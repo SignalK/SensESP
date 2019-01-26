@@ -2,6 +2,7 @@
 
 #include "components/component.h"
 #include "devices/device.h"
+#include "devices/analog_input.h"
 #include "devices/system_info.h"
 #include "net/ota.h"
 #include "net/wifi.h"
@@ -40,6 +41,13 @@ SensESPApp::SensESPApp() {
   uptime->attach([uptime, uptime_value](){ uptime_value->set_input(uptime->get()); });
   devices.push_back(uptime);
   components.push_back(uptime_value);
+
+  // connect analog input
+  AnalogInput* analog_in = new AnalogInput();
+  Passthrough<float>* analog_value = new Passthrough<float>("sensors.unknown.analog");
+  analog_in->attach([analog_in, analog_value](){ analog_value->set_input(analog_in->get()); });
+  devices.push_back(analog_in);
+  components.push_back(analog_value);
 
   // connect all components to the Signal K delta output
 
