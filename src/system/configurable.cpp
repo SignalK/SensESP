@@ -1,5 +1,7 @@
 #include "configurable.h"
 
+#include "FS.h"
+
 // Define a global configurable map. Rationale for a global variable:
 // Every Configurable with an id gets registered, and carrying an object
 // reference around would unnecessarily reduce readability of the code.
@@ -19,7 +21,7 @@ JsonObject& Configurable::get_configuration(JsonBuffer& buf) {
 }
 
 // Sets and saves the configuration
-void Configurable::set_configuration(JsonObject& config) {
+void Configurable::set_configuration(const JsonObject& config) {
   Serial.println(F("WARNING: set_configuration not defined"));
 }
 
@@ -30,13 +32,36 @@ void Configurable::set_configuration(JsonObject& config) {
 // descriptions.
 // Schema format TBD.
 String Configurable::get_config_schema() {
-  Serial.println(F("WARNING: get_config_schema not defined"));
+  return "{}";
 }
 
 void Configurable::load_configuration() {
-  Serial.println(F("WARNING: load_configuration not defined"));
+  if (id=="" || !SPIFFS.exists(id)) {
+    // nothing to load from
+    Serial.print(
+      F("Not loading configuration, id empty or file does not exist: "));
+    Serial.println(id);
+    return;
+  }
+
+  File f = SPIFFS.open(id, "r");
+  DynamicJsonBuffer jsonBuffer;
+  JsonObject& obj = jsonBuffer.parse(f);
+  if (!obj.success()) {
+    Serial.print(F("WARNING: Could not parse configuration for "));
+    Serial.println(id);
+  }
+  set_configuration(obj);
+  f.close();
 }
 
 void Configurable::save_configuration() {
-  Serial.println(F("WARNING: save_configuration not defined"));
+  if (id=="") {
+    Serial.println(F("WARNING: Could not save configuration (id not set)"));
+  }
+  DynamicJsonBuffer jsonBuffer;
+  JsonObject& obj = get_configuration(jsonBuffer);
+  File f = SPIFFS.open(id, "w");
+  obj.printTo(f);
+  f.close();
 }

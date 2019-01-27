@@ -12,8 +12,8 @@ class Configurable {
   Configurable(String id, String schema);
   const String id;
   virtual JsonObject& get_configuration(JsonBuffer& buf);
-  virtual void set_configuration(JsonObject& config);
-  String get_config_schema();
+  virtual void set_configuration(const JsonObject& config);
+  virtual String get_config_schema();
  protected:
   virtual void load_configuration();
   virtual void save_configuration();

@@ -28,7 +28,7 @@ class Passthrough : public Component {
     output = input;
     notify();
   }
-  String as_json() override {
+  String as_json() final {
     DynamicJsonBuffer jsonBuffer;
     String json;
     JsonObject& root = jsonBuffer.createObject();
@@ -43,16 +43,16 @@ class Passthrough : public Component {
 
 // y = k * x + c
 class Linear : public Component {
+ public:
+  Linear(String sk_path, float k, float c, String id="", String schema="");
+  void set_input(float input);
+  String as_json() final;
+  virtual JsonObject& get_configuration(JsonBuffer& buf) final;
+  virtual void set_configuration(const JsonObject& config) final;
+ private:
   float k;
   float c;
   float output;
-  public:
-    Linear(String sk_path, float k, float c, String id="", String schema="");
-    void set_input(float input);
-    //void set_configuration(JsonObject& config) override;
-    String as_json() override;
-    //JsonObject& get_configuration() override;
-    //String get_config_description() override;
 };
 
 #endif

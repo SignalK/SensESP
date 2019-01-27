@@ -13,7 +13,6 @@
 // FIXME: Setting up the system is too verbose and repetitive
 
 SensESPApp::SensESPApp() {
-
   // initialize filesystem
 
   setup_spiffs_storage();
@@ -37,7 +36,8 @@ SensESPApp::SensESPApp() {
   // connect uptime (exaggerate the value!)
 
   Uptime* uptime = new Uptime();
-  Linear* uptime_value = new Linear("sensors.unknown.uptime", 1.2, 3600.);
+  Linear* uptime_value = new Linear("sensors.unknown.uptime", 1.2, 3600.,
+                                    "/comp/uptime");
   uptime->attach([uptime, uptime_value](){ uptime_value->set_input(uptime->get()); });
   devices.push_back(uptime);
   components.push_back(uptime_value);

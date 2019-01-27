@@ -7,7 +7,9 @@
 Linear::Linear(String path, float k, float c, String id, String schema)
   : Component{ path, id, schema },
     k{ k },
-    c{ c } {}
+    c{ c } {
+  load_configuration();
+}
 
 void Linear::set_input(float input) {
   output = k * input + c;
@@ -22,4 +24,18 @@ String Linear::as_json() {
   root.set("value", output);
   root.printTo(json);
   return json;
+}
+
+JsonObject& Linear::get_configuration(JsonBuffer& buf) {
+  JsonObject& root = buf.createObject();
+  root["k"] = k;
+  root["c"] = c;
+  root["sk_path"] = sk_path;
+  return root;
+}
+
+void Linear::set_configuration(const JsonObject& config) {
+  k = config["k"];
+  c = config["c"];
+  sk_path = config["sk_path"].as<String>();
 }
