@@ -1,7 +1,8 @@
-#include "sensesp.h"
-#include "../config.h"
-#include "../system/led_blinker.h"
 #include "wifi.h"
+
+#include "config.h"
+#include "sensesp.h"
+#include "system/led_blinker.h"
 
 
 bool should_save_config = false;

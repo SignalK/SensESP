@@ -1,9 +1,7 @@
 #ifndef _led_blinker_H_
 #define _led_blinker_H_
 
-
 #include <ReactESP.h>
-
 
 class LedBlinker {
   private:

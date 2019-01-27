@@ -1,16 +1,15 @@
 #ifndef _app_H_
 #define _app_H_
 
+#include <list>
+
 #include "config.h"
-#include "sensesp.h"
 #include "components/component.h"
 #include "devices/device.h"
 #include "net/ws_client.h"
+#include "sensesp.h"
 #include "system/led_blinker.h"
 #include "system/signal_k.h"
-
-#include <list>
-
 
 class SensESPApp {
     std::list<Device*> devices;

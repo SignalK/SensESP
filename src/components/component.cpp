@@ -2,11 +2,10 @@
 
 #include "ArduinoJson.h"
 
-
 // Linear
 
-Linear::Linear(String path, float k, float c)
-  : Component{ path },
+Linear::Linear(String path, float k, float c, String id, String schema)
+  : Component{ path, id, schema },
     k{ k },
     c{ c } {}
 
@@ -15,24 +14,12 @@ void Linear::set_input(float input) {
   notify();
 }
 
-// void Linear::set_configuration(JsonObject& config) {
-//   Serial.println("Linear::set_configuration");
-// }
-
 String Linear::as_json() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();
-  root.set("path", this->path);
+  root.set("path", this->sk_path);
   root.set("value", output);
   root.printTo(json);
   return json;
 }
-
-// JsonObject& Linear::get_configuration() {
-//   Serial.println("Linear::as_json");
-// }
-
-// String Linear::get_config_description() {
-//   return "{}";
-// }

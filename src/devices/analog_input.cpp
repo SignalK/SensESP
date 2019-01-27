@@ -1,9 +1,8 @@
 #include "analog_input.h"
 
-#include "../sensesp.h"
-
 #include "Arduino.h"
 
+#include "../sensesp.h"
 
 void AnalogInput::update() {
   value = analogRead(A0);

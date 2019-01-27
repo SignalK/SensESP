@@ -3,7 +3,6 @@
 
 #include "device.h"
 
-
 class AnalogInput : public Device {
     float value;
     void update();

@@ -1,10 +1,9 @@
 #ifndef _signal_k_H_
 #define _signal_k_H_
 
-#include "ArduinoJson.h"
-
 #include <list>
 
+#include "ArduinoJson.h"
 
 ///////////////////
 // Signal K delta message representation

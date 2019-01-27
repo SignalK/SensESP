@@ -1,11 +1,10 @@
 #ifndef _ws_client_H_
 #define _ws_client_H_
 
-#include "../system/signal_k.h"
-#include "../sensesp.h"
-
 #include <WebSocketsClient.h>
 
+#include "sensesp.h"
+#include "system/signal_k.h"
 
 class WSClient {
     String host = "";

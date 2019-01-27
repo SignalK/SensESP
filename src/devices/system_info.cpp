@@ -1,8 +1,8 @@
 #include "system_info.h"
 
-#include "../sensesp.h"
-
 #include "Arduino.h"
+
+#include "sensesp.h"
 
 void SystemHz::tick() {
   tick_count++;

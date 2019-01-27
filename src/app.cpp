@@ -1,8 +1,8 @@
 #include "app.h"
 
 #include "components/component.h"
-#include "devices/device.h"
 #include "devices/analog_input.h"
+#include "devices/device.h"
 #include "devices/system_info.h"
 #include "net/ota.h"
 #include "net/wifi.h"
@@ -43,6 +43,7 @@ SensESPApp::SensESPApp() {
   components.push_back(uptime_value);
 
   // connect analog input
+
   AnalogInput* analog_in = new AnalogInput();
   Passthrough<float>* analog_value = new Passthrough<float>("sensors.unknown.analog");
   analog_in->attach([analog_in, analog_value](){ analog_value->set_input(analog_in->get()); });

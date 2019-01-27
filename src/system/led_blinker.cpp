@@ -1,6 +1,7 @@
 
-#include "../config.h"
 #include "led_blinker.h"
+
+#include "config.h"
 #include "sensesp.h"
 
 LedBlinker::LedBlinker() {

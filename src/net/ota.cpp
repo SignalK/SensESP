@@ -1,11 +1,10 @@
 #include "ota.h"
 
-#include "../config.h"
-#include "../sensesp.h"
-
-#include <ArduinoOTA.h>
 #include <Arduino.h>
+#include <ArduinoOTA.h>
 
+#include "config.h"
+#include "sensesp.h"
 
 void handle_OTA() {
   ArduinoOTA.handle();

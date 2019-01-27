@@ -1,9 +1,9 @@
 #ifndef _observable_H_
 #define _observable_H_
 
-#include <vector>
-#include <functional>
 #include <forward_list>
+#include <functional>
+#include <vector>
 
 
 ///////////////////
