@@ -11,7 +11,7 @@ class SystemHz : public Device {
     void tick();
     void update();
   public:
-    void enable() final;
+    void enable() override final;
     float get();
 };
 
@@ -20,7 +20,7 @@ class FreeMem : public Device {
     uint32_t free_mem;
     void update();
   public:
-    void enable() final;
+    void enable() override final;
     uint32_t get();
 };
 
@@ -29,7 +29,7 @@ class Uptime : public Device {
     float uptime;
     void update();
   public:
-    void enable() final;
+    void enable() override final;
     float get();
 };
 

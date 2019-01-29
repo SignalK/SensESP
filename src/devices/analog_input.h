@@ -7,7 +7,7 @@ class AnalogInput : public Device {
     float value;
     void update();
   public:
-    void enable() final;
+    void enable() override final;
     float get();
 };
 

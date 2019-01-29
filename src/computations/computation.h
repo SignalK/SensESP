@@ -28,7 +28,7 @@ class Passthrough : public Computation {
     output = input;
     notify();
   }
-  String as_json() final {
+  String as_json() override final {
     DynamicJsonBuffer jsonBuffer;
     String json;
     JsonObject& root = jsonBuffer.createObject();
@@ -46,9 +46,9 @@ class Linear : public Computation {
  public:
   Linear(String sk_path, float k, float c, String id="", String schema="");
   void set_input(float input);
-  String as_json() final;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) final;
-  virtual void set_configuration(const JsonObject& config) final;
+  String as_json() override final;
+  virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
+  virtual void set_configuration(const JsonObject& config) override final;
  private:
   float k;
   float c;
