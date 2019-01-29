@@ -1,5 +1,5 @@
-#ifndef _component_H_
-#define _component_H_
+#ifndef _computation_H_
+#define _computation_H_
 
 #include "Arduino.h"
 #include <ArduinoJson.h>
@@ -8,11 +8,11 @@
 #include "system/observable.h"
 
 ///////////////////
-// Components transform raw device readouts into useful sensor values.
+// Computations transform raw device readouts into useful sensor values.
 
-class Component : public Observable, public Configurable {
+class Computation : public Observable, public Configurable {
  public:
-  Component(String sk_path, String id="", String schema="")
+  Computation(String sk_path, String id="", String schema="")
     : Configurable{id, schema}, sk_path{sk_path} {}
   virtual String as_json() = 0;
  protected:
@@ -20,10 +20,10 @@ class Component : public Observable, public Configurable {
 };
 
 template <class T>
-class Passthrough : public Component {
+class Passthrough : public Computation {
  public:
   Passthrough(String sk_path, String id="", String schema="")
-    : Component{sk_path, id, schema} {}
+    : Computation{sk_path, id, schema} {}
   void set_input(T input) {
     output = input;
     notify();
@@ -42,7 +42,7 @@ class Passthrough : public Component {
 };
 
 // y = k * x + c
-class Linear : public Component {
+class Linear : public Computation {
  public:
   Linear(String sk_path, float k, float c, String id="", String schema="");
   void set_input(float input);

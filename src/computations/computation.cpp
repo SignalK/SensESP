@@ -1,11 +1,11 @@
-#include "component.h"
+#include "computation.h"
 
 #include "ArduinoJson.h"
 
 // Linear
 
 Linear::Linear(String path, float k, float c, String id, String schema)
-  : Component{ path, id, schema },
+  : Computation{ path, id, schema },
     k{ k },
     c{ c } {
   load_configuration();

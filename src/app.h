@@ -4,7 +4,7 @@
 #include <list>
 
 #include "config.h"
-#include "components/component.h"
+#include "computations/computation.h"
 #include "devices/device.h"
 #include "net/http.h"
 #include "net/ws_client.h"
@@ -14,7 +14,7 @@
 
 class SensESPApp {
     std::list<Device*> devices;
-    std::list<Component*> components;
+    std::list<Computation*> computations;
 
     HTTPServer* http_server;
     LedBlinker led_blinker;
