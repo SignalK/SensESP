@@ -8,7 +8,7 @@
 #define WIFI_CONFIG_PORTAL_TIMEOUT 180
 
 // HTTP port for the configuration interface
-#define HTTP_PORT 80
+#define HTTP_SERVER_PORT 80
 
 // Password for Over-the-air (OTA) updates
 #define OTA_PASSWORD "bonvoyage"

@@ -1,4 +1,4 @@
-#include "wifi.h"
+#include "networking.h"
 
 #include <ESPAsyncWebServer.h>     //Local WebServer used to serve the configuration portal
 #include <ESPAsyncWiFiManager.h>
@@ -22,7 +22,7 @@ void check_connection() {
   }
 }
 
-void setup_wifi(LedBlinker led_blinker) {
+void setup_networking(LedBlinker led_blinker) {
   char hostname[16];
 
   AsyncWebServer server(80);

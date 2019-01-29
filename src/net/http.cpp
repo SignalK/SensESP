@@ -52,7 +52,7 @@ const char INDEX_PAGE[] PROGMEM = R"foo(
 )foo";
 
 HTTPServer::HTTPServer() {
-  server = new AsyncWebServer(HTTP_PORT);
+  server = new AsyncWebServer(HTTP_SERVER_PORT);
   using std::placeholders::_1;
   server->onNotFound(std::bind(&HTTPServer::handle_not_found, this, _1));
   server->on("/",[](AsyncWebServerRequest *request ) {
