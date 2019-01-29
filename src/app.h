@@ -6,6 +6,7 @@
 #include "config.h"
 #include "components/component.h"
 #include "devices/device.h"
+#include "net/http.h"
 #include "net/ws_client.h"
 #include "sensesp.h"
 #include "system/led_blinker.h"
@@ -15,9 +16,10 @@ class SensESPApp {
     std::list<Device*> devices;
     std::list<Component*> components;
 
+    HTTPServer* http_server;
     LedBlinker led_blinker;
-    WSClient* ws_client;
     SKDelta* sk_delta;
+    WSClient* ws_client;
 
   public:
     SensESPApp();

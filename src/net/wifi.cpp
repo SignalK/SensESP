@@ -1,5 +1,8 @@
 #include "wifi.h"
 
+#include <ESPAsyncWebServer.h>     //Local WebServer used to serve the configuration portal
+#include <ESPAsyncWiFiManager.h>
+
 #include "config.h"
 #include "sensesp.h"
 #include "system/led_blinker.h"
@@ -22,14 +25,17 @@ void check_connection() {
 void setup_wifi(LedBlinker led_blinker) {
   char hostname[16];
 
-  WiFiManager wifiManager;
+  AsyncWebServer server(80);
+  DNSServer dns;
+
+  AsyncWiFiManager wifiManager(&server,&dns);
 
   //set config save notify callback
   wifiManager.setSaveConfigCallback(save_config_callback);
 
   wifiManager.setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
 
-  WiFiManagerParameter custom_hostname("hostname", "Set hostname", hostname, 16);
+  AsyncWiFiManagerParameter custom_hostname("hostname", "Set hostname", hostname, 16);
   wifiManager.addParameter(&custom_hostname);
 
   if (!wifiManager.autoConnect("Unconfigured Sensor")) {

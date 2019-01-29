@@ -1,12 +1,9 @@
 #include "app.h"
 
-#include "components/component.h"
 #include "devices/analog_input.h"
-#include "devices/device.h"
 #include "devices/system_info.h"
 #include "net/ota.h"
 #include "net/wifi.h"
-#include "net/ws_client.h"
 #include "system/spiffs_storage.h"
 
 
@@ -57,6 +54,10 @@ SensESPApp::SensESPApp() {
     comp->attach([comp, this](){ this->sk_delta->append(comp->as_json()); });
   }
 
+  // create the HTTP server
+
+  this->http_server = new HTTPServer();
+
   // create the websocket client
 
   auto ws_connected_cb = [this](){
@@ -79,6 +80,7 @@ void SensESPApp::enable() {
   setup_wifi(led_blinker);
   setup_OTA();
 
+  this->http_server->enable();
   this->ws_client->enable();
 
   Serial.println("WS client enabled");
