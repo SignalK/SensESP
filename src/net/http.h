@@ -14,9 +14,7 @@ class HTTPServer {
   void handle_device_restart(AsyncWebServerRequest* request);
   void handle_info(AsyncWebServerRequest* request);
   void handle_settings_hostname(AsyncWebServerRequest* request);
-  void handle_settings_signalk_host(AsyncWebServerRequest* request);
-  void handle_settings_signalk_port(AsyncWebServerRequest* request);
-  void handle_settings_signalk_path(AsyncWebServerRequest* request);
+  void handle_settings_signalk_address(AsyncWebServerRequest* request);
  private:
   AsyncWebServer* server;
 };
