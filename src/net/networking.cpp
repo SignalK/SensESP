@@ -7,22 +7,29 @@
 #include "sensesp.h"
 #include "system/led_blinker.h"
 
-
-bool should_save_config = false;
+// networking is effectively a singleton, and the
+// callback needs access to the object
+Networking* networking;
 
 void save_config_callback() {
-  Serial.println(F("Should save config"));
-  should_save_config = true;
+  networking->save_configuration();
+  ESP.restart();
 }
 
-void check_connection() {
+Networking::Networking(String id, String schema) : Configurable{id, schema} {
+
+}
+
+
+
+void Networking::check_connection() {
   if (WiFi.status() != WL_CONNECTED) {
     // if connection is lost, simply restart
     ESP.restart();
   }
 }
 
-void setup_networking(LedBlinker led_blinker) {
+void Networking::setup(std::function<void(bool)> connection_cb) {
   char hostname[16];
 
   AsyncWebServer server(80);
@@ -44,17 +51,8 @@ void setup_networking(LedBlinker led_blinker) {
   }
 
   Serial.println(F("Connected to Wifi."));
-  led_blinker.set_wifi_connected();
+  connection_cb(true);
 
-  // Save config if needed
-  if (should_save_config) {
-    strcpy(hostname, custom_hostname.getValue());
-    //saveConfig();
-    // For some reason, connection isn't properly established after exiting the
-    // captive portal. Just reset to be safe.
-    ESP.restart();
-  }
-
-  app.onRepeat(1000, check_connection);
+  app.onRepeat(1000, std::bind(Networking::check_connection, this));
 }
 
