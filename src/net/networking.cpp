@@ -14,8 +14,9 @@ void save_config_callback() {
   should_save_config = true;
 }
 
-Networking::Networking(String id, String schema) 
+Networking::Networking(String id, String schema)
     : Configurable{id, schema} {
+  hostname = new ObservableValue<String>(String(""));
   load_configuration();
 }
 
@@ -39,11 +40,11 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   wifiManager.setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
 
   AsyncWiFiManagerParameter custom_hostname(
-    "hostname", "Set hostname", this->hostname, 20);
+    "hostname", "Set hostname", this->hostname->get().c_str(), 20);
   wifiManager.addParameter(&custom_hostname);
 
   if (should_save_config) {
-    this->hostname = custom_hostname.getValue();
+    this->hostname->set(custom_hostname.getValue());
     save_configuration();
     ESP.restart();
   }
@@ -60,19 +61,19 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 }
 
 ObservableValue<String>* Networking::get_hostname() {
-  return &this->hostname;
+  return this->hostname;
 }
 
 void Networking::set_hostname(String hostname) {
-  this->hostname.set(hostname);
+  this->hostname->set(hostname);
 }
 
 JsonObject& Networking::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
-  root["hostname"] = this->hostname.get();
+  root["hostname"] = this->hostname->get();
   return root;
 }
 
 void Networking::set_configuration(const JsonObject& config) {
-  this->hostname.set(config["hostname"].as<String>());
+  this->hostname->set(config["hostname"].as<String>());
 }

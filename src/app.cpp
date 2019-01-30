@@ -14,6 +14,9 @@ SensESPApp::SensESPApp() {
 
   setup_spiffs_storage();
 
+  // initialize networking
+  networking = new Networking("/system/networking", "");
+
   // connect systemhz
 
   SystemHz* syshz = new SystemHz();
