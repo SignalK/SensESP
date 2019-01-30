@@ -3,7 +3,7 @@
 #include "devices/analog_input.h"
 #include "devices/system_info.h"
 #include "net/ota.h"
-#include "net/wifi.h"
+#include "net/networking.h"
 #include "system/spiffs_storage.h"
 
 
@@ -20,7 +20,7 @@ SensESPApp::SensESPApp() {
   Passthrough<float>* syshz_value = new Passthrough<float>("sensors.unknown.system_hz");
   syshz->attach([syshz, syshz_value](){ syshz_value->set_input(syshz->get()); });
   devices.push_back(syshz);
-  components.push_back(syshz_value);
+  computations.push_back(syshz_value);
 
   // connect freemem
 
@@ -28,7 +28,7 @@ SensESPApp::SensESPApp() {
   Passthrough<float>* freemem_value = new Passthrough<float>("sensors.unknown.freemem");
   freemem->attach([freemem, freemem_value](){ freemem_value->set_input(freemem->get()); });
   devices.push_back(freemem);
-  components.push_back(freemem_value);
+  computations.push_back(freemem_value);
 
   // connect uptime (exaggerate the value!)
 
@@ -37,7 +37,7 @@ SensESPApp::SensESPApp() {
                                     "/comp/uptime");
   uptime->attach([uptime, uptime_value](){ uptime_value->set_input(uptime->get()); });
   devices.push_back(uptime);
-  components.push_back(uptime_value);
+  computations.push_back(uptime_value);
 
   // connect analog input
 
@@ -45,12 +45,12 @@ SensESPApp::SensESPApp() {
   Passthrough<float>* analog_value = new Passthrough<float>("sensors.unknown.analog");
   analog_in->attach([analog_in, analog_value](){ analog_value->set_input(analog_in->get()); });
   devices.push_back(analog_in);
-  components.push_back(analog_value);
+  computations.push_back(analog_value);
 
-  // connect all components to the Signal K delta output
+  // connect all computations to the Signal K delta output
 
   sk_delta = new SKDelta("unknown");
-  for (auto const& comp : components) {
+  for (auto const& comp : computations) {
     comp->attach([comp, this](){ this->sk_delta->append(comp->as_json()); });
   }
 
