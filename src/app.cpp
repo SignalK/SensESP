@@ -25,11 +25,21 @@ SensESPApp::SensESPApp() {
 
   // connect systemhz
 
-  SystemHz* syshz = new SystemHz();
-  Passthrough<float>* syshz_value = new Passthrough<float>("sensors.unknown.system_hz");
-  syshz->attach([syshz, syshz_value](){ syshz_value->set_input(syshz->get()); });
-  devices.push_back(syshz);
-  computations.push_back(syshz_value);
+  SystemHz* syshz_dev = new SystemHz();
+  Passthrough<float>* syshz_comp = new Passthrough<float>(
+    "sensors.unknown.system_hz");
+  // update the SK path if hostname changes
+  hostname->attach(
+    [hostname, syshz_comp](){
+      syshz_comp->set_sk_path(String("sensors.") +
+                               hostname->get() +
+                               ".system_hz");
+  });
+  syshz_dev->attach([syshz_dev, syshz_comp](){
+    syshz_comp->set_input(syshz_dev->get());
+  });
+  devices.push_back(syshz_dev);
+  computations.push_back(syshz_comp);
 
   // connect freemem
 
@@ -53,8 +63,8 @@ SensESPApp::SensESPApp() {
   AnalogInput* analog_in_dev = new AnalogInput();
   Passthrough<float>* analog_comp = new Passthrough<float>(
     "sensors.unknown.analog");
-  analog_in_dev->attach([analog_in_dev, analog_comp](){ 
-    analog_comp->set_input(analog_in_dev->get()); 
+  analog_in_dev->attach([analog_in_dev, analog_comp](){
+    analog_comp->set_input(analog_in_dev->get());
   });
   devices.push_back(analog_in_dev);
   computations.push_back(analog_comp);
@@ -62,8 +72,8 @@ SensESPApp::SensESPApp() {
   // connect all computations to the Signal K delta output
 
   sk_delta = new SKDelta(hostname->get());
-  hostname->attach([hostname, this](){ 
-    this->sk_delta->set_hostname(hostname->get()); 
+  hostname->attach([hostname, this](){
+    this->sk_delta->set_hostname(hostname->get());
   });
   for (auto const& comp : computations) {
     comp->attach([comp, this](){ this->sk_delta->append(comp->as_json()); });
@@ -91,9 +101,9 @@ SensESPApp::SensESPApp() {
 
 void SensESPApp::enable() {
   this->led_blinker.set_wifi_disconnected();
-  
+
   Serial.println("Enabling subsystems");
-  
+
   networking->setup([this](bool connected) {
     if (connected) {
       this->led_blinker.set_wifi_connected();
