@@ -19,8 +19,9 @@ SensESPApp::SensESPApp() {
     ESP.restart();
   }
 
-  // initialize networking
+  // create the networking object
   networking = new Networking("/system/networking", "");
+  ObservableValue<String>* hostname = networking->get_hostname();
 
   // connect systemhz
 
@@ -57,7 +58,10 @@ SensESPApp::SensESPApp() {
 
   // connect all computations to the Signal K delta output
 
-  sk_delta = new SKDelta("unknown");
+  sk_delta = new SKDelta(hostname->get());
+  hostname->attach([hostname, this](){ 
+    this->sk_delta->set_hostname(hostname->get()); 
+  });
   for (auto const& comp : computations) {
     comp->attach([comp, this](){ this->sk_delta->append(comp->as_json()); });
   }
@@ -84,7 +88,9 @@ SensESPApp::SensESPApp() {
 
 void SensESPApp::enable() {
   this->led_blinker.set_wifi_disconnected();
+  
   Serial.println("Enabling subsystems");
+  
   networking->setup([this](bool connected) {
     if (connected) {
       this->led_blinker.set_wifi_connected();
