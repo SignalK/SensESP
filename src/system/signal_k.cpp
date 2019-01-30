@@ -3,12 +3,14 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
-SKDelta::SKDelta(String hostname) {
-  this->hostname = hostname;
-}
+SKDelta::SKDelta(const String& hostname, int max_buffer_size) 
+: hostname{hostname},
+  max_buffer_size{max_buffer_size} {}
 
 void SKDelta::append(const String val) {
-  buffer.push_front(val);
+  if (buffer.size() < max_buffer_size) {
+    buffer.push_front(val);
+  }
 }
 
 bool SKDelta::data_available() {

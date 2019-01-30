@@ -9,13 +9,15 @@
 // Signal K delta message representation
 
 class SKDelta {
-    String hostname;
-    std::list<String> buffer;
-  public:
-    SKDelta(const String hostname);
-    void append(const String val);
-    bool data_available();
-    void get_delta(String& output);
+ public:
+  SKDelta(const String& hostname, int max_buffer_size=20);
+  void append(const String val);
+  bool data_available();
+  void get_delta(String& output);
+ private:
+  const String& hostname;
+  int max_buffer_size;
+  std::list<String> buffer;
 };
 
 #endif
