@@ -50,11 +50,14 @@ SensESPApp::SensESPApp() {
 
   // connect analog input
 
-  AnalogInput* analog_in = new AnalogInput();
-  Passthrough<float>* analog_value = new Passthrough<float>("sensors.unknown.analog");
-  analog_in->attach([analog_in, analog_value](){ analog_value->set_input(analog_in->get()); });
-  devices.push_back(analog_in);
-  computations.push_back(analog_value);
+  AnalogInput* analog_in_dev = new AnalogInput();
+  Passthrough<float>* analog_comp = new Passthrough<float>(
+    "sensors.unknown.analog");
+  analog_in_dev->attach([analog_in_dev, analog_comp](){ 
+    analog_comp->set_input(analog_in_dev->get()); 
+  });
+  devices.push_back(analog_in_dev);
+  computations.push_back(analog_comp);
 
   // connect all computations to the Signal K delta output
 
