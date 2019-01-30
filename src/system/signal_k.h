@@ -15,7 +15,7 @@ class SKDelta {
   bool data_available();
   void get_delta(String& output);
  private:
-  const String& hostname;
+  String hostname;
   unsigned int max_buffer_size;
   std::list<String> buffer;
 };
