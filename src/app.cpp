@@ -1,5 +1,7 @@
 #include "app.h"
 
+#include "FS.h"
+
 #include "devices/analog_input.h"
 #include "devices/system_info.h"
 #include "net/ota.h"
@@ -12,7 +14,10 @@
 SensESPApp::SensESPApp() {
   // initialize filesystem
 
-  setup_spiffs_storage();
+  if (!SPIFFS.begin()) {
+    Serial.println("FATAL: Filesystem initialization failed.");
+    ESP.restart();
+  }
 
   // initialize networking
   networking = new Networking("/system/networking", "");
