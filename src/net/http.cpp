@@ -9,8 +9,8 @@
 
 #include <ESPAsyncWebServer.h>
 
+#include "app.h"
 #include "config.h"
-#include "sensesp.h"
 
 // Simple web page to view deltas
 const char INDEX_PAGE[] PROGMEM = R"foo(
@@ -52,7 +52,8 @@ const char INDEX_PAGE[] PROGMEM = R"foo(
 </html>
 )foo";
 
-HTTPServer::HTTPServer() {
+HTTPServer::HTTPServer(std::function<void()> reset_device) {
+  this->reset_device = reset_device;
   server = new AsyncWebServer(HTTP_SERVER_PORT);
   using std::placeholders::_1;
   server->onNotFound(std::bind(&HTTPServer::handle_not_found, this, _1));
@@ -121,7 +122,9 @@ void HTTPServer::handle_config(AsyncWebServerRequest* request) {
 }
 
 void HTTPServer::handle_device_reset(AsyncWebServerRequest* request) {
-  request->send(200, "text/plain", "/device/reset");
+  request->send(200, "text/plain",
+    "OK, resetting the device settings back to factory defaults.\n");
+  this->reset_device();
 }
 
 void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {

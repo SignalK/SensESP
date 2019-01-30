@@ -81,7 +81,7 @@ SensESPApp::SensESPApp() {
 
   // create the HTTP server
 
-  this->http_server = new HTTPServer();
+  this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this));
 
   // create the websocket client
 
@@ -125,4 +125,11 @@ void SensESPApp::enable() {
   }
 
   Serial.println("All devices enabled");
+}
+
+void SensESPApp::reset() {
+  Serial.println("Resetting the device configuration.");
+  networking->reset_settings();
+  SPIFFS.format();
+  app.onDelay(1000, [](){ ESP.reset(); });
 }

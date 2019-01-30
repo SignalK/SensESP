@@ -36,7 +36,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 
   AsyncWiFiManagerParameter custom_hostname(
     "hostname", "Set hostname", this->hostname->get().c_str(), 20);
-  wifiManager->addParameter(&custom_hostname);
+  wifi_manager->addParameter(&custom_hostname);
 
   if (should_save_config) {
     this->hostname->set(custom_hostname.getValue());

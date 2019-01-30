@@ -14,18 +14,20 @@
 #include "system/signal_k.h"
 
 class SensESPApp {
-    std::list<Device*> devices;
-    std::list<Computation*> computations;
+ public:
+  SensESPApp();
+  void enable();
+  void reset();
+ private:
+  std::list<Device*> devices;
+  std::list<Computation*> computations;
 
-    HTTPServer* http_server;
-    LedBlinker led_blinker;
-    Networking* networking;
-    SKDelta* sk_delta;
-    WSClient* ws_client;
+  HTTPServer* http_server;
+  LedBlinker led_blinker;
+  Networking* networking;
+  SKDelta* sk_delta;
+  WSClient* ws_client;
 
-  public:
-    SensESPApp();
-    void enable();
 };
 
 extern SensESPApp* sensesp_app;
