@@ -3,6 +3,10 @@
 
 #include "Arduino.h"
 
+// Local WebServer used to serve the configuration portal
+#include <ESPAsyncWebServer.h>
+#include <ESPAsyncWiFiManager.h>
+
 #include "system/configurable.h"
 #include "system/observable.h"
 
@@ -16,9 +20,14 @@ class Networking : public Configurable {
 
   void set_hostname(String hostname);
 
+  void reset_settings();
+
  protected:
   void check_connection();
  private:
+  AsyncWebServer* server;
+  DNSServer* dns;
+  AsyncWiFiManager* wifi_manager;
   ObservableValue<String>* hostname;
 };
 

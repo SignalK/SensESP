@@ -1,9 +1,5 @@
 #include "networking.h"
 
-// Local WebServer used to serve the configuration portal
-#include <ESPAsyncWebServer.h>
-#include <ESPAsyncWiFiManager.h>
-
 #include "config.h"
 #include "sensesp.h"
 #include "system/led_blinker.h"
@@ -18,6 +14,9 @@ Networking::Networking(String id, String schema)
     : Configurable{id, schema} {
   hostname = new ObservableValue<String>(String(""));
   load_configuration();
+  server = new AsyncWebServer(80);
+  dns = new DNSServer();
+  wifi_manager = new AsyncWiFiManager(server, dns);
 }
 
 void Networking::check_connection() {
@@ -28,20 +27,16 @@ void Networking::check_connection() {
 }
 
 void Networking::setup(std::function<void(bool)> connection_cb) {
-  AsyncWebServer server(80);
-  DNSServer dns;
   should_save_config = false;
 
-  AsyncWiFiManager wifiManager(&server,&dns);
-
   //set config save notify callback
-  wifiManager.setSaveConfigCallback(save_config_callback);
+  wifi_manager->setSaveConfigCallback(save_config_callback);
 
-  wifiManager.setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
+  wifi_manager->setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
 
   AsyncWiFiManagerParameter custom_hostname(
     "hostname", "Set hostname", this->hostname->get().c_str(), 20);
-  wifiManager.addParameter(&custom_hostname);
+  wifiManager->addParameter(&custom_hostname);
 
   if (should_save_config) {
     this->hostname->set(custom_hostname.getValue());
@@ -49,7 +44,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
     ESP.restart();
   }
 
-  if (!wifiManager.autoConnect("Unconfigured Sensor")) {
+  if (!wifi_manager->autoConnect("Unconfigured Sensor")) {
     Serial.println(F("Failed to connect to wifi and config timed out."));
     ESP.restart();
   }
@@ -79,4 +74,8 @@ void Networking::set_configuration(const JsonObject& config) {
   this->save_configuration();
   // network configuration changes require a device restart
   app.onDelay(50, [](){ ESP.restart(); });
+}
+
+void Networking::reset_settings() {
+  wifi_manager->resetSettings();
 }
