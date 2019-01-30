@@ -15,6 +15,9 @@ class Computation : public Observable, public Configurable {
   Computation(String sk_path, String id="", String schema="")
     : Configurable{id, schema}, sk_path{sk_path} {}
   virtual String as_json() = 0;
+  void set_sk_path(const String& path) {
+    sk_path = path;
+  }
  protected:
   String sk_path;
 };

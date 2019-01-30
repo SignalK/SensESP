@@ -5,9 +5,9 @@
 // Linear
 
 Linear::Linear(String path, float k, float c, String id, String schema)
-  : Computation{ path, id, schema },
-    k{ k },
-    c{ c } {
+    : Computation{ path, id, schema },
+      k{ k },
+      c{ c } {
   load_configuration();
 }
 
