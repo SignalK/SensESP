@@ -76,4 +76,7 @@ JsonObject& Networking::get_configuration(JsonBuffer& buf) {
 
 void Networking::set_configuration(const JsonObject& config) {
   this->hostname->set(config["hostname"].as<String>());
+  this->save_configuration();
+  // network configuration changes require a device restart
+  app.onDelay(50, [](){ ESP.restart(); });
 }
