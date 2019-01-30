@@ -77,7 +77,14 @@ SensESPApp::SensESPApp() {
 void SensESPApp::enable() {
   this->led_blinker.set_wifi_disconnected();
   Serial.println("Enabling subsystems");
-  setup_networking(led_blinker);
+  networking->setup([this](bool connected) {
+    if (connected) {
+      this->led_blinker.set_wifi_connected();
+    } else {
+      this->led_blinker.set_wifi_disconnected();
+    }
+  });
+
   setup_OTA();
 
   this->http_server->enable();

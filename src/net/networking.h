@@ -5,7 +5,7 @@
 
 #include "system/configurable.h"
 
-class Networking : Configurable {
+class Networking : public Configurable {
  public:
   Networking(String id, String schema="");
   void setup(std::function<void(bool)> connection_cb);
@@ -15,8 +15,6 @@ class Networking : Configurable {
 
  protected:
   void check_connection();
-  virtual void load_configuration() override final;
-  virtual void save_configuration() override final;
  private:
   String hostname;
 };

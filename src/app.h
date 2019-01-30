@@ -7,6 +7,7 @@
 #include "computations/computation.h"
 #include "devices/device.h"
 #include "net/http.h"
+#include "net/networking.h"
 #include "net/ws_client.h"
 #include "sensesp.h"
 #include "system/led_blinker.h"
@@ -18,6 +19,7 @@ class SensESPApp {
 
     HTTPServer* http_server;
     LedBlinker led_blinker;
+    Networking* networking;
     SKDelta* sk_delta;
     WSClient* ws_client;
 

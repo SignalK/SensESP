@@ -44,8 +44,8 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   wifiManager.addParameter(&custom_hostname);
 
   if (should_save_config) {
-    this->hostname.set(custom_hostname.getValue());
-    this->save_configuration();
+    this->hostname = custom_hostname.getValue();
+    save_configuration();
     ESP.restart();
   }
 
@@ -57,6 +57,6 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   Serial.println(F("Connected to Wifi."));
   connection_cb(true);
 
-  app.onRepeat(1000, std::bind(Networking::check_connection, this));
+  app.onRepeat(1000, std::bind(&Networking::check_connection, this));
 }
 
