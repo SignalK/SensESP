@@ -85,18 +85,19 @@ SensESPApp::SensESPApp() {
 
   // create the websocket client
 
-  auto ws_connected_cb = [this](){
-    this->led_blinker.set_server_connected();
-  };
-  auto ws_disconnected_cb = [this](){
-    this->led_blinker.set_wifi_connected();
+  auto ws_connected_cb = [this](bool connected){
+    if (connected) {
+      this->led_blinker.set_server_connected();
+    } else {
+      this->led_blinker.set_server_disconnected();
+    }
   };
   auto ws_delta_cb = [this](){
     this->led_blinker.flip();
   };
   this->ws_client = new WSClient(
-    sk_delta, ws_connected_cb, ws_disconnected_cb, ws_delta_cb);
-
+    "/system/sk", "",
+    sk_delta, ws_connected_cb, ws_delta_cb);
 }
 
 void SensESPApp::enable() {

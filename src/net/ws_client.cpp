@@ -28,17 +28,17 @@ void webSocketClientEvent(WStype_t type, uint8_t * payload, size_t length) {
    }
 }
 
-WSClient::WSClient(SKDelta* sk_delta,
-                   void_cb_func connected_cb,
-                   void_cb_func disconnected_cb,
-                   void_cb_func delta_cb) {
+WSClient::WSClient(String id, String schema, SKDelta* sk_delta,
+                   std::function<void(bool)> connected_cb,
+                   void_cb_func delta_cb) : Configurable{id, schema} {
   this->sk_delta = sk_delta;
   this->connected_cb = connected_cb;
-  this->disconnected_cb = disconnected_cb;
   this->delta_cb = delta_cb;
 
   // set the singleton object pointer
   ws_client = this;
+
+  load_configuration();
 }
 
 void WSClient::enable() {
@@ -51,20 +51,20 @@ void WSClient::on_disconnected() {
   this->connected = false;
   app.onDelay(10000, [this](){ this->connect(); });
   Serial.println("Websocket client disconnected.");
-  this->disconnected_cb();
+  this->connected_cb(false);
 }
 
 void WSClient::on_error() {
   this->connected = false;
   app.onDelay(10000, [this](){ this->connect(); });
   Serial.println("Websocket client error.");
-  this->disconnected_cb();
+  this->connected_cb(false);
 }
 
 void WSClient::on_connected(uint8_t * payload) {
   this->connected = true;
   Serial.printf("Websocket client connected to URL: %s\n", payload);
-  this->connected_cb();
+  this->connected_cb(true);
 }
 
 void WSClient::on_receive_delta(uint8_t * payload) {
@@ -113,7 +113,7 @@ void WSClient::connect() {
   }
 
   this->client.begin(host, port, this->path + url_args);
-  this->connected_cb();
+  this->connected_cb(true);
 }
 
 void WSClient::loop() {
@@ -125,7 +125,7 @@ bool WSClient::is_connected() {
 }
 
 void WSClient::restart() {
-  if (!this->connected) {
+  if (this->connected) {
     this->client.disconnect();
   }
 }
@@ -137,4 +137,22 @@ void WSClient::send_delta() {
     this->client.sendTXT(output);
     this->delta_cb();
   }
+}
+
+JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
+  JsonObject& root = buf.createObject();
+  root["sk_host"] = this->host;
+  root["sk_port"] = this->port;
+  root["sk_path"] = this->path;
+  root["token"] = this->auth_token;
+  return root;
+}
+
+void WSClient::set_configuration(const JsonObject& config) {
+  this->host = config["hostname"].as<String>();
+  this->port = config["sk_port"].as<int>();
+  this->path = config["sk_path"].as<String>();
+  this->auth_token = config["token"].as<String>();
+  this->save_configuration();
+  this->restart();
 }
