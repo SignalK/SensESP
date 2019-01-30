@@ -1,6 +1,7 @@
 #include "networking.h"
 
-#include <ESPAsyncWebServer.h>     //Local WebServer used to serve the configuration portal
+// Local WebServer used to serve the configuration portal
+#include <ESPAsyncWebServer.h>
 #include <ESPAsyncWiFiManager.h>
 
 #include "config.h"
@@ -13,11 +14,10 @@ void save_config_callback() {
   should_save_config = true;
 }
 
-Networking::Networking(String id, String schema) : Configurable{id, schema} {
-
+Networking::Networking(String id, String schema) 
+    : Configurable{id, schema} {
+  load_configuration();
 }
-
-
 
 void Networking::check_connection() {
   if (WiFi.status() != WL_CONNECTED) {
@@ -27,8 +27,6 @@ void Networking::check_connection() {
 }
 
 void Networking::setup(std::function<void(bool)> connection_cb) {
-  char hostname[16];
-
   AsyncWebServer server(80);
   DNSServer dns;
   should_save_config = false;
@@ -40,7 +38,8 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 
   wifiManager.setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
 
-  AsyncWiFiManagerParameter custom_hostname("hostname", "Set hostname", hostname, 16);
+  AsyncWiFiManagerParameter custom_hostname(
+    "hostname", "Set hostname", this->hostname, 20);
   wifiManager.addParameter(&custom_hostname);
 
   if (should_save_config) {
@@ -60,3 +59,20 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   app.onRepeat(1000, std::bind(&Networking::check_connection, this));
 }
 
+ObservableValue<String>* Networking::get_hostname() {
+  return &this->hostname;
+}
+
+void Networking::set_hostname(String hostname) {
+  this->hostname.set(hostname);
+}
+
+JsonObject& Networking::get_configuration(JsonBuffer& buf) {
+  JsonObject& root = buf.createObject();
+  root["hostname"] = this->hostname.get();
+  return root;
+}
+
+void Networking::set_configuration(const JsonObject& config) {
+  this->hostname.set(config["hostname"].as<String>());
+}
