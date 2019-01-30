@@ -13,10 +13,28 @@
 // notify the observers about some state change.
 
 class Observable {
-    std::forward_list < std::function<void()> > observers;
-  public:
-    void notify();
-    void attach(std::function<void()> observer);
+ public:
+  void notify();
+  void attach(std::function<void()> observer);
+ private:
+  std::forward_list < std::function<void()> > observers;
+};
+
+///////////////////
+// ObservableValue is simply a value that notifies its observers if
+// it gets changed.
+
+template <class T>
+class ObservableValue : public Observable {
+ public:
+  ObservableValue(T value) : value{value} {}
+  const T& get() { return value; }
+  void set(T value) {
+    this->value = value;
+    notify();
+  }
+ private:
+  T value;
 };
 
 #endif
