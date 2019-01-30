@@ -3,7 +3,7 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
-SKDelta::SKDelta(const String& hostname, int max_buffer_size) 
+SKDelta::SKDelta(const String& hostname, unsigned int max_buffer_size)
 : hostname{hostname},
   max_buffer_size{max_buffer_size} {}
 
