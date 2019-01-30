@@ -66,11 +66,7 @@ HTTPServer::HTTPServer() {
              std::bind(&HTTPServer::handle_device_restart, this, _1));
   server->on("/info", HTTP_GET,
              std::bind(&HTTPServer::handle_info, this, _1));
-  server->on("/settings/hostname", HTTP_GET|HTTP_PUT,
-             std::bind(&HTTPServer::handle_settings_hostname, this, _1));
-  server->on("/settings/signalk/address", HTTP_GET|HTTP_PUT,
-             std::bind(&HTTPServer::handle_settings_signalk_address, this, _1));
-}
+  }
 
 void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
   Serial.printf("NOT_FOUND: ");
@@ -133,12 +129,4 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   request->send(200, "text/plain", "/info");
-}
-
-void HTTPServer::handle_settings_hostname(AsyncWebServerRequest* request) {
-  request->send(200, "text/plain", "/settings/hostname");
-}
-
-void HTTPServer::handle_settings_signalk_address(AsyncWebServerRequest* request) {
-  request->send(200, "text/plain", "/settings/signalk/address");
 }
