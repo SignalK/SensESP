@@ -7,13 +7,10 @@
 #include "sensesp.h"
 #include "system/led_blinker.h"
 
-// networking is effectively a singleton, and the
-// callback needs access to the object
-Networking* networking;
+bool should_save_config = false;
 
 void save_config_callback() {
-  networking->save_configuration();
-  ESP.restart();
+  should_save_config = true;
 }
 
 Networking::Networking(String id, String schema) : Configurable{id, schema} {
@@ -34,6 +31,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 
   AsyncWebServer server(80);
   DNSServer dns;
+  should_save_config = false;
 
   AsyncWiFiManager wifiManager(&server,&dns);
 
@@ -44,6 +42,12 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 
   AsyncWiFiManagerParameter custom_hostname("hostname", "Set hostname", hostname, 16);
   wifiManager.addParameter(&custom_hostname);
+
+  if (should_save_config) {
+    this->hostname.set(custom_hostname.getValue());
+    this->save_configuration();
+    ESP.restart();
+  }
 
   if (!wifiManager.autoConnect("Unconfigured Sensor")) {
     Serial.println(F("Failed to connect to wifi and config timed out."));
