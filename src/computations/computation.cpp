@@ -31,6 +31,7 @@ JsonObject& Linear::get_configuration(JsonBuffer& buf) {
   root["k"] = k;
   root["c"] = c;
   root["sk_path"] = sk_path;
+  root["value"] = output;
   return root;
 }
 
@@ -38,4 +39,5 @@ void Linear::set_configuration(const JsonObject& config) {
   k = config["k"];
   c = config["c"];
   sk_path = config["sk_path"].as<String>();
+  save_configuration();
 }
