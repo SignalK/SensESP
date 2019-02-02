@@ -3,6 +3,7 @@
 #include "FS.h"
 
 #include "devices/analog_input.h"
+#include "devices/digital_input.h"
 #include "devices/system_info.h"
 #include "net/discovery.h"
 #include "net/ota.h"
@@ -87,6 +88,17 @@ SensESPApp::SensESPApp() {
   });
   devices.push_back(analog_in_dev);
   computations.push_back(analog_comp);
+
+  // connect digital input
+
+  DigitalInput* digital_in_dev = new DigitalInput(D1, INPUT_PULLUP, CHANGE);
+  Passthrough<bool>* button_comp = new Passthrough<bool>(
+    "sensors.sensesp.button");
+  digital_in_dev->attach([digital_in_dev, button_comp](){
+    button_comp->set_input(digital_in_dev->get());
+  });
+  devices.push_back(digital_in_dev);
+  computations.push_back(button_comp);
 
   // connect all computations to the Signal K delta output
 
