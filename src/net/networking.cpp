@@ -12,7 +12,7 @@ void save_config_callback() {
 
 Networking::Networking(String id, String schema)
     : Configurable{id, schema} {
-  hostname = new ObservableValue<String>(String(""));
+  hostname = new ObservableValue<String>(String("unknown"));
   load_configuration();
   server = new AsyncWebServer(80);
   dns = new DNSServer();
