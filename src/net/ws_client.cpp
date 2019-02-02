@@ -153,6 +153,4 @@ void WSClient::set_configuration(const JsonObject& config) {
   this->port = config["sk_port"].as<int>();
   this->path = config["sk_path"].as<String>();
   this->auth_token = config["token"].as<String>();
-  this->save_configuration();
-  this->restart();
 }

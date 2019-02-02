@@ -39,5 +39,4 @@ void Linear::set_configuration(const JsonObject& config) {
   k = config["k"];
   c = config["c"];
   sk_path = config["sk_path"].as<String>();
-  save_configuration();
 }
