@@ -38,12 +38,6 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
     "hostname", "Set hostname", this->hostname->get().c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
 
-  if (should_save_config) {
-    this->hostname->set(custom_hostname.getValue());
-    save_configuration();
-    ESP.restart();
-  }
-
   if (!wifi_manager->autoConnect("Unconfigured Sensor")) {
     Serial.println(F("Failed to connect to wifi and config timed out."));
     ESP.restart();
@@ -51,6 +45,16 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 
   Serial.println(F("Connected to Wifi."));
   connection_cb(true);
+
+  if (should_save_config) {
+    String new_hostname = custom_hostname.getValue();
+    Serial.print("Got new hostname: ");
+    Serial.println(new_hostname);
+    this->hostname->set(new_hostname);
+    save_configuration();
+    Serial.println("Restarting in 500ms");
+    app.onDelay(500, [](){ ESP.restart(); });
+  }
 
   app.onRepeat(1000, std::bind(&Networking::check_connection, this));
 }
