@@ -58,4 +58,16 @@ class Linear : public Computation {
   float output;
 };
 
+class Frequency : public Computation {
+ public:
+  Frequency(String sk_path, String id="", String schema="");
+  void tick();
+  String as_json() override final;
+ private:
+  int ticks = 0;
+  int last_update = 0;
+  void repeat_cb();
+  float output;
+};
+
 #endif

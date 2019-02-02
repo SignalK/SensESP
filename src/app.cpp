@@ -100,6 +100,12 @@ SensESPApp::SensESPApp() {
   devices.push_back(digital_in_dev);
   computations.push_back(button_comp);
 
+  Frequency* dig_in_freq_comp = new Frequency("sensors.button.frequency");
+  digital_in_dev->attach([dig_in_freq_comp](){
+    dig_in_freq_comp->tick();
+  });
+  computations.push_back(dig_in_freq_comp);
+
   // connect all computations to the Signal K delta output
 
   sk_delta = new SKDelta(hostname->get());
