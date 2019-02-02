@@ -18,6 +18,7 @@ class HTTPServer {
  private:
   AsyncWebServer* server;
   std::function<void()> reset_device;
+  void handle_config_list(AsyncWebServerRequest* request);
 };
 
 

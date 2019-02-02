@@ -7,10 +7,14 @@
 #include "SPIFFS.h"
 #endif
 
+#include "Arduino.h"
+#include "AsyncJson.h"
+#include "ArduinoJson.h"
 #include <ESPAsyncWebServer.h>
 
 #include "app.h"
 #include "config.h"
+#include "system/configurable.h"
 
 // Simple web page to view deltas
 const char INDEX_PAGE[] PROGMEM = R"foo(
@@ -60,8 +64,68 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
   server->on("/",[](AsyncWebServerRequest *request ) {
       request->send_P(200, "text/html", INDEX_PAGE);
     });
-  server->on("/config", HTTP_GET|HTTP_PUT,
-             std::bind(&HTTPServer::handle_config, this, _1));
+
+  AsyncCallbackJsonWebHandler* config_put_handler
+    = new AsyncCallbackJsonWebHandler(
+      "/config",
+      [](AsyncWebServerRequest *request, JsonVariant &json) {
+        // omit the "/config" part of the url
+        String url_tail = request->url().substring(7);
+
+        if (url_tail=="") {
+          request->send(405, "text/plain",
+                        F("PUT to /config not allowed.\n"));
+          return;
+        }
+
+        std::map<String, Configurable*>::iterator it
+            = configurables.find(url_tail);
+        if (it==configurables.end()) {
+          request->send(404, "text/plain",
+                        F("Configuration key not found.\n"));
+          return;
+        }
+        Configurable* confable = it->second;
+
+        JsonObject& body = json.as<JsonObject>();
+        if (body.success()) {
+          confable->set_configuration(body); // TODO: check for errors
+          request->send(200, "text/plain", F("Configuration successful.\n"));
+          return;
+        } else {
+          request->send(400, "text/plain", F("Unable to parse JSON body.\n"));
+          return;
+        }
+      });
+  config_put_handler->setMethod(HTTP_PUT);
+  server->addHandler(config_put_handler);
+  server->on("/config", HTTP_GET, [this] (AsyncWebServerRequest *request) {
+    // omit the "/config" part of the url
+    String url_tail = request->url().substring(7);
+
+    if (url_tail=="") {
+      this->handle_config_list(request);
+      return;
+    }
+
+    std::map<String, Configurable*>::iterator it
+        = configurables.find(url_tail);
+    if (it==configurables.end()) {
+      request->send(404, "text/plain",
+                    F("Configuration key not found.\n"));
+      return;
+    }
+    Configurable* confable = it->second;
+
+    AsyncResponseStream *response = request->beginResponseStream("application/json");
+    DynamicJsonBuffer json_buffer;
+    JsonObject& root = json_buffer.createObject();
+    root["config"] = confable->get_configuration(json_buffer);
+    root["schema"] = RawJson(confable->get_config_schema());
+    root.printTo(*response);
+    request->send(response);
+  });
+
   server->on("/device/reset", HTTP_GET,
              std::bind(&HTTPServer::handle_device_reset, this, _1));
   server->on("/device/restart", HTTP_GET,
@@ -117,7 +181,20 @@ void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
   request->send(404);
 }
 
+void HTTPServer::handle_config_list(AsyncWebServerRequest* request) {
+  AsyncResponseStream *response = request->beginResponseStream("application/json");
+  DynamicJsonBuffer json_buffer;
+  JsonObject& root = json_buffer.createObject();
+  JsonArray& arr = root.createNestedArray("keys");
+  for (auto it = configurables.begin(); it!=configurables.end(); ++it) {
+    arr.add(it->first);
+  }
+  root.printTo(*response);
+  request->send(response);
+}
+
 void HTTPServer::handle_config(AsyncWebServerRequest* request) {
+  Serial.println(request->url());
   request->send(200, "text/plain", "/config");
 }
 
