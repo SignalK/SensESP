@@ -22,18 +22,19 @@ SensESPApp::SensESPApp() {
   // create the networking object
   networking = new Networking("/system/networking", "");
   ObservableValue<String>* hostname = networking->get_hostname();
+  String hostname_str = hostname->get();
 
   // connect systemhz
 
   SystemHz* syshz_dev = new SystemHz();
   Passthrough<float>* syshz_comp = new Passthrough<float>(
-    "sensors.unknown.system_hz");
+    "sensors." + hostname_str + ".system_hz");
   // update the SK path if hostname changes
   hostname->attach(
     [hostname, syshz_comp](){
-      syshz_comp->set_sk_path(String("sensors.") +
-                               hostname->get() +
-                               ".system_hz");
+      Serial.println("updating hostname");
+      syshz_comp->set_sk_path(
+        "sensors." + hostname->get() + ".system_hz");
   });
   syshz_dev->attach([syshz_dev, syshz_comp](){
     syshz_comp->set_input(syshz_dev->get());
@@ -44,7 +45,8 @@ SensESPApp::SensESPApp() {
   // connect freemem
 
   FreeMem* freemem = new FreeMem();
-  Passthrough<float>* freemem_value = new Passthrough<float>("sensors.unknown.freemem");
+  Passthrough<float>* freemem_value = new Passthrough<float>(
+    "sensors." + hostname_str + ".freemem");
   freemem->attach([freemem, freemem_value](){ freemem_value->set_input(freemem->get()); });
   devices.push_back(freemem);
   computations.push_back(freemem_value);
@@ -52,8 +54,9 @@ SensESPApp::SensESPApp() {
   // connect uptime (exaggerate the value!)
 
   Uptime* uptime = new Uptime();
-  Linear* uptime_value = new Linear("sensors.unknown.uptime", 1.2, 3600.,
-                                    "/comp/uptime");
+  Linear* uptime_value = new Linear(
+    "sensors." + hostname_str + ".uptime", 1.2, 3600.,
+    "/comp/uptime");
   uptime->attach([uptime, uptime_value](){ uptime_value->set_input(uptime->get()); });
   devices.push_back(uptime);
   computations.push_back(uptime_value);
@@ -62,7 +65,7 @@ SensESPApp::SensESPApp() {
 
   AnalogInput* analog_in_dev = new AnalogInput();
   Passthrough<float>* analog_comp = new Passthrough<float>(
-    "sensors.unknown.analog");
+    "sensors." + hostname_str + ".analog");
   analog_in_dev->attach([analog_in_dev, analog_comp](){
     analog_comp->set_input(analog_in_dev->get());
   });
