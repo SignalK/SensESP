@@ -9,8 +9,8 @@ class DigitalInput : public Device {
                String id="", String schema="");
   void enable() override final;
   bool get();
-  void ICACHE_RAM_ATTR interrupt_handler();
  private:
+  void ICACHE_RAM_ATTR interrupt_handler();
   uint8_t pin;
   int interrupt_type;
   bool value = 0;
