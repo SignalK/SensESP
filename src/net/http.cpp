@@ -202,7 +202,7 @@ void HTTPServer::handle_config(AsyncWebServerRequest* request) {
 void HTTPServer::handle_device_reset(AsyncWebServerRequest* request) {
   request->send(200, "text/plain",
     "OK, resetting the device settings back to factory defaults.\n");
-  this->reset_device();
+  app.onDelay(500, [this](){ this->reset_device(); });
 }
 
 void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
