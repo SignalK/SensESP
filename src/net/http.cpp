@@ -103,7 +103,7 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
     // omit the "/config" part of the url
     String url_tail = request->url().substring(7);
 
-    if (url_tail=="") {
+    if (url_tail=="" || url_tail=="/") {
       this->handle_config_list(request);
       return;
     }
