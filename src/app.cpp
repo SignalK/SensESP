@@ -4,6 +4,7 @@
 
 #include "devices/analog_input.h"
 #include "devices/system_info.h"
+#include "net/discovery.h"
 #include "net/ota.h"
 #include "net/networking.h"
 #include "system/spiffs_storage.h"
@@ -132,6 +133,7 @@ void SensESPApp::enable() {
   });
 
   setup_OTA();
+  setup_discovery(networking->get_hostname()->get().c_str());
 
   this->http_server->enable();
   this->ws_client->enable();

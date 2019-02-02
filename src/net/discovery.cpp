@@ -5,7 +5,7 @@
 #endif
 
 
-void setup_discovery(char* hostname) {
+void setup_discovery(const char* hostname) {
   if (!MDNS.begin(hostname)) {             // Start the mDNS responder for esp8266.local
     Serial.println(F("Error setting up mDNS responder"));
   } else {
