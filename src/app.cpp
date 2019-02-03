@@ -24,87 +24,11 @@ SensESPApp::SensESPApp() {
   // create the networking object
   networking = new Networking("/system/networking", "");
   ObservableValue<String>* hostname = networking->get_hostname();
-  String hostname_str = hostname->get();
 
-  // connect systemhz
+  // setup all devices and their computations
 
-  SystemHz* syshz_dev = new SystemHz();
-  Passthrough<float>* syshz_comp = new Passthrough<float>(
-    "sensors." + hostname_str + ".system_hz");
-  // update the SK path if hostname changes
-  hostname->attach(
-    [hostname, syshz_comp](){
-      syshz_comp->set_sk_path(
-        "sensors." + hostname->get() + ".system_hz");
-  });
-  syshz_dev->attach([syshz_dev, syshz_comp](){
-    syshz_comp->set_input(syshz_dev->get());
-  });
-  devices.push_back(syshz_dev);
-  computations.push_back(syshz_comp);
-
-  // connect freemem
-
-  FreeMem* freemem_dev = new FreeMem();
-  Passthrough<float>* freemem_comp = new Passthrough<float>(
-    "sensors." + hostname_str + ".freemem");
-  // update the SK path if hostname changes
-  hostname->attach(
-    [hostname, freemem_comp](){
-      freemem_comp->set_sk_path(
-        "sensors." + hostname->get() + ".freemem");
-  });
-  freemem_dev->attach([freemem_dev, freemem_comp](){
-    freemem_comp->set_input(freemem_dev->get());
-  });
-  devices.push_back(freemem_dev);
-  computations.push_back(freemem_comp);
-
-  // connect uptime (exaggerate the value!)
-
-  Uptime* uptime_dev = new Uptime();
-  Linear* uptime_comp = new Linear(
-    "sensors." + hostname_str + ".uptime", 1.2, 3600.,
-    "/comp/uptime");
-  // update the SK path if hostname changes
-  hostname->attach(
-    [hostname, uptime_comp](){
-      uptime_comp->set_sk_path(
-        "sensors." + hostname->get() + ".uptime");
-  });
-  uptime_dev->attach([uptime_dev, uptime_comp](){
-    uptime_comp->set_input(uptime_dev->get());
-  });
-  devices.push_back(uptime_dev);
-  computations.push_back(uptime_comp);
-
-  // connect analog input
-
-  AnalogInput* analog_in_dev = new AnalogInput();
-  Passthrough<float>* analog_comp = new Passthrough<float>(
-    "sensors.indoor.illumination");
-  analog_in_dev->attach([analog_in_dev, analog_comp](){
-    analog_comp->set_input(analog_in_dev->get());
-  });
-  devices.push_back(analog_in_dev);
-  computations.push_back(analog_comp);
-
-  // connect digital input
-
-  DigitalInput* digital_in_dev = new DigitalInput(D1, INPUT_PULLUP, CHANGE);
-  Passthrough<bool>* button_comp = new Passthrough<bool>(
-    "sensors.sensesp.button");
-  digital_in_dev->attach([digital_in_dev, button_comp](){
-    button_comp->set_input(digital_in_dev->get());
-  });
-  devices.push_back(digital_in_dev);
-  computations.push_back(button_comp);
-
-  Frequency* dig_in_freq_comp = new Frequency("sensors.button.frequency");
-  digital_in_dev->attach([dig_in_freq_comp](){
-    dig_in_freq_comp->tick();
-  });
-  computations.push_back(dig_in_freq_comp);
+  setup_standard_devices(hostname);
+  setup_custom_devices(hostname);
 
   // connect all computations to the Signal K delta output
 
@@ -135,6 +59,60 @@ SensESPApp::SensESPApp() {
   this->ws_client = new WSClient(
     "/system/sk", "",
     sk_delta, ws_connected_cb, ws_delta_cb);
+}
+
+void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
+
+  // connect systemhz
+
+  connect_1to1_h<SystemHz, Passthrough<float>>(
+    new SystemHz(),
+    new Passthrough<float>(),
+    hostname
+  );
+
+  String hostname_str = hostname->get();
+
+  // connect freemem
+
+  connect_1to1_h<FreeMem, Passthrough<float>>(
+    new FreeMem(),
+    new Passthrough<float>(),
+    hostname
+  );
+
+  // connect uptime
+
+  connect_1to1_h<Uptime, Passthrough<float>>(
+    new Uptime(),
+    new Passthrough<float>(),
+    hostname
+  );
+}
+
+void SensESPApp::setup_custom_devices(ObservableValue<String>* hostname) {
+  // connect analog input
+
+  connect_1to1<AnalogInput, Passthrough<float>>(
+    new AnalogInput(),
+    new Passthrough<float>("sensors.indoor.illumination"));
+
+  // connect digital input
+
+  DigitalInput* digital_in_dev = new DigitalInput(D1, INPUT_PULLUP, CHANGE);
+  Passthrough<bool>* button_comp = new Passthrough<bool>(
+    "sensors.sensesp.button");
+  digital_in_dev->attach([digital_in_dev, button_comp](){
+    button_comp->set_input(digital_in_dev->get());
+  });
+  devices.push_back(digital_in_dev);
+  computations.push_back(button_comp);
+
+  Frequency* dig_in_freq_comp = new Frequency("sensors.button.frequency");
+  digital_in_dev->attach([dig_in_freq_comp](){
+    dig_in_freq_comp->tick();
+  });
+  computations.push_back(dig_in_freq_comp);
 }
 
 void SensESPApp::enable() {

@@ -25,6 +25,7 @@ class Computation : public Observable, public Configurable {
 template <class T>
 class Passthrough : public Computation {
  public:
+  Passthrough() : Computation{"", "", ""} {}
   Passthrough(String sk_path, String id="", String schema="")
     : Computation{sk_path, id, schema} {}
   void set_input(T input) {
