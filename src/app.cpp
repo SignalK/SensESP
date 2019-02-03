@@ -28,7 +28,7 @@ SensESPApp::SensESPApp() {
   // setup all devices and their computations
 
   setup_standard_devices(hostname);
-  setup_custom_devices(hostname);
+  setup_custom_devices();
 
   // connect all computations to the Signal K delta output
 
@@ -96,31 +96,6 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
     new Passthrough<String>(),
     hostname
   );
-}
-
-void SensESPApp::setup_custom_devices(ObservableValue<String>* hostname) {
-  // connect analog input
-
-  connect_1to1<AnalogInput, Passthrough<float>>(
-    new AnalogInput(),
-    new Passthrough<float>("sensors.indoor.illumination"));
-
-  // connect digital input
-
-  DigitalInput* digital_in_dev = new DigitalInput(D1, INPUT_PULLUP, CHANGE);
-  Passthrough<bool>* button_comp = new Passthrough<bool>(
-    "sensors.sensesp.button");
-  digital_in_dev->attach([digital_in_dev, button_comp](){
-    button_comp->set_input(digital_in_dev->get());
-  });
-  devices.push_back(digital_in_dev);
-  computations.push_back(button_comp);
-
-  Frequency* dig_in_freq_comp = new Frequency("sensors.button.frequency");
-  digital_in_dev->attach([dig_in_freq_comp](){
-    dig_in_freq_comp->tick();
-  });
-  computations.push_back(dig_in_freq_comp);
 }
 
 void SensESPApp::enable() {

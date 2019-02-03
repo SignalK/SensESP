@@ -1,7 +1,7 @@
 #ifndef _app_H_
 #define _app_H_
 
-#include <list>
+#include <set>
 
 #include "config.h"
 #include "computations/computation.h"
@@ -19,19 +19,19 @@ class SensESPApp {
   void enable();
   void reset();
  private:
-  std::list<Device*> devices;
-  std::list<Computation*> computations;
+  std::set<Device*> devices;
+  std::set<Computation*> computations;
 
   void setup_standard_devices(ObservableValue<String>* hostname);
-  void setup_custom_devices(ObservableValue<String>* hostname);
+  void setup_custom_devices();
 
   template<typename T, typename U>
   void connect_1to1(T* device, U* computation) {
     device->attach([device, computation](){
       computation->set_input(device->get());
     });
-    devices.push_back(device);
-    computations.push_back(computation);
+    devices.insert(device);
+    computations.insert(computation);
   }
 
   template<typename T, typename U>
@@ -49,8 +49,8 @@ class SensESPApp {
       computation->set_input(device->get());
     });
     hostname->attach(comp_set_sk_path);
-    devices.push_back(device);
-    computations.push_back(computation);
+    devices.insert(device);
+    computations.insert(computation);
   }
 
   HTTPServer* http_server;
