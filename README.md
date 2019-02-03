@@ -1,6 +1,8 @@
 # SensESP
 
-SensESP is a Signal K sensor framework for ESP8266 and ESP32. At the moment it should be considered a proof of concept, heavily inspired by [SigkSens](https://github.com/mxtommy/SigkSens).
+SensESP is a Signal K sensor framework for ESP8266 and ESP32. At the moment it is very much a work in progress.
+
+SensESP is heavily inspired by [SigkSens](https://github.com/mxtommy/SigkSens) and prior work done by [@mxtommy](https://github.com/mxtommy).
 
 ## Installation
 
@@ -12,11 +14,9 @@ SensESP needs to be installed using PlatformIO:
 4. Press the "Upload and Monitor" button.
 5. See the magic happen.
 
-## Initial device configuration
+## Initial device wiring
 
-Initial device configuration is at the moment performed by
-modifying the `SensESPApp` constructor in `app.cpp`.
-(Sorry about that.)
+Some basic configuration settings are located in `config.h`. Initial device software wiring is done by modifying `src/device_setup.cpp`.
 
 ## Runtime setup
 
@@ -34,23 +34,23 @@ possible configuration keys can be retrieved from:
 An individual key configuration can be retrieved under
 the config path:
 
-    http://sensesp.local/config/comp/uptime
+    http://sensesp.local/config/system/networking
 
 Configuration can be updated with HTTP PUT requests:
 
     curl -X PUT \
-    http://sensesp.local/config/comp/uptime \
+    http://sensesp.local/config/system/networking \
     -H 'Content-Type: application/json' \
     -d '{
-      "k": 1,
-      "c": 0
+      "hostname": "myesp"
     }'
 
 ## Feature wishlist
 
 - [x] Persistent configuration
 - [x] RESTful HTTP control interface
-- [ ] Improved device configuration system
+- [x] Improved device configuration system
 - [ ] Authentication token support
 - [ ] Web configuration UI
-- [ ] Device writing support
+- [ ] Device control support. For now, all devices are read-only, and control devices such as leds, relays, or
+PWM output are not supported.
