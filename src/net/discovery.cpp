@@ -14,4 +14,5 @@ void setup_discovery(const char* hostname) {
     Serial.println(F(""));
   }
   MDNS.addService("http", "tcp", 80);
+  MDNS.addService("signalk-sensesp", "tcp", 80);
 }
