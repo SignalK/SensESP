@@ -6,6 +6,7 @@
 
 #include "system/configurable.h"
 #include "system/observable.h"
+#include "sensesp.h"
 
 ///////////////////
 // Computations transform raw device readouts into useful sensor values.
@@ -59,15 +60,38 @@ class Linear : public Computation {
   float output;
 };
 
+template <class T>
 class Frequency : public Computation {
  public:
-  Frequency(String sk_path, String id="", String schema="");
-  void tick();
-  String as_json() override final;
+  Frequency(String sk_path, String id="", String schema="")
+      : Computation{sk_path, id, schema} {
+    last_update = millis();
+    app.onRepeat(1000, std::bind(&Frequency::repeat_cb, this));
+  }
+  void set_input(T input) {
+    ++ticks;
+    notify();
+  }
+  String as_json() override final {
+    DynamicJsonBuffer jsonBuffer;
+    String json;
+    JsonObject& root = jsonBuffer.createObject();
+    root.set("path", this->sk_path);
+    root.set("value", output);
+    root.printTo(json);
+    return json;
+  }
  private:
   int ticks = 0;
   int last_update = 0;
-  void repeat_cb();
+  void repeat_cb() {
+    unsigned long cur_millis = millis();
+    unsigned long elapsed_millis = cur_millis - last_update;
+    output = ticks / (elapsed_millis/1000.);
+    last_update = cur_millis;
+    ticks = 0;
+    notify();
+  }
   float output;
 };
 
