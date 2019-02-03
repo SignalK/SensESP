@@ -36,4 +36,14 @@ class Uptime : public Device {
   void update();
 };
 
+class IPAddrDev : public Device {
+ public:
+  void enable() override final;
+  String get();
+  String get_value_name() { return "ipaddr"; }
+ private:
+  String ipaddr;
+  void update();
+};
+
 #endif

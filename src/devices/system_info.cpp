@@ -1,6 +1,7 @@
 #include "system_info.h"
 
 #include "Arduino.h"
+#include <ESP8266WiFi.h>
 
 #include "sensesp.h"
 
@@ -62,3 +63,15 @@ float Uptime::get() {
   return this->uptime;
 }
 
+void IPAddrDev::update() {
+  ipaddr = WiFi.localIP().toString();
+  this->notify();
+}
+
+void IPAddrDev::enable() {
+  app.onRepeat(10000, [this](){ this->update(); });
+}
+
+String IPAddrDev::get() {
+  return this->ipaddr;
+}

@@ -88,6 +88,14 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
     new Passthrough<float>(),
     hostname
   );
+
+  // connect ip address
+
+  connect_1to1_h<IPAddrDev, Passthrough<String>>(
+    new IPAddrDev(),
+    new Passthrough<String>(),
+    hostname
+  );
 }
 
 void SensESPApp::setup_custom_devices(ObservableValue<String>* hostname) {
