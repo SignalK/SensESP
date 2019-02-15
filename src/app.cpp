@@ -25,18 +25,18 @@ SensESPApp::SensESPApp() {
   networking = new Networking("/system/networking", "");
   ObservableValue<String>* hostname = networking->get_hostname();
 
-  // setup all devices and their computations
+  // setup all devices and their transforms
 
   setup_standard_devices(hostname);
   setup_custom_devices();
 
-  // connect all computations to the Signal K delta output
+  // connect all transforms to the Signal K delta output
 
   sk_delta = new SKDelta(hostname->get());
   hostname->attach([hostname, this](){
     this->sk_delta->set_hostname(hostname->get());
   });
-  for (auto const& comp : computations) {
+  for (auto const& comp : transforms) {
     comp->attach([comp, this](){ this->sk_delta->append(comp->as_json()); });
   }
 

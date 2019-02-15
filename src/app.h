@@ -4,7 +4,7 @@
 #include <set>
 
 #include "config.h"
-#include "computations/computation.h"
+#include "transforms/transform.h"
 #include "devices/device.h"
 #include "net/http.h"
 #include "net/networking.h"
@@ -20,37 +20,37 @@ class SensESPApp {
   void reset();
  private:
   std::set<Device*> devices;
-  std::set<Computation*> computations;
+  std::set<Transform*> transforms;
 
   void setup_standard_devices(ObservableValue<String>* hostname);
   void setup_custom_devices();
 
   template<typename T, typename U>
-  void connect_1to1(T* device, U* computation) {
-    device->attach([device, computation](){
-      computation->set_input(device->get());
+  void connect_1to1(T* device, U* transform) {
+    device->attach([device, transform](){
+      transform->set_input(device->get());
     });
     devices.insert(device);
-    computations.insert(computation);
+    transforms.insert(transform);
   }
 
   template<typename T, typename U>
-  void connect_1to1_h(T* device, U* computation,
+  void connect_1to1_h(T* device, U* transform,
                       ObservableValue<String>* hostname) {
     String hostname_str = hostname->get();
     String value_name = device->get_value_name();
     String sk_path = "sensors." + hostname_str + "." + value_name;
-    auto comp_set_sk_path = [hostname, computation, value_name](){
-        computation->set_sk_path(
+    auto comp_set_sk_path = [hostname, transform, value_name](){
+        transform->set_sk_path(
           "sensors." + hostname->get() + "." + value_name);
     };
     comp_set_sk_path();
-    device->attach([device, computation](){
-      computation->set_input(device->get());
+    device->attach([device, transform](){
+      transform->set_input(device->get());
     });
     hostname->attach(comp_set_sk_path);
     devices.insert(device);
-    computations.insert(computation);
+    transforms.insert(transform);
   }
 
   HTTPServer* http_server;

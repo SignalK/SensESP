@@ -1,4 +1,4 @@
-#include "computation.h"
+#include "transform.h"
 
 #include "ArduinoJson.h"
 
@@ -7,7 +7,7 @@
 // Linear
 
 Linear::Linear(String path, float k, float c, String id, String schema)
-    : Computation{ path, id, schema },
+    : Transform{ path, id, schema },
       k{ k },
       c{ c } {
   load_configuration();

@@ -1,5 +1,5 @@
-#ifndef _computation_H_
-#define _computation_H_
+#ifndef _transform_H_
+#define _transform_H_
 
 #include "Arduino.h"
 #include <ArduinoJson.h>
@@ -9,11 +9,11 @@
 #include "sensesp.h"
 
 ///////////////////
-// Computations transform raw device readouts into useful sensor values.
+// Transforms transform raw device readouts into useful sensor values.
 
-class Computation : public Observable, public Configurable {
+class Transform : public Observable, public Configurable {
  public:
-  Computation(String sk_path, String id="", String schema="")
+  Transform(String sk_path, String id="", String schema="")
     : Configurable{id, schema}, sk_path{sk_path} {}
   virtual String as_json() = 0;
   void set_sk_path(const String& path) {
@@ -24,11 +24,11 @@ class Computation : public Observable, public Configurable {
 };
 
 template <class T>
-class Passthrough : public Computation {
+class Passthrough : public Transform {
  public:
-  Passthrough() : Computation{"", "", ""} {}
+  Passthrough() : Transform{"", "", ""} {}
   Passthrough(String sk_path, String id="", String schema="")
-    : Computation{sk_path, id, schema} {}
+    : Transform{sk_path, id, schema} {}
   void set_input(T input) {
     output = input;
     notify();
@@ -47,7 +47,7 @@ class Passthrough : public Computation {
 };
 
 // y = k * x + c
-class Linear : public Computation {
+class Linear : public Transform {
  public:
   Linear(String sk_path, float k, float c, String id="", String schema="");
   void set_input(float input);
@@ -61,10 +61,10 @@ class Linear : public Computation {
 };
 
 template <class T>
-class Frequency : public Computation {
+class Frequency : public Transform {
  public:
   Frequency(String sk_path, String id="", String schema="")
-      : Computation{sk_path, id, schema} {
+      : Transform{sk_path, id, schema} {
     last_update = millis();
     app.onRepeat(1000, std::bind(&Frequency::repeat_cb, this));
   }

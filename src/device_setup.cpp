@@ -9,7 +9,7 @@ void SensESPApp::setup_custom_devices() {
     new AnalogInput(),
     new Passthrough<float>("sensors.indoor.illumination"));
 
-  // connect a digital input to two different computations
+  // connect a digital input to two different transforms
 
   DigitalInput* digin = new DigitalInput(D1, INPUT_PULLUP, CHANGE);
   connect_1to1<DigitalInput, Passthrough<bool>>(
