@@ -42,6 +42,15 @@ class Passthrough : public Transform {
     root.printTo(json);
     return json;
   }
+  virtual JsonObject& get_configuration(JsonBuffer& buf) override final {
+    JsonObject& root = buf.createObject();
+    root["sk_path"] = sk_path;
+    root["value"] = output;
+    return root;
+  }
+  virtual void set_configuration(const JsonObject& config) override final {
+    sk_path = config["sk_path"].as<String>();
+  }
  private:
   T output;
 };
