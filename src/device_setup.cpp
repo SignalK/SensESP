@@ -1,6 +1,7 @@
 #include "app.h"
 #include "devices/analog_input.h"
 #include "devices/digital_input.h"
+#include "devices/onewire_temperature.h"
 
 void SensESPApp::setup_custom_devices() {
   // connect an analog input
@@ -21,4 +22,15 @@ void SensESPApp::setup_custom_devices() {
     digin,
     new Frequency<bool>("sensors.button.frequency")
   );
+
+  // OneWire temperature devices need to have the bus
+  // controller device created first
+  DallasTemperatureSensors* dts = new DallasTemperatureSensors(13);
+  devices.insert(dts);
+
+  connect_1to1<OneWireTemperature, Passthrough<float>>(
+    new OneWireTemperature(dts, "/devices/ow_temp_1", ""),
+    new Passthrough<float>("sensors.temperature.ow1",
+                           "/transforms/ow_temp_1"));
+
 }
