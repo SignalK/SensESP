@@ -149,7 +149,7 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
 }
 
 void WSClient::set_configuration(const JsonObject& config) {
-  this->host = config["hostname"].as<String>();
+  this->host = config["sk_host"].as<String>();
   this->port = config["sk_port"].as<int>();
   this->path = config["sk_path"].as<String>();
   this->auth_token = config["token"].as<String>();
