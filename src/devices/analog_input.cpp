@@ -2,7 +2,7 @@
 
 #include "Arduino.h"
 
-#include "../sensesp.h"
+#include "sensesp.h"
 
 void AnalogInput::update() {
   value = analogRead(A0);
@@ -10,7 +10,6 @@ void AnalogInput::update() {
 }
 
 void AnalogInput::enable() {
-
   app.onRepeat(100, [this](){ this->update(); });
 }
 

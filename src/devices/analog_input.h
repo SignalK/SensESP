@@ -4,11 +4,12 @@
 #include "device.h"
 
 class AnalogInput : public Device {
-    float value;
-    void update();
-  public:
-    void enable() override final;
-    float get();
+ public:
+  void enable() override final;
+  float get();
+ private:
+  float value;
+  void update();
 };
 
 #endif
