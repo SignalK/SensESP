@@ -26,7 +26,7 @@ class WSClient : public Configurable {
   void send_delta();
 
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual void set_configuration(const JsonObject& config) override final;
+  virtual bool set_configuration(const JsonObject& config) override final;
 
  private:
   String host = "";

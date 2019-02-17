@@ -89,7 +89,11 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
 
         JsonObject& body = json.as<JsonObject>();
         if (body.success()) {
-          confable->set_configuration(body); // TODO: check for errors
+          if (!confable->set_configuration(body)) {
+            request->send(400, "text/plain",
+                          F("Unable to extract keys from JSON.\n"));
+            return;
+          }
           confable->save_configuration();
           request->send(200, "text/plain", F("Configuration successful.\n"));
           return;

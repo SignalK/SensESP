@@ -16,7 +16,7 @@ class Networking : public Configurable {
   void setup(std::function<void(bool)> connection_cb);
   ObservableValue<String>* get_hostname();
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual void set_configuration(const JsonObject& config) override final;
+  virtual bool set_configuration(const JsonObject& config) override final;
 
   void set_hostname(String hostname);
 

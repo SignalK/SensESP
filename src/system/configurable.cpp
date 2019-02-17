@@ -21,8 +21,9 @@ JsonObject& Configurable::get_configuration(JsonBuffer& buf) {
 }
 
 // Sets and saves the configuration
-void Configurable::set_configuration(const JsonObject& config) {
+bool Configurable::set_configuration(const JsonObject& config) {
   Serial.println(F("WARNING: set_configuration not defined"));
+  return false;
 }
 
 // Returns the configuration schema.
@@ -51,7 +52,10 @@ void Configurable::load_configuration() {
     Serial.print(F("WARNING: Could not parse configuration for "));
     Serial.println(id);
   }
-  set_configuration(obj);
+  if (!set_configuration(obj)) {
+    Serial.print(F("WARNING: Could not set configuration for "));
+    Serial.println(id);
+  }
   f.close();
 }
 

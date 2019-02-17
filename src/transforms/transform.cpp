@@ -37,8 +37,15 @@ JsonObject& Linear::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-void Linear::set_configuration(const JsonObject& config) {
+bool Linear::set_configuration(const JsonObject& config) {
+  String expected[] = {"k", "c", "sk_path"};
+  for (auto str : expected) {
+    if (!config.containsKey(str)) {
+      return false;
+    }
+  }
   k = config["k"];
   c = config["c"];
   sk_path = config["sk_path"].as<String>();
+  return true;
 }

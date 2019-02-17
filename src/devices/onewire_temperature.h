@@ -31,7 +31,7 @@ class OneWireTemperature : public Device {
   void enable() override final;
   float get();
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual void set_configuration(const JsonObject& config) override final;
+  virtual bool set_configuration(const JsonObject& config) override final;
  private:
   OneWire* onewire;
   float value;

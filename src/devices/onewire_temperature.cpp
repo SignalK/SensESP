@@ -142,6 +142,10 @@ JsonObject& OneWireTemperature::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-void OneWireTemperature::set_configuration(const JsonObject& config) {
+bool OneWireTemperature::set_configuration(const JsonObject& config) {
+  if (!config.containsKey("address")) {
+    return false;
+  }
   string_to_owda(&address, config["address"]);
+  return true;
 }

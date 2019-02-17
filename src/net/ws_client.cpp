@@ -148,9 +148,16 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-void WSClient::set_configuration(const JsonObject& config) {
+bool WSClient::set_configuration(const JsonObject& config) {
+  String expected[] = {"sk_host", "sk_port", "sk_path", "token"};
+  for (auto str : expected) {
+    if (!config.containsKey(str)) {
+      return false;
+    }
+  }
   this->host = config["sk_host"].as<String>();
   this->port = config["sk_port"].as<int>();
   this->path = config["sk_path"].as<String>();
   this->auth_token = config["token"].as<String>();
+  return true;
 }

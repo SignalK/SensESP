@@ -48,7 +48,10 @@ class Passthrough : public Transform {
     root["value"] = output;
     return root;
   }
-  virtual void set_configuration(const JsonObject& config) override final {
+  virtual bool set_configuration(const JsonObject& config) override final {
+    if (!config.containsKey("sk_path")) {
+      return false;
+    }
     sk_path = config["sk_path"].as<String>();
   }
  private:
@@ -62,7 +65,7 @@ class Linear : public Transform {
   void set_input(float input);
   String as_json() override final;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual void set_configuration(const JsonObject& config) override final;
+  virtual bool set_configuration(const JsonObject& config) override final;
  private:
   float k;
   float c;

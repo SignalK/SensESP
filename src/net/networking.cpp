@@ -74,8 +74,12 @@ JsonObject& Networking::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-void Networking::set_configuration(const JsonObject& config) {
+bool Networking::set_configuration(const JsonObject& config) {
+  if (!config.containsKey("hostname")) {
+    return false;
+  }
   this->hostname->set(config["hostname"].as<String>());
+  return true;
 }
 
 void Networking::reset_settings() {
