@@ -78,38 +78,16 @@ class Linear : public Transform {
 
 // TODO: frequency should have a scaling factor (for flow rate meters etc)
 
-template <class T>
+// Frequency transform divides its input value by the time elapsed since
+// the last reading
 class Frequency : public Transform {
  public:
-  Frequency(String sk_path, String id="", String schema="")
-      : Transform{sk_path, id, schema} {
-    last_update = millis();
-    app.onRepeat(1000, std::bind(&Frequency::repeat_cb, this));
-  }
-  void set_input(T input) {
-    ++ticks;
-    notify();
-  }
-  String as_json() override final {
-    DynamicJsonBuffer jsonBuffer;
-    String json;
-    JsonObject& root = jsonBuffer.createObject();
-    root.set("path", this->sk_path);
-    root.set("value", output);
-    root.printTo(json);
-    return json;
-  }
+  Frequency(String sk_path, String id="", String schema="");
+  void set_input(uint input);
+  String as_json() override final;
  private:
   int ticks = 0;
-  int last_update = 0;
-  void repeat_cb() {
-    unsigned long cur_millis = millis();
-    unsigned long elapsed_millis = cur_millis - last_update;
-    output = ticks / (elapsed_millis/1000.);
-    last_update = cur_millis;
-    ticks = 0;
-    notify();
-  }
+  uint last_update = 0;
   float output;
 };
 
