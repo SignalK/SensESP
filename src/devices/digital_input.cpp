@@ -42,7 +42,11 @@ DigitalInputCounter::DigitalInputCounter(
 
 void DigitalInputCounter::enable() {
   app.onInterrupt(pin, interrupt_type,
-                  [this](){ this->counter++; });
+                  [this](){
+    noInterrupts();
+    this->counter++;
+    interrupts();
+  });
   app.onRepeat(read_delay, [this](){
     value = counter;
     counter = 0;
