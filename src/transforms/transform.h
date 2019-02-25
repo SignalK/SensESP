@@ -1,6 +1,8 @@
 #ifndef _transform_H_
 #define _transform_H_
 
+#include <set>
+
 #include "Arduino.h"
 #include <ArduinoJson.h>
 
@@ -13,12 +15,9 @@
 ///////////////////
 // Transforms transform raw device readouts into useful sensor values.
 
-// TODO: transforms should register themselves
-
 class Transform : public Observable, public Configurable {
  public:
-  Transform(String sk_path, String id="", String schema="")
-    : Configurable{id, schema}, sk_path{sk_path} {}
+  Transform(String sk_path, String id="", String schema="");
   virtual String as_json() = 0;
   String& get_sk_path() {
     return sk_path;
@@ -27,8 +26,13 @@ class Transform : public Observable, public Configurable {
     sk_path = path;
   }
   virtual void enable() {}
+  static const std::set<Transform*>& get_transforms() {
+    return transforms;
+  }
  protected:
   String sk_path;
+ private:
+  static std::set<Transform*> transforms;
 };
 
 template <class T>

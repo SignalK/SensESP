@@ -1,8 +1,6 @@
 #ifndef _app_H_
 #define _app_H_
 
-#include <set>
-
 #include "config.h"
 #include "transforms/transform.h"
 #include "devices/device.h"
@@ -19,9 +17,6 @@ class SensESPApp {
   void enable();
   void reset();
  private:
-  std::set<Device*> devices;
-  std::set<Transform*> transforms;
-
   void setup_standard_devices(ObservableValue<String>* hostname);
   void setup_custom_devices();
 
@@ -32,8 +27,6 @@ class SensESPApp {
     device->attach([device, transform](){
       transform->set_input(device->get());
     });
-    devices.insert(device);
-    transforms.insert(transform);
   }
 
   template<typename T, typename U>
@@ -51,8 +44,6 @@ class SensESPApp {
       transform->set_input(device->get());
     });
     hostname->attach(comp_set_sk_path);
-    devices.insert(device);
-    transforms.insert(transform);
   }
 
   HTTPServer* http_server;

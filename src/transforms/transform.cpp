@@ -4,6 +4,15 @@
 
 #include "sensesp.h"
 
+// Transform
+
+std::set<Transform*> Transform::transforms;
+
+Transform::Transform(String sk_path, String id, String schema)
+    : Configurable{id, schema}, sk_path{sk_path} {
+  transforms.insert(this);
+}
+
 // Linear
 
 Linear::Linear(String path, float k, float c, String id, String schema)

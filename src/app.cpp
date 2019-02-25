@@ -36,7 +36,7 @@ SensESPApp::SensESPApp() {
   hostname->attach([hostname, this](){
     this->sk_delta->set_hostname(hostname->get());
   });
-  for (auto const& transf : transforms) {
+  for (auto const& transf : Transform::get_transforms()) {
     if (transf->get_sk_path()!="") {
       transf->attach([transf, this](){
         this->sk_delta->append(transf->as_json());
@@ -123,13 +123,13 @@ void SensESPApp::enable() {
 
   Serial.println("WS client enabled");
 
-  for (auto const& dev : devices) {
+  for (auto const& dev : Device::get_devices()) {
     dev->enable();
   }
 
   Serial.println("All devices enabled");
 
-  for (auto const& transf : transforms) {
+  for (auto const& transf : Transform::get_transforms()) {
     transf->enable();
   }
   Serial.println("All transforms enabled");
