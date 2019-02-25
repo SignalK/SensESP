@@ -20,6 +20,9 @@ class Transform : public Observable, public Configurable {
   Transform(String sk_path, String id="", String schema="")
     : Configurable{id, schema}, sk_path{sk_path} {}
   virtual String as_json() = 0;
+  String& get_sk_path() {
+    return sk_path;
+  }
   void set_sk_path(const String& path) {
     sk_path = path;
   }

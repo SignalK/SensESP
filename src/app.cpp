@@ -36,8 +36,12 @@ SensESPApp::SensESPApp() {
   hostname->attach([hostname, this](){
     this->sk_delta->set_hostname(hostname->get());
   });
-  for (auto const& comp : transforms) {
-    comp->attach([comp, this](){ this->sk_delta->append(comp->as_json()); });
+  for (auto const& transf : transforms) {
+    if (transf->get_sk_path()!="") {
+      transf->attach([transf, this](){
+        this->sk_delta->append(transf->as_json());
+      });
+    }
   }
 
   // create the HTTP server
