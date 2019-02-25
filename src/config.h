@@ -11,12 +11,12 @@
 #define HTTP_SERVER_PORT 80
 
 // Password for Over-the-air (OTA) updates
-#define OTA_PASSWORD "bonvoyage"
+//#define OTA_PASSWORD "bonvoyage"
 
 // LED pin
 
-//#define LED_PIN LED_BUILTIN  // If your board doesn't have a defined LED_BUILTIN, comment this line out...
-#define LED_PIN 2        // ... and uncomment this line, and change 13 to any LED pin you have. If you have none, leave it at 13.
+#define LED_PIN LED_BUILTIN  // If your board doesn't have a defined LED_BUILTIN, comment this line out...
+//#define LED_PIN 2        // ... and uncomment this line, and change 13 to any LED pin you have. If you have none, leave it at 13.
 #define LED_ACTIVE_LOW true
 
 

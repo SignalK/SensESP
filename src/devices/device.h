@@ -7,6 +7,8 @@
 ///////////////////
 // Devices represent raw hardware thingies.
 
+// TODO: devices should register themselves
+
 class Device : public Observable, public Configurable {
  public:
   Device(String id="", String schema="") : Configurable{id, schema} {}

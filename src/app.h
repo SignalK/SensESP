@@ -25,6 +25,8 @@ class SensESPApp {
   void setup_standard_devices(ObservableValue<String>* hostname);
   void setup_custom_devices();
 
+  // TODO: generalize so that first arg can be any observable
+
   template<typename T, typename U>
   void connect_1to1(T* device, U* transform) {
     device->attach([device, transform](){

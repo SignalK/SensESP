@@ -8,8 +8,12 @@
 #include "system/observable.h"
 #include "sensesp.h"
 
+// TODO: Split into multiple files
+
 ///////////////////
 // Transforms transform raw device readouts into useful sensor values.
+
+// TODO: transforms should register themselves
 
 class Transform : public Observable, public Configurable {
  public:
@@ -72,6 +76,8 @@ class Linear : public Transform {
   float output;
 };
 
+// TODO: frequency should have a scaling factor (for flow rate meters etc)
+
 template <class T>
 class Frequency : public Transform {
  public:
@@ -106,5 +112,7 @@ class Frequency : public Transform {
   }
   float output;
 };
+
+// TODO: implement a difference transform
 
 #endif
