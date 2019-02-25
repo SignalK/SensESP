@@ -84,17 +84,18 @@ class Linear : public Transform {
   float output;
 };
 
-// TODO: frequency should have a scaling factor (for flow rate meters etc)
-
 // Frequency transform divides its input value by the time elapsed since
 // the last reading
 class Frequency : public Transform {
  public:
-  Frequency(String sk_path, String id="", String schema="");
+  Frequency(String sk_path, float k=1, String id="", String schema="");
   void set_input(uint input);
   String as_json() override final;
   void enable() override final;
+  virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
+  virtual bool set_configuration(const JsonObject& config) override final;
  private:
+  float k;
   int ticks = 0;
   uint last_update = 0;
   float output;
