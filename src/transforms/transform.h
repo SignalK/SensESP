@@ -23,6 +23,7 @@ class Transform : public Observable, public Configurable {
   void set_sk_path(const String& path) {
     sk_path = path;
   }
+  virtual void enable() {}
  protected:
   String sk_path;
 };
@@ -85,6 +86,7 @@ class Frequency : public Transform {
   Frequency(String sk_path, String id="", String schema="");
   void set_input(uint input);
   String as_json() override final;
+  void enable() override final;
  private:
   int ticks = 0;
   uint last_update = 0;

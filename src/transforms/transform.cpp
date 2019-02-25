@@ -52,6 +52,10 @@ bool Linear::set_configuration(const JsonObject& config) {
 
 Frequency::Frequency(String sk_path, String id, String schema)
     : Transform{sk_path, id, schema} {
+  //load_configuration();
+}
+
+void Frequency::enable() {
   last_update = millis();
 }
 

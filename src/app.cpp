@@ -124,6 +124,11 @@ void SensESPApp::enable() {
   }
 
   Serial.println("All devices enabled");
+
+  for (auto const& transf : transforms) {
+    transf->enable();
+  }
+  Serial.println("All transforms enabled");
 }
 
 void SensESPApp::reset() {
