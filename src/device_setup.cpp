@@ -12,7 +12,7 @@ void SensESPApp::setup_custom_devices() {
 
   // connect a digital input to two different transforms
 
-  DigitalInput* digin = new DigitalInput(D1, INPUT_PULLUP, CHANGE);
+  //DigitalInput* digin = new DigitalInput(D1, INPUT_PULLUP, RISING);
   // connect_1to1<DigitalInput, Passthrough<bool>>(
   //   digin,
   //   new Passthrough<bool>("sensors.sensesp.button")
@@ -34,9 +34,9 @@ void SensESPApp::setup_custom_devices() {
 //
   // connect a RPM meter
 
-  connect_1to1<DigitalInput, Frequency<bool>>(
-    new DigitalInput(D5, INPUT_PULLUP, CHANGE),
-    new Frequency<bool>("sensors.engine.rpm")
+  connect_1to1<DigitalInputCounter, Frequency>(
+    new DigitalInputCounter(D5, INPUT_PULLUP, RISING, 1000),
+    new Frequency("sensors.engine.rpm")
   );
 
   // OneWire temperature devices need to have the bus

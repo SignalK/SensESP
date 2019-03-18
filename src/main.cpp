@@ -2,8 +2,6 @@
 
 #include "app.h"
 
-SensESPApp* sensesp_app;
-
 ReactESP app([] () {
   Serial.begin(115200);
 

@@ -65,6 +65,7 @@ class Passthrough : public Transform {
       return false;
     }
     sk_path = config["sk_path"].as<String>();
+    return true;
   }
  private:
   T output;

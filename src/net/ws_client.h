@@ -9,6 +9,8 @@
 #include "system/configurable.h"
 #include "system/signal_k.h"
 
+enum ConnectionState { disconnected, connecting, connected };
+
 class WSClient : public Configurable {
  public:
   WSClient(String id, String schema, SKDelta* sk_delta,
@@ -31,11 +33,18 @@ class WSClient : public Configurable {
  private:
   String host = "";
   uint16_t port = 80;
-  String path = "/signalk/v1/stream";
+  String client_id = "";
+  String polling_href = "";
   String auth_token;
-  bool connected = false;
+  // FIXME: replace with a single connection_state enum
+  ConnectionState connection_state = disconnected;
   WebSocketsClient client;
   SKDelta* sk_delta;
+  void connect_loop();
+  void test_token(const String host, const uint16_t port);
+  void send_access_request(const String host, const uint16_t port);
+  void poll_access_request(const String host, const uint16_t port, const String href);
+  void connect_ws(const String host, const uint16_t port);
   std::function<void(bool)> connected_cb;
   void_cb_func delta_cb;
   bool get_mdns_service(String &host, uint16_t& port);

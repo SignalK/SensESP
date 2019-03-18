@@ -16,6 +16,7 @@ class SensESPApp {
   SensESPApp();
   void enable();
   void reset();
+  String get_hostname();
  private:
   void setup_standard_devices(ObservableValue<String>* hostname);
   void setup_custom_devices();

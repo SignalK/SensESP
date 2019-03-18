@@ -141,3 +141,9 @@ void SensESPApp::reset() {
   SPIFFS.format();
   app.onDelay(1000, [](){ ESP.reset(); });
 }
+
+String SensESPApp::get_hostname() {
+  return networking->get_hostname()->get();
+}
+
+SensESPApp* sensesp_app;
