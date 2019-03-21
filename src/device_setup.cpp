@@ -35,11 +35,16 @@ void SensESPApp::setup_custom_devices() {
   );
 #endif
 
-  // connect a RPM meter
+  // connect a RPM meter. A DigitalInputCounter counts pulses
+  // and reports the readings every read_delay ms
+  // (500 in the example). A Frequency
+  // transform takes a number of pulses and converts that into
+  // a frequency. The sample multiplier converts the 97 tooth
+  // tach output into Hz, SK native units.
 
   connect_1to1<DigitalInputCounter, Frequency>(
     new DigitalInputCounter(D5, INPUT_PULLUP, RISING, 500),
-    new Frequency("sensors.engine.rpm")
+    new Frequency("sensors.engine.rpm", 1./97.)
   );
 
 #if 0
