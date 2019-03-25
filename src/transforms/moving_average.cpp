@@ -2,12 +2,11 @@
 
 // MovingAverage
 
-MovingAverage::MovingAverage(String path, float k, int n, String id, String schema)
+MovingAverage::MovingAverage(String path, int n, float k, String id, String schema)
     : Transform{ path, id, schema },
-      k{ k },
-      n{ n } {
+      n{ n },
+      k{ k } {
   buf.resize(n, 0);
-  ptr = 0;
   load_configuration();
 }
 
