@@ -10,6 +10,11 @@ std::map<String, Configurable*> configurables;
 Configurable::Configurable(String id="", String schema="")
     : id{id}, schema{schema} {
   if (id != "") {
+    auto it = configurables.find(id);
+    if (it != configurables.end()) {
+      Serial.print(F("WARNING: Overriding id "));
+      Serial.println(id.c_str());
+    }
     configurables[id] = this;
   }
 }
