@@ -35,12 +35,15 @@ class Transform : public Observable, public Configurable {
   static std::set<Transform*> transforms;
 };
 
+// Passthrough is a "null" transform, just passing the value to output
+
 template <class T>
 class Passthrough : public Transform {
  public:
   Passthrough() : Transform{"", "", ""} {}
   Passthrough(String sk_path, String id="", String schema="")
     : Transform{sk_path, id, schema} {}
+  T get() { return output; }
   void set_input(T input) {
     output = input;
     notify();
@@ -69,37 +72,6 @@ class Passthrough : public Transform {
   }
  private:
   T output;
-};
-
-// y = k * x + c
-class Linear : public Transform {
- public:
-  Linear(String sk_path, float k, float c, String id="", String schema="");
-  void set_input(float input);
-  String as_json() override final;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual bool set_configuration(const JsonObject& config) override final;
- private:
-  float k;
-  float c;
-  float output;
-};
-
-// Frequency transform divides its input value by the time elapsed since
-// the last reading
-class Frequency : public Transform {
- public:
-  Frequency(String sk_path, float k=1, String id="", String schema="");
-  void set_input(uint input);
-  String as_json() override final;
-  void enable() override final;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual bool set_configuration(const JsonObject& config) override final;
- private:
-  float k;
-  int ticks = 0;
-  uint last_update = 0;
-  float output;
 };
 
 // TODO: implement a difference transform
