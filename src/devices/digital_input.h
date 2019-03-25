@@ -21,7 +21,7 @@ class DigitalInputValue : public DigitalInput {
   void enable() override final;
   bool get();
  private:
-  void ICACHE_RAM_ATTR interrupt_handler();
+  bool triggered = false;
   bool value = 0;
 };
 

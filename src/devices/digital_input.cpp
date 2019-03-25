@@ -18,15 +18,20 @@ DigitalInputValue::DigitalInputValue(
     : DigitalInput{pin, pin_mode, interrupt_type, id, schema} {}
 
 void DigitalInputValue::enable() {
-  app.onInterrupt(pin, interrupt_type,
-                  [this](){ this->interrupt_handler(); });
-}
-
-void ICACHE_RAM_ATTR DigitalInputValue::interrupt_handler() {
-  app.onDelay(0, [this](){
-    this->value = digitalRead(this->pin);
-    this->notify();
-   });
+  app.onInterrupt(
+    pin, interrupt_type,
+    [this](){
+      value = digitalRead(pin);
+      triggered = true;
+    });
+  app.onTick(
+    [this](){
+      if (triggered) {
+        triggered = false;
+        notify();
+      }
+    }
+  );
 }
 
 bool DigitalInputValue::get() {
@@ -43,13 +48,13 @@ DigitalInputCounter::DigitalInputCounter(
 void DigitalInputCounter::enable() {
   app.onInterrupt(pin, interrupt_type,
                   [this](){
-    noInterrupts();
     this->counter++;
-    interrupts();
   });
   app.onRepeat(read_delay, [this](){
+    noInterrupts();
     value = counter;
     counter = 0;
+    interrupts();
     notify();
   });
 }
