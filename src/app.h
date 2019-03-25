@@ -2,7 +2,6 @@
 #define _app_H_
 
 #include "config.h"
-#include "transforms/transform.h"
 #include "devices/device.h"
 #include "net/http.h"
 #include "net/networking.h"
@@ -25,6 +24,16 @@ class SensESPApp {
   void connect_1to1(T* obs, U* transform) {
     obs->attach([obs, transform](){
       transform->set_input(obs->get());
+    });
+  }
+
+  template<typename T, typename U>
+  void connect_2to1(T* obs1, T* obs2, U* transform) {
+    obs1->attach([obs1, transform]() {
+      transform->set_input(0, obs1->get());
+    });
+    obs2->attach([obs2, transform]() {
+      transform->set_input(1, obs2->get());
     });
   }
 

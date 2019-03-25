@@ -9,7 +9,10 @@
 #include "net/ota.h"
 #include "net/networking.h"
 #include "system/spiffs_storage.h"
-
+#include "transforms/transform.h"
+#include "transforms/difference.h"
+#include "transforms/frequency.h"
+#include "transforms/linear.h"
 
 // FIXME: Setting up the system is too verbose and repetitive
 
