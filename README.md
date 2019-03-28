@@ -50,7 +50,7 @@ Configuration can be updated with HTTP PUT requests:
 - [x] Persistent configuration
 - [x] RESTful HTTP control interface
 - [x] Improved device configuration system
-- [ ] Authentication token support
+- [x] Authentication token support
 - [ ] Web configuration UI
-- [ ] Device control support. For now, all devices are read-only, and control devices such as leds, relays, or
+- [ ] Control device support. For now, all devices are read-only, and control devices such as leds, relays, or
 PWM output are not supported.
