@@ -35,7 +35,7 @@ class WSClient : public Configurable {
   uint16_t port = 80;
   String client_id = "";
   String polling_href = "";
-  String auth_token;
+  String auth_token = "no-token";
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
   WebSocketsClient client;

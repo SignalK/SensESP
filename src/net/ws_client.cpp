@@ -152,8 +152,10 @@ void WSClient::test_token(const String host, const uint16_t port) {
   String full_token = String("JWT ") + auth_token;
   http.addHeader("Authorization", full_token.c_str());
   int httpCode = http.GET();
+  String payload = http.getString();
   http.end();
   Serial.printf("Testing resulted in http status %d\n", httpCode);
+  Serial.println(payload);
   if (httpCode == 200) {
     // our token is valid, go ahead and connect
     this->connect_ws(host, port);
