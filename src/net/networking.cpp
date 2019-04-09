@@ -34,25 +34,27 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 
   wifi_manager->setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
 
+  #ifdef SERIAL_DEBUG_DISABLED
+  wifi_manager->setDebugOutput(false);
+  #endif
   AsyncWiFiManagerParameter custom_hostname(
     "hostname", "Set hostname", this->hostname->get().c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
 
   if (!wifi_manager->autoConnect("Unconfigured Sensor")) {
-    Serial.println(F("Failed to connect to wifi and config timed out."));
+    debugE("Failed to connect to wifi and config timed out.");
     ESP.restart();
   }
 
-  Serial.println(F("Connected to Wifi."));
+  debugI("Connected to Wifi.");
   connection_cb(true);
 
   if (should_save_config) {
     String new_hostname = custom_hostname.getValue();
-    Serial.print("Got new hostname: ");
-    Serial.println(new_hostname);
+    debugI("Got new hostname: %s", new_hostname.c_str());
     this->hostname->set(new_hostname);
     save_configuration();
-    Serial.println("Restarting in 500ms");
+    debugW("Restarting in 500ms");
     app.onDelay(500, [](){ ESP.restart(); });
   }
 
@@ -64,7 +66,7 @@ ObservableValue<String>* Networking::get_hostname() {
 }
 
 void Networking::set_hostname(String hostname) {
-  Serial.println("Setting hostname");
+  debugD("Setting hostname");
   this->hostname->set(hostname);
 }
 

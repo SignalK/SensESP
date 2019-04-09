@@ -1,3 +1,6 @@
+#include "config.h"
+#include "sensesp.h"
+
 #include "configurable.h"
 
 #include "FS.h"
@@ -12,8 +15,7 @@ Configurable::Configurable(String id="", String schema="")
   if (id != "") {
     auto it = configurables.find(id);
     if (it != configurables.end()) {
-      Serial.print(F("WARNING: Overriding id "));
-      Serial.println(id.c_str());
+      debugW("WARNING: Overriding id %s", id.c_str());
     }
     configurables[id] = this;
   }
@@ -21,13 +23,13 @@ Configurable::Configurable(String id="", String schema="")
 
 // Returns the current configuration
 JsonObject& Configurable::get_configuration(JsonBuffer& buf) {
-  Serial.println(F("WARNING: get_configuration not defined"));
+  debugW("WARNING: get_configuration not defined");
   return buf.createObject();
 }
 
 // Sets and saves the configuration
 bool Configurable::set_configuration(const JsonObject& config) {
-  Serial.println(F("WARNING: set_configuration not defined"));
+  debugW("WARNING: set_configuration not defined");
   return false;
 }
 
@@ -44,9 +46,9 @@ String Configurable::get_config_schema() {
 void Configurable::load_configuration() {
   if (id=="" || !SPIFFS.exists(id)) {
     // nothing to load from
-    Serial.print(
-      F("Not loading configuration, id empty or file does not exist: "));
-    Serial.println(id);
+    debugI(
+      "Not loading configuration, id empty or file does not exist: %s",
+      id.c_str());
     return;
   }
 
@@ -54,19 +56,21 @@ void Configurable::load_configuration() {
   DynamicJsonBuffer jsonBuffer;
   JsonObject& obj = jsonBuffer.parse(f);
   if (!obj.success()) {
-    Serial.print(F("WARNING: Could not parse configuration for "));
-    Serial.println(id);
+    debugW(
+      "WARNING: Could not parse configuration for %s",
+      id.c_str());
   }
   if (!set_configuration(obj)) {
-    Serial.print(F("WARNING: Could not set configuration for "));
-    Serial.println(id);
+    debugW(
+      "WARNING: Could not set configuration for %s",
+      id.c_str());
   }
   f.close();
 }
 
 void Configurable::save_configuration() {
   if (id=="") {
-    Serial.println(F("WARNING: Could not save configuration (id not set)"));
+    debugI("WARNING: Could not save configuration (id not set)");
   }
   DynamicJsonBuffer jsonBuffer;
   JsonObject& obj = get_configuration(jsonBuffer);

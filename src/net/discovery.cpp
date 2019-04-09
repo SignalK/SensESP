@@ -1,3 +1,5 @@
+#include "sensesp.h"
+
 #ifdef ESP8266
   #include <ESP8266mDNS.h>        // Include the mDNS library
 #elif defined(ESP32)
@@ -7,11 +9,9 @@
 
 void setup_discovery(const char* hostname) {
   if (!MDNS.begin(hostname)) {             // Start the mDNS responder for esp8266.local
-    Serial.println(F("Error setting up mDNS responder"));
+    debugW("Error setting up mDNS responder");
   } else {
-    Serial.print (F("mDNS responder started at "));
-    Serial.print (hostname);
-    Serial.println(F(""));
+    debugI("mDNS responder started at %s", hostname);
   }
   MDNS.addService("http", "tcp", 80);
   MDNS.addService("signalk-sensesp", "tcp", 80);

@@ -63,25 +63,24 @@ void WSClient::connect_loop() {
 
 void WSClient::on_disconnected() {
   this->connection_state = disconnected;
-  Serial.println("Websocket client disconnected.");
+  debugW("Websocket client disconnected.");
   this->connected_cb(false);
 }
 
 void WSClient::on_error() {
   this->connection_state = disconnected;
-  Serial.println("Websocket client error.");
+  debugW("Websocket client error.");
   this->connected_cb(false);
 }
 
 void WSClient::on_connected(uint8_t * payload) {
   this->connection_state = connected;
-  Serial.printf("Websocket client connected to URL: %s\n", payload);
+  debugI("Websocket client connected to URL: %s\n", payload);
   this->connected_cb(true);
 }
 
 void WSClient::on_receive_delta(uint8_t * payload) {
-  Serial.println("Received payload:");
-  Serial.println((char*)payload);
+  debugD("Received payload: %s", (char*)payload);
 }
 
 bool WSClient::get_mdns_service(String& host, uint16_t& port) {
@@ -93,8 +92,7 @@ bool WSClient::get_mdns_service(String& host, uint16_t& port) {
   } else {
     host = MDNS.IP(0).toString();
     port = MDNS.port(0);
-    Serial.print(F("Found server with IP/Port: "));
-    Serial.print(host); Serial.print(":"); Serial.println(port);
+    debugI("Found server with IP/Port: %s:%d", host.c_str(), port);
     return true;
   }
 }
@@ -103,7 +101,7 @@ void WSClient::connect() {
   if (connection_state!=disconnected) {
     return;
   }
-  Serial.println("Initiating connection");
+  debugD("Initiating connection");
 
   connection_state = connecting;
 
@@ -118,7 +116,7 @@ void WSClient::connect() {
   }
 
   if ((host.length() > 0) && (port > 0)) {
-    Serial.println(F("Websocket client starting"));
+    debugD("Websocket client starting");
   } else {
     // host and port not defined - wait for mDNS
     connection_state = disconnected;
@@ -145,7 +143,7 @@ void WSClient::test_token(const String host, const uint16_t port) {
   WiFiClient client;
   HTTPClient http;
 
-  Serial.println("Testing token");
+  debugD("Testing token");
 
   String url = String("http://") + host + ":" + port + "/signalk/v1/api/";
   http.begin(client, url);
@@ -154,8 +152,8 @@ void WSClient::test_token(const String host, const uint16_t port) {
   int httpCode = http.GET();
   String payload = http.getString();
   http.end();
-  Serial.printf("Testing resulted in http status %d\n", httpCode);
-  Serial.println(payload);
+  debugD("Testing resulted in http status %d", httpCode);
+  debugD("%s", payload.c_str());
   if (httpCode == 200) {
     // our token is valid, go ahead and connect
     this->connect_ws(host, port);
@@ -167,7 +165,7 @@ void WSClient::test_token(const String host, const uint16_t port) {
 }
 
 void WSClient::send_access_request(const String host, const uint16_t port) {
-  Serial.println("Preparing a new access request");
+  debugD("Preparing a new access request");
   if (client_id == "") {
     // generate a client ID
     byte uuidNumber[16];
@@ -198,8 +196,8 @@ void WSClient::send_access_request(const String host, const uint16_t port) {
 
   // if we get a response we can't handle, try to reconnect later
   if (httpCode != 202) {
-    Serial.printf("Can't handle response %d to access request.\n", httpCode);
-    Serial.println(payload);
+    debugW("Can't handle response %d to access request.", httpCode);
+    debugD("%s", payload.c_str());
     connection_state = disconnected;
     return;
   }
@@ -210,8 +208,7 @@ void WSClient::send_access_request(const String host, const uint16_t port) {
   String state = resp["state"];
 
   if (state != "PENDING") {
-    Serial.print("Got unknown state: ");
-    Serial.println(state);
+    debugW("Got unknown state: %s", state.c_str());
     connection_state = disconnected;
     return;
   }
@@ -220,16 +217,14 @@ void WSClient::send_access_request(const String host, const uint16_t port) {
   polling_href = href;
   save_configuration();
 
-  Serial.print("Polling ");
-  Serial.print(polling_href);
-  Serial.println(" in 5 seconds");
+  debugD("Polling %s in 5 seconds", polling_href.c_str());
   app.onDelay(5000, [this, host, port](){
     this->poll_access_request(host, port, this->polling_href);
   });
 }
 
 void WSClient::poll_access_request(const String host, const uint16_t port, const String href) {
-  Serial.println("Polling");
+  debugD("Polling");
 
   WiFiClient client;
   HTTPClient http;
@@ -243,7 +238,7 @@ void WSClient::poll_access_request(const String host, const uint16_t port, const
     DynamicJsonBuffer buf;
     JsonObject& resp = buf.parseObject(payload);
     String state = resp["state"];
-    Serial.println(state);
+    debugD("%s", state.c_str());
     if (state == "PENDING") {
       app.onDelay(5000, [this, host, port, href](){ this->poll_access_request(host, port, href); });
       return;
@@ -254,11 +249,11 @@ void WSClient::poll_access_request(const String host, const uint16_t port, const
       save_configuration();
 
       if (permission == "DENIED") {
-        Serial.println("Permission denied");
+        debugW("Permission denied");
         connection_state = disconnected;
         return;
       } else if (permission == "APPROVED") {
-        Serial.println("Permission granted");
+        debugI("Permission granted");
         String token = access_req["token"];
         auth_token = token;
         save_configuration();
@@ -272,14 +267,14 @@ void WSClient::poll_access_request(const String host, const uint16_t port, const
       // this is probably the server barfing due to
       // us polling a non-existing request. Just
       // delete the polling href.
-      Serial.println("Got 500, probably a non-existing request.");
+      debugD("Got 500, probably a non-existing request.");
       polling_href = "";
       save_configuration();
       connection_state = disconnected;
       return;
     }
     // any other HTTP status code
-    Serial.printf("Can't handle response %d to pending access request.\n", httpCode);
+    debugW("Can't handle response %d to pending access request.\n", httpCode);
     connection_state = disconnected;
     return;
   }

@@ -1,5 +1,7 @@
 #include "onewire_temperature.h"
 
+#include "config.h"
+
 #include <algorithm>
 
 #include <DallasTemperature.h>
@@ -39,8 +41,7 @@ DallasTemperatureSensors::DallasTemperatureSensors(
   sensors->begin();
 
   int num_devices = sensors->getDeviceCount();
-  Serial.print("OneWire devices found: ");
-  Serial.println(num_devices, DEC);
+  debugI("OneWire devices found: %d", num_devices);
 
   DeviceAddress addr;
   OWDevAddr owda;
@@ -48,10 +49,11 @@ DallasTemperatureSensors::DallasTemperatureSensors(
     sensors->getAddress(addr, i);
     std::copy(std::begin(addr), std::end(addr), std::begin(owda));
     known_addresses.insert(owda);
-    Serial.print("Found OneWire device ");
+    #ifndef DEBUG_DISABLED
     char addrstr[24];
     owda_to_string(addrstr, owda);
-    Serial.println(addrstr);
+    debugI("Found OneWire device %s", addrstr);
+    #endif
   }
 
   // all conversions will by async
@@ -97,7 +99,7 @@ OneWireTemperature::OneWireTemperature(
     // previously unconfigured device
     bool success = dts->get_next_address(&address);
     if (!success) {
-      Serial.println("FATAL: Could not find an available OneWire device");
+      debugE("FATAL: Could not find an available OneWire device");
       failed = true;
     } else {
       dts->register_address(address);
@@ -105,7 +107,7 @@ OneWireTemperature::OneWireTemperature(
   } else {
     bool success = dts->register_address(address);
     if (!success) {
-      Serial.println("FATAL: Unable to register OneWire device");
+      debugE("FATAL: Unable to register OneWire device");
       failed = true;
     }
   }

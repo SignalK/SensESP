@@ -15,21 +15,21 @@ void setup_OTA() {
   ArduinoOTA.setPassword((const char *)OTA_PASSWORD);
 #endif
   ArduinoOTA.onStart([]() {
-    Serial.println(F("Starting OTA"));
+    debugW("Starting OTA");
   });
   ArduinoOTA.onEnd([]() {
-    Serial.println(F("\nEnd"));
+    debugW("OTA End");
   });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-    Serial.printf("OTA Progress: %u%%\r", (progress / (total / 100)));
+    debugI("OTA Progress: %u%%\r", (progress / (total / 100)));
   });
   ArduinoOTA.onError([](ota_error_t error) {
-    Serial.printf("OTA Error[%u]: ", error);
-    if (error == OTA_AUTH_ERROR) Serial.println(F("OTA Auth Failed"));
-    else if (error == OTA_BEGIN_ERROR) Serial.println(F("OTA Begin Failed"));
-    else if (error == OTA_CONNECT_ERROR) Serial.println(F("OTA Connect Failed"));
-    else if (error == OTA_RECEIVE_ERROR) Serial.println(F("OTA Receive Failed"));
-    else if (error == OTA_END_ERROR) Serial.println(F("OTA End Failed"));
+    debugE("OTA Error[%u]: ", error);
+    if (error == OTA_AUTH_ERROR) debugE("OTA Auth Failed");
+    else if (error == OTA_BEGIN_ERROR) debugE("OTA Begin Failed");
+    else if (error == OTA_CONNECT_ERROR) debugE("OTA Connect Failed");
+    else if (error == OTA_RECEIVE_ERROR) debugE("OTA Receive Failed");
+    else if (error == OTA_END_ERROR) debugE("OTA End Failed");
   });
   ArduinoOTA.begin();
   //app.onTick(&handle_OTA);

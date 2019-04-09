@@ -14,13 +14,17 @@
 #include "transforms/frequency.h"
 #include "transforms/linear.h"
 
+#ifndef DEBUG_DISABLED
+RemoteDebug Debug;
+#endif
+
 // FIXME: Setting up the system is too verbose and repetitive
 
 SensESPApp::SensESPApp() {
   // initialize filesystem
 
   if (!SPIFFS.begin()) {
-    Serial.println("FATAL: Filesystem initialization failed.");
+    debugE("FATAL: Filesystem initialization failed.");
     ESP.restart();
   }
 
@@ -108,7 +112,7 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
 void SensESPApp::enable() {
   this->led_blinker.set_wifi_disconnected();
 
-  Serial.println("Enabling subsystems");
+  debugI("Enabling subsystems");
 
   networking->setup([this](bool connected) {
     if (connected) {
@@ -124,22 +128,30 @@ void SensESPApp::enable() {
   this->http_server->enable();
   this->ws_client->enable();
 
-  Serial.println("WS client enabled");
+  debugI("WS client enabled");
+
+  // initialize remote debugging
+
+  #ifndef DEBUG_DISABLED
+  Debug.begin(networking->get_hostname()->get());
+  Debug.setResetCmdEnabled(true);
+  app.onRepeat(1, [](){ Debug.handle(); });
+  #endif
 
   for (auto const& dev : Device::get_devices()) {
     dev->enable();
   }
 
-  Serial.println("All devices enabled");
+  debugI("All devices enabled");
 
   for (auto const& transf : Transform::get_transforms()) {
     transf->enable();
   }
-  Serial.println("All transforms enabled");
+  debugI("All transforms enabled");
 }
 
 void SensESPApp::reset() {
-  Serial.println("Resetting the device configuration.");
+  debugW("Resetting the device configuration.");
   networking->reset_settings();
   SPIFFS.format();
   app.onDelay(1000, [](){ ESP.reset(); });

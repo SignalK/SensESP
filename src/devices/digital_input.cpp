@@ -9,7 +9,6 @@ DigitalInput::DigitalInput(
     String id, String schema)
     : Device{id, schema}, pin{pin}, interrupt_type{interrupt_type} {
   pinMode(pin, pin_mode);
-  Serial.println(digitalRead(pin));
 }
 
 DigitalInputValue::DigitalInputValue(

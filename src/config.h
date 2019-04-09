@@ -19,6 +19,8 @@
 //#define LED_PIN 2        // ... and uncomment this line, and change 13 to any LED pin you have. If you have none, leave it at 13.
 #define LED_ACTIVE_LOW true
 
+//#define DEBUG_DISABLED
+#define SERIAL_DEBUG_DISABLED
 
 // if you want to use the optional my_config.h file
 // to override configuration constants,

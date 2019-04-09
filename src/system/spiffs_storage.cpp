@@ -1,3 +1,5 @@
+#include "sensesp.h"
+
 #include "spiffs_storage.h"
 
 #include "FS.h"
@@ -5,7 +7,7 @@
 void setup_spiffs_storage() {
   bool result = SPIFFS.begin();
   if (!result) {
-    Serial.println("FATAL: Filesystem initialization failed.");
+    debugE("FATAL: Filesystem initialization failed.");
     ESP.restart();
   }
 }
