@@ -10,7 +10,9 @@ String GNSSPosition::as_json() {
     JsonObject& value = root.createNestedObject("value");
     value.set("latitude", output->latitude);
     value.set("longitude", output->longitude);
-    value.set("altitude", output->altitude);
+    if (output->altitude > -10000) {
+      value.set("altitude", output->altitude);
+    }
     root.printTo(json);
     return json;
 }
