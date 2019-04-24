@@ -2,6 +2,7 @@
 #include "devices/analog_input.h"
 #include "devices/digital_input.h"
 #include "devices/onewire_temperature.h"
+#include "devices/gps.h"
 #include "transforms/transform.h"
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
@@ -103,4 +104,10 @@ void SensESPApp::setup_custom_devices() {
     new Passthrough<float>("sensors.temperature.ow1",
                            "/sensors/ow_temp_1"));
 #endif
+
+  GPSInput* gps = new GPSInput(D5);
+  connect_1to1<ObservableValue<Position*>, GNSSPosition>(
+    &gps->nmea_data.position,
+    new GNSSPosition("navigation.position", "")
+  );
 }
