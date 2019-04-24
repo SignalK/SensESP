@@ -74,6 +74,4 @@ class Passthrough : public Transform {
   T output;
 };
 
-// TODO: implement a difference transform
-
 #endif
