@@ -54,7 +54,7 @@ bool parse_latlon(double* value, char* s) {
   int retval = sscanf(s, "%lf", &degmin);
   if (retval==1) {
     int degrees = degmin / 100;
-    double minutes = degmin - degrees;
+    double minutes = degmin - 100*degrees;
     *value = degrees + minutes / 60;
     return true;
   } else {
@@ -320,10 +320,10 @@ void GPRMCSentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
   if (is_valid) {
     nmea_data->position.set(&position);
     nmea_data->datetime.set(mktime(&time));
-    nmea_data->speed.set(speed);
-    nmea_data->true_course.set(true_course);
+    nmea_data->speed.set(1852.*speed/3600.);
+    nmea_data->true_course.set(2*PI*true_course/360.);
     if (variation_defined) {
-      nmea_data->variation.set(variation);
+      nmea_data->variation.set(2*PI*variation/360.);
     }
   }
   debugD("Successfully parsed %s", sentence());
@@ -515,7 +515,7 @@ void PSTI032SentenceParser::parse(char* buffer, int term_offsets[], int num_term
     nmea_data->datetime.set(mktime(&time));
     nmea_data->baseline_projection.set(projection);
     nmea_data->baseline_length.set(baseline_length);
-    nmea_data->baseline_course.set(baseline_course);
+    nmea_data->baseline_course.set(2*PI*baseline_course/360.);
     nmea_data->gnss_quality.set(gnssQualityStrings[quality]);
   }
 
