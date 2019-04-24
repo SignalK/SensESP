@@ -23,12 +23,11 @@ class GPSInput : public Device {
 // - GPGLL - Latitude/Longitude
 // - GPRMC - The Recommended Minimum
 // - GPVTG - Course Over Ground and Ground Speed
-// - GPZDA - TIME AND DATE
 // - GPGSA - GNSS DOP and Active Satellites
 // - GLGSA - GNSS DOP and Active Satellites
 // - GPGSV - GNSS Satellites in View
 // - GLGSV - GNSS Satellites in View
-// - STI,030 - Recommended Minimum 3D GNSS Data
-// - STI,032 - RTK Baseline Data
+// - PSTI,030 - Recommended Minimum 3D GNSS Data
+// - PSTI,032 - RTK Baseline Data
 
 #endif

@@ -16,6 +16,12 @@ struct Position {
   float altitude;
 };
 
+struct ENUVector {
+  float east;
+  float north;
+  float up;
+};
+
 struct NMEAData {
   ObservableValue<Position*> position;
   ObservableValue<String> gnss_quality;
@@ -28,12 +34,24 @@ struct NMEAData {
   ObservableValue<float> speed;
   ObservableValue<float> true_course;
   ObservableValue<float> variation;
+  ObservableValue<ENUVector> enu_velocity;
+  ObservableValue<float> rtk_age;
+  ObservableValue<float> rtk_ratio;
+  ObservableValue<ENUVector> baseline_projection;
+  ObservableValue<float> baseline_length;
+  ObservableValue<float> baseline_course;
 };
 
 class SentenceParser {
  public:
   SentenceParser(NMEAData* nmea_data);
   virtual void parse(char* buffer, int term_offsets[], int num_terms) = 0;
+  virtual void parse(
+    char* buffer, int term_offsets[], int num_terms,
+    std::map<String, SentenceParser*>& sentence_parsers
+  ) {
+    parse(buffer, term_offsets, num_terms);
+  }
   virtual const char* sentence() = 0;
  protected:
   NMEAData* nmea_data;
@@ -64,43 +82,39 @@ class GPRMCSentenceParser : public SentenceParser {
  private:
 };
 
-class GPVTGSentenceParser : public SentenceParser {
+//class GPVTGSentenceParser : public SentenceParser {
+// public:
+//  GPVTGSentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
+//  void parse(char* buffer, int term_offsets[], int num_terms) override final;
+//  const char* sentence() { return "GPVTG"; }
+// private:
+//};
+
+class PSTISentenceParser : public SentenceParser {
  public:
-  GPVTGSentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
-  void parse(char* buffer, int term_offsets[], int num_terms) override final;
-  const char* sentence() { return "GPVTG"; }
+  PSTISentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
+  void parse(char* buffer, int term_offsets[], int num_terms) override final {}
+  void parse(
+    char* buffer, int term_offsets[], int num_terms,
+    std::map<String, SentenceParser*>& sentence_parsers
+  );
+  const char* sentence() { return "PSTI"; }
  private:
 };
 
-class GPZDASentenceParser : public SentenceParser {
+class PSTI030SentenceParser : public SentenceParser {
  public:
-  GPZDASentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
+  PSTI030SentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
   void parse(char* buffer, int term_offsets[], int num_terms) override final;
-  const char* sentence() { return "GPZDA"; }
+  const char* sentence() { return "PSTI,030"; }
  private:
 };
 
-class GPZDASentenceParser : public SentenceParser {
+class PSTI032SentenceParser : public SentenceParser {
  public:
-  GPZDASentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
+  PSTI032SentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
   void parse(char* buffer, int term_offsets[], int num_terms) override final;
-  const char* sentence() { return "GPZDA"; }
- private:
-};
-
-class GPZDASentenceParser : public SentenceParser {
- public:
-  GPZDASentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
-  void parse(char* buffer, int term_offsets[], int num_terms) override final;
-  const char* sentence() { return "GPZDA"; }
- private:
-};
-
-class GPZDASentenceParser : public SentenceParser {
- public:
-  GPZDASentenceParser(NMEAData* nmea_data) : SentenceParser{nmea_data} {}
-  void parse(char* buffer, int term_offsets[], int num_terms) override final;
-  const char* sentence() { return "GPZDA"; }
+  const char* sentence() { return "PSTI,032"; }
  private:
 };
 

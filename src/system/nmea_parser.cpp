@@ -105,6 +105,38 @@ bool parse_AV(bool* is_valid, char* s) {
   return true;
 }
 
+bool parse_PSTI030_mode(GNSSQuality* quality, char* s) {
+  switch (*s) {
+    case 'N':
+      *quality = GNSSQuality::no_gps;
+      break;
+    case 'A':
+      *quality = GNSSQuality::gnss_fix;
+      break;
+    case 'D':
+      *quality = GNSSQuality::dgnss_fix;
+      break;
+    case 'E':
+      *quality = GNSSQuality::estimated_mode;
+      break;
+    case 'M':
+      *quality = GNSSQuality::manual_input;
+      break;
+    case 'S':
+      *quality = GNSSQuality::simulator_mode;
+      break;
+    case 'F':
+      *quality = GNSSQuality::rtk_float;
+      break;
+    case 'R':
+      *quality = GNSSQuality::rtk_fixed_integer;
+      break;
+    default:
+      return false;
+  }
+  return true;
+}
+
 bool parse_time(int* hour, int* minute, float* second, char* s) {
   int retval = sscanf(s, "%2d%2d%f", hour, minute, second);
   return retval==3;
@@ -297,6 +329,199 @@ void GPRMCSentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
   debugD("Successfully parsed %s", sentence());
 }
 
+void PSTISentenceParser::parse(
+    char* buffer, int term_offsets[], int num_terms,
+    std::map<String, SentenceParser*>& sentence_parsers
+  ) {
+  bool ok = true;
+  int subsentence;
+
+  debugD("Parsing sentence %s", sentence());
+
+  ok &= parse_int(&subsentence, buffer+term_offsets[1]);
+
+  if (!ok) {
+    debugI("Failed to parse %s", sentence());
+    return;
+  }
+
+  switch (subsentence) {
+    case 30:
+      sentence_parsers["PSTI,030"]->parse(buffer, term_offsets, num_terms);
+      break;
+    case 32:
+      sentence_parsers["PSTI,032"]->parse(buffer, term_offsets, num_terms);
+      break;
+  }
+
+  debugD("Successfully parsed %s", sentence());
+}
+
+void PSTI030SentenceParser::parse(char* buffer, int term_offsets[], int num_terms) {
+  bool ok = true;
+
+  struct tm time;
+  float second;
+  bool is_valid;
+  Position position;
+  ENUVector velocity;
+  GNSSQuality quality;
+  float rtk_age;
+  float rtk_ratio;
+
+  debugD("Parsing sentence %s", sentence());
+
+  // Example:
+  // $PSTI,030,044606.000,A,2447.0924110,N,12100.5227860,E,103.323,0.00,0.00,0.00,180915,R,1.2,4.2*02
+
+  // note: term offsets are one larger than in the reference because
+  // the subsentence number is at offset 1
+
+  // Field  Name  Example  Description
+  // 1  UTC time  044606.000  UTC time in hhmmss.sss format (000000.00 ~ 235959.999)
+  ok &= parse_time(&time.tm_hour, &time.tm_min, &second, buffer+term_offsets[2]);
+  // 2  Status  A  Status
+  // ‘V’ = Navigation receiver warning
+  // ‘A’ = Data Valid
+  ok &= parse_AV(&is_valid, buffer+term_offsets[3]);
+  // 3  Latitude  2447.0924110  Latitude in dddmm.mmmmmmm format
+  // Leading zeros transmitted
+  ok &= parse_latlon(&position.latitude, buffer+term_offsets[4]);
+  // 4  N/S indicator  N  Latitude hemisphere indicator
+  // ‘N’ = North
+  // ‘S’ = South
+  ok &= parse_NS(&position.latitude, buffer+term_offsets[5]);
+  // 5  Longitude  12100.5227860 Longitude in dddmm.mmmmmmm format
+  // Leading zeros transmitted
+  ok &= parse_latlon(&position.longitude, buffer+term_offsets[6]);
+  // 6  E/W Indicator  E  Longitude hemisphere indicator
+  // 'E' = East
+  // 'W' = West
+  ok &= parse_EW(&position.longitude, buffer+term_offsets[7]);
+  // 7  Altitude  103.323  mean sea level (geoid), (‐9999.999 ~ 17999.999)
+  ok &= parse_float(&position.altitude, buffer+term_offsets[8]);
+  // 8  East Velocity  0.00  ‘East’ component of ENU velocity (m/s)
+  ok &= parse_float(&velocity.east, buffer+term_offsets[9]);
+  // 9  North Velocity  0.00  ‘North’ component of ENU velocity (m/s)
+  ok &= parse_float(&velocity.north, buffer+term_offsets[10]);
+  // 10  Up Velocity  0.00  ‘Up’ component of ENU velocity (m/s)
+  ok &= parse_float(&velocity.up, buffer+term_offsets[11]);
+  // 11  UTC Date  180915  UTC date of position fix, ddmmyy format
+  ok &= parse_date(&time.tm_year, &time.tm_mon, &time.tm_mday, buffer+term_offsets[12]);
+  // 12  Mode indicator  R  Mode indicator
+  // ‘N’ = Data not valid
+  // ‘A’ = Autonomous mode
+  // ‘D’ = Differential mode
+  // ‘E’ = Estimated (dead reckoning) mode
+  // ‘M’ = Manual input mode
+  // ‘S’ = Simulator mode
+  // ‘F’ = Float RTK. Satellite system used in RTK mode, floating
+  // integers
+  // ‘R’ = Real Time Kinematic. System used in RTK mode with fixed
+  // integers
+  ok &= parse_PSTI030_mode(&quality, buffer+term_offsets[13]);
+  // 13  RTK Age  1.2  Age of differential
+  ok &= parse_float(&rtk_age, buffer+term_offsets[14]);
+  // 14  RTK Ratio  4.2  AR ratio factor for validation
+  ok &= parse_float(&rtk_ratio, buffer+term_offsets[15]);
+
+  if (!ok) {
+    debugI("Failed to parse %s", sentence());
+    return;
+  }
+
+  time.tm_sec = (int)second;
+  time.tm_isdst = 0;
+
+  // notify relevant observers
+
+  // NB: we're passing a stack pointer here - need to be extra-careful
+  // that the pointer isn't stored in the call chain
+  if (is_valid) {
+    nmea_data->position.set(&position);
+    nmea_data->datetime.set(mktime(&time));
+    nmea_data->enu_velocity.set(velocity);
+    nmea_data->gnss_quality.set(gnssQualityStrings[quality]);
+    nmea_data->rtk_age.set(rtk_age);
+    nmea_data->rtk_ratio.set(rtk_ratio);
+  }
+  debugD("Successfully parsed %s", sentence());
+}
+
+void PSTI032SentenceParser::parse(char* buffer, int term_offsets[], int num_terms) {
+  bool ok = true;
+
+  struct tm time;
+  float second;
+  bool is_valid;
+  ENUVector projection;
+  GNSSQuality quality;
+  float baseline_length;
+  float baseline_course;
+
+  debugD("Parsing sentence %s", sentence());
+
+  // Example:
+  // $PSTI,032,041457.000,170316,A,R,0.603,‐0.837,‐0.089,1.036,144.22,,,,,*30
+
+  // note: term offsets are one larger than in the reference because
+  // the subsentence number is at offset 1
+
+  // Field  Name  Example  Description
+  // 1  UTC time  041457.000  UTC time in hhmmss.sss format (000000.000~235959.999)
+  ok &= parse_time(&time.tm_hour, &time.tm_min, &second, buffer+term_offsets[2]);
+  // 2  UTC Date  170316  UTC date of position fix, ddmmyy format
+  ok &= parse_date(&time.tm_year, &time.tm_mon, &time.tm_mday, buffer+term_offsets[3]);
+  // 3  Status  A
+  // Status
+  // ‘V’ = Void
+  // ‘A’ = Active
+  ok &= parse_AV(&is_valid, buffer+term_offsets[4]);
+  if (is_valid) {
+    // 4  Mode indicator  R
+    // Mode indicator
+    // ‘F’ = Float RTK. System used in RTK mode with float ambiguity
+    // ‘R’ = Real Time Kinematic. System used in RTK mode with fixed
+    // ambiguity
+    ok &= parse_PSTI030_mode(&quality, buffer+term_offsets[5]);
+    // 5  East‐projection of
+    // baseline  0.603  East‐projection of baseline, meters
+    ok &= parse_float(&projection.east, buffer+term_offsets[6]);
+    // 6  North‐projection of
+    // baseline  ‐0.837  North‐projection of baseline, meters
+    ok &= parse_float(&projection.north, buffer+term_offsets[7]);
+    // 7  Up‐projection of
+    // baseline  ‐0.089  Up‐projection of baseline, meters
+    ok &= parse_float(&projection.up, buffer+term_offsets[8]);
+    // 8  Baseline length  1.036  Baseline length, meters
+    ok &= parse_float(&baseline_length, buffer+term_offsets[9]);
+    // 9  Baseline course  144.22
+    // Baseline course (angle between baseline vector and north
+    // direction), degrees
+    ok &= parse_float(&baseline_course, buffer+term_offsets[10]);
+    // 10  Reserve    Reserve
+    // 11  Reserve    Reserve
+    // 12  Reserve    Reserve
+    // 13  Reserve    Reserve
+    // 14  Reserve    Reserve
+  }
+
+  if (!ok) {
+    debugI("Failed to parse %s", sentence());
+    return;
+  }
+
+  if (is_valid) {
+    nmea_data->datetime.set(mktime(&time));
+    nmea_data->baseline_projection.set(projection);
+    nmea_data->baseline_length.set(baseline_length);
+    nmea_data->baseline_course.set(baseline_course);
+    nmea_data->gnss_quality.set(gnssQualityStrings[quality]);
+  }
+
+  debugD("Successfully parsed %s", sentence());
+}
+
 SentenceParser::SentenceParser(NMEAData* nmea_data) : nmea_data{nmea_data} {}
 
 NMEAParser::NMEAParser() {
@@ -383,7 +608,8 @@ void NMEAParser::state_in_checksum(char c) {
       if (sentence_parsers.find(buffer) == sentence_parsers.end()) {
         debugD("Parser not found for sentence %s", buffer);
       } else {
-        sentence_parsers[buffer]->parse(buffer, term_offsets, cur_term+1);
+        sentence_parsers[buffer]->parse(buffer, term_offsets, cur_term+1,
+                                        sentence_parsers);
       }
       current_state = &NMEAParser::state_start;
       break;
