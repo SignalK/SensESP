@@ -8,7 +8,9 @@
 #include "transforms/frequency.h"
 #include "transforms/integrator.h"
 #include "transforms/linear.h"
+#include "transforms/timestring.h"
 #include "transforms/moving_average.h"
+#include "transforms/gnss_position.h"
 
 void SensESPApp::setup_custom_devices() {
 
@@ -80,6 +82,7 @@ void SensESPApp::setup_custom_devices() {
     new Integrator("propulsion.left.fuel.usedReturn", 0.46/1e6, 0., "/sensors/fuel_out_used")
   );
 
+#if 0
   //////////
   // connect a RPM meter. A DigitalInputCounter counts pulses
   // and reports the readings every read_delay ms
@@ -92,6 +95,7 @@ void SensESPApp::setup_custom_devices() {
     new DigitalInputCounter(D5, INPUT_PULLUP, RISING, 500),
     new Frequency("propulsion.left.revolutions", 1./97., "/sensors/engine_rpm")
   );
+  #endif
 
 #if 0
   //////////
@@ -106,8 +110,82 @@ void SensESPApp::setup_custom_devices() {
 #endif
 
   GPSInput* gps = new GPSInput(D5);
-  connect_1to1<ObservableValue<Position*>, GNSSPosition>(
-    &gps->nmea_data.position,
+
+  connect_1to1<ObservableValue<Position>, GNSSPosition>(
+    &(gps->nmea_data.position),
     new GNSSPosition("navigation.position", "")
   );
+
+  connect_1to1<ObservableValue<String>, Passthrough<String>>(
+    &(gps->nmea_data.gnss_quality),
+    new Passthrough<String>("navigation.methodQuality", "")
+  );
+
+  connect_1to1<ObservableValue<int>, Passthrough<int>>(
+    &(gps->nmea_data.num_satellites),
+    new Passthrough<int>("navigation.satellites", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.horizontal_dilution),
+    new Passthrough<float>("navigation.horizontalDilution", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.geoidal_separation),
+    new Passthrough<float>("navigation.geoidalSeparation", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.dgps_age),
+    new Passthrough<float>("navigation.differentialAge", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.dgps_id),
+    new Passthrough<float>("navigation.differentialReference", "")
+  );
+
+  connect_1to1<ObservableValue<time_t>, TimeString>(
+    &(gps->nmea_data.datetime),
+    new TimeString("navigation.datetime", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.speed),
+    new Passthrough<float>("navigation.speedOverGround", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.true_course),
+    new Passthrough<float>("navigation.courseOverGroundTrue", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.variation),
+    new Passthrough<float>("navigation.magneticVariation", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.rtk_age),
+    new Passthrough<float>("navigation.rtkAge", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.rtk_ratio),
+    new Passthrough<float>("navigation.rtkRatio", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.baseline_length),
+    new Passthrough<float>("navigation.rtkBaselineLength", "")
+  );
+
+  connect_1to1<ObservableValue<float>, Passthrough<float>>(
+    &(gps->nmea_data.baseline_course),
+    new Passthrough<float>("navigation.rtkBaselineCourse", "")
+  );
+
+
+
 }
