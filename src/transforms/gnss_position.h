@@ -18,8 +18,8 @@ class GNSSPosition : public Transform {
   GNSSPosition() : Transform{"", "", ""} {}
   GNSSPosition(String sk_path, String id="", String schema="")
     : Transform{sk_path, id, schema} {}
-  const Position* get() { return output; }
-  void set_input(Position* input) {
+  const Position& get() { return output; }
+  void set_input(const Position& input) {
     output = input;
     notify();
   }
@@ -27,7 +27,7 @@ class GNSSPosition : public Transform {
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
  private:
-  Position* output;
+  Position output;
 };
 
 #endif

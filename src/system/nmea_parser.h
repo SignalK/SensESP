@@ -23,7 +23,7 @@ struct ENUVector {
 };
 
 struct NMEAData {
-  ObservableValue<Position*> position;
+  ObservableValue<Position> position;
   ObservableValue<String> gnss_quality;
   ObservableValue<int> num_satellites;
   ObservableValue<float> horizontal_dilution;

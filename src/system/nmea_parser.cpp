@@ -164,8 +164,6 @@ void GPGGASentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
   int dgps_id;
   bool dgps_id_defined = false;
 
-  debugD("Parsing sentence %s", sentence());
-
   // eg3. $GPGGA,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x,xx,x.x,x.x,M,x.x,M,x.x,xxxx*hh
   // 1    = UTC of Position
   ok &= parse_time(&hour, &minute, &second, buffer+term_offsets[1]);
@@ -212,9 +210,7 @@ void GPGGASentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
 
   // notify relevant observers
 
-  // NB: we're passing a stack pointer here - need to be extra-careful
-  // that the pointer isn't stored in the call chain
-  nmea_data->position.set(&position);
+  nmea_data->position.set(position);
   nmea_data->gnss_quality.set(gnssQualityStrings[quality]);
   nmea_data->num_satellites.set(num_satellites);
   nmea_data->horizontal_dilution.set(horizontal_dilution);
@@ -225,15 +221,12 @@ void GPGGASentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
   if (dgps_id_defined) {
     nmea_data->dgps_id.set(dgps_id);
   }
-  debugD("Successfully parsed %s", sentence());
 }
 
 void GPGLLSentenceParser::parse(char* buffer, int term_offsets[], int num_terms) {
   bool ok = true;
 
   Position position;
-
-  debugD("Parsing sentence %s", sentence());
 
   // eg3. $GPGLL,5133.81,N,00042.25,W*75
   //       1    5133.81   Current latitude
@@ -254,11 +247,7 @@ void GPGLLSentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
 
   // notify relevant observers
 
-  // NB: we're passing a stack pointer here - need to be extra-careful
-  // that the pointer isn't stored in the call chain
-  nmea_data->position.set(&position);
-
-  debugD("Successfully parsed %s", sentence());
+  nmea_data->position.set(position);
 }
 
 void GPRMCSentenceParser::parse(char* buffer, int term_offsets[], int num_terms) {
@@ -272,8 +261,6 @@ void GPRMCSentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
   float true_course;
   double variation;
   bool variation_defined = false;
-
-  debugD("Parsing sentence %s", sentence());
 
   // eg3. $GPRMC,220516,A,5133.82,N,00042.24,W,173.8,231.8,130694,004.2,W*70
   // 1   220516     Time Stamp
@@ -315,10 +302,8 @@ void GPRMCSentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
 
   // notify relevant observers
 
-  // NB: we're passing a stack pointer here - need to be extra-careful
-  // that the pointer isn't stored in the call chain
   if (is_valid) {
-    nmea_data->position.set(&position);
+    nmea_data->position.set(position);
     nmea_data->datetime.set(mktime(&time));
     nmea_data->speed.set(1852.*speed/3600.);
     nmea_data->true_course.set(2*PI*true_course/360.);
@@ -326,7 +311,6 @@ void GPRMCSentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
       nmea_data->variation.set(2*PI*variation/360.);
     }
   }
-  debugD("Successfully parsed %s", sentence());
 }
 
 void PSTISentenceParser::parse(
@@ -335,8 +319,6 @@ void PSTISentenceParser::parse(
   ) {
   bool ok = true;
   int subsentence;
-
-  debugD("Parsing sentence %s", sentence());
 
   ok &= parse_int(&subsentence, buffer+term_offsets[1]);
 
@@ -353,8 +335,6 @@ void PSTISentenceParser::parse(
       sentence_parsers["PSTI,032"]->parse(buffer, term_offsets, num_terms);
       break;
   }
-
-  debugD("Successfully parsed %s", sentence());
 }
 
 void PSTI030SentenceParser::parse(char* buffer, int term_offsets[], int num_terms) {
@@ -368,8 +348,6 @@ void PSTI030SentenceParser::parse(char* buffer, int term_offsets[], int num_term
   GNSSQuality quality;
   float rtk_age;
   float rtk_ratio;
-
-  debugD("Parsing sentence %s", sentence());
 
   // Example:
   // $PSTI,030,044606.000,A,2447.0924110,N,12100.5227860,E,103.323,0.00,0.00,0.00,180915,R,1.2,4.2*02
@@ -435,17 +413,15 @@ void PSTI030SentenceParser::parse(char* buffer, int term_offsets[], int num_term
 
   // notify relevant observers
 
-  // NB: we're passing a stack pointer here - need to be extra-careful
-  // that the pointer isn't stored in the call chain
+  nmea_data->gnss_quality.set(gnssQualityStrings[quality]);
+  nmea_data->rtk_age.set(rtk_age);
+  nmea_data->rtk_ratio.set(rtk_ratio);
+
   if (is_valid) {
-    nmea_data->position.set(&position);
+    nmea_data->position.set(position);
     nmea_data->datetime.set(mktime(&time));
     nmea_data->enu_velocity.set(velocity);
-    nmea_data->gnss_quality.set(gnssQualityStrings[quality]);
-    nmea_data->rtk_age.set(rtk_age);
-    nmea_data->rtk_ratio.set(rtk_ratio);
   }
-  debugD("Successfully parsed %s", sentence());
 }
 
 void PSTI032SentenceParser::parse(char* buffer, int term_offsets[], int num_terms) {
@@ -458,8 +434,6 @@ void PSTI032SentenceParser::parse(char* buffer, int term_offsets[], int num_term
   GNSSQuality quality;
   float baseline_length;
   float baseline_course;
-
-  debugD("Parsing sentence %s", sentence());
 
   // Example:
   // $PSTI,032,041457.000,170316,A,R,0.603,‐0.837,‐0.089,1.036,144.22,,,,,*30
@@ -518,8 +492,6 @@ void PSTI032SentenceParser::parse(char* buffer, int term_offsets[], int num_term
     nmea_data->baseline_course.set(2*PI*baseline_course/360.);
     nmea_data->gnss_quality.set(gnssQualityStrings[quality]);
   }
-
-  debugD("Successfully parsed %s", sentence());
 }
 
 SentenceParser::SentenceParser(NMEAData* nmea_data) : nmea_data{nmea_data} {}
@@ -624,6 +596,5 @@ bool NMEAParser::validate_checksum() {
   char* checksum_str = buffer + term_offsets[cur_term];
   int checksum;
   sscanf(checksum_str, "%2x", &checksum);
-  debugV("Got parity/checksum: %2x, %2x", parity, checksum);
   return this->parity==checksum;
 }
