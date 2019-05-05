@@ -1,7 +1,5 @@
 #include "onewire_temperature.h"
 
-#include "config.h"
-
 #include <algorithm>
 
 #include <DallasTemperature.h>

@@ -3,8 +3,12 @@
 #include <Arduino.h>
 #include <ArduinoOTA.h>
 
-#include "config.h"
 #include "sensesp.h"
+
+// Password for Over-the-air (OTA) updates
+#ifndef OTA_PASSWORD
+//#define OTA_PASSWORD "bonvoyage"
+#endif
 
 void handle_OTA() {
   ArduinoOTA.handle();

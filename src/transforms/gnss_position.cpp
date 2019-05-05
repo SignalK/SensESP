@@ -1,4 +1,3 @@
-#include "config.h"
 
 #include "gnss_position.h"
 

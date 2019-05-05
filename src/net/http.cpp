@@ -13,9 +13,12 @@
 #include <ESPAsyncWebServer.h>
 
 #include "app.h"
-#include "config.h"
 #include "system/configurable.h"
 
+// HTTP port for the configuration interface
+#ifndef HTTP_SERVER_PORT
+#define HTTP_SERVER_PORT 80
+#endif
 
 HTTPServer::HTTPServer(std::function<void()> reset_device) {
   this->reset_device = reset_device;

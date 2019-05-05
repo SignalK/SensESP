@@ -1,7 +1,6 @@
 #ifndef _app_H_
 #define _app_H_
 
-#include "config.h"
 #include "devices/device.h"
 #include "net/http.h"
 #include "net/networking.h"
