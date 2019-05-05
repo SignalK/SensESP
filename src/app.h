@@ -16,9 +16,6 @@ class SensESPApp {
   void enable();
   void reset();
   String get_hostname();
- private:
-  void setup_standard_devices(ObservableValue<String>* hostname);
-  void setup_custom_devices();
 
   template<typename T, typename U>
   void connect_1to1(T* obs, U* transform) {
@@ -53,6 +50,8 @@ class SensESPApp {
     });
     hostname->attach(comp_set_sk_path);
   }
+ private:
+  void setup_standard_devices(ObservableValue<String>* hostname);
 
   HTTPServer* http_server;
   LedBlinker led_blinker;
