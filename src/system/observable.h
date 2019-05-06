@@ -27,6 +27,7 @@ class Observable {
 template <class T>
 class ObservableValue : public Observable {
  public:
+  ObservableValue() {}
   ObservableValue(T value) : value{value} {}
   const T& get() { return value; }
   void set(T value) {

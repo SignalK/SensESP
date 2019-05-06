@@ -1,4 +1,3 @@
-#include "config.h"
 #include "sensesp.h"
 
 #include "configurable.h"

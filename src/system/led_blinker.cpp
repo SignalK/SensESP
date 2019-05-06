@@ -1,8 +1,12 @@
 
 #include "led_blinker.h"
 
-#include "config.h"
 #include "sensesp.h"
+
+#ifndef LED_PIN
+#define LED_PIN LED_BUILTIN  // If your board doesn't have a defined LED_BUILTIN, comment this line out...
+//#define LED_PIN 2        // ... and uncomment this line, and change 13 to any LED pin you have. If you have none, leave it at 13.
+#endif
 
 LedBlinker::LedBlinker() {
   pinMode(LED_PIN, OUTPUT);
@@ -17,11 +21,7 @@ void LedBlinker::remove_blinker() {
 
 void LedBlinker::set_state(int new_state) {
   this->current_state = new_state;
-  #ifdef LED_ACTIVE_LOW
   digitalWrite(LED_PIN, !new_state);
-  #else
-  digitalWrite(LED_PIN, new_state);
-  #endif
 }
 
 void LedBlinker::flip() {

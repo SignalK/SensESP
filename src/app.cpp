@@ -32,29 +32,24 @@ SensESPApp::SensESPApp() {
   networking = new Networking("/system/networking", "");
   ObservableValue<String>* hostname = networking->get_hostname();
 
-  // setup all devices and their transforms
+  // setup standard devices and their transforms
 
   setup_standard_devices(hostname);
-  setup_custom_devices();
 
-  // connect all transforms to the Signal K delta output
+  // create the SK delta object
 
   sk_delta = new SKDelta(hostname->get());
+
+  // listen for hostname updates
+
   hostname->attach([hostname, this](){
     this->sk_delta->set_hostname(hostname->get());
   });
-  for (auto const& transf : Transform::get_transforms()) {
-    if (transf->get_sk_path()!="") {
-      transf->attach([transf, this](){
-        this->sk_delta->append(transf->as_json());
-      });
-    }
-  }
 
   // create the HTTP server
-
+    
   this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this));
-
+    
   // create the websocket client
 
   auto ws_connected_cb = [this](bool connected){
@@ -111,6 +106,18 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
 
 void SensESPApp::enable() {
   this->led_blinker.set_wifi_disconnected();
+
+  // connect all transforms to the Signal K delta output
+
+  ObservableValue<String>* hostname = networking->get_hostname();
+
+  for (auto const& transf : Transform::get_transforms()) {
+    if (transf->get_sk_path()!="") {
+      transf->attach([transf, this](){
+        this->sk_delta->append(transf->as_json());
+      });
+    }
+  }
 
   debugI("Enabling subsystems");
 

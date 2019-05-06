@@ -1,8 +1,15 @@
 #include "networking.h"
 
-#include "config.h"
 #include "sensesp.h"
 #include "system/led_blinker.h"
+
+// Wifi config portal timeout (seconds). The smaller the value, the faster
+// the device will attempt to reconnect. If set too small, it might
+// become impossible to actually configure the Wifi settings in the captive
+// portal.
+#ifndef WIFI_CONFIG_PORTAL_TIMEOUT
+#define WIFI_CONFIG_PORTAL_TIMEOUT 180
+#endif
 
 bool should_save_config = false;
 

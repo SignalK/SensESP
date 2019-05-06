@@ -13,48 +13,12 @@
 #include <ESPAsyncWebServer.h>
 
 #include "app.h"
-#include "config.h"
 #include "system/configurable.h"
 
-// Simple web page to view deltas
-const char INDEX_PAGE[] PROGMEM = R"foo(
-<html>
-<head>
-  <title>Deltas</title>
-  <meta charset="utf-8">
-  <script type="text/javascript">
-    var WebSocket = WebSocket || MozWebSocket;
-    var lastDelta = Date.now();
-    var serverUrl = "ws://" + window.location.hostname + ":81";
-
-    connection = new WebSocket(serverUrl);
-
-    connection.onopen = function(evt) {
-      console.log("Connected!");
-      document.getElementById("box").innerHTML = "Connected!";
-      document.getElementById("last").innerHTML = "Last: N/A";
-    };
-
-    connection.onmessage = function(evt) {
-      var msg = JSON.parse(evt.data);
-      document.getElementById("box").innerHTML = JSON.stringify(msg, null, 2);
-      document.getElementById("last").innerHTML = "Last: " + ((Date.now() - lastDelta)/1000).toFixed(2) + " seconds";
-      lastDelta = Date.now();
-    };
-
-    setInterval(function(){
-      document.getElementById("age").innerHTML = "Age: " + ((Date.now() - lastDelta)/1000).toFixed(1) + " seconds";
-    }, 50);
-  </script>
-</head>
-<body>
-  <h3>Last Delta</h3>
-  <pre width="100%" height="50%" id="box">Not Connected yet</pre>
-  <div id="last"></div>
-  <div id="age"></div>
-</body>
-</html>
-)foo";
+// HTTP port for the configuration interface
+#ifndef HTTP_SERVER_PORT
+#define HTTP_SERVER_PORT 80
+#endif
 
 HTTPServer::HTTPServer(std::function<void()> reset_device) {
   this->reset_device = reset_device;
@@ -62,7 +26,7 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
   using std::placeholders::_1;
   server->onNotFound(std::bind(&HTTPServer::handle_not_found, this, _1));
   server->on("/",[](AsyncWebServerRequest *request ) {
-      request->send_P(200, "text/html", INDEX_PAGE);
+      request->send_P(200, "text/html", "SensESP");
     });
 
   AsyncCallbackJsonWebHandler* config_put_handler

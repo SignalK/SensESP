@@ -1,6 +1,9 @@
 #include <Arduino.h>
 
+//#define SERIAL_DEBUG_DISABLED
+
 #include "app.h"
+#include "wiring_helpers.h"
 
 ReactESP app([] () {
   #ifndef SERIAL_DEBUG_DISABLED
@@ -14,5 +17,14 @@ ReactESP app([] () {
   #endif
 
   sensesp_app = new SensESPApp();
+
+  setup_analog_input(
+    sensesp_app,
+    "sensors.indoor.illumination",
+    1, 0,
+    "/sensors/indoor_illumination");
+
+  //setup_gps(sensesp_app, 5);
+
   sensesp_app->enable();
 });
