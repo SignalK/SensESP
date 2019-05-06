@@ -16,7 +16,10 @@ SensESP needs to be installed using PlatformIO:
 
 ## Initial device wiring
 
-Some basic configuration settings are located in `config.h`. Initial device software wiring is done by modifying `src/device_setup.cpp`.
+Initial device wiring happens in `main.cpp` using either the
+high-level wiring helpers defined in `wiring_helpers.h`, or
+the low-level devices and transforms defined in `devices/*`
+and `transforms/*`, respectively.
 
 ## Runtime setup
 
@@ -51,6 +54,7 @@ Configuration can be updated with HTTP PUT requests:
 - [x] RESTful HTTP control interface
 - [x] Improved device configuration system
 - [x] Authentication token support
+- [ ] Make the project a library
 - [ ] Web configuration UI
 - [ ] Control device support. For now, all devices are read-only, and control devices such as leds, relays, or
 PWM output are not supported.
