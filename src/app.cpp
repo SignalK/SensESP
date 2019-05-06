@@ -36,10 +36,20 @@ SensESPApp::SensESPApp() {
 
   setup_standard_devices(hostname);
 
+  // create the SK delta object
+
+  sk_delta = new SKDelta(hostname->get());
+
+  // listen for hostname updates
+
+  hostname->attach([hostname, this](){
+    this->sk_delta->set_hostname(hostname->get());
+  });
+
   // create the HTTP server
-
+    
   this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this));
-
+    
   // create the websocket client
 
   auto ws_connected_cb = [this](bool connected){
@@ -101,10 +111,6 @@ void SensESPApp::enable() {
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
-  sk_delta = new SKDelta(hostname->get());
-  hostname->attach([hostname, this](){
-    this->sk_delta->set_hostname(hostname->get());
-  });
   for (auto const& transf : Transform::get_transforms()) {
     if (transf->get_sk_path()!="") {
       transf->attach([transf, this](){
