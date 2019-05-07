@@ -14,7 +14,7 @@
 
 #include <WiFiClient.h>
 
-#include "app.h"
+#include "sensesp_app.h"
 
 WSClient* ws_client;
 

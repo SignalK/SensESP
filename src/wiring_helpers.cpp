@@ -1,6 +1,6 @@
 #include "wiring_helpers.h"
 
-#include "app.h"
+#include "sensesp_app.h"
 #include "devices/analog_input.h"
 #include "devices/digital_input.h"
 #include "devices/gps.h"

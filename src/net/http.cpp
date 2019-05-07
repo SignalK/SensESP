@@ -12,7 +12,7 @@
 #include "ArduinoJson.h"
 #include <ESPAsyncWebServer.h>
 
-#include "app.h"
+#include "sensesp_app.h"
 #include "system/configurable.h"
 
 // HTTP port for the configuration interface

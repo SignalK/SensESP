@@ -1,4 +1,4 @@
-#include "app.h"
+#include "sensesp_app.h"
 
 #include "FS.h"
 
@@ -47,9 +47,9 @@ SensESPApp::SensESPApp() {
   });
 
   // create the HTTP server
-    
+
   this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this));
-    
+
   // create the websocket client
 
   auto ws_connected_cb = [this](bool connected){

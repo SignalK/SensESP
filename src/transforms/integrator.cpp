@@ -1,6 +1,6 @@
 #include "integrator.h"
 
-#include "app.h"
+#include "sensesp_app.h"
 
 // Integrator
 
