@@ -1,33 +1,61 @@
 # SensESP
 
-SensESP is a Signal K sensor framework for ESP8266 and ESP32. At the moment it is very much a work in progress.
+SensESP is a Signal K sensor development library for ESP8266
+and ESP32. It can be used as a high-level toolkit for
+creating ESP sensor devices that interface with Signal K
+servers. At the moment it is very much a work in progress.
 
-SensESP is heavily inspired by [SigkSens](https://github.com/mxtommy/SigkSens) and prior work done by [@mxtommy](https://github.com/mxtommy).
+SensESP is heavily inspired by [SigkSens](https://github.com/mxtommy/SigkSens)
+and prior work done by [@mxtommy](https://github.com/mxtommy).
 
-## Installation
+## Getting Started
 
-SensESP needs to be installed using PlatformIO:
+SensESP is a library and will be installed automatically as
+a dependency when defined as such in the project's
+`platformio.ini` file.
 
-1. Clone or download the GitHub repo.
-2. Connect a Wemos (or similar) ESP8266 board to your computer.
-3. Open the directory in PlatformIO.
-4. Press the "Upload and Monitor" button.
-5. See the magic happen.
+You need to have PlatformIO installed. First, download and
+install [Visual Studio Code](https://code.visualstudio.com/).
+Then, select "Extensions" from the left toolbar
+(see image XX). Search for "platformio", select the first
+result, and press "Install".
 
-## Initial device wiring
+Once you have PlatformIO installed, its home screen should
+open automatically when you start VSCode. On the PIO Home,
+select "New Project". Enter a name and then select "WeMos
+D1 mini" in the board dropdown. The Arduino framework
+should become automatically selected. Complete the new
+project dialog and open the project you created.
 
-Initial device wiring happens in `main.cpp` using either the
-high-level wiring helpers defined in `wiring_helpers.h`, or
-the low-level devices and transforms defined in `devices/*`
-and `transforms/*`, respectively.
+Once you have your new project open, open the `platformio.ini` file. Add the SensESP dependency:
+
+```
+lib_deps =
+    SensESP
+```
+
+The above definition will work only once the library
+registration is completed. Until then, use the following:
+
+```
+lib_deps =
+    https://github.com/mairas/SensESP.git
+```
+
+Then, open `src/main.cpp`. The default template is for Arduino IDE and the SensESP main file will look a bit different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left  toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
+
+Assuming the project uploading was successful, you will have a sensor running the sample code. To configure it, connect your computer or phone wifi to the "Unconfigured Sensor" network. A captive portal should pop up. Enter your wifi credentials to allow the device to access the network. Also enter a suitable name, for example `sensesp` for the device.
+
+Once on the network, your new SensESP device should automatically find your Signal K server, assuming it has mDNS enabled. If your server has security enabled, you should
+get an access request for the device. Approve it, preferably with a long or infinite duration, and you should start getting data on the instrument panel.
+
+## Low-level wiring
+
+TODO!
 
 ## Runtime setup
 
-Once the software has been uploaded, connect to the
-"Unconfigured sensor" Wifi access point. A captive portal
-should automatically appear. Select your wifi and enter
-the credentials. Also enter a suitable hostname for the
-device. In the examples below, `sensesp` is used.
+In the examples below, `sensesp` is used as the device name.
 
 SensESP implements a RESTful configuration API. A list of
 possible configuration keys can be retrieved from:
@@ -54,7 +82,7 @@ Configuration can be updated with HTTP PUT requests:
 - [x] RESTful HTTP control interface
 - [x] Improved device configuration system
 - [x] Authentication token support
-- [ ] Make the project a library
+- [x] Make the project a library
 - [ ] Web configuration UI
 - [ ] Control device support. For now, all devices are read-only, and control devices such as leds, relays, or
 PWM output are not supported.

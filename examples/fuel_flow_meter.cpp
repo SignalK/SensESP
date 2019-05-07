@@ -1,8 +1,6 @@
 #include <Arduino.h>
 
-//#define SERIAL_DEBUG_DISABLED
-
-#include "app.h"
+#include "sensesp_app.h"
 #include "wiring_helpers.h"
 
 ReactESP app([] () {
@@ -18,13 +16,7 @@ ReactESP app([] () {
 
   sensesp_app = new SensESPApp();
 
-  setup_analog_input(
-    sensesp_app,
-    "sensors.indoor.illumination",
-    1, 0,
-    "/sensors/indoor_illumination");
-
-  //setup_gps(sensesp_app, 5);
+  setup_fuel_flow_meter(sensesp_app, D5, D6);
 
   sensesp_app->enable();
 });

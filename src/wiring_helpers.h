@@ -1,7 +1,7 @@
 #ifndef _wiring_helpers_H_
 #define _wiring_helpers_H_
 
-#include "app.h"
+#include "sensesp_app.h"
 #include "devices/onewire_temperature.h"
 
 void setup_analog_input(
