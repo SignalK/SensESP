@@ -24,17 +24,16 @@ class DallasTemperatureSensors : public Device {
   std::set<OWDevAddr> registered_addresses;
 };
 
-class OneWireTemperature : public Device {
+class OneWireTemperature : public NumericDevice {
  public:
   OneWireTemperature(DallasTemperatureSensors* dts,
-                     String id="", String schema="");
+                     String id="", String schema="", uint8_t valueIndex = 0);
   void enable() override final;
-  float get();
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
+
  private:
   OneWire* onewire;
-  float value;
   DallasTemperatureSensors* dts;
   bool failed=false;
   OWDevAddr address = {};

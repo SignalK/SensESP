@@ -8,6 +8,8 @@
 #include "sensesp.h"
 #include "system/led_blinker.h"
 #include "system/signal_k.h"
+#include "system/valueproducer.h"
+#include "system/valueconsumer.h"
 
 class SensESPApp {
  public:
@@ -15,6 +17,13 @@ class SensESPApp {
   void enable();
   void reset();
   String get_hostname();
+
+
+  template<typename T>  
+  void connect(ValueProducer<T>* pProducer, ValueConsumer<T>* pConsumer) {
+      pProducer->connectTo(pConsumer);
+  }
+
 
   template<typename T, typename U>
   void connect_1to1(T* obs, U* transform) {
@@ -26,10 +35,10 @@ class SensESPApp {
   template<typename T, typename U>
   void connect_2to1(T* obs1, T* obs2, U* transform) {
     obs1->attach([obs1, transform]() {
-      transform->set_input(0, obs1->get());
+      transform->set_input(obs1->get(), 0);
     });
     obs2->attach([obs2, transform]() {
-      transform->set_input(1, obs2->get());
+      transform->set_input(obs2->get(), 1);
     });
   }
 

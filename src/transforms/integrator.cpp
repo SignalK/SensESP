@@ -1,15 +1,18 @@
 #include "integrator.h"
 
 #include "sensesp_app.h"
+#include "system/valueproducer.h"
 
 // Integrator
 
-Integrator::Integrator(String path, float k, float value, String id, String schema)
-    : Transform{ path, id, schema },
-      k{ k },
-      output{ value } {
+Integrator::Integrator(String path, float k, float value, String id, String schema, uint8_t valueIdx) :
+    NumericConsumer(),
+    NumericTransform{ path, id, schema, valueIdx },
+      k{ k } {
+  output = value;
   load_configuration();
 }
+
 
 void Integrator::enable() {
   // save the integrator value every 10 s
@@ -18,7 +21,7 @@ void Integrator::enable() {
   //app.onRepeat(10000, [this](){ this->save_configuration(); });
 }
 
-void Integrator::set_input(float input) {
+void Integrator::set_input(float input, uint8_t idx) {
   output += input;
   notify();
 }

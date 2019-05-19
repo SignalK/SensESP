@@ -13,6 +13,7 @@
 #include "transforms/moving_average.h"
 #include "transforms/timestring.h"
 #include "transforms/transform.h"
+#include "transforms/passthrough.h"
 
 
 void setup_analog_input(

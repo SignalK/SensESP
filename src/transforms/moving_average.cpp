@@ -2,15 +2,16 @@
 
 // MovingAverage
 
-MovingAverage::MovingAverage(String path, int n, float k, String id, String schema)
-    : Transform{ path, id, schema },
+MovingAverage::MovingAverage(String path, int n, float k, String id, String schema, uint8_t valueIdx) :
+    NumericConsumer(),
+    NumericTransform{ path, id, schema, valueIdx },
       n{ n },
       k{ k } {
   buf.resize(n, 0);
   load_configuration();
 }
 
-void MovingAverage::set_input(float input) {
+void MovingAverage::set_input(float input, uint8_t idx) {
   output += -k*buf[ptr]/n;
   buf[ptr] = input;
   ptr = (ptr+1) % n;
