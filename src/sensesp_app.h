@@ -58,6 +58,23 @@ class SensESPApp {
     });
     hostname->attach(comp_set_sk_path);
   }
+
+ /**
+  * Returns true if the host system is connected to Wifi
+  */
+  bool isWifiConnected() {
+     return WiFi.status() == WL_CONNECTED;
+  }
+
+
+  /**
+   * Returns true if the host system is connected to a SignalK server
+   */
+  bool isSignalKConnected() {
+    return ws_client->is_connected();
+  }
+
+
  private:
   void setup_standard_devices(ObservableValue<String>* hostname);
 
