@@ -9,7 +9,7 @@
 #include "system/configurable.h"
 #include "system/observable.h"
 #include "system/valueproducer.h"
-#include "system/MustEnable.h"
+#include "system/wantsenable.h"
 #include "system/signalksource.h"
 #include "sensesp.h"
 
@@ -27,7 +27,7 @@
  */
 class TransformBase : public SignalKSource,
                       public Configurable, 
-                      public MustEnable {
+                      public WantsEnable {
  public:
     TransformBase(String sk_path, String id="", String schema="");
 
