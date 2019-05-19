@@ -9,6 +9,7 @@
 #include "system/configurable.h"
 #include "system/observable.h"
 #include "system/valueproducer.h"
+#include "system/MustEnable.h"
 #include "sensesp.h"
 
 
@@ -23,7 +24,7 @@
  * have an optiona persistence configuration by specifying an "id" to
  * save the configuration data in.
  */
-class TransformBase : virtual public Observable, public Configurable {
+class TransformBase : virtual public Observable, public Configurable, public MustEnable {
  public:
   TransformBase(String sk_path, String id="", String schema="");
 
@@ -36,8 +37,6 @@ class TransformBase : virtual public Observable, public Configurable {
   void set_sk_path(const String& path) {
     sk_path = path;
   }
-
-  virtual void enable() {}
 
   static const std::set<TransformBase*>& get_transforms() {
     return transforms;

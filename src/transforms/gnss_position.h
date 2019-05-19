@@ -13,14 +13,15 @@
 ///////////////////
 // provide correct output formatting for GNSS position
 
-class GNSSPosition : public ValueConsumer<Position>, public Transform<Position> {
+class GNSSPosition : public OneToOneTransform<Position> {
  public:
   GNSSPosition(String sk_path, String id="", String schema="", uint8_t valueIdx = 0) :
-    ValueConsumer<Position>(),
-    Transform<Position>{sk_path, id, schema, valueIdx} {}
+    OneToOneTransform<Position>{sk_path, id, schema, valueIdx} {
+  }
 
-  virtual void inputUpdated(uint8_t udx) {
-    notify();
+  virtual void set_input(Position newValue, uint8_t idx = 0) {
+     output = newValue;
+     notify();
   }
 
   virtual String as_json() override final;
@@ -28,6 +29,7 @@ class GNSSPosition : public ValueConsumer<Position>, public Transform<Position> 
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
 
   virtual bool set_configuration(const JsonObject& config) override final;
+
 };
 
 #endif

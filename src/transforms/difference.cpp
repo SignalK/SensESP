@@ -3,9 +3,10 @@
 // Difference
 
 Difference::Difference(String path, float k1, float k2, String id, String schema, uint8_t valueIdx)
-    : NumericConsumer(2), NumericTransform{ path, id, schema, valueIdx },
+    : OneToOneTransform<float>{ path, id, schema, valueIdx },
       k1{ k1 },
       k2{ k2 } {
+  inputs = new float[2];
   load_configuration();
 }
 

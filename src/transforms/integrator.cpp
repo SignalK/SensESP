@@ -6,8 +6,7 @@
 // Integrator
 
 Integrator::Integrator(String path, float k, float value, String id, String schema, uint8_t valueIdx) :
-    NumericConsumer(),
-    NumericTransform{ path, id, schema, valueIdx },
+    OneToOneTransform<float>{ path, id, schema, valueIdx },
       k{ k } {
   output = value;
   load_configuration();

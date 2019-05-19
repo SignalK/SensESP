@@ -5,7 +5,7 @@
 #include "system/valueconsumer.h"
 
 // y = k1 * x1 - k2 * x2
-class Difference : public NumericConsumer, public NumericTransform {
+class Difference : public OneToOneTransform<float> {
  public:
   Difference(String sk_path, float k1, float k2, String id="", String schema="", uint8_t valueIdx = 0);
   virtual void set_input(float input, uint8_t idx) override final;
@@ -15,6 +15,7 @@ class Difference : public NumericConsumer, public NumericTransform {
 
  private:
   uint8_t received = 0;
+  float* inputs;
   float k1;
   float k2;
 };

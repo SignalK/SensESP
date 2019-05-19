@@ -16,21 +16,6 @@ class ValueConsumer {
 
     public:
         /**
-         *  Constructor
-         *  @param inputSize optional parameter used to indicate the 
-         *    maximum number of input values that this consumer
-         *    works with.
-         */
-        ValueConsumer(uint8_t inputSize = 1) : inputSize{inputSize} {
-            inputs = new T[inputSize];
-        }
-
-        virtual ~ValueConsumer() {
-            delete [] inputs;
-        }
-
-
-        /**
          * Used to set an input of this consumer. It is usually called
          * automatically by a ValueProducer
          * @param newValue the value of the input
@@ -38,23 +23,7 @@ class ValueConsumer {
          *   Indexes that are out of range will be discarded.
          */
         virtual void set_input(T newValue, uint8_t idx = 0) {
-
-            if (idx >= 0 && idx < inputSize) {
-                inputs[idx] = newValue;
-                inputUpdated(idx);
-            }
         }
-
-        /**
-         * Called after each call to set_input() to do additional processing
-         * once a new value has been set.
-         * @param idex The zero based index of the input that was just changed.
-         */
-        virtual void inputUpdated(uint8_t idx) {}
-
-    protected:
-        T* inputs;
-        uint8_t inputSize;
 
 };
 

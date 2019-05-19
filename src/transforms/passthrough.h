@@ -16,7 +16,8 @@ class Passthrough : public OneToOneTransform<T> {
     }
 
 
-  virtual void inputUpdated(uint8_t idx) override final {
+  virtual void set_input(T newValue, uint8_t idx = 0) override final {
+    ValueProducer<T>::output = newValue;
     this->notify();
   }
 

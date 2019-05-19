@@ -146,16 +146,9 @@ void SensESPApp::enable() {
   app.onRepeat(1, [](){ Debug.handle(); });
   #endif
 
-  for (auto const& dev : Device::get_devices()) {
-    dev->enable();
-  }
+  MustEnable::enableAll();
+  debugI("All devices and transforms enabled");
 
-  debugI("All devices enabled");
-
-  for (auto const& transf : TransformBase::get_transforms()) {
-    transf->enable();
-  }
-  debugI("All transforms enabled");
 }
 
 void SensESPApp::reset() {

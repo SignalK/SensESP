@@ -5,7 +5,7 @@
 #include "system/valueconsumer.h"
 
 // y = k * x + c
-class Linear : public NumericConsumer, public NumericTransform  {
+class Linear : public OneToOneTransform<float>  {
  public:
   Linear(String sk_path, float k, float c, String id="", String schema="", uint8_t valueIdx = 0);
   virtual void set_input(float input, uint8_t idx = 0) override final;
