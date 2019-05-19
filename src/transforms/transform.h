@@ -10,6 +10,7 @@
 #include "system/observable.h"
 #include "system/valueproducer.h"
 #include "system/MustEnable.h"
+#include "system/signalksource.h"
 #include "sensesp.h"
 
 
@@ -24,28 +25,22 @@
  * have an optiona persistence configuration by specifying an "id" to
  * save the configuration data in.
  */
-class TransformBase : virtual public Observable, public Configurable, public MustEnable {
+class TransformBase : public SignalKSource,
+                      public Configurable, 
+                      public MustEnable {
  public:
-  TransformBase(String sk_path, String id="", String schema="");
+    TransformBase(String sk_path, String id="", String schema="");
 
-  virtual String as_json() { return "not implemented"; }
-
-  String& get_sk_path() {
-    return sk_path;
-  }
-
-  void set_sk_path(const String& path) {
-    sk_path = path;
-  }
-
+  
+  // Primary purpose of this was to supply SignalK sources
+  // (now handled by SignalKSource::get_sources). Should
+  // this be deprecated?
   static const std::set<TransformBase*>& get_transforms() {
     return transforms;
   }
- protected:
-  String sk_path;
-
- private:
-  static std::set<TransformBase*> transforms;
+ 
+  private:
+    static std::set<TransformBase*> transforms;
 };
 
 

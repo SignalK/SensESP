@@ -112,10 +112,11 @@ void SensESPApp::enable() {
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
-  for (auto const& transf : TransformBase::get_transforms()) {
-    if (transf->get_sk_path()!="") {
-      transf->attach([transf, this](){
-        this->sk_delta->append(transf->as_json());
+  for (auto const& sigkSource : SignalKSource::get_sources()) {
+    if (sigkSource->get_sk_path() != "") {
+      debugI("Connecting SignalK source %s", sigkSource->get_sk_path().c_str());
+      sigkSource->attach([sigkSource, this](){
+        this->sk_delta->append(sigkSource->as_json());
       });
     }
   }
