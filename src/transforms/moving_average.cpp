@@ -3,8 +3,7 @@
 // MovingAverage
 
 MovingAverage::MovingAverage(String path, int n, float k, String id, String schema, uint8_t valueIdx) :
-    NumericConsumer(),
-    NumericTransform{ path, id, schema, valueIdx },
+    OneToOneTransform<float>{ path, id, schema, valueIdx },
       n{ n },
       k{ k } {
   buf.resize(n, 0);

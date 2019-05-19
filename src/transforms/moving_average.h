@@ -4,10 +4,9 @@
 #include <vector>
 
 #include "transform.h"
-#include "system/valueconsumer.h"
 
 // y = k * 1/n * \sum_k=1^n(x_k)
-class MovingAverage : public NumericConsumer, public NumericTransform {
+class MovingAverage : public OneToOneTransform<float> {
 
  public:
   MovingAverage(String sk_path, int n, float k=1., String id="", String schema="", uint8_t valueIdx = 0);
