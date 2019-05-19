@@ -5,9 +5,9 @@
 #include <ArduinoJson.h>
 
 /**
- *  A ValueConsumer is any piece of code (like a transformation), or a device that
- *  accepts data for input. They can accept one or more input values which are
- *  stored for immediate processing. They are connected to ValueProducers
+ *  A ValueConsumer is any piece of code (like a transformation) or device that
+ *  accepts data for input. They can accept one or more input values 
+ *  via the set_input() method. They are connected to ValueProducers
  *  via the connectTo() method.
  *  @see ValueProducer::connectTo()
  */
@@ -20,7 +20,6 @@ class ValueConsumer {
          * automatically by a ValueProducer
          * @param newValue the value of the input
          * @param idx The zero based index of the input to this consumer.
-         *   Indexes that are out of range will be discarded.
          */
         virtual void set_input(T newValue, uint8_t idx = 0) {
         }

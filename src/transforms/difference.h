@@ -15,7 +15,7 @@ class Difference : public OneToOneTransform<float> {
 
  private:
   uint8_t received = 0;
-  float* inputs;
+  float inputs[2];
   float k1;
   float k2;
 };

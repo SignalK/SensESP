@@ -6,7 +6,6 @@ Difference::Difference(String path, float k1, float k2, String id, String schema
     : OneToOneTransform<float>{ path, id, schema, valueIdx },
       k1{ k1 },
       k2{ k2 } {
-  inputs = new float[2];
   load_configuration();
 }
 

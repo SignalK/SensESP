@@ -13,8 +13,8 @@
 
 /**
  * A SignalK source is one that produces SignalK output to be
- * forwarded to the SignalK server (if the system is connected)
- * to one.  SignalK is reported via the as_json() method.
+ * forwarded to the SignalK server (if the system is connected
+ * to one).  SignalK is reported via the as_json() method.
  */
 class SignalKSource : virtual public Observable {
 

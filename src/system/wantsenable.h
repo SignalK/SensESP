@@ -1,5 +1,5 @@
-#ifndef _mustenable_H_
-#define _mustenable_H_
+#ifndef _wantsenable_H_
+#define _wantsenable_H_
 
 #include <vector>
 #include <stdint.h>
@@ -9,7 +9,7 @@
  * call automatically at startup when the SensESP app itself
  * is enabled.  The optional priority allows for certain classes
  * to be initialized first. A lower priority (e.g. zero) will be
- * enabled for a higher one (e.g. 10). The maximum priority is 10.
+ * enabled before a higher one (e.g. 10). The maximum priority is 10.
  */
 class WantsEnable {
 
@@ -24,7 +24,8 @@ class WantsEnable {
 
         /**
          * Called by the SensESP framework to initialize all of the objects
-         * marked with this class.
+         * marked with this class. They will be initialized in priorty
+         * order.
          */
         static void enableAll();
     

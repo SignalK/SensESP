@@ -22,7 +22,7 @@
 /**
  * The base class for all transforms. All transforms are can be subscribed
  * to by calling attach() (inherited from Observable). They can
- * have an optiona persistence configuration by specifying an "id" to
+ * have an optional persistence configuration by specifying an "id" to
  * save the configuration data in.
  */
 class TransformBase : public SignalKSource,
@@ -47,7 +47,7 @@ class TransformBase : public SignalKSource,
 /**
  * The main Transform class. A transform is identified primarily by the
  * type of value that is produces (i.e. a Transform<float> is a
- * ValueProducer<float> to generates float values)
+ * ValueProducer<float> that generates float values)
  */
 template <typename T>
 class Transform : public TransformBase, public ValueProducer<T> {
