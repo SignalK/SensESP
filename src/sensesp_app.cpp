@@ -13,6 +13,7 @@
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
 #include "transforms/linear.h"
+#include "transforms/passthrough.h"
 
 #ifndef DEBUG_DISABLED
 RemoteDebug Debug;
@@ -111,10 +112,11 @@ void SensESPApp::enable() {
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
-  for (auto const& transf : Transform::get_transforms()) {
-    if (transf->get_sk_path()!="") {
-      transf->attach([transf, this](){
-        this->sk_delta->append(transf->as_json());
+  for (auto const& sigkSource : SignalKSource::get_sources()) {
+    if (sigkSource->get_sk_path() != "") {
+      debugI("Connecting SignalK source %s", sigkSource->get_sk_path().c_str());
+      sigkSource->attach([sigkSource, this](){
+        this->sk_delta->append(sigkSource->as_json());
       });
     }
   }
@@ -145,16 +147,9 @@ void SensESPApp::enable() {
   app.onRepeat(1, [](){ Debug.handle(); });
   #endif
 
-  for (auto const& dev : Device::get_devices()) {
-    dev->enable();
-  }
+  WantsEnable::enableAll();
+  debugI("All devices and transforms enabled");
 
-  debugI("All devices enabled");
-
-  for (auto const& transf : Transform::get_transforms()) {
-    transf->enable();
-  }
-  debugI("All transforms enabled");
 }
 
 void SensESPApp::reset() {

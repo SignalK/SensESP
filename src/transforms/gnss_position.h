@@ -13,21 +13,23 @@
 ///////////////////
 // provide correct output formatting for GNSS position
 
-class GNSSPosition : public Transform {
+class GNSSPosition : public OneToOneTransform<Position> {
  public:
-  GNSSPosition() : Transform{"", "", ""} {}
-  GNSSPosition(String sk_path, String id="", String schema="")
-    : Transform{sk_path, id, schema} {}
-  const Position& get() { return output; }
-  void set_input(const Position& input) {
-    output = input;
-    notify();
+  GNSSPosition(String sk_path, String id="", String schema="", uint8_t valueIdx = 0) :
+    OneToOneTransform<Position>{sk_path, id, schema, valueIdx} {
   }
-  String as_json() override final;
+
+  virtual void set_input(Position newValue, uint8_t idx = 0) {
+     output = newValue;
+     notify();
+  }
+
+  virtual String as_json() override final;
+
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
+
   virtual bool set_configuration(const JsonObject& config) override final;
- private:
-  Position output;
+
 };
 
 #endif

@@ -18,7 +18,7 @@ void SystemHz::update() {
     return;
   }
 
-  system_hz = (tick_count*1000) / elapsed;
+  output = (tick_count*1000) / elapsed;
 
   tick_count = 0;
   prev_millis = cur_millis;
@@ -33,12 +33,9 @@ void SystemHz::enable() {
   app.onRepeat(1000, [this](){ this->update(); });
 }
 
-float SystemHz::get() {
-  return this->system_hz;
-}
 
 void FreeMem::update() {
-  free_mem = ESP.getFreeHeap();
+  output = ESP.getFreeHeap();
   this->notify();
 }
 
@@ -46,12 +43,9 @@ void FreeMem::enable() {
   app.onRepeat(1000, [this](){ this->update(); });
 }
 
-uint32_t FreeMem::get() {
-  return this->free_mem;
-}
 
 void Uptime::update() {
-  uptime = millis() / 1000.;
+  output = millis() / 1000.;
   this->notify();
 }
 
@@ -59,19 +53,12 @@ void Uptime::enable() {
   app.onRepeat(1000, [this](){ this->update(); });
 }
 
-float Uptime::get() {
-  return this->uptime;
-}
 
 void IPAddrDev::update() {
-  ipaddr = WiFi.localIP().toString();
+  output = WiFi.localIP().toString();
   this->notify();
 }
 
 void IPAddrDev::enable() {
   app.onRepeat(10000, [this](){ this->update(); });
-}
-
-String IPAddrDev::get() {
-  return this->ipaddr;
 }

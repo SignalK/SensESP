@@ -2,14 +2,14 @@
 
 // Difference
 
-Difference::Difference(String path, float k1, float k2, String id, String schema)
-    : Transform{ path, id, schema },
+Difference::Difference(String path, float k1, float k2, String id, String schema, uint8_t valueIdx)
+    : OneToOneTransform<float>{ path, id, schema, valueIdx },
       k1{ k1 },
       k2{ k2 } {
   load_configuration();
 }
 
-void Difference::set_input(uint8_t idx, float input) {
+void Difference::set_input(float input, uint8_t idx) {
   inputs[idx] = input;
   received |= 1<<idx;
   if (received==0b11) {

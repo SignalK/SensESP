@@ -2,8 +2,9 @@
 
 // Frequency
 
-Frequency::Frequency(String sk_path, float k, String id, String schema)
-    : Transform{sk_path, id, schema}, k{k} {
+Frequency::Frequency(String sk_path, float k, String id, String schema, uint8_t valueIdx) :
+    IntegerConsumer(),
+    NumericTransform{sk_path, id, schema, valueIdx}, k{k} {
   //load_configuration();
 }
 
@@ -11,7 +12,7 @@ void Frequency::enable() {
   last_update = millis();
 }
 
-void Frequency::set_input(uint input) {
+void Frequency::set_input(int input, uint8_t idx) {
   unsigned long cur_millis = millis();
   unsigned long elapsed_millis = cur_millis - last_update;
   output = k * input / (elapsed_millis / 1000.);

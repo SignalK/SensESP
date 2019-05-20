@@ -8,70 +8,74 @@
 
 #include "system/configurable.h"
 #include "system/observable.h"
+#include "system/valueproducer.h"
+#include "system/wantsenable.h"
+#include "system/signalksource.h"
 #include "sensesp.h"
+
 
 // TODO: Split into multiple files
 
 ///////////////////
 // Transforms transform raw device readouts into useful sensor values.
 
-class Transform : public Observable, public Configurable {
+/**
+ * The base class for all transforms. All transforms are can be subscribed
+ * to by calling attach() (inherited from Observable). They can
+ * have an optional persistence configuration by specifying an "id" to
+ * save the configuration data in.
+ */
+class TransformBase : public SignalKSource,
+                      public Configurable, 
+                      public WantsEnable {
  public:
-  Transform(String sk_path, String id="", String schema="");
-  virtual String as_json() = 0;
-  String& get_sk_path() {
-    return sk_path;
-  }
-  void set_sk_path(const String& path) {
-    sk_path = path;
-  }
-  virtual void enable() {}
-  static const std::set<Transform*>& get_transforms() {
+    TransformBase(String sk_path, String id="", String schema="");
+
+  
+  // Primary purpose of this was to supply SignalK sources
+  // (now handled by SignalKSource::get_sources). Should
+  // this be deprecated?
+  static const std::set<TransformBase*>& get_transforms() {
     return transforms;
   }
- protected:
-  String sk_path;
- private:
-  static std::set<Transform*> transforms;
+ 
+  private:
+    static std::set<TransformBase*> transforms;
 };
 
-// Passthrough is a "null" transform, just passing the value to output
 
-template <class T>
-class Passthrough : public Transform {
- public:
-  Passthrough() : Transform{"", "", ""} {}
-  Passthrough(String sk_path, String id="", String schema="")
-    : Transform{sk_path, id, schema} {}
-  T get() { return output; }
-  void set_input(T input) {
-    output = input;
-    notify();
+/**
+ * The main Transform class. A transform is identified primarily by the
+ * type of value that is produces (i.e. a Transform<float> is a
+ * ValueProducer<float> that generates float values)
+ */
+template <typename T>
+class Transform : public TransformBase, public ValueProducer<T> {
+    public:
+      Transform(String sk_path, String id="", String schema="", uint8_t valueIdx = 0) :
+         TransformBase(sk_path, id, schema), ValueProducer<T>(valueIdx) {
+      }
+};
+
+
+#define BooleanTransform Transform<bool>
+#define NumericTransform Transform<float>
+#define IntegerTransform Transform<int>
+#define StringTransform Transform<String>
+
+
+/**
+ * A OneToOneTransform is a common type of transform that consumes, transforms,
+ * then outputs values of the same data type.
+ */
+template <typename T>
+class OneToOneTransform : public ValueConsumer<T>, public Transform<T> {
+
+  public: 
+     OneToOneTransform(String sk_path, String id="", String schema="", uint8_t valueIdx = 0) :
+      ValueConsumer<T>(),
+      Transform<T>(sk_path, id, schema, valueIdx) {
   }
-  String as_json() override final {
-    DynamicJsonBuffer jsonBuffer;
-    String json;
-    JsonObject& root = jsonBuffer.createObject();
-    root.set("path", sk_path);
-    root.set("value", output);
-    root.printTo(json);
-    return json;
-  }
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override final {
-    JsonObject& root = buf.createObject();
-    root["sk_path"] = sk_path;
-    root["value"] = output;
-    return root;
-  }
-  virtual bool set_configuration(const JsonObject& config) override final {
-    if (!config.containsKey("sk_path")) {
-      return false;
-    }
-    sk_path = config["sk_path"].as<String>();
-    return true;
-  }
- private:
-  T output;
 };
 
 #endif
