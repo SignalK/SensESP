@@ -8,7 +8,7 @@
 #include <ESPAsyncWiFiManager.h>
 
 #include "system/configurable.h"
-#include "system/observable.h"
+#include "system/observablevalue.h"
 
 class Networking : public Configurable {
  public:

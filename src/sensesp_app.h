@@ -10,6 +10,7 @@
 #include "system/signal_k.h"
 #include "system/valueproducer.h"
 #include "system/valueconsumer.h"
+#include "system/observablevalue.h"
 
 class SensESPApp {
  public:
