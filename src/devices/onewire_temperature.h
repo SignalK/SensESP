@@ -27,7 +27,7 @@ class DallasTemperatureSensors : public Device {
 class OneWireTemperature : public NumericDevice {
  public:
   OneWireTemperature(DallasTemperatureSensors* dts,
-                     String id="", String schema="", uint8_t valueIndex = 0);
+                     String id="", String schema="");
   void enable() override final;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;

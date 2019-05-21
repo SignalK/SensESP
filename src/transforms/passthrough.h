@@ -10,10 +10,10 @@ class Passthrough : public OneToOneTransform<T> {
  public:
   Passthrough() : Passthrough("") {}
 
-  Passthrough(String sk_path, String id="", String schema="", uint8_t valueIdx = 0)
-    : OneToOneTransform<T>{sk_path, id, schema, valueIdx} {
+  Passthrough(String sk_path, String id="", String schema="")
+    : OneToOneTransform<T>{sk_path, id, schema} {
 
-    }
+  }
 
 
   virtual void set_input(T newValue, uint8_t idx = 0) override final {

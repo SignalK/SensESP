@@ -23,22 +23,18 @@ class ValueProducer : virtual public Observable {
          *   zero.
          *  @see ValueConsumer::set_input()
          */
-        ValueProducer(uint8_t valueIdx = 0) : valueIdx{valueIdx} {}
+        ValueProducer() {}
 
         virtual T get() { return output; }
 
-        virtual uint8_t getValueIdx() { return valueIdx; }
-        virtual void setValueIdx(uint8_t newIdx) { valueIdx = newIdx; }
-
-        void connectTo(ValueConsumer<T>* pConsumer) {
-            this->attach([this, pConsumer](){
-                pConsumer->set_input(this->get(), this->getValueIdx());
+        void connectTo(ValueConsumer<T>* pConsumer, uint8_t valueIdx) {
+            this->attach([this, pConsumer, valueIdx](){
+                pConsumer->set_input(this->get(), valueIdx);
             });
         }
 
     protected:
         T output;
-        uint8_t valueIdx;
 };
 
 // The following common types are defined using #define to make the purpose of a template class

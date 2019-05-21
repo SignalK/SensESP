@@ -19,7 +19,7 @@ class DigitalInput : public Device {
 class DigitalInputValue : public DigitalInput, public BooleanProducer {
  public:
   DigitalInputValue(uint8_t pin, int pin_mode, int interrupt_type,
-                    String id="", String schema="", uint8_t valueIndex = 0);
+                    String id="", String schema="");
 
   virtual void enable() override final;
 
@@ -32,7 +32,7 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  public:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       uint read_delay,
-                      String id="", String schema="", uint8_t valueIndex = 0);
+                      String id="", String schema="");
 
   void enable() override final;
 

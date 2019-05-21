@@ -1,9 +1,9 @@
 #include "timestring.h"
 
 
-TimeString::TimeString(String path, String id, String schema, uint8_t valueIdx) :
+TimeString::TimeString(String path, String id, String schema) :
     ValueConsumer<time_t>(),
-    StringTransform{ path, id, schema, valueIdx } {
+    StringTransform{ path, id, schema } {
   load_configuration();
 }
 

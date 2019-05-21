@@ -20,8 +20,8 @@ class SensESPApp {
 
 
   template<typename T>  
-  void connect(ValueProducer<T>* pProducer, ValueConsumer<T>* pConsumer) {
-      pProducer->connectTo(pConsumer);
+  void connect(ValueProducer<T>* pProducer, ValueConsumer<T>* pConsumer, uint8_t valueIdx = 0) {
+      pProducer->connectTo(pConsumer, valueIdx);
   }
 
 

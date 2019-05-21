@@ -13,9 +13,9 @@ DigitalInput::DigitalInput(
 
 DigitalInputValue::DigitalInputValue(
     uint8_t pin, int pin_mode, int interrupt_type,
-    String id, String schema, uint8_t valueIndex) :
+    String id, String schema) :
       DigitalInput{pin, pin_mode, interrupt_type, id, schema},
-      BooleanProducer(valueIndex) {}
+      BooleanProducer() {}
 
 void DigitalInputValue::enable() {
   app.onInterrupt(
@@ -38,9 +38,9 @@ void DigitalInputValue::enable() {
 DigitalInputCounter::DigitalInputCounter(
     uint8_t pin, int pin_mode, int interrupt_type,
     uint read_delay,
-    String id, String schema, uint8_t valueIndex) :
+    String id, String schema) :
       DigitalInput{pin, pin_mode, interrupt_type, id, schema},
-      IntegerProducer(valueIndex),
+      IntegerProducer(),
       read_delay{read_delay} {}
 
 void DigitalInputCounter::enable() {

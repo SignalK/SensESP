@@ -52,8 +52,8 @@ class TransformBase : public SignalKSource,
 template <typename T>
 class Transform : public TransformBase, public ValueProducer<T> {
     public:
-      Transform(String sk_path, String id="", String schema="", uint8_t valueIdx = 0) :
-         TransformBase(sk_path, id, schema), ValueProducer<T>(valueIdx) {
+      Transform(String sk_path, String id="", String schema="") :
+         TransformBase(sk_path, id, schema), ValueProducer<T>() {
       }
 };
 
@@ -72,9 +72,9 @@ template <typename T>
 class OneToOneTransform : public ValueConsumer<T>, public Transform<T> {
 
   public: 
-     OneToOneTransform(String sk_path, String id="", String schema="", uint8_t valueIdx = 0) :
+     OneToOneTransform(String sk_path, String id="", String schema="") :
       ValueConsumer<T>(),
-      Transform<T>(sk_path, id, schema, valueIdx) {
+      Transform<T>(sk_path, id, schema) {
   }
 };
 
