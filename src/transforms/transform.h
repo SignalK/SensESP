@@ -78,4 +78,9 @@ class OneToOneTransform : public ValueConsumer<T>, public Transform<T> {
   }
 };
 
+#define OneToOneNumericTransform OneToOneTransform<float>
+#define OneToOneIntegerTransform OneToOneTransform<int>
+#define OneToOneBooleanTransform OneToOneTransform<bool>
+#define OneToOneStringTransform OneToOneTransform<String>
+
 #endif
