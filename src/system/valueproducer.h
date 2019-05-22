@@ -5,6 +5,9 @@
 #include <ArduinoJson.h>
 #include "valueconsumer.h"
 
+// OneToOneTransform is defined in transforms/transform.h
+template <typename T> class OneToOneTransform;
+
 /**
  * A ValueProducer<> is any device or piece of code that outputs a value for consumption
  * elsewhere.  They are Observable, allowing code to be notified whenever a new value
@@ -23,22 +26,32 @@ class ValueProducer : virtual public Observable {
          *   zero.
          *  @see ValueConsumer::set_input()
          */
-        ValueProducer(uint8_t valueIdx = 0) : valueIdx{valueIdx} {}
+        ValueProducer() {}
 
         virtual T get() { return output; }
 
-        virtual uint8_t getValueIdx() { return valueIdx; }
-        virtual void setValueIdx(uint8_t newIdx) { valueIdx = newIdx; }
-
-        void connectTo(ValueConsumer<T>* pConsumer) {
-            this->attach([this, pConsumer](){
-                pConsumer->set_input(this->get(), this->getValueIdx());
+        void connectTo(ValueConsumer<T>* pConsumer, uint8_t valueIdx = 0) {
+            this->attach([this, pConsumer, valueIdx](){
+                pConsumer->set_input(this->get(), valueIdx);
             });
+        }
+
+
+        /**
+         *  If the consumer this producer is connecting to is ALSO a producer
+         *  of values of the same type, connectTo() calls can be chained
+         *  together, as this specialized version returns the Producer/Consumer
+         *  so this method can be called on THAT object.
+         */
+        OneToOneTransform<T>* connectTo(OneToOneTransform<T>* pProducerConsumer, uint8_t valueIdx = 0) {
+            this->attach([this, pProducerConsumer, valueIdx](){
+                pProducerConsumer->set_input(this->get(), valueIdx);
+            });
+            return pProducerConsumer;
         }
 
     protected:
         T output;
-        uint8_t valueIdx;
 };
 
 // The following common types are defined using #define to make the purpose of a template class

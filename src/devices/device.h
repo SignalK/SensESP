@@ -30,7 +30,7 @@ class Device : virtual public Observable, public Configurable, public WantsEnabl
 class NumericDevice : public Device, public NumericProducer {
 
     public:
-        NumericDevice(String id="", String schema="", uint8_t valueIndex = 0);
+        NumericDevice(String id="", String schema="");
 
 };
 
@@ -38,7 +38,7 @@ class NumericDevice : public Device, public NumericProducer {
 class IntegerDevice : public Device, public IntegerProducer {
 
     public:
-        IntegerDevice(String id="", String schema="", uint8_t valueIndex = 0);
+        IntegerDevice(String id="", String schema="");
 
 };
 
@@ -46,7 +46,7 @@ class IntegerDevice : public Device, public IntegerProducer {
 class StringDevice : public Device, public StringProducer {
 
     public:
-        StringDevice(String id="", String schema="", uint8_t valueIndex = 0);
+        StringDevice(String id="", String schema="");
 
 };
 

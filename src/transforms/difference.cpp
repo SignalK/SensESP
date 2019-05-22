@@ -2,8 +2,8 @@
 
 // Difference
 
-Difference::Difference(String path, float k1, float k2, String id, String schema, uint8_t valueIdx)
-    : OneToOneTransform<float>{ path, id, schema, valueIdx },
+Difference::Difference(String path, float k1, float k2, String id, String schema)
+    : OneToOneTransform<float>{ path, id, schema },
       k1{ k1 },
       k2{ k2 } {
   load_configuration();

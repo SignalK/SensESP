@@ -8,19 +8,19 @@ Device::Device(String id, String schema) : Configurable{id, schema}, WantsEnable
 
 
 
-NumericDevice::NumericDevice(String id, String schema, uint8_t valueIndex) :
-   Device(id, schema), NumericProducer(valueIndex) {
+NumericDevice::NumericDevice(String id, String schema) :
+   Device(id, schema), NumericProducer() {
 
 };
 
 
-IntegerDevice::IntegerDevice(String id, String schema, uint8_t valueIndex) :
-   Device(id, schema), IntegerProducer(valueIndex) {
+IntegerDevice::IntegerDevice(String id, String schema) :
+   Device(id, schema), IntegerProducer() {
 
 };
 
 
-StringDevice::StringDevice(String id, String schema, uint8_t valueIndex) :
-   Device(id, schema), StringProducer(valueIndex) {
+StringDevice::StringDevice(String id, String schema) :
+   Device(id, schema), StringProducer() {
 
 };

@@ -2,8 +2,8 @@
 
 // Linear
 
-Linear::Linear(String path, float k, float c, String id, String schema, uint8_t valueIdx) :
-    OneToOneTransform<float>{ path, id, schema, valueIdx },
+Linear::Linear(String path, float k, float c, String id, String schema) :
+    OneToOneTransform<float>{ path, id, schema },
       k{ k },
       c{ c } {
   load_configuration();

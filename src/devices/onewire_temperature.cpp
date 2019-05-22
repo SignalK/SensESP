@@ -90,8 +90,8 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
 }
 
 OneWireTemperature::OneWireTemperature(
-    DallasTemperatureSensors* dts, String id, String schema, uint8_t valueIndex)
-    : NumericDevice{id, schema, valueIndex}, dts{dts} {
+    DallasTemperatureSensors* dts, String id, String schema)
+    : NumericDevice{id, schema}, dts{dts} {
   load_configuration();
   if (address==null_ow_addr) {
     // previously unconfigured device

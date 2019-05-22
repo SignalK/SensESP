@@ -10,6 +10,7 @@
 #include "system/signal_k.h"
 #include "system/valueproducer.h"
 #include "system/valueconsumer.h"
+#include "system/observablevalue.h"
 
 class SensESPApp {
  public:
@@ -20,8 +21,8 @@ class SensESPApp {
 
 
   template<typename T>  
-  void connect(ValueProducer<T>* pProducer, ValueConsumer<T>* pConsumer) {
-      pProducer->connectTo(pConsumer);
+  void connect(ValueProducer<T>* pProducer, ValueConsumer<T>* pConsumer, uint8_t valueIdx = 0) {
+      pProducer->connectTo(pConsumer, valueIdx);
   }
 
 

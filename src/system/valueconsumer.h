@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <ArduinoJson.h>
 
+template <typename T> class ValueProducer;
+
 /**
  *  A ValueConsumer is any piece of code (like a transformation) or device that
  *  accepts data for input. They can accept one or more input values 
@@ -22,6 +24,12 @@ class ValueConsumer {
          * @param idx The zero based index of the input to this consumer.
          */
         virtual void set_input(T newValue, uint8_t idx = 0) {
+        }
+
+        void connectFrom(ValueProducer<T>* pProducer, uint8_t valueIdx) {
+            pProducer->attach([pProducer, this, valueIdx](){
+                this->set_input(pProducer->get(), valueIdx);
+            });
         }
 
 };

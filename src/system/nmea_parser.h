@@ -5,7 +5,7 @@
 
 #include <map>
 
-#include "observable.h"
+#include "observablevalue.h"
 
 constexpr int INPUT_BUFFER_LENGTH = 250;
 constexpr int MAX_TERMS = 25;

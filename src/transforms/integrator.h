@@ -7,7 +7,7 @@
 // y = k * sum(x_t)
 class Integrator : public OneToOneTransform<float> {
  public:
-  Integrator(String sk_path, float k=1, float value=0, String id="", String schema="", uint8_t valueIdx = 0);
+  Integrator(String sk_path, float k=1, float value=0, String id="", String schema="");
   virtual void enable() override final;
   virtual void set_input(float input, uint8_t idx = 0) override final;
   String as_json() override final;

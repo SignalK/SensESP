@@ -10,13 +10,13 @@ class Passthrough : public OneToOneTransform<T> {
  public:
   Passthrough() : Passthrough("") {}
 
-  Passthrough(String sk_path, String id="", String schema="", uint8_t valueIdx = 0)
-    : OneToOneTransform<T>{sk_path, id, schema, valueIdx} {
+  Passthrough(String sk_path, String id="", String schema="")
+    : OneToOneTransform<T>{sk_path, id, schema} {
 
-    }
+  }
 
 
-  virtual void set_input(T newValue, uint8_t idx = 0) override final {
+  virtual void set_input(T newValue, uint8_t idx = 0) override {
     ValueProducer<T>::output = newValue;
     this->notify();
   }
@@ -32,14 +32,14 @@ class Passthrough : public OneToOneTransform<T> {
     return json;
   }
 
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override final {
+  virtual JsonObject& get_configuration(JsonBuffer& buf) override {
     JsonObject& root = buf.createObject();
     root["sk_path"] = TransformBase::sk_path;
     root["value"] = ValueProducer<T>::output;
     return root;
   }
 
-  virtual bool set_configuration(const JsonObject& config) override final {
+  virtual bool set_configuration(const JsonObject& config) override {
     if (!config.containsKey("sk_path")) {
       return false;
     }
