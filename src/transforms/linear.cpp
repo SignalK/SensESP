@@ -10,7 +10,7 @@ Linear::Linear(String path, float k, float c, String id, String schema) :
 }
 
 
-void Linear::set_input(float input, uint8_t idx) {
+void Linear::set_input(float input, uint8_t inputChannel) {
   output = k * input + c;
   notify();
 }

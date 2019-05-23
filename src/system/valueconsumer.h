@@ -21,27 +21,31 @@ class ValueConsumer {
          * Used to set an input of this consumer. It is usually called
          * automatically by a ValueProducer
          * @param newValue the value of the input
-         * @param idx The zero based index of the input to this consumer.
+         * @param inputChannel The zero based index of the input channel
+         *   the new value corresponds to.
          */
-        virtual void set_input(T newValue, uint8_t idx = 0) {
+        virtual void set_input(T newValue, uint8_t inputChannel = 0) {
         }
 
-        void connectFrom(ValueProducer<T>* pProducer, uint8_t valueIdx) {
-            pProducer->attach([pProducer, this, valueIdx](){
-                this->set_input(pProducer->get(), valueIdx);
+        /**
+         * Registers this consumer with the specified producer, letting it
+         * know that this consumer would like to receive notifications whenever
+         * its value changes
+         * @param inputChannel The zero based channel number that the producer's
+         *   input changes should be reported on.
+         */
+        void connectFrom(ValueProducer<T>* pProducer, uint8_t inputChannel = 0) {
+            pProducer->attach([pProducer, this, inputChannel](){
+                this->set_input(pProducer->get(), inputChannel);
             });
         }
 
 };
 
-// The following common types are defined using #define to make the purpose of a template class
-// clearer, as well as allow for interoperability between the various classes. If NumericConsumer
-// inherited from "ValueConsumer<float>"" vs just being an alias, it would actually be a different type than
-// anything defined as being or inheriting from "ValueConsumer<float>"".  When used as an alias, they
-// are interchangable.
-#define NumericConsumer ValueConsumer<float> 
-#define IntegerConsumer ValueConsumer<int> 
-#define BooleanConsumer ValueConsumer<bool>
-#define StringConsumer ValueConsumer<String> 
+
+typedef ValueConsumer<float> NumericConsumer;
+typedef ValueConsumer<int> IntegerConsumer;
+typedef ValueConsumer<bool> BooleanConsumer;
+typedef ValueConsumer<String> StringConsumer;
 
 #endif

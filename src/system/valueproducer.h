@@ -18,21 +18,27 @@ template <typename T>
 class ValueProducer : virtual public Observable {
 
     public:
+        ValueProducer() {}
+
+
         /**
-         *  Constructor
-         * @param valueIdx Consumers can have one or more inputs feeding them
+         * Returns the current value of this producer
+         */
+        virtual const T& get() { return output; }
+
+
+        /**
+         * Connects this producer to the specified consumer, registering that
+         * consumer for notifications to when this producer's value changes
+         * @param inputChannel Consumers can have one or more inputs feeding them
          *   This parameter allows you to specify which input number this producer
          *   is connecting to. For single input consumers, leave the index at
          *   zero.
          *  @see ValueConsumer::set_input()
          */
-        ValueProducer() {}
-
-        virtual T get() { return output; }
-
-        void connectTo(ValueConsumer<T>* pConsumer, uint8_t valueIdx = 0) {
-            this->attach([this, pConsumer, valueIdx](){
-                pConsumer->set_input(this->get(), valueIdx);
+        void connectTo(ValueConsumer<T>* pConsumer, uint8_t inputChannel = 0) {
+            this->attach([this, pConsumer, inputChannel](){
+                pConsumer->set_input(this->get(), inputChannel);
             });
         }
 
@@ -43,25 +49,24 @@ class ValueProducer : virtual public Observable {
          *  together, as this specialized version returns the Producer/Consumer
          *  so this method can be called on THAT object.
          */
-        OneToOneTransform<T>* connectTo(OneToOneTransform<T>* pProducerConsumer, uint8_t valueIdx = 0) {
-            this->attach([this, pProducerConsumer, valueIdx](){
-                pProducerConsumer->set_input(this->get(), valueIdx);
+        OneToOneTransform<T>* connectTo(OneToOneTransform<T>* pProducerConsumer, uint8_t inputChannel = 0) {
+            this->attach([this, pProducerConsumer, inputChannel](){
+                pProducerConsumer->set_input(this->get(), inputChannel);
             });
             return pProducerConsumer;
         }
 
     protected:
+        /**
+         * The current value of this producer is stored here in this output member
+         * (unless descendant classes override ValueProducer::get())
+         */
         T output;
 };
 
-// The following common types are defined using #define to make the purpose of a template class
-// clearer, as well as allow for interoperability between the various classes. If NumericProducer
-// inherited from "ValueProducer<float>"" vs just being an alias, it would actually be a different type than
-// anything defined as being or inheriting from "ValueProducer<float>"".  When used as an alias, they
-// are interchangable.
-#define NumericProducer ValueProducer<float> 
-#define IntegerProducer ValueProducer<int> 
-#define BooleanProducer ValueProducer<bool>
-#define StringProducer  ValueProducer<String> 
+typedef ValueProducer<float> NumericProducer;
+typedef ValueProducer<int>  IntegerProducer;
+typedef ValueProducer<bool> BooleanProducer;
+typedef ValueProducer<String> StringProducer;
 
 #endif

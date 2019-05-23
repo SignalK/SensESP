@@ -9,9 +9,9 @@ Difference::Difference(String path, float k1, float k2, String id, String schema
   load_configuration();
 }
 
-void Difference::set_input(float input, uint8_t idx) {
-  inputs[idx] = input;
-  received |= 1<<idx;
+void Difference::set_input(float input, uint8_t inputChannel) {
+  inputs[inputChannel] = input;
+  received |= 1<<inputChannel;
   if (received==0b11) {
     output = k1 * inputs[0] - k2 * inputs[1];
     received = 0;

@@ -9,7 +9,7 @@
 class Frequency : public IntegerConsumer, public NumericTransform {
  public:
   Frequency(String sk_path, float k=1, String id="", String schema="");
-  virtual void set_input(int input, uint8_t idx = 0) override final;
+  virtual void set_input(int input, uint8_t inputChannel = 0) override final;
   virtual String as_json() override final;
   virtual void enable() override final;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;

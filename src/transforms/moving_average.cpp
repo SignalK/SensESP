@@ -10,7 +10,7 @@ MovingAverage::MovingAverage(String path, int n, float k, String id, String sche
   load_configuration();
 }
 
-void MovingAverage::set_input(float input, uint8_t idx) {
+void MovingAverage::set_input(float input, uint8_t inputChannel) {
   output += -k*buf[ptr]/n;
   buf[ptr] = input;
   ptr = (ptr+1) % n;
