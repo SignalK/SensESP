@@ -7,7 +7,7 @@ TimeString::TimeString(String path, String id, String schema) :
   load_configuration();
 }
 
-void TimeString::set_input(time_t input, uint8_t idx) {
+void TimeString::set_input(time_t input, uint8_t inputChannel) {
   char buf[sizeof "2011-10-08T07:07:09Z"];
   strftime(buf, sizeof buf, "%FT%TZ", gmtime(&input));
   output = String(buf);

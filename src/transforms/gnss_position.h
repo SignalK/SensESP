@@ -19,7 +19,7 @@ class GNSSPosition : public OneToOneTransform<Position> {
     OneToOneTransform<Position>{sk_path, id, schema } {
   }
 
-  virtual void set_input(Position newValue, uint8_t idx = 0) {
+  virtual void set_input(Position newValue, uint8_t inputChannel = 0) {
      output = newValue;
      notify();
   }

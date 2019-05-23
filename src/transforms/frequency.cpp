@@ -12,7 +12,7 @@ void Frequency::enable() {
   last_update = millis();
 }
 
-void Frequency::set_input(int input, uint8_t idx) {
+void Frequency::set_input(int input, uint8_t inputChannel) {
   unsigned long cur_millis = millis();
   unsigned long elapsed_millis = cur_millis - last_update;
   output = k * input / (elapsed_millis / 1000.);

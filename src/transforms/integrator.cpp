@@ -20,7 +20,7 @@ void Integrator::enable() {
   //app.onRepeat(10000, [this](){ this->save_configuration(); });
 }
 
-void Integrator::set_input(float input, uint8_t idx) {
+void Integrator::set_input(float input, uint8_t inputChannel) {
   output += input;
   notify();
 }

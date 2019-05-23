@@ -8,7 +8,7 @@
 class Difference : public OneToOneTransform<float> {
  public:
   Difference(String sk_path, float k1, float k2, String id="", String schema="");
-  virtual void set_input(float input, uint8_t idx) override final;
+  virtual void set_input(float input, uint8_t inputChannel) override final;
   virtual String as_json() override final;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;

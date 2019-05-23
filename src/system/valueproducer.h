@@ -18,21 +18,27 @@ template <typename T>
 class ValueProducer : virtual public Observable {
 
     public:
+        ValueProducer() {}
+
+
         /**
-         *  Constructor
-         * @param valueIdx Consumers can have one or more inputs feeding them
+         * Returns the current value of this producer
+         */
+        virtual const T& get() { return output; }
+
+
+        /**
+         * Connects this producer to the specified consumer, registering that
+         * consumer for notifications to when this producer's value changes
+         * @param inputChannel Consumers can have one or more inputs feeding them
          *   This parameter allows you to specify which input number this producer
          *   is connecting to. For single input consumers, leave the index at
          *   zero.
          *  @see ValueConsumer::set_input()
          */
-        ValueProducer() {}
-
-        virtual const T& get() { return output; }
-
-        void connectTo(ValueConsumer<T>* pConsumer, uint8_t valueIdx = 0) {
-            this->attach([this, pConsumer, valueIdx](){
-                pConsumer->set_input(this->get(), valueIdx);
+        void connectTo(ValueConsumer<T>* pConsumer, uint8_t inputChannel = 0) {
+            this->attach([this, pConsumer, inputChannel](){
+                pConsumer->set_input(this->get(), inputChannel);
             });
         }
 
@@ -43,14 +49,18 @@ class ValueProducer : virtual public Observable {
          *  together, as this specialized version returns the Producer/Consumer
          *  so this method can be called on THAT object.
          */
-        OneToOneTransform<T>* connectTo(OneToOneTransform<T>* pProducerConsumer, uint8_t valueIdx = 0) {
-            this->attach([this, pProducerConsumer, valueIdx](){
-                pProducerConsumer->set_input(this->get(), valueIdx);
+        OneToOneTransform<T>* connectTo(OneToOneTransform<T>* pProducerConsumer, uint8_t inputChannel = 0) {
+            this->attach([this, pProducerConsumer, inputChannel](){
+                pProducerConsumer->set_input(this->get(), inputChannel);
             });
             return pProducerConsumer;
         }
 
     protected:
+        /**
+         * The current value of this producer is stored here in this output member
+         * (unless descendant classes override ValueProducer::get())
+         */
         T output;
 };
 
