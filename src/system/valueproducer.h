@@ -28,7 +28,7 @@ class ValueProducer : virtual public Observable {
          */
         ValueProducer() {}
 
-        virtual T get() { return output; }
+        virtual const T& get() { return output; }
 
         void connectTo(ValueConsumer<T>* pConsumer, uint8_t valueIdx = 0) {
             this->attach([this, pConsumer, valueIdx](){

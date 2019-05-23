@@ -13,16 +13,16 @@ class ObservableValue : public ValueProducer<T> {
  public:
   ObservableValue() {}
 
-  ObservableValue(T value) {
+  ObservableValue(const T& value) {
       ValueProducer<T>::output = value;
   }
 
-  void set(T value) {
+  void set(const T& value) {
     ValueProducer<T>::output = value;
     Observable::notify();
   }
 
-  T operator=(T value) {
+  const T& operator=(const T& value) {
       set(value);
       return value;
   }
