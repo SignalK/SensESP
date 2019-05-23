@@ -54,14 +54,9 @@ class ValueProducer : virtual public Observable {
         T output;
 };
 
-// The following common types are defined using #define to make the purpose of a template class
-// clearer, as well as allow for interoperability between the various classes. If NumericProducer
-// inherited from "ValueProducer<float>"" vs just being an alias, it would actually be a different type than
-// anything defined as being or inheriting from "ValueProducer<float>"".  When used as an alias, they
-// are interchangable.
-#define NumericProducer ValueProducer<float> 
-#define IntegerProducer ValueProducer<int> 
-#define BooleanProducer ValueProducer<bool>
-#define StringProducer  ValueProducer<String> 
+typedef ValueProducer<float> NumericProducer;
+typedef ValueProducer<int>  IntegerProducer;
+typedef ValueProducer<bool> BooleanProducer;
+typedef ValueProducer<String> StringProducer;
 
 #endif

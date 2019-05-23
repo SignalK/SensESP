@@ -58,10 +58,10 @@ class Transform : public TransformBase, public ValueProducer<T> {
 };
 
 
-#define BooleanTransform Transform<bool>
-#define NumericTransform Transform<float>
-#define IntegerTransform Transform<int>
-#define StringTransform Transform<String>
+typedef Transform<bool> BooleanTransform;
+typedef Transform<float> NumericTransform;
+typedef Transform<int> IntegerTransform;
+typedef Transform<String> StringTransform;
 
 
 /**
@@ -78,9 +78,9 @@ class OneToOneTransform : public ValueConsumer<T>, public Transform<T> {
   }
 };
 
-#define OneToOneNumericTransform OneToOneTransform<float>
-#define OneToOneIntegerTransform OneToOneTransform<int>
-#define OneToOneBooleanTransform OneToOneTransform<bool>
-#define OneToOneStringTransform OneToOneTransform<String>
+typedef OneToOneTransform<float> OneToOneNumericTransform;
+typedef OneToOneTransform<int> OneToOneIntegerTransform;
+typedef OneToOneTransform<bool> OneToOneBooleanTransform;
+typedef OneToOneTransform<String> OneToOneStringTransform;
 
 #endif

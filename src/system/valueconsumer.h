@@ -34,14 +34,10 @@ class ValueConsumer {
 
 };
 
-// The following common types are defined using #define to make the purpose of a template class
-// clearer, as well as allow for interoperability between the various classes. If NumericConsumer
-// inherited from "ValueConsumer<float>"" vs just being an alias, it would actually be a different type than
-// anything defined as being or inheriting from "ValueConsumer<float>"".  When used as an alias, they
-// are interchangable.
-#define NumericConsumer ValueConsumer<float> 
-#define IntegerConsumer ValueConsumer<int> 
-#define BooleanConsumer ValueConsumer<bool>
-#define StringConsumer ValueConsumer<String> 
+
+typedef ValueConsumer<float> NumericConsumer;
+typedef ValueConsumer<int> IntegerConsumer;
+typedef ValueConsumer<bool> BooleanConsumer;
+typedef ValueConsumer<String> StringConsumer;
 
 #endif
