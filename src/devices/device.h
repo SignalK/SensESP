@@ -6,17 +6,17 @@
 #include "system/configurable.h"
 #include "system/observable.h"
 #include "system/valueproducer.h"
-#include "system/wantsenable.h"
+#include "system/enable.h"
 
 
 ///////////////////
 // Devices represent raw hardware thingies.
 
-class Device : virtual public Observable, public Configurable, public WantsEnable {
+class Device : virtual public Observable, public Configurable, public Enable {
   public:
     Device(String id="", String schema="");
 
-  // Was used by sensesp_app::enable(). Now handled by WantsEnable.  Deprecate?
+  // Was used by sensesp_app::enable(). Now handled by Enable.  Deprecate?
   static const std::set<Device*>& get_devices() {
     return devices;
   }
