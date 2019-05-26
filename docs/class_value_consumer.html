@@ -158,14 +158,14 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Registers this consumer with the specified producer, letting it know that this consumer would like to receive notifications whenever its value changes </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Registers this consumer with the specified producer, letting it know that this consumer would like to receive notifications whenever its value changes. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inputChannel</td><td>The zero based channel number that the producer's input changes should be reported on. </td></tr>
+    <tr><td class="paramname">inputChannel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00037">37</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00039">39</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
 
 </div>
 </div>
@@ -204,17 +204,17 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">newValue</td><td>the value of the input </td></tr>
-    <tr><td class="paramname">inputChannel</td><td>The zero based index of the input channel the new value corresponds to. </td></tr>
+    <tr><td class="paramname">inputChannel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Reimplemented in <a class="el" href="class_g_n_s_s_position.html#a0b1570b2bf0da3deb2f4d20a9bb9ea71">GNSSPosition</a>, <a class="el" href="class_passthrough.html#a401a7f308b76eac7ed7d90a618d997db">Passthrough&lt; T &gt;</a>, <a class="el" href="class_moving_average.html#ac953bfbae65b9acde7a2a770b029c5bd">MovingAverage</a>, <a class="el" href="class_integrator.html#a7fb38d2d19aa3e918dbee34b9096f7a6">Integrator</a>, <a class="el" href="class_time_string.html#a918b15a7599ec68ad8494ce77b08bde1">TimeString</a>, <a class="el" href="class_difference.html#abf5c7d23d414d2971ddeca8c6bf6b9a7">Difference</a>, and <a class="el" href="class_linear.html#aca76127ec02b9e354b0f891d73f24b37">Linear</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00027">27</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00028">28</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
 
 </div>
 </div>
