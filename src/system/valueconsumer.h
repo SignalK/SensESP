@@ -19,10 +19,11 @@ class ValueConsumer {
     public:
         /**
          * Used to set an input of this consumer. It is usually called
-         * automatically by a ValueProducer
+         * automatically by a ValueProducer.
          * @param newValue the value of the input
-         * @param inputChannel The zero based index of the input channel
-         *   the new value corresponds to.
+         * @param inputChannel Consumers can have one or more inputs feeding them.
+         *  This parameter allows you to specify which input number the producer 
+         *  is connecting to. For single input consumers, leave the index at zero.
          */
         virtual void set_input(T newValue, uint8_t inputChannel = 0) {
         }
@@ -30,9 +31,10 @@ class ValueConsumer {
         /**
          * Registers this consumer with the specified producer, letting it
          * know that this consumer would like to receive notifications whenever
-         * its value changes
-         * @param inputChannel The zero based channel number that the producer's
-         *   input changes should be reported on.
+         * its value changes.
+         * @param inputChannel Consumers can have one or more inputs feeding them.
+         *  This parameter allows you to specify which input number the producer 
+         *  is connecting to. For single input consumers, leave the index at zero.
          */
         void connectFrom(ValueProducer<T>* pProducer, uint8_t inputChannel = 0) {
             pProducer->attach([pProducer, this, inputChannel](){
