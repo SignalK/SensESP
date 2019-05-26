@@ -86,3 +86,7 @@ Configuration can be updated with HTTP PUT requests:
 - [ ] Web configuration UI
 - [ ] Control device support. For now, all devices are read-only, and control devices such as leds, relays, or
 PWM output are not supported.
+
+SensESP Class Diagram
+----------------------------
+![alt text](sens_esp_uml.png "UML for SensESP")

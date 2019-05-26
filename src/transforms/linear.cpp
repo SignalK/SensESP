@@ -2,14 +2,15 @@
 
 // Linear
 
-Linear::Linear(String path, float k, float c, String id, String schema)
-    : Transform{ path, id, schema },
+Linear::Linear(String path, float k, float c, String id, String schema) :
+    OneToOneTransform<float>{ path, id, schema },
       k{ k },
       c{ c } {
   load_configuration();
 }
 
-void Linear::set_input(float input) {
+
+void Linear::set_input(float input, uint8_t inputChannel) {
   output = k * input + c;
   notify();
 }

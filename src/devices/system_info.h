@@ -3,10 +3,9 @@
 
 #include "device.h"
 
-class SystemHz : public Device {
+class SystemHz : public NumericDevice {
  public:
   void enable() override final;
-  float get();
   String get_value_name() { return "systemhz"; }
  private:
   uint32_t tick_count = 0;
@@ -16,33 +15,27 @@ class SystemHz : public Device {
   void update();
 };
 
-class FreeMem : public Device {
+class FreeMem : public Device, public ValueProducer<uint32_t> {
  public:
   void enable() override final;
-  uint32_t get();
   String get_value_name() { return "freemem"; }
  private:
-  uint32_t free_mem;
   void update();
 };
 
-class Uptime : public Device {
+class Uptime : public NumericDevice {
  public:
   void enable() override final;
-  float get();
   String get_value_name() { return "uptime"; }
  private:
-  float uptime;
   void update();
 };
 
-class IPAddrDev : public Device {
+class IPAddrDev : public StringDevice {
  public:
   void enable() override final;
-  String get();
   String get_value_name() { return "ipaddr"; }
  private:
-  String ipaddr;
   void update();
 };
 

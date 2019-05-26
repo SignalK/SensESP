@@ -6,10 +6,9 @@
 
 // Transform
 
-std::set<Transform*> Transform::transforms;
+std::set<TransformBase*> TransformBase::transforms;
 
-Transform::Transform(String sk_path, String id, String schema)
-    : Configurable{id, schema}, sk_path{sk_path} {
+TransformBase::TransformBase(String sk_path, String id, String schema) :
+    Configurable{id, schema}, SignalKSource(sk_path), Enable(5) {
   transforms.insert(this);
 }
-

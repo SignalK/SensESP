@@ -20,22 +20,4 @@ class Observable {
   std::forward_list < std::function<void()> > observers;
 };
 
-///////////////////
-// ObservableValue is simply a value that notifies its observers if
-// it gets changed.
-
-template <class T>
-class ObservableValue : public Observable {
- public:
-  ObservableValue() {}
-  ObservableValue(T value) : value{value} {}
-  const T& get() { return value; }
-  void set(T value) {
-    this->value = value;
-    notify();
-  }
- private:
-  T value;
-};
-
 #endif

@@ -3,13 +3,14 @@
 
 #include "device.h"
 
-class AnalogInput : public Device {
- public:
+class AnalogInput : public NumericDevice {
+
+public:
   void enable() override final;
-  float get();
- private:
-  float value;
+
+private:
   void update();
 };
+
 
 #endif

@@ -91,7 +91,7 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
 
 OneWireTemperature::OneWireTemperature(
     DallasTemperatureSensors* dts, String id, String schema)
-    : Device{id, schema}, dts{dts} {
+    : NumericDevice{id, schema}, dts{dts} {
   load_configuration();
   if (address==null_ow_addr) {
     // previously unconfigured device
@@ -117,9 +117,6 @@ void OneWireTemperature::enable() {
   }
 }
 
-float OneWireTemperature::get() {
-  return this->value;
-}
 
 void OneWireTemperature::update() {
   dts->sensors->requestTemperaturesByAddress(address.data());
@@ -128,13 +125,13 @@ void OneWireTemperature::update() {
 }
 
 void OneWireTemperature::read_value() {
-  value = dts->sensors->getTempC(address.data());
+  output = dts->sensors->getTempC(address.data());
   this->notify();
 }
 
 JsonObject& OneWireTemperature::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
-  root.set("value", value);
+  root.set("value", output);
   char addr_str[24];
   owda_to_string(addr_str, address);
   root.set("address", addr_str);
