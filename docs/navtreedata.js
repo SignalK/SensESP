@@ -24,7 +24,6 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "SensESP", "index.html", [
-    [ "SensESP", "md___users__joel__workspaces_platformio__sens_e_s_p__r_e_a_d_m_e.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -32,7 +31,8 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", null ],
+        [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -52,8 +52,9 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"analog__input_8h.html",
-"dir_6da37a2e7f63af40030fb14c33b85242.html"
+"analog__input_8cpp.html",
+"difference_8h.html",
+"wiring__helpers_8h.html#a013f0fccc349c462c3a1d1a692e0cc23"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

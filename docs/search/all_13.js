@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['wantsenable',['WantsEnable',['../class_wants_enable.html',1,'WantsEnable'],['../class_wants_enable.html#a3a907f8cabcf33c1e774785447e4d686',1,'WantsEnable::WantsEnable()']]],
-  ['wantsenable_2ecpp',['wantsenable.cpp',['../wantsenable_8cpp.html',1,'']]],
-  ['wantsenable_2eh',['wantsenable.h',['../wantsenable_8h.html',1,'']]],
   ['websocketclientevent',['webSocketClientEvent',['../ws__client_8cpp.html#a5e74f160471b58a262cceef5edaea7e0',1,'ws_client.cpp']]],
   ['wifi_5fconfig_5fportal_5ftimeout',['WIFI_CONFIG_PORTAL_TIMEOUT',['../networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce',1,'networking.cpp']]],
   ['wiring_5fhelpers_2ecpp',['wiring_helpers.cpp',['../wiring__helpers_8cpp.html',1,'']]],

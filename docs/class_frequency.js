@@ -5,5 +5,5 @@ var class_frequency =
     [ "enable", "class_frequency.html#a2f0884295031b687dadd09add8acb877", null ],
     [ "get_configuration", "class_frequency.html#a40efa67350036f8bdc07be9fd4a94e42", null ],
     [ "set_configuration", "class_frequency.html#a52099d6dbece2eab9ec8b053ab28cdf4", null ],
-    [ "set_input", "class_frequency.html#a315441086b9f9c2063fa984f098f0832", null ]
+    [ "set_input", "class_frequency.html#a8854a4f94e59b2f057655e18a62131ab", null ]
 ];

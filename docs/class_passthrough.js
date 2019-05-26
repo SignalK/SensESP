@@ -5,5 +5,5 @@ var class_passthrough =
     [ "as_json", "class_passthrough.html#a87f840179756a79a9d19e53eb573164a", null ],
     [ "get_configuration", "class_passthrough.html#aecaa7961190394983b550495da47ee9c", null ],
     [ "set_configuration", "class_passthrough.html#ae3a80dd8daac718da3c75eb9eb45197a", null ],
-    [ "set_input", "class_passthrough.html#ad899c40db38bcfaba74f329b83f5b57e", null ]
+    [ "set_input", "class_passthrough.html#a401a7f308b76eac7ed7d90a618d997db", null ]
 ];

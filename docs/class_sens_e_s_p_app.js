@@ -1,7 +1,7 @@
 var class_sens_e_s_p_app =
 [
     [ "SensESPApp", "class_sens_e_s_p_app.html#a092f600dda1a51189bc2c9fd5de360e8", null ],
-    [ "connect", "class_sens_e_s_p_app.html#a237f93e0073dbb8553568861e513ea46", null ],
+    [ "connect", "class_sens_e_s_p_app.html#ac53d90429563f50e4aca5224a1e85afd", null ],
     [ "connect_1to1", "class_sens_e_s_p_app.html#a0a499dc1d52fa2115d314149bb41259f", null ],
     [ "connect_1to1_h", "class_sens_e_s_p_app.html#a8875ca27de5c10c1b2931c3c41e1f9b5", null ],
     [ "connect_2to1", "class_sens_e_s_p_app.html#a5c4d4d6581822017e942421c833f27f3", null ],

@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -95,15 +95,15 @@ $(document).ready(function(){initNavTree('class_observable_value.html','');});
 <p>This is the complete list of members for <a class="el" href="class_observable_value.html">ObservableValue&lt; T &gt;</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_observable.html#af72ed9c9cf7157a33caad4b930232e69">attach</a>(std::function&lt; void()&gt; observer)</td><td class="entry"><a class="el" href="class_observable.html">Observable</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_value_producer.html#ab67d5e31f847e1683db9e3529f65b9c2">connectTo</a>(ValueConsumer&lt; T &gt; *pConsumer, uint8_t valueIdx=0)</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_value_producer.html#a65cd7a7145853271cf36b02ae0441894">connectTo</a>(OneToOneTransform&lt; T &gt; *pProducerConsumer, uint8_t valueIdx=0)</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_value_producer.html#a401d328875745a78e6062a7b7a022b28">get</a>()</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo</a>(ValueConsumer&lt; T &gt; *pConsumer, uint8_t inputChannel=0)</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_value_producer.html#a4194a8cdf7fb741e9bfbd1ba8efd01a9">connectTo</a>(OneToOneTransform&lt; T &gt; *pProducerConsumer, uint8_t inputChannel=0)</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_value_producer.html#adaf30ea1027efa0c83c75dfe3afc0c1a">get</a>()</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_observable.html#a099bf851e05bb8c1a25e83f2a1389e58">notify</a>()</td><td class="entry"><a class="el" href="class_observable.html">Observable</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_observable_value.html#a92bc2f2646592dc209717bb546d86a2c">ObservableValue</a>()</td><td class="entry"><a class="el" href="class_observable_value.html">ObservableValue&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_observable_value.html#ab5e319c4f3e8d8a95996db0961dcfb8a">ObservableValue</a>(T value)</td><td class="entry"><a class="el" href="class_observable_value.html">ObservableValue&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_observable_value.html#aa4317dd7a1535491ed40a825d3dd7ef1">operator=</a>(T value)</td><td class="entry"><a class="el" href="class_observable_value.html">ObservableValue&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_observable_value.html#adaf97ca440787ba883915603056f002b">ObservableValue</a>(const T &amp;value)</td><td class="entry"><a class="el" href="class_observable_value.html">ObservableValue&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_observable_value.html#a900b99ef37a8d31e84c48a97b8eff10d">operator=</a>(const T &amp;value)</td><td class="entry"><a class="el" href="class_observable_value.html">ObservableValue&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697">output</a></td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_observable_value.html#a35a0355201061fae359b78bda98bd127">set</a>(T value)</td><td class="entry"><a class="el" href="class_observable_value.html">ObservableValue&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_observable_value.html#a51cf25d4951d3214021da0c25985838d">set</a>(const T &amp;value)</td><td class="entry"><a class="el" href="class_observable_value.html">ObservableValue&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_value_producer.html#a0ef05992883120f7202c14fd8e577103">ValueProducer</a>()</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->

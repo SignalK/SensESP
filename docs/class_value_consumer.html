@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,26 +102,29 @@ Inheritance diagram for ValueConsumer&lt; T &gt;:</div>
  <div class="center">
   <img src="class_value_consumer.png" usemap="#ValueConsumer_3C_20T_20_3E_map" alt=""/>
   <map id="ValueConsumer_3C_20T_20_3E_map" name="ValueConsumer_3C_20T_20_3E_map">
-<area href="class_one_to_one_transform.html" alt="OneToOneTransform&lt; T &gt;" shape="rect" coords="0,56,162,80"/>
-<area href="class_passthrough.html" alt="Passthrough&lt; T &gt;" shape="rect" coords="0,112,162,136"/>
+<area href="class_frequency.html" alt="Frequency" shape="rect" coords="0,56,162,80"/>
+<area href="class_one_to_one_transform.html" alt="OneToOneTransform&lt; T &gt;" shape="rect" coords="172,56,334,80"/>
+<area href="class_passthrough.html" alt="Passthrough&lt; T &gt;" shape="rect" coords="172,112,334,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a38401efa16d8b237663de64b40bb4c7f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_consumer.html#a38401efa16d8b237663de64b40bb4c7f">set_input</a> (T newValue, uint8_t idx=0)</td></tr>
-<tr class="separator:a38401efa16d8b237663de64b40bb4c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7c2327bcd9c9d10fe3b1ece875de628"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_consumer.html#af7c2327bcd9c9d10fe3b1ece875de628">connectFrom</a> (<a class="el" href="class_value_producer.html">ValueProducer</a>&lt; T &gt; *pProducer, uint8_t valueIdx)</td></tr>
-<tr class="separator:af7c2327bcd9c9d10fe3b1ece875de628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bf920e5ad5f171ec6e2aeda056ff01f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_consumer.html#a7bf920e5ad5f171ec6e2aeda056ff01f">set_input</a> (T newValue, uint8_t inputChannel=0)</td></tr>
+<tr class="separator:a7bf920e5ad5f171ec6e2aeda056ff01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6adf62d8d87ffa3ce70bb85379a68715"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_consumer.html#a6adf62d8d87ffa3ce70bb85379a68715">connectFrom</a> (<a class="el" href="class_value_producer.html">ValueProducer</a>&lt; T &gt; *pProducer, uint8_t inputChannel=0)</td></tr>
+<tr class="separator:a6adf62d8d87ffa3ce70bb85379a68715"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
 class ValueConsumer&lt; T &gt;</h3>
 
-<p>A <a class="el" href="class_value_consumer.html">ValueConsumer</a> is any piece of code (like a transformation) or device that accepts data for input. They can accept one or more input values via the <a class="el" href="class_value_consumer.html#a38401efa16d8b237663de64b40bb4c7f">set_input()</a> method. They are connected to ValueProducers via the connectTo() method. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_value_producer.html#ab67d5e31f847e1683db9e3529f65b9c2">ValueProducer::connectTo()</a> </dd></dl>
+<p>A <a class="el" href="class_value_consumer.html">ValueConsumer</a> is any piece of code (like a transformation) or device that accepts data for input. They can accept one or more input values via the <a class="el" href="class_value_consumer.html#a7bf920e5ad5f171ec6e2aeda056ff01f">set_input()</a> method. They are connected to ValueProducers via the connectTo() method. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">ValueProducer::connectTo()</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00017">17</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af7c2327bcd9c9d10fe3b1ece875de628"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7c2327bcd9c9d10fe3b1ece875de628">&#9670;&nbsp;</a></span>connectFrom()</h2>
+<a id="a6adf62d8d87ffa3ce70bb85379a68715"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6adf62d8d87ffa3ce70bb85379a68715">&#9670;&nbsp;</a></span>connectFrom()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +144,7 @@ template&lt;typename T&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>valueIdx</em>&#160;</td>
+          <td class="paramname"><em>inputChannel</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -155,11 +158,19 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Registers this consumer with the specified producer, letting it know that this consumer would like to receive notifications whenever its value changes </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputChannel</td><td>The zero based channel number that the producer's input changes should be reported on. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00037">37</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
 
 </div>
 </div>
-<a id="a38401efa16d8b237663de64b40bb4c7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38401efa16d8b237663de64b40bb4c7f">&#9670;&nbsp;</a></span>set_input()</h2>
+<a id="a7bf920e5ad5f171ec6e2aeda056ff01f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bf920e5ad5f171ec6e2aeda056ff01f">&#9670;&nbsp;</a></span>set_input()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,7 +190,7 @@ template&lt;typename T&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>idx</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>inputChannel</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -196,17 +207,19 @@ template&lt;typename T&gt; </div>
 <p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">newValue</td><td>the value of the input </td></tr>
-    <tr><td class="paramname">idx</td><td>The zero based index of the input to this consumer. </td></tr>
+    <tr><td class="paramname">inputChannel</td><td>The zero based index of the input channel the new value corresponds to. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_g_n_s_s_position.html#a016ab19465c7d8f2f80a4453fcb98d78">GNSSPosition</a>, <a class="el" href="class_passthrough.html#ad899c40db38bcfaba74f329b83f5b57e">Passthrough&lt; T &gt;</a>, <a class="el" href="class_moving_average.html#a51c30f6e8c2c89aa34d5f945a70a77a4">MovingAverage</a>, <a class="el" href="class_integrator.html#aad069a18f92e88debf8f6945f253bff4">Integrator</a>, <a class="el" href="class_time_string.html#a37982fa0ccf14edc30edc5b69d4f185b">TimeString</a>, <a class="el" href="class_difference.html#a98be7e61402950ab9c12fc25fb699342">Difference</a>, and <a class="el" href="class_linear.html#aacfd06c03c2b2497aae333a5ca86eb97">Linear</a>.</p>
+<p>Reimplemented in <a class="el" href="class_g_n_s_s_position.html#a0b1570b2bf0da3deb2f4d20a9bb9ea71">GNSSPosition</a>, <a class="el" href="class_passthrough.html#a401a7f308b76eac7ed7d90a618d997db">Passthrough&lt; T &gt;</a>, <a class="el" href="class_moving_average.html#ac953bfbae65b9acde7a2a770b029c5bd">MovingAverage</a>, <a class="el" href="class_integrator.html#a7fb38d2d19aa3e918dbee34b9096f7a6">Integrator</a>, <a class="el" href="class_time_string.html#a918b15a7599ec68ad8494ce77b08bde1">TimeString</a>, <a class="el" href="class_difference.html#abf5c7d23d414d2971ddeca8c6bf6b9a7">Difference</a>, and <a class="el" href="class_linear.html#aca76127ec02b9e354b0f891d73f24b37">Linear</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00027">27</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/Joel/Workspaces/platformio/SensESP/src/system/<a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a></li>
+<li>src/system/<a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

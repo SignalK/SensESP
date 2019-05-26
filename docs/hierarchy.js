@@ -1,8 +1,5 @@
 var hierarchy =
 [
-    [ "BooleanProducer", null, [
-      [ "DigitalInputValue", "class_digital_input_value.html", null ]
-    ] ],
     [ "Configurable", "class_configurable.html", [
       [ "Device", "class_device.html", [
         [ "DallasTemperatureSensors", "class_dallas_temperature_sensors.html", null ],
@@ -28,9 +25,11 @@ var hierarchy =
         [ "Transform< T >", "class_transform.html", [
           [ "OneToOneTransform< T >", "class_one_to_one_transform.html", [
             [ "Passthrough< T >", "class_passthrough.html", null ]
-          ] ]
+          ] ],
+          [ "TimeString", "class_time_string.html", null ]
         ] ],
         [ "Transform< float >", "class_transform.html", [
+          [ "Frequency", "class_frequency.html", null ],
           [ "OneToOneTransform< float >", "class_one_to_one_transform.html", [
             [ "Difference", "class_difference.html", null ],
             [ "Integrator", "class_integrator.html", null ],
@@ -46,30 +45,22 @@ var hierarchy =
       ] ],
       [ "WSClient", "class_w_s_client.html", null ]
     ] ],
+    [ "Enable", "class_enable.html", [
+      [ "Device", "class_device.html", null ],
+      [ "TransformBase", "class_transform_base.html", null ]
+    ] ],
     [ "ENUVector", "struct_e_n_u_vector.html", null ],
     [ "HTTPServer", "class_h_t_t_p_server.html", null ],
-    [ "IntegerConsumer", null, [
-      [ "Frequency", "class_frequency.html", null ]
-    ] ],
-    [ "IntegerProducer", null, [
-      [ "DigitalInputCounter", "class_digital_input_counter.html", null ],
-      [ "IntegerDevice", "class_integer_device.html", null ]
-    ] ],
     [ "LedBlinker", "class_led_blinker.html", null ],
     [ "NMEAData", "struct_n_m_e_a_data.html", null ],
     [ "NMEAParser", "class_n_m_e_a_parser.html", null ],
-    [ "NumericProducer", null, [
-      [ "NumericDevice", "class_numeric_device.html", null ]
-    ] ],
-    [ "NumericTransform", null, [
-      [ "Frequency", "class_frequency.html", null ]
-    ] ],
     [ "Observable", "class_observable.html", [
       [ "Device", "class_device.html", null ],
       [ "SignalKSource", "class_signal_k_source.html", [
         [ "TransformBase", "class_transform_base.html", null ]
       ] ],
       [ "ValueProducer< T >", "class_value_producer.html", [
+        [ "DigitalInputValue", "class_digital_input_value.html", null ],
         [ "ObservableValue< T >", "class_observable_value.html", null ],
         [ "Transform< T >", "class_transform.html", null ]
       ] ],
@@ -77,10 +68,13 @@ var hierarchy =
         [ "ObservableValue< ENUVector >", "class_observable_value.html", null ]
       ] ],
       [ "ValueProducer< float >", "class_value_producer.html", [
+        [ "NumericDevice", "class_numeric_device.html", null ],
         [ "ObservableValue< float >", "class_observable_value.html", null ],
         [ "Transform< float >", "class_transform.html", null ]
       ] ],
       [ "ValueProducer< int >", "class_value_producer.html", [
+        [ "DigitalInputCounter", "class_digital_input_counter.html", null ],
+        [ "IntegerDevice", "class_integer_device.html", null ],
         [ "ObservableValue< int >", "class_observable_value.html", null ]
       ] ],
       [ "ValueProducer< Position >", "class_value_producer.html", [
@@ -88,7 +82,8 @@ var hierarchy =
         [ "Transform< Position >", "class_transform.html", null ]
       ] ],
       [ "ValueProducer< String >", "class_value_producer.html", [
-        [ "ObservableValue< String >", "class_observable_value.html", null ]
+        [ "ObservableValue< String >", "class_observable_value.html", null ],
+        [ "StringDevice", "class_string_device.html", null ]
       ] ],
       [ "ValueProducer< time_t >", "class_value_producer.html", [
         [ "ObservableValue< time_t >", "class_observable_value.html", null ]
@@ -108,13 +103,8 @@ var hierarchy =
       [ "PSTISentenceParser", "class_p_s_t_i_sentence_parser.html", null ]
     ] ],
     [ "SKDelta", "class_s_k_delta.html", null ],
-    [ "StringProducer", null, [
-      [ "StringDevice", "class_string_device.html", null ]
-    ] ],
-    [ "StringTransform", null, [
-      [ "TimeString", "class_time_string.html", null ]
-    ] ],
     [ "ValueConsumer< T >", "class_value_consumer.html", [
+      [ "Frequency", "class_frequency.html", null ],
       [ "OneToOneTransform< T >", "class_one_to_one_transform.html", null ]
     ] ],
     [ "ValueConsumer< float >", "class_value_consumer.html", [
@@ -125,9 +115,5 @@ var hierarchy =
     ] ],
     [ "ValueConsumer< time_t >", "class_value_consumer.html", [
       [ "TimeString", "class_time_string.html", null ]
-    ] ],
-    [ "WantsEnable", "class_wants_enable.html", [
-      [ "Device", "class_device.html", null ],
-      [ "TransformBase", "class_transform_base.html", null ]
     ] ]
 ];

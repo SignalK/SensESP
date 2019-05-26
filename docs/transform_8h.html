@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SensESP: /Users/Joel/Workspaces/platformio/SensESP/src/transforms/transform.h File Reference</title>
+<title>SensESP: src/transforms/transform.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('transform_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">transform.h File Reference</div>  </div>
 </div><!--header-->
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('transform_8h.html','');});
 <code>#include &quot;<a class="el" href="configurable_8h_source.html">system/configurable.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="observable_8h_source.html">system/observable.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="valueproducer_8h_source.html">system/valueproducer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="wantsenable_8h_source.html">system/wantsenable.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="enable_8h_source.html">system/enable.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="signalksource_8h_source.html">system/signalksource.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sensesp_8h_source.html">sensesp.h</a>&quot;</code><br />
 </div>
@@ -115,135 +115,151 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_one_to_one_transform.html">OneToOneTransform&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:aab58ad227fcf71904f072e4a6032904c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#aab58ad227fcf71904f072e4a6032904c">BooleanTransform</a>&#160;&#160;&#160;<a class="el" href="class_transform.html">Transform</a>&lt;bool&gt;</td></tr>
-<tr class="separator:aab58ad227fcf71904f072e4a6032904c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7e0e4e95aa99b2820adb75dc7d04aa9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#af7e0e4e95aa99b2820adb75dc7d04aa9">NumericTransform</a>&#160;&#160;&#160;<a class="el" href="class_transform.html">Transform</a>&lt;float&gt;</td></tr>
-<tr class="separator:af7e0e4e95aa99b2820adb75dc7d04aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19aac4382ed825148e56c8353af9ab46"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a19aac4382ed825148e56c8353af9ab46">IntegerTransform</a>&#160;&#160;&#160;<a class="el" href="class_transform.html">Transform</a>&lt;int&gt;</td></tr>
-<tr class="separator:a19aac4382ed825148e56c8353af9ab46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a266b45daa2fba0550607b7f38dfd89f8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a266b45daa2fba0550607b7f38dfd89f8">StringTransform</a>&#160;&#160;&#160;<a class="el" href="class_transform.html">Transform</a>&lt;String&gt;</td></tr>
-<tr class="separator:a266b45daa2fba0550607b7f38dfd89f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2092388bc11acfa82799a8f1ce9a0f42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a2092388bc11acfa82799a8f1ce9a0f42">OneToOneNumericTransform</a>&#160;&#160;&#160;<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;float&gt;</td></tr>
-<tr class="separator:a2092388bc11acfa82799a8f1ce9a0f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73659e129103b151292e766c93b68777"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a73659e129103b151292e766c93b68777">OneToOneIntegerTransform</a>&#160;&#160;&#160;<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;int&gt;</td></tr>
-<tr class="separator:a73659e129103b151292e766c93b68777"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74a58e2d61bbc4141a282ab52fe0700c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a74a58e2d61bbc4141a282ab52fe0700c">OneToOneBooleanTransform</a>&#160;&#160;&#160;<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;bool&gt;</td></tr>
-<tr class="separator:a74a58e2d61bbc4141a282ab52fe0700c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a117aea87a81ad8272b52fa2a27e54ecc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a117aea87a81ad8272b52fa2a27e54ecc">OneToOneStringTransform</a>&#160;&#160;&#160;<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;String&gt;</td></tr>
-<tr class="separator:a117aea87a81ad8272b52fa2a27e54ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:acbd22cace30bc4704b42c76e0d1b5baf"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_transform.html">Transform</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#acbd22cace30bc4704b42c76e0d1b5baf">BooleanTransform</a></td></tr>
+<tr class="separator:acbd22cace30bc4704b42c76e0d1b5baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3be75a3cb354d5f1fe245410c4d92948"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_transform.html">Transform</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a3be75a3cb354d5f1fe245410c4d92948">NumericTransform</a></td></tr>
+<tr class="separator:a3be75a3cb354d5f1fe245410c4d92948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae89d78453e476b19db8b903f80c90c5a"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_transform.html">Transform</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#ae89d78453e476b19db8b903f80c90c5a">IntegerTransform</a></td></tr>
+<tr class="separator:ae89d78453e476b19db8b903f80c90c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b6f203fb2d7cf6bb03ef36075e68f19"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_transform.html">Transform</a>&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a9b6f203fb2d7cf6bb03ef36075e68f19">StringTransform</a></td></tr>
+<tr class="separator:a9b6f203fb2d7cf6bb03ef36075e68f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac66bdac7151bef44ac8bb469e350ef11"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#ac66bdac7151bef44ac8bb469e350ef11">OneToOneNumericTransform</a></td></tr>
+<tr class="separator:ac66bdac7151bef44ac8bb469e350ef11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71f2bcbe06c14614420278e46aa8af84"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a71f2bcbe06c14614420278e46aa8af84">OneToOneIntegerTransform</a></td></tr>
+<tr class="separator:a71f2bcbe06c14614420278e46aa8af84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a242c85c4b755812338f6bf5c78402c"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#a2a242c85c4b755812338f6bf5c78402c">OneToOneBooleanTransform</a></td></tr>
+<tr class="separator:a2a242c85c4b755812338f6bf5c78402c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7071f1260bd2030e51ef6aa54a032e7"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="transform_8h.html#aa7071f1260bd2030e51ef6aa54a032e7">OneToOneStringTransform</a></td></tr>
+<tr class="separator:aa7071f1260bd2030e51ef6aa54a032e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="aab58ad227fcf71904f072e4a6032904c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab58ad227fcf71904f072e4a6032904c">&#9670;&nbsp;</a></span>BooleanTransform</h2>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="acbd22cace30bc4704b42c76e0d1b5baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbd22cace30bc4704b42c76e0d1b5baf">&#9670;&nbsp;</a></span>BooleanTransform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BooleanTransform&#160;&#160;&#160;<a class="el" href="class_transform.html">Transform</a>&lt;bool&gt;</td>
+          <td class="memname">typedef <a class="el" href="class_transform.html">Transform</a>&lt;bool&gt; <a class="el" href="transform_8h.html#acbd22cace30bc4704b42c76e0d1b5baf">BooleanTransform</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00061">61</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+
 </div>
 </div>
-<a id="a19aac4382ed825148e56c8353af9ab46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19aac4382ed825148e56c8353af9ab46">&#9670;&nbsp;</a></span>IntegerTransform</h2>
+<a id="ae89d78453e476b19db8b903f80c90c5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae89d78453e476b19db8b903f80c90c5a">&#9670;&nbsp;</a></span>IntegerTransform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define IntegerTransform&#160;&#160;&#160;<a class="el" href="class_transform.html">Transform</a>&lt;int&gt;</td>
+          <td class="memname">typedef <a class="el" href="class_transform.html">Transform</a>&lt;int&gt; <a class="el" href="transform_8h.html#ae89d78453e476b19db8b903f80c90c5a">IntegerTransform</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00063">63</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+
 </div>
 </div>
-<a id="af7e0e4e95aa99b2820adb75dc7d04aa9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7e0e4e95aa99b2820adb75dc7d04aa9">&#9670;&nbsp;</a></span>NumericTransform</h2>
+<a id="a3be75a3cb354d5f1fe245410c4d92948"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3be75a3cb354d5f1fe245410c4d92948">&#9670;&nbsp;</a></span>NumericTransform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NumericTransform&#160;&#160;&#160;<a class="el" href="class_transform.html">Transform</a>&lt;float&gt;</td>
+          <td class="memname">typedef <a class="el" href="class_transform.html">Transform</a>&lt;float&gt; <a class="el" href="transform_8h.html#a3be75a3cb354d5f1fe245410c4d92948">NumericTransform</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00062">62</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+
 </div>
 </div>
-<a id="a74a58e2d61bbc4141a282ab52fe0700c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74a58e2d61bbc4141a282ab52fe0700c">&#9670;&nbsp;</a></span>OneToOneBooleanTransform</h2>
+<a id="a2a242c85c4b755812338f6bf5c78402c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a242c85c4b755812338f6bf5c78402c">&#9670;&nbsp;</a></span>OneToOneBooleanTransform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define OneToOneBooleanTransform&#160;&#160;&#160;<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;bool&gt;</td>
+          <td class="memname">typedef <a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;bool&gt; <a class="el" href="transform_8h.html#a2a242c85c4b755812338f6bf5c78402c">OneToOneBooleanTransform</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00083">83</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+
 </div>
 </div>
-<a id="a73659e129103b151292e766c93b68777"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73659e129103b151292e766c93b68777">&#9670;&nbsp;</a></span>OneToOneIntegerTransform</h2>
+<a id="a71f2bcbe06c14614420278e46aa8af84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71f2bcbe06c14614420278e46aa8af84">&#9670;&nbsp;</a></span>OneToOneIntegerTransform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define OneToOneIntegerTransform&#160;&#160;&#160;<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;int&gt;</td>
+          <td class="memname">typedef <a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;int&gt; <a class="el" href="transform_8h.html#a71f2bcbe06c14614420278e46aa8af84">OneToOneIntegerTransform</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00082">82</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+
 </div>
 </div>
-<a id="a2092388bc11acfa82799a8f1ce9a0f42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2092388bc11acfa82799a8f1ce9a0f42">&#9670;&nbsp;</a></span>OneToOneNumericTransform</h2>
+<a id="ac66bdac7151bef44ac8bb469e350ef11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac66bdac7151bef44ac8bb469e350ef11">&#9670;&nbsp;</a></span>OneToOneNumericTransform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define OneToOneNumericTransform&#160;&#160;&#160;<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;float&gt;</td>
+          <td class="memname">typedef <a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;float&gt; <a class="el" href="transform_8h.html#ac66bdac7151bef44ac8bb469e350ef11">OneToOneNumericTransform</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00081">81</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+
 </div>
 </div>
-<a id="a117aea87a81ad8272b52fa2a27e54ecc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a117aea87a81ad8272b52fa2a27e54ecc">&#9670;&nbsp;</a></span>OneToOneStringTransform</h2>
+<a id="aa7071f1260bd2030e51ef6aa54a032e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7071f1260bd2030e51ef6aa54a032e7">&#9670;&nbsp;</a></span>OneToOneStringTransform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define OneToOneStringTransform&#160;&#160;&#160;<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;String&gt;</td>
+          <td class="memname">typedef <a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt;String&gt; <a class="el" href="transform_8h.html#aa7071f1260bd2030e51ef6aa54a032e7">OneToOneStringTransform</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00084">84</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+
 </div>
 </div>
-<a id="a266b45daa2fba0550607b7f38dfd89f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a266b45daa2fba0550607b7f38dfd89f8">&#9670;&nbsp;</a></span>StringTransform</h2>
+<a id="a9b6f203fb2d7cf6bb03ef36075e68f19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b6f203fb2d7cf6bb03ef36075e68f19">&#9670;&nbsp;</a></span>StringTransform</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define StringTransform&#160;&#160;&#160;<a class="el" href="class_transform.html">Transform</a>&lt;String&gt;</td>
+          <td class="memname">typedef <a class="el" href="class_transform.html">Transform</a>&lt;String&gt; <a class="el" href="transform_8h.html#a9b6f203fb2d7cf6bb03ef36075e68f19">StringTransform</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00064">64</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
 
 </div>
 </div>
@@ -252,7 +268,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_de2e969868933b856f42db28d12e528b.html">SensESP</a></li><li class="navelem"><a class="el" href="dir_6da37a2e7f63af40030fb14c33b85242.html">src</a></li><li class="navelem"><a class="el" href="dir_d860e6b7b2a417293a71920401ae3646.html">transforms</a></li><li class="navelem"><a class="el" href="transform_8h.html">transform.h</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_859cad99e661c8c6c06da42378c04432.html">transforms</a></li><li class="navelem"><a class="el" href="transform_8h.html">transform.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>

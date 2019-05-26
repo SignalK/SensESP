@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -106,18 +106,20 @@ Inheritance diagram for SignalKSource:</div>
   <map id="SignalKSource_map" name="SignalKSource_map">
 <area href="class_observable.html" alt="Observable" shape="rect" coords="522,0,721,24"/>
 <area href="class_transform_base.html" alt="TransformBase" shape="rect" coords="522,112,721,136"/>
-<area href="class_transform.html" alt="Transform&lt; T &gt;" shape="rect" coords="0,168,199,192"/>
+<area href="class_transform.html" alt="Transform&lt; T &gt;" shape="rect" coords="104,168,303,192"/>
 <area href="class_transform.html" alt="Transform&lt; float &gt;" shape="rect" coords="522,168,721,192"/>
-<area href="class_transform.html" alt="Transform&lt; Position &gt;" shape="rect" coords="1045,168,1244,192"/>
+<area href="class_transform.html" alt="Transform&lt; Position &gt;" shape="rect" coords="1149,168,1348,192"/>
 <area href="class_one_to_one_transform.html" alt="OneToOneTransform&lt; T &gt;" shape="rect" coords="0,224,199,248"/>
-<area href="class_one_to_one_transform.html" alt="OneToOneTransform&lt; float &gt;" shape="rect" coords="522,224,721,248"/>
-<area href="class_one_to_one_transform.html" alt="OneToOneTransform&lt; Position &gt;" shape="rect" coords="1045,224,1244,248"/>
+<area href="class_time_string.html" alt="TimeString" shape="rect" coords="209,224,408,248"/>
+<area href="class_frequency.html" alt="Frequency" shape="rect" coords="418,224,617,248"/>
+<area href="class_one_to_one_transform.html" alt="OneToOneTransform&lt; float &gt;" shape="rect" coords="627,224,826,248"/>
+<area href="class_one_to_one_transform.html" alt="OneToOneTransform&lt; Position &gt;" shape="rect" coords="1149,224,1348,248"/>
 <area href="class_passthrough.html" alt="Passthrough&lt; T &gt;" shape="rect" coords="0,280,199,304"/>
-<area href="class_difference.html" alt="Difference" shape="rect" coords="209,280,408,304"/>
-<area href="class_integrator.html" alt="Integrator" shape="rect" coords="418,280,617,304"/>
-<area href="class_linear.html" alt="Linear" shape="rect" coords="627,280,826,304"/>
-<area href="class_moving_average.html" alt="MovingAverage" shape="rect" coords="836,280,1035,304"/>
-<area href="class_g_n_s_s_position.html" alt="GNSSPosition" shape="rect" coords="1045,280,1244,304"/>
+<area href="class_difference.html" alt="Difference" shape="rect" coords="313,280,512,304"/>
+<area href="class_integrator.html" alt="Integrator" shape="rect" coords="522,280,721,304"/>
+<area href="class_linear.html" alt="Linear" shape="rect" coords="731,280,930,304"/>
+<area href="class_moving_average.html" alt="MovingAverage" shape="rect" coords="940,280,1139,304"/>
+<area href="class_g_n_s_s_position.html" alt="GNSSPosition" shape="rect" coords="1149,280,1348,304"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -149,6 +151,8 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A SignalK source is one that produces SignalK output to be forwarded to the SignalK server (if the system is connected to one). SignalK is reported via the <a class="el" href="class_signal_k_source.html#a526b4a692616b8a81ad9669226ae369d">as_json()</a> method. </p>
+
+<p class="definition">Definition at line <a class="el" href="signalksource_8h_source.html#l00019">19</a> of file <a class="el" href="signalksource_8h_source.html">signalksource.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af2ba130c1d59658c144ac3841d967ac8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af2ba130c1d59658c144ac3841d967ac8">&#9670;&nbsp;</a></span>SignalKSource()</h2>
@@ -171,6 +175,8 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="signalksource_8cpp_source.html#l00005">5</a> of file <a class="el" href="signalksource_8cpp_source.html">signalksource.cpp</a>.</p>
 
 </div>
 </div>
@@ -199,7 +205,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns the data to be reported to the server as a SignalK json string. </p>
 
-<p>Reimplemented in <a class="el" href="class_g_n_s_s_position.html#a23492cbbddafda1d23a17968d69b8171">GNSSPosition</a>, <a class="el" href="class_passthrough.html#a87f840179756a79a9d19e53eb573164a">Passthrough&lt; T &gt;</a>, <a class="el" href="class_moving_average.html#a451bcd032399204854757c5574fbafe2">MovingAverage</a>, <a class="el" href="class_integrator.html#a321f6ad79d15dc77860fb739b7857d07">Integrator</a>, <a class="el" href="class_difference.html#a3bb50d1cea37ab67716371049d45d0ed">Difference</a>, and <a class="el" href="class_linear.html#ae411e74abd196b8f8c143a39306b1aa2">Linear</a>.</p>
+<p>Reimplemented in <a class="el" href="class_g_n_s_s_position.html#a23492cbbddafda1d23a17968d69b8171">GNSSPosition</a>, <a class="el" href="class_passthrough.html#a87f840179756a79a9d19e53eb573164a">Passthrough&lt; T &gt;</a>, <a class="el" href="class_moving_average.html#a451bcd032399204854757c5574fbafe2">MovingAverage</a>, <a class="el" href="class_frequency.html#a925e93827a1632fbe2d5b848d162ec94">Frequency</a>, <a class="el" href="class_integrator.html#a321f6ad79d15dc77860fb739b7857d07">Integrator</a>, <a class="el" href="class_time_string.html#a11b8e304450ec8763ccd955a91064b31">TimeString</a>, <a class="el" href="class_difference.html#a3bb50d1cea37ab67716371049d45d0ed">Difference</a>, and <a class="el" href="class_linear.html#ae411e74abd196b8f8c143a39306b1aa2">Linear</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="signalksource_8h_source.html#l00034">34</a> of file <a class="el" href="signalksource_8h_source.html">signalksource.h</a>.</p>
 
 </div>
 </div>
@@ -227,6 +235,8 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns the current SignalK path. An empty string is returned if this particular source is not configured or intended to return actual data. </p>
 
+<p class="definition">Definition at line <a class="el" href="signalksource_8h_source.html#l00042">42</a> of file <a class="el" href="signalksource_8h_source.html">signalksource.h</a>.</p>
+
 </div>
 </div>
 <a id="ab89067dab50ab4583f2bc9678be16650"></a>
@@ -251,6 +261,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalksource_8h_source.html#l00050">50</a> of file <a class="el" href="signalksource_8h_source.html">signalksource.h</a>.</p>
 
 </div>
 </div>
@@ -278,6 +290,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="signalksource_8h_source.html#l00046">46</a> of file <a class="el" href="signalksource_8h_source.html">signalksource.h</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -301,11 +315,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="signalksource_8h_source.html#l00055">55</a> of file <a class="el" href="signalksource_8h_source.html">signalksource.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/Joel/Workspaces/platformio/SensESP/src/system/<a class="el" href="signalksource_8h_source.html">signalksource.h</a></li>
-<li>/Users/Joel/Workspaces/platformio/SensESP/src/system/<a class="el" href="signalksource_8cpp.html">signalksource.cpp</a></li>
+<li>src/system/<a class="el" href="signalksource_8h_source.html">signalksource.h</a></li>
+<li>src/system/<a class="el" href="signalksource_8cpp_source.html">signalksource.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

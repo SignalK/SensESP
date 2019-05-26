@@ -8,6 +8,7 @@ var annotated_dup =
     [ "DigitalInput", "class_digital_input.html", "class_digital_input" ],
     [ "DigitalInputCounter", "class_digital_input_counter.html", "class_digital_input_counter" ],
     [ "DigitalInputValue", "class_digital_input_value.html", "class_digital_input_value" ],
+    [ "Enable", "class_enable.html", "class_enable" ],
     [ "ENUVector", "struct_e_n_u_vector.html", "struct_e_n_u_vector" ],
     [ "FreeMem", "class_free_mem.html", "class_free_mem" ],
     [ "Frequency", "class_frequency.html", "class_frequency" ],
@@ -48,6 +49,5 @@ var annotated_dup =
     [ "Uptime", "class_uptime.html", "class_uptime" ],
     [ "ValueConsumer", "class_value_consumer.html", "class_value_consumer" ],
     [ "ValueProducer", "class_value_producer.html", "class_value_producer" ],
-    [ "WantsEnable", "class_wants_enable.html", "class_wants_enable" ],
     [ "WSClient", "class_w_s_client.html", "class_w_s_client" ]
 ];
