@@ -2,7 +2,7 @@
 
 std::set<Device*> Device::devices;
 
-Device::Device(String id, String schema) : Configurable{id, schema}, WantsEnable(0) {
+Device::Device(String id, String schema) : Configurable{id, schema}, Enable(10) {
   devices.insert(this);
 }
 
