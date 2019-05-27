@@ -8,7 +8,7 @@ servers. At the moment it is very much a work in progress.
 SensESP is heavily inspired by [SigkSens](https://github.com/mxtommy/SigkSens)
 and prior work done by [@mxtommy](https://github.com/mxtommy).
 
-Class documentation for SensESP is [here](https://joelkoz.github.io/SensESP/annotated.html)
+Class documentation for SensESP is [here](https://mairas.github.io/SensESP/annotated.html)
 
 ## Getting Started
 
