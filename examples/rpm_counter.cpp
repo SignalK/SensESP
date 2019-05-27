@@ -52,7 +52,7 @@ ReactESP app([] () {
 
 
 // 3. Connect the producer directly to the consumer
-new DigitalInputCounter(D5, INPUT_PULLUP, RISING, 500)
+(new DigitalInputCounter(D5, INPUT_PULLUP, RISING, 500))
     -> connectTo(new Frequency("propulsion.left.revolutions", 1./97., "/sensors/engine_rpm"));
 
 
