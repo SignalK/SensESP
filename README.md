@@ -36,14 +36,6 @@ lib_deps =
     SensESP
 ```
 
-The above definition will work only once the library
-registration is completed. Until then, use the following:
-
-```
-lib_deps =
-    https://github.com/mairas/SensESP.git
-```
-
 Then, open `src/main.cpp`. The default template is for Arduino IDE and the SensESP main file will look a bit different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left  toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
 
 Assuming the project uploading was successful, you will have a sensor running the sample code. To configure it, connect your computer or phone wifi to the "Unconfigured Sensor" network. A captive portal should pop up. Enter your wifi credentials to allow the device to access the network. Also enter a suitable name, for example `sensesp` for the device.
