@@ -1,6 +1,9 @@
 #ifndef _app_H_
 #define _app_H_
 
+// Required for RemoteDebug
+#define USE_LIB_WEBSOCKET true
+
 #include "devices/device.h"
 #include "net/http.h"
 #include "net/networking.h"
@@ -20,7 +23,7 @@ class SensESPApp {
   String get_hostname();
 
 
-  template<typename T>  
+  template<typename T>
   void connect(ValueProducer<T>* pProducer, ValueConsumer<T>* pConsumer, uint8_t inputChannel = 0) {
       pProducer->connectTo(pConsumer, inputChannel);
   }

@@ -16,7 +16,51 @@
       "maintainer": true
     }
   ],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "name": "ReactESP"
+    },
+    {
+      "name": "ESP8266WebServer"
+    },
+    {
+      "name": "DNSServer"
+    },
+    {
+      "name": "ESPAsyncTCP"
+    },
+    {
+      "name": "ESP Async WebServer"
+    },
+    {
+      "name": "ESP8266WiFi"
+    },
+    {
+      "name": "ESP8266mDNS"
+    },
+    {
+      "name": "ESPAsyncWiFiManager"
+    },
+    {
+      "name": "ArduinoJson",
+      "version": "^5.0.0"
+    },
+    {
+      "name": "WebSockets"
+    },
+    {
+      "name": "OneWire"
+    },
+    {
+      "name": "DallasTemperature"
+    },
+    {
+      "name": "ESP8266TrueRandom"
+    },
+    {
+      "name": "RemoteDebug",
+      "version": "https://github.com/JoaoLopesF/RemoteDebug.git#0b5a9c1a49fd2ade0e3cadc3a3707781e819359a" }
+  ],
   "version": "0.1.0",
   "frameworks": "arduino",
   "platforms": "*"
