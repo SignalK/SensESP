@@ -116,7 +116,7 @@ void SensESPApp::enable() {
     if (sigkSource->get_sk_path() != "") {
       debugI("Connecting SignalK source %s", sigkSource->get_sk_path().c_str());
       sigkSource->attach([sigkSource, this](){
-        this->sk_delta->append(sigkSource->as_json());
+        this->sk_delta->append(sigkSource->as_signalK());
       });
     }
   }

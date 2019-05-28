@@ -22,7 +22,7 @@ class Passthrough : public OneToOneTransform<T> {
   }
 
 
-  String as_json() override final {
+  String as_signalK() override final {
     DynamicJsonBuffer jsonBuffer;
     String json;
     JsonObject& root = jsonBuffer.createObject();
