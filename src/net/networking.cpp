@@ -17,8 +17,8 @@ void save_config_callback() {
   should_save_config = true;
 }
 
-Networking::Networking(String id, String schema)
-    : Configurable{id, schema} {
+Networking::Networking(String config_path)
+    : Configurable{config_path} {
   hostname = new ObservableValue<String>(String("unknown"));
   load_configuration();
   server = new AsyncWebServer(80);

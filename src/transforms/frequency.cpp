@@ -2,9 +2,9 @@
 
 // Frequency
 
-Frequency::Frequency(String sk_path, float k, String id, String schema) :
+Frequency::Frequency(String sk_path, float k, String config_path) :
     IntegerConsumer(),
-    NumericTransform{sk_path, id, schema}, k{k} {
+    NumericTransform{sk_path, config_path}, k{k} {
   //load_configuration();
 }
 

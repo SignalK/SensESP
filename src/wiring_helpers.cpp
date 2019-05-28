@@ -19,25 +19,25 @@
 void setup_analog_input(
     SensESPApp* seapp,
     String sk_path, float k, float c,
-    String id, String schema) {
+    String config_path) {
   seapp->connect_1to1<AnalogInput, Linear>(
     new AnalogInput(),
     new Linear(
       sk_path, k, c,
-      id, schema));
+      config_path));
 }
 
 void setup_digital_input(
     SensESPApp* seapp,
     int digital_pin,
     String sk_path, float k, float c,
-    String id, String schema) {
+    String config_path) {
   // expose a slowly changing (button-type) digital input
   seapp->connect_1to1<DigitalInputValue, Linear>(
     new DigitalInputValue(digital_pin, INPUT_PULLUP, RISING),
     new Linear(
       sk_path, k, c,
-      id, schema));
+      config_path));
 }
 
 void setup_fuel_flow_meter(
@@ -182,12 +182,12 @@ void setup_onewire_temperature(
     SensESPApp* seapp,
     DallasTemperatureSensors* dts,
     String sk_path,
-    String id,
+    String config_path,
     String schema
 ) {
   seapp->connect_1to1<OneWireTemperature, Passthrough<float>>(
     new OneWireTemperature(dts),
-    new Passthrough<float>(sk_path, id, schema));
+    new Passthrough<float>(sk_path, config_path));
 }
 
 void setup_rpm_meter(SensESPApp* seapp, int input_pin) {

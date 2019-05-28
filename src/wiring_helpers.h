@@ -7,13 +7,13 @@
 void setup_analog_input(
     SensESPApp* seapp,
     String sk_path, float k=1, float c=0,
-    String id="", String schema="");
+    String config_path="");
 
 void setup_digital_input(
     SensESPApp* seapp,
     int digital_pin,
     String sk_path, float k=1, float c=0,
-    String id="", String schema="");
+    String config_path="");
 
 void setup_fuel_flow_meter(
   SensESPApp* seapp,
@@ -27,8 +27,7 @@ void setup_onewire_temperature(
   SensESPApp* seapp,
   DallasTemperatureSensors* dts,
   String sk_path,
-  String id,
-  String schema
+  String config_path
 );
 
 void setup_rpm_meter(SensESPApp* seapp, int input_pin);

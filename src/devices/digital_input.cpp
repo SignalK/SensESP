@@ -6,15 +6,15 @@
 
 DigitalInput::DigitalInput(
     uint8_t pin, int pin_mode, int interrupt_type,
-    String id, String schema)
-    : Device{id, schema}, pin{pin}, interrupt_type{interrupt_type} {
+    String config_path)
+    : Device(config_path), pin{pin}, interrupt_type{interrupt_type} {
   pinMode(pin, pin_mode);
 }
 
 DigitalInputValue::DigitalInputValue(
     uint8_t pin, int pin_mode, int interrupt_type,
-    String id, String schema) :
-      DigitalInput{pin, pin_mode, interrupt_type, id, schema},
+    String config_path) :
+      DigitalInput{pin, pin_mode, interrupt_type, config_path},
       BooleanProducer() {}
 
 void DigitalInputValue::enable() {
@@ -38,8 +38,8 @@ void DigitalInputValue::enable() {
 DigitalInputCounter::DigitalInputCounter(
     uint8_t pin, int pin_mode, int interrupt_type,
     uint read_delay,
-    String id, String schema) :
-      DigitalInput{pin, pin_mode, interrupt_type, id, schema},
+    String config_path) :
+      DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntegerProducer(),
       read_delay{read_delay} {}
 

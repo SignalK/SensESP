@@ -29,7 +29,7 @@ class TransformBase : public SignalKSource,
                       public Configurable, 
                       public Enable {
  public:
-    TransformBase(String sk_path, String id="", String schema="");
+    TransformBase(String sk_path, String config_path="");
 
   
   // Primary purpose of this was to supply SignalK sources
@@ -52,8 +52,8 @@ class TransformBase : public SignalKSource,
 template <typename T>
 class Transform : public TransformBase, public ValueProducer<T> {
     public:
-      Transform(String sk_path, String id="", String schema="") :
-         TransformBase(sk_path, id, schema), ValueProducer<T>() {
+      Transform(String sk_path, String config_path="") :
+         TransformBase(sk_path, config_path), ValueProducer<T>() {
       }
 };
 
@@ -72,9 +72,9 @@ template <typename T>
 class OneToOneTransform : public ValueConsumer<T>, public Transform<T> {
 
   public: 
-     OneToOneTransform(String sk_path, String id="", String schema="") :
+     OneToOneTransform(String sk_path, String config_path="") :
       ValueConsumer<T>(),
-      Transform<T>(sk_path, id, schema) {
+      Transform<T>(sk_path, config_path) {
   }
 };
 
