@@ -1,6 +1,6 @@
 var class_w_s_client =
 [
-    [ "WSClient", "class_w_s_client.html#a62b8b27f958e5f0e9ba161c1ce04870c", null ],
+    [ "WSClient", "class_w_s_client.html#a46394a4855cdb0d9587fde318574b6e4", null ],
     [ "connect", "class_w_s_client.html#a1612670a5dccbc8a39518ae972fbae90", null ],
     [ "enable", "class_w_s_client.html#a1313d063fd61739f7e3ca9b2c126b048", null ],
     [ "get_configuration", "class_w_s_client.html#a2a41e313d8d3be52cd7bb53e6bbf3117", null ],

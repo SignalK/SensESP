@@ -53,8 +53,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "analog__input_8cpp.html",
-"difference_8h.html",
-"wiring__helpers_8h.html#a013f0fccc349c462c3a1d1a692e0cc23"
+"class_voltage_divider_r2.html#a1d13a6e6ddac3468c3722dc884a64ffd",
+"struct_position.html#ac6606384ff43b39b8614dd3b590d6b36"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

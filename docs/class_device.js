@@ -1,4 +1,4 @@
 var class_device =
 [
-    [ "Device", "class_device.html#a9dc53ebd0934bf98018963f90906dd79", null ]
+    [ "Device", "class_device.html#a170bb69c9bf69109815c18a70a77a875", null ]
 ];

@@ -1,7 +1,9 @@
 var searchData=
 [
   ['check_5fconnection',['check_connection',['../class_networking.html#ae4b12924970227730df3377144301a7c',1,'Networking']]],
-  ['configurable',['Configurable',['../class_configurable.html',1,'Configurable'],['../class_configurable.html#a5fbc69e52b909b0a2c6e3244025ccb16',1,'Configurable::Configurable()']]],
+  ['clearsamples',['clearSamples',['../class_interpolate.html#ad8ce06fa260129a286e01650c5b47ea9',1,'Interpolate']]],
+  ['config_5fpath',['config_path',['../class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9',1,'Configurable']]],
+  ['configurable',['Configurable',['../class_configurable.html',1,'Configurable'],['../class_configurable.html#a8972a439fb9b734ff68d27c699640f78',1,'Configurable::Configurable()']]],
   ['configurable_2ecpp',['configurable.cpp',['../configurable_8cpp.html',1,'']]],
   ['configurable_2eh',['configurable.h',['../configurable_8h.html',1,'']]],
   ['configurables',['configurables',['../configurable_8cpp.html#a19ac563e52fea3af6b643155f9d258b6',1,'configurables():&#160;configurable.cpp'],['../configurable_8h.html#a19ac563e52fea3af6b643155f9d258b6',1,'configurables():&#160;configurable.cpp']]],
