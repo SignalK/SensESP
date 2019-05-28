@@ -10,7 +10,7 @@
  * between.  It is used primarily for non-linear analog gauges such as temperature gauges using
  * Thermocouples 
  */
-class Interpolate : public OneToOneTransform<float> {
+class Interpolate : public SymmetricTransform<float> {
 
  public:
     class Sample {

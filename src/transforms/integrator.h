@@ -5,7 +5,7 @@
 #include <system/valueconsumer.h>
 
 // y = k * sum(x_t)
-class Integrator : public OneToOneTransform<float> {
+class Integrator : public SymmetricTransform<float> {
  public:
   Integrator(String sk_path, float k=1, float value=0, String config_path="");
   virtual void enable() override final;

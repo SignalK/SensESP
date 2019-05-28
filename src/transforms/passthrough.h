@@ -6,12 +6,12 @@
 
 // Passthrough is a "null" transform, just passing the value to output
 template <typename T>
-class Passthrough : public OneToOneTransform<T> {
+class Passthrough : public SymmetricTransform<T> {
  public:
   Passthrough() : Passthrough("") {}
 
   Passthrough(String sk_path, String config_path="")
-    : OneToOneTransform<T>{sk_path, config_path} {
+    : SymmetricTransform<T>{sk_path, config_path} {
 
   }
 

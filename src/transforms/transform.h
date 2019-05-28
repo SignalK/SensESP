@@ -65,22 +65,22 @@ typedef Transform<String> StringTransform;
 
 
 /**
- * A OneToOneTransform is a common type of transform that consumes, transforms,
+ * A SymmetricTransform is a common type of transform that consumes, transforms,
  * then outputs values of the same data type.
  */
 template <typename T>
-class OneToOneTransform : public ValueConsumer<T>, public Transform<T> {
+class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
 
   public: 
-     OneToOneTransform(String sk_path, String config_path="") :
+     SymmetricTransform(String sk_path, String config_path="") :
       ValueConsumer<T>(),
       Transform<T>(sk_path, config_path) {
   }
 };
 
-typedef OneToOneTransform<float> OneToOneNumericTransform;
-typedef OneToOneTransform<int> OneToOneIntegerTransform;
-typedef OneToOneTransform<bool> OneToOneBooleanTransform;
-typedef OneToOneTransform<String> OneToOneStringTransform;
+typedef SymmetricTransform<float> SymmetricNumericTransform;
+typedef SymmetricTransform<int> SymmetricIntegerTransform;
+typedef SymmetricTransform<bool> SymmetricBooleanTransform;
+typedef SymmetricTransform<String> SymmetricStringTransform;
 
 #endif

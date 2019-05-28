@@ -6,7 +6,7 @@
 // Integrator
 
 Integrator::Integrator(String path, float k, float value, String config_path) :
-    OneToOneTransform<float>{ path, config_path },
+    SymmetricTransform<float>{ path, config_path },
       k{ k } {
   output = value;
   load_configuration();

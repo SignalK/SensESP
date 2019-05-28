@@ -6,7 +6,7 @@
 #include "transform.h"
 
 // y = k * 1/n * \sum_k=1^n(x_k)
-class MovingAverage : public OneToOneTransform<float> {
+class MovingAverage : public SymmetricTransform<float> {
 
  public:
   MovingAverage(String sk_path, int n, float k=1., String config_path="");
