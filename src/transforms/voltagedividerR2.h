@@ -17,7 +17,7 @@
 class VoltageDividerR2 : public OneToOneTransform<float> {
 
     public:
-        VoltageDividerR2(float R1, float Vin = 3.3, String sk_path="", String id="", String schema="");
+        VoltageDividerR2(float R1, float Vin = 3.3, String sk_path="", String config_path="");
 
         virtual void set_input(float Vout, uint8_t ignored = 0) override;
 
