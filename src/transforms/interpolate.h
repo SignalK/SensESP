@@ -26,7 +26,7 @@ class Interpolate : public OneToOneTransform<float> {
     };
 
  public:
-   Interpolate(String sk_path, std::set<Sample>* defaults = NULL, String id="", String schema="");
+   Interpolate(String sk_path, std::set<Sample>* defaults = NULL, String config_path="");
 
    // Set and retrieve the transformed value
    void set_input(float input, uint8_t inputChannel = 0) override final;

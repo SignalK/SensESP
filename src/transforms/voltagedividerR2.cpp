@@ -1,7 +1,7 @@
 #include "voltagedividerR2.h"
 
-VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String sk_path, String id, String schema) :
-   OneToOneTransform<float>(sk_path, id, schema), R1{R1}, Vin{Vin} {
+VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String sk_path, String config_path) :
+   OneToOneTransform<float>(sk_path, config_path ), R1{R1}, Vin{Vin} {
 }
 
 void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {
