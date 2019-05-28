@@ -24,7 +24,7 @@ class GNSSPosition : public OneToOneTransform<Position> {
      notify();
   }
 
-  virtual String as_json() override final;
+  virtual String as_signalK() override final;
 
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
 

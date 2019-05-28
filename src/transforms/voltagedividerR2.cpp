@@ -9,7 +9,7 @@ void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {
     notify();
 }
 
-String VoltageDividerR2::as_json() {
+String VoltageDividerR2::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();

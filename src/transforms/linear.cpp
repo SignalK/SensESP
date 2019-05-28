@@ -15,7 +15,7 @@ void Linear::set_input(float input, uint8_t inputChannel) {
   notify();
 }
 
-String Linear::as_json() {
+String Linear::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();

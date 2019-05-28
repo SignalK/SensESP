@@ -20,7 +20,7 @@ void Frequency::set_input(int input, uint8_t inputChannel) {
   notify();
 }
 
-String Frequency::as_json() {
+String Frequency::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();

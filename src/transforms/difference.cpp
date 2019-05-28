@@ -19,7 +19,7 @@ void Difference::set_input(float input, uint8_t inputChannel) {
   }
 }
 
-String Difference::as_json() {
+String Difference::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();

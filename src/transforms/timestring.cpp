@@ -14,7 +14,7 @@ void TimeString::set_input(time_t input, uint8_t inputChannel) {
   notify();
 }
 
-String TimeString::as_json() {
+String TimeString::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();
