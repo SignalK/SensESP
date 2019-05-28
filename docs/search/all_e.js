@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['r1',['R1',['../class_voltage_divider_r2.html#a927b6c4d26bc24dfd326f63a0a127f66',1,'VoltageDividerR2']]],
   ['read',['read',['../class_n_m_e_a_parser.html#a0f7e6a8f7ee6d7f2ab69a0b05341861b',1,'NMEAParser']]],
   ['read_5fjson',['read_json',['../spiffs__storage_8h.html#aeb6c893649f188e378de0c76055b1f01',1,'spiffs_storage.h']]],
   ['read_5fstring',['read_string',['../spiffs__storage_8cpp.html#a7429780969e66149e25ea6088bf65b7a',1,'read_string(const String filename):&#160;spiffs_storage.cpp'],['../spiffs__storage_8h.html#a7429780969e66149e25ea6088bf65b7a',1,'read_string(const String filename):&#160;spiffs_storage.cpp']]],

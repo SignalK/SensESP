@@ -24,6 +24,7 @@ var hierarchy =
       [ "TransformBase", "class_transform_base.html", [
         [ "Transform< T >", "class_transform.html", [
           [ "OneToOneTransform< T >", "class_one_to_one_transform.html", [
+            [ "Debounce", "class_debounce.html", null ],
             [ "Passthrough< T >", "class_passthrough.html", null ]
           ] ],
           [ "TimeString", "class_time_string.html", null ]
@@ -33,8 +34,14 @@ var hierarchy =
           [ "OneToOneTransform< float >", "class_one_to_one_transform.html", [
             [ "Difference", "class_difference.html", null ],
             [ "Integrator", "class_integrator.html", null ],
-            [ "Linear", "class_linear.html", null ],
-            [ "MovingAverage", "class_moving_average.html", null ]
+            [ "Interpolate", "class_interpolate.html", [
+              [ "TemperatureInterpreter", "class_temperature_interpreter.html", null ]
+            ] ],
+            [ "Linear", "class_linear.html", [
+              [ "AnalogVoltage", "class_analog_voltage.html", null ]
+            ] ],
+            [ "MovingAverage", "class_moving_average.html", null ],
+            [ "VoltageDividerR2", "class_voltage_divider_r2.html", null ]
           ] ]
         ] ],
         [ "Transform< Position >", "class_transform.html", [
@@ -93,6 +100,7 @@ var hierarchy =
       ] ]
     ] ],
     [ "Position", "struct_position.html", null ],
+    [ "Interpolate::Sample", "class_interpolate_1_1_sample.html", null ],
     [ "SensESPApp", "class_sens_e_s_p_app.html", null ],
     [ "SentenceParser", "class_sentence_parser.html", [
       [ "GPGGASentenceParser", "class_g_p_g_g_a_sentence_parser.html", null ],

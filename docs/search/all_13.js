@@ -9,5 +9,5 @@ var searchData=
   ['ws_5fclient',['ws_client',['../ws__client_8cpp.html#a4d8d7cfce2bd21646b059e9aa4d0349b',1,'ws_client.cpp']]],
   ['ws_5fclient_2ecpp',['ws_client.cpp',['../ws__client_8cpp.html',1,'']]],
   ['ws_5fclient_2eh',['ws_client.h',['../ws__client_8h.html',1,'']]],
-  ['wsclient',['WSClient',['../class_w_s_client.html',1,'WSClient'],['../class_w_s_client.html#a62b8b27f958e5f0e9ba161c1ce04870c',1,'WSClient::WSClient()']]]
+  ['wsclient',['WSClient',['../class_w_s_client.html',1,'WSClient'],['../class_w_s_client.html#a46394a4855cdb0d9587fde318574b6e4',1,'WSClient::WSClient()']]]
 ];

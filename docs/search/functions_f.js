@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['timestring',['TimeString',['../class_time_string.html#a7d351331d6ccebc074c3be2a9a526606',1,'TimeString']]],
-  ['transform',['Transform',['../class_transform.html#a8bf0c2460ed128cb57caa14f1d47a5b6',1,'Transform']]],
-  ['transformbase',['TransformBase',['../class_transform_base.html#a6216afd0dcb7d71b91b11b444a97f5f0',1,'TransformBase']]]
+  ['temperatureinterpreter',['TemperatureInterpreter',['../class_temperature_interpreter.html#a261da73de9ecca813741fc0f69a99053',1,'TemperatureInterpreter']]],
+  ['timestring',['TimeString',['../class_time_string.html#a9f4690ed5017c87671cff921855ab473',1,'TimeString']]],
+  ['transform',['Transform',['../class_transform.html#a44b7bcef8cc3b89fd6bbdb6a2bd98593',1,'Transform']]],
+  ['transformbase',['TransformBase',['../class_transform_base.html#ac5499a469190bd7d6efcc5bbec4f49d7',1,'TransformBase']]]
 ];
