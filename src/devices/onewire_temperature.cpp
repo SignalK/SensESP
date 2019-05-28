@@ -32,8 +32,8 @@ bool string_to_owda(OWDevAddr* addr, const char* str) {
 }
 
 DallasTemperatureSensors::DallasTemperatureSensors(
-    int pin, String id, String schema)
-    : Device{id, schema} {
+    int pin, String config_path)
+    : Device(config_path) {
   onewire = new OneWire(pin);
   sensors = new DallasTemperature(onewire);
   sensors->begin();
@@ -90,8 +90,8 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
 }
 
 OneWireTemperature::OneWireTemperature(
-    DallasTemperatureSensors* dts, String id, String schema)
-    : NumericDevice{id, schema}, dts{dts} {
+    DallasTemperatureSensors* dts, String config_path)
+    : NumericDevice(config_path), dts{dts} {
   load_configuration();
   if (address==null_ow_addr) {
     // previously unconfigured device

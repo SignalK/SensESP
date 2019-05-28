@@ -35,9 +35,9 @@ void webSocketClientEvent(WStype_t type, uint8_t * payload, size_t length) {
    }
 }
 
-WSClient::WSClient(String id, String schema, SKDelta* sk_delta,
+WSClient::WSClient(String config_path, SKDelta* sk_delta,
                    std::function<void(bool)> connected_cb,
-                   void_cb_func delta_cb) : Configurable{id, schema} {
+                   void_cb_func delta_cb) : Configurable{config_path} {
   this->sk_delta = sk_delta;
   this->connected_cb = connected_cb;
   this->delta_cb = delta_cb;

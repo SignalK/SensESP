@@ -6,7 +6,7 @@
 class DigitalInput : public Device {
  public:
   DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
-               String id="", String schema="");
+               String config_path="");
 
  protected:
   uint8_t pin;
@@ -19,7 +19,7 @@ class DigitalInput : public Device {
 class DigitalInputValue : public DigitalInput, public BooleanProducer {
  public:
   DigitalInputValue(uint8_t pin, int pin_mode, int interrupt_type,
-                    String id="", String schema="");
+                    String config_path="");
 
   virtual void enable() override final;
 
@@ -32,7 +32,7 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  public:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       uint read_delay,
-                      String id="", String schema="");
+                      String config_path="");
 
   void enable() override final;
 

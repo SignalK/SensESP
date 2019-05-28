@@ -30,7 +30,7 @@ SensESPApp::SensESPApp() {
   }
 
   // create the networking object
-  networking = new Networking("/system/networking", "");
+  networking = new Networking("/system/networking");
   ObservableValue<String>* hostname = networking->get_hostname();
 
   // setup standard devices and their transforms
@@ -64,7 +64,7 @@ SensESPApp::SensESPApp() {
     this->led_blinker.flip();
   };
   this->ws_client = new WSClient(
-    "/system/sk", "",
+    "/system/sk", 
     sk_delta, ws_connected_cb, ws_delta_cb);
 }
 
