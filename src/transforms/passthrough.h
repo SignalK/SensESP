@@ -10,8 +10,8 @@ class Passthrough : public OneToOneTransform<T> {
  public:
   Passthrough() : Passthrough("") {}
 
-  Passthrough(String sk_path, String id="", String schema="")
-    : OneToOneTransform<T>{sk_path, id, schema} {
+  Passthrough(String sk_path, String config_path="")
+    : OneToOneTransform<T>{sk_path, config_path} {
 
   }
 

@@ -5,8 +5,8 @@
 
 // Integrator
 
-Integrator::Integrator(String path, float k, float value, String id, String schema) :
-    OneToOneTransform<float>{ path, id, schema },
+Integrator::Integrator(String path, float k, float value, String config_path) :
+    OneToOneTransform<float>{ path, config_path },
       k{ k } {
   output = value;
   load_configuration();

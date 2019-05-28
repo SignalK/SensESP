@@ -15,8 +15,8 @@
 
 class GNSSPosition : public OneToOneTransform<Position> {
  public:
-  GNSSPosition(String sk_path, String id="", String schema="") :
-    OneToOneTransform<Position>{sk_path, id, schema } {
+  GNSSPosition(String sk_path, String config_path="") :
+    OneToOneTransform<Position>{sk_path, config_path} {
   }
 
   virtual void set_input(Position newValue, uint8_t inputChannel = 0) {

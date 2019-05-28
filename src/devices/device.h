@@ -14,7 +14,7 @@
 
 class Device : virtual public Observable, public Configurable, public Enable {
   public:
-    Device(String id="", String schema="");
+    Device(String config_path="");
 
   // Was used by sensesp_app::enable(). Now handled by Enable.  Deprecate?
   static const std::set<Device*>& get_devices() {
@@ -30,7 +30,7 @@ class Device : virtual public Observable, public Configurable, public Enable {
 class NumericDevice : public Device, public NumericProducer {
 
     public:
-        NumericDevice(String id="", String schema="");
+        NumericDevice(String config_path="");
 
 };
 
@@ -38,7 +38,7 @@ class NumericDevice : public Device, public NumericProducer {
 class IntegerDevice : public Device, public IntegerProducer {
 
     public:
-        IntegerDevice(String id="", String schema="");
+        IntegerDevice(String config_path="");
 
 };
 
@@ -46,7 +46,7 @@ class IntegerDevice : public Device, public IntegerProducer {
 class StringDevice : public Device, public StringProducer {
 
     public:
-        StringDevice(String id="", String schema="");
+        StringDevice(String config_path="");
 
 };
 

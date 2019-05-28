@@ -9,18 +9,17 @@
 // reference around would unnecessarily reduce readability of the code.
 std::map<String, Configurable*> configurables;
 
-Configurable::Configurable(String id="", String schema="")
-    : id{id}, schema{schema} {
-  if (id != "") {
-    auto it = configurables.find(id);
+Configurable::Configurable(String config_path="")
+    : config_path{config_path} {
+  if (config_path != "") {
+    auto it = configurables.find(config_path);
     if (it != configurables.end()) {
-      debugW("WARNING: Overriding id %s", id.c_str());
+      debugW("WARNING: Overriding id %s", config_path.c_str());
     }
-    configurables[id] = this;
+    configurables[config_path] = this;
   }
 }
 
-// Returns the current configuration
 JsonObject& Configurable::get_configuration(JsonBuffer& buf) {
   debugW("WARNING: get_configuration not defined");
   return buf.createObject();
@@ -32,48 +31,43 @@ bool Configurable::set_configuration(const JsonObject& config) {
   return false;
 }
 
-// Returns the configuration schema.
-// The schema is a Json object defining and describing the configuration
-// keys and possibly allowed value types. The schema can be used
-// in client code to render a configuration UI with helpful
-// descriptions.
-// Schema format TBD.
+
 String Configurable::get_config_schema() {
   return "{}";
 }
 
 void Configurable::load_configuration() {
-  if (id=="" || !SPIFFS.exists(id)) {
+  if (config_path=="" || !SPIFFS.exists(config_path)) {
     // nothing to load from
     debugI(
-      "Not loading configuration, id empty or file does not exist: %s",
-      id.c_str());
+      "Not loading configuration, config_path empty or file does not exist: %s",
+      config_path.c_str());
     return;
   }
 
-  File f = SPIFFS.open(id, "r");
+  File f = SPIFFS.open(config_path, "r");
   DynamicJsonBuffer jsonBuffer;
   JsonObject& obj = jsonBuffer.parse(f);
   if (!obj.success()) {
     debugW(
       "WARNING: Could not parse configuration for %s",
-      id.c_str());
+      config_path.c_str());
   }
   if (!set_configuration(obj)) {
     debugW(
       "WARNING: Could not set configuration for %s",
-      id.c_str());
+      config_path.c_str());
   }
   f.close();
 }
 
 void Configurable::save_configuration() {
-  if (id=="") {
-    debugI("WARNING: Could not save configuration (id not set)");
+  if (config_path=="") {
+    debugI("WARNING: Could not save configuration (config_path not set)");
   }
   DynamicJsonBuffer jsonBuffer;
   JsonObject& obj = get_configuration(jsonBuffer);
-  File f = SPIFFS.open(id, "w");
+  File f = SPIFFS.open(config_path, "w");
   obj.printTo(f);
   f.close();
 }

@@ -2,8 +2,8 @@
 
 // MovingAverage
 
-MovingAverage::MovingAverage(String path, int n, float k, String id, String schema) :
-    OneToOneTransform<float>{ path, id, schema },
+MovingAverage::MovingAverage(String path, int n, float k, String config_path) :
+    OneToOneTransform<float>{ path, config_path },
       n{ n },
       k{ k } {
   buf.resize(n, 0);

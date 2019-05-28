@@ -8,7 +8,7 @@
 
 class TimeString : public ValueConsumer<time_t>, public StringTransform {
  public:
-  TimeString(String sk_path, String id="", String schema="");
+  TimeString(String sk_path, String config_path="");
   virtual void set_input(time_t input, uint8_t inputChannel = 0) override final;
   String as_json() override final;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
