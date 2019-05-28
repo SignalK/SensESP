@@ -6,8 +6,8 @@
 
 /**
  * Interpolate uses a collection of input/output samples that approximate a non-linear curve.
- * The output is the linear interpolation between the two nearest sample points.
- * It is used primarily for non-linear analog gauges such as temperature gauges using
+ * The output is the linear interpolation between the two sample points the input falls
+ * between.  It is used primarily for non-linear analog gauges such as temperature gauges using
  * Thermocouples 
  */
 class Interpolate : public OneToOneTransform<float> {
