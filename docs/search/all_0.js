@@ -1,12 +1,15 @@
 var searchData=
 [
   ['add_5fsentence_5fparser',['add_sentence_parser',['../class_n_m_e_a_parser.html#a438b3fd8f8587b55a3785656651f73a6',1,'NMEAParser']]],
+  ['addsample',['addSample',['../class_interpolate.html#a403cf307fbec7e985b8b736f8d25cd43',1,'Interpolate']]],
   ['altitude',['altitude',['../struct_position.html#add1df8470102854f3950fc9dd2fee06d',1,'Position']]],
   ['analog_5finput_2ecpp',['analog_input.cpp',['../analog__input_8cpp.html',1,'']]],
   ['analog_5finput_2eh',['analog_input.h',['../analog__input_8h.html',1,'']]],
   ['analoginput',['AnalogInput',['../class_analog_input.html',1,'']]],
+  ['analogvoltage',['AnalogVoltage',['../class_analog_voltage.html',1,'AnalogVoltage'],['../class_analog_voltage.html#aa685c09a7c29bec4ed7b89e6317ee127',1,'AnalogVoltage::AnalogVoltage()']]],
+  ['analogvoltage_2eh',['analogvoltage.h',['../analogvoltage_8h.html',1,'']]],
   ['app',['app',['../sensesp_8h.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f',1,'sensesp.h']]],
   ['append',['append',['../class_s_k_delta.html#afacfa3952be6179d0e96960575f393a8',1,'SKDelta']]],
-  ['as_5fjson',['as_json',['../class_signal_k_source.html#a526b4a692616b8a81ad9669226ae369d',1,'SignalKSource::as_json()'],['../class_difference.html#a3bb50d1cea37ab67716371049d45d0ed',1,'Difference::as_json()'],['../class_frequency.html#a925e93827a1632fbe2d5b848d162ec94',1,'Frequency::as_json()'],['../class_g_n_s_s_position.html#a23492cbbddafda1d23a17968d69b8171',1,'GNSSPosition::as_json()'],['../class_integrator.html#a321f6ad79d15dc77860fb739b7857d07',1,'Integrator::as_json()'],['../class_linear.html#ae411e74abd196b8f8c143a39306b1aa2',1,'Linear::as_json()'],['../class_moving_average.html#a451bcd032399204854757c5574fbafe2',1,'MovingAverage::as_json()'],['../class_passthrough.html#a87f840179756a79a9d19e53eb573164a',1,'Passthrough::as_json()'],['../class_time_string.html#a11b8e304450ec8763ccd955a91064b31',1,'TimeString::as_json()']]],
+  ['as_5fsignalk',['as_signalK',['../class_signal_k_source.html#aadf429c623392e8717957bc3c09852d0',1,'SignalKSource::as_signalK()'],['../class_difference.html#ae997bff433d26706bf892a9e62a4f16e',1,'Difference::as_signalK()'],['../class_frequency.html#a8c800e44383c952c3afb3653713e9f82',1,'Frequency::as_signalK()'],['../class_g_n_s_s_position.html#a070948f5a4729aa16c2943ba90e6760e',1,'GNSSPosition::as_signalK()'],['../class_integrator.html#ad0444330433ed9e46f55050da21f0ea5',1,'Integrator::as_signalK()'],['../class_interpolate.html#ade58a8591eb935cb5577ed40435fb4d4',1,'Interpolate::as_signalK()'],['../class_linear.html#a03c3950e9baabef8f54eb31d65b752fd',1,'Linear::as_signalK()'],['../class_moving_average.html#afb4db64f5dbaae11bc4d3cd09b8b8af0',1,'MovingAverage::as_signalK()'],['../class_passthrough.html#acc3e3b30c646d1e49bc9b003e7edb97e',1,'Passthrough::as_signalK()'],['../class_time_string.html#af290f6820906cba8d628ac04aad09378',1,'TimeString::as_signalK()'],['../class_voltage_divider_r2.html#a1d13a6e6ddac3468c3722dc884a64ffd',1,'VoltageDividerR2::as_signalK()']]],
   ['attach',['attach',['../class_observable.html#af72ed9c9cf7157a33caad4b930232e69',1,'Observable']]]
 ];

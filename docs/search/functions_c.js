@@ -12,7 +12,7 @@ var searchData=
   ['parse_5fns',['parse_NS',['../nmea__parser_8cpp.html#a18bf596259e1849f3b6bdbdd765ab606',1,'nmea_parser.cpp']]],
   ['parse_5fpsti030_5fmode',['parse_PSTI030_mode',['../nmea__parser_8cpp.html#a37bce694f34f625b2c3e29a1a74c1570',1,'nmea_parser.cpp']]],
   ['parse_5ftime',['parse_time',['../nmea__parser_8cpp.html#a202c8d748e820b33d2fb1a324710698b',1,'nmea_parser.cpp']]],
-  ['passthrough',['Passthrough',['../class_passthrough.html#ad4c60e8f46012deb4643f2ad7871df72',1,'Passthrough::Passthrough()'],['../class_passthrough.html#a310faf6e412b355b3c971fb79d36c075',1,'Passthrough::Passthrough(String sk_path, String id=&quot;&quot;, String schema=&quot;&quot;)']]],
+  ['passthrough',['Passthrough',['../class_passthrough.html#ad4c60e8f46012deb4643f2ad7871df72',1,'Passthrough::Passthrough()'],['../class_passthrough.html#a63f4217398589b274a2a2c4b7f48c8e5',1,'Passthrough::Passthrough(String sk_path, String config_path=&quot;&quot;)']]],
   ['psti030sentenceparser',['PSTI030SentenceParser',['../class_p_s_t_i030_sentence_parser.html#aa368abaa7d559a9a0893d3846a01fdb7',1,'PSTI030SentenceParser']]],
   ['psti032sentenceparser',['PSTI032SentenceParser',['../class_p_s_t_i032_sentence_parser.html#af44c303ec78c3a24a18eacb265cee013',1,'PSTI032SentenceParser']]],
   ['pstisentenceparser',['PSTISentenceParser',['../class_p_s_t_i_sentence_parser.html#a4bb2246e947c443d5bca3706e2853cd0',1,'PSTISentenceParser']]]

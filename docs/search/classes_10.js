@@ -11,5 +11,6 @@ var searchData=
   ['valueproducer_3c_20position_20_3e',['ValueProducer&lt; Position &gt;',['../class_value_producer.html',1,'']]],
   ['valueproducer_3c_20string_20_3e',['ValueProducer&lt; String &gt;',['../class_value_producer.html',1,'']]],
   ['valueproducer_3c_20time_5ft_20_3e',['ValueProducer&lt; time_t &gt;',['../class_value_producer.html',1,'']]],
-  ['valueproducer_3c_20uint32_5ft_20_3e',['ValueProducer&lt; uint32_t &gt;',['../class_value_producer.html',1,'']]]
+  ['valueproducer_3c_20uint32_5ft_20_3e',['ValueProducer&lt; uint32_t &gt;',['../class_value_producer.html',1,'']]],
+  ['voltagedividerr2',['VoltageDividerR2',['../class_voltage_divider_r2.html',1,'']]]
 ];

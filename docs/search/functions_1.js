@@ -1,7 +1,8 @@
 var searchData=
 [
   ['check_5fconnection',['check_connection',['../class_networking.html#ae4b12924970227730df3377144301a7c',1,'Networking']]],
-  ['configurable',['Configurable',['../class_configurable.html#a5fbc69e52b909b0a2c6e3244025ccb16',1,'Configurable']]],
+  ['clearsamples',['clearSamples',['../class_interpolate.html#ad8ce06fa260129a286e01650c5b47ea9',1,'Interpolate']]],
+  ['configurable',['Configurable',['../class_configurable.html#a8972a439fb9b734ff68d27c699640f78',1,'Configurable']]],
   ['connect',['connect',['../class_w_s_client.html#a1612670a5dccbc8a39518ae972fbae90',1,'WSClient::connect()'],['../class_sens_e_s_p_app.html#ac53d90429563f50e4aca5224a1e85afd',1,'SensESPApp::connect()']]],
   ['connect_5f1to1',['connect_1to1',['../class_sens_e_s_p_app.html#a0a499dc1d52fa2115d314149bb41259f',1,'SensESPApp']]],
   ['connect_5f1to1_5fh',['connect_1to1_h',['../class_sens_e_s_p_app.html#a8875ca27de5c10c1b2931c3c41e1f9b5',1,'SensESPApp']]],

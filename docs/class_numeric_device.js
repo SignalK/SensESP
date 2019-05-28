@@ -1,4 +1,4 @@
 var class_numeric_device =
 [
-    [ "NumericDevice", "class_numeric_device.html#a9b708983a4e3e75b54adcb65d502e22e", null ]
+    [ "NumericDevice", "class_numeric_device.html#a0e1774421ac0182e58dd259521ad76bd", null ]
 ];

@@ -5,8 +5,8 @@ var searchData=
   ['on_5fdisconnected',['on_disconnected',['../class_w_s_client.html#ae110b10f209f55a82e2d700c8c9149a7',1,'WSClient']]],
   ['on_5ferror',['on_error',['../class_w_s_client.html#af921852d17f75f46999c2cc1442c4723',1,'WSClient']]],
   ['on_5freceive_5fdelta',['on_receive_delta',['../class_w_s_client.html#a2b235f3e62668b6e7923cbbcba00e5c1',1,'WSClient']]],
-  ['onetoonetransform',['OneToOneTransform',['../class_one_to_one_transform.html#aebefa19d7bbc8a05ccd7a6f90c3195b9',1,'OneToOneTransform']]],
-  ['onewiretemperature',['OneWireTemperature',['../class_one_wire_temperature.html#a37ac96e0ae122b576de0a99f38a755fc',1,'OneWireTemperature']]],
+  ['onetoonetransform',['OneToOneTransform',['../class_one_to_one_transform.html#a77b7f7f7e97ad07d0d51bdf76a6f8929',1,'OneToOneTransform']]],
+  ['onewiretemperature',['OneWireTemperature',['../class_one_wire_temperature.html#a6ceb584282ee0949f76a35ca5ae40a51',1,'OneWireTemperature']]],
   ['operator_3d',['operator=',['../class_observable_value.html#a900b99ef37a8d31e84c48a97b8eff10d',1,'ObservableValue']]],
   ['owda_5fto_5fstring',['owda_to_string',['../onewire__temperature_8cpp.html#ad0134b3041182b5f8c3004025183e6eb',1,'onewire_temperature.cpp']]]
 ];
