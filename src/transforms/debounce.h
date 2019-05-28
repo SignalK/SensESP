@@ -12,7 +12,7 @@
 class Debounce : public OneToOneBooleanTransform {
 
     public:
-        Debounce(int msMinDelay = 200, String sk_path="", String config_id="", String schema="");
+        Debounce(int msMinDelay = 200, String sk_path="", String config_path="");
 
         virtual void set_input(bool newValue, uint8_t inputChannel = 0) override;
 

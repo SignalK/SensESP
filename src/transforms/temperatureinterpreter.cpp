@@ -2,8 +2,8 @@
 
 #include <RemoteDebug.h>
 
-TemperatureInterpreter::TemperatureInterpreter(String sk_path, String config_id, String schema) :
-    Interpolate(sk_path, NULL, config_id, schema) {
+TemperatureInterpreter::TemperatureInterpreter(String sk_path, String config_path) :
+    Interpolate(sk_path, NULL, config_path ) {
 
    // Lookup table for Ohms to Kelvin
    clearSamples();

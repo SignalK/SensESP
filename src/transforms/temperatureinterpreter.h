@@ -11,7 +11,7 @@
 class TemperatureInterpreter : public Interpolate {
 
     public:
-        TemperatureInterpreter(String sk_path="", String config_id="", String schema="");
+        TemperatureInterpreter(String sk_path="", String config_path="");
 };
 
 #endif
