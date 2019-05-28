@@ -1,7 +1,7 @@
 
 #include "gnss_position.h"
 
-String GNSSPosition::as_json() {
+String GNSSPosition::as_signalK() {
     DynamicJsonBuffer jsonBuffer;
     String json;
     JsonObject& root = jsonBuffer.createObject();

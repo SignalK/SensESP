@@ -22,7 +22,7 @@ class VoltageDividerR2 : public OneToOneTransform<float> {
         virtual void set_input(float Vout, uint8_t ignored = 0) override;
 
         // For outputting the results as SignalK
-        String as_json() override;
+        String as_signalK() override;
 
         // For reading and writing the configuration of this transformation
         virtual JsonObject& get_configuration(JsonBuffer& buf) override;

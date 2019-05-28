@@ -33,7 +33,7 @@ class Interpolate : public OneToOneTransform<float> {
 
 
    // For outputting the results as SignalK
-   String as_json() override;
+   String as_signalK() override;
 
    // For reading and writing the configuration of this transformation
    virtual JsonObject& get_configuration(JsonBuffer& buf) override;

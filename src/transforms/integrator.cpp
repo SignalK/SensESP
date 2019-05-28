@@ -25,7 +25,7 @@ void Integrator::set_input(float input, uint8_t inputChannel) {
   notify();
 }
 
-String Integrator::as_json() {
+String Integrator::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();

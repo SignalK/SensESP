@@ -18,7 +18,7 @@ void MovingAverage::set_input(float input, uint8_t inputChannel) {
   notify();
 }
 
-String MovingAverage::as_json() {
+String MovingAverage::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();

@@ -67,7 +67,7 @@ void Interpolate::set_input(float input, uint8_t inputChannel) {
 }
 
 
-String Interpolate::as_json() {
+String Interpolate::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();
