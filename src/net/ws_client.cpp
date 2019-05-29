@@ -129,8 +129,9 @@ void WSClient::connect() {
     return;
   }
 
-  if (this->auth_token == "") {
+  if (this->auth_token == Null_Auth_Token) {
     // initiate HTTP authentication
+    debugD("No prior authorization token present.");
     this->send_access_request(host, port);
     return;
   }
