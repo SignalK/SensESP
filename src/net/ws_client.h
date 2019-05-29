@@ -38,6 +38,8 @@ class WSClient : public Configurable {
   String client_id = "";
   String polling_href = "";
   String auth_token = Null_Auth_Token;
+  bool server_detected = false;
+
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
   WebSocketsClient client;
