@@ -14,7 +14,7 @@
  * divider.  R1 and/or Vin is selected in such a way to ensure Vout (the value
  * read by the MCU's analog input) does not exceed 3.3 volts.
  */
-class VoltageDividerR2 : public OneToOneTransform<float> {
+class VoltageDividerR2 : public SymmetricTransform<float> {
 
     public:
         VoltageDividerR2(float R1, float Vin = 3.3, String sk_path="", String config_path="");

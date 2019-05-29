@@ -14,7 +14,7 @@ Interpolate::Sample::Sample(JsonObject& obj) : input{obj["input"]}, output{obj["
 
 
 Interpolate::Interpolate(String sk_path, std::set<Sample>* defaults, String config_path)
-    : OneToOneTransform<float>{ sk_path, config_path } {
+    : SymmetricTransform<float>{ sk_path, config_path } {
 
   // Load default values if no configuration present...
   if (defaults != NULL) {

@@ -3,7 +3,7 @@
 // Linear
 
 Linear::Linear(String path, float k, float c, String config_path) :
-    OneToOneTransform<float>{ path, config_path },
+    SymmetricTransform<float>{ path, config_path },
       k{ k },
       c{ c } {
   load_configuration();

@@ -5,8 +5,8 @@
 #include <ArduinoJson.h>
 #include "valueconsumer.h"
 
-// OneToOneTransform is defined in transforms/transform.h
-template <typename T> class OneToOneTransform;
+// SymmetricTransform is defined in transforms/transform.h
+template <typename T> class SymmetricTransform;
 
 /**
  * A ValueProducer<> is any device or piece of code that outputs a value for consumption
@@ -49,7 +49,7 @@ class ValueProducer : virtual public Observable {
          *  together, as this specialized version returns the Producer/Consumer
          *  so this method can be called on THAT object.
          */
-        OneToOneTransform<T>* connectTo(OneToOneTransform<T>* pProducerConsumer, uint8_t inputChannel = 0) {
+        SymmetricTransform<T>* connectTo(SymmetricTransform<T>* pProducerConsumer, uint8_t inputChannel = 0) {
             this->attach([this, pProducerConsumer, inputChannel](){
                 pProducerConsumer->set_input(this->get(), inputChannel);
             });

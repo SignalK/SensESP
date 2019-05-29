@@ -5,7 +5,7 @@
 #include "system/valueconsumer.h"
 
 // y = k * x + c
-class Linear : public OneToOneTransform<float>  {
+class Linear : public SymmetricTransform<float>  {
  public:
   Linear(String sk_path, float k, float c, String config_path="");
   virtual void set_input(float input, uint8_t inputChannel = 0) override final;

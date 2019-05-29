@@ -13,10 +13,10 @@
 ///////////////////
 // provide correct output formatting for GNSS position
 
-class GNSSPosition : public OneToOneTransform<Position> {
+class GNSSPosition : public SymmetricTransform<Position> {
  public:
   GNSSPosition(String sk_path, String config_path="") :
-    OneToOneTransform<Position>{sk_path, config_path} {
+    SymmetricTransform<Position>{sk_path, config_path} {
   }
 
   virtual void set_input(Position newValue, uint8_t inputChannel = 0) {
