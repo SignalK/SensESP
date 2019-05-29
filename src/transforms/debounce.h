@@ -9,7 +9,7 @@
  * accept value changes that are sufficiently spaced apart to
  * be passed on to the next consumer.
  */
-class Debounce : public OneToOneBooleanTransform {
+class Debounce : public SymmetricBooleanTransform {
 
     public:
         Debounce(int msMinDelay = 200, String sk_path="", String config_path="");
