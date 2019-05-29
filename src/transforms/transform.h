@@ -76,6 +76,37 @@ class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
       ValueConsumer<T>(),
       Transform<T>(sk_path, config_path) {
   }
+
+  /**
+   * A convenience method that allows up to five producers to be
+   * quickly connected to the input of the ValueConsumer side of this 
+   * transform.  The first producer will be connected to input
+   * channel zero, the second one to input channel 1, etc.
+   * "this" is returned, which allows the ValueProducer side
+   * of this transform to then be wired to other transforms via
+   * a call to connectTo().
+   */
+  SymmetricTransform<T>* connectFrom(ValueProducer<T>* pProducer0,
+                                     ValueProducer<T>* pProducer1 = NULL,
+                                     ValueProducer<T>* pProducer2 = NULL,
+                                     ValueProducer<T>* pProducer3 = NULL,
+                                     ValueProducer<T>* pProducer4 = NULL) {
+
+      this->connectFrom(pProducer0, 0);
+      if (pProducer1 != NULL) {
+        this->connectFrom(pProducer1, 1);
+      }
+      if (pProducer2 != NULL) {
+        this->connectFrom(pProducer2, 2);
+      }
+      if (pProducer3 != NULL) {
+        this->connectFrom(pProducer3, 3);
+      }
+      if (pProducer4 != NULL) {
+        this->connectFrom(pProducer4, 4);
+      }
+      return this;                                      
+  }  
 };
 
 typedef SymmetricTransform<float> SymmetricNumericTransform;
