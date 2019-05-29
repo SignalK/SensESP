@@ -62,8 +62,16 @@ void WSClient::connect_loop() {
 }
 
 void WSClient::on_disconnected() {
+  if (this->connection_state == connecting && server_detected) {
+     // Going from connecting directly to disconnect when we
+     // know we have found and talked to the server usually means
+     // the authentication token is bad.
+     debugW("Bad access token detected.");
+     auth_token = Null_Auth_Token;
+     save_configuration();
+  }
   this->connection_state = disconnected;
-  debugW("Websocket client disconnected.");
+  server_detected = false;
   this->connected_cb(false);
 }
 
@@ -129,8 +137,9 @@ void WSClient::connect() {
     return;
   }
 
-  if (this->auth_token == "") {
+  if (this->auth_token == Null_Auth_Token || this->auth_token == "") {
     // initiate HTTP authentication
+    debugD("No prior authorization token present.");
     this->send_access_request(host, port);
     return;
   }
@@ -156,6 +165,7 @@ void WSClient::test_token(const String host, const uint16_t port) {
   debugD("%s", payload.c_str());
   if (httpCode == 200) {
     // our token is valid, go ahead and connect
+    server_detected = true;
     this->connect_ws(host, port);
   } else if (httpCode == 401) {
     this->send_access_request(host, port);

@@ -9,6 +9,8 @@
 #include "system/configurable.h"
 #include "system/signal_k.h"
 
+static const char* Null_Auth_Token = "no-token";
+
 enum ConnectionState { disconnected, connecting, connected };
 
 class WSClient : public Configurable {
@@ -35,7 +37,9 @@ class WSClient : public Configurable {
   uint16_t port = 80;
   String client_id = "";
   String polling_href = "";
-  String auth_token = "no-token";
+  String auth_token = Null_Auth_Token;
+  bool server_detected = false;
+
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
   WebSocketsClient client;
