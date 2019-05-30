@@ -23,7 +23,7 @@ var hierarchy =
       [ "Networking", "class_networking.html", null ],
       [ "TransformBase", "class_transform_base.html", [
         [ "Transform< T >", "class_transform.html", [
-          [ "OneToOneTransform< T >", "class_one_to_one_transform.html", [
+          [ "SymmetricTransform< T >", "class_symmetric_transform.html", [
             [ "Debounce", "class_debounce.html", null ],
             [ "Passthrough< T >", "class_passthrough.html", null ]
           ] ],
@@ -31,7 +31,7 @@ var hierarchy =
         ] ],
         [ "Transform< float >", "class_transform.html", [
           [ "Frequency", "class_frequency.html", null ],
-          [ "OneToOneTransform< float >", "class_one_to_one_transform.html", [
+          [ "SymmetricTransform< float >", "class_symmetric_transform.html", [
             [ "Difference", "class_difference.html", null ],
             [ "Integrator", "class_integrator.html", null ],
             [ "Interpolate", "class_interpolate.html", [
@@ -45,7 +45,7 @@ var hierarchy =
           ] ]
         ] ],
         [ "Transform< Position >", "class_transform.html", [
-          [ "OneToOneTransform< Position >", "class_one_to_one_transform.html", [
+          [ "SymmetricTransform< Position >", "class_symmetric_transform.html", [
             [ "GNSSPosition", "class_g_n_s_s_position.html", null ]
           ] ]
         ] ]
@@ -113,13 +113,13 @@ var hierarchy =
     [ "SKDelta", "class_s_k_delta.html", null ],
     [ "ValueConsumer< T >", "class_value_consumer.html", [
       [ "Frequency", "class_frequency.html", null ],
-      [ "OneToOneTransform< T >", "class_one_to_one_transform.html", null ]
+      [ "SymmetricTransform< T >", "class_symmetric_transform.html", null ]
     ] ],
     [ "ValueConsumer< float >", "class_value_consumer.html", [
-      [ "OneToOneTransform< float >", "class_one_to_one_transform.html", null ]
+      [ "SymmetricTransform< float >", "class_symmetric_transform.html", null ]
     ] ],
     [ "ValueConsumer< Position >", "class_value_consumer.html", [
-      [ "OneToOneTransform< Position >", "class_one_to_one_transform.html", null ]
+      [ "SymmetricTransform< Position >", "class_symmetric_transform.html", null ]
     ] ],
     [ "ValueConsumer< time_t >", "class_value_consumer.html", [
       [ "TimeString", "class_time_string.html", null ]
