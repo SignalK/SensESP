@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">0.2.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,7 +102,7 @@ Inheritance diagram for Integrator:</div>
 <div class="center"><img src="class_integrator__inherit__graph.png" border="0" usemap="#_integrator_inherit__map" alt="Inheritance graph"/></div>
 <map name="_integrator_inherit__map" id="_integrator_inherit__map">
 <area shape="rect"  title=" " alt="" coords="150,385,229,411"/>
-<area shape="rect"  href="class_one_to_one_transform.html" title=" " alt="" coords="113,299,266,337"/>
+<area shape="rect"  href="class_symmetric_transform.html" title=" " alt="" coords="117,299,262,337"/>
 <area shape="rect"  href="class_value_consumer.html" title=" " alt="" coords="22,225,186,251"/>
 <area shape="rect"  href="class_transform.html" title=" " alt="" coords="210,225,340,251"/>
 <area shape="rect"  href="class_transform_base.html" title=" " alt="" coords="137,152,249,177"/>
@@ -128,9 +128,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1b4cfd7f598d8456a582865a88d768e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa53205d3211635dad0a035adf5d511a6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_integrator.html#aa53205d3211635dad0a035adf5d511a6">set_configuration</a> (const JsonObject &amp;config) override final</td></tr>
 <tr class="separator:aa53205d3211635dad0a035adf5d511a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_one_to_one_transform"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_one_to_one_transform')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_one_to_one_transform.html">OneToOneTransform&lt; float &gt;</a></td></tr>
-<tr class="memitem:a77b7f7f7e97ad07d0d51bdf76a6f8929 inherit pub_methods_class_one_to_one_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_one_to_one_transform.html#a77b7f7f7e97ad07d0d51bdf76a6f8929">OneToOneTransform</a> (String <a class="el" href="class_signal_k_source.html#ac9416b56a4a8fc0e741ec537b2411177">sk_path</a>, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
-<tr class="separator:a77b7f7f7e97ad07d0d51bdf76a6f8929 inherit pub_methods_class_one_to_one_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_symmetric_transform"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_symmetric_transform')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_symmetric_transform.html">SymmetricTransform&lt; float &gt;</a></td></tr>
+<tr class="memitem:add5f3e15e1956bde08508240e1031722 inherit pub_methods_class_symmetric_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetric_transform.html#add5f3e15e1956bde08508240e1031722">SymmetricTransform</a> (String <a class="el" href="class_signal_k_source.html#ac9416b56a4a8fc0e741ec537b2411177">sk_path</a>, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="separator:add5f3e15e1956bde08508240e1031722 inherit pub_methods_class_symmetric_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefde059b7d9b753b11a33dd4bac6972b inherit pub_methods_class_symmetric_transform"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_symmetric_transform.html">SymmetricTransform</a>&lt; float &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetric_transform.html#aefde059b7d9b753b11a33dd4bac6972b">connectFrom</a> (<a class="el" href="class_value_producer.html">ValueProducer</a>&lt; float &gt; *pProducer0, <a class="el" href="class_value_producer.html">ValueProducer</a>&lt; float &gt; *pProducer1=NULL, <a class="el" href="class_value_producer.html">ValueProducer</a>&lt; float &gt; *pProducer2=NULL, <a class="el" href="class_value_producer.html">ValueProducer</a>&lt; float &gt; *pProducer3=NULL, <a class="el" href="class_value_producer.html">ValueProducer</a>&lt; float &gt; *pProducer4=NULL)</td></tr>
+<tr class="separator:aefde059b7d9b753b11a33dd4bac6972b inherit pub_methods_class_symmetric_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_value_consumer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_value_consumer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_value_consumer.html">ValueConsumer&lt; float &gt;</a></td></tr>
 <tr class="memitem:a6adf62d8d87ffa3ce70bb85379a68715 inherit pub_methods_class_value_consumer"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_consumer.html#a6adf62d8d87ffa3ce70bb85379a68715">connectFrom</a> (<a class="el" href="class_value_producer.html">ValueProducer</a>&lt; float &gt; *pProducer, uint8_t inputChannel=0)</td></tr>
 <tr class="separator:a6adf62d8d87ffa3ce70bb85379a68715 inherit pub_methods_class_value_consumer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,8 +173,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adaf30ea1027efa0c83c75dfe3afc0c1a inherit pub_methods_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1669282467997608ce6164fe4d729bb2 inherit pub_methods_class_value_producer"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo</a> (<a class="el" href="class_value_consumer.html">ValueConsumer</a>&lt; float &gt; *pConsumer, uint8_t inputChannel=0)</td></tr>
 <tr class="separator:a1669282467997608ce6164fe4d729bb2 inherit pub_methods_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4194a8cdf7fb741e9bfbd1ba8efd01a9 inherit pub_methods_class_value_producer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt; float &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a4194a8cdf7fb741e9bfbd1ba8efd01a9">connectTo</a> (<a class="el" href="class_one_to_one_transform.html">OneToOneTransform</a>&lt; float &gt; *pProducerConsumer, uint8_t inputChannel=0)</td></tr>
-<tr class="separator:a4194a8cdf7fb741e9bfbd1ba8efd01a9 inherit pub_methods_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64af7a373036743d912876475c566045 inherit pub_methods_class_value_producer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_symmetric_transform.html">SymmetricTransform</a>&lt; float &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a64af7a373036743d912876475c566045">connectTo</a> (<a class="el" href="class_symmetric_transform.html">SymmetricTransform</a>&lt; float &gt; *pProducerConsumer, uint8_t inputChannel=0)</td></tr>
+<tr class="separator:a64af7a373036743d912876475c566045 inherit pub_methods_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
