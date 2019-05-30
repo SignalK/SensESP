@@ -30,5 +30,6 @@ var searchData=
   ['signalksource',['SignalKSource',['../class_signal_k_source.html#af2ba130c1d59658c144ac3841d967ac8',1,'SignalKSource']]],
   ['skdelta',['SKDelta',['../class_s_k_delta.html#a3d4825fc72903feaebe635dc643d2b16',1,'SKDelta']]],
   ['string_5fto_5fowda',['string_to_owda',['../onewire__temperature_8cpp.html#a2ea2a536fdbbb476ae3fb824d73d3e1a',1,'onewire_temperature.cpp']]],
-  ['stringdevice',['StringDevice',['../class_string_device.html#a6aca962377f5ac96ff960f9bcb7ff948',1,'StringDevice']]]
+  ['stringdevice',['StringDevice',['../class_string_device.html#a6aca962377f5ac96ff960f9bcb7ff948',1,'StringDevice']]],
+  ['symmetrictransform',['SymmetricTransform',['../class_symmetric_transform.html#add5f3e15e1956bde08508240e1031722',1,'SymmetricTransform']]]
 ];

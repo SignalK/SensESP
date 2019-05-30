@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"class_voltage_divider_r2.html":[0,0,53],
 "class_voltage_divider_r2.html#a1d13a6e6ddac3468c3722dc884a64ffd":[0,0,53,1],
 "class_voltage_divider_r2.html#a35275626b89244eb30f0c1be504dbdb6":[0,0,53,2],
 "class_voltage_divider_r2.html#a43fa7bb9dc49c50de247aac272d7f697":[0,0,53,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "struct_n_m_e_a_data.html#ad752076d48c74317d72a26643fef7fef":[0,0,28,0],
 "struct_n_m_e_a_data.html#af61e9824ffaf9b43c1a95d8d7a93bc10":[0,0,28,4],
 "struct_n_m_e_a_data.html#afe6efa0ec62ce332673ab98b282990c8":[0,0,28,14],
-"struct_position.html":[0,0,36],
-"struct_position.html#a76a87a4287c53ae7e53eba716e740c12":[0,0,36,2]
+"struct_position.html":[0,0,35]
 };
