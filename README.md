@@ -12,6 +12,9 @@ Class documentation for SensESP is [here](http://signalk.org/SensESP/annotated.h
 
 ## Getting Started
 
+You must have a Signal K Server running on your network, or SensESP has nothing to connect to. The most common installation is the
+Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md).
+
 SensESP is a library and will be installed automatically as
 a dependency when defined as such in the project's
 `platformio.ini` file.
@@ -24,10 +27,10 @@ result, and press "Install".
 
 Once you have PlatformIO installed, its home screen should
 open automatically when you start VSCode. On the PIO Home,
-select "New Project". Enter a name and then select "WeMos
+select "New Project". Enter a name (something like SensESPTest for your first project) and then select "WeMos
 D1 mini" in the board dropdown. The Arduino framework
 should become automatically selected. Complete the new
-project dialog and open the project you created.
+project dialog, then open the project you created.
 
 Once you have your new project open, open the `platformio.ini` file. Add the SensESP dependency:
 
@@ -36,12 +39,12 @@ lib_deps =
     SensESP
 ```
 
-Then, open `src/main.cpp`. The default template is for Arduino IDE and the SensESP main file will look a bit different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left  toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
+Then, open `src/main.cpp`. The default template is for Arduino IDE, but a SensESP main file will look very different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
 
-Assuming the project uploading was successful, you will have a sensor running the sample code. To configure it, connect your computer or phone wifi to the "Unconfigured Sensor" network. A captive portal should pop up. Enter your wifi credentials to allow the device to access the network. Also enter a suitable name, for example `sensesp` for the device.
+Assuming the project uploading was successful, your Wemos will be running the example code. To configure it, connect your computer or phone wifi to the "Unconfigured Sensor" network. A captive portal may pop up, but if it doesn't, open a browser and go to 192.168.4.1. Enter your wifi credentials to allow the device to access the network. Also enter a suitable name, for example `WemosSensESP` for the device. (No more than 16 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the Wemos will restart and try to connect to your wifi network.
 
-Once on the network, your new SensESP device should automatically find your Signal K server, assuming it has mDNS enabled. If your server has security enabled, you should
-get an access request for the device. Approve it, preferably with a long or infinite duration, and you should start getting data on the instrument panel.
+Once on the network, SensESP should automatically find your Signal K server, assuming it has mDNS enabled. If your server has security enabled, you should
+see an access request for Wemos in the Signal K Dashboard, under Security - Access Requests. (You must be logged into the Signal K Dashboard to see the Security sub-menu.) Approve it, choosing "Never" for the expiration. The Wemos will restart, and you should start getting data on the Signal K Instrument Panel. (Dashboard - Webapps - Instrument Panel)
 
 ## Low-level wiring
 
