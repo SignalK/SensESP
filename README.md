@@ -40,7 +40,8 @@ lib_deps =
 ```
 But for now, use this:
 ```
-https://github.com/SignalK/SensESP.git
+lib_deps =
+    https://github.com/SignalK/SensESP.git
 ```
 
 Then, open `src/main.cpp`. The default template is for Arduino IDE, but a SensESP main file will look very different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
