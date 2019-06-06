@@ -335,20 +335,6 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-
-String WSClient::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_host": { "title": "SignalK Host", "type": "string" },
-          "sk_port": { "title": "SignalK host port", "type": "integer" },
-          "client_id": { "title": "Client id", "type": "string" },
-          "polling_href": { "title": "Server authorization polling href", "type": "string" }
-      }
-   })";
-}
-
-
 bool WSClient::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_host", "sk_port", "token"};
   for (auto str : expected) {

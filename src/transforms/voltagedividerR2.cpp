@@ -29,18 +29,6 @@ JsonObject& VoltageDividerR2::get_configuration(JsonBuffer& buf) {
 }
 
 
-String VoltageDividerR2::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "Vin": { "title": "Voltage in", "type": "number" },
-          "R1": { "title": "Resistance (ohms) of R1", "type": "number" }
-      }
-   })";
-}
-
-
 bool VoltageDividerR2::set_configuration(const JsonObject& config) {
 
   String expected[] = { "sk_path", "Vin", "R1" };

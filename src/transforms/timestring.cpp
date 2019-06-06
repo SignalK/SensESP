@@ -31,16 +31,6 @@ JsonObject& TimeString::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-String TimeString::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "value": { "title": "Last value", "type" : "string", "readOnly": true }
-      }
-   })";
-}
-
 bool TimeString::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_path"};
   for (auto str : expected) {

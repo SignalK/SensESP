@@ -34,20 +34,6 @@ JsonObject& Linear::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-
-String Linear::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "k": { "title": "Multiplier", "type": "number" },
-          "c": { "title": "Constant offset", "type": "number" },
-          "value": { "title": "Last value", "type" : "number", "readOnly": true }
-      }
-   })";
-}
-
-
 bool Linear::set_configuration(const JsonObject& config) {
   String expected[] = {"k", "c", "sk_path"};
   for (auto str : expected) {

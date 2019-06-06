@@ -24,10 +24,11 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
   this->reset_device = reset_device;
   server = new AsyncWebServer(HTTP_SERVER_PORT);
   using std::placeholders::_1;
-
   server->onNotFound(std::bind(&HTTPServer::handle_not_found, this, _1));
+  server->on("/",[](AsyncWebServerRequest *request ) {
+      request->send_P(200, "text/html", "SensESP");
+    });
 
-  // Handle setting configuration values of a Configurable via a Json PUT to /config
   AsyncCallbackJsonWebHandler* config_put_handler
     = new AsyncCallbackJsonWebHandler(
       "/config",
@@ -67,10 +68,6 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
       });
   config_put_handler->setMethod(HTTP_PUT);
   server->addHandler(config_put_handler);
-
-
-  // Handle requests to retrieve the current Json configuration of a Configurable
-  // via HTTP GET on /config
   server->on("/config", HTTP_GET, [this] (AsyncWebServerRequest *request) {
     // omit the "/config" part of the url
     String url_tail = request->url().substring(7);
@@ -98,37 +95,13 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
     request->send(response);
   });
 
-
-  server->on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-      debugD("Serving index.html");
-      request->send(SPIFFS, "/index.html", "text/html");    
-  });
-
-  server->on("/setup", HTTP_GET, [](AsyncWebServerRequest *request) {
-      debugD("Serving setup.html");
-      request->send(SPIFFS, "/setup.html", "text/html");    
-  });
-
-  server->on("/js/jsoneditor.min.js", HTTP_GET, [](AsyncWebServerRequest *request) {
-      debugD("Serving jsoneditor.min.js");
-      request->send(SPIFFS, "/js_jsoneditor.min.js", "text/javascript");    
-  });
-
-
-  server->on("/js/sensesp.js", HTTP_GET, [](AsyncWebServerRequest *request) {
-      debugD("Serving sensesp.js");
-      request->send(SPIFFS, "/js_sensesp.js", "text/javascript");    
-  });
-
-
   server->on("/device/reset", HTTP_GET,
              std::bind(&HTTPServer::handle_device_reset, this, _1));
   server->on("/device/restart", HTTP_GET,
              std::bind(&HTTPServer::handle_device_restart, this, _1));
   server->on("/info", HTTP_GET,
              std::bind(&HTTPServer::handle_info, this, _1));
-}
-
+  }
 
 void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
   debugD("NOT_FOUND: ");
@@ -205,8 +178,6 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
   app.onDelay(50, [](){ ESP.restart(); });
 }
 
-
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   request->send(200, "text/plain", "/info");
 }
-

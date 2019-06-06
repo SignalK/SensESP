@@ -43,21 +43,8 @@ JsonObject& Integrator::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-
-String Integrator::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "k": { "title": "Multiplier", "type": "number" },
-          "value": { "title": "Current value", "type" : "number", "readOnly": false }
-      }
-   })";
-}
-
-
 bool Integrator::set_configuration(const JsonObject& config) {
-  String expected[] = {"k", "sk_path"};
+  String expected[] = {"k", "value", "sk_path"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
