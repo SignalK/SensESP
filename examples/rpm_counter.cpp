@@ -65,7 +65,7 @@ const uint read_delay = 500;
      );
   */
 
-  // 3. Connect the producer directly to the consumer
+  // 2. Connect the producer directly to the consumer
   auto* pDevice = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
   
   pDevice->connectTo(new Frequency(sk_path, multiplier, config_path));
