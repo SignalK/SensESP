@@ -22,6 +22,17 @@ JsonObject& GNSSPosition::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+String GNSSPosition::get_config_schema() {
+   return R"({
+      "type": "object",
+      "properties": {
+          "sk_path": { "title": "SignalK Path", "type": "string" }
+      }
+   })";
+}
+
+
+
 bool GNSSPosition::set_configuration(const JsonObject& config) {
   if (!config.containsKey("sk_path")) {
     return false;

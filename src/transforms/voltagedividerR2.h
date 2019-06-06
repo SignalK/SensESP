@@ -27,6 +27,7 @@ class VoltageDividerR2 : public SymmetricTransform<float> {
         // For reading and writing the configuration of this transformation
         virtual JsonObject& get_configuration(JsonBuffer& buf) override;
         virtual bool set_configuration(const JsonObject& config) override;
+        virtual String get_config_schema() override;
 
     protected:
         float R1;
