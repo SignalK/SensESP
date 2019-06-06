@@ -39,6 +39,10 @@ lib_deps =
 ```
 Then, open `src/main.cpp`. The default template is for Arduino IDE, but a SensESP main file will look very different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
 
+If you plan on using the Web UI to configure your device, copy the "data" directory out of the SensESP project
+and into your new project.  Then, select the "Upload File System Image" Project Task in PlatformIO (the little
+alien face again).
+
 Assuming the project uploading was successful, your Wemos will be running the example code. To configure it, connect your computer or phone wifi to the "Unconfigured Sensor" network. A captive portal may pop up, but if it doesn't, open a browser and go to 192.168.4.1. Enter your wifi credentials to allow the device to access the network. Also enter a suitable name, for example `WemosSensESP` for the device. (No more than 16 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the Wemos will restart and try to connect to your wifi network.
 
 Once on the network, SensESP should automatically find your Signal K server, assuming it has mDNS enabled. If your server has security enabled, you should
@@ -51,6 +55,14 @@ TODO!
 ## Runtime setup
 
 In the examples below, `sensesp` is used as the device name.
+
+The easiest way to interact with your device is using the SensESP web user interface.  Simply go to:
+
+    http://sensesp.local
+
+and you can select from the various options to configure your device.    
+
+## Programmatic setup
 
 SensESP implements a RESTful configuration API. A list of
 possible configuration keys can be retrieved from:
@@ -78,7 +90,7 @@ Configuration can be updated with HTTP PUT requests:
 - [x] Improved device configuration system
 - [x] Authentication token support
 - [x] Make the project a library
-- [ ] Web configuration UI
+- [x] Web configuration UI
 - [ ] Control device support. For now, all devices are read-only, and control devices such as leds, relays, or
 PWM output are not supported.
 
