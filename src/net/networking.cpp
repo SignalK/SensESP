@@ -77,6 +77,17 @@ void Networking::set_hostname(String hostname) {
   this->hostname->set(hostname);
 }
 
+
+String Networking::get_config_schema() {
+   return R"({
+      "type": "object",
+      "properties": {
+          "hostname": { "title": "Network SSID", "type": "string" }
+      }
+   })";
+}
+
+
 JsonObject& Networking::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
   root["hostname"] = this->hostname->get();

@@ -60,7 +60,7 @@ void Interpolate::set_input(float input, uint8_t inputChannel) {
   else {
     // Hit the end of the table with no match.
     output = 9999.9;
-    debugE("Could not find sample interval for input %0f", input);
+//    debugW("Could not find sample interval for input %0f", input);
   }
 
   notify();
@@ -92,6 +92,23 @@ JsonObject& Interpolate::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+
+String Interpolate::get_config_schema() {
+   return R"({
+      "type": "object",
+      "properties": {
+          "sk_path": { "title": "SignalK Path", "type": "string" },
+          "samples": { "title": "Sample values",
+                      "type": "array", 
+                      "items": { "title": "Sample",
+                                  "type": "object",
+                                  "properties": {
+                                      "input": { "type": "number" },
+                                      "output": { "type": "number" }
+                                }}}
+      }
+   })";
+}
 
 bool Interpolate::set_configuration(const JsonObject& config) {
 
