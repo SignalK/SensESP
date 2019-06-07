@@ -1,13 +1,23 @@
 var searchData=
 [
-  ['websocketclientevent',['webSocketClientEvent',['../ws__client_8cpp.html#a5e74f160471b58a262cceef5edaea7e0',1,'ws_client.cpp']]],
-  ['wifi_5fconfig_5fportal_5ftimeout',['WIFI_CONFIG_PORTAL_TIMEOUT',['../networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce',1,'networking.cpp']]],
-  ['wiring_5fhelpers_2ecpp',['wiring_helpers.cpp',['../wiring__helpers_8cpp.html',1,'']]],
-  ['wiring_5fhelpers_2eh',['wiring_helpers.h',['../wiring__helpers_8h.html',1,'']]],
-  ['write_5fjson',['write_json',['../spiffs__storage_8h.html#afc3e0da568f2f14c9954eeab665ab9cd',1,'spiffs_storage.h']]],
-  ['write_5fstring',['write_string',['../spiffs__storage_8cpp.html#ae1cd66733f6f724334874c5ff65b958b',1,'write_string(const String filename, String data):&#160;spiffs_storage.cpp'],['../spiffs__storage_8h.html#ae1cd66733f6f724334874c5ff65b958b',1,'write_string(const String filename, String data):&#160;spiffs_storage.cpp']]],
-  ['ws_5fclient',['ws_client',['../ws__client_8cpp.html#a4d8d7cfce2bd21646b059e9aa4d0349b',1,'ws_client.cpp']]],
-  ['ws_5fclient_2ecpp',['ws_client.cpp',['../ws__client_8cpp.html',1,'']]],
-  ['ws_5fclient_2eh',['ws_client.h',['../ws__client_8h.html',1,'']]],
-  ['wsclient',['WSClient',['../class_w_s_client.html',1,'WSClient'],['../class_w_s_client.html#a46394a4855cdb0d9587fde318574b6e4',1,'WSClient::WSClient()']]]
+  ['valueconsumer',['ValueConsumer',['../class_value_consumer.html',1,'']]],
+  ['valueconsumer_2eh',['valueconsumer.h',['../valueconsumer_8h.html',1,'']]],
+  ['valueconsumer_3c_20float_20_3e',['ValueConsumer&lt; float &gt;',['../class_value_consumer.html',1,'']]],
+  ['valueconsumer_3c_20position_20_3e',['ValueConsumer&lt; Position &gt;',['../class_value_consumer.html',1,'']]],
+  ['valueconsumer_3c_20time_5ft_20_3e',['ValueConsumer&lt; time_t &gt;',['../class_value_consumer.html',1,'']]],
+  ['valueproducer',['ValueProducer',['../class_value_producer.html',1,'ValueProducer&lt; T &gt;'],['../class_value_producer.html#a0ef05992883120f7202c14fd8e577103',1,'ValueProducer::ValueProducer()']]],
+  ['valueproducer_2eh',['valueproducer.h',['../valueproducer_8h.html',1,'']]],
+  ['valueproducer_3c_20enuvector_20_3e',['ValueProducer&lt; ENUVector &gt;',['../class_value_producer.html',1,'']]],
+  ['valueproducer_3c_20float_20_3e',['ValueProducer&lt; float &gt;',['../class_value_producer.html',1,'']]],
+  ['valueproducer_3c_20int_20_3e',['ValueProducer&lt; int &gt;',['../class_value_producer.html',1,'']]],
+  ['valueproducer_3c_20position_20_3e',['ValueProducer&lt; Position &gt;',['../class_value_producer.html',1,'']]],
+  ['valueproducer_3c_20string_20_3e',['ValueProducer&lt; String &gt;',['../class_value_producer.html',1,'']]],
+  ['valueproducer_3c_20time_5ft_20_3e',['ValueProducer&lt; time_t &gt;',['../class_value_producer.html',1,'']]],
+  ['valueproducer_3c_20uint32_5ft_20_3e',['ValueProducer&lt; uint32_t &gt;',['../class_value_producer.html',1,'']]],
+  ['variation',['variation',['../struct_n_m_e_a_data.html#ab5b508669ea5109f812b28cdba65c402',1,'NMEAData']]],
+  ['vin',['Vin',['../class_voltage_divider_r2.html#a482239a7e4031b16091886109efd2296',1,'VoltageDividerR2']]],
+  ['void_5fcb_5ffunc',['void_cb_func',['../sensesp_8h.html#abb3668fa85a914138ab7c0c4329681ec',1,'sensesp.h']]],
+  ['voltagedividerr2',['VoltageDividerR2',['../class_voltage_divider_r2.html',1,'VoltageDividerR2'],['../class_voltage_divider_r2.html#aa01015814dad17dd7db497a8c9209d44',1,'VoltageDividerR2::VoltageDividerR2()']]],
+  ['voltagedividerr2_2ecpp',['voltagedividerR2.cpp',['../voltagedivider_r2_8cpp.html',1,'']]],
+  ['voltagedividerr2_2eh',['voltagedividerR2.h',['../voltagedivider_r2_8h.html',1,'']]]
 ];
