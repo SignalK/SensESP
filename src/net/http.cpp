@@ -15,6 +15,12 @@
 #include "sensesp_app.h"
 #include "system/configurable.h"
 
+// Include the web UI stored in PROGMEM space
+#include "web/index.h"
+#include "web/setup.h"
+#include "web/js_jsoneditor.h"
+#include "web/js_sensesp.h"
+
 // HTTP port for the configuration interface
 #ifndef HTTP_SERVER_PORT
 #define HTTP_SERVER_PORT 80
@@ -101,23 +107,23 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
 
   server->on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
       debugD("Serving index.html");
-      request->send(SPIFFS, "/index.html", "text/html");    
+      request->send_P(200, "text/html", PAGE_index);
   });
 
   server->on("/setup", HTTP_GET, [](AsyncWebServerRequest *request) {
       debugD("Serving setup.html");
-      request->send(SPIFFS, "/setup.html", "text/html");    
+      request->send_P(200, "text/html", PAGE_setup);
   });
 
   server->on("/js/jsoneditor.min.js", HTTP_GET, [](AsyncWebServerRequest *request) {
       debugD("Serving jsoneditor.min.js");
-      request->send(SPIFFS, "/js_jsoneditor.min.js", "text/javascript");    
+      request->send_P(200, "text/javascript", PAGE_js_jsoneditor);
   });
 
 
   server->on("/js/sensesp.js", HTTP_GET, [](AsyncWebServerRequest *request) {
       debugD("Serving sensesp.js");
-      request->send(SPIFFS, "/js_sensesp.js", "text/javascript");    
+      request->send_P(200, "text/javascript", PAGE_js_sensesp);
   });
 
 

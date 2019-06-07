@@ -1,3 +1,5 @@
+#include <pgmspace.h>
+const char PAGE_index[] PROGMEM = R"=====(
 <html>
 <head>
 <title>SensESP SignalK Sensor</title>
@@ -13,3 +15,5 @@ Your options:
 </ul>
 </body>
 </html>
+
+)=====";

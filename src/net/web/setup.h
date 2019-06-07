@@ -1,3 +1,5 @@
+#include <pgmspace.h>
+const char PAGE_setup[] PROGMEM = R"=====(
 <html>
     <head>
         <title>Configure SensESP Sensor</title>
@@ -55,3 +57,5 @@ ul, #tree {
 </div>
 </body>
 </html>
+
+)=====";
