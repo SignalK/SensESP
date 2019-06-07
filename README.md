@@ -29,17 +29,11 @@ D1 mini" in the board dropdown. The Arduino framework
 should become automatically selected. Complete the new
 project dialog and open the project you created.
 
-Once you have your new project open, open the `platformio.ini` file. Add the SensESP dependency. Eventually, when SensESP is fully registered with PlatformIO, you'll be able to use:
-
+Once you have your new project open, open the `platformio.ini` file that's in your project's directory (NOT the one that you find if you go down into the .pio/libdeps/... folders). Add the SensESP dependency to the section for your Wemos (the section title should be `[env:d1_mini]`):
 ```
 lib_deps =
-    SensESP
+    https://github.com/SignalK/SensESP.git
 ```
-But for now, use this:
-```
-https://github.com/SignalK/SensESP.git
-```
-
 Then, open `src/main.cpp`. The default template is for Arduino IDE and the SensESP main file will look a bit different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left  toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
 
 Assuming the project uploading was successful, you will have a sensor running the sample code. To configure it, connect your computer or phone wifi to the "Unconfigured Sensor" network. A captive portal should pop up. Enter your wifi credentials to allow the device to access the network. Also enter a suitable name, for example `sensesp` for the device.
