@@ -1,5 +1,5 @@
 
-function ajax(method, url, data) {
+function ajax(method, url, data, contentType) {
   return new Promise(function(resolve, reject) {
     var request = new XMLHttpRequest();
 
@@ -16,6 +16,10 @@ function ajax(method, url, data) {
     request.onerror = function() {
       reject(Error("Network Error"));
     };
+
+    if (contentType) {
+        request.setRequestHeader("Content-Type", contentType);
+    }
 
     request.send(data);
   });
@@ -195,9 +199,15 @@ function editConfig(config_path) {
 
 
 function saveConfig(config_path, values) {
-    alert('Save path: ' + config_path);
-    alert('Save values: ' + JSON.stringify(values));
-    showConfigTree();
+
+    ajax('PUT', '/config' + config_path, JSON.stringify(values), 'application/json')
+    .then(response => {
+        showConfigTree();
+    })
+    .catch(err => {
+        alert(`Error saving configuration ${config_path}: ${err.message}`);
+        showConfigTree();
+    });
 }
 
 
