@@ -12,6 +12,8 @@ class Linear : public SymmetricTransform<float>  {
   virtual String as_signalK() override final;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
+  virtual String get_config_schema() override;
+
  private:
   float k;
   float c;

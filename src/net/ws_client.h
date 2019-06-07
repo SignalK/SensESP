@@ -31,6 +31,7 @@ class WSClient : public Configurable {
 
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
+  virtual String get_config_schema() override;
 
  private:
   String host = "";

@@ -52,7 +52,12 @@ TODO!
 
 In the examples below, `sensesp` is used as the device name.
 
-SensESP implements a RESTful configuration API. A list of
+You can configure your device with any web browser by going to
+
+    http://sensesp.local
+
+
+SensESP also implements a RESTful configuration API. A list of
 possible configuration keys can be retrieved from:
 
     http://sensesp.local/config
@@ -78,7 +83,7 @@ Configuration can be updated with HTTP PUT requests:
 - [x] Improved device configuration system
 - [x] Authentication token support
 - [x] Make the project a library
-- [ ] Web configuration UI
+- [x] Web configuration UI
 - [ ] Control device support. For now, all devices are read-only, and control devices such as leds, relays, or
 PWM output are not supported.
 

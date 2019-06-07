@@ -139,6 +139,19 @@ JsonObject& OneWireTemperature::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+
+String OneWireTemperature::get_config_schema() {
+   return R"({
+      "type": "object",
+      "properties": {
+          "address": { "title": "OneWire address", "type": "string" },
+          "value": { "title": "Last value", "type" : "number", "readOnly": true }
+      }
+   })";
+}
+
+
+
 bool OneWireTemperature::set_configuration(const JsonObject& config) {
   if (!config.containsKey("address")) {
     return false;

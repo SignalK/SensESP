@@ -14,6 +14,8 @@ class Frequency : public IntegerConsumer, public NumericTransform {
   virtual void enable() override final;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
+  virtual String get_config_schema() override;
+
  private:
   float k;
   int ticks = 0;
