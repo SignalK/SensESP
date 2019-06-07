@@ -10,8 +10,8 @@ to point to the "docroot" directory in this web directory.  You can then make we
 and test or modify the behavior of the Javascript without the need to communicate with an actual
 sensor running SensESP.
 
-Once you are done, you can run the "webUI" build target to move required files to the project "data" directory for
-upload to the MCU.
+Once you are done, you can run the "webUI" build target to convert the required files to C header files
+that can be used by the SensESP source code.
 
 
 # Rebuilding for deployment
@@ -30,8 +30,8 @@ For information on how this build target works, see the project file extra_scrip
 
 # Files used by WebUI
 
-The following files are copied to the "data" directory for upload to
-the MCU during the build process:
+The following files converted to header files for use by the SensESP web UI.  See the 
+src/net/web directory for the results of this conversion.
 
 1. docroot/index.html
 1. docroot/js/jsoneditor.min.js

@@ -39,11 +39,6 @@ lib_deps =
 ```
 Then, open `src/main.cpp`. The default template is for Arduino IDE, but a SensESP main file will look very different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
 
-To activate the ability to do advanced configuration on your sensors via a web interface, you must upload the
-web UI support files to your Wemos board.  To do this, copy the "data" directory out of the SensESP project
-and into your new project (that is, your project directory needs to have a directory named "data" that contains
-the same files as the SensESP/data directory).  Once this copy is made, select the "Upload File System Image" Project Task in PlatformIO (the little alien face).
-
 Assuming the project uploading was successful, your Wemos will be running the example code. To configure it, connect your computer or phone wifi to the "Unconfigured Sensor" network. A captive portal may pop up, but if it doesn't, open a browser and go to 192.168.4.1. Enter your wifi credentials to allow the device to access the network. Also enter a suitable name, for example `WemosSensESP` for the device. (No more than 16 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the Wemos will restart and try to connect to your wifi network.
 
 Once on the network, SensESP should automatically find your Signal K server, assuming it has mDNS enabled. If your server has security enabled, you should
@@ -57,8 +52,7 @@ TODO!
 
 In the examples below, `sensesp` is used as the device name.
 
-Assuming you have uploaded the web UI support files as described above, you can configure your device with any
-web browser by going to
+You can configure your device with any web browser by going to
 
     http://sensesp.local
 
