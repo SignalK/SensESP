@@ -51,7 +51,7 @@ String Frequency::get_config_schema() {
 
 
 bool Frequency::set_configuration(const JsonObject& config) {
-  String expected[] = {"k", "c", "sk_path"};
+  String expected[] = {"k", "sk_path"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
