@@ -39,6 +39,17 @@ class Passthrough : public SymmetricTransform<T> {
     return root;
   }
 
+  String get_config_schema() override {
+    return R"({
+        "type": "object",
+        "properties": {
+            "sk_path": { "title": "SignalK Path", "type": "string" },
+            "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        }
+    })";
+  }
+
+
   virtual bool set_configuration(const JsonObject& config) override {
     if (!config.containsKey("sk_path")) {
       return false;

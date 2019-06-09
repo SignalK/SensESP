@@ -2,6 +2,7 @@ var class_networking =
 [
     [ "Networking", "class_networking.html#a4b8c4d193f59be9aea6b09fd36b4f956", null ],
     [ "check_connection", "class_networking.html#ae4b12924970227730df3377144301a7c", null ],
+    [ "get_config_schema", "class_networking.html#a253025ed2a3c36eb998e7b900155359e", null ],
     [ "get_configuration", "class_networking.html#a2b8f2f52b332dc0af375113a64881a8a", null ],
     [ "get_hostname", "class_networking.html#a7a3cac2e878aa2c513451f235c70aff7", null ],
     [ "reset_settings", "class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c", null ],

@@ -37,6 +37,18 @@ JsonObject& MovingAverage::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+String MovingAverage::get_config_schema() {
+   return R"({
+      "type": "object",
+      "properties": {
+          "sk_path": { "title": "SignalK Path", "type": "string" },
+          "n": { "title": "Number of samples in average", "type": "integer" }
+          "k": { "title": "Multiplier", "type": "number" }
+      }
+   })";
+}
+
+
 bool MovingAverage::set_configuration(const JsonObject& config) {
   String expected[] = {"k", "sk_path"};
   for (auto str : expected) {
