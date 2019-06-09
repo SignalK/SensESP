@@ -98,7 +98,7 @@ OneWireTemperature::OneWireTemperature(
     bool success = dts->get_next_address(&address);
     if (!success) {
       debugE("FATAL: Could not find an available OneWire device");
-      failed = true;
+      found = false;
     } else {
       dts->register_address(address);
     }
@@ -106,13 +106,13 @@ OneWireTemperature::OneWireTemperature(
     bool success = dts->register_address(address);
     if (!success) {
       debugE("FATAL: Unable to register OneWire device");
-      failed = true;
+      found = false;
     }
   }
 }
 
 void OneWireTemperature::enable() {
-  if (!failed) {
+  if (found) {
     app.onRepeat(1000, [this](){ this->update(); });
   }
 }
@@ -135,7 +135,7 @@ JsonObject& OneWireTemperature::get_configuration(JsonBuffer& buf) {
   char addr_str[24];
   owda_to_string(addr_str, address);
   root.set("address", addr_str);
-  root.set("failed", failed);
+  root.set("found", found);
   return root;
 }
 
@@ -145,6 +145,7 @@ String OneWireTemperature::get_config_schema() {
       "type": "object",
       "properties": {
           "address": { "title": "OneWire address", "type": "string" },
+          "found": { "title": "Device found", "type": "boolean", "readOnly": true },
           "value": { "title": "Last value", "type" : "number", "readOnly": true }
       }
    })";

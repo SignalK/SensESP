@@ -32,11 +32,11 @@ class OneWireTemperature : public NumericDevice {
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
-  
+
  private:
   OneWire* onewire;
   DallasTemperatureSensors* dts;
-  bool failed=false;
+  bool found=false;
   OWDevAddr address = {};
   void update();
   void read_value();
