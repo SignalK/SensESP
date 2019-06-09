@@ -9,7 +9,7 @@
 #include "system/configurable.h"
 #include "system/signal_k.h"
 
-static const char* Null_Auth_Token = "no-token";
+static const char* NULL_AUTH_TOKEN = "";
 
 enum ConnectionState { disconnected, connecting, connected };
 
@@ -38,7 +38,7 @@ class WSClient : public Configurable {
   uint16_t port = 80;
   String client_id = "";
   String polling_href = "";
-  String auth_token = Null_Auth_Token;
+  String auth_token = NULL_AUTH_TOKEN;
   bool server_detected = false;
 
   // FIXME: replace with a single connection_state enum

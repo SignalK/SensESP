@@ -67,7 +67,7 @@ void WSClient::on_disconnected() {
      // know we have found and talked to the server usually means
      // the authentication token is bad.
      debugW("Bad access token detected.");
-     auth_token = Null_Auth_Token;
+     auth_token = NULL_AUTH_TOKEN;
      save_configuration();
   }
   this->connection_state = disconnected;
@@ -137,7 +137,7 @@ void WSClient::connect() {
     return;
   }
 
-  if (this->auth_token == Null_Auth_Token || this->auth_token == "") {
+  if (this->auth_token == NULL_AUTH_TOKEN) {
     // initiate HTTP authentication
     debugD("No prior authorization token present.");
     this->send_access_request(host, port);
