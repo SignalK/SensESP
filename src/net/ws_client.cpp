@@ -342,15 +342,16 @@ String WSClient::get_config_schema() {
       "properties": {
           "sk_host": { "title": "SignalK Host", "type": "string" },
           "sk_port": { "title": "SignalK host port", "type": "integer" },
-          "client_id": { "title": "Client id", "type": "string" },
-          "polling_href": { "title": "Server authorization polling href", "type": "string" }
+          "client_id": { "title": "Client id", "type": "string", "readOnly": true },
+          "token": { "title": "Server authorization token", "type": "string" },
+          "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
       }
    })";
 }
 
 
 bool WSClient::set_configuration(const JsonObject& config) {
-  String expected[] = {"sk_host", "sk_port", "token"};
+  String expected[] = {"sk_host", "sk_port", "token", "client_id", "polling_href"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
