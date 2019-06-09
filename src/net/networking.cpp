@@ -82,7 +82,7 @@ String Networking::get_config_schema() {
    return R"({
       "type": "object",
       "properties": {
-          "hostname": { "title": "Network SSID", "type": "string" }
+          "hostname": { "title": "Device hostname", "type": "string" }
       }
    })";
 }
