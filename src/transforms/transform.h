@@ -26,19 +26,19 @@
  * save the configuration data in.
  */
 class TransformBase : public SignalKSource,
-                      public Configurable, 
+                      public Configurable,
                       public Enable {
  public:
     TransformBase(String sk_path, String config_path="");
 
-  
+
   // Primary purpose of this was to supply SignalK sources
   // (now handled by SignalKSource::get_sources). Should
   // this be deprecated?
   static const std::set<TransformBase*>& get_transforms() {
     return transforms;
   }
- 
+
   private:
     static std::set<TransformBase*> transforms;
 };
@@ -71,7 +71,7 @@ typedef Transform<String> StringTransform;
 template <typename T>
 class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
 
-  public: 
+  public:
      SymmetricTransform(String sk_path, String config_path="") :
       ValueConsumer<T>(),
       Transform<T>(sk_path, config_path) {
@@ -79,7 +79,7 @@ class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
 
   /**
    * A convenience method that allows up to five producers to be
-   * quickly connected to the input of the ValueConsumer side of this 
+   * quickly connected to the input of the ValueConsumer side of this
    * transform.  The first producer will be connected to input
    * channel zero, the second one to input channel 1, etc.
    * "this" is returned, which allows the ValueProducer side
@@ -92,21 +92,21 @@ class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
                                      ValueProducer<T>* pProducer3 = NULL,
                                      ValueProducer<T>* pProducer4 = NULL) {
 
-      this->connectFrom(pProducer0, 0);
+      pProducer0->connectTo(this, 0);
       if (pProducer1 != NULL) {
-        this->connectFrom(pProducer1, 1);
+        pProducer1->connectTo(this, 1);
       }
       if (pProducer2 != NULL) {
-        this->connectFrom(pProducer2, 2);
+        pProducer2->connectTo(this, 2);
       }
       if (pProducer3 != NULL) {
-        this->connectFrom(pProducer3, 3);
+        pProducer3->connectTo(this, 3);
       }
       if (pProducer4 != NULL) {
-        this->connectFrom(pProducer4, 4);
+        pProducer4->connectTo(this, 4);
       }
-      return this;                                      
-  }  
+      return this;
+  }
 };
 
 typedef SymmetricTransform<float> SymmetricNumericTransform;
