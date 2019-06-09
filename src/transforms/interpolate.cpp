@@ -9,7 +9,7 @@ Interpolate::Sample::Sample(float input, float output) : input{input}, output{ou
 }
 
 Interpolate::Sample::Sample(JsonObject& obj) : input{obj["input"]}, output{obj["output"]} {
-  
+
 }
 
 
@@ -92,22 +92,23 @@ JsonObject& Interpolate::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "sk_path": { "title": "SignalK Path", "type": "string" },
+        "samples": { "title": "Sample values",
+                    "type": "array",
+                    "items": { "title": "Sample",
+                                "type": "object",
+                                "properties": {
+                                    "input": { "type": "number" },
+                                    "output": { "type": "number" }
+                              }}}
+    }
+  })";
 
 String Interpolate::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "samples": { "title": "Sample values",
-                      "type": "array", 
-                      "items": { "title": "Sample",
-                                  "type": "object",
-                                  "properties": {
-                                      "input": { "type": "number" },
-                                      "output": { "type": "number" }
-                                }}}
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
 
 bool Interpolate::set_configuration(const JsonObject& config) {

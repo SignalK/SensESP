@@ -117,7 +117,6 @@ void OneWireTemperature::enable() {
   }
 }
 
-
 void OneWireTemperature::update() {
   dts->sensors->requestTemperaturesByAddress(address.data());
 
@@ -139,19 +138,18 @@ JsonObject& OneWireTemperature::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "address": { "title": "OneWire address", "type": "string" },
+        "found": { "title": "Device found", "type": "boolean", "readOnly": true },
+        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+    }
+  })";
 
 String OneWireTemperature::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "address": { "title": "OneWire address", "type": "string" },
-          "found": { "title": "Device found", "type": "boolean", "readOnly": true },
-          "value": { "title": "Last value", "type" : "number", "readOnly": true }
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
-
-
 
 bool OneWireTemperature::set_configuration(const JsonObject& config) {
   if (!config.containsKey("address")) {

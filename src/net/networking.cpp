@@ -77,16 +77,16 @@ void Networking::set_hostname(String hostname) {
   this->hostname->set(hostname);
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "hostname": { "title": "Device hostname", "type": "string" }
+    }
+  })";
 
 String Networking::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "hostname": { "title": "Device hostname", "type": "string" }
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
-
 
 JsonObject& Networking::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();

@@ -335,18 +335,19 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "sk_host": { "title": "SignalK Host", "type": "string" },
+        "sk_port": { "title": "SignalK host port", "type": "integer" },
+        "client_id": { "title": "Client id", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token", "type": "string" },
+        "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
+    }
+  })";
 
 String WSClient::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_host": { "title": "SignalK Host", "type": "string" },
-          "sk_port": { "title": "SignalK host port", "type": "integer" },
-          "client_id": { "title": "Client id", "type": "string", "readOnly": true },
-          "token": { "title": "Server authorization token", "type": "string" },
-          "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
 
 
