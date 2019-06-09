@@ -5,7 +5,7 @@
 Frequency::Frequency(String sk_path, float k, String config_path) :
     IntegerConsumer(),
     NumericTransform{sk_path, config_path}, k{k} {
-  //load_configuration();
+    load_configuration();
 }
 
 void Frequency::enable() {
