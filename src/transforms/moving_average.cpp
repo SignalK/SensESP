@@ -37,15 +37,17 @@ JsonObject& MovingAverage::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "sk_path": { "title": "SignalK Path", "type": "string" },
+        "n": { "title": "Number of samples in average", "type": "integer" }
+        "k": { "title": "Multiplier", "type": "number" }
+    }
+  })";
+
 String MovingAverage::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "n": { "title": "Number of samples in average", "type": "integer" }
-          "k": { "title": "Multiplier", "type": "number" }
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
 
 

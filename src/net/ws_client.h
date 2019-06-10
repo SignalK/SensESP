@@ -9,7 +9,7 @@
 #include "system/configurable.h"
 #include "system/signal_k.h"
 
-static const char* Null_Auth_Token = "no-token";
+static const char* NULL_AUTH_TOKEN = "";
 
 enum ConnectionState { disconnected, connecting, connected };
 
@@ -34,11 +34,11 @@ class WSClient : public Configurable {
   virtual String get_config_schema() override;
 
  private:
-  String host = "";
-  uint16_t port = 80;
+  String server_address = "";
+  uint16_t server_port = 80;
   String client_id = "";
   String polling_href = "";
-  String auth_token = Null_Auth_Token;
+  String auth_token = NULL_AUTH_TOKEN;
   bool server_detected = false;
 
   // FIXME: replace with a single connection_state enum
@@ -52,7 +52,7 @@ class WSClient : public Configurable {
   void connect_ws(const String host, const uint16_t port);
   std::function<void(bool)> connected_cb;
   void_cb_func delta_cb;
-  bool get_mdns_service(String &host, uint16_t& port);
+  bool get_mdns_service(String &server_address, uint16_t& server_port);
 };
 
 #endif

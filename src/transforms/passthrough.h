@@ -3,6 +3,13 @@
 
 #include "transform.h"
 
+static const char PASSTHROUGH_SCHEMA[] PROGMEM = R"({
+      "type": "object",
+      "properties": {
+          "sk_path": { "title": "SignalK Path", "type": "string" },
+          "value": { "title": "Last value", "type" : "number", "readOnly": true }
+      }
+  })";
 
 // Passthrough is a "null" transform, just passing the value to output
 template <typename T>
@@ -40,15 +47,8 @@ class Passthrough : public SymmetricTransform<T> {
   }
 
   String get_config_schema() override {
-    return R"({
-        "type": "object",
-        "properties": {
-            "sk_path": { "title": "SignalK Path", "type": "string" },
-            "value": { "title": "Last value", "type" : "number", "readOnly": true }
-        }
-    })";
+    return FPSTR(PASSTHROUGH_SCHEMA);
   }
-
 
   virtual bool set_configuration(const JsonObject& config) override {
     if (!config.containsKey("sk_path")) {
@@ -57,7 +57,7 @@ class Passthrough : public SymmetricTransform<T> {
     TransformBase::sk_path = config["sk_path"].as<String>();
     return true;
   }
-  
+
 };
 
 #endif

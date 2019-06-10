@@ -28,18 +28,18 @@ JsonObject& VoltageDividerR2::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "sk_path": { "title": "SignalK Path", "type": "string" },
+        "Vin": { "title": "Voltage in", "type": "number" },
+        "R1": { "title": "Resistance (ohms) of R1", "type": "number" }
+    }
+  })";
 
 String VoltageDividerR2::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "Vin": { "title": "Voltage in", "type": "number" },
-          "R1": { "title": "Resistance (ohms) of R1", "type": "number" }
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
-
 
 bool VoltageDividerR2::set_configuration(const JsonObject& config) {
 
