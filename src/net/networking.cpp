@@ -45,10 +45,10 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   wifi_manager->setDebugOutput(false);
   #endif
   AsyncWiFiManagerParameter custom_hostname(
-    "hostname", "Set hostname", this->hostname->get().c_str(), 20);
+    "hostname", "Set ESP device hostname", this->hostname->get().c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
 
-  if (!wifi_manager->autoConnect("Unconfigured Sensor")) {
+  if (!wifi_manager->autoConnect("Unconfigured SensESP Device")) {
     debugE("Failed to connect to wifi and config timed out.");
     ESP.restart();
   }
@@ -80,7 +80,7 @@ void Networking::set_hostname(String hostname) {
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "hostname": { "title": "Device hostname", "type": "string" }
+        "hostname": { "title": "ESP device hostname", "type": "string" }
     }
   })";
 

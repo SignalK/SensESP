@@ -91,16 +91,16 @@ void WSClient::on_receive_delta(uint8_t * payload) {
   debugD("Received payload: %s", (char*)payload);
 }
 
-bool WSClient::get_mdns_service(String& host, uint16_t& port) {
+bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
   // get IP address using an mDNS query
   int n = MDNS.queryService("signalk-ws", "tcp");
   if (n==0) {
     // no service found
     return false;
   } else {
-    host = MDNS.IP(0).toString();
-    port = MDNS.port(0);
-    debugI("Found server with IP/Port: %s:%d", host.c_str(), port);
+    server_address = MDNS.IP(0).toString();
+    server_port = MDNS.port(0);
+    debugI("Found server %s (port %d)", server_address.c_str(), server_port);
     return true;
   }
 }
@@ -113,17 +113,17 @@ void WSClient::connect() {
 
   connection_state = connecting;
 
-  String host = "";
-  uint16_t port = 80;
+  String server_address = "";
+  uint16_t server_port = 80;
 
-  if (this->host.length() == 0) {
-    get_mdns_service(host, port);
+  if (this->server_address.length() == 0) {
+    get_mdns_service(server_address, server_port);
   } else {
-    host = this->host;
-    port = this->port;
+    server_address = this->server_address;
+    server_port = this->server_port;
   }
 
-  if ((host.length() > 0) && (port > 0)) {
+  if ((server_address.length() > 0) && (server_port > 0)) {
     debugD("Websocket client starting");
   } else {
     // host and port not defined - wait for mDNS
@@ -133,20 +133,20 @@ void WSClient::connect() {
 
   if (this->polling_href != "") {
     // existing pending request
-    this->poll_access_request(host, port, this->polling_href);
+    this->poll_access_request(server_address, server_port, this->polling_href);
     return;
   }
 
   if (this->auth_token == NULL_AUTH_TOKEN) {
     // initiate HTTP authentication
     debugD("No prior authorization token present.");
-    this->send_access_request(host, port);
+    this->send_access_request(server_address, server_port);
     return;
   }
-  this->test_token(host, port);
+  this->test_token(server_address, server_port);
 }
 
-void WSClient::test_token(const String host, const uint16_t port) {
+void WSClient::test_token(const String server_address, const uint16_t server_port) {
 
   // FIXME: implement async HTTP client!
   WiFiClient client;
@@ -154,7 +154,7 @@ void WSClient::test_token(const String host, const uint16_t port) {
 
   debugD("Testing token");
 
-  String url = String("http://") + host + ":" + port + "/signalk/v1/api/";
+  String url = String("http://") + server_address + ":" + server_port + "/signalk/v1/api/";
   http.begin(client, url);
   String full_token = String("JWT ") + auth_token;
   http.addHeader("Authorization", full_token.c_str());
@@ -166,15 +166,15 @@ void WSClient::test_token(const String host, const uint16_t port) {
   if (httpCode == 200) {
     // our token is valid, go ahead and connect
     server_detected = true;
-    this->connect_ws(host, port);
+    this->connect_ws(server_address, server_port);
   } else if (httpCode == 401) {
-    this->send_access_request(host, port);
+    this->send_access_request(server_address, server_port);
   } else {
     connection_state = disconnected;
   }
 }
 
-void WSClient::send_access_request(const String host, const uint16_t port) {
+void WSClient::send_access_request(const String server_address, const uint16_t server_port) {
   debugD("Preparing a new access request");
   if (client_id == "") {
     // generate a client ID
@@ -189,14 +189,14 @@ void WSClient::send_access_request(const String host, const uint16_t port) {
   JsonObject& req = buf.createObject();
   req["clientId"] = client_id;
   req["description"] =
-    String("SensESP sensor: ") + sensesp_app->get_hostname();
+    String("SensESP device: ") + sensesp_app->get_hostname();
   String json_req = "";
   req.printTo(json_req);
 
   WiFiClient client;
   HTTPClient http;
 
-  String url = String("http://") + host + ":" + port
+  String url = String("http://") + server_address + ":" + server_port
       + "/signalk/v1/access/requests";
   http.begin(client, url);
   http.addHeader("Content-Type", "application/json");
@@ -228,18 +228,18 @@ void WSClient::send_access_request(const String host, const uint16_t port) {
   save_configuration();
 
   debugD("Polling %s in 5 seconds", polling_href.c_str());
-  app.onDelay(5000, [this, host, port](){
-    this->poll_access_request(host, port, this->polling_href);
+  app.onDelay(5000, [this, server_address, server_port](){
+    this->poll_access_request(server_address, server_port, this->polling_href);
   });
 }
 
-void WSClient::poll_access_request(const String host, const uint16_t port, const String href) {
+void WSClient::poll_access_request(const String server_address, const uint16_t server_port, const String href) {
   debugD("Polling");
 
   WiFiClient client;
   HTTPClient http;
 
-  String url = String("http://") + host + ":" + port + href;
+  String url = String("http://") + server_address + ":" + server_port + href;
   http.begin(client, url);
   int httpCode = http.GET();
   if (httpCode == 200 or httpCode == 202) {
@@ -250,7 +250,7 @@ void WSClient::poll_access_request(const String host, const uint16_t port, const
     String state = resp["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
-      app.onDelay(5000, [this, host, port, href](){ this->poll_access_request(host, port, href); });
+      app.onDelay(5000, [this, server_address, server_port, href](){ this->poll_access_request(server_address, server_port, href); });
       return;
     } else if (state == "COMPLETED") {
       JsonObject& access_req = resp["accessRequest"];
@@ -267,7 +267,7 @@ void WSClient::poll_access_request(const String host, const uint16_t port, const
         String token = access_req["token"];
         auth_token = token;
         save_configuration();
-        app.onDelay(0, [this, host, port](){ this->connect_ws(host, port); });
+        app.onDelay(0, [this, server_address, server_port](){ this->connect_ws(server_address, server_port); });
         return;
       }
     }
@@ -327,8 +327,8 @@ void WSClient::send_delta() {
 
 JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
-  root["sk_host"] = this->host;
-  root["sk_port"] = this->port;
+  root["sk_address"] = this->server_address;
+  root["sk_port"] = this->server_port;
   root["token"] = this->auth_token;
   root["client_id"] = this->client_id;
   root["polling_href"] = this->polling_href;
@@ -338,9 +338,9 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "sk_host": { "title": "SignalK Host", "type": "string" },
-        "sk_port": { "title": "SignalK host port", "type": "integer" },
-        "client_id": { "title": "Client id", "type": "string", "readOnly": true },
+        "sk_address": { "title": "SignalK server address", "type": "string" },
+        "sk_port": { "title": "SignalK server port", "type": "integer" },
+        "client_id": { "title": "Client ID", "type": "string", "readOnly": true },
         "token": { "title": "Server authorization token", "type": "string" },
         "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
     }
@@ -352,14 +352,14 @@ String WSClient::get_config_schema() {
 
 
 bool WSClient::set_configuration(const JsonObject& config) {
-  String expected[] = {"sk_host", "sk_port", "token", "client_id", "polling_href"};
+  String expected[] = {"sk_address", "sk_port", "token", "client_id"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
     }
   }
-  this->host = config["sk_host"].as<String>();
-  this->port = config["sk_port"].as<int>();
+  this->server_address = config["sk_address"].as<String>();
+  this->server_port = config["sk_port"].as<int>();
   // FIXME: setting the token should not be allowed via the REST API.
   this->auth_token = config["token"].as<String>();
   this->client_id = config["client_id"].as<String>();
