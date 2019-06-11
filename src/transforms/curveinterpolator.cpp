@@ -1,19 +1,19 @@
-#include "interpolate.h"
+#include "CurveInterpolator.h"
 
 #include <RemoteDebug.h>
 
-Interpolate::Sample::Sample() {
+CurveInterpolator::Sample::Sample() {
 }
 
-Interpolate::Sample::Sample(float input, float output) : input{input}, output{output} {
+CurveInterpolator::Sample::Sample(float input, float output) : input{input}, output{output} {
 }
 
-Interpolate::Sample::Sample(JsonObject& obj) : input{obj["input"]}, output{obj["output"]} {
+CurveInterpolator::Sample::Sample(JsonObject& obj) : input{obj["input"]}, output{obj["output"]} {
 
 }
 
 
-Interpolate::Interpolate(String sk_path, std::set<Sample>* defaults, String config_path)
+CurveInterpolator::CurveInterpolator(String sk_path, std::set<Sample>* defaults, String config_path)
     : SymmetricTransform<float>{ sk_path, config_path } {
 
   // Load default values if no configuration present...
@@ -27,7 +27,7 @@ Interpolate::Interpolate(String sk_path, std::set<Sample>* defaults, String conf
 }
 
 
-void Interpolate::set_input(float input, uint8_t inputChannel) {
+void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
 
   float x0 = 0.0;
   float y0 = 0.0;
@@ -50,7 +50,7 @@ void Interpolate::set_input(float input, uint8_t inputChannel) {
 
   if (it != samples.end()) {
     // We found our range. "input" is between
-    // minInput and it->input. Interpolate the result
+    // minInput and it->input. CurveInterpolator the result
     Sample max = *it;
     float x1 = max.input;
     float y1 = max.output;
@@ -67,7 +67,7 @@ void Interpolate::set_input(float input, uint8_t inputChannel) {
 }
 
 
-String Interpolate::as_signalK() {
+String CurveInterpolator::as_signalK() {
   DynamicJsonBuffer jsonBuffer;
   String json;
   JsonObject& root = jsonBuffer.createObject();
@@ -78,7 +78,7 @@ String Interpolate::as_signalK() {
 }
 
 
-JsonObject& Interpolate::get_configuration(JsonBuffer& buf) {
+JsonObject& CurveInterpolator::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
   root["sk_path"] = sk_path;
 
@@ -107,16 +107,16 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String Interpolate::get_config_schema() {
+String CurveInterpolator::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool Interpolate::set_configuration(const JsonObject& config) {
+bool CurveInterpolator::set_configuration(const JsonObject& config) {
 
   String expected[] = { "sk_path", "samples" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE("Can not set Interpolate configuration: missing json field %s\n", str.c_str());
+      debugE("Can not set CurveInterpolator configuration: missing json field %s\n", str.c_str());
       return false;
     }
   }
@@ -137,11 +137,11 @@ bool Interpolate::set_configuration(const JsonObject& config) {
 
 }
 
-void Interpolate::clearSamples() {
+void CurveInterpolator::clearSamples() {
    samples.clear();
 }
 
-void Interpolate::addSample(const Sample& sample) {
+void CurveInterpolator::addSample(const Sample& sample) {
    Sample* pSampleCopy = new Sample(sample);
    samples.insert(*pSampleCopy);
 }
