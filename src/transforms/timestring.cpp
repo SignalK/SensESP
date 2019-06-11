@@ -31,14 +31,16 @@ JsonObject& TimeString::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "sk_path": { "title": "SignalK Path", "type": "string" },
+        "value": { "title": "Last value", "type" : "string", "readOnly": true }
+    }
+  })";
+
 String TimeString::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "value": { "title": "Last value", "type" : "string", "readOnly": true }
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
 
 bool TimeString::set_configuration(const JsonObject& config) {

@@ -38,19 +38,19 @@ JsonObject& Difference::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "sk_path": { "title": "SignalK Path", "type": "string" },
+        "k1": { "title": "Input #1 multiplier", "type": "number" },
+        "k2": { "title": "Input #2 multiplier", "type": "number" },
+        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+    }
+  })";
 
 String Difference::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
-          "k1": { "title": "Input #1 multiplier", "type": "number" },
-          "k2": { "title": "Input #2 multiplier", "type": "number" },
-          "value": { "title": "Last value", "type" : "number", "readOnly": true }
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
-
 
 bool Difference::set_configuration(const JsonObject& config) {
   String expected[] = {"k1", "k2", "sk_path"};

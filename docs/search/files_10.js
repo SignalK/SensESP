@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['wiring_5fhelpers_2ecpp',['wiring_helpers.cpp',['../wiring__helpers_8cpp.html',1,'']]],
-  ['wiring_5fhelpers_2eh',['wiring_helpers.h',['../wiring__helpers_8h.html',1,'']]],
-  ['ws_5fclient_2ecpp',['ws_client.cpp',['../ws__client_8cpp.html',1,'']]],
-  ['ws_5fclient_2eh',['ws_client.h',['../ws__client_8h.html',1,'']]]
+  ['valueconsumer_2eh',['valueconsumer.h',['../valueconsumer_8h.html',1,'']]],
+  ['valueproducer_2eh',['valueproducer.h',['../valueproducer_8h.html',1,'']]],
+  ['voltagedividerr2_2ecpp',['voltagedividerR2.cpp',['../voltagedivider_r2_8cpp.html',1,'']]],
+  ['voltagedividerr2_2eh',['voltagedividerR2.h',['../voltagedivider_r2_8h.html',1,'']]]
 ];

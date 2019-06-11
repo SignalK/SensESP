@@ -9,6 +9,5 @@ var searchData=
   ['horizontal_5fdilution',['horizontal_dilution',['../struct_n_m_e_a_data.html#aa6d1ee7ee222393032e1f57cde891b31',1,'NMEAData']]],
   ['http_2ecpp',['http.cpp',['../http_8cpp.html',1,'']]],
   ['http_2eh',['http.h',['../http_8h.html',1,'']]],
-  ['http_5fserver_5fport',['HTTP_SERVER_PORT',['../http_8cpp.html#a4f905ddd4da1a3e205a8935f4babb25b',1,'http.cpp']]],
   ['httpserver',['HTTPServer',['../class_h_t_t_p_server.html',1,'HTTPServer'],['../class_h_t_t_p_server.html#adacba9a090d5b0465da86dd6c82953a9',1,'HTTPServer::HTTPServer()']]]
 ];

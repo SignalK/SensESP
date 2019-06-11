@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.2.1</span>
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -125,6 +125,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a266d69d7194eb2c4c3bcd1bbc7e5251c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fbc04b63761975f99f6a812501da0b1"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_time_string.html#a4fbc04b63761975f99f6a812501da0b1">set_configuration</a> (const JsonObject &amp;config) override final</td></tr>
 <tr class="separator:a4fbc04b63761975f99f6a812501da0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf45aade28b1e60657253aefe9a1b6f4"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_time_string.html#adf45aade28b1e60657253aefe9a1b6f4">get_config_schema</a> () override</td></tr>
+<tr class="separator:adf45aade28b1e60657253aefe9a1b6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_value_consumer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_value_consumer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_value_consumer.html">ValueConsumer&lt; time_t &gt;</a></td></tr>
 <tr class="memitem:a6adf62d8d87ffa3ce70bb85379a68715 inherit pub_methods_class_value_consumer"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_consumer.html#a6adf62d8d87ffa3ce70bb85379a68715">connectFrom</a> (<a class="el" href="class_value_producer.html">ValueProducer</a>&lt; time_t &gt; *pProducer, uint8_t inputChannel=0)</td></tr>
 <tr class="separator:a6adf62d8d87ffa3ce70bb85379a68715 inherit pub_methods_class_value_consumer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,8 +151,6 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_class_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_configurable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_configurable.html">Configurable</a></td></tr>
 <tr class="memitem:a8972a439fb9b734ff68d27c699640f78 inherit pub_methods_class_configurable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#a8972a439fb9b734ff68d27c699640f78">Configurable</a> (String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>)</td></tr>
 <tr class="separator:a8972a439fb9b734ff68d27c699640f78 inherit pub_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73131c4e7dd8134f23a93de861e1c0e4 inherit pub_methods_class_configurable"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">get_config_schema</a> ()</td></tr>
-<tr class="separator:a73131c4e7dd8134f23a93de861e1c0e4 inherit pub_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a657419f13060caa20c45a41935b9d53a inherit pub_methods_class_configurable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#a657419f13060caa20c45a41935b9d53a">save_configuration</a> ()</td></tr>
 <tr class="separator:a657419f13060caa20c45a41935b9d53a inherit pub_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_enable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_enable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_enable.html">Enable</a></td></tr>
@@ -259,6 +259,36 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="adf45aade28b1e60657253aefe9a1b6f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf45aade28b1e60657253aefe9a1b6f4">&#9670;&nbsp;</a></span>get_config_schema()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String TimeString::get_config_schema </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns a configuration schema that specifies the key/value pairs that can be expected when calling <a class="el" href="class_time_string.html#a266d69d7194eb2c4c3bcd1bbc7e5251c">get_configuration()</a>, or are expected by <a class="el" href="class_time_string.html#a4fbc04b63761975f99f6a812501da0b1">set_configuration()</a>. The schema will be in JSON Schema format </p><dl class="section see"><dt>See also</dt><dd><a href="https://json-schema.org">https://json-schema.org</a> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">Configurable</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="timestring_8cpp_source.html#l00034">34</a> of file <a class="el" href="timestring_8cpp_source.html">timestring.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a266d69d7194eb2c4c3bcd1bbc7e5251c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a266d69d7194eb2c4c3bcd1bbc7e5251c">&#9670;&nbsp;</a></span>get_configuration()</h2>
 
@@ -317,7 +347,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a6e0281fe25cfbdf024bdb05147ffb52b">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timestring_8cpp_source.html#l00034">34</a> of file <a class="el" href="timestring_8cpp_source.html">timestring.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timestring_8cpp_source.html#l00044">44</a> of file <a class="el" href="timestring_8cpp_source.html">timestring.cpp</a>.</p>
 
 </div>
 </div>

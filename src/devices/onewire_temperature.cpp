@@ -97,26 +97,25 @@ OneWireTemperature::OneWireTemperature(
     // previously unconfigured device
     bool success = dts->get_next_address(&address);
     if (!success) {
-      debugE("FATAL: Could not find an available OneWire device");
-      failed = true;
+      debugE("FATAL: Could not find available OneWire devices");
+      found = false;
     } else {
       dts->register_address(address);
     }
   } else {
     bool success = dts->register_address(address);
     if (!success) {
-      debugE("FATAL: Unable to register OneWire device");
-      failed = true;
+      debugE("FATAL: OneWire device(s) found, but could not be registered");
+      found = false;
     }
   }
 }
 
 void OneWireTemperature::enable() {
-  if (!failed) {
+  if (found) {
     app.onRepeat(1000, [this](){ this->update(); });
   }
 }
-
 
 void OneWireTemperature::update() {
   dts->sensors->requestTemperaturesByAddress(address.data());
@@ -135,22 +134,22 @@ JsonObject& OneWireTemperature::get_configuration(JsonBuffer& buf) {
   char addr_str[24];
   owda_to_string(addr_str, address);
   root.set("address", addr_str);
-  root.set("failed", failed);
+  root.set("found", found);
   return root;
 }
 
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "address": { "title": "OneWire address", "type": "string" },
+        "found": { "title": "Device found", "type": "boolean", "readOnly": true },
+        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+    }
+  })";
 
 String OneWireTemperature::get_config_schema() {
-   return R"({
-      "type": "object",
-      "properties": {
-          "address": { "title": "OneWire address", "type": "string" },
-          "value": { "title": "Last value", "type" : "number", "readOnly": true }
-      }
-   })";
+  return FPSTR(SCHEMA);
 }
-
-
 
 bool OneWireTemperature::set_configuration(const JsonObject& config) {
   if (!config.containsKey("address")) {

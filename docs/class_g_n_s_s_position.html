@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.2.1</span>
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -126,6 +126,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a261e90fc05b828e9539c6622ec3aafe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a142b7c97d1ff603c513c8e63598c4aef"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_n_s_s_position.html#a142b7c97d1ff603c513c8e63598c4aef">set_configuration</a> (const JsonObject &amp;config) override final</td></tr>
 <tr class="separator:a142b7c97d1ff603c513c8e63598c4aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8a6a06700255194de45b4188fe6d08a"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_n_s_s_position.html#ae8a6a06700255194de45b4188fe6d08a">get_config_schema</a> () override</td></tr>
+<tr class="separator:ae8a6a06700255194de45b4188fe6d08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_symmetric_transform"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_symmetric_transform')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_symmetric_transform.html">SymmetricTransform&lt; Position &gt;</a></td></tr>
 <tr class="memitem:add5f3e15e1956bde08508240e1031722 inherit pub_methods_class_symmetric_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_symmetric_transform.html#add5f3e15e1956bde08508240e1031722">SymmetricTransform</a> (String <a class="el" href="class_signal_k_source.html#ac9416b56a4a8fc0e741ec537b2411177">sk_path</a>, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
 <tr class="separator:add5f3e15e1956bde08508240e1031722 inherit pub_methods_class_symmetric_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,8 +157,6 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_class_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_configurable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_configurable.html">Configurable</a></td></tr>
 <tr class="memitem:a8972a439fb9b734ff68d27c699640f78 inherit pub_methods_class_configurable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#a8972a439fb9b734ff68d27c699640f78">Configurable</a> (String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>)</td></tr>
 <tr class="separator:a8972a439fb9b734ff68d27c699640f78 inherit pub_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73131c4e7dd8134f23a93de861e1c0e4 inherit pub_methods_class_configurable"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">get_config_schema</a> ()</td></tr>
-<tr class="separator:a73131c4e7dd8134f23a93de861e1c0e4 inherit pub_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a657419f13060caa20c45a41935b9d53a inherit pub_methods_class_configurable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#a657419f13060caa20c45a41935b9d53a">save_configuration</a> ()</td></tr>
 <tr class="separator:a657419f13060caa20c45a41935b9d53a inherit pub_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_enable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_enable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_enable.html">Enable</a></td></tr>
@@ -273,6 +273,36 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="ae8a6a06700255194de45b4188fe6d08a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8a6a06700255194de45b4188fe6d08a">&#9670;&nbsp;</a></span>get_config_schema()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String GNSSPosition::get_config_schema </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns a configuration schema that specifies the key/value pairs that can be expected when calling <a class="el" href="class_g_n_s_s_position.html#a261e90fc05b828e9539c6622ec3aafe3">get_configuration()</a>, or are expected by <a class="el" href="class_g_n_s_s_position.html#a142b7c97d1ff603c513c8e63598c4aef">set_configuration()</a>. The schema will be in JSON Schema format </p><dl class="section see"><dt>See also</dt><dd><a href="https://json-schema.org">https://json-schema.org</a> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">Configurable</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="gnss__position_8cpp_source.html#l00025">25</a> of file <a class="el" href="gnss__position_8cpp_source.html">gnss_position.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a261e90fc05b828e9539c6622ec3aafe3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a261e90fc05b828e9539c6622ec3aafe3">&#9670;&nbsp;</a></span>get_configuration()</h2>
 
@@ -331,7 +361,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a6e0281fe25cfbdf024bdb05147ffb52b">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gnss__position_8cpp_source.html#l00025">25</a> of file <a class="el" href="gnss__position_8cpp_source.html">gnss_position.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gnss__position_8cpp_source.html#l00036">36</a> of file <a class="el" href="gnss__position_8cpp_source.html">gnss_position.cpp</a>.</p>
 
 </div>
 </div>

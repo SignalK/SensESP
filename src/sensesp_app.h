@@ -28,24 +28,6 @@ class SensESPApp {
       pProducer->connectTo(pConsumer, inputChannel);
   }
 
-
-  template<typename T, typename U>
-  void connect_1to1(T* obs, U* transform) {
-    obs->attach([obs, transform](){
-      transform->set_input(obs->get());
-    });
-  }
-
-  template<typename T, typename U>
-  void connect_2to1(T* obs1, T* obs2, U* transform) {
-    obs1->attach([obs1, transform]() {
-      transform->set_input(obs1->get(), 0);
-    });
-    obs2->attach([obs2, transform]() {
-      transform->set_input(obs2->get(), 1);
-    });
-  }
-
   template<typename T, typename U>
   void connect_1to1_h(T* device, U* transform,
                       ObservableValue<String>* hostname) {
