@@ -1,5 +1,5 @@
-#ifndef _Interpolate_H_
-#define _Interpolate_H_
+#ifndef _CurveInterpolator_H_
+#define _CurveInterpolator_H_
 
 #include "transforms/transform.h"
 
@@ -10,7 +10,7 @@
  * between.  It is used primarily for non-linear analog gauges such as temperature gauges using
  * Thermocouples 
  */
-class Interpolate : public SymmetricTransform<float> {
+class CurveInterpolator : public SymmetricTransform<float> {
 
  public:
     class Sample {
@@ -26,7 +26,7 @@ class Interpolate : public SymmetricTransform<float> {
     };
 
  public:
-   Interpolate(String sk_path, std::set<Sample>* defaults = NULL, String config_path="");
+   CurveInterpolator(String sk_path, std::set<Sample>* defaults = NULL, String config_path="");
 
    // Set and retrieve the transformed value
    void set_input(float input, uint8_t inputChannel = 0) override final;
