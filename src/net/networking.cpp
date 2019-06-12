@@ -54,7 +54,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
     ESP.restart();
   }
 
-  debugD("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
+  debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
   connection_cb(true);
 
   if (should_save_config) {

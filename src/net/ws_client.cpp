@@ -189,7 +189,7 @@ void WSClient::send_access_request(const String host, const uint16_t port) {
   JsonObject& req = buf.createObject();
   req["clientId"] = client_id;
   req["description"] =
-    String("SensESP MCU: ") + sensesp_app->get_hostname();
+    String("SensESP device: ") + sensesp_app->get_hostname();
   String json_req = "";
   req.printTo(json_req);
 
