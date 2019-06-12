@@ -66,7 +66,7 @@ void WSClient::on_disconnected() {
      // Going from connecting directly to disconnect when we
      // know we have found and talked to the server usually means
      // the authentication token is bad.
-     debugW("Bad access token detected.");
+     debugW("Bad access token detected. Setting token to null.");
      auth_token = Null_Auth_Token;
      save_configuration();
   }
@@ -88,7 +88,7 @@ void WSClient::on_connected(uint8_t * payload) {
 }
 
 void WSClient::on_receive_delta(uint8_t * payload) {
-  debugD("Received payload: %s", (char*)payload);
+  debugD("Websocket payload received: %s", (char*)payload);
 }
 
 bool WSClient::get_mdns_service(String& host, uint16_t& port) {
@@ -189,7 +189,7 @@ void WSClient::send_access_request(const String host, const uint16_t port) {
   JsonObject& req = buf.createObject();
   req["clientId"] = client_id;
   req["description"] =
-    String("SensESP sensor: ") + sensesp_app->get_hostname();
+    String("SensESP device: ") + sensesp_app->get_hostname();
   String json_req = "";
   req.printTo(json_req);
 
@@ -234,7 +234,7 @@ void WSClient::send_access_request(const String host, const uint16_t port) {
 }
 
 void WSClient::poll_access_request(const String host, const uint16_t port, const String href) {
-  debugD("Polling");
+  debugD("Polling SK Server for authentication token");
 
   WiFiClient client;
   HTTPClient http;

@@ -29,6 +29,7 @@ Networking::Networking(String config_path)
 void Networking::check_connection() {
   if (WiFi.status() != WL_CONNECTED) {
     // if connection is lost, simply restart
+    debugD("Wifi disconnected: restarting...");
     ESP.restart();
   }
 }
@@ -49,11 +50,11 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   wifi_manager->addParameter(&custom_hostname);
 
   if (!wifi_manager->autoConnect("Unconfigured Sensor")) {
-    debugE("Failed to connect to wifi and config timed out.");
+    debugE("Failed to connect to wifi and config timed out. Restarting...");
     ESP.restart();
   }
 
-  debugI("Connected to Wifi.");
+  debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
   connection_cb(true);
 
   if (should_save_config) {
