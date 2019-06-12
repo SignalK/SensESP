@@ -123,18 +123,24 @@ void SensESPApp::enable() {
 
   debugI("Enabling subsystems");
 
+  debugI("Subsystem: networking->setup()");
   networking->setup([this](bool connected) {
     if (connected) {
       this->led_blinker.set_wifi_connected();
     } else {
       this->led_blinker.set_wifi_disconnected();
+      debugD("Not connected to wifi");
     }
   });
 
+  debugI("Subsystem: setup_OTA()");
   setup_OTA();
+  debugI("Subsystem: setup_discovery()");
   setup_discovery(networking->get_hostname()->get().c_str());
 
+  debugI("Subsystem: http_server()");
   this->http_server->enable();
+  debugI("Subsystem: ws_client()");
   this->ws_client->enable();
 
   debugI("WS client enabled");
