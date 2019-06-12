@@ -1,4 +1,4 @@
-#include "CurveInterpolator.h"
+#include "curveinterpolator.h"
 
 #include <RemoteDebug.h>
 
