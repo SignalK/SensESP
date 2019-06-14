@@ -13,6 +13,11 @@
 ///////////////////
 // provide correct output formatting for GNSS position
 
+
+template<>
+String SKOutput<Position>::as_signalK();
+
+
 class SKOutputPosition : public SKOutput<Position> {
  public:
   SKOutputPosition(String sk_path, String config_path="") :
@@ -20,12 +25,6 @@ class SKOutputPosition : public SKOutput<Position> {
   }
 
   virtual String as_signalK() override;
-
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
-
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
-
 };
 
 #endif

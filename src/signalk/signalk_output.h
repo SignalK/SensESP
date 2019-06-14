@@ -36,6 +36,7 @@ class SKOutput : public SKEmitter,
     String json;
     JsonObject& root = jsonBuffer.createObject();
     root.set("path", this->get_sk_path());
+    root.set("value", ValueProducer<T>::output);    
     root.printTo(json);
     return json;
   }
