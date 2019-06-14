@@ -6,7 +6,7 @@
 #include "Arduino.h"
 #include <ArduinoJson.h>
 
-#include "devices/gps.h"
+#include "sensors/gps.h"
 #include "sensesp.h"
 #include "signalk_output.h"
 

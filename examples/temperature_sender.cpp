@@ -2,7 +2,7 @@
 
 #include "sensesp_app.h"
 #include "transforms/linear.h"
-#include "devices/analog_input.h"
+#include "sensors/analog_input.h"
 
 #include "transforms/analogvoltage.h"
 #include "transforms/voltagedividerR2.h"
@@ -12,7 +12,7 @@
 
 
 /**
- * A custom transform that takes a resistance value on ohms and returns the estimated 
+ * A custom transform that takes a resistance value on ohms and returns the estimated
  * temperature in Kelvin.  Sample data in this example were taken from a Westerbeke generator
  * temperature gauge.
  */
@@ -61,7 +61,7 @@ ReactESP app([] () {
   sensesp_app = new SensESPApp();
 
 
-  // The "SignalK path" identifies this sensor to the SignalK network. 
+  // The "SignalK path" identifies this sensor to the SignalK network.
   const char* sk_path = "electrical.generator.engine.water.temp";
 
 

@@ -11,7 +11,7 @@ template <typename C, typename P> class Transform;
 
 
 /**
- * A ValueProducer<> is any device or piece of code that outputs a value for consumption
+ * A ValueProducer<> is any sensor or piece of code that outputs a value for consumption
  * elsewhere.  They are Observable, allowing code to be notified whenever a new value
  * is available.  They can be connected directly to ValueConsumers of the same type
  * using the connectTo() method.

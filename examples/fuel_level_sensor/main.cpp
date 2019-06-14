@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "sensesp_app.h"
-#include "devices/analog_input.h"
+#include "sensors/analog_input.h"
 #include "transforms/moving_average.h"
 #include "signalk/signalk_output.h"
 
@@ -30,7 +30,7 @@ ReactESP app([] () {
   MovingAverage* avg = new MovingAverage(10, scale);
 
   input -> connectTo(avg) -> connectTo(new SKOutputNumber("tanks.fuel.0.currentLevel"));
-  
+
   sensesp_app->enable();
 
 });

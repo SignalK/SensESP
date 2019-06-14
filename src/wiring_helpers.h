@@ -2,7 +2,7 @@
 #define _wiring_helpers_H_
 
 #include "sensesp_app.h"
-#include "devices/onewire_temperature.h"
+#include "sensors/onewire_temperature.h"
 
 void setup_analog_input(
     String sk_path, float k=1, float c=0,

@@ -4,7 +4,7 @@
 // Required for RemoteDebug
 #define USE_LIB_WEBSOCKET true
 
-#include "devices/device.h"
+#include "sensors/sensor.h"
 #include "net/http.h"
 #include "net/networking.h"
 #include "net/ws_client.h"
@@ -29,18 +29,18 @@ class SensESPApp {
   }
 
   template<typename T, typename U>
-  void connect_1to1_h(T* device, U* transform,
+  void connect_1to1_h(T* sensor, U* transform,
                       ObservableValue<String>* hostname) {
     String hostname_str = hostname->get();
-    String value_name = device->get_value_name();
+    String value_name = sensor->get_value_name();
     String sk_path = "sensors." + hostname_str + "." + value_name;
     auto comp_set_sk_path = [hostname, transform, value_name](){
         transform->set_sk_path(
           "sensors." + hostname->get() + "." + value_name);
     };
     comp_set_sk_path();
-    device->attach([device, transform](){
-      transform->set_input(device->get());
+    sensor->attach([sensor, transform](){
+      transform->set_input(sensor->get());
     });
     hostname->attach(comp_set_sk_path);
   }
@@ -62,7 +62,7 @@ class SensESPApp {
 
 
  private:
-  void setup_standard_devices(ObservableValue<String>* hostname);
+  void setup_standard_sensors(ObservableValue<String>* hostname);
 
   HTTPServer* http_server;
   LedBlinker led_blinker;

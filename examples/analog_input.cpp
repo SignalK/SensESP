@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 #include "sensesp_app.h"
-#include "devices/analog_input.h"
+#include "sensors/analog_input.h"
 #include "transforms/linear.h"
 #include "signalk/signalk_output.h"
 
@@ -33,16 +33,16 @@ ReactESP app([] () {
   // The "Configuration path" is combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
   // It is ALSO used to specify a path to the SPIFFS file system
-  // where configuration data is saved on the MCU board.  It should 
-  // ALWAYS start with a forward slash if specified.  If left blank, 
-  // that indicates this sensor or transform does not have any 
+  // where configuration data is saved on the MCU board.  It should
+  // ALWAYS start with a forward slash if specified.  If left blank,
+  // that indicates this sensor or transform does not have any
   // configuration to save.
   // Note that if you want to be able to change the sk_path at runtime,
   // you will need to specify a config_path.
   const char* config_path = "/sensors/indoor_illumination";
 
 
-  // Create a "device" that is the source of our data
+  // Create a "sensor" that is the source of our data
   auto* pAnalogInput = new AnalogInput();
 
 
@@ -52,7 +52,7 @@ ReactESP app([] () {
   const float offset = 0.0;
   auto* pTransform = new Linear(multiplier, offset, config_path);
 
-  
+
   // Wire up the output of the analog input to the transform,
   // and then output the results on the SignalK network...
   pAnalogInput -> connectTo(pTransform)

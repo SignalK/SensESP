@@ -5,7 +5,7 @@
 #include "sensesp.h"
 
 GPSInput::GPSInput(int rx_pin, String config_path)
-    : Device(config_path) {
+    : Sensor(config_path) {
 
   nmea_parser.add_sentence_parser(new GPGGASentenceParser(&nmea_data));
   nmea_parser.add_sentence_parser(new GPGLLSentenceParser(&nmea_data));
