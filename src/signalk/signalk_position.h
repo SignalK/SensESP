@@ -13,10 +13,10 @@
 ///////////////////
 // provide correct output formatting for GNSS position
 
-class SignalKPosition : public SignalKOutput<Position> {
+class SKOutputPosition : public SKOutput<Position> {
  public:
-  SignalKPosition(String sk_path, String config_path="") :
-    SignalKOutput<Position>{sk_path, config_path } {
+  SKOutputPosition(String sk_path, String config_path="") :
+    SKOutput<Position>{sk_path, config_path } {
   }
 
   virtual String as_signalK() override;

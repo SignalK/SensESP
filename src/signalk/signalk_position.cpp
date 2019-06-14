@@ -1,7 +1,7 @@
 
 #include "signalk_position.h"
 
-String SignalKPosition::as_signalK() {
+String SKOutputPosition::as_signalK() {
     DynamicJsonBuffer jsonBuffer;
     String json;
     JsonObject& root = jsonBuffer.createObject();
@@ -16,7 +16,7 @@ String SignalKPosition::as_signalK() {
     return json;
 }
 
-JsonObject& SignalKPosition::get_configuration(JsonBuffer& buf) {
+JsonObject& SKOutputPosition::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
   root["sk_path"] = this->get_sk_path();
   return root;
@@ -29,11 +29,11 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String SignalKPosition::get_config_schema() {
+String SKOutputPosition::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool SignalKPosition::set_configuration(const JsonObject& config) {
+bool SKOutputPosition::set_configuration(const JsonObject& config) {
   if (!config.containsKey("sk_path")) {
     return false;
   }

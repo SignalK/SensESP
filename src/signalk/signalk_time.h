@@ -4,10 +4,10 @@
 #include "transforms/timestring.h"
 #include "signalk_source.h"
 
-class SignalKTime : public TimeString, 
+class SKOutputTime : public TimeString, 
                     public SignalKSource {
  public:
-  SignalKTime(String sk_path, String config_path="");
+  SKOutputTime(String sk_path, String config_path="");
   virtual String as_signalK() override;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override;
   virtual bool set_configuration(const JsonObject& config) override;

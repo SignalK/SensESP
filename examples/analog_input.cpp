@@ -56,7 +56,7 @@ ReactESP app([] () {
   // Wire up the output of the analog input to the transform,
   // and then output the results on the SignalK network...
   pAnalogInput -> connectTo(pTransform)
-               -> connectTo(new SignalKNumber(sk_path));
+               -> connectTo(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running
   sensesp_app->enable();

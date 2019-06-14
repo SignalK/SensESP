@@ -67,7 +67,7 @@ const uint read_delay = 500;
   auto* pDevice = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
   
   pDevice->connectTo(new Frequency(multiplier, "/sensors/engine_rpm/calibrate")) 
-         -> connectTo(new SignalKNumber(sk_path, "/sensors/engine_rpm/sk"));
+         -> connectTo(new SKOutputNumber(sk_path, "/sensors/engine_rpm/sk"));
 
 
   // Start the SensESP application running

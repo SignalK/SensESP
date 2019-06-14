@@ -72,9 +72,9 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
 
   // connect systemhz
 
-  connect_1to1_h<SystemHz, SignalKOutput<float>>(
+  connect_1to1_h<SystemHz, SKOutput<float>>(
     new SystemHz(),
-    new SignalKOutput<float>(),
+    new SKOutput<float>(),
     hostname
   );
 
@@ -82,25 +82,25 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
 
   // connect freemem
 
-  connect_1to1_h<FreeMem, SignalKOutput<float>>(
+  connect_1to1_h<FreeMem, SKOutput<float>>(
     new FreeMem(),
-    new SignalKOutput<float>(),
+    new SKOutput<float>(),
     hostname
   );
 
   // connect uptime
 
-  connect_1to1_h<Uptime, SignalKOutput<float>>(
+  connect_1to1_h<Uptime, SKOutput<float>>(
     new Uptime(),
-    new SignalKOutput<float>(),
+    new SKOutput<float>(),
     hostname
   );
 
   // connect ip address
 
-  connect_1to1_h<IPAddrDev, SignalKOutput<String>>(
+  connect_1to1_h<IPAddrDev, SKOutput<String>>(
     new IPAddrDev(),
-    new SignalKOutput<String>(),
+    new SKOutput<String>(),
     hostname
   );
 }

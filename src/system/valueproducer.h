@@ -9,9 +9,6 @@
 // The Transform class is defined in transforms/transform.h
 template <typename C, typename P> class Transform;
 
-// SignalKOutput is defined in signalk/signalk_output.h
-template <typename T> class SignalKOutput;
-
 
 /**
  * A ValueProducer<> is any device or piece of code that outputs a value for consumption

@@ -11,15 +11,15 @@ static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
       }
   })";
 
-// SignalKOutput is a specialized transform whose primary purpose is
+// SKOutput is a specialized transform whose primary purpose is
 // to output SignalK data on the SignalK network.
 template <typename T>
-class SignalKOutput : public SignalKSource,
+class SKOutput : public SignalKSource,
                       public SymmetricTransform<T> {
  public:
-  SignalKOutput() : SignalKOutput("") {}
+  SKOutput() : SKOutput("") {}
 
-  SignalKOutput(String sk_path, String config_path="")
+  SKOutput(String sk_path, String config_path="")
     : SignalKSource(sk_path), SymmetricTransform<T>(config_path) {
     Enable::setPriority(-5);
   }
@@ -60,9 +60,9 @@ class SignalKOutput : public SignalKSource,
 
 };
 
-typedef SignalKOutput<float> SignalKNumber;
-typedef SignalKOutput<int> SignalKInt;
-typedef SignalKOutput<bool> SignalKBool;
-typedef SignalKOutput<String> SignalKString;
+typedef SKOutput<float> SKOutputNumber;
+typedef SKOutput<int> SKOutputInt;
+typedef SKOutput<bool> SKOutputBool;
+typedef SKOutput<String> SKOutputString;
 
 #endif
