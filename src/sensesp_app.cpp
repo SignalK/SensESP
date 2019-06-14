@@ -13,7 +13,7 @@
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
 #include "transforms/linear.h"
-#include "transforms/passthrough.h"
+#include "signalk/signalk_output.h"
 
 #ifndef DEBUG_DISABLED
 RemoteDebug Debug;
@@ -72,9 +72,9 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
 
   // connect systemhz
 
-  connect_1to1_h<SystemHz, Passthrough<float>>(
+  connect_1to1_h<SystemHz, SKOutput<float>>(
     new SystemHz(),
-    new Passthrough<float>(),
+    new SKOutput<float>(),
     hostname
   );
 
@@ -82,25 +82,25 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
 
   // connect freemem
 
-  connect_1to1_h<FreeMem, Passthrough<float>>(
+  connect_1to1_h<FreeMem, SKOutput<float>>(
     new FreeMem(),
-    new Passthrough<float>(),
+    new SKOutput<float>(),
     hostname
   );
 
   // connect uptime
 
-  connect_1to1_h<Uptime, Passthrough<float>>(
+  connect_1to1_h<Uptime, SKOutput<float>>(
     new Uptime(),
-    new Passthrough<float>(),
+    new SKOutput<float>(),
     hostname
   );
 
   // connect ip address
 
-  connect_1to1_h<IPAddrDev, Passthrough<String>>(
+  connect_1to1_h<IPAddrDev, SKOutput<String>>(
     new IPAddrDev(),
-    new Passthrough<String>(),
+    new SKOutput<String>(),
     hostname
   );
 }
@@ -112,7 +112,7 @@ void SensESPApp::enable() {
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
-  for (auto const& sigkSource : SignalKSource::get_sources()) {
+  for (auto const& sigkSource : SKEmitter::get_sources()) {
     if (sigkSource->get_sk_path() != "") {
       debugI("Connecting SignalK source %s", sigkSource->get_sk_path().c_str());
       sigkSource->attach([sigkSource, this](){

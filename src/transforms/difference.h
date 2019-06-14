@@ -2,16 +2,14 @@
 #define _difference_H_
 
 #include "transform.h"
-#include "system/valueconsumer.h"
 
 // y = k1 * x1 - k2 * x2
-class Difference : public SymmetricTransform<float> {
+class Difference : public NumericTransform {
  public:
-  Difference(String sk_path, float k1, float k2, String config_path="");
-  virtual void set_input(float input, uint8_t inputChannel) override final;
-  virtual String as_signalK() override final;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual bool set_configuration(const JsonObject& config) override final;
+  Difference(float k1, float k2, String config_path="");
+  virtual void set_input(float input, uint8_t inputChannel) override;
+  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
+  virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
  private:

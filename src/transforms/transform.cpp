@@ -8,7 +8,8 @@
 
 std::set<TransformBase*> TransformBase::transforms;
 
-TransformBase::TransformBase(String sk_path, String config_path) :
-    Configurable{config_path}, SignalKSource(sk_path), Enable(5) {
+TransformBase::TransformBase(String config_path) :
+    Configurable{config_path}, Enable(5) {
   transforms.insert(this);
 }
+

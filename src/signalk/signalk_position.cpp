@@ -1,11 +1,11 @@
 
-#include "gnss_position.h"
+#include "signalk_position.h"
 
-String GNSSPosition::as_signalK() {
+String SKOutputPosition::as_signalK() {
     DynamicJsonBuffer jsonBuffer;
     String json;
     JsonObject& root = jsonBuffer.createObject();
-    root.set("path", sk_path);
+    root.set("path", this->get_sk_path());
     JsonObject& value = root.createNestedObject("value");
     value.set("latitude", output.latitude);
     value.set("longitude", output.longitude);
@@ -16,9 +16,9 @@ String GNSSPosition::as_signalK() {
     return json;
 }
 
-JsonObject& GNSSPosition::get_configuration(JsonBuffer& buf) {
+JsonObject& SKOutputPosition::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
-  root["sk_path"] = sk_path;
+  root["sk_path"] = this->get_sk_path();
   return root;
 }
 
@@ -29,14 +29,14 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String GNSSPosition::get_config_schema() {
+String SKOutputPosition::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool GNSSPosition::set_configuration(const JsonObject& config) {
+bool SKOutputPosition::set_configuration(const JsonObject& config) {
   if (!config.containsKey("sk_path")) {
     return false;
   }
-  sk_path = config["sk_path"].as<String>();
+  this->set_sk_path(config["sk_path"].as<String>());
   return true;
 }

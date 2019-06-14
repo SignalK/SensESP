@@ -13,8 +13,8 @@ CurveInterpolator::Sample::Sample(JsonObject& obj) : input{obj["input"]}, output
 }
 
 
-CurveInterpolator::CurveInterpolator(String sk_path, std::set<Sample>* defaults, String config_path)
-    : SymmetricTransform<float>{ sk_path, config_path } {
+CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults, String config_path)
+    : NumericTransform(config_path) {
 
   // Load default values if no configuration present...
   if (defaults != NULL) {
@@ -67,20 +67,8 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
 }
 
 
-String CurveInterpolator::as_signalK() {
-  DynamicJsonBuffer jsonBuffer;
-  String json;
-  JsonObject& root = jsonBuffer.createObject();
-  root.set("path", this->sk_path);
-  root.set("value", output);
-  root.printTo(json);
-  return json;
-}
-
-
 JsonObject& CurveInterpolator::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
-  root["sk_path"] = sk_path;
 
   JsonArray& jSamples = root.createNestedArray("samples");
   for (auto& sample : samples) {
@@ -95,7 +83,6 @@ JsonObject& CurveInterpolator::get_configuration(JsonBuffer& buf) {
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "sk_path": { "title": "SignalK Path", "type": "string" },
         "samples": { "title": "Sample values",
                     "type": "array",
                     "items": { "title": "Sample",
@@ -113,15 +100,13 @@ String CurveInterpolator::get_config_schema() {
 
 bool CurveInterpolator::set_configuration(const JsonObject& config) {
 
-  String expected[] = { "sk_path", "samples" };
+  String expected[] = { "samples" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       debugE("Can not set CurveInterpolator configuration: missing json field %s\n", str.c_str());
       return false;
     }
   }
-
-  sk_path = config["sk_path"].as<String>();
 
   JsonArray& arr = config["samples"];
   if (arr.size() > 0) {

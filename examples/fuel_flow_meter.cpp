@@ -16,7 +16,7 @@ ReactESP app([] () {
 
   sensesp_app = new SensESPApp();
 
-  setup_fuel_flow_meter(sensesp_app, D5, D6);
+  setup_fuel_flow_meter(D5, D6);
 
   sensesp_app->enable();
 });

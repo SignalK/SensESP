@@ -1,9 +1,8 @@
 #include <Arduino.h>
 #include "sensesp_app.h"
-#include "system/valueconsumer.h"
 #include "devices/analog_input.h"
 #include "transforms/moving_average.h"
-#include "wiring_helpers.h"
+#include "signalk/signalk_output.h"
 
 #define SERIAL_DEBUG_DISABLED = true
 
@@ -28,8 +27,10 @@ ReactESP app([] () {
   float scale = 0.001149425F;
 
   // Takes a moving average for every 10 values, with scale factor
-  MovingAverage* avg = new MovingAverage("tanks.fuel.0.currentLevel", 10, scale);
+  MovingAverage* avg = new MovingAverage(10, scale);
 
-  input->connectTo(avg);
+  input -> connectTo(avg) -> connectTo(new SKOutputNumber("tanks.fuel.0.currentLevel"));
+  
   sensesp_app->enable();
+
 });

@@ -6,14 +6,16 @@
 #include "transform.h"
 #include "system/valueconsumer.h"
 
-class TimeString : public ValueConsumer<time_t>, public StringTransform {
+/**
+ * TimeString consumes a time_t time object and produces a human readable
+ * string of the time for UTC in ISO 8601 format.
+ */
+class TimeString : public Transform<time_t, String> {
+                          
  public:
-  TimeString(String sk_path, String config_path="");
-  virtual void set_input(time_t input, uint8_t inputChannel = 0) override final;
-  String as_signalK() override final;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual bool set_configuration(const JsonObject& config) override final;
-  virtual String get_config_schema() override;
+  TimeString(String config_path="");
+  virtual void set_input(time_t input, uint8_t inputChannel = 0) override;
+
 };
 
 #endif

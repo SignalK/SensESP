@@ -9,8 +9,8 @@
 class AnalogVoltage : public Linear {
 
     public:
-       AnalogVoltage(String sk_path="", String config_path = "") : 
-          Linear(sk_path, 1.0 / 1024.0 * 3.3, 0, config_path) {}
+       AnalogVoltage(String config_path = "") : 
+          Linear(1.0 / 1024.0 * 3.3, 0, config_path) {}
 };
 
 #endif

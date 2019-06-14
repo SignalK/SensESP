@@ -17,12 +17,9 @@
 class VoltageDividerR2 : public SymmetricTransform<float> {
 
     public:
-        VoltageDividerR2(float R1, float Vin = 3.3, String sk_path="", String config_path="");
+        VoltageDividerR2(float R1, float Vin = 3.3, String config_path="");
 
         virtual void set_input(float Vout, uint8_t ignored = 0) override;
-
-        // For outputting the results as SignalK
-        String as_signalK() override;
 
         // For reading and writing the configuration of this transformation
         virtual JsonObject& get_configuration(JsonBuffer& buf) override;
