@@ -5,7 +5,7 @@
 #include "devices/digital_input.h"
 #include "sensesp_app.h"
 #include "transforms/frequency.h"
-#include "wiring_helpers.h"
+#include "signalk/signalk_output.h"
 
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
@@ -25,9 +25,7 @@ ReactESP app([]() {
 
 
 
-  // The "SignalK path" identifies this sensor to the SignalK network. Leaving
-  // this blank would indicate this particular sensor (or transform) does not
-  // broadcast SignalK data
+  // The "SignalK path" identifies this sensor to the SignalK network. 
   const char* sk_path = "propulsion.left.revolutions";
 
 
@@ -61,14 +59,15 @@ const uint read_delay = 500;
   /*
      sensesp_app->connect<int>(
           new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay),
-          new Frequency(sk_path, multiplier, config_path)
+          new Frequency(multiplier, config_path)
      );
   */
 
   // 2. Connect the producer directly to the consumer
   auto* pDevice = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
   
-  pDevice->connectTo(new Frequency(sk_path, multiplier, config_path));
+  pDevice->connectTo(new Frequency(multiplier, config_path)) 
+         -> outputTo(new SignalKNumber(sk_path));
 
 
   // Start the SensESP application running
