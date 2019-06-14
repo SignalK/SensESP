@@ -10,7 +10,7 @@
  * between.  It is used primarily for non-linear analog gauges such as temperature gauges using
  * Thermocouples 
  */
-class CurveInterpolator : public SymmetricTransform<float> {
+class CurveInterpolator : public NumericTransform {
 
  public:
     class Sample {
@@ -26,14 +26,11 @@ class CurveInterpolator : public SymmetricTransform<float> {
     };
 
  public:
-   CurveInterpolator(String sk_path, std::set<Sample>* defaults = NULL, String config_path="");
+   CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path="");
 
    // Set and retrieve the transformed value
    void set_input(float input, uint8_t inputChannel = 0) override final;
 
-
-   // For outputting the results as SignalK
-   String as_signalK() override;
 
    // For reading and writing the configuration of this transformation
    virtual JsonObject& get_configuration(JsonBuffer& buf) override;

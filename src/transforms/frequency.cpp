@@ -2,9 +2,8 @@
 
 // Frequency
 
-Frequency::Frequency(String sk_path, float k, String config_path) :
-    IntegerConsumer(),
-    NumericTransform{sk_path, config_path}, k{k} {
+Frequency::Frequency(float k, String config_path) :
+    Transform<int, float>(config_path), k{k} {
     load_configuration();
 }
 
@@ -20,20 +19,10 @@ void Frequency::set_input(int input, uint8_t inputChannel) {
   notify();
 }
 
-String Frequency::as_signalK() {
-  DynamicJsonBuffer jsonBuffer;
-  String json;
-  JsonObject& root = jsonBuffer.createObject();
-  root.set("path", this->sk_path);
-  root.set("value", output);
-  root.printTo(json);
-  return json;
-}
 
 JsonObject& Frequency::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
   root["k"] = k;
-  root["sk_path"] = sk_path;
   root["value"] = output;
   return root;
 }
@@ -41,7 +30,6 @@ JsonObject& Frequency::get_configuration(JsonBuffer& buf) {
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "sk_path": { "title": "SignalK Path", "type": "string" },
         "k": { "title": "Multiplier", "type": "number" },
         "value": { "title": "Last value", "type" : "number", "readOnly": true }
     }
@@ -52,13 +40,12 @@ String Frequency::get_config_schema() {
 }
 
 bool Frequency::set_configuration(const JsonObject& config) {
-  String expected[] = {"k", "sk_path"};
+  String expected[] = {"k"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
     }
   }
   k = config["k"];
-  sk_path = config["sk_path"].as<String>();
   return true;
 }

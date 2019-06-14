@@ -1,10 +1,9 @@
+
 #include "timestring.h"
 
 
-TimeString::TimeString(String path, String config_path) :
-    ValueConsumer<time_t>(),
-    StringTransform{ path, config_path } {
-  load_configuration();
+TimeString::TimeString(String config_path) :
+    Transform<time_t, String>(config_path) {
 }
 
 void TimeString::set_input(time_t input, uint8_t inputChannel) {
@@ -13,44 +12,3 @@ void TimeString::set_input(time_t input, uint8_t inputChannel) {
   output = String(buf);
   notify();
 }
-
-String TimeString::as_signalK() {
-  DynamicJsonBuffer jsonBuffer;
-  String json;
-  JsonObject& root = jsonBuffer.createObject();
-  root.set("path", this->sk_path);
-  root.set("value", output);
-  root.printTo(json);
-  return json;
-}
-
-JsonObject& TimeString::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
-  root["sk_path"] = sk_path;
-  root["value"] = output;
-  return root;
-}
-
-static const char SCHEMA[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "sk_path": { "title": "SignalK Path", "type": "string" },
-        "value": { "title": "Last value", "type" : "string", "readOnly": true }
-    }
-  })";
-
-String TimeString::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
-
-bool TimeString::set_configuration(const JsonObject& config) {
-  String expected[] = {"sk_path"};
-  for (auto str : expected) {
-    if (!config.containsKey(str)) {
-      return false;
-    }
-  }
-  sk_path = config["sk_path"].as<String>();
-  return true;
-}
-

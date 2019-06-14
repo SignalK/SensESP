@@ -10,7 +10,7 @@
 ReactESP app([] () {
   sensesp_app = new SensESPApp();
 
-  setup_gps(sensesp_app, D7);
+  setup_gps(D7);
 
   sensesp_app->enable();
 });

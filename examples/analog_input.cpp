@@ -3,6 +3,7 @@
 #include "sensesp_app.h"
 #include "devices/analog_input.h"
 #include "transforms/linear.h"
+#include "signalk/signalk_output.h"
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
@@ -49,12 +50,13 @@ ReactESP app([] () {
   // over the SignalK network.
   const float multiplier = 1.0;
   const float offset = 0.0;
-  auto* pTransform = new Linear(sk_path, multiplier, offset, config_path);
+  auto* pTransform = new Linear(multiplier, offset, config_path);
 
   
-  // Wire up the output of the analog input to the transform
-  pAnalogInput->connectTo(pTransform);
-
+  // Wire up the output of the analog input to the transform,
+  // and then output the results on the SignalK network...
+  pAnalogInput -> connectTo(pTransform)
+               -> connectTo(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running
   sensesp_app->enable();

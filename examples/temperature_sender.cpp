@@ -7,6 +7,7 @@
 #include "transforms/analogvoltage.h"
 #include "transforms/voltagedividerR2.h"
 #include "transforms/curveinterpolator.h"
+#include "signalk/signalk_output.h"
 
 
 
@@ -18,8 +19,8 @@
 class TemperatureInterpreter : public CurveInterpolator {
 
     public:
-        TemperatureInterpreter(String sk_path="", String config_path="") :
-           CurveInterpolator(sk_path, NULL, config_path ) {
+        TemperatureInterpreter(String config_path="") :
+           CurveInterpolator(NULL, config_path ) {
 
           // Populate a lookup table tp translate the ohm values returned by
           // our temperature sender to Kelvin
@@ -60,15 +61,9 @@ ReactESP app([] () {
   sensesp_app = new SensESPApp();
 
 
-  // The "SignalK path" identifies this sensor to the SignalK network. Leaving
-  // this blank would indicate this particular sensor (or transform) does not
-  // broadcast SignalK data
+  // The "SignalK path" identifies this sensor to the SignalK network. 
   const char* sk_path = "electrical.generator.engine.water.temp";
 
-
-  // A blank sk path means you do not want any SignalK generated from that
-  // particular transform...
-  const char* no_sk_wanted = "";
 
 
   // Connecting a "sender" to the MCU involves using a "voltage divider" circuit. A resistor (R1) is connected
@@ -86,9 +81,10 @@ ReactESP app([] () {
   // Translating the number returned by AnalogInput into a temperature requires several transformations.
   // Wire them up in sequence...
   pAnalogInput->connectTo(new AnalogVoltage()) ->
-                connectTo(new VoltageDividerR2(R1, Vin, no_sk_wanted, "/gen/temp/sender")) ->
-                connectTo(new TemperatureInterpreter(no_sk_wanted, "/gen/temp/curve")) ->
-                connectTo(new Linear(sk_path, 1.0, 0.0, "/gen/temp/adjust"));
+                connectTo(new VoltageDividerR2(R1, Vin, "/gen/temp/sender")) ->
+                connectTo(new TemperatureInterpreter("/gen/temp/curve")) ->
+                connectTo(new Linear(1.0, 0.0, "/gen/temp/calibrate")) ->
+                connectTo(new SKOutputNumber(sk_path, "/gen/temp/sk"));
 
 
   // Start the SensESP application running

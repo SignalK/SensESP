@@ -7,21 +7,23 @@
 #include "transforms/difference.h"
 #include "devices/digital_input.h"
 #include "transforms/frequency.h"
-#include "transforms/gnss_position.h"
+#include "signalk/signalk_output.h"
+#include "signalk/signalk_position.h"
+#include "signalk/signalk_time.h"
 #include "transforms/integrator.h"
 #include "transforms/linear.h"
 #include "transforms/moving_average.h"
-#include "transforms/timestring.h"
 #include "transforms/transform.h"
-#include "transforms/passthrough.h"
 
 
 void setup_analog_input(
     String sk_path, float k, float c,
     String config_path) {
   (new AnalogInput())
-    -> connectTo(new Linear(sk_path, k, c, config_path));
+    -> connectTo(new Linear(k, c, config_path + "/calibrate"))
+    -> connectTo(new SKOutputNumber(sk_path, config_path + "/sk"));
 }
+
 
 void setup_fuel_flow_meter(
   int inflow_pin,
@@ -33,72 +35,78 @@ void setup_fuel_flow_meter(
   auto* dic1 = new DigitalInputCounter(inflow_pin, INPUT_PULLUP, CHANGE, 1000);
   auto* dic2 = new DigitalInputCounter(return_flow_pin, INPUT_PULLUP, CHANGE, 1000);
 
-  auto* freq1 = new Frequency("sensors.inflow.frequency");
-  auto* freq2 = new Frequency("sensors.outflow.frequency");
+  Frequency* freq1;
+  Frequency* freq2;
 
-  dic1->connectTo(freq1);
-  dic2->connectTo(freq2);
+  dic1->connectTo(freq1 = new Frequency())
+      -> connectTo(new SKOutputNumber("sensors.inflow.frequency"));
+    
+  dic2->connectTo(freq2 = new Frequency())
+      -> connectTo(new SKOutputNumber("sensors.outflow.frequency"));
+
 
   // Here, each pulse of a flow sensor represents 0.46ml of flow
   // for both inflow and outflow
-  auto* diff = new Difference("propulsion.0.fuel.rate",
-                                    0.46/1e6, 0.46/1e6,
-                                    "/sensors/fuel_rate");
+  auto* diff = new Difference(0.46/1e6, 0.46/1e6,
+                              "/sensors/fuel/rate/calibrate");
 
-  diff->connectFrom(freq1, freq2);
+  diff->connectFrom(freq1, freq2)
+      -> connectTo(new SKOutputNumber("propulsion.0.fuel.rate", "/sensors/fuel/rate/sk"))
+      -> connectTo(new MovingAverage(10, 1., "/sensors/fuel/average/calibrate")) // this is the same as above, but averaged over 10 s
+      -> connectTo(new SKOutputNumber("propulsion.0.fuel.averageRate", "/sensors/fuel/average/sk"));
 
-  // this is the same as above, but averaged over 10 s
-  diff->connectTo(
-    new MovingAverage("propulsion.0.fuel.averageRate", 10, 1., "/sensors/fuel_average_rate"));
 
   // Integrate the net flow over time. The output is dependent
   // on the the input counter update rate!
-  diff->connectTo(
-    new Integrator("propulsion.left.fuel.used", 1., 0., "/sensors/fuel_used"));
+  diff->connectTo(new Integrator(1., 0.))
+      -> connectTo(new SKOutputNumber("propulsion.left.fuel.used", "/sensors/fuel/used/sk"));
+
 
   // Integrate the total outflow over time. The output is dependent
   // on the the input counter update rate!
-  freq1->connectTo(
-    new Integrator("propulsion.left.fuel.usedGross", 0.46/1e6, 0., "/sensors/fuel_in_used"));
+  freq1-> connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/in_used/calibrate"))
+       -> connectTo(new SKOutputNumber("propulsion.left.fuel.usedGross", "/sensors/fuel/in_used/sk"));
+
 
   // Integrate the net fuel flow over time. The output is dependent
   // on the the input counter update rate!
-  freq2->connectTo(
-    new Integrator("propulsion.left.fuel.usedReturn", 0.46/1e6, 0., "/sensors/fuel_out_used"));
+  freq2->connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/out_used/calibrate"))
+       -> connectTo(new SKOutputNumber("propulsion.left.fuel.usedReturn", "/sensors/fuel/out_used/sk"));
 }
+
 
 void setup_gps(int serial_input_pin) {
   GPSInput* gps = new GPSInput(serial_input_pin);
   gps->nmea_data.position.connectTo(
-    new GNSSPosition("navigation.position", ""));
+    new SKOutputPosition("navigation.position", ""));
   gps->nmea_data.gnss_quality.connectTo(
-    new Passthrough<String>("navigation.methodQuality", ""));
+    new SKOutputString("navigation.methodQuality", ""));
   gps->nmea_data.num_satellites.connectTo(
-    new Passthrough<int>("navigation.satellites", ""));
+    new SKOutputInt("navigation.satellites", ""));
   gps->nmea_data.horizontal_dilution.connectTo(
-    new Passthrough<float>("navigation.horizontalDilution", ""));
+    new SKOutputNumber("navigation.horizontalDilution", ""));
   gps->nmea_data.geoidal_separation.connectTo(
-    new Passthrough<float>("navigation.geoidalSeparation", ""));
+    new SKOutputNumber("navigation.geoidalSeparation", ""));
   gps->nmea_data.dgps_age.connectTo(
-    new Passthrough<float>("navigation.differentialAge", ""));
+    new SKOutputNumber("navigation.differentialAge", ""));
   gps->nmea_data.dgps_id.connectTo(
-    new Passthrough<float>("navigation.differentialReference", ""));
+    new SKOutputNumber("navigation.differentialReference", ""));
   gps->nmea_data.datetime.connectTo(
-    new TimeString("navigation.datetime", ""));
+    new SKOutputTime("navigation.datetime", ""));
   gps->nmea_data.speed.connectTo(
-    new Passthrough<float>("navigation.speedOverGround", ""));
+    new SKOutputNumber("navigation.speedOverGround", ""));
   gps->nmea_data.true_course.connectTo(
-    new Passthrough<float>("navigation.courseOverGroundTrue", ""));
+    new SKOutputNumber("navigation.courseOverGroundTrue", ""));
   gps->nmea_data.variation.connectTo(
-    new Passthrough<float>("navigation.magneticVariation", ""));
+    new SKOutputNumber("navigation.magneticVariation", ""));
   gps->nmea_data.rtk_age.connectTo(
-    new Passthrough<float>("navigation.rtkAge", ""));
+    new SKOutputNumber("navigation.rtkAge", ""));
   gps->nmea_data.rtk_ratio.connectTo(
-    new Passthrough<float>("navigation.rtkRatio", ""));
+    new SKOutputNumber("navigation.rtkRatio", ""));
   gps->nmea_data.baseline_length.connectTo(
-    new Passthrough<float>("navigation.rtkBaselineLength", ""));
+    new SKOutputNumber("navigation.rtkBaselineLength", ""));
   gps->nmea_data.baseline_course.connectTo(
-    new Passthrough<float>("navigation.rtkBaselineCourse", ""));
+    new SKOutputNumber("navigation.rtkBaselineCourse", ""));
 }
 
 void setup_onewire_temperature(
@@ -109,7 +117,7 @@ void setup_onewire_temperature(
     String schema
 ) {
   (new OneWireTemperature(dts))->connectTo(
-    new Passthrough<float>(sk_path, config_path));
+    new SKOutputNumber(sk_path, config_path));
 }
 
 void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
@@ -122,5 +130,7 @@ void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
   // tach output into Hz, SK native units.
 
   (new DigitalInputCounter(input_pin, INPUT_PULLUP, RISING, 500))
-    -> connectTo(new Frequency("propulsion.left.revolutions", 1./97., "/sensors/engine_rpm"));
+      -> connectTo<float>(new Frequency(1./97., "/sensors/engine_rpm/calibrate"))
+      -> connectTo(new SKOutputNumber("propulsion.left.revolutions", "/sensors/engine_rpm/sk"));
+  
 }

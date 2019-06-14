@@ -1,7 +1,7 @@
 #include "debounce.h"
 
-Debounce::Debounce(int msMinDelay, String sk_path, String config_path) :
-    SymmetricBooleanTransform(sk_path, config_path), msMinDelay{msMinDelay} {
+Debounce::Debounce(int msMinDelay, String config_path) :
+    BooleanTransform(config_path), msMinDelay{msMinDelay} {
 
     lastTime = millis();
 }

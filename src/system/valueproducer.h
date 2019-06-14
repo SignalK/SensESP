@@ -5,8 +5,10 @@
 #include <ArduinoJson.h>
 #include "valueconsumer.h"
 
-// SymmetricTransform is defined in transforms/transform.h
-template <typename T> class SymmetricTransform;
+
+// The Transform class is defined in transforms/transform.h
+template <typename C, typename P> class Transform;
+
 
 /**
  * A ValueProducer<> is any device or piece of code that outputs a value for consumption
@@ -27,6 +29,7 @@ class ValueProducer : virtual public Observable {
         virtual const T& get() { return output; }
 
 
+
         /**
          * Connects this producer to the specified consumer, registering that
          * consumer for notifications to when this producer's value changes
@@ -43,17 +46,24 @@ class ValueProducer : virtual public Observable {
         }
 
 
+
         /**
          *  If the consumer this producer is connecting to is ALSO a producer
          *  of values of the same type, connectTo() calls can be chained
-         *  together, as this specialized version returns the Producer/Consumer
-         *  so this method can be called on THAT object.
+         *  together, as this specialized version returns the producer/consumer
+         *  being conencted to so connectTo() can be called on THAT object.
+         * @param inputChannel Consumers can have one or more inputs feeding them
+         *   This parameter allows you to specify which input number this producer
+         *   is connecting to. For single input consumers, leave the index at
+         *   zero.
+         *  @see ValueConsumer::set_input()
          */
-        SymmetricTransform<T>* connectTo(SymmetricTransform<T>* pProducerConsumer, uint8_t inputChannel = 0) {
-            this->attach([this, pProducerConsumer, inputChannel](){
-                pProducerConsumer->set_input(this->get(), inputChannel);
+        template <typename T2>
+        Transform<T, T2>* connectTo(Transform<T, T2>* pConsumerProducer, uint8_t inputChannel = 0) {
+            this->attach([this, pConsumerProducer, inputChannel](){
+                pConsumerProducer->set_input(this->get(), inputChannel);
             });
-            return pProducerConsumer;
+            return pConsumerProducer;
         }
 
     protected:
@@ -63,6 +73,7 @@ class ValueProducer : virtual public Observable {
          */
         T output;
 };
+
 
 typedef ValueProducer<float> NumericProducer;
 typedef ValueProducer<int>  IntegerProducer;

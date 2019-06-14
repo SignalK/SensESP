@@ -8,9 +8,9 @@
 
 #include "system/configurable.h"
 #include "system/observable.h"
+#include "system/valueconsumer.h"
 #include "system/valueproducer.h"
 #include "system/enable.h"
-#include "system/signalksource.h"
 #include "sensesp.h"
 
 
@@ -25,15 +25,14 @@
  * have an optional persistence configuration by specifying an "id" to
  * save the configuration data in.
  */
-class TransformBase : public SignalKSource,
-                      public Configurable,
+class TransformBase : public Configurable,
                       public Enable {
  public:
-    TransformBase(String sk_path, String config_path="");
+    TransformBase(String config_path="");
 
 
   // Primary purpose of this was to supply SignalK sources
-  // (now handled by SignalKSource::get_sources). Should
+  // (now handled by SKEmitter::get_sources). Should
   // this be deprecated?
   static const std::set<TransformBase*>& get_transforms() {
     return transforms;
@@ -49,33 +48,17 @@ class TransformBase : public SignalKSource,
  * type of value that is produces (i.e. a Transform<float> is a
  * ValueProducer<float> that generates float values)
  */
-template <typename T>
-class Transform : public TransformBase, public ValueProducer<T> {
+template <typename C, typename P>
+class Transform : public TransformBase, 
+                  public ValueConsumer<C>, 
+                  public ValueProducer<P> {
     public:
-      Transform(String sk_path, String config_path="") :
-         TransformBase(sk_path, config_path), ValueProducer<T>() {
+      Transform(String config_path="") :
+         TransformBase(config_path), 
+         ValueConsumer<C>(), 
+         ValueProducer<P>() {
       }
-};
 
-
-typedef Transform<bool> BooleanTransform;
-typedef Transform<float> NumericTransform;
-typedef Transform<int> IntegerTransform;
-typedef Transform<String> StringTransform;
-
-
-/**
- * A SymmetricTransform is a common type of transform that consumes, transforms,
- * then outputs values of the same data type.
- */
-template <typename T>
-class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
-
-  public:
-     SymmetricTransform(String sk_path, String config_path="") :
-      ValueConsumer<T>(),
-      Transform<T>(sk_path, config_path) {
-  }
 
   /**
    * A convenience method that allows up to five producers to be
@@ -86,32 +69,49 @@ class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
    * of this transform to then be wired to other transforms via
    * a call to connectTo().
    */
-  SymmetricTransform<T>* connectFrom(ValueProducer<T>* pProducer0,
-                                     ValueProducer<T>* pProducer1 = NULL,
-                                     ValueProducer<T>* pProducer2 = NULL,
-                                     ValueProducer<T>* pProducer3 = NULL,
-                                     ValueProducer<T>* pProducer4 = NULL) {
+  Transform<C, P>* connectFrom(ValueProducer<P>* pProducer0,
+                               ValueProducer<P>* pProducer1 = NULL,
+                               ValueProducer<P>* pProducer2 = NULL,
+                               ValueProducer<P>* pProducer3 = NULL,
+                               ValueProducer<P>* pProducer4 = NULL) {
 
-      pProducer0->connectTo(this, 0);
+      this->ValueConsumer<C>::connectFrom(pProducer0);
       if (pProducer1 != NULL) {
-        pProducer1->connectTo(this, 1);
+        this->ValueConsumer<C>::connectFrom(pProducer1, 1);
       }
       if (pProducer2 != NULL) {
-        pProducer2->connectTo(this, 2);
+        this->ValueConsumer<C>::connectFrom(pProducer2, 2);
       }
       if (pProducer3 != NULL) {
-        pProducer3->connectTo(this, 3);
+        this->ValueConsumer<C>::connectFrom(pProducer3, 3);
       }
       if (pProducer4 != NULL) {
-        pProducer4->connectTo(this, 4);
+        this->ValueConsumer<C>::connectFrom(pProducer4, 4);
       }
       return this;
   }
+
 };
 
-typedef SymmetricTransform<float> SymmetricNumericTransform;
-typedef SymmetricTransform<int> SymmetricIntegerTransform;
-typedef SymmetricTransform<bool> SymmetricBooleanTransform;
-typedef SymmetricTransform<String> SymmetricStringTransform;
+
+
+/**
+ * A SymmetricTransform is a common type of transform that consumes, transforms,
+ * then outputs values of the same data type.
+ */
+template <typename T>
+class SymmetricTransform : public Transform<T, T> {
+
+  public:
+     SymmetricTransform(String config_path="") :
+      Transform<T, T>(config_path) {
+  }
+
+};
+
+typedef SymmetricTransform<float> NumericTransform;
+typedef SymmetricTransform<int> IntegerTransform;
+typedef SymmetricTransform<bool> BooleanTransform;
+typedef SymmetricTransform<String> StringTransform;
 
 #endif
