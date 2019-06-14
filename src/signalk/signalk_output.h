@@ -11,15 +11,14 @@ static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
       }
   })";
 
-// SKOutput is a specialized transform whose primary purpose is
-// to output SignalK data on the SignalK network.
-template <typename T>
-class SKOutput : public SKEmitter,
-                      public SymmetricTransform<T> {
- public:
-  SKOutput() : SKOutput("") {}
 
-  SKOutput(String sk_path, String config_path="")
+template <typename T>
+class SKOutputBase : public SKEmitter,
+                     public SymmetricTransform<T> {
+ public:
+  SKOutputBase() : SKOutputBase("") {}
+
+  SKOutputBase(String sk_path, String config_path="")
     : SKEmitter(sk_path), SymmetricTransform<T>(config_path) {
     Enable::setPriority(-5);
   }
@@ -30,15 +29,6 @@ class SKOutput : public SKEmitter,
     this->notify();
   }
 
-
-  virtual String as_signalK() override {
-    DynamicJsonBuffer jsonBuffer;
-    String json;
-    JsonObject& root = jsonBuffer.createObject();
-    root.set("path", this->get_sk_path());
-    root.printTo(json);
-    return json;
-  }
 
   virtual JsonObject& get_configuration(JsonBuffer& buf) override {
     JsonObject& root = buf.createObject();
@@ -56,6 +46,32 @@ class SKOutput : public SKEmitter,
     }
     this->set_sk_path(config["sk_path"].as<String>());
     return true;
+  }
+
+};
+
+
+// SKOutput is a specialized transform whose primary purpose is
+// to output SignalK data on the SignalK network.
+template <typename T>
+class SKOutput : public SKOutputBase<T> {
+                    
+ public:
+  SKOutput() : SKOutput("") {}
+
+  SKOutput(String sk_path, String config_path="")
+    : SKOutputBase<T>(sk_path, config_path) {
+  }
+ 
+
+  virtual String as_signalK() override {
+    DynamicJsonBuffer jsonBuffer;
+    String json;
+    JsonObject& root = jsonBuffer.createObject();
+    root.set("path", this->get_sk_path());
+    root.set("value", ValueProducer<T>::output);    
+    root.printTo(json);
+    return json;
   }
 
 };
