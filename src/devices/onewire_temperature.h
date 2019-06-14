@@ -36,7 +36,7 @@ class OneWireTemperature : public NumericDevice {
  private:
   OneWire* onewire;
   DallasTemperatureSensors* dts;
-  bool found=false;
+  bool found = true;
   OWDevAddr address = {};
   void update();
   void read_value();
