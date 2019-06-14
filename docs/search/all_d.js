@@ -18,11 +18,11 @@ var searchData=
   ['onewire_5ftemperature_2ecpp',['onewire_temperature.cpp',['../onewire__temperature_8cpp.html',1,'']]],
   ['onewire_5ftemperature_2eh',['onewire_temperature.h',['../onewire__temperature_8h.html',1,'']]],
   ['onewiretemperature',['OneWireTemperature',['../class_one_wire_temperature.html',1,'OneWireTemperature'],['../class_one_wire_temperature.html#a6ceb584282ee0949f76a35ca5ae40a51',1,'OneWireTemperature::OneWireTemperature()']]],
-  ['operator_3c',['operator&lt;',['../class_enable.html#a5e6385aea4a61b890368ce0b411f690c',1,'Enable::operator&lt;()'],['../class_interpolate_1_1_sample.html#a1cf03a106b3a98056fdb448df6fb9c17',1,'Interpolate::Sample::operator&lt;()']]],
+  ['operator_3c',['operator&lt;',['../class_enable.html#a5e6385aea4a61b890368ce0b411f690c',1,'Enable::operator&lt;()'],['../class_curve_interpolator_1_1_sample.html#a1cf03a106b3a98056fdb448df6fb9c17',1,'CurveInterpolator::Sample::operator&lt;()']]],
   ['operator_3d',['operator=',['../class_observable_value.html#a900b99ef37a8d31e84c48a97b8eff10d',1,'ObservableValue']]],
   ['ota_2ecpp',['ota.cpp',['../ota_8cpp.html',1,'']]],
   ['ota_2eh',['ota.h',['../ota_8h.html',1,'']]],
-  ['output',['output',['../class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697',1,'ValueProducer::output()'],['../class_interpolate_1_1_sample.html#ab243b190bf17260998dbff5878e3955c',1,'Interpolate::Sample::output()']]],
+  ['output',['output',['../class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697',1,'ValueProducer::output()'],['../class_curve_interpolator_1_1_sample.html#ada14a8de02c7cc737db52aa3a54a330b',1,'CurveInterpolator::Sample::output()']]],
   ['owda_5fto_5fstring',['owda_to_string',['../onewire__temperature_8cpp.html#ad0134b3041182b5f8c3004025183e6eb',1,'onewire_temperature.cpp']]],
   ['owdevaddr',['OWDevAddr',['../onewire__temperature_8h.html#aaada9c625aab143feda6189e26144775',1,'onewire_temperature.h']]]
 ];

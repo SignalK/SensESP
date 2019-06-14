@@ -19,14 +19,6 @@ var dir_d501334aeb1b78ad67cd3c72c37b1e87 =
     [ "observablevalue.h", "observablevalue_8h.html", [
       [ "ObservableValue", "class_observable_value.html", "class_observable_value" ]
     ] ],
-    [ "signal_k.cpp", "signal__k_8cpp.html", null ],
-    [ "signal_k.h", "signal__k_8h.html", [
-      [ "SKDelta", "class_s_k_delta.html", "class_s_k_delta" ]
-    ] ],
-    [ "signalksource.cpp", "signalksource_8cpp.html", null ],
-    [ "signalksource.h", "signalksource_8h.html", [
-      [ "SignalKSource", "class_signal_k_source.html", "class_signal_k_source" ]
-    ] ],
     [ "spiffs_storage.cpp", "spiffs__storage_8cpp.html", "spiffs__storage_8cpp" ],
     [ "spiffs_storage.h", "spiffs__storage_8h.html", "spiffs__storage_8h" ],
     [ "valueconsumer.h", "valueconsumer_8h.html", "valueconsumer_8h" ],

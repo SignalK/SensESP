@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.3.0</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('class_system_hz.html','');});
   <tr><td class="entry"><a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a></td><td class="entry"><a class="el" href="class_configurable.html">Configurable</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_configurable.html#a8972a439fb9b734ff68d27c699640f78">Configurable</a>(String config_path)</td><td class="entry"><a class="el" href="class_configurable.html">Configurable</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo</a>(ValueConsumer&lt; float &gt; *pConsumer, uint8_t inputChannel=0)</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; float &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_value_producer.html#a64af7a373036743d912876475c566045">connectTo</a>(SymmetricTransform&lt; float &gt; *pProducerConsumer, uint8_t inputChannel=0)</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; float &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_value_producer.html#adfb3d9679b80c9fae0951ca13911344f">connectTo</a>(Transform&lt; float, T2 &gt; *pConsumerProducer, uint8_t inputChannel=0)</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; float &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_device.html#a170bb69c9bf69109815c18a70a77a875">Device</a>(String config_path=&quot;&quot;)</td><td class="entry"><a class="el" href="class_device.html">Device</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_system_hz.html#a2f2337dcbe45cce879392f28579e233d">enable</a>() override final</td><td class="entry"><a class="el" href="class_system_hz.html">SystemHz</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_enable.html#a62d0a37863086502e168bfa8ab94ebc0">Enable</a>(uint8_t priority=0)</td><td class="entry"><a class="el" href="class_enable.html">Enable</a></td><td class="entry"></td></tr>
@@ -115,7 +115,8 @@ $(document).ready(function(){initNavTree('class_system_hz.html','');});
   <tr class="even"><td class="entry"><a class="el" href="class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697">output</a></td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; float &gt;</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_configurable.html#a657419f13060caa20c45a41935b9d53a">save_configuration</a>()</td><td class="entry"><a class="el" href="class_configurable.html">Configurable</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_configurable.html#a6e0281fe25cfbdf024bdb05147ffb52b">set_configuration</a>(const JsonObject &amp;config)</td><td class="entry"><a class="el" href="class_configurable.html">Configurable</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_value_producer.html#a0ef05992883120f7202c14fd8e577103">ValueProducer</a>()</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; float &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_enable.html#ab4ca14d496a85788896df6c78143994c">setPriority</a>(uint8_t priority)</td><td class="entry"><a class="el" href="class_enable.html">Enable</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_value_producer.html#a0ef05992883120f7202c14fd8e577103">ValueProducer</a>()</td><td class="entry"><a class="el" href="class_value_producer.html">ValueProducer&lt; float &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

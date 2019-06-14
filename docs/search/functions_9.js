@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['movingaverage',['MovingAverage',['../class_moving_average.html#a0ffb04a59f74c1e58920de64a8136e5f',1,'MovingAverage']]]
+  ['movingaverage',['MovingAverage',['../class_moving_average.html#adda127d69bc5441a3f4ca98d51c87f4b',1,'MovingAverage']]]
 ];
