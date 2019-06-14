@@ -40,7 +40,7 @@ void setup_fuel_flow_meter(
 
   dic1->connectTo(freq1 = new Frequency())
       -> connectTo(new SKOutputNumber("sensors.inflow.frequency"));
-    
+
   dic2->connectTo(freq2 = new Frequency())
       -> connectTo(new SKOutputNumber("sensors.outflow.frequency"));
 
@@ -132,5 +132,5 @@ void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
   (new DigitalInputCounter(input_pin, INPUT_PULLUP, RISING, 500))
       -> connectTo<float>(new Frequency(1./97., "/sensors/engine_rpm/calibrate"))
       -> connectTo(new SKOutputNumber("propulsion.left.revolutions", "/sensors/engine_rpm/sk"));
-  
+
 }
