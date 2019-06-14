@@ -32,7 +32,7 @@ class TransformBase : public Configurable,
 
 
   // Primary purpose of this was to supply SignalK sources
-  // (now handled by SignalKSource::get_sources). Should
+  // (now handled by SKEmitter::get_sources). Should
   // this be deprecated?
   static const std::set<TransformBase*>& get_transforms() {
     return transforms;

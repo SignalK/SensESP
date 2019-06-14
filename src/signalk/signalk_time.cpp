@@ -4,7 +4,7 @@
 
 SKOutputTime::SKOutputTime(String sk_path, String config_path) :
     TimeString(config_path),
-    SignalKSource(sk_path)  {
+    SKEmitter(sk_path)  {
   load_configuration();
 }
 

@@ -112,7 +112,7 @@ void SensESPApp::enable() {
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
-  for (auto const& sigkSource : SignalKSource::get_sources()) {
+  for (auto const& sigkSource : SKEmitter::get_sources()) {
     if (sigkSource->get_sk_path() != "") {
       debugI("Connecting SignalK source %s", sigkSource->get_sk_path().c_str());
       sigkSource->attach([sigkSource, this](){

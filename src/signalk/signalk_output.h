@@ -1,7 +1,7 @@
 #ifndef _signalk_output_H_
 #define _signalk_output_H_
 
-#include "signalk/signalk_source.h"
+#include "signalk/signalk_emitter.h"
 #include "transforms/transform.h"
 
 static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
@@ -14,13 +14,13 @@ static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
 // SKOutput is a specialized transform whose primary purpose is
 // to output SignalK data on the SignalK network.
 template <typename T>
-class SKOutput : public SignalKSource,
+class SKOutput : public SKEmitter,
                       public SymmetricTransform<T> {
  public:
   SKOutput() : SKOutput("") {}
 
   SKOutput(String sk_path, String config_path="")
-    : SignalKSource(sk_path), SymmetricTransform<T>(config_path) {
+    : SKEmitter(sk_path), SymmetricTransform<T>(config_path) {
     Enable::setPriority(-5);
   }
  

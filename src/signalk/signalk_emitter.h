@@ -1,5 +1,5 @@
-#ifndef _signalk_source_H_
-#define _signalk_source_H_
+#ifndef _signalk_emitter_H_
+#define _signalk_emitter_H_
 
 #include <set>
 
@@ -16,7 +16,7 @@
  * forwarded to the SignalK server (if the system is connected
  * to one).  SignalK is reported via the as_signalK() method.
  */
-class SignalKSource : virtual public Observable {
+class SKEmitter : virtual public Observable {
 
     public:
         /**
@@ -24,7 +24,7 @@ class SignalKSource : virtual public Observable {
          * @param sk_path The SignalK path that identifies
          * this particular source
          */
-        SignalKSource(String sk_path);
+        SKEmitter(String sk_path);
 
 
         /**
@@ -47,7 +47,7 @@ class SignalKSource : virtual public Observable {
             sk_path = path;
         }
 
-        static const std::vector<SignalKSource*>& get_sources() {
+        static const std::vector<SKEmitter*>& get_sources() {
             return sources;
         }
 
@@ -55,7 +55,7 @@ class SignalKSource : virtual public Observable {
         String sk_path;
 
     private:
-        static std::vector<SignalKSource*> sources;
+        static std::vector<SKEmitter*> sources;
 
 };
 

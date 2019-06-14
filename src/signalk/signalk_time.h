@@ -2,10 +2,10 @@
 #define _signalk_time_H_
 
 #include "transforms/timestring.h"
-#include "signalk_source.h"
+#include "signalk_emitter.h"
 
 class SKOutputTime : public TimeString, 
-                    public SignalKSource {
+                    public SKEmitter {
  public:
   SKOutputTime(String sk_path, String config_path="");
   virtual String as_signalK() override;
