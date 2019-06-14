@@ -30,7 +30,7 @@ JsonObject& MovingAverage::get_configuration(JsonBuffer& buf) {
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "n": { "title": "Number of samples in average", "type": "integer" }
+        "n": { "title": "Number of samples in average", "type": "integer" },
         "k": { "title": "Multiplier", "type": "number" }
     }
   })";

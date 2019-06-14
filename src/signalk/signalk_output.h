@@ -7,7 +7,7 @@
 static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
       "type": "object",
       "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" },
+          "sk_path": { "title": "SignalK Path", "type": "string" }
       }
   })";
 
