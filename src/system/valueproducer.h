@@ -5,8 +5,14 @@
 #include <ArduinoJson.h>
 #include "valueconsumer.h"
 
-// SymmetricTransform is defined in transforms/transform.h
+
+// These transform classes are defined in transforms/transform.h
+template <typename C, typename P> class Transform;
 template <typename T> class SymmetricTransform;
+
+// SignalKOutput is defined in signalk/signalk_output.h
+template <typename T> class SignalKOutput;
+
 
 /**
  * A ValueProducer<> is any device or piece of code that outputs a value for consumption
@@ -46,14 +52,47 @@ class ValueProducer : virtual public Observable {
         /**
          *  If the consumer this producer is connecting to is ALSO a producer
          *  of values of the same type, connectTo() calls can be chained
-         *  together, as this specialized version returns the Producer/Consumer
-         *  so this method can be called on THAT object.
+         *  together, as this specialized version returns the producer/consumer
+         *  being conencted to so connectTo() can be called on THAT object.
          */
         SymmetricTransform<T>* connectTo(SymmetricTransform<T>* pProducerConsumer, uint8_t inputChannel = 0) {
             this->attach([this, pProducerConsumer, inputChannel](){
                 pProducerConsumer->set_input(this->get(), inputChannel);
             });
             return pProducerConsumer;
+        }
+
+
+        /**
+         *  Similar to connectTo(SymmetricTransform<>), this version of
+         *  connectTo() allows chained calls, but its only requirement
+         *  is that the output of this producer and the input of the
+         *  new producer/consumer be the same.  The output of the
+         *  new producer/consumer may be different, but you must
+         *  specify it as a template parameter.
+         */
+        template <typename T2>
+        Transform<T, T2>* connectTo(Transform<T, T2>* pConsumerProducer, uint8_t inputChannel = 0) {
+            this->attach([this, pConsumerProducer, inputChannel](){
+                pConsumerProducer->set_input(this->get(), inputChannel);
+            });
+            return pConsumerProducer;
+        }
+
+
+
+        /**
+         * Connects this producer to the specified SignalK output consumer 
+         * so that the value of this producer will be broadcast in SignalK
+         * over the network.  This producer is then returned so
+         * this object can then be connected to another consumer and
+         * the connection chain can continue.  Note this differs from connectTo()
+         * as this method returns "this" producer, and that method returns 
+         * the value consumer that was passed in as a parameter.
+         */
+        ValueProducer<T>* outputTo(SignalKOutput<T>* pOutput) {
+            this->connectTo(pOutput);
+            return this;
         }
 
     protected:
@@ -63,6 +102,7 @@ class ValueProducer : virtual public Observable {
          */
         T output;
 };
+
 
 typedef ValueProducer<float> NumericProducer;
 typedef ValueProducer<int>  IntegerProducer;

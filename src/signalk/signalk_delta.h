@@ -1,5 +1,5 @@
-#ifndef _signal_k_H_
-#define _signal_k_H_
+#ifndef _signalk_delta_H_
+#define _signalk_delta_H_
 
 #include <list>
 

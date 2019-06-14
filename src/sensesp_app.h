@@ -10,7 +10,7 @@
 #include "net/ws_client.h"
 #include "sensesp.h"
 #include "system/led_blinker.h"
-#include "system/signal_k.h"
+#include "signalk/signalk_delta.h"
 #include "system/valueproducer.h"
 #include "system/valueconsumer.h"
 #include "system/observablevalue.h"

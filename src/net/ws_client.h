@@ -7,7 +7,7 @@
 
 #include "sensesp.h"
 #include "system/configurable.h"
-#include "system/signal_k.h"
+#include "signalk/signalk_delta.h"
 
 static const char* NULL_AUTH_TOKEN = "";
 

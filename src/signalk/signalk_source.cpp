@@ -1,4 +1,4 @@
-#include "signalksource.h"
+#include "signalk_source.h"
 
 std::vector<SignalKSource*> SignalKSource::sources;
 

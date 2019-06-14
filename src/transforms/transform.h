@@ -8,9 +8,9 @@
 
 #include "system/configurable.h"
 #include "system/observable.h"
+#include "system/valueconsumer.h"
 #include "system/valueproducer.h"
 #include "system/enable.h"
-#include "system/signalksource.h"
 #include "sensesp.h"
 
 
@@ -25,11 +25,10 @@
  * have an optional persistence configuration by specifying an "id" to
  * save the configuration data in.
  */
-class TransformBase : public SignalKSource,
-                      public Configurable,
+class TransformBase : public Configurable,
                       public Enable {
  public:
-    TransformBase(String sk_path, String config_path="");
+    TransformBase(String config_path="");
 
 
   // Primary purpose of this was to supply SignalK sources
@@ -49,19 +48,19 @@ class TransformBase : public SignalKSource,
  * type of value that is produces (i.e. a Transform<float> is a
  * ValueProducer<float> that generates float values)
  */
-template <typename T>
-class Transform : public TransformBase, public ValueProducer<T> {
+template <typename C, typename P>
+class Transform : public TransformBase, 
+                  public ValueConsumer<C>, 
+                  public ValueProducer<P> {
     public:
-      Transform(String sk_path, String config_path="") :
-         TransformBase(sk_path, config_path), ValueProducer<T>() {
+      Transform(String config_path="") :
+         TransformBase(config_path), 
+         ValueConsumer<C>(), 
+         ValueProducer<P>() {
       }
+
 };
 
-
-typedef Transform<bool> BooleanTransform;
-typedef Transform<float> NumericTransform;
-typedef Transform<int> IntegerTransform;
-typedef Transform<String> StringTransform;
 
 
 /**
@@ -69,12 +68,11 @@ typedef Transform<String> StringTransform;
  * then outputs values of the same data type.
  */
 template <typename T>
-class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
+class SymmetricTransform : public Transform<T, T> {
 
   public:
-     SymmetricTransform(String sk_path, String config_path="") :
-      ValueConsumer<T>(),
-      Transform<T>(sk_path, config_path) {
+     SymmetricTransform(String config_path="") :
+      Transform<T, T>(config_path) {
   }
 
   /**
@@ -109,9 +107,9 @@ class SymmetricTransform : public ValueConsumer<T>, public Transform<T> {
   }
 };
 
-typedef SymmetricTransform<float> SymmetricNumericTransform;
-typedef SymmetricTransform<int> SymmetricIntegerTransform;
-typedef SymmetricTransform<bool> SymmetricBooleanTransform;
-typedef SymmetricTransform<String> SymmetricStringTransform;
+typedef SymmetricTransform<float> NumericTransform;
+typedef SymmetricTransform<int> IntegerTransform;
+typedef SymmetricTransform<bool> BooleanTransform;
+typedef SymmetricTransform<String> StringTransform;
 
 #endif

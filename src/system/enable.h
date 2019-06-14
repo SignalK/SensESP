@@ -27,6 +27,9 @@ class Enable {
         const int8_t getEnablePriority() { return priority; }
 
 
+        void setPriority(uint8_t priority) { this-> priority = priority; }
+
+
         /**
          * Called by the SensESP framework to initialize all of the objects
          * marked with this class. They will be initialized in priorty

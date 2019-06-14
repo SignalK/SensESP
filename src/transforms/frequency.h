@@ -6,14 +6,14 @@
 
 // Frequency transform divides its input value by the time elapsed since
 // the last reading
-class Frequency : public IntegerConsumer, public NumericTransform {
+class Frequency : public Transform<int, float> {
+  
  public:
-  Frequency(String sk_path, float k=1, String config_path="");
-  virtual void set_input(int input, uint8_t inputChannel = 0) override final;
-  virtual String as_signalK() override final;
-  virtual void enable() override final;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
-  virtual bool set_configuration(const JsonObject& config) override final;
+  Frequency(float k=1, String config_path="");
+  virtual void set_input(int input, uint8_t inputChannel = 0) override;
+  virtual void enable() override;
+  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
+  virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
  private:

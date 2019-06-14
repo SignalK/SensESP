@@ -13,7 +13,7 @@
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
 #include "transforms/linear.h"
-#include "transforms/passthrough.h"
+#include "signalk/signalk_output.h"
 
 #ifndef DEBUG_DISABLED
 RemoteDebug Debug;
@@ -72,9 +72,9 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
 
   // connect systemhz
 
-  connect_1to1_h<SystemHz, Passthrough<float>>(
+  connect_1to1_h<SystemHz, SignalKOutput<float>>(
     new SystemHz(),
-    new Passthrough<float>(),
+    new SignalKOutput<float>(),
     hostname
   );
 
@@ -82,25 +82,25 @@ void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
 
   // connect freemem
 
-  connect_1to1_h<FreeMem, Passthrough<float>>(
+  connect_1to1_h<FreeMem, SignalKOutput<float>>(
     new FreeMem(),
-    new Passthrough<float>(),
+    new SignalKOutput<float>(),
     hostname
   );
 
   // connect uptime
 
-  connect_1to1_h<Uptime, Passthrough<float>>(
+  connect_1to1_h<Uptime, SignalKOutput<float>>(
     new Uptime(),
-    new Passthrough<float>(),
+    new SignalKOutput<float>(),
     hostname
   );
 
   // connect ip address
 
-  connect_1to1_h<IPAddrDev, Passthrough<String>>(
+  connect_1to1_h<IPAddrDev, SignalKOutput<String>>(
     new IPAddrDev(),
-    new Passthrough<String>(),
+    new SignalKOutput<String>(),
     hostname
   );
 }

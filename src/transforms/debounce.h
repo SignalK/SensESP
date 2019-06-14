@@ -9,10 +9,10 @@
  * accept value changes that are sufficiently spaced apart to
  * be passed on to the next consumer.
  */
-class Debounce : public SymmetricBooleanTransform {
+class Debounce : public BooleanTransform {
 
     public:
-        Debounce(int msMinDelay = 200, String sk_path="", String config_path="");
+        Debounce(int msMinDelay = 200, String config_path="");
 
         virtual void set_input(bool newValue, uint8_t inputChannel = 0) override;
 

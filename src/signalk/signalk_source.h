@@ -1,5 +1,5 @@
-#ifndef _signalksource_H_
-#define _signalksource_H_
+#ifndef _signalk_source_H_
+#define _signalk_source_H_
 
 #include <set>
 
