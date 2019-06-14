@@ -13,18 +13,9 @@
 ///////////////////
 // provide correct output formatting for GNSS position
 
-
 template<>
 String SKOutput<Position>::as_signalK();
 
-
-class SKOutputPosition : public SKOutput<Position> {
- public:
-  SKOutputPosition(String sk_path, String config_path="") :
-    SKOutput<Position>{sk_path, config_path } {
-  }
-
-  virtual String as_signalK() override;
-};
+typedef SKOutput<Position> SKOutputPosition;
 
 #endif
