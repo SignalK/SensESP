@@ -6,9 +6,8 @@
 #include "valueconsumer.h"
 
 
-// These transform classes are defined in transforms/transform.h
+// The Transform class is defined in transforms/transform.h
 template <typename C, typename P> class Transform;
-template <typename T> class SymmetricTransform;
 
 // SignalKOutput is defined in signalk/signalk_output.h
 template <typename T> class SignalKOutput;
@@ -33,6 +32,7 @@ class ValueProducer : virtual public Observable {
         virtual const T& get() { return output; }
 
 
+
         /**
          * Connects this producer to the specified consumer, registering that
          * consumer for notifications to when this producer's value changes
@@ -49,27 +49,17 @@ class ValueProducer : virtual public Observable {
         }
 
 
+
         /**
          *  If the consumer this producer is connecting to is ALSO a producer
          *  of values of the same type, connectTo() calls can be chained
          *  together, as this specialized version returns the producer/consumer
          *  being conencted to so connectTo() can be called on THAT object.
-         */
-        SymmetricTransform<T>* connectTo(SymmetricTransform<T>* pProducerConsumer, uint8_t inputChannel = 0) {
-            this->attach([this, pProducerConsumer, inputChannel](){
-                pProducerConsumer->set_input(this->get(), inputChannel);
-            });
-            return pProducerConsumer;
-        }
-
-
-        /**
-         *  Similar to connectTo(SymmetricTransform<>), this version of
-         *  connectTo() allows chained calls, but its only requirement
-         *  is that the output of this producer and the input of the
-         *  new producer/consumer be the same.  The output of the
-         *  new producer/consumer may be different, but you must
-         *  specify it as a template parameter.
+         * @param inputChannel Consumers can have one or more inputs feeding them
+         *   This parameter allows you to specify which input number this producer
+         *   is connecting to. For single input consumers, leave the index at
+         *   zero.
+         *  @see ValueConsumer::set_input()
          */
         template <typename T2>
         Transform<T, T2>* connectTo(Transform<T, T2>* pConsumerProducer, uint8_t inputChannel = 0) {

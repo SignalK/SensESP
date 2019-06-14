@@ -59,6 +59,38 @@ class Transform : public TransformBase,
          ValueProducer<P>() {
       }
 
+
+  /**
+   * A convenience method that allows up to five producers to be
+   * quickly connected to the input of the ValueConsumer side of this
+   * transform.  The first producer will be connected to input
+   * channel zero, the second one to input channel 1, etc.
+   * "this" is returned, which allows the ValueProducer side
+   * of this transform to then be wired to other transforms via
+   * a call to connectTo().
+   */
+  Transform<C, P>* connectFrom(ValueProducer<P>* pProducer0,
+                               ValueProducer<P>* pProducer1 = NULL,
+                               ValueProducer<P>* pProducer2 = NULL,
+                               ValueProducer<P>* pProducer3 = NULL,
+                               ValueProducer<P>* pProducer4 = NULL) {
+
+      this->ValueConsumer<C>::connectFrom(pProducer0);
+      if (pProducer1 != NULL) {
+        this->ValueConsumer<C>::connectFrom(pProducer1, 1);
+      }
+      if (pProducer2 != NULL) {
+        this->ValueConsumer<C>::connectFrom(pProducer2, 2);
+      }
+      if (pProducer3 != NULL) {
+        this->ValueConsumer<C>::connectFrom(pProducer3, 3);
+      }
+      if (pProducer4 != NULL) {
+        this->ValueConsumer<C>::connectFrom(pProducer4, 4);
+      }
+      return this;
+  }
+
 };
 
 
@@ -75,36 +107,6 @@ class SymmetricTransform : public Transform<T, T> {
       Transform<T, T>(config_path) {
   }
 
-  /**
-   * A convenience method that allows up to five producers to be
-   * quickly connected to the input of the ValueConsumer side of this
-   * transform.  The first producer will be connected to input
-   * channel zero, the second one to input channel 1, etc.
-   * "this" is returned, which allows the ValueProducer side
-   * of this transform to then be wired to other transforms via
-   * a call to connectTo().
-   */
-  SymmetricTransform<T>* connectFrom(ValueProducer<T>* pProducer0,
-                                     ValueProducer<T>* pProducer1 = NULL,
-                                     ValueProducer<T>* pProducer2 = NULL,
-                                     ValueProducer<T>* pProducer3 = NULL,
-                                     ValueProducer<T>* pProducer4 = NULL) {
-
-      pProducer0->connectTo(this, 0);
-      if (pProducer1 != NULL) {
-        pProducer1->connectTo(this, 1);
-      }
-      if (pProducer2 != NULL) {
-        pProducer2->connectTo(this, 2);
-      }
-      if (pProducer3 != NULL) {
-        pProducer3->connectTo(this, 3);
-      }
-      if (pProducer4 != NULL) {
-        pProducer4->connectTo(this, 4);
-      }
-      return this;
-  }
 };
 
 typedef SymmetricTransform<float> NumericTransform;
