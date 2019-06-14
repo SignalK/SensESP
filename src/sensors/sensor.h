@@ -16,7 +16,6 @@ class Sensor : virtual public Observable, public Configurable, public Enable {
   public:
     Sensor(String config_path="");
 
-  // Was used by sensesp_app::enable(). Now handled by Enable.  Deprecate?
   static const std::set<Sensor*>& get_sensors() {
     return sensors;
   }
