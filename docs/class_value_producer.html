@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.3.0</span>
+   &#160;<span id="projectnumber">0.4.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -105,12 +105,11 @@ Inheritance diagram for ValueProducer&lt; T &gt;:</div>
 <area shape="rect"  title=" " alt="" coords="166,79,305,104"/>
 <area shape="rect"  href="class_digital_input_value.html" title=" " alt="" coords="5,152,134,191"/>
 <area shape="rect"  href="class_observable_value.html" title=" " alt="" coords="158,159,312,184"/>
-<area shape="rect"  href="class_transform.html" title=" " alt="" coords="336,159,449,184"/>
+<area shape="rect"  href="class_transform.html" title=" " alt="" coords="336,159,462,184"/>
 <area shape="rect"  href="class_observable.html" title=" " alt="" coords="190,5,280,31"/>
-<area shape="rect"  href="class_symmetric_transform.html" title=" " alt="" coords="213,239,388,264"/>
-<area shape="rect"  href="class_time_string.html" title=" " alt="" coords="412,239,555,264"/>
-<area shape="rect"  href="class_debounce.html" title=" " alt="" coords="159,312,290,337"/>
-<area shape="rect"  href="class_passthrough.html" title=" " alt="" coords="313,312,440,337"/>
+<area shape="rect"  href="class_symmetric_transform.html" title=" " alt="" coords="312,239,487,264"/>
+<area shape="rect"  href="class_debounce.html" title=" " alt="" coords="262,312,392,337"/>
+<area shape="rect"  href="class_s_k_output.html" title=" " alt="" coords="416,312,526,337"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -122,8 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adaf30ea1027efa0c83c75dfe3afc0c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1669282467997608ce6164fe4d729bb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo</a> (<a class="el" href="class_value_consumer.html">ValueConsumer</a>&lt; T &gt; *pConsumer, uint8_t inputChannel=0)</td></tr>
 <tr class="separator:a1669282467997608ce6164fe4d729bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64af7a373036743d912876475c566045"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_symmetric_transform.html">SymmetricTransform</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a64af7a373036743d912876475c566045">connectTo</a> (<a class="el" href="class_symmetric_transform.html">SymmetricTransform</a>&lt; T &gt; *pProducerConsumer, uint8_t inputChannel=0)</td></tr>
-<tr class="separator:a64af7a373036743d912876475c566045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfb3d9679b80c9fae0951ca13911344f"><td class="memTemplParams" colspan="2">template&lt;typename T2 &gt; </td></tr>
+<tr class="memitem:adfb3d9679b80c9fae0951ca13911344f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_transform.html">Transform</a>&lt; T, T2 &gt; *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_value_producer.html#adfb3d9679b80c9fae0951ca13911344f">connectTo</a> (<a class="el" href="class_transform.html">Transform</a>&lt; T, T2 &gt; *pConsumerProducer, uint8_t inputChannel=0)</td></tr>
+<tr class="separator:adfb3d9679b80c9fae0951ca13911344f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_observable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_observable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_observable.html">Observable</a></td></tr>
 <tr class="memitem:a099bf851e05bb8c1a25e83f2a1389e58 inherit pub_methods_class_observable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_observable.html#a099bf851e05bb8c1a25e83f2a1389e58">notify</a> ()</td></tr>
 <tr class="separator:a099bf851e05bb8c1a25e83f2a1389e58 inherit pub_methods_class_observable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,7 +168,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00021">21</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00023">23</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 
 </div>
 </div>
@@ -216,35 +216,39 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_value_consumer.html#a7bf920e5ad5f171ec6e2aeda056ff01f">ValueConsumer::set_input()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00039">39</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00042">42</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_value_producer_a1669282467997608ce6164fe4d729bb2_icgraph.png" border="0" usemap="#class_value_producer_a1669282467997608ce6164fe4d729bb2_icgraph" alt=""/></div>
 <map name="class_value_producer_a1669282467997608ce6164fe4d729bb2_icgraph" id="class_value_producer_a1669282467997608ce6164fe4d729bb2_icgraph">
-<area shape="rect"  title=" " alt="" coords="209,5,385,31"/>
+<area shape="rect"  title=" " alt="" coords="209,55,386,80"/>
 <area shape="rect"  href="class_sens_e_s_p_app.html#ac53d90429563f50e4aca5224a1e85afd" title=" " alt="" coords="5,5,161,31"/>
+<area shape="rect"  href="wiring__helpers_8h.html#ae36e0604b36693bd720bffcf4145baf9" title=" " alt="" coords="5,55,161,80"/>
+<area shape="rect"  href="wiring__helpers_8h.html#a2ef51129a7e0e59a4efe2d031141d82f" title=" " alt="" coords="42,104,125,129"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a64af7a373036743d912876475c566045"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64af7a373036743d912876475c566045">&#9670;&nbsp;</a></span>connectTo() <span class="overload">[2/2]</span></h2>
+<a id="adfb3d9679b80c9fae0951ca13911344f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfb3d9679b80c9fae0951ca13911344f">&#9670;&nbsp;</a></span>connectTo() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T&gt; </div>
+<div class="memtemplate">
+template&lt;typename T2 &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_symmetric_transform.html">SymmetricTransform</a>&lt;T&gt;* <a class="el" href="class_value_producer.html">ValueProducer</a>&lt; T &gt;::connectTo </td>
+          <td class="memname"><a class="el" href="class_transform.html">Transform</a>&lt;T, T2&gt;* <a class="el" href="class_value_producer.html">ValueProducer</a>&lt; T &gt;::connectTo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_symmetric_transform.html">SymmetricTransform</a>&lt; T &gt; *&#160;</td>
-          <td class="paramname"><em>pProducerConsumer</em>, </td>
+          <td class="paramtype"><a class="el" href="class_transform.html">Transform</a>&lt; T, T2 &gt; *&#160;</td>
+          <td class="paramname"><em>pConsumerProducer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -264,9 +268,15 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If the consumer this producer is connecting to is ALSO a producer of values of the same type, <a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo()</a> calls can be chained together, as this specialized version returns the Producer/Consumer so this method can be called on THAT object. </p>
+<p>If the consumer this producer is connecting to is ALSO a producer of values of the same type, <a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo()</a> calls can be chained together, as this specialized version returns the producer/consumer being conencted to so <a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo()</a> can be called on THAT object. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputChannel</td><td>Consumers can have one or more inputs feeding them This parameter allows you to specify which input number this producer is connecting to. For single input consumers, leave the index at zero. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_value_consumer.html#a7bf920e5ad5f171ec6e2aeda056ff01f">ValueConsumer::set_input()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00052">52</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00062">62</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 
 </div>
 </div>
@@ -296,7 +306,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <p>Returns the current value of this producer </p>
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00027">27</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00029">29</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -309,7 +319,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect"  href="class_sens_e_s_p_app.html#a092f600dda1a51189bc2c9fd5de360e8" title=" " alt="" coords="207,156,395,181"/>
 <area shape="rect"  href="class_sens_e_s_p_app.html#ac068882b9e9f6092da0818c5e42b48b8" title=" " alt="" coords="204,205,397,231"/>
 <area shape="rect"  href="class_sens_e_s_p_app.html#a8875ca27de5c10c1b2931c3c41e1f9b5" title=" " alt="" coords="223,255,378,293"/>
-<area shape="rect"  href="class_value_consumer.html#a6adf62d8d87ffa3ce70bb85379a68715" title=" " alt="" coords="224,317,377,356"/>
+<area shape="rect"  href="class_value_consumer.html#a6adf62d8d87ffa3ce70bb85379a68715" title=" " alt="" coords="227,317,375,356"/>
 <area shape="rect"  href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2" title=" " alt="" coords="223,380,378,419"/>
 </map>
 </div>
@@ -340,7 +350,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <p>The current value of this producer is stored here in this output member (unless descendant classes override <a class="el" href="class_value_producer.html#adaf30ea1027efa0c83c75dfe3afc0c1a">ValueProducer::get()</a>) </p>
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00064">64</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00074">74</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 
 </div>
 </div>

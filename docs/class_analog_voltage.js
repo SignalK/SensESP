@@ -1,4 +1,4 @@
 var class_analog_voltage =
 [
-    [ "AnalogVoltage", "class_analog_voltage.html#aa685c09a7c29bec4ed7b89e6317ee127", null ]
+    [ "AnalogVoltage", "class_analog_voltage.html#a22cee4790f99a391a883370cac00894a", null ]
 ];

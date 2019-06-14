@@ -1,9 +1,8 @@
 var wiring__helpers_8h =
 [
-    [ "setup_analog_input", "wiring__helpers_8h.html#adea719867d33321e725bf045de32076c", null ],
-    [ "setup_digital_input", "wiring__helpers_8h.html#af8491f1a9541b35d11c13f5c2ec8dc46", null ],
-    [ "setup_fuel_flow_meter", "wiring__helpers_8h.html#adfc99a40e14ac9cd0b83ee26e2ea2427", null ],
-    [ "setup_gps", "wiring__helpers_8h.html#a013f0fccc349c462c3a1d1a692e0cc23", null ],
-    [ "setup_onewire_temperature", "wiring__helpers_8h.html#ad76896b776ebaa3509b6cc91f017e86c", null ],
-    [ "setup_rpm_meter", "wiring__helpers_8h.html#aa6279a7bab0b61c448263a90303bb7e0", null ]
+    [ "setup_analog_input", "wiring__helpers_8h.html#a70ac1c40d730c9e0f9b93b1f4dd5f0f9", null ],
+    [ "setup_fuel_flow_meter", "wiring__helpers_8h.html#ae36e0604b36693bd720bffcf4145baf9", null ],
+    [ "setup_gps", "wiring__helpers_8h.html#a2ef51129a7e0e59a4efe2d031141d82f", null ],
+    [ "setup_onewire_temperature", "wiring__helpers_8h.html#a37c83d7d3ac2abb00e8f9e86c1da52d3", null ],
+    [ "setup_rpm_meter", "wiring__helpers_8h.html#a99ed20d80aca90bb060c88019c5f739f", null ]
 ];

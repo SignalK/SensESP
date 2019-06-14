@@ -12,8 +12,6 @@ var searchData=
   ['parse_5fns',['parse_NS',['../nmea__parser_8cpp.html#a18bf596259e1849f3b6bdbdd765ab606',1,'nmea_parser.cpp']]],
   ['parse_5fpsti030_5fmode',['parse_PSTI030_mode',['../nmea__parser_8cpp.html#a37bce694f34f625b2c3e29a1a74c1570',1,'nmea_parser.cpp']]],
   ['parse_5ftime',['parse_time',['../nmea__parser_8cpp.html#a202c8d748e820b33d2fb1a324710698b',1,'nmea_parser.cpp']]],
-  ['passthrough',['Passthrough',['../class_passthrough.html',1,'Passthrough&lt; T &gt;'],['../class_passthrough.html#ad4c60e8f46012deb4643f2ad7871df72',1,'Passthrough::Passthrough()'],['../class_passthrough.html#a63f4217398589b274a2a2c4b7f48c8e5',1,'Passthrough::Passthrough(String sk_path, String config_path=&quot;&quot;)']]],
-  ['passthrough_2eh',['passthrough.h',['../passthrough_8h.html',1,'']]],
   ['pin',['pin',['../class_digital_input.html#a92b46ff35c6b0fcf13644727c0a6b61f',1,'DigitalInput']]],
   ['position',['Position',['../struct_position.html',1,'Position'],['../struct_n_m_e_a_data.html#a249d831d604857b04284d4c33719005e',1,'NMEAData::position()']]],
   ['precise_5fgnss',['precise_gnss',['../nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520afa0a09a3165e3cc313372a0b424b149c',1,'nmea_parser.cpp']]],
