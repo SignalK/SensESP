@@ -97,15 +97,16 @@ OneWireTemperature::OneWireTemperature(
     // previously unconfigured device
     bool success = dts->get_next_address(&address);
     if (!success) {
-      debugE("FATAL: Could not find available OneWire devices");
+      debugE("FATAL: No more unregistered OneWire devices left");
       found = false;
     } else {
+      debugD("Registered previously unconfigured OneWire device");
       dts->register_address(address);
     }
   } else {
     bool success = dts->register_address(address);
     if (!success) {
-      debugE("FATAL: OneWire device(s) found, but could not be registered");
+      debugE("FATAL: Previously saved OneWire device could no longer be found");
       found = false;
     }
   }
