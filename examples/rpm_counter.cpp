@@ -66,8 +66,8 @@ const uint read_delay = 500;
   // 2. Connect the producer directly to the consumer
   auto* pDevice = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
   
-  pDevice->connectTo(new Frequency(multiplier, config_path)) 
-         -> outputTo(new SignalKNumber(sk_path));
+  pDevice->connectTo(new Frequency(multiplier, "/sensors/engine_rpm/calibrate")) 
+         -> outputTo(new SignalKNumber(sk_path, "/sensors/engine_rpm/sk"));
 
 
   // Start the SensESP application running
