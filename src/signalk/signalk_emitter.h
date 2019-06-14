@@ -12,7 +12,7 @@
 #include "sensesp.h"
 
 /**
- * A SignalK source is one that produces SignalK output to be
+ * A SignalK emitter is one that produces SignalK output to be
  * forwarded to the SignalK server (if the system is connected
  * to one).  SignalK is reported via the as_signalK() method.
  */
@@ -22,7 +22,7 @@ class SKEmitter : virtual public Observable {
         /**
          * The constructor
          * @param sk_path The SignalK path that identifies
-         * this particular source
+         * this particular output
          */
         SKEmitter(String sk_path);
 
