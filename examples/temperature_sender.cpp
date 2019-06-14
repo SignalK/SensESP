@@ -84,7 +84,7 @@ ReactESP app([] () {
                 connectTo(new VoltageDividerR2(R1, Vin, "/gen/temp/sender")) ->
                 connectTo(new TemperatureInterpreter("/gen/temp/curve")) ->
                 connectTo(new Linear(1.0, 0.0, "/gen/temp/calibrate")) ->
-                outputTo(new SignalKNumber(sk_path, "/gen/temp/sk"));
+                connectTo(new SignalKNumber(sk_path, "/gen/temp/sk"));
 
 
   // Start the SensESP application running

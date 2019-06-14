@@ -29,7 +29,7 @@ ReactESP app([] () {
   // Takes a moving average for every 10 values, with scale factor
   MovingAverage* avg = new MovingAverage(10, scale);
 
-  input -> connectTo(avg) -> outputTo(new SignalKNumber("tanks.fuel.0.currentLevel"));
+  input -> connectTo(avg) -> connectTo(new SignalKNumber("tanks.fuel.0.currentLevel"));
   
   sensesp_app->enable();
 

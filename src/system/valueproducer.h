@@ -69,22 +69,6 @@ class ValueProducer : virtual public Observable {
             return pConsumerProducer;
         }
 
-
-
-        /**
-         * Connects this producer to the specified SignalK output consumer 
-         * so that the value of this producer will be broadcast in SignalK
-         * over the network.  This producer is then returned so
-         * this object can then be connected to another consumer and
-         * the connection chain can continue.  Note this differs from connectTo()
-         * as this method returns "this" producer, and that method returns 
-         * the value consumer that was passed in as a parameter.
-         */
-        ValueProducer<T>* outputTo(SignalKOutput<T>* pOutput) {
-            this->connectTo(pOutput);
-            return this;
-        }
-
     protected:
         /**
          * The current value of this producer is stored here in this output member

@@ -21,7 +21,7 @@ void setup_analog_input(
     String config_path) {
   (new AnalogInput())
     -> connectTo(new Linear(k, c, config_path + "/calibrate"))
-    -> outputTo(new SignalKNumber(sk_path, config_path + "/sk"));
+    -> connectTo(new SignalKNumber(sk_path, config_path + "/sk"));
 }
 
 
@@ -39,10 +39,10 @@ void setup_fuel_flow_meter(
   Frequency* freq2;
 
   dic1->connectTo(freq1 = new Frequency())
-      -> outputTo(new SignalKNumber("sensors.inflow.frequency"));
+      -> connectTo(new SignalKNumber("sensors.inflow.frequency"));
     
   dic2->connectTo(freq2 = new Frequency())
-      -> outputTo(new SignalKNumber("sensors.outflow.frequency"));
+      -> connectTo(new SignalKNumber("sensors.outflow.frequency"));
 
 
   // Here, each pulse of a flow sensor represents 0.46ml of flow
@@ -51,27 +51,27 @@ void setup_fuel_flow_meter(
                               "/sensors/fuel/rate/calibrate");
 
   diff->connectFrom(freq1, freq2)
-      -> outputTo(new SignalKNumber("propulsion.0.fuel.rate", "/sensors/fuel/rate/sk"))
+      -> connectTo(new SignalKNumber("propulsion.0.fuel.rate", "/sensors/fuel/rate/sk"))
       -> connectTo(new MovingAverage(10, 1., "/sensors/fuel/average/calibrate")) // this is the same as above, but averaged over 10 s
-      -> outputTo(new SignalKNumber("propulsion.0.fuel.averageRate", "/sensors/fuel/average/sk"));
+      -> connectTo(new SignalKNumber("propulsion.0.fuel.averageRate", "/sensors/fuel/average/sk"));
 
 
   // Integrate the net flow over time. The output is dependent
   // on the the input counter update rate!
   diff->connectTo(new Integrator(1., 0.))
-      -> outputTo(new SignalKNumber("propulsion.left.fuel.used", "/sensors/fuel/used/sk"));
+      -> connectTo(new SignalKNumber("propulsion.left.fuel.used", "/sensors/fuel/used/sk"));
 
 
   // Integrate the total outflow over time. The output is dependent
   // on the the input counter update rate!
   freq1-> connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/in_used/calibrate"))
-       -> outputTo(new SignalKNumber("propulsion.left.fuel.usedGross", "/sensors/fuel/in_used/sk"));
+       -> connectTo(new SignalKNumber("propulsion.left.fuel.usedGross", "/sensors/fuel/in_used/sk"));
 
 
   // Integrate the net fuel flow over time. The output is dependent
   // on the the input counter update rate!
   freq2->connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/out_used/calibrate"))
-       -> outputTo(new SignalKNumber("propulsion.left.fuel.usedReturn", "/sensors/fuel/out_used/sk"));
+       -> connectTo(new SignalKNumber("propulsion.left.fuel.usedReturn", "/sensors/fuel/out_used/sk"));
 }
 
 
@@ -131,6 +131,6 @@ void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
 
   (new DigitalInputCounter(input_pin, INPUT_PULLUP, RISING, 500))
       -> connectTo<float>(new Frequency(1./97., "/sensors/engine_rpm/calibrate"))
-      -> outputTo(new SignalKNumber("propulsion.left.revolutions", "/sensors/engine_rpm/sk"));
+      -> connectTo(new SignalKNumber("propulsion.left.revolutions", "/sensors/engine_rpm/sk"));
   
 }
