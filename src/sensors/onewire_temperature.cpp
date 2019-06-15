@@ -100,7 +100,10 @@ OneWireTemperature::OneWireTemperature(
     // previously unconfigured sensor
     bool success = dts->get_next_address(&address);
     if (!success) {
-      debugE("FATAL: No more new OneWire sensors left");
+      debugE("FATAL: Unable to allocate a OneWire sensor for %s. "
+             "All sensors have already been configured. "
+             "Check the physical wiring of your sensors.",
+             config_path.c_str());
       found = false;
     } else {
       debugD("Registered a new OneWire sensor");
@@ -112,7 +115,8 @@ OneWireTemperature::OneWireTemperature(
       char addrstr[24];
       owda_to_string(addrstr, address);
       debugE("FATAL: OneWire sensor %s at %s is missing. "
-             "Check the physical wiring of the devices.", config_path.c_str(), addrstr);
+             "Check the physical wiring of your sensors.",
+             config_path.c_str(), addrstr);
       found = false;
     }
   }
