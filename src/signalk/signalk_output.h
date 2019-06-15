@@ -23,7 +23,7 @@ class SKOutput : public SKEmitter,
     : SKEmitter(sk_path), SymmetricTransform<T>(config_path) {
     Enable::setPriority(-5);
   }
- 
+
 
   virtual void set_input(T newValue, uint8_t inputChannel = 0) override {
     ValueProducer<T>::output = newValue;
@@ -36,7 +36,7 @@ class SKOutput : public SKEmitter,
     String json;
     JsonObject& root = jsonBuffer.createObject();
     root.set("path", this->get_sk_path());
-    root.set("value", ValueProducer<T>::output);    
+    root.set("value", ValueProducer<T>::output);
     root.printTo(json);
     return json;
   }
