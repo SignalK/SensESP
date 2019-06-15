@@ -123,6 +123,7 @@ bool parse_AV(bool* is_valid, char* s) {
   switch (*s) {
     case 'A':
       *is_valid = true;
+      break;
     case 'V':
       *is_valid = false;
       break;
@@ -171,7 +172,9 @@ bool parse_time(int* hour, int* minute, float* second, char* s) {
 
 bool parse_date(int* year, int* month, int* day, char* s) {
   int retval = sscanf(s, "%2d%2d%2d", day, month, year);
-  year += 2000;
+  // date expressed as C struct tm
+  *year += 100;
+  *month -= 1;
   return retval==3;
 }
 
