@@ -112,7 +112,7 @@ OneWireTemperature::OneWireTemperature(
       char addrstr[24];
       owda_to_string(addrstr, address);
       debugE("FATAL: OneWire sensor %s at %s is missing. "
-             "Check the physical wiring of the devices.", config_path, addrstr);
+             "Check the physical wiring of the devices.", config_path.c_str(), addrstr);
       found = false;
     }
   }
