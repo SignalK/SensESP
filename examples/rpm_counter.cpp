@@ -25,7 +25,14 @@ ReactESP app([]() {
 
 
 
-  // The "SignalK path" identifies this sensor to the SignalK network.
+  // The "SignalK path" identifies the output of the sensor to the SignalK network.
+  // If you have multiple sensors connected to your microcontoller (ESP), each one of them
+  // will (probably) have its own SignalK path variable. For example, if you have two
+  // propulsion engines, and you want the RPM of each of them to go to SignalK, you might
+  // have sk_path_leftEngine = "propulsion.left.revolutions"
+  // and  sk_path_rightEngine = "propulsion.right.revolutions"
+  // In this example, there is only one propulsion engine, and its RPM is the only thing
+  // being reported to SignalK.
   const char* sk_path = "propulsion.left.revolutions";
 
 
@@ -40,11 +47,14 @@ ReactESP app([]() {
   // you will need to specify a config_path.
   const char* config_path = "/sensors/engine_rpm";
 
+  // These two are necessary until a method is created to synthesize them:
+  const char* config_path_calibrate = "/sensors/engine_rpm/calibrate";
+  const char* config_path_skpath = "/sensors/engine_rpm/sk";
 
 
 //////////
-// connect a RPM meter. A DigitalInputCounter counts pulses
-// and reports the readings every read_delay ms
+// connect a RPM meter. A DigitalInputCounter implements an interrupt
+// to count pulses and reports the readings every read_delay ms
 // (500 in the example). A Frequency
 // transform takes a number of pulses and converts that into
 // a frequency. The sample multiplier converts the 97 tooth
@@ -53,23 +63,15 @@ const float multiplier = 1.0 / 97.0;
 const uint read_delay = 500;
 
 
-  // Two ways to wire up sensors and transformations:
+  // Wire it all up by connecting the producer directly to the consumer
+  auto* pSensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
 
-  // 1. Connect by specifying data type of Producer's output/Consumer's input
-  /*
-     sensesp_app->connect<int>(
-          new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay),
-          new Frequency(multiplier, config_path)
-     );
-  */
-
-  // 2. Connect the producer directly to the consumer
-  auto* sensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
-
-  sensor->connectTo(new Frequency(multiplier, "/sensors/engine_rpm/calibrate"))
-        ->connectTo(new SKOutputNumber(sk_path, "/sensors/engine_rpm/sk"));
+  pSensor->connectTo(new Frequency(multiplier, config_path_calibrate))  // connect the output of pSensor to the input of Frequency()
+        ->connectTo(new SKOutputNumber(sk_path, config_path_skpath));   // connect the output of Frequency() to a SignalK Output as a number
 
 
-  // Start the SensESP application running
+  // Start the SensESP application running. It constantly monitors the interrupt pin, and every
+  // read_delay ms, it sends the calculated frequency to SignalK.
   sensesp_app->enable();
 });
+
