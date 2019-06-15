@@ -2,7 +2,7 @@
 
 SensESP is a Signal K sensor development library for ESP8266
 and ESP32. It can be used as a high-level toolkit for
-creating ESP sensor devices that interface with Signal K
+creating ESP hardware sensoring devices that interface with Signal K
 servers. At the moment it is very much a work in progress.
 
 SensESP is heavily inspired by [SigkSens](https://github.com/mxtommy/SigkSens)
@@ -84,7 +84,7 @@ Configuration can be updated with HTTP PUT requests:
 - [x] Authentication token support
 - [x] Make the project a library
 - [x] Web configuration UI
-- [ ] Control device support. For now, all devices are read-only, and control devices such as leds, relays, or
+- [ ] Control device support. For now, all devices are read-only, and controls such as leds, relays, or
 PWM output are not supported.
 
 SensESP Class Diagram

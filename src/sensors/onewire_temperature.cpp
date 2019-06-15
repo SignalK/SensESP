@@ -5,7 +5,7 @@
 #include <DallasTemperature.h>
 #include <OneWire.h>
 
-#include "device.h"
+#include "sensor.h"
 #include "sensesp.h"
 
 const OWDevAddr null_ow_addr = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -33,24 +33,27 @@ bool string_to_owda(OWDevAddr* addr, const char* str) {
 
 DallasTemperatureSensors::DallasTemperatureSensors(
     int pin, String config_path)
-    : Device(config_path) {
+    : Sensor(config_path) {
   onewire = new OneWire(pin);
   sensors = new DallasTemperature(onewire);
   sensors->begin();
 
-  int num_devices = sensors->getDeviceCount();
-  debugI("OneWire devices found: %d", num_devices);
+  // getDeviceCount() is a method of DallasTemperature
+  // and can't be renamed to conform to the SensESP
+  // nomenclature
+  int num_sensors = sensors->getDeviceCount();
+  debugI("OneWire sensors found: %d", num_sensors);
 
   DeviceAddress addr;
   OWDevAddr owda;
-  for (int i=0; i<num_devices; i++) {
+  for (int i=0; i<num_sensors; i++) {
     sensors->getAddress(addr, i);
     std::copy(std::begin(addr), std::end(addr), std::begin(owda));
     known_addresses.insert(owda);
     #ifndef DEBUG_DISABLED
     char addrstr[24];
     owda_to_string(addrstr, owda);
-    debugI("Found OneWire device %s", addrstr);
+    debugI("Found OneWire sensor %s", addrstr);
     #endif
   }
 
@@ -91,22 +94,25 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
 
 OneWireTemperature::OneWireTemperature(
     DallasTemperatureSensors* dts, String config_path)
-    : NumericDevice(config_path), dts{dts} {
+    : NumericSensor(config_path), dts{dts} {
   load_configuration();
   if (address==null_ow_addr) {
-    // previously unconfigured device
+    // previously unconfigured sensor
     bool success = dts->get_next_address(&address);
     if (!success) {
-      debugE("FATAL: No more unregistered OneWire devices left");
+      debugE("FATAL: No more new OneWire sensors left");
       found = false;
     } else {
-      debugD("Registered previously unconfigured OneWire device");
+      debugD("Registered a new OneWire sensor");
       dts->register_address(address);
     }
   } else {
     bool success = dts->register_address(address);
     if (!success) {
-      debugE("FATAL: Previously saved OneWire device could no longer be found");
+      char addrstr[24];
+      owda_to_string(addrstr, address);
+      debugE("FATAL: OneWire sensor %s at %s is missing. "
+             "Check the physical wiring of the devices.", config_path, addrstr);
       found = false;
     }
   }

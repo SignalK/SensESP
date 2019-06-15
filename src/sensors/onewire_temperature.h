@@ -6,11 +6,11 @@
 #include <DallasTemperature.h>
 #include <OneWire.h>
 
-#include "device.h"
+#include "sensor.h"
 
 typedef std::array<uint8_t, 8> OWDevAddr;
 
-class DallasTemperatureSensors : public Device {
+class DallasTemperatureSensors : public Sensor {
  public:
   DallasTemperatureSensors(int pin, String config_path="");
   void enable() override final {}
@@ -19,12 +19,12 @@ class DallasTemperatureSensors : public Device {
   DallasTemperature* sensors;
  private:
   OneWire* onewire;
-  uint8_t next_device = 0;
+  uint8_t next_sensor = 0;
   std::set<OWDevAddr> known_addresses;
   std::set<OWDevAddr> registered_addresses;
 };
 
-class OneWireTemperature : public NumericDevice {
+class OneWireTemperature : public NumericSensor {
  public:
   OneWireTemperature(DallasTemperatureSensors* dts,
                      String config_path="");

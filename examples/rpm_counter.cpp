@@ -2,7 +2,7 @@
 
 //#define SERIAL_DEBUG_DISABLED
 
-#include "devices/digital_input.h"
+#include "sensors/digital_input.h"
 #include "sensesp_app.h"
 #include "transforms/frequency.h"
 #include "signalk/signalk_output.h"
@@ -25,16 +25,16 @@ ReactESP app([]() {
 
 
 
-  // The "SignalK path" identifies this sensor to the SignalK network. 
+  // The "SignalK path" identifies this sensor to the SignalK network.
   const char* sk_path = "propulsion.left.revolutions";
 
 
   // The "Configuration path" is combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
   // It is ALSO used to specify a path to the SPIFFS file system
-  // where configuration data is saved on the MCU board.  It should 
-  // ALWAYS start with a forward slash if specified.  If left blank, 
-  // that indicates this sensor or transform does not have any 
+  // where configuration data is saved on the MCU board.  It should
+  // ALWAYS start with a forward slash if specified.  If left blank,
+  // that indicates this sensor or transform does not have any
   // configuration to save.
   // Note that if you want to be able to change the sk_path at runtime,
   // you will need to specify a config_path.
@@ -53,7 +53,7 @@ const float multiplier = 1.0 / 97.0;
 const uint read_delay = 500;
 
 
-  // Two ways to wire up devices and transformations:
+  // Two ways to wire up sensors and transformations:
 
   // 1. Connect by specifying data type of Producer's output/Consumer's input
   /*
@@ -64,10 +64,10 @@ const uint read_delay = 500;
   */
 
   // 2. Connect the producer directly to the consumer
-  auto* pDevice = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
-  
-  pDevice->connectTo(new Frequency(multiplier, "/sensors/engine_rpm/calibrate")) 
-         -> connectTo(new SKOutputNumber(sk_path, "/sensors/engine_rpm/sk"));
+  auto* sensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
+
+  sensor->connectTo(new Frequency(multiplier, "/sensors/engine_rpm/calibrate"))
+        ->connectTo(new SKOutputNumber(sk_path, "/sensors/engine_rpm/sk"));
 
 
   // Start the SensESP application running

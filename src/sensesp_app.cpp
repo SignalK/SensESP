@@ -2,9 +2,9 @@
 
 #include "FS.h"
 
-#include "devices/analog_input.h"
-#include "devices/digital_input.h"
-#include "devices/system_info.h"
+#include "sensors/analog_input.h"
+#include "sensors/digital_input.h"
+#include "sensors/system_info.h"
 #include "net/discovery.h"
 #include "net/ota.h"
 #include "net/networking.h"
@@ -33,9 +33,9 @@ SensESPApp::SensESPApp() {
   networking = new Networking("/system/networking");
   ObservableValue<String>* hostname = networking->get_hostname();
 
-  // setup standard devices and their transforms
+  // setup standard sensors and their transforms
 
-  setup_standard_devices(hostname);
+  setup_standard_sensors(hostname);
 
   // create the SK delta object
 
@@ -64,11 +64,11 @@ SensESPApp::SensESPApp() {
     this->led_blinker.flip();
   };
   this->ws_client = new WSClient(
-    "/system/sk", 
+    "/system/sk",
     sk_delta, ws_connected_cb, ws_delta_cb);
 }
 
-void SensESPApp::setup_standard_devices(ObservableValue<String>* hostname) {
+void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
 
   // connect systemhz
 
@@ -154,7 +154,7 @@ void SensESPApp::enable() {
   #endif
 
   Enable::enableAll();
-  debugI("All devices and transforms enabled");
+  debugI("All sensors and transforms enabled");
 
 }
 

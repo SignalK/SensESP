@@ -7,7 +7,7 @@
 DigitalInput::DigitalInput(
     uint8_t pin, int pin_mode, int interrupt_type,
     String config_path)
-    : Device(config_path), pin{pin}, interrupt_type{interrupt_type} {
+    : Sensor(config_path), pin{pin}, interrupt_type{interrupt_type} {
   pinMode(pin, pin_mode);
 }
 
@@ -48,7 +48,7 @@ void DigitalInputCounter::enable() {
                   [this](){
     this->counter++;
   });
-  
+
   app.onRepeat(read_delay, [this](){
     noInterrupts();
     output = counter;
