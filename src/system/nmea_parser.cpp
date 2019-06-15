@@ -34,6 +34,33 @@ String gnssQualityStrings[] = {
   "Error"
 };
 
+// reconstruct the original NMEA sentence for debugging purposes
+void reconstruct_nmea_sentence(
+    char* sentence,
+    const char* buffer,
+    int term_offsets[],
+    int num_terms) {
+      int cur_pos = 0;
+
+      // get the total length of the sentence
+      int last_term_loc = term_offsets[num_terms-1];
+      int last_term_len = strlen(buffer+term_offsets[num_terms-1]);
+      // include the final \0
+      int sentence_len = last_term_loc + last_term_len + 1;
+
+      // beginning $
+      sentence[0] = '$';
+      // copy the buffer contents
+      memcpy(sentence+1, buffer, sentence_len);
+
+      // fill in the gaps with commas
+      for (int i=1; i< num_terms-1; i++) {
+        sentence[term_offsets[i]] = ',';
+      }
+      // the final gap has an asterisk
+      sentence[term_offsets[num_terms-1]] = '*';
+}
+
 bool parse_int(int* value, char* s) {
   int retval = sscanf(s, "%d", value);
   return retval==1;
@@ -429,11 +456,15 @@ void PSTI032SentenceParser::parse(char* buffer, int term_offsets[], int num_term
 
   struct tm time;
   float second;
-  bool is_valid;
+  bool is_valid = false;
   ENUVector projection;
   GNSSQuality quality;
   float baseline_length;
   float baseline_course;
+
+  char reconstruction[INPUT_BUFFER_LENGTH];
+  reconstruct_nmea_sentence(reconstruction, buffer, term_offsets, num_terms);
+  debugD("%s", reconstruction);
 
   // Example:
   // $PSTI,032,041457.000,170316,A,R,0.603,‐0.837,‐0.089,1.036,144.22,,,,,*30
