@@ -152,24 +152,28 @@ void WSClient::test_token(const String server_address, const uint16_t server_por
   WiFiClient client;
   HTTPClient http;
 
-  debugD("Testing token");
-
   String url = String("http://") + server_address + ":" + server_port + "/signalk/v1/api/";
+  debugD("Testing token with url %s", url.c_str());
   http.begin(client, url);
   String full_token = String("JWT ") + auth_token;
   http.addHeader("Authorization", full_token.c_str());
   int httpCode = http.GET();
-  String payload = http.getString();
-  http.end();
-  debugD("Testing resulted in http status %d", httpCode);
-  debugD("%s", payload.c_str());
-  if (httpCode == 200) {
-    // our token is valid, go ahead and connect
-    server_detected = true;
-    this->connect_ws(server_address, server_port);
-  } else if (httpCode == 401) {
-    this->send_access_request(server_address, server_port);
+  if (httpCode > 0) {
+    String payload = http.getString();
+    http.end();
+    debugD("Testing resulted in http status %d", httpCode);
+    debugD("%s", payload.c_str());
+    if (httpCode == 200) {
+      // our token is valid, go ahead and connect
+      server_detected = true;
+      this->connect_ws(server_address, server_port);
+    } else if (httpCode == 401) {
+      this->send_access_request(server_address, server_port);
+    } else {
+      connection_state = disconnected;
+    }
   } else {
+    debugE("GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
     connection_state = disconnected;
   }
 }
