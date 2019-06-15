@@ -38,6 +38,9 @@ DallasTemperatureSensors::DallasTemperatureSensors(
   sensors = new DallasTemperature(onewire);
   sensors->begin();
 
+  // getDeviceCount() is a method of DallasTemperature
+  // and can't be renamed to conform to the SensESP
+  // nomenclature
   int num_sensors = sensors->getDeviceCount();
   debugI("OneWire sensors found: %d", num_sensors);
 
@@ -97,16 +100,19 @@ OneWireTemperature::OneWireTemperature(
     // previously unconfigured sensor
     bool success = dts->get_next_address(&address);
     if (!success) {
-      debugE("FATAL: No more unregistered OneWire sensors left");
+      debugE("FATAL: No more new OneWire sensors left");
       found = false;
     } else {
-      debugD("Registered previously unconfigured OneWire sensor");
+      debugD("Registered a new OneWire sensor");
       dts->register_address(address);
     }
   } else {
     bool success = dts->register_address(address);
     if (!success) {
-      debugE("FATAL: Previously saved OneWire sensor could no longer be found");
+      char addrstr[24];
+      owda_to_string(addrstr, address);
+      debugE("FATAL: OneWire sensor %s at %s is missing. "
+             "Check the physical wiring of the devices.", config_path, addrstr);
       found = false;
     }
   }
