@@ -11,10 +11,11 @@ constexpr int GPS_SERIAL_BITRATE = 115200;
 
 class GPSInput : public Sensor {
  public:
-  GPSInput(int rx_pin, String config_path="");
+  GPSInput(int reset_pin, String config_path="");
   virtual void enable() override final;
   NMEAData nmea_data;
  private:
+  int reset_pin;
   NMEAParser nmea_parser;
 };
 
