@@ -76,8 +76,9 @@ const uint read_delay = 500;
         ->connectTo(new SKOutputNumber(sk_path, config_path_skpath));   // connect the output of Frequency() to a SignalK Output as a number
 
 
-  // Start the SensESP application running. It constantly monitors the interrupt pin, and every
-  // read_delay ms, it sends the calculated frequency to SignalK.
+  // Start the SensESP application running. Because of everything that's been set up above,
+  // it constantly monitors the interrupt pin, and every read_delay ms, it sends the 
+  // calculated frequency to SignalK.
   sensesp_app->enable();
 });
 
