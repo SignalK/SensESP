@@ -6,6 +6,7 @@
 #include "sensors/gps.h"
 #include "transforms/difference.h"
 #include "sensors/digital_input.h"
+#include "transforms/angle_correction.h"
 #include "transforms/frequency.h"
 #include "signalk/signalk_output.h"
 #include "signalk/signalk_position.h"
@@ -75,38 +76,40 @@ void setup_fuel_flow_meter(
 }
 
 
-void setup_gps(int serial_input_pin) {
-  GPSInput* gps = new GPSInput(serial_input_pin);
-  gps->nmea_data.position.connectTo(
-    new SKOutputPosition("navigation.position", ""));
-  gps->nmea_data.gnss_quality.connectTo(
-    new SKOutputString("navigation.methodQuality", ""));
-  gps->nmea_data.num_satellites.connectTo(
-    new SKOutputInt("navigation.satellites", ""));
-  gps->nmea_data.horizontal_dilution.connectTo(
-    new SKOutputNumber("navigation.horizontalDilution", ""));
-  gps->nmea_data.geoidal_separation.connectTo(
-    new SKOutputNumber("navigation.geoidalSeparation", ""));
-  gps->nmea_data.dgps_age.connectTo(
-    new SKOutputNumber("navigation.differentialAge", ""));
-  gps->nmea_data.dgps_id.connectTo(
-    new SKOutputNumber("navigation.differentialReference", ""));
-  gps->nmea_data.datetime.connectTo(
-    new SKOutputTime("navigation.datetime", ""));
-  gps->nmea_data.speed.connectTo(
-    new SKOutputNumber("navigation.speedOverGround", ""));
-  gps->nmea_data.true_course.connectTo(
-    new SKOutputNumber("navigation.courseOverGroundTrue", ""));
-  gps->nmea_data.variation.connectTo(
-    new SKOutputNumber("navigation.magneticVariation", ""));
-  gps->nmea_data.rtk_age.connectTo(
-    new SKOutputNumber("navigation.rtkAge", ""));
-  gps->nmea_data.rtk_ratio.connectTo(
-    new SKOutputNumber("navigation.rtkRatio", ""));
-  gps->nmea_data.baseline_length.connectTo(
-    new SKOutputNumber("navigation.rtkBaselineLength", ""));
-  gps->nmea_data.baseline_course.connectTo(
-    new SKOutputNumber("navigation.rtkBaselineCourse", ""));
+void setup_gps(int reset_pin) {
+  GPSInput* gps = new GPSInput(reset_pin);
+  gps->nmea_data.position
+    .connectTo(new SKOutputPosition("navigation.position", ""));
+  gps->nmea_data.gnss_quality
+    .connectTo(new SKOutputString("navigation.methodQuality", ""));
+  gps->nmea_data.num_satellites
+    .connectTo(new SKOutputInt("navigation.satellites", ""));
+  gps->nmea_data.horizontal_dilution
+    .connectTo(new SKOutputNumber("navigation.horizontalDilution", ""));
+  gps->nmea_data.geoidal_separation
+    .connectTo(new SKOutputNumber("navigation.geoidalSeparation", ""));
+  gps->nmea_data.dgps_age
+    .connectTo(new SKOutputNumber("navigation.differentialAge", ""));
+  gps->nmea_data.dgps_id
+    .connectTo(new SKOutputNumber("navigation.differentialReference", ""));
+  gps->nmea_data.datetime
+    .connectTo(new SKOutputTime("navigation.datetime", ""));
+  gps->nmea_data.speed
+    .connectTo(new SKOutputNumber("navigation.speedOverGround", ""));
+  gps->nmea_data.true_course
+    .connectTo(new SKOutputNumber("navigation.courseOverGroundTrue", ""));
+  gps->nmea_data.variation
+    .connectTo(new SKOutputNumber("navigation.magneticVariation", ""));
+  gps->nmea_data.rtk_age
+    .connectTo(new SKOutputNumber("navigation.rtkAge", ""));
+  gps->nmea_data.rtk_ratio
+    .connectTo(new SKOutputNumber("navigation.rtkRatio", ""));
+  gps->nmea_data.baseline_length
+    .connectTo(new SKOutputNumber("navigation.rtkBaselineLength", ""));
+  gps->nmea_data.baseline_course
+    .connectTo(new SKOutputNumber("navigation.rtkBaselineCourse"))
+    ->connectTo(new AngleCorrection(0, 0, "/sensors/heading/correction"))
+    ->connectTo(new SKOutputNumber("navigation.headingTrue", ""));
 }
 
 void setup_onewire_temperature(
