@@ -32,8 +32,8 @@ JsonObject& AngleCorrection::get_configuration(JsonBuffer& buf) {
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "offset": { "title": "Constant offset (radians)", "type": "number" },
-        "min_angle": { "title": "Minimum angle value (radians, typically 0 or -3.15159265", "type": "number" },
+        "offset": { "title": "Constant offset", "description": "Value to be added, in radians", "type": "number" },
+        "min_angle": { "title": "Minimum angle value", "description": "If you have output between -pi and pi, use -3.14159265, otherwise use 0.", "type": "number" },
         "value": { "title": "Last value", "type" : "number", "readOnly": true }
     }
   })###";
