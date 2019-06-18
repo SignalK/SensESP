@@ -3,6 +3,8 @@
 
 #include <queue>
 #include <stdint.h>
+#include <typeinfo>
+// BAS #include "sensesp_app.h"
 
 /**
  * Classes that implement "Enable" will have their enable() method
@@ -22,6 +24,9 @@ class Enable {
          * to add runtime initialization code to your class
          */
         virtual void enable() {}
+     
+
+        virtual const char* getClassName() { return typeid(*this).name(); }   
 
 
         const int8_t getEnablePriority() { return priority; }
