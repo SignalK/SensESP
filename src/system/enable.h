@@ -4,7 +4,6 @@
 #include <queue>
 #include <stdint.h>
 #include <typeinfo>
-// BAS #include "sensesp_app.h"
 
 /**
  * Classes that implement "Enable" will have their enable() method
