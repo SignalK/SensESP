@@ -25,7 +25,9 @@ class Enable {
         virtual void enable() {}
      
 
-        virtual const char* getClassName() { return typeid(*this).name(); }   
+        #if __GXX_RTTI
+        virtual const char* getClassName() { return typeid(*this).name(); }
+        #endif
 
 
         const int8_t getEnablePriority() { return priority; }

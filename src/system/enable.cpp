@@ -10,10 +10,16 @@ Enable::Enable(uint8_t priority) : priority{priority} {
 
 
 void Enable::enableAll() {
+    debugD("Enabling all required sensors and transforms");
     while (!enableList.empty()) {
         auto& obj = *enableList.top();
+        #if __GXX_RTTI
         debugD("Enabling sensor or transform: %s", obj.getClassName());
+        #endif
         obj.enable();
         enableList.pop();
     } // while
+    #if ! __GXX_RTTI
+    debugD("To see each sensor and transform listed here, add 'build_unflags = -fno-rtti' to platformio.ini");
+    #endif
 }
