@@ -23,11 +23,9 @@ class Enable {
          * to add runtime initialization code to your class
          */
         virtual void enable() {}
-     
 
-        #if __GXX_RTTI
-        virtual const char* getClassName() { return typeid(*this).name(); }
-        #endif
+
+        virtual const char* getClassName();
 
 
         const int8_t getEnablePriority() { return priority; }
