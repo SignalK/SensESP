@@ -35,6 +35,30 @@ void Networking::check_connection() {
 }
 
 void Networking::setup(std::function<void(bool)> connection_cb) {
+  if (ap_ssid != "" && ap_password != "") {
+    setup_saved_ssid(connection_cb);
+  } else {
+    setup_wifi_manager(connection_cb);
+  }
+  app.onRepeat(1000, std::bind(&Networking::check_connection, this));
+}
+
+void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
+  WiFi.begin(ap_ssid, ap_password);
+
+  rdebugI("Connecting");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    rdebugI(".");
+  }
+  debugI("\n");
+
+  debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
+  connection_cb(true);
+}
+
+void Networking::setup_wifi_manager(std::function<void(bool)> connection_cb) {
   should_save_config = false;
 
   //set config save notify callback
@@ -61,12 +85,13 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
     String new_hostname = custom_hostname.getValue();
     debugI("Got new hostname: %s", new_hostname.c_str());
     this->hostname->set(new_hostname);
+    this->ap_ssid = WiFi.SSID();
+    debugI("Got new SSID: %s", ap_ssid.c_str());
+    this->ap_password = WiFi.psk();
     save_configuration();
     debugW("Restarting in 500ms");
     app.onDelay(500, [](){ ESP.restart(); });
   }
-
-  app.onRepeat(1000, std::bind(&Networking::check_connection, this));
 }
 
 ObservableValue<String>* Networking::get_hostname() {
@@ -81,7 +106,9 @@ void Networking::set_hostname(String hostname) {
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "hostname": { "title": "ESP device hostname", "type": "string" }
+        "hostname": { "title": "ESP device hostname", "type": "string" },
+        "ap_ssid": { "title": "Wifi Access Point SSID", "type": "string" },
+        "ap_password": { "title": "Wifi Access Point Password", "type": "string" }
     }
   })";
 
@@ -92,6 +119,9 @@ String Networking::get_config_schema() {
 JsonObject& Networking::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
   root["hostname"] = this->hostname->get();
+  root["ap_ssid"] = this->ap_ssid;
+  root["ap_password"] = this->ap_password;
+
   return root;
 }
 
@@ -100,9 +130,15 @@ bool Networking::set_configuration(const JsonObject& config) {
     return false;
   }
   this->hostname->set(config["hostname"].as<String>());
+  this->ap_ssid = config["ap_ssid"].as<String>();
+  this->ap_password = config["ap_password"].as<String>();
   return true;
 }
 
 void Networking::reset_settings() {
+  hostname->set("");
+  ap_ssid = "";
+  ap_password = "";
+  save_configuration();
   wifi_manager->resetSettings();
 }
