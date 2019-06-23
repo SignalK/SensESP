@@ -135,7 +135,7 @@ void OneWireTemperature::update() {
 }
 
 void OneWireTemperature::read_value() {
-  output = dts->sensors->getTempC(address.data());
+  output = dts->sensors->getTempC(address.data()) + 273.15;
   this->notify();
 }
 
