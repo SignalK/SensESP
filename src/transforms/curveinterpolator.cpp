@@ -16,6 +16,8 @@ CurveInterpolator::Sample::Sample(JsonObject& obj) : input{obj["input"]}, output
 CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults, String config_path)
     : NumericTransform(config_path) {
 
+  className = "CurveInterpolator";    
+
   // Load default values if no configuration present...
   if (defaults != NULL) {
     samples.clear();
