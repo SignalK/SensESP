@@ -4,10 +4,6 @@
 #include <queue>
 #include <stdint.h>
 
-#if __GXX_RTTI
-#include <typeinfo>
-#endif
-
 /**
  * Classes that implement "Enable" will have their enable() method
  * called automatically at startup when the SensESP app itself
