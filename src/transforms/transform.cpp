@@ -10,7 +10,7 @@ std::set<TransformBase*> TransformBase::transforms;
 
 TransformBase::TransformBase(String config_path) :
     Configurable{config_path}, Enable(5) {
-  this->className = "TransformBase";    
+  className = "TransformBase";    
   transforms.insert(this);
 }
 

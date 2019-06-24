@@ -5,7 +5,7 @@
 
 class SystemHz : public NumericSensor {
  public:
-  SystemHz() { this->className = "SystemHz"; }
+  SystemHz() { className = "SystemHz"; }
   void enable() override final;
   String get_value_name() { return "systemhz"; }
  private:
@@ -18,7 +18,7 @@ class SystemHz : public NumericSensor {
 
 class FreeMem : public Sensor, public ValueProducer<uint32_t> {
  public:
-  FreeMem() { this->className = "FreeMem"; }
+  FreeMem() { className = "FreeMem"; }
   void enable() override final;
   String get_value_name() { return "freemem"; }
  private:
@@ -27,7 +27,7 @@ class FreeMem : public Sensor, public ValueProducer<uint32_t> {
 
 class Uptime : public NumericSensor {
  public:
-  Uptime() { this->className = "Uptime"; }
+  Uptime() { className = "Uptime"; }
   void enable() override final;
   String get_value_name() { return "uptime"; }
  private:
@@ -36,7 +36,7 @@ class Uptime : public NumericSensor {
 
 class IPAddrDev : public StringSensor {
  public:
-  IPAddrDev() { this->className = "IPAddrDev"; }
+  IPAddrDev() { className = "IPAddrDev"; }
   void enable() override final;
   String get_value_name() { return "ipaddr"; }
  private:

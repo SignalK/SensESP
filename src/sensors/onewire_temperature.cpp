@@ -34,7 +34,7 @@ bool string_to_owda(OWDevAddr* addr, const char* str) {
 DallasTemperatureSensors::DallasTemperatureSensors(
     int pin, String config_path)
     : Sensor(config_path) {
-  this->className = "DallasTemperatureSensor";
+  className = "DallasTemperatureSensor";
   onewire = new OneWire(pin);
   sensors = new DallasTemperature(onewire);
   sensors->begin();
@@ -96,7 +96,7 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
 OneWireTemperature::OneWireTemperature(
     DallasTemperatureSensors* dts, String config_path)
     : NumericSensor(config_path), dts{dts} {
-  this->className = "OneWireTemperature";
+  className = "OneWireTemperature";
   load_configuration();
   if (address==null_ow_addr) {
     // previously unconfigured sensor

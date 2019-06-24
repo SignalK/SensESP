@@ -57,7 +57,7 @@ class Transform : public TransformBase,
          TransformBase(config_path), 
          ValueConsumer<C>(), 
          ValueProducer<P>() {
-           this->className = "Transform";
+           className = "Transform";
       }
 
 

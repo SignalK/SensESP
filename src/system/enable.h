@@ -24,7 +24,7 @@ class Enable {
         virtual void enable() {}
 
 
-        void setClassName(const char* newClassName) { this->className = newClassName; }
+        void setClassName(const char* newClassName) { className = newClassName; }
         
         
         virtual const char* getClassName();

@@ -6,7 +6,7 @@ MovingAverage::MovingAverage(int n, float k, String config_path) :
     NumericTransform(config_path),
       n{ n },
       k{ k } {
-  this->className = "MovingAverage";
+  className = "MovingAverage";
   buf.resize(n, 0);
   load_configuration();
 }

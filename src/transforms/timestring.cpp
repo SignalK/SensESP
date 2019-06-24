@@ -4,7 +4,7 @@
 
 TimeString::TimeString(String config_path) :
     Transform<time_t, String>(config_path) {
-      this->className = "TimeString";
+      className = "TimeString";
 }
 
 void TimeString::set_input(time_t input, uint8_t inputChannel) {

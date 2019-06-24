@@ -7,7 +7,7 @@
 GPSInput::GPSInput(int reset_pin, String config_path)
     : Sensor(config_path) {
 
-  this->className = "GPSInput";
+  className = "GPSInput";
   this->reset_pin = reset_pin;
 
   nmea_parser.add_sentence_parser(new GPGGASentenceParser(&nmea_data));

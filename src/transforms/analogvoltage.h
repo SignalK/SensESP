@@ -11,7 +11,7 @@ class AnalogVoltage : public Linear {
     public:
        AnalogVoltage(String config_path = "") : 
           Linear(1.0 / 1024.0 * 3.3, 0, config_path) {
-             this->className = "AnalogVoltage";
+             className = "AnalogVoltage";
           }
 };
 

@@ -5,7 +5,7 @@
 #include "sensesp.h"
 
 AnalogInput::AnalogInput() : NumericSensor() {
-  this->className = "AnalogInput";
+  className = "AnalogInput";
 }
 
 void AnalogInput::update() {
