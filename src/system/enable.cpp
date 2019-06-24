@@ -10,14 +10,7 @@ Enable::Enable(uint8_t priority) : priority{priority} {
 
 
 const char* Enable::getClassName() { 
-    static int counter = 1;
-    #if __GXX_RTTI
-    return typeid(*this).name();
-    #else
-    char s[4];
-    sprintf(s, "%d", counter++);
-    return s;
-    #endif
+   return this->className;
 }
 
 
@@ -29,7 +22,4 @@ void Enable::enableAll() {
         obj.enable();
         enableList.pop();
     } // while
-    #if ! __GXX_RTTI
-    debugD("To see the name of each sensor and transform, add 'build_unflags = -fno-rtti' to platformio.ini");
-    #endif
 }

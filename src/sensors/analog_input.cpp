@@ -4,6 +4,10 @@
 
 #include "sensesp.h"
 
+AnalogInput::AnalogInput() : NumericSensor() {
+  this->className = "AnalogInput";
+}
+
 void AnalogInput::update() {
   output = analogRead(A0);
   this->notify();

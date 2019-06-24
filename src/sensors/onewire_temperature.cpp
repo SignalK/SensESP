@@ -34,6 +34,7 @@ bool string_to_owda(OWDevAddr* addr, const char* str) {
 DallasTemperatureSensors::DallasTemperatureSensors(
     int pin, String config_path)
     : Sensor(config_path) {
+  this->className = "DallasTemperatureSensor";
   onewire = new OneWire(pin);
   sensors = new DallasTemperature(onewire);
   sensors->begin();
@@ -95,12 +96,16 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
 OneWireTemperature::OneWireTemperature(
     DallasTemperatureSensors* dts, String config_path)
     : NumericSensor(config_path), dts{dts} {
+  this->className = "OneWireTemperature";
   load_configuration();
   if (address==null_ow_addr) {
     // previously unconfigured sensor
     bool success = dts->get_next_address(&address);
     if (!success) {
-      debugE("FATAL: No more new OneWire sensors left");
+      debugE("FATAL: Unable to allocate a OneWire sensor for %s. "
+             "All sensors have already been configured. "
+             "Check the physical wiring of your sensors.",
+             config_path.c_str());
       found = false;
     } else {
       debugD("Registered a new OneWire sensor");
@@ -112,7 +117,8 @@ OneWireTemperature::OneWireTemperature(
       char addrstr[24];
       owda_to_string(addrstr, address);
       debugE("FATAL: OneWire sensor %s at %s is missing. "
-             "Check the physical wiring of the devices.", config_path.c_str(), addrstr);
+             "Check the physical wiring of your sensors.",
+             config_path.c_str(), addrstr);
       found = false;
     }
   }

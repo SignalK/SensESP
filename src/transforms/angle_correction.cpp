@@ -3,6 +3,7 @@
 AngleCorrection::AngleCorrection(float offset, float min_angle, String config_path) :
     NumericTransform(config_path),
       offset{ offset }, min_angle{ min_angle } {
+  this->className = "AngleCorrection";
   load_configuration();
 }
 

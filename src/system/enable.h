@@ -3,7 +3,10 @@
 
 #include <queue>
 #include <stdint.h>
+
+#if __GXX_RTTI
 #include <typeinfo>
+#endif
 
 /**
  * Classes that implement "Enable" will have their enable() method
@@ -25,6 +28,9 @@ class Enable {
         virtual void enable() {}
 
 
+        void setClassName(const char* newClassName) { this->className = newClassName; }
+        
+        
         virtual const char* getClassName();
 
 
@@ -37,13 +43,22 @@ class Enable {
         /**
          * Called by the SensESP framework to initialize all of the objects
          * marked with this class. They will be initialized in priorty
-         * order.
+         * order. If you want to see see the name of each sensor and transport
+         * in the serial monitor as each one is enabled, add the following
+         * to your project's platformio.ini file:
+         * 
+         * build_unflags = -fno-rtti
          */
         static void enableAll();
     
 
         friend bool operator<(const Enable& lhs, const Enable& rhs) { return lhs.priority < rhs.priority; }
 
+    
+    protected:
+        const char* className = "Enable";
+    
+    
     private:
         int8_t priority;
 

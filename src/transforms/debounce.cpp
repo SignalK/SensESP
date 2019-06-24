@@ -2,7 +2,7 @@
 
 Debounce::Debounce(int msMinDelay, String config_path) :
     BooleanTransform(config_path), msMinDelay{msMinDelay} {
-
+    this->className = "Debounce";
     lastTime = millis();
 }
 

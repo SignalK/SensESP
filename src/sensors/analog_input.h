@@ -6,6 +6,7 @@
 class AnalogInput : public NumericSensor {
 
 public:
+  AnalogInput();
   void enable() override final;
 
 private:
