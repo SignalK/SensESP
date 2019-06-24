@@ -27,7 +27,7 @@ class Enable {
         void setClassName(const char* newClassName) { className = newClassName; }
         
         
-        virtual const char* getClassName();
+        virtual const char* getClassName() { return className; };
 
 
         const int8_t getEnablePriority() { return priority; }

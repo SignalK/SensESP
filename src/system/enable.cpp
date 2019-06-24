@@ -9,11 +9,6 @@ Enable::Enable(uint8_t priority) : priority{priority} {
 }
 
 
-const char* Enable::getClassName() { 
-   return this->className;
-}
-
-
 void Enable::enableAll() {
     debugD("Enabling all required sensors and transforms");
     while (!enableList.empty()) {
