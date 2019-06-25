@@ -37,7 +37,8 @@ void Networking::check_connection() {
 void Networking::setup(std::function<void(bool)> connection_cb) {
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid(connection_cb);
-  } else {
+  }
+  if (WiFi.status() != WL_CONNECTED) {
     setup_wifi_manager(connection_cb);
   }
   app.onRepeat(1000, std::bind(&Networking::check_connection, this));
@@ -46,16 +47,20 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
   WiFi.begin(ap_ssid, ap_password);
 
+  uint32_t timer_start = millis();
+
   rdebugI("Connecting");
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while (WiFi.status() != WL_CONNECTED &&
+         (millis() - timer_start) < 3 * 60 * 1000) {
     delay(500);
     rdebugI(".");
   }
   debugI("\n");
 
-  debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
-  connection_cb(true);
+  if (WiFi.status() == WL_CONNECTED) {
+    debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
+    connection_cb(true);
+  }
 }
 
 void Networking::setup_wifi_manager(std::function<void(bool)> connection_cb) {
