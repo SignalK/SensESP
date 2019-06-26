@@ -52,27 +52,27 @@ void setup_fuel_flow_meter(
                               "/sensors/fuel/rate/calibrate");
 
   diff->connectFrom(freq1, freq2)
-      -> connectTo(new SKOutputNumber("propulsion.0.fuel.rate", "/sensors/fuel/rate/sk"))
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.rate", "/sensors/fuel/rate/sk"))
       -> connectTo(new MovingAverage(10, 1., "/sensors/fuel/average/calibrate")) // this is the same as above, but averaged over 10 s
-      -> connectTo(new SKOutputNumber("propulsion.0.fuel.averageRate", "/sensors/fuel/average/sk"));
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.averageRate", "/sensors/fuel/average/sk"));
 
 
   // Integrate the net flow over time. The output is dependent
   // on the the input counter update rate!
   diff->connectTo(new Integrator(1., 0.))
-      -> connectTo(new SKOutputNumber("propulsion.left.fuel.used", "/sensors/fuel/used/sk"));
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.used", "/sensors/fuel/used/sk"));
 
 
   // Integrate the total outflow over time. The output is dependent
   // on the the input counter update rate!
   freq1-> connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/in_used/calibrate"))
-       -> connectTo(new SKOutputNumber("propulsion.left.fuel.usedGross", "/sensors/fuel/in_used/sk"));
+       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedGross", "/sensors/fuel/in_used/sk"));
 
 
   // Integrate the net fuel flow over time. The output is dependent
   // on the the input counter update rate!
   freq2->connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/out_used/calibrate"))
-       -> connectTo(new SKOutputNumber("propulsion.left.fuel.usedReturn", "/sensors/fuel/out_used/sk"));
+       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedReturn", "/sensors/fuel/out_used/sk"));
 }
 
 
@@ -134,6 +134,6 @@ void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
 
   (new DigitalInputCounter(input_pin, INPUT_PULLUP, RISING, 500))
       -> connectTo<float>(new Frequency(1./97., "/sensors/engine_rpm/calibrate"))
-      -> connectTo(new SKOutputNumber("propulsion.left.revolutions", "/sensors/engine_rpm/sk"));
+      -> connectTo(new SKOutputNumber("propulsion.main.revolutions", "/sensors/engine_rpm/sk"));
 
 }
