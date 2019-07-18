@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.4.0</span>
+   &#160;<span id="projectnumber">0.4.2</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -143,6 +143,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a62d0a37863086502e168bfa8ab94ebc0 inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62ea021bf8d986150be346977a8eede3 inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#a62ea021bf8d986150be346977a8eede3">enable</a> ()</td></tr>
 <tr class="separator:a62ea021bf8d986150be346977a8eede3 inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c8fbdba606732e028a6bf194a3e2529 inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#a5c8fbdba606732e028a6bf194a3e2529">setClassName</a> (const char *newClassName)</td></tr>
+<tr class="separator:a5c8fbdba606732e028a6bf194a3e2529 inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af924d33e6ccb0a065af78f264997299f inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#af924d33e6ccb0a065af78f264997299f">getClassName</a> ()</td></tr>
+<tr class="separator:af924d33e6ccb0a065af78f264997299f inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12a65d666c56d9909c2a1958b7cfda40 inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">const int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#a12a65d666c56d9909c2a1958b7cfda40">getEnablePriority</a> ()</td></tr>
 <tr class="separator:a12a65d666c56d9909c2a1958b7cfda40 inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ca14d496a85788896df6c78143994c inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#ab4ca14d496a85788896df6c78143994c">setPriority</a> (uint8_t priority)</td></tr>
@@ -179,6 +183,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_class_configurable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_configurable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_configurable.html">Configurable</a></td></tr>
 <tr class="memitem:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#ac2ba4044c81acc2fc6bf95cce411f6a4">load_configuration</a> ()</td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_enable"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_enable')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_enable.html">Enable</a></td></tr>
+<tr class="memitem:a88a9d200883d86ac64d5b1cd03c07d29 inherit pro_attribs_class_enable"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#a88a9d200883d86ac64d5b1cd03c07d29">className</a> = &quot;Enable&quot;</td></tr>
+<tr class="separator:a88a9d200883d86ac64d5b1cd03c07d29 inherit pro_attribs_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_value_producer.html">ValueProducer&lt; String &gt;</a></td></tr>
 <tr class="memitem:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697">output</a></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,7 +259,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_value_consumer.html#a7bf920e5ad5f171ec6e2aeda056ff01f">ValueConsumer&lt; time_t &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="timestring_8cpp_source.html#l00009">9</a> of file <a class="el" href="timestring_8cpp_source.html">timestring.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="timestring_8cpp_source.html#l00010">10</a> of file <a class="el" href="timestring_8cpp_source.html">timestring.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">

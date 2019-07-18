@@ -2,7 +2,7 @@ var class_sens_e_s_p_app =
 [
     [ "SensESPApp", "class_sens_e_s_p_app.html#a092f600dda1a51189bc2c9fd5de360e8", null ],
     [ "connect", "class_sens_e_s_p_app.html#ac53d90429563f50e4aca5224a1e85afd", null ],
-    [ "connect_1to1_h", "class_sens_e_s_p_app.html#a8875ca27de5c10c1b2931c3c41e1f9b5", null ],
+    [ "connect_1to1_h", "class_sens_e_s_p_app.html#aa6e3bc4bb1c696cc0bef02835ce0f7bf", null ],
     [ "enable", "class_sens_e_s_p_app.html#a3d70c22bfd1bf842f6daa83ab2f50f79", null ],
     [ "get_hostname", "class_sens_e_s_p_app.html#ac068882b9e9f6092da0818c5e42b48b8", null ],
     [ "isSignalKConnected", "class_sens_e_s_p_app.html#adee3f53bc75ae6d5d73a8707dd75600e", null ],

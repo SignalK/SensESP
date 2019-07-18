@@ -3,6 +3,8 @@ var searchData=
   ['sensesp_2eh',['sensesp.h',['../sensesp_8h.html',1,'']]],
   ['sensesp_5fapp_2ecpp',['sensesp_app.cpp',['../sensesp__app_8cpp.html',1,'']]],
   ['sensesp_5fapp_2eh',['sensesp_app.h',['../sensesp__app_8h.html',1,'']]],
+  ['sensor_2ecpp',['sensor.cpp',['../sensor_8cpp.html',1,'']]],
+  ['sensor_2eh',['sensor.h',['../sensor_8h.html',1,'']]],
   ['setup_2eh',['setup.h',['../setup_8h.html',1,'']]],
   ['signalk_5fdelta_2ecpp',['signalk_delta.cpp',['../signalk__delta_8cpp.html',1,'']]],
   ['signalk_5fdelta_2eh',['signalk_delta.h',['../signalk__delta_8h.html',1,'']]],

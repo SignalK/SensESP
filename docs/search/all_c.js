@@ -14,7 +14,7 @@ var searchData=
   ['null_5fow_5faddr',['null_ow_addr',['../onewire__temperature_8cpp.html#af247f8ddcd26451c72c7706fc884a6dc',1,'onewire_temperature.cpp']]],
   ['num_5fsatellites',['num_satellites',['../struct_n_m_e_a_data.html#ac5e91779da683f23c11da42c1db41b60',1,'NMEAData']]],
   ['numericconsumer',['NumericConsumer',['../valueconsumer_8h.html#a1220e1ddede7c4512fde395262841b74',1,'valueconsumer.h']]],
-  ['numericdevice',['NumericDevice',['../class_numeric_device.html',1,'NumericDevice'],['../class_numeric_device.html#a0e1774421ac0182e58dd259521ad76bd',1,'NumericDevice::NumericDevice()']]],
   ['numericproducer',['NumericProducer',['../valueproducer_8h.html#aaf22f94e9cc9067637cd0625ad9fe352',1,'valueproducer.h']]],
+  ['numericsensor',['NumericSensor',['../class_numeric_sensor.html',1,'NumericSensor'],['../class_numeric_sensor.html#a456c5509bf2af2007bd9ee1703e8315f',1,'NumericSensor::NumericSensor()']]],
   ['numerictransform',['NumericTransform',['../transform_8h.html#ac62af394caec478e4d32c254c96af25b',1,'transform.h']]]
 ];

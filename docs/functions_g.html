@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.4.0</span>
+   &#160;<span id="projectnumber">0.4.2</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -97,7 +97,8 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 : <a class="el" href="class_value_producer.html#adaf30ea1027efa0c83c75dfe3afc0c1a">ValueProducer&lt; T &gt;</a>
 </li>
 <li>get_config_schema()
-: <a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">Configurable</a>
+: <a class="el" href="class_angle_correction.html#ad31bbb6a8fd400879eceba5f0b2880fe">AngleCorrection</a>
+, <a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">Configurable</a>
 , <a class="el" href="class_curve_interpolator.html#a6f9c593782d05c95ba92810b8f70f287">CurveInterpolator</a>
 , <a class="el" href="class_difference.html#ac5b6559e3820f2f58bed5d120a440a55">Difference</a>
 , <a class="el" href="class_frequency.html#a93e3f28917f7faa7411b95745171f6af">Frequency</a>
@@ -107,13 +108,13 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 , <a class="el" href="class_networking.html#a253025ed2a3c36eb998e7b900155359e">Networking</a>
 , <a class="el" href="class_one_wire_temperature.html#a4331b2b91d6c7d000454e741cdce9d0a">OneWireTemperature</a>
 , <a class="el" href="class_s_k_output.html#a0f29018517bcb51943dae1dd7bbace0a">SKOutput&lt; T &gt;</a>
-, <a class="el" href="class_s_k_output_position.html#a1296489a2e57b3ee5740b4f7f1cca6e2">SKOutputPosition</a>
 , <a class="el" href="class_s_k_output_time.html#aa283f508ef59103626c835cd37b9bfb3">SKOutputTime</a>
 , <a class="el" href="class_voltage_divider_r2.html#ae37065fd9bd093497ff74a9faf5b6cea">VoltageDividerR2</a>
 , <a class="el" href="class_w_s_client.html#a78fbe2ccf0f84423abbf9d1047aff0bc">WSClient</a>
 </li>
 <li>get_configuration()
-: <a class="el" href="class_configurable.html#a787559a1a907f909d6088d2ec6825b44">Configurable</a>
+: <a class="el" href="class_angle_correction.html#a454172cb376cbeb9f3b7467392bf582e">AngleCorrection</a>
+, <a class="el" href="class_configurable.html#a787559a1a907f909d6088d2ec6825b44">Configurable</a>
 , <a class="el" href="class_curve_interpolator.html#a274cd3426b3e379db1538c71bebad9c8">CurveInterpolator</a>
 , <a class="el" href="class_difference.html#a70f6832fd0b14c5eb5c2c05188757b72">Difference</a>
 , <a class="el" href="class_frequency.html#ae121e43d37643d390bc607def68e0e02">Frequency</a>
@@ -123,7 +124,6 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 , <a class="el" href="class_networking.html#a2b8f2f52b332dc0af375113a64881a8a">Networking</a>
 , <a class="el" href="class_one_wire_temperature.html#a4a1058669383f507ed70bd46f9f0d2f0">OneWireTemperature</a>
 , <a class="el" href="class_s_k_output.html#a1020f0eb3e0eb6bc10f57034c7fbc0c6">SKOutput&lt; T &gt;</a>
-, <a class="el" href="class_s_k_output_position.html#a1e1dfc32c80fe7e541b9342ef62275b9">SKOutputPosition</a>
 , <a class="el" href="class_s_k_output_time.html#a03982e7159ac7e6d44b8f7c6976617c4">SKOutputTime</a>
 , <a class="el" href="class_voltage_divider_r2.html#a35275626b89244eb30f0c1be504dbdb6">VoltageDividerR2</a>
 , <a class="el" href="class_w_s_client.html#a2a41e313d8d3be52cd7bb53e6bbf3117">WSClient</a>
@@ -131,15 +131,15 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <li>get_delta()
 : <a class="el" href="class_s_k_delta.html#ab1592b494b343964703102a4797d3bbc">SKDelta</a>
 </li>
-<li>get_devices()
-: <a class="el" href="class_device.html#a784e4de986feeca3770ba9ea58b722cd">Device</a>
-</li>
 <li>get_hostname()
 : <a class="el" href="class_networking.html#a7a3cac2e878aa2c513451f235c70aff7">Networking</a>
 , <a class="el" href="class_sens_e_s_p_app.html#ac068882b9e9f6092da0818c5e42b48b8">SensESPApp</a>
 </li>
 <li>get_next_address()
 : <a class="el" href="class_dallas_temperature_sensors.html#a1e1b9cd3dd2bde0d51ef657a490881eb">DallasTemperatureSensors</a>
+</li>
+<li>get_sensors()
+: <a class="el" href="class_sensor.html#a772509291ea3a645853975e404ad89f9">Sensor</a>
 </li>
 <li>get_sk_path()
 : <a class="el" href="class_s_k_emitter.html#ab619d4a66c7683bf06350809e8c2153f">SKEmitter</a>
@@ -155,6 +155,9 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 , <a class="el" href="class_i_p_addr_dev.html#aad770ae7db264bfc4bc33d3d1dca71fb">IPAddrDev</a>
 , <a class="el" href="class_system_hz.html#aafe9250142a6c4b234f3d8e64771ce95">SystemHz</a>
 , <a class="el" href="class_uptime.html#a43cdcac661b684e1c746fcdf7224e68f">Uptime</a>
+</li>
+<li>getClassName()
+: <a class="el" href="class_enable.html#af924d33e6ccb0a065af78f264997299f">Enable</a>
 </li>
 <li>getEnablePriority()
 : <a class="el" href="class_enable.html#a12a65d666c56d9909c2a1958b7cfda40">Enable</a>
@@ -172,7 +175,7 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 : <a class="el" href="class_g_p_r_m_c_sentence_parser.html#a8ea0212728334cc4b6fa4aa650fa2e58">GPRMCSentenceParser</a>
 </li>
 <li>GPSInput()
-: <a class="el" href="class_g_p_s_input.html#ad359ed86362300bee0f26dcade663959">GPSInput</a>
+: <a class="el" href="class_g_p_s_input.html#ab763769a97cf52221aeb9e63d3004737">GPSInput</a>
 </li>
 </ul>
 </div><!-- contents -->

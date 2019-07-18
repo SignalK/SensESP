@@ -3,6 +3,10 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     [ "analogvoltage.h", "analogvoltage_8h.html", [
       [ "AnalogVoltage", "class_analog_voltage.html", "class_analog_voltage" ]
     ] ],
+    [ "angle_correction.cpp", "angle__correction_8cpp.html", null ],
+    [ "angle_correction.h", "angle__correction_8h.html", [
+      [ "AngleCorrection", "class_angle_correction.html", "class_angle_correction" ]
+    ] ],
     [ "curveinterpolator.cpp", "curveinterpolator_8cpp.html", null ],
     [ "curveinterpolator.h", "curveinterpolator_8h.html", [
       [ "CurveInterpolator", "class_curve_interpolator.html", "class_curve_interpolator" ],
