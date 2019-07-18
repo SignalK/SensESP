@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.4.0</span>
+   &#160;<span id="projectnumber">0.4.2</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -139,7 +139,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
 class ValueProducer&lt; T &gt;</h3>
 
-<p>A ValueProducer&lt;&gt; is any device or piece of code that outputs a value for consumption elsewhere. They are <a class="el" href="class_observable.html">Observable</a>, allowing code to be notified whenever a new value is available. They can be connected directly to ValueConsumers of the same type using the <a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo()</a> method. </p>
+<p>A ValueProducer&lt;&gt; is any sensor or piece of code that outputs a value for consumption elsewhere. They are <a class="el" href="class_observable.html">Observable</a>, allowing code to be notified whenever a new value is available. They can be connected directly to ValueConsumers of the same type using the <a class="el" href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2">connectTo()</a> method. </p>
 
 <p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00007">7</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -225,7 +225,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect"  title=" " alt="" coords="209,55,386,80"/>
 <area shape="rect"  href="class_sens_e_s_p_app.html#ac53d90429563f50e4aca5224a1e85afd" title=" " alt="" coords="5,5,161,31"/>
 <area shape="rect"  href="wiring__helpers_8h.html#ae36e0604b36693bd720bffcf4145baf9" title=" " alt="" coords="5,55,161,80"/>
-<area shape="rect"  href="wiring__helpers_8h.html#a2ef51129a7e0e59a4efe2d031141d82f" title=" " alt="" coords="42,104,125,129"/>
+<area shape="rect"  href="wiring__helpers_8h.html#a8edfa609fe0f66ca940c2c8311e687b9" title=" " alt="" coords="42,104,125,129"/>
 </map>
 </div>
 
@@ -312,15 +312,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_value_producer_adaf30ea1027efa0c83c75dfe3afc0c1a_icgraph.png" border="0" usemap="#class_value_producer_adaf30ea1027efa0c83c75dfe3afc0c1a_icgraph" alt=""/></div>
 <map name="class_value_producer_adaf30ea1027efa0c83c75dfe3afc0c1a_icgraph" id="class_value_producer_adaf30ea1027efa0c83c75dfe3afc0c1a_icgraph">
-<area shape="rect"  title=" " alt="" coords="448,181,582,207"/>
-<area shape="rect"  href="class_networking.html#a94815dd34af734e9fc3839cbe6279355" title=" " alt="" coords="237,5,365,31"/>
-<area shape="rect"  href="class_sens_e_s_p_app.html#a3d70c22bfd1bf842f6daa83ab2f50f79" title=" " alt="" coords="5,31,154,56"/>
-<area shape="rect"  href="class_networking.html#a2b8f2f52b332dc0af375113a64881a8a" title=" " alt="" coords="202,107,400,132"/>
-<area shape="rect"  href="class_sens_e_s_p_app.html#a092f600dda1a51189bc2c9fd5de360e8" title=" " alt="" coords="207,156,395,181"/>
-<area shape="rect"  href="class_sens_e_s_p_app.html#ac068882b9e9f6092da0818c5e42b48b8" title=" " alt="" coords="204,205,397,231"/>
-<area shape="rect"  href="class_sens_e_s_p_app.html#a8875ca27de5c10c1b2931c3c41e1f9b5" title=" " alt="" coords="223,255,378,293"/>
-<area shape="rect"  href="class_value_consumer.html#a6adf62d8d87ffa3ce70bb85379a68715" title=" " alt="" coords="227,317,375,356"/>
-<area shape="rect"  href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2" title=" " alt="" coords="223,380,378,419"/>
+<area shape="rect"  title=" " alt="" coords="624,195,758,220"/>
+<area shape="rect"  href="class_networking.html#a082fa99914f8f6f277b640667877c85e" title=" " alt="" coords="399,5,554,44"/>
+<area shape="rect"  href="class_sens_e_s_p_app.html#a3d70c22bfd1bf842f6daa83ab2f50f79" title=" " alt="" coords="5,44,154,69"/>
+<area shape="rect"  href="class_networking.html#a2b8f2f52b332dc0af375113a64881a8a" title=" " alt="" coords="378,120,576,145"/>
+<area shape="rect"  href="class_sens_e_s_p_app.html#a092f600dda1a51189bc2c9fd5de360e8" title=" " alt="" coords="383,169,571,195"/>
+<area shape="rect"  href="class_sens_e_s_p_app.html#ac068882b9e9f6092da0818c5e42b48b8" title=" " alt="" coords="380,219,573,244"/>
+<area shape="rect"  href="class_sens_e_s_p_app.html#aa6e3bc4bb1c696cc0bef02835ce0f7bf" title=" " alt="" coords="399,268,554,307"/>
+<area shape="rect"  href="class_value_consumer.html#a6adf62d8d87ffa3ce70bb85379a68715" title=" " alt="" coords="403,331,551,369"/>
+<area shape="rect"  href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2" title=" " alt="" coords="399,393,554,432"/>
+<area shape="rect"  href="class_networking.html#a94815dd34af734e9fc3839cbe6279355" title=" " alt="" coords="202,16,330,41"/>
 </map>
 </div>
 

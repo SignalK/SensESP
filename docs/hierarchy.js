@@ -1,7 +1,8 @@
 var hierarchy =
 [
     [ "Configurable", "class_configurable.html", [
-      [ "Device", "class_device.html", [
+      [ "Networking", "class_networking.html", null ],
+      [ "Sensor", "class_sensor.html", [
         [ "DallasTemperatureSensors", "class_dallas_temperature_sensors.html", null ],
         [ "DigitalInput", "class_digital_input.html", [
           [ "DigitalInputCounter", "class_digital_input_counter.html", null ],
@@ -9,22 +10,22 @@ var hierarchy =
         ] ],
         [ "FreeMem", "class_free_mem.html", null ],
         [ "GPSInput", "class_g_p_s_input.html", null ],
-        [ "IntegerDevice", "class_integer_device.html", null ],
-        [ "NumericDevice", "class_numeric_device.html", [
+        [ "IntegerSensor", "class_integer_sensor.html", null ],
+        [ "NumericSensor", "class_numeric_sensor.html", [
           [ "AnalogInput", "class_analog_input.html", null ],
           [ "OneWireTemperature", "class_one_wire_temperature.html", null ],
           [ "SystemHz", "class_system_hz.html", null ],
           [ "Uptime", "class_uptime.html", null ]
         ] ],
-        [ "StringDevice", "class_string_device.html", [
+        [ "StringSensor", "class_string_sensor.html", [
           [ "IPAddrDev", "class_i_p_addr_dev.html", null ]
         ] ]
       ] ],
-      [ "Networking", "class_networking.html", null ],
       [ "TransformBase", "class_transform_base.html", [
         [ "Transform< C, P >", "class_transform.html", null ],
         [ "Transform< float, float >", "class_transform.html", [
           [ "SymmetricTransform< float >", "class_symmetric_transform.html", [
+            [ "AngleCorrection", "class_angle_correction.html", null ],
             [ "CurveInterpolator", "class_curve_interpolator.html", null ],
             [ "Difference", "class_difference.html", null ],
             [ "Integrator", "class_integrator.html", null ],
@@ -37,13 +38,6 @@ var hierarchy =
         ] ],
         [ "Transform< int, float >", "class_transform.html", [
           [ "Frequency", "class_frequency.html", null ]
-        ] ],
-        [ "Transform< Position, Position >", "class_transform.html", [
-          [ "SymmetricTransform< Position >", "class_symmetric_transform.html", [
-            [ "SKOutput< Position >", "class_s_k_output.html", [
-              [ "SKOutputPosition", "class_s_k_output_position.html", null ]
-            ] ]
-          ] ]
         ] ],
         [ "Transform< T, T >", "class_transform.html", [
           [ "SymmetricTransform< T >", "class_symmetric_transform.html", [
@@ -60,7 +54,7 @@ var hierarchy =
       [ "WSClient", "class_w_s_client.html", null ]
     ] ],
     [ "Enable", "class_enable.html", [
-      [ "Device", "class_device.html", null ],
+      [ "Sensor", "class_sensor.html", null ],
       [ "TransformBase", "class_transform_base.html", null ]
     ] ],
     [ "ENUVector", "struct_e_n_u_vector.html", null ],
@@ -69,10 +63,9 @@ var hierarchy =
     [ "NMEAData", "struct_n_m_e_a_data.html", null ],
     [ "NMEAParser", "class_n_m_e_a_parser.html", null ],
     [ "Observable", "class_observable.html", [
-      [ "Device", "class_device.html", null ],
+      [ "Sensor", "class_sensor.html", null ],
       [ "SKEmitter", "class_s_k_emitter.html", [
         [ "SKOutput< T >", "class_s_k_output.html", null ],
-        [ "SKOutput< Position >", "class_s_k_output.html", null ],
         [ "SKOutputTime", "class_s_k_output_time.html", null ]
       ] ],
       [ "ValueProducer< T >", "class_value_producer.html", [
@@ -84,26 +77,25 @@ var hierarchy =
         [ "ObservableValue< ENUVector >", "class_observable_value.html", null ]
       ] ],
       [ "ValueProducer< float >", "class_value_producer.html", [
-        [ "NumericDevice", "class_numeric_device.html", null ],
+        [ "NumericSensor", "class_numeric_sensor.html", null ],
         [ "ObservableValue< float >", "class_observable_value.html", null ],
         [ "Transform< float, float >", "class_transform.html", null ],
         [ "Transform< int, float >", "class_transform.html", null ]
       ] ],
       [ "ValueProducer< int >", "class_value_producer.html", [
         [ "DigitalInputCounter", "class_digital_input_counter.html", null ],
-        [ "IntegerDevice", "class_integer_device.html", null ],
+        [ "IntegerSensor", "class_integer_sensor.html", null ],
         [ "ObservableValue< int >", "class_observable_value.html", null ]
       ] ],
       [ "ValueProducer< P >", "class_value_producer.html", [
         [ "Transform< C, P >", "class_transform.html", null ]
       ] ],
       [ "ValueProducer< Position >", "class_value_producer.html", [
-        [ "ObservableValue< Position >", "class_observable_value.html", null ],
-        [ "Transform< Position, Position >", "class_transform.html", null ]
+        [ "ObservableValue< Position >", "class_observable_value.html", null ]
       ] ],
       [ "ValueProducer< String >", "class_value_producer.html", [
         [ "ObservableValue< String >", "class_observable_value.html", null ],
-        [ "StringDevice", "class_string_device.html", null ],
+        [ "StringSensor", "class_string_sensor.html", null ],
         [ "Transform< time_t, String >", "class_transform.html", null ]
       ] ],
       [ "ValueProducer< time_t >", "class_value_producer.html", [
@@ -136,9 +128,6 @@ var hierarchy =
     ] ],
     [ "ValueConsumer< int >", "class_value_consumer.html", [
       [ "Transform< int, float >", "class_transform.html", null ]
-    ] ],
-    [ "ValueConsumer< Position >", "class_value_consumer.html", [
-      [ "Transform< Position, Position >", "class_transform.html", null ]
     ] ],
     [ "ValueConsumer< time_t >", "class_value_consumer.html", [
       [ "Transform< time_t, String >", "class_transform.html", null ]
