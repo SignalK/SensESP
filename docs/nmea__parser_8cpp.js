@@ -23,5 +23,6 @@ var nmea__parser_8cpp =
     [ "parse_NS", "nmea__parser_8cpp.html#a18bf596259e1849f3b6bdbdd765ab606", null ],
     [ "parse_PSTI030_mode", "nmea__parser_8cpp.html#a37bce694f34f625b2c3e29a1a74c1570", null ],
     [ "parse_time", "nmea__parser_8cpp.html#a202c8d748e820b33d2fb1a324710698b", null ],
+    [ "reconstruct_nmea_sentence", "nmea__parser_8cpp.html#a69a390886762ecd9593ebeada6f3e52d", null ],
     [ "gnssQualityStrings", "nmea__parser_8cpp.html#a78e0374f91eaf4035ec29121f7e40064", null ]
 ];
