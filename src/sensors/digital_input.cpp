@@ -7,7 +7,8 @@
 DigitalInput::DigitalInput(
     uint8_t pin, int pin_mode, int interrupt_type,
     String config_path)
-    : Device(config_path), pin{pin}, interrupt_type{interrupt_type} {
+    : Sensor(config_path), pin{pin}, interrupt_type{interrupt_type} {
+  className = "DigitalInput";
   pinMode(pin, pin_mode);
 }
 
@@ -15,7 +16,9 @@ DigitalInputValue::DigitalInputValue(
     uint8_t pin, int pin_mode, int interrupt_type,
     String config_path) :
       DigitalInput{pin, pin_mode, interrupt_type, config_path},
-      BooleanProducer() {}
+      BooleanProducer() {
+        className = "DigitalInputValue";
+      }
 
 void DigitalInputValue::enable() {
   app.onInterrupt(
@@ -41,14 +44,16 @@ DigitalInputCounter::DigitalInputCounter(
     String config_path) :
       DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntegerProducer(),
-      read_delay{read_delay} {}
+      read_delay{read_delay} {
+        className = "DigitalInputCounter";
+      }
 
 void DigitalInputCounter::enable() {
   app.onInterrupt(pin, interrupt_type,
                   [this](){
     this->counter++;
   });
-  
+
   app.onRepeat(read_delay, [this](){
     noInterrupts();
     output = counter;

@@ -7,6 +7,7 @@
 Integrator::Integrator(float k, float value, String config_path) :
     NumericTransform(config_path),
       k{ k } {
+  className = "Integrator";
   output = value;
   load_configuration();
 }

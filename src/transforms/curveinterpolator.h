@@ -3,13 +3,13 @@
 
 #include "transforms/transform.h"
 
-
 /**
- * Interpolate uses a collection of input/output samples that approximate a non-linear curve.
- * The output is the linear interpolation between the two sample points the input falls
- * between.  It is used primarily for non-linear analog gauges such as temperature gauges using
- * Thermocouples 
+ * CurveInterpolator uses a collection of input/output samples that approximate a non-linear curve.
+ * The output is the linear interpolation between the two sample points that the input falls
+ * between. It is used primarily for non-linear analog gauges such as temperature gauges and
+ * oil pressure gauges, which get their input from analog sensors that are variable resistors.
  */
+
 class CurveInterpolator : public NumericTransform {
 
  public:

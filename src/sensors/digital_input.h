@@ -1,9 +1,9 @@
 #ifndef _digital_input_H_
 #define _digital_input_H_
 
-#include "device.h"
+#include "sensor.h"
 
-class DigitalInput : public Device {
+class DigitalInput : public Sensor {
  public:
   DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
                String config_path="");

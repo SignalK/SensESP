@@ -1,7 +1,7 @@
 #ifndef _gps_H_
 #define _gps_H_
 
-#include "device.h"
+#include "sensor.h"
 #include "system/nmea_parser.h"
 
 // Support for a GPS module communicating with NMEA-0183
@@ -9,12 +9,13 @@
 
 constexpr int GPS_SERIAL_BITRATE = 115200;
 
-class GPSInput : public Device {
+class GPSInput : public Sensor {
  public:
-  GPSInput(int rx_pin, String config_path="");
+  GPSInput(int reset_pin, String config_path="");
   virtual void enable() override final;
   NMEAData nmea_data;
  private:
+  int reset_pin;
   NMEAParser nmea_parser;
 };
 

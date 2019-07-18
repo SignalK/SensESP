@@ -1,11 +1,12 @@
 #ifndef _analog_input_H_
 #define _analog_input_H_
 
-#include "device.h"
+#include "sensor.h"
 
-class AnalogInput : public NumericDevice {
+class AnalogInput : public NumericSensor {
 
 public:
+  AnalogInput();
   void enable() override final;
 
 private:

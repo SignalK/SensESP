@@ -3,7 +3,9 @@
 
 #include "transform.h"
 
-// y = k * x + c
+// Perform a linear transform on the input value. The transform
+// is of the form \f$y = k * x + c\f$, where k is the input
+// coefficient and c is a bias value.
 class Linear : public NumericTransform  {
  public:
   Linear(float k, float c, String config_path="");

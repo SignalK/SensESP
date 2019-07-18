@@ -1,11 +1,12 @@
 #include "wiring_helpers.h"
 
 #include "sensesp_app.h"
-#include "devices/analog_input.h"
-#include "devices/digital_input.h"
-#include "devices/gps.h"
+#include "sensors/analog_input.h"
+#include "sensors/digital_input.h"
+#include "sensors/gps.h"
 #include "transforms/difference.h"
-#include "devices/digital_input.h"
+#include "sensors/digital_input.h"
+#include "transforms/angle_correction.h"
 #include "transforms/frequency.h"
 #include "signalk/signalk_output.h"
 #include "signalk/signalk_position.h"
@@ -51,62 +52,64 @@ void setup_fuel_flow_meter(
                               "/sensors/fuel/rate/calibrate");
 
   diff->connectFrom(freq1, freq2)
-      -> connectTo(new SKOutputNumber("propulsion.0.fuel.rate", "/sensors/fuel/rate/sk"))
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.rate", "/sensors/fuel/rate/sk"))
       -> connectTo(new MovingAverage(10, 1., "/sensors/fuel/average/calibrate")) // this is the same as above, but averaged over 10 s
-      -> connectTo(new SKOutputNumber("propulsion.0.fuel.averageRate", "/sensors/fuel/average/sk"));
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.averageRate", "/sensors/fuel/average/sk"));
 
 
   // Integrate the net flow over time. The output is dependent
   // on the the input counter update rate!
   diff->connectTo(new Integrator(1., 0.))
-      -> connectTo(new SKOutputNumber("propulsion.left.fuel.used", "/sensors/fuel/used/sk"));
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.used", "/sensors/fuel/used/sk"));
 
 
   // Integrate the total outflow over time. The output is dependent
   // on the the input counter update rate!
   freq1-> connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/in_used/calibrate"))
-       -> connectTo(new SKOutputNumber("propulsion.left.fuel.usedGross", "/sensors/fuel/in_used/sk"));
+       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedGross", "/sensors/fuel/in_used/sk"));
 
 
   // Integrate the net fuel flow over time. The output is dependent
   // on the the input counter update rate!
   freq2->connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/out_used/calibrate"))
-       -> connectTo(new SKOutputNumber("propulsion.left.fuel.usedReturn", "/sensors/fuel/out_used/sk"));
+       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedReturn", "/sensors/fuel/out_used/sk"));
 }
 
 
-void setup_gps(int serial_input_pin) {
-  GPSInput* gps = new GPSInput(serial_input_pin);
-  gps->nmea_data.position.connectTo(
-    new SKOutputPosition("navigation.position", ""));
-  gps->nmea_data.gnss_quality.connectTo(
-    new SKOutputString("navigation.methodQuality", ""));
-  gps->nmea_data.num_satellites.connectTo(
-    new SKOutputInt("navigation.satellites", ""));
-  gps->nmea_data.horizontal_dilution.connectTo(
-    new SKOutputNumber("navigation.horizontalDilution", ""));
-  gps->nmea_data.geoidal_separation.connectTo(
-    new SKOutputNumber("navigation.geoidalSeparation", ""));
-  gps->nmea_data.dgps_age.connectTo(
-    new SKOutputNumber("navigation.differentialAge", ""));
-  gps->nmea_data.dgps_id.connectTo(
-    new SKOutputNumber("navigation.differentialReference", ""));
-  gps->nmea_data.datetime.connectTo(
-    new SKOutputTime("navigation.datetime", ""));
-  gps->nmea_data.speed.connectTo(
-    new SKOutputNumber("navigation.speedOverGround", ""));
-  gps->nmea_data.true_course.connectTo(
-    new SKOutputNumber("navigation.courseOverGroundTrue", ""));
-  gps->nmea_data.variation.connectTo(
-    new SKOutputNumber("navigation.magneticVariation", ""));
-  gps->nmea_data.rtk_age.connectTo(
-    new SKOutputNumber("navigation.rtkAge", ""));
-  gps->nmea_data.rtk_ratio.connectTo(
-    new SKOutputNumber("navigation.rtkRatio", ""));
-  gps->nmea_data.baseline_length.connectTo(
-    new SKOutputNumber("navigation.rtkBaselineLength", ""));
-  gps->nmea_data.baseline_course.connectTo(
-    new SKOutputNumber("navigation.rtkBaselineCourse", ""));
+void setup_gps(int reset_pin) {
+  GPSInput* gps = new GPSInput(reset_pin);
+  gps->nmea_data.position
+    .connectTo(new SKOutputPosition("navigation.position", ""));
+  gps->nmea_data.gnss_quality
+    .connectTo(new SKOutputString("navigation.methodQuality", ""));
+  gps->nmea_data.num_satellites
+    .connectTo(new SKOutputInt("navigation.satellites", ""));
+  gps->nmea_data.horizontal_dilution
+    .connectTo(new SKOutputNumber("navigation.horizontalDilution", ""));
+  gps->nmea_data.geoidal_separation
+    .connectTo(new SKOutputNumber("navigation.geoidalSeparation", ""));
+  gps->nmea_data.dgps_age
+    .connectTo(new SKOutputNumber("navigation.differentialAge", ""));
+  gps->nmea_data.dgps_id
+    .connectTo(new SKOutputNumber("navigation.differentialReference", ""));
+  gps->nmea_data.datetime
+    .connectTo(new SKOutputTime("navigation.datetime", ""));
+  gps->nmea_data.speed
+    .connectTo(new SKOutputNumber("navigation.speedOverGround", ""));
+  gps->nmea_data.true_course
+    .connectTo(new SKOutputNumber("navigation.courseOverGroundTrue", ""));
+  gps->nmea_data.variation
+    .connectTo(new SKOutputNumber("navigation.magneticVariation", ""));
+  gps->nmea_data.rtk_age
+    .connectTo(new SKOutputNumber("navigation.rtkAge", ""));
+  gps->nmea_data.rtk_ratio
+    .connectTo(new SKOutputNumber("navigation.rtkRatio", ""));
+  gps->nmea_data.baseline_length
+    .connectTo(new SKOutputNumber("navigation.rtkBaselineLength", ""));
+  gps->nmea_data.baseline_course
+    .connectTo(new SKOutputNumber("navigation.rtkBaselineCourse"))
+    ->connectTo(new AngleCorrection(0, 0, "/sensors/heading/correction"))
+    ->connectTo(new SKOutputNumber("navigation.headingTrue", ""));
 }
 
 void setup_onewire_temperature(
@@ -131,6 +134,6 @@ void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
 
   (new DigitalInputCounter(input_pin, INPUT_PULLUP, RISING, 500))
       -> connectTo<float>(new Frequency(1./97., "/sensors/engine_rpm/calibrate"))
-      -> connectTo(new SKOutputNumber("propulsion.left.revolutions", "/sensors/engine_rpm/sk"));
+      -> connectTo(new SKOutputNumber("propulsion.main.revolutions", "/sensors/engine_rpm/sk"));
 
 }

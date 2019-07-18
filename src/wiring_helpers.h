@@ -2,7 +2,7 @@
 #define _wiring_helpers_H_
 
 #include "sensesp_app.h"
-#include "devices/onewire_temperature.h"
+#include "sensors/onewire_temperature.h"
 
 void setup_analog_input(
     String sk_path, float k=1, float c=0,
@@ -13,7 +13,7 @@ void setup_fuel_flow_meter(
   int return_flow_pin
 );
 
-void setup_gps(int serial_input_pin);
+void setup_gps(int reset_pin=0);
 
 void setup_onewire_temperature(
   DallasTemperatureSensors* dts,
