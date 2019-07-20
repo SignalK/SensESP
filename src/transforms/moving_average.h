@@ -18,8 +18,9 @@ class MovingAverage : public NumericTransform {
  private:
   std::vector<float> buf;
   int ptr = 0;
-  const int n;
+  int n;
   float k;
+  bool initialized;
 };
 
 #endif

@@ -8,14 +8,23 @@ MovingAverage::MovingAverage(int n, float k, String config_path) :
       k{ k } {
   className = "MovingAverage";
   buf.resize(n, 0);
+  initialized = false;
   load_configuration();
 }
 
 void MovingAverage::set_input(float input, uint8_t inputChannel) {
-  output += -k*buf[ptr]/n;
-  buf[ptr] = input;
-  ptr = (ptr+1) % n;
-  output += k * input/n;
+
+  if (!initialized) {
+    buf.assign(n, input);
+    output = input;
+    initialized = true;
+  }
+  else {
+    output += -k*buf[ptr]/n;
+    buf[ptr] = input;
+    ptr = (ptr+1) % n;
+    output += k * input/n;
+  }
   notify();
 }
 
@@ -54,7 +63,8 @@ bool MovingAverage::set_configuration(const JsonObject& config) {
   if (n != n_new) {
     buf.assign(n, 0);
     ptr = 0;
-    output = 0;
+    initialized = false;
+    n = n_new;
   }
   return true;
 }
