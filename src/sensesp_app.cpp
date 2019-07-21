@@ -123,6 +123,9 @@ void SensESPApp::enable() {
 
   debugI("Enabling subsystems");
 
+  debugI("Subsystem: setup_discovery()");
+  setup_discovery(networking->get_hostname()->get().c_str());
+
   debugI("Subsystem: networking->setup()");
   networking->setup([this](bool connected) {
     if (connected) {
@@ -135,9 +138,7 @@ void SensESPApp::enable() {
 
   debugI("Subsystem: setup_OTA()");
   setup_OTA();
-  debugI("Subsystem: setup_discovery()");
-  setup_discovery(networking->get_hostname()->get().c_str());
-
+  
   debugI("Subsystem: http_server()");
   this->http_server->enable();
   debugI("Subsystem: ws_client()");
