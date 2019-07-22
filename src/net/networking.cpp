@@ -19,7 +19,7 @@ void save_config_callback() {
 
 Networking::Networking(String config_path)
     : Configurable{config_path} {
-  hostname = new ObservableValue<String>(String("unknown"));
+  hostname = new ObservableValue<String>(String("sensesp"));
   load_configuration();
   server = new AsyncWebServer(80);
   dns = new DNSServer();
