@@ -12,28 +12,22 @@
  * MovingAverage outputs the average of the most recent n values. It also incorporates
  * a "scale" factor, in case you want to increase or decrease your final output by a
  * fixed percentage.
- * 
- * @param n is the number of samples to average
- * 
- * @param k is the "scale" - defaults to 1.0, so has no effect unless you use other than 1.0
- * 
  */
 
 // y = k * 1/n * \sum_k=1^n(x_k)
 class MovingAverage : public NumericTransform {
 
  public:
-  MovingAverage(int n, float k=1., String config_path="");
-
   /**
-   * set_input is used to input a new value to this transform. After the
-   * transformation, notify() is called to output the new value.
-   */
+   * @param n is the number of most recent values you want to average for your output
+   * 
+   * @param the moving average will be multiplied by k before it is output - make it 
+   * something other than 1. if you need to scale your output up or down by a fixed
+   * percentage
+   * 
+   * */
+  MovingAverage(int n, float k=1., String config_path="");
   virtual void set_input(float input, uint8_t inputChannel = 0) override;
-
-  /** 
-   * For reading and writing the configuration of this transform
-   */
   virtual JsonObject& get_configuration(JsonBuffer& buf) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
