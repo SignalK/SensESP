@@ -14,16 +14,21 @@ MovingAverage::MovingAverage(int n, float k, String config_path) :
 
 void MovingAverage::set_input(float input, uint8_t inputChannel) {
 
+  // So the first value to be included in the average doesn't default to 0.0
   if (!initialized) {
     buf.assign(n, input);
     output = input;
     initialized = true;
   }
   else {
+    // Subtract 1/nth of the oldest value and add 1/nth of the newest value
     output += -k*buf[ptr]/n;
+    output += k * input/n;
+    
+    // Save the most recent input, then advance to the next storage location.
+    // When storage location n is reached, start over again at 0.
     buf[ptr] = input;
     ptr = (ptr+1) % n;
-    output += k * input/n;
   }
   notify();
 }
