@@ -76,7 +76,7 @@ void setup_fuel_flow_meter(
 }
 
 
-void setup_gps(int reset_pin) {
+GPSInput* setup_gps(int reset_pin) {
   GPSInput* gps = new GPSInput(reset_pin);
   gps->nmea_data.position
     .connectTo(new SKOutputPosition("navigation.position", ""));
@@ -110,6 +110,8 @@ void setup_gps(int reset_pin) {
     .connectTo(new SKOutputNumber("navigation.rtkBaselineCourse"))
     ->connectTo(new AngleCorrection(0, 0, "/sensors/heading/correction"))
     ->connectTo(new SKOutputNumber("navigation.headingTrue", ""));
+
+  return gps;
 }
 
 void setup_onewire_temperature(

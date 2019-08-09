@@ -27,11 +27,15 @@ void GPSInput::enable() {
 
   // reset the GPS modules
   if (this->reset_pin) {
-    pinMode(this->reset_pin, OUTPUT);
-    digitalWrite(this->reset_pin, LOW);
-    app.onDelay(100, [this](){
-      digitalWrite(this->reset_pin, HIGH);
-      pinMode(this->reset_pin, INPUT);
+    // first wait for 5 s
+    app.onDelay(5000, [this](){
+      pinMode(this->reset_pin, OUTPUT);
+      digitalWrite(this->reset_pin, LOW);
+      // keep the reset pin pulled low for 1 s
+      app.onDelay(1000, [this](){
+        digitalWrite(this->reset_pin, HIGH);
+        pinMode(this->reset_pin, INPUT);
+      });
     });
   }
 

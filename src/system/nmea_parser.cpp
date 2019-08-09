@@ -519,6 +519,9 @@ void PSTI032SentenceParser::parse(char* buffer, int term_offsets[], int num_term
     return;
   }
 
+  time.tm_sec = (int)second;
+  time.tm_isdst = 0;
+
   if (is_valid) {
     nmea_data->datetime.set(mktime(&time));
     nmea_data->baseline_projection.set(projection);
