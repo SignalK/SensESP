@@ -4,11 +4,12 @@
 
 #include "sensesp.h"
 
-GPSInput::GPSInput(int reset_pin, String config_path)
+GPSInput::GPSInput(int reset_pin, int bitrate, String config_path)
     : Sensor(config_path) {
 
   className = "GPSInput";
   this->reset_pin = reset_pin;
+  this->bitrate = bitrate;
 
   nmea_parser.add_sentence_parser(new GPGGASentenceParser(&nmea_data));
   nmea_parser.add_sentence_parser(new GPGLLSentenceParser(&nmea_data));
@@ -21,7 +22,7 @@ GPSInput::GPSInput(int reset_pin, String config_path)
 }
 
 void GPSInput::enable() {
-  Serial.begin(GPS_SERIAL_BITRATE);
+  Serial.begin(bitrate);
   // This moves RX to pin 13 (D7)
   Serial.swap();
 

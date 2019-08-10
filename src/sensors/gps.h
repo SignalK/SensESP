@@ -7,15 +7,14 @@
 // Support for a GPS module communicating with NMEA-0183
 // messages over a serial interface
 
-constexpr int GPS_SERIAL_BITRATE = 115200;
-
 class GPSInput : public Sensor {
  public:
-  GPSInput(int reset_pin, String config_path="");
+  GPSInput(int reset_pin, int bitrate=115200, String config_path="");
   virtual void enable() override final;
   NMEAData nmea_data;
  private:
   int reset_pin;
+  int bitrate;
   NMEAParser nmea_parser;
 };
 
