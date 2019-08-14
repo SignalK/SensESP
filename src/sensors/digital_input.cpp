@@ -73,7 +73,7 @@ void DigitalInputCounter::enable() {
   static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { "title": "Read delay", "type": "number" },
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
         "value": { "title": "Last value", "type" : "number", "readOnly": true }
     }
   })###";
