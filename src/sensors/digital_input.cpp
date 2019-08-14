@@ -61,4 +61,34 @@ void DigitalInputCounter::enable() {
     interrupts();
     notify();
   });
+  }
+
+  JsonObject& DigitalInputCounter::get_configuration(JsonBuffer& buf) {
+  JsonObject& root = buf.createObject();
+  root["read_delay"] = read_delay;
+  root["value"] = output;
+  return root;
+  };
+
+  static const char SCHEMA[] PROGMEM = R"###({
+    "type": "object",
+    "properties": {
+        "read_delay": { "title": "Read delay", "type": "number" },
+        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+    }
+  })###";
+
+  String DigitalInputCounter::get_config_schema() {
+  return FPSTR(SCHEMA);
+}
+
+bool DigitalInputCounter::set_configuration(const JsonObject& config) {
+  String expected[] = {"read_delay"};
+  for (auto str : expected) {
+    if (!config.containsKey(str)) {
+      return false;
+    }
+  }
+  read_delay = config["read_delay"];
+  return true;
 }

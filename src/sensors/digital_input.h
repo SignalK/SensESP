@@ -39,6 +39,9 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  private:
   uint read_delay;
   volatile uint counter = 0;
+  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
+  virtual bool set_configuration(const JsonObject& config) override;
+  virtual String get_config_schema() override;
 };
 
 #endif
