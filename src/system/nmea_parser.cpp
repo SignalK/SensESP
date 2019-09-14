@@ -178,6 +178,15 @@ bool parse_date(int* year, int* month, int* day, char* s) {
   return retval==3;
 }
 
+void report_success(bool ok, const char* sentence) {
+  if (!ok) {
+    debugI("Failed to parse %s", sentence);
+    return;
+  } else {
+    debugD("Parsed sentence %s", sentence);
+  }
+}
+
 void GPGGASentenceParser::parse(char* buffer, int term_offsets[], int num_terms) {
   bool ok = true;
 
@@ -233,8 +242,8 @@ void GPGGASentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
   // 15   = Checksum
   // (validated already earlier)
 
+  report_success(ok, sentence());
   if (!ok) {
-    debugI("Failed to parse %s", sentence());
     return;
   }
 
@@ -268,8 +277,8 @@ void GPGLLSentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
   //       4    W         East/West
   ok &= parse_EW(&position.longitude, buffer+term_offsets[4]);
 
+  report_success(ok, sentence());
   if (!ok) {
-    debugI("Failed to parse %s", sentence());
     return;
   }
 
@@ -321,8 +330,8 @@ void GPRMCSentenceParser::parse(char* buffer, int term_offsets[], int num_terms)
     variation_defined = true;
   }
 
+  report_success(ok, sentence());
   if (!ok) {
-    debugI("Failed to parse %s", sentence());
     return;
   }
 
@@ -352,8 +361,8 @@ void PSTISentenceParser::parse(
 
   ok &= parse_int(&subsentence, buffer+term_offsets[1]);
 
+  report_success(ok, sentence());
   if (!ok) {
-    debugI("Failed to parse %s", sentence());
     return;
   }
 
@@ -433,8 +442,8 @@ void PSTI030SentenceParser::parse(char* buffer, int term_offsets[], int num_term
   // 14  RTK Ratio  4.2  AR ratio factor for validation
   ok &= parse_float(&rtk_ratio, buffer+term_offsets[15]);
 
+  report_success(ok, sentence());
   if (!ok) {
-    debugI("Failed to parse %s", sentence());
     return;
   }
 
@@ -514,8 +523,8 @@ void PSTI032SentenceParser::parse(char* buffer, int term_offsets[], int num_term
     // 14  Reserve    Reserve
   }
 
+  report_success(ok, sentence());
   if (!ok) {
-    debugI("Failed to parse %s", sentence());
     return;
   }
 
