@@ -543,7 +543,7 @@ void NMEAParser::add_sentence_parser(SentenceParser* parser) {
   sentence_parsers[sentence] = parser;
 }
 
-void NMEAParser::read(char c) {
+void NMEAParser::handle(char c) {
   (this->*(current_state))(c);
 }
 
