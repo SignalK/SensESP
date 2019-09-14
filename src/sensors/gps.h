@@ -9,12 +9,11 @@
 
 class GPSInput : public Sensor {
  public:
-  GPSInput(int reset_pin, int bitrate=115200, String config_path="");
+  GPSInput(Stream* rx_stream, String config_path="");
   virtual void enable() override final;
   NMEAData nmea_data;
  private:
-  int reset_pin;
-  int bitrate;
+  Stream* rx_stream;
   NMEAParser nmea_parser;
 };
 
