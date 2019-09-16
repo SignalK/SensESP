@@ -76,8 +76,8 @@ void setup_fuel_flow_meter(
 }
 
 
-GPSInput* setup_gps(int reset_pin) {
-  GPSInput* gps = new GPSInput(reset_pin);
+GPSInput* setup_gps(Stream* rx_stream) {
+  GPSInput* gps = new GPSInput(rx_stream);
   gps->nmea_data.position
     .connectTo(new SKOutputPosition("navigation.position", ""));
   gps->nmea_data.gnss_quality

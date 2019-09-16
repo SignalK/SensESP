@@ -4,11 +4,11 @@
 
 #include "sensesp.h"
 
-GPSInput::GPSInput(int reset_pin, String config_path)
+GPSInput::GPSInput(Stream* rx_stream, String config_path)
     : Sensor(config_path) {
 
   className = "GPSInput";
-  this->reset_pin = reset_pin;
+  this->rx_stream = rx_stream;
 
   nmea_parser.add_sentence_parser(new GPGGASentenceParser(&nmea_data));
   nmea_parser.add_sentence_parser(new GPGLLSentenceParser(&nmea_data));
@@ -21,28 +21,10 @@ GPSInput::GPSInput(int reset_pin, String config_path)
 }
 
 void GPSInput::enable() {
-  Serial.begin(GPS_SERIAL_BITRATE);
-  // This moves RX to pin 13 (D7)
-  Serial.swap();
-
-  // reset the GPS modules
-  if (this->reset_pin) {
-    // first wait for 5 s
-    app.onDelay(5000, [this](){
-      pinMode(this->reset_pin, OUTPUT);
-      digitalWrite(this->reset_pin, LOW);
-      // keep the reset pin pulled low for 1 s
-      app.onDelay(1000, [this](){
-        digitalWrite(this->reset_pin, HIGH);
-        pinMode(this->reset_pin, INPUT);
-      });
-    });
-  }
-
   // enable reading the serial port
-  app.onAvailable(Serial, [this](){
-    while (Serial.available()) {
-      nmea_parser.read(Serial.read());
+  app.onAvailable(*rx_stream, [this](){
+    while (this->rx_stream->available()) {
+      nmea_parser.handle(this->rx_stream->read());
     }
   });
 

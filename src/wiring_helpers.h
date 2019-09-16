@@ -14,7 +14,7 @@ void setup_fuel_flow_meter(
   int return_flow_pin
 );
 
-GPSInput* setup_gps(int reset_pin=0);
+GPSInput* setup_gps(Stream* rx_stream);
 
 void setup_onewire_temperature(
   DallasTemperatureSensors* dts,
