@@ -121,7 +121,7 @@ class PSTI032SentenceParser : public SentenceParser {
 class NMEAParser {
 public:
   NMEAParser();
-  void read(char c);
+  void handle(char c);
   void add_sentence_parser(SentenceParser* parser);
 private:
   void (NMEAParser::* current_state) (char);
