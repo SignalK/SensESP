@@ -2,7 +2,7 @@ Import("env")
 
 def make_c_header(inName, outName):
 
-   print 'Writing ',inName,' to src/net/web/',outName,'.h'
+   print('Writing ',inName,' to src/net/web/',outName,'.h')
 
    infile = open('web/docroot/' + inName, "r")
    outfile = open("src/net/web/" + outName + ".h","w") 
