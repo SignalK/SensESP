@@ -162,9 +162,17 @@ void WSClient::test_token(const String server_address, const uint16_t server_por
     String payload = http.getString();
     http.end();
     debugD("Testing resulted in http status %d", httpCode);
-    debugD("%s", payload.c_str());
+    if (payload.length() > 0) {
+      debugD("Returned payload (length %d) is: ", payload.length());
+      debugD("%s", payload.c_str());
+      debugD("End of payload output");
+    }
+    else {
+      debugD("Returned payload is empty");
+    }
     if (httpCode == 200) {
       // our token is valid, go ahead and connect
+      debugD("Attempting to connect to SignalK Websocket...");
       server_detected = true;
       this->connect_ws(server_address, server_port);
     } else if (httpCode == 401) {
