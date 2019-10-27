@@ -2,6 +2,7 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
+#include "sensesp.h"
 
 SKDelta::SKDelta(const String& hostname, unsigned int max_buffer_size)
 : hostname{hostname},
@@ -35,5 +36,7 @@ void SKDelta::get_delta(String& output) {
   }
 
   delta.printTo(output);
+
+  debugD("SKDelta::get_delta: %s", output.c_str());
 }
 
