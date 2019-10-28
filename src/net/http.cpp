@@ -138,22 +138,30 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
 
 void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
   debugD("NOT_FOUND: ");
-  if(request->method() == HTTP_GET)
-    debugD("GET");
-  else if(request->method() == HTTP_POST)
+  if(request->method() == HTTP_GET) {
+     debugD("GET"); 
+  }
+  else if(request->method() == HTTP_POST) {
     debugD("POST");
-  else if(request->method() == HTTP_DELETE)
+  }
+  else if(request->method() == HTTP_DELETE) {
     debugD("DELETE");
-  else if(request->method() == HTTP_PUT)
+  }
+  else if(request->method() == HTTP_PUT) {
     debugD("PUT");
-  else if(request->method() == HTTP_PATCH)
+  }
+  else if(request->method() == HTTP_PATCH) {
     debugD("PATCH");
-  else if(request->method() == HTTP_HEAD)
+  }
+  else if(request->method() == HTTP_HEAD) {
     debugD("HEAD");
-  else if(request->method() == HTTP_OPTIONS)
+  }
+  else if(request->method() == HTTP_OPTIONS) {
     debugD("OPTIONS");
-  else
+  }
+  else {
     debugD("UNKNOWN");
+  }
   debugD(" http://%s%s\n", request->host().c_str(), request->url().c_str());
 
   if(request->contentLength()){
