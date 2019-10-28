@@ -32,6 +32,9 @@ void webSocketClientEvent(WStype_t type, uint8_t * payload, size_t length) {
     case WStype_TEXT:
       ws_client->on_receive_delta(payload);
       break;
+    default:
+      // Do nothing for other types
+      break;
    }
 }
 

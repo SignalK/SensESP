@@ -29,11 +29,11 @@ void setup_OTA() {
   });
   ArduinoOTA.onError([](ota_error_t error) {
     debugE("OTA Error[%u]: ", error);
-    if (error == OTA_AUTH_ERROR) debugE("OTA Auth Failed");
-    else if (error == OTA_BEGIN_ERROR) debugE("OTA Begin Failed");
-    else if (error == OTA_CONNECT_ERROR) debugE("OTA Connect Failed");
-    else if (error == OTA_RECEIVE_ERROR) debugE("OTA Receive Failed");
-    else if (error == OTA_END_ERROR) debugE("OTA End Failed");
+    if (error == OTA_AUTH_ERROR) { debugE("OTA Auth Failed"); }
+    else if (error == OTA_BEGIN_ERROR) { debugE("OTA Begin Failed"); }
+    else if (error == OTA_CONNECT_ERROR) { debugE("OTA Connect Failed"); }
+    else if (error == OTA_RECEIVE_ERROR) { debugE("OTA Receive Failed"); }
+    else if (error == OTA_END_ERROR) { debugE("OTA End Failed"); }
   });
   ArduinoOTA.begin();
   //app.onTick(&handle_OTA);

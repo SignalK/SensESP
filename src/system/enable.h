@@ -30,7 +30,7 @@ class Enable {
         virtual const char* getClassName() { return className; };
 
 
-        const int8_t getEnablePriority() { return priority; }
+        const uint8_t getEnablePriority() { return priority; }
 
 
         void setPriority(uint8_t priority) { this-> priority = priority; }
@@ -56,7 +56,7 @@ class Enable {
     
     
     private:
-        int8_t priority;
+        uint8_t priority;
 
         static std::priority_queue<Enable*> enableList;
 };
