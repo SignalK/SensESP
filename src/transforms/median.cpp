@@ -1,7 +1,7 @@
 #include "median.h"
 
 
-Median::Median(int sampleSize, String config_path) :
+Median::Median(unsigned int sampleSize, String config_path) :
     sampleSize{sampleSize},
     NumericTransform(config_path) {
   className = "Median";
@@ -49,7 +49,7 @@ bool Median::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  int sampleSize_new = config["sampleSize"];
+  unsigned int sampleSize_new = config["sampleSize"];
   if (sampleSize != sampleSize_new) {
     sampleSize = sampleSize_new;
     buf.reserve(sampleSize);

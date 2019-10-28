@@ -40,7 +40,6 @@ void reconstruct_nmea_sentence(
     const char* buffer,
     int term_offsets[],
     int num_terms) {
-      int cur_pos = 0;
 
       // get the total length of the sentence
       int last_term_loc = term_offsets[num_terms-1];

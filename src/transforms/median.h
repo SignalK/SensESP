@@ -13,7 +13,7 @@
 class Median : public NumericTransform {
 
  public:
-  Median(int sampleSize = 10, String config_path="");
+  Median(unsigned int sampleSize = 10, String config_path="");
   virtual void set_input(float input, uint8_t inputChannel = 0) override;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override;
   virtual bool set_configuration(const JsonObject& config) override;
@@ -21,7 +21,7 @@ class Median : public NumericTransform {
 
  private:
   std::vector<float> buf;
-  int sampleSize;
+  unsigned int sampleSize;
 };
 
 #endif

@@ -110,7 +110,7 @@ void SensESPApp::enable() {
 
   // connect all transforms to the Signal K delta output
 
-  ObservableValue<String>* hostname = networking->get_hostname();
+  // ObservableValue<String>* hostname = networking->get_hostname();
 
   for (auto const& sigkSource : SKEmitter::get_sources()) {
     if (sigkSource->get_sk_path() != "") {
