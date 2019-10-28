@@ -26,12 +26,14 @@ var hierarchy =
         [ "Transform< float, float >", "class_transform.html", [
           [ "SymmetricTransform< float >", "class_symmetric_transform.html", [
             [ "AngleCorrection", "class_angle_correction.html", null ],
+            [ "ChangeFilter", "class_change_filter.html", null ],
             [ "CurveInterpolator", "class_curve_interpolator.html", null ],
             [ "Difference", "class_difference.html", null ],
             [ "Integrator", "class_integrator.html", null ],
             [ "Linear", "class_linear.html", [
               [ "AnalogVoltage", "class_analog_voltage.html", null ]
             ] ],
+            [ "Median", "class_median.html", null ],
             [ "MovingAverage", "class_moving_average.html", null ],
             [ "VoltageDividerR2", "class_voltage_divider_r2.html", null ]
           ] ]

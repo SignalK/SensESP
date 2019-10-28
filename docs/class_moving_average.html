@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -150,8 +150,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5c8fbdba606732e028a6bf194a3e2529 inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af924d33e6ccb0a065af78f264997299f inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#af924d33e6ccb0a065af78f264997299f">getClassName</a> ()</td></tr>
 <tr class="separator:af924d33e6ccb0a065af78f264997299f inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12a65d666c56d9909c2a1958b7cfda40 inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">const int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#a12a65d666c56d9909c2a1958b7cfda40">getEnablePriority</a> ()</td></tr>
-<tr class="separator:a12a65d666c56d9909c2a1958b7cfda40 inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38bebd90f45effcd9fa2781cc43f0d34 inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#a38bebd90f45effcd9fa2781cc43f0d34">getEnablePriority</a> ()</td></tr>
+<tr class="separator:a38bebd90f45effcd9fa2781cc43f0d34 inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4ca14d496a85788896df6c78143994c inherit pub_methods_class_enable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enable.html#ab4ca14d496a85788896df6c78143994c">setPriority</a> (uint8_t priority)</td></tr>
 <tr class="separator:ab4ca14d496a85788896df6c78143994c inherit pub_methods_class_enable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_value_consumer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_value_consumer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_value_consumer.html">ValueConsumer&lt; float &gt;</a></td></tr>
@@ -194,8 +194,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="moving__average_8h_source.html#l00009">9</a> of file <a class="el" href="moving__average_8h_source.html">moving_average.h</a>.</p>
+<div class="textblock"><p><a class="el" href="class_moving_average.html">MovingAverage</a> is used to smooth the output of a value (signal) that has frequent variations. For example, the output of a temperature sensor may vary from 180 to 185 several times over a short period, but you just want to see the average of that. <a class="el" href="class_moving_average.html">MovingAverage</a> outputs the average of the most recent n values. It also incorporates a "scale" factor, in case you want to increase or decrease your final output by a fixed percentage. </p>
+
+<p class="definition">Definition at line <a class="el" href="moving__average_8h_source.html#l00018">18</a> of file <a class="el" href="moving__average_8h_source.html">moving_average.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adda127d69bc5441a3f4ca98d51c87f4b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adda127d69bc5441a3f4ca98d51c87f4b">&#9670;&nbsp;</a></span>MovingAverage()</h2>
@@ -228,6 +229,13 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>is the number of most recent values you want to average for your output</td></tr>
+    <tr><td class="paramname">the</td><td>moving average will be multiplied by k before it is output - make it something other than 1. if you need to scale your output up or down by a fixed percentage </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00005">5</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
 
@@ -260,7 +268,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00039">39</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00053">53</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
 
 </div>
 </div>
@@ -291,7 +299,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a787559a1a907f909d6088d2ec6825b44">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00023">23</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00037">37</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +330,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a6e0281fe25cfbdf024bdb05147ffb52b">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00044">44</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00058">58</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
 
 </div>
 </div>
@@ -369,7 +377,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_value_consumer.html#a7bf920e5ad5f171ec6e2aeda056ff01f">ValueConsumer&lt; float &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00014">14</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00015">15</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">

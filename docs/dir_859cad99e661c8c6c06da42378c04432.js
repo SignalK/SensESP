@@ -7,6 +7,10 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     [ "angle_correction.h", "angle__correction_8h.html", [
       [ "AngleCorrection", "class_angle_correction.html", "class_angle_correction" ]
     ] ],
+    [ "change_filter.cpp", "change__filter_8cpp.html", null ],
+    [ "change_filter.h", "change__filter_8h.html", [
+      [ "ChangeFilter", "class_change_filter.html", "class_change_filter" ]
+    ] ],
     [ "curveinterpolator.cpp", "curveinterpolator_8cpp.html", null ],
     [ "curveinterpolator.h", "curveinterpolator_8h.html", [
       [ "CurveInterpolator", "class_curve_interpolator.html", "class_curve_interpolator" ],
@@ -31,6 +35,10 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     [ "linear.cpp", "linear_8cpp.html", null ],
     [ "linear.h", "linear_8h.html", [
       [ "Linear", "class_linear.html", "class_linear" ]
+    ] ],
+    [ "median.cpp", "median_8cpp.html", null ],
+    [ "median.h", "median_8h.html", [
+      [ "Median", "class_median.html", "class_median" ]
     ] ],
     [ "moving_average.cpp", "moving__average_8cpp.html", null ],
     [ "moving_average.h", "moving__average_8h.html", [

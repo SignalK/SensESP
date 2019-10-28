@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['change_5ffilter_2ecpp',['change_filter.cpp',['../change__filter_8cpp.html',1,'']]],
+  ['change_5ffilter_2eh',['change_filter.h',['../change__filter_8h.html',1,'']]],
+  ['changefilter',['ChangeFilter',['../class_change_filter.html',1,'ChangeFilter'],['../class_change_filter.html#a6ca0d72e2d4f5afc36ec6c38513cb9c3',1,'ChangeFilter::ChangeFilter()']]],
   ['check_5fconnection',['check_connection',['../class_networking.html#ae4b12924970227730df3377144301a7c',1,'Networking']]],
   ['classname',['className',['../class_enable.html#a88a9d200883d86ac64d5b1cd03c07d29',1,'Enable']]],
   ['clearsamples',['clearSamples',['../class_curve_interpolator.html#afb1dbb8e85015e2909dff8495875f8f5',1,'CurveInterpolator']]],

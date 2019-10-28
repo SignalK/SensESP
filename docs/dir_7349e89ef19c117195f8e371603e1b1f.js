@@ -11,7 +11,9 @@ var dir_7349e89ef19c117195f8e371603e1b1f =
       [ "DigitalInputCounter", "class_digital_input_counter.html", "class_digital_input_counter" ]
     ] ],
     [ "gps.cpp", "gps_8cpp.html", null ],
-    [ "gps.h", "gps_8h.html", "gps_8h" ],
+    [ "gps.h", "gps_8h.html", [
+      [ "GPSInput", "class_g_p_s_input.html", "class_g_p_s_input" ]
+    ] ],
     [ "onewire_temperature.cpp", "onewire__temperature_8cpp.html", "onewire__temperature_8cpp" ],
     [ "onewire_temperature.h", "onewire__temperature_8h.html", "onewire__temperature_8h" ],
     [ "sensor.cpp", "sensor_8cpp.html", null ],

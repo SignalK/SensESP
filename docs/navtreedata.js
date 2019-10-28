@@ -53,8 +53,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "analog__input_8cpp.html",
-"class_time_string.html#adc18ed47c4b6d88acceec81741aab5c3",
-"sensor_8h.html"
+"class_sens_e_s_p_app.html#ac53d90429563f50e4aca5224a1e85afd",
+"onewire__temperature_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
