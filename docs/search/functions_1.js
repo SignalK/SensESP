@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['changefilter',['ChangeFilter',['../class_change_filter.html#a6ca0d72e2d4f5afc36ec6c38513cb9c3',1,'ChangeFilter']]],
   ['check_5fconnection',['check_connection',['../class_networking.html#ae4b12924970227730df3377144301a7c',1,'Networking']]],
   ['clearsamples',['clearSamples',['../class_curve_interpolator.html#afb1dbb8e85015e2909dff8495875f8f5',1,'CurveInterpolator']]],
   ['configurable',['Configurable',['../class_configurable.html#a8972a439fb9b734ff68d27c699640f78',1,'Configurable']]],

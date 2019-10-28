@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">0.4.2</span>
+   &#160;<span id="projectnumber">0.4.3</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -94,43 +94,46 @@ $(document).ready(function(){initNavTree('wiring__helpers_8h.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="gps_8h_source.html">sensors/gps.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="onewire__temperature_8h_source.html">sensors/onewire_temperature.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for wiring_helpers.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="wiring__helpers_8h__incl.png" border="0" usemap="#src_2wiring__helpers_8h" alt=""/></div>
 <map name="src_2wiring__helpers_8h" id="src_2wiring__helpers_8h">
-<area shape="rect"  title=" " alt="" coords="569,5,708,31"/>
-<area shape="rect"  href="sensesp__app_8h.html" title=" " alt="" coords="984,79,1096,104"/>
+<area shape="rect"  title=" " alt="" coords="469,5,608,31"/>
+<area shape="rect"  href="sensesp__app_8h.html" title=" " alt="" coords="1016,79,1128,104"/>
+<area shape="rect"  href="gps_8h.html" title=" " alt="" coords="486,79,591,104"/>
 <area shape="rect"  href="onewire__temperature_8h.html" title=" " alt="" coords="133,79,342,104"/>
 <area shape="rect"  href="sensor_8h.html" title=" " alt="" coords="333,152,456,177"/>
-<area shape="rect"  href="valueproducer_8h.html" title=" " alt="" coords="528,299,690,324"/>
-<area shape="rect"  href="valueconsumer_8h.html" title=" " alt="" coords="493,372,616,397"/>
-<area shape="rect"  href="http_8h.html" title=" " alt="" coords="1295,152,1372,177"/>
-<area shape="rect"  href="networking_8h.html" title=" " alt="" coords="980,152,1099,177"/>
-<area shape="rect"  href="observablevalue_8h.html" title=" " alt="" coords="629,225,805,251"/>
-<area shape="rect"  href="ws__client_8h.html" title=" " alt="" coords="1638,152,1748,177"/>
-<area shape="rect"  href="sensesp_8h.html" title=" " alt="" coords="1539,225,1621,251"/>
-<area shape="rect"  href="signalk__delta_8h.html" title=" " alt="" coords="1810,225,1966,251"/>
-<area shape="rect"  href="led__blinker_8h.html" title=" " alt="" coords="1398,152,1540,177"/>
-<area shape="rect"  title=" " alt="" coords="166,225,205,251"/>
-<area shape="rect"  href="configurable_8h.html" title=" " alt="" coords="1078,225,1229,251"/>
-<area shape="rect"  href="observable_8h.html" title=" " alt="" coords="648,372,792,397"/>
-<area shape="rect"  href="enable_8h.html" title=" " alt="" coords="335,225,454,251"/>
-<area shape="rect"  title=" " alt="" coords="1103,299,1150,324"/>
-<area shape="rect"  title=" " alt="" coords="1001,299,1079,324"/>
-<area shape="rect"  title=" " alt="" coords="1032,445,1138,471"/>
-<area shape="rect"  title=" " alt="" coords="608,445,698,471"/>
-<area shape="rect"  title=" " alt="" coords="1411,445,1490,471"/>
-<area shape="rect"  title=" " alt="" coords="722,445,779,471"/>
-<area shape="rect"  title=" " alt="" coords="492,445,556,471"/>
-<area shape="rect"  title=" " alt="" coords="344,299,402,324"/>
-<area shape="rect"  title=" " alt="" coords="1253,225,1413,251"/>
-<area shape="rect"  title=" " alt="" coords="829,225,1002,251"/>
-<area shape="rect"  title=" " alt="" coords="1645,225,1786,251"/>
-<area shape="rect"  title=" " alt="" coords="1488,299,1581,324"/>
-<area shape="rect"  title=" " alt="" coords="1605,299,1723,324"/>
-<area shape="rect"  title=" " alt="" coords="1869,299,1907,324"/>
+<area shape="rect"  href="valueproducer_8h.html" title=" " alt="" coords="429,299,592,324"/>
+<area shape="rect"  href="valueconsumer_8h.html" title=" " alt="" coords="413,372,536,397"/>
+<area shape="rect"  href="http_8h.html" title=" " alt="" coords="1348,152,1425,177"/>
+<area shape="rect"  href="networking_8h.html" title=" " alt="" coords="1012,152,1131,177"/>
+<area shape="rect"  href="observablevalue_8h.html" title=" " alt="" coords="859,225,1034,251"/>
+<area shape="rect"  href="ws__client_8h.html" title=" " alt="" coords="1606,152,1716,177"/>
+<area shape="rect"  href="sensesp_8h.html" title=" " alt="" coords="1944,225,2026,251"/>
+<area shape="rect"  href="signalk__delta_8h.html" title=" " alt="" coords="1541,225,1696,251"/>
+<area shape="rect"  href="led__blinker_8h.html" title=" " alt="" coords="2001,152,2143,177"/>
+<area shape="rect"  title=" " alt="" coords="142,225,181,251"/>
+<area shape="rect"  href="configurable_8h.html" title=" " alt="" coords="632,225,783,251"/>
+<area shape="rect"  href="observable_8h.html" title=" " alt="" coords="1323,372,1466,397"/>
+<area shape="rect"  href="enable_8h.html" title=" " alt="" coords="237,225,355,251"/>
+<area shape="rect"  title=" " alt="" coords="667,299,714,324"/>
+<area shape="rect"  title=" " alt="" coords="789,299,867,324"/>
+<area shape="rect"  title=" " alt="" coords="597,445,704,471"/>
+<area shape="rect"  title=" " alt="" coords="1351,445,1441,471"/>
+<area shape="rect"  title=" " alt="" coords="1465,445,1543,471"/>
+<area shape="rect"  title=" " alt="" coords="1270,445,1327,471"/>
+<area shape="rect"  title=" " alt="" coords="376,445,440,471"/>
+<area shape="rect"  title=" " alt="" coords="245,299,304,324"/>
+<area shape="rect"  title=" " alt="" coords="1306,225,1467,251"/>
+<area shape="rect"  title=" " alt="" coords="1109,225,1282,251"/>
+<area shape="rect"  title=" " alt="" coords="1720,225,1861,251"/>
+<area shape="rect"  title=" " alt="" coords="2072,299,2165,324"/>
+<area shape="rect"  title=" " alt="" coords="1930,299,2048,324"/>
+<area shape="rect"  title=" " alt="" coords="1599,299,1638,324"/>
+<area shape="rect"  href="nmea__parser_8h.html" title=" " alt="" coords="662,152,818,177"/>
 <area shape="rect"  title=" " alt="" coords="165,152,309,177"/>
 <area shape="rect"  title=" " alt="" coords="5,152,90,177"/>
 </map>
@@ -153,8 +156,8 @@ Functions</h2></td></tr>
 <tr class="separator:a70ac1c40d730c9e0f9b93b1f4dd5f0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae36e0604b36693bd720bffcf4145baf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wiring__helpers_8h.html#ae36e0604b36693bd720bffcf4145baf9">setup_fuel_flow_meter</a> (int inflow_pin, int return_flow_pin)</td></tr>
 <tr class="separator:ae36e0604b36693bd720bffcf4145baf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8edfa609fe0f66ca940c2c8311e687b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wiring__helpers_8h.html#a8edfa609fe0f66ca940c2c8311e687b9">setup_gps</a> (int reset_pin=0)</td></tr>
-<tr class="separator:a8edfa609fe0f66ca940c2c8311e687b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f7d5e59747355ce523001faddc7ada9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_g_p_s_input.html">GPSInput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wiring__helpers_8h.html#a8f7d5e59747355ce523001faddc7ada9">setup_gps</a> (Stream *rx_stream)</td></tr>
+<tr class="separator:a8f7d5e59747355ce523001faddc7ada9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37c83d7d3ac2abb00e8f9e86c1da52d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wiring__helpers_8h.html#a37c83d7d3ac2abb00e8f9e86c1da52d3">setup_onewire_temperature</a> (<a class="el" href="class_dallas_temperature_sensors.html">DallasTemperatureSensors</a> *dts, String sk_path, String config_path)</td></tr>
 <tr class="separator:a37c83d7d3ac2abb00e8f9e86c1da52d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99ed20d80aca90bb060c88019c5f739f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wiring__helpers_8h.html#a99ed20d80aca90bb060c88019c5f739f">setup_rpm_meter</a> (int input_pin)</td></tr>
@@ -242,17 +245,17 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a8edfa609fe0f66ca940c2c8311e687b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8edfa609fe0f66ca940c2c8311e687b9">&#9670;&nbsp;</a></span>setup_gps()</h2>
+<a id="a8f7d5e59747355ce523001faddc7ada9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f7d5e59747355ce523001faddc7ada9">&#9670;&nbsp;</a></span>setup_gps()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void setup_gps </td>
+          <td class="memname"><a class="el" href="class_g_p_s_input.html">GPSInput</a>* setup_gps </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>reset_pin</em> = <code>0</code></td><td>)</td>
+          <td class="paramtype">Stream *&#160;</td>
+          <td class="paramname"><em>rx_stream</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -262,8 +265,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="wiring__helpers_8h_a8edfa609fe0f66ca940c2c8311e687b9_cgraph.png" border="0" usemap="#wiring__helpers_8h_a8edfa609fe0f66ca940c2c8311e687b9_cgraph" alt=""/></div>
-<map name="wiring__helpers_8h_a8edfa609fe0f66ca940c2c8311e687b9_cgraph" id="wiring__helpers_8h_a8edfa609fe0f66ca940c2c8311e687b9_cgraph">
+<div class="center"><img src="wiring__helpers_8h_a8f7d5e59747355ce523001faddc7ada9_cgraph.png" border="0" usemap="#wiring__helpers_8h_a8f7d5e59747355ce523001faddc7ada9_cgraph" alt=""/></div>
+<map name="wiring__helpers_8h_a8f7d5e59747355ce523001faddc7ada9_cgraph" id="wiring__helpers_8h_a8f7d5e59747355ce523001faddc7ada9_cgraph">
 <area shape="rect"  title=" " alt="" coords="5,5,88,31"/>
 <area shape="rect"  href="class_value_producer.html#a1669282467997608ce6164fe4d729bb2" title=" " alt="" coords="136,5,313,31"/>
 </map>

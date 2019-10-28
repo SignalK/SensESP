@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['handle',['handle',['../class_n_m_e_a_parser.html#a8687b75207c6df0c049721fe5a586913',1,'NMEAParser']]],
   ['handle_5fconfig',['handle_config',['../class_h_t_t_p_server.html#a3b7406f8ac0cb9b90e86513acee23542',1,'HTTPServer']]],
   ['handle_5fdevice_5freset',['handle_device_reset',['../class_h_t_t_p_server.html#ab088a2530794acb9db8a8e1910729c35',1,'HTTPServer']]],
   ['handle_5fdevice_5frestart',['handle_device_restart',['../class_h_t_t_p_server.html#a8b03465f1ad5631d0e20cc67e5419562',1,'HTTPServer']]],
