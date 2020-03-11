@@ -8,7 +8,9 @@ servers. At the moment it is very much a work in progress.
 SensESP is heavily inspired by [SigkSens](https://github.com/mxtommy/SigkSens)
 and prior work done by [@mxtommy](https://github.com/mxtommy).
 
-Class documentation for SensESP is [here](http://signalk.org/SensESP/annotated.html)
+Class documentation for SensESP is [here](http://signalk.org/SensESP/annotated.html).
+
+A Wiki page with more detailed information about using SensESP is [here](https://github.com/SignalK/SensESP/wiki).
 
 ## Getting Started
 
@@ -52,12 +54,14 @@ TODO!
 
 In the examples below, `sensesp` is used as the device name.
 
-You can configure your device with any web browser by going to
+You can configure your device with any web browser by putting the IP address of your device into the URL field of the browser, or by going to
 
     http://sensesp.local
 
 
-SensESP also implements a RESTful configuration API. A list of
+Everything that is configurable on a "live" device will be in the menu that appears. You can also restart the device from that menu, and even reset the device to factory settings.
+
+(OBSOLETE?) SensESP also implements a RESTful configuration API. A list of
 possible configuration keys can be retrieved from:
 
     http://sensesp.local/config
