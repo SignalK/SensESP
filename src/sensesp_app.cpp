@@ -21,7 +21,7 @@ RemoteDebug Debug;
 
 // FIXME: Setting up the system is too verbose and repetitive
 
-SensESPApp::SensESPApp() {
+SensESPApp::SensESPApp(bool disableStdSensors) : disableStdSensors{disableStdSensors} {
   // initialize filesystem
 
   if (!SPIFFS.begin()) {
@@ -35,7 +35,9 @@ SensESPApp::SensESPApp() {
 
   // setup standard sensors and their transforms
 
-  setup_standard_sensors(hostname);
+  if(!disableStdSensors) {
+    setup_standard_sensors(hostname);
+  }
 
   // create the SK delta object
 

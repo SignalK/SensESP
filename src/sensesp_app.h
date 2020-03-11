@@ -17,7 +17,7 @@
 
 class SensESPApp {
  public:
-  SensESPApp();
+  SensESPApp(bool disableStdSensors = false);
   void enable();
   void reset();
   String get_hostname();
@@ -62,6 +62,7 @@ class SensESPApp {
 
 
  private:
+  bool disableStdSensors;
   void setup_standard_sensors(ObservableValue<String>* hostname);
 
   HTTPServer* http_server;
