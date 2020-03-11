@@ -37,10 +37,15 @@ String Configurable::get_config_schema() {
 }
 
 void Configurable::load_configuration() {
-  if (config_path=="" || !SPIFFS.exists(config_path)) {
-    // nothing to load from
+  if (config_path=="") {
     debugI(
-      "Not loading configuration, config_path empty or file does not exist: %s",
+      "Not loading configuration: no config_path specified: %s",
+      config_path.c_str());
+    return;
+  }
+  if (!SPIFFS.exists(config_path)) {
+    debugI(
+      "Not loading configuration: file does not exist: %s",
       config_path.c_str());
     return;
   }
