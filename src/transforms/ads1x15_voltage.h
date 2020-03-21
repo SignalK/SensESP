@@ -26,18 +26,13 @@
 class ADS1x15Voltage : public NumericTransform {
 
     public:
-        ADS1x15Voltage(uint8_t chip = 1, adsGain_t gain = GAIN_TWOTHIRDS, String config_path = "");
+        ADS1x15Voltage(uint8_t chip = 1, adsGain_t gain = GAIN_TWOTHIRDS);
 
         virtual void set_input(float input, uint8_t inputChannel = 0) override;
 
     protected:
         uint8_t chip;
         adsGain_t gain;
-
-    private:
-        virtual JsonObject& get_configuration(JsonBuffer& buf) override;
-        virtual bool set_configuration(const JsonObject& config) override;
-        virtual String get_config_schema() override;    
 
 };
 
