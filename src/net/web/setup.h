@@ -2,7 +2,7 @@
 const char PAGE_setup[] PROGMEM = R"=====(
 <html>
     <head>
-        <title>Configure SensESP Sensor</title>
+        <title>Configure SensESP Device</title>
 
 <style>
 /* Remove default bullets */
