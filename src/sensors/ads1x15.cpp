@@ -21,6 +21,7 @@ template class ADS1x15<Adafruit_ADS1115>;
 ADS1015channel::ADS1015channel(ADS1015* ads1015, uint8_t channel, uint read_delay, String config_path) :
                    NumericSensor(config_path), ads1015{ads1015}, channel{channel}, read_delay{read_delay} {
       className = "ADS1015channel";
+      load_configuration();
 }
 
 void ADS1015channel::enable() {
@@ -76,6 +77,7 @@ bool ADS1015channel::set_configuration(const JsonObject& config) {
 ADS1115channel::ADS1115channel(ADS1115* ads1115, uint8_t channel, uint read_delay, String config_path) :
                    NumericSensor(config_path), ads1115{ads1115}, channel{channel}, read_delay{read_delay} {
       className = "ADS1115channel";
+      load_configuration();
 }
 
 void ADS1115channel::enable() {
