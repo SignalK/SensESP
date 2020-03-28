@@ -7,6 +7,7 @@
 AnalogInput::AnalogInput(uint read_delay, String config_path) 
                  : NumericSensor(config_path), read_delay{read_delay} {
   className = "AnalogInput";
+  load_configuration();
 }
 
 void AnalogInput::update() {
