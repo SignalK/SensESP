@@ -17,6 +17,7 @@ ChangeFilter::ChangeFilter(float minDelta, float maxDelta, int maxSkips, String 
           maxSkips{maxSkips},
           NumericTransform(config_path) {
 
+  className = "ChangeFilter";
   load_configuration();
   skips = maxSkips+1;
 }
