@@ -6,8 +6,7 @@
 class I2CInput : public NumericSensor {
 
 public:
-    I2CInput(uint8_t given_address,
-                     String config_path="");
+    I2CInput(uint8_t given_address,uint8_t given_register, String config_path, uint8_t given_registersize);
   bool scanI2CAddress(uint8_t address);
   void enable() override final;
   void scanAllI2C();
@@ -19,8 +18,12 @@ public:
 private:
   bool found = true;
   uint8_t address;
+  uint8_t regi;
   void update();
   void read_value();
+  uint8_t registersize;
+  bool PollI2C(uint8_t address, uint8_t register, uint8_t count);
+  float ReadI2C(uint8_t address, uint8_t register, uint8_t count);
 };
 
 
