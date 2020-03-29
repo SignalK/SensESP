@@ -42,7 +42,7 @@ ReactESP app([] () {
   //   down to less than 5 volts, which is the maximum the ADC can read. The output is the original voltage.
   // - SKOutputNumber() is a specialized transport to send a float value to the Signal K server.
 
-    p12V_AltVoltage->connectTo(new ADS1x15Voltage()) 
+    p12V_AltVoltage->connectTo(new ADS1x15Voltage(chip, gain)) 
                   ->connectTo(new VoltageMultiplier(10000, 4730, "/12V_Alt/VoltMuliplier"))  // Measured ohm values of R1 and R2 in the physical voltage divider
                   ->connectTo(new SKOutputNumber("electrical.alternators.12V.voltage", "/12V_Alt/skPath"));
 
@@ -53,7 +53,7 @@ ReactESP app([] () {
 
   auto* p24VAltVoltage = new ADS1115channel(ads1115, channel_24V, read_delay_24V, "/24V_Alt/ADC read delay");
 
-    p24VAltVoltage->connectTo(new ADS1x15Voltage()) 
+    p24VAltVoltage->connectTo(new ADS1x15Voltage(chip, gain)) 
                   ->connectTo(new VoltageMultiplier(21800, 4690, "/24V_Alt/VoltMuliplier"))
                   ->connectTo(new SKOutputNumber("electrical.alternators.24V.voltage", "/24V_Alt/skPath"));                
 
