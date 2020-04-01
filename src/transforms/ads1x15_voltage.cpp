@@ -1,12 +1,12 @@
 #include "ads1x15_voltage.h"
 
-ADS1x15Voltage::ADS1x15Voltage(uint8_t chip, adsGain_t gain) :
+ADS1x15Voltage::ADS1x15Voltage(ADS1x15CHIP_t chip, adsGain_t gain) :
        NumericTransform(), chip{chip}, gain{gain} {
      className = "ADS1x15Voltage";
 }
 
 void ADS1x15Voltage::set_input(float input, uint8_t inputChannel) {
-    if (chip == 0) { // ADS1015
+    if (chip == ADS1015chip) {
       switch (gain) { 
         case GAIN_TWOTHIRDS: output = input * 0.003;
                 break;
@@ -23,7 +23,7 @@ void ADS1x15Voltage::set_input(float input, uint8_t inputChannel) {
         default: debugE("FATAL: invalid GAIN parameter.");  
       }
     }
-    else if (chip == 1) { // ADS1115
+    else if (chip == ADS1115chip) {
        switch (gain) { 
         case GAIN_TWOTHIRDS: output = input * 0.0001875;
                 break;
@@ -41,7 +41,7 @@ void ADS1x15Voltage::set_input(float input, uint8_t inputChannel) {
       } 
     }
     else {
-      debugE("FATAL: chip parameter must be 0 (ADS1015) or 1 (ADS1115");
+      debugE("FATAL: chip parameter must be ADS1015chip or ADS1115chip.");
     }
     notify();
 }

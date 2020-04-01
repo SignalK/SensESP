@@ -4,6 +4,9 @@
 #include "transforms/transform.h"
 #include <Adafruit_ADS1015.h>
 
+// Pass one of these in the constructor to ADS1x15Voltage() to tell which of the two chips you're working with.
+enum ADS1x15CHIP_t { ADS1015chip, ADS1115chip };
+
 
 /**
  * A transform that takes the output from an ADS1015 or ADS1115 analog-to-digital converter
@@ -26,12 +29,12 @@
 class ADS1x15Voltage : public NumericTransform {
 
     public:
-        ADS1x15Voltage(uint8_t chip = 1, adsGain_t gain = GAIN_TWOTHIRDS);
+        ADS1x15Voltage(ADS1x15CHIP_t chip = ADS1115chip, adsGain_t gain = GAIN_TWOTHIRDS);
 
         virtual void set_input(float input, uint8_t inputChannel = 0) override;
 
     protected:
-        uint8_t chip;
+        ADS1x15CHIP_t chip;
         adsGain_t gain;
 
 };

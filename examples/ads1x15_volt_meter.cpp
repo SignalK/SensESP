@@ -1,3 +1,5 @@
+// ads1x15_volt_meter.cpp example
+
 #include <Arduino.h>
 
 //#define SERIAL_DEBUG_DISABLED
@@ -23,18 +25,17 @@ ReactESP app([] () {
 
   sensesp_app = new SensESPApp();
   
-  // Create an instance of a ADS1115 Analog-to-Digital Converter (ADC). Defining a variable for the chip
-  // and gain helps ensure the same chip and gain are used for the ADC and for ADS1x15Voltage below.
-  byte chip = 1;  // 1 is an ADS1115, 0 would be an ADS1015
+  // Create an instance of a ADS1115 Analog-to-Digital Converter (ADC). 
+  ADS1x15CHIP_t chip = ADS1115chip;
   adsGain_t gain = GAIN_TWOTHIRDS;
-  
   ADS1115* ads1115 = new ADS1115(0x48, gain);
 
-  // Create an instance of ADS1115channel to read a specific channel of the ADC
+  // Create an instance of ADS1115value to read a specific channel of the ADC,
+  // the channel on the physical chip that the input is connected to.
   uint8_t channel_12V = 0;
   uint read_delay_12V = 500;
 
-  auto* p12V_AltVoltage = new ADS1115channel(ads1115, channel_12V, read_delay_12V, "/12V_Alt/ADC read delay");
+  auto* p12V_AltVoltage = new ADS1115value(ads1115, channel_12V, read_delay_12V, "/12V_Alt/ADC read delay");
 
   // The output from the ADS1115 needs to be sent through some transforms to get it ready to display in Signal K:
   // - ADS1x15Voltage() takes the output from the ADS1115 and converts it back into the voltage that was read by the chip.
@@ -47,11 +48,11 @@ ReactESP app([] () {
                   ->connectTo(new SKOutputNumber("electrical.alternators.12V.voltage", "/12V_Alt/skPath"));
 
 
-  // Create a second instance of ADS1115channel to read from the same physical ADS1115, but from channel 1.
+  // Create a second instance of ADS1115value to read from the same physical ADS1115, but from channel 1 instead of 0.
   uint8_t channel_24V = 1;
   uint read_delay_24V = 500;
 
-  auto* p24VAltVoltage = new ADS1115channel(ads1115, channel_24V, read_delay_24V, "/24V_Alt/ADC read delay");
+  auto* p24VAltVoltage = new ADS1115value(ads1115, channel_24V, read_delay_24V, "/24V_Alt/ADC read delay");
 
     p24VAltVoltage->connectTo(new ADS1x15Voltage(chip, gain)) 
                   ->connectTo(new VoltageMultiplier(21800, 4690, "/24V_Alt/VoltMuliplier"))
