@@ -32,22 +32,24 @@ ReactESP app([] () {
   */
   DallasTemperatureSensors* dts = new DallasTemperatureSensors(D7);
 
-  auto* pCoolantTemp = new OneWireTemperature(dts, "/coolantTemperature/oneWire");
+  uint read_delay = 500;
+
+  auto* pCoolantTemp = new OneWireTemperature(dts, read_delay, "/coolantTemperature/oneWire");
 
     pCoolantTemp->connectTo(new Linear(1.0, 0.0, "/coolantTemperature/linear"))
                 ->connectTo(new SKOutputNumber("propulsion.mainEngine.coolantTemperature", "/coolantTemperature/skPath"));
 
-  auto* pExhaustTemp = new OneWireTemperature(dts, "/exhaustTemperature/oneWire");
+  auto* pExhaustTemp = new OneWireTemperature(dts, read_delay, "/exhaustTemperature/oneWire");
     
     pExhaustTemp->connectTo(new Linear(1.0, 0.0, "/exhaustTemperature/linear"))
                 ->connectTo(new SKOutputNumber("propulsion.mainEngine.exhaustTemperature", "/exhaustTemperature/skPath"));
   
-  auto* p24VTemp = new OneWireTemperature(dts, "/24vAltTemperature/oneWire");
+  auto* p24VTemp = new OneWireTemperature(dts, read_delay, "/24vAltTemperature/oneWire");
       
       p24VTemp->connectTo(new Linear(1.0, 0.0, "/24vAltTemperature/linear"))
               ->connectTo(new SKOutputNumber("electrical.alternators.24V.temperature", "/24vAltTemperature/skPath"));
 
-  auto* p12VTemp = new OneWireTemperature(dts, "/12vAltTemperature/oneWire");
+  auto* p12VTemp = new OneWireTemperature(dts, read_delay, "/12vAltTemperature/oneWire");
       
       p12VTemp->connectTo(new Linear(1.0, 0.0, "/12vAltTemperature/linear"))
               ->connectTo(new SKOutputNumber("electrical.alternators.12V.temperature", "/12vAltTemperature/skPath"));      
