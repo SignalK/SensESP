@@ -27,7 +27,7 @@ ReactESP app([] () {
   // The "SignalK path" identifies this sensor to the SignalK server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
   // broadcast SignalK data.
-  const char* sk_path = "sensors.indoor.illumination";
+  const char* sk_path = "indoor.illumination";
 
 
   // The "Configuration path" is combined with "/config" to formulate a URL
