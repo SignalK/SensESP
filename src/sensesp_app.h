@@ -33,10 +33,10 @@ class SensESPApp {
                       ObservableValue<String>* hostname) {
     String hostname_str = hostname->get();
     String value_name = sensor->get_value_name();
-    String sk_path = "sensors." + hostname_str + "." + value_name;
+    String sk_path = hostname_str + "." + value_name;
     auto comp_set_sk_path = [hostname, transform, value_name](){
         transform->set_sk_path(
-          "sensors." + hostname->get() + "." + value_name);
+          hostname->get() + "." + value_name);
     };
     comp_set_sk_path();
     sensor->attach([sensor, transform](){
