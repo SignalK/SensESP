@@ -46,6 +46,7 @@ DigitalInputCounter::DigitalInputCounter(
       IntegerProducer(),
       read_delay{read_delay} {
         className = "DigitalInputCounter";
+        load_configuration();
       }
 
 void DigitalInputCounter::enable() {
