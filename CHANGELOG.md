@@ -5,6 +5,11 @@ PR's since Version 0.4.3, since most of the work done prior to that was quite lo
 to most end users.
 
 ## Pull Requests Merged Since v0.4.3
+
+- [#101](https://github.com/SignalK/SensESP/pull/101) (2020/04/06) feature: add support for SHT31 temp/humidity sensor
+- [#100](https://github.com/SignalK/SensESP/pull/100) (2020/04/06) fix: remove "sensors" from all SK Paths throughout the project
+- [#97](https://github.com/SignalK/SensESP/pull/97) (2020/04/06) feature: add support for BMP280 temp/pressure sensor
+- [#96](https://github.com/SignalK/SensESP/pull/96) (2020/04/06) feature: add support for BME280 temp/pressure/humidity sensor
 - [#82](https://github.com/SignalK/SensESP/pull/82) (2020/04/02) feature: add configurable read_delay to OneWire Temperature sensor
 - [#81](https://github.com/SignalK/SensESP/pull/81) (2020/04/02) feature: add support for ADS1015/ADS1115 Analog-to-Digital Converters
 - [#92](https://github.com/SignalK/SensESP/pull/92) (2020/04/01) fix: add "last value" to config of moving_average transport 
