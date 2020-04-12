@@ -21,7 +21,7 @@ RemoteDebug Debug;
 
 // FIXME: Setting up the system is too verbose and repetitive
 
-SensESPApp::SensESPApp(bool disableStdSensors) : disableStdSensors{disableStdSensors} {
+SensESPApp::SensESPApp(StdSensors_t stdSensors) : stdSensors{stdSensors} {
   // initialize filesystem
 
   if (!SPIFFS.begin()) {
@@ -35,9 +35,7 @@ SensESPApp::SensESPApp(bool disableStdSensors) : disableStdSensors{disableStdSen
 
   // setup standard sensors and their transforms
 
-  if(!disableStdSensors) {
-    setup_standard_sensors(hostname);
-  }
+  setup_standard_sensors(hostname, stdSensors);
 
   // create the SK delta object
 
@@ -70,41 +68,46 @@ SensESPApp::SensESPApp(bool disableStdSensors) : disableStdSensors{disableStdSen
     sk_delta, ws_connected_cb, ws_delta_cb);
 }
 
-void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
+void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname, StdSensors_t stdSensors) {
 
-  // connect systemhz
+  if (stdSensors == noStdSensors) {return;};
 
-  connect_1to1_h<SystemHz, SKOutput<float>>(
-    new SystemHz(),
-    new SKOutput<float>(),
-    hostname
-  );
+  if (stdSensors == allStdSensors) {
+    // connect systemhz
 
-  String hostname_str = hostname->get();
+    connect_1to1_h<SystemHz, SKOutput<float>>(
+      new SystemHz(),
+      new SKOutput<float>(),
+      hostname
+    );
 
-  // connect freemem
+    // connect freemem
 
-  connect_1to1_h<FreeMem, SKOutput<float>>(
-    new FreeMem(),
-    new SKOutput<float>(),
-    hostname
-  );
+    connect_1to1_h<FreeMem, SKOutput<float>>(
+      new FreeMem(),
+      new SKOutput<float>(),
+      hostname
+    );
 
+    // connect ip address
+
+    connect_1to1_h<IPAddrDev, SKOutput<String>>(
+      new IPAddrDev(),
+      new SKOutput<String>(),
+      hostname
+    );
+  }
+
+  if (stdSensors == allStdSensors || stdSensors == uptimeOnly) {
   // connect uptime
 
-  connect_1to1_h<Uptime, SKOutput<float>>(
-    new Uptime(),
-    new SKOutput<float>(),
-    hostname
-  );
-
-  // connect ip address
-
-  connect_1to1_h<IPAddrDev, SKOutput<String>>(
-    new IPAddrDev(),
-    new SKOutput<String>(),
-    hostname
-  );
+    connect_1to1_h<Uptime, SKOutput<float>>(
+      new Uptime(),
+      new SKOutput<float>(),
+      hostname
+    );
+  }
+  
 }
 
 void SensESPApp::enable() {
