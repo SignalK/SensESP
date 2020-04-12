@@ -15,9 +15,11 @@
 #include "system/valueconsumer.h"
 #include "system/observablevalue.h"
 
+enum StdSensors_t { allStdSensors, noStdSensors, uptimeOnly };
+
 class SensESPApp {
  public:
-  SensESPApp(bool disableStdSensors = false);
+  SensESPApp(StdSensors_t stdSensors = allStdSensors);
   void enable();
   void reset();
   String get_hostname();
@@ -62,8 +64,8 @@ class SensESPApp {
 
 
  private:
-  bool disableStdSensors;
-  void setup_standard_sensors(ObservableValue<String>* hostname);
+  StdSensors_t stdSensors;
+  void setup_standard_sensors(ObservableValue<String>* hostname, StdSensors_t stdSensors = allStdSensors);
 
   HTTPServer* http_server;
   LedBlinker led_blinker;
