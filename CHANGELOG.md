@@ -5,6 +5,7 @@ PR's since Version 0.4.3, since most of the work done prior to that was quite lo
 to most end users.
 
 ## Pull Requests Merged Since v0.4.3
+- [#107](https://github.com/SignalK/SensESP/pull/107) (2020/04/12) feature: add more options for including "Standard Sensors"
 - [#104](https://github.com/SignalK/SensESP/pull/104) (2020/04/11) feature: add support for INA219 volt/amp sensor
 - [#101](https://github.com/SignalK/SensESP/pull/101) (2020/04/06) feature: add support for SHT31 temp/humidity sensor
 - [#100](https://github.com/SignalK/SensESP/pull/100) (2020/04/06) fix: remove "sensors" from all SK Paths throughout the project
