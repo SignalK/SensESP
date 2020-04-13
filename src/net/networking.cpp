@@ -78,7 +78,12 @@ void Networking::setup_wifi_manager(std::function<void(bool)> connection_cb) {
     "hostname", "Set ESP device hostname", this->hostname->get().c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
 
-  if (!wifi_manager->autoConnect("Unconfigured SensESP Device")) {
+  // Create a unique SSID for each SensESP Device
+  String config_ssid = this->hostname->get();
+  config_ssid = "Configure " + config_ssid;
+  const char* pconfig_ssid = config_ssid.c_str();
+    
+  if (!wifi_manager->autoConnect(pconfig_ssid)) {
     debugE("Failed to connect to wifi and config timed out. Restarting...");
     ESP.restart();
   }
