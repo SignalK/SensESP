@@ -31,8 +31,7 @@ INA219value::INA219value(INA219* pINA219, INA219ValType val_type, uint read_dela
       load_configuration();
 }
 
-// INA219 outputs temp in Celsius. Need to convert to Kelvin before sending to Signal K.
-// Pressure is output in Pascals, Humidity is output in relative humidity (0 - 100%)
+
 void INA219value::enable() {
   app.onRepeat(read_delay, [this](){
       switch (val_type) { 
