@@ -30,7 +30,9 @@ result, and press "Install".
 Once you have PlatformIO installed, its home screen should
 open automatically when you start VSCode. On the PIO Home,
 select "New Project". Enter a name (something like SensESPTest for your first project) and then select "WeMos
-D1 mini" in the board dropdown. The Arduino framework
+D1 mini" in the board dropdown. (This assumes you're using the most commonly used microcontroller with SensESP,
+the Wemos D1 Mini, an implementation of the ESP8266 chip. If you're using a different ESP8266, select that in the 
+board dropdown.) The Arduino framework
 should become automatically selected. Complete the new
 project dialog, then open the project you created.
 
