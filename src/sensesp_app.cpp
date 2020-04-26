@@ -1,6 +1,10 @@
 #include "sensesp_app.h"
 
+#ifdef ESP8266
 #include "FS.h"
+#elif defined(ESP32)
+#include "SPIFFS.h"
+#endif
 
 #include "sensors/analog_input.h"
 #include "sensors/digital_input.h"
@@ -168,7 +172,7 @@ void SensESPApp::reset() {
   debugW("Resetting the device configuration.");
   networking->reset_settings();
   SPIFFS.format();
-  app.onDelay(1000, [](){ ESP.reset(); });
+  app.onDelay(1000, [](){ ESP.restart(); });
 }
 
 String SensESPApp::get_hostname() {

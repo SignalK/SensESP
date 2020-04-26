@@ -3,14 +3,15 @@
 #include "Arduino.h"
 
 #include <ArduinoJson.h>
-#include <ESP8266HTTPClient.h>
 #ifdef ESP8266
+  #include <ESP8266HTTPClient.h>
   #include <ESP8266mDNS.h>        // Include the mDNS library
 #elif defined(ESP32)
+  #include <HTTPClient.h>
   #include <ESPmDNS.h>
 #endif
 
-#include <ESP8266TrueRandom.h>
+#include <ESPTrueRandom.h>
 
 #include <WiFiClient.h>
 
@@ -194,8 +195,8 @@ void WSClient::send_access_request(const String server_address, const uint16_t s
   if (client_id == "") {
     // generate a client ID
     byte uuidNumber[16];
-    ESP8266TrueRandom.uuid(uuidNumber);
-    client_id = ESP8266TrueRandom.uuidToString(uuidNumber);
+    ESPTrueRandom.uuid(uuidNumber);
+    client_id = ESPTrueRandom.uuidToString(uuidNumber);
     save_configuration();
   }
 

@@ -26,7 +26,8 @@
       "version": "^0.2.2"
     },
     {
-      "name": "ESP8266WebServer"
+      "name": "ESP8266WebServer",
+      "platforms": "espressif8266"
     },
     {
       "name": "DNSServer"
@@ -38,10 +39,12 @@
       "name": "ESP Async WebServer"
     },
     {
-      "name": "ESP8266WiFi"
+      "name": "ESP8266WiFi",
+      "platforms": "espressif8266"
     },
     {
-      "name": "ESP8266mDNS"
+      "name": "ESP8266mDNS",
+      "platforms": "espressif8266"
     },
     {
       "name": "ESPAsyncWiFiManager"
@@ -60,7 +63,7 @@
       "name": "DallasTemperature"
     },
     {
-      "name": "ESP8266TrueRandom"
+      "name": "ESPTrueRandom"
     },
     {
       "name": "Adafruit ADS1X15"
