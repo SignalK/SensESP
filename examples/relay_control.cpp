@@ -1,8 +1,6 @@
 #include <Arduino.h>
 
 #include "sensesp_app.h"
-#include "sensors/analog_input.h"
-#include "transforms/linear.h"
 #include "signalk/signalk_output.h"
 #include "signalk/signalk_listener.h"
 #include "signalk/signalk_value_listener.h"

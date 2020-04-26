@@ -3,11 +3,11 @@
 
 DigitalOutput::DigitalOutput(int pin)
 {
-    this->pinNumber = pin;
+    pinNumber = pin;
     pinMode(pin, OUTPUT);
 }
 
 void DigitalOutput::set_input(bool newValue, uint8_t inputChannel)
 {
-    digitalWrite(this->pinNumber, newValue);
+    digitalWrite(pinNumber, newValue);
 }
