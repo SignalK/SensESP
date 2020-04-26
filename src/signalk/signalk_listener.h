@@ -12,7 +12,7 @@
 #include "sensesp.h"
 
 /**
- * A SignalK listener is one that listens subscribes for SignalK stream deltas
+ * A SignalK listener is one that listens for SignalK stream deltas
  * and notifies of value changes
  */
 class SKListener : virtual public Observable {
@@ -23,7 +23,7 @@ class SKListener : virtual public Observable {
          * @param sk_path The SignalK path that identifies
          * this particular subscription to value
          */
-        SKListener(String sk_path, int period);
+        SKListener(String sk_path, int listen_delay);
 
         /**
          * Returns the current SignalK path.  An empty string
@@ -34,9 +34,9 @@ class SKListener : virtual public Observable {
             return sk_path;
         }
 
-        int getPeriod()
+        int getListenDelay()
         {
-            return period;
+            return listen_delay;
         }
 
         virtual void parseValue(JsonObject& json)
@@ -53,7 +53,7 @@ class SKListener : virtual public Observable {
 
     private:
         static std::vector<SKListener*> listeners;
-        int period;
+        int listen_delay;
 };
 
 #endif

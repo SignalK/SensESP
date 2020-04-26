@@ -11,9 +11,9 @@
 template <class T>
 class SKValueListener : public SKListener, public ValueProducer<T> {
  public:
-  SKValueListener(String sk_path, int period) : SKListener(sk_path, period) 
+  SKValueListener(String sk_path, int listen_Delay = 1000) : SKListener(sk_path, listen_Delay) 
   {
-
+       
   }
 
   void parseValue(JsonObject& json) override
@@ -25,5 +25,8 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
 
 };
 
-
+typedef SKValueListener<float> SKFloatListener;
+typedef SKValueListener<int> SKIntListener;
+typedef SKValueListener<bool> SKBoolListener;
+typedef SKValueListener<String> SKStringListener;
 #endif
