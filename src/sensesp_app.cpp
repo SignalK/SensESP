@@ -28,7 +28,11 @@ RemoteDebug Debug;
 SensESPApp::SensESPApp(StdSensors_t stdSensors) : stdSensors{stdSensors} {
   // initialize filesystem
 
+#ifdef ESP8266
   if (!SPIFFS.begin()) {
+#elif defined(ESP32)
+  if (!SPIFFS.begin(true)) {
+#endif
     debugE("FATAL: Filesystem initialization failed.");
     ESP.restart();
   }

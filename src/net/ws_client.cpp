@@ -54,7 +54,9 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta,
 
 void WSClient::enable() {
   app.onDelay(0, [this](){ this->connect(); });
+#ifdef ESP8266
   app.onRepeat(20, [this](){ this->loop(); });
+#endif
   app.onRepeat(100, [this](){ this->send_delta(); });
   app.onRepeat(10000, [this](){ this->connect_loop(); });
 }
