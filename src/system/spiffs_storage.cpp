@@ -3,9 +3,17 @@
 #include "spiffs_storage.h"
 
 #include "FS.h"
+#ifdef ESP32
+  #include <SPIFFS.h>
+#endif
 
 void setup_spiffs_storage() {
-  bool result = SPIFFS.begin();
+
+  #ifdef ESP8266
+    bool result = SPIFFS.begin();
+  #elif defined(ESP32)
+    bool result = SPIFFS.begin(true);
+  #endif
   if (!result) {
     debugE("FATAL: Filesystem initialization failed.");
     ESP.restart();

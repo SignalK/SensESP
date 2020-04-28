@@ -3,6 +3,9 @@
 #include "configurable.h"
 
 #include "FS.h"
+#ifdef ESP32
+  #include <SPIFFS.h>
+#endif
 
 // Define a global configurable map. Rationale for a global variable:
 // Every Configurable with an id gets registered, and carrying an object
