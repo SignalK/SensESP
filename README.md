@@ -30,8 +30,8 @@ result, and press "Install".
 Once you have PlatformIO installed, its home screen should
 open automatically when you start VSCode. On the PIO Home,
 select "New Project". Enter a name (something like SensESPTest for your first project) and then select "WeMos
-D1 mini" in the board dropdown. (This assumes you're using the most commonly used microcontroller with SensESP,
-the Wemos D1 Mini, an implementation of the ESP8266 chip. If you're using a different ESP8266, select that in the 
+D1 R2 and mini" in the board dropdown. (This assumes you're using the most commonly used microcontroller with SensESP,
+the Wemos D1 mini, an implementation of the ESP8266 chip. If you're using a different ESP8266, select that in the 
 board dropdown.) The Arduino framework
 should become automatically selected. Complete the new
 project dialog, then open the project you created.
@@ -41,12 +41,12 @@ Once you have your new project open, open the `platformio.ini` file that's in yo
 lib_deps =
     https://github.com/SignalK/SensESP.git
 ```
-Then, open `src/main.cpp`. The default template is for Arduino IDE, but a SensESP main file will look very different. Replace the `main.cpp` contents with one of the SensESP examples in the `examples` subdirectory. Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
+Then, open `src/main.cpp`. The default template is for the Arduino IDE, but a SensESP main file will look very different. Replace the contents of `main.cpp` with the contents of one of the SensESP examples in the `examples` subdirectory here on GitHub. (This is a good one to start with: https://github.com/SignalK/SensESP/blob/master/examples/analog_input.cpp .) Check that the settings match your hardware and select "Build" from the PlatformIO submenu (the little alien face) from the left toolbar. If the build succeeds, you can plug in your Wemos board and press "Upload and Monitor".
 
-Assuming the project uploading was successful, your Wemos will be running the example code. To configure it, connect your computer or phone wifi to the "Unconfigured Sensor" network. A captive portal may pop up, but if it doesn't, open a browser and go to 192.168.4.1. Enter your wifi credentials to allow the device to access the network. Also enter a suitable name, for example `WemosSensESP` for the device. (No more than 16 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the Wemos will restart and try to connect to your wifi network.
+Assuming the project uploading was successful, your Wemos will be running the example code. To configure it, connect your computer or phone wifi to the "Configure sensesp" network. A captive portal may pop up, but if it doesn't, open a browser and go to 192.168.4.1. Enter your wifi credentials to allow the device to access the network that your Signal K Server is on. Also enter a suitable name, for example `BilgeMonitor` for the device. (No more than 16 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the Wemos will restart and try to connect to your wifi network.
 
 Once on the network, SensESP should automatically find your Signal K server, assuming it has mDNS enabled. If your server has security enabled, you should
-see an access request for Wemos in the Signal K Dashboard, under Security - Access Requests. (You must be logged into the Signal K Dashboard to see the Security sub-menu.) Approve it, choosing "Never" for the expiration. The Wemos will restart, and you should start getting data on the Signal K Instrument Panel. (Dashboard - Webapps - Instrument Panel)
+see an access request for Wemos in the Signal K Dashboard, under Security - Access Requests. (You must be logged into the Signal K Dashboard to see the Security sub-menu.) Select "Read / Write" Approve it, choosing "Never" for the expiration. The Wemos will restart, and you should start getting data on the Signal K Instrument Panel. (Dashboard - Webapps - Instrument Panel)
 
 ## Low-level wiring
 
