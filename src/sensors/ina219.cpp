@@ -5,7 +5,7 @@
 #include <RemoteDebug.h>
 
 
-// INA219 represents an ADAfruit (or compatible) INA219 temperature / pressure / humidity sensor.
+// INA219 represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor.
 INA219::INA219(uint8_t addr, INA219CAL_t calibration_setting, String config_path) :
        Sensor(config_path) {
     className = "INA219";
