@@ -62,12 +62,9 @@
     {
       "name": "DallasTemperature"
     },
-    { "name": "ESP8266TrueRandom",
-      "platforms": "espressif8266"
-    },
     {
-      "name": "ESPRandom",
-      "platforms": "espressif32"
+      "name": "ESPTrueRandom",
+      "version": "https://github.com/sivar2311/ESPTrueRandom"
     },
     {
       "name": "Adafruit ADS1X15"
