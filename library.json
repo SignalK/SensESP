@@ -62,8 +62,12 @@
     {
       "name": "DallasTemperature"
     },
+    { "name": "ESP8266TrueRandom",
+      "platforms": "espressif8266"
+    },
     {
-      "name": "ESPTrueRandom"
+      "name": "ESPRandom",
+      "platforms": "espressif32"
     },
     {
       "name": "Adafruit ADS1X15"
@@ -79,6 +83,10 @@
     },
     {
       "name": "Adafruit INA219"
+    },
+    {
+      "name": "Wire",
+      "platforms": "espressif8266"
     },
     {
       "name": "RemoteDebug",
