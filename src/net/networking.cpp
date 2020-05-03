@@ -45,11 +45,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 }
 
 void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
-#ifdef ESP8266
-  WiFi.begin(ap_ssid, ap_password);
-#elif defined(ESP32)
   WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
-#endif
 
   uint32_t timer_start = millis();
 
