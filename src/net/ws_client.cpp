@@ -195,7 +195,8 @@ void WSClient::send_access_request(const String server_address, const uint16_t s
     // generate a client ID
     byte uuidNumber[16];
     ESPTrueRandom.uuid(uuidNumber);
-    client_id = ESPTrueRandom.uuidToString(uuidNumber);    save_configuration();
+    client_id = ESPTrueRandom.uuidToString(uuidNumber);
+    save_configuration();
   }
 
   // create a new access request
