@@ -13,12 +13,15 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
  public:
   SKValueListener(String sk_path, int listen_Delay = 1000) : SKListener(sk_path, listen_Delay) 
   {
-       
+       if(sk_path.isEmpty())
+       {
+            DEBUG_E("SKValueListener: User has provided empty sk_path. The subscription will not work as expected!");
+       }
   }
 
   void parseValue(JsonObject& json) override
   {
-       output = (T)json["value"];
+       this->output = (T)json["value"];
        notify();
   }  
 

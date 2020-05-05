@@ -1,6 +1,15 @@
 #include "transform.h"
 #ifndef _threshold_h
 #define _threshold_h
+
+/**
+ * A Transform base class that translates the value of type C into value of type P using threshold.
+ * Base class for classes NumericThreshold and IntegerThreshold.
+ * Arguments are minValue - minimum value for output to be inRange value.
+ *               maxValue - maximum value for output to be InRange value.
+ *               inRange - value if input value is in range
+ *               outRange - value if input value is out of the range
+ */
 template <typename C, typename P>
 class ThresholdTransform : public Transform<C, P> {
  public:
@@ -21,11 +30,14 @@ class ThresholdTransform : public Transform<C, P> {
   P outRange;
 };
 
-
+/**
+ * A Transform that translates float value into boolean value. User can define minValue and MaxValue to set region.
+ * If value is in range transform will use inRange boolean value as output. In other cases it uses !inRange value.
+ */
 class NumericThreshold : public ThresholdTransform<float, bool>
 {
     public:
-      NumericThreshold(float minValue, float maxValue, bool inRange,
+      NumericThreshold(float minValue, float maxValue, bool inRange = true,
                      String config_path="") :
                       ThresholdTransform<float, bool>(minValue, maxValue, inRange, !inRange, config_path)
                       {}
@@ -35,10 +47,14 @@ class NumericThreshold : public ThresholdTransform<float, bool>
     virtual String get_config_schema() override;
 };
 
+/**
+ * A Transform that translates integer value into boolean value. User can define minValue and MaxValue to set region.
+ * If value is in range transform will use inRange boolean value as output. In other cases it uses !inRange value.
+ */
 class IntegerThreshold : public ThresholdTransform<int, bool>
 {
     public:
-      IntegerThreshold(int minValue, int maxValue, bool inRange,
+      IntegerThreshold(int minValue, int maxValue, bool inRange = true,
                      String config_path="") :
                       ThresholdTransform<int, bool>(minValue, maxValue, inRange, !inRange, config_path)
                       {}
