@@ -5,14 +5,14 @@ void ThresholdTransform<C,P>::set_input(C input, uint8_t inputChannel) {
   
   if(input >= minValue && input <= maxValue)
   {
-      output = inRange;
+      this->output = inRange;
   }
   else
   {
-      output = outRange;
+      this->output = outRange;
   }
   
-  notify();
+  this->notify();
 }
 
 
