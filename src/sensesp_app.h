@@ -15,9 +15,11 @@
 #include "system/valueconsumer.h"
 #include "system/observablevalue.h"
 
+enum StdSensors_t { allStdSensors, noStdSensors, uptimeOnly };
+
 class SensESPApp {
  public:
-  SensESPApp();
+  SensESPApp(StdSensors_t stdSensors = allStdSensors);
   void enable();
   void reset();
   String get_hostname();
@@ -33,10 +35,10 @@ class SensESPApp {
                       ObservableValue<String>* hostname) {
     String hostname_str = hostname->get();
     String value_name = sensor->get_value_name();
-    String sk_path = "sensors." + hostname_str + "." + value_name;
+    String sk_path = hostname_str + "." + value_name;
     auto comp_set_sk_path = [hostname, transform, value_name](){
         transform->set_sk_path(
-          "sensors." + hostname->get() + "." + value_name);
+          hostname->get() + "." + value_name);
     };
     comp_set_sk_path();
     sensor->attach([sensor, transform](){
@@ -62,7 +64,8 @@ class SensESPApp {
 
 
  private:
-  void setup_standard_sensors(ObservableValue<String>* hostname);
+  StdSensors_t stdSensors;
+  void setup_standard_sensors(ObservableValue<String>* hostname, StdSensors_t stdSensors = allStdSensors);
 
   HTTPServer* http_server;
   LedBlinker led_blinker;
