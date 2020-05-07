@@ -1,4 +1,5 @@
 #include <Arduino.h>
+// modified
 
 #include "sensesp_app.h"
 #include "sensors/i2c_input.h"
@@ -219,10 +220,11 @@ char buf[128];
 		pI2CInput -> connectTo(new SKOutputNumber(buf));
 		sprintf(buf, "%sCalibration",config_path);
 		pI2CInput = new I2CInput(0x60,30, buf, 8);
+		pI2CInput -> connectTo(new SKOutputNumber(buf));
 		sprintf(buf, "%sPitch",config_path);
 		pI2CInput = new I2CInput(0x60,4, buf, 8);
 		pI2CInput -> connectTo(new SKOutputNumber(buf));
-		sprintf(buf, "%sRoll",config_path);
+		sprintf(buf, "%sXRoll",config_path);
 		pI2CInput = new I2CInput(0x60,5, buf, 8);
 		pI2CInput -> connectTo(new SKOutputNumber(buf));
 	// Start the SensESP application running

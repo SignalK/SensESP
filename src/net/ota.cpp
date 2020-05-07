@@ -36,6 +36,9 @@ void setup_OTA() {
     else if (error == OTA_END_ERROR) { debugE("OTA End Failed"); }
   });
   ArduinoOTA.begin();
+   Serial.println("Ready");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
   //app.onTick(&handle_OTA);
   app.onRepeat(20, handle_OTA);
 }

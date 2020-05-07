@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- configuration for avnav_server on windows
+     we do not have a gpsd and we can only directly use serial readers -->
+<AVNServer>
+<AVNConfig loglevel="INFO"
+	logfile="#DATADIR#/log/avnav.log" 
+	debugToLog="true"/>
+<Readers>
+<AVNGpsdFeeder useGpsd="false" listenerPort="0" port="0" />
+<!-- <AVNSerialReader name="com4reader" port="3" useFeeder="true"/>-->
+<!-- add readers here for com ports that you want to listen on -->
+<!--<AVNSerialReader useFeeder="true" name="com8reader" port="7" baud="38400" minbaud="4800"/>-->
+<!-- bluetooth support
+	 we have a scanner that is looking for bluetooth devices
+	 if one is found, it will try to connect and feed the data through the gpsd feeder
+	 this avoids the need for more or less broken rfcomm stuff
+	  -->
+
+<AVNBlueToothReader maxDevices="5" >
+</AVNBlueToothReader>
+
+<!-- udev based detection of serial devices
+	 we can have an autodetection here but can also add defined devices
+	 to e.g. limit to some USB ports (or later for output)
+	 identification of devices is based on the USB bus id
+	 this heavily depends on the topology of the connected devices
+	 for my setup with an USB 4 port HUB at the upper USB port
+	 a device at the hubs first port will look like: 1-1.2.1:1.0 ,
+	 at the second 1-1.2.2:1.0 - potentially you must check the logs
+	 The below config uses a predefined device with this ID and 
+	 room for 4 additional autodetect devices
+	 The serial parameters are the same like for all serial readers
+	 We use autobaud between 4800 and 38400 here
+	 The data is feed through the gpsd feeder
+	 -->
+<AVNUsbSerialReader maxDevices="5" allowUnknown="true" baud="38400" minbaud="4800">
+	<UsbDevice usbid="1-1.2.1:1.0" baud="38400" minbaud="4800"/>
+	<!-- a serial output device at one particular USB port
+             with this filter it will output all NMEA data but no AIS data
+             you can further restrict this by using e.g. $RMC for NMEA RMC sentences 
+	     in this configuration it additionally has a reader enabled that runs at the same baudrate
+	     use a readerFilter to also apply a filter at the reader-->
+	<!-- <UsbDevice usbid="3-4.3.1:1.0" baud="38400" type="writer" xonxoff="1" timeout="10" filter="$RMC" combined="True" /> -->
+	<!-- more readable form ...-->
+	<UsbDevice usbid="3-4.3.1:1.0" baud="38400" type="combined" xonxoff="1" timeout="10" filter="$RMC" />
+	<!-- a device to be ignored - e.g. for testing -->
+	<UsbDevice usbid="3-10.1:1.0" baud="38400" type="ignore" />
+	<!-- a reader with autobaud and filter - it will filter out any RMC records and all AIS stuff-->
+	<!--<UsbDevice usbid="3-4.3.2:1.0" baud="38400" minbaud="4800" type="reader" filter="^$RMC,^!"/>-->
+	<!-- a pure writer that outputs RMB -->
+	<UsbDevice usbid="3-10.3.1:1.0" baud="4800" minbaud="4800" type="writer" filter="$RMB"/>
+	<!--<UsbDevice usbid="3-4.3.2:1.0" baud="38400" minbaud="4800" type="ignore" filter=""/>-->
+</AVNUsbSerialReader>
+
+
+
+<!-- for testing purposes: connect to a socket for reading NMEA data -->
+<!--<AVNSocketReader host="localhost" port="34568"/>-->
+	<AVNUdpReader port="34667" minTime="100"></AVNUdpReader>
+</Readers>
+<!-- provide your data at this port for e.g. OpenCPN -->
+<AVNSocketWriter port="34567" maxDevices="5" filter="" read="true" minTime="100"/>
+<AVNTrackWriter interval="10" distance="100" trackdir="#DATADIR#/tracks"/>
+<AVNHttpServer navurl="/viewer/avnav_navi.php" httpPort="8080" upzoom="0"
+               chartbase="maps" empty="nonexistent">
+<!-- chartbaseurl="http://$host/Karten/anav"> -->
+	<Directory urlpath="maps" path="~/AvNavCharts/out"></Directory>
+	<MimeType extension=".avt" type="text/plain"></MimeType>
+	<MimeType extension=".log" type="text/plain"></MimeType>
+</AVNHttpServer>
+<!-- create chart overview files -->
+<AVNChartHandler></AVNChartHandler>
+    <!--  routing handler -->
+<AVNRouter routesdir="#DATADIR#/routes"></AVNRouter>
+<!--<AVNNmeaLogger filter="$" interval="0"></AVNNmeaLogger>-->
+<AVNNmeaLogger></AVNNmeaLogger>
+<AVNImporter importDir="#DATADIR#/import"></AVNImporter>
+<AVNWpaHandler></AVNWpaHandler>
+<AVNCommandHandler>
+	<Command name="sound" command="mpg123 -q" repeat="1"/>
+</AVNCommandHandler>
+<AVNAlarmHandler>
+	<Alarm name="waypoint" command="sound" parameter="$BASEDIR/../sounds/waypointAlarm.mp3" repeat="1"/>
+	<Alarm name="ais" command="sound" parameter="$BASEDIR/../sounds/aisAlarm.mp3" repeat="1"/>
+	<Alarm name="anchor" command="sound" parameter="$BASEDIR/../sounds/anchorAlarm.mp3" repeat="20000"/>
+	<Alarm name="gps" command="sound" parameter="$BASEDIR/../sounds/anchorAlarm.mp3" repeat="20000"/>
+</AVNAlarmHandler>
+</AVNServer>
