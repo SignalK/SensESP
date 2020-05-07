@@ -2,9 +2,9 @@
 // modified
 
 #include <sensesp_app.h>
-#include "sensors/i2c_input.h"
-#include "transforms/linear.h"
-#include "signalk/signalk_output.h"
+#include <sensors/i2c_input.h>
+#include <transforms/linear.h>
+#include <signalk/signalk_output.h>
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
