@@ -1,7 +1,7 @@
 #include <Arduino.h>
 // modified
 
-#include "sensesp_app.h"
+#include <sensesp_app.h>
 #include "sensors/i2c_input.h"
 #include "transforms/linear.h"
 #include "signalk/signalk_output.h"
