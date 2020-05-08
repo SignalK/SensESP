@@ -14,6 +14,7 @@ bool I2CInput::scanI2CAddress(uint8_t address)
   if (errorCode == 0) {
     return true;
   }
+
   return false;
 }
 
@@ -67,12 +68,25 @@ void I2CInput::update()
   else
     output = ReadI2C(address, regi, 2);
   this->notify();
+  /*
+  {
+    static int i=0;
+  static clock_t old_t;
+  clock_t new_t;
+  new_t = millis();
+  debugD("\nreg:%d-update: %dms\n", regi,millis());
+  i++;
+  //debugD("%s\n",output.c_str());
+  
+old_t = new_t;
+}
+*/
   // poll
 }
 
 void I2CInput::enable() 
 {
-  app.onRepeat(200, [this](){ this->update(); });
+  app.onRepeat(100, [this](){ this->update(); });
 }
 
 JsonObject& I2CInput::get_configuration(JsonBuffer& buf) {
@@ -145,14 +159,14 @@ float I2CInput::ReadI2C(uint8_t address, uint8_t regi, uint8_t count)
   Wire.requestFrom(address, count); // either both int or both uint8_t...
   if (Wire.available() >= count)
     {
-    Serial.printf("\n%d gelesen von register %d\n",count, regi);
+    //Serial.printf("\n%d gelesen von register %d\n",count, regi);
     for(i=0; i < count; i++)
 
       {
        data[i] = Wire.read();
-       Serial.printf("[%d]:%x,", i, data[i]);
+       //Serial.printf("[%d]:%x,", i, data[i]);
       } 
-    Serial.printf("\n");
+    //Serial.printf("\n");
     }
 
   errorCode = Wire.endTransmission();
@@ -169,13 +183,13 @@ float I2CInput::ReadI2C(uint8_t address, uint8_t regi, uint8_t count)
       {
         k= ((unsigned char)data[0])<<8;
         k+=(unsigned char)data[1];
-        Serial.printf("k HEX: %x  DEZ: %d DBL:%f\n\n", k,k,k);
+        //Serial.printf("k HEX: %x  DEZ: %d DBL:%f\n\n", k,k,k);
       }
       else
       {
         k= (int)((char)data[0]);
-        Serial.printf("k HEX: %x  DEZ: %d DBL:%f\n\n", k,k,k);
-        Serial.printf("k HEX: %x  DEZ: %d DBL:%f\n\n", k,k,k);
+        //Serial.printf("k HEX: %x  DEZ: %d DBL:%f\n\n", k,k,k);
+        //Serial.printf("k HEX: %x  DEZ: %d DBL:%f\n\n", k,k,k);
       }
       
     // Convert the data

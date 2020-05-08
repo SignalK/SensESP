@@ -25,7 +25,7 @@ char buf[128];
 
 
 	// Create the global SensESPApp() object.
-	sensesp_app = new SensESPApp();
+	sensesp_app = new SensESPApp(uptimeOnly);
 
 
 	// The "SignalK path" identifies this sensor to the SignalK network. Leaving

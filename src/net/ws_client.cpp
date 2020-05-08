@@ -15,6 +15,7 @@
 #include <WiFiClient.h>
 
 #include "sensesp_app.h"
+#include "time.h"
 
 WSClient* ws_client;
 
@@ -336,8 +337,18 @@ void WSClient::send_delta() {
     if (connection_state==connected) {
       this->client.sendTXT(output);
       this->delta_cb();
+       {
+  static clock_t old_t;
+  clock_t new_t;
+  new_t = millis();
+  //debugD("\nsend_delta time: %d\n", new_t-old_t);
+  //debugD("%s\n",output.c_str());
+  
+old_t = new_t;
+}
     }
   }
+ 
 }
 
 JsonObject& WSClient::get_configuration(JsonBuffer& buf) {

@@ -37,6 +37,6 @@ void SKDelta::get_delta(String& output) {
 
   delta.printTo(output);
 
-  debugD("SKDelta::get_delta: %s", output.c_str());
+  //debugD("SKDelta::get_delta: %s", output.c_str());
 }
 
