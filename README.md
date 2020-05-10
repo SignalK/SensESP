@@ -93,8 +93,7 @@ Configuration can be updated with HTTP PUT requests:
 - [x] Authentication token support
 - [x] Make the project a library
 - [x] Web configuration UI
-- [ ] Control device support. For now, all devices are read-only, and controls such as leds, relays, or
-PWM output are not supported.
+- [x] Control device support. Support for SKValueListener is working with WS subscription. Relay sample is working, LEDs should work.
 
 SensESP Class Diagram
 ----------------------------
