@@ -22,12 +22,12 @@ class SKListener : virtual public Observable {
          * The constructor
          * @param sk_path The SignalK path that identifies
          * this particular subscription to value
-         * @param listen_delay The SignalK transmission rate, e.g. every period/1000 seconds.
+         * @param listen_delay How often to check for the value
          */
         SKListener(String sk_path, int listen_delay);
 
         /**
-         * Returns the current SignalK path.  An empty string
+         * Returns the current SignalK path. An empty string
          * is returned if this particular source is not configured
          * or intended to return actual data.
          */
@@ -35,7 +35,7 @@ class SKListener : virtual public Observable {
             return sk_path;
         }
 
-        int getListenDelay()
+        int get_listen_delay()
         {
             return listen_delay;
         }

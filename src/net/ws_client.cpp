@@ -107,15 +107,14 @@ void WSClient::subscribe_listeners() {
     for (size_t i = 0; i < listeners.size(); i++) {
       auto* listener = listeners.at(i);
       String sk_path = listener->get_sk_path();
-      int listenDelay = listener->getListenDelay();
+      int listen_delay = listener->get_listen_delay();
 
       JsonObject& subscribePath = subscribe.createNestedObject();
 
       subscribePath["path"] = sk_path;
-      subscribePath["period"] = listenDelay;
+      subscribePath["period"] = listen_delay;
 
-      debugI("Adding %s subscription with listen delay %d\n", sk_path.c_str(),
-             listenDelay);
+      debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(), listen_delay);
     }
 
     String messageJson;
