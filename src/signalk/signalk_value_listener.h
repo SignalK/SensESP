@@ -13,9 +13,9 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
  public:
   SKValueListener(String sk_path, int listen_Delay = 1000) : SKListener(sk_path, listen_Delay) 
   {
-       if(sk_path.isEmpty())
+       if(sk_path == "")
        {
-            DEBUG_E("SKValueListener: User has provided empty sk_path. The subscription will not work as expected!");
+            debugE("SKValueListener: User has provided no sk_path to listen to.");
        }
   }
 
@@ -28,7 +28,7 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
 
 };
 
-typedef SKValueListener<float> SKFloatListener;
+typedef SKValueListener<float> SKNumericListener;
 typedef SKValueListener<int> SKIntListener;
 typedef SKValueListener<bool> SKBoolListener;
 typedef SKValueListener<String> SKStringListener;

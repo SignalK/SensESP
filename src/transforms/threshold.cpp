@@ -1,7 +1,7 @@
 #include "threshold.h"
 
 template <class C, class P>
-void ThresholdTransform<C,P>::set_input(C input, uint8_t inputChannel) {
+void ThresholdTransform<C, P>::set_input(C input, uint8_t inputChannel) {
   
   if(input >= minValue && input <= maxValue)
   {
@@ -29,10 +29,10 @@ JsonObject& NumericThreshold::get_configuration(JsonBuffer& buf)
 static const char NUMERIC_SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "min": { "title": "Minimal value", "type": "number", "description" : "Minimum value when output will be set to In range value." },
-        "max": { "title": "Maximal value", "type": "number", "description" : "Maximum value when output will be set to In range value." },
-        "in_range": { "title": "In range value", "type": "boolean", "description" : "Output value (1/0 eg. on/off) when input value is in range defined." },
-        "value": { "title": "Last value", "type": "boolean" }
+        "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
+        "max": { "title": "Maximum value", "type": "number", "description" : "Maximum value to be 'in range'" },
+        "in_range": { "title": "In range value", "type": "boolean", "description" : "Output value when input value is 'in range'" },
+        "value": { "title": "Last value", "type" : "boolean", "readOnly": true }
     }
   })";
 
@@ -71,10 +71,10 @@ static const char NUMERIC_SCHEMA[] PROGMEM = R"({
   static const char INTEGER_SCHEMA[] PROGMEM = R"({
       "type": "object",
       "properties": {
-          "min": { "title": "Minimal value", "type": "number", "description" : "Minimum value when output will be set to In range value." },
-          "max": { "title": "Maximal value", "type": "number", "description" : "Maximum value when output will be set to In range value." },
-          "in_range": { "title": "In range value", "type": "boolean", "description" : "Output value (1/0 eg. on/off) when input value is in range defined." },
-          "value": { "title": "Last value", "type": "boolean" }
+          "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
+          "max": { "title": "Maximum value", "type": "number", "description" : "Maximum value to be 'in range'" },
+          "in_range": { "title": "In range value", "type": "boolean", "description" : "Output value when input value is 'in range'" },
+          "value": { "title": "Last value", "type" : "boolean", "readOnly": true }
       }
     })";
 
