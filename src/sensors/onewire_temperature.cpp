@@ -94,8 +94,8 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
 }
 
 OneWireTemperature::OneWireTemperature(
-    DallasTemperatureSensors* dts, String config_path)
-    : NumericSensor(config_path), dts{dts} {
+    DallasTemperatureSensors* dts, uint read_delay, String config_path)
+    : NumericSensor(config_path), dts{dts}, read_delay{read_delay}{
   className = "OneWireTemperature";
   load_configuration();
   if (address==null_ow_addr) {
@@ -126,7 +126,7 @@ OneWireTemperature::OneWireTemperature(
 
 void OneWireTemperature::enable() {
   if (found) {
-    app.onRepeat(1000, [this](){ this->update(); });
+    app.onRepeat(read_delay, [this](){ this->update(); });
   }
 }
 

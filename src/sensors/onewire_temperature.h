@@ -26,7 +26,7 @@ class DallasTemperatureSensors : public Sensor {
 
 class OneWireTemperature : public NumericSensor {
  public:
-  OneWireTemperature(DallasTemperatureSensors* dts,
+  OneWireTemperature(DallasTemperatureSensors* dts, uint read_delay = 1000,
                      String config_path="");
   void enable() override final;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
@@ -36,6 +36,7 @@ class OneWireTemperature : public NumericSensor {
  private:
   OneWire* onewire;
   DallasTemperatureSensors* dts;
+  uint read_delay;
   bool found = true;
   OWDevAddr address = {};
   void update();

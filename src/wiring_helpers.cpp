@@ -17,6 +17,7 @@
 #include "transforms/transform.h"
 
 
+// Obsolete.
 void setup_analog_input(
     String sk_path, float k, float c,
     String config_path) {
@@ -33,46 +34,46 @@ void setup_fuel_flow_meter(
   //////////
   // connect a fuel flow meter with return line
 
-  auto* dic1 = new DigitalInputCounter(inflow_pin, INPUT_PULLUP, CHANGE, 1000);
-  auto* dic2 = new DigitalInputCounter(return_flow_pin, INPUT_PULLUP, CHANGE, 1000);
+  auto* dicIn = new DigitalInputCounter(inflow_pin, INPUT_PULLUP, CHANGE, 1000);
+  auto* dicOut = new DigitalInputCounter(return_flow_pin, INPUT_PULLUP, CHANGE, 1000);
 
-  Frequency* freq1;
-  Frequency* freq2;
+  Frequency* freqIn;
+  Frequency* freqOut;
 
-  dic1->connectTo(freq1 = new Frequency())
-      -> connectTo(new SKOutputNumber("sensors.inflow.frequency"));
+  dicIn->connectTo(freqIn = new Frequency())
+      -> connectTo(new SKOutputNumber("fuelflow.inflow.frequency"));
 
-  dic2->connectTo(freq2 = new Frequency())
-      -> connectTo(new SKOutputNumber("sensors.outflow.frequency"));
+  dicOut->connectTo(freqOut = new Frequency())
+      -> connectTo(new SKOutputNumber("fuelflow.outflow.frequency"));
 
 
   // Here, each pulse of a flow sensor represents 0.46ml of flow
   // for both inflow and outflow
   auto* diff = new Difference(0.46/1e6, 0.46/1e6,
-                              "/sensors/fuel/rate/calibrate");
+                              "/fuelflow/fuel/rate/calibrate");
 
-  diff->connectFrom(freq1, freq2)
-      -> connectTo(new SKOutputNumber("propulsion.main.fuel.rate", "/sensors/fuel/rate/sk"))
-      -> connectTo(new MovingAverage(10, 1., "/sensors/fuel/average/calibrate")) // this is the same as above, but averaged over 10 s
-      -> connectTo(new SKOutputNumber("propulsion.main.fuel.averageRate", "/sensors/fuel/average/sk"));
+  diff->connectFrom(freqIn, freqOut)
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.rate", "/fuelflow/fuel/rate/sk"))
+      -> connectTo(new MovingAverage(10, 1., "/fuelflow/fuel/average/calibrate")) // this is the same as above, but averaged over 10 s
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.averageRate", "/fuelflow/fuel/average/sk"));
 
 
   // Integrate the net flow over time. The output is dependent
   // on the the input counter update rate!
   diff->connectTo(new Integrator(1., 0.))
-      -> connectTo(new SKOutputNumber("propulsion.main.fuel.used", "/sensors/fuel/used/sk"));
+      -> connectTo(new SKOutputNumber("propulsion.main.fuel.used", "/fuelflow/fuel/used/sk"));
 
 
   // Integrate the total outflow over time. The output is dependent
   // on the the input counter update rate!
-  freq1-> connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/in_used/calibrate"))
-       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedGross", "/sensors/fuel/in_used/sk"));
+  freqIn-> connectTo(new Integrator(0.46/1e6, 0., "/fuelflow/fuel/in_used/calibrate"))
+       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedGross", "/fuelflow/fuel/in_used/sk"));
 
 
   // Integrate the net fuel flow over time. The output is dependent
   // on the the input counter update rate!
-  freq2->connectTo(new Integrator(0.46/1e6, 0., "/sensors/fuel/out_used/calibrate"))
-       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedReturn", "/sensors/fuel/out_used/sk"));
+  freqOut->connectTo(new Integrator(0.46/1e6, 0., "/fuelflow/fuel/out_used/calibrate"))
+       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedReturn", "/fuelflow/fuel/out_used/sk"));
 }
 
 
@@ -114,6 +115,7 @@ GPSInput* setup_gps(Stream* rx_stream) {
   return gps;
 }
 
+//Obsolete
 void setup_onewire_temperature(
     SensESPApp* seapp,
     DallasTemperatureSensors* dts,
@@ -125,6 +127,7 @@ void setup_onewire_temperature(
     new SKOutputNumber(sk_path, config_path));
 }
 
+//Obsolete
 void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
   //////////
   // connect a RPM meter. A DigitalInputCounter counts pulses

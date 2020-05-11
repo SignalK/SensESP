@@ -2,7 +2,8 @@
 
 VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path) :
    SymmetricTransform<float>(config_path ), R1{R1}, Vin{Vin} {
-     className = "VoltageDivider2";
+     className = "VoltageDividerR2";
+     load_configuration();
 }
 
 void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {

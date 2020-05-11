@@ -24,38 +24,44 @@ ReactESP app([] () {
   sensesp_app = new SensESPApp();
 
 
-  // The "SignalK path" identifies this sensor to the SignalK network. Leaving
+  // The "SignalK path" identifies this sensor to the SignalK server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
-  // broadcast SignalK data
-  const char* sk_path = "sensors.indoor.illumination";
+  // broadcast SignalK data.
+  const char* sk_path = "indoor.illumination";
 
 
   // The "Configuration path" is combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
   // It is ALSO used to specify a path to the SPIFFS file system
-  // where configuration data is saved on the MCU board.  It should
-  // ALWAYS start with a forward slash if specified.  If left blank,
+  // where configuration data is saved on the MCU board. It should
+  // ALWAYS start with a forward slash if specified. If left blank,
   // that indicates this sensor or transform does not have any
-  // configuration to save.
-  // Note that if you want to be able to change the sk_path at runtime,
-  // you will need to specify a config_path.
-  const char* config_path = "/sensors/indoor_illumination";
+  // configuration to save, or that you're not interested in doing
+  // run-time configuration.
+  const char* analog_in_config_path = "/indoor_illumination/analog_in";
+  const char* linear_config_path = "/indoor_illumination/linear";
+  
 
+  // Create a sensor that is the source of our data, that will be read every 500 ms. 
+  // It's a light sensor that's connected to the ESP's AnalogIn pin. When it's dark,
+  // the sensor's output (as read by analogRead()) is 120, and when it's bright,
+  // the output is 850, for a range of 730.
+  uint read_delay = 500;
+  
+  auto* pAnalogInput = new AnalogInput(read_delay, analog_in_config_path);
 
-  // Create a "sensor" that is the source of our data
-  auto* pAnalogInput = new AnalogInput();
+  // A Linear transform takes its input, multiplies it by the multiplier, then adds the offset,
+  // to calculate its output. In this example, we want to see the final output presented
+  // as a percentage, where dark = 0% and bright = 100%. To get a percentage, we use this formula:
+  // sensor output * (100 / 730) - 16.44 = output (a percentage from 0 to 100).
+  // Dark = 120 * (100 / 730) + (-16.44) = 0%
+  // Bright = 850 * (100 / 730) + (-16.44) = 100%
+  const float multiplier = 0.137; // 100% divided by 730 = 0.137 "percent per analogRead() unit"
+  const float offset = -16.44;
 
-
-  // Create a "transform" that can modify the data and/or broadcast it
-  // over the SignalK network.
-  const float multiplier = 1.0;
-  const float offset = 0.0;
-  auto* pTransform = new Linear(multiplier, offset, config_path);
-
-
-  // Wire up the output of the analog input to the transform,
-  // and then output the results on the SignalK network...
-  pAnalogInput -> connectTo(pTransform)
+  // Wire up the output of the analog input to the Linear transform,
+  // and then output the results to the SignalK server.
+  pAnalogInput -> connectTo(new Linear(multiplier, offset, linear_config_path))
                -> connectTo(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running
