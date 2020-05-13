@@ -13,28 +13,48 @@ DigitalInput::DigitalInput(
 }
 
 DigitalInputValue::DigitalInputValue(
-    uint8_t pin, int pin_mode, int interrupt_type,
+    uint8_t pin, int pin_mode, int interrupt_type, int read_delay,
     String config_path) :
       DigitalInput{pin, pin_mode, interrupt_type, config_path},
-      BooleanProducer() {
+      IntegerProducer(), read_delay{read_delay} {
         className = "DigitalInputValue";
       }
 
 void DigitalInputValue::enable() {
-  app.onInterrupt(
-    pin, interrupt_type,
-    [this](){
-      output = digitalRead(pin);
-      triggered = true;
-    });
-  app.onTick(
-    [this](){
-      if (triggered) {
-        triggered = false;
+  app.onRepeat(read_delay, [this](){
+    output = digitalRead(pin);
         notify();
-      }
+  });
+}
+
+JsonObject& DigitalInputValue::get_configuration(JsonBuffer& buf) {
+  JsonObject& root = buf.createObject();
+  root["read_delay"] = read_delay;
+  root["value"] = output;
+  return root;
+  };
+
+  static const char SCHEMA2[] PROGMEM = R"###({
+    "type": "object",
+    "properties": {
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
+        "value": { "title": "Last value", "type" : "number", "readOnly": true }
     }
-  );
+  })###";
+
+  String DigitalInputValue::get_config_schema() {
+  return FPSTR(SCHEMA2);
+}
+
+bool DigitalInputValue::set_configuration(const JsonObject& config) {
+  String expected[] = {"read_delay"};
+  for (auto str : expected) {
+    if (!config.containsKey(str)) {
+      return false;
+    }
+  }
+  read_delay = config["read_delay"];
+  return true;
 }
 
 
