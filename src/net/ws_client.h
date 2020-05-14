@@ -1,6 +1,6 @@
 #ifndef _ws_client_H_
 #define _ws_client_H_
-
+#include <set>
 #include <functional>
 
 #include <WebSocketsClient.h>
@@ -50,6 +50,7 @@ class WSClient : public Configurable {
   void send_access_request(const String host, const uint16_t port);
   void poll_access_request(const String host, const uint16_t port, const String href);
   void connect_ws(const String host, const uint16_t port);
+  void subscribe_listeners();
   std::function<void(bool)> connected_cb;
   void_cb_func delta_cb;
   bool get_mdns_service(String &server_address, uint16_t& server_port);

@@ -4,11 +4,11 @@
 
 #include <ArduinoJson.h>
 #ifdef ESP8266
-  #include <ESP8266HTTPClient.h>
-  #include <ESP8266mDNS.h>        // Include the mDNS library
+#include <ESP8266HTTPClient.h>
+#include <ESP8266mDNS.h>  // Include the mDNS library
 #elif defined(ESP32)
-  #include <HTTPClient.h>
-  #include <ESPmDNS.h>
+#include <HTTPClient.h>
+#include <ESPmDNS.h>
 #endif
 
 #include <ESPTrueRandom.h>
@@ -16,10 +16,12 @@
 
 #include "sensesp_app.h"
 
+#include "signalk/signalk_listener.h"
+
 WSClient* ws_client;
 
-void webSocketClientEvent(WStype_t type, uint8_t * payload, size_t length) {
-  switch(type) {
+void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
+  switch (type) {
     case WStype_DISCONNECTED:
       ws_client->on_disconnected();
       break;
@@ -35,12 +37,13 @@ void webSocketClientEvent(WStype_t type, uint8_t * payload, size_t length) {
     default:
       // Do nothing for other types
       break;
-   }
+  }
 }
 
 WSClient::WSClient(String config_path, SKDelta* sk_delta,
                    std::function<void(bool)> connected_cb,
-                   void_cb_func delta_cb) : Configurable{config_path} {
+                   void_cb_func delta_cb)
+    : Configurable{config_path} {
   this->sk_delta = sk_delta;
   this->connected_cb = connected_cb;
   this->delta_cb = delta_cb;
@@ -52,26 +55,26 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta,
 }
 
 void WSClient::enable() {
-  app.onDelay(0, [this](){ this->connect(); });
-  app.onRepeat(20, [this](){ this->loop(); });
-  app.onRepeat(100, [this](){ this->send_delta(); });
-  app.onRepeat(10000, [this](){ this->connect_loop(); });
+  app.onDelay(0, [this]() { this->connect(); });
+  app.onRepeat(20, [this]() { this->loop(); });
+  app.onRepeat(100, [this]() { this->send_delta(); });
+  app.onRepeat(10000, [this]() { this->connect_loop(); });
 }
 
 void WSClient::connect_loop() {
-  if (this->connection_state==disconnected) {
+  if (this->connection_state == disconnected) {
     this->connect();
   }
 }
 
 void WSClient::on_disconnected() {
   if (this->connection_state == connecting && server_detected) {
-     // Going from connecting directly to disconnect when we
-     // know we have found and talked to the server usually means
-     // the authentication token is bad.
-     debugW("Bad access token detected. Setting token to null.");
-     auth_token = NULL_AUTH_TOKEN;
-     save_configuration();
+    // Going from connecting directly to disconnect when we
+    // know we have found and talked to the server usually means
+    // the authentication token is bad.
+    debugW("Bad access token detected. Setting token to null.");
+    auth_token = NULL_AUTH_TOKEN;
+    save_configuration();
   }
   this->connection_state = disconnected;
   server_detected = false;
@@ -84,20 +87,85 @@ void WSClient::on_error() {
   this->connected_cb(false);
 }
 
-void WSClient::on_connected(uint8_t * payload) {
+void WSClient::on_connected(uint8_t* payload) {
   this->connection_state = connected;
   debugI("Websocket client connected to URL: %s\n", payload);
   this->connected_cb(true);
+  debugI("Subscribing to SignalK listeners...");
+  this->subscribe_listeners();
 }
 
-void WSClient::on_receive_delta(uint8_t * payload) {
+void WSClient::subscribe_listeners() {
+  const std::vector<SKListener*>& listeners = SKListener::get_listeners();
+
+  if (listeners.size() > 0) {
+    DynamicJsonBuffer jsonBuffer;
+    JsonObject& subscription = jsonBuffer.createObject();
+    subscription["context"] = "vessels.self";
+    JsonArray& subscribe = subscription.createNestedArray("subscribe");
+
+    for (size_t i = 0; i < listeners.size(); i++) {
+      auto* listener = listeners.at(i);
+      String sk_path = listener->get_sk_path();
+      int listen_delay = listener->get_listen_delay();
+
+      JsonObject& subscribePath = subscribe.createNestedObject();
+
+      subscribePath["path"] = sk_path;
+      subscribePath["period"] = listen_delay;
+
+      debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(), listen_delay);
+    }
+
+    String messageJson;
+
+    subscription.printTo(messageJson);
+    debugI("Subscription JSON message:\n %s", messageJson.c_str());
+    this->client.sendTXT(messageJson);
+  }
+}
+
+void WSClient::on_receive_delta(uint8_t* payload) {
+  #ifdef SIGNALK_PRINT_RCV_DELTA
   debugD("Websocket payload received: %s", (char*)payload);
+  #endif
+  
+  DynamicJsonBuffer jsonBuffer;
+  JsonObject& message = jsonBuffer.parseObject(String((char*)payload));
+
+  if (message.success()) {
+    JsonArray& updates = message["updates"];
+
+    for (size_t i = 0; i < updates.size(); i++) {
+      JsonObject& update = updates[i];
+
+      JsonArray& values = update["values"];
+
+      for (size_t vi = 0; vi < values.size(); vi++) {
+        JsonObject& value = values[vi];
+        
+        const char* path = value["path"];
+        //debugD("Got update of value %s\n", path);
+
+        const std::vector<SKListener*>& listeners = SKListener::get_listeners();
+
+        for (size_t i = 0; i < listeners.size(); i++)
+        {
+          SKListener* listener = listeners[i];
+          if(listener->get_sk_path().equals(path))
+          {
+            listener->parseValue(value);
+          }
+        }        
+      }
+    }
+  }
 }
 
 bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
   // get IP address using an mDNS query
   int n = MDNS.queryService("signalk-ws", "tcp");
-  if (n==0) {
+  if (n == 0) {
     // no service found
     return false;
   } else {
@@ -109,7 +177,7 @@ bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
 }
 
 void WSClient::connect() {
-  if (connection_state!=disconnected) {
+  if (connection_state != disconnected) {
     return;
   }
   debugD("Initiating connection");
@@ -149,13 +217,14 @@ void WSClient::connect() {
   this->test_token(server_address, server_port);
 }
 
-void WSClient::test_token(const String server_address, const uint16_t server_port) {
-
+void WSClient::test_token(const String server_address,
+                          const uint16_t server_port) {
   // FIXME: implement async HTTP client!
   WiFiClient client;
   HTTPClient http;
 
-  String url = String("http://") + server_address + ":" + server_port + "/signalk/v1/api/";
+  String url = String("http://") + server_address + ":" + server_port +
+               "/signalk/v1/api/";
   debugD("Testing token with url %s", url.c_str());
   http.begin(client, url);
   String full_token = String("JWT ") + auth_token;
@@ -169,8 +238,7 @@ void WSClient::test_token(const String server_address, const uint16_t server_por
       debugD("Returned payload (length %d) is: ", payload.length());
       debugD("%s", payload.c_str());
       debugD("End of payload output");
-    }
-    else {
+    } else {
       debugD("Returned payload is empty");
     }
     if (httpCode == 200) {
@@ -189,7 +257,8 @@ void WSClient::test_token(const String server_address, const uint16_t server_por
   }
 }
 
-void WSClient::send_access_request(const String server_address, const uint16_t server_port) {
+void WSClient::send_access_request(const String server_address,
+                                   const uint16_t server_port) {
   debugD("Preparing a new access request");
   if (client_id == "") {
     // generate a client ID
@@ -203,16 +272,15 @@ void WSClient::send_access_request(const String server_address, const uint16_t s
   DynamicJsonBuffer buf;
   JsonObject& req = buf.createObject();
   req["clientId"] = client_id;
-  req["description"] =
-    String("SensESP device: ") + sensesp_app->get_hostname();
+  req["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
   String json_req = "";
   req.printTo(json_req);
 
   WiFiClient client;
   HTTPClient http;
 
-  String url = String("http://") + server_address + ":" + server_port
-      + "/signalk/v1/access/requests";
+  String url = String("http://") + server_address + ":" + server_port +
+               "/signalk/v1/access/requests";
   http.begin(client, url);
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(json_req);
@@ -243,12 +311,14 @@ void WSClient::send_access_request(const String server_address, const uint16_t s
   save_configuration();
 
   debugD("Polling %s in 5 seconds", polling_href.c_str());
-  app.onDelay(5000, [this, server_address, server_port](){
+  app.onDelay(5000, [this, server_address, server_port]() {
     this->poll_access_request(server_address, server_port, this->polling_href);
   });
 }
 
-void WSClient::poll_access_request(const String server_address, const uint16_t server_port, const String href) {
+void WSClient::poll_access_request(const String server_address,
+                                   const uint16_t server_port,
+                                   const String href) {
   debugD("Polling SK Server for authentication token");
 
   WiFiClient client;
@@ -265,7 +335,9 @@ void WSClient::poll_access_request(const String server_address, const uint16_t s
     String state = resp["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
-      app.onDelay(5000, [this, server_address, server_port, href](){ this->poll_access_request(server_address, server_port, href); });
+      app.onDelay(5000, [this, server_address, server_port, href]() {
+        this->poll_access_request(server_address, server_port, href);
+      });
       return;
     } else if (state == "COMPLETED") {
       JsonObject& access_req = resp["accessRequest"];
@@ -282,13 +354,15 @@ void WSClient::poll_access_request(const String server_address, const uint16_t s
         String token = access_req["token"];
         auth_token = token;
         save_configuration();
-        app.onDelay(0, [this, server_address, server_port](){ this->connect_ws(server_address, server_port); });
+        app.onDelay(0, [this, server_address, server_port]() {
+          this->connect_ws(server_address, server_port);
+        });
         return;
       }
     }
   } else {
     http.end();
-    if (httpCode==500) {
+    if (httpCode == 500) {
       // this is probably the server barfing due to
       // us polling a non-existing request. Just
       // delete the polling href.
@@ -314,16 +388,12 @@ void WSClient::connect_ws(const String host, const uint16_t port) {
   this->client.setAuthorization(full_token.c_str());
 }
 
-void WSClient::loop() {
-  this->client.loop();
-}
+void WSClient::loop() { this->client.loop(); }
 
-bool WSClient::is_connected() {
-  return connection_state==connected;
-}
+bool WSClient::is_connected() { return connection_state == connected; }
 
 void WSClient::restart() {
-  if (connection_state==connected) {
+  if (connection_state == connected) {
     this->client.disconnect();
     connection_state = disconnected;
   }
@@ -333,7 +403,7 @@ void WSClient::send_delta() {
   String output;
   if (sk_delta->data_available()) {
     sk_delta->get_delta(output);
-    if (connection_state==connected) {
+    if (connection_state == connected) {
       this->client.sendTXT(output);
       this->delta_cb();
     }
@@ -361,10 +431,7 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String WSClient::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
-
+String WSClient::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool WSClient::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_address", "sk_port", "token", "client_id"};
