@@ -5,6 +5,7 @@ PR's since Version 0.4.3, since most of the work done prior to that was quite lo
 to most end users.
 
 ## Pull Requests Merged Since v0.4.3
+- [#127](https://github.com/SignalK/SensESP/pull/127) (2020/05/13) fix: small fixes to ESP32 support; update all examples for ESP32
 - [#118](https://github.com/SignalK/SensESP/pull/118) (2020/05/25) feature: add support for ESP32
 - [#125](https://github.com/SignalK/SensESP/pull/125) (2020/05/13) fix: DigitalInputValue was not getting to SK Server
 - [#123](https://github.com/SignalK/SensESP/pull/123) (2020/05/10) feature: add SKValueListener, Threshold transform, DigitalOut sensor
