@@ -14,16 +14,15 @@ ReactESP app([]() {
 #ifndef SERIAL_DEBUG_DISABLED
   Serial.begin(115200);
 
-  // A small arbitrary delay is required to let the
-  // serial port catch up
-
+  // A small delay and one debugI() are required so that
+  // the serial output displays everything
   delay(100);
   Debug.setSerialEnabled(true);
-#endif
+  #endif
+  delay(100);
+  debugI("Serial debug enabled");
 
   sensesp_app = new SensESPApp();
-
-
 
   // The "SignalK path" identifies the output of the sensor to the SignalK network.
   // If you have multiple sensors connected to your microcontoller (ESP), each one of them
@@ -70,6 +69,8 @@ const uint read_delay = 500;
 
 
   // Wire it all up by connecting the producer directly to the consumer
+  // ESP8266 pins are specified as DX
+  // ESP32 pins are specified as just the X in GPIOX
   auto* pSensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
 
   pSensor->connectTo(new Frequency(multiplier, config_path_calibrate))  // connect the output of pSensor to the input of Frequency()
