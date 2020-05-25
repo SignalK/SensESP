@@ -5,7 +5,8 @@
 
 #ifndef LED_PIN
 #define LED_PIN LED_BUILTIN  // If your board doesn't have a defined LED_BUILTIN, comment this line out...
-//#define LED_PIN 2        // ... and uncomment this line, and change 13 to any LED pin you have. If you have none, leave it at 13.
+//#define LED_PIN 2          // ... and uncomment this line, and change 13 to any LED pin you have. If you have none,
+                             // you can add an external LED to an available GPIO pin and use that pin number here.
 #endif
 
 LedBlinker::LedBlinker() {

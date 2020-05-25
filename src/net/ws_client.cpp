@@ -188,7 +188,9 @@ void WSClient::connect() {
   uint16_t server_port = 80;
 
   if (this->server_address.length() == 0) {
-    get_mdns_service(server_address, server_port);
+    if (!get_mdns_service(server_address, server_port)) {
+       debugI("No mDNS service found by get_mdns_service");
+    }
   } else {
     server_address = this->server_address;
     server_port = this->server_port;
