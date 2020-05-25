@@ -45,7 +45,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 }
 
 void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
-  WiFi.begin(ap_ssid, ap_password);
+  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
 
   uint32_t timer_start = millis();
 
