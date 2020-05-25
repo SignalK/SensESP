@@ -12,10 +12,10 @@ static float absf(float val) {
 
 
 ChangeFilter::ChangeFilter(float minDelta, float maxDelta, int maxSkips, String config_path) : 
+          NumericTransform(config_path),
           minDelta{minDelta},
           maxDelta{maxDelta},
-          maxSkips{maxSkips},
-          NumericTransform(config_path) {
+          maxSkips{maxSkips} {
 
   className = "ChangeFilter";
   load_configuration();

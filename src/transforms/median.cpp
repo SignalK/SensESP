@@ -2,8 +2,8 @@
 
 
 Median::Median(unsigned int sampleSize, String config_path) :
-    sampleSize{sampleSize},
-    NumericTransform(config_path) {
+    NumericTransform(config_path),
+    sampleSize{sampleSize} {
   className = "Median";
   load_configuration();
   buf.reserve(sampleSize);
