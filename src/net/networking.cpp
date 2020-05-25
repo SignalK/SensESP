@@ -89,6 +89,7 @@ void Networking::setup_wifi_manager(std::function<void(bool)> connection_cb) {
   }
 
   debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
+  debugI("IP address of Device: %s",  WiFi.localIP().toString().c_str());
   connection_cb(true);
 
   if (should_save_config) {
