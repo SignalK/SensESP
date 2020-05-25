@@ -4,14 +4,15 @@
 
 #include "sensesp.h"
 
-AnalogInput::AnalogInput(uint read_delay, String config_path) 
-                 : NumericSensor(config_path), read_delay{read_delay} {
+AnalogInput::AnalogInput(uint8_t pin, uint read_delay, String config_path) 
+                 : NumericSensor(config_path), pin{pin}, read_delay{read_delay} {
+  pinMode(pin, INPUT);
   className = "AnalogInput";
   load_configuration();
 }
 
 void AnalogInput::update() {
-  output = analogRead(A0);
+  output = analogRead(pin);
   this->notify();
 }
 

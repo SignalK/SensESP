@@ -6,10 +6,11 @@
 class AnalogInput : public NumericSensor {
 
 public:
-  AnalogInput(uint read_delay = 200, String config_path = "");
+  AnalogInput(uint8_t pin = A0, uint read_delay = 200, String config_path = "");
   void enable() override final;
 
 private:
+  uint8_t pin;
   uint read_delay;
   virtual JsonObject& get_configuration(JsonBuffer& buf) override;
   virtual bool set_configuration(const JsonObject& config) override;
