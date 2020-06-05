@@ -30,10 +30,9 @@ ReactESP app([] () {
   // 0x77 is the default address. Some chips use 0x76, which is shown here.
   auto* pBMP280 = new BMP280(0x76);
 
-  // If you want to change any of the settings that are set by Adafruit_BME280::setSampling(), do
+  // If you want to change any of the settings that are set by Adafruit_BMP280::setSampling(), do
   // that here, like this:
   // pBMP280->pAdafruitBMP280->setSampling(); // pass in the parameters you want
-
 
   // Define the read_delays you're going to use:
   const uint read_delay = 1000; // once per second
