@@ -40,14 +40,14 @@ ReactESP app([] () {
 
   // Create a BMP280value, which is used to read a specific value from the BMP280, and send its output
   // to SignalK as a number (float). This one is for the temperature reading.
-  auto* pBMPtemperature = new BMP280value(pBMP280, temperature, read_delay, "Outside/Temperature");
+  auto* pBMPtemperature = new BMP280value(pBMP280, temperature, read_delay, "/Outside/Temperature");
       
       pBMPtemperature->connectTo(new SKOutputNumber("environment.outside.temperature"));
 
 
   // Do the same for the barometric pressure value. Its read_delay is longer, since barometric pressure can't
   // change all that quickly. It could be much longer for that reason.
-  auto* pBMPpressure = new BMP280value(pBMP280, pressure,  pressure_read_delay, "Outside/Pressure");
+  auto* pBMPpressure = new BMP280value(pBMP280, pressure,  pressure_read_delay, "/Outside/Pressure");
       
       pBMPpressure->connectTo(new SKOutputNumber("environment.outside.pressure"));
 
