@@ -6,7 +6,7 @@ The design is provided "AS IS", without any warranty of any kind, express or imp
 ---------------
 PCB Use
 ---------------
-This PCB was designed to work with the SensESP Sensor framework specifically for the user with I2C or OneWire sensors. Whilst the design allows for 3 sensors to be connected on the same PCB, when using I2C only one sensor is supported by SensESP. When using OneWire, multiple sensors can be used on one PCB. 
+This PCB was designed to work with the SensESP Sensor framework specifically for the use with I2C or OneWire sensors. Whilst the design allows for 3 sensors to be connected on the same PCB, when using I2C only one sensor is supported by SensESP. When using OneWire, multiple sensors can be used on one PCB. 
 
 ---------------
 PCB Notes
