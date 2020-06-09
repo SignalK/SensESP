@@ -1,0 +1,106 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=SensESP
+*Date=13:42:25
+*CreatedBy=Fritzing 0.9.4.2019-12-01.CD-498-0-a1ffcea
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;THT;6.20889;-42.9411;0;Bottom;J6
+2;;;43.4095;-6.02833;0;Bottom;TXT2
+3;;THT;83.8589;-11.2102;180;Bottom;J1
+4;;;81.4832;-21.4259;0;Bottom;Copper Fill18
+5;;;53.0289;-18.9468;0;Bottom;TXT5
+6;4.7k;THT;17.6389;-34.0511;90;Bottom;R2
+7;;;10.2338;-31.627;0;Bottom;TXT2
+8;;;23.4442;-17.5524;0;Bottom;Copper Fill4
+9;;;19.4066;-21.226;0;Bottom;TXT5
+10;;;20.3988;-18.7382;0;Bottom;TXT5
+11;;;51.6076;-21.3282;0;Bottom;TXT5
+12;;;75.6158;-5.6779;0;Bottom;Copper Fill13
+13;;;44.2442;-13.8445;0;Bottom;TXT2
+14;;;10.0584;-38.1264;0;Bottom;Via3
+15;;;9.97953;-23.5425;0;Bottom;TXT2
+16;;;25.1841;-31.1668;0;Bottom;Copper Fill22
+17;;;39.5514;-31.5407;0;Bottom;TXT5
+18;;;80.3627;-23.7499;0;Bottom;TXT5
+19;;;22.7076;-20.0924;0;Bottom;Copper Fill3
+20;;;33.7726;-51.9252;0;Bottom;TXT3
+21;;;87.4141;-7.8242;0;Bottom;Copper Fill14
+22;;;65.9071;-12.1749;0;Bottom;TXT6
+23;;;10.1603;-38.7081;0;Bottom;TXT2
+24;;;88.3158;-8.7259;0;Bottom;Copper Fill15
+25;;dipswitch-08;27.7989;-15.0011;90;Bottom;SW1
+26;;;43.3522;-8.35187;0;Bottom;TXT2
+27;;;31.289;-33.97;90;Bottom;TXT2
+28;;molex-1x2_lock;23.8619;-30.4951;0;Bottom;JP6
+29;;THT;6.20889;-27.7011;0;Bottom;J7
+30;;molex-1x2_lock;48.2459;-6.36511;0;Bottom;JP7
+31;;;30.4038;-11.2659;0;Bottom;Copper Fill19
+32;;;41.8338;-6.0208;0;Bottom;Copper Fill6
+33;;THT;65.5446;-12.0801;180;Bottom;U4
+34;;;53.2564;-5.21158;0;Bottom;TXT5
+35;;;15.4451;-34.0821;90;Bottom;TXT2
+36;;;92.9326;-8.40606;0;Bottom;TXT2
+37;330;THT;29.0689;-34.0511;90;Bottom;R1
+38;;;51.4343;-26.2363;0;Bottom;TXT5
+39;;;39.4738;-21.4114;0;Bottom;TXT5
+40;;THT;6.20889;-12.4611;0;Bottom;J8
+41;;;9.97186;-41.56;0;Bottom;TXT2
+42;;;70.3326;-16.9174;0;Bottom;Copper Fill7
+43;;;3.66889;-3.57103;0;Bottom;Hole3
+44;;300 mil [THT];45.7228;-31.9627;0;Bottom;D6
+45;;;44.0924;-11.4162;0;Bottom;TXT2
+46;;;25.2552;-49.713;0;Bottom;TXT4
+47;;;73.8378;-8.2179;0;Bottom;Copper Fill9
+48;;;10.8486;-14.0169;0;Bottom;TXT2
+49;0.47mF;100 mil [THT, electrolytic];83.6789;-21.3511;0;Bottom;C3
+50;;300 mil [THT];45.5535;-21.3511;0;Bottom;D5
+51;;;67.0941;-29.9222;0;Bottom;Copper Fill20
+52;;;45.9889;-0.898097;0;Bottom;TXT5
+53;;;19.9744;-30.8557;90;Bottom;TXT2
+54;;;72.5761;-40.4011;90;Bottom;WeMos D1 Mini1
+55;;;74.7141;-9.0942;0;Bottom;Copper Fill8
+56;;;20.3404;-5.72494;0;Bottom;TXT2
+57;;;20.1887;-10.8851;0;Bottom;TXT5
+58;;;20.1887;-13.5411;0;Bottom;TXT5
+59;;;3.66889;-51.8311;0;Bottom;Hole4
+60;;;57.0484;-8.2179;0;Bottom;Copper Fill10
+61;;;86.7127;-23.7499;0;Bottom;TXT5
+62;;;10.4165;-44.247;0;Bottom;TXT2
+63;;THT;39.2289;-9.92111;0;Bottom;J5
+64;;;18.4434;-23.8346;0;Bottom;TXT5
+65;;;50.2219;-0.912208;0;Bottom;TXT5
+66;;;10.3461;-28.9346;0;Bottom;TXT2
+67;;;91.6752;-3.57111;0;Bottom;Hole2
+68;;;77.8721;-18.7659;0;Bottom;TXT5
+69;;;50.4444;-6.1859;0;Bottom;Copper Fill16
+70;;;64.7063;-25.8197;0;Bottom;TXT2
+71;;;52.2085;-31.1519;0;Bottom;TXT5
+72;;;10.8251;-16.3619;0;Bottom;TXT2
+73;;;39.3688;-26.4564;0;Bottom;TXT5
+74;;300 mil [THT];45.5535;-26.4311;0;Bottom;D4
+75;;;6.4008;-20.2448;0;Bottom;Copper Fill2
+76;;;34.1841;-22.5859;0;Bottom;Via4
+77;;;10.4818;-46.8741;0;Bottom;TXT2
+78;;;77.7202;-5.48618;0;Bottom;TXT5
+79;;;10.3356;-11.5469;0;Bottom;TXT2
+80;;;10.361;-8.97784;0;Bottom;TXT2
+81;;;9.88547;-26.1195;0;Bottom;TXT2
+82;;;92.5731;-13.7821;0;Bottom;TXT2
+83;;;67.0941;-28.1442;0;Bottom;Copper Fill21
+84;;;82.3341;-22.2768;0;Bottom;Copper Fill17
+85;;;8.636;-38.1518;0;Bottom;Copper Fill1
+86;;;74.7141;-4.7762;0;Bottom;Copper Fill11
+87;;;20.4922;-8.2291;0;Bottom;TXT2
+88;;;73.8378;-5.6779;0;Bottom;Copper Fill12
+89;;;47.7266;-27.7632;0;Bottom;Copper Fill5
+90;;;91.6752;-51.7841;0;Bottom;Hole1
+91;;;20.2751;-16.1212;0;Bottom;TXT5
