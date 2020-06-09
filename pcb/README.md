@@ -36,12 +36,14 @@ Dip Switch:
 
 If you have a sensor with pinout VCC, GND, SCL, SCA, there is no need to connect anything to J5, instead just close (connected) switches D5-D8 and connect your sensors to J6, J7 or J8.
 
-But if you want to connect an I2C sensor with a different pinout, for example, VCC, GND, SCA and SCL (note SCA and SCL are reversed): 
+But if you want to connect an I2C sensor with a different pinout, for example, VCC, GND, SCA and SCL (note SCA and SCL are reversed)
 - Open (not connected) switch D7 and D8 (SCA and SCL) 
 - Manually connect two jumper wires:
 	- One from Pin 3 on J5 to Pin 4 on J8 and 
 	- One from Pin 4 on J5 to Pin 3 on J8. 
 You have now effectively changed the pinouts on J6, J7 and J8 to VCC, GND, SCA and SCL and can connect your sensor to J6 or J7 (given that J8 contains the jumper wires)
+
+There is a sample image (SensorChangePinout.png) in this folder which shows the above example.
  
 Resistors:
 R1: 330k for LED
