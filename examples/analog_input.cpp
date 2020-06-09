@@ -13,12 +13,13 @@ ReactESP app([] () {
   #ifndef SERIAL_DEBUG_DISABLED
   Serial.begin(115200);
 
-  // A small arbitrary delay is required to let the
-  // serial port catch up
+  // A small delay and one debugI() are required so that
+  // the serial output displays everything
   delay(100);
   Debug.setSerialEnabled(true);
   #endif
-
+  delay(100);
+  debugI("Serial debug enabled");
 
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp();
@@ -43,12 +44,15 @@ ReactESP app([] () {
   
 
   // Create a sensor that is the source of our data, that will be read every 500 ms. 
-  // It's a light sensor that's connected to the ESP's AnalogIn pin. When it's dark,
-  // the sensor's output (as read by analogRead()) is 120, and when it's bright,
-  // the output is 850, for a range of 730.
+  // It's a light sensor that's connected to the ESP's AnalogIn pin. 
+  // The AnalogIn pin on ESP8266 is always A0, but ESP32 has many pins that can be
+  // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
+  // When it's dark, the sensor's output (as read by analogRead()) is 120, and when
+  // it's bright, the output is 850, for a range of 730.
+  uint8_t pin = A0;
   uint read_delay = 500;
   
-  auto* pAnalogInput = new AnalogInput(read_delay, analog_in_config_path);
+  auto* pAnalogInput = new AnalogInput(pin, read_delay, analog_in_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then adds the offset,
   // to calculate its output. In this example, we want to see the final output presented

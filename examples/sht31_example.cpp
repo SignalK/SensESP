@@ -14,12 +14,13 @@ ReactESP app([] () {
   #ifndef SERIAL_DEBUG_DISABLED
   Serial.begin(115200);
 
-  // A small arbitrary delay is required to let the
-  // serial port catch up
-
+  // A small delay and one debugI() are required so that
+  // the serial output displays everything
   delay(100);
   Debug.setSerialEnabled(true);
   #endif
+  delay(100);
+  debugI("Serial debug enabled");
 
   // Create the SensESPApp with whatever "standard sensors" you want: noStdSensors, allStdSensors, or uptimeOnly.
   // The default is allStdSensors.
@@ -35,13 +36,13 @@ ReactESP app([] () {
 
   // Create a SHT31value, which is used to read a specific value from the SHT31, and send its output
   // to SignalK as a Number (float). This one is for the temperature reading.
-  auto* pSHT31temperature = new SHT31value(pSHT31, temperature, read_delay, "fridge/temperature");
+  auto* pSHT31temperature = new SHT31value(pSHT31, temperature, read_delay, "/fridge/temperature");
       
         pSHT31temperature->connectTo(new SKOutputNumber("environment.inside.refrigerator.temperature"));
 
 
   // Do the same for the humidity value.
-  auto* pSHT31humidity = new SHT31value(pSHT31, humidity,  read_delay, "fridge/humidity");
+  auto* pSHT31humidity = new SHT31value(pSHT31, humidity,  read_delay, "/fridge/humidity");
       
         pSHT31humidity->connectTo(new SKOutputNumber("environment.inside.refrigerator.humidity"));
 

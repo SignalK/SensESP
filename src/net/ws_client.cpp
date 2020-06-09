@@ -3,15 +3,15 @@
 #include "Arduino.h"
 
 #include <ArduinoJson.h>
-#include <ESP8266HTTPClient.h>
 #ifdef ESP8266
+#include <ESP8266HTTPClient.h>
 #include <ESP8266mDNS.h>  // Include the mDNS library
 #elif defined(ESP32)
+#include <HTTPClient.h>
 #include <ESPmDNS.h>
 #endif
 
-#include <ESP8266TrueRandom.h>
-
+#include <ESPTrueRandom.h>
 #include <WiFiClient.h>
 
 #include "sensesp_app.h"
@@ -181,7 +181,9 @@ void WSClient::connect() {
   uint16_t server_port = 80;
 
   if (this->server_address.length() == 0) {
-    get_mdns_service(server_address, server_port);
+    if (!get_mdns_service(server_address, server_port)) {
+       debugI("No mDNS service found by get_mdns_service");
+    }
   } else {
     server_address = this->server_address;
     server_port = this->server_port;
@@ -256,8 +258,8 @@ void WSClient::send_access_request(const String server_address,
   if (client_id == "") {
     // generate a client ID
     byte uuidNumber[16];
-    ESP8266TrueRandom.uuid(uuidNumber);
-    client_id = ESP8266TrueRandom.uuidToString(uuidNumber);
+    ESPTrueRandom.uuid(uuidNumber);
+    client_id = ESPTrueRandom.uuidToString(uuidNumber);
     save_configuration();
   }
 

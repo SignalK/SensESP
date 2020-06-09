@@ -14,12 +14,13 @@ ReactESP app([] () {
   #ifndef SERIAL_DEBUG_DISABLED
   Serial.begin(115200);
 
-  // A small arbitrary delay is required to let the
-  // serial port catch up
-
+  // A small delay and one debugI() are required so that
+  // the serial output displays everything
   delay(100);
   Debug.setSerialEnabled(true);
   #endif
+  delay(100);
+  debugI("Serial debug enabled");
 
   sensesp_app = new SensESPApp();
 
@@ -29,6 +30,9 @@ ReactESP app([] () {
      have more than one sensor, you may have to swap the addresses around on
      the configuration page for the device. (You get to the configuration page
      by entering the IP address of the device into a browser.)
+
+     ESP8266 pins are specified as DX
+     ESP32 pins are specified as just the X in GPIOX
   */
   DallasTemperatureSensors* dts = new DallasTemperatureSensors(D7);
 

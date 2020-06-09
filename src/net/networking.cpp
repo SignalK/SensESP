@@ -45,7 +45,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 }
 
 void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
-  WiFi.begin(ap_ssid, ap_password);
+  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
 
   uint32_t timer_start = millis();
 
@@ -89,6 +89,7 @@ void Networking::setup_wifi_manager(std::function<void(bool)> connection_cb) {
   }
 
   debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
+  debugI("IP address of Device: %s",  WiFi.localIP().toString().c_str());
   connection_cb(true);
 
   if (should_save_config) {

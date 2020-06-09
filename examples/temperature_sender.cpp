@@ -63,12 +63,13 @@ ReactESP app([] () {
   #ifndef SERIAL_DEBUG_DISABLED
   Serial.begin(115200);
 
-  // A small arbitrary delay is required to let the
-  // serial port catch up
-
-  delay(1000);
+  // A small delay and one debugI() are required so that
+  // the serial output displays everything
+  delay(100);
   Debug.setSerialEnabled(true);
   #endif
+  delay(100);
+  debugI("Serial debug enabled");
 
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp();
@@ -118,7 +119,9 @@ ReactESP app([] () {
 
   // An AnalogInput gets the value from the microcontroller's AnalogIn pin, which is
   // a value from 0 to 1023.
-  auto* pAnalogInput = new AnalogInput();
+  // The AnalogIn pin on ESP8266 is always A0, but ESP32 has many pins that can be
+  // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
+  auto* pAnalogInput = new AnalogInput(A0);
 
   /* Translating the number returned by AnalogInput into a temperature, and sending it to SignalK,
      requires several transforms. Wire them up in sequence:

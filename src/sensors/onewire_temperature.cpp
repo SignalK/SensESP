@@ -39,23 +39,25 @@ DallasTemperatureSensors::DallasTemperatureSensors(
   sensors = new DallasTemperature(onewire);
   sensors->begin();
 
-  // getDeviceCount() is a method of DallasTemperature
-  // and can't be renamed to conform to the SensESP
-  // nomenclature
-  int num_sensors = sensors->getDeviceCount();
-  debugI("OneWire sensors found: %d", num_sensors);
+  // DallasTemperature::getDeviceCount() doesn't work reliably with ESP32,
+  // so sensors are found using getAddress()
 
   DeviceAddress addr;
   OWDevAddr owda;
-  for (int i=0; i<num_sensors; i++) {
-    sensors->getAddress(addr, i);
-    std::copy(std::begin(addr), std::end(addr), std::begin(owda));
-    known_addresses.insert(owda);
-    #ifndef DEBUG_DISABLED
-    char addrstr[24];
-    owda_to_string(addrstr, owda);
-    debugI("Found OneWire sensor %s", addrstr);
-    #endif
+  bool check_again = true;
+  uint8_t sensor_index = 0;
+  while (check_again) {
+    if(sensors->getAddress(addr, sensor_index)) {
+      std::copy(std::begin(addr), std::end(addr), std::begin(owda));
+      known_addresses.insert(owda);
+      #ifndef DEBUG_DISABLED
+      char addrstr[24];
+      owda_to_string(addrstr, owda);
+      debugI("Found OneWire sensor %s", addrstr);
+      #endif
+      sensor_index++;
+    }
+    else check_again = false;
   }
 
   // all conversions will by async

@@ -18,7 +18,9 @@ ReactESP app([] () {
   // Set up sensesp
   sensesp_app = new SensESPApp();
 
-  // This reads A0 every 100 ms
+  // This reads A0 every 100 ms.
+  // If you're using an ESP32, you must specify the pin number: AnalogInput(14);
+  // You can also specify any read interval: AnalogInput(A0, 500);
   AnalogInput* input = new AnalogInput();
 
   // scale factor. this will depend on your circuit:

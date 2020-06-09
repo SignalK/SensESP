@@ -22,11 +22,13 @@ ReactESP app([] () {
   #ifndef SERIAL_DEBUG_DISABLED
   Serial.begin(115200);
 
-  // A small arbitrary delay is required to let the
-  // serial port catch up
+  // A small delay and one debugI() are required so that
+  // the serial output displays everything
   delay(100);
   Debug.setSerialEnabled(true);
   #endif
+  delay(100);
+  debugI("Serial debug enabled");
 
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp(new SensESPAppOptions()
@@ -51,7 +53,7 @@ ReactESP app([] () {
   // Wire up the output of the float value on server "environment.outside.illuminance" to the NumericThreshold,
   // and then output the transformed float to boolean to DigitalOutput
   auto * pListener = new SKNumericListener(sk_path);
-  pListener->connectTo(new NumericThreshold(0.0f, 100.0f, true, config_path), 0)
+  pListener->connectTo(new NumericThreshold(0.0f, 100.0f, true, config_path))
            ->connectTo(new DigitalOutput(5));
   
   // Start the SensESP application running
