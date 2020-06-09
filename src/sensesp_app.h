@@ -4,6 +4,7 @@
 // Required for RemoteDebug
 #define USE_LIB_WEBSOCKET true
 
+#include "sensesp_app_options.h"
 #include "sensors/sensor.h"
 #include "net/http.h"
 #include "net/networking.h"
@@ -14,12 +15,13 @@
 #include "system/valueproducer.h"
 #include "system/valueconsumer.h"
 #include "system/observablevalue.h"
+#include "sensesp_app_options.h"
 
 enum StdSensors_t { allStdSensors, noStdSensors, uptimeOnly };
 
 class SensESPApp {
  public:
-  SensESPApp(StdSensors_t stdSensors = allStdSensors);
+  SensESPApp(SensESPAppOptions* options);
   void enable();
   void reset();
   String get_hostname();
