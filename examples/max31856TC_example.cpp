@@ -3,7 +3,7 @@
 #include "sensesp_app.h"
 #include "transforms/linear.h"
 #include "signalk/signalk_output.h"
-#include "sensors/ultrasonic_input.h"
+#include "sensors/max31856TC_input.h"
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
@@ -27,7 +27,7 @@ ReactESP app([] () {
   // The "SignalK path" identifies this sensor to the SignalK server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
   // broadcast SignalK data.
-  const char* sk_path = "tanks.freshWater.starboard.currentLevel";
+  const char* sk_path = "propulsion.Main_Engine.temperature";
 
 
   // The "Configuration path" is combined with "/config" to formulate a URL
@@ -38,8 +38,8 @@ ReactESP app([] () {
   // that indicates this sensor or transform does not have any
   // configuration to save, or that you're not interested in doing
   // run-time configuration.
-  const char* ultrasonic_in_config_path = "/freshWaterTank_starboard/ultrasonic_in";
-  const char* linear_config_path = "/freshWaterTank_starboard/linear";
+  const char* temperature_in_config_path = "/propulsion/Main_Engine/temperature_in";
+  const char* linear_config_path = "/Main_Engine/temperature_in/linear";
   
 
   // Create a sensor that is the source of our data, that will be read every 500 ms. 
@@ -50,20 +50,18 @@ ReactESP app([] () {
   // The sensor is mounted at the top of a water tank that is 25 cm deep.
   uint read_delay = 500;
   
-  auto* pUltrasonicInput = new UltrasonicInput(read_delay, ultrasonic_in_config_path);
+  auto* pTemperatureInput = new MAX31856TCInput(read_delay, temperature_in_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then adds the offset,
-  // to calculate its output. In this example, we want to see the final output presented
-  // as a ratio, where full (~2c cm) = 1 and  empty (25 cm)= 0. 
-  // To get a ratio:  R = (pulse_width/58.)*(-0.05) + 1.08675
-  // full = 1450 * (-0.044347 / 58) +  1.08675 = 1
-  // empty = 116 * (-0.044347 / 58) +  1.08675 = 0
-  const float multiplier = -0.00074948;
-  const float offset = 1.08675;
+  // to calculate its output. The MAX31856TC produces temperatures in degrees Celcius. We need to change
+  // them to Kelvin for compatibility with SignalK.
+ 
+  const float multiplier = 1.0;
+  const float offset = 273.16;
 
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the SignalK server.
-  pUltrasonicInput -> connectTo(new Linear(multiplier, offset, linear_config_path))
+  pTemperatureInput -> connectTo(new Linear(multiplier, offset, linear_config_path))
                -> connectTo(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running

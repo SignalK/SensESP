@@ -1,7 +1,6 @@
 #ifndef _ultrasonic_input_H_
 #define _ultrasonic_input_H_
 
-
 #define TRIGGER_PIN 15
 #define INPUT_PIN 14
 
@@ -20,9 +19,7 @@ class UltrasonicInput : public NumericSensor {
   void update();
   int ultrasonicRead();
   volatile long startTime;
-  volatile int state;
-  volatile long pulseWidth;
-  void ICACHE_RAM_ATTR  changeISR();  
+  volatile int pulseWidth;
 };
 
 #endif
