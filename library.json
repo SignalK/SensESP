@@ -26,7 +26,8 @@
       "version": "^0.2.2"
     },
     {
-      "name": "ESP8266WebServer"
+      "name": "ESP8266WebServer",
+      "platforms": "espressif8266"
     },
     {
       "name": "DNSServer"
@@ -35,13 +36,16 @@
       "name": "ESPAsyncTCP"
     },
     {
-      "name": "ESP Async WebServer"
+      "name": "ESP Async WebServer",
+      "version": "https://github.com/me-no-dev/ESPAsyncWebServer"
     },
     {
-      "name": "ESP8266WiFi"
+      "name": "ESP8266WiFi",
+      "platforms": "espressif8266"
     },
     {
-      "name": "ESP8266mDNS"
+      "name": "ESP8266mDNS",
+      "platforms": "espressif8266"
     },
     {
       "name": "ESPAsyncWiFiManager"
@@ -60,7 +64,26 @@
       "name": "DallasTemperature"
     },
     {
-      "name": "ESP8266TrueRandom"
+      "name": "ESPTrueRandom",
+      "version": "https://github.com/sivar2311/ESPTrueRandom"
+    },
+    {
+      "name": "Wire"
+    },
+    {
+      "name": "Adafruit ADS1X15"
+    },
+    {
+      "name": "Adafruit BME280 Library"
+    },
+    { 
+      "name": "Adafruit BMP280 Library"
+    },
+    {
+      "name": "Adafruit SHT31 Library"
+    },
+    {
+      "name": "Adafruit INA219"
     },
     {
       "name": "RemoteDebug",

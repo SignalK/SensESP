@@ -16,15 +16,19 @@ class DigitalInput : public Sensor {
 
 // DigitalInputValue is meant to report directly the state of
 // a slowly changing signal
-class DigitalInputValue : public DigitalInput, public BooleanProducer {
+class DigitalInputValue : public DigitalInput, public IntegerProducer {
  public:
-  DigitalInputValue(uint8_t pin, int pin_mode, int interrupt_type,
+  DigitalInputValue(uint8_t pin, int pin_mode, int interrupt_type, int read_delay = 1000,
                     String config_path="");
 
   virtual void enable() override final;
 
  private:
   bool triggered = false;
+  int read_delay;
+  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
+  virtual bool set_configuration(const JsonObject& config) override;
+  virtual String get_config_schema() override;
 };
 
 // DigitalInputCounter tracks rapidly changing digital inputs

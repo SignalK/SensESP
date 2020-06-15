@@ -19,7 +19,8 @@ ReactESP app([] () {
   Debug.setSerialEnabled(true);
 
   // Software serial port is used for receiving NMEA data
-
+  // ESP8266 pins are specified as DX
+  // ESP32 pins are specified as just the X in GPIOX
   SoftwareSerial* swSerial = new SoftwareSerial(D7, SW_SERIAL_UNUSED_PIN);
   swSerial->begin(38400, SWSERIAL_8N1);
   

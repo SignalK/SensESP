@@ -45,11 +45,11 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
 }
 
 void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
-  WiFi.begin(ap_ssid, ap_password);
+  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
 
   uint32_t timer_start = millis();
 
-  rdebugI("Connecting");
+  rdebugI("Connecting to wifi");
   while (WiFi.status() != WL_CONNECTED &&
          (millis() - timer_start) < 3 * 60 * 1000) {
     delay(500);
@@ -75,23 +75,29 @@ void Networking::setup_wifi_manager(std::function<void(bool)> connection_cb) {
   wifi_manager->setDebugOutput(false);
   #endif
   AsyncWiFiManagerParameter custom_hostname(
-    "hostname", "Set ESP device hostname", this->hostname->get().c_str(), 20);
+    "hostname", "Set ESP Device custom hostname", this->hostname->get().c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
 
-  if (!wifi_manager->autoConnect("Unconfigured SensESP Device")) {
+  // Create a unique SSID for configuring each SensESP Device
+  String config_ssid = this->hostname->get();
+  config_ssid = "Configure " + config_ssid;
+  const char* pconfig_ssid = config_ssid.c_str();
+    
+  if (!wifi_manager->autoConnect(pconfig_ssid)) {
     debugE("Failed to connect to wifi and config timed out. Restarting...");
     ESP.restart();
   }
 
   debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
+  debugI("IP address of Device: %s",  WiFi.localIP().toString().c_str());
   connection_cb(true);
 
   if (should_save_config) {
     String new_hostname = custom_hostname.getValue();
-    debugI("Got new hostname: %s", new_hostname.c_str());
+    debugI("Got new custom hostname: %s", new_hostname.c_str());
     this->hostname->set(new_hostname);
     this->ap_ssid = WiFi.SSID();
-    debugI("Got new SSID: %s", ap_ssid.c_str());
+    debugI("Got new SSID and password: %s", ap_ssid.c_str());
     this->ap_password = WiFi.psk();
     save_configuration();
     debugW("Restarting in 500ms");
@@ -103,10 +109,11 @@ ObservableValue<String>* Networking::get_hostname() {
   return this->hostname;
 }
 
-void Networking::set_hostname(String hostname) {
-  debugD("Setting hostname");
-  this->hostname->set(hostname);
-}
+// No longer used
+//void Networking::set_hostname(String hostname) {
+//  debugD("Setting hostname");
+//  this->hostname->set(hostname);
+//}
 
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
