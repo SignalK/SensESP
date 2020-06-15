@@ -11,7 +11,7 @@
 #include <ESPmDNS.h>
 #endif
 
-#include <ESPTrueRandom.h>
+#include <ESP8266TrueRandom.h>
 #include <WiFiClient.h>
 
 #include "sensesp_app.h"
@@ -265,8 +265,8 @@ void WSClient::send_access_request(const String server_address,
   if (client_id == "") {
     // generate a client ID
     byte uuidNumber[16];
-    ESPTrueRandom.uuid(uuidNumber);
-    client_id = ESPTrueRandom.uuidToString(uuidNumber);
+    ESP8266TrueRandom.uuid(uuidNumber);
+    client_id = ESP8266TrueRandom.uuidToString(uuidNumber);
     save_configuration();
   }
 
