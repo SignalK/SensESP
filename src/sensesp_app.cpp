@@ -24,10 +24,12 @@ RemoteDebug Debug;
 #endif
 
 // FIXME: Setting up the system is too verbose and repetitive
+//SensESPApp::SensESPApp(StdSensors_t stdSensors) : stdSensors{stdSensors}
+SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
+ {
+  this->options = appOptions;
 
-SensESPApp::SensESPApp(StdSensors_t stdSensors) : stdSensors{stdSensors} {
   // initialize filesystem
-
 #ifdef ESP8266
   if (!SPIFFS.begin()) {
 #elif defined(ESP32)
@@ -43,7 +45,7 @@ SensESPApp::SensESPApp(StdSensors_t stdSensors) : stdSensors{stdSensors} {
 
   // setup standard sensors and their transforms
 
-  setup_standard_sensors(hostname, stdSensors);
+  setup_standard_sensors(hostname);
 
   // create the SK delta object
 
@@ -76,46 +78,39 @@ SensESPApp::SensESPApp(StdSensors_t stdSensors) : stdSensors{stdSensors} {
     sk_delta, ws_connected_cb, ws_delta_cb);
 }
 
-void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname, StdSensors_t stdSensors) {
-
-  if (stdSensors == noStdSensors) {return;};
-
-  if (stdSensors == allStdSensors) {
+void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
     // connect systemhz
+    auto sensorOptions = this->options->getStandardSensors();
 
-    connect_1to1_h<SystemHz, SKOutput<float>>(
-      new SystemHz(),
-      new SKOutput<float>(),
-      hostname
-    );
+    if(sensorOptions & frequency != 0)
+    {
+      connect_1to1_h<SystemHz, SKOutput<float>>(
+        new SystemHz(),
+        new SKOutput<float>(),
+        hostname
+      );
+    }
 
     // connect freemem
-
-    connect_1to1_h<FreeMem, SKOutput<float>>(
-      new FreeMem(),
-      new SKOutput<float>(),
-      hostname
-    );
-
+    if(sensorOptions & freeMemory != 0)
+    {
+      connect_1to1_h<FreeMem, SKOutput<float>>(
+        new FreeMem(),
+        new SKOutput<float>(),
+        hostname
+      );
+    }
+    
     // connect ip address
 
-    connect_1to1_h<IPAddrDev, SKOutput<String>>(
-      new IPAddrDev(),
-      new SKOutput<String>(),
-      hostname
-    );
-  }
-
-  if (stdSensors == allStdSensors || stdSensors == uptimeOnly) {
-  // connect uptime
-
-    connect_1to1_h<Uptime, SKOutput<float>>(
-      new Uptime(),
-      new SKOutput<float>(),
-      hostname
-    );
-  }
-  
+    if(sensorOptions & ipAddress != 0)
+    {
+      connect_1to1_h<IPAddrDev, SKOutput<String>>(
+        new IPAddrDev(),
+        new SKOutput<String>(),
+        hostname
+      );
+    }
 }
 
 void SensESPApp::enable() {

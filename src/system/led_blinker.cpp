@@ -2,6 +2,8 @@
 #include "led_blinker.h"
 
 #include "sensesp.h"
+#include "sensesp_app.h"
+#include "sensesp_app_options.h"
 
 #ifndef LED_PIN
 #define LED_PIN LED_BUILTIN  // If your board doesn't have a defined LED_BUILTIN, comment this line out...
@@ -21,8 +23,11 @@ void LedBlinker::remove_blinker() {
 }
 
 void LedBlinker::set_state(int new_state) {
-  this->current_state = new_state;
-  digitalWrite(LED_PIN, !new_state);
+  if(sensesp_app->getOptions()->getLEDEnabled())
+  {
+    this->current_state = new_state;
+    digitalWrite(LED_PIN, !new_state);
+  }
 }
 
 void LedBlinker::flip() {
@@ -31,12 +36,17 @@ void LedBlinker::flip() {
 
 void LedBlinker::set_wifi_disconnected() {
   this->remove_blinker();
-  this->blinker = app.onRepeat(1000, [this] () {
-    this->set_state(1);
-    app.onDelay(100, [this] () {
-      this->set_state(0);
+  auto interval = sensesp_app->getOptions()->getLEDIntervals().offlineInterval;
+
+  if(interval > 0)
+  {
+    this->blinker = app.onRepeat(interval, [this] () {
+      this->set_state(1);
+      app.onDelay(100, [this] () {
+        this->set_state(0);
+      });
     });
-  });
+  }
 }
 
 void LedBlinker::set_wifi_connected() {

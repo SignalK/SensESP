@@ -17,14 +17,13 @@
 #include "system/observablevalue.h"
 #include "sensesp_app_options.h"
 
-enum StdSensors_t { allStdSensors, noStdSensors, uptimeOnly };
-
 class SensESPApp {
  public:
-  SensESPApp(SensESPAppOptions* options);
+  SensESPApp(SensESPAppOptions* appOptions);
   void enable();
   void reset();
   String get_hostname();
+  SensESPAppOptions* getOptions() { return options; }
 
 
   template<typename T>
@@ -66,8 +65,8 @@ class SensESPApp {
 
 
  private:
-  StdSensors_t stdSensors;
-  void setup_standard_sensors(ObservableValue<String>* hostname, StdSensors_t stdSensors = allStdSensors);
+  SensESPAppOptions* options;
+  void setup_standard_sensors(ObservableValue<String>* hostname);
 
   HTTPServer* http_server;
   LedBlinker led_blinker;

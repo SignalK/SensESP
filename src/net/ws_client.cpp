@@ -50,6 +50,7 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta,
 
   // set the singleton object pointer
   ws_client = this;
+  options = sensesp_app->getOptions();
 
   load_configuration();
 }
@@ -112,9 +113,15 @@ void WSClient::subscribe_listeners() {
       JsonObject& subscribePath = subscribe.createNestedObject();
 
       subscribePath["path"] = sk_path;
+      subscribePath["period"] = listen_delay;
+      debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(), listen_delay);
+    }
+
+    String messageJson;
 
     subscription.printTo(messageJson);
     debugI("Subscription JSON message:\n %s", messageJson.c_str());
+    this->client.sendTXT(messageJson);
   }
 }
 
@@ -180,7 +187,7 @@ void WSClient::connect() {
   String server_address = "";
   uint16_t server_port = 80;
 
-  if (this->server_address.length() == 0) {
+  if (this->server_address.isEmpty() && options->useMDNS()) {
     if (!get_mdns_service(server_address, server_port)) {
        debugI("No mDNS service found by get_mdns_service");
     }
@@ -189,10 +196,15 @@ void WSClient::connect() {
     server_port = this->server_port;
   }
 
-  if ((server_address.length() > 0) && (server_port > 0)) {
+  if (!server_address.isEmpty() && server_port > 0) {
     debugD("Websocket client starting");
   } else {
     // host and port not defined - wait for mDNS
+    if(options->useMDNS())
+    {
+      debugW("Websocket server or port isn't definied!");
+    }
+    
     connection_state = disconnected;
     return;
   }
@@ -441,5 +453,15 @@ bool WSClient::set_configuration(const JsonObject& config) {
   this->auth_token = config["token"].as<String>();
   this->client_id = config["client_id"].as<String>();
   this->polling_href = config["polling_href"].as<String>();
+
+  if(!options->getMDNSEnabled() && !options->isServerSet())
+  {
+    debugI("Using preconfigured server address %s and port %d from SensESP options.", options->getServerAddress(), options->getServerPort());
+    this->server_address = options->getServerAddress();
+    this->server_port = options->getServerPort();
+  }
+
   return true;
 }
+
+

@@ -20,6 +20,8 @@ void save_config_callback() {
 Networking::Networking(String config_path)
     : Configurable{config_path} {
   hostname = new ObservableValue<String>(String("sensesp"));
+  options = sensesp_app->getOptions();
+
   load_configuration();
   server = new AsyncWebServer(80);
   dns = new DNSServer();
@@ -144,13 +146,30 @@ bool Networking::set_configuration(const JsonObject& config) {
   this->hostname->set(config["hostname"].as<String>());
   this->ap_ssid = config["ap_ssid"].as<String>();
   this->ap_password = config["ap_password"].as<String>();
+
+  if((this->ap_ssid.isEmpty() || this->ap_password.isEmpty()) && options->isWifiSet())
+  {
+    debugI("Using preconfigured SSID %s and password from SensESP options.", options->getSsid());
+    this->ap_ssid = options->getSsid();
+    this->ap_password = options->getPassword();
+  }
+
   return true;
 }
 
 void Networking::reset_settings() {
   hostname->set("");
-  ap_ssid = "";
-  ap_password = "";
+  if(options->isWifiSet())
+  {
+    ap_ssid = options->getSsid();
+    ap_password = options->getPassword();
+  }
+  else
+  {
+    ap_ssid = "";
+    ap_password = "";  
+  }
+  
   save_configuration();
   wifi_manager->resetSettings();
 }

@@ -10,6 +10,9 @@
 #include "system/configurable.h"
 #include "system/observablevalue.h"
 
+#include "sensesp_app.h"
+#include "sensesp_app_options.h"
+
 class Networking : public Configurable {
  public:
   Networking(String config_path);
@@ -36,6 +39,7 @@ class Networking : public Configurable {
   ObservableValue<String>* hostname;
   String ap_ssid = "";
   String ap_password = "";
+  SensESPAppOptions* options;
 };
 
 #endif

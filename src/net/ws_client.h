@@ -8,6 +8,7 @@
 #include "sensesp.h"
 #include "system/configurable.h"
 #include "signalk/signalk_delta.h"
+#include "sensesp_app_options.h"
 
 static const char* NULL_AUTH_TOKEN = "";
 
@@ -40,6 +41,7 @@ class WSClient : public Configurable {
   String polling_href = "";
   String auth_token = NULL_AUTH_TOKEN;
   bool server_detected = false;
+  SensESPAppOptions* options;
 
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
