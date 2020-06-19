@@ -46,7 +46,7 @@ ReactESP app([] () {
   // It is an ultrasonic distance sensor that sends out an acoustical pulse in response
   // to a 100 micro-sec trigger pulse from the ESP. The return acoustical pulse width
   // can be converted to a distance by the formula 2*distance = pulse_width/speed_of_sound
-  // With pulse_width om ,icro-sec and distance in cm, 2*speed_of_sound = 58
+  // With pulse_width in micro-sec and distance in cm, 2*speed_of_sound = 58
   // The sensor is mounted at the top of a water tank that is 25 cm deep.
   uint read_delay = 500;
   
