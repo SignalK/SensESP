@@ -24,11 +24,11 @@ The Max31856 thermocouple amplifier will not work with a grounded thermocouple t
 
 The Thermocouple engine temperature sensor is implemented in software with two files src/sensors/max31856TC_input.h and src/sensors/max31856_input.cpp. The MAX31856 breakout board communicates with the Huzzah through software SPI and if you want to use pins other than SPI_CS_PIN 15, SPI_MOSI_PIN 13, SPI_MISO_PIN 12 and SPI_CLK_PIN 14 or a thermocouple other than Type-K, you will need to make the appropriate adjustments in max31856TC_input.h and recompile SensESP. 
 
-I have forked and then cloned the SensESP repo from GitHub and used my local repo for SensESP.
+To make changes to SensESP, fork the SensESP repo and then clone it to your local PC. 
 
 To implement thermocouple engine temperature sensor, create a new PlatformIO project, select the Adafruit HUZZAH ESP8266 as the board, select Arduino as the framework, check the box "Use default location" and copy the contents of the file max31856TC_example.cpp into src/main.cpp.
 
-The platformIO.ini file that has been used for this project is listed below. Copy the contents of this file and use it to replace the contents of the default platformIO.ini file.
+The platformio.ini file that has been used for this project is listed below. Copy the contents of this file and use it to replace the contents of the default platformio.ini file. You may need to adjust it to correspond to your choice of board. 
 
 ```
 ; PlatformIO Project Configuration File
@@ -79,4 +79,6 @@ lib_deps =
 
 extra_scripts = extra_script.py
 ```
-As can be seen from the first entry under lib-deps, the local SensESP repo is being used for the project. This is necessary if you are going to change the SPI pins or TC type.
+As can be seen from the first entry under lib-deps, the local SensESP repo is being used for the project. This is necessary if you are going to change the SPI pins or TC type. Otherwise this line can be replaced with:
+
+https://github.com/SignalK/SensESP.git
