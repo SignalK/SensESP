@@ -10,7 +10,7 @@ This example implements a thermocouple temperature sensor usig the Adafruit MAX3
 
 The connections for the Huzzah and MAX31856 are shown in the figure below.
 
-![picture 1](images/5bf11e4a90297bd72138f2b4ee5dc361cb02e9d18363e4e0334a380023cc468a.png) 
+![picture 1](images/Huzzah-Max31856_bb.png) 
 
 In pactice, the MAX31856 is screewed to the top of the Huzzah on a Feather prototyping "Featherwing" with nylon screws and short nylon standoffs. Electrical connections have been made with wire-wrap. It is easier to alter if later if you want to alter the wiring.
 

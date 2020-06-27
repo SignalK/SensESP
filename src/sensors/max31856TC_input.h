@@ -5,6 +5,7 @@
 #define SPI_MOSI_PIN 13
 #define SPI_MISO_PIN 12
 #define SPI_CLK_PIN 14
+#define DRDY_PIN 5
 
 //#define MAX_TCTYPE MAX_TCTYPE_K // other types can be B, E, J, N, R, S, T
 

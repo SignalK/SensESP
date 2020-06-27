@@ -14,7 +14,7 @@ MAX31856TCInput::MAX31856TCInput(uint read_delay, String config_path)
 	  while(1) delay(10);
   }
   max31856TC.setThermocoupleType(MAX31856_TCTYPE_K);
-  max31856TC.setConversionMode(MAX31856_ONESHOT_NOWAIT);
+  max31856TC.setConversionMode(MAX31856_CONTINUOUS);
   load_configuration();
 }
 
@@ -24,14 +24,10 @@ void MAX31856TCInput::update() {
 }
 
 float MAX31856TCInput::tcRead() {
-	max31856TC.triggerOneShot();
-	delay(50);
-	while (!max31856TC.conversionComplete()){
+	while (digitalRead(DRDY_PIN)) {
 		delay(25);
 	}
 	float temp(max31856TC.readThermocoupleTemperature());
-  Serial.print("TC Temp: ");
-  Serial.println(temp);
   return temp;
 }
 
