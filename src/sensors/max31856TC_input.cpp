@@ -1,41 +1,41 @@
 #include "max31856TC_input.h"
-
 #include "Arduino.h"
 #include "sensesp.h"
-#include "Adafruit_MAX31856.h"
 
-Adafruit_MAX31856 max31856TC = Adafruit_MAX31856(SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN, SPI_CLK_PIN);
+uint8_t dataRdy;
 
 
-MAX31856TCInput::MAX31856TCInput(uint read_delay, String config_path)
-    : NumericSensor(config_path), read_delay{read_delay} {
-  className = "MAX31856TCInput";
-  if (!max31856TC.begin()) {
+MAX31856TC::MAX31856TC(int8_t cs_pin, int8_t mosi_pin, int8_t miso_pin, int8_t clk_pin, int8_t drdy_pin, max31856_thermocoupletype_t  tc_type, String config_path) :
+    Sensor(config_path) {
+  className = "MAX31856TC";
+  load_configuration();
+  pAdafruitMAX31856 = new Adafruit_MAX31856(cs_pin, mosi_pin, miso_pin, clk_pin);
+  if (!pAdafruitMAX31856->begin()) {
 	  while(1) delay(10);
   }
-  max31856TC.setThermocoupleType(MAX31856_TCTYPE_K);
-  max31856TC.setConversionMode(MAX31856_CONTINUOUS);
-  load_configuration();
+  dataRdy = drdy_pin;
+  pAdafruitMAX31856->setThermocoupleType(tc_type);
+  pAdafruitMAX31856->setConversionMode(MAX31856_CONTINUOUS);
 }
 
-void MAX31856TCInput::update() {
-  output = tcRead();
+MAX31856TCvalue::MAX31856TCvalue(MAX31856TC* pMAX31856TC, uint read_delay, String config_path) :
+  NumericSensor(config_path), pMAX31856TC{pMAX31856TC}, read_delay{read_delay} {
+    className = "MAX31856TCvalue";
+    load_configuration();
+  }
+
+void MAX31856TCvalue::enable() {
+  app.onRepeat(read_delay, [this]() { 
+      while (digitalRead(dataRdy)) {
+		    delay(25);
+	     }
+	float temp = pMAX31856TC->pAdafruitMAX31856->readThermocoupleTemperature();
+  output = temp;
   this->notify();
+  });
 }
 
-float MAX31856TCInput::tcRead() {
-	while (digitalRead(DRDY_PIN)) {
-		delay(25);
-	}
-	float temp(max31856TC.readThermocoupleTemperature());
-  return temp;
-}
-
-void MAX31856TCInput::enable() {
-  app.onRepeat(read_delay, [this]() { this->update(); });
-}
-
-JsonObject& MAX31856TCInput::get_configuration(JsonBuffer& buf) {
+JsonObject& MAX31856TCvalue::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
   root["read_delay"] = read_delay;
   root["value"] = output;
@@ -50,9 +50,9 @@ static const char SCHEMA[] PROGMEM = R"###({
     }
   })###";
 
-String MAX31856TCInput::get_config_schema() { return FPSTR(SCHEMA); }
+String MAX31856TCvalue::get_config_schema() { return FPSTR(SCHEMA); }
 
-bool MAX31856TCInput::set_configuration(const JsonObject& config) {
+bool MAX31856TCvalue::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

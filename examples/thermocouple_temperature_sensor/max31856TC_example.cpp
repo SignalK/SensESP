@@ -4,6 +4,15 @@
 #include "transforms/linear.h"
 #include "signalk/signalk_output.h"
 #include "sensors/max31856TC_input.h"
+#include <Adafruit_MAX31856.h>
+
+#define SPI_CS_PIN 15
+#define SPI_MOSI_PIN 13
+#define SPI_MISO_PIN 12
+#define SPI_CLK_PIN 14
+#define DRDY_PIN 5
+
+//max31856_thermocoupletype_t tcType = MAX31856_TCTYPE_K;   // other types can be B, E, J, N, R, S, T
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
@@ -18,6 +27,8 @@ ReactESP app([] () {
   delay(100);
   Debug.setSerialEnabled(true);
   #endif
+  
+  debugI("\nSerial debug enabled\n");
 
 
   // Create the global SensESPApp() object.
@@ -38,19 +49,18 @@ ReactESP app([] () {
   // that indicates this sensor or transform does not have any
   // configuration to save, or that you're not interested in doing
   // run-time configuration.
-  const char* temperature_in_config_path = "/propulsion/Main_Engine/temperature_in";
-  const char* linear_config_path = "/Main_Engine/temperature_in/linear";
   
+  const char* temperature_in_config_path = "/propulsion/Main_Engine/temperature_in/read_delay";
+  //const char* linear_config_path = "/propulsion/Main_Engine/temperature_in/linear";
 
-  // Create a sensor that is the source of our data, that will be read every 500 ms. 
-  // It is an ultrasonic distance sensor that sends out an acoustical pulse in response
-  // to a 100 micro-sec trigger pulse from the ESP. The return acoustical pulse width
-  // can be converted to a distance by the formula 2*distance = pulse_width/speed_of_sound
-  // With pulse_width om ,icro-sec and distance in cm, 2*speed_of_sound = 58
-  // The sensor is mounted at the top of a water tank that is 25 cm deep.
-  uint read_delay = 500;
-  
-  auto* pTemperatureInput = new MAX31856TCInput(read_delay, temperature_in_config_path);
+
+  // Create a sensor that is the source of our data, that will be read every 1000 ms. 
+  const uint readDelay = 1000;
+
+  auto* pMAX31856TC = new MAX31856TC(SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN, SPI_CLK_PIN, DRDY_PIN, MAX31856_TCTYPE_K, "");
+
+  // Create a MAX31856TCvalue which is used to read a specific temperature from the MAX31856 and send it to the signalk_output
+  auto* pMAX31856TCvalue = new MAX31856TCvalue(pMAX31856TC, readDelay, temperature_in_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then adds the offset,
   // to calculate its output. The MAX31856TC produces temperatures in degrees Celcius. We need to change
@@ -61,7 +71,7 @@ ReactESP app([] () {
 
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the SignalK server.
-  pTemperatureInput -> connectTo(new Linear(multiplier, offset, linear_config_path))
+  pMAX31856TCvalue -> connectTo(new Linear(multiplier, offset, ""))
                -> connectTo(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running

@@ -19,7 +19,7 @@
 
 ## Hardware
 
-The sensor has been implemented using an Adafruit Feather HUZZAH ESP8266 and SignalK/SensESP. It requires no signal conditioning and connects directly to the HUZZAH (powered by 5v).
+The sensor has been implemented using an Adafruit Feather HUZZAH ESP8266 and SignalK/SensESP. It requires only a voltage divider for signal conditioning to reduce the 5V output pulse to 3 V and gets power directly from the HUZZAH (powered by 5v).
 
 The sensor has a pigtail cable with 4 wires. The connection to the HUZZAH is shown below:
 
@@ -40,9 +40,3 @@ The ultrawsonic distance sensor is implemented in software with the two files Se
 ![picture 2](images/PWM-Waveform.png)  
 
 In practice I found that with T1 = 0.1 ms, T2 ~ 15 ms. The distance (in cm) to the reflecting object is given by 2*distance = pulse_width/speed_of_sound with the pulse_width (T3) in micro-sec and the the 2*speed of sound = 58 micro-sec/cm.
-
-If you use an Adafruit Feather Huzzah ESP8266 and the same wiring as above, you can use SensESP as a library. If  you intend to change wiring, you will have to adjust the definitions in src/sensors/ultrasonic_input.h and recompile SensESP. 
-
-To make changes to SensESP, fork the SensESP repo and then clone it to your local PC. 
-
-To implement ultrasonic distance sensor, create a new PlatformIO project, select your board, select Arduino as the framework, check the box "Use default location" and copy the contents of the file ultrasonic_DVP_example.cpp into src/main.cpp. The sensor will require calibration unless you intend the raw distance ouptut values. The calibration can be seen in the file ultrasonic_DVP_example.cpp.
