@@ -1,37 +1,40 @@
 #include "ultrasonic_input.h"
-
 #include "Arduino.h"
 #include "sensesp.h"
 
-UltrasonicInput::UltrasonicInput(uint read_delay, String config_path)
-    : NumericSensor(config_path), read_delay{read_delay} {
-  className = "UltrasonicInput";
-  pinMode(TRIGGER_PIN, OUTPUT);
-  pinMode(INPUT_PIN, INPUT_PULLUP);
+uint triggerPin;
+uint inputPin;
+
+UltrasonicSens::UltrasonicSens(int8_t trig_pin, int8_t input_pin, String config_path) :
+    Sensor(config_path) {
+  className = "UltrasonicSens";
+  pinMode(trig_pin, OUTPUT);
+  pinMode(input_pin, INPUT_PULLUP);
+  triggerPin = trig_pin;
+  inputPin = input_pin;
   load_configuration();
 }
 
-void UltrasonicInput::update() {
-  output = ultrasonicRead();
-  this->notify();
-}
+UltrasonicSensValue::UltrasonicSensValue(UltrasonicSens* pUltrasonicSens, uint read_delay, String config_path) :
+  NumericSensor(config_path), pUltrasonicSens{pUltrasonicSens}, read_delay{read_delay} {
+    className = "UltrasonicSensValue";
+    load_configuration();
+  }
 
-int UltrasonicInput::ultrasonicRead() {
-  digitalWrite(TRIGGER_PIN, HIGH);
+void UltrasonicSensValue::enable() {
+  app.onRepeat(read_delay, [this]() { 
+    digitalWrite(triggerPin, HIGH);
   long lastTime = micros();
   while (micros() - lastTime < 100) {
     yield();
   }
-  digitalWrite(TRIGGER_PIN, LOW);
-  pulseWidth = pulseIn(INPUT_PIN, HIGH);
-  return pulseWidth;
+  digitalWrite(triggerPin, LOW);
+  output = pulseIn(inputPin, HIGH);
+  this->notify();
+  });
 }
 
-void UltrasonicInput::enable() {
-  app.onRepeat(read_delay, [this]() { this->update(); });
-}
-
-JsonObject& UltrasonicInput::get_configuration(JsonBuffer& buf) {
+JsonObject& UltrasonicSensValue::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
   root["read_delay"] = read_delay;
   root["value"] = output;
@@ -41,14 +44,14 @@ JsonObject& UltrasonicInput::get_configuration(JsonBuffer& buf) {
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "Number of milliseconds between each ultrasonicRead(INPUT_PIN)" },
+        "read_delay": { "title": "Read delay", "type": "number", "description": "Number of milliseconds between each thermocouple read " },
         "value": { "title": "Last value", "type" : "number", "readOnly": true }
     }
   })###";
 
-String UltrasonicInput::get_config_schema() { return FPSTR(SCHEMA); }
+String UltrasonicSensValue::get_config_schema() { return FPSTR(SCHEMA); }
 
-bool UltrasonicInput::set_configuration(const JsonObject& config) {
+bool UltrasonicSensValue::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

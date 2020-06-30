@@ -12,8 +12,6 @@
 #define SPI_CLK_PIN 14
 #define DRDY_PIN 5
 
-//max31856_thermocoupletype_t tcType = MAX31856_TCTYPE_K;   // other types can be B, E, J, N, R, S, T
-
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
 ReactESP app([] () {
@@ -56,7 +54,7 @@ ReactESP app([] () {
 
   // Create a sensor that is the source of our data, that will be read every 1000 ms. 
   const uint readDelay = 1000;
-
+  //tcType:  MAX31856_TCTYPE_K;   // other types can be B, E, J, N, R, S, T
   auto* pMAX31856TC = new MAX31856TC(SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN, SPI_CLK_PIN, DRDY_PIN, MAX31856_TCTYPE_K, "");
 
   // Create a MAX31856TCvalue which is used to read a specific temperature from the MAX31856 and send it to the signalk_output
