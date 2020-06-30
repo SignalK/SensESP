@@ -1,6 +1,6 @@
-#include "max31856TC_input.h"
 #include "Arduino.h"
 #include "sensesp.h"
+#include "max31856TC_input.h"
 
 uint8_t dataRdy;
 

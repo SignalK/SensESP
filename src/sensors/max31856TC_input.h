@@ -1,7 +1,7 @@
 #ifndef _MAX31856TC_input_H_
 #define _MAX31856TC_input_H_
 #include "sensor.h"
-#include <Adafruit_MAX31856.h>
+#include "Adafruit_MAX31856.h"
 
 class MAX31856TC : public Sensor {
   public:
