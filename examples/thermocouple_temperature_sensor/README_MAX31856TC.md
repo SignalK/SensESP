@@ -1,8 +1,6 @@
 # Thermocouple engine temperature sensor
 
  ## Introduction
- 
- On my boat, the engine temperature gauge is placed about ankle level to the left of the wheel. Not a place you look often when steering. Never once in all of the times the engine, for one reason or another, has overheated, did I discover it until there was billows of steam coming out of the exhaust. A better solution to monitoring engine temperatuer is clearly warranted. 
 
 This example implements a thermocouple temperature sensor usig the Adafruit MAX31856 break-out board and an Adafruit Feather HUZZAH ESP8266 running SensESP to communicate the engine temperature wirelessly to the SignalK navigation system.
 
@@ -22,4 +20,4 @@ The Max31856 thermocouple amplifier will not work with a grounded thermocouple t
 
 ## Software
 
-The Thermocouple engine temperature sensor is implemented in software with two files src/sensors/max31856TC_input.h and src/sensors/max31856_input.cpp.
+The Thermocouple engine temperature sensor is implemented in software with two files src/sensors/thermocouple_temperature_sensor/max31856TC_input.h and max31856_input.cpp.

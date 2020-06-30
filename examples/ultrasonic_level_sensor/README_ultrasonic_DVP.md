@@ -35,7 +35,7 @@ The sensor has a pigtail cable with 4 wires. The connection to the HUZZAH is sho
 
 ## Software
 
-The ultrawsonic distance sensor is implemented in software with the two files SensESP/src/sensors/ultrasonic_input.cpp and SensESP/src/sensors/ultrasonic_input.h. According to the manufacturer, the receipt of a Trigger pulse 100 microsec wide causes the sensor to emit a pulse whose width is proportional to 2X the travel time between the sensor and the reflecting surface. 
+The ultrawsonic distance sensor is implemented in software with the two files SensESP/src/sensors/ultrasonic_level_sensor/ultrasonic_input.cpp and ultrasonic_input.h. According to the manufacturer, the receipt of a Trigger pulse 100 microsec wide causes the sensor to emit a pulse whose width is proportional to 2X the travel time between the sensor and the reflecting surface. 
 
 ![picture 2](images/PWM-Waveform.png)  
 
