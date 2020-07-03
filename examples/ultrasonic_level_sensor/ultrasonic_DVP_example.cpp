@@ -3,9 +3,11 @@
 #include "sensesp_app.h"
 #include "transforms/linear.h"
 #include "signalk/signalk_output.h"
+#include "sensors/ultrasonic_input.h"
+#include "transforms/moving_average.h"
 
 #define TRIGGER_PIN 15
-#device INPUT_PIN 14
+#define INPUT_PIN 14
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
@@ -50,12 +52,9 @@ ReactESP app([]() {
   // can be converted to a distance by the formula 2*distance = pulse_width/speed_of_sound
   // With pulse_width in micro-sec and distance in cm, 2*speed_of_sound = 58
   // The sensor is mounted at the top of a water tank that is 25 cm deep.
-  const uint readDelay = 1000;
+  uint read_delay = 1000;
 
-  auto *pUltrasonicSens = new UltrasonicSens(TRIGGER_PIN, INPUT_PIN, "");
-
-  // Create a UltrasonicSensValue which is used to read the distance measurement from the sensor send it to the signalk_output
-  auto *pUltrasonicSensValue = new UltrasonicSensValue(pUltrasonicSens, readDelay, ultrasonic_in_config_path);
+  auto* pUltrasonicSens = new UltrasonicSens(TRIGGER_PIN, INPUT_PIN, read_delay, ultrasonic_in_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then adds the offset,
   // to calculate its output. In this example, we want to see the final output presented
@@ -65,10 +64,11 @@ ReactESP app([]() {
   // empty = 116 * (-0.044347 / 58) +  1.08675 = 0
   const float multiplier = -0.00074948;
   const float offset = 1.08675;
+  float scale = 1.0;
 
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the SignalK server.
-  pUltrasonicSensValue->connectTo(new Linear(multiplier, offset, linear_config_path))
+  pUltrasonicSens->connectTo(new Linear(multiplier, offset, linear_config_path))
       ->connectTo(new MovingAverage(10, scale, ultrasonic_ave_samples))
       ->connectTo(new SKOutputNumber(sk_path));
 
