@@ -12,14 +12,6 @@ UltrasonicSens::UltrasonicSens(int8_t trig_pin, int8_t input_pin, uint read_dela
   load_configuration();
 }
 
-/*
-UltrasonicSensValue::UltrasonicSensValue(UltrasonicSens* pUltrasonicSens, uint read_delay, String config_path) :
-  NumericSensor(config_path), pUltrasonicSens{pUltrasonicSens}, read_delay{read_delay} {
-    className = "UltrasonicSensValue";
-    load_configuration();
-  }
-*/
-
 void UltrasonicSens::enable() {
   app.onRepeat(read_delay, [this]() { 
     digitalWrite(triggerPin, HIGH);
