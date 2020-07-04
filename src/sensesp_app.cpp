@@ -9,7 +9,6 @@
 #include "sensors/analog_input.h"
 #include "sensors/digital_input.h"
 #include "sensors/system_info.h"
-#include "sensors/ultrasonic_input.h"
 #include "net/discovery.h"
 #include "net/ota.h"
 #include "net/networking.h"

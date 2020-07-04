@@ -55,10 +55,7 @@ ReactESP app([] () {
   // Create a sensor that is the source of our data, that will be read every 1000 ms. 
   const uint readDelay = 1000;
   //tcType:  MAX31856_TCTYPE_K;   // other types can be B, E, J, N, R, S, T
-  auto* pMAX31856TC = new MAX31856TC(SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN, SPI_CLK_PIN, DRDY_PIN, MAX31856_TCTYPE_K, "");
-
-  // Create a MAX31856TCvalue which is used to read a specific temperature from the MAX31856 and send it to the signalk_output
-  auto* pMAX31856TCvalue = new MAX31856TCvalue(pMAX31856TC, readDelay, temperature_in_config_path);
+  auto* pMAX31856TC = new MAX31856TC(SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN, SPI_CLK_PIN, DRDY_PIN, MAX31856_TCTYPE_K, readDelay, temperature_in_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then adds the offset,
   // to calculate its output. The MAX31856TC produces temperatures in degrees Celcius. We need to change
@@ -69,7 +66,7 @@ ReactESP app([] () {
 
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the SignalK server.
-  pMAX31856TCvalue -> connectTo(new Linear(multiplier, offset, ""))
+  pMAX31856TC -> connectTo(new Linear(multiplier, offset, ""))
                -> connectTo(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running
