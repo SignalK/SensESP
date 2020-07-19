@@ -20,6 +20,7 @@
 class SensESPApp {
  public:
   SensESPApp(SensESPAppOptions* appOptions);
+  SensESPApp();
   void enable();
   void reset();
   String get_hostname();

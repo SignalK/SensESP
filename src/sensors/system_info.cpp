@@ -61,3 +61,14 @@ void IPAddrDev::update() {
 void IPAddrDev::enable() {
   app.onRepeat(10000, [this](){ this->update(); });
 }
+
+void WifiSignal::enable()
+{
+  app.onRepeat(3000, [this](){ this->update(); });
+}
+
+void WifiSignal::update()
+{
+  output = WiFi.RSSI();
+  this->notify();
+}

@@ -43,4 +43,14 @@ class IPAddrDev : public StringSensor {
   void update();
 };
 
+class WifiSignal : public NumericSensor
+{
+  public:
+   WifiSignal() { className = "WifiSignal"; }
+   void enable() override final;
+   String get_value_name() { return "WifiSignal"; }
+  private:
+    void update();
+};
+
 #endif

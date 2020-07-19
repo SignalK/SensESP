@@ -23,11 +23,14 @@
 RemoteDebug Debug;
 #endif
 
-// FIXME: Setting up the system is too verbose and repetitive
-//SensESPApp::SensESPApp(StdSensors_t stdSensors) : stdSensors{stdSensors}
+SensESPApp::SensESPApp() : SensESPApp(new SensESPAppOptions())
+{
+
+}
+
 SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
  {
-  this->options = appOptions;
+    options = appOptions;
 
   // initialize filesystem
 #ifdef ESP8266
@@ -40,7 +43,7 @@ SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
   }
 
   // create the networking object
-  networking = new Networking("/system/networking");
+  networking = new Networking("/system/networking", appOptions);
   ObservableValue<String>* hostname = networking->get_hostname();
 
   // setup standard sensors and their transforms
@@ -82,7 +85,7 @@ void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
     // connect systemhz
     auto sensorOptions = this->options->getStandardSensors();
 
-    if(sensorOptions & frequency != 0)
+    if((sensorOptions & frequency) != 0)
     {
       connect_1to1_h<SystemHz, SKOutput<float>>(
         new SystemHz(),
@@ -92,7 +95,7 @@ void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
     }
 
     // connect freemem
-    if(sensorOptions & freeMemory != 0)
+    if((sensorOptions & freeMemory) != 0)
     {
       connect_1to1_h<FreeMem, SKOutput<float>>(
         new FreeMem(),
@@ -103,11 +106,20 @@ void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
     
     // connect ip address
 
-    if(sensorOptions & ipAddress != 0)
+    if((sensorOptions & ipAddress) != 0)
     {
       connect_1to1_h<IPAddrDev, SKOutput<String>>(
         new IPAddrDev(),
         new SKOutput<String>(),
+        hostname
+      );
+    }
+
+    if((sensorOptions & wifiSignal) != 0)
+    {
+      connect_1to1_h<WifiSignal, SKOutput<float>>(
+        new WifiSignal(),
+        new SKOutput<float>(),
         hostname
       );
     }

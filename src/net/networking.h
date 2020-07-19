@@ -10,12 +10,11 @@
 #include "system/configurable.h"
 #include "system/observablevalue.h"
 
-#include "sensesp_app.h"
 #include "sensesp_app_options.h"
 
 class Networking : public Configurable {
  public:
-  Networking(String config_path);
+  Networking(String config_path, SensESPAppOptions* options);
   void setup(std::function<void(bool)> connection_cb);
   ObservableValue<String>* get_hostname();
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;

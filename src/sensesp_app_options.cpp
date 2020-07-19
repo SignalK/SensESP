@@ -15,6 +15,8 @@ SensESPAppOptions* SensESPAppOptions::useDefault()
     mDNSEnabled = true;
     wifiSet = false;
     serverSet = false;
+    ledPin = LED_BUILTIN;
+    hostName = "";
 
     useLED();
 
@@ -44,7 +46,6 @@ SensESPAppOptions* SensESPAppOptions::useServer(String address, int port)
 SensESPAppOptions* SensESPAppOptions::useStandardSensors(StandardSensorsOptions_t sensors)
 {
     enabledSensors = sensors;
-
     return this;
 }
 
@@ -55,5 +56,11 @@ SensESPAppOptions* SensESPAppOptions::useLED(bool enabled, int webSocketConnecte
     ledIntervals.websocketConnected = webSocketConnected;
     ledIntervals.offlineInterval = offline;
 
+    return this;
+}
+
+SensESPAppOptions* SensESPAppOptions::useHostName(String hostName)
+{
+    hostName = hostName;
     return this;
 }

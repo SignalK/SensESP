@@ -456,7 +456,7 @@ bool WSClient::set_configuration(const JsonObject& config) {
 
   if(!options->getMDNSEnabled() && !options->isServerSet())
   {
-    debugI("Using preconfigured server address %s and port %d from SensESP options.", options->getServerAddress(), options->getServerPort());
+    debugI("Using preconfigured server address %s and port %d from SensESP options.", options->getServerAddress().c_str(), options->getServerPort());
     this->server_address = options->getServerAddress();
     this->server_port = options->getServerPort();
   }

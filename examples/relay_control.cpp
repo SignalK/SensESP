@@ -34,7 +34,9 @@ ReactESP app([] () {
   sensesp_app = new SensESPApp(new SensESPAppOptions()
                 ->useWifi("ssdi", "password")
                 ->useServer("10.10.10.1", 3000)
-                ->useStandardSensors(allStdSensors));
+                ->useStandardSensors(all)
+                ->setLEDPin(10)
+                ->useLED(true, 1000, 5000, 10000));
   
   // Define the SK Path you want to listen to
   const char* sk_path = "environment.outside.illuminance";

@@ -17,10 +17,17 @@ void save_config_callback() {
   should_save_config = true;
 }
 
-Networking::Networking(String config_path)
+Networking::Networking(String config_path, SensESPAppOptions* options)
     : Configurable{config_path} {
-  hostname = new ObservableValue<String>(String("sensesp"));
-  options = sensesp_app->getOptions();
+  this->options = options;
+  if(options->getHostname().isEmpty())
+  {
+    hostname = new ObservableValue<String>(String("sensesp"));
+  }
+  else
+  {
+    hostname = new ObservableValue<String>(options->getHostname());
+  }  
 
   load_configuration();
   server = new AsyncWebServer(80);
@@ -51,7 +58,7 @@ void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
 
   uint32_t timer_start = millis();
 
-  rdebugI("Connecting to wifi");
+  rdebugI("Connecting to wifi %s", ap_ssid.c_str());
   while (WiFi.status() != WL_CONNECTED &&
          (millis() - timer_start) < 3 * 60 * 1000) {
     delay(500);
@@ -60,7 +67,7 @@ void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
   debugI("\n");
 
   if (WiFi.status() == WL_CONNECTED) {
-    debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
+    debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(), WiFi.RSSI());
     connection_cb(true);
   }
 }
@@ -90,7 +97,7 @@ void Networking::setup_wifi_manager(std::function<void(bool)> connection_cb) {
     ESP.restart();
   }
 
-  debugI("Connected to wifi, SSID: %s", WiFi.SSID().c_str());
+  debugI("Connected to wifi,");
   debugI("IP address of Device: %s",  WiFi.localIP().toString().c_str());
   connection_cb(true);
 
@@ -149,7 +156,7 @@ bool Networking::set_configuration(const JsonObject& config) {
 
   if((this->ap_ssid.isEmpty() || this->ap_password.isEmpty()) && options->isWifiSet())
   {
-    debugI("Using preconfigured SSID %s and password from SensESP options.", options->getSsid());
+    debugI("Using preconfigured SSID %s and password from SensESP options.", options->getSsid().c_str());
     this->ap_ssid = options->getSsid();
     this->ap_password = options->getPassword();
   }
@@ -158,7 +165,7 @@ bool Networking::set_configuration(const JsonObject& config) {
 }
 
 void Networking::reset_settings() {
-  hostname->set("");
+  hostname->set(options->getHostname());
   if(options->isWifiSet())
   {
     ap_ssid = options->getSsid();
