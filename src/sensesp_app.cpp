@@ -23,19 +23,17 @@
 RemoteDebug Debug;
 #endif
 
-SensESPApp::SensESPApp() : SensESPApp(new SensESPAppOptions())
+SensESPApp::SensESPApp() : SensESPApp([this](SensESPAppOptions*o) { })
 {
 
 }
 
-SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
- {
-    options = appOptions;
 
-    if(options == NULL)
-    {
-      debugE("appOptions object is null!!");
-    }
+
+SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions)
+{
+  options = new SensESPAppOptions();
+  setupOptions(options);
 
   // initialize filesystem
 #ifdef ESP8266
@@ -48,11 +46,10 @@ SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
   }
 
   // create the networking object
-  networking = new Networking("/system/networking", appOptions);
+  networking = new Networking("/system/networking", options);
   ObservableValue<String>* hostname = networking->get_hostname();
 
   // setup standard sensors and their transforms
-  debugE("");
   setup_standard_sensors(hostname);
 
   // create the SK delta object
@@ -65,7 +62,7 @@ SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
     this->sk_delta->set_hostname(hostname->get());
   });
 
-  led_blinker = new LedBlinker(appOptions);
+  led_blinker = new LedBlinker(options);
 
   // create the HTTP server
 

@@ -19,7 +19,8 @@
 
 class SensESPApp {
  public:
-  SensESPApp(SensESPAppOptions* appOptions);
+  //SensESPApp(SensESPAppOptions* appOptions);
+  SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions);
   SensESPApp();
   void enable();
   void reset();
@@ -75,6 +76,10 @@ class SensESPApp {
   SKDelta* sk_delta;
   WSClient* ws_client;
 
+  void DefaultOptionsSetup(SensESPAppOptions*options)
+  {
+
+  };
 };
 
 extern SensESPApp* sensesp_app;
