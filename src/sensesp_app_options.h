@@ -24,13 +24,14 @@ class SensESPAppOptions {
         SensESPAppOptions* setLEDPin(int pin);
         SensESPAppOptions* useHostName(String hostname);
 
-        String getSsid() { return this->ssid; }
+        String getSsid() { return ssid; }
         String getPassword() { return password; }
         String getServerAddress() { return serverAddress; }
         int getServerPort() { return serverPort; }
         bool getMDNSEnabled() { return mDNSEnabled; }
         StandardSensorsOptions_t getStandardSensors() { return enabledSensors; } 
         bool getLEDEnabled() { return enableLED; }
+        int getLEDPin() { return ledPin; }
         bool isWifiSet() { return wifiSet; }
         bool isServerSet() { return serverSet; }
         LedIntervals_T getLEDIntervals() { return ledIntervals; }

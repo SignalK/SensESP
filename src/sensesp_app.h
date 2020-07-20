@@ -70,7 +70,7 @@ class SensESPApp {
   void setup_standard_sensors(ObservableValue<String>* hostname);
 
   HTTPServer* http_server;
-  LedBlinker led_blinker;
+  LedBlinker* led_blinker;
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;

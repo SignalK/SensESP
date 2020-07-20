@@ -40,7 +40,7 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   }
 }
 
-WSClient::WSClient(String config_path, SKDelta* sk_delta,
+WSClient::WSClient(String config_path, SKDelta* sk_delta, SensESPAppOptions* options,
                    std::function<void(bool)> connected_cb,
                    void_cb_func delta_cb)
     : Configurable{config_path} {
@@ -50,9 +50,9 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta,
 
   // set the singleton object pointer
   ws_client = this;
-  options = sensesp_app->getOptions();
-
-  load_configuration();
+  this->options = options;
+  
+  load_configuration();    
 }
 
 void WSClient::enable() {
@@ -187,7 +187,12 @@ void WSClient::connect() {
   String server_address = "";
   uint16_t server_port = 80;
 
-  if (this->server_address.isEmpty() && options->useMDNS()) {
+  if(options->isServerSet())
+  {
+    server_address = options->getServerAddress();
+    server_port = options->getServerPort();
+  }
+  else if (this->server_address.isEmpty() && options->useMDNS()) {
     if (!get_mdns_service(server_address, server_port)) {
        debugI("No mDNS service found by get_mdns_service");
     }

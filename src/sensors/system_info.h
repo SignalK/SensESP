@@ -48,7 +48,7 @@ class WifiSignal : public NumericSensor
   public:
    WifiSignal() { className = "WifiSignal"; }
    void enable() override final;
-   String get_value_name() { return "WifiSignal"; }
+   String get_value_name() { return "wifisignal"; }
   private:
     void update();
 };

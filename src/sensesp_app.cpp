@@ -32,6 +32,11 @@ SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
  {
     options = appOptions;
 
+    if(options == NULL)
+    {
+      debugE("appOptions object is null!!");
+    }
+
   // initialize filesystem
 #ifdef ESP8266
   if (!SPIFFS.begin()) {
@@ -47,7 +52,7 @@ SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
   ObservableValue<String>* hostname = networking->get_hostname();
 
   // setup standard sensors and their transforms
-
+  debugE("");
   setup_standard_sensors(hostname);
 
   // create the SK delta object
@@ -60,6 +65,8 @@ SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
     this->sk_delta->set_hostname(hostname->get());
   });
 
+  led_blinker = new LedBlinker(appOptions);
+
   // create the HTTP server
 
   this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this));
@@ -68,17 +75,17 @@ SensESPApp::SensESPApp(SensESPAppOptions* appOptions)
 
   auto ws_connected_cb = [this](bool connected){
     if (connected) {
-      this->led_blinker.set_server_connected();
+      this->led_blinker->set_server_connected();
     } else {
-      this->led_blinker.set_server_disconnected();
+      this->led_blinker->set_server_disconnected();
     }
   };
   auto ws_delta_cb = [this](){
-    this->led_blinker.flip();
+    this->led_blinker->flip();
   };
   this->ws_client = new WSClient(
-    "/system/sk",
-    sk_delta, ws_connected_cb, ws_delta_cb);
+    "/system/sk", sk_delta, options,
+    ws_connected_cb, ws_delta_cb);
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
@@ -126,7 +133,7 @@ void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
 }
 
 void SensESPApp::enable() {
-  this->led_blinker.set_wifi_disconnected();
+  this->led_blinker->set_wifi_disconnected();
 
   // connect all transforms to the Signal K delta output
 
@@ -149,9 +156,9 @@ void SensESPApp::enable() {
   debugI("Subsystem: networking->setup()");
   networking->setup([this](bool connected) {
     if (connected) {
-      this->led_blinker.set_wifi_connected();
+      this->led_blinker->set_wifi_connected();
     } else {
-      this->led_blinker.set_wifi_disconnected();
+      this->led_blinker->set_wifi_disconnected();
       debugD("Not connected to wifi");
     }
   });

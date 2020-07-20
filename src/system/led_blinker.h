@@ -2,10 +2,14 @@
 #define _led_blinker_H_
 
 #include <ReactESP.h>
+#include "sensesp_app_options.h"
 
 class LedBlinker {
   private:
     int current_state = 0;
+    int pin = 0;
+    bool enabled = true;
+    LedIntervals_T intervals;
     RepeatReaction* blinker = nullptr;
     void remove_blinker();
   protected:
@@ -18,7 +22,7 @@ class LedBlinker {
       set_wifi_connected();
     }
     void flip();
-    LedBlinker();
+    LedBlinker(SensESPAppOptions*options);
 };
 
 #endif

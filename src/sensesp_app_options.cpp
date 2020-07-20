@@ -64,3 +64,11 @@ SensESPAppOptions* SensESPAppOptions::useHostName(String hostName)
     hostName = hostName;
     return this;
 }
+
+SensESPAppOptions* SensESPAppOptions::useMDNS()
+{
+    this->serverAddress = "";
+    this->serverPort = 0;
+    return this;
+}
+

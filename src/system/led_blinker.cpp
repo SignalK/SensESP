@@ -11,9 +11,16 @@
                              // you can add an external LED to an available GPIO pin and use that pin number here.
 #endif
 
-LedBlinker::LedBlinker() {
-  pinMode(LED_PIN, OUTPUT);
-  this->set_state(0);
+LedBlinker::LedBlinker(SensESPAppOptions*options) {
+  pin = options->getLEDPin();
+  enabled = options->getLEDEnabled();
+  intervals = options->getLEDIntervals();
+
+  if(enabled)
+  {
+    pinMode(pin, OUTPUT);
+    this->set_state(0);
+  }
 }
 
 void LedBlinker::remove_blinker() {
@@ -23,7 +30,7 @@ void LedBlinker::remove_blinker() {
 }
 
 void LedBlinker::set_state(int new_state) {
-  if(sensesp_app->getOptions()->getLEDEnabled())
+  if(enabled)
   {
     this->current_state = new_state;
     digitalWrite(LED_PIN, !new_state);
@@ -31,16 +38,18 @@ void LedBlinker::set_state(int new_state) {
 }
 
 void LedBlinker::flip() {
-  this->set_state(!this->current_state);
+  if(enabled)
+  {
+    this->set_state(!this->current_state);
+  }
 }
 
 void LedBlinker::set_wifi_disconnected() {
   this->remove_blinker();
-  auto interval = sensesp_app->getOptions()->getLEDIntervals().offlineInterval;
 
-  if(interval > 0)
+  if(intervals.offlineInterval > 0)
   {
-    this->blinker = app.onRepeat(interval, [this] () {
+    this->blinker = app.onRepeat(intervals.offlineInterval, [this] () {
       this->set_state(1);
       app.onDelay(100, [this] () {
         this->set_state(0);
@@ -51,14 +60,14 @@ void LedBlinker::set_wifi_disconnected() {
 
 void LedBlinker::set_wifi_connected() {
   this->remove_blinker();
-  this->blinker = app.onRepeat(1000, [this] () {
+  this->blinker = app.onRepeat(intervals.wifiConnected, [this] () {
     this->flip();
   });
 }
 
 void LedBlinker::set_server_connected() {
   this->remove_blinker();
-  this->blinker = app.onRepeat(200, [this] () {
+  this->blinker = app.onRepeat(intervals.websocketConnected, [this] () {
     this->flip();
   });
 }
