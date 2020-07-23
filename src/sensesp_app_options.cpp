@@ -16,7 +16,7 @@ SensESPAppOptions* SensESPAppOptions::useDefault()
     wifiSet = false;
     serverSet = false;
     ledPin = LED_BUILTIN;
-    hostName = "";
+    hostName = "sensesp";
 
     useLED();
 
@@ -25,8 +25,8 @@ SensESPAppOptions* SensESPAppOptions::useDefault()
 
 SensESPAppOptions* SensESPAppOptions::useWifi(String ssid, String password)
 {
-    ssid = ssid;
-    password = password;
+    this->ssid = ssid;
+    this->password = password;
     wifiSet = true;
 
     return this;
@@ -61,7 +61,7 @@ SensESPAppOptions* SensESPAppOptions::useLED(bool enabled, int webSocketConnecte
 
 SensESPAppOptions* SensESPAppOptions::useHostName(String hostName)
 {
-    hostName = hostName;
+    this->hostName = hostName;
     return this;
 }
 

@@ -26,8 +26,9 @@
 #define HTTP_SERVER_PORT 80
 #endif
 
-HTTPServer::HTTPServer(std::function<void()> reset_device) {
+HTTPServer::HTTPServer(std::function<void()> reset_device, SensESPAppOptions*options) {
   this->reset_device = reset_device;
+  this->options = options;
   server = new AsyncWebServer(HTTP_SERVER_PORT);
   using std::placeholders::_1;
 
@@ -221,6 +222,45 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
 
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
-  request->send(200, "text/plain", "/info");
+  auto * response = request->beginResponseStream("text/plain");
+
+  response->setCode(200);
+  response->printf("Name: %s, build at %s %s", options->getHostname().c_str(), __DATE__, __TIME__);
+
+  response->println();
+  response->printf("MAC: %s", WiFi.macAddress().c_str());
+  response->println();
+  response->printf("WiFi signal: %d", WiFi.RSSI());
+  response->println();
+
+  if(options->isWifiSet())
+  {
+    response->println("Wifi configuration is set in main.cpp");
+    response->printf("SSID: %s", options->getSsid().c_str());
+  }
+  else
+  {
+    response->println("Wifi configuration is set in Web UI");
+    response->printf("SSID: %s", WiFi.SSID().c_str());
+  }  
+
+  response->println();
+
+  if(options->isServerSet())
+  {
+    response->println("SignalK adddress is set in main.cpp");
+    response->printf("Server: %s:%d", options->getServerAddress().c_str(), options->getServerPort());
+    response->println();
+  }
+  else if(options->useMDNS())
+  {
+    response->println("SignalK adddress will be found using mDNS.");
+  }
+  else
+  {
+    response->println("SignalK adddress is set in Web UI");
+  }  
+
+  request->send(response);
 }
 

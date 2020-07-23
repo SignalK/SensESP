@@ -20,16 +20,17 @@ void save_config_callback() {
 Networking::Networking(String config_path, SensESPAppOptions* options)
     : Configurable{config_path} {
   this->options = options;
-  if(options->getHostname().isEmpty())
-  {
-    hostname = new ObservableValue<String>(String("sensesp"));
-  }
-  else
-  {
-    hostname = new ObservableValue<String>(options->getHostname());
-  }  
+  
+  hostname = new ObservableValue<String>(options->getHostname());
 
-  load_configuration();
+  if(options->isWifiSet())
+  {
+    debugI("Using preconfigured SSID %s and password main.cpp", options->getSsid().c_str());
+    this->ap_ssid = options->getSsid();
+    this->ap_password = options->getPassword();
+  } else {
+    load_configuration();
+  }
   server = new AsyncWebServer(80);
   dns = new DNSServer();
   wifi_manager = new AsyncWiFiManager(server, dns);
@@ -133,8 +134,21 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
+  static const char SCHEMA_READONLY[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "hostname": { "title": "ESP device hostname", "type": "string", "readOnly": true },
+        "ap_ssid": { "title": "Wifi Access Point SSID", "type": "string", "readOnly": true },
+        "ap_password": { "title": "Wifi Access Point Password", "type": "string", "readOnly": true }
+    }
+  })";
+
 String Networking::get_config_schema() {
-  return FPSTR(SCHEMA);
+  if(options->isWifiSet()) {
+    return FPSTR(SCHEMA_READONLY);
+  } else {
+    return FPSTR(SCHEMA);
+  }
 }
 
 JsonObject& Networking::get_configuration(JsonBuffer& buf) {
@@ -147,19 +161,19 @@ JsonObject& Networking::get_configuration(JsonBuffer& buf) {
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
+
+  if(options->isWifiSet())
+  {
+    debugI("Networking configuration update rejected. Configuration is set from main.cpp.");
+    return false;
+  }
+
   if (!config.containsKey("hostname")) {
     return false;
   }
   this->hostname->set(config["hostname"].as<String>());
   this->ap_ssid = config["ap_ssid"].as<String>();
-  this->ap_password = config["ap_password"].as<String>();
-
-  if((this->ap_ssid.isEmpty() || this->ap_password.isEmpty()) && options->isWifiSet())
-  {
-    debugI("Using preconfigured SSID %s and password from SensESP options.", options->getSsid().c_str());
-    this->ap_ssid = options->getSsid();
-    this->ap_password = options->getPassword();
-  }
+  this->ap_password = config["ap_password"].as<String>(); 
 
   return true;
 }

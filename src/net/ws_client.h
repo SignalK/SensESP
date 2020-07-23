@@ -56,6 +56,7 @@ class WSClient : public Configurable {
   std::function<void(bool)> connected_cb;
   void_cb_func delta_cb;
   bool get_mdns_service(String &server_address, uint16_t& server_port);
+  void setConfigurationFromOptions();
 };
 
 #endif

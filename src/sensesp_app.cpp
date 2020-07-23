@@ -47,6 +47,7 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions)
 
   // create the networking object
   networking = new Networking("/system/networking", options);
+  
   ObservableValue<String>* hostname = networking->get_hostname();
 
   // setup standard sensors and their transforms
@@ -66,7 +67,7 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions)
 
   // create the HTTP server
 
-  this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this));
+  this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this), options);
 
   // create the websocket client
 

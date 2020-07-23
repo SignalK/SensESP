@@ -32,7 +32,7 @@ ReactESP app([] () {
 
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp(new SensESPAppOptions()
-                ->useWifi("ssdi", "password")
+                ->useWifi("yourSSID", "yourPassword")
                 ->useServer("10.10.10.1", 3000)
                 ->useStandardSensors(all)
                 ->setLEDPin(10)

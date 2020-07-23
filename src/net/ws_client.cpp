@@ -52,7 +52,14 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta, SensESPAppOptions* opt
   ws_client = this;
   this->options = options;
   
-  load_configuration();    
+  if(options->isServerSet())
+  {
+    setConfigurationFromOptions();
+  }
+  else
+  {
+    load_configuration();   
+  }  
 }
 
 void WSClient::enable() {
@@ -184,32 +191,28 @@ void WSClient::connect() {
 
   connection_state = connecting;
 
-  String server_address = "";
-  uint16_t server_port = 80;
-
-  if(options->isServerSet())
-  {
-    server_address = options->getServerAddress();
-    server_port = options->getServerPort();
-  }
-  else if (this->server_address.isEmpty() && options->useMDNS()) {
+  String server_address = this->server_address;
+  uint16_t server_port = this->server_port;
+  
+  if (this->server_address.isEmpty() && options->useMDNS()) {
     if (!get_mdns_service(server_address, server_port)) {
-       debugI("No mDNS service found by get_mdns_service");
+       debugE("No SignalK server found in network when using mDNS service!");
     }
-  } else {
-    server_address = this->server_address;
-    server_port = this->server_port;
+    else
+    {
+      debugI("SignalK has been found at address %s:%d by mDNS.", server_address.c_str(), server_port);
+    }    
   }
 
   if (!server_address.isEmpty() && server_port > 0) {
-    debugD("Websocket client starting");
+    debugD("Websocket is connecting to SignalK on address %s:%d", server_address.c_str(), server_port);
   } else {
     // host and port not defined - wait for mDNS
-    if(options->useMDNS())
+    if(!options->getMDNSEnabled())
     {
-      debugW("Websocket server or port isn't definied!");
-    }
-    
+      debugW("SignalK server address and port isn't configured! Please configure it from Web UI at address http://%s:80/", WiFi.localIP().toString().c_str());
+    }    
+
     connection_state = disconnected;
     return;
   }
@@ -438,35 +441,69 @@ static const char SCHEMA[] PROGMEM = R"({
         "sk_address": { "title": "SignalK server address", "type": "string" },
         "sk_port": { "title": "SignalK server port", "type": "integer" },
         "client_id": { "title": "Client ID", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token", "type": "string" },
+        "token": { "title": "Server authorization token", "type": "string", "readOnly": true },
         "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
     }
   })";
 
-String WSClient::get_config_schema() { return FPSTR(SCHEMA); }
+  static const char SCHEMA_READONLY[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "sk_address": { "title": "SignalK server address", "type": "string", "readOnly": true },
+        "sk_port": { "title": "SignalK server port", "type": "integer", "readOnly": true },
+        "client_id": { "title": "Client ID", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
+    }
+  })";
+
+String WSClient::get_config_schema() 
+{
+  if(!options->isServerSet())
+  {
+    return FPSTR(SCHEMA); 
+  } else {
+    return FPSTR(SCHEMA_READONLY);
+  }  
+}
+
+void WSClient::setConfigurationFromOptions()
+{
+  if(options->isServerSet())
+  {
+      debugI("Using preconfigured server address %s and port %d from main.cpp", options->getServerAddress().c_str(), options->getServerPort());
+      this->server_address = options->getServerAddress();
+      this->server_port = options->getServerPort();
+  }
+}
 
 bool WSClient::set_configuration(const JsonObject& config) {
+
   String expected[] = {"sk_address", "sk_port", "token", "client_id"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
+      debugI("Websocket configuration update rejected. Missing following parameter: %s", str.c_str());
       return false;
     }
   }
-  this->server_address = config["sk_address"].as<String>();
-  this->server_port = config["sk_port"].as<int>();
+
+  if(options->isServerSet())
+  {
+    debugI("Websocket configuration change ignored. Configuration is from main.cpp.");
+  } else {
+    this->server_address = config["sk_address"].as<String>();
+    this->server_port = config["sk_port"].as<int>();
+  }  
+
   // FIXME: setting the token should not be allowed via the REST API.
   this->auth_token = config["token"].as<String>();
   this->client_id = config["client_id"].as<String>();
   this->polling_href = config["polling_href"].as<String>();
 
-  if(!options->getMDNSEnabled() && !options->isServerSet())
-  {
-    debugI("Using preconfigured server address %s and port %d from SensESP options.", options->getServerAddress().c_str(), options->getServerPort());
-    this->server_address = options->getServerAddress();
-    this->server_port = options->getServerPort();
-  }
+  
 
   return true;
 }
+
 
 

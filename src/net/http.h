@@ -4,10 +4,11 @@
 #include <functional>
 
 #include <ESPAsyncWebServer.h>
+#include "sensesp_app_options.h"
 
 class HTTPServer {
  public:
-  HTTPServer(std::function<void()> reset_device);
+  HTTPServer(std::function<void()> reset_device, SensESPAppOptions*options);
   ~HTTPServer() { delete server; }
   void enable() { server->begin(); }
   void handle_not_found(AsyncWebServerRequest* request);
@@ -19,6 +20,7 @@ class HTTPServer {
   AsyncWebServer* server;
   std::function<void()> reset_device;
   void handle_config_list(AsyncWebServerRequest* request);
+  SensESPAppOptions*options;
 };
 
 
