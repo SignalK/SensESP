@@ -153,9 +153,19 @@ String Networking::get_config_schema() {
 
 JsonObject& Networking::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
-  root["hostname"] = this->hostname->get();
-  root["ap_ssid"] = this->ap_ssid;
-  root["ap_password"] = this->ap_password;
+
+  if(options->isWifiSet())
+  {
+    root["hostname"] = options->getHostname();
+    root["ap_ssid"] = options->getSsid();
+    root["ap_password"] = options->getPassword();
+  }
+  else
+  {
+    root["hostname"] = this->hostname->get();
+    root["ap_ssid"] = this->ap_ssid;
+    root["ap_password"] = this->ap_password;    
+  }  
 
   return root;
 }

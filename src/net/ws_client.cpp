@@ -427,8 +427,15 @@ void WSClient::send_delta() {
 
 JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
-  root["sk_address"] = this->server_address;
-  root["sk_port"] = this->server_port;
+  if(options->isServerSet())
+  {
+    root["sk_address"] = options->getServerAddress();
+    root["sk_port"] = options->getServerPort();
+  } else {
+    root["sk_address"] = this->server_address;
+    root["sk_port"] = this->server_port;
+  }
+
   root["token"] = this->auth_token;
   root["client_id"] = this->client_id;
   root["polling_href"] = this->polling_href;
