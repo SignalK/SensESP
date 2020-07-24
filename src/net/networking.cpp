@@ -137,9 +137,9 @@ static const char SCHEMA[] PROGMEM = R"({
   static const char SCHEMA_READONLY[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "hostname": { "title": "ESP device hostname", "type": "string", "readOnly": true },
-        "ap_ssid": { "title": "Wifi Access Point SSID", "type": "string", "readOnly": true },
-        "ap_password": { "title": "Wifi Access Point Password", "type": "string", "readOnly": true }
+        "hostname": { "title": "ESP device hostname - readonly", "type": "string", "readOnly": true },
+        "ap_ssid": { "title": "Wifi Access Point SSID - readonly", "type": "string", "readOnly": true },
+        "ap_password": { "title": "Wifi Access Point Password - readonly", "type": "string", "readOnly": true }
     }
   })";
 

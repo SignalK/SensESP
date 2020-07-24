@@ -52,13 +52,11 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta, SensESPAppOptions* opt
   ws_client = this;
   this->options = options;
   
+  load_configuration();
+
   if(options->isServerSet())
   {
     setConfigurationFromOptions();
-  }
-  else
-  {
-    load_configuration();   
   }  
 }
 
@@ -439,6 +437,7 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   root["token"] = this->auth_token;
   root["client_id"] = this->client_id;
   root["polling_href"] = this->polling_href;
+
   return root;
 }
 
@@ -447,20 +446,20 @@ static const char SCHEMA[] PROGMEM = R"({
     "properties": {
         "sk_address": { "title": "SignalK server address", "type": "string" },
         "sk_port": { "title": "SignalK server port", "type": "integer" },
-        "client_id": { "title": "Client ID", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token", "type": "string", "readOnly": true },
-        "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
+        "client_id": { "title": "Client ID - readonly", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token - readonly", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href - readonly", "type": "string", "readOnly": true }
     }
   })";
 
   static const char SCHEMA_READONLY[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "sk_address": { "title": "SignalK server address", "type": "string", "readOnly": true },
-        "sk_port": { "title": "SignalK server port", "type": "integer", "readOnly": true },
-        "client_id": { "title": "Client ID", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token", "type": "string", "readOnly": true },
-        "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
+        "sk_address": { "title": "SignalK server address - readonly", "type": "string", "readOnly": true },
+        "sk_port": { "title": "SignalK server port - readonly", "type": "integer", "readOnly": true },
+        "client_id": { "title": "Client ID  - readonly", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token - readonly", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href - readonly", "type": "string", "readOnly": true }
     }
   })";
 
@@ -506,8 +505,6 @@ bool WSClient::set_configuration(const JsonObject& config) {
   this->auth_token = config["token"].as<String>();
   this->client_id = config["client_id"].as<String>();
   this->polling_href = config["polling_href"].as<String>();
-
-  
 
   return true;
 }
