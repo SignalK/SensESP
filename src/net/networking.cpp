@@ -48,7 +48,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid(connection_cb);
   }
-  if (WiFi.status() != WL_CONNECTED) {
+  if (!options->isWifiSet() && WiFi.status() != WL_CONNECTED) {
     setup_wifi_manager(connection_cb);
   }
   app.onRepeat(1000, std::bind(&Networking::check_connection, this));
