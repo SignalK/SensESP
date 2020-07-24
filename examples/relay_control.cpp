@@ -31,12 +31,13 @@ ReactESP app([] () {
   debugI("Serial debug enabled");
 
   // Create the global SensESPApp() object.
-  sensesp_app = new SensESPApp(new SensESPAppOptions()
-                ->useWifi("yourSSID", "yourPassword")
-                ->useServer("10.10.10.1", 3000)
-                ->useStandardSensors(all)
-                ->setLEDPin(10)
-                ->useLED(true, 1000, 5000, 10000));
+  sensesp_app = new SensESPApp([] (SensESPAppOptions*o)
+  {
+         o->useServer("10.10.10.1", 3000)
+          ->useWifi("yourSSID", "yourPassword")
+          ->useHostName("relay")
+          ->useStandardSensors();
+  });
   
   // Define the SK Path you want to listen to
   const char* sk_path = "environment.outside.illuminance";
