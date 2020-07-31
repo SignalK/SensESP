@@ -33,10 +33,10 @@ ReactESP app([] () {
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp([] (SensESPAppOptions*o)
   {
-         o->useServer("10.10.10.1", 3000)
-          ->useWifi("yourSSID", "yourPassword")
-          ->useHostName("relay")
-          ->useStandardSensors();
+         o->setServerOptions("10.10.10.1", 3000)
+          ->setWifiOptions("yourSSID", "yourPassword")
+          ->setHostName("relay")
+          ->setStandardSensors();
   });
   
   // Define the SK Path you want to listen to

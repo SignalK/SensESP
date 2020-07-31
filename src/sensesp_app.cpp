@@ -46,7 +46,8 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions)
   }
 
   // create the networking object
-  networking = new Networking("/system/networking", options);
+  networking = new Networking("/system/networking", options->isWifiSet(), options->getSsid(),
+                                options->getPassword(), options->getHostname());
   
   ObservableValue<String>* hostname = networking->get_hostname();
 
@@ -63,7 +64,7 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions)
     this->sk_delta->set_hostname(hostname->get());
   });
 
-  led_blinker = new LedBlinker(options);
+  led_blinker = new LedBlinker(options->getLEDPin(), options->getLEDEnabled(), options->getLEDIntervals());
 
   // create the HTTP server
 
@@ -94,6 +95,15 @@ void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
     {
       connect_1to1_h<SystemHz, SKOutput<float>>(
         new SystemHz(),
+        new SKOutput<float>(),
+        hostname
+      );
+    }
+
+    if((sensorOptions & uptime) != 0)
+    {
+      connect_1to1_h<Uptime, SKOutput<float>>(
+        new Uptime(),
         new SKOutput<float>(),
         hostname
       );
@@ -148,8 +158,11 @@ void SensESPApp::enable() {
 
   debugI("Enabling subsystems");
 
-  debugI("Subsystem: setup_discovery()");
-  setup_discovery(networking->get_hostname()->get().c_str());
+  if(options->getMDNSEnabled())
+  {
+    debugI("Subsystem: setup_discovery()");
+    setup_discovery(networking->get_hostname()->get().c_str());
+  }
 
   debugI("Subsystem: networking->setup()");
   networking->setup([this](bool connected) {

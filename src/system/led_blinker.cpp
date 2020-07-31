@@ -5,16 +5,10 @@
 #include "sensesp_app.h"
 #include "sensesp_app_options.h"
 
-#ifndef LED_PIN
-#define LED_PIN LED_BUILTIN  // If your board doesn't have a defined LED_BUILTIN, comment this line out...
-//#define LED_PIN 2          // ... and uncomment this line, and change 13 to any LED pin you have. If you have none,
-                             // you can add an external LED to an available GPIO pin and use that pin number here.
-#endif
-
-LedBlinker::LedBlinker(SensESPAppOptions*options) {
-  pin = options->getLEDPin();
-  enabled = options->getLEDEnabled();
-  intervals = options->getLEDIntervals();
+LedBlinker::LedBlinker(int pin, bool enabled, LedIntervals_T intervals) {
+  this->pin = pin;
+  this->enabled = enabled;
+  this->intervals = intervals;
 
   if(enabled)
   {
@@ -33,7 +27,7 @@ void LedBlinker::set_state(int new_state) {
   if(enabled)
   {
     this->current_state = new_state;
-    digitalWrite(LED_PIN, !new_state);
+    digitalWrite(pin, !new_state);
   }
 }
 

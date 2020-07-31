@@ -22,7 +22,7 @@ class LedBlinker {
       set_wifi_connected();
     }
     void flip();
-    LedBlinker(SensESPAppOptions*options);
+    LedBlinker(int pin, bool enabled, LedIntervals_T intervals);
 };
 
 #endif

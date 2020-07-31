@@ -16,13 +16,13 @@ class SensESPAppOptions {
     public:
         SensESPAppOptions();
         SensESPAppOptions* useDefault();
-        SensESPAppOptions* useWifi(String ssid, String password);
-        SensESPAppOptions* useServer(String serverAddress, int port);
-        SensESPAppOptions* useStandardSensors(StandardSensorsOptions_t sensors = all);
+        SensESPAppOptions* setWifiOptions(String ssid, String password);
+        SensESPAppOptions* setServerOptions(String serverAddress, int port);
+        SensESPAppOptions* setStandardSensors(StandardSensorsOptions_t sensors = all);
         SensESPAppOptions* useMDNS();
-        SensESPAppOptions* useLED(bool enabled = true, int webSocketConnected = 200, int wifiConnected = 1000, int offline = 5000);
+        SensESPAppOptions* setLEDOptions(bool enabled = true, int webSocketConnected = 200, int wifiConnected = 1000, int offline = 5000);
         SensESPAppOptions* setLEDPin(int pin);
-        SensESPAppOptions* useHostName(String hostname);
+        SensESPAppOptions* setHostName(String hostname);
 
         String getSsid() { return ssid; }
         String getPassword() { return password; }

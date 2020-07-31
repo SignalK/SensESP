@@ -17,17 +17,17 @@ void save_config_callback() {
   should_save_config = true;
 }
 
-Networking::Networking(String config_path, SensESPAppOptions* options)
+Networking::Networking(String config_path, bool isWifiSet, String ssid, String password, String hostname)
     : Configurable{config_path} {
-  this->options = options;
   
-  hostname = new ObservableValue<String>(options->getHostname());
+  this->hostname = new ObservableValue<String>(hostname);
+  this->isWifiSet = isWifiSet;
 
-  if(options->isWifiSet())
+  if(isWifiSet)
   {
-    debugI("Using preconfigured SSID %s and password main.cpp", options->getSsid().c_str());
-    this->ap_ssid = options->getSsid();
-    this->ap_password = options->getPassword();
+    debugI("Using preconfigured SSID %s and password from main.cpp", ssid.c_str());
+    this->ap_ssid = ssid;
+    this->ap_password = ssid;
   } else {
     load_configuration();
   }
@@ -48,7 +48,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid(connection_cb);
   }
-  if (!options->isWifiSet() && WiFi.status() != WL_CONNECTED) {
+  if (!isWifiSet && WiFi.status() != WL_CONNECTED) {
     setup_wifi_manager(connection_cb);
   }
   app.onRepeat(1000, std::bind(&Networking::check_connection, this));
@@ -59,11 +59,11 @@ void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
 
   uint32_t timer_start = millis();
 
-  rdebugI("Connecting to wifi %s", ap_ssid.c_str());
+  debugI("Connecting to wifi %s", ap_ssid.c_str());
   while (WiFi.status() != WL_CONNECTED &&
          (millis() - timer_start) < 3 * 60 * 1000) {
     delay(500);
-    rdebugI(".");
+    debugI("Wifi status= %d", WiFi.status());
   }
   debugI("\n");
 
@@ -144,7 +144,7 @@ static const char SCHEMA[] PROGMEM = R"({
   })";
 
 String Networking::get_config_schema() {
-  if(options->isWifiSet()) {
+  if(isWifiSet) {
     return FPSTR(SCHEMA_READONLY);
   } else {
     return FPSTR(SCHEMA);
@@ -154,25 +154,16 @@ String Networking::get_config_schema() {
 JsonObject& Networking::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
 
-  if(options->isWifiSet())
-  {
-    root["hostname"] = options->getHostname();
-    root["ap_ssid"] = options->getSsid();
-    root["ap_password"] = options->getPassword();
-  }
-  else
-  {
-    root["hostname"] = this->hostname->get();
-    root["ap_ssid"] = this->ap_ssid;
-    root["ap_password"] = this->ap_password;    
-  }  
+  root["hostname"] = this->hostname->get();
+  root["ap_ssid"] = this->ap_ssid;
+  root["ap_password"] = this->ap_password;    
 
   return root;
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
 
-  if(options->isWifiSet())
+  if(isWifiSet)
   {
     debugI("Networking configuration update rejected. Configuration is set from main.cpp.");
     return false;
@@ -189,13 +180,7 @@ bool Networking::set_configuration(const JsonObject& config) {
 }
 
 void Networking::reset_settings() {
-  hostname->set(options->getHostname());
-  if(options->isWifiSet())
-  {
-    ap_ssid = options->getSsid();
-    ap_password = options->getPassword();
-  }
-  else
+  if(!isWifiSet)
   {
     ap_ssid = "";
     ap_password = "";  
