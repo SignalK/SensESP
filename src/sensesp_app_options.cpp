@@ -66,6 +66,7 @@ SensESPAppOptions* SensESPAppOptions::setLEDOptions(bool enabled, int webSocketC
 SensESPAppOptions* SensESPAppOptions::setHostName(String hostName)
 {
     this->hostName = hostName;
+    this->isHostNameChanged = true;
     return this;
 }
 

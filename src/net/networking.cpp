@@ -17,17 +17,18 @@ void save_config_callback() {
   should_save_config = true;
 }
 
-Networking::Networking(String config_path, bool isWifiSet, String ssid, String password, String hostname)
+Networking::Networking(String config_path, bool isWifiSet, String ssid, String password, bool isHostNameSet, String hostname)
     : Configurable{config_path} {
   
   this->hostname = new ObservableValue<String>(hostname);
   this->isWifiSet = isWifiSet;
+  this->isHostNameSet = isHostNameSet;
 
   if(isWifiSet)
   {
     debugI("Using preconfigured SSID %s and password from main.cpp", ssid.c_str());
     this->ap_ssid = ssid;
-    this->ap_password = ssid;
+    this->ap_password = password;
   } else {
     load_configuration();
   }
@@ -59,13 +60,17 @@ void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
 
   uint32_t timer_start = millis();
 
-  debugI("Connecting to wifi %s", ap_ssid.c_str());
+  debugI("Connecting to wifi %s.", ap_ssid.c_str());
+  int printCounter = 0;
   while (WiFi.status() != WL_CONNECTED &&
          (millis() - timer_start) < 3 * 60 * 1000) {
     delay(500);
-    debugI("Wifi status= %d", WiFi.status());
+    if(printCounter % 4)
+    {
+      debugI("Wifi status=%d, time=%d ms", WiFi.status(), 500 * printCounter);
+    }
+    printCounter++;
   }
-  debugI("\n");
 
   if (WiFi.status() == WL_CONNECTED) {
     debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(), WiFi.RSSI());
@@ -172,7 +177,11 @@ bool Networking::set_configuration(const JsonObject& config) {
   if (!config.containsKey("hostname")) {
     return false;
   }
-  this->hostname->set(config["hostname"].as<String>());
+
+  if(!isHostNameSet)
+  {
+    this->hostname->set(config["hostname"].as<String>());
+  }
   this->ap_ssid = config["ap_ssid"].as<String>();
   this->ap_password = config["ap_password"].as<String>(); 
 

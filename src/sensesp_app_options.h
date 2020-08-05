@@ -36,12 +36,14 @@ class SensESPAppOptions {
         bool isServerSet() { return serverSet; }
         LedIntervals_T getLEDIntervals() { return ledIntervals; }
         String getHostname() { return hostName; }
+        bool isHostNameSet() { return isHostNameChanged; }
         
     private:
         String ssid;
         String password;
         bool wifiSet;
         String serverAddress;
+        bool isHostNameChanged;
         String hostName;
         bool serverSet;
         int serverPort;

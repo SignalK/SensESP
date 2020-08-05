@@ -14,7 +14,7 @@
 
 class Networking : public Configurable {
  public:
-  Networking(String config_path, bool isWifiSet, String ssid, String password, String hostname);
+  Networking(String config_path, bool isWifiSet, String ssid, String password, bool isHostNameSet, String hostname);
   void setup(std::function<void(bool)> connection_cb);
   ObservableValue<String>* get_hostname();
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
@@ -39,6 +39,7 @@ class Networking : public Configurable {
   String ap_ssid = "";
   String ap_password = "";
   bool isWifiSet = false;
+  bool isHostNameSet = false;
 };
 
 #endif
