@@ -31,9 +31,9 @@ ReactESP app([] () {
   debugI("Serial debug enabled");
 
   // Create the global SensESPApp() object.
-  sensesp_app = new SensESPApp([] (SensESPAppOptions*o)
+  sensesp_app = new SensESPApp([] (SensESPAppOptions*options)
   {
-         o->setServerOptions("10.10.10.1", 3000)
+         options->setServerOptions("10.10.10.1", 3000)
           ->setWifiOptions("yourSSID", "yourPassword")
           ->setHostName("relay")
           ->setStandardSensors();

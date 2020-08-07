@@ -198,12 +198,12 @@ void WSClient::connect() {
     }
     else
     {
-      debugI("SignalK has been found at address %s:%d by mDNS.", server_address.c_str(), server_port);
+      debugI("SignalK server has been found at address %s:%d by mDNS.", server_address.c_str(), server_port);
     }    
   }
 
   if (!server_address.isEmpty() && server_port > 0) {
-    debugD("Websocket is connecting to SignalK on address %s:%d", server_address.c_str(), server_port);
+    debugD("Websocket is connecting to SignalK server on address %s:%d", server_address.c_str(), server_port);
   } else {
     // host and port not defined - wait for mDNS
     if(!options->getMDNSEnabled())
@@ -477,7 +477,7 @@ void WSClient::setConfigurationFromOptions()
 {
   if(options->isServerSet())
   {
-      debugI("Using preconfigured server address %s and port %d from main.cpp", options->getServerAddress().c_str(), options->getServerPort());
+      debugI("Using server address %s and port %d from main.cpp", options->getServerAddress().c_str(), options->getServerPort());
       this->server_address = options->getServerAddress();
       this->server_port = options->getServerPort();
   }

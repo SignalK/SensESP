@@ -15,11 +15,14 @@ SensESPAppOptions* SensESPAppOptions::useDefault()
     mDNSEnabled = true;
     wifiSet = false;
     serverSet = false;
+    
 #ifdef LED_BUILTIN
     ledPin = LED_BUILTIN;
-#endif
-#ifdef LED
-    ledPin = LED;
+    enableLED = true;
+#else
+    enableLED = false;
+    ledPin = 0;
+    debugW("LED_BUILTIN isn't defined! LED blink will be disabled!");
 #endif
 
     hostName = "sensesp";
