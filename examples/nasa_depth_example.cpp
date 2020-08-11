@@ -28,8 +28,6 @@ ReactESP app([] () {
   const uint read_delay = 500;
 
   auto* depth = new NasaDepth(D2, D1, read_delay, "/depth");
-  // if your led pin is not LED_BUILTIN then uncomment and set below:
-  // depth->set_led_pin(your_pin);
       
   depth->connectTo(new SKOutputNumber(sk_path, config_path_skpath));      
 
