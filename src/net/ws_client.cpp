@@ -1,21 +1,20 @@
 #include "ws_client.h"
 
-#include "Arduino.h"
-
 #include <ArduinoJson.h>
+
+#include "Arduino.h"
 #ifdef ESP8266
 #include <ESP8266HTTPClient.h>
 #include <ESP8266mDNS.h>  // Include the mDNS library
 #elif defined(ESP32)
-#include <HTTPClient.h>
 #include <ESPmDNS.h>
+#include <HTTPClient.h>
 #endif
 
 #include <ESPTrueRandom.h>
 #include <WiFiClient.h>
 
 #include "sensesp_app.h"
-
 #include "signalk/signalk_listener.h"
 
 WSClient* ws_client;
@@ -40,24 +39,23 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   }
 }
 
-WSClient::WSClient(String config_path, SKDelta* sk_delta, SensESPAppOptions* options,
+WSClient::WSClient(String config_path, SKDelta* sk_delta, String serverAddress,
+                   int serverPort, bool useMDNS,
                    std::function<void(bool)> connected_cb,
                    void_cb_func delta_cb)
     : Configurable{config_path} {
   this->sk_delta = sk_delta;
   this->connected_cb = connected_cb;
   this->delta_cb = delta_cb;
-
+  this->useMDNS = useMDNS;
   // set the singleton object pointer
   ws_client = this;
-  this->options = options;
-  
+
   load_configuration();
 
-  if(options->isServerSet())
-  {
-    setConfigurationFromOptions();
-  }  
+  if (!serverAddress.isEmpty()) {
+    setConfigurationFromOptions(serverAddress, serverPort);
+  }
 }
 
 void WSClient::enable() {
@@ -119,7 +117,8 @@ void WSClient::subscribe_listeners() {
 
       subscribePath["path"] = sk_path;
       subscribePath["period"] = listen_delay;
-      debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(), listen_delay);
+      debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(),
+             listen_delay);
     }
 
     String messageJson;
@@ -131,10 +130,10 @@ void WSClient::subscribe_listeners() {
 }
 
 void WSClient::on_receive_delta(uint8_t* payload) {
-  #ifdef SIGNALK_PRINT_RCV_DELTA
+#ifdef SIGNALK_PRINT_RCV_DELTA
   debugD("Websocket payload received: %s", (char*)payload);
-  #endif
-  
+#endif
+
   DynamicJsonBuffer jsonBuffer;
   JsonObject& message = jsonBuffer.parseObject(String((char*)payload));
 
@@ -148,20 +147,18 @@ void WSClient::on_receive_delta(uint8_t* payload) {
 
       for (size_t vi = 0; vi < values.size(); vi++) {
         JsonObject& value = values[vi];
-        
+
         const char* path = value["path"];
-        //debugD("Got update of value %s\n", path);
+        // debugD("Got update of value %s\n", path);
 
         const std::vector<SKListener*>& listeners = SKListener::get_listeners();
 
-        for (size_t i = 0; i < listeners.size(); i++)
-        {
+        for (size_t i = 0; i < listeners.size(); i++) {
           SKListener* listener = listeners[i];
-          if(listener->get_sk_path().equals(path))
-          {
+          if (listener->get_sk_path().equals(path)) {
             listener->parseValue(value);
           }
-        }        
+        }
       }
     }
   }
@@ -191,25 +188,27 @@ void WSClient::connect() {
 
   String server_address = this->server_address;
   uint16_t server_port = this->server_port;
-  
-  if (this->server_address.isEmpty() && options->useMDNS()) {
+
+  if (this->server_address.isEmpty() && useMDNS) {
     if (!get_mdns_service(server_address, server_port)) {
-       debugE("No SignalK server found in network when using mDNS service!");
+      debugE("No SignalK server found in network when using mDNS service!");
+    } else {
+      debugI("SignalK server has been found at address %s:%d by mDNS.",
+             server_address.c_str(), server_port);
     }
-    else
-    {
-      debugI("SignalK server has been found at address %s:%d by mDNS.", server_address.c_str(), server_port);
-    }    
   }
 
   if (!server_address.isEmpty() && server_port > 0) {
-    debugD("Websocket is connecting to SignalK server on address %s:%d", server_address.c_str(), server_port);
+    debugD("Websocket is connecting to SignalK server on address %s:%d",
+           server_address.c_str(), server_port);
   } else {
     // host and port not defined - wait for mDNS
-    if(!options->getMDNSEnabled())
-    {
-      debugW("SignalK server address and port isn't configured! Please configure it from Web UI at address http://%s:80/", WiFi.localIP().toString().c_str());
-    }    
+    if (!useMDNS) {
+      debugW(
+          "SignalK server address and port isn't configured! Please configure "
+          "it from Web UI at address http://%s:80/",
+          WiFi.localIP().toString().c_str());
+    }
 
     connection_state = disconnected;
     return;
@@ -425,14 +424,8 @@ void WSClient::send_delta() {
 
 JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
-  if(options->isServerSet())
-  {
-    root["sk_address"] = options->getServerAddress();
-    root["sk_port"] = options->getServerPort();
-  } else {
-    root["sk_address"] = this->server_address;
-    root["sk_port"] = this->server_port;
-  }
+  root["sk_address"] = this->server_address;
+  root["sk_port"] = this->server_port;
 
   root["token"] = this->auth_token;
   root["client_id"] = this->client_id;
@@ -452,7 +445,7 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-  static const char SCHEMA_READONLY[] PROGMEM = R"({
+static const char SCHEMA_READONLY[] PROGMEM = R"({
     "type": "object",
     "properties": {
         "sk_address": { "title": "SignalK server address - readonly", "type": "string", "readOnly": true },
@@ -463,43 +456,42 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String WSClient::get_config_schema() 
-{
-  if(!options->isServerSet())
-  {
-    return FPSTR(SCHEMA); 
+String WSClient::get_config_schema() {
+  if (configFromOptions) {
+    return FPSTR(SCHEMA);
   } else {
     return FPSTR(SCHEMA_READONLY);
-  }  
-}
-
-void WSClient::setConfigurationFromOptions()
-{
-  if(options->isServerSet())
-  {
-      debugI("Using server address %s and port %d from main.cpp", options->getServerAddress().c_str(), options->getServerPort());
-      this->server_address = options->getServerAddress();
-      this->server_port = options->getServerPort();
   }
 }
 
-bool WSClient::set_configuration(const JsonObject& config) {
+void WSClient::setConfigurationFromOptions(String serverAddress, int port) {
+  debugI("Using server address %s and port %d set from SensespAppOptions",
+         serverAddress.c_str(), port);
+  this->server_address = serverAddress;
+  this->server_port = port;
+  this->configFromOptions = true;
+}
 
+bool WSClient::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_address", "sk_port", "token", "client_id"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugI("Websocket configuration update rejected. Missing following parameter: %s", str.c_str());
+      debugI(
+          "Websocket configuration update rejected. Missing following "
+          "parameter: %s",
+          str.c_str());
       return false;
     }
   }
 
-  if(options->isServerSet())
-  {
-    debugI("Websocket configuration change ignored. Configuration is from main.cpp.");
+  if (configFromOptions) {
+    debugI(
+        "Websocket configuration change ignored. Configuration is set from "
+        "SensespAppOptions.");
   } else {
     this->server_address = config["sk_address"].as<String>();
     this->server_port = config["sk_port"].as<int>();
-  }  
+  }
 
   // FIXME: setting the token should not be allowed via the REST API.
   this->auth_token = config["token"].as<String>();
@@ -508,6 +500,3 @@ bool WSClient::set_configuration(const JsonObject& config) {
 
   return true;
 }
-
-
-

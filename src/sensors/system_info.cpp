@@ -1,12 +1,9 @@
 #include "system_info.h"
 
 #include "Arduino.h"
-
 #include "sensesp.h"
 
-void SystemHz::tick() {
-  tick_count++;
-}
+void SystemHz::tick() { tick_count++; }
 
 void SystemHz::update() {
   uint32_t cur_millis = millis();
@@ -17,7 +14,7 @@ void SystemHz::update() {
     return;
   }
 
-  output = (tick_count*1000) / elapsed;
+  output = (tick_count * 1000) / elapsed;
 
   tick_count = 0;
   prev_millis = cur_millis;
@@ -28,10 +25,9 @@ void SystemHz::update() {
 void SystemHz::enable() {
   prev_millis = millis();
 
-  app.onTick([this](){ this->tick(); });
-  app.onRepeat(1000, [this](){ this->update(); });
+  app.onTick([this]() { this->tick(); });
+  app.onRepeat(1000, [this]() { this->update(); });
 }
-
 
 void FreeMem::update() {
   output = ESP.getFreeHeap();
@@ -39,9 +35,8 @@ void FreeMem::update() {
 }
 
 void FreeMem::enable() {
-  app.onRepeat(1000, [this](){ this->update(); });
+  app.onRepeat(1000, [this]() { this->update(); });
 }
-
 
 void Uptime::update() {
   output = millis() / 1000.;
@@ -49,9 +44,8 @@ void Uptime::update() {
 }
 
 void Uptime::enable() {
-  app.onRepeat(1000, [this](){ this->update(); });
+  app.onRepeat(1000, [this]() { this->update(); });
 }
-
 
 void IPAddrDev::update() {
   output = WiFi.localIP().toString();
@@ -59,16 +53,14 @@ void IPAddrDev::update() {
 }
 
 void IPAddrDev::enable() {
-  app.onRepeat(10000, [this](){ this->update(); });
+  app.onRepeat(10000, [this]() { this->update(); });
 }
 
-void WifiSignal::enable()
-{
-  app.onRepeat(3000, [this](){ this->update(); });
+void WifiSignal::enable() {
+  app.onRepeat(3000, [this]() { this->update(); });
 }
 
-void WifiSignal::update()
-{
+void WifiSignal::update() {
   output = WiFi.RSSI();
   this->notify();
 }
