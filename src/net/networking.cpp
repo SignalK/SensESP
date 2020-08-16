@@ -145,9 +145,33 @@ static const char SCHEMA_READONLY[] PROGMEM = R"({
     }
   })";
 
+static const char SCHEMA_READONLY_WIFI[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "hostname": { "title": "ESP device hostname", "type": "string"},
+        "ap_ssid": { "title": "Wifi Access Point SSID - readonly", "type": "string", "readOnly": true },
+        "ap_password": { "title": "Wifi Access Point Password - readonly", "type": "string", "readOnly": true }
+    }
+  })";
+
+static const char SCHEMA_READONLY_HOSTNAME[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "hostname": { "title": "ESP device hostname - readonly", "type": "string", "readOnly": true },
+        "ap_ssid": { "title": "Wifi Access Point SSID", "type": "string" },
+        "ap_password": { "title": "Wifi Access Point Password", "type": "string" }
+    }
+  })";
+
 String Networking::get_config_schema() {
-  if (isWifiSet) {
-    return FPSTR(SCHEMA_READONLY);
+  if (isWifiSet || isHostNameSet) {
+    if (isWifiSet && isHostNameSet) {
+      return FPSTR(SCHEMA_READONLY);
+    } else if (isWifiSet && !isHostNameSet) {
+      return FPSTR(SCHEMA_READONLY_WIFI);
+    } else if (!isWifiSet && isHostNameSet) {
+      return FPSTR(SCHEMA_READONLY_HOSTNAME);
+    }
   } else {
     return FPSTR(SCHEMA);
   }
