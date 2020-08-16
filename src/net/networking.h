@@ -7,19 +7,21 @@
 #include <ESPAsyncWebServer.h>
 #include <ESPAsyncWiFiManager.h>
 
+#include "sensesp_app_options.h"
 #include "system/configurable.h"
 #include "system/observablevalue.h"
 
 class Networking : public Configurable {
  public:
-  Networking(String config_path);
+  Networking(String config_path, bool isWifiSet, String ssid, String password,
+             bool isHostNameSet, String hostname);
   void setup(std::function<void(bool)> connection_cb);
   ObservableValue<String>* get_hostname();
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
 
-  //void set_hostname(String hostname);
+  // void set_hostname(String hostname);
 
   void reset_settings();
 
@@ -27,6 +29,7 @@ class Networking : public Configurable {
   void check_connection();
   void setup_saved_ssid(std::function<void(bool)> connection_cb);
   void setup_wifi_manager(std::function<void(bool)> connection_cb);
+
  private:
   AsyncWebServer* server;
   // FIXME: DNSServer and AsyncWiFiManager could be instantiated in
@@ -36,6 +39,8 @@ class Networking : public Configurable {
   ObservableValue<String>* hostname;
   String ap_ssid = "";
   String ap_password = "";
+  bool isWifiSet = false;
+  bool isHostNameSet = false;
 };
 
 #endif

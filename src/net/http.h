@@ -1,9 +1,11 @@
 #ifndef _http_H_
 #define _http_H_
 
+#include <ESPAsyncWebServer.h>
+
 #include <functional>
 
-#include <ESPAsyncWebServer.h>
+#include "sensesp_app_options.h"
 
 class HTTPServer {
  public:
@@ -15,11 +17,11 @@ class HTTPServer {
   void handle_device_reset(AsyncWebServerRequest* request);
   void handle_device_restart(AsyncWebServerRequest* request);
   void handle_info(AsyncWebServerRequest* request);
+
  private:
   AsyncWebServer* server;
   std::function<void()> reset_device;
   void handle_config_list(AsyncWebServerRequest* request);
 };
-
 
 #endif
