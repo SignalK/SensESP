@@ -400,7 +400,11 @@ void WSClient::connect_ws(const String host, const uint16_t port) {
   this->client.setAuthorization(full_token.c_str());
 }
 
-void WSClient::loop() { this->client.loop(); }
+void WSClient::loop() {
+  if (this->connection_state == disconnected) {
+    this->client.loop();
+  }
+}
 
 bool WSClient::is_connected() { return connection_state == connected; }
 
@@ -413,9 +417,9 @@ void WSClient::restart() {
 
 void WSClient::send_delta() {
   String output;
-  if (sk_delta->data_available()) {
-    sk_delta->get_delta(output);
-    if (connection_state == connected) {
+  if (connection_state == connected) {
+    if (sk_delta->data_available()) {
+      sk_delta->get_delta(output);
       this->client.sendTXT(output);
       this->delta_cb();
     }
