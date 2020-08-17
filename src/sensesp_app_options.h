@@ -45,13 +45,12 @@ class SensESPAppOptions {
   bool isServerSet() { return !serverAddress.isEmpty(); }
   LedIntervals_T getLEDIntervals() { return ledIntervals; }
   String getHostname() { return hostName; }
-  bool isHostNameSet() { return isHostNameChanged; }
+  bool isHostNameSet() { return hostName.isEmpty(); }
 
  private:
   String ssid;
   String password;
   String serverAddress;
-  bool isHostNameChanged;
   String hostName;
   int serverPort;
   StandardSensorsOptions_t enabledSensors;

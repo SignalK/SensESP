@@ -18,8 +18,7 @@ SensESPAppOptions* SensESPAppOptions::useDefault() {
   ledPin = 0;
   debugW("LED_BUILTIN isn't defined! LED blink will be disabled!");
 #endif
-
-  hostName = "sensesp";
+  hostName = "";
 
   return this;
 }
@@ -61,7 +60,6 @@ SensESPAppOptions* SensESPAppOptions::setLEDOptions(bool enabled,
 
 SensESPAppOptions* SensESPAppOptions::setHostName(String hostName) {
   this->hostName = hostName;
-  this->isHostNameChanged = true;
   return this;
 }
 

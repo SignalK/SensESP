@@ -16,20 +16,30 @@ bool should_save_config = false;
 void save_config_callback() { should_save_config = true; }
 
 Networking::Networking(String config_path, bool isWifiSet, String ssid,
-                       String password, bool isHostNameSet, String hostname)
+                       String password, String hostname)
     : Configurable{config_path} {
+  
+
+  if (hostname.isEmpty()) {
+    hostname = "sensesp";
+  }
+  else
+  {
+    isHostNameSet = true;
+    debugI("Using hostname %s set from SensespAppOptions", hostname.c_str());
+  }
+
   this->hostname = new ObservableValue<String>(hostname);
   this->isWifiSet = isWifiSet;
-  this->isHostNameSet = isHostNameSet;
 
   if (isWifiSet) {
     debugI("Using SSID %s and password set from SensespAppOptions",
            ssid.c_str());
     this->ap_ssid = ssid;
     this->ap_password = password;
-  } else {
-    load_configuration();
   }
+
+  load_configuration();
   server = new AsyncWebServer(80);
   dns = new DNSServer();
   wifi_manager = new AsyncWiFiManager(server, dns);
