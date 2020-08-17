@@ -18,13 +18,9 @@ void save_config_callback() { should_save_config = true; }
 Networking::Networking(String config_path, bool isWifiSet, String ssid,
                        String password, String hostname)
     : Configurable{config_path} {
-  
-
   if (hostname.isEmpty()) {
     hostname = "sensesp";
-  }
-  else
-  {
+  } else {
     isHostNameSet = true;
     debugI("Using hostname %s set from SensespAppOptions", hostname.c_str());
   }
