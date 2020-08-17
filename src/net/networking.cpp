@@ -188,22 +188,26 @@ JsonObject& Networking::get_configuration(JsonBuffer& buf) {
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
-  if (isWifiSet) {
-    debugI(
-        "Networking configuration update rejected. Configuration is set from "
-        "SensespAppOptions.");
-    return false;
-  }
-
   if (!config.containsKey("hostname")) {
     return false;
   }
 
   if (!isHostNameSet) {
     this->hostname->set(config["hostname"].as<String>());
+  } else {
+    debugI(
+        "Hostname configuration update rejected. Configuration is set from "
+        "SensespAppOptions.");
   }
-  this->ap_ssid = config["ap_ssid"].as<String>();
-  this->ap_password = config["ap_password"].as<String>();
+
+  if (!isWifiSet) {
+    this->ap_ssid = config["ap_ssid"].as<String>();
+    this->ap_password = config["ap_password"].as<String>();
+  } else {
+    debugI(
+        "Wifi configuration update rejected. Configuration is set from "
+        "SensespAppOptions.");
+  }
 
   return true;
 }
