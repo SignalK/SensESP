@@ -24,8 +24,7 @@ class SensESPApp {
   void enable();
   void reset();
   String get_hostname();
-  SensESPAppOptions* getOptions() { return options; }
-
+  
   template <typename T>
   void connect(ValueProducer<T>* pProducer, ValueConsumer<T>* pConsumer,
                uint8_t inputChannel = 0) {
@@ -58,8 +57,8 @@ class SensESPApp {
   bool isSignalKConnected() { return ws_client->is_connected(); }
 
  private:
-  SensESPAppOptions* options;
-  void setup_standard_sensors(ObservableValue<String>* hostname);
+  void setup_standard_sensors(ObservableValue<String>* hostname,
+                              StandardSensorsOptions_t enabled_sensors=all);
 
   HTTPServer* http_server;
   LedBlinker* led_blinker;
@@ -70,6 +69,7 @@ class SensESPApp {
   void DefaultOptionsSetup(SensESPAppOptions* options){
 
   };
+  friend class HTTPServer;
 };
 
 extern SensESPApp* sensesp_app;

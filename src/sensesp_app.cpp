@@ -26,8 +26,8 @@ RemoteDebug Debug;
 SensESPApp::SensESPApp() : SensESPApp([this](SensESPAppOptions* o) {}) {}
 
 SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
-  options = new SensESPAppOptions();
-  setupOptions(options);
+  SensESPAppOptions options;
+  setupOptions(&options);
 
   // initialize filesystem
 #ifdef ESP8266
@@ -40,9 +40,9 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
   }
 
   // create the networking object
-  networking = new Networking("/system/networking", options->isWifiSet(),
-                              options->getSsid(), options->getPassword(),
-                              options->isHostNameSet(), options->getHostname());
+  networking = new Networking("/system/networking", options.isWifiSet(),
+                              options.getSsid(), options.getPassword(),
+                              options.isHostNameSet(), options.getHostname());
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
@@ -58,8 +58,8 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
   hostname->attach(
       [hostname, this]() { this->sk_delta->set_hostname(hostname->get()); });
 
-  led_blinker = new LedBlinker(options->getLEDPin(), options->getLEDEnabled(),
-                               options->getLEDIntervals());
+  led_blinker = new LedBlinker(options.getLEDPin(), options.getLEDEnabled(),
+                               options.getLEDIntervals());
 
   // create the HTTP server
 
@@ -76,14 +76,15 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
   };
   auto ws_delta_cb = [this]() { this->led_blinker->flip(); };
   this->ws_client =
-      new WSClient("/system/sk", sk_delta, options->getServerAddress(),
-                   options->getServerPort(), options->useMDNS(),
+      new WSClient("/system/sk", sk_delta, options.getServerAddress(),
+                   options.getServerPort(), options.useMDNS(),
                    ws_connected_cb, ws_delta_cb);
 }
 
-void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
+void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
+                                        StandardSensorsOptions_t enabled_sensors) {
   // connect systemhz
-  auto sensorOptions = this->options->getStandardSensors();
+  auto sensorOptions = enabled_sensors;
 
   if ((sensorOptions & frequency) != 0) {
     connect_1to1_h<SystemHz, SKOutput<float>>(new SystemHz(),
@@ -132,7 +133,7 @@ void SensESPApp::enable() {
 
   debugI("Enabling subsystems");
 
-  if (options->getMDNSEnabled()) {
+  if (!ws_client->get_server_address().isEmpty()) {
     debugI("Subsystem: setup_discovery()");
     setup_discovery(networking->get_hostname()->get().c_str());
   }
