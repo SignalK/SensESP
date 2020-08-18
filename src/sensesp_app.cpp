@@ -23,10 +23,11 @@
 RemoteDebug Debug;
 #endif
 
-SensESPApp::SensESPApp() : SensESPApp([this](SensESPAppOptions* o) {}) {}
-
-SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions, bool use_builder) {
-
+SensESPApp::SensESPApp(String preset_hostname, String ssid,
+                       String wifi_password, String sk_server_address,
+                       int sk_server_port, StandardSensors sensors, int led_pin,
+                       bool enable_led, int led_ws_connected,
+                       int led_wifi_connected, int led_offline) {
   // initialize filesystem
 #ifdef ESP8266
   if (!SPIFFS.begin()) {
@@ -37,25 +38,14 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions, boo
     ESP.restart();
   }
 
-  if (!use_builder) {
-    this->initialize(setupOptions);
-  }
-}
-
-
-void SensESPApp::initialize(std::function<void(SensESPAppOptions*)> setupOptions) {
-  SensESPAppOptions options;
-  setupOptions(&options);
-
   // create the networking object
-  networking = new Networking("/system/networking",
-                              options.getSsid(), options.getPassword(),
-                              options.getHostname());
+  networking = new Networking("/system/networking", ssid, wifi_password,
+                              preset_hostname);
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
   // setup standard sensors and their transforms
-  setup_standard_sensors(hostname);
+  setup_standard_sensors(hostname, sensors);
 
   // create the SK delta object
 
@@ -66,8 +56,8 @@ void SensESPApp::initialize(std::function<void(SensESPAppOptions*)> setupOptions
   hostname->attach(
       [hostname, this]() { this->sk_delta->set_hostname(hostname->get()); });
 
-  led_blinker = new LedBlinker(options.getLEDPin(), options.getLEDEnabled(),
-                               options.getLEDIntervals());
+  led_blinker = new LedBlinker(led_pin, led_ws_connected, led_wifi_connected,
+                               led_offline);
 
   // create the HTTP server
 
@@ -83,41 +73,37 @@ void SensESPApp::initialize(std::function<void(SensESPAppOptions*)> setupOptions
     }
   };
   auto ws_delta_cb = [this]() { this->led_blinker->flip(); };
-  this->ws_client =
-      new WSClient("/system/sk", sk_delta, options.getServerAddress(),
-                   options.getServerPort(),
-                   ws_connected_cb, ws_delta_cb);
+  this->ws_client = new WSClient("/system/sk", sk_delta, sk_server_address,
+                                 sk_server_port, ws_connected_cb, ws_delta_cb);
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
-                                        StandardSensorsOptions_t enabled_sensors) {
-  // connect systemhz
-  auto sensorOptions = enabled_sensors;
-
-  if ((sensorOptions & frequency) != 0) {
+                                        StandardSensors enabled_sensors) {
+  
+  if ((enabled_sensors & FREQUENCY) != 0) {
     connect_1to1_h<SystemHz, SKOutput<float>>(new SystemHz(),
                                               new SKOutput<float>(), hostname);
   }
 
-  if ((sensorOptions & uptime) != 0) {
+  if ((enabled_sensors & UPTIME) != 0) {
     connect_1to1_h<Uptime, SKOutput<float>>(new Uptime(), new SKOutput<float>(),
                                             hostname);
   }
 
   // connect freemem
-  if ((sensorOptions & freeMemory) != 0) {
+  if ((enabled_sensors & FREE_MEMORY) != 0) {
     connect_1to1_h<FreeMem, SKOutput<float>>(new FreeMem(),
                                              new SKOutput<float>(), hostname);
   }
 
   // connect ip address
 
-  if ((sensorOptions & ipAddress) != 0) {
+  if ((enabled_sensors & IP_ADDRESS) != 0) {
     connect_1to1_h<IPAddrDev, SKOutput<String>>(
         new IPAddrDev(), new SKOutput<String>(), hostname);
   }
 
-  if ((sensorOptions & wifiSignal) != 0) {
+  if ((enabled_sensors & WIFI_SIGNAL) != 0) {
     connect_1to1_h<WifiSignal, SKOutput<float>>(
         new WifiSignal(), new SKOutput<float>(), hostname);
   }

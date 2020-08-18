@@ -5,8 +5,6 @@
 
 #include <functional>
 
-#include "sensesp_app_options.h"
-
 class HTTPServer {
  public:
   HTTPServer(std::function<void()> reset_device);

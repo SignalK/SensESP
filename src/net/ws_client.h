@@ -6,7 +6,6 @@
 #include <set>
 
 #include "sensesp.h"
-#include "sensesp_app_options.h"
 #include "signalk/signalk_delta.h"
 #include "system/configurable.h"
 
@@ -45,7 +44,7 @@ class WSClient : public Configurable {
   String auth_token = NULL_AUTH_TOKEN;
   bool server_detected = false;
   bool configFromOptions = false;
-  
+
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
   WebSocketsClient client;
