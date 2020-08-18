@@ -77,7 +77,7 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
   auto ws_delta_cb = [this]() { this->led_blinker->flip(); };
   this->ws_client =
       new WSClient("/system/sk", sk_delta, options.getServerAddress(),
-                   options.getServerPort(), options.useMDNS(),
+                   options.getServerPort(),
                    ws_connected_cb, ws_delta_cb);
 }
 

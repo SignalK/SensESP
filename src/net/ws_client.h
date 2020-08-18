@@ -17,7 +17,7 @@ enum ConnectionState { disconnected, connecting, connected };
 class WSClient : public Configurable {
  public:
   WSClient(String config_path, SKDelta* sk_delta, String serverAddress,
-           int serverPort, bool useMDNS, std::function<void(bool)> connected_cb,
+           int serverPort, std::function<void(bool)> connected_cb,
            void_cb_func delta_cb);
   void enable();
   void on_disconnected();
@@ -45,8 +45,7 @@ class WSClient : public Configurable {
   String auth_token = NULL_AUTH_TOKEN;
   bool server_detected = false;
   bool configFromOptions = false;
-  bool useMDNS = true;
-
+  
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
   WebSocketsClient client;
