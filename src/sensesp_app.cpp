@@ -48,9 +48,9 @@ void SensESPApp::initialize(std::function<void(SensESPAppOptions*)> setupOptions
   setupOptions(&options);
 
   // create the networking object
-  networking = new Networking("/system/networking", options.isWifiSet(),
+  networking = new Networking("/system/networking",
                               options.getSsid(), options.getPassword(),
-                              options.isHostNameSet(), options.getHostname());
+                              options.getHostname());
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
