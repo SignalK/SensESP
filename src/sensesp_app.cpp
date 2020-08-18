@@ -25,9 +25,7 @@ RemoteDebug Debug;
 
 SensESPApp::SensESPApp() : SensESPApp([this](SensESPAppOptions* o) {}) {}
 
-SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
-  SensESPAppOptions options;
-  setupOptions(&options);
+SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions, bool use_builder) {
 
   // initialize filesystem
 #ifdef ESP8266
@@ -38,6 +36,16 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
     debugE("FATAL: Filesystem initialization failed.");
     ESP.restart();
   }
+
+  if (!use_builder) {
+    this->initialize(setupOptions);
+  }
+}
+
+
+void SensESPApp::initialize(std::function<void(SensESPAppOptions*)> setupOptions) {
+  SensESPAppOptions options;
+  setupOptions(&options);
 
   // create the networking object
   networking = new Networking("/system/networking", options.isWifiSet(),

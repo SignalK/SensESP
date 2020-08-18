@@ -18,9 +18,8 @@
 
 class SensESPApp {
  public:
-  // SensESPApp(SensESPAppOptions* appOptions);
-  SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions);
   SensESPApp();
+  SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions, bool use_builder=false);
   void enable();
   void reset();
   String get_hostname();
@@ -57,6 +56,7 @@ class SensESPApp {
   bool isSignalKConnected() { return ws_client->is_connected(); }
 
  private:
+  void initialize(std::function<void(SensESPAppOptions*)> setupOptions);
   void setup_standard_sensors(ObservableValue<String>* hostname,
                               StandardSensorsOptions_t enabled_sensors=all);
 
