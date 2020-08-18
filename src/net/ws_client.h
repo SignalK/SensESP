@@ -12,7 +12,7 @@
 
 static const char* NULL_AUTH_TOKEN = "";
 
-enum ConnectionState { disconnected, connecting, connected };
+enum ConnectionState { disconnected, authorizing, connecting, connected };
 
 class WSClient : public Configurable {
  public:
