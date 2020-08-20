@@ -73,6 +73,7 @@ void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
     debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
            WiFi.RSSI());
     connection_cb(true);
+    WiFi.mode(WIFI_STA);
   }
 }
 

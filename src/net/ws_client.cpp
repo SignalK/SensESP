@@ -184,7 +184,7 @@ void WSClient::connect() {
   }
   debugD("Initiating connection");
 
-  connection_state = connecting;
+  connection_state = authorizing;
 
   String server_address = this->server_address;
   uint16_t server_port = this->server_port;
@@ -232,13 +232,12 @@ void WSClient::connect() {
 void WSClient::test_token(const String server_address,
                           const uint16_t server_port) {
   // FIXME: implement async HTTP client!
-  WiFiClient client;
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/api/";
   debugD("Testing token with url %s", url.c_str());
-  http.begin(client, url);
+  http.begin(url);
   String full_token = String("JWT ") + auth_token;
   http.addHeader("Authorization", full_token.c_str());
   int httpCode = http.GET();
@@ -259,6 +258,7 @@ void WSClient::test_token(const String server_address,
       server_detected = true;
       this->connect_ws(server_address, server_port);
     } else if (httpCode == 401) {
+      this->client_id = "";
       this->send_access_request(server_address, server_port);
     } else {
       connection_state = disconnected;
@@ -288,12 +288,11 @@ void WSClient::send_access_request(const String server_address,
   String json_req = "";
   req.printTo(json_req);
 
-  WiFiClient client;
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/access/requests";
-  http.begin(client, url);
+  http.begin(url);
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(json_req);
   String payload = http.getString();
@@ -304,6 +303,7 @@ void WSClient::send_access_request(const String server_address,
     debugW("Can't handle response %d to access request.", httpCode);
     debugD("%s", payload.c_str());
     connection_state = disconnected;
+    client_id = "";
     return;
   }
 
@@ -315,6 +315,7 @@ void WSClient::send_access_request(const String server_address,
   if (state != "PENDING") {
     debugW("Got unknown state: %s", state.c_str());
     connection_state = disconnected;
+    client_id = "";
     return;
   }
 
@@ -323,7 +324,7 @@ void WSClient::send_access_request(const String server_address,
   save_configuration();
 
   debugD("Polling %s in 5 seconds", polling_href.c_str());
-  app.onDelay(5000, [this, server_address, server_port]() {
+  app.onDelay(5000, [this, server_address, server_port, href]() {
     this->poll_access_request(server_address, server_port, this->polling_href);
   });
 }
@@ -333,11 +334,10 @@ void WSClient::poll_access_request(const String server_address,
                                    const String href) {
   debugD("Polling SK Server for authentication token");
 
-  WiFiClient client;
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port + href;
-  http.begin(client, url);
+  http.begin(url);
   int httpCode = http.GET();
   if (httpCode == 200 or httpCode == 202) {
     String payload = http.getString();
@@ -393,14 +393,18 @@ void WSClient::poll_access_request(const String server_address,
 
 void WSClient::connect_ws(const String host, const uint16_t port) {
   String path = "/signalk/v1/stream?subscribe=none";
-
+  this->connection_state = connecting;
   this->client.begin(host, port, path);
   this->client.onEvent(webSocketClientEvent);
   String full_token = String("JWT ") + auth_token;
   this->client.setAuthorization(full_token.c_str());
 }
 
-void WSClient::loop() { this->client.loop(); }
+void WSClient::loop() {
+  if (this->connection_state == connecting || this->connection_state == connected) {
+    this->client.loop();
+  }
+}
 
 bool WSClient::is_connected() { return connection_state == connected; }
 
@@ -413,9 +417,9 @@ void WSClient::restart() {
 
 void WSClient::send_delta() {
   String output;
-  if (sk_delta->data_available()) {
-    sk_delta->get_delta(output);
-    if (connection_state == connected) {
+  if (connection_state == connected) {
+    if (sk_delta->data_available()) {
+      sk_delta->get_delta(output);
       this->client.sendTXT(output);
       this->delta_cb();
     }
