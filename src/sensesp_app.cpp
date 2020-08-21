@@ -23,12 +23,11 @@
 RemoteDebug Debug;
 #endif
 
-SensESPApp::SensESPApp() : SensESPApp([this](SensESPAppOptions* o) {}) {}
-
-SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
-  options = new SensESPAppOptions();
-  setupOptions(options);
-
+SensESPApp::SensESPApp(String preset_hostname, String ssid,
+                       String wifi_password, String sk_server_address,
+                       int sk_server_port, StandardSensors sensors, int led_pin,
+                       bool enable_led, int led_ws_connected,
+                       int led_wifi_connected, int led_offline) {
   // initialize filesystem
 #ifdef ESP8266
   if (!SPIFFS.begin()) {
@@ -40,14 +39,13 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
   }
 
   // create the networking object
-  networking = new Networking("/system/networking", options->isWifiSet(),
-                              options->getSsid(), options->getPassword(),
-                              options->isHostNameSet(), options->getHostname());
+  networking = new Networking("/system/networking", ssid, wifi_password,
+                              preset_hostname);
 
   ObservableValue<String>* hostname = networking->get_hostname();
 
   // setup standard sensors and their transforms
-  setup_standard_sensors(hostname);
+  setup_standard_sensors(hostname, sensors);
 
   // create the SK delta object
 
@@ -58,8 +56,8 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
   hostname->attach(
       [hostname, this]() { this->sk_delta->set_hostname(hostname->get()); });
 
-  led_blinker = new LedBlinker(options->getLEDPin(), options->getLEDEnabled(),
-                               options->getLEDIntervals());
+  led_blinker = new LedBlinker(led_pin, led_ws_connected, led_wifi_connected,
+                               led_offline);
 
   // create the HTTP server
 
@@ -75,40 +73,37 @@ SensESPApp::SensESPApp(std::function<void(SensESPAppOptions*)> setupOptions) {
     }
   };
   auto ws_delta_cb = [this]() { this->led_blinker->flip(); };
-  this->ws_client =
-      new WSClient("/system/sk", sk_delta, options->getServerAddress(),
-                   options->getServerPort(), options->useMDNS(),
-                   ws_connected_cb, ws_delta_cb);
+  this->ws_client = new WSClient("/system/sk", sk_delta, sk_server_address,
+                                 sk_server_port, ws_connected_cb, ws_delta_cb);
 }
 
-void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname) {
-  // connect systemhz
-  auto sensorOptions = this->options->getStandardSensors();
-
-  if ((sensorOptions & frequency) != 0) {
+void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
+                                        StandardSensors enabled_sensors) {
+  
+  if ((enabled_sensors & FREQUENCY) != 0) {
     connect_1to1_h<SystemHz, SKOutput<float>>(new SystemHz(),
                                               new SKOutput<float>(), hostname);
   }
 
-  if ((sensorOptions & uptime) != 0) {
+  if ((enabled_sensors & UPTIME) != 0) {
     connect_1to1_h<Uptime, SKOutput<float>>(new Uptime(), new SKOutput<float>(),
                                             hostname);
   }
 
   // connect freemem
-  if ((sensorOptions & freeMemory) != 0) {
+  if ((enabled_sensors & FREE_MEMORY) != 0) {
     connect_1to1_h<FreeMem, SKOutput<float>>(new FreeMem(),
                                              new SKOutput<float>(), hostname);
   }
 
   // connect ip address
 
-  if ((sensorOptions & ipAddress) != 0) {
+  if ((enabled_sensors & IP_ADDRESS) != 0) {
     connect_1to1_h<IPAddrDev, SKOutput<String>>(
         new IPAddrDev(), new SKOutput<String>(), hostname);
   }
 
-  if ((sensorOptions & wifiSignal) != 0) {
+  if ((enabled_sensors & WIFI_SIGNAL) != 0) {
     connect_1to1_h<WifiSignal, SKOutput<float>>(
         new WifiSignal(), new SKOutput<float>(), hostname);
   }
@@ -132,7 +127,7 @@ void SensESPApp::enable() {
 
   debugI("Enabling subsystems");
 
-  if (options->getMDNSEnabled()) {
+  if (!ws_client->get_server_address().isEmpty()) {
     debugI("Subsystem: setup_discovery()");
     setup_discovery(networking->get_hostname()->get().c_str());
   }

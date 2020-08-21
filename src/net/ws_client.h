@@ -6,7 +6,6 @@
 #include <set>
 
 #include "sensesp.h"
-#include "sensesp_app_options.h"
 #include "signalk/signalk_delta.h"
 #include "system/configurable.h"
 
@@ -17,7 +16,7 @@ enum ConnectionState { disconnected, authorizing, connecting, connected };
 class WSClient : public Configurable {
  public:
   WSClient(String config_path, SKDelta* sk_delta, String serverAddress,
-           int serverPort, bool useMDNS, std::function<void(bool)> connected_cb,
+           int serverPort, std::function<void(bool)> connected_cb,
            void_cb_func delta_cb);
   void enable();
   void on_disconnected();
@@ -29,6 +28,9 @@ class WSClient : public Configurable {
   bool is_connected();
   void restart();
   void send_delta();
+
+  const String get_server_address() { return server_address; }
+  const int get_server_port() { return server_port; }
 
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
@@ -42,7 +44,6 @@ class WSClient : public Configurable {
   String auth_token = NULL_AUTH_TOKEN;
   bool server_detected = false;
   bool configFromOptions = false;
-  bool useMDNS = true;
 
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;

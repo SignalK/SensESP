@@ -40,14 +40,13 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
 }
 
 WSClient::WSClient(String config_path, SKDelta* sk_delta, String serverAddress,
-                   int serverPort, bool useMDNS,
+                   int serverPort,
                    std::function<void(bool)> connected_cb,
                    void_cb_func delta_cb)
     : Configurable{config_path} {
   this->sk_delta = sk_delta;
   this->connected_cb = connected_cb;
   this->delta_cb = delta_cb;
-  this->useMDNS = useMDNS;
   // set the singleton object pointer
   ws_client = this;
 
@@ -189,7 +188,7 @@ void WSClient::connect() {
   String server_address = this->server_address;
   uint16_t server_port = this->server_port;
 
-  if (this->server_address.isEmpty() && useMDNS) {
+  if (this->server_address.isEmpty()) {
     if (!get_mdns_service(server_address, server_port)) {
       debugE("No SignalK server found in network when using mDNS service!");
     } else {
@@ -203,13 +202,6 @@ void WSClient::connect() {
            server_address.c_str(), server_port);
   } else {
     // host and port not defined - wait for mDNS
-    if (!useMDNS) {
-      debugW(
-          "SignalK server address and port isn't configured! Please configure "
-          "it from Web UI at address http://%s:80/",
-          WiFi.localIP().toString().c_str());
-    }
-
     connection_state = disconnected;
     return;
   }
