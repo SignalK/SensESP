@@ -16,7 +16,7 @@ enum ConnectionState { disconnected, authorizing, connecting, connected };
 class WSClient : public Configurable {
  public:
   WSClient(String config_path, SKDelta* sk_delta, String server_address,
-           int server_port, std::function<void(bool)> connected_cb,
+           uint16_t server_port, std::function<void(bool)> connected_cb,
            void_cb_func delta_cb);
   void enable();
   void on_disconnected();
@@ -30,7 +30,7 @@ class WSClient : public Configurable {
   void send_delta();
 
   const String get_server_address() { return server_address; }
-  const int get_server_port() { return server_port; }
+  const uint16_t get_server_port() { return server_port; }
 
   virtual JsonObject& get_configuration(JsonBuffer& buf) override final;
   virtual bool set_configuration(const JsonObject& config) override final;

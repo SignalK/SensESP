@@ -9,7 +9,7 @@ class SensESPAppBuilder {
   String ssid = "";
   String password = "";
   String sk_server_address = "";
-  int sk_server_port = 0;
+  uint16_t sk_server_port = 0;
   StandardSensors sensors = ALL;
   int led_pin = LED_PIN;
   bool enable_led = ENABLE_LED;
@@ -24,7 +24,7 @@ class SensESPAppBuilder {
     this->password = password;
     return this;
   }
-  SensESPAppBuilder* set_sk_server(String address, int port) {
+  SensESPAppBuilder* set_sk_server(String address, uint16_t port) {
     this->sk_server_address = address;
     this->sk_server_port = port;
     return this;

@@ -36,7 +36,7 @@ enum StandardSensors {
 class SensESPApp {
  public:
   SensESPApp(String hostname = "", String ssid = "", String wifi_password = "",
-             String sk_server_address = "", int sk_server_port = 0,
+             String sk_server_address = "", uint16_t sk_server_port = 0,
              StandardSensors sensors = ALL, int led_pin = LED_PIN,
              bool enable_led = ENABLE_LED, int led_ws_connected = 200,
              int led_wifi_connected = 1000, int led_offline = 2000);

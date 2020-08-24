@@ -25,8 +25,8 @@ RemoteDebug Debug;
 
 SensESPApp::SensESPApp(String preset_hostname, String ssid,
                        String wifi_password, String sk_server_address,
-                       int sk_server_port, StandardSensors sensors, int led_pin,
-                       bool enable_led, int led_ws_connected,
+                       uint16_t sk_server_port, StandardSensors sensors,
+                       int led_pin, bool enable_led, int led_ws_connected,
                        int led_wifi_connected, int led_offline) {
   // initialize filesystem
 #ifdef ESP8266
@@ -79,7 +79,6 @@ SensESPApp::SensESPApp(String preset_hostname, String ssid,
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
                                         StandardSensors enabled_sensors) {
-  
   if ((enabled_sensors & FREQUENCY) != 0) {
     connect_1to1_h<SystemHz, SKOutput<float>>(new SystemHz(),
                                               new SKOutput<float>(), hostname);
