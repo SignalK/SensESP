@@ -127,10 +127,9 @@ void SensESPApp::enable() {
 
   debugI("Enabling subsystems");
 
-  if (!ws_client->get_server_address().isEmpty()) {
-    debugI("Subsystem: setup_discovery()");
-    setup_discovery(networking->get_hostname()->get().c_str());
-  }
+  // FIXME: Setting up mDNS discovery before networking can't work!
+  debugI("Subsystem: setup_discovery()");
+  setup_discovery(networking->get_hostname()->get().c_str());
 
   debugI("Subsystem: networking->setup()");
   networking->setup([this](bool connected) {
