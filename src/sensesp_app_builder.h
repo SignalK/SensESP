@@ -10,7 +10,7 @@ class SensESPAppBuilder {
   String password = "";
   String sk_server_address = "";
   int sk_server_port = 0;
-  StandardSensors sensors = NONE;
+  StandardSensors sensors = ALL;
   int led_pin = LED_PIN;
   bool enable_led = ENABLE_LED;
   int led_ws_connected = 200;
