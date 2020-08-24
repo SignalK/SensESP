@@ -430,27 +430,30 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char SCHEMA[] PROGMEM = R"~({
     "type": "object",
     "properties": {
         "sk_address": { "title": "SignalK server address", "type": "string" },
         "sk_port": { "title": "SignalK server port", "type": "integer" },
-        "client_id": { "title": "Client ID - readonly", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token - readonly", "type": "string", "readOnly": true },
-        "polling_href": { "title": "Server authorization polling href - readonly", "type": "string", "readOnly": true }
+        "client_id": { "title": "Client ID (readonly)", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
     }
-  })";
+  })~";
 
-static const char SCHEMA_READONLY[] PROGMEM = R"({
+// FIXME: Don't Repeat Yourself
+static const char SCHEMA_READONLY[] PROGMEM = R"~(
+  {
     "type": "object",
     "properties": {
-        "sk_address": { "title": "SignalK server address - readonly", "type": "string", "readOnly": true },
-        "sk_port": { "title": "SignalK server port - readonly", "type": "integer", "readOnly": true },
-        "client_id": { "title": "Client ID  - readonly", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token - readonly", "type": "string", "readOnly": true },
-        "polling_href": { "title": "Server authorization polling href - readonly", "type": "string", "readOnly": true }
+        "sk_address": { "title": "SignalK server address (readonly)", "type": "string", "readOnly": true },
+        "sk_port": { "title": "SignalK server port (readonly)", "type": "integer", "readOnly": true },
+        "client_id": { "title": "Client ID  (readonly)", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
     }
-  })";
+  }
+  )~";
 
 String WSClient::get_config_schema() {
   if (configFromOptions) {
