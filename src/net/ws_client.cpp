@@ -45,16 +45,18 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
                    void_cb_func delta_cb)
     : Configurable{config_path} {
   this->sk_delta = sk_delta;
+
+  preset_server_address = server_address;
+  preset_server_port = server_port;
+  this->server_address = server_address;
+  this->server_port = server_port;
+
   this->connected_cb = connected_cb;
   this->delta_cb = delta_cb;
   // set the singleton object pointer
   ws_client = this;
 
   load_configuration();
-
-  if (!serverAddress.isEmpty()) {
-    setConfigurationFromOptions(serverAddress, serverPort);
-  }
 }
 
 void WSClient::enable() {
@@ -456,19 +458,11 @@ static const char SCHEMA_READONLY[] PROGMEM = R"~(
   )~";
 
 String WSClient::get_config_schema() {
-  if (configFromOptions) {
+  if (!preset_server_address.isEmpty()) {
     return FPSTR(SCHEMA);
   } else {
     return FPSTR(SCHEMA_READONLY);
   }
-}
-
-void WSClient::setConfigurationFromOptions(String serverAddress, int port) {
-  debugI("Using server address %s and port %d set from SensespAppOptions",
-         serverAddress.c_str(), port);
-  this->server_address = serverAddress;
-  this->server_port = port;
-  this->configFromOptions = true;
 }
 
 bool WSClient::set_configuration(const JsonObject& config) {
@@ -483,10 +477,9 @@ bool WSClient::set_configuration(const JsonObject& config) {
     }
   }
 
-  if (configFromOptions) {
+  if (!preset_server_address.isEmpty()) {
     debugI(
-        "Websocket configuration change ignored. Configuration is set from "
-        "SensespAppOptions.");
+        "Saved Signal K server configuration ignored due to hardcoded values.");
   } else {
     this->server_address = config["sk_address"].as<String>();
     this->server_port = config["sk_port"].as<int>();

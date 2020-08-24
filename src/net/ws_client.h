@@ -39,12 +39,13 @@ class WSClient : public Configurable {
  private:
   String server_address = "";
   uint16_t server_port = 80;
+  String preset_server_address = "";
+  uint16_t preset_server_port = 0;
   String client_id = "";
   String polling_href = "";
   String auth_token = NULL_AUTH_TOKEN;
   bool server_detected = false;
-  bool configFromOptions = false;
-
+  
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
   WebSocketsClient client;
@@ -59,7 +60,6 @@ class WSClient : public Configurable {
   std::function<void(bool)> connected_cb;
   void_cb_func delta_cb;
   bool get_mdns_service(String& server_address, uint16_t& server_port);
-  void setConfigurationFromOptions(String serverAddress, int port);
 };
 
 #endif
