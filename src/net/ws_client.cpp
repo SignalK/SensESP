@@ -39,8 +39,8 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   }
 }
 
-WSClient::WSClient(String config_path, SKDelta* sk_delta, String serverAddress,
-                   int serverPort,
+WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
+                   int server_port,
                    std::function<void(bool)> connected_cb,
                    void_cb_func delta_cb)
     : Configurable{config_path} {

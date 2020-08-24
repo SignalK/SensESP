@@ -15,8 +15,8 @@ enum ConnectionState { disconnected, authorizing, connecting, connected };
 
 class WSClient : public Configurable {
  public:
-  WSClient(String config_path, SKDelta* sk_delta, String serverAddress,
-           int serverPort, std::function<void(bool)> connected_cb,
+  WSClient(String config_path, SKDelta* sk_delta, String server_address,
+           int server_port, std::function<void(bool)> connected_cb,
            void_cb_func delta_cb);
   void enable();
   void on_disconnected();
