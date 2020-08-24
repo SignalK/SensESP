@@ -20,33 +20,35 @@ class SensESPAppBuilder {
  public:
   SensESPAppBuilder() {}
   SensESPAppBuilder* set_wifi(String ssid, String password) {
-    ssid = ssid;
-    password = password;
+    this->ssid = ssid;
+    this->password = password;
     return this;
   }
   SensESPAppBuilder* set_sk_server(String address, int port) {
     sk_server_address = address;
     sk_server_port = port;
+    this->sk_server_address = address;
+    this->sk_server_port = port;
     return this;
   }
   SensESPAppBuilder* set_standard_sensors(StandardSensors sensors = ALL) {
-    sensors = sensors;
+    this->sensors = sensors;
     return this;
   }
   SensESPAppBuilder* set_led_pin(int led_pin) {
-    led_pin = led_pin;
+    this->led_pin = led_pin;
     return this;
   }
   SensESPAppBuilder* set_led_blinker(bool enabled, int websocket_connected,
                                      int wifi_connected, int offline) {
-    enable_led = enabled;
-    led_ws_connected = websocket_connected;
-    led_wifi_connected = wifi_connected;
-    led_offline = offline;
+    this->enable_led = enabled;
+    this->led_ws_connected = websocket_connected;
+    this->led_wifi_connected = wifi_connected;
+    this->led_offline = offline;
     return this;
   }
   SensESPAppBuilder* set_hostname(String hostname) {
-    hostname = hostname;
+    this->hostname = hostname;
     return this;
   }
   SensESPApp* get_app() {
