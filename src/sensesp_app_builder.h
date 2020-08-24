@@ -25,8 +25,6 @@ class SensESPAppBuilder {
     return this;
   }
   SensESPAppBuilder* set_sk_server(String address, int port) {
-    sk_server_address = address;
-    sk_server_port = port;
     this->sk_server_address = address;
     this->sk_server_port = port;
     return this;
