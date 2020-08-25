@@ -93,7 +93,7 @@ void SensorNXP_FXOS8700_FXAS21002::gatherOrientationDataOnce(
   accelerometer->getEvent(&accel_event);
 
 #if defined(AHRS_DEBUG_OUTPUT)
-  DebugI("I2C took %d ms", millis() - timestamp);
+  debugI("I2C took %lu ms", millis() - timestamp);
 #endif
 
   cal.calibrate(mag_event);
@@ -118,9 +118,9 @@ void SensorNXP_FXOS8700_FXAS21002::gatherOrientationDataOnce(
   heading = filter.getYaw();
   float qw, qx, qy, qz;
   filter.getQuaternion(&qw, &qx, &qy, &qz);
-
+  
 #if defined(AHRS_DEBUG_OUTPUT)
-  debugI("Update took %d ms", millis() - timestamp);
+  debugI("Update took %lu ms", millis() - timestamp);
   debugI("Raw: %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f",
           accel_event.acceleration.x,
           accel_event.acceleration.y,
@@ -128,7 +128,7 @@ void SensorNXP_FXOS8700_FXAS21002::gatherOrientationDataOnce(
           gx, gy, gz,
           mag_event.magnetic.x,
           mag_event.magnetic.y,
-          mag_event.magnetic.z;
+          mag_event.magnetic.z );
   debugI("Heading: %.1f", heading);
 #endif
 
@@ -141,9 +141,11 @@ void SensorNXP_FXOS8700_FXAS21002::gatherOrientationDataOnce(
             qw, qx, qy, qz);
     last_print_time = millis();
   }
+
 #if defined(AHRS_DEBUG_OUTPUT)
-  DebugI("I2C took %d ms", millis() - timestamp);
+  debugI("Orientation collection + processing took %lu ms", millis() - timestamp);
 #endif
+
 }  // end gatherOrientationDataOnce()
 
 // Fetches data from sensors and outputs to serial port in 
