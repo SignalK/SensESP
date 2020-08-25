@@ -15,15 +15,17 @@ bool should_save_config = false;
 
 void save_config_callback() { should_save_config = true; }
 
-Networking::Networking(String config_path, bool isWifiSet, String ssid,
-                       String password, bool isHostNameSet, String hostname)
+Networking::Networking(String config_path, String ssid,
+                       String password, String hostname)
     : Configurable{config_path} {
   this->hostname = new ObservableValue<String>(hostname);
-  this->isWifiSet = isWifiSet;
-  this->isHostNameSet = isHostNameSet;
 
-  if (isWifiSet) {
-    debugI("Using SSID %s and password set from SensespAppOptions",
+  preset_ssid = ssid;
+  preset_password = password;
+  preset_hostname = hostname;
+
+  if (!ssid.isEmpty()) {
+    debugI("Using hard-coded SSID %s and password",
            ssid.c_str());
     this->ap_ssid = ssid;
     this->ap_password = password;
@@ -47,7 +49,7 @@ void Networking::setup(std::function<void(bool)> connection_cb) {
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid(connection_cb);
   }
-  if (!isWifiSet && WiFi.status() != WL_CONNECTED) {
+  if (ap_ssid == "" && WiFi.status() != WL_CONNECTED) {
     setup_wifi_manager(connection_cb);
   }
   app.onRepeat(1000, std::bind(&Networking::check_connection, this));
@@ -128,54 +130,33 @@ ObservableValue<String>* Networking::get_hostname() { return this->hostname; }
 //  this->hostname->set(hostname);
 //}
 
-static const char SCHEMA[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "hostname": { "title": "ESP device hostname", "type": "string" },
-        "ap_ssid": { "title": "Wifi Access Point SSID", "type": "string" },
-        "ap_password": { "title": "Wifi Access Point Password", "type": "string" }
-    }
-  })";
+static const char SCHEMA_PREFIX[] PROGMEM = R"({
+"type": "object",
+"properties": {
+)";
 
-static const char SCHEMA_READONLY[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "hostname": { "title": "ESP device hostname - readonly", "type": "string", "readOnly": true },
-        "ap_ssid": { "title": "Wifi Access Point SSID - readonly", "type": "string", "readOnly": true },
-        "ap_password": { "title": "Wifi Access Point Password - readonly", "type": "string", "readOnly": true }
-    }
-  })";
+String get_property_row(String key, String title, bool readonly) {
+  String readonly_title = "";
+  String readonly_property = "";
 
-static const char SCHEMA_READONLY_WIFI[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "hostname": { "title": "ESP device hostname", "type": "string"},
-        "ap_ssid": { "title": "Wifi Access Point SSID - readonly", "type": "string", "readOnly": true },
-        "ap_password": { "title": "Wifi Access Point Password - readonly", "type": "string", "readOnly": true }
-    }
-  })";
+  if (readonly) {
+    readonly_title = " (readonly)";
+    readonly_property = ",\"readOnly\":true";
+  }
 
-static const char SCHEMA_READONLY_HOSTNAME[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "hostname": { "title": "ESP device hostname - readonly", "type": "string", "readOnly": true },
-        "ap_ssid": { "title": "Wifi Access Point SSID", "type": "string" },
-        "ap_password": { "title": "Wifi Access Point Password", "type": "string" }
-    }
-  })";
+  return "\"" + key + "\":{\"title\":\"" + title + readonly_title + "\","
+    + "\"type\":\"string\"" + readonly_property + "}";
+}
 
 String Networking::get_config_schema() {
-  if (isWifiSet || isHostNameSet) {
-    if (isWifiSet && isHostNameSet) {
-      return FPSTR(SCHEMA_READONLY);
-    } else if (isWifiSet && !isHostNameSet) {
-      return FPSTR(SCHEMA_READONLY_WIFI);
-    } else if (!isWifiSet && isHostNameSet) {
-      return FPSTR(SCHEMA_READONLY_HOSTNAME);
-    }
-  } else {
-    return FPSTR(SCHEMA);
-  }
+  String schema;
+  bool hostname_preset = preset_hostname != "";
+  bool wifi_preset = preset_ssid != "";
+  return String(FPSTR(SCHEMA_PREFIX))
+    + get_property_row("hostname", "ESP device hostname", hostname_preset) + ","
+    + get_property_row("ap_ssid", "Wifi Access Point SSID", wifi_preset) + ","
+    + get_property_row("ap_password", "Wifi Access Point Password", wifi_preset)
+    + "}}";
 }
 
 JsonObject& Networking::get_configuration(JsonBuffer& buf) {
@@ -189,31 +170,25 @@ JsonObject& Networking::get_configuration(JsonBuffer& buf) {
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
-  if (isWifiSet) {
-    debugI(
-        "Networking configuration update rejected. Configuration is set from "
-        "SensespAppOptions.");
-    return false;
-  }
-
   if (!config.containsKey("hostname")) {
     return false;
   }
 
-  if (!isHostNameSet) {
+  if (preset_hostname == "") {
     this->hostname->set(config["hostname"].as<String>());
   }
-  this->ap_ssid = config["ap_ssid"].as<String>();
-  this->ap_password = config["ap_password"].as<String>();
-
+  
+  if (preset_ssid == "") {
+    debugW("Ignoring saved SSID and password");
+    this->ap_ssid = config["ap_ssid"].as<String>();
+    this->ap_password = config["ap_password"].as<String>();
+  }
   return true;
 }
 
 void Networking::reset_settings() {
-  if (!isWifiSet) {
-    ap_ssid = "";
-    ap_password = "";
-  }
+  ap_ssid = preset_ssid;
+  ap_password = preset_password;
 
   save_configuration();
   wifi_manager->resetSettings();

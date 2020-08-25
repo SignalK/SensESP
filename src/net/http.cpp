@@ -213,38 +213,18 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto* response = request->beginResponseStream("text/plain");
-  auto* options = sensesp_app->getOptions();
-
+  
   response->setCode(200);
-  response->printf("Name: %s, build at %s %s", options->getHostname().c_str(),
+  response->printf("Name: %s, build at %s %s\n", sensesp_app->get_hostname().c_str(),
                    __DATE__, __TIME__);
 
-  response->println();
-  response->printf("MAC: %s", WiFi.macAddress().c_str());
-  response->println();
-  response->printf("WiFi signal: %d", WiFi.RSSI());
-  response->println();
-
-  if (options->isWifiSet()) {
-    response->println("Wifi configuration is set with SensespAppOptions");
-    response->printf("SSID: %s", options->getSsid().c_str());
-  } else {
-    response->println("Wifi configuration is set in Web UI");
-    response->printf("SSID: %s", WiFi.SSID().c_str());
-  }
-
-  response->println();
-
-  if (options->isServerSet()) {
-    response->println("SignalK adddress is set with SensespAppOptions");
-    response->printf("Server: %s:%d", options->getServerAddress().c_str(),
-                     options->getServerPort());
-    response->println();
-  } else if (options->useMDNS()) {
-    response->println("SignalK adddress will be found using mDNS.");
-  } else {
-    response->println("SignalK adddress is set in Web UI");
-  }
+  response->printf("MAC: %s\n", WiFi.macAddress().c_str());
+  response->printf("WiFi signal: %d\n", WiFi.RSSI());
+  
+  response->printf("SSID: %s\n", WiFi.SSID().c_str());
+  
+  response->printf("SignalK server address: %s\n", sensesp_app->ws_client->get_server_address().c_str());
+  response->printf("SignalK server port: %d\n", sensesp_app->ws_client->get_server_port());
 
   request->send(response);
 }

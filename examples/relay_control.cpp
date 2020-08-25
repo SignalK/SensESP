@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 #include "sensesp_app.h"
-#include "sensesp_app_options.h"
+#include "sensesp_app_builder.h"
 #include "sensors/digital_output.h"
 #include "signalk/signalk_listener.h"
 #include "signalk/signalk_output.h"
@@ -31,13 +31,15 @@ ReactESP app([]() {
   delay(100);
   debugI("Serial debug enabled");
 
+  // Create a builder object
+  SensESPAppBuilder builder;
+
   // Create the global SensESPApp() object.
-  sensesp_app = new SensESPApp([](SensESPAppOptions* options) {
-    options->setServerOptions("10.10.10.1", 3000)
-        ->setWifiOptions("yourSSID", "yourPassword")
-        ->setHostName("relay")
-        ->setStandardSensors();
-  });
+  sensesp_app = builder.set_hostname("relay")
+    ->set_sk_server("10.10.10.1", 3000)
+    ->set_wifi("yourSSID", "yourPassword")
+    ->set_standard_sensors()
+    ->get_app();
 
   // Define the SK Path you want to listen to
   const char* sk_path = "environment.outside.illuminance";
