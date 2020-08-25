@@ -1,5 +1,7 @@
 #include "sensor_NXP_FXOS8700_FXAS21002.h"
 
+#include <RemoteDebug.h>
+#include "sensesp.h"
 #include <Adafruit_FXAS21002C.h>
 #include <Adafruit_FXOS8700.h>
 
@@ -26,16 +28,16 @@ SensorNXP_FXOS8700_FXAS21002::SensorNXP_FXOS8700_FXAS21002() {}
 //  TODO: set ranges/sensitivity. For now use ICs' default values.
 bool SensorNXP_FXOS8700_FXAS21002::connect(uint8_t pin_i2c_sda,
                                            uint8_t pin_i2c_scl) {
-  Serial.println(F("NXP 9 Degrees-of-Freedom Sensor with Adafruit AHRS"));
+  debugI("NXP 9 Degrees-of-Freedom Sensor with Adafruit AHRS");
   if (!cal.begin()) {
-    Serial.println("Failed to initialize calibration helper");
+      debugE("Failed to initialize calibration helper");
     while (1) yield();
   }
   if (!cal.loadCalibration()) {
-    Serial.println("No calibration loaded/found...will start with defaults");
+      debugI("No calibration loaded/found...will start with defaults");
     isCalibrated = false;
   } else {
-    Serial.println("Loaded existing calibration:");
+      debugI("Loaded existing calibration:");
     cal.printSavedCalibration();
     isCalibrated = true;
   }
@@ -44,7 +46,7 @@ bool SensorNXP_FXOS8700_FXAS21002::connect(uint8_t pin_i2c_sda,
   Wire.setClock(400000);  // 400KHz I2C (used to be after setupo())
 
   if (!initSensors()) {
-    Serial.println("Failed to find sensors");
+      debugE("Failed to find sensors");
     return false;
   }
 
@@ -84,23 +86,20 @@ void SensorNXP_FXOS8700_FXAS21002::gatherOrientationDataOnce(
   timestamp = millis();
 
   if (!isCalibrated) {
-    Serial.println(
-      "WARNING: gatherOrientationDataOnce() Orientation is uncalibrated!");
+    debugW("Orientation is uncalibrated!");
   }
   magnetometer->getEvent(&mag_event);
   gyroscope->getEvent(&gyro_event);
   accelerometer->getEvent(&accel_event);
 
 #if defined(AHRS_DEBUG_OUTPUT)
-  Serial.print("I2C took ");
-  Serial.print(millis() - timestamp);
-  Serial.println(" ms");
+  DebugI("I2C took %d ms", millis() - timestamp);
 #endif
 
   cal.calibrate(mag_event);
   cal.calibrate(accel_event);
   cal.calibrate(gyro_event);
-  // Gyroscope needs to be converted from Rad/s to Degree/s
+  // Gyroscope needs to be converted from Rad/s to Degree/s for filter
   // the rest are not unit-important
   gx = gyro_event.gyro.x * SENSORS_RADS_TO_DPS;
   gy = gyro_event.gyro.y * SENSORS_RADS_TO_DPS;
@@ -121,58 +120,29 @@ void SensorNXP_FXOS8700_FXAS21002::gatherOrientationDataOnce(
   filter.getQuaternion(&qw, &qx, &qy, &qz);
 
 #if defined(AHRS_DEBUG_OUTPUT)
-  Serial.print("Update took ");
-  Serial.print(millis() - timestamp);
-  Serial.println(" ms");
-  Serial.print("Raw: ");
-  Serial.print(accel_event.acceleration.x, 4);
-  Serial.print(", ");
-  Serial.print(accel_event.acceleration.y, 4);
-  Serial.print(", ");
-  Serial.print(accel_event.acceleration.z, 4);
-  Serial.print(", ");
-  Serial.print(gx, 4);
-  Serial.print(", ");
-  Serial.print(gy, 4);
-  Serial.print(", ");
-  Serial.print(gz, 4);
-  Serial.print(", ");
-  Serial.print(mag_event.magnetic.x, 4);
-  Serial.print(", ");
-  Serial.print(mag_event.magnetic.y, 4);
-  Serial.print(", ");
-  // Serial.print(mag_event.magnetic.z, 4); Serial.println("");
-  Serial.print(mag_event.magnetic.z, 4);
-  Serial.print("  Heading:");
-  Serial.print(heading, 1);
-  Serial.println("");
+  debugI("Update took %d ms", millis() - timestamp);
+  debugI("Raw: %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f",
+          accel_event.acceleration.x,
+          accel_event.acceleration.y,
+          accel_event.acceleration.z,
+          gx, gy, gz,
+          mag_event.magnetic.x,
+          mag_event.magnetic.y,
+          mag_event.magnetic.z;
+  debugI("Heading: %.1f", heading);
 #endif
 
   if (is_print_results &&
       (millis() - last_print_time > MIN_PRINT_INTERVAL_MS)) {
     // print the heading, pitch and roll
-    Serial.print("Orientation: ");
-    Serial.print(heading);
-    Serial.print(", ");
-    Serial.print(pitch);
-    Serial.print(", ");
-    Serial.println(roll);
-
-    Serial.print("Quaternion: ");
-    Serial.print(qw, 4);
-    Serial.print(", ");
-    Serial.print(qx, 4);
-    Serial.print(", ");
-    Serial.print(qy, 4);
-    Serial.print(", ");
-    Serial.println(qz, 4);
-
+    debugI("Orientation: %.2f, %.2f, %.2f", 
+            heading, pitch, roll);
+    debugI("Quaternion: %.4f, %.4f, %.4f, %.4f", 
+            qw, qx, qy, qz);
     last_print_time = millis();
   }
 #if defined(AHRS_DEBUG_OUTPUT)
-  Serial.print("Took ");
-  Serial.print(millis() - timestamp);
-  Serial.println(" ms");
+  DebugI("I2C took %d ms", millis() - timestamp);
 #endif
 }  // end gatherOrientationDataOnce()
 
@@ -189,10 +159,11 @@ void SensorNXP_FXOS8700_FXAS21002::gatherCalibrationDataOnce(
   accelerometer->getEvent(&accel_event);
 
   if (is_print_results) {
-    // 'Raw' values to match expectation of MotionCal utility
+    // 'Raw' values in format matching expectation of MotionCal utility
+    // This section copied verbatim from  Adafruit_AHRS_calibration.ino
     Serial.print(int(millis()));
     Serial.print(
-        "Raw:");  // are the Raw and Uni labels reversed? Seems to work as-is.
+        "Raw:");
     Serial.print(int(accel_event.acceleration.x * 8192 / 9.8));
     Serial.print(",");
     Serial.print(int(accel_event.acceleration.y * 8192 / 9.8));
@@ -340,9 +311,9 @@ void SensorNXP_FXOS8700_FXAS21002::receiveCalibration(void) {
       cal.mag_softiron[8] = offsets[12];
 
       if (!cal.saveCalibration()) {
-        Serial.println("**WARNING** Couldn't save calibration");
+        debugW("Couldn't save calibration");
       } else {
-        Serial.println("Wrote calibration");
+        debugI("Wrote calibration");
       }
       cal.printSavedCalibration();
       calcount = 0;
