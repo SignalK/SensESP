@@ -74,9 +74,9 @@ void SensorNXP_FXOS8700_FXAS21002::initFilter(int sampling_interval_ms) {
   timestamp = millis();
 }  // end initFilter()
 
-float SensorNXP_FXOS8700_FXAS21002::getHeadingDegrees(void) {
-  return heading;
-}  // end getHeadingDegrees()
+float SensorNXP_FXOS8700_FXAS21002::getHeadingRadians(void) {
+  return heading / SENSORS_RADS_TO_DPS;
+}  // end getHeadingRadians()
 
 // fetches data from sensors, applies filter function, and assigns orientation
 // data to member variables as pitch/roll/heading and quaternion.

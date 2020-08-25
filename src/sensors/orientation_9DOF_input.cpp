@@ -76,7 +76,7 @@ void Read9DOF::update() {
       output = -1.0;
       break;
     case (compass_hdg):
-      output = pSensorFXOSFXAS->getHeadingDegrees();
+      output = pSensorFXOSFXAS->getHeadingRadians();
       break;
     case (gyro):
       // TODO - process full return vals. Right now does nothing useful.

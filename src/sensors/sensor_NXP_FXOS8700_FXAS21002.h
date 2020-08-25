@@ -44,7 +44,7 @@ class SensorNXP_FXOS8700_FXAS21002 {
   bool connect(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl);
   void printSensorDetails(void);
   void initFilter(int sampling_interval_ms);
-  float getHeadingDegrees(void);
+  float getHeadingRadians(void);
   void gatherCalibrationDataOnce(bool is_print_results);
   void gatherOrientationDataOnce(bool is_print_results);
  
