@@ -39,22 +39,24 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   }
 }
 
-WSClient::WSClient(String config_path, SKDelta* sk_delta, String serverAddress,
-                   int serverPort,
+WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
+                   uint16_t server_port,
                    std::function<void(bool)> connected_cb,
                    void_cb_func delta_cb)
     : Configurable{config_path} {
   this->sk_delta = sk_delta;
+
+  preset_server_address = server_address;
+  preset_server_port = server_port;
+  this->server_address = server_address;
+  this->server_port = server_port;
+
   this->connected_cb = connected_cb;
   this->delta_cb = delta_cb;
   // set the singleton object pointer
   ws_client = this;
 
   load_configuration();
-
-  if (!serverAddress.isEmpty()) {
-    setConfigurationFromOptions(serverAddress, serverPort);
-  }
 }
 
 void WSClient::enable() {
@@ -430,42 +432,37 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char SCHEMA[] PROGMEM = R"~({
     "type": "object",
     "properties": {
         "sk_address": { "title": "SignalK server address", "type": "string" },
         "sk_port": { "title": "SignalK server port", "type": "integer" },
-        "client_id": { "title": "Client ID - readonly", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token - readonly", "type": "string", "readOnly": true },
-        "polling_href": { "title": "Server authorization polling href - readonly", "type": "string", "readOnly": true }
+        "client_id": { "title": "Client ID (readonly)", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
     }
-  })";
+  })~";
 
-static const char SCHEMA_READONLY[] PROGMEM = R"({
+// FIXME: Don't Repeat Yourself
+static const char SCHEMA_READONLY[] PROGMEM = R"~(
+  {
     "type": "object",
     "properties": {
-        "sk_address": { "title": "SignalK server address - readonly", "type": "string", "readOnly": true },
-        "sk_port": { "title": "SignalK server port - readonly", "type": "integer", "readOnly": true },
-        "client_id": { "title": "Client ID  - readonly", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token - readonly", "type": "string", "readOnly": true },
-        "polling_href": { "title": "Server authorization polling href - readonly", "type": "string", "readOnly": true }
+        "sk_address": { "title": "SignalK server address (readonly)", "type": "string", "readOnly": true },
+        "sk_port": { "title": "SignalK server port (readonly)", "type": "integer", "readOnly": true },
+        "client_id": { "title": "Client ID  (readonly)", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
     }
-  })";
+  }
+  )~";
 
 String WSClient::get_config_schema() {
-  if (configFromOptions) {
+  if (!preset_server_address.isEmpty()) {
     return FPSTR(SCHEMA);
   } else {
     return FPSTR(SCHEMA_READONLY);
   }
-}
-
-void WSClient::setConfigurationFromOptions(String serverAddress, int port) {
-  debugI("Using server address %s and port %d set from SensespAppOptions",
-         serverAddress.c_str(), port);
-  this->server_address = serverAddress;
-  this->server_port = port;
-  this->configFromOptions = true;
 }
 
 bool WSClient::set_configuration(const JsonObject& config) {
@@ -480,10 +477,9 @@ bool WSClient::set_configuration(const JsonObject& config) {
     }
   }
 
-  if (configFromOptions) {
+  if (!preset_server_address.isEmpty()) {
     debugI(
-        "Websocket configuration change ignored. Configuration is set from "
-        "SensespAppOptions.");
+        "Saved Signal K server configuration ignored due to hardcoded values.");
   } else {
     this->server_address = config["sk_address"].as<String>();
     this->server_port = config["sk_port"].as<int>();
