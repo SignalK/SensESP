@@ -5,7 +5,7 @@
   "repository":
   {
     "type": "git",
-    "url": "https://github.com/SignalK/SensESP.git"
+    "url": "https://github.com/BjarneBitscrambler/SensESP.git"
   },
   "authors":
   [
@@ -85,9 +85,15 @@
     {
       "name": "Adafruit INA219"
     },
-	{
-		"name": "Adafruit MAX31856 library"
-	},
+    {
+      "name": "Adafruit MAX31856 library"
+    },
+    {
+      "name": "Adafruit AHRS"
+    },
+    {
+      "name": "SoftwareSerial"
+    },
     {
       "name": "RemoteDebug",
       "version": "https://github.com/JoaoLopesF/RemoteDebug.git#0b5a9c1a49fd2ade0e3cadc3a3707781e819359a" }
