@@ -1,21 +1,20 @@
 #include "ws_client.h"
 
-#include "Arduino.h"
-
 #include <ArduinoJson.h>
+
+#include "Arduino.h"
 #ifdef ESP8266
 #include <ESP8266HTTPClient.h>
 #include <ESP8266mDNS.h>  // Include the mDNS library
 #elif defined(ESP32)
-#include <HTTPClient.h>
 #include <ESPmDNS.h>
+#include <HTTPClient.h>
 #endif
 
 #include <ESPTrueRandom.h>
 #include <WiFiClient.h>
 
 #include "sensesp_app.h"
-
 #include "signalk/signalk_listener.h"
 
 WSClient* ws_client;
@@ -40,14 +39,20 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   }
 }
 
-WSClient::WSClient(String config_path, SKDelta* sk_delta,
+WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
+                   uint16_t server_port,
                    std::function<void(bool)> connected_cb,
                    void_cb_func delta_cb)
     : Configurable{config_path} {
   this->sk_delta = sk_delta;
+
+  preset_server_address = server_address;
+  preset_server_port = server_port;
+  this->server_address = server_address;
+  this->server_port = server_port;
+
   this->connected_cb = connected_cb;
   this->delta_cb = delta_cb;
-
   // set the singleton object pointer
   ws_client = this;
 
@@ -113,8 +118,8 @@ void WSClient::subscribe_listeners() {
 
       subscribePath["path"] = sk_path;
       subscribePath["period"] = listen_delay;
-
-      debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(), listen_delay);
+      debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(),
+             listen_delay);
     }
 
     String messageJson;
@@ -126,10 +131,10 @@ void WSClient::subscribe_listeners() {
 }
 
 void WSClient::on_receive_delta(uint8_t* payload) {
-  #ifdef SIGNALK_PRINT_RCV_DELTA
+#ifdef SIGNALK_PRINT_RCV_DELTA
   debugD("Websocket payload received: %s", (char*)payload);
-  #endif
-  
+#endif
+
   DynamicJsonBuffer jsonBuffer;
   JsonObject& message = jsonBuffer.parseObject(String((char*)payload));
 
@@ -143,20 +148,18 @@ void WSClient::on_receive_delta(uint8_t* payload) {
 
       for (size_t vi = 0; vi < values.size(); vi++) {
         JsonObject& value = values[vi];
-        
+
         const char* path = value["path"];
-        //debugD("Got update of value %s\n", path);
+        // debugD("Got update of value %s\n", path);
 
         const std::vector<SKListener*>& listeners = SKListener::get_listeners();
 
-        for (size_t i = 0; i < listeners.size(); i++)
-        {
+        for (size_t i = 0; i < listeners.size(); i++) {
           SKListener* listener = listeners[i];
-          if(listener->get_sk_path().equals(path))
-          {
+          if (listener->get_sk_path().equals(path)) {
             listener->parseValue(value);
           }
-        }        
+        }
       }
     }
   }
@@ -182,22 +185,23 @@ void WSClient::connect() {
   }
   debugD("Initiating connection");
 
-  connection_state = connecting;
+  connection_state = authorizing;
 
-  String server_address = "";
-  uint16_t server_port = 80;
+  String server_address = this->server_address;
+  uint16_t server_port = this->server_port;
 
-  if (this->server_address.length() == 0) {
+  if (this->server_address.isEmpty()) {
     if (!get_mdns_service(server_address, server_port)) {
-       debugI("No mDNS service found by get_mdns_service");
+      debugE("No SignalK server found in network when using mDNS service!");
+    } else {
+      debugI("SignalK server has been found at address %s:%d by mDNS.",
+             server_address.c_str(), server_port);
     }
-  } else {
-    server_address = this->server_address;
-    server_port = this->server_port;
   }
 
-  if ((server_address.length() > 0) && (server_port > 0)) {
-    debugD("Websocket client starting");
+  if (!server_address.isEmpty() && server_port > 0) {
+    debugD("Websocket is connecting to SignalK server on address %s:%d",
+           server_address.c_str(), server_port);
   } else {
     // host and port not defined - wait for mDNS
     connection_state = disconnected;
@@ -222,13 +226,12 @@ void WSClient::connect() {
 void WSClient::test_token(const String server_address,
                           const uint16_t server_port) {
   // FIXME: implement async HTTP client!
-  WiFiClient client;
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/api/";
   debugD("Testing token with url %s", url.c_str());
-  http.begin(client, url);
+  http.begin(url);
   String full_token = String("JWT ") + auth_token;
   http.addHeader("Authorization", full_token.c_str());
   int httpCode = http.GET();
@@ -249,6 +252,7 @@ void WSClient::test_token(const String server_address,
       server_detected = true;
       this->connect_ws(server_address, server_port);
     } else if (httpCode == 401) {
+      this->client_id = "";
       this->send_access_request(server_address, server_port);
     } else {
       connection_state = disconnected;
@@ -278,12 +282,11 @@ void WSClient::send_access_request(const String server_address,
   String json_req = "";
   req.printTo(json_req);
 
-  WiFiClient client;
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/access/requests";
-  http.begin(client, url);
+  http.begin(url);
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(json_req);
   String payload = http.getString();
@@ -294,6 +297,7 @@ void WSClient::send_access_request(const String server_address,
     debugW("Can't handle response %d to access request.", httpCode);
     debugD("%s", payload.c_str());
     connection_state = disconnected;
+    client_id = "";
     return;
   }
 
@@ -305,6 +309,7 @@ void WSClient::send_access_request(const String server_address,
   if (state != "PENDING") {
     debugW("Got unknown state: %s", state.c_str());
     connection_state = disconnected;
+    client_id = "";
     return;
   }
 
@@ -313,7 +318,7 @@ void WSClient::send_access_request(const String server_address,
   save_configuration();
 
   debugD("Polling %s in 5 seconds", polling_href.c_str());
-  app.onDelay(5000, [this, server_address, server_port]() {
+  app.onDelay(5000, [this, server_address, server_port, href]() {
     this->poll_access_request(server_address, server_port, this->polling_href);
   });
 }
@@ -323,11 +328,10 @@ void WSClient::poll_access_request(const String server_address,
                                    const String href) {
   debugD("Polling SK Server for authentication token");
 
-  WiFiClient client;
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port + href;
-  http.begin(client, url);
+  http.begin(url);
   int httpCode = http.GET();
   if (httpCode == 200 or httpCode == 202) {
     String payload = http.getString();
@@ -383,14 +387,18 @@ void WSClient::poll_access_request(const String server_address,
 
 void WSClient::connect_ws(const String host, const uint16_t port) {
   String path = "/signalk/v1/stream?subscribe=none";
-
+  this->connection_state = connecting;
   this->client.begin(host, port, path);
   this->client.onEvent(webSocketClientEvent);
   String full_token = String("JWT ") + auth_token;
   this->client.setAuthorization(full_token.c_str());
 }
 
-void WSClient::loop() { this->client.loop(); }
+void WSClient::loop() {
+  if (this->connection_state == connecting || this->connection_state == connected) {
+    this->client.loop();
+  }
+}
 
 bool WSClient::is_connected() { return connection_state == connected; }
 
@@ -403,9 +411,9 @@ void WSClient::restart() {
 
 void WSClient::send_delta() {
   String output;
-  if (sk_delta->data_available()) {
-    sk_delta->get_delta(output);
-    if (connection_state == connected) {
+  if (connection_state == connected) {
+    if (sk_delta->data_available()) {
+      sk_delta->get_delta(output);
       this->client.sendTXT(output);
       this->delta_cb();
     }
@@ -416,37 +424,71 @@ JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
   JsonObject& root = buf.createObject();
   root["sk_address"] = this->server_address;
   root["sk_port"] = this->server_port;
+
   root["token"] = this->auth_token;
   root["client_id"] = this->client_id;
   root["polling_href"] = this->polling_href;
+
   return root;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char SCHEMA[] PROGMEM = R"~({
     "type": "object",
     "properties": {
         "sk_address": { "title": "SignalK server address", "type": "string" },
         "sk_port": { "title": "SignalK server port", "type": "integer" },
-        "client_id": { "title": "Client ID", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token", "type": "string" },
-        "polling_href": { "title": "Server authorization polling href", "type": "string", "readOnly": true }
+        "client_id": { "title": "Client ID (readonly)", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
     }
-  })";
+  })~";
 
-String WSClient::get_config_schema() { return FPSTR(SCHEMA); }
+// FIXME: Don't Repeat Yourself
+static const char SCHEMA_READONLY[] PROGMEM = R"~(
+  {
+    "type": "object",
+    "properties": {
+        "sk_address": { "title": "SignalK server address (readonly)", "type": "string", "readOnly": true },
+        "sk_port": { "title": "SignalK server port (readonly)", "type": "integer", "readOnly": true },
+        "client_id": { "title": "Client ID  (readonly)", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
+    }
+  }
+  )~";
+
+String WSClient::get_config_schema() {
+  if (!preset_server_address.isEmpty()) {
+    return FPSTR(SCHEMA);
+  } else {
+    return FPSTR(SCHEMA_READONLY);
+  }
+}
 
 bool WSClient::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_address", "sk_port", "token", "client_id"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
+      debugI(
+          "Websocket configuration update rejected. Missing following "
+          "parameter: %s",
+          str.c_str());
       return false;
     }
   }
-  this->server_address = config["sk_address"].as<String>();
-  this->server_port = config["sk_port"].as<int>();
+
+  if (!preset_server_address.isEmpty()) {
+    debugI(
+        "Saved Signal K server configuration ignored due to hardcoded values.");
+  } else {
+    this->server_address = config["sk_address"].as<String>();
+    this->server_port = config["sk_port"].as<int>();
+  }
+
   // FIXME: setting the token should not be allowed via the REST API.
   this->auth_token = config["token"].as<String>();
   this->client_id = config["client_id"].as<String>();
   this->polling_href = config["polling_href"].as<String>();
+
   return true;
 }
