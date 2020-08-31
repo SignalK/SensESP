@@ -1,8 +1,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#include "SPIFFS.h"
-
 #include <sstream>
 #include <string>
 
@@ -56,9 +54,6 @@ ReactESP app([]() {
   // configuration to save, or that you're not interested in doing
   // run-time configuration.
   // These two are necessary until a method is created to synthesize them.
-  // Everything after "/sensors" in each of these ("/engine_rpm/calibrate" and
-  // "/engine_rpm/sk") is simply a label to display what you're configuring in
-  // the Configuration UI.
   const char* config_path_hdg_skpath = "/sensors/orientation/sk";
   const char* config_path_hdg_compass = "/sensors/orientation/compass";
 
