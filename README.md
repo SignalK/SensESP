@@ -37,7 +37,7 @@ lib_deps =
     https://github.com/SignalK/SensESP.git
 ```
 
-Look at [this file](https://github.com/SignalK/SensESP/blob/master/platformio.ini). Notice there are two `env` sections: `[env:d1_mini]` and `[env:esp32dev]`. `[env:d1_mini]` is for the Wemos D1 Mini ESP8266. If your board is an ESP8266, copy all of the lines from that section into the `env` section of your platformio.ini. `[env:esp32dev]` is for a basic ESP32. If your board is an ESP32, opy all the lines from that section into the `env` section of your platformio.ini.
+Look at [this file](https://github.com/SignalK/SensESP/blob/master/platformio.ini). Notice there are two `env` sections: `[env:d1_mini]` and `[env:esp32dev]`. `[env:d1_mini]` is for the Wemos D1 Mini ESP8266. If your board is an ESP8266, copy all of the lines from that section into the `env` section of your platformio.ini. `[env:esp32dev]` is for a basic ESP32. If your board is an ESP32, copy all the lines from that section into the `env` section of your platformio.ini.
 
 Then, open `src/main.cpp`. The default template is for the Arduino IDE, but a SensESP main.cpp file will look very different. Replace the contents of `main.cpp` with the contents of one of the SensESP examples in the `examples` subdirectory here on GitHub. (This is a good one to start with: https://github.com/SignalK/SensESP/blob/master/examples/analog_input.cpp .) Check that the settings (pin numbers, etc.) match your hardware and select "Build" from the PlatformIO submenu (the little alien face) on the left toolbar. If the build succeeds, you can plug in your ESP board and press "Upload and Monitor".
 
