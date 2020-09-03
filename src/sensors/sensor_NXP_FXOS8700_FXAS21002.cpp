@@ -43,7 +43,7 @@ bool SensorNXP_FXOS8700_FXAS21002::connect(uint8_t pin_i2c_sda,
   }
 
   Wire.begin(pin_i2c_sda, pin_i2c_scl);
-  Wire.setClock(400000);  // 400KHz I2C (used to be after setupo())
+  Wire.setClock(400000);  // 400KHz I2C
 
   if (!initSensors()) {
       debugE("Failed to find sensors");
@@ -74,9 +74,51 @@ void SensorNXP_FXOS8700_FXAS21002::initFilter(int sampling_interval_ms) {
   timestamp = millis();
 }  // end initFilter()
 
+/* The following get___() methods return the specified parameter
+of the nine measured parameters. Terminology is nautical
+(e.g. heading, pitch, roll) and assumes the physical sensor
+is aligned with the X-axis pointing to the Bow;
+the Y-axis pointing to Port; and the Z-axis pointing up. If your
+sensor is mounted differently, changes to the terminology/axes
+will need to be made.
+Per SignalK convention, units are SI:  radians for headings;
+radians / second for turn rates; and meters / second^2 for acceleration.
+*/
 float SensorNXP_FXOS8700_FXAS21002::getHeadingRadians(void) {
-  return heading / SENSORS_RADS_TO_DPS;
+  return (360.0 - heading) / SENSORS_RADS_TO_DPS;
 }  // end getHeadingRadians()
+
+float SensorNXP_FXOS8700_FXAS21002::getPitchRadians(void) {
+  return (-pitch) / SENSORS_RADS_TO_DPS;
+}  // end getPitchRadians()
+
+float SensorNXP_FXOS8700_FXAS21002::getRollRadians(void) {
+  return roll / SENSORS_RADS_TO_DPS;
+}  // end getRollRadians()
+
+float SensorNXP_FXOS8700_FXAS21002::getAccelerationX(void) {
+  return accel_event.acceleration.x;
+}  // end getAccelerationX()
+
+float SensorNXP_FXOS8700_FXAS21002::getAccelerationY(void) {
+  return accel_event.acceleration.y;
+}  // end getAccelerationY()
+
+float SensorNXP_FXOS8700_FXAS21002::getAccelerationZ(void) {
+  return accel_event.acceleration.z;
+}  // end getAccelerationZ()
+
+float SensorNXP_FXOS8700_FXAS21002::getRateOfTurn(void) {
+  return (-gz) / SENSORS_RADS_TO_DPS;
+}  // end getRateOfTurn()
+
+float SensorNXP_FXOS8700_FXAS21002::getRateOfPitch(void) {
+  return (-gy) / SENSORS_RADS_TO_DPS;
+}  // end getRateOfPitch()
+
+float SensorNXP_FXOS8700_FXAS21002::getRateOfRoll(void) {
+  return gx / SENSORS_RADS_TO_DPS;
+}  // end getRateOfRoll()
 
 // fetches data from sensors, applies filter function, and assigns orientation
 // data to member variables as pitch/roll/heading and quaternion.
@@ -247,7 +289,12 @@ bool SensorNXP_FXOS8700_FXAS21002::initSensors() {
 }  // end initSensors()
 
 void SensorNXP_FXOS8700_FXAS21002::setupSensors(void) {
-  // we could set the g range for accelerometer here, for example
+  //TODO: we could set the g range for accelerometer here, for example
+  //Note that if the ranges are changed, the scaling of the output values
+  //may need adjusting. For example, the accelerometer is operating
+  //by default at +/-2g sensitivity (= 0.244 mg/LSB), and the accelerations
+  //are converted to m/s^2. The conversion factor needs scale 
+  //proportionally to the sensitivity.
 }  // end setupSensors()
 
 // Receives calibration values sent by external calibration utility

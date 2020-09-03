@@ -28,7 +28,7 @@
 //   please support PJRC and open-source hardware by purchasing products
 //   from PJRC!  Written by PJRC, adapted by Limor Fried for Adafruit Industries.
 
-// Last edits by Bjarne Hansen 2020-08-16
+// Last edits by Bjarne Hansen 2020-09-03
 
 // Relies on Serial object existing for sending data/diagnostics to serial port
 
@@ -45,9 +45,17 @@ class SensorNXP_FXOS8700_FXAS21002 {
   void printSensorDetails(void);
   void initFilter(int sampling_interval_ms);
   float getHeadingRadians(void);
+  float getPitchRadians(void);
+  float getRollRadians(void);
+  float getAccelerationX(void);
+  float getAccelerationY(void);
+  float getAccelerationZ(void);
+  float getRateOfTurn(void);
+  float getRateOfPitch(void);
+  float getRateOfRoll(void);
   void gatherCalibrationDataOnce(bool is_print_results);
   void gatherOrientationDataOnce(bool is_print_results);
- 
+
  private:
   // pick one of three following filters: slower == better quality output
   // Adafruit_NXPSensorFusion filter; // slowest.  Note that this one needs to
@@ -58,7 +66,7 @@ class SensorNXP_FXOS8700_FXAS21002 {
   // Adafruit_Mahony filter;    // fastest/smallest
 
   Adafruit_Sensor *accelerometer, *gyroscope, *magnetometer;
-  Adafruit_Sensor_Calibration_EEPROM  cal; // use EEPROM on ESP32 module
+  Adafruit_Sensor_Calibration_EEPROM cal;  // use EEPROM on ESP32 module
   byte caldata[68];  // buffer to receive magnetic calibration data
   byte calcount = 0;
   bool isCalibrated = false;
@@ -75,7 +83,6 @@ class SensorNXP_FXOS8700_FXAS21002 {
   void setupSensors(void);
   void receiveCalibration(void);
   uint16_t crc16_update(uint16_t crc, uint8_t a);
-
 };
 
 #endif  //_SENSORS_NXP_FXOS8700_FXAS21002_H

@@ -11,7 +11,6 @@ SensorNXP_FXOS8700_FXAS21002*
 // Orientation9DOF represents a 9-Degrees-of-Freedom sensor (magnetometer,
 // accelerometer, and gyroscope), such as an
 // ADAfruit NXP FXOS8700 + FXAS21002 combination sensor.
-// TODO - make accel range a configurable
 Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                                  String config_path)
     : Sensor(config_path) {
@@ -21,11 +20,10 @@ Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
   if (!pSensorFXOSFXAS->connect(pin_i2c_sda, pin_i2c_scl)) {
     debugE(
         "No connection to FXOS8700/FXAS21002 sensor: check address & wiring");
+  }else {
+    pSensorFXOSFXAS->printSensorDetails();
   }
-}
 
-void Orientation9DOF::displaySensorDetails(void) {
-  pSensorFXOSFXAS->printSensorDetails();
 }
 
 void Orientation9DOF::streamRawValues(void) {
@@ -56,34 +54,60 @@ Read9DOF::Read9DOF(Orientation9DOF* p9DOF, OrientationValType val_type,
 
 // Setup repeated readings from combination sensor.
 void Read9DOF::enable() {
-  // some sensor examples implement the sensor readings directly in this
-  // enable() method, rather than by calling update(). Is there a reason to
-  // prefer one method over the other?
   app.onRepeat(read_delay, [this]() { this->update(); });
 }
 
-// Obtain one set of readings from combination sensor. Values are updated from
-// all three modes (magnetometer, accelerometer, gyro)
-// but only the requested val_type is returned in the output variable.
-// TODO - how to return multiple values
+// Provides one parameter reading from the combination sensor. 
+// val_type determines which particular parameter is output.
+// Note that since the filter algorithm works best when all 9-DOF
+//  parameters are captured simultaneously, and at a specified
+//  constant rate, there is only a single call to 
+//  pSensorFXOSFXAS->gatherOrientationDataOnce() in this method.
+//  Arbitrarily, this update happens when the compass heading
+//  is requested; all the remaining parameters are retrieved
+//  by calling the appropriate pSensorFXOSFXAS->getter method.
+// If the compass heading parameter is not the one that is set
+//  to the fastest repetition rate (in main.cpp when calling
+//  Read9DOF::Read9DOF()), then you should move the  
+//  gatherOrientationDataOnce() call into the case block
+//  for whichever parameter _is_ updated the fastest - this
+//  ensures that that parameter and all others are never stale.
 void Read9DOF::update() {
   // if pSensorFXOSFXAS is a member of Orientation9DOF, then when called in
   // onRepeat it causes CPU panic
-  pSensorFXOSFXAS->gatherOrientationDataOnce(false);
   switch (val_type) {
-    case (accelerometer):
-      // TODO - process full return vals. Right now does nothing useful.
-      output = -1.0;
-      break;
     case (compass_hdg):
+      //sensor is read and filter called, only for compass_hdg
+      //remaining parameters are obtained from most recent filter results
+      pSensorFXOSFXAS->gatherOrientationDataOnce(false);
       output = pSensorFXOSFXAS->getHeadingRadians();
       break;
-    case (gyro):
-      // TODO - process full return vals. Right now does nothing useful.
-      output = -2.0;
+    case (roll):
+      output = pSensorFXOSFXAS->getRollRadians();
+      break;
+    case (pitch):
+      output = pSensorFXOSFXAS->getPitchRadians();
+      break;
+    case (acceleration_x):
+      output = pSensorFXOSFXAS->getAccelerationX();
+      break;
+    case (acceleration_y):
+      output = pSensorFXOSFXAS->getAccelerationY();
+      break;
+    case (acceleration_z):
+      output = pSensorFXOSFXAS->getAccelerationZ();
+      break;
+    case (rate_of_turn):
+      output = pSensorFXOSFXAS->getRateOfTurn();
+      break;
+    case (rate_of_pitch):
+      output = pSensorFXOSFXAS->getRateOfPitch();
+      break;
+    case (rate_of_roll):
+      output = pSensorFXOSFXAS->getRateOfRoll();
       break;
     default:
-      output = -3.0;
+      output = 0.0;
   }
   notify();
 }

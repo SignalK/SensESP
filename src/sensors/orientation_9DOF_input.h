@@ -15,10 +15,7 @@
 // It's desirable to capture all the orientation readings (i.e. mag, accel, and
 //  gyro) simultaneously, so the class Read9DOF polls the FXOS8700 and FXAS21002
 //  together, passes the raw values to the Adafruit AHRS / NXP SensorFusion
-//  filter, and stores the combined 9DOF orientation data. Since a SensESP
-//  sensor only passes a single float value back, only the compass heading is
-//  provided to the signal chain. TODO: figure out how to extend this for other
-//  parameters.
+//  filter, and stores the combined 9DOF orientation data.
 // Calling the public Adafruit_FXOS8700:: methods can be done
 //  after you instantiate Orientation9DOF, for example by:
 //  pSensorFXOSFXAS->pAdafruitFXOS8700->setSampling();
@@ -28,7 +25,6 @@ class Orientation9DOF : public Sensor {
  public:
   Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                   String config_path = "");
-  void displaySensorDetails(void);  // is private in BME280 example - is there a reason not to be public?
   void streamRawValues(void);       // used when calibrating
  private:
   uint8_t addr;  // unused
@@ -36,9 +32,9 @@ class Orientation9DOF : public Sensor {
 
 // Pass one of these in Read9DOF() constructor corresponding to type of value you want
 enum OrientationValType {
-  accelerometer,
-  compass_hdg,
-  gyro
+  compass_hdg, pitch, roll, 
+  acceleration_x, acceleration_y, acceleration_z,
+  rate_of_turn, rate_of_pitch, rate_of_roll
 };
 
 // Read9DOF reads the combo FXOS8700 + FXAS21002 sensor and outputs the
@@ -46,7 +42,7 @@ enum OrientationValType {
 class Read9DOF : public NumericSensor {
  public:
   Read9DOF(Orientation9DOF* p9DOF, OrientationValType val_type = compass_hdg,
-           uint read_delay = 500, String config_path = "");
+           uint read_delay = 100, String config_path = "");
   void enable() override final;
   Orientation9DOF* pOrientation9DOF;
 
