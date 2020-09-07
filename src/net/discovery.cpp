@@ -8,6 +8,11 @@
 
 
 void setup_discovery(const char* hostname) {
+  // MDNS.begin(hostname) will crash if hostname is blank
+  if ((hostname == NULL) || (hostname[0] == '\0')) {
+   debugE("hostname has not been set - mDNS can't start");
+   return;
+  }
   if (!MDNS.begin(hostname)) {             // Start the mDNS responder for esp8266.local
     debugW("Error setting up mDNS responder");
   } else {

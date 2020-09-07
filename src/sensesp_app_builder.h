@@ -5,7 +5,7 @@
 
 class SensESPAppBuilder {
  private:
-  String hostname = "";
+  String hostname = "SensESP";
   String ssid = "";
   String password = "";
   String sk_server_address = "";
