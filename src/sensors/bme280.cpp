@@ -16,15 +16,14 @@ BME280::BME280(uint8_t addr, String config_path) :
 
 
 void BME280::check_status() {
-  bool status = pAdafruitBME280->begin(addr);
-  if (!status) {
+  bool started = pAdafruitBME280->begin(addr);
+  if (!started) {
         debugI("Could not find a valid BME280 sensor. Check wiring, address, and sensor ID.");
         debugI("SensorID is: 0x%d", pAdafruitBME280->sensorID());
         debugI("0xFF: is a BMP180 or BMP085, or a bad address");
         debugI("0x56-0x58 is a BMP280");
         debugI("0x60 is a BME280");
         debugI("0x61 is a BME680");
-        while (1) delay(10);
     }
 }
 
