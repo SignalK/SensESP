@@ -74,6 +74,7 @@ void Networking::setup_saved_ssid(std::function<void(bool)> connection_cb) {
   if (WiFi.status() == WL_CONNECTED) {
     debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
            WiFi.RSSI());
+    debugI("IP address of Device: %s",  WiFi.localIP().toString().c_str());
     connection_cb(true);
     WiFi.mode(WIFI_STA);
   }
