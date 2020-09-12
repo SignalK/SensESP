@@ -180,7 +180,7 @@ bool Networking::set_configuration(const JsonObject& config) {
   }
   
   if (preset_ssid == "") {
-    debugW("Ignoring saved SSID and password");
+    debugW("Using saved SSID and password");
     this->ap_ssid = config["ap_ssid"].as<String>();
     this->ap_password = config["ap_password"].as<String>();
   }
