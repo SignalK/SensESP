@@ -125,11 +125,6 @@ void Networking::setup_wifi_manager(std::function<void(bool)> connection_cb) {
 
 ObservableValue<String>* Networking::get_hostname() { return this->hostname; }
 
-// No longer used
-// void Networking::set_hostname(String hostname) {
-//  debugD("Setting hostname");
-//  this->hostname->set(hostname);
-//}
 
 static const char SCHEMA_PREFIX[] PROGMEM = R"({
 "type": "object",
@@ -151,7 +146,11 @@ String get_property_row(String key, String title, bool readonly) {
 
 String Networking::get_config_schema() {
   String schema;
-  bool hostname_preset = preset_hostname != "";
+  // If hostname is not set by SensESPAppBuilder::set_hostname() in main.cpp,
+  // then preset_hostname will be "SensESP", and should not be read-only in the
+  // Config UI. If preset_hostname is not "SensESP", then it was set in main.cpp, so
+  // it should be read-only.
+  bool hostname_preset = preset_hostname != "SensESP";
   bool wifi_preset = preset_ssid != "";
   return String(FPSTR(SCHEMA_PREFIX))
     + get_property_row("hostname", "ESP device hostname", hostname_preset) + ","
@@ -175,7 +174,7 @@ bool Networking::set_configuration(const JsonObject& config) {
     return false;
   }
 
-  if (preset_hostname == "") {
+  if (preset_hostname == "SensESP") {
     this->hostname->set(config["hostname"].as<String>());
   }
   
