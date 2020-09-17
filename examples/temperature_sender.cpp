@@ -5,7 +5,7 @@
 #include "sensors/analog_input.h"
 
 #include "transforms/analogvoltage.h"
-#include "transforms/voltagedividerR2.h"
+#include "transforms/voltagedivider.h"
 #include "transforms/curveinterpolator.h"
 #include "signalk/signalk_output.h"
 
@@ -71,10 +71,18 @@ ReactESP app([] () {
   delay(100);
   debugI("Serial debug enabled");
 
-  // Create the global SensESPApp() object.
-  sensesp_app = new SensESPApp();
+ // Create the global SensESPApp() object. If you add the line ->set_wifi("your ssid", "your password") you can specify
+  // the wifi parameters in the builder. If you do not do that, the SensESP device wifi configuration hotspot will appear and you can use a web 
+  // browser pointed to 192.168.4.1 to configure the wifi parameters. 
+  // You can use NONE, UPTIME, FREQUENCY, FREE_MEMORY, WIFI_SIGNAL or ALL instead if IP_ADDRESS in set_standard_sensors().
 
+  sensesp_app = builder.set_hostname("your device name")
+                ->set_standard_sensors(IP_ADDRESS)
+                ->set_sk_server("your server address", your_server_port) 
+                ->get_app();
+  
   // The "SignalK path" identifies the output of this sensor to the SignalK network.
+
   const char* sk_path = "electrical.generator.engine.water.temp";
   
   /*
