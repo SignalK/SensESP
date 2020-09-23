@@ -29,8 +29,8 @@ class VoltageMultiplier : public NumericTransform {
     private:
         uint16_t R1;
         uint16_t R2;
-        virtual JsonObject get_configuration(JsonDocument doc) override;
-        virtual bool set_configuration(const JsonObject config) override;
+        virtual JsonObject get_configuration(JsonDocument& doc) override;
+        virtual bool set_configuration(const JsonObject& config) override;
         virtual String get_config_schema() override;
 };
 

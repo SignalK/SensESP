@@ -159,7 +159,7 @@ String Networking::get_config_schema() {
     + "}}";
 }
 
-JsonObject Networking::get_configuration(JsonDocument doc) {
+JsonObject Networking::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
 
   root["hostname"] = this->hostname->get();
@@ -169,7 +169,7 @@ JsonObject Networking::get_configuration(JsonDocument doc) {
   return root;
 }
 
-bool Networking::set_configuration(const JsonObject config) {
+bool Networking::set_configuration(const JsonObject& config) {
   if (!config.containsKey("hostname")) {
     return false;
   }

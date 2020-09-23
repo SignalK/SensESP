@@ -9,8 +9,8 @@ class SKOutputTime : public TimeString,
  public:
   SKOutputTime(String sk_path, String config_path="");
   virtual String as_signalK() override;
-  virtual JsonObject get_configuration(JsonDocument doc) override;
-  virtual bool set_configuration(const JsonObject config) override;
+  virtual JsonObject get_configuration(JsonDocument& doc) override;
+  virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };
 

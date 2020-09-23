@@ -26,7 +26,7 @@ void MAX31856TC::enable() {
   });
 }
 
-JsonObject MAX31856TC::get_configuration(JsonDocument doc) {
+JsonObject MAX31856TC::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
@@ -43,7 +43,7 @@ static const char SCHEMA[] PROGMEM = R"###({
 
 String MAX31856TC::get_config_schema() { return FPSTR(SCHEMA); }
 
-bool MAX31856TC::set_configuration(const JsonObject config) {
+bool MAX31856TC::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

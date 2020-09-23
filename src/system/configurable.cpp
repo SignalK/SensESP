@@ -24,14 +24,14 @@ Configurable::Configurable(String config_path="")
   }
 }
 
-JsonObject Configurable::get_configuration(JsonDocument doc) {
+JsonObject Configurable::get_configuration(JsonDocument& doc) {
   debugW("WARNING: get_configuration not defined");
   JsonObject obj = doc.as<JsonObject>();
   return obj;
 }
 
 // Sets and saves the configuration
-bool Configurable::set_configuration(const JsonObject config) {
+bool Configurable::set_configuration(const JsonObject& config) {
   debugW("WARNING: set_configuration not defined for this Class");
   return false;
 }
@@ -62,7 +62,7 @@ void Configurable::load_configuration() {
     debugW("WARNING: Could not parse configuration for %s", config_path.c_str());    
     return;  
   }          // 
-  if (!set_configuration(jsonDoc)) {
+  if (!set_configuration(jsonDoc.as<JsonObject>())) {
     debugW(
       "WARNING: Could not set configuration for %s",
       config_path.c_str());
@@ -75,7 +75,7 @@ void Configurable::save_configuration() {
     debugI("WARNING: Could not save configuration (config_path not set)");
   }
   DynamicJsonDocument jsonDoc(1024);
-  JsonObject obj = doc.as<JsonObject>();
+  JsonObject obj = jsonDoc.as<JsonObject>();
   File f = SPIFFS.open(config_path, "w");
   serializeJson(obj, f);
   f.close();

@@ -20,7 +20,7 @@ void AnalogInput::enable() {
   app.onRepeat(read_delay, [this](){ this->update(); });
 }
 
-JsonObject AnalogInput::get_configuration(JsonDocument doc) {
+JsonObject AnalogInput::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
@@ -39,7 +39,7 @@ JsonObject AnalogInput::get_configuration(JsonDocument doc) {
   return FPSTR(SCHEMA);
 }
 
-bool AnalogInput::set_configuration(const JsonObject config) {
+bool AnalogInput::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

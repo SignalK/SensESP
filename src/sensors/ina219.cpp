@@ -52,8 +52,8 @@ void INA219value::enable() {
  });
 }
 
-JsonObject INA219value::get_configuration(JsonDocument doc) {
-  JsonObject& root = doc.as<JsonObject>();
+JsonObject INA219value::get_configuration(JsonDocument& doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
   return root;
@@ -72,7 +72,7 @@ JsonObject INA219value::get_configuration(JsonDocument doc) {
   return FPSTR(SCHEMA);
 }
 
-bool INA219value::set_configuration(const JsonObject config) {
+bool INA219value::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

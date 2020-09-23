@@ -57,7 +57,7 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
             Configurable* confable = it->second;
 
             JsonObject body = json.as<JsonObject>();
-            if (body.success()) {
+            //if (body.success()) {
               if (!confable->set_configuration(body)) {
                 request->send(400, "text/plain",
                               F("Unable to extract keys from JSON.\n"));
@@ -67,11 +67,11 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
               request->send(200, "text/plain",
                             F("Configuration successful.\n"));
               return;
-            } else {
+            /*} else {
               request->send(400, "text/plain",
                             F("Unable to parse JSON body.\n"));
               return;
-            }
+            }*/
           });
   config_put_handler->setMethod(HTTP_PUT);
   server->addHandler(config_put_handler);

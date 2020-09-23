@@ -35,7 +35,7 @@ class Configurable {
    * saved to a new object created with JsonDocument::as<JsonObject>() 
    * and returned.
    */  
-  virtual JsonObject get_configuration(JsonDocument doc);
+  virtual JsonObject get_configuration(JsonDocument& doc);
 
 
 
@@ -43,7 +43,7 @@ class Configurable {
    * Sets the current state of local member variables using
    * the data stored in config.
    */
-  virtual bool set_configuration(const JsonObject config);
+  virtual bool set_configuration(const JsonObject& config);
 
 
   /**

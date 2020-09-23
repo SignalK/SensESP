@@ -307,8 +307,8 @@ void WSClient::send_access_request(const String server_address,
 
   // http status code 202
 
+  deserializeJson(doc, payload.c_str());
   JsonObject resp = doc.as<JsonObject>();
-  deserializeJson(resp, payload);
   String state = resp["state"];
 
   if (state != "PENDING") {
@@ -342,12 +342,12 @@ void WSClient::poll_access_request(const String server_address,
     String payload = http.getString();
     http.end();
     DynamicJsonDocument doc(1024);
-    JsonObject resp = doc.as<JsonObject>();
-    auto error = deserializeJson(resp, payload);
+    auto error = deserializeJson(doc, payload.c_str());
     if (error) {
       debugW("WARNING: Could not deserialize http.");    
-      // return;  TODO: return at this point, or keep going?
+      return; //TODO: return at this point, or keep going?
     }
+    JsonObject resp = doc.as<JsonObject>();
     String state = resp["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
@@ -430,7 +430,7 @@ void WSClient::send_delta() {
   }
 }
 
-JsonObject WSClient::get_configuration(JsonDocument doc) {
+JsonObject WSClient::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["sk_address"] = this->server_address;
   root["sk_port"] = this->server_port;
@@ -475,7 +475,7 @@ String WSClient::get_config_schema() {
   }
 }
 
-bool WSClient::set_configuration(const JsonObject config) {
+bool WSClient::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_address", "sk_port", "token", "client_id"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

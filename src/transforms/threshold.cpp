@@ -16,7 +16,7 @@ void ThresholdTransform<C, P>::set_input(C input, uint8_t inputChannel) {
 }
 
 
-JsonObject NumericThreshold::get_configuration(JsonDocument doc) {
+JsonObject NumericThreshold::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["min"] = minValue;
   root["max"] = maxValue;
@@ -35,7 +35,7 @@ static const char NUMERIC_SCHEMA[] PROGMEM = R"({
     }
   })";
 
-  bool NumericThreshold::set_configuration(const JsonObject config)
+  bool NumericThreshold::set_configuration(const JsonObject& config)
   {
       String expected[] = {"min", "max", "in_range", "value"};
       for (auto str : expected) {
@@ -57,7 +57,7 @@ static const char NUMERIC_SCHEMA[] PROGMEM = R"({
   }
 
 
-  JsonObject IntegerThreshold::get_configuration(JsonDocument doc) {
+  JsonObject IntegerThreshold::get_configuration(JsonDocument& doc) {
     JsonObject root = doc.as<JsonObject>();
     root["min"] = minValue;
     root["max"] = maxValue;
@@ -76,7 +76,7 @@ static const char NUMERIC_SCHEMA[] PROGMEM = R"({
       }
     })";
 
-  bool IntegerThreshold::set_configuration(const JsonObject config)
+  bool IntegerThreshold::set_configuration(const JsonObject& config)
   {
       String expected[] = {"min", "max", "in_range"};
       for (auto str : expected) {

@@ -17,7 +17,7 @@ void Linear::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject& Linear::get_configuration(JsonDocument doc) {
+JsonObject Linear::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["k"] = k;
   root["c"] = c;
@@ -38,7 +38,7 @@ String Linear::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool Linear::set_configuration(const JsonObject config) {
+bool Linear::set_configuration(const JsonObject& config) {
   String expected[] = {"k", "c" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {

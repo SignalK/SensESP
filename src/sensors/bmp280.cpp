@@ -39,7 +39,7 @@ void BMP280value::enable() {
  });
 }
 
-JsonObject BMP280value::get_configuration(JsonDocument doc) {
+JsonObject BMP280value::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;

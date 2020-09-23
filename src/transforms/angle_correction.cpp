@@ -22,7 +22,7 @@ void AngleCorrection::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject AngleCorrection::get_configuration(JsonDocument doc) {
+JsonObject AngleCorrection::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["offset"] = offset;
   root["min_angle"] = min_angle;
@@ -43,7 +43,7 @@ String AngleCorrection::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool AngleCorrection::set_configuration(const JsonObject config) {
+bool AngleCorrection::set_configuration(const JsonObject& config) {
   String expected[] = { "offset", "min_angle" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {

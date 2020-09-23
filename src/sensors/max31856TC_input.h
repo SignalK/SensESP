@@ -12,8 +12,8 @@ class MAX31856TC : public NumericSensor {
   private:
     int8_t dataRdy;
     uint read_delay;
-    virtual JsonObject get_configuration(JsonDocument doc) override;
-    virtual bool set_configuration(const JsonObject config) override;
+    virtual JsonObject get_configuration(JsonDocument& doc) override;
+    virtual bool set_configuration(const JsonObject& config) override;
     virtual String get_config_schema() override;
 
 };

@@ -21,7 +21,7 @@ void Frequency::set_input(int input, uint8_t inputChannel) {
 }
 
 
-JsonObject Frequency::get_configuration(JsonDocument doc) {
+JsonObject Frequency::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["k"] = k;
   root["value"] = output;
@@ -40,7 +40,7 @@ String Frequency::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool Frequency::set_configuration(const JsonObject config) {
+bool Frequency::set_configuration(const JsonObject& config) {
   String expected[] = {"k"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

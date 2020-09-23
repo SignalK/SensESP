@@ -54,7 +54,7 @@ void BME280value::enable() {
  });
 }
 
-JsonObject BME280value::get_configuration(JsonDocument doc) {
+JsonObject BME280value::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
@@ -74,7 +74,7 @@ JsonObject BME280value::get_configuration(JsonDocument doc) {
   return FPSTR(SCHEMA);
 }
 
-bool BME280value::set_configuration(const JsonObject config) {
+bool BME280value::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

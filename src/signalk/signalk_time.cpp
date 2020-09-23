@@ -19,7 +19,7 @@ String SKOutputTime::as_signalK() {
   return json;
 }
 
-JsonObject SKOutputTime::get_configuration(JsonDocument doc) {
+JsonObject SKOutputTime::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["sk_path"] = sk_path;
   root["value"] = output;
@@ -38,7 +38,7 @@ String SKOutputTime::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool SKOutputTime::set_configuration(const JsonObject config) {
+bool SKOutputTime::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_path"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

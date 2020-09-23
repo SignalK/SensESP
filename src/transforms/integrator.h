@@ -9,8 +9,8 @@ class Integrator : public NumericTransform {
   Integrator(float k=1, float value=0, String config_path="");
   virtual void enable() override final;
   virtual void set_input(float input, uint8_t inputChannel = 0) override final;
-  virtual JsonObject get_configuration(JsonDocument doc) override final;
-  virtual bool set_configuration(const JsonObject config) override final;
+  virtual JsonObject get_configuration(JsonDocument& doc) override final;
+  virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
 
  private:

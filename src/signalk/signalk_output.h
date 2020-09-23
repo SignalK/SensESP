@@ -42,7 +42,7 @@ class SKOutput : public SKEmitter,
     return json;
   }
 
-  virtual JsonObject get_configuration(JsonDocument doc) override {
+  virtual JsonObject get_configuration(JsonDocument& doc) override {
     JsonObject root = doc.as<JsonObject>();
     root["sk_path"] = this->get_sk_path();
     return root;
@@ -52,7 +52,7 @@ class SKOutput : public SKEmitter,
     return FPSTR(SIGNALKOUTPUT_SCHEMA);
   }
 
-  virtual bool set_configuration(const JsonObject config) override {
+  virtual bool set_configuration(const JsonObject& config) override {
     if (!config.containsKey("sk_path")) {
       return false;
     }

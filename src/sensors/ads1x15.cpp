@@ -46,7 +46,7 @@ void ADS1x15value<T_ads_1x15>::enable() {
 }
 
 template <class T_ads_1x15>
-JsonObject ADS1x15value<T_ads_1x15>::get_configuration(JsonDocument doc) {
+JsonObject ADS1x15value<T_ads_1x15>::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
@@ -68,7 +68,7 @@ JsonObject ADS1x15value<T_ads_1x15>::get_configuration(JsonDocument doc) {
 }
 
 template <class T_ads_1x15>
-bool ADS1x15value<T_ads_1x15>::set_configuration(const JsonObject config) {
+bool ADS1x15value<T_ads_1x15>::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

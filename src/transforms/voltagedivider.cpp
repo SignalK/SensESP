@@ -12,7 +12,7 @@ void VoltageDividerR1::set_input(float Vout, uint8_t ignored) {
 }
 
 
-JsonObject VoltageDividerR1::get_configuration(JsonDocument doc) {
+JsonObject VoltageDividerR1::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["Vin"] = Vin;
   root["R2"] = R2;
@@ -31,7 +31,7 @@ String VoltageDividerR1::get_config_schema() {
   return FPSTR(SCHEMA_R1);
 }
 
-bool VoltageDividerR1::set_configuration(const JsonObject config) {
+bool VoltageDividerR1::set_configuration(const JsonObject& config) {
 
   String expected[] = { "Vin", "R2" };
   for (auto str : expected) {
@@ -60,7 +60,7 @@ void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {
 }
 
 
-JsonObject VoltageDividerR2::get_configuration(JsonDocument doc) {
+JsonObject VoltageDividerR2::get_configuration(JsonDocument& doc) {
   JsonObject root = doc.as<JsonObject>();
   root["Vin"] = Vin;
   root["R1"] = R1;
@@ -79,7 +79,7 @@ String VoltageDividerR2::get_config_schema() {
   return FPSTR(SCHEMA_R2);
 }
 
-bool VoltageDividerR2::set_configuration(const JsonObject config) {
+bool VoltageDividerR2::set_configuration(const JsonObject& config) {
 
   String expected[] = { "Vin", "R1" };
   for (auto str : expected) {
