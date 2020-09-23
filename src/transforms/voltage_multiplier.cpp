@@ -11,8 +11,8 @@ void VoltageMultiplier::set_input(float input, uint8_t inputChannel) {
     notify();
 }
 
-JsonObject& VoltageMultiplier::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject VoltageMultiplier::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["R1"] = R1;
   root["R2"] = R2;
   root["value"] = output;
@@ -33,7 +33,7 @@ JsonObject& VoltageMultiplier::get_configuration(JsonBuffer& buf) {
   return FPSTR(SCHEMA);
 }
 
-bool VoltageMultiplier::set_configuration(const JsonObject& config) {
+bool VoltageMultiplier::set_configuration(const JsonObject config) {
   String expected[] = {"R1", "R2"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

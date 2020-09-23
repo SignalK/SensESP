@@ -24,14 +24,15 @@ Configurable::Configurable(String config_path="")
   }
 }
 
-JsonObject& Configurable::get_configuration(JsonBuffer& buf) {
+JsonObject Configurable::get_configuration(JsonDocument doc) {
   debugW("WARNING: get_configuration not defined");
-  return buf.createObject();
+  JsonObject obj = doc.as<JsonObject>();
+  return obj;
 }
 
 // Sets and saves the configuration
-bool Configurable::set_configuration(const JsonObject& config) {
-  debugW("WARNING: set_configuration not defined");
+bool Configurable::set_configuration(const JsonObject config) {
+  debugW("WARNING: set_configuration not defined for this Class");
   return false;
 }
 
@@ -41,7 +42,7 @@ String Configurable::get_config_schema() {
 }
 
 void Configurable::load_configuration() {
-  if (config_path=="") {
+  if (config_path == "") {
     debugI(
       "Not loading configuration: no config_path specified: %s",
       config_path.c_str());
@@ -55,14 +56,13 @@ void Configurable::load_configuration() {
   }
 
   File f = SPIFFS.open(config_path, "r");
-  DynamicJsonBuffer jsonBuffer;
-  JsonObject& obj = jsonBuffer.parse(f);
-  if (!obj.success()) {
-    debugW(
-      "WARNING: Could not parse configuration for %s",
-      config_path.c_str());
-  }
-  if (!set_configuration(obj)) {
+  DynamicJsonDocument jsonDoc(1024);                     // TODO: set the size of ALL DynamicJsonDocuments throughout the project
+  auto error = deserializeJson(jsonDoc, f);
+  if (error) {
+    debugW("WARNING: Could not parse configuration for %s", config_path.c_str());    
+    return;  
+  }          // 
+  if (!set_configuration(jsonDoc)) {
     debugW(
       "WARNING: Could not set configuration for %s",
       config_path.c_str());
@@ -74,9 +74,9 @@ void Configurable::save_configuration() {
   if (config_path=="") {
     debugI("WARNING: Could not save configuration (config_path not set)");
   }
-  DynamicJsonBuffer jsonBuffer;
-  JsonObject& obj = get_configuration(jsonBuffer);
+  DynamicJsonDocument jsonDoc(1024);
+  JsonObject obj = doc.as<JsonObject>();
   File f = SPIFFS.open(config_path, "w");
-  obj.printTo(f);
+  serializeJson(obj, f);
   f.close();
 }

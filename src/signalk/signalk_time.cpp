@@ -10,17 +10,17 @@ SKOutputTime::SKOutputTime(String sk_path, String config_path) :
 
 
 String SKOutputTime::as_signalK() {
-  DynamicJsonBuffer jsonBuffer;
+  DynamicJsonDocument jsonDoc(1024);
   String json;
-  JsonObject& root = jsonBuffer.createObject();
-  root.set("path", this->sk_path);
-  root.set("value", output);
-  root.printTo(json);
+  JsonObject root = jsonDoc.as<JsonObject>();
+  root["path"] = this->sk_path;
+  root["value"] = output;
+  serializeJson(root, json);
   return json;
 }
 
-JsonObject& SKOutputTime::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject SKOutputTime::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["sk_path"] = sk_path;
   root["value"] = output;
   return root;
@@ -38,7 +38,7 @@ String SKOutputTime::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool SKOutputTime::set_configuration(const JsonObject& config) {
+bool SKOutputTime::set_configuration(const JsonObject config) {
   String expected[] = {"sk_path"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

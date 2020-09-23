@@ -27,8 +27,8 @@ void DigitalInputValue::enable() {
   });
 }
 
-JsonObject& DigitalInputValue::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject DigitalInputValue::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
   return root;
@@ -46,7 +46,7 @@ JsonObject& DigitalInputValue::get_configuration(JsonBuffer& buf) {
   return FPSTR(SCHEMA2);
 }
 
-bool DigitalInputValue::set_configuration(const JsonObject& config) {
+bool DigitalInputValue::set_configuration(const JsonObject config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
@@ -84,11 +84,11 @@ void DigitalInputCounter::enable() {
   });
   }
 
-  JsonObject& DigitalInputCounter::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
-  root["read_delay"] = read_delay;
-  root["value"] = output;
-  return root;
+  JsonObject DigitalInputCounter::get_configuration(JsonDocument doc) {
+    JsonObject root = doc.as<JsonObject>();
+    root["read_delay"] = read_delay;
+    root["value"] = output;
+    return root;
   };
 
   static const char SCHEMA[] PROGMEM = R"###({
@@ -103,7 +103,7 @@ void DigitalInputCounter::enable() {
   return FPSTR(SCHEMA);
 }
 
-bool DigitalInputCounter::set_configuration(const JsonObject& config) {
+bool DigitalInputCounter::set_configuration(const JsonObject config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

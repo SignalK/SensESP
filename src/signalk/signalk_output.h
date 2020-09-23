@@ -33,17 +33,17 @@ class SKOutput : public SKEmitter,
 
 
   virtual String as_signalK() override {
-    DynamicJsonBuffer jsonBuffer;
+    DynamicJsonDocument jsonDoc(1024);
     String json;
-    JsonObject& root = jsonBuffer.createObject();
-    root.set("path", this->get_sk_path());
-    root.set("value", ValueProducer<T>::output);
-    root.printTo(json);
+    JsonObject root = jsonDoc.as<JsonObject>();
+    root["path"] = this->get_sk_path();
+    root["value"] = ValueProducer<T>::output;
+    serializeJson(root, json);
     return json;
   }
 
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override {
-    JsonObject& root = buf.createObject();
+  virtual JsonObject get_configuration(JsonDocument doc) override {
+    JsonObject root = doc.as<JsonObject>();
     root["sk_path"] = this->get_sk_path();
     return root;
   }
@@ -52,7 +52,7 @@ class SKOutput : public SKEmitter,
     return FPSTR(SIGNALKOUTPUT_SCHEMA);
   }
 
-  virtual bool set_configuration(const JsonObject& config) override {
+  virtual bool set_configuration(const JsonObject config) override {
     if (!config.containsKey("sk_path")) {
       return false;
     }

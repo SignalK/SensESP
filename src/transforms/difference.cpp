@@ -21,8 +21,8 @@ void Difference::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject& Difference::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject Difference::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["k1"] = k1;
   root["k2"] = k2;
   root["value"] = output;
@@ -42,7 +42,7 @@ String Difference::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool Difference::set_configuration(const JsonObject& config) {
+bool Difference::set_configuration(const JsonObject config) {
   String expected[] = {"k1", "k2" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {

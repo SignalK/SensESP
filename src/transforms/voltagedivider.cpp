@@ -12,8 +12,8 @@ void VoltageDividerR1::set_input(float Vout, uint8_t ignored) {
 }
 
 
-JsonObject& VoltageDividerR1::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject VoltageDividerR1::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["Vin"] = Vin;
   root["R2"] = R2;
   return root;
@@ -31,12 +31,12 @@ String VoltageDividerR1::get_config_schema() {
   return FPSTR(SCHEMA_R1);
 }
 
-bool VoltageDividerR1::set_configuration(const JsonObject& config) {
+bool VoltageDividerR1::set_configuration(const JsonObject config) {
 
   String expected[] = { "Vin", "R2" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE("Can not set VoltageDividerR1: configuration: missing json field %s\n", str.c_str());
+      debugE("Cannot set VoltageDividerR1: configuration: missing json field %s\n", str.c_str());
       return false;
     }
   }
@@ -60,8 +60,8 @@ void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {
 }
 
 
-JsonObject& VoltageDividerR2::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject VoltageDividerR2::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["Vin"] = Vin;
   root["R1"] = R1;
   return root;
@@ -79,12 +79,12 @@ String VoltageDividerR2::get_config_schema() {
   return FPSTR(SCHEMA_R2);
 }
 
-bool VoltageDividerR2::set_configuration(const JsonObject& config) {
+bool VoltageDividerR2::set_configuration(const JsonObject config) {
 
   String expected[] = { "Vin", "R1" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE("Can not set VoltageDividerR2: configuration: missing json field %s\n", str.c_str());
+      debugE("Cannot set VoltageDividerR2: configuration: missing json field %s\n", str.c_str());
       return false;
     }
   }

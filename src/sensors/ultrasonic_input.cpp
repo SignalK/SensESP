@@ -23,8 +23,8 @@ void UltrasonicSens::enable() {
   });
 }
 
-JsonObject& UltrasonicSens::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject UltrasonicSens::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
   return root;
@@ -40,7 +40,7 @@ static const char SCHEMA[] PROGMEM = R"###({
 
 String UltrasonicSens::get_config_schema() { return FPSTR(SCHEMA); }
 
-bool UltrasonicSens::set_configuration(const JsonObject& config) {
+bool UltrasonicSens::set_configuration(const JsonObject config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

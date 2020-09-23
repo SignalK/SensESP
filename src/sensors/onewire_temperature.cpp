@@ -144,13 +144,13 @@ void OneWireTemperature::read_value() {
   this->notify();
 }
 
-JsonObject& OneWireTemperature::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
-  root.set("value", output);
+JsonObject OneWireTemperature::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
+  root["value"] = output;
   char addr_str[24];
   owda_to_string(addr_str, address);
-  root.set("address", addr_str);
-  root.set("found", found);
+  root["address"] = addr_str;
+  root["found"] = found;
   return root;
 }
 
@@ -167,7 +167,7 @@ String OneWireTemperature::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool OneWireTemperature::set_configuration(const JsonObject& config) {
+bool OneWireTemperature::set_configuration(const JsonObject config) {
   if (!config.containsKey("address")) {
     return false;
   }

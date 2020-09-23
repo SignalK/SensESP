@@ -56,7 +56,7 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
             }
             Configurable* confable = it->second;
 
-            JsonObject& body = json.as<JsonObject>();
+            JsonObject body = json.as<JsonObject>();
             if (body.success()) {
               if (!confable->set_configuration(body)) {
                 request->send(400, "text/plain",
@@ -96,11 +96,11 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
 
     AsyncResponseStream* response =
         request->beginResponseStream("application/json");
-    DynamicJsonBuffer json_buffer;
-    JsonObject& root = json_buffer.createObject();
-    root["config"] = confable->get_configuration(json_buffer);
-    root["schema"] = RawJson(confable->get_config_schema());
-    root.printTo(*response);
+    DynamicJsonDocument jsonDoc(1024);
+    JsonObject root = jsonDoc.as<JsonObject>();
+    root["config"] = confable->get_configuration(jsonDoc);
+    root["schema"] = serialized(confable->get_config_schema());
+    serializeJson(root, *response);
     request->send(response);
   });
 
@@ -184,13 +184,13 @@ void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
 void HTTPServer::handle_config_list(AsyncWebServerRequest* request) {
   AsyncResponseStream* response =
       request->beginResponseStream("application/json");
-  DynamicJsonBuffer json_buffer;
-  JsonObject& root = json_buffer.createObject();
-  JsonArray& arr = root.createNestedArray("keys");
+  DynamicJsonDocument jsonDoc(1024);
+  JsonObject root = jsonDoc.as<JsonObject>();
+  JsonArray arr = root.createNestedArray("keys");
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     arr.add(it->first);
   }
-  root.printTo(*response);
+  serializeJson(root, *response);
   request->send(response);
 }
 

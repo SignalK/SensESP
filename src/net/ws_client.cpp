@@ -104,17 +104,17 @@ void WSClient::subscribe_listeners() {
   const std::vector<SKListener*>& listeners = SKListener::get_listeners();
 
   if (listeners.size() > 0) {
-    DynamicJsonBuffer jsonBuffer;
-    JsonObject& subscription = jsonBuffer.createObject();
+    DynamicJsonDocument jsonDoc(1024);
+    JsonObject subscription = jsonDoc.as<JsonObject>();
     subscription["context"] = "vessels.self";
-    JsonArray& subscribe = subscription.createNestedArray("subscribe");
+    JsonArray subscribe = subscription.createNestedArray("subscribe");
 
     for (size_t i = 0; i < listeners.size(); i++) {
       auto* listener = listeners.at(i);
       String sk_path = listener->get_sk_path();
       int listen_delay = listener->get_listen_delay();
 
-      JsonObject& subscribePath = subscribe.createNestedObject();
+      JsonObject subscribePath = subscribe.createNestedObject();
 
       subscribePath["path"] = sk_path;
       subscribePath["period"] = listen_delay;
@@ -124,7 +124,7 @@ void WSClient::subscribe_listeners() {
 
     String messageJson;
 
-    subscription.printTo(messageJson);
+    serializeJson(subscription, messageJson);
     debugI("Subscription JSON message:\n %s", messageJson.c_str());
     this->client.sendTXT(messageJson);
   }
@@ -135,19 +135,20 @@ void WSClient::on_receive_delta(uint8_t* payload) {
   debugD("Websocket payload received: %s", (char*)payload);
 #endif
 
-  DynamicJsonBuffer jsonBuffer;
-  JsonObject& message = jsonBuffer.parseObject(String((char*)payload));
+  DynamicJsonDocument message(1024);
+  //JsonObject message = jsonDoc.as<JsonObject>();
+  auto error = deserializeJson(message, payload);
 
-  if (message.success()) {
-    JsonArray& updates = message["updates"];
+  if (!error) {
+    JsonArray updates = message["updates"];
 
     for (size_t i = 0; i < updates.size(); i++) {
-      JsonObject& update = updates[i];
+      JsonObject update = updates[i];
 
-      JsonArray& values = update["values"];
+      JsonArray values = update["values"];
 
       for (size_t vi = 0; vi < values.size(); vi++) {
-        JsonObject& value = values[vi];
+        JsonObject value = values[vi];
 
         const char* path = value["path"];
         // debugD("Got update of value %s\n", path);
@@ -162,6 +163,9 @@ void WSClient::on_receive_delta(uint8_t* payload) {
         }
       }
     }
+  }
+  else {
+    debugE("deserializeJson error: %s", error.c_str());
   }
 }
 
@@ -275,12 +279,12 @@ void WSClient::send_access_request(const String server_address,
   }
 
   // create a new access request
-  DynamicJsonBuffer buf;
-  JsonObject& req = buf.createObject();
+  DynamicJsonDocument doc(1024);
+  JsonObject req = doc.as<JsonObject>();
   req["clientId"] = client_id;
   req["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
   String json_req = "";
-  req.printTo(json_req);
+  serializeJson(req, json_req);
 
   HTTPClient http;
 
@@ -303,7 +307,8 @@ void WSClient::send_access_request(const String server_address,
 
   // http status code 202
 
-  JsonObject& resp = buf.parseObject(payload);
+  JsonObject resp = doc.as<JsonObject>();
+  deserializeJson(resp, payload);
   String state = resp["state"];
 
   if (state != "PENDING") {
@@ -336,8 +341,13 @@ void WSClient::poll_access_request(const String server_address,
   if (httpCode == 200 or httpCode == 202) {
     String payload = http.getString();
     http.end();
-    DynamicJsonBuffer buf;
-    JsonObject& resp = buf.parseObject(payload);
+    DynamicJsonDocument doc(1024);
+    JsonObject resp = doc.as<JsonObject>();
+    auto error = deserializeJson(resp, payload);
+    if (error) {
+      debugW("WARNING: Could not deserialize http.");    
+      // return;  TODO: return at this point, or keep going?
+    }
     String state = resp["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
@@ -346,8 +356,8 @@ void WSClient::poll_access_request(const String server_address,
       });
       return;
     } else if (state == "COMPLETED") {
-      JsonObject& access_req = resp["accessRequest"];
-      String permission = access_req["permission"];
+      JsonObject access_req = resp["accessRequest"];
+      String permission = access_req["permission"];  // TODO: like this in ArdJson 6? String permission = resp["accessRequest"]["permission"];
       polling_href = "";
       save_configuration();
 
@@ -420,8 +430,8 @@ void WSClient::send_delta() {
   }
 }
 
-JsonObject& WSClient::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject WSClient::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["sk_address"] = this->server_address;
   root["sk_port"] = this->server_port;
 
@@ -443,7 +453,7 @@ static const char SCHEMA[] PROGMEM = R"~({
     }
   })~";
 
-// FIXME: Don't Repeat Yourself
+// TODO: FIXME: Don't Repeat Yourself
 static const char SCHEMA_READONLY[] PROGMEM = R"~(
   {
     "type": "object",
@@ -465,7 +475,7 @@ String WSClient::get_config_schema() {
   }
 }
 
-bool WSClient::set_configuration(const JsonObject& config) {
+bool WSClient::set_configuration(const JsonObject config) {
   String expected[] = {"sk_address", "sk_port", "token", "client_id"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

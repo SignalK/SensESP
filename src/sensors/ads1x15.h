@@ -36,8 +36,8 @@ class ADS1x15value : public NumericSensor {
     T_ads_1x15* ads1x15;
     uint8_t channel;
     uint read_delay;
-    virtual JsonObject& get_configuration(JsonBuffer& buf) override;
-    virtual bool set_configuration(const JsonObject& config) override;
+    virtual JsonObject get_configuration(JsonDocument doc) override;
+    virtual bool set_configuration(const JsonObject config) override;
     virtual String get_config_schema() override;
 
 };

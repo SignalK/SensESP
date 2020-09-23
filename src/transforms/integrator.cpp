@@ -26,8 +26,8 @@ void Integrator::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject& Integrator::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject Integrator::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["k"] = k;
   root["value"] = output;
   return root;
@@ -45,7 +45,7 @@ String Integrator::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool Integrator::set_configuration(const JsonObject& config) {
+bool Integrator::set_configuration(const JsonObject config) {
   String expected[] = {"k" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {

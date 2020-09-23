@@ -159,8 +159,8 @@ String Networking::get_config_schema() {
     + "}}";
 }
 
-JsonObject& Networking::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject Networking::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
 
   root["hostname"] = this->hostname->get();
   root["ap_ssid"] = this->ap_ssid;
@@ -169,7 +169,7 @@ JsonObject& Networking::get_configuration(JsonBuffer& buf) {
   return root;
 }
 
-bool Networking::set_configuration(const JsonObject& config) {
+bool Networking::set_configuration(const JsonObject config) {
   if (!config.containsKey("hostname")) {
     return false;
   }

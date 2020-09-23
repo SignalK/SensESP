@@ -39,8 +39,8 @@ void SHT31value::enable() {
  });
 }
 
-JsonObject& SHT31value::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject SHT31value::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
   return root;
@@ -59,7 +59,7 @@ JsonObject& SHT31value::get_configuration(JsonBuffer& buf) {
   return FPSTR(SCHEMA);
 }
 
-bool SHT31value::set_configuration(const JsonObject& config) {
+bool SHT31value::set_configuration(const JsonObject config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

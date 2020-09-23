@@ -24,8 +24,8 @@ void Median::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject& Median::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject Median::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["sampleSize"] = sampleSize;
   return root;
 }
@@ -42,7 +42,7 @@ String Median::get_config_schema() {
 }
 
 
-bool Median::set_configuration(const JsonObject& config) {
+bool Median::set_configuration(const JsonObject config) {
   String expected[] = {"sampleSize"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

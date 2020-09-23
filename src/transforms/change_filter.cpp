@@ -37,8 +37,8 @@ void ChangeFilter::set_input(float newValue, uint8_t inputChannel) {
 }
 
 
-JsonObject& ChangeFilter::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject ChangeFilter::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["minDelta"] = minDelta;
   root["maxDelta"] = maxDelta;
   root["maxSkips"] = maxSkips;
@@ -60,7 +60,7 @@ String ChangeFilter::get_config_schema() {
 }
 
 
-bool ChangeFilter::set_configuration(const JsonObject& config) {
+bool ChangeFilter::set_configuration(const JsonObject config) {
   String expected[] = {"minDelta", "maxDelta", "maxSkips" };
   for (auto str : expected) {
     if (!config.containsKey(str)) {

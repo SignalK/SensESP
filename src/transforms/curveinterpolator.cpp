@@ -69,12 +69,12 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject& CurveInterpolator::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject CurveInterpolator::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
 
-  JsonArray& jSamples = root.createNestedArray("samples");
+  JsonArray jSamples = root.createNestedArray("samples");
   for (auto& sample : samples) {
-    JsonObject& entry = buf.createObject();
+    JsonObject entry = doc.as<JsonObject>();
     entry["input"] = sample.input;
     entry["output"] = sample.output;
     jSamples.add(entry);
@@ -100,7 +100,7 @@ String CurveInterpolator::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool CurveInterpolator::set_configuration(const JsonObject& config) {
+bool CurveInterpolator::set_configuration(const JsonObject config) {
 
   String expected[] = { "samples" };
   for (auto str : expected) {
@@ -110,7 +110,7 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
     }
   }
 
-  JsonArray& arr = config["samples"];
+  JsonArray arr = config["samples"];
   if (arr.size() > 0) {
     samples.clear();
     for (auto& jentry : arr) {

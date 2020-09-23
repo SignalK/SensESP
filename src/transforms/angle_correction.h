@@ -10,8 +10,8 @@ class AngleCorrection : public NumericTransform  {
  public:
   AngleCorrection(float offset, float min_angle=0, String config_path="");
   virtual void set_input(float input, uint8_t inputChannel = 0) override;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
-  virtual bool set_configuration(const JsonObject& config) override;
+  virtual JsonObject get_configuration(JsonDocument doc) override;
+    virtual bool set_configuration(const JsonObject config) override;
   virtual String get_config_schema() override;
 
  private:

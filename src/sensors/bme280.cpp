@@ -54,8 +54,8 @@ void BME280value::enable() {
  });
 }
 
-JsonObject& BME280value::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject BME280value::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["read_delay"] = read_delay;
   root["value"] = output;
   return root;
@@ -74,7 +74,7 @@ JsonObject& BME280value::get_configuration(JsonBuffer& buf) {
   return FPSTR(SCHEMA);
 }
 
-bool BME280value::set_configuration(const JsonObject& config) {
+bool BME280value::set_configuration(const JsonObject config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

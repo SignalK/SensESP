@@ -38,8 +38,8 @@ class INA219value : public NumericSensor {
     
     INA219ValType val_type;
     uint read_delay;
-    virtual JsonObject& get_configuration(JsonBuffer& buf) override;
-    virtual bool set_configuration(const JsonObject& config) override;
+    virtual JsonObject& get_configuration(JsonDocument doc) override;
+    virtual bool set_configuration(const JsonObject config) override;
     virtual String get_config_schema() override;
 
 };

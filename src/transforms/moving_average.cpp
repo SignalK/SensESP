@@ -34,8 +34,8 @@ void MovingAverage::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject& MovingAverage::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+JsonObject MovingAverage::get_configuration(JsonDocument doc) {
+  JsonObject root = doc.as<JsonObject>();
   root["k"] = k;
   root["n"] = n;
   root["value"] = output;
@@ -56,7 +56,7 @@ String MovingAverage::get_config_schema() {
 }
 
 
-bool MovingAverage::set_configuration(const JsonObject& config) {
+bool MovingAverage::set_configuration(const JsonObject config) {
   String expected[] = {"k", "n"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
