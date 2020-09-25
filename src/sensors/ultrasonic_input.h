@@ -12,7 +12,7 @@ class UltrasonicSens : public NumericSensor {
  private:
   int8_t triggerPin;
   int8_t inputPin;
-  virtual JsonObject get_configuration(JsonDocument& doc) override;
+  virtual void get_configuration(JsonObject& doc) override;
     virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };

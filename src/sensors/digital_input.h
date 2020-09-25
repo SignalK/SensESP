@@ -26,7 +26,7 @@ class DigitalInputValue : public DigitalInput, public IntegerProducer {
  private:
   bool triggered = false;
   int read_delay;
-  virtual JsonObject get_configuration(JsonDocument& doc) override;
+  virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };
@@ -43,7 +43,7 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  private:
   uint read_delay;
   volatile uint counter = 0;
-  virtual JsonObject get_configuration(JsonDocument& doc) override;
+  virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };

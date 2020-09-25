@@ -29,7 +29,7 @@ class OneWireTemperature : public NumericSensor {
   OneWireTemperature(DallasTemperatureSensors* dts, uint read_delay = 1000,
                      String config_path="");
   void enable() override final;
-  virtual JsonObject get_configuration(JsonDocument& doc) override final;
+  virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
 

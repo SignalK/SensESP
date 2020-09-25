@@ -2,27 +2,20 @@
 
 template <class C, class P>
 void ThresholdTransform<C, P>::set_input(C input, uint8_t inputChannel) {
-  
-  if(input >= minValue && input <= maxValue)
-  {
-      this->output = inRange;
+  if (input >= minValue && input <= maxValue) {
+    this->output = inRange;
+  } else {
+    this->output = outRange;
   }
-  else
-  {
-      this->output = outRange;
-  }
-  
+
   this->notify();
 }
 
-
-JsonObject NumericThreshold::get_configuration(JsonDocument& doc) {
-  JsonObject root = doc.as<JsonObject>();
+void NumericThreshold::get_configuration(JsonObject& root) {
   root["min"] = minValue;
   root["max"] = maxValue;
   root["in_range"] = inRange;
   root["value"] = output;
-  return root;
 }
 
 static const char NUMERIC_SCHEMA[] PROGMEM = R"({
@@ -35,38 +28,31 @@ static const char NUMERIC_SCHEMA[] PROGMEM = R"({
     }
   })";
 
-  bool NumericThreshold::set_configuration(const JsonObject& config)
-  {
-      String expected[] = {"min", "max", "in_range", "value"};
-      for (auto str : expected) {
-        if (!config.containsKey(str)) {
-          return false;
-        }
-      }
-      minValue = config["min"];
-      maxValue = config["max"];
-      inRange = config["in_range"];
-      output = config["value"];
-
-      return true;
+bool NumericThreshold::set_configuration(const JsonObject& config) {
+  String expected[] = {"min", "max", "in_range", "value"};
+  for (auto str : expected) {
+    if (!config.containsKey(str)) {
+      return false;
+    }
   }
+  minValue = config["min"];
+  maxValue = config["max"];
+  inRange = config["in_range"];
+  output = config["value"];
 
-  String NumericThreshold::get_config_schema()
-  {
-    return FPSTR(NUMERIC_SCHEMA);
-  }
+  return true;
+}
 
+String NumericThreshold::get_config_schema() { return FPSTR(NUMERIC_SCHEMA); }
 
-  JsonObject IntegerThreshold::get_configuration(JsonDocument& doc) {
-    JsonObject root = doc.as<JsonObject>();
-    root["min"] = minValue;
-    root["max"] = maxValue;
-    root["in_range"] = inRange;
-    root["value"] = output;
-    return root;
-  }
+void IntegerThreshold::get_configuration(JsonObject& root) {
+  root["min"] = minValue;
+  root["max"] = maxValue;
+  root["in_range"] = inRange;
+  root["value"] = output;
+}
 
-  static const char INTEGER_SCHEMA[] PROGMEM = R"({
+static const char INTEGER_SCHEMA[] PROGMEM = R"({
       "type": "object",
       "properties": {
           "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
@@ -76,23 +62,19 @@ static const char NUMERIC_SCHEMA[] PROGMEM = R"({
       }
     })";
 
-  bool IntegerThreshold::set_configuration(const JsonObject& config)
-  {
-      String expected[] = {"min", "max", "in_range"};
-      for (auto str : expected) {
-        if (!config.containsKey(str)) {
-          return false;
-        }
-      }
-      minValue = config["min"];
-      maxValue = config["max"];
-      inRange = config["in_range"];
-      output = config["value"];
-
-      return true;
+bool IntegerThreshold::set_configuration(const JsonObject& config) {
+  String expected[] = {"min", "max", "in_range"};
+  for (auto str : expected) {
+    if (!config.containsKey(str)) {
+      return false;
+    }
   }
+  minValue = config["min"];
+  maxValue = config["max"];
+  inRange = config["in_range"];
+  output = config["value"];
 
-  String IntegerThreshold::get_config_schema()
-  {
-    return FPSTR(INTEGER_SCHEMA);
-  }
+  return true;
+}
+
+String IntegerThreshold::get_config_schema() { return FPSTR(INTEGER_SCHEMA); }

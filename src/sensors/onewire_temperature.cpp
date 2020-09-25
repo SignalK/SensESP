@@ -144,14 +144,12 @@ void OneWireTemperature::read_value() {
   this->notify();
 }
 
-JsonObject OneWireTemperature::get_configuration(JsonDocument& doc) {
-  JsonObject root = doc.as<JsonObject>();
+void OneWireTemperature::get_configuration(JsonObject& root) {
   root["value"] = output;
   char addr_str[24];
   owda_to_string(addr_str, address);
   root["address"] = addr_str;
   root["found"] = found;
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"({

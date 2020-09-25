@@ -12,12 +12,10 @@ void VoltageMultiplier::set_input(float input, uint8_t inputChannel) {
   notify();
 }
 
-JsonObject VoltageMultiplier::get_configuration(JsonDocument& doc) {
-  JsonObject root = doc.as<JsonObject>();
+void VoltageMultiplier::get_configuration(JsonObject& root) {
   root["R1"] = R1;
   root["R2"] = R2;
   root["value"] = output;
-  return root;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({

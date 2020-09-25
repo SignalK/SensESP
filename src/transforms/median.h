@@ -15,7 +15,7 @@ class Median : public NumericTransform {
  public:
   Median(unsigned int sampleSize = 10, String config_path="");
   virtual void set_input(float input, uint8_t inputChannel = 0) override;
-  virtual JsonObject get_configuration(JsonDocument& doc) override;
+  virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

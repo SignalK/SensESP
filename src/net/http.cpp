@@ -97,10 +97,10 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
     AsyncResponseStream* response =
         request->beginResponseStream("application/json");
     DynamicJsonDocument jsonDoc(1024);
-    JsonObject root = jsonDoc.as<JsonObject>();
-    root["config"] = confable->get_configuration(jsonDoc);
-    root["schema"] = serialized(confable->get_config_schema());
-    serializeJson(root, *response);
+    JsonObject config = jsonDoc.createNestedObject("config");
+    confable->get_configuration(config);
+    jsonDoc["schema"] = serialized(confable->get_config_schema());
+    serializeJson(jsonDoc, *response);
     request->send(response);
   });
 
@@ -185,12 +185,12 @@ void HTTPServer::handle_config_list(AsyncWebServerRequest* request) {
   AsyncResponseStream* response =
       request->beginResponseStream("application/json");
   DynamicJsonDocument jsonDoc(1024);
-  JsonObject root = jsonDoc.as<JsonObject>();
-  JsonArray arr = root.createNestedArray("keys");
+  //JsonObject root = jsonDoc.as<JsonObject>();
+  JsonArray arr = jsonDoc.createNestedArray("keys");
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     arr.add(it->first);
   }
-  serializeJson(root, *response);
+  serializeJson(jsonDoc, *response);
   request->send(response);
 }
 

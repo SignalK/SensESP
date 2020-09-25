@@ -280,11 +280,10 @@ void WSClient::send_access_request(const String server_address,
 
   // create a new access request
   DynamicJsonDocument doc(1024);
-  JsonObject req = doc.as<JsonObject>();
-  req["clientId"] = client_id;
-  req["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
+  doc["clientId"] = client_id;
+  doc["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
   String json_req = "";
-  serializeJson(req, json_req);
+  serializeJson(doc, json_req);
 
   HTTPClient http;
 
@@ -430,16 +429,13 @@ void WSClient::send_delta() {
   }
 }
 
-JsonObject WSClient::get_configuration(JsonDocument& doc) {
-  JsonObject root = doc.as<JsonObject>();
+void WSClient::get_configuration(JsonObject& root) {
   root["sk_address"] = this->server_address;
   root["sk_port"] = this->server_port;
 
   root["token"] = this->auth_token;
   root["client_id"] = this->client_id;
   root["polling_href"] = this->polling_href;
-
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"~({

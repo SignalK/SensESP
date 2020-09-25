@@ -39,7 +39,7 @@ class NumericThreshold : public ThresholdTransform<float, bool>
                       ThresholdTransform<float, bool>(minValue, maxValue, inRange, !inRange, config_path)
                       {}
 
-    virtual JsonObject get_configuration(JsonDocument& doc) override;
+    virtual void get_configuration(JsonObject& doc) override;
     virtual bool set_configuration(const JsonObject& config) override;
     virtual String get_config_schema() override;
 };
@@ -56,7 +56,7 @@ class IntegerThreshold : public ThresholdTransform<int, bool>
                       ThresholdTransform<int, bool>(minValue, maxValue, inRange, !inRange, config_path)
                       {}
 
-    virtual JsonObject get_configuration(JsonDocument& doc) override;
+    virtual void get_configuration(JsonObject& doc) override;
     virtual bool set_configuration(const JsonObject& config) override;
     virtual String get_config_schema() override;
 };

@@ -1,9 +1,7 @@
 #include "median.h"
 
-
-Median::Median(unsigned int sampleSize, String config_path) :
-    NumericTransform(config_path),
-    sampleSize{sampleSize} {
+Median::Median(unsigned int sampleSize, String config_path)
+    : NumericTransform(config_path), sampleSize{sampleSize} {
   className = "Median";
   load_configuration();
   buf.reserve(sampleSize);
@@ -11,7 +9,6 @@ Median::Median(unsigned int sampleSize, String config_path) :
 }
 
 void Median::set_input(float input, uint8_t inputChannel) {
-
   buf.push_back(input);
   if (buf.size() >= sampleSize) {
     // Its time to output a value
@@ -23,11 +20,8 @@ void Median::set_input(float input, uint8_t inputChannel) {
   }
 }
 
-
-JsonObject Median::get_configuration(JsonDocument& doc) {
-  JsonObject root = doc.as<JsonObject>();
+void Median::get_configuration(JsonObject& root) {
   root["sampleSize"] = sampleSize;
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
@@ -37,10 +31,7 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String Median::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
-
+String Median::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool Median::set_configuration(const JsonObject& config) {
   String expected[] = {"sampleSize"};

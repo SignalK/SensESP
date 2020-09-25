@@ -35,17 +35,14 @@ class SKOutput : public SKEmitter,
   virtual String as_signalK() override {
     DynamicJsonDocument jsonDoc(1024);
     String json;
-    JsonObject root = jsonDoc.as<JsonObject>();
-    root["path"] = this->get_sk_path();
-    root["value"] = ValueProducer<T>::output;
-    serializeJson(root, json);
+    jsonDoc["path"] = this->get_sk_path();
+    jsonDoc["value"] = ValueProducer<T>::output;
+    serializeJson(jsonDoc, json);
     return json;
   }
 
-  virtual JsonObject get_configuration(JsonDocument& doc) override {
-    JsonObject root = doc.as<JsonObject>();
+  virtual void get_configuration(JsonObject& root) override {
     root["sk_path"] = this->get_sk_path();
-    return root;
   }
 
   String get_config_schema() override {

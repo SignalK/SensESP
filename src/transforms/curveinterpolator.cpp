@@ -69,17 +69,14 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject CurveInterpolator::get_configuration(JsonDocument& doc) {
-  JsonObject root = doc.as<JsonObject>();
-
+void CurveInterpolator::get_configuration(JsonObject& root) {
   JsonArray jSamples = root.createNestedArray("samples");
   for (auto& sample : samples) {
-    JsonObject entry = doc.as<JsonObject>();
+    auto entry = jSamples.createNestedObject();
     entry["input"] = sample.input;
     entry["output"] = sample.output;
     jSamples.add(entry);
   }
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"({

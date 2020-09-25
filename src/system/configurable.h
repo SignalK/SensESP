@@ -35,7 +35,7 @@ class Configurable {
    * saved to a new object created with JsonDocument::as<JsonObject>() 
    * and returned.
    */  
-  virtual JsonObject get_configuration(JsonDocument& doc);
+  virtual void get_configuration(JsonObject& configObject);
 
 
 
