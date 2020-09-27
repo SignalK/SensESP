@@ -307,8 +307,7 @@ void WSClient::send_access_request(const String server_address,
   // http status code 202
 
   deserializeJson(doc, payload.c_str());
-  JsonObject resp = doc.as<JsonObject>();
-  String state = resp["state"];
+  String state = doc["state"];
 
   if (state != "PENDING") {
     debugW("Got unknown state: %s", state.c_str());
@@ -317,7 +316,7 @@ void WSClient::send_access_request(const String server_address,
     return;
   }
 
-  String href = resp["href"];
+  String href = doc["href"];
   polling_href = href;
   save_configuration();
 
@@ -346,8 +345,7 @@ void WSClient::poll_access_request(const String server_address,
       debugW("WARNING: Could not deserialize http.");    
       return; //TODO: return at this point, or keep going?
     }
-    JsonObject resp = doc.as<JsonObject>();
-    String state = resp["state"];
+    String state = doc["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
       app.onDelay(5000, [this, server_address, server_port, href]() {
@@ -355,7 +353,7 @@ void WSClient::poll_access_request(const String server_address,
       });
       return;
     } else if (state == "COMPLETED") {
-      JsonObject access_req = resp["accessRequest"];
+      JsonObject access_req = doc["accessRequest"];
       String permission = access_req["permission"];  // TODO: like this in ArdJson 6? String permission = resp["accessRequest"]["permission"];
       polling_href = "";
       save_configuration();
