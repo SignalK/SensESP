@@ -57,21 +57,15 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
             Configurable* confable = it->second;
 
             JsonObject body = json.as<JsonObject>();
-            //if (body.success()) {
-              if (!confable->set_configuration(body)) {
-                request->send(400, "text/plain",
-                              F("Unable to extract keys from JSON.\n"));
-                return;
-              }
-              confable->save_configuration();
-              request->send(200, "text/plain",
-                            F("Configuration successful.\n"));
-              return;
-            /*} else {
+
+            if (!confable->set_configuration(body)) {
               request->send(400, "text/plain",
-                            F("Unable to parse JSON body.\n"));
+                            F("Unable to extract keys from JSON.\n"));
               return;
-            }*/
+            }
+            confable->save_configuration();
+            request->send(200, "text/plain", F("Configuration successful.\n"));
+            return;
           });
   config_put_handler->setMethod(HTTP_PUT);
   server->addHandler(config_put_handler);
@@ -185,7 +179,7 @@ void HTTPServer::handle_config_list(AsyncWebServerRequest* request) {
   AsyncResponseStream* response =
       request->beginResponseStream("application/json");
   DynamicJsonDocument jsonDoc(1024);
-  //JsonObject root = jsonDoc.as<JsonObject>();
+  // JsonObject root = jsonDoc.as<JsonObject>();
   JsonArray arr = jsonDoc.createNestedArray("keys");
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     arr.add(it->first);
@@ -213,18 +207,20 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto* response = request->beginResponseStream("text/plain");
-  
+
   response->setCode(200);
-  response->printf("Name: %s, build at %s %s\n", sensesp_app->get_hostname().c_str(),
-                   __DATE__, __TIME__);
+  response->printf("Name: %s, build at %s %s\n",
+                   sensesp_app->get_hostname().c_str(), __DATE__, __TIME__);
 
   response->printf("MAC: %s\n", WiFi.macAddress().c_str());
   response->printf("WiFi signal: %d\n", WiFi.RSSI());
-  
+
   response->printf("SSID: %s\n", WiFi.SSID().c_str());
-  
-  response->printf("SignalK server address: %s\n", sensesp_app->ws_client->get_server_address().c_str());
-  response->printf("SignalK server port: %d\n", sensesp_app->ws_client->get_server_port());
+
+  response->printf("SignalK server address: %s\n",
+                   sensesp_app->ws_client->get_server_address().c_str());
+  response->printf("SignalK server port: %d\n",
+                   sensesp_app->ws_client->get_server_port());
 
   request->send(response);
 }
