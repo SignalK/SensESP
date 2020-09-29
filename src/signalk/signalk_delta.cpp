@@ -20,22 +20,22 @@ bool SKDelta::data_available() {
 }
 
 void SKDelta::get_delta(String& output) {
-  DynamicJsonBuffer jsonBuffer;
+  DynamicJsonDocument jsonDoc(1024);
 
-  JsonObject& delta = jsonBuffer.createObject();
-  JsonArray& updates = delta.createNestedArray("updates");
+  //JsonObject delta = jsonDoc.as<JsonObject>();
+  JsonArray updates = jsonDoc.createNestedArray("updates");
 
-  JsonObject& current = updates.createNestedObject();
-  JsonObject& source = current.createNestedObject("source");
+  JsonObject current = updates.createNestedObject();
+  JsonObject source = current.createNestedObject("source");
   source["label"] = hostname;
-  JsonArray& values = current.createNestedArray("values");
+  JsonArray values = current.createNestedArray("values");
 
   while (!buffer.empty()) {
-    values.add(RawJson(buffer.back()));
+    values.add(serialized(buffer.back()));
     buffer.pop_back();
   }
 
-  delta.printTo(output);
+  serializeJson(jsonDoc, output);
 
   debugD("SKDelta::get_delta: %s", output.c_str());
 }

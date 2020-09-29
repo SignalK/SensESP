@@ -32,10 +32,10 @@ class Configurable {
   /**
    * Returns the current configuration data as a JsonObject. In
    * general, the current state of local member variables are 
-   * saved to a new object created with JsonBuffer::createObject() 
+   * saved to a new object created with JsonDocument::as<JsonObject>() 
    * and returned.
    */  
-  virtual JsonObject& get_configuration(JsonBuffer& buf);
+  virtual void get_configuration(JsonObject& configObject);
 
 
 

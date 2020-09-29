@@ -1,26 +1,25 @@
 #include "analogvoltage.h"
 
-
-AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset, String config_path) :
-    NumericTransform(config_path), max_voltage{max_voltage}, multiplier{multiplier}, offset{offset} {
+AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
+                             String config_path)
+    : NumericTransform(config_path),
+      max_voltage{max_voltage},
+      multiplier{multiplier},
+      offset{offset} {
   className = "AnalogVoltage";
   load_configuration();
 }
-
 
 void AnalogVoltage::set_input(float input, uint8_t inputChannel) {
   output = ((input * (max_voltage / 1024.0)) * multiplier) + offset;
   notify();
 }
 
-
-JsonObject& AnalogVoltage::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void AnalogVoltage::get_configuration(JsonObject& root) {
   root["max_voltage"] = max_voltage;
   root["multiplier"] = multiplier;
   root["offset"] = offset;
   root["value"] = output;
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
@@ -33,12 +32,10 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String AnalogVoltage::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
+String AnalogVoltage::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool AnalogVoltage::set_configuration(const JsonObject& config) {
-  String expected[] = {"max_voltage", "multiplier", "offset" };
+  String expected[] = {"max_voltage", "multiplier", "offset"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

@@ -46,11 +46,9 @@ void ADS1x15value<T_ads_1x15>::enable() {
 }
 
 template <class T_ads_1x15>
-JsonObject& ADS1x15value<T_ads_1x15>::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void ADS1x15value<T_ads_1x15>::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
-  return root;
   };
 
   static const char SCHEMA[] PROGMEM = R"###({

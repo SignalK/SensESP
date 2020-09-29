@@ -9,7 +9,7 @@ class SKOutputTime : public TimeString,
  public:
   SKOutputTime(String sk_path, String config_path="");
   virtual String as_signalK() override;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
+  virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };

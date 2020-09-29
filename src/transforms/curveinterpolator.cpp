@@ -69,17 +69,14 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject& CurveInterpolator::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
-
-  JsonArray& jSamples = root.createNestedArray("samples");
+void CurveInterpolator::get_configuration(JsonObject& root) {
+  JsonArray jSamples = root.createNestedArray("samples");
   for (auto& sample : samples) {
-    JsonObject& entry = buf.createObject();
+    auto entry = jSamples.createNestedObject();
     entry["input"] = sample.input;
     entry["output"] = sample.output;
     jSamples.add(entry);
   }
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
@@ -110,14 +107,14 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
     }
   }
 
-  JsonArray& arr = config["samples"];
+  JsonArray arr = config["samples"];
   if (arr.size() > 0) {
     samples.clear();
-    for (auto& jentry : arr) {
-        Sample sample(jentry.as<JsonObject>());
+    for (auto jentry : arr) {
+        auto jObject = jentry.as<JsonObject>();
+        Sample sample(jObject);
         samples.insert(sample);
     }
-
   }
 
   return true;

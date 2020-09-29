@@ -33,19 +33,16 @@ class SKOutput : public SKEmitter,
 
 
   virtual String as_signalK() override {
-    DynamicJsonBuffer jsonBuffer;
+    DynamicJsonDocument jsonDoc(1024);
     String json;
-    JsonObject& root = jsonBuffer.createObject();
-    root.set("path", this->get_sk_path());
-    root.set("value", ValueProducer<T>::output);
-    root.printTo(json);
+    jsonDoc["path"] = this->get_sk_path();
+    jsonDoc["value"] = ValueProducer<T>::output;
+    serializeJson(jsonDoc, json);
     return json;
   }
 
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override {
-    JsonObject& root = buf.createObject();
+  virtual void get_configuration(JsonObject& root) override {
     root["sk_path"] = this->get_sk_path();
-    return root;
   }
 
   String get_config_schema() override {

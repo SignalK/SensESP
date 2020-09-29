@@ -8,7 +8,7 @@ class Difference : public NumericTransform {
  public:
   Difference(float k1, float k2, String config_path="");
   virtual void set_input(float input, uint8_t inputChannel) override;
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
+  virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

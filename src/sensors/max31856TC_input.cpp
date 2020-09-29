@@ -26,11 +26,9 @@ void MAX31856TC::enable() {
   });
 }
 
-JsonObject& MAX31856TC::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void MAX31856TC::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
-  return root;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({

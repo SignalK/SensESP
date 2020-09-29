@@ -22,12 +22,10 @@ void AngleCorrection::set_input(float input, uint8_t inputChannel) {
 }
 
 
-JsonObject& AngleCorrection::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void AngleCorrection::get_configuration(JsonObject& root) {
   root["offset"] = offset;
   root["min_angle"] = min_angle;
   root["value"] = output;
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"###({

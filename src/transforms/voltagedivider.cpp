@@ -1,22 +1,19 @@
 #include "voltagedivider.h"
 
-VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path) :
-   SymmetricTransform<float>(config_path ), R2{R2}, Vin{Vin} {
-     className = "VoltageDividerR1";
-     load_configuration();
+VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path)
+    : SymmetricTransform<float>(config_path), R2{R2}, Vin{Vin} {
+  className = "VoltageDividerR1";
+  load_configuration();
 }
 
 void VoltageDividerR1::set_input(float Vout, uint8_t ignored) {
-    output = (Vin - Vout) * R2 / Vout;
-    notify();
+  output = (Vin - Vout) * R2 / Vout;
+  notify();
 }
 
-
-JsonObject& VoltageDividerR1::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void VoltageDividerR1::get_configuration(JsonObject& root) {
   root["Vin"] = Vin;
   root["R2"] = R2;
-  return root;
 }
 
 static const char SCHEMA_R1[] PROGMEM = R"({
@@ -27,16 +24,15 @@ static const char SCHEMA_R1[] PROGMEM = R"({
     }
   })";
 
-String VoltageDividerR1::get_config_schema() {
-  return FPSTR(SCHEMA_R1);
-}
+String VoltageDividerR1::get_config_schema() { return FPSTR(SCHEMA_R1); }
 
 bool VoltageDividerR1::set_configuration(const JsonObject& config) {
-
-  String expected[] = { "Vin", "R2" };
+  String expected[] = {"Vin", "R2"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE("Can not set VoltageDividerR1: configuration: missing json field %s\n", str.c_str());
+      debugE(
+          "Cannot set VoltageDividerR1: configuration: missing json field %s\n",
+          str.c_str());
       return false;
     }
   }
@@ -45,26 +41,22 @@ bool VoltageDividerR1::set_configuration(const JsonObject& config) {
   R2 = config["R2"];
 
   return true;
-
 }
 
-VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path) :
-   SymmetricTransform<float>(config_path ), R1{R1}, Vin{Vin} {
-     className = "VoltageDividerR2";
-     load_configuration();
+VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path)
+    : SymmetricTransform<float>(config_path), R1{R1}, Vin{Vin} {
+  className = "VoltageDividerR2";
+  load_configuration();
 }
 
 void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {
-    output = (Vout * R1) / (Vin - Vout);
-    notify();
+  output = (Vout * R1) / (Vin - Vout);
+  notify();
 }
 
-
-JsonObject& VoltageDividerR2::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void VoltageDividerR2::get_configuration(JsonObject& root) {
   root["Vin"] = Vin;
   root["R1"] = R1;
-  return root;
 }
 
 static const char SCHEMA_R2[] PROGMEM = R"({
@@ -75,16 +67,15 @@ static const char SCHEMA_R2[] PROGMEM = R"({
     }
   })";
 
-String VoltageDividerR2::get_config_schema() {
-  return FPSTR(SCHEMA_R2);
-}
+String VoltageDividerR2::get_config_schema() { return FPSTR(SCHEMA_R2); }
 
 bool VoltageDividerR2::set_configuration(const JsonObject& config) {
-
-  String expected[] = { "Vin", "R1" };
+  String expected[] = {"Vin", "R1"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE("Can not set VoltageDividerR2: configuration: missing json field %s\n", str.c_str());
+      debugE(
+          "Cannot set VoltageDividerR2: configuration: missing json field %s\n",
+          str.c_str());
       return false;
     }
   }
@@ -93,6 +84,4 @@ bool VoltageDividerR2::set_configuration(const JsonObject& config) {
   R1 = config["R1"];
 
   return true;
-
 }
-

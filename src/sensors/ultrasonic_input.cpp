@@ -1,9 +1,14 @@
 #include "ultrasonic_input.h"
+
 #include "Arduino.h"
 #include "sensesp.h"
 
-UltrasonicSens::UltrasonicSens(int8_t trig_pin, int8_t input_pin,  uint read_delay, String config_path) :
-    NumericSensor(config_path), triggerPin{trig_pin}, inputPin{input_pin}, read_delay{read_delay} {
+UltrasonicSens::UltrasonicSens(int8_t trig_pin, int8_t input_pin,
+                               uint read_delay, String config_path)
+    : NumericSensor(config_path),
+      triggerPin{trig_pin},
+      inputPin{input_pin},
+      read_delay{read_delay} {
   className = "UltrasonicSens";
   pinMode(trig_pin, OUTPUT);
   pinMode(input_pin, INPUT_PULLUP);
@@ -11,23 +16,21 @@ UltrasonicSens::UltrasonicSens(int8_t trig_pin, int8_t input_pin,  uint read_del
 }
 
 void UltrasonicSens::enable() {
-  app.onRepeat(read_delay, [this]() { 
+  app.onRepeat(read_delay, [this]() {
     digitalWrite(triggerPin, HIGH);
-  long lastTime = micros();
-  while (micros() - lastTime < 100) {
-    yield();
-  }
-  digitalWrite(triggerPin, LOW);
-  output = pulseIn(inputPin, HIGH);
-  this->notify();
+    long lastTime = micros();
+    while (micros() - lastTime < 100) {
+      yield();
+    }
+    digitalWrite(triggerPin, LOW);
+    output = pulseIn(inputPin, HIGH);
+    this->notify();
   });
 }
 
-JsonObject& UltrasonicSens::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void UltrasonicSens::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
-  return root;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({

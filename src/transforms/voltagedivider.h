@@ -24,7 +24,7 @@ class VoltageDividerR1 : public SymmetricTransform<float> {
         virtual void set_input(float Vout, uint8_t ignored = 0) override;
 
         // For reading and writing the configuration of this transformation
-        virtual JsonObject& get_configuration(JsonBuffer& buf) override;
+        virtual void get_configuration(JsonObject& doc) override;
         virtual bool set_configuration(const JsonObject& config) override;
         virtual String get_config_schema() override;
 
@@ -52,8 +52,8 @@ class VoltageDividerR2 : public SymmetricTransform<float> {
         virtual void set_input(float Vout, uint8_t ignored = 0) override;
 
         // For reading and writing the configuration of this transformation
-        virtual JsonObject& get_configuration(JsonBuffer& buf) override;
-        virtual bool set_configuration(const JsonObject& config) override;
+        virtual void get_configuration(JsonObject& doc) override;
+        virtual bool set_configuration(const JsonObject& config) override;   
         virtual String get_config_schema() override;
 
     protected:

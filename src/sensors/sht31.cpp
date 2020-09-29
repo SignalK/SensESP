@@ -39,11 +39,9 @@ void SHT31value::enable() {
  });
 }
 
-JsonObject& SHT31value::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void SHT31value::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
-  return root;
   };
 
   static const char SCHEMA[] PROGMEM = R"###({

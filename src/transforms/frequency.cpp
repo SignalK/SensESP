@@ -2,15 +2,13 @@
 
 // Frequency
 
-Frequency::Frequency(float k, String config_path) :
-    Transform<int, float>(config_path), k{k} {
-    className = "Frequency";
-    load_configuration();
+Frequency::Frequency(float k, String config_path)
+    : Transform<int, float>(config_path), k{k} {
+  className = "Frequency";
+  load_configuration();
 }
 
-void Frequency::enable() {
-  last_update = millis();
-}
+void Frequency::enable() { last_update = millis(); }
 
 void Frequency::set_input(int input, uint8_t inputChannel) {
   unsigned long cur_millis = millis();
@@ -20,12 +18,9 @@ void Frequency::set_input(int input, uint8_t inputChannel) {
   notify();
 }
 
-
-JsonObject& Frequency::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void Frequency::get_configuration(JsonObject& root) {
   root["k"] = k;
   root["value"] = output;
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"###({
@@ -36,9 +31,7 @@ static const char SCHEMA[] PROGMEM = R"###({
     }
   })###";
 
-String Frequency::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
+String Frequency::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool Frequency::set_configuration(const JsonObject& config) {
   String expected[] = {"k"};

@@ -13,7 +13,7 @@ void setup_spiffs_storage();
 void write_string(const String filename, String data);
 String read_string(const String filename);
 
-void write_json(const String filename, JsonObject& data);
-JsonObject& read_json(const String filename, JsonBuffer& buf);
+void write_json(const String filename, JsonObject data);
+JsonObject read_json(const String filename, JsonDocument doc);
 
 #endif

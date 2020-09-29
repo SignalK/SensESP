@@ -2,27 +2,21 @@
 
 // Linear
 
-Linear::Linear(float k, float c, String config_path) :
-    NumericTransform(config_path),
-      k{ k },
-      c{ c } {
+Linear::Linear(float k, float c, String config_path)
+    : NumericTransform(config_path), k{k}, c{c} {
   className = "Linear";
   load_configuration();
 }
-
 
 void Linear::set_input(float input, uint8_t inputChannel) {
   output = k * input + c;
   notify();
 }
 
-
-JsonObject& Linear::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
+void Linear::get_configuration(JsonObject& root) {
   root["k"] = k;
   root["c"] = c;
   root["value"] = output;
-  return root;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
@@ -34,12 +28,10 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String Linear::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
+String Linear::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool Linear::set_configuration(const JsonObject& config) {
-  String expected[] = {"k", "c" };
+  String expected[] = {"k", "c"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
