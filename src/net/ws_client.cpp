@@ -40,8 +40,9 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
 }
 
 WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
-                   uint16_t server_port, std::function<void(bool)> connected_cb,
-                   void_cb_func delta_cb)
+                   uint16_t server_port,
+                   std::function<void(bool)> connected_cb,
+                   void_cb_func delta_cb, String permission)
     : Configurable{config_path} {
   this->sk_delta = sk_delta;
 
@@ -52,6 +53,8 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
 
   this->connected_cb = connected_cb;
   this->delta_cb = delta_cb;
+
+  this->sk_permission = permission;
   // set the singleton object pointer
   ws_client = this;
 
@@ -280,6 +283,7 @@ void WSClient::send_access_request(const String server_address,
   DynamicJsonDocument doc(1024);
   doc["clientId"] = client_id;
   doc["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
+  doc["permissions"] = this->sk_permission;
   String json_req = "";
   serializeJson(doc, json_req);
 

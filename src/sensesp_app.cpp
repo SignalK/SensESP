@@ -38,7 +38,8 @@ SensESPApp::SensESPApp(String preset_hostname, String ssid,
                        String wifi_password, String sk_server_address,
                        uint16_t sk_server_port, StandardSensors sensors,
                        int led_pin, bool enable_led, int led_ws_connected,
-                       int led_wifi_connected, int led_offline) {
+                       int led_wifi_connected, int led_offline,
+                       SKPermissions permissions) {
   // initialize filesystem
 #ifdef ESP8266
   if (!SPIFFS.begin()) {
@@ -84,8 +85,9 @@ SensESPApp::SensESPApp(String preset_hostname, String ssid,
     }
   };
   auto ws_delta_cb = [this]() { this->led_blinker->flip(); };
-  this->ws_client = new WSClient("/system/sk", sk_delta, sk_server_address,
-                                 sk_server_port, ws_connected_cb, ws_delta_cb);
+  this->ws_client =
+      new WSClient("/system/sk", sk_delta, sk_server_address, sk_server_port,
+                   ws_connected_cb, ws_delta_cb, get_permission_string(permissions));
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
@@ -178,6 +180,26 @@ void SensESPApp::reset() {
   networking->reset_settings();
   SPIFFS.format();
   app.onDelay(1000, []() { ESP.restart(); });
+}
+
+String SensESPApp::get_permission_string(SKPermissions permission) 
+{
+  if(permission == READONLY)
+  {
+    return "readonly";
+  }
+  else if(permission == READWRITE)
+  {
+    return "readwrite";
+  }
+  else if(permission == ADMIN)
+  {
+    return "admin";
+  }
+  else
+  {
+    return "";
+  }  
 }
 
 String SensESPApp::get_hostname() { return networking->get_hostname()->get(); }
