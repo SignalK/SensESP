@@ -7,18 +7,18 @@
 #include "sensesp_app.h"
 #include "sensors/onewire_temperature.h"
 #include "signalk/signalk_output.h"
-#include "wiring_helpers.h"
 #include "transforms/linear.h"
+#include "wiring_helpers.h"
 
-ReactESP app([] () {
-  #ifndef SERIAL_DEBUG_DISABLED
+ReactESP app([]() {
+#ifndef SERIAL_DEBUG_DISABLED
   Serial.begin(115200);
 
   // A small delay and one debugI() are required so that
   // the serial output displays everything
   delay(100);
   Debug.setSerialEnabled(true);
-  #endif
+#endif
   delay(100);
   debugI("Serial debug enabled");
 
@@ -38,25 +38,33 @@ ReactESP app([] () {
 
   uint read_delay = 500;
 
-  auto* pCoolantTemp = new OneWireTemperature(dts, read_delay, "/coolantTemperature/oneWire");
+  auto* coolant_temp =
+      new OneWireTemperature(dts, read_delay, "/coolantTemperature/oneWire");
 
-    pCoolantTemp->connectTo(new Linear(1.0, 0.0, "/coolantTemperature/linear"))
-                ->connectTo(new SKOutputNumber("propulsion.mainEngine.coolantTemperature", "/coolantTemperature/skPath"));
+  coolant_temp->connectTo(new Linear(1.0, 0.0, "/coolantTemperature/linear"))
+      ->connectTo(new SKOutputNumber("propulsion.mainEngine.coolantTemperature",
+                                     "/coolantTemperature/skPath"));
 
-  auto* pExhaustTemp = new OneWireTemperature(dts, read_delay, "/exhaustTemperature/oneWire");
-    
-    pExhaustTemp->connectTo(new Linear(1.0, 0.0, "/exhaustTemperature/linear"))
-                ->connectTo(new SKOutputNumber("propulsion.mainEngine.exhaustTemperature", "/exhaustTemperature/skPath"));
-  
-  auto* p24VTemp = new OneWireTemperature(dts, read_delay, "/24vAltTemperature/oneWire");
-      
-      p24VTemp->connectTo(new Linear(1.0, 0.0, "/24vAltTemperature/linear"))
-              ->connectTo(new SKOutputNumber("electrical.alternators.24V.temperature", "/24vAltTemperature/skPath"));
+  auto* exhaust_temp =
+      new OneWireTemperature(dts, read_delay, "/exhaustTemperature/oneWire");
 
-  auto* p12VTemp = new OneWireTemperature(dts, read_delay, "/12vAltTemperature/oneWire");
-      
-      p12VTemp->connectTo(new Linear(1.0, 0.0, "/12vAltTemperature/linear"))
-              ->connectTo(new SKOutputNumber("electrical.alternators.12V.temperature", "/12vAltTemperature/skPath"));      
+  exhaust_temp->connectTo(new Linear(1.0, 0.0, "/exhaustTemperature/linear"))
+      ->connectTo(new SKOutputNumber("propulsion.mainEngine.exhaustTemperature",
+                                     "/exhaustTemperature/skPath"));
+
+  auto* alt_24v_temp =
+      new OneWireTemperature(dts, read_delay, "/24vAltTemperature/oneWire");
+
+  alt_24v_temp->connectTo(new Linear(1.0, 0.0, "/24vAltTemperature/linear"))
+      ->connectTo(new SKOutputNumber("electrical.alternators.24V.temperature",
+                                     "/24vAltTemperature/skPath"));
+
+  auto* alt_12v_temp =
+      new OneWireTemperature(dts, read_delay, "/12vAltTemperature/oneWire");
+
+  alt_12v_temp->connectTo(new Linear(1.0, 0.0, "/12vAltTemperature/linear"))
+      ->connectTo(new SKOutputNumber("electrical.alternators.12V.temperature",
+                                     "/12vAltTemperature/skPath"));
 
   sensesp_app->enable();
 });

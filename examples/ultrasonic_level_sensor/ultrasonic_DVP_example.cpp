@@ -54,7 +54,7 @@ ReactESP app([]() {
   // The sensor is mounted at the top of a water tank that is 25 cm deep.
   uint read_delay = 1000;
 
-  auto* pUltrasonicSens = new UltrasonicSens(TRIGGER_PIN, INPUT_PIN, read_delay, ultrasonic_in_config_path);
+  auto* ultrasonic_sensor = new UltrasonicSens(TRIGGER_PIN, INPUT_PIN, read_delay, ultrasonic_in_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then adds the offset,
   // to calculate its output. In this example, we want to see the final output presented
@@ -68,7 +68,7 @@ ReactESP app([]() {
 
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the SignalK server.
-  pUltrasonicSens->connectTo(new Linear(multiplier, offset, linear_config_path))
+  ultrasonic_sensor->connectTo(new Linear(multiplier, offset, linear_config_path))
       ->connectTo(new MovingAverage(10, scale, ultrasonic_ave_samples))
       ->connectTo(new SKOutputNumber(sk_path));
 
