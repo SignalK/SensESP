@@ -81,7 +81,6 @@ ReactESP app([]() {
   SensESPAppBuilder builder;
 
   sensesp_app = builder.set_hostname("your device name")
-                    ->set_standard_sensors("192.168.1.2")
                     ->set_sk_server("your server address", 80)
                     ->get_app();
 
