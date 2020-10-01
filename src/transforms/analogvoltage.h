@@ -3,6 +3,12 @@
 
 #include "transform.h"
 
+#ifdef ESP32
+#define MAX_ANALOG_OUTPUT 4096
+#else
+#define MAX_ANALOG_OUTPUT 1024
+#endif
+
 /**
  * AnalogVoltage is a transform that takes the output of the built-in analog-to-digital converter
  * on the ESP and outputs the voltage that went into it. It can also be used like

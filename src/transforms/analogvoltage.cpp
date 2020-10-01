@@ -11,7 +11,7 @@ AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
 }
 
 void AnalogVoltage::set_input(float input, uint8_t inputChannel) {
-  output = ((input * (max_voltage / 1024.0)) * multiplier) + offset;
+  output = ((input * (max_voltage / MAX_ANALOG_OUTPUT)) * multiplier) + offset;
   notify();
 }
 
