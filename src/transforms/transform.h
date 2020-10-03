@@ -67,7 +67,7 @@ class Transform : public TransformBase,
    * channel zero, the second one to input channel 1, etc.
    * "this" is returned, which allows the ValueProducer side
    * of this transform to then be wired to other transforms via
-   * a call to connectTo().
+   * a call to connect_to().
    */
   Transform<C, P>* connectFrom(ValueProducer<P>* pProducer0,
                                ValueProducer<P>* pProducer1 = NULL,

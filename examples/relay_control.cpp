@@ -59,8 +59,8 @@ ReactESP app([]() {
   // "environment.outside.illuminance" to the NumericThreshold, and then output
   // the transformed float to boolean to DigitalOutput
   auto* listener = new SKNumericListener(sk_path);
-  listener->connectTo(new NumericThreshold(0.0f, 100.0f, true, config_path))
-      ->connectTo(new DigitalOutput(5));
+  listener->connect_to(new NumericThreshold(0.0f, 100.0f, true, config_path))
+      ->connect_to(new DigitalOutput(5));
 
   // Start the SensESP application running
   sensesp_app->enable();

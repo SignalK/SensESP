@@ -41,29 +41,29 @@ ReactESP app([]() {
   auto* coolant_temp =
       new OneWireTemperature(dts, read_delay, "/coolantTemperature/oneWire");
 
-  coolant_temp->connectTo(new Linear(1.0, 0.0, "/coolantTemperature/linear"))
-      ->connectTo(new SKOutputNumber("propulsion.mainEngine.coolantTemperature",
+  coolant_temp->connect_to(new Linear(1.0, 0.0, "/coolantTemperature/linear"))
+      ->connect_to(new SKOutputNumber("propulsion.mainEngine.coolantTemperature",
                                      "/coolantTemperature/skPath"));
 
   auto* exhaust_temp =
       new OneWireTemperature(dts, read_delay, "/exhaustTemperature/oneWire");
 
-  exhaust_temp->connectTo(new Linear(1.0, 0.0, "/exhaustTemperature/linear"))
-      ->connectTo(new SKOutputNumber("propulsion.mainEngine.exhaustTemperature",
+  exhaust_temp->connect_to(new Linear(1.0, 0.0, "/exhaustTemperature/linear"))
+      ->connect_to(new SKOutputNumber("propulsion.mainEngine.exhaustTemperature",
                                      "/exhaustTemperature/skPath"));
 
   auto* alt_24v_temp =
       new OneWireTemperature(dts, read_delay, "/24vAltTemperature/oneWire");
 
-  alt_24v_temp->connectTo(new Linear(1.0, 0.0, "/24vAltTemperature/linear"))
-      ->connectTo(new SKOutputNumber("electrical.alternators.24V.temperature",
+  alt_24v_temp->connect_to(new Linear(1.0, 0.0, "/24vAltTemperature/linear"))
+      ->connect_to(new SKOutputNumber("electrical.alternators.24V.temperature",
                                      "/24vAltTemperature/skPath"));
 
   auto* alt_12v_temp =
       new OneWireTemperature(dts, read_delay, "/12vAltTemperature/oneWire");
 
-  alt_12v_temp->connectTo(new Linear(1.0, 0.0, "/12vAltTemperature/linear"))
-      ->connectTo(new SKOutputNumber("electrical.alternators.12V.temperature",
+  alt_12v_temp->connect_to(new Linear(1.0, 0.0, "/12vAltTemperature/linear"))
+      ->connect_to(new SKOutputNumber("electrical.alternators.12V.temperature",
                                      "/12vAltTemperature/skPath"));
 
   sensesp_app->enable();

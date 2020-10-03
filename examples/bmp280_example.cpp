@@ -42,7 +42,7 @@ ReactESP app([]() {
   auto* bmp_temperature =
       new BMP280value(bmp280, temperature, read_delay, "/Outside/Temperature");
 
-  bmp_temperature->connectTo(
+  bmp_temperature->connect_to(
       new SKOutputNumber("environment.outside.temperature"));
 
   // Do the same for the barometric pressure value. Its read_delay is longer,
@@ -51,7 +51,7 @@ ReactESP app([]() {
   auto* bmp_pressure = new BMP280value(bmp280, pressure, pressure_read_delay,
                                        "/Outside/Pressure");
 
-  bmp_pressure->connectTo(new SKOutputNumber("environment.outside.pressure"));
+  bmp_pressure->connect_to(new SKOutputNumber("environment.outside.pressure"));
 
   sensesp_app->enable();
 });

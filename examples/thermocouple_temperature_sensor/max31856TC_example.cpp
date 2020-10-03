@@ -68,8 +68,8 @@ ReactESP app([]() {
 
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the SignalK server.
-  max31856tc->connectTo(new Linear(multiplier, offset, ""))
-      ->connectTo(new SKOutputNumber(sk_path));
+  max31856tc->connect_to(new Linear(multiplier, offset, ""))
+      ->connect_to(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running
   sensesp_app->enable();

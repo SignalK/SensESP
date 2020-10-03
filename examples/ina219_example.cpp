@@ -40,35 +40,35 @@ ReactESP app([]() {
   auto* ina219_bus_voltage = new INA219value(ina219, bus_voltage, read_delay,
                                              "/someElectricDevice/busVoltage");
 
-  ina219_bus_voltage->connectTo(
+  ina219_bus_voltage->connect_to(
       new SKOutputNumber("electrical.someelectricdevice.busVoltage"));
 
   // Do the same for the shunt voltage.
   auto* ina219_shunt_voltage = new INA219value(
       ina219, shunt_voltage, read_delay, "/someElectricDevice/shuntVoltage");
 
-  ina219_shunt_voltage->connectTo(
+  ina219_shunt_voltage->connect_to(
       new SKOutputNumber("electrical.someelectricdevice.shuntVoltage"));
 
   // Do the same for the current (amperage).
   auto* ina219_current = new INA219value(ina219, current, read_delay,
                                          "/someElectricDevice/current");
 
-  ina219_current->connectTo(
+  ina219_current->connect_to(
       new SKOutputNumber("electrical.someelectricdevice.current"));
 
   // Do the same for the power (watts).
   auto* ina219_power =
       new INA219value(ina219, power, read_delay, "/someElectricDevice/power");
 
-  ina219_power->connectTo(
+  ina219_power->connect_to(
       new SKOutputNumber("electrical.someelectricdevice.power"));
 
   // Do the same for the load voltage.
   auto* ina219_load_voltage = new INA219value(
       ina219, load_voltage, read_delay, "/someElectricDevice/loadVoltage");
 
-  ina219_load_voltage->connectTo(
+  ina219_load_voltage->connect_to(
       new SKOutputNumber("electrical.someelectricdevice.loadVoltage"));
 
   sensesp_app->enable();

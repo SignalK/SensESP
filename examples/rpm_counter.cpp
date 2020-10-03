@@ -72,10 +72,10 @@ ReactESP app([]() {
   auto* sensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
 
   sensor
-      ->connectTo(new Frequency(
+      ->connect_to(new Frequency(
           multiplier, config_path_calibrate))  // connect the output of sensor
                                                // to the input of Frequency()
-      ->connectTo(new SKOutputNumber(
+      ->connect_to(new SKOutputNumber(
           sk_path, config_path_skpath));  // connect the output of Frequency()
                                           // to a SignalK Output as a number
 

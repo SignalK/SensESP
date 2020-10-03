@@ -37,14 +37,14 @@ ReactESP app([]() {
   auto* sht31_temperature =
       new SHT31value(sht31, temperature, read_delay, "/fridge/temperature");
 
-  sht31_temperature->connectTo(
+  sht31_temperature->connect_to(
       new SKOutputNumber("environment.inside.refrigerator.temperature"));
 
   // Do the same for the humidity value.
   auto* sht31_humidity =
       new SHT31value(sht31, humidity, read_delay, "/fridge/humidity");
 
-  sht31_humidity->connectTo(
+  sht31_humidity->connect_to(
       new SKOutputNumber("environment.inside.refrigerator.humidity"));
 
   sensesp_app->enable();

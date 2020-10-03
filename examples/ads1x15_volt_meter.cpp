@@ -51,12 +51,12 @@ ReactESP app([]() {
   // - SKOutputNumber() is a specialized transport to send a float value to the
   // Signal K server.
 
-  alt_12v_voltage->connectTo(new ADS1x15Voltage(chip, gain))
-      ->connectTo(new VoltageMultiplier(
+  alt_12v_voltage->connect_to(new ADS1x15Voltage(chip, gain))
+      ->connect_to(new VoltageMultiplier(
           10000, 4730,
           "/12V_Alt/VoltMuliplier"))  // Measured ohm values of R1 and R2 in the
                                       // physical voltage divider
-      ->connectTo(new SKOutputNumber("electrical.alternators.12V.voltage",
+      ->connect_to(new SKOutputNumber("electrical.alternators.12V.voltage",
                                      "/12V_Alt/skPath"));
 
   // Create a second instance of ADS1115value to read from the same physical
@@ -67,9 +67,9 @@ ReactESP app([]() {
   auto* alt_24v_voltage = new ADS1115value(ads1115, channel_24V, read_delay_24V,
                                            "/24V_Alt/ADC read delay");
 
-  alt_24v_voltage->connectTo(new ADS1x15Voltage(chip, gain))
-      ->connectTo(new VoltageMultiplier(21800, 4690, "/24V_Alt/VoltMuliplier"))
-      ->connectTo(new SKOutputNumber("electrical.alternators.24V.voltage",
+  alt_24v_voltage->connect_to(new ADS1x15Voltage(chip, gain))
+      ->connect_to(new VoltageMultiplier(21800, 4690, "/24V_Alt/VoltMuliplier"))
+      ->connect_to(new SKOutputNumber("electrical.alternators.24V.voltage",
                                      "/24V_Alt/skPath"));
 
   sensesp_app->enable();
