@@ -1,20 +1,20 @@
 #include "threshold.h"
 
 template <class C, class P>
-void ThresholdTransform<C, P>::set_input(C input, uint8_t inputChannel) {
-  if (input >= minValue && input <= maxValue) {
-    this->output = inRange;
+void ThresholdTransform<C, P>::set_input(C input, uint8_t input_channel) {
+  if (input >= min_value && input <= max_value) {
+    this->output = in_range;
   } else {
-    this->output = outRange;
+    this->output = out_range;
   }
 
   this->notify();
 }
 
 void NumericThreshold::get_configuration(JsonObject& root) {
-  root["min"] = minValue;
-  root["max"] = maxValue;
-  root["in_range"] = inRange;
+  root["min"] = min_value;
+  root["max"] = max_value;
+  root["in_range"] = in_range;
   root["value"] = output;
 }
 
@@ -35,9 +35,9 @@ bool NumericThreshold::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  minValue = config["min"];
-  maxValue = config["max"];
-  inRange = config["in_range"];
+  min_value = config["min"];
+  max_value = config["max"];
+  in_range = config["in_range"];
   output = config["value"];
 
   return true;
@@ -46,9 +46,9 @@ bool NumericThreshold::set_configuration(const JsonObject& config) {
 String NumericThreshold::get_config_schema() { return FPSTR(NUMERIC_SCHEMA); }
 
 void IntegerThreshold::get_configuration(JsonObject& root) {
-  root["min"] = minValue;
-  root["max"] = maxValue;
-  root["in_range"] = inRange;
+  root["min"] = min_value;
+  root["max"] = max_value;
+  root["in_range"] = in_range;
   root["value"] = output;
 }
 
@@ -69,9 +69,9 @@ bool IntegerThreshold::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  minValue = config["min"];
-  maxValue = config["max"];
-  inRange = config["in_range"];
+  min_value = config["min"];
+  max_value = config["max"];
+  in_range = config["in_range"];
   output = config["value"];
 
   return true;
