@@ -8,7 +8,6 @@
 // sensor.
 BMP280::BMP280(uint8_t addr, String config_path)
     : Sensor(config_path), addr{addr} {
-  className = "BMP280";
   load_configuration();
   pAdafruitBMP280 = new Adafruit_BMP280();
   if (!pAdafruitBMP280->begin(addr)) {
@@ -23,7 +22,6 @@ BMP280value::BMP280value(BMP280* pBMP280, BMP280ValType val_type,
       pBMP280{pBMP280},
       val_type{val_type},
       read_delay{read_delay} {
-  className = "BMP280value";
   load_configuration();
 }
 

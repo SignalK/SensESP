@@ -9,7 +9,6 @@ UltrasonicSens::UltrasonicSens(int8_t trig_pin, int8_t input_pin,
       triggerPin{trig_pin},
       inputPin{input_pin},
       read_delay{read_delay} {
-  className = "UltrasonicSens";
   pinMode(trig_pin, OUTPUT);
   pinMode(input_pin, INPUT_PULLUP);
   load_configuration();

@@ -2,9 +2,7 @@
 
 VoltageMultiplier::VoltageMultiplier(uint16_t R1, uint16_t R2,
                                      String config_path)
-    : NumericTransform(config_path), R1{R1}, R2{R2} {
-  className = "VoltageMultiplier";
-}
+    : NumericTransform(config_path), R1{R1}, R2{R2} {}
 
 void VoltageMultiplier::set_input(float input, uint8_t inputChannel) {
   // Ohms Law at work!

@@ -5,7 +5,6 @@
 
 MAX31856TC::MAX31856TC(int8_t cs_pin, int8_t mosi_pin, int8_t miso_pin, int8_t clk_pin, int8_t drdy_pin, max31856_thermocoupletype_t  tc_type, uint read_delay, String config_path) :
     NumericSensor(config_path), dataRdy{drdy_pin}, read_delay{read_delay} {
-  className = "MAX31856TC";
   load_configuration();
   pAdafruitMAX31856 = new Adafruit_MAX31856(cs_pin, mosi_pin, miso_pin, clk_pin);
   if (!pAdafruitMAX31856->begin()) {

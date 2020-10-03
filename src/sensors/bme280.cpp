@@ -8,7 +8,6 @@
 // humidity sensor.
 BME280::BME280(uint8_t addr, String config_path)
     : Sensor(config_path), addr{addr} {
-  className = "BME280";
   load_configuration();
   pAdafruitBME280 = new Adafruit_BME280();
   check_status();
@@ -35,7 +34,6 @@ BME280value::BME280value(BME280* pBME280, BME280ValType val_type,
       pBME280{pBME280},
       val_type{val_type},
       read_delay{read_delay} {
-  className = "BME280value";
   load_configuration();
 }
 

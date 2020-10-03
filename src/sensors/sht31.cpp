@@ -7,7 +7,6 @@
 // SHT31 represents an ADAfruit (or compatible) SHT31 temperature & humidity sensor.
 SHT31::SHT31(uint8_t addr, String config_path) :
        Sensor(config_path), addr{addr} {
-    className = "SHT31";
     load_configuration();
     pAdafruitSHT31 = new Adafruit_SHT31();
     if (!pAdafruitSHT31->begin(addr)) {
@@ -19,7 +18,6 @@ SHT31::SHT31(uint8_t addr, String config_path) :
 // SHT31value reads and outputs the specified type of value of a SHT31 sensor
 SHT31value::SHT31value(SHT31* pSHT31, SHT31ValType val_type, uint read_delay, String config_path) :
                    NumericSensor(config_path), pSHT31{pSHT31}, val_type{val_type}, read_delay{read_delay} {
-      className = "SHT31value";
       load_configuration();
 }
 

@@ -4,7 +4,6 @@
 
 Difference::Difference(float k1, float k2, String config_path)
     : NumericTransform(config_path), k1{k1}, k2{k2} {
-  className = "Difference";
   load_configuration();
 }
 

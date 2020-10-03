@@ -57,7 +57,6 @@ class Transform : public TransformBase,
          TransformBase(config_path), 
          ValueConsumer<C>(), 
          ValueProducer<P>() {
-           className = "Transform";
       }
 
 
@@ -105,9 +104,7 @@ class SymmetricTransform : public Transform<T, T> {
 
   public:
      SymmetricTransform(String config_path="") :
-      Transform<T, T>(config_path) {
-        Enable::className = "SymmetricTransform";
-  }
+      Transform<T, T>(config_path) {}
 
 };
 

@@ -16,7 +16,6 @@ class ThresholdTransform : public Transform<C, P> {
   ThresholdTransform(C minValue, C maxValue, P inRange, P outRange,
            String config_path="") : Transform<C, P>(config_path), minValue{minValue},
            maxValue{maxValue}, inRange{inRange}, outRange{outRange}  {
-    Enable::className = "ThresholdTransform";
     this->load_configuration();
 };
   virtual void set_input(C newValue, uint8_t inputChannel = 0) override;

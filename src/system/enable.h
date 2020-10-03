@@ -23,13 +23,6 @@ class Enable {
          */
         virtual void enable() {}
 
-
-        void setClassName(const char* newClassName) { className = newClassName; }
-        
-        
-        virtual const char* getClassName() { return className; };
-
-
         const uint8_t getEnablePriority() { return priority; }
 
 
@@ -50,10 +43,6 @@ class Enable {
 
         friend bool operator<(const Enable& lhs, const Enable& rhs) { return lhs.priority < rhs.priority; }
 
-    
-    protected:
-        const char* className = "Enable";
-    
     
     private:
         uint8_t priority;

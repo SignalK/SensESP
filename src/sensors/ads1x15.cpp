@@ -6,7 +6,6 @@ template <class T_Ada_1x15>
 ADS1x15<T_Ada_1x15>::ADS1x15(
     uint8_t addr, adsGain_t gain, String config_path)
     : Sensor(config_path) {
-  className = "ADS1x15";
   ads = new T_Ada_1x15(addr);
   ads->begin();
   ads->setGain(gain);
@@ -22,7 +21,6 @@ ADS1x15value<T_ads_1x15>::ADS1x15value(
       T_ads_1x15* ads1x15, uint8_t channel, uint read_delay, String config_path)
      : NumericSensor(config_path), ads1x15{ads1x15}, channel{channel}, read_delay{read_delay} {
 
-  className = "ADS1x15value";
   load_configuration();     
 }
 

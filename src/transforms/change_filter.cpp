@@ -14,7 +14,6 @@ ChangeFilter::ChangeFilter(float minDelta, float maxDelta, int maxSkips,
       minDelta{minDelta},
       maxDelta{maxDelta},
       maxSkips{maxSkips} {
-  className = "ChangeFilter";
   load_configuration();
   skips = maxSkips + 1;
 }

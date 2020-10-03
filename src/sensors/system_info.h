@@ -5,7 +5,7 @@
 
 class SystemHz : public NumericSensor {
  public:
-  SystemHz() { className = "SystemHz"; }
+  SystemHz() {}
   void enable() override final;
   String get_value_name() { return "systemhz"; }
 
@@ -19,7 +19,7 @@ class SystemHz : public NumericSensor {
 
 class FreeMem : public Sensor, public ValueProducer<uint32_t> {
  public:
-  FreeMem() { className = "FreeMem"; }
+  FreeMem() {}
   void enable() override final;
   String get_value_name() { return "freemem"; }
 
@@ -29,7 +29,7 @@ class FreeMem : public Sensor, public ValueProducer<uint32_t> {
 
 class Uptime : public NumericSensor {
  public:
-  Uptime() { className = "Uptime"; }
+  Uptime() {}
   void enable() override final;
   String get_value_name() { return "uptime"; }
 
@@ -39,7 +39,7 @@ class Uptime : public NumericSensor {
 
 class IPAddrDev : public StringSensor {
  public:
-  IPAddrDev() { className = "IPAddrDev"; }
+  IPAddrDev() {}
   void enable() override final;
   String get_value_name() { return "ipaddr"; }
 
@@ -49,7 +49,7 @@ class IPAddrDev : public StringSensor {
 
 class WifiSignal : public NumericSensor {
  public:
-  WifiSignal() { className = "WifiSignal"; }
+  WifiSignal() {}
   void enable() override final;
   String get_value_name() { return "wifisignal"; }
 

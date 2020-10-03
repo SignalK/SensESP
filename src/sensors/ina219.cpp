@@ -9,7 +9,6 @@
 INA219::INA219(uint8_t addr, INA219CAL_t calibration_setting,
                String config_path)
     : Sensor(config_path) {
-  className = "INA219";
   load_configuration();
   pAdafruitINA219 = new Adafruit_INA219(addr);
   pAdafruitINA219->begin();
@@ -30,7 +29,6 @@ INA219value::INA219value(INA219* pINA219, INA219ValType val_type,
       pINA219{pINA219},
       val_type{val_type},
       read_delay{read_delay} {
-  className = "INA219value";
   load_configuration();
 }
 
