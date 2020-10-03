@@ -15,7 +15,7 @@
 class SHT31 : public Sensor {
   public:
     SHT31(uint8_t addr = 0x44, String config_path = "");
-    Adafruit_SHT31* pAdafruitSHT31;
+    Adafruit_SHT31* adafruit_sht31;
 
   private:
     uint8_t addr;
@@ -25,12 +25,12 @@ class SHT31 : public Sensor {
 // Pass one of these in the constructor to SHT31value() to tell which type of value you want to output
 enum SHT31ValType { temperature, humidity };
 
-// SHT31value reads and outputs the specified value of a SHT31 sensor.
-class SHT31value : public NumericSensor {
+// SHT31Value reads and outputs the specified value of a SHT31 sensor.
+class SHT31Value : public NumericSensor {
   public:
-    SHT31value(SHT31* pSHT31, SHT31ValType val_type, uint read_delay = 500, String config_path="");
+    SHT31Value(SHT31* sht31, SHT31ValType val_type, uint read_delay = 500, String config_path="");
     void enable() override final;
-    SHT31* pSHT31;
+    SHT31* sht31;
 
   private:
     
@@ -41,5 +41,8 @@ class SHT31value : public NumericSensor {
     virtual String get_config_schema() override;
 
 };
+
+[[deprecated("Use SHT31Value instead.")]]
+typedef SHT31Value SHT31value;
 
 #endif
