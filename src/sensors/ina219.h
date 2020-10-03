@@ -19,7 +19,7 @@ enum INA219CAL_t { cal32_2, cal32_1, cal16_400 };
 class INA219 : public Sensor {
   public:
     INA219(uint8_t addr = 0x40, INA219CAL_t calibration_setting = cal32_2, String config_path = "");
-    Adafruit_INA219* pAdafruitINA219;
+    Adafruit_INA219* ina219;
 
 };
 
@@ -27,12 +27,12 @@ class INA219 : public Sensor {
 // Pass one of these in the constructor to INA219value() to tell which type of value you want to output
 enum INA219ValType { bus_voltage, shunt_voltage, current, power, load_voltage };
 
-// INA219value reads and outputs the specified value of a INA219 sensor.
-class INA219value : public NumericSensor {
+// INA219Value reads and outputs the specified value of a INA219 sensor.
+class INA219Value : public NumericSensor {
   public:
-    INA219value(INA219* pINA219, INA219ValType val_type, uint read_delay = 500, String config_path="");
+    INA219Value(INA219* pINA219, INA219ValType val_type, uint read_delay = 500, String config_path="");
     void enable() override final;
-    INA219* pINA219;
+    INA219* ina219;
 
   private:
     
@@ -43,5 +43,8 @@ class INA219value : public NumericSensor {
     virtual String get_config_schema() override;
 
 };
+
+[[deprecated("Use INA219Value instead.")]]
+typedef INA219Value INA219value;
 
 #endif
