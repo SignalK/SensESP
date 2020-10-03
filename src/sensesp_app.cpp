@@ -141,7 +141,7 @@ void SensESPApp::enable() {
   });
 
   debugI("Subsystem: setup_OTA()");
-  setup_OTA();
+  setup_ota();
 
   debugI("Subsystem: http_server()");
   this->http_server->enable();
