@@ -31,7 +31,7 @@ class SKEmitter : virtual public Observable {
          * Returns the data to be reported to the server as
          * a SignalK json string.
          */
-        virtual String as_signalK() { return "not implemented"; }
+        virtual String as_signalk() { return "not implemented"; }
 
 
         /**

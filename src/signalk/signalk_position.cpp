@@ -2,7 +2,7 @@
 #include "signalk_position.h"
 
 template<>
-String SKOutput<Position>::as_signalK() {
+String SKOutput<Position>::as_signalk() {
     DynamicJsonDocument jsonDoc(1024);
     String json;
     JsonObject root = jsonDoc.as<JsonObject>();

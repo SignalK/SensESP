@@ -31,7 +31,7 @@ class SKOutput : public SKEmitter,
   }
 
 
-  virtual String as_signalK() override {
+  virtual String as_signalk() override {
     DynamicJsonDocument jsonDoc(1024);
     String json;
     jsonDoc["path"] = this->get_sk_path();

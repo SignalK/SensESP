@@ -6,7 +6,7 @@ SKOutputTime::SKOutputTime(String sk_path, String config_path)
   load_configuration();
 }
 
-String SKOutputTime::as_signalK() {
+String SKOutputTime::as_signalk() {
   DynamicJsonDocument jsonDoc(1024);
   String json;
   JsonObject root = jsonDoc.as<JsonObject>();

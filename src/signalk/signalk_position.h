@@ -14,7 +14,7 @@
 // provide correct output formatting for GNSS position
 
 template<>
-String SKOutput<Position>::as_signalK();
+String SKOutput<Position>::as_signalk();
 
 typedef SKOutput<Position> SKOutputPosition;
 
