@@ -9,9 +9,9 @@ class DigitalOutput : public BooleanConsumer
 {
     public: 
         DigitalOutput(int pin);
-        void set_input(bool newValue, uint8_t inputChannel = 0) override;
+        void set_input(bool new_value, uint8_t input_channel = 0) override;
     private:
-        int pinNumber;
+        int pin_number;
 };
 
 #endif
