@@ -20,4 +20,4 @@ The Max31856 thermocouple amplifier will not work with a grounded thermocouple t
 
 ## Software
 
-The Thermocouple engine temperature sensor is implemented in software with two files src/sensors/thermocouple_temperature_sensor/max31856TC_input.h and max31856_input.cpp.
+The Thermocouple engine temperature sensor is implemented in software with two files src/sensors/thermocouple_temperature_sensor/max31856_thermocouple.h and max31856_thermocouple.cpp.
