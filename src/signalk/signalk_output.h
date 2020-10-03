@@ -25,18 +25,18 @@ class SKOutput : public SKEmitter,
   }
 
 
-  virtual void set_input(T newValue, uint8_t inputChannel = 0) override {
-    ValueProducer<T>::output = newValue;
+  virtual void set_input(T new_value, uint8_t input_channel = 0) override {
+    ValueProducer<T>::output = new_value;
     this->notify();
   }
 
 
   virtual String as_signalk() override {
-    DynamicJsonDocument jsonDoc(1024);
+    DynamicJsonDocument json_doc(1024);
     String json;
-    jsonDoc["path"] = this->get_sk_path();
-    jsonDoc["value"] = ValueProducer<T>::output;
-    serializeJson(jsonDoc, json);
+    json_doc["path"] = this->get_sk_path();
+    json_doc["value"] = ValueProducer<T>::output;
+    serializeJson(json_doc, json);
     return json;
   }
 
