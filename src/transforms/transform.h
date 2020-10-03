@@ -75,18 +75,18 @@ class Transform : public TransformBase,
                                ValueProducer<P>* pProducer3 = NULL,
                                ValueProducer<P>* pProducer4 = NULL) {
 
-      this->ValueConsumer<C>::connectFrom(pProducer0);
+      this->ValueConsumer<C>::connect_from(pProducer0);
       if (pProducer1 != NULL) {
-        this->ValueConsumer<C>::connectFrom(pProducer1, 1);
+        this->ValueConsumer<C>::connect_from(pProducer1, 1);
       }
       if (pProducer2 != NULL) {
-        this->ValueConsumer<C>::connectFrom(pProducer2, 2);
+        this->ValueConsumer<C>::connect_from(pProducer2, 2);
       }
       if (pProducer3 != NULL) {
-        this->ValueConsumer<C>::connectFrom(pProducer3, 3);
+        this->ValueConsumer<C>::connect_from(pProducer3, 3);
       }
       if (pProducer4 != NULL) {
-        this->ValueConsumer<C>::connectFrom(pProducer4, 4);
+        this->ValueConsumer<C>::connect_from(pProducer4, 4);
       }
       return this;
   }
