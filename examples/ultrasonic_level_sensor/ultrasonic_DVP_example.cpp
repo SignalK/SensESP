@@ -3,7 +3,7 @@
 #include "sensesp_app.h"
 #include "transforms/linear.h"
 #include "signalk/signalk_output.h"
-#include "sensors/ultrasonic_input.h"
+#include "sensors/ultrasonic_distance.h"
 #include "transforms/moving_average.h"
 
 #define TRIGGER_PIN 15
