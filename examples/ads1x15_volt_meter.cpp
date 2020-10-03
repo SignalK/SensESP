@@ -32,12 +32,12 @@ ReactESP app([]() {
   adsGain_t gain = GAIN_TWOTHIRDS;
   ADS1115* ads1115 = new ADS1115(0x48, gain);
 
-  // Create an instance of ADS1115value to read a specific channel of the ADC,
+  // Create an instance of ADS1115Value to read a specific channel of the ADC,
   // the channel on the physical chip that the input is connected to.
   uint8_t channel_12V = 0;
   uint read_delay_12V = 500;
 
-  auto* alt_12v_voltage = new ADS1115value(ads1115, channel_12V, read_delay_12V,
+  auto* alt_12v_voltage = new ADS1115Value(ads1115, channel_12V, read_delay_12V,
                                            "/12V_Alt/ADC read delay");
 
   // The output from the ADS1115 needs to be sent through some transforms to get
@@ -59,12 +59,12 @@ ReactESP app([]() {
       ->connect_to(new SKOutputNumber("electrical.alternators.12V.voltage",
                                      "/12V_Alt/skPath"));
 
-  // Create a second instance of ADS1115value to read from the same physical
+  // Create a second instance of ADS1115Value to read from the same physical
   // ADS1115, but from channel 1 instead of 0.
   uint8_t channel_24V = 1;
   uint read_delay_24V = 500;
 
-  auto* alt_24v_voltage = new ADS1115value(ads1115, channel_24V, read_delay_24V,
+  auto* alt_24v_voltage = new ADS1115Value(ads1115, channel_24V, read_delay_24V,
                                            "/24V_Alt/ADC read delay");
 
   alt_24v_voltage->connect_to(new ADS1x15Voltage(chip, gain))

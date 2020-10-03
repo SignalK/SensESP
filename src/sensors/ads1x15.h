@@ -21,15 +21,15 @@ typedef ADS1x15<Adafruit_ADS1015> ADS1015;
 typedef ADS1x15<Adafruit_ADS1115> ADS1115;
 
 
-// ADS1015value is used to read the value of an ADS1x15 (either ADS1015 or ADS1115). If you want to read a single channel,
+// ADS1015Value is used to read the value of an ADS1x15 (either ADS1015 or ADS1115). If you want to read a single channel,
 // make your channel parameter be 0, 1 2 or 3 and readADC_SingleEnded() will be used. If you want
 // to read the difference between two channels, your channel parameter should be:
 // - 10 will use readADC_Differential_0_1()
 // - 23 will use readADC_Differential_2_3()
 template <class T_ads_1x15>
-class ADS1x15value : public NumericSensor {
+class ADS1x15Value : public NumericSensor {
   public:
-    ADS1x15value(T_ads_1x15* ads1x15, uint8_t channel = 0, uint read_delay = 200, String config_path="");
+    ADS1x15Value(T_ads_1x15* ads1x15, uint8_t channel = 0, uint read_delay = 200, String config_path="");
     void enable() override final;
 
   private:
@@ -42,8 +42,13 @@ class ADS1x15value : public NumericSensor {
 
 };
 
-typedef ADS1x15value<ADS1015> ADS1015value;
-typedef ADS1x15value<ADS1115> ADS1115value;
+typedef ADS1x15Value<ADS1015> ADS1015Value;
+typedef ADS1x15Value<ADS1115> ADS1115Value;
+
+[[deprecated("Use ADS1015Value instead.")]]
+typedef ADS1015Value ADS1015value;
+[[deprecated("Use ADS1115Value instead.")]]
+typedef ADS1115Value ADS1115value;
 
 
 #endif
