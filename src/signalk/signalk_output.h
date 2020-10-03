@@ -21,7 +21,7 @@ class SKOutput : public SKEmitter,
 
   SKOutput(String sk_path, String config_path="")
     : SKEmitter(sk_path), SymmetricTransform<T>(config_path) {
-    Enable::setPriority(-5);
+    Enable::set_priority(-5);
   }
 
 

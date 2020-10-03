@@ -158,7 +158,7 @@ void SensESPApp::enable() {
   app.onRepeat(1, []() { Debug.handle(); });
 #endif
 
-  Enable::enableAll();
+  Enable::enable_all();
   debugI("All sensors and transforms enabled");
 }
 

@@ -23,10 +23,10 @@ class Enable {
          */
         virtual void enable() {}
 
-        const uint8_t getEnablePriority() { return priority; }
+        const uint8_t get_enable_priority() { return priority; }
 
 
-        void setPriority(uint8_t priority) { this-> priority = priority; }
+        void set_priority(uint8_t priority) { this-> priority = priority; }
 
 
         /**
@@ -38,8 +38,10 @@ class Enable {
          * 
          * build_unflags = -fno-rtti
          */
-        static void enableAll();
-    
+        static void enable_all();
+
+        [[deprecated("Use enable_all() instead.")]]
+        static void enableAll() { enable_all(); };
 
         friend bool operator<(const Enable& lhs, const Enable& rhs) { return lhs.priority < rhs.priority; }
 
