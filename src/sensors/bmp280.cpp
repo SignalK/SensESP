@@ -9,8 +9,8 @@
 BMP280::BMP280(uint8_t addr, String config_path)
     : Sensor(config_path), addr{addr} {
   load_configuration();
-  bmp280 = new Adafruit_BMP280();
-  if (!bmp280->begin(addr)) {
+  adafruit_bmp280 = new Adafruit_BMP280();
+  if (!adafruit_bmp280->begin(addr)) {
     debugE("Could not find a valid BMP280 sensor: check address and wiring");
   }
 }
@@ -30,10 +30,10 @@ BMP280Value::BMP280Value(BMP280* bmp280, BMP280ValType val_type,
 void BMP280Value::enable() {
   app.onRepeat(read_delay, [this]() {
     if (val_type == temperature) {
-      output = bmp280->bmp280->readTemperature() +
+      output = bmp280->adafruit_bmp280->readTemperature() +
                273.15;  // Kelvin is Celsius + 273.15
     } else if (val_type == pressure) {
-      output = bmp280->bmp280->readPressure();
+      output = bmp280->adafruit_bmp280->readPressure();
     } else
       output = 0.0;
 
