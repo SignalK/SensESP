@@ -4,6 +4,8 @@
 #include "transforms/transform.h"
 #include <Adafruit_ADS1015.h>
 
+// FIXME: This shouldn't be a separate transform but integrated with ads1x15 sensors.
+
 // Pass one of these in the constructor to ADS1x15Voltage() to tell which of the two chips you're working with.
 enum ADS1x15CHIP_t { ADS1015chip, ADS1115chip };
 
@@ -31,7 +33,7 @@ class ADS1x15Voltage : public NumericTransform {
     public:
         ADS1x15Voltage(ADS1x15CHIP_t chip = ADS1115chip, adsGain_t gain = GAIN_TWOTHIRDS);
 
-        virtual void set_input(float input, uint8_t inputChannel = 0) override;
+        virtual void set_input(float input, uint8_t input_channel = 0) override;
 
     protected:
         ADS1x15CHIP_t chip;
