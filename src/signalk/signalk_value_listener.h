@@ -19,7 +19,7 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
        }
   }
 
-  void parseValue(JsonObject& json) override
+  void parse_value(JsonObject& json) override
   {
        this->output = (T)json["value"];
        notify();
