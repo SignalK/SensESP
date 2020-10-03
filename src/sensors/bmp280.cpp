@@ -9,17 +9,17 @@
 BMP280::BMP280(uint8_t addr, String config_path)
     : Sensor(config_path), addr{addr} {
   load_configuration();
-  pAdafruitBMP280 = new Adafruit_BMP280();
-  if (!pAdafruitBMP280->begin(addr)) {
+  bmp280 = new Adafruit_BMP280();
+  if (!bmp280->begin(addr)) {
     debugE("Could not find a valid BMP280 sensor: check address and wiring");
   }
 }
 
-// BMP280value reads and outputs the specified type of value of a BMP280 sensor
-BMP280value::BMP280value(BMP280* pBMP280, BMP280ValType val_type,
+// BMP280Value reads and outputs the specified type of value of a BMP280 sensor
+BMP280Value::BMP280Value(BMP280* bmp280, BMP280ValType val_type,
                          uint read_delay, String config_path)
     : NumericSensor(config_path),
-      pBMP280{pBMP280},
+      bmp280{bmp280},
       val_type{val_type},
       read_delay{read_delay} {
   load_configuration();
@@ -27,13 +27,13 @@ BMP280value::BMP280value(BMP280* pBMP280, BMP280ValType val_type,
 
 // BMP280 outputs temp in Celsius. Need to convert to Kelvin before sending to
 // Signal K. Pressure is output in Pascals.
-void BMP280value::enable() {
+void BMP280Value::enable() {
   app.onRepeat(read_delay, [this]() {
     if (val_type == temperature) {
-      output = pBMP280->pAdafruitBMP280->readTemperature() +
+      output = bmp280->bmp280->readTemperature() +
                273.15;  // Kelvin is Celsius + 273.15
     } else if (val_type == pressure) {
-      output = pBMP280->pAdafruitBMP280->readPressure();
+      output = bmp280->bmp280->readPressure();
     } else
       output = 0.0;
 
@@ -41,7 +41,7 @@ void BMP280value::enable() {
   });
 }
 
-void BMP280value::get_configuration(JsonObject& root) {
+void BMP280Value::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
 };
@@ -54,9 +54,9 @@ static const char SCHEMA[] PROGMEM = R"###({
     }
   })###";
 
-String BMP280value::get_config_schema() { return FPSTR(SCHEMA); }
+String BMP280Value::get_config_schema() { return FPSTR(SCHEMA); }
 
-bool BMP280value::set_configuration(const JsonObject& config) {
+bool BMP280Value::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
