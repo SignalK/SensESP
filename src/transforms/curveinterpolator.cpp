@@ -119,11 +119,11 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
 
 }
 
-void CurveInterpolator::clearSamples() {
+void CurveInterpolator::clear_samples() {
    samples.clear();
 }
 
-void CurveInterpolator::addSample(const Sample& sample) {
+void CurveInterpolator::add_sample(const Sample& sample) {
    Sample* pSampleCopy = new Sample(sample);
    samples.insert(*pSampleCopy);
 }
