@@ -33,10 +33,10 @@ ReactESP app([] () {
   SensESPAppBuilder builder;
 
   sensesp_app = builder.set_hostname("test_unit")
-                ->set_wifi("MysticBlue", "passwors1234")
+                ->set_wifi("your_ssid", "your_password")
                 //->set_standard_sensors(IP_ADDRESS)
                 ->set_standard_sensors(NONE)
-                ->set_sk_server("192.168.1.141", 3000) 
+                ->set_sk_server("xxx.xxx.xxx.xxxx", 3000) 
                 ->get_app();
   
 // In the test setup the input voltage was 0.651 in which case all of the options below all 
