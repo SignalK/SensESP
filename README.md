@@ -61,6 +61,8 @@ ESP32 ONLY: in the Serial Monitor, until you authorize the security request, you
 ```
 Once you approve the security request, the ESP will do this a few more times, and then it will see the authorization, and will then continue on, and finally start sending data to the Signal K Server. (There is an Issue to try to handle this condition more gracefully, but approving the security request on the server solves it, and it happens only once, so for now, that's what we've got.)
 
+Some additional instructions are available on the [SensESP wiki](https://github.com/SignalK/SensESP/wiki/). 
+
 ## Low-level "wiring"
 
 This refers to how you actually use the SensESP library to "wire" (in software) a sensor to send its output to the Signal K Server. Rather than explain it here, just look at the examples - most of them have a lot of comments that describe how this works. Showing is better than telling in this case.
@@ -75,6 +77,14 @@ You can find the IP address of your device in the Serial Monitor, right after th
 
 
 Everything that is configurable on a "live" device will be in the menu that appears. As you'll see in the examples, this includes things like how often you want to read the sensor (usually represented as "read_delay"), how many samples you want in the MovingAverage() transform, what multiplier and offset you want in the Linear() transform, etc., etc. You can also rename the device from that menu, and restart the device, and even reset the device to factory settings (which erases the wifi credentials and the device name).
+
+## Getting help
+
+Discussion about SensESP happens mostly in [Signalk-dev Slack](http://slack-invite.signalk.org/) on the #sensors channel. Don't hesitate to join and ask if you ever have problems with getting your project working!
+
+## Contributing
+
+Some guidelines about contributing to SensESP are given on the [SensESP wiki](https://github.com/SignalK/SensESP/wiki/Contributing-to-the-SensESP-Project). In particular, you should follow the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) and try to keep the Git commits clean. The project maintainers are active on the [Signalk-dev Slack](http://slack-invite.signalk.org/) #sensors channel. It's recommended to provide a heads-up about your plans there first!
 
 ## SensESP Class Diagram
 ----------------------------
