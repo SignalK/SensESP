@@ -1,15 +1,13 @@
 #include "transform.h"
 
 #include "ArduinoJson.h"
-
 #include "sensesp.h"
 
 // Transform
 
 std::set<TransformBase*> TransformBase::transforms;
 
-TransformBase::TransformBase(String config_path) :
-    Configurable{config_path}, Enable(5) {
+TransformBase::TransformBase(String config_path)
+    : Configurable{config_path}, Enable(5) {
   transforms.insert(this);
 }
-

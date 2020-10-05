@@ -45,7 +45,7 @@ class WSClient : public Configurable {
   String polling_href = "";
   String auth_token = NULL_AUTH_TOKEN;
   bool server_detected = false;
-  
+
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
   WebSocketsClient client;

@@ -43,12 +43,12 @@ void INA219Value::enable() {
                   1000);  // SK wants volts, not mV
         break;
       case current:
-        output = (ina219->ina219->getCurrent_mA() /
-                  1000);  // SK wants amps, not mA
+        output =
+            (ina219->ina219->getCurrent_mA() / 1000);  // SK wants amps, not mA
         break;
       case power:
-        output = (ina219->ina219->getPower_mW() /
-                  1000);  // SK want watts, not mW
+        output =
+            (ina219->ina219->getPower_mW() / 1000);  // SK want watts, not mW
         break;
       case load_voltage:
         output = (ina219->ina219->getBusVoltage_V() +

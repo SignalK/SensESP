@@ -6,7 +6,6 @@
 
 GPSInput::GPSInput(Stream* rx_stream, String config_path)
     : Sensor(config_path) {
-
   this->rx_stream = rx_stream;
 
   nmea_parser.add_sentence_parser(new GPGGASentenceParser(&nmea_data));
@@ -21,7 +20,7 @@ GPSInput::GPSInput(Stream* rx_stream, String config_path)
 
 void GPSInput::enable() {
   // enable reading the serial port
-  app.onAvailable(*rx_stream, [this](){
+  app.onAvailable(*rx_stream, [this]() {
     while (this->rx_stream->available()) {
       nmea_parser.handle(this->rx_stream->read());
     }
@@ -36,4 +35,3 @@ void GPSInput::enable() {
   //});
   //#endif
 }
-

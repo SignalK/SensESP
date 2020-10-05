@@ -1,10 +1,8 @@
 
 #include "timestring.h"
 
-
-TimeString::TimeString(String config_path) :
-    Transform<time_t, String>(config_path) {
-}
+TimeString::TimeString(String config_path)
+    : Transform<time_t, String>(config_path) {}
 
 void TimeString::set_input(time_t input, uint8_t inputChannel) {
   char buf[sizeof "2011-10-08T07:07:09Z"];

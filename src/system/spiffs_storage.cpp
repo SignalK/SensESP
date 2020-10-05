@@ -1,13 +1,12 @@
-#include "sensesp.h"
-
 #include "spiffs_storage.h"
+
+#include "sensesp.h"
 
 #ifdef ESP8266
 #include "FS.h"
 #elif defined(ESP32)
 #include "SPIFFS.h"
 #endif
-
 
 void setup_spiffs_storage() {
   bool result = SPIFFS.begin();

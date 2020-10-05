@@ -3,13 +3,11 @@
 
 #include "transform.h"
 
-
 // Frequency transform divides its input value by the time elapsed since
 // the last reading
 class Frequency : public Transform<int, float> {
-  
  public:
-  Frequency(float k=1, String config_path="");
+  Frequency(float k = 1, String config_path = "");
   virtual void set_input(int input, uint8_t inputChannel = 0) override;
   virtual void enable() override;
   virtual void get_configuration(JsonObject& doc) override;

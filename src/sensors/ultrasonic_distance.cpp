@@ -4,7 +4,7 @@
 #include "sensesp.h"
 
 UltrasonicDistance::UltrasonicDistance(int8_t trig_pin, int8_t input_pin,
-                               uint read_delay, String config_path)
+                                       uint read_delay, String config_path)
     : NumericSensor(config_path),
       trigger_pin{trig_pin},
       input_pin{input_pin},
