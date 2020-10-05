@@ -40,8 +40,7 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
 }
 
 WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
-                   uint16_t server_port,
-                   std::function<void(bool)> connected_cb,
+                   uint16_t server_port, std::function<void(bool)> connected_cb,
                    void_cb_func delta_cb)
     : Configurable{config_path} {
   this->sk_delta = sk_delta;
@@ -136,7 +135,7 @@ void WSClient::on_receive_delta(uint8_t* payload) {
 #endif
 
   DynamicJsonDocument message(1024);
-  //JsonObject message = jsonDoc.as<JsonObject>();
+  // JsonObject message = jsonDoc.as<JsonObject>();
   auto error = deserializeJson(message, payload);
 
   if (!error) {
@@ -163,8 +162,7 @@ void WSClient::on_receive_delta(uint8_t* payload) {
         }
       }
     }
-  }
-  else {
+  } else {
     debugE("deserializeJson error: %s", error.c_str());
   }
 }
@@ -342,8 +340,8 @@ void WSClient::poll_access_request(const String server_address,
     DynamicJsonDocument doc(1024);
     auto error = deserializeJson(doc, payload.c_str());
     if (error) {
-      debugW("WARNING: Could not deserialize http.");    
-      return; //TODO: return at this point, or keep going?
+      debugW("WARNING: Could not deserialize http.");
+      return;  // TODO: return at this point, or keep going?
     }
     String state = doc["state"];
     debugD("%s", state.c_str());
@@ -354,7 +352,10 @@ void WSClient::poll_access_request(const String server_address,
       return;
     } else if (state == "COMPLETED") {
       JsonObject access_req = doc["accessRequest"];
-      String permission = access_req["permission"];  // TODO: like this in ArdJson 6? String permission = resp["accessRequest"]["permission"];
+      String permission =
+          access_req["permission"];  // TODO: like this in ArdJson 6? String
+                                     // permission =
+                                     // resp["accessRequest"]["permission"];
       polling_href = "";
       save_configuration();
 
@@ -402,7 +403,8 @@ void WSClient::connect_ws(const String host, const uint16_t port) {
 }
 
 void WSClient::loop() {
-  if (this->connection_state == connecting || this->connection_state == connected) {
+  if (this->connection_state == connecting ||
+      this->connection_state == connected) {
     this->client.loop();
   }
 }

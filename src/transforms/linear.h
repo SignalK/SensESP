@@ -6,9 +6,9 @@
 // Perform a linear transform on the input value. The transform
 // is of the form \f$y = k * x + c\f$, where k is the input
 // coefficient and c is a bias value.
-class Linear : public NumericTransform  {
+class Linear : public NumericTransform {
  public:
-  Linear(float k, float c, String config_path="");
+  Linear(float k, float c, String config_path = "");
   virtual void set_input(float input, uint8_t inputChannel = 0) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;

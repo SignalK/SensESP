@@ -13,9 +13,7 @@ class ObservableValue : public ValueProducer<T> {
  public:
   ObservableValue() {}
 
-  ObservableValue(const T& value) {
-      ValueProducer<T>::output = value;
-  }
+  ObservableValue(const T& value) { ValueProducer<T>::output = value; }
 
   void set(const T& value) {
     ValueProducer<T>::output = value;
@@ -23,11 +21,9 @@ class ObservableValue : public ValueProducer<T> {
   }
 
   const T& operator=(const T& value) {
-      set(value);
-      return value;
+    set(value);
+    return value;
   }
-  
 };
-
 
 #endif

@@ -6,7 +6,7 @@
 // y = k1 * x1 - k2 * x2
 class Difference : public NumericTransform {
  public:
-  Difference(float k1, float k2, String config_path="");
+  Difference(float k1, float k2, String config_path = "");
   virtual void set_input(float input, uint8_t inputChannel) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;

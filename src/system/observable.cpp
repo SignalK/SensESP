@@ -1,7 +1,7 @@
 #include "observable.h"
 
 void Observable::notify() {
-  for (auto o: observers) {
+  for (auto o : observers) {
     o();
   }
 }

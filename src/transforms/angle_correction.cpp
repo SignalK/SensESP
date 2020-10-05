@@ -1,11 +1,12 @@
 #include "angle_correction.h"
 
-AngleCorrection::AngleCorrection(float offset, float min_angle, String config_path) :
-    NumericTransform(config_path),
-      offset{ offset }, min_angle{ min_angle } {
+#define M_PI 3.14159265358979323846
+
+AngleCorrection::AngleCorrection(float offset, float min_angle,
+                                 String config_path)
+    : NumericTransform(config_path), offset{offset}, min_angle{min_angle} {
   load_configuration();
 }
-
 
 void AngleCorrection::set_input(float input, uint8_t inputChannel) {
   // first the correction
@@ -13,13 +14,13 @@ void AngleCorrection::set_input(float input, uint8_t inputChannel) {
 
   // then wrap around the values
   x = fmod(x - min_angle, 2 * M_PI);
-  if (x < 0)
-      x += 2 * M_PI;
+  if (x < 0) {
+    x += 2 * M_PI;
+  }
   output = x + min_angle;
 
   notify();
 }
-
 
 void AngleCorrection::get_configuration(JsonObject& root) {
   root["offset"] = offset;
@@ -36,12 +37,10 @@ static const char SCHEMA[] PROGMEM = R"###({
     }
   })###";
 
-String AngleCorrection::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
+String AngleCorrection::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool AngleCorrection::set_configuration(const JsonObject& config) {
-  String expected[] = { "offset", "min_angle" };
+  String expected[] = {"offset", "min_angle"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

@@ -6,20 +6,19 @@
 class DigitalInput : public Sensor {
  public:
   DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
-               String config_path="");
+               String config_path = "");
 
  protected:
   uint8_t pin;
   int interrupt_type;
 };
 
-
 // DigitalInputValue is meant to report directly the state of
 // a slowly changing signal
 class DigitalInputValue : public DigitalInput, public IntegerProducer {
  public:
-  DigitalInputValue(uint8_t pin, int pin_mode, int interrupt_type, int read_delay = 1000,
-                    String config_path="");
+  DigitalInputValue(uint8_t pin, int pin_mode, int interrupt_type,
+                    int read_delay = 1000, String config_path = "");
 
   virtual void enable() override final;
 
@@ -35,8 +34,7 @@ class DigitalInputValue : public DigitalInput, public IntegerProducer {
 class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  public:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
-                      uint read_delay,
-                      String config_path="");
+                      uint read_delay, String config_path = "");
 
   void enable() override final;
 

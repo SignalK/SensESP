@@ -1,18 +1,17 @@
 #ifndef _transform_H_
 #define _transform_H_
 
+#include <ArduinoJson.h>
+
 #include <set>
 
 #include "Arduino.h"
-#include <ArduinoJson.h>
-
+#include "sensesp.h"
 #include "system/configurable.h"
+#include "system/enable.h"
 #include "system/observable.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
-#include "system/enable.h"
-#include "sensesp.h"
-
 
 // TODO: Split into multiple files
 
@@ -25,23 +24,18 @@
  * have an optional persistence configuration by specifying an "id" to
  * save the configuration data in.
  */
-class TransformBase : public Configurable,
-                      public Enable {
+class TransformBase : public Configurable, public Enable {
  public:
-    TransformBase(String config_path="");
-
+  TransformBase(String config_path = "");
 
   // Primary purpose of this was to supply SignalK sources
   // (now handled by SKEmitter::get_sources). Should
   // this be deprecated?
-  static const std::set<TransformBase*>& get_transforms() {
-    return transforms;
-  }
+  static const std::set<TransformBase*>& get_transforms() { return transforms; }
 
-  private:
-    static std::set<TransformBase*> transforms;
+ private:
+  static std::set<TransformBase*> transforms;
 };
-
 
 /**
  * The main Transform class. A transform is identified primarily by the
@@ -49,16 +43,12 @@ class TransformBase : public Configurable,
  * ValueProducer<float> that generates float values)
  */
 template <typename C, typename P>
-class Transform : public TransformBase, 
-                  public ValueConsumer<C>, 
+class Transform : public TransformBase,
+                  public ValueConsumer<C>,
                   public ValueProducer<P> {
-    public:
-      Transform(String config_path="") :
-         TransformBase(config_path), 
-         ValueConsumer<C>(), 
-         ValueProducer<P>() {
-      }
-
+ public:
+  Transform(String config_path = "")
+      : TransformBase(config_path), ValueConsumer<C>(), ValueProducer<P>() {}
 
   /**
    * A convenience method that allows up to five producers to be
@@ -69,31 +59,27 @@ class Transform : public TransformBase,
    * of this transform to then be wired to other transforms via
    * a call to connect_to().
    */
-  Transform<C, P>* connectFrom(ValueProducer<P>* pProducer0,
-                               ValueProducer<P>* pProducer1 = NULL,
-                               ValueProducer<P>* pProducer2 = NULL,
-                               ValueProducer<P>* pProducer3 = NULL,
-                               ValueProducer<P>* pProducer4 = NULL) {
-
-      this->ValueConsumer<C>::connect_from(pProducer0);
-      if (pProducer1 != NULL) {
-        this->ValueConsumer<C>::connect_from(pProducer1, 1);
-      }
-      if (pProducer2 != NULL) {
-        this->ValueConsumer<C>::connect_from(pProducer2, 2);
-      }
-      if (pProducer3 != NULL) {
-        this->ValueConsumer<C>::connect_from(pProducer3, 3);
-      }
-      if (pProducer4 != NULL) {
-        this->ValueConsumer<C>::connect_from(pProducer4, 4);
-      }
-      return this;
+  Transform<C, P>* connectFrom(ValueProducer<P>* producer0,
+                               ValueProducer<P>* producer1 = NULL,
+                               ValueProducer<P>* producer2 = NULL,
+                               ValueProducer<P>* producer3 = NULL,
+                               ValueProducer<P>* producer4 = NULL) {
+    this->ValueConsumer<C>::connect_from(producer0);
+    if (producer1 != NULL) {
+      this->ValueConsumer<C>::connect_from(producer1, 1);
+    }
+    if (producer2 != NULL) {
+      this->ValueConsumer<C>::connect_from(producer2, 2);
+    }
+    if (producer3 != NULL) {
+      this->ValueConsumer<C>::connect_from(producer3, 3);
+    }
+    if (producer4 != NULL) {
+      this->ValueConsumer<C>::connect_from(producer4, 4);
+    }
+    return this;
   }
-
 };
-
-
 
 /**
  * A SymmetricTransform is a common type of transform that consumes, transforms,
@@ -101,11 +87,8 @@ class Transform : public TransformBase,
  */
 template <typename T>
 class SymmetricTransform : public Transform<T, T> {
-
-  public:
-     SymmetricTransform(String config_path="") :
-      Transform<T, T>(config_path) {}
-
+ public:
+  SymmetricTransform(String config_path = "") : Transform<T, T>(config_path) {}
 };
 
 typedef SymmetricTransform<float> NumericTransform;

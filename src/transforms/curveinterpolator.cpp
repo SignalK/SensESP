@@ -2,20 +2,17 @@
 
 #include <RemoteDebug.h>
 
-CurveInterpolator::Sample::Sample() {
-}
+CurveInterpolator::Sample::Sample() {}
 
-CurveInterpolator::Sample::Sample(float input, float output) : input{input}, output{output} {
-}
+CurveInterpolator::Sample::Sample(float input, float output)
+    : input{input}, output{output} {}
 
-CurveInterpolator::Sample::Sample(JsonObject& obj) : input{obj["input"]}, output{obj["output"]} {
+CurveInterpolator::Sample::Sample(JsonObject& obj)
+    : input{obj["input"]}, output{obj["output"]} {}
 
-}
-
-
-CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults, String config_path)
+CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
+                                     String config_path)
     : NumericTransform(config_path) {
-
   // Load default values if no configuration present...
   if (defaults != NULL) {
     samples.clear();
@@ -23,29 +20,25 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults, String config_p
   }
 
   load_configuration();
-
 }
 
-
 void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
-
   float x0 = 0.0;
   float y0 = 0.0;
 
   std::set<Sample>::iterator it = samples.begin();
 
   while (it != samples.end()) {
-     auto& sample = *it;
+    auto& sample = *it;
 
-     if (input > sample.input) {
-        x0 = sample.input;
-        y0 = sample.output;
-     }
-     else {
-       break;
-     }
+    if (input > sample.input) {
+      x0 = sample.input;
+      y0 = sample.output;
+    } else {
+      break;
+    }
 
-     it++;
+    it++;
   }
 
   if (it != samples.end()) {
@@ -56,16 +49,14 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
     float y1 = max.output;
 
     output = (y0 * (x1 - input) + y1 * (input - x0)) / (x1 - x0);
-  }
-  else {
+  } else {
     // Hit the end of the table with no match.
     output = 9999.9;
-//    debugW("Could not find sample interval for input %0f", input);
+    //    debugW("Could not find sample interval for input %0f", input);
   }
 
   notify();
 }
-
 
 void CurveInterpolator::get_configuration(JsonObject& root) {
   JsonArray jSamples = root.createNestedArray("samples");
@@ -91,16 +82,16 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String CurveInterpolator::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
+String CurveInterpolator::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool CurveInterpolator::set_configuration(const JsonObject& config) {
-
-  String expected[] = { "samples" };
+  String expected[] = {"samples"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE("Can not set CurveInterpolator configuration: missing json field %s\n", str.c_str());
+      debugE(
+          "Can not set CurveInterpolator configuration: missing json field "
+          "%s\n",
+          str.c_str());
       return false;
     }
   }
@@ -109,21 +100,18 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
   if (arr.size() > 0) {
     samples.clear();
     for (auto jentry : arr) {
-        auto jObject = jentry.as<JsonObject>();
-        Sample sample(jObject);
-        samples.insert(sample);
+      auto jObject = jentry.as<JsonObject>();
+      Sample sample(jObject);
+      samples.insert(sample);
     }
   }
 
   return true;
-
 }
 
-void CurveInterpolator::clear_samples() {
-   samples.clear();
-}
+void CurveInterpolator::clear_samples() { samples.clear(); }
 
 void CurveInterpolator::add_sample(const Sample& sample) {
-   Sample* pSampleCopy = new Sample(sample);
-   samples.insert(*pSampleCopy);
+  Sample* pSampleCopy = new Sample(sample);
+  samples.insert(*pSampleCopy);
 }

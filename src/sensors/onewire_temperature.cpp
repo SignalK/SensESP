@@ -1,38 +1,34 @@
 #include "onewire_temperature.h"
 
-#include <algorithm>
-
 #include <DallasTemperature.h>
 #include <OneWire.h>
 
-#include "sensor.h"
+#include <algorithm>
+
 #include "sensesp.h"
+#include "sensor.h"
 
 const OWDevAddr null_ow_addr = {0, 0, 0, 0, 0, 0, 0, 0};
 
 void owda_to_string(char* str, const OWDevAddr& addr) {
   // brute force it
-  sprintf(str,
-          "%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x",
-          addr[0], addr[1], addr[2], addr[3],
-          addr[4], addr[5], addr[6], addr[7]);
+  sprintf(str, "%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x", addr[0], addr[1],
+          addr[2], addr[3], addr[4], addr[5], addr[6], addr[7]);
 }
 
 bool string_to_owda(OWDevAddr* addr, const char* str) {
   // brute force it
   uint vals[8];
-  int num_items = sscanf(str,
-                         "%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x",
-                         &vals[0], &vals[1], &vals[2], &vals[3],
-                         &vals[4], &vals[5], &vals[6], &vals[7]);
-  for (int i=0; i<8; i++) {
+  int num_items =
+      sscanf(str, "%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x", &vals[0], &vals[1],
+             &vals[2], &vals[3], &vals[4], &vals[5], &vals[6], &vals[7]);
+  for (int i = 0; i < 8; i++) {
     (*addr)[i] = vals[i];
   }
-  return num_items==8;
+  return num_items == 8;
 }
 
-DallasTemperatureSensors::DallasTemperatureSensors(
-    int pin, String config_path)
+DallasTemperatureSensors::DallasTemperatureSensors(int pin, String config_path)
     : Sensor(config_path) {
   onewire = new OneWire(pin);
   sensors = new DallasTemperature(onewire);
@@ -46,17 +42,17 @@ DallasTemperatureSensors::DallasTemperatureSensors(
   bool check_again = true;
   uint8_t sensor_index = 0;
   while (check_again) {
-    if(sensors->getAddress(addr, sensor_index)) {
+    if (sensors->getAddress(addr, sensor_index)) {
       std::copy(std::begin(addr), std::end(addr), std::begin(owda));
       known_addresses.insert(owda);
-      #ifndef DEBUG_DISABLED
+#ifndef DEBUG_DISABLED
       char addrstr[24];
       owda_to_string(addrstr, owda);
       debugI("Found OneWire sensor %s", addrstr);
-      #endif
+#endif
       sensor_index++;
-    }
-    else check_again = false;
+    } else
+      check_again = false;
   }
 
   // all conversions will by async
@@ -94,18 +90,19 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
   return false;
 }
 
-OneWireTemperature::OneWireTemperature(
-    DallasTemperatureSensors* dts, uint read_delay, String config_path)
-    : NumericSensor(config_path), dts{dts}, read_delay{read_delay}{
+OneWireTemperature::OneWireTemperature(DallasTemperatureSensors* dts,
+                                       uint read_delay, String config_path)
+    : NumericSensor(config_path), dts{dts}, read_delay{read_delay} {
   load_configuration();
-  if (address==null_ow_addr) {
+  if (address == null_ow_addr) {
     // previously unconfigured sensor
     bool success = dts->get_next_address(&address);
     if (!success) {
-      debugE("FATAL: Unable to allocate a OneWire sensor for %s. "
-             "All sensors have already been configured. "
-             "Check the physical wiring of your sensors.",
-             config_path.c_str());
+      debugE(
+          "FATAL: Unable to allocate a OneWire sensor for %s. "
+          "All sensors have already been configured. "
+          "Check the physical wiring of your sensors.",
+          config_path.c_str());
       found = false;
     } else {
       debugD("Registered a new OneWire sensor");
@@ -116,9 +113,10 @@ OneWireTemperature::OneWireTemperature(
     if (!success) {
       char addrstr[24];
       owda_to_string(addrstr, address);
-      debugE("FATAL: OneWire sensor %s at %s is missing. "
-             "Check the physical wiring of your sensors.",
-             config_path.c_str(), addrstr);
+      debugE(
+          "FATAL: OneWire sensor %s at %s is missing. "
+          "Check the physical wiring of your sensors.",
+          config_path.c_str(), addrstr);
       found = false;
     }
   }
@@ -126,14 +124,14 @@ OneWireTemperature::OneWireTemperature(
 
 void OneWireTemperature::enable() {
   if (found) {
-    app.onRepeat(read_delay, [this](){ this->update(); });
+    app.onRepeat(read_delay, [this]() { this->update(); });
   }
 }
 
 void OneWireTemperature::update() {
   dts->sensors->requestTemperaturesByAddress(address.data());
 
-  app.onDelay(750, [this](){ this->read_value(); });
+  app.onDelay(750, [this]() { this->read_value(); });
 }
 
 void OneWireTemperature::read_value() {
@@ -159,9 +157,7 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String OneWireTemperature::get_config_schema() {
-  return FPSTR(SCHEMA);
-}
+String OneWireTemperature::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool OneWireTemperature::set_configuration(const JsonObject& config) {
   if (!config.containsKey("address")) {
