@@ -1,18 +1,17 @@
 #include "debounce.h"
 
-Debounce::Debounce(int msMinDelay, String config_path) :
-    BooleanTransform(config_path), msMinDelay{msMinDelay} {
-    className = "Debounce";
-    lastTime = millis();
+Debounce::Debounce(int ms_min_delay, String config_path) :
+    BooleanTransform(config_path), ms_min_delay{ms_min_delay} {
+    last_time = millis();
 }
 
 
 void Debounce::set_input(bool newValue, uint8_t inputChannel) {
 
-    int elapsed = millis() - lastTime;
-    if (newValue != output || elapsed > msMinDelay) {
+    int elapsed = millis() - last_time;
+    if (newValue != output || elapsed > ms_min_delay) {
         output = newValue;
-        lastTime = millis();
+        last_time = millis();
         notify();
     }
 }

@@ -7,31 +7,29 @@
 // SHT31 represents an ADAfruit (or compatible) SHT31 temperature & humidity sensor.
 SHT31::SHT31(uint8_t addr, String config_path) :
        Sensor(config_path), addr{addr} {
-    className = "SHT31";
     load_configuration();
-    pAdafruitSHT31 = new Adafruit_SHT31();
-    if (!pAdafruitSHT31->begin(addr)) {
+    adafruit_sht31 = new Adafruit_SHT31();
+    if (!adafruit_sht31->begin(addr)) {
        debugE("Could not find a valid SHT31 sensor: check address and wiring");
     }
 }
 
 
-// SHT31value reads and outputs the specified type of value of a SHT31 sensor
-SHT31value::SHT31value(SHT31* pSHT31, SHT31ValType val_type, uint read_delay, String config_path) :
-                   NumericSensor(config_path), pSHT31{pSHT31}, val_type{val_type}, read_delay{read_delay} {
-      className = "SHT31value";
+// SHT31Value reads and outputs the specified type of value of a SHT31 sensor
+SHT31Value::SHT31Value(SHT31* sht31, SHT31ValType val_type, uint read_delay, String config_path) :
+                   NumericSensor(config_path), sht31{sht31}, val_type{val_type}, read_delay{read_delay} {
       load_configuration();
 }
 
 // SHT31 outputs temp in Celsius. Need to convert to Kelvin before sending to Signal K.
 // Humidity is output in relative humidity (0 - 100%)
-void SHT31value::enable() {
+void SHT31Value::enable() {
   app.onRepeat(read_delay, [this](){ 
       if (val_type == temperature) {
-          output = pSHT31->pAdafruitSHT31->readTemperature() + 273.15; // Kelvin is Celsius + 273.15
+          output = sht31->adafruit_sht31->readTemperature() + 273.15; // Kelvin is Celsius + 273.15
       }
       else if (val_type == humidity) {
-          output = pSHT31->pAdafruitSHT31->readHumidity();
+          output = sht31->adafruit_sht31->readHumidity();
       }
       else output = 0.0;
       
@@ -39,7 +37,7 @@ void SHT31value::enable() {
  });
 }
 
-void SHT31value::get_configuration(JsonObject& root) {
+void SHT31Value::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
   };
@@ -53,11 +51,11 @@ void SHT31value::get_configuration(JsonObject& root) {
   })###";
 
 
-  String SHT31value::get_config_schema() {
+  String SHT31Value::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
-bool SHT31value::set_configuration(const JsonObject& config) {
+bool SHT31Value::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

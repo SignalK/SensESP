@@ -14,7 +14,7 @@ class TimeString : public Transform<time_t, String> {
                           
  public:
   TimeString(String config_path="");
-  virtual void set_input(time_t input, uint8_t inputChannel = 0) override;
+  virtual void set_input(time_t input, uint8_t input_channel = 0) override;
 
 };
 

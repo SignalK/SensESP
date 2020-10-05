@@ -7,7 +7,6 @@
 DigitalInput::DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
                            String config_path)
     : Sensor(config_path), pin{pin}, interrupt_type{interrupt_type} {
-  className = "DigitalInput";
   pinMode(pin, pin_mode);
 }
 
@@ -17,7 +16,6 @@ DigitalInputValue::DigitalInputValue(uint8_t pin, int pin_mode,
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntegerProducer(),
       read_delay{read_delay} {
-  className = "DigitalInputValue";
 }
 
 void DigitalInputValue::enable() {
@@ -59,7 +57,6 @@ DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode,
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntegerProducer(),
       read_delay{read_delay} {
-  className = "DigitalInputCounter";
   load_configuration();
 }
 

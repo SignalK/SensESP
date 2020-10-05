@@ -14,7 +14,7 @@ template <typename C, typename P> class Transform;
  * A ValueProducer<> is any sensor or piece of code that outputs a value for consumption
  * elsewhere.  They are Observable, allowing code to be notified whenever a new value
  * is available.  They can be connected directly to ValueConsumers of the same type
- * using the connectTo() method.
+ * using the connect_to() method.
  */
 template <typename T>
 class ValueProducer : virtual public Observable {
@@ -33,37 +33,46 @@ class ValueProducer : virtual public Observable {
         /**
          * Connects this producer to the specified consumer, registering that
          * consumer for notifications to when this producer's value changes
-         * @param inputChannel Consumers can have one or more inputs feeding them
+         * @param input_channel Consumers can have one or more inputs feeding them
          *   This parameter allows you to specify which input number this producer
          *   is connecting to. For single input consumers, leave the index at
          *   zero.
          *  @see ValueConsumer::set_input()
          */
-        void connectTo(ValueConsumer<T>* pConsumer, uint8_t inputChannel = 0) {
-            this->attach([this, pConsumer, inputChannel](){
-                pConsumer->set_input(this->get(), inputChannel);
+        void connect_to(ValueConsumer<T>* consumer, uint8_t input_channel = 0) {
+            this->attach([this, consumer, input_channel](){
+                consumer->set_input(this->get(), input_channel);
             });
         }
 
-
+        [[deprecated("Use connect_to() instead.")]]
+        void connectTo(ValueConsumer<T>* consumer, uint8_t input_channel = 0) {
+            connect_to(consumer, input_channel);
+        }
 
         /**
          *  If the consumer this producer is connecting to is ALSO a producer
-         *  of values of the same type, connectTo() calls can be chained
+         *  of values of the same type, connect_to() calls can be chained
          *  together, as this specialized version returns the producer/consumer
-         *  being conencted to so connectTo() can be called on THAT object.
-         * @param inputChannel Consumers can have one or more inputs feeding them
+         *  being conencted to so connect_to() can be called on THAT object.
+         * @param input_channel Consumers can have one or more inputs feeding them
          *   This parameter allows you to specify which input number this producer
          *   is connecting to. For single input consumers, leave the index at
          *   zero.
          *  @see ValueConsumer::set_input()
          */
         template <typename T2>
-        Transform<T, T2>* connectTo(Transform<T, T2>* pConsumerProducer, uint8_t inputChannel = 0) {
-            this->attach([this, pConsumerProducer, inputChannel](){
-                pConsumerProducer->set_input(this->get(), inputChannel);
+        Transform<T, T2>* connect_to(Transform<T, T2>* consumer_producer, uint8_t input_channel = 0) {
+            this->attach([this, consumer_producer, input_channel](){
+                consumer_producer->set_input(this->get(), input_channel);
             });
-            return pConsumerProducer;
+            return consumer_producer;
+        }
+
+        template <typename T2>
+        [[deprecated("Use connect_to(...) instead.")]]
+        Transform<T, T2>* connectTo(Transform<T, T2>* consumer_producer, uint8_t input_channel = 0) {
+            return connect_to(consumer_producer, input_channel);
         }
 
     protected:

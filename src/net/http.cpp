@@ -90,11 +90,11 @@ HTTPServer::HTTPServer(std::function<void()> reset_device) {
 
     AsyncResponseStream* response =
         request->beginResponseStream("application/json");
-    DynamicJsonDocument jsonDoc(1024);
-    JsonObject config = jsonDoc.createNestedObject("config");
+    DynamicJsonDocument json_doc(1024);
+    JsonObject config = json_doc.createNestedObject("config");
     confable->get_configuration(config);
-    jsonDoc["schema"] = serialized(confable->get_config_schema());
-    serializeJson(jsonDoc, *response);
+    json_doc["schema"] = serialized(confable->get_config_schema());
+    serializeJson(json_doc, *response);
     request->send(response);
   });
 
@@ -153,14 +153,13 @@ void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
   }
 
   int headers = request->headers();
-  int i;
-  for (i = 0; i < headers; i++) {
+  for (int i = 0; i < headers; i++) {
     AsyncWebHeader* h = request->getHeader(i);
     debugD("_HEADER[%s]: %s\n", h->name().c_str(), h->value().c_str());
   }
 
   int params = request->params();
-  for (i = 0; i < params; i++) {
+  for (int i = 0; i < params; i++) {
     AsyncWebParameter* p = request->getParam(i);
     if (p->isFile()) {
       debugD("_FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(),
@@ -178,13 +177,13 @@ void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
 void HTTPServer::handle_config_list(AsyncWebServerRequest* request) {
   AsyncResponseStream* response =
       request->beginResponseStream("application/json");
-  DynamicJsonDocument jsonDoc(1024);
-  // JsonObject root = jsonDoc.as<JsonObject>();
-  JsonArray arr = jsonDoc.createNestedArray("keys");
+  DynamicJsonDocument json_doc(1024);
+  // JsonObject root = json_doc.as<JsonObject>();
+  JsonArray arr = json_doc.createNestedArray("keys");
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     arr.add(it->first);
   }
-  serializeJson(jsonDoc, *response);
+  serializeJson(json_doc, *response);
   request->send(response);
 }
 

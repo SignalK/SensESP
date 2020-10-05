@@ -8,19 +8,18 @@
 // humidity sensor.
 BME280::BME280(uint8_t addr, String config_path)
     : Sensor(config_path), addr{addr} {
-  className = "BME280";
   load_configuration();
-  pAdafruitBME280 = new Adafruit_BME280();
+  adafruit_bme280 = new Adafruit_BME280();
   check_status();
 }
 
 void BME280::check_status() {
-  bool started = pAdafruitBME280->begin(addr);
+  bool started = adafruit_bme280->begin(addr);
   if (!started) {
     debugI(
         "Could not find a valid BME280 sensor. Check wiring, address, and "
         "sensor ID.");
-    debugI("SensorID is: 0x%d", pAdafruitBME280->sensorID());
+    debugI("SensorID is: 0x%d", adafruit_bme280->sensorID());
     debugI("0xFF: is a BMP180 or BMP085, or a bad address");
     debugI("0x56-0x58 is a BMP280");
     debugI("0x60 is a BME280");
@@ -28,29 +27,28 @@ void BME280::check_status() {
   }
 }
 
-// BME280value reads and outputs the specified type of value of a BME280 sensor
-BME280value::BME280value(BME280* pBME280, BME280ValType val_type,
+// BME280Value reads and outputs the specified type of value of a BME280 sensor
+BME280Value::BME280Value(BME280* bme280, BME280ValType val_type,
                          uint read_delay, String config_path)
     : NumericSensor(config_path),
-      pBME280{pBME280},
+      bme280{bme280},
       val_type{val_type},
       read_delay{read_delay} {
-  className = "BME280value";
   load_configuration();
 }
 
 // BME280 outputs temp in Celsius. Need to convert to Kelvin before sending to
 // Signal K. Pressure is output in Pascals, Humidity is output in relative
 // humidity (0 - 100%)
-void BME280value::enable() {
+void BME280Value::enable() {
   app.onRepeat(read_delay, [this]() {
     if (val_type == temperature) {
-      output = pBME280->pAdafruitBME280->readTemperature() +
+      output = bme280->adafruit_bme280->readTemperature() +
                273.15;  // Kelvin is Celsius + 273.15
     } else if (val_type == pressure) {
-      output = pBME280->pAdafruitBME280->readPressure();
+      output = bme280->adafruit_bme280->readPressure();
     } else if (val_type == humidity) {
-      output = pBME280->pAdafruitBME280->readHumidity();
+      output = bme280->adafruit_bme280->readHumidity();
     } else
       output = 0.0;
 
@@ -58,7 +56,7 @@ void BME280value::enable() {
   });
 }
 
-void BME280value::get_configuration(JsonObject& root) {
+void BME280Value::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
 };
@@ -71,9 +69,9 @@ static const char SCHEMA[] PROGMEM = R"###({
     }
   })###";
 
-String BME280value::get_config_schema() { return FPSTR(SCHEMA); }
+String BME280Value::get_config_schema() { return FPSTR(SCHEMA); }
 
-bool BME280value::set_configuration(const JsonObject& config) {
+bool BME280Value::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

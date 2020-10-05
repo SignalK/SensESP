@@ -2,7 +2,7 @@
 #include <Arduino.h>
 
 #include "sensesp_app.h"
-#include "sensors/max31856TC_input.h"
+#include "sensors/max31856_thermocouple.h"
 #include "signalk/signalk_output.h"
 #include "transforms/linear.h"
 
@@ -54,9 +54,9 @@ ReactESP app([]() {
   // 1000 ms.
   const uint readDelay = 1000;
   // tcType:  MAX31856_TCTYPE_K;   // other types can be B, E, J, N, R, S, T
-  auto* max31856tc = new MAX31856TC(SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN,
-                                    SPI_CLK_PIN, DRDY_PIN, MAX31856_TCTYPE_K,
-                                    readDelay, temperature_in_config_path);
+  auto* max31856tc = new MAX31856Thermocouple(SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN,
+                                              SPI_CLK_PIN, DRDY_PIN, MAX31856_TCTYPE_K,
+                                              readDelay, temperature_in_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then
   // adds the offset, to calculate its output. The MAX31856TC produces
@@ -68,8 +68,8 @@ ReactESP app([]() {
 
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the SignalK server.
-  max31856tc->connectTo(new Linear(multiplier, offset, ""))
-      ->connectTo(new SKOutputNumber(sk_path));
+  max31856tc->connect_to(new Linear(multiplier, offset, ""))
+      ->connect_to(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running
   sensesp_app->enable();

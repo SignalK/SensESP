@@ -10,11 +10,11 @@
 //#define OTA_PASSWORD "bonvoyage"
 #endif
 
-void handle_OTA() {
+void handle_ota() {
   ArduinoOTA.handle();
 }
 
-void setup_OTA() {
+void setup_ota() {
 #ifdef OTA_PASSWORD
   ArduinoOTA.setPassword((const char *)OTA_PASSWORD);
 #endif
@@ -37,5 +37,5 @@ void setup_OTA() {
   });
   ArduinoOTA.begin();
   //app.onTick(&handle_OTA);
-  app.onRepeat(20, handle_OTA);
+  app.onRepeat(20, handle_ota);
 }

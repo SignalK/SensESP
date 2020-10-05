@@ -6,7 +6,6 @@
 AnalogInput::AnalogInput(uint8_t pin, uint read_delay, String config_path)
     : NumericSensor(config_path), pin{pin}, read_delay{read_delay} {
   pinMode(pin, INPUT);
-  className = "AnalogInput";
   load_configuration();
 }
 

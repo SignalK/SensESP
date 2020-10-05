@@ -2,7 +2,6 @@
 
 ADS1x15Voltage::ADS1x15Voltage(ADS1x15CHIP_t chip, adsGain_t gain) :
        NumericTransform(), chip{chip}, gain{gain} {
-     className = "ADS1x15Voltage";
 }
 
 void ADS1x15Voltage::set_input(float input, uint8_t inputChannel) {

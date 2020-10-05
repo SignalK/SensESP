@@ -4,7 +4,6 @@
 
 Frequency::Frequency(float k, String config_path)
     : Transform<int, float>(config_path), k{k} {
-  className = "Frequency";
   load_configuration();
 }
 

@@ -2,7 +2,6 @@
 
 VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path)
     : SymmetricTransform<float>(config_path), R2{R2}, Vin{Vin} {
-  className = "VoltageDividerR1";
   load_configuration();
 }
 
@@ -45,7 +44,6 @@ bool VoltageDividerR1::set_configuration(const JsonObject& config) {
 
 VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path)
     : SymmetricTransform<float>(config_path), R1{R1}, Vin{Vin} {
-  className = "VoltageDividerR2";
   load_configuration();
 }
 

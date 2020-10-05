@@ -1,34 +1,33 @@
-#include "ultrasonic_input.h"
+#include "ultrasonic_distance.h"
 
 #include "Arduino.h"
 #include "sensesp.h"
 
-UltrasonicSens::UltrasonicSens(int8_t trig_pin, int8_t input_pin,
+UltrasonicDistance::UltrasonicDistance(int8_t trig_pin, int8_t input_pin,
                                uint read_delay, String config_path)
     : NumericSensor(config_path),
-      triggerPin{trig_pin},
-      inputPin{input_pin},
+      trigger_pin{trig_pin},
+      input_pin{input_pin},
       read_delay{read_delay} {
-  className = "UltrasonicSens";
   pinMode(trig_pin, OUTPUT);
   pinMode(input_pin, INPUT_PULLUP);
   load_configuration();
 }
 
-void UltrasonicSens::enable() {
+void UltrasonicDistance::enable() {
   app.onRepeat(read_delay, [this]() {
-    digitalWrite(triggerPin, HIGH);
+    digitalWrite(trigger_pin, HIGH);
     long lastTime = micros();
     while (micros() - lastTime < 100) {
       yield();
     }
-    digitalWrite(triggerPin, LOW);
-    output = pulseIn(inputPin, HIGH);
+    digitalWrite(trigger_pin, LOW);
+    output = pulseIn(input_pin, HIGH);
     this->notify();
   });
 }
 
-void UltrasonicSens::get_configuration(JsonObject& root) {
+void UltrasonicDistance::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
 };
@@ -41,9 +40,9 @@ static const char SCHEMA[] PROGMEM = R"###({
     }
   })###";
 
-String UltrasonicSens::get_config_schema() { return FPSTR(SCHEMA); }
+String UltrasonicDistance::get_config_schema() { return FPSTR(SCHEMA); }
 
-bool UltrasonicSens::set_configuration(const JsonObject& config) {
+bool UltrasonicDistance::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {

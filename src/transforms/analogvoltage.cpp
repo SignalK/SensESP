@@ -6,7 +6,6 @@ AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
       max_voltage{max_voltage},
       multiplier{multiplier},
       offset{offset} {
-  className = "AnalogVoltage";
   load_configuration();
 }
 

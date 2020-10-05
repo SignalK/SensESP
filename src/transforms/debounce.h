@@ -12,13 +12,13 @@
 class Debounce : public BooleanTransform {
 
     public:
-        Debounce(int msMinDelay = 200, String config_path="");
+        Debounce(int ms_min_delay = 200, String config_path="");
 
-        virtual void set_input(bool newValue, uint8_t inputChannel = 0) override;
+        virtual void set_input(bool new_value, uint8_t input_channel = 0) override;
 
     protected:
-        unsigned long lastTime;
-        int msMinDelay;
+        unsigned long last_time;
+        int ms_min_delay;
 };
 
 #endif

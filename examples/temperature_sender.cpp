@@ -154,11 +154,11 @@ ReactESP app([]() {
      - use Linear() in case you want to calibrate the output at runtime
      - send calibrated Kelvin value to SignalK with SKOutputNumber()
   */
-  analog_input->connectTo(new AnalogVoltage())
-      ->connectTo(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))
-      ->connectTo(new TemperatureInterpreter("/gen/temp/curve"))
-      ->connectTo(new Linear(1.0, 0.0, "/gen/temp/calibrate"))
-      ->connectTo(new SKOutputNumber(sk_path, "/gen/temp/sk"));
+  analog_input->connect_to(new AnalogVoltage())
+      ->connect_to(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))
+      ->connect_to(new TemperatureInterpreter("/gen/temp/curve"))
+      ->connect_to(new Linear(1.0, 0.0, "/gen/temp/calibrate"))
+      ->connect_to(new SKOutputNumber(sk_path, "/gen/temp/sk"));
 
   // Start the SensESP application running, which simply activates everything
   // that's been set up above

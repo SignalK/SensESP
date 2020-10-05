@@ -6,10 +6,10 @@ SKOutputTime::SKOutputTime(String sk_path, String config_path)
   load_configuration();
 }
 
-String SKOutputTime::as_signalK() {
-  DynamicJsonDocument jsonDoc(1024);
+String SKOutputTime::as_signalk() {
+  DynamicJsonDocument json_doc(1024);
   String json;
-  JsonObject root = jsonDoc.as<JsonObject>();
+  JsonObject root = json_doc.as<JsonObject>();
   root["path"] = this->sk_path;
   root["value"] = output;
   serializeJson(root, json);

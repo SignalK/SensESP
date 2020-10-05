@@ -22,8 +22,8 @@ void setup_analog_input(
     String sk_path, float k, float c,
     String config_path) {
   (new AnalogInput())
-    -> connectTo(new Linear(k, c, config_path + "/calibrate"))
-    -> connectTo(new SKOutputNumber(sk_path, config_path + "/sk"));
+    -> connect_to(new Linear(k, c, config_path + "/calibrate"))
+    -> connect_to(new SKOutputNumber(sk_path, config_path + "/sk"));
 }
 
 
@@ -40,11 +40,11 @@ void setup_fuel_flow_meter(
   Frequency* freqIn;
   Frequency* freqOut;
 
-  dicIn->connectTo(freqIn = new Frequency())
-      -> connectTo(new SKOutputNumber("fuelflow.inflow.frequency"));
+  dicIn->connect_to(freqIn = new Frequency())
+      -> connect_to(new SKOutputNumber("fuelflow.inflow.frequency"));
 
-  dicOut->connectTo(freqOut = new Frequency())
-      -> connectTo(new SKOutputNumber("fuelflow.outflow.frequency"));
+  dicOut->connect_to(freqOut = new Frequency())
+      -> connect_to(new SKOutputNumber("fuelflow.outflow.frequency"));
 
 
   // Here, each pulse of a flow sensor represents 0.46ml of flow
@@ -53,64 +53,64 @@ void setup_fuel_flow_meter(
                               "/fuelflow/fuel/rate/calibrate");
 
   diff->connectFrom(freqIn, freqOut)
-      -> connectTo(new SKOutputNumber("propulsion.main.fuel.rate", "/fuelflow/fuel/rate/sk"))
-      -> connectTo(new MovingAverage(10, 1., "/fuelflow/fuel/average/calibrate")) // this is the same as above, but averaged over 10 s
-      -> connectTo(new SKOutputNumber("propulsion.main.fuel.averageRate", "/fuelflow/fuel/average/sk"));
+      -> connect_to(new SKOutputNumber("propulsion.main.fuel.rate", "/fuelflow/fuel/rate/sk"))
+      -> connect_to(new MovingAverage(10, 1., "/fuelflow/fuel/average/calibrate")) // this is the same as above, but averaged over 10 s
+      -> connect_to(new SKOutputNumber("propulsion.main.fuel.averageRate", "/fuelflow/fuel/average/sk"));
 
 
   // Integrate the net flow over time. The output is dependent
   // on the the input counter update rate!
-  diff->connectTo(new Integrator(1., 0.))
-      -> connectTo(new SKOutputNumber("propulsion.main.fuel.used", "/fuelflow/fuel/used/sk"));
+  diff->connect_to(new Integrator(1., 0.))
+      -> connect_to(new SKOutputNumber("propulsion.main.fuel.used", "/fuelflow/fuel/used/sk"));
 
 
   // Integrate the total outflow over time. The output is dependent
   // on the the input counter update rate!
-  freqIn-> connectTo(new Integrator(0.46/1e6, 0., "/fuelflow/fuel/in_used/calibrate"))
-       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedGross", "/fuelflow/fuel/in_used/sk"));
+  freqIn-> connect_to(new Integrator(0.46/1e6, 0., "/fuelflow/fuel/in_used/calibrate"))
+       -> connect_to(new SKOutputNumber("propulsion.main.fuel.usedGross", "/fuelflow/fuel/in_used/sk"));
 
 
   // Integrate the net fuel flow over time. The output is dependent
   // on the the input counter update rate!
-  freqOut->connectTo(new Integrator(0.46/1e6, 0., "/fuelflow/fuel/out_used/calibrate"))
-       -> connectTo(new SKOutputNumber("propulsion.main.fuel.usedReturn", "/fuelflow/fuel/out_used/sk"));
+  freqOut->connect_to(new Integrator(0.46/1e6, 0., "/fuelflow/fuel/out_used/calibrate"))
+       -> connect_to(new SKOutputNumber("propulsion.main.fuel.usedReturn", "/fuelflow/fuel/out_used/sk"));
 }
 
 
 GPSInput* setup_gps(Stream* rx_stream) {
   GPSInput* gps = new GPSInput(rx_stream);
   gps->nmea_data.position
-    .connectTo(new SKOutputPosition("navigation.position", ""));
+    .connect_to(new SKOutputPosition("navigation.position", ""));
   gps->nmea_data.gnss_quality
-    .connectTo(new SKOutputString("navigation.methodQuality", ""));
+    .connect_to(new SKOutputString("navigation.methodQuality", ""));
   gps->nmea_data.num_satellites
-    .connectTo(new SKOutputInt("navigation.satellites", ""));
+    .connect_to(new SKOutputInt("navigation.satellites", ""));
   gps->nmea_data.horizontal_dilution
-    .connectTo(new SKOutputNumber("navigation.horizontalDilution", ""));
+    .connect_to(new SKOutputNumber("navigation.horizontalDilution", ""));
   gps->nmea_data.geoidal_separation
-    .connectTo(new SKOutputNumber("navigation.geoidalSeparation", ""));
+    .connect_to(new SKOutputNumber("navigation.geoidalSeparation", ""));
   gps->nmea_data.dgps_age
-    .connectTo(new SKOutputNumber("navigation.differentialAge", ""));
+    .connect_to(new SKOutputNumber("navigation.differentialAge", ""));
   gps->nmea_data.dgps_id
-    .connectTo(new SKOutputNumber("navigation.differentialReference", ""));
+    .connect_to(new SKOutputNumber("navigation.differentialReference", ""));
   gps->nmea_data.datetime
-    .connectTo(new SKOutputTime("navigation.datetime", ""));
+    .connect_to(new SKOutputTime("navigation.datetime", ""));
   gps->nmea_data.speed
-    .connectTo(new SKOutputNumber("navigation.speedOverGround", ""));
+    .connect_to(new SKOutputNumber("navigation.speedOverGround", ""));
   gps->nmea_data.true_course
-    .connectTo(new SKOutputNumber("navigation.courseOverGroundTrue", ""));
+    .connect_to(new SKOutputNumber("navigation.courseOverGroundTrue", ""));
   gps->nmea_data.variation
-    .connectTo(new SKOutputNumber("navigation.magneticVariation", ""));
+    .connect_to(new SKOutputNumber("navigation.magneticVariation", ""));
   gps->nmea_data.rtk_age
-    .connectTo(new SKOutputNumber("navigation.rtkAge", ""));
+    .connect_to(new SKOutputNumber("navigation.rtkAge", ""));
   gps->nmea_data.rtk_ratio
-    .connectTo(new SKOutputNumber("navigation.rtkRatio", ""));
+    .connect_to(new SKOutputNumber("navigation.rtkRatio", ""));
   gps->nmea_data.baseline_length
-    .connectTo(new SKOutputNumber("navigation.rtkBaselineLength", ""));
+    .connect_to(new SKOutputNumber("navigation.rtkBaselineLength", ""));
   gps->nmea_data.baseline_course
-    .connectTo(new SKOutputNumber("navigation.rtkBaselineCourse"))
-    ->connectTo(new AngleCorrection(0, 0, "/sensors/heading/correction"))
-    ->connectTo(new SKOutputNumber("navigation.headingTrue", ""));
+    .connect_to(new SKOutputNumber("navigation.rtkBaselineCourse"))
+    ->connect_to(new AngleCorrection(0, 0, "/sensors/heading/correction"))
+    ->connect_to(new SKOutputNumber("navigation.headingTrue", ""));
 
   return gps;
 }
@@ -123,7 +123,7 @@ void setup_onewire_temperature(
     String config_path,
     String schema
 ) {
-  (new OneWireTemperature(dts))->connectTo(
+  (new OneWireTemperature(dts))->connect_to(
     new SKOutputNumber(sk_path, config_path));
 }
 
@@ -138,7 +138,7 @@ void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
   // tach output into Hz, SK native units.
 
   (new DigitalInputCounter(input_pin, INPUT_PULLUP, RISING, 500))
-      -> connectTo<float>(new Frequency(1./97., "/sensors/engine_rpm/calibrate"))
-      -> connectTo(new SKOutputNumber("propulsion.main.revolutions", "/sensors/engine_rpm/sk"));
+      -> connect_to<float>(new Frequency(1./97., "/sensors/engine_rpm/calibrate"))
+      -> connect_to(new SKOutputNumber("propulsion.main.revolutions", "/sensors/engine_rpm/sk"));
 
 }

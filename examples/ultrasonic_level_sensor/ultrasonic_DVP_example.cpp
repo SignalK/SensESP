@@ -3,7 +3,7 @@
 #include "sensesp_app.h"
 #include "transforms/linear.h"
 #include "signalk/signalk_output.h"
-#include "sensors/ultrasonic_input.h"
+#include "sensors/ultrasonic_distance.h"
 #include "transforms/moving_average.h"
 
 #define TRIGGER_PIN 15
@@ -68,9 +68,9 @@ ReactESP app([]() {
 
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the SignalK server.
-  ultrasonic_sensor->connectTo(new Linear(multiplier, offset, linear_config_path))
-      ->connectTo(new MovingAverage(10, scale, ultrasonic_ave_samples))
-      ->connectTo(new SKOutputNumber(sk_path));
+  ultrasonic_sensor->connect_to(new Linear(multiplier, offset, linear_config_path))
+      ->connect_to(new MovingAverage(10, scale, ultrasonic_ave_samples))
+      ->connect_to(new SKOutputNumber(sk_path));
 
   // Start the SensESP application running
   sensesp_app->enable();

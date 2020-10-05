@@ -41,7 +41,7 @@ class SKListener : virtual public Observable {
             return listen_delay;
         }
 
-        virtual void parseValue(JsonObject& json)
+        virtual void parse_value(JsonObject& json)
         {
 
         }

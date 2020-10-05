@@ -57,7 +57,6 @@ class Transform : public TransformBase,
          TransformBase(config_path), 
          ValueConsumer<C>(), 
          ValueProducer<P>() {
-           className = "Transform";
       }
 
 
@@ -68,7 +67,7 @@ class Transform : public TransformBase,
    * channel zero, the second one to input channel 1, etc.
    * "this" is returned, which allows the ValueProducer side
    * of this transform to then be wired to other transforms via
-   * a call to connectTo().
+   * a call to connect_to().
    */
   Transform<C, P>* connectFrom(ValueProducer<P>* pProducer0,
                                ValueProducer<P>* pProducer1 = NULL,
@@ -76,18 +75,18 @@ class Transform : public TransformBase,
                                ValueProducer<P>* pProducer3 = NULL,
                                ValueProducer<P>* pProducer4 = NULL) {
 
-      this->ValueConsumer<C>::connectFrom(pProducer0);
+      this->ValueConsumer<C>::connect_from(pProducer0);
       if (pProducer1 != NULL) {
-        this->ValueConsumer<C>::connectFrom(pProducer1, 1);
+        this->ValueConsumer<C>::connect_from(pProducer1, 1);
       }
       if (pProducer2 != NULL) {
-        this->ValueConsumer<C>::connectFrom(pProducer2, 2);
+        this->ValueConsumer<C>::connect_from(pProducer2, 2);
       }
       if (pProducer3 != NULL) {
-        this->ValueConsumer<C>::connectFrom(pProducer3, 3);
+        this->ValueConsumer<C>::connect_from(pProducer3, 3);
       }
       if (pProducer4 != NULL) {
-        this->ValueConsumer<C>::connectFrom(pProducer4, 4);
+        this->ValueConsumer<C>::connect_from(pProducer4, 4);
       }
       return this;
   }
@@ -105,9 +104,7 @@ class SymmetricTransform : public Transform<T, T> {
 
   public:
      SymmetricTransform(String config_path="") :
-      Transform<T, T>(config_path) {
-        Enable::className = "SymmetricTransform";
-  }
+      Transform<T, T>(config_path) {}
 
 };
 

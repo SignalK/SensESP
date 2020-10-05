@@ -158,7 +158,7 @@ void WSClient::on_receive_delta(uint8_t* payload) {
         for (size_t i = 0; i < listeners.size(); i++) {
           SKListener* listener = listeners[i];
           if (listener->get_sk_path().equals(path)) {
-            listener->parseValue(value);
+            listener->parse_value(value);
           }
         }
       }

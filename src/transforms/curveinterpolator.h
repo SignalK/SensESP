@@ -29,7 +29,7 @@ class CurveInterpolator : public NumericTransform {
    CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path="");
 
    // Set and retrieve the transformed value
-   void set_input(float input, uint8_t inputChannel = 0) override final;
+   void set_input(float input, uint8_t input_channel = 0) override final;
 
 
    // For reading and writing the configuration of this transformation
@@ -38,8 +38,16 @@ class CurveInterpolator : public NumericTransform {
    virtual String get_config_schema() override;
    
    // For manually adding sample points
-   void clearSamples();
-   void addSample(const Sample& newSample);
+   void clear_samples();
+   [[deprecated("Use clear_samples() instead.")]]
+   void clearSamples() {
+      clear_samples();
+   }
+   void add_sample(const Sample& new_sample);
+   [[deprecated("Use add_sample() instead.")]]
+   void addSample(const Sample& new_sample) {
+      add_sample(new_sample);
+   }
 
  private:
     std::set<Sample> samples;

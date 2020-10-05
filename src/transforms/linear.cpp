@@ -4,7 +4,6 @@
 
 Linear::Linear(float k, float c, String config_path)
     : NumericTransform(config_path), k{k}, c{c} {
-  className = "Linear";
   load_configuration();
 }
 

@@ -4,7 +4,6 @@
 
 MovingAverage::MovingAverage(int n, float k, String config_path)
     : NumericTransform(config_path), n{n}, k{k} {
-  className = "MovingAverage";
   buf.resize(n, 0);
   initialized = false;
   load_configuration();

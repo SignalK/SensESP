@@ -35,16 +35,16 @@ ReactESP app([]() {
   // and send its output to SignalK as a Number (float). This one is for the
   // temperature reading.
   auto* sht31_temperature =
-      new SHT31value(sht31, temperature, read_delay, "/fridge/temperature");
+      new SHT31Value(sht31, temperature, read_delay, "/fridge/temperature");
 
-  sht31_temperature->connectTo(
+  sht31_temperature->connect_to(
       new SKOutputNumber("environment.inside.refrigerator.temperature"));
 
   // Do the same for the humidity value.
   auto* sht31_humidity =
-      new SHT31value(sht31, humidity, read_delay, "/fridge/humidity");
+      new SHT31Value(sht31, humidity, read_delay, "/fridge/humidity");
 
-  sht31_humidity->connectTo(
+  sht31_humidity->connect_to(
       new SKOutputNumber("environment.inside.refrigerator.humidity"));
 
   sensesp_app->enable();

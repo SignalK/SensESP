@@ -7,7 +7,6 @@
 GPSInput::GPSInput(Stream* rx_stream, String config_path)
     : Sensor(config_path) {
 
-  className = "GPSInput";
   this->rx_stream = rx_stream;
 
   nmea_parser.add_sentence_parser(new GPGGASentenceParser(&nmea_data));
