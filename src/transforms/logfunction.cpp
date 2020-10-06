@@ -23,8 +23,8 @@ void LogFunction::get_configuration(JsonObject& root) {
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "constant_1": { "title": "multiplier", "type": "number", "description": "The (m)ultiplier in the equation f(x) = m*log(x) + o" },
-        "offset": { "title": "offset", "type": "number", "description": "The (o)ffset in the equation f(x) = m*log(x) + 0" },
+        "constant_1": { "title": "multiplier", "type": "number", "description": "The (m)ultiplier in the equation f(x) = m * log(x) + o" },
+        "offset": { "title": "offset", "type": "number", "description": "The (o)ffset in the equation f(x) = m * log(x) + o" },
         "value": { "title": "Last value", "type" : "number", "readOnly": true }
     }
   })";
