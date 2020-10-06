@@ -1,6 +1,6 @@
 #include "logfunction.h"
 
-LogFunction::LogFunction(float constant_1, float constant_2,
+LogFunction::LogFunction(float multiplier, float offset,
                              String config_path)
     : NumericTransform(config_path),
       multiplier{multiplier},
