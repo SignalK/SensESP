@@ -55,7 +55,7 @@ ReactESP app([]() {
 
   // Do the same for the humidity value.
   auto* bme_humidity =
-      new BME280Value(bme280, humidity, read_delay, "Outside/Humidity");
+      new BME280Value(bme280, humidity, read_delay, "/Outside/Humidity");
 
   bme_humidity->connect_to(new SKOutputNumber("environment.outside.humidity"));
 
