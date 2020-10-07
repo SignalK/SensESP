@@ -95,4 +95,15 @@ class SensESPApp {
 
 extern SensESPApp* sensesp_app;
 
+void SetupSerialDebug(uint32_t baudrate) {
+  Serial.begin(baudrate);
+
+  // A small delay and one debugI() are required so that
+  // the serial output displays everything
+  delay(100);
+  Debug.setSerialEnabled(true);
+  delay(100);
+  debugI("Serial debug enabled");
+}
+
 #endif
