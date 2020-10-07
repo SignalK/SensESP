@@ -233,7 +233,7 @@ void WSClient::test_token(const String server_address,
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/api/";
   debugD("Testing token with url %s", url.c_str());
-  http.begin(url);
+  http.begin(wifi_client, url);
   String full_token = String("JWT ") + auth_token;
   http.addHeader("Authorization", full_token.c_str());
   int httpCode = http.GET();
@@ -287,7 +287,7 @@ void WSClient::send_access_request(const String server_address,
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/access/requests";
-  http.begin(url);
+  http.begin(wifi_client, url);
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(json_req);
   String payload = http.getString();
@@ -332,7 +332,7 @@ void WSClient::poll_access_request(const String server_address,
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port + href;
-  http.begin(url);
+  http.begin(wifi_client, url);
   int httpCode = http.GET();
   if (httpCode == 200 or httpCode == 202) {
     String payload = http.getString();
