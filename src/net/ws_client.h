@@ -48,6 +48,7 @@ class WSClient : public Configurable {
 
   // FIXME: replace with a single connection_state enum
   ConnectionState connection_state = disconnected;
+  WiFiClient wifi_client;
   WebSocketsClient client;
   SKDelta* sk_delta;
   void connect_loop();
