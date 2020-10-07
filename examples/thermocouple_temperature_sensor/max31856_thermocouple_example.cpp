@@ -21,8 +21,6 @@ ReactESP app([]() {
   SetupSerialDebug(115200);
 #endif
 
-  debugI("\nSerial debug enabled\n");
-
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp();
 
