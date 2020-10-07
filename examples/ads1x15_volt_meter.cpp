@@ -15,15 +15,8 @@
 
 ReactESP app([]() {
 #ifndef SERIAL_DEBUG_DISABLED
-  Serial.begin(115200);
-
-  // A small delay and one debugI() are required so that
-  // the serial output displays everything
-  delay(100);
-  Debug.setSerialEnabled(true);
+  SetupSerialDebug(115200);
 #endif
-  delay(100);
-  debugI("Serial debug enabled");
 
   sensesp_app = new SensESPApp();
 

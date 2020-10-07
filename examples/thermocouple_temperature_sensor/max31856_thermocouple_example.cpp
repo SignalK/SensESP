@@ -18,12 +18,7 @@ ReactESP app([]() {
 
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
-  Serial.begin(115200);
-
-  // A small arbitrary delay is required to let the
-  // serial port catch up
-  delay(100);
-  Debug.setSerialEnabled(true);
+  SetupSerialDebug(115200);
 #endif
 
   debugI("\nSerial debug enabled\n");

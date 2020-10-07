@@ -60,15 +60,8 @@ ReactESP app([]() {
 
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
-  Serial.begin(115200);
-
-  // A small delay and one debugI() are required so that
-  // the serial output displays everything
-  delay(100);
-  Debug.setSerialEnabled(true);
+  SetupSerialDebug(115200);
 #endif
-  delay(100);
-  debugI("Serial debug enabled");
 
   // Create the global SensESPApp() object. If you add the line ->set_wifi("your
   // ssid", "your password") you can specify the wifi parameters in the builder.
