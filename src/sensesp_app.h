@@ -1,5 +1,5 @@
-#ifndef _app_H_
-#define _app_H_
+#ifndef _sensesp_app_H_
+#define _sensesp_app_H_
 
 // Required for RemoteDebug
 #define USE_LIB_WEBSOCKET true
@@ -32,6 +32,8 @@ enum StandardSensors {
   WIFI_SIGNAL = 0x10,
   ALL = 0x1F
 };
+
+void SetupSerialDebug(uint32_t baudrate);
 
 class SensESPApp {
  public:
@@ -94,16 +96,5 @@ class SensESPApp {
 };
 
 extern SensESPApp* sensesp_app;
-
-void SetupSerialDebug(uint32_t baudrate) {
-  Serial.begin(baudrate);
-
-  // A small delay and one debugI() are required so that
-  // the serial output displays everything
-  delay(100);
-  Debug.setSerialEnabled(true);
-  delay(100);
-  debugI("Serial debug enabled");
-}
 
 #endif
