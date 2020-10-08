@@ -28,12 +28,12 @@ class HysteresisTransform : public Transform<C, P> {
 };
 
 /**
- * A Transform that translates a float value into a boolean value. minValue and MaxValue set the upper 
- * and lower boundaries of the hysteresis range. 
- * No output state changes occur within the range. 
- * If input value is outside of the hysteresis range to the minValue side, the output will be the value of 
+ * A Transform that translates a float value into a boolean value. minValue and MaxValue set the upper
+ * and lower boundaries of the hysteresis range.
+ * No output state changes occur within the range.
+ * If input value is outside of the hysteresis range to the minValue side, the output will be the value of
  * belowRange.
- * If input value is outside of the hysteresis range to the maxValue side, the output will be the value of 
+ * If input value is outside of the hysteresis range to the maxValue side, the output will be the value of
  * !belowRange.
  */
 class NumericHysteresis : public HysteresisTransform<float, bool>
@@ -50,12 +50,12 @@ class NumericHysteresis : public HysteresisTransform<float, bool>
 };
 
 /**
- * A Transform that translates a integer value into a boolean value. minValue and MaxValue set the upper 
- * and lower boundaries of the hysteresis range. 
- * No output state changes occur while the input is within the range. 
- * If input value is outside of the hysteresis range to the minValue side, the output will be the value of 
+ * A Transform that translates a integer value into a boolean value. minValue and MaxValue set the upper
+ * and lower boundaries of the hysteresis range.
+ * No output state changes occur while the input is within the range.
+ * If input value is outside of the hysteresis range to the minValue side, the output will be the value of
  * belowRange.
- * If input value is outside of the hysteresis range to the maxValue side, the output will be the value of 
+ * If input value is outside of the hysteresis range to the maxValue side, the output will be the value of
  * !belowRange.
  */
 class IntegerHysteresis : public HysteresisTransform<int, bool>

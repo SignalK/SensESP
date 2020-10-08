@@ -2,18 +2,20 @@
 
 template <class C, class P>
 void HysteresisTransform<C, P>::set_input(C input, uint8_t inputChannel) {
+/*
   debugD("minValue = %f", minValue);
   debugD("maxValue = %f", maxValue);
   debugD("input = %f", input);
-  debugD("belowRange %s", x belowRange "true" : "false");
-  debugD("aboveRange %s", x aboveRange "true" : "false");
+  debugD("belowRange = %d", belowRange);
+  debugD("aboveRange = %d", aboveRange);
+*/
   if (input < minValue) {
     this->output = belowRange;
-  } 
+  }
   if (input > maxValue) {
     this->output = !belowRange;
-  } 
-  
+  }
+
   this->notify();
 }
 
