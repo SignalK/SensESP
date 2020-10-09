@@ -52,14 +52,21 @@ ReactESP app([]() {
       {"multiplier", "Multiplier"}, {"base", "Base"}, {"offset", "Offset"}};
 
   // Here we create a new LambdaTransform objects. The template parameters
-  // (four floats in this example) correspond to the following types:
+  // (five floats in this example) correspond to the following types:
+  //
   // 1. Output type of the transform function
-  // 2. Input type of the transoform function
+  // 2. Input type of the transform function
   // 3. Type of parameter 1
   // 4. Type of parameter 2
+  // 5. Type of parameter 3
+  //
+  // The function arguments are:
+  // 1. The tranform function
+  // 2-4. Default values for parameters
+  // 5. Parameter data for the web config UI
+  // 6. Configuration path for the transform
 
-  auto log_transform = new LambdaTransform<float, float, float, float>(
-      log_function, 10, 2, 100, log_lambda_arg_data, "/transforms/log");
+  auto log_transform = new LambdaTransform<float, float, float, float, float>(
       log_function, 10, 2, 100, log_lambda_param_data, "/transforms/log");
 
   // Finally, connect the analog input via the freshly-generated log_transform
