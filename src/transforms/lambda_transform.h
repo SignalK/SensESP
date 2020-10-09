@@ -63,37 +63,37 @@ struct ParamInfo {
  * possible configuration parameters values and configuration parameter
  * metadata (key names and descriptions).
  *
- * @tparam I Transform function input value type
- * @tparam O Transform function output value type
- * @tparam T1 Transform function parameter 1 type
- * @tparam T2 Transform function parameter 2 type
- * @tparam T3 Transform function parameter 3 type
- * @tparam T4 Transform function parameter 4 type
- * @tparam T5 Transform function parameter 5 type
- * @tparam T6 Transform function parameter 6 type
+ * @tparam IN Transform function input value type
+ * @tparam OUT Transform function output value type
+ * @tparam P1 Transform function parameter 1 type
+ * @tparam P2 Transform function parameter 2 type
+ * @tparam P3 Transform function parameter 3 type
+ * @tparam P4 Transform function parameter 4 type
+ * @tparam P5 Transform function parameter 5 type
+ * @tparam P6 Transform function parameter 6 type
  * */
-template <class I, class O, class T1 = float, class T2 = float,
-          class T3 = float, class T4 = float, class T5 = float,
-          class T6 = float>
-class LambdaTransform : public Transform<I, O> {
+template <class IN, class OUT, class P1 = float, class P2 = float,
+          class P3 = float, class P4 = float, class P5 = float,
+          class P6 = float>
+class LambdaTransform : public Transform<IN, OUT> {
  public:
-  LambdaTransform(O (*function)(I input), String config_path = "")
-      : Transform<I, O>(config_path), function0{function}, num_params{0} {
+  LambdaTransform(OUT (*function)(IN input), String config_path = "")
+      : Transform<IN, OUT>(config_path), function0{function}, num_params{0} {
     this->load_configuration();
   }
 
-  LambdaTransform(O (*function)(I input), const ParamInfo* param_info,
+  LambdaTransform(OUT (*function)(IN input), const ParamInfo* param_info,
                   String config_path = "")
-      : Transform<I, O>(config_path),
+      : Transform<IN, OUT>(config_path),
         function0{function},
         num_params{0},
         param_info{param_info} {
     this->load_configuration();
   }
 
-  LambdaTransform(O (*function)(I input, T1 param1), T1 param1,
+  LambdaTransform(OUT (*function)(IN input, P1 param1), P1 param1,
                   const ParamInfo* param_info, String config_path = "")
-      : Transform<I, O>(config_path),
+      : Transform<IN, OUT>(config_path),
         function1{function},
         param1{param1},
         num_params{1},
@@ -114,10 +114,10 @@ class LambdaTransform : public Transform<I, O> {
    * @param param_info Keys and Descriptions of each configuration parameter
    * @param config_path Configuration path for the transform
    **/
-  LambdaTransform(O (*function)(I input, T1 param1, T2 param2), T1 param1,
-                  T2 param2, const ParamInfo* param_info,
+  LambdaTransform(OUT (*function)(IN input, P1 param1, P2 param2), P1 param1,
+                  P2 param2, const ParamInfo* param_info,
                   String config_path = "")
-      : Transform<I, O>(config_path),
+      : Transform<IN, OUT>(config_path),
         function2{function},
         param1{param1},
         param2{param2},
@@ -126,10 +126,10 @@ class LambdaTransform : public Transform<I, O> {
     this->load_configuration();
   }
 
-  LambdaTransform(O (*function)(I input, T1 param1, T2 param2, T3 param3),
-                  T1 param1, T2 param2, T3 param3, const ParamInfo* param_info,
+  LambdaTransform(OUT (*function)(IN input, P1 param1, P2 param2, P3 param3),
+                  P1 param1, P2 param2, P3 param3, const ParamInfo* param_info,
                   String config_path = "")
-      : Transform<I, O>(config_path),
+      : Transform<IN, OUT>(config_path),
         function3{function},
         param1{param1},
         param2{param2},
@@ -139,11 +139,11 @@ class LambdaTransform : public Transform<I, O> {
     this->load_configuration();
   }
 
-  LambdaTransform(O (*function)(I input, T1 param1, T2 param2, T3 param3,
-                                T4 param4),
-                  T1 param1, T2 param2, T3 param3, T4 param4,
+  LambdaTransform(OUT (*function)(IN input, P1 param1, P2 param2, P3 param3,
+                                P4 param4),
+                  P1 param1, P2 param2, P3 param3, P4 param4,
                   const ParamInfo* param_info, String config_path = "")
-      : Transform<I, O>(config_path),
+      : Transform<IN, OUT>(config_path),
         function4{function},
         param1{param1},
         param2{param2},
@@ -154,11 +154,11 @@ class LambdaTransform : public Transform<I, O> {
     this->load_configuration();
   }
 
-  LambdaTransform(O (*function)(I input, T1 param1, T2 param2, T3 param3,
-                                T4 param4, T5 param5),
-                  T1 param1, T2 param2, T3 param3, T4 param4, T5 param5,
+  LambdaTransform(OUT (*function)(IN input, P1 param1, P2 param2, P3 param3,
+                                P4 param4, P5 param5),
+                  P1 param1, P2 param2, P3 param3, P4 param4, P5 param5,
                   const ParamInfo* param_info, String config_path = "")
-      : Transform<I, O>(config_path),
+      : Transform<IN, OUT>(config_path),
         function4{function},
         param1{param1},
         param2{param2},
@@ -170,12 +170,12 @@ class LambdaTransform : public Transform<I, O> {
     this->load_configuration();
   }
 
-  LambdaTransform(O (*function)(I input, T1 param1, T2 param2, T3 param3,
-                                T4 param4, T5 param5, T6 param6),
-                  T1 param1, T2 param2, T3 param3, T4 param4, T5 param5,
-                  T6 param6, const ParamInfo* param_info,
+  LambdaTransform(OUT (*function)(IN input, P1 param1, P2 param2, P3 param3,
+                                P4 param4, P5 param5, P6 param6),
+                  P1 param1, P2 param2, P3 param3, P4 param4, P5 param5,
+                  P6 param6, const ParamInfo* param_info,
                   String config_path = "")
-      : Transform<I, O>(config_path),
+      : Transform<IN, OUT>(config_path),
         function4{function},
         param1{param1},
         param2{param2},
@@ -188,7 +188,7 @@ class LambdaTransform : public Transform<I, O> {
     this->load_configuration();
   }
 
-  void set_input(I input, uint8_t input_channel = 0) override {
+  void set_input(IN input, uint8_t input_channel = 0) override {
     switch (num_params) {
       case 0:
         this->output = (*function0)(input);
@@ -327,24 +327,24 @@ class LambdaTransform : public Transform<I, O> {
   }
 
  private:
-  T1 param1;
-  T2 param2;
-  T3 param3;
-  T4 param4;
-  T5 param5;
-  T6 param6;
+  P1 param1;
+  P2 param2;
+  P3 param3;
+  P4 param4;
+  P5 param5;
+  P6 param6;
   int num_params;
   const ParamInfo* param_info;
 
-  O (*function0)(I input);
-  O (*function1)(I input, T1 param1);
-  O (*function2)(I input, T1 param1, T2 param2);
-  O (*function3)(I input, T1 param1, T2 param2, T3 param3);
-  O (*function4)(I input, T1 param1, T2 param2, T3 param3, T4 param4);
-  O(*function5)
-  (I input, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5);
-  O(*function6)
-  (I input, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6);
+  OUT (*function0)(IN input);
+  OUT (*function1)(IN input, P1 param1);
+  OUT (*function2)(IN input, P1 param1, P2 param2);
+  OUT (*function3)(IN input, P1 param1, P2 param2, P3 param3);
+  OUT (*function4)(IN input, P1 param1, P2 param2, P3 param3, P4 param4);
+  OUT(*function5)
+  (IN input, P1 param1, P2 param2, P3 param3, P4 param4, P5 param5);
+  OUT(*function6)
+  (IN input, P1 param1, P2 param2, P3 param3, P4 param4, P5 param5, P6 param6);
 
   static String format_schema_row(const char key[], const char title[],
                                   const char type[], const bool read_only) {
