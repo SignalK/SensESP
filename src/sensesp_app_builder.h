@@ -25,9 +25,10 @@ class SensESPAppBuilder {
     this->password = password;
     return this;
   }
-  SensESPAppBuilder* set_sk_server(String address, uint16_t port) {
+  SensESPAppBuilder* set_sk_server(String address, uint16_t port, SKPermissions permissions = READWRITE) {
     this->sk_server_address = address;
     this->sk_server_port = port;
+    this->sk_server_permissions = permissions;
     return this;
   }
   SensESPAppBuilder* set_standard_sensors(StandardSensors sensors = ALL) {
@@ -48,11 +49,6 @@ class SensESPAppBuilder {
   }
   SensESPAppBuilder* set_hostname(String hostname) {
     this->hostname = hostname;
-    return this;
-  }
-
-  SensESPAppBuilder* set_server_permissions(SKPermissions permissions) {
-    this->sk_server_permissions = permissions;
     return this;
   }
 
