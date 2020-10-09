@@ -36,7 +36,8 @@ ReactESP app([]() {
       new AnalogInput(pin, read_delay, analog_in_config_path, output_scale);
 
   // This is our transform function. The example is artificial; a log transform
-  // with configurable multiplier, base, and offset parameters.
+  // with configurable multiplier, base, and offset parameters. The 
+  // final "-> float" refers to the return type of the function.
 
   auto log_function = [](float input, float multiplier, float base,
                          float offset) -> float {
