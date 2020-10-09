@@ -9,6 +9,9 @@
 ReactESP app([]() {
   SetupSerialDebug(115200);
 
+  // Create a new SensESPApp object. This is the direct constructor call, and
+  // an equivalent alternative to using the SensESPAppBuilder class.
+
   sensesp_app = new SensESPApp("sensesp-illum-example", "My WiFi SSID",
                                "my_wifi_password", "skdev.lan", 80, NONE);
 
