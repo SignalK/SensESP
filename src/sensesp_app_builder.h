@@ -16,6 +16,7 @@ class SensESPAppBuilder {
   int led_ws_connected = 200;
   int led_wifi_connected = 1000;
   int led_offline = 5000;
+  SKPermissions sk_server_permissions = READWRITE;
 
  public:
   SensESPAppBuilder() {}
@@ -49,10 +50,17 @@ class SensESPAppBuilder {
     this->hostname = hostname;
     return this;
   }
+
+  SensESPAppBuilder* set_server_permissions(SKPermissions permissions) {
+    this->sk_server_permissions = permissions;
+    return this;
+  }
+
   SensESPApp* get_app() {
     return new SensESPApp(hostname, ssid, password, sk_server_address,
                           sk_server_port, sensors, led_pin, enable_led,
-                          led_ws_connected, led_wifi_connected, led_offline);
+                          led_ws_connected, led_wifi_connected, led_offline,
+                          sk_server_permissions);
   }
 };
 
