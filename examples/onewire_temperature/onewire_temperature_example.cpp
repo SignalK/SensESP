@@ -31,7 +31,13 @@ ReactESP app([]() {
      ESP8266 pins are specified as DX
      ESP32 pins are specified as just the X in GPIOX
   */
-  DallasTemperatureSensors* dts = new DallasTemperatureSensors(D7);
+#ifdef ESP8266
+  uint8_t pin = D7;
+#elif defined(ESP32)
+  uint8_t pin = 4;
+#endif
+
+  DallasTemperatureSensors* dts = new DallasTemperatureSensors(pin);
 
   // Define how often SensESP should read the sensor(s) in milliseconds
   uint read_delay = 500;

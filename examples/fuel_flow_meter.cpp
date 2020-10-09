@@ -13,7 +13,14 @@ ReactESP app([]() {
   // setup the fuel flow meter on two pins
   // ESP8266 pins are specified as DX
   // ESP32 pins are specified as just the X in GPIOX
-  setup_fuel_flow_meter(D5, D6);
+#ifdef ESP8266
+  uint8_t pinA = D5;
+  uint8_t pinB = D6;  
+#elif defined(ESP32)
+  uint8_t pinA = 4;
+  uint8_t pinB = 5;
+#endif
+  setup_fuel_flow_meter(pinA, pinB);
 
   sensesp_app->enable();
 });

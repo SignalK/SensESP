@@ -62,7 +62,12 @@ ReactESP app([]() {
   // Wire it all up by connecting the producer directly to the consumer
   // ESP8266 pins are specified as DX
   // ESP32 pins are specified as just the X in GPIOX
-  auto* sensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
+#ifdef ESP8266
+  uint8_t pin = D5;  
+#elif defined(ESP32)
+  uint8_t pin = 4;
+#endif
+  auto* sensor = new DigitalInputCounter(pin, INPUT_PULLUP, RISING, read_delay);
 
   sensor
       ->connect_to(new Frequency(
