@@ -31,7 +31,7 @@ void SetupSerialDebug(uint32_t baudrate) {
   delay(100);
   Debug.setSerialEnabled(true);
   delay(100);
-  debugI("Serial debug enabled");
+  debugI("\nSerial debug enabled");
 }
 
 SensESPApp::SensESPApp(String preset_hostname, String ssid,
