@@ -72,9 +72,9 @@ struct ParamInfo {
  * @tparam P5 Transform function parameter 5 type
  * @tparam P6 Transform function parameter 6 type
  * */
-template <class IN, class OUT, class P1 = float, class P2 = float,
-          class P3 = float, class P4 = float, class P5 = float,
-          class P6 = float>
+template <class IN, class OUT, class P1 = bool, class P2 = bool,
+          class P3 = bool, class P4 = bool, class P5 = bool,
+          class P6 = bool>
 class LambdaTransform : public Transform<IN, OUT> {
  public:
   LambdaTransform(OUT (*function)(IN input), String config_path = "")
