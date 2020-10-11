@@ -1,18 +1,17 @@
+#include <Adafruit_Sensor.h>
 #include <Arduino.h>
 #include <Wire.h>
 
 #include <sstream>
 #include <string>
 
-#include <Adafruit_Sensor.h>
-
 #include "sensesp_app.h"
-#include "signalk/signalk_output.h"
 #include "sensors/orientation_9dof_input.h"
 #include "sensors/sensor_nxp_fxos8700_fxas21002.h"
+#include "signalk/signalk_output.h"
 
-#define PIN_I2C_SDA   (23)  //Adjust to your board. A value of -1
-#define PIN_I2C_SCL   (25)  // will use default Arduino pins.
+#define PIN_I2C_SDA (23)  // Adjust to your board. A value of -1
+#define PIN_I2C_SCL (25)  // will use default Arduino pins.
 
 #define ORIENTATION_SAMPLING_INTERVAL_MS (100)
 
@@ -37,18 +36,18 @@ ReactESP app([]() {
   // of them to go to SignalK, you might have sk_path_portEngine =
   // "propulsion.port.revolutions" and sk_path_starboardEngine =
   // "propulsion.starboard.revolutions"
-  const char* sk_path_heading     = "orientation.heading";
-  const char* sk_path_pitch       = "orientation.pitch";
-  const char* sk_path_roll        = "orientation.roll";
+  const char* sk_path_heading = "orientation.heading";
+  const char* sk_path_pitch = "orientation.pitch";
+  const char* sk_path_roll = "orientation.roll";
   /* This example shows heading, pitch, and roll. If you want other parameters
       as well, uncomment the appropriate path(s) from the following.
   */
-  //const char* sk_path_accel_x     = "orientation.accel_x";
-  //const char* sk_path_accel_y     = "orientation.accel_y";
-  //const char* sk_path_accel_z     = "orientation.accel_z";
-  //const char* sk_path_turn_rate   = "orientation.turn_rate";
-  //const char* sk_path_roll_rate   = "orientation.roll_rate";
-  //const char* sk_path_pitch_rate  = "orientation.pitch_rate";
+  // const char* sk_path_accel_x     = "orientation.accel_x";
+  // const char* sk_path_accel_y     = "orientation.accel_y";
+  // const char* sk_path_accel_z     = "orientation.accel_z";
+  // const char* sk_path_turn_rate   = "orientation.turn_rate";
+  // const char* sk_path_roll_rate   = "orientation.roll_rate";
+  // const char* sk_path_pitch_rate  = "orientation.pitch_rate";
 
   // The "Configuration path" is combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
@@ -59,26 +58,27 @@ ReactESP app([]() {
   // configuration to save, or that you're not interested in doing
   // run-time configuration.
   // These two are necessary until a method is created to synthesize them.
-  const char* config_path_orientation_skpath  = "/sensors/orientation/sk";
-  const char* config_path_heading             = "/sensors/orientation/heading";
-  const char* config_path_pitch               = "/sensors/orientation/pitch";
-  const char* config_path_roll                = "/sensors/orientation/roll";
+  const char* config_path_orientation_skpath = "/sensors/orientation/sk";
+  const char* config_path_heading = "/sensors/orientation/heading";
+  const char* config_path_pitch = "/sensors/orientation/pitch";
+  const char* config_path_roll = "/sensors/orientation/roll";
   /* This example shows heading, pitch, and roll. If you want other parameters
       as well, uncomment the appropriate path(s) from the following.
   */
-  //const char* config_path_accel_x             = "/sensors/orientation/accel_x";
-  //const char* config_path_accel_y             = "/sensors/orientation/accel_y";
-  //const char* config_path_accel_z             = "/sensors/orientation/accel_z";
-  //const char* config_path_turn_rate           = "/sensors/orientation/turn_rate";
-  //const char* config_path_roll_rate           = "/sensors/orientation/roll_rate";
-  //const char* config_path_pitch_rate          = "/sensors/orientation/pitch_rate";
-  /*above arrangement of paths yields this sensor web interface structure:
-    sensors->orientation->heading
-                        ->pitch
-                        ->roll
-                        ->sk   (and this one, which allows setting the SK name of sensor, only lists the last
-                                connect_to path, "orientation.roll" in this case)
-  */    
+  // const char* config_path_accel_x = "/sensors/orientation/accel_x"; 
+  // const char* config_path_accel_y = "/sensors/orientation/accel_y"; 
+  // const char* config_path_accel_z = "/sensors/orientation/accel_z"; 
+  // const char* config_path_turn_rate = "/sensors/orientation/turn_rate"; 
+  // const char* config_path_roll_rate = "/sensors/orientation/roll_rate";
+  // const char* config_path_pitch_rate = "/sensors/orientation/pitch_rate";
+  /* above arrangement of paths yields this sensor web interface structure:
+     sensors->orientation->heading
+                         ->pitch
+                         ->roll
+                         ->sk   (and this one, which allows setting the SK name
+     of sensor, only lists the last connect_to path, "orientation.roll" in this
+     case)
+  */
 
   // Magnetic Heading data source, using 9 Degrees-of-freedom combination sensor
   Orientation9DOF NXP9DOF =
@@ -92,10 +92,11 @@ ReactESP app([]() {
       After calibration values have been written to EEPROM/Flash, re-comment
      following line to restore normal program flow.
   */
-  //  NXP9DOF.stream_raw_values();  //continuous raw data collection. This call does not return.
+  //  NXP9DOF.stream_raw_values();  //continuous raw data collection. This call
+  //  does not return.
 
   // Start periodic readings from orientation sensor. Note that the physical
-  //  sensor is read at whatever rate is specified for the heading 
+  //  sensor is read at whatever rate is specified for the heading
   //  parameter; all other parameters are retrieved from variables that
   //  are updated only at the time of the sensor read. So, ensure that
   //  the sampling rate specified for the heading parameter is the same
@@ -106,77 +107,75 @@ ReactESP app([]() {
                    config_path_heading);
   sensor_heading->connect_to(
       new SKOutputNumber(sk_path_heading, config_path_orientation_skpath));
-  
-  auto* sensor_pitch =
-      new Read9DOF(&NXP9DOF, pitch, ORIENTATION_SAMPLING_INTERVAL_MS*5,
-                   config_path_pitch);
+
+  auto* sensor_pitch = new Read9DOF(
+      &NXP9DOF, pitch, ORIENTATION_SAMPLING_INTERVAL_MS * 5, config_path_pitch);
   sensor_pitch->connect_to(
       new SKOutputNumber(sk_path_pitch, config_path_orientation_skpath));
 
- auto* sensor_roll =
-      new Read9DOF(&NXP9DOF, roll, ORIENTATION_SAMPLING_INTERVAL_MS*5,
-                   config_path_roll);
+  auto* sensor_roll = new Read9DOF(
+      &NXP9DOF, roll, ORIENTATION_SAMPLING_INTERVAL_MS * 5, config_path_roll);
   sensor_roll->connect_to(
       new SKOutputNumber(sk_path_roll, config_path_orientation_skpath));
 
   /* This example shows heading, pitch, and roll. If you want other parameters
       as well, uncomment the appropriate connections from the following.
-  
+
  auto* pSensor_turn_rate =
       new Read9DOF(&NXP9DOF, rate_of_turn, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_turn_rate);
   pSensor_turn_rate->connectTo(
       new SKOutputNumber(sk_path_turn_rate, config_path_orientation_skpath));
-  
+
  auto* pSensor_roll_rate =
       new Read9DOF(&NXP9DOF, rate_of_roll, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_roll_rate);
   pSensor_roll_rate->connectTo(
       new SKOutputNumber(sk_path_roll_rate, config_path_orientation_skpath));
-   
+
  auto* pSensor_pitch_rate =
       new Read9DOF(&NXP9DOF, rate_of_pitch, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_pitch_rate);
   pSensor_pitch_rate->connectTo(
       new SKOutputNumber(sk_path_pitch_rate, config_path_orientation_skpath));
-  
+
  auto* pSensor_accel_x =
       new Read9DOF(&NXP9DOF, acceleration_x, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_x);
   pSensor_accel_x->connectTo(
       new SKOutputNumber(sk_path_accel_x, config_path_orientation_skpath));
-  
+
  auto* pSensor_accel_y =
       new Read9DOF(&NXP9DOF, acceleration_y, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_y);
   pSensor_accel_y->connectTo(
       new SKOutputNumber(sk_path_accel_y, config_path_orientation_skpath));
-  
+
  auto* pSensor_accel_z =
       new Read9DOF(&NXP9DOF, acceleration_z, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_z);
   pSensor_accel_z->connectTo(
       new SKOutputNumber(sk_path_accel_z, config_path_orientation_skpath));
   */
-    /*  Relationship of the Axes and the terminology:
-    X,Y,Z are orthogonal, in a Right-handed coordinate system: 
-    think of the X axis pointing West, Y pointing South, and Z pointing up.
-    On the Adafruit FXOS8700/FXAS21002 sensor PCB, the axes are printed
-    on the top-side silkscreen.
-    Acceleration is measured in the direction of the corresponding axis.
-    
-    If the sensor is mounted with the X-axis pointing to the bow of the boat
-    and the Y-axis pointing to Port, then Z points up and the following applies:
-    Heading is rotation about the Z-axis. It increases with rotation to starboard.
-    Pitch is rotation about the Y-axis. Positive is when the bow points up.
-    Roll is rotation about the X-axis. Positive is rolling to starboard.
-    Turn-rate is rotation about the Z-axis. Positive is increasing bearing.
-    Roll-rate is rotation about the X-axis. Positive is rolling to starboard.
-    Pitch-rate is rotation about the Y-axis. Positive is ***bow falling.
-    
-    If the sensor is mounted differently, or you prefer an alternate nomenclature,
-    the get___() methods in sensor_NXP_FXOS8700_FXAS21002.cpp can be adjusted.
-  */
+  /*  Relationship of the Axes and the terminology:
+  X,Y,Z are orthogonal, in a Right-handed coordinate system:
+  think of the X axis pointing West, Y pointing South, and Z pointing up.
+  On the Adafruit FXOS8700/FXAS21002 sensor PCB, the axes are printed
+  on the top-side silkscreen.
+  Acceleration is measured in the direction of the corresponding axis.
+
+  If the sensor is mounted with the X-axis pointing to the bow of the boat
+  and the Y-axis pointing to Port, then Z points up and the following applies:
+  Heading is rotation about the Z-axis. It increases with rotation to starboard.
+  Pitch is rotation about the Y-axis. Positive is when the bow points up.
+  Roll is rotation about the X-axis. Positive is rolling to starboard.
+  Turn-rate is rotation about the Z-axis. Positive is increasing bearing.
+  Roll-rate is rotation about the X-axis. Positive is rolling to starboard.
+  Pitch-rate is rotation about the Y-axis. Positive is ***bow falling.
+
+  If the sensor is mounted differently, or you prefer an alternate nomenclature,
+  the get___() methods in sensor_NXP_FXOS8700_FXAS21002.cpp can be adjusted.
+*/
 
   // Start the SensESP application running
   sensesp_app->enable();

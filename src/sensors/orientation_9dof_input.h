@@ -2,9 +2,9 @@
 #define SENSORS_ORIENTATION_9DOF_INPUT_H_
 
 //  SensESP Sensor definition file.
-//  Provides Orientation from 9DOF sensor combination (magnetometer, 
+//  Provides Orientation from 9DOF sensor combination (magnetometer,
 //    accelerometer, gyroscope) consisting of FXOS8700 + FXAS21002
- 
+
 #include "sensor.h"
 #include "sensor_nxp_fxos8700_fxas21002.h"
 
@@ -25,16 +25,23 @@ class Orientation9DOF : public Sensor {
  public:
   Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                   String config_path = "");
-  void stream_raw_values(void);       // used when calibrating
+  void stream_raw_values(void);  // used when calibrating
  private:
   uint8_t addr;  // unused
 };
 
-// Pass one of these in Read9DOF() constructor corresponding to type of value you want
+// Pass one of these in Read9DOF() constructor corresponding to type of value
+// you want
 enum OrientationValType {
-  compass_hdg, pitch, roll, 
-  acceleration_x, acceleration_y, acceleration_z,
-  rate_of_turn, rate_of_pitch, rate_of_roll
+  compass_hdg,
+  pitch,
+  roll,
+  acceleration_x,
+  acceleration_y,
+  acceleration_z,
+  rate_of_turn,
+  rate_of_pitch,
+  rate_of_roll
 };
 
 // Read9DOF reads the combo FXOS8700 + FXAS21002 sensor and outputs the
@@ -56,4 +63,4 @@ class Read9DOF : public NumericSensor {
   virtual String get_config_schema() override;
 };
 
-#endif  //SENSORS_ORIENTATION_9DOF_INPUT_H_
+#endif  // SENSORS_ORIENTATION_9DOF_INPUT_H_

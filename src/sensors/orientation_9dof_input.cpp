@@ -1,12 +1,13 @@
 #include "orientation_9dof_input.h"
 
 #include <RemoteDebug.h>
+
 #include "sensesp.h"
 
 // pointer to physical sensor
 SensorNXP_FXOS8700_FXAS21002*
-    sensor_fxos_fxas;  // if sensor_fxos_fxas is a member of Orientation9DOF, then
-                      // when called in onRepeat it causes CPU panic 
+    sensor_fxos_fxas;  // if sensor_fxos_fxas is a member of Orientation9DOF,
+                       // then when called in onRepeat it causes CPU panic
 
 // Orientation9DOF represents a 9-Degrees-of-Freedom sensor (magnetometer,
 // accelerometer, and gyroscope), such as an
@@ -19,10 +20,9 @@ Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
   if (!sensor_fxos_fxas->connect(pin_i2c_sda, pin_i2c_scl)) {
     debugE(
         "No connection to FXOS8700/FXAS21002 sensor: check address & wiring");
-  }else {
+  } else {
     sensor_fxos_fxas->printSensorDetails();
   }
-
 }
 
 void Orientation9DOF::stream_raw_values(void) {
@@ -35,13 +35,14 @@ void Orientation9DOF::stream_raw_values(void) {
 }
 
 // Read9DOF() sets up access to the combo FXOS8700 + FXAS21002 sensor, loads
-// its configuration, and initializes the filter that turns raw data into 
-// desired orientation parameter. For accurate filter output, sensor needs 
+// its configuration, and initializes the filter that turns raw data into
+// desired orientation parameter. For accurate filter output, sensor needs
 // to be calibrated first. OrientationValType val_type specifies what kind of
 // orientation parameter value is to be read (heading, linear accel, or angular
 // velocity)
-Read9DOF::Read9DOF(Orientation9DOF* orientation_9dof, OrientationValType val_type,
-                   uint read_delay, String config_path)
+Read9DOF::Read9DOF(Orientation9DOF* orientation_9dof,
+                   OrientationValType val_type, uint read_delay,
+                   String config_path)
     : NumericSensor(config_path),
       orientation_9dof{orientation_9dof},
       val_type{val_type},
@@ -55,18 +56,18 @@ void Read9DOF::enable() {
   app.onRepeat(read_delay, [this]() { this->update(); });
 }
 
-// Provides one parameter reading from the combination sensor. 
+// Provides one parameter reading from the combination sensor.
 // val_type determines which particular parameter is output.
 // Note that since the filter algorithm works best when all 9-DOF
 //  parameters are captured simultaneously, and at a specified
-//  constant rate, there is only a single call to 
+//  constant rate, there is only a single call to
 //  sensor_fxos_fxas->gatherOrientationDataOnce() in this method.
 //  Arbitrarily, this update happens when the compass heading
 //  is requested; all the remaining parameters are retrieved
 //  by calling the appropriate sensor_fxos_fxas->getter method.
 // If the compass heading parameter is not the one that is set
 //  to the fastest repetition rate (in main.cpp when calling
-//  Read9DOF::Read9DOF()), then you should move the  
+//  Read9DOF::Read9DOF()), then you should move the
 //  gatherOrientationDataOnce() call into the case block
 //  for whichever parameter _is_ updated the fastest - this
 //  ensures that that parameter and all others are never stale.
@@ -75,8 +76,8 @@ void Read9DOF::update() {
   // onRepeat it causes CPU panic
   switch (val_type) {
     case (compass_hdg):
-      //sensor is read and filter called, only for compass_hdg
-      //remaining parameters are obtained from most recent filter results
+      // sensor is read and filter called, only for compass_hdg
+      // remaining parameters are obtained from most recent filter results
       sensor_fxos_fxas->gatherOrientationDataOnce(false);
       output = sensor_fxos_fxas->getHeadingRadians();
       break;
