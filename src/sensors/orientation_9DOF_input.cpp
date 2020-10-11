@@ -15,7 +15,7 @@ Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                                  String config_path)
     : Sensor(config_path) {
   className = "Orientation9DOF";
-  load_configuration(); //no effect, since get_ and set_configuration() not defined
+  load_configuration();
   pSensorFXOSFXAS = new SensorNXP_FXOS8700_FXAS21002();
   if (!pSensorFXOSFXAS->connect(pin_i2c_sda, pin_i2c_scl)) {
     debugE(
@@ -112,11 +112,9 @@ void Read9DOF::update() {
   notify();
 }
 
-JsonObject& Read9DOF::get_configuration(JsonBuffer& buf) {
-  JsonObject& root = buf.createObject();
-  root["read_delay"] = read_delay;
-  root["value"] = output;
-  return root;
+void Read9DOF::get_configuration(JsonObject& doc) {
+  doc["read_delay"] = read_delay;
+  doc["value"] = output;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({

@@ -51,7 +51,7 @@ class Read9DOF : public NumericSensor {
   uint read_delay;
   void update(void);  // doesn't exist in some examples (e.g. BME280)
                       // Incorporated into enable() instead.
-  virtual JsonObject& get_configuration(JsonBuffer& buf) override;
+  virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };
