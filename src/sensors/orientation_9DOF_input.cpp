@@ -14,7 +14,6 @@ SensorNXP_FXOS8700_FXAS21002*
 Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                                  String config_path)
     : Sensor(config_path) {
-  className = "Orientation9DOF";
   load_configuration();
   pSensorFXOSFXAS = new SensorNXP_FXOS8700_FXAS21002();
   if (!pSensorFXOSFXAS->connect(pin_i2c_sda, pin_i2c_scl)) {
@@ -47,7 +46,6 @@ Read9DOF::Read9DOF(Orientation9DOF* p9DOF, OrientationValType val_type,
       pOrientation9DOF{p9DOF},
       val_type{val_type},
       read_delay{read_delay} {
-  className = "Read9DOF";
   load_configuration();
   pSensorFXOSFXAS->initFilter(this->read_delay);
 }
