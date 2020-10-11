@@ -47,7 +47,8 @@ class BME280Value : public NumericSensor {
   virtual String get_config_schema() override;
 };
 
-[[deprecated("Use BME280Value instead.")]]
+// FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+// [[deprecated("Use BME280Value instead.")]]
 typedef BME280Value BME280value;
 
 #endif
