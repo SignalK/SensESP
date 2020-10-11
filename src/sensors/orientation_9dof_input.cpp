@@ -5,7 +5,7 @@
 
 // pointer to physical sensor
 SensorNXP_FXOS8700_FXAS21002*
-    pSensorFXOSFXAS;  // if pSensorFXOSFXAS is a member of Orientation9DOF, then
+    sensor_fxos_fxas;  // if sensor_fxos_fxas is a member of Orientation9DOF, then
                       // when called in onRepeat it causes CPU panic 
 
 // Orientation9DOF represents a 9-Degrees-of-Freedom sensor (magnetometer,
@@ -15,21 +15,21 @@ Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                                  String config_path)
     : Sensor(config_path) {
   load_configuration();
-  pSensorFXOSFXAS = new SensorNXP_FXOS8700_FXAS21002();
-  if (!pSensorFXOSFXAS->connect(pin_i2c_sda, pin_i2c_scl)) {
+  sensor_fxos_fxas = new SensorNXP_FXOS8700_FXAS21002();
+  if (!sensor_fxos_fxas->connect(pin_i2c_sda, pin_i2c_scl)) {
     debugE(
         "No connection to FXOS8700/FXAS21002 sensor: check address & wiring");
   }else {
-    pSensorFXOSFXAS->printSensorDetails();
+    sensor_fxos_fxas->printSensorDetails();
   }
 
 }
 
-void Orientation9DOF::streamRawValues(void) {
+void Orientation9DOF::stream_raw_values(void) {
   // Used only when calibrating. This method does not return.
   debugI("calling gatherCalibrationData()");
   while (true) {
-    pSensorFXOSFXAS->gatherCalibrationDataOnce(true);
+    sensor_fxos_fxas->gatherCalibrationDataOnce(true);
     delay(10);
   }
 }
@@ -40,14 +40,14 @@ void Orientation9DOF::streamRawValues(void) {
 // to be calibrated first. OrientationValType val_type specifies what kind of
 // orientation parameter value is to be read (heading, linear accel, or angular
 // velocity)
-Read9DOF::Read9DOF(Orientation9DOF* p9DOF, OrientationValType val_type,
+Read9DOF::Read9DOF(Orientation9DOF* orientation_9dof, OrientationValType val_type,
                    uint read_delay, String config_path)
     : NumericSensor(config_path),
-      pOrientation9DOF{p9DOF},
+      orientation_9dof{orientation_9dof},
       val_type{val_type},
       read_delay{read_delay} {
   load_configuration();
-  pSensorFXOSFXAS->initFilter(this->read_delay);
+  sensor_fxos_fxas->initFilter(this->read_delay);
 }
 
 // Setup repeated readings from combination sensor.
@@ -60,10 +60,10 @@ void Read9DOF::enable() {
 // Note that since the filter algorithm works best when all 9-DOF
 //  parameters are captured simultaneously, and at a specified
 //  constant rate, there is only a single call to 
-//  pSensorFXOSFXAS->gatherOrientationDataOnce() in this method.
+//  sensor_fxos_fxas->gatherOrientationDataOnce() in this method.
 //  Arbitrarily, this update happens when the compass heading
 //  is requested; all the remaining parameters are retrieved
-//  by calling the appropriate pSensorFXOSFXAS->getter method.
+//  by calling the appropriate sensor_fxos_fxas->getter method.
 // If the compass heading parameter is not the one that is set
 //  to the fastest repetition rate (in main.cpp when calling
 //  Read9DOF::Read9DOF()), then you should move the  
@@ -71,38 +71,38 @@ void Read9DOF::enable() {
 //  for whichever parameter _is_ updated the fastest - this
 //  ensures that that parameter and all others are never stale.
 void Read9DOF::update() {
-  // if pSensorFXOSFXAS is a member of Orientation9DOF, then when called in
+  // if sensor_fxos_fxas is a member of Orientation9DOF, then when called in
   // onRepeat it causes CPU panic
   switch (val_type) {
     case (compass_hdg):
       //sensor is read and filter called, only for compass_hdg
       //remaining parameters are obtained from most recent filter results
-      pSensorFXOSFXAS->gatherOrientationDataOnce(false);
-      output = pSensorFXOSFXAS->getHeadingRadians();
+      sensor_fxos_fxas->gatherOrientationDataOnce(false);
+      output = sensor_fxos_fxas->getHeadingRadians();
       break;
     case (roll):
-      output = pSensorFXOSFXAS->getRollRadians();
+      output = sensor_fxos_fxas->getRollRadians();
       break;
     case (pitch):
-      output = pSensorFXOSFXAS->getPitchRadians();
+      output = sensor_fxos_fxas->getPitchRadians();
       break;
     case (acceleration_x):
-      output = pSensorFXOSFXAS->getAccelerationX();
+      output = sensor_fxos_fxas->getAccelerationX();
       break;
     case (acceleration_y):
-      output = pSensorFXOSFXAS->getAccelerationY();
+      output = sensor_fxos_fxas->getAccelerationY();
       break;
     case (acceleration_z):
-      output = pSensorFXOSFXAS->getAccelerationZ();
+      output = sensor_fxos_fxas->getAccelerationZ();
       break;
     case (rate_of_turn):
-      output = pSensorFXOSFXAS->getRateOfTurn();
+      output = sensor_fxos_fxas->getRateOfTurn();
       break;
     case (rate_of_pitch):
-      output = pSensorFXOSFXAS->getRateOfPitch();
+      output = sensor_fxos_fxas->getRateOfPitch();
       break;
     case (rate_of_roll):
-      output = pSensorFXOSFXAS->getRateOfRoll();
+      output = sensor_fxos_fxas->getRateOfRoll();
       break;
     default:
       output = 0.0;

@@ -18,14 +18,14 @@
 //  filter, and stores the combined 9DOF orientation data.
 // Calling the public Adafruit_FXOS8700:: methods can be done
 //  after you instantiate Orientation9DOF, for example by:
-//  pSensorFXOSFXAS->pAdafruitFXOS8700->setSampling();
+//  sensor_fxos_fxas->pAdafruitFXOS8700->setSampling();
 //  See the Adafruit library for details.
 //  https://github.com/adafruit/Adafruit_FXOS8700_Library/blob/master/Adafruit_FXOS8700.h
 class Orientation9DOF : public Sensor {
  public:
   Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                   String config_path = "");
-  void streamRawValues(void);       // used when calibrating
+  void stream_raw_values(void);       // used when calibrating
  private:
   uint8_t addr;  // unused
 };
@@ -44,7 +44,7 @@ class Read9DOF : public NumericSensor {
   Read9DOF(Orientation9DOF* p9DOF, OrientationValType val_type = compass_hdg,
            uint read_delay = 100, String config_path = "");
   void enable() override final;
-  Orientation9DOF* pOrientation9DOF;
+  Orientation9DOF* orientation_9dof;
 
  private:
   OrientationValType val_type;

@@ -92,7 +92,7 @@ ReactESP app([]() {
       After calibration values have been written to EEPROM/Flash, re-comment
      following line to restore normal program flow.
   */
-  //  NXP9DOF.streamRawValues();  //continuous raw data collection. This call does not return.
+  //  NXP9DOF.stream_raw_values();  //continuous raw data collection. This call does not return.
 
   // Start periodic readings from orientation sensor. Note that the physical
   //  sensor is read at whatever rate is specified for the heading 
@@ -101,22 +101,22 @@ ReactESP app([]() {
   //  the sampling rate specified for the heading parameter is the same
   //  or faster than any of the other parameters (otherwise those other
   //  parameters will not update at the rate you expect).
-  auto* pSensor_heading =
+  auto* sensor_heading =
       new Read9DOF(&NXP9DOF, compass_hdg, ORIENTATION_SAMPLING_INTERVAL_MS,
                    config_path_heading);
-  pSensor_heading->connectTo(
+  sensor_heading->connect_to(
       new SKOutputNumber(sk_path_heading, config_path_orientation_skpath));
   
-  auto* pSensor_pitch =
+  auto* sensor_pitch =
       new Read9DOF(&NXP9DOF, pitch, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_pitch);
-  pSensor_pitch->connectTo(
+  sensor_pitch->connect_to(
       new SKOutputNumber(sk_path_pitch, config_path_orientation_skpath));
 
- auto* pSensor_roll =
+ auto* sensor_roll =
       new Read9DOF(&NXP9DOF, roll, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_roll);
-  pSensor_roll->connectTo(
+  sensor_roll->connect_to(
       new SKOutputNumber(sk_path_roll, config_path_orientation_skpath));
 
   /* This example shows heading, pitch, and roll. If you want other parameters
