@@ -1,4 +1,4 @@
-#include "sensor_NXP_FXOS8700_FXAS21002.h"
+#include "sensor_nxp_fxos8700_fxas21002.h"
 
 #include <RemoteDebug.h>
 #include "sensesp.h"

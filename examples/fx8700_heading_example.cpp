@@ -8,8 +8,8 @@
 
 #include "sensesp_app.h"
 #include "signalk/signalk_output.h"
-#include "sensors/orientation_9DOF_input.h"
-#include "sensors/sensor_NXP_FXOS8700_FXAS21002.h"
+#include "sensors/orientation_9dof_input.h"
+#include "sensors/sensor_nxp_fxos8700_fxas21002.h"
 
 #define PIN_I2C_SDA   (23)  //Adjust to your board. A value of -1
 #define PIN_I2C_SCL   (25)  // will use default Arduino pins.

@@ -6,7 +6,7 @@
 //    accelerometer, gyroscope) consisting of FXOS8700 + FXAS21002
  
 #include "sensor.h"
-#include "sensor_NXP_FXOS8700_FXAS21002.h"
+#include "sensor_nxp_fxos8700_fxas21002.h"
 
 // Orientation9DOF represents an NXP FXOS8700 accelerometer and magnetometer
 //  sensor, plus an NXP FXAS21002C gyroscope. This combination sensor is found

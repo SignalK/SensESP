@@ -1,4 +1,4 @@
-#include "orientation_9DOF_input.h"
+#include "orientation_9dof_input.h"
 
 #include <RemoteDebug.h>
 #include "sensesp.h"
