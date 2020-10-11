@@ -42,7 +42,8 @@ class SHT31Value : public NumericSensor {
   virtual String get_config_schema() override;
 };
 
-[[deprecated("Use SHT31Value instead.")]]
+// FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+// [[deprecated("Use SHT31Value instead.")]]
 typedef SHT31Value SHT31value;
 
 #endif

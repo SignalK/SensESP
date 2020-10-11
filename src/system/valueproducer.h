@@ -41,9 +41,11 @@ class ValueProducer : virtual public Observable {
     });
   }
 
-  [[deprecated("Use connect_to() instead.")]]
+  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+  // [[deprecated("Use connect_to() instead.")]]
   void connectTo(
       ValueConsumer<T>* consumer, uint8_t input_channel = 0) {
+    debugW("Use connect_to() instead.");
     connect_to(consumer, input_channel);
   }
 
@@ -68,9 +70,11 @@ class ValueProducer : virtual public Observable {
   }
 
   template <typename T2>
-  [[deprecated("Use connect_to(...) instead.")]]
+  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+  //[[deprecated("Use connect_to(...) instead.")]]
   Transform<T, T2>* connectTo(
       Transform<T, T2>* consumer_producer, uint8_t input_channel = 0) {
+    debugW("Use connect_to(...) instead.");
     return connect_to(consumer_producer, input_channel);
   }
 

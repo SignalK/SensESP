@@ -5,6 +5,8 @@
 
 #include <queue>
 
+#include "sensesp.h"
+
 /**
  * Classes that implement "Enable" will have their enable() method
  * called automatically at startup when the SensESP app itself
@@ -38,8 +40,10 @@ class Enable {
    */
   static void enable_all();
 
-  [[deprecated("Use enable_all() instead.")]]
+  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+  // [[deprecated("Use enable_all() instead.")]]
   static void enableAll() {
+    debugW("Use enable_all() instead.");
     enable_all();
   };
 

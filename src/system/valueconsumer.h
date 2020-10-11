@@ -3,7 +3,7 @@
 
 #include <ArduinoJson.h>
 #include <stdint.h>
-
+#include "sensesp.h"
 template <typename T>
 class ValueProducer;
 
@@ -40,9 +40,11 @@ class ValueConsumer {
       this->set_input(producer->get(), input_channel);
     });
   }
-  [[deprecated("Use connect_from() instead.")]]
+  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+  // [[deprecated("Use connect_from() instead.")]]
   void connectFrom(
       ValueProducer<T>* producer, uint8_t input_channel = 0) {
+    debugW("Use connect_from() instead.");
     connect_from(producer, input_channel);
   }
 };

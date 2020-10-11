@@ -18,7 +18,8 @@ class UltrasonicDistance : public NumericSensor {
   virtual String get_config_schema() override;
 };
 
-[[deprecated("Use UltrasonicDistance instead.")]]
+// FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+// [[deprecated("Use UltrasonicDistance instead.")]]
 typedef UltrasonicDistance UltrasonicSens;
 
 #endif

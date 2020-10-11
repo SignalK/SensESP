@@ -45,7 +45,8 @@ class INA219Value : public NumericSensor {
   virtual String get_config_schema() override;
 };
 
-[[deprecated("Use INA219Value instead.")]]
+// FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+// [[deprecated("Use INA219Value instead.")]]
 typedef INA219Value INA219value;
 
 #endif

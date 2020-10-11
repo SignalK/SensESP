@@ -46,9 +46,11 @@ class ADS1x15Value : public NumericSensor {
 typedef ADS1x15Value<ADS1015> ADS1015Value;
 typedef ADS1x15Value<ADS1115> ADS1115Value;
 
-[[deprecated("Use ADS1015Value instead.")]]
+// FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+// [[deprecated("Use ADS1015Value instead.")]]
 typedef ADS1015Value ADS1015value;
-[[deprecated("Use ADS1115Value instead.")]]
+// FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
+// [[deprecated("Use ADS1115Value instead.")]]
 typedef ADS1115Value ADS1115value;
 
 #endif
