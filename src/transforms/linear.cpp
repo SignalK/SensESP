@@ -1,42 +1,17 @@
 #include "linear.h"
 
-// Linear
+// Keys and descriptions of constant parameters
+
+const ParamInfo Linear::param_info[] = {{"k", "Multiplier"},
+                                        {"c", "Constant offset"}};
+
+// Function implementing the linear transform
+
+float (*Linear::function)(float, float, float) =
+    [](float input, float k, float c) { return k * input + c; };
+
+// Constructor definition
 
 Linear::Linear(float k, float c, String config_path)
-    : NumericTransform(config_path), k{k}, c{c} {
-  load_configuration();
-}
-
-void Linear::set_input(float input, uint8_t inputChannel) {
-  output = k * input + c;
-  notify();
-}
-
-void Linear::get_configuration(JsonObject& root) {
-  root["k"] = k;
-  root["c"] = c;
-  root["value"] = output;
-}
-
-static const char SCHEMA[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "k": { "title": "Multiplier", "type": "number" },
-        "c": { "title": "Constant offset", "type": "number" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
-    }
-  })";
-
-String Linear::get_config_schema() { return FPSTR(SCHEMA); }
-
-bool Linear::set_configuration(const JsonObject& config) {
-  String expected[] = {"k", "c"};
-  for (auto str : expected) {
-    if (!config.containsKey(str)) {
-      return false;
-    }
-  }
-  k = config["k"];
-  c = config["c"];
-  return true;
-}
+    : LambdaTransform<float, float, float, float>(function, k, c, param_info,
+                                                  config_path) {}
