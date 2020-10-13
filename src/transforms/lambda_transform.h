@@ -154,7 +154,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         param2{param2},
         param3{param3},
         param4{param4},
-        param4{param5},
+        param5{param5},
         num_params{5},
         param_info{param_info} {
     this->load_configuration();
