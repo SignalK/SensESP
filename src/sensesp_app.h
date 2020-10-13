@@ -48,9 +48,9 @@ class SensESPApp {
   String get_hostname();
 
   template <typename T>
-  void connect(ValueProducer<T>* pProducer, ValueConsumer<T>* pConsumer,
+  void connect(ValueProducer<T>* producer, ValueConsumer<T>* consumer,
                uint8_t inputChannel = 0) {
-    pProducer->connect_to(pConsumer, inputChannel);
+    producer->connect_to(consumer, inputChannel);
   }
 
   template <typename T, typename U>

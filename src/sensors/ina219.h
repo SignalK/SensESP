@@ -32,7 +32,7 @@ enum INA219ValType { bus_voltage, shunt_voltage, current, power, load_voltage };
 // INA219Value reads and outputs the specified value of a INA219 sensor.
 class INA219Value : public NumericSensor {
  public:
-  INA219Value(INA219* pINA219, INA219ValType val_type, uint read_delay = 500,
+  INA219Value(INA219* ina219, INA219ValType val_type, uint read_delay = 500,
               String config_path = "");
   void enable() override final;
   INA219* ina219;
