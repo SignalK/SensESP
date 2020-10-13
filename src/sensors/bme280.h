@@ -14,7 +14,7 @@
 // the specified value. If you want to change any of the values with the
 // Adafruit_BME280::setSampling() method, it's public, so you can call that
 // after you instantiate the BME280 and before you start using it, with:
-// yourInstanceVariable->pAdafruitBME280->setSampling(); See the Adafruit
+// sensor_object->adafruit_bme280->setSampling(); See the Adafruit
 // library for details.
 // https://github.com/adafruit/Adafruit_BME280_Library/blob/master/Adafruit_BME280.h
 class BME280 : public Sensor {
