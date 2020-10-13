@@ -121,40 +121,40 @@ ReactESP app([]() {
   /* This example shows heading, pitch, and roll. If you want other parameters
       as well, uncomment the appropriate connections from the following.
 
- auto* pSensor_turn_rate =
+ auto* sensor_turn_rate =
       new Read9DOF(&NXP9DOF, rate_of_turn, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_turn_rate);
-  pSensor_turn_rate->connectTo(
+  sensor_turn_rate->connect_to(
       new SKOutputNumber(sk_path_turn_rate, config_path_orientation_skpath));
 
- auto* pSensor_roll_rate =
+ auto* sensor_roll_rate =
       new Read9DOF(&NXP9DOF, rate_of_roll, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_roll_rate);
-  pSensor_roll_rate->connectTo(
+  sensor_roll_rate->connect_to(
       new SKOutputNumber(sk_path_roll_rate, config_path_orientation_skpath));
 
- auto* pSensor_pitch_rate =
+ auto* sensor_pitch_rate =
       new Read9DOF(&NXP9DOF, rate_of_pitch, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_pitch_rate);
-  pSensor_pitch_rate->connectTo(
+  sensor_pitch_rate->connect_to(
       new SKOutputNumber(sk_path_pitch_rate, config_path_orientation_skpath));
 
- auto* pSensor_accel_x =
+ auto* sensor_accel_x =
       new Read9DOF(&NXP9DOF, acceleration_x, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_x);
-  pSensor_accel_x->connectTo(
+  sensor_accel_x->connect_to(
       new SKOutputNumber(sk_path_accel_x, config_path_orientation_skpath));
 
- auto* pSensor_accel_y =
+ auto* sensor_accel_y =
       new Read9DOF(&NXP9DOF, acceleration_y, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_y);
-  pSensor_accel_y->connectTo(
+  sensor_accel_y->connect_to(
       new SKOutputNumber(sk_path_accel_y, config_path_orientation_skpath));
 
- auto* pSensor_accel_z =
+ auto* sensor_accel_z =
       new Read9DOF(&NXP9DOF, acceleration_z, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_z);
-  pSensor_accel_z->connectTo(
+  sensor_accel_z->connect_to(
       new SKOutputNumber(sk_path_accel_z, config_path_orientation_skpath));
   */
   /*  Relationship of the Axes and the terminology:
