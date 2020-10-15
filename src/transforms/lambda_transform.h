@@ -19,29 +19,19 @@ static const char kLambdaTransformSchemaTail[] PROGMEM = R"(
  * template specializations.
  **/
 template <class T>
-const char* get_schema_type_string(const T dummy) {
-  return "string";
-}
+const char* get_schema_type_string(const T dummy);
 
 template <>
-const char* get_schema_type_string(const int dummy) {
-  return "number";
-}
+const char* get_schema_type_string(const int dummy);
 
 template <>
-const char* get_schema_type_string(const float dummy) {
-  return "number";
-}
+const char* get_schema_type_string(const float dummy);
 
 template <>
-const char* get_schema_type_string(const String dummy) {
-  return "string";
-}
+const char* get_schema_type_string(const String dummy);
 
 template <>
-const char* get_schema_type_string(const bool dummy) {
-  return "boolean";
-}
+const char* get_schema_type_string(const bool dummy);
 
 /**
  * Configuration parameter information struct
@@ -164,7 +154,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         param2{param2},
         param3{param3},
         param4{param4},
-        param4{param5},
+        param5{param5},
         num_params{5},
         param_info{param_info} {
     this->load_configuration();
