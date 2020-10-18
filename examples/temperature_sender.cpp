@@ -77,7 +77,7 @@ ReactESP app([]() {
                     ->set_sk_server("your server address", 80)
                     ->get_app();
 
-  // The "SignalK path" identifies the output of this sensor to the SignalK
+  // The "Signal K path" identifies the output of this sensor to the Signal K
   // network.
 
   const char* sk_path = "electrical.generator.engine.water.temp";
@@ -101,12 +101,12 @@ ReactESP app([]() {
   AnalogInput to volts, which is done with AnalogVoltage().
 
   Although complex, this example pefectly illustrates the normal "chain" for
-  getting a value from a sensor all the way to the SignalK server:
+  getting a value from a sensor all the way to the Signal K server:
   - A real-world sensor sends its output to an input pin on the microcontroller
   - The value read from that pin gives us our actual input to the program. In
   this example, that's an AnalogInput().
   - That input is then sent through one or more transforms so that the end
-  result is the value we want to send to SignalK. In this example, the
+  result is the value we want to send to Signal K. In this example, the
   transforms are AnalogVoltage(), then VoltageDivider2(), then
   TemperatureInterpreter(), then Linear().
   - Finally, the value we want is sent to the final "consumer", in this case
@@ -117,10 +117,10 @@ ReactESP app([]() {
   other transforms. For example, if you know your temperature sender always
   reports a temp that's about 5 degrees Fahrenheit too cold, you can calibrate
   its output here. A difference of 5 degrees F is a difference of 2.78 degrees
-  Kelvin, and all temps are sent to SignalK in Kelvin. So the Linear() below
+  Kelvin, and all temps are sent to Signal K in Kelvin. So the Linear() below
   would be Linear(1.0, 2.78, "gen/temp/calibrate") - 1.0 is the multiplier (so
   it does nothing), and 2.78 is the offset, so it's added to the output of
-  TemperatureInterpreter() just before the value is sent to SignalK.
+  TemperatureInterpreter() just before the value is sent to Signal K.
   ("gen/temp/calibrate" tells the Config UI how to display it.)
   */
 
@@ -138,14 +138,14 @@ ReactESP app([]() {
   auto* analog_input = new AnalogInput(A0);
 
   /* Translating the number returned by AnalogInput into a temperature, and
-     sending it to SignalK, requires several transforms. Wire them up in
+     sending it to Signal K, requires several transforms. Wire them up in
      sequence:
      - convert the value from the AnalogIn pin into an AnalogVoltage()
      - convert voltage into ohms with VoltageDividerR2()
      - find the Kelvin value for the given ohms value with
      TemperatureInterpreter()
      - use Linear() in case you want to calibrate the output at runtime
-     - send calibrated Kelvin value to SignalK with SKOutputNumber()
+     - send calibrated Kelvin value to Signal K with SKOutputNumber()
   */
   analog_input->connect_to(new AnalogVoltage())
       ->connect_to(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))

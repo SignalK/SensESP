@@ -28,7 +28,7 @@ class TransformBase : public Configurable, public Enable {
  public:
   TransformBase(String config_path = "");
 
-  // Primary purpose of this was to supply SignalK sources
+  // Primary purpose of this was to supply Signal K sources
   // (now handled by SKEmitter::get_sources). Should
   // this be deprecated?
   static const std::set<TransformBase*>& get_transforms() { return transforms; }

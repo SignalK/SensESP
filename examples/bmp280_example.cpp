@@ -30,7 +30,7 @@ ReactESP app([]() {
   const uint pressure_read_delay = 60000;  // once per minute
 
   // Create a BMP280Value, which is used to read a specific value from the
-  // BMP280, and send its output to SignalK as a number (float). This one is for
+  // BMP280, and send its output to Signal K as a number (float). This one is for
   // the temperature reading.
   auto* bmp_temperature =
       new BMP280Value(bmp280, temperature, read_delay, "/Outside/Temperature");

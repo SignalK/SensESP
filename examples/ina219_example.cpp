@@ -28,7 +28,7 @@ ReactESP app([]() {
   const uint read_delay = 1000;  // once per second
 
   // Create an INA219value, which is used to read a specific value from the
-  // INA219, and send its output to SignalK as a number (float). This one is for
+  // INA219, and send its output to Signal K as a number (float). This one is for
   // the bus voltage.
   auto* ina219_bus_voltage = new INA219Value(ina219, bus_voltage, read_delay,
                                              "/someElectricDevice/busVoltage");

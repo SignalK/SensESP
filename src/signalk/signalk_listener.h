@@ -12,14 +12,14 @@
 #include "system/valueproducer.h"
 
 /**
- * A SignalK listener is one that listens for SignalK stream deltas
+ * A Signal K listener is one that listens for Signal K stream deltas
  * and notifies of value changes
  */
 class SKListener : virtual public Observable {
  public:
   /**
    * The constructor
-   * @param sk_path The SignalK path that identifies
+   * @param sk_path The Signal K path that identifies
    * this particular subscription to value
    * @param listen_delay How often you want the SK Server to send the
    * data you're subscribing to
@@ -27,7 +27,7 @@ class SKListener : virtual public Observable {
   SKListener(String sk_path, int listen_delay);
 
   /**
-   * Returns the current SignalK path. An empty string
+   * Returns the current Signal K path. An empty string
    * is returned if this particular source is not configured
    * or intended to return actual data.
    */
