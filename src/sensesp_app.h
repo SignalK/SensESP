@@ -74,7 +74,7 @@ class SensESPApp {
   bool isWifiConnected() { return WiFi.status() == WL_CONNECTED; }
 
   /**
-   * Returns true if the host system is connected to a SignalK server
+   * Returns true if the host system is connected to a Signal K server
    */
   bool isSignalKConnected() { return ws_client->is_connected(); }
 

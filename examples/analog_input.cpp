@@ -18,9 +18,9 @@ ReactESP app([]() {
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp();
 
-  // The "SignalK path" identifies this sensor to the SignalK server. Leaving
+  // The "Signal K path" identifies this sensor to the Signal K server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
-  // broadcast SignalK data.
+  // broadcast Signal K data.
   const char* sk_path = "indoor.illumination";
 
   // The "Configuration path" is combined with "/config" to formulate a URL
@@ -56,7 +56,7 @@ ReactESP app([]() {
   const float offset = -16.44;
 
   // Wire up the output of the analog input to the Linear transform,
-  // and then output the results to the SignalK server.
+  // and then output the results to the Signal K server.
   analog_input->connect_to(new Linear(multiplier, offset, linear_config_path))
       ->connect_to(new SKOutputNumber(sk_path));
 

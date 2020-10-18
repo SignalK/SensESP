@@ -25,7 +25,7 @@ ReactESP app([]() {
   const uint read_delay = 1000;
 
   // Create a SHT31value, which is used to read a specific value from the SHT31,
-  // and send its output to SignalK as a Number (float). This one is for the
+  // and send its output to Signal K as a Number (float). This one is for the
   // temperature reading.
   auto* sht31_temperature =
       new SHT31Value(sht31, temperature, read_delay, "/fridge/temperature");

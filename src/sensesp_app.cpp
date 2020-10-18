@@ -128,7 +128,7 @@ void SensESPApp::enable() {
 
   for (auto const& sk_source : SKEmitter::get_sources()) {
     if (sk_source->get_sk_path() != "") {
-      debugI("Connecting SignalK source %s", sk_source->get_sk_path().c_str());
+      debugI("Connecting Signal K source %s", sk_source->get_sk_path().c_str());
       sk_source->attach([sk_source, this]() {
         this->sk_delta->append(sk_source->as_signalk());
       });

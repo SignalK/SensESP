@@ -24,7 +24,7 @@ void SKOutputTime::get_configuration(JsonObject& root) {
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "sk_path": { "title": "SignalK Path", "type": "string" },
+        "sk_path": { "title": "Signal K Path", "type": "string" },
         "value": { "title": "Last value", "type" : "string", "readOnly": true }
     }
   })";

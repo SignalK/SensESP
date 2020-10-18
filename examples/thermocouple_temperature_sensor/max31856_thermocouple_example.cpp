@@ -24,9 +24,9 @@ ReactESP app([]() {
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp();
 
-  // The "SignalK path" identifies this sensor to the SignalK server. Leaving
+  // The "Signal K path" identifies this sensor to the Signal K server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
-  // broadcast SignalK data.
+  // broadcast Signal K data.
   const char* sk_path = "propulsion.Main_Engine.temperature";
 
   // The "Configuration path" is combined with "/config" to formulate a URL
@@ -54,13 +54,13 @@ ReactESP app([]() {
   // A Linear transform takes its input, multiplies it by the multiplier, then
   // adds the offset, to calculate its output. The MAX31856TC produces
   // temperatures in degrees Celcius. We need to change them to Kelvin for
-  // compatibility with SignalK.
+  // compatibility with Signal K.
 
   const float multiplier = 1.0;
   const float offset = 273.16;
 
   // Wire up the output of the analog input to the Linear transform,
-  // and then output the results to the SignalK server.
+  // and then output the results to the Signal K server.
   max31856tc->connect_to(new Linear(multiplier, offset, ""))
       ->connect_to(new SKOutputNumber(sk_path));
 

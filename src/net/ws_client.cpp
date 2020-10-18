@@ -95,7 +95,7 @@ void WSClient::on_connected(uint8_t* payload) {
   this->connection_state = connected;
   debugI("Websocket client connected to URL: %s\n", payload);
   this->connected_cb(true);
-  debugI("Subscribing to SignalK listeners...");
+  debugI("Subscribing to Signal K listeners...");
   this->subscribe_listeners();
 }
 
@@ -194,15 +194,15 @@ void WSClient::connect() {
 
   if (this->server_address.isEmpty()) {
     if (!get_mdns_service(server_address, server_port)) {
-      debugE("No SignalK server found in network when using mDNS service!");
+      debugE("No Signal K server found in network when using mDNS service!");
     } else {
-      debugI("SignalK server has been found at address %s:%d by mDNS.",
+      debugI("Signal K server has been found at address %s:%d by mDNS.",
              server_address.c_str(), server_port);
     }
   }
 
   if (!server_address.isEmpty() && server_port > 0) {
-    debugD("Websocket is connecting to SignalK server on address %s:%d",
+    debugD("Websocket is connecting to Signal K server on address %s:%d",
            server_address.c_str(), server_port);
   } else {
     // host and port not defined - wait for mDNS
@@ -250,7 +250,7 @@ void WSClient::test_token(const String server_address,
     }
     if (httpCode == 200) {
       // our token is valid, go ahead and connect
-      debugD("Attempting to connect to SignalK Websocket...");
+      debugD("Attempting to connect to Signal K Websocket...");
       server_detected = true;
       this->connect_ws(server_address, server_port);
     } else if (httpCode == 401) {
@@ -441,8 +441,8 @@ void WSClient::get_configuration(JsonObject& root) {
 static const char SCHEMA[] PROGMEM = R"~({
     "type": "object",
     "properties": {
-        "sk_address": { "title": "SignalK server address", "type": "string" },
-        "sk_port": { "title": "SignalK server port", "type": "integer" },
+        "sk_address": { "title": "Signal K server address", "type": "string" },
+        "sk_port": { "title": "Signal K server port", "type": "integer" },
         "client_id": { "title": "Client ID (readonly)", "type": "string", "readOnly": true },
         "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
         "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
@@ -454,8 +454,8 @@ static const char SCHEMA_READONLY[] PROGMEM = R"~(
   {
     "type": "object",
     "properties": {
-        "sk_address": { "title": "SignalK server address (readonly)", "type": "string", "readOnly": true },
-        "sk_port": { "title": "SignalK server port (readonly)", "type": "integer", "readOnly": true },
+        "sk_address": { "title": "Signal K server address (readonly)", "type": "string", "readOnly": true },
+        "sk_port": { "title": "Signal K server port (readonly)", "type": "integer", "readOnly": true },
         "client_id": { "title": "Client ID  (readonly)", "type": "string", "readOnly": true },
         "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
         "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }

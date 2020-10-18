@@ -7,12 +7,12 @@
 static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
       "type": "object",
       "properties": {
-          "sk_path": { "title": "SignalK Path", "type": "string" }
+          "sk_path": { "title": "Signal K Path", "type": "string" }
       }
   })";
 
 // SKOutput is a specialized transform whose primary purpose is
-// to output SignalK data on the SignalK network.
+// to output Signal K data on the Signal K network.
 template <typename T>
 class SKOutput : public SKEmitter, public SymmetricTransform<T> {
  public:

@@ -216,9 +216,9 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
 
   response->printf("SSID: %s\n", WiFi.SSID().c_str());
 
-  response->printf("SignalK server address: %s\n",
+  response->printf("Signal K server address: %s\n",
                    sensesp_app->ws_client->get_server_address().c_str());
-  response->printf("SignalK server port: %d\n",
+  response->printf("Signal K server port: %d\n",
                    sensesp_app->ws_client->get_server_port());
 
   request->send(response);

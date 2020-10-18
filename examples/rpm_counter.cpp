@@ -16,14 +16,14 @@ ReactESP app([]() {
 
   sensesp_app = new SensESPApp();
 
-  // The "SignalK path" identifies the output of the sensor to the SignalK
+  // The "Signal K path" identifies the output of the sensor to the Signal K
   // network. If you have multiple sensors connected to your microcontoller
-  // (ESP), each one of them will (probably) have its own SignalK path variable.
+  // (ESP), each one of them will (probably) have its own Signal K path variable.
   // For example, if you have two propulsion engines, and you want the RPM of
-  // each of them to go to SignalK, you might have sk_path_portEngine =
+  // each of them to go to Signal K, you might have sk_path_portEngine =
   // "propulsion.port.revolutions" and sk_path_starboardEngine =
   // "propulsion.starboard.revolutions" In this example, there is only one
-  // propulsion engine, and its RPM is the only thing being reported to SignalK.
+  // propulsion engine, and its RPM is the only thing being reported to Signal K.
   const char* sk_path = "propulsion.main.revolutions";
 
   // The "Configuration path" is combined with "/config" to formulate a URL
@@ -35,7 +35,7 @@ ReactESP app([]() {
   // configuration to save.
   // Note that if you want to be able to change the sk_path at runtime,
   // you will need to specify a configuration path.
-  // As with the SignalK path, if you have multiple configurable sensors
+  // As with the Signal K path, if you have multiple configurable sensors
   // connected to the microcontroller, you will have a configuration path
   // for each of them, such as config_path_portEngine =
   // "/sensors/portEngine/rpm" and config_path_starboardEngine =
@@ -70,10 +70,10 @@ ReactESP app([]() {
                                                // to the input of Frequency()
       ->connect_to(new SKOutputNumber(
           sk_path, config_path_skpath));  // connect the output of Frequency()
-                                          // to a SignalK Output as a number
+                                          // to a Signal K Output as a number
 
   // Start the SensESP application running. Because of everything that's been
   // set up above, it constantly monitors the interrupt pin, and every
-  // read_delay ms, it sends the calculated frequency to SignalK.
+  // read_delay ms, it sends the calculated frequency to Signal K.
   sensesp_app->enable();
 });
