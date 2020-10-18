@@ -18,7 +18,7 @@ public:
   ETapeInterpreter(String config_path = "") : CurveInterpolator(NULL, config_path)
   {
 
-    // Populate a lookup table tp translate the ohm values returned by
+    // Populate a lookup table to translate the ohm values returned by
     // our level sensor to inches on the sensor scale
     clear_samples();
     // add_sample(CurveInterpolator::Sample(knownOhmValue, sensorHeight));
