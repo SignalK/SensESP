@@ -12,8 +12,8 @@ ReactESP app([]() {
   sensesp_app = new SensESPApp("sensesp-hysteresis-example", "My WiFi SSID",
                                "my_wifi_password", "skserver.lan", 80, NONE);
 
-  const char* sk_path = "indoor.illumination";
-  const char* analog_in_config_path = "/indoor_illumination/analog_in";
+  const char* sk_path = "environment.indoor.illuminance";
+  const char* analog_in_config_path = "/indoor_illuminance/analog_in";
 
   uint read_delay = 500;
 

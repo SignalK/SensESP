@@ -24,12 +24,14 @@ ReactESP app([]() {
   // Define the read_delay you're going to use. The default is 500 ms.
   const uint read_delay = 1000;
 
-  // Create a SHT31value, which is used to read a specific value from the SHT31,
-  // and send its output to Signal K as a Number (float). This one is for the
-  // temperature reading.
+  // Create a SHT31value, which is used to read a specific value from the SHT31.
+  // This one is for the temperature reading.
   auto* sht31_temperature =
       new SHT31Value(sht31, temperature, read_delay, "/fridge/temperature");
 
+  // Then send its output to Signal K as a Number (float).
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   sht31_temperature->connect_to(
       new SKOutputNumber("environment.inside.refrigerator.temperature"));
 

@@ -34,6 +34,8 @@ ReactESP app([]() {
                     ->set_standard_sensors()
                     ->get_app();
 
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html  
   // Define the SK Path you want to listen to
   const char* sk_path = "environment.outside.illuminance";
 

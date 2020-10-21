@@ -36,6 +36,10 @@ ReactESP app([]() {
   // Define how often SensESP should read the sensor(s) in milliseconds
   uint read_delay = 500;
 
+  // Below are temperatures sampled and sent to Signal K server
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
+
   // Measure coolant temperature
   auto* coolant_temp =
       new OneWireTemperature(dts, read_delay, "/coolantTemperature/oneWire");

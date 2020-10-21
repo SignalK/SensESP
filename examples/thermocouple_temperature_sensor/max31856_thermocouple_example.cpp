@@ -27,7 +27,9 @@ ReactESP app([]() {
   // The "Signal K path" identifies this sensor to the Signal K server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
   // broadcast Signal K data.
-  const char* sk_path = "propulsion.Main_Engine.temperature";
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
+  const char* sk_path = "propulsion.Main_Engine.exhaustTemperature";
 
   // The "Configuration path" is combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
@@ -38,10 +40,10 @@ ReactESP app([]() {
   // configuration to save, or that you're not interested in doing
   // run-time configuration.
 
-  const char* temperature_in_config_path =
-      "/propulsion/Main_Engine/temperature_in/read_delay";
+  const char* exhaust_temp_config_path =
+      "/propulsion/Main_Engine/exhaustTemperature/read_delay";
   // const char* linear_config_path =
-  // "/propulsion/Main_Engine/temperature_in/linear";
+  // "/propulsion/Main_Engine/exhaustTemperature/linear";
 
   // Create a sensor that is the source of our data, that will be read every
   // 1000 ms.
@@ -49,11 +51,11 @@ ReactESP app([]() {
   // tcType:  MAX31856_TCTYPE_K;   // other types can be B, E, J, N, R, S, T
   auto* max31856tc = new MAX31856Thermocouple(
       SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN, SPI_CLK_PIN, DRDY_PIN,
-      MAX31856_TCTYPE_K, readDelay, temperature_in_config_path);
+      MAX31856_TCTYPE_K, readDelay, exhaust_temp_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then
   // adds the offset, to calculate its output. The MAX31856TC produces
-  // temperatures in degrees Celcius. We need to change them to Kelvin for
+  // temperatures in degrees Celsius. We need to change them to Kelvin for
   // compatibility with Signal K.
 
   const float multiplier = 1.0;

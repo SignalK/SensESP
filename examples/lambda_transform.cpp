@@ -15,8 +15,10 @@ ReactESP app([]() {
   sensesp_app = new SensESPApp("sensesp-illum-example", "My WiFi SSID",
                                "my_wifi_password", "skdev.lan", 80, NONE);
 
-  const char* sk_path = "indoor.illumination";
-  const char* analog_in_config_path = "/indoor_illumination/analog_in";
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
+  const char* sk_path = "environment.indoor.illuminance";
+  const char* analog_in_config_path = "/indoor_illuminance/analog_in";
 
   uint read_delay = 500;
 

@@ -29,6 +29,9 @@ ReactESP app([]() {
   // Takes a moving average for every 10 values, with scale factor
   MovingAverage* avg = new MovingAverage(10, scale);
 
+  // Connect avg. value to a SK path
+  // See this link for available tank paths:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html#vesselsregexptanks
   input->connect_to(avg)->connect_to(
       new SKOutputNumber("tanks.fuel.0.currentLevel"));
 
