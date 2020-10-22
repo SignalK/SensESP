@@ -7,9 +7,9 @@
 #include "transforms/linear.h"
 #include "signalk/signalk_output.h"
 #include "transforms/moving_average.h"
-#include "transforms/VoltageDivider.h"
-#include "transforms/AnalogVoltage.h"
-#include "transforms/CurveInterpolator.h"
+#include "transforms/voltagedivider.h"
+#include "transforms/analogvoltage.h"
+#include "transforms/curveinterpolator.h"
 
 class ETapeInterpreter : public CurveInterpolator
 {
