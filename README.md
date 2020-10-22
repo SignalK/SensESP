@@ -12,6 +12,10 @@ Class documentation for SensESP is [here](http://signalk.org/SensESP/annotated.h
 
 A Wiki page with more detailed information about using SensESP is [here](https://github.com/SignalK/SensESP/wiki).
 
+*NOTE:* If you have an existing project that fails to compile after 2020-10-22, add the following line to the `[env]` section of the `platformio.ini` file of your project:
+
+    lib_ldf_mode = deep
+
 ## Getting Started
 
 You must have a Signal K Server running on your network, or SensESP has nothing to connect to. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md).
