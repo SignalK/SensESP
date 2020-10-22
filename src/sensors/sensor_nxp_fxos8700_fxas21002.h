@@ -18,7 +18,7 @@
 //   mounting enclosure, nearby magnetically-permeable objects) of the sensor
 //   changes. Orientation data will not be reliable without prior calibration.
 
-// Orientation data are intended as a SignalK data source, but can also
+// Orientation data are intended as a Signal K data source, but can also
 //   be viewed on the serial port stream, or using the OrientationVisualiser
 //   example in the Adafruit AHRS Processing library.
 
@@ -28,20 +28,22 @@
 //   please support PJRC and open-source hardware by purchasing products
 //   from PJRC!  Written by PJRC, adapted by Limor Fried for Adafruit Industries.
 
-// Last edits by Bjarne Hansen 2020-09-03
+// Last edits by Bjarne Hansen 2020-10-20
 
 // Relies on Serial object existing for sending data/diagnostics to serial port
 
 #include <stdint.h>
 
 #include <Adafruit_AHRS.h>
-#include "Adafruit_Sensor_Calibration.h"
+#include <Adafruit_FXAS21002C.h>
+#include <Adafruit_FXOS8700.h>
+#include <Adafruit_Sensor_Calibration.h>
 
 class SensorNXP_FXOS8700_FXAS21002 {
 
  public:
   SensorNXP_FXOS8700_FXAS21002(void);
-  bool connect(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl);
+  bool connect(int pin_i2c_sda, int pin_i2c_scl);
   void printSensorDetails(void);
   void initFilter(int sampling_interval_ms);
   float getHeadingRadians(void);
@@ -65,24 +67,34 @@ class SensorNXP_FXOS8700_FXAS21002 {
   // Adafruit_Madgwick filter;  // faster than NXP
   // Adafruit_Mahony filter;    // fastest/smallest
 
-  Adafruit_Sensor *accelerometer, *gyroscope, *magnetometer;
-  Adafruit_Sensor_Calibration_EEPROM cal;  // use EEPROM on ESP32 module
-  byte caldata[68];  // buffer to receive magnetic calibration data
-  byte calcount = 0;
-  bool isCalibrated = false;
-  sensors_event_t mag_event, gyro_event, accel_event;
-  uint32_t timestamp;
-  uint32_t last_print_time = 0;
-  float roll, pitch, heading;  // rotation values calculated by filter function,
+  Adafruit_FXOS8700 fxos_;    // the combined magnetometer + accelerometer
+  Adafruit_FXAS21002C fxas_;  // the gyroscope
+  Adafruit_Sensor *accelerometer_,  // accesses the accelerometer
+                  *gyroscope_,      // accesses the gyro
+                  *magnetometer_;   // accesses the magnetometer
+  Adafruit_Sensor_Calibration_EEPROM cal_;  // use EEPROM on ESP32 module
+  byte cal_data_[68];  // buffer to receive magnetic calibration data
+  byte cal_count_ = 0;
+  bool is_calibrated_ = false;
+  bool is_connected_ = false; //indicates successful connection to sensor
+  sensors_event_t mag_event_, gyro_event_, accel_event_;  // sensor readings
+  uint32_t timestamp_;
+  uint32_t last_print_time_ = 0;
+  float roll_, pitch_, heading_;  // rotation values calculated by filter function,
                                // and reported to outside world
-  float gx, gy, gz;  // angular velocity (gyroscope) calculated by filter
+  float gx_, gy_, gz_;  // angular velocity (gyroscope) calculated by filter
                      // function, and reported to outside world
   // linear acceleration readings are stored in accel_event
+  float sampling_rate_hz_ = 100.0; //used in setting filter, response rate of gyro, etc.
 
-  bool initSensors(void);
+  bool startSensors(void);
   void setupSensors(void);
   void receiveCalibration(void);
   uint16_t crc16_update(uint16_t crc, uint8_t a);
+  bool pingFXAS21002(void);
+  bool pingFXAS8700(void);
+  void writeByte(byte address, byte reg, byte value);
+  byte readByte(byte address, byte reg);
 };
 
 #endif  //_SENSORS_NXP_FXOS8700_FXAS21002_H
