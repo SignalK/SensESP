@@ -24,6 +24,8 @@ ReactESP app([]() {
   // The "Signal K path" identifies this sensor to the Signal K server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
   // broadcast Signal K data.
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char *sk_path = "tanks.freshWater.starboard.currentLevel";
 
   // The "Configuration path" is combined with "/config" to formulate a URL

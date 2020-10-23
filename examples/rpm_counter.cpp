@@ -24,6 +24,8 @@ ReactESP app([]() {
   // "propulsion.port.revolutions" and sk_path_starboardEngine =
   // "propulsion.starboard.revolutions" In this example, there is only one
   // propulsion engine, and its RPM is the only thing being reported to Signal K.
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html  
   const char* sk_path = "propulsion.main.revolutions";
 
   // The "Configuration path" is combined with "/config" to formulate a URL

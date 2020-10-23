@@ -21,7 +21,9 @@ ReactESP app([]() {
   // The "Signal K path" identifies this sensor to the Signal K server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
   // broadcast Signal K data.
-  const char* sk_path = "indoor.illumination";
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
+  const char* sk_path = "environment.indoor.illuminance";
 
   // The "Configuration path" is combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
@@ -31,8 +33,8 @@ ReactESP app([]() {
   // that indicates this sensor or transform does not have any
   // configuration to save, or that you're not interested in doing
   // run-time configuration.
-  const char* analog_in_config_path = "/indoor_illumination/analog_in";
-  const char* linear_config_path = "/indoor_illumination/linear";
+  const char* analog_in_config_path = "/indoor_illuminance/analog_in";
+  const char* linear_config_path = "/indoor_illuminance/linear";
 
   // Create a sensor that is the source of our data, that will be read every 500
   // ms. It's a light sensor that's connected to the ESP's AnalogIn pin. The

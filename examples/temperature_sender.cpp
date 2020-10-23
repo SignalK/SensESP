@@ -11,8 +11,7 @@
 
 /*
   Illustrates a custom transform that takes a resistance value in ohms and
-  returns the estimated temperature in Kelvin. Sample data in this example were
-  taken from a Westerbeke generator temperature sender and gauge. Note that you
+  returns the estimated temperature in Kelvin. Note that you
   will never instantiate CurveInterpolator in your own SensESP project - you
   will always need to create a descendant class of it, like
   TemperatureInterpreter in this example. The constructor needs to do only two
@@ -79,8 +78,9 @@ ReactESP app([]() {
 
   // The "Signal K path" identifies the output of this sensor to the Signal K
   // network.
-
-  const char* sk_path = "electrical.generator.engine.water.temp";
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
+  const char* sk_path = "electrical.alternators.12V.temperature";
 
   /*
   Connecting a physical temperature sender to the MCU involves using a "voltage
@@ -100,7 +100,7 @@ ReactESP app([]() {
   VoltageDivider2(), which means we need to first convert the value of
   AnalogInput to volts, which is done with AnalogVoltage().
 
-  Although complex, this example pefectly illustrates the normal "chain" for
+  Although complex, this example perfectly illustrates the normal "chain" for
   getting a value from a sensor all the way to the Signal K server:
   - A real-world sensor sends its output to an input pin on the microcontroller
   - The value read from that pin gives us our actual input to the program. In
@@ -148,10 +148,10 @@ ReactESP app([]() {
      - send calibrated Kelvin value to Signal K with SKOutputNumber()
   */
   analog_input->connect_to(new AnalogVoltage())
-      ->connect_to(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))
-      ->connect_to(new TemperatureInterpreter("/gen/temp/curve"))
-      ->connect_to(new Linear(1.0, 0.0, "/gen/temp/calibrate"))
-      ->connect_to(new SKOutputNumber(sk_path, "/gen/temp/sk"));
+      ->connect_to(new VoltageDividerR2(R1, Vin, "/12V_alternator/temp/sender"))
+      ->connect_to(new TemperatureInterpreter("/12V_alternator/temp/curve"))
+      ->connect_to(new Linear(1.0, 0.0, "/12V_alternator/temp/calibrate"))
+      ->connect_to(new SKOutputNumber(sk_path, "/12V_alternator/temp/sk"));
 
   // Start the SensESP application running, which simply activates everything
   // that's been set up above

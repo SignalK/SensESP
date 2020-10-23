@@ -43,11 +43,14 @@ ReactESP app([]() {
   //   output is the original voltage.
   // - SKOutputNumber() is a specialized transport to send a float value to the
   // Signal K server.
+  //
+  // To find valid Signal K Paths that fits your need you look at this link:
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html#vesselsregexpelectrical
 
   alt_12v_voltage->connect_to(new ADS1x15Voltage(chip, gain))
       ->connect_to(new VoltageMultiplier(
           10000, 4730,
-          "/12V_Alt/VoltMuliplier"))  // Measured ohm values of R1 and R2 in the
+          "/12V_Alt/VoltMultiplier"))  // Measured ohm values of R1 and R2 in the
                                       // physical voltage divider
       ->connect_to(new SKOutputNumber("electrical.alternators.12V.voltage",
                                       "/12V_Alt/skPath"));
@@ -61,7 +64,7 @@ ReactESP app([]() {
                                            "/24V_Alt/ADC read delay");
 
   alt_24v_voltage->connect_to(new ADS1x15Voltage(chip, gain))
-      ->connect_to(new VoltageMultiplier(21800, 4690, "/24V_Alt/VoltMuliplier"))
+      ->connect_to(new VoltageMultiplier(21800, 4690, "/24V_Alt/VoltMultiplier"))
       ->connect_to(new SKOutputNumber("electrical.alternators.24V.voltage",
                                       "/24V_Alt/skPath"));
 
