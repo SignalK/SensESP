@@ -10,23 +10,23 @@ jobs:
       matrix:
         example: [
           examples/ads1x15_volt_meter.cpp,
-          examples/ina219_example.cpp,
           examples/analog_input.cpp,
-          examples/lambda_transform.cpp,
           examples/bme280_example.cpp,
           examples/bmp280_example.cpp,
+          examples/fuel_flow_meter.cpp,
+          examples/fuel_level_sensor/fuel_level_sensor_example.cpp,
+          examples/gps_compass.cpp,
+          examples/hysteresis.cpp,
+          examples/ina219_example.cpp,
+          examples/lambda_transform.cpp,
+          examples/milone_level_sensor/milone_level_sensor.cpp,
+          examples/onewire_temperature/onewire_temperature_example.cpp,
           examples/relay_control.cpp,
+          examples/rpm_counter.cpp,
           examples/sht31_example.cpp,
           examples/temperature_sender.cpp,
-          examples/gps_compass.cpp,
-          examples/fuel_flow_meter.cpp,
-          examples/rpm_counter.cpp,
-          examples/fuel_level_sensor/fuel_level_sensor_example.cpp,
-          examples/onewire_temperature/onewire_temperature_example.cpp,
-          examples/milone_level_sensor/milone_level_sensor.cpp,
           examples/thermocouple_temperature_sensor/max31856_thermocouple_example.cpp,
           examples/ultrasonic_level_sensor/ultrasonic_dvp_example.cpp]
-          # examples/hysteresis.cpp,
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python
