@@ -340,7 +340,8 @@ void WSClient::poll_access_request(const String server_address,
     DynamicJsonDocument doc(1024);
     auto error = deserializeJson(doc, payload.c_str());
     if (error) {
-      debugW("WARNING: Could not deserialize http.");
+      debugW("WARNING: Could not deserialize http payload.");
+      debugW("DeserializationError: %s", error.c_str());
       return;  // TODO: return at this point, or keep going?
     }
     String state = doc["state"];
