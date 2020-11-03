@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['baseanalogreader_41',['BaseAnalogReader',['../class_base_analog_reader.html',1,'']]],
+  ['baseline_5fcourse_42',['baseline_course',['../struct_n_m_e_a_data.html#ad752076d48c74317d72a26643fef7fef',1,'NMEAData']]],
+  ['baseline_5flength_43',['baseline_length',['../struct_n_m_e_a_data.html#a96cce54518c05c611d50c159ea5122d6',1,'NMEAData']]],
+  ['baseline_5fprojection_44',['baseline_projection',['../struct_n_m_e_a_data.html#a3ae9e3d23c088e1c435acf4c232d6a5c',1,'NMEAData']]],
+  ['bme280_45',['BME280',['../class_b_m_e280.html',1,'BME280'],['../class_b_m_e280.html#a7eb425e9c7b1eebc6bad4288de80dcab',1,'BME280::BME280()'],['../class_b_m_e280_value.html#a333a82519078ad9ec9b3d5828b42bc2b',1,'BME280Value::bme280()']]],
+  ['bme280_2ecpp_46',['bme280.cpp',['../bme280_8cpp.html',1,'']]],
+  ['bme280_2eh_47',['bme280.h',['../bme280_8h.html',1,'']]],
+  ['bme280valtype_48',['BME280ValType',['../bme280_8h.html#acce372cdae7772cfadaa815858c0956d',1,'bme280.h']]],
+  ['bme280value_49',['BME280Value',['../class_b_m_e280_value.html',1,'BME280Value'],['../class_b_m_e280_value.html#a59605de196c5141aac67b51522902183',1,'BME280Value::BME280Value()'],['../bme280_8h.html#af37089b3d8f44826d66821c4a89498bc',1,'BME280value():&#160;bme280.h']]],
+  ['bmp280_50',['BMP280',['../class_b_m_p280.html',1,'BMP280'],['../class_b_m_p280.html#a70a4ccddabb11d3da232a4b0339d4851',1,'BMP280::BMP280()'],['../class_b_m_p280_value.html#a93dfd7d1bb90299ba31505749b482aae',1,'BMP280Value::bmp280()']]],
+  ['bmp280_2ecpp_51',['bmp280.cpp',['../bmp280_8cpp.html',1,'']]],
+  ['bmp280_2eh_52',['bmp280.h',['../bmp280_8h.html',1,'']]],
+  ['bmp280valtype_53',['BMP280ValType',['../bmp280_8h.html#ab9dfceb0d5985ce5ae28521c2ddb5bf4',1,'bmp280.h']]],
+  ['bmp280value_54',['BMP280Value',['../class_b_m_p280_value.html',1,'BMP280Value'],['../class_b_m_p280_value.html#a9862d2cc3be55366831f97613a805973',1,'BMP280Value::BMP280Value()'],['../bmp280_8h.html#adc2b0c1f8c770323d86e72b706958989',1,'BMP280value():&#160;bmp280.h']]],
+  ['booleanconsumer_55',['BooleanConsumer',['../valueconsumer_8h.html#abea8a189967941972b3e7c5a329c4963',1,'valueconsumer.h']]],
+  ['booleanproducer_56',['BooleanProducer',['../valueproducer_8h.html#a79edc4b65652f6948d690891bb6d7e0c',1,'valueproducer.h']]],
+  ['booleantransform_57',['BooleanTransform',['../transform_8h.html#ac1617ff234bef4e8a50341c1d6943246',1,'transform.h']]],
+  ['bus_5fvoltage_58',['bus_voltage',['../ina219_8h.html#a80681f57fd3d14d390d830a2ea845654a111ba01d5017c5f1829f20d73348f03f',1,'ina219.h']]]
+];
