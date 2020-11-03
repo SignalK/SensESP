@@ -6,6 +6,18 @@
 #include "signalk/signalk_output.h"
 #include "transforms/linear.h"
 
+#ifdef D1MINI
+#define ANALOG A0  //Always A0
+#endif
+
+#ifdef ESP32DEV
+#define ANALOG 36 //ADC1_0
+#endif
+
+#ifdef ESPWROVERKIT
+#define ANALOG 0 //ADC2_1
+#endif
+
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
 ReactESP app([]() {
@@ -42,7 +54,7 @@ ReactESP app([]() {
   // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
   // When it's dark, the sensor's output (as read by analogRead()) is 120, and
   // when it's bright, the output is 850, for a range of 730.
-  uint8_t pin = A0;
+  uint8_t pin = ANALOG;
   uint read_delay = 500;
 
   auto* analog_input = new AnalogInput(pin, read_delay, analog_in_config_path);
