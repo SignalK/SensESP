@@ -52,7 +52,7 @@ ul, #tree {
 </head>
 
 <body onload="showConfigTree()">
-<h1>SensESP Sensor</h1>
+<h1>SensESP Device</h1>
 <div id="mountNode">
 </div>
 </body>
