@@ -17,8 +17,8 @@ UltrasonicDistance::UltrasonicDistance(int8_t trig_pin, int8_t input_pin,
 void UltrasonicDistance::enable() {
   app.onRepeat(read_delay, [this]() {
     digitalWrite(trigger_pin, HIGH);
-    long lastTime = micros();
-    while (micros() - lastTime < 100) {
+    long last_time = micros();
+    while (micros() - last_time < 100) {
       yield();
     }
     digitalWrite(trigger_pin, LOW);
