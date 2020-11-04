@@ -18,6 +18,7 @@ void setup_discovery(const char* hostname) {
   } else {
     debugI("mDNS responder started at %s", hostname);
   }
+  mdns_instance_name_set(hostname);
   MDNS.addService("http", "tcp", 80);
   MDNS.addService("signalk-sensesp", "tcp", 80);
 }
