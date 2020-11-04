@@ -15,7 +15,9 @@ DigitalInputValue::DigitalInputValue(uint8_t pin, int pin_mode,
                                      String config_path)
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntegerProducer(),
-      read_delay{read_delay} {}
+      read_delay{read_delay} {
+  load_configuration();      
+}
 
 void DigitalInputValue::enable() {
   app.onRepeat(read_delay, [this]() {
