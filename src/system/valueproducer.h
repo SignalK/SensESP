@@ -78,6 +78,14 @@ class ValueProducer : virtual public Observable {
     return connect_to(consumer_producer, input_channel);
   }
 
+  /*
+   * Set a new output value and notify consumers about it
+   */
+  void emit(T new_value) {
+    this->output = new_value;
+    Observable::notify();
+  }
+
  protected:
   /**
    * The current value of this producer is stored here in this output member

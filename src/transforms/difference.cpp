@@ -11,9 +11,8 @@ void Difference::set_input(float input, uint8_t inputChannel) {
   inputs[inputChannel] = input;
   received |= 1 << inputChannel;
   if (received == 0b11) {
-    output = k1 * inputs[0] - k2 * inputs[1];
     received = 0;
-    notify();
+    this->emit(k1 * inputs[0] - k2 * inputs[1]);
   }
 }
 

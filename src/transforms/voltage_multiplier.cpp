@@ -6,8 +6,7 @@ VoltageMultiplier::VoltageMultiplier(uint16_t R1, uint16_t R2,
 
 void VoltageMultiplier::set_input(float input, uint8_t inputChannel) {
   // Ohms Law at work!
-  output = input * (((float)R1 + (float)R2) / (float)R2);
-  notify();
+  this->emit(input * (((float)R1 + (float)R2) / (float)R2));
 }
 
 void VoltageMultiplier::get_configuration(JsonObject& root) {

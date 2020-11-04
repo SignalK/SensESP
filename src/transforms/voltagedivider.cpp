@@ -6,8 +6,7 @@ VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path)
 }
 
 void VoltageDividerR1::set_input(float Vout, uint8_t ignored) {
-  output = (Vin - Vout) * R2 / Vout;
-  notify();
+  this->emit((Vin - Vout) * R2 / Vout);
 }
 
 void VoltageDividerR1::get_configuration(JsonObject& root) {
@@ -48,8 +47,7 @@ VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path)
 }
 
 void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {
-  output = (Vout * R1) / (Vin - Vout);
-  notify();
+  this->emit((Vout * R1) / (Vin - Vout));
 }
 
 void VoltageDividerR2::get_configuration(JsonObject& root) {

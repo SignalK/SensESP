@@ -21,9 +21,8 @@ ChangeFilter::ChangeFilter(float min_delta, float max_delta, int max_skips,
 void ChangeFilter::set_input(float new_value, uint8_t input_channel) {
   float delta = absf(new_value - output);
   if ((delta >= min_delta && delta <= max_delta) || skips > max_skips) {
-    output = new_value;
     skips = 0;
-    notify();
+    this->emit(new_value);
   } else {
     skips++;
   }

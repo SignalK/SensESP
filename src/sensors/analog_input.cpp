@@ -14,8 +14,7 @@ AnalogInput::AnalogInput(uint8_t pin, uint read_delay, String config_path,
 }
 
 void AnalogInput::update() {
-  output = output_scale * analog_reader->read();
-  this->notify();
+  this->emit(output_scale * analog_reader->read());
 }
 
 void AnalogInput::enable() {

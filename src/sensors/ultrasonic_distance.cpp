@@ -22,8 +22,7 @@ void UltrasonicDistance::enable() {
       yield();
     }
     digitalWrite(trigger_pin, LOW);
-    output = pulseIn(input_pin, HIGH);
-    this->notify();
+    this->emit(pulseIn(input_pin, HIGH));
   });
 }
 

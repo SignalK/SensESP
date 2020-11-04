@@ -8,8 +8,7 @@ Debounce::Debounce(int ms_min_delay, String config_path)
 void Debounce::set_input(bool newValue, uint8_t inputChannel) {
   int elapsed = millis() - last_time;
   if (newValue != output || elapsed > ms_min_delay) {
-    output = newValue;
     last_time = millis();
-    notify();
+    this->emit(newValue);
   }
 }

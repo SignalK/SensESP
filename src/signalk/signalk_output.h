@@ -24,8 +24,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
   }
 
   virtual void set_input(T new_value, uint8_t input_channel = 0) override {
-    ValueProducer<T>::output = new_value;
-    this->notify();
+    this->ValueProducer<T>::emit(new_value);
   }
 
   virtual String as_signalk() override {
