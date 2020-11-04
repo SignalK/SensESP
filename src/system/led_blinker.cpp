@@ -38,7 +38,29 @@ void LedBlinker::set_input(WifiState new_value, uint8_t input_channel) {
       break;
   }
 }
+
+void LedBlinker::set_input(WSConnectionState new_value, uint8_t input_channel) {
+  switch (new_value) {
+    case kWSDisconnected:
+      this->set_server_disconnected();
+      break;
+    case kWSConnecting:
+      this->set_server_disconnected();
+      break;
+    case kWSAuthorizing:
+      this->set_server_disconnected();
+      break;
+    case kWSConnected:
+      this->set_server_connected();
+      break;
+    default:
+      this->set_server_disconnected();
+      break;
   }
+}
+
+void LedBlinker::set_input(int new_value, uint8_t input_channel) {
+  this->flip();
 }
 
 void LedBlinker::remove_blinker() {

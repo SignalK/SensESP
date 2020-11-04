@@ -40,9 +40,7 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
 }
 
 WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
-                   uint16_t server_port,
-                   std::function<void(bool)> connected_cb,
-                   void_cb_func delta_cb, String permission)
+                   uint16_t server_port, String permission)
     : Configurable{config_path} {
   this->sk_delta = sk_delta;
 
@@ -51,10 +49,16 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
   this->server_address = server_address;
   this->server_port = server_port;
 
-  this->connected_cb = connected_cb;
-  this->delta_cb = delta_cb;
-
   this->sk_permission = permission;
+
+  // a WSClient object observes its own connection_state member
+  // and simply passes through any notification it emits. As a result,
+  // whenever the value of connection_state is updated, observers of the
+  // WSClient object get automatically notified.
+  this->connection_state.attach([this]() {
+    this->emit(this->connection_state.get()); 
+  });
+
   // set the singleton object pointer
   ws_client = this;
 
@@ -69,13 +73,13 @@ void WSClient::enable() {
 }
 
 void WSClient::connect_loop() {
-  if (this->connection_state == disconnected) {
+  if (this->connection_state == kWSDisconnected) {
     this->connect();
   }
 }
 
 void WSClient::on_disconnected() {
-  if (this->connection_state == connecting && server_detected) {
+  if (this->connection_state == kWSConnecting && server_detected) {
     // Going from connecting directly to disconnect when we
     // know we have found and talked to the server usually means
     // the authentication token is bad.
@@ -83,21 +87,18 @@ void WSClient::on_disconnected() {
     auth_token = NULL_AUTH_TOKEN;
     save_configuration();
   }
-  this->connection_state = disconnected;
+  this->connection_state = kWSDisconnected;
   server_detected = false;
-  this->connected_cb(false);
 }
 
 void WSClient::on_error() {
-  this->connection_state = disconnected;
+  this->connection_state = kWSDisconnected;
   debugW("Websocket client error.");
-  this->connected_cb(false);
 }
 
 void WSClient::on_connected(uint8_t* payload) {
-  this->connection_state = connected;
+  this->connection_state = kWSConnected;
   debugI("Websocket client connected to URL: %s\n", payload);
-  this->connected_cb(true);
   debugI("Subscribing to Signal K listeners...");
   this->subscribe_listeners();
 }
@@ -185,12 +186,12 @@ bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
 }
 
 void WSClient::connect() {
-  if (connection_state != disconnected) {
+  if (connection_state != kWSDisconnected) {
     return;
   }
   debugD("Initiating connection");
 
-  connection_state = authorizing;
+  connection_state = kWSAuthorizing;
 
   String server_address = this->server_address;
   uint16_t server_port = this->server_port;
@@ -209,7 +210,7 @@ void WSClient::connect() {
            server_address.c_str(), server_port);
   } else {
     // host and port not defined - wait for mDNS
-    connection_state = disconnected;
+    connection_state = kWSDisconnected;
     return;
   }
 
@@ -260,11 +261,11 @@ void WSClient::test_token(const String server_address,
       this->client_id = "";
       this->send_access_request(server_address, server_port);
     } else {
-      connection_state = disconnected;
-    }
+      connection_state = kWSDisconnected;
+  }
   } else {
     debugE("GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
-    connection_state = disconnected;
+    connection_state = kWSDisconnected;
   }
 }
 
@@ -301,7 +302,7 @@ void WSClient::send_access_request(const String server_address,
   if (httpCode != 202) {
     debugW("Can't handle response %d to access request.", httpCode);
     debugD("%s", payload.c_str());
-    connection_state = disconnected;
+    connection_state = kWSDisconnected;
     client_id = "";
     return;
   }
@@ -313,7 +314,7 @@ void WSClient::send_access_request(const String server_address,
 
   if (state != "PENDING") {
     debugW("Got unknown state: %s", state.c_str());
-    connection_state = disconnected;
+    connection_state = kWSDisconnected;
     client_id = "";
     return;
   }
@@ -366,7 +367,7 @@ void WSClient::poll_access_request(const String server_address,
 
       if (permission == "DENIED") {
         debugW("Permission denied");
-        connection_state = disconnected;
+        connection_state = kWSDisconnected;
         return;
       } else if (permission == "APPROVED") {
         debugI("Permission granted");
@@ -388,19 +389,19 @@ void WSClient::poll_access_request(const String server_address,
       debugD("Got 500, probably a non-existing request.");
       polling_href = "";
       save_configuration();
-      connection_state = disconnected;
+      connection_state = kWSDisconnected;
       return;
     }
     // any other HTTP status code
     debugW("Can't handle response %d to pending access request.\n", httpCode);
-    connection_state = disconnected;
+    connection_state = kWSDisconnected;
     return;
   }
 }
 
 void WSClient::connect_ws(const String host, const uint16_t port) {
   String path = "/signalk/v1/stream?subscribe=none";
-  this->connection_state = connecting;
+  this->connection_state = kWSConnecting;
   this->client.begin(host, port, path);
   this->client.onEvent(webSocketClientEvent);
   String full_token = String("JWT ") + auth_token;
@@ -408,28 +409,29 @@ void WSClient::connect_ws(const String host, const uint16_t port) {
 }
 
 void WSClient::loop() {
-  if (this->connection_state == connecting ||
-      this->connection_state == connected) {
+  if (this->connection_state == kWSConnecting ||
+      this->connection_state == kWSConnected) {
     this->client.loop();
   }
 }
 
-bool WSClient::is_connected() { return connection_state == connected; }
+bool WSClient::is_connected() { return connection_state == kWSConnected; }
 
 void WSClient::restart() {
-  if (connection_state == connected) {
+  if (connection_state == kWSConnected) {
     this->client.disconnect();
-    connection_state = disconnected;
+    connection_state = kWSDisconnected;
   }
 }
 
 void WSClient::send_delta() {
   String output;
-  if (connection_state == connected) {
+  if (connection_state == kWSConnected) {
     if (sk_delta->data_available()) {
       sk_delta->get_delta(output);
       this->client.sendTXT(output);
-      this->delta_cb();
+      // This automatically notifies the observers
+      this->delta_count_producer = 1;
     }
   }
 }

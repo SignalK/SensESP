@@ -70,26 +70,25 @@ SensESPApp::SensESPApp(String preset_hostname, String ssid,
   hostname->attach(
       [hostname, this]() { this->sk_delta->set_hostname(hostname->get()); });
 
-  led_blinker = new LedBlinker(led_pin, led_ws_connected, led_wifi_connected,
-                               led_offline);
-
   // create the HTTP server
 
   this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this));
 
   // create the websocket client
 
-  auto ws_connected_cb = [this](bool connected) {
-    if (connected) {
-      this->led_blinker->set_server_connected();
-    } else {
-      this->led_blinker->set_server_disconnected();
-    }
-  };
-  auto ws_delta_cb = [this]() { this->led_blinker->flip(); };
-  this->ws_client = new WSClient("/system/sk", sk_delta, sk_server_address,
-                                 sk_server_port, ws_connected_cb, ws_delta_cb,
+
+  this->ws_client =
+      new WSClient("/system/sk", sk_delta, sk_server_address, sk_server_port,
                                  permission_strings[(int)permissions]);
+
+  // create a led blinker and connect it to its data sources
+
+  led_blinker = new LedBlinker(led_pin, led_ws_connected, led_wifi_connected,
+                               led_offline);
+
+  this->networking->connect_to(led_blinker);
+  this->ws_client->connect_to(led_blinker);
+  this->ws_client->get_delta_count_producer().connect_to(led_blinker);
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
@@ -145,7 +144,6 @@ void SensESPApp::enable() {
   setup_discovery(networking->get_hostname()->get().c_str());
 
   networking->setup();
-  networking->connect_to(led_blinker);
 
   setup_ota();
 

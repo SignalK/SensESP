@@ -45,8 +45,7 @@ void Networking::check_connection() {
 
     // Might be futile to notify about a disconnection if it results in
     // a reboot anyway
-    this->output = kDisconnected;
-    this->notify();
+    this->emit(kDisconnected);
 
     ESP.restart();
   }
