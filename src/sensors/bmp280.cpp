@@ -34,8 +34,9 @@ void BMP280Value::enable() {
                273.15;  // Kelvin is Celsius + 273.15
     } else if (val_type == pressure) {
       output = bmp280->adafruit_bmp280->readPressure();
-    } else
+    } else {
       output = 0.0;
+    }
 
     notify();
   });

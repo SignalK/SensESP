@@ -34,8 +34,9 @@ void SHT31Value::enable() {
                273.15;  // Kelvin is Celsius + 273.15
     } else if (val_type == humidity) {
       output = sht31->adafruit_sht31->readHumidity();
-    } else
+    } else {
       output = 0.0;
+    }
 
     notify();
   });
