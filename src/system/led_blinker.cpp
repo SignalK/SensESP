@@ -1,6 +1,7 @@
 
 #include "led_blinker.h"
 
+#include "net/networking.h"
 #include "sensesp.h"
 #include "sensesp_app.h"
 
@@ -15,6 +16,28 @@ LedBlinker::LedBlinker(int pin, bool enabled, int ws_connected_interval,
   if (enabled) {
     pinMode(pin, OUTPUT);
     this->set_state(0);
+  }
+}
+
+void LedBlinker::set_input(WifiState new_value, uint8_t input_channel) {
+  switch (new_value) {
+    case kNoAP:
+      this->set_wifi_disconnected();
+      break;
+    case kDisconnected:
+      this->set_wifi_disconnected();
+      break;
+    case kConnectedToAP:
+      this->set_wifi_connected();
+      break;
+    case kWifiManager:
+      this->set_wifi_disconnected();
+      break;
+    default:
+      this->set_wifi_disconnected();
+      break;
+  }
+}
   }
 }
 

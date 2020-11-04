@@ -142,28 +142,15 @@ void SensESPApp::enable() {
   debugI("Enabling subsystems");
 
   // FIXME: Setting up mDNS discovery before networking can't work!
-  debugI("Subsystem: setup_discovery()");
   setup_discovery(networking->get_hostname()->get().c_str());
 
-  debugI("Subsystem: networking->setup()");
-  networking->setup([this](bool connected) {
-    if (connected) {
-      this->led_blinker->set_wifi_connected();
-    } else {
-      this->led_blinker->set_wifi_disconnected();
-      debugD("Not connected to wifi");
-    }
-  });
+  networking->setup();
+  networking->connect_to(led_blinker);
 
-  debugI("Subsystem: setup_OTA()");
   setup_ota();
 
-  debugI("Subsystem: http_server()");
   this->http_server->enable();
-  debugI("Subsystem: ws_client()");
   this->ws_client->enable();
-
-  debugI("WS client enabled");
 
   // initialize remote debugging
 
