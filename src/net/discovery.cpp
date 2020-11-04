@@ -18,7 +18,9 @@ void setup_discovery(const char* hostname) {
   } else {
     debugI("mDNS responder started at %s", hostname);
   }
-  mdns_instance_name_set(hostname);
+#ifdef ESP32
+  mdns_instance_name_set(hostname);   //mDNS hostname for ESP32
+#endif
   MDNS.addService("http", "tcp", 80);
   MDNS.addService("signalk-sensesp", "tcp", 80);
 }
