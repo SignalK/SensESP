@@ -56,8 +56,8 @@ ReactESP app([]() {
   // Here we create a new LambdaTransform objects. The template parameters
   // (five floats in this example) correspond to the following types:
   //
-  // 1. Output type of the transform function
-  // 2. Input type of the transform function
+  // 1. Input type of the transform function
+  // 2. Output type of the transform function
   // 3. Type of parameter 1
   // 4. Type of parameter 2
   // 5. Type of parameter 3
