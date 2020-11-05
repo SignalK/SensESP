@@ -12,10 +12,10 @@
 #include "system/valueproducer.h"
 
 enum WifiState {
-  kNoAP = 0,
-  kDisconnected,
-  kConnectedToAP,
-  kWifiManager
+  kWifiNoAP = 0,
+  kWifiDisconnected,
+  kWifiConnectedToAP,
+  kExecutingWifiManager
 };
 
 class Networking : public Configurable, public ValueProducer<WifiState> {

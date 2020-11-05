@@ -20,7 +20,7 @@ Networking::Networking(String config_path, String ssid, String password,
     : Configurable{config_path} {
   this->hostname = new ObservableValue<String>(hostname);
 
-  this->output = kNoAP;
+  this->output = kWifiNoAP;
 
   preset_ssid = ssid;
   preset_password = password;
@@ -45,7 +45,7 @@ void Networking::check_connection() {
 
     // Might be futile to notify about a disconnection if it results in
     // a reboot anyway
-    this->emit(kDisconnected);
+    this->emit(kWifiDisconnected);
 
     ESP.restart();
   }
@@ -63,7 +63,7 @@ void Networking::setup() {
 
 void Networking::setup_saved_ssid() {
   WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
-  this->output = kDisconnected;
+  this->output = kWifiDisconnected;
   this->notify();
 
   uint32_t timer_start = millis();
@@ -83,7 +83,7 @@ void Networking::setup_saved_ssid() {
     debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
            WiFi.RSSI());
     debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
-    this->output = kConnectedToAP;
+    this->output = kWifiConnectedToAP;
     this->notify();
     WiFi.mode(WIFI_STA);
   }
@@ -110,13 +110,13 @@ void Networking::setup_wifi_manager() {
   config_ssid = "Configure " + config_ssid;
   const char* pconfig_ssid = config_ssid.c_str();
 
-  this->output = kWifiManager;
+  this->output = kExecutingWifiManager;
   this->notify();
 
   if (!wifi_manager->autoConnect(pconfig_ssid)) {
     debugE("Failed to connect to wifi and config timed out. Restarting...");
 
-    this->output = kDisconnected;
+    this->output = kWifiDisconnected;
     this->notify();
 
     ESP.restart();
@@ -124,7 +124,7 @@ void Networking::setup_wifi_manager() {
 
   debugI("Connected to wifi,");
   debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
-  this->output = kConnectedToAP;
+  this->output = kWifiConnectedToAP;
   this->notify();
 
   if (should_save_config) {

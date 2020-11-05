@@ -21,16 +21,16 @@ LedBlinker::LedBlinker(int pin, bool enabled, int ws_connected_interval,
 
 void LedBlinker::set_input(WifiState new_value, uint8_t input_channel) {
   switch (new_value) {
-    case kNoAP:
+    case kWifiNoAP:
       this->set_wifi_disconnected();
       break;
-    case kDisconnected:
+    case kWifiDisconnected:
       this->set_wifi_disconnected();
       break;
-    case kConnectedToAP:
+    case kWifiConnectedToAP:
       this->set_wifi_connected();
       break;
-    case kWifiManager:
+    case kExecutingWifiManager:
       this->set_wifi_disconnected();
       break;
     default:
