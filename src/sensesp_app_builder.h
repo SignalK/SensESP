@@ -18,45 +18,47 @@ class SensESPAppBuilder {
   int led_offline = 5000;
   SKPermissions sk_server_permissions = READWRITE;
 
+  SensESPApp* app;
+
  public:
-  SensESPAppBuilder() {}
+  SensESPAppBuilder() {
+    app = new SensESPApp(true);
+  }
   SensESPAppBuilder* set_wifi(String ssid, String password) {
-    this->ssid = ssid;
-    this->password = password;
+    app->set_ssid(ssid);
+    app->set_wifi_password(password);
     return this;
   }
   SensESPAppBuilder* set_sk_server(String address, uint16_t port, SKPermissions permissions = READWRITE) {
-    this->sk_server_address = address;
-    this->sk_server_port = port;
-    this->sk_server_permissions = permissions;
+    app->set_sk_server_address(address);
+    app->set_sk_server_port(port);
+    app->set_requested_permissions(permissions);
     return this;
   }
   SensESPAppBuilder* set_standard_sensors(StandardSensors sensors = ALL) {
-    this->sensors = sensors;
+    app->set_sensors(sensors);
     return this;
   }
   SensESPAppBuilder* set_led_pin(int led_pin) {
-    this->led_pin = led_pin;
+    app->set_led_pin(led_pin);
     return this;
   }
   SensESPAppBuilder* set_led_blinker(bool enabled, int websocket_connected,
                                      int wifi_connected, int offline) {
-    this->enable_led = enabled;
-    this->led_ws_connected = websocket_connected;
-    this->led_wifi_connected = wifi_connected;
-    this->led_offline = offline;
+    app->set_enable_led(enabled);
+    app->set_led_ws_connected(websocket_connected);
+    app->set_led_wifi_connected(wifi_connected);
+    app->set_led_offline(offline);
     return this;
   }
   SensESPAppBuilder* set_hostname(String hostname) {
-    this->hostname = hostname;
+    app->set_preset_hostname(hostname);
     return this;
   }
 
   SensESPApp* get_app() {
-    return new SensESPApp(hostname, ssid, password, sk_server_address,
-                          sk_server_port, sensors, led_pin, enable_led,
-                          led_ws_connected, led_wifi_connected, led_offline,
-                          sk_server_permissions);
+    app->setup();
+    return app;
   }
 };
 

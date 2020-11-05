@@ -44,11 +44,10 @@ void SetupSerialDebug(uint32_t baudrate);
 
 class SensESPApp {
  public:
+  SensESPApp(bool defer_setup);
   SensESPApp(String hostname = "SensESP", String ssid = "", String wifi_password = "",
-             String sk_server_address = "", uint16_t sk_server_port = 0,
-             StandardSensors sensors = ALL, int led_pin = LED_PIN,
-             bool enable_led = ENABLE_LED, int led_ws_connected = 200,
-             int led_wifi_connected = 1000, int led_offline = 2000, SKPermissions permissions = READWRITE);
+             String sk_server_address = "", uint16_t sk_server_port = 0);
+  void setup();
   void enable();
   void reset();
   String get_hostname();
@@ -84,7 +83,36 @@ class SensESPApp {
    */
   bool isSignalKConnected() { return ws_client->is_connected(); }
 
+ protected:
+  // setters for all constructor arguments
+
+  const SensESPApp* set_preset_hostname(String preset_hostname) { this->preset_hostname = preset_hostname; }
+  const SensESPApp* set_ssid(String ssid) { this->ssid = ssid; }
+  const SensESPApp* set_wifi_password(String wifi_password) { this->wifi_password = wifi_password; }
+  const SensESPApp* set_sk_server_address(String sk_server_address) { this->sk_server_address = sk_server_address; }
+  const SensESPApp* set_sk_server_port(uint16_t sk_server_port) { this->sk_server_port = sk_server_port; }
+  const SensESPApp* set_sensors(StandardSensors sensors) { this->sensors = sensors; }
+  const SensESPApp* set_led_pin(int led_pin) { this->led_pin = led_pin; }
+  const SensESPApp* set_enable_led(bool enable_led) { this->enable_led = enable_led; }
+  const SensESPApp* set_led_ws_connected(int led_ws_connected) { this->led_ws_connected = led_ws_connected; }
+  const SensESPApp* set_led_wifi_connected(int led_wifi_connected) { this->led_wifi_connected = led_wifi_connected; }
+  const SensESPApp* set_led_offline(int led_offline) { this->led_offline = led_offline; }
+  const SensESPApp* set_requested_permissions(SKPermissions permissions) { this->requested_permissions = permissions; }
+
  private:
+  String preset_hostname = "SensESP";
+  String ssid = "";
+  String wifi_password = "";
+  String sk_server_address = "";
+  uint16_t sk_server_port = 0;
+  StandardSensors sensors = ALL;
+  int led_pin = LED_PIN;
+  bool enable_led = ENABLE_LED;
+  int led_ws_connected = 200;
+  int led_wifi_connected = 1000;
+  int led_offline = 2000;
+  SKPermissions requested_permissions = READWRITE;
+
   void initialize();
   void setup_standard_sensors(ObservableValue<String>* hostname,
                               StandardSensors enabled_sensors = ALL);
