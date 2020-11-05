@@ -106,8 +106,7 @@ void WSClient::subscribe_listeners() {
   const std::vector<SKListener*>& listeners = SKListener::get_listeners();
 
   if (listeners.size() > 0) {
-    DynamicJsonDocument jsonDoc(1024);
-    JsonObject subscription = jsonDoc.as<JsonObject>();
+    DynamicJsonDocument subscription(1024);
     subscription["context"] = "vessels.self";
     JsonArray subscribe = subscription.createNestedArray("subscribe");
 
