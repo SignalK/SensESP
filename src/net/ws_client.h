@@ -17,7 +17,7 @@ class WSClient : public Configurable {
  public:
   WSClient(String config_path, SKDelta* sk_delta, String server_address,
            uint16_t server_port, std::function<void(bool)> connected_cb,
-           void_cb_func delta_cb);
+           void_cb_func delta_cb, String sk_permission = "readwrite");
   void enable();
   void on_disconnected();
   void on_error();
@@ -44,6 +44,7 @@ class WSClient : public Configurable {
   String client_id = "";
   String polling_href = "";
   String auth_token = NULL_AUTH_TOKEN;
+  String sk_permission;
   bool server_detected = false;
 
   // FIXME: replace with a single connection_state enum

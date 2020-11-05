@@ -33,16 +33,22 @@ enum StandardSensors {
   ALL = 0x1F
 };
 
+enum SKPermissions
+{
+  READONLY,
+  READWRITE,
+  ADMIN
+};
+
 void SetupSerialDebug(uint32_t baudrate);
 
 class SensESPApp {
  public:
-  SensESPApp(String hostname = "SensESP", String ssid = "",
-             String wifi_password = "", String sk_server_address = "",
-             uint16_t sk_server_port = 0, StandardSensors sensors = ALL,
-             int led_pin = LED_PIN, bool enable_led = ENABLE_LED,
-             int led_ws_connected = 200, int led_wifi_connected = 1000,
-             int led_offline = 2000);
+  SensESPApp(String hostname = "SensESP", String ssid = "", String wifi_password = "",
+             String sk_server_address = "", uint16_t sk_server_port = 0,
+             StandardSensors sensors = ALL, int led_pin = LED_PIN,
+             bool enable_led = ENABLE_LED, int led_ws_connected = 200,
+             int led_wifi_connected = 1000, int led_offline = 2000, SKPermissions permissions = READWRITE);
   void enable();
   void reset();
   String get_hostname();
@@ -88,6 +94,7 @@ class SensESPApp {
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;
+  String get_permission_string(SKPermissions permission);
 
   void set_wifi(String ssid, String password);
 
