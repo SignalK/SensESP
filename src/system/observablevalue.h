@@ -16,8 +16,7 @@ class ObservableValue : public ValueProducer<T> {
   ObservableValue(const T& value) { ValueProducer<T>::output = value; }
 
   void set(const T& value) {
-    ValueProducer<T>::output = value;
-    Observable::notify();
+    this->ValueProducer<T>::emit(value);
   }
 
   const T& operator=(const T& value) {

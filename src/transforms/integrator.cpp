@@ -5,8 +5,7 @@
 // Integrator
 
 Integrator::Integrator(float k, float value, String config_path)
-    : NumericTransform(config_path), k{k} {
-  output = value;
+    : NumericTransform(config_path), k{k}, value{value} {
   load_configuration();
 }
 
@@ -18,13 +17,13 @@ void Integrator::enable() {
 }
 
 void Integrator::set_input(float input, uint8_t inputChannel) {
-  output += input;
-  notify();
+  value += input;
+  this->emit(value);
 }
 
 void Integrator::get_configuration(JsonObject& root) {
   root["k"] = k;
-  root["value"] = output;
+  root["value"] = value;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
@@ -45,6 +44,6 @@ bool Integrator::set_configuration(const JsonObject& config) {
     }
   }
   k = config["k"];
-  output = config["value"];
+  value = config["value"];
   return true;
 }

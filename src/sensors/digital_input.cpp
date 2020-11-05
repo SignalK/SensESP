@@ -21,8 +21,7 @@ DigitalInputValue::DigitalInputValue(uint8_t pin, int pin_mode,
 
 void DigitalInputValue::enable() {
   app.onRepeat(read_delay, [this]() {
-    output = digitalRead(pin);
-    notify();
+    emit(digitalRead(pin));
   });
 }
 

@@ -17,9 +17,7 @@ void AngleCorrection::set_input(float input, uint8_t inputChannel) {
   if (x < 0) {
     x += 2 * M_PI;
   }
-  output = x + min_angle;
-
-  notify();
+  this->emit(x + min_angle);
 }
 
 void AngleCorrection::get_configuration(JsonObject& root) {

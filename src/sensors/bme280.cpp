@@ -49,8 +49,9 @@ void BME280Value::enable() {
       output = bme280->adafruit_bme280->readPressure();
     } else if (val_type == humidity) {
       output = bme280->adafruit_bme280->readHumidity();
-    } else
+    } else {
       output = 0.0;
+    }
 
     notify();
   });

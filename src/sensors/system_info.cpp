@@ -30,8 +30,7 @@ void SystemHz::enable() {
 }
 
 void FreeMem::update() {
-  output = ESP.getFreeHeap();
-  this->notify();
+  this->emit(ESP.getFreeHeap());
 }
 
 void FreeMem::enable() {
@@ -39,8 +38,7 @@ void FreeMem::enable() {
 }
 
 void Uptime::update() {
-  output = millis() / 1000.;
-  this->notify();
+  this->emit(millis() / 1000.);
 }
 
 void Uptime::enable() {
@@ -48,8 +46,7 @@ void Uptime::enable() {
 }
 
 void IPAddrDev::update() {
-  output = WiFi.localIP().toString();
-  this->notify();
+  this->emit(WiFi.localIP().toString());
 }
 
 void IPAddrDev::enable() {
@@ -61,6 +58,5 @@ void WifiSignal::enable() {
 }
 
 void WifiSignal::update() {
-  output = WiFi.RSSI();
-  this->notify();
+  this->emit(WiFi.RSSI());
 }

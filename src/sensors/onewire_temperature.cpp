@@ -136,8 +136,7 @@ void OneWireTemperature::update() {
 
 void OneWireTemperature::read_value() {
   // getTempC returns degrees Celsius but Signal K expects Kelvins
-  output = dts->sensors->getTempC(address.data()) + 273.15;
-  this->notify();
+  this->emit(dts->sensors->getTempC(address.data()) + 273.15);
 }
 
 void OneWireTemperature::get_configuration(JsonObject& root) {

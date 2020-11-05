@@ -12,9 +12,8 @@ void Frequency::enable() { last_update = millis(); }
 void Frequency::set_input(int input, uint8_t inputChannel) {
   unsigned long cur_millis = millis();
   unsigned long elapsed_millis = cur_millis - last_update;
-  output = k * input / (elapsed_millis / 1000.);
   last_update = cur_millis;
-  notify();
+  this->emit(k * input / (elapsed_millis / 1000.));
 }
 
 void Frequency::get_configuration(JsonObject& root) {

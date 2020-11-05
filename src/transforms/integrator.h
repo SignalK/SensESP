@@ -14,6 +14,7 @@ class Integrator : public NumericTransform {
   virtual String get_config_schema() override;
 
  private:
+  float value = 0;
   float k;
 };
 
