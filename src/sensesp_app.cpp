@@ -87,19 +87,17 @@ void SensESPApp::setup() {
 
   // create the websocket client
 
-
   this->ws_client =
       new WSClient("/system/sk", sk_delta, sk_server_address, sk_server_port,
                                  permission_strings[(int)requested_permissions]);
 
-  // create a led blinker and connect it to its data sources
+  // create a led controller and connect it to its data sources
 
-  led_blinker = new LedBlinker(led_pin, led_ws_connected, led_wifi_connected,
-                               led_offline);
+  led_controller = new LedController(led_pin);
+  this->networking->connect_to(led_controller);
+  this->ws_client->connect_to(led_controller);
+  this->ws_client->get_delta_count_producer().connect_to(led_controller);
 
-  this->networking->connect_to(led_blinker);
-  this->ws_client->connect_to(led_blinker);
-  this->ws_client->get_delta_count_producer().connect_to(led_blinker);
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
@@ -134,8 +132,6 @@ void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
 }
 
 void SensESPApp::enable() {
-  this->led_blinker->set_wifi_disconnected();
-
   // connect all transforms to the Signal K delta output
 
   // ObservableValue<String>* hostname = networking->get_hostname();
