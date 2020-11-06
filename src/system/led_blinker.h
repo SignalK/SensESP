@@ -17,6 +17,7 @@ class BaseBlinker : public Enable {
   BaseBlinker(int pin);
   void set_state(bool state);
   void flip_state();
+  void blip(int duration = 20);
   void set_enabled(bool state);
   /**
    * Tick is called whenever the blinker is enabled or when it's time to
@@ -29,6 +30,7 @@ class BaseBlinker : public Enable {
   int pin;
   bool enabled = true;
   bool state = false;
+  int update_counter = 0;
   Reaction* reaction = NULL;
 };
 

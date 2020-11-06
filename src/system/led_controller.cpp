@@ -99,5 +99,5 @@ void LedController::set_input(WSConnectionState new_value,
 }
 
 void LedController::set_input(int new_value, uint8_t input_channel) {
-  blinker->flip();
+  blinker->blip();
 }

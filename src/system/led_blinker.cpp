@@ -22,7 +22,39 @@ void BaseBlinker::set_state(bool state) {
  * Invert the current LED state.
  */
 void BaseBlinker::flip_state() { this->set_state(!this->state); }
+
+/**
+ * Flip the LED off and on for `duration` milliseconds.
+ */
+void BaseBlinker::blip(int duration) {
+  // indicator for a blip being in progress
+  static bool blipping = false;
+
+  // only allow one blip at a time
+  if (blipping) {
+    return;
   }
+  blipping = true;
+
+  bool orig_state = this->state;
+  this->set_state(false);
+  int current_counter = this->update_counter;
+  app.onDelay(duration, [this, duration, orig_state, current_counter]() {
+    // only update if no-one has touched the LED in the meanwhile
+    if (this->update_counter == current_counter) {
+      this->set_state(true);
+      int new_counter = this->update_counter;
+      app.onDelay(duration, [this, orig_state, new_counter]() {
+        // again, only update if no-one has touched the LED
+        if (this->update_counter == new_counter) {
+          this->set_state(orig_state);
+        }
+        blipping = false;
+      });
+    } else {
+      blipping = false;
+    }
+  });
 }
 
 /**
