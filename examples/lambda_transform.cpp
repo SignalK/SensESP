@@ -13,7 +13,7 @@ ReactESP app([]() {
   // an equivalent alternative to using the SensESPAppBuilder class.
 
   sensesp_app = new SensESPApp("sensesp-illum-example", "My WiFi SSID",
-                               "my_wifi_password", "skdev.lan", 80, NONE);
+                               "my_wifi_password", "skdev.lan", 80);
 
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html

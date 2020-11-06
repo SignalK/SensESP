@@ -36,12 +36,23 @@ void SetupSerialDebug(uint32_t baudrate) {
 
 static char* permission_strings[] = {"readonly", "readwrite", "admin"};
 
+/*
+ * This constructor must be only used in SensESPAppBuilder
+ */
+SensESPApp::SensESPApp(bool defer_setup) {}
+
 SensESPApp::SensESPApp(String preset_hostname, String ssid,
                        String wifi_password, String sk_server_address,
-                       uint16_t sk_server_port, StandardSensors sensors,
-                       int led_pin, bool enable_led, int led_ws_connected,
-                       int led_wifi_connected, int led_offline,
-                       SKPermissions permissions) {
+                       uint16_t sk_server_port)
+    : preset_hostname{preset_hostname},
+      ssid{ssid},
+      wifi_password{wifi_password},
+      sk_server_address{sk_server_address},
+      sk_server_port{sk_server_port} {
+  setup();
+}
+
+void SensESPApp::setup() {
   // initialize filesystem
 #ifdef ESP8266
   if (!SPIFFS.begin()) {
@@ -79,7 +90,7 @@ SensESPApp::SensESPApp(String preset_hostname, String ssid,
 
   this->ws_client =
       new WSClient("/system/sk", sk_delta, sk_server_address, sk_server_port,
-                                 permission_strings[(int)permissions]);
+                                 permission_strings[(int)requested_permissions]);
 
   // create a led blinker and connect it to its data sources
 
