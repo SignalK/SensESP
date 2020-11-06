@@ -1,26 +1,14 @@
-#ifndef _LED_CONTROLLER_H_
-#define _LED_CONTROLLER_H_
+#ifndef _VISUAL_CONTROLLER_H_
+#define _VISUAL_CONTROLLER_H_
 
-#include "led_blinker.h"
-#include "visual_controller.h"
+#include "net/networking.h"
+#include "net/ws_client.h"
+#include "valueconsumer.h"
 
-class LedController : public VisualController {
- protected:
-  PatternBlinker* blinker;
-
-  virtual void set_wifi_no_ap();
-  virtual void set_wifi_disconnected();
-  virtual void set_wifi_connected();
-  virtual void set_wifimanager();
-
-  virtual void set_ws_disconnected();
-  virtual void set_ws_authorizing();
-  virtual void set_ws_connecting();
-  virtual void set_ws_connected();
-
+class VisualController : public ValueConsumer<WifiState>,
+                         public ValueConsumer<WSConnectionState>,
+                         public ValueConsumer<int> {
  public:
-  LedController(int pin);
-
   // ValueConsumer interface for ValueConsumer<WifiState> (Networking object
   // state updates)
   virtual void set_input(WifiState new_value, uint8_t input_channel = 0) override;

@@ -12,16 +12,18 @@
 #define ENABLE_LED false
 #endif
 
+#include <forward_list>
+
 #include "net/http.h"
 #include "net/networking.h"
 #include "net/ws_client.h"
 #include "sensesp.h"
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta.h"
-#include "system/led_controller.h"
 #include "system/observablevalue.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
+#include "system/visual_controller.h"
 
 enum StandardSensors {
   NONE,
@@ -116,7 +118,7 @@ class SensESPApp {
                               StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server;
-  LedController* led_controller;
+  std::forward_list<VisualController*> visual_controllers;
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;
