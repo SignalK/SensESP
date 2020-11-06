@@ -103,6 +103,9 @@ class SensESPApp {
   const SensESPApp* set_requested_permissions(SKPermissions permissions) {
     this->requested_permissions = permissions;
   }
+  const SensESPApp* add_visual_controller(VisualController* controller) {
+    visual_controllers.push_front(controller);
+  }
 
  private:
   String preset_hostname = "SensESP";
