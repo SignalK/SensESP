@@ -8,16 +8,22 @@
 #include "sensesp.h"
 #include "signalk/signalk_delta.h"
 #include "system/configurable.h"
+#include "system/valueproducer.h"
+#include "system/observablevalue.h"
 
 static const char* NULL_AUTH_TOKEN = "";
 
-enum ConnectionState { disconnected, authorizing, connecting, connected };
+enum WSConnectionState {
+  kWSDisconnected,
+  kWSAuthorizing,
+  kWSConnecting,
+  kWSConnected
+};
 
-class WSClient : public Configurable {
+class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
  public:
   WSClient(String config_path, SKDelta* sk_delta, String server_address,
-           uint16_t server_port, std::function<void(bool)> connected_cb,
-           void_cb_func delta_cb, String sk_permission = "readwrite");
+           uint16_t server_port, String sk_permission = "readwrite");
   void enable();
   void on_disconnected();
   void on_error();
@@ -36,6 +42,12 @@ class WSClient : public Configurable {
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
 
+  /*
+   * Return a delta update ValueProducer that produces the number of sent deltas
+   * (ordinarily always 1)
+   */
+  ValueProducer<int>& get_delta_count_producer() { return delta_count_producer; };
+
  private:
   String server_address = "";
   uint16_t server_port = 80;
@@ -47,11 +59,11 @@ class WSClient : public Configurable {
   String sk_permission;
   bool server_detected = false;
 
-  // FIXME: replace with a single connection_state enum
-  ConnectionState connection_state = disconnected;
+  ObservableValue<WSConnectionState> connection_state = kWSDisconnected;
   WiFiClient wifi_client;
   WebSocketsClient client;
   SKDelta* sk_delta;
+  ObservableValue<int> delta_count_producer = 0;
   void connect_loop();
   void test_token(const String host, const uint16_t port);
   void send_access_request(const String host, const uint16_t port);
@@ -59,8 +71,6 @@ class WSClient : public Configurable {
                            const String href);
   void connect_ws(const String host, const uint16_t port);
   void subscribe_listeners();
-  std::function<void(bool)> connected_cb;
-  void_cb_func delta_cb;
   bool get_mdns_service(String& server_address, uint16_t& server_port);
 };
 
