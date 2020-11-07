@@ -3,6 +3,9 @@
 // These patterns indicate how many milliseconds the led should be on and off,
 // repeating until PATTERN_END is reached
 
+// FIXME: These patterns eat up memory even if the LED
+// would be disabled
+
 // PATTERN: *___________________
 int no_ap_pattern[] = {50, 950, PATTERN_END};
 
