@@ -5,6 +5,11 @@
 #include "net/ws_client.h"
 #include "valueconsumer.h"
 
+/**
+ * An abstract base class for a subsystem providing visual feedback on
+ * the system state. May be subclassed to implement e.g. a blinking LED or 
+ * a display.
+ */
 class VisualOutputController : public ValueConsumer<WifiState>,
                                public ValueConsumer<WSConnectionState>,
                                public ValueConsumer<int> {

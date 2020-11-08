@@ -5,7 +5,9 @@
 #include "visual_output_controller.h"
 
 /**
- * 
+ * LedController consumes the networking and websocket states and delta counts
+ * and updates the device LED accordingly. Inherit this class and override
+ * the methods to customize the behavior.
  */
 class LedController : public VisualOutputController {
  protected:
