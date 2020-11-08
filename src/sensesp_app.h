@@ -18,7 +18,7 @@
 #include "sensesp.h"
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta.h"
-#include "system/led_blinker.h"
+#include "system/led_controller.h"
 #include "system/observablevalue.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
@@ -93,10 +93,6 @@ class SensESPApp {
   const SensESPApp* set_sk_server_port(uint16_t sk_server_port) { this->sk_server_port = sk_server_port; }
   const SensESPApp* set_sensors(StandardSensors sensors) { this->sensors = sensors; }
   const SensESPApp* set_led_pin(int led_pin) { this->led_pin = led_pin; }
-  const SensESPApp* set_enable_led(bool enable_led) { this->enable_led = enable_led; }
-  const SensESPApp* set_led_ws_connected(int led_ws_connected) { this->led_ws_connected = led_ws_connected; }
-  const SensESPApp* set_led_wifi_connected(int led_wifi_connected) { this->led_wifi_connected = led_wifi_connected; }
-  const SensESPApp* set_led_offline(int led_offline) { this->led_offline = led_offline; }
   const SensESPApp* set_requested_permissions(SKPermissions permissions) { this->requested_permissions = permissions; }
 
  private:
@@ -107,10 +103,6 @@ class SensESPApp {
   uint16_t sk_server_port = 0;
   StandardSensors sensors = ALL;
   int led_pin = LED_PIN;
-  bool enable_led = ENABLE_LED;
-  int led_ws_connected = 200;
-  int led_wifi_connected = 1000;
-  int led_offline = 2000;
   SKPermissions requested_permissions = READWRITE;
 
   void initialize();
@@ -118,7 +110,7 @@ class SensESPApp {
                               StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server;
-  LedBlinker* led_blinker;
+  LedController* led_controller;
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;

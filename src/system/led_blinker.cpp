@@ -5,102 +5,145 @@
 #include "sensesp.h"
 #include "sensesp_app.h"
 
-LedBlinker::LedBlinker(int pin, bool enabled, int ws_connected_interval,
-                       int wifi_connected_interval, int offline_interval) {
-  this->pin = pin;
-  this->enabled = enabled;
-  this->ws_connected_interval = ws_connected_interval;
-  this->wifi_connected_interval = wifi_connected_interval;
-  this->offline_interval = offline_interval;
+#define max(a, b) ((a) > (b) ? (a) : (b))
 
-  if (enabled) {
-    pinMode(pin, OUTPUT);
-    this->set_state(0);
+BaseBlinker::BaseBlinker(int pin) : pin{pin} {}
+
+/**
+ * Turn the LED on or off.
+ */
+void BaseBlinker::set_state(bool state) {
+  this->state = state;
+#ifdef ESP32
+  digitalWrite(pin, state);
+#elif defined(ESP8266)
+  // LED (at least on ESP-01 and Wemos D1 mini) is active low
+  digitalWrite(pin, !state);
+#endif
+  update_counter++;
+
+}
+
+/**
+ * Invert the current LED state.
+ */
+void BaseBlinker::flip_state() { this->set_state(!this->state); }
+
+/**
+ * Flip the LED off and on for `duration` milliseconds.
+ */
+void BaseBlinker::blip(int duration) {
+  // indicator for a blip being in progress
+  static bool blipping = false;
+
+  // only allow one blip at a time
+  if (blipping) {
+    return;
+  }
+  blipping = true;
+
+  bool orig_state = this->state;
+  this->set_state(false);
+  int current_counter = this->update_counter;
+  app.onDelay(duration, [this, duration, orig_state, current_counter]() {
+    // only update if no-one has touched the LED in the meanwhile
+    if (this->update_counter == current_counter) {
+      this->set_state(true);
+      int new_counter = this->update_counter;
+      app.onDelay(duration, [this, orig_state, new_counter]() {
+        // again, only update if no-one has touched the LED
+        if (this->update_counter == new_counter) {
+          this->set_state(orig_state);
+        }
+        blipping = false;
+      });
+    } else {
+      blipping = false;
+    }
+  });
+}
+
+/**
+ * Enable or disable the blinker.
+ */
+void BaseBlinker::set_enabled(bool state) {
+  bool was_enabled = this->enabled;
+  this->enabled = state;
+  if (this->enabled) {
+    this->tick();
+  } else {
+    this->set_state(false);
+    if (was_enabled) {
+      reaction->remove();
+    }
   }
 }
 
-void LedBlinker::set_input(WifiState new_value, uint8_t input_channel) {
-  switch (new_value) {
-    case kWifiNoAP:
-      this->set_wifi_disconnected();
-      break;
-    case kWifiDisconnected:
-      this->set_wifi_disconnected();
-      break;
-    case kWifiConnectedToAP:
-      this->set_wifi_connected();
-      break;
-    case kExecutingWifiManager:
-      this->set_wifi_disconnected();
-      break;
-    default:
-      this->set_wifi_disconnected();
-      break;
+void BaseBlinker::enable() { this->tick(); }
+
+PeriodicBlinker::PeriodicBlinker(int pin, unsigned int period)
+    : BaseBlinker(pin), period{period} {}
+
+EvenBlinker::EvenBlinker(int pin, unsigned int period)
+    : PeriodicBlinker(pin, period) {}
+
+void EvenBlinker::tick() {
+  if (!enabled) {
+    return;
   }
+  this->flip_state();
+  reaction = app.onDelay(period, [this]() { this->tick(); });
 }
 
-void LedBlinker::set_input(WSConnectionState new_value, uint8_t input_channel) {
-  switch (new_value) {
-    case kWSDisconnected:
-      this->set_server_disconnected();
-      break;
-    case kWSConnecting:
-      this->set_server_disconnected();
-      break;
-    case kWSAuthorizing:
-      this->set_server_disconnected();
-      break;
-    case kWSConnected:
-      this->set_server_connected();
-      break;
-    default:
-      this->set_server_disconnected();
-      break;
+RatioBlinker::RatioBlinker(int pin, unsigned int period, float ratio)
+    : PeriodicBlinker(pin, period), ratio{ratio} {}
+
+void RatioBlinker::tick() {
+  if (!enabled) {
+    return;
   }
+  this->flip_state();
+  int on_duration = ratio * period;
+  int off_duration = max(0, period - on_duration);
+  unsigned int ref_duration = state == false ? off_duration : on_duration;
+  reaction = app.onDelay(ref_duration, [this]() { this->tick(); });
 }
 
-void LedBlinker::set_input(int new_value, uint8_t input_channel) {
-  this->flip();
+PatternBlinker::PatternBlinker(int pin, int pattern[])
+    : BaseBlinker(pin), pattern{pattern} {}
+
+/**
+ * Set a new blink pattern. Patterns are arrays of ints, with
+ * PATTERN_END as the last value. Each number in the pattern indicates
+ * the length of that segment, in milliseconds. The first number indicates
+ * an ON duration, the second an OFF duration, and so on.
+ */
+void PatternBlinker::set_pattern(int pattern[]) {
+  this->pattern = pattern;
+  this->restart();
 }
 
-void LedBlinker::remove_blinker() {
-  if (this->blinker != nullptr) {
-    this->blinker->remove();
+void PatternBlinker::tick() {
+  if (!enabled) {
+    return;
   }
-}
-
-void LedBlinker::set_state(int new_state) {
-  if (enabled) {
-    this->current_state = new_state;
-    digitalWrite(pin, !new_state);
+  // When pattern[pattern_ptr] == PATTERN_END, that's the end of the pattern,
+  // so start over at the beginning.
+  if (pattern[pattern_ptr] == PATTERN_END) {
+    pattern_ptr = 0;
   }
+  // odd indices indicate times when LED should be OFF, even when ON
+  bool new_state = (pattern_ptr % 2) == 0;
+  this->set_state(new_state);
+  reaction = app.onDelay(pattern[pattern_ptr++], [this]() { this->tick(); });
 }
 
-void LedBlinker::flip() {
-  if (enabled) {
-    this->set_state(!this->current_state);
+void PatternBlinker::restart() {
+  state = false;
+  pattern_ptr = 0;
+  if (reaction != NULL) {
+    reaction->remove();
+    reaction = NULL;
+    this->tick();
   }
-}
-
-void LedBlinker::set_wifi_disconnected() {
-  this->remove_blinker();
-
-  if (offline_interval > 0) {
-    this->blinker = app.onRepeat(offline_interval, [this]() {
-      this->set_state(1);
-      app.onDelay(100, [this]() { this->set_state(0); });
-    });
-  }
-}
-
-void LedBlinker::set_wifi_connected() {
-  this->remove_blinker();
-  this->blinker =
-      app.onRepeat(wifi_connected_interval, [this]() { this->flip(); });
-}
-
-void LedBlinker::set_server_connected() {
-  this->remove_blinker();
-  this->blinker =
-      app.onRepeat(ws_connected_interval, [this]() { this->flip(); });
 }

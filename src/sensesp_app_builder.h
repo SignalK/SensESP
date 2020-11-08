@@ -12,10 +12,6 @@ class SensESPAppBuilder {
   uint16_t sk_server_port = 0;
   StandardSensors sensors = ALL;
   int led_pin = LED_PIN;
-  bool enable_led = ENABLE_LED;
-  int led_ws_connected = 200;
-  int led_wifi_connected = 1000;
-  int led_offline = 5000;
   SKPermissions sk_server_permissions = READWRITE;
 
   SensESPApp* app;
@@ -41,14 +37,6 @@ class SensESPAppBuilder {
   }
   SensESPAppBuilder* set_led_pin(int led_pin) {
     app->set_led_pin(led_pin);
-    return this;
-  }
-  SensESPAppBuilder* set_led_blinker(bool enabled, int websocket_connected,
-                                     int wifi_connected, int offline) {
-    app->set_enable_led(enabled);
-    app->set_led_ws_connected(websocket_connected);
-    app->set_led_wifi_connected(wifi_connected);
-    app->set_led_offline(offline);
     return this;
   }
   SensESPAppBuilder* set_hostname(String hostname) {
