@@ -94,10 +94,10 @@ void SensESPApp::setup() {
 
   // create controllers and connect them to their data sources
 
-  if (visual_controllers.empty()) {
-    visual_controllers.push_front(new LedController(LED_PIN));
+  if (visual_output_controllers.empty()) {
+    visual_output_controllers.push_front(new LedController(LED_PIN));
   }
-  for (auto controller : visual_controllers) {
+  for (auto controller : visual_output_controllers) {
     this->networking->connect_to(controller);
     this->ws_client->connect_to(controller);
     this->ws_client->get_delta_count_producer().connect_to(controller);

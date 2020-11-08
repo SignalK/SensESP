@@ -23,7 +23,7 @@
 #include "system/observablevalue.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
-#include "system/visual_controller.h"
+#include "system/visual_output_controller.h"
 
 enum StandardSensors {
   NONE,
@@ -103,8 +103,8 @@ class SensESPApp {
   const SensESPApp* set_requested_permissions(SKPermissions permissions) {
     this->requested_permissions = permissions;
   }
-  const SensESPApp* add_visual_controller(VisualController* controller) {
-    visual_controllers.push_front(controller);
+  const SensESPApp* add_visual_controller(VisualOutputController* controller) {
+    visual_output_controllers.push_front(controller);
   }
 
  private:
@@ -121,7 +121,7 @@ class SensESPApp {
                               StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server;
-  std::forward_list<VisualController*> visual_controllers;
+  std::forward_list<VisualOutputController*> visual_output_controllers;
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;

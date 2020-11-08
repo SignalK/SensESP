@@ -2,9 +2,12 @@
 #define _LED_CONTROLLER_H_
 
 #include "led_blinker.h"
-#include "visual_controller.h"
+#include "visual_output_controller.h"
 
-class LedController : public VisualController {
+/**
+ * 
+ */
+class LedController : public VisualOutputController {
  protected:
   PatternBlinker* blinker;
 
