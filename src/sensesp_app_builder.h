@@ -39,7 +39,7 @@ class SensESPAppBuilder {
     return this;
   }
   SensESPAppBuilder* add_visual_controller(VisualOutputController* controller) {
-    app->add_visual_controller(controller);
+    app->visual_output_controllers.push_front(controller);
     return this;
   }
   SensESPApp* get_app() {

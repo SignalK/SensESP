@@ -86,25 +86,31 @@ class SensESPApp {
 
   const SensESPApp* set_preset_hostname(String preset_hostname) {
     this->preset_hostname = preset_hostname;
+    return this;
   }
-  const SensESPApp* set_ssid(String ssid) { this->ssid = ssid; }
+  const SensESPApp* set_ssid(String ssid) {
+    this->ssid = ssid;
+    return this;
+  }
   const SensESPApp* set_wifi_password(String wifi_password) {
     this->wifi_password = wifi_password;
+    return this;
   }
   const SensESPApp* set_sk_server_address(String sk_server_address) {
     this->sk_server_address = sk_server_address;
+    return this;
   }
   const SensESPApp* set_sk_server_port(uint16_t sk_server_port) {
     this->sk_server_port = sk_server_port;
+    return this;
   }
   const SensESPApp* set_sensors(StandardSensors sensors) {
     this->sensors = sensors;
+    return this;
   }
   const SensESPApp* set_requested_permissions(SKPermissions permissions) {
     this->requested_permissions = permissions;
-  }
-  const SensESPApp* add_visual_controller(VisualOutputController* controller) {
-    visual_output_controllers.push_front(controller);
+    return this;
   }
 
  private:
