@@ -15,10 +15,6 @@
 #define FXAS_CR1_ODR_BITS_LOC (2) //ODR bits are in positions 4:2
 #define N2K_INVALID_FLOAT (-1e-9) //NMEA2000 value for unavailable parameters
 
-Adafruit_NXPSensorFusion filter;  // when placed inside class, results from this
-                                  // filter return Heading=0.0 always. Other two
-                                  // filters (see below) work OK inside class
-
 //  Constructor creates an accelerometer/magnetometer object (fxos_)
 //  and a gyroscope object (fxas_)
 SensorNXP_FXOS8700_FXAS21002::SensorNXP_FXOS8700_FXAS21002()

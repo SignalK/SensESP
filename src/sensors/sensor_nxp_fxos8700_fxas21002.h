@@ -28,8 +28,6 @@
 //   please support PJRC and open-source hardware by purchasing products
 //   from PJRC!  Written by PJRC, adapted by Limor Fried for Adafruit Industries.
 
-// Last edits by Bjarne Hansen 2020-10-20
-
 // Relies on Serial object existing for sending data/diagnostics to serial port
 
 #include <stdint.h>
@@ -65,7 +63,7 @@ class SensorNXP_FXOS8700_FXAS21002 {
   // why. Currently declared in *.cpp file  The other two filters are fine when
   // declared inside class. Adafruit_NXP_SensorFusion filter runs fine on ESP32.
   // Adafruit_Madgwick filter;  // faster than NXP
-  // Adafruit_Mahony filter;    // fastest/smallest
+  Adafruit_Mahony filter;    // fastest/smallest
 
   Adafruit_FXOS8700 fxos_;    // the combined magnetometer + accelerometer
   Adafruit_FXAS21002C fxas_;  // the gyroscope
