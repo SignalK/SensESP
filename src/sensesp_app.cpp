@@ -13,6 +13,7 @@
 #include "sensors/digital_input.h"
 #include "sensors/system_info.h"
 #include "signalk/signalk_output.h"
+#include "system/led_controller.h"
 #include "system/spiffs_storage.h"
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
@@ -89,15 +90,18 @@ void SensESPApp::setup() {
 
   this->ws_client =
       new WSClient("/system/sk", sk_delta, sk_server_address, sk_server_port,
-                                 permission_strings[(int)requested_permissions]);
+                   permission_strings[(int)requested_permissions]);
 
-  // create a led controller and connect it to its data sources
+  // create controllers and connect them to their data sources
 
-  led_controller = new LedController(led_pin);
-  this->networking->connect_to(led_controller);
-  this->ws_client->connect_to(led_controller);
-  this->ws_client->get_delta_count_producer().connect_to(led_controller);
-
+  if (visual_output_controllers.empty()) {
+    visual_output_controllers.push_front(new LedController(LED_PIN));
+  }
+  for (auto controller : visual_output_controllers) {
+    this->networking->connect_to(controller);
+    this->ws_client->connect_to(controller);
+    this->ws_client->get_delta_count_producer().connect_to(controller);
+  }
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
