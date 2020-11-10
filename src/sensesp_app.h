@@ -81,6 +81,10 @@ class SensESPApp {
    */
   bool isSignalKConnected() { return ws_client->is_connected(); }
 
+  const SKDelta* get_sk_delta() const { return this->sk_delta; }
+  const Networking* get_networking() const { return this->networking; }
+  const WSClient* get_ws_client() const { return this->ws_client; }
+
  protected:
   // setters for all constructor arguments
 
@@ -137,6 +141,7 @@ class SensESPApp {
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
+  friend class VisualOutputController;
 };
 
 extern SensESPApp* sensesp_app;
