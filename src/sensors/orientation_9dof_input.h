@@ -26,8 +26,11 @@ class Orientation9DOF : public Sensor {
   Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                   String config_path = "");
   void stream_raw_values(void);  // used when calibrating
- private:
-  uint8_t addr;  // unused
+  // pointer to physical sensor
+  SensorNXP_FXOS8700_FXAS21002 *sensor_fxos_fxas;
+
+private:
+ uint8_t addr;  // unused
 };
 
 // Pass one of these in Read9DOF() constructor corresponding to type of value

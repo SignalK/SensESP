@@ -81,8 +81,7 @@ ReactESP app([]() {
   */
 
   // Magnetic Heading data source, using 9 Degrees-of-freedom combination sensor
-  Orientation9DOF NXP9DOF =
-      Orientation9DOF(PIN_I2C_SDA, PIN_I2C_SCL, config_path_heading);
+  auto* NXP9DOF = new Orientation9DOF(PIN_I2C_SDA, PIN_I2C_SCL, config_path_heading);
 
   /*  Uncomment the following line during calibration - this will stream raw
      readings to serial port, where they can be intercepted by the Motion Sensor
@@ -92,7 +91,7 @@ ReactESP app([]() {
       After calibration values have been written to EEPROM/Flash, re-comment
      following line to restore normal program flow.
   */
-  //  NXP9DOF.stream_raw_values();  //continuous raw data collection. This call
+  //  NXP9DOF->stream_raw_values();  //continuous raw data collection. This call
   //  does not return.
 
   // Start periodic readings from orientation sensor. Note that the physical
@@ -103,18 +102,18 @@ ReactESP app([]() {
   //  or faster than any of the other parameters (otherwise those other
   //  parameters will not update at the rate you expect).
   auto* sensor_heading =
-      new Read9DOF(&NXP9DOF, compass_hdg, ORIENTATION_SAMPLING_INTERVAL_MS,
+      new Read9DOF(NXP9DOF, compass_hdg, ORIENTATION_SAMPLING_INTERVAL_MS,
                    config_path_heading);
   sensor_heading->connect_to(
       new SKOutputNumber(sk_path_heading, config_path_orientation_skpath));
 
   auto* sensor_pitch = new Read9DOF(
-      &NXP9DOF, pitch, ORIENTATION_SAMPLING_INTERVAL_MS * 5, config_path_pitch);
+      NXP9DOF, pitch, ORIENTATION_SAMPLING_INTERVAL_MS * 5, config_path_pitch);
   sensor_pitch->connect_to(
       new SKOutputNumber(sk_path_pitch, config_path_orientation_skpath));
 
   auto* sensor_roll = new Read9DOF(
-      &NXP9DOF, roll, ORIENTATION_SAMPLING_INTERVAL_MS * 5, config_path_roll);
+      NXP9DOF, roll, ORIENTATION_SAMPLING_INTERVAL_MS * 5, config_path_roll);
   sensor_roll->connect_to(
       new SKOutputNumber(sk_path_roll, config_path_orientation_skpath));
 
@@ -122,37 +121,37 @@ ReactESP app([]() {
       as well, uncomment the appropriate connections from the following.
 
  auto* sensor_turn_rate =
-      new Read9DOF(&NXP9DOF, rate_of_turn, ORIENTATION_SAMPLING_INTERVAL_MS*5,
+      new Read9DOF(NXP9DOF, rate_of_turn, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_turn_rate);
   sensor_turn_rate->connect_to(
       new SKOutputNumber(sk_path_turn_rate, config_path_orientation_skpath));
 
  auto* sensor_roll_rate =
-      new Read9DOF(&NXP9DOF, rate_of_roll, ORIENTATION_SAMPLING_INTERVAL_MS*5,
+      new Read9DOF(NXP9DOF, rate_of_roll, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_roll_rate);
   sensor_roll_rate->connect_to(
       new SKOutputNumber(sk_path_roll_rate, config_path_orientation_skpath));
 
  auto* sensor_pitch_rate =
-      new Read9DOF(&NXP9DOF, rate_of_pitch, ORIENTATION_SAMPLING_INTERVAL_MS*5,
+      new Read9DOF(NXP9DOF, rate_of_pitch, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_pitch_rate);
   sensor_pitch_rate->connect_to(
       new SKOutputNumber(sk_path_pitch_rate, config_path_orientation_skpath));
 
  auto* sensor_accel_x =
-      new Read9DOF(&NXP9DOF, acceleration_x, ORIENTATION_SAMPLING_INTERVAL_MS*5,
+      new Read9DOF(NXP9DOF, acceleration_x, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_x);
   sensor_accel_x->connect_to(
       new SKOutputNumber(sk_path_accel_x, config_path_orientation_skpath));
 
  auto* sensor_accel_y =
-      new Read9DOF(&NXP9DOF, acceleration_y, ORIENTATION_SAMPLING_INTERVAL_MS*5,
+      new Read9DOF(NXP9DOF, acceleration_y, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_y);
   sensor_accel_y->connect_to(
       new SKOutputNumber(sk_path_accel_y, config_path_orientation_skpath));
 
  auto* sensor_accel_z =
-      new Read9DOF(&NXP9DOF, acceleration_z, ORIENTATION_SAMPLING_INTERVAL_MS*5,
+      new Read9DOF(NXP9DOF, acceleration_z, ORIENTATION_SAMPLING_INTERVAL_MS*5,
                    config_path_accel_z);
   sensor_accel_z->connect_to(
       new SKOutputNumber(sk_path_accel_z, config_path_orientation_skpath));
@@ -171,7 +170,7 @@ ReactESP app([]() {
   Roll is rotation about the X-axis. Positive is rolling to starboard.
   Turn-rate is rotation about the Z-axis. Positive is increasing bearing.
   Roll-rate is rotation about the X-axis. Positive is rolling to starboard.
-  Pitch-rate is rotation about the Y-axis. Positive is ***bow falling.
+  Pitch-rate is rotation about the Y-axis. Positive is bow rising.
 
   If the sensor is mounted differently, or you prefer an alternate nomenclature,
   the get___() methods in sensor_NXP_FXOS8700_FXAS21002.cpp can be adjusted.

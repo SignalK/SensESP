@@ -16,9 +16,9 @@
 #define N2K_INVALID_FLOAT (-1e-9) //NMEA2000 value for unavailable parameters
 
 //  Constructor creates an accelerometer/magnetometer object (fxos_)
-//  and a gyroscope object (fxas_)
+//  a gyroscope object (fxas_), and filter
 SensorNXP_FXOS8700_FXAS21002::SensorNXP_FXOS8700_FXAS21002()
-    : fxos_(0x8700A, 0x8700B), fxas_(0x0021002C) {}
+    : filter(), fxos_(0x8700A, 0x8700B), fxas_(0x0021002C) {}
 
 //  Connect to FXOS8700 & FXAS21002 sensor combination using I2C.
 //  To use default Arduino I2C pins, pass pin_i2c_sda and pin_i2c_scl = -1
