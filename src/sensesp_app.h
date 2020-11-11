@@ -23,7 +23,7 @@
 #include "system/observablevalue.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
-#include "system/visual_output_controller.h"
+#include "controllers/visual_output_controller.h"
 
 enum StandardSensors {
   NONE,
@@ -81,30 +81,40 @@ class SensESPApp {
    */
   bool isSignalKConnected() { return ws_client->is_connected(); }
 
+  const SKDelta* get_sk_delta() const { return this->sk_delta; }
+  const Networking* get_networking() const { return this->networking; }
+  const WSClient* get_ws_client() const { return this->ws_client; }
+
  protected:
   // setters for all constructor arguments
 
   const SensESPApp* set_preset_hostname(String preset_hostname) {
     this->preset_hostname = preset_hostname;
+    return this;
   }
-  const SensESPApp* set_ssid(String ssid) { this->ssid = ssid; }
+  const SensESPApp* set_ssid(String ssid) {
+    this->ssid = ssid;
+    return this;
+  }
   const SensESPApp* set_wifi_password(String wifi_password) {
     this->wifi_password = wifi_password;
+    return this;
   }
   const SensESPApp* set_sk_server_address(String sk_server_address) {
     this->sk_server_address = sk_server_address;
+    return this;
   }
   const SensESPApp* set_sk_server_port(uint16_t sk_server_port) {
     this->sk_server_port = sk_server_port;
+    return this;
   }
   const SensESPApp* set_sensors(StandardSensors sensors) {
     this->sensors = sensors;
+    return this;
   }
   const SensESPApp* set_requested_permissions(SKPermissions permissions) {
     this->requested_permissions = permissions;
-  }
-  const SensESPApp* add_visual_controller(VisualOutputController* controller) {
-    visual_output_controllers.push_front(controller);
+    return this;
   }
 
  private:
@@ -131,6 +141,7 @@ class SensESPApp {
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
+  friend class VisualOutputController;
 };
 
 extern SensESPApp* sensesp_app;

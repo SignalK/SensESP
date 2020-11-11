@@ -35,8 +35,11 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
   void restart();
   void send_delta();
 
-  const String get_server_address() { return server_address; }
-  const uint16_t get_server_port() { return server_port; }
+  const String get_server_address() const { return server_address; }
+  const uint16_t get_server_port() const { return server_port; }
+  const WSConnectionState get_connection_state() const {
+    return connection_state.get();
+  }
 
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
