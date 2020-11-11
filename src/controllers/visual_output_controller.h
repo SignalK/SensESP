@@ -3,7 +3,7 @@
 
 #include "net/networking.h"
 #include "net/ws_client.h"
-#include "valueconsumer.h"
+#include "system/valueconsumer.h"
 
 /**
  * An abstract base class for a subsystem providing visual feedback on

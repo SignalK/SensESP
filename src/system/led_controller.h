@@ -2,7 +2,7 @@
 #define _LED_CONTROLLER_H_
 
 #include "led_blinker.h"
-#include "visual_output_controller.h"
+#include "controllers/visual_output_controller.h"
 
 /**
  * LedController consumes the networking and websocket states and delta counts
