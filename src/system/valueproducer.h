@@ -24,7 +24,7 @@ class ValueProducer : virtual public Observable {
   /**
    * Returns the current value of this producer
    */
-  virtual const T& get() { return output; }
+  virtual const T& get() const { return output; }
 
   /**
    * Connects this producer to the specified consumer, registering that
