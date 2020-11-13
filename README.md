@@ -35,39 +35,13 @@ the Wemos D1 mini, an implementation of the ESP8266 chip. If you're using a diff
 board dropdown. If you're using an ESP32 that isn't in the board list, choose "Espressif ESP32 Dev Module".)
 The Arduino framework should become automatically selected. Complete the New Project dialog, then open the project you created.
 
-Once you have your new project open, open the `platformio.ini` file that's in your project's directory (NOT the one that you find if you go down into the .pio/libdeps/... folders). Use the File_Save As... menu option to save the file as "platformio.ini.auto" (because it's the one that was automatically generated).
+Once you have your new project open, open the automatically generated `platformio.ini` file that's in your project's directory (NOT the one that you find if you go down into the .pio/libdeps/... folders). Save it as `platformio.ini.auto` so you can refer back to it.
 
-Use File_New File to create a new, empty file. Copy-paste the entire contents of [the example platformio.ini file](https://github.com/SignalK/SensESP/blob/master/examples/platformio.ini) into this new file. Then File_Save this new file as "platformio.ini". Near the top of that file is a section that looks like this:
-```
-[platformio]
-;set default_envs to whichever board(s) you use. Build/Run/etc processes those envs
-default_envs = 
-   ;esp32dev
-   d1_mini
-;   esp-wrover-kit
-```
-See if your board is one of the boards in the list. (Look in the file you saved as `platformio.ini.auto` to see how your board is represented.) If your board is in that list, make sure that it's NOT commented out (that is, make sure the line it's on doesn't start with a semi-colon), and make sure that all the other boards in that section ARE commented out.
+Create a new file, and copy/paste the entire contents of [this example `platformio.ini` file](https://github.com/SignalK/SensESP/blob/master/examples/platformio.ini) into it. Save it as `platformio.ini`.
 
-If your board is NOT in that list, you need to do a few things:
-1. Add your board to the list. You'll know what to add by looking at the `board = ` section of `platformio.ini.auto`.
-2. Comment out the other boards in the list.
-3. Copy-paste the entire contents of `platformio.ini.auto` into the very bottom of `platformio.ini`. That will look something like this: 
-```
-[env:your_board_name]
-platform = espressif32
-board = your_board_name
-framework = arduino
-```
-4. Copy one of these on a new line immediately after `[env:your_board_name]`: if your board is an ESP8266, copy this: `extends = espressif8266_base`; if your board is an ESP32, copy this: `extends = espressif32_base`.
-5. Comment out, or simply remove, the `platform = ` line. (It's already included in the "base" section that the previous line points to.)
-6. Comment out, or simply remove, the `framework = arduino` line. (It's already included in the global `[env]` section earlier in the file.)
-7. If there are other lines in the `[env:your_board_name]` section of `platformio.ini.auto`, you should leave them.
-8. If there are other sections (besides the `[env:your_board_name]` section) in `platformio.ini.auto`, they're there because PlatformIO thinks you need them, so you should copy them into the bottom of `platformio.ini`, too.
-9. Look through the entire `platformio.ini` file, looking at all of the comments, to determine if any of them pertain to your board or your project.
+If the `[platformio]` section of this file contains your ESP board, make sure your board is not commented out, and that all other boards are commented out, and save it. This should be a good `platformio.ini` file for SensESP. If your board is NOT included, you need to add it (see how it's represented in the `platformio.ini.auto` that you saved). And you need to merge the other lines in `platformio.ini.auto` into your `platformio.ini` file.
 
-Now you should have a `platformio.ini` that will work for your board, and that has all the settings that have been determined to be necessary for SensESP.
-
-Open `/YourProjectName/src/main.cpp`. The default template is for the Arduino IDE, but a SensESP `main.cpp` file will look very different. Replace the contents of `main.cpp` with the contents of one of the SensESP examples in https://github.com/SignalK/SensESP/tree/master/examples. (This is a good one to start with: https://github.com/SignalK/SensESP/blob/master/examples/analog_input.cpp.) Check that the settings (pin numbers, etc.) match your hardware. Then click on the checkmark icon on the blue status bar along the bottom of your screen. (That's the "Build" shortcut.) If the build succeeds, you can plug in your ESP board and press "Upload and Monitor".
+Now, open `src/main.cpp`. The default template is for the Arduino IDE, but a SensESP `main.cpp` file will look very different. Replace the contents of `main.cpp` with the contents of one of the SensESP examples in the examples subdirectory here on GitHub. (This is a good one to start with: https://github.com/SignalK/SensESP/blob/master/examples/analog_input.cpp .) Check that the settings (pin numbers, etc.) match your hardware. Then click on the checkmark icon on the blue status bar along the bottom of your screen. (That's the "Build" shortcut.) If the build succeeds, you can plug in your ESP board and press "Upload and Monitor".
 
 If the project compiles and uploads, your ESP will be running the example code. Since the first thing it needs to do is connect to a wifi network, and it doesn't know what network to connect to, it will broadcast a wifi SSID for you to connect to so you can configure it. Connect your computer or phone wifi to the "Configure SensESP" network. A captive portal may pop up, but if it doesn't, open a browser and go to 192.168.4.1. Enter your wifi credentials to allow the device to access the network that your Signal K Server is on. Also enter a suitable name for the ESP, for example `BilgeMonitor` or `EngineTemps`. (No more than 16 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the ESP will restart and try to connect to your wifi network.
 
