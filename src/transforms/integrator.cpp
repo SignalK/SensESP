@@ -17,7 +17,7 @@ void Integrator::enable() {
 }
 
 void Integrator::set_input(float input, uint8_t inputChannel) {
-  value += input;
+  value += input * k;
   this->emit(value);
 }
 
