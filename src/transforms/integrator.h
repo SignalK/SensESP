@@ -12,6 +12,7 @@ class Integrator : public NumericTransform {
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
+  void reset();
 
  private:
   float value = 0;
