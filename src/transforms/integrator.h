@@ -57,5 +57,6 @@ class IntegratorT : public SymmetricTransform<T> {
 };
 
 typedef IntegratorT<float> Integrator;
+typedef IntegratorT<int> Accumulator;
 
 #endif
