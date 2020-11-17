@@ -17,12 +17,13 @@ UltrasonicDistance::UltrasonicDistance(int8_t trig_pin, int8_t input_pin,
 void UltrasonicDistance::enable() {
   app.onRepeat(read_delay, [this]() {
     digitalWrite(trigger_pin, HIGH);
-    long last_time = micros();
-    while (micros() - last_time < 100) {
+    long lastTime = micros();
+    while (micros() - lastTime < 100) {
       yield();
     }
     digitalWrite(trigger_pin, LOW);
-    this->emit(pulseIn(input_pin, HIGH));
+    output = pulseIn(input_pin, HIGH, 100); //  add a 100 ms timeout
+    this->notify();
   });
 }
 
