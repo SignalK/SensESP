@@ -42,9 +42,10 @@ bool SensorNXP_FXOS8700_FXAS21002::connect(int pin_i2c_sda,
     }
   }//end of loading calibration
 
-  Wire.begin(pin_i2c_sda, pin_i2c_scl, 400000 );
+  Wire.begin(pin_i2c_sda, pin_i2c_scl);
+  Wire.setClock(400000);  // separate from begin() for ESP82666 compatibility
   if (!startSensors()) {
-      debugE("Failed to find sensors");
+    debugE("Failed to find sensors");
     return false;
   }
 
