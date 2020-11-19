@@ -17,9 +17,11 @@ void Integrator::enable() {
 }
 
 void Integrator::set_input(float input, uint8_t inputChannel) {
-  value += input;
+  value += input * k;
   this->emit(value);
 }
+
+void Integrator::reset() {value = 0;}
 
 void Integrator::get_configuration(JsonObject& root) {
   root["k"] = k;

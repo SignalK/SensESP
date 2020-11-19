@@ -15,14 +15,10 @@
 #define FXAS_CR1_ODR_BITS_LOC (2) //ODR bits are in positions 4:2
 #define N2K_INVALID_FLOAT (-1e-9) //NMEA2000 value for unavailable parameters
 
-Adafruit_NXPSensorFusion filter;  // when placed inside class, results from this
-                                  // filter return Heading=0.0 always. Other two
-                                  // filters (see below) work OK inside class
-
 //  Constructor creates an accelerometer/magnetometer object (fxos_)
-//  and a gyroscope object (fxas_)
+//  a gyroscope object (fxas_), and filter
 SensorNXP_FXOS8700_FXAS21002::SensorNXP_FXOS8700_FXAS21002()
-    : fxos_(0x8700A, 0x8700B), fxas_(0x0021002C) {}
+    : filter(), fxos_(0x8700A, 0x8700B), fxas_(0x0021002C) {}
 
 //  Connect to FXOS8700 & FXAS21002 sensor combination using I2C.
 //  To use default Arduino I2C pins, pass pin_i2c_sda and pin_i2c_scl = -1
@@ -46,9 +42,10 @@ bool SensorNXP_FXOS8700_FXAS21002::connect(int pin_i2c_sda,
     }
   }//end of loading calibration
 
-  Wire.begin(pin_i2c_sda, pin_i2c_scl, 400000 );
+  Wire.begin(pin_i2c_sda, pin_i2c_scl);
+  Wire.setClock(400000);  // separate from begin() for ESP82666 compatibility
   if (!startSensors()) {
-      debugE("Failed to find sensors");
+    debugE("Failed to find sensors");
     return false;
   }
 

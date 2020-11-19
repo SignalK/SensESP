@@ -12,16 +12,18 @@
 #define ENABLE_LED false
 #endif
 
+#include <forward_list>
+
 #include "net/http.h"
 #include "net/networking.h"
 #include "net/ws_client.h"
 #include "sensesp.h"
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta.h"
-#include "system/led_controller.h"
 #include "system/observablevalue.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
+#include "controllers/visual_output_controller.h"
 
 enum StandardSensors {
   NONE,
@@ -33,20 +35,16 @@ enum StandardSensors {
   ALL = 0x1F
 };
 
-enum SKPermissions
-{
-  READONLY,
-  READWRITE,
-  ADMIN
-};
+enum SKPermissions { READONLY, READWRITE, ADMIN };
 
 void SetupSerialDebug(uint32_t baudrate);
 
 class SensESPApp {
  public:
   SensESPApp(bool defer_setup);
-  SensESPApp(String hostname = "SensESP", String ssid = "", String wifi_password = "",
-             String sk_server_address = "", uint16_t sk_server_port = 0);
+  SensESPApp(String hostname = "SensESP", String ssid = "",
+             String wifi_password = "", String sk_server_address = "",
+             uint16_t sk_server_port = 0);
   void setup();
   void enable();
   void reset();
@@ -83,17 +81,41 @@ class SensESPApp {
    */
   bool isSignalKConnected() { return ws_client->is_connected(); }
 
+  const SKDelta* get_sk_delta() const { return this->sk_delta; }
+  const Networking* get_networking() const { return this->networking; }
+  const WSClient* get_ws_client() const { return this->ws_client; }
+
  protected:
   // setters for all constructor arguments
 
-  const SensESPApp* set_preset_hostname(String preset_hostname) { this->preset_hostname = preset_hostname; }
-  const SensESPApp* set_ssid(String ssid) { this->ssid = ssid; }
-  const SensESPApp* set_wifi_password(String wifi_password) { this->wifi_password = wifi_password; }
-  const SensESPApp* set_sk_server_address(String sk_server_address) { this->sk_server_address = sk_server_address; }
-  const SensESPApp* set_sk_server_port(uint16_t sk_server_port) { this->sk_server_port = sk_server_port; }
-  const SensESPApp* set_sensors(StandardSensors sensors) { this->sensors = sensors; }
-  const SensESPApp* set_led_pin(int led_pin) { this->led_pin = led_pin; }
-  const SensESPApp* set_requested_permissions(SKPermissions permissions) { this->requested_permissions = permissions; }
+  const SensESPApp* set_preset_hostname(String preset_hostname) {
+    this->preset_hostname = preset_hostname;
+    return this;
+  }
+  const SensESPApp* set_ssid(String ssid) {
+    this->ssid = ssid;
+    return this;
+  }
+  const SensESPApp* set_wifi_password(String wifi_password) {
+    this->wifi_password = wifi_password;
+    return this;
+  }
+  const SensESPApp* set_sk_server_address(String sk_server_address) {
+    this->sk_server_address = sk_server_address;
+    return this;
+  }
+  const SensESPApp* set_sk_server_port(uint16_t sk_server_port) {
+    this->sk_server_port = sk_server_port;
+    return this;
+  }
+  const SensESPApp* set_sensors(StandardSensors sensors) {
+    this->sensors = sensors;
+    return this;
+  }
+  const SensESPApp* set_requested_permissions(SKPermissions permissions) {
+    this->requested_permissions = permissions;
+    return this;
+  }
 
  private:
   String preset_hostname = "SensESP";
@@ -102,7 +124,6 @@ class SensESPApp {
   String sk_server_address = "";
   uint16_t sk_server_port = 0;
   StandardSensors sensors = ALL;
-  int led_pin = LED_PIN;
   SKPermissions requested_permissions = READWRITE;
 
   void initialize();
@@ -110,7 +131,7 @@ class SensESPApp {
                               StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server;
-  LedController* led_controller;
+  std::forward_list<VisualOutputController*> visual_output_controllers;
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;
@@ -120,6 +141,7 @@ class SensESPApp {
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
+  friend class VisualOutputController;
 };
 
 extern SensESPApp* sensesp_app;

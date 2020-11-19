@@ -28,8 +28,6 @@
 //   please support PJRC and open-source hardware by purchasing products
 //   from PJRC!  Written by PJRC, adapted by Limor Fried for Adafruit Industries.
 
-// Last edits by Bjarne Hansen 2020-10-20
-
 // Relies on Serial object existing for sending data/diagnostics to serial port
 
 #include <stdint.h>
@@ -60,10 +58,7 @@ class SensorNXP_FXOS8700_FXAS21002 {
 
  private:
   // pick one of three following filters: slower == better quality output
-  // Adafruit_NXPSensorFusion filter; // slowest.  Note that this one needs to
-  // be declared outside of class, else heading returns 0.0 always. Unsure
-  // why. Currently declared in *.cpp file  The other two filters are fine when
-  // declared inside class. Adafruit_NXP_SensorFusion filter runs fine on ESP32.
+  Adafruit_NXPSensorFusion filter;  // slowest/largest. Runs fine on ESP32.
   // Adafruit_Madgwick filter;  // faster than NXP
   // Adafruit_Mahony filter;    // fastest/smallest
 

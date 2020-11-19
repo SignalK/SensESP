@@ -11,7 +11,6 @@ class SensESPAppBuilder {
   String sk_server_address = "";
   uint16_t sk_server_port = 0;
   StandardSensors sensors = ALL;
-  int led_pin = LED_PIN;
   SKPermissions sk_server_permissions = READWRITE;
 
   SensESPApp* app;
@@ -35,15 +34,14 @@ class SensESPAppBuilder {
     app->set_sensors(sensors);
     return this;
   }
-  SensESPAppBuilder* set_led_pin(int led_pin) {
-    app->set_led_pin(led_pin);
-    return this;
-  }
   SensESPAppBuilder* set_hostname(String hostname) {
     app->set_preset_hostname(hostname);
     return this;
   }
-
+  SensESPAppBuilder* add_visual_controller(VisualOutputController* controller) {
+    app->visual_output_controllers.push_front(controller);
+    return this;
+  }
   SensESPApp* get_app() {
     app->setup();
     return app;

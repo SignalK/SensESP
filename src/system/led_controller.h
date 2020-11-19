@@ -2,39 +2,41 @@
 #define _LED_CONTROLLER_H_
 
 #include "led_blinker.h"
-#include "net/networking.h"
-#include "net/ws_client.h"
-#include "valueconsumer.h"
+#include "controllers/visual_output_controller.h"
 
-class LedController : public ValueConsumer<WifiState>,
-                      public ValueConsumer<WSConnectionState>,
-                      public ValueConsumer<int> {
- private:
+/**
+ * LedController consumes the networking and websocket states and delta counts
+ * and updates the device LED accordingly. Inherit this class and override
+ * the methods to customize the behavior.
+ */
+class LedController : public VisualOutputController {
+ protected:
   PatternBlinker* blinker;
 
-  void set_wifi_no_ap();
-  void set_wifi_disconnected();
-  void set_wifi_connected();
-  void set_wifimanager();
+  virtual void set_wifi_no_ap();
+  virtual void set_wifi_disconnected();
+  virtual void set_wifi_connected();
+  virtual void set_wifimanager();
 
-  void set_ws_disconnected();
-  void set_ws_authorizing();
-  void set_ws_connecting();
-  void set_ws_connected();
+  virtual void set_ws_disconnected();
+  virtual void set_ws_authorizing();
+  virtual void set_ws_connecting();
+  virtual void set_ws_connected();
 
  public:
   LedController(int pin);
 
   // ValueConsumer interface for ValueConsumer<WifiState> (Networking object
   // state updates)
-  void set_input(WifiState new_value, uint8_t input_channel = 0) override;
+  virtual void set_input(WifiState new_value,
+                         uint8_t input_channel = 0) override;
   // ValueConsumer interface for ValueConsumer<WSConnectionState>
   // (WSClient object state updates)
-  void set_input(WSConnectionState new_value,
-                 uint8_t input_channel = 0) override;
+  virtual void set_input(WSConnectionState new_value,
+                         uint8_t input_channel = 0) override;
   // ValueConsumer interface for ValueConsumer<int> (delta count producer
   // updates)
-  void set_input(int new_value, uint8_t input_channel = 0) override;
+  virtual void set_input(int new_value, uint8_t input_channel = 0) override;
 };
 
 #endif
