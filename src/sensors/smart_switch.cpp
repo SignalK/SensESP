@@ -1,5 +1,5 @@
 #include "smart_switch.h"
-#include "sensors/smart_switch_controller.h"
+
 
 // Calculate the PWM value to send to analogWrite() based on the specified
 // color value. When using analogWrite(), the closer to zero, the

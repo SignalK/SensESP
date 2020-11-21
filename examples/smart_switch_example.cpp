@@ -4,7 +4,7 @@
 #include "sensesp_app_builder.h"
 #include "sensors/button.h"
 #include "sensors/smart_switch.h"
-#include "sensors/smart_switch_controller.h"
+#include "controllers/smart_switch_controller.h"
 #include "signalk/signalk_listener.h"
 #include "signalk/signalk_output.h"
 #include "signalk/signalk_put_request_listener.h"
