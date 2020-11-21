@@ -19,7 +19,7 @@ class ClickType : public Transform<bool, ClickTypes> {
 
     public:
 
-      ClickType(String config_path, int long_click_delay = 1300, int double_click_interval = 350, int ultra_long_click_delay = 5000);
+      ClickType(String config_path, long long_click_delay = 1300, long double_click_interval = 350, long ultra_long_click_delay = 5000);
       virtual void set_input(bool input, uint8_t input_channel = 0) override;
       virtual void get_configuration(JsonObject& doc) override;
       virtual bool set_configuration(const JsonObject& config) override;
@@ -29,9 +29,9 @@ class ClickType : public Transform<bool, ClickTypes> {
       long press_started;
       long press_released;
       int click_count;
-      int long_click_delay;
-      int double_click_interval;
-      int ultra_long_click_delay;
+      long long_click_delay;
+      long double_click_interval;
+      long ultra_long_click_delay;
       DelayReaction* queued_report;
 
       void pressCompleted();

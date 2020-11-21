@@ -1,7 +1,7 @@
 #include "transforms/click_type.h"
 #include "ReactESP.h"
 
-ClickType::ClickType(String config_path, int long_click_delay, int double_click_interval, int ultra_long_click_delay) :
+ClickType::ClickType(String config_path, long long_click_delay, long double_click_interval, long ultra_long_click_delay) :
    Transform<bool, ClickTypes>(config_path),
     press_started{-1},
     press_released{0},
@@ -34,7 +34,7 @@ void ClickType::set_input(bool input, uint8_t inputChannel) {
           debugD("ClickType received PRESS (millis: %ld, last press interval: %ld)", millis(), unpress_interval);
         }
      }
-     else if (millis() - press_started > ultra_long_click_delay) {
+     else if ((long)(millis() - press_started) > ultra_long_click_delay) {
         onUltraLongClick("PRESS");
      }
      else {

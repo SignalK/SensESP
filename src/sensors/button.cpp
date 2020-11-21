@@ -1,14 +1,14 @@
 #include "button.h"
 
 
-Button::Button(uint8_t pin, String configPath, int repeat_start_interval, int repeat_interval, int pressedState) : 
+Button::Button(uint8_t pin, String configPath, int repeat_start_interval, int repeat_interval, int pressed_state) : 
     DigitalInput(pin, INPUT, CHANGE, configPath),
     repeat_start_interval{repeat_start_interval},
     repeat_interval{repeat_interval},
-    pressedState{pressedState},
     last_press_sent{-1},
     pushed{false},
-    repeating{false} {
+    repeating{false},
+    pressed_state{pressed_state} {
     load_configuration();
 }
 
@@ -19,9 +19,9 @@ void Button::enable() {
   // app.onInterrupt(pin, interrupt_type, [this]() {
   app.onRepeat(10, [this]() {
      int state = digitalRead(pin);
-     bool nowPushed = (state == pressedState);
+     bool nowPushed = (state == pressed_state);
      if (nowPushed) {
-         unsigned long interval = (last_press_sent != -1 ? millis() - last_press_sent : 0);
+         long interval = (last_press_sent != -1 ? millis() - last_press_sent : 0);
          bool start_repeat = (interval > repeat_start_interval);
          if (!pushed || start_repeat ||
             (repeating && interval > repeat_interval) ) {

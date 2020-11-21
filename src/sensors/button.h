@@ -16,7 +16,7 @@
 class Button : public DigitalInput, public BooleanProducer {
 
     public:
-        Button(uint8_t pin, String configPath = "", int repeat_start_interval = 1500, int repeat_interval = 250, int pressedState = HIGH);
+        Button(uint8_t pin, String configPath = "", int repeat_start_interval = 1500, int repeat_interval = 250, int pressed_state = HIGH);
 
         virtual void enable() override;
         virtual void get_configuration(JsonObject& doc) override;
@@ -25,10 +25,10 @@ class Button : public DigitalInput, public BooleanProducer {
     protected:
        int repeat_start_interval;
        int repeat_interval;
-       unsigned long last_press_sent;
-       int pressedState;
+       long last_press_sent;
        bool pushed;
        bool repeating;
+       int pressed_state;
 };
 
 
