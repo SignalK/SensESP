@@ -20,11 +20,11 @@ void SmartSwitchController::set_input(ClickTypes new_value, uint8_t input_channe
 
 void SmartSwitchController::set_input(String new_value, uint8_t input_channel) {
 
-    if (textIsTrue(new_value)) {
+    if (is_valid_true(new_value)) {
         this->emit(true);
     }
-    else if (textIsFalse(new_value)) {
-        this->emit(true);        
+    else if (is_valid_false(new_value)) {
+        this->emit(false);        
     }
     else {
         // All other values simply toggle...

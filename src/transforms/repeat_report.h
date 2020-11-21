@@ -5,15 +5,15 @@
 
 /**
  * RepeatReport ensures that values that do not change frequently are still reported at
- * at a specified maximum silence interval. If the value has not changed in maxSilenceInterval 
+ * at a specified maximum silence interval. If the value has not changed in max_silence_interval 
  * milliseconds, the current value is emmitted again, 
  */
 template <typename T>
 class RepeatReport : public SymmetricTransform<T> {
  public:
-  RepeatReport(long maxSilenceInterval = 15000, String config_path = "") :
+  RepeatReport(long max_silence_interval = 15000, String config_path = "") :
      SymmetricTransform<T>(config_path),
-     maxSilenceInterval{maxSilenceInterval} {
+     max_silence_interval{max_silence_interval} {
      this->load_configuration();
   }
 
@@ -25,7 +25,7 @@ class RepeatReport : public SymmetricTransform<T> {
   virtual String get_config_schema() override;
 
  private:
-  long maxSilenceInterval;
+  long max_silence_interval;
   uint last_update = 0;
 
 }; 

@@ -8,13 +8,13 @@
 /**
  * Returns TRUE if value represents one of truth values recognized by TextToTruth
  */
-extern bool textIsTrue(String value);
+extern bool is_valid_true(String value);
 
 
 /**
  * Returns TRUE if value represents one of boolean values recognized by TextToTruth as "false"
  */
-extern bool textIsFalse(String value);
+extern bool is_valid_false(String value);
 
 
 /**
@@ -48,23 +48,23 @@ template <class IN>
 class TruthToText : public Transform<IN, String> {
 
   public:
-    TruthToText(const char* trueValue="ON", const char* falseValue="OFF") {
-        truthValue = new char*[2];
-        truthValue[0] = falseValue;
-        truthValue[1] = trueValue;
+    TruthToText(String true_value = "ON", String false_value = "OFF") {
+        truth_value = new String[2];
+        truth_value[0] = false_value;
+        truth_value[1] = true_value;
     }
 
     virtual void set_input(IN input, uint8_t input_channel = 0) override {
        if (input) {
-          this->emit(truthValue[1]);
+          this->emit(truth_value[1]);
        }
        else {
-          this->emit(truthValue[0]);
+          this->emit(truth_value[0]);
        }
     }
 
   protected:
-     char* truthValue[];
+     String truth_value[];
 
 };
 

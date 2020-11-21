@@ -1,6 +1,6 @@
 #include "truth_text.h"
 
-bool textIsTrue(String input) {
+bool is_valid_true(String input) {
 
   if (input.length() == 0) {
       return false;
@@ -24,7 +24,7 @@ bool textIsTrue(String input) {
 }
 
 
-bool textIsFalse(String input) {
+bool is_valid_false(String input) {
 
   if (input.length() == 0) {
       return false;
@@ -48,15 +48,15 @@ bool textIsFalse(String input) {
 
 template<class OUT>
 void TextToTruth<OUT>::set_input(String input, uint8_t input_channel) {
-     this->emit(textIsTrue(input));
+     this->emit(is_valid_true(input));
 }
 
 template<>
 void TextToTruth<int>::set_input(String input, uint8_t input_channel) {
-    this->emit(textIsTrue(input) ? 1 : 0);
+    this->emit(is_valid_true(input) ? 1 : 0);
 }
 
 template<>
 void TextToTruth<float>::set_input(String input, uint8_t input_channel) {
-    this->emit(textIsTrue(input) ? 1.0 : 0.0);
+    this->emit(is_valid_true(input) ? 1.0 : 0.0);
 }

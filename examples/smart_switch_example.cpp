@@ -68,13 +68,6 @@ ReactESP app([]() {
   SmartSwitchController* controller = new SmartSwitchController();
 
 
-  // Connect the controller up to a smart switch, and then have the switch
-  // send its setting to the server as Signal K...
-  controller->connect_to(new SmartSwitch(PIN_RELAY, PIN_LED_R, PIN_LED_G, PIN_LED_B, LED_ON_COLOR, LED_OFF_COLOR))
-            ->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
-            ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
-
-
   // Connect a button that will feed manual click types into the controller...
   Button* btn = new Button(PIN_BUTTON);
   btn->connect_to(new Debounce(20, config_path_button_d))
@@ -82,12 +75,20 @@ ReactESP app([]() {
      ->connect_to(controller);
 
 
+  // Connect the controller up to a smart switch, and then have the switch
+  // send its setting to the server as Signal K...
+  controller->connect_to(new SmartSwitch(PIN_RELAY, PIN_LED_R, PIN_LED_G, PIN_LED_B, LED_ON_COLOR, LED_OFF_COLOR))
+            ->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
+            ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
+
+
+
   // In addition to the manual user clicks, the controller accepts
   // explicit state settings via any boolean producer, or various
   // "truth" values in human readable format via a String producer.
   // Here, we set up an sk PUT request listener from the Signal K 
   // server and send those to the controller so the sk server can 
-  // also controller the state of its switch...
+  // also control the state of its switch...
   auto* sk_listener = new SKStringPutRequestListener(sk_path);
   sk_listener->connect_to(controller);
 

@@ -3,6 +3,10 @@
 
 #include "transforms/transform.h"
 
+
+/**
+ * ClickTypes defines the types of clicks a ClickType transform can detect
+ */
 enum class ClickTypes { SingleClick, LongSingleClick, UltraLongSingleClick, DoubleClick };
 
 
@@ -14,10 +18,8 @@ enum class ClickTypes { SingleClick, LongSingleClick, UltraLongSingleClick, Doub
 class ClickType : public Transform<bool, ClickTypes> {
 
     public:
-      /**
-       * Type sdefines the types of clicks a ClickType transform can detect
-       */
-      ClickType(String config_path, int long_click_delay=1300, int double_click_interval=350, int ultra_long_click_delay=5000);
+
+      ClickType(String config_path, int long_click_delay = 1300, int double_click_interval = 350, int ultra_long_click_delay = 5000);
       virtual void set_input(bool input, uint8_t input_channel = 0) override;
       virtual void get_configuration(JsonObject& doc) override;
       virtual bool set_configuration(const JsonObject& config) override;
@@ -30,7 +32,7 @@ class ClickType : public Transform<bool, ClickTypes> {
       int long_click_delay;
       int double_click_interval;
       int ultra_long_click_delay;
-      DelayReaction* pQueuedReport;
+      DelayReaction* queued_report;
 
       void pressCompleted();
 

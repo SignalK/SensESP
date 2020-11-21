@@ -9,7 +9,7 @@ class SmartSwitchController;
  * SmartSwitch is a specialized digital output controller intended to be wired to both
  * a relay that controls a load, as well as an optional LED to display its current status.
  * It consumes boolean values used to set the state of the switch. After setting the status
- * of the relay (and optional LED), the value is the forwarded along, as this device
+ * of the relay (and optional LED), the value is then forwarded along, as this device
  * is also a BooleanProducer.  Note that values will only be produced if an actual
  * change occurs on the SmartSwitch.
  * <p>The attached LED may be either a single color LED (attached to a single output pin),
@@ -30,16 +30,18 @@ class SmartSwitch : public BooleanTransform {
         * @param led_b_pin the digital output pin that controls the blue element of
         *   an RGB LED.  Set to -1 if a monochrome LED is being used.
         * @param led_on_rgb The RGB color to use when the switch is in the "on" state.
-        *   For monochrome LEDs any non-zero value will light the LED.
+        *   For monochrome LEDs any non-zero value will light the LED. The default
+        *   value is 0x00FF00, which is RGB for "green"
         * @param led_off_rgb The RGB color to use when the switch is in the "off" state.
-        *   For monochrome LEDs any non-zero value will light the LED.
+        *   For monochrome LEDs any non-zero value will light the LED.  The default
+        *   value is 0, RGB black, which is "off"
         * @param enable_priority The "enable priority" used when this switch is enabled. 
         * @see Enable
         */
        SmartSwitch(int relay_pin, 
                    int led_r_pin = -1, int led_g_pin = -1, int led_b_pin = -1,
                    long led_on_rgb = 0x00FF00, long led_off_rgb = 0,
-                   int enable_priority=1);
+                   int enable_priority = 1);
 
        void set_input(bool new_value, uint8_t input_channel = 0) override;
        void enable() override;

@@ -7,15 +7,16 @@
 /**
  * Button represents a switch or button connected to a digital input
  * pin. Button emits a value only when the state of the button changes
- * unless the button is pressed longer than repeat_start_interval.
- * If the button is pressed longer than repeat_start_interval, a 
- * button repeat is sent every repeat_interval milliseconds. To
+ * (i.e. when the button changes from not pressed to pressed, and vice versa).
+ * However, if the button is pressed and held longer than repeat_start_interval 
+ * milliseconds, the press will be emitted once again, and then again every 
+ * repeat_interval milliseconds untill the press is released. To
  * disable this feature, set repeat_start_interval to -1.
  */
 class Button : public DigitalInput, public BooleanProducer {
 
     public:
-        Button(uint8_t pin, int pin_mode = INPUT, int repeat_start_interval = 1500, int repeat_interval = 250);
+        Button(uint8_t pin, String configPath = "", int repeat_start_interval = 1500, int repeat_interval = 250, int pressedState = HIGH);
 
         virtual void enable() override;
         virtual void get_configuration(JsonObject& doc) override;
@@ -25,6 +26,7 @@ class Button : public DigitalInput, public BooleanProducer {
        int repeat_start_interval;
        int repeat_interval;
        unsigned long last_press_sent;
+       int pressedState;
        bool pushed;
        bool repeating;
 };

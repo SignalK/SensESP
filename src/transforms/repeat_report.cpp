@@ -12,7 +12,7 @@ void RepeatReport<T>::enable() {
       SymmetricTransform<T>::enable();
       app.onTick([this]() {
          unsigned long interval = millis() - this->last_update;
-         if (interval > maxSilenceInterval) {
+         if (interval > max_silence_interval) {
            this->last_update = millis();
            this->notify();
          }
@@ -22,14 +22,14 @@ void RepeatReport<T>::enable() {
 
 template <typename T>
 void RepeatReport<T>::get_configuration(JsonObject& root) {
-  root["maxSilenceInterval"] = maxSilenceInterval;
+  root["max_silence_interval"] = max_silence_interval;
   root["value"] = this->output;
 }
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "maxSilenceInterval": { "title": "Max ms interval until value repeated", "type": "number" },
+        "max_silence_interval": { "title": "Max ms interval until value repeated", "type": "number" },
         "value": { "title": "Last value", "type" : "number", "readOnly": true }
     }
   })###";
@@ -39,13 +39,13 @@ String RepeatReport<T>::get_config_schema() { return FPSTR(SCHEMA); }
 
 template <typename T>
 bool RepeatReport<T>::set_configuration(const JsonObject& config) {
-  String expected[] = {"maxSilenceInterval"};
+  String expected[] = {"max_silence_interval"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
     }
   }
-  this->maxSilenceInterval = config["maxSilenceInterval"];
+  this->max_silence_interval = config["max_silence_interval"];
   return true;
 }
 
