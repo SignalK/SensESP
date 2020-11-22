@@ -16,11 +16,20 @@
 // a manual button press, or via Signal K PUT requests.
 
 // Control devices are wired to the following digital pins
+
+#ifdef ESP32
+#define PIN_LED_R 6
+#define PIN_LED_G 7
+#define PIN_LED_B 8
+#define PIN_BUTTON 0
+#define PIN_RELAY 5
+#else
 #define PIN_LED_R D6
 #define PIN_LED_G D7
 #define PIN_LED_B D8
 #define PIN_BUTTON D0
 #define PIN_RELAY D5
+#endif
 
 #define LED_ON_COLOR 0x004700
 #define LED_OFF_COLOR 0x261900
