@@ -2,8 +2,8 @@
 #define _smart_switch_H_
 
 #include "transforms/transform.h"
+#include "system/led_light.h"
 
-class SmartSwitchController;
 
 /**
  * SmartSwitch is a specialized digital output controller intended to be wired to both
@@ -56,10 +56,10 @@ class SmartSwitch : public BooleanTransform {
 
    protected:
        int relay_pin;
-       int led_r_pin;
-       int led_g_pin;
-       int led_b_pin;
-       int pwm[2][3];
+       long led_on_rgb;
+       long led_off_rgb;
+       LEDLight* led_light;
+
 };
 
 #endif
