@@ -10,7 +10,7 @@
  * (i.e. when the button changes from not pressed to pressed, and vice versa).
  * However, if the button is pressed and held longer than repeat_start_interval 
  * milliseconds, the press will be emitted once again, and then again every 
- * repeat_interval milliseconds untill the press is released. To
+ * repeat_interval milliseconds until the press is released. To
  * disable this feature, set repeat_start_interval to -1.
  */
 class Button : public DigitalInput, public BooleanProducer {
