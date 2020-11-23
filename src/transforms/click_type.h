@@ -34,9 +34,9 @@ class ClickType : public Transform<bool, ClickTypes> {
       long ultra_long_click_delay;
       DelayReaction* queued_report;
 
-      void pressCompleted();
+      void press_completed();
 
-      void onUltraLongClick(const char* keyType);
+      void on_ultra_long_click(const char* keyType);
 };
 
 #endif

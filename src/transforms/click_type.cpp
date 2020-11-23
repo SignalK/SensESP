@@ -35,7 +35,7 @@ void ClickType::set_input(bool input, uint8_t inputChannel) {
         }
      }
      else if ((long)(millis() - press_started) > ultra_long_click_delay) {
-        onUltraLongClick("PRESS");
+        on_ultra_long_click("PRESS");
      }
      else {
        debugW("ClickType ignoring PRESS while PRESS already started (millis=%ld)", millis());
@@ -49,19 +49,19 @@ void ClickType::set_input(bool input, uint8_t inputChannel) {
         press_started = -1;
         press_released = millis();
         if (press_interval >= this->ultra_long_click_delay) {
-            onUltraLongClick("UNPRESSED");
-            this->pressCompleted();
+            on_ultra_long_click("UNPRESSED");
+            this->press_completed();
         }
         else if (press_interval >= this->long_click_delay) {
             debugD("ClickType UNPRESSED with LongSingleClick (millis: %ld, press interval %ld)", millis(), press_interval);
             this->emit(ClickTypes::LongSingleClick);
-            this->pressCompleted();
+            this->press_completed();
         }
         else if (this->click_count >= 1) {
           // We have just ended a double click.  Sent it immediately...
           debugD("ClickType UNPRESSED with DoubleClick (millis: %ld, press interval %ld)", millis(), press_interval);
           this->emit(ClickTypes::DoubleClick);
-          this->pressCompleted();
+          this->press_completed();
         }
         else {
           // This is the end of the first normal click.  Queue up a send of a single click,
@@ -70,7 +70,7 @@ void ClickType::set_input(bool input, uint8_t inputChannel) {
           queued_report = app.onDelay(double_click_interval+20, [this, press_interval, ms]() {
               debugD("ClickType UNPRESSED with SingleClick (millis: %ld, queue time: %ld, press interval %ld)", millis(), ms, press_interval);
               this->emit(ClickTypes::SingleClick);
-              this->pressCompleted();
+              this->press_completed();
           });
         }
      }
@@ -82,14 +82,14 @@ void ClickType::set_input(bool input, uint8_t inputChannel) {
 }
 
 
-void ClickType::pressCompleted() {
+void ClickType::press_completed() {
     this->click_count = 0;
     queued_report = NULL;
     press_started = -1;
     press_released = 0;
 }
 
-void ClickType::onUltraLongClick(const char* keyType) {
+void ClickType::on_ultra_long_click(const char* keyType) {
     debugD("ClickType %s with UltraLongSingleClick (millis: %ld, press interval %ld)", keyType, millis(), millis() - press_started);
     this->emit(ClickTypes::UltraLongSingleClick);
 }
