@@ -15,7 +15,7 @@ template class ADS1x15<Adafruit_ADS1015>;
 template class ADS1x15<Adafruit_ADS1115>;
 
 template <class T_ads_1x15>
-ADS1x15Value<T_ads_1x15>::ADS1x15Value(T_ads_1x15* ads1x15, uint8_t channel,
+ADS1x15RawValue<T_ads_1x15>::ADS1x15RawValue(T_ads_1x15* ads1x15, uint8_t channel,
                                        uint read_delay, String config_path)
     : NumericSensor(config_path),
       ads1x15{ads1x15},
@@ -25,7 +25,7 @@ ADS1x15Value<T_ads_1x15>::ADS1x15Value(T_ads_1x15* ads1x15, uint8_t channel,
 }
 
 template <class T_ads_1x15>
-void ADS1x15Value<T_ads_1x15>::enable() {
+void ADS1x15RawValue<T_ads_1x15>::enable() {
   app.onRepeat(read_delay, [this]() {
     switch (channel) {
       case 0:
@@ -48,7 +48,7 @@ void ADS1x15Value<T_ads_1x15>::enable() {
 }
 
 template <class T_ads_1x15>
-void ADS1x15Value<T_ads_1x15>::get_configuration(JsonObject& root) {
+void ADS1x15RawValue<T_ads_1x15>::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
   root["value"] = output;
 };
@@ -62,12 +62,12 @@ static const char SCHEMA[] PROGMEM = R"###({
   })###";
 
 template <class T_ads_1x15>
-String ADS1x15Value<T_ads_1x15>::get_config_schema() {
+String ADS1x15RawValue<T_ads_1x15>::get_config_schema() {
   return FPSTR(SCHEMA);
 }
 
 template <class T_ads_1x15>
-bool ADS1x15Value<T_ads_1x15>::set_configuration(const JsonObject& config) {
+bool ADS1x15RawValue<T_ads_1x15>::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
@@ -79,5 +79,5 @@ bool ADS1x15Value<T_ads_1x15>::set_configuration(const JsonObject& config) {
 }
 
 // define all possible instances of an ADS1x15value
-template class ADS1x15Value<ADS1015>;
-template class ADS1x15Value<ADS1115>;
+template class ADS1x15RawValue<ADS1015>;
+template class ADS1x15RawValue<ADS1115>;
