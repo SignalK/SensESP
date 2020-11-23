@@ -2,7 +2,7 @@
 
 template <typename T>
 void RepeatReport<T>::set_input(T input, uint8_t inputChannel) {
-      last_update = millis();
+      last_update_interval = 0;
       this->emit(input);
 }
 
@@ -10,10 +10,9 @@ void RepeatReport<T>::set_input(T input, uint8_t inputChannel) {
 template <typename T>
 void RepeatReport<T>::enable() {
       SymmetricTransform<T>::enable();
-      app.onTick([this]() {
-         unsigned long interval = millis() - this->last_update;
-         if (interval > max_silence_interval) {
-           this->last_update = millis();
+      app.onRepeat(10, [this]() {
+         if (last_update_interval > max_silence_interval) {
+           this->last_update_interval = 0;
            this->notify();
          }
       });

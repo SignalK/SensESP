@@ -1,6 +1,8 @@
 #ifndef _repeat_report_H_
 #define _repeat_report_H_
 
+#include <elapsedMillis.h>
+
 #include "transforms/transform.h"
 
 /**
@@ -26,7 +28,7 @@ class RepeatReport : public SymmetricTransform<T> {
 
  private:
   long max_silence_interval;
-  uint last_update = 0;
+  elapsedMillis last_update_interval;
 
 }; 
 
