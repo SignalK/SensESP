@@ -1,10 +1,15 @@
 #include "led_light.h"
 
 
-LEDLight::LEDLight(int led_r_pin, int led_g_pin, int led_b_pin) :
+LEDLight::LEDLight(int led_r_pin, int led_g_pin, int led_b_pin,
+                   String config_path,
+                   long led_on_rgb, long led_off_rgb) :
+    Configurable(config_path),
     led_r_pin{led_r_pin},
     led_g_pin{led_g_pin},
-    led_b_pin{led_b_pin} {
+    led_b_pin{led_b_pin},
+    led_on_rgb{led_on_rgb},
+    led_off_rgb{led_off_rgb} {
 
     if (led_r_pin >= 0) {
        pinMode(led_r_pin, OUTPUT);
@@ -13,7 +18,9 @@ LEDLight::LEDLight(int led_r_pin, int led_g_pin, int led_b_pin) :
           pinMode(led_g_pin, OUTPUT);
           pinMode(led_b_pin, OUTPUT);
        }
-    }       
+    }
+
+    this->load_configuration();
 }
 
 
@@ -130,4 +137,46 @@ void LEDLight::set_input(long new_value, uint8_t input_channel) {
             digitalWrite(led_r_pin, state);
         }
     }
+}
+
+
+void LEDLight::set_input(bool new_value, uint8_t input_channel) {
+
+   if (new_value) {
+      set_input(led_on_rgb, input_channel);
+   }
+   else {
+      set_input(led_off_rgb, input_channel);
+   }
+
+}
+
+
+void LEDLight::get_configuration(JsonObject& root) {
+  root["led_on_rgb"] = led_on_rgb;
+  root["led_off_rgb"] = led_off_rgb;
+}
+
+
+static const char SCHEMA[] PROGMEM = R"({
+    "type": "object",
+    "properties": {
+        "led_on_rgb": { "title": "RGB color for led ON", "type": "integer" },
+        "led_off_rgb": { "title": "RGB color for led OFF", "type": "integer" }
+    }
+  })";
+
+
+String LEDLight::get_config_schema() { return FPSTR(SCHEMA); }
+
+bool LEDLight::set_configuration(const JsonObject& config) {
+  String expected[] = {"led_on_rgb", "led_off_rgb"};
+  for (auto str : expected) {
+    if (!config.containsKey(str)) {
+      return false;
+    }
+  }
+  led_on_rgb = config["led_on_rgb"];
+  led_off_rgb = config["led_off_rgb"];
+  return true;
 }
