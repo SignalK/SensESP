@@ -18,7 +18,7 @@ extern bool is_valid_false(String value);
 
 
 /**
- * TextToTruth consumes a string, and outputs boolean or numeric "true" 
+ * TextToTruth consumes a string, and outputs boolean "true" 
  * if the text represents a human readable version of "true". The following
  * case-insensitive values are considered true:
  * <p><ul>
@@ -31,8 +31,7 @@ extern bool is_valid_false(String value);
  * </ul>
  * 
  */
-template <class OUT>
-class TextToTruth : public Transform<String, OUT> {
+class TextToTruth : public Transform<String, bool> {
 
   public:
     virtual void set_input(String input, uint8_t input_channel = 0) override;
@@ -44,27 +43,15 @@ class TextToTruth : public Transform<String, OUT> {
  * TruthToText consumes a boolean or numeric value, and outputs the
  * specific truth strings.  This is the inverse of TextToTruth.
  */
-template <class IN>
-class TruthToText : public Transform<IN, String> {
+class TruthToText : public Transform<bool, String> {
 
   public:
-    TruthToText(String true_value = "ON", String false_value = "OFF") {
-        truth_value = new String[2];
-        truth_value[0] = false_value;
-        truth_value[1] = true_value;
-    }
+    TruthToText(String true_value = "ON", String false_value = "OFF");
 
-    virtual void set_input(IN input, uint8_t input_channel = 0) override {
-       if (input) {
-          this->emit(truth_value[1]);
-       }
-       else {
-          this->emit(truth_value[0]);
-       }
-    }
+    virtual void set_input(bool input, uint8_t input_channel = 0) override;
 
   protected:
-     String truth_value[];
+     String* truth_value;
 
 };
 

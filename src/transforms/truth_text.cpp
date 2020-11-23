@@ -46,17 +46,23 @@ bool is_valid_false(String input) {
 }
 
 
-template<class OUT>
-void TextToTruth<OUT>::set_input(String input, uint8_t input_channel) {
+void TextToTruth::set_input(String input, uint8_t input_channel) {
      this->emit(is_valid_true(input));
 }
 
-template<>
-void TextToTruth<int>::set_input(String input, uint8_t input_channel) {
-    this->emit(is_valid_true(input) ? 1 : 0);
+
+TruthToText::TruthToText(String true_value, String false_value) :
+       Transform<bool, String>() {
+    truth_value = new String[2];
+    truth_value[0] = false_value;
+    truth_value[1] = true_value;
 }
 
-template<>
-void TextToTruth<float>::set_input(String input, uint8_t input_channel) {
-    this->emit(is_valid_true(input) ? 1.0 : 0.0);
+void TruthToText::set_input(bool input, uint8_t input_channel) {
+   if (input) {
+      this->emit(truth_value[1]);
+   }
+   else {
+      this->emit(truth_value[0]);
+   }
 }
