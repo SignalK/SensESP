@@ -1,13 +1,13 @@
 #ifndef _smart_switch_controller_h
 #define _smart_switch_controller_h
 
-#include "sensors/smart_switch.h"
+#include "sensors/load_controller.h"
 #include "system/valueconsumer.h"
 #include "transforms/click_type.h"
 
 /**
  * SmartSwitchController is a high level transform designed specifically to
- * control a SmartSwitch. The controller accepts inputs from a generic boolean
+ * control a LoadController. This controller accepts inputs from a generic boolean
  * producer (usually a SignalK listener), as well as String and ClickType transforms.
  * The latter allows a manual button to control the SmartSwitch as well as
  * add special behaviors to the sensor application. In particular, an ultra
@@ -22,7 +22,7 @@
  * will set the switch accordingly. Strings that are NOT valid truth values
  * will cause the switch state to toggle. Thus, incoming strings like
  * "toggle" or "default" will toggle the current state and output the results.
- * @see SmartSwitch
+ * @see LoadController
  * @see TextToTruth
  */
 class SmartSwitchController : public BooleanTransform,

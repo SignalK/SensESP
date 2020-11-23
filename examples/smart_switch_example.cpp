@@ -3,11 +3,12 @@
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
 #include "sensors/button.h"
-#include "sensors/smart_switch.h"
+#include "sensors/load_controller.h"
 #include "controllers/smart_switch_controller.h"
 #include "signalk/signalk_listener.h"
 #include "signalk/signalk_output.h"
 #include "signalk/signalk_put_request_listener.h"
+#include "system/led_light.h"
 #include "transforms/debounce.h"
 #include "transforms/click_type.h"
 #include "transforms/repeat_report.h"
@@ -70,36 +71,49 @@ ReactESP app([]() {
   // configuration to save.
   const char* config_path_button_d = "/button/debounce";
   const char* config_path_button_c = "/button/clicktime";
+  const char* config_path_status_light = "/button/statusLight";
   const char* config_path_sk_output = "/signalk/path";
   const char* config_path_repeat = "/signalk/repeat";
-  
-  // Create a switch controller to handle the user press logic...
+
+
+
+  // Create a load controller to control the light (or other electrical load), 
+  // and connect it up to an LED to show the current status on the switch...
+  LoadController* load_switch = new LoadController(PIN_RELAY);
+  load_switch->connect_to(new LEDLight(PIN_LED_R, PIN_LED_G, PIN_LED_B, 
+                                       config_path_status_light, 
+                                       LED_ON_COLOR, LED_OFF_COLOR));
+
+
+  // Create a switch controller to handle the user press logic and 
+  // connect it to the load switch...
   SmartSwitchController* controller = new SmartSwitchController();
+  controller->connect_to(load_switch);
 
 
-  // Connect a button that will feed manual click types into the controller...
+  // Connect a physical button that will feed manual click types into the controller...
   Button* btn = new Button(PIN_BUTTON);
   btn->connect_to(new Debounce(20, config_path_button_d))
      ->connect_to(new ClickType(config_path_button_c))
      ->connect_to(controller);
 
 
-  // Connect the controller up to a smart switch, and then have the switch
-  // send its setting to the server as Signal K...
-  controller->connect_to(new SmartSwitch(PIN_RELAY, PIN_LED_R, PIN_LED_G, PIN_LED_B, LED_ON_COLOR, LED_OFF_COLOR))
-            ->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
-            ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
-
-
-
-  // In addition to the manual user clicks, the controller accepts
-  // explicit state settings via any boolean producer, or various
-  // "truth" values in human readable format via a String producer.
-  // Here, we set up an sk PUT request listener from the Signal K 
-  // server and send those to the controller so the sk server can 
-  // also control the state of its switch...
+  // In addition to the manual button "click types", a 
+  // SmartSwitchController accepts explicit state settings via 
+  // any boolean producer or various "truth" values in human readable 
+  // format via a String producer.
+  // Here, we set up a SignalK PUT request listener to handle
+  // requests made to the Signal K to set the switch state.
+  // This allows any device on the SignalK network that can make
+  // such a request to also control the state of our switch.
   auto* sk_listener = new SKStringPutRequestListener(sk_path);
   sk_listener->connect_to(controller);
+
+
+  // Finally, specify that the load controller should report its status at regular
+  // intervals back to the SignalK server...
+  load_switch->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
+             ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
 
   // Start the SensESP application running
   sensesp_app->enable();
