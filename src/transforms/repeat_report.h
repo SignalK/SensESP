@@ -6,20 +6,22 @@
 #include "transforms/transform.h"
 
 /**
- * RepeatReport ensures that values that do not change frequently are still reported at
- * at a specified maximum silence interval. If the value has not changed in max_silence_interval 
- * milliseconds, the current value is emmitted again, 
+ * RepeatReport ensures that values that do not change frequently are still
+ * reported at at a specified maximum silence interval. If the value has not
+ * changed in max_silence_interval milliseconds, the current value is emmitted
+ * again,
  */
 template <typename T>
 class RepeatReport : public SymmetricTransform<T> {
  public:
-  RepeatReport(long max_silence_interval = 15000, String config_path = "") :
-     SymmetricTransform<T>(config_path),
-     max_silence_interval{max_silence_interval} {
-     this->load_configuration();
+  RepeatReport(long max_silence_interval = 15000, String config_path = "")
+      : SymmetricTransform<T>(config_path),
+        max_silence_interval{max_silence_interval} {
+    this->load_configuration();
   }
 
-  // The followig methods moved to CPP file to avoid excessive inline code generation...
+  // The following methods moved to CPP file to avoid excessive inline code
+  // generation...
   virtual void set_input(T input, uint8_t inputChannel = 0) override;
   virtual void enable() override;
   virtual void get_configuration(JsonObject& doc) override;
@@ -29,7 +31,6 @@ class RepeatReport : public SymmetricTransform<T> {
  private:
   long max_silence_interval;
   elapsedMillis last_update_interval;
-
-}; 
+};
 
 #endif
