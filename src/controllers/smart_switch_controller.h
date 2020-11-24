@@ -9,21 +9,26 @@
  * SmartSwitchController is a high level transform designed specifically to
  * control a LoadController. This controller accepts inputs from a generic boolean
  * producer (usually a SignalK listener), as well as String and ClickType transforms.
- * The latter allows a manual button to control the SmartSwitch as well as
+ * The latter allows a physical button to control the load as well as
  * add special behaviors to the sensor application. In particular, an ultra
  * long press of the button will cause the MCU to reboot.
- * <p>A SmartSwitchController is assumed to be a toggle switch. Normal
- * incoming click types will toggle the output of this producer on and off.
- * The incoming boolean values, on the other hand, are assumed to be
- * state setting commands (i.e. turn on or off), so those are used
- * verbatim and forwarded. Incoming string values can be one of 
- * many various "truth" values (such as "on" or "off"). Strings
- * that are valid truth values (e.g. "on", "true", "1", "off", "false", etc)
- * will set the switch accordingly. Strings that are NOT valid truth values
- * will cause the switch state to toggle. Thus, incoming strings like
- * "toggle" or "default" will toggle the current state and output the results.
- * @see LoadController
- * @see TextToTruth
+ * <p>A SmartSwitchController object behaves differently depending on the type of 
+ * input it receives. If the input is a boolean or a "valid truth type" 
+ * (which is a specialized type of boolean - see below), SmartSwitchController's 
+ * output will be "on" if the input is "true", or "off" if the input is "false". 
+ * If the input is a ClickType, or a String that's NOT a "valid truth type", 
+ * SmartSwitchController's output will simply toggle the output back and forth 
+ * between "on" and "off" with each input. The one exception to this is if
+ * the input is a ClickType with the value ClickTypes::UltraLongSingleClick
+ * which will reboot the MCU.
+ * <p>Incoming String values are evaluated to see if they represent a "valid truth type". 
+ * Examples include "on", "ON", "off", "true", "false", "one", "1", "123" (or any other string
+ * that represents a non-zero value), etc. Case is insensitive. Any 
+ * incoming String that doesn't evaluate to a "valid truth type" will be treated as 
+ * a "click", and will toggle the output btween "on" and "off". 
+ * @see LoadController 
+ * @see TextToTruth 
+ * @see ClickType
  */
 class SmartSwitchController : public BooleanTransform,
                               public ValueConsumer<ClickTypes>,
@@ -33,6 +38,9 @@ class SmartSwitchController : public BooleanTransform,
        void set_input(bool new_value, uint8_t input_channel = 0) override;
        void set_input(String new_value, uint8_t input_channel = 0) override;
        void set_input(ClickTypes new_value, uint8_t input_channel = 0) override;
+
+     protected:
+       bool is_on = false;
 };
 
 #endif
