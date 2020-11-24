@@ -30,6 +30,7 @@ class ADS1x15 : public Sensor {
           String config_path = "");
   void enable() override final {}
   T_Ada_1x15* ads;
+  adsGain_t gain;
 };
 
 // define all possible instances of the class
@@ -38,9 +39,10 @@ typedef ADS1x15<Adafruit_ADS1115> ADS1115;
 
 
 /**
- * @brief ADS1x15RawValue is used to read the raw output of the ADS1x15.
- *   If you want the voltage that was the input to the ADS1x15 (voltage is
- *   what the ADS1x15 actually reads), use ADS1x15Voltage instead.
+ * @brief ADS1x15RawValue is used to read the raw output of the ADS1x15, which
+ *   is an integer between 0 and 32,768. If you want the voltage that was the 
+ *   input to the ADS1x15 (because voltage is what the ADS1x15 actually reads),
+ *   use ADS1x15Voltage instead.
  *
  * @param ads1x15 A pointer to the ADS1x15 object.
  * 
@@ -60,12 +62,16 @@ class ADS1x15RawValue : public NumericSensor {
  public:
   ADS1x15RawValue(T_ads_1x15* ads1x15, uint8_t channel = 0, uint read_delay = 200,
                String config_path = "");
-  void enable() override final;
+  void enable() override;
 
- private:
+ protected:
+  void read_raw_value();
   T_ads_1x15* ads1x15;
   uint8_t channel;
   uint read_delay;
+  uint16_t raw_value = 0;
+
+ private:
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
@@ -87,5 +93,50 @@ typedef ADS1115RawValue ADS1115value; // The original name
 // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
 // [[deprecated("Use ADS1015RawValue instead.")]]
 typedef ADS1115RawValue ADS1115Value; // The second name
+
+
+// Used for ADS1x15Voltage
+enum ADS1x15CHIP_t { ADS1015chip, ADS1115chip };
+
+
+/**
+ * @brief ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between
+ *   0 and 32,768) and converts it back into the voltage that was actually read
+ *   by the chip. If you want the raw output itself, use ADS1x15RawValue instead.
+ *
+ * @tparam T_ads_1x15 An Adafruit_ADS1015 or Adafruit_ADS1115
+ * 
+ * @tparam chip A label for the type of chip being used
+ * 
+ * @param ads1x15 A pointer to the ADS1x15 object.
+ * 
+ * @param channel The channel of the ADS1x15 that you want to read. For a
+ *   single channel, use 0, 1, 2, or 3, and readADC_SingleEnded() will be used. If
+ *   you want to read the difference between two channels, this parameter should be:
+ *   - 10 to use readADC_Differential_0_1()
+ *   - 23 to use readADC_Differential_2_3()
+ * 
+ * @param read_delay How often to read the value, in ms.
+ * 
+ * @param config_path The path to configuring read_delay in the Config UI.
+ * 
+ * */
+template <class T_ads_1x15, ADS1x15CHIP_t chip>
+class ADS1x15Voltage : public ADS1x15RawValue<T_ads_1x15> {
+ public:
+  ADS1x15Voltage(T_ads_1x15* ads1x15, uint8_t channel = 0, uint read_delay = 200,
+               String config_path = "");
+  void enable() override final;
+
+ private:
+  void calculate_voltage(int input);
+  ADS1x15CHIP_t chip_type;
+  float calculated_voltage = 0.0;
+
+};
+
+// define all possible instances of the class
+typedef ADS1x15Voltage<ADS1015, ADS1015chip> ADS1015Voltage;
+typedef ADS1x15Voltage<ADS1115, ADS1115chip> ADS1115Voltage;
 
 #endif
