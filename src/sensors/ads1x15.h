@@ -29,8 +29,8 @@ class ADS1x15 : public Sensor {
   ADS1x15(uint8_t addr = 0x48, adsGain_t gain = GAIN_TWOTHIRDS,
           String config_path = "");
   void enable() override final {}
-  T_Ada_1x15* ads;
-  adsGain_t gain;
+  T_Ada_1x15* ads_;
+  adsGain_t gain_;
 };
 
 // define all possible instances of the class
@@ -64,12 +64,12 @@ class ADS1x15RawValue : public NumericSensor {
                String config_path = "");
   void enable() override;
 
- protected:
+ //protected:
   void read_raw_value();
-  T_ads_1x15* ads1x15;
-  uint8_t channel;
-  uint read_delay;
-  uint16_t raw_value = 0;
+  T_ads_1x15* ads1x15_;
+  uint8_t channel_;
+  uint read_delay_;
+  uint16_t raw_value_ = 0;
 
  private:
   virtual void get_configuration(JsonObject& doc) override;
@@ -130,8 +130,8 @@ class ADS1x15Voltage : public ADS1x15RawValue<T_ads_1x15> {
 
  private:
   void calculate_voltage(int input);
-  ADS1x15CHIP_t chip_type;
-  float calculated_voltage = 0.0;
+  ADS1x15CHIP_t chip_;
+  float calculated_voltage_ = 0.0;
 
 };
 
