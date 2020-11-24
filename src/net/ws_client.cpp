@@ -16,6 +16,7 @@
 
 #include "sensesp_app.h"
 #include "signalk/signalk_listener.h"
+#include "signalk/signalk_put_request_listener.h"
 
 WSClient* ws_client;
 
@@ -142,29 +143,71 @@ void WSClient::on_receive_delta(uint8_t* payload) {
   auto error = deserializeJson(message, payload);
 
   if (!error) {
-    JsonArray updates = message["updates"];
 
-    for (size_t i = 0; i < updates.size(); i++) {
-      JsonObject update = updates[i];
+    if (message.containsKey("updates")) {
+      // Process updates from subscriptions...
+      JsonArray updates = message["updates"];
 
-      JsonArray values = update["values"];
+      for (size_t i = 0; i < updates.size(); i++) {
+        JsonObject update = updates[i];
 
-      for (size_t vi = 0; vi < values.size(); vi++) {
-        JsonObject value = values[vi];
+        JsonArray values = update["values"];
 
-        const char* path = value["path"];
-        // debugD("Got update of value %s\n", path);
+        for (size_t vi = 0; vi < values.size(); vi++) {
+          JsonObject value = values[vi];
 
-        const std::vector<SKListener*>& listeners = SKListener::get_listeners();
+          const char* path = value["path"];
+          debugD("Got update of value %s\n", path);
 
-        for (size_t i = 0; i < listeners.size(); i++) {
-          SKListener* listener = listeners[i];
-          if (listener->get_sk_path().equals(path)) {
-            listener->parse_value(value);
+          const std::vector<SKListener*>& listeners = SKListener::get_listeners();
+
+          for (size_t i = 0; i < listeners.size(); i++) {
+            SKListener* listener = listeners[i];
+            if (listener->get_sk_path().equals(path)) {
+              listener->parse_value(value);
+            }
           }
         }
       }
     }
+
+    if (message.containsKey("put")) {
+      // Process PUT requests...
+      JsonArray puts = message["put"];
+      size_t responseCount = 0;
+      for (size_t i = 0; i < puts.size(); i++) {
+          JsonObject put = puts[i];
+          const char* path = put["path"];
+          String strVal = put["value"].as<String>();
+          debugD("Received PUT request for path %s (value %s)\n", path, strVal.c_str());
+          const std::vector<SKPutListener*>& listeners = SKPutListener::get_listeners();
+          for (size_t i = 0; i < listeners.size(); i++) {
+            SKPutListener* listener = listeners[i];
+            if (listener->get_sk_path().equals(path)) {
+              listener->parse_value(put);
+              responseCount++;
+            }
+          }
+
+          // Send back a request reasponse...
+          DynamicJsonDocument putResponse(512);
+          putResponse["requestId"] = message["requestId"];
+          if (responseCount == puts.size()) {
+            // We found a response for every PUT request
+            putResponse["state"] = "COMPLETED";
+            putResponse["statusCode"] = 200;
+          }
+          else {
+            // One or more requests did not have a matching path
+            putResponse["state"] = "FAILED";
+            putResponse["statusCode"] = 405;
+          }
+          String responseTxt;
+          serializeJson(putResponse, responseTxt);
+          debugD("Replying to PUT request with %s", responseTxt.c_str());
+          this->client.sendTXT(responseTxt);
+      }
+    }    
   } else {
     debugE("deserializeJson error: %s", error.c_str());
   }
