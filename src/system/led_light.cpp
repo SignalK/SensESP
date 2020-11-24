@@ -29,13 +29,6 @@ LEDLight::LEDLight(int led_r_pin, int led_g_pin, int led_b_pin,
 // Code for analogWrite() simulation on ESP32 inspired by
 // https://github.com/ERROPiX/ESP32_AnalogWrite
 
-typedef struct analog_write_channel
-{
-  int8_t pin;
-  double frequency;
-  uint8_t resolution;
-} analog_write_channel_t;
-
 int8_t channel_to_pin[16] = { -1, -1, -1, -1,
                               -1, -1, -1, -1,
                               -1, -1, -1, -1,
@@ -96,7 +89,7 @@ static void analogWrite(uint8_t pin, uint32_t value, uint32_t valueMax = 255)
 
 // Calculate the PWM value to send to analogWrite() based on the specified
 // color value. 
-static int getPWM(long rgb, int shift_right) {
+static int get_pwm(long rgb, int shift_right) {
     int color_val = (rgb >> shift_right) & 0xFF;
     return 255 - color_val;
 }
@@ -107,7 +100,7 @@ static int getPWM(long rgb, int shift_right) {
 // color value. When using analogWrite(), the closer to zero, the
 // brighter the color. The closer to PWMRANGE, the darker the
 // color.
-static int getPWM(long rgb, int shift_right) {
+static int get_pwm(long rgb, int shift_right) {
     int color_val = (rgb >> shift_right) & 0xFF;
     float color_pct = color_val / 255.0;
 
@@ -124,9 +117,9 @@ void LEDLight::set_input(long new_value, uint8_t input_channel) {
         // An LED is connected
         if (led_g_pin >= 0) {
             // And its color
-            int r = getPWM(new_value, 16);
-            int g = getPWM(new_value, 8);
-            int b = getPWM(new_value, 0);
+            int r = get_pwm(new_value, 16);
+            int g = get_pwm(new_value, 8);
+            int b = get_pwm(new_value, 0);
             analogWrite(led_r_pin, r);
             analogWrite(led_g_pin, g);
             analogWrite(led_b_pin, b);
