@@ -1,5 +1,5 @@
-#ifndef _led_color_H_
-#define _led_color_H_
+#ifndef _led_light_H_
+#define _led_light_H_
 
 #include "system/configurable.h"
 #include "system/valueconsumer.h"
