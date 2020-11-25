@@ -72,7 +72,7 @@ class SKPutRequestBase : public SKRequest, public Configurable {
   /**
    * The constructor
    * @param sk_path The SignalK path the put request will be made on
-   * @param config_path The configuration path to save the confirmation
+   * @param config_path The configuration path to save the configuration
    * @param timeout The number of milliseconds to wait for a COMPLETED or
    *  FAILED response to be received from the server
    */
