@@ -72,6 +72,14 @@ class SensESPApp {
   }
 
   /**
+   * Sends the specified payload text directly to the signalk server
+   * over the connected websocket. If no websocket is connect, the
+   * call is ignored.
+   */
+  void send_to_server(String& payload) { this->ws_client->sendTXT(payload); }
+
+
+  /**
    * Returns true if the host system is connected to Wifi
    */
   bool isWifiConnected() { return WiFi.status() == WL_CONNECTED; }
