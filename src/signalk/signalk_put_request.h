@@ -65,11 +65,19 @@ class SKRequest {
 
 /**
  * SKPutRequestBase is a base class for all variations of
- * put requests
+ * put requests. See https://signalk.org/specification/1.5.0/doc/put.html
  */
 class SKPutRequestBase : public SKRequest, public Configurable {
  public:
-  SKPutRequestBase(String sk_path, String config_path = "");
+  /**
+   * The constructor
+   * @param sk_path The SignalK path the put request will be made on
+   * @param config_path The configuration path to save the confirmation
+   * @param timeout The number of milliseconds to wait for a COMPLETED or
+   *  FAILED response to be received from the server
+   */
+  SKPutRequestBase(String sk_path, String config_path = "",
+                   uint32_t timeout = 5000);
 
   // For reading and writing the configuration
   virtual void get_configuration(JsonObject& doc) override;
@@ -95,15 +103,35 @@ class SKPutRequestBase : public SKRequest, public Configurable {
   virtual void on_response(DynamicJsonDocument& response);
 
   String sk_path;
+  uint32_t timeout;
 };
 
+/**
+ * SKPutRequest is used to send PUT requests for specific types of
+ * SignalK values according to the specification at
+ * https://signalk.org/specification/1.5.0/doc/put.html
+ */
 template <typename T>
 class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
  public:
-  SKPutRequest(String sk_path, String config_path = "")
-      : SKPutRequestBase(sk_path, config_path) {}
+  /**
+   * The constructor
+   * @param sk_path The SignalK path the put request will be made on
+   * @param config_path The configuration path to save the confirmation
+   * @param ignore_duplicates TRUE if incoming values that have not changed
+   *  since the last one should not generated a PUT request
+   * @param timeout The number of milliseconds to wait for a COMPLETED or
+   *  FAILED response to be received from the server
+   */
+  SKPutRequest(String sk_path, String config_path = "",
+               bool ignore_duplicates = true, uint32_t timeout = 5000)
+      : SKPutRequestBase(sk_path, config_path, timeout),
+        ignore_duplicates{ignore_duplicates} {}
 
   virtual void set_input(T new_value, uint8_t input_channel = 0) override {
+    if (ignore_duplicates && new_value == value) {
+      return;
+    }
     this->value = new_value;
     send_put_request();
   };
@@ -114,6 +142,7 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
 
  protected:
   T value;
+  bool ignore_duplicates;
 };
 
 typedef SKPutRequest<float> SKNumericPutRequest;

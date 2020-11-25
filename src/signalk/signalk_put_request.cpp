@@ -15,11 +15,9 @@ static String uuid4() {
   return ESPTrueRandom.uuidToString(uuidNumber);
 }
 
-void SKRequest::send_request(
-    DynamicJsonDocument& request,
-    std::function<void(DynamicJsonDocument&)> callback,
-    uint32_t timeout) {
-
+void SKRequest::send_request(DynamicJsonDocument& request,
+                             std::function<void(DynamicJsonDocument&)> callback,
+                             uint32_t timeout) {
   // Create a new PendingRequest object to track this request...
   PendingRequest* pending_request = new PendingRequest();
 
@@ -34,11 +32,11 @@ void SKRequest::send_request(
   pending_request->timeout_cleanup = app.onDelay(timeout, [pending_request]() {
     // Mark the delay reaction null as it will be cleaned up by the ReactESP
     // framework if this executes...
-    debugW("No response from server for request Id %s", pending_request->request_id.c_str());
+    debugW("No response from server for request Id %s",
+           pending_request->request_id.c_str());
     pending_request->timeout_cleanup = nullptr;
     SKRequest::remove_request(pending_request->request_id);
   });
-
 
   request_map[pending_request->request_id] = pending_request;
 
@@ -52,90 +50,74 @@ void SKRequest::send_request(
   sensesp_app->send_to_server(request_txt);
 }
 
-
 SKRequest::PendingRequest* SKRequest::get_request(String request_id) {
-
-    auto it = request_map.find(request_id);
-    if (it != request_map.end()) {
-        return (it->second);
-    }
-    else {
-        return nullptr;
-    }
+  auto it = request_map.find(request_id);
+  if (it != request_map.end()) {
+    return (it->second);
+  } else {
+    return nullptr;
+  }
 }
-
-
 
 void SKRequest::handle_response(DynamicJsonDocument& response) {
+  String request_id = response["requestId"];
+  PendingRequest* pending_request = get_request(request_id);
+  if (pending_request != nullptr) {
+    pending_request->callback(response);
 
-    String request_id = response["requestId"];
-    PendingRequest* pending_request = get_request(request_id);
-    if (pending_request != nullptr) {
-    
-        pending_request->callback(response);
-
-        // Now, are we done?
-        String state = response["state"];
-        if (!state.equalsIgnoreCase("PENDING")) {
-            remove_request(request_id);
-        }
+    // Now, are we done?
+    String state = response["state"];
+    if (!state.equalsIgnoreCase("PENDING")) {
+      remove_request(request_id);
     }
-    else {
-        debugW("Received request response for an untracked request: %s", request_id.c_str());
-    }
+  } else {
+    debugW("Received request response for an untracked request: %s",
+           request_id.c_str());
+  }
 }
-
-
 
 void SKRequest::remove_request(String request_id) {
-
-    PendingRequest* pending_request = SKRequest::get_request(request_id);
-    if (pending_request != nullptr) {
-
-        // First, stop any pending timeout handlers...
-        if (pending_request->timeout_cleanup != nullptr) {
-            // The timeout code was not called, so just
-            // remove it from the ReactESP execution queue...
-            pending_request->timeout_cleanup->remove();
-        }
-
-        // Now, remove the request from the map...
-        request_map.erase(request_id);
-
-        // Finally, discard the request tracker...
-        delete pending_request;
+  PendingRequest* pending_request = SKRequest::get_request(request_id);
+  if (pending_request != nullptr) {
+    // First, stop any pending timeout handlers...
+    if (pending_request->timeout_cleanup != nullptr) {
+      // The timeout code was not called, so just
+      // remove it from the ReactESP execution queue...
+      pending_request->timeout_cleanup->remove();
     }
 
+    // Now, remove the request from the map...
+    request_map.erase(request_id);
+
+    // Finally, discard the request tracker...
+    delete pending_request;
+  }
 }
 
-SKPutRequestBase::SKPutRequestBase(String sk_path, String config_path)  :
-   Configurable(config_path),
-   sk_path{sk_path} {
-   load_configuration();
+SKPutRequestBase::SKPutRequestBase(String sk_path, String config_path,
+                                   uint32_t timeout)
+    : Configurable(config_path), sk_path{sk_path}, timeout{timeout} {
+  load_configuration();
 }
-
 
 void SKPutRequestBase::send_put_request() {
-
-   DynamicJsonDocument doc(1024);
-   JsonObject root = doc.to<JsonObject>();
-   JsonObject put_data = root.createNestedObject("put");
-   put_data["path"] = sk_path;
-   set_put_value(put_data);
-   SKRequest::send_request(doc, [this](DynamicJsonDocument& response) {
-       this->on_response(response);
-   });
-
+  DynamicJsonDocument doc(1024);
+  JsonObject root = doc.to<JsonObject>();
+  JsonObject put_data = root.createNestedObject("put");
+  put_data["path"] = sk_path;
+  set_put_value(put_data);
+  SKRequest::send_request(
+      doc,
+      [this](DynamicJsonDocument& response) { this->on_response(response); },
+      timeout);
 }
-
 
 void SKPutRequestBase::on_response(DynamicJsonDocument& response) {
-   String request_id = response["requestId"];
-   String state = response["state"];
-   debugD("Response %s received for PUT request: %s", state.c_str(), request_id.c_str());
+  String request_id = response["requestId"];
+  String state = response["state"];
+  debugD("Response %s received for PUT request: %s", state.c_str(),
+         request_id.c_str());
 }
-
-
 
 void SKPutRequestBase::get_configuration(JsonObject& root) {
   root["sk_path"] = sk_path;
@@ -148,9 +130,7 @@ static const char SCHEMA[] PROGMEM = R"###({
       }
   })###";
 
-
 String SKPutRequestBase::get_config_schema() { return FPSTR(SCHEMA); }
-
 
 bool SKPutRequestBase::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_path"};
@@ -162,4 +142,3 @@ bool SKPutRequestBase::set_configuration(const JsonObject& config) {
   this->sk_path = config["sk_path"].as<String>();
   return true;
 }
-
