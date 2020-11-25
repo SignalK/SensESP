@@ -1,7 +1,7 @@
 #ifndef _analog_write_esp32_H_
 #define _analog_write_esp32_H_
 
-// PWM and analogWrite() compatibility module for ESP32 MUCs.
+// PWM and analogWrite() compatibility module for ESP32 MCUs.
 
 #ifdef ESP32
 #include <stdint.h>
