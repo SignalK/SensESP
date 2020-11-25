@@ -27,13 +27,11 @@ class BME280 : public Sensor {
   void check_status();
 };
 
-// Pass one of these in the constructor to BME280value() to tell which type of
-// value you want to output
-enum BME280ValType { temperature, pressure, humidity };
 
 // BME280Value reads and outputs the specified value of a BME280 sensor.
 class BME280Value : public NumericSensor {
  public:
+  enum BME280ValType { temperature, pressure, humidity };
   BME280Value(BME280* bme280, BME280ValType val_type, uint read_delay = 500,
               String config_path = "");
   void enable() override final;
