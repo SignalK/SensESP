@@ -26,13 +26,12 @@ class BMP280 : public Sensor {
   uint8_t addr;
 };
 
-// Pass one of these in the constructor to BMP280value() to tell which type of
-// value you want to output
-enum BMP280ValType { temperature, pressure };
 
 // BMP280Value reads and outputs the specified value of a BMP280 sensor.
 class BMP280Value : public NumericSensor {
  public:
+  
+  enum BMP280ValType { temperature, pressure };
   BMP280Value(BMP280* bmp280, BMP280ValType val_type, uint read_delay = 500,
               String config_path = "");
   void enable() override final;
