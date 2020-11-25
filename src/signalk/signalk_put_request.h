@@ -59,7 +59,7 @@ class SKRequest {
   static void remove_request(String request_id);
 
   // Returns the pending request object associated with
-  // request_id, or nullptr is no such id is found.
+  // request_id, or nullptr if no such id is found.
   static PendingRequest* get_request(String request_id);
 };
 
@@ -117,7 +117,7 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
   /**
    * The constructor
    * @param sk_path The SignalK path the put request will be made on
-   * @param config_path The configuration path to save the confirmation
+   * @param config_path The configuration path to save the configuration
    * @param ignore_duplicates TRUE if incoming values that have not changed
    *  since the last one should not generated a PUT request
    * @param timeout The number of milliseconds to wait for a COMPLETED or
