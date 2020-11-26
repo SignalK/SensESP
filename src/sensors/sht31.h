@@ -22,13 +22,11 @@ class SHT31 : public Sensor {
   uint8_t addr;
 };
 
-// Pass one of these in the constructor to SHT31value() to tell which type of
-// value you want to output
-enum SHT31ValType { temperature, humidity };
 
 // SHT31Value reads and outputs the specified value of a SHT31 sensor.
 class SHT31Value : public NumericSensor {
  public:
+  enum SHT31ValType { temperature, humidity };
   SHT31Value(SHT31* sht31, SHT31ValType val_type, uint read_delay = 500,
              String config_path = "");
   void enable() override final;

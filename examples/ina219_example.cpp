@@ -33,7 +33,7 @@ ReactESP app([]() {
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
     
   // This one is for the bus voltage.
-  auto* ina219_bus_voltage = new INA219Value(ina219, bus_voltage, read_delay,
+  auto* ina219_bus_voltage = new INA219Value(ina219, INA219Value::bus_voltage, read_delay,
                                              "/someElectricDevice/busVoltage");
 
   ina219_bus_voltage->connect_to(
@@ -41,13 +41,13 @@ ReactESP app([]() {
 
   // Do the same for the shunt voltage.
   auto* ina219_shunt_voltage = new INA219Value(
-      ina219, shunt_voltage, read_delay, "/someElectricDevice/shuntVoltage");
+      ina219, INA219Value::shunt_voltage, read_delay, "/someElectricDevice/shuntVoltage");
 
   ina219_shunt_voltage->connect_to(
       new SKOutputNumber("electrical.someelectricdevice.shuntVoltage"));
 
   // Do the same for the current (amperage).
-  auto* ina219_current = new INA219Value(ina219, current, read_delay,
+  auto* ina219_current = new INA219Value(ina219, INA219Value::current, read_delay,
                                          "/someElectricDevice/current");
 
   ina219_current->connect_to(
@@ -55,14 +55,14 @@ ReactESP app([]() {
 
   // Do the same for the power (watts).
   auto* ina219_power =
-      new INA219Value(ina219, power, read_delay, "/someElectricDevice/power");
+      new INA219Value(ina219, INA219Value::power, read_delay, "/someElectricDevice/power");
 
   ina219_power->connect_to(
       new SKOutputNumber("electrical.someelectricdevice.power"));
 
   // Do the same for the load voltage.
   auto* ina219_load_voltage = new INA219Value(
-      ina219, load_voltage, read_delay, "/someElectricDevice/loadVoltage");
+      ina219, INA219Value::load_voltage, read_delay, "/someElectricDevice/loadVoltage");
 
   ina219_load_voltage->connect_to(
       new SKOutputNumber("electrical.someelectricdevice.loadVoltage"));
