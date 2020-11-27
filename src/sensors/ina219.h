@@ -25,13 +25,11 @@ class INA219 : public Sensor {
   Adafruit_INA219* ina219;
 };
 
-// Pass one of these in the constructor to INA219value() to tell which type of
-// value you want to output
-enum INA219ValType { bus_voltage, shunt_voltage, current, power, load_voltage };
 
 // INA219Value reads and outputs the specified value of a INA219 sensor.
 class INA219Value : public NumericSensor {
  public:
+  enum INA219ValType { bus_voltage, shunt_voltage, current, power, load_voltage };
   INA219Value(INA219* ina219, INA219ValType val_type, uint read_delay = 500,
               String config_path = "");
   void enable() override final;

@@ -33,7 +33,7 @@ ReactESP app([]() {
   // BME280, and send its output to Signal K as a number (float). This one is for
   // the temperature reading.
   auto* bme_temperature =
-      new BME280Value(bme280, temperature, read_delay, "/Outside/Temperature");
+      new BME280Value(bme280, BME280Value::temperature, read_delay, "/Outside/Temperature");
 
   bme_temperature->connect_to(
       new SKOutputNumber("environment.outside.temperature"));
@@ -41,14 +41,14 @@ ReactESP app([]() {
   // Do the same for the barometric pressure value. Its read_delay is longer,
   // since barometric pressure can't change all that quickly. It could be much
   // longer for that reason.
-  auto* bme_pressure = new BME280Value(bme280, pressure, pressure_read_delay,
+  auto* bme_pressure = new BME280Value(bme280, BME280Value::pressure, pressure_read_delay,
                                        "/Outside/Pressure");
 
   bme_pressure->connect_to(new SKOutputNumber("environment.outside.pressure"));
 
   // Do the same for the humidity value.
   auto* bme_humidity =
-      new BME280Value(bme280, humidity, read_delay, "/Outside/Humidity");
+      new BME280Value(bme280, BME280Value::humidity, read_delay, "/Outside/Humidity");
 
   bme_humidity->connect_to(new SKOutputNumber("environment.outside.humidity"));
 
