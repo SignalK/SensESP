@@ -1,15 +1,24 @@
 #ifndef _click_types_H_
 #define _click_types_H_
 
+<<<<<<< HEAD
 #include <elapsedMillis.h>
 
+=======
+>>>>>>> 5e2e2e45376927151ace2deb06082aad64276941
 #include "transforms/transform.h"
 
 
 /**
+<<<<<<< HEAD
  * ClickTypes defines the types of clicks and button presses a ClickType transform can detect
  */
 enum class ClickTypes { ButtonPress, ButtonRelease, SingleClick, LongSingleClick, UltraLongSingleClick, DoubleClick };
+=======
+ * ClickTypes defines the types of clicks a ClickType transform can detect
+ */
+enum class ClickTypes { SingleClick, LongSingleClick, UltraLongSingleClick, DoubleClick };
+>>>>>>> 5e2e2e45376927151ace2deb06082aad64276941
 
 
 /**
@@ -39,6 +48,7 @@ class ClickType : public Transform<bool, ClickTypes> {
        *  is immediately emitted. This value should be longer than long_click_delay
        * 
        */
+<<<<<<< HEAD
       ClickType(String config_path = "", long long_click_delay = 1300, long double_click_interval = 400, long ultra_long_click_delay = 5000);
 
       /**
@@ -48,12 +58,16 @@ class ClickType : public Transform<bool, ClickTypes> {
        */
       static bool is_click(ClickTypes value);
 
+=======
+      ClickType(String config_path = "", long long_click_delay = 1300, long double_click_interval = 350, long ultra_long_click_delay = 5000);
+>>>>>>> 5e2e2e45376927151ace2deb06082aad64276941
       virtual void set_input(bool input, uint8_t input_channel = 0) override;
       virtual void get_configuration(JsonObject& doc) override;
       virtual bool set_configuration(const JsonObject& config) override;
       virtual String get_config_schema() override;
 
     protected:
+<<<<<<< HEAD
       /// A counter to specify how many clicks are currently being
       /// processed. Used to distinguish between single and double
       /// clicks.
@@ -119,6 +133,19 @@ class ClickType : public Transform<bool, ClickTypes> {
        * can propogate through the system.
        */
       void emitDelayed(ClickTypes value);
+=======
+      long press_started;
+      long press_released;
+      int click_count;
+      long long_click_delay;
+      long double_click_interval;
+      long ultra_long_click_delay;
+      DelayReaction* queued_report;
+
+      void press_completed();
+
+      void on_ultra_long_click(const char* keyType);
+>>>>>>> 5e2e2e45376927151ace2deb06082aad64276941
 };
 
 #endif
