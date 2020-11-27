@@ -4,19 +4,6 @@
 #include "transforms/transform.h"
 
 
-
-/**
- * Returns TRUE if value represents one of truth values recognized by TextToTruth
- */
-extern bool is_valid_true(String value);
-
-
-/**
- * Returns TRUE if value represents one of boolean values recognized by TextToTruth as "false"
- */
-extern bool is_valid_false(String value);
-
-
 /**
  * TextToTruth consumes a string, and outputs boolean "true" 
  * if the text represents a human readable version of "true". The following
@@ -35,6 +22,18 @@ class TextToTruth : public Transform<String, bool> {
 
   public:
     virtual void set_input(String input, uint8_t input_channel = 0) override;
+
+   /**
+    * Returns TRUE if value represents one of truth values recognized by TextToTruth
+    */
+    static bool is_valid_true(String value);
+
+   /**
+    * Returns TRUE if value represents one of boolean values recognized 
+    * as a "false" value.  FALSE is returned if value value that is
+    * normally associated with a boolean false.
+    */
+    static bool is_valid_false(String value);
 
 };
 
