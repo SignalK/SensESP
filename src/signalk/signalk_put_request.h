@@ -64,8 +64,12 @@ class SKRequest {
 };
 
 /**
- * SKPutRequestBase is a base class for all variations of
- * put requests. See https://signalk.org/specification/1.5.0/doc/put.html
+ * SKPutRequestBase is a base class for all template variations of
+ * the PUT request class SKPutRequest. This base class keeps the
+ * compiler from generating reduntant object code for common
+ * functionality of each template version.
+ * @see SKPutRequest
+ * See https://signalk.org/specification/1.5.0/doc/put.html
  */
 class SKPutRequestBase : public SKRequest, public Configurable {
  public:
