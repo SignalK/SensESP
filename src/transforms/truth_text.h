@@ -29,7 +29,7 @@ extern bool is_valid_false(String value);
  *   <li>On
  *   <li>Any string that represents a non-zero number
  * </ul>
- * 
+ * @see TruthToText
  */
 class TextToTruth : public Transform<String, bool> {
 
@@ -40,8 +40,10 @@ class TextToTruth : public Transform<String, bool> {
 
 
 /**
- * TruthToText consumes a boolean or numeric value, and outputs the
- * specific truth strings.  This is the inverse of TextToTruth.
+ * TruthToText consumes a boolean value and outputs one the
+ * appropriate truth string specified in the constructor. 
+ * This is the inverse of TextToTruth.
+ * @see TextToTruth
  */
 class TruthToText : public Transform<bool, String> {
 
