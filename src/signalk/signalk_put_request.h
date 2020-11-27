@@ -41,8 +41,8 @@ class SKRequest {
   static void handle_response(DynamicJsonDocument& response);
 
  private:
-  // PendingRequest is a utility class used internally for
-  // tracking websocket requests made to the SignalK server.
+  /// PendingRequest is a utility class used internally for
+  /// tracking websocket requests made to the SignalK server.
   class PendingRequest {
    public:
     String request_id;
@@ -50,16 +50,16 @@ class SKRequest {
     DelayReaction* timeout_cleanup;
   };
 
-  // A map to hold all of the requests we are expecting future
-  // responses from...
+  /// A map to hold all of the requests we are expecting future
+  /// responses from...
   static std::map<String, PendingRequest*> request_map;
 
-  // Removes the specified request_id from the request_map,
-  // cleaning up outstanding reactions if necessary
+  /// Removes the specified request_id from the request_map,
+  /// cleaning up outstanding reactions if necessary
   static void remove_request(String request_id);
 
-  // Returns the pending request object associated with
-  // request_id, or nullptr if no such id is found.
+  /// Returns the pending request object associated with
+  /// request_id, or nullptr if no such id is found.
   static PendingRequest* get_request(String request_id);
 };
 
