@@ -66,21 +66,21 @@ class ClickType : public Transform<bool, ClickTypes> {
       /// a normal SingleClick and a LongSingleClick
       long long_click_delay;
 
-      /// How many milliseconds a button is pressed to distinguish between
+      /// How many milliseoncs a button is pressed to distinguish between
       /// a normal SingleClick and an UltraLongSingleClick
       long ultra_long_click_delay;
 
-      /// The maximum number of milliseconds that can pass for two
-      /// clicks in a row to be combined into a single DoubleClick
+      /// The maximum number of milliseconds that can pass before two
+      /// clicks in a row are combined into a single DoubleClick
       long double_click_interval;
 
 
-      /// Timer to time length of button presses
-      elapsedMillis press_started;
+      /// Timmer to time button presses
+      elapsedMillis press_duration;
 
 
       /// Timer to time interval between button releases
-      elapsedMillis press_released;
+      elapsedMillis release_duration;
 
 
       /// Holds a delayed "SingleClick" report that we can pull back
@@ -100,14 +100,14 @@ class ClickType : public Transform<bool, ClickTypes> {
 
       /// Processes an ultra long click. Unlike the other click types,
       /// ultra long clicks are executed as soon as they pass the
-      /// "ultra long" delay
-      void on_ultra_long_click(const char* keyType);
+      /// "ultra long"
+      void on_ultra_long_click();
 
 
 
       /**
-       * Resets click tracking variables after a press has been released and
-       * successfully translated into a click event
+       * Resets click tracking variables after a press has been released so the
+       * next button press can be processed.
        */
       void on_click_completed();
 
@@ -115,8 +115,8 @@ class ClickType : public Transform<bool, ClickTypes> {
       /**
        * Emits the specified value after a 5 millisecond delay. This allows
        * translated click types like SingleClick and DoubleClick to be
-       * sent, but delays its processing so the "ButtonPress" and
-       * "ButtonRelease" click typesbvcan propagate through the system.
+       * sent but delays its processing so the ClickTypes::ButtonReleased
+       * can propogate through the system.
        */
       void emitDelayed(ClickTypes value);
 };
