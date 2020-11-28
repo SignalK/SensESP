@@ -16,7 +16,7 @@ template class ADS1x15<Adafruit_ADS1115>;
 
 
 template <class T_ads_1x15>
-ADS1x15RawValue<T_ads_1x15>::ADS1x15RawValue(T_ads_1x15* ads1x15, uint8_t channel,
+ADS1x15RawValue<T_ads_1x15>::ADS1x15RawValue(T_ads_1x15* ads1x15, ADS1x15Channel_t channel,
                                        uint read_delay, String config_path)
     : NumericSensor(config_path),
       ads1x15_{ads1x15},
@@ -28,20 +28,18 @@ ADS1x15RawValue<T_ads_1x15>::ADS1x15RawValue(T_ads_1x15* ads1x15, uint8_t channe
 template <class T_ads_1x15>
 void ADS1x15RawValue<T_ads_1x15>::read_raw_value() {
   switch (channel_) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
+    case channel_0:
+    case channel_1:
+    case channel_2:
+    case channel_3:
       raw_value_ = ads1x15_->ads_->readADC_SingleEnded(channel_);
       break;
-    case 10:
+    case channels_0_1:
       raw_value_ = ads1x15_->ads_->readADC_Differential_0_1();
       break;
-    case 23:
+    case channels_2_3:
       raw_value_ = ads1x15_->ads_->readADC_Differential_2_3();
       break;
-    default:
-      debugE("FATAL: invalid channel - must be 0, 1, 2, 3, 10, or 23");
   }
 }
 
@@ -91,7 +89,7 @@ template class ADS1x15RawValue<ADS1115>;
 
 
 template <class T_ads_1x15, ADS1x15CHIP_t chip>
-ADS1x15Voltage<T_ads_1x15, chip>::ADS1x15Voltage(T_ads_1x15* ads1x15, uint8_t channel,
+ADS1x15Voltage<T_ads_1x15, chip>::ADS1x15Voltage(T_ads_1x15* ads1x15, ADS1x15Channel_t channel,
                                            uint read_delay, String config_path)
     : ADS1x15RawValue<T_ads_1x15>(ads1x15, channel, read_delay, config_path), chip_{chip} {
   ADS1x15RawValue<T_ads_1x15>::load_configuration();

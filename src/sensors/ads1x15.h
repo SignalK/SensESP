@@ -47,27 +47,31 @@ typedef ADS1x15<Adafruit_ADS1115> ADS1115;
  * @param ads1x15 A pointer to the ADS1x15 object.
  * 
  * @param channel The channel of the ADS1x15 that you want to read. For a
- *   single channel, use 0, 1, 2, or 3, and readADC_SingleEnded() will be used. If
- *   you want to read the difference between two channels, this parameter should be:
- *   - 10 to use readADC_Differential_0_1()
- *   - 23 to use readADC_Differential_2_3()
+ *   single channel, use channel_0, channel_1, channel_2, or channel_3, and 
+ *   readADC_SingleEnded() will be used. If you want to read the difference between
+ *   two channels, this parameter should be:
+ *   - channels_0_1 to use readADC_Differential_0_1()
+ *   - channels_2_3 to use readADC_Differential_2_3()
  * 
  * @param read_delay How often to read the value, in ms.
  * 
  * @param config_path The path to configuring read_delay in the Config UI.
  * 
  * */
+
+enum ADS1x15Channel_t { channel_0, channel_1, channel_2, channel_3, channels_0_1, channels_2_3 };
+
 template <class T_ads_1x15>
 class ADS1x15RawValue : public NumericSensor {
  public:
-  ADS1x15RawValue(T_ads_1x15* ads1x15, uint8_t channel = 0, uint read_delay = 200,
+  ADS1x15RawValue(T_ads_1x15* ads1x15, ADS1x15Channel_t channel = channel_0, uint read_delay = 200,
                String config_path = "");
   void enable() override;
 
  //protected:
   void read_raw_value();
   T_ads_1x15* ads1x15_;
-  uint8_t channel_;
+  ADS1x15Channel_t channel_;
   uint read_delay_;
   uint16_t raw_value_ = 0;
 
@@ -111,10 +115,11 @@ enum ADS1x15CHIP_t { ADS1015chip, ADS1115chip };
  * @param ads1x15 A pointer to the ADS1x15 object.
  * 
  * @param channel The channel of the ADS1x15 that you want to read. For a
- *   single channel, use 0, 1, 2, or 3, and readADC_SingleEnded() will be used. If
- *   you want to read the difference between two channels, this parameter should be:
- *   - 10 to use readADC_Differential_0_1()
- *   - 23 to use readADC_Differential_2_3()
+ *   single channel, use channel_0, channel_1, channel_2, or channel_3, and 
+ *   readADC_SingleEnded() will be used. If you want to read the difference between
+ *   two channels, this parameter should be:
+ *   - channels_0_1 to use readADC_Differential_0_1()
+ *   - channels_2_3 to use readADC_Differential_2_3()
  * 
  * @param read_delay How often to read the value, in ms.
  * 
@@ -124,7 +129,7 @@ enum ADS1x15CHIP_t { ADS1015chip, ADS1115chip };
 template <class T_ads_1x15, ADS1x15CHIP_t chip>
 class ADS1x15Voltage : public ADS1x15RawValue<T_ads_1x15> {
  public:
-  ADS1x15Voltage(T_ads_1x15* ads1x15, uint8_t channel = 0, uint read_delay = 200,
+  ADS1x15Voltage(T_ads_1x15* ads1x15, ADS1x15Channel_t channel = channel_0, uint read_delay = 200,
                String config_path = "");
   void enable() override final;
 

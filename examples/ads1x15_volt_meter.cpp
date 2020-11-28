@@ -27,7 +27,7 @@ ReactESP app([]() {
   // Create an instance of ADS1115Voltage to read a specific channel of the ADC,
   // (the channel on the physical chip that the input is connected to), and
   // convert it back into the voltage that was read by the ADC.
-  uint8_t channel_12V = 0;
+  ADS1x15Channel_t channel_12V = channel_0;
   uint read_delay_12V = 500;
 
   auto* alt_12v_voltage = new ADS1115Voltage(ads1115, channel_12V, read_delay_12V,
@@ -58,7 +58,7 @@ ReactESP app([]() {
   // voltage that was read - instead, it outputs an int from 0 to 32,768. ADS1115RawValue
   // is used when you don't care about the actual voltage, because you're measuring something
   // like a distance, or the percentage fullness of a tank, which is what this example is.
-  uint8_t channel_tank_level = 1;
+  ADS1x15Channel_t channel_tank_level = channel_1;
   uint read_delay_tank_level = 500;
 
   auto* tank_level = new ADS1115RawValue(ads1115, channel_tank_level, read_delay_tank_level,
