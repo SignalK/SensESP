@@ -1,0 +1,50 @@
+#ifndef _press_repeater_H_
+#define _press_repeater_H_
+
+#include <elapsedMillis.h>
+
+#include "sensors/digital_input.h"
+#include "transforms/transform.h"
+#include "system/valueconsumer.h"
+
+/**
+ * PressRepeater is a transform that takes boolean inputs and adds
+ * button behaviors familiar to many device end users.
+ * It emits a value only when the state of the input changes
+ * (i.e. when the input changes from TRUE to FALSE, and vice versa).
+ * In addition, if the input remains TRUE longer than repeat_start_interval 
+ * milliseconds, it will emit TRUE once again, and then again every 
+ * repeat_interval milliseconds until the input returns to FALSE.
+ * <p>An example use case would be a DigitalInput connected to a button
+ * that represents the "Volume Up" or "Volume Down" of a sound system.
+ * <p>As a convenience for wiring up to DigitalInputValue and other
+ * producers that emit integers, PressRepeater can also consume
+ * integer values.  As long as the integer value coming in does not 
+ * match integer_false PressRepeater will act as if TRUE was passed to it.
+ */
+class PressRepeater : public BooleanTransform,
+                      public IntegerConsumer {
+
+    public:
+        PressRepeater(String config_path = "", int integer_false = 0, int repeat_start_interval = 1500, int repeat_interval = 250);
+
+        virtual void enable() override;
+
+        virtual void set_input(bool new_value, uint8_t input_channel = 0) override;
+        virtual void set_input(int new_value, uint8_t input_channel = 0) override;
+
+        virtual void get_configuration(JsonObject& doc) override;
+        virtual bool set_configuration(const JsonObject& config) override;
+        virtual String get_config_schema() override;
+    protected:
+       int integer_false;
+       int repeat_start_interval;
+       int repeat_interval;
+       elapsedMillis last_value_sent;
+       bool pushed;
+       bool repeating;
+
+};
+
+
+#endif
