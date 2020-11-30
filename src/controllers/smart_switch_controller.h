@@ -1,7 +1,6 @@
 #ifndef _smart_switch_controller_h
 #define _smart_switch_controller_h
 
-#include "sensors/load_controller.h"
 #include "system/valueconsumer.h"
 #include "transforms/click_type.h"
 
