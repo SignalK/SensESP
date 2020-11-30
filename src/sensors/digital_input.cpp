@@ -10,37 +10,36 @@ DigitalInput::DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
   pinMode(pin, pin_mode);
 }
 
-DigitalInputValue::DigitalInputValue(uint8_t pin, int pin_mode,
+DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
                                      int interrupt_type, int read_delay,
                                      String config_path)
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntegerProducer(),
-      read_delay{read_delay} {
+      read_delay{read_delay},
+      triggered{false} {
   load_configuration();      
 }
 
-void DigitalInputValue::enable() {
+void DigitalInputState::enable() {
   app.onRepeat(read_delay, [this]() {
     emit(digitalRead(pin));
   });
 }
 
-void DigitalInputValue::get_configuration(JsonObject& root) {
+void DigitalInputState::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
-  root["value"] = output;
 }
 
 static const char SCHEMA2[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
     }
   })###";
 
-String DigitalInputValue::get_config_schema() { return FPSTR(SCHEMA2); }
+String DigitalInputState::get_config_schema() { return FPSTR(SCHEMA2); }
 
-bool DigitalInputValue::set_configuration(const JsonObject& config) {
+bool DigitalInputState::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
@@ -74,14 +73,12 @@ void DigitalInputCounter::enable() {
 
 void DigitalInputCounter::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
-  root["value"] = output;
 }
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
     }
   })###";
 
