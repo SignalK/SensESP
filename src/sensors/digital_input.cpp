@@ -94,3 +94,57 @@ bool DigitalInputCounter::set_configuration(const JsonObject& config) {
   read_delay = config["read_delay"];
   return true;
 }
+
+
+DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
+                                       int interrupt_type, uint read_delay,
+                                       String config_path)
+    : DigitalInput(pin, pin_mode, interrupt_type, config_path),
+      IntegerProducer(),
+      read_delay_{read_delay},
+      triggered_{false} {
+    load_configuration();    
+    }
+
+void DigitalInputChange::enable() {
+  app.onInterrupt(pin, interrupt_type,
+    [this](){
+      output = digitalRead(pin);
+      triggered_ = true;
+    });
+  // app.onTick was tried for this, but for some reason, it doesn't work.
+  // app.onRepeat() does work.
+  app.onRepeat(read_delay_, [this](){
+      if (triggered_) {
+        noInterrupts();
+        triggered_ = false;
+        interrupts();
+        notify();
+      }
+    }
+  );
+}
+
+void DigitalInputChange::get_configuration(JsonObject& root) {
+  root["read_delay"] = read_delay_;
+}
+
+static const char SCHEMA3[] PROGMEM = R"###({
+    "type": "object",
+    "properties": {
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
+    }
+  })###";
+
+String DigitalInputChange::get_config_schema() { return FPSTR(SCHEMA3); }
+
+bool DigitalInputChange::set_configuration(const JsonObject& config) {
+  String expected[] = {"read_delay"};
+  for (auto str : expected) {
+    if (!config.containsKey(str)) {
+      return false;
+    }
+  }
+  read_delay_ = config["read_delay"];
+  return true;
+}

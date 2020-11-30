@@ -102,4 +102,35 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
   virtual String get_config_schema() override;
 };
 
+
+ /**
+ * @brief DigitalInputChange is meant to report when a digital pin changes its state.
+ *
+ * It's intended for monitoring a button or other type of relatively slow changing switch.
+ * Because physical switches like buttons can be somewhat "noisy", you may want to connect
+ * the output of this Sensor to the Debounce Transform, and try different combinations of
+ * read_delay for this Sensor and ms_min_delay for Debounce to get the "cleanest" output
+ * from your button or other switch.
+ *
+ * @param pin The GPIO pin to which the device is connected
+ * 
+ * @param pin_mode Will be INPUT or INPUT_PULLUP
+ * 
+ * @param interrupt_type Will be RISING, FALLING, or CHANGE
+ * 
+ * */
+class DigitalInputChange : public DigitalInput, public IntegerProducer {
+ public:
+  DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type, uint read_delay = 50,
+                                         String config_path = "");
+  virtual void enable() override final;
+ 
+ private:
+  uint read_delay_;
+  bool triggered_;
+  virtual void get_configuration(JsonObject& doc) override;
+  virtual bool set_configuration(const JsonObject& config) override;
+  virtual String get_config_schema() override;
+};
+
 #endif
