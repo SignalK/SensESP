@@ -6,7 +6,7 @@
 
 DigitalInput::DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
                            String config_path)
-    : Sensor(config_path), pin{pin}, interrupt_type{interrupt_type} {
+    : Sensor(config_path), pin_{pin}, interrupt_type_{interrupt_type} {
   pinMode(pin, pin_mode);
 }
 
@@ -15,19 +15,19 @@ DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
                                      String config_path)
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntegerProducer(),
-      read_delay{read_delay},
-      triggered{false} {
+      read_delay_{read_delay},
+      triggered_{false} {
   load_configuration();      
 }
 
 void DigitalInputState::enable() {
-  app.onRepeat(read_delay, [this]() {
-    emit(digitalRead(pin));
+  app.onRepeat(read_delay_, [this]() {
+    emit(digitalRead(pin_));
   });
 }
 
 void DigitalInputState::get_configuration(JsonObject& root) {
-  root["read_delay"] = read_delay;
+  root["read_delay"] = read_delay_;
 }
 
 static const char SCHEMA2[] PROGMEM = R"###({
@@ -46,7 +46,7 @@ bool DigitalInputState::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  read_delay = config["read_delay"];
+  read_delay_ = config["read_delay"];
   return true;
 }
 
@@ -55,24 +55,24 @@ DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode,
                                          String config_path)
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntegerProducer(),
-      read_delay{read_delay} {
+      read_delay_{read_delay} {
   load_configuration();
 }
 
 void DigitalInputCounter::enable() {
-  app.onInterrupt(pin, interrupt_type, [this]() { this->counter++; });
+  app.onInterrupt(pin_, interrupt_type_, [this]() { this->counter_++; });
 
-  app.onRepeat(read_delay, [this]() {
+  app.onRepeat(read_delay_, [this]() {
     noInterrupts();
-    output = counter;
-    counter = 0;
+    output = counter_;
+    counter_ = 0;
     interrupts();
     notify();
   });
 }
 
 void DigitalInputCounter::get_configuration(JsonObject& root) {
-  root["read_delay"] = read_delay;
+  root["read_delay"] = read_delay_;
 }
 
 static const char SCHEMA[] PROGMEM = R"###({
@@ -91,7 +91,7 @@ bool DigitalInputCounter::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  read_delay = config["read_delay"];
+  read_delay_ = config["read_delay"];
   return true;
 }
 
@@ -107,9 +107,9 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
     }
 
 void DigitalInputChange::enable() {
-  app.onInterrupt(pin, interrupt_type,
+  app.onInterrupt(pin_, interrupt_type_,
     [this](){
-      output = digitalRead(pin);
+      output = digitalRead(pin_);
       triggered_ = true;
     });
   // app.onTick was tried for this, but for some reason, it doesn't work.

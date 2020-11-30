@@ -21,8 +21,8 @@ class DigitalInput : public Sensor {
                String config_path = "");
 
  protected:
-  uint8_t pin;
-  int interrupt_type;
+  uint8_t pin_;
+  int interrupt_type_;
 };
 
 
@@ -57,8 +57,8 @@ class DigitalInputState : public DigitalInput, public IntegerProducer {
   virtual void enable() override final;
 
  private:
-  int read_delay;
-  bool triggered;
+  int read_delay_;
+  bool triggered_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
@@ -95,8 +95,8 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
   void enable() override final;
 
  private:
-  uint read_delay;
-  volatile uint counter = 0;
+  uint read_delay_;
+  volatile uint counter_ = 0;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
