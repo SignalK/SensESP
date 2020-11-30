@@ -2,16 +2,17 @@
 
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "sensors/button.h"
-#include "sensors/load_controller.h"
+#include "sensors/digital_input.h"
+#include "sensors/digital_output.h"
 #include "controllers/smart_switch_controller.h"
 #include "signalk/signalk_listener.h"
 #include "signalk/signalk_output.h"
 #include "signalk/signalk_put_request_listener.h"
-#include "system/led_light.h"
+// #include "system/rgb_led.h"
 #include "transforms/debounce.h"
 #include "transforms/click_type.h"
 #include "transforms/repeat_report.h"
+#include "transforms/press_repeater.h"
 
 // This example implements a smart light switch which can control a load either via
 // a manual button press, or via Signal K PUT requests.
@@ -79,10 +80,10 @@ ReactESP app([]() {
 
   // Create a load controller to control the light (or other electrical load), 
   // and connect it up to an LED to show the current status on the switch...
-  LoadController* load_switch = new LoadController(PIN_RELAY);
-  load_switch->connect_to(new LEDLight(PIN_LED_R, PIN_LED_G, PIN_LED_B, 
-                                       config_path_status_light, 
-                                       LED_ON_COLOR, LED_OFF_COLOR));
+  auto* load_switch = new DigitalOutput(PIN_RELAY);
+  // load_switch->connect_to(new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B, 
+  //                                    config_path_status_light, 
+  //                                    LED_ON_COLOR, LED_OFF_COLOR));
 
 
   // Create a switch controller to handle the user press logic and 
@@ -92,9 +93,10 @@ ReactESP app([]() {
 
 
   // Connect a physical button that will feed manual click types into the controller...
-  Button* btn = new Button(PIN_BUTTON);
-  btn->connect_to(new Debounce(20, config_path_button_d))
-     ->connect_to(new ClickType(config_path_button_c))
+  DigitalInputValue* btn = new DigitalInputValue(PIN_BUTTON, INPUT, CHANGE, 100);
+  PressRepeater* pr = new PressRepeater();
+  btn->connect_to(pr);
+  pr->connect_to(new ClickType(config_path_button_c))
      ->connect_to(controller);
 
 
