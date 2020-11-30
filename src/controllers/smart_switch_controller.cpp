@@ -22,10 +22,10 @@ void SmartSwitchController::set_input(ClickTypes new_value, uint8_t input_channe
 
 void SmartSwitchController::set_input(String new_value, uint8_t input_channel) {
 
-    if (is_valid_true(new_value)) {
+    if (TextToTruth::is_valid_true(new_value)) {
         is_on = true;
     }
-    else if (is_valid_false(new_value)) {
+    else if (TextToTruth::is_valid_false(new_value)) {
         is_on = false;      
     }
     else {
