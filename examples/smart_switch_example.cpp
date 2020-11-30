@@ -70,7 +70,6 @@ ReactESP app([]() {
   // ALWAYS start with a forward slash if specified.  If left blank,
   // that indicates a sensor or transform does not have any
   // configuration to save.
-  const char* config_path_button_d = "/button/debounce";
   const char* config_path_button_c = "/button/clicktime";
   const char* config_path_status_light = "/button/statusLight";
   const char* config_path_sk_output = "/signalk/path";
