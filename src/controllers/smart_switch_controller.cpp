@@ -9,6 +9,11 @@ void SmartSwitchController::set_input(bool new_value, uint8_t input_channel) {
 
 void SmartSwitchController::set_input(ClickTypes new_value, uint8_t input_channel) {
 
+    if (!ClickType::is_click(new_value)) {
+        // Ignore button presses (we only want interpreted clicks)
+        return;
+    }
+
     if (new_value == ClickTypes::UltraLongSingleClick) {
         // Long clicks reboot the system...
         ESP.restart();
