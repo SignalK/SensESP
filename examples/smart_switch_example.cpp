@@ -57,7 +57,9 @@ ReactESP app([]() {
                     ->get_app();
 
 
-  // Define the SK Path you want to listen to and report on
+  // Define the SK Path that represents the load this device controls.
+  // This device will report its status on this path, as well as
+  // respond to PUT requests to change its status.
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html  
   const char* sk_path = "electrical.switches.lights.engineroom.state";
@@ -77,8 +79,10 @@ ReactESP app([]() {
 
 
 
-  // Create a load controller to control the light (or other electrical load), 
-  // and connect it up to an LED to show the current status on the switch...
+  // Create a digital output that is assumed to be connected to the
+  // control channel of a relay or a MOSFET that will control the
+  // electric light.  Also connect this pin's state to an LED to get
+  // a visual indicator of load's state. 
   auto* load_switch = new DigitalOutput(PIN_RELAY);
   // load_switch->connect_to(new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B, 
   //                                    config_path_status_light, 
@@ -101,17 +105,17 @@ ReactESP app([]() {
 
   // In addition to the manual button "click types", a 
   // SmartSwitchController accepts explicit state settings via 
-  // any boolean producer or various "truth" values in human readable 
+  // any boolean producer as well as any "truth" values in human readable 
   // format via a String producer.
   // Here, we set up a SignalK PUT request listener to handle
-  // requests made to the Signal K to set the switch state.
+  // requests made to the Signal K server to set the switch state.
   // This allows any device on the SignalK network that can make
   // such a request to also control the state of our switch.
   auto* sk_listener = new SKStringPutRequestListener(sk_path);
   sk_listener->connect_to(controller);
 
 
-  // Finally, specify that the load controller should report its status at regular
+  // Finally, specify that the load switch should report its status at regular
   // intervals back to the SignalK server...
   load_switch->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
              ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
