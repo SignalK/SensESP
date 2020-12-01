@@ -24,12 +24,14 @@ The release process is as follows:
 
    Remember to commit the results.
 
-3. Update the doxygen docs (first bump the version number in `Doxyfile`)
+3. Update the Doxygen docs (first bump the version number in `Doxyfile`). To
+   run Doxygen, you need to have Graphviz installed on your system. It is 
+   available on your favorite package manager on any Linux distribution or Mac.
 
     rm -rf docs/generated/docs/
     doxygen
 
-   Again, commit the results.
+   Again, commit the changes.
 
 4. Push the changes to your local fork.
 
