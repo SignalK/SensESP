@@ -1,13 +1,13 @@
 #include "debounce.h"
 
 template<class T>
-Debounce<T>::Debounce(int ms_min_delay, String config_path)
+DebounceTemplate<T>::DebounceTemplate(int ms_min_delay, String config_path)
     : SymmetricTransform<T>(config_path), ms_min_delay_{ms_min_delay} {
       interrupt_timer_ = 0;
 }
 
 template<class T>
-void Debounce<T>::set_input(T newValue, uint8_t inputChannel) {
+void DebounceTemplate<T>::set_input(T newValue, uint8_t inputChannel) {
   if (interrupt_timer_ > ms_min_delay_) {
     interrupt_timer_ = 0;
     this->emit(newValue);
@@ -15,7 +15,7 @@ void Debounce<T>::set_input(T newValue, uint8_t inputChannel) {
 }
 
 template<class T>
-void Debounce<T>::get_configuration(JsonObject& root) {
+void DebounceTemplate<T>::get_configuration(JsonObject& root) {
   root["min_delay"] = ms_min_delay_;
 }
 
@@ -27,10 +27,10 @@ static const char SCHEMA[] PROGMEM = R"###({
   })###";
 
 template<class T>
-String Debounce<T>::get_config_schema() { return FPSTR(SCHEMA); }
+String DebounceTemplate<T>::get_config_schema() { return FPSTR(SCHEMA); }
 
 template<class T>
-bool Debounce<T>::set_configuration(const JsonObject& config) {
+bool DebounceTemplate<T>::set_configuration(const JsonObject& config) {
   String expected[] = {"min_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
@@ -42,7 +42,7 @@ bool Debounce<T>::set_configuration(const JsonObject& config) {
 }
 
 // define all possible instances of a Debounce
-template class Debounce<bool>;
-template class Debounce<int>;
-template class Debounce<float>;
-template class Debounce<String>;
+template class DebounceTemplate<bool>;
+template class DebounceTemplate<int>;
+template class DebounceTemplate<float>;
+template class DebounceTemplate<String>;

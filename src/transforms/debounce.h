@@ -5,7 +5,7 @@
 #include <elapsedMillis.h>
 
 /**
- * @brief Debounce is a passthrough transform that will output a value only when
+ * @brief DebounceTemplate is a passthrough transform that will output a value only when
  * there is ms_min_delay milliseconds between inputs.
  *
  * @tparam T The type of value being passed through Debounce.
@@ -16,9 +16,9 @@
  * @param config_path The path for configuring ms_min_delay with the Config UI.
  */
 template<class T>
-class Debounce : public SymmetricTransform<T> {
+class DebounceTemplate : public SymmetricTransform<T> {
  public:
-  Debounce(int ms_min_delay = 200, String config_path = "");
+  DebounceTemplate(int ms_min_delay = 200, String config_path = "");
 
   virtual void set_input(T new_value, uint8_t input_channel = 0) override;
 
@@ -30,9 +30,10 @@ class Debounce : public SymmetricTransform<T> {
   virtual String get_config_schema() override;
 };
 
-typedef Debounce<bool> DebounceBool;
-typedef Debounce<int> DebounceInt;
-typedef Debounce<float> DebounceFloat;
-typedef Debounce<String> DebounceString;
+typedef DebounceTemplate<bool> DebounceBool;
+typedef DebounceTemplate<bool> Debounce; // for backward-compatibility with original class
+typedef DebounceTemplate<int> DebounceInt;
+typedef DebounceTemplate<float> DebounceFloat;
+typedef DebounceTemplate<String> DebounceString;
 
 #endif
