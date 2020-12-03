@@ -13,9 +13,9 @@ DebounceTemplate<T>::DebounceTemplate(int ms_min_delay, String config_path)
 template<class T>
 void DebounceTemplate<T>::set_input(T newValue, uint8_t inputChannel) {
   if (interrupt_timer_ > ms_min_delay_) {
-    interrupt_timer_ = 0;
     this->emit(newValue);
   }
+  interrupt_timer_ = 0;
 }
 
 template<class T>
