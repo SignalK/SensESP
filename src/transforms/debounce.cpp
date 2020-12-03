@@ -1,5 +1,9 @@
 #include "debounce.h"
 
+// Developers: this isn't an ideal implementation of a templated Transform.
+// See the limitations and suggestion solution in SensESP Issue #287.
+// https://github.com/SignalK/SensESP/issues/287
+
 template<class T>
 DebounceTemplate<T>::DebounceTemplate(int ms_min_delay, String config_path)
     : SymmetricTransform<T>(config_path), ms_min_delay_{ms_min_delay} {

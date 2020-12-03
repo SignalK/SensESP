@@ -4,6 +4,10 @@
 #include "transforms/transform.h"
 #include <elapsedMillis.h>
 
+// Developers: this isn't an ideal implementation of a templated Transform.
+// See the limitations and suggestion solution in SensESP Issue #287.
+// https://github.com/SignalK/SensESP/issues/287
+
 /**
  * @brief DebounceTemplate is a passthrough transform that will output a value only when
  * there is ms_min_delay milliseconds between inputs.
