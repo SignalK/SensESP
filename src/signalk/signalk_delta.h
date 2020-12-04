@@ -3,7 +3,7 @@
 
 #include <list>
 
-#include "ArduinoJson.h"
+#include <ArduinoJson.h>
 
 ///////////////////
 // Signal K delta message representation
@@ -23,7 +23,7 @@ class SKDelta {
   bool meta_sent_;
 
   // Adds Signal K meta data to the specified document
-  void add_metadata(DynamicJsonDocument& doc);
+  void add_metadata(JsonArray updates);
 };
 
 #endif

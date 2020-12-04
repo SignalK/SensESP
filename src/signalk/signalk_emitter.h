@@ -45,6 +45,9 @@ class SKEmitter : virtual public Observable {
       * @param timeout Tells the consumer how long it should consider the value valid. This value is specified in seconds.
       */
      Metadata(String display_name, String units = "", String description = "", String short_name = "", String timeout = "");
+
+     /// Default constructor creates a blank Metadata structure
+     Metadata() {}
   };
 
 
