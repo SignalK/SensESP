@@ -18,8 +18,18 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
  public:
   SKOutput() : SKOutput("") {}
 
-  SKOutput(String sk_path, String config_path = "")
-      : SKEmitter(sk_path), SymmetricTransform<T>(config_path) {
+  /**
+   * The constructor
+   * @param sk_path The Signal K path the output value of this transform is sent on
+   * @param config_path The optional configuration path that allows an end user to
+   *   change the configuration of this object. See the Configurable class for more information.
+   * @param meta Optional metadata that is associated with the value output by this class
+   *   A value specified here will cause the path's metadata to be emitted on the first
+   *   delta sent to the server. Use NULL if this path has no metadata to report (or
+   *   if the path is already an official part of the Signal K specification)
+   */
+  SKOutput(String sk_path, String config_path = "", SKEmitter::Metadata* meta = NULL)
+      : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
     Enable::set_priority(-5);
   }
 
@@ -49,6 +59,20 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
     this->set_sk_path(config["sk_path"].as<String>());
     return true;
   }
+
+  /**
+   * Used to set the optional metadata that is associated with
+   * the Signal K path this transform emits. This is a second
+   * method of setting the metadata (the first being a parameter
+   * to the constructor).
+   */
+  virtual void set_metadata(Metadata* meta) { this->meta_ = meta; }
+
+
+  virtual Metadata* get_metadata() override { return meta_; }
+
+  private:
+    SKEmitter::Metadata* meta_;
 };
 
 typedef SKOutput<float> SKOutputNumber;

@@ -20,6 +20,10 @@ class SKDelta {
   String hostname;
   unsigned int max_buffer_size;
   std::list<String> buffer;
+  bool meta_sent_;
+
+  // Adds Signal K meta data to the specified document
+  void add_metadata(DynamicJsonDocument& doc);
 };
 
 #endif
