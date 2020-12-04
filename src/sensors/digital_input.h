@@ -128,6 +128,7 @@ class DigitalInputChange : public DigitalInput, public IntegerProducer {
  private:
   uint read_delay_;
   bool triggered_;
+  uint8_t last_output_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

@@ -102,7 +102,8 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
     : DigitalInput(pin, pin_mode, interrupt_type, config_path),
       IntegerProducer(),
       read_delay_{read_delay},
-      triggered_{false} {
+      triggered_{false},
+      last_output_{0} {
     load_configuration();    
     }
 
@@ -112,12 +113,13 @@ void DigitalInputChange::enable() {
       output = digitalRead(pin_);
       triggered_ = true;
     });
-  // app.onTick was tried for this, but for some reason, it doesn't work.
-  // app.onRepeat() does work.
+  
+  
   app.onRepeat(read_delay_, [this](){
-      if (triggered_) {
+      if (triggered_ && output != last_output_) {
         noInterrupts();
         triggered_ = false;
+        last_output_ = output;
         interrupts();
         notify();
       }
