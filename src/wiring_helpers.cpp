@@ -44,7 +44,7 @@ void setup_fuel_flow_meter(int inflow_pin, int return_flow_pin) {
   auto* diff =
       new Difference(0.46 / 1e6, 0.46 / 1e6, "/fuelflow/fuel/rate/calibrate");
 
-  diff->connectFrom(freqIn, freqOut)
+  diff->connect_from(freqIn, freqOut)
       ->connect_to(new SKOutputNumber("propulsion.main.fuel.rate",
                                       "/fuelflow/fuel/rate/sk"))
       ->connect_to(new MovingAverage(
