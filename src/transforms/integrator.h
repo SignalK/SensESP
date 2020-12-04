@@ -11,12 +11,27 @@ static const char INTEGRATOR_SCHEMA[] PROGMEM = R"({
     }
   })";
 
-// y = k * sum(x_t)
-template <class T>
-class IntegratorT : public SymmetricTransform<T> {
+/**
+ * @brief Integrator integrates (accumulates) the incoming values.
+ * 
+ * The integrator output value is the sum of the all previous values plus
+ * the latest value, multiplied by the coefficient k.
+ * 
+ * @tparam C Consumer (incoming) data type
+ * @tparam P Producer (output) data type
+ */
+template <class C, class P>
+class IntegratorT : public Transform<C, P> {
  public:
-  IntegratorT(T k = 1, T value = 0, String config_path = "")
-      : SymmetricTransform<T>(config_path), k{k}, value{value} {
+  /**
+   * @brief Construct a new Integrator T object
+   * 
+   * @param k Multiplier coefficient
+   * @param value Initial value of the accumulator
+   * @param config_path Configuration path
+   */
+  IntegratorT(P k = 1, P value = 0, String config_path = "")
+      : Transform<C, P>(config_path), k{k}, value{value} {
     this->load_configuration();
   }
 
@@ -27,7 +42,7 @@ class IntegratorT : public SymmetricTransform<T> {
     // app.onRepeat(10000, [this](){ this->save_configuration(); });
   }
 
-  virtual void set_input(T input, uint8_t inputChannel = 0) override final {
+  virtual void set_input(C input, uint8_t inputChannel = 0) override final {
     value += input * k;
     this->emit(value);
   }
@@ -52,11 +67,11 @@ class IntegratorT : public SymmetricTransform<T> {
   virtual String get_config_schema() override { return FPSTR(INTEGRATOR_SCHEMA); }
 
  private:
-  T value = 0;
-  T k;
+  P value = 0;
+  P k;
 };
 
-typedef IntegratorT<float> Integrator;
-typedef IntegratorT<int> Accumulator;
+typedef IntegratorT<float, float> Integrator;
+typedef IntegratorT<int, int> Accumulator;
 
 #endif
