@@ -36,7 +36,7 @@ private:
 /**
  * A Typecast transform that takes as its
  * input an integer number, and outputs
- * booean TRUE if the number is non-zero.
+ * boolean TRUE if the number is non-zero.
  */
 class IntToBool : public Typecast<int, bool>
 {
@@ -46,7 +46,7 @@ public:
 };
 
 /**
- * A Typecast transform that takesa as its
+ * A Typecast transform that takes as its
  * input a boolean value, and outputs "1"
  * if it is true, and "0" if it is false.
  */
