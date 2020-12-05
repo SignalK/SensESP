@@ -30,9 +30,9 @@ class RgbLed : public Configurable,
    * @param led_r_pin the digital output pin that controls the red element of
    *   an RGB LED.  Specify -1 if there is no red channel connected.
    * @param led_g_pin the digital output pin that controls the green element of
-   *   an RGB LED. Specify -1 if there is no red channel connected.
+   *   an RGB LED. Specify -1 if there is no green channel connected.
    * @param led_b_pin the digital output pin that controls the blue element of
-   *   an RGB LED. Specify -1 if there is no red channel connected.
+   *   an RGB LED. Specify -1 if there is no blue channel connected.
    * @param config_path The configuration path to use to load and save the
    *   user configurable values of this device. Use BLANK if this device
    *   can not have user configurable values.
