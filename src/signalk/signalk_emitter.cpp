@@ -2,9 +2,9 @@
 
 std::vector<SKEmitter*> SKEmitter::sources;
 
-SKEmitter::Metadata::Metadata(String display_name, String units, String description, String short_name, String timeout) :
-   display_name_{display_name},
+SKEmitter::Metadata::Metadata(String units, String display_name, String description, String short_name, String timeout) :
    units_{units},
+   display_name_{display_name},
    description_{description},
    short_name_{short_name},
    timeout_{timeout} {
