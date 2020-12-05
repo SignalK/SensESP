@@ -9,9 +9,9 @@ RgbLed::RgbLed(int led_r_pin, int led_g_pin, int led_b_pin, String config_path,
       led_off_rgb_{led_off_rgb},
       common_anode_{common_anode} {
 
-  led_r_channel_ = PWMOutput::assign_channel(led_r_pin);
-  led_g_channel_ = PWMOutput::assign_channel(led_g_pin);
-  led_b_channel_ = PWMOutput::assign_channel(led_b_pin);
+  led_r_channel_ = (led_r_pin < 0) ? -1 : PWMOutput::assign_channel(led_r_pin);
+  led_g_channel_ = (led_g_pin < 0) ? -1 : PWMOutput::assign_channel(led_g_pin);
+  led_b_channel_ = (led_b_pin < 0) ? -1 : PWMOutput::assign_channel(led_b_pin);
 
   this->load_configuration();
 }
@@ -37,12 +37,21 @@ static float get_pwm(long rgb, int shift_right, bool common_anode) {
 
 
 void RgbLed::set_input(long new_value, uint8_t input_channel) {
-  float r = get_pwm(new_value, 16, common_anode_);
-  float g = get_pwm(new_value, 8, common_anode_);
-  float b = get_pwm(new_value, 0, common_anode_);
-  PWMOutput::set_pwm(led_r_channel_, r);
-  PWMOutput::set_pwm(led_g_channel_, g);
-  PWMOutput::set_pwm(led_b_channel_, b);
+
+  if (led_r_channel_ >= 0) {
+     float r = get_pwm(new_value, 16, common_anode_);
+     PWMOutput::set_pwm(led_r_channel_, r);
+  }
+
+  if (led_g_channel_ >= 0) {
+     float g = get_pwm(new_value, 8, common_anode_);
+     PWMOutput::set_pwm(led_g_channel_, g);
+  }
+
+  if (led_b_channel_ >= 0) {
+     float b = get_pwm(new_value, 0, common_anode_);
+     PWMOutput::set_pwm(led_b_channel_, b);
+  }
 }
 
 
