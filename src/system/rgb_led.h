@@ -6,9 +6,9 @@
 
 /**
  * RgbLed is a special device object that can be used to control
- * a multi-channel color rgb LED light using up to 3 digital output 
+ * a multi-channel color rgb LED light using up to 3 digital output
  * channels. A "color" is defined using the standard 24 bit color
- * depth numbers composed of three 8 bit channels for Red, Green, 
+ * depth numbers composed of three 8 bit channels for Red, Green,
  * and Blue (see https://techterms.com/definition/rgb)
  * <p>Color LEDs can be controlled by either setting the specific
  * color to be displayed via the set_input(long), or by setting the
@@ -16,7 +16,7 @@
  * via the the bool input, the default ON or OFF colors specified in the
  * constructor are used.
  * <p>You do not have to define all three channels (for example, if
- * you are short on output pins, or if you happen to be using a 
+ * you are short on output pins, or if you happen to be using a
  * two channel color led). Specify -1 for any pin for that channel
  * to be ignored. The color values used still have to adhere to
  * the 24 bit color definition however.
@@ -44,10 +44,9 @@ class RgbLed : public Configurable,
    *   (which inverts the PWM signal to obtain the necessary color). FALSE
    *   if the led is a common cathode
    */
-  RgbLed(int led_r_pin=-1, int led_g_pin=-1, int led_b_pin=-1, String config_path = "",
-         long led_on_rgb = 0x00FF00, long led_off_rgb = 0xFF0000,
-         bool common_anode = true);
-
+  RgbLed(int led_r_pin = -1, int led_g_pin = -1, int led_b_pin = -1,
+         String config_path = "", long led_on_rgb = 0x00FF00,
+         long led_off_rgb = 0xFF0000, bool common_anode = true);
 
   /**
    * Used to set the current display state of the LED.
