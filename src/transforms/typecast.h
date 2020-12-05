@@ -26,7 +26,7 @@ class Typecast : public LambdaTransform<IN, OUT>
 {
 
 public:
-    Typecast(OUT (*cast)(IN input) =
+    Typecast(std::function<OUT (IN)> cast =
        [](IN input) -> OUT { return (OUT)input; } ) : LambdaTransform<IN, OUT>(cast) {}
 };
 

@@ -67,7 +67,7 @@ template <class IN, class OUT, class P1 = bool, class P2 = bool,
           class P6 = bool>
 class LambdaTransform : public Transform<IN, OUT> {
  public:
-  LambdaTransform(OUT (*function)(IN input), String config_path = "")
+  LambdaTransform(std::function<OUT (IN)> function, String config_path = "")
       : Transform<IN, OUT>(config_path), function0{function}, num_params{0} {
     this->load_configuration();
   }
