@@ -15,18 +15,20 @@ class AnalogInput : public NumericSensor {
    *
    * @param[in] pin The GPIO pin to read. On ESP8266, always A0. On ESP32, at
    * the moment only ADC channel 1 (pins 32..39) is supported.
-   * 
+   *
    * @param[in] read_delay Time delay between consecutive readings, in ms
-   * 
+   *
    * @param[in] config_path Configuration path for the sensor
-   * 
-   * @param[in] output_scale The maximum scale of the output. The default is 1024,
-   * which is typical for Arduino AnalogInput pins. (Because of the way this has
-   * been implemented in SensESP, the default for ESP32 is also 1024.) If you want
-   * your output to be on a different scale (i.e., something other than 0 - 1023),
-   * use this parameter to indicate the X in the `0 - X` scale. For example, if you
-   * want your output to be expressed as a percentage (0 to 100), make this parameter
-   * be 100.
+   *
+   * @param[in] output_scale The scale of the converted input value that
+   * AnalogInput produces. The maximum raw analog value returned by an ESP8266
+   * and an ESP32 are different, but AnalogInput takes that into account by
+   * converting them to a number between zero and 'output_scale'. This allows
+   * the same code to run on both platforms. The default value for
+   * 'output_scale' is 1024, which means output will be from 0 to 1023. If you
+   * want your output to be on a different scale, use this parameter to indicate
+   * the X in the `0 to X` scale. For example, if you want your output to be
+   * expressed as a percentage (0 to 100), make this parameter be 100.
    */
   AnalogInput(uint8_t pin = A0, uint read_delay = 200, String config_path = "",
               float output_scale = 1024.);
