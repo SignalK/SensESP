@@ -82,6 +82,17 @@ ReactESP app([]() {
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "electrical.alternators.12V.temperature";
 
+  // If you are creating a new Signal K path that does not
+  // already exist in the specification, it is best to
+  // define "metadata" that describes your new value. This
+  // metadata will be reported to the server upon the first
+  // time your sensor reports its value(s) to the server
+  SKEmitter::Metadata* metadata = new SKEmitter::Metadata();
+  metadata->display_name_ = "Alternator Temperature";
+  metadata->short_name_ = "Alt Temp";
+  metadata->units_ = "K";
+
+
   /*
   Connecting a physical temperature sender to the MCU involves using a "voltage
   divider" circuit. A resistor (R1) is connected to the voltage output of the
@@ -151,7 +162,7 @@ ReactESP app([]() {
       ->connect_to(new VoltageDividerR2(R1, Vin, "/12V_alternator/temp/sender"))
       ->connect_to(new TemperatureInterpreter("/12V_alternator/temp/curve"))
       ->connect_to(new Linear(1.0, 0.0, "/12V_alternator/temp/calibrate"))
-      ->connect_to(new SKOutputNumber(sk_path, "/12V_alternator/temp/sk"));
+      ->connect_to(new SKOutputNumber(sk_path, "/12V_alternator/temp/sk", metadata));
 
   // Start the SensESP application running, which simply activates everything
   // that's been set up above

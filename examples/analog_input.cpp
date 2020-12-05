@@ -60,7 +60,7 @@ ReactESP app([]() {
   // Wire up the output of the analog input to the Linear transform,
   // and then output the results to the Signal K server.
   analog_input->connect_to(new Linear(multiplier, offset, linear_config_path))
-      ->connect_to(new SKOutputNumber(sk_path));
+      ->connect_to(new SKOutputNumber(sk_path, "", new SKEmitter::Metadata("ratio")));
 
   // Start the SensESP application running
   sensesp_app->enable();
