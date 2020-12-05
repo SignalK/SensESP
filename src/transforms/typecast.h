@@ -7,13 +7,13 @@
 
 /**
  * Typecast is a transform that allows you to convert from one
- * data type to another. To use Typecast, simply constructor
+ * data type to another. To use Typecast, simply construct
  * a new instance, passing in a lambda function that takes
  * as its input a value of type "IN" and returns the
  * value as an "OUT".
  * <p>The two most common typecasts one might use in
  * SensESP (bool to int, and int to bool) have been pre-defined
- * for easier user.
+ * for easier use.
  * @see IntToBool
  * @see BoolToInt
  */
