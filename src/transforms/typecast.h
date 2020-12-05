@@ -9,7 +9,7 @@
  * Typecast is a transform that allows you to convert from one
  * data type to another. To use Typecast, simply construct
  * a new instance of Typecast.
- * <p>If the data type of IN is capable for doing
+ * <p>If the data type of IN is capable of doing
  * a typecast to OUT on its own (i.e. C++ has an implicit
  * conversion available, or IN defines a overloaded
  * typecast operator for OUT), then no additional
@@ -18,6 +18,8 @@
  * you are looking for), then you must pass in a
  * lambda expression that is capable of doing the
  * conversion explicitly.
+ * @tparam The data type the typecast accepts as input
+ * @tparam The data type the typecast outputs after conversion
  */
 template <typename IN, typename OUT>
 class Typecast : public LambdaTransform<IN, OUT>
