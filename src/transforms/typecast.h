@@ -56,4 +56,45 @@ public:
     BoolToInt();
 };
 
+/**
+ * A Typecast transform that takes as its
+ * input an integer number, and outputs
+ * it as a float
+ */
+class IntToFloat : public Typecast<int, float>
+{
+
+public:
+    IntToFloat();
+};
+
+
+/**
+ * A Typecast transform that takes as its
+ * input a float number, and outputs
+ * it as an int. Note that if the float
+ * contains a fractional part, it will
+ * be truncated and not rounded.
+ */
+class FloatToInt : public Typecast<float, int>
+{
+
+public:
+    FloatToInt();
+};
+
+
+/**
+ * A Typecast transform that takes as its
+ * input a float number, and rounds it to
+ * the nearest whole number, then outputs
+ * it as an int. 
+ */
+class RoundToInt : public Typecast<float, int>
+{
+
+public:
+    RoundToInt();
+};
+
 #endif
