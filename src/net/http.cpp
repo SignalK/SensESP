@@ -175,10 +175,12 @@ void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
 }
 
 void HTTPServer::handle_config_list(AsyncWebServerRequest* request) {
+  // to save memory, guesstimate the required output buffer size based
+  // on the number of elements
+  auto output_buffer_size = 200 * configurables.size();
   AsyncResponseStream* response =
       request->beginResponseStream("application/json");
-  DynamicJsonDocument json_doc(1024);
-  // JsonObject root = json_doc.as<JsonObject>();
+  DynamicJsonDocument json_doc(output_buffer_size);
   JsonArray arr = json_doc.createNestedArray("keys");
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     arr.add(it->first);
