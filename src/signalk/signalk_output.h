@@ -28,7 +28,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    *   delta sent to the server. Use NULL if this path has no metadata to report (or
    *   if the path is already an official part of the Signal K specification)
    */
-  SKOutput(String sk_path, String config_path = "", SKEmitter::Metadata* meta = NULL)
+  SKOutput(String sk_path, String config_path = "", SKMetadata* meta = NULL)
       : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
     Enable::set_priority(-5);
   }
@@ -66,13 +66,13 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    * method of setting the metadata (the first being a parameter
    * to the constructor).
    */
-  virtual void set_metadata(Metadata* meta) { this->meta_ = meta; }
+  virtual void set_metadata(SKMetadata* meta) { this->meta_ = meta; }
 
 
-  virtual Metadata* get_metadata() override { return meta_; }
+  virtual SKMetadata* get_metadata() override { return meta_; }
 
   private:
-    SKEmitter::Metadata* meta_;
+    SKMetadata* meta_;
 };
 
 typedef SKOutput<float> SKOutputNumber;
