@@ -13,7 +13,7 @@
 #include "sensors/digital_input.h"
 #include "sensors/system_info.h"
 #include "signalk/signalk_output.h"
-#include "system/led_controller.h"
+#include "system/system_status_led.h"
 #include "system/spiffs_storage.h"
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
@@ -95,7 +95,7 @@ void SensESPApp::setup() {
   // create controllers and connect them to their data sources
 
   if (visual_output_controllers.empty()) {
-    visual_output_controllers.push_front(new LedController(LED_PIN));
+    visual_output_controllers.push_front(new SystemStatusLed(LED_PIN));
   }
   for (auto controller : visual_output_controllers) {
     this->networking->connect_to(controller);
