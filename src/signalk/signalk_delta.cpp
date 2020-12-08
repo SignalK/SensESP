@@ -21,10 +21,6 @@ bool SKDelta::data_available() { return buffer.size() > 0; }
 void SKDelta::get_delta(String& output) {
   DynamicJsonDocument jsonDoc(1024);
 
-  if (!meta_sent_) {
-    this->add_metadata(jsonDoc);
-  }
-
   // JsonObject delta = jsonDoc.as<JsonObject>();
   JsonArray updates = jsonDoc.createNestedArray("updates");
 
