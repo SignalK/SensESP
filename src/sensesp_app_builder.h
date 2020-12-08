@@ -38,7 +38,7 @@ class SensESPAppBuilder {
     app->set_preset_hostname(hostname);
     return this;
   }
-  SensESPAppBuilder* add_visual_controller(VisualOutputController* controller) {
+  SensESPAppBuilder* add_visual_controller(SystemStatusConsumer* controller) {
     app->visual_output_controllers.push_front(controller);
     return this;
   }

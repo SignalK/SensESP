@@ -2,14 +2,14 @@
 #define _LED_CONTROLLER_H_
 
 #include "led_blinker.h"
-#include "controllers/visual_output_controller.h"
+#include "controllers/system_status_consumer.h"
 
 /**
  * LedController consumes the networking and websocket states and delta counts
  * and updates the device LED accordingly. Inherit this class and override
  * the methods to customize the behavior.
  */
-class LedController : public VisualOutputController {
+class LedController : public SystemStatusConsumer {
  protected:
   PatternBlinker* blinker;
 

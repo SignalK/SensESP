@@ -1,18 +1,17 @@
-#ifndef _VISUAL_OUTPUT_CONTROLLER_H_
-#define _VISUAL_OUTPUT_CONTROLLER_H_
+#ifndef _SYSTEM_STATUS_CONSUMER_H_
+#define _SYSTEM_STATUS_CONSUMER_H_
 
 #include "net/networking.h"
 #include "net/ws_client.h"
 #include "system/valueconsumer.h"
 
 /**
- * An abstract base class for a subsystem providing visual feedback on
- * the system state. May be subclassed to implement e.g. a blinking LED or
- * a display.
+ * An interface for a subsystem providing feedback on the system state.
+ * May be subclassed to implement e.g. a blinking LED or a display.
  */
-class VisualOutputController : public ValueConsumer<WifiState>,
-                               public ValueConsumer<WSConnectionState>,
-                               public ValueConsumer<int> {
+class SystemStatusConsumer : public ValueConsumer<WifiState>,
+                             public ValueConsumer<WSConnectionState>,
+                             public ValueConsumer<int> {
  public:
   // ValueConsumer interface for ValueConsumer<WifiState> (Networking object
   // state updates)

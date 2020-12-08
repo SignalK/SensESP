@@ -23,7 +23,7 @@
 #include "system/observablevalue.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
-#include "controllers/visual_output_controller.h"
+#include "controllers/system_status_consumer.h"
 
 enum StandardSensors {
   NONE,
@@ -139,7 +139,7 @@ class SensESPApp {
                               StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server;
-  std::forward_list<VisualOutputController*> visual_output_controllers;
+  std::forward_list<SystemStatusConsumer*> visual_output_controllers;
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;
@@ -149,7 +149,7 @@ class SensESPApp {
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
-  friend class VisualOutputController;
+  friend class SystemStatusConsumer;
 };
 
 extern SensESPApp* sensesp_app;
