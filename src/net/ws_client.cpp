@@ -100,6 +100,7 @@ void WSClient::on_error() {
 
 void WSClient::on_connected(uint8_t* payload) {
   this->connection_state = kWSConnected;
+  this->sk_delta->reset_meta_send();
   debugI("Websocket client connected to URL: %s\n", payload);
   debugI("Subscribing to Signal K listeners...");
   this->subscribe_listeners();

@@ -59,11 +59,11 @@ class Transform : public TransformBase,
    * of this transform to then be wired to other transforms via
    * a call to connect_to().
    */
-  Transform<C, P>* connectFrom(ValueProducer<P>* producer0,
-                               ValueProducer<P>* producer1 = NULL,
-                               ValueProducer<P>* producer2 = NULL,
-                               ValueProducer<P>* producer3 = NULL,
-                               ValueProducer<P>* producer4 = NULL) {
+  Transform<C, P>* connect_from(ValueProducer<P>* producer0,
+                                ValueProducer<P>* producer1 = NULL,
+                                ValueProducer<P>* producer2 = NULL,
+                                ValueProducer<P>* producer3 = NULL,
+                                ValueProducer<P>* producer4 = NULL) {
     this->ValueConsumer<C>::connect_from(producer0);
     if (producer1 != NULL) {
       this->ValueConsumer<C>::connect_from(producer1, 1);
@@ -79,11 +79,21 @@ class Transform : public TransformBase,
     }
     return this;
   }
+
+  // deprecated! use connect_from instead
+  Transform<C, P>* connectFrom(ValueProducer<P>* producer0,
+                               ValueProducer<P>* producer1 = NULL,
+                               ValueProducer<P>* producer2 = NULL,
+                               ValueProducer<P>* producer3 = NULL,
+                               ValueProducer<P>* producer4 = NULL) {
+    return this->connect_from(producer0, producer1, producer2, producer3,
+                              producer4);
+  }
 };
 
 /**
- * A SymmetricTransform is a common type of transform that consumes, transforms,
- * then outputs values of the same data type.
+ * A SymmetricTransform is a common type of transform that consumes,
+ * transforms, then outputs values of the same data type.
  */
 template <typename T>
 class SymmetricTransform : public Transform<T, T> {
