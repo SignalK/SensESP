@@ -35,7 +35,7 @@ void SetupSerialDebug(uint32_t baudrate) {
   debugI("\nSerial debug enabled");
 }
 
-static char* permission_strings[] = {"readonly", "readwrite", "admin"};
+static const char* permission_strings[] = {"readonly", "readwrite", "admin"};
 
 /*
  * This constructor must be only used in SensESPAppBuilder
