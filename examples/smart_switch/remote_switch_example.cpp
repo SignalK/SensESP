@@ -15,7 +15,7 @@
 #include "transforms/repeat_report.h"
 #include "transforms/press_repeater.h"
 
-// This example implements a virtual switch that can remotely control the
+// This example implements a remote switch that can remotely control the
 // smart switch created in smart_switch_example.cpp 
 
 #ifdef ESP32
@@ -93,7 +93,7 @@ ReactESP app([]() {
 
 
   // Connect a physical button that will feed manual click types into the controller...
-  DigitalInputValue* btn = new DigitalInputValue(PIN_BUTTON, INPUT, CHANGE, 100);
+  DigitalInputState* btn = new DigitalInputState(PIN_BUTTON, INPUT, CHANGE, 100);
   PressRepeater* pr = new PressRepeater();
   btn->connect_to(pr);
   pr->connect_to(new ClickType(config_path_button_c))
