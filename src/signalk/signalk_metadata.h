@@ -24,7 +24,7 @@ class SKMetadata {
 
   /**
    * @param units The unit of measurement the value represents. See
-   * https://github.com/SignalK/specification/blob/de83f65f0144bacde665be547d08eb9a12c70212/schemas/definitions.json#L82
+   * https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
    * @param display_name This is used on or near any display or gauge which
    * shows the data.
    * @param description This is the description for the Signal K path and must

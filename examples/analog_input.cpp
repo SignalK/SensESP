@@ -62,7 +62,7 @@ ReactESP app([]() {
   // that output, send some metadata to indicate that the "units"
   // of the value we are sending is a "ratio" - which is the official
   // unit type for a percentage represented as a float between 0.0 and 1.0
-  // See https://github.com/SignalK/specification/blob/de83f65f0144bacde665be547d08eb9a12c70212/schemas/definitions.json#L82
+  // See https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
   // for more details.
   analog_input->connect_to(new Linear(multiplier, offset, linear_config_path))
       ->connect_to(new SKOutputNumber(sk_path, "", new SKMetadata("ratio")));
