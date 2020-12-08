@@ -1,5 +1,7 @@
 #include "observable.h"
 
+Observable::Observable(Observable&& other) : observers{other.observers} {}
+
 void Observable::notify() {
   for (auto o : observers) {
     o();
