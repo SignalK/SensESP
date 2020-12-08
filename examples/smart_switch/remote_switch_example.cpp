@@ -89,7 +89,7 @@ ReactESP app([]() {
   controller->connect_to(new SKBooleanPutRequest(sk_path));
 
   // Also connect the controller to an onboard LED...
-  //  controller->connect_to(led);
+  controller->connect_to(led);
 
 
   // Connect a physical button that will feed manual click types into the controller...
