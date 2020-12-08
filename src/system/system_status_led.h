@@ -2,7 +2,7 @@
 #define _LED_CONTROLLER_H_
 
 #include "led_blinker.h"
-#include "controllers/system_status_consumer.h"
+#include "system/system_status_consumer.h"
 
 /**
  * SystemStatusLed consumes the networking and websocket states and delta counts

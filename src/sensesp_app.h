@@ -23,7 +23,7 @@
 #include "system/observablevalue.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
-#include "controllers/system_status_consumer.h"
+#include "system/system_status_consumer.h"
 
 enum StandardSensors {
   NONE,
