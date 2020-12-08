@@ -96,7 +96,7 @@ ReactESP app([]() {
 
 
   // Connect a physical button that will feed manual click types into the controller...
-  DigitalInputValue* btn = new DigitalInputValue(PIN_BUTTON, INPUT, CHANGE, 100);
+  DigitalInputState* btn = new DigitalInputState(PIN_BUTTON, INPUT, CHANGE, 100);
   PressRepeater* pr = new PressRepeater();
   btn->connect_to(pr);
   pr->connect_to(new ClickType(config_path_button_c))
@@ -115,8 +115,13 @@ ReactESP app([]() {
   sk_listener->connect_to(controller);
 
 
-  // Finally, specify that the load switch should report its status at regular
-  // intervals back to the SignalK server...
+  // Finally, connect the load switch to an SKOutput so it reports its state 
+  // to the Signal K server.  Since the load switch only reports its state 
+  // whenever it changes (and switches like light switches change infrequently), 
+  // send it through a `RepeatReport` transform, which will cause the state 
+  // to be reported to the server every 10 seconds, regardless of whether 
+  // or not it has changed.  That keeps the value on the server fresh and 
+  // lets the server know the switch is still alive.
   load_switch->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
              ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
 
