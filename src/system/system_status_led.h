@@ -1,15 +1,15 @@
 #ifndef _LED_CONTROLLER_H_
 #define _LED_CONTROLLER_H_
 
+#include "controllers/system_status_controller.h"
 #include "led_blinker.h"
-#include "system/system_status_consumer.h"
 
 /**
  * SystemStatusLed consumes the networking and websocket states and delta counts
  * and updates the device LED accordingly. Inherit this class and override
  * the methods to customize the behavior.
  */
-class SystemStatusLed : public SystemStatusConsumer {
+class SystemStatusLed : public SystemStatusController {
  protected:
   PatternBlinker* blinker;
 
@@ -26,16 +26,10 @@ class SystemStatusLed : public SystemStatusConsumer {
  public:
   SystemStatusLed(int pin);
 
-  // ValueConsumer interface for ValueConsumer<WifiState> (Networking object
-  // state updates)
   virtual void set_input(WifiState new_value,
                          uint8_t input_channel = 0) override;
-  // ValueConsumer interface for ValueConsumer<WSConnectionState>
-  // (WSClient object state updates)
   virtual void set_input(WSConnectionState new_value,
                          uint8_t input_channel = 0) override;
-  // ValueConsumer interface for ValueConsumer<int> (delta count producer
-  // updates)
   virtual void set_input(int new_value, uint8_t input_channel = 0) override;
 };
 
