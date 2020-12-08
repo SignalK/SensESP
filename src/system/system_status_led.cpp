@@ -42,7 +42,7 @@ void SystemStatusLed::set_wifi_disconnected() {
 void SystemStatusLed::set_wifi_connected() {
   blinker->set_pattern(wifi_connected_pattern);
 }
-void SystemStatusLed::set_wifimanager() {
+void SystemStatusLed::set_wifimanager_activated() {
   blinker->set_pattern(wifimanager_pattern);
 }
 void SystemStatusLed::set_ws_disconnected() {
@@ -72,7 +72,7 @@ void SystemStatusLed::set_input(WifiState new_value, uint8_t input_channel) {
       this->set_wifi_connected();
       break;
     case kExecutingWifiManager:
-      this->set_wifimanager();
+      this->set_wifimanager_activated();
       break;
     default:
       this->set_wifi_disconnected();

@@ -16,7 +16,7 @@ class SystemStatusLed : public SystemStatusController {
   virtual void set_wifi_no_ap();
   virtual void set_wifi_disconnected();
   virtual void set_wifi_connected();
-  virtual void set_wifimanager();
+  virtual void set_wifimanager_activated();
 
   virtual void set_ws_disconnected();
   virtual void set_ws_authorizing();

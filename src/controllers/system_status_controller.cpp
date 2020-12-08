@@ -15,7 +15,7 @@ void SystemStatusController::set_input(WifiState new_value,
       this->set_wifi_connected();
       break;
     case kExecutingWifiManager:
-      this->set_wifimanager();
+      this->set_wifimanager_activated();
       break;
     default:
       this->set_wifi_disconnected();
