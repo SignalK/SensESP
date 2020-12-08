@@ -6,7 +6,12 @@
 /**
  * @brief Holds Signal K meta data that is associated with
  * the sk_path an SKEmitter class may optionally send to the server.
- * Note that this structure is a subset of the complete meta model.
+ * According to the official Signal K specification: "All keys in the Signal K 
+ * specification must have a `description`, and where the key is a numeric value 
+ * it must have `units`". Thus, any paths that you output that are not
+ * already part of the official Signal K specification should have these
+ * two fields defined as metadata.
+ * <p>Note that this structure is a subset of the complete meta model.
  * These are the most common properties. More complex strctures
  * can be created by creating a descendant class of SKMetadata and
  * overriding add_entry()

@@ -88,6 +88,7 @@ ReactESP app([]() {
   // metadata will be reported to the server upon the first
   // time your sensor reports its value(s) to the server
   SKMetadata* metadata = new SKMetadata();
+  metadata->description_ = "Alternator Temperature";
   metadata->display_name_ = "Alternator Temperature";
   metadata->short_name_ = "Alt Temp";
   metadata->units_ = "K";
