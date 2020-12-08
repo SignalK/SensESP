@@ -45,9 +45,9 @@ class ClickType : public Transform<bool, ClickTypes> {
    * than long_click_delay
    *
    */
-  ClickType(String config_path = "", long long_click_delay = 1300,
-            long double_click_interval = 400,
-            long ultra_long_click_delay = 5000);
+  ClickType(String config_path = "", uint16_t long_click_delay = 1300,
+            uint16_t double_click_interval = 400,
+            uint16_t ultra_long_click_delay = 5000);
 
   /**
    * Returns TRUE if the specified value is one of the higher level click
@@ -71,15 +71,15 @@ class ClickType : public Transform<bool, ClickTypes> {
 
   /// How many milliseconds a button is pressed to distinguish between
   /// a normal SingleClick and a LongSingleClick
-  long long_click_delay;
+  uint16_t long_click_delay;
 
   /// How many milliseoncs a button is pressed to distinguish between
   /// a normal SingleClick and an UltraLongSingleClick
-  long ultra_long_click_delay;
+  uint16_t ultra_long_click_delay;
 
   /// The maximum number of milliseconds that can pass before two
   /// clicks in a row are combined into a single DoubleClick
-  long double_click_interval;
+  uint16_t double_click_interval;
 
   /// Timmer to time button presses
   elapsedMillis press_duration;
