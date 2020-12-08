@@ -58,7 +58,12 @@ ReactESP app([]() {
   const float offset = -16.44;
 
   // Wire up the output of the analog input to the Linear transform,
-  // and then output the results to the Signal K server.
+  // and then output the results to the Signal K server. As part of
+  // that output, send some metadata to indicate that the "units"
+  // of the value we are sending is a "ratio" - which is the official
+  // unit type for a percentage represented as a float between 0.0 and 1.0
+  // See https://github.com/SignalK/specification/blob/de83f65f0144bacde665be547d08eb9a12c70212/schemas/definitions.json#L82
+  // for more details.
   analog_input->connect_to(new Linear(multiplier, offset, linear_config_path))
       ->connect_to(new SKOutputNumber(sk_path, "", new SKMetadata("ratio")));
 
