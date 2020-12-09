@@ -81,7 +81,9 @@ void WSClient::connect_loop() {
 }
 
 void WSClient::on_disconnected() {
-  if (this->connection_state == kWSConnecting && server_detected) {
+  if (this->connection_state == kWSConnecting && 
+      server_detected && 
+      !token_test_success) {
     // Going from connecting directly to disconnect when we
     // know we have found and talked to the server usually means
     // the authentication token is bad.
@@ -254,48 +256,68 @@ bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
 }
 
 void WSClient::connect() {
+  debugI("WSClient connect attempt (state=%d)", connection_state.get());
+
   if (connection_state != kWSDisconnected) {
     return;
   }
-  debugD("Initiating connection");
 
-  connection_state = kWSAuthorizing;
+  if (WiFi.isConnected()) {
+    debugD("Initiating connection");
 
-  String server_address = this->server_address;
-  uint16_t server_port = this->server_port;
+    connection_state = kWSAuthorizing;
 
-  if (this->server_address.isEmpty()) {
-    if (!get_mdns_service(server_address, server_port)) {
-      debugE("No Signal K server found in network when using mDNS service!");
+    String server_address = this->server_address;
+    uint16_t server_port = this->server_port;
+
+    if (this->server_address.isEmpty()) {
+      if (!get_mdns_service(server_address, server_port)) {
+        debugE("No Signal K server found in network when using mDNS service!");
+      } else {
+        debugI("Signal K server has been found at address %s:%d by mDNS.",
+              server_address.c_str(), server_port);
+      }
+    }
+
+    if (!server_address.isEmpty() && server_port > 0) {
+      debugD("Websocket is connecting to Signal K server on address %s:%d",
+            server_address.c_str(), server_port);
     } else {
-      debugI("Signal K server has been found at address %s:%d by mDNS.",
-             server_address.c_str(), server_port);
+      // host and port not defined - wait for mDNS
+      connection_state = kWSDisconnected;
+      return;
+    }
+
+    if (this->polling_href != "") {
+      // existing pending request
+      this->poll_access_request(server_address, server_port, this->polling_href);
+      return;
+    }
+
+    if (this->auth_token == NULL_AUTH_TOKEN) {
+      // initiate HTTP authentication
+      debugD("No prior authorization token present.");
+      this->send_access_request(server_address, server_port);
+      return;
+    }
+
+    if (!token_test_success) {
+      // Test the validity of the authorization token for the first time...
+      this->test_token(server_address, server_port);
+    } else {
+      // The token has already been validated once,
+      // so we must be trying a subsequent reconnect.
+      // Jump directly to opening up the websocket...
+      server_detected = true;
+      this->connect_ws(server_address, server_port);
     }
   }
-
-  if (!server_address.isEmpty() && server_port > 0) {
-    debugD("Websocket is connecting to Signal K server on address %s:%d",
-           server_address.c_str(), server_port);
-  } else {
-    // host and port not defined - wait for mDNS
-    connection_state = kWSDisconnected;
-    return;
+  else {
+      debugI("WiFi is disconnected. SignalK client connection will connect when "
+             "WiFi is connected.");
   }
-
-  if (this->polling_href != "") {
-    // existing pending request
-    this->poll_access_request(server_address, server_port, this->polling_href);
-    return;
-  }
-
-  if (this->auth_token == NULL_AUTH_TOKEN) {
-    // initiate HTTP authentication
-    debugD("No prior authorization token present.");
-    this->send_access_request(server_address, server_port);
-    return;
-  }
-  this->test_token(server_address, server_port);
 }
+
 
 void WSClient::test_token(const String server_address,
                           const uint16_t server_port) {
@@ -324,6 +346,7 @@ void WSClient::test_token(const String server_address,
       // our token is valid, go ahead and connect
       debugD("Attempting to connect to Signal K Websocket...");
       server_detected = true;
+      token_test_success = true;
       this->connect_ws(server_address, server_port);
     } else if (httpCode == 401) {
       this->client_id = "";
