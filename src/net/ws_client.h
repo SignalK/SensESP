@@ -8,12 +8,12 @@
 #include "sensesp.h"
 #include "signalk/signalk_delta.h"
 #include "system/configurable.h"
-#include "system/valueproducer.h"
 #include "system/observablevalue.h"
+#include "system/valueproducer.h"
 
 static const char* NULL_AUTH_TOKEN = "";
 
-enum WSConnectionState {
+enum class WSConnectionState {
   kWSDisconnected,
   kWSAuthorizing,
   kWSConnecting,
@@ -58,7 +58,9 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
    * Return a delta update ValueProducer that produces the number of sent deltas
    * (ordinarily always 1)
    */
-  ValueProducer<int>& get_delta_count_producer() { return delta_count_producer; };
+  ValueProducer<int>& get_delta_count_producer() {
+    return delta_count_producer;
+  };
 
  private:
   String server_address = "";
@@ -71,8 +73,9 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
   String sk_permission;
   bool server_detected = false;
   bool token_test_success = false;
-  
-  ObservableValue<WSConnectionState> connection_state = kWSDisconnected;
+
+  ObservableValue<WSConnectionState> connection_state =
+      WSConnectionState::kWSDisconnected;
   WiFiClient wifi_client;
   WebSocketsClient client;
   SKDelta* sk_delta;
