@@ -1,4 +1,4 @@
-#include "led_controller.h"
+#include "system_status_led.h"
 
 // These patterns indicate how many milliseconds the led should be on and off,
 // repeating until PATTERN_END is reached
@@ -30,35 +30,35 @@ int ws_disconnected_pattern[] = {50, 50, 50, 50, 50, 50, 50, 650, PATTERN_END};
 // PATTERN: ****____
 int ws_authorizing_pattern[] = {200, 200, PATTERN_END};
 
-LedController::LedController(int pin) {
+SystemStatusLed::SystemStatusLed(int pin) {
   pinMode(pin, OUTPUT);
   blinker = new PatternBlinker(pin, no_ap_pattern);
 }
 
-void LedController::set_wifi_no_ap() { blinker->set_pattern(no_ap_pattern); }
-void LedController::set_wifi_disconnected() {
+void SystemStatusLed::set_wifi_no_ap() { blinker->set_pattern(no_ap_pattern); }
+void SystemStatusLed::set_wifi_disconnected() {
   blinker->set_pattern(wifi_disconnected_pattern);
 }
-void LedController::set_wifi_connected() {
+void SystemStatusLed::set_wifi_connected() {
   blinker->set_pattern(wifi_connected_pattern);
 }
-void LedController::set_wifimanager() {
+void SystemStatusLed::set_wifimanager_activated() {
   blinker->set_pattern(wifimanager_pattern);
 }
-void LedController::set_ws_disconnected() {
+void SystemStatusLed::set_ws_disconnected() {
   blinker->set_pattern(ws_disconnected_pattern);
 }
-void LedController::set_ws_authorizing() {
+void SystemStatusLed::set_ws_authorizing() {
   blinker->set_pattern(ws_authorizing_pattern);
 }
-void LedController::set_ws_connecting() {
+void SystemStatusLed::set_ws_connecting() {
   blinker->set_pattern(ws_connecting_pattern);
 }
-void LedController::set_ws_connected() {
+void SystemStatusLed::set_ws_connected() {
   blinker->set_pattern(ws_connected_pattern);
 }
 
-void LedController::set_input(WifiState new_value, uint8_t input_channel) {
+void SystemStatusLed::set_input(WifiState new_value, uint8_t input_channel) {
   // FIXME: If pointers to member functions would be held in an array,
   // this would be a simple array dereferencing
   switch (new_value) {
@@ -72,7 +72,7 @@ void LedController::set_input(WifiState new_value, uint8_t input_channel) {
       this->set_wifi_connected();
       break;
     case kExecutingWifiManager:
-      this->set_wifimanager();
+      this->set_wifimanager_activated();
       break;
     default:
       this->set_wifi_disconnected();
@@ -80,7 +80,7 @@ void LedController::set_input(WifiState new_value, uint8_t input_channel) {
   }
 }
 
-void LedController::set_input(WSConnectionState new_value,
+void SystemStatusLed::set_input(WSConnectionState new_value,
                               uint8_t input_channel) {
   switch (new_value) {
     case kWSDisconnected:
@@ -101,6 +101,6 @@ void LedController::set_input(WSConnectionState new_value,
   }
 }
 
-void LedController::set_input(int new_value, uint8_t input_channel) {
+void SystemStatusLed::set_input(int new_value, uint8_t input_channel) {
   blinker->blip();
 }
