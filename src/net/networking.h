@@ -11,11 +11,11 @@
 #include "system/observablevalue.h"
 #include "system/valueproducer.h"
 
-enum WifiState {
+enum class WifiState {
   kWifiNoAP = 0,
   kWifiDisconnected,
   kWifiConnectedToAP,
-  kExecutingWifiManager
+  kWifiManagerActivated
 };
 
 class Networking : public Configurable, public ValueProducer<WifiState> {
