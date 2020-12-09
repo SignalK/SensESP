@@ -7,7 +7,9 @@
 
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
-BaseBlinker::BaseBlinker(int pin) : pin{pin} {}
+BaseBlinker::BaseBlinker(int pin) : pin{pin} {
+  pinMode(pin, OUTPUT);
+}
 
 /**
  * Turn the LED on or off.

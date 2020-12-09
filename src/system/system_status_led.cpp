@@ -31,7 +31,6 @@ int ws_disconnected_pattern[] = {50, 50, 50, 50, 50, 50, 50, 650, PATTERN_END};
 int ws_authorizing_pattern[] = {200, 200, PATTERN_END};
 
 SystemStatusLed::SystemStatusLed(int pin) {
-  pinMode(pin, OUTPUT);
   blinker = new PatternBlinker(pin, no_ap_pattern);
 }
 
