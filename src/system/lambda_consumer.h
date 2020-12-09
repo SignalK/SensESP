@@ -21,17 +21,16 @@
 template <class IN>
 class LambdaConsumer : public ValueConsumer<IN> {
  public:
-  LambdaConsumer(void (*function)(IN input))
+  LambdaConsumer(std::function<void (IN)> function)
       : ValueConsumer<IN>(), function{function} {
   }
 
   void set_input(IN input, uint8_t input_channel = 0) override {
-    (*function)(input);
+    function(input);
   }
   
- private:
-  void (*function)(IN input);
-  
+ protected:
+  std::function<void (IN)> function;  
 };
 
 #endif
