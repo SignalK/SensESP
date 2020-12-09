@@ -110,7 +110,8 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  * Because physical switches like buttons can be somewhat "noisy", you may want to connect
  * the output of this Sensor to the Debounce Transform, and try different combinations of
  * read_delay for this Sensor and ms_min_delay for Debounce to get the "cleanest" output
- * from your button or other switch.
+ * from your button or other switch. (Make Debounce::ms_min_delay at least a little longer
+ * than DigitalInputChange::read_delay)
  *
  * @param pin The GPIO pin to which the device is connected
  * 
@@ -118,10 +119,14 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  * 
  * @param interrupt_type Will be RISING, FALLING, or CHANGE
  * 
+ * @param read_delay How often you want to read the state of the pin
+ * 
+ * @param config_path The path to configure read_delay_ in the Config UI
+ * 
  * */
 class DigitalInputChange : public DigitalInput, public IntegerProducer {
  public:
-  DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type, uint read_delay = 50,
+  DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type, uint read_delay = 10,
                                          String config_path = "");
   virtual void enable() override final;
  
@@ -129,6 +134,7 @@ class DigitalInputChange : public DigitalInput, public IntegerProducer {
   uint read_delay_;
   bool triggered_;
   uint8_t last_output_;
+  bool value_sent_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
