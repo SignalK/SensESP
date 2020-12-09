@@ -92,16 +92,17 @@ void SensESPApp::setup() {
       new WSClient("/system/sk", sk_delta, sk_server_address, sk_server_port,
                    permission_strings[(int)requested_permissions]);
 
-  // create controllers and connect them to their data sources
+  // connect the system status controller
 
-  if (system_status_consumers.empty()) {
-    system_status_consumers.push_front(new SystemStatusLed(LED_PIN));
-  }
-  for (auto consumer : system_status_consumers) {
-    this->networking->connect_to(consumer);
-    this->ws_client->connect_to(consumer);
-    this->ws_client->get_delta_count_producer().connect_to(consumer);
-  }
+  this->networking->connect_to(&system_status_controller);
+  this->ws_client->connect_to(&system_status_controller);
+
+  // create a system status led and connect it
+
+  system_status_led = new SystemStatusLed(LED_PIN);
+  this->system_status_controller.connect_to(system_status_led);
+  this->ws_client->get_delta_count_producer().connect_to(system_status_led);
+
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,

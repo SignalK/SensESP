@@ -10,8 +10,7 @@
  * May be subclassed to implement e.g. a blinking LED or a display.
  */
 class SystemStatusConsumer : public ValueConsumer<WifiState>,
-                             public ValueConsumer<WSConnectionState>,
-                             public ValueConsumer<int> {
+                             public ValueConsumer<WSConnectionState> {
  public:
   // ValueConsumer interface for ValueConsumer<WifiState> (Networking object
   // state updates)
@@ -20,9 +19,6 @@ class SystemStatusConsumer : public ValueConsumer<WifiState>,
   // (WSClient object state updates)
   virtual void set_input(WSConnectionState new_value,
                          uint8_t input_channel = 0) = 0;
-  // ValueConsumer interface for ValueConsumer<int> (delta count producer
-  // updates)
-  virtual void set_input(int new_value, uint8_t input_channel = 0) = 0;
 };
 
 #endif

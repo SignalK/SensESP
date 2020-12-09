@@ -5,20 +5,17 @@ void SystemStatusController::set_input(WifiState new_value,
   // FIXME: If pointers to member functions would be held in an array,
   // this would be a simple array dereferencing
   switch (new_value) {
-    case kWifiNoAP:
-      this->set_wifi_no_ap();
+    case WifiState::kWifiNoAP:
+      this->emit(SystemStatus::kWifiNoAP);
       break;
-    case kWifiDisconnected:
-      this->set_wifi_disconnected();
+    case WifiState::kWifiDisconnected:
+      this->emit(SystemStatus::kWifiDisconnected);
       break;
-    case kWifiConnectedToAP:
-      this->set_wifi_connected();
+    case WifiState::kWifiConnectedToAP:
+      this->emit(SystemStatus::kWSDisconnected);
       break;
-    case kExecutingWifiManager:
-      this->set_wifimanager_activated();
-      break;
-    default:
-      this->set_wifi_disconnected();
+    case WifiState::kWifiManagerActivated:
+      this->emit(SystemStatus::kWifiManagerActivated);
       break;
   }
 }
@@ -26,20 +23,17 @@ void SystemStatusController::set_input(WifiState new_value,
 void SystemStatusController::set_input(WSConnectionState new_value,
                                        uint8_t input_channel) {
   switch (new_value) {
-    case kWSDisconnected:
-      this->set_ws_disconnected();
+    case WSConnectionState::kWSDisconnected:
+      this->emit(SystemStatus::kWSDisconnected);
       break;
-    case kWSConnecting:
-      this->set_ws_connecting();
+    case WSConnectionState::kWSConnecting:
+      this->emit(SystemStatus::kWSConnecting);
       break;
-    case kWSAuthorizing:
-      this->set_ws_authorizing();
+    case WSConnectionState::kWSAuthorizing:
+      this->emit(SystemStatus::kWSAuthorizing);
       break;
-    case kWSConnected:
-      this->set_ws_connected();
-      break;
-    default:
-      this->set_ws_disconnected();
+    case WSConnectionState::kWSConnected:
+      this->emit(SystemStatus::kWSConnected);
       break;
   }
 }

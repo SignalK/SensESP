@@ -14,6 +14,7 @@
 
 #include <forward_list>
 
+#include "controllers/system_status_controller.h"
 #include "net/http.h"
 #include "net/networking.h"
 #include "net/ws_client.h"
@@ -21,9 +22,9 @@
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta.h"
 #include "system/observablevalue.h"
+#include "system/system_status_led.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
-#include "system/system_status_consumer.h"
 
 enum StandardSensors {
   NONE,
@@ -139,6 +140,8 @@ class SensESPApp {
                               StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server;
+  SystemStatusLed* system_status_led;
+  SystemStatusController system_status_controller;
   std::forward_list<SystemStatusConsumer*> system_status_consumers;
   Networking* networking;
   SKDelta* sk_delta;

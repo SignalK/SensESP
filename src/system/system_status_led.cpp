@@ -38,9 +38,6 @@ void SystemStatusLed::set_wifi_no_ap() { blinker->set_pattern(no_ap_pattern); }
 void SystemStatusLed::set_wifi_disconnected() {
   blinker->set_pattern(wifi_disconnected_pattern);
 }
-void SystemStatusLed::set_wifi_connected() {
-  blinker->set_pattern(wifi_connected_pattern);
-}
 void SystemStatusLed::set_wifimanager_activated() {
   blinker->set_pattern(wifimanager_pattern);
 }
@@ -57,45 +54,28 @@ void SystemStatusLed::set_ws_connected() {
   blinker->set_pattern(ws_connected_pattern);
 }
 
-void SystemStatusLed::set_input(WifiState new_value, uint8_t input_channel) {
-  // FIXME: If pointers to member functions would be held in an array,
-  // this would be a simple array dereferencing
+void SystemStatusLed::set_input(SystemStatus new_value, uint8_t input_channel) {
   switch (new_value) {
-    case kWifiNoAP:
+    case SystemStatus::kWifiNoAP:
       this->set_wifi_no_ap();
       break;
-    case kWifiDisconnected:
+    case SystemStatus::kWifiDisconnected:
       this->set_wifi_disconnected();
       break;
-    case kWifiConnectedToAP:
-      this->set_wifi_connected();
-      break;
-    case kExecutingWifiManager:
+    case SystemStatus::kWifiManagerActivated:
       this->set_wifimanager_activated();
       break;
-    default:
-      this->set_wifi_disconnected();
-      break;
-  }
-}
-
-void SystemStatusLed::set_input(WSConnectionState new_value,
-                              uint8_t input_channel) {
-  switch (new_value) {
-    case kWSDisconnected:
+    case SystemStatus::kWSDisconnected:
       this->set_ws_disconnected();
       break;
-    case kWSConnecting:
+    case SystemStatus::kWSConnecting:
       this->set_ws_connecting();
       break;
-    case kWSAuthorizing:
+    case SystemStatus::kWSAuthorizing:
       this->set_ws_authorizing();
       break;
-    case kWSConnected:
+    case SystemStatus::kWSConnected:
       this->set_ws_connected();
-      break;
-    default:
-      this->set_ws_disconnected();
       break;
   }
 }
