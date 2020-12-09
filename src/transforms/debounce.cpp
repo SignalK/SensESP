@@ -11,14 +11,14 @@ DebounceTemplate<T>::DebounceTemplate(int ms_min_delay, String config_path)
       value_sent_{false},
       stable_input_{false},
       reaction_{NULL} {
-  load_configuration();
+  this->load_configuration();
 }
 
 template <class T>
-void DebounceTemplate<T>::set_input(T newValue, uint8_t inputChannel) {
+void DebounceTemplate<T>::set_input(T input, uint8_t inputChannel) {
   if (reaction_ != NULL) {
     reaction_->remove();
-    reaction = NULL;
+    reaction_ = NULL;
   }
   // Input has changed since the last emit, or this is the first
   // input since the program started to run.
@@ -63,4 +63,4 @@ bool DebounceTemplate<T>::set_configuration(const JsonObject& config) {
 template class DebounceTemplate<bool>;
 template class DebounceTemplate<int>;
 template class DebounceTemplate<float>;
-template class DebounceTemplate<String>;
+//template class DebounceTemplate<String>;
