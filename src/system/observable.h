@@ -13,6 +13,11 @@
 
 class Observable {
  public:
+  Observable() {}
+
+  /// Move constructor
+  Observable(Observable&& other);
+
   void notify();
   void attach(std::function<void()> observer);
 
