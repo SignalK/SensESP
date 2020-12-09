@@ -4,18 +4,32 @@
 // See the limitations and suggestion solution in SensESP Issue #287.
 // https://github.com/SignalK/SensESP/issues/287
 
-template<class T>
+template <class T>
 DebounceTemplate<T>::DebounceTemplate(int ms_min_delay, String config_path)
-    : SymmetricTransform<T>(config_path), ms_min_delay_{ms_min_delay} {
-      interrupt_timer_ = 0;
+    : SymmetricTransform<T>(config_path),
+      ms_min_delay_{ms_min_delay},
+      value_sent_{false},
+      stable_input_{false},
+      reaction_{NULL} {
+  load_configuration();
 }
 
-template<class T>
+template <class T>
 void DebounceTemplate<T>::set_input(T newValue, uint8_t inputChannel) {
-  if (interrupt_timer_ > ms_min_delay_) {
-    this->emit(newValue);
+  if (reaction_ != NULL) {
+    reaction_->remove();
+    reaction = NULL;
   }
-  interrupt_timer_ = 0;
+  // Input has changed since the last emit, or this is the first
+  // input since the program started to run.
+  if (input != stable_input_ || value_sent_ == false) {
+    reaction_ = app.onDelay(ms_min_delay_, [this, input]() {
+      this->reaction_ = NULL;
+      this->stable_input_ = input;
+      this->value_sent_ = true;
+      this->emit(input);
+    });
+  } 
 }
 
 template<class T>

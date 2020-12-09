@@ -37,8 +37,10 @@ class DebounceTemplate : public SymmetricTransform<T> {
   virtual void set_input(T new_value, uint8_t input_channel = 0) override;
 
  private:
-  elapsedMillis interrupt_timer_;
   int ms_min_delay_;
+  bool value_sent_;
+  bool stable_input_;
+  DelayReaction* reaction_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
