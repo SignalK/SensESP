@@ -139,7 +139,7 @@ class SensESPApp {
                               StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server;
-  std::forward_list<SystemStatusConsumer*> visual_output_controllers;
+  std::forward_list<SystemStatusConsumer*> system_status_consumers;
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;

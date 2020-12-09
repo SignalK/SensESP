@@ -94,13 +94,13 @@ void SensESPApp::setup() {
 
   // create controllers and connect them to their data sources
 
-  if (visual_output_controllers.empty()) {
-    visual_output_controllers.push_front(new SystemStatusLed(LED_PIN));
+  if (system_status_consumers.empty()) {
+    system_status_consumers.push_front(new SystemStatusLed(LED_PIN));
   }
-  for (auto controller : visual_output_controllers) {
-    this->networking->connect_to(controller);
-    this->ws_client->connect_to(controller);
-    this->ws_client->get_delta_count_producer().connect_to(controller);
+  for (auto consumer : system_status_consumers) {
+    this->networking->connect_to(consumer);
+    this->ws_client->connect_to(consumer);
+    this->ws_client->get_delta_count_producer().connect_to(consumer);
   }
 }
 
