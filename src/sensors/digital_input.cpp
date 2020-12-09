@@ -103,7 +103,8 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
       IntegerProducer(),
       read_delay_{read_delay},
       triggered_{false},
-      last_output_{0} {
+      last_output_{0},
+      value_sent_{false} {
     load_configuration();    
     }
 
@@ -116,11 +117,12 @@ void DigitalInputChange::enable() {
   
   
   app.onRepeat(read_delay_, [this](){
-      if (triggered_ && output != last_output_) {
+      if (triggered_ && (output != last_output_ || value_sent_ == false)) {
         noInterrupts();
         triggered_ = false;
         last_output_ = output;
         interrupts();
+        value_sent_ = true;
         notify();
       }
     }
