@@ -79,7 +79,6 @@ class SensESPApp {
    */
   void send_to_server(String& payload) { this->ws_client->sendTXT(payload); }
 
-
   /**
    * Returns true if the host system is connected to Wifi
    */
@@ -91,6 +90,9 @@ class SensESPApp {
   bool isSignalKConnected() { return ws_client->is_connected(); }
 
   const SKDelta* get_sk_delta() const { return this->sk_delta; }
+  const SystemStatusController* get_system_status_controller() const {
+    return &(this->system_status_controller);
+  }
   const Networking* get_networking() const { return this->networking; }
   const WSClient* get_ws_client() const { return this->ws_client; }
 
