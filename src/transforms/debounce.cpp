@@ -62,5 +62,4 @@ bool DebounceTemplate<T>::set_configuration(const JsonObject& config) {
 // define all possible instances of a Debounce
 template class DebounceTemplate<bool>;
 template class DebounceTemplate<int>;
-template class DebounceTemplate<float>;
-//template class DebounceTemplate<String>;
+template class DebounceTemplate<float>; // not sure this works - test it if you use it

@@ -47,7 +47,6 @@ class DebounceTemplate : public SymmetricTransform<T> {
 typedef DebounceTemplate<bool> DebounceBool;
 typedef DebounceTemplate<bool> Debounce; // for backward-compatibility with original class
 typedef DebounceTemplate<int> DebounceInt;
-typedef DebounceTemplate<float> DebounceFloat;
-//typedef DebounceTemplate<String> DebounceString;
+typedef DebounceTemplate<float> DebounceFloat; // not sure this works - test it if you use it
 
 #endif
