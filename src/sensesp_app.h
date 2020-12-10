@@ -144,7 +144,6 @@ class SensESPApp {
   HTTPServer* http_server;
   SystemStatusLed* system_status_led;
   SystemStatusController system_status_controller;
-  std::forward_list<SystemStatusConsumer*> system_status_consumers;
   Networking* networking;
   SKDelta* sk_delta;
   WSClient* ws_client;
