@@ -89,12 +89,13 @@ class SensESPApp {
    */
   bool isSignalKConnected() { return ws_client->is_connected(); }
 
-  const SKDelta* get_sk_delta() const { return this->sk_delta; }
-  const SystemStatusController* get_system_status_controller() const {
+  // getters for internal members
+  SKDelta* get_sk_delta() { return this->sk_delta; }
+  SystemStatusController* get_system_status_controller() {
     return &(this->system_status_controller);
   }
-  const Networking* get_networking() const { return this->networking; }
-  const WSClient* get_ws_client() const { return this->ws_client; }
+  Networking* get_networking() { return this->networking; }
+  WSClient* get_ws_client() { return this->ws_client; }
 
  protected:
   // setters for all constructor arguments
