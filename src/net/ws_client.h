@@ -70,7 +70,8 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
   String auth_token = NULL_AUTH_TOKEN;
   String sk_permission;
   bool server_detected = false;
-
+  bool token_test_success = false;
+  
   ObservableValue<WSConnectionState> connection_state = kWSDisconnected;
   WiFiClient wifi_client;
   WebSocketsClient client;
