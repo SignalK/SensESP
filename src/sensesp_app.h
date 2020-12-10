@@ -119,6 +119,10 @@ class SensESPApp {
     this->sk_server_port = sk_server_port;
     return this;
   }
+  const SensESPApp* set_system_status_led(SystemStatusLed* system_status_led) {
+    this->system_status_led = system_status_led;
+    return this;
+  }
   const SensESPApp* set_sensors(StandardSensors sensors) {
     this->sensors = sensors;
     return this;
@@ -142,7 +146,7 @@ class SensESPApp {
                               StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server;
-  SystemStatusLed* system_status_led;
+  SystemStatusLed* system_status_led = NULL;
   SystemStatusController system_status_controller;
   Networking* networking;
   SKDelta* sk_delta;

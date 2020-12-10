@@ -38,8 +38,8 @@ class SensESPAppBuilder {
     app->set_preset_hostname(hostname);
     return this;
   }
-  SensESPAppBuilder* add_system_status_consumer(SystemStatusConsumer* consumer) {
-    app->system_status_consumers.push_front(consumer);
+  SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
+    app->set_system_status_led(system_status_led);
     return this;
   }
   SensESPApp* get_app() {

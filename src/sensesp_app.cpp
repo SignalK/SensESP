@@ -99,7 +99,9 @@ void SensESPApp::setup() {
 
   // create a system status led and connect it
 
-  system_status_led = new SystemStatusLed(LED_PIN);
+  if (system_status_led == NULL) {
+    system_status_led = new SystemStatusLed(LED_PIN);
+  }
   this->system_status_controller.connect_to(system_status_led);
   this->ws_client->get_delta_count_producer().connect_to(system_status_led);
 
