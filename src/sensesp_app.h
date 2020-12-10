@@ -77,7 +77,7 @@ class SensESPApp {
    * over the connected websocket. If no websocket is connect, the
    * call is ignored.
    */
-  void send_to_server(String& payload) { this->ws_client->sendTXT(payload); }
+  void send_to_server(String& payload) { this->ws_client_->sendTXT(payload); }
 
   /**
    * Returns true if the host system is connected to Wifi
@@ -87,78 +87,77 @@ class SensESPApp {
   /**
    * Returns true if the host system is connected to a Signal K server
    */
-  bool isSignalKConnected() { return ws_client->is_connected(); }
+  bool isSignalKConnected() { return ws_client_->is_connected(); }
 
   // getters for internal members
-  SKDelta* get_sk_delta() { return this->sk_delta; }
+  SKDelta* get_sk_delta() { return this->sk_delta_; }
   SystemStatusController* get_system_status_controller() {
-    return &(this->system_status_controller);
+    return &(this->system_status_controller_);
   }
-  Networking* get_networking() { return this->networking; }
-  WSClient* get_ws_client() { return this->ws_client; }
+  Networking* get_networking() { return this->networking_; }
+  WSClient* get_ws_client() { return this->ws_client_; }
 
  protected:
   // setters for all constructor arguments
 
   const SensESPApp* set_preset_hostname(String preset_hostname) {
-    this->preset_hostname = preset_hostname;
+    this->preset_hostname_ = preset_hostname;
     return this;
   }
   const SensESPApp* set_ssid(String ssid) {
-    this->ssid = ssid;
+    this->ssid_ = ssid;
     return this;
   }
   const SensESPApp* set_wifi_password(String wifi_password) {
-    this->wifi_password = wifi_password;
+    this->wifi_password_ = wifi_password;
     return this;
   }
   const SensESPApp* set_sk_server_address(String sk_server_address) {
-    this->sk_server_address = sk_server_address;
+    this->sk_server_address_ = sk_server_address;
     return this;
   }
   const SensESPApp* set_sk_server_port(uint16_t sk_server_port) {
-    this->sk_server_port = sk_server_port;
+    this->sk_server_port_ = sk_server_port;
     return this;
   }
   const SensESPApp* set_system_status_led(SystemStatusLed* system_status_led) {
-    this->system_status_led = system_status_led;
+    this->system_status_led_ = system_status_led;
     return this;
   }
   const SensESPApp* set_sensors(StandardSensors sensors) {
-    this->sensors = sensors;
+    this->sensors_ = sensors;
     return this;
   }
   const SensESPApp* set_requested_permissions(SKPermissions permissions) {
-    this->requested_permissions = permissions;
+    this->requested_permissions_ = permissions;
     return this;
   }
 
  private:
-  String preset_hostname = "SensESP";
-  String ssid = "";
-  String wifi_password = "";
-  String sk_server_address = "";
-  uint16_t sk_server_port = 0;
-  StandardSensors sensors = ALL;
-  SKPermissions requested_permissions = READWRITE;
+  String preset_hostname_ = "SensESP";
+  String ssid_ = "";
+  String wifi_password_ = "";
+  String sk_server_address_ = "";
+  uint16_t sk_server_port_ = 0;
+  StandardSensors sensors_ = ALL;
+  SKPermissions requested_permissions_ = READWRITE;
 
   void initialize();
   void setup_standard_sensors(ObservableValue<String>* hostname,
                               StandardSensors enabled_sensors = ALL);
 
-  HTTPServer* http_server;
-  SystemStatusLed* system_status_led = NULL;
-  SystemStatusController system_status_controller;
-  Networking* networking;
-  SKDelta* sk_delta;
-  WSClient* ws_client;
+  HTTPServer* http_server_;
+  SystemStatusLed* system_status_led_ = NULL;
+  SystemStatusController system_status_controller_;
+  Networking* networking_;
+  SKDelta* sk_delta_;
+  WSClient* ws_client_;
   String get_permission_string(SKPermissions permission);
 
   void set_wifi(String ssid, String password);
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
-  friend class SystemStatusConsumer;
 };
 
 extern SensESPApp* sensesp_app;

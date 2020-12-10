@@ -5,13 +5,13 @@
 
 class SensESPAppBuilder {
  private:
-  String hostname = "SensESP";
-  String ssid = "";
-  String password = "";
-  String sk_server_address = "";
-  uint16_t sk_server_port = 0;
-  StandardSensors sensors = ALL;
-  SKPermissions sk_server_permissions = READWRITE;
+  String hostname_ = "SensESP";
+  String ssid_ = "";
+  String password_ = "";
+  String sk_server_address_ = "";
+  uint16_t sk_server_port_ = 0;
+  StandardSensors sensors_ = ALL;
+  SKPermissions sk_server_permissions_ = READWRITE;
 
   SensESPApp* app;
 

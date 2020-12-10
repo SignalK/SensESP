@@ -13,7 +13,7 @@
 class SystemStatusLed : public ValueConsumer<SystemStatus>,
                         public ValueConsumer<int> {
  protected:
-  PatternBlinker* blinker;
+  PatternBlinker* blinker_;
 
   virtual void set_wifi_no_ap();
   virtual void set_wifi_disconnected();

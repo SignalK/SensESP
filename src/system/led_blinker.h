@@ -27,11 +27,11 @@ class BaseBlinker : public Enable {
   void enable() override;
 
  protected:
-  int pin;
-  bool enabled = true;
-  bool state = false;
-  int update_counter = 0;
-  Reaction* reaction = NULL;
+  int pin_;
+  bool enabled_ = true;
+  bool state_ = false;
+  int update_counter_ = 0;
+  Reaction* reaction_ = NULL;
 };
 
 /**
@@ -40,10 +40,10 @@ class BaseBlinker : public Enable {
 class PeriodicBlinker : public BaseBlinker {
  public:
   PeriodicBlinker(int pin, unsigned int period);
-  void set_period(unsigned int period) { this->period = period; }
+  void set_period(unsigned int period) { this->period_ = period; }
 
  protected:
-  unsigned int period;
+  unsigned int period_;
 };
 
 /**
@@ -64,10 +64,10 @@ class RatioBlinker : public PeriodicBlinker {
  public:
   RatioBlinker(int pin, unsigned int period, float ratio = 0.);
   void tick() override final;
-  void set_ratio(unsigned int ratio) { this->ratio = ratio; }
+  void set_ratio(unsigned int ratio) { this->ratio_ = ratio; }
 
  protected:
-  float ratio;
+  float ratio_;
 };
 
 /**
@@ -82,8 +82,8 @@ class PatternBlinker : public BaseBlinker {
   void restart();
 
  protected:
-  int* pattern;
-  unsigned int pattern_ptr = 0;
+  int* pattern_;
+  unsigned int pattern_ptr_ = 0;
 };
 
 #endif
