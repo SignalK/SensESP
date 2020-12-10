@@ -256,14 +256,14 @@ bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
 }
 
 void WSClient::connect() {
-  debugI("WSClient connect attempt (state=%d)", connection_state.get());
+  debugI("WSClient websocket connect attempt (state=%d)", connection_state.get());
 
   if (connection_state != kWSDisconnected) {
     return;
   }
 
   if (WiFi.isConnected()) {
-    debugD("Initiating connection");
+    debugD("Initiating websocket connection with server...");
 
     connection_state = kWSAuthorizing;
 
