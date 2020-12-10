@@ -17,7 +17,7 @@ BaseBlinker::BaseBlinker(int pin) : pin_{pin} {
 void BaseBlinker::set_state(bool state) {
   this->state_ = state;
 #ifdef ESP32
-  digitalWrite(pin, state);
+  digitalWrite(pin_, state);
 #elif defined(ESP8266)
   // LED (at least on ESP-01 and Wemos D1 mini) is active low
   digitalWrite(pin_, !state);

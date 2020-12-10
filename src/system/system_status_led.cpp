@@ -31,27 +31,27 @@ int ws_disconnected_pattern[] = {50, 50, 50, 50, 50, 50, 50, 650, PATTERN_END};
 int ws_authorizing_pattern[] = {200, 200, PATTERN_END};
 
 SystemStatusLed::SystemStatusLed(int pin) {
-  blinker = new PatternBlinker(pin, no_ap_pattern);
+  blinker_ = new PatternBlinker(pin, no_ap_pattern);
 }
 
-void SystemStatusLed::set_wifi_no_ap() { blinker->set_pattern(no_ap_pattern); }
+void SystemStatusLed::set_wifi_no_ap() { blinker_->set_pattern(no_ap_pattern); }
 void SystemStatusLed::set_wifi_disconnected() {
-  blinker->set_pattern(wifi_disconnected_pattern);
+  blinker_->set_pattern(wifi_disconnected_pattern);
 }
 void SystemStatusLed::set_wifimanager_activated() {
-  blinker->set_pattern(wifimanager_pattern);
+  blinker_->set_pattern(wifimanager_pattern);
 }
 void SystemStatusLed::set_ws_disconnected() {
-  blinker->set_pattern(ws_disconnected_pattern);
+  blinker_->set_pattern(ws_disconnected_pattern);
 }
 void SystemStatusLed::set_ws_authorizing() {
-  blinker->set_pattern(ws_authorizing_pattern);
+  blinker_->set_pattern(ws_authorizing_pattern);
 }
 void SystemStatusLed::set_ws_connecting() {
-  blinker->set_pattern(ws_connecting_pattern);
+  blinker_->set_pattern(ws_connecting_pattern);
 }
 void SystemStatusLed::set_ws_connected() {
-  blinker->set_pattern(ws_connected_pattern);
+  blinker_->set_pattern(ws_connected_pattern);
 }
 
 void SystemStatusLed::set_input(SystemStatus new_value, uint8_t input_channel) {
@@ -81,5 +81,5 @@ void SystemStatusLed::set_input(SystemStatus new_value, uint8_t input_channel) {
 }
 
 void SystemStatusLed::set_input(int new_value, uint8_t input_channel) {
-  blinker->blip();
+  blinker_->blip();
 }
