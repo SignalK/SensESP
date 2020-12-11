@@ -30,11 +30,12 @@ class SystemStatusController : public ValueConsumer<WifiState>,
 
   /// ValueConsumer interface for ValueConsumer<WifiState> (Networking object
   /// state updates)
-  virtual void set_input(WifiState new_value, uint8_t input_channel = 0);
+  virtual void set_input(WifiState new_value,
+                         uint8_t input_channel = 0) override;
   /// ValueConsumer interface for ValueConsumer<WSConnectionState>
   /// (WSClient object state updates)
   virtual void set_input(WSConnectionState new_value,
-                         uint8_t input_channel = 0);
+                         uint8_t input_channel = 0) override;
 };
 
 #endif
