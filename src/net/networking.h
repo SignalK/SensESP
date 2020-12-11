@@ -11,11 +11,11 @@
 #include "system/observablevalue.h"
 #include "system/valueproducer.h"
 
-enum WifiState {
+enum class WifiState {
   kWifiNoAP = 0,
   kWifiDisconnected,
   kWifiConnectedToAP,
-  kExecutingWifiManager
+  kWifiManagerActivated
 };
 
 class Networking : public Configurable, public ValueProducer<WifiState> {
@@ -26,7 +26,7 @@ class Networking : public Configurable, public ValueProducer<WifiState> {
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
-  
+
   void reset_settings();
 
  protected:

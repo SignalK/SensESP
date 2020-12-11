@@ -5,26 +5,25 @@
 
 class SensESPAppBuilder {
  private:
-  String hostname = "SensESP";
-  String ssid = "";
-  String password = "";
-  String sk_server_address = "";
-  uint16_t sk_server_port = 0;
-  StandardSensors sensors = ALL;
-  SKPermissions sk_server_permissions = READWRITE;
+  String hostname_ = "SensESP";
+  String ssid_ = "";
+  String password_ = "";
+  String sk_server_address_ = "";
+  uint16_t sk_server_port_ = 0;
+  StandardSensors sensors_ = ALL;
+  SKPermissions sk_server_permissions_ = READWRITE;
 
   SensESPApp* app;
 
  public:
-  SensESPAppBuilder() {
-    app = new SensESPApp(true);
-  }
+  SensESPAppBuilder() { app = new SensESPApp(true); }
   SensESPAppBuilder* set_wifi(String ssid, String password) {
     app->set_ssid(ssid);
     app->set_wifi_password(password);
     return this;
   }
-  SensESPAppBuilder* set_sk_server(String address, uint16_t port, SKPermissions permissions = READWRITE) {
+  SensESPAppBuilder* set_sk_server(String address, uint16_t port,
+                                   SKPermissions permissions = READWRITE) {
     app->set_sk_server_address(address);
     app->set_sk_server_port(port);
     app->set_requested_permissions(permissions);
@@ -38,8 +37,8 @@ class SensESPAppBuilder {
     app->set_preset_hostname(hostname);
     return this;
   }
-  SensESPAppBuilder* add_system_status_consumer(SystemStatusConsumer* consumer) {
-    app->system_status_consumers.push_front(consumer);
+  SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
+    app->set_system_status_led(system_status_led);
     return this;
   }
   SensESPApp* get_app() {
