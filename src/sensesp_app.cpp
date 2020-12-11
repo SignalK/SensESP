@@ -13,8 +13,8 @@
 #include "sensors/digital_input.h"
 #include "sensors/system_info.h"
 #include "signalk/signalk_output.h"
-#include "system/system_status_led.h"
 #include "system/spiffs_storage.h"
+#include "system/system_status_led.h"
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
 #include "transforms/linear.h"
@@ -66,7 +66,7 @@ void SensESPApp::setup() {
 
   // create the networking object
   networking_ = new Networking("/system/networking", ssid_, wifi_password_,
-                              preset_hostname_);
+                               preset_hostname_);
 
   ObservableValue<String>* hostname = networking_->get_hostname();
 
@@ -104,7 +104,6 @@ void SensESPApp::setup() {
   }
   this->system_status_controller_.connect_to(system_status_led_);
   this->ws_client_->get_delta_count_producer().connect_to(system_status_led_);
-
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,

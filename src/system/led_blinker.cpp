@@ -7,9 +7,7 @@
 
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
-BaseBlinker::BaseBlinker(int pin) : pin_{pin} {
-  pinMode(pin, OUTPUT);
-}
+BaseBlinker::BaseBlinker(int pin) : pin_{pin} { pinMode(pin, OUTPUT); }
 
 /**
  * Turn the LED on or off.
@@ -23,7 +21,6 @@ void BaseBlinker::set_state(bool state) {
   digitalWrite(pin_, !state);
 #endif
   update_counter_++;
-
 }
 
 /**

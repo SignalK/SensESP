@@ -16,15 +16,14 @@ class SensESPAppBuilder {
   SensESPApp* app;
 
  public:
-  SensESPAppBuilder() {
-    app = new SensESPApp(true);
-  }
+  SensESPAppBuilder() { app = new SensESPApp(true); }
   SensESPAppBuilder* set_wifi(String ssid, String password) {
     app->set_ssid(ssid);
     app->set_wifi_password(password);
     return this;
   }
-  SensESPAppBuilder* set_sk_server(String address, uint16_t port, SKPermissions permissions = READWRITE) {
+  SensESPAppBuilder* set_sk_server(String address, uint16_t port,
+                                   SKPermissions permissions = READWRITE) {
     app->set_sk_server_address(address);
     app->set_sk_server_port(port);
     app->set_requested_permissions(permissions);
