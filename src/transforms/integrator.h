@@ -67,8 +67,8 @@ class IntegratorT : public Transform<C, P> {
   virtual String get_config_schema() override { return FPSTR(INTEGRATOR_SCHEMA); }
 
  private:
-  P value = 0;
   P k;
+  P value = 0;
 };
 
 typedef IntegratorT<float, float> Integrator;
