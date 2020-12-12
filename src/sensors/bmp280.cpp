@@ -15,6 +15,15 @@ BMP280::BMP280(uint8_t addr, String config_path)
   }
 }
 
+BMP280::BMP280(uint8_t addr, TwoWire* two_wire, String config_path)
+    : Sensor(config_path), addr{addr} {
+  load_configuration();
+  adafruit_bmp280 = new Adafruit_BMP280(two_wire);
+  if (!adafruit_bmp280->begin(addr)) {
+    debugE("Could not find a valid BMP280 sensor: check address and wiring");
+  }
+}
+
 // BMP280Value reads and outputs the specified type of value of a BMP280 sensor
 BMP280Value::BMP280Value(BMP280* bmp280, BMP280ValType val_type,
                          uint read_delay, String config_path)

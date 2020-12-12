@@ -8,18 +8,32 @@
 
 // The BMP280 classes are based on the ADAfruit_BMP280 library.
 
-// BMP280 represents an ADAfruit (or compatible) BMP280 temperature & pressure
-// sensor. The constructore creates a pointer to the instance, and starts up the
-// sensor. The pointer is passed to BMP280value, which retrieves the specified
-// value. If you want to change any of the values with the
-// Adafruit_BMP280::setSampling() method, it's public, so you can call that
-// after you instantiate the BMP280 and before you start using it, with:
-// yourInstanceVariable->bmp280->setSampling(); See the Adafruit library for
-// details.
-// https://github.com/adafruit/Adafruit_BMP280_Library/blob/master/Adafruit_BMP280.h
+/* * 
+ * @brief BMP280 represents an ADAfruit or compatible BMP280 temperature & pressure
+ * sensor. 
+ * 
+ * The constructor creates a pointer to the instance, and starts up the
+ * sensor. The pointer is passed to BMP280Value, which retrieves the specified
+ * value. If you want to change any of the values with the
+ * Adafruit_BMP280::setSampling() method, it's public, so you can call that
+ * after you instantiate the BMP280 and before you start using it, with:
+ * yourInstanceVariable->bmp280->setSampling(); See the Adafruit library for
+ * details.
+ * https://github.com/adafruit/Adafruit_BMP280_Library/blob/master/Adafruit_BMP280.h
+ * 
+ * @param addr The memory address of the sensor. Defaults to 0x77, but other
+ * addresses are available for some BME280 chips. See the datasheet.
+ * 
+ * @param two_wire A pointer to the instance of Wire that has previously been
+ * created in your main.cpp. Not used if the typical Wire library works with
+ * your particular ESP.
+*/
 class BMP280 : public Sensor {
  public:
+  // Uses the typical Wire library for I2C
   BMP280(uint8_t addr = 0x77, String config_path = "");
+  // Uses the TwoWire library for I2C
+  BMP280(uint8_t addr, TwoWire* two_wire, String config_path = "");
   Adafruit_BMP280* adafruit_bmp280;
 
  private:
@@ -27,7 +41,17 @@ class BMP280 : public Sensor {
 };
 
 
-// BMP280Value reads and outputs the specified value of a BMP280 sensor.
+/* 
+ * @brief BMP280Value reads and outputs the specified value of a BMP280 sensor.
+ * 
+ * @param bmp280 A pointer to an instance of a BMP280.
+ * 
+ * @param val_type The type of value you're reading: temperature or pressure.
+ * 
+ * @param read_delay How often to read the sensor - in ms.
+ * 
+ * @param config_path Path in the Config UI to configure read_delay
+ */
 class BMP280Value : public NumericSensor {
  public:
   
