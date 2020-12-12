@@ -62,6 +62,12 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
     return delta_count_producer;
   };
 
+  // If set to TRUE, the authentication token will be tested each
+  // time the device connects to the server. If set to false,
+  // the authentication token will not be retested on subsequent
+  // connections.
+  static bool test_auth_on_each_connect_;
+
  private:
   String server_address = "";
   uint16_t server_port = 80;

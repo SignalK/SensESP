@@ -21,6 +21,8 @@
 
 WSClient* ws_client;
 
+bool WSClient::test_auth_on_each_connect_ = true;
+
 void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   switch (type) {
     case WStype_DISCONNECTED:
@@ -295,7 +297,7 @@ void WSClient::connect() {
       return;
     }
 
-    if (!token_test_success) {
+    if (test_auth_on_each_connect_ || !token_test_success) {
       // Test the validity of the authorization token for the first time...
       this->test_token(server_address, server_port);
     } else {
