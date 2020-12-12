@@ -34,10 +34,10 @@ class BMP280 : public Sensor {
   BMP280(uint8_t addr = 0x77, String config_path = "");
   // Uses the TwoWire library for I2C
   BMP280(uint8_t addr, TwoWire* two_wire, String config_path = "");
-  Adafruit_BMP280* adafruit_bmp280;
+  Adafruit_BMP280* adafruit_bmp280_;
 
  private:
-  uint8_t addr;
+  uint8_t addr_;
 };
 
 
@@ -59,11 +59,11 @@ class BMP280Value : public NumericSensor {
   BMP280Value(BMP280* bmp280, BMP280ValType val_type, uint read_delay = 500,
               String config_path = "");
   void enable() override final;
-  BMP280* bmp280;
+  BMP280* bmp280_;
 
  private:
-  BMP280ValType val_type;
-  uint read_delay;
+  BMP280ValType val_type_;
+  uint read_delay_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
