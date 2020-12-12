@@ -53,14 +53,12 @@ void BMP280Value::enable() {
 
 void BMP280Value::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay_;
-  root["value"] = output;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
     }
   })###";
 
