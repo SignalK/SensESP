@@ -6,23 +6,15 @@
 
 // BMP280 represents an ADAfruit (or compatible) BMP280 temperature & pressure
 // sensor.
-BMP280::BMP280(uint8_t addr, String config_path)
+BMP280::BMP280(uint8_t addr, String config_path, Adafruit_BMP280* sensor)
     : Sensor(config_path), addr_{addr} {
   load_configuration();
-  adafruit_bmp280_ = new Adafruit_BMP280();
+  adafruit_bmp280_ = sensor;
   if (!adafruit_bmp280_->begin(addr_)) {
     debugE("Could not find a valid BMP280 sensor: check address and wiring");
   }
 }
 
-BMP280::BMP280(uint8_t addr, TwoWire* two_wire, String config_path)
-    : Sensor(config_path), addr_{addr} {
-  load_configuration();
-  adafruit_bmp280_ = new Adafruit_BMP280(two_wire);
-  if (!adafruit_bmp280_->begin(addr_)) {
-    debugE("Could not find a valid BMP280 sensor: check address and wiring");
-  }
-}
 
 // BMP280Value reads and outputs the specified type of value of a BMP280 sensor
 BMP280Value::BMP280Value(BMP280* bmp280, BMP280ValType val_type,

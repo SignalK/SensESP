@@ -24,16 +24,19 @@
  * @param addr The memory address of the sensor. Defaults to 0x77, but other
  * addresses are available for some BME280 chips. See the datasheet.
  * 
- * @param two_wire A pointer to the instance of Wire that has previously been
- * created in your main.cpp. Not used if the typical Wire library works with
- * your particular ESP.
+ * @param config_path Will always be "", since there is nothing to configure in the
+ * Config UI.
+ * 
+ * @param sensor A pointer to the actual BME280 sensor, returned by a constructor to
+ * an Adafruit_BMP280 object. By default, SensESP uses the default Adafruit_BMP280
+ * constructor - the one with no parameters. If your ESP doesn't use standard I2C pins
+ * for SDA and SCL, you'll need to do something like this in main.cpp:
+ *   Wire.begin(SDA_PIN, SCL_PIN, FREQUENCY); // ESP32 uses FREQUENCY, ESP8266 does not
+ *   auto* bmp280 = new BMP280(0x76, "/some_config/path", new Adafruit_BMP280(&Wire));
 */
 class BMP280 : public Sensor {
  public:
-  // Uses the typical Wire library for I2C
-  BMP280(uint8_t addr = 0x77, String config_path = "");
-  // Uses the TwoWire library for I2C
-  BMP280(uint8_t addr, TwoWire* two_wire, String config_path = "");
+  BMP280(uint8_t addr = 0x77, String config_path = "", Adafruit_BMP280* sensor = new Adafruit_BMP280());
   Adafruit_BMP280* adafruit_bmp280_;
 
  private:
