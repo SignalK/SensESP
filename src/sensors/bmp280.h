@@ -36,7 +36,7 @@
 */
 class BMP280 : public Sensor {
  public:
-  BMP280(uint8_t addr = 0x77, String config_path = "", Adafruit_BMP280* sensor = new Adafruit_BMP280());
+  BMP280(uint8_t addr = 0x77, String config_path = "", Adafruit_BMP280* sensor = NULL);
   Adafruit_BMP280* adafruit_bmp280_;
 
  private:

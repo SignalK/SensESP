@@ -9,6 +9,9 @@
 BMP280::BMP280(uint8_t addr, String config_path, Adafruit_BMP280* sensor)
     : Sensor(config_path), addr_{addr} {
   load_configuration();
+  if (sensor == NULL) {
+    sensor = new Adafruit_BMP280();
+  }
   adafruit_bmp280_ = sensor;
   if (!adafruit_bmp280_->begin(addr_)) {
     debugE("Could not find a valid BMP280 sensor: check address and wiring");
