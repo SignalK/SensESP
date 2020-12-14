@@ -24,9 +24,6 @@
  * @param addr The memory address of the sensor. Defaults to 0x77, but other
  * addresses are available for some BME280 chips. See the datasheet.
  * 
- * @param config_path Will always be "", since there is nothing to configure in the
- * Config UI.
- * 
  * @param sensor A pointer to the actual BME280 sensor, returned by a constructor to
  * an Adafruit_BMP280 object. By default, SensESP uses the default Adafruit_BMP280
  * constructor - the one with no parameters. If your ESP doesn't use standard I2C pins
@@ -36,11 +33,8 @@
 */
 class BMP280 : public Sensor {
  public:
-  BMP280(uint8_t addr = 0x77, String config_path = "", Adafruit_BMP280* sensor = NULL);
+  BMP280(uint8_t addr = 0x77, Adafruit_BMP280* sensor = NULL);
   Adafruit_BMP280* adafruit_bmp280_;
-
- private:
-  uint8_t addr_;
 };
 
 

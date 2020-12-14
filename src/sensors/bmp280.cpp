@@ -6,14 +6,13 @@
 
 // BMP280 represents an ADAfruit (or compatible) BMP280 temperature & pressure
 // sensor.
-BMP280::BMP280(uint8_t addr, String config_path, Adafruit_BMP280* sensor)
-    : Sensor(config_path), addr_{addr} {
-  load_configuration();
+BMP280::BMP280(uint8_t addr, Adafruit_BMP280* sensor)
+    : Sensor() {
   if (sensor == NULL) {
     sensor = new Adafruit_BMP280();
   }
   adafruit_bmp280_ = sensor;
-  if (!adafruit_bmp280_->begin(addr_)) {
+  if (!adafruit_bmp280_->begin(addr)) {
     debugE("Could not find a valid BMP280 sensor: check address and wiring");
   }
 }
