@@ -8,7 +8,7 @@
 
 // The BMP280 classes are based on the ADAfruit_BMP280 library.
 
-/* * 
+/** 
  * @brief BMP280 represents an ADAfruit or compatible BMP280 temperature & pressure
  * sensor. 
  * 
@@ -44,7 +44,7 @@ class BMP280 : public Sensor {
 };
 
 
-/* 
+/**
  * @brief BMP280Value reads and outputs the specified value of a BMP280 sensor.
  * 
  * @param bmp280 A pointer to an instance of a BMP280.
