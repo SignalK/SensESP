@@ -52,11 +52,11 @@ auto *chain_counter = new DigitalInputCounter(COUNTER_PIN, INPUT_PULLUP, RISING,
 
 /* An IntegratorT<int, float> called "accumulator" adds up all the counts it
 * receives (which are ints) and multiplies each count by gypsy_circum, which is the
-* amount of chain, in feet, that is moved by each revolution of the windlass. (Since
+* amount of chain, in meters, that is moved by each revolution of the windlass. (Since
 * gypsy_circum is a float, the output of this transform must be a float, which is why
 * we use IntegratorT<int, float>). It can be configured in the Config UI at accum_config_path.
 */
-float gypsy_circum = 0.65;
+float gypsy_circum = 0.32;
 String accum_config_path = "/accumulator/circum";
 auto* accumulator = new IntegratorT<int, float>(gypsy_circum, 0.0, accum_config_path);
 
