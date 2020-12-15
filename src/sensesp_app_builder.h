@@ -41,6 +41,10 @@ class SensESPAppBuilder {
     app->set_system_status_led(system_status_led);
     return this;
   }
+  SensESPAppBuilder* set_test_auth_on_each_connect(bool val) {
+    WSClient::test_auth_on_each_connect_ = val;
+    return this;
+  }
   SensESPApp* get_app() {
     app->setup();
     return app;
