@@ -16,7 +16,7 @@ static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
 template <typename T>
 class SKOutput : public SKEmitter, public SymmetricTransform<T> {
  public:
-  SKOutput() : SKOutput("") {}
+  SKOutput() : SKOutput("") { this->load_configuration(); }
 
   /**
    * The constructor
@@ -31,6 +31,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
   SKOutput(String sk_path, String config_path = "", SKMetadata* meta = NULL)
       : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
     Enable::set_priority(-5);
+    this->load_configuration();
   }
 
   virtual void set_input(T new_value, uint8_t input_channel = 0) override {
