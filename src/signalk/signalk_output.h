@@ -33,6 +33,11 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
     Enable::set_priority(-5);
   }
 
+
+  SKOutput(String sk_path, SKMetadata* meta) :
+    SKOutput(sk_path, "", meta) {}
+
+
   virtual void set_input(T new_value, uint8_t input_channel = 0) override {
     this->ValueProducer<T>::emit(new_value);
   }
@@ -84,6 +89,11 @@ class SKOutputNumeric : public SKOutput<T> {
 
    public:
       SKOutputNumeric(String sk_path, String config_path = "", SKMetadata* meta = NULL);
+
+
+      SKOutputNumeric(String sk_path, SKMetadata* meta) :
+        SKOutputNumeric(sk_path, "", meta) {}
+
 
       /// The Signal K specification requires that numeric values sent
       /// to the server should at minimum specify a "units". This
