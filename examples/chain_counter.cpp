@@ -62,6 +62,18 @@ float gypsy_circum = 0.32;
 String accum_config_path = "/accumulator/circum";
 auto* accumulator = new IntegratorT<int, float>(gypsy_circum, 0.0, accum_config_path);
 
+/**
+ * There is no path for the amount of anchor rode deployed in the current Signal K
+ * specification. By creating an instance of SKMetaData, we can send a partial or full
+ * defintion of the metadata that other consumers of Signal K data might find useful.
+ * (For example, Instrument Panel will benefit from knowing the units to be displayed.)
+ * The metadata is sent only the first time the data value is sent to the server.
+ */
+SKMetadata* metadata = new SKMetadata();
+  metadata->units_ = "m";
+  metadata->description_ = "Anchor Rode Deployed";
+  metadata->display_name_ = "Rode Deployed";
+  metadata->short_name_ = "Rode Out";
 
 /** 
  * chain_counter is connected to accumulator, which is connected to an SKOutputNumber,
@@ -69,8 +81,11 @@ auto* accumulator = new IntegratorT<int, float>(gypsy_circum, 0.0, accum_config_
  * each data type has its own version of SKOutput: SKOutputNumber for floats, SKOutputInt,
  * SKOutputBool, and SKOutputString.)
  */
-chain_counter->connect_to(accumulator) 
-             ->connect_to(new SKOutputNumber("navigation.anchor.rodeDeployed"));
+  String sk_path = "navigation.anchor.rodeDeployed";
+  String sk_path_config_path = "/rodeDeployed/sk";
+  
+  chain_counter->connect_to(accumulator)
+               ->connect_to(new SKOutputNumber(sk_path, sk_path_config_path, metadata));
 
 
 
