@@ -82,7 +82,7 @@ ReactESP app([]() {
 
   tank_level->connect_to(new Linear(multiplier, offset, "/tank_level/linear"))
       ->connect_to(new SKOutputNumber("tanks.freshWater.currentLevel",
-                                      "/tank_level/skPath"));
+                                      "/tank_level/skPath", "ratio"));
 
   sensesp_app->enable();
 });

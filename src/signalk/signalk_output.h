@@ -34,6 +34,11 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
     this->load_configuration();
   }
 
+
+  SKOutput(String sk_path, SKMetadata* meta) :
+    SKOutput(sk_path, "", meta) {}
+
+
   virtual void set_input(T new_value, uint8_t input_channel = 0) override {
     this->ValueProducer<T>::emit(new_value);
   }
@@ -72,12 +77,39 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
 
   virtual SKMetadata* get_metadata() override { return meta_; }
 
-  private:
+  protected:
     SKMetadata* meta_;
 };
 
-typedef SKOutput<float> SKOutputNumber;
-typedef SKOutput<int> SKOutputInt;
+
+/**
+ * A special class for outputting numeric values.
+ */
+template <typename T>
+class SKOutputNumeric : public SKOutput<T> {
+
+   public:
+      SKOutputNumeric(String sk_path, String config_path = "", SKMetadata* meta = NULL);
+
+
+      SKOutputNumeric(String sk_path, SKMetadata* meta) :
+        SKOutputNumeric(sk_path, "", meta) {}
+
+
+      /// The Signal K specification requires that numeric values sent
+      /// to the server should at minimum specify a "units". This
+      /// constructor allows you to conveniently specify the numeric
+      /// units as a third parameter.
+      /// @param units The unit value for the number this outputs on the specified
+      ///  Signal K path. See https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
+      ///   
+      /// @see SKMetadata
+      SKOutputNumeric(String sk_path, String config_path, String units) :
+         SKOutputNumeric(sk_path, config_path, new SKMetadata(units)) {}
+};
+
+typedef SKOutputNumeric<float> SKOutputNumber;
+typedef SKOutputNumeric<int> SKOutputInt;
 typedef SKOutput<bool> SKOutputBool;
 typedef SKOutput<String> SKOutputString;
 
