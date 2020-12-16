@@ -22,7 +22,7 @@
  * https://github.com/adafruit/Adafruit_BMP280_Library/blob/master/Adafruit_BMP280.h
  * 
  * @param addr The memory address of the sensor. Defaults to 0x77, but other
- * addresses are available for some P280 chips. See the datasheet.
+ * addresses are available for some BMP280 chips. See the datasheet.
  * 
  * @param sensor A pointer to the actual Adafruit_BMP280 sensor. It is NULL by default,
  * which means "use the default constructor for the Adafruit_BMP20", which is:
