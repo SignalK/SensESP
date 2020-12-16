@@ -26,6 +26,9 @@ class SKDelta {
   std::list<String> buffer;
   bool meta_sent_;
 
+  unsigned int get_doc_size_estimate();
+  unsigned int get_metadata_size_estimate();
+
   // Adds Signal K meta data to the specified document
   void add_metadata(JsonArray updates);
 };
