@@ -12,7 +12,7 @@
 #include "system/valueconsumer.h"
 
 /**
- * SKRequest is a base class for all objects that are capable of sending
+ * @brief A base class for all objects that are capable of sending
  * "requests" to the SignalK server (and optionally receiving the responses)
  *  according to the specification located at
  * https://signalk.org/specification/1.5.0/doc/request_response.html
@@ -64,7 +64,7 @@ class SKRequest {
 };
 
 /**
- * SKPutRequestBase is a base class for all template variations of
+ * @brief  A base class for all template variations of
  * the PUT request class SKPutRequest. This base class keeps the
  * compiler from generating reduntant object code for common
  * functionality of each template version.
@@ -111,8 +111,9 @@ class SKPutRequestBase : public SKRequest, public Configurable {
 };
 
 /**
- * SKPutRequest is used to send PUT requests for specific types of
- * SignalK values according to the specification at
+ * @brief Used to send requests to the server to change the
+ * value of the specified path to a specific value according
+ * to the specification at
  * https://signalk.org/specification/1.5.0/doc/put.html
  */
 template <typename T>

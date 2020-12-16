@@ -5,7 +5,7 @@
 
 
 /**
- * TextToTruth consumes a string, and outputs boolean "true" 
+ * @brief Consumes a string and outputs boolean "true" 
  * if the text represents a human readable version of "true". The following
  * case-insensitive values are considered true:
  * <p><ul>
@@ -39,7 +39,7 @@ class TextToTruth : public Transform<String, bool> {
 
 
 /**
- * TruthToText consumes a boolean value and outputs one the
+ * @brief Consumes a boolean value and outputs one the
  * appropriate truth string specified in the constructor. 
  * This is the inverse of TextToTruth.
  * @see TextToTruth

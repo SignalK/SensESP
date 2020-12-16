@@ -6,7 +6,7 @@
 #include "transforms/transform.h"
 
 /**
- * RepeatReport ensures that values that do not change frequently are still
+ * @brief Ensures that values that do not change frequently are still
  * reported at at a specified maximum silence interval. If the value has not
  * changed in max_silence_interval milliseconds, the current value is emmitted
  * again,

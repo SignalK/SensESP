@@ -6,7 +6,7 @@
 #include "transforms/lambda_transform.h"
 
 /**
- * Typecast is a transform that allows you to convert from one
+ * @brief A transform that allows you to convert from one
  * data type to another. To use Typecast, simply construct
  * a new instance of Typecast.
  * <p>If the data type of IN is capable of doing
@@ -38,7 +38,7 @@ typedef Typecast<int, float> IntToFloat;
 typedef Typecast<float, int> FloatToInt;
 
 /**
- * A Typecast transform that takes as its
+ * @brief A Typecast transform that takes as its
  * input a float number, rounds it to
  * the nearest whole number, then outputs
  * it as an int. 

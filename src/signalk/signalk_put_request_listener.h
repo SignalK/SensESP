@@ -12,8 +12,10 @@
 #include "system/valueproducer.h"
 
 /**
- * A Signal K listener is one that listens for Signal K stream deltas
- * and notifies of value changes
+ * @brief An Obervable class that listens for Signal K PUT
+ * requests coming over the websocket connection and notifies
+ * observers of the change.
+ * @see SKPutRequestListener
  */
 class SKPutListener : virtual public Observable {
  public:
@@ -40,7 +42,7 @@ class SKPutListener : virtual public Observable {
 
 
 /**
- * SKPutRequestListener is object that listens for PUT requests to come in
+ * @brief  An object that listens for PUT requests to come in
  * for the specified SignalK path. The value is then emitted for
  * further processing.
  */
