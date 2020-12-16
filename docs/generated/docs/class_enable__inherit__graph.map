@@ -1,51 +1,51 @@
 <map id="Enable" name="Enable">
-<area shape="rect" id="node1" title=" " alt="" coords="5,425,68,451"/>
-<area shape="rect" id="node2" href="$class_base_blinker.html" title=" " alt="" coords="127,80,220,105"/>
-<area shape="rect" id="node7" href="$class_sensor.html" title=" " alt="" coords="142,425,205,451"/>
-<area shape="rect" id="node37" href="$class_transform_base.html" title=" " alt="" coords="118,1549,230,1575"/>
-<area shape="rect" id="node3" href="$class_pattern_blinker.html" title=" " alt="" coords="317,80,422,105"/>
-<area shape="rect" id="node4" href="$class_periodic_blinker.html" title=" " alt="" coords="315,31,425,56"/>
-<area shape="rect" id="node5" href="$class_even_blinker.html" title=" " alt="" coords="687,5,780,31"/>
-<area shape="rect" id="node6" href="$class_ratio_blinker.html" title=" " alt="" coords="687,55,780,80"/>
-<area shape="rect" id="node8" href="$class_a_d_s1x15.html" title="ADS1x15 represents an ADS1015 or ADS1115 Analog to Digital Converter." alt="" coords="282,277,458,303"/>
-<area shape="rect" id="node9" href="$class_b_m_e280.html" title=" " alt="" coords="334,327,406,352"/>
-<area shape="rect" id="node10" href="$class_b_m_p280.html" title="BMP280 represents an ADAfruit or compatible BMP280 temperature &amp; pressure sensor." alt="" coords="334,376,406,401"/>
-<area shape="rect" id="node11" href="$class_dallas_temperature_sensors.html" title=" " alt="" coords="279,425,461,451"/>
-<area shape="rect" id="node12" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="326,475,414,500"/>
-<area shape="rect" id="node16" href="$class_free_mem.html" title=" " alt="" coords="331,524,409,549"/>
-<area shape="rect" id="node17" href="$class_g_p_s_input.html" title=" " alt="" coords="330,573,409,599"/>
-<area shape="rect" id="node18" href="$class_i_n_a219.html" title=" " alt="" coords="337,623,403,648"/>
-<area shape="rect" id="node19" href="$class_integer_sensor.html" title=" " alt="" coords="317,672,422,697"/>
-<area shape="rect" id="node20" href="$class_numeric_sensor.html" title=" " alt="" coords="313,809,427,835"/>
-<area shape="rect" id="node34" href="$class_orientation9_d_o_f.html" title=" " alt="" coords="309,129,431,155"/>
-<area shape="rect" id="node35" href="$class_s_h_t31.html" title=" " alt="" coords="338,179,401,204"/>
-<area shape="rect" id="node36" href="$class_string_sensor.html" title=" " alt="" coords="321,228,419,253"/>
-<area shape="rect" id="node13" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="666,376,801,401"/>
-<area shape="rect" id="node14" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="666,425,801,451"/>
-<area shape="rect" id="node15" href="$class_digital_input_state.html" title="DigitalInputState reports the state of a digital pin every read_delay ms." alt="" coords="674,475,793,500"/>
-<area shape="rect" id="node21" href="$class_a_d_s1x15_raw_value.html" title=" " alt="" coords="655,672,812,711"/>
-<area shape="rect" id="node22" href="$class_analog_input.html" title=" " alt="" coords="687,735,780,760"/>
-<area shape="rect" id="node23" href="$class_b_m_e280_value.html" title=" " alt="" coords="681,784,786,809"/>
-<area shape="rect" id="node24" href="$class_b_m_p280_value.html" title="BMP280Value reads and outputs the specified value of a BMP280 sensor." alt="" coords="681,833,786,859"/>
-<area shape="rect" id="node25" href="$class_i_n_a219_value.html" title=" " alt="" coords="684,883,783,908"/>
-<area shape="rect" id="node26" href="$class_m_a_x31856_thermocouple.html" title=" " alt="" coords="647,932,820,957"/>
-<area shape="rect" id="node27" href="$class_one_wire_temperature.html" title=" " alt="" coords="659,981,808,1007"/>
-<area shape="rect" id="node28" href="$class_read9_d_o_f.html" title=" " alt="" coords="689,1031,778,1056"/>
-<area shape="rect" id="node29" href="$class_s_h_t31_value.html" title=" " alt="" coords="686,1080,782,1105"/>
-<area shape="rect" id="node30" href="$class_system_hz.html" title=" " alt="" coords="693,1129,775,1155"/>
-<area shape="rect" id="node31" href="$class_ultrasonic_distance.html" title=" " alt="" coords="667,524,800,549"/>
-<area shape="rect" id="node32" href="$class_uptime.html" title=" " alt="" coords="702,573,765,599"/>
-<area shape="rect" id="node33" href="$class_wifi_signal.html" title=" " alt="" coords="693,623,774,648"/>
-<area shape="rect" id="node38" href="$class_transform.html" title=" " alt="" coords="305,1549,435,1575"/>
-<area shape="rect" id="node39" href="$class_transform.html" title=" " alt="" coords="652,1701,815,1727"/>
-<area shape="rect" id="node40" href="$class_transform.html" title=" " alt="" coords="657,1856,810,1881"/>
-<area shape="rect" id="node41" href="$class_transform.html" title=" " alt="" coords="648,1371,820,1396"/>
-<area shape="rect" id="node42" href="$class_transform.html" title=" " alt="" coords="658,1493,809,1519"/>
-<area shape="rect" id="node43" href="$class_transform.html" title=" " alt="" coords="658,1296,809,1321"/>
-<area shape="rect" id="node44" href="$class_transform.html" title=" " alt="" coords="658,1593,809,1619"/>
-<area shape="rect" id="node45" href="$class_transform.html" title=" " alt="" coords="652,1772,815,1797"/>
-<area shape="rect" id="node46" href="$class_transform.html" title=" " alt="" coords="667,1201,800,1240"/>
-<area shape="rect" id="node47" href="$class_transform.html" title=" " alt="" coords="671,1431,797,1456"/>
-<area shape="rect" id="node48" href="$class_transform.html" title=" " alt="" coords="668,1971,799,2009"/>
-<area shape="rect" id="node49" href="$class_transform.html" title=" " alt="" coords="633,1911,834,1936"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,436,68,463"/>
+<area shape="rect" id="node2" href="$class_base_blinker.html" title=" " alt="" coords="127,81,219,108"/>
+<area shape="rect" id="node7" href="$class_sensor.html" title=" " alt="" coords="141,436,204,463"/>
+<area shape="rect" id="node37" href="$class_transform_base.html" title=" " alt="" coords="117,1588,228,1615"/>
+<area shape="rect" id="node3" href="$class_pattern_blinker.html" title=" " alt="" coords="315,81,419,108"/>
+<area shape="rect" id="node4" href="$class_periodic_blinker.html" title=" " alt="" coords="312,31,421,57"/>
+<area shape="rect" id="node5" href="$class_even_blinker.html" title=" " alt="" coords="685,5,777,32"/>
+<area shape="rect" id="node6" href="$class_ratio_blinker.html" title=" " alt="" coords="684,56,777,83"/>
+<area shape="rect" id="node8" href="$class_a_d_s1x15.html" title="ADS1x15 represents an ADS1015 or ADS1115 Analog to Digital Converter." alt="" coords="279,284,454,311"/>
+<area shape="rect" id="node9" href="$class_b_m_e280.html" title=" " alt="" coords="331,335,403,361"/>
+<area shape="rect" id="node10" href="$class_b_m_p280.html" title="BMP280 represents an ADAfruit or compatible BMP280 temperature &amp; pressure sensor." alt="" coords="331,385,403,412"/>
+<area shape="rect" id="node11" href="$class_dallas_temperature_sensors.html" title=" " alt="" coords="277,436,456,463"/>
+<area shape="rect" id="node12" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="323,487,411,513"/>
+<area shape="rect" id="node16" href="$class_free_mem.html" title=" " alt="" coords="328,537,405,564"/>
+<area shape="rect" id="node17" href="$class_g_p_s_input.html" title=" " alt="" coords="327,588,406,615"/>
+<area shape="rect" id="node18" href="$class_i_n_a219.html" title=" " alt="" coords="333,639,400,665"/>
+<area shape="rect" id="node19" href="$class_integer_sensor.html" title=" " alt="" coords="315,689,418,716"/>
+<area shape="rect" id="node20" href="$class_numeric_sensor.html" title=" " alt="" coords="311,832,423,859"/>
+<area shape="rect" id="node34" href="$class_orientation9_d_o_f.html" title=" " alt="" coords="307,132,427,159"/>
+<area shape="rect" id="node35" href="$class_s_h_t31.html" title=" " alt="" coords="335,183,398,209"/>
+<area shape="rect" id="node36" href="$class_string_sensor.html" title=" " alt="" coords="318,233,415,260"/>
+<area shape="rect" id="node13" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="664,385,797,412"/>
+<area shape="rect" id="node14" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="663,436,798,463"/>
+<area shape="rect" id="node15" href="$class_digital_input_state.html" title="DigitalInputState reports the state of a digital pin every read_delay ms." alt="" coords="671,487,790,513"/>
+<area shape="rect" id="node21" href="$class_a_d_s1x15_raw_value.html" title=" " alt="" coords="652,690,809,731"/>
+<area shape="rect" id="node22" href="$class_analog_input.html" title=" " alt="" coords="685,756,776,783"/>
+<area shape="rect" id="node23" href="$class_b_m_e280_value.html" title=" " alt="" coords="679,807,783,833"/>
+<area shape="rect" id="node24" href="$class_b_m_p280_value.html" title="BMP280Value reads and outputs the specified value of a BMP280 sensor." alt="" coords="679,857,783,884"/>
+<area shape="rect" id="node25" href="$class_i_n_a219_value.html" title=" " alt="" coords="681,908,780,935"/>
+<area shape="rect" id="node26" href="$class_m_a_x31856_thermocouple.html" title=" " alt="" coords="647,959,815,985"/>
+<area shape="rect" id="node27" href="$class_one_wire_temperature.html" title=" " alt="" coords="658,1009,803,1036"/>
+<area shape="rect" id="node28" href="$class_read9_d_o_f.html" title=" " alt="" coords="687,1060,775,1087"/>
+<area shape="rect" id="node29" href="$class_s_h_t31_value.html" title=" " alt="" coords="683,1111,778,1137"/>
+<area shape="rect" id="node30" href="$class_system_hz.html" title=" " alt="" coords="689,1161,773,1188"/>
+<area shape="rect" id="node31" href="$class_ultrasonic_distance.html" title=" " alt="" coords="664,537,797,564"/>
+<area shape="rect" id="node32" href="$class_uptime.html" title=" " alt="" coords="699,588,763,615"/>
+<area shape="rect" id="node33" href="$class_wifi_signal.html" title=" " alt="" coords="690,639,771,665"/>
+<area shape="rect" id="node38" href="$class_transform.html" title=" " alt="" coords="301,1588,433,1615"/>
+<area shape="rect" id="node39" href="$class_transform.html" title=" " alt="" coords="649,1743,812,1769"/>
+<area shape="rect" id="node40" href="$class_transform.html" title=" " alt="" coords="653,1885,808,1912"/>
+<area shape="rect" id="node41" href="$class_transform.html" title=" " alt="" coords="645,1405,816,1432"/>
+<area shape="rect" id="node42" href="$class_transform.html" title=" " alt="" coords="655,1531,806,1557"/>
+<area shape="rect" id="node43" href="$class_transform.html" title=" " alt="" coords="655,1331,807,1357"/>
+<area shape="rect" id="node44" href="$class_transform.html" title=" " alt="" coords="655,1633,807,1660"/>
+<area shape="rect" id="node45" href="$class_transform.html" title=" " alt="" coords="649,1807,812,1833"/>
+<area shape="rect" id="node46" href="$class_transform.html" title=" " alt="" coords="664,1234,797,1275"/>
+<area shape="rect" id="node47" href="$class_transform.html" title=" " alt="" coords="667,1469,794,1496"/>
+<area shape="rect" id="node48" href="$class_transform.html" title=" " alt="" coords="665,2002,796,2043"/>
+<area shape="rect" id="node49" href="$class_transform.html" title=" " alt="" coords="629,1941,832,1968"/>
 </map>

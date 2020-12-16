@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('class_smart_switch_controller.html',''
 </div><!--header-->
 <div class="contents">
 
+<p>A high level transform designed to control a digital output (such as a relay) via manual button presses or programatic commands. To accomplish this, the controller accepts inputs from a generic boolean producer (usually a SignalK listener), as well as String and <a class="el" href="class_click_type.html" title="ClickType adds a time element to button presses. It measures the time between a button press and its ...">ClickType</a> inputs. The latter allows a physical button to control the load as well as add special behaviors to the sensor application. In particular, an ultra long press of the button will cause the MCU to reboot.  
+ <a href="class_smart_switch_controller.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="smart__switch__controller_8h_source.html">smart_switch_controller.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SmartSwitchController:</div>
@@ -226,13 +229,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_smart_switch_controller.html">SmartSwitchController</a> is a high level transform designed specifically to control a LoadController. This controller accepts inputs from a generic boolean producer (usually a SignalK listener), as well as String and <a class="el" href="class_click_type.html">ClickType</a> transforms. The latter allows a physical button to control the load as well as add special behaviors to the sensor application. In particular, an ultra long press of the button will cause the MCU to reboot. </p>
-<p>A <a class="el" href="class_smart_switch_controller.html">SmartSwitchController</a> object behaves differently depending on the type of input it receives. If the input is a boolean or a "valid truth type" (which is a specialized type of boolean - see below), <a class="el" href="class_smart_switch_controller.html">SmartSwitchController</a>'s output will be "on" if the input is "true", or "off" if the input is "false". If the input is a <a class="el" href="class_click_type.html">ClickType</a>, or a String that's NOT a "valid truth type", <a class="el" href="class_smart_switch_controller.html">SmartSwitchController</a>'s output will simply toggle the output back and forth between "on" and "off" with each input. The one exception to this is if the input is a <a class="el" href="class_click_type.html">ClickType</a> with the value <a class="el" href="click__type_8h.html#a4a760072c8c7ae604f801ff82824b666a90cdf9b893f111309c5f35d6bf413f90">ClickTypes::UltraLongSingleClick</a> which will reboot the MCU. </p>
-<p>Incoming String values are evaluated to see if they represent a "valid truth type". Examples include "on", "ON", "off", "true", "false", "one", "1", "123" (or any other string that represents a non-zero value), etc. Case is insensitive. Any incoming String that doesn't evaluate to a "valid truth type" will be treated as a "click", and will toggle the output btween "on" and "off". </p><dl class="section see"><dt>See also</dt><dd>LoadController </dd>
+<div class="textblock"><p>A high level transform designed to control a digital output (such as a relay) via manual button presses or programatic commands. To accomplish this, the controller accepts inputs from a generic boolean producer (usually a SignalK listener), as well as String and <a class="el" href="class_click_type.html" title="ClickType adds a time element to button presses. It measures the time between a button press and its ...">ClickType</a> inputs. The latter allows a physical button to control the load as well as add special behaviors to the sensor application. In particular, an ultra long press of the button will cause the MCU to reboot. </p>
+<p>A <a class="el" href="class_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press...">SmartSwitchController</a> object behaves differently depending on the type of input it receives. If the input is a boolean or a "valid truth type" (which is a specialized type of boolean - see below), <a class="el" href="class_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press...">SmartSwitchController</a>'s output will be "on" if the input is "true", or "off" if the input is "false". If the input is a <a class="el" href="class_click_type.html" title="ClickType adds a time element to button presses. It measures the time between a button press and its ...">ClickType</a>, or a String that's NOT a "valid truth type", <a class="el" href="class_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press...">SmartSwitchController</a>'s output will simply toggle the output back and forth between "on" and "off" with each input. The one exception to this is if the input is a <a class="el" href="class_click_type.html" title="ClickType adds a time element to button presses. It measures the time between a button press and its ...">ClickType</a> with the value <a class="el" href="click__type_8h.html#a4a760072c8c7ae604f801ff82824b666a90cdf9b893f111309c5f35d6bf413f90">ClickTypes::UltraLongSingleClick</a> which will reboot the MCU. </p>
+<p>Incoming String values are evaluated to see if they represent a "valid truth type". Examples include "on", "ON", "off", "true", "false", "one", "1", "123" (or any other string that represents a non-zero value), etc. Case is insensitive. Any incoming String that doesn't evaluate to a "valid truth type" will be treated as a "click", and will toggle the output btween "on" and "off". </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_text_to_truth.html" title="Consumes a string and outputs boolean &quot;true&quot; if the text represents a human readable version of &quot;true...">TextToTruth</a> </dd>
 <dd>
-<a class="el" href="class_text_to_truth.html">TextToTruth</a> </dd>
-<dd>
-<a class="el" href="class_click_type.html">ClickType</a> </dd></dl>
+<a class="el" href="class_click_type.html" title="ClickType adds a time element to button presses. It measures the time between a button press and its ...">ClickType</a> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="smart__switch__controller_8h_source.html#l00032">32</a> of file <a class="el" href="smart__switch__controller_8h_source.html">smart_switch_controller.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -266,7 +267,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller_aa6584265e6cc0cd46e80a64dedf3d9eb_cgraph.svg" width="354" height="50"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller_aa6584265e6cc0cd46e80a64dedf3d9eb_cgraph.svg" width="351" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -310,7 +311,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller_a349f8404d8ce901bc4fc4a5fdd7c7a5e_cgraph.svg" width="354" height="50"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller_a349f8404d8ce901bc4fc4a5fdd7c7a5e_cgraph.svg" width="351" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -363,7 +364,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller_a94d837ee621c08bb45a6897b91378bf7_cgraph.svg" width="386" height="148"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller_a94d837ee621c08bb45a6897b91378bf7_cgraph.svg" width="384" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -416,7 +417,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller_a6c3251597a8f276fa3d112fac781602a_cgraph.svg" width="354" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller_a6c3251597a8f276fa3d112fac781602a_cgraph.svg" width="351" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
