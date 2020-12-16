@@ -22,14 +22,20 @@
  * https://github.com/adafruit/Adafruit_BMP280_Library/blob/master/Adafruit_BMP280.h
  * 
  * @param addr The memory address of the sensor. Defaults to 0x77, but other
- * addresses are available for some BME280 chips. See the datasheet.
+ * addresses are available for some P280 chips. See the datasheet.
  * 
- * @param sensor A pointer to the actual BME280 sensor, returned by a constructor to
- * an Adafruit_BMP280 object. By default, SensESP uses the default Adafruit_BMP280
- * constructor - the one with no parameters. If your ESP doesn't use standard I2C pins
- * for SDA and SCL, you'll need to do something like this in main.cpp:
- *   Wire.begin(SDA_PIN, SCL_PIN, FREQUENCY); // ESP32 uses FREQUENCY, ESP8266 does not
- *   auto* bmp280 = new BMP280(0x76, "/some_config/path", new Adafruit_BMP280(&Wire));
+ * @param sensor A pointer to the actual Adafruit_BMP280 sensor. It is NULL by default,
+ * which means "use the default constructor for the Adafruit_BMP20", which is:
+     
+     sensor = new Adafruit_BMP280();  // no parameters
+   
+ * If your ESP doesn't use standard I2C pins for SDA and SCL, you'll need to do something
+ * like this in main.cpp:
+ 
+    Wire.begin(SDA_PIN, SCL_PIN, FREQUENCY); // ESP32 uses FREQUENCY, ESP8266 does not
+    Adafruit_BMP280* bmp_280_sensor = new Adafruit_BMP280(&Wire);
+    auto* bmp280 = new BMP280(0x76, bmp_280_sensor);
+
 */
 class BMP280 : public Sensor {
  public:
