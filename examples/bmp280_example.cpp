@@ -19,6 +19,8 @@ ReactESP app([]() {
 
   // Create a BMP280, which represents the physical sensor.
   // 0x77 is the default address. Some chips use 0x76, which is shown here.
+  // If you need to use the TwoWire library instead of the Wire library, there
+  // is a different constructor: see bmp280.h
   auto* bmp280 = new BMP280(0x76);
 
   // If you want to change any of the settings that are set by
