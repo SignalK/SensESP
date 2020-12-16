@@ -4,5 +4,6 @@ var class_s_k_delta =
     [ "append", "class_s_k_delta.html#afacfa3952be6179d0e96960575f393a8", null ],
     [ "data_available", "class_s_k_delta.html#a74ab20a661a4f80a336b50fccc4bd9bc", null ],
     [ "get_delta", "class_s_k_delta.html#ab1592b494b343964703102a4797d3bbc", null ],
+    [ "reset_meta_send", "class_s_k_delta.html#a39c8edf6268d4caf854e5cf5d3f283b7", null ],
     [ "set_hostname", "class_s_k_delta.html#acd3c98ae0fe75f92d5d9c1e6a216a8dd", null ]
 ];

@@ -1,5 +1,147 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_transform.html" title=" " alt="" coords="5,12,168,37"/>
-<area shape="rect" id="node2" href="$class_threshold_transform.html" title=" " alt="" coords="216,5,357,44"/>
-<area shape="rect" id="node3" href="$class_numeric_threshold.html" title=" " alt="" coords="405,12,535,37"/>
+<area shape="rect" id="node1" href="$class_configurable.html" title=" " alt="" coords="5,909,102,935"/>
+<area shape="rect" id="node2" href="$class_networking.html" title=" " alt="" coords="487,572,575,597"/>
+<area shape="rect" id="node3" href="$class_rgb_led.html" title=" " alt="" coords="497,720,565,745"/>
+<area shape="rect" id="node4" href="$class_sensor.html" title=" " alt="" coords="229,473,293,499"/>
+<area shape="rect" id="node36" href="$class_s_k_put_request_base.html" title=" " alt="" coords="191,1096,330,1121"/>
+<area shape="rect" id="node38" href="$class_transform_base.html" title=" " alt="" coords="205,1424,317,1449"/>
+<area shape="rect" id="node92" href="$class_w_s_client.html" title=" " alt="" coords="493,2143,569,2168"/>
+<area shape="rect" id="node5" href="$class_a_d_s1x15.html" title="ADS1x15 represents an ADS1015 or ADS1115 Analog to Digital Converter." alt="" coords="443,325,619,351"/>
+<area shape="rect" id="node6" href="$class_b_m_e280.html" title=" " alt="" coords="495,375,567,400"/>
+<area shape="rect" id="node7" href="$class_b_m_p280.html" title="BMP280 represents an ADAfruit or compatible BMP280 temperature &amp; pressure sensor." alt="" coords="495,424,567,449"/>
+<area shape="rect" id="node8" href="$class_dallas_temperature_sensors.html" title=" " alt="" coords="440,473,622,499"/>
+<area shape="rect" id="node9" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="487,871,575,896"/>
+<area shape="rect" id="node13" href="$class_free_mem.html" title=" " alt="" coords="492,523,570,548"/>
+<area shape="rect" id="node14" href="$class_g_p_s_input.html" title=" " alt="" coords="491,128,571,153"/>
+<area shape="rect" id="node15" href="$class_i_n_a219.html" title=" " alt="" coords="498,177,564,203"/>
+<area shape="rect" id="node16" href="$class_integer_sensor.html" title=" " alt="" coords="478,920,584,945"/>
+<area shape="rect" id="node17" href="$class_numeric_sensor.html" title=" " alt="" coords="474,769,588,795"/>
+<area shape="rect" id="node32" href="$class_orientation9_d_o_f.html" title=" " alt="" coords="470,227,592,252"/>
+<area shape="rect" id="node33" href="$class_s_h_t31.html" title=" " alt="" coords="500,276,562,301"/>
+<area shape="rect" id="node34" href="$class_string_sensor.html" title=" " alt="" coords="482,621,580,647"/>
+<area shape="rect" id="node10" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="725,1072,860,1097"/>
+<area shape="rect" id="node11" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="724,1121,860,1147"/>
+<area shape="rect" id="node12" href="$class_digital_input_state.html" title="DigitalInputState reports the state of a digital pin every read_delay ms." alt="" coords="733,1171,852,1196"/>
+<area shape="rect" id="node18" href="$class_a_d_s1x15_raw_value.html" title=" " alt="" coords="714,861,871,900"/>
+<area shape="rect" id="node20" href="$class_analog_input.html" title=" " alt="" coords="746,924,838,949"/>
+<area shape="rect" id="node21" href="$class_b_m_e280_value.html" title=" " alt="" coords="739,973,845,999"/>
+<area shape="rect" id="node22" href="$class_b_m_p280_value.html" title="BMP280Value reads and outputs the specified value of a BMP280 sensor." alt="" coords="739,1023,845,1048"/>
+<area shape="rect" id="node23" href="$class_i_n_a219_value.html" title=" " alt="" coords="743,417,842,443"/>
+<area shape="rect" id="node24" href="$class_m_a_x31856_thermocouple.html" title=" " alt="" coords="706,467,878,492"/>
+<area shape="rect" id="node25" href="$class_one_wire_temperature.html" title=" " alt="" coords="718,516,867,541"/>
+<area shape="rect" id="node26" href="$class_read9_d_o_f.html" title=" " alt="" coords="748,565,837,591"/>
+<area shape="rect" id="node27" href="$class_s_h_t31_value.html" title=" " alt="" coords="744,615,840,640"/>
+<area shape="rect" id="node28" href="$class_system_hz.html" title=" " alt="" coords="751,664,833,689"/>
+<area shape="rect" id="node29" href="$class_ultrasonic_distance.html" title=" " alt="" coords="726,713,858,739"/>
+<area shape="rect" id="node30" href="$class_uptime.html" title=" " alt="" coords="760,763,824,788"/>
+<area shape="rect" id="node31" href="$class_wifi_signal.html" title=" " alt="" coords="752,812,833,837"/>
+<area shape="rect" id="node19" href="$class_a_d_s1x15_voltage.html" title="ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it ..." alt="" coords="942,1175,1112,1213"/>
+<area shape="rect" id="node35" href="$class_i_p_addr_dev.html" title=" " alt="" coords="750,256,835,281"/>
+<area shape="rect" id="node37" href="$class_s_k_put_request.html" title=" " alt="" coords="461,1171,601,1196"/>
+<area shape="rect" id="node39" href="$class_transform.html" title=" " alt="" coords="466,671,596,696"/>
+<area shape="rect" id="node42" href="$class_transform.html" title=" " alt="" coords="430,1269,632,1295"/>
+<area shape="rect" id="node44" href="$class_transform.html" title=" " alt="" coords="445,1220,617,1245"/>
+<area shape="rect" id="node46" href="$class_transform.html" title=" " alt="" coords="450,1480,612,1505"/>
+<area shape="rect" id="node49" href="$class_transform.html" title=" " alt="" coords="450,1641,612,1667"/>
+<area shape="rect" id="node63" href="$class_transform.html" title=" " alt="" coords="455,1381,607,1407"/>
+<area shape="rect" id="node67" href="$class_transform.html" title=" " alt="" coords="454,1992,608,2017"/>
+<area shape="rect" id="node73" href="$class_transform.html" title=" " alt="" coords="455,1529,607,1555"/>
+<area shape="rect" id="node76" href="$class_transform.html" title=" " alt="" coords="455,1740,607,1765"/>
+<area shape="rect" id="node78" href="$class_transform.html" title=" " alt="" coords="465,1579,597,1617"/>
+<area shape="rect" id="node80" href="$class_transform.html" title=" " alt="" coords="468,1431,594,1456"/>
+<area shape="rect" id="node89" href="$class_transform.html" title=" " alt="" coords="464,1319,598,1357"/>
+<area shape="rect" id="node40" href="$class_integrator_t.html" title="Integrator integrates (accumulates) the incoming values." alt="" coords="725,368,860,393"/>
+<area shape="rect" id="node41" href="$class_threshold_transform.html" title=" " alt="" coords="722,305,863,344"/>
+<area shape="rect" id="node43" href="$class_click_type.html" title=" " alt="" coords="753,1269,832,1295"/>
+<area shape="rect" id="node45" href="$class_truth_to_text.html" title=" " alt="" coords="747,1220,837,1245"/>
+<area shape="rect" id="node47" href="$class_threshold_transform.html" title=" " alt="" coords="722,1323,863,1361"/>
+<area shape="rect" id="node48" href="$class_numeric_threshold.html" title=" " alt="" coords="962,977,1092,1003"/>
+<area shape="rect" id="node50" href="$class_lambda_transform.html" title=" " alt="" coords="707,1552,877,1591"/>
+<area shape="rect" id="node52" href="$class_symmetric_transform.html" title=" " alt="" coords="720,1615,865,1653"/>
+<area shape="rect" id="node51" href="$class_linear.html" title=" " alt="" coords="998,1287,1056,1312"/>
+<area shape="rect" id="node53" href="$class_analog_voltage.html" title=" " alt="" coords="973,1484,1081,1509"/>
+<area shape="rect" id="node54" href="$class_angle_correction.html" title=" " alt="" coords="969,1583,1086,1608"/>
+<area shape="rect" id="node55" href="$class_change_filter.html" title=" " alt="" coords="978,1632,1076,1657"/>
+<area shape="rect" id="node56" href="$class_curve_interpolator.html" title=" " alt="" coords="965,1681,1089,1707"/>
+<area shape="rect" id="node57" href="$class_difference.html" title=" " alt="" coords="986,1731,1068,1756"/>
+<area shape="rect" id="node58" href="$class_median.html" title=" " alt="" coords="995,1780,1060,1805"/>
+<area shape="rect" id="node59" href="$class_moving_average.html" title=" " alt="" coords="970,1829,1084,1855"/>
+<area shape="rect" id="node60" href="$class_voltage_divider_r1.html" title=" " alt="" coords="965,1336,1089,1361"/>
+<area shape="rect" id="node61" href="$class_voltage_divider_r2.html" title=" " alt="" coords="965,1385,1089,1411"/>
+<area shape="rect" id="node62" href="$class_voltage_multiplier.html" title=" " alt="" coords="968,1435,1087,1460"/>
+<area shape="rect" id="node64" href="$class_lambda_transform.html" title=" " alt="" coords="707,1727,877,1765"/>
+<area shape="rect" id="node65" href="$class_typecast.html" title=" " alt="" coords="955,1879,1099,1904"/>
+<area shape="rect" id="node66" href="$class_round_to_int.html" title=" " alt="" coords="1195,1879,1285,1904"/>
+<area shape="rect" id="node68" href="$class_lambda_transform.html" title="Construct a new transform based on a single function." alt="" coords="713,2003,871,2055"/>
+<area shape="rect" id="node69" href="$class_lambda_transform.html" title=" " alt="" coords="713,1940,871,1979"/>
+<area shape="rect" id="node71" href="$class_lambda_transform.html" title=" " alt="" coords="705,2079,879,2117"/>
+<area shape="rect" id="node70" href="$class_typecast.html" title=" " alt="" coords="954,2027,1100,2052"/>
+<area shape="rect" id="node72" href="$class_hysteresis.html" title="Hysteresis function." alt="" coords="950,2085,1105,2111"/>
+<area shape="rect" id="node74" href="$class_threshold_transform.html" title=" " alt="" coords="722,1440,863,1479"/>
+<area shape="rect" id="node75" href="$class_integer_threshold.html" title=" " alt="" coords="966,1237,1088,1263"/>
+<area shape="rect" id="node77" href="$class_frequency.html" title=" " alt="" coords="750,1789,834,1815"/>
+<area shape="rect" id="node79" href="$class_text_to_truth.html" title=" " alt="" coords="747,1503,837,1528"/>
+<area shape="rect" id="node81" href="$class_symmetric_transform.html" title=" " alt="" coords="705,1391,880,1416"/>
+<area shape="rect" id="node82" href="$class_debounce_template.html" title="DebounceTemplate implements debounce code for a button or switch." alt="" coords="944,1027,1111,1052"/>
+<area shape="rect" id="node83" href="$class_digital_output.html" title=" " alt="" coords="978,1076,1076,1101"/>
+<area shape="rect" id="node84" href="$class_press_repeater.html" title=" " alt="" coords="972,1533,1082,1559"/>
+<area shape="rect" id="node85" href="$class_repeat_report.html" title=" " alt="" coords="960,1125,1095,1151"/>
+<area shape="rect" id="node86" href="$class_s_k_output.html" title=" " alt="" coords="972,1928,1082,1953"/>
+<area shape="rect" id="node88" href="$class_smart_switch_controller.html" title=" " alt="" coords="950,2143,1104,2168"/>
+<area shape="rect" id="node87" href="$class_s_k_output_numeric.html" title=" " alt="" coords="1160,1928,1320,1953"/>
+<area shape="rect" id="node90" href="$class_time_string.html" title=" " alt="" coords="750,1677,835,1703"/>
+<area shape="rect" id="node91" href="$class_s_k_output_time.html" title=" " alt="" coords="973,1977,1081,2003"/>
+<area shape="rect" id="node93" href="$class_enable.html" title=" " alt="" coords="22,473,85,499"/>
+<area shape="rect" id="node94" href="$class_base_blinker.html" title=" " alt="" coords="215,79,307,104"/>
+<area shape="rect" id="node95" href="$class_pattern_blinker.html" title=" " alt="" coords="478,79,584,104"/>
+<area shape="rect" id="node96" href="$class_periodic_blinker.html" title=" " alt="" coords="476,29,586,55"/>
+<area shape="rect" id="node97" href="$class_even_blinker.html" title=" " alt="" coords="746,55,838,80"/>
+<area shape="rect" id="node98" href="$class_ratio_blinker.html" title=" " alt="" coords="746,5,839,31"/>
+<area shape="rect" id="node99" href="$class_observable.html" title=" " alt="" coords="9,1941,99,1967"/>
+<area shape="rect" id="node100" href="$class_s_k_emitter.html" title=" " alt="" coords="752,1891,833,1916"/>
+<area shape="rect" id="node101" href="$class_s_k_listener.html" title=" " alt="" coords="218,2205,304,2231"/>
+<area shape="rect" id="node103" href="$class_s_k_put_listener.html" title=" " alt="" coords="208,2304,314,2329"/>
+<area shape="rect" id="node105" href="$class_value_producer.html" title=" " alt="" coords="191,2255,330,2280"/>
+<area shape="rect" id="node107" href="$class_value_producer.html" title=" " alt="" coords="182,1545,339,1571"/>
+<area shape="rect" id="node108" href="$class_value_producer.html" title=" " alt="" coords="163,1319,359,1344"/>
+<area shape="rect" id="node109" href="$class_value_producer.html" title=" " alt="" coords="162,2353,360,2379"/>
+<area shape="rect" id="node111" href="$class_value_producer.html" title=" " alt="" coords="182,1740,339,1765"/>
+<area shape="rect" id="node113" href="$class_value_producer.html" title=" " alt="" coords="188,1021,334,1047"/>
+<area shape="rect" id="node115" href="$class_value_producer.html" title=" " alt="" coords="181,1992,341,2017"/>
+<area shape="rect" id="node116" href="$class_value_producer.html" title=" " alt="" coords="191,723,331,748"/>
+<area shape="rect" id="node117" href="$class_value_producer.html" title=" " alt="" coords="171,2403,350,2428"/>
+<area shape="rect" id="node119" href="$class_value_producer.html" title=" " alt="" coords="178,1171,344,1196"/>
+<area shape="rect" id="node121" href="$class_value_producer.html" title=" " alt="" coords="154,2501,368,2527"/>
+<area shape="rect" id="node123" href="$class_value_producer.html" title=" " alt="" coords="177,2452,345,2477"/>
+<area shape="rect" id="node125" href="$class_value_producer.html" title=" " alt="" coords="171,523,350,548"/>
+<area shape="rect" id="node126" href="$class_value_producer.html" title=" " alt="" coords="168,624,353,649"/>
+<area shape="rect" id="node127" href="$class_value_producer.html" title=" " alt="" coords="156,2143,365,2181"/>
+<area shape="rect" id="node102" href="$class_s_k_value_listener.html" title=" " alt="" coords="456,2255,606,2280"/>
+<area shape="rect" id="node104" href="$class_s_k_put_request_listener.html" title=" " alt="" coords="438,2353,624,2379"/>
+<area shape="rect" id="node106" href="$class_observable_value.html" title=" " alt="" coords="454,2304,608,2329"/>
+<area shape="rect" id="node110" href="$class_observable_value.html" title=" " alt="" coords="425,2403,637,2428"/>
+<area shape="rect" id="node112" href="$class_observable_value.html" title=" " alt="" coords="446,1789,616,1815"/>
+<area shape="rect" id="node114" href="$class_observable_value.html" title=" " alt="" coords="451,1072,611,1097"/>
+<area shape="rect" id="node118" href="$class_observable_value.html" title=" " alt="" coords="434,2452,628,2477"/>
+<area shape="rect" id="node120" href="$class_observable_value.html" title=" " alt="" coords="441,1121,621,1147"/>
+<area shape="rect" id="node122" href="$class_system_status_controller.html" title="Base class for a controller that can react to system status events." alt="" coords="450,2551,612,2576"/>
+<area shape="rect" id="node124" href="$class_observable_value.html" title=" " alt="" coords="440,2501,622,2527"/>
+<area shape="rect" id="node128" href="$class_observable_value.html" title=" " alt="" coords="419,2192,643,2231"/>
+<area shape="rect" id="node129" href="$class_s_k_request.html" title=" " alt="" coords="9,1096,98,1121"/>
+<area shape="rect" id="node130" href="$class_value_consumer.html" title=" " alt="" coords="188,1269,334,1295"/>
+<area shape="rect" id="node131" href="$class_value_consumer.html" title=" " alt="" coords="179,1220,343,1245"/>
+<area shape="rect" id="node132" href="$class_value_consumer.html" title=" " alt="" coords="187,673,335,699"/>
+<area shape="rect" id="node133" href="$class_value_consumer.html" title=" " alt="" coords="691,2193,894,2219"/>
+<area shape="rect" id="node134" href="$class_value_consumer.html" title=" " alt="" coords="179,1625,343,1651"/>
+<area shape="rect" id="node135" href="$class_p_w_m_output.html" title="PWMOutput provides a cross platform mechanism for generating Pulse Width Modulation signals over one ..." alt="" coords="484,1691,578,1716"/>
+<area shape="rect" id="node136" href="$class_value_consumer.html" title=" " alt="" coords="185,2041,337,2067"/>
+<area shape="rect" id="node137" href="$class_lambda_consumer.html" title="Construct a new ValueConsumer to execute a single function." alt="" coords="447,2093,615,2119"/>
+<area shape="rect" id="node138" href="$class_value_consumer.html" title=" " alt="" coords="184,1789,337,1815"/>
+<area shape="rect" id="node139" href="$class_system_status_led.html" title=" " alt="" coords="468,1891,594,1916"/>
+<area shape="rect" id="node140" href="$class_value_consumer.html" title=" " alt="" coords="179,824,343,849"/>
+<area shape="rect" id="node141" href="$class_value_consumer.html" title=" " alt="" coords="174,1840,348,1865"/>
+<area shape="rect" id="node142" href="$class_value_consumer.html" title=" " alt="" coords="150,1891,371,1916"/>
+<area shape="rect" id="node143" href="$class_value_consumer.html" title=" " alt="" coords="173,1368,348,1393"/>
+<area shape="rect" id="node144" href="$class_value_consumer.html" title=" " alt="" coords="165,2551,357,2576"/>
+<area shape="rect" id="node145" href="$class_value_consumer.html" title=" " alt="" coords="153,2600,369,2639"/>
 </map>

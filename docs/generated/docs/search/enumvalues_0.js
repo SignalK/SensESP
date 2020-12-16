@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['acceleration_5fx_1094',['acceleration_x',['../orientation__9dof__input_8h.html#aee05f622fca61a6272817b66c58fc95ea2cb838e8090509cdbe8d5cb0e2baea09',1,'orientation_9dof_input.h']]],
-  ['acceleration_5fy_1095',['acceleration_y',['../orientation__9dof__input_8h.html#aee05f622fca61a6272817b66c58fc95ea662c740c96b3f23ac9fff8f5b7fa6e1f',1,'orientation_9dof_input.h']]],
-  ['acceleration_5fz_1096',['acceleration_z',['../orientation__9dof__input_8h.html#aee05f622fca61a6272817b66c58fc95eaa69107d7ac45a55e7d4f70da85db52a1',1,'orientation_9dof_input.h']]],
-  ['ads1015chip_1097',['ADS1015chip',['../ads1x15__voltage_8h.html#a287de91a50d45b83ad2b999a32f96846a1efc5b453be0b8efe9d2827c22c94669',1,'ads1x15_voltage.h']]],
-  ['ads1115chip_1098',['ADS1115chip',['../ads1x15__voltage_8h.html#a287de91a50d45b83ad2b999a32f96846a8d7ed005368ca618b3f7022dc1cb5c32',1,'ads1x15_voltage.h']]],
-  ['all_1099',['ALL',['../sensesp__app_8h.html#abeacf3e22e82961fc23c43cad734ebbdab1d5eac4b1dca480c8056eaea7663b7a',1,'sensesp_app.h']]],
-  ['authorizing_1100',['authorizing',['../ws__client_8h.html#acdd867d72142510ce53521a63a062f9ba1f27ab35c30a3960dc1b8f11202c743d',1,'ws_client.h']]]
+  ['acceleration_5fx',['acceleration_x',['../class_read9_d_o_f.html#adce59e3cd83086f9c600bba27263739ea3238bb6203ecc06917a4f2c5b84ac1ea',1,'Read9DOF']]],
+  ['acceleration_5fy',['acceleration_y',['../class_read9_d_o_f.html#adce59e3cd83086f9c600bba27263739eaf049804b0e8b83590a9a7df566cc8d69',1,'Read9DOF']]],
+  ['acceleration_5fz',['acceleration_z',['../class_read9_d_o_f.html#adce59e3cd83086f9c600bba27263739ea2415394bfbdcb0e7a64f50061acd682f',1,'Read9DOF']]],
+  ['admin',['ADMIN',['../sensesp__app_8h.html#a0ddfe34dcd9d9aa9ba14fddb05ad38f2a3228e792244f936584abc6e3d7542d2c',1,'sensesp_app.h']]],
+  ['ads1015chip',['ADS1015chip',['../ads1x15_8h.html#a287de91a50d45b83ad2b999a32f96846a1efc5b453be0b8efe9d2827c22c94669',1,'ADS1015chip():&#160;ads1x15.h'],['../ads1x15__voltage_8h.html#a287de91a50d45b83ad2b999a32f96846a1efc5b453be0b8efe9d2827c22c94669',1,'ADS1015chip():&#160;ads1x15_voltage.h']]],
+  ['ads1115chip',['ADS1115chip',['../ads1x15_8h.html#a287de91a50d45b83ad2b999a32f96846a8d7ed005368ca618b3f7022dc1cb5c32',1,'ADS1115chip():&#160;ads1x15.h'],['../ads1x15__voltage_8h.html#a287de91a50d45b83ad2b999a32f96846a8d7ed005368ca618b3f7022dc1cb5c32',1,'ADS1115chip():&#160;ads1x15_voltage.h']]],
+  ['all',['ALL',['../sensesp__app_8h.html#abeacf3e22e82961fc23c43cad734ebbdab1d5eac4b1dca480c8056eaea7663b7a',1,'sensesp_app.h']]]
 ];

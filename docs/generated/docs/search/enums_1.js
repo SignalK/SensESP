@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['bme280valtype_1085',['BME280ValType',['../bme280_8h.html#acce372cdae7772cfadaa815858c0956d',1,'bme280.h']]],
-  ['bmp280valtype_1086',['BMP280ValType',['../bmp280_8h.html#ab9dfceb0d5985ce5ae28521c2ddb5bf4',1,'bmp280.h']]]
+  ['bme280valtype',['BME280ValType',['../class_b_m_e280_value.html#a4dff9590dbcf1d99b72df4269a66e2cb',1,'BME280Value']]],
+  ['bmp280valtype',['BMP280ValType',['../class_b_m_p280_value.html#af8f65b4c41c9686869d3665a676d8fe0',1,'BMP280Value']]]
 ];

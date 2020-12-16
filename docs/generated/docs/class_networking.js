@@ -7,7 +7,7 @@ var class_networking =
     [ "get_hostname", "class_networking.html#a7a3cac2e878aa2c513451f235c70aff7", null ],
     [ "reset_settings", "class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c", null ],
     [ "set_configuration", "class_networking.html#a59d475a2f12b88ef8334274a9a0b1cee", null ],
-    [ "setup", "class_networking.html#a94815dd34af734e9fc3839cbe6279355", null ],
-    [ "setup_saved_ssid", "class_networking.html#a91507b52fbc31dd34d143c8a5634027e", null ],
-    [ "setup_wifi_manager", "class_networking.html#a082fa99914f8f6f277b640667877c85e", null ]
+    [ "setup", "class_networking.html#ad17d45ae0397a30afbdb00d605e4f719", null ],
+    [ "setup_saved_ssid", "class_networking.html#a8513b8883900f67fab0a56a9b2c9ae18", null ],
+    [ "setup_wifi_manager", "class_networking.html#a1723b5f8aac4e47c52be50e98a8ead91", null ]
 ];

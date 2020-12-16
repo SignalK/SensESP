@@ -12,15 +12,15 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     [ "change_filter.h", "change__filter_8h.html", [
       [ "ChangeFilter", "class_change_filter.html", "class_change_filter" ]
     ] ],
+    [ "click_type.cpp", "click__type_8cpp.html", null ],
+    [ "click_type.h", "click__type_8h.html", "click__type_8h" ],
     [ "curveinterpolator.cpp", "curveinterpolator_8cpp.html", null ],
     [ "curveinterpolator.h", "curveinterpolator_8h.html", [
       [ "CurveInterpolator", "class_curve_interpolator.html", "class_curve_interpolator" ],
       [ "Sample", "class_curve_interpolator_1_1_sample.html", "class_curve_interpolator_1_1_sample" ]
     ] ],
     [ "debounce.cpp", "debounce_8cpp.html", null ],
-    [ "debounce.h", "debounce_8h.html", [
-      [ "Debounce", "class_debounce.html", "class_debounce" ]
-    ] ],
+    [ "debounce.h", "debounce_8h.html", "debounce_8h" ],
     [ "difference.cpp", "difference_8cpp.html", null ],
     [ "difference.h", "difference_8h.html", [
       [ "Difference", "class_difference.html", "class_difference" ]
@@ -31,9 +31,7 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     ] ],
     [ "hysteresis.h", "hysteresis_8h.html", "hysteresis_8h" ],
     [ "integrator.cpp", "integrator_8cpp.html", null ],
-    [ "integrator.h", "integrator_8h.html", [
-      [ "Integrator", "class_integrator.html", "class_integrator" ]
-    ] ],
+    [ "integrator.h", "integrator_8h.html", "integrator_8h" ],
     [ "lambda_transform.cpp", "lambda__transform_8cpp.html", "lambda__transform_8cpp" ],
     [ "lambda_transform.h", "lambda__transform_8h.html", "lambda__transform_8h" ],
     [ "linear.cpp", "linear_8cpp.html", null ],
@@ -48,6 +46,14 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     [ "moving_average.h", "moving__average_8h.html", [
       [ "MovingAverage", "class_moving_average.html", "class_moving_average" ]
     ] ],
+    [ "press_repeater.cpp", "press__repeater_8cpp.html", null ],
+    [ "press_repeater.h", "press__repeater_8h.html", [
+      [ "PressRepeater", "class_press_repeater.html", "class_press_repeater" ]
+    ] ],
+    [ "repeat_report.cpp", "repeat__report_8cpp.html", null ],
+    [ "repeat_report.h", "repeat__report_8h.html", [
+      [ "RepeatReport", "class_repeat_report.html", "class_repeat_report" ]
+    ] ],
     [ "threshold.cpp", "threshold_8cpp.html", null ],
     [ "threshold.h", "threshold_8h.html", [
       [ "ThresholdTransform", "class_threshold_transform.html", "class_threshold_transform" ],
@@ -60,6 +66,13 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     ] ],
     [ "transform.cpp", "transform_8cpp.html", null ],
     [ "transform.h", "transform_8h.html", "transform_8h" ],
+    [ "truth_text.cpp", "truth__text_8cpp.html", null ],
+    [ "truth_text.h", "truth__text_8h.html", [
+      [ "TextToTruth", "class_text_to_truth.html", "class_text_to_truth" ],
+      [ "TruthToText", "class_truth_to_text.html", "class_truth_to_text" ]
+    ] ],
+    [ "typecast.cpp", "typecast_8cpp.html", null ],
+    [ "typecast.h", "typecast_8h.html", "typecast_8h" ],
     [ "voltage_multiplier.cpp", "voltage__multiplier_8cpp.html", null ],
     [ "voltage_multiplier.h", "voltage__multiplier_8h.html", [
       [ "VoltageMultiplier", "class_voltage_multiplier.html", "class_voltage_multiplier" ]

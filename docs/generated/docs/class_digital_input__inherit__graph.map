@@ -1,9 +1,10 @@
 <map id="DigitalInput" name="DigitalInput">
-<area shape="rect" id="node1" title=" " alt="" coords="123,152,211,177"/>
-<area shape="rect" id="node6" href="$class_digital_input_counter.html" title=" " alt="" coords="24,225,159,251"/>
-<area shape="rect" id="node7" href="$class_digital_input_value.html" title=" " alt="" coords="183,225,304,251"/>
-<area shape="rect" id="node2" href="$class_sensor.html" title=" " alt="" coords="136,79,199,104"/>
-<area shape="rect" id="node3" href="$class_observable.html" title=" " alt="" coords="5,5,95,31"/>
-<area shape="rect" id="node4" href="$class_configurable.html" title=" " alt="" coords="119,5,216,31"/>
-<area shape="rect" id="node5" href="$class_enable.html" title=" " alt="" coords="240,5,303,31"/>
+<area shape="rect" id="node1" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="187,152,275,177"/>
+<area shape="rect" id="node6" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="5,225,140,251"/>
+<area shape="rect" id="node7" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="164,225,299,251"/>
+<area shape="rect" id="node8" href="$class_digital_input_state.html" title="DigitalInputState reports the state of a digital pin every read_delay ms." alt="" coords="322,225,442,251"/>
+<area shape="rect" id="node2" href="$class_sensor.html" title=" " alt="" coords="200,79,263,104"/>
+<area shape="rect" id="node3" href="$class_observable.html" title=" " alt="" coords="69,5,159,31"/>
+<area shape="rect" id="node4" href="$class_configurable.html" title=" " alt="" coords="183,5,280,31"/>
+<area shape="rect" id="node5" href="$class_enable.html" title=" " alt="" coords="304,5,367,31"/>
 </map>

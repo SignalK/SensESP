@@ -1,7 +1,7 @@
 var class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002 =
 [
     [ "SensorNXP_FXOS8700_FXAS21002", "class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002.html#a681937828c756188c18330a7aacd1ecb", null ],
-    [ "connect", "class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002.html#a00127c0fb0aa12d05fbaa1887552d074", null ],
+    [ "connect", "class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002.html#a66463f18f5d9cd9b6c6f98eb57fb5a21", null ],
     [ "gatherCalibrationDataOnce", "class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002.html#ab3532ac68215da8b09b1004766175024", null ],
     [ "gatherOrientationDataOnce", "class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002.html#afad8509ff38a0b8cc9415c1d17193259", null ],
     [ "getAccelerationX", "class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002.html#a715cdbdb39e3f12ef813ce3b4c624853", null ],
