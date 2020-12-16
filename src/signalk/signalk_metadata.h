@@ -25,7 +25,7 @@ class SKMetadata {
   String units_;
   String description_;
   String short_name_;
-  String timeout_;
+  float timeout_;
 
   /**
    * @param units The unit of measurement the value represents. See
@@ -39,13 +39,14 @@ class SKMetadata {
    * value. The short version may be used by consumers where space is at a
    * premium
    * @param timeout Tells the consumer how long it should consider the value
-   * valid. This value is specified in seconds.
+   * valid. This value is specified in seconds. Specify -1.0 if you do not
+   * want to specify a timeout.
    */
   SKMetadata(String units, String display_name = "", String description = "",
-             String short_name = "", String timeout = "");
+             String short_name = "", float timeout = -1.0);
 
   /// Default constructor creates a blank Metadata structure
-  SKMetadata() {}
+  SKMetadata() : timeout_{-1} {}
 
   /**
    * Adds an entry to the specified meta array that represents this metadata

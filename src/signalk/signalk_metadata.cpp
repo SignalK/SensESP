@@ -1,7 +1,7 @@
 #include "signalk_metadata.h"
 
 SKMetadata::SKMetadata(String units, String display_name, String description,
-                       String short_name, String timeout)
+                       String short_name, float timeout)
     : units_{units},
       display_name_{display_name},
       description_{description},
@@ -31,7 +31,7 @@ void SKMetadata::add_entry(String sk_path, JsonArray& meta) {
     val["shortName"] = this->short_name_;
   }
 
-  if (!this->timeout_.isEmpty()) {
+  if (this->timeout_ >= 0.0) {
     val["timeout"] = this->timeout_;
   }
 }
