@@ -7,19 +7,19 @@
 // BME280 represents an ADAfruit (or compatible) BME280 temperature / pressure /
 // humidity sensor.
 BME280::BME280(uint8_t addr, String config_path)
-    : Sensor(config_path), addr{addr} {
+    : Sensor(config_path), addr_{addr} {
   load_configuration();
-  adafruit_bme280 = new Adafruit_BME280();
+  adafruit_bme280_ = new Adafruit_BME280();
   check_status();
 }
 
 void BME280::check_status() {
-  bool started = adafruit_bme280->begin(addr);
+  bool started = adafruit_bme280_->begin(addr_);
   if (!started) {
     debugI(
         "Could not find a valid BME280 sensor. Check wiring, address, and "
         "sensor ID.");
-    debugI("SensorID is: 0x%d", adafruit_bme280->sensorID());
+    debugI("SensorID is: 0x%d", adafruit_bme280_->sensorID());
     debugI("0xFF: is a BMP180 or BMP085, or a bad address");
     debugI("0x56-0x58 is a BMP280");
     debugI("0x60 is a BME280");
@@ -31,9 +31,9 @@ void BME280::check_status() {
 BME280Value::BME280Value(BME280* bme280, BME280ValType val_type,
                          uint read_delay, String config_path)
     : NumericSensor(config_path),
-      bme280{bme280},
-      val_type{val_type},
-      read_delay{read_delay} {
+      bme280_{bme280},
+      val_type_{val_type},
+      read_delay_{read_delay} {
   load_configuration();
 }
 
@@ -41,14 +41,14 @@ BME280Value::BME280Value(BME280* bme280, BME280ValType val_type,
 // Signal K. Pressure is output in Pascals, Humidity is output in relative
 // humidity (0 - 100%)
 void BME280Value::enable() {
-  app.onRepeat(read_delay, [this]() {
-    if (val_type == temperature) {
-      output = bme280->adafruit_bme280->readTemperature() +
+  app.onRepeat(read_delay_, [this]() {
+    if (val_type_ == temperature) {
+      output = bme280_->adafruit_bme280_->readTemperature() +
                273.15;  // Kelvin is Celsius + 273.15
-    } else if (val_type == pressure) {
-      output = bme280->adafruit_bme280->readPressure();
-    } else if (val_type == humidity) {
-      output = bme280->adafruit_bme280->readHumidity();
+    } else if (val_type_ == pressure) {
+      output = bme280_->adafruit_bme280_->readPressure();
+    } else if (val_type_ == humidity) {
+      output = bme280_->adafruit_bme280_->readHumidity();
     } else {
       output = 0.0;
     }
@@ -58,7 +58,7 @@ void BME280Value::enable() {
 }
 
 void BME280Value::get_configuration(JsonObject& root) {
-  root["read_delay"] = read_delay;
+  root["read_delay"] = read_delay_;
   root["value"] = output;
 };
 
@@ -79,6 +79,6 @@ bool BME280Value::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  read_delay = config["read_delay"];
+  read_delay_ = config["read_delay"];
   return true;
 }
