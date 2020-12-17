@@ -9,11 +9,22 @@
 
 #include "system/configurable.h"
 #include "system/observablevalue.h"
+#include "system/valueproducer.h"
 
-class Networking : public Configurable {
+enum class WifiState {
+  kWifiNoAP = 0,
+  kWifiDisconnected,
+  kWifiConnectedToAP,
+  kWifiManagerActivated
+};
+
+/**
+ * @brief Manages the ESP's connection to the Wifi network. 
+ */
+class Networking : public Configurable, public ValueProducer<WifiState> {
  public:
   Networking(String config_path, String ssid, String password, String hostname);
-  void setup(std::function<void(bool)> connection_cb);
+  void setup();
   ObservableValue<String>* get_hostname();
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
@@ -23,8 +34,8 @@ class Networking : public Configurable {
 
  protected:
   void check_connection();
-  void setup_saved_ssid(std::function<void(bool)> connection_cb);
-  void setup_wifi_manager(std::function<void(bool)> connection_cb);
+  void setup_saved_ssid();
+  void setup_wifi_manager();
 
  private:
   AsyncWebServer* server;

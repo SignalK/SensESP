@@ -1,77 +1,76 @@
 #include "sensor_nxp_fxos8700_fxas21002.h"
 
 #include <RemoteDebug.h>
+
 #include "sensesp.h"
-#include <Adafruit_FXAS21002C.h>
-#include <Adafruit_FXOS8700.h>
 
 //#define AHRS_DEBUG_OUTPUT  //output diagnostics from sensor read and filter
 #define MIN_PRINT_INTERVAL_MS \
   (200)  // when result printing is requested, it won't happen
          // any more frequently than this,
          // to avoid overloading the serial channel
+#define FXAS_CR1_ACTIVE_BITMASK (0b00000010) //Active bit in gyro CTRL_REG1
+#define FXAS_CR1_READY_BITMASK (0b00000001) //Ready bit in gyro CTRL_REG1
+#define FXAS_CR1_ODR_BITMASK (0b00011100) //Output Data Rate in gyro CTRL_REG1
+#define FXAS_CR1_ODR_BITS_LOC (2) //ODR bits are in positions 4:2
+#define N2K_INVALID_FLOAT (-1e-9) //NMEA2000 value for unavailable parameters
 
-// can the following be moved inside class? or into main.cpp?
-Adafruit_FXOS8700 fxos = Adafruit_FXOS8700(0x8700A, 0x8700B);  
-Adafruit_FXAS21002C fxas = Adafruit_FXAS21002C(0x0021002C);
-
-Adafruit_NXPSensorFusion filter;  // when placed inside class, results from this
-                                  // filter return Heading=0.0 always. Other two
-                                  // filters (see below) work OK inside class
-
-SensorNXP_FXOS8700_FXAS21002::SensorNXP_FXOS8700_FXAS21002() {}
+//  Constructor creates an accelerometer/magnetometer object (fxos_)
+//  a gyroscope object (fxas_), and filter
+SensorNXP_FXOS8700_FXAS21002::SensorNXP_FXOS8700_FXAS21002()
+    : filter(), fxos_(0x8700A, 0x8700B), fxas_(0x0021002C) {}
 
 //  Connect to FXOS8700 & FXAS21002 sensor combination using I2C.
 //  To use default Arduino I2C pins, pass pin_i2c_sda and pin_i2c_scl = -1
 //  Load calibration values if available (readings won't be valid without
 //    calibration).
-//  TODO: set ranges/sensitivity. For now use ICs' default values.
-bool SensorNXP_FXOS8700_FXAS21002::connect(uint8_t pin_i2c_sda,
-                                           uint8_t pin_i2c_scl) {
+//  Ranges/sensitivity use ICs' default values, then setupSensors() adjusts.
+bool SensorNXP_FXOS8700_FXAS21002::connect(int pin_i2c_sda,
+                                           int pin_i2c_scl) {
   debugI("NXP 9 Degrees-of-Freedom Sensor with Adafruit AHRS");
-  if (!cal.begin()) {
-      debugE("Failed to initialize calibration helper");
-    while (1) yield();
-  }
-  if (!cal.loadCalibration()) {
+  if (!cal_.begin()) {
+    debugE("Failed to initialize calibration helper");
+    is_calibrated_ = false; 
+  }else { 
+    if (!cal_.loadCalibration()) {
       debugI("No calibration loaded/found...will start with defaults");
-    isCalibrated = false;
-  } else {
+    is_calibrated_ = false;
+    } else {
       debugI("Loaded existing calibration:");
-    cal.printSavedCalibration();
-    isCalibrated = true;
-  }
+    cal_.printSavedCalibration();
+    is_calibrated_ = true;
+    }
+  }//end of loading calibration
 
   Wire.begin(pin_i2c_sda, pin_i2c_scl);
-  Wire.setClock(400000);  // 400KHz I2C
-
-  if (!initSensors()) {
-      debugE("Failed to find sensors");
+  Wire.setClock(400000);  // separate from begin() for ESP82666 compatibility
+  if (!startSensors()) {
+    debugE("Failed to find sensors");
     return false;
   }
 
-  setupSensors();       // TODO - can set ranges, etc
-  printSensorDetails();
+  setupSensors();       //set ranges, etc
 
   return true;
 }  // end connect()
 
 //  Prints details of FXOS8700 & FXAS21002 sensor combination
 void SensorNXP_FXOS8700_FXAS21002::printSensorDetails(void) {
-  accelerometer->printSensorDetails();
-  gyroscope->printSensorDetails();
-  magnetometer->printSensorDetails();
+  accelerometer_->printSensorDetails();
+  gyroscope_->printSensorDetails();
+  magnetometer_->printSensorDetails();
 }  // end printSensorDetails()
 
 void SensorNXP_FXOS8700_FXAS21002::initFilter(int sampling_interval_ms) {
-  roll = 0.0;
-  pitch = 0.0;
-  heading = 0.0;
-  gx = 0.0;
-  gy = 0.0;
-  gz = 0.0;
-  filter.begin(1000.0 / sampling_interval_ms);
-  timestamp = millis();
+  roll_ = 0.0;
+  pitch_ = 0.0;
+  heading_ = 0.0;
+  gx_ = 0.0;
+  gy_ = 0.0;
+  gz_ = 0.0;
+  sampling_rate_hz_ = 1000.0 / sampling_interval_ms;
+  filter.begin(sampling_rate_hz_);
+  timestamp_ = millis();
 }  // end initFilter()
 
 /* The following get___() methods return the specified parameter
@@ -81,43 +80,43 @@ is aligned with the X-axis pointing to the Bow;
 the Y-axis pointing to Port; and the Z-axis pointing up. If your
 sensor is mounted differently, changes to the terminology/axes
 will need to be made.
-Per SignalK convention, units are SI:  radians for headings;
+Per Signal K convention, units are SI:  radians for headings;
 radians / second for turn rates; and meters / second^2 for acceleration.
 */
 float SensorNXP_FXOS8700_FXAS21002::getHeadingRadians(void) {
-  return (360.0 - heading) / SENSORS_RADS_TO_DPS;
+  return (360.0 - heading_) / SENSORS_RADS_TO_DPS;
 }  // end getHeadingRadians()
 
 float SensorNXP_FXOS8700_FXAS21002::getPitchRadians(void) {
-  return (-pitch) / SENSORS_RADS_TO_DPS;
+  return (-pitch_) / SENSORS_RADS_TO_DPS;
 }  // end getPitchRadians()
 
 float SensorNXP_FXOS8700_FXAS21002::getRollRadians(void) {
-  return roll / SENSORS_RADS_TO_DPS;
+  return roll_ / SENSORS_RADS_TO_DPS;
 }  // end getRollRadians()
 
 float SensorNXP_FXOS8700_FXAS21002::getAccelerationX(void) {
-  return accel_event.acceleration.x;
+  return accel_event_.acceleration.x;
 }  // end getAccelerationX()
 
 float SensorNXP_FXOS8700_FXAS21002::getAccelerationY(void) {
-  return accel_event.acceleration.y;
+  return accel_event_.acceleration.y;
 }  // end getAccelerationY()
 
 float SensorNXP_FXOS8700_FXAS21002::getAccelerationZ(void) {
-  return accel_event.acceleration.z;
+  return accel_event_.acceleration.z;
 }  // end getAccelerationZ()
 
 float SensorNXP_FXOS8700_FXAS21002::getRateOfTurn(void) {
-  return (-gz) / SENSORS_RADS_TO_DPS;
+  return (-gz_) / SENSORS_RADS_TO_DPS;
 }  // end getRateOfTurn()
 
 float SensorNXP_FXOS8700_FXAS21002::getRateOfPitch(void) {
-  return (-gy) / SENSORS_RADS_TO_DPS;
+  return (-gy_) / SENSORS_RADS_TO_DPS;
 }  // end getRateOfPitch()
 
 float SensorNXP_FXOS8700_FXAS21002::getRateOfRoll(void) {
-  return gx / SENSORS_RADS_TO_DPS;
+  return gx_ / SENSORS_RADS_TO_DPS;
 }  // end getRateOfRoll()
 
 // fetches data from sensors, applies filter function, and assigns orientation
@@ -125,63 +124,85 @@ float SensorNXP_FXOS8700_FXAS21002::getRateOfRoll(void) {
 void SensorNXP_FXOS8700_FXAS21002::gatherOrientationDataOnce(
     bool is_print_results) {
 
-  timestamp = millis();
+  timestamp_ = millis();
 
-  if (!isCalibrated) {
+  //confirm we are connected to sensors, attempt reconnect if not
+  if( !startSensors() ) {  
+    debugW("No connection with orientation sensors!");
+    //assign orientation value that in NMEA2000 means invalid/unavailable
+    gx_ = N2K_INVALID_FLOAT;
+    gy_ = N2K_INVALID_FLOAT;
+    gz_ = N2K_INVALID_FLOAT;
+    roll_ = N2K_INVALID_FLOAT;
+    pitch_ = N2K_INVALID_FLOAT;
+    heading_ = N2K_INVALID_FLOAT;
+    accel_event_.acceleration.x = N2K_INVALID_FLOAT;
+    accel_event_.acceleration.y = N2K_INVALID_FLOAT;
+    accel_event_.acceleration.z = N2K_INVALID_FLOAT;
+    return;
+  }
+
+  if (!is_calibrated_) {
     debugW("Orientation is uncalibrated!");
   }
-  magnetometer->getEvent(&mag_event);
-  gyroscope->getEvent(&gyro_event);
-  accelerometer->getEvent(&accel_event);
+  magnetometer_->getEvent(&mag_event_);
+  gyroscope_->getEvent(&gyro_event_);
+  accelerometer_->getEvent(&accel_event_);
 
 #if defined(AHRS_DEBUG_OUTPUT)
   debugI("I2C took %lu ms", millis() - timestamp);
 #endif
 
-  cal.calibrate(mag_event);
-  cal.calibrate(accel_event);
-  cal.calibrate(gyro_event);
+  if( !cal_.calibrate(mag_event_) ) {
+    debugW("Could not calibrate mag!");
+  }
+  if( !cal_.calibrate(accel_event_) ) {
+    debugW("Could not calibrate accel!");
+  }
+  if( !cal_.calibrate(gyro_event_) ) {
+    debugW("Could not calibrate gyro!");
+  }
   // Gyroscope needs to be converted from Rad/s to Degree/s for filter
   // the rest are not unit-important
-  gx = gyro_event.gyro.x * SENSORS_RADS_TO_DPS;
-  gy = gyro_event.gyro.y * SENSORS_RADS_TO_DPS;
-  gz = gyro_event.gyro.z * SENSORS_RADS_TO_DPS;
+  gx_ = gyro_event_.gyro.x * SENSORS_RADS_TO_DPS;
+  gy_ = gyro_event_.gyro.y * SENSORS_RADS_TO_DPS;
+  gz_ = gyro_event_.gyro.z * SENSORS_RADS_TO_DPS;
 
   // Apply the desired filter
-  filter.update(gx, gy, gz, 
-                accel_event.acceleration.x,
-                accel_event.acceleration.y, 
-                accel_event.acceleration.z,
-                mag_event.magnetic.x, 
-                mag_event.magnetic.y,
-                mag_event.magnetic.z);
-  roll = filter.getRoll();
-  pitch = filter.getPitch();
-  heading = filter.getYaw();
+  filter.update(gx_, gy_, gz_, 
+                accel_event_.acceleration.x,
+                accel_event_.acceleration.y, 
+                accel_event_.acceleration.z,
+                mag_event_.magnetic.x, 
+                mag_event_.magnetic.y,
+                mag_event_.magnetic.z);
+  roll_ = filter.getRoll();
+  pitch_ = filter.getPitch();
+  heading_ = filter.getYaw();
   float qw, qx, qy, qz;
   filter.getQuaternion(&qw, &qx, &qy, &qz);
   
 #if defined(AHRS_DEBUG_OUTPUT)
   debugI("Update took %lu ms", millis() - timestamp);
   debugI("Raw: %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f, %.4f",
-          accel_event.acceleration.x,
-          accel_event.acceleration.y,
-          accel_event.acceleration.z,
+          accel_event_.acceleration.x,
+          accel_event_.acceleration.y,
+          accel_event_.acceleration.z,
           gx, gy, gz,
-          mag_event.magnetic.x,
-          mag_event.magnetic.y,
-          mag_event.magnetic.z );
+          mag_event_.magnetic.x,
+          mag_event_.magnetic.y,
+          mag_event_.magnetic.z );
   debugI("Heading: %.1f", heading);
 #endif
 
   if (is_print_results &&
-      (millis() - last_print_time > MIN_PRINT_INTERVAL_MS)) {
+      (millis() - last_print_time_ > MIN_PRINT_INTERVAL_MS)) {
     // print the heading, pitch and roll
     debugI("Orientation: %.2f, %.2f, %.2f", 
-            heading, pitch, roll);
+            heading_, pitch_, roll_);
     debugI("Quaternion: %.4f, %.4f, %.4f, %.4f", 
             qw, qx, qy, qz);
-    last_print_time = millis();
+    last_print_time_ = millis();
   }
 
 #if defined(AHRS_DEBUG_OUTPUT)
@@ -198,9 +219,9 @@ void SensorNXP_FXOS8700_FXAS21002::gatherOrientationDataOnce(
 void SensorNXP_FXOS8700_FXAS21002::gatherCalibrationDataOnce(
     bool is_print_results) {  
 
-  magnetometer->getEvent(&mag_event);
-  gyroscope->getEvent(&gyro_event);
-  accelerometer->getEvent(&accel_event);
+  magnetometer_->getEvent(&mag_event_);
+  gyroscope_->getEvent(&gyro_event_);
+  accelerometer_->getEvent(&accel_event_);
 
   if (is_print_results) {
     // 'Raw' values in format matching expectation of MotionCal utility
@@ -208,44 +229,44 @@ void SensorNXP_FXOS8700_FXAS21002::gatherCalibrationDataOnce(
     Serial.print(int(millis()));
     Serial.print(
         "Raw:");
-    Serial.print(int(accel_event.acceleration.x * 8192 / 9.8));
+    Serial.print(int(accel_event_.acceleration.x * 8192 / 9.8));
     Serial.print(",");
-    Serial.print(int(accel_event.acceleration.y * 8192 / 9.8));
+    Serial.print(int(accel_event_.acceleration.y * 8192 / 9.8));
     Serial.print(",");
-    Serial.print(int(accel_event.acceleration.z * 8192 / 9.8));
+    Serial.print(int(accel_event_.acceleration.z * 8192 / 9.8));
     Serial.print(",");
-    Serial.print(int(gyro_event.gyro.x * SENSORS_RADS_TO_DPS * 16));
+    Serial.print(int(gyro_event_.gyro.x * SENSORS_RADS_TO_DPS * 16));
     Serial.print(",");
-    Serial.print(int(gyro_event.gyro.y * SENSORS_RADS_TO_DPS * 16));
+    Serial.print(int(gyro_event_.gyro.y * SENSORS_RADS_TO_DPS * 16));
     Serial.print(",");
-    Serial.print(int(gyro_event.gyro.z * SENSORS_RADS_TO_DPS * 16));
+    Serial.print(int(gyro_event_.gyro.z * SENSORS_RADS_TO_DPS * 16));
     Serial.print(",");
-    Serial.print(int(mag_event.magnetic.x * 10));
+    Serial.print(int(mag_event_.magnetic.x * 10));
     Serial.print(",");
-    Serial.print(int(mag_event.magnetic.y * 10));
+    Serial.print(int(mag_event_.magnetic.y * 10));
     Serial.print(",");
-    Serial.print(int(mag_event.magnetic.z * 10));
+    Serial.print(int(mag_event_.magnetic.z * 10));
     Serial.println("");
 
     // unified data
     Serial.print("Uni:");
-    Serial.print(accel_event.acceleration.x);
+    Serial.print(accel_event_.acceleration.x);
     Serial.print(",");
-    Serial.print(accel_event.acceleration.y);
+    Serial.print(accel_event_.acceleration.y);
     Serial.print(",");
-    Serial.print(accel_event.acceleration.z);
+    Serial.print(accel_event_.acceleration.z);
     Serial.print(",");
-    Serial.print(gyro_event.gyro.x, 4);
+    Serial.print(gyro_event_.gyro.x, 4);
     Serial.print(",");
-    Serial.print(gyro_event.gyro.y, 4);
+    Serial.print(gyro_event_.gyro.y, 4);
     Serial.print(",");
-    Serial.print(gyro_event.gyro.z, 4);
+    Serial.print(gyro_event_.gyro.z, 4);
     Serial.print(",");
-    Serial.print(mag_event.magnetic.x);
+    Serial.print(mag_event_.magnetic.x);
     Serial.print(",");
-    Serial.print(mag_event.magnetic.y);
+    Serial.print(mag_event_.magnetic.y);
     Serial.print(",");
-    Serial.print(mag_event.magnetic.z);
+    Serial.print(mag_event_.magnetic.z);
     Serial.println("");
   }
 
@@ -254,22 +275,22 @@ void SensorNXP_FXOS8700_FXAS21002::gatherCalibrationDataOnce(
   if (is_print_results) {
     Serial.print("Cal1:");
     for (int i = 0; i < 3; i++) {
-      Serial.print(cal.accel_zerog[i], 3);
+      Serial.print(cal_.accel_zerog[i], 3);
       Serial.print(",");
     }
     for (int i = 0; i < 3; i++) {
-      Serial.print(cal.gyro_zerorate[i], 3);
+      Serial.print(cal_.gyro_zerorate[i], 3);
       Serial.print(",");
     }
     for (int i = 0; i < 3; i++) {
-      Serial.print(cal.mag_hardiron[i], 3);
+      Serial.print(cal_.mag_hardiron[i], 3);
       Serial.print(",");
     }
-    Serial.println(cal.mag_field, 3);
+    Serial.println(cal_.mag_field, 3);
 
     Serial.print("Cal2:");
     for (int i = 0; i < 9; i++) {
-      Serial.print(cal.mag_softiron[i], 4);
+      Serial.print(cal_.mag_softiron[i], 4);
       if (i < 8) Serial.print(',');
     }
     Serial.println();
@@ -277,25 +298,115 @@ void SensorNXP_FXOS8700_FXAS21002::gatherCalibrationDataOnce(
 }  // end gatherCalibrationDataOnce()
 
 
-bool SensorNXP_FXOS8700_FXAS21002::initSensors() {
-  if (!fxos.begin() || !fxas.begin()) {
-    return false;
-  }
-  accelerometer = fxos.getAccelerometerSensor();
-  magnetometer = fxos.getMagnetometerSensor();
-  gyroscope = &fxas;
+//If not already connected to sensors,
+//try to connect and configure them.
+//If already connected, check connection and
+// return true if still responding.
+bool SensorNXP_FXOS8700_FXAS21002::startSensors() {
 
-  return true;
-}  // end initSensors()
+  if( !is_connected_ ) {     
+    if( fxos_.begin() && fxas_.begin() ) {
+      //the Adafruit begin() routines setup the  sensors with these defaults:
+      //  gyro: 100 Hz data rate, +/-250 dps full-scale, HPF off, active state, no FIFO,
+      //  default LPF is 32Hz for ODR=100Hz
+      is_connected_ = true;
+      accelerometer_ = fxos_.getAccelerometerSensor();
+      magnetometer_ = fxos_.getMagnetometerSensor();
+      gyroscope_ = &fxas_;
+      setupSensors();
+    }
+  }else { //already connected, we believe
+    //ping each sensor to ensure it's still working/attached
+    if( !pingFXAS21002() || !pingFXAS8700() ) {
+      is_connected_ = false;  //ping unsuccessful: assume no connection
+    }
+  }
+
+  return is_connected_;
+}  // end startSensors()
 
 void SensorNXP_FXOS8700_FXAS21002::setupSensors(void) {
-  //TODO: we could set the g range for accelerometer here, for example
+  //Sets ranges for sensors, when defaults are not optimal.
   //Note that if the ranges are changed, the scaling of the output values
   //may need adjusting. For example, the accelerometer is operating
   //by default at +/-2g sensitivity (= 0.244 mg/LSB), and the accelerations
-  //are converted to m/s^2. The conversion factor needs scale 
+  //are converted to m/s^2. The conversion factor needs to scale 
   //proportionally to the sensitivity.
+  //Register locations and settings are from the datasheets for the
+  //FXAS21002 and FXOS8700:
+  //https://www.nxp.com/docs/en/data-sheet/FXAS21002.pdf
+  //https://www.nxp.com/docs/en/data-sheet/FXOS8700CQ.pdf
+
+  //set gyro data rate to correspond with sampling rate, so 
+  //internal LPF (low pass filter) will be suitable freq
+  uint8_t odr_bits;
+  if (sampling_rate_hz_ > 400.0) {
+    odr_bits = 0b000;
+  }else if(sampling_rate_hz_ > 200.0) {
+    odr_bits = 0b001;
+  }else if(sampling_rate_hz_ > 100.0) {
+    odr_bits = 0b010;
+  }else if(sampling_rate_hz_ > 50.0) {
+    odr_bits = 0b011;
+  }else if(sampling_rate_hz_ > 25.0) {
+    odr_bits = 0b100;
+  }else if(sampling_rate_hz_ > 12.5) {
+    odr_bits = 0b101;
+  }else {
+    odr_bits = 0b110;
+  }
+  odr_bits = odr_bits << FXAS_CR1_ODR_BITS_LOC;  //shift left to bit posns 4:2
+
+  byte ctl_reg1 = readByte(FXAS21002C_ADDRESS,GYRO_REGISTER_CTRL_REG1); //get reg value
+  ctl_reg1 &= ~(FXAS_CR1_ACTIVE_BITMASK | FXAS_CR1_READY_BITMASK); //zero out the Active & Ready bits
+  writeByte(FXAS21002C_ADDRESS,GYRO_REGISTER_CTRL_REG1, ctl_reg1); //put gyro in standby 
+  ctl_reg1 = (ctl_reg1 & (~(FXAS_CR1_ODR_BITMASK | FXAS_CR1_ACTIVE_BITMASK))) | odr_bits | FXAS_CR1_ACTIVE_BITMASK;
+  writeByte(FXAS21002C_ADDRESS,GYRO_REGISTER_CTRL_REG1, ctl_reg1 ); //back to Active mode
+
 }  // end setupSensors()
+
+//checks I2C bus to see whether FXAS21002 is connected and responding
+bool SensorNXP_FXOS8700_FXAS21002::pingFXAS21002( void ) {
+  if( FXAS21002C_ID == readByte(FXAS21002C_ADDRESS,GYRO_REGISTER_WHO_AM_I) ) {
+    return true;
+  } else {
+    return false;
+  }
+} // end pingFXAS21002()
+
+
+//checks I2C bus to see whether FXOS8700 is connected and responding
+bool SensorNXP_FXOS8700_FXAS21002::pingFXAS8700( void ) {
+  if( FXOS8700_ID == readByte(FXOS8700_ADDRESS,FXOS8700_REGISTER_WHO_AM_I) ) {
+    return true;
+  } else {
+    return false;
+  }
+} // end pingFXAS21002()
+
+
+//    Send value to reg register at address using Wire library
+void SensorNXP_FXOS8700_FXAS21002::writeByte(byte address, byte reg, byte value) {
+  Wire.beginTransmission(address);
+  Wire.write(reg);
+  Wire.write(value);
+  Wire.endTransmission();
+} // end writeByte()
+
+//  Read byte from reg register at address using Wire library
+//  Returns 0 if error occurs on read.
+byte SensorNXP_FXOS8700_FXAS21002::readByte(byte address,byte reg) {
+
+  Wire.beginTransmission(address);
+  Wire.write(reg);
+  if (Wire.endTransmission(false) != 0) {
+    return 0;
+  }
+  Wire.requestFrom(address, (byte)1);
+  return Wire.read();
+
+} // end readByte()
+
 
 // Receives calibration values sent by external calibration utility
 //  over serial port. For details and format, see
@@ -311,78 +422,78 @@ void SensorNXP_FXOS8700_FXAS21002::receiveCalibration(void) {
                              // crc and 117,84 not found in data - then the final
                              // if() is entered, and we read 2 bytes.
     b = Serial.read();
-    if (calcount == 0 && b != 117) {
+    if (cal_count_ == 0 && b != 117) {
       // first byte must be 117
       return;
     }
-    if (calcount == 1 && b != 84) {
+    if (cal_count_ == 1 && b != 84) {
       // second byte must be 84
-      calcount = 0;
+      cal_count_ = 0;
       return;
     }
     // store this byte
-    caldata[calcount++] = b;
-    if (calcount < 68) {
+    cal_data_[cal_count_++] = b;
+    if (cal_count_ < 68) {
       // full calibration message is 68 bytes
       return;
     }
     // verify the crc16 check
     crc = 0xFFFF;
     for (i = 0; i < 68; i++) {
-      crc = crc16_update(crc, caldata[i]);
+      crc = crc16_update(crc, cal_data_[i]);
     }
     if (crc == 0) {
       // data looks good, use it
       float offsets[16];
-      memcpy(offsets, caldata + 2, 16 * 4);
-      cal.accel_zerog[0] = offsets[0];
-      cal.accel_zerog[1] = offsets[1];
-      cal.accel_zerog[2] = offsets[2];
+      memcpy(offsets, cal_data_ + 2, 16 * 4);
+      cal_.accel_zerog[0] = offsets[0];
+      cal_.accel_zerog[1] = offsets[1];
+      cal_.accel_zerog[2] = offsets[2];
 
-      cal.gyro_zerorate[0] = offsets[3];
-      cal.gyro_zerorate[1] = offsets[4];
-      cal.gyro_zerorate[2] = offsets[5];
+      cal_.gyro_zerorate[0] = offsets[3];
+      cal_.gyro_zerorate[1] = offsets[4];
+      cal_.gyro_zerorate[2] = offsets[5];
 
-      cal.mag_hardiron[0] = offsets[6];
-      cal.mag_hardiron[1] = offsets[7];
-      cal.mag_hardiron[2] = offsets[8];
+      cal_.mag_hardiron[0] = offsets[6];
+      cal_.mag_hardiron[1] = offsets[7];
+      cal_.mag_hardiron[2] = offsets[8];
 
-      cal.mag_field = offsets[9];
+      cal_.mag_field = offsets[9];
 
-      cal.mag_softiron[0] = offsets[10];
-      cal.mag_softiron[1] = offsets[13];
-      cal.mag_softiron[2] = offsets[14];
-      cal.mag_softiron[3] = offsets[13];
-      cal.mag_softiron[4] = offsets[11];
-      cal.mag_softiron[5] = offsets[15];
-      cal.mag_softiron[6] = offsets[14];
-      cal.mag_softiron[7] = offsets[15];
-      cal.mag_softiron[8] = offsets[12];
+      cal_.mag_softiron[0] = offsets[10];
+      cal_.mag_softiron[1] = offsets[13];
+      cal_.mag_softiron[2] = offsets[14];
+      cal_.mag_softiron[3] = offsets[13];
+      cal_.mag_softiron[4] = offsets[11];
+      cal_.mag_softiron[5] = offsets[15];
+      cal_.mag_softiron[6] = offsets[14];
+      cal_.mag_softiron[7] = offsets[15];
+      cal_.mag_softiron[8] = offsets[12];
 
-      if (!cal.saveCalibration()) {
+      if (!cal_.saveCalibration()) {
         debugW("Couldn't save calibration");
       } else {
         debugI("Wrote calibration");
       }
-      cal.printSavedCalibration();
-      calcount = 0;
+      cal_.printSavedCalibration();
+      cal_count_ = 0;
       return;
     }
     // look for the 117,84 in the data, before discarding
     for (i = 2; i < 67; i++) {
-      if (caldata[i] == 117 && caldata[i + 1] == 84) {
+      if (cal_data_[i] == 117 && cal_data_[i + 1] == 84) {
         // found possible start within data
-        calcount = 68 - i;
-        memmove(caldata, caldata + i, calcount);
+        cal_count_ = 68 - i;
+        memmove(cal_data_, cal_data_ + i, cal_count_);
         return;
       }
     }
     // look for 117 in last byte
-    if (caldata[67] == 117) {
-      caldata[0] = 117;
-      calcount = 1;
+    if (cal_data_[67] == 117) {
+      cal_data_[0] = 117;
+      cal_count_ = 1;
     } else {
-      calcount = 0;
+      cal_count_ = 0;
     }
   }
 }  // end receiveCalibration()

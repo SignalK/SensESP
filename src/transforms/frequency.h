@@ -3,8 +3,10 @@
 
 #include "transform.h"
 
-// Frequency transform divides its input value by the time elapsed since
-// the last reading
+/**
+ * @brief A transform that divides its input value by the time elapsed since
+ * the last reading
+ */
 class Frequency : public Transform<int, float> {
  public:
   Frequency(float k = 1, String config_path = "");

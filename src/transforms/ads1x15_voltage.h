@@ -5,36 +5,35 @@
 
 #include "transforms/transform.h"
 
-// FIXME: This shouldn't be a separate transform but integrated with ads1x15
-// sensors.
 
 // Pass one of these in the constructor to ADS1x15Voltage() to tell which of the
 // two chips you're working with.
 enum ADS1x15CHIP_t { ADS1015chip, ADS1115chip };
 
 /**
+ * @brief DEPRECATED: Use ADS1x15Voltage SENSOR instead of an ADS1x15Value
+ * Sensor connected to this ADS1x15Voltage Transform.
+ * 
  * A transform that takes the output from an ADS1015 or ADS1115
- analog-to-digital converter
- * (ADC) as input, and converts the value to the original voltage sensed by the
- ADC.
- * There are two parameters:
+ * analog-to-digital converter (ADC) as input, and converts the value to 
+ * the original voltage sensed by the ADC.
  *
- * - chip, which is either 0 (representing the ADS1015) or 1 (representing the
- ADS1115). Default is 1.
- * - gain, which is the value of the GAIN setting used by the firmware on the
- chip. It defaults to GAIN_TWOTHIRDS, which is also the default GAIN setting for
- both chips. Valid values are from the ADAfruit_ADS1015 library:
-
-        GAIN_TWOTHIRDS = +/-6.144V range
-        GAIN_ONE = +/-4.096V range
-        GAIN_TWO = +/-2.048V range
-        GAIN_FOUR = +/-1.024V range
-        GAIN_EIGHT = +/-0.512V range
-        GAIN_SIXTEEN = +/-0.256V range
+ * @param chip Either 0 (representing the ADS1015) or 1 (representing the
+ * ADS1115). Default is 1.
+ *
+ * @param gain The value of the GAIN setting used by the firmware on the
+ * chip. It defaults to GAIN_TWOTHIRDS, which is also the default GAIN setting for
+ * both chips. Valid values are from the ADAfruit_ADS1015 library:
+ *
+ *       GAIN_TWOTHIRDS = +/-6.144V range
+ *       GAIN_ONE = +/-4.096V range
+ *       GAIN_TWO = +/-2.048V range
+ *       GAIN_FOUR = +/-1.024V range
+ *       GAIN_EIGHT = +/-0.512V range
+ *       GAIN_SIXTEEN = +/-0.256V range
  *
  * It's up to you to set the proper chip and gain to match what you've set in
- ADS1015() or
- * ADS1115() - they are not automatically detected.
+ * ADS1015() or ADS1115() - they are not automatically detected.
  */
 class ADS1x15Voltage : public NumericTransform {
  public:

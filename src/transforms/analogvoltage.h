@@ -10,7 +10,7 @@
 #endif
 
 /**
- * AnalogVoltage is a transform that takes the output of the built-in
+ * @brief A transform that takes the output of the built-in
  * analog-to-digital converter on the ESP and outputs the voltage that went into
  * it. It can also be used like the Linear transport since it has a multiplier
  * and an offset. max_voltage is the maximum voltage allowable on the Analog

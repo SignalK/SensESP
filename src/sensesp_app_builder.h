@@ -3,56 +3,55 @@
 
 #include "sensesp_app.h"
 
+/**
+ * @brief A class for quickly configuring a SensESP application object before
+ * wiring up your sensors.
+ */
 class SensESPAppBuilder {
  private:
-  String hostname = "SensESP";
-  String ssid = "";
-  String password = "";
-  String sk_server_address = "";
-  uint16_t sk_server_port = 0;
-  StandardSensors sensors = ALL;
-  int led_pin = LED_PIN;
-  bool enable_led = ENABLE_LED;
-  int led_ws_connected = 200;
-  int led_wifi_connected = 1000;
-  int led_offline = 5000;
+  String hostname_ = "SensESP";
+  String ssid_ = "";
+  String password_ = "";
+  String sk_server_address_ = "";
+  uint16_t sk_server_port_ = 0;
+  StandardSensors sensors_ = ALL;
+  SKPermissions sk_server_permissions_ = READWRITE;
+
+  SensESPApp* app;
 
  public:
-  SensESPAppBuilder() {}
+  SensESPAppBuilder() { app = new SensESPApp(true); }
   SensESPAppBuilder* set_wifi(String ssid, String password) {
-    this->ssid = ssid;
-    this->password = password;
+    app->set_ssid(ssid);
+    app->set_wifi_password(password);
     return this;
   }
-  SensESPAppBuilder* set_sk_server(String address, uint16_t port) {
-    this->sk_server_address = address;
-    this->sk_server_port = port;
+  SensESPAppBuilder* set_sk_server(String address, uint16_t port,
+                                   SKPermissions permissions = READWRITE) {
+    app->set_sk_server_address(address);
+    app->set_sk_server_port(port);
+    app->set_requested_permissions(permissions);
     return this;
   }
   SensESPAppBuilder* set_standard_sensors(StandardSensors sensors = ALL) {
-    this->sensors = sensors;
-    return this;
-  }
-  SensESPAppBuilder* set_led_pin(int led_pin) {
-    this->led_pin = led_pin;
-    return this;
-  }
-  SensESPAppBuilder* set_led_blinker(bool enabled, int websocket_connected,
-                                     int wifi_connected, int offline) {
-    this->enable_led = enabled;
-    this->led_ws_connected = websocket_connected;
-    this->led_wifi_connected = wifi_connected;
-    this->led_offline = offline;
+    app->set_sensors(sensors);
     return this;
   }
   SensESPAppBuilder* set_hostname(String hostname) {
-    this->hostname = hostname;
+    app->set_preset_hostname(hostname);
+    return this;
+  }
+  SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
+    app->set_system_status_led(system_status_led);
+    return this;
+  }
+  SensESPAppBuilder* set_test_auth_on_each_connect(bool val) {
+    WSClient::test_auth_on_each_connect_ = val;
     return this;
   }
   SensESPApp* get_app() {
-    return new SensESPApp(hostname, ssid, password, sk_server_address,
-                          sk_server_port, sensors, led_pin, enable_led,
-                          led_ws_connected, led_wifi_connected, led_offline);
+    app->setup();
+    return app;
   }
 };
 

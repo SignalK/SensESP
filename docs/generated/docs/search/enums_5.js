@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['orientationvaltype_1091',['OrientationValType',['../orientation__9dof__input_8h.html#aee05f622fca61a6272817b66c58fc95e',1,'orientation_9dof_input.h']]]
+  ['orientationvaltype',['OrientationValType',['../class_read9_d_o_f.html#adce59e3cd83086f9c600bba27263739e',1,'Read9DOF']]]
 ];

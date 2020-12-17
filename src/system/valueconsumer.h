@@ -8,10 +8,10 @@ template <typename T>
 class ValueProducer;
 
 /**
- *  A ValueConsumer is any piece of code (like a transformation) that
- *  accepts data for input. They can accept one or more input values
- *  via the set_input() method. They are connected to ValueProducers
- *  via the connect_to() method.
+ *  @brief A base class for piece of code (like a transform) that
+ *  accepts data for input. ValueConsumers can accept one or more input values
+ *  via the set_input() method. They are connected to `ValueProducers`
+ *  via the `connect_to()` method.
  *  @see ValueProducer::connect_to()
  */
 template <typename T>

@@ -4,8 +4,9 @@
 #include "transforms/transform.h"
 
 /**
- * CurveInterpolator uses a collection of input/output samples that approximate
- * a non-linear curve. The output is the linear interpolation between the two
+ * @brief Uses a collection of input/output samples that approximate
+ * a non-linear curve and outputs a value on that curve. 
+ * The output is the linear interpolation between the two
  * sample points that the input falls between. It is used primarily for
  * non-linear analog gauges such as temperature gauges and oil pressure gauges,
  * which get their input from analog sensors that are variable resistors.

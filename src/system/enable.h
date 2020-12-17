@@ -8,7 +8,7 @@
 #include "sensesp.h"
 
 /**
- * Classes that implement "Enable" will have their enable() method
+ * @brief Classes that implement "Enable" will have their enable() method
  * called automatically at startup when the SensESP app itself
  * is enabled.  The optional priority allows for certain classes
  * to be initialized first. The default priority is zero.

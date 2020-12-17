@@ -44,7 +44,7 @@ void setup_fuel_flow_meter(int inflow_pin, int return_flow_pin) {
   auto* diff =
       new Difference(0.46 / 1e6, 0.46 / 1e6, "/fuelflow/fuel/rate/calibrate");
 
-  diff->connectFrom(freqIn, freqOut)
+  diff->connect_from(freqIn, freqOut)
       ->connect_to(new SKOutputNumber("propulsion.main.fuel.rate",
                                       "/fuelflow/fuel/rate/sk"))
       ->connect_to(new MovingAverage(
@@ -56,7 +56,7 @@ void setup_fuel_flow_meter(int inflow_pin, int return_flow_pin) {
 
   // Integrate the net flow over time. The output is dependent
   // on the the input counter update rate!
-  diff->connect_to(new Integrator(1., 0.))
+  diff->connect_to(new Integrator(1.f, 0.f))
       ->connect_to(new SKOutputNumber("propulsion.main.fuel.used",
                                       "/fuelflow/fuel/used/sk"));
 
@@ -64,7 +64,7 @@ void setup_fuel_flow_meter(int inflow_pin, int return_flow_pin) {
   // on the the input counter update rate!
   freqIn
       ->connect_to(
-          new Integrator(0.46 / 1e6, 0., "/fuelflow/fuel/in_used/calibrate"))
+          new Integrator(0.46f / 1e6f, 0.f, "/fuelflow/fuel/in_used/calibrate"))
       ->connect_to(new SKOutputNumber("propulsion.main.fuel.usedGross",
                                       "/fuelflow/fuel/in_used/sk"));
 
@@ -72,7 +72,7 @@ void setup_fuel_flow_meter(int inflow_pin, int return_flow_pin) {
   // on the the input counter update rate!
   freqOut
       ->connect_to(
-          new Integrator(0.46 / 1e6, 0., "/fuelflow/fuel/out_used/calibrate"))
+          new Integrator(0.46f / 1e6f, 0.f, "/fuelflow/fuel/out_used/calibrate"))
       ->connect_to(new SKOutputNumber("propulsion.main.fuel.usedReturn",
                                       "/fuelflow/fuel/out_used/sk"));
 }

@@ -13,11 +13,12 @@
 // only need to handle the other two.
 enum INA219CAL_t { cal32_2, cal32_1, cal16_400 };
 
-// INA219 represents an ADAfruit (or compatible) INA219 High Side DC Current
-// Sensor. The constructor creates a pointer to the instance, and starts up the
-// sensor. The pointer is passed to INA219value, which retrieves the specified
-// value.
-//
+/**
+ * @brief  Represents an ADAfruit (or compatible) INA219 High Side DC Current
+ * Sensor. The constructor creates a pointer to the instance, and starts up the
+ * sensor. The pointer is passed to INA219value, which retrieves the specified
+ * value.
+ */
 class INA219 : public Sensor {
  public:
   INA219(uint8_t addr = 0x40, INA219CAL_t calibration_setting = cal32_2,
@@ -25,13 +26,11 @@ class INA219 : public Sensor {
   Adafruit_INA219* ina219;
 };
 
-// Pass one of these in the constructor to INA219value() to tell which type of
-// value you want to output
-enum INA219ValType { bus_voltage, shunt_voltage, current, power, load_voltage };
 
 // INA219Value reads and outputs the specified value of a INA219 sensor.
 class INA219Value : public NumericSensor {
  public:
+  enum INA219ValType { bus_voltage, shunt_voltage, current, power, load_voltage };
   INA219Value(INA219* ina219, INA219ValType val_type, uint read_delay = 500,
               String config_path = "");
   void enable() override final;

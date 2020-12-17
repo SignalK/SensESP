@@ -19,6 +19,8 @@ ReactESP app([]() {
 
   // Create a BMP280, which represents the physical sensor.
   // 0x77 is the default address. Some chips use 0x76, which is shown here.
+  // If you need to use the TwoWire library instead of the Wire library, there
+  // is a different constructor: see bmp280.h
   auto* bmp280 = new BMP280(0x76);
 
   // If you want to change any of the settings that are set by
@@ -33,7 +35,7 @@ ReactESP app([]() {
   // BMP280, and send its output to Signal K as a number (float). This one is for
   // the temperature reading.
   auto* bmp_temperature =
-      new BMP280Value(bmp280, temperature, read_delay, "/Outside/Temperature");
+      new BMP280Value(bmp280, BMP280Value::temperature, read_delay, "/Outside/Temperature");
 
   bmp_temperature->connect_to(
       new SKOutputNumber("environment.outside.temperature"));
@@ -41,7 +43,7 @@ ReactESP app([]() {
   // Do the same for the barometric pressure value. Its read_delay is longer,
   // since barometric pressure can't change all that quickly. It could be much
   // longer for that reason.
-  auto* bmp_pressure = new BMP280Value(bmp280, pressure, pressure_read_delay,
+  auto* bmp_pressure = new BMP280Value(bmp280, BMP280Value::pressure, pressure_read_delay,
                                        "/Outside/Pressure");
 
   bmp_pressure->connect_to(new SKOutputNumber("environment.outside.pressure"));

@@ -1,38 +1,51 @@
 <map id="Observable" name="Observable">
-<area shape="rect" id="node1" title=" " alt="" coords="5,659,95,684"/>
-<area shape="rect" id="node2" href="$class_sensor.html" title=" " alt="" coords="154,327,218,352"/>
-<area shape="rect" id="node32" href="$class_s_k_emitter.html" title=" " alt="" coords="145,659,227,684"/>
-<area shape="rect" id="node35" href="$class_s_k_listener.html" title=" " alt="" coords="143,732,229,757"/>
-<area shape="rect" id="node3" href="$class_a_d_s1x15.html" title=" " alt="" coords="280,5,456,31"/>
-<area shape="rect" id="node4" href="$class_b_m_e280.html" title=" " alt="" coords="332,55,405,80"/>
-<area shape="rect" id="node5" href="$class_b_m_p280.html" title=" " alt="" coords="332,104,405,129"/>
-<area shape="rect" id="node6" href="$class_dallas_temperature_sensors.html" title=" " alt="" coords="277,153,460,179"/>
-<area shape="rect" id="node7" href="$class_digital_input.html" title=" " alt="" coords="324,203,412,228"/>
-<area shape="rect" id="node10" href="$class_free_mem.html" title=" " alt="" coords="329,252,408,277"/>
-<area shape="rect" id="node11" href="$class_g_p_s_input.html" title=" " alt="" coords="329,301,408,327"/>
-<area shape="rect" id="node12" href="$class_i_n_a219.html" title=" " alt="" coords="336,351,401,376"/>
-<area shape="rect" id="node13" href="$class_integer_sensor.html" title=" " alt="" coords="316,400,421,425"/>
-<area shape="rect" id="node14" href="$class_numeric_sensor.html" title=" " alt="" coords="312,449,425,475"/>
-<area shape="rect" id="node28" href="$class_orientation9_d_o_f.html" title=" " alt="" coords="307,499,430,524"/>
-<area shape="rect" id="node29" href="$class_s_h_t31.html" title=" " alt="" coords="337,548,400,573"/>
-<area shape="rect" id="node30" href="$class_string_sensor.html" title=" " alt="" coords="319,597,418,623"/>
-<area shape="rect" id="node8" href="$class_digital_input_counter.html" title=" " alt="" coords="526,65,662,91"/>
-<area shape="rect" id="node9" href="$class_digital_input_value.html" title=" " alt="" coords="533,115,654,140"/>
-<area shape="rect" id="node15" href="$class_a_d_s1x15_value.html" title=" " alt="" coords="514,164,673,203"/>
-<area shape="rect" id="node16" href="$class_analog_input.html" title=" " alt="" coords="548,227,640,252"/>
-<area shape="rect" id="node17" href="$class_b_m_e280_value.html" title=" " alt="" coords="541,276,647,301"/>
-<area shape="rect" id="node18" href="$class_b_m_p280_value.html" title=" " alt="" coords="541,325,647,351"/>
-<area shape="rect" id="node19" href="$class_i_n_a219_value.html" title=" " alt="" coords="544,375,643,400"/>
-<area shape="rect" id="node20" href="$class_m_a_x31856_thermocouple.html" title=" " alt="" coords="508,424,680,449"/>
-<area shape="rect" id="node21" href="$class_one_wire_temperature.html" title=" " alt="" coords="519,473,668,499"/>
-<area shape="rect" id="node22" href="$class_read9_d_o_f.html" title=" " alt="" coords="549,523,638,548"/>
-<area shape="rect" id="node23" href="$class_s_h_t31_value.html" title=" " alt="" coords="546,572,642,597"/>
-<area shape="rect" id="node24" href="$class_system_hz.html" title=" " alt="" coords="553,621,635,647"/>
-<area shape="rect" id="node25" href="$class_ultrasonic_distance.html" title=" " alt="" coords="528,671,660,696"/>
-<area shape="rect" id="node26" href="$class_uptime.html" title=" " alt="" coords="562,720,626,745"/>
-<area shape="rect" id="node27" href="$class_wifi_signal.html" title=" " alt="" coords="554,769,634,795"/>
-<area shape="rect" id="node31" href="$class_i_p_addr_dev.html" title=" " alt="" coords="551,819,636,844"/>
-<area shape="rect" id="node33" href="$class_s_k_output.html" title=" " alt="" coords="314,647,423,672"/>
-<area shape="rect" id="node34" href="$class_s_k_output_time.html" title=" " alt="" coords="314,696,423,721"/>
-<area shape="rect" id="node36" href="$class_s_k_value_listener.html" title=" " alt="" coords="293,745,444,771"/>
+<area shape="rect" id="node1" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,1025,93,1052"/>
+<area shape="rect" id="node2" href="$class_sensor.html" title="Represents a raw hardware thingie." alt="" coords="553,321,615,348"/>
+<area shape="rect" id="node18" href="$class_s_k_emitter.html" title="A class that produces Signal K output to be forwarded to the Signal K server (if the system is connec..." alt="" coords="171,1735,253,1761"/>
+<area shape="rect" id="node21" href="$class_s_k_listener.html" title="An Obervable class that listens for Signal K stream deltas and notifies any observers of value change..." alt="" coords="169,833,255,860"/>
+<area shape="rect" id="node23" href="$class_s_k_put_listener.html" title="An Obervable class that listens for Signal K PUT requests coming over the websocket connection and no..." alt="" coords="159,464,265,491"/>
+<area shape="rect" id="node25" href="$class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="143,1025,281,1052"/>
+<area shape="rect" id="node30" href="$class_value_producer.html" title=" " alt="" coords="492,832,676,859"/>
+<area shape="rect" id="node31" href="$class_value_producer.html" title=" " alt="" coords="495,1660,673,1687"/>
+<area shape="rect" id="node32" href="$class_value_producer.html" title=" " alt="" coords="496,411,672,437"/>
+<area shape="rect" id="node33" href="$class_value_producer.html" title=" " alt="" coords="515,1297,653,1324"/>
+<area shape="rect" id="node34" href="$class_value_producer.html" title=" " alt="" coords="485,992,683,1019"/>
+<area shape="rect" id="node35" href="$class_value_producer.html" title=" " alt="" coords="507,779,661,805"/>
+<area shape="rect" id="node38" href="$class_value_producer.html" title=" " alt="" coords="512,577,656,604"/>
+<area shape="rect" id="node39" href="$class_value_producer.html" title=" " alt="" coords="501,1531,667,1557"/>
+<area shape="rect" id="node40" href="$class_value_producer.html" title=" " alt="" coords="502,644,666,671"/>
+<area shape="rect" id="node41" href="$class_value_producer.html" title=" " alt="" coords="505,1591,663,1617"/>
+<area shape="rect" id="node42" href="$class_value_producer.html" title=" " alt="" coords="487,1216,681,1243"/>
+<area shape="rect" id="node44" href="$class_value_producer.html" title=" " alt="" coords="507,1476,661,1503"/>
+<area shape="rect" id="node48" href="$class_value_producer.html" title=" " alt="" coords="477,1133,691,1160"/>
+<area shape="rect" id="node49" href="$class_value_producer.html" title=" " alt="" coords="481,1374,687,1415"/>
+<area shape="rect" id="node3" href="$class_a_d_s1x15.html" title="ADS1x15 represents an ADS1015 or ADS1115 Analog to Digital Converter." alt="" coords="853,157,1027,184"/>
+<area shape="rect" id="node4" href="$class_b_m_e280.html" title="Represents an ADAfruit (or compatible) BME280 temperature / pressure / humidity sensor." alt="" coords="904,208,976,235"/>
+<area shape="rect" id="node5" href="$class_b_m_p280.html" title="BMP280 represents an ADAfruit or compatible BMP280 temperature &amp; pressure sensor." alt="" coords="904,259,976,285"/>
+<area shape="rect" id="node6" href="$class_dallas_temperature_sensors.html" title=" " alt="" coords="851,309,1029,336"/>
+<area shape="rect" id="node7" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="896,461,984,488"/>
+<area shape="rect" id="node10" href="$class_free_mem.html" title=" " alt="" coords="901,411,979,437"/>
+<area shape="rect" id="node11" href="$class_g_p_s_input.html" title=" " alt="" coords="901,360,979,387"/>
+<area shape="rect" id="node12" href="$class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor. The constructor creates a ..." alt="" coords="907,5,973,32"/>
+<area shape="rect" id="node13" href="$class_integer_sensor.html" title=" " alt="" coords="889,512,991,539"/>
+<area shape="rect" id="node14" href="$class_numeric_sensor.html" title=" " alt="" coords="884,728,996,755"/>
+<area shape="rect" id="node15" href="$class_orientation9_d_o_f.html" title=" " alt="" coords="880,56,1000,83"/>
+<area shape="rect" id="node16" href="$class_s_h_t31.html" title=" " alt="" coords="909,107,971,133"/>
+<area shape="rect" id="node17" href="$class_string_sensor.html" title=" " alt="" coords="891,563,989,589"/>
+<area shape="rect" id="node8" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="1095,580,1229,607"/>
+<area shape="rect" id="node9" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="1095,653,1229,680"/>
+<area shape="rect" id="node19" href="$class_s_k_output.html" title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network." alt="" coords="529,1776,639,1803"/>
+<area shape="rect" id="node20" href="$class_s_k_output_time.html" title=" " alt="" coords="530,1725,638,1752"/>
+<area shape="rect" id="node22" href="$class_s_k_value_listener.html" title="An ValueProducer that listens to specific Signal K paths and emits its value whenever it changes." alt="" coords="509,885,659,912"/>
+<area shape="rect" id="node24" href="$class_s_k_put_request_listener.html" title="An object that listens for PUT requests to come in for the specified SignalK path...." alt="" coords="491,493,677,520"/>
+<area shape="rect" id="node26" href="$class_observable_value.html" title="A value that notifies its observers if it gets changed." alt="" coords="508,941,660,968"/>
+<area shape="rect" id="node29" href="$class_transform.html" title=" " alt="" coords="521,1047,647,1073"/>
+<area shape="rect" id="node27" href="$class_observable_value.html" title=" " alt="" coords="835,971,1045,997"/>
+<area shape="rect" id="node28" href="$class_observable_value.html" title=" " alt="" coords="855,889,1025,916"/>
+<area shape="rect" id="node36" href="$class_transform.html" title=" " alt="" coords="859,779,1021,805"/>
+<area shape="rect" id="node37" href="$class_transform.html" title=" " alt="" coords="864,829,1016,856"/>
+<area shape="rect" id="node43" href="$class_transform.html" title=" " alt="" coords="839,1216,1041,1243"/>
+<area shape="rect" id="node45" href="$class_transform.html" title=" " alt="" coords="859,1476,1021,1503"/>
+<area shape="rect" id="node46" href="$class_transform.html" title=" " alt="" coords="865,1527,1015,1553"/>
+<area shape="rect" id="node47" href="$class_transform.html" title=" " alt="" coords="875,1410,1005,1451"/>
 </map>

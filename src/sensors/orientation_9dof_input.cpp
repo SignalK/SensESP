@@ -4,10 +4,6 @@
 
 #include "sensesp.h"
 
-// pointer to physical sensor
-SensorNXP_FXOS8700_FXAS21002*
-    sensor_fxos_fxas;  // if sensor_fxos_fxas is a member of Orientation9DOF,
-                       // then when called in onRepeat it causes CPU panic
 
 // Orientation9DOF represents a 9-Degrees-of-Freedom sensor (magnetometer,
 // accelerometer, and gyroscope), such as an
@@ -48,7 +44,7 @@ Read9DOF::Read9DOF(Orientation9DOF* orientation_9dof,
       val_type{val_type},
       read_delay{read_delay} {
   load_configuration();
-  sensor_fxos_fxas->initFilter(this->read_delay);
+  orientation_9dof->sensor_fxos_fxas->initFilter(this->read_delay);
 }
 
 // Setup repeated readings from combination sensor.
@@ -72,38 +68,36 @@ void Read9DOF::enable() {
 //  for whichever parameter _is_ updated the fastest - this
 //  ensures that that parameter and all others are never stale.
 void Read9DOF::update() {
-  // if sensor_fxos_fxas is a member of Orientation9DOF, then when called in
-  // onRepeat it causes CPU panic
   switch (val_type) {
     case (compass_hdg):
       // sensor is read and filter called, only for compass_hdg
       // remaining parameters are obtained from most recent filter results
-      sensor_fxos_fxas->gatherOrientationDataOnce(false);
-      output = sensor_fxos_fxas->getHeadingRadians();
+      orientation_9dof->sensor_fxos_fxas->gatherOrientationDataOnce(false);
+      output = orientation_9dof->sensor_fxos_fxas->getHeadingRadians();
       break;
     case (roll):
-      output = sensor_fxos_fxas->getRollRadians();
+      output = orientation_9dof->sensor_fxos_fxas->getRollRadians();
       break;
     case (pitch):
-      output = sensor_fxos_fxas->getPitchRadians();
+      output = orientation_9dof->sensor_fxos_fxas->getPitchRadians();
       break;
     case (acceleration_x):
-      output = sensor_fxos_fxas->getAccelerationX();
+      output = orientation_9dof->sensor_fxos_fxas->getAccelerationX();
       break;
     case (acceleration_y):
-      output = sensor_fxos_fxas->getAccelerationY();
+      output = orientation_9dof->sensor_fxos_fxas->getAccelerationY();
       break;
     case (acceleration_z):
-      output = sensor_fxos_fxas->getAccelerationZ();
+      output = orientation_9dof->sensor_fxos_fxas->getAccelerationZ();
       break;
     case (rate_of_turn):
-      output = sensor_fxos_fxas->getRateOfTurn();
+      output = orientation_9dof->sensor_fxos_fxas->getRateOfTurn();
       break;
     case (rate_of_pitch):
-      output = sensor_fxos_fxas->getRateOfPitch();
+      output = orientation_9dof->sensor_fxos_fxas->getRateOfPitch();
       break;
     case (rate_of_roll):
-      output = sensor_fxos_fxas->getRateOfRoll();
+      output = orientation_9dof->sensor_fxos_fxas->getRateOfRoll();
       break;
     default:
       output = 0.0;

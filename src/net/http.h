@@ -5,6 +5,9 @@
 
 #include <functional>
 
+/**
+ * @brief Handles external interactions with the device via the web interface.
+ */
 class HTTPServer {
  public:
   HTTPServer(std::function<void()> reset_device);

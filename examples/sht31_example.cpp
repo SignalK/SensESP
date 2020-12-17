@@ -27,7 +27,7 @@ ReactESP app([]() {
   // Create a SHT31value, which is used to read a specific value from the SHT31.
   // This one is for the temperature reading.
   auto* sht31_temperature =
-      new SHT31Value(sht31, temperature, read_delay, "/fridge/temperature");
+      new SHT31Value(sht31, SHT31Value::temperature, read_delay, "/fridge/temperature");
 
   // Then send its output to Signal K as a Number (float).
   // To find valid Signal K Paths that fits your need you look at this link:
@@ -37,7 +37,7 @@ ReactESP app([]() {
 
   // Do the same for the humidity value.
   auto* sht31_humidity =
-      new SHT31Value(sht31, humidity, read_delay, "/fridge/humidity");
+      new SHT31Value(sht31, SHT31Value::humidity, read_delay, "/fridge/humidity");
 
   sht31_humidity->connect_to(
       new SKOutputNumber("environment.inside.refrigerator.humidity"));

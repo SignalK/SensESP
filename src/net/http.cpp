@@ -175,10 +175,12 @@ void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
 }
 
 void HTTPServer::handle_config_list(AsyncWebServerRequest* request) {
+  // to save memory, guesstimate the required output buffer size based
+  // on the number of elements
+  auto output_buffer_size = 200 * configurables.size();
   AsyncResponseStream* response =
       request->beginResponseStream("application/json");
-  DynamicJsonDocument json_doc(1024);
-  // JsonObject root = json_doc.as<JsonObject>();
+  DynamicJsonDocument json_doc(output_buffer_size);
   JsonArray arr = json_doc.createNestedArray("keys");
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     arr.add(it->first);
@@ -217,9 +219,9 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   response->printf("SSID: %s\n", WiFi.SSID().c_str());
 
   response->printf("Signal K server address: %s\n",
-                   sensesp_app->ws_client->get_server_address().c_str());
+                   sensesp_app->ws_client_->get_server_address().c_str());
   response->printf("Signal K server port: %d\n",
-                   sensesp_app->ws_client->get_server_port());
+                   sensesp_app->ws_client_->get_server_port());
 
   request->send(response);
 }

@@ -4,7 +4,7 @@
 #include "transforms/transform.h"
 
 /**
- * ChangeFilter is a numeric passthrough transform that will only
+ * @brief A numeric passthrough transform that will only
  * pass that value through if it is "sufficiently different" from
  * the last value passed through. More specifically, the absolute
  * value of the difference between the new value and the last passed

@@ -26,13 +26,19 @@ class Orientation9DOF : public Sensor {
   Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                   String config_path = "");
   void stream_raw_values(void);  // used when calibrating
- private:
-  uint8_t addr;  // unused
+  // pointer to physical sensor
+  SensorNXP_FXOS8700_FXAS21002 *sensor_fxos_fxas;
+
+private:
+ uint8_t addr;  // unused
 };
 
-// Pass one of these in Read9DOF() constructor corresponding to type of value
-// you want
-enum OrientationValType {
+
+// Read9DOF reads the combo FXOS8700 + FXAS21002 sensor and outputs the
+// specified orientation parameter value
+class Read9DOF : public NumericSensor {
+ public:
+  enum OrientationValType {
   compass_hdg,
   pitch,
   roll,
@@ -43,11 +49,6 @@ enum OrientationValType {
   rate_of_pitch,
   rate_of_roll
 };
-
-// Read9DOF reads the combo FXOS8700 + FXAS21002 sensor and outputs the
-// specified orientation parameter value
-class Read9DOF : public NumericSensor {
- public:
   Read9DOF(Orientation9DOF* p9DOF, OrientationValType val_type = compass_hdg,
            uint read_delay = 100, String config_path = "");
   void enable() override final;

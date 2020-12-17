@@ -1,8 +1,9 @@
 <map id="IntegerSensor" name="IntegerSensor">
-<area shape="rect" id="node1" title=" " alt="" coords="172,152,277,177"/>
-<area shape="rect" id="node2" href="$class_sensor.html" title=" " alt="" coords="136,79,199,104"/>
-<area shape="rect" id="node3" href="$class_observable.html" title=" " alt="" coords="5,5,95,31"/>
-<area shape="rect" id="node4" href="$class_configurable.html" title=" " alt="" coords="119,5,216,31"/>
-<area shape="rect" id="node5" href="$class_enable.html" title=" " alt="" coords="240,5,303,31"/>
-<area shape="rect" id="node6" href="$class_value_producer.html" title=" " alt="" coords="224,79,341,104"/>
+<area shape="rect" id="node1" title=" " alt="" coords="163,247,266,273"/>
+<area shape="rect" id="node2" href="$class_sensor.html" title="Represents a raw hardware thingie." alt="" coords="231,81,294,108"/>
+<area shape="rect" id="node3" href="$class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="103,5,191,32"/>
+<area shape="rect" id="node6" href="$class_value_producer.html" title=" " alt="" coords="111,171,225,197"/>
+<area shape="rect" id="node7" href="$class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="5,81,144,108"/>
+<area shape="rect" id="node4" href="$class_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="215,5,310,32"/>
+<area shape="rect" id="node5" href="$class_enable.html" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="334,5,397,32"/>
 </map>

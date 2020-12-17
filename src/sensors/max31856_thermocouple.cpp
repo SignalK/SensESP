@@ -26,8 +26,7 @@ void MAX31856Thermocouple::enable() {
       delay(25);
     }
     float temp = max31856->readThermocoupleTemperature();
-    output = temp;
-    this->notify();
+    this->emit(temp);
   });
 }
 

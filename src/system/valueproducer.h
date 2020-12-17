@@ -11,10 +11,12 @@ template <typename C, typename P>
 class Transform;
 
 /**
- * A ValueProducer<> is any sensor or piece of code that outputs a value for
- * consumption elsewhere.  They are Observable, allowing code to be notified
+ * @brief A base class for any sensor or piece of code that outputs a value for
+ * consumption elsewhere.  
+ * <p>They are Observable, allowing code to be notified
  * whenever a new value is available.  They can be connected directly to
- * ValueConsumers of the same type using the connect_to() method.
+ * `ValueConsumer`s of the same type using the `connect_to()` method.
+ * @see ValueConsumer
  */
 template <typename T>
 class ValueProducer : virtual public Observable {
@@ -24,7 +26,7 @@ class ValueProducer : virtual public Observable {
   /**
    * Returns the current value of this producer
    */
-  virtual const T& get() { return output; }
+  virtual const T& get() const { return output; }
 
   /**
    * Connects this producer to the specified consumer, registering that
@@ -76,6 +78,14 @@ class ValueProducer : virtual public Observable {
       Transform<T, T2>* consumer_producer, uint8_t input_channel = 0) {
     debugW("Use connect_to(...) instead.");
     return connect_to(consumer_producer, input_channel);
+  }
+
+  /*
+   * Set a new output value and notify consumers about it
+   */
+  void emit(T new_value) {
+    this->output = new_value;
+    Observable::notify();
   }
 
  protected:

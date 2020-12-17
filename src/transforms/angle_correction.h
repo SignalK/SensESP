@@ -3,9 +3,11 @@
 
 #include "transform.h"
 
-// Add a value to an angle input (in radians). The output
-// value is wrapped to a range between [0, 2*pi[. This transform
-// is useful for correcting e.g. a heading or a wind direction reading.
+/**
+ * @brief Add a value to an angle input (in radians). The output
+ * value is wrapped to a range between [0, 2*pi[. This transform
+ * is useful for correcting e.g. a heading or a wind direction reading.
+ */
 class AngleCorrection : public NumericTransform {
  public:
   AngleCorrection(float offset, float min_angle = 0, String config_path = "");

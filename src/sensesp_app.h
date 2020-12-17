@@ -12,14 +12,17 @@
 #define ENABLE_LED false
 #endif
 
+#include <forward_list>
+
+#include "controllers/system_status_controller.h"
 #include "net/http.h"
 #include "net/networking.h"
 #include "net/ws_client.h"
 #include "sensesp.h"
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta.h"
-#include "system/led_blinker.h"
 #include "system/observablevalue.h"
+#include "system/system_status_led.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
 
@@ -33,16 +36,21 @@ enum StandardSensors {
   ALL = 0x1F
 };
 
+enum SKPermissions { READONLY, READWRITE, ADMIN };
+
 void SetupSerialDebug(uint32_t baudrate);
 
+/**
+ * The main SensESP application object.
+ * @see SensESPAppBuilder
+ */
 class SensESPApp {
  public:
+  SensESPApp(bool defer_setup);
   SensESPApp(String hostname = "SensESP", String ssid = "",
              String wifi_password = "", String sk_server_address = "",
-             uint16_t sk_server_port = 0, StandardSensors sensors = ALL,
-             int led_pin = LED_PIN, bool enable_led = ENABLE_LED,
-             int led_ws_connected = 200, int led_wifi_connected = 1000,
-             int led_offline = 2000);
+             uint16_t sk_server_port = 0);
+  void setup();
   void enable();
   void reset();
   String get_hostname();
@@ -69,6 +77,13 @@ class SensESPApp {
   }
 
   /**
+   * Sends the specified payload text directly to the signalk server
+   * over the connected websocket. If no websocket is connect, the
+   * call is ignored.
+   */
+  void send_to_server(String& payload) { this->ws_client_->sendTXT(payload); }
+
+  /**
    * Returns true if the host system is connected to Wifi
    */
   bool isWifiConnected() { return WiFi.status() == WL_CONNECTED; }
@@ -76,18 +91,72 @@ class SensESPApp {
   /**
    * Returns true if the host system is connected to a Signal K server
    */
-  bool isSignalKConnected() { return ws_client->is_connected(); }
+  bool isSignalKConnected() { return ws_client_->is_connected(); }
+
+  // getters for internal members
+  SKDelta* get_sk_delta() { return this->sk_delta_; }
+  SystemStatusController* get_system_status_controller() {
+    return &(this->system_status_controller_);
+  }
+  Networking* get_networking() { return this->networking_; }
+  WSClient* get_ws_client() { return this->ws_client_; }
+
+ protected:
+  // setters for all constructor arguments
+
+  const SensESPApp* set_preset_hostname(String preset_hostname) {
+    this->preset_hostname_ = preset_hostname;
+    return this;
+  }
+  const SensESPApp* set_ssid(String ssid) {
+    this->ssid_ = ssid;
+    return this;
+  }
+  const SensESPApp* set_wifi_password(String wifi_password) {
+    this->wifi_password_ = wifi_password;
+    return this;
+  }
+  const SensESPApp* set_sk_server_address(String sk_server_address) {
+    this->sk_server_address_ = sk_server_address;
+    return this;
+  }
+  const SensESPApp* set_sk_server_port(uint16_t sk_server_port) {
+    this->sk_server_port_ = sk_server_port;
+    return this;
+  }
+  const SensESPApp* set_system_status_led(SystemStatusLed* system_status_led) {
+    this->system_status_led_ = system_status_led;
+    return this;
+  }
+  const SensESPApp* set_sensors(StandardSensors sensors) {
+    this->sensors_ = sensors;
+    return this;
+  }
+  const SensESPApp* set_requested_permissions(SKPermissions permissions) {
+    this->requested_permissions_ = permissions;
+    return this;
+  }
 
  private:
+  String preset_hostname_ = "SensESP";
+  String ssid_ = "";
+  String wifi_password_ = "";
+  String sk_server_address_ = "";
+  uint16_t sk_server_port_ = 0;
+  StandardSensors sensors_ = ALL;
+  SKPermissions requested_permissions_ = READWRITE;
+
   void initialize();
   void setup_standard_sensors(ObservableValue<String>* hostname,
                               StandardSensors enabled_sensors = ALL);
 
-  HTTPServer* http_server;
-  LedBlinker* led_blinker;
-  Networking* networking;
-  SKDelta* sk_delta;
-  WSClient* ws_client;
+  HTTPServer* http_server_;
+  SystemStatusLed* system_status_led_ = NULL;
+  SystemStatusController system_status_controller_;
+  Networking* networking_;
+  SKDelta* sk_delta_;
+  WSClient* ws_client_;
+  String get_permission_string(SKPermissions permission);
 
   void set_wifi(String ssid, String password);
 

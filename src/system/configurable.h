@@ -8,7 +8,7 @@
 #include "Arduino.h"
 
 /**
- * A Configurable is any object that is capable of having configuration data
+ * @brief An object that is capable of having configuration data
  * that can be set remotely using a RESTful API, and can be persisted to the
  * local file system.
  */

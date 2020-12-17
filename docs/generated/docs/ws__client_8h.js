@@ -1,10 +1,10 @@
 var ws__client_8h =
 [
     [ "WSClient", "class_w_s_client.html", "class_w_s_client" ],
-    [ "ConnectionState", "ws__client_8h.html#acdd867d72142510ce53521a63a062f9b", [
-      [ "disconnected", "ws__client_8h.html#acdd867d72142510ce53521a63a062f9ba519f950c18a0ec32082cf9984cd2b225", null ],
-      [ "authorizing", "ws__client_8h.html#acdd867d72142510ce53521a63a062f9ba1f27ab35c30a3960dc1b8f11202c743d", null ],
-      [ "connecting", "ws__client_8h.html#acdd867d72142510ce53521a63a062f9bab4dbdd36e3f602f54d0024fd818e12d6", null ],
-      [ "connected", "ws__client_8h.html#acdd867d72142510ce53521a63a062f9ba8ba3de7243211c98f5ec24395c73d65b", null ]
+    [ "WSConnectionState", "ws__client_8h.html#ab2dc4b1ce1326c2f9f7ebe361d6dfed8", [
+      [ "kWSDisconnected", "ws__client_8h.html#ab2dc4b1ce1326c2f9f7ebe361d6dfed8afc5d8075e090bc270813d73c4c87c74a", null ],
+      [ "kWSAuthorizing", "ws__client_8h.html#ab2dc4b1ce1326c2f9f7ebe361d6dfed8a53396694885ba110633752f7b4dcbc37", null ],
+      [ "kWSConnecting", "ws__client_8h.html#ab2dc4b1ce1326c2f9f7ebe361d6dfed8a06ee8fe02fa081d715323bf64473cfc9", null ],
+      [ "kWSConnected", "ws__client_8h.html#ab2dc4b1ce1326c2f9f7ebe361d6dfed8a1082607a601695536faefdbca5e45db0", null ]
     ] ]
 ];

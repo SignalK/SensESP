@@ -14,6 +14,7 @@
 #include "sensors/system_info.h"
 #include "signalk/signalk_output.h"
 #include "system/spiffs_storage.h"
+#include "system/system_status_led.h"
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
 #include "transforms/linear.h"
@@ -34,11 +35,25 @@ void SetupSerialDebug(uint32_t baudrate) {
   debugI("\nSerial debug enabled");
 }
 
+static const char* permission_strings[] = {"readonly", "readwrite", "admin"};
+
+/*
+ * This constructor must be only used in SensESPAppBuilder
+ */
+SensESPApp::SensESPApp(bool defer_setup) {}
+
 SensESPApp::SensESPApp(String preset_hostname, String ssid,
                        String wifi_password, String sk_server_address,
-                       uint16_t sk_server_port, StandardSensors sensors,
-                       int led_pin, bool enable_led, int led_ws_connected,
-                       int led_wifi_connected, int led_offline) {
+                       uint16_t sk_server_port)
+    : preset_hostname_{preset_hostname},
+      ssid_{ssid},
+      wifi_password_{wifi_password},
+      sk_server_address_{sk_server_address},
+      sk_server_port_{sk_server_port} {
+  setup();
+}
+
+void SensESPApp::setup() {
   // initialize filesystem
 #ifdef ESP8266
   if (!SPIFFS.begin()) {
@@ -50,42 +65,45 @@ SensESPApp::SensESPApp(String preset_hostname, String ssid,
   }
 
   // create the networking object
-  networking = new Networking("/system/networking", ssid, wifi_password,
-                              preset_hostname);
+  networking_ = new Networking("/system/networking", ssid_, wifi_password_,
+                               preset_hostname_);
 
-  ObservableValue<String>* hostname = networking->get_hostname();
+  ObservableValue<String>* hostname = networking_->get_hostname();
 
   // setup standard sensors and their transforms
-  setup_standard_sensors(hostname, sensors);
+  setup_standard_sensors(hostname, sensors_);
 
   // create the SK delta object
 
-  sk_delta = new SKDelta(hostname->get());
+  sk_delta_ = new SKDelta(hostname->get());
 
   // listen for hostname updates
 
   hostname->attach(
-      [hostname, this]() { this->sk_delta->set_hostname(hostname->get()); });
-
-  led_blinker = new LedBlinker(led_pin, led_ws_connected, led_wifi_connected,
-                               led_offline);
+      [hostname, this]() { this->sk_delta_->set_hostname(hostname->get()); });
 
   // create the HTTP server
 
-  this->http_server = new HTTPServer(std::bind(&SensESPApp::reset, this));
+  this->http_server_ = new HTTPServer(std::bind(&SensESPApp::reset, this));
 
   // create the websocket client
 
-  auto ws_connected_cb = [this](bool connected) {
-    if (connected) {
-      this->led_blinker->set_server_connected();
-    } else {
-      this->led_blinker->set_server_disconnected();
-    }
-  };
-  auto ws_delta_cb = [this]() { this->led_blinker->flip(); };
-  this->ws_client = new WSClient("/system/sk", sk_delta, sk_server_address,
-                                 sk_server_port, ws_connected_cb, ws_delta_cb);
+  this->ws_client_ =
+      new WSClient("/system/sk", sk_delta_, sk_server_address_, sk_server_port_,
+                   permission_strings[(int)requested_permissions_]);
+
+  // connect the system status controller
+
+  this->networking_->connect_to(&system_status_controller_);
+  this->ws_client_->connect_to(&system_status_controller_);
+
+  // create a system status led and connect it
+
+  if (system_status_led_ == NULL) {
+    system_status_led_ = new SystemStatusLed(LED_PIN);
+  }
+  this->system_status_controller_.connect_to(system_status_led_);
+  this->ws_client_->get_delta_count_producer().connect_to(system_status_led_);
 }
 
 void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
@@ -120,8 +138,6 @@ void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
 }
 
 void SensESPApp::enable() {
-  this->led_blinker->set_wifi_disconnected();
-
   // connect all transforms to the Signal K delta output
 
   // ObservableValue<String>* hostname = networking->get_hostname();
@@ -130,7 +146,7 @@ void SensESPApp::enable() {
     if (sk_source->get_sk_path() != "") {
       debugI("Connecting Signal K source %s", sk_source->get_sk_path().c_str());
       sk_source->attach([sk_source, this]() {
-        this->sk_delta->append(sk_source->as_signalk());
+        this->sk_delta_->append(sk_source->as_signalk());
       });
     }
   }
@@ -138,33 +154,19 @@ void SensESPApp::enable() {
   debugI("Enabling subsystems");
 
   // FIXME: Setting up mDNS discovery before networking can't work!
-  debugI("Subsystem: setup_discovery()");
-  setup_discovery(networking->get_hostname()->get().c_str());
+  setup_discovery(networking_->get_hostname()->get().c_str());
 
-  debugI("Subsystem: networking->setup()");
-  networking->setup([this](bool connected) {
-    if (connected) {
-      this->led_blinker->set_wifi_connected();
-    } else {
-      this->led_blinker->set_wifi_disconnected();
-      debugD("Not connected to wifi");
-    }
-  });
+  networking_->setup();
 
-  debugI("Subsystem: setup_OTA()");
   setup_ota();
 
-  debugI("Subsystem: http_server()");
-  this->http_server->enable();
-  debugI("Subsystem: ws_client()");
-  this->ws_client->enable();
-
-  debugI("WS client enabled");
+  this->http_server_->enable();
+  this->ws_client_->enable();
 
   // initialize remote debugging
 
 #ifndef DEBUG_DISABLED
-  Debug.begin(networking->get_hostname()->get());
+  Debug.begin(networking_->get_hostname()->get());
   Debug.setResetCmdEnabled(true);
   app.onRepeat(1, []() { Debug.handle(); });
 #endif
@@ -175,11 +177,11 @@ void SensESPApp::enable() {
 
 void SensESPApp::reset() {
   debugW("Resetting the device configuration.");
-  networking->reset_settings();
+  networking_->reset_settings();
   SPIFFS.format();
   app.onDelay(1000, []() { ESP.restart(); });
 }
 
-String SensESPApp::get_hostname() { return networking->get_hostname()->get(); }
+String SensESPApp::get_hostname() { return networking_->get_hostname()->get(); }
 
 SensESPApp* sensesp_app;
