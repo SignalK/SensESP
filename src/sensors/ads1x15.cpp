@@ -3,8 +3,8 @@
 #include "sensesp.h"
 
 template <class T_Ada_1x15>
-ADS1x15<T_Ada_1x15>::ADS1x15(uint8_t addr, adsGain_t gain, String config_path)
-    : Sensor(config_path), gain_{gain} {
+ADS1x15<T_Ada_1x15>::ADS1x15(uint8_t addr, adsGain_t gain)
+    : Sensor(), gain_{gain} {
   ads_ = new T_Ada_1x15(addr);
   ads_->begin();
   ads_->setGain(gain_);
