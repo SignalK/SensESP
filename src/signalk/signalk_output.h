@@ -11,8 +11,10 @@ static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
       }
   })";
 
-// SKOutput is a specialized transform whose primary purpose is
-// to output Signal K data on the Signal K network.
+/**
+ *  @brief A specialized transform whose primary purpose is
+ *  to output Signal K data on the Signal K network.
+ */
 template <typename T>
 class SKOutput : public SKEmitter, public SymmetricTransform<T> {
  public:
@@ -83,7 +85,8 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
 
 
 /**
- * A special class for outputting numeric values.
+ * @brief A special class for sending numeric values to
+ * the Signal K server on a specific Signal K path.
  */
 template <typename T>
 class SKOutputNumeric : public SKOutput<T> {

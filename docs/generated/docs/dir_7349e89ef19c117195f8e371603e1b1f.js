@@ -14,11 +14,7 @@ var dir_7349e89ef19c117195f8e371603e1b1f =
     [ "bmp280.cpp", "bmp280_8cpp.html", null ],
     [ "bmp280.h", "bmp280_8h.html", "bmp280_8h" ],
     [ "digital_input.cpp", "digital__input_8cpp.html", null ],
-    [ "digital_input.h", "digital__input_8h.html", [
-      [ "DigitalInput", "class_digital_input.html", "class_digital_input" ],
-      [ "DigitalInputValue", "class_digital_input_value.html", "class_digital_input_value" ],
-      [ "DigitalInputCounter", "class_digital_input_counter.html", "class_digital_input_counter" ]
-    ] ],
+    [ "digital_input.h", "digital__input_8h.html", "digital__input_8h" ],
     [ "digital_output.cpp", "digital__output_8cpp.html", null ],
     [ "digital_output.h", "digital__output_8h.html", [
       [ "DigitalOutput", "class_digital_output.html", "class_digital_output" ]
@@ -35,8 +31,11 @@ var dir_7349e89ef19c117195f8e371603e1b1f =
     ] ],
     [ "onewire_temperature.cpp", "onewire__temperature_8cpp.html", "onewire__temperature_8cpp" ],
     [ "onewire_temperature.h", "onewire__temperature_8h.html", "onewire__temperature_8h" ],
-    [ "orientation_9dof_input.cpp", "orientation__9dof__input_8cpp.html", "orientation__9dof__input_8cpp" ],
-    [ "orientation_9dof_input.h", "orientation__9dof__input_8h.html", "orientation__9dof__input_8h" ],
+    [ "orientation_9dof_input.cpp", "orientation__9dof__input_8cpp.html", null ],
+    [ "orientation_9dof_input.h", "orientation__9dof__input_8h.html", [
+      [ "Orientation9DOF", "class_orientation9_d_o_f.html", "class_orientation9_d_o_f" ],
+      [ "Read9DOF", "class_read9_d_o_f.html", "class_read9_d_o_f" ]
+    ] ],
     [ "sensor.cpp", "sensor_8cpp.html", null ],
     [ "sensor.h", "sensor_8h.html", [
       [ "Sensor", "class_sensor.html", "class_sensor" ],

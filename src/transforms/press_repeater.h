@@ -8,7 +8,7 @@
 #include "transforms/transform.h"
 
 /**
- * PressRepeater is a transform that takes boolean inputs and adds
+ * @brief A transform that takes boolean inputs and adds
  * button behaviors familiar to many device end users.
  * It emits a value only when the state of the input changes
  * (i.e. when the input changes from TRUE to FALSE, and vice versa).

@@ -7,7 +7,7 @@
 #include "transforms/transform.h"
 
 /**
- * DigitalOutput configures the specified GPIO pin
+ * @brief Configures the specified GPIO pin
  * as an output pin, then sets the status of that
  * pin to HIGH whenever set_input() is called
  * and new_value is true. The pin is set to LOW when

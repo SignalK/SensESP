@@ -4,7 +4,7 @@
 #include "transforms/transform.h"
 
 /**
- * A transform that uses the voltage divider formula to resolve the resistance
+ * @brief A transform that uses the voltage divider formula to resolve the resistance
  * of R1 in the circuit, given a fixed voltage sent into the divider (Vin),
  * a known resistance an the junction of the two resistors (R2), and the
  * output of the divider (Vout).
@@ -33,7 +33,7 @@ class VoltageDividerR1 : public SymmetricTransform<float> {
 };
 
 /**
- * A transform that uses the voltage divider formula to resolve the resistance
+ * @brief A transform that uses the voltage divider formula to resolve the resistance
  * of R2 in the circuit, given a fixed voltage sent into the divider (Vin),
  * a known resistance an the junction of the two resistors (R1), and the
  * output of the divider (Vout).  This is the typical way a sensor such as

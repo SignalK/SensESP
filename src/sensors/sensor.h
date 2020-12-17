@@ -9,9 +9,9 @@
 #include "system/enable.h"
 
 
-///////////////////
-// Sensors represent raw hardware thingies.
-
+/**
+ * @brief Represents a raw hardware thingie.
+ */
 class Sensor : virtual public Observable, public Configurable, public Enable {
   public:
     Sensor(String config_path="");

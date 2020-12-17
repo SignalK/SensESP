@@ -12,8 +12,11 @@
 #include "system/valueproducer.h"
 
 /**
- * A Signal K listener is one that listens for Signal K stream deltas
- * and notifies of value changes
+ * @brief An Obervable class that listens for Signal K stream deltas
+ * and notifies any observers of value changes. This serves as a
+ * base class for code that needs to listen to the stream, with
+ * the most common descendant being `SKValueListener`
+ * @see SKValueListener
  */
 class SKListener : virtual public Observable {
  public:

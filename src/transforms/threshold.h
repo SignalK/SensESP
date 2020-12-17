@@ -3,7 +3,7 @@
 #define _threshold_h
 
 /**
- * A Transform base class that translates the value of type C into value of type
+ * @brief A Transform base class that translates the value of type C into value of type
  * P. Base class for classes NumericThreshold and IntegerThreshold.
  *
  * Arguments are:
@@ -35,7 +35,7 @@ class ThresholdTransform : public Transform<C, P> {
 };
 
 /**
- * A Transform that translates a float value into a boolean value. min_value and
+ * @brief A Transform that translates a float value into a boolean value. min_value and
  * MaxValue set a range. If input value is in the range, the output will be the
  * value of in_range. Otherwise, it will be !in_range.
  */
@@ -52,7 +52,7 @@ class NumericThreshold : public ThresholdTransform<float, bool> {
 };
 
 /**
- * A Transform that translates an integer value into a boolean value. min_value
+ * @brief A Transform that translates an integer value into a boolean value. min_value
  * and MaxValue set a range. If input value is in the range, the output will be
  * the value of in_range. Otherwise, it will be !in_range.
  */

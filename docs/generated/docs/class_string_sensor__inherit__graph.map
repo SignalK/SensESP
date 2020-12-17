@@ -1,9 +1,10 @@
 <map id="StringSensor" name="StringSensor">
-<area shape="rect" id="node1" title=" " alt="" coords="173,152,271,177"/>
-<area shape="rect" id="node7" href="$class_i_p_addr_dev.html" title=" " alt="" coords="180,225,265,251"/>
-<area shape="rect" id="node2" href="$class_sensor.html" title=" " alt="" coords="136,79,199,104"/>
-<area shape="rect" id="node3" href="$class_observable.html" title=" " alt="" coords="5,5,95,31"/>
-<area shape="rect" id="node4" href="$class_configurable.html" title=" " alt="" coords="119,5,216,31"/>
-<area shape="rect" id="node5" href="$class_enable.html" title=" " alt="" coords="240,5,303,31"/>
-<area shape="rect" id="node6" href="$class_value_producer.html" title=" " alt="" coords="223,79,333,104"/>
+<area shape="rect" id="node1" title=" " alt="" coords="166,247,263,273"/>
+<area shape="rect" id="node8" href="$class_i_p_addr_dev.html" title=" " alt="" coords="173,323,257,349"/>
+<area shape="rect" id="node2" href="$class_sensor.html" title="Represents a raw hardware thingie." alt="" coords="230,81,293,108"/>
+<area shape="rect" id="node3" href="$class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="101,5,189,32"/>
+<area shape="rect" id="node6" href="$class_value_producer.html" title=" " alt="" coords="115,171,223,197"/>
+<area shape="rect" id="node7" href="$class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="5,81,144,108"/>
+<area shape="rect" id="node4" href="$class_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="214,5,309,32"/>
+<area shape="rect" id="node5" href="$class_enable.html" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="333,5,395,32"/>
 </map>

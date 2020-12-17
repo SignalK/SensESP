@@ -1,9 +1,10 @@
 <map id="DigitalInputCounter" name="DigitalInputCounter">
-<area shape="rect" id="node1" title=" " alt="" coords="162,225,298,251"/>
-<area shape="rect" id="node2" href="$class_digital_input.html" title=" " alt="" coords="123,152,211,177"/>
-<area shape="rect" id="node3" href="$class_sensor.html" title=" " alt="" coords="136,79,199,104"/>
-<area shape="rect" id="node4" href="$class_observable.html" title=" " alt="" coords="5,5,95,31"/>
-<area shape="rect" id="node5" href="$class_configurable.html" title=" " alt="" coords="119,5,216,31"/>
-<area shape="rect" id="node6" href="$class_enable.html" title=" " alt="" coords="240,5,303,31"/>
-<area shape="rect" id="node7" href="$class_value_producer.html" title=" " alt="" coords="236,152,353,177"/>
+<area shape="rect" id="node1" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="141,247,275,273"/>
+<area shape="rect" id="node2" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="228,171,316,197"/>
+<area shape="rect" id="node3" href="$class_sensor.html" title="Represents a raw hardware thingie." alt="" coords="241,81,303,108"/>
+<area shape="rect" id="node4" href="$class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="112,5,200,32"/>
+<area shape="rect" id="node7" href="$class_value_producer.html" title=" " alt="" coords="89,171,204,197"/>
+<area shape="rect" id="node8" href="$class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="5,81,144,108"/>
+<area shape="rect" id="node5" href="$class_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="225,5,319,32"/>
+<area shape="rect" id="node6" href="$class_enable.html" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="343,5,406,32"/>
 </map>

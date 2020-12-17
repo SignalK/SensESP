@@ -4,7 +4,7 @@
 #include "lambda_transform.h"
 
 /**
- * Perform a linear transform on the input value. The transform
+ * @brief Performs a linear transform on the input value. The transform
  * is of the form \f$y = k * x + c\f$, where k is the input
  * coefficient and c is a bias (offset) value.
  **/

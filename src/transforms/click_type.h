@@ -19,9 +19,9 @@ enum class ClickTypes {
 };
 
 /**
- * ClickType adds a time element to button presses. It measures the time between
- * a button press and its release and will emit its value as an encoded version
- * of the button press.
+ * @brief ClickType is a transform that consumes button clicks and translates them
+ * as events of type `ClickTypes`.
+ * @see ClickTypes
  */
 class ClickType : public Transform<bool, ClickTypes> {
  public:

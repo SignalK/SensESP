@@ -10,7 +10,7 @@
 #define PATTERN_END (-1)
 
 /**
- * A base class for LED blinker classes.
+ * @brief A base class for LED blinker classes.
  */
 class BaseBlinker : public Enable {
  public:
@@ -35,7 +35,7 @@ class BaseBlinker : public Enable {
 };
 
 /**
- * A base class for periodic blinkers.
+ * @brief A base class for periodic blinkers.
  */
 class PeriodicBlinker : public BaseBlinker {
  public:
@@ -47,7 +47,7 @@ class PeriodicBlinker : public BaseBlinker {
 };
 
 /**
- * EvenBlinker is a LED blinker class that blinks the LED 50% off, 50% on,
+ * @brief  An LED blinker class that blinks the LED 50% off, 50% on,
  * at a given period.
  */
 class EvenBlinker : public PeriodicBlinker {
@@ -57,7 +57,7 @@ class EvenBlinker : public PeriodicBlinker {
 };
 
 /**
- * RatioBlinker is a periodic blinker that defines both the on-ratio
+ * @brief A periodic blinker that defines both the on-ratio
  * and the period length.
  */
 class RatioBlinker : public PeriodicBlinker {
@@ -71,7 +71,7 @@ class RatioBlinker : public PeriodicBlinker {
 };
 
 /**
- * PatternBlinker is a blinker that blinks the LED according to a defined
+ * @brief A blinker that blinks the LED according to a defined
  * repeating pattern.
  */
 class PatternBlinker : public BaseBlinker {

@@ -7,7 +7,7 @@
 #include "transform.h"
 
 /**
- * TimeString consumes a time_t time object and produces a human readable
+ * @brief Consumes a time_t time object and produces a human readable
  * string of the time for UTC in ISO 8601 format.
  */
 class TimeString : public Transform<time_t, String> {

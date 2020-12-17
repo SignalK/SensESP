@@ -6,7 +6,7 @@
 #include "system/valueconsumer.h"
 
 /**
- * @brief PWMOutput provides a cross platform mechanism for generating
+ * @brief Provides a cross platform mechanism for generating
  * Pulse Width Modulation signals over one or more GPIO pins
  * on the MCU.
  * <p>This class works by defining a "PWM channel". GPIO pins

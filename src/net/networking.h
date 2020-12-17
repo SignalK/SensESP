@@ -18,6 +18,9 @@ enum class WifiState {
   kWifiManagerActivated
 };
 
+/**
+ * @brief Manages the ESP's connection to the Wifi network. 
+ */
 class Networking : public Configurable, public ValueProducer<WifiState> {
  public:
   Networking(String config_path, String ssid, String password, String hostname);

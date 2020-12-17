@@ -123,6 +123,7 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  * 
  * @param config_path The path to configure read_delay_ in the Config UI
  * 
+ * @see Debounce
  * */
 class DigitalInputChange : public DigitalInput, public IntegerProducer {
  public:

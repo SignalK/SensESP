@@ -6,7 +6,7 @@
 #include "transforms/transform.h"
 
 /**
- * Median collects a list of input values of size sample_size and
+ * @brief Collects a list of input values of size sample_size and
  * outputs the median value (i.e. element number sample_size / 2 of
  * a sorted sample list).
  */

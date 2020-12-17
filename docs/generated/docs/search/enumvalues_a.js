@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['manual_5finput_1119',['manual_input',['../nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a4692e23f3770a255f880456f7fbec485',1,'nmea_parser.cpp']]]
+  ['load_5fvoltage',['load_voltage',['../class_i_n_a219_value.html#a3e9bd0837f3e8b5cbe6f0cb1d2ed9110adac5fa7e0783f2942576ad6bdbac86a6',1,'INA219Value']]],
+  ['longsingleclick',['LongSingleClick',['../click__type_8h.html#a4a760072c8c7ae604f801ff82824b666ad0fff85d3541aedaddfb3c5e67e897b4',1,'click_type.h']]]
 ];

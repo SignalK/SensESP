@@ -18,8 +18,8 @@ bool operator!=(ObservableValue<T> const& lhs, T const& rhs) {
   return lhs.output != rhs;
 }
 
-/*
- * ObservableValue is a value that notifies its observers if it gets changed.
+/**
+ * @brief A value that notifies its observers if it gets changed.
  */
 template <class T>
 class ObservableValue : public ValueProducer<T> {
