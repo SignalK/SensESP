@@ -38,7 +38,7 @@ typedef ADS1x15<Adafruit_ADS1115> ADS1115;
 enum ADS1x15Channel_t { channel_0, channel_1, channel_2, channel_3, channels_0_1, channels_2_3 };
 
 /**
- * @brief ADS1x15RawValue is used to read the raw output of the ADS1x15, which
+ * @brief Used to read the raw output of the ADS1x15, which
  *   is an integer between 0 and 32,768. If you want the voltage that was the 
  *   input to the ADS1x15 (because voltage is what the ADS1x15 actually reads),
  *   use ADS1x15Voltage instead.
@@ -98,7 +98,7 @@ typedef ADS1115RawValue ADS1115Value; // The second name
 // Used for ADS1x15Voltage
 enum ADS1x15CHIP_t { ADS1015chip, ADS1115chip };
 /**
- * @brief ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between
+ * @brief Reads the raw output of the ADS1x15 (an integer between
  *   0 and 32,768) and converts it back into the voltage that was actually read
  *   by the chip. If you want the raw output itself, use ADS1x15RawValue instead.
  *
