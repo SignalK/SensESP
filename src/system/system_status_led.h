@@ -6,7 +6,7 @@
 #include "system/lambda_consumer.h"
 
 /**
- * SystemStatusLed consumes the networking and websocket states and delta counts
+ * @brief Consumes the networking and websocket states and delta counts
  * and updates the device LED accordingly. Inherit this class and override
  * the methods to customize the behavior.
  */

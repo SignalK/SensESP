@@ -13,7 +13,7 @@
 #include "system/valueproducer.h"
 
 /**
- * A Signal K emitter is one that produces Signal K output to be
+ * @brief A class that produces Signal K output to be
  * forwarded to the Signal K server (if the system is connected
  * to one).  Signal K is reported via the as_signalK() method.
  */

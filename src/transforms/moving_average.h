@@ -6,7 +6,7 @@
 #include "transform.h"
 
 /**
- * MovingAverage is used to smooth the output of a value (signal) that has
+ * @brief Used to smooth the output of a value (signal) that has
  * frequent variations. For example, the output of a temperature sensor may vary
  * from 180 to 185 several times over a short period, but you just want to see
  * the average of that. MovingAverage outputs the average of the most recent n

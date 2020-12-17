@@ -5,7 +5,7 @@
 #include "system/valueconsumer.h"
 
 /**
- * RgbLed is a special device object that can be used to control
+ * @brief A special device object that can be used to control
  * a multi-channel color rgb LED light using up to 3 digital output
  * channels. A "color" is defined using the standard 24 bit color
  * depth numbers composed of three 8 bit channels for Red, Green,
@@ -20,6 +20,7 @@
  * two channel color led). Specify -1 for any pin for that channel
  * to be ignored. The color values used still have to adhere to
  * the 24 bit color definition however.
+ * @see PWMOutput
  */
 class RgbLed : public Configurable,
                public ValueConsumer<long>,

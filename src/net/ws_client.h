@@ -20,6 +20,10 @@ enum class WSConnectionState {
   kWSConnected
 };
 
+/**
+ * @brief The websocket connection to the Signal K server.
+ * @see SensESPApp
+ */
 class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
  public:
   WSClient(String config_path, SKDelta* sk_delta, String server_address,

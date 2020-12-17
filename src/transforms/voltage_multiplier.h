@@ -4,7 +4,7 @@
 #include "transforms/transform.h"
 
 /**
- * A transform that does the opposite of what a physical voltage divider circuit
+ * @brief A transform that does the opposite of what a physical voltage divider circuit
  * does. Used to convert the voltage that comes out of a voltage divider back
  * into the original voltage that went into the voltage divider.
  *

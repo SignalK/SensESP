@@ -11,10 +11,12 @@ template <typename C, typename P>
 class Transform;
 
 /**
- * A ValueProducer<> is any sensor or piece of code that outputs a value for
- * consumption elsewhere.  They are Observable, allowing code to be notified
+ * @brief A base class for any sensor or piece of code that outputs a value for
+ * consumption elsewhere.  
+ * <p>They are Observable, allowing code to be notified
  * whenever a new value is available.  They can be connected directly to
- * ValueConsumers of the same type using the connect_to() method.
+ * `ValueConsumer`s of the same type using the `connect_to()` method.
+ * @see ValueConsumer
  */
 template <typename T>
 class ValueProducer : virtual public Observable {

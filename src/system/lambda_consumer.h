@@ -4,12 +4,12 @@
 #include "valueconsumer.h"
 
 /**
- * @brief Construct a new ValueConsumer to execute a single function
- *
- * LambdaConsumer provides an easy way of calling a function based on
- * the output of any ValueProducer. You create the function in
+ * @brief Provides an easy way of calling a function based on
+ * the output of any ValueProducer.
+ * 
+ * <p>To use LambdaConsumer, you create the function in
  * main.cpp as a lambda expression, and then pass it as the "function"
- * parameter to the LambaConsumer.
+ * parameter to the LambaConsumer constructor.
  * See https://github.com/SignalK/SensESP/blob/master/examples/lambda_consumer.cpp
  * for a detailed example.
  *

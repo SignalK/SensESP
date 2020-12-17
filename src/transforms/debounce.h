@@ -8,7 +8,7 @@
 // https://github.com/SignalK/SensESP/issues/287
 
 /**
- * @brief DebounceTemplate implements debounce code for a button or switch
+ * @brief Implements debounce code for a button or switch
  * 
  * It's a passthrough transform that will output a value only if it's different
  * from the previous output, and only if it's been ms_min_delay ms since the input
@@ -18,14 +18,15 @@
  *
  * @param ms_min_delay The minimum amount of time that must have passed since
  * the input was received by this Transform in order for the output to occur. If
- * you are using this to debounce the output from DigitalInputChange, ms_min_delay
- * should be set at least a little bit longer than DigitalInputChange::read_delay.
+ * you are using this to debounce the output from `DigitalInputChange`, ms_min_delay
+ * should be set at least a little bit longer than `DigitalInputChange::read_delay`.
  * 
  * DigitalInputChange::read_delay is 10 ms by default, and Debounce::ms_min_delay
  * is 15 ms by default. If that doesn't adequately debounce your button or switch,
  * adjust both of those values until it does.
  *
  * @param config_path The path for configuring ms_min_delay with the Config UI.
+ * @see DigitalInputChange
  */
 template<class T>
 class DebounceTemplate : public SymmetricTransform<T> {

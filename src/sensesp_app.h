@@ -40,6 +40,10 @@ enum SKPermissions { READONLY, READWRITE, ADMIN };
 
 void SetupSerialDebug(uint32_t baudrate);
 
+/**
+ * The main SensESP application object.
+ * @see SensESPAppBuilder
+ */
 class SensESPApp {
  public:
   SensESPApp(bool defer_setup);

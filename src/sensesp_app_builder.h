@@ -3,6 +3,10 @@
 
 #include "sensesp_app.h"
 
+/**
+ * @brief A class for quickly configuring a SensESP application object before
+ * wiring up your sensors.
+ */
 class SensESPAppBuilder {
  private:
   String hostname_ = "SensESP";
