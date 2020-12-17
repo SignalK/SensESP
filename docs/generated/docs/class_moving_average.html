@@ -101,6 +101,9 @@ $(document).ready(function(){initNavTree('class_moving_average.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Used to smooth the output of a value (signal) that has frequent variations. For example, the output of a temperature sensor may vary from 180 to 185 several times over a short period, but you just want to see the average of that. <a class="el" href="class_moving_average.html" title="Used to smooth the output of a value (signal) that has frequent variations. For example,...">MovingAverage</a> outputs the average of the most recent n values. It also incorporates a "scale" factor, in case you want to increase or decrease your final output by a fixed percentage.  
+ <a href="class_moving_average.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="moving__average_8h_source.html">moving_average.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MovingAverage:</div>
@@ -206,7 +209,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_moving_average.html">MovingAverage</a> is used to smooth the output of a value (signal) that has frequent variations. For example, the output of a temperature sensor may vary from 180 to 185 several times over a short period, but you just want to see the average of that. <a class="el" href="class_moving_average.html">MovingAverage</a> outputs the average of the most recent n values. It also incorporates a "scale" factor, in case you want to increase or decrease your final output by a fixed percentage. </p>
+<div class="textblock"><p>Used to smooth the output of a value (signal) that has frequent variations. For example, the output of a temperature sensor may vary from 180 to 185 several times over a short period, but you just want to see the average of that. <a class="el" href="class_moving_average.html" title="Used to smooth the output of a value (signal) that has frequent variations. For example,...">MovingAverage</a> outputs the average of the most recent n values. It also incorporates a "scale" factor, in case you want to increase or decrease your final output by a fixed percentage. </p>
 
 <p class="definition">Definition at line <a class="el" href="moving__average_8h_source.html#l00018">18</a> of file <a class="el" href="moving__average_8h_source.html">moving_average.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -379,7 +382,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

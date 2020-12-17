@@ -101,6 +101,9 @@ $(document).ready(function(){initNavTree('class_time_string.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Consumes a time_t time object and produces a human readable string of the time for UTC in ISO 8601 format.  
+ <a href="class_time_string.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="timestring_8h_source.html">timestring.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for TimeString:</div>
@@ -203,7 +206,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_time_string.html">TimeString</a> consumes a time_t time object and produces a human readable string of the time for UTC in ISO 8601 format. </p>
+<div class="textblock"><p>Consumes a time_t time object and produces a human readable string of the time for UTC in ISO 8601 format. </p>
 
 <p class="definition">Definition at line <a class="el" href="timestring_8h_source.html#l00013">13</a> of file <a class="el" href="timestring_8h_source.html">timestring.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -261,7 +264,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

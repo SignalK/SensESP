@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('class_rgb_led.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A special device object that can be used to control a multi-channel color rgb LED light using up to 3 digital output channels. A "color" is defined using the standard 24 bit color depth numbers composed of three 8 bit channels for Red, Green, and Blue (see <a href="https://techterms.com/definition/rgb">https://techterms.com/definition/rgb</a>)  
+ <a href="class_rgb_led.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RgbLed:</div>
@@ -171,11 +174,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_rgb_led.html">RgbLed</a> is a special device object that can be used to control a multi-channel color rgb LED light using up to 3 digital output channels. A "color" is defined using the standard 24 bit color depth numbers composed of three 8 bit channels for Red, Green, and Blue (see <a href="https://techterms.com/definition/rgb">https://techterms.com/definition/rgb</a>) </p>
+<div class="textblock"><p>A special device object that can be used to control a multi-channel color rgb LED light using up to 3 digital output channels. A "color" is defined using the standard 24 bit color depth numbers composed of three 8 bit channels for Red, Green, and Blue (see <a href="https://techterms.com/definition/rgb">https://techterms.com/definition/rgb</a>) </p>
 <p>Color LEDs can be controlled by either setting the specific color to be displayed via the set_input(long), or by setting the on/off state via set_input(bool). When specifying a simple on/off via the the bool input, the default ON or OFF colors specified in the constructor are used. </p>
-<p>You do not have to define all three channels (for example, if you are short on output pins, or if you happen to be using a two channel color led). Specify -1 for any pin for that channel to be ignored. The color values used still have to adhere to the 24 bit color definition however. </p>
+<p>You do not have to define all three channels (for example, if you are short on output pins, or if you happen to be using a two channel color led). Specify -1 for any pin for that channel to be ignored. The color values used still have to adhere to the 24 bit color definition however. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_p_w_m_output.html" title="Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GP...">PWMOutput</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00024">24</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00025">25</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aba030d17728a89a1b7ff1a241a6abcbe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aba030d17728a89a1b7ff1a241a6abcbe">&#9670;&nbsp;</a></span>RgbLed()</h2>
@@ -462,7 +465,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00074">74</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00075">75</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -486,7 +489,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00071">71</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00072">72</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -510,7 +513,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00070">70</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00071">71</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -534,7 +537,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00073">73</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00074">74</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -558,7 +561,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00072">72</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00073">73</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -582,7 +585,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00069">69</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00070">70</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>

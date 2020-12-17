@@ -69,7 +69,7 @@
 <!-- Node18 -->
 <g id="node4" class="node">
 <title>Node18</title>
-<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
 <polygon fill="white" stroke="black" points="340,-224.5 340,-243.5 423,-243.5 423,-224.5 340,-224.5"/>
 <text text-anchor="middle" x="381.5" y="-231.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -84,7 +84,7 @@
 <!-- Node27 -->
 <g id="node13" class="node">
 <title>Node27</title>
-<g id="a_node13"><a xlink:href="class_transform.html" target="_top" xlink:title=" ">
+<g id="a_node13"><a xlink:href="class_transform.html" target="_top" xlink:title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">
 <polygon fill="white" stroke="black" points="591,-137.5 591,-156.5 690,-156.5 690,-137.5 591,-137.5"/>
 <text text-anchor="middle" x="640.5" y="-144.5" font-family="Helvetica,sans-Serif" font-size="10.00">Transform&lt; C, P &gt;</text>
 </a>
@@ -99,7 +99,7 @@
 <!-- Node19 -->
 <g id="node5" class="node">
 <title>Node19</title>
-<g id="a_node5"><a xlink:href="class_configurable.html" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_configurable.html" target="_top" xlink:title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">
 <polygon fill="white" stroke="black" points="152.5,-218.5 152.5,-237.5 223.5,-237.5 223.5,-218.5 152.5,-218.5"/>
 <text text-anchor="middle" x="188" y="-225.5" font-family="Helvetica,sans-Serif" font-size="10.00">Configurable</text>
 </a>
@@ -114,7 +114,7 @@
 <!-- Node20 -->
 <g id="node6" class="node">
 <title>Node20</title>
-<g id="a_node6"><a xlink:href="class_enable.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="class_enable.html" target="_top" xlink:title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ...">
 <polygon fill="white" stroke="black" points="164.5,-256.5 164.5,-275.5 211.5,-275.5 211.5,-256.5 164.5,-256.5"/>
 <text text-anchor="middle" x="188" y="-263.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enable</text>
 </a>
@@ -144,7 +144,7 @@
 <!-- Node22 -->
 <g id="node8" class="node">
 <title>Node22</title>
-<g id="a_node8"><a xlink:href="class_value_consumer.html" target="_top" xlink:title=" ">
+<g id="a_node8"><a xlink:href="class_value_consumer.html" target="_top" xlink:title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">
 <polygon fill="white" stroke="black" points="133,-165.5 133,-184.5 243,-184.5 243,-165.5 133,-165.5"/>
 <text text-anchor="middle" x="188" y="-172.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; T &gt;</text>
 </a>
@@ -191,7 +191,7 @@
 <!-- Node24 -->
 <g id="node10" class="node">
 <title>Node24</title>
-<g id="a_node10"><a xlink:href="class_observable.html" target="_top" xlink:title=" ">
+<g id="a_node10"><a xlink:href="class_observable.html" target="_top" xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="white" stroke="black" points="0,-64.5 0,-83.5 66,-83.5 66,-64.5 0,-64.5"/>
 <text text-anchor="middle" x="33" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>
@@ -206,7 +206,7 @@
 <!-- Node25 -->
 <g id="node11" class="node">
 <title>Node25</title>
-<g id="a_node11"><a xlink:href="class_value_producer.html" target="_top" xlink:title=" ">
+<g id="a_node11"><a xlink:href="class_value_producer.html" target="_top" xlink:title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">
 <polygon fill="white" stroke="black" points="136,-64.5 136,-83.5 240,-83.5 240,-64.5 136,-64.5"/>
 <text text-anchor="middle" x="188" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer&lt; T &gt;</text>
 </a>

@@ -1,19 +1,19 @@
 <map id="Configurable" name="Configurable">
-<area shape="rect" id="node1" title=" " alt="" coords="5,547,100,573"/>
-<area shape="rect" id="node2" href="$class_networking.html" title=" " alt="" coords="175,284,263,311"/>
-<area shape="rect" id="node3" href="$class_rgb_led.html" title=" " alt="" coords="185,335,252,361"/>
-<area shape="rect" id="node4" href="$class_sensor.html" title=" " alt="" coords="187,385,250,412"/>
+<area shape="rect" id="node1" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,547,100,573"/>
+<area shape="rect" id="node2" href="$class_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="175,284,263,311"/>
+<area shape="rect" id="node3" href="$class_rgb_led.html" title="A special device object that can be used to control a multi&#45;channel color rgb LED light using up to 3..." alt="" coords="185,335,252,361"/>
+<area shape="rect" id="node4" href="$class_sensor.html" title="Represents a raw hardware thingie." alt="" coords="187,385,250,412"/>
 <area shape="rect" id="node34" href="$class_s_k_put_request_base.html" title="A base class for all template variations of the PUT request class SKPutRequest. This base class keeps..." alt="" coords="149,631,288,657"/>
-<area shape="rect" id="node36" href="$class_transform_base.html" title=" " alt="" coords="163,1129,274,1156"/>
-<area shape="rect" id="node49" href="$class_w_s_client.html" title=" " alt="" coords="179,1180,258,1207"/>
+<area shape="rect" id="node36" href="$class_transform_base.html" title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher..." alt="" coords="163,1129,274,1156"/>
+<area shape="rect" id="node49" href="$class_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="179,1180,258,1207"/>
 <area shape="rect" id="node5" href="$class_a_d_s1x15.html" title="ADS1x15 represents an ADS1015 or ADS1115 Analog to Digital Converter." alt="" coords="339,5,514,32"/>
-<area shape="rect" id="node6" href="$class_b_m_e280.html" title=" " alt="" coords="391,56,463,83"/>
+<area shape="rect" id="node6" href="$class_b_m_e280.html" title="Represents an ADAfruit (or compatible) BME280 temperature / pressure / humidity sensor." alt="" coords="391,56,463,83"/>
 <area shape="rect" id="node7" href="$class_b_m_p280.html" title="BMP280 represents an ADAfruit or compatible BMP280 temperature &amp; pressure sensor." alt="" coords="391,107,463,133"/>
 <area shape="rect" id="node8" href="$class_dallas_temperature_sensors.html" title=" " alt="" coords="337,157,516,184"/>
 <area shape="rect" id="node9" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="383,208,471,235"/>
 <area shape="rect" id="node13" href="$class_free_mem.html" title=" " alt="" coords="388,259,465,285"/>
 <area shape="rect" id="node14" href="$class_g_p_s_input.html" title=" " alt="" coords="387,309,466,336"/>
-<area shape="rect" id="node15" href="$class_i_n_a219.html" title=" " alt="" coords="393,360,460,387"/>
+<area shape="rect" id="node15" href="$class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor. The constructor creates a ..." alt="" coords="393,360,460,387"/>
 <area shape="rect" id="node16" href="$class_integer_sensor.html" title=" " alt="" coords="375,411,478,437"/>
 <area shape="rect" id="node17" href="$class_numeric_sensor.html" title=" " alt="" coords="371,461,483,488"/>
 <area shape="rect" id="node31" href="$class_orientation9_d_o_f.html" title=" " alt="" coords="367,512,487,539"/>
@@ -36,7 +36,7 @@
 <area shape="rect" id="node29" href="$class_uptime.html" title=" " alt="" coords="759,588,823,615"/>
 <area shape="rect" id="node30" href="$class_wifi_signal.html" title=" " alt="" coords="750,639,831,665"/>
 <area shape="rect" id="node35" href="$class_s_k_put_request.html" title="Used to send requests to the server to change the value of the specified path to a specific value acc..." alt="" coords="356,664,497,691"/>
-<area shape="rect" id="node37" href="$class_transform.html" title=" " alt="" coords="361,1181,493,1208"/>
+<area shape="rect" id="node37" href="$class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="361,1181,493,1208"/>
 <area shape="rect" id="node38" href="$class_transform.html" title=" " alt="" coords="709,868,872,895"/>
 <area shape="rect" id="node39" href="$class_transform.html" title=" " alt="" coords="713,1363,868,1389"/>
 <area shape="rect" id="node40" href="$class_transform.html" title=" " alt="" coords="705,1564,876,1591"/>

@@ -195,19 +195,20 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state.">DigitalInputChange</a> is meant to report when a digital pin changes its state. </p>
-<p>It's intended for monitoring a button or other type of relatively slow changing switch. Because physical switches like buttons can be somewhat "noisy", you may want to connect the output of this <a class="el" href="class_sensor.html">Sensor</a> to the Debounce <a class="el" href="class_transform.html">Transform</a>, and try different combinations of read_delay for this <a class="el" href="class_sensor.html">Sensor</a> and ms_min_delay for Debounce to get the "cleanest" output from your button or other switch. (Make Debounce::ms_min_delay at least a little longer than DigitalInputChange::read_delay)</p>
+<p>It's intended for monitoring a button or other type of relatively slow changing switch. Because physical switches like buttons can be somewhat "noisy", you may want to connect the output of this <a class="el" href="class_sensor.html" title="Represents a raw hardware thingie.">Sensor</a> to the Debounce <a class="el" href="class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">Transform</a>, and try different combinations of read_delay for this <a class="el" href="class_sensor.html" title="Represents a raw hardware thingie.">Sensor</a> and ms_min_delay for Debounce to get the "cleanest" output from your button or other switch. (Make Debounce::ms_min_delay at least a little longer than DigitalInputChange::read_delay)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>The GPIO pin to which the device is connected</td></tr>
     <tr><td class="paramname">pin_mode</td><td>Will be INPUT or INPUT_PULLUP</td></tr>
     <tr><td class="paramname">interrupt_type</td><td>Will be RISING, FALLING, or CHANGE</td></tr>
     <tr><td class="paramname">read_delay</td><td>How often you want to read the state of the pin</td></tr>
-    <tr><td class="paramname">config_path</td><td>The path to configure read_delay_ in the Config UI </td></tr>
+    <tr><td class="paramname">config_path</td><td>The path to configure read_delay_ in the Config UI</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="debounce_8h.html#aa1835a27a53a927709d335086ebdcb5b">Debounce</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="digital__input_8h_source.html#l00127">127</a> of file <a class="el" href="digital__input_8h_source.html">digital_input.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="digital__input_8h_source.html#l00128">128</a> of file <a class="el" href="digital__input_8h_source.html">digital_input.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa4e3287984a2c17e9e6f2564701cecb2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa4e3287984a2c17e9e6f2564701cecb2">&#9670;&nbsp;</a></span>DigitalInputChange()</h2>

@@ -12,7 +12,7 @@
 <!-- Node62 -->
 <g id="node1" class="node">
 <title>Node62</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">
 <polygon fill="#bfbfbf" stroke="black" points="169,-0.5 169,-19.5 268,-19.5 268,-0.5 169,-0.5"/>
 <text text-anchor="middle" x="218.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Transform&lt; C, P &gt;</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node63 -->
 <g id="node2" class="node">
 <title>Node63</title>
-<g id="a_node2"><a xlink:href="class_transform_base.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
 <polygon fill="white" stroke="black" points="62,-57.5 62,-76.5 145,-76.5 145,-57.5 62,-57.5"/>
 <text text-anchor="middle" x="103.5" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node64 -->
 <g id="node3" class="node">
 <title>Node64</title>
-<g id="a_node3"><a xlink:href="class_configurable.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="class_configurable.html" target="_top" xlink:title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">
 <polygon fill="white" stroke="black" points="0,-124.5 0,-143.5 71,-143.5 71,-124.5 0,-124.5"/>
 <text text-anchor="middle" x="35.5" y="-131.5" font-family="Helvetica,sans-Serif" font-size="10.00">Configurable</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node65 -->
 <g id="node4" class="node">
 <title>Node65</title>
-<g id="a_node4"><a xlink:href="class_enable.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_enable.html" target="_top" xlink:title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ...">
 <polygon fill="white" stroke="black" points="89,-124.5 89,-143.5 136,-143.5 136,-124.5 89,-124.5"/>
 <text text-anchor="middle" x="112.5" y="-131.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enable</text>
 </a>
@@ -81,7 +81,7 @@
 <!-- Node67 -->
 <g id="node6" class="node">
 <title>Node67</title>
-<g id="a_node6"><a xlink:href="class_value_consumer.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="class_value_consumer.html" target="_top" xlink:title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">
 <polygon fill="white" stroke="black" points="163.5,-124.5 163.5,-143.5 273.5,-143.5 273.5,-124.5 163.5,-124.5"/>
 <text text-anchor="middle" x="218.5" y="-131.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; T &gt;</text>
 </a>
@@ -112,7 +112,7 @@
 <!-- Node69 -->
 <g id="node8" class="node">
 <title>Node69</title>
-<g id="a_node8"><a xlink:href="class_observable.html" target="_top" xlink:title=" ">
+<g id="a_node8"><a xlink:href="class_observable.html" target="_top" xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="white" stroke="black" points="299.5,-191.5 299.5,-210.5 365.5,-210.5 365.5,-191.5 299.5,-191.5"/>
 <text text-anchor="middle" x="332.5" y="-198.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>
@@ -127,7 +127,7 @@
 <!-- Node70 -->
 <g id="node9" class="node">
 <title>Node70</title>
-<g id="a_node9"><a xlink:href="class_value_producer.html" target="_top" xlink:title=" ">
+<g id="a_node9"><a xlink:href="class_value_producer.html" target="_top" xlink:title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">
 <polygon fill="white" stroke="black" points="353.5,-124.5 353.5,-143.5 457.5,-143.5 457.5,-124.5 353.5,-124.5"/>
 <text text-anchor="middle" x="405.5" y="-131.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer&lt; T &gt;</text>
 </a>

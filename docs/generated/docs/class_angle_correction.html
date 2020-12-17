@@ -101,6 +101,9 @@ $(document).ready(function(){initNavTree('class_angle_correction.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Add a value to an angle input (in radians). The output value is wrapped to a range between [0, 2*pi[. This transform is useful for correcting e.g. a heading or a wind direction reading.  
+ <a href="class_angle_correction.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="angle__correction_8h_source.html">angle_correction.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AngleCorrection:</div>
@@ -206,8 +209,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="angle__correction_8h_source.html#l00009">9</a> of file <a class="el" href="angle__correction_8h_source.html">angle_correction.h</a>.</p>
+<div class="textblock"><p>Add a value to an angle input (in radians). The output value is wrapped to a range between [0, 2*pi[. This transform is useful for correcting e.g. a heading or a wind direction reading. </p>
+
+<p class="definition">Definition at line <a class="el" href="angle__correction_8h_source.html#l00011">11</a> of file <a class="el" href="angle__correction_8h_source.html">angle_correction.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6a023df6e49e8ada977738dc8cbe150c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a023df6e49e8ada977738dc8cbe150c">&#9670;&nbsp;</a></span>AngleCorrection()</h2>
@@ -371,7 +375,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

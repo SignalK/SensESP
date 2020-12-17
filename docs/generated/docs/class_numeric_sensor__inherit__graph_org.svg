@@ -217,7 +217,7 @@
 <!-- Node1 -->
 <g id="node2" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="class_sensor.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_sensor.html" target="_top" xlink:title="Represents a raw hardware thingie.">
 <polygon fill="white" stroke="black" points="136.5,-216.5 136.5,-235.5 183.5,-235.5 183.5,-216.5 136.5,-216.5"/>
 <text text-anchor="middle" x="160" y="-223.5" font-family="Helvetica,sans-Serif" font-size="10.00">Sensor</text>
 </a>
@@ -232,7 +232,7 @@
 <!-- Node2 -->
 <g id="node3" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="class_observable.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="class_observable.html" target="_top" xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="white" stroke="black" points="2.5,-266.5 2.5,-285.5 68.5,-285.5 68.5,-266.5 2.5,-266.5"/>
 <text text-anchor="middle" x="35.5" y="-273.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>
@@ -262,7 +262,7 @@
 <!-- Node6 -->
 <g id="node7" class="node">
 <title>Node6</title>
-<g id="a_node7"><a xlink:href="class_value_producer.html" target="_top" xlink:title=" ">
+<g id="a_node7"><a xlink:href="class_value_producer.html" target="_top" xlink:title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">
 <polygon fill="white" stroke="black" points="108,-254.5 108,-273.5 212,-273.5 212,-254.5 108,-254.5"/>
 <text text-anchor="middle" x="160" y="-261.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer&lt; T &gt;</text>
 </a>
@@ -277,7 +277,7 @@
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_configurable.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_configurable.html" target="_top" xlink:title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">
 <polygon fill="white" stroke="black" points="0,-216.5 0,-235.5 71,-235.5 71,-216.5 0,-216.5"/>
 <text text-anchor="middle" x="35.5" y="-223.5" font-family="Helvetica,sans-Serif" font-size="10.00">Configurable</text>
 </a>
@@ -292,7 +292,7 @@
 <!-- Node4 -->
 <g id="node5" class="node">
 <title>Node4</title>
-<g id="a_node5"><a xlink:href="class_enable.html" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_enable.html" target="_top" xlink:title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ...">
 <polygon fill="white" stroke="black" points="12,-178.5 12,-197.5 59,-197.5 59,-178.5 12,-178.5"/>
 <text text-anchor="middle" x="35.5" y="-185.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enable</text>
 </a>

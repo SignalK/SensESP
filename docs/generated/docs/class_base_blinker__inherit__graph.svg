@@ -12,7 +12,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="A base class for LED blinker classes.">
 <polygon fill="#bfbfbf" stroke="black" points="53.5,-112.5 53.5,-131.5 122.5,-131.5 122.5,-112.5 53.5,-112.5"/>
 <text text-anchor="middle" x="88" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">BaseBlinker</text>
 </a>
@@ -21,7 +21,7 @@
 <!-- Node2 -->
 <g id="node3" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="class_pattern_blinker.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="class_pattern_blinker.html" target="_top" xlink:title="A blinker that blinks the LED according to a defined repeating pattern.">
 <polygon fill="white" stroke="black" points="0,-56.5 0,-75.5 78,-75.5 78,-56.5 0,-56.5"/>
 <text text-anchor="middle" x="39" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">PatternBlinker</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_periodic_blinker.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_periodic_blinker.html" target="_top" xlink:title="A base class for periodic blinkers.">
 <polygon fill="white" stroke="black" points="96,-56.5 96,-75.5 178,-75.5 178,-56.5 96,-56.5"/>
 <text text-anchor="middle" x="137" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">PeriodicBlinker</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node1 -->
 <g id="node2" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="class_enable.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_enable.html" target="_top" xlink:title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ...">
 <polygon fill="white" stroke="black" points="64.5,-168.5 64.5,-187.5 111.5,-187.5 111.5,-168.5 64.5,-168.5"/>
 <text text-anchor="middle" x="88" y="-175.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enable</text>
 </a>
@@ -66,7 +66,7 @@
 <!-- Node4 -->
 <g id="node5" class="node">
 <title>Node4</title>
-<g id="a_node5"><a xlink:href="class_even_blinker.html" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_even_blinker.html" target="_top" xlink:title="An LED blinker class that blinks the LED 50% off, 50% on, at a given period.">
 <polygon fill="white" stroke="black" points="58.5,-0.5 58.5,-19.5 127.5,-19.5 127.5,-0.5 58.5,-0.5"/>
 <text text-anchor="middle" x="93" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">EvenBlinker</text>
 </a>
@@ -81,7 +81,7 @@
 <!-- Node5 -->
 <g id="node6" class="node">
 <title>Node5</title>
-<g id="a_node6"><a xlink:href="class_ratio_blinker.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="class_ratio_blinker.html" target="_top" xlink:title="A periodic blinker that defines both the on&#45;ratio and the period length.">
 <polygon fill="white" stroke="black" points="146,-0.5 146,-19.5 216,-19.5 216,-0.5 146,-0.5"/>
 <text text-anchor="middle" x="181" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">RatioBlinker</text>
 </a>

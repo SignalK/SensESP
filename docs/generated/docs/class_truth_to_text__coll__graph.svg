@@ -82,7 +82,7 @@ var sectionId = 'dynsection-1';
 <!-- Node15 -->
 <g id="node3" class="node">
 <title>Node15</title>
-<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
 <polygon fill="white" stroke="black" points="346,-224.5 346,-243.5 429,-243.5 429,-224.5 346,-224.5"/>
 <text text-anchor="middle" x="387.5" y="-231.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -97,7 +97,7 @@ var sectionId = 'dynsection-1';
 <!-- Node24 -->
 <g id="node12" class="node">
 <title>Node24</title>
-<g id="a_node12"><a xlink:href="class_transform.html" target="_top" xlink:title=" ">
+<g id="a_node12"><a xlink:href="class_transform.html" target="_top" xlink:title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">
 <polygon fill="white" stroke="black" points="607,-137.5 607,-156.5 706,-156.5 706,-137.5 607,-137.5"/>
 <text text-anchor="middle" x="656.5" y="-144.5" font-family="Helvetica,sans-Serif" font-size="10.00">Transform&lt; C, P &gt;</text>
 </a>
@@ -112,7 +112,7 @@ var sectionId = 'dynsection-1';
 <!-- Node16 -->
 <g id="node4" class="node">
 <title>Node16</title>
-<g id="a_node4"><a xlink:href="class_configurable.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_configurable.html" target="_top" xlink:title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">
 <polygon fill="white" stroke="black" points="152.5,-218.5 152.5,-237.5 223.5,-237.5 223.5,-218.5 152.5,-218.5"/>
 <text text-anchor="middle" x="188" y="-225.5" font-family="Helvetica,sans-Serif" font-size="10.00">Configurable</text>
 </a>
@@ -127,7 +127,7 @@ var sectionId = 'dynsection-1';
 <!-- Node17 -->
 <g id="node5" class="node">
 <title>Node17</title>
-<g id="a_node5"><a xlink:href="class_enable.html" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_enable.html" target="_top" xlink:title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ...">
 <polygon fill="white" stroke="black" points="164.5,-256.5 164.5,-275.5 211.5,-275.5 211.5,-256.5 164.5,-256.5"/>
 <text text-anchor="middle" x="188" y="-263.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enable</text>
 </a>
@@ -157,7 +157,7 @@ var sectionId = 'dynsection-1';
 <!-- Node19 -->
 <g id="node7" class="node">
 <title>Node19</title>
-<g id="a_node7"><a xlink:href="class_value_consumer.html" target="_top" xlink:title=" ">
+<g id="a_node7"><a xlink:href="class_value_consumer.html" target="_top" xlink:title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">
 <polygon fill="white" stroke="black" points="133,-165.5 133,-184.5 243,-184.5 243,-165.5 133,-165.5"/>
 <text text-anchor="middle" x="188" y="-172.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; T &gt;</text>
 </a>
@@ -204,7 +204,7 @@ var sectionId = 'dynsection-1';
 <!-- Node21 -->
 <g id="node9" class="node">
 <title>Node21</title>
-<g id="a_node9"><a xlink:href="class_observable.html" target="_top" xlink:title=" ">
+<g id="a_node9"><a xlink:href="class_observable.html" target="_top" xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="white" stroke="black" points="0,-64.5 0,-83.5 66,-83.5 66,-64.5 0,-64.5"/>
 <text text-anchor="middle" x="33" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>
@@ -219,7 +219,7 @@ var sectionId = 'dynsection-1';
 <!-- Node22 -->
 <g id="node10" class="node">
 <title>Node22</title>
-<g id="a_node10"><a xlink:href="class_value_producer.html" target="_top" xlink:title=" ">
+<g id="a_node10"><a xlink:href="class_value_producer.html" target="_top" xlink:title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">
 <polygon fill="white" stroke="black" points="136,-64.5 136,-83.5 240,-83.5 240,-64.5 136,-64.5"/>
 <text text-anchor="middle" x="188" y="-71.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer&lt; T &gt;</text>
 </a>

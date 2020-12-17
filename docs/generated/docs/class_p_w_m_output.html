@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('class_p_w_m_output.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_p_w_m_output.html" title="PWMOutput provides a cross platform mechanism for generating Pulse Width Modulation signals over one ...">PWMOutput</a> provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GPIO pins on the MCU.  
+<p>Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GPIO pins on the MCU.  
  <a href="class_p_w_m_output.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="pwm__output_8h_source.html">pwm_output.h</a>&gt;</code></p>
@@ -151,9 +151,9 @@ Static Protected Attributes</h2></td></tr>
 <tr class="separator:ada9b993e1d377418c7e8ae3a37567fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_p_w_m_output.html" title="PWMOutput provides a cross platform mechanism for generating Pulse Width Modulation signals over one ...">PWMOutput</a> provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GPIO pins on the MCU. </p>
+<div class="textblock"><p>Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GPIO pins on the MCU. </p>
 <p>This class works by defining a "PWM channel". GPIO pins are assigned to a channel, and then the channel is used when setting the pwm value. The pwm value is a float number between 0.0 and 1.0, interpreted as a percentage of the maximum duty cycle possible. </p>
-<p>Channels can be auto-assigned to a pin or they can be declared explicitly in your code. The PWM value is set either by calling <code><a class="el" href="class_p_w_m_output.html#ab381dfd2a6f548a2e4e5641926b8d303">set_pwm()</a></code>, or by using an instance of <code><a class="el" href="class_p_w_m_output.html" title="PWMOutput provides a cross platform mechanism for generating Pulse Width Modulation signals over one ...">PWMOutput</a></code> and calling the <code><a class="el" href="class_p_w_m_output.html#a3f9850800824fcf491c19eab2ba433ce">set_input()</a></code> method as defined in <code><a class="el" href="class_value_consumer.html">ValueConsumer</a>&lt;&gt;</code>. </p>
+<p>Channels can be auto-assigned to a pin or they can be declared explicitly in your code. The PWM value is set either by calling <code><a class="el" href="class_p_w_m_output.html#ab381dfd2a6f548a2e4e5641926b8d303">set_pwm()</a></code>, or by using an instance of <code><a class="el" href="class_p_w_m_output.html" title="Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GP...">PWMOutput</a></code> and calling the <code><a class="el" href="class_p_w_m_output.html#a3f9850800824fcf491c19eab2ba433ce">set_input()</a></code> method as defined in <code><a class="el" href="class_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">ValueConsumer</a>&lt;&gt;</code>. </p>
 <p>On an esp32, the "channel" corresponds to one of the timer channels available on the onboard chip. Explicit declaration of a channel may or may not be necessary depending on other libraries that you may be using. On an esp8266, the channel is an artificial concept. Unless you have a need to use an explicit channel (e.g. if some other software is already using a particular esp32 timer channel), the channel auto-assign feature is the easiest to use. In either event, using this channel number allows the same code to work on either platform. </p>
 
 <p class="definition">Definition at line <a class="el" href="pwm__output_8h_source.html#l00031">31</a> of file <a class="el" href="pwm__output_8h_source.html">pwm_output.h</a>.</p>
@@ -183,7 +183,7 @@ Static Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Creates an instance of a <a class="el" href="class_p_w_m_output.html" title="PWMOutput provides a cross platform mechanism for generating Pulse Width Modulation signals over one ...">PWMOutput</a> <a class="el" href="class_value_consumer.html">ValueConsumer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Creates an instance of a <a class="el" href="class_p_w_m_output.html" title="Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GP...">PWMOutput</a> <a class="el" href="class_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">ValueConsumer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>The GPIO pin used to output the pwm signal. Pass -1 if this instance does not manage a specific pin. Using -1 is only valid if channel assignments have been explicitly made by calling <code><a class="el" href="class_p_w_m_output.html#a129d99124ffd0161d1713d279a108f29">PWMOutput::assign_channel()</a></code> </td></tr>
     <tr><td class="paramname">pwm_channel</td><td>The pwm channel the GPIO pin is to be assigned to. Pass -1 if you would like the system to auto-select the next unassigned pin. </td></tr>
@@ -287,7 +287,7 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sets the duty cycle of the specified pwm_channel to new_value. If pwm_channel is zero, the channel assigned when the <a class="el" href="class_p_w_m_output.html" title="PWMOutput provides a cross platform mechanism for generating Pulse Width Modulation signals over one ...">PWMOutput</a> instance was instantiated will be used. </p>
+<p>Sets the duty cycle of the specified pwm_channel to new_value. If pwm_channel is zero, the channel assigned when the <a class="el" href="class_p_w_m_output.html" title="Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GP...">PWMOutput</a> instance was instantiated will be used. </p>
 
 <p>Reimplemented from <a class="el" href="class_value_consumer.html#a0a2ab6f7c8bfb460d8778f6ae727cde7">ValueConsumer&lt; float &gt;</a>.</p>
 

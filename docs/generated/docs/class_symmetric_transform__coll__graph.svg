@@ -12,7 +12,7 @@
 <!-- Node30 -->
 <g id="node1" class="node">
 <title>Node30</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="A common type of transform that consumes, transforms, then outputs values of the same data type.">
 <polygon fill="#bfbfbf" stroke="black" points="183.5,-0.5 183.5,-19.5 315.5,-19.5 315.5,-0.5 183.5,-0.5"/>
 <text text-anchor="middle" x="249.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SymmetricTransform&lt; T &gt;</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node32 -->
 <g id="node3" class="node">
 <title>Node32</title>
-<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
 <polygon fill="white" stroke="black" points="32,-181.5 32,-200.5 115,-200.5 115,-181.5 32,-181.5"/>
 <text text-anchor="middle" x="73.5" y="-188.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node39 -->
 <g id="node10" class="node">
 <title>Node39</title>
-<g id="a_node10"><a xlink:href="class_transform.html" target="_top" xlink:title=" ">
+<g id="a_node10"><a xlink:href="class_transform.html" target="_top" xlink:title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">
 <polygon fill="white" stroke="black" points="143,-124.5 143,-143.5 242,-143.5 242,-124.5 143,-124.5"/>
 <text text-anchor="middle" x="192.5" y="-131.5" font-family="Helvetica,sans-Serif" font-size="10.00">Transform&lt; C, P &gt;</text>
 </a>
@@ -66,7 +66,7 @@
 <!-- Node33 -->
 <g id="node4" class="node">
 <title>Node33</title>
-<g id="a_node4"><a xlink:href="class_configurable.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_configurable.html" target="_top" xlink:title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">
 <polygon fill="white" stroke="black" points="0,-248.5 0,-267.5 71,-267.5 71,-248.5 0,-248.5"/>
 <text text-anchor="middle" x="35.5" y="-255.5" font-family="Helvetica,sans-Serif" font-size="10.00">Configurable</text>
 </a>
@@ -81,7 +81,7 @@
 <!-- Node34 -->
 <g id="node5" class="node">
 <title>Node34</title>
-<g id="a_node5"><a xlink:href="class_enable.html" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_enable.html" target="_top" xlink:title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ...">
 <polygon fill="white" stroke="black" points="89,-248.5 89,-267.5 136,-267.5 136,-248.5 89,-248.5"/>
 <text text-anchor="middle" x="112.5" y="-255.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enable</text>
 </a>
@@ -96,7 +96,7 @@
 <!-- Node35 -->
 <g id="node6" class="node">
 <title>Node35</title>
-<g id="a_node6"><a xlink:href="class_value_consumer.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="class_value_consumer.html" target="_top" xlink:title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">
 <polygon fill="white" stroke="black" points="184.5,-248.5 184.5,-267.5 294.5,-267.5 294.5,-248.5 184.5,-248.5"/>
 <text text-anchor="middle" x="239.5" y="-255.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; T &gt;</text>
 </a>
@@ -127,7 +127,7 @@
 <!-- Node36 -->
 <g id="node7" class="node">
 <title>Node36</title>
-<g id="a_node7"><a xlink:href="class_value_producer.html" target="_top" xlink:title=" ">
+<g id="a_node7"><a xlink:href="class_value_producer.html" target="_top" xlink:title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">
 <polygon fill="white" stroke="black" points="380.5,-248.5 380.5,-267.5 484.5,-267.5 484.5,-248.5 380.5,-248.5"/>
 <text text-anchor="middle" x="432.5" y="-255.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer&lt; T &gt;</text>
 </a>
@@ -158,7 +158,7 @@
 <!-- Node37 -->
 <g id="node8" class="node">
 <title>Node37</title>
-<g id="a_node8"><a xlink:href="class_observable.html" target="_top" xlink:title=" ">
+<g id="a_node8"><a xlink:href="class_observable.html" target="_top" xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="white" stroke="black" points="326.5,-315.5 326.5,-334.5 392.5,-334.5 392.5,-315.5 326.5,-315.5"/>
 <text text-anchor="middle" x="359.5" y="-322.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>

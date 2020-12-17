@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('class_click_type.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_click_type.html" title="ClickType adds a time element to button presses. It measures the time between a button press and its ...">ClickType</a> adds a time element to button presses. It measures the time between a button press and its release and will emit its value as an encoded version of the button press.  
+<p><a class="el" href="class_click_type.html" title="ClickType is a transform that consumes button clicks and translates them as events of type ClickTypes...">ClickType</a> is a transform that consumes button clicks and translates them as events of type <code>ClickTypes</code>.  
  <a href="class_click_type.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="click__type_8h_source.html">click_type.h</a>&gt;</code></p>
@@ -248,10 +248,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_click_type.html" title="ClickType adds a time element to button presses. It measures the time between a button press and its ...">ClickType</a> adds a time element to button presses. It measures the time between a button press and its release and will emit its value as an encoded version of the button press. </p>
+<div class="textblock"><p><a class="el" href="class_click_type.html" title="ClickType is a transform that consumes button clicks and translates them as events of type ClickTypes...">ClickType</a> is a transform that consumes button clicks and translates them as events of type <code>ClickTypes</code>. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="click__type_8h.html#a4a760072c8c7ae604f801ff82824b666">ClickTypes</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00027">27</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00026">26</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a88f578cc51609106df51155494b62e5b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a88f578cc51609106df51155494b62e5b">&#9670;&nbsp;</a></span>ClickType()</h2>
@@ -662,7 +662,7 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>
@@ -704,7 +704,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>A counter to specify how many clicks are currently being processed. Used to distinguish between single and double clicks. </p>
 
-<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00069">69</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00068">68</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
 
 </div>
 </div>
@@ -729,7 +729,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>Holds a delayed "SingleClick" report that we can pull back if the second click of a double click comes through. This value will be NULL if no click report is currently queued up. </p>
 
-<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00095">95</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00094">94</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
 
 </div>
 </div>
@@ -754,7 +754,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>The maximum number of milliseconds that can pass before two clicks in a row are combined into a single DoubleClick </p>
 
-<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00083">83</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00082">82</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
 
 </div>
 </div>
@@ -779,7 +779,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>How many milliseconds a button is pressed to distinguish between a normal SingleClick and a LongSingleClick </p>
 
-<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00075">75</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00074">74</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
 
 </div>
 </div>
@@ -805,7 +805,7 @@ Here is the call graph for this function:</div>
 
 <p>Timmer to time button presses. </p>
 
-<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00086">86</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00085">85</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
 
 </div>
 </div>
@@ -831,7 +831,7 @@ Here is the call graph for this function:</div>
 
 <p>Timer to time interval between button releases. </p>
 
-<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00089">89</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00088">88</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
 
 </div>
 </div>
@@ -856,7 +856,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <p>How many milliseoncs a button is pressed to distinguish between a normal SingleClick and an UltraLongSingleClick </p>
 
-<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00079">79</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="click__type_8h_source.html#l00078">78</a> of file <a class="el" href="click__type_8h_source.html">click_type.h</a>.</p>
 
 </div>
 </div>

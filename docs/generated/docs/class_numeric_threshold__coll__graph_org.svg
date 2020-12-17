@@ -12,7 +12,7 @@
 <!-- Node15 -->
 <g id="node1" class="node">
 <title>Node15</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="A Transform that translates a float value into a boolean value. min_value and MaxValue set a range....">
 <polygon fill="#bfbfbf" stroke="black" points="1155,-159.5 1155,-178.5 1251,-178.5 1251,-159.5 1155,-159.5"/>
 <text text-anchor="middle" x="1203" y="-166.5" font-family="Helvetica,sans-Serif" font-size="10.00">NumericThreshold</text>
 </a>
@@ -52,7 +52,7 @@
 <!-- Node18 -->
 <g id="node4" class="node">
 <title>Node18</title>
-<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
 <polygon fill="white" stroke="black" points="335.5,-44.5 335.5,-63.5 418.5,-63.5 418.5,-44.5 335.5,-44.5"/>
 <text text-anchor="middle" x="377" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -67,7 +67,7 @@
 <!-- Node27 -->
 <g id="node13" class="node">
 <title>Node27</title>
-<g id="a_node13"><a xlink:href="class_transform.html" target="_top" xlink:title=" ">
+<g id="a_node13"><a xlink:href="class_transform.html" target="_top" xlink:title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">
 <polygon fill="white" stroke="black" points="593,-147.5 593,-166.5 692,-166.5 692,-147.5 593,-147.5"/>
 <text text-anchor="middle" x="642.5" y="-154.5" font-family="Helvetica,sans-Serif" font-size="10.00">Transform&lt; C, P &gt;</text>
 </a>
@@ -82,7 +82,7 @@
 <!-- Node19 -->
 <g id="node5" class="node">
 <title>Node19</title>
-<g id="a_node5"><a xlink:href="class_configurable.html" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_configurable.html" target="_top" xlink:title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">
 <polygon fill="white" stroke="black" points="152.5,-38.5 152.5,-57.5 223.5,-57.5 223.5,-38.5 152.5,-38.5"/>
 <text text-anchor="middle" x="188" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Configurable</text>
 </a>
@@ -97,7 +97,7 @@
 <!-- Node20 -->
 <g id="node6" class="node">
 <title>Node20</title>
-<g id="a_node6"><a xlink:href="class_enable.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="class_enable.html" target="_top" xlink:title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ...">
 <polygon fill="white" stroke="black" points="164.5,-0.5 164.5,-19.5 211.5,-19.5 211.5,-0.5 164.5,-0.5"/>
 <text text-anchor="middle" x="188" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enable</text>
 </a>
@@ -127,7 +127,7 @@
 <!-- Node22 -->
 <g id="node8" class="node">
 <title>Node22</title>
-<g id="a_node8"><a xlink:href="class_value_consumer.html" target="_top" xlink:title=" ">
+<g id="a_node8"><a xlink:href="class_value_consumer.html" target="_top" xlink:title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">
 <polygon fill="white" stroke="black" points="133,-221.5 133,-240.5 243,-240.5 243,-221.5 133,-221.5"/>
 <text text-anchor="middle" x="188" y="-228.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; T &gt;</text>
 </a>
@@ -174,7 +174,7 @@
 <!-- Node24 -->
 <g id="node10" class="node">
 <title>Node24</title>
-<g id="a_node10"><a xlink:href="class_observable.html" target="_top" xlink:title=" ">
+<g id="a_node10"><a xlink:href="class_observable.html" target="_top" xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="white" stroke="black" points="0,-114.5 0,-133.5 66,-133.5 66,-114.5 0,-114.5"/>
 <text text-anchor="middle" x="33" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>
@@ -189,7 +189,7 @@
 <!-- Node25 -->
 <g id="node11" class="node">
 <title>Node25</title>
-<g id="a_node11"><a xlink:href="class_value_producer.html" target="_top" xlink:title=" ">
+<g id="a_node11"><a xlink:href="class_value_producer.html" target="_top" xlink:title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">
 <polygon fill="white" stroke="black" points="136,-114.5 136,-133.5 240,-133.5 240,-114.5 136,-114.5"/>
 <text text-anchor="middle" x="188" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer&lt; T &gt;</text>
 </a>
@@ -256,7 +256,7 @@
 <!-- Node30 -->
 <g id="node16" class="node">
 <title>Node30</title>
-<g id="a_node16"><a xlink:href="class_threshold_transform.html" target="_top" xlink:title=" ">
+<g id="a_node16"><a xlink:href="class_threshold_transform.html" target="_top" xlink:title="A Transform base class that translates the value of type C into value of type P. Base class for class...">
 <polygon fill="white" stroke="black" points="801,-197 801,-227 905,-227 905,-197 801,-197"/>
 <text text-anchor="start" x="809" y="-215" font-family="Helvetica,sans-Serif" font-size="10.00">ThresholdTransform</text>
 <text text-anchor="middle" x="853" y="-204" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; C, P &gt;</text>

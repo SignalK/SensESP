@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('class_value_producer.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A base class for any sensor or piece of code that outputs a value for consumption elsewhere.  
+ <a href="class_value_producer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ValueProducer&lt; T &gt;:</div>
@@ -154,7 +157,8 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename T&gt;<br />
 class ValueProducer&lt; T &gt;</h3>
 
-<p>A ValueProducer&lt;&gt; is any sensor or piece of code that outputs a value for consumption elsewhere. They are <a class="el" href="class_observable.html">Observable</a>, allowing code to be notified whenever a new value is available. They can be connected directly to ValueConsumers of the same type using the <a class="el" href="class_value_producer.html#a5920fda501e9eb4328f4a7d14d02fa39">connect_to()</a> method. </p>
+<p>A base class for any sensor or piece of code that outputs a value for consumption elsewhere. </p>
+<p>They are <a class="el" href="class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">Observable</a>, allowing code to be notified whenever a new value is available. They can be connected directly to <code><a class="el" href="class_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">ValueConsumer</a></code>s of the same type using the <code><a class="el" href="class_value_producer.html#a5920fda501e9eb4328f4a7d14d02fa39">connect_to()</a></code> method. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">ValueConsumer</a> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="valueconsumer_8h_source.html#l00008">8</a> of file <a class="el" href="valueconsumer_8h_source.html">valueconsumer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -183,7 +187,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00022">22</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00024">24</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 
 </div>
 </div>
@@ -231,7 +235,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_value_consumer.html#a0a2ab6f7c8bfb460d8778f6ae727cde7">ValueConsumer::set_input()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00038">38</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00040">40</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -286,7 +290,7 @@ template&lt;typename T2 &gt; </div>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_value_consumer.html#a0a2ab6f7c8bfb460d8778f6ae727cde7">ValueConsumer::set_input()</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00064">64</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00066">66</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 
 </div>
 </div>
@@ -326,7 +330,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00046">46</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00048">48</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 
 </div>
 </div>
@@ -368,7 +372,7 @@ template&lt;typename T2 &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00075">75</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00077">77</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 
 </div>
 </div>
@@ -398,7 +402,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00084">84</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00086">86</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -434,7 +438,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <p>Returns the current value of this producer </p>
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00027">27</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00029">29</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -468,7 +472,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 <p>The current value of this producer is stored here in this output member (unless descendant classes override <a class="el" href="class_value_producer.html#a0164ba6fd3345f9b8dd2187e7ea919d9">ValueProducer::get()</a>) </p>
 
-<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00094">94</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="valueproducer_8h_source.html#l00096">96</a> of file <a class="el" href="valueproducer_8h_source.html">valueproducer.h</a>.</p>
 
 </div>
 </div>

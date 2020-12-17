@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="A common type of transform that consumes, transforms, then outputs values of the same data type.">
 <polygon fill="#bfbfbf" stroke="black" points="731,-404.5 731,-423.5 863,-423.5 863,-404.5 731,-404.5"/>
 <text text-anchor="middle" x="797" y="-411.5" font-family="Helvetica,sans-Serif" font-size="10.00">SymmetricTransform&lt; T &gt;</text>
 </a>
@@ -67,7 +67,7 @@ var sectionId = 'dynsection-0';
 <!-- Node11 -->
 <g id="node12" class="node">
 <title>Node11</title>
-<g id="a_node12"><a xlink:href="class_debounce_template.html" target="_top" xlink:title="DebounceTemplate implements debounce code for a button or switch.">
+<g id="a_node12"><a xlink:href="class_debounce_template.html" target="_top" xlink:title="Implements debounce code for a button or switch.">
 <polygon fill="white" stroke="black" points="939,-518.5 939,-537.5 1064,-537.5 1064,-518.5 939,-518.5"/>
 <text text-anchor="middle" x="1001.5" y="-525.5" font-family="Helvetica,sans-Serif" font-size="10.00">DebounceTemplate&lt; T &gt;</text>
 </a>
@@ -82,7 +82,7 @@ var sectionId = 'dynsection-0';
 <!-- Node12 -->
 <g id="node13" class="node">
 <title>Node12</title>
-<g id="a_node13"><a xlink:href="class_digital_output.html" target="_top" xlink:title=" ">
+<g id="a_node13"><a xlink:href="class_digital_output.html" target="_top" xlink:title="Configures the specified GPIO pin as an output pin, then sets the status of that pin to HIGH whenever...">
 <polygon fill="white" stroke="black" points="946.5,-480.5 946.5,-499.5 1056.5,-499.5 1056.5,-480.5 946.5,-480.5"/>
 <text text-anchor="middle" x="1001.5" y="-487.5" font-family="Helvetica,sans-Serif" font-size="10.00">DigitalOutput&lt; bool &gt;</text>
 </a>
@@ -127,7 +127,7 @@ var sectionId = 'dynsection-0';
 <!-- Node15 -->
 <g id="node16" class="node">
 <title>Node15</title>
-<g id="a_node16"><a xlink:href="class_s_k_output.html" target="_top" xlink:title=" ">
+<g id="a_node16"><a xlink:href="class_s_k_output.html" target="_top" xlink:title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network.">
 <polygon fill="white" stroke="black" points="960,-366.5 960,-385.5 1043,-385.5 1043,-366.5 960,-366.5"/>
 <text text-anchor="middle" x="1001.5" y="-373.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKOutput&lt; T &gt;</text>
 </a>
@@ -190,7 +190,7 @@ var sectionId = 'dynsection-0';
 <!-- Node2 -->
 <g id="node3" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
 <polygon fill="white" stroke="black" points="292,-477.5 292,-496.5 375,-496.5 375,-477.5 292,-477.5"/>
 <text text-anchor="middle" x="333.5" y="-484.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -205,7 +205,7 @@ var sectionId = 'dynsection-0';
 <!-- Node8 -->
 <g id="node9" class="node">
 <title>Node8</title>
-<g id="a_node9"><a xlink:href="class_transform.html" target="_top" xlink:title=" ">
+<g id="a_node9"><a xlink:href="class_transform.html" target="_top" xlink:title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">
 <polygon fill="white" stroke="black" points="426,-425.5 426,-444.5 525,-444.5 525,-425.5 426,-425.5"/>
 <text text-anchor="middle" x="475.5" y="-432.5" font-family="Helvetica,sans-Serif" font-size="10.00">Transform&lt; C, P &gt;</text>
 </a>
@@ -220,7 +220,7 @@ var sectionId = 'dynsection-0';
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_configurable.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_configurable.html" target="_top" xlink:title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">
 <polygon fill="white" stroke="black" points="122.5,-484.5 122.5,-503.5 193.5,-503.5 193.5,-484.5 122.5,-484.5"/>
 <text text-anchor="middle" x="158" y="-491.5" font-family="Helvetica,sans-Serif" font-size="10.00">Configurable</text>
 </a>
@@ -235,7 +235,7 @@ var sectionId = 'dynsection-0';
 <!-- Node4 -->
 <g id="node5" class="node">
 <title>Node4</title>
-<g id="a_node5"><a xlink:href="class_enable.html" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_enable.html" target="_top" xlink:title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ...">
 <polygon fill="white" stroke="black" points="134.5,-446.5 134.5,-465.5 181.5,-465.5 181.5,-446.5 134.5,-446.5"/>
 <text text-anchor="middle" x="158" y="-453.5" font-family="Helvetica,sans-Serif" font-size="10.00">Enable</text>
 </a>
@@ -250,7 +250,7 @@ var sectionId = 'dynsection-0';
 <!-- Node5 -->
 <g id="node6" class="node">
 <title>Node5</title>
-<g id="a_node6"><a xlink:href="class_value_consumer.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="class_value_consumer.html" target="_top" xlink:title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">
 <polygon fill="white" stroke="black" points="103,-399.5 103,-418.5 213,-418.5 213,-399.5 103,-399.5"/>
 <text text-anchor="middle" x="158" y="-406.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; T &gt;</text>
 </a>
@@ -281,7 +281,7 @@ var sectionId = 'dynsection-0';
 <!-- Node6 -->
 <g id="node7" class="node">
 <title>Node6</title>
-<g id="a_node7"><a xlink:href="class_value_producer.html" target="_top" xlink:title=" ">
+<g id="a_node7"><a xlink:href="class_value_producer.html" target="_top" xlink:title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">
 <polygon fill="white" stroke="black" points="106,-316.5 106,-335.5 210,-335.5 210,-316.5 106,-316.5"/>
 <text text-anchor="middle" x="158" y="-323.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer&lt; T &gt;</text>
 </a>
@@ -312,7 +312,7 @@ var sectionId = 'dynsection-0';
 <!-- Node7 -->
 <g id="node8" class="node">
 <title>Node7</title>
-<g id="a_node8"><a xlink:href="class_observable.html" target="_top" xlink:title=" ">
+<g id="a_node8"><a xlink:href="class_observable.html" target="_top" xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="white" stroke="black" points="0,-341.5 0,-360.5 66,-360.5 66,-341.5 0,-341.5"/>
 <text text-anchor="middle" x="33" y="-348.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>
@@ -383,7 +383,7 @@ var sectionId = 'dynsection-0';
 <!-- Node20 -->
 <g id="node21" class="node">
 <title>Node20</title>
-<g id="a_node21"><a xlink:href="class_analog_voltage.html" target="_top" xlink:title=" ">
+<g id="a_node21"><a xlink:href="class_analog_voltage.html" target="_top" xlink:title="A transform that takes the output of the built&#45;in analog&#45;to&#45;digital converter on the ESP and outputs ...">
 <polygon fill="white" stroke="black" points="1125,-228.5 1125,-247.5 1205,-247.5 1205,-228.5 1125,-228.5"/>
 <text text-anchor="middle" x="1165" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">AnalogVoltage</text>
 </a>
@@ -398,7 +398,7 @@ var sectionId = 'dynsection-0';
 <!-- Node21 -->
 <g id="node22" class="node">
 <title>Node21</title>
-<g id="a_node22"><a xlink:href="class_angle_correction.html" target="_top" xlink:title=" ">
+<g id="a_node22"><a xlink:href="class_angle_correction.html" target="_top" xlink:title="Add a value to an angle input (in radians). The output value is wrapped to a range between [0,...">
 <polygon fill="white" stroke="black" points="1122,-190.5 1122,-209.5 1208,-209.5 1208,-190.5 1122,-190.5"/>
 <text text-anchor="middle" x="1165" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00">AngleCorrection</text>
 </a>
@@ -413,7 +413,7 @@ var sectionId = 'dynsection-0';
 <!-- Node22 -->
 <g id="node23" class="node">
 <title>Node22</title>
-<g id="a_node23"><a xlink:href="class_change_filter.html" target="_top" xlink:title=" ">
+<g id="a_node23"><a xlink:href="class_change_filter.html" target="_top" xlink:title="A numeric passthrough transform that will only pass that value through if it is &quot;sufficiently differe...">
 <polygon fill="white" stroke="black" points="1129,-152.5 1129,-171.5 1201,-171.5 1201,-152.5 1129,-152.5"/>
 <text text-anchor="middle" x="1165" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">ChangeFilter</text>
 </a>
@@ -428,7 +428,7 @@ var sectionId = 'dynsection-0';
 <!-- Node23 -->
 <g id="node24" class="node">
 <title>Node23</title>
-<g id="a_node24"><a xlink:href="class_curve_interpolator.html" target="_top" xlink:title=" ">
+<g id="a_node24"><a xlink:href="class_curve_interpolator.html" target="_top" xlink:title="Uses a collection of input/output samples that approximate a non&#45;linear curve and outputs a value on ...">
 <polygon fill="white" stroke="black" points="1119,-114.5 1119,-133.5 1211,-133.5 1211,-114.5 1119,-114.5"/>
 <text text-anchor="middle" x="1165" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">CurveInterpolator</text>
 </a>
@@ -458,7 +458,7 @@ var sectionId = 'dynsection-0';
 <!-- Node25 -->
 <g id="node26" class="node">
 <title>Node25</title>
-<g id="a_node26"><a xlink:href="class_median.html" target="_top" xlink:title=" ">
+<g id="a_node26"><a xlink:href="class_median.html" target="_top" xlink:title="Collects a list of input values of size sample_size and outputs the median value (i....">
 <polygon fill="white" stroke="black" points="1141,-38.5 1141,-57.5 1189,-57.5 1189,-38.5 1141,-38.5"/>
 <text text-anchor="middle" x="1165" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Median</text>
 </a>
@@ -473,7 +473,7 @@ var sectionId = 'dynsection-0';
 <!-- Node26 -->
 <g id="node27" class="node">
 <title>Node26</title>
-<g id="a_node27"><a xlink:href="class_moving_average.html" target="_top" xlink:title=" ">
+<g id="a_node27"><a xlink:href="class_moving_average.html" target="_top" xlink:title="Used to smooth the output of a value (signal) that has frequent variations. For example,...">
 <polygon fill="white" stroke="black" points="1123,-0.5 1123,-19.5 1207,-19.5 1207,-0.5 1123,-0.5"/>
 <text text-anchor="middle" x="1165" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">MovingAverage</text>
 </a>
@@ -488,7 +488,7 @@ var sectionId = 'dynsection-0';
 <!-- Node27 -->
 <g id="node28" class="node">
 <title>Node27</title>
-<g id="a_node28"><a xlink:href="class_voltage_divider_r1.html" target="_top" xlink:title=" ">
+<g id="a_node28"><a xlink:href="class_voltage_divider_r1.html" target="_top" xlink:title="A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit,...">
 <polygon fill="white" stroke="black" points="1118.5,-392.5 1118.5,-411.5 1211.5,-411.5 1211.5,-392.5 1118.5,-392.5"/>
 <text text-anchor="middle" x="1165" y="-399.5" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageDividerR1</text>
 </a>
@@ -503,7 +503,7 @@ var sectionId = 'dynsection-0';
 <!-- Node28 -->
 <g id="node29" class="node">
 <title>Node28</title>
-<g id="a_node29"><a xlink:href="class_voltage_divider_r2.html" target="_top" xlink:title=" ">
+<g id="a_node29"><a xlink:href="class_voltage_divider_r2.html" target="_top" xlink:title="A transform that uses the voltage divider formula to resolve the resistance of R2 in the circuit,...">
 <polygon fill="white" stroke="black" points="1118.5,-354.5 1118.5,-373.5 1211.5,-373.5 1211.5,-354.5 1118.5,-354.5"/>
 <text text-anchor="middle" x="1165" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageDividerR2</text>
 </a>
@@ -518,7 +518,7 @@ var sectionId = 'dynsection-0';
 <!-- Node29 -->
 <g id="node30" class="node">
 <title>Node29</title>
-<g id="a_node30"><a xlink:href="class_voltage_multiplier.html" target="_top" xlink:title=" ">
+<g id="a_node30"><a xlink:href="class_voltage_multiplier.html" target="_top" xlink:title="A transform that does the opposite of what a physical voltage divider circuit does....">
 <polygon fill="white" stroke="black" points="1120.5,-316.5 1120.5,-335.5 1209.5,-335.5 1209.5,-316.5 1120.5,-316.5"/>
 <text text-anchor="middle" x="1165" y="-323.5" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageMultiplier</text>
 </a>

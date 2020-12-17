@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('class_voltage_divider_r2.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A transform that uses the voltage divider formula to resolve the resistance of R2 in the circuit, given a fixed voltage sent into the divider (Vin), a known resistance an the junction of the two resistors (R1), and the output of the divider (Vout). This is the typical way a sensor such as a temperature sender or oil pressure sender is wired up: the sender's resistance varies based on temperature or pressure, so it is usually "R2" in a voltage divider. R1 and/or Vin is selected in such a way to ensure Vout (the value read by the MCU's analog input) does not exceed 3.3 volts.  
+ <a href="class_voltage_divider_r2.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VoltageDividerR2:</div>
@@ -380,7 +383,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

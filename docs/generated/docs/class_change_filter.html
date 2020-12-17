@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('class_change_filter.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A numeric passthrough transform that will only pass that value through if it is "sufficiently different" from the last value passed through. More specifically, the absolute value of the difference between the new value and the last passed value has to be greater than or equal to the specified min_delta, and less than or equal to the specified max_delta. If the consecutive skip count ever reaches max_skips, the value will be let through regardless.  
+ <a href="class_change_filter.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="change__filter_8h_source.html">change_filter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ChangeFilter:</div>
@@ -218,7 +221,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_change_filter.html">ChangeFilter</a> is a numeric passthrough transform that will only pass that value through if it is "sufficiently different" from the last value passed through. More specifically, the absolute value of the difference between the new value and the last passed value has to be greater than or equal to the specified min_delta, and less than or equal to the specified max_delta. If the consecutive skip count ever reaches max_skips, the value will be let through regardless. </p>
+<div class="textblock"><p>A numeric passthrough transform that will only pass that value through if it is "sufficiently different" from the last value passed through. More specifically, the absolute value of the difference between the new value and the last passed value has to be greater than or equal to the specified min_delta, and less than or equal to the specified max_delta. If the consecutive skip count ever reaches max_skips, the value will be let through regardless. </p>
 
 <p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00016">16</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -390,7 +393,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

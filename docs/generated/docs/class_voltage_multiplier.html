@@ -101,6 +101,9 @@ $(document).ready(function(){initNavTree('class_voltage_multiplier.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A transform that does the opposite of what a physical voltage divider circuit does. Used to convert the voltage that comes out of a voltage divider back into the original voltage that went into the voltage divider.  
+ <a href="class_voltage_multiplier.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="voltage__multiplier_8h_source.html">voltage_multiplier.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VoltageMultiplier:</div>
@@ -200,7 +203,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A transform that does the opposite of what a physical voltage divider circuit does. Used to convert the voltage that comes out of a voltage divider back into the original voltage that went into the voltage divider.</p>
+<div class="textblock"><p>A transform that does the opposite of what a physical voltage divider circuit does. Used to convert the voltage that comes out of a voltage divider back into the original voltage that went into the voltage divider. </p>
 <p>Use case: measuring a ~12V DC source with an analog-to-digital converter (ADC) that can take only 5V. You use a physical voltage divider circuit to reduce from ~12V down to a range that's no higher than 5V. After you read the output from the ADC and convert it into voltage, you have to reverse the effect of the voltage divider circuit to know the original source voltage.</p>
 <p>Two parameters:</p>
 <ul>
@@ -281,7 +284,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

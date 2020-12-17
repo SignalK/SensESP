@@ -1,21 +1,21 @@
 <map id="Sensor" name="Sensor">
-<area shape="rect" id="node1" title=" " alt="" coords="148,309,211,336"/>
+<area shape="rect" id="node1" title="Represents a raw hardware thingie." alt="" coords="148,309,211,336"/>
 <area shape="rect" id="node5" href="$class_a_d_s1x15.html" title="ADS1x15 represents an ADS1015 or ADS1115 Analog to Digital Converter." alt="" coords="261,5,435,32"/>
-<area shape="rect" id="node6" href="$class_b_m_e280.html" title=" " alt="" coords="312,56,384,83"/>
+<area shape="rect" id="node6" href="$class_b_m_e280.html" title="Represents an ADAfruit (or compatible) BME280 temperature / pressure / humidity sensor." alt="" coords="312,56,384,83"/>
 <area shape="rect" id="node7" href="$class_b_m_p280.html" title="BMP280 represents an ADAfruit or compatible BMP280 temperature &amp; pressure sensor." alt="" coords="312,107,384,133"/>
 <area shape="rect" id="node8" href="$class_dallas_temperature_sensors.html" title=" " alt="" coords="259,157,437,184"/>
 <area shape="rect" id="node9" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="304,208,392,235"/>
 <area shape="rect" id="node13" href="$class_free_mem.html" title=" " alt="" coords="309,259,387,285"/>
 <area shape="rect" id="node14" href="$class_g_p_s_input.html" title=" " alt="" coords="309,309,387,336"/>
-<area shape="rect" id="node15" href="$class_i_n_a219.html" title=" " alt="" coords="315,360,381,387"/>
+<area shape="rect" id="node15" href="$class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor. The constructor creates a ..." alt="" coords="315,360,381,387"/>
 <area shape="rect" id="node16" href="$class_integer_sensor.html" title=" " alt="" coords="297,411,399,437"/>
 <area shape="rect" id="node17" href="$class_numeric_sensor.html" title=" " alt="" coords="292,461,404,488"/>
 <area shape="rect" id="node32" href="$class_orientation9_d_o_f.html" title=" " alt="" coords="288,512,408,539"/>
 <area shape="rect" id="node33" href="$class_s_h_t31.html" title=" " alt="" coords="317,563,379,589"/>
 <area shape="rect" id="node34" href="$class_string_sensor.html" title=" " alt="" coords="299,740,397,767"/>
-<area shape="rect" id="node2" href="$class_observable.html" title=" " alt="" coords="9,259,97,285"/>
-<area shape="rect" id="node3" href="$class_configurable.html" title=" " alt="" coords="5,309,100,336"/>
-<area shape="rect" id="node4" href="$class_enable.html" title=" " alt="" coords="21,360,84,387"/>
+<area shape="rect" id="node2" href="$class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="9,259,97,285"/>
+<area shape="rect" id="node3" href="$class_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,309,100,336"/>
+<area shape="rect" id="node4" href="$class_enable.html" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="21,360,84,387"/>
 <area shape="rect" id="node10" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="503,40,636,67"/>
 <area shape="rect" id="node11" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="502,91,637,117"/>
 <area shape="rect" id="node12" href="$class_digital_input_state.html" title="DigitalInputState reports the state of a digital pin every read_delay ms." alt="" coords="510,141,629,168"/>

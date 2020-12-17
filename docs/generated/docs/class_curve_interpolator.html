@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('class_curve_interpolator.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Uses a collection of input/output samples that approximate a non-linear curve and outputs a value on that curve. The output is the linear interpolation between the two sample points that the input falls between. It is used primarily for non-linear analog gauges such as temperature gauges and oil pressure gauges, which get their input from analog sensors that are variable resistors.  
+ <a href="class_curve_interpolator.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for CurveInterpolator:</div>
@@ -220,9 +223,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_curve_interpolator.html">CurveInterpolator</a> uses a collection of input/output samples that approximate a non-linear curve. The output is the linear interpolation between the two sample points that the input falls between. It is used primarily for non-linear analog gauges such as temperature gauges and oil pressure gauges, which get their input from analog sensors that are variable resistors. </p>
+<div class="textblock"><p>Uses a collection of input/output samples that approximate a non-linear curve and outputs a value on that curve. The output is the linear interpolation between the two sample points that the input falls between. It is used primarily for non-linear analog gauges such as temperature gauges and oil pressure gauges, which get their input from analog sensors that are variable resistors. </p>
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00014">14</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00015">15</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a09bdf144307f1264c36d5afaea5c96a3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09bdf144307f1264c36d5afaea5c96a3">&#9670;&nbsp;</a></span>CurveInterpolator()</h2>
@@ -311,7 +314,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00052">52</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00053">53</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -369,7 +372,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00045">45</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00046">46</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -504,7 +507,7 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

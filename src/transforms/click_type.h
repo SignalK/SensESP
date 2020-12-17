@@ -20,7 +20,7 @@ enum class ClickTypes {
 
 /**
  * @brief ClickType is a transform that consumes button clicks and translates them
- * as events of type ClickTypes.
+ * as events of type `ClickTypes`.
  * @see ClickTypes
  */
 class ClickType : public Transform<bool, ClickTypes> {

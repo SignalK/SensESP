@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="#bfbfbf" stroke="black" points="0,-563.5 0,-582.5 66,-582.5 66,-563.5 0,-563.5"/>
 <text text-anchor="middle" x="33" y="-570.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>
@@ -67,7 +67,7 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="node2" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="class_sensor.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_sensor.html" target="_top" xlink:title="Represents a raw hardware thingie.">
 <polygon fill="white" stroke="black" points="410.5,-1091.5 410.5,-1110.5 457.5,-1110.5 457.5,-1091.5 410.5,-1091.5"/>
 <text text-anchor="middle" x="434" y="-1098.5" font-family="Helvetica,sans-Serif" font-size="10.00">Sensor</text>
 </a>
@@ -82,7 +82,7 @@ var sectionId = 'dynsection-0';
 <!-- Node33 -->
 <g id="node18" class="node">
 <title>Node33</title>
-<g id="a_node18"><a xlink:href="class_s_k_emitter.html" target="_top" xlink:title=" ">
+<g id="a_node18"><a xlink:href="class_s_k_emitter.html" target="_top" xlink:title="A class that produces Signal K output to be forwarded to the Signal K server (if the system is connec...">
 <polygon fill="white" stroke="black" points="124,-31.5 124,-50.5 186,-50.5 186,-31.5 124,-31.5"/>
 <text text-anchor="middle" x="155" y="-38.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKEmitter</text>
 </a>
@@ -127,7 +127,7 @@ var sectionId = 'dynsection-0';
 <!-- Node41 -->
 <g id="node25" class="node">
 <title>Node41</title>
-<g id="a_node25"><a xlink:href="class_value_producer.html" target="_top" xlink:title=" ">
+<g id="a_node25"><a xlink:href="class_value_producer.html" target="_top" xlink:title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">
 <polygon fill="white" stroke="black" points="103,-563.5 103,-582.5 207,-582.5 207,-563.5 103,-563.5"/>
 <text text-anchor="middle" x="155" y="-570.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer&lt; T &gt;</text>
 </a>
@@ -368,7 +368,7 @@ var sectionId = 'dynsection-0';
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_b_m_e280.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_b_m_e280.html" target="_top" xlink:title="Represents an ADAfruit (or compatible) BME280 temperature / pressure / humidity sensor.">
 <polygon fill="white" stroke="black" points="674,-1176.5 674,-1195.5 728,-1195.5 728,-1176.5 674,-1176.5"/>
 <text text-anchor="middle" x="701" y="-1183.5" font-family="Helvetica,sans-Serif" font-size="10.00">BME280</text>
 </a>
@@ -458,7 +458,7 @@ var sectionId = 'dynsection-0';
 <!-- Node12 -->
 <g id="node12" class="node">
 <title>Node12</title>
-<g id="a_node12"><a xlink:href="class_i_n_a219.html" target="_top" xlink:title=" ">
+<g id="a_node12"><a xlink:href="class_i_n_a219.html" target="_top" xlink:title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor. The constructor creates a ...">
 <polygon fill="white" stroke="black" points="676,-1328.5 676,-1347.5 726,-1347.5 726,-1328.5 676,-1328.5"/>
 <text text-anchor="middle" x="701" y="-1335.5" font-family="Helvetica,sans-Serif" font-size="10.00">INA219</text>
 </a>
@@ -578,7 +578,7 @@ var sectionId = 'dynsection-0';
 <!-- Node34 -->
 <g id="node19" class="node">
 <title>Node34</title>
-<g id="a_node19"><a xlink:href="class_s_k_output.html" target="_top" xlink:title=" ">
+<g id="a_node19"><a xlink:href="class_s_k_output.html" target="_top" xlink:title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network.">
 <polygon fill="white" stroke="red" points="392.5,-0.5 392.5,-19.5 475.5,-19.5 475.5,-0.5 392.5,-0.5"/>
 <text text-anchor="middle" x="434" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKOutput&lt; T &gt;</text>
 </a>
@@ -650,7 +650,7 @@ var sectionId = 'dynsection-0';
 <!-- Node42 -->
 <g id="node26" class="node">
 <title>Node42</title>
-<g id="a_node26"><a xlink:href="class_observable_value.html" target="_top" xlink:title=" ">
+<g id="a_node26"><a xlink:href="class_observable_value.html" target="_top" xlink:title="A value that notifies its observers if it gets changed.">
 <polygon fill="white" stroke="red" points="377,-626.5 377,-645.5 491,-645.5 491,-626.5 377,-626.5"/>
 <text text-anchor="middle" x="434" y="-633.5" font-family="Helvetica,sans-Serif" font-size="10.00">ObservableValue&lt; T &gt;</text>
 </a>

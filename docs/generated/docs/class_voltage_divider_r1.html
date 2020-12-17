@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('class_voltage_divider_r1.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit, given a fixed voltage sent into the divider (Vin), a known resistance an the junction of the two resistors (R2), and the output of the divider (Vout).  
+ <a href="class_voltage_divider_r1.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for VoltageDividerR1:</div>
@@ -214,7 +217,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit, given a fixed voltage sent into the divider (Vin), a known resistance an the junction of the two resistors (R2), and the output of the divider (Vout).</p>
+<div class="textblock"><p>A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit, given a fixed voltage sent into the divider (Vin), a known resistance an the junction of the two resistors (R2), and the output of the divider (Vout). </p>
 <p>Here, the output is the voltage across the fixed resistor (R2) between the junction and ground and the variable resistor is connected between Vin and the junction.</p>
 <p>R2 is selected on the basis of the range of values for R1 and the maximum input voltage for the MCU's analog input. </p>
 
@@ -382,7 +385,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

@@ -1,8 +1,8 @@
 <map id="BaseBlinker" name="BaseBlinker">
-<area shape="rect" id="node1" title=" " alt="" coords="77,80,169,107"/>
-<area shape="rect" id="node3" href="$class_pattern_blinker.html" title=" " alt="" coords="5,155,109,181"/>
-<area shape="rect" id="node4" href="$class_periodic_blinker.html" title=" " alt="" coords="133,155,243,181"/>
-<area shape="rect" id="node2" href="$class_enable.html" title=" " alt="" coords="91,5,154,32"/>
-<area shape="rect" id="node5" href="$class_even_blinker.html" title=" " alt="" coords="83,229,175,256"/>
-<area shape="rect" id="node6" href="$class_ratio_blinker.html" title=" " alt="" coords="200,229,293,256"/>
+<area shape="rect" id="node1" title="A base class for LED blinker classes." alt="" coords="77,80,169,107"/>
+<area shape="rect" id="node3" href="$class_pattern_blinker.html" title="A blinker that blinks the LED according to a defined repeating pattern." alt="" coords="5,155,109,181"/>
+<area shape="rect" id="node4" href="$class_periodic_blinker.html" title="A base class for periodic blinkers." alt="" coords="133,155,243,181"/>
+<area shape="rect" id="node2" href="$class_enable.html" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="91,5,154,32"/>
+<area shape="rect" id="node5" href="$class_even_blinker.html" title="An LED blinker class that blinks the LED 50% off, 50% on, at a given period." alt="" coords="83,229,175,256"/>
+<area shape="rect" id="node6" href="$class_ratio_blinker.html" title="A periodic blinker that defines both the on&#45;ratio and the period length." alt="" coords="200,229,293,256"/>
 </map>

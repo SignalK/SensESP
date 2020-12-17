@@ -103,6 +103,9 @@ $(document).ready(function(){initNavTree('class_system_status_led.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>Consumes the networking and websocket states and delta counts and updates the device LED accordingly. Inherit this class and override the methods to customize the behavior.  
+ <a href="class_system_status_led.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="system__status__led_8h_source.html">system_status_led.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SystemStatusLed:</div>
@@ -159,7 +162,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad13feb34428093808c9f70e4974dbb92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_system_status_led.html">SystemStatusLed</a> consumes the networking and websocket states and delta counts and updates the device LED accordingly. Inherit this class and override the methods to customize the behavior. </p>
+<div class="textblock"><p>Consumes the networking and websocket states and delta counts and updates the device LED accordingly. Inherit this class and override the methods to customize the behavior. </p>
 
 <p class="definition">Definition at line <a class="el" href="system__status__led_8h_source.html#l00013">13</a> of file <a class="el" href="system__status__led_8h_source.html">system_status_led.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -217,7 +220,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>
@@ -270,7 +273,7 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

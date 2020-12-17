@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('class_lambda_consumer.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Construct a new <a class="el" href="class_value_consumer.html">ValueConsumer</a> to execute a single function.  
+<p>Provides an easy way of calling a function based on the output of any <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>.  
  <a href="class_lambda_consumer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="lambda__consumer_8h_source.html">lambda_consumer.h</a>&gt;</code></p>
@@ -140,8 +140,8 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;class IN&gt;<br />
 class LambdaConsumer&lt; IN &gt;</h3>
 
-<p>Construct a new <a class="el" href="class_value_consumer.html">ValueConsumer</a> to execute a single function. </p>
-<p><a class="el" href="class_lambda_consumer.html" title="Construct a new ValueConsumer to execute a single function.">LambdaConsumer</a> provides an easy way of calling a function based on the output of any <a class="el" href="class_value_producer.html">ValueProducer</a>. You create the function in main.cpp as a lambda expression, and then pass it as the "function" parameter to the LambaConsumer. See <a href="https://github.com/SignalK/SensESP/blob/master/examples/lambda_consumer.cpp">https://github.com/SignalK/SensESP/blob/master/examples/lambda_consumer.cpp</a> for a detailed example.</p>
+<p>Provides an easy way of calling a function based on the output of any <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p>
+<p>To use <a class="el" href="class_lambda_consumer.html" title="Provides an easy way of calling a function based on the output of any ValueProducer.">LambdaConsumer</a>, you create the function in main.cpp as a lambda expression, and then pass it as the "function" parameter to the LambaConsumer constructor. See <a href="https://github.com/SignalK/SensESP/blob/master/examples/lambda_consumer.cpp">https://github.com/SignalK/SensESP/blob/master/examples/lambda_consumer.cpp</a> for a detailed example.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">IN</td><td>Consumer function input value type</td></tr>
@@ -223,7 +223,7 @@ template&lt;class IN &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

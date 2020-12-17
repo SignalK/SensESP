@@ -102,6 +102,9 @@ $(document).ready(function(){initNavTree('class_threshold_transform.html','');})
 </div><!--header-->
 <div class="contents">
 
+<p>A <a class="el" href="class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">Transform</a> base class that translates the value of type C into value of type P. Base class for classes <a class="el" href="class_numeric_threshold.html" title="A Transform that translates a float value into a boolean value. min_value and MaxValue set a range....">NumericThreshold</a> and <a class="el" href="class_integer_threshold.html" title="A Transform that translates an integer value into a boolean value. min_value and MaxValue set a range...">IntegerThreshold</a>.  
+ <a href="class_threshold_transform.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="threshold_8h_source.html">threshold.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ThresholdTransform&lt; C, P &gt;:</div>
@@ -218,7 +221,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename C, typename P&gt;<br />
 class ThresholdTransform&lt; C, P &gt;</h3>
 
-<p>A <a class="el" href="class_transform.html">Transform</a> base class that translates the value of type C into value of type P. Base class for classes <a class="el" href="class_numeric_threshold.html">NumericThreshold</a> and <a class="el" href="class_integer_threshold.html">IntegerThreshold</a>.</p>
+<p>A <a class="el" href="class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">Transform</a> base class that translates the value of type C into value of type P. Base class for classes <a class="el" href="class_numeric_threshold.html" title="A Transform that translates a float value into a boolean value. min_value and MaxValue set a range....">NumericThreshold</a> and <a class="el" href="class_integer_threshold.html" title="A Transform that translates an integer value into a boolean value. min_value and MaxValue set a range...">IntegerThreshold</a>. </p>
 <p>Arguments are:</p>
 <p>min_value - minimum value of input for output to be the value of in_range. max_value - maximum value of input for output to be the value of in_range. in_range - output value if input value is in range out_range - output value if input value is out of the range </p>
 
@@ -318,7 +321,7 @@ template&lt;class C, class P &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>

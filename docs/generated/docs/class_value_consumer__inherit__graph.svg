@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">
 <polygon fill="#bfbfbf" stroke="black" points="0,-316 0,-335 110,-335 110,-316 0,-316"/>
 <text text-anchor="middle" x="55" y="-323" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; T &gt;</text>
 </a>
@@ -290,7 +290,7 @@ var sectionId = 'dynsection-0';
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_symmetric_transform.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_symmetric_transform.html" target="_top" xlink:title="A common type of transform that consumes, transforms, then outputs values of the same data type.">
 <polygon fill="white" stroke="black" points="1034,-715 1034,-734 1166,-734 1166,-715 1034,-715"/>
 <text text-anchor="middle" x="1100" y="-722" font-family="Helvetica,sans-Serif" font-size="10.00">SymmetricTransform&lt; T &gt;</text>
 </a>
@@ -305,7 +305,7 @@ var sectionId = 'dynsection-0';
 <!-- Node4 -->
 <g id="node5" class="node">
 <title>Node4</title>
-<g id="a_node5"><a xlink:href="class_debounce_template.html" target="_top" xlink:title="DebounceTemplate implements debounce code for a button or switch.">
+<g id="a_node5"><a xlink:href="class_debounce_template.html" target="_top" xlink:title="Implements debounce code for a button or switch.">
 <polygon fill="white" stroke="black" points="1242,-810 1242,-829 1367,-829 1367,-810 1242,-810"/>
 <text text-anchor="middle" x="1304.5" y="-817" font-family="Helvetica,sans-Serif" font-size="10.00">DebounceTemplate&lt; T &gt;</text>
 </a>
@@ -320,7 +320,7 @@ var sectionId = 'dynsection-0';
 <!-- Node5 -->
 <g id="node6" class="node">
 <title>Node5</title>
-<g id="a_node6"><a xlink:href="class_digital_output.html" target="_top" xlink:title=" ">
+<g id="a_node6"><a xlink:href="class_digital_output.html" target="_top" xlink:title="Configures the specified GPIO pin as an output pin, then sets the status of that pin to HIGH whenever...">
 <polygon fill="white" stroke="black" points="1249.5,-772 1249.5,-791 1359.5,-791 1359.5,-772 1249.5,-772"/>
 <text text-anchor="middle" x="1304.5" y="-779" font-family="Helvetica,sans-Serif" font-size="10.00">DigitalOutput&lt; bool &gt;</text>
 </a>
@@ -365,7 +365,7 @@ var sectionId = 'dynsection-0';
 <!-- Node8 -->
 <g id="node9" class="node">
 <title>Node8</title>
-<g id="a_node9"><a xlink:href="class_s_k_output.html" target="_top" xlink:title=" ">
+<g id="a_node9"><a xlink:href="class_s_k_output.html" target="_top" xlink:title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network.">
 <polygon fill="white" stroke="red" points="1263,-658 1263,-677 1346,-677 1346,-658 1263,-658"/>
 <text text-anchor="middle" x="1304.5" y="-665" font-family="Helvetica,sans-Serif" font-size="10.00">SKOutput&lt; T &gt;</text>
 </a>
@@ -428,7 +428,7 @@ var sectionId = 'dynsection-0';
 <!-- Node26 -->
 <g id="node15" class="node">
 <title>Node26</title>
-<g id="a_node15"><a xlink:href="class_rgb_led.html" target="_top" xlink:title=" ">
+<g id="a_node15"><a xlink:href="class_rgb_led.html" target="_top" xlink:title="A special device object that can be used to control a multi&#45;channel color rgb LED light using up to 3...">
 <polygon fill="white" stroke="black" points="627.5,-283 627.5,-302 677.5,-302 677.5,-283 627.5,-283"/>
 <text text-anchor="middle" x="652.5" y="-290" font-family="Helvetica,sans-Serif" font-size="10.00">RgbLed</text>
 </a>
@@ -443,7 +443,7 @@ var sectionId = 'dynsection-0';
 <!-- Node28 -->
 <g id="node17" class="node">
 <title>Node28</title>
-<g id="a_node17"><a xlink:href="class_p_w_m_output.html" target="_top" xlink:title="PWMOutput provides a cross platform mechanism for generating Pulse Width Modulation signals over one ...">
+<g id="a_node17"><a xlink:href="class_p_w_m_output.html" target="_top" xlink:title="Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GP...">
 <polygon fill="white" stroke="black" points="885.5,-692 885.5,-711 956.5,-711 956.5,-692 885.5,-692"/>
 <text text-anchor="middle" x="921" y="-699" font-family="Helvetica,sans-Serif" font-size="10.00">PWMOutput</text>
 </a>
@@ -572,7 +572,7 @@ var sectionId = 'dynsection-0';
 <!-- Node41 -->
 <g id="node26" class="node">
 <title>Node41</title>
-<g id="a_node26"><a xlink:href="class_system_status_led.html" target="_top" xlink:title=" ">
+<g id="a_node26"><a xlink:href="class_system_status_led.html" target="_top" xlink:title="Consumes the networking and websocket states and delta counts and updates the device LED accordingly....">
 <polygon fill="white" stroke="black" points="605,-412 605,-431 700,-431 700,-412 605,-412"/>
 <text text-anchor="middle" x="652.5" y="-419" font-family="Helvetica,sans-Serif" font-size="10.00">SystemStatusLed</text>
 </a>
@@ -633,7 +633,7 @@ var sectionId = 'dynsection-0';
 <!-- Node46 -->
 <g id="node30" class="node">
 <title>Node46</title>
-<g id="a_node30"><a xlink:href="class_frequency.html" target="_top" xlink:title=" ">
+<g id="a_node30"><a xlink:href="class_frequency.html" target="_top" xlink:title="A transform that divides its input value by the time elapsed since the last reading.">
 <polygon fill="white" stroke="black" points="1069,-419 1069,-438 1131,-438 1131,-419 1069,-419"/>
 <text text-anchor="middle" x="1100" y="-426" font-family="Helvetica,sans-Serif" font-size="10.00">Frequency</text>
 </a>
@@ -664,7 +664,7 @@ var sectionId = 'dynsection-0';
 <!-- Node49 -->
 <g id="node33" class="node">
 <title>Node49</title>
-<g id="a_node33"><a xlink:href="class_time_string.html" target="_top" xlink:title=" ">
+<g id="a_node33"><a xlink:href="class_time_string.html" target="_top" xlink:title="Consumes a time_t time object and produces a human readable string of the time for UTC in ISO 8601 fo...">
 <polygon fill="white" stroke="red" points="1068,-135 1068,-154 1132,-154 1132,-135 1068,-135"/>
 <text text-anchor="middle" x="1100" y="-142" font-family="Helvetica,sans-Serif" font-size="10.00">TimeString</text>
 </a>
@@ -725,7 +725,7 @@ var sectionId = 'dynsection-0';
 <!-- Node56 -->
 <g id="node39" class="node">
 <title>Node56</title>
-<g id="a_node39"><a xlink:href="class_transform.html" target="_top" xlink:title=" ">
+<g id="a_node39"><a xlink:href="class_transform.html" target="_top" xlink:title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">
 <polygon fill="white" stroke="red" points="603,-374 603,-393 702,-393 702,-374 603,-374"/>
 <text text-anchor="middle" x="652.5" y="-381" font-family="Helvetica,sans-Serif" font-size="10.00">Transform&lt; C, P &gt;</text>
 </a>
@@ -871,7 +871,7 @@ var sectionId = 'dynsection-0';
 <!-- Node71 -->
 <g id="node46" class="node">
 <title>Node71</title>
-<g id="a_node46"><a xlink:href="class_lambda_consumer.html" target="_top" xlink:title="Construct a new ValueConsumer to execute a single function.">
+<g id="a_node46"><a xlink:href="class_lambda_consumer.html" target="_top" xlink:title="Provides an easy way of calling a function based on the output of any ValueProducer.">
 <polygon fill="white" stroke="black" points="590,-110 590,-129 715,-129 715,-110 590,-110"/>
 <text text-anchor="middle" x="652.5" y="-117" font-family="Helvetica,sans-Serif" font-size="10.00">LambdaConsumer&lt; IN &gt;</text>
 </a>

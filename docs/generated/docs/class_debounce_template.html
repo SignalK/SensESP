@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('class_debounce_template.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_debounce_template.html" title="DebounceTemplate implements debounce code for a button or switch.">DebounceTemplate</a> implements debounce code for a button or switch.  
+<p>Implements debounce code for a button or switch.  
  <a href="class_debounce_template.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="debounce_8h_source.html">debounce.h</a>&gt;</code></p>
@@ -208,7 +208,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
 class DebounceTemplate&lt; T &gt;</h3>
 
-<p><a class="el" href="class_debounce_template.html" title="DebounceTemplate implements debounce code for a button or switch.">DebounceTemplate</a> implements debounce code for a button or switch. </p>
+<p>Implements debounce code for a button or switch. </p>
 <p>It's a passthrough transform that will output a value only if it's different from the previous output, and only if it's been ms_min_delay ms since the input was received, with no other input received since then.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -218,7 +218,7 @@ class DebounceTemplate&lt; T &gt;</h3>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ms_min_delay</td><td>The minimum amount of time that must have passed since the input was received by this <a class="el" href="class_transform.html">Transform</a> in order for the output to occur. If you are using this to debounce the output from <a class="el" href="class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state.">DigitalInputChange</a>, ms_min_delay should be set at least a little bit longer than DigitalInputChange::read_delay.</td></tr>
+    <tr><td class="paramname">ms_min_delay</td><td>The minimum amount of time that must have passed since the input was received by this <a class="el" href="class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">Transform</a> in order for the output to occur. If you are using this to debounce the output from <code><a class="el" href="class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state.">DigitalInputChange</a></code>, ms_min_delay should be set at least a little bit longer than <code>DigitalInputChange::read_delay</code>.</td></tr>
   </table>
   </dd>
 </dl>
@@ -229,8 +229,9 @@ class DebounceTemplate&lt; T &gt;</h3>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state.">DigitalInputChange</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="debounce_8h_source.html#l00031">31</a> of file <a class="el" href="debounce_8h_source.html">debounce.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="debounce_8h_source.html#l00032">32</a> of file <a class="el" href="debounce_8h_source.html">debounce.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9e01d0463e661167b1bb931bdb75e468"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9e01d0463e661167b1bb931bdb75e468">&#9670;&nbsp;</a></span>DebounceTemplate()</h2>
@@ -300,7 +301,7 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
     <tr><td class="paramname">input_channel</td><td>Consumers can have one or more inputs feeding them. This parameter allows you to specify which input number the producer is connecting to. For single input consumers, leave the index at zero. </td></tr>
