@@ -130,12 +130,12 @@ void OneWireTemperature::enable() {
 
 void OneWireTemperature::update() {
   dts->sensors->requestTemperaturesByAddress(address.data());
-
+  // temp converstion can take up to 750 ms, so wait before reading
   app.onDelay(750, [this]() { this->read_value(); });
 }
 
 void OneWireTemperature::read_value() {
-  // getTempC returns degrees Celsius but Signal K expects Kelvins
+  // getTempC returns degrees Celsius but Signal K expects Kelvin
   this->emit(dts->sensors->getTempC(address.data()) + 273.15);
 }
 
