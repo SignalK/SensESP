@@ -56,11 +56,11 @@ class INA219Value : public NumericSensor {
   INA219Value(INA219* ina219, INA219ValType val_type, uint read_delay = 500,
               String config_path = "");
   void enable() override final;
-  INA219* ina219;
+  INA219* ina219_;
 
  private:
-  INA219ValType val_type;
-  uint read_delay;
+  INA219ValType val_type_;
+  uint read_delay_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

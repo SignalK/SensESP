@@ -24,33 +24,33 @@ INA219::INA219(uint8_t addr, INA219CAL_t calibration_setting)
 INA219Value::INA219Value(INA219* ina219, INA219ValType val_type,
                          uint read_delay, String config_path)
     : NumericSensor(config_path),
-      ina219{ina219},
-      val_type{val_type},
-      read_delay{read_delay} {
+      ina219_{ina219},
+      val_type_{val_type},
+      read_delay_{read_delay} {
   load_configuration();
 }
 
 void INA219Value::enable() {
-  app.onRepeat(read_delay, [this]() {
-    switch (val_type) {
+  app.onRepeat(read_delay_, [this]() {
+    switch (val_type_) {
       case bus_voltage:
-        output = ina219->ada_ina219_->getBusVoltage_V();
+        output = ina219_->ada_ina219_->getBusVoltage_V();
         break;
       case shunt_voltage:
-        output = (ina219->ada_ina219_->getShuntVoltage_mV() /
+        output = (ina219_->ada_ina219_->getShuntVoltage_mV() /
                   1000);  // SK wants volts, not mV
         break;
       case current:
         output =
-            (ina219->ada_ina219_->getCurrent_mA() / 1000);  // SK wants amps, not mA
+            (ina219_->ada_ina219_->getCurrent_mA() / 1000);  // SK wants amps, not mA
         break;
       case power:
         output =
-            (ina219->ada_ina219_->getPower_mW() / 1000);  // SK want watts, not mW
+            (ina219_->ada_ina219_->getPower_mW() / 1000);  // SK want watts, not mW
         break;
       case load_voltage:
-        output = (ina219->ada_ina219_->getBusVoltage_V() +
-                  (ina219->ada_ina219_->getShuntVoltage_mV() / 1000));
+        output = (ina219_->ada_ina219_->getBusVoltage_V() +
+                  (ina219_->ada_ina219_->getShuntVoltage_mV() / 1000));
         break;
       default:
         debugE("FATAL: invalid val_type parameter.");
@@ -61,7 +61,7 @@ void INA219Value::enable() {
 }
 
 void INA219Value::get_configuration(JsonObject& root) {
-  root["read_delay"] = read_delay;
+  root["read_delay"] = read_delay_;
   root["value"] = output;
 }
 
@@ -82,6 +82,6 @@ bool INA219Value::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  read_delay = config["read_delay"];
+  read_delay_ = config["read_delay"];
   return true;
 }
