@@ -6,10 +6,8 @@
 
 // INA219 represents an ADAfruit (or compatible) INA219 High Side DC Current
 // Sensor.
-INA219::INA219(uint8_t addr, INA219CAL_t calibration_setting,
-               String config_path)
-    : Sensor(config_path) {
-  load_configuration();
+INA219::INA219(uint8_t addr, INA219CAL_t calibration_setting)
+    : Sensor() {
   ina219 = new Adafruit_INA219(addr);
   ina219->begin();
   // Default calibration in the Adafruit_INA219 constructor is 32V and 2A, so
