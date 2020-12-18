@@ -1,4 +1,3 @@
-#include <Adafruit_Sensor.h>
 #include <Arduino.h>
 #include <Wire.h>
 
@@ -6,14 +5,17 @@
 #include <string>
 
 #include "sensesp_app.h"
-#include "sensors/orientation_9dof_input.h"
-#include "sensors/sensor_nxp_fxos8700_fxas21002.h"
+#include "sensors/orientation_sensor.h"
 #include "signalk/signalk_output.h"
 
-#define PIN_I2C_SDA (23)  // Adjust to your board. A value of -1
-#define PIN_I2C_SCL (25)  // will use default Arduino pins.
+// Sensor hardware details: I2C addresses and pins       
+#define BOARD_ACCEL_MAG_I2C_ADDR    (0x1F) ///< I2C address on Adafruit breakout board
+#define BOARD_GYRO_I2C_ADDR         (0x21) ///< I2C address on Adafruit breakout board
+#define PIN_I2C_SDA (13)  //Adjust to your board. A value of -1
+#define PIN_I2C_SCL (12)  //will use default Arduino pins.
 
-#define ORIENTATION_SAMPLING_INTERVAL_MS (100)
+// How often orientation parameters are published via Signal K message
+#define ORIENTATION_REPORTING_INTERVAL_MS (100)
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
@@ -27,154 +29,222 @@ ReactESP app([]() {
   // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp();
 
-  // The "SignalK path" identifies this sensor to the SignalK server. Leaving
-  // this blank would indicate this particular sensor (or transform) does not
-  // broadcast SignalK data.
-  // If you have multiple sensors connected to your microcontoller (ESP), each
-  // one of them will (probably) have its own SignalK path variable. For
-  // example, if you have two propulsion engines, and you want the RPM of each
-  // of them to go to SignalK, you might have sk_path_portEngine =
-  // "propulsion.port.revolutions" and sk_path_starboardEngine =
-  // "propulsion.starboard.revolutions"
-  const char* sk_path_heading = "orientation.heading";
-  const char* sk_path_pitch = "orientation.pitch";
-  const char* sk_path_roll = "orientation.roll";
-  /* This example shows heading, pitch, and roll. If you want other parameters
-      as well, uncomment the appropriate path(s) from the following.
-  */
-  // const char* sk_path_accel_x     = "orientation.accel_x";
-  // const char* sk_path_accel_y     = "orientation.accel_y";
-  // const char* sk_path_accel_z     = "orientation.accel_z";
-  // const char* sk_path_turn_rate   = "orientation.turn_rate";
-  // const char* sk_path_roll_rate   = "orientation.roll_rate";
-  // const char* sk_path_pitch_rate  = "orientation.pitch_rate";
+  /**
+   * The "SignalK path" identifies this sensor to the Signal K server. Leaving
+   * this blank would indicate this particular sensor or transform does not
+   * broadcast Signal K data.
+   * If you have multiple sensors connected to your microcontroller (ESP),
+   * each of them will (probably) have its own Signal K path variable. For
+   * example, if you have two propulsion engines, and you want the RPM of
+   * each of them to go to Signal K, you might have
+   * sk_path_portEngine = "propulsion.port.revolutions" and
+   * sk_path_starboardEngine = "propulsion.starboard.revolutions"
+   * To find valid Signal K Paths look at this link (or later version):
+   * @see https://signalk.org/specification/1.5.0/doc/vesselsBranch.html
+   *
+   * Vessel heading can be indicated as headingCompass (uncorrected for
+   * Deviation) or as part of an attitude data group (i.e. yaw, pitch, roll).
+   * This example provides both.
+   */
+  const char* kSKPathHeading = "navigation.headingCompass";
+  const char* kSKPathAttitude = "navigation.attitude";
 
-  // The "Configuration path" is combined with "/config" to formulate a URL
-  // used by the RESTful API for retrieving or setting configuration data.
-  // It is ALSO used to specify a path to the SPIFFS file system
-  // where configuration data is saved on the MCU board. It should
-  // ALWAYS start with a forward slash if specified. If left blank,
-  // that indicates this sensor or transform does not have any
-  // configuration to save, or that you're not interested in doing
-  // run-time configuration.
-  // These two are necessary until a method is created to synthesize them.
-  const char* config_path_orientation_skpath = "/sensors/orientation/sk";
-  const char* config_path_heading = "/sensors/orientation/heading";
-  const char* config_path_pitch = "/sensors/orientation/pitch";
-  const char* config_path_roll = "/sensors/orientation/roll";
-  /* This example shows heading, pitch, and roll. If you want other parameters
-      as well, uncomment the appropriate path(s) from the following.
-  */
-  // const char* config_path_accel_x = "/sensors/orientation/accel_x"; 
-  // const char* config_path_accel_y = "/sensors/orientation/accel_y"; 
-  // const char* config_path_accel_z = "/sensors/orientation/accel_z"; 
-  // const char* config_path_turn_rate = "/sensors/orientation/turn_rate"; 
-  // const char* config_path_roll_rate = "/sensors/orientation/roll_rate";
-  // const char* config_path_pitch_rate = "/sensors/orientation/pitch_rate";
-  /* above arrangement of paths yields this sensor web interface structure:
-     sensors->orientation->heading
-                         ->pitch
-                         ->roll
-                         ->sk   (and this one, which allows setting the SK name
-     of sensor, only lists the last connect_to path, "orientation.roll" in this
-     case)
-  */
+  /**
+   * This example shows heading, pitch, and roll. If you want other parameters
+   * as well, uncomment the appropriate path(s) from the following.
+   * Signal K v1.5 does not describe paths for roll rate and pitch rate
+   * so these are provided using the same pattern as for rateOfTurn.
+   * Signal K v1.5 says path for temperature can include zone.
+   * Replace ecompass with a different zone if desired.
+   * Signal K v1.5 does not describe a path for acceleration.
+   */
+  // const char* kSKPathTurnRate   = "navigation.rateOfTurn";
+  // const char* kSKPathRollRate   = "navigation.rateOfRoll";
+  // const char* kSKPathPitchRate  = "navigation.rateOfPitch";
+  // const char* kSKPathTemperature =
+  //                "environment.inside.ecompass.temperature"; 
+  // const char* kSKPathAccel = "sensors.accelerometer.accel_xyz";
 
-  // Magnetic Heading data source, using 9 Degrees-of-freedom combination sensor
-  auto* NXP9DOF = new Orientation9DOF(PIN_I2C_SDA, PIN_I2C_SCL, config_path_heading);
+  /**
+   * If you are creating a new Signal K path that does not
+   * already exist in the specification, it is best to
+   * define "metadata" that describes your new value. This
+   * metadata will be reported to the Signal K server the first
+   * time your sensor reports its value(s) to the server.
+   */
+  // Uncomment from the following as needed.
+  //   SKMetadata* metadata_accel = new SKMetadata();
+  //   metadata_accel->description_ = "Acceleration in X,Y,Z axes";
+  //   metadata_accel->display_name_ = "Accelerometer";
+  //   metadata_accel->short_name_ = "Accel";
+  //   metadata_accel->units_ = "m/s^2";
+  //
+  //   SKMetadata* metadata_rate_of_roll = new SKMetadata();
+  //   metadata_rate_of_roll->description_ =
+  //        "Rate of Roll about bow-stern axis";
+  //   metadata_rate_of_roll->display_name_ = "Roll Rate";
+  //   metadata_rate_of_roll->short_name_ = "Roll Rate";
+  //   metadata_rate_of_roll->units_ = "rad/s";
+  //
+  //   SKMetadata* metadata_rate_of_pitch = new SKMetadata();
+  //   metadata_rate_of_pitch->description_ =
+  //        "Rate of Pitch about port-starboard axis";
+  //   metadata_rate_of_pitch->display_name_ = "Pitch Rate";
+  //   metadata_rate_of_pitch->short_name_ = "Pitch Rate";
+  //   metadata_rate_of_pitch->units_ = "rad/s";
+  //
+  //   SKMetadata* metadata_temperature = new SKMetadata();
+  //   metadata_temperature->description_ =
+  //        "Temperature reported by orientation sensor"
+  //   metadata_temperature->display_name_ = "Temperature at eCompass";
+  //   metadata_temperature->short_name_ = "Temp";
+  //   metadata_temperature->units_ = "K";
 
-  /*  Uncomment the following line during calibration - this will stream raw
-     readings to serial port, where they can be intercepted by the Motion Sensor
-     Calibration Tool. See Adafruit tutorial
-      https://learn.adafruit.com/adafruit-sensorlab-magnetometer-calibration/magnetic-calibration-with-motioncal
-      and Paul Stoffregen's app https://github.com/PaulStoffregen/MotionCal
-      After calibration values have been written to EEPROM/Flash, re-comment
-     following line to restore normal program flow.
+  /**
+   * The "Configuration path" is combined with "/config" to formulate a URL
+   * used by the RESTful API for retrieving or setting configuration data.
+   * It is ALSO used to specify a path to the file system
+   * where configuration data is saved on the MCU board. It should
+   * ALWAYS start with a forward slash if specified. If left blank,
+   * that indicates this sensor or transform does not have any
+   * configuration to save, or that you're not interested in doing
+   * run-time configuration.
+   * These two are necessary until a method is created to synthesize them.
+   */
+  const char* kConfigPathSensor = "/sensors/orientation/value_settings";
+  const char* kConfigPathAttitude = "/sensors/attitude/value_settings";
+  const char* kConfigPathAttitude_SK = "/sensors/attitude/sk";
+  const char* kConfigPathHeading = "/sensors/heading/value_settings";
+  const char* kConfigPathHeading_SK = "/sensors/heading/sk";
+  // It may make sense to use the same path (not _sk) for all types of readings
+  // from the one sensor.
+  /**
+   Above arrangement of config paths yields this web interface structure:
+   Note the sensor itself has no sk path at it is not a Signal K emitter.
+   sensors->orientation
+                   ->value_settings
+           ->attitude
+                   ->sk_path
+                   ->value_settings
+           ->heading
+                   ->sk_path
+                   ->value_settings
   */
-  //  NXP9DOF->stream_raw_values();  //continuous raw data collection. This call
-  //  does not return.
+  // This example shows attitude and compass heading. If you want other parameters
+  // as well, uncomment and modify the appropriate path(s) from the following 
+  // or create new paths as needed.
+  //   const char* kConfigPathTurnRate_SK    = "/sensors/rateOfTurn/sk_path";
+  //   const char* kConfigPathTurnRate       = "/sensors/rateOfTurn/value_settings";
+  //   const char* kConfigPathAccelXYZ       = "/sensors/acceleration/value_settings";
+  //   const char* kConfigPathAccelXYZ_SK    = "/sensors/acceleration/sk_path";
+  //   const char* kConfigPathTemperature    = "/sensors/temperature/value_settings";
+  //   const char* kConfigPathTemperature_SK = "/sensors/temperature/sk_path";
 
-  // Start periodic readings from orientation sensor. Note that the physical
-  //  sensor is read at whatever rate is specified for the heading
-  //  parameter; all other parameters are retrieved from variables that
-  //  are updated only at the time of the sensor read. So, ensure that
-  //  the sampling rate specified for the heading parameter is the same
-  //  or faster than any of the other parameters (otherwise those other
-  //  parameters will not update at the rate you expect).
-  auto* sensor_heading =
-      new Read9DOF(NXP9DOF, Read9DOF::compass_hdg, ORIENTATION_SAMPLING_INTERVAL_MS,
-                   config_path_heading);
+  /**
+   * Create and initialize the Orientation data source.
+   * This uses a 9 Degrees-of-freedom combination sensor that provides multiple
+   * orientation parameters. Selection of which particular parameters are
+   * output is performed later when the value producers are created.
+   */
+  auto* orientation_sensor =
+      new OrientationSensor(PIN_I2C_SDA, PIN_I2C_SCL, BOARD_ACCEL_MAG_I2C_ADDR,
+                          BOARD_GYRO_I2C_ADDR, kConfigPathSensor);
+
+  /* Magnetic Calibration occurs during regular runtime. After power-on, move
+   * the sensor through a series of rolls, pitches and yaws. After enough
+   * readings have been collected (takes 15-30 seconds when rotating the sensor
+   * by hand) then the sensor should be calibrated.
+   * TODO: Calibrations can be saved in non-volatile memory, but
+   * the command to do this has not been implemented yet in SensESP (though it
+   * does exist in the Sensor Fusion library).
+   * TODO: It is possible to have an indication that the sensor is uncalibrated
+   * but this has not been implemented.
+   */
+
+  /*
+   * Create the desired outputs from orientation sensor. Note that the physical
+   * sensor is read at whatever rate is specified in the Sensor Fusion library's
+   * build.h file (#define FUSION_HZ), currently set to 40 Hz. Fusion
+   * calculations are run at that same rate. This is different than, and
+   * usually faster than, the rate at which orientation parameters are output.
+   * Reportng orientation values within SensESP can happen at any desired
+   * rate, though if it is more often than the fusion rate then
+   * there will be duplicated values. This example uses a 10 Hz outout rate.
+   * It is not necessary that all the values be output at the same rate (for
+   * example, it likely makes sense to report temperature at a slower rate).
+   */
+  auto* sensor_heading = new OrientationValues(
+      orientation_sensor, OrientationValues::kCompassHeading,
+      ORIENTATION_REPORTING_INTERVAL_MS, kConfigPathHeading);
   sensor_heading->connect_to(
-      new SKOutputNumber(sk_path_heading, config_path_orientation_skpath));
+      new SKOutputNumber(kSKPathHeading, kConfigPathHeading_SK));
 
-  auto* sensor_pitch = new Read9DOF(
-      NXP9DOF, Read9DOF::pitch, ORIENTATION_SAMPLING_INTERVAL_MS * 5, config_path_pitch);
-  sensor_pitch->connect_to(
-      new SKOutputNumber(sk_path_pitch, config_path_orientation_skpath));
+  auto* sensor_attitude = new AttitudeValues(
+      orientation_sensor, ORIENTATION_REPORTING_INTERVAL_MS,
+      kConfigPathAttitude);
+  sensor_attitude->connect_to(
+      new SKOutputAttitude(kSKPathAttitude, kConfigPathAttitude_SK));
 
-  auto* sensor_roll = new Read9DOF(
-      NXP9DOF, Read9DOF::roll, ORIENTATION_SAMPLING_INTERVAL_MS * 5, config_path_roll);
-  sensor_roll->connect_to(
-      new SKOutputNumber(sk_path_roll, config_path_orientation_skpath));
+  // This example shows attitude and heading. If you want other parameters
+  // as well, uncomment the appropriate connections from the following.
+  //   auto* sensor_turn_rate = new OrientationValues(
+  //       orientation_sensor, OrientationValues::kRateOfTurn,
+  //       ORIENTATION_REPORTING_INTERVAL_MS, kConfigPathTurnRate);
+  //   sensor_turn_rate->connect_to(
+  //       new SKOutputNumber(kSKPathTurnRate, kConfigPathTurnRate_SK));
 
-  /* This example shows heading, pitch, and roll. If you want other parameters
-      as well, uncomment the appropriate connections from the following.
+  //   auto* sensor_roll_rate = new OrientationValues(
+  //       orientation_sensor, OrientationValues::kRateOfRoll,
+  //       ORIENTATION_REPORTING_INTERVAL_MS, kConfigPathRollRate);
+  //   sensor_roll_rate->connect_to(
+  //       new SKOutputNumber(kSKPathRollRate, kConfigPathRollRate_SK));
 
- auto* sensor_turn_rate =
-      new Read9DOF(NXP9DOF, Read9DOF::rate_of_turn, ORIENTATION_SAMPLING_INTERVAL_MS*5,
-                   config_path_turn_rate);
-  sensor_turn_rate->connect_to(
-      new SKOutputNumber(sk_path_turn_rate, config_path_orientation_skpath));
+  //   auto* sensor_pitch_rate = new OrientationValues(
+  //       orientation_sensor, OrientationValues::kRateOfPitch,
+  //       ORIENTATION_REPORTING_INTERVAL_MS, kConfigPathPitchRate);
+  //   sensor_pitch_rate->connect_to(
+  //       new SKOutputNumber(kSKPathPitchRate, kConfigPathPitchRate_SK));
 
- auto* sensor_roll_rate =
-      new Read9DOF(NXP9DOF, Read9DOF::rate_of_roll, ORIENTATION_SAMPLING_INTERVAL_MS*5,
-                   config_path_roll_rate);
-  sensor_roll_rate->connect_to(
-      new SKOutputNumber(sk_path_roll_rate, config_path_orientation_skpath));
+  // TODO - it makes sense to send all three accel values (XYZ) in
+  // one SK package. The needed data structure is not yet defined in
+  // SensESP. The following sends the X accel as a single value.
+  //   auto* sensor_accel_x = new OrientationValues(
+  //       orientation_sensor, OrientationValues::kAccelerationX,
+  //       ORIENTATION_REPORTING_INTERVAL_MS, kConfigPathAccelXYZ);
+  //   sensor_accel_x->connect_to(
+  //       new SKOutputNumber(kSKPathAccel, kConfigPathAccelXYZ_SK));
 
- auto* sensor_pitch_rate =
-      new Read9DOF(NXP9DOF, Read9DOF::rate_of_pitch, ORIENTATION_SAMPLING_INTERVAL_MS*5,
-                   config_path_pitch_rate);
-  sensor_pitch_rate->connect_to(
-      new SKOutputNumber(sk_path_pitch_rate, config_path_orientation_skpath));
+  //   auto* sensor_temperature =
+  //       new OrientationValues(orientation_sensor,
+  //       OrientationValues::kTemperature,
+  //                             1000, kConfigPathTemperature);
+  //   sensor_temperature
+  //       ->connect_to(new Linear(1.0, 0.0, "/sensors/temperature/calibrate"))
+  //       ->connect_to(new SKOutputNumber(
+  //           kSKPathTemperature, kConfigPathTemperature_SK,
+  //           metadata_temperature));
 
- auto* sensor_accel_x =
-      new Read9DOF(NXP9DOF, Read9DOF::acceleration_x, ORIENTATION_SAMPLING_INTERVAL_MS*5,
-                   config_path_accel_x);
-  sensor_accel_x->connect_to(
-      new SKOutputNumber(sk_path_accel_x, config_path_orientation_skpath));
-
- auto* sensor_accel_y =
-      new Read9DOF(NXP9DOF, Read9DOF::acceleration_y, ORIENTATION_SAMPLING_INTERVAL_MS*5,
-                   config_path_accel_y);
-  sensor_accel_y->connect_to(
-      new SKOutputNumber(sk_path_accel_y, config_path_orientation_skpath));
-
- auto* sensor_accel_z =
-      new Read9DOF(NXP9DOF, Read9DOF::acceleration_z, ORIENTATION_SAMPLING_INTERVAL_MS*5,
-                   config_path_accel_z);
-  sensor_accel_z->connect_to(
-      new SKOutputNumber(sk_path_accel_z, config_path_orientation_skpath));
+  /**
+   *  Relationship of the Axes and the terminology:
+   * X,Y,Z are orthogonal, in a Right-handed coordinate system:
+   * think of the X axis pointing West, Y pointing South, and Z pointing up.
+   * On the Adafruit FXOS8700/FXAS21002 sensor PCB, the axes are printed
+   * on the top-side silkscreen.
+   * 
+   * Acceleration is measured in the direction of the corresponding axis.
+   * 
+   * If the sensor is mounted with the X-axis pointing to the bow of the boat
+   * and the Y-axis pointing to Port, then Z points up and the following applies:
+   *  Heading is rotation about the Z-axis. It increases with rotation to starboard.
+   *  Pitch is rotation about the Y-axis. Positive is when the bow points up.
+   *  Roll is rotation about the X-axis. Positive is rolling to starboard.
+   *  Turn-rate is rotation about the Z-axis. Positive is increasing bearing.
+   *  Roll-rate is rotation about the X-axis. Positive is rolling to starboard.
+   *  Pitch-rate is rotation about the Y-axis. Positive is bow rising.
+   * 
+   * If the sensor is mounted differently, or you prefer an alternate nomenclature,
+   * the get___() methods in sensor_fusion_class.cpp can be adjusted.
   */
-  /*  Relationship of the Axes and the terminology:
-  X,Y,Z are orthogonal, in a Right-handed coordinate system:
-  think of the X axis pointing West, Y pointing South, and Z pointing up.
-  On the Adafruit FXOS8700/FXAS21002 sensor PCB, the axes are printed
-  on the top-side silkscreen.
-  Acceleration is measured in the direction of the corresponding axis.
-
-  If the sensor is mounted with the X-axis pointing to the bow of the boat
-  and the Y-axis pointing to Port, then Z points up and the following applies:
-  Heading is rotation about the Z-axis. It increases with rotation to starboard.
-  Pitch is rotation about the Y-axis. Positive is when the bow points up.
-  Roll is rotation about the X-axis. Positive is rolling to starboard.
-  Turn-rate is rotation about the Z-axis. Positive is increasing bearing.
-  Roll-rate is rotation about the X-axis. Positive is rolling to starboard.
-  Pitch-rate is rotation about the Y-axis. Positive is bow rising.
-
-  If the sensor is mounted differently, or you prefer an alternate nomenclature,
-  the get___() methods in sensor_NXP_FXOS8700_FXAS21002.cpp can be adjusted.
-*/
 
   // Start the SensESP application running
   sensesp_app->enable();

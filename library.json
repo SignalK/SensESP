@@ -83,15 +83,6 @@
     { 
       "name": "Adafruit BMP280 Library"
     },
-    { 
-      "name": "Adafruit FXAS21002C"
-    },
-    { 
-      "name": "Adafruit FXOS8700"
-    },
-    {
-      "name": "Adafruit Sensor Calibration"
-    },
     {
       "name": "Adafruit SHT31 Library"
     },
@@ -108,11 +99,11 @@
       "name": "Adafruit BusIO"
     },
     {
-      "name": "Adafruit AHRS"
-    },
-    {
       "name": "RemoteDebug",
       "version": "https://github.com/JoaoLopesF/RemoteDebug.git#0b5a9c1a49fd2ade0e3cadc3a3707781e819359a" 
+    },
+    { "name": "OrientationSensorFusion-ESP",
+      "version": "https://github.com/BjarneBitscrambler/OrientationSensorFusion-ESP"
     }
   ],
   "version": "1.0.1",
