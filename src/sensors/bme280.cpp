@@ -1,13 +1,12 @@
 #include "bme280.h"
 
 #include "sensesp.h"
-//#include "i2c_tools.h"
 #include <RemoteDebug.h>
 
 // BME280 represents an ADAfruit (or compatible) BME280 temperature / pressure /
 // humidity sensor.
-BME280::BME280(uint8_t addr, String config_path)
-    : Sensor(config_path), addr_{addr} {
+BME280::BME280(uint8_t addr)
+    : Sensor(), addr_{addr} {
   load_configuration();
   adafruit_bme280_ = new Adafruit_BME280();
   check_status();
@@ -59,14 +58,12 @@ void BME280Value::enable() {
 
 void BME280Value::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay_;
-  root["value"] = output;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
     }
   })###";
 

@@ -26,7 +26,7 @@
  **/
 class BME280 : public Sensor {
  public:
-  BME280(uint8_t addr = 0x77, String config_path = "");
+  BME280(uint8_t addr = 0x77);
   Adafruit_BME280* adafruit_bme280_;
 
  private:
