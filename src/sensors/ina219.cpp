@@ -8,15 +8,15 @@
 // Sensor.
 INA219::INA219(uint8_t addr, INA219CAL_t calibration_setting)
     : Sensor() {
-  ina219 = new Adafruit_INA219(addr);
-  ina219->begin();
+  ada_ina219_ = new Adafruit_INA219(addr);
+  ada_ina219_->begin();
   // Default calibration in the Adafruit_INA219 constructor is 32V and 2A, so
   // that's what it will be unless it's set to something different in the call
   // to this constructor:
   if (calibration_setting == cal32_1) {
-    ina219->setCalibration_32V_1A();
+    ada_ina219_->setCalibration_32V_1A();
   } else if (calibration_setting == cal16_400) {
-    ina219->setCalibration_16V_400mA();
+    ada_ina219_->setCalibration_16V_400mA();
   }
 }
 
@@ -34,23 +34,23 @@ void INA219Value::enable() {
   app.onRepeat(read_delay, [this]() {
     switch (val_type) {
       case bus_voltage:
-        output = ina219->ina219->getBusVoltage_V();
+        output = ina219->ada_ina219_->getBusVoltage_V();
         break;
       case shunt_voltage:
-        output = (ina219->ina219->getShuntVoltage_mV() /
+        output = (ina219->ada_ina219_->getShuntVoltage_mV() /
                   1000);  // SK wants volts, not mV
         break;
       case current:
         output =
-            (ina219->ina219->getCurrent_mA() / 1000);  // SK wants amps, not mA
+            (ina219->ada_ina219_->getCurrent_mA() / 1000);  // SK wants amps, not mA
         break;
       case power:
         output =
-            (ina219->ina219->getPower_mW() / 1000);  // SK want watts, not mW
+            (ina219->ada_ina219_->getPower_mW() / 1000);  // SK want watts, not mW
         break;
       case load_voltage:
-        output = (ina219->ina219->getBusVoltage_V() +
-                  (ina219->ina219->getShuntVoltage_mV() / 1000));
+        output = (ina219->ada_ina219_->getBusVoltage_V() +
+                  (ina219->ada_ina219_->getShuntVoltage_mV() / 1000));
         break;
       default:
         debugE("FATAL: invalid val_type parameter.");

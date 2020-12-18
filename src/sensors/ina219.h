@@ -34,14 +34,14 @@ enum INA219CAL_t { cal32_2, cal32_1, cal16_400 };
 class INA219 : public Sensor {
  public:
   INA219(uint8_t addr = 0x40, INA219CAL_t calibration_setting = cal32_2);
-  Adafruit_INA219* ina219;
+  Adafruit_INA219* ada_ina219_;
 };
 
 
 /**
  * @brief INA219Value reads and outputs the specified value of an INA219 sensor.
  * 
- * @param ina219 A pointer to an instance of an INA2xx.
+ * @param ina219 A pointer to an instance of an INA219.
  * 
  * @param val_type The type of value you're reading:
  *      bus_voltage, shunt_voltage, current, power, or load_voltage.
