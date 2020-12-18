@@ -9,6 +9,8 @@
 /**
  * @brief Sets a GPIO pin to whatever the input is (true = HIGH,
  * false = LOW), and passes the value on to the next ValueConsumer.
+ * 
+ * @param pin Pin number of the pin you want to output to.
  */
 class DigitalOutput : public BooleanTransform {
  public:
