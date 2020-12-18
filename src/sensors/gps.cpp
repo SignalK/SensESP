@@ -4,9 +4,9 @@
 
 #include "sensesp.h"
 
-GPSInput::GPSInput(Stream* rx_stream, String config_path)
-    : Sensor(config_path) {
-  this->rx_stream_ = rx_stream;
+GPSInput::GPSInput(Stream* rx_stream)
+    : Sensor() {
+  rx_stream_ = rx_stream;
 
   nmea_parser_.add_sentence_parser(new GPGGASentenceParser(&nmea_data_));
   nmea_parser_.add_sentence_parser(new GPGLLSentenceParser(&nmea_data_));
@@ -15,14 +15,13 @@ GPSInput::GPSInput(Stream* rx_stream, String config_path)
   nmea_parser_.add_sentence_parser(new PSTI030SentenceParser(&nmea_data_));
   nmea_parser_.add_sentence_parser(new PSTI032SentenceParser(&nmea_data_));
 
-  load_configuration();
 }
 
 void GPSInput::enable() {
   // enable reading the serial port
   app.onAvailable(*rx_stream_, [this]() {
-    while (this->rx_stream_->available()) {
-      nmea_parser_.handle(this->rx_stream_->read());
+    while (rx_stream_->available()) {
+      nmea_parser_.handle(rx_stream_->read());
     }
   });
 

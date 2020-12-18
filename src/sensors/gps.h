@@ -14,7 +14,7 @@
 
 class GPSInput : public Sensor {
  public:
-  GPSInput(Stream* rx_stream, String config_path="");
+  GPSInput(Stream* rx_stream);
   virtual void enable() override final;
   NMEAData nmea_data_;
  private:
