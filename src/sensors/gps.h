@@ -4,17 +4,22 @@
 #include "sensor.h"
 #include "system/nmea_parser.h"
 
-// Support for a GPS module communicating with NMEA-0183
-// messages over a serial interface
+/**
+ * @brief Support for a GPS module communicating with NMEA-0183
+ * messages over a serial interface.
+ * 
+ * @param rx_stream Pointer to the Stream of incoming GPS data over
+ * a serial connection. 
+ **/ 
 
 class GPSInput : public Sensor {
  public:
   GPSInput(Stream* rx_stream, String config_path="");
   virtual void enable() override final;
-  NMEAData nmea_data;
+  NMEAData nmea_data_;
  private:
-  Stream* rx_stream;
-  NMEAParser nmea_parser;
+  Stream* rx_stream_;
+  NMEAParser nmea_parser_;
 };
 
 // must parse the following sentences:
