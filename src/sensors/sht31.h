@@ -24,9 +24,6 @@ class SHT31 : public Sensor {
  public:
   SHT31(uint8_t addr = 0x44);
   Adafruit_SHT31* adafruit_sht31;
-
- private:
-  uint8_t addr;
 };
 
 
