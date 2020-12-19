@@ -22,7 +22,7 @@ void UltrasonicDistance::enable() {
       yield();
     }
     digitalWrite(trigger_pin, LOW);
-    this->emit(pulseIn(input_pin, HIGH, 50000));  // 50 ms timeout
+    this->emit(pulseIn(input_pin, HIGH, 50000));  // 50 microsecond timeout
   });
 }
 
