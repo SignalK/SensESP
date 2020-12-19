@@ -90,6 +90,11 @@ class SKPutRequestBase : public SKRequest, public Configurable {
   virtual String get_config_schema() override;
 
   /**
+   * Returns the Signal K path this object makes requests to
+   */
+  String get_sk_path() { return sk_path; }
+
+  /**
    * Returns TRUE if there is currently a PUT request pending
    * (i.e. this class has send a request, and it has not yet 
    * received a reply or timeout)
