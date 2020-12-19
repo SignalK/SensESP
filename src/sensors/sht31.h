@@ -23,7 +23,7 @@
 class SHT31 : public Sensor {
  public:
   SHT31(uint8_t addr = 0x44);
-  Adafruit_SHT31* adafruit_sht31;
+  Adafruit_SHT31* adafruit_sht31_;
 };
 
 
@@ -44,11 +44,11 @@ class SHT31Value : public NumericSensor {
   SHT31Value(SHT31* sht31, SHT31ValType val_type, uint read_delay = 500,
              String config_path = "");
   void enable() override final;
-  SHT31* sht31;
+  SHT31* sht31_;
 
  private:
-  SHT31ValType val_type;
-  uint read_delay;
+  SHT31ValType val_type_;
+  uint read_delay_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
