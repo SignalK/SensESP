@@ -140,7 +140,6 @@ void OneWireTemperature::read_value() {
 }
 
 void OneWireTemperature::get_configuration(JsonObject& root) {
-  root["value"] = output;
   char addr_str[24];
   owda_to_string(addr_str, address);
   root["address"] = addr_str;
@@ -151,8 +150,7 @@ static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
         "address": { "title": "OneWire address", "type": "string" },
-        "found": { "title": "Device found", "type": "boolean", "readOnly": true },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "found": { "title": "Device found", "type": "boolean", "readOnly": true }
     }
   })";
 

@@ -44,6 +44,9 @@ class DallasTemperatureSensors : public Sensor {
  * sensor. If you have X sensors connected to your ESP, you need to create
  * X instances of this class in main.cpp.
  * 
+ * All instances of this class have
+ * a pointer to the same instance of DallasTemperatureSensors.
+ * 
  * Temperature is read in Celsius, then converted to Kelvin before sending
  * to Signal K.
  * 
@@ -54,7 +57,7 @@ class DallasTemperatureSensors : public Sensor {
  * 
  * @see https://github.com/SignalK/SensESP/tree/master/examples/thermocouple_temperature_sensor
  * 
- * @param dts Pointer to an instance of a DalassTemperatureSensors class.
+ * @param dts Pointer to an instance of a DallasTemperatureSensors class.
  * 
  * @param read_delay How often to read the temperature. It takes up to 750 ms for the data
  * to be read by the chip, so this parameter should not be less than 750. You should
