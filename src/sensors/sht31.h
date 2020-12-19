@@ -6,12 +6,19 @@
 
 #include "sensor.h"
 
-// The SHT31 classes are based on the ADAfruit_SHT31 library.
+/* The SHT31 classes are based on the ADAfruit_SHT31 library. */
 
-// SHT31 represents an ADAfruit (or compatible) SHT31 temperature & humidity
-// sensor. The constructor creates a pointer to the instance, and starts up the
-// sensor. The pointer is passed to SHT31value, which retrieves the specified
-// value.
+/** 
+ * @brief SHT31 represents an ADAfruit (or compatible) SHT31 temperature & humidity
+ * sensor. 
+ * 
+ * The constructor creates a pointer to the sensor, and starts up the
+ * sensor. The pointer is passed to SHT31value, which retrieves the specified
+ * value.
+ * 
+ * @param addr The memory address of the sensor. Defaults to 0x44, but other
+ * addresses are available for some SHT31 chips. See the datasheet.
+**/
 
 class SHT31 : public Sensor {
  public:
@@ -23,7 +30,17 @@ class SHT31 : public Sensor {
 };
 
 
-// SHT31Value reads and outputs the specified value of a SHT31 sensor.
+/** 
+ * @brief SHT31Value reads and outputs the specified value of an SHT31 sensor
+ * 
+ * @param sht31 A pointer to an instance of a SHT31.
+ * 
+ * @param val_type The type of value you're reading: temperature or humidity.
+ * 
+ * @param read_delay How often to read the sensor - in ms.
+ * 
+ * @param config_path Path in the Config UI to configure read_delay
+ **/
 class SHT31Value : public NumericSensor {
  public:
   enum SHT31ValType { temperature, humidity };
