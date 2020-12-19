@@ -34,7 +34,6 @@ class DallasTemperatureSensors : public Sensor {
   DallasTemperature* sensors_;
  private:
   OneWire* onewire_;
-  //uint8_t next_sensor_ = 0;
   std::set<OWDevAddr> known_addresses_;
   std::set<OWDevAddr> registered_addresses_;
 };
@@ -75,7 +74,6 @@ class OneWireTemperature : public NumericSensor {
   virtual String get_config_schema() override;
 
  private:
-  //OneWire* onewire;
   DallasTemperatureSensors* dts_;
   uint read_delay_;
   bool found_ = true;
