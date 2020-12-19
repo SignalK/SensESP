@@ -10,7 +10,7 @@ template <typename T>
 void RepeatReport<T>::enable() {
   SymmetricTransform<T>::enable();
   app.onRepeat(10, [this]() {
-    if (last_update_interval_ > max_silence_interval_) {
+    if (max_silence_interval_ > 0 && last_update_interval_ > max_silence_interval_) {
       this->last_update_interval_ = 0;
       this->notify();
     }
