@@ -26,9 +26,9 @@ class UltrasonicDistance : public NumericSensor {
   void enable() override final;
 
  private:
-  int8_t trigger_pin;
-  int8_t input_pin;
-  uint read_delay;
+  int8_t trigger_pin_;
+  int8_t input_pin_;
+  uint read_delay_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

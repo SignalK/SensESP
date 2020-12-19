@@ -6,28 +6,28 @@
 UltrasonicDistance::UltrasonicDistance(int8_t trig_pin, int8_t input_pin,
                                        uint read_delay, String config_path)
     : NumericSensor(config_path),
-      trigger_pin{trig_pin},
-      input_pin{input_pin},
-      read_delay{read_delay} {
+      trigger_pin_{trig_pin},
+      input_pin_{input_pin},
+      read_delay_{read_delay} {
   pinMode(trig_pin, OUTPUT);
   pinMode(input_pin, INPUT_PULLUP);
   load_configuration();
 }
 
 void UltrasonicDistance::enable() {
-  app.onRepeat(read_delay, [this]() {
-    digitalWrite(trigger_pin, HIGH);
+  app.onRepeat(read_delay_, [this]() {
+    digitalWrite(trigger_pin_, HIGH);
     long last_time = micros();
     while (micros() - last_time < 100) {
       yield();
     }
-    digitalWrite(trigger_pin, LOW);
-    this->emit(pulseIn(input_pin, HIGH, 50000));  // 50 microsecond timeout
+    digitalWrite(trigger_pin_, LOW);
+    this->emit(pulseIn(input_pin_, HIGH, 50000));  // 50 microsecond timeout
   });
 }
 
 void UltrasonicDistance::get_configuration(JsonObject& root) {
-  root["read_delay"] = read_delay;
+  root["read_delay"] = read_delay_;
   root["value"] = output;
 };
 
@@ -48,6 +48,6 @@ bool UltrasonicDistance::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  read_delay = config["read_delay"];
+  read_delay_ = config["read_delay"];
   return true;
 }
