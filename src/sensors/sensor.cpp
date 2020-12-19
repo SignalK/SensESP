@@ -1,9 +1,9 @@
 #include "sensor.h"
 
-std::set<Sensor*> Sensor::sensors;
+std::set<Sensor*> Sensor::sensors_;
 
 Sensor::Sensor(String config_path) : Configurable{config_path}, Enable(10) {
-  sensors.insert(this);
+  sensors_.insert(this);
 }
 
 NumericSensor::NumericSensor(String config_path)
