@@ -31,12 +31,12 @@ class DallasTemperatureSensors : public Sensor {
   void enable() override final {}
   bool register_address(const OWDevAddr& addr);
   bool get_next_address(OWDevAddr* addr);
-  DallasTemperature* sensors;
+  DallasTemperature* sensors_;
  private:
-  OneWire* onewire;
-  uint8_t next_sensor = 0;
-  std::set<OWDevAddr> known_addresses;
-  std::set<OWDevAddr> registered_addresses;
+  OneWire* onewire_;
+  //uint8_t next_sensor_ = 0;
+  std::set<OWDevAddr> known_addresses_;
+  std::set<OWDevAddr> registered_addresses_;
 };
 
 /**
@@ -61,7 +61,7 @@ class DallasTemperatureSensors : public Sensor {
  * 
  * @param read_delay How often to read the temperature. It takes up to 750 ms for the data
  * to be read by the chip, so this parameter should not be less than 750. You should
- * probably make it 1000 or more, to be safe.
+ * probably make it 1000 (the default) or more, to be safe.
  * 
  * @param config_path The path to configure the sensor address in the Config UI.
  **/ 
@@ -75,11 +75,11 @@ class OneWireTemperature : public NumericSensor {
   virtual String get_config_schema() override;
 
  private:
-  OneWire* onewire;
-  DallasTemperatureSensors* dts;
-  uint read_delay;
-  bool found = true;
-  OWDevAddr address = {};
+  //OneWire* onewire;
+  DallasTemperatureSensors* dts_;
+  uint read_delay_;
+  bool found_ = true;
+  OWDevAddr address_ = {};
   void update();
   void read_value();
 };
