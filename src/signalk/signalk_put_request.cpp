@@ -15,9 +15,9 @@ static String uuid4() {
   return ESPTrueRandom.uuidToString(uuidNumber);
 }
 
-void SKRequest::send_request(DynamicJsonDocument& request,
-                             std::function<void(DynamicJsonDocument&)> callback,
-                             uint32_t timeout) {
+String SKRequest::send_request(DynamicJsonDocument& request,
+                               std::function<void(DynamicJsonDocument&)> callback,
+                               uint32_t timeout) {
   // Create a new PendingRequest object to track this request...
   PendingRequest* pending_request = new PendingRequest();
 
@@ -48,6 +48,8 @@ void SKRequest::send_request(DynamicJsonDocument& request,
   debugD("Sending websocket request to server: %s", request_txt.c_str());
 
   sensesp_app->send_to_server(request_txt);
+
+  return pending_request->request_id;
 }
 
 SKRequest::PendingRequest* SKRequest::get_request(String request_id) {
@@ -106,11 +108,18 @@ void SKPutRequestBase::send_put_request() {
   JsonObject put_data = root.createNestedObject("put");
   put_data["path"] = sk_path;
   set_put_value(put_data);
-  SKRequest::send_request(
-      doc,
-      [this](DynamicJsonDocument& response) { this->on_response(response); },
-      timeout);
+  this->pending_request_id_ =
+     SKRequest::send_request(
+         doc,
+         [this](DynamicJsonDocument& response) { this->on_response(response); },
+         timeout);
 }
+
+
+bool SKPutRequestBase::request_pending() {
+  return (get_request(this->pending_request_id_) != nullptr);
+}
+
 
 void SKPutRequestBase::on_response(DynamicJsonDocument& response) {
   String request_id = response["requestId"];

@@ -34,6 +34,14 @@ class SmartSwitchController : public BooleanTransform,
                               public ValueConsumer<String> {
 
      public:
+       /**
+        * The constructor
+        * @param auto_initialize If TRUE, the controller will emit an
+        *  initial "off" status when enabled. This is generally the
+        *  desired case unless this controller is mirroring the state
+        *  of a remote load.
+        */
+       SmartSwitchController(bool auto_initialize = true) : auto_initialize_{auto_initialize} {}
        void enable() override;
        void set_input(bool new_value, uint8_t input_channel = 0) override;
        void set_input(String new_value, uint8_t input_channel = 0) override;
@@ -41,6 +49,7 @@ class SmartSwitchController : public BooleanTransform,
 
      protected:
        bool is_on = false;
+       bool auto_initialize_;
 };
 
 #endif

@@ -29,10 +29,11 @@ class SKRequest {
    * from the server that correspond to the request.
    * @param timeout The number of milliseconds to wait for a COMPLETED or
    *  FAILED response to be received from the server
+   * @return The request Id that is sent to the server.
    */
-  static void send_request(DynamicJsonDocument& request,
-                           std::function<void(DynamicJsonDocument&)> callback,
-                           uint32_t timeout = 5000);
+  static String send_request(DynamicJsonDocument& request,
+                             std::function<void(DynamicJsonDocument&)> callback,
+                             uint32_t timeout = 5000);
 
   /**
    * Is called by the web socket code to handle any incoming request responses
@@ -40,7 +41,7 @@ class SKRequest {
    */
   static void handle_response(DynamicJsonDocument& response);
 
- private:
+ protected:
   /// PendingRequest is a utility class used internally for
   /// tracking websocket requests made to the SignalK server.
   class PendingRequest {
@@ -88,6 +89,13 @@ class SKPutRequestBase : public SKRequest, public Configurable {
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
+  /**
+   * Returns TRUE if there is currently a PUT request pending
+   * (i.e. this class has send a request, and it has not yet 
+   * received a reply or timeout)
+   */
+  bool request_pending();
+
  protected:
   /**
    * Sends the put request to the server
@@ -108,6 +116,7 @@ class SKPutRequestBase : public SKRequest, public Configurable {
 
   String sk_path;
   uint32_t timeout;
+  String pending_request_id_;
 };
 
 /**
@@ -137,8 +146,13 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
     if (ignore_duplicates && new_value == value) {
       return;
     }
-    this->value = new_value;
-    send_put_request();
+    if (!request_pending()) {
+       this->value = new_value;
+       send_put_request();
+    }
+    else {
+       debugW("Ignoring PUT request (previous request still outstanding)");
+    }
   };
 
   virtual void set_put_value(JsonObject& put_data) override {
