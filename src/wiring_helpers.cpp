@@ -79,35 +79,35 @@ void setup_fuel_flow_meter(int inflow_pin, int return_flow_pin) {
 
 GPSInput* setup_gps(Stream* rx_stream) {
   GPSInput* gps = new GPSInput(rx_stream);
-  gps->nmea_data.position.connect_to(
+  gps->nmea_data_.position.connect_to(
       new SKOutputPosition("navigation.position", ""));
-  gps->nmea_data.gnss_quality.connect_to(
+  gps->nmea_data_.gnss_quality.connect_to(
       new SKOutputString("navigation.methodQuality", ""));
-  gps->nmea_data.num_satellites.connect_to(
+  gps->nmea_data_.num_satellites.connect_to(
       new SKOutputInt("navigation.satellites", ""));
-  gps->nmea_data.horizontal_dilution.connect_to(
+  gps->nmea_data_.horizontal_dilution.connect_to(
       new SKOutputNumber("navigation.horizontalDilution", ""));
-  gps->nmea_data.geoidal_separation.connect_to(
+  gps->nmea_data_.geoidal_separation.connect_to(
       new SKOutputNumber("navigation.geoidalSeparation", ""));
-  gps->nmea_data.dgps_age.connect_to(
+  gps->nmea_data_.dgps_age.connect_to(
       new SKOutputNumber("navigation.differentialAge", ""));
-  gps->nmea_data.dgps_id.connect_to(
+  gps->nmea_data_.dgps_id.connect_to(
       new SKOutputNumber("navigation.differentialReference", ""));
-  gps->nmea_data.datetime.connect_to(
+  gps->nmea_data_.datetime.connect_to(
       new SKOutputTime("navigation.datetime", ""));
-  gps->nmea_data.speed.connect_to(
+  gps->nmea_data_.speed.connect_to(
       new SKOutputNumber("navigation.speedOverGround", ""));
-  gps->nmea_data.true_course.connect_to(
+  gps->nmea_data_.true_course.connect_to(
       new SKOutputNumber("navigation.courseOverGroundTrue", ""));
-  gps->nmea_data.variation.connect_to(
+  gps->nmea_data_.variation.connect_to(
       new SKOutputNumber("navigation.magneticVariation", ""));
-  gps->nmea_data.rtk_age.connect_to(
+  gps->nmea_data_.rtk_age.connect_to(
       new SKOutputNumber("navigation.rtkAge", ""));
-  gps->nmea_data.rtk_ratio.connect_to(
+  gps->nmea_data_.rtk_ratio.connect_to(
       new SKOutputNumber("navigation.rtkRatio", ""));
-  gps->nmea_data.baseline_length.connect_to(
+  gps->nmea_data_.baseline_length.connect_to(
       new SKOutputNumber("navigation.rtkBaselineLength", ""));
-  gps->nmea_data.baseline_course
+  gps->nmea_data_.baseline_course
       .connect_to(new SKOutputNumber("navigation.rtkBaselineCourse"))
       ->connect_to(new AngleCorrection(0, 0, "/sensors/heading/correction"))
       ->connect_to(new SKOutputNumber("navigation.headingTrue", ""));

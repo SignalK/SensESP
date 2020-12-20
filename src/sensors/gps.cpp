@@ -4,25 +4,24 @@
 
 #include "sensesp.h"
 
-GPSInput::GPSInput(Stream* rx_stream, String config_path)
-    : Sensor(config_path) {
-  this->rx_stream = rx_stream;
+GPSInput::GPSInput(Stream* rx_stream)
+    : Sensor() {
+  rx_stream_ = rx_stream;
 
-  nmea_parser.add_sentence_parser(new GPGGASentenceParser(&nmea_data));
-  nmea_parser.add_sentence_parser(new GPGLLSentenceParser(&nmea_data));
-  nmea_parser.add_sentence_parser(new GPRMCSentenceParser(&nmea_data));
-  nmea_parser.add_sentence_parser(new PSTISentenceParser(&nmea_data));
-  nmea_parser.add_sentence_parser(new PSTI030SentenceParser(&nmea_data));
-  nmea_parser.add_sentence_parser(new PSTI032SentenceParser(&nmea_data));
+  nmea_parser_.add_sentence_parser(new GPGGASentenceParser(&nmea_data_));
+  nmea_parser_.add_sentence_parser(new GPGLLSentenceParser(&nmea_data_));
+  nmea_parser_.add_sentence_parser(new GPRMCSentenceParser(&nmea_data_));
+  nmea_parser_.add_sentence_parser(new PSTISentenceParser(&nmea_data_));
+  nmea_parser_.add_sentence_parser(new PSTI030SentenceParser(&nmea_data_));
+  nmea_parser_.add_sentence_parser(new PSTI032SentenceParser(&nmea_data_));
 
-  load_configuration();
 }
 
 void GPSInput::enable() {
   // enable reading the serial port
-  app.onAvailable(*rx_stream, [this]() {
-    while (this->rx_stream->available()) {
-      nmea_parser.handle(this->rx_stream->read());
+  app.onAvailable(*rx_stream_, [this]() {
+    while (rx_stream_->available()) {
+      nmea_parser_.handle(rx_stream_->read());
     }
   });
 

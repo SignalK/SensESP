@@ -30,9 +30,9 @@ bool string_to_owda(OWDevAddr* addr, const char* str) {
 
 DallasTemperatureSensors::DallasTemperatureSensors(int pin, String config_path)
     : Sensor(config_path) {
-  onewire = new OneWire(pin);
-  sensors = new DallasTemperature(onewire);
-  sensors->begin();
+  onewire_ = new OneWire(pin);
+  sensors_ = new DallasTemperature(onewire_);
+  sensors_->begin();
 
   // DallasTemperature::getDeviceCount() doesn't work reliably with ESP32,
   // so sensors are found using getAddress()
@@ -42,9 +42,9 @@ DallasTemperatureSensors::DallasTemperatureSensors(int pin, String config_path)
   bool check_again = true;
   uint8_t sensor_index = 0;
   while (check_again) {
-    if (sensors->getAddress(addr, sensor_index)) {
+    if (sensors_->getAddress(addr, sensor_index)) {
       std::copy(std::begin(addr), std::end(addr), std::begin(owda));
-      known_addresses.insert(owda);
+      known_addresses_.insert(owda);
 #ifndef DEBUG_DISABLED
       char addrstr[24];
       owda_to_string(addrstr, owda);
@@ -56,33 +56,33 @@ DallasTemperatureSensors::DallasTemperatureSensors(int pin, String config_path)
   }
 
   // all conversions will by async
-  sensors->setWaitForConversion(false);
+  sensors_->setWaitForConversion(false);
   // always use maximum resolution
-  sensors->setResolution(12);
+  sensors_->setResolution(12);
 }
 
 bool DallasTemperatureSensors::register_address(const OWDevAddr& addr) {
-  auto search_known = known_addresses.find(addr);
-  if (search_known == known_addresses.end()) {
+  auto search_known = known_addresses_.find(addr);
+  if (search_known == known_addresses_.end()) {
     // address is not known
     return false;
   }
-  auto search_reg = registered_addresses.find(addr);
-  if (search_reg != registered_addresses.end()) {
+  auto search_reg = registered_addresses_.find(addr);
+  if (search_reg != registered_addresses_.end()) {
     // address is already registered
     return false;
   }
 
-  registered_addresses.insert(addr);
+  registered_addresses_.insert(addr);
   return true;
 }
 
 bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
   // find the next address from known_addresses which is
   // not present in registered_addresses
-  for (auto known : known_addresses) {
-    auto reg_it = registered_addresses.find(known);
-    if (reg_it == registered_addresses.end()) {
+  for (auto known : known_addresses_) {
+    auto reg_it = registered_addresses_.find(known);
+    if (reg_it == registered_addresses_.end()) {
       *addr = known;
       return true;
     }
@@ -92,67 +92,65 @@ bool DallasTemperatureSensors::get_next_address(OWDevAddr* addr) {
 
 OneWireTemperature::OneWireTemperature(DallasTemperatureSensors* dts,
                                        uint read_delay, String config_path)
-    : NumericSensor(config_path), dts{dts}, read_delay{read_delay} {
+    : NumericSensor(config_path), dts_{dts}, read_delay_{read_delay} {
   load_configuration();
-  if (address == null_ow_addr) {
+  if (address_ == null_ow_addr) {
     // previously unconfigured sensor
-    bool success = dts->get_next_address(&address);
+    bool success = dts_->get_next_address(&address_);
     if (!success) {
       debugE(
           "FATAL: Unable to allocate a OneWire sensor for %s. "
           "All sensors have already been configured. "
           "Check the physical wiring of your sensors.",
           config_path.c_str());
-      found = false;
+      found_ = false;
     } else {
       debugD("Registered a new OneWire sensor");
-      dts->register_address(address);
+      dts_->register_address(address_);
     }
   } else {
-    bool success = dts->register_address(address);
+    bool success = dts_->register_address(address_);
     if (!success) {
       char addrstr[24];
-      owda_to_string(addrstr, address);
+      owda_to_string(addrstr, address_);
       debugE(
           "FATAL: OneWire sensor %s at %s is missing. "
           "Check the physical wiring of your sensors.",
           config_path.c_str(), addrstr);
-      found = false;
+      found_ = false;
     }
   }
 }
 
 void OneWireTemperature::enable() {
-  if (found) {
-    app.onRepeat(read_delay, [this]() { this->update(); });
+  if (found_) {
+    app.onRepeat(read_delay_, [this]() { this->update(); });
   }
 }
 
 void OneWireTemperature::update() {
-  dts->sensors->requestTemperaturesByAddress(address.data());
-
+  dts_->sensors_->requestTemperaturesByAddress(address_.data());
+  // temp converstion can take up to 750 ms, so wait before reading
   app.onDelay(750, [this]() { this->read_value(); });
 }
 
 void OneWireTemperature::read_value() {
-  // getTempC returns degrees Celsius but Signal K expects Kelvins
-  this->emit(dts->sensors->getTempC(address.data()) + 273.15);
+  // getTempC returns degrees Celsius but Signal K expects Kelvin
+  this->emit(dts_->sensors_->getTempC(address_.data()) + 273.15);
 }
 
 void OneWireTemperature::get_configuration(JsonObject& root) {
-  root["value"] = output;
   char addr_str[24];
-  owda_to_string(addr_str, address);
+  owda_to_string(addr_str, address_);
   root["address"] = addr_str;
-  root["found"] = found;
+  root["found"] = found_;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
         "address": { "title": "OneWire address", "type": "string" },
-        "found": { "title": "Device found", "type": "boolean", "readOnly": true },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "found": { "title": "Device found", "type": "boolean", "readOnly": true }
     }
   })";
 
@@ -162,6 +160,6 @@ bool OneWireTemperature::set_configuration(const JsonObject& config) {
   if (!config.containsKey("address")) {
     return false;
   }
-  string_to_owda(&address, config["address"]);
+  string_to_owda(&address_, config["address"]);
   return true;
 }
