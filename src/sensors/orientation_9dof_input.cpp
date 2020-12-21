@@ -4,7 +4,6 @@
 
 #include "sensesp.h"
 
-
 Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                                  String config_path)
     : Sensor(config_path) {
@@ -99,14 +98,12 @@ void Read9DOF::update() {
 
 void Read9DOF::get_configuration(JsonObject& doc) {
   doc["read_delay"] = read_delay_;
-  doc["value"] = output;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
     }
   })###";
 
