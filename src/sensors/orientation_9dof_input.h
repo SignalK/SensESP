@@ -32,10 +32,7 @@ class Orientation9DOF : public Sensor {
                   String config_path = "");
   void stream_raw_values(void);  // used when calibrating
   // pointer to physical sensor
-  SensorNXP_FXOS8700_FXAS21002 *sensor_fxos_fxas;
-
-private:
- uint8_t addr;  // unused
+  SensorNXP_FXOS8700_FXAS21002 *sensor_fxos_fxas_;
 };
 
 /**
@@ -74,11 +71,11 @@ class Read9DOF : public NumericSensor {
   Read9DOF(Orientation9DOF* p9DOF, OrientationValType val_type = compass_hdg,
            uint read_delay = 100, String config_path = "");
   void enable() override final;
-  Orientation9DOF* orientation_9dof;
+  Orientation9DOF* orientation_9dof_;
 
  private:
-  OrientationValType val_type;
-  uint read_delay;
+  OrientationValType val_type_;
+  uint read_delay_;
   void update(void);
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
