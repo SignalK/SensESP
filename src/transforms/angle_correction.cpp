@@ -4,25 +4,25 @@
 
 AngleCorrection::AngleCorrection(float offset, float min_angle,
                                  String config_path)
-    : NumericTransform(config_path), offset{offset}, min_angle{min_angle} {
+    : NumericTransform(config_path), offset_{offset}, min_angle_{min_angle} {
   load_configuration();
 }
 
 void AngleCorrection::set_input(float input, uint8_t inputChannel) {
   // first the correction
-  float x = input + offset;
+  float x = input + offset_;
 
   // then wrap around the values
-  x = fmod(x - min_angle, 2 * M_PI);
+  x = fmod(x - min_angle_, 2 * M_PI);
   if (x < 0) {
     x += 2 * M_PI;
   }
-  this->emit(x + min_angle);
+  this->emit(x + min_angle_);
 }
 
 void AngleCorrection::get_configuration(JsonObject& root) {
-  root["offset"] = offset;
-  root["min_angle"] = min_angle;
+  root["offset"] = offset_;
+  root["min_angle"] = min_angle_;
   root["value"] = output;
 }
 
@@ -44,7 +44,7 @@ bool AngleCorrection::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  offset = config["offset"];
-  min_angle = config["min_angle"];
+  offset_ = config["offset"];
+  min_angle_ = config["min_angle"];
   return true;
 }
