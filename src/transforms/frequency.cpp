@@ -18,14 +18,12 @@ void Frequency::set_input(int input, uint8_t inputChannel) {
 
 void Frequency::get_configuration(JsonObject& root) {
   root["multiplier"] = multiplier_;
-  root["value"] = output;
 }
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "multiplier": { "title": "Multiplier", "type": "number" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "multiplier": { "title": "Multiplier", "type": "number" }
     }
   })###";
 
