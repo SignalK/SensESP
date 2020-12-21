@@ -5,9 +5,6 @@
 #include "sensesp.h"
 
 
-// Orientation9DOF represents a 9-Degrees-of-Freedom sensor (magnetometer,
-// accelerometer, and gyroscope), such as an
-// ADAfruit NXP FXOS8700 + FXAS21002 combination sensor.
 Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                                  String config_path)
     : Sensor(config_path) {
@@ -21,8 +18,8 @@ Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
   }
 }
 
+// Used only when calibrating. This method does not return.
 void Orientation9DOF::stream_raw_values(void) {
-  // Used only when calibrating. This method does not return.
   debugI("calling gatherCalibrationData()");
   while (true) {
     sensor_fxos_fxas->gatherCalibrationDataOnce(true);
@@ -30,12 +27,7 @@ void Orientation9DOF::stream_raw_values(void) {
   }
 }
 
-// Read9DOF() sets up access to the combo FXOS8700 + FXAS21002 sensor, loads
-// its configuration, and initializes the filter that turns raw data into
-// desired orientation parameter. For accurate filter output, sensor needs
-// to be calibrated first. OrientationValType val_type specifies what kind of
-// orientation parameter value is to be read (heading, linear accel, or angular
-// velocity)
+
 Read9DOF::Read9DOF(Orientation9DOF* orientation_9dof,
                    OrientationValType val_type, uint read_delay,
                    String config_path)
