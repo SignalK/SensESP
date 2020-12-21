@@ -5,11 +5,11 @@
 ClickType::ClickType(String config_path, uint16_t long_click_delay,
                      uint16_t double_click_interval, uint16_t ultra_long_click_delay)
     : Transform<bool, ClickTypes>(config_path),
-      click_count{0},
-      long_click_delay{long_click_delay},
-      ultra_long_click_delay{ultra_long_click_delay},
-      double_click_interval{double_click_interval},
-      delayed_click_report{NULL} {
+      click_count_{0},
+      long_click_delay_{long_click_delay},
+      ultra_long_click_delay_{ultra_long_click_delay},
+      double_click_interval_{double_click_interval},
+      delayed_click_report_{NULL} {
   load_configuration();
 }
 
@@ -30,32 +30,32 @@ void ClickType::on_button_press() {
   debugD(
       "ClickType received PRESS on click count %d (millis: %ld, last release: "
       "%ld ms ago)",
-      click_count, millis(), (long)release_duration);
+      click_count_, millis(), (long)release_duration_);
 
-  if (click_count == 0) {
+  if (click_count_ == 0) {
     // This is a new, isolated "click" that we have not yet processed.
-    click_count++;
-    press_duration = 0;
+    click_count_++;
+    press_duration_ = 0;
   } else {
     // One or more presses is already in progress...
 
-    if (press_duration > ultra_long_click_delay) {
+    if (press_duration_ > ultra_long_click_delay_) {
       // The button down is the second one reported in a row without a button
       // release and the press is now long enough to qualify as an "ultra long
       // click"
       on_ultra_long_click();
-    } else if (release_duration <= double_click_interval) {
+    } else if (release_duration_ <= double_click_interval_) {
       // This is the start of a second click to come in prior to the expiration
       // of the double_click_interval.  Remove any "SingleClick" report that may
       // have been queued up....
-      if (delayed_click_report != NULL) {
-        delayed_click_report->remove();
-        delayed_click_report = NULL;
+      if (delayed_click_report_ != NULL) {
+        delayed_click_report_->remove();
+        delayed_click_report_ = NULL;
         debugD(
             "ClickType press is double click. Removed queued SingleClick "
             "report");
       }
-      click_count++;
+      click_count_++;
     }
   }
 
@@ -66,25 +66,25 @@ void ClickType::on_button_release() {
   debugD(
       "ClickType received UNPRESS for click count %d (millis: %ld, press "
       "duration: %ld ms)",
-      click_count, millis(), (long)press_duration);
+      click_count_, millis(), (long)press_duration_);
 
-  if (click_count > 0) {
+  if (click_count_ > 0) {
     // This is the "release" of a click we are tracking...
-    if (press_duration >= this->ultra_long_click_delay) {
+    if (press_duration_ >= this->ultra_long_click_delay_) {
       on_ultra_long_click();
       this->on_click_completed();
-    } else if (press_duration >= this->long_click_delay) {
+    } else if (press_duration_ >= this->long_click_delay_) {
       debugD(
           "ClickType detected LongSingleClick (millis: %ld, press duration %ld "
           "ms)",
-          millis(), (long)press_duration);
+          millis(), (long)press_duration_);
       this->emitDelayed(ClickTypes::LongSingleClick);
       this->on_click_completed();
-    } else if (this->click_count > 1) {
+    } else if (this->click_count_ > 1) {
       // We have just ended a double click.  Sent it immediately...
       debugD(
           "ClickType detected DoubleClick (millis: %ld, press duration %ld ms)",
-          millis(), (long)press_duration);
+          millis(), (long)press_duration_);
       this->emitDelayed(ClickTypes::DoubleClick);
       this->on_click_completed();
     } else {
@@ -93,9 +93,9 @@ void ClickType::on_button_release() {
       // to the double_click_interval, which would turn this click into a
       // DoubleClick
       unsigned long time_of_event = millis();
-      long pd = (long)press_duration;
-      delayed_click_report =
-          app.onDelay(double_click_interval + 20, [this, pd, time_of_event]() {
+      long pd = (long)press_duration_;
+      delayed_click_report_ =
+          app.onDelay(double_click_interval_ + 20, [this, pd, time_of_event]() {
             debugD(
                 "ClickType detected SingleClick (millis: %ld, queue time: %ld, "
                 "press duration %ld ms)",
@@ -105,14 +105,14 @@ void ClickType::on_button_release() {
           });
     }
 
-    release_duration = 0;
+    release_duration_ = 0;
     this->emit(ClickTypes::ButtonRelease);
 
   } else {
     // A press release with no initial press should happen only when
     // an UltraLongClick has already been sent, or the producer
     // is feeding us weird values...
-    release_duration = 0;
+    release_duration_ = 0;
     debugW("ClickType detected UNPRESS with no pending PRESS (millis=%ld)",
            millis());
   }
@@ -123,25 +123,25 @@ void ClickType::emitDelayed(ClickTypes value) {
 }
 
 void ClickType::on_click_completed() {
-  this->click_count = 0;
-  delayed_click_report = NULL;
-  press_duration = 0;
-  release_duration = 0;
+  this->click_count_ = 0;
+  delayed_click_report_ = NULL;
+  press_duration_ = 0;
+  release_duration_ = 0;
 }
 
 void ClickType::on_ultra_long_click() {
   debugD(
       "ClickType detected UltraLongSingleClick (millis: %ld, press duration "
       "%ld ms)",
-      millis(), (long)press_duration);
+      millis(), (long)press_duration_);
   this->emitDelayed(ClickTypes::UltraLongSingleClick);
   on_click_completed();
 }
 
 void ClickType::get_configuration(JsonObject& root) {
-  root["long_click_delay"] = long_click_delay;
-  root["ultra_long_click_delay"] = ultra_long_click_delay;
-  root["double_click_interval"] = double_click_interval;
+  root["long_click_delay"] = long_click_delay_;
+  root["ultra_long_click_delay"] = ultra_long_click_delay_;
+  root["double_click_interval"] = double_click_interval_;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
@@ -163,8 +163,8 @@ bool ClickType::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  long_click_delay = config["long_click_delay"];
-  ultra_long_click_delay = config["ultra_long_click_delay"];
-  double_click_interval = config["double_click_interval"];
+  long_click_delay_ = config["long_click_delay"];
+  ultra_long_click_delay_ = config["ultra_long_click_delay"];
+  double_click_interval_ = config["double_click_interval"];
   return true;
 }

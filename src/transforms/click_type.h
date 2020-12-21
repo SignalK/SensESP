@@ -65,33 +65,33 @@ class ClickType : public Transform<bool, ClickTypes> {
   /// A counter to specify how many clicks are currently being
   /// processed. Used to distinguish between single and double
   /// clicks.
-  int click_count;
+  int click_count_;
 
   // User Configuration variables...
 
   /// How many milliseconds a button is pressed to distinguish between
   /// a normal SingleClick and a LongSingleClick
-  uint16_t long_click_delay;
+  uint16_t long_click_delay_;
 
   /// How many milliseoncs a button is pressed to distinguish between
   /// a normal SingleClick and an UltraLongSingleClick
-  uint16_t ultra_long_click_delay;
+  uint16_t ultra_long_click_delay_;
 
   /// The maximum number of milliseconds that can pass before two
   /// clicks in a row are combined into a single DoubleClick
-  uint16_t double_click_interval;
+  uint16_t double_click_interval_;
 
   /// Timmer to time button presses
-  elapsedMillis press_duration;
+  elapsedMillis press_duration_;
 
   /// Timer to time interval between button releases
-  elapsedMillis release_duration;
+  elapsedMillis release_duration_;
 
   /// Holds a delayed "SingleClick" report that we can pull back
   /// if the second click of a double click comes through. This
   /// value will be NULL if no click report is currently
   /// queued up.
-  DelayReaction* delayed_click_report;
+  DelayReaction* delayed_click_report_;
 
   /// Processes incoming values that represent a "ButonPress" event
   void on_button_press();
