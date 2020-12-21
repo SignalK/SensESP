@@ -9,29 +9,29 @@ MAX31856Thermocouple::MAX31856Thermocouple(int8_t cs_pin, int8_t mosi_pin,
                                            max31856_thermocoupletype_t tc_type,
                                            uint read_delay, String config_path)
     : NumericSensor(config_path),
-      data_ready_pin{drdy_pin},
-      read_delay{read_delay} {
+      data_ready_pin_{drdy_pin},
+      read_delay_{read_delay} {
   load_configuration();
-  max31856 = new Adafruit_MAX31856(cs_pin, mosi_pin, miso_pin, clk_pin);
-  if (!max31856->begin()) {
+  max31856_ = new Adafruit_MAX31856(cs_pin, mosi_pin, miso_pin, clk_pin);
+  if (!max31856_->begin()) {
     while (1) delay(10);
   }
-  max31856->setThermocoupleType(tc_type);
-  max31856->setConversionMode(MAX31856_CONTINUOUS);
+  max31856_->setThermocoupleType(tc_type);
+  max31856_->setConversionMode(MAX31856_CONTINUOUS);
 }
 
 void MAX31856Thermocouple::enable() {
-  app.onRepeat(read_delay, [this]() {
-    while (digitalRead(data_ready_pin)) {
+  app.onRepeat(read_delay_, [this]() {
+    while (digitalRead(data_ready_pin_)) {
       delay(25);
     }
-    float temp = max31856->readThermocoupleTemperature();
+    float temp = max31856_->readThermocoupleTemperature();
     this->emit(temp);
   });
 }
 
 void MAX31856Thermocouple::get_configuration(JsonObject& root) {
-  root["read_delay"] = read_delay;
+  root["read_delay"] = read_delay_;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({
@@ -50,6 +50,6 @@ bool MAX31856Thermocouple::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  read_delay = config["read_delay"];
+  read_delay_ = config["read_delay"];
   return true;
 }
