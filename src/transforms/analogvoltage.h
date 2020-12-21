@@ -41,9 +41,9 @@ class AnalogVoltage : public NumericTransform {
   virtual String get_config_schema() override;
 
  private:
-  float max_voltage;
-  float multiplier;
-  float offset;
+  float max_voltage_;
+  float multiplier_;
+  float offset_;
 };
 
 #endif
