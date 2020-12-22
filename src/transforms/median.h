@@ -6,9 +6,14 @@
 #include "transforms/transform.h"
 
 /**
- * @brief Collects a list of input values of size sample_size and
- * outputs the median value (i.e. element number sample_size / 2 of
- * a sorted sample list).
+ * @brief Calculates the median of sample_size inputs.
+ * 
+ * Creates a sorted list of sample_size values and outputs the one
+ * in the middle (i.e. element number 'sample_size / 2').
+ * 
+ * @param sample_size Number of values you want to take the median of.
+ * 
+ * @param config_path Path to configure this transform in the Config UI.
  */
 class Median : public NumericTransform {
  public:
@@ -19,8 +24,8 @@ class Median : public NumericTransform {
   virtual String get_config_schema() override;
 
  private:
-  std::vector<float> buf;
-  unsigned int sample_size;
+  std::vector<float> buf_;
+  unsigned int sample_size_;
 };
 
 #endif
