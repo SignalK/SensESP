@@ -18,8 +18,8 @@ class Linear : public LambdaTransform<float, float, float, float> {
   Linear(float multiplier, float offset, String config_path = "");
 
  private:
-  static float (*function)(float, float, float);
-  static const ParamInfo param_info[];
+  static float (*function_)(float, float, float);
+  static const ParamInfo param_info_[];
 };
 
 #endif
