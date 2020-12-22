@@ -6,7 +6,7 @@
 #include "transforms/transform.h"
 
 /**
- * @brief Calculates the median of sample_size inputs.
+ * @brief Outputs the median value of sample_size inputs.
  * 
  * Creates a sorted list of sample_size values and outputs the one
  * in the middle (i.e. element number 'sample_size / 2').
