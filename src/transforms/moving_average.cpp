@@ -31,15 +31,13 @@ void MovingAverage::set_input(float input, uint8_t inputChannel) {
 void MovingAverage::get_configuration(JsonObject& root) {
   root["multiplier"] = multiplier_;
   root["sample_size"] = sample_size_;
-  root["value"] = output;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
         "sample_size": { "title": "Number of samples in average", "type": "integer" },
-        "multiplier": { "title": "Multiplier", "type": "number" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "multiplier": { "title": "Multiplier", "type": "number" }
     }
   })";
 
