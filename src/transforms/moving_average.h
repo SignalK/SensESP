@@ -11,9 +11,9 @@
  * Used to smooth the output of a value (signal) that has
  * frequent variations. For example, the output of a temperature sensor may vary
  * from 180 to 185 several times over a short period, but you just want to see
- * the average of that. MovingAverage outputs the average of the most recent n
- * values. It also incorporates a "scale" factor, in case you want to increase
- * or decrease your final output by a fixed percentage.
+ * the average of that. MovingAverage outputs the average of the most recent
+ * sample_size values. It also incorporates a "scale" factor, in case you want
+ * to increase or decrease your final output by a fixed percentage.
  */
 
 // y = k * 1/n * \sum_k=1^n(x_k)
@@ -36,11 +36,11 @@ class MovingAverage : public NumericTransform {
   virtual String get_config_schema() override;
 
  private:
-  std::vector<float> buf;
-  int ptr = 0;
+  std::vector<float> buf_;
+  int ptr_ = 0;
   int sample_size_;
   float multiplier_;
-  bool initialized;
+  bool initialized_;
 };
 
 #endif
