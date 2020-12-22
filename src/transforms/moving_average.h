@@ -6,7 +6,9 @@
 #include "transform.h"
 
 /**
- * @brief Used to smooth the output of a value (signal) that has
+ * @brief Outputs the moving average of the last sample_size inputs.
+ * 
+ * Used to smooth the output of a value (signal) that has
  * frequent variations. For example, the output of a temperature sensor may vary
  * from 180 to 185 several times over a short period, but you just want to see
  * the average of that. MovingAverage outputs the average of the most recent n
@@ -18,15 +20,16 @@
 class MovingAverage : public NumericTransform {
  public:
   /**
-   * @param n is the number of most recent values you want to average for your
-   * output
+   * @param sample_size The number of most recent values you want to average for your
+   * output.
    *
-   * @param the moving average will be multiplied by k before it is output -
+   * @param multiplier Moving average will be multiplied by multiplier before it is output -
    * make it something other than 1. if you need to scale your output up or down
-   * by a fixed percentage
+   * by a fixed percentage.
    *
+   * @param config_path The path used to configure this transform in the Config UI.
    * */
-  MovingAverage(int n, float k = 1., String config_path = "");
+  MovingAverage(int sample_size, float multiplier = 1.0, String config_path = "");
   virtual void set_input(float input, uint8_t inputChannel = 0) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
@@ -35,8 +38,8 @@ class MovingAverage : public NumericTransform {
  private:
   std::vector<float> buf;
   int ptr = 0;
-  int n;
-  float k;
+  int sample_size_;
+  float multiplier_;
   bool initialized;
 };
 
