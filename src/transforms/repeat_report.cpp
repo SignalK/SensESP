@@ -2,7 +2,7 @@
 
 template <typename T>
 void RepeatReport<T>::set_input(T input, uint8_t inputChannel) {
-  last_update_interval = 0;
+  last_update_interval_ = 0;
   this->emit(input);
 }
 
@@ -10,8 +10,8 @@ template <typename T>
 void RepeatReport<T>::enable() {
   SymmetricTransform<T>::enable();
   app.onRepeat(10, [this]() {
-    if (last_update_interval > max_silence_interval) {
-      this->last_update_interval = 0;
+    if (last_update_interval_ > max_silence_interval_) {
+      this->last_update_interval_ = 0;
       this->notify();
     }
   });
@@ -19,7 +19,7 @@ void RepeatReport<T>::enable() {
 
 template <typename T>
 void RepeatReport<T>::get_configuration(JsonObject& root) {
-  root["max_silence_interval"] = max_silence_interval;
+  root["max_silence_interval"] = max_silence_interval_;
   root["value"] = this->output;
 }
 
@@ -44,7 +44,7 @@ bool RepeatReport<T>::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  this->max_silence_interval = config["max_silence_interval"];
+  this->max_silence_interval_ = config["max_silence_interval"];
   return true;
 }
 
