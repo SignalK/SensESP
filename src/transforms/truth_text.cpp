@@ -53,16 +53,16 @@ void TextToTruth::set_input(String input, uint8_t input_channel) {
 
 TruthToText::TruthToText(String true_value, String false_value) :
        Transform<bool, String>() {
-    truth_value = new String[2];
-    truth_value[0] = false_value;
-    truth_value[1] = true_value;
+    truth_value_ = new String[2];
+    truth_value_[0] = false_value;
+    truth_value_[1] = true_value;
 }
 
 void TruthToText::set_input(bool input, uint8_t input_channel) {
    if (input) {
-      this->emit(truth_value[1]);
+      this->emit(truth_value_[1]);
    }
    else {
-      this->emit(truth_value[0]);
+      this->emit(truth_value_[0]);
    }
 }
