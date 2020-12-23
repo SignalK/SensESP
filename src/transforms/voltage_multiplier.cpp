@@ -2,16 +2,16 @@
 
 VoltageMultiplier::VoltageMultiplier(uint16_t R1, uint16_t R2,
                                      String config_path)
-    : NumericTransform(config_path), R1{R1}, R2{R2} {}
+    : NumericTransform(config_path), R1_{R1}, R2_{R2} {}
 
 void VoltageMultiplier::set_input(float input, uint8_t inputChannel) {
   // Ohms Law at work!
-  this->emit(input * (((float)R1 + (float)R2) / (float)R2));
+  this->emit(input * (((float)R1_ + (float)R2_) / (float)R2_));
 }
 
 void VoltageMultiplier::get_configuration(JsonObject& root) {
-  root["R1"] = R1;
-  root["R2"] = R2;
+  root["R1"] = R1_;
+  root["R2"] = R2_;
   root["value"] = output;
 };
 
@@ -33,7 +33,7 @@ bool VoltageMultiplier::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  R1 = config["R1"];
-  R2 = config["R2"];
+  R1_ = config["R1"];
+  R2_ = config["R2"];
   return true;
 }
