@@ -20,19 +20,19 @@ class ThresholdTransform : public Transform<C, P> {
   ThresholdTransform(C min_value, C max_value, P in_range, P out_range,
                      String config_path = "")
       : Transform<C, P>(config_path),
-        min_value{min_value},
-        max_value{max_value},
-        in_range{in_range},
-        out_range{out_range} {
+        min_value_{min_value},
+        max_value_{max_value},
+        in_range_{in_range},
+        out_range_{out_range} {
     this->load_configuration();
   };
   virtual void set_input(C new_value, uint8_t input_channel = 0) override;
 
  protected:
-  C min_value;
-  C max_value;
-  P in_range;
-  P out_range;
+  C min_value_;
+  C max_value_;
+  P in_range_;
+  P out_range_;
 };
 
 /**
