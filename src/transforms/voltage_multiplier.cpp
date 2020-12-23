@@ -12,15 +12,13 @@ void VoltageMultiplier::set_input(float input, uint8_t inputChannel) {
 void VoltageMultiplier::get_configuration(JsonObject& root) {
   root["R1"] = R1_;
   root["R2"] = R2_;
-  root["value"] = output;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
         "R1": { "title": "R1", "type": "number", "description": "The measured value of resistor R1" },
-        "R2": { "title": "R2", "type": "number", "description": "The measured value of resistor R2" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "R2": { "title": "R2", "type": "number", "description": "The measured value of resistor R2" }
     }
   })###";
 
