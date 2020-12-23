@@ -15,7 +15,6 @@ void NumericThreshold::get_configuration(JsonObject& root) {
   root["min"] = min_value;
   root["max"] = max_value;
   root["in_range"] = in_range;
-  root["value"] = output;
 }
 
 static const char NUMERIC_SCHEMA[] PROGMEM = R"({
@@ -23,8 +22,7 @@ static const char NUMERIC_SCHEMA[] PROGMEM = R"({
     "properties": {
         "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
         "max": { "title": "Maximum value", "type": "number", "description" : "Maximum value to be 'in range'" },
-        "in_range": { "title": "In range value", "type": "boolean", "description" : "Output value when input value is 'in range'" },
-        "value": { "title": "Last value", "type" : "boolean", "readOnly": true }
+        "in_range": { "title": "In range value", "type": "boolean", "description" : "Output value when input value is 'in range'" }
     }
   })";
 
@@ -38,8 +36,6 @@ bool NumericThreshold::set_configuration(const JsonObject& config) {
   min_value = config["min"];
   max_value = config["max"];
   in_range = config["in_range"];
-  output = config["value"];
-
   return true;
 }
 
@@ -49,7 +45,6 @@ void IntegerThreshold::get_configuration(JsonObject& root) {
   root["min"] = min_value;
   root["max"] = max_value;
   root["in_range"] = in_range;
-  root["value"] = output;
 }
 
 static const char INTEGER_SCHEMA[] PROGMEM = R"({
@@ -57,8 +52,7 @@ static const char INTEGER_SCHEMA[] PROGMEM = R"({
       "properties": {
           "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
           "max": { "title": "Maximum value", "type": "number", "description" : "Maximum value to be 'in range'" },
-          "in_range": { "title": "In range value", "type": "boolean", "description" : "Output value when input value is 'in range'" },
-          "value": { "title": "Last value", "type" : "boolean", "readOnly": true }
+          "in_range": { "title": "In range value", "type": "boolean", "description" : "Output value when input value is 'in range'" }
       }
     })";
 
@@ -72,8 +66,6 @@ bool IntegerThreshold::set_configuration(const JsonObject& config) {
   min_value = config["min"];
   max_value = config["max"];
   in_range = config["in_range"];
-  output = config["value"];
-
   return true;
 }
 
