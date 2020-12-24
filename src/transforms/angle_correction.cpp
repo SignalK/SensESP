@@ -23,15 +23,13 @@ void AngleCorrection::set_input(float input, uint8_t inputChannel) {
 void AngleCorrection::get_configuration(JsonObject& root) {
   root["offset"] = offset_;
   root["min_angle"] = min_angle_;
-  root["value"] = output;
 }
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
         "offset": { "title": "Constant offset", "description": "Value to be added, in radians", "type": "number" },
-        "min_angle": { "title": "Minimum angle value", "description": "If you have output between -pi and pi, use -3.14159265, otherwise use 0.", "type": "number" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "min_angle": { "title": "Minimum angle value", "description": "If you have output between -pi and pi, use -3.14159265, otherwise use 0.", "type": "number" }
     }
   })###";
 
