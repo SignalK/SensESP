@@ -124,6 +124,10 @@ OneWireTemperature::OneWireTemperature(DallasTemperatureSensors* dts,
 
 void OneWireTemperature::enable() {
   if (found_) {
+    // read_delay must be at least a little longer than conversion_delay
+    if (read_delay_ < conversion_delay_ + 50) {
+      read_delay_ = conversion_delay_ + 50;
+    }
     app.onRepeat(read_delay_, [this]() { this->update(); });
   }
 }
@@ -131,7 +135,7 @@ void OneWireTemperature::enable() {
 void OneWireTemperature::update() {
   dts_->sensors_->requestTemperaturesByAddress(address_.data());
   // temp converstion can take up to 750 ms, so wait before reading
-  app.onDelay(750, [this]() { this->read_value(); });
+  app.onDelay(conversion_delay_, [this]() { this->read_value(); });
 }
 
 void OneWireTemperature::read_value() {

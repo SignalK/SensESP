@@ -59,7 +59,8 @@ class DallasTemperatureSensors : public Sensor {
  * @param dts Pointer to an instance of a DallasTemperatureSensors class.
  * 
  * @param read_delay How often to read the temperature. It takes up to 750 ms for the data
- * to be read by the chip, so this parameter should not be less than 750. You should
+ * to be read by the chip, so this parameter can't be less than 800. If you make it less than
+ * 800, the program will force it to be 800. You should
  * probably make it 1000 (the default) or more, to be safe.
  * 
  * @param config_path The path to configure the sensor address in the Config UI.
@@ -75,6 +76,7 @@ class OneWireTemperature : public NumericSensor {
 
  private:
   DallasTemperatureSensors* dts_;
+  uint conversion_delay_ = 750;
   uint read_delay_;
   bool found_ = true;
   OWDevAddr address_ = {};
