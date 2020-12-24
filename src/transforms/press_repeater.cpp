@@ -3,28 +3,28 @@
 PressRepeater::PressRepeater(String config_path, int integer_false,
                              int repeat_start_interval, int repeat_interval)
     : BooleanTransform(config_path),
-      integer_false{integer_false},
-      repeat_start_interval{repeat_start_interval},
-      repeat_interval{repeat_interval},
-      pushed{false},
-      repeating{false} {
+      integer_false_{integer_false},
+      repeat_start_interval_{repeat_start_interval},
+      repeat_interval_{repeat_interval},
+      pushed_{false},
+      repeating_{false} {
   load_configuration();
 }
 
 void PressRepeater::enable() {
   app.onRepeat(10, [this]() {
-    if (pushed) {
+    if (pushed_) {
       // A press is currently in progress
-      if (repeating) {
-        if (last_value_sent > (unsigned long)repeat_interval) {
+      if (repeating_) {
+        if (last_value_sent_ > (unsigned long)repeat_interval_) {
           debugD("Repeating press report");
-          last_value_sent = 0;
+          last_value_sent_ = 0;
           this->emit(true);
         }
-      } else if (last_value_sent > (unsigned long)repeat_start_interval) {
+      } else if (last_value_sent_ > (unsigned long)repeat_start_interval_) {
         debugD("Starting press report repeat");
-        repeating = true;
-        last_value_sent = 0;
+        repeating_ = true;
+        last_value_sent_ = 0;
         this->emit(true);
       }
     }
@@ -32,25 +32,25 @@ void PressRepeater::enable() {
 }
 
 void PressRepeater::set_input(int new_value, uint8_t input_channel) {
-  this->set_input(new_value != integer_false, input_channel);
+  this->set_input(new_value != integer_false_, input_channel);
 }
 
 void PressRepeater::set_input(bool new_value, uint8_t input_channel) {
-  if (new_value != pushed) {
-    pushed = new_value;
+  if (new_value != pushed_) {
+    pushed_ = new_value;
 
-    if (!pushed) {
-      repeating = false;
+    if (!pushed_) {
+      repeating_ = false;
     }
 
-    last_value_sent = 0;
-    this->emit(pushed);
+    last_value_sent_ = 0;
+    this->emit(pushed_);
   }
 }
 
 void PressRepeater::get_configuration(JsonObject& root) {
-  root["repeat_start_interval"] = repeat_start_interval;
-  root["repeat_interval"] = repeat_interval;
+  root["repeat_start_interval"] = repeat_start_interval_;
+  root["repeat_interval"] = repeat_interval_;
 }
 
 static const char SCHEMA[] PROGMEM = R"###({
@@ -70,7 +70,7 @@ bool PressRepeater::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  repeat_start_interval = config["repeat_start_interval"];
-  repeat_interval = config["repeat_interval"];
+  repeat_start_interval_ = config["repeat_start_interval"];
+  repeat_interval_ = config["repeat_interval"];
   return true;
 }

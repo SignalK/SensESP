@@ -4,17 +4,22 @@
 #include "lambda_transform.h"
 
 /**
- * @brief Performs a linear transform on the input value. The transform
- * is of the form \f$y = k * x + c\f$, where k is the input
- * coefficient and c is a bias (offset) value.
+ * @brief Performs a linear transform on the input value:
+ * output = (input * multiplier) + offset.
+ * 
+ * @param multiplier The input is multiplied this value.
+ * 
+ * @param offset This is added to (input * multiplier)
+ * 
+ * @param config_path The path to configure this transform in the Config UI
  **/
 class Linear : public LambdaTransform<float, float, float, float> {
  public:
-  Linear(float k, float c, String config_path = "");
+  Linear(float multiplier, float offset, String config_path = "");
 
  private:
-  static float (*function)(float, float, float);
-  static const ParamInfo param_info[];
+  static float (*function_)(float, float, float);
+  static const ParamInfo param_info_[];
 };
 
 #endif

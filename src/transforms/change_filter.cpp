@@ -11,27 +11,27 @@ static float absf(float val) {
 ChangeFilter::ChangeFilter(float min_delta, float max_delta, int max_skips,
                            String config_path)
     : NumericTransform(config_path),
-      min_delta{min_delta},
-      max_delta{max_delta},
-      max_skips{max_skips} {
+      min_delta_{min_delta},
+      max_delta_{max_delta},
+      max_skips_{max_skips} {
   load_configuration();
-  skips = max_skips + 1;
+  skips_ = max_skips_ + 1;
 }
 
 void ChangeFilter::set_input(float new_value, uint8_t input_channel) {
   float delta = absf(new_value - output);
-  if ((delta >= min_delta && delta <= max_delta) || skips > max_skips) {
-    skips = 0;
+  if ((delta >= min_delta_ && delta <= max_delta_) || skips_ > max_skips_) {
+    skips_ = 0;
     this->emit(new_value);
   } else {
-    skips++;
+    skips_++;
   }
 }
 
 void ChangeFilter::get_configuration(JsonObject& root) {
-  root["min_delta"] = min_delta;
-  root["max_delta"] = max_delta;
-  root["max_skips"] = max_skips;
+  root["min_delta"] = min_delta_;
+  root["max_delta"] = max_delta_;
+  root["max_skips"] = max_skips_;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
@@ -52,9 +52,9 @@ bool ChangeFilter::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  min_delta = config["min_delta"];
-  max_delta = config["max_delta"];
-  max_skips = config["max_skips"];
-  skips = max_skips + 1;
+  min_delta_ = config["min_delta"];
+  max_delta_ = config["max_delta"];
+  max_skips_ = config["max_skips"];
+  skips_ = max_skips_ + 1;
   return true;
 }
