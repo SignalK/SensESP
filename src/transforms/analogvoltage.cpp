@@ -3,21 +3,21 @@
 AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
                              String config_path)
     : NumericTransform(config_path),
-      max_voltage{max_voltage},
-      multiplier{multiplier},
-      offset{offset} {
+      max_voltage_{max_voltage},
+      multiplier_{multiplier},
+      offset_{offset} {
   load_configuration();
 }
 
 void AnalogVoltage::set_input(float input, uint8_t inputChannel) {
-  this->emit(((input * (max_voltage / MAX_ANALOG_OUTPUT)) * multiplier) +
-             offset);
+  this->emit(((input * (max_voltage_ / MAX_ANALOG_OUTPUT)) * multiplier_) +
+             offset_);
 }
 
 void AnalogVoltage::get_configuration(JsonObject& root) {
-  root["max_voltage"] = max_voltage;
-  root["multiplier"] = multiplier;
-  root["offset"] = offset;
+  root["max_voltage"] = max_voltage_;
+  root["multiplier"] = multiplier_;
+  root["offset"] = offset_;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
@@ -38,8 +38,8 @@ bool AnalogVoltage::set_configuration(const JsonObject& config) {
       return false;
     }
   }
-  max_voltage = config["max_voltage"];
-  multiplier = config["multiplier"];
-  offset = config["offset"];
+  max_voltage_ = config["max_voltage"];
+  multiplier_ = config["multiplier"];
+  offset_ = config["offset"];
   return true;
 }
