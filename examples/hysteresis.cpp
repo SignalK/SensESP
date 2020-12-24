@@ -10,7 +10,7 @@ ReactESP app([]() {
   SetupSerialDebug(115200);
 
   sensesp_app = new SensESPApp("sensesp-hysteresis-example", "My WiFi SSID",
-                               "my_wifi_password", "skserver.lan", 80);
+                               "my_wifi_password", "192.168.10.3", 80);
 
   const char* sk_path = "environment.indoor.illuminance";
   const char* analog_in_config_path = "/indoor_illuminance/analog_in";

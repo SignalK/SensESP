@@ -48,7 +48,7 @@ ReactESP app([]() {
 
   // Create the global SensESPApp() object.
   sensesp_app = builder.set_hostname("sk-lights-vswitch")
-                    ->set_sk_server("sk-server.local", 3000)
+                    ->set_sk_server("10.10.1.5", 3000)
                     ->set_wifi("YOUR_WIFI_SSID", "YOUR_WIFI_PASSWORD")
                     ->set_standard_sensors(StandardSensors::NONE)
                     ->get_app();
