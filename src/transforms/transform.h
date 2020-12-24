@@ -19,10 +19,15 @@
 // Transforms transform raw device readouts into useful sensor values.
 
 /**
- * @brief The base class for all transforms. All transforms are can be subscribed
- * to by calling attach() (inherited from Observable). They can
+ * @brief The base class for all transforms. A transforms takes a value
+ * in, transforms it in some way, and outputs the transformed value.
+ * 
+ * All transforms are subscribed
+ * to by calling attach() (inherited from Observable).
+ * 
+ * They can
  * have an optional persistence configuration by specifying an "id" to
- * save the configuration data in.
+ * save the configuration data in. TODO: Is this still true?
  */
 class TransformBase : public Configurable, public Enable {
  public:
@@ -31,10 +36,10 @@ class TransformBase : public Configurable, public Enable {
   // Primary purpose of this was to supply Signal K sources
   // (now handled by SKEmitter::get_sources). Should
   // this be deprecated?
-  static const std::set<TransformBase*>& get_transforms() { return transforms; }
+  static const std::set<TransformBase*>& get_transforms() { return transforms_; }
 
  private:
-  static std::set<TransformBase*> transforms;
+  static std::set<TransformBase*> transforms_;
 };
 
 /**
@@ -53,7 +58,7 @@ class Transform : public TransformBase,
   /**
    * A convenience method that allows up to five producers to be
    * quickly connected to the input of the ValueConsumer side of this
-   * transform.  The first producer will be connected to input
+   * transform. The first producer will be connected to input
    * channel zero, the second one to input channel 1, etc.
    * "this" is returned, which allows the ValueProducer side
    * of this transform to then be wired to other transforms via

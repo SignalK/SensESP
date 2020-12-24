@@ -6,20 +6,27 @@
 #include "transforms/lambda_transform.h"
 
 /**
- * @brief A transform that allows you to convert from one
- * data type to another. To use Typecast, simply construct
+ * @brief Converts input from one
+ * data type to another, then outputs the new type.
+ * 
+ * To use Typecast, simply construct
  * a new instance of Typecast.
+ * 
  * <p>If the data type of IN is capable of doing
  * a typecast to OUT on its own (i.e. C++ has an implicit
  * conversion available, or IN defines a overloaded
  * typecast operator for OUT), then no additional
- * work is needed.  If a compiler derived typecast from
+ * work is needed. 
+ * 
+ * If a compiler-derived typecast from
  * IN to OUT does not exist (or is not the functionality
  * you are looking for), then you must pass in a
  * lambda expression that is capable of doing the
  * conversion explicitly.
- * @tparam The data type the typecast accepts as input
- * @tparam The data type the typecast outputs after conversion
+ * 
+ * @tparam The data type of input.
+ * 
+ * @tparam The data type of output.
  */
 template <typename IN, typename OUT>
 class Typecast : public LambdaTransform<IN, OUT>
@@ -38,10 +45,10 @@ typedef Typecast<int, float> IntToFloat;
 typedef Typecast<float, int> FloatToInt;
 
 /**
- * @brief A Typecast transform that takes as its
- * input a float number, rounds it to
+ * @brief Takes as its
+ * input a float, rounds it to
  * the nearest whole number, then outputs
- * it as an int. 
+ * it as an int.
  */
 class RoundToInt : public Typecast<float, int>
 {

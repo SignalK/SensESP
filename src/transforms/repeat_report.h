@@ -7,21 +7,24 @@
 
 /**
  * @brief Ensures that values that do not change frequently are still
- * reported at at a specified maximum silence interval. If the value has not
+ * reported at a specified maximum silence interval. If the value has not
  * changed in max_silence_interval milliseconds, the current value is emmitted
- * again,
+ * again.
+ * 
+ * @param max_silence_interval Maximum time, in ms, before the previous value
+ * is emitted again. Default is 15000 (15 seconds).
+ * 
+ * @param config_path Path to configure this transform in the Config UI.
  */
 template <typename T>
 class RepeatReport : public SymmetricTransform<T> {
  public:
   RepeatReport(long max_silence_interval = 15000, String config_path = "")
       : SymmetricTransform<T>(config_path),
-        max_silence_interval{max_silence_interval} {
+        max_silence_interval_{max_silence_interval} {
     this->load_configuration();
   }
 
-  // The following methods moved to CPP file to avoid excessive inline code
-  // generation...
   virtual void set_input(T input, uint8_t inputChannel = 0) override;
   virtual void enable() override;
   virtual void get_configuration(JsonObject& doc) override;
@@ -29,8 +32,8 @@ class RepeatReport : public SymmetricTransform<T> {
   virtual String get_config_schema() override;
 
  private:
-  long max_silence_interval;
-  elapsedMillis last_update_interval;
+  long max_silence_interval_;
+  elapsedMillis last_update_interval_;
 };
 
 #endif
