@@ -7,12 +7,13 @@
 /**
  * @brief Reads the temperature from an Adafruit MAX31856 (or compatible) thermocouple
  * breakout board. Communicates with the ESP via SPI.
- * 
+ *  
  * @param cs_pin
  * @param mosi_pin
  * @param miso_pin
  * @param clk_pin
- * @param drdy_pin The data-ready pin
+ * @param drdy_pin The data-ready pin. Not used, but still provided for backward-
+ * compatibility.
  * @param tc_type Type of thermocouple that's attached to the MAX31856. For the
  * available types, see 
  * https://github.com/adafruit/Adafruit_MAX31856/blob/master/Adafruit_MAX31856.h
