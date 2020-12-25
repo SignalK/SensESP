@@ -20,6 +20,15 @@ MAX31856Thermocouple::MAX31856Thermocouple(int8_t cs_pin, int8_t mosi_pin,
   max31856_->setConversionMode(MAX31856_ONESHOT_NOWAIT);
 }
 
+MAX31856Thermocouple::MAX31856Thermocouple(Adafruit_MAX31856* max31856,
+                                           uint read_delay, String config_path)
+    : NumericSensor(config_path),
+      max31856_{max31856},
+      read_delay_{read_delay} {
+  load_configuration();
+  max31856_->setConversionMode(MAX31856_ONESHOT_NOWAIT);
+}
+
 void MAX31856Thermocouple::enable() {
   // Must be at least 500 to allow time for temperature "conversion".
   if (read_delay_ < 500) {
