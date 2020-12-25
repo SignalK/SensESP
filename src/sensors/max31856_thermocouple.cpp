@@ -14,7 +14,7 @@ MAX31856Thermocouple::MAX31856Thermocouple(int8_t cs_pin, int8_t mosi_pin,
   load_configuration();      
   max31856_ = new Adafruit_MAX31856(cs_pin, mosi_pin, miso_pin, clk_pin);
   if (!max31856_->begin()) {
-    while (1) delay(10);
+    debugW("No MAX31856 detected: check wiring.");
   }
   max31856_->setThermocoupleType(tc_type);
   max31856_->setConversionMode(MAX31856_ONESHOT_NOWAIT);
