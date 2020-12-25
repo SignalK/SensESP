@@ -26,21 +26,31 @@ class MAX31856Thermocouple : public NumericSensor {
                        int8_t clk_pin, int8_t drdy_pin,
                        max31856_thermocoupletype_t tc_type, uint read_delay,
                        String config_path = "");
-  
-/**
- * @param max31856 A pointer to an Adafruit_MAX31856, which you must create in
- * main.cpp before you call this constructor. After you create it, you must call
- * begin(), and also set the thermocouple type, before calling this constructor:
-   
-   auto* max = new Adafruit_MAX31856( <<whatever parameters you want / need>> );
-   max->begin();
-   max->setThermocoupleType( <<whatever type you're using>> );
-   // now you can call this constructor
-   MAX31856Thermocouple(max, 1000, "/config/path");
 
- * @param read_delay How often to read the sensor, in ms.
- * @param config_path The path to configure read_delay in the Config UI.
-**/
+  /**
+   * A version of the constructor that doesn't require the now-obsolete drdy_pin.
+  **/ 
+  MAX31856Thermocouple(int8_t cs_pin, int8_t mosi_pin, int8_t miso_pin,
+                       int8_t clk_pin, max31856_thermocoupletype_t tc_type,
+                       uint read_delay, String config_path = "") :
+                       MAX31856Thermocouple(cs_pin, mosi_pin, miso_pin,
+                       clk_pin, 0, tc_type, read_delay, config_path) {}
+
+  /**
+   * @param max31856 A pointer to an Adafruit_MAX31856, which you must create in
+   * main.cpp before you call this constructor. After you create it, you must
+  call
+   * begin(), and also set the thermocouple type, before calling this
+  constructor:
+
+     auto* max = new Adafruit_MAX31856( <<whatever parameters you want / need>>
+  ); max->begin(); max->setThermocoupleType( <<whatever type you're using>> );
+     // now you can call this constructor
+     MAX31856Thermocouple(max, 1000, "/config/path");
+
+   * @param read_delay How often to read the sensor, in ms.
+   * @param config_path The path to configure read_delay in the Config UI.
+  **/
   MAX31856Thermocouple(Adafruit_MAX31856* max31856, uint read_delay = 500,
                        String config_path = "");                     
   Adafruit_MAX31856* max31856_;
