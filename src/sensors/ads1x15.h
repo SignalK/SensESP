@@ -21,10 +21,9 @@
  *   See https://github.com/adafruit/Adafruit_ADS1X15/blob/master/Adafruit_ADS1015.h
  * */
 template <class T_Ada_1x15>
-class ADS1x15 : public Sensor {
+class ADS1x15 {
  public:
   ADS1x15(uint8_t addr = 0x48, adsGain_t gain = GAIN_TWOTHIRDS);
-  void enable() override final {}
   T_Ada_1x15* ads_;
   adsGain_t gain_;
 };
