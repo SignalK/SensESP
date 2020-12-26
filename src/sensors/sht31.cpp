@@ -6,8 +6,7 @@
 
 // SHT31 represents an ADAfruit (or compatible) SHT31 temperature & humidity
 // sensor.
-SHT31::SHT31(uint8_t addr)
-    : Sensor() {
+SHT31::SHT31(uint8_t addr) {
   adafruit_sht31_ = new Adafruit_SHT31();
   if (!adafruit_sht31_->begin(addr)) {
     debugE("Could not find a valid SHT31 sensor: check address and wiring");
