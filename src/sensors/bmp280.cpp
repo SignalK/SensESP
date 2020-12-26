@@ -6,8 +6,7 @@
 
 // BMP280 represents an ADAfruit (or compatible) BMP280 temperature & pressure
 // sensor.
-BMP280::BMP280(uint8_t addr, Adafruit_BMP280* sensor)
-    : Sensor() {
+BMP280::BMP280(uint8_t addr, Adafruit_BMP280* sensor) {
   if (sensor == NULL) {
     sensor = new Adafruit_BMP280();
   }
