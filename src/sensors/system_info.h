@@ -2,6 +2,7 @@
 #define _systeminfo_H_
 
 #include "sensor.h"
+#include <elapsedMillis.h>
 
 /**
  * @brief Reports the current clock speed of the ESP. 
@@ -18,7 +19,7 @@ class SystemHz : public NumericSensor {
 
  private:
   uint32_t tick_count_ = 0;
-  uint32_t prev_millis_;
+  elapsedMillis elapsed_millis_;
   float system_hz_;
   void tick();
   void update();
