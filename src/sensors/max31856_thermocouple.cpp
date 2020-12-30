@@ -33,18 +33,18 @@ MAX31856Thermocouple::MAX31856Thermocouple(Adafruit_MAX31856* max31856,
 void MAX31856Thermocouple::enable() {
   // Must be at least 500 to allow time for temperature "conversion".
   if (sensor_detected_) {
-  if (read_delay_ < 500) {
-    read_delay_ = 500;
-  }
-  app.onRepeat(read_delay_, [this]() {
-    max31856_->triggerOneShot();
-    app.onDelay(450, [this]() {
-      float temp = max31856_->readThermocoupleTemperature();
-      this->emit(temp);
+    if (read_delay_ < 500) {
+      read_delay_ = 500;
+    }
+    app.onRepeat(read_delay_, [this]() {
+      max31856_->triggerOneShot();
+      app.onDelay(450, [this]() {
+        float temp = max31856_->readThermocoupleTemperature();
+        this->emit(temp);
       });
-  });
-  }
-  else debugE("MAX31856 not enabled: no sensor detected.");
+    });
+  } else
+    debugE("MAX31856 not enabled: no sensor detected.");
 }
 
 void MAX31856Thermocouple::get_configuration(JsonObject& root) {
