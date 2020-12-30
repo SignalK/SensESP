@@ -14,6 +14,7 @@ MAX31856Thermocouple::MAX31856Thermocouple(int8_t cs_pin, int8_t mosi_pin,
   load_configuration();      
   max31856_ = new Adafruit_MAX31856(cs_pin, mosi_pin, miso_pin, clk_pin);
   if (!max31856_->begin()) {
+    sensor_detected_ = false;
     debugW("No MAX31856 detected: check wiring.");
   }
   max31856_->setThermocoupleType(tc_type);
@@ -31,6 +32,7 @@ MAX31856Thermocouple::MAX31856Thermocouple(Adafruit_MAX31856* max31856,
 
 void MAX31856Thermocouple::enable() {
   // Must be at least 500 to allow time for temperature "conversion".
+  if (sensor_detected_) {
   if (read_delay_ < 500) {
     read_delay_ = 500;
   }
@@ -41,6 +43,8 @@ void MAX31856Thermocouple::enable() {
       this->emit(temp);
       });
   });
+  }
+  else debugE("MAX31856 not enabled: no sensor detected.");
 }
 
 void MAX31856Thermocouple::get_configuration(JsonObject& root) {
