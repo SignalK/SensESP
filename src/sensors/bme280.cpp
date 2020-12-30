@@ -5,8 +5,7 @@
 
 // BME280 represents an ADAfruit (or compatible) BME280 temperature / pressure /
 // humidity sensor.
-BME280::BME280(uint8_t addr)
-    : Sensor(), addr_{addr} {
+BME280::BME280(uint8_t addr) : addr_{addr} {
   adafruit_bme280_ = new Adafruit_BME280();
   check_status();
 }

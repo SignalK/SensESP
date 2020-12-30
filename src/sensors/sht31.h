@@ -20,7 +20,7 @@
  * addresses are available for some SHT31 chips. See the datasheet.
 **/
 
-class SHT31 : public Sensor {
+class SHT31 {
  public:
   SHT31(uint8_t addr = 0x44);
   Adafruit_SHT31* adafruit_sht31_;

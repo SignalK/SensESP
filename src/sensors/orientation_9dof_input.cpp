@@ -4,10 +4,7 @@
 
 #include "sensesp.h"
 
-Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
-                                 String config_path)
-    : Sensor(config_path) {
-  load_configuration();
+Orientation9DOF::Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl) {
   sensor_fxos_fxas_ = new SensorNXP_FXOS8700_FXAS21002();
   if (!sensor_fxos_fxas_->connect(pin_i2c_sda, pin_i2c_scl)) {
     debugE(

@@ -26,10 +26,9 @@
  * 
  *  @param pin_i2c_scl The pin you're using for I2c SCL.
 **/
-class Orientation9DOF : public Sensor {
+class Orientation9DOF {
  public:
-  Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
-                  String config_path = "");
+  Orientation9DOF(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl);
   void stream_raw_values(void);  // used when calibrating
   // pointer to physical sensor
   SensorNXP_FXOS8700_FXAS21002 *sensor_fxos_fxas_;

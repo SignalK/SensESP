@@ -24,7 +24,7 @@
  * @param addr The memory address where the sensor can be read. Default is 0x77. Some
  * sensors use, or can use, different addresses - check your datasheet.
  **/
-class BME280 : public Sensor {
+class BME280 {
  public:
   BME280(uint8_t addr = 0x77);
   Adafruit_BME280* adafruit_bme280_;
