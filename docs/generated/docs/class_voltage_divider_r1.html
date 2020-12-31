@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('class_voltage_divider_r1.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit, given a fixed voltage sent into the divider (Vin), a known resistance an the junction of the two resistors (R2), and the output of the divider (Vout).  
+<p>Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit.  
  <a href="class_voltage_divider_r1.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>&gt;</code></p>
@@ -112,16 +112,10 @@ Inheritance diagram for VoltageDividerR1:</div>
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_voltage_divider_r1__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for VoltageDividerR1:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_voltage_divider_r1__coll__graph.svg" width="100%" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a559bd31c65cb8a407e7e28d968d97678"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voltage_divider_r1.html#a559bd31c65cb8a407e7e28d968d97678">VoltageDividerR1</a> (float <a class="el" href="class_voltage_divider_r1.html#ad00c68d3e756cdb88d099ac0c0eadd1e">R2</a>, float <a class="el" href="class_voltage_divider_r1.html#a0431451b00c45c89d3ac5bf4fec692c3">Vin</a>=3.3, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:a559bd31c65cb8a407e7e28d968d97678"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voltage_divider_r1.html#a559bd31c65cb8a407e7e28d968d97678">VoltageDividerR1</a> (float R2, float Vin=3.3, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
 <tr class="separator:a559bd31c65cb8a407e7e28d968d97678"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9cb0660e2c1e82a6740739fcfc2a360"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voltage_divider_r1.html#ad9cb0660e2c1e82a6740739fcfc2a360">set_input</a> (float Vout, uint8_t ignored=0) override</td></tr>
 <tr class="separator:ad9cb0660e2c1e82a6740739fcfc2a360"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,10 +185,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ad00c68d3e756cdb88d099ac0c0eadd1e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voltage_divider_r1.html#ad00c68d3e756cdb88d099ac0c0eadd1e">R2</a></td></tr>
-<tr class="separator:ad00c68d3e756cdb88d099ac0c0eadd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0431451b00c45c89d3ac5bf4fec692c3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voltage_divider_r1.html#a0431451b00c45c89d3ac5bf4fec692c3">Vin</a></td></tr>
-<tr class="separator:a0431451b00c45c89d3ac5bf4fec692c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc15a702ad7bc5e9fe4eced5f978ec2b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voltage_divider_r1.html#afc15a702ad7bc5e9fe4eced5f978ec2b">R2_</a></td></tr>
+<tr class="separator:afc15a702ad7bc5e9fe4eced5f978ec2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35be6d57a79b71694992b43f940b17a9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voltage_divider_r1.html#a35be6d57a79b71694992b43f940b17a9">Vin_</a></td></tr>
+<tr class="separator:a35be6d57a79b71694992b43f940b17a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_value_producer.html">ValueProducer&lt; float &gt;</a></td></tr>
 <tr class="memitem:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697">output</a></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,11 +211,17 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit, given a fixed voltage sent into the divider (Vin), a known resistance an the junction of the two resistors (R2), and the output of the divider (Vout). </p>
-<p>Here, the output is the voltage across the fixed resistor (R2) between the junction and ground and the variable resistor is connected between Vin and the junction.</p>
-<p>R2 is selected on the basis of the range of values for R1 and the maximum input voltage for the MCU's analog input. </p>
+<div class="textblock"><p>Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit. </p>
+<p>Vout = (Vin x R2) / (R1 + R2) is the voltage divider formula. We know:</p><ul>
+<li>Vout - that's the input to this transform, probably coming from an <a class="el" href="class_analog_voltage.html" title="A transform that takes the output of the built-in analog-to-digital converter on the ESP and outputs ...">AnalogVoltage</a> transform.</li>
+<li>Vin - that's one of the paramaters to this transform. It's a fixed voltage that you know from your physical voltage divider circuit.</li>
+<li>R2 - also a parameter to this transform, and also from your physical voltage divider.</li>
+</ul>
+<p>Knowing Vin, Vout, and R2, we can calculate R1 (which is what this transform does).</p>
+<p>The purpose of this transform is to help determine the resistance value of a physical sensor of the "variable resistor" type, such as a temperature sensor, or an oil pressure sensor. If we know the resistance of the sensor, we can then determine the temperature (or pressure, etc.) that the sensor is reading, by connecting this transform's output to an instance of the <a class="el" href="class_curve_interpolator.html" title="Uses a collection of input/output samples that approximate a non-linear curve and outputs a value on ...">CurveInterpolator</a> transform.</p>
+<dl class="section see"><dt>See also</dt><dd><a href="https://github.com/SignalK/SensESP/blob/master/examples/temperature_sender.cpp">https://github.com/SignalK/SensESP/blob/master/examples/temperature_sender.cpp</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="voltagedivider_8h_source.html#l00019">19</a> of file <a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="voltagedivider_8h_source.html#l00028">28</a> of file <a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a559bd31c65cb8a407e7e28d968d97678"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a559bd31c65cb8a407e7e28d968d97678">&#9670;&nbsp;</a></span>VoltageDividerR1()</h2>
@@ -406,8 +406,8 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad00c68d3e756cdb88d099ac0c0eadd1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad00c68d3e756cdb88d099ac0c0eadd1e">&#9670;&nbsp;</a></span>R2</h2>
+<a id="afc15a702ad7bc5e9fe4eced5f978ec2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc15a702ad7bc5e9fe4eced5f978ec2b">&#9670;&nbsp;</a></span>R2_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -416,7 +416,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float VoltageDividerR1::R2</td>
+          <td class="memname">float VoltageDividerR1::R2_</td>
         </tr>
       </table>
   </td>
@@ -426,12 +426,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="voltagedivider_8h_source.html#l00031">31</a> of file <a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="voltagedivider_8h_source.html#l00039">39</a> of file <a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>.</p>
 
 </div>
 </div>
-<a id="a0431451b00c45c89d3ac5bf4fec692c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0431451b00c45c89d3ac5bf4fec692c3">&#9670;&nbsp;</a></span>Vin</h2>
+<a id="a35be6d57a79b71694992b43f940b17a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35be6d57a79b71694992b43f940b17a9">&#9670;&nbsp;</a></span>Vin_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,7 +440,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float VoltageDividerR1::Vin</td>
+          <td class="memname">float VoltageDividerR1::Vin_</td>
         </tr>
       </table>
   </td>
@@ -450,7 +450,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="voltagedivider_8h_source.html#l00032">32</a> of file <a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="voltagedivider_8h_source.html#l00040">40</a> of file <a class="el" href="voltagedivider_8h_source.html">voltagedivider.h</a>.</p>
 
 </div>
 </div>

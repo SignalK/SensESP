@@ -17,6 +17,6 @@ var searchData=
   ['operator_21_3d',['operator!=',['../observablevalue_8h.html#af4ac342ae6cb2542a761a0a43af7ff89',1,'observablevalue.h']]],
   ['operator_3d',['operator=',['../class_observable_value.html#a900b99ef37a8d31e84c48a97b8eff10d',1,'ObservableValue']]],
   ['operator_3d_3d',['operator==',['../observablevalue_8h.html#a39aa0ba39924c6d828551a6d887cf6e5',1,'observablevalue.h']]],
-  ['orientation9dof',['Orientation9DOF',['../class_orientation9_d_o_f.html#ad27863d8df7610c8e6c74c874a91fbba',1,'Orientation9DOF']]],
+  ['orientation9dof',['Orientation9DOF',['../class_orientation9_d_o_f.html#a0349f192a89f4f694625318c1eb1be78',1,'Orientation9DOF']]],
   ['owda_5fto_5fstring',['owda_to_string',['../onewire__temperature_8cpp.html#ad0134b3041182b5f8c3004025183e6eb',1,'onewire_temperature.cpp']]]
 ];

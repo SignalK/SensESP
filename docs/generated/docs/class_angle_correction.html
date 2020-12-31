@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('class_angle_correction.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Add a value to an angle input (in radians). The output value is wrapped to a range between [0, 2*pi[. This transform is useful for correcting e.g. a heading or a wind direction reading.  
+<p>Add a value to an angle input (in radians). The output value is wrapped to a range between [0, 2*pi]. This transform is useful for correcting e.g. a heading or a wind direction reading.  
  <a href="class_angle_correction.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="angle__correction_8h_source.html">angle_correction.h</a>&gt;</code></p>
@@ -109,12 +109,6 @@ $(document).ready(function(){initNavTree('class_angle_correction.html','');});
 Inheritance diagram for AngleCorrection:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_angle_correction__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for AngleCorrection:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_angle_correction__coll__graph.svg" width="100%" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -209,9 +203,17 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Add a value to an angle input (in radians). The output value is wrapped to a range between [0, 2*pi[. This transform is useful for correcting e.g. a heading or a wind direction reading. </p>
+<div class="textblock"><p>Add a value to an angle input (in radians). The output value is wrapped to a range between [0, 2*pi]. This transform is useful for correcting e.g. a heading or a wind direction reading. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">offset</td><td>Value to be added, in radians.</td></tr>
+    <tr><td class="paramname">min_angle</td><td>If you have output between -pi and pi, use -3.14159265, otherwise use 0. Default value is 0.</td></tr>
+    <tr><td class="paramname">config_path</td><td>Path to configure this transform in the Config UI. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="angle__correction_8h_source.html#l00011">11</a> of file <a class="el" href="angle__correction_8h_source.html">angle_correction.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="angle__correction_8h_source.html#l00018">18</a> of file <a class="el" href="angle__correction_8h_source.html">angle_correction.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6a023df6e49e8ada977738dc8cbe150c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a023df6e49e8ada977738dc8cbe150c">&#9670;&nbsp;</a></span>AngleCorrection()</h2>
@@ -276,7 +278,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="angle__correction_8cpp_source.html#l00038">38</a> of file <a class="el" href="angle__correction_8cpp_source.html">angle_correction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="angle__correction_8cpp_source.html#l00036">36</a> of file <a class="el" href="angle__correction_8cpp_source.html">angle_correction.cpp</a>.</p>
 
 </div>
 </div>
@@ -338,7 +340,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a6e0281fe25cfbdf024bdb05147ffb52b">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="angle__correction_8cpp_source.html#l00040">40</a> of file <a class="el" href="angle__correction_8cpp_source.html">angle_correction.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="angle__correction_8cpp_source.html#l00038">38</a> of file <a class="el" href="angle__correction_8cpp_source.html">angle_correction.cpp</a>.</p>
 
 </div>
 </div>

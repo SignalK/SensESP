@@ -12,7 +12,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title="ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it ...">
+<g id="a_node1"><a xlink:title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v...">
 <polygon fill="#bfbfbf" stroke="black" points="1382,-113.55 1382,-143.55 1510,-143.55 1510,-113.55 1382,-113.55"/>
 <text text-anchor="start" x="1390" y="-131.55" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15Voltage&lt; T_ads</text>
 <text text-anchor="middle" x="1446" y="-120.55" font-family="Helvetica,sans-Serif" font-size="10.00">_1x15, chip &gt;</text>
@@ -52,7 +52,7 @@
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="305.5,-139.05 305.5,-158.05 388.5,-158.05 388.5,-139.05 305.5,-139.05"/>
 <text text-anchor="middle" x="347" y="-146.05" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -112,7 +112,7 @@
 <!-- Node18 -->
 <g id="node19" class="node">
 <title>Node18</title>
-<g id="a_node19"><a xlink:href="class_sensor.html" target="_top" xlink:title="Represents a raw hardware thingie.">
+<g id="a_node19"><a xlink:href="class_sensor.html" target="_top" xlink:title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project.">
 <polygon fill="white" stroke="black" points="323.5,-22.05 323.5,-41.05 370.5,-41.05 370.5,-22.05 323.5,-22.05"/>
 <text text-anchor="middle" x="347" y="-29.05" font-family="Helvetica,sans-Serif" font-size="10.00">Sensor</text>
 </a>
@@ -357,7 +357,7 @@
 <!-- Node16 -->
 <g id="node17" class="node">
 <title>Node16</title>
-<g id="a_node17"><a xlink:href="class_a_d_s1x15_raw_value.html" target="_top" xlink:title=" ">
+<g id="a_node17"><a xlink:href="class_a_d_s1x15_raw_value.html" target="_top" xlink:title="Used to read the raw output of the ADS1x15, which is an integer between 0 and 32,768....">
 <polygon fill="white" stroke="black" points="903,-89.55 903,-119.55 1021,-119.55 1021,-89.55 903,-89.55"/>
 <text text-anchor="start" x="911" y="-107.55" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15RawValue&lt; T</text>
 <text text-anchor="middle" x="962" y="-96.55" font-family="Helvetica,sans-Serif" font-size="10.00">_ads_1x15 &gt;</text>
@@ -373,7 +373,7 @@
 <!-- Node17 -->
 <g id="node18" class="node">
 <title>Node17</title>
-<g id="a_node18"><a xlink:href="class_numeric_sensor.html" target="_top" xlink:title=" ">
+<g id="a_node18"><a xlink:href="class_numeric_sensor.html" target="_top" xlink:title="A Sensor whose output is a float.">
 <polygon fill="white" stroke="black" points="570.5,-64.05 570.5,-83.05 654.5,-83.05 654.5,-64.05 570.5,-64.05"/>
 <text text-anchor="middle" x="612.5" y="-71.05" font-family="Helvetica,sans-Serif" font-size="10.00">NumericSensor</text>
 </a>

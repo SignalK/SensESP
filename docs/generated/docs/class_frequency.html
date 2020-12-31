@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('class_frequency.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>A transform that divides its input value by the time elapsed since the last reading.  
+<p>Transforms its input into frequency (Hz: cycles per second)  
  <a href="class_frequency.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="frequency_8h_source.html">frequency.h</a>&gt;</code></p>
@@ -111,17 +111,11 @@ Inheritance diagram for Frequency:</div>
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_frequency__inherit__graph.svg" width="100%" height="526"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for Frequency:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_frequency__coll__graph.svg" width="100%" height="584"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abbaff61b74433bb8a990685be24c3c8b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_frequency.html#abbaff61b74433bb8a990685be24c3c8b">Frequency</a> (float k=1, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
-<tr class="separator:abbaff61b74433bb8a990685be24c3c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab27b1b9c2172fab3096e667d943b2238"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_frequency.html#ab27b1b9c2172fab3096e667d943b2238">Frequency</a> (float multiplier=1, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="separator:ab27b1b9c2172fab3096e667d943b2238"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99df388f446a8aa46f465fe464023f55"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_frequency.html#a99df388f446a8aa46f465fe464023f55">set_input</a> (int input, uint8_t inputChannel=0) override</td></tr>
 <tr class="separator:a99df388f446a8aa46f465fe464023f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d6846952b3295809421ac18633e397e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_frequency.html#a0d6846952b3295809421ac18633e397e">enable</a> () override</td></tr>
@@ -206,12 +200,20 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A transform that divides its input value by the time elapsed since the last reading. </p>
+<div class="textblock"><p>Transforms its input into frequency (Hz: cycles per second) </p>
+<p>Divides its input value by the time elapsed since the last reading.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">multiplier</td><td>Output is multiplied by this parameter before being output, as a way to adjust the scale of the ouput. For example, if you're calculating the frequency of engine revolutions and you're sensing 4 signals per revolution (such as with 4 magnets on the flywheel), set multiplier = 0.25 to convert the total signals into "revolutions".</td></tr>
+    <tr><td class="paramname">config_path</td><td>Path to configure this transform in the Config UI. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="frequency_8h_source.html#l00010">10</a> of file <a class="el" href="frequency_8h_source.html">frequency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frequency_8h_source.html#l00019">19</a> of file <a class="el" href="frequency_8h_source.html">frequency.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abbaff61b74433bb8a990685be24c3c8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbaff61b74433bb8a990685be24c3c8b">&#9670;&nbsp;</a></span>Frequency()</h2>
+<a id="ab27b1b9c2172fab3096e667d943b2238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab27b1b9c2172fab3096e667d943b2238">&#9670;&nbsp;</a></span>Frequency()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +222,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">Frequency::Frequency </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>k</em> = <code>1</code>, </td>
+          <td class="paramname"><em>multiplier</em> = <code>1</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -297,7 +299,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="frequency_8cpp_source.html#l00032">32</a> of file <a class="el" href="frequency_8cpp_source.html">frequency.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frequency_8cpp_source.html#l00030">30</a> of file <a class="el" href="frequency_8cpp_source.html">frequency.cpp</a>.</p>
 
 </div>
 </div>
@@ -359,7 +361,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a6e0281fe25cfbdf024bdb05147ffb52b">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="frequency_8cpp_source.html#l00034">34</a> of file <a class="el" href="frequency_8cpp_source.html">frequency.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frequency_8cpp_source.html#l00032">32</a> of file <a class="el" href="frequency_8cpp_source.html">frequency.cpp</a>.</p>
 
 </div>
 </div>

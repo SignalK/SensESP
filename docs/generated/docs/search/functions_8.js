@@ -1,7 +1,7 @@
 var searchData=
 [
   ['if',['if',['../sensesp__app_8cpp.html#aebdf763bd2eca7171655deaef5565990',1,'sensesp_app.cpp']]],
-  ['ina219',['INA219',['../class_i_n_a219.html#adc0300a6f6fa99ee85786a354614e343',1,'INA219']]],
+  ['ina219',['INA219',['../class_i_n_a219.html#af79b5ea99badaee822e8c795f10454bb',1,'INA219']]],
   ['ina219value',['INA219Value',['../class_i_n_a219_value.html#a929d4abc76063b697a4836da30d1d5c6',1,'INA219Value']]],
   ['initfilter',['initFilter',['../class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002.html#a68de3c26ea9715291dcaee9d1260c149',1,'SensorNXP_FXOS8700_FXAS21002']]],
   ['integersensor',['IntegerSensor',['../class_integer_sensor.html#a2214ecc518fbbb314be8ca987aa0e730',1,'IntegerSensor']]],

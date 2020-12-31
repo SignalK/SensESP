@@ -10,11 +10,11 @@ var class_click_type =
     [ "on_ultra_long_click", "class_click_type.html#ad02f210e44bc8ba18c80dce9ee4f5db5", null ],
     [ "set_configuration", "class_click_type.html#a165bd7e32c714c2690bd7850d2d46a21", null ],
     [ "set_input", "class_click_type.html#a7b1a0723cd0b8438d3f1ec380243d208", null ],
-    [ "click_count", "class_click_type.html#aad23a0b6a3b88d8d9347b8015827ad3e", null ],
-    [ "delayed_click_report", "class_click_type.html#a3a841d590b13cfbaf245aa3bcb891cf0", null ],
-    [ "double_click_interval", "class_click_type.html#a7d5a16fd9586414c1feeb76daa64a6cc", null ],
-    [ "long_click_delay", "class_click_type.html#a5d5ad3eafb5bfcfd597c2316d8b37da5", null ],
-    [ "press_duration", "class_click_type.html#a76394a3bad716d7bd1f74b54a58e8266", null ],
-    [ "release_duration", "class_click_type.html#a28670885d433ccc698b1fc3b80990274", null ],
-    [ "ultra_long_click_delay", "class_click_type.html#a6f5981815572e3c12ec89a3bd3646f0b", null ]
+    [ "click_count_", "class_click_type.html#a16efc016d0d211a996d19a993ebca8e0", null ],
+    [ "delayed_click_report_", "class_click_type.html#a39f3d745cb3d6359a7daefb88b0a78b6", null ],
+    [ "double_click_interval_", "class_click_type.html#af0f9e6f28386d7ec4bfcd12f0bf2037a", null ],
+    [ "long_click_delay_", "class_click_type.html#a4b61fd5d3364a7f11f1b0c121fd50b03", null ],
+    [ "press_duration_", "class_click_type.html#a0d5d3bf1f68cc1024b1e02edef16ca12", null ],
+    [ "release_duration_", "class_click_type.html#ac378d5adad1b411b4fc9921871c7b9ae", null ],
+    [ "ultra_long_click_delay_", "class_click_type.html#a817ab3dc6af5db0818dbfe61769bd66a", null ]
 ];

@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -103,17 +103,14 @@ $(document).ready(function(){initNavTree('class_read9_d_o_f.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>sets up the combo FXOS8700 + FXAS21002 sensor and outputs the specified orientation parameter value.  
+ <a href="class_read9_d_o_f.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="orientation__9dof__input_8h_source.html">orientation_9dof_input.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Read9DOF:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_read9_d_o_f__inherit__graph.svg" width="406" height="355"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for Read9DOF:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read9_d_o_f__coll__graph.svg" width="547" height="410"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -187,8 +184,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a15c1bf2b7dc82f06a72d259f0d804977"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_orientation9_d_o_f.html">Orientation9DOF</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read9_d_o_f.html#a15c1bf2b7dc82f06a72d259f0d804977">orientation_9dof</a></td></tr>
-<tr class="separator:a15c1bf2b7dc82f06a72d259f0d804977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeebeae0f61c8fb1e22634a1f247b81cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_orientation9_d_o_f.html">Orientation9DOF</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read9_d_o_f.html#aeebeae0f61c8fb1e22634a1f247b81cc">orientation_9dof_</a></td></tr>
+<tr class="separator:aeebeae0f61c8fb1e22634a1f247b81cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_configurable.html">Configurable</a></td></tr>
 <tr class="memitem:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a></td></tr>
 <tr class="separator:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,8 +208,20 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8h_source.html#l00039">39</a> of file <a class="el" href="orientation__9dof__input_8h_source.html">orientation_9dof_input.h</a>.</p>
+<div class="textblock"><p>sets up the combo FXOS8700 + FXAS21002 sensor and outputs the specified orientation parameter value. </p>
+<p>Setting up the sensor combo FXOS8700 + FXAS21002 includes loading the configuration, initializing the filter, and calibrating the sensor.</p>
+<p>FIXME: The above description is not adequate for an end user to know how to use this sensor properly. Those details are in the .cpp file, but they need to be here in order to appear in the Doxygen documentation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p9DOF</td><td>Pointer to an <a class="el" href="class_orientation9_d_o_f.html" title="Represents an NXP FXOS8700 accelerometer and magnetometer sensor, plus an NXP FXAS21002C gyroscope.">Orientation9DOF</a>.</td></tr>
+    <tr><td class="paramname">val_type</td><td>The type of value you want to read, from the enum OrientationValType. Defaults to compass_hdg.</td></tr>
+    <tr><td class="paramname">read_delay</td><td>How often you want to read the value, in ms. Default is 100.</td></tr>
+    <tr><td class="paramname">config_path</td><td>The path to configure the sensor in the Config UI. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8h_source.html#l00057">57</a> of file <a class="el" href="orientation__9dof__input_8h_source.html">orientation_9dof_input.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="adce59e3cd83086f9c600bba27263739e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adce59e3cd83086f9c600bba27263739e">&#9670;&nbsp;</a></span>OrientationValType</h2>
@@ -237,7 +246,7 @@ Additional Inherited Members</h2></td></tr>
 <tr><td class="fieldname"><a id="adce59e3cd83086f9c600bba27263739eaeffbf44eb508b72b6e6acf705ead3362"></a>rate_of_roll&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8h_source.html#l00041">41</a> of file <a class="el" href="orientation__9dof__input_8h_source.html">orientation_9dof_input.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8h_source.html#l00059">59</a> of file <a class="el" href="orientation__9dof__input_8h_source.html">orientation_9dof_input.h</a>.</p>
 
 </div>
 </div>
@@ -280,7 +289,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8cpp_source.html#l00039">39</a> of file <a class="el" href="orientation__9dof__input_8cpp_source.html">orientation_9dof_input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8cpp_source.html#l00027">27</a> of file <a class="el" href="orientation__9dof__input_8cpp_source.html">orientation_9dof_input.cpp</a>.</p>
 
 </div>
 </div>
@@ -311,24 +320,24 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_enable.html#a62ea021bf8d986150be346977a8eede3">Enable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8cpp_source.html#l00051">51</a> of file <a class="el" href="orientation__9dof__input_8cpp_source.html">orientation_9dof_input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8cpp_source.html#l00039">39</a> of file <a class="el" href="orientation__9dof__input_8cpp_source.html">orientation_9dof_input.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a15c1bf2b7dc82f06a72d259f0d804977"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15c1bf2b7dc82f06a72d259f0d804977">&#9670;&nbsp;</a></span>orientation_9dof</h2>
+<a id="aeebeae0f61c8fb1e22634a1f247b81cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeebeae0f61c8fb1e22634a1f247b81cc">&#9670;&nbsp;</a></span>orientation_9dof_</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_orientation9_d_o_f.html">Orientation9DOF</a>* Read9DOF::orientation_9dof</td>
+          <td class="memname"><a class="el" href="class_orientation9_d_o_f.html">Orientation9DOF</a>* Read9DOF::orientation_9dof_</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8h_source.html#l00055">55</a> of file <a class="el" href="orientation__9dof__input_8h_source.html">orientation_9dof_input.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="orientation__9dof__input_8h_source.html#l00073">73</a> of file <a class="el" href="orientation__9dof__input_8h_source.html">orientation_9dof_input.h</a>.</p>
 
 </div>
 </div>

@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('class_digital_output.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Configures the specified GPIO pin as an output pin, then sets the status of that pin to HIGH whenever <a class="el" href="class_digital_output.html#a565a9c57af6dbc61d4895c4b35fe3a6a">set_input()</a> is called and new_value is true. The pin is set to LOW when new_value is false. After the output pin's state is set, the new_value is passed through unmodified as the value returned by <a class="el" href="class_value_producer.html#a0164ba6fd3345f9b8dd2187e7ea919d9">BooleanTransform::get()</a>.  
+<p>Sets a GPIO pin to whatever the input is (true = HIGH, false = LOW), and passes the value on to the next <a class="el" href="class_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">ValueConsumer</a>.  
  <a href="class_digital_output.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="digital__output_8h_source.html">digital_output.h</a>&gt;</code></p>
@@ -109,12 +109,6 @@ $(document).ready(function(){initNavTree('class_digital_output.html','');});
 Inheritance diagram for DigitalOutput:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_digital_output__inherit__graph.svg" width="654" height="520"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for DigitalOutput:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_digital_output__coll__graph.svg" width="658" height="534"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -213,9 +207,15 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configures the specified GPIO pin as an output pin, then sets the status of that pin to HIGH whenever <a class="el" href="class_digital_output.html#a565a9c57af6dbc61d4895c4b35fe3a6a">set_input()</a> is called and new_value is true. The pin is set to LOW when new_value is false. After the output pin's state is set, the new_value is passed through unmodified as the value returned by <a class="el" href="class_value_producer.html#a0164ba6fd3345f9b8dd2187e7ea919d9">BooleanTransform::get()</a>. </p>
+<div class="textblock"><p>Sets a GPIO pin to whatever the input is (true = HIGH, false = LOW), and passes the value on to the next <a class="el" href="class_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">ValueConsumer</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>Pin number of the pin you want to output to. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="digital__output_8h_source.html#l00018">18</a> of file <a class="el" href="digital__output_8h_source.html">digital_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="digital__output_8h_source.html#l00015">15</a> of file <a class="el" href="digital__output_8h_source.html">digital_output.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a49b9011baf6e4280e6a4f8be0177bc1b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a49b9011baf6e4280e6a4f8be0177bc1b">&#9670;&nbsp;</a></span>DigitalOutput()</h2>

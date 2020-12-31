@@ -12,7 +12,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title="Performs a linear transform on the input value. The transform is of the form , where k is the input c...">
+<g id="a_node1"><a xlink:title="Performs a linear transform on the input value: output = (input * multiplier) + offset.">
 <polygon fill="#bfbfbf" stroke="black" points="1329,-154.09 1329,-173.09 1372,-173.09 1372,-154.09 1329,-154.09"/>
 <text text-anchor="middle" x="1350.5" y="-161.09" font-family="Helvetica,sans-Serif" font-size="10.00">Linear</text>
 </a>
@@ -52,7 +52,7 @@
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="310,-122.09 310,-141.09 393,-141.09 393,-122.09 310,-122.09"/>
 <text text-anchor="middle" x="351.5" y="-129.09" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>

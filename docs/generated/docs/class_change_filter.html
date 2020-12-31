@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('class_change_filter.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>A numeric passthrough transform that will only pass that value through if it is "sufficiently different" from the last value passed through. More specifically, the absolute value of the difference between the new value and the last passed value has to be greater than or equal to the specified min_delta, and less than or equal to the specified max_delta. If the consecutive skip count ever reaches max_skips, the value will be let through regardless.  
+<p>A numeric passthrough transform that will only pass that value through if it is "sufficiently different" from the last value passed through.  
  <a href="class_change_filter.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="change__filter_8h_source.html">change_filter.h</a>&gt;</code></p>
@@ -112,16 +112,10 @@ Inheritance diagram for ChangeFilter:</div>
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_change_filter__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for ChangeFilter:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_change_filter__coll__graph.svg" width="100%" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae7e753c0391e335c7b6cc4ec14bad7c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#ae7e753c0391e335c7b6cc4ec14bad7c9">ChangeFilter</a> (float <a class="el" href="class_change_filter.html#af9585e67bbf9636617127ef86f4ada81">min_delta</a>=0.0, float <a class="el" href="class_change_filter.html#a95afe5f733a86231157059b272b4295a">max_delta</a>=9999.0, int <a class="el" href="class_change_filter.html#a3cac91e9ec0a56ae72ad4e0e27fef205">max_skips</a>=99, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:ae7e753c0391e335c7b6cc4ec14bad7c9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#ae7e753c0391e335c7b6cc4ec14bad7c9">ChangeFilter</a> (float min_delta=0.0, float max_delta=9999.0, int max_skips=99, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
 <tr class="separator:ae7e753c0391e335c7b6cc4ec14bad7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48249b125e44834d6641484b49f3a877"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#a48249b125e44834d6641484b49f3a877">set_input</a> (float new_value, uint8_t input_channel=0) override</td></tr>
 <tr class="separator:a48249b125e44834d6641484b49f3a877"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,14 +185,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af9585e67bbf9636617127ef86f4ada81"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#af9585e67bbf9636617127ef86f4ada81">min_delta</a></td></tr>
-<tr class="separator:af9585e67bbf9636617127ef86f4ada81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95afe5f733a86231157059b272b4295a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#a95afe5f733a86231157059b272b4295a">max_delta</a></td></tr>
-<tr class="separator:a95afe5f733a86231157059b272b4295a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cac91e9ec0a56ae72ad4e0e27fef205"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#a3cac91e9ec0a56ae72ad4e0e27fef205">max_skips</a></td></tr>
-<tr class="separator:a3cac91e9ec0a56ae72ad4e0e27fef205"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae51076f79fdfc36e34b8383a0e13e700"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#ae51076f79fdfc36e34b8383a0e13e700">skips</a></td></tr>
-<tr class="separator:ae51076f79fdfc36e34b8383a0e13e700"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bfef15cc9d51e68b7f442be95d704de"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#a9bfef15cc9d51e68b7f442be95d704de">min_delta_</a></td></tr>
+<tr class="separator:a9bfef15cc9d51e68b7f442be95d704de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca580cf499b707c3a3427dc7dec0f655"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#aca580cf499b707c3a3427dc7dec0f655">max_delta_</a></td></tr>
+<tr class="separator:aca580cf499b707c3a3427dc7dec0f655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c86e00cfcb23f0db1a57242a111fcd4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#a8c86e00cfcb23f0db1a57242a111fcd4">max_skips_</a></td></tr>
+<tr class="separator:a8c86e00cfcb23f0db1a57242a111fcd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb99e2ac32e39a6d580c202071f59f3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_change_filter.html#adb99e2ac32e39a6d580c202071f59f3c">skips_</a></td></tr>
+<tr class="separator:adb99e2ac32e39a6d580c202071f59f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_value_producer.html">ValueProducer&lt; float &gt;</a></td></tr>
 <tr class="memitem:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697">output</a></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,9 +215,19 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A numeric passthrough transform that will only pass that value through if it is "sufficiently different" from the last value passed through. More specifically, the absolute value of the difference between the new value and the last passed value has to be greater than or equal to the specified min_delta, and less than or equal to the specified max_delta. If the consecutive skip count ever reaches max_skips, the value will be let through regardless. </p>
+<div class="textblock"><p>A numeric passthrough transform that will only pass that value through if it is "sufficiently different" from the last value passed through. </p>
+<p>More specifically, the absolute value of the difference between the new value and the last passed value has to be greater than or equal to the specified min_delta, and less than or equal to the specified max_delta. If the consecutive skip count ever reaches max_skips, the value will be let through regardless.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min_delta</td><td>If the change from the last passed value is less than min_delta, it will not be passed. Default = 0.0.</td></tr>
+    <tr><td class="paramname">max_delta</td><td>If the change from the last passed value is more than max_delta, it will not be passed. Default = 9999.0.</td></tr>
+    <tr><td class="paramname">max_skips</td><td>If max_skips inputs have already been skipped, the current input will be passed even if it's between min_delta and max_delta, and max_skips will be reset to 0.</td></tr>
+    <tr><td class="paramname">config_path</td><td>The path to configure this transform in the Config UI. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00016">16</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00031">31</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae7e753c0391e335c7b6cc4ec14bad7c9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae7e753c0391e335c7b6cc4ec14bad7c9">&#9670;&nbsp;</a></span>ChangeFilter()</h2>
@@ -408,8 +412,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a95afe5f733a86231157059b272b4295a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95afe5f733a86231157059b272b4295a">&#9670;&nbsp;</a></span>max_delta</h2>
+<a id="aca580cf499b707c3a3427dc7dec0f655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca580cf499b707c3a3427dc7dec0f655">&#9670;&nbsp;</a></span>max_delta_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -418,7 +422,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float ChangeFilter::max_delta</td>
+          <td class="memname">float ChangeFilter::max_delta_</td>
         </tr>
       </table>
   </td>
@@ -428,12 +432,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00028">28</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00043">43</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
 
 </div>
 </div>
-<a id="a3cac91e9ec0a56ae72ad4e0e27fef205"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cac91e9ec0a56ae72ad4e0e27fef205">&#9670;&nbsp;</a></span>max_skips</h2>
+<a id="a8c86e00cfcb23f0db1a57242a111fcd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c86e00cfcb23f0db1a57242a111fcd4">&#9670;&nbsp;</a></span>max_skips_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -442,7 +446,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ChangeFilter::max_skips</td>
+          <td class="memname">int ChangeFilter::max_skips_</td>
         </tr>
       </table>
   </td>
@@ -452,12 +456,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00029">29</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00044">44</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
 
 </div>
 </div>
-<a id="af9585e67bbf9636617127ef86f4ada81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9585e67bbf9636617127ef86f4ada81">&#9670;&nbsp;</a></span>min_delta</h2>
+<a id="a9bfef15cc9d51e68b7f442be95d704de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bfef15cc9d51e68b7f442be95d704de">&#9670;&nbsp;</a></span>min_delta_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -466,7 +470,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float ChangeFilter::min_delta</td>
+          <td class="memname">float ChangeFilter::min_delta_</td>
         </tr>
       </table>
   </td>
@@ -476,12 +480,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00027">27</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00042">42</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
 
 </div>
 </div>
-<a id="ae51076f79fdfc36e34b8383a0e13e700"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae51076f79fdfc36e34b8383a0e13e700">&#9670;&nbsp;</a></span>skips</h2>
+<a id="adb99e2ac32e39a6d580c202071f59f3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb99e2ac32e39a6d580c202071f59f3c">&#9670;&nbsp;</a></span>skips_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -490,7 +494,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ChangeFilter::skips</td>
+          <td class="memname">int ChangeFilter::skips_</td>
         </tr>
       </table>
   </td>
@@ -500,7 +504,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00030">30</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="change__filter_8h_source.html#l00045">45</a> of file <a class="el" href="change__filter_8h_source.html">change_filter.h</a>.</p>
 
 </div>
 </div>

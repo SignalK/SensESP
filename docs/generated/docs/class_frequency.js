@@ -1,6 +1,6 @@
 var class_frequency =
 [
-    [ "Frequency", "class_frequency.html#abbaff61b74433bb8a990685be24c3c8b", null ],
+    [ "Frequency", "class_frequency.html#ab27b1b9c2172fab3096e667d943b2238", null ],
     [ "enable", "class_frequency.html#a0d6846952b3295809421ac18633e397e", null ],
     [ "get_config_schema", "class_frequency.html#a93e3f28917f7faa7411b95745171f6af", null ],
     [ "get_configuration", "class_frequency.html#a35901f2d996c2e598e1ca0f95ea0e62b", null ],

@@ -12,7 +12,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node1"><a xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="#bfbfbf" stroke="black" points="108,-409.08 108,-428.08 191,-428.08 191,-409.08 108,-409.08"/>
 <text text-anchor="middle" x="149.5" y="-416.08" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -375,7 +375,7 @@
 <!-- Node7 -->
 <g id="node8" class="node">
 <title>Node7</title>
-<g id="a_node8"><a xlink:href="class_integer_threshold.html" target="_top" xlink:title="A Transform that translates an integer value into a boolean value. min_value and MaxValue set a range...">
+<g id="a_node8"><a xlink:href="class_integer_threshold.html" target="_top" xlink:title="Translates an integer value into a boolean value, which depends on whether the integer value is &quot;in r...">
 <polygon fill="white" stroke="black" points="1042.5,-123.08 1042.5,-142.08 1131.5,-142.08 1131.5,-123.08 1042.5,-123.08"/>
 <text text-anchor="middle" x="1087" y="-130.08" font-family="Helvetica,sans-Serif" font-size="10.00">IntegerThreshold</text>
 </a>
@@ -390,7 +390,7 @@
 <!-- Node9 -->
 <g id="node10" class="node">
 <title>Node9</title>
-<g id="a_node10"><a xlink:href="class_numeric_threshold.html" target="_top" xlink:title="A Transform that translates a float value into a boolean value. min_value and MaxValue set a range....">
+<g id="a_node10"><a xlink:href="class_numeric_threshold.html" target="_top" xlink:title="Translates a float value into a boolean value, which depends on whether the float value is &quot;in range&quot;...">
 <polygon fill="white" stroke="black" points="1039,-184.08 1039,-203.08 1135,-203.08 1135,-184.08 1039,-184.08"/>
 <text text-anchor="middle" x="1087" y="-191.08" font-family="Helvetica,sans-Serif" font-size="10.00">NumericThreshold</text>
 </a>
@@ -437,7 +437,7 @@
 <!-- Node12 -->
 <g id="node13" class="node">
 <title>Node12</title>
-<g id="a_node13"><a xlink:href="class_linear.html" target="_top" xlink:title="Performs a linear transform on the input value. The transform is of the form , where k is the input c...">
+<g id="a_node13"><a xlink:href="class_linear.html" target="_top" xlink:title="Performs a linear transform on the input value: output = (input * multiplier) + offset.">
 <polygon fill="white" stroke="black" points="1233.5,-407.08 1233.5,-426.08 1276.5,-426.08 1276.5,-407.08 1233.5,-407.08"/>
 <text text-anchor="middle" x="1255" y="-414.08" font-family="Helvetica,sans-Serif" font-size="10.00">Linear</text>
 </a>
@@ -452,7 +452,7 @@
 <!-- Node14 -->
 <g id="node15" class="node">
 <title>Node14</title>
-<g id="a_node15"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it ...">
+<g id="a_node15"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v...">
 <polygon fill="white" stroke="black" points="1191,-521.58 1191,-551.58 1319,-551.58 1319,-521.58 1191,-521.58"/>
 <text text-anchor="start" x="1199" y="-539.58" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15Voltage&lt; T_ads</text>
 <text text-anchor="middle" x="1255" y="-528.58" font-family="Helvetica,sans-Serif" font-size="10.00">_1x15, chip &gt;</text>
@@ -543,7 +543,7 @@
 <!-- Node20 -->
 <g id="node21" class="node">
 <title>Node20</title>
-<g id="a_node21"><a xlink:href="class_median.html" target="_top" xlink:title="Collects a list of input values of size sample_size and outputs the median value (i....">
+<g id="a_node21"><a xlink:href="class_median.html" target="_top" xlink:title="Outputs the median value of sample_size inputs.">
 <polygon fill="white" stroke="black" points="1231,-723.08 1231,-742.08 1279,-742.08 1279,-723.08 1231,-723.08"/>
 <text text-anchor="middle" x="1255" y="-730.08" font-family="Helvetica,sans-Serif" font-size="10.00">Median</text>
 </a>
@@ -558,7 +558,7 @@
 <!-- Node21 -->
 <g id="node22" class="node">
 <title>Node21</title>
-<g id="a_node22"><a xlink:href="class_moving_average.html" target="_top" xlink:title="Used to smooth the output of a value (signal) that has frequent variations. For example,...">
+<g id="a_node22"><a xlink:href="class_moving_average.html" target="_top" xlink:title="Outputs the moving average of the last sample_size inputs.">
 <polygon fill="white" stroke="black" points="1213,-685.08 1213,-704.08 1297,-704.08 1297,-685.08 1213,-685.08"/>
 <text text-anchor="middle" x="1255" y="-692.08" font-family="Helvetica,sans-Serif" font-size="10.00">MovingAverage</text>
 </a>
@@ -573,7 +573,7 @@
 <!-- Node22 -->
 <g id="node23" class="node">
 <title>Node22</title>
-<g id="a_node23"><a xlink:href="class_voltage_divider_r1.html" target="_top" xlink:title="A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit,...">
+<g id="a_node23"><a xlink:href="class_voltage_divider_r1.html" target="_top" xlink:title="Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit.">
 <polygon fill="white" stroke="black" points="1208.5,-647.08 1208.5,-666.08 1301.5,-666.08 1301.5,-647.08 1208.5,-647.08"/>
 <text text-anchor="middle" x="1255" y="-654.08" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageDividerR1</text>
 </a>
@@ -588,7 +588,7 @@
 <!-- Node23 -->
 <g id="node24" class="node">
 <title>Node23</title>
-<g id="a_node24"><a xlink:href="class_voltage_divider_r2.html" target="_top" xlink:title="A transform that uses the voltage divider formula to resolve the resistance of R2 in the circuit,...">
+<g id="a_node24"><a xlink:href="class_voltage_divider_r2.html" target="_top" xlink:title="Uses the voltage divider formula to calculate (and output) the resistance of R2 in the circuit.">
 <polygon fill="white" stroke="black" points="1208.5,-609.08 1208.5,-628.08 1301.5,-628.08 1301.5,-609.08 1208.5,-609.08"/>
 <text text-anchor="middle" x="1255" y="-616.08" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageDividerR2</text>
 </a>
@@ -603,7 +603,7 @@
 <!-- Node24 -->
 <g id="node25" class="node">
 <title>Node24</title>
-<g id="a_node25"><a xlink:href="class_voltage_multiplier.html" target="_top" xlink:title="A transform that does the opposite of what a physical voltage divider circuit does....">
+<g id="a_node25"><a xlink:href="class_voltage_multiplier.html" target="_top" xlink:title="A transform that does the opposite of what a physical voltage divider circuit does: convert the volta...">
 <polygon fill="white" stroke="black" points="1210.5,-571.08 1210.5,-590.08 1299.5,-590.08 1299.5,-571.08 1210.5,-571.08"/>
 <text text-anchor="middle" x="1255" y="-578.08" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageMultiplier</text>
 </a>
@@ -722,7 +722,7 @@
 <!-- Node30 -->
 <g id="node31" class="node">
 <title>Node30</title>
-<g id="a_node31"><a xlink:href="class_typecast.html" target="_top" xlink:title="A transform that allows you to convert from one data type to another. To use Typecast,...">
+<g id="a_node31"><a xlink:href="class_typecast.html" target="_top" xlink:title="Converts input from one data type to another, then outputs the new type.">
 <polygon fill="white" stroke="black" points="1199,-366.08 1199,-385.08 1311,-385.08 1311,-366.08 1199,-366.08"/>
 <text text-anchor="middle" x="1255" y="-373.08" font-family="Helvetica,sans-Serif" font-size="10.00">Typecast&lt; IN, OUT &gt;</text>
 </a>
@@ -786,7 +786,7 @@
 <!-- Node39 -->
 <g id="node39" class="node">
 <title>Node39</title>
-<g id="a_node39"><a xlink:href="class_frequency.html" target="_top" xlink:title="A transform that divides its input value by the time elapsed since the last reading.">
+<g id="a_node39"><a xlink:href="class_frequency.html" target="_top" xlink:title="Transforms its input into frequency (Hz: cycles per second)">
 <polygon fill="white" stroke="black" points="802,-596.08 802,-615.08 864,-615.08 864,-596.08 802,-596.08"/>
 <text text-anchor="middle" x="833" y="-603.08" font-family="Helvetica,sans-Serif" font-size="10.00">Frequency</text>
 </a>

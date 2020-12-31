@@ -12,7 +12,7 @@ var searchData=
   ['debouncetemplate',['DebounceTemplate',['../class_debounce_template.html',1,'DebounceTemplate&lt; T &gt;'],['../class_debounce_template.html#a9e01d0463e661167b1bb931bdb75e468',1,'DebounceTemplate::DebounceTemplate()']]],
   ['debug',['Debug',['../sensesp_8h.html#a5ae2f374710d648c2027c78237f5df01',1,'Debug():&#160;sensesp_app.cpp'],['../sensesp__app_8cpp.html#a5ae2f374710d648c2027c78237f5df01',1,'Debug():&#160;sensesp_app.cpp']]],
   ['default_5fchannel_5f',['default_channel_',['../class_p_w_m_output.html#adf707790f7a4e586d793b5b0e2773fdc',1,'PWMOutput']]],
-  ['delayed_5fclick_5freport',['delayed_click_report',['../class_click_type.html#a3a841d590b13cfbaf245aa3bcb891cf0',1,'ClickType']]],
+  ['delayed_5fclick_5freport_5f',['delayed_click_report_',['../class_click_type.html#a39f3d745cb3d6359a7daefb88b0a78b6',1,'ClickType']]],
   ['description',['description',['../struct_param_info.html#a4cc8fb2021184f5b228e6307f3507a38',1,'ParamInfo']]],
   ['description_5f',['description_',['../class_s_k_metadata.html#aedfb5f49fecfb1575a25b22178c2a90d',1,'SKMetadata']]],
   ['dgnss_5ffix',['dgnss_fix',['../nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a8d26d1fa1d0cda42a29843162786a0b6',1,'nmea_parser.cpp']]],
@@ -34,6 +34,6 @@ var searchData=
   ['discovery_2ecpp',['discovery.cpp',['../discovery_8cpp.html',1,'']]],
   ['discovery_2eh',['discovery.h',['../discovery_8h.html',1,'']]],
   ['display_5fname_5f',['display_name_',['../class_s_k_metadata.html#aa383628fc6ca0038c5265d0bb9a1042b',1,'SKMetadata']]],
-  ['double_5fclick_5finterval',['double_click_interval',['../class_click_type.html#a7d5a16fd9586414c1feeb76daa64a6cc',1,'ClickType']]],
+  ['double_5fclick_5finterval_5f',['double_click_interval_',['../class_click_type.html#af0f9e6f28386d7ec4bfcd12f0bf2037a',1,'ClickType']]],
   ['doubleclick',['DoubleClick',['../click__type_8h.html#a4a760072c8c7ae604f801ff82824b666a99f490e53ed16a6580a350b42e1143a9',1,'click_type.h']]]
 ];

@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title="A Transform that translates an integer value into a boolean value. min_value and MaxValue set a range...">
+<g id="a_node1"><a xlink:title="Translates an integer value into a boolean value, which depends on whether the integer value is &quot;in r...">
 <polygon fill="#bfbfbf" stroke="black" points="1092,-110.5 1092,-129.5 1181,-129.5 1181,-110.5 1092,-110.5"/>
 <text text-anchor="middle" x="1136.5" y="-117.5" font-family="Helvetica,sans-Serif" font-size="10.00">IntegerThreshold</text>
 </a>
@@ -98,7 +98,7 @@ var sectionId = 'dynsection-0';
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="305.5,-40.5 305.5,-59.5 388.5,-59.5 388.5,-40.5 305.5,-40.5"/>
 <text text-anchor="middle" x="347" y="-47.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>

@@ -88,7 +88,7 @@ var annotated_dup =
     [ "SKPutRequest", "class_s_k_put_request.html", "class_s_k_put_request" ],
     [ "SKPutRequestBase", "class_s_k_put_request_base.html", "class_s_k_put_request_base" ],
     [ "SKPutRequestListener", "class_s_k_put_request_listener.html", "class_s_k_put_request_listener" ],
-    [ "SKRequest", "class_s_k_request.html", null ],
+    [ "SKRequest", "class_s_k_request.html", "class_s_k_request" ],
     [ "SKValueListener", "class_s_k_value_listener.html", "class_s_k_value_listener" ],
     [ "SmartSwitchController", "class_smart_switch_controller.html", "class_smart_switch_controller" ],
     [ "StringSensor", "class_string_sensor.html", "class_string_sensor" ],

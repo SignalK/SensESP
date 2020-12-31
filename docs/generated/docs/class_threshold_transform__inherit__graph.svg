@@ -71,7 +71,7 @@
 <!-- Node2 -->
 <g id="node3" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="62,-260.5 62,-279.5 145,-279.5 145,-260.5 62,-260.5"/>
 <text text-anchor="middle" x="103.5" y="-267.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -199,7 +199,7 @@
 <!-- Node11 -->
 <g id="node12" class="node">
 <title>Node11</title>
-<g id="a_node12"><a xlink:href="class_integer_threshold.html" target="_top" xlink:title="A Transform that translates an integer value into a boolean value. min_value and MaxValue set a range...">
+<g id="a_node12"><a xlink:href="class_integer_threshold.html" target="_top" xlink:title="Translates an integer value into a boolean value, which depends on whether the integer value is &quot;in r...">
 <polygon fill="white" stroke="black" points="114,-0.5 114,-19.5 203,-19.5 203,-0.5 114,-0.5"/>
 <text text-anchor="middle" x="158.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">IntegerThreshold</text>
 </a>
@@ -214,7 +214,7 @@
 <!-- Node13 -->
 <g id="node14" class="node">
 <title>Node13</title>
-<g id="a_node14"><a xlink:href="class_numeric_threshold.html" target="_top" xlink:title="A Transform that translates a float value into a boolean value. min_value and MaxValue set a range....">
+<g id="a_node14"><a xlink:href="class_numeric_threshold.html" target="_top" xlink:title="Translates a float value into a boolean value, which depends on whether the float value is &quot;in range&quot;...">
 <polygon fill="white" stroke="black" points="232.5,-0.5 232.5,-19.5 328.5,-19.5 328.5,-0.5 232.5,-0.5"/>
 <text text-anchor="middle" x="280.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">NumericThreshold</text>
 </a>

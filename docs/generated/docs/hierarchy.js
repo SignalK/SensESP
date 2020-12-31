@@ -1,13 +1,13 @@
 var hierarchy =
 [
+    [ "ADS1x15< T_Ada_1x15 >", "class_a_d_s1x15.html", null ],
     [ "BaseAnalogReader", "class_base_analog_reader.html", null ],
+    [ "BME280", "class_b_m_e280.html", null ],
+    [ "BMP280", "class_b_m_p280.html", null ],
     [ "Configurable", "class_configurable.html", [
       [ "Networking", "class_networking.html", null ],
       [ "RgbLed", "class_rgb_led.html", null ],
       [ "Sensor", "class_sensor.html", [
-        [ "ADS1x15< T_Ada_1x15 >", "class_a_d_s1x15.html", null ],
-        [ "BME280", "class_b_m_e280.html", null ],
-        [ "BMP280", "class_b_m_p280.html", null ],
         [ "DallasTemperatureSensors", "class_dallas_temperature_sensors.html", null ],
         [ "DigitalInput", "class_digital_input.html", [
           [ "DigitalInputChange", "class_digital_input_change.html", null ],
@@ -35,8 +35,6 @@ var hierarchy =
           [ "Uptime", "class_uptime.html", null ],
           [ "WifiSignal", "class_wifi_signal.html", null ]
         ] ],
-        [ "Orientation9DOF", "class_orientation9_d_o_f.html", null ],
-        [ "SHT31", "class_s_h_t31.html", null ],
         [ "StringSensor", "class_string_sensor.html", [
           [ "IPAddrDev", "class_i_p_addr_dev.html", null ]
         ] ]
@@ -215,7 +213,9 @@ var hierarchy =
         [ "WSClient", "class_w_s_client.html", null ]
       ] ]
     ] ],
+    [ "Orientation9DOF", "class_orientation9_d_o_f.html", null ],
     [ "ParamInfo", "struct_param_info.html", null ],
+    [ "SKRequest::PendingRequest", "class_s_k_request_1_1_pending_request.html", null ],
     [ "Position", "struct_position.html", null ],
     [ "CurveInterpolator::Sample", "class_curve_interpolator_1_1_sample.html", null ],
     [ "SensESPApp", "class_sens_e_s_p_app.html", null ],
@@ -229,6 +229,7 @@ var hierarchy =
       [ "PSTI032SentenceParser", "class_p_s_t_i032_sentence_parser.html", null ],
       [ "PSTISentenceParser", "class_p_s_t_i_sentence_parser.html", null ]
     ] ],
+    [ "SHT31", "class_s_h_t31.html", null ],
     [ "SKDelta", "class_s_k_delta.html", null ],
     [ "SKMetadata", "class_s_k_metadata.html", null ],
     [ "SKRequest", "class_s_k_request.html", [

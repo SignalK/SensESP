@@ -1,6 +1,7 @@
 var signalk__put__request_8h =
 [
-    [ "SKRequest", "class_s_k_request.html", null ],
+    [ "SKRequest", "class_s_k_request.html", "class_s_k_request" ],
+    [ "PendingRequest", "class_s_k_request_1_1_pending_request.html", "class_s_k_request_1_1_pending_request" ],
     [ "SKPutRequestBase", "class_s_k_put_request_base.html", "class_s_k_put_request_base" ],
     [ "SKPutRequest", "class_s_k_put_request.html", "class_s_k_put_request" ],
     [ "SKBooleanPutRequest", "signalk__put__request_8h.html#af5482ebc1fef3acd7221abc3e56dd31d", null ],

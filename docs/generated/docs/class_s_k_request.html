@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -96,6 +96,8 @@ $(document).ready(function(){initNavTree('class_s_k_request.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="class_s_k_request-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">SKRequest Class Reference</div>  </div>
@@ -113,18 +115,70 @@ Inheritance diagram for SKRequest:</div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_k_request_1_1_pending_request.html">PendingRequest</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae90a27bec15ed7e8a43a5e90c7945f20"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_k_request.html#ae90a27bec15ed7e8a43a5e90c7945f20">send_request</a> (DynamicJsonDocument &amp;request, std::function&lt; void(DynamicJsonDocument &amp;)&gt; callback, uint32_t timeout=5000)</td></tr>
-<tr class="separator:ae90a27bec15ed7e8a43a5e90c7945f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac666c30cf6a22fdef2ccefc93233e79f"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_k_request.html#ac666c30cf6a22fdef2ccefc93233e79f">send_request</a> (DynamicJsonDocument &amp;request, std::function&lt; void(DynamicJsonDocument &amp;)&gt; callback, uint32_t timeout=5000)</td></tr>
+<tr class="separator:ac666c30cf6a22fdef2ccefc93233e79f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f7cf1cb7b984e069acab0053b3d8470"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_k_request.html#a8f7cf1cb7b984e069acab0053b3d8470">handle_response</a> (DynamicJsonDocument &amp;response)</td></tr>
 <tr class="separator:a8f7cf1cb7b984e069acab0053b3d8470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a352a0cb6824802651e8cf58b286af81c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_k_request.html#a352a0cb6824802651e8cf58b286af81c">remove_request</a> (String request_id)</td></tr>
+<tr class="separator:a352a0cb6824802651e8cf58b286af81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f0d2fcebb029920e8cc33e7a7b5da66"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_s_k_request_1_1_pending_request.html">PendingRequest</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_k_request.html#a2f0d2fcebb029920e8cc33e7a7b5da66">get_request</a> (String request_id)</td></tr>
+<tr class="separator:a2f0d2fcebb029920e8cc33e7a7b5da66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a040428f5aa4aeb6f0abc8b1ea0d10bbc"><td class="memItemLeft" align="right" valign="top">static std::map&lt; String, <a class="el" href="class_s_k_request_1_1_pending_request.html">PendingRequest</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_k_request.html#a040428f5aa4aeb6f0abc8b1ea0d10bbc">request_map</a></td></tr>
+<tr class="separator:a040428f5aa4aeb6f0abc8b1ea0d10bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A base class for all objects that are capable of sending "requests" to the SignalK server (and optionally receiving the responses) according to the specification located at <a href="https://signalk.org/specification/1.5.0/doc/request_response.html">https://signalk.org/specification/1.5.0/doc/request_response.html</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="signalk__put__request_8h_source.html#l00020">20</a> of file <a class="el" href="signalk__put__request_8h_source.html">signalk_put_request.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2f0d2fcebb029920e8cc33e7a7b5da66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f0d2fcebb029920e8cc33e7a7b5da66">&#9670;&nbsp;</a></span>get_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_s_k_request_1_1_pending_request.html">SKRequest::PendingRequest</a> * SKRequest::get_request </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>request_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the pending request object associated with request_id, or nullptr if no such id is found. </p>
+
+<p class="definition">Definition at line <a class="el" href="signalk__put__request_8cpp_source.html#l00055">55</a> of file <a class="el" href="signalk__put__request_8cpp_source.html">signalk_put_request.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_s_k_request_a2f0d2fcebb029920e8cc33e7a7b5da66_icgraph.svg" width="100%" height="402"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+
+</div>
+</div>
 <a id="a8f7cf1cb7b984e069acab0053b3d8470"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8f7cf1cb7b984e069acab0053b3d8470">&#9670;&nbsp;</a></span>handle_response()</h2>
 
@@ -150,7 +204,13 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Is called by the web socket code to handle any incoming request responses that is receives. </p>
 
-<p class="definition">Definition at line <a class="el" href="signalk__put__request_8cpp_source.html#l00062">62</a> of file <a class="el" href="signalk__put__request_8cpp_source.html">signalk_put_request.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__put__request_8cpp_source.html#l00064">64</a> of file <a class="el" href="signalk__put__request_8cpp_source.html">signalk_put_request.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_s_k_request_a8f7cf1cb7b984e069acab0053b3d8470_cgraph.svg" width="658" height="63"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -160,8 +220,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ae90a27bec15ed7e8a43a5e90c7945f20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae90a27bec15ed7e8a43a5e90c7945f20">&#9670;&nbsp;</a></span>send_request()</h2>
+<a id="a352a0cb6824802651e8cf58b286af81c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a352a0cb6824802651e8cf58b286af81c">&#9670;&nbsp;</a></span>remove_request()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +230,48 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void SKRequest::send_request </td>
+          <td class="memname">void SKRequest::remove_request </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>request_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Removes the specified request_id from the request_map, cleaning up outstanding reactions if necessary </p>
+
+<p class="definition">Definition at line <a class="el" href="signalk__put__request_8cpp_source.html#l00081">81</a> of file <a class="el" href="signalk__put__request_8cpp_source.html">signalk_put_request.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_s_k_request_a352a0cb6824802651e8cf58b286af81c_cgraph.svg" width="415" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_s_k_request_a352a0cb6824802651e8cf58b286af81c_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ac666c30cf6a22fdef2ccefc93233e79f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac666c30cf6a22fdef2ccefc93233e79f">&#9670;&nbsp;</a></span>send_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String SKRequest::send_request </td>
           <td>(</td>
           <td class="paramtype">DynamicJsonDocument &amp;&#160;</td>
           <td class="paramname"><em>request</em>, </td>
@@ -207,14 +308,41 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The request Id that is sent to the server. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="signalk__put__request_8cpp_source.html#l00018">18</a> of file <a class="el" href="signalk__put__request_8cpp_source.html">signalk_put_request.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_s_k_request_ae90a27bec15ed7e8a43a5e90c7945f20_icgraph.svg" width="627" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_s_k_request_ac666c30cf6a22fdef2ccefc93233e79f_icgraph.svg" width="627" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a040428f5aa4aeb6f0abc8b1ea0d10bbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a040428f5aa4aeb6f0abc8b1ea0d10bbc">&#9670;&nbsp;</a></span>request_map</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; String, <a class="el" href="class_s_k_request_1_1_pending_request.html">SKRequest::PendingRequest</a> * &gt; SKRequest::request_map</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A map to hold all of the requests we are expecting future responses from... </p>
+
+<p class="definition">Definition at line <a class="el" href="signalk__put__request_8h_source.html#l00056">56</a> of file <a class="el" href="signalk__put__request_8h_source.html">signalk_put_request.h</a>.</p>
 
 </div>
 </div>

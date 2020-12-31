@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -112,15 +112,11 @@ Inheritance diagram for SmartSwitchController:</div>
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for SmartSwitchController:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_smart_switch_controller__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aefa943624dc250407ad73b4601dfa719"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_switch_controller.html#aefa943624dc250407ad73b4601dfa719">SmartSwitchController</a> (bool auto_initialize=true)</td></tr>
+<tr class="separator:aefa943624dc250407ad73b4601dfa719"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6584265e6cc0cd46e80a64dedf3d9eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_switch_controller.html#aa6584265e6cc0cd46e80a64dedf3d9eb">enable</a> () override</td></tr>
 <tr class="separator:aa6584265e6cc0cd46e80a64dedf3d9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a349f8404d8ce901bc4fc4a5fdd7c7a5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_switch_controller.html#a349f8404d8ce901bc4fc4a5fdd7c7a5e">set_input</a> (bool new_value, uint8_t input_channel=0) override</td></tr>
@@ -207,6 +203,8 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ac41c61abf5bb24313f73571c5acfb53f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_switch_controller.html#ac41c61abf5bb24313f73571c5acfb53f">is_on</a> = false</td></tr>
 <tr class="separator:ac41c61abf5bb24313f73571c5acfb53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaee5a2358db3fe62d02e96135a930d59"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_switch_controller.html#aaee5a2358db3fe62d02e96135a930d59">auto_initialize_</a></td></tr>
+<tr class="separator:aaee5a2358db3fe62d02e96135a930d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td></tr>
 <tr class="memitem:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697">output</a></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -236,7 +234,42 @@ Additional Inherited Members</h2></td></tr>
 <a class="el" href="class_click_type.html" title="ClickType is a transform that consumes button clicks and translates them as events of type ClickTypes...">ClickType</a> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="smart__switch__controller_8h_source.html#l00032">32</a> of file <a class="el" href="smart__switch__controller_8h_source.html">smart_switch_controller.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aefa943624dc250407ad73b4601dfa719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefa943624dc250407ad73b4601dfa719">&#9670;&nbsp;</a></span>SmartSwitchController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SmartSwitchController::SmartSwitchController </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>auto_initialize</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The constructor </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">auto_initialize</td><td>If TRUE, the controller will emit an initial "off" status when enabled. This is generally the desired case unless this controller is mirroring the state of a remote load. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8h_source.html#l00044">44</a> of file <a class="el" href="smart__switch__controller_8h_source.html">smart_switch_controller.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa6584265e6cc0cd46e80a64dedf3d9eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6584265e6cc0cd46e80a64dedf3d9eb">&#9670;&nbsp;</a></span>enable()</h2>
 
@@ -307,7 +340,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8cpp_source.html#l00008">8</a> of file <a class="el" href="smart__switch__controller_8cpp_source.html">smart_switch_controller.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8cpp_source.html#l00010">10</a> of file <a class="el" href="smart__switch__controller_8cpp_source.html">smart_switch_controller.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -360,7 +393,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_value_consumer.html#a0a2ab6f7c8bfb460d8778f6ae727cde7">ValueConsumer&lt; String &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8cpp_source.html#l00032">32</a> of file <a class="el" href="smart__switch__controller_8cpp_source.html">smart_switch_controller.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8cpp_source.html#l00034">34</a> of file <a class="el" href="smart__switch__controller_8cpp_source.html">smart_switch_controller.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -413,7 +446,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_value_consumer.html#a0a2ab6f7c8bfb460d8778f6ae727cde7">ValueConsumer&lt; ClickTypes &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8cpp_source.html#l00014">14</a> of file <a class="el" href="smart__switch__controller_8cpp_source.html">smart_switch_controller.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8cpp_source.html#l00016">16</a> of file <a class="el" href="smart__switch__controller_8cpp_source.html">smart_switch_controller.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -424,6 +457,30 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aaee5a2358db3fe62d02e96135a930d59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaee5a2358db3fe62d02e96135a930d59">&#9670;&nbsp;</a></span>auto_initialize_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SmartSwitchController::auto_initialize_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8h_source.html#l00052">52</a> of file <a class="el" href="smart__switch__controller_8h_source.html">smart_switch_controller.h</a>.</p>
+
+</div>
+</div>
 <a id="ac41c61abf5bb24313f73571c5acfb53f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac41c61abf5bb24313f73571c5acfb53f">&#9670;&nbsp;</a></span>is_on</h2>
 
@@ -444,7 +501,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8h_source.html#l00043">43</a> of file <a class="el" href="smart__switch__controller_8h_source.html">smart_switch_controller.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="smart__switch__controller_8h_source.html#l00051">51</a> of file <a class="el" href="smart__switch__controller_8h_source.html">smart_switch_controller.h</a>.</p>
 
 </div>
 </div>
