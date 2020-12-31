@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('class_i_n_a219.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Represents an ADAfruit (or compatible) <a class="el" href="class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor. The constructor creates a ...">INA219</a> High Side DC Current <a class="el" href="class_sensor.html" title="Represents a raw hardware thingie.">Sensor</a>. The constructor creates a pointer to the instance, and starts up the sensor. The pointer is passed to INA219value, which retrieves the specified value.  
+<p>Represents an ADAfruit (or compatible) <a class="el" href="class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor.">INA219</a> High Side DC Current <a class="el" href="class_sensor.html" title="The base class for all sensors. Used only as a base class - never instantiated directly in a project.">Sensor</a>.  
  <a href="class_i_n_a219.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ina219_8h_source.html">ina219.h</a>&gt;</code></p>
@@ -112,17 +112,11 @@ Inheritance diagram for INA219:</div>
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_i_n_a219__inherit__graph.svg" width="306" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for INA219:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_i_n_a219__coll__graph.svg" width="306" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adc0300a6f6fa99ee85786a354614e343"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_n_a219.html#adc0300a6f6fa99ee85786a354614e343">INA219</a> (uint8_t addr=0x40, INA219CAL_t calibration_setting=cal32_2, String config_path=&quot;&quot;)</td></tr>
-<tr class="separator:adc0300a6f6fa99ee85786a354614e343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af79b5ea99badaee822e8c795f10454bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_n_a219.html#af79b5ea99badaee822e8c795f10454bb">INA219</a> (uint8_t addr=0x40, INA219CAL_t calibration_setting=cal32_2)</td></tr>
+<tr class="separator:af79b5ea99badaee822e8c795f10454bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_sensor"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_sensor')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_sensor.html">Sensor</a></td></tr>
 <tr class="memitem:a921d5f94f7f77fa42b5950a807a8e79c inherit pub_methods_class_sensor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sensor.html#a921d5f94f7f77fa42b5950a807a8e79c">Sensor</a> (String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
 <tr class="separator:a921d5f94f7f77fa42b5950a807a8e79c inherit pub_methods_class_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,8 +153,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a3bdfe18ddb1ca53b53f48ac8672a94d0"><td class="memItemLeft" align="right" valign="top">Adafruit_INA219 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_n_a219.html#a3bdfe18ddb1ca53b53f48ac8672a94d0">ina219</a></td></tr>
-<tr class="separator:a3bdfe18ddb1ca53b53f48ac8672a94d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6def9bf5815690db2d4e26155b5ec9a4"><td class="memItemLeft" align="right" valign="top">Adafruit_INA219 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_n_a219.html#a6def9bf5815690db2d4e26155b5ec9a4">ada_ina219_</a></td></tr>
+<tr class="separator:a6def9bf5815690db2d4e26155b5ec9a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_configurable.html">Configurable</a></td></tr>
 <tr class="memitem:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a></td></tr>
 <tr class="separator:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,12 +174,21 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents an ADAfruit (or compatible) <a class="el" href="class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor. The constructor creates a ...">INA219</a> High Side DC Current <a class="el" href="class_sensor.html" title="Represents a raw hardware thingie.">Sensor</a>. The constructor creates a pointer to the instance, and starts up the sensor. The pointer is passed to INA219value, which retrieves the specified value. </p>
+<div class="textblock"><p>Represents an ADAfruit (or compatible) <a class="el" href="class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor.">INA219</a> High Side DC Current <a class="el" href="class_sensor.html" title="The base class for all sensors. Used only as a base class - never instantiated directly in a project.">Sensor</a>. </p>
+<p>The constructor creates a pointer to the sensor, and starts up the sensor. The pointer is passed to INA219value, which retrieves the specified value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addr</td><td>Memory address where the sensor is read. Defaults to 0x40. Some sensors can use a different address - see the datasheet.</td></tr>
+    <tr><td class="paramname">calibration_setting</td><td>Determines the maximum voltage and amperage to be read. Choices are cal32_2 (the default), cal32_1, and cal16_400. See the Adafruit library for details. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a href="https://github.com/adafruit/Adafruit_INA219">https://github.com/adafruit/Adafruit_INA219</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ina219_8h_source.html#l00022">22</a> of file <a class="el" href="ina219_8h_source.html">ina219.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ina219_8h_source.html#l00034">34</a> of file <a class="el" href="ina219_8h_source.html">ina219.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adc0300a6f6fa99ee85786a354614e343"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc0300a6f6fa99ee85786a354614e343">&#9670;&nbsp;</a></span>INA219()</h2>
+<a id="af79b5ea99badaee822e8c795f10454bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af79b5ea99badaee822e8c795f10454bb">&#9670;&nbsp;</a></span>INA219()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,13 +203,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="ina219_8h.html#af0f21d23ba16939156ae369e49fc59d0">INA219CAL_t</a>&#160;</td>
-          <td class="paramname"><em>calibration_setting</em> = <code><a class="el" href="ina219_8h.html#af0f21d23ba16939156ae369e49fc59d0ae0ccdd359f693e07141b4bcef13e149a">cal32_2</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>config_path</em> = <code>&quot;&quot;</code>&#160;</td>
+          <td class="paramname"><em>calibration_setting</em> = <code><a class="el" href="ina219_8h.html#af0f21d23ba16939156ae369e49fc59d0ae0ccdd359f693e07141b4bcef13e149a">cal32_2</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -217,29 +214,23 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ina219_8cpp_source.html#l00009">9</a> of file <a class="el" href="ina219_8cpp_source.html">ina219.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_i_n_a219_adc0300a6f6fa99ee85786a354614e343_cgraph.svg" width="555" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a3bdfe18ddb1ca53b53f48ac8672a94d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bdfe18ddb1ca53b53f48ac8672a94d0">&#9670;&nbsp;</a></span>ina219</h2>
+<a id="a6def9bf5815690db2d4e26155b5ec9a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6def9bf5815690db2d4e26155b5ec9a4">&#9670;&nbsp;</a></span>ada_ina219_</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Adafruit_INA219* INA219::ina219</td>
+          <td class="memname">Adafruit_INA219* INA219::ada_ina219_</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ina219_8h_source.html#l00026">26</a> of file <a class="el" href="ina219_8h_source.html">ina219.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ina219_8h_source.html#l00037">37</a> of file <a class="el" href="ina219_8h_source.html">ina219.h</a>.</p>
 
 </div>
 </div>

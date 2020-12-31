@@ -17,12 +17,13 @@ var searchData=
   ['get_5fnetworking',['get_networking',['../class_sens_e_s_p_app.html#a70b401008321bed49322740472ac2005',1,'SensESPApp']]],
   ['get_5fnext_5faddress',['get_next_address',['../class_dallas_temperature_sensors.html#a1e1b9cd3dd2bde0d51ef657a490881eb',1,'DallasTemperatureSensors']]],
   ['get_5fproperty_5frow',['get_property_row',['../networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13',1,'networking.cpp']]],
+  ['get_5frequest',['get_request',['../class_s_k_request.html#a2f0d2fcebb029920e8cc33e7a7b5da66',1,'SKRequest']]],
   ['get_5fschema_5ftype_5fstring',['get_schema_type_string',['../lambda__transform_8cpp.html#ad157c07ea0943b787f0fb03fa11669bf',1,'get_schema_type_string(const T dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8cpp.html#ab2b46faeee0a0a89516c536f0b3fb7c7',1,'get_schema_type_string(const int dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8cpp.html#a1ba339fb0c0884b466ff07c096632b6c',1,'get_schema_type_string(const float dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8cpp.html#a088917acfc20b1694a87b1bac518676b',1,'get_schema_type_string(const String dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8cpp.html#aeff670170ffe32f04eaecd5f5135c7ce',1,'get_schema_type_string(const bool dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8h.html#ad157c07ea0943b787f0fb03fa11669bf',1,'get_schema_type_string(const T dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8h.html#ab2b46faeee0a0a89516c536f0b3fb7c7',1,'get_schema_type_string(const int dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8h.html#a1ba339fb0c0884b466ff07c096632b6c',1,'get_schema_type_string(const float dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8h.html#a088917acfc20b1694a87b1bac518676b',1,'get_schema_type_string(const String dummy):&#160;lambda_transform.cpp'],['../lambda__transform_8h.html#aeff670170ffe32f04eaecd5f5135c7ce',1,'get_schema_type_string(const bool dummy):&#160;lambda_transform.cpp']]],
   ['get_5fsensors',['get_sensors',['../class_sensor.html#a772509291ea3a645853975e404ad89f9',1,'Sensor']]],
   ['get_5fserver_5faddress',['get_server_address',['../class_w_s_client.html#a5d9426cc45ae12822ca114fcb599aeb8',1,'WSClient']]],
   ['get_5fserver_5fport',['get_server_port',['../class_w_s_client.html#a182276a74d4886630a5493f6fa4e7ab9',1,'WSClient']]],
   ['get_5fsk_5fdelta',['get_sk_delta',['../class_sens_e_s_p_app.html#affe6ab19c780012c4211b33d73ab6b03',1,'SensESPApp']]],
-  ['get_5fsk_5fpath',['get_sk_path',['../class_s_k_emitter.html#ab619d4a66c7683bf06350809e8c2153f',1,'SKEmitter::get_sk_path()'],['../class_s_k_listener.html#acd3c93850871a4ef30d01e3ed08c3fe1',1,'SKListener::get_sk_path()'],['../class_s_k_put_listener.html#aca1d1dbdf13e67b4b61c33816bc65184',1,'SKPutListener::get_sk_path()']]],
+  ['get_5fsk_5fpath',['get_sk_path',['../class_s_k_emitter.html#ab619d4a66c7683bf06350809e8c2153f',1,'SKEmitter::get_sk_path()'],['../class_s_k_listener.html#acd3c93850871a4ef30d01e3ed08c3fe1',1,'SKListener::get_sk_path()'],['../class_s_k_put_request_base.html#ac1d3f1c3849c818370f044b1321b398c',1,'SKPutRequestBase::get_sk_path()'],['../class_s_k_put_listener.html#aca1d1dbdf13e67b4b61c33816bc65184',1,'SKPutListener::get_sk_path()']]],
   ['get_5fsources',['get_sources',['../class_s_k_emitter.html#a14e45e259c78d1e4ab7bdcce94fc8b02',1,'SKEmitter']]],
   ['get_5fsystem_5fstatus_5fcontroller',['get_system_status_controller',['../class_sens_e_s_p_app.html#a08b8da31661f2dd98b9e3b72d3d57661',1,'SensESPApp']]],
   ['get_5ftransforms',['get_transforms',['../class_transform_base.html#a17bfeb1e7a836b7bc597aa7d7c4ac116',1,'TransformBase']]],
@@ -40,5 +41,5 @@ var searchData=
   ['gpggasentenceparser',['GPGGASentenceParser',['../class_g_p_g_g_a_sentence_parser.html#a1a3a77042194bd6ef59b7960c0f35fd1',1,'GPGGASentenceParser']]],
   ['gpgllsentenceparser',['GPGLLSentenceParser',['../class_g_p_g_l_l_sentence_parser.html#af4335548b0e919cb23ec9149bc2e8012',1,'GPGLLSentenceParser']]],
   ['gprmcsentenceparser',['GPRMCSentenceParser',['../class_g_p_r_m_c_sentence_parser.html#a8ea0212728334cc4b6fa4aa650fa2e58',1,'GPRMCSentenceParser']]],
-  ['gpsinput',['GPSInput',['../class_g_p_s_input.html#ac434000c2641c7ef06badb2d51f79520',1,'GPSInput']]]
+  ['gpsinput',['GPSInput',['../class_g_p_s_input.html#a714116d29480d73d60730664c711d065',1,'GPSInput']]]
 ];

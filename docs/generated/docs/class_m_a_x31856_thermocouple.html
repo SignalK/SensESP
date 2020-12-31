@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,17 +102,14 @@ $(document).ready(function(){initNavTree('class_m_a_x31856_thermocouple.html',''
 </div><!--header-->
 <div class="contents">
 
+<p>Reads the temperature from an Adafruit MAX31856 (or compatible) thermocouple breakout board. Communicates with the ESP via SPI.  
+ <a href="class_m_a_x31856_thermocouple.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="max31856__thermocouple_8h_source.html">max31856_thermocouple.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MAX31856Thermocouple:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_m_a_x31856_thermocouple__inherit__graph.svg" width="406" height="355"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for MAX31856Thermocouple:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_m_a_x31856_thermocouple__coll__graph.svg" width="419" height="368"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -168,8 +165,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab5bf3c1660f17374bcb02f65b6cd6e94"><td class="memItemLeft" align="right" valign="top">Adafruit_MAX31856 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_a_x31856_thermocouple.html#ab5bf3c1660f17374bcb02f65b6cd6e94">max31856</a></td></tr>
-<tr class="separator:ab5bf3c1660f17374bcb02f65b6cd6e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a760cbffb4aa6676077f70f3cab91fe4b"><td class="memItemLeft" align="right" valign="top">Adafruit_MAX31856 *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_a_x31856_thermocouple.html#a760cbffb4aa6676077f70f3cab91fe4b">max31856_</a></td></tr>
+<tr class="separator:a760cbffb4aa6676077f70f3cab91fe4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_configurable.html">Configurable</a></td></tr>
 <tr class="memitem:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a></td></tr>
 <tr class="separator:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,8 +189,22 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="max31856__thermocouple_8h_source.html#l00006">6</a> of file <a class="el" href="max31856__thermocouple_8h_source.html">max31856_thermocouple.h</a>.</p>
+<div class="textblock"><p>Reads the temperature from an Adafruit MAX31856 (or compatible) thermocouple breakout board. Communicates with the ESP via SPI. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cs_pin</td><td></td></tr>
+    <tr><td class="paramname">mosi_pin</td><td></td></tr>
+    <tr><td class="paramname">miso_pin</td><td></td></tr>
+    <tr><td class="paramname">clk_pin</td><td></td></tr>
+    <tr><td class="paramname">drdy_pin</td><td>The data-ready pin </td></tr>
+    <tr><td class="paramname">tc_type</td><td>Type of thermocouple that's attached to the MAX31856. For the available types, see <a href="https://github.com/adafruit/Adafruit_MAX31856/blob/master/Adafruit_MAX31856.h">https://github.com/adafruit/Adafruit_MAX31856/blob/master/Adafruit_MAX31856.h</a> </td></tr>
+    <tr><td class="paramname">read_delay</td><td>How often to read the sensor, in ms. </td></tr>
+    <tr><td class="paramname">config_path</td><td>The path to the sensor in the Config UI. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="max31856__thermocouple_8h_source.html#l00022">22</a> of file <a class="el" href="max31856__thermocouple_8h_source.html">max31856_thermocouple.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2e8fb0d3c58fe34f9d49554b418596a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2e8fb0d3c58fe34f9d49554b418596a8">&#9670;&nbsp;</a></span>MAX31856Thermocouple()</h2>
@@ -299,19 +310,19 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ab5bf3c1660f17374bcb02f65b6cd6e94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5bf3c1660f17374bcb02f65b6cd6e94">&#9670;&nbsp;</a></span>max31856</h2>
+<a id="a760cbffb4aa6676077f70f3cab91fe4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a760cbffb4aa6676077f70f3cab91fe4b">&#9670;&nbsp;</a></span>max31856_</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Adafruit_MAX31856* MAX31856Thermocouple::max31856</td>
+          <td class="memname">Adafruit_MAX31856* MAX31856Thermocouple::max31856_</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="max31856__thermocouple_8h_source.html#l00012">12</a> of file <a class="el" href="max31856__thermocouple_8h_source.html">max31856_thermocouple.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="max31856__thermocouple_8h_source.html#l00028">28</a> of file <a class="el" href="max31856__thermocouple_8h_source.html">max31856_thermocouple.h</a>.</p>
 
 </div>
 </div>

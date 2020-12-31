@@ -276,7 +276,7 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="node2" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node2"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="292,-318.5 292,-337.5 375,-337.5 375,-318.5 292,-318.5"/>
 <text text-anchor="middle" x="333.5" y="-325.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -438,7 +438,7 @@ var sectionId = 'dynsection-0';
 <!-- Node12 -->
 <g id="node13" class="node">
 <title>Node12</title>
-<g id="a_node13"><a xlink:href="class_integer_threshold.html" target="_top" xlink:title="A Transform that translates an integer value into a boolean value. min_value and MaxValue set a range...">
+<g id="a_node13"><a xlink:href="class_integer_threshold.html" target="_top" xlink:title="Translates an integer value into a boolean value, which depends on whether the integer value is &quot;in r...">
 <polygon fill="white" stroke="black" points="1232.5,-487.5 1232.5,-506.5 1321.5,-506.5 1321.5,-487.5 1232.5,-487.5"/>
 <text text-anchor="middle" x="1277" y="-494.5" font-family="Helvetica,sans-Serif" font-size="10.00">IntegerThreshold</text>
 </a>
@@ -453,7 +453,7 @@ var sectionId = 'dynsection-0';
 <!-- Node14 -->
 <g id="node15" class="node">
 <title>Node14</title>
-<g id="a_node15"><a xlink:href="class_numeric_threshold.html" target="_top" xlink:title="A Transform that translates a float value into a boolean value. min_value and MaxValue set a range....">
+<g id="a_node15"><a xlink:href="class_numeric_threshold.html" target="_top" xlink:title="Translates a float value into a boolean value, which depends on whether the float value is &quot;in range&quot;...">
 <polygon fill="white" stroke="black" points="1229,-532.5 1229,-551.5 1325,-551.5 1325,-532.5 1229,-532.5"/>
 <text text-anchor="middle" x="1277" y="-539.5" font-family="Helvetica,sans-Serif" font-size="10.00">NumericThreshold</text>
 </a>
@@ -500,7 +500,7 @@ var sectionId = 'dynsection-0';
 <!-- Node17 -->
 <g id="node18" class="node">
 <title>Node17</title>
-<g id="a_node18"><a xlink:href="class_linear.html" target="_top" xlink:title="Performs a linear transform on the input value. The transform is of the form , where k is the input c...">
+<g id="a_node18"><a xlink:href="class_linear.html" target="_top" xlink:title="Performs a linear transform on the input value: output = (input * multiplier) + offset.">
 <polygon fill="white" stroke="black" points="1423.5,-247.5 1423.5,-266.5 1466.5,-266.5 1466.5,-247.5 1423.5,-247.5"/>
 <text text-anchor="middle" x="1445" y="-254.5" font-family="Helvetica,sans-Serif" font-size="10.00">Linear</text>
 </a>
@@ -515,7 +515,7 @@ var sectionId = 'dynsection-0';
 <!-- Node19 -->
 <g id="node20" class="node">
 <title>Node19</title>
-<g id="a_node20"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it ...">
+<g id="a_node20"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v...">
 <polygon fill="white" stroke="black" points="1381,-438 1381,-468 1509,-468 1509,-438 1381,-438"/>
 <text text-anchor="start" x="1389" y="-456" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15Voltage&lt; T_ads</text>
 <text text-anchor="middle" x="1445" y="-445" font-family="Helvetica,sans-Serif" font-size="10.00">_1x15, chip &gt;</text>
@@ -606,7 +606,7 @@ var sectionId = 'dynsection-0';
 <!-- Node25 -->
 <g id="node26" class="node">
 <title>Node25</title>
-<g id="a_node26"><a xlink:href="class_median.html" target="_top" xlink:title="Collects a list of input values of size sample_size and outputs the median value (i....">
+<g id="a_node26"><a xlink:href="class_median.html" target="_top" xlink:title="Outputs the median value of sample_size inputs.">
 <polygon fill="white" stroke="black" points="1421,-601.5 1421,-620.5 1469,-620.5 1469,-601.5 1421,-601.5"/>
 <text text-anchor="middle" x="1445" y="-608.5" font-family="Helvetica,sans-Serif" font-size="10.00">Median</text>
 </a>
@@ -621,7 +621,7 @@ var sectionId = 'dynsection-0';
 <!-- Node26 -->
 <g id="node27" class="node">
 <title>Node26</title>
-<g id="a_node27"><a xlink:href="class_moving_average.html" target="_top" xlink:title="Used to smooth the output of a value (signal) that has frequent variations. For example,...">
+<g id="a_node27"><a xlink:href="class_moving_average.html" target="_top" xlink:title="Outputs the moving average of the last sample_size inputs.">
 <polygon fill="white" stroke="black" points="1403,-563.5 1403,-582.5 1487,-582.5 1487,-563.5 1403,-563.5"/>
 <text text-anchor="middle" x="1445" y="-570.5" font-family="Helvetica,sans-Serif" font-size="10.00">MovingAverage</text>
 </a>
@@ -636,7 +636,7 @@ var sectionId = 'dynsection-0';
 <!-- Node27 -->
 <g id="node28" class="node">
 <title>Node27</title>
-<g id="a_node28"><a xlink:href="class_voltage_divider_r1.html" target="_top" xlink:title="A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit,...">
+<g id="a_node28"><a xlink:href="class_voltage_divider_r1.html" target="_top" xlink:title="Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit.">
 <polygon fill="white" stroke="black" points="1398.5,-525.5 1398.5,-544.5 1491.5,-544.5 1491.5,-525.5 1398.5,-525.5"/>
 <text text-anchor="middle" x="1445" y="-532.5" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageDividerR1</text>
 </a>
@@ -651,7 +651,7 @@ var sectionId = 'dynsection-0';
 <!-- Node28 -->
 <g id="node29" class="node">
 <title>Node28</title>
-<g id="a_node29"><a xlink:href="class_voltage_divider_r2.html" target="_top" xlink:title="A transform that uses the voltage divider formula to resolve the resistance of R2 in the circuit,...">
+<g id="a_node29"><a xlink:href="class_voltage_divider_r2.html" target="_top" xlink:title="Uses the voltage divider formula to calculate (and output) the resistance of R2 in the circuit.">
 <polygon fill="white" stroke="black" points="1398.5,-487.5 1398.5,-506.5 1491.5,-506.5 1491.5,-487.5 1398.5,-487.5"/>
 <text text-anchor="middle" x="1445" y="-494.5" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageDividerR2</text>
 </a>
@@ -782,7 +782,7 @@ var sectionId = 'dynsection-0';
 <!-- Node44 -->
 <g id="node40" class="node">
 <title>Node44</title>
-<g id="a_node40"><a xlink:href="class_frequency.html" target="_top" xlink:title="A transform that divides its input value by the time elapsed since the last reading.">
+<g id="a_node40"><a xlink:href="class_frequency.html" target="_top" xlink:title="Transforms its input into frequency (Hz: cycles per second)">
 <polygon fill="white" stroke="black" points="992,-114.5 992,-133.5 1054,-133.5 1054,-114.5 992,-114.5"/>
 <text text-anchor="middle" x="1023" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">Frequency</text>
 </a>

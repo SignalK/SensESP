@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('class_sensor.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Represents a raw hardware thingie.  
+<p>The base class for all sensors. Used only as a base class - never instantiated directly in a project.  
  <a href="class_sensor.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="sensor_8h_source.html">sensor.h</a>&gt;</code></p>
@@ -110,12 +110,6 @@ $(document).ready(function(){initNavTree('class_sensor.html','');});
 Inheritance diagram for Sensor:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_sensor__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for Sensor:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_sensor__coll__graph.svg" width="306" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -174,9 +168,16 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents a raw hardware thingie. </p>
+<div class="textblock"><p>The base class for all sensors. Used only as a base class - never instantiated directly in a project. </p>
+<p>In SensESP, a sensor is something that takes a measurement outside of the SensESP / SignalK environment and brings it into SensESP. Look at the list of files in <a href="https://github.com/SignalK/SensESP/tree/master/src/sensors">https://github.com/SignalK/SensESP/tree/master/src/sensors</a> for all the already-defined sensors.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config_path</td><td>The path that defines the place in the hierarchy of variables, in the Config UI, that are configurable at run-time. If a class has no configurable variables, or if you simply don't want any particular variable to be configurable at run-time in your project, don't provide a config_path when you construct the class. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="sensor_8h_source.html#l00015">15</a> of file <a class="el" href="sensor_8h_source.html">sensor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensor_8h_source.html#l00027">27</a> of file <a class="el" href="sensor_8h_source.html">sensor.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a921d5f94f7f77fa42b5950a807a8e79c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a921d5f94f7f77fa42b5950a807a8e79c">&#9670;&nbsp;</a></span>Sensor()</h2>
@@ -222,7 +223,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensor_8h_source.html#l00019">19</a> of file <a class="el" href="sensor_8h_source.html">sensor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensor_8h_source.html#l00031">31</a> of file <a class="el" href="sensor_8h_source.html">sensor.h</a>.</p>
 
 </div>
 </div>

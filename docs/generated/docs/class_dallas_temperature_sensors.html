@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,17 +102,14 @@ $(document).ready(function(){initNavTree('class_dallas_temperature_sensors.html'
 </div><!--header-->
 <div class="contents">
 
+<p>Finds all 1-Wire temperature sensors that are connected to the ESP and makes the address(es) and temperature data available to the <a class="el" href="class_one_wire_temperature.html" title="Used to read the temperature from a single 1-Wire temperature sensor. If you have X sensors connected...">OneWireTemperature</a> class.  
+ <a href="class_dallas_temperature_sensors.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="onewire__temperature_8h_source.html">onewire_temperature.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for DallasTemperatureSensors:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_dallas_temperature_sensors__inherit__graph.svg" width="306" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for DallasTemperatureSensors:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_dallas_temperature_sensors__coll__graph.svg" width="306" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -160,8 +157,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:abd79995496fd66d416e6d9cd1ff56342"><td class="memItemLeft" align="right" valign="top">DallasTemperature *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dallas_temperature_sensors.html#abd79995496fd66d416e6d9cd1ff56342">sensors</a></td></tr>
-<tr class="separator:abd79995496fd66d416e6d9cd1ff56342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf7de7f7a87d242f37ac36ab6981c077"><td class="memItemLeft" align="right" valign="top">DallasTemperature *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dallas_temperature_sensors.html#aaf7de7f7a87d242f37ac36ab6981c077">sensors_</a></td></tr>
+<tr class="separator:aaf7de7f7a87d242f37ac36ab6981c077"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_configurable.html">Configurable</a></td></tr>
 <tr class="memitem:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a></td></tr>
 <tr class="separator:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,8 +178,17 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="onewire__temperature_8h_source.html#l00013">13</a> of file <a class="el" href="onewire__temperature_8h_source.html">onewire_temperature.h</a>.</p>
+<div class="textblock"><p>Finds all 1-Wire temperature sensors that are connected to the ESP and makes the address(es) and temperature data available to the <a class="el" href="class_one_wire_temperature.html" title="Used to read the temperature from a single 1-Wire temperature sensor. If you have X sensors connected...">OneWireTemperature</a> class. </p>
+<p>This class has no pre-defined limit on the number of 1-Wire sensors it can work with. From a practical standpoint, it should handle all the sensors you're likely to connect to a single ESP.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The GPIO pin to which you have the data wire of the 1-Wire sensor(s) connected.</td></tr>
+    <tr><td class="paramname">config_path</td><td>Currently not used for this class, don't provide it - it defaults to a blank String. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="onewire__temperature_8h_source.html#l00028">28</a> of file <a class="el" href="onewire__temperature_8h_source.html">onewire_temperature.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a778aa28e0e329028f2811c5ed71cb11d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a778aa28e0e329028f2811c5ed71cb11d">&#9670;&nbsp;</a></span>DallasTemperatureSensors()</h2>
@@ -247,7 +253,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_enable.html#a62ea021bf8d986150be346977a8eede3">Enable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="onewire__temperature_8h_source.html#l00016">16</a> of file <a class="el" href="onewire__temperature_8h_source.html">onewire_temperature.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="onewire__temperature_8h_source.html#l00031">31</a> of file <a class="el" href="onewire__temperature_8h_source.html">onewire_temperature.h</a>.</p>
 
 </div>
 </div>
@@ -292,19 +298,19 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="abd79995496fd66d416e6d9cd1ff56342"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd79995496fd66d416e6d9cd1ff56342">&#9670;&nbsp;</a></span>sensors</h2>
+<a id="aaf7de7f7a87d242f37ac36ab6981c077"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf7de7f7a87d242f37ac36ab6981c077">&#9670;&nbsp;</a></span>sensors_</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">DallasTemperature* DallasTemperatureSensors::sensors</td>
+          <td class="memname">DallasTemperature* DallasTemperatureSensors::sensors_</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="onewire__temperature_8h_source.html#l00019">19</a> of file <a class="el" href="onewire__temperature_8h_source.html">onewire_temperature.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="onewire__temperature_8h_source.html#l00034">34</a> of file <a class="el" href="onewire__temperature_8h_source.html">onewire_temperature.h</a>.</p>
 
 </div>
 </div>

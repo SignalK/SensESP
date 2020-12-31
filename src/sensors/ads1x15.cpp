@@ -3,8 +3,7 @@
 #include "sensesp.h"
 
 template <class T_Ada_1x15>
-ADS1x15<T_Ada_1x15>::ADS1x15(uint8_t addr, adsGain_t gain, String config_path)
-    : Sensor(config_path), gain_{gain} {
+ADS1x15<T_Ada_1x15>::ADS1x15(uint8_t addr, adsGain_t gain) : gain_{gain} {
   ads_ = new T_Ada_1x15(addr);
   ads_->begin();
   ads_->setGain(gain_);
@@ -54,14 +53,12 @@ void ADS1x15RawValue<T_ads_1x15>::enable() {
 template <class T_ads_1x15>
 void ADS1x15RawValue<T_ads_1x15>::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay_;
-  root["value"] = output;
 };
 
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
     }
   })###";
 

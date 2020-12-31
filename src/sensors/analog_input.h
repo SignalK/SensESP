@@ -4,14 +4,13 @@
 #include "analog_reader.h"
 #include "sensor.h"
 
-class AnalogInput : public NumericSensor {
- public:
   /**
    * @brief Sensor for reading the MCU analog input pins
    *
    * Read an analog input pin and return the result scaled onto a given range.
-   * Note that the ADCs in both ESP8266 and ESP32 are quite unlinear and noisy
-   * and unlikely to give very accurate results.
+   * Note that the ADCs in both ESP8266 and ESP32 are quite nonlinear and noisy
+   * and unlikely to give very accurate results. For accurate ADC results,
+   * SensESP supports the ADS1015 and ADS1115 ADC's.
    *
    * @param[in] pin The GPIO pin to read. On ESP8266, always A0. On ESP32, at
    * the moment only ADC channel 1 (pins 32..39) is supported.
@@ -30,6 +29,8 @@ class AnalogInput : public NumericSensor {
    * the X in the `0 to X` scale. For example, if you want your output to be
    * expressed as a percentage (0 to 100), make this parameter be 100.
    */
+ class AnalogInput : public NumericSensor {
+ public:
   AnalogInput(uint8_t pin = A0, uint read_delay = 200, String config_path = "",
               float output_scale = 1024.);
   void enable() override final;

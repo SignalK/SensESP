@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ultra_5flong_5fclick_5fdelay',['ultra_long_click_delay',['../class_click_type.html#a6f5981815572e3c12ec89a3bd3646f0b',1,'ClickType']]],
+  ['ultra_5flong_5fclick_5fdelay_5f',['ultra_long_click_delay_',['../class_click_type.html#a817ab3dc6af5db0818dbfe61769bd66a',1,'ClickType']]],
   ['ultralongsingleclick',['UltraLongSingleClick',['../click__type_8h.html#a4a760072c8c7ae604f801ff82824b666a90cdf9b893f111309c5f35d6bf413f90',1,'click_type.h']]],
   ['ultrasonic_5fdistance_2ecpp',['ultrasonic_distance.cpp',['../ultrasonic__distance_8cpp.html',1,'']]],
   ['ultrasonic_5fdistance_2eh',['ultrasonic_distance.h',['../ultrasonic__distance_8h.html',1,'']]],

@@ -5,7 +5,7 @@ var searchData=
   ['add_5fsample',['add_sample',['../class_curve_interpolator.html#a938e1bdc8256ef255c27ffc65c8360b7',1,'CurveInterpolator']]],
   ['add_5fsentence_5fparser',['add_sentence_parser',['../class_n_m_e_a_parser.html#a438b3fd8f8587b55a3785656651f73a6',1,'NMEAParser']]],
   ['addsample',['addSample',['../class_curve_interpolator.html#a263eaf111e6b5f47e72c6e13d77dea99',1,'CurveInterpolator']]],
-  ['ads1x15',['ADS1x15',['../class_a_d_s1x15.html#a222eece7162f1774e5970fc9f14dd6a2',1,'ADS1x15']]],
+  ['ads1x15',['ADS1x15',['../class_a_d_s1x15.html#a4ed4da8f62fb0bfc7aeec20de9632d6a',1,'ADS1x15']]],
   ['ads1x15rawvalue',['ADS1x15RawValue',['../class_a_d_s1x15_raw_value.html#a40c9fc985f5ba21c3d496c9c8833cfab',1,'ADS1x15RawValue']]],
   ['ads1x15voltage',['ADS1x15Voltage',['../class_a_d_s1x15_voltage.html#a8365ffe36ff36a9ee05e1442803929b6',1,'ADS1x15Voltage::ADS1x15Voltage(T_ads_1x15 *ads1x15, ADS1x15Channel_t channel=channel_0, uint read_delay=200, String config_path=&quot;&quot;)'],['../class_a_d_s1x15_voltage.html#a998e0006a12f339420963162f8bd5d31',1,'ADS1x15Voltage::ADS1x15Voltage(ADS1x15CHIP_t chip=ADS1115chip, adsGain_t gain=GAIN_TWOTHIRDS)']]],
   ['analoginput',['AnalogInput',['../class_analog_input.html#a63db2d6f83b69573a4739466a6e429e6',1,'AnalogInput']]],

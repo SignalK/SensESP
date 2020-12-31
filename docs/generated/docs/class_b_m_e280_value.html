@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -103,17 +103,14 @@ $(document).ready(function(){initNavTree('class_b_m_e280_value.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="class_b_m_e280_value.html" title="BME280Value reads and outputs the specified value of a BME280 sensor.">BME280Value</a> reads and outputs the specified value of a <a class="el" href="class_b_m_e280.html" title="Represents an ADAfruit (or compatible) BME280 temperature / pressure / humidity sensor.">BME280</a> sensor.  
+ <a href="class_b_m_e280_value.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="bme280_8h_source.html">bme280.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BME280Value:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_b_m_e280_value__inherit__graph.svg" width="406" height="355"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for BME280Value:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_b_m_e280_value__coll__graph.svg" width="459" height="382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -127,7 +124,7 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a59605de196c5141aac67b51522902183"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e280_value.html#a59605de196c5141aac67b51522902183">BME280Value</a> (<a class="el" href="class_b_m_e280.html">BME280</a> *<a class="el" href="class_b_m_e280_value.html#a333a82519078ad9ec9b3d5828b42bc2b">bme280</a>, <a class="el" href="class_b_m_e280_value.html#a4dff9590dbcf1d99b72df4269a66e2cb">BME280ValType</a> val_type, uint read_delay=500, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:a59605de196c5141aac67b51522902183"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e280_value.html#a59605de196c5141aac67b51522902183">BME280Value</a> (<a class="el" href="class_b_m_e280.html">BME280</a> *bme280, <a class="el" href="class_b_m_e280_value.html#a4dff9590dbcf1d99b72df4269a66e2cb">BME280ValType</a> val_type, uint read_delay=500, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
 <tr class="separator:a59605de196c5141aac67b51522902183"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afac9027689bc79c15e329bebec201c1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e280_value.html#afac9027689bc79c15e329bebec201c1b">enable</a> () override final</td></tr>
 <tr class="separator:afac9027689bc79c15e329bebec201c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,8 +174,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a333a82519078ad9ec9b3d5828b42bc2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_b_m_e280.html">BME280</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e280_value.html#a333a82519078ad9ec9b3d5828b42bc2b">bme280</a></td></tr>
-<tr class="separator:a333a82519078ad9ec9b3d5828b42bc2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa15943a50c150da43a2a21bd43a74472"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_b_m_e280.html">BME280</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_b_m_e280_value.html#aa15943a50c150da43a2a21bd43a74472">bme280_</a></td></tr>
+<tr class="separator:aa15943a50c150da43a2a21bd43a74472"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_configurable.html">Configurable</a></td></tr>
 <tr class="memitem:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a></td></tr>
 <tr class="separator:aaa54fa6156d9c7f5848d670bd9b18aa9 inherit pub_attribs_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,8 +198,18 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="bme280_8h_source.html#l00036">36</a> of file <a class="el" href="bme280_8h_source.html">bme280.h</a>.</p>
+<div class="textblock"><p><a class="el" href="class_b_m_e280_value.html" title="BME280Value reads and outputs the specified value of a BME280 sensor.">BME280Value</a> reads and outputs the specified value of a <a class="el" href="class_b_m_e280.html" title="Represents an ADAfruit (or compatible) BME280 temperature / pressure / humidity sensor.">BME280</a> sensor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bme280</td><td>A pointer to an instance of a <a class="el" href="class_b_m_e280.html" title="Represents an ADAfruit (or compatible) BME280 temperature / pressure / humidity sensor.">BME280</a>.</td></tr>
+    <tr><td class="paramname">val_type</td><td>The type of value you're reading: temperature, pressure, or humidity.</td></tr>
+    <tr><td class="paramname">read_delay</td><td>How often to read the sensor - in ms.</td></tr>
+    <tr><td class="paramname">config_path</td><td>Path in the Config UI to configure read_delay </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="bme280_8h_source.html#l00050">50</a> of file <a class="el" href="bme280_8h_source.html">bme280.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a4dff9590dbcf1d99b72df4269a66e2cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4dff9590dbcf1d99b72df4269a66e2cb">&#9670;&nbsp;</a></span>BME280ValType</h2>
@@ -221,7 +228,7 @@ Additional Inherited Members</h2></td></tr>
 <tr><td class="fieldname"><a id="a4dff9590dbcf1d99b72df4269a66e2cba12d040839f2737a41e92e14e665ad140"></a>humidity&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="bme280_8h_source.html#l00038">38</a> of file <a class="el" href="bme280_8h_source.html">bme280.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bme280_8h_source.html#l00052">52</a> of file <a class="el" href="bme280_8h_source.html">bme280.h</a>.</p>
 
 </div>
 </div>
@@ -264,7 +271,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bme280_8cpp_source.html#l00031">31</a> of file <a class="el" href="bme280_8cpp_source.html">bme280.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bme280_8cpp_source.html#l00028">28</a> of file <a class="el" href="bme280_8cpp_source.html">bme280.cpp</a>.</p>
 
 </div>
 </div>
@@ -295,7 +302,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_enable.html#a62ea021bf8d986150be346977a8eede3">Enable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="bme280_8cpp_source.html#l00043">43</a> of file <a class="el" href="bme280_8cpp_source.html">bme280.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bme280_8cpp_source.html#l00040">40</a> of file <a class="el" href="bme280_8cpp_source.html">bme280.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -306,19 +313,19 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a333a82519078ad9ec9b3d5828b42bc2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a333a82519078ad9ec9b3d5828b42bc2b">&#9670;&nbsp;</a></span>bme280</h2>
+<a id="aa15943a50c150da43a2a21bd43a74472"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa15943a50c150da43a2a21bd43a74472">&#9670;&nbsp;</a></span>bme280_</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_b_m_e280.html">BME280</a>* BME280Value::bme280</td>
+          <td class="memname"><a class="el" href="class_b_m_e280.html">BME280</a>* BME280Value::bme280_</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bme280_8h_source.html#l00042">42</a> of file <a class="el" href="bme280_8h_source.html">bme280.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bme280_8h_source.html#l00056">56</a> of file <a class="el" href="bme280_8h_source.html">bme280.h</a>.</p>
 
 </div>
 </div>

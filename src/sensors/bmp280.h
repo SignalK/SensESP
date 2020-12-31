@@ -37,7 +37,7 @@
     auto* bmp280 = new BMP280(0x76, bmp_280_sensor);
 
 */
-class BMP280 : public Sensor {
+class BMP280 {
  public:
   BMP280(uint8_t addr = 0x77, Adafruit_BMP280* sensor = NULL);
   Adafruit_BMP280* adafruit_bmp280_;

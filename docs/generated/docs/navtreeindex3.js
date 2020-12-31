@@ -1,5 +1,13 @@
 var NAVTREEINDEX3 =
 {
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666ad0fff85d3541aedaddfb3c5e67e897b4":[1,0,0,5,9,1,3],
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666ae331802be240d79912c365112ad41ddb":[1,0,0,5,9,1,0],
+"click__type_8h_source.html":[1,0,0,5,9],
+"configurable_8cpp.html":[1,0,0,4,0],
+"configurable_8cpp.html#a19ac563e52fea3af6b643155f9d258b6":[1,0,0,4,0,0],
+"configurable_8cpp_source.html":[1,0,0,4,0],
+"configurable_8h.html":[1,0,0,4,1],
+"configurable_8h.html#a19ac563e52fea3af6b643155f9d258b6":[1,0,0,4,1,1],
 "configurable_8h_source.html":[1,0,0,4,1],
 "curveinterpolator_8cpp.html":[1,0,0,5,10],
 "curveinterpolator_8cpp_source.html":[1,0,0,5,10],
@@ -241,13 +249,5 @@ var NAVTREEINDEX3 =
 "nmea__parser_8cpp_source.html":[1,0,0,4,7],
 "nmea__parser_8h.html":[1,0,0,4,8],
 "nmea__parser_8h.html#a6088978b66925a9ff44bbdf302f00726":[1,0,0,4,8,11],
-"nmea__parser_8h.html#a6487a496a45b3acfe263589909cfc101":[1,0,0,4,8,12],
-"nmea__parser_8h_source.html":[1,0,0,4,8],
-"observable_8cpp.html":[1,0,0,4,9],
-"observable_8cpp_source.html":[1,0,0,4,9],
-"observable_8h.html":[1,0,0,4,10],
-"observable_8h_source.html":[1,0,0,4,10],
-"observablevalue_8h.html":[1,0,0,4,11],
-"observablevalue_8h.html#a39aa0ba39924c6d828551a6d887cf6e5":[1,0,0,4,11,3],
-"observablevalue_8h.html#af4ac342ae6cb2542a761a0a43af7ff89":[1,0,0,4,11,2]
+"nmea__parser_8h.html#a6487a496a45b3acfe263589909cfc101":[1,0,0,4,8,12]
 };

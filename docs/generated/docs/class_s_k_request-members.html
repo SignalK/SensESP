@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -100,8 +100,11 @@ $(document).ready(function(){initNavTree('class_s_k_request.html','');});
 
 <p>This is the complete list of members for <a class="el" href="class_s_k_request.html">SKRequest</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_s_k_request.html#a8f7cf1cb7b984e069acab0053b3d8470">handle_response</a>(DynamicJsonDocument &amp;response)</td><td class="entry"><a class="el" href="class_s_k_request.html">SKRequest</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_s_k_request.html#ae90a27bec15ed7e8a43a5e90c7945f20">send_request</a>(DynamicJsonDocument &amp;request, std::function&lt; void(DynamicJsonDocument &amp;)&gt; callback, uint32_t timeout=5000)</td><td class="entry"><a class="el" href="class_s_k_request.html">SKRequest</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_s_k_request.html#a2f0d2fcebb029920e8cc33e7a7b5da66">get_request</a>(String request_id)</td><td class="entry"><a class="el" href="class_s_k_request.html">SKRequest</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_s_k_request.html#a8f7cf1cb7b984e069acab0053b3d8470">handle_response</a>(DynamicJsonDocument &amp;response)</td><td class="entry"><a class="el" href="class_s_k_request.html">SKRequest</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_s_k_request.html#a352a0cb6824802651e8cf58b286af81c">remove_request</a>(String request_id)</td><td class="entry"><a class="el" href="class_s_k_request.html">SKRequest</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_s_k_request.html#a040428f5aa4aeb6f0abc8b1ea0d10bbc">request_map</a></td><td class="entry"><a class="el" href="class_s_k_request.html">SKRequest</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_s_k_request.html#ac666c30cf6a22fdef2ccefc93233e79f">send_request</a>(DynamicJsonDocument &amp;request, std::function&lt; void(DynamicJsonDocument &amp;)&gt; callback, uint32_t timeout=5000)</td><td class="entry"><a class="el" href="class_s_k_request.html">SKRequest</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

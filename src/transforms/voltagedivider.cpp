@@ -1,17 +1,17 @@
 #include "voltagedivider.h"
 
 VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path)
-    : SymmetricTransform<float>(config_path), R2{R2}, Vin{Vin} {
+    : SymmetricTransform<float>(config_path), R2_{R2}, Vin_{Vin} {
   load_configuration();
 }
 
 void VoltageDividerR1::set_input(float Vout, uint8_t ignored) {
-  this->emit((Vin - Vout) * R2 / Vout);
+  this->emit((Vin_ - Vout) * R2_ / Vout);
 }
 
 void VoltageDividerR1::get_configuration(JsonObject& root) {
-  root["Vin"] = Vin;
-  root["R2"] = R2;
+  root["Vin"] = Vin_;
+  root["R2"] = R2_;
 }
 
 static const char SCHEMA_R1[] PROGMEM = R"({
@@ -35,24 +35,24 @@ bool VoltageDividerR1::set_configuration(const JsonObject& config) {
     }
   }
 
-  Vin = config["Vin"];
-  R2 = config["R2"];
+  Vin_ = config["Vin"];
+  R2_ = config["R2"];
 
   return true;
 }
 
 VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path)
-    : SymmetricTransform<float>(config_path), R1{R1}, Vin{Vin} {
+    : SymmetricTransform<float>(config_path), R1_{R1}, Vin_{Vin} {
   load_configuration();
 }
 
 void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {
-  this->emit((Vout * R1) / (Vin - Vout));
+  this->emit((Vout * R1_) / (Vin_ - Vout));
 }
 
 void VoltageDividerR2::get_configuration(JsonObject& root) {
-  root["Vin"] = Vin;
-  root["R1"] = R1;
+  root["Vin"] = Vin_;
+  root["R1"] = R1_;
 }
 
 static const char SCHEMA_R2[] PROGMEM = R"({
@@ -76,8 +76,8 @@ bool VoltageDividerR2::set_configuration(const JsonObject& config) {
     }
   }
 
-  Vin = config["Vin"];
-  R1 = config["R1"];
+  Vin_ = config["Vin"];
+  R1_ = config["R1"];
 
   return true;
 }

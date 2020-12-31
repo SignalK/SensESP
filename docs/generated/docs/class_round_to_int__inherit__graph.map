@@ -1,9 +1,9 @@
 <map id="RoundToInt" name="RoundToInt">
-<area shape="rect" id="node1" title="A Typecast transform that takes as its input a float number, rounds it to the nearest whole number,..." alt="" coords="2197,188,2287,215"/>
+<area shape="rect" id="node1" title="Takes as its input a float, rounds it to the nearest whole number, then outputs it as an int." alt="" coords="2197,188,2287,215"/>
 <area shape="rect" id="node2" href="$class_typecast.html" title=" " alt="" coords="2001,188,2148,215"/>
 <area shape="rect" id="node3" href="$class_lambda_transform.html" title=" " alt="" coords="1511,153,1679,194"/>
 <area shape="rect" id="node4" href="$class_transform.html" title=" " alt="" coords="1024,132,1176,159"/>
-<area shape="rect" id="node5" href="$class_transform_base.html" title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher..." alt="" coords="419,235,529,261"/>
+<area shape="rect" id="node5" href="$class_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="419,235,529,261"/>
 <area shape="rect" id="node13" href="$class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="764,231,896,257"/>
 <area shape="rect" id="node17" href="$class_transform.html" title=" " alt="" coords="1023,260,1177,287"/>
 <area shape="rect" id="node6" href="$class_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="169,261,263,288"/>
@@ -19,5 +19,5 @@
 <area shape="rect" id="node19" href="$class_value_producer.html" title=" " alt="" coords="395,392,553,419"/>
 <area shape="rect" id="node16" href="$class_lambda_transform.html" title="Construct a new transform based on a single function." alt="" coords="1227,183,1384,239"/>
 <area shape="rect" id="node21" href="$class_lambda_transform.html" title=" " alt="" coords="1516,218,1673,259"/>
-<area shape="rect" id="node20" href="$class_typecast.html" title="A transform that allows you to convert from one data type to another. To use Typecast,..." alt="" coords="1728,215,1877,241"/>
+<area shape="rect" id="node20" href="$class_typecast.html" title="Converts input from one data type to another, then outputs the new type." alt="" coords="1728,215,1877,241"/>
 </map>

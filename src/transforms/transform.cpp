@@ -5,9 +5,9 @@
 
 // Transform
 
-std::set<TransformBase*> TransformBase::transforms;
+std::set<TransformBase*> TransformBase::transforms_;
 
 TransformBase::TransformBase(String config_path)
     : Configurable{config_path}, Enable(5) {
-  transforms.insert(this);
+  transforms_.insert(this);
 }

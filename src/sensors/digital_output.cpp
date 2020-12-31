@@ -3,11 +3,11 @@
 #include "Arduino.h"
 
 DigitalOutput::DigitalOutput(int pin) {
-  pin_number = pin;
+  pin_number_ = pin;
   pinMode(pin, OUTPUT);
 }
 
 void DigitalOutput::set_input(bool new_value, uint8_t inputChannel) {
-  digitalWrite(pin_number, new_value);
+  digitalWrite(pin_number_, new_value);
   this->emit(new_value);
 }

@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -114,16 +114,10 @@ Inheritance diagram for ClickType:</div>
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_click_type__inherit__graph.svg" width="100%" height="527"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for ClickType:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_click_type__coll__graph.svg" width="100%" height="584"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a88f578cc51609106df51155494b62e5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a88f578cc51609106df51155494b62e5b">ClickType</a> (String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;, uint16_t <a class="el" href="class_click_type.html#a5d5ad3eafb5bfcfd597c2316d8b37da5">long_click_delay</a>=1300, uint16_t <a class="el" href="class_click_type.html#a7d5a16fd9586414c1feeb76daa64a6cc">double_click_interval</a>=400, uint16_t <a class="el" href="class_click_type.html#a6f5981815572e3c12ec89a3bd3646f0b">ultra_long_click_delay</a>=5000)</td></tr>
+<tr class="memitem:a88f578cc51609106df51155494b62e5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a88f578cc51609106df51155494b62e5b">ClickType</a> (String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;, uint16_t long_click_delay=1300, uint16_t double_click_interval=400, uint16_t ultra_long_click_delay=5000)</td></tr>
 <tr class="separator:a88f578cc51609106df51155494b62e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b1a0723cd0b8438d3f1ec380243d208"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a7b1a0723cd0b8438d3f1ec380243d208">set_input</a> (bool input, uint8_t input_channel=0) override</td></tr>
 <tr class="separator:a7b1a0723cd0b8438d3f1ec380243d208"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,22 +215,22 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aad23a0b6a3b88d8d9347b8015827ad3e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#aad23a0b6a3b88d8d9347b8015827ad3e">click_count</a></td></tr>
-<tr class="separator:aad23a0b6a3b88d8d9347b8015827ad3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d5ad3eafb5bfcfd597c2316d8b37da5"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a5d5ad3eafb5bfcfd597c2316d8b37da5">long_click_delay</a></td></tr>
-<tr class="separator:a5d5ad3eafb5bfcfd597c2316d8b37da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f5981815572e3c12ec89a3bd3646f0b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a6f5981815572e3c12ec89a3bd3646f0b">ultra_long_click_delay</a></td></tr>
-<tr class="separator:a6f5981815572e3c12ec89a3bd3646f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d5a16fd9586414c1feeb76daa64a6cc"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a7d5a16fd9586414c1feeb76daa64a6cc">double_click_interval</a></td></tr>
-<tr class="separator:a7d5a16fd9586414c1feeb76daa64a6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76394a3bad716d7bd1f74b54a58e8266"><td class="memItemLeft" align="right" valign="top">elapsedMillis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a76394a3bad716d7bd1f74b54a58e8266">press_duration</a></td></tr>
-<tr class="memdesc:a76394a3bad716d7bd1f74b54a58e8266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timmer to time button presses.  <a href="#a76394a3bad716d7bd1f74b54a58e8266">More...</a><br /></td></tr>
-<tr class="separator:a76394a3bad716d7bd1f74b54a58e8266"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28670885d433ccc698b1fc3b80990274"><td class="memItemLeft" align="right" valign="top">elapsedMillis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a28670885d433ccc698b1fc3b80990274">release_duration</a></td></tr>
-<tr class="memdesc:a28670885d433ccc698b1fc3b80990274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer to time interval between button releases.  <a href="#a28670885d433ccc698b1fc3b80990274">More...</a><br /></td></tr>
-<tr class="separator:a28670885d433ccc698b1fc3b80990274"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a841d590b13cfbaf245aa3bcb891cf0"><td class="memItemLeft" align="right" valign="top">DelayReaction *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a3a841d590b13cfbaf245aa3bcb891cf0">delayed_click_report</a></td></tr>
-<tr class="separator:a3a841d590b13cfbaf245aa3bcb891cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16efc016d0d211a996d19a993ebca8e0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a16efc016d0d211a996d19a993ebca8e0">click_count_</a></td></tr>
+<tr class="separator:a16efc016d0d211a996d19a993ebca8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b61fd5d3364a7f11f1b0c121fd50b03"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a4b61fd5d3364a7f11f1b0c121fd50b03">long_click_delay_</a></td></tr>
+<tr class="separator:a4b61fd5d3364a7f11f1b0c121fd50b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a817ab3dc6af5db0818dbfe61769bd66a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a817ab3dc6af5db0818dbfe61769bd66a">ultra_long_click_delay_</a></td></tr>
+<tr class="separator:a817ab3dc6af5db0818dbfe61769bd66a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f9e6f28386d7ec4bfcd12f0bf2037a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#af0f9e6f28386d7ec4bfcd12f0bf2037a">double_click_interval_</a></td></tr>
+<tr class="separator:af0f9e6f28386d7ec4bfcd12f0bf2037a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5d3bf1f68cc1024b1e02edef16ca12"><td class="memItemLeft" align="right" valign="top">elapsedMillis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a0d5d3bf1f68cc1024b1e02edef16ca12">press_duration_</a></td></tr>
+<tr class="memdesc:a0d5d3bf1f68cc1024b1e02edef16ca12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timmer to time button presses.  <a href="#a0d5d3bf1f68cc1024b1e02edef16ca12">More...</a><br /></td></tr>
+<tr class="separator:a0d5d3bf1f68cc1024b1e02edef16ca12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac378d5adad1b411b4fc9921871c7b9ae"><td class="memItemLeft" align="right" valign="top">elapsedMillis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#ac378d5adad1b411b4fc9921871c7b9ae">release_duration_</a></td></tr>
+<tr class="memdesc:ac378d5adad1b411b4fc9921871c7b9ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer to time interval between button releases.  <a href="#ac378d5adad1b411b4fc9921871c7b9ae">More...</a><br /></td></tr>
+<tr class="separator:ac378d5adad1b411b4fc9921871c7b9ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f3d745cb3d6359a7daefb88b0a78b6"><td class="memItemLeft" align="right" valign="top">DelayReaction *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_click_type.html#a39f3d745cb3d6359a7daefb88b0a78b6">delayed_click_report_</a></td></tr>
+<tr class="separator:a39f3d745cb3d6359a7daefb88b0a78b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_value_producer.html">ValueProducer&lt; ClickTypes &gt;</a></td></tr>
 <tr class="memitem:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="click__type_8h.html#a4a760072c8c7ae604f801ff82824b666">ClickTypes</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697">output</a></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -683,8 +677,8 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aad23a0b6a3b88d8d9347b8015827ad3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad23a0b6a3b88d8d9347b8015827ad3e">&#9670;&nbsp;</a></span>click_count</h2>
+<a id="a16efc016d0d211a996d19a993ebca8e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16efc016d0d211a996d19a993ebca8e0">&#9670;&nbsp;</a></span>click_count_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -693,7 +687,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ClickType::click_count</td>
+          <td class="memname">int ClickType::click_count_</td>
         </tr>
       </table>
   </td>
@@ -708,8 +702,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a3a841d590b13cfbaf245aa3bcb891cf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a841d590b13cfbaf245aa3bcb891cf0">&#9670;&nbsp;</a></span>delayed_click_report</h2>
+<a id="a39f3d745cb3d6359a7daefb88b0a78b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39f3d745cb3d6359a7daefb88b0a78b6">&#9670;&nbsp;</a></span>delayed_click_report_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,7 +712,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DelayReaction* ClickType::delayed_click_report</td>
+          <td class="memname">DelayReaction* ClickType::delayed_click_report_</td>
         </tr>
       </table>
   </td>
@@ -733,8 +727,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a7d5a16fd9586414c1feeb76daa64a6cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d5a16fd9586414c1feeb76daa64a6cc">&#9670;&nbsp;</a></span>double_click_interval</h2>
+<a id="af0f9e6f28386d7ec4bfcd12f0bf2037a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0f9e6f28386d7ec4bfcd12f0bf2037a">&#9670;&nbsp;</a></span>double_click_interval_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -743,7 +737,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t ClickType::double_click_interval</td>
+          <td class="memname">uint16_t ClickType::double_click_interval_</td>
         </tr>
       </table>
   </td>
@@ -758,8 +752,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a5d5ad3eafb5bfcfd597c2316d8b37da5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d5ad3eafb5bfcfd597c2316d8b37da5">&#9670;&nbsp;</a></span>long_click_delay</h2>
+<a id="a4b61fd5d3364a7f11f1b0c121fd50b03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b61fd5d3364a7f11f1b0c121fd50b03">&#9670;&nbsp;</a></span>long_click_delay_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -768,7 +762,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t ClickType::long_click_delay</td>
+          <td class="memname">uint16_t ClickType::long_click_delay_</td>
         </tr>
       </table>
   </td>
@@ -783,8 +777,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a76394a3bad716d7bd1f74b54a58e8266"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76394a3bad716d7bd1f74b54a58e8266">&#9670;&nbsp;</a></span>press_duration</h2>
+<a id="a0d5d3bf1f68cc1024b1e02edef16ca12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d5d3bf1f68cc1024b1e02edef16ca12">&#9670;&nbsp;</a></span>press_duration_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -793,7 +787,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">elapsedMillis ClickType::press_duration</td>
+          <td class="memname">elapsedMillis ClickType::press_duration_</td>
         </tr>
       </table>
   </td>
@@ -809,8 +803,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a28670885d433ccc698b1fc3b80990274"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28670885d433ccc698b1fc3b80990274">&#9670;&nbsp;</a></span>release_duration</h2>
+<a id="ac378d5adad1b411b4fc9921871c7b9ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac378d5adad1b411b4fc9921871c7b9ae">&#9670;&nbsp;</a></span>release_duration_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -819,7 +813,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">elapsedMillis ClickType::release_duration</td>
+          <td class="memname">elapsedMillis ClickType::release_duration_</td>
         </tr>
       </table>
   </td>
@@ -835,8 +829,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a6f5981815572e3c12ec89a3bd3646f0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f5981815572e3c12ec89a3bd3646f0b">&#9670;&nbsp;</a></span>ultra_long_click_delay</h2>
+<a id="a817ab3dc6af5db0818dbfe61769bd66a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a817ab3dc6af5db0818dbfe61769bd66a">&#9670;&nbsp;</a></span>ultra_long_click_delay_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -845,7 +839,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t ClickType::ultra_long_click_delay</td>
+          <td class="memname">uint16_t ClickType::ultra_long_click_delay_</td>
         </tr>
       </table>
   </td>

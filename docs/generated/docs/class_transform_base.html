@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('class_transform_base.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>The base class for all transforms. All transforms are can be subscribed to by calling <a class="el" href="sensesp__app_8cpp.html#a0c812b75c2619ea71ff8026f5415aecd">attach()</a> (inherited from <a class="el" href="class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">Observable</a>). They can have an optional persistence configuration by specifying an "id" to save the configuration data in.  
+<p>The base class for all transforms. A transforms takes a value in, transforms it in some way, and outputs the transformed value.  
  <a href="class_transform_base.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="transform_8h_source.html">transform.h</a>&gt;</code></p>
@@ -110,12 +110,6 @@ $(document).ready(function(){initNavTree('class_transform_base.html','');});
 Inheritance diagram for TransformBase:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_transform_base__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for TransformBase:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_transform_base__coll__graph.svg" width="192" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -164,9 +158,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The base class for all transforms. All transforms are can be subscribed to by calling <a class="el" href="sensesp__app_8cpp.html#a0c812b75c2619ea71ff8026f5415aecd">attach()</a> (inherited from <a class="el" href="class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">Observable</a>). They can have an optional persistence configuration by specifying an "id" to save the configuration data in. </p>
+<div class="textblock"><p>The base class for all transforms. A transforms takes a value in, transforms it in some way, and outputs the transformed value. </p>
+<p>All transforms are subscribed to by calling <a class="el" href="sensesp__app_8cpp.html#a0c812b75c2619ea71ff8026f5415aecd">attach()</a> (inherited from <a class="el" href="class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">Observable</a>).</p>
+<p>They can have an optional persistence configuration by specifying an "id" to save the configuration data in. TODO: Is this still true? </p>
 
-<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00027">27</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00032">32</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4f28a4ec27046ac3ef1546eda4b5b43b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f28a4ec27046ac3ef1546eda4b5b43b">&#9670;&nbsp;</a></span>TransformBase()</h2>
@@ -212,7 +208,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00034">34</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transform_8h_source.html#l00039">39</a> of file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
 
 </div>
 </div>

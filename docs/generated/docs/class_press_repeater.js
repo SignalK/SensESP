@@ -7,10 +7,10 @@ var class_press_repeater =
     [ "set_configuration", "class_press_repeater.html#a7bdc58ae767a6000efa98de2c128cb91", null ],
     [ "set_input", "class_press_repeater.html#adc1cfd34d9ed1e3e29fa485fc222be6f", null ],
     [ "set_input", "class_press_repeater.html#ad3d26f28a45c151c830c4887f85ab152", null ],
-    [ "integer_false", "class_press_repeater.html#abb68f8f673afde5ab7a36adc93b3f18e", null ],
-    [ "last_value_sent", "class_press_repeater.html#a3a61b6869d11123429462fc3d042f0be", null ],
-    [ "pushed", "class_press_repeater.html#a864f4ee378f95e58337fdccc798918c6", null ],
-    [ "repeat_interval", "class_press_repeater.html#a80e7b7b63e5339eeababc65066d87ecd", null ],
-    [ "repeat_start_interval", "class_press_repeater.html#a36b48f693392a49edfbcb9d425ee7b2e", null ],
-    [ "repeating", "class_press_repeater.html#a5f2e6ce00e451e9999b98d5952bd0329", null ]
+    [ "integer_false_", "class_press_repeater.html#aefe015eb7e3a0ea8a9fc50e989a06333", null ],
+    [ "last_value_sent_", "class_press_repeater.html#a4a2b81bdd657be585e667d7df29e000e", null ],
+    [ "pushed_", "class_press_repeater.html#a56c70bacd6afcc6e597377219cf986df", null ],
+    [ "repeat_interval_", "class_press_repeater.html#a97206c627b286a3bfc54f5cf7a4a590a", null ],
+    [ "repeat_start_interval_", "class_press_repeater.html#a9f4f79b341ad25ab487e58bd48ef996c", null ],
+    [ "repeating_", "class_press_repeater.html#a80671be142f37752d3b7c97f50e986fc", null ]
 ];

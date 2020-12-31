@@ -12,7 +12,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title="A transform that divides its input value by the time elapsed since the last reading.">
+<g id="a_node1"><a xlink:title="Transforms its input into frequency (Hz: cycles per second)">
 <polygon fill="#bfbfbf" stroke="black" points="898,-104.8 898,-123.8 960,-123.8 960,-104.8 898,-104.8"/>
 <text text-anchor="middle" x="929" y="-111.8" font-family="Helvetica,sans-Serif" font-size="10.00">Frequency</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node2 -->
 <g id="node3" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="305.5,-166.8 305.5,-185.8 388.5,-185.8 388.5,-166.8 305.5,-166.8"/>
 <text text-anchor="middle" x="347" y="-173.8" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
