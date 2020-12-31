@@ -154,7 +154,7 @@ var sectionId = 'dynsection-0';
 <!-- Node2 -->
 <g id="node3" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="310,-167.92 310,-186.92 393,-186.92 393,-167.92 310,-167.92"/>
 <text text-anchor="middle" x="351.5" y="-174.92" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -369,7 +369,7 @@ var sectionId = 'dynsection-0';
 <!-- Node16 -->
 <g id="node17" class="node">
 <title>Node16</title>
-<g id="a_node17"><a xlink:href="class_typecast.html" target="_top" xlink:title="A transform that allows you to convert from one data type to another. To use Typecast,...">
+<g id="a_node17"><a xlink:href="class_typecast.html" target="_top" xlink:title="Converts input from one data type to another, then outputs the new type.">
 <polygon fill="white" stroke="black" points="1446.5,-131.92 1446.5,-150.92 1558.5,-150.92 1558.5,-131.92 1446.5,-131.92"/>
 <text text-anchor="middle" x="1502.5" y="-138.92" font-family="Helvetica,sans-Serif" font-size="10.00">Typecast&lt; IN, OUT &gt;</text>
 </a>
@@ -400,7 +400,7 @@ var sectionId = 'dynsection-0';
 <!-- Node18 -->
 <g id="node19" class="node">
 <title>Node18</title>
-<g id="a_node19"><a xlink:href="class_round_to_int.html" target="_top" xlink:title="A Typecast transform that takes as its input a float number, rounds it to the nearest whole number,...">
+<g id="a_node19"><a xlink:href="class_round_to_int.html" target="_top" xlink:title="Takes as its input a float, rounds it to the nearest whole number, then outputs it as an int.">
 <polygon fill="white" stroke="black" points="1802,-108.92 1802,-127.92 1869,-127.92 1869,-108.92 1802,-108.92"/>
 <text text-anchor="middle" x="1835.5" y="-115.92" font-family="Helvetica,sans-Serif" font-size="10.00">RoundToInt</text>
 </a>
@@ -421,7 +421,7 @@ var sectionId = 'dynsection-0';
 <!-- Node21 -->
 <g id="node22" class="node">
 <title>Node21</title>
-<g id="a_node22"><a xlink:href="class_linear.html" target="_top" xlink:title="Performs a linear transform on the input value. The transform is of the form , where k is the input c...">
+<g id="a_node22"><a xlink:href="class_linear.html" target="_top" xlink:title="Performs a linear transform on the input value: output = (input * multiplier) + offset.">
 <polygon fill="white" stroke="black" points="1481,-46.92 1481,-65.92 1524,-65.92 1524,-46.92 1481,-46.92"/>
 <text text-anchor="middle" x="1502.5" y="-53.92" font-family="Helvetica,sans-Serif" font-size="10.00">Linear</text>
 </a>

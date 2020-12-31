@@ -1,7 +1,8 @@
 var searchData=
 [
   ['networking_5f',['networking_',['../sensesp__app_8cpp.html#a272b089163f37f3cb9ac5a06bd1c3f01',1,'sensesp_app.cpp']]],
-  ['nmea_5fdata',['nmea_data',['../class_g_p_s_input.html#ae31d915c7701418b950dcbba4f87f72a',1,'GPSInput::nmea_data()'],['../class_sentence_parser.html#a77a87f5f20ac471591d2110856e8232b',1,'SentenceParser::nmea_data()']]],
+  ['nmea_5fdata',['nmea_data',['../class_sentence_parser.html#a77a87f5f20ac471591d2110856e8232b',1,'SentenceParser']]],
+  ['nmea_5fdata_5f',['nmea_data_',['../class_g_p_s_input.html#a950a6517cc0e5f37b65fe6362e23d1ff',1,'GPSInput']]],
   ['no_5fap_5fpattern',['no_ap_pattern',['../system__status__led_8cpp.html#ad55913bd86bb7e9d146be5cb3ac71ba7',1,'system_status_led.cpp']]],
   ['north',['north',['../struct_e_n_u_vector.html#a4cf8b3abdd2edd2f9a463fc6394dbb50',1,'ENUVector']]],
   ['null_5fow_5faddr',['null_ow_addr',['../onewire__temperature_8cpp.html#af247f8ddcd26451c72c7706fc884a6dc',1,'onewire_temperature.cpp']]],

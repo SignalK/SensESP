@@ -12,7 +12,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title="A transform that allows you to convert from one data type to another. To use Typecast,...">
+<g id="a_node1"><a xlink:title="Converts input from one data type to another, then outputs the new type.">
 <polygon fill="#bfbfbf" stroke="black" points="1276,-105.92 1276,-124.92 1388,-124.92 1388,-105.92 1276,-105.92"/>
 <text text-anchor="middle" x="1332" y="-112.92" font-family="Helvetica,sans-Serif" font-size="10.00">Typecast&lt; IN, OUT &gt;</text>
 </a>
@@ -85,7 +85,7 @@
 <!-- Node3 -->
 <g id="node4" class="node">
 <title>Node3</title>
-<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node4"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="310,-166.92 310,-185.92 393,-185.92 393,-166.92 310,-166.92"/>
 <text text-anchor="middle" x="351.5" y="-173.92" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -292,7 +292,7 @@
 <!-- Node16 -->
 <g id="node17" class="node">
 <title>Node16</title>
-<g id="a_node17"><a xlink:href="class_round_to_int.html" target="_top" xlink:title="A Typecast transform that takes as its input a float number, rounds it to the nearest whole number,...">
+<g id="a_node17"><a xlink:href="class_round_to_int.html" target="_top" xlink:title="Takes as its input a float, rounds it to the nearest whole number, then outputs it as an int.">
 <polygon fill="white" stroke="black" points="1628,-105.92 1628,-124.92 1695,-124.92 1695,-105.92 1628,-105.92"/>
 <text text-anchor="middle" x="1661.5" y="-112.92" font-family="Helvetica,sans-Serif" font-size="10.00">RoundToInt</text>
 </a>

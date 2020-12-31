@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="A Sensor whose output is a float.">
 <polygon fill="#bfbfbf" stroke="black" points="417,-228.5 417,-247.5 501,-247.5 501,-228.5 417,-228.5"/>
 <text text-anchor="middle" x="459" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">NumericSensor</text>
 </a>
@@ -67,7 +67,7 @@ var sectionId = 'dynsection-0';
 <!-- Node7 -->
 <g id="node8" class="node">
 <title>Node7</title>
-<g id="a_node8"><a xlink:href="class_a_d_s1x15_raw_value.html" target="_top" xlink:title=" ">
+<g id="a_node8"><a xlink:href="class_a_d_s1x15_raw_value.html" target="_top" xlink:title="Used to read the raw output of the ADS1x15, which is an integer between 0 and 32,768....">
 <polygon fill="white" stroke="black" points="542,-457 542,-487 660,-487 660,-457 542,-457"/>
 <text text-anchor="start" x="550" y="-475" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15RawValue&lt; T</text>
 <text text-anchor="middle" x="601" y="-464" font-family="Helvetica,sans-Serif" font-size="10.00">_ads_1x15 &gt;</text>
@@ -83,7 +83,7 @@ var sectionId = 'dynsection-0';
 <!-- Node9 -->
 <g id="node10" class="node">
 <title>Node9</title>
-<g id="a_node10"><a xlink:href="class_analog_input.html" target="_top" xlink:title=" ">
+<g id="a_node10"><a xlink:href="class_analog_input.html" target="_top" xlink:title="Sensor for reading the MCU analog input pins.">
 <polygon fill="white" stroke="black" points="567,-418.5 567,-437.5 635,-437.5 635,-418.5 567,-418.5"/>
 <text text-anchor="middle" x="601" y="-425.5" font-family="Helvetica,sans-Serif" font-size="10.00">AnalogInput</text>
 </a>
@@ -98,7 +98,7 @@ var sectionId = 'dynsection-0';
 <!-- Node10 -->
 <g id="node11" class="node">
 <title>Node10</title>
-<g id="a_node11"><a xlink:href="class_b_m_e280_value.html" target="_top" xlink:title=" ">
+<g id="a_node11"><a xlink:href="class_b_m_e280_value.html" target="_top" xlink:title="BME280Value reads and outputs the specified value of a BME280 sensor.">
 <polygon fill="white" stroke="black" points="562,-380.5 562,-399.5 640,-399.5 640,-380.5 562,-380.5"/>
 <text text-anchor="middle" x="601" y="-387.5" font-family="Helvetica,sans-Serif" font-size="10.00">BME280Value</text>
 </a>
@@ -128,7 +128,7 @@ var sectionId = 'dynsection-0';
 <!-- Node12 -->
 <g id="node13" class="node">
 <title>Node12</title>
-<g id="a_node13"><a xlink:href="class_i_n_a219_value.html" target="_top" xlink:title=" ">
+<g id="a_node13"><a xlink:href="class_i_n_a219_value.html" target="_top" xlink:title="INA219Value reads and outputs the specified value of an INA219 sensor.">
 <polygon fill="white" stroke="black" points="564,-304.5 564,-323.5 638,-323.5 638,-304.5 564,-304.5"/>
 <text text-anchor="middle" x="601" y="-311.5" font-family="Helvetica,sans-Serif" font-size="10.00">INA219Value</text>
 </a>
@@ -143,7 +143,7 @@ var sectionId = 'dynsection-0';
 <!-- Node13 -->
 <g id="node14" class="node">
 <title>Node13</title>
-<g id="a_node14"><a xlink:href="class_m_a_x31856_thermocouple.html" target="_top" xlink:title=" ">
+<g id="a_node14"><a xlink:href="class_m_a_x31856_thermocouple.html" target="_top" xlink:title="Reads the temperature from an Adafruit MAX31856 (or compatible) thermocouple breakout board....">
 <polygon fill="white" stroke="black" points="538,-266.5 538,-285.5 664,-285.5 664,-266.5 538,-266.5"/>
 <text text-anchor="middle" x="601" y="-273.5" font-family="Helvetica,sans-Serif" font-size="10.00">MAX31856Thermocouple</text>
 </a>
@@ -158,7 +158,7 @@ var sectionId = 'dynsection-0';
 <!-- Node14 -->
 <g id="node15" class="node">
 <title>Node14</title>
-<g id="a_node15"><a xlink:href="class_one_wire_temperature.html" target="_top" xlink:title=" ">
+<g id="a_node15"><a xlink:href="class_one_wire_temperature.html" target="_top" xlink:title="Used to read the temperature from a single 1&#45;Wire temperature sensor. If you have X sensors connected...">
 <polygon fill="white" stroke="black" points="546.5,-228.5 546.5,-247.5 655.5,-247.5 655.5,-228.5 546.5,-228.5"/>
 <text text-anchor="middle" x="601" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">OneWireTemperature</text>
 </a>
@@ -173,7 +173,7 @@ var sectionId = 'dynsection-0';
 <!-- Node15 -->
 <g id="node16" class="node">
 <title>Node15</title>
-<g id="a_node16"><a xlink:href="class_read9_d_o_f.html" target="_top" xlink:title=" ">
+<g id="a_node16"><a xlink:href="class_read9_d_o_f.html" target="_top" xlink:title="sets up the combo FXOS8700 + FXAS21002 sensor and outputs the specified orientation parameter value.">
 <polygon fill="white" stroke="black" points="568,-190.5 568,-209.5 634,-209.5 634,-190.5 568,-190.5"/>
 <text text-anchor="middle" x="601" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00">Read9DOF</text>
 </a>
@@ -188,7 +188,7 @@ var sectionId = 'dynsection-0';
 <!-- Node16 -->
 <g id="node17" class="node">
 <title>Node16</title>
-<g id="a_node17"><a xlink:href="class_s_h_t31_value.html" target="_top" xlink:title=" ">
+<g id="a_node17"><a xlink:href="class_s_h_t31_value.html" target="_top" xlink:title="SHT31Value reads and outputs the specified value of an SHT31 sensor.">
 <polygon fill="white" stroke="black" points="565.5,-152.5 565.5,-171.5 636.5,-171.5 636.5,-152.5 565.5,-152.5"/>
 <text text-anchor="middle" x="601" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">SHT31Value</text>
 </a>
@@ -203,7 +203,7 @@ var sectionId = 'dynsection-0';
 <!-- Node17 -->
 <g id="node18" class="node">
 <title>Node17</title>
-<g id="a_node18"><a xlink:href="class_system_hz.html" target="_top" xlink:title=" ">
+<g id="a_node18"><a xlink:href="class_system_hz.html" target="_top" xlink:title="Reports the current clock speed of the ESP.">
 <polygon fill="white" stroke="black" points="569.5,-114.5 569.5,-133.5 632.5,-133.5 632.5,-114.5 569.5,-114.5"/>
 <text text-anchor="middle" x="601" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">SystemHz</text>
 </a>
@@ -218,7 +218,7 @@ var sectionId = 'dynsection-0';
 <!-- Node18 -->
 <g id="node19" class="node">
 <title>Node18</title>
-<g id="a_node19"><a xlink:href="class_ultrasonic_distance.html" target="_top" xlink:title=" ">
+<g id="a_node19"><a xlink:href="class_ultrasonic_distance.html" target="_top" xlink:title="Reads a DYP&#45;A02YYWM&#45;V1.0 (and possibly other types) ultrasonic sensor and outputs the number of micro...">
 <polygon fill="white" stroke="black" points="551,-76.5 551,-95.5 651,-95.5 651,-76.5 551,-76.5"/>
 <text text-anchor="middle" x="601" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">UltrasonicDistance</text>
 </a>
@@ -233,7 +233,7 @@ var sectionId = 'dynsection-0';
 <!-- Node19 -->
 <g id="node20" class="node">
 <title>Node19</title>
-<g id="a_node20"><a xlink:href="class_uptime.html" target="_top" xlink:title=" ">
+<g id="a_node20"><a xlink:href="class_uptime.html" target="_top" xlink:title="Reports the number of seconds since the last restart of the ESP.">
 <polygon fill="white" stroke="black" points="577,-38.5 577,-57.5 625,-57.5 625,-38.5 577,-38.5"/>
 <text text-anchor="middle" x="601" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Uptime</text>
 </a>
@@ -248,7 +248,7 @@ var sectionId = 'dynsection-0';
 <!-- Node20 -->
 <g id="node21" class="node">
 <title>Node20</title>
-<g id="a_node21"><a xlink:href="class_wifi_signal.html" target="_top" xlink:title=" ">
+<g id="a_node21"><a xlink:href="class_wifi_signal.html" target="_top" xlink:title="Reports the current strength of the wifi signal that the ESP is connected to.">
 <polygon fill="white" stroke="black" points="570.5,-0.5 570.5,-19.5 631.5,-19.5 631.5,-0.5 570.5,-0.5"/>
 <text text-anchor="middle" x="601" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">WifiSignal</text>
 </a>
@@ -263,7 +263,7 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="node2" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="class_sensor.html" target="_top" xlink:title="Represents a raw hardware thingie.">
+<g id="a_node2"><a xlink:href="class_sensor.html" target="_top" xlink:title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project.">
 <polygon fill="white" stroke="black" points="136.5,-216.5 136.5,-235.5 183.5,-235.5 183.5,-216.5 136.5,-216.5"/>
 <text text-anchor="middle" x="160" y="-223.5" font-family="Helvetica,sans-Serif" font-size="10.00">Sensor</text>
 </a>
@@ -366,7 +366,7 @@ var sectionId = 'dynsection-0';
 <!-- Node8 -->
 <g id="node9" class="node">
 <title>Node8</title>
-<g id="a_node9"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it ...">
+<g id="a_node9"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v...">
 <polygon fill="white" stroke="black" points="701,-457 701,-487 829,-487 829,-457 701,-457"/>
 <text text-anchor="start" x="709" y="-475" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15Voltage&lt; T_ads</text>
 <text text-anchor="middle" x="765" y="-464" font-family="Helvetica,sans-Serif" font-size="10.00">_1x15 &gt;</text>

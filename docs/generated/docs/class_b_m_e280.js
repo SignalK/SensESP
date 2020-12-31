@@ -1,5 +1,5 @@
 var class_b_m_e280 =
 [
-    [ "BME280", "class_b_m_e280.html#a7eb425e9c7b1eebc6bad4288de80dcab", null ],
-    [ "adafruit_bme280", "class_b_m_e280.html#ac977ead8ac47915501544b240fee22fc", null ]
+    [ "BME280", "class_b_m_e280.html#adcc555a15b55a5d73e5b1de914790ddf", null ],
+    [ "adafruit_bme280_", "class_b_m_e280.html#a132cde35b989fdd29f8f3d1204a2b35c", null ]
 ];

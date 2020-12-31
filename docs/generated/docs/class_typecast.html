@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('class_typecast.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>A transform that allows you to convert from one data type to another. To use <a class="el" href="class_typecast.html" title="A transform that allows you to convert from one data type to another. To use Typecast,...">Typecast</a>, simply construct a new instance of <a class="el" href="class_typecast.html" title="A transform that allows you to convert from one data type to another. To use Typecast,...">Typecast</a>.  
+<p>Converts input from one data type to another, then outputs the new type.  
  <a href="class_typecast.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="typecast_8h_source.html">typecast.h</a>&gt;</code></p>
@@ -109,12 +109,6 @@ $(document).ready(function(){initNavTree('class_typecast.html','');});
 Inheritance diagram for Typecast&lt; IN, OUT &gt;:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_typecast__inherit__graph.svg" width="100%" height="526"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for Typecast&lt; IN, OUT &gt;:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_typecast__coll__graph.svg" width="100%" height="584"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -227,16 +221,19 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename IN, typename OUT&gt;<br />
 class Typecast&lt; IN, OUT &gt;</h3>
 
-<p>A transform that allows you to convert from one data type to another. To use <a class="el" href="class_typecast.html" title="A transform that allows you to convert from one data type to another. To use Typecast,...">Typecast</a>, simply construct a new instance of <a class="el" href="class_typecast.html" title="A transform that allows you to convert from one data type to another. To use Typecast,...">Typecast</a>. </p>
-<p>If the data type of IN is capable of doing a typecast to OUT on its own (i.e. C++ has an implicit conversion available, or IN defines a overloaded typecast operator for OUT), then no additional work is needed. If a compiler derived typecast from IN to OUT does not exist (or is not the functionality you are looking for), then you must pass in a lambda expression that is capable of doing the conversion explicitly. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Converts input from one data type to another, then outputs the new type. </p>
+<p>To use <a class="el" href="class_typecast.html" title="Converts input from one data type to another, then outputs the new type.">Typecast</a>, simply construct a new instance of <a class="el" href="class_typecast.html" title="Converts input from one data type to another, then outputs the new type.">Typecast</a>.</p>
+<p>If the data type of IN is capable of doing a typecast to OUT on its own (i.e. C++ has an implicit conversion available, or IN defines a overloaded typecast operator for OUT), then no additional work is needed.</p>
+<p>If a compiler-derived typecast from IN to OUT does not exist (or is not the functionality you are looking for), then you must pass in a lambda expression that is capable of doing the conversion explicitly.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">The</td><td>data type the typecast accepts as input </td></tr>
-    <tr><td class="paramname">The</td><td>data type the typecast outputs after conversion </td></tr>
+    <tr><td class="paramname">The</td><td>data type of input.</td></tr>
+    <tr><td class="paramname">The</td><td>data type of output. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="typecast_8h_source.html#l00025">25</a> of file <a class="el" href="typecast_8h_source.html">typecast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typecast_8h_source.html#l00032">32</a> of file <a class="el" href="typecast_8h_source.html">typecast.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3722d7f718945fcb623f61ba99fd4649"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3722d7f718945fcb623f61ba99fd4649">&#9670;&nbsp;</a></span>Typecast()</h2>
@@ -264,7 +261,7 @@ template&lt;typename IN, typename OUT&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="typecast_8h_source.html#l00029">29</a> of file <a class="el" href="typecast_8h_source.html">typecast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="typecast_8h_source.html#l00036">36</a> of file <a class="el" href="typecast_8h_source.html">typecast.h</a>.</p>
 
 </div>
 </div>

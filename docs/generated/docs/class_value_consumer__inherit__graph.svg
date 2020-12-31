@@ -320,7 +320,7 @@ var sectionId = 'dynsection-0';
 <!-- Node5 -->
 <g id="node6" class="node">
 <title>Node5</title>
-<g id="a_node6"><a xlink:href="class_digital_output.html" target="_top" xlink:title="Configures the specified GPIO pin as an output pin, then sets the status of that pin to HIGH whenever...">
+<g id="a_node6"><a xlink:href="class_digital_output.html" target="_top" xlink:title="Sets a GPIO pin to whatever the input is (true = HIGH, false = LOW), and passes the value on to the n...">
 <polygon fill="white" stroke="black" points="1249.5,-772 1249.5,-791 1359.5,-791 1359.5,-772 1249.5,-772"/>
 <text text-anchor="middle" x="1304.5" y="-779" font-family="Helvetica,sans-Serif" font-size="10.00">DigitalOutput&lt; bool &gt;</text>
 </a>
@@ -335,7 +335,7 @@ var sectionId = 'dynsection-0';
 <!-- Node6 -->
 <g id="node7" class="node">
 <title>Node6</title>
-<g id="a_node7"><a xlink:href="class_press_repeater.html" target="_top" xlink:title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users....">
+<g id="a_node7"><a xlink:href="class_press_repeater.html" target="_top" xlink:title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users.">
 <polygon fill="white" stroke="black" points="1245.5,-734 1245.5,-753 1363.5,-753 1363.5,-734 1245.5,-734"/>
 <text text-anchor="middle" x="1304.5" y="-741" font-family="Helvetica,sans-Serif" font-size="10.00">PressRepeater&lt; bool &gt;</text>
 </a>
@@ -350,7 +350,7 @@ var sectionId = 'dynsection-0';
 <!-- Node7 -->
 <g id="node8" class="node">
 <title>Node7</title>
-<g id="a_node8"><a xlink:href="class_repeat_report.html" target="_top" xlink:title="Ensures that values that do not change frequently are still reported at at a specified maximum silenc...">
+<g id="a_node8"><a xlink:href="class_repeat_report.html" target="_top" xlink:title="Ensures that values that do not change frequently are still reported at a specified maximum silence i...">
 <polygon fill="white" stroke="black" points="1254,-696 1254,-715 1355,-715 1355,-696 1254,-696"/>
 <text text-anchor="middle" x="1304.5" y="-703" font-family="Helvetica,sans-Serif" font-size="10.00">RepeatReport&lt; T &gt;</text>
 </a>
@@ -557,7 +557,7 @@ var sectionId = 'dynsection-0';
 <!-- Node40 -->
 <g id="node25" class="node">
 <title>Node40</title>
-<g id="a_node25"><a xlink:href="class_press_repeater.html" target="_top" xlink:title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users....">
+<g id="a_node25"><a xlink:href="class_press_repeater.html" target="_top" xlink:title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users.">
 <polygon fill="white" stroke="black" points="611.5,-528 611.5,-547 693.5,-547 693.5,-528 611.5,-528"/>
 <text text-anchor="middle" x="652.5" y="-535" font-family="Helvetica,sans-Serif" font-size="10.00">PressRepeater</text>
 </a>
@@ -633,7 +633,7 @@ var sectionId = 'dynsection-0';
 <!-- Node46 -->
 <g id="node30" class="node">
 <title>Node46</title>
-<g id="a_node30"><a xlink:href="class_frequency.html" target="_top" xlink:title="A transform that divides its input value by the time elapsed since the last reading.">
+<g id="a_node30"><a xlink:href="class_frequency.html" target="_top" xlink:title="Transforms its input into frequency (Hz: cycles per second)">
 <polygon fill="white" stroke="black" points="1069,-419 1069,-438 1131,-438 1131,-419 1069,-419"/>
 <text text-anchor="middle" x="1100" y="-426" font-family="Helvetica,sans-Serif" font-size="10.00">Frequency</text>
 </a>

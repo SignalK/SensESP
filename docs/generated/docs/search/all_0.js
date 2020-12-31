@@ -4,9 +4,10 @@ var searchData=
   ['acceleration_5fy',['acceleration_y',['../class_read9_d_o_f.html#adce59e3cd83086f9c600bba27263739eaf049804b0e8b83590a9a7df566cc8d69',1,'Read9DOF']]],
   ['acceleration_5fz',['acceleration_z',['../class_read9_d_o_f.html#adce59e3cd83086f9c600bba27263739ea2415394bfbdcb0e7a64f50061acd682f',1,'Read9DOF']]],
   ['accumulator',['Accumulator',['../integrator_8h.html#a9738309f33810b7bd9dac98c07a46890',1,'integrator.h']]],
-  ['adafruit_5fbme280',['adafruit_bme280',['../class_b_m_e280.html#ac977ead8ac47915501544b240fee22fc',1,'BME280']]],
+  ['ada_5fina219_5f',['ada_ina219_',['../class_i_n_a219.html#a6def9bf5815690db2d4e26155b5ec9a4',1,'INA219']]],
+  ['adafruit_5fbme280_5f',['adafruit_bme280_',['../class_b_m_e280.html#a132cde35b989fdd29f8f3d1204a2b35c',1,'BME280']]],
   ['adafruit_5fbmp280_5f',['adafruit_bmp280_',['../class_b_m_p280.html#a7f23ec6ec67986e1ec7f5dd56ac4f366',1,'BMP280']]],
-  ['adafruit_5fsht31',['adafruit_sht31',['../class_s_h_t31.html#ada57336159f2495b9a3ab318818e16aa',1,'SHT31']]],
+  ['adafruit_5fsht31_5f',['adafruit_sht31_',['../class_s_h_t31.html#aaae1cd423f193d711e773f4136de68c8',1,'SHT31']]],
   ['add_5fentry',['add_entry',['../class_s_k_metadata.html#ab75a06cbba12d220f8851d075ab4f571',1,'SKMetadata']]],
   ['add_5fmetadata',['add_metadata',['../class_s_k_emitter.html#adc9a9774018384f1d264d3cb51e2f59f',1,'SKEmitter']]],
   ['add_5fsample',['add_sample',['../class_curve_interpolator.html#a938e1bdc8256ef255c27ffc65c8360b7',1,'CurveInterpolator']]],
@@ -23,7 +24,7 @@ var searchData=
   ['ads1115rawvalue',['ADS1115RawValue',['../ads1x15_8h.html#a743fdef8f11174acd7711a3bf31c41ab',1,'ads1x15.h']]],
   ['ads1115value',['ADS1115Value',['../ads1x15_8h.html#ac74ed9a15eabc15bb5c655cd2652ce36',1,'ADS1115Value():&#160;ads1x15.h'],['../ads1x15_8h.html#a5953e6ad92b9f37e021c2faa06547049',1,'ADS1115value():&#160;ads1x15.h']]],
   ['ads1115voltage',['ADS1115Voltage',['../ads1x15_8h.html#ad9a274de1efec3a9ffb43a3d4f9ed700',1,'ads1x15.h']]],
-  ['ads1x15',['ADS1x15',['../class_a_d_s1x15.html',1,'ADS1x15&lt; T_Ada_1x15 &gt;'],['../class_a_d_s1x15.html#a222eece7162f1774e5970fc9f14dd6a2',1,'ADS1x15::ADS1x15()']]],
+  ['ads1x15',['ADS1x15',['../class_a_d_s1x15.html',1,'ADS1x15&lt; T_Ada_1x15 &gt;'],['../class_a_d_s1x15.html#a4ed4da8f62fb0bfc7aeec20de9632d6a',1,'ADS1x15::ADS1x15()']]],
   ['ads1x15_2ecpp',['ads1x15.cpp',['../ads1x15_8cpp.html',1,'']]],
   ['ads1x15_2eh',['ads1x15.h',['../ads1x15_8h.html',1,'']]],
   ['ads1x15_5f',['ads1x15_',['../class_a_d_s1x15_raw_value.html#aa5b512e16189295e0e628578b15476c5',1,'ADS1x15RawValue']]],
@@ -50,5 +51,6 @@ var searchData=
   ['append',['append',['../class_s_k_delta.html#afacfa3952be6179d0e96960575f393a8',1,'SKDelta']]],
   ['as_5fsignalk',['as_signalk',['../class_s_k_emitter.html#ab25ae819460f8a07fee381cc06332f95',1,'SKEmitter::as_signalk()'],['../class_s_k_output.html#a638cad044b186372707c776fcd9a69bd',1,'SKOutput::as_signalk()'],['../class_s_k_output_time.html#aaf792b14c69ced31c6a3c2bd0d1a32e4',1,'SKOutputTime::as_signalk()'],['../class_s_k_output.html#a16b209c57784b8c37256f2b77a5f423d',1,'SKOutput::as_signalk()'],['../class_s_k_output.html#a16b209c57784b8c37256f2b77a5f423d',1,'SKOutput::as_signalk()']]],
   ['assign_5fchannel',['assign_channel',['../class_p_w_m_output.html#a129d99124ffd0161d1713d279a108f29',1,'PWMOutput']]],
-  ['attach',['attach',['../class_observable.html#af72ed9c9cf7157a33caad4b930232e69',1,'Observable::attach()'],['../sensesp__app_8cpp.html#a0c812b75c2619ea71ff8026f5415aecd',1,'attach():&#160;sensesp_app.cpp']]]
+  ['attach',['attach',['../class_observable.html#af72ed9c9cf7157a33caad4b930232e69',1,'Observable::attach()'],['../sensesp__app_8cpp.html#a0c812b75c2619ea71ff8026f5415aecd',1,'attach():&#160;sensesp_app.cpp']]],
+  ['auto_5finitialize_5f',['auto_initialize_',['../class_smart_switch_controller.html#aaee5a2358db3fe62d02e96135a930d59',1,'SmartSwitchController']]]
 ];

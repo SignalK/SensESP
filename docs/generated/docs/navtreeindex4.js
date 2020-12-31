@@ -1,5 +1,13 @@
 var NAVTREEINDEX4 =
 {
+"nmea__parser_8h_source.html":[1,0,0,4,8],
+"observable_8cpp.html":[1,0,0,4,9],
+"observable_8cpp_source.html":[1,0,0,4,9],
+"observable_8h.html":[1,0,0,4,10],
+"observable_8h_source.html":[1,0,0,4,10],
+"observablevalue_8h.html":[1,0,0,4,11],
+"observablevalue_8h.html#a39aa0ba39924c6d828551a6d887cf6e5":[1,0,0,4,11,3],
+"observablevalue_8h.html#af4ac342ae6cb2542a761a0a43af7ff89":[1,0,0,4,11,2],
 "observablevalue_8h_source.html":[1,0,0,4,11],
 "onewire__temperature_8cpp.html":[1,0,0,2,19],
 "onewire__temperature_8cpp.html#a2ea2a536fdbbb476ae3fb824d73d3e1a":[1,0,0,2,19,1],
@@ -134,10 +142,10 @@ var NAVTREEINDEX4 =
 "signalk__put__request_8cpp.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f":[1,0,0,3,12,0],
 "signalk__put__request_8cpp_source.html":[1,0,0,3,12],
 "signalk__put__request_8h.html":[1,0,0,3,13],
-"signalk__put__request_8h.html#a2095be88166518081ffd7114f9bbc67b":[1,0,0,3,13,5],
-"signalk__put__request_8h.html#a4860f447e24f7c31d9152d3964839eaa":[1,0,0,3,13,6],
-"signalk__put__request_8h.html#ac32c376aa0a2d19b3036517860dce77d":[1,0,0,3,13,4],
-"signalk__put__request_8h.html#af5482ebc1fef3acd7221abc3e56dd31d":[1,0,0,3,13,3],
+"signalk__put__request_8h.html#a2095be88166518081ffd7114f9bbc67b":[1,0,0,3,13,6],
+"signalk__put__request_8h.html#a4860f447e24f7c31d9152d3964839eaa":[1,0,0,3,13,7],
+"signalk__put__request_8h.html#ac32c376aa0a2d19b3036517860dce77d":[1,0,0,3,13,5],
+"signalk__put__request_8h.html#af5482ebc1fef3acd7221abc3e56dd31d":[1,0,0,3,13,4],
 "signalk__put__request_8h_source.html":[1,0,0,3,13],
 "signalk__put__request__listener_8cpp.html":[1,0,0,3,14],
 "signalk__put__request__listener_8cpp_source.html":[1,0,0,3,14],
@@ -241,13 +249,5 @@ var NAVTREEINDEX4 =
 "transform_8cpp.html":[1,0,0,5,37],
 "transform_8cpp_source.html":[1,0,0,5,37],
 "transform_8h.html":[1,0,0,5,38],
-"transform_8h.html#a463af5c6e30307ac67004d67dd014030":[1,0,0,5,38,6],
-"transform_8h.html#ac1617ff234bef4e8a50341c1d6943246":[1,0,0,5,38,3],
-"transform_8h.html#ac62af394caec478e4d32c254c96af25b":[1,0,0,5,38,5],
-"transform_8h.html#ae9c0b5d70ecdf35d4bd3a0a4bd4e0d17":[1,0,0,5,38,4],
-"transform_8h_source.html":[1,0,0,5,38],
-"truth__text_8cpp.html":[1,0,0,5,39],
-"truth__text_8cpp_source.html":[1,0,0,5,39],
-"truth__text_8h.html":[1,0,0,5,40],
-"truth__text_8h_source.html":[1,0,0,5,40]
+"transform_8h.html#a463af5c6e30307ac67004d67dd014030":[1,0,0,5,38,6]
 };

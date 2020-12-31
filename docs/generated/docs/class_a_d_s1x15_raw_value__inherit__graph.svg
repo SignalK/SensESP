@@ -12,7 +12,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Used to read the raw output of the ADS1x15, which is an integer between 0 and 32,768....">
 <polygon fill="#bfbfbf" stroke="black" points="99,-68.5 99,-98.5 217,-98.5 217,-68.5 99,-68.5"/>
 <text text-anchor="start" x="107" y="-86.5" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15RawValue&lt; T</text>
 <text text-anchor="middle" x="158" y="-75.5" font-family="Helvetica,sans-Serif" font-size="10.00">_ads_1x15 &gt;</text>
@@ -22,7 +22,7 @@
 <!-- Node8 -->
 <g id="node9" class="node">
 <title>Node8</title>
-<g id="a_node9"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it ...">
+<g id="a_node9"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v...">
 <polygon fill="white" stroke="black" points="94,-0.5 94,-30.5 222,-30.5 222,-0.5 94,-0.5"/>
 <text text-anchor="start" x="102" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15Voltage&lt; T_ads</text>
 <text text-anchor="middle" x="158" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_1x15 &gt;</text>
@@ -38,7 +38,7 @@
 <!-- Node1 -->
 <g id="node2" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="class_numeric_sensor.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_numeric_sensor.html" target="_top" xlink:title="A Sensor whose output is a float.">
 <polygon fill="white" stroke="black" points="116,-136.5 116,-155.5 200,-155.5 200,-136.5 116,-136.5"/>
 <text text-anchor="middle" x="158" y="-143.5" font-family="Helvetica,sans-Serif" font-size="10.00">NumericSensor</text>
 </a>
@@ -53,7 +53,7 @@
 <!-- Node2 -->
 <g id="node3" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="class_sensor.html" target="_top" xlink:title="Represents a raw hardware thingie.">
+<g id="a_node3"><a xlink:href="class_sensor.html" target="_top" xlink:title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project.">
 <polygon fill="white" stroke="black" points="171.5,-260.5 171.5,-279.5 218.5,-279.5 218.5,-260.5 171.5,-260.5"/>
 <text text-anchor="middle" x="195" y="-267.5" font-family="Helvetica,sans-Serif" font-size="10.00">Sensor</text>
 </a>

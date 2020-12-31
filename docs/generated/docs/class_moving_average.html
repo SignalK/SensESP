@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('class_moving_average.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Used to smooth the output of a value (signal) that has frequent variations. For example, the output of a temperature sensor may vary from 180 to 185 several times over a short period, but you just want to see the average of that. <a class="el" href="class_moving_average.html" title="Used to smooth the output of a value (signal) that has frequent variations. For example,...">MovingAverage</a> outputs the average of the most recent n values. It also incorporates a "scale" factor, in case you want to increase or decrease your final output by a fixed percentage.  
+<p>Outputs the moving average of the last sample_size inputs.  
  <a href="class_moving_average.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="moving__average_8h_source.html">moving_average.h</a>&gt;</code></p>
@@ -111,17 +111,11 @@ Inheritance diagram for MovingAverage:</div>
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_moving_average__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for MovingAverage:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_moving_average__coll__graph.svg" width="100%" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adda127d69bc5441a3f4ca98d51c87f4b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_moving_average.html#adda127d69bc5441a3f4ca98d51c87f4b">MovingAverage</a> (int n, float k=1., String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
-<tr class="separator:adda127d69bc5441a3f4ca98d51c87f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1e61dd247e250b373e190dd3180fe01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_moving_average.html#ad1e61dd247e250b373e190dd3180fe01">MovingAverage</a> (int sample_size, float multiplier=1.0, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="separator:ad1e61dd247e250b373e190dd3180fe01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22a08de98351ed805b49beecb234ab0b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_moving_average.html#a22a08de98351ed805b49beecb234ab0b">set_input</a> (float input, uint8_t inputChannel=0) override</td></tr>
 <tr class="separator:a22a08de98351ed805b49beecb234ab0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a803ba927db89306b62ebff4375e25ada"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_moving_average.html#a803ba927db89306b62ebff4375e25ada">get_configuration</a> (JsonObject &amp;doc) override</td></tr>
@@ -209,12 +203,13 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Used to smooth the output of a value (signal) that has frequent variations. For example, the output of a temperature sensor may vary from 180 to 185 several times over a short period, but you just want to see the average of that. <a class="el" href="class_moving_average.html" title="Used to smooth the output of a value (signal) that has frequent variations. For example,...">MovingAverage</a> outputs the average of the most recent n values. It also incorporates a "scale" factor, in case you want to increase or decrease your final output by a fixed percentage. </p>
+<div class="textblock"><p>Outputs the moving average of the last sample_size inputs. </p>
+<p>Used to smooth the output of a value (signal) that has frequent variations. For example, the output of a temperature sensor may vary from 180 to 185 several times over a short period, but you just want to see the average of that. <a class="el" href="class_moving_average.html" title="Outputs the moving average of the last sample_size inputs.">MovingAverage</a> outputs the average of the most recent sample_size values. It also incorporates a "scale" factor, in case you want to increase or decrease your final output by a fixed percentage. </p>
 
-<p class="definition">Definition at line <a class="el" href="moving__average_8h_source.html#l00018">18</a> of file <a class="el" href="moving__average_8h_source.html">moving_average.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="moving__average_8h_source.html#l00020">20</a> of file <a class="el" href="moving__average_8h_source.html">moving_average.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adda127d69bc5441a3f4ca98d51c87f4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adda127d69bc5441a3f4ca98d51c87f4b">&#9670;&nbsp;</a></span>MovingAverage()</h2>
+<a id="ad1e61dd247e250b373e190dd3180fe01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1e61dd247e250b373e190dd3180fe01">&#9670;&nbsp;</a></span>MovingAverage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -223,13 +218,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">MovingAverage::MovingAverage </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
+          <td class="paramname"><em>sample_size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>k</em> = <code>1.</code>, </td>
+          <td class="paramname"><em>multiplier</em> = <code>1.0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -246,8 +241,9 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">n</td><td>is the number of most recent values you want to average for your output</td></tr>
-    <tr><td class="paramname">the</td><td>moving average will be multiplied by k before it is output - make it something other than 1. if you need to scale your output up or down by a fixed percentage </td></tr>
+    <tr><td class="paramname">sample_size</td><td>The number of most recent values you want to average for your output.</td></tr>
+    <tr><td class="paramname">multiplier</td><td>Moving average will be multiplied by multiplier before it is output - make it something other than 1. if you need to scale your output up or down by a fixed percentage.</td></tr>
+    <tr><td class="paramname">config_path</td><td>The path used to configure this transform in the Config UI. </td></tr>
   </table>
   </dd>
 </dl>
@@ -283,7 +279,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a73131c4e7dd8134f23a93de861e1c0e4">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00046">46</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00044">44</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
 
 </div>
 </div>
@@ -345,7 +341,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_configurable.html#a6e0281fe25cfbdf024bdb05147ffb52b">Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00048">48</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="moving__average_8cpp_source.html#l00046">46</a> of file <a class="el" href="moving__average_8cpp_source.html">moving_average.cpp</a>.</p>
 
 </div>
 </div>

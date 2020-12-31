@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('class_press_repeater.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>A transform that takes boolean inputs and adds button behaviors familiar to many device end users. It emits a value only when the state of the input changes (i.e. when the input changes from TRUE to FALSE, and vice versa). In addition, if the input remains TRUE longer than repeat_start_interval milliseconds, it will emit TRUE once again, and then again every repeat_interval milliseconds until the input returns to FALSE.  
+<p>A transform that takes boolean inputs and adds button behaviors familiar to many device end users.  
  <a href="class_press_repeater.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>&gt;</code></p>
@@ -112,16 +112,10 @@ Inheritance diagram for PressRepeater:</div>
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_press_repeater__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for PressRepeater:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_press_repeater__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae89fa2d95fff61ced5bab03f0d2377bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#ae89fa2d95fff61ced5bab03f0d2377bd">PressRepeater</a> (String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;, int <a class="el" href="class_press_repeater.html#abb68f8f673afde5ab7a36adc93b3f18e">integer_false</a>=0, int <a class="el" href="class_press_repeater.html#a36b48f693392a49edfbcb9d425ee7b2e">repeat_start_interval</a>=1500, int <a class="el" href="class_press_repeater.html#a80e7b7b63e5339eeababc65066d87ecd">repeat_interval</a>=250)</td></tr>
+<tr class="memitem:ae89fa2d95fff61ced5bab03f0d2377bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#ae89fa2d95fff61ced5bab03f0d2377bd">PressRepeater</a> (String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;, int integer_false=0, int repeat_start_interval=1500, int repeat_interval=250)</td></tr>
 <tr class="separator:ae89fa2d95fff61ced5bab03f0d2377bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ef727de63af809009fb2163e76a38b4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a1ef727de63af809009fb2163e76a38b4">enable</a> () override</td></tr>
 <tr class="separator:a1ef727de63af809009fb2163e76a38b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,18 +194,18 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:abb68f8f673afde5ab7a36adc93b3f18e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#abb68f8f673afde5ab7a36adc93b3f18e">integer_false</a></td></tr>
-<tr class="separator:abb68f8f673afde5ab7a36adc93b3f18e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36b48f693392a49edfbcb9d425ee7b2e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a36b48f693392a49edfbcb9d425ee7b2e">repeat_start_interval</a></td></tr>
-<tr class="separator:a36b48f693392a49edfbcb9d425ee7b2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80e7b7b63e5339eeababc65066d87ecd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a80e7b7b63e5339eeababc65066d87ecd">repeat_interval</a></td></tr>
-<tr class="separator:a80e7b7b63e5339eeababc65066d87ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a61b6869d11123429462fc3d042f0be"><td class="memItemLeft" align="right" valign="top">elapsedMillis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a3a61b6869d11123429462fc3d042f0be">last_value_sent</a></td></tr>
-<tr class="separator:a3a61b6869d11123429462fc3d042f0be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a864f4ee378f95e58337fdccc798918c6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a864f4ee378f95e58337fdccc798918c6">pushed</a></td></tr>
-<tr class="separator:a864f4ee378f95e58337fdccc798918c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f2e6ce00e451e9999b98d5952bd0329"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a5f2e6ce00e451e9999b98d5952bd0329">repeating</a></td></tr>
-<tr class="separator:a5f2e6ce00e451e9999b98d5952bd0329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefe015eb7e3a0ea8a9fc50e989a06333"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#aefe015eb7e3a0ea8a9fc50e989a06333">integer_false_</a></td></tr>
+<tr class="separator:aefe015eb7e3a0ea8a9fc50e989a06333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f4f79b341ad25ab487e58bd48ef996c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a9f4f79b341ad25ab487e58bd48ef996c">repeat_start_interval_</a></td></tr>
+<tr class="separator:a9f4f79b341ad25ab487e58bd48ef996c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97206c627b286a3bfc54f5cf7a4a590a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a97206c627b286a3bfc54f5cf7a4a590a">repeat_interval_</a></td></tr>
+<tr class="separator:a97206c627b286a3bfc54f5cf7a4a590a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a2b81bdd657be585e667d7df29e000e"><td class="memItemLeft" align="right" valign="top">elapsedMillis&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a4a2b81bdd657be585e667d7df29e000e">last_value_sent_</a></td></tr>
+<tr class="separator:a4a2b81bdd657be585e667d7df29e000e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56c70bacd6afcc6e597377219cf986df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a56c70bacd6afcc6e597377219cf986df">pushed_</a></td></tr>
+<tr class="separator:a56c70bacd6afcc6e597377219cf986df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80671be142f37752d3b7c97f50e986fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_press_repeater.html#a80671be142f37752d3b7c97f50e986fc">repeating_</a></td></tr>
+<tr class="separator:a80671be142f37752d3b7c97f50e986fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_value_producer.html">ValueProducer&lt; T &gt;</a></td></tr>
 <tr class="memitem:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_value_producer.html#a9d3882f6de7ef8b05e78947cf9df2697">output</a></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,11 +228,21 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac2ba4044c81acc2fc6bf95cce411f6a4 inherit pro_methods_class_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A transform that takes boolean inputs and adds button behaviors familiar to many device end users. It emits a value only when the state of the input changes (i.e. when the input changes from TRUE to FALSE, and vice versa). In addition, if the input remains TRUE longer than repeat_start_interval milliseconds, it will emit TRUE once again, and then again every repeat_interval milliseconds until the input returns to FALSE. </p>
-<p>An example use case would be a <a class="el" href="class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin.">DigitalInput</a> connected to a button that represents the "Volume Up" or "Volume Down" of a sound system. </p>
-<p>As a convenience for wiring up to DigitalInputValue and other producers that emit integers, <a class="el" href="class_press_repeater.html" title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users....">PressRepeater</a> can also consume integer values. As long as the integer value coming in does not match integer_false <a class="el" href="class_press_repeater.html" title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users....">PressRepeater</a> will act as if TRUE was passed to it. </p>
+<div class="textblock"><p>A transform that takes boolean inputs and adds button behaviors familiar to many device end users. </p>
+<p>It emits a value only when the state of the input changes (i.e. when the input changes from TRUE to FALSE, and vice versa). In addition, if the input remains TRUE longer than repeat_start_interval milliseconds, it will emit TRUE once again, and then again every repeat_interval milliseconds until the input returns to FALSE.</p>
+<p>An example use case would be a <a class="el" href="class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin.">DigitalInput</a> connected to a button that represents the "Volume Up" or "Volume Down" of a sound system.</p>
+<p>As a convenience for wiring up to DigitalInputValue and other producers that emit integers, <a class="el" href="class_press_repeater.html" title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users.">PressRepeater</a> can also consume integer values. As long as the integer value coming in does not match integer_false, <a class="el" href="class_press_repeater.html" title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users.">PressRepeater</a> will act as if TRUE was passed to it.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config_path</td><td>The path to configure this transform in Config UI</td></tr>
+    <tr><td class="paramname">integer_false</td><td>Whatever integer value (of your input) you want to be the same as boolean "false". Default is 0.</td></tr>
+    <tr><td class="paramname">repeat_start_interval</td><td>How long the input must be TRUE before the first repeated output, in ms. Default is 1500.</td></tr>
+    <tr><td class="paramname">repeat_interval</td><td>How often to repeat the repeated output, in ms. The default is 250. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00025">25</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00039">39</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae89fa2d95fff61ced5bab03f0d2377bd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae89fa2d95fff61ced5bab03f0d2377bd">&#9670;&nbsp;</a></span>PressRepeater()</h2>
@@ -515,8 +519,8 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="abb68f8f673afde5ab7a36adc93b3f18e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb68f8f673afde5ab7a36adc93b3f18e">&#9670;&nbsp;</a></span>integer_false</h2>
+<a id="aefe015eb7e3a0ea8a9fc50e989a06333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefe015eb7e3a0ea8a9fc50e989a06333">&#9670;&nbsp;</a></span>integer_false_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -525,7 +529,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int PressRepeater::integer_false</td>
+          <td class="memname">int PressRepeater::integer_false_</td>
         </tr>
       </table>
   </td>
@@ -535,12 +539,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00040">40</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00054">54</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
 
 </div>
 </div>
-<a id="a3a61b6869d11123429462fc3d042f0be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a61b6869d11123429462fc3d042f0be">&#9670;&nbsp;</a></span>last_value_sent</h2>
+<a id="a4a2b81bdd657be585e667d7df29e000e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a2b81bdd657be585e667d7df29e000e">&#9670;&nbsp;</a></span>last_value_sent_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -549,7 +553,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">elapsedMillis PressRepeater::last_value_sent</td>
+          <td class="memname">elapsedMillis PressRepeater::last_value_sent_</td>
         </tr>
       </table>
   </td>
@@ -559,12 +563,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00043">43</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00057">57</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
 
 </div>
 </div>
-<a id="a864f4ee378f95e58337fdccc798918c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a864f4ee378f95e58337fdccc798918c6">&#9670;&nbsp;</a></span>pushed</h2>
+<a id="a56c70bacd6afcc6e597377219cf986df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56c70bacd6afcc6e597377219cf986df">&#9670;&nbsp;</a></span>pushed_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -573,7 +577,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool PressRepeater::pushed</td>
+          <td class="memname">bool PressRepeater::pushed_</td>
         </tr>
       </table>
   </td>
@@ -583,12 +587,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00044">44</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00058">58</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
 
 </div>
 </div>
-<a id="a80e7b7b63e5339eeababc65066d87ecd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80e7b7b63e5339eeababc65066d87ecd">&#9670;&nbsp;</a></span>repeat_interval</h2>
+<a id="a97206c627b286a3bfc54f5cf7a4a590a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97206c627b286a3bfc54f5cf7a4a590a">&#9670;&nbsp;</a></span>repeat_interval_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -597,7 +601,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int PressRepeater::repeat_interval</td>
+          <td class="memname">int PressRepeater::repeat_interval_</td>
         </tr>
       </table>
   </td>
@@ -607,12 +611,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00042">42</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00056">56</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
 
 </div>
 </div>
-<a id="a36b48f693392a49edfbcb9d425ee7b2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36b48f693392a49edfbcb9d425ee7b2e">&#9670;&nbsp;</a></span>repeat_start_interval</h2>
+<a id="a9f4f79b341ad25ab487e58bd48ef996c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f4f79b341ad25ab487e58bd48ef996c">&#9670;&nbsp;</a></span>repeat_start_interval_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -621,7 +625,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int PressRepeater::repeat_start_interval</td>
+          <td class="memname">int PressRepeater::repeat_start_interval_</td>
         </tr>
       </table>
   </td>
@@ -631,12 +635,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00041">41</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00055">55</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
 
 </div>
 </div>
-<a id="a5f2e6ce00e451e9999b98d5952bd0329"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f2e6ce00e451e9999b98d5952bd0329">&#9670;&nbsp;</a></span>repeating</h2>
+<a id="a80671be142f37752d3b7c97f50e986fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80671be142f37752d3b7c97f50e986fc">&#9670;&nbsp;</a></span>repeating_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -645,7 +649,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool PressRepeater::repeating</td>
+          <td class="memname">bool PressRepeater::repeating_</td>
         </tr>
       </table>
   </td>
@@ -655,7 +659,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00045">45</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="press__repeater_8h_source.html#l00059">59</a> of file <a class="el" href="press__repeater_8h_source.html">press_repeater.h</a>.</p>
 
 </div>
 </div>

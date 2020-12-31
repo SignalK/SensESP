@@ -5,8 +5,8 @@ var class_change_filter =
     [ "get_configuration", "class_change_filter.html#a92d946de57540d88deb54364a8827f7d", null ],
     [ "set_configuration", "class_change_filter.html#a0bbe692080d7ee9a41fcd77a3f581ca9", null ],
     [ "set_input", "class_change_filter.html#a48249b125e44834d6641484b49f3a877", null ],
-    [ "max_delta", "class_change_filter.html#a95afe5f733a86231157059b272b4295a", null ],
-    [ "max_skips", "class_change_filter.html#a3cac91e9ec0a56ae72ad4e0e27fef205", null ],
-    [ "min_delta", "class_change_filter.html#af9585e67bbf9636617127ef86f4ada81", null ],
-    [ "skips", "class_change_filter.html#ae51076f79fdfc36e34b8383a0e13e700", null ]
+    [ "max_delta_", "class_change_filter.html#aca580cf499b707c3a3427dc7dec0f655", null ],
+    [ "max_skips_", "class_change_filter.html#a8c86e00cfcb23f0db1a57242a111fcd4", null ],
+    [ "min_delta_", "class_change_filter.html#a9bfef15cc9d51e68b7f442be95d704de", null ],
+    [ "skips_", "class_change_filter.html#adb99e2ac32e39a6d580c202071f59f3c", null ]
 ];

@@ -36,7 +36,7 @@
 <!-- Node12 -->
 <g id="node13" class="node">
 <title>Node12</title>
-<g id="a_node13"><a xlink:href="class_digital_output.html" target="_top" xlink:title="Configures the specified GPIO pin as an output pin, then sets the status of that pin to HIGH whenever...">
+<g id="a_node13"><a xlink:href="class_digital_output.html" target="_top" xlink:title="Sets a GPIO pin to whatever the input is (true = HIGH, false = LOW), and passes the value on to the n...">
 <polygon fill="white" stroke="black" points="946.5,-480.5 946.5,-499.5 1056.5,-499.5 1056.5,-480.5 946.5,-480.5"/>
 <text text-anchor="middle" x="1001.5" y="-487.5" font-family="Helvetica,sans-Serif" font-size="10.00">DigitalOutput&lt; bool &gt;</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node13 -->
 <g id="node14" class="node">
 <title>Node13</title>
-<g id="a_node14"><a xlink:href="class_press_repeater.html" target="_top" xlink:title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users....">
+<g id="a_node14"><a xlink:href="class_press_repeater.html" target="_top" xlink:title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users.">
 <polygon fill="white" stroke="black" points="942.5,-442.5 942.5,-461.5 1060.5,-461.5 1060.5,-442.5 942.5,-442.5"/>
 <text text-anchor="middle" x="1001.5" y="-449.5" font-family="Helvetica,sans-Serif" font-size="10.00">PressRepeater&lt; bool &gt;</text>
 </a>
@@ -66,7 +66,7 @@
 <!-- Node14 -->
 <g id="node15" class="node">
 <title>Node14</title>
-<g id="a_node15"><a xlink:href="class_repeat_report.html" target="_top" xlink:title="Ensures that values that do not change frequently are still reported at at a specified maximum silenc...">
+<g id="a_node15"><a xlink:href="class_repeat_report.html" target="_top" xlink:title="Ensures that values that do not change frequently are still reported at a specified maximum silence i...">
 <polygon fill="white" stroke="black" points="951,-404.5 951,-423.5 1052,-423.5 1052,-404.5 951,-404.5"/>
 <text text-anchor="middle" x="1001.5" y="-411.5" font-family="Helvetica,sans-Serif" font-size="10.00">RepeatReport&lt; T &gt;</text>
 </a>
@@ -144,7 +144,7 @@
 <!-- Node2 -->
 <g id="node3" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. All transforms are can be subscribed to by calling attach() (inher...">
+<g id="a_node3"><a xlink:href="class_transform_base.html" target="_top" xlink:title="The base class for all transforms. A transforms takes a value in, transforms it in some way,...">
 <polygon fill="white" stroke="black" points="292,-477.5 292,-496.5 375,-496.5 375,-477.5 292,-477.5"/>
 <text text-anchor="middle" x="333.5" y="-484.5" font-family="Helvetica,sans-Serif" font-size="10.00">TransformBase</text>
 </a>
@@ -321,7 +321,7 @@
 <!-- Node19 -->
 <g id="node20" class="node">
 <title>Node19</title>
-<g id="a_node20"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="ADS1x15Voltage reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it ...">
+<g id="a_node20"><a xlink:href="class_a_d_s1x15_voltage.html" target="_top" xlink:title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v...">
 <polygon fill="white" stroke="black" points="1101,-267 1101,-297 1229,-297 1229,-267 1101,-267"/>
 <text text-anchor="start" x="1109" y="-285" font-family="Helvetica,sans-Serif" font-size="10.00">ADS1x15Voltage&lt; T_ads</text>
 <text text-anchor="middle" x="1165" y="-274" font-family="Helvetica,sans-Serif" font-size="10.00">_1x15, chip &gt;</text>
@@ -412,7 +412,7 @@
 <!-- Node25 -->
 <g id="node26" class="node">
 <title>Node25</title>
-<g id="a_node26"><a xlink:href="class_median.html" target="_top" xlink:title="Collects a list of input values of size sample_size and outputs the median value (i....">
+<g id="a_node26"><a xlink:href="class_median.html" target="_top" xlink:title="Outputs the median value of sample_size inputs.">
 <polygon fill="white" stroke="black" points="1141,-38.5 1141,-57.5 1189,-57.5 1189,-38.5 1141,-38.5"/>
 <text text-anchor="middle" x="1165" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Median</text>
 </a>
@@ -427,7 +427,7 @@
 <!-- Node26 -->
 <g id="node27" class="node">
 <title>Node26</title>
-<g id="a_node27"><a xlink:href="class_moving_average.html" target="_top" xlink:title="Used to smooth the output of a value (signal) that has frequent variations. For example,...">
+<g id="a_node27"><a xlink:href="class_moving_average.html" target="_top" xlink:title="Outputs the moving average of the last sample_size inputs.">
 <polygon fill="white" stroke="black" points="1123,-0.5 1123,-19.5 1207,-19.5 1207,-0.5 1123,-0.5"/>
 <text text-anchor="middle" x="1165" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">MovingAverage</text>
 </a>
@@ -442,7 +442,7 @@
 <!-- Node27 -->
 <g id="node28" class="node">
 <title>Node27</title>
-<g id="a_node28"><a xlink:href="class_voltage_divider_r1.html" target="_top" xlink:title="A transform that uses the voltage divider formula to resolve the resistance of R1 in the circuit,...">
+<g id="a_node28"><a xlink:href="class_voltage_divider_r1.html" target="_top" xlink:title="Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit.">
 <polygon fill="white" stroke="black" points="1118.5,-392.5 1118.5,-411.5 1211.5,-411.5 1211.5,-392.5 1118.5,-392.5"/>
 <text text-anchor="middle" x="1165" y="-399.5" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageDividerR1</text>
 </a>
@@ -457,7 +457,7 @@
 <!-- Node28 -->
 <g id="node29" class="node">
 <title>Node28</title>
-<g id="a_node29"><a xlink:href="class_voltage_divider_r2.html" target="_top" xlink:title="A transform that uses the voltage divider formula to resolve the resistance of R2 in the circuit,...">
+<g id="a_node29"><a xlink:href="class_voltage_divider_r2.html" target="_top" xlink:title="Uses the voltage divider formula to calculate (and output) the resistance of R2 in the circuit.">
 <polygon fill="white" stroke="black" points="1118.5,-354.5 1118.5,-373.5 1211.5,-373.5 1211.5,-354.5 1118.5,-354.5"/>
 <text text-anchor="middle" x="1165" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageDividerR2</text>
 </a>
@@ -472,7 +472,7 @@
 <!-- Node29 -->
 <g id="node30" class="node">
 <title>Node29</title>
-<g id="a_node30"><a xlink:href="class_voltage_multiplier.html" target="_top" xlink:title="A transform that does the opposite of what a physical voltage divider circuit does....">
+<g id="a_node30"><a xlink:href="class_voltage_multiplier.html" target="_top" xlink:title="A transform that does the opposite of what a physical voltage divider circuit does: convert the volta...">
 <polygon fill="white" stroke="black" points="1120.5,-316.5 1120.5,-335.5 1209.5,-335.5 1209.5,-316.5 1120.5,-316.5"/>
 <text text-anchor="middle" x="1165" y="-323.5" font-family="Helvetica,sans-Serif" font-size="10.00">VoltageMultiplier</text>
 </a>

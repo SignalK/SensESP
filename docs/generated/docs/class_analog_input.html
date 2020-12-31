@@ -36,7 +36,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -101,6 +101,9 @@ $(document).ready(function(){initNavTree('class_analog_input.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="class_sensor.html" title="The base class for all sensors. Used only as a base class - never instantiated directly in a project.">Sensor</a> for reading the MCU analog input pins.  
+ <a href="class_analog_input.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="analog__input_8h_source.html">analog_input.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AnalogInput:</div>
@@ -108,17 +111,10 @@ Inheritance diagram for AnalogInput:</div>
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_analog_input__inherit__graph.svg" width="406" height="355"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for AnalogInput:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_analog_input__coll__graph.svg" width="419" height="368"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a63db2d6f83b69573a4739466a6e429e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_analog_input.html#a63db2d6f83b69573a4739466a6e429e6">AnalogInput</a> (uint8_t pin=A0, uint read_delay=200, String <a class="el" href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">config_path</a>=&quot;&quot;, float output_scale=1024.)</td></tr>
-<tr class="memdesc:a63db2d6f83b69573a4739466a6e429e6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sensor.html" title="Represents a raw hardware thingie.">Sensor</a> for reading the MCU analog input pins.  <a href="#a63db2d6f83b69573a4739466a6e429e6">More...</a><br /></td></tr>
 <tr class="separator:a63db2d6f83b69573a4739466a6e429e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34942eae263f68e8f44fa3f405d057fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_analog_input.html#a34942eae263f68e8f44fa3f405d057fb">enable</a> () override final</td></tr>
 <tr class="separator:a34942eae263f68e8f44fa3f405d057fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,8 +183,19 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9d3882f6de7ef8b05e78947cf9df2697 inherit pro_attribs_class_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="analog__input_8h_source.html#l00007">7</a> of file <a class="el" href="analog__input_8h_source.html">analog_input.h</a>.</p>
+<div class="textblock"><p><a class="el" href="class_sensor.html" title="The base class for all sensors. Used only as a base class - never instantiated directly in a project.">Sensor</a> for reading the MCU analog input pins. </p>
+<p>Read an analog input pin and return the result scaled onto a given range. Note that the ADCs in both ESP8266 and ESP32 are quite nonlinear and noisy and unlikely to give very accurate results. For accurate ADC results, SensESP supports the ADS1015 and ADS1115 ADC's.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>The GPIO pin to read. On ESP8266, always A0. On ESP32, at the moment only ADC channel 1 (pins 32..39) is supported.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">read_delay</td><td>Time delay between consecutive readings, in ms</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">config_path</td><td>Configuration path for the sensor</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">output_scale</td><td>The scale of the converted input value that <a class="el" href="class_analog_input.html" title="Sensor for reading the MCU analog input pins.">AnalogInput</a> produces. The maximum raw analog value returned by an ESP8266 and an ESP32 are different, but <a class="el" href="class_analog_input.html" title="Sensor for reading the MCU analog input pins.">AnalogInput</a> takes that into account by converting them to a number between zero and 'output_scale'. This allows the same code to run on both platforms. The default value for 'output_scale' is 1024, which means output will be from 0 to 1023. If you want your output to be on a different scale, use this parameter to indicate the X in the <code>0 to X</code> scale. For example, if you want your output to be expressed as a percentage (0 to 100), make this parameter be 100. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="analog__input_8h_source.html#l00032">32</a> of file <a class="el" href="analog__input_8h_source.html">analog_input.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a63db2d6f83b69573a4739466a6e429e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a63db2d6f83b69573a4739466a6e429e6">&#9670;&nbsp;</a></span>AnalogInput()</h2>
@@ -227,18 +234,6 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><a class="el" href="class_sensor.html" title="Represents a raw hardware thingie.">Sensor</a> for reading the MCU analog input pins. </p>
-<p>Read an analog input pin and return the result scaled onto a given range. Note that the ADCs in both ESP8266 and ESP32 are quite unlinear and noisy and unlikely to give very accurate results.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">pin</td><td>The GPIO pin to read. On ESP8266, always A0. On ESP32, at the moment only ADC channel 1 (pins 32..39) is supported.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">read_delay</td><td>Time delay between consecutive readings, in ms</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">config_path</td><td>Configuration path for the sensor</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">output_scale</td><td>The scale of the converted input value that <a class="el" href="class_analog_input.html">AnalogInput</a> produces. The maximum raw analog value returned by an ESP8266 and an ESP32 are different, but <a class="el" href="class_analog_input.html">AnalogInput</a> takes that into account by converting them to a number between zero and 'output_scale'. This allows the same code to run on both platforms. The default value for 'output_scale' is 1024, which means output will be from 0 to 1023. If you want your output to be on a different scale, use this parameter to indicate the X in the <code>0 to X</code> scale. For example, if you want your output to be expressed as a percentage (0 to 100), make this parameter be 100. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 <p class="definition">Definition at line <a class="el" href="analog__input_8cpp_source.html#l00006">6</a> of file <a class="el" href="analog__input_8cpp_source.html">analog_input.cpp</a>.</p>
 
