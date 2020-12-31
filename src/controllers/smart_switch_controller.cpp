@@ -2,7 +2,9 @@
 #include "transforms/truth_text.h"
 
 void SmartSwitchController::enable() {
-    this->emit(is_on);
+    if (auto_initialize_) {
+       this->emit(is_on);
+    }
 }
 
 void SmartSwitchController::set_input(bool new_value, uint8_t input_channel) {

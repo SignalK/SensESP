@@ -85,7 +85,7 @@ ReactESP app([]() {
 
   // Create a switch controller to handle the user press logic and 
   // connect it a server PUT request...
-  SmartSwitchController* controller = new SmartSwitchController();
+  SmartSwitchController* controller = new SmartSwitchController(false);
   controller->connect_to(new SKBooleanPutRequest(sk_path));
 
   // Also connect the controller to an onboard LED...
