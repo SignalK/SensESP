@@ -12,7 +12,8 @@
  * again.
  * 
  * @param max_silence_interval Maximum time, in ms, before the previous value
- * is emitted again. Default is 15000 (15 seconds).
+ * is emitted again. Default is 15000 (15 seconds). Setting the interval to 
+ * zero disables the repeating.
  * 
  * @param config_path Path to configure this transform in the Config UI.
  */
