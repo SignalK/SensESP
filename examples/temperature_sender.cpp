@@ -62,18 +62,15 @@ ReactESP app([]() {
   SetupSerialDebug(115200);
 #endif
 
-  // Create the global SensESPApp() object. If you add the line ->set_wifi("your
-  // ssid", "your password") you can specify the wifi parameters in the builder.
-  // If you do not do that, the SensESP device wifi configuration hotspot will
-  // appear and you can use a web browser pointed to 192.168.4.1 to configure
-  // the wifi parameters. You can use NONE, UPTIME, FREQUENCY, FREE_MEMORY,
-  // WIFI_SIGNAL or ALL instead if IP_ADDRESS in set_standard_sensors().
+  // Create the global SensESPApp() object by first creating a
+  // SensESPAppBuilder object, then setting some hard-coded
+  // program attributes, and then calling get_app().
 
   // Create a builder object
   SensESPAppBuilder builder;
 
   sensesp_app = builder.set_hostname("your device name")
-                    ->set_sk_server("your server address", 80)
+                    ->set_sk_server("192.168.1.5", 80)
                     ->get_app();
 
   // The "Signal K path" identifies the output of this sensor to the Signal K
