@@ -20,6 +20,8 @@ A Wiki page with more detailed information about using SensESP is [here](https:/
 
 You must have a Signal K Server running on your network, or SensESP has nothing to connect to. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md).
 
+NOTE: SensESP does not currently support SSL. If you enabled that when you installed your Signal K Server, you will need to disable it before proceeding. From a command line on your Signal K Server's Pi, run `sudo signalk-server-setup`. It will go through all the setup options again, and when you get to the SSL option, turn it OFF, then finish the setup script.
+
 Once the SK Server is installed and running, go to the Dashboard (enter `localhost:3000` into the Raspberry Pi's browser to start it), select Server - Settings from the left side menu, and make sure the "mdns" option is ON.
 
 SensESP is a library and will be installed automatically as a dependency when defined as such in the project's
