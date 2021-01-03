@@ -20,6 +20,8 @@ A Wiki page with more detailed information about using SensESP is [here](https:/
 
 You must have a Signal K Server running on your network, or SensESP has nothing to connect to. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md).
 
+NOTE: SensESP does not currently support SSL. If you enabled that when you installed your Signal K Server, you will need to disable it before proceeding. From a command line on your Signal K Server's Pi, run `sudo signalk-server-setup`. It will go through all the setup options again, and when you get to the SSL option, turn it OFF, then finish the setup script.
+
 Once the SK Server is installed and running, go to the Dashboard (enter `localhost:3000` into the Raspberry Pi's browser to start it), select Server - Settings from the left side menu, and make sure the "mdns" option is ON.
 
 SensESP is a library and will be installed automatically as a dependency when defined as such in the project's
@@ -47,7 +49,7 @@ If the project compiles and uploads, your ESP will be running the example code. 
 
 Once on the network, SensESP should automatically find your Signal K server, assuming it has mDNS enabled (see instructions above). 
 
-If your server has security enabled (it does by default), you should see an access request for your ESP in the Signal K Dashboard, under Security - Access Requests. (You must be logged into the Signal K Server to see the Security sub-menu.) Set the "Authentication Timeout" field to "NEVER", set the Permission to "Read / Write", then Approve it. You should start getting data on the Signal K Instrument Panel. (Dashboard - Webapps - Instrument Panel) You can see lots of activity in the Serial Monitor, including the connection to the Signal K Server, the request for and approval of the security token, and the flow of data.
+If your server has security enabled (it does by default), you should see an access request for your ESP in the Signal K Dashboard, under Security - Access Requests. (You must be logged into the Signal K Server to see the Security sub-menu.) Set the "Authentication Timeout" field to "NEVER", set the Permission to "Read / Write", then Approve it. You should start getting data on the Signal K Instrument Panel. (Dashboard - Webapps - Instrument Panel) You can see lots of activity in the Visual Studio Code Serial Monitor, including the connection to the Signal K Server, the request for and approval of the security token, and the flow of data.
 
 If you have any problems with configuring the wifi credentials, or with SensESP finding your Signal K server, you can hard-code those settings. See [Hard-coding Certain Program Attributes](https://github.com/SignalK/SensESP/wiki/SensESP-Overview-and-Programming-Details#hard-coding-certain-program-attributes).
 
