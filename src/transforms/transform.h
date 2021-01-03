@@ -25,9 +25,7 @@
  * All transforms are subscribed
  * to by calling attach() (inherited from Observable).
  * 
- * They can
- * have an optional persistence configuration by specifying an "id" to
- * save the configuration data in. TODO: Is this still true?
+ * @param config_path The path to configure the Transform in the Config UI.
  */
 class TransformBase : public Configurable, public Enable {
  public:
