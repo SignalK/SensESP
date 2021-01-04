@@ -12,16 +12,19 @@
  * @param mosi_pin
  * @param miso_pin
  * @param clk_pin
- * @param drdy_pin The data-ready pin. Not used, but still provided for backward-
+ * @param drdy_pin The data-ready pin. No longer used, but still provided for backward-
  * compatibility.
+ * 
  * @param tc_type Type of thermocouple that's attached to the MAX31856. For the
  * available types, see 
  * https://github.com/adafruit/Adafruit_MAX31856/blob/master/Adafruit_MAX31856.h
+ * 
  * @param read_delay How often to read the sensor, in ms.
  * @param config_path The path to the sensor in the Config UI.
  **/
 class MAX31856Thermocouple : public NumericSensor {
  public:
+  /* DEPRECATED: drdy_pin no longer used */
   MAX31856Thermocouple(int8_t cs_pin, int8_t mosi_pin, int8_t miso_pin,
                        int8_t clk_pin, int8_t drdy_pin,
                        max31856_thermocoupletype_t tc_type, uint read_delay,
@@ -37,15 +40,18 @@ class MAX31856Thermocouple : public NumericSensor {
                        clk_pin, 0, tc_type, read_delay, config_path) {}
 
   /**
+   * A version of the constructor that allows you to create the Adafruit_MAX31856
+   * in main.cpp, with whatever paramaters you need, and then point to it.
+   * 
    * @param max31856 A pointer to an Adafruit_MAX31856, which you must create in
-   * main.cpp before you call this constructor. After you create it, you must
-  call
-   * begin(), and also set the thermocouple type, before calling this
-  constructor:
+   * main.cpp before you call this constructor. After you create it, you must call
+   * begin(), and set the thermocouple type, before calling this constructor,
+   * like this:
 
-     auto* max = new Adafruit_MAX31856( <<whatever parameters you want / need>>
-  ); max->begin(); max->setThermocoupleType( <<whatever type you're using>> );
-     // now you can call this constructor
+     auto* max = new Adafruit_MAX31856( <<whatever parameters you want / need>> );
+     max->begin();
+     max->setThermocoupleType( <<whatever type you're using>> );
+     // now you can call this constructor - 1000 ms read_delay shown here
      MAX31856Thermocouple(max, 1000, "/config/path");
 
    * @param read_delay How often to read the sensor, in ms.
