@@ -16,6 +16,7 @@ MAX31856Thermocouple::MAX31856Thermocouple(int8_t cs_pin, int8_t mosi_pin,
   if (!max31856_->begin()) {
     sensor_detected_ = false;
     debugW("No MAX31856 detected: check wiring.");
+    return;
   }
   max31856_->setThermocoupleType(tc_type);
   max31856_->setConversionMode(MAX31856_ONESHOT_NOWAIT);
