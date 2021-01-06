@@ -10,7 +10,10 @@
 #define SPI_MOSI_PIN 13
 #define SPI_MISO_PIN 12
 #define SPI_CLK_PIN 14
-#define DRDY_PIN 5
+// There is a version of the constructor for the MAX31856Thermocouple that can use
+// "hardware SPI", so you don't have to specify the pins.
+// See https://github.com/SignalK/SensESP/blob/master/src/sensors/max31856_thermocouple.h
+// and https://learn.adafruit.com/adafruit-max31856-thermocouple-amplifier/wiring-and-test
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
@@ -48,9 +51,13 @@ ReactESP app([]() {
   // Create a sensor that is the source of our data, that will be read every
   // 1000 ms.
   const uint readDelay = 1000;
+  
   // tcType:  MAX31856_TCTYPE_K;   // other types can be B, E, J, N, R, S, T
+  // There is an alternate constructor that allows you to create the
+  // Adafruit_MAX31856 object however you like.
+  // See https://github.com/SignalK/SensESP/blob/master/src/sensors/max31856_thermocouple.h
   auto* max31856tc = new MAX31856Thermocouple(
-      SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN, SPI_CLK_PIN, DRDY_PIN,
+      SPI_CS_PIN, SPI_MOSI_PIN, SPI_MISO_PIN, SPI_CLK_PIN,
       MAX31856_TCTYPE_K, readDelay, exhaust_temp_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then

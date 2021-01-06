@@ -11,23 +11,44 @@ MAX31856Thermocouple::MAX31856Thermocouple(int8_t cs_pin, int8_t mosi_pin,
     : NumericSensor(config_path),
       data_ready_pin_{drdy_pin},
       read_delay_{read_delay} {
-  load_configuration();
+  load_configuration();      
   max31856_ = new Adafruit_MAX31856(cs_pin, mosi_pin, miso_pin, clk_pin);
   if (!max31856_->begin()) {
-    while (1) delay(10);
+    sensor_detected_ = false;
+    debugW("No MAX31856 detected: check wiring.");
+    return;
   }
   max31856_->setThermocoupleType(tc_type);
-  max31856_->setConversionMode(MAX31856_CONTINUOUS);
+  max31856_->setConversionMode(MAX31856_ONESHOT_NOWAIT);
+}
+
+MAX31856Thermocouple::MAX31856Thermocouple(Adafruit_MAX31856* max31856,
+                                           uint read_delay, String config_path)
+    : NumericSensor(config_path),
+      max31856_{max31856},
+      read_delay_{read_delay} {
+  load_configuration();
+  max31856_->setConversionMode(MAX31856_ONESHOT_NOWAIT);
 }
 
 void MAX31856Thermocouple::enable() {
-  app.onRepeat(read_delay_, [this]() {
-    while (digitalRead(data_ready_pin_)) {
-      delay(25);
+  // Must be at least 500 to allow time for temperature "conversion".
+  if (!sensor_detected_) {
+    debugE("MAX31856 not enabled: no sensor detected.");
+    return;
+  }  
+  else {
+    if (read_delay_ < 500) {
+      read_delay_ = 500;
     }
-    float temp = max31856_->readThermocoupleTemperature();
-    this->emit(temp);
-  });
+    app.onRepeat(read_delay_, [this]() {
+      max31856_->triggerOneShot();
+      app.onDelay(450, [this]() {
+        float temp = max31856_->readThermocoupleTemperature();
+        this->emit(temp);
+      });
+    });
+  } 
 }
 
 void MAX31856Thermocouple::get_configuration(JsonObject& root) {
