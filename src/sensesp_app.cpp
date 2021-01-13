@@ -29,9 +29,11 @@ void SetupSerialDebug(uint32_t baudrate) {
 
   // A small delay and one debugI() are required so that
   // the serial output displays everything
+#ifndef DEBUG_DISABLED
   delay(100);
   Debug.setSerialEnabled(true);
   delay(100);
+#endif 
   debugI("\nSerial debug enabled");
 }
 
