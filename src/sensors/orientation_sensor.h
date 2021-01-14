@@ -8,10 +8,6 @@
 #ifndef orientation_sensor_H_
 #define orientation_sensor_H_
 
-#ifndef N2K_INVALID_FLOAT
-  #define N2K_INVALID_FLOAT (-1e-9) // NMEA2000 value for unavailable parameters
-#endif
-
 #include "sensor_fusion_class.h"  // for OrientationSensorFusion-ESP library
 
 #include "sensors/sensor.h"
@@ -35,14 +31,13 @@
  * The OrientationSensorFusion-ESP library has details:
  * @see https://github.com/BjarneBitscrambler/OrientationSensorFusion-ESP.git
   */
-class OrientationSensor : public Sensor {
+class OrientationSensor {
  public:
   OrientationSensor(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                     uint8_t accel_mag_i2c_addr, uint8_t gyro_i2c_addr,
                     String config_path = "");
   SensorFusion* sensor_interface_; ///< sensor's Fusion Library interface
-  void enable() override; ///< starts periodic calls to ReadAndProcessSensors()
-
+ 
  private:
   void ReadAndProcessSensors(void);  ///< reads sensor and runs fusion algorithm
 };

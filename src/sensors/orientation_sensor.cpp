@@ -21,8 +21,7 @@
 OrientationSensor::OrientationSensor(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                                      uint8_t accel_mag_i2c_addr,
                                      uint8_t gyro_i2c_addr, String config_path)
-    : Sensor(config_path) {
-  load_configuration();
+    {
   sensor_interface_ = new SensorFusion();  // create our fusion engine instance
 
   bool success;
@@ -44,23 +43,17 @@ OrientationSensor::OrientationSensor(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
   } else {
     sensor_interface_->Begin(pin_i2c_sda, pin_i2c_scl);
     debugI("Sensors connected & Fusion ready");
+    
+    // The Fusion Library, in build.h, defines how fast the ICs generate new
+    // orientation data and how fast the fusion algorithm runs, using FUSION_HZ.
+    // Usually this rate should be the same as ReadAndProcessSensors() is called.
+    const uint32_t kFusionIntervalMs = 1000.0 / FUSION_HZ;
+    //Start periodic reads of sensor and running of fusion algorithm.
+    app.onRepeat(kFusionIntervalMs, [this]() { this->ReadAndProcessSensors(); });
+
   }
 
 }  // end OrientationSensor()
-
-/**
- * @brief Starts periodic reads of sensor and running of fusion algorithm.
- *
- * The enable() function is inherited from Sensor::, and is
- * automatically called when the SensESP app starts.
- */
-void OrientationSensor::enable(void) {
-  // The Fusion Library, in build.h, defines how fast the ICs generate new
-  // orientation data and how fast the fusion algorithm runs, using FUSION_HZ.
-  // Usually this rate should be the same as ReadAndProcessSensors() is called.
-  const uint32_t kFusionIntervalMs = 1000.0 / FUSION_HZ;
-  app.onRepeat(kFusionIntervalMs, [this]() { this->ReadAndProcessSensors(); });
-}  // end Enable()
 
 /**
  * @brief Read the Sensors and calculate orientation parameters
