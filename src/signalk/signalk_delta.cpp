@@ -66,8 +66,6 @@ void SKDelta::get_delta(String& output) {
 
   unsigned int doc_size_estimate = get_doc_size_estimate();
 
-  debugD("doc size estimate: %d", doc_size_estimate);
-
   if (!meta_sent_) {
     doc_size_estimate += JSON_OBJECT_SIZE(1) + get_metadata_size_estimate();
   }
