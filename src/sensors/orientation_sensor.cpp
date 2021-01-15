@@ -20,8 +20,7 @@
  */
 OrientationSensor::OrientationSensor(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
                                      uint8_t accel_mag_i2c_addr,
-                                     uint8_t gyro_i2c_addr, String config_path)
-    {
+                                     uint8_t gyro_i2c_addr) {
   sensor_interface_ = new SensorFusion();  // create our fusion engine instance
 
   bool success;
@@ -38,19 +37,20 @@ OrientationSensor::OrientationSensor(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
       sensor_interface_->InstallSensor(accel_mag_i2c_addr,
                                        SensorType::kThermometer) &&
       sensor_interface_->InstallSensor(gyro_i2c_addr, SensorType::kGyroscope);
-  if( ! success ) {
+  if (!success) {
     debugE("Trouble installing sensors.");
   } else {
     sensor_interface_->Begin(pin_i2c_sda, pin_i2c_scl);
     debugI("Sensors connected & Fusion ready");
-    
+
     // The Fusion Library, in build.h, defines how fast the ICs generate new
     // orientation data and how fast the fusion algorithm runs, using FUSION_HZ.
-    // Usually this rate should be the same as ReadAndProcessSensors() is called.
+    // Usually this rate should be the same as ReadAndProcessSensors() is
+    // called.
     const uint32_t kFusionIntervalMs = 1000.0 / FUSION_HZ;
-    //Start periodic reads of sensor and running of fusion algorithm.
-    app.onRepeat(kFusionIntervalMs, [this]() { this->ReadAndProcessSensors(); });
-
+    // Start periodic reads of sensor and running of fusion algorithm.
+    app.onRepeat(kFusionIntervalMs,
+                 [this]() { this->ReadAndProcessSensors(); });
   }
 
 }  // end OrientationSensor()
@@ -68,15 +68,17 @@ void OrientationSensor::ReadAndProcessSensors(void) {
  * @brief Constructor sets up the frequency of output and the Signal K path.
  *
  * @param orientation_sensor Pointer to the physical sensor's interface
- * @param read_delay_ms Interval between output reports
+ * @param report_interval_ms Interval between output reports
  * @param config_path RESTful path by which reporting frequency can be
  * configured.
  */
 AttitudeValues::AttitudeValues(OrientationSensor* orientation_sensor,
-                               uint read_delay_ms, String config_path)
-    : orientation_sensor_{orientation_sensor}, read_delay_ms_{read_delay_ms} {
+                               uint report_interval_ms, String config_path)
+    : Sensor(config_path),
+      orientation_sensor_{orientation_sensor},
+      report_interval_ms_{report_interval_ms} {
   load_configuration();
-
+  save_mag_cal_ = 0;
 }  // end AttitudeValues()
 
 /**
@@ -86,7 +88,7 @@ AttitudeValues::AttitudeValues(OrientationSensor* orientation_sensor,
  * automatically called when the SensESP app starts.
  */
 void AttitudeValues::enable() {
-  app.onRepeat(read_delay_ms_, [this]() { this->Update(); });
+  app.onRepeat(report_interval_ms_, [this]() { this->Update(); });
 }
 
 /**
@@ -100,6 +102,11 @@ void AttitudeValues::enable() {
  * message contents are assembled by as_signalk(),they can reflect that. 
  */
 void AttitudeValues::Update() {
+  //check whether magnetic calibration has been requested to be saved
+  if( 1 == save_mag_cal_ ) {
+    orientation_sensor_->sensor_interface_->InjectCommand("SVMC");
+    save_mag_cal_ = 0;  // set flag back to zero so we don't repeat save
+  }
   attitude_.is_data_valid =
       orientation_sensor_->sensor_interface_->IsDataValid();
   attitude_.yaw = orientation_sensor_->sensor_interface_->GetHeadingRadians();
@@ -122,10 +129,15 @@ void AttitudeValues::Update() {
 static const char SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
-        "read_delay": { 
-          "title": "Read delay", 
+        "report_interval": { 
+          "title": "Report Interval", 
           "type": "number", 
-          "description": "Interval in milliseconds between outputs of this parameter" 
+          "description": "Milliseconds between outputs of this parameter" 
+        },
+        "save_mag_cal": { 
+          "title": "Save Magnetic Cal", 
+          "type": "number", 
+          "description": "Set to 1 to save current magnetic calibration" 
         }
     }
   })###";
@@ -138,7 +150,8 @@ static const char SCHEMA[] PROGMEM = R"###({
  * to be updated.
  */
 void AttitudeValues::get_configuration(JsonObject& doc) {
-  doc["read_delay"] = read_delay_ms_;
+  doc["report_interval"] = report_interval_ms_;
+  doc["save_mag_cal"] = save_mag_cal_;
 }  // end get_configuration()
 
 /**
@@ -155,13 +168,14 @@ String AttitudeValues::get_config_schema() { return FPSTR(SCHEMA); }
  * @return True if successful; False if a parameter could not be found.
  */
 bool AttitudeValues::set_configuration(const JsonObject& config) {
-  String expected[] = {"read_delay"};
+  String expected[] = {"report_interval", "save_mag_cal"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
     }
   }
-  read_delay_ms_ = config["read_delay"];
+  report_interval_ms_ = config["report_interval"];
+  save_mag_cal_ = config["save_mag_cal"];
   return true;
 }  // end set_configuration()
 
@@ -170,18 +184,19 @@ bool AttitudeValues::set_configuration(const JsonObject& config) {
  *
  * @param orientation_sensor Pointer to the physical sensor's interface
  * @param val_type The type of orientation parameter to be sent
- * @param read_delay_ms Interval between output reports
+ * @param report_interval_ms Interval between output reports
  * @param config_path RESTful path by which reporting frequency can be
  * configured.
  */
 OrientationValues::OrientationValues(OrientationSensor* orientation_sensor,
                                      OrientationValType val_type,
-                                     uint read_delay_ms, String config_path)
+                                     uint report_interval_ms, String config_path)
     : NumericSensor(config_path),
       orientation_sensor_{orientation_sensor},
       value_type_{val_type},
-      read_delay_ms_{read_delay_ms} {
+      report_interval_ms_{report_interval_ms} {
   load_configuration();
+  save_mag_cal_ = 0;
 
 }  // end OrientationValues()
 
@@ -192,7 +207,7 @@ OrientationValues::OrientationValues(OrientationSensor* orientation_sensor,
  * automatically called when the SensESP app starts.
  */
 void OrientationValues::enable() {
-  app.onRepeat(read_delay_ms_, [this]() { this->Update(); });
+  app.onRepeat(report_interval_ms_, [this]() { this->Update(); });
 }
 
 /**
@@ -205,6 +220,12 @@ void OrientationValues::enable() {
  * by the call to notify()
  */
 void OrientationValues::Update() {
+  //check whether magnetic calibration has been requested to be saved
+  if( 1 == save_mag_cal_ ) {
+    orientation_sensor_->sensor_interface_->InjectCommand("SVMC");
+    save_mag_cal_ = 0;  // set flag back to zero so we don't repeat save
+  }
+  //check which type of parameter is requested, and pass it on
   switch (value_type_) {
     case (kCompassHeading):
       output = orientation_sensor_->sensor_interface_->GetHeadingRadians();
@@ -237,7 +258,7 @@ void OrientationValues::Update() {
       output = orientation_sensor_->sensor_interface_->GetTemperatureK();
       break;
     default:
-      output = N2K_INVALID_FLOAT;
+      return; //skip the notify(), due to unrecognized value type
   }
   if (orientation_sensor_->sensor_interface_->IsDataValid()) {
     notify();  // only pass on the data if it is valid
@@ -252,7 +273,8 @@ void OrientationValues::Update() {
  * to be updated.
  */
 void OrientationValues::get_configuration(JsonObject& doc) {
-  doc["read_delay"] = read_delay_ms_;
+  doc["report_interval"] = report_interval_ms_;
+  doc["save_mag_cal"] = save_mag_cal_;
 }  // end get_configuration()
 
 /**
@@ -269,12 +291,13 @@ String OrientationValues::get_config_schema() { return FPSTR(SCHEMA); }
  * @return True if successful; False if a parameter could not be found.
  */
 bool OrientationValues::set_configuration(const JsonObject& config) {
-  String expected[] = {"read_delay"};
+  String expected[] = {"report_interval", "save_mag_cal"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
     }
   }
-  read_delay_ms_ = config["read_delay"];
+  report_interval_ms_ = config["report_interval"];
+  save_mag_cal_ = config["save_mag_cal"];
   return true;
 }

@@ -34,10 +34,9 @@
 class OrientationSensor {
  public:
   OrientationSensor(uint8_t pin_i2c_sda, uint8_t pin_i2c_scl,
-                    uint8_t accel_mag_i2c_addr, uint8_t gyro_i2c_addr,
-                    String config_path = "");
-  SensorFusion* sensor_interface_; ///< sensor's Fusion Library interface
- 
+                    uint8_t accel_mag_i2c_addr, uint8_t gyro_i2c_addr);
+  SensorFusion* sensor_interface_;  ///< sensor's Fusion Library interface
+
  private:
   void ReadAndProcessSensors(void);  ///< reads sensor and runs fusion algorithm
 };
@@ -51,7 +50,7 @@ class OrientationSensor {
 class AttitudeValues : public AttitudeProducer, public Sensor {
  public:
   AttitudeValues(OrientationSensor* orientation_sensor,
-                 uint read_delay_ms = 100, String config_path = "");
+                 uint report_interval_ms = 100, String config_path = "");
   void enable() override final;  ///< starts periodic outputs of Attitude
   OrientationSensor*
       orientation_sensor_;  ///< Pointer to the orientation sensor
@@ -61,8 +60,9 @@ class AttitudeValues : public AttitudeProducer, public Sensor {
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
-  Attitude attitude_;   ///< struct storing the current yaw,pitch,roll values
-  uint read_delay_ms_;  ///< interval between attitude updates to Signal K
+  Attitude attitude_;  ///< struct storing the current yaw,pitch,roll values
+  uint report_interval_ms_;  ///< interval between attitude updates to Signal K
+  uint8_t save_mag_cal_;     ///< Flag for saving current magnetic calibration
 
 };  // end class AttitudeValues
 
@@ -93,7 +93,7 @@ class OrientationValues : public NumericSensor {
   };
   OrientationValues(OrientationSensor* orientation_sensor,
                     OrientationValType value_type = kCompassHeading,
-                    uint read_delay_ms = 100, String config_path = "");
+                    uint report_interval_ms = 100, String config_path = "");
   void enable() override final;  ///< starts periodic outputs of Attitude
   OrientationSensor*
       orientation_sensor_;  ///< Pointer to the orientation sensor
@@ -105,8 +105,9 @@ class OrientationValues : public NumericSensor {
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
   OrientationValType
-      value_type_;      ///< Particular type of orientation parameter supplied
-  uint read_delay_ms_;  ///< Interval between data outputs via Signal K
+      value_type_;  ///< Particular type of orientation parameter supplied
+  uint report_interval_ms_;  ///< Interval between data outputs via Signal K
+  uint8_t save_mag_cal_;     ///< Flag for saving current magnetic calibration
 
 };  // end class OrientationValues
 
