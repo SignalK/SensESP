@@ -11,8 +11,13 @@
 // Sensor hardware details: I2C addresses and pins       
 #define BOARD_ACCEL_MAG_I2C_ADDR    (0x1F) ///< I2C address on Adafruit breakout board
 #define BOARD_GYRO_I2C_ADDR         (0x21) ///< I2C address on Adafruit breakout board
-#define PIN_I2C_SDA (13)  //Adjust to your board. A value of -1
-#define PIN_I2C_SCL (12)  //will use default Arduino pins.
+#if defined( ESP8266 )
+  #define PIN_I2C_SDA (12)  //Adjust to your board. A value of -1
+  #define PIN_I2C_SCL (14)  // will use default Arduino pins.
+#elif defined( ESP32 )
+  #define PIN_I2C_SDA (23)  //Adjust to your board. A value of -1
+  #define PIN_I2C_SCL (25)  //will use default Arduino pins.
+#endif
 
 // How often orientation parameters are published via Signal K message
 #define ORIENTATION_REPORTING_INTERVAL_MS (100)
@@ -26,8 +31,19 @@ ReactESP app([]() {
   SetupSerialDebug(115200);
 #endif
 
-  // Create the global SensESPApp() object.
-  sensesp_app = new SensESPApp();
+  /**
+   * Create the global SensESPApp() object.
+   * By passing the WiFi setup details in the constructor, rather than
+   * relying on entering it in the device's web interface, we save about
+   * 2496 bytes of heap memory (RAM). Another alternative is to use the
+   * Builder pattern (sensesp_app_builder.h), but that saves only 1880 bytes.
+   */
+  sensesp_app = new SensESPApp(
+      "SensESP_D1",         //hostname (name of this ESP device as advertised to SignalK)
+      "mySSID",             //WiFi network SSID
+      "myPassword",         //WiFi network password
+      "192.168.1.4",        //IP address of network's Signal K server
+      3000);                //port on which to connect to Signal K server
 
   /**
    * The "SignalK path" identifies this sensor to the Signal K server. Leaving
@@ -48,7 +64,6 @@ ReactESP app([]() {
    */
   const char* kSKPathHeading = "navigation.headingCompass";
   const char* kSKPathAttitude = "navigation.attitude";
-
   /**
    * This example shows heading, pitch, and roll. If you want other parameters
    * as well, uncomment the appropriate path(s) from the following.
@@ -111,19 +126,14 @@ ReactESP app([]() {
    * run-time configuration.
    * These two are necessary until a method is created to synthesize them.
    */
-  const char* kConfigPathSensor = "/sensors/orientation/value_settings";
   const char* kConfigPathAttitude = "/sensors/attitude/value_settings";
   const char* kConfigPathAttitude_SK = "/sensors/attitude/sk";
   const char* kConfigPathHeading = "/sensors/heading/value_settings";
   const char* kConfigPathHeading_SK = "/sensors/heading/sk";
-  // It may make sense to use the same path (not _sk) for all types of readings
-  // from the one sensor.
   /**
    Above arrangement of config paths yields this web interface structure:
-   Note the sensor itself has no sk path at it is not a Signal K emitter.
-   sensors->orientation
-                   ->value_settings
-           ->attitude
+   Note the hardware sensor itself has no run-time configurable items.
+   sensors->attitude
                    ->sk_path
                    ->value_settings
            ->heading
@@ -146,17 +156,18 @@ ReactESP app([]() {
    * orientation parameters. Selection of which particular parameters are
    * output is performed later when the value producers are created.
    */
-  auto* orientation_sensor =
-      new OrientationSensor(PIN_I2C_SDA, PIN_I2C_SCL, BOARD_ACCEL_MAG_I2C_ADDR,
-                          BOARD_GYRO_I2C_ADDR, kConfigPathSensor);
+  auto* orientation_sensor = new OrientationSensor(
+      PIN_I2C_SDA, PIN_I2C_SCL, BOARD_ACCEL_MAG_I2C_ADDR, BOARD_GYRO_I2C_ADDR);
 
   /* Magnetic Calibration occurs during regular runtime. After power-on, move
    * the sensor through a series of rolls, pitches and yaws. After enough
    * readings have been collected (takes 15-30 seconds when rotating the sensor
    * by hand) then the sensor should be calibrated.
-   * TODO: Calibrations can be saved in non-volatile memory, but
-   * the command to do this has not been implemented yet in SensESP (though it
-   * does exist in the Sensor Fusion library).
+   * A Magnetic Calibration can be saved in non-volatile memory, so it will be
+   * loaded at the next power-up. To save a calibration, use the
+   * value_settings->Save_Mag_Cal entry in the sensor web interface.
+   * A calibration will be valid until the sensor's magnetic environment
+   * changes.
    * TODO: It is possible to have an indication that the sensor is uncalibrated
    * but this has not been implemented.
    */
@@ -185,7 +196,7 @@ ReactESP app([]() {
   sensor_attitude->connect_to(
       new SKOutputAttitude(kSKPathAttitude, kConfigPathAttitude_SK));
 
-  // This example shows attitude and heading. If you want other parameters
+  // This example reports attitude and heading. If you want other parameters
   // as well, uncomment the appropriate connections from the following.
   //   auto* sensor_turn_rate = new OrientationValues(
   //       orientation_sensor, OrientationValues::kRateOfTurn,
