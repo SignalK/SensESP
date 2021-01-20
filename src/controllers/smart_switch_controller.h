@@ -25,7 +25,7 @@
  * the input is a ClickType:
  * <ol>
  *   <li>A value of ClickTypes::DoubleClick will toggle the output as well as
- *       send PUT requests to syncrhonize zero or more paths that are configured to
+ *       send PUT requests to synchronize zero or more paths that are configured to
  *       do so</li>
  *   <li>A value of ClickTypes::UltraLongSingleClick will reboot the MCU.</li>
  * </ol>
@@ -42,6 +42,34 @@ class SmartSwitchController : public BooleanTransform,
                               public ValueConsumer<String> {
 
      public:
+       /**
+        * The constructor
+        * @param auto_initialize If TRUE, the controller will emit an
+        *  initial "off" status when enabled. This is generally the
+        *  desired case unless this controller is mirroring the state
+        *  of a remote load.
+        * @param config_path The path to save configuration data (blank for
+        *   no saving)
+        * @param sk_sync_paths An optional array of Signal K paths that should
+        *   synchronize their status whenever a double click ClickType is received.
+        *   Each path listed will have a PUT request issued to set the status to
+        *   be the same as this SmartSwitchController each time a double click occurs.
+        *   This list, if specified, should have a zero length string as its last entry.
+        */
+       SmartSwitchController(bool auto_initialize = true, String config_path = "", const char* sk_sync_paths[] = NULL);
+       void enable() override;
+       void set_input(bool new_value, uint8_t input_channel = 0) override;
+       void set_input(String new_value, uint8_t input_channel = 0) override;
+       void set_input(ClickTypes new_value, uint8_t input_channel = 0) override;
+
+
+       // For reading and writing the configuration of this transformation
+       virtual void get_configuration(JsonObject& doc) override;
+       virtual bool set_configuration(const JsonObject& config) override;
+       virtual String get_config_schema() override;
+
+     public:
+       /// Used to store configuration internally.
        class SyncPath {
           public:
             String sk_sync_path;
@@ -54,29 +82,6 @@ class SmartSwitchController : public BooleanTransform,
               return lhs.sk_sync_path < rhs.sk_sync_path;
             }
        };
-
-       /**
-        * The constructor
-        * @param auto_initialize If TRUE, the controller will emit an
-        *  initial "off" status when enabled. This is generally the
-        *  desired case unless this controller is mirroring the state
-        *  of a remote load.
-        * @param config_path The path to save configuration data (blank for
-        *   no saving)
-        * @param defaults The default list of paths to synchronize status
-        *   when a double click is commanded by the user.
-        */
-       SmartSwitchController(bool auto_initialize = true, String config_path = "", std::set<SyncPath>* defaults = NULL);
-       void enable() override;
-       void set_input(bool new_value, uint8_t input_channel = 0) override;
-       void set_input(String new_value, uint8_t input_channel = 0) override;
-       void set_input(ClickTypes new_value, uint8_t input_channel = 0) override;
-
-
-       // For reading and writing the configuration of this transformation
-       virtual void get_configuration(JsonObject& doc) override;
-       virtual bool set_configuration(const JsonObject& config) override;
-       virtual String get_config_schema() override;
 
      protected:
        bool is_on = false;

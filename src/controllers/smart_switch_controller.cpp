@@ -1,13 +1,18 @@
 #include "smart_switch_controller.h"
 #include "transforms/truth_text.h"
 
-SmartSwitchController::SmartSwitchController(bool auto_initialize, String config_path, std::set<SyncPath>* defaults) :
+SmartSwitchController::SmartSwitchController(bool auto_initialize, String config_path, const char* sk_sync_paths[]) :
    BooleanTransform(config_path),
    auto_initialize_{auto_initialize} {
 
-  if (defaults != NULL) {
-    sync_paths.clear();
-    sync_paths = *defaults;
+  if (sk_sync_paths != NULL) {
+      sync_paths.clear();
+      int i = 0;
+      while (strlen(sk_sync_paths[i]) > 0) {
+          SyncPath path(sk_sync_paths[i]);
+          sync_paths.insert(path);
+          i++;
+      } // while
   }
 
   load_configuration();
