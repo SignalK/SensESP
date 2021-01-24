@@ -257,60 +257,60 @@ void WSClient::connect() {
     return;
   }
 
-  if (WiFi.isConnected()) {
-    debugD("Initiating websocket connection with server...");
-
-    connection_state = WSConnectionState::kWSAuthorizing;
-
-    String server_address = this->server_address;
-    uint16_t server_port = this->server_port;
-
-    if (this->server_address.isEmpty()) {
-      if (!get_mdns_service(server_address, server_port)) {
-        debugE("No Signal K server found in network when using mDNS service!");
-      } else {
-        debugI("Signal K server has been found at address %s:%d by mDNS.",
-               server_address.c_str(), server_port);
-      }
-    }
-
-    if (!server_address.isEmpty() && server_port > 0) {
-      debugD("Websocket is connecting to Signal K server on address %s:%d",
-             server_address.c_str(), server_port);
-    } else {
-      // host and port not defined - wait for mDNS
-      connection_state = WSConnectionState::kWSDisconnected;
-      return;
-    }
-
-    if (this->polling_href != "") {
-      // existing pending request
-      this->poll_access_request(server_address, server_port,
-                                this->polling_href);
-      return;
-    }
-
-    if (this->auth_token == NULL_AUTH_TOKEN) {
-      // initiate HTTP authentication
-      debugD("No prior authorization token present.");
-      this->send_access_request(server_address, server_port);
-      return;
-    }
-
-    if (test_auth_on_each_connect_ || !token_test_success) {
-      // Test the validity of the authorization token for the first time...
-      this->test_token(server_address, server_port);
-    } else {
-      // The token has already been validated once,
-      // so we must be trying a subsequent reconnect.
-      // Jump directly to opening up the websocket...
-      server_detected = true;
-      this->connect_ws(server_address, server_port);
-    }
-  } else {
+  if (!WiFi.isConnected()) {
     debugI(
         "WiFi is disconnected. SignalK client connection will connect when "
         "WiFi is connected.");
+    return;
+  }
+
+  debugD("Initiating websocket connection with server...");
+
+  connection_state = WSConnectionState::kWSAuthorizing;
+
+  String server_address = this->server_address;
+  uint16_t server_port = this->server_port;
+
+  if (this->server_address.isEmpty()) {
+    if (!get_mdns_service(server_address, server_port)) {
+      debugE("No Signal K server found in network when using mDNS service!");
+    } else {
+      debugI("Signal K server has been found at address %s:%d by mDNS.",
+             server_address.c_str(), server_port);
+    }
+  }
+
+  if (!server_address.isEmpty() && server_port > 0) {
+    debugD("Websocket is connecting to Signal K server on address %s:%d",
+           server_address.c_str(), server_port);
+  } else {
+    // host and port not defined - wait for mDNS
+    connection_state = WSConnectionState::kWSDisconnected;
+    return;
+  }
+
+  if (this->polling_href != "") {
+    // existing pending request
+    this->poll_access_request(server_address, server_port, this->polling_href);
+    return;
+  }
+
+  if (this->auth_token == NULL_AUTH_TOKEN) {
+    // initiate HTTP authentication
+    debugD("No prior authorization token present.");
+    this->send_access_request(server_address, server_port);
+    return;
+  }
+
+  if (test_auth_on_each_connect_ || !token_test_success) {
+    // Test the validity of the authorization token for the first time...
+    this->test_token(server_address, server_port);
+  } else {
+    // The token has already been validated once,
+    // so we must be trying a subsequent reconnect.
+    // Jump directly to opening up the websocket...
+    server_detected = true;
+    this->connect_ws(server_address, server_port);
   }
 }
 
