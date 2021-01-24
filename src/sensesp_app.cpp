@@ -15,6 +15,7 @@
 #include "signalk/signalk_output.h"
 #include "system/spiffs_storage.h"
 #include "system/system_status_led.h"
+#include "transforms/debounce.h"
 #include "transforms/difference.h"
 #include "transforms/frequency.h"
 #include "transforms/linear.h"
@@ -99,6 +100,21 @@ void SensESPApp::setup() {
   this->networking_->connect_to(&system_status_controller_);
   this->ws_client_->connect_to(&system_status_controller_);
 
+  // create the wifi disconnect watchdog
+
+  this->system_status_controller_
+    .connect_to(new DebounceTemplate<SystemStatus>(
+      3*60*1000, // 180 s = 180000 ms = 3 minutes
+      "/system/wifi_reboot_watchdog"))
+    ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {
+      debugD("Got system status: %d", (int)input);
+      if (input == SystemStatus::kWifiDisconnected ||
+          input == SystemStatus::kWifiNoAP) {
+            debugW("Unable to connect to wifi for too long; restarting.");
+            app.onDelay(1000, []() { ESP.restart(); });
+          }
+    }));
+
   // create a system status led and connect it
 
   if (system_status_led_ == NULL) {
@@ -181,7 +197,7 @@ void SensESPApp::reset() {
   debugW("Resetting the device configuration.");
   networking_->reset_settings();
   SPIFFS.format();
-  app.onDelay(1000, []() { ESP.restart(); });
+  app.onDelay(1000, []() { ESP.restart(); delay(1000); });
 }
 
 String SensESPApp::get_hostname() { return networking_->get_hostname()->get(); }

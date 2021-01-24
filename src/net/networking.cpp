@@ -83,14 +83,7 @@ void Networking::wifi_station_connected() {
 }
 
 void Networking::wifi_station_disconnected() {
-  // if connection is lost, simply restart
-  debugD("Wifi disconnected");
-
-  // Might be futile to notify about a disconnection if it results in
-  // a reboot anyway
   this->emit(WifiState::kWifiDisconnected);
-
-  //ESP.restart();
 }
 
 void Networking::setup_wifi_manager() {
