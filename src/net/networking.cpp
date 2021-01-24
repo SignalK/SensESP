@@ -38,19 +38,6 @@ Networking::Networking(String config_path, String ssid, String password,
   wifi_manager = new AsyncWiFiManager(server, dns);
 }
 
-void Networking::check_connection() {
-  if (WiFi.status() != WL_CONNECTED) {
-    // if connection is lost, simply restart
-    debugD("Wifi disconnected: restarting...");
-
-    // Might be futile to notify about a disconnection if it results in
-    // a reboot anyway
-    this->emit(WifiState::kWifiDisconnected);
-
-    ESP.restart();
-  }
-}
-
 void Networking::setup() {
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid();
@@ -58,37 +45,58 @@ void Networking::setup() {
   if (ap_ssid == "" && WiFi.status() != WL_CONNECTED) {
     setup_wifi_manager();
   }
-  app.onRepeat(1000, std::bind(&Networking::check_connection, this));
+}
+
+void Networking::setup_wifi_callbacks() {
+#if defined(ESP8266)
+  WiFi.onStationModeConnected([this](const WiFiEventStationModeConnected& event) { 
+    this->wifi_station_connected();
+  });
+  WiFi.onStationModeDisconnected([this](const WiFiEventStationModeDisconnected& event) { 
+    this->wifi_station_disconnected();
+  });
+#elif defined(ESP32)
+  WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
+    this->wifi_station_connected();
+  }, WiFiEvent_t::SYSTEM_EVENT_STA_GOT_IP);
+  WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
+    this->wifi_station_disconnected();
+  }, WiFiEvent_t::SYSTEM_EVENT_STA_DISCONNECTED);  
+#endif
 }
 
 void Networking::setup_saved_ssid() {
-  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
   this->emit(WifiState::kWifiDisconnected);
-
+  setup_wifi_callbacks();
+  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
+  
   uint32_t timer_start = millis();
 
   debugI("Connecting to wifi %s.", ap_ssid.c_str());
-  int printCounter = 0;
-  while (WiFi.status() != WL_CONNECTED &&
-         (millis() - timer_start) < 3 * 60 * 1000) {
-    delay(500);
-    if (printCounter % 4) {
-      debugI("Wifi status=%d, time=%d ms", WiFi.status(), 500 * printCounter);
-    }
-    printCounter++;
-  }
+}
 
-  if (WiFi.status() == WL_CONNECTED) {
+void Networking::wifi_station_connected() {
     debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
            WiFi.RSSI());
     debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
     this->emit(WifiState::kWifiConnectedToAP);
-    WiFi.mode(WIFI_STA);
-  }
+}
+
+void Networking::wifi_station_disconnected() {
+  // if connection is lost, simply restart
+  debugD("Wifi disconnected");
+
+  // Might be futile to notify about a disconnection if it results in
+  // a reboot anyway
+  this->emit(WifiState::kWifiDisconnected);
+
+  //ESP.restart();
 }
 
 void Networking::setup_wifi_manager() {
   should_save_config = false;
+
+  setup_wifi_callbacks();
 
   // set config save notify callback
   wifi_manager->setSaveConfigCallback(save_config_callback);

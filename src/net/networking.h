@@ -33,9 +33,14 @@ class Networking : public Configurable, public ValueProducer<WifiState> {
   void reset_settings();
 
  protected:
-  void check_connection();
   void setup_saved_ssid();
+  void setup_wifi_callbacks();
   void setup_wifi_manager();
+
+  // callbacks
+
+  void wifi_station_connected();
+  void wifi_station_disconnected();
 
  private:
   AsyncWebServer* server;
