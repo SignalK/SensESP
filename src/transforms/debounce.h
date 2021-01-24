@@ -37,23 +37,20 @@ class DebounceTemplate : public SymmetricTransform<T> {
  public:
   DebounceTemplate(int ms_min_delay = 15, String config_path = "")
       : SymmetricTransform<T>(config_path),
-        ms_min_delay_{ms_min_delay},
-        value_sent_{false},
-        stable_input_{false},
-        reaction_{NULL} {
+        ms_min_delay_{ms_min_delay} {
     this->load_configuration();
   }
 
   virtual void set_input(T input, uint8_t input_channel = 0) override {
     if (reaction_ != NULL) {
       reaction_->remove();
-      reaction_ = NULL;
+      reaction_ = nullptr;
     }
     // Input has changed since the last emit, or this is the first
     // input since the program started to run.
     if (input != stable_input_ || value_sent_ == false) {
       reaction_ = app.onDelay(ms_min_delay_, [this, input]() {
-        this->reaction_ = NULL;
+        this->reaction_ = nullptr;
         this->stable_input_ = input;
         this->value_sent_ = true;
         this->emit(input);
@@ -63,9 +60,9 @@ class DebounceTemplate : public SymmetricTransform<T> {
 
  private:
   int ms_min_delay_;
-  bool value_sent_;
-  bool stable_input_;
-  DelayReaction* reaction_;
+  bool value_sent_ = false;
+  T stable_input_;
+  DelayReaction* reaction_ = nullptr;
   virtual void get_configuration(JsonObject& doc) override {
     doc["min_delay"] = ms_min_delay_;
   }
