@@ -83,6 +83,7 @@ void Networking::wifi_station_connected() {
 }
 
 void Networking::wifi_station_disconnected() {
+  debugI("Disconnected from wifi.");
   this->emit(WifiState::kWifiDisconnected);
 }
 
