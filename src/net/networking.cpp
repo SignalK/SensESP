@@ -189,5 +189,8 @@ void Networking::reset_settings() {
   ap_password = preset_password;
 
   save_configuration();
-  wifi_manager->resetSettings();
+  WiFi.disconnect(true);
+  // On ESP32, disconnect does not erase previous credentials. Let's connect
+  // to a bogus network instead
+  WiFi.begin("0", "0");
 }
