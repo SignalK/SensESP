@@ -71,8 +71,6 @@ void Networking::setup_saved_ssid() {
   this->emit(WifiState::kWifiDisconnected);
   setup_wifi_callbacks();
   WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
-  
-  uint32_t timer_start = millis();
 
   debugI("Connecting to wifi %s.", ap_ssid.c_str());
 }
