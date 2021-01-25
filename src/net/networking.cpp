@@ -49,12 +49,14 @@ void Networking::setup() {
 
 void Networking::setup_wifi_callbacks() {
 #if defined(ESP8266)
-  WiFi.onStationModeConnected([this](const WiFiEventStationModeConnected& event) { 
-    this->wifi_station_connected();
-  });
-  WiFi.onStationModeDisconnected([this](const WiFiEventStationModeDisconnected& event) { 
-    this->wifi_station_disconnected();
-  });
+  got_ip_event_handler_ =
+      WiFi.onStationModeGotIP([this](const WiFiEventStationModeGotIP& event) {
+        this->wifi_station_connected();
+      });
+  wifi_disconnected_event_handler_ = WiFi.onStationModeDisconnected(
+      [this](const WiFiEventStationModeDisconnected& event) {
+        this->wifi_station_disconnected();
+      });
 #elif defined(ESP32)
   WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
     this->wifi_station_connected();
