@@ -320,7 +320,7 @@ void WSClient::test_token(const String server_address,
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port +
-               "/signalk/v1/api/";
+               "/signalk/";
   debugD("Testing token with url %s", url.c_str());
   http.begin(wifi_client, url);
   String full_token = String("JWT ") + auth_token;
