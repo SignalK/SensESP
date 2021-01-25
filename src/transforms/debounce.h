@@ -15,7 +15,7 @@ static const char DEBOUNCE_SCHEMA[] PROGMEM = R"###({
  *
  * It's a passthrough transform that will output a value only if it's different
  * from the previous output, and only if it's been ms_min_delay ms since the
- * input was received, with no other input received since then.
+ * input was received.
  *
  * @tparam T The type of value being passed through Debounce.
  *
@@ -42,26 +42,30 @@ class DebounceTemplate : public SymmetricTransform<T> {
   }
 
   virtual void set_input(T input, uint8_t input_channel = 0) override {
-    if (reaction_ != NULL) {
-      reaction_->remove();
-      reaction_ = nullptr;
-    }
+    
     // Input has changed since the last emit, or this is the first
     // input since the program started to run.
-    if (input != stable_input_ || value_sent_ == false) {
+    
+    if (input != debounced_value_ || !value_received_) {
+      debounced_value_ = input;
+
+      if (reaction_) {
+        reaction_->remove();
+        reaction_ = nullptr;
+      }
       reaction_ = app.onDelay(ms_min_delay_, [this, input]() {
         this->reaction_ = nullptr;
-        this->stable_input_ = input;
-        this->value_sent_ = true;
+        this->debounced_value_ = input;
         this->emit(input);
       });
+      value_received_ = true;
     }
   }
 
  private:
   int ms_min_delay_;
-  bool value_sent_ = false;
-  T stable_input_;
+  bool value_received_ = false;
+  T debounced_value_;
   DelayReaction* reaction_ = nullptr;
   virtual void get_configuration(JsonObject& doc) override {
     doc["min_delay"] = ms_min_delay_;
