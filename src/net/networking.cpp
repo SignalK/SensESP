@@ -163,21 +163,13 @@ String Networking::get_config_schema() {
   // Config UI. If preset_hostname is not "SensESP", then it was set in
   // main.cpp, so it should be read-only.
   bool hostname_preset = preset_hostname != "SensESP";
-  bool wifi_preset = preset_ssid != "";
   return String(FPSTR(SCHEMA_PREFIX)) +
          get_property_row("hostname", "ESP device hostname", hostname_preset) +
-         "," +
-         get_property_row("ap_ssid", "Wifi Access Point SSID", wifi_preset) +
-         "," +
-         get_property_row("ap_password", "Wifi Access Point Password",
-                          wifi_preset) +
          "}}";
 }
 
 void Networking::get_configuration(JsonObject& root) {
   root["hostname"] = this->hostname->get();
-  root["ap_ssid"] = this->ap_ssid;
-  root["ap_password"] = this->ap_password;
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
@@ -189,11 +181,6 @@ bool Networking::set_configuration(const JsonObject& config) {
     this->hostname->set(config["hostname"].as<String>());
   }
 
-  if (preset_ssid == "") {
-    debugW("Using saved SSID and password");
-    this->ap_ssid = config["ap_ssid"].as<String>();
-    this->ap_password = config["ap_password"].as<String>();
-  }
   return true;
 }
 
