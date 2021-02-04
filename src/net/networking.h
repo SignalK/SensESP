@@ -3,6 +3,10 @@
 
 #include "Arduino.h"
 
+#ifdef ESP8266
+#include <ESP8266WiFi.h>
+#endif
+
 // Local WebServer used to serve the configuration portal
 #include <ESPAsyncWebServer.h>
 #include <ESPAsyncWiFiManager.h>
@@ -19,7 +23,7 @@ enum class WifiState {
 };
 
 /**
- * @brief Manages the ESP's connection to the Wifi network. 
+ * @brief Manages the ESP's connection to the Wifi network.
  */
 class Networking : public Configurable, public ValueProducer<WifiState> {
  public:
@@ -33,9 +37,14 @@ class Networking : public Configurable, public ValueProducer<WifiState> {
   void reset_settings();
 
  protected:
-  void check_connection();
   void setup_saved_ssid();
+  void setup_wifi_callbacks();
   void setup_wifi_manager();
+
+  // callbacks
+
+  void wifi_station_connected();
+  void wifi_station_disconnected();
 
  private:
   AsyncWebServer* server;
@@ -43,6 +52,13 @@ class Networking : public Configurable, public ValueProducer<WifiState> {
   // respective methods to save some runtime memory
   DNSServer* dns;
   AsyncWiFiManager* wifi_manager;
+
+#ifdef ESP8266
+  // event handlers must be saved to keep the handlers activated
+  WiFiEventHandler got_ip_event_handler_;
+  WiFiEventHandler wifi_disconnected_event_handler_;
+#endif
+
   ObservableValue<String>* hostname;
   String ap_ssid = "";
   String ap_password = "";
