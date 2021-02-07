@@ -27,7 +27,9 @@
    * 'output_scale' is 1024, which means output will be from 0 to 1023. If you
    * want your output to be on a different scale, use this parameter to indicate
    * the X in the `0 to X` scale. For example, if you want your output to be
-   * expressed as a percentage (0 to 100), make this parameter be 100.
+   * expressed as a percentage (0 to 100), make this parameter be 100. If you want
+   * your output to be the original voltage read by the AnalogIn pin, make this
+   * parameter be the maximum voltage that can go into the pin (probably 3.3).
    */
  class AnalogInput : public NumericSensor {
  public:
