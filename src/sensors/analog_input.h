@@ -29,7 +29,11 @@
    * the X in the `0 to X` scale. For example, if you want your output to be
    * expressed as a percentage (0 to 100), make this parameter be 100. If you want
    * your output to be the original voltage read by the AnalogIn pin, make this
-   * parameter be the maximum voltage that can go into the pin (probably 3.3).
+   * parameter be the maximum voltage that can go into the pin (probably 3.3). If
+   * you want your output to be the original voltage that was intput into a
+   * physical voltage divider circuit before being read by the AnalogIn pin,
+   * make this parameter be the maximum voltage that you would send into the
+   * voltage divider circuit.
    */
  class AnalogInput : public NumericSensor {
  public:
