@@ -12,6 +12,9 @@ Class documentation for SensESP is [here](http://signalk.org/SensESP/generated/d
 
 A Wiki page with more detailed information about using SensESP is [here](https://github.com/SignalK/SensESP/wiki).
 
+Libraries for some SensESP "add-ons" can be found [here](https://github.com/SensESP). Initially, there are a few external sensors in this list
+(such as the INA family of voltage and current sensors). Eventually, there may be add-ons to interface with other hardware or software.
+
 *NOTE:* If you have an existing project that fails to compile after 2020-10-22, add the following line to the `[env]` section of the `platformio.ini` file of your project:
 
     lib_ldf_mode = deep
