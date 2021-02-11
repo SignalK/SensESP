@@ -9,7 +9,7 @@
  * 
  * Vout = (Vin x R2) / (R1 + R2) is the voltage divider formula. We know:
  * - Vout - that's the input to this transform, probably coming from an AnalogVoltage
- *          transform.
+ *          transform, or directly from an AnalogInput sensor.
  * - Vin - that's one of the paramaters to this transform. It's a fixed voltage that
  *         you know from your physical voltage divider circuit.
  * - R2 - also a parameter to this transform, and also from your physical voltage divider.
@@ -46,7 +46,7 @@ class VoltageDividerR1 : public SymmetricTransform<float> {
  * 
  * Vout = (Vin x R2) / (R1 + R2) is the voltage divider formula. We know:
  * - Vout - that's the input to this transform, probably coming from an AnalogVoltage
- *          transform.
+ *          transform, or directly from an AnalogInput sensor.
  * - Vin - that's one of the paramaters to this transform. It's a fixed voltage that
  *         you know from your physical voltage divider circuit.
  * - R1 - also a parameter to this transform, and also from your physical voltage divider.
