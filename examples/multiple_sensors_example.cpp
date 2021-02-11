@@ -1,72 +1,80 @@
-#include "sensors/analog_input.h"
+// multiple_sensors_example.cpp
+
+/**
+ * This example illustrates only a single concept - how to combine multiple sensors
+ * into a single main.cpp. (All the other examples show only a single sensor.)
+ * It combines the code from two of the other examples: sht31_example.cpp and
+ * rpm_counter.cpp.
+ * 
+ * All of the original comments have been removed from those two examples, and new
+ * comments have been added to show how multiple sensors can be read. For the
+ * detailed comments about either of the two examples included here, see their
+ * respective example file.
+ **/ 
 
 #include <Arduino.h>
 
+#define USE_LIB_WEBSOCKET true
+
 #include "sensesp_app.h"
+#include "sensors/sht31.h"
+#include "sensors/digital_input.h"
+#include "transforms/frequency.h"
 #include "signalk/signalk_output.h"
-#include "transforms/linear.h"
 
-// SensESP builds upon the ReactESP framework. Every ReactESP application
-// defines an "app" object vs defining a "main()" method.
 ReactESP app([]() {
-
-// Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
 #endif
 
-  // Create the global SensESPApp() object.
   sensesp_app = new SensESPApp();
 
-  // The "Signal K path" identifies this sensor to the Signal K server. Leaving
-  // this blank would indicate this particular sensor (or transform) does not
-  // broadcast Signal K data.
-  // To find valid Signal K Paths that fits your need you look at this link:
-  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
-  const char* sk_path = "environment.indoor.illuminance";
+  // Everything above this line is boilerplate, except for the #include statements
 
-  // The "Configuration path" is combined with "/config" to formulate a URL
-  // used by the RESTful API for retrieving or setting configuration data.
-  // It is ALSO used to specify a path to the SPIFFS file system
-  // where configuration data is saved on the MCU board. It should
-  // ALWAYS start with a forward slash if specified. If left blank,
-  // that indicates this sensor or transform does not have any
-  // configuration to save, or that you're not interested in doing
-  // run-time configuration.
-  const char* analog_in_config_path = "/indoor_illuminance/analog_in";
-  const char* linear_config_path = "/indoor_illuminance/linear";
+  // This is the beginning of the code to read the SHT31 temperature and humidity
+  // sensor.
 
-  // Create a sensor that is the source of our data, that will be read every 500
-  // ms. It's a light sensor that's connected to the ESP's AnalogIn pin. The
-  // AnalogIn pin on ESP8266 is always A0, but ESP32 has many pins that can be
-  // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
-  // When it's dark, the sensor's output (as read by analogRead()) is 120, and
-  // when it's bright, the output is 850, for a range of 730.
-  uint8_t pin = A0;
-  uint read_delay = 500;
+  auto* sht31 = new SHT31(0x45);
+  const uint sht31_read_delay = 1000;
 
-  auto* analog_input = new AnalogInput(pin, read_delay, analog_in_config_path);
+  auto* sht31_temperature =
+      new SHT31Value(sht31, SHT31Value::temperature, sht31_read_delay, "/fridge/temperature");
+  sht31_temperature->connect_to(
+      new SKOutputNumber("environment.inside.refrigerator.temperature"));
 
-  // A Linear transform takes its input, multiplies it by the multiplier, then
-  // adds the offset, to calculate its output. In this example, we want to see
-  // the final output presented as a percentage, where dark = 0% and bright =
-  // 100%. To get a percentage, we use this formula: sensor output * (100 / 730)
-  // - 16.44 = output (a percentage from 0 to 100). Dark = 120 * (100 / 730) +
-  // (-16.44) = 0% Bright = 850 * (100 / 730) + (-16.44) = 100%
-  const float multiplier =
-      0.137;  // 100% divided by 730 = 0.137 "percent per analogRead() unit"
-  const float offset = -16.44;
+  auto* sht31_humidity =
+      new SHT31Value(sht31, SHT31Value::humidity, sht31_read_delay, "/fridge/humidity");
+  sht31_humidity->connect_to(
+      new SKOutputNumber("environment.inside.refrigerator.humidity"));
 
-  // Wire up the output of the analog input to the Linear transform,
-  // and then output the results to the Signal K server. As part of
-  // that output, send some metadata to indicate that the "units"
-  // of the value we are sending is a "ratio" - which is the official
-  // unit type for a percentage represented as a float between 0.0 and 1.0
-  // See https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
-  // for more details.
-  analog_input->connect_to(new Linear(multiplier, offset, linear_config_path))
-      ->connect_to(new SKOutputNumber(sk_path, "", new SKMetadata("ratio")));
+   // This is the end of the SHT31 code and the beginning of the RPM counter code. Notice
+   // that nothing special has to be done - just start writing the code for the next sensor.
+   // You'll notice slight differences in code styles - for example, the code above
+   // defines the config paths "in place", and the code below defines them with a variable,
+   // then uses the variable as the function parameter. Either approach works.  
 
-  // Start the SensESP application running
+  const char* sk_path = "propulsion.main.revolutions";
+  const char* config_path_calibrate = "/sensors/engine_rpm/calibrate";
+  const char* config_path_skpath = "/sensors/engine_rpm/sk";
+  const float multiplier = 1.0 / 97.0;
+  const uint rpm_read_delay = 500;
+
+#ifdef ESP8266
+  uint8_t pin = D5;  
+#elif defined(ESP32)
+  uint8_t pin = 4;
+#endif
+  auto* dic = new DigitalInputCounter(pin, INPUT_PULLUP, RISING, rpm_read_delay);
+
+  dic
+      ->connect_to(new Frequency(multiplier, config_path_calibrate)) 
+      ->connect_to(new SKOutputNumber(sk_path, config_path_skpath));
+
+    // This is the end of the RPM counter code.
+
+    // If you wanted to add a third, fourth, or more sensor, you would do that
+    // here. An ESP9266 should easily handle four or five sensors, and an ESP32
+    // should handle eight or ten, or more.
+    
   sensesp_app->enable();
 });
