@@ -49,7 +49,7 @@ class BME280 {
  **/ 
 class BME280Value : public NumericSensor {
  public:
-  enum BME280ValType { temperature, pressure, humidity };
+  enum BME280ValType { temperature, pressure, humidity, dewPointTemperature };
   BME280Value(BME280* bme280, BME280ValType val_type, uint read_delay = 500,
               String config_path = "");
   void enable() override final;

@@ -36,7 +36,8 @@ BME280Value::BME280Value(BME280* bme280, BME280ValType val_type,
 
 // BME280 outputs temp in Celsius. Need to convert to Kelvin before sending to
 // Signal K. Pressure is output in Pascals, Humidity is output in relative
-// humidity (0 - 100%) and needs to be converted to ratio (0-1)
+// humidity (0 - 100%) and needs to be converted to ratio (0-1).Dew point
+// temperature is in kelvin and calculated from temperature and humidity.
 void BME280Value::enable() {
   app.onRepeat(read_delay_, [this]() {
     if (val_type_ == temperature) {
@@ -46,7 +47,20 @@ void BME280Value::enable() {
       output = bme280_->adafruit_bme280_->readPressure();
     } else if (val_type_ == humidity) {
       output = bme280_->adafruit_bme280_->readHumidity()/100;
-    } else {
+      } else if (val_type_ == dewPointTemperature) {
+          const float a = 17.27;
+          const float b = 237.7; // in Celsius
+
+          float h= bme280_->adafruit_bme280_->readHumidity()/100; //humidity in percent, so divide by 100
+          float t= bme280_->adafruit_bme280_->readTemperature();
+
+          float alfa=(a*t)/(b+t)+ log(h);
+
+          float dpt = (b*alfa)/(a-alfa); 
+        
+          output = dpt + 273.15; // Kelvin is Celsius + 273.15
+       } else {
+
       output = 0.0;
     }
 
