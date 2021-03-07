@@ -48,16 +48,22 @@ void BME280Value::enable() {
     } else if (val_type_ == humidity) {
       output = bme280_->adafruit_bme280_->readHumidity()/100;
       } else if (val_type_ == dewPointTemperature) {
-          const float a = 17.27;
-          const float b = 237.7; // in Celsius
 
-          float h= bme280_->adafruit_bme280_->readHumidity()/100; //humidity in percent, so divide by 100
-          float t= bme280_->adafruit_bme280_->readTemperature();
+          float RH= bme280_->adafruit_bme280_->readHumidity()/100;  //humidity in percent, so divide by 100
+          float T= bme280_->adafruit_bme280_->readTemperature();    //temperature in degrees Celsius
 
-          float alfa=(a*t)/(b+t)+ log(h);
+          // https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point, with Arden Buck Equation and Arden Buck valuation sets
+          float b = 17.368;
+          float c = 238.88; // degrees Celsius
+          const float d = 234.5; // degrees Celsius
+          if (T<0.0) {
+            float b = 17.966;
+            float c = 247.15; // degrees Celsius
+          }
 
-          float dpt = (b*alfa)/(a-alfa); 
-        
+          float gamma=log(RH*exp((b-(T/d))*(T/(c+T))));
+          float dpt = (c*gamma)/(b-gamma);
+
           output = dpt + 273.15; // Kelvin is Celsius + 273.15
        } else {
 
