@@ -62,6 +62,8 @@ Some additional instructions are available on the [SensESP wiki](https://github.
 
 This refers to how you actually use the SensESP library to "wire" (in software) a sensor to send its output to the Signal K Server. Rather than explain it here, just look at the examples - most of them have a lot of comments that describe how this works. Showing is better than telling in this case.
 
+A frequent question from new SensESP users is "Can you have more than one sensor in a single project?". Yes, you can. See the [Multiple Sensors Example](https://github.com/SignalK/SensESP/blob/master/examples/multiple_sensors_example.cpp)
+
 ## Runtime setup
 
 You can configure your device with any web browser by putting the IP address of your device into the URL field of the browser, or by going to
