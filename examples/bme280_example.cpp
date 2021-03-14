@@ -9,6 +9,7 @@
 #include "sensesp_app.h"
 #include "sensors/bme280.h"
 #include "signalk/signalk_output.h"
+#include "transforms/dew_point.h"
 
 ReactESP app([]() {
 #ifndef SERIAL_DEBUG_DISABLED
@@ -51,6 +52,15 @@ ReactESP app([]() {
       new BME280Value(bme280, BME280Value::humidity, read_delay, "/Outside/Humidity");
 
   bme_humidity->connect_to(new SKOutputNumber("environment.outside.humidity"));
+
+
+  // Use the transform dewPoint to calculate the dewpoint based upon the temperature and humidity.
+  auto* dewPoint  = 
+      new DewPoint();
+
+  dewPoint->connect_from(bme_temperature,bme_humidity)
+          ->connect_to(new SKOutputNumber("environment.outside.dewpoint"));
+
 
   sensesp_app->enable();
 });
