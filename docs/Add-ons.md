@@ -2,6 +2,8 @@
 
 This page lists different add-ons and other projects related to [SensESP](https://github.com/SignalK/SensESP).
 
+If you want to have your own project added to the list, [make a PR](https://github.com/SignalK/SensESP/pulls) or [create an issue](https://github.com/SignalK/SensESP/issues) for it.
+
 ## Sensor libraries
 
 ### Attitude
