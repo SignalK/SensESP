@@ -12,13 +12,6 @@ Class documentation for SensESP is [here](http://signalk.org/SensESP/generated/d
 
 A Wiki page with more detailed information about using SensESP is [here](https://github.com/SignalK/SensESP/wiki).
 
-Libraries for some SensESP "add-ons" can be found [here](https://github.com/SensESP). Initially, there are a few external sensors in this list
-(such as the INA family of voltage and current sensors). Eventually, there may be add-ons to interface with other hardware or software.
-
-*NOTE:* If you have an existing project that fails to compile after 2020-10-22, add the following line to the `[env]` section of the `platformio.ini` file of your project:
-
-    lib_ldf_mode = deep
-
 ## Getting Started
 
 You must have a Signal K Server running on your network, or SensESP has nothing to connect to. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md).
@@ -74,6 +67,13 @@ You can find the IP address of your device in the Serial Monitor, right after th
 
 Everything that is configurable on a "live" device will be in the menu that appears. As you'll see in the examples, this includes things like how often you want to read the sensor (usually represented as "read_delay"), how many samples you want in the MovingAverage() transform, what multiplier and offset you want in the Linear() transform, etc., etc. You can also rename the device from that menu, and restart the device, and even reset the device to factory settings (which erases the wifi credentials and the device name).
 
+## Add-on libraries
+
+Going forward, SensESP attempts to focus on providing the core "scaffolding" for building asynchronous and Signal K aware sensor devices. It will not include sensor classes for every possible piece of hardware but those can be provided by third parties and pulled in as dependencies as any other library. Thus, SensESP will hopefully become more like a network of affiliated projects.
+
+A list of SensESP add-on libraries can be found on a separate page: [SensESP add-ons and related projects](https://github.com/SensESP/blob/master/docs/Add-ons.md).
+
+
 ## Getting help
 
 Discussion about SensESP happens mostly in [Signalk-dev Slack](http://slack-invite.signalk.org/) on the #sensors channel. Don't hesitate to join and ask if you ever have problems with getting your project working!
@@ -81,9 +81,3 @@ Discussion about SensESP happens mostly in [Signalk-dev Slack](http://slack-invi
 ## Contributing
 
 Some guidelines about contributing to SensESP are given on the [SensESP wiki](https://github.com/SignalK/SensESP/wiki/Contributing-to-the-SensESP-Project). In particular, you should follow the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) and try to keep the Git commits clean. The project maintainers are active on the [Signalk-dev Slack](http://slack-invite.signalk.org/) #sensors channel. It's recommended to provide a heads-up about your plans there first!
-
-## SensESP Class Diagram
-
-----------------------------
-
-![alt text](sens_esp_uml.png "UML for SensESP")
