@@ -49,22 +49,27 @@ void BME280Value::enable() {
       output = bme280_->adafruit_bme280_->readHumidity()/100;
       } else if (val_type_ == dewPointTemperature) {
 
-          float RH= bme280_->adafruit_bme280_->readHumidity()/100;  //humidity in percent, so divide by 100
-          float T= bme280_->adafruit_bme280_->readTemperature();    //temperature in degrees Celsius
+          // Dew point is calculated with Arden Buck Equation and Arden Buck valuation sets
+          // For more info on the calculation see https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
 
-          // https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point, with Arden Buck Equation and Arden Buck valuation sets
+          float relative_humidity = bme280_->adafruit_bme280_->readHumidity()/100;  //humidity in percent, so divide by 100
+          float temp_celcius = bme280_->adafruit_bme280_->readTemperature();    
+
+          // valuation set for temperatures above 0°C
           float b = 17.368;
-          float c = 238.88; // degrees Celsius
-          const float d = 234.5; // degrees Celsius
-          if (T<0.0) {
+          float c = 238.88; 
+          const float d = 234.5; 
+           
+          // valuation set for temperatures below 0°C
+          if (temp_celcius < 0.0) {
             float b = 17.966;
-            float c = 247.15; // degrees Celsius
+            float c = 247.15; 
           }
 
-          float gamma=log(RH*exp((b-(T/d))*(T/(c+T))));
-          float dpt = (c*gamma)/(b-gamma);
+          float gamma=log(relative_humidity * exp((b - (temp_celcius / d)) * (temp_celcius / (c + temp_celcius))));
+          float dew_point = (c * gamma) / ( b-gamma );
 
-          output = dpt + 273.15; // Kelvin is Celsius + 273.15
+          output = dew_point + 273.15; // Kelvin is Celsius + 273.15
        } else {
 
       output = 0.0;

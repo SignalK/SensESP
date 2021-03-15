@@ -55,11 +55,11 @@ ReactESP app([]() {
 
 
   // Use the transform dewPoint to calculate the dewpoint based upon the temperature and humidity.
-  auto* dewPoint  = 
+  auto* dew_point  = 
       new DewPoint();
 
-  dewPoint->connect_from(bme_temperature,bme_humidity)
-          ->connect_to(new SKOutputNumber("environment.outside.dewpoint"));
+  dew_point->connect_from(bme_temperature, bme_humidity)
+          ->connect_to(new SKOutputNumber("environment.outside.dewPointTemperature"));
 
 
   sensesp_app->enable();

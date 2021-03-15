@@ -10,25 +10,27 @@ void DewPoint::set_input(float input, uint8_t inputChannel) {
   if (received == 0b11) {
     received = 0;
 
-          float TC= inputs[0]-273.15;     // temperature in Celsius
-          float RH= inputs[1];            // relative humidity
+          // Dew point is calculated with Arden Buck Equation and Arden Buck valuation sets
+          // For more info on the calculation see https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
 
-          // https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point, with Arden Buck Equation and Arden Buck valuation sets
+          float temp_celcius = inputs[0] - 273.15; 
+          float relative_humidity = inputs[1];  
 
+          
           // valuation set for temperatures above 0°C
           float b = 17.368;
           float c = 238.88; 
           const float d = 234.5; 
           
           // valuation set for temperatures below 0°C
-          if (TC<0.0) {
+          if (temp_celcius<0.0) {
             b = 17.966;
             c = 247.15; 
           }
 
-          float gamma=log(RH*exp((b-(TC/d))*(TC/(c+TC))));
-          float dpt = (c*gamma)/(b-gamma);
+          float gamma = log(relative_humidity * exp(( b - (temp_celcius / d)) * (temp_celcius /  (c + temp_celcius ))));
+          float dew_point = (c * gamma) / (b - gamma);
 
-  this->emit(dpt + 273.15); // Kelvin is Celsius + 273.15
+  this->emit(dew_point + 273.15);  // Kelvin is Celsius + 273.15
   }
 }
