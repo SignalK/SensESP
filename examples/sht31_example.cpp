@@ -9,7 +9,6 @@
 #include "sensesp_app.h"
 #include "sensors/sht31.h"
 #include "signalk/signalk_output.h"
-#include "transforms/dew_point.h"
 
 ReactESP app([]() {
 #ifndef SERIAL_DEBUG_DISABLED
@@ -42,13 +41,6 @@ ReactESP app([]() {
 
   sht31_humidity->connect_to(
       new SKOutputNumber("environment.inside.refrigerator.humidity"));
-
-  // Use the transform dewPoint to calculate the dewpoint based upon the temperature and humidity.
-  auto* dew_point  = 
-      new DewPoint();
-
-  dew_point->connect_from(sht31_temperature, sht31_humidity)
-          ->connect_to(new SKOutputNumber("environment.inside.refrigerator.dewPointTemperature"));
 
   sensesp_app->enable();
 });
