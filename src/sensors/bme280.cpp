@@ -40,38 +40,14 @@ BME280Value::BME280Value(BME280* bme280, BME280ValType val_type,
 // temperature is in kelvin and calculated from temperature and humidity.
 void BME280Value::enable() {
   app.onRepeat(read_delay_, [this]() {
-    if (val_type_ == temperature) {
+    if (val_type_ == kTemperature) {
       output = bme280_->adafruit_bme280_->readTemperature() +
                273.15;  // Kelvin is Celsius + 273.15
-    } else if (val_type_ == pressure) {
+    } else if (val_type_ == kPressure) {
       output = bme280_->adafruit_bme280_->readPressure();
-    } else if (val_type_ == humidity) {
+    } else if (val_type_ == kHumidity) {
       output = bme280_->adafruit_bme280_->readHumidity()/100;
-      } else if (val_type_ == dewPointTemperature) {
-
-          // Dew point is calculated with Arden Buck Equation and Arden Buck valuation sets
-          // For more info on the calculation see https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
-
-          float relative_humidity = bme280_->adafruit_bme280_->readHumidity()/100;  //humidity in percent, so divide by 100
-          float temp_celcius = bme280_->adafruit_bme280_->readTemperature();    
-
-          // valuation set for temperatures above 0°C
-          float b = 17.368;
-          float c = 238.88; 
-          const float d = 234.5; 
-           
-          // valuation set for temperatures below 0°C
-          if (temp_celcius < 0.0) {
-            float b = 17.966;
-            float c = 247.15; 
-          }
-
-          float gamma=log(relative_humidity * exp((b - (temp_celcius / d)) * (temp_celcius / (c + temp_celcius))));
-          float dew_point = (c * gamma) / ( b-gamma );
-
-          output = dew_point + 273.15; // Kelvin is Celsius + 273.15
-       } else {
-
+    } else {
       output = 0.0;
     }
 
