@@ -10,6 +10,7 @@
 #include "sensors/bme280.h"
 #include "signalk/signalk_output.h"
 #include "transforms/dew_point.h"
+#include "transforms/air_density.h"
 
 ReactESP app([]() {
 #ifndef SERIAL_DEBUG_DISABLED
@@ -60,6 +61,14 @@ ReactESP app([]() {
 
   dew_point->connect_from(bme_temperature, bme_humidity)
           ->connect_to(new SKOutputNumber("environment.outside.dewPointTemperature"));
+
+  // Use the transform airDensity to calculate the air density of humid air ased
+  // upon the temperature, humidity and pressure.
+  auto* airDensity = 
+      new AirDensity();
+
+  airDensity->connect_from(bme_temperature,bme_humidity,bme_pressure)
+          ->connect_to(new SKOutputNumber("environment.inside.engineroom.airDensity","",airDensity_metadata));
 
 
   sensesp_app->enable();
