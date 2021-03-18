@@ -7,8 +7,8 @@ DewPoint::DewPoint() : NumericTransform() {}
 void DewPoint::set_input(float input, uint8_t inputChannel) {
   inputs[inputChannel] = input;
   received |= 1 << inputChannel;
-  if (received == 0b11) {
-    received = 0;
+  if (received == 0b11) { // for 2 channels, use 0b11. For 3 channels, use b111 and so on.
+    received = 0; // recalculates after all values are updated. Remove if a recalculation is required after an update of any value.
 
           // Dew point is calculated with Arden Buck Equation and Arden Buck valuation sets
           // For more info on the calculation see https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
