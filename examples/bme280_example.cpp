@@ -68,7 +68,7 @@ ReactESP app([]() {
       new AirDensity();
 
   airDensity->connect_from(bme_temperature,bme_humidity,bme_pressure)
-          ->connect_to(new SKOutputNumber("environment.inside.engineroom.airDensity","",airDensity_metadata));
+          ->connect_to(new SKOutputNumber("environment.inside.engineroom.airDensity"));
 
 
   sensesp_app->enable();
