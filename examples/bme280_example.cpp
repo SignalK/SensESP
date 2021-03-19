@@ -56,16 +56,14 @@ ReactESP app([]() {
 
 
   // Use the transform dewPoint to calculate the dewpoint based upon the temperature and humidity.
-  auto* dew_point  = 
-      new DewPoint();
+  auto* dew_point = new DewPoint();
 
   dew_point->connect_from(bme_temperature, bme_humidity)
           ->connect_to(new SKOutputNumber("environment.outside.dewPointTemperature"));
 
-  // Use the transform airDensity to calculate the air density of humid air ased
+  // Use the transform airDensity to calculate the air density of humid air based
   // upon the temperature, humidity and pressure.
-  auto* airDensity = 
-      new AirDensity();
+  auto* airDensity = new AirDensity();
 
   airDensity->connect_from(bme_temperature,bme_humidity,bme_pressure)
           ->connect_to(new SKOutputNumber("environment.inside.engineroom.airDensity"));
