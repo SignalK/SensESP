@@ -46,21 +46,21 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
 WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
                    uint16_t server_port, String permission)
     : Configurable{config_path} {
-  this->sk_delta = sk_delta;
+  this->sk_delta_ = sk_delta;
 
-  preset_server_address = server_address;
-  preset_server_port = server_port;
-  this->server_address = server_address;
-  this->server_port = server_port;
+  preset_server_address_ = server_address;
+  preset_server_port_ = server_port;
+  this->server_address_ = server_address;
+  this->server_port_ = server_port;
 
-  this->sk_permission = permission;
+  this->sk_permission_ = permission;
 
-  // a WSClient object observes its own connection_state member
+  // a WSClient object observes its own connection_state_ member
   // and simply passes through any notification it emits. As a result,
-  // whenever the value of connection_state is updated, observers of the
+  // whenever the value of connection_state_ is updated, observers of the
   // WSClient object get automatically notified.
-  this->connection_state.attach(
-      [this]() { this->emit(this->connection_state.get()); });
+  this->connection_state_.attach(
+      [this]() { this->emit(this->connection_state_.get()); });
 
   // set the singleton object pointer
   ws_client = this;
@@ -71,38 +71,38 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
 void WSClient::enable() {
   app.onDelay(0, [this]() { this->connect(); });
   app.onRepeat(20, [this]() { this->loop(); });
-  app.onRepeat(100, [this]() { this->send_delta(); });
+  app.onRepeat(5, [this]() { this->send_delta(); });
   app.onRepeat(10000, [this]() { this->connect_loop(); });
 }
 
 void WSClient::connect_loop() {
-  if (this->connection_state == WSConnectionState::kWSDisconnected) {
+  if (this->connection_state_ == WSConnectionState::kWSDisconnected) {
     this->connect();
   }
 }
 
 void WSClient::on_disconnected() {
-  if (this->connection_state == WSConnectionState::kWSConnecting &&
-      server_detected && !token_test_success) {
+  if (this->connection_state_ == WSConnectionState::kWSConnecting &&
+      server_detected_ && !token_test_success_) {
     // Going from connecting directly to disconnect when we
     // know we have found and talked to the server usually means
     // the authentication token is bad.
     debugW("Bad access token detected. Setting token to null.");
-    auth_token = NULL_AUTH_TOKEN;
+    auth_token_ = NULL_AUTH_TOKEN;
     save_configuration();
   }
-  this->connection_state = WSConnectionState::kWSDisconnected;
-  server_detected = false;
+  this->connection_state_ = WSConnectionState::kWSDisconnected;
+  server_detected_ = false;
 }
 
 void WSClient::on_error() {
-  this->connection_state = WSConnectionState::kWSDisconnected;
+  this->connection_state_ = WSConnectionState::kWSDisconnected;
   debugW("Websocket client error.");
 }
 
 void WSClient::on_connected(uint8_t* payload) {
-  this->connection_state = WSConnectionState::kWSConnected;
-  this->sk_delta->reset_meta_send();
+  this->connection_state_ = WSConnectionState::kWSConnected;
+  this->sk_delta_->reset_meta_send();
   debugI("Websocket client connected to URL: %s\n", payload);
   debugI("Subscribing to Signal K listeners...");
   this->subscribe_listeners();
@@ -133,7 +133,7 @@ void WSClient::subscribe_listeners() {
 
     serializeJson(subscription, messageJson);
     debugI("Subscription JSON message:\n %s", messageJson.c_str());
-    this->client.sendTXT(messageJson);
+    this->client_.sendTXT(messageJson);
   }
 }
 
@@ -225,13 +225,13 @@ void WSClient::on_receive_put(DynamicJsonDocument& message) {
     String responseTxt;
     serializeJson(putResponse, responseTxt);
     debugD("Replying to PUT request with %s", responseTxt.c_str());
-    this->client.sendTXT(responseTxt);
+    this->client_.sendTXT(responseTxt);
   }
 }
 
 void WSClient::sendTXT(String& payload) {
-  if (connection_state == WSConnectionState::kWSConnected) {
-    this->client.sendTXT(payload);
+  if (connection_state_ == WSConnectionState::kWSConnected) {
+    this->client_.sendTXT(payload);
   }
 }
 
@@ -251,66 +251,66 @@ bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
 
 void WSClient::connect() {
   debugI("WSClient websocket connect attempt (state=%d)",
-         connection_state.get());
+         connection_state_.get());
 
-  if (connection_state != WSConnectionState::kWSDisconnected) {
+  if (connection_state_ != WSConnectionState::kWSDisconnected) {
     return;
   }
 
-  if (WiFi.isConnected()) {
-    debugD("Initiating websocket connection with server...");
-
-    connection_state = WSConnectionState::kWSAuthorizing;
-
-    String server_address = this->server_address;
-    uint16_t server_port = this->server_port;
-
-    if (this->server_address.isEmpty()) {
-      if (!get_mdns_service(server_address, server_port)) {
-        debugE("No Signal K server found in network when using mDNS service!");
-      } else {
-        debugI("Signal K server has been found at address %s:%d by mDNS.",
-               server_address.c_str(), server_port);
-      }
-    }
-
-    if (!server_address.isEmpty() && server_port > 0) {
-      debugD("Websocket is connecting to Signal K server on address %s:%d",
-             server_address.c_str(), server_port);
-    } else {
-      // host and port not defined - wait for mDNS
-      connection_state = WSConnectionState::kWSDisconnected;
-      return;
-    }
-
-    if (this->polling_href != "") {
-      // existing pending request
-      this->poll_access_request(server_address, server_port,
-                                this->polling_href);
-      return;
-    }
-
-    if (this->auth_token == NULL_AUTH_TOKEN) {
-      // initiate HTTP authentication
-      debugD("No prior authorization token present.");
-      this->send_access_request(server_address, server_port);
-      return;
-    }
-
-    if (test_auth_on_each_connect_ || !token_test_success) {
-      // Test the validity of the authorization token for the first time...
-      this->test_token(server_address, server_port);
-    } else {
-      // The token has already been validated once,
-      // so we must be trying a subsequent reconnect.
-      // Jump directly to opening up the websocket...
-      server_detected = true;
-      this->connect_ws(server_address, server_port);
-    }
-  } else {
+  if (!WiFi.isConnected()) {
     debugI(
         "WiFi is disconnected. SignalK client connection will connect when "
         "WiFi is connected.");
+    return;
+  }
+
+  debugD("Initiating websocket connection with server...");
+
+  connection_state_ = WSConnectionState::kWSAuthorizing;
+
+  String server_address = this->server_address_;
+  uint16_t server_port = this->server_port_;
+
+  if (this->server_address_.isEmpty()) {
+    if (!get_mdns_service(server_address, server_port)) {
+      debugE("No Signal K server found in network when using mDNS service!");
+    } else {
+      debugI("Signal K server has been found at address %s:%d by mDNS.",
+             server_address.c_str(), server_port);
+    }
+  }
+
+  if (!server_address.isEmpty() && server_port > 0) {
+    debugD("Websocket is connecting to Signal K server on address %s:%d",
+           server_address.c_str(), server_port);
+  } else {
+    // host and port not defined - wait for mDNS
+    connection_state_ = WSConnectionState::kWSDisconnected;
+    return;
+  }
+
+  if (this->polling_href_ != "") {
+    // existing pending request
+    this->poll_access_request(server_address, server_port, this->polling_href_);
+    return;
+  }
+
+  if (this->auth_token_ == NULL_AUTH_TOKEN) {
+    // initiate HTTP authentication
+    debugD("No prior authorization token present.");
+    this->send_access_request(server_address, server_port);
+    return;
+  }
+
+  if (test_auth_on_each_connect_ || !token_test_success_) {
+    // Test the validity of the authorization token for the first time...
+    this->test_token(server_address, server_port);
+  } else {
+    // The token has already been validated once,
+    // so we must be trying a subsequent reconnect.
+    // Jump directly to opening up the websocket...
+    server_detected_ = true;
+    this->connect_ws(server_address, server_port);
   }
 }
 
@@ -320,10 +320,10 @@ void WSClient::test_token(const String server_address,
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port +
-               "/signalk/v1/api/";
+               "/signalk/";
   debugD("Testing token with url %s", url.c_str());
-  http.begin(wifi_client, url);
-  String full_token = String("JWT ") + auth_token;
+  http.begin(wifi_client_, url);
+  String full_token = String("JWT ") + auth_token_;
   http.addHeader("Authorization", full_token.c_str());
   int httpCode = http.GET();
   if (httpCode > 0) {
@@ -340,37 +340,37 @@ void WSClient::test_token(const String server_address,
     if (httpCode == 200) {
       // our token is valid, go ahead and connect
       debugD("Attempting to connect to Signal K Websocket...");
-      server_detected = true;
-      token_test_success = true;
+      server_detected_ = true;
+      token_test_success_ = true;
       this->connect_ws(server_address, server_port);
     } else if (httpCode == 401) {
-      this->client_id = "";
+      this->client_id_ = "";
       this->send_access_request(server_address, server_port);
     } else {
-      connection_state = WSConnectionState::kWSDisconnected;
+      connection_state_ = WSConnectionState::kWSDisconnected;
     }
   } else {
     debugE("GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
-    connection_state = WSConnectionState::kWSDisconnected;
+    connection_state_ = WSConnectionState::kWSDisconnected;
   }
 }
 
 void WSClient::send_access_request(const String server_address,
                                    const uint16_t server_port) {
   debugD("Preparing a new access request");
-  if (client_id == "") {
+  if (client_id_ == "") {
     // generate a client ID
     byte uuidNumber[16];
     ESPTrueRandom.uuid(uuidNumber);
-    client_id = ESPTrueRandom.uuidToString(uuidNumber);
+    client_id_ = ESPTrueRandom.uuidToString(uuidNumber);
     save_configuration();
   }
 
   // create a new access request
   DynamicJsonDocument doc(1024);
-  doc["clientId"] = client_id;
+  doc["clientId"] = client_id_;
   doc["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
-  doc["permissions"] = this->sk_permission;
+  doc["permissions"] = this->sk_permission_;
   String json_req = "";
   serializeJson(doc, json_req);
 
@@ -378,7 +378,7 @@ void WSClient::send_access_request(const String server_address,
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/access/requests";
-  http.begin(wifi_client, url);
+  http.begin(wifi_client_, url);
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(json_req);
   String payload = http.getString();
@@ -388,8 +388,8 @@ void WSClient::send_access_request(const String server_address,
   if (httpCode != 202) {
     debugW("Can't handle response %d to access request.", httpCode);
     debugD("%s", payload.c_str());
-    connection_state = WSConnectionState::kWSDisconnected;
-    client_id = "";
+    connection_state_ = WSConnectionState::kWSDisconnected;
+    client_id_ = "";
     return;
   }
 
@@ -400,18 +400,18 @@ void WSClient::send_access_request(const String server_address,
 
   if (state != "PENDING") {
     debugW("Got unknown state: %s", state.c_str());
-    connection_state = WSConnectionState::kWSDisconnected;
-    client_id = "";
+    connection_state_ = WSConnectionState::kWSDisconnected;
+    client_id_ = "";
     return;
   }
 
   String href = doc["href"];
-  polling_href = href;
+  polling_href_ = href;
   save_configuration();
 
-  debugD("Polling %s in 5 seconds", polling_href.c_str());
+  debugD("Polling %s in 5 seconds", polling_href_.c_str());
   app.onDelay(5000, [this, server_address, server_port, href]() {
-    this->poll_access_request(server_address, server_port, this->polling_href);
+    this->poll_access_request(server_address, server_port, this->polling_href_);
   });
 }
 
@@ -423,7 +423,7 @@ void WSClient::poll_access_request(const String server_address,
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port + href;
-  http.begin(wifi_client, url);
+  http.begin(wifi_client_, url);
   int httpCode = http.GET();
   if (httpCode == 200 or httpCode == 202) {
     String payload = http.getString();
@@ -448,17 +448,17 @@ void WSClient::poll_access_request(const String server_address,
           access_req["permission"];  // TODO: like this in ArdJson 6? String
                                      // permission =
                                      // resp["accessRequest"]["permission"];
-      polling_href = "";
+      polling_href_ = "";
       save_configuration();
 
       if (permission == "DENIED") {
         debugW("Permission denied");
-        connection_state = WSConnectionState::kWSDisconnected;
+        connection_state_ = WSConnectionState::kWSDisconnected;
         return;
       } else if (permission == "APPROVED") {
         debugI("Permission granted");
         String token = access_req["token"];
-        auth_token = token;
+        auth_token_ = token;
         save_configuration();
         app.onDelay(0, [this, server_address, server_port]() {
           this->connect_ws(server_address, server_port);
@@ -473,64 +473,64 @@ void WSClient::poll_access_request(const String server_address,
       // us polling a non-existing request. Just
       // delete the polling href.
       debugD("Got 500, probably a non-existing request.");
-      polling_href = "";
+      polling_href_ = "";
       save_configuration();
-      connection_state = WSConnectionState::kWSDisconnected;
+      connection_state_ = WSConnectionState::kWSDisconnected;
       return;
     }
     // any other HTTP status code
     debugW("Can't handle response %d to pending access request.\n", httpCode);
-    connection_state = WSConnectionState::kWSDisconnected;
+    connection_state_ = WSConnectionState::kWSDisconnected;
     return;
   }
 }
 
 void WSClient::connect_ws(const String host, const uint16_t port) {
   String path = "/signalk/v1/stream?subscribe=none";
-  this->connection_state = WSConnectionState::kWSConnecting;
-  this->client.begin(host, port, path);
-  this->client.onEvent(webSocketClientEvent);
-  String full_token = String("JWT ") + auth_token;
-  this->client.setAuthorization(full_token.c_str());
+  this->connection_state_ = WSConnectionState::kWSConnecting;
+  this->client_.begin(host, port, path);
+  this->client_.onEvent(webSocketClientEvent);
+  String full_token = String("JWT ") + auth_token_;
+  this->client_.setAuthorization(full_token.c_str());
 }
 
 void WSClient::loop() {
-  if (this->connection_state == WSConnectionState::kWSConnecting ||
-      this->connection_state == WSConnectionState::kWSConnected) {
-    this->client.loop();
+  if (this->connection_state_ == WSConnectionState::kWSConnecting ||
+      this->connection_state_ == WSConnectionState::kWSConnected) {
+    this->client_.loop();
   }
 }
 
 bool WSClient::is_connected() {
-  return connection_state == WSConnectionState::kWSConnected;
+  return connection_state_ == WSConnectionState::kWSConnected;
 }
 
 void WSClient::restart() {
-  if (connection_state == WSConnectionState::kWSConnected) {
-    this->client.disconnect();
-    connection_state = WSConnectionState::kWSDisconnected;
+  if (connection_state_ == WSConnectionState::kWSConnected) {
+    this->client_.disconnect();
+    connection_state_ = WSConnectionState::kWSDisconnected;
   }
 }
 
 void WSClient::send_delta() {
   String output;
-  if (connection_state == WSConnectionState::kWSConnected) {
-    if (sk_delta->data_available()) {
-      sk_delta->get_delta(output);
-      this->client.sendTXT(output);
+  if (connection_state_ == WSConnectionState::kWSConnected) {
+    if (sk_delta_->data_available()) {
+      sk_delta_->get_delta(output);
+      this->client_.sendTXT(output);
       // This automatically notifies the observers
-      this->delta_count_producer = 1;
+      this->delta_count_producer_ = 1;
     }
   }
 }
 
 void WSClient::get_configuration(JsonObject& root) {
-  root["sk_address"] = this->server_address;
-  root["sk_port"] = this->server_port;
+  root["sk_address"] = this->server_address_;
+  root["sk_port"] = this->server_port_;
 
-  root["token"] = this->auth_token;
-  root["client_id"] = this->client_id;
-  root["polling_href"] = this->polling_href;
+  root["token"] = this->auth_token_;
+  root["client_id"] = this->client_id_;
+  root["polling_href"] = this->polling_href_;
 }
 
 static const char SCHEMA[] PROGMEM = R"~({
@@ -559,7 +559,7 @@ static const char SCHEMA_READONLY[] PROGMEM = R"~(
   )~";
 
 String WSClient::get_config_schema() {
-  if (!preset_server_address.isEmpty()) {
+  if (!preset_server_address_.isEmpty()) {
     return FPSTR(SCHEMA);
   } else {
     return FPSTR(SCHEMA_READONLY);
@@ -578,18 +578,18 @@ bool WSClient::set_configuration(const JsonObject& config) {
     }
   }
 
-  if (!preset_server_address.isEmpty()) {
+  if (!preset_server_address_.isEmpty()) {
     debugI(
         "Saved Signal K server configuration ignored due to hardcoded values.");
   } else {
-    this->server_address = config["sk_address"].as<String>();
-    this->server_port = config["sk_port"].as<int>();
+    this->server_address_ = config["sk_address"].as<String>();
+    this->server_port_ = config["sk_port"].as<int>();
   }
 
   // FIXME: setting the token should not be allowed via the REST API.
-  this->auth_token = config["token"].as<String>();
-  this->client_id = config["client_id"].as<String>();
-  this->polling_href = config["polling_href"].as<String>();
+  this->auth_token_ = config["token"].as<String>();
+  this->client_id_ = config["client_id"].as<String>();
+  this->polling_href_ = config["polling_href"].as<String>();
 
   return true;
 }

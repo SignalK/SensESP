@@ -22,8 +22,7 @@
   ],
   "dependencies": [
     {
-      "name": "ReactESP",
-      "version": "^0.2.2"
+      "name": "ReactESP"
     },
     {
       "name": "ESP8266WebServer",
@@ -75,7 +74,8 @@
       "name": "Wire"
     },
     {
-      "name": "Adafruit ADS1X15"
+      "name": "Adafruit ADS1X15",
+      "version": "<2.0.0"
     },
     {
       "name": "Adafruit BME280 Library"
@@ -115,7 +115,7 @@
       "version": "https://github.com/JoaoLopesF/RemoteDebug.git#0b5a9c1a49fd2ade0e3cadc3a3707781e819359a" 
     }
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "frameworks": "arduino",
   "platforms": "*"
 }

@@ -24,14 +24,14 @@ SHT31Value::SHT31Value(SHT31* sht31, SHT31ValType val_type, uint read_delay,
 }
 
 // SHT31 outputs temp in Celsius. Need to convert to Kelvin before sending to
-// Signal K. Humidity is output in relative humidity (0 - 100%)
+// Signal K. Humidity is output in relative humidity (0 - 100%) and should be as ratio (0 - 1)
 void SHT31Value::enable() {
   app.onRepeat(read_delay_, [this]() {
     if (val_type_ == temperature) {
       output = sht31_->adafruit_sht31_->readTemperature() +
                273.15;  // Kelvin is Celsius + 273.15
     } else if (val_type_ == humidity) {
-      output = sht31_->adafruit_sht31_->readHumidity();
+      output = sht31_->adafruit_sht31_->readHumidity() / 100;
     } else {
       output = 0.0;
     }

@@ -64,7 +64,6 @@ void CurveInterpolator::get_configuration(JsonObject& root) {
     auto entry = jSamples.createNestedObject();
     entry["input"] = sample.input;
     entry["output"] = sample.output;
-    jSamples.add(entry);
   }
 }
 

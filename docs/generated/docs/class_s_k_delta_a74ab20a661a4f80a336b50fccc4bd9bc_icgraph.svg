@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 553;
+var viewWidth = 621;
 var viewHeight = 28;
 var sectionId = 'dynsection-1';
 </script>
@@ -54,60 +54,75 @@ var sectionId = 'dynsection-1';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>SKDelta::data_available</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-24 549,-24 549,4 -4,4"/>
-<!-- Node6 -->
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-24 617,-24 617,4 -4,4"/>
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node6</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="black" points="423,-0.5 423,-19.5 545,-19.5 545,-0.5 423,-0.5"/>
-<text text-anchor="middle" x="484" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKDelta::data_available</text>
+<polygon fill="#bfbfbf" stroke="black" points="491,-0.5 491,-19.5 613,-19.5 613,-0.5 491,-0.5"/>
+<text text-anchor="middle" x="552" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKDelta::data_available</text>
 </a>
 </g>
 </g>
-<!-- Node7 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node7</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="class_w_s_client.html#ab6bcc3fb4cfe71aff3929480fab9bd5a" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="275,-0.5 275,-19.5 387,-19.5 387,-0.5 275,-0.5"/>
-<text text-anchor="middle" x="331" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">WSClient::send_delta</text>
+<polygon fill="white" stroke="black" points="343,-0.5 343,-19.5 455,-19.5 455,-0.5 343,-0.5"/>
+<text text-anchor="middle" x="399" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">WSClient::send_delta</text>
 </a>
 </g>
 </g>
-<!-- Node6&#45;&gt;Node7 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node6&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M412.8,-10C404.14,-10 395.39,-10 387.01,-10"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="412.89,-13.5 422.89,-10 412.89,-6.5 412.89,-13.5"/>
+<title>Node1&#45;&gt;Node2</title>
+<path fill="none" stroke="midnightblue" d="M480.8,-10C472.14,-10 463.39,-10 455.01,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="480.89,-13.5 490.89,-10 480.89,-6.5 480.89,-13.5"/>
 </g>
-<!-- Node8 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node8</title>
+<title>Node3</title>
 <g id="a_node3"><a xlink:href="class_w_s_client.html#a1313d063fd61739f7e3ca9b2c126b048" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="146,-0.5 146,-19.5 239,-19.5 239,-0.5 146,-0.5"/>
-<text text-anchor="middle" x="192.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">WSClient::enable</text>
+<polygon fill="white" stroke="black" points="214,-0.5 214,-19.5 307,-19.5 307,-0.5 214,-0.5"/>
+<text text-anchor="middle" x="260.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">WSClient::enable</text>
 </a>
 </g>
 </g>
-<!-- Node7&#45;&gt;Node8 -->
+<!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node7&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M264.79,-10C256.14,-10 247.43,-10 239.21,-10"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="264.87,-13.5 274.87,-10 264.87,-6.5 264.87,-13.5"/>
+<title>Node2&#45;&gt;Node3</title>
+<path fill="none" stroke="midnightblue" d="M332.79,-10C324.14,-10 315.43,-10 307.21,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="332.87,-13.5 342.87,-10 332.87,-6.5 332.87,-13.5"/>
 </g>
-<!-- Node9 -->
+<!-- Node4 -->
 <g id="node4" class="node">
-<title>Node9</title>
+<title>Node4</title>
 <g id="a_node4"><a xlink:href="class_sens_e_s_p_app.html#a3d70c22bfd1bf842f6daa83ab2f50f79" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="0,-0.5 0,-19.5 110,-19.5 110,-0.5 0,-0.5"/>
-<text text-anchor="middle" x="55" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SensESPApp::enable</text>
+<polygon fill="white" stroke="black" points="68,-0.5 68,-19.5 178,-19.5 178,-0.5 68,-0.5"/>
+<text text-anchor="middle" x="123" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SensESPApp::enable</text>
 </a>
 </g>
 </g>
-<!-- Node8&#45;&gt;Node9 -->
+<!-- Node3&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
-<title>Node8&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M135.58,-10C127.21,-10 118.59,-10 110.26,-10"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="135.63,-13.5 145.63,-10 135.63,-6.5 135.63,-13.5"/>
+<title>Node3&#45;&gt;Node4</title>
+<path fill="none" stroke="midnightblue" d="M203.58,-10C195.21,-10 186.59,-10 178.26,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="203.63,-13.5 213.63,-10 203.63,-6.5 203.63,-13.5"/>
+</g>
+<!-- Node5 -->
+<g id="node5" class="node">
+<title>Node5</title>
+<g id="a_node5"><a xlink:href="main_8cpp.html#a52e1a3891fbdadd9ebf9f12d507ee950" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="0,-0.5 0,-19.5 32,-19.5 32,-0.5 0,-0.5"/>
+<text text-anchor="middle" x="16" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">app</text>
+</a>
+</g>
+</g>
+<!-- Node4&#45;&gt;Node5 -->
+<g id="edge4" class="edge">
+<title>Node4&#45;&gt;Node5</title>
+<path fill="none" stroke="midnightblue" d="M57.94,-10C48.45,-10 39.49,-10 32.39,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="57.96,-13.5 67.96,-10 57.96,-6.5 57.96,-13.5"/>
 </g>
 </g>
 </svg>

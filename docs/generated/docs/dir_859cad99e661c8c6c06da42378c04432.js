@@ -2,6 +2,10 @@ var dir_859cad99e661c8c6c06da42378c04432 =
 [
     [ "ads1x15_voltage.cpp", "ads1x15__voltage_8cpp.html", null ],
     [ "ads1x15_voltage.h", "ads1x15__voltage_8h.html", "ads1x15__voltage_8h" ],
+    [ "air_density.cpp", "air__density_8cpp.html", null ],
+    [ "air_density.h", "air__density_8h.html", [
+      [ "AirDensity", "class_air_density.html", "class_air_density" ]
+    ] ],
     [ "analogvoltage.cpp", "analogvoltage_8cpp.html", null ],
     [ "analogvoltage.h", "analogvoltage_8h.html", "analogvoltage_8h" ],
     [ "angle_correction.cpp", "angle__correction_8cpp.html", "angle__correction_8cpp" ],
@@ -19,8 +23,11 @@ var dir_859cad99e661c8c6c06da42378c04432 =
       [ "CurveInterpolator", "class_curve_interpolator.html", "class_curve_interpolator" ],
       [ "Sample", "class_curve_interpolator_1_1_sample.html", "class_curve_interpolator_1_1_sample" ]
     ] ],
-    [ "debounce.cpp", "debounce_8cpp.html", null ],
     [ "debounce.h", "debounce_8h.html", "debounce_8h" ],
+    [ "dew_point.cpp", "dew__point_8cpp.html", null ],
+    [ "dew_point.h", "dew__point_8h.html", [
+      [ "DewPoint", "class_dew_point.html", "class_dew_point" ]
+    ] ],
     [ "difference.cpp", "difference_8cpp.html", null ],
     [ "difference.h", "difference_8h.html", [
       [ "Difference", "class_difference.html", "class_difference" ]

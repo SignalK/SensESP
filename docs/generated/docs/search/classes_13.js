@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['wifisignal',['WifiSignal',['../class_wifi_signal.html',1,'']]],
-  ['wsclient',['WSClient',['../class_w_s_client.html',1,'']]]
+  ['wifisignal_933',['WifiSignal',['../class_wifi_signal.html',1,'']]],
+  ['wsclient_934',['WSClient',['../class_w_s_client.html',1,'']]]
 ];

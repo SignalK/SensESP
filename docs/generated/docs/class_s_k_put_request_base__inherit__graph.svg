@@ -9,57 +9,57 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 136)">
 <title>SKPutRequestBase</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-136 160,-136 160,4 -4,4"/>
-<!-- Node0 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node0</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title="A base class for all template variations of the PUT request class SKPutRequest. This base class keeps...">
 <polygon fill="#bfbfbf" stroke="black" points="24.5,-56.5 24.5,-75.5 128.5,-75.5 128.5,-56.5 24.5,-56.5"/>
 <text text-anchor="middle" x="76.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKPutRequestBase</text>
 </a>
 </g>
 </g>
-<!-- Node3 -->
+<!-- Node4 -->
 <g id="node4" class="node">
-<title>Node3</title>
+<title>Node4</title>
 <g id="a_node4"><a xlink:href="class_s_k_put_request.html" target="_top" xlink:title="Used to send requests to the server to change the value of the specified path to a specific value acc...">
 <polygon fill="white" stroke="black" points="23.5,-0.5 23.5,-19.5 129.5,-19.5 129.5,-0.5 23.5,-0.5"/>
 <text text-anchor="middle" x="76.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKPutRequest&lt; T &gt;</text>
 </a>
 </g>
 </g>
-<!-- Node0&#45;&gt;Node3 -->
+<!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
-<title>Node0&#45;&gt;Node3</title>
+<title>Node1&#45;&gt;Node4</title>
 <path fill="none" stroke="midnightblue" d="M76.5,-45.8C76.5,-36.91 76.5,-26.78 76.5,-19.75"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="73,-46.08 76.5,-56.08 80,-46.08 73,-46.08"/>
 </g>
-<!-- Node1 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node1</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="class_s_k_request.html" target="_top" xlink:title="A base class for all objects that are capable of sending &quot;requests&quot; to the SignalK server (and option...">
 <polygon fill="white" stroke="black" points="0,-112.5 0,-131.5 67,-131.5 67,-112.5 0,-112.5"/>
 <text text-anchor="middle" x="33.5" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKRequest</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node0 -->
+<!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge">
-<title>Node1&#45;&gt;Node0</title>
+<title>Node2&#45;&gt;Node1</title>
 <path fill="none" stroke="midnightblue" d="M46.92,-104.14C54.41,-94.74 63.44,-83.4 69.53,-75.75"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="44.09,-102.08 40.6,-112.08 49.57,-106.44 44.09,-102.08"/>
 </g>
-<!-- Node2 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node2</title>
+<title>Node3</title>
 <g id="a_node3"><a xlink:href="class_configurable.html" target="_top" xlink:title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">
 <polygon fill="white" stroke="black" points="85,-112.5 85,-131.5 156,-131.5 156,-112.5 85,-112.5"/>
 <text text-anchor="middle" x="120.5" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">Configurable</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node0 -->
+<!-- Node3&#45;&gt;Node1 -->
 <g id="edge2" class="edge">
-<title>Node2&#45;&gt;Node0</title>
+<title>Node3&#45;&gt;Node1</title>
 <path fill="none" stroke="midnightblue" d="M106.77,-104.14C99.1,-94.74 89.87,-83.4 83.63,-75.75"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="104.2,-106.54 113.23,-112.08 109.63,-102.12 104.2,-106.54"/>
 </g>

@@ -6,16 +6,16 @@ void SystemStatusController::set_input(WifiState new_value,
   // this would be a simple array dereferencing
   switch (new_value) {
     case WifiState::kWifiNoAP:
-      this->emit(SystemStatus::kWifiNoAP);
+      this->update_state(SystemStatus::kWifiNoAP);
       break;
     case WifiState::kWifiDisconnected:
-      this->emit(SystemStatus::kWifiDisconnected);
+      this->update_state(SystemStatus::kWifiDisconnected);
       break;
     case WifiState::kWifiConnectedToAP:
-      this->emit(SystemStatus::kWSDisconnected);
+      this->update_state(SystemStatus::kWSDisconnected);
       break;
     case WifiState::kWifiManagerActivated:
-      this->emit(SystemStatus::kWifiManagerActivated);
+      this->update_state(SystemStatus::kWifiManagerActivated);
       break;
   }
 }
@@ -24,16 +24,21 @@ void SystemStatusController::set_input(WSConnectionState new_value,
                                        uint8_t input_channel) {
   switch (new_value) {
     case WSConnectionState::kWSDisconnected:
-      this->emit(SystemStatus::kWSDisconnected);
+      if (current_state_ != SystemStatus::kWifiDisconnected &&
+          current_state_ != SystemStatus::kWifiNoAP &&
+          current_state_ != SystemStatus::kWifiManagerActivated) {
+        // Wifi disconnection states override the higher level protocol state
+        this->update_state(SystemStatus::kWSDisconnected);
+      }
       break;
     case WSConnectionState::kWSConnecting:
-      this->emit(SystemStatus::kWSConnecting);
+      this->update_state(SystemStatus::kWSConnecting);
       break;
     case WSConnectionState::kWSAuthorizing:
-      this->emit(SystemStatus::kWSAuthorizing);
+      this->update_state(SystemStatus::kWSAuthorizing);
       break;
     case WSConnectionState::kWSConnected:
-      this->emit(SystemStatus::kWSConnected);
+      this->update_state(SystemStatus::kWSConnected);
       break;
   }
 }

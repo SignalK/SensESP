@@ -10,12 +10,17 @@
 #endif
 
 /**
- * @brief A transform that takes the output of the built-in
- * analog-to-digital converter on the ESP and outputs the voltage that went into
- * it.
+ * @brief A transform that takes the output of an
+ * analog-to-digital converter and outputs the voltage that went into
+ * it. (This can be the built-in ADC on the ESP, or it can be an external
+ * ADC like the ADS1015/1115.)
  * 
  * It can also be used like the Linear transport since it has a multiplier
  * and an offset.
+ * 
+ * If you don't need to use the mulitplier or offset, you probably don't need
+ * this transform, because the AnalogInput sensor now has the ability to output
+ * the original voltage that came into it, using its `output_scale` parameter.
  * 
  * @param max_voltage is the maximum voltage allowable on the Analog
  * Input pin of the microcontroller, which is 3.3V on most ESP's, but only 1.0V

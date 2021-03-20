@@ -9,45 +9,45 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 73.5)">
 <title>TextToTruth::is_valid_true</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-73.5 284,-73.5 284,4 -4,4"/>
-<!-- Node4 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node4</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="black" points="151,-22.5 151,-41.5 280,-41.5 280,-22.5 151,-22.5"/>
-<text text-anchor="middle" x="215.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">TextToTruth::is_valid_true</text>
+<polygon fill="#bfbfbf" stroke="black" points="151,-28 151,-47 280,-47 280,-28 151,-28"/>
+<text text-anchor="middle" x="215.5" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">TextToTruth::is_valid_true</text>
 </a>
 </g>
 </g>
-<!-- Node5 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node5</title>
-<g id="a_node2"><a xlink:href="class_smart_switch_controller.html#a94d837ee621c08bb45a6897b91378bf7" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="0,-39 0,-69 115,-69 115,-39 0,-39"/>
-<text text-anchor="start" x="8" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">SmartSwitchController</text>
-<text text-anchor="middle" x="57.5" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">::set_input</text>
+<title>Node2</title>
+<g id="a_node2"><a xlink:href="class_text_to_truth.html#a18fb1c8a872fdd666c798676d51f5c8d" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="0.5,-50 0.5,-69 114.5,-69 114.5,-50 0.5,-50"/>
+<text text-anchor="middle" x="57.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">TextToTruth::set_input</text>
 </a>
 </g>
 </g>
-<!-- Node4&#45;&gt;Node5 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node4&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M140.58,-42.42C132,-43.64 123.35,-44.85 115.05,-46.02"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="141.19,-45.87 150.6,-41.01 140.21,-38.94 141.19,-45.87"/>
+<title>Node1&#45;&gt;Node2</title>
+<path fill="none" stroke="midnightblue" d="M140.43,-47.95C131.73,-49.17 122.96,-50.41 114.56,-51.59"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="141.19,-51.37 150.6,-46.51 140.21,-44.44 141.19,-51.37"/>
 </g>
-<!-- Node6 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node6</title>
-<g id="a_node3"><a xlink:href="class_text_to_truth.html#a18fb1c8a872fdd666c798676d51f5c8d" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="0.5,-0.5 0.5,-19.5 114.5,-19.5 114.5,-0.5 0.5,-0.5"/>
-<text text-anchor="middle" x="57.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">TextToTruth::set_input</text>
+<title>Node3</title>
+<g id="a_node3"><a xlink:href="class_smart_switch_controller.html#a94d837ee621c08bb45a6897b91378bf7" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="0,-0.5 0,-30.5 115,-30.5 115,-0.5 0,-0.5"/>
+<text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">SmartSwitchController</text>
+<text text-anchor="middle" x="57.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::set_input</text>
 </a>
 </g>
 </g>
-<!-- Node4&#45;&gt;Node6 -->
+<!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node4&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M140.43,-21.55C131.73,-20.33 122.96,-19.09 114.56,-17.91"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="140.21,-25.06 150.6,-22.99 141.19,-18.13 140.21,-25.06"/>
+<title>Node1&#45;&gt;Node3</title>
+<path fill="none" stroke="midnightblue" d="M140.58,-27.08C132,-25.86 123.35,-24.65 115.05,-23.48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="140.21,-30.56 150.6,-28.49 141.19,-23.63 140.21,-30.56"/>
 </g>
 </g>
 </svg>

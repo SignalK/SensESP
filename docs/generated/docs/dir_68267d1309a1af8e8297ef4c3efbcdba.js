@@ -6,6 +6,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "signalk", "dir_846aa835ffd15ea225ad18b5b4aa0d4f.html", "dir_846aa835ffd15ea225ad18b5b4aa0d4f" ],
     [ "system", "dir_d501334aeb1b78ad67cd3c72c37b1e87.html", "dir_d501334aeb1b78ad67cd3c72c37b1e87" ],
     [ "transforms", "dir_859cad99e661c8c6c06da42378c04432.html", "dir_859cad99e661c8c6c06da42378c04432" ],
+    [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
     [ "sensesp.h", "sensesp_8h.html", "sensesp_8h" ],
     [ "sensesp_app.cpp", "sensesp__app_8cpp.html", "sensesp__app_8cpp" ],
     [ "sensesp_app.h", "sensesp__app_8h.html", "sensesp__app_8h" ],

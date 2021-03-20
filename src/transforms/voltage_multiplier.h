@@ -4,7 +4,11 @@
 #include "transforms/transform.h"
 
 /**
- * @brief A transform that does the opposite of what a physical voltage divider circuit
+ * @brief OBSOLETE: Since you can now apply an "output_scale" to the
+ * AnalogInput sensor, you don't need this transform anymore. See the
+ * description of "output_scale" in analog_input.h.
+ * 
+ * A transform that does the opposite of what a physical voltage divider circuit
  * does: convert the voltage that comes out of a voltage divider back
  * into the original voltage that went into the voltage divider.
  *

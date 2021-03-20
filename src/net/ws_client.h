@@ -48,10 +48,10 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
    */
   void sendTXT(String& payload);
 
-  const String get_server_address() const { return server_address; }
-  const uint16_t get_server_port() const { return server_port; }
+  const String get_server_address() const { return server_address_; }
+  const uint16_t get_server_port() const { return server_port_; }
   const WSConnectionState get_connection_state() const {
-    return connection_state.get();
+    return connection_state_.get();
   }
 
   virtual void get_configuration(JsonObject& doc) override final;
@@ -63,7 +63,7 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
    * (ordinarily always 1)
    */
   ValueProducer<int>& get_delta_count_producer() {
-    return delta_count_producer;
+    return delta_count_producer_;
   };
 
   /// If set to TRUE, the authentication token will be tested each
@@ -73,23 +73,23 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
   static bool test_auth_on_each_connect_;
 
  private:
-  String server_address = "";
-  uint16_t server_port = 80;
-  String preset_server_address = "";
-  uint16_t preset_server_port = 0;
-  String client_id = "";
-  String polling_href = "";
-  String auth_token = NULL_AUTH_TOKEN;
-  String sk_permission;
-  bool server_detected = false;
-  bool token_test_success = false;
+  String server_address_ = "";
+  uint16_t server_port_ = 80;
+  String preset_server_address_ = "";
+  uint16_t preset_server_port_ = 0;
+  String client_id_ = "";
+  String polling_href_ = "";
+  String auth_token_ = NULL_AUTH_TOKEN;
+  String sk_permission_;
+  bool server_detected_ = false;
+  bool token_test_success_ = false;
 
-  ObservableValue<WSConnectionState> connection_state =
+  ObservableValue<WSConnectionState> connection_state_ =
       WSConnectionState::kWSDisconnected;
-  WiFiClient wifi_client;
-  WebSocketsClient client;
-  SKDelta* sk_delta;
-  ObservableValue<int> delta_count_producer = 0;
+  WiFiClient wifi_client_;
+  WebSocketsClient client_;
+  SKDelta* sk_delta_;
+  ObservableValue<int> delta_count_producer_ = 0;
   void connect_loop();
   void test_token(const String host, const uint16_t port);
   void send_access_request(const String host, const uint16_t port);

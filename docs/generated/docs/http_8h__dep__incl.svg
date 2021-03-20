@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 1069;
+var viewWidth = 1100;
 var viewHeight = 207;
 var sectionId = 'dynsection-1';
 </script>
@@ -54,178 +54,199 @@ var sectionId = 'dynsection-1';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>src/net/http.h</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-203 1064.5,-203 1064.5,4 -4,4"/>
-<!-- Node3 -->
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-203 1095.5,-203 1095.5,4 -4,4"/>
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node3</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="black" points="263.5,-179.5 263.5,-198.5 337.5,-198.5 337.5,-179.5 263.5,-179.5"/>
-<text text-anchor="middle" x="300.5" y="-186.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/net/http.h</text>
+<polygon fill="#bfbfbf" stroke="black" points="216.5,-179.5 216.5,-198.5 290.5,-198.5 290.5,-179.5 216.5,-179.5"/>
+<text text-anchor="middle" x="253.5" y="-186.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/net/http.h</text>
 </a>
 </g>
 </g>
-<!-- Node4 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node4</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="http_8cpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="0,-62 0,-81 85,-81 85,-62 0,-62"/>
 <text text-anchor="middle" x="42.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/net/http.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node3&#45;&gt;Node4 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
+<title>Node1&#45;&gt;Node2</title>
+<path fill="none" stroke="midnightblue" d="M228.77,-174.46C184.91,-150.45 94.67,-101.06 58.26,-81.12"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="227.19,-177.59 237.64,-179.32 230.55,-171.45 227.19,-177.59"/>
+</g>
+<!-- Node3 -->
+<g id="node3" class="node">
+<title>Node3</title>
+<g id="a_node3"><a xlink:href="sensesp__app_8h.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="414,-123.5 414,-142.5 513,-142.5 513,-123.5 414,-123.5"/>
+<text text-anchor="middle" x="463.5" y="-130.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensesp_app.h</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node3 -->
+<g id="edge2" class="edge">
+<title>Node1&#45;&gt;Node3</title>
+<path fill="none" stroke="midnightblue" d="M296.69,-176.89C336.35,-166.7 394.27,-151.8 430.38,-142.52"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="295.59,-173.56 286.78,-179.44 297.33,-180.34 295.59,-173.56"/>
+</g>
+<!-- Node3&#45;&gt;Node2 -->
+<g id="edge4" class="edge">
+<title>Node3&#45;&gt;Node2</title>
+<path fill="none" stroke="midnightblue" d="M403.44,-126.92C330.98,-120.24 205.67,-106.98 99.5,-87 90.87,-85.38 81.61,-83.21 73.11,-81.04"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="403.46,-130.43 413.74,-127.85 404.1,-123.46 403.46,-130.43"/>
+</g>
+<!-- Node4 -->
+<g id="node4" class="node">
+<title>Node4</title>
+<g id="a_node4"><a xlink:href="main_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="252,-0.5 252,-19.5 325,-19.5 325,-0.5 252,-0.5"/>
+<text text-anchor="middle" x="288.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/main.cpp</text>
+</a>
+</g>
+</g>
+<!-- Node3&#45;&gt;Node4 -->
+<g id="edge3" class="edge">
 <title>Node3&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M271.93,-175.21C218.95,-151.49 106.76,-101.27 61.77,-81.12"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="270.55,-178.43 281.11,-179.32 273.41,-172.04 270.55,-178.43"/>
+<path fill="none" stroke="midnightblue" d="M403.66,-132.86C318.02,-132.65 167,-126.51 132.5,-87 95.64,-44.79 194.69,-23.8 251.62,-15.47"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="403.77,-136.36 413.77,-132.85 403.77,-129.36 403.77,-136.36"/>
 </g>
 <!-- Node5 -->
-<g id="node3" class="node">
+<g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node3"><a xlink:href="sensesp__app_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="442,-123.5 442,-142.5 541,-142.5 541,-123.5 442,-123.5"/>
-<text text-anchor="middle" x="491.5" y="-130.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensesp_app.h</text>
+<g id="a_node5"><a xlink:href="ws__client_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="141.5,-62 141.5,-81 251.5,-81 251.5,-62 141.5,-62"/>
+<text text-anchor="middle" x="196.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/net/ws_client.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node5 -->
-<g id="edge2" class="edge">
+<g id="edge5" class="edge">
 <title>Node3&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M340.47,-176.7C376.52,-166.51 428.74,-151.74 461.38,-142.52"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="339.44,-173.35 330.76,-179.44 341.34,-180.09 339.44,-173.35"/>
-</g>
-<!-- Node5&#45;&gt;Node4 -->
-<g id="edge3" class="edge">
-<title>Node5&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M431.78,-128.2C353.7,-122.57 212.93,-110.07 94.5,-87 86.4,-85.42 77.73,-83.22 69.83,-81"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="431.69,-131.71 441.91,-128.92 432.18,-124.72 431.69,-131.71"/>
+<path fill="none" stroke="midnightblue" d="M414.55,-121.21C373.42,-112.14 313.11,-98.79 260.5,-87 251.94,-85.08 242.74,-83.01 234.06,-81.04"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="414.05,-124.69 424.57,-123.43 415.56,-117.85 414.05,-124.69"/>
 </g>
 <!-- Node6 -->
-<g id="node4" class="node">
+<g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node4"><a xlink:href="ws__client_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="103.5,-62 103.5,-81 213.5,-81 213.5,-62 103.5,-62"/>
-<text text-anchor="middle" x="158.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/net/ws_client.cpp</text>
+<g id="a_node6"><a xlink:href="sensesp__app_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="269.5,-62 269.5,-81 379.5,-81 379.5,-62 269.5,-62"/>
+<text text-anchor="middle" x="324.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensesp_app.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node6 -->
-<g id="edge4" class="edge">
-<title>Node5&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M431.57,-122.98C376.94,-114.51 294.08,-101.08 222.5,-87 213.45,-85.22 203.71,-83.11 194.64,-81.07"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="431.35,-126.49 441.77,-124.55 432.42,-119.57 431.35,-126.49"/>
+<!-- Node3&#45;&gt;Node6 -->
+<g id="edge6" class="edge">
+<title>Node3&#45;&gt;Node6</title>
+<path fill="none" stroke="midnightblue" d="M434.25,-119.48C407.25,-107.92 367.9,-91.08 344.38,-81.01"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="433.01,-122.76 443.58,-123.48 435.77,-116.32 433.01,-122.76"/>
 </g>
 <!-- Node7 -->
-<g id="node5" class="node">
+<g id="node7" class="node">
 <title>Node7</title>
-<g id="a_node5"><a xlink:href="sensesp__app_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="231.5,-62 231.5,-81 341.5,-81 341.5,-62 231.5,-62"/>
-<text text-anchor="middle" x="286.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensesp_app.cpp</text>
+<g id="a_node7"><a xlink:href="sensesp__app__builder_8h.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="397.5,-62 397.5,-81 529.5,-81 529.5,-62 397.5,-62"/>
+<text text-anchor="middle" x="463.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensesp_app_builder.h</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node7 -->
-<g id="edge5" class="edge">
-<title>Node5&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M452.48,-120.68C412.65,-109.11 351.72,-91.43 315.82,-81.01"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="451.55,-124.05 462.13,-123.48 453.5,-117.33 451.55,-124.05"/>
+<!-- Node3&#45;&gt;Node7 -->
+<g id="edge7" class="edge">
+<title>Node3&#45;&gt;Node7</title>
+<path fill="none" stroke="midnightblue" d="M463.5,-113.32C463.5,-102.5 463.5,-89.4 463.5,-81.01"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="460,-113.48 463.5,-123.48 467,-113.48 460,-113.48"/>
 </g>
 <!-- Node8 -->
-<g id="node6" class="node">
+<g id="node8" class="node">
 <title>Node8</title>
-<g id="a_node6"><a xlink:href="sensesp__app__builder_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="359.5,-62 359.5,-81 491.5,-81 491.5,-62 359.5,-62"/>
-<text text-anchor="middle" x="425.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensesp_app_builder.h</text>
+<g id="a_node8"><a xlink:href="signalk__put__request_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="547.5,-56.5 547.5,-86.5 645.5,-86.5 645.5,-56.5 547.5,-56.5"/>
+<text text-anchor="start" x="555.5" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/signalk/signalk</text>
+<text text-anchor="middle" x="596.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">_put_request.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node8 -->
-<g id="edge6" class="edge">
-<title>Node5&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M474.47,-116.65C461.89,-105.31 445.22,-90.28 434.94,-81.01"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="472.27,-119.38 482.04,-123.48 476.96,-114.18 472.27,-119.38"/>
+<!-- Node3&#45;&gt;Node8 -->
+<g id="edge9" class="edge">
+<title>Node3&#45;&gt;Node8</title>
+<path fill="none" stroke="midnightblue" d="M491.82,-119.33C513.34,-109.7 542.92,-96.47 565.15,-86.52"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="490.25,-116.2 482.56,-123.48 493.11,-122.59 490.25,-116.2"/>
 </g>
 <!-- Node9 -->
-<g id="node7" class="node">
+<g id="node9" class="node">
 <title>Node9</title>
-<g id="a_node7"><a xlink:href="signalk__put__request_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="509.5,-56.5 509.5,-86.5 607.5,-86.5 607.5,-56.5 509.5,-56.5"/>
-<text text-anchor="start" x="517.5" y="-74.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/signalk/signalk</text>
-<text text-anchor="middle" x="558.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">_put_request.cpp</text>
+<g id="a_node9"><a xlink:href="enable_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="663.5,-62 663.5,-81 779.5,-81 779.5,-62 663.5,-62"/>
+<text text-anchor="middle" x="721.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/system/enable.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node9 -->
-<g id="edge7" class="edge">
-<title>Node5&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M508.79,-116.65C519.26,-107.35 532.52,-95.57 542.71,-86.52"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="506.25,-114.22 501.1,-123.48 510.9,-119.45 506.25,-114.22"/>
+<!-- Node3&#45;&gt;Node9 -->
+<g id="edge10" class="edge">
+<title>Node3&#45;&gt;Node9</title>
+<path fill="none" stroke="midnightblue" d="M510.39,-121.19C560.45,-109.64 638.75,-91.58 684.6,-81.01"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="509.42,-117.82 500.47,-123.48 511,-124.64 509.42,-117.82"/>
 </g>
 <!-- Node10 -->
-<g id="node8" class="node">
+<g id="node10" class="node">
 <title>Node10</title>
-<g id="a_node8"><a xlink:href="enable_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="625.5,-62 625.5,-81 741.5,-81 741.5,-62 625.5,-62"/>
-<text text-anchor="middle" x="683.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/system/enable.cpp</text>
+<g id="a_node10"><a xlink:href="led__blinker_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="798,-62 798,-81 931,-81 931,-62 798,-62"/>
+<text text-anchor="middle" x="864.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/system/led_blinker.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node10 -->
-<g id="edge8" class="edge">
-<title>Node5&#45;&gt;Node10</title>
-<path fill="none" stroke="midnightblue" d="M528.99,-120.38C566.31,-108.82 622.7,-91.34 656.04,-81.01"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="527.52,-117.17 519.01,-123.48 529.6,-123.86 527.52,-117.17"/>
+<!-- Node3&#45;&gt;Node10 -->
+<g id="edge11" class="edge">
+<title>Node3&#45;&gt;Node10</title>
+<path fill="none" stroke="midnightblue" d="M523.28,-124.65C588.59,-116.4 696.2,-102.18 788.5,-87 799.37,-85.21 811.07,-83.08 821.96,-81.01"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="522.66,-121.2 513.17,-125.92 523.53,-128.15 522.66,-121.2"/>
 </g>
 <!-- Node11 -->
-<g id="node9" class="node">
+<g id="node11" class="node">
 <title>Node11</title>
-<g id="a_node9"><a xlink:href="led__blinker_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="760,-62 760,-81 893,-81 893,-62 760,-62"/>
-<text text-anchor="middle" x="826.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/system/led_blinker.cpp</text>
+<g id="a_node11"><a xlink:href="wiring__helpers_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="942.5,-0.5 942.5,-19.5 1056.5,-19.5 1056.5,-0.5 942.5,-0.5"/>
+<text text-anchor="middle" x="999.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/wiring_helpers.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node11 -->
-<g id="edge9" class="edge">
-<title>Node5&#45;&gt;Node11</title>
-<path fill="none" stroke="midnightblue" d="M551.34,-121.89C603.87,-112.95 682.31,-99.43 750.5,-87 760.81,-85.12 771.89,-83.04 782.32,-81.06"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="550.47,-118.49 541.2,-123.62 551.64,-125.39 550.47,-118.49"/>
+<!-- Node3&#45;&gt;Node11 -->
+<g id="edge12" class="edge">
+<title>Node3&#45;&gt;Node11</title>
+<path fill="none" stroke="midnightblue" d="M523.47,-132.12C634.97,-131.41 869.24,-125.24 939.5,-87 967.85,-71.57 987.43,-36.54 995.44,-19.98"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="523.38,-128.62 513.4,-132.17 523.42,-135.62 523.38,-128.62"/>
 </g>
 <!-- Node12 -->
-<g id="node10" class="node">
+<g id="node12" class="node">
 <title>Node12</title>
-<g id="a_node10"><a xlink:href="wiring__helpers_8h.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="911.5,-62 911.5,-81 1015.5,-81 1015.5,-62 911.5,-62"/>
-<text text-anchor="middle" x="963.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/wiring_helpers.h</text>
+<g id="a_node12"><a xlink:href="wiring__helpers_8h.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="987.5,-62 987.5,-81 1091.5,-81 1091.5,-62 987.5,-62"/>
+<text text-anchor="middle" x="1039.5" y="-69" font-family="Helvetica,sans-Serif" font-size="10.00">src/wiring_helpers.h</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node12 -->
-<g id="edge10" class="edge">
-<title>Node5&#45;&gt;Node12</title>
-<path fill="none" stroke="midnightblue" d="M551.54,-127.78C631.88,-121.59 778.62,-108.42 902.5,-87 911.83,-85.39 921.87,-83.19 931.05,-81"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="550.83,-124.32 541.13,-128.57 551.36,-131.3 550.83,-124.32"/>
+<!-- Node3&#45;&gt;Node12 -->
+<g id="edge13" class="edge">
+<title>Node3&#45;&gt;Node12</title>
+<path fill="none" stroke="midnightblue" d="M523.4,-129.21C619.01,-124.19 811.8,-111.79 973.5,-87 983.7,-85.44 994.69,-83.23 1004.72,-81.02"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="523.15,-125.72 513.34,-129.73 523.51,-132.71 523.15,-125.72"/>
 </g>
-<!-- Node13 -->
-<g id="node11" class="node">
-<title>Node13</title>
-<g id="a_node11"><a xlink:href="wiring__helpers_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="946.5,-0.5 946.5,-19.5 1060.5,-19.5 1060.5,-0.5 946.5,-0.5"/>
-<text text-anchor="middle" x="1003.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/wiring_helpers.cpp</text>
-</a>
+<!-- Node7&#45;&gt;Node4 -->
+<g id="edge8" class="edge">
+<title>Node7&#45;&gt;Node4</title>
+<path fill="none" stroke="midnightblue" d="M428.89,-58.73C394.87,-47.17 343.78,-29.8 313.53,-19.51"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="427.83,-62.07 438.43,-61.98 430.09,-55.44 427.83,-62.07"/>
 </g>
-</g>
-<!-- Node5&#45;&gt;Node13 -->
-<g id="edge12" class="edge">
-<title>Node5&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M551.7,-131.4C684.44,-129.45 993.03,-121.24 1024.5,-87 1042.1,-67.85 1022.01,-35.26 1010.48,-19.73"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="551.26,-127.9 541.31,-131.54 551.36,-134.9 551.26,-127.9"/>
-</g>
-<!-- Node12&#45;&gt;Node13 -->
-<g id="edge11" class="edge">
-<title>Node12&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M974.93,-53.51C982.4,-42.39 991.84,-28.34 997.78,-19.51"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="971.91,-51.72 969.23,-61.98 977.71,-55.63 971.91,-51.72"/>
+<!-- Node12&#45;&gt;Node11 -->
+<g id="edge14" class="edge">
+<title>Node12&#45;&gt;Node11</title>
+<path fill="none" stroke="midnightblue" d="M1028.07,-53.51C1020.6,-42.39 1011.16,-28.34 1005.22,-19.51"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="1025.29,-55.63 1033.77,-61.98 1031.09,-51.72 1025.29,-55.63"/>
 </g>
 </g>
 </svg>

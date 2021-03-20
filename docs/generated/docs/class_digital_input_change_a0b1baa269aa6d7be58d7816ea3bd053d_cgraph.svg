@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>DigitalInputChange::enable</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-35 236,-35 236,4 -4,4"/>
-<!-- Node2 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node2</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 100,-30.5 100,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">DigitalInputChange</text>
@@ -19,18 +19,18 @@
 </a>
 </g>
 </g>
-<!-- Node3 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node3</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="class_observable.html#a099bf851e05bb8c1a25e83f2a1389e58" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="136,-6 136,-25 232,-25 232,-6 136,-6"/>
 <text text-anchor="middle" x="184" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">Observable::notify</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node3 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node2&#45;&gt;Node3</title>
+<title>Node1&#45;&gt;Node2</title>
 <path fill="none" stroke="midnightblue" d="M100.15,-15.5C108.49,-15.5 117.21,-15.5 125.74,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="126,-19 136,-15.5 126,-12 126,-19"/>
 </g>

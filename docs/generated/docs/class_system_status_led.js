@@ -1,8 +1,8 @@
 var class_system_status_led =
 [
     [ "SystemStatusLed", "class_system_status_led.html#a5ff6444c9edf54e9f6ae7f3c5e80a3bd", null ],
-    [ "set_input", "class_system_status_led.html#a99f3f5a326684b994a0c8a5d9cd89935", null ],
     [ "set_input", "class_system_status_led.html#a8a57a6fe6ce0f405746fc998abbc9e7a", null ],
+    [ "set_input", "class_system_status_led.html#a99f3f5a326684b994a0c8a5d9cd89935", null ],
     [ "set_wifi_disconnected", "class_system_status_led.html#a25327ecc5ba90895e7e430c8ea28334c", null ],
     [ "set_wifi_no_ap", "class_system_status_led.html#a10a7b5ba09bad8add2a30b8de8ecb4e5", null ],
     [ "set_wifimanager_activated", "class_system_status_led.html#a92d8fa42ec130bc6f1b82f63a4f4e5c3", null ],
