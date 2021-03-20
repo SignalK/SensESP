@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 169)">
 <title>src/sensors/sensor_nxp_fxos8700_fxas21002.h</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-169 290,-169 290,4 -4,4"/>
-<!-- Node6 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node6</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="black" points="63.5,-134.5 63.5,-164.5 204.5,-164.5 204.5,-134.5 63.5,-134.5"/>
 <text text-anchor="start" x="71.5" y="-152.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensors/sensor</text>
@@ -19,9 +19,9 @@
 </a>
 </g>
 </g>
-<!-- Node7 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node7</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="orientation__9dof__input_8h.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="0,-67.5 0,-97.5 116,-97.5 116,-67.5 0,-67.5"/>
 <text text-anchor="start" x="8" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensors/orientation</text>
@@ -29,15 +29,15 @@
 </a>
 </g>
 </g>
-<!-- Node6&#45;&gt;Node7 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node6&#45;&gt;Node7</title>
+<title>Node1&#45;&gt;Node2</title>
 <path fill="none" stroke="midnightblue" d="M109.89,-127.88C98.34,-118.01 84.81,-106.43 74.46,-97.58"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="107.63,-130.56 117.51,-134.4 112.18,-125.24 107.63,-130.56"/>
 </g>
-<!-- Node9 -->
+<!-- Node4 -->
 <g id="node4" class="node">
-<title>Node9</title>
+<title>Node4</title>
 <g id="a_node4"><a xlink:href="sensor__nxp__fxos8700__fxas21002_8cpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="134,-67.5 134,-97.5 286,-97.5 286,-67.5 134,-67.5"/>
 <text text-anchor="start" x="142" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensors/sensor</text>
@@ -45,15 +45,15 @@
 </a>
 </g>
 </g>
-<!-- Node6&#45;&gt;Node9 -->
+<!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
-<title>Node6&#45;&gt;Node9</title>
+<title>Node1&#45;&gt;Node4</title>
 <path fill="none" stroke="midnightblue" d="M158.11,-127.88C169.66,-118.01 183.19,-106.43 193.54,-97.58"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="155.82,-125.24 150.49,-134.4 160.37,-130.56 155.82,-125.24"/>
 </g>
-<!-- Node8 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node8</title>
+<title>Node3</title>
 <g id="a_node3"><a xlink:href="orientation__9dof__input_8cpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="0,-0.5 0,-30.5 116,-30.5 116,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensors/orientation</text>
@@ -61,9 +61,9 @@
 </a>
 </g>
 </g>
-<!-- Node7&#45;&gt;Node8 -->
+<!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node7&#45;&gt;Node8</title>
+<title>Node2&#45;&gt;Node3</title>
 <path fill="none" stroke="midnightblue" d="M58,-57.11C58,-48.15 58,-38.32 58,-30.58"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="54.5,-57.4 58,-67.4 61.5,-57.4 54.5,-57.4"/>
 </g>

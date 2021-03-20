@@ -9,63 +9,63 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 214)">
 <title>src/system/nmea_parser.h</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-214 423,-214 423,4 -4,4"/>
-<!-- Node15 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node15</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="black" points="212.5,-190.5 212.5,-209.5 344.5,-209.5 344.5,-190.5 212.5,-190.5"/>
 <text text-anchor="middle" x="278.5" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/system/nmea_parser.h</text>
 </a>
 </g>
 </g>
-<!-- Node16 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node16</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="gps_8h.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="163,-134.5 163,-153.5 258,-153.5 258,-134.5 163,-134.5"/>
 <text text-anchor="middle" x="210.5" y="-141.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensors/gps.h</text>
 </a>
 </g>
 </g>
-<!-- Node15&#45;&gt;Node16 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node15&#45;&gt;Node16</title>
+<title>Node1&#45;&gt;Node2</title>
 <path fill="none" stroke="midnightblue" d="M259.74,-184.1C247.5,-174.38 231.94,-162.03 221.62,-153.83"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="257.57,-186.85 267.57,-190.32 261.92,-181.36 257.57,-186.85"/>
 </g>
-<!-- Node22 -->
+<!-- Node8 -->
 <g id="node8" class="node">
-<title>Node22</title>
+<title>Node8</title>
 <g id="a_node8"><a xlink:href="nmea__parser_8cpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="276,-134.5 276,-153.5 419,-153.5 419,-134.5 276,-134.5"/>
 <text text-anchor="middle" x="347.5" y="-141.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/system/nmea_parser.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node15&#45;&gt;Node22 -->
+<!-- Node1&#45;&gt;Node8 -->
 <g id="edge9" class="edge">
-<title>Node15&#45;&gt;Node22</title>
+<title>Node1&#45;&gt;Node8</title>
 <path fill="none" stroke="midnightblue" d="M297.54,-184.1C309.96,-174.38 325.74,-162.03 336.21,-153.83"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="295.3,-181.4 289.59,-190.32 299.62,-186.92 295.3,-181.4"/>
 </g>
-<!-- Node17 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node17</title>
+<title>Node3</title>
 <g id="a_node3"><a xlink:href="gps_8cpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="0,-73 0,-92 105,-92 105,-73 0,-73"/>
 <text text-anchor="middle" x="52.5" y="-80" font-family="Helvetica,sans-Serif" font-size="10.00">src/sensors/gps.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node16&#45;&gt;Node17 -->
+<!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node16&#45;&gt;Node17</title>
+<title>Node2&#45;&gt;Node3</title>
 <path fill="none" stroke="midnightblue" d="M178.46,-130.93C147.75,-119.37 102.18,-102.21 75.1,-92.01"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="177.27,-134.23 187.86,-134.48 179.74,-127.68 177.27,-134.23"/>
 </g>
-<!-- Node18 -->
+<!-- Node4 -->
 <g id="node4" class="node">
-<title>Node18</title>
+<title>Node4</title>
 <g id="a_node4"><a xlink:href="signalk__position_8h.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="123.5,-67.5 123.5,-97.5 221.5,-97.5 221.5,-67.5 123.5,-67.5"/>
 <text text-anchor="start" x="131.5" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/signalk/signalk</text>
@@ -73,45 +73,45 @@
 </a>
 </g>
 </g>
-<!-- Node16&#45;&gt;Node18 -->
+<!-- Node2&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
-<title>Node16&#45;&gt;Node18</title>
+<title>Node2&#45;&gt;Node4</title>
 <path fill="none" stroke="midnightblue" d="M199.62,-125.96C193.87,-116.96 186.89,-106.03 181.46,-97.52"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="196.72,-127.93 205.06,-134.48 202.62,-124.16 196.72,-127.93"/>
 </g>
-<!-- Node20 -->
+<!-- Node6 -->
 <g id="node6" class="node">
-<title>Node20</title>
+<title>Node6</title>
 <g id="a_node6"><a xlink:href="wiring__helpers_8cpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="216.5,-6 216.5,-25 330.5,-25 330.5,-6 216.5,-6"/>
 <text text-anchor="middle" x="273.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">src/wiring_helpers.cpp</text>
 </a>
 </g>
 </g>
-<!-- Node16&#45;&gt;Node20 -->
-<g id="edge8" class="edge">
-<title>Node16&#45;&gt;Node20</title>
+<!-- Node2&#45;&gt;Node6 -->
+<g id="edge6" class="edge">
+<title>Node2&#45;&gt;Node6</title>
 <path fill="none" stroke="midnightblue" d="M219.44,-125.04C233.17,-97.48 258.9,-45.81 269.14,-25.26"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="216.16,-123.79 214.83,-134.31 222.42,-126.91 216.16,-123.79"/>
 </g>
-<!-- Node21 -->
+<!-- Node7 -->
 <g id="node7" class="node">
-<title>Node21</title>
+<title>Node7</title>
 <g id="a_node7"><a xlink:href="wiring__helpers_8h.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="277.5,-73 277.5,-92 381.5,-92 381.5,-73 277.5,-73"/>
 <text text-anchor="middle" x="329.5" y="-80" font-family="Helvetica,sans-Serif" font-size="10.00">src/wiring_helpers.h</text>
 </a>
 </g>
 </g>
-<!-- Node16&#45;&gt;Node21 -->
-<g id="edge6" class="edge">
-<title>Node16&#45;&gt;Node21</title>
+<!-- Node2&#45;&gt;Node7 -->
+<g id="edge7" class="edge">
+<title>Node2&#45;&gt;Node7</title>
 <path fill="none" stroke="midnightblue" d="M236.77,-129.87C259.83,-118.33 292.7,-101.9 312.48,-92.01"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="234.93,-126.87 227.55,-134.48 238.06,-133.13 234.93,-126.87"/>
 </g>
-<!-- Node19 -->
+<!-- Node5 -->
 <g id="node5" class="node">
-<title>Node19</title>
+<title>Node5</title>
 <g id="a_node5"><a xlink:href="signalk__position_8cpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="100.5,-0.5 100.5,-30.5 198.5,-30.5 198.5,-0.5 100.5,-0.5"/>
 <text text-anchor="start" x="108.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/signalk/signalk</text>
@@ -119,21 +119,21 @@
 </a>
 </g>
 </g>
-<!-- Node18&#45;&gt;Node19 -->
+<!-- Node4&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
-<title>Node18&#45;&gt;Node19</title>
+<title>Node4&#45;&gt;Node5</title>
 <path fill="none" stroke="midnightblue" d="M164.08,-57.7C160.85,-48.59 157.28,-38.49 154.48,-30.58"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="160.87,-59.14 167.51,-67.4 167.47,-56.8 160.87,-59.14"/>
 </g>
-<!-- Node18&#45;&gt;Node20 -->
+<!-- Node4&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
-<title>Node18&#45;&gt;Node20</title>
+<title>Node4&#45;&gt;Node6</title>
 <path fill="none" stroke="midnightblue" d="M202.84,-61.97C221.99,-49.65 245.77,-34.35 260.28,-25.01"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="200.93,-59.04 194.42,-67.4 204.72,-64.93 200.93,-59.04"/>
 </g>
-<!-- Node21&#45;&gt;Node20 -->
-<g id="edge7" class="edge">
-<title>Node21&#45;&gt;Node20</title>
+<!-- Node7&#45;&gt;Node6 -->
+<g id="edge8" class="edge">
+<title>Node7&#45;&gt;Node6</title>
 <path fill="none" stroke="midnightblue" d="M315.4,-65.13C304.45,-52.42 289.7,-35.3 280.93,-25.13"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="312.77,-67.44 321.95,-72.73 318.07,-62.87 312.77,-67.44"/>
 </g>

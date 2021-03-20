@@ -9,42 +9,42 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 136)">
 <title>SKPutListener</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-136 144,-136 144,4 -4,4"/>
-<!-- Node0 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node0</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title="An Obervable class that listens for Signal K PUT requests coming over the websocket connection and no...">
 <polygon fill="#bfbfbf" stroke="black" points="30,-56.5 30,-75.5 110,-75.5 110,-56.5 30,-56.5"/>
 <text text-anchor="middle" x="70" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKPutListener</text>
 </a>
 </g>
 </g>
-<!-- Node2 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node2</title>
+<title>Node3</title>
 <g id="a_node3"><a xlink:href="class_s_k_put_request_listener.html" target="_top" xlink:title="An object that listens for PUT requests to come in for the specified SignalK path....">
 <polygon fill="white" stroke="black" points="0,-0.5 0,-19.5 140,-19.5 140,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="70" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKPutRequestListener&lt; T &gt;</text>
 </a>
 </g>
 </g>
-<!-- Node0&#45;&gt;Node2 -->
+<!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node0&#45;&gt;Node2</title>
+<title>Node1&#45;&gt;Node3</title>
 <path fill="none" stroke="midnightblue" d="M70,-45.8C70,-36.91 70,-26.78 70,-19.75"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="66.5,-46.08 70,-56.08 73.5,-46.08 66.5,-46.08"/>
 </g>
-<!-- Node1 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node1</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="class_observable.html" target="_top" xlink:title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh...">
 <polygon fill="white" stroke="black" points="37,-112.5 37,-131.5 103,-131.5 103,-112.5 37,-112.5"/>
 <text text-anchor="middle" x="70" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">Observable</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node0 -->
+<!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge">
-<title>Node1&#45;&gt;Node0</title>
+<title>Node2&#45;&gt;Node1</title>
 <path fill="none" stroke="midnightblue" d="M70,-101.8C70,-92.91 70,-82.78 70,-75.75"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="66.5,-102.08 70,-112.08 73.5,-102.08 66.5,-102.08"/>
 </g>
