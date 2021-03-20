@@ -55,9 +55,9 @@ var sectionId = 'dynsection-3';
 <g id="viewport">
 <title>SystemStatusLed::set_wifi_disconnected</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-35 688,-35 688,4 -4,4"/>
-<!-- Node19 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node19</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 114,-30.5 114,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">SystemStatusLed::set</text>
@@ -65,9 +65,9 @@ var sectionId = 'dynsection-3';
 </a>
 </g>
 </g>
-<!-- Node20 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node20</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="class_pattern_blinker.html#a8b9d3d21bac01d8ed8048cddb5b753b6" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="150,-0.5 150,-30.5 248,-30.5 248,-0.5 150,-0.5"/>
 <text text-anchor="start" x="158" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">PatternBlinker::set</text>
@@ -75,54 +75,54 @@ var sectionId = 'dynsection-3';
 </a>
 </g>
 </g>
-<!-- Node19&#45;&gt;Node20 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node19&#45;&gt;Node20</title>
+<title>Node1&#45;&gt;Node2</title>
 <path fill="none" stroke="midnightblue" d="M114.14,-15.5C122.57,-15.5 131.29,-15.5 139.77,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="139.96,-19 149.96,-15.5 139.96,-12 139.96,-19"/>
 </g>
-<!-- Node21 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node21</title>
+<title>Node3</title>
 <g id="a_node3"><a xlink:href="class_pattern_blinker.html#acd7cdf3ec3693c715548321a8221fb00" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="284,-6 284,-25 396,-25 396,-6 284,-6"/>
 <text text-anchor="middle" x="340" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">PatternBlinker::restart</text>
 </a>
 </g>
 </g>
-<!-- Node20&#45;&gt;Node21 -->
+<!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node20&#45;&gt;Node21</title>
+<title>Node2&#45;&gt;Node3</title>
 <path fill="none" stroke="midnightblue" d="M248.23,-15.5C256.45,-15.5 265.12,-15.5 273.7,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="273.71,-19 283.71,-15.5 273.71,-12 273.71,-19"/>
 </g>
-<!-- Node22 -->
+<!-- Node4 -->
 <g id="node4" class="node">
-<title>Node22</title>
+<title>Node4</title>
 <g id="a_node4"><a xlink:href="class_pattern_blinker.html#a5085b2293eebd391eede2e547014ed78" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="432,-6 432,-25 532,-25 532,-6 432,-6"/>
 <text text-anchor="middle" x="482" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">PatternBlinker::tick</text>
 </a>
 </g>
 </g>
-<!-- Node21&#45;&gt;Node22 -->
+<!-- Node3&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
-<title>Node21&#45;&gt;Node22</title>
+<title>Node3&#45;&gt;Node4</title>
 <path fill="none" stroke="midnightblue" d="M396.33,-15.5C404.7,-15.5 413.36,-15.5 421.81,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="421.97,-19 431.97,-15.5 421.97,-12 421.97,-19"/>
 </g>
-<!-- Node23 -->
+<!-- Node5 -->
 <g id="node5" class="node">
-<title>Node23</title>
+<title>Node5</title>
 <g id="a_node5"><a xlink:href="class_base_blinker.html#ae508f9be2dd4185090b541070f353acc" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="568,-6 568,-25 684,-25 684,-6 568,-6"/>
 <text text-anchor="middle" x="626" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">BaseBlinker::set_state</text>
 </a>
 </g>
 </g>
-<!-- Node22&#45;&gt;Node23 -->
+<!-- Node4&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
-<title>Node22&#45;&gt;Node23</title>
+<title>Node4&#45;&gt;Node5</title>
 <path fill="none" stroke="midnightblue" d="M532.27,-15.5C540.35,-15.5 548.86,-15.5 557.3,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="557.53,-19 567.53,-15.5 557.53,-12 557.53,-19"/>
 </g>

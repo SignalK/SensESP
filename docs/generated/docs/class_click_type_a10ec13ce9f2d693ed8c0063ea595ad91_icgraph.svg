@@ -48,25 +48,25 @@ if (edges && edges.length) {
 <script type="text/javascript">
 var viewWidth = 553;
 var viewHeight = 88;
-var sectionId = 'dynsection-2';
+var sectionId = 'dynsection-1';
 </script>
 <script xlink:href="svgpan.js"/>
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>ClickType::emitDelayed</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-84 549,-84 549,4 -4,4"/>
-<!-- Node4 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node4</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="black" points="424,-33 424,-52 545,-52 545,-33 424,-33"/>
 <text text-anchor="middle" x="484.5" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00">ClickType::emitDelayed</text>
 </a>
 </g>
 </g>
-<!-- Node5 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node5</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="class_click_type.html#aa64de73fe0fb21580f5a9720701664d9" target="_top" xlink:title="Processes incoming value that represent a &quot;ButtonRelease&quot; event.">
 <polygon fill="white" stroke="black" points="142,-49.5 142,-79.5 251,-79.5 251,-49.5 142,-49.5"/>
 <text text-anchor="start" x="150" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">ClickType::on_button</text>
@@ -74,15 +74,15 @@ var sectionId = 'dynsection-2';
 </a>
 </g>
 </g>
-<!-- Node4&#45;&gt;Node5 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node4&#45;&gt;Node5</title>
+<title>Node1&#45;&gt;Node2</title>
 <path fill="none" stroke="midnightblue" d="M413.79,-47.86C363.72,-51.71 297.22,-56.83 251.24,-60.37"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="414.19,-51.34 423.89,-47.09 413.65,-44.36 414.19,-51.34"/>
 </g>
-<!-- Node7 -->
+<!-- Node4 -->
 <g id="node4" class="node">
-<title>Node7</title>
+<title>Node4</title>
 <g id="a_node4"><a xlink:href="class_click_type.html#ad02f210e44bc8ba18c80dce9ee4f5db5" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="287,-5.5 287,-35.5 388,-35.5 388,-5.5 287,-5.5"/>
 <text text-anchor="start" x="295" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">ClickType::on_ultra</text>
@@ -90,36 +90,36 @@ var sectionId = 'dynsection-2';
 </a>
 </g>
 </g>
-<!-- Node4&#45;&gt;Node7 -->
+<!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
-<title>Node4&#45;&gt;Node7</title>
+<title>Node1&#45;&gt;Node4</title>
 <path fill="none" stroke="midnightblue" d="M413.6,-31.89C404.96,-30.58 396.28,-29.27 388.03,-28.02"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="413.27,-35.38 423.69,-33.42 414.32,-28.46 413.27,-35.38"/>
 </g>
-<!-- Node6 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node6</title>
+<title>Node3</title>
 <g id="a_node3"><a xlink:href="class_click_type.html#a7b1a0723cd0b8438d3f1ec380243d208" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="0,-30 0,-49 106,-49 106,-30 0,-30"/>
 <text text-anchor="middle" x="53" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00">ClickType::set_input</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node6 -->
+<!-- Node2&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
-<title>Node5&#45;&gt;Node6</title>
+<title>Node2&#45;&gt;Node3</title>
 <path fill="none" stroke="midnightblue" d="M131.73,-53.23C123.24,-51.73 114.61,-50.21 106.35,-48.75"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="131.14,-56.68 141.6,-54.98 132.36,-49.79 131.14,-56.68"/>
 </g>
-<!-- Node7&#45;&gt;Node5 -->
+<!-- Node4&#45;&gt;Node2 -->
 <g id="edge6" class="edge">
-<title>Node7&#45;&gt;Node5</title>
+<title>Node4&#45;&gt;Node2</title>
 <path fill="none" stroke="midnightblue" d="M279.25,-38.62C267.93,-42.2 256.17,-45.93 245.21,-49.4"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="280.58,-41.87 289.05,-35.52 278.46,-35.2 280.58,-41.87"/>
 </g>
-<!-- Node8 -->
+<!-- Node5 -->
 <g id="node5" class="node">
-<title>Node8</title>
+<title>Node5</title>
 <g id="a_node5"><a xlink:href="class_click_type.html#a9424a22ada921ea26cec9cfc777d8be9" target="_top" xlink:title="Processes incoming values that represent a &quot;ButonPress&quot; event.">
 <polygon fill="white" stroke="black" points="142,-0.5 142,-30.5 251,-30.5 251,-0.5 142,-0.5"/>
 <text text-anchor="start" x="150" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">ClickType::on_button</text>
@@ -127,15 +127,15 @@ var sectionId = 'dynsection-2';
 </a>
 </g>
 </g>
-<!-- Node7&#45;&gt;Node8 -->
+<!-- Node4&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
-<title>Node7&#45;&gt;Node8</title>
+<title>Node4&#45;&gt;Node5</title>
 <path fill="none" stroke="midnightblue" d="M276.55,-18.34C268.11,-18.04 259.48,-17.73 251.18,-17.43"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="276.59,-21.85 286.71,-18.71 276.84,-14.85 276.59,-21.85"/>
 </g>
-<!-- Node8&#45;&gt;Node6 -->
+<!-- Node5&#45;&gt;Node3 -->
 <g id="edge5" class="edge">
-<title>Node8&#45;&gt;Node6</title>
+<title>Node5&#45;&gt;Node3</title>
 <path fill="none" stroke="midnightblue" d="M131.73,-26.32C123.24,-27.76 114.61,-29.22 106.35,-30.62"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="132.33,-29.76 141.6,-24.64 131.16,-22.86 132.33,-29.76"/>
 </g>

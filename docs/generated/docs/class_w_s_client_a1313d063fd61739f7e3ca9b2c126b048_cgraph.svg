@@ -9,102 +9,87 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 119)">
 <title>WSClient::enable</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-119 403,-119 403,4 -4,4"/>
-<!-- Node7 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node7</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="black" points="0,-57.5 0,-76.5 93,-76.5 93,-57.5 0,-57.5"/>
 <text text-anchor="middle" x="46.5" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">WSClient::enable</text>
 </a>
 </g>
 </g>
-<!-- Node8 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node8</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="class_w_s_client.html#a1612670a5dccbc8a39518ae972fbae90" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="135.5,-95.5 135.5,-114.5 234.5,-114.5 234.5,-95.5 135.5,-95.5"/>
 <text text-anchor="middle" x="185" y="-102.5" font-family="Helvetica,sans-Serif" font-size="10.00">WSClient::connect</text>
 </a>
 </g>
 </g>
-<!-- Node7&#45;&gt;Node8 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node7&#45;&gt;Node8</title>
+<title>Node1&#45;&gt;Node2</title>
 <path fill="none" stroke="midnightblue" d="M81.94,-76.59C99.48,-81.47 121.01,-87.46 139.76,-92.68"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="138.99,-96.1 149.57,-95.41 140.87,-89.36 138.99,-96.1"/>
 </g>
-<!-- Node10 -->
-<g id="node4" class="node">
-<title>Node10</title>
-<g id="a_node4"><a xlink:href="class_w_s_client.html#ae23657a7da08a9413a09e9054495904e" target="_top" xlink:title=" ">
+<!-- Node3 -->
+<g id="node3" class="node">
+<title>Node3</title>
+<g id="a_node3"><a xlink:href="class_w_s_client.html#ae23657a7da08a9413a09e9054495904e" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="143.5,-57.5 143.5,-76.5 226.5,-76.5 226.5,-57.5 143.5,-57.5"/>
 <text text-anchor="middle" x="185" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">WSClient::loop</text>
 </a>
 </g>
 </g>
-<!-- Node7&#45;&gt;Node10 -->
-<g id="edge3" class="edge">
-<title>Node7&#45;&gt;Node10</title>
+<!-- Node1&#45;&gt;Node3 -->
+<g id="edge2" class="edge">
+<title>Node1&#45;&gt;Node3</title>
 <path fill="none" stroke="midnightblue" d="M93.33,-67C106.04,-67 119.92,-67 132.91,-67"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="133.1,-70.5 143.1,-67 133.1,-63.5 133.1,-70.5"/>
 </g>
-<!-- Node11 -->
-<g id="node5" class="node">
-<title>Node11</title>
-<g id="a_node5"><a xlink:href="class_w_s_client.html#ab6bcc3fb4cfe71aff3929480fab9bd5a" target="_top" xlink:title=" ">
+<!-- Node4 -->
+<g id="node4" class="node">
+<title>Node4</title>
+<g id="a_node4"><a xlink:href="class_w_s_client.html#ab6bcc3fb4cfe71aff3929480fab9bd5a" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="129,-19.5 129,-38.5 241,-38.5 241,-19.5 129,-19.5"/>
 <text text-anchor="middle" x="185" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">WSClient::send_delta</text>
 </a>
 </g>
 </g>
-<!-- Node7&#45;&gt;Node11 -->
-<g id="edge4" class="edge">
-<title>Node7&#45;&gt;Node11</title>
+<!-- Node1&#45;&gt;Node4 -->
+<g id="edge3" class="edge">
+<title>Node1&#45;&gt;Node4</title>
 <path fill="none" stroke="midnightblue" d="M81.94,-57.41C99.48,-52.53 121.01,-46.54 139.76,-41.32"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="140.87,-44.64 149.57,-38.59 138.99,-37.9 140.87,-44.64"/>
 </g>
-<!-- Node9 -->
-<g id="node3" class="node">
-<title>Node9</title>
-<g id="a_node3"><a xlink:href="class_value_producer.html#a0164ba6fd3345f9b8dd2187e7ea919d9" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="288.5,-95.5 288.5,-114.5 387.5,-114.5 387.5,-95.5 288.5,-95.5"/>
-<text text-anchor="middle" x="338" y="-102.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueProducer::get</text>
-</a>
-</g>
-</g>
-<!-- Node8&#45;&gt;Node9 -->
-<g id="edge2" class="edge">
-<title>Node8&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M234.61,-105C248.48,-105 263.75,-105 278.17,-105"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="278.48,-108.5 288.48,-105 278.48,-101.5 278.48,-108.5"/>
-</g>
-<!-- Node12 -->
-<g id="node6" class="node">
-<title>Node12</title>
-<g id="a_node6"><a xlink:href="class_s_k_delta.html#a74ab20a661a4f80a336b50fccc4bd9bc" target="_top" xlink:title=" ">
+<!-- Node5 -->
+<g id="node5" class="node">
+<title>Node5</title>
+<g id="a_node5"><a xlink:href="class_s_k_delta.html#a74ab20a661a4f80a336b50fccc4bd9bc" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="277,-38.5 277,-57.5 399,-57.5 399,-38.5 277,-38.5"/>
 <text text-anchor="middle" x="338" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKDelta::data_available</text>
 </a>
 </g>
 </g>
-<!-- Node11&#45;&gt;Node12 -->
-<g id="edge5" class="edge">
-<title>Node11&#45;&gt;Node12</title>
+<!-- Node4&#45;&gt;Node5 -->
+<g id="edge4" class="edge">
+<title>Node4&#45;&gt;Node5</title>
 <path fill="none" stroke="midnightblue" d="M241.37,-35.97C249.66,-37.01 258.29,-38.1 266.84,-39.17"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="266.45,-42.65 276.8,-40.43 267.32,-35.7 266.45,-42.65"/>
 </g>
-<!-- Node13 -->
-<g id="node7" class="node">
-<title>Node13</title>
-<g id="a_node7"><a xlink:href="class_s_k_delta.html#ab1592b494b343964703102a4797d3bbc" target="_top" xlink:title=" ">
+<!-- Node6 -->
+<g id="node6" class="node">
+<title>Node6</title>
+<g id="a_node6"><a xlink:href="class_s_k_delta.html#ab1592b494b343964703102a4797d3bbc" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="288.5,-0.5 288.5,-19.5 387.5,-19.5 387.5,-0.5 288.5,-0.5"/>
 <text text-anchor="middle" x="338" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SKDelta::get_delta</text>
 </a>
 </g>
 </g>
-<!-- Node11&#45;&gt;Node13 -->
-<g id="edge6" class="edge">
-<title>Node11&#45;&gt;Node13</title>
+<!-- Node4&#45;&gt;Node6 -->
+<g id="edge5" class="edge">
+<title>Node4&#45;&gt;Node6</title>
 <path fill="none" stroke="midnightblue" d="M241.37,-22.03C253.34,-20.53 266.03,-18.93 278.13,-17.41"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="278.64,-20.87 288.12,-16.15 277.76,-13.93 278.64,-20.87"/>
 </g>

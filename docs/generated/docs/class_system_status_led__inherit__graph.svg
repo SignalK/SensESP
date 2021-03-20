@@ -9,65 +9,65 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 148)">
 <title>SystemStatusLed</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-148 302,-148 302,4 -4,4"/>
-<!-- Node0 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node0</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title="Consumes the networking and websocket states and delta counts and updates the device LED accordingly....">
 <polygon fill="#bfbfbf" stroke="black" points="113.5,-0.5 113.5,-19.5 208.5,-19.5 208.5,-0.5 113.5,-0.5"/>
 <text text-anchor="middle" x="161" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">SystemStatusLed</text>
 </a>
 </g>
 </g>
-<!-- Node1 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node1</title>
+<title>Node2</title>
 <g id="a_node2"><a xlink:href="class_value_consumer.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="0,-57.5 0,-76.5 166,-76.5 166,-57.5 0,-57.5"/>
 <text text-anchor="middle" x="83" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; SystemStatus &gt;</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node0 -->
+<!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge">
-<title>Node1&#45;&gt;Node0</title>
+<title>Node2&#45;&gt;Node1</title>
 <path fill="none" stroke="midnightblue" d="M103.51,-51.54C117.95,-41.35 136.79,-28.07 148.9,-19.53"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="101.34,-48.78 95.19,-57.41 105.38,-54.5 101.34,-48.78"/>
 </g>
-<!-- Node2 -->
+<!-- Node3 -->
 <g id="node3" class="node">
-<title>Node2</title>
+<title>Node3</title>
 <g id="a_node3"><a xlink:href="class_value_consumer.html" target="_top" xlink:title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc...">
 <polygon fill="white" stroke="black" points="106,-124.5 106,-143.5 216,-143.5 216,-124.5 106,-124.5"/>
 <text text-anchor="middle" x="161" y="-131.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; T &gt;</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node1 -->
+<!-- Node3&#45;&gt;Node2 -->
 <g id="edge2" class="edge">
-<title>Node2&#45;&gt;Node1</title>
+<title>Node3&#45;&gt;Node2</title>
 <path fill="none" stroke="orange" stroke-dasharray="5,2" d="M138.81,-118.58C133.19,-114.68 127.26,-110.33 122,-106 110.62,-96.62 98.62,-84.56 90.99,-76.57"/>
 <polygon fill="orange" stroke="orange" points="136.99,-121.58 147.24,-124.29 140.92,-115.79 136.99,-121.58"/>
 <text text-anchor="middle" x="164" y="-98" font-family="Helvetica,sans-Serif" font-size="10.00"> &lt; SystemStatus &gt;</text>
 </g>
-<!-- Node3 -->
+<!-- Node4 -->
 <g id="node4" class="node">
-<title>Node3</title>
+<title>Node4</title>
 <g id="a_node4"><a xlink:href="class_value_consumer.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="184,-57.5 184,-76.5 298,-76.5 298,-57.5 184,-57.5"/>
 <text text-anchor="middle" x="241" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">ValueConsumer&lt; int &gt;</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node3 -->
+<!-- Node3&#45;&gt;Node4 -->
 <g id="edge4" class="edge">
-<title>Node2&#45;&gt;Node3</title>
+<title>Node3&#45;&gt;Node4</title>
 <path fill="none" stroke="orange" stroke-dasharray="5,2" d="M187.09,-119.07C193.51,-115.18 200.21,-110.72 206,-106 216.99,-97.05 227.75,-84.67 234.37,-76.51"/>
 <polygon fill="orange" stroke="orange" points="184.9,-116.29 178,-124.32 188.41,-122.35 184.9,-116.29"/>
 <text text-anchor="middle" x="233" y="-98" font-family="Helvetica,sans-Serif" font-size="10.00"> &lt; int &gt;</text>
 </g>
-<!-- Node3&#45;&gt;Node0 -->
+<!-- Node4&#45;&gt;Node1 -->
 <g id="edge3" class="edge">
-<title>Node3&#45;&gt;Node0</title>
+<title>Node4&#45;&gt;Node1</title>
 <path fill="none" stroke="midnightblue" d="M219.96,-51.54C205.15,-41.35 185.83,-28.07 173.41,-19.53"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="218.28,-54.63 228.5,-57.41 222.24,-48.86 218.28,-54.63"/>
 </g>

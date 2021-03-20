@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 226)">
 <title>GPGLLSentenceParser::parse</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-226 278,-226 278,4 -4,4"/>
-<!-- Node2 -->
+<!-- Node1 -->
 <g id="node1" class="node">
-<title>Node2</title>
+<title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="black" points="0,-102 0,-132 119,-132 119,-102 0,-102"/>
 <text text-anchor="start" x="8" y="-120" font-family="Helvetica,sans-Serif" font-size="10.00">GPGLLSentenceParser</text>
@@ -19,69 +19,69 @@
 </a>
 </g>
 </g>
-<!-- Node3 -->
+<!-- Node2 -->
 <g id="node2" class="node">
-<title>Node3</title>
-<g id="a_node2"><a xlink:href="nmea__parser_8cpp.html#a21e8f85a497e58ad08d5c473e89a8463" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="180,-202.5 180,-221.5 249,-221.5 249,-202.5 180,-202.5"/>
-<text text-anchor="middle" x="214.5" y="-209.5" font-family="Helvetica,sans-Serif" font-size="10.00">parse_latlon</text>
+<title>Node2</title>
+<g id="a_node2"><a xlink:href="nmea__parser_8cpp.html#a113615295f150c16f895c9e2525bbd6e" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="183.5,-202.5 183.5,-221.5 245.5,-221.5 245.5,-202.5 183.5,-202.5"/>
+<text text-anchor="middle" x="214.5" y="-209.5" font-family="Helvetica,sans-Serif" font-size="10.00">parse_EW</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node3 -->
+<!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M75.61,-132.11C93.28,-149.03 124.07,-176.28 155,-193 159.81,-195.6 165.05,-197.93 170.33,-199.97"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="169.24,-203.3 179.84,-203.37 171.6,-196.71 169.24,-203.3"/>
+<title>Node1&#45;&gt;Node2</title>
+<path fill="none" stroke="midnightblue" d="M75.61,-132.11C93.28,-149.03 124.07,-176.28 155,-193 160.79,-196.13 167.19,-198.86 173.57,-201.19"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="172.88,-204.66 183.48,-204.54 175.12,-198.02 172.88,-204.66"/>
+</g>
+<!-- Node3 -->
+<g id="node3" class="node">
+<title>Node3</title>
+<g id="a_node3"><a xlink:href="nmea__parser_8cpp.html#a21e8f85a497e58ad08d5c473e89a8463" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="180,-164.5 180,-183.5 249,-183.5 249,-164.5 180,-164.5"/>
+<text text-anchor="middle" x="214.5" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00">parse_latlon</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node3 -->
+<g id="edge2" class="edge">
+<title>Node1&#45;&gt;Node3</title>
+<path fill="none" stroke="midnightblue" d="M96.18,-132.02C113.78,-139.25 135.39,-147.88 155,-155 160.72,-157.08 166.8,-159.17 172.79,-161.17"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="172.11,-164.63 182.7,-164.43 174.29,-157.98 172.11,-164.63"/>
 </g>
 <!-- Node4 -->
-<g id="node3" class="node">
+<g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node3"><a xlink:href="nmea__parser_8cpp.html#a18bf596259e1849f3b6bdbdd765ab606" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="184.5,-164.5 184.5,-183.5 244.5,-183.5 244.5,-164.5 184.5,-164.5"/>
-<text text-anchor="middle" x="214.5" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00">parse_NS</text>
+<g id="a_node4"><a xlink:href="nmea__parser_8cpp.html#a18bf596259e1849f3b6bdbdd765ab606" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="184.5,-126.5 184.5,-145.5 244.5,-145.5 244.5,-126.5 184.5,-126.5"/>
+<text text-anchor="middle" x="214.5" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">parse_NS</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node4 -->
-<g id="edge2" class="edge">
-<title>Node2&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M96.18,-132.02C113.78,-139.25 135.39,-147.88 155,-155 161.19,-157.25 167.8,-159.52 174.26,-161.66"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="173.61,-165.13 184.21,-164.92 175.79,-158.48 173.61,-165.13"/>
+<!-- Node1&#45;&gt;Node4 -->
+<g id="edge3" class="edge">
+<title>Node1&#45;&gt;Node4</title>
+<path fill="none" stroke="midnightblue" d="M119.22,-124.29C137.64,-126.58 157.52,-129.05 174.25,-131.13"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="173.87,-134.61 184.23,-132.36 174.73,-127.66 173.87,-134.61"/>
 </g>
 <!-- Node5 -->
-<g id="node4" class="node">
-<title>Node5</title>
-<g id="a_node4"><a xlink:href="nmea__parser_8cpp.html#a113615295f150c16f895c9e2525bbd6e" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="183.5,-126.5 183.5,-145.5 245.5,-145.5 245.5,-126.5 183.5,-126.5"/>
-<text text-anchor="middle" x="214.5" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">parse_EW</text>
-</a>
-</g>
-</g>
-<!-- Node2&#45;&gt;Node5 -->
-<g id="edge3" class="edge">
-<title>Node2&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M119.22,-124.29C137.19,-126.52 156.55,-128.93 173.02,-130.97"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="173.03,-134.5 183.39,-132.26 173.89,-127.55 173.03,-134.5"/>
-</g>
-<!-- Node6 -->
 <g id="node5" class="node">
-<title>Node6</title>
+<title>Node5</title>
 <g id="a_node5"><a xlink:href="nmea__parser_8cpp.html#af7a3600deec155122015fcfedfc126a7" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="173,-88.5 173,-107.5 256,-107.5 256,-88.5 173,-88.5"/>
 <text text-anchor="middle" x="214.5" y="-95.5" font-family="Helvetica,sans-Serif" font-size="10.00">report_success</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node6 -->
+<!-- Node1&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
-<title>Node2&#45;&gt;Node6</title>
+<title>Node1&#45;&gt;Node5</title>
 <path fill="none" stroke="midnightblue" d="M119.22,-109.71C133.45,-107.94 148.56,-106.06 162.41,-104.34"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="163.23,-107.77 172.72,-103.06 162.37,-100.82 163.23,-107.77"/>
 </g>
-<!-- Node7 -->
+<!-- Node6 -->
 <g id="node6" class="node">
-<title>Node7</title>
+<title>Node6</title>
 <g id="a_node6"><a xlink:href="class_g_p_g_l_l_sentence_parser.html#acbee347184ae22343a9af2515ae57c98" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="155,-39 155,-69 274,-69 274,-39 155,-39"/>
 <text text-anchor="start" x="163" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">GPGLLSentenceParser</text>
@@ -89,24 +89,24 @@
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node7 -->
+<!-- Node1&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
-<title>Node2&#45;&gt;Node7</title>
+<title>Node1&#45;&gt;Node6</title>
 <path fill="none" stroke="midnightblue" d="M97.15,-101.91C118.27,-93.21 145,-82.2 167.52,-72.93"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="168.97,-76.12 176.89,-69.08 166.31,-69.65 168.97,-76.12"/>
 </g>
-<!-- Node8 -->
+<!-- Node7 -->
 <g id="node7" class="node">
-<title>Node8</title>
+<title>Node7</title>
 <g id="a_node7"><a xlink:href="class_observable_value.html#a51cf25d4951d3214021da0c25985838d" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="159.5,-0.5 159.5,-19.5 269.5,-19.5 269.5,-0.5 159.5,-0.5"/>
 <text text-anchor="middle" x="214.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">ObservableValue::set</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node8 -->
+<!-- Node1&#45;&gt;Node7 -->
 <g id="edge6" class="edge">
-<title>Node2&#45;&gt;Node8</title>
+<title>Node1&#45;&gt;Node7</title>
 <path fill="none" stroke="midnightblue" d="M73.4,-101.72C90.35,-82.52 121.85,-49.73 155,-30 159.16,-27.52 163.67,-25.3 168.28,-23.31"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="169.78,-26.49 177.8,-19.57 167.22,-19.97 169.78,-26.49"/>
 </g>
