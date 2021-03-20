@@ -11,7 +11,7 @@
 /**
  * @brief Represents an ADAfruit (or compatible) BME280 temperature / pressure /
  * humidity sensor.
- * 
+ *
  * The constructor creates a pointer to the sensor and
  * starts up the sensor. The pointer is passed to BME280value, which retrieves
  * the specified value. If you want to change any of the values with the
@@ -19,10 +19,11 @@
  * after you instantiate the BME280 and before you start using it, with:
  * sensor_object->adafruit_bme280->setSampling(); See the Adafruit
  * library for details.
- * @see https://github.com/adafruit/Adafruit_BME280_Library/blob/master/Adafruit_BME280.h
- * 
- * @param addr The memory address where the sensor can be read. Default is 0x77. Some
- * sensors use, or can use, different addresses - check your datasheet.
+ * @see
+ *https://github.com/adafruit/Adafruit_BME280_Library/blob/master/Adafruit_BME280.h
+ *
+ * @param addr The memory address where the sensor can be read. Default is 0x77.
+ *Some sensors use, or can use, different addresses - check your datasheet.
  **/
 class BME280 {
  public:
@@ -34,19 +35,18 @@ class BME280 {
   void check_status();
 };
 
-
-/** 
+/**
  * @brief BME280Value reads and outputs the specified value of a BME280 sensor
- * 
+ *
  * @param bme280 A pointer to an instance of a BME280.
- * 
+ *
  * @param val_type The type of value you're reading: temperature, pressure, or
  * humidity.
- * 
+ *
  * @param read_delay How often to read the sensor - in ms.
- * 
+ *
  * @param config_path Path in the Config UI to configure read_delay
- **/ 
+ **/
 class BME280Value : public NumericSensor {
  public:
   enum BME280ValType { temperature, pressure, humidity };
