@@ -11,6 +11,7 @@
 #include "signalk/signalk_output.h"
 #include "transforms/dew_point.h"
 #include "transforms/air_density.h"
+#include "transforms/heat_index.h"
 
 ReactESP app([]() {
 #ifndef SERIAL_DEBUG_DISABLED
@@ -66,8 +67,15 @@ ReactESP app([]() {
   auto* airDensity = new AirDensity();
 
   airDensity->connect_from(bme_temperature,bme_humidity,bme_pressure)
-          ->connect_to(new SKOutputNumber("environment.inside.engineroom.airDensity"));
+          ->connect_to(new SKOutputNumber("environment.outside.airDensity"));
 
+  // Use the transform heatIndex to calculate the heat index based upon the temperature and humidity.
+  auto* heat_index_temperature = new HeatIndexTemperature();
+
+  heat_index_temperature->connect_from(bme_temperature, bme_humidity)
+          ->connect_to(new SKOutputNumber("environment.outside.heatIndexTemperature"))
+          ->connect_to(new HeatIndexEffect)
+          ->connect_to(new SKOutputString("enivronment.outside.heatIndexEffect"));
 
   sensesp_app->enable();
 });
