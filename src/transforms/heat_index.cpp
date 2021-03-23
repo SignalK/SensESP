@@ -52,15 +52,15 @@ void HeatIndexTemperature::set_input(float input, uint8_t inputChannel) {
 HeatIndexEffect::HeatIndexEffect() : Transform<float, String>() {}
 
 void HeatIndexEffect::set_input(float input, uint8_t inputChannel) {
-  float heat_index_temperature = input;
+  float heat_index_temperature = input + 273.15; // celsius = kelvin + 273.15
   String heat_index_effect = "";
-  if (heat_index_temperature > 273.15 + 54) {
+  if (heat_index_temperature > 54) {
     heat_index_effect = "Extreme danger";
-  } else if (heat_index_temperature > 273.15 + 41) {
+  } else if (heat_index_temperature > 41) {
     heat_index_effect = "Danger";
-  } else if (heat_index_temperature > 273.15 + 32) {
+  } else if (heat_index_temperature > 32) {
     heat_index_effect = "Extreme Caution";
-  } else if (heat_index_temperature > 273.15 + 27) {
+  } else if (heat_index_temperature > 27) {
     heat_index_effect + "Caution";
   }
 
