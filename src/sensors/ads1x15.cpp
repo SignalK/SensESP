@@ -4,8 +4,8 @@
 
 template <class T_Ada_1x15>
 ADS1x15<T_Ada_1x15>::ADS1x15(uint8_t addr, adsGain_t gain) : gain_{gain} {
-  ads_ = new T_Ada_1x15(addr);
-  ads_->begin();
+  ads_ = new T_Ada_1x15();
+  ads_->begin(addr);
   ads_->setGain(gain_);
 }
 

@@ -1,7 +1,7 @@
 #ifndef _ads1x15_voltage_H
 #define _ads1x15_voltage_H
 
-#include <Adafruit_ADS1015.h>
+#include <Adafruit_ADS1X15.h>
 
 #include "transforms/transform.h"
 
