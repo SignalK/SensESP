@@ -36,6 +36,11 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     [ "frequency.h", "frequency_8h.html", [
       [ "Frequency", "class_frequency.html", "class_frequency" ]
     ] ],
+    [ "heat_index.cpp", "heat__index_8cpp.html", null ],
+    [ "heat_index.h", "heat__index_8h.html", [
+      [ "HeatIndexTemperature", "class_heat_index_temperature.html", "class_heat_index_temperature" ],
+      [ "HeatIndexEffect", "class_heat_index_effect.html", "class_heat_index_effect" ]
+    ] ],
     [ "hysteresis.h", "hysteresis_8h.html", "hysteresis_8h" ],
     [ "integrator.cpp", "integrator_8cpp.html", null ],
     [ "integrator.h", "integrator_8h.html", "integrator_8h" ],
