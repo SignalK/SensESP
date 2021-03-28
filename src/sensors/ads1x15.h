@@ -1,8 +1,7 @@
 #ifndef _adds1x15_H_
 #define _adds1x15_H_
 
-#include <Adafruit_ADS1015.h>
-#include <Wire.h>
+#include <Adafruit_ADS1X15.h>
 
 #include "sensor.h"
 
