@@ -13,7 +13,7 @@ void DewPoint::set_input(float input, uint8_t inputChannel) {
           // Dew point is calculated with Arden Buck Equation and Arden Buck valuation sets
           // For more info on the calculation see https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
 
-          float temp_celcius = inputs[0] - 273.15; 
+          float temp_celsius = inputs[0] - 273.15; 
           float relative_humidity = inputs[1];  
 
           
@@ -23,12 +23,12 @@ void DewPoint::set_input(float input, uint8_t inputChannel) {
           const float d = 234.5; 
           
           // valuation set for temperatures below 0°C
-          if (temp_celcius<0.0) {
+          if (temp_celsius<0.0) {
             b = 17.966;
             c = 247.15; 
           }
 
-          float gamma = log(relative_humidity * exp(( b - (temp_celcius / d)) * (temp_celcius /  (c + temp_celcius ))));
+          float gamma = log(relative_humidity * exp(( b - (temp_celsius / d)) * (temp_celsius /  (c + temp_celsius ))));
           float dew_point = (c * gamma) / (b - gamma);
 
   this->emit(dew_point + 273.15);  // Kelvin is Celsius + 273.15
