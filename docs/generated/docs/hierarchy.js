@@ -133,6 +133,7 @@ var hierarchy =
         [ "CurveInterpolator", "class_curve_interpolator.html", null ],
         [ "DewPoint", "class_dew_point.html", null ],
         [ "Difference", "class_difference.html", null ],
+        [ "HeatIndexTemperature", "class_heat_index_temperature.html", null ],
         [ "Median", "class_median.html", null ],
         [ "MovingAverage", "class_moving_average.html", null ],
         [ "VoltageDividerR1", "class_voltage_divider_r1.html", null ],
@@ -146,6 +147,9 @@ var hierarchy =
           [ "RoundToInt", "class_round_to_int.html", null ]
         ] ]
       ] ]
+    ] ],
+    [ "Transform< float, String >", "class_transform.html", [
+      [ "HeatIndexEffect", "class_heat_index_effect.html", null ]
     ] ],
     [ "Transform< IN, OUT >", "class_transform.html", [
       [ "LambdaTransform< IN, OUT, P1, P2, P3, P4, P5, P6 >", "class_lambda_transform.html", null ],
