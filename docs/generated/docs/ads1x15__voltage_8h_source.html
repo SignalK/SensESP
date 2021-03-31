@@ -33,7 +33,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('ads1x15__voltage_8h_source.html',''); 
 <a href="ads1x15__voltage_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _ads1x15_voltage_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define _ads1x15_voltage_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;Adafruit_ADS1015.h&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;Adafruit_ADS1X15.h&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="transform_8h.html">transforms/transform.h</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
@@ -121,13 +121,13 @@ $(document).ready(function(){initNavTree('ads1x15__voltage_8h_source.html',''); 
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aads1x15_8h_html_a287de91a50d45b83ad2b999a32f96846"><div class="ttname"><a href="ads1x15_8h.html#a287de91a50d45b83ad2b999a32f96846">ADS1x15CHIP_t</a></div><div class="ttdeci">ADS1x15CHIP_t</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15_8h_source.html#l00098">ads1x15.h:98</a></div></div>
+<div class="ttc" id="aads1x15_8h_html_a287de91a50d45b83ad2b999a32f96846"><div class="ttname"><a href="ads1x15_8h.html#a287de91a50d45b83ad2b999a32f96846">ADS1x15CHIP_t</a></div><div class="ttdeci">ADS1x15CHIP_t</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15_8h_source.html#l00097">ads1x15.h:97</a></div></div>
 <div class="ttc" id="aclass_symmetric_transform_html"><div class="ttname"><a href="class_symmetric_transform.html">SymmetricTransform&lt; float &gt;</a></div></div>
 <div class="ttc" id="aclass_a_d_s1x15_voltage_html_af8d855cb9c34ebfe95be202e0192b46f"><div class="ttname"><a href="class_a_d_s1x15_voltage.html#af8d855cb9c34ebfe95be202e0192b46f">ADS1x15Voltage::set_input</a></div><div class="ttdeci">virtual void set_input(float input, uint8_t input_channel=0) override</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15__voltage_8cpp_source.html#l00006">ads1x15_voltage.cpp:6</a></div></div>
 <div class="ttc" id="aclass_a_d_s1x15_voltage_html_a8365ffe36ff36a9ee05e1442803929b6"><div class="ttname"><a href="class_a_d_s1x15_voltage.html#a8365ffe36ff36a9ee05e1442803929b6">ADS1x15Voltage::ADS1x15Voltage</a></div><div class="ttdeci">ADS1x15Voltage(T_ads_1x15 *ads1x15, ADS1x15Channel_t channel=channel_0, uint read_delay=200, String config_path=&quot;&quot;)</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15_8cpp_source.html#l00089">ads1x15.cpp:89</a></div></div>
 <div class="ttc" id="aads1x15__voltage_8h_html_a287de91a50d45b83ad2b999a32f96846a8d7ed005368ca618b3f7022dc1cb5c32"><div class="ttname"><a href="ads1x15__voltage_8h.html#a287de91a50d45b83ad2b999a32f96846a8d7ed005368ca618b3f7022dc1cb5c32">ADS1115chip</a></div><div class="ttdeci">@ ADS1115chip</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15__voltage_8h_source.html#l00011">ads1x15_voltage.h:11</a></div></div>
 <div class="ttc" id="aclass_a_d_s1x15_voltage_html_abc592cac1f7213cefc1a93811eafc077"><div class="ttname"><a href="class_a_d_s1x15_voltage.html#abc592cac1f7213cefc1a93811eafc077">ADS1x15Voltage::chip</a></div><div class="ttdeci">ADS1x15CHIP_t chip</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15__voltage_8h_source.html#l00046">ads1x15_voltage.h:46</a></div></div>
-<div class="ttc" id="aclass_a_d_s1x15_voltage_html"><div class="ttname"><a href="class_a_d_s1x15_voltage.html">ADS1x15Voltage</a></div><div class="ttdoc">Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v...</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15_8h_source.html#l00123">ads1x15.h:123</a></div></div>
+<div class="ttc" id="aclass_a_d_s1x15_voltage_html"><div class="ttname"><a href="class_a_d_s1x15_voltage.html">ADS1x15Voltage</a></div><div class="ttdoc">Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v...</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15_8h_source.html#l00122">ads1x15.h:122</a></div></div>
 <div class="ttc" id="atransform_8h_html"><div class="ttname"><a href="transform_8h.html">transform.h</a></div></div>
 <div class="ttc" id="aclass_a_d_s1x15_voltage_html_a203c5de138972cc1816552d4588e532d"><div class="ttname"><a href="class_a_d_s1x15_voltage.html#a203c5de138972cc1816552d4588e532d">ADS1x15Voltage::gain</a></div><div class="ttdeci">adsGain_t gain</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15__voltage_8h_source.html#l00047">ads1x15_voltage.h:47</a></div></div>
 <div class="ttc" id="aads1x15__voltage_8h_html_a287de91a50d45b83ad2b999a32f96846a1efc5b453be0b8efe9d2827c22c94669"><div class="ttname"><a href="ads1x15__voltage_8h.html#a287de91a50d45b83ad2b999a32f96846a1efc5b453be0b8efe9d2827c22c94669">ADS1015chip</a></div><div class="ttdeci">@ ADS1015chip</div><div class="ttdef"><b>Definition:</b> <a href="ads1x15__voltage_8h_source.html#l00011">ads1x15_voltage.h:11</a></div></div>
