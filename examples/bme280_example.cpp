@@ -75,7 +75,7 @@ ReactESP app([]() {
   heat_index_temperature->connect_from(bme_temperature, bme_humidity)
           ->connect_to(new SKOutputNumber("environment.outside.heatIndexTemperature"))
           ->connect_to(new HeatIndexEffect)
-          ->connect_to(new SKOutputString("enivronment.outside.heatIndexEffect"));
-
+          ->connect_to(new SKOutputString("environment.outside.heatIndexEffect"));
+ 
   sensesp_app->enable();
 });
