@@ -35,6 +35,8 @@ var annotated_dup =
     [ "GPGLLSentenceParser", "class_g_p_g_l_l_sentence_parser.html", "class_g_p_g_l_l_sentence_parser" ],
     [ "GPRMCSentenceParser", "class_g_p_r_m_c_sentence_parser.html", "class_g_p_r_m_c_sentence_parser" ],
     [ "GPSInput", "class_g_p_s_input.html", "class_g_p_s_input" ],
+    [ "HeatIndexEffect", "class_heat_index_effect.html", "class_heat_index_effect" ],
+    [ "HeatIndexTemperature", "class_heat_index_temperature.html", "class_heat_index_temperature" ],
     [ "HTTPServer", "class_h_t_t_p_server.html", "class_h_t_t_p_server" ],
     [ "Hysteresis", "class_hysteresis.html", "class_hysteresis" ],
     [ "INA219", "class_i_n_a219.html", "class_i_n_a219" ],

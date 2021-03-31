@@ -33,7 +33,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('dew__point_8cpp_source.html',''); init
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;          <span class="comment">// Dew point is calculated with Arden Buck Equation and Arden Buck valuation sets</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;          <span class="comment">// For more info on the calculation see https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;          <span class="keywordtype">float</span> temp_celcius = inputs[0] - 273.15; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;          <span class="keywordtype">float</span> temp_celsius = inputs[0] - 273.15; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;          <span class="keywordtype">float</span> relative_humidity = inputs[1];  </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;          </div>
@@ -119,12 +119,12 @@ $(document).ready(function(){initNavTree('dew__point_8cpp_source.html',''); init
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;          <span class="keyword">const</span> <span class="keywordtype">float</span> d = 234.5; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;          </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;          <span class="comment">// valuation set for temperatures below 0°C</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;          <span class="keywordflow">if</span> (temp_celcius&lt;0.0) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;          <span class="keywordflow">if</span> (temp_celsius&lt;0.0) {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            b = 17.966;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            c = 247.15; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;          }</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;          <span class="keywordtype">float</span> gamma = log(relative_humidity * exp(( b - (temp_celcius / d)) * (temp_celcius /  (c + temp_celcius ))));</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;          <span class="keywordtype">float</span> gamma = log(relative_humidity * exp(( b - (temp_celsius / d)) * (temp_celsius /  (c + temp_celsius ))));</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;          <span class="keywordtype">float</span> dew_point = (c * gamma) / (b - gamma);</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  this-&gt;emit(dew_point + 273.15);  <span class="comment">// Kelvin is Celsius + 273.15</span></div>
