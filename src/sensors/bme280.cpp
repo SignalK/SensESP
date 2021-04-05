@@ -17,7 +17,7 @@ void BME280::check_status() {
     debugI(
         "Could not find a valid BME280 sensor. Check wiring, address, and "
         "sensor ID.");
-    debugI("SensorID is: 0x%d", adafruit_bme280_->sensorID());
+    debugI("SensorID is: 0x%T", adafruit_bme280_->sensorID());
     debugI("0xFF: is a BMP180 or BMP085, or a bad address");
     debugI("0x56-0x58 is a BMP280");
     debugI("0x60 is a BME280");
