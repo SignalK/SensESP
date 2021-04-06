@@ -4,7 +4,6 @@
 #include <set>
 
 #include <DallasTemperature.h>
-#include <OneWire.h>
 
 #include "sensor.h"
 
