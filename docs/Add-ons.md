@@ -22,6 +22,7 @@ If you want to have your own project added to the list, [make a PR](https://gith
 ### Temperature and humidity
 
 - [DHTxx](https://github.com/SensESP/DHTxx): Library for reading low-cost DHTxx Temperature and Humidity Sensors including DHT11, DHT21, and DHT22.
+- [SH-ESP32 temperature sensing tutorial](https://hatlabs.github.io/sh-esp32/pages/tutorials/onewire-temperature/): A step-by-step tutorial for building an NMEA 2000 enabled SensESP temperature sensor device with the SH-ESP32 development board
 
 ## Examples and related projects
 
