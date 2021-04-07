@@ -1,7 +1,6 @@
 #include "onewire_temperature.h"
 
 #include <DallasTemperature.h>
-#include <OneWire.h>
 
 #include <algorithm>
 
@@ -139,8 +138,17 @@ void OneWireTemperature::update() {
 }
 
 void OneWireTemperature::read_value() {
+  float tempC = dts_->sensors_->getTempC(address_.data());
+  // we're on purpose ignoring the "conversion not ready" value (+85°C)
+  // because the update method always waits for 750 ms before reading the value
+  if (tempC == DEVICE_DISCONNECTED_C) {
+    char ow_addr_str[24];
+    owda_to_string(ow_addr_str, address_);
+    debugW("Failed to read 1-Wire device %s", ow_addr_str);
+    return;
+  }
   // getTempC returns degrees Celsius but Signal K expects Kelvin
-  this->emit(dts_->sensors_->getTempC(address_.data()) + 273.15);
+  this->emit(tempC + 273.15);
 }
 
 void OneWireTemperature::get_configuration(JsonObject& root) {

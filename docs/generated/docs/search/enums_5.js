@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['orientationvaltype_1599',['OrientationValType',['../class_read9_d_o_f.html#adce59e3cd83086f9c600bba27263739e',1,'Read9DOF']]]
+  ['sht31valtype_1534',['SHT31ValType',['../class_s_h_t31_value.html#a09fe48db07d2eac1604baaed79855247',1,'SHT31Value']]],
+  ['skpermissions_1535',['SKPermissions',['../sensesp__app_8h.html#a0ddfe34dcd9d9aa9ba14fddb05ad38f2',1,'sensesp_app.h']]],
+  ['standardsensors_1536',['StandardSensors',['../sensesp__app_8h.html#abeacf3e22e82961fc23c43cad734ebbd',1,'sensesp_app.h']]],
+  ['systemstatus_1537',['SystemStatus',['../system__status__controller_8h.html#a2cc3130d597bd9e7880b6497496b4f35',1,'system_status_controller.h']]]
 ];

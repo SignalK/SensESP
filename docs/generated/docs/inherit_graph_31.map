@@ -1,5 +1,19 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="5,35,137,61"/>
-<area shape="rect" id="node2" href="$class_integrator_t.html" title="Integrator integrates (accumulates) the incoming values." alt="" coords="187,5,323,32"/>
-<area shape="rect" id="node3" href="$class_threshold_transform.html" title="A Transform base class that translates the value of type C into value of type P. Base class for class..." alt="" coords="185,57,324,98"/>
+<area shape="rect" id="node1" href="$class_transform.html" title=" " alt="" coords="5,303,168,329"/>
+<area shape="rect" id="node2" href="$class_lambda_transform.html" title=" " alt="" coords="216,130,384,171"/>
+<area shape="rect" id="node4" href="$class_symmetric_transform.html" title=" " alt="" coords="228,327,372,369"/>
+<area shape="rect" id="node3" href="$class_linear.html" title="Performs a linear transform on the input value: output = (input * multiplier) + offset." alt="" coords="481,5,538,32"/>
+<area shape="rect" id="node5" href="$class_air_density.html" title="Transforms temperature, relative humidity and pressure in air density." alt="" coords="468,56,551,83"/>
+<area shape="rect" id="node6" href="$class_analog_voltage.html" title="A transform that takes the output of an analog&#45;to&#45;digital converter and outputs the voltage that went..." alt="" coords="456,107,563,133"/>
+<area shape="rect" id="node7" href="$class_angle_correction.html" title="Add a value to an angle input (in radians). The output value is wrapped to a range between [0,..." alt="" coords="452,157,567,184"/>
+<area shape="rect" id="node8" href="$class_change_filter.html" title="A numeric passthrough transform that will only pass that value through if it is &quot;sufficiently differe..." alt="" coords="461,208,557,235"/>
+<area shape="rect" id="node9" href="$class_curve_interpolator.html" title="Uses a collection of input/output samples that approximate a non&#45;linear curve and outputs a value on ..." alt="" coords="448,259,571,285"/>
+<area shape="rect" id="node10" href="$class_dew_point.html" title="Transforms temperature and relative humidity in dew point temperature." alt="" coords="470,309,549,336"/>
+<area shape="rect" id="node11" href="$class_difference.html" title=" " alt="" coords="468,360,551,387"/>
+<area shape="rect" id="node12" href="$class_heat_index_temperature.html" title="Transforms temperature and relative humidity in heat index temperature." alt="" coords="432,411,587,437"/>
+<area shape="rect" id="node13" href="$class_median.html" title="Outputs the median value of sample_size inputs." alt="" coords="477,461,541,488"/>
+<area shape="rect" id="node14" href="$class_moving_average.html" title="Outputs the moving average of the last sample_size inputs." alt="" coords="453,512,565,539"/>
+<area shape="rect" id="node15" href="$class_voltage_divider_r1.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit." alt="" coords="447,563,571,589"/>
+<area shape="rect" id="node16" href="$class_voltage_divider_r2.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R2 in the circuit." alt="" coords="447,613,571,640"/>
+<area shape="rect" id="node17" href="$class_voltage_multiplier.html" title="OBSOLETE: Since you can now apply an &quot;output_scale&quot; to the AnalogInput sensor, you don&#39;t need this tr..." alt="" coords="450,664,569,691"/>
 </map>

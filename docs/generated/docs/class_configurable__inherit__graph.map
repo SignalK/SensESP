@@ -1,19 +1,19 @@
 <map id="Configurable" name="Configurable">
-<area shape="rect" id="node1" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,376,100,403"/>
-<area shape="rect" id="node2" href="$class_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="173,249,261,276"/>
-<area shape="rect" id="node3" href="$class_rgb_led.html" title="A special device object that can be used to control a multi&#45;channel color rgb LED light using up to 3..." alt="" coords="184,300,251,327"/>
-<area shape="rect" id="node4" href="$class_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="186,351,249,377"/>
-<area shape="rect" id="node31" href="$class_s_k_put_request_base.html" title="A base class for all template variations of the PUT request class SKPutRequest. This base class keeps..." alt="" coords="148,401,287,428"/>
-<area shape="rect" id="node33" href="$class_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="162,452,273,479"/>
-<area shape="rect" id="node34" href="$class_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="178,503,257,529"/>
+<area shape="rect" id="node1" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,351,100,377"/>
+<area shape="rect" id="node2" href="$class_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="173,224,261,251"/>
+<area shape="rect" id="node3" href="$class_rgb_led.html" title="A special device object that can be used to control a multi&#45;channel color rgb LED light using up to 3..." alt="" coords="184,275,251,301"/>
+<area shape="rect" id="node4" href="$class_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="186,325,249,352"/>
+<area shape="rect" id="node30" href="$class_s_k_put_request_base.html" title="A base class for all template variations of the PUT request class SKPutRequest. This base class keeps..." alt="" coords="148,376,287,403"/>
+<area shape="rect" id="node32" href="$class_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="162,427,273,453"/>
+<area shape="rect" id="node33" href="$class_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="178,477,257,504"/>
 <area shape="rect" id="node5" href="$class_dallas_temperature_sensors.html" title="Finds all 1&#45;Wire temperature sensors that are connected to the ESP and makes the address(es) and temp..." alt="" coords="335,56,513,83"/>
 <area shape="rect" id="node6" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="380,107,468,133"/>
-<area shape="rect" id="node10" href="$class_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="385,249,463,276"/>
-<area shape="rect" id="node11" href="$class_g_p_s_input.html" title="Support for a GPS module communicating with NMEA&#45;0183 messages over a serial interface." alt="" coords="385,300,463,327"/>
-<area shape="rect" id="node12" href="$class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor." alt="" coords="391,351,457,377"/>
-<area shape="rect" id="node13" href="$class_integer_sensor.html" title="A Sensor whose output is an integer." alt="" coords="373,401,475,428"/>
-<area shape="rect" id="node14" href="$class_numeric_sensor.html" title="A Sensor whose output is a float." alt="" coords="368,452,480,479"/>
-<area shape="rect" id="node29" href="$class_string_sensor.html" title="A Sensor whose output is a String." alt="" coords="375,503,473,529"/>
+<area shape="rect" id="node10" href="$class_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="385,224,463,251"/>
+<area shape="rect" id="node11" href="$class_g_p_s_input.html" title="Support for a GPS module communicating with NMEA&#45;0183 messages over a serial interface." alt="" coords="385,275,463,301"/>
+<area shape="rect" id="node12" href="$class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor." alt="" coords="391,325,457,352"/>
+<area shape="rect" id="node13" href="$class_integer_sensor.html" title="A Sensor whose output is an integer." alt="" coords="373,376,475,403"/>
+<area shape="rect" id="node14" href="$class_numeric_sensor.html" title="A Sensor whose output is a float." alt="" coords="368,427,480,453"/>
+<area shape="rect" id="node28" href="$class_string_sensor.html" title="A Sensor whose output is a String." alt="" coords="375,477,473,504"/>
 <area shape="rect" id="node7" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="579,5,712,32"/>
 <area shape="rect" id="node8" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="578,56,713,83"/>
 <area shape="rect" id="node9" href="$class_digital_input_state.html" title="DigitalInputState reports the state of a digital pin every read_delay ms." alt="" coords="586,107,705,133"/>
@@ -24,13 +24,12 @@
 <area shape="rect" id="node20" href="$class_i_n_a219_value.html" title="INA219Value reads and outputs the specified value of an INA219 sensor." alt="" coords="596,376,695,403"/>
 <area shape="rect" id="node21" href="$class_m_a_x31856_thermocouple.html" title="Reads the temperature from an Adafruit MAX31856 (or compatible) thermocouple breakout board...." alt="" coords="561,427,729,453"/>
 <area shape="rect" id="node22" href="$class_one_wire_temperature.html" title="Used to read the temperature from a single 1&#45;Wire temperature sensor. If you have X sensors connected..." alt="" coords="573,477,718,504"/>
-<area shape="rect" id="node23" href="$class_read9_d_o_f.html" title="sets up the combo FXOS8700 + FXAS21002 sensor and outputs the specified orientation parameter value." alt="" coords="601,528,689,555"/>
-<area shape="rect" id="node24" href="$class_s_h_t31_value.html" title="SHT31Value reads and outputs the specified value of an SHT31 sensor." alt="" coords="598,579,693,605"/>
-<area shape="rect" id="node25" href="$class_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="603,629,687,656"/>
-<area shape="rect" id="node26" href="$class_ultrasonic_distance.html" title="Reads a DYP&#45;A02YYWM&#45;V1.0 (and possibly other types) ultrasonic sensor and outputs the number of micro..." alt="" coords="579,680,712,707"/>
-<area shape="rect" id="node27" href="$class_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="613,731,677,757"/>
-<area shape="rect" id="node28" href="$class_wifi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="605,781,686,808"/>
+<area shape="rect" id="node23" href="$class_s_h_t31_value.html" title="SHT31Value reads and outputs the specified value of an SHT31 sensor." alt="" coords="598,528,693,555"/>
+<area shape="rect" id="node24" href="$class_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="603,579,687,605"/>
+<area shape="rect" id="node25" href="$class_ultrasonic_distance.html" title="Reads a DYP&#45;A02YYWM&#45;V1.0 (and possibly other types) ultrasonic sensor and outputs the number of micro..." alt="" coords="579,629,712,656"/>
+<area shape="rect" id="node26" href="$class_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="613,680,677,707"/>
+<area shape="rect" id="node27" href="$class_wifi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="605,731,686,757"/>
 <area shape="rect" id="node16" href="$class_a_d_s1x15_voltage.html" title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v..." alt="" coords="777,158,948,199"/>
-<area shape="rect" id="node30" href="$class_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="603,832,687,859"/>
-<area shape="rect" id="node32" href="$class_s_k_put_request.html" title="Used to send requests to the server to change the value of the specified path to a specific value acc..." alt="" coords="353,553,495,580"/>
+<area shape="rect" id="node29" href="$class_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="603,781,687,808"/>
+<area shape="rect" id="node31" href="$class_s_k_put_request.html" title="Used to send requests to the server to change the value of the specified path to a specific value acc..." alt="" coords="353,528,495,555"/>
 </map>

@@ -56,11 +56,11 @@
       "name": "WebSockets"
     },
     {
-      "name": "OneWire",
-      "version": "paulstoffregen/OneWire"
+      "name": "OneWireNg"
     },
     {
-      "name": "DallasTemperature"
+      "name": "DallasTemperature",
+      "version": "https://github.com/pstolarz/Arduino-Temperature-Control-Library"
     },
     {
       "name": "ESPTrueRandom",
@@ -82,15 +82,6 @@
     { 
       "name": "Adafruit BMP280 Library"
     },
-    { 
-      "name": "Adafruit FXAS21002C"
-    },
-    { 
-      "name": "Adafruit FXOS8700"
-    },
-    {
-      "name": "Adafruit Sensor Calibration"
-    },
     {
       "name": "Adafruit SHT31 Library"
     },
@@ -101,20 +92,14 @@
       "name": "Adafruit MAX31856 library"
     },
     {
-      "name": "Adafruit Unified Sensor"
-    },
-    {
       "name": "Adafruit BusIO"
-    },
-    {
-      "name": "Adafruit AHRS"
     },
     {
       "name": "RemoteDebug",
       "version": "https://github.com/JoaoLopesF/RemoteDebug.git#0b5a9c1a49fd2ade0e3cadc3a3707781e819359a" 
     }
   ],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "frameworks": "arduino",
   "platforms": "*"
 }
