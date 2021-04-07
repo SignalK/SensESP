@@ -33,7 +33,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.0.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -166,161 +166,180 @@ $(document).ready(function(){initNavTree('networking_8cpp_source.html',''); init
 <div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_networking.html#a8513b8883900f67fab0a56a9b2c9ae18">   70</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a8513b8883900f67fab0a56a9b2c9ae18">Networking::setup_saved_ssid</a>() {</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiDisconnected);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="class_networking.html#ad490cf0e51f5f285917e5421bbda3c6e">setup_wifi_callbacks</a>();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  debugI(<span class="stringliteral">&quot;Connecting to wifi %s.&quot;</span>, ap_ssid.c_str());</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_networking.html#a6d07c9b3acdfef3755e5ecf3a3fbd1cb">   78</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a6d07c9b3acdfef3755e5ecf3a3fbd1cb">Networking::wifi_station_connected</a>() {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    debugI(<span class="stringliteral">&quot;Connected to wifi, SSID: %s (signal: %d)&quot;</span>, WiFi.SSID().c_str(),</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;           WiFi.RSSI());</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    debugI(<span class="stringliteral">&quot;IP address of Device: %s&quot;</span>, WiFi.localIP().toString().c_str());</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiConnectedToAP);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">// this is a workaround for setting the DHCP hostname, suggested in</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// https://github.com/espressif/arduino-esp32/issues/2537</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  WiFi.setHostname(hostname-&gt;get().c_str());</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#elif defined(ESP8266)</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  WiFi.hostname(hostname-&gt;get().c_str());</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_networking.html#ad099c3f937d89fe5aebe94dd40d49da1">   85</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#ad099c3f937d89fe5aebe94dd40d49da1">Networking::wifi_station_disconnected</a>() {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  debugI(<span class="stringliteral">&quot;Disconnected from wifi.&quot;</span>);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiDisconnected);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_networking.html#a1723b5f8aac4e47c52be50e98a8ead91">   90</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a1723b5f8aac4e47c52be50e98a8ead91">Networking::setup_wifi_manager</a>() {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="networking_8cpp.html#ade4bb65788e7b6ea2d2e3e026baf7310">should_save_config</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="class_networking.html#ad490cf0e51f5f285917e5421bbda3c6e">setup_wifi_callbacks</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  debugI(<span class="stringliteral">&quot;Connecting to wifi %s.&quot;</span>, ap_ssid.c_str());</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_networking.html#a6d07c9b3acdfef3755e5ecf3a3fbd1cb">   88</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a6d07c9b3acdfef3755e5ecf3a3fbd1cb">Networking::wifi_station_connected</a>() {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    debugI(<span class="stringliteral">&quot;Connected to wifi, SSID: %s (signal: %d)&quot;</span>, WiFi.SSID().c_str(),</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;           WiFi.RSSI());</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    debugI(<span class="stringliteral">&quot;IP address of Device: %s&quot;</span>, WiFi.localIP().toString().c_str());</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiConnectedToAP);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="comment">// set config save notify callback</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  wifi_manager-&gt;setSaveConfigCallback(<a class="code" href="networking_8cpp.html#a7930cb24915efc348611f4c48d1d5e4c">save_config_callback</a>);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  wifi_manager-&gt;setConfigPortalTimeout(<a class="code" href="networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce">WIFI_CONFIG_PORTAL_TIMEOUT</a>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="class_networking.html#ad099c3f937d89fe5aebe94dd40d49da1">   95</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#ad099c3f937d89fe5aebe94dd40d49da1">Networking::wifi_station_disconnected</a>() {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  debugI(<span class="stringliteral">&quot;Disconnected from wifi.&quot;</span>);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiDisconnected);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#ifdef SERIAL_DEBUG_DISABLED</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  wifi_manager-&gt;setDebugOutput(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  AsyncWiFiManagerParameter custom_hostname(<span class="stringliteral">&quot;hostname&quot;</span>,</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                                            <span class="stringliteral">&quot;Set ESP Device custom hostname&quot;</span>,</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                                            this-&gt;hostname-&gt;get().c_str(), 20);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  wifi_manager-&gt;addParameter(&amp;custom_hostname);</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="class_networking.html#a1723b5f8aac4e47c52be50e98a8ead91">  100</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a1723b5f8aac4e47c52be50e98a8ead91">Networking::setup_wifi_manager</a>() {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="networking_8cpp.html#ade4bb65788e7b6ea2d2e3e026baf7310">should_save_config</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <a class="code" href="class_networking.html#ad490cf0e51f5f285917e5421bbda3c6e">setup_wifi_callbacks</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="comment">// set config save notify callback</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  wifi_manager-&gt;setSaveConfigCallback(<a class="code" href="networking_8cpp.html#a7930cb24915efc348611f4c48d1d5e4c">save_config_callback</a>);</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="comment">// Create a unique SSID for configuring each SensESP Device</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  String config_ssid = this-&gt;hostname-&gt;get();</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  config_ssid = <span class="stringliteral">&quot;Configure &quot;</span> + config_ssid;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* pconfig_ssid = config_ssid.c_str();</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(<a class="code" href="networking_8h.html#af6ea68b534324ac2537398bad7f564f9a91fb26167a66932c36d148bb5fdf98da">WifiState::kWifiManagerActivated</a>);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordflow">if</span> (!wifi_manager-&gt;autoConnect(pconfig_ssid)) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    debugE(<span class="stringliteral">&quot;Failed to connect to wifi and config timed out. Restarting...&quot;</span>);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  wifi_manager-&gt;setConfigPortalTimeout(<a class="code" href="networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce">WIFI_CONFIG_PORTAL_TIMEOUT</a>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#ifdef SERIAL_DEBUG_DISABLED</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  wifi_manager-&gt;setDebugOutput(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  AsyncWiFiManagerParameter custom_hostname(<span class="stringliteral">&quot;hostname&quot;</span>,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                                            <span class="stringliteral">&quot;Set ESP Device custom hostname&quot;</span>,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                                            this-&gt;hostname-&gt;get().c_str(), 20);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  wifi_manager-&gt;addParameter(&amp;custom_hostname);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiDisconnected);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    ESP.restart();</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="comment">// Create a unique SSID for configuring each SensESP Device</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  String config_ssid = this-&gt;hostname-&gt;get();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  config_ssid = <span class="stringliteral">&quot;Configure &quot;</span> + config_ssid;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* pconfig_ssid = config_ssid.c_str();</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  debugI(<span class="stringliteral">&quot;Connected to wifi,&quot;</span>);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  debugI(<span class="stringliteral">&quot;IP address of Device: %s&quot;</span>, WiFi.localIP().toString().c_str());</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiConnectedToAP);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="networking_8cpp.html#ade4bb65788e7b6ea2d2e3e026baf7310">should_save_config</a>) {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    String new_hostname = custom_hostname.getValue();</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    debugI(<span class="stringliteral">&quot;Got new custom hostname: %s&quot;</span>, new_hostname.c_str());</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    this-&gt;hostname-&gt;<a class="code" href="class_observable_value.html#a51cf25d4951d3214021da0c25985838d">set</a>(new_hostname);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    this-&gt;ap_ssid = WiFi.SSID();</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    debugI(<span class="stringliteral">&quot;Got new SSID and password: %s&quot;</span>, ap_ssid.c_str());</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    this-&gt;ap_password = WiFi.psk();</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <a class="code" href="class_configurable.html#a657419f13060caa20c45a41935b9d53a">save_configuration</a>();</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    debugW(<span class="stringliteral">&quot;Restarting in 500ms&quot;</span>);</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <a class="code" href="sensesp_8h.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f">app</a>.onDelay(500, []() { ESP.restart(); });</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;}</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="class_networking.html#a7a3cac2e878aa2c513451f235c70aff7">  140</a></span>&#160;<a class="code" href="class_observable_value.html">ObservableValue&lt;String&gt;</a>* <a class="code" href="class_networking.html#a7a3cac2e878aa2c513451f235c70aff7">Networking::get_hostname</a>() { <span class="keywordflow">return</span> this-&gt;hostname; }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(<a class="code" href="networking_8h.html#af6ea68b534324ac2537398bad7f564f9a91fb26167a66932c36d148bb5fdf98da">WifiState::kWifiManagerActivated</a>);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="comment">// this is a workaround for setting the DHCP hostname, suggested in</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="comment">// https://github.com/espressif/arduino-esp32/issues/2537</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#ifdef ESP32</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  WiFi.setHostname(hostname-&gt;get().c_str());</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#elif defined(ESP8266)</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  WiFi.hostname(hostname-&gt;get().c_str());</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keywordflow">if</span> (!wifi_manager-&gt;autoConnect(pconfig_ssid)) {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    debugE(<span class="stringliteral">&quot;Failed to connect to wifi and config timed out. Restarting...&quot;</span>);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiDisconnected);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    ESP.restart();</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  }</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> SCHEMA_PREFIX[] PROGMEM = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="stringliteral">&quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="stringliteral">&quot;properties&quot;: {</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="stringliteral">)&quot;;</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13">  147</a></span>&#160;<span class="stringliteral">String <a class="code" href="networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13">get_property_row</a>(String key, String title, </span><span class="keywordtype">bool</span> readonly) {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  String readonly_title = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  String readonly_property = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="keywordflow">if</span> (readonly) {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    readonly_title = <span class="stringliteral">&quot; (readonly)&quot;</span>;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    readonly_property = <span class="stringliteral">&quot;,\&quot;readOnly\&quot;:true&quot;</span>;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordflow">return</span> <span class="stringliteral">&quot;\&quot;&quot;</span> + key + <span class="stringliteral">&quot;\&quot;:{\&quot;title\&quot;:\&quot;&quot;</span> + title + readonly_title + <span class="stringliteral">&quot;\&quot;,&quot;</span> +</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;         <span class="stringliteral">&quot;\&quot;type\&quot;:\&quot;string\&quot;&quot;</span> + readonly_property + <span class="stringliteral">&quot;}&quot;</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="class_networking.html#a253025ed2a3c36eb998e7b900155359e">  160</a></span>&#160;String <a class="code" href="class_networking.html#a253025ed2a3c36eb998e7b900155359e">Networking::get_config_schema</a>() {</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  String schema;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="comment">// If hostname is not set by SensESPAppBuilder::set_hostname() in main.cpp,</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="comment">// then preset_hostname will be &quot;SensESP&quot;, and should not be read-only in the</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="comment">// Config UI. If preset_hostname is not &quot;SensESP&quot;, then it was set in</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="comment">// main.cpp, so it should be read-only.</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">bool</span> hostname_preset = preset_hostname != <span class="stringliteral">&quot;SensESP&quot;</span>;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="keywordflow">return</span> String(FPSTR(SCHEMA_PREFIX)) +</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;         <a class="code" href="networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13">get_property_row</a>(<span class="stringliteral">&quot;hostname&quot;</span>, <span class="stringliteral">&quot;ESP device hostname&quot;</span>, hostname_preset) +</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;         <span class="stringliteral">&quot;}}&quot;</span>;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="class_networking.html#a4071208242243ae91f48884294a18429">  172</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a4071208242243ae91f48884294a18429">Networking::get_configuration</a>(JsonObject&amp; root) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  root[<span class="stringliteral">&quot;hostname&quot;</span>] = this-&gt;hostname-&gt;get();</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="class_networking.html#a59d475a2f12b88ef8334274a9a0b1cee">  176</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_networking.html#a59d475a2f12b88ef8334274a9a0b1cee">Networking::set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="keywordflow">if</span> (!config.containsKey(<span class="stringliteral">&quot;hostname&quot;</span>)) {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  }</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="keywordflow">if</span> (preset_hostname == <span class="stringliteral">&quot;SensESP&quot;</span>) {</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    this-&gt;hostname-&gt;<a class="code" href="class_observable_value.html#a51cf25d4951d3214021da0c25985838d">set</a>(config[<span class="stringliteral">&quot;hostname&quot;</span>].as&lt;String&gt;());</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;}</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c">  188</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c">Networking::reset_settings</a>() {</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  ap_ssid = preset_ssid;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  ap_password = preset_password;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <a class="code" href="class_configurable.html#a657419f13060caa20c45a41935b9d53a">save_configuration</a>();</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  WiFi.disconnect(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="comment">// On ESP32, disconnect does not erase previous credentials. Let&#39;s connect</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="comment">// to a bogus network instead</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  WiFi.begin(<span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  debugI(<span class="stringliteral">&quot;Connected to wifi,&quot;</span>);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  debugI(<span class="stringliteral">&quot;IP address of Device: %s&quot;</span>, WiFi.localIP().toString().c_str());</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  this-&gt;<a class="code" href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">emit</a>(WifiState::kWifiConnectedToAP);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="networking_8cpp.html#ade4bb65788e7b6ea2d2e3e026baf7310">should_save_config</a>) {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    String new_hostname = custom_hostname.getValue();</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    debugI(<span class="stringliteral">&quot;Got new custom hostname: %s&quot;</span>, new_hostname.c_str());</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    this-&gt;hostname-&gt;<a class="code" href="class_observable_value.html#a51cf25d4951d3214021da0c25985838d">set</a>(new_hostname);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    this-&gt;ap_ssid = WiFi.SSID();</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    debugI(<span class="stringliteral">&quot;Got new SSID and password: %s&quot;</span>, ap_ssid.c_str());</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    this-&gt;ap_password = WiFi.psk();</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <a class="code" href="class_configurable.html#a657419f13060caa20c45a41935b9d53a">save_configuration</a>();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    debugW(<span class="stringliteral">&quot;Restarting in 500ms&quot;</span>);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <a class="code" href="sensesp_8h.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f">app</a>.onDelay(500, []() { ESP.restart(); });</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;}</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="class_networking.html#a7a3cac2e878aa2c513451f235c70aff7">  159</a></span>&#160;<a class="code" href="class_observable_value.html">ObservableValue&lt;String&gt;</a>* <a class="code" href="class_networking.html#a7a3cac2e878aa2c513451f235c70aff7">Networking::get_hostname</a>() { <span class="keywordflow">return</span> this-&gt;hostname; }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> SCHEMA_PREFIX[] PROGMEM = R<span class="stringliteral">&quot;({</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="stringliteral">&quot;type&quot;: &quot;object&quot;,</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="stringliteral">&quot;properties&quot;: {</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="stringliteral">)&quot;;</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13">  166</a></span>&#160;<span class="stringliteral">String <a class="code" href="networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13">get_property_row</a>(String key, String title, </span><span class="keywordtype">bool</span> readonly) {</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  String readonly_title = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  String readonly_property = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keywordflow">if</span> (readonly) {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    readonly_title = <span class="stringliteral">&quot; (readonly)&quot;</span>;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    readonly_property = <span class="stringliteral">&quot;,\&quot;readOnly\&quot;:true&quot;</span>;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="keywordflow">return</span> <span class="stringliteral">&quot;\&quot;&quot;</span> + key + <span class="stringliteral">&quot;\&quot;:{\&quot;title\&quot;:\&quot;&quot;</span> + title + readonly_title + <span class="stringliteral">&quot;\&quot;,&quot;</span> +</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;         <span class="stringliteral">&quot;\&quot;type\&quot;:\&quot;string\&quot;&quot;</span> + readonly_property + <span class="stringliteral">&quot;}&quot;</span>;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="class_networking.html#a253025ed2a3c36eb998e7b900155359e">  179</a></span>&#160;String <a class="code" href="class_networking.html#a253025ed2a3c36eb998e7b900155359e">Networking::get_config_schema</a>() {</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  String schema;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="comment">// If hostname is not set by SensESPAppBuilder::set_hostname() in main.cpp,</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="comment">// then preset_hostname will be &quot;SensESP&quot;, and should not be read-only in the</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="comment">// Config UI. If preset_hostname is not &quot;SensESP&quot;, then it was set in</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="comment">// main.cpp, so it should be read-only.</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordtype">bool</span> hostname_preset = preset_hostname != <span class="stringliteral">&quot;SensESP&quot;</span>;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordflow">return</span> String(FPSTR(SCHEMA_PREFIX)) +</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;         <a class="code" href="networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13">get_property_row</a>(<span class="stringliteral">&quot;hostname&quot;</span>, <span class="stringliteral">&quot;ESP device hostname&quot;</span>, hostname_preset) +</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;         <span class="stringliteral">&quot;}}&quot;</span>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="class_networking.html#a4071208242243ae91f48884294a18429">  191</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a4071208242243ae91f48884294a18429">Networking::get_configuration</a>(JsonObject&amp; root) {</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  root[<span class="stringliteral">&quot;hostname&quot;</span>] = this-&gt;hostname-&gt;get();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="class_networking.html#a59d475a2f12b88ef8334274a9a0b1cee">  195</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_networking.html#a59d475a2f12b88ef8334274a9a0b1cee">Networking::set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordflow">if</span> (!config.containsKey(<span class="stringliteral">&quot;hostname&quot;</span>)) {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keywordflow">if</span> (preset_hostname == <span class="stringliteral">&quot;SensESP&quot;</span>) {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    this-&gt;hostname-&gt;<a class="code" href="class_observable_value.html#a51cf25d4951d3214021da0c25985838d">set</a>(config[<span class="stringliteral">&quot;hostname&quot;</span>].as&lt;String&gt;());</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  }</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c">  207</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c">Networking::reset_settings</a>() {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  ap_ssid = preset_ssid;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  ap_password = preset_password;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <a class="code" href="class_configurable.html#a657419f13060caa20c45a41935b9d53a">save_configuration</a>();</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  WiFi.disconnect(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="comment">// On ESP32, disconnect does not erase previous credentials. Let&#39;s connect</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="comment">// to a bogus network instead</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  WiFi.begin(<span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_networking_html_a4071208242243ae91f48884294a18429"><div class="ttname"><a href="class_networking.html#a4071208242243ae91f48884294a18429">Networking::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;doc) override final</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00172">networking.cpp:172</a></div></div>
-<div class="ttc" id="aclass_networking_html_a253025ed2a3c36eb998e7b900155359e"><div class="ttname"><a href="class_networking.html#a253025ed2a3c36eb998e7b900155359e">Networking::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00160">networking.cpp:160</a></div></div>
+<div class="ttc" id="aclass_networking_html_a4071208242243ae91f48884294a18429"><div class="ttname"><a href="class_networking.html#a4071208242243ae91f48884294a18429">Networking::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;doc) override final</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00191">networking.cpp:191</a></div></div>
+<div class="ttc" id="aclass_networking_html_a253025ed2a3c36eb998e7b900155359e"><div class="ttname"><a href="class_networking.html#a253025ed2a3c36eb998e7b900155359e">Networking::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00179">networking.cpp:179</a></div></div>
 <div class="ttc" id="anetworking_8h_html"><div class="ttname"><a href="networking_8h.html">networking.h</a></div></div>
-<div class="ttc" id="aclass_networking_html_a7a3cac2e878aa2c513451f235c70aff7"><div class="ttname"><a href="class_networking.html#a7a3cac2e878aa2c513451f235c70aff7">Networking::get_hostname</a></div><div class="ttdeci">ObservableValue&lt; String &gt; * get_hostname()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00140">networking.cpp:140</a></div></div>
-<div class="ttc" id="aclass_networking_html_a207f306c10b8f65ca0904cc26a9ef15c"><div class="ttname"><a href="class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c">Networking::reset_settings</a></div><div class="ttdeci">void reset_settings()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00188">networking.cpp:188</a></div></div>
+<div class="ttc" id="aclass_networking_html_a7a3cac2e878aa2c513451f235c70aff7"><div class="ttname"><a href="class_networking.html#a7a3cac2e878aa2c513451f235c70aff7">Networking::get_hostname</a></div><div class="ttdeci">ObservableValue&lt; String &gt; * get_hostname()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00159">networking.cpp:159</a></div></div>
+<div class="ttc" id="aclass_networking_html_a207f306c10b8f65ca0904cc26a9ef15c"><div class="ttname"><a href="class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c">Networking::reset_settings</a></div><div class="ttdeci">void reset_settings()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00207">networking.cpp:207</a></div></div>
 <div class="ttc" id="aclass_value_producer_html_a461623f7438c5048c224d71d06dfac4b"><div class="ttname"><a href="class_value_producer.html#a461623f7438c5048c224d71d06dfac4b">ValueProducer&lt; WifiState &gt;::emit</a></div><div class="ttdeci">void emit(WifiState new_value)</div><div class="ttdef"><b>Definition:</b> <a href="valueproducer_8h_source.html#l00086">valueproducer.h:86</a></div></div>
 <div class="ttc" id="aclass_observable_value_html"><div class="ttname"><a href="class_observable_value.html">ObservableValue&lt; String &gt;</a></div></div>
 <div class="ttc" id="anetworking_8cpp_html_a7930cb24915efc348611f4c48d1d5e4c"><div class="ttname"><a href="networking_8cpp.html#a7930cb24915efc348611f4c48d1d5e4c">save_config_callback</a></div><div class="ttdeci">void save_config_callback()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00016">networking.cpp:16</a></div></div>
 <div class="ttc" id="aled__blinker_8h_html"><div class="ttname"><a href="led__blinker_8h.html">led_blinker.h</a></div></div>
 <div class="ttc" id="anetworking_8cpp_html_ade4bb65788e7b6ea2d2e3e026baf7310"><div class="ttname"><a href="networking_8cpp.html#ade4bb65788e7b6ea2d2e3e026baf7310">should_save_config</a></div><div class="ttdeci">bool should_save_config</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00014">networking.cpp:14</a></div></div>
 <div class="ttc" id="aclass_configurable_html_a657419f13060caa20c45a41935b9d53a"><div class="ttname"><a href="class_configurable.html#a657419f13060caa20c45a41935b9d53a">Configurable::save_configuration</a></div><div class="ttdeci">virtual void save_configuration()</div><div class="ttdef"><b>Definition:</b> <a href="configurable_8cpp_source.html#l00066">configurable.cpp:66</a></div></div>
-<div class="ttc" id="anetworking_8cpp_html_a48cbc1e96bb919a4d4e7631d26744d13"><div class="ttname"><a href="networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13">get_property_row</a></div><div class="ttdeci">String get_property_row(String key, String title, bool readonly)</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00147">networking.cpp:147</a></div></div>
+<div class="ttc" id="anetworking_8cpp_html_a48cbc1e96bb919a4d4e7631d26744d13"><div class="ttname"><a href="networking_8cpp.html#a48cbc1e96bb919a4d4e7631d26744d13">get_property_row</a></div><div class="ttdeci">String get_property_row(String key, String title, bool readonly)</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00166">networking.cpp:166</a></div></div>
 <div class="ttc" id="aclass_networking_html_a8513b8883900f67fab0a56a9b2c9ae18"><div class="ttname"><a href="class_networking.html#a8513b8883900f67fab0a56a9b2c9ae18">Networking::setup_saved_ssid</a></div><div class="ttdeci">void setup_saved_ssid()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00070">networking.cpp:70</a></div></div>
-<div class="ttc" id="aclass_networking_html_a1723b5f8aac4e47c52be50e98a8ead91"><div class="ttname"><a href="class_networking.html#a1723b5f8aac4e47c52be50e98a8ead91">Networking::setup_wifi_manager</a></div><div class="ttdeci">void setup_wifi_manager()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00090">networking.cpp:90</a></div></div>
+<div class="ttc" id="aclass_networking_html_a1723b5f8aac4e47c52be50e98a8ead91"><div class="ttname"><a href="class_networking.html#a1723b5f8aac4e47c52be50e98a8ead91">Networking::setup_wifi_manager</a></div><div class="ttdeci">void setup_wifi_manager()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00100">networking.cpp:100</a></div></div>
 <div class="ttc" id="aclass_networking_html_abffdf8c391f0e371da4ff59a05b1c085"><div class="ttname"><a href="class_networking.html#abffdf8c391f0e371da4ff59a05b1c085">Networking::Networking</a></div><div class="ttdeci">Networking(String config_path, String ssid, String password, String hostname)</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00018">networking.cpp:18</a></div></div>
 <div class="ttc" id="aclass_configurable_html_aaa54fa6156d9c7f5848d670bd9b18aa9"><div class="ttname"><a href="class_configurable.html#aaa54fa6156d9c7f5848d670bd9b18aa9">Configurable::config_path</a></div><div class="ttdeci">const String config_path</div><div class="ttdef"><b>Definition:</b> <a href="configurable_8h_source.html#l00031">configurable.h:31</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 <div class="ttc" id="anetworking_8h_html_af6ea68b534324ac2537398bad7f564f9a91fb26167a66932c36d148bb5fdf98da"><div class="ttname"><a href="networking_8h.html#af6ea68b534324ac2537398bad7f564f9a91fb26167a66932c36d148bb5fdf98da">WifiState::kWifiNoAP</a></div><div class="ttdeci">@ kWifiNoAP</div></div>
 <div class="ttc" id="aclass_networking_html_ad490cf0e51f5f285917e5421bbda3c6e"><div class="ttname"><a href="class_networking.html#ad490cf0e51f5f285917e5421bbda3c6e">Networking::setup_wifi_callbacks</a></div><div class="ttdeci">void setup_wifi_callbacks()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00050">networking.cpp:50</a></div></div>
 <div class="ttc" id="anetworking_8cpp_html_a6beb3d9ab4141921e87c56b399230fce"><div class="ttname"><a href="networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce">WIFI_CONFIG_PORTAL_TIMEOUT</a></div><div class="ttdeci">#define WIFI_CONFIG_PORTAL_TIMEOUT</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00011">networking.cpp:11</a></div></div>
-<div class="ttc" id="aclass_networking_html_a59d475a2f12b88ef8334274a9a0b1cee"><div class="ttname"><a href="class_networking.html#a59d475a2f12b88ef8334274a9a0b1cee">Networking::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override final</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00176">networking.cpp:176</a></div></div>
+<div class="ttc" id="aclass_networking_html_a59d475a2f12b88ef8334274a9a0b1cee"><div class="ttname"><a href="class_networking.html#a59d475a2f12b88ef8334274a9a0b1cee">Networking::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override final</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00195">networking.cpp:195</a></div></div>
 <div class="ttc" id="aclass_observable_value_html_a51cf25d4951d3214021da0c25985838d"><div class="ttname"><a href="class_observable_value.html#a51cf25d4951d3214021da0c25985838d">ObservableValue::set</a></div><div class="ttdeci">void set(const T &amp;value)</div><div class="ttdef"><b>Definition:</b> <a href="observablevalue_8h_source.html#l00031">observablevalue.h:31</a></div></div>
 <div class="ttc" id="asensesp__app_8cpp_html_ad73d4df2ce4b897a6f527dcc95adde4c"><div class="ttname"><a href="sensesp__app_8cpp.html#ad73d4df2ce4b897a6f527dcc95adde4c">hostname</a></div><div class="ttdeci">ObservableValue&lt; String &gt; * hostname</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app_8cpp_source.html#l00074">sensesp_app.cpp:74</a></div></div>
 <div class="ttc" id="aclass_networking_html_ad17d45ae0397a30afbdb00d605e4f719"><div class="ttname"><a href="class_networking.html#ad17d45ae0397a30afbdb00d605e4f719">Networking::setup</a></div><div class="ttdeci">void setup()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00041">networking.cpp:41</a></div></div>
 <div class="ttc" id="asensesp_8h_html_aaa2ffd80e6f851dc6bb43c95a2c7d26f"><div class="ttname"><a href="sensesp_8h.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f">app</a></div><div class="ttdeci">ReactESP app</div></div>
-<div class="ttc" id="aclass_networking_html_ad099c3f937d89fe5aebe94dd40d49da1"><div class="ttname"><a href="class_networking.html#ad099c3f937d89fe5aebe94dd40d49da1">Networking::wifi_station_disconnected</a></div><div class="ttdeci">void wifi_station_disconnected()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00085">networking.cpp:85</a></div></div>
+<div class="ttc" id="aclass_networking_html_ad099c3f937d89fe5aebe94dd40d49da1"><div class="ttname"><a href="class_networking.html#ad099c3f937d89fe5aebe94dd40d49da1">Networking::wifi_station_disconnected</a></div><div class="ttdeci">void wifi_station_disconnected()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00095">networking.cpp:95</a></div></div>
 <div class="ttc" id="aclass_configurable_html"><div class="ttname"><a href="class_configurable.html">Configurable</a></div><div class="ttdoc">An object that is capable of having configuration data that can be set remotely using a RESTful API,...</div><div class="ttdef"><b>Definition:</b> <a href="configurable_8h_source.html#l00015">configurable.h:15</a></div></div>
-<div class="ttc" id="aclass_networking_html_a6d07c9b3acdfef3755e5ecf3a3fbd1cb"><div class="ttname"><a href="class_networking.html#a6d07c9b3acdfef3755e5ecf3a3fbd1cb">Networking::wifi_station_connected</a></div><div class="ttdeci">void wifi_station_connected()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00078">networking.cpp:78</a></div></div>
+<div class="ttc" id="aclass_networking_html_a6d07c9b3acdfef3755e5ecf3a3fbd1cb"><div class="ttname"><a href="class_networking.html#a6d07c9b3acdfef3755e5ecf3a3fbd1cb">Networking::wifi_station_connected</a></div><div class="ttdeci">void wifi_station_connected()</div><div class="ttdef"><b>Definition:</b> <a href="networking_8cpp_source.html#l00088">networking.cpp:88</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
