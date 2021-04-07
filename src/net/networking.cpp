@@ -70,6 +70,16 @@ void Networking::setup_wifi_callbacks() {
 void Networking::setup_saved_ssid() {
   this->emit(WifiState::kWifiDisconnected);
   setup_wifi_callbacks();
+
+  // this is a workaround for setting the DHCP hostname, suggested in
+  // https://github.com/espressif/arduino-esp32/issues/2537
+  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
+#ifdef ESP32
+  WiFi.setHostname(hostname->get().c_str());
+#elif defined(ESP8266)
+  WiFi.hostname(hostname->get().c_str());
+#endif
+
   WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
 
   debugI("Connecting to wifi %s.", ap_ssid.c_str());
@@ -111,6 +121,15 @@ void Networking::setup_wifi_manager() {
   const char* pconfig_ssid = config_ssid.c_str();
 
   this->emit(WifiState::kWifiManagerActivated);
+
+  // this is a workaround for setting the DHCP hostname, suggested in
+  // https://github.com/espressif/arduino-esp32/issues/2537
+  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
+#ifdef ESP32
+  WiFi.setHostname(hostname->get().c_str());
+#elif defined(ESP8266)
+  WiFi.hostname(hostname->get().c_str());
+#endif
 
   if (!wifi_manager->autoConnect(pconfig_ssid)) {
     debugE("Failed to connect to wifi and config timed out. Restarting...");
