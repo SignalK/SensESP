@@ -31,21 +31,12 @@ var dir_7349e89ef19c117195f8e371603e1b1f =
     ] ],
     [ "onewire_temperature.cpp", "onewire__temperature_8cpp.html", "onewire__temperature_8cpp" ],
     [ "onewire_temperature.h", "onewire__temperature_8h.html", "onewire__temperature_8h" ],
-    [ "orientation_9dof_input.cpp", "orientation__9dof__input_8cpp.html", null ],
-    [ "orientation_9dof_input.h", "orientation__9dof__input_8h.html", [
-      [ "Orientation9DOF", "class_orientation9_d_o_f.html", "class_orientation9_d_o_f" ],
-      [ "Read9DOF", "class_read9_d_o_f.html", "class_read9_d_o_f" ]
-    ] ],
     [ "sensor.cpp", "sensor_8cpp.html", null ],
     [ "sensor.h", "sensor_8h.html", [
       [ "Sensor", "class_sensor.html", "class_sensor" ],
       [ "NumericSensor", "class_numeric_sensor.html", "class_numeric_sensor" ],
       [ "IntegerSensor", "class_integer_sensor.html", "class_integer_sensor" ],
       [ "StringSensor", "class_string_sensor.html", "class_string_sensor" ]
-    ] ],
-    [ "sensor_nxp_fxos8700_fxas21002.cpp", "sensor__nxp__fxos8700__fxas21002_8cpp.html", "sensor__nxp__fxos8700__fxas21002_8cpp" ],
-    [ "sensor_nxp_fxos8700_fxas21002.h", "sensor__nxp__fxos8700__fxas21002_8h.html", [
-      [ "SensorNXP_FXOS8700_FXAS21002", "class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002.html", "class_sensor_n_x_p___f_x_o_s8700___f_x_a_s21002" ]
     ] ],
     [ "sht31.cpp", "sht31_8cpp.html", null ],
     [ "sht31.h", "sht31_8h.html", "sht31_8h" ],

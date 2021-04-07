@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['sht31valtype_1600',['SHT31ValType',['../class_s_h_t31_value.html#a09fe48db07d2eac1604baaed79855247',1,'SHT31Value']]],
-  ['skpermissions_1601',['SKPermissions',['../sensesp__app_8h.html#a0ddfe34dcd9d9aa9ba14fddb05ad38f2',1,'sensesp_app.h']]],
-  ['standardsensors_1602',['StandardSensors',['../sensesp__app_8h.html#abeacf3e22e82961fc23c43cad734ebbd',1,'sensesp_app.h']]],
-  ['systemstatus_1603',['SystemStatus',['../system__status__controller_8h.html#a2cc3130d597bd9e7880b6497496b4f35',1,'system_status_controller.h']]]
+  ['wifistate_1538',['WifiState',['../networking_8h.html#af6ea68b534324ac2537398bad7f564f9',1,'networking.h']]],
+  ['wsconnectionstate_1539',['WSConnectionState',['../ws__client_8h.html#ab2dc4b1ce1326c2f9f7ebe361d6dfed8',1,'ws_client.h']]]
 ];
