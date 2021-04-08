@@ -9,6 +9,7 @@ If you want to have your own project added to the list, [make a PR](https://gith
 ### Attitude
 
 - [NXP Sensor Fusion](https://github.com/BjarneBitscrambler/OrientationSensorFusion-ESP): Orientation sensing and sensor fusion using NXP FXOS8700 magnetometer/accelerometer and FXAS21002 gyroscope sensors
+- [SignalK-Orientation](https://github.com/BjarneBitscrambler/SignalK-Orientation): Library providing vessel and vehicle orientation information in Signal K message format
 
 ### Current and power
 
