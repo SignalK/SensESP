@@ -14,7 +14,7 @@ DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
                                      int interrupt_type, int read_delay,
                                      String config_path)
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
-      IntProducer(),
+      BoolProducer(),
       read_delay_{read_delay},
       triggered_{false} {
   load_configuration();      
