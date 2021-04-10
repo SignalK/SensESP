@@ -75,7 +75,7 @@ ReactESP app([]() {
   // to an SKOutputNumber object
 
   analog_input->connect_to(log_transform)
-      ->connect_to(new SKOutputNumber(sk_path));
+      ->connect_to(new SKOutputFloat(sk_path));
 
   sensesp_app->enable();
 });
