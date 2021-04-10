@@ -26,16 +26,6 @@
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
 
-enum StandardSensors {
-  NONE,
-  UPTIME = 0x01,
-  FREQUENCY = 0x02,
-  FREE_MEMORY = 0x04,
-  IP_ADDRESS = 0x08,
-  WIFI_SIGNAL = 0x10,
-  ALL = 0x1F
-};
-
 void SetupSerialDebug(uint32_t baudrate);
 
 /**
@@ -126,10 +116,6 @@ class SensESPApp {
     this->system_status_led_ = system_status_led;
     return this;
   }
-  const SensESPApp* set_sensors(StandardSensors sensors) {
-    this->sensors_ = sensors;
-    return this;
-  }
 
  private:
   String preset_hostname_ = "SensESP";
@@ -137,11 +123,8 @@ class SensESPApp {
   String wifi_password_ = "";
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
-  StandardSensors sensors_ = ALL;
 
   void initialize();
-  void setup_standard_sensors(ObservableValue<String>* hostname,
-                              StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server_;
   SystemStatusLed* system_status_led_ = NULL;

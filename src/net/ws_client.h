@@ -13,8 +13,6 @@
 
 static const char* NULL_AUTH_TOKEN = "";
 
-static const char* kRequestPermission = "readwrite";
-
 enum class WSConnectionState {
   kWSDisconnected,
   kWSAuthorizing,
