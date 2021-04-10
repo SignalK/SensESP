@@ -71,9 +71,6 @@ void SensESPApp::setup() {
 
   ObservableValue<String>* hostname = networking_->get_hostname();
 
-  // setup standard sensors and their transforms
-  setup_standard_sensors(hostname, sensors_);
-
   // create the SK delta object
 
   sk_delta_ = new SKDelta(hostname->get());
@@ -119,37 +116,6 @@ void SensESPApp::setup() {
   }
   this->system_status_controller_.connect_to(system_status_led_);
   this->ws_client_->get_delta_count_producer().connect_to(system_status_led_);
-}
-
-void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
-                                        StandardSensors enabled_sensors) {
-  if ((enabled_sensors & FREQUENCY) != 0) {
-    connect_1to1_h<SystemHz, SKOutput<float>>(new SystemHz(),
-                                              new SKOutput<float>(), hostname);
-  }
-
-  if ((enabled_sensors & UPTIME) != 0) {
-    connect_1to1_h<Uptime, SKOutput<float>>(new Uptime(), new SKOutput<float>(),
-                                            hostname);
-  }
-
-  // connect freemem
-  if ((enabled_sensors & FREE_MEMORY) != 0) {
-    connect_1to1_h<FreeMem, SKOutput<float>>(new FreeMem(),
-                                             new SKOutput<float>(), hostname);
-  }
-
-  // connect ip address
-
-  if ((enabled_sensors & IP_ADDRESS) != 0) {
-    connect_1to1_h<IPAddrDev, SKOutput<String>>(
-        new IPAddrDev(), new SKOutput<String>(), hostname);
-  }
-
-  if ((enabled_sensors & WIFI_SIGNAL) != 0) {
-    connect_1to1_h<WifiSignal, SKOutput<float>>(
-        new WifiSignal(), new SKOutput<float>(), hostname);
-  }
 }
 
 void SensESPApp::enable() {
