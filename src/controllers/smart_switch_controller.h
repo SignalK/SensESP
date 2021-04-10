@@ -73,7 +73,7 @@ class SmartSwitchController : public BooleanTransform,
        class SyncPath {
           public:
             String sk_sync_path;
-            SKBooleanPutRequest* put_request;
+            SKBoolPutRequest* put_request;
 
             SyncPath();
             SyncPath(String sk_sync_path);
