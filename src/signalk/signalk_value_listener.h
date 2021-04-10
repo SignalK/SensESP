@@ -29,7 +29,7 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
   }
 };
 
-typedef SKValueListener<float> SKNumericListener;
+typedef SKValueListener<float> SKFloatListener;
 typedef SKValueListener<int> SKIntListener;
 typedef SKValueListener<bool> SKBoolListener;
 typedef SKValueListener<String> SKStringListener;
