@@ -36,7 +36,7 @@
  * @param repeat_interval How often to repeat the repeated output, in ms.
  * The default is 250.
  */
-class PressRepeater : public BooleanTransform, public IntegerConsumer {
+class PressRepeater : public BooleanTransform, public IntConsumer {
  public:
   PressRepeater(String config_path = "", int integer_false = 0,
                 int repeat_start_interval = 1500, int repeat_interval = 250);
