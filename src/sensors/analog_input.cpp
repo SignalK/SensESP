@@ -5,7 +5,7 @@
 
 AnalogInput::AnalogInput(uint8_t pin, uint read_delay, String config_path,
                          float output_scale)
-    : NumericSensor(config_path),
+    : FloatSensor(config_path),
       pin{pin},
       read_delay{read_delay},
       output_scale{output_scale} {
