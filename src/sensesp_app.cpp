@@ -38,8 +38,6 @@ void SetupSerialDebug(uint32_t baudrate) {
   debugI("\nSerial debug enabled");
 }
 
-static const char* permission_strings[] = {"readonly", "readwrite", "admin"};
-
 /*
  * This constructor must be only used in SensESPAppBuilder
  */
@@ -92,8 +90,7 @@ void SensESPApp::setup() {
   // create the websocket client
 
   this->ws_client_ =
-      new WSClient("/system/sk", sk_delta_, sk_server_address_, sk_server_port_,
-                   permission_strings[(int)requested_permissions_]);
+      new WSClient("/system/sk", sk_delta_, sk_server_address_, sk_server_port_);
 
   // connect the system status controller
 

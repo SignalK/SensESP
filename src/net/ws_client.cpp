@@ -21,6 +21,8 @@
 
 WSClient* ws_client;
 
+static const char* kRequestPermission = "readwrite";
+
 bool WSClient::test_auth_on_each_connect_ = true;
 
 void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
@@ -44,7 +46,7 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
 }
 
 WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
-                   uint16_t server_port, String permission)
+                   uint16_t server_port)
     : Configurable{config_path} {
   this->sk_delta_ = sk_delta;
 
@@ -52,8 +54,6 @@ WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
   preset_server_port_ = server_port;
   this->server_address_ = server_address;
   this->server_port_ = server_port;
-
-  this->sk_permission_ = permission;
 
   // a WSClient object observes its own connection_state_ member
   // and simply passes through any notification it emits. As a result,
@@ -368,7 +368,7 @@ void WSClient::send_access_request(const String server_address,
   DynamicJsonDocument doc(1024);
   doc["clientId"] = client_id_;
   doc["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
-  doc["permissions"] = this->sk_permission_;
+  doc["permissions"] = kRequestPermission;
   String json_req = "";
   serializeJson(doc, json_req);
 
