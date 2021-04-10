@@ -104,7 +104,7 @@ class SymmetricTransform : public Transform<T, T> {
   SymmetricTransform(String config_path = "") : Transform<T, T>(config_path) {}
 };
 
-typedef SymmetricTransform<float> NumericTransform;
+typedef SymmetricTransform<float> FloatTransform;
 typedef SymmetricTransform<int> IntegerTransform;
 typedef SymmetricTransform<bool> BooleanTransform;
 typedef SymmetricTransform<String> StringTransform;

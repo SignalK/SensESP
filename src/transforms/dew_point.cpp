@@ -2,7 +2,7 @@
 
 // dew point
 
-DewPoint::DewPoint() : NumericTransform() {}
+DewPoint::DewPoint() : FloatTransform() {}
 
 void DewPoint::set_input(float input, uint8_t inputChannel) {
   inputs[inputChannel] = input;

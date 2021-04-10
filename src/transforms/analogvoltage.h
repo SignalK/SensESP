@@ -36,7 +36,7 @@
  * @param config_path The path in the Config UI to configure this transform.
  */
 
-class AnalogVoltage : public NumericTransform {
+class AnalogVoltage : public FloatTransform {
  public:
   AnalogVoltage(float max_voltage = 3.3, float multiplier = 1.0,
                 float offset = 0.0, String config_path = "");

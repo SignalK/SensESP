@@ -1,7 +1,7 @@
 #include "median.h"
 
 Median::Median(unsigned int sample_size, String config_path)
-    : NumericTransform(config_path), sample_size_{sample_size} {
+    : FloatTransform(config_path), sample_size_{sample_size} {
   load_configuration();
   buf_.reserve(sample_size_);
   buf_.clear();

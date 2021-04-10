@@ -15,7 +15,7 @@
  * 
  * @param config_path Path to configure this transform in the Config UI.
  */
-class AngleCorrection : public NumericTransform {
+class AngleCorrection : public FloatTransform {
  public:
   AngleCorrection(float offset, float min_angle = 0, String config_path = "");
   virtual void set_input(float input, uint8_t inputChannel = 0) override;

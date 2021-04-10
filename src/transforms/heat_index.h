@@ -11,7 +11,7 @@
  * the NOAA NWS. More info about the equation can be found at
  * https://en.wikipedia.org/wiki/Heat_index
  */
-class HeatIndexTemperature : public NumericTransform {
+class HeatIndexTemperature : public FloatTransform {
  public:
   HeatIndexTemperature();
   virtual void set_input(float input, uint8_t inputChannel) override;
