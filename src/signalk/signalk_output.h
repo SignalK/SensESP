@@ -111,7 +111,7 @@ class SKOutputNumeric : public SKOutput<T> {
          SKOutputNumeric(sk_path, config_path, new SKMetadata(units)) {}
 };
 
-typedef SKOutputNumeric<float> SKOutputNumber;
+typedef SKOutputNumeric<float> SKOutputFloat;
 typedef SKOutputNumeric<int> SKOutputInt;
 typedef SKOutput<bool> SKOutputBool;
 typedef SKOutput<String> SKOutputString;
