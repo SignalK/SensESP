@@ -61,7 +61,7 @@ class SKPutRequestListener : public SKPutListener, public ValueProducer<T> {
   }
 };
 
-typedef SKPutRequestListener<float> SKNumericPutRequestListener;
+typedef SKPutRequestListener<float> SKFloatPutRequestListener;
 typedef SKPutRequestListener<int> SKIntPutRequestListener;
 typedef SKPutRequestListener<bool> SKBoolPutRequestListener;
 typedef SKPutRequestListener<String> SKStringPutRequestListener;
