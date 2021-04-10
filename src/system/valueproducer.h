@@ -96,9 +96,9 @@ class ValueProducer : virtual public Observable {
   T output;
 };
 
-typedef ValueProducer<float> NumericProducer;
-typedef ValueProducer<int> IntegerProducer;
-typedef ValueProducer<bool> BooleanProducer;
+typedef ValueProducer<float> FloatProducer;
+typedef ValueProducer<int> IntProducer;
+typedef ValueProducer<bool> BoolProducer;
 typedef ValueProducer<String> StringProducer;
 
 #endif

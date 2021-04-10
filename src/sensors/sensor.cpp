@@ -7,10 +7,10 @@ Sensor::Sensor(String config_path) : Configurable{config_path}, Enable(10) {
 }
 
 NumericSensor::NumericSensor(String config_path)
-    : Sensor(config_path), NumericProducer(){};
+    : Sensor(config_path), FloatProducer(){};
 
 IntegerSensor::IntegerSensor(String config_path)
-    : Sensor(config_path), IntegerProducer(){};
+    : Sensor(config_path), IntProducer(){};
 
 StringSensor::StringSensor(String config_path)
     : Sensor(config_path), StringProducer(){};
