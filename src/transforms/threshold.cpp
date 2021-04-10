@@ -11,13 +11,13 @@ void ThresholdTransform<C, P>::set_input(C input, uint8_t input_channel) {
   this->notify();
 }
 
-void NumericThreshold::get_configuration(JsonObject& root) {
+void FloatThreshold::get_configuration(JsonObject& root) {
   root["min"] = min_value_;
   root["max"] = max_value_;
   root["in_range"] = in_range_;
 }
 
-static const char NUMERIC_SCHEMA[] PROGMEM = R"({
+static const char FLOAT_SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
         "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
@@ -26,7 +26,7 @@ static const char NUMERIC_SCHEMA[] PROGMEM = R"({
     }
   })";
 
-bool NumericThreshold::set_configuration(const JsonObject& config) {
+bool FloatThreshold::set_configuration(const JsonObject& config) {
   String expected[] = {"min", "max", "in_range", "value"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
@@ -39,15 +39,15 @@ bool NumericThreshold::set_configuration(const JsonObject& config) {
   return true;
 }
 
-String NumericThreshold::get_config_schema() { return FPSTR(NUMERIC_SCHEMA); }
+String FloatThreshold::get_config_schema() { return FPSTR(FLOAT_SCHEMA); }
 
-void IntegerThreshold::get_configuration(JsonObject& root) {
+void IntThreshold::get_configuration(JsonObject& root) {
   root["min"] = min_value_;
   root["max"] = max_value_;
   root["in_range"] = in_range_;
 }
 
-static const char INTEGER_SCHEMA[] PROGMEM = R"({
+static const char INT_SCHEMA[] PROGMEM = R"({
       "type": "object",
       "properties": {
           "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
@@ -56,7 +56,7 @@ static const char INTEGER_SCHEMA[] PROGMEM = R"({
       }
     })";
 
-bool IntegerThreshold::set_configuration(const JsonObject& config) {
+bool IntThreshold::set_configuration(const JsonObject& config) {
   String expected[] = {"min", "max", "in_range"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
@@ -69,4 +69,4 @@ bool IntegerThreshold::set_configuration(const JsonObject& config) {
   return true;
 }
 
-String IntegerThreshold::get_config_schema() { return FPSTR(INTEGER_SCHEMA); }
+String IntThreshold::get_config_schema() { return FPSTR(INT_SCHEMA); }
