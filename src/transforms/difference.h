@@ -4,7 +4,7 @@
 #include "transform.h"
 
 // y = k1 * x1 - k2 * x2
-class Difference : public NumericTransform {
+class Difference : public FloatTransform {
  public:
   Difference(float k1, float k2, String config_path = "");
   virtual void set_input(float input, uint8_t inputChannel) override;

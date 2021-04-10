@@ -4,7 +4,7 @@
 #include "transforms/transform.h"
 
 /**
- * @brief A numeric passthrough transform that will only
+ * @brief A float passthrough transform that will only
  * pass that value through if it is "sufficiently different" from
  * the last value passed through. 
  * 
@@ -28,7 +28,7 @@
  * @param config_path The path to configure this transform in the 
  * Config UI.
  */
-class ChangeFilter : public NumericTransform {
+class ChangeFilter : public FloatTransform {
  public:
   ChangeFilter(float min_delta = 0.0, float max_delta = 9999.0,
                int max_skips = 99, String config_path = "");

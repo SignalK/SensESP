@@ -4,7 +4,7 @@
 
 AngleCorrection::AngleCorrection(float offset, float min_angle,
                                  String config_path)
-    : NumericTransform(config_path), offset_{offset}, min_angle_{min_angle} {
+    : FloatTransform(config_path), offset_{offset}, min_angle_{min_angle} {
   load_configuration();
 }
 

@@ -3,7 +3,7 @@
 // MovingAverage
 
 MovingAverage::MovingAverage(int sample_size, float multiplier, String config_path)
-    : NumericTransform(config_path), sample_size_{sample_size}, multiplier_{multiplier} {
+    : FloatTransform(config_path), sample_size_{sample_size}, multiplier_{multiplier} {
   buf_.resize(sample_size_, 0);
   initialized_ = false;
   load_configuration();

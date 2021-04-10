@@ -10,7 +10,7 @@ static float absf(float val) {
 
 ChangeFilter::ChangeFilter(float min_delta, float max_delta, int max_skips,
                            String config_path)
-    : NumericTransform(config_path),
+    : FloatTransform(config_path),
       min_delta_{min_delta},
       max_delta_{max_delta},
       max_skips_{max_skips} {

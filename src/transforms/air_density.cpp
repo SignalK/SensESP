@@ -4,7 +4,7 @@
 
 // dew point
 
-AirDensity::AirDensity() : NumericTransform() {}
+AirDensity::AirDensity() : FloatTransform() {}
 
 void AirDensity::set_input(float input, uint8_t inputChannel) {
   inputs[inputChannel] = input;

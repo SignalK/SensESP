@@ -12,7 +12,7 @@
  * which get their input from analog sensors that are variable resistors.
  */
 
-class CurveInterpolator : public NumericTransform {
+class CurveInterpolator : public FloatTransform {
  public:
   class Sample {
    public:
