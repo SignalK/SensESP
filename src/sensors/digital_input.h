@@ -48,7 +48,7 @@ class DigitalInput : public Sensor {
  * @param config_path The path to configuring read_delay in the Config UI.
  * 
  * */
-class DigitalInputState : public DigitalInput, public IntegerProducer {
+class DigitalInputState : public DigitalInput, public IntProducer {
  public:
 
   DigitalInputState(uint8_t pin, int pin_mode, int interrupt_type,
@@ -87,7 +87,7 @@ typedef DigitalInputState DigitalInputValue;
  * @param config_path The path to configuring read_delay in the Config UI
  * 
  * */
-class DigitalInputCounter : public DigitalInput, public IntegerProducer {
+class DigitalInputCounter : public DigitalInput, public IntProducer {
  public:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       uint read_delay, String config_path = "");
@@ -125,7 +125,7 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  * 
  * @see Debounce
  * */
-class DigitalInputChange : public DigitalInput, public IntegerProducer {
+class DigitalInputChange : public DigitalInput, public IntProducer {
  public:
   DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type, uint read_delay = 10,
                                          String config_path = "");
