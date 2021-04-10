@@ -48,7 +48,7 @@ class DigitalInput : public Sensor {
  * @param config_path The path to configuring read_delay in the Config UI.
  * 
  * */
-class DigitalInputState : public DigitalInput, public IntProducer {
+class DigitalInputState : public DigitalInput, public BoolProducer {
  public:
 
   DigitalInputState(uint8_t pin, int pin_mode, int interrupt_type,
