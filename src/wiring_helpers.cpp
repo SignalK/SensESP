@@ -3,9 +3,7 @@
 #include "sensesp_app.h"
 #include "sensors/analog_input.h"
 #include "sensors/digital_input.h"
-#include "sensors/gps.h"
 #include "signalk/signalk_output.h"
-#include "signalk/signalk_position.h"
 #include "signalk/signalk_time.h"
 #include "transforms/angle_correction.h"
 #include "transforms/difference.h"
@@ -77,51 +75,7 @@ void setup_fuel_flow_meter(int inflow_pin, int return_flow_pin) {
                                       "/fuelflow/fuel/out_used/sk"));
 }
 
-GPSInput* setup_gps(Stream* rx_stream) {
-  GPSInput* gps = new GPSInput(rx_stream);
-  gps->nmea_data_.position.connect_to(
-      new SKOutputPosition("navigation.position", ""));
-  gps->nmea_data_.gnss_quality.connect_to(
-      new SKOutputString("navigation.methodQuality", ""));
-  gps->nmea_data_.num_satellites.connect_to(
-      new SKOutputInt("navigation.satellites", ""));
-  gps->nmea_data_.horizontal_dilution.connect_to(
-      new SKOutputNumber("navigation.horizontalDilution", ""));
-  gps->nmea_data_.geoidal_separation.connect_to(
-      new SKOutputNumber("navigation.geoidalSeparation", ""));
-  gps->nmea_data_.dgps_age.connect_to(
-      new SKOutputNumber("navigation.differentialAge", ""));
-  gps->nmea_data_.dgps_id.connect_to(
-      new SKOutputNumber("navigation.differentialReference", ""));
-  gps->nmea_data_.datetime.connect_to(
-      new SKOutputTime("navigation.datetime", ""));
-  gps->nmea_data_.speed.connect_to(
-      new SKOutputNumber("navigation.speedOverGround", ""));
-  gps->nmea_data_.true_course.connect_to(
-      new SKOutputNumber("navigation.courseOverGroundTrue", ""));
-  gps->nmea_data_.variation.connect_to(
-      new SKOutputNumber("navigation.magneticVariation", ""));
-  gps->nmea_data_.rtk_age.connect_to(
-      new SKOutputNumber("navigation.rtkAge", ""));
-  gps->nmea_data_.rtk_ratio.connect_to(
-      new SKOutputNumber("navigation.rtkRatio", ""));
-  gps->nmea_data_.baseline_length.connect_to(
-      new SKOutputNumber("navigation.rtkBaselineLength", ""));
-  gps->nmea_data_.baseline_course
-      .connect_to(new SKOutputNumber("navigation.rtkBaselineCourse"))
-      ->connect_to(new AngleCorrection(0, 0, "/sensors/heading/correction"))
-      ->connect_to(new SKOutputNumber("navigation.headingTrue", ""));
 
-  return gps;
-}
-
-// Obsolete
-void setup_onewire_temperature(SensESPApp* seapp, DallasTemperatureSensors* dts,
-                               String sk_path, String config_path,
-                               String schema) {
-  (new OneWireTemperature(dts))
-      ->connect_to(new SKOutputNumber(sk_path, config_path));
-}
 
 // Obsolete
 void setup_rpm_meter(SensESPApp* seapp, int input_pin) {
