@@ -15,7 +15,6 @@ class SensESPAppBuilder {
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
   StandardSensors sensors_ = ALL;
-  SKPermissions sk_server_permissions_ = READWRITE;
 
   SensESPApp* app;
 
@@ -26,11 +25,9 @@ class SensESPAppBuilder {
     app->set_wifi_password(password);
     return this;
   }
-  SensESPAppBuilder* set_sk_server(String address, uint16_t port,
-                                   SKPermissions permissions = READWRITE) {
+  SensESPAppBuilder* set_sk_server(String address, uint16_t port) {
     app->set_sk_server_address(address);
     app->set_sk_server_port(port);
-    app->set_requested_permissions(permissions);
     return this;
   }
   SensESPAppBuilder* set_standard_sensors(StandardSensors sensors = ALL) {

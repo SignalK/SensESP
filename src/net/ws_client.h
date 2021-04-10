@@ -13,6 +13,8 @@
 
 static const char* NULL_AUTH_TOKEN = "";
 
+static const char* kRequestPermission = "readwrite";
+
 enum class WSConnectionState {
   kWSDisconnected,
   kWSAuthorizing,
@@ -27,7 +29,7 @@ enum class WSConnectionState {
 class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
  public:
   WSClient(String config_path, SKDelta* sk_delta, String server_address,
-           uint16_t server_port, String sk_permission = "readwrite");
+           uint16_t server_port);
   void enable();
   void on_disconnected();
   void on_error();
@@ -80,7 +82,6 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
   String client_id_ = "";
   String polling_href_ = "";
   String auth_token_ = NULL_AUTH_TOKEN;
-  String sk_permission_;
   bool server_detected_ = false;
   bool token_test_success_ = false;
 

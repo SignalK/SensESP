@@ -36,8 +36,6 @@ enum StandardSensors {
   ALL = 0x1F
 };
 
-enum SKPermissions { READONLY, READWRITE, ADMIN };
-
 void SetupSerialDebug(uint32_t baudrate);
 
 /**
@@ -132,10 +130,6 @@ class SensESPApp {
     this->sensors_ = sensors;
     return this;
   }
-  const SensESPApp* set_requested_permissions(SKPermissions permissions) {
-    this->requested_permissions_ = permissions;
-    return this;
-  }
 
  private:
   String preset_hostname_ = "SensESP";
@@ -144,7 +138,6 @@ class SensESPApp {
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
   StandardSensors sensors_ = ALL;
-  SKPermissions requested_permissions_ = READWRITE;
 
   void initialize();
   void setup_standard_sensors(ObservableValue<String>* hostname,
@@ -156,7 +149,6 @@ class SensESPApp {
   Networking* networking_;
   SKDelta* sk_delta_;
   WSClient* ws_client_;
-  String get_permission_string(SKPermissions permission);
 
   void set_wifi(String ssid, String password);
 
