@@ -49,9 +49,9 @@ class ValueConsumer {
   }
 };
 
-typedef ValueConsumer<float> NumericConsumer;
-typedef ValueConsumer<int> IntegerConsumer;
-typedef ValueConsumer<bool> BooleanConsumer;
+typedef ValueConsumer<float> FloatConsumer;
+typedef ValueConsumer<int> IntConsumer;
+typedef ValueConsumer<bool> BoolConsumer;
 typedef ValueConsumer<String> StringConsumer;
 
 #endif
