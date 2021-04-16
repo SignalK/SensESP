@@ -56,7 +56,7 @@ class CurveInterpolator : public NumericTransform {
     add_sample(new_sample);
   }
 
- private:
+ protected:
   std::set<Sample> samples;
 };
 
