@@ -32,7 +32,7 @@ class CurveInterpolator : public NumericTransform {
   CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path = "");
 
   // Set and retrieve the transformed value
-  void set_input(float input, uint8_t input_channel = 0) override final;
+  void set_input(float input, uint8_t input_channel = 0) override;
 
   // For reading and writing the configuration of this transformation
   virtual void get_configuration(JsonObject& doc) override;
