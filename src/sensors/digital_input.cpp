@@ -4,17 +4,15 @@
 
 #include "sensesp.h"
 
-DigitalInput::DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
-                           String config_path)
-    : Sensor(config_path), pin_{pin}, interrupt_type_{interrupt_type} {
+DigitalInput::DigitalInput(uint8_t pin, int pin_mode, String config_path)
+    : Sensor(config_path), pin_{pin} {
   pinMode(pin, pin_mode);
 }
 
-DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
-                                     int interrupt_type, int read_delay,
+DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode, int read_delay,
                                      String config_path)
-    : DigitalInput{pin, pin_mode, interrupt_type, config_path},
-      IntegerProducer(),
+    : DigitalInput{pin, pin_mode, config_path},
+      BooleanProducer(),
       read_delay_{read_delay},
       triggered_{false} {
   load_configuration();      
@@ -22,7 +20,7 @@ DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
 
 void DigitalInputState::enable() {
   app.onRepeat(read_delay_, [this]() {
-    emit(digitalRead(pin_));
+    emit(digitalRead(pin_) == 1);
   });
 }
 
@@ -53,9 +51,10 @@ bool DigitalInputState::set_configuration(const JsonObject& config) {
 DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode,
                                          int interrupt_type, uint read_delay,
                                          String config_path)
-    : DigitalInput{pin, pin_mode, interrupt_type, config_path},
+    : DigitalInput{pin, pin_mode, config_path},
       IntegerProducer(),
-      read_delay_{read_delay} {
+      read_delay_{read_delay},
+      interrupt_type_{interrupt_type} {
   load_configuration();
 }
 
@@ -99,11 +98,12 @@ bool DigitalInputCounter::set_configuration(const JsonObject& config) {
 DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
                                        int interrupt_type, uint read_delay,
                                        String config_path)
-    : DigitalInput(pin, pin_mode, interrupt_type, config_path),
-      IntegerProducer(),
+    : DigitalInput(pin, pin_mode, config_path),
+      BooleanProducer(),
+      interrupt_type_{interrupt_type},
       read_delay_{read_delay},
       triggered_{false},
-      last_output_{0},
+      last_output_{false},
       value_sent_{false} {
     load_configuration();    
     }
@@ -111,7 +111,7 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
 void DigitalInputChange::enable() {
   app.onInterrupt(pin_, interrupt_type_,
     [this](){
-      output = digitalRead(pin_);
+      output = (digitalRead(pin_) == 1);
       triggered_ = true;
     });
   
