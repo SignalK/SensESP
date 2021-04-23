@@ -39,7 +39,7 @@ String SKRequest::send_request(DynamicJsonDocument& request,
   serializeJson(request, request_txt);
   debugD("Sending websocket request to server: %s", request_txt.c_str());
 
-  sensesp_app->send_to_server(request_txt);
+  sensesp_app->get_ws_client()->sendTXT(request_txt);
 
   return pending_request->request_id;
 }

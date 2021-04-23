@@ -43,44 +43,6 @@ class SensESPApp {
   void reset();
   String get_hostname();
 
-  template <typename T>
-  void connect(ValueProducer<T>* producer, ValueConsumer<T>* consumer,
-               uint8_t inputChannel = 0) {
-    producer->connect_to(consumer, inputChannel);
-  }
-
-  template <typename T, typename U>
-  void connect_1to1_h(T* sensor, U* transform,
-                      ObservableValue<String>* hostname) {
-    String hostname_str = hostname->get();
-    String value_name = sensor->get_value_name();
-    String sk_path = hostname_str + "." + value_name;
-    auto comp_set_sk_path = [hostname, transform, value_name]() {
-      transform->set_sk_path(hostname->get() + "." + value_name);
-    };
-    comp_set_sk_path();
-    sensor->attach(
-        [sensor, transform]() { transform->set_input(sensor->get()); });
-    hostname->attach(comp_set_sk_path);
-  }
-
-  /**
-   * Sends the specified payload text directly to the signalk server
-   * over the connected websocket. If no websocket is connect, the
-   * call is ignored.
-   */
-  void send_to_server(String& payload) { this->ws_client_->sendTXT(payload); }
-
-  /**
-   * Returns true if the host system is connected to Wifi
-   */
-  bool isWifiConnected() { return WiFi.status() == WL_CONNECTED; }
-
-  /**
-   * Returns true if the host system is connected to a Signal K server
-   */
-  bool isSignalKConnected() { return ws_client_->is_connected(); }
-
   // getters for internal members
   SKDelta* get_sk_delta() { return this->sk_delta_; }
   SystemStatusController* get_system_status_controller() {
@@ -132,8 +94,6 @@ class SensESPApp {
   Networking* networking_;
   SKDelta* sk_delta_;
   WSClient* ws_client_;
-
-  void set_wifi(String ssid, String password);
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
