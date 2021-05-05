@@ -73,7 +73,7 @@ void Networking::setup_saved_ssid() {
 
   // this is a workaround for setting the DHCP hostname, suggested in
   // https://github.com/espressif/arduino-esp32/issues/2537
-  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
+  // WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
 #ifdef ESP32
   WiFi.setHostname(hostname->get().c_str());
 #elif defined(ESP8266)
@@ -124,7 +124,7 @@ void Networking::setup_wifi_manager() {
 
   // this is a workaround for setting the DHCP hostname, suggested in
   // https://github.com/espressif/arduino-esp32/issues/2537
-  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
+  // WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
 #ifdef ESP32
   WiFi.setHostname(hostname->get().c_str());
 #elif defined(ESP8266)
