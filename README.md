@@ -18,7 +18,7 @@ NOTE: SensESP does not currently support SSL. If you enabled that when you insta
 Once the SK Server is installed and running, go to the Dashboard (enter `localhost:3000` into the Raspberry Pi's browser to start it), select Server - Settings from the left side menu, and make sure the "mdns" option is ON.
 
 SensESP is a library and will be installed automatically as a dependency when defined as such in the project's
-`platformio.ini` file. Instructions below.
+`platformio.ini` file. Instructions below. However, in order for PlatformIO to install all of the libraries that SensESP uses, you must have Git installed. If you do already, you should update it to the latest version. If you don't, install it now: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 You need to have PlatformIO installed. First, download and install [Visual Studio Code](https://code.visualstudio.com/).
 Then, select "Extensions" from the left toolbar. Search for "platformio", select the first result, and click "Install".
