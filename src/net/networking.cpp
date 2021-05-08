@@ -87,6 +87,7 @@ void Networking::wifi_station_connected() {
            WiFi.RSSI());
     debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
     this->emit(WifiState::kWifiConnectedToAP);
+    WiFi.mode(WIFI_STA); // so "Configure <hostname>" AP won't appear
 }
 
 void Networking::wifi_station_disconnected() {
