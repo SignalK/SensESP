@@ -87,6 +87,9 @@ void Networking::wifi_station_connected() {
            WiFi.RSSI());
     debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
     this->emit(WifiState::kWifiConnectedToAP);
+#if defined(ESP8266)
+    WiFi.mode(WIFI_STA); // so "Configure <hostname>" AP won't appear
+#endif        
 }
 
 void Networking::wifi_station_disconnected() {
