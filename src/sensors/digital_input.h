@@ -17,12 +17,11 @@
  * */
 class DigitalInput : public Sensor {
  public:
-  DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
+  DigitalInput(uint8_t pin, int pin_mode, 
                String config_path = "");
 
  protected:
   uint8_t pin_;
-  int interrupt_type_;
 };
 
 
@@ -48,11 +47,10 @@ class DigitalInput : public Sensor {
  * @param config_path The path to configuring read_delay in the Config UI.
  * 
  * */
-class DigitalInputState : public DigitalInput, public IntegerProducer {
+class DigitalInputState : public DigitalInput, public BooleanProducer {
  public:
 
-  DigitalInputState(uint8_t pin, int pin_mode, int interrupt_type,
-                    int read_delay = 1000, String config_path = "");
+  DigitalInputState(uint8_t pin, int pin_mode, int read_delay = 1000, String config_path = "");
 
   virtual void enable() override final;
 
@@ -96,6 +94,7 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
 
  private:
   uint read_delay_;
+  int interrupt_type_;
   volatile uint counter_ = 0;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
@@ -125,7 +124,7 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
  * 
  * @see Debounce
  * */
-class DigitalInputChange : public DigitalInput, public IntegerProducer {
+class DigitalInputChange : public DigitalInput, public BooleanProducer {
  public:
   DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type, uint read_delay = 10,
                                          String config_path = "");
@@ -133,8 +132,9 @@ class DigitalInputChange : public DigitalInput, public IntegerProducer {
  
  private:
   uint read_delay_;
+  int interrupt_type_;
   bool triggered_;
-  uint8_t last_output_;
+  bool last_output_;
   bool value_sent_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
