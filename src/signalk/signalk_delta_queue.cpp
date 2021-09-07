@@ -1,23 +1,23 @@
-#include "signalk_delta.h"
+#include "signalk_delta_queue.h"
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "sensesp.h"
 #include "signalk/signalk_emitter.h"
 
-SKDelta::SKDelta(const String& hostname, unsigned int max_buffer_size)
+SKDeltaQueue::SKDeltaQueue(const String& hostname, unsigned int max_buffer_size)
     : hostname{hostname}, max_buffer_size{max_buffer_size}, meta_sent_{false} {}
 
-void SKDelta::append(const String val) {
+void SKDeltaQueue::append(const String val) {
   if (buffer.size() >= max_buffer_size) {
     buffer.pop_back();
   }
   buffer.push_front(val);
 }
 
-bool SKDelta::data_available() { return buffer.size() > 0; }
+bool SKDeltaQueue::data_available() { return buffer.size() > 0; }
 
-unsigned int SKDelta::get_doc_size_estimate() {
+unsigned int SKDeltaQueue::get_doc_size_estimate() {
   int buf_size = buffer.size();
   int estimate =
       2 * JSON_OBJECT_SIZE(1) +         // source and one update
@@ -33,7 +33,7 @@ unsigned int SKDelta::get_doc_size_estimate() {
   return estimate;  
 }
 
-unsigned int SKDelta::get_metadata_size_estimate() {
+unsigned int SKDeltaQueue::get_metadata_size_estimate() {
   int num_metadata = SKEmitter::get_sources().size();
   int estimate = JSON_ARRAY_SIZE(num_metadata);
 
@@ -61,7 +61,7 @@ unsigned int SKDelta::get_metadata_size_estimate() {
   return estimate;
 }
 
-void SKDelta::get_delta(String& output) {
+void SKDeltaQueue::get_delta(String& output) {
   // estimate the size of the serialized json string
 
   unsigned int doc_size_estimate = get_doc_size_estimate();
@@ -94,7 +94,7 @@ void SKDelta::get_delta(String& output) {
   debugD("delta: %s", output.c_str());
 }
 
-void SKDelta::add_metadata(JsonArray updates) {
+void SKDeltaQueue::add_metadata(JsonArray updates) {
   JsonObject new_entry = updates.createNestedObject();
   JsonArray meta = new_entry.createNestedArray("meta");
   for (auto const& sk_source : SKEmitter::get_sources()) {
