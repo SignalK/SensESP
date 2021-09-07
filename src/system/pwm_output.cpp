@@ -12,6 +12,10 @@
 #define PWMRANGE 4095
 #endif
 
+#ifdef ESP8266
+#define PWMRANGE 1023
+#endif
+
 std::map<uint8_t, int8_t> PWMOutput::channel_to_pin_;
 
 PWMOutput::PWMOutput(int pin, int pwm_channel) {

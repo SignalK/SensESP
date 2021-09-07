@@ -1,21 +1,21 @@
 <map id="NumericSensor" name="NumericSensor">
-<area shape="rect" id="node1" title="A Sensor whose output is a float." alt="" coords="319,299,431,326"/>
-<area shape="rect" id="node7" href="$class_a_d_s1x15_raw_value.html" title="Used to read the raw output of the ADS1x15, which is an integer between 0 and 32,768...." alt="" coords="484,5,641,47"/>
-<area shape="rect" id="node9" href="$class_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="517,71,608,98"/>
-<area shape="rect" id="node10" href="$class_b_m_e280_value.html" title="BME280Value reads and outputs the specified value of a BME280 sensor." alt="" coords="511,122,615,149"/>
-<area shape="rect" id="node11" href="$class_b_m_p280_value.html" title="BMP280Value reads and outputs the specified value of a BMP280 sensor." alt="" coords="511,173,615,199"/>
-<area shape="rect" id="node12" href="$class_i_n_a219_value.html" title="INA219Value reads and outputs the specified value of an INA219 sensor." alt="" coords="513,223,612,250"/>
-<area shape="rect" id="node13" href="$class_m_a_x31856_thermocouple.html" title="Reads the temperature from an Adafruit MAX31856 (or compatible) thermocouple breakout board...." alt="" coords="479,274,647,301"/>
-<area shape="rect" id="node14" href="$class_one_wire_temperature.html" title="Used to read the temperature from a single 1&#45;Wire temperature sensor. If you have X sensors connected..." alt="" coords="490,325,635,351"/>
-<area shape="rect" id="node15" href="$class_s_h_t31_value.html" title="SHT31Value reads and outputs the specified value of an SHT31 sensor." alt="" coords="515,375,610,402"/>
-<area shape="rect" id="node16" href="$class_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="521,426,605,453"/>
-<area shape="rect" id="node17" href="$class_ultrasonic_distance.html" title="Reads a DYP&#45;A02YYWM&#45;V1.0 (and possibly other types) ultrasonic sensor and outputs the number of micro..." alt="" coords="496,477,629,503"/>
-<area shape="rect" id="node18" href="$class_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="531,527,595,554"/>
-<area shape="rect" id="node19" href="$class_wifi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="522,578,603,605"/>
-<area shape="rect" id="node2" href="$class_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="178,274,241,301"/>
-<area shape="rect" id="node3" href="$class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="9,223,97,250"/>
-<area shape="rect" id="node4" href="$class_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,274,100,301"/>
-<area shape="rect" id="node5" href="$class_enable.html" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="21,325,84,351"/>
-<area shape="rect" id="node6" href="$class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="148,325,271,351"/>
-<area shape="rect" id="node8" href="$class_a_d_s1x15_voltage.html" title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v..." alt="" coords="695,5,865,47"/>
+<area shape="rect" id="node1" title="A Sensor whose output is a float." alt="" coords="324,299,437,326"/>
+<area shape="rect" id="node7" href="$class_a_d_s1x15_raw_value.html" title="Used to read the raw output of the ADS1x15, which is an integer between 0 and 32,768...." alt="" coords="493,5,651,47"/>
+<area shape="rect" id="node9" href="$class_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="525,71,619,98"/>
+<area shape="rect" id="node10" href="$class_b_m_e280_value.html" title="BME280Value reads and outputs the specified value of a BME280 sensor." alt="" coords="519,122,625,149"/>
+<area shape="rect" id="node11" href="$class_b_m_p280_value.html" title="BMP280Value reads and outputs the specified value of a BMP280 sensor." alt="" coords="519,173,625,199"/>
+<area shape="rect" id="node12" href="$class_i_n_a219_value.html" title="INA219Value reads and outputs the specified value of an INA219 sensor." alt="" coords="522,223,622,250"/>
+<area shape="rect" id="node13" href="$class_m_a_x31856_thermocouple.html" title="Reads the temperature from an Adafruit MAX31856 (or compatible) thermocouple breakout board...." alt="" coords="485,274,659,301"/>
+<area shape="rect" id="node14" href="$class_one_wire_temperature.html" title="Used to read the temperature from a single 1&#45;Wire temperature sensor. If you have X sensors connected..." alt="" coords="497,325,647,351"/>
+<area shape="rect" id="node15" href="$class_s_h_t31_value.html" title="SHT31Value reads and outputs the specified value of an SHT31 sensor." alt="" coords="524,375,620,402"/>
+<area shape="rect" id="node16" href="$class_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="531,426,613,453"/>
+<area shape="rect" id="node17" href="$class_ultrasonic_distance.html" title="Reads a DYP&#45;A02YYWM&#45;V1.0 (and possibly other types) ultrasonic sensor and outputs the number of micro..." alt="" coords="505,477,639,503"/>
+<area shape="rect" id="node18" href="$class_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="540,527,604,554"/>
+<area shape="rect" id="node19" href="$class_wifi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="531,578,613,605"/>
+<area shape="rect" id="node2" href="$class_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="181,274,245,301"/>
+<area shape="rect" id="node3" href="$class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="9,325,99,351"/>
+<area shape="rect" id="node6" href="$class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="151,325,276,351"/>
+<area shape="rect" id="node4" href="$class_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,223,103,250"/>
+<area shape="rect" id="node5" href="$class_enable.html" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="22,274,86,301"/>
+<area shape="rect" id="node8" href="$class_a_d_s1x15_voltage.html" title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v..." alt="" coords="707,5,877,47"/>
 </map>

@@ -9,5 +9,6 @@ var class_curve_interpolator =
     [ "get_config_schema", "class_curve_interpolator.html#a6f9c593782d05c95ba92810b8f70f287", null ],
     [ "get_configuration", "class_curve_interpolator.html#ab375c3b1d191900f1c5561d87ad634cb", null ],
     [ "set_configuration", "class_curve_interpolator.html#acfda195c475a261d2e2a3af365fd6c19", null ],
-    [ "set_input", "class_curve_interpolator.html#af2ce224bb3f29245ea8d90cee0c5bdb6", null ]
+    [ "set_input", "class_curve_interpolator.html#a7c6fd578626d84e69fae5414344448b6", null ],
+    [ "samples", "class_curve_interpolator.html#a850c3a9a23bf5256d550ed97efcdd7cd", null ]
 ];

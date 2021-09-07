@@ -184,11 +184,12 @@ var NAVTREEINDEX0 =
 "class_curve_interpolator.html#a09bdf144307f1264c36d5afaea5c96a3":[0,0,16,1],
 "class_curve_interpolator.html#a263eaf111e6b5f47e72c6e13d77dea99":[0,0,16,3],
 "class_curve_interpolator.html#a6f9c593782d05c95ba92810b8f70f287":[0,0,16,6],
+"class_curve_interpolator.html#a7c6fd578626d84e69fae5414344448b6":[0,0,16,9],
+"class_curve_interpolator.html#a850c3a9a23bf5256d550ed97efcdd7cd":[0,0,16,10],
 "class_curve_interpolator.html#a89d37139f9b601e8a1c74335811c2af2":[0,0,16,4],
 "class_curve_interpolator.html#a938e1bdc8256ef255c27ffc65c8360b7":[0,0,16,2],
 "class_curve_interpolator.html#ab375c3b1d191900f1c5561d87ad634cb":[0,0,16,7],
 "class_curve_interpolator.html#acfda195c475a261d2e2a3af365fd6c19":[0,0,16,8],
-"class_curve_interpolator.html#af2ce224bb3f29245ea8d90cee0c5bdb6":[0,0,16,9],
 "class_curve_interpolator.html#afb1dbb8e85015e2909dff8495875f8f5":[0,0,16,5],
 "class_curve_interpolator_1_1_sample.html":[0,0,16,0],
 "class_curve_interpolator_1_1_sample.html#a1cf03a106b3a98056fdb448df6fb9c17":[0,0,16,0,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "class_frequency.html#a0d6846952b3295809421ac18633e397e":[0,0,30,1],
 "class_frequency.html#a35901f2d996c2e598e1ca0f95ea0e62b":[0,0,30,3],
 "class_frequency.html#a87d16c67ce064b9b0f671747808c3963":[0,0,30,4],
-"class_frequency.html#a93e3f28917f7faa7411b95745171f6af":[0,0,30,2],
-"class_frequency.html#a99df388f446a8aa46f465fe464023f55":[0,0,30,5]
+"class_frequency.html#a93e3f28917f7faa7411b95745171f6af":[0,0,30,2]
 };
