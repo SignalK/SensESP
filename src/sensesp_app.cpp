@@ -123,14 +123,7 @@ void SensESPApp::enable() {
 
   // ObservableValue<String>* hostname = networking->get_hostname();
 
-  for (auto const& sk_source : SKEmitter::get_sources()) {
-    if (sk_source->get_sk_path() != "") {
-      debugI("Connecting Signal K source %s", sk_source->get_sk_path().c_str());
-      sk_source->attach([sk_source, this]() {
-        this->sk_delta_->append(sk_source->as_signalk());
-      });
-    }
-  }
+  this->sk_delta_->connect_sources(SKEmitter::get_sources());
 
   debugI("Enabling subsystems");
 

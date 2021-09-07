@@ -15,6 +15,16 @@ void SKDeltaQueue::append(const String val) {
   buffer.push_front(val);
 }
 
+void SKDeltaQueue::connect_sources(std::vector<SKEmitter*> sk_delta_sources) {
+  for (auto const& sk_source : sk_delta_sources) {
+    if (sk_source->get_sk_path() != "") {
+      sk_source->attach([sk_source, this]() {
+        this->append(sk_source->as_signalk());
+      });
+    }
+  }
+}
+
 bool SKDeltaQueue::data_available() { return buffer.size() > 0; }
 
 unsigned int SKDeltaQueue::get_doc_size_estimate() {
