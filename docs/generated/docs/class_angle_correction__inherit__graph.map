@@ -1,8 +1,15 @@
 <map id="AngleCorrection" name="AngleCorrection">
-<area shape="rect" id="node1" title="Add a value to an angle input (in radians). The output value is wrapped to a range between [0,..." alt="" coords="47,361,161,388"/>
-<area shape="rect" id="node2" href="$class_symmetric_transform.html" title=" " alt="" coords="39,285,169,312"/>
-<area shape="rect" id="node3" href="$class_transform.html" title=" " alt="" coords="5,145,168,172"/>
-<area shape="rect" id="node4" href="$class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="81,5,213,32"/>
-<area shape="rect" id="node6" href="$class_transform.html" title=" " alt="" coords="143,95,270,121"/>
-<area shape="rect" id="node5" href="$class_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="120,196,296,223"/>
+<area shape="rect" id="node1" title="Add a value to an angle input (in radians). The output value is wrapped to a range between [0,..." alt="" coords="523,577,641,604"/>
+<area shape="rect" id="node2" href="$class_symmetric_transform.html" title=" " alt="" coords="516,501,648,528"/>
+<area shape="rect" id="node3" href="$class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="303,247,434,273"/>
+<area shape="rect" id="node13" href="$class_transform.html" title=" " alt="" coords="305,336,432,363"/>
+<area shape="rect" id="node4" href="$class_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="73,171,185,197"/>
+<area shape="rect" id="node5" href="$class_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,81,103,108"/>
+<area shape="rect" id="node6" href="$class_enable.html" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="127,81,191,108"/>
+<area shape="rect" id="node7" href="$class_value_consumer.html" title=" " alt="" coords="259,171,409,197"/>
+<area shape="rect" id="node8" href="$class_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="227,81,374,108"/>
+<area shape="rect" id="node9" href="$class_value_producer.html" title=" " alt="" coords="433,171,574,197"/>
+<area shape="rect" id="node10" href="$class_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="474,5,565,32"/>
+<area shape="rect" id="node11" href="$class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="541,81,681,108"/>
+<area shape="rect" id="node12" href="$class_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="385,412,561,439"/>
 </map>

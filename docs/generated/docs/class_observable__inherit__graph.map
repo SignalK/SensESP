@@ -1,37 +1,51 @@
 <map id="Observable" name="Observable">
-<area shape="rect" id="node1" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,819,93,845"/>
-<area shape="rect" id="node2" href="$class_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="163,351,226,377"/>
-<area shape="rect" id="node28" href="$class_s_k_emitter.html" title="A class that produces Signal K output to be forwarded to the Signal K server (if the system is connec..." alt="" coords="153,793,236,820"/>
-<area shape="rect" id="node32" href="$class_s_k_listener.html" title="An Obervable class that listens for Signal K stream deltas and notifies any observers of value change..." alt="" coords="151,844,238,871"/>
-<area shape="rect" id="node34" href="$class_s_k_put_listener.html" title="An Obervable class that listens for Signal K PUT requests coming over the websocket connection and no..." alt="" coords="141,895,248,921"/>
-<area shape="rect" id="node3" href="$class_dallas_temperature_sensors.html" title="Finds all 1&#45;Wire temperature sensors that are connected to the ESP and makes the address(es) and temp..." alt="" coords="300,56,479,83"/>
-<area shape="rect" id="node4" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="345,107,433,133"/>
-<area shape="rect" id="node8" href="$class_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="351,249,428,276"/>
-<area shape="rect" id="node9" href="$class_g_p_s_input.html" title="Support for a GPS module communicating with NMEA&#45;0183 messages over a serial interface." alt="" coords="350,300,429,327"/>
-<area shape="rect" id="node10" href="$class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor." alt="" coords="356,351,423,377"/>
-<area shape="rect" id="node11" href="$class_integer_sensor.html" title="A Sensor whose output is an integer." alt="" coords="338,401,441,428"/>
-<area shape="rect" id="node12" href="$class_numeric_sensor.html" title="A Sensor whose output is a float." alt="" coords="333,452,445,479"/>
-<area shape="rect" id="node26" href="$class_string_sensor.html" title="A Sensor whose output is a String." alt="" coords="341,565,438,592"/>
-<area shape="rect" id="node5" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="548,5,681,32"/>
-<area shape="rect" id="node6" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="547,56,682,83"/>
-<area shape="rect" id="node7" href="$class_digital_input_state.html" title="DigitalInputState reports the state of a digital pin every read_delay ms." alt="" coords="555,107,674,133"/>
-<area shape="rect" id="node13" href="$class_a_d_s1x15_raw_value.html" title="Used to read the raw output of the ADS1x15, which is an integer between 0 and 32,768...." alt="" coords="536,158,693,199"/>
-<area shape="rect" id="node15" href="$class_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="569,224,660,251"/>
-<area shape="rect" id="node16" href="$class_b_m_e280_value.html" title="BME280Value reads and outputs the specified value of a BME280 sensor." alt="" coords="563,275,667,301"/>
-<area shape="rect" id="node17" href="$class_b_m_p280_value.html" title="BMP280Value reads and outputs the specified value of a BMP280 sensor." alt="" coords="563,325,667,352"/>
-<area shape="rect" id="node18" href="$class_i_n_a219_value.html" title="INA219Value reads and outputs the specified value of an INA219 sensor." alt="" coords="565,376,664,403"/>
-<area shape="rect" id="node19" href="$class_m_a_x31856_thermocouple.html" title="Reads the temperature from an Adafruit MAX31856 (or compatible) thermocouple breakout board...." alt="" coords="531,427,699,453"/>
-<area shape="rect" id="node20" href="$class_one_wire_temperature.html" title="Used to read the temperature from a single 1&#45;Wire temperature sensor. If you have X sensors connected..." alt="" coords="542,477,687,504"/>
-<area shape="rect" id="node21" href="$class_s_h_t31_value.html" title="SHT31Value reads and outputs the specified value of an SHT31 sensor." alt="" coords="567,528,662,555"/>
-<area shape="rect" id="node22" href="$class_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="573,579,657,605"/>
-<area shape="rect" id="node23" href="$class_ultrasonic_distance.html" title="Reads a DYP&#45;A02YYWM&#45;V1.0 (and possibly other types) ultrasonic sensor and outputs the number of micro..." alt="" coords="548,629,681,656"/>
-<area shape="rect" id="node24" href="$class_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="583,680,647,707"/>
-<area shape="rect" id="node25" href="$class_wifi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="574,731,655,757"/>
-<area shape="rect" id="node14" href="$class_a_d_s1x15_voltage.html" title="Reads the raw output of the ADS1x15 (an integer between 0 and 32,768) and converts it back into the v..." alt="" coords="747,158,917,199"/>
-<area shape="rect" id="node27" href="$class_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="573,781,657,808"/>
-<area shape="rect" id="node29" href="$class_s_k_output.html" title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network." alt="" coords="334,743,445,769"/>
-<area shape="rect" id="node31" href="$class_s_k_output_time.html" title=" " alt="" coords="335,793,443,820"/>
-<area shape="rect" id="node30" href="$class_s_k_output_numeric.html" title="A special class for sending numeric values to the Signal K server on a specific Signal K path." alt="" coords="535,832,695,859"/>
-<area shape="rect" id="node33" href="$class_s_k_value_listener.html" title="An ValueProducer that listens to specific Signal K paths and emits its value whenever it changes." alt="" coords="314,844,465,871"/>
-<area shape="rect" id="node35" href="$class_s_k_put_request_listener.html" title="An object that listens for PUT requests to come in for the specified SignalK path...." alt="" coords="296,895,483,921"/>
+<area shape="rect" id="node1" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,739,96,765"/>
+<area shape="rect" id="node2" href="$class_value_producer.html" title=" " alt="" coords="496,424,681,451"/>
+<area shape="rect" id="node4" href="$class_value_producer.html" title=" " alt="" coords="499,475,679,501"/>
+<area shape="rect" id="node6" href="$class_value_producer.html" title=" " alt="" coords="518,1583,659,1609"/>
+<area shape="rect" id="node16" href="$class_value_producer.html" title=" " alt="" coords="481,609,696,636"/>
+<area shape="rect" id="node18" href="$class_value_producer.html" title=" " alt="" coords="484,533,693,574"/>
+<area shape="rect" id="node21" href="$class_s_k_emitter.html" title="A class that produces Signal K output to be forwarded to the Signal K server (if the system is connec..." alt="" coords="174,1991,257,2017"/>
+<area shape="rect" id="node24" href="$class_s_k_listener.html" title="An Obervable class that listens for Signal K stream deltas and notifies any observers of value change..." alt="" coords="172,1889,259,1916"/>
+<area shape="rect" id="node26" href="$class_s_k_put_listener.html" title="An Obervable class that listens for Signal K PUT requests coming over the websocket connection and no..." alt="" coords="162,1940,269,1967"/>
+<area shape="rect" id="node28" href="$class_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="183,208,247,235"/>
+<area shape="rect" id="node36" href="$class_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="145,1140,285,1167"/>
+<area shape="rect" id="node3" href="$class_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="959,427,1049,453"/>
+<area shape="rect" id="node5" href="$class_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="965,368,1043,395"/>
+<area shape="rect" id="node7" href="$class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="939,1583,1069,1609"/>
+<area shape="rect" id="node8" href="$class_transform.html" title=" " alt="" coords="1313,1163,1466,1189"/>
+<area shape="rect" id="node9" href="$class_transform.html" title=" " alt="" coords="1303,1313,1476,1340"/>
+<area shape="rect" id="node10" href="$class_transform.html" title=" " alt="" coords="1313,1400,1465,1427"/>
+<area shape="rect" id="node11" href="$class_transform.html" title=" " alt="" coords="1303,1464,1476,1491"/>
+<area shape="rect" id="node12" href="$class_transform.html" title=" " alt="" coords="1323,1542,1456,1583"/>
+<area shape="rect" id="node13" href="$class_transform.html" title=" " alt="" coords="1326,1635,1453,1661"/>
+<area shape="rect" id="node14" href="$class_transform.html" title=" " alt="" coords="1323,1711,1455,1753"/>
+<area shape="rect" id="node15" href="$class_transform.html" title=" " alt="" coords="1288,1787,1491,1813"/>
+<area shape="rect" id="node17" href="$class_system_status_controller.html" title="Base class for a controller that can react to system status events." alt="" coords="923,615,1085,641"/>
+<area shape="rect" id="node19" href="$class_observable_value.html" title=" " alt="" coords="892,549,1116,590"/>
+<area shape="rect" id="node20" href="$class_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="965,497,1043,524"/>
+<area shape="rect" id="node22" href="$class_s_k_output.html" title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network." alt="" coords="533,2029,644,2056"/>
+<area shape="rect" id="node23" href="$class_s_k_output_time.html" title=" " alt="" coords="534,1979,643,2005"/>
+<area shape="rect" id="node25" href="$class_s_k_value_listener.html" title="An ValueProducer that listens to specific Signal K paths and emits its value whenever it changes." alt="" coords="513,1861,664,1888"/>
+<area shape="rect" id="node27" href="$class_s_k_put_request_listener.html" title="An object that listens for PUT requests to come in for the specified SignalK path...." alt="" coords="495,1917,683,1944"/>
+<area shape="rect" id="node29" href="$class_dallas_temperature_sensors.html" title="Finds all 1&#45;Wire temperature sensors that are connected to the ESP and makes the address(es) and temp..." alt="" coords="497,259,680,285"/>
+<area shape="rect" id="node30" href="$class_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="544,309,633,336"/>
+<area shape="rect" id="node31" href="$class_g_p_s_input.html" title="Support for a GPS module communicating with NMEA&#45;0183 messages over a serial interface." alt="" coords="549,5,629,32"/>
+<area shape="rect" id="node32" href="$class_i_n_a219.html" title="Represents an ADAfruit (or compatible) INA219 High Side DC Current Sensor." alt="" coords="555,56,622,83"/>
+<area shape="rect" id="node33" href="$class_integer_sensor.html" title="A Sensor whose output is an integer." alt="" coords="536,107,641,133"/>
+<area shape="rect" id="node34" href="$class_numeric_sensor.html" title="A Sensor whose output is a float." alt="" coords="532,157,645,184"/>
+<area shape="rect" id="node35" href="$class_string_sensor.html" title="A Sensor whose output is a String." alt="" coords="539,208,638,235"/>
+<area shape="rect" id="node37" href="$class_observable_value.html" title=" " alt="" coords="907,676,1101,703"/>
+<area shape="rect" id="node38" href="$class_observable_value.html" title=" " alt="" coords="898,749,1110,776"/>
+<area shape="rect" id="node39" href="$class_observable_value.html" title=" " alt="" coords="918,828,1090,855"/>
+<area shape="rect" id="node40" href="$class_observable_value.html" title=" " alt="" coords="924,897,1084,924"/>
+<area shape="rect" id="node41" href="$class_observable_value.html" title=" " alt="" coords="913,997,1095,1024"/>
+<area shape="rect" id="node42" href="$class_observable_value.html" title=" " alt="" coords="913,1053,1095,1080"/>
+<area shape="rect" id="node43" href="$class_digital_input_change.html" title="DigitalInputChange is meant to report when a digital pin changes its state." alt="" coords="521,1133,657,1174"/>
+<area shape="rect" id="node44" href="$class_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="521,1198,657,1239"/>
+<area shape="rect" id="node45" href="$class_digital_input_state.html" title="DigitalInputState reports the state of a digital pin every read_delay ms." alt="" coords="525,1263,653,1305"/>
+<area shape="rect" id="node46" href="$class_integer_sensor.html" title="A Sensor whose output is an integer." alt="" coords="517,1329,660,1356"/>
+<area shape="rect" id="node47" href="$class_numeric_sensor.html" title="A Sensor whose output is a float." alt="" coords="507,1808,670,1835"/>
+<area shape="rect" id="node48" href="$class_observable_value.html" title="A value that notifies its observers if it gets changed." alt="" coords="512,868,665,895"/>
+<area shape="rect" id="node49" href="$class_string_sensor.html" title="A Sensor whose output is a String." alt="" coords="510,711,667,737"/>
 </map>
