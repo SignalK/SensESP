@@ -45,10 +45,10 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   }
 }
 
-WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta,
+WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
                    String server_address, uint16_t server_port)
     : Configurable{config_path} {
-  this->sk_delta_ = sk_delta;
+  this->sk_delta_queue_ = sk_delta_queue;
 
   preset_server_address_ = server_address;
   preset_server_port_ = server_port;
@@ -102,7 +102,7 @@ void WSClient::on_error() {
 
 void WSClient::on_connected(uint8_t* payload) {
   this->connection_state_ = WSConnectionState::kWSConnected;
-  this->sk_delta_->reset_meta_send();
+  this->sk_delta_queue_->reset_meta_send();
   debugI("Websocket client connected to URL: %s\n", payload);
   debugI("Subscribing to Signal K listeners...");
   this->subscribe_listeners();
@@ -513,8 +513,8 @@ void WSClient::restart() {
 void WSClient::send_delta() {
   String output;
   if (connection_state_ == WSConnectionState::kWSConnected) {
-    if (sk_delta_->data_available()) {
-      sk_delta_->get_delta(output);
+    if (sk_delta_queue_->data_available()) {
+      sk_delta_queue_->get_delta(output);
       this->client_.sendTXT(output);
       // This automatically notifies the observers
       this->delta_count_producer_ = 1;
