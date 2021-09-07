@@ -45,8 +45,8 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   }
 }
 
-WSClient::WSClient(String config_path, SKDelta* sk_delta, String server_address,
-                   uint16_t server_port)
+WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta,
+                   String server_address, uint16_t server_port)
     : Configurable{config_path} {
   this->sk_delta_ = sk_delta;
 
@@ -319,8 +319,8 @@ void WSClient::test_token(const String server_address,
   // FIXME: implement async HTTP client!
   HTTPClient http;
 
-  String url = String("http://") + server_address + ":" + server_port +
-               "/signalk/";
+  String url =
+      String("http://") + server_address + ":" + server_port + "/signalk/";
   debugD("Testing token with url %s", url.c_str());
   http.begin(wifi_client_, url);
   String full_token = String("JWT ") + auth_token_;

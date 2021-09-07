@@ -73,7 +73,7 @@ void SensESPApp::setup() {
 
   // create the SK delta object
 
-  sk_delta_ = new SKDelta(hostname->get());
+  sk_delta_ = new SKDeltaQueue(hostname->get());
 
   // listen for hostname updates
 

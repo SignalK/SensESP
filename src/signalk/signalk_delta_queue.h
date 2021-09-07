@@ -1,16 +1,20 @@
-#ifndef _signalk_delta_H_
-#define _signalk_delta_H_
+#ifndef _signalk_delta_queue_H_
+#define _signalk_delta_queue_H_
 
 #include <list>
 
 #include <ArduinoJson.h>
 
-///////////////////
-// Signal K delta message representation
-
-class SKDelta {
+/**
+ * @brief Signal K delta queue
+ * 
+ * This class implements a Signal K delta queue. There should be a unique queue
+ * for each possible output channel (WSClient, NMEA 2000 messages,
+ * carrier pigeons).
+ */
+class SKDeltaQueue {
  public:
-  SKDelta(const String& hostname, unsigned int max_buffer_size = 20);
+  SKDeltaQueue(const String& hostname, unsigned int max_buffer_size = 20);
   void append(const String val);
   bool data_available();
   void get_delta(String& output);
