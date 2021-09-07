@@ -44,7 +44,7 @@ class SensESPApp {
   String get_hostname();
 
   // getters for internal members
-  SKDeltaQueue* get_sk_delta() { return this->sk_delta_; }
+  SKDeltaQueue* get_sk_delta() { return this->sk_delta_queue_; }
   SystemStatusController* get_system_status_controller() {
     return &(this->system_status_controller_);
   }
@@ -92,7 +92,7 @@ class SensESPApp {
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;
   Networking* networking_;
-  SKDeltaQueue* sk_delta_;
+  SKDeltaQueue* sk_delta_queue_;
   WSClient* ws_client_;
 
   friend class HTTPServer;
