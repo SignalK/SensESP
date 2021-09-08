@@ -3,7 +3,7 @@
 
 #include <ReactESP.h>
 
-#include "enable.h"
+#include "enableable.h"
 #include "net/networking.h"
 #include "net/ws_client.h"
 
@@ -12,7 +12,7 @@
 /**
  * @brief A base class for LED blinker classes.
  */
-class BaseBlinker : public Enable {
+class BaseBlinker : public Enableable {
  public:
   BaseBlinker(int pin);
   void set_state(bool state);
