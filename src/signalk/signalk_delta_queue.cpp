@@ -15,8 +15,8 @@ void SKDeltaQueue::append(const String val) {
   buffer.push_front(val);
 }
 
-void SKDeltaQueue::connect_sources(std::vector<SKEmitter*> sk_delta_sources) {
-  for (auto const& sk_source : sk_delta_sources) {
+void SKDeltaQueue::connect_emitters() {
+  for (auto const& sk_source : SKEmitter::get_sources()) {
     if (sk_source->get_sk_path() != "") {
       sk_source->attach([sk_source, this]() {
         this->append(sk_source->as_signalk());

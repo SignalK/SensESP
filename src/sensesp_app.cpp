@@ -123,7 +123,7 @@ void SensESPApp::enable() {
 
   // ObservableValue<String>* hostname = networking->get_hostname();
 
-  this->sk_delta_queue_->connect_sources(SKEmitter::get_sources());
+  this->sk_delta_queue_->connect_emitters();
 
   debugI("Enabling subsystems");
 
