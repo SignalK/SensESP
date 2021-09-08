@@ -2,7 +2,7 @@
 
 std::set<Sensor*> Sensor::sensors_;
 
-Sensor::Sensor(String config_path) : Configurable{config_path}, Enable(10) {
+Sensor::Sensor(String config_path) : Configurable{config_path}, Enableable(10) {
   sensors_.insert(this);
 }
 

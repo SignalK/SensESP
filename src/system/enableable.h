@@ -1,5 +1,5 @@
-#ifndef _enable_H_
-#define _enable_H_
+#ifndef _enableable_H_
+#define _enableable_H_
 
 #include <stdint.h>
 
@@ -8,16 +8,18 @@
 #include "sensesp.h"
 
 /**
- * @brief Classes that implement "Enable" will have their enable() method
+ * @brief Automatic calling of the enable() method at startup
+ * 
+ * Classes that implement "Enableable" will have their enable() method
  * called automatically at startup when the SensESP app itself
  * is enabled.  The optional priority allows for certain classes
  * to be initialized first. The default priority is zero.
  * A higher priority (i.e. greater than zero) will be enabled before a
  * lower one (i.e. less than zero).
  */
-class Enable {
+class Enableable {
  public:
-  Enable(uint8_t priority = 0);
+  Enableable(uint8_t priority = 0);
 
   /**
    * Called during the initialization process.  Override this method
@@ -47,14 +49,14 @@ class Enable {
     enable_all();
   };
 
-  friend bool operator<(const Enable& lhs, const Enable& rhs) {
+  friend bool operator<(const Enableable& lhs, const Enableable& rhs) {
     return lhs.priority < rhs.priority;
   }
 
  private:
   uint8_t priority;
 
-  static std::priority_queue<Enable*> enableList;
+  static std::priority_queue<Enableable*> enableList;
 };
 
 #endif
