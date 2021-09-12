@@ -125,7 +125,7 @@ class DigitalInputCounter : public DigitalInput, public IntProducer {
  * 
  * @see Debounce
  * */
-class DigitalInputChange : public DigitalInput, public IntProducer {
+class DigitalInputChange : public DigitalInput, public BoolProducer {
  public:
   DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type, uint read_delay = 10,
                                          String config_path = "");
