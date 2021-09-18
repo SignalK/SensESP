@@ -38,7 +38,7 @@ Networking::Networking(String config_path, String ssid, String password,
   wifi_manager = new AsyncWiFiManager(server, dns);
 }
 
-void Networking::setup() {
+void Networking::enable () {
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid();
   }

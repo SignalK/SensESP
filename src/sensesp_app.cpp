@@ -127,9 +127,6 @@ void SensESPApp::enable() {
   // FIXME: Setting up mDNS discovery before networking can't work!
   setup_discovery(networking_->get_hostname()->get().c_str());
 
-  networking_->setup();
-
-
   this->ws_client_->enable();
 
   // initialize remote debugging
