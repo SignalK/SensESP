@@ -47,7 +47,7 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
 
 WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
                    String server_address, uint16_t server_port)
-    : Configurable{config_path} {
+    : Configurable{config_path}, Enableable(60) {
   this->sk_delta_queue_ = sk_delta_queue;
 
   preset_server_address_ = server_address;
