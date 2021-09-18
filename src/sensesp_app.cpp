@@ -130,7 +130,6 @@ void SensESPApp::enable() {
   networking_->setup();
 
 
-  this->http_server_->enable();
   this->ws_client_->enable();
 
   // initialize remote debugging
