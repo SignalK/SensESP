@@ -17,6 +17,7 @@
 #include "controllers/system_status_controller.h"
 #include "net/http.h"
 #include "net/networking.h"
+#include "net/ota.h"
 #include "net/ws_client.h"
 #include "sensesp.h"
 #include "sensors/sensor.h"
@@ -92,6 +93,7 @@ class SensESPApp {
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;
   Networking* networking_;
+  OTA* ota_;
   SKDeltaQueue* sk_delta_queue_;
   WSClient* ws_client_;
 
