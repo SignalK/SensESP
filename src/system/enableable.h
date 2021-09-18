@@ -56,7 +56,7 @@ class Enableable {
  private:
   uint8_t priority;
 
-  static std::priority_queue<Enableable*> enableList;
+  static std::priority_queue<Enableable*> enable_list;
 };
 
 #endif
