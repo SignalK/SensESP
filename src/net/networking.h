@@ -12,6 +12,7 @@
 #include <ESPAsyncWiFiManager.h>
 
 #include "system/configurable.h"
+#include "system/enableable.h"
 #include "system/observablevalue.h"
 #include "system/valueproducer.h"
 
@@ -25,10 +26,10 @@ enum class WifiState {
 /**
  * @brief Manages the ESP's connection to the Wifi network.
  */
-class Networking : public Configurable, public ValueProducer<WifiState> {
+class Networking : public Configurable, public Enableable, public ValueProducer<WifiState> {
  public:
   Networking(String config_path, String ssid, String password, String hostname);
-  void setup();
+  virtual void enable() override;
   ObservableValue<String>* get_hostname();
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
