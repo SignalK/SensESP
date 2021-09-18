@@ -4,7 +4,7 @@
 
 std::priority_queue<Enableable*> Enableable::enable_list;
 
-Enableable::Enableable(uint8_t priority) : priority{priority} {
+Enableable::Enableable(int priority) : priority{priority} {
   Enableable::enable_list.push(this);
 }
 
