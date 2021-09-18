@@ -61,6 +61,9 @@ void SensESPApp::setup() {
   networking_ = new Networking("/system/networking", ssid_, wifi_password_,
                                preset_hostname_);
 
+  // create the OTA object
+  ota_ = new OTA();
+
   // TODO: hostname should work even without networking
   ObservableValue<String>* hostname = networking_->get_hostname();
 
@@ -104,6 +107,7 @@ void SensESPApp::setup() {
 
   // create a system status led and connect it
 
+  // TODO: must not depend on networking and ws_client etc
   if (system_status_led_ == NULL) {
     system_status_led_ = new SystemStatusLed(LED_PIN);
   }
@@ -125,7 +129,6 @@ void SensESPApp::enable() {
 
   networking_->setup();
 
-  setup_ota();
 
   this->http_server_->enable();
   this->ws_client_->enable();
