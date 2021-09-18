@@ -19,7 +19,7 @@
  */
 class Enableable {
  public:
-  Enableable(uint8_t priority = 0);
+  Enableable(int priority = 0);
 
   /**
    * Called during the initialization process.  Override this method
@@ -27,9 +27,9 @@ class Enableable {
    */
   virtual void enable() {}
 
-  const uint8_t get_enable_priority() { return priority; }
+  const int get_enable_priority() { return priority; }
 
-  void set_priority(uint8_t priority) { this->priority = priority; }
+  void set_priority(int priority) { this->priority = priority; }
 
   /**
    * Called by the SensESP framework to initialize all of the objects
