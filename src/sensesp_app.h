@@ -16,6 +16,7 @@
 
 #include "controllers/system_status_controller.h"
 #include "net/http.h"
+#include "net/discovery.h"
 #include "net/networking.h"
 #include "net/ota.h"
 #include "net/ws_client.h"
@@ -91,6 +92,7 @@ class SensESPApp {
   void initialize();
 
   RemoteDebugger* remote_debugger_;
+  MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;

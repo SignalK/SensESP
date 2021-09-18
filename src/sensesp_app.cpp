@@ -93,6 +93,9 @@ void SensESPApp::setup() {
   this->networking_->connect_to(&system_status_controller_);
   this->ws_client_->connect_to(&system_status_controller_);
 
+  // create the MDNS discovery object
+  mdns_discovery_ = new MDNSDiscovery();
+
   // create the wifi disconnect watchdog
   // TODO: make conditional
   this->system_status_controller_
@@ -123,12 +126,9 @@ void SensESPApp::enable() {
 
   // ObservableValue<String>* hostname = networking->get_hostname();
 
-  //this->sk_delta_queue_->connect_emitters();
+  this->sk_delta_queue_->connect_emitters();
 
   debugI("Enabling subsystems");
-
-  // FIXME: Setting up mDNS discovery before networking can't work!
-  //setup_discovery(networking_->get_hostname()->get().c_str());
 
   Enableable::enable_all();
   debugI("All sensors and transforms enabled");
