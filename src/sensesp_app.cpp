@@ -64,6 +64,9 @@ void SensESPApp::setup() {
   // create the OTA object
   ota_ = new OTA();
 
+  // create a remote debugger object
+  remote_debugger_ = new RemoteDebugger();
+
   // TODO: hostname should work even without networking
   ObservableValue<String>* hostname = networking_->get_hostname();
 
@@ -120,20 +123,12 @@ void SensESPApp::enable() {
 
   // ObservableValue<String>* hostname = networking->get_hostname();
 
-  this->sk_delta_queue_->connect_emitters();
+  //this->sk_delta_queue_->connect_emitters();
 
   debugI("Enabling subsystems");
 
   // FIXME: Setting up mDNS discovery before networking can't work!
-  setup_discovery(networking_->get_hostname()->get().c_str());
-
-  // initialize remote debugging
-
-#ifndef DEBUG_DISABLED
-  Debug.begin(networking_->get_hostname()->get());
-  Debug.setResetCmdEnabled(true);
-  app.onRepeat(1, []() { Debug.handle(); });
-#endif
+  //setup_discovery(networking_->get_hostname()->get().c_str());
 
   Enableable::enable_all();
   debugI("All sensors and transforms enabled");
