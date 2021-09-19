@@ -18,7 +18,7 @@ void save_config_callback() { should_save_config = true; }
 
 Networking::Networking(String config_path, String ssid, String password,
                        String hostname)
-    : Configurable{config_path}, Startable(80) {
+    : Configurable{config_path}, Startable(80), Resettable(0) {
   this->output = WifiState::kWifiNoAP;
 
   preset_ssid = ssid;
@@ -209,7 +209,9 @@ bool Networking::set_configuration(const JsonObject& config) {
   return true;
 }
 
-void Networking::reset_settings() {
+void Networking::reset() {
+  debugI("Resetting WiFi SSID settings");
+
   ap_ssid = preset_ssid;
   ap_password = preset_password;
 

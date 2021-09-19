@@ -116,7 +116,6 @@ void SensESPApp::start() {
 void SensESPApp::reset() {
   debugW("Resetting the device configuration to system defaults.");
   Resettable::reset_all();
-  networking_->reset_settings();
   
   app.onDelay(1000, []() {
     ESP.restart();
