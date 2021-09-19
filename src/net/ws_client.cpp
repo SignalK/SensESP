@@ -69,6 +69,7 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
 }
 
 void WSClient::enable() {
+  debugD("Enabling WSClient");
   app.onDelay(0, [this]() { this->connect(); });
   app.onRepeat(20, [this]() { this->loop(); });
   app.onRepeat(5, [this]() { this->send_delta(); });
@@ -367,7 +368,8 @@ void WSClient::send_access_request(const String server_address,
   // create a new access request
   DynamicJsonDocument doc(1024);
   doc["clientId"] = client_id_;
-  doc["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
+  doc["description"] = String("SensESP device: ") +
+                       sensesp_app->get_hostname_observable()->get();
   doc["permissions"] = kRequestPermission;
   String json_req = "";
   serializeJson(doc, json_req);

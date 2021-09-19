@@ -3,12 +3,14 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "sensesp.h"
+#include "sensesp_app.h"
 #include "signalk/signalk_emitter.h"
 
-SKDeltaQueue::SKDeltaQueue(const String& hostname, unsigned int max_buffer_size)
-    : Enableable{0}, hostname{hostname}, max_buffer_size{max_buffer_size}, meta_sent_{false} {}
+SKDeltaQueue::SKDeltaQueue(unsigned int max_buffer_size)
+    : Enableable(0), max_buffer_size{max_buffer_size}, meta_sent_{false} {}
 
 void SKDeltaQueue::enable() {
+  debugD("Enabling SKDeltaQueue");
   this->connect_emitters();
 }
 
@@ -95,7 +97,7 @@ void SKDeltaQueue::get_delta(String& output) {
 
   JsonObject current = updates.createNestedObject();
   JsonObject source = current.createNestedObject("source");
-  source["label"] = hostname;
+  source["label"] = sensesp_app->get_hostname_observable()->get();
   JsonArray values = current.createNestedArray("values");
 
   while (!buffer.empty()) {
