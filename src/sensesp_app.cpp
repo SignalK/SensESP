@@ -26,7 +26,7 @@ void SetupSerialDebug(uint32_t baudrate) {
   delay(100);
   Debug.setSerialEnabled(true);
   delay(100);
-#endif 
+#endif
   debugI("\nSerial debug enabled");
 }
 
@@ -57,6 +57,9 @@ void SensESPApp::setup() {
     ESP.restart();
   }
 
+  // create the hostname_ observable
+  hostname_ = new ObservableValue<String>(preset_hostname_);
+
   // create the networking object
   networking_ = new Networking("/system/networking", ssid_, wifi_password_,
                                preset_hostname_);
@@ -67,17 +70,9 @@ void SensESPApp::setup() {
   // create a remote debugger object
   remote_debugger_ = new RemoteDebugger();
 
-  // TODO: hostname should work even without networking
-  ObservableValue<String>* hostname = networking_->get_hostname();
-
   // create the SK delta object
   // TODO: one queue per output path
-  sk_delta_queue_ = new SKDeltaQueue(hostname->get());
-
-  // listen for hostname updates
-
-  hostname->attach(
-      [hostname, this]() { this->sk_delta_queue_->set_hostname(hostname->get()); });
+  sk_delta_queue_ = new SKDeltaQueue();
 
   // create the HTTP server
   // TODO: make conditional
@@ -85,8 +80,8 @@ void SensESPApp::setup() {
 
   // create the websocket client
   // TODO: make conditional
-  this->ws_client_ =
-      new WSClient("/system/sk", sk_delta_queue_, sk_server_address_, sk_server_port_);
+  this->ws_client_ = new WSClient("/system/sk", sk_delta_queue_,
+                                  sk_server_address_, sk_server_port_);
 
   // connect the system status controller
   // TODO: make conditional
@@ -99,17 +94,17 @@ void SensESPApp::setup() {
   // create the wifi disconnect watchdog
   // TODO: make conditional
   this->system_status_controller_
-    .connect_to(new DebounceTemplate<SystemStatus>(
-      3*60*1000, // 180 s = 180000 ms = 3 minutes
-      "/system/wifi_reboot_watchdog"))
-    ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {
-      debugD("Got system status: %d", (int)input);
-      if (input == SystemStatus::kWifiDisconnected ||
-          input == SystemStatus::kWifiNoAP) {
-            debugW("Unable to connect to wifi for too long; restarting.");
-            app.onDelay(1000, []() { ESP.restart(); });
-          }
-    }));
+      .connect_to(new DebounceTemplate<SystemStatus>(
+          3 * 60 * 1000,  // 180 s = 180000 ms = 3 minutes
+          "/system/wifi_reboot_watchdog"))
+      ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {
+        debugD("Got system status: %d", (int)input);
+        if (input == SystemStatus::kWifiDisconnected ||
+            input == SystemStatus::kWifiNoAP) {
+          debugW("Unable to connect to wifi for too long; restarting.");
+          app.onDelay(1000, []() { ESP.restart(); });
+        }
+      }));
 
   // create a system status led and connect it
 
@@ -136,9 +131,14 @@ void SensESPApp::reset() {
   debugW("Resetting the device configuration.");
   networking_->reset_settings();
   SPIFFS.format();
-  app.onDelay(1000, []() { ESP.restart(); delay(1000); });
+  app.onDelay(1000, []() {
+    ESP.restart();
+    delay(1000);
+  });
 }
 
-String SensESPApp::get_hostname() { return networking_->get_hostname()->get(); }
+ObservableValue<String>* SensESPApp::get_hostname_observable() {
+  return hostname_;
+}
 
 SensESPApp* sensesp_app;
