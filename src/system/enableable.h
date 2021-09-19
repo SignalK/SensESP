@@ -7,6 +7,8 @@
 
 #include "sensesp.h"
 
+class EnableableCompare;
+
 /**
  * @brief Automatic calling of the enable() method at startup
  * 
@@ -49,14 +51,18 @@ class Enableable {
     enable_all();
   };
 
-  friend bool operator<(const Enableable& lhs, const Enableable& rhs) {
-    return lhs.priority < rhs.priority;
-  }
-
+  friend class EnableableCompare;
  private:
-  uint8_t priority;
+  int priority;
 
-  static std::priority_queue<Enableable*> enable_list;
+  static std::priority_queue<Enableable*, std::vector<Enableable*>, EnableableCompare> enable_list;
+};
+
+class EnableableCompare {
+  public:
+    bool operator()(const Enableable* lhs, const Enableable* rhs) const {
+      return lhs->priority < rhs->priority;
+    }
 };
 
 #endif
