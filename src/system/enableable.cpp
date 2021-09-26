@@ -1,18 +1,18 @@
 #include "enableable.h"
 
-#include "sensesp_app.h"
+#include "sensesp.h"
 
-std::priority_queue<Enableable*, std::vector<Enableable*>, EnableableCompare> Enableable::enable_list;
+std::priority_queue<Enableable*, std::vector<Enableable*>, EnableableCompare> Enableable::enable_list_;
 
-Enableable::Enableable(int priority) : priority{priority} {
-  Enableable::enable_list.push(this);
+Enableable::Enableable(int priority) : priority_{priority} {
+  Enableable::enable_list_.push(this);
 }
 
 void Enableable::enable_all() {
-  debugD("Enabling all required sensors and transforms");
-  while (!enable_list.empty()) {
-    auto& obj = *enable_list.top();
+  debugI("Enabling all required sensors and transforms");
+  while (!enable_list_.empty()) {
+    auto& obj = *enable_list_.top();
     obj.enable();
-    enable_list.pop();
+    enable_list_.pop();
   }  // while
 }
