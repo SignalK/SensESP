@@ -1,11 +1,5 @@
 #include "sensesp_app.h"
 
-#ifdef ESP8266
-#include "FS.h"
-#elif defined(ESP32)
-#include "SPIFFS.h"
-#endif
-
 #include "net/discovery.h"
 #include "net/networking.h"
 #include "net/ota.h"
@@ -47,14 +41,7 @@ SensESPApp::SensESPApp(String preset_hostname, String ssid,
 
 void SensESPApp::setup() {
   // initialize filesystem
-#ifdef ESP8266
-  if (!SPIFFS.begin()) {
-#elif defined(ESP32)
-  if (!SPIFFS.begin(true)) {
-#endif
-    debugE("FATAL: Filesystem initialization failed.");
-    ESP.restart();
-  }
+  filesystem_ = new Filesystem();
 
   // create the hostname_ observable
   hostname_ = new ObservableValue<String>(preset_hostname_);
@@ -127,9 +114,10 @@ void SensESPApp::start() {
 }
 
 void SensESPApp::reset() {
-  debugW("Resetting the device configuration.");
+  debugW("Resetting the device configuration to system defaults.");
+  Resettable::reset_all();
   networking_->reset_settings();
-  SPIFFS.format();
+  
   app.onDelay(1000, []() {
     ESP.restart();
     delay(1000);
