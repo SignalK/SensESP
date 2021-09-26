@@ -1,11 +1,7 @@
 #ifndef _enableable_H_
 #define _enableable_H_
 
-#include <stdint.h>
-
 #include <queue>
-
-#include "sensesp.h"
 
 class EnableableCompare;
 
@@ -29,9 +25,9 @@ class Enableable {
    */
   virtual void enable() {}
 
-  const int get_enable_priority() { return priority; }
+  const int get_enable_priority() { return priority_; }
 
-  void set_priority(int priority) { this->priority = priority; }
+  void set_priority(int priority) { this->priority_ = priority; }
 
   /**
    * Called by the SensESP framework to initialize all of the objects
@@ -44,24 +40,17 @@ class Enableable {
    */
   static void enable_all();
 
-  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
-  // [[deprecated("Use enable_all() instead.")]]
-  static void enableAll() {
-    debugW("Use enable_all() instead.");
-    enable_all();
-  };
-
   friend class EnableableCompare;
  private:
-  int priority;
+  int priority_;
 
-  static std::priority_queue<Enableable*, std::vector<Enableable*>, EnableableCompare> enable_list;
+  static std::priority_queue<Enableable*, std::vector<Enableable*>, EnableableCompare> enable_list_;
 };
 
 class EnableableCompare {
   public:
     bool operator()(const Enableable* lhs, const Enableable* rhs) const {
-      return lhs->priority < rhs->priority;
+      return lhs->priority_ < rhs->priority_;
     }
 };
 
