@@ -56,13 +56,13 @@ void SensESPApp::setup() {
   // create a remote debugger object
   remote_debugger_ = new RemoteDebugger();
 
+  // create the HTTP server
+  // TODO: make conditional
+  this->http_server_ = new HTTPServer();
+
   // create the SK delta object
   // TODO: one queue per output path
   sk_delta_queue_ = new SKDeltaQueue();
-
-  // create the HTTP server
-  // TODO: make conditional
-  this->http_server_ = new HTTPServer([this]() { this->reset(); });
 
   // create the websocket client
   // TODO: make conditional
@@ -116,7 +116,7 @@ void SensESPApp::start() {
 void SensESPApp::reset() {
   debugW("Resetting the device configuration to system defaults.");
   Resettable::reset_all();
-  
+
   app.onDelay(1000, []() {
     ESP.restart();
     delay(1000);

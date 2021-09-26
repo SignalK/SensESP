@@ -26,8 +26,7 @@
 #define HTTP_SERVER_PORT 80
 #endif
 
-HTTPServer::HTTPServer(std::function<void()> reset_device) : Startable(50) {
-  this->reset_device = reset_device;
+HTTPServer::HTTPServer() : Startable(50) {
   server = new AsyncWebServer(HTTP_SERVER_PORT);
   using std::placeholders::_1;
 
@@ -198,7 +197,7 @@ void HTTPServer::handle_device_reset(AsyncWebServerRequest* request) {
   request->send(
       200, "text/plain",
       "OK, resetting the device settings back to factory defaults.\n");
-  app.onDelay(500, [this]() { this->reset_device(); });
+  app.onDelay(500, [this]() { sensesp_app->reset(); });
 }
 
 void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
