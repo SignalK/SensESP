@@ -9,7 +9,6 @@
 #include "net/discovery.h"
 #include "net/networking.h"
 #include "net/ota.h"
-#include "system/spiffs_storage.h"
 #include "system/system_status_led.h"
 #include "transforms/debounce.h"
 
