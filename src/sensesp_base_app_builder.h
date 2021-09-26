@@ -8,19 +8,19 @@ class SensESPBaseAppBuilder {
   String hostname_ = "SensESP";
 
  protected:
-  SensESPBaseApp* app;
+  SensESPBaseApp* app_;
 
  public:
   SensESPBaseAppBuilder() {
-    app = new SensESPBaseApp(true);
+    app_ = SensESPBaseApp::get();
   }
   SensESPBaseAppBuilder* set_hostname(String hostname) {
-    app->set_preset_hostname(hostname);
+    app_->set_preset_hostname(hostname);
     return this;
   }
   SensESPBaseApp* get_app() {
-    app->setup();
-    return app;
+    app_->setup();
+    return app_;
   }
 };
 

@@ -73,7 +73,7 @@ void Networking::setup_saved_ssid() {
   this->emit(WifiState::kWifiDisconnected);
   setup_wifi_callbacks();
 
-  const char* hostname = sensesp_app->get_hostname_observable()->get().c_str();
+  const char* hostname = SensESPBaseApp::get()->get_hostname_observable()->get().c_str();
 
 #ifdef ESP32
   WiFi.setHostname(hostname);
@@ -104,7 +104,7 @@ void Networking::wifi_station_disconnected() {
 void Networking::setup_wifi_manager() {
   should_save_config = false;
 
-  String hostname = sensesp_app->get_hostname_observable()->get();
+  String hostname = SensESPBaseApp::get()->get_hostname_observable()->get();
 
   setup_wifi_callbacks();
 
@@ -122,14 +122,14 @@ void Networking::setup_wifi_manager() {
   wifi_manager->addParameter(&custom_hostname);
 
   // Create a unique SSID for configuring each SensESP Device
-  String config_ssid = sensesp_app->get_hostname_observable()->get();
+  String config_ssid = SensESPBaseApp::get()->get_hostname_observable()->get();
   config_ssid = "Configure " + config_ssid;
   const char* pconfig_ssid = config_ssid.c_str();
 
   this->emit(WifiState::kWifiManagerActivated);
 
 #ifdef ESP32
-  WiFi.setHostname(sensesp_app->get_hostname_observable()->get().c_str());
+  WiFi.setHostname(SensESPBaseApp::get()->get_hostname_observable()->get().c_str());
 #elif defined(ESP8266)
   WiFi.hostname(sensesp_app->get_hostname_observable()->get().c_str());
 #endif
@@ -149,7 +149,7 @@ void Networking::setup_wifi_manager() {
   if (should_save_config) {
     String new_hostname = custom_hostname.getValue();
     debugI("Got new custom hostname: %s", new_hostname.c_str());
-    sensesp_app->get_hostname_observable()->set(new_hostname);
+    SensESPBaseApp::get()->get_hostname_observable()->set(new_hostname);
     this->ap_ssid = WiFi.SSID();
     debugI("Got new SSID and password: %s", ap_ssid.c_str());
     this->ap_password = WiFi.psk();
@@ -192,7 +192,7 @@ String Networking::get_config_schema() {
 // FIXME: hostname should be saved in SensESPApp
 
 void Networking::get_configuration(JsonObject& root) {
-  //root["hostname"] = sensesp_app->get_hostname_observable()->get();
+  //root["hostname"] = SensESPBaseApp::get()->get_hostname_observable()->get();
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
@@ -202,7 +202,7 @@ bool Networking::set_configuration(const JsonObject& config) {
   //}
 //
   //if (preset_hostname == "SensESP") {
-  //  sensesp_app->get_hostname_observable()->set(
+  //  SensESPBaseApp::get()->get_hostname_observable()->set(
   //      config["hostname"].as<String>());
   //}
 

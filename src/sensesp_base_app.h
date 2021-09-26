@@ -24,24 +24,21 @@ void SetupSerialDebug(uint32_t baudrate);
  */
 class SensESPBaseApp {
  public:
+  
   /**
-   * @brief Construct a new SensESP Base App object
-   *
-   * This constructor must only be used in SensESPBaseAppBuilder
-   * 
-   * @param defer_setup If set to true, the setup() method will not be 
-   *  called by the constructor.
+   * Singletons should not be cloneable
    */
-  SensESPBaseApp(bool defer_setup);
+  SensESPBaseApp(SensESPBaseApp &other) = delete;
 
   /**
-   * @brief Construct a new SensESP Base App object
-   * 
-   * This is a general-use constructor for direct instantiation of
-   * SensESPBaseApp objects.
-   * 
+   * Singletons should not be assignable
    */
-  SensESPBaseApp(String preset_hostname = "SensESP");
+  void operator=(const SensESPBaseApp &) = delete;
+
+  /**
+   * @brief Get the singleton instance of the SensESPBaseApp
+   */
+  static SensESPBaseApp* get();
 
   /**
    * @brief Initialize the app
@@ -69,6 +66,17 @@ class SensESPBaseApp {
   ObservableValue<String>* get_hostname_observable();
 
 protected:
+  /**
+   * @brief Construct a new SensESP Base App object
+   *
+   * This constructor must only be used in SensESPBaseAppBuilder, and must
+   * be called only once. For compatibility reasons, the class hasn't been
+   * refactored into a singleton.
+   */
+  SensESPBaseApp();
+
+  static SensESPBaseApp* instance_;
+
   String preset_hostname_ = "SensESP";
   ObservableValue<String>* hostname_;
 

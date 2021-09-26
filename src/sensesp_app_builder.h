@@ -21,7 +21,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
 
 
  public:
-  SensESPAppBuilder() { app_ = new SensESPApp(true); }
+  SensESPAppBuilder() { app_ = SensESPApp::get(); }
   SensESPAppBuilder* set_wifi(String ssid, String password) {
     app_->set_ssid(ssid);
     app_->set_wifi_password(password);

@@ -6,22 +6,16 @@
 #include "system/system_status_led.h"
 #include "transforms/debounce.h"
 
-
 /*
  * This constructor must be only used in SensESPAppBuilder
  */
-SensESPApp::SensESPApp(bool defer_setup) 
-    : SensESPBaseApp(defer_setup) {}
+SensESPApp::SensESPApp() : SensESPBaseApp() {}
 
-SensESPApp::SensESPApp(String preset_hostname, String ssid,
-                       String wifi_password, String sk_server_address,
-                       uint16_t sk_server_port)
-    : SensESPBaseApp(preset_hostname),
-      ssid_{ssid},
-      wifi_password_{wifi_password},
-      sk_server_address_{sk_server_address},
-      sk_server_port_{sk_server_port} {
-  setup();
+SensESPApp* SensESPApp::get() {
+  if (instance_ == nullptr) {
+    instance_ = new SensESPApp();
+  }
+  return (SensESPApp*)instance_;
 }
 
 void SensESPApp::setup() {

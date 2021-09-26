@@ -30,10 +30,22 @@ void SetupSerialDebug(uint32_t baudrate);
  */
 class SensESPApp : public SensESPBaseApp {
  public:
-  SensESPApp(bool defer_setup);
-  SensESPApp(String hostname = "SensESP", String ssid = "",
-             String wifi_password = "", String sk_server_address = "",
-             uint16_t sk_server_port = 0);
+
+  /**
+   * Singletons should not be cloneable
+   */
+  SensESPApp(SensESPApp &other) = delete;
+
+  /**
+   * Singletons should not be assignable
+   */
+  void operator=(const SensESPApp &) = delete;
+
+  /**
+   * @brief Get the singleton instance of the SensESPApp
+   */
+  static SensESPApp* get();
+
   void setup();
   ObservableValue<String>* get_hostname_observable();
 
@@ -46,6 +58,8 @@ class SensESPApp : public SensESPBaseApp {
   WSClient* get_ws_client() { return this->ws_client_; }
 
  protected:
+  SensESPApp();
+
   // setters for all constructor arguments
 
   const SensESPApp* set_preset_hostname(String preset_hostname) {
