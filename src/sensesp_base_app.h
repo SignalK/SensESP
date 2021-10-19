@@ -79,6 +79,8 @@ protected:
     preset_hostname_ = preset_hostname;
     return this;
   }
+
+  friend class SensESPBaseAppBuilder;
 };
 
 #endif

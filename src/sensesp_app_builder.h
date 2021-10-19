@@ -1,13 +1,14 @@
 #ifndef SENSESP_APP_BUILDER_H
 #define SENSESP_APP_BUILDER_H
 
+#include "sensesp_base_app_builder.h"
 #include "sensesp_app.h"
 
 /**
  * @brief A class for quickly configuring a SensESP application object before
  * wiring up your sensors.
  */
-class SensESPAppBuilder {
+class SensESPAppBuilder : public SensESPBaseAppBuilder {
  private:
   String hostname_ = "SensESP";
   String ssid_ = "";
@@ -32,7 +33,7 @@ class SensESPAppBuilder {
     return this;
   }
   SensESPAppBuilder* set_hostname(String hostname) {
-    app_->set_preset_hostname(hostname);
+    this->SensESPBaseAppBuilder::set_hostname(hostname);
     return this;
   }
   SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
