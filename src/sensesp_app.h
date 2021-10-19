@@ -1,8 +1,6 @@
 #ifndef _sensesp_app_H_
 #define _sensesp_app_H_
 
-// Required for RemoteDebug
-#define USE_LIB_WEBSOCKET true
 
 #ifdef LED_BUILTIN
 #define LED_PIN LED_BUILTIN
@@ -12,8 +10,6 @@
 #define ENABLE_LED false
 #endif
 
-#include <forward_list>
-
 #include "controllers/system_status_controller.h"
 #include "net/http.h"
 #include "net/discovery.h"
@@ -21,14 +17,10 @@
 #include "net/ota.h"
 #include "net/ws_client.h"
 #include "net/remote_debugger.h"
-#include "sensesp.h"
+#include "sensesp_base_app.h"
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta_queue.h"
-#include "system/filesystem.h"
-#include "system/observablevalue.h"
 #include "system/system_status_led.h"
-#include "system/valueconsumer.h"
-#include "system/valueproducer.h"
 
 void SetupSerialDebug(uint32_t baudrate);
 
@@ -36,15 +28,13 @@ void SetupSerialDebug(uint32_t baudrate);
  * The main SensESP application object.
  * @see SensESPAppBuilder
  */
-class SensESPApp {
+class SensESPApp : public SensESPBaseApp {
  public:
   SensESPApp(bool defer_setup);
   SensESPApp(String hostname = "SensESP", String ssid = "",
              String wifi_password = "", String sk_server_address = "",
              uint16_t sk_server_port = 0);
   void setup();
-  void start();
-  void reset();
   ObservableValue<String>* get_hostname_observable();
 
   // getters for internal members
@@ -59,7 +49,7 @@ class SensESPApp {
   // setters for all constructor arguments
 
   const SensESPApp* set_preset_hostname(String preset_hostname) {
-    this->preset_hostname_ = preset_hostname;
+    this->SensESPBaseApp::set_preset_hostname(preset_hostname);
     return this;
   }
   const SensESPApp* set_ssid(String ssid) {
@@ -84,7 +74,6 @@ class SensESPApp {
   }
 
  protected:
-  String preset_hostname_ = "SensESP";
   String ssid_ = "";
   String wifi_password_ = "";
   String sk_server_address_ = "";
