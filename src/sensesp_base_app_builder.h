@@ -18,6 +18,10 @@ class SensESPBaseAppBuilder {
     app->set_preset_hostname(hostname);
     return this;
   }
+  SensESPBaseApp* get_app() {
+    app->setup();
+    return app;
+  }
 };
 
 #endif
