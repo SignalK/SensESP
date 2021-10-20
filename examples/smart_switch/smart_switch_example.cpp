@@ -111,7 +111,7 @@ ReactESP app([]() {
   // requests made to the Signal K server to set the switch state.
   // This allows any device on the SignalK network that can make
   // such a request to also control the state of our switch.
-  auto* sk_listener = new SKStringPutRequestListener(sk_path);
+  auto* sk_listener = new StringSKPutRequestListener(sk_path);
   sk_listener->connect_to(controller);
 
 

@@ -85,7 +85,7 @@ SKMetadata* metadata = new SKMetadata();
   String sk_path_config_path = "/rodeDeployed/sk";
   
   chain_counter->connect_to(accumulator)
-               ->connect_to(new SKOutputNumber(sk_path, sk_path_config_path, metadata));
+               ->connect_to(new SKOutputFloat(sk_path, sk_path_config_path, metadata));
 
 
 

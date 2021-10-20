@@ -75,7 +75,7 @@ ReactESP app([]() {
       ->connect_to(new Frequency(
           multiplier, config_path_calibrate))  // connect the output of sensor
                                                // to the input of Frequency()
-      ->connect_to(new SKOutputNumber(
+      ->connect_to(new SKOutputFloat(
           sk_path, config_path_skpath));  // connect the output of Frequency()
                                           // to a Signal K Output as a number
 
