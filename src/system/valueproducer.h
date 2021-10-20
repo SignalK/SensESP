@@ -52,6 +52,23 @@ class ValueProducer : virtual public Observable {
   }
 
   /**
+   * @brief Connect a producer to a consumer of a different type.
+   * 
+   * This allows you to connect a producer to a consumer of a different type.
+   * Automatic type conversion is performed.
+   * 
+   * @tparam CT Consumer type
+   * @param consumer Consumer object to connect to
+   * @param input_channel 
+   */
+  template <typename CT>
+  void connect_to(ValueConsumer<CT>* consumer, uint8_t input_channel = 0) {
+    this->attach([this, consumer, input_channel]() {
+      consumer->set_input(CT(this->get()), input_channel);
+    });
+  }
+
+  /**
    *  If the consumer this producer is connecting to is ALSO a producer
    *  of values of the same type, connect_to() calls can be chained
    *  together, as this specialized version returns the producer/consumer
@@ -66,7 +83,29 @@ class ValueProducer : virtual public Observable {
   Transform<T, T2>* connect_to(Transform<T, T2>* consumer_producer,
                                uint8_t input_channel = 0) {
     this->attach([this, consumer_producer, input_channel]() {
-      consumer_producer->set_input(this->get(), input_channel);
+      consumer_producer->set_input(T(this->get()), input_channel);
+    });
+    return consumer_producer;
+  }
+
+
+  /**
+   * @brief Connect a producer to a transform with a different input type
+   * 
+   * This allows you to connect a producer to a transform with a different
+   * input type. Automatic type conversion is performed.
+   * 
+   * @tparam TT Transform input type
+   * @tparam T2 Transform output type
+   * @param consumer_producer Transform object to connect to
+   * @param input_channel 
+   * @return Transform<TT, T2>* 
+   */
+  template <typename TT, typename T2>
+  Transform<TT, T2>* connect_to(Transform<TT, T2>* consumer_producer,
+                               uint8_t input_channel = 0) {
+    this->attach([this, consumer_producer, input_channel]() {
+      consumer_producer->set_input(TT(this->get()), input_channel);
     });
     return consumer_producer;
   }
