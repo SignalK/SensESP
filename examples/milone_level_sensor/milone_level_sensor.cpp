@@ -115,7 +115,7 @@ ReactESP app([]() {
   // Comment out the following 3 lines to suppress the output of the eTape sensor resistance.
   analog_input->connect_to(new AnalogVoltage(1.0, 1.0, 0.))
       ->connect_to(new VoltageDividerR1(R2, Vin, "/freshWaterTank_starboard/divider"))
-      ->connect_to(new SKOutputNumber("tanks.freshWater.starboard.R1"));
+      ->connect_to(new SKOutputFloat("tanks.freshWater.starboard.R1"));
 
   // Use the ETapeInterpolator to output the water level depth in the tank and pass it through
   // the MovingAverage transport before outputting the result.
@@ -124,7 +124,7 @@ ReactESP app([]() {
       ->connect_to(new VoltageDividerR1(R2, Vin, ""))
       ->connect_to(new ETapeInterpreter(""))
       ->connect_to(new MovingAverage(samples, scale, "/freshWaterTank_starboard/samples"))
-      ->connect_to(new SKOutputNumber("tanks.freshwater.starboard.currentLevel"));
+      ->connect_to(new SKOutputFloat("tanks.freshwater.starboard.currentLevel"));
 
   // Start the SensESP application running
   sensesp_app->enable();
