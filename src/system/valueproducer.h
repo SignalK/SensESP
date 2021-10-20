@@ -42,15 +42,7 @@ class ValueProducer : virtual public Observable {
       consumer->set_input(this->get(), input_channel);
     });
   }
-
-  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
-  // [[deprecated("Use connect_to() instead.")]]
-  void connectTo(
-      ValueConsumer<T>* consumer, uint8_t input_channel = 0) {
-    debugW("Use connect_to() instead.");
-    connect_to(consumer, input_channel);
-  }
-
+  
   /**
    *  If the consumer this producer is connecting to is ALSO a producer
    *  of values of the same type, connect_to() calls can be chained
@@ -69,15 +61,6 @@ class ValueProducer : virtual public Observable {
       consumer_producer->set_input(this->get(), input_channel);
     });
     return consumer_producer;
-  }
-
-  template <typename T2>
-  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
-  //[[deprecated("Use connect_to(...) instead.")]]
-  Transform<T, T2>* connectTo(
-      Transform<T, T2>* consumer_producer, uint8_t input_channel = 0) {
-    debugW("Use connect_to(...) instead.");
-    return connect_to(consumer_producer, input_channel);
   }
 
   /*
