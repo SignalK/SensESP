@@ -27,8 +27,8 @@ ReactESP app([]() {
   SetupSerialDebug(115200);
 
   SensESPAppBuilder builder;
-  sensesp_app = builder.set_standard_sensors(NONE)
-              ->set_hostname("ChainCounter")
+  sensesp_app = builder
+              .set_hostname("ChainCounter")
               ->set_wifi("YourSSID", "YourPassword")
               ->get_app();
 

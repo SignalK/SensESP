@@ -31,7 +31,6 @@ ReactESP app([]() {
   sensesp_app = builder.set_hostname("relay")
                     ->set_sk_server("10.10.10.1", 3000)
                     ->set_wifi("yourSSID", "yourPassword")
-                    ->set_standard_sensors()
                     ->get_app();
 
   // To find valid Signal K Paths that fits your need you look at this link:
