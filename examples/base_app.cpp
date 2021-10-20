@@ -1,12 +1,11 @@
 #include <Arduino.h>
 
 #include "math.h"
-#include "net/http_server.h"
+#include "net/http.h"
 #include "net/networking.h"
 #include "sensesp_base_app.h"
 #include "sensesp_base_app_builder.h"
 #include "sensors/digital_input.h"
-#include "transforms/enable.h"
 #include "transforms/lambda_transform.h"
 #include "transforms/linear.h"
 #include "transforms/typecast.h"
@@ -69,5 +68,5 @@ ReactESP app([]() {
     digitalWrite(output_pin2, !digitalRead(output_pin2));
   });
 
-  sensesp_app->enable();
+  sensesp_app->start();
 });

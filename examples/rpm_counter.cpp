@@ -2,7 +2,7 @@
 
 //#define SERIAL_DEBUG_DISABLED
 
-#include "sensesp_app.h"
+#include "sensesp_app_builder.h"
 #include "sensors/digital_input.h"
 #include "signalk/signalk_output.h"
 #include "transforms/frequency.h"
@@ -14,7 +14,8 @@ ReactESP app([]() {
   SetupSerialDebug(115200);
 #endif
 
-  sensesp_app = new SensESPApp();
+  SensESPAppBuilder builder;
+  sensesp_app = builder.get_app();
 
   // The "Signal K path" identifies the output of the sensor to the Signal K
   // network. If you have multiple sensors connected to your microcontoller
