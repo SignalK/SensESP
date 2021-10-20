@@ -12,7 +12,7 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "AsyncJson.h"
-#include "sensesp_app.h"
+#include "sensesp_base_app.h"
 #include "system/configurable.h"
 
 // Include the web UI stored in PROGMEM space
@@ -218,10 +218,11 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
 
   response->printf("SSID: %s\n", WiFi.SSID().c_str());
 
-  response->printf("Signal K server address: %s\n",
-                   SensESPApp::get()->ws_client_->get_server_address().c_str());
-  response->printf("Signal K server port: %d\n",
-                   SensESPApp::get()->ws_client_->get_server_port());
-
-  request->send(response);
+  // TODO: use inversion of control to acquire information on different subsystems
+  //  response->printf("Signal K server address: %s\n",
+  //                   SensESPApp::get()->ws_client_->get_server_address().c_str());
+  //  response->printf("Signal K server port: %d\n",
+  //                   SensESPApp::get()->ws_client_->get_server_port());
+  //
+    request->send(response);
 }
