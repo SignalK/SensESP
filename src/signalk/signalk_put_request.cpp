@@ -1,19 +1,11 @@
 #include "signalk/signalk_put_request.h"
 
-#include <ESPTrueRandom.h>
-
 #include "sensesp_app.h"
+#include "system/uuid.h"
 
 extern ReactESP app;
 
 std::map<String, SKRequest::PendingRequest*> SKRequest::request_map;
-
-// Generate a uuid for requests...
-static String uuid4() {
-  byte uuidNumber[16];
-  ESPTrueRandom.uuid(uuidNumber);
-  return ESPTrueRandom.uuidToString(uuidNumber);
-}
 
 String SKRequest::send_request(DynamicJsonDocument& request,
                                std::function<void(DynamicJsonDocument&)> callback,
@@ -22,7 +14,7 @@ String SKRequest::send_request(DynamicJsonDocument& request,
   PendingRequest* pending_request = new PendingRequest();
 
   // Generate a uuid for the request...
-  pending_request->request_id = uuid4();
+  pending_request->request_id = generate_uuid4();
 
   // Save the callback for future processing...
   pending_request->callback = callback;
