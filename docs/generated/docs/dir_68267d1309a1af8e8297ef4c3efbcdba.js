@@ -13,6 +13,9 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "sensesp_app_builder.h", "sensesp__app__builder_8h.html", [
       [ "SensESPAppBuilder", "class_sens_e_s_p_app_builder.html", "class_sens_e_s_p_app_builder" ]
     ] ],
+    [ "sensesp_app_builder_pre.h", "sensesp__app__builder__pre_8h.html", [
+      [ "SensESPAppBuilder", "class_sens_e_s_p_app_builder.html", "class_sens_e_s_p_app_builder" ]
+    ] ],
     [ "wiring_helpers.cpp", "wiring__helpers_8cpp.html", "wiring__helpers_8cpp" ],
     [ "wiring_helpers.h", "wiring__helpers_8h.html", "wiring__helpers_8h" ]
 ];
