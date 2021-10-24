@@ -11,13 +11,13 @@
 #include <HTTPClient.h>
 #endif
 
-#include <ESPTrueRandom.h>
 #include <WiFiClient.h>
 
 #include "sensesp_app.h"
 #include "signalk/signalk_listener.h"
 #include "signalk/signalk_put_request.h"
 #include "signalk/signalk_put_request_listener.h"
+#include "system/uuid.h"
 
 WSClient* ws_client;
 
@@ -360,9 +360,7 @@ void WSClient::send_access_request(const String server_address,
   debugD("Preparing a new access request");
   if (client_id_ == "") {
     // generate a client ID
-    byte uuidNumber[16];
-    ESPTrueRandom.uuid(uuidNumber);
-    client_id_ = ESPTrueRandom.uuidToString(uuidNumber);
+    client_id_ = generate_uuid4();
     save_configuration();
   }
 
