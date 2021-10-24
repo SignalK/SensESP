@@ -33,7 +33,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.6</span>
+   &#160;<span id="projectnumber">1.0.7</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -121,6 +121,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad735260f9c88e9f45810fa7403fbbf59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a6855b053816852d61fd7012ea46e1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sens_e_s_p_app.html">SensESPApp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sens_e_s_p_app_builder.html#a4a6855b053816852d61fd7012ea46e1f">get_app</a> ()</td></tr>
 <tr class="separator:a4a6855b053816852d61fd7012ea46e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a820e3351c223431dd5ace3020eae7c12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sens_e_s_p_app_builder.html#a820e3351c223431dd5ace3020eae7c12">SensESPAppBuilder</a> ()</td></tr>
+<tr class="separator:a820e3351c223431dd5ace3020eae7c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81a82a604d3720c50b1bbe7d7c649172"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sens_e_s_p_app_builder.html#a81a82a604d3720c50b1bbe7d7c649172">set_wifi</a> (String ssid, String password)</td></tr>
+<tr class="separator:a81a82a604d3720c50b1bbe7d7c649172"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a1b039efc3345f1d909b7adea3342ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sens_e_s_p_app_builder.html#a2a1b039efc3345f1d909b7adea3342ee">set_sk_server</a> (String address, uint16_t port)</td></tr>
+<tr class="separator:a2a1b039efc3345f1d909b7adea3342ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a154893dfbbca4f214b733f3a0d147b76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sens_e_s_p_app_builder.html#a154893dfbbca4f214b733f3a0d147b76">set_hostname</a> (String <a class="el" href="sensesp__app_8cpp.html#ad73d4df2ce4b897a6f527dcc95adde4c">hostname</a>)</td></tr>
+<tr class="separator:a154893dfbbca4f214b733f3a0d147b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63bec132d64058c62eef2874d50190ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sens_e_s_p_app_builder.html#a63bec132d64058c62eef2874d50190ee">set_system_status_led</a> (<a class="el" href="class_system_status_led.html">SystemStatusLed</a> *system_status_led)</td></tr>
+<tr class="separator:a63bec132d64058c62eef2874d50190ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad735260f9c88e9f45810fa7403fbbf59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sens_e_s_p_app_builder.html#ad735260f9c88e9f45810fa7403fbbf59">set_test_auth_on_each_connect</a> (bool val)</td></tr>
+<tr class="separator:ad735260f9c88e9f45810fa7403fbbf59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a6855b053816852d61fd7012ea46e1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sens_e_s_p_app.html">SensESPApp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sens_e_s_p_app_builder.html#a4a6855b053816852d61fd7012ea46e1f">get_app</a> ()</td></tr>
+<tr class="separator:a4a6855b053816852d61fd7012ea46e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class for quickly configuring a SensESP application object before wiring up your sensors. </p>
@@ -128,7 +142,7 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="sensesp__app__builder_8h_source.html#l00010">10</a> of file <a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a820e3351c223431dd5ace3020eae7c12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a820e3351c223431dd5ace3020eae7c12">&#9670;&nbsp;</a></span>SensESPAppBuilder()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a820e3351c223431dd5ace3020eae7c12">&#9670;&nbsp;</a></span>SensESPAppBuilder() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,9 +168,36 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a820e3351c223431dd5ace3020eae7c12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a820e3351c223431dd5ace3020eae7c12">&#9670;&nbsp;</a></span>SensESPAppBuilder() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SensESPAppBuilder::SensESPAppBuilder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__app__builder__pre_8h_source.html#l00021">21</a> of file <a class="el" href="sensesp__app__builder__pre_8h_source.html">sensesp_app_builder_pre.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4a6855b053816852d61fd7012ea46e1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a6855b053816852d61fd7012ea46e1f">&#9670;&nbsp;</a></span>get_app()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a6855b053816852d61fd7012ea46e1f">&#9670;&nbsp;</a></span>get_app() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,11 +220,44 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="sensesp__app__builder_8h_source.html#l00052">52</a> of file <a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_sens_e_s_p_app_builder_a4a6855b053816852d61fd7012ea46e1f_icgraph.svg" width="254" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a4a6855b053816852d61fd7012ea46e1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a6855b053816852d61fd7012ea46e1f">&#9670;&nbsp;</a></span>get_app() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_sens_e_s_p_app.html">SensESPApp</a>* SensESPAppBuilder::get_app </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__app__builder__pre_8h_source.html#l00044">44</a> of file <a class="el" href="sensesp__app__builder__pre_8h_source.html">sensesp_app_builder_pre.h</a>.</p>
 
 </div>
 </div>
 <a id="a154893dfbbca4f214b733f3a0d147b76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a154893dfbbca4f214b733f3a0d147b76">&#9670;&nbsp;</a></span>set_hostname()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a154893dfbbca4f214b733f3a0d147b76">&#9670;&nbsp;</a></span>set_hostname() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,11 +281,83 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="sensesp__app__builder_8h_source.html#l00040">40</a> of file <a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_sens_e_s_p_app_builder_a154893dfbbca4f214b733f3a0d147b76_icgraph.svg" width="254" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a154893dfbbca4f214b733f3a0d147b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a154893dfbbca4f214b733f3a0d147b76">&#9670;&nbsp;</a></span>set_hostname() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a>* SensESPAppBuilder::set_hostname </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>hostname</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__app__builder__pre_8h_source.html#l00032">32</a> of file <a class="el" href="sensesp__app__builder__pre_8h_source.html">sensesp_app_builder_pre.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a1b039efc3345f1d909b7adea3342ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a1b039efc3345f1d909b7adea3342ee">&#9670;&nbsp;</a></span>set_sk_server() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a>* SensESPAppBuilder::set_sk_server </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__app__builder__pre_8h_source.html#l00027">27</a> of file <a class="el" href="sensesp__app__builder__pre_8h_source.html">sensesp_app_builder_pre.h</a>.</p>
 
 </div>
 </div>
 <a id="a24cb2ae2e908baaf3bc878b6c0e7ba57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24cb2ae2e908baaf3bc878b6c0e7ba57">&#9670;&nbsp;</a></span>set_sk_server()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24cb2ae2e908baaf3bc878b6c0e7ba57">&#9670;&nbsp;</a></span>set_sk_server() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,11 +425,17 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="sensesp__app__builder_8h_source.html#l00036">36</a> of file <a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_sens_e_s_p_app_builder_aa17d9342f404c76087f27bd6d34729e0_icgraph.svg" width="256" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
 <a id="a63bec132d64058c62eef2874d50190ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63bec132d64058c62eef2874d50190ee">&#9670;&nbsp;</a></span>set_system_status_led()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a63bec132d64058c62eef2874d50190ee">&#9670;&nbsp;</a></span>set_system_status_led() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -310,8 +462,36 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a63bec132d64058c62eef2874d50190ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63bec132d64058c62eef2874d50190ee">&#9670;&nbsp;</a></span>set_system_status_led() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a>* SensESPAppBuilder::set_system_status_led </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_system_status_led.html">SystemStatusLed</a> *&#160;</td>
+          <td class="paramname"><em>system_status_led</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__app__builder__pre_8h_source.html#l00036">36</a> of file <a class="el" href="sensesp__app__builder__pre_8h_source.html">sensesp_app_builder_pre.h</a>.</p>
+
+</div>
+</div>
 <a id="ad735260f9c88e9f45810fa7403fbbf59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad735260f9c88e9f45810fa7403fbbf59">&#9670;&nbsp;</a></span>set_test_auth_on_each_connect()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad735260f9c88e9f45810fa7403fbbf59">&#9670;&nbsp;</a></span>set_test_auth_on_each_connect() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,8 +518,36 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad735260f9c88e9f45810fa7403fbbf59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad735260f9c88e9f45810fa7403fbbf59">&#9670;&nbsp;</a></span>set_test_auth_on_each_connect() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a>* SensESPAppBuilder::set_test_auth_on_each_connect </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__app__builder__pre_8h_source.html#l00040">40</a> of file <a class="el" href="sensesp__app__builder__pre_8h_source.html">sensesp_app_builder_pre.h</a>.</p>
+
+</div>
+</div>
 <a id="a81a82a604d3720c50b1bbe7d7c649172"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81a82a604d3720c50b1bbe7d7c649172">&#9670;&nbsp;</a></span>set_wifi()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a81a82a604d3720c50b1bbe7d7c649172">&#9670;&nbsp;</a></span>set_wifi() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -373,11 +581,56 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="sensesp__app__builder_8h_source.html#l00024">24</a> of file <a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_sens_e_s_p_app_builder_a81a82a604d3720c50b1bbe7d7c649172_icgraph.svg" width="254" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a id="a81a82a604d3720c50b1bbe7d7c649172"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81a82a604d3720c50b1bbe7d7c649172">&#9670;&nbsp;</a></span>set_wifi() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a>* SensESPAppBuilder::set_wifi </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>ssid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>password</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__app__builder__pre_8h_source.html#l00022">22</a> of file <a class="el" href="sensesp__app__builder__pre_8h_source.html">sensesp_app_builder_pre.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a></li>
+<li>src/<a class="el" href="sensesp__app__builder__pre_8h_source.html">sensesp_app_builder_pre.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

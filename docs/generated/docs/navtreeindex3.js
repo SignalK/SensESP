@@ -1,5 +1,12 @@
 var NAVTREEINDEX3 =
 {
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666":[1,0,0,5,11,1],
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666a6276db3bdb34c277449d4bfe85e107fd":[1,0,0,5,11,1,2],
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666a90cdf9b893f111309c5f35d6bf413f90":[1,0,0,5,11,1,4],
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666a99f490e53ed16a6580a350b42e1143a9":[1,0,0,5,11,1,5],
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666ac58a283b80d411649376455b98710c95":[1,0,0,5,11,1,1],
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666ad0fff85d3541aedaddfb3c5e67e897b4":[1,0,0,5,11,1,3],
+"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666ae331802be240d79912c365112ad41ddb":[1,0,0,5,11,1,0],
 "click__type_8h_source.html":[1,0,0,5,11],
 "configurable_8cpp.html":[1,0,0,4,0],
 "configurable_8cpp.html#a19ac563e52fea3af6b643155f9d258b6":[1,0,0,4,0,0],
@@ -201,8 +208,7 @@ var NAVTREEINDEX3 =
 "linear_8h.html":[1,0,0,5,29],
 "linear_8h_source.html":[1,0,0,5,29],
 "main_8cpp.html":[1,0,0,6],
-"main_8cpp.html#a8abe44af131f55591035d3587ca9484d":[1,0,0,6,0],
-"main_8cpp.html#ade307de9a8f825b2b28252c94189a56e":[1,0,0,6,1],
+"main_8cpp.html#a7d891101ebfe1f138bc4c87a4a602322":[1,0,0,6,0],
 "main_8cpp_source.html":[1,0,0,6],
 "max31856__thermocouple_8cpp.html":[1,0,0,2,17],
 "max31856__thermocouple_8cpp_source.html":[1,0,0,2,17],
@@ -243,11 +249,5 @@ var NAVTREEINDEX3 =
 "nmea__parser_8cpp.html#a78e0374f91eaf4035ec29121f7e40064":[1,0,0,4,7,14],
 "nmea__parser_8cpp.html#ac534d920f6775ddb34453e554699e1b4":[1,0,0,4,7,5],
 "nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520":[1,0,0,4,7,0],
-"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a05e849a8cef5c44456bd54132f622ef2":[1,0,0,4,7,0,4],
-"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a1b64cc0e9a9ebc1afccab8e472ed2e3c":[1,0,0,4,7,0,5],
-"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a32b763dac1af6b0b08ab952ea202f6a3":[1,0,0,4,7,0,8],
-"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a4692e23f3770a255f880456f7fbec485":[1,0,0,4,7,0,7],
-"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a59f188885f9974ee947a7e5af4b9f5bc":[1,0,0,4,7,0,6],
-"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a8d26d1fa1d0cda42a29843162786a0b6":[1,0,0,4,7,0,2],
-"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520acad07a79b4226b1e51ce24a510e6aef0":[1,0,0,4,7,0,0]
+"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a05e849a8cef5c44456bd54132f622ef2":[1,0,0,4,7,0,4]
 };

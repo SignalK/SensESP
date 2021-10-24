@@ -32,6 +32,8 @@ var dir_d501334aeb1b78ad67cd3c72c37b1e87 =
     [ "system_status_led.h", "system__status__led_8h.html", [
       [ "SystemStatusLed", "class_system_status_led.html", "class_system_status_led" ]
     ] ],
+    [ "uuid.cpp", "uuid_8cpp.html", "uuid_8cpp" ],
+    [ "uuid.h", "uuid_8h.html", "uuid_8h" ],
     [ "valueconsumer.h", "valueconsumer_8h.html", "valueconsumer_8h" ],
     [ "valueproducer.h", "valueproducer_8h.html", "valueproducer_8h" ]
 ];
