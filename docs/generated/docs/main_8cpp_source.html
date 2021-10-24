@@ -33,7 +33,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SensESP
-   &#160;<span id="projectnumber">1.0.6</span>
+   &#160;<span id="projectnumber">1.0.7</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor framework for ESP8266 and ESP32</div>
   </td>
@@ -96,76 +96,40 @@ $(document).ready(function(){initNavTree('main_8cpp_source.html',''); initResiza
 <div class="contents">
 <a href="main_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//#define SERIAL_DEBUG_DISABLED</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="main_8cpp.html#a8abe44af131f55591035d3587ca9484d">    5</a></span>&#160;<span class="preprocessor">#define USE_LIB_WEBSOCKET true</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sensesp__app_8h.html">sensesp_app.h</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="onewire__temperature_8h.html">sensors/onewire_temperature.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="signalk__output_8h.html">signalk/signalk_output.h</a>&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="linear_8h.html">transforms/linear.h</a>&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="wiring__helpers_8h.html">wiring_helpers.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;math.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sensesp__app_8h.html">sensesp_app.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sensesp__app__builder_8h.html">sensesp_app_builder.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="analog__input_8h.html">sensors/analog_input.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="signalk__output_8h.html">signalk/signalk_output.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hysteresis_8h.html">transforms/hysteresis.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="main_8cpp.html#a7d891101ebfe1f138bc4c87a4a602322">   10</a></span>&#160;ReactESP <a class="code" href="main_8cpp.html#a7d891101ebfe1f138bc4c87a4a602322">app</a>([]() {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <a class="code" href="sensesp__app_8cpp.html#a26cd8b11d153355437b86342648b9d70">SetupSerialDebug</a>(115200);</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="main_8cpp.html#ade307de9a8f825b2b28252c94189a56e">   13</a></span>&#160;ReactESP <a class="code" href="main_8cpp.html#ade307de9a8f825b2b28252c94189a56e">app</a>([]() {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef SERIAL_DEBUG_DISABLED</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <a class="code" href="sensesp__app_8cpp.html#a26cd8b11d153355437b86342648b9d70">SetupSerialDebug</a>(115200);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <a class="code" href="sensesp__app_8cpp.html#a9b53af60ecde971876d66994134fbfff">sensesp_app</a> = <span class="keyword">new</span> <a class="code" href="class_sens_e_s_p_app.html">SensESPApp</a>();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <a class="code" href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a> builder;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <a class="code" href="sensesp__app_8cpp.html#a9b53af60ecde971876d66994134fbfff">sensesp_app</a> = builder</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                  .<a class="code" href="class_sens_e_s_p_app_builder.html#a154893dfbbca4f214b733f3a0d147b76">set_hostname</a>(<span class="stringliteral">&quot;minimal&quot;</span>)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                  -&gt;<a class="code" href="class_sens_e_s_p_app_builder.html#a81a82a604d3720c50b1bbe7d7c649172">set_wifi</a>(<span class="stringliteral">&quot;Root Cause&quot;</span>, <span class="stringliteral">&quot;kanneluuri2406&quot;</span>)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                  -&gt;<a class="code" href="class_sens_e_s_p_app_builder.html#aa17d9342f404c76087f27bd6d34729e0">set_standard_sensors</a>(<a class="code" href="sensesp__app_8h.html#abeacf3e22e82961fc23c43cad734ebbdab1d5eac4b1dca480c8056eaea7663b7a">ALL</a>)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                  -&gt;<a class="code" href="class_sens_e_s_p_app_builder.html#a4a6855b053816852d61fd7012ea46e1f">get_app</a>();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="comment">/*</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     Find all the sensors and their unique addresses. Then, each new instance</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     of OneWireTemperature will use one of those addresses. You can&#39;t specify</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     which address will initially be assigned to a particular sensor, so if you</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     have more than one sensor, you may have to swap the addresses around on</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     the configuration page for the device. (You get to the configuration page</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     by entering the IP address of the device into a browser.)</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  */</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="comment">/*</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     Tell SensESP where the sensor is connected to the board</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     ESP8266 pins are specified as DX</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     ESP32 pins are specified as just the X in GPIOX</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  */</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifdef ESP8266</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  uint8_t pin = D1;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#elif defined(ESP32)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  uint8_t pin = 4;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="class_dallas_temperature_sensors.html">DallasTemperatureSensors</a>* dts = <span class="keyword">new</span> <a class="code" href="class_dallas_temperature_sensors.html">DallasTemperatureSensors</a>(pin);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="comment">// Define how often SensESP should read the sensor(s) in milliseconds</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> read_delay = 500;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">// Below are temperatures sampled and sent to Signal K server</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// To find valid Signal K Paths that fits your need you look at this link:</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">// https://signalk.org/specification/1.4.0/doc/vesselsBranch.html</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="comment">// Measure coolant temperature</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">auto</span>* ow_temp =</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keyword">new</span> <a class="code" href="class_one_wire_temperature.html">OneWireTemperature</a>(dts, read_delay, <span class="stringliteral">&quot;/test/oneWire&quot;</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  ow_temp-&gt;connect_to(</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          <span class="keyword">new</span> <a class="code" href="signalk__output_8h.html#a4d7e8d82175eee43e47bbc5499bde0e8">SKOutputNumber</a>(<span class="stringliteral">&quot;test.onewire.temperature&quot;</span>,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                             <span class="stringliteral">&quot;/test/skPath&quot;</span>));</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="comment">// Configuration is done, lets start the readings of the sensors!</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <a class="code" href="sensesp__app_8cpp.html#a9b53af60ecde971876d66994134fbfff">sensesp_app</a>-&gt;<a class="code" href="class_sens_e_s_p_app.html#a3d70c22bfd1bf842f6daa83ab2f50f79">enable</a>();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;});</div>
-<div class="ttc" id="aclass_dallas_temperature_sensors_html"><div class="ttname"><a href="class_dallas_temperature_sensors.html">DallasTemperatureSensors</a></div><div class="ttdoc">Finds all 1-Wire temperature sensors that are connected to the ESP and makes the address(es) and temp...</div><div class="ttdef"><b>Definition:</b> <a href="onewire__temperature_8h_source.html#l00027">onewire_temperature.h:27</a></div></div>
-<div class="ttc" id="aclass_one_wire_temperature_html"><div class="ttname"><a href="class_one_wire_temperature.html">OneWireTemperature</a></div><div class="ttdoc">Used to read the temperature from a single 1-Wire temperature sensor. If you have X sensors connected...</div><div class="ttdef"><b>Definition:</b> <a href="onewire__temperature_8h_source.html#l00067">onewire_temperature.h:67</a></div></div>
-<div class="ttc" id="aclass_sens_e_s_p_app_html"><div class="ttname"><a href="class_sens_e_s_p_app.html">SensESPApp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app_8h_source.html#l00047">sensesp_app.h:47</a></div></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="sensesp__app_8cpp.html#a9b53af60ecde971876d66994134fbfff">sensesp_app</a>-&gt;<a class="code" href="class_sens_e_s_p_app.html#a3d70c22bfd1bf842f6daa83ab2f50f79">enable</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;});</div>
+<div class="ttc" id="aanalog__input_8h_html"><div class="ttname"><a href="analog__input_8h.html">analog_input.h</a></div></div>
+<div class="ttc" id="aclass_sens_e_s_p_app_builder_html"><div class="ttname"><a href="class_sens_e_s_p_app_builder.html">SensESPAppBuilder</a></div><div class="ttdoc">A class for quickly configuring a SensESP application object before wiring up your sensors.</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app__builder_8h_source.html#l00010">sensesp_app_builder.h:10</a></div></div>
+<div class="ttc" id="aclass_sens_e_s_p_app_builder_html_a154893dfbbca4f214b733f3a0d147b76"><div class="ttname"><a href="class_sens_e_s_p_app_builder.html#a154893dfbbca4f214b733f3a0d147b76">SensESPAppBuilder::set_hostname</a></div><div class="ttdeci">SensESPAppBuilder * set_hostname(String hostname)</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app__builder_8h_source.html#l00040">sensesp_app_builder.h:40</a></div></div>
+<div class="ttc" id="aclass_sens_e_s_p_app_builder_html_a4a6855b053816852d61fd7012ea46e1f"><div class="ttname"><a href="class_sens_e_s_p_app_builder.html#a4a6855b053816852d61fd7012ea46e1f">SensESPAppBuilder::get_app</a></div><div class="ttdeci">SensESPApp * get_app()</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app__builder_8h_source.html#l00052">sensesp_app_builder.h:52</a></div></div>
+<div class="ttc" id="aclass_sens_e_s_p_app_builder_html_a81a82a604d3720c50b1bbe7d7c649172"><div class="ttname"><a href="class_sens_e_s_p_app_builder.html#a81a82a604d3720c50b1bbe7d7c649172">SensESPAppBuilder::set_wifi</a></div><div class="ttdeci">SensESPAppBuilder * set_wifi(String ssid, String password)</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app__builder_8h_source.html#l00024">sensesp_app_builder.h:24</a></div></div>
+<div class="ttc" id="aclass_sens_e_s_p_app_builder_html_aa17d9342f404c76087f27bd6d34729e0"><div class="ttname"><a href="class_sens_e_s_p_app_builder.html#aa17d9342f404c76087f27bd6d34729e0">SensESPAppBuilder::set_standard_sensors</a></div><div class="ttdeci">SensESPAppBuilder * set_standard_sensors(StandardSensors sensors=ALL)</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app__builder_8h_source.html#l00036">sensesp_app_builder.h:36</a></div></div>
 <div class="ttc" id="aclass_sens_e_s_p_app_html_a3d70c22bfd1bf842f6daa83ab2f50f79"><div class="ttname"><a href="class_sens_e_s_p_app.html#a3d70c22bfd1bf842f6daa83ab2f50f79">SensESPApp::enable</a></div><div class="ttdeci">void enable()</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app_8cpp_source.html#l00158">sensesp_app.cpp:158</a></div></div>
-<div class="ttc" id="alinear_8h_html"><div class="ttname"><a href="linear_8h.html">linear.h</a></div></div>
-<div class="ttc" id="amain_8cpp_html_ade307de9a8f825b2b28252c94189a56e"><div class="ttname"><a href="main_8cpp.html#ade307de9a8f825b2b28252c94189a56e">app</a></div><div class="ttdeci">ReactESP app([]() { SetupSerialDebug(115200);sensesp_app=new SensESPApp();DallasTemperatureSensors *dts=new DallasTemperatureSensors(pin);unsigned int read_delay=500;auto *ow_temp=new OneWireTemperature(dts, read_delay, &quot;/test/oneWire&quot;);ow_temp-&gt;connect_to(new SKOutputNumber(&quot;test.onewire.temperature&quot;, &quot;/test/skPath&quot;));sensesp_app-&gt;enable();})</div></div>
-<div class="ttc" id="aonewire__temperature_8h_html"><div class="ttname"><a href="onewire__temperature_8h.html">onewire_temperature.h</a></div></div>
+<div class="ttc" id="ahysteresis_8h_html"><div class="ttname"><a href="hysteresis_8h.html">hysteresis.h</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a7d891101ebfe1f138bc4c87a4a602322"><div class="ttname"><a href="main_8cpp.html#a7d891101ebfe1f138bc4c87a4a602322">app</a></div><div class="ttdeci">ReactESP app([]() { SetupSerialDebug(115200);SensESPAppBuilder builder;sensesp_app=builder .set_hostname(&quot;minimal&quot;) -&gt;set_wifi(&quot;Root Cause&quot;, &quot;kanneluuri2406&quot;) -&gt;set_standard_sensors(ALL) -&gt;get_app();sensesp_app-&gt;enable();})</div></div>
 <div class="ttc" id="asensesp__app_8cpp_html_a26cd8b11d153355437b86342648b9d70"><div class="ttname"><a href="sensesp__app_8cpp.html#a26cd8b11d153355437b86342648b9d70">SetupSerialDebug</a></div><div class="ttdeci">void SetupSerialDebug(uint32_t baudrate)</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app_8cpp_source.html#l00028">sensesp_app.cpp:28</a></div></div>
 <div class="ttc" id="asensesp__app_8cpp_html_a9b53af60ecde971876d66994134fbfff"><div class="ttname"><a href="sensesp__app_8cpp.html#a9b53af60ecde971876d66994134fbfff">sensesp_app</a></div><div class="ttdeci">SensESPApp * sensesp_app</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app_8cpp_source.html#l00205">sensesp_app.cpp:205</a></div></div>
 <div class="ttc" id="asensesp__app_8h_html"><div class="ttname"><a href="sensesp__app_8h.html">sensesp_app.h</a></div></div>
+<div class="ttc" id="asensesp__app_8h_html_abeacf3e22e82961fc23c43cad734ebbdab1d5eac4b1dca480c8056eaea7663b7a"><div class="ttname"><a href="sensesp__app_8h.html#abeacf3e22e82961fc23c43cad734ebbdab1d5eac4b1dca480c8056eaea7663b7a">ALL</a></div><div class="ttdeci">@ ALL</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app_8h_source.html#l00037">sensesp_app.h:36</a></div></div>
+<div class="ttc" id="asensesp__app__builder_8h_html"><div class="ttname"><a href="sensesp__app__builder_8h.html">sensesp_app_builder.h</a></div></div>
 <div class="ttc" id="asignalk__output_8h_html"><div class="ttname"><a href="signalk__output_8h.html">signalk_output.h</a></div></div>
-<div class="ttc" id="asignalk__output_8h_html_a4d7e8d82175eee43e47bbc5499bde0e8"><div class="ttname"><a href="signalk__output_8h.html#a4d7e8d82175eee43e47bbc5499bde0e8">SKOutputNumber</a></div><div class="ttdeci">SKOutputNumeric&lt; float &gt; SKOutputNumber</div><div class="ttdef"><b>Definition:</b> <a href="signalk__output_8h_source.html#l00114">signalk_output.h:114</a></div></div>
-<div class="ttc" id="awiring__helpers_8h_html"><div class="ttname"><a href="wiring__helpers_8h.html">wiring_helpers.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
