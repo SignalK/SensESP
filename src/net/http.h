@@ -1,9 +1,9 @@
 #ifndef _http_H_
 #define _http_H_
 
-#include <functional>
-
 #include <ESPAsyncWebServer.h>
+
+#include <functional>
 
 #include "system/startable.h"
 
@@ -12,7 +12,7 @@
  */
 class HTTPServer : public Startable {
  public:
-  HTTPServer(std::function<void()> reset_device);
+  HTTPServer();
   ~HTTPServer() { delete server; }
   virtual void start() override { server->begin(); }
   void handle_not_found(AsyncWebServerRequest* request);
@@ -23,7 +23,6 @@ class HTTPServer : public Startable {
 
  private:
   AsyncWebServer* server;
-  std::function<void()> reset_device;
   void handle_config_list(AsyncWebServerRequest* request);
 };
 

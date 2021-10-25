@@ -24,6 +24,7 @@
 #include "sensesp.h"
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta_queue.h"
+#include "system/filesystem.h"
 #include "system/observablevalue.h"
 #include "system/system_status_led.h"
 #include "system/valueconsumer.h"
@@ -91,8 +92,7 @@ class SensESPApp {
 
   ObservableValue<String>* hostname_;
 
-  void initialize();
-
+  Filesystem* filesystem_;
   RemoteDebugger* remote_debugger_;
   MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;

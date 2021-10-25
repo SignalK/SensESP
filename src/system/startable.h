@@ -27,7 +27,7 @@ class Startable {
 
   const int get_start_priority() { return priority_; }
 
-  void set_priority(int priority) { this->priority_ = priority; }
+  void set_start_priority(int priority) { this->priority_ = priority; }
 
   /**
    * Called by the SensESP framework to initialize all of the objects
