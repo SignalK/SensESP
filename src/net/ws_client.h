@@ -6,7 +6,7 @@
 #include <set>
 
 #include "sensesp.h"
-#include "signalk/signalk_delta.h"
+#include "signalk/signalk_delta_queue.h"
 #include "system/configurable.h"
 #include "system/observablevalue.h"
 #include "system/valueproducer.h"
@@ -26,7 +26,7 @@ enum class WSConnectionState {
  */
 class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
  public:
-  WSClient(String config_path, SKDelta* sk_delta, String server_address,
+  WSClient(String config_path, SKDeltaQueue* sk_delta_queue, String server_address,
            uint16_t server_port);
   void enable();
   void on_disconnected();
@@ -87,7 +87,7 @@ class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
       WSConnectionState::kWSDisconnected;
   WiFiClient wifi_client_;
   WebSocketsClient client_;
-  SKDelta* sk_delta_;
+  SKDeltaQueue* sk_delta_queue_;
   ObservableValue<int> delta_count_producer_ = 0;
   void connect_loop();
   void test_token(const String host, const uint16_t port);

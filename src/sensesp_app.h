@@ -20,7 +20,7 @@
 #include "net/ws_client.h"
 #include "sensesp.h"
 #include "sensors/sensor.h"
-#include "signalk/signalk_delta.h"
+#include "signalk/signalk_delta_queue.h"
 #include "system/observablevalue.h"
 #include "system/system_status_led.h"
 #include "system/valueconsumer.h"
@@ -44,7 +44,7 @@ class SensESPApp {
   String get_hostname();
 
   // getters for internal members
-  SKDelta* get_sk_delta() { return this->sk_delta_; }
+  SKDeltaQueue* get_sk_delta() { return this->sk_delta_queue_; }
   SystemStatusController* get_system_status_controller() {
     return &(this->system_status_controller_);
   }
@@ -92,7 +92,7 @@ class SensESPApp {
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;
   Networking* networking_;
-  SKDelta* sk_delta_;
+  SKDeltaQueue* sk_delta_queue_;
   WSClient* ws_client_;
 
   friend class HTTPServer;

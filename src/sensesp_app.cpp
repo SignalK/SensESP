@@ -73,12 +73,12 @@ void SensESPApp::setup() {
 
   // create the SK delta object
 
-  sk_delta_ = new SKDelta(hostname->get());
+  sk_delta_queue_ = new SKDeltaQueue(hostname->get());
 
   // listen for hostname updates
 
   hostname->attach(
-      [hostname, this]() { this->sk_delta_->set_hostname(hostname->get()); });
+      [hostname, this]() { this->sk_delta_queue_->set_hostname(hostname->get()); });
 
   // create the HTTP server
 
@@ -87,7 +87,7 @@ void SensESPApp::setup() {
   // create the websocket client
 
   this->ws_client_ =
-      new WSClient("/system/sk", sk_delta_, sk_server_address_, sk_server_port_);
+      new WSClient("/system/sk", sk_delta_queue_, sk_server_address_, sk_server_port_);
 
   // connect the system status controller
 
@@ -123,14 +123,7 @@ void SensESPApp::enable() {
 
   // ObservableValue<String>* hostname = networking->get_hostname();
 
-  for (auto const& sk_source : SKEmitter::get_sources()) {
-    if (sk_source->get_sk_path() != "") {
-      debugI("Connecting Signal K source %s", sk_source->get_sk_path().c_str());
-      sk_source->attach([sk_source, this]() {
-        this->sk_delta_->append(sk_source->as_signalk());
-      });
-    }
-  }
+  this->sk_delta_queue_->connect_emitters();
 
   debugI("Enabling subsystems");
 
