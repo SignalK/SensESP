@@ -32,7 +32,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    */
   SKOutput(String sk_path, String config_path = "", SKMetadata* meta = NULL)
       : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
-    Enable::set_priority(-5);
+    Startable::set_priority(-5);
     this->load_configuration();
   }
 

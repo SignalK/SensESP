@@ -1,4 +1,7 @@
 #include "sensesp.h"
+#include "sensesp_app.h"
+
+#include "discovery.h"
 
 #ifdef ESP8266
   #include <ESP8266mDNS.h>        // Include the mDNS library
@@ -6,8 +9,9 @@
   #include <ESPmDNS.h>
 #endif
 
+void MDNSDiscovery::start() {
+  const char* hostname = sensesp_app->get_hostname().c_str();
 
-void setup_discovery(const char* hostname) {
   // MDNS.begin(hostname) will crash if hostname is blank
   if ((hostname == NULL) || (hostname[0] == '\0')) {
    debugE("hostname has not been set - mDNS can't start");

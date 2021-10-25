@@ -42,5 +42,5 @@ ReactESP app([]() {
                                                "/transforms/hysteresis"))
       ->connect_to(new SKOutputBool(sk_path));
 
-  sensesp_app->enable();
+  sensesp_app->start();
 });

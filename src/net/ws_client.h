@@ -8,6 +8,7 @@
 #include "sensesp.h"
 #include "signalk/signalk_delta_queue.h"
 #include "system/configurable.h"
+#include "system/startable.h"
 #include "system/observablevalue.h"
 #include "system/valueproducer.h"
 
@@ -24,11 +25,11 @@ enum class WSConnectionState {
  * @brief The websocket connection to the Signal K server.
  * @see SensESPApp
  */
-class WSClient : public Configurable, public ValueProducer<WSConnectionState> {
+class WSClient : public Configurable, public Startable, public ValueProducer<WSConnectionState> {
  public:
   WSClient(String config_path, SKDeltaQueue* sk_delta_queue, String server_address,
            uint16_t server_port);
-  void enable();
+  virtual void start() override;
   void on_disconnected();
   void on_error();
   void on_connected(uint8_t* payload);

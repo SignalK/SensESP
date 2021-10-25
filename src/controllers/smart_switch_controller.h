@@ -57,7 +57,7 @@ class SmartSwitchController : public BooleanTransform,
         *   This list, if specified, should have a zero length string as its last entry.
         */
        SmartSwitchController(bool auto_initialize = true, String config_path = "", const char* sk_sync_paths[] = NULL);
-       void enable() override;
+       void start() override;
        void set_input(bool new_value, uint8_t input_channel = 0) override;
        void set_input(String new_value, uint8_t input_channel = 0) override;
        void set_input(ClickTypes new_value, uint8_t input_channel = 0) override;

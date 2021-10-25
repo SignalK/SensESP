@@ -24,7 +24,7 @@ void SystemHz::update() {
   this->notify();
 }
 
-void SystemHz::enable() {
+void SystemHz::start() {
   elapsed_millis_ = 0;
 
   app.onTick([this]() { this->tick(); });
@@ -35,7 +35,7 @@ void FreeMem::update() {
   this->emit(ESP.getFreeHeap());
 }
 
-void FreeMem::enable() {
+void FreeMem::start() {
   app.onRepeat(1000, [this]() { this->update(); });
 }
 
@@ -43,7 +43,7 @@ void Uptime::update() {
   this->emit(millis() / 1000.);
 }
 
-void Uptime::enable() {
+void Uptime::start() {
   app.onRepeat(1000, [this]() { this->update(); });
 }
 
@@ -51,11 +51,11 @@ void IPAddrDev::update() {
   this->emit(WiFi.localIP().toString());
 }
 
-void IPAddrDev::enable() {
+void IPAddrDev::start() {
   app.onRepeat(10000, [this]() { this->update(); });
 }
 
-void WifiSignal::enable() {
+void WifiSignal::start() {
   app.onRepeat(3000, [this]() { this->update(); });
 }
 

@@ -17,7 +17,7 @@ void save_config_callback() { should_save_config = true; }
 
 Networking::Networking(String config_path, String ssid, String password,
                        String hostname)
-    : Configurable{config_path} {
+    : Configurable{config_path}, Startable(80) {
   this->hostname = new ObservableValue<String>(hostname);
 
   this->output = WifiState::kWifiNoAP;
@@ -38,7 +38,8 @@ Networking::Networking(String config_path, String ssid, String password,
   wifi_manager = new AsyncWiFiManager(server, dns);
 }
 
-void Networking::setup() {
+void Networking::start () {
+  debugD("Enabling Networking object");
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid();
   }

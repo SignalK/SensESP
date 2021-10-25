@@ -16,8 +16,11 @@
 
 #include "controllers/system_status_controller.h"
 #include "net/http.h"
+#include "net/discovery.h"
 #include "net/networking.h"
+#include "net/ota.h"
 #include "net/ws_client.h"
+#include "net/remote_debugger.h"
 #include "sensesp.h"
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta_queue.h"
@@ -39,7 +42,7 @@ class SensESPApp {
              String wifi_password = "", String sk_server_address = "",
              uint16_t sk_server_port = 0);
   void setup();
-  void enable();
+  void start();
   void reset();
   String get_hostname();
 
@@ -88,10 +91,13 @@ class SensESPApp {
 
   void initialize();
 
+  RemoteDebugger* remote_debugger_;
+  MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;
   Networking* networking_;
+  OTA* ota_;
   SKDeltaQueue* sk_delta_queue_;
   WSClient* ws_client_;
 

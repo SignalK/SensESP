@@ -9,17 +9,9 @@
 #include "net/discovery.h"
 #include "net/networking.h"
 #include "net/ota.h"
-#include "sensors/analog_input.h"
-#include "sensors/digital_input.h"
-#include "sensors/system_info.h"
-#include "signalk/signalk_output.h"
 #include "system/spiffs_storage.h"
 #include "system/system_status_led.h"
 #include "transforms/debounce.h"
-#include "transforms/difference.h"
-#include "transforms/frequency.h"
-#include "transforms/linear.h"
-#include "transforms/transform.h"
 
 #ifndef DEBUG_DISABLED
 RemoteDebug Debug;
@@ -69,10 +61,17 @@ void SensESPApp::setup() {
   networking_ = new Networking("/system/networking", ssid_, wifi_password_,
                                preset_hostname_);
 
+  // create the OTA object
+  ota_ = new OTA();
+
+  // create a remote debugger object
+  remote_debugger_ = new RemoteDebugger();
+
+  // TODO: hostname should work even without networking
   ObservableValue<String>* hostname = networking_->get_hostname();
 
   // create the SK delta object
-
+  // TODO: one queue per output path
   sk_delta_queue_ = new SKDeltaQueue(hostname->get());
 
   // listen for hostname updates
@@ -81,21 +80,24 @@ void SensESPApp::setup() {
       [hostname, this]() { this->sk_delta_queue_->set_hostname(hostname->get()); });
 
   // create the HTTP server
-
-  this->http_server_ = new HTTPServer(std::bind(&SensESPApp::reset, this));
+  // TODO: make conditional
+  this->http_server_ = new HTTPServer([this]() { this->reset(); });
 
   // create the websocket client
-
+  // TODO: make conditional
   this->ws_client_ =
       new WSClient("/system/sk", sk_delta_queue_, sk_server_address_, sk_server_port_);
 
   // connect the system status controller
-
+  // TODO: make conditional
   this->networking_->connect_to(&system_status_controller_);
   this->ws_client_->connect_to(&system_status_controller_);
 
-  // create the wifi disconnect watchdog
+  // create the MDNS discovery object
+  mdns_discovery_ = new MDNSDiscovery();
 
+  // create the wifi disconnect watchdog
+  // TODO: make conditional
   this->system_status_controller_
     .connect_to(new DebounceTemplate<SystemStatus>(
       3*60*1000, // 180 s = 180000 ms = 3 minutes
@@ -111,6 +113,7 @@ void SensESPApp::setup() {
 
   // create a system status led and connect it
 
+  // TODO: must not depend on networking and ws_client etc
   if (system_status_led_ == NULL) {
     system_status_led_ = new SystemStatusLed(LED_PIN);
   }
@@ -118,34 +121,14 @@ void SensESPApp::setup() {
   this->ws_client_->get_delta_count_producer().connect_to(system_status_led_);
 }
 
-void SensESPApp::enable() {
+void SensESPApp::start() {
   // connect all transforms to the Signal K delta output
 
   // ObservableValue<String>* hostname = networking->get_hostname();
 
-  this->sk_delta_queue_->connect_emitters();
-
   debugI("Enabling subsystems");
 
-  // FIXME: Setting up mDNS discovery before networking can't work!
-  setup_discovery(networking_->get_hostname()->get().c_str());
-
-  networking_->setup();
-
-  setup_ota();
-
-  this->http_server_->enable();
-  this->ws_client_->enable();
-
-  // initialize remote debugging
-
-#ifndef DEBUG_DISABLED
-  Debug.begin(networking_->get_hostname()->get());
-  Debug.setResetCmdEnabled(true);
-  app.onRepeat(1, []() { Debug.handle(); });
-#endif
-
-  Enable::enable_all();
+  Startable::start_all();
   debugI("All sensors and transforms enabled");
 }
 

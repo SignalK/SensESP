@@ -164,5 +164,5 @@ ReactESP app([]() {
 
   // Start the SensESP application running, which simply activates everything
   // that's been set up above
-  sensesp_app->enable();
+  sensesp_app->start();
 });

@@ -19,7 +19,7 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize, String config
 }
 
 
-void SmartSwitchController::enable() {
+void SmartSwitchController::start() {
     if (auto_initialize_) {
        this->emit(is_on);
     }

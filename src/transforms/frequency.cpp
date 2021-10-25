@@ -7,7 +7,7 @@ Frequency::Frequency(float multiplier, String config_path)
   load_configuration();
 }
 
-void Frequency::enable() { last_update_ = millis(); }
+void Frequency::start() { last_update_ = millis(); }
 
 void Frequency::set_input(int input, uint8_t inputChannel) {
   unsigned long cur_millis = millis();
