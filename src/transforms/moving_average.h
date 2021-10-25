@@ -17,7 +17,7 @@
  */
 
 // y = k * 1/n * \sum_k=1^n(x_k)
-class MovingAverage : public NumericTransform {
+class MovingAverage : public FloatTransform {
  public:
   /**
    * @param sample_size The number of most recent values you want to average for your

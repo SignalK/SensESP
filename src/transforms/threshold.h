@@ -4,7 +4,7 @@
 
 /**
  * @brief A Transform base class that translates the value of type C into value of type
- * P. Base class for classes NumericThreshold and IntegerThreshold.
+ * P. Base class for classes FloatThreshold and IntThreshold.
  *
  *   @param min_value Minimum value of input for output to be the value of in_range.
  * 
@@ -49,9 +49,9 @@ class ThresholdTransform : public Transform<C, P> {
  * 
  * @param config_path Path to configure this transform in the Config UI.
  */
-class NumericThreshold : public ThresholdTransform<float, bool> {
+class FloatThreshold : public ThresholdTransform<float, bool> {
  public:
-  NumericThreshold(float min_value, float max_value, bool in_range = true,
+  FloatThreshold(float min_value, float max_value, bool in_range = true,
                    String config_path = "")
       : ThresholdTransform<float, bool>(min_value, max_value, in_range,
                                         !in_range, config_path) {}
@@ -75,9 +75,9 @@ class NumericThreshold : public ThresholdTransform<float, bool> {
  * 
  * @param config_path Path to configure this transform in the Config UI.
  */
-class IntegerThreshold : public ThresholdTransform<int, bool> {
+class IntThreshold : public ThresholdTransform<int, bool> {
  public:
-  IntegerThreshold(int min_value, int max_value, bool in_range = true,
+  IntThreshold(int min_value, int max_value, bool in_range = true,
                    String config_path = "")
       : ThresholdTransform<int, bool>(min_value, max_value, in_range, !in_range,
                                       config_path) {}

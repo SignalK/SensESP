@@ -40,20 +40,20 @@ class Sensor : virtual public Observable, public Configurable, public Enable {
 /**
  * @brief A Sensor whose output is a float.
  **/ 
-class NumericSensor : public Sensor, public NumericProducer {
+class FloatSensor : public Sensor, public FloatProducer {
 
     public:
-        NumericSensor(String config_path = "");
+        FloatSensor(String config_path = "");
 
 };
 
 /**
  * @brief A Sensor whose output is an integer.
  **/
-class IntegerSensor : public Sensor, public IntegerProducer {
+class IntSensor : public Sensor, public IntProducer {
 
     public:
-        IntegerSensor(String config_path = "");
+        IntSensor(String config_path = "");
 
 };
 

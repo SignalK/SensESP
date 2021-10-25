@@ -12,7 +12,7 @@ CurveInterpolator::Sample::Sample(JsonObject& obj)
 
 CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
                                      String config_path)
-    : NumericTransform(config_path) {
+    : FloatTransform(config_path) {
   // Load default values if no configuration present...
   if (defaults != NULL) {
     samples.clear();

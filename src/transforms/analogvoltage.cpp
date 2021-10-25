@@ -2,7 +2,7 @@
 
 AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
                              String config_path)
-    : NumericTransform(config_path),
+    : FloatTransform(config_path),
       max_voltage_{max_voltage},
       multiplier_{multiplier},
       offset_{offset} {

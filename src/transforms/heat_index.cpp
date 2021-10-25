@@ -2,7 +2,7 @@
 
 // heat index temperature
 
-HeatIndexTemperature::HeatIndexTemperature() : NumericTransform() {}
+HeatIndexTemperature::HeatIndexTemperature() : FloatTransform() {}
 
 void HeatIndexTemperature::set_input(float input, uint8_t inputChannel) {
   inputs[inputChannel] = input;

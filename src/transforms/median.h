@@ -15,7 +15,7 @@
  * 
  * @param config_path Path to configure this transform in the Config UI.
  */
-class Median : public NumericTransform {
+class Median : public FloatTransform {
  public:
   Median(unsigned int sample_size = 10, String config_path = "");
   virtual void set_input(float input, uint8_t input_channel = 0) override;

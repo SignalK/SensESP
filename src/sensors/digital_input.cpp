@@ -14,7 +14,7 @@ DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
                                      int interrupt_type, int read_delay,
                                      String config_path)
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
-      IntegerProducer(),
+      BoolProducer(),
       read_delay_{read_delay},
       triggered_{false} {
   load_configuration();      
@@ -54,7 +54,7 @@ DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode,
                                          int interrupt_type, uint read_delay,
                                          String config_path)
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
-      IntegerProducer(),
+      IntProducer(),
       read_delay_{read_delay} {
   load_configuration();
 }
@@ -100,7 +100,7 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
                                        int interrupt_type, uint read_delay,
                                        String config_path)
     : DigitalInput(pin, pin_mode, interrupt_type, config_path),
-      IntegerProducer(),
+      BoolProducer(),
       read_delay_{read_delay},
       triggered_{false},
       last_output_{0},
@@ -111,7 +111,7 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
 void DigitalInputChange::enable() {
   app.onInterrupt(pin_, interrupt_type_,
     [this](){
-      output = digitalRead(pin_);
+      output = (bool)digitalRead(pin_);
       triggered_ = true;
     });
   

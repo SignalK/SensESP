@@ -11,7 +11,7 @@
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class SystemHz : public NumericSensor {
+class SystemHz : public FloatSensor {
  public:
   SystemHz() {}
   void enable() override final;
@@ -50,7 +50,7 @@ class FreeMem : public Sensor, public ValueProducer<uint32_t> {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class Uptime : public NumericSensor {
+class Uptime : public FloatSensor {
  public:
   Uptime() {}
   void enable() override final;
@@ -86,7 +86,7 @@ class IPAddrDev : public StringSensor {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class WifiSignal : public NumericSensor {
+class WifiSignal : public FloatSensor {
  public:
   WifiSignal() {}
   void enable() override final;

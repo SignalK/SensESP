@@ -33,7 +33,7 @@ ReactESP app([]() {
   // See this link for available tank paths:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html#vesselsregexptanks
   input->connect_to(avg)->connect_to(
-      new SKOutputNumber("tanks.fuel.0.currentLevel"));
+      new SKOutputFloat("tanks.fuel.0.currentLevel"));
 
   sensesp_app->enable();
 });

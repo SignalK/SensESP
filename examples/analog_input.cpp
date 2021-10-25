@@ -3,6 +3,7 @@
 #include <Arduino.h>
 
 #include "sensesp_app.h"
+#include "sensesp_app_builder.h"
 #include "signalk/signalk_output.h"
 #include "transforms/linear.h"
 
@@ -16,7 +17,8 @@ ReactESP app([]() {
 #endif
 
   // Create the global SensESPApp() object.
-  sensesp_app = new SensESPApp();
+  SensESPAppBuilder builder;
+  sensesp_app = builder.get_app();
 
   // The "Signal K path" identifies this sensor to the Signal K server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
@@ -65,7 +67,7 @@ ReactESP app([]() {
   // See https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
   // for more details.
   analog_input->connect_to(new Linear(multiplier, offset, linear_config_path))
-      ->connect_to(new SKOutputNumber(sk_path, "", new SKMetadata("ratio")));
+      ->connect_to(new SKOutputFloat(sk_path, "", new SKMetadata("ratio")));
 
   // Start the SensESP application running
   sensesp_app->enable();

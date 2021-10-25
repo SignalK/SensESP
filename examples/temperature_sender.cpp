@@ -160,7 +160,7 @@ ReactESP app([]() {
       ->connect_to(new VoltageDividerR2(R1, Vin, "/12V_alternator/temp/sender"))
       ->connect_to(new TemperatureInterpreter("/12V_alternator/temp/curve"))
       ->connect_to(new Linear(1.0, 0.0, "/12V_alternator/temp/calibrate"))
-      ->connect_to(new SKOutputNumber(sk_path, "/12V_alternator/temp/sk", metadata));
+      ->connect_to(new SKOutputFloat(sk_path, "/12V_alternator/temp/sk", metadata));
 
   // Start the SensESP application running, which simply activates everything
   // that's been set up above

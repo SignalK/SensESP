@@ -25,7 +25,7 @@
  * For maximum accuracy, you should measure the actual ohms value of your
  * resistors, rather than just assuming they are as labeled.
  */
-class VoltageMultiplier : public NumericTransform {
+class VoltageMultiplier : public FloatTransform {
  public:
   VoltageMultiplier(uint16_t R1, uint16_t R2, String config_path = "");
 

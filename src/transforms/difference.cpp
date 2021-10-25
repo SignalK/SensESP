@@ -3,7 +3,7 @@
 // Difference
 
 Difference::Difference(float k1, float k2, String config_path)
-    : NumericTransform(config_path), k1{k1}, k2{k2} {
+    : FloatTransform(config_path), k1{k1}, k2{k2} {
   load_configuration();
 }
 

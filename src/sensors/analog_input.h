@@ -35,7 +35,7 @@
    * make this parameter be the maximum voltage that you would send into the
    * voltage divider circuit.
    */
- class AnalogInput : public NumericSensor {
+ class AnalogInput : public FloatSensor {
  public:
   AnalogInput(uint8_t pin = A0, uint read_delay = 200, String config_path = "",
               float output_scale = 1024.);

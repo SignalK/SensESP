@@ -8,7 +8,7 @@
  * 
  * More info about the equation can be found at https://en.wikipedia.org/wiki/Density_of_air
  */
-class AirDensity : public NumericTransform {
+class AirDensity : public FloatTransform {
  public:
   AirDensity();
   virtual void set_input(float input, uint8_t inputChannel) override;
