@@ -9,15 +9,11 @@ jobs:
     strategy:
       matrix:
         example:
-          - examples/ads1x15_volt_meter.cpp
           - examples/analog_input.cpp
-          - examples/bme280_example.cpp
           - examples/hysteresis.cpp
           - examples/lambda_transform.cpp
-          - examples/onewire_temperature/onewire_temperature_example.cpp
           - examples/relay_control.cpp
           - examples/rpm_counter.cpp
-          - examples/ultrasonic_level_sensor/ultrasonic_dvp_example.cpp
         target_device:
           - d1_mini
           - esp32dev
