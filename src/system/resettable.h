@@ -23,7 +23,7 @@ class Resettable {
 
   const int get_reset_priority() const { return priority; }
 
-  void set_priority(int priority) { this->priority = priority; }
+  void set_reset_priority(int priority) { this->priority = priority; }
 
   static void reset_all();
 
