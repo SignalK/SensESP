@@ -38,8 +38,6 @@ void SetupSerialDebug(uint32_t baudrate) {
   debugI("\nSerial debug enabled");
 }
 
-static const char* permission_strings[] = {"readonly", "readwrite", "admin"};
-
 /*
  * This constructor must be only used in SensESPAppBuilder
  */
@@ -73,9 +71,6 @@ void SensESPApp::setup() {
 
   ObservableValue<String>* hostname = networking_->get_hostname();
 
-  // setup standard sensors and their transforms
-  setup_standard_sensors(hostname, sensors_);
-
   // create the SK delta object
 
   sk_delta_ = new SKDelta(hostname->get());
@@ -92,8 +87,7 @@ void SensESPApp::setup() {
   // create the websocket client
 
   this->ws_client_ =
-      new WSClient("/system/sk", sk_delta_, sk_server_address_, sk_server_port_,
-                   permission_strings[(int)requested_permissions_]);
+      new WSClient("/system/sk", sk_delta_, sk_server_address_, sk_server_port_);
 
   // connect the system status controller
 
@@ -122,37 +116,6 @@ void SensESPApp::setup() {
   }
   this->system_status_controller_.connect_to(system_status_led_);
   this->ws_client_->get_delta_count_producer().connect_to(system_status_led_);
-}
-
-void SensESPApp::setup_standard_sensors(ObservableValue<String>* hostname,
-                                        StandardSensors enabled_sensors) {
-  if ((enabled_sensors & FREQUENCY) != 0) {
-    connect_1to1_h<SystemHz, SKOutput<float>>(new SystemHz(),
-                                              new SKOutput<float>(), hostname);
-  }
-
-  if ((enabled_sensors & UPTIME) != 0) {
-    connect_1to1_h<Uptime, SKOutput<float>>(new Uptime(), new SKOutput<float>(),
-                                            hostname);
-  }
-
-  // connect freemem
-  if ((enabled_sensors & FREE_MEMORY) != 0) {
-    connect_1to1_h<FreeMem, SKOutput<float>>(new FreeMem(),
-                                             new SKOutput<float>(), hostname);
-  }
-
-  // connect ip address
-
-  if ((enabled_sensors & IP_ADDRESS) != 0) {
-    connect_1to1_h<IPAddrDev, SKOutput<String>>(
-        new IPAddrDev(), new SKOutput<String>(), hostname);
-  }
-
-  if ((enabled_sensors & WIFI_SIGNAL) != 0) {
-    connect_1to1_h<WifiSignal, SKOutput<float>>(
-        new WifiSignal(), new SKOutput<float>(), hostname);
-  }
 }
 
 void SensESPApp::enable() {

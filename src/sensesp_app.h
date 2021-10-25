@@ -26,18 +26,6 @@
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
 
-enum StandardSensors {
-  NONE,
-  UPTIME = 0x01,
-  FREQUENCY = 0x02,
-  FREE_MEMORY = 0x04,
-  IP_ADDRESS = 0x08,
-  WIFI_SIGNAL = 0x10,
-  ALL = 0x1F
-};
-
-enum SKPermissions { READONLY, READWRITE, ADMIN };
-
 void SetupSerialDebug(uint32_t baudrate);
 
 /**
@@ -54,44 +42,6 @@ class SensESPApp {
   void enable();
   void reset();
   String get_hostname();
-
-  template <typename T>
-  void connect(ValueProducer<T>* producer, ValueConsumer<T>* consumer,
-               uint8_t inputChannel = 0) {
-    producer->connect_to(consumer, inputChannel);
-  }
-
-  template <typename T, typename U>
-  void connect_1to1_h(T* sensor, U* transform,
-                      ObservableValue<String>* hostname) {
-    String hostname_str = hostname->get();
-    String value_name = sensor->get_value_name();
-    String sk_path = hostname_str + "." + value_name;
-    auto comp_set_sk_path = [hostname, transform, value_name]() {
-      transform->set_sk_path(hostname->get() + "." + value_name);
-    };
-    comp_set_sk_path();
-    sensor->attach(
-        [sensor, transform]() { transform->set_input(sensor->get()); });
-    hostname->attach(comp_set_sk_path);
-  }
-
-  /**
-   * Sends the specified payload text directly to the signalk server
-   * over the connected websocket. If no websocket is connect, the
-   * call is ignored.
-   */
-  void send_to_server(String& payload) { this->ws_client_->sendTXT(payload); }
-
-  /**
-   * Returns true if the host system is connected to Wifi
-   */
-  bool isWifiConnected() { return WiFi.status() == WL_CONNECTED; }
-
-  /**
-   * Returns true if the host system is connected to a Signal K server
-   */
-  bool isSignalKConnected() { return ws_client_->is_connected(); }
 
   // getters for internal members
   SKDelta* get_sk_delta() { return this->sk_delta_; }
@@ -128,14 +78,6 @@ class SensESPApp {
     this->system_status_led_ = system_status_led;
     return this;
   }
-  const SensESPApp* set_sensors(StandardSensors sensors) {
-    this->sensors_ = sensors;
-    return this;
-  }
-  const SensESPApp* set_requested_permissions(SKPermissions permissions) {
-    this->requested_permissions_ = permissions;
-    return this;
-  }
 
  private:
   String preset_hostname_ = "SensESP";
@@ -143,12 +85,8 @@ class SensESPApp {
   String wifi_password_ = "";
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
-  StandardSensors sensors_ = ALL;
-  SKPermissions requested_permissions_ = READWRITE;
 
   void initialize();
-  void setup_standard_sensors(ObservableValue<String>* hostname,
-                              StandardSensors enabled_sensors = ALL);
 
   HTTPServer* http_server_;
   SystemStatusLed* system_status_led_ = NULL;
@@ -156,9 +94,6 @@ class SensESPApp {
   Networking* networking_;
   SKDelta* sk_delta_;
   WSClient* ws_client_;
-  String get_permission_string(SKPermissions permission);
-
-  void set_wifi(String ssid, String password);
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
