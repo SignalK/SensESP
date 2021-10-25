@@ -211,7 +211,8 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
 
   response->setCode(200);
   response->printf("Name: %s, build at %s %s\n",
-                   sensesp_app->get_hostname().c_str(), __DATE__, __TIME__);
+                   sensesp_app->get_hostname_observable()->get().c_str(),
+                   __DATE__, __TIME__);
 
   response->printf("MAC: %s\n", WiFi.macAddress().c_str());
   response->printf("WiFi signal: %d\n", WiFi.RSSI());

@@ -30,7 +30,6 @@ class Networking : public Configurable, public Startable, public ValueProducer<W
  public:
   Networking(String config_path, String ssid, String password, String hostname);
   virtual void start() override;
-  ObservableValue<String>* get_hostname();
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
@@ -60,7 +59,6 @@ class Networking : public Configurable, public Startable, public ValueProducer<W
   WiFiEventHandler wifi_disconnected_event_handler_;
 #endif
 
-  ObservableValue<String>* hostname;
   String ap_ssid = "";
   String ap_password = "";
   String preset_ssid = "";

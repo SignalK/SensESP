@@ -16,11 +16,10 @@
  */
 class SKDeltaQueue : public Startable {
  public:
-  SKDeltaQueue(const String& hostname, unsigned int max_buffer_size = 20);
+  SKDeltaQueue(unsigned int max_buffer_size = 20);
   void append(const String val);
   bool data_available();
   void get_delta(String& output);
-  void set_hostname(String hostname) { this->hostname = hostname; }
 
   void connect_emitters();
 
@@ -31,7 +30,6 @@ class SKDeltaQueue : public Startable {
   virtual void start() override;
 
  private:
-  String hostname;
   unsigned int max_buffer_size;
   std::list<String> buffer;
   bool meta_sent_;

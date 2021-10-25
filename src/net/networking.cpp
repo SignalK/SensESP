@@ -1,6 +1,7 @@
 #include "networking.h"
 
 #include "sensesp.h"
+#include "sensesp_app.h"
 #include "system/led_blinker.h"
 
 // Wifi config portal timeout (seconds). The smaller the value, the faster
@@ -18,8 +19,6 @@ void save_config_callback() { should_save_config = true; }
 Networking::Networking(String config_path, String ssid, String password,
                        String hostname)
     : Configurable{config_path}, Startable(80) {
-  this->hostname = new ObservableValue<String>(hostname);
-
   this->output = WifiState::kWifiNoAP;
 
   preset_ssid = ssid;
@@ -38,7 +37,7 @@ Networking::Networking(String config_path, String ssid, String password,
   wifi_manager = new AsyncWiFiManager(server, dns);
 }
 
-void Networking::start () {
+void Networking::start() {
   debugD("Enabling Networking object");
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid();
@@ -59,12 +58,14 @@ void Networking::setup_wifi_callbacks() {
         this->wifi_station_disconnected();
       });
 #elif defined(ESP32)
-  WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
-    this->wifi_station_connected();
-  }, WiFiEvent_t::SYSTEM_EVENT_STA_GOT_IP);
-  WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
-    this->wifi_station_disconnected();
-  }, WiFiEvent_t::SYSTEM_EVENT_STA_DISCONNECTED);  
+  WiFi.onEvent([this](WiFiEvent_t event,
+                      WiFiEventInfo_t info) { this->wifi_station_connected(); },
+               WiFiEvent_t::SYSTEM_EVENT_STA_GOT_IP);
+  WiFi.onEvent(
+      [this](WiFiEvent_t event, WiFiEventInfo_t info) {
+        this->wifi_station_disconnected();
+      },
+      WiFiEvent_t::SYSTEM_EVENT_STA_DISCONNECTED);
 #endif
 }
 
@@ -72,10 +73,12 @@ void Networking::setup_saved_ssid() {
   this->emit(WifiState::kWifiDisconnected);
   setup_wifi_callbacks();
 
+  const char* hostname = sensesp_app->get_hostname_observable()->get().c_str();
+
 #ifdef ESP32
-  WiFi.setHostname(hostname->get().c_str());
+  WiFi.setHostname(hostname);
 #elif defined(ESP8266)
-  WiFi.hostname(hostname->get().c_str());
+  WiFi.hostname(hostname);
 #endif
 
   WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
@@ -84,13 +87,13 @@ void Networking::setup_saved_ssid() {
 }
 
 void Networking::wifi_station_connected() {
-    debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
-           WiFi.RSSI());
-    debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
-    this->emit(WifiState::kWifiConnectedToAP);
+  debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
+         WiFi.RSSI());
+  debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
+  this->emit(WifiState::kWifiConnectedToAP);
 #if defined(ESP8266)
-    WiFi.mode(WIFI_STA); // so "Configure <hostname>" AP won't appear
-#endif        
+  WiFi.mode(WIFI_STA);  // so "Configure <hostname>" AP won't appear
+#endif
 }
 
 void Networking::wifi_station_disconnected() {
@@ -100,6 +103,8 @@ void Networking::wifi_station_disconnected() {
 
 void Networking::setup_wifi_manager() {
   should_save_config = false;
+
+  String hostname = sensesp_app->get_hostname_observable()->get();
 
   setup_wifi_callbacks();
 
@@ -111,22 +116,22 @@ void Networking::setup_wifi_manager() {
 #ifdef SERIAL_DEBUG_DISABLED
   wifi_manager->setDebugOutput(false);
 #endif
-  AsyncWiFiManagerParameter custom_hostname("hostname",
-                                            "Set ESP Device custom hostname",
-                                            this->hostname->get().c_str(), 20);
+  AsyncWiFiManagerParameter custom_hostname(
+      "hostname", "Set ESP Device custom hostname",
+      hostname.c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
 
   // Create a unique SSID for configuring each SensESP Device
-  String config_ssid = this->hostname->get();
+  String config_ssid = sensesp_app->get_hostname_observable()->get();
   config_ssid = "Configure " + config_ssid;
   const char* pconfig_ssid = config_ssid.c_str();
 
   this->emit(WifiState::kWifiManagerActivated);
 
 #ifdef ESP32
-  WiFi.setHostname(hostname->get().c_str());
+  WiFi.setHostname(sensesp_app->get_hostname_observable()->get().c_str());
 #elif defined(ESP8266)
-  WiFi.hostname(hostname->get().c_str());
+  WiFi.hostname(sensesp_app->get_hostname_observable()->get().c_str());
 #endif
 
   if (!wifi_manager->autoConnect(pconfig_ssid)) {
@@ -144,7 +149,7 @@ void Networking::setup_wifi_manager() {
   if (should_save_config) {
     String new_hostname = custom_hostname.getValue();
     debugI("Got new custom hostname: %s", new_hostname.c_str());
-    this->hostname->set(new_hostname);
+    sensesp_app->get_hostname_observable()->set(new_hostname);
     this->ap_ssid = WiFi.SSID();
     debugI("Got new SSID and password: %s", ap_ssid.c_str());
     this->ap_password = WiFi.psk();
@@ -153,8 +158,6 @@ void Networking::setup_wifi_manager() {
     app.onDelay(500, []() { ESP.restart(); });
   }
 }
-
-ObservableValue<String>* Networking::get_hostname() { return this->hostname; }
 
 static const char SCHEMA_PREFIX[] PROGMEM = R"({
 "type": "object",
@@ -186,18 +189,22 @@ String Networking::get_config_schema() {
          "}}";
 }
 
+// FIXME: hostname should be saved in SensESPApp
+
 void Networking::get_configuration(JsonObject& root) {
-  root["hostname"] = this->hostname->get();
+  //root["hostname"] = sensesp_app->get_hostname_observable()->get();
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
-  if (!config.containsKey("hostname")) {
-    return false;
-  }
-
-  if (preset_hostname == "SensESP") {
-    this->hostname->set(config["hostname"].as<String>());
-  }
+  debugD("%s\n", __func__);
+  //if (!config.containsKey("hostname")) {
+  //  return false;
+  //}
+//
+  //if (preset_hostname == "SensESP") {
+  //  sensesp_app->get_hostname_observable()->set(
+  //      config["hostname"].as<String>());
+  //}
 
   return true;
 }

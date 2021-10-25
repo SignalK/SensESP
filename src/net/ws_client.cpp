@@ -367,7 +367,8 @@ void WSClient::send_access_request(const String server_address,
   // create a new access request
   DynamicJsonDocument doc(1024);
   doc["clientId"] = client_id_;
-  doc["description"] = String("SensESP device: ") + sensesp_app->get_hostname();
+  doc["description"] = String("SensESP device: ") +
+                       sensesp_app->get_hostname_observable()->get();
   doc["permissions"] = kRequestPermission;
   String json_req = "";
   serializeJson(doc, json_req);
