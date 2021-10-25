@@ -114,5 +114,5 @@ SmartSwitchController::SyncPath::SyncPath() {}
 SmartSwitchController::SyncPath::SyncPath(String sk_sync_path)
     : sk_sync_path{sk_sync_path} {
    debugD("DoubleClick will also sync %s", sk_sync_path.c_str());
-   this->put_request = new SKBoolPutRequest(sk_sync_path, "", false);
+   this->put_request = new BoolSKPutRequest(sk_sync_path, "", false);
 }

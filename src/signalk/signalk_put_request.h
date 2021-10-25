@@ -169,9 +169,9 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
   bool ignore_duplicates;
 };
 
-typedef SKPutRequest<float> SKFloatPutRequest;
-typedef SKPutRequest<int> SKIntPutRequest;
-typedef SKPutRequest<bool> SKBoolPutRequest;
-typedef SKPutRequest<String> SKStringPutRequest;
+typedef SKPutRequest<float> FloatSKPutRequest;
+typedef SKPutRequest<int> IntSKPutRequest;
+typedef SKPutRequest<bool> BoolSKPutRequest;
+typedef SKPutRequest<String> StringSKPutRequest;
 
 #endif
