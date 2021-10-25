@@ -78,7 +78,7 @@ void BaseBlinker::set_enabled(bool state) {
   }
 }
 
-void BaseBlinker::enable() { this->tick(); }
+void BaseBlinker::start() { this->tick(); }
 
 PeriodicBlinker::PeriodicBlinker(int pin, unsigned int period)
     : BaseBlinker(pin), period_{period} {}

@@ -8,7 +8,7 @@
 #include "Arduino.h"
 #include "sensesp.h"
 #include "system/configurable.h"
-#include "system/enableable.h"
+#include "system/startable.h"
 #include "system/observable.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
@@ -27,7 +27,7 @@
  * 
  * @param config_path The path to configure the Transform in the Config UI.
  */
-class TransformBase : public Configurable, public Enableable {
+class TransformBase : public Configurable, public Startable {
  public:
   TransformBase(String config_path = "");
 

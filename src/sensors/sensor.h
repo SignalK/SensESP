@@ -6,7 +6,7 @@
 #include "system/configurable.h"
 #include "system/observable.h"
 #include "system/valueproducer.h"
-#include "system/enableable.h"
+#include "system/startable.h"
 
 
 /**
@@ -24,7 +24,7 @@
  * variable to be configurable at run-time in your project, don't provide a
  * config_path when you construct the class.
  */
-class Sensor : virtual public Observable, public Configurable, public Enableable {
+class Sensor : virtual public Observable, public Configurable, public Startable {
   public:
     Sensor(String config_path = "");
 

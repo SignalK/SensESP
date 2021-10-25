@@ -35,7 +35,7 @@ class IntegratorT : public Transform<C, P> {
     this->load_configuration();
   }
 
-  virtual void enable() override final {
+  virtual void start() override final {
     // save the integrator value every 10 s
     // NOTE: Disabled for now because interrupts start throwing
     // exceptions.

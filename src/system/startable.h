@@ -1,31 +1,31 @@
-#ifndef _enableable_H_
-#define _enableable_H_
+#ifndef _startable_H_
+#define _startable_H_
 
 #include <queue>
 
-class EnableableCompare;
+class StartableCompare;
 
 /**
- * @brief Automatic calling of the enable() method at startup
+ * @brief Automatic calling of the start() method at startup
  * 
- * Classes that implement "Enableable" will have their enable() method
+ * Classes that implement "Startable" will have their start() method
  * called automatically at startup when the SensESP app itself
- * is enabled.  The optional priority allows for certain classes
+ * is started.  The optional priority allows for certain classes
  * to be initialized first. The default priority is zero.
- * A higher priority (i.e. greater than zero) will be enabled before a
+ * A higher priority (i.e. greater than zero) will be started before a
  * lower one (i.e. less than zero).
  */
-class Enableable {
+class Startable {
  public:
-  Enableable(int priority = 0);
+  Startable(int priority = 0);
 
   /**
    * Called during the initialization process.  Override this method
    * to add runtime initialization code to your class
    */
-  virtual void enable() {}
+  virtual void start() {}
 
-  const int get_enable_priority() { return priority_; }
+  const int get_start_priority() { return priority_; }
 
   void set_priority(int priority) { this->priority_ = priority; }
 
@@ -38,18 +38,18 @@ class Enableable {
    *
    * build_unflags = -fno-rtti
    */
-  static void enable_all();
+  static void start_all();
 
-  friend class EnableableCompare;
+  friend class StartableCompare;
  private:
   int priority_;
 
-  static std::priority_queue<Enableable*, std::vector<Enableable*>, EnableableCompare> enable_list_;
+  static std::priority_queue<Startable*, std::vector<Startable*>, StartableCompare> startable_list_;
 };
 
-class EnableableCompare {
+class StartableCompare {
   public:
-    bool operator()(const Enableable* lhs, const Enableable* rhs) const {
+    bool operator()(const Startable* lhs, const Startable* rhs) const {
       return lhs->priority_ < rhs->priority_;
     }
 };

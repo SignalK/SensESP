@@ -6,9 +6,9 @@
 #include "signalk/signalk_emitter.h"
 
 SKDeltaQueue::SKDeltaQueue(const String& hostname, unsigned int max_buffer_size)
-    : Enableable{0}, hostname{hostname}, max_buffer_size{max_buffer_size}, meta_sent_{false} {}
+    : Startable{0}, hostname{hostname}, max_buffer_size{max_buffer_size}, meta_sent_{false} {}
 
-void SKDeltaQueue::enable() {
+void SKDeltaQueue::start() {
   this->connect_emitters();
 }
 

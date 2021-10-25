@@ -14,7 +14,7 @@
 class SystemHz : public FloatSensor {
  public:
   SystemHz() {}
-  void enable() override final;
+  void start() override final;
   String get_value_name() { return "systemhz"; }
 
  private:
@@ -35,7 +35,7 @@ class SystemHz : public FloatSensor {
 class FreeMem : public Sensor, public ValueProducer<uint32_t> {
  public:
   FreeMem() {}
-  void enable() override final;
+  void start() override final;
   String get_value_name() { return "freemem"; }
 
  private:
@@ -53,7 +53,7 @@ class FreeMem : public Sensor, public ValueProducer<uint32_t> {
 class Uptime : public FloatSensor {
  public:
   Uptime() {}
-  void enable() override final;
+  void start() override final;
   String get_value_name() { return "uptime"; }
 
  private:
@@ -71,7 +71,7 @@ class Uptime : public FloatSensor {
 class IPAddrDev : public StringSensor {
  public:
   IPAddrDev() {}
-  void enable() override final;
+  void start() override final;
   String get_value_name() { return "ipaddr"; }
 
  private:
@@ -89,7 +89,7 @@ class IPAddrDev : public StringSensor {
 class WifiSignal : public FloatSensor {
  public:
   WifiSignal() {}
-  void enable() override final;
+  void start() override final;
   String get_value_name() { return "wifisignal"; }
 
  private:

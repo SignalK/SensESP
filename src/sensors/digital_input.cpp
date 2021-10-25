@@ -20,7 +20,7 @@ DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
   load_configuration();      
 }
 
-void DigitalInputState::enable() {
+void DigitalInputState::start() {
   app.onRepeat(read_delay_, [this]() {
     emit(digitalRead(pin_));
   });
@@ -59,7 +59,7 @@ DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode,
   load_configuration();
 }
 
-void DigitalInputCounter::enable() {
+void DigitalInputCounter::start() {
   app.onInterrupt(pin_, interrupt_type_, [this]() { this->counter_++; });
 
   app.onRepeat(read_delay_, [this]() {
@@ -108,7 +108,7 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
     load_configuration();    
     }
 
-void DigitalInputChange::enable() {
+void DigitalInputChange::start() {
   app.onInterrupt(pin_, interrupt_type_,
     [this](){
       output = (bool)digitalRead(pin_);

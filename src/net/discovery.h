@@ -1,12 +1,12 @@
 #ifndef _discovery_H_
 #define _discovery_H_
 
-#include "system/enableable.h"
+#include "system/startable.h"
 
-class MDNSDiscovery : public Enableable {
+class MDNSDiscovery : public Startable {
  public:
-  MDNSDiscovery() : Enableable(0) {}
-  virtual void enable() override;
+  MDNSDiscovery() : Startable(0) {}
+  virtual void start() override;
 };
 
 #endif

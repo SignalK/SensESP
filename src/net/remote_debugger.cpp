@@ -5,7 +5,7 @@
 
 // initialize remote debugging
 
-void RemoteDebugger::enable() {
+void RemoteDebugger::start() {
 #ifndef DEBUG_DISABLED
   //Debug.begin(sensesp_app->get_hostname());
   //Debug.setResetCmdEnabled(true);

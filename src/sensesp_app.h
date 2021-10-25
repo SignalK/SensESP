@@ -42,7 +42,7 @@ class SensESPApp {
              String wifi_password = "", String sk_server_address = "",
              uint16_t sk_server_port = 0);
   void setup();
-  void enable();
+  void start();
   void reset();
   String get_hostname();
 

@@ -57,5 +57,5 @@ ReactESP app([]() {
       ->connect_to(new DigitalOutput(5));
 
   // Start the SensESP application running
-  sensesp_app->enable();
+  sensesp_app->start();
 });

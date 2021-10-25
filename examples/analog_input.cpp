@@ -70,5 +70,5 @@ ReactESP app([]() {
       ->connect_to(new SKOutputFloat(sk_path, "", new SKMetadata("ratio")));
 
   // Start the SensESP application running
-  sensesp_app->enable();
+  sensesp_app->start();
 });

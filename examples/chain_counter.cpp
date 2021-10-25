@@ -148,7 +148,7 @@ button_watcher->connect_to(debounce)
 
 
 /* Finally, start the SensESPApp */
-sensesp_app->enable();
+sensesp_app->start();
 
 });
 

@@ -121,14 +121,14 @@ void SensESPApp::setup() {
   this->ws_client_->get_delta_count_producer().connect_to(system_status_led_);
 }
 
-void SensESPApp::enable() {
+void SensESPApp::start() {
   // connect all transforms to the Signal K delta output
 
   // ObservableValue<String>* hostname = networking->get_hostname();
 
   debugI("Enabling subsystems");
 
-  Enableable::enable_all();
+  Startable::start_all();
   debugI("All sensors and transforms enabled");
 }
 

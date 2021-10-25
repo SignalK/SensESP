@@ -9,7 +9,7 @@
   #include <ESPmDNS.h>
 #endif
 
-void MDNSDiscovery::enable() {
+void MDNSDiscovery::start() {
   const char* hostname = sensesp_app->get_hostname().c_str();
 
   // MDNS.begin(hostname) will crash if hostname is blank

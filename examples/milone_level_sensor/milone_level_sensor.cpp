@@ -127,5 +127,5 @@ ReactESP app([]() {
       ->connect_to(new SKOutputFloat("tanks.freshwater.starboard.currentLevel"));
 
   // Start the SensESP application running
-  sensesp_app->enable();
+  sensesp_app->start();
 });

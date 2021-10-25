@@ -82,5 +82,5 @@ ReactESP app([]() {
   // Start the SensESP application running. Because of everything that's been
   // set up above, it constantly monitors the interrupt pin, and every
   // read_delay ms, it sends the calculated frequency to Signal K.
-  sensesp_app->enable();
+  sensesp_app->start();
 });

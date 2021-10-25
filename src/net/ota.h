@@ -1,12 +1,12 @@
 #ifndef _ota_H_
 #define _ota_H_
 
-#include "system/enableable.h"
+#include "system/startable.h"
 
-class OTA : public Enableable {
+class OTA : public Startable {
  public:
-  OTA() : Enableable{0} {}
-  virtual void enable() override;
+  OTA() : Startable{0} {}
+  virtual void start() override;
  private:
   static void handle_ota();
 };

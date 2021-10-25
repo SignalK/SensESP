@@ -35,5 +35,5 @@ ReactESP app([]() {
   input->connect_to(avg)->connect_to(
       new SKOutputFloat("tanks.fuel.0.currentLevel"));
 
-  sensesp_app->enable();
+  sensesp_app->start();
 });

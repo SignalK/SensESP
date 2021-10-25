@@ -2,12 +2,12 @@
 #define _remote_debug_H_
 
 
-#include "system/enableable.h"
+#include "system/startable.h"
 
-class RemoteDebugger : public Enableable {
+class RemoteDebugger : public Startable {
  public:
-  RemoteDebugger() : Enableable{0} {}
-  virtual void enable() override;
+  RemoteDebugger() : Startable{0} {}
+  virtual void start() override;
 };
 
 #endif

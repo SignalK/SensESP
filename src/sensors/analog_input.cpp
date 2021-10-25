@@ -17,7 +17,7 @@ void AnalogInput::update() {
   this->emit(output_scale * analog_reader->read());
 }
 
-void AnalogInput::enable() {
+void AnalogInput::start() {
   if (this->analog_reader->configure()) {
     app.onRepeat(read_delay, [this]() { this->update(); });
   }

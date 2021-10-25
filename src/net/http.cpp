@@ -26,7 +26,7 @@
 #define HTTP_SERVER_PORT 80
 #endif
 
-HTTPServer::HTTPServer(std::function<void()> reset_device) : Enableable(50) {
+HTTPServer::HTTPServer(std::function<void()> reset_device) : Startable(50) {
   this->reset_device = reset_device;
   server = new AsyncWebServer(HTTP_SERVER_PORT);
   using std::placeholders::_1;

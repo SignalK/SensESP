@@ -54,7 +54,7 @@ class DigitalInputState : public DigitalInput, public BoolProducer {
   DigitalInputState(uint8_t pin, int pin_mode, int interrupt_type,
                     int read_delay = 1000, String config_path = "");
 
-  virtual void enable() override final;
+  virtual void start() override final;
 
  private:
   int read_delay_;
@@ -92,7 +92,7 @@ class DigitalInputCounter : public DigitalInput, public IntProducer {
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       uint read_delay, String config_path = "");
 
-  void enable() override final;
+  void start() override final;
 
  private:
   uint read_delay_;
@@ -129,7 +129,7 @@ class DigitalInputChange : public DigitalInput, public BoolProducer {
  public:
   DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type, uint read_delay = 10,
                                          String config_path = "");
-  virtual void enable() override final;
+  virtual void start() override final;
  
  private:
   uint read_delay_;

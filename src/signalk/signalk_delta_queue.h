@@ -5,7 +5,7 @@
 
 #include <ArduinoJson.h>
 
-#include "system/enableable.h"
+#include "system/startable.h"
 
 /**
  * @brief Signal K delta queue
@@ -14,7 +14,7 @@
  * for each possible output channel (WSClient, NMEA 2000 messages,
  * carrier pigeons).
  */
-class SKDeltaQueue : public Enableable {
+class SKDeltaQueue : public Startable {
  public:
   SKDeltaQueue(const String& hostname, unsigned int max_buffer_size = 20);
   void append(const String val);
@@ -28,7 +28,7 @@ class SKDeltaQueue : public Enableable {
   /// delta should have metadata added to it.
   void reset_meta_send() { this-> meta_sent_ = false; }
 
-  virtual void enable() override;
+  virtual void start() override;
 
  private:
   String hostname;

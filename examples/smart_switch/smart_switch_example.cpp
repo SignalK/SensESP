@@ -125,6 +125,6 @@ ReactESP app([]() {
              ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
 
   // Start the SensESP application running
-  sensesp_app->enable();
+  sensesp_app->start();
 
 });
