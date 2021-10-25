@@ -92,8 +92,6 @@ class SensESPApp {
 
   ObservableValue<String>* hostname_;
 
-  void initialize();
-
   Filesystem* filesystem_;
   RemoteDebugger* remote_debugger_;
   MDNSDiscovery* mdns_discovery_;
