@@ -42,13 +42,22 @@ class ValueProducer : virtual public Observable {
       consumer->set_input(this->get(), input_channel);
     });
   }
-
-  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
-  // [[deprecated("Use connect_to() instead.")]]
-  void connectTo(
-      ValueConsumer<T>* consumer, uint8_t input_channel = 0) {
-    debugW("Use connect_to() instead.");
-    connect_to(consumer, input_channel);
+  
+  /**
+   * @brief Connect a producer to a consumer of a different type.
+   * 
+   * This allows you to connect a producer to a consumer of a different type.
+   * Automatic type conversion is performed.
+   * 
+   * @tparam CT Consumer type
+   * @param consumer Consumer object to connect to
+   * @param input_channel 
+   */
+  template <typename CT>
+  void connect_to(ValueConsumer<CT>* consumer, uint8_t input_channel = 0) {
+    this->attach([this, consumer, input_channel]() {
+      consumer->set_input(CT(this->get()), input_channel);
+    });
   }
 
   /**
@@ -66,18 +75,31 @@ class ValueProducer : virtual public Observable {
   Transform<T, T2>* connect_to(Transform<T, T2>* consumer_producer,
                                uint8_t input_channel = 0) {
     this->attach([this, consumer_producer, input_channel]() {
-      consumer_producer->set_input(this->get(), input_channel);
+      consumer_producer->set_input(T(this->get()), input_channel);
     });
     return consumer_producer;
   }
 
-  template <typename T2>
-  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
-  //[[deprecated("Use connect_to(...) instead.")]]
-  Transform<T, T2>* connectTo(
-      Transform<T, T2>* consumer_producer, uint8_t input_channel = 0) {
-    debugW("Use connect_to(...) instead.");
-    return connect_to(consumer_producer, input_channel);
+
+  /**
+   * @brief Connect a producer to a transform with a different input type
+   * 
+   * This allows you to connect a producer to a transform with a different
+   * input type. Automatic type conversion is performed.
+   * 
+   * @tparam TT Transform input type
+   * @tparam T2 Transform output type
+   * @param consumer_producer Transform object to connect to
+   * @param input_channel 
+   * @return Transform<TT, T2>* 
+   */
+  template <typename TT, typename T2>
+  Transform<TT, T2>* connect_to(Transform<TT, T2>* consumer_producer,
+                               uint8_t input_channel = 0) {
+    this->attach([this, consumer_producer, input_channel]() {
+      consumer_producer->set_input(TT(this->get()), input_channel);
+    });
+    return consumer_producer;
   }
 
   /*
