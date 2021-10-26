@@ -16,7 +16,6 @@ jobs:
           - examples/relay_control.cpp
           - examples/rpm_counter.cpp
         target_device:
-          - d1_mini
           - esp32dev
     steps:
       - uses: actions/checkout@v1
