@@ -30,20 +30,16 @@ void SensESPApp::setup() {
   ota_ = new OTA();
 
   // create the HTTP server
-  // TODO: make conditional
   this->http_server_ = new HTTPServer();
 
   // create the SK delta object
-  // TODO: one queue per output path
   sk_delta_queue_ = new SKDeltaQueue();
 
   // create the websocket client
-  // TODO: make conditional
   this->ws_client_ = new WSClient("/system/sk", sk_delta_queue_,
                                   sk_server_address_, sk_server_port_);
 
   // connect the system status controller
-  // TODO: make conditional
   this->networking_->connect_to(&system_status_controller_);
   this->ws_client_->connect_to(&system_status_controller_);
 
@@ -51,7 +47,6 @@ void SensESPApp::setup() {
   mdns_discovery_ = new MDNSDiscovery();
 
   // create the wifi disconnect watchdog
-  // TODO: make conditional
   this->system_status_controller_
       .connect_to(new DebounceTemplate<SystemStatus>(
           3 * 60 * 1000,  // 180 s = 180000 ms = 3 minutes
@@ -66,8 +61,7 @@ void SensESPApp::setup() {
       }));
 
   // create a system status led and connect it
-
-  // TODO: must not depend on networking and ws_client etc
+  
   if (system_status_led_ == NULL) {
     system_status_led_ = new SystemStatusLed(LED_PIN);
   }
