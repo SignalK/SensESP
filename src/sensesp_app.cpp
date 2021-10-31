@@ -56,7 +56,7 @@ void SensESPApp::setup() {
       }));
 
   // create a system status led and connect it
-  
+
   if (system_status_led_ == NULL) {
     system_status_led_ = new SystemStatusLed(LED_PIN);
   }

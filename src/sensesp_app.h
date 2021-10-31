@@ -1,7 +1,6 @@
 #ifndef _sensesp_app_H_
 #define _sensesp_app_H_
 
-
 #ifdef LED_BUILTIN
 #define LED_PIN LED_BUILTIN
 #define ENABLE_LED true
@@ -11,12 +10,12 @@
 #endif
 
 #include "controllers/system_status_controller.h"
-#include "net/http.h"
 #include "net/discovery.h"
+#include "net/http.h"
 #include "net/networking.h"
 #include "net/ota.h"
-#include "net/ws_client.h"
 #include "net/remote_debugger.h"
+#include "net/ws_client.h"
 #include "sensesp_base_app.h"
 #include "sensors/sensor.h"
 #include "signalk/signalk_delta_queue.h"
@@ -31,16 +30,15 @@ void SetupSerialDebug(uint32_t baudrate);
  */
 class SensESPApp : public SensESPBaseApp {
  public:
-
   /**
    * Singletons should not be cloneable
    */
-  SensESPApp(SensESPApp &other) = delete;
+  SensESPApp(SensESPApp& other) = delete;
 
   /**
    * Singletons should not be assignable
    */
-  void operator=(const SensESPApp &) = delete;
+  void operator=(const SensESPApp&) = delete;
 
   /**
    * @brief Get the singleton instance of the SensESPApp
@@ -59,13 +57,13 @@ class SensESPApp : public SensESPBaseApp {
   WSClient* get_ws_client() { return this->ws_client_; }
 
  protected:
- /**
-  * @brief SensESPApp constructor
-  * 
-  * Note that the constructor is protected, so SensESPApp should only
-  * be instantiated using SensESPAppBuilder.
-  * 
-  */
+  /**
+   * @brief SensESPApp constructor
+   *
+   * Note that the constructor is protected, so SensESPApp should only
+   * be instantiated using SensESPAppBuilder.
+   *
+   */
   SensESPApp() : SensESPBaseApp() {}
 
   // setters for all constructor arguments

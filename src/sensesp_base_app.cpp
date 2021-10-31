@@ -25,21 +25,18 @@ SensESPBaseApp::SensESPBaseApp() {}
  * Get the singleton SensESPBaseApp singleton instance.
  * The instance must be set by the builder.
  */
-SensESPBaseApp* SensESPBaseApp::get() {
-  return instance_;
-}
+SensESPBaseApp* SensESPBaseApp::get() { return instance_; }
 
 void SensESPBaseApp::setup() {
-    // initialize the filesystem
-    filesystem_ = new Filesystem();
+  // initialize the filesystem
+  filesystem_ = new Filesystem();
 
-    // create the hostname_ observable
-    hostname_ = new ObservableValue<String>(preset_hostname_);
+  // create the hostname_ observable
+  hostname_ = new ObservableValue<String>(preset_hostname_);
 
-    // create a remote debugger object
-    remote_debugger_ = new RemoteDebugger();
+  // create a remote debugger object
+  remote_debugger_ = new RemoteDebugger();
 }
-
 
 void SensESPBaseApp::start() {
   // start all individual startable components
@@ -48,7 +45,6 @@ void SensESPBaseApp::start() {
   Startable::start_all();
   debugD("All sensors and transforms started");
 }
-
 
 void SensESPBaseApp::reset() {
   debugW("Resetting the device configuration to system defaults.");

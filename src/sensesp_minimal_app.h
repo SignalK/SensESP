@@ -11,7 +11,7 @@ class SensESPMinimalApp : public SensESPBaseApp {
   /**
    * @brief Get the singleton instance of the SensESPMinimalApp
    */
-  static SensESPMinimalApp* get();
+  static SensESPMinimalApp *get();
 
  protected:
   SensESPMinimalApp() : SensESPBaseApp() {}
