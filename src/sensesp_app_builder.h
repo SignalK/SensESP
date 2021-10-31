@@ -1,8 +1,8 @@
 #ifndef SENSESP_APP_BUILDER_H
 #define SENSESP_APP_BUILDER_H
 
-#include "sensesp_base_app_builder.h"
 #include "sensesp_app.h"
+#include "sensesp_base_app_builder.h"
 
 /**
  * @brief A class for quickly configuring a SensESP application object before
@@ -19,7 +19,6 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
  protected:
   SensESPApp* app_;
 
-
  public:
   SensESPAppBuilder() { app_ = SensESPApp::get(); }
   SensESPAppBuilder* set_wifi(String ssid, String password) {
@@ -32,8 +31,8 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     app_->set_sk_server_port(port);
     return this;
   }
-  SensESPAppBuilder* set_hostname(String hostname) {
-    this->SensESPBaseAppBuilder::set_hostname(hostname);
+  SensESPAppBuilder* set_hostname(String hostname) override final {
+    app_->set_preset_hostname(hostname);
     return this;
   }
   SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
@@ -44,7 +43,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     WSClient::test_auth_on_each_connect_ = val;
     return this;
   }
-  SensESPApp* get_app() {
+  SensESPApp* get_app() override final {
     app_->setup();
     return app_;
   }
