@@ -19,9 +19,6 @@ void SetupSerialDebug(uint32_t baudrate) {
 
 SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
 
-/*
- * This constructor must be only used in SensESPBaseAppBuilder
- */
 SensESPBaseApp::SensESPBaseApp() {}
 
 /**
@@ -45,14 +42,11 @@ void SensESPBaseApp::setup() {
 
 
 void SensESPBaseApp::start() {
-  // connect all transforms to the Signal K delta output
-
-  // ObservableValue<String>* hostname = networking->get_hostname();
+  // start all individual startable components
 
   debugI("Starting subsystems");
-
   Startable::start_all();
-  debugI("All sensors and transforms started");
+  debugD("All sensors and transforms started");
 }
 
 
