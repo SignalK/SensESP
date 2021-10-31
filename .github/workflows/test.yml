@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         example:
-          - examples/base_app.cpp
+          - examples/minimal_app.cpp
           - examples/analog_input.cpp
           - examples/hysteresis.cpp
           - examples/lambda_transform.cpp

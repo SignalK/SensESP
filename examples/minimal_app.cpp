@@ -3,8 +3,7 @@
 #include "math.h"
 #include "net/http.h"
 #include "net/networking.h"
-#include "sensesp_base_app.h"
-#include "sensesp_base_app_builder.h"
+#include "sensesp_minimal_app_builder.h"
 #include "sensors/digital_input.h"
 #include "transforms/lambda_transform.h"
 #include "transforms/linear.h"
@@ -17,20 +16,21 @@ constexpr uint8_t output_pin1 = 18;
 constexpr uint8_t input_pin2 = 13;
 constexpr uint8_t output_pin2 = 21;
 
-// This is a sample program to demonstrate how to instantiate a minimal
-// SensESPBaseApp application and only enable some required components
+// This is a sample program to demonstrate how to instantiate a
+// SensESPMinimalApp application and only enable some required components
 // explicitly.
 //
-// The program just wiggle GPIO pins 18 and 21 at defined rates, and 
-// reads inputof pins 15 and 13. If the output and input pins are connected
-// with a jumper wire, you should see changes on the reported values on the
+// The program just wiggles GPIO pins 18 and 21 at defined rates, and 
+// reads the input of pins 15 and 13. If the output and input pins are connected
+// with a jumper wire, you should see changes in the reported values on the
 // serial console.
 
 ReactESP app([]() {
   SetupSerialDebug(115200);
 
+  SensESPMinimalAppBuilder builder;
   auto sensesp_app =
-      (new SensESPBaseAppBuilder())->set_hostname("counter-test")->get_app();
+      builder.set_hostname("counter-test")->get_app();
 
   // manually create Networking and HTTPServer objects to enable
   // the HTTP configuration interface
