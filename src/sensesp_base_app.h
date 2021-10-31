@@ -24,17 +24,6 @@ void SetupSerialDebug(uint32_t baudrate);
  */
 class SensESPBaseApp {
  public:
-  
-  /**
-   * Singletons should not be cloneable
-   */
-  SensESPBaseApp(SensESPBaseApp &other) = delete;
-
-  /**
-   * Singletons should not be assignable
-   */
-  void operator=(const SensESPBaseApp &) = delete;
-
   /**
    * @brief Get the singleton instance of the SensESPBaseApp
    */
@@ -87,8 +76,6 @@ protected:
     preset_hostname_ = preset_hostname;
     return this;
   }
-
-  friend class SensESPBaseAppBuilder;
 };
 
 #endif

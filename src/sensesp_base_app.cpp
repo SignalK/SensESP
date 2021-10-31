@@ -24,13 +24,11 @@ SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
  */
 SensESPBaseApp::SensESPBaseApp() {}
 
-// Combining singletons and inheritance is always clunky. Be sure to always
-// call the child class get() method, if any, first. Having an appropriate
-// Builder class for the child should take care of that.
+/**
+ * Get the singleton SensESPBaseApp singleton instance.
+ * The instance must be set by the builder.
+ */
 SensESPBaseApp* SensESPBaseApp::get() {
-  if (instance_ == nullptr) {
-    instance_ = new SensESPBaseApp();
-  }
   return instance_;
 }
 
