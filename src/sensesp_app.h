@@ -25,7 +25,8 @@
 void SetupSerialDebug(uint32_t baudrate);
 
 /**
- * The main SensESP application object.
+ * The default SensESP application object with networking and Signal K
+ * communication.
  * @see SensESPAppBuilder
  */
 class SensESPApp : public SensESPBaseApp {
@@ -58,7 +59,14 @@ class SensESPApp : public SensESPBaseApp {
   WSClient* get_ws_client() { return this->ws_client_; }
 
  protected:
-  SensESPApp();
+ /**
+  * @brief SensESPApp constructor
+  * 
+  * Note that the constructor is protected, so SensESPApp should only
+  * be instantiated using SensESPAppBuilder.
+  * 
+  */
+  SensESPApp() : SensESPBaseApp() {}
 
   // setters for all constructor arguments
 

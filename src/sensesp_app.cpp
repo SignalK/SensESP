@@ -6,11 +6,6 @@
 #include "system/system_status_led.h"
 #include "transforms/debounce.h"
 
-/*
- * This constructor must be only used in SensESPAppBuilder
- */
-SensESPApp::SensESPApp() : SensESPBaseApp() {}
-
 SensESPApp* SensESPApp::get() {
   if (instance_ == nullptr) {
     instance_ = new SensESPApp();
