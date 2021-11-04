@@ -11,7 +11,7 @@
 
 #include "controllers/system_status_controller.h"
 #include "net/discovery.h"
-#include "net/http.h"
+#include "net/http_server.h"
 #include "net/networking.h"
 #include "net/ota.h"
 #include "net/remote_debugger.h"
