@@ -12,7 +12,7 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "AsyncJson.h"
-#include "sensesp_app.h"
+#include "sensesp_base_app.h"
 #include "system/configurable.h"
 
 // Include the web UI stored in PROGMEM space
@@ -197,7 +197,7 @@ void HTTPServer::handle_device_reset(AsyncWebServerRequest* request) {
   request->send(
       200, "text/plain",
       "OK, resetting the device settings back to factory defaults.\n");
-  app.onDelay(500, [this]() { sensesp_app->reset(); });
+  app.onDelay(500, [this]() { SensESPBaseApp::get()->reset(); });
 }
 
 void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
@@ -210,7 +210,7 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
 
   response->setCode(200);
   response->printf("Name: %s, build at %s %s\n",
-                   sensesp_app->get_hostname_observable()->get().c_str(),
+                   SensESPBaseApp::get()->get_hostname_observable()->get().c_str(),
                    __DATE__, __TIME__);
 
   response->printf("MAC: %s\n", WiFi.macAddress().c_str());
@@ -218,10 +218,11 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
 
   response->printf("SSID: %s\n", WiFi.SSID().c_str());
 
-  response->printf("Signal K server address: %s\n",
-                   sensesp_app->ws_client_->get_server_address().c_str());
-  response->printf("Signal K server port: %d\n",
-                   sensesp_app->ws_client_->get_server_port());
-
-  request->send(response);
+  // TODO: use inversion of control to acquire information on different subsystems
+  //  response->printf("Signal K server address: %s\n",
+  //                   SensESPApp::get()->ws_client_->get_server_address().c_str());
+  //  response->printf("Signal K server port: %d\n",
+  //                   SensESPApp::get()->ws_client_->get_server_port());
+  //
+    request->send(response);
 }

@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 #include "math.h"
-#include "sensesp_app.h"
+#include "sensesp_app_builder.h"
 #include "sensors/analog_input.h"
 #include "signalk/signalk_output.h"
 #include "transforms/lambda_transform.h"
@@ -12,8 +12,13 @@ ReactESP app([]() {
   // Create a new SensESPApp object. This is the direct constructor call, and
   // an equivalent alternative to using the SensESPAppBuilder class.
 
-  sensesp_app = new SensESPApp("sensesp-illum-example", "My WiFi SSID",
-                               "my_wifi_password", "192.168.1.13", 80);
+  SensESPAppBuilder builder;
+
+  sensesp_app = builder
+                  .set_hostname("sensesp-illum-example")
+                  ->set_wifi("My WiFi SSID", "my_wifi_password")
+                  ->set_sk_server("192.168.1.13", 80)
+                  ->get_app();
 
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html

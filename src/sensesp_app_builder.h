@@ -2,12 +2,13 @@
 #define SENSESP_APP_BUILDER_H
 
 #include "sensesp_app.h"
+#include "sensesp_base_app_builder.h"
 
 /**
  * @brief A class for quickly configuring a SensESP application object before
  * wiring up your sensors.
  */
-class SensESPAppBuilder {
+class SensESPAppBuilder : public SensESPBaseAppBuilder {
  private:
   String hostname_ = "SensESP";
   String ssid_ = "";
@@ -18,9 +19,8 @@ class SensESPAppBuilder {
  protected:
   SensESPApp* app_;
 
-
  public:
-  SensESPAppBuilder() { app_ = new SensESPApp(true); }
+  SensESPAppBuilder() { app_ = SensESPApp::get(); }
   SensESPAppBuilder* set_wifi(String ssid, String password) {
     app_->set_ssid(ssid);
     app_->set_wifi_password(password);
@@ -31,7 +31,7 @@ class SensESPAppBuilder {
     app_->set_sk_server_port(port);
     return this;
   }
-  SensESPAppBuilder* set_hostname(String hostname) {
+  SensESPAppBuilder* set_hostname(String hostname) override final {
     app_->set_preset_hostname(hostname);
     return this;
   }
@@ -43,7 +43,7 @@ class SensESPAppBuilder {
     WSClient::test_auth_on_each_connect_ = val;
     return this;
   }
-  SensESPApp* get_app() {
+  SensESPApp* get_app() override final {
     app_->setup();
     return app_;
   }

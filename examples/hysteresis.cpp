@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 #include "math.h"
-#include "sensesp_app.h"
+#include "sensesp_app_builder.h"
 #include "sensors/analog_input.h"
 #include "signalk/signalk_output.h"
 #include "transforms/hysteresis.h"
@@ -9,8 +9,12 @@
 ReactESP app([]() {
   SetupSerialDebug(115200);
 
-  sensesp_app = new SensESPApp("sensesp-hysteresis-example", "My WiFi SSID",
-                               "my_wifi_password", "192.168.10.3", 80);
+  SensESPAppBuilder builder;
+  sensesp_app = builder
+                  .set_hostname("sensesp-hysteresis-example")
+                  ->set_wifi("My WiFi SSID", "my_wifi_password")
+                  ->set_sk_server("192.168.10.3", 80)
+                  ->get_app();
 
   const char* sk_path = "environment.indoor.illuminance";
   const char* analog_in_config_path = "/indoor_illuminance/analog_in";
