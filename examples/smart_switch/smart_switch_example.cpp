@@ -14,6 +14,8 @@
 #include "transforms/repeat_report.h"
 #include "transforms/press_repeater.h"
 
+using namespace sensesp;
+
 // This example implements a smart light switch which can control a load either via
 // a manual button press, or via Signal K PUT requests.
 
@@ -60,7 +62,7 @@ ReactESP app([]() {
   // This device will report its status on this path, as well as
   // respond to PUT requests to change its status.
   // To find valid Signal K Paths that fits your need you look at this link:
-  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html  
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "electrical.switches.lights.engineroom.state";
 
 
@@ -81,14 +83,14 @@ ReactESP app([]() {
   // Create a digital output that is assumed to be connected to the
   // control channel of a relay or a MOSFET that will control the
   // electric light.  Also connect this pin's state to an LED to get
-  // a visual indicator of load's state. 
+  // a visual indicator of load's state.
   auto* load_switch = new DigitalOutput(PIN_RELAY);
-  load_switch->connect_to(new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B, 
-                                     config_path_status_light, 
+  load_switch->connect_to(new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B,
+                                     config_path_status_light,
                                      LED_ON_COLOR, LED_OFF_COLOR));
 
 
-  // Create a switch controller to handle the user press logic and 
+  // Create a switch controller to handle the user press logic and
   // connect it to the load switch...
   SmartSwitchController* controller = new SmartSwitchController();
   controller->connect_to(load_switch);
@@ -102,9 +104,9 @@ ReactESP app([]() {
      ->connect_to(controller);
 
 
-  // In addition to the manual button "click types", a 
-  // SmartSwitchController accepts explicit state settings via 
-  // any boolean producer as well as any "truth" values in human readable 
+  // In addition to the manual button "click types", a
+  // SmartSwitchController accepts explicit state settings via
+  // any boolean producer as well as any "truth" values in human readable
   // format via a String producer.
   // Here, we set up a SignalK PUT request listener to handle
   // requests made to the Signal K server to set the switch state.
@@ -114,12 +116,12 @@ ReactESP app([]() {
   sk_listener->connect_to(controller);
 
 
-  // Finally, connect the load switch to an SKOutput so it reports its state 
-  // to the Signal K server.  Since the load switch only reports its state 
-  // whenever it changes (and switches like light switches change infrequently), 
-  // send it through a `RepeatReport` transform, which will cause the state 
-  // to be reported to the server every 10 seconds, regardless of whether 
-  // or not it has changed.  That keeps the value on the server fresh and 
+  // Finally, connect the load switch to an SKOutput so it reports its state
+  // to the Signal K server.  Since the load switch only reports its state
+  // whenever it changes (and switches like light switches change infrequently),
+  // send it through a `RepeatReport` transform, which will cause the state
+  // to be reported to the server every 10 seconds, regardless of whether
+  // or not it has changed.  That keeps the value on the server fresh and
   // lets the server know the switch is still alive.
   load_switch->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
              ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));

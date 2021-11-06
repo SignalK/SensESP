@@ -9,6 +9,8 @@
 #include "transforms/linear.h"
 #include "transforms/typecast.h"
 
+using namespace sensesp;
+
 constexpr unsigned int read_delay = 500;
 
 constexpr uint8_t input_pin1 = 15;

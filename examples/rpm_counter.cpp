@@ -7,6 +7,8 @@
 #include "signalk/signalk_output.h"
 #include "transforms/frequency.h"
 
+using namespace sensesp;
+
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
 ReactESP app([]() {
@@ -26,7 +28,7 @@ ReactESP app([]() {
   // "propulsion.starboard.revolutions" In this example, there is only one
   // propulsion engine, and its RPM is the only thing being reported to Signal K.
   // To find valid Signal K Paths that fits your need you look at this link:
-  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html  
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "propulsion.main.revolutions";
 
   // The "Configuration path" is combined with "/config" to formulate a URL
@@ -66,7 +68,7 @@ ReactESP app([]() {
   // ESP8266 pins are specified as DX
   // ESP32 pins are specified as just the X in GPIOX
 #ifdef ESP8266
-  uint8_t pin = D5;  
+  uint8_t pin = D5;
 #elif defined(ESP32)
   uint8_t pin = 4;
 #endif

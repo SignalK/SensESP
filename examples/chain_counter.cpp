@@ -8,8 +8,9 @@
 #include "transforms/debounce.h"
 #include "signalk/signalk_output.h"
 
+using namespace sensesp;
 
-/** 
+/**
  * This example illustrates an anchor chain counter. Note that it
  * doesn't distinguish between chain being let out and chain being
  * taken in, so the intended usage is this: Press the button to make
@@ -19,7 +20,7 @@
  * counter will show how much you have brought in. Press the button
  * again to reset the counter to 0.0, to be ready for the next anchor
  * deployment.
- * 
+ *
  * A bi-directional chain counter is possible, but this is not one.
  */
 
@@ -38,7 +39,7 @@ ReactESP app([]() {
 #elif defined(ESP32)
   uint8_t COUNTER_PIN = 32;
   uint8_t BUTTON_PIN = 34;
-#endif 
+#endif
 
 /**
  * DigitalInputCounter will count the revolutions of the windlass with a
@@ -51,7 +52,7 @@ String counter_config_path = "/chain_counter/read_delay";
 auto *chain_counter = new DigitalInputCounter(COUNTER_PIN, INPUT_PULLUP, RISING,
                           counter_read_delay, counter_config_path);
 
-/** 
+/**
  * An IntegratorT<int, float> called "accumulator" adds up all the counts it
 * receives (which are ints) and multiplies each count by gypsy_circum, which is the
 * amount of chain, in meters, that is moved by each revolution of the windlass. (Since
@@ -75,7 +76,7 @@ SKMetadata* metadata = new SKMetadata();
   metadata->display_name_ = "Rode Deployed";
   metadata->short_name_ = "Rode Out";
 
-/** 
+/**
  * chain_counter is connected to accumulator, which is connected to an SKOutputNumber,
  * which sends the final result to the indicated path on the Signal K server. (Note that
  * each data type has its own version of SKOutput: SKOutputNumber for floats, SKOutputInt,
@@ -83,13 +84,13 @@ SKMetadata* metadata = new SKMetadata();
  */
   String sk_path = "navigation.anchor.rodeDeployed";
   String sk_path_config_path = "/rodeDeployed/sk";
-  
+
   chain_counter->connect_to(accumulator)
                ->connect_to(new SKOutputFloat(sk_path, sk_path_config_path, metadata));
 
 
 
-/** 
+/**
  * DigitalInputChange monitors a physical button connected to BUTTON_PIN. Because
  * its interrupt type is CHANGE, it will emit a value when the button is pressed,
  * and again when it's released, but that's OK - our LambdaConsumer function will
@@ -98,10 +99,10 @@ SKMetadata* metadata = new SKMetadata();
 */
 int read_delay = 10;
 String read_delay_config_path = "/button_watcher/read_delay";
-auto* button_watcher = new DigitalInputChange(BUTTON_PIN, INPUT, CHANGE, read_delay, read_delay_config_path); 
+auto* button_watcher = new DigitalInputChange(BUTTON_PIN, INPUT, CHANGE, read_delay, read_delay_config_path);
 
 
-/** 
+/**
  * Create a DebounceInt to make sure we get a nice, clean signal from the button.
  * Set the debounce delay period to 15 ms, which can be configured at debounce_config_path
  * in the Config UI.
@@ -111,7 +112,7 @@ String debounce_config_path = "/debounce/delay";
 auto* debounce = new DebounceInt(debounce_delay, debounce_config_path);
 
 
-/** 
+/**
  * When the button is pressed (or released), it will call the lambda expression
 * (or "function") that's called by the LambdaConsumer. This is the function - notice
 * that it calls reset() only when the input is 1, which indicates a button press. It
@@ -124,20 +125,20 @@ auto reset_function = [accumulator](int input) {
   }
 };
 
-/** 
+/**
  * Create the LambdaConsumer that calls reset_function, Because DigitalInputChange
  * outputs an int, the version of LambdaConsumer we need is LambdaConsumer<int>.
- * 
+ *
  * While this approach - defining the lambda function (above) separate from the
  * LambdaConsumer (below) - is simpler to understand, there is a more concise approach:
- * 
+ *
   auto* button_consumer = new LambdaConsumer<int>([accumulator](int input) {
     if (input == 1) {
       accumulator->reset();
     }
   });
 
- * 
+ *
 */
 auto* button_consumer = new LambdaConsumer<int>(reset_function);
 

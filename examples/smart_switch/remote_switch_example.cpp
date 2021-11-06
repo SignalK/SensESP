@@ -15,8 +15,10 @@
 #include "transforms/repeat_report.h"
 #include "transforms/press_repeater.h"
 
+using namespace sensesp;
+
 // This example implements a remote switch that can remotely control the
-// smart switch created in smart_switch_example.cpp 
+// smart switch created in smart_switch_example.cpp
 
 #ifdef ESP32
 #define PIN_LED_R 6
@@ -59,7 +61,7 @@ ReactESP app([]() {
   // switch will also subscribe to this path, and will set its state
   // internally to match any value reported on this path.
   // To find valid Signal K Paths that fits your need you look at this link:
-  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html  
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "electrical.switches.lights.engineroom.state";
 
 
@@ -77,12 +79,12 @@ ReactESP app([]() {
 
 
   // An led that represents the current state of the switch.
-  auto* led = new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B, 
-                         config_path_status_light, 
+  auto* led = new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B,
+                         config_path_status_light,
                          LED_ON_COLOR, LED_OFF_COLOR);
 
 
-  // Create a switch controller to handle the user press logic and 
+  // Create a switch controller to handle the user press logic and
   // connect it a server PUT request...
   SmartSwitchController* controller = new SmartSwitchController(false);
   controller->connect_to(new BoolSKPutRequest(sk_path));
@@ -99,15 +101,15 @@ ReactESP app([]() {
      ->connect_to(controller);
 
 
-  // In addition to the manual button "click types", a 
-  // SmartSwitchController accepts explicit state settings via 
-  // any boolean producer or various "truth" values in human readable 
+  // In addition to the manual button "click types", a
+  // SmartSwitchController accepts explicit state settings via
+  // any boolean producer or various "truth" values in human readable
   // format via a String producer.
   // Since this device is NOT the device that directly controls the
   // load, we don't want to respond to PUT requests. Instead, we
   // let the "real" switch respond to the PUT requests, and
   // here we just listen to the published values that are
-  // sent across the Signal K network when the controlling device 
+  // sent across the Signal K network when the controlling device
   // confirms it has made the change in state.
   auto* sk_listener = new SKValueListener<bool>(sk_path);
   sk_listener->connect_to(controller);

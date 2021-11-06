@@ -8,6 +8,8 @@
 #include "signalk/signalk_value_listener.h"
 #include "transforms/threshold.h"
 
+using namespace sensesp;
+
 // This example shows how to listen to a specific SK Path (on the SK Server) for
 // a value within a specified range. If the value is in the range (or outside,
 // if that's how you've set it up), the output will be "true". You can then
@@ -34,7 +36,7 @@ ReactESP app([]() {
                     ->get_app();
 
   // To find valid Signal K Paths that fits your need you look at this link:
-  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html  
+  // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   // Define the SK Path you want to listen to
   const char* sk_path = "environment.outside.illuminance";
 
