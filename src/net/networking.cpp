@@ -35,6 +35,7 @@ Networking::Networking(String config_path, String ssid, String password,
   }
   server = new AsyncWebServer(80);
   dns = new DNSServer();
+  WiFi.persistent(true);
   wifi_manager = new AsyncWiFiManager(server, dns);
 }
 
