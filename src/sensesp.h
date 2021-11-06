@@ -8,8 +8,6 @@ namespace sensesp {
 
 typedef std::function<void()> void_cb_func;
 
-extern ReactESP app;
-
 #ifndef DEBUG_DISABLED
 extern RemoteDebug Debug;
 #endif
