@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 #include "math.h"
-#include "net/http.h"
+#include "net/http_server.h"
 #include "net/networking.h"
 #include "sensesp_minimal_app_builder.h"
 #include "sensors/digital_input.h"
@@ -20,7 +20,7 @@ constexpr uint8_t output_pin2 = 21;
 // SensESPMinimalApp application and only enable some required components
 // explicitly.
 //
-// The program just wiggles GPIO pins 18 and 21 at defined rates, and 
+// The program just wiggles GPIO pins 18 and 21 at defined rates, and
 // reads the input of pins 15 and 13. If the output and input pins are connected
 // with a jumper wire, you should see changes in the reported values on the
 // serial console.
