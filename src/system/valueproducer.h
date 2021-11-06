@@ -6,13 +6,15 @@
 #include "observable.h"
 #include "valueconsumer.h"
 
+namespace sensesp {
+
 // The Transform class is defined in transforms/transform.h
 template <typename C, typename P>
 class Transform;
 
 /**
  * @brief A base class for any sensor or piece of code that outputs a value for
- * consumption elsewhere.  
+ * consumption elsewhere.
  * <p>They are Observable, allowing code to be notified
  * whenever a new value is available.  They can be connected directly to
  * `ValueConsumer`s of the same type using the `connect_to()` method.
@@ -42,16 +44,16 @@ class ValueProducer : virtual public Observable {
       consumer->set_input(this->get(), input_channel);
     });
   }
-  
+
   /**
    * @brief Connect a producer to a consumer of a different type.
-   * 
+   *
    * This allows you to connect a producer to a consumer of a different type.
    * Automatic type conversion is performed.
-   * 
+   *
    * @tparam CT Consumer type
    * @param consumer Consumer object to connect to
-   * @param input_channel 
+   * @param input_channel
    */
   template <typename CT>
   void connect_to(ValueConsumer<CT>* consumer, uint8_t input_channel = 0) {
@@ -80,22 +82,21 @@ class ValueProducer : virtual public Observable {
     return consumer_producer;
   }
 
-
   /**
    * @brief Connect a producer to a transform with a different input type
-   * 
+   *
    * This allows you to connect a producer to a transform with a different
    * input type. Automatic type conversion is performed.
-   * 
+   *
    * @tparam TT Transform input type
    * @tparam T2 Transform output type
    * @param consumer_producer Transform object to connect to
-   * @param input_channel 
-   * @return Transform<TT, T2>* 
+   * @param input_channel
+   * @return Transform<TT, T2>*
    */
   template <typename TT, typename T2>
   Transform<TT, T2>* connect_to(Transform<TT, T2>* consumer_producer,
-                               uint8_t input_channel = 0) {
+                                uint8_t input_channel = 0) {
     this->attach([this, consumer_producer, input_channel]() {
       consumer_producer->set_input(TT(this->get()), input_channel);
     });
@@ -122,5 +123,7 @@ typedef ValueProducer<float> FloatProducer;
 typedef ValueProducer<int> IntProducer;
 typedef ValueProducer<bool> BoolProducer;
 typedef ValueProducer<String> StringProducer;
+
+}  // namespace sensesp
 
 #endif

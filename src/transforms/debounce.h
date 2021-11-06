@@ -3,6 +3,8 @@
 
 #include "transforms/transform.h"
 
+namespace sensesp {
+
 static const char DEBOUNCE_SCHEMA[] PROGMEM = R"###({
     "type": "object",
     "properties": {
@@ -42,10 +44,10 @@ class DebounceTemplate : public SymmetricTransform<T> {
   }
 
   virtual void set_input(T input, uint8_t input_channel = 0) override {
-    
+
     // Input has changed since the last emit, or this is the first
     // input since the program started to run.
-    
+
     if (input != debounced_value_ || !value_received_) {
       debounced_value_ = input;
 
@@ -91,5 +93,7 @@ typedef DebounceTemplate<bool>
 typedef DebounceTemplate<int> DebounceInt;
 typedef DebounceTemplate<float>
     DebounceFloat;  // not sure this works - test it if you use it
+
+}
 
 #endif

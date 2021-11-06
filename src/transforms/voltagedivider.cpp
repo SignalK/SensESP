@@ -1,5 +1,7 @@
 #include "voltagedivider.h"
 
+namespace sensesp {
+
 VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path)
     : SymmetricTransform<float>(config_path), R2_{R2}, Vin_{Vin} {
   load_configuration();
@@ -81,3 +83,5 @@ bool VoltageDividerR2::set_configuration(const JsonObject& config) {
 
   return true;
 }
+
+}  // namespace sensesp

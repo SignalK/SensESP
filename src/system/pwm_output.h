@@ -5,6 +5,8 @@
 
 #include "system/valueconsumer.h"
 
+namespace sensesp {
+
 /**
  * @brief Provides a cross platform mechanism for generating
  * Pulse Width Modulation signals over one or more GPIO pins
@@ -72,5 +74,7 @@ class PWMOutput : public ValueConsumer<float> {
   static std::map<uint8_t, int8_t> channel_to_pin_;
   uint8_t default_channel_;
 };
+
+}  // namespace sensesp
 
 #endif

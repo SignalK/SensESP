@@ -4,6 +4,8 @@
 #include "sensesp_app.h"
 #include "system/led_blinker.h"
 
+namespace sensesp {
+
 // Wifi config portal timeout (seconds). The smaller the value, the faster
 // the device will attempt to reconnect. If set too small, it might
 // become impossible to actually configure the Wifi settings in the captive
@@ -73,7 +75,8 @@ void Networking::setup_saved_ssid() {
   this->emit(WifiState::kWifiDisconnected);
   setup_wifi_callbacks();
 
-  const char* hostname = SensESPBaseApp::get()->get_hostname_observable()->get().c_str();
+  const char* hostname =
+      SensESPBaseApp::get()->get_hostname_observable()->get().c_str();
 
 #ifdef ESP32
   WiFi.setHostname(hostname);
@@ -117,8 +120,7 @@ void Networking::setup_wifi_manager() {
   wifi_manager->setDebugOutput(false);
 #endif
   AsyncWiFiManagerParameter custom_hostname(
-      "hostname", "Set ESP Device custom hostname",
-      hostname.c_str(), 20);
+      "hostname", "Set ESP Device custom hostname", hostname.c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
 
   // Create a unique SSID for configuring each SensESP Device
@@ -129,7 +131,8 @@ void Networking::setup_wifi_manager() {
   this->emit(WifiState::kWifiManagerActivated);
 
 #ifdef ESP32
-  WiFi.setHostname(SensESPBaseApp::get()->get_hostname_observable()->get().c_str());
+  WiFi.setHostname(
+      SensESPBaseApp::get()->get_hostname_observable()->get().c_str());
 #elif defined(ESP8266)
   WiFi.hostname(sensesp_app->get_hostname_observable()->get().c_str());
 #endif
@@ -192,16 +195,16 @@ String Networking::get_config_schema() {
 // FIXME: hostname should be saved in SensESPApp
 
 void Networking::get_configuration(JsonObject& root) {
-  //root["hostname"] = SensESPBaseApp::get()->get_hostname_observable()->get();
+  // root["hostname"] = SensESPBaseApp::get()->get_hostname_observable()->get();
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
   debugD("%s\n", __func__);
-  //if (!config.containsKey("hostname")) {
+  // if (!config.containsKey("hostname")) {
   //  return false;
   //}
-//
-  //if (preset_hostname == "SensESP") {
+  //
+  // if (preset_hostname == "SensESP") {
   //  SensESPBaseApp::get()->get_hostname_observable()->set(
   //      config["hostname"].as<String>());
   //}
@@ -221,3 +224,5 @@ void Networking::reset() {
   // to a bogus network instead
   WiFi.begin("0", "0");
 }
+
+}  // namespace sensesp

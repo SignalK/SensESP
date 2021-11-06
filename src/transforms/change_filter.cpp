@@ -1,5 +1,7 @@
 #include "change_filter.h"
 
+namespace sensesp {
+
 static float absf(float val) {
   if (val < 0) {
     return -val;
@@ -58,3 +60,5 @@ bool ChangeFilter::set_configuration(const JsonObject& config) {
   skips_ = max_skips_ + 1;
   return true;
 }
+
+}  // namespace sensesp

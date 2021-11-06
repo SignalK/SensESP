@@ -1,5 +1,7 @@
 #include "difference.h"
 
+namespace sensesp {
+
 // Difference
 
 Difference::Difference(float k1, float k2, String config_path)
@@ -44,3 +46,5 @@ bool Difference::set_configuration(const JsonObject& config) {
   k2 = config["k2"];
   return true;
 }
+
+}  // namespace sensesp

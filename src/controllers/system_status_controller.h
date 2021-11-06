@@ -5,6 +5,8 @@
 #include "net/ws_client.h"
 #include "system/valueproducer.h"
 
+namespace sensesp {
+
 enum class SystemStatus {
   kWifiNoAP = 100,
   kWifiDisconnected,
@@ -36,13 +38,17 @@ class SystemStatusController : public ValueConsumer<WifiState>,
   /// (WSClient object state updates)
   virtual void set_input(WSConnectionState new_value,
                          uint8_t input_channel = 0) override;
+
  protected:
   void update_state(const SystemStatus new_state) {
     current_state_ = new_state;
     this->emit(new_state);
   }
+
  private:
   SystemStatus current_state_ = SystemStatus::kWifiNoAP;
 };
+
+}  // namespace sensesp
 
 #endif

@@ -3,11 +3,13 @@
 
 #include <ArduinoJson.h>
 
+namespace sensesp {
+
 /**
  * @brief Holds Signal K meta data that is associated with
  * the sk_path an SKEmitter class may optionally send to the server.
- * According to the official Signal K specification: "All keys in the Signal K 
- * specification must have a `description`, and where the key is a numeric value 
+ * According to the official Signal K specification: "All keys in the Signal K
+ * specification must have a `description`, and where the key is a numeric value
  * it must have `units`". Thus, any paths that you output that are not
  * already part of the official Signal K specification should have these
  * two fields defined as metadata.
@@ -57,5 +59,7 @@ class SKMetadata {
    */
   virtual void add_entry(String sk_path, JsonArray& meta);
 };
+
+}  // namespace sensesp
 
 #endif

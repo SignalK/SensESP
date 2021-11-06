@@ -7,6 +7,8 @@
 
 #include "system/startable.h"
 
+namespace sensesp {
+
 /**
  * @brief Handles external interactions with the device via the web interface.
  */
@@ -25,5 +27,7 @@ class HTTPServer : public Startable {
   AsyncWebServer* server;
   void handle_config_list(AsyncWebServerRequest* request);
 };
+
+}  // namespace sensesp
 
 #endif

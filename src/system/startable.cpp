@@ -2,7 +2,10 @@
 
 #include "sensesp.h"
 
-std::priority_queue<Startable*, std::vector<Startable*>, StartableCompare> Startable::startable_list_;
+namespace sensesp {
+
+std::priority_queue<Startable*, std::vector<Startable*>, StartableCompare>
+    Startable::startable_list_;
 
 Startable::Startable(int priority) : priority_{priority} {
   Startable::startable_list_.push(this);
@@ -16,3 +19,5 @@ void Startable::start_all() {
     startable_list_.pop();
   }  // while
 }
+
+}  // namespace sensesp

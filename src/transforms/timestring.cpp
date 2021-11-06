@@ -1,6 +1,8 @@
 
 #include "timestring.h"
 
+namespace sensesp {
+
 TimeString::TimeString(String config_path)
     : Transform<time_t, String>(config_path) {}
 
@@ -9,3 +11,5 @@ void TimeString::set_input(time_t input, uint8_t inputChannel) {
   strftime(buf, sizeof buf, "%FT%TZ", gmtime(&input));
   this->emit(String(buf));
 }
+
+}  // namespace sensesp

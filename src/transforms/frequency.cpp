@@ -1,5 +1,7 @@
 #include "frequency.h"
 
+namespace sensesp {
+
 // Frequency
 
 Frequency::Frequency(float multiplier, String config_path)
@@ -39,3 +41,5 @@ bool Frequency::set_configuration(const JsonObject& config) {
   multiplier_ = config["multiplier"];
   return true;
 }
+
+}  // namespace sensesp

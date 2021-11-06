@@ -4,6 +4,8 @@
 
 #include "sensesp.h"
 
+namespace sensesp {
+
 DigitalInput::DigitalInput(uint8_t pin, int pin_mode, int interrupt_type,
                            String config_path)
     : Sensor(config_path), pin_{pin}, interrupt_type_{interrupt_type} {
@@ -17,13 +19,11 @@ DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
       BoolProducer(),
       read_delay_{read_delay},
       triggered_{false} {
-  load_configuration();      
+  load_configuration();
 }
 
 void DigitalInputState::start() {
-  app.onRepeat(read_delay_, [this]() {
-    emit(digitalRead(pin_));
-  });
+  app.onRepeat(read_delay_, [this]() { emit(digitalRead(pin_)); });
 }
 
 void DigitalInputState::get_configuration(JsonObject& root) {
@@ -95,7 +95,6 @@ bool DigitalInputCounter::set_configuration(const JsonObject& config) {
   return true;
 }
 
-
 DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
                                        int interrupt_type, uint read_delay,
                                        String config_path)
@@ -105,28 +104,25 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
       triggered_{false},
       last_output_{0},
       value_sent_{false} {
-    load_configuration();    
-    }
+  load_configuration();
+}
 
 void DigitalInputChange::start() {
-  app.onInterrupt(pin_, interrupt_type_,
-    [this](){
-      output = (bool)digitalRead(pin_);
-      triggered_ = true;
-    });
-  
-  
-  app.onRepeat(read_delay_, [this](){
-      if (triggered_ && (output != last_output_ || value_sent_ == false)) {
-        noInterrupts();
-        triggered_ = false;
-        last_output_ = output;
-        interrupts();
-        value_sent_ = true;
-        notify();
-      }
+  app.onInterrupt(pin_, interrupt_type_, [this]() {
+    output = (bool)digitalRead(pin_);
+    triggered_ = true;
+  });
+
+  app.onRepeat(read_delay_, [this]() {
+    if (triggered_ && (output != last_output_ || value_sent_ == false)) {
+      noInterrupts();
+      triggered_ = false;
+      last_output_ = output;
+      interrupts();
+      value_sent_ = true;
+      notify();
     }
-  );
+  });
 }
 
 void DigitalInputChange::get_configuration(JsonObject& root) {
@@ -152,3 +148,5 @@ bool DigitalInputChange::set_configuration(const JsonObject& config) {
   read_delay_ = config["read_delay"];
   return true;
 }
+
+}  // namespace sensesp

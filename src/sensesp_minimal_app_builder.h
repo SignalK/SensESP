@@ -4,6 +4,8 @@
 #include "sensesp_base_app_builder.h"
 #include "sensesp_minimal_app.h"
 
+namespace sensesp {
+
 class SensESPMinimalAppBuilder : public SensESPBaseAppBuilder {
  protected:
   SensESPMinimalApp* app_;
@@ -20,4 +22,5 @@ class SensESPMinimalAppBuilder : public SensESPBaseAppBuilder {
   }
 };
 
+}  // namespace sensesp
 #endif

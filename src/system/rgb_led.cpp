@@ -2,6 +2,8 @@
 
 #include "system/pwm_output.h"
 
+namespace sensesp {
+
 RgbLed::RgbLed(int led_r_pin, int led_g_pin, int led_b_pin, String config_path,
                long led_on_rgb, long led_off_rgb, bool common_anode)
     : Configurable(config_path),
@@ -81,3 +83,5 @@ bool RgbLed::set_configuration(const JsonObject& config) {
   led_off_rgb_ = config["led_off_rgb"];
   return true;
 }
+
+}  // namespace sensesp

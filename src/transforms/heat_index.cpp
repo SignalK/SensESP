@@ -1,5 +1,7 @@
 #include "heat_index.h"
 
+namespace sensesp {
+
 // heat index temperature
 
 HeatIndexTemperature::HeatIndexTemperature() : FloatTransform() {}
@@ -22,17 +24,17 @@ void HeatIndexTemperature::set_input(float input, uint8_t inputChannel) {
     float relative_humidity = inputs[1] * 100;  // relative humidity in percent
 
     // step 1: if temperature is less than 40°F then heat index temperature is
-    // dry bulb temperature. 
+    // dry bulb temperature.
     float heat_index_temperature;
 
     if (temp_fahrenheit <= 40) {
       heat_index_temperature = temp_fahrenheit;
     } else {
-      // step 2: use algorithm to calculate heat index and us it if the result is less than 79°F;
+      // step 2: use algorithm to calculate heat index and us it if the result
+      // is less than 79°F;
       heat_index_temperature =
-          -10.3 + 1.1 * temp_fahrenheit + 0.047 * relative_humidity; 
+          -10.3 + 1.1 * temp_fahrenheit + 0.047 * relative_humidity;
       if (heat_index_temperature > 79) {
-        
         // step 3: calculate heat index temperature for other temperatures
         // Coefficients for temperature in Fahrenheit
         const double c1 = -42.379;
@@ -47,12 +49,9 @@ void HeatIndexTemperature::set_input(float input, uint8_t inputChannel) {
 
         // equation for heat index
         float heat_index_temperature =
-            c1 + 
-            c2 * temp_fahrenheit + 
-            c3 * relative_humidity +
+            c1 + c2 * temp_fahrenheit + c3 * relative_humidity +
             c4 * temp_fahrenheit * relative_humidity +
-            c5 * pow(temp_fahrenheit, 2) + 
-            c6 * pow(relative_humidity, 2) +
+            c5 * pow(temp_fahrenheit, 2) + c6 * pow(relative_humidity, 2) +
             c7 * pow(temp_fahrenheit, 2) * relative_humidity +
             c8 * temp_fahrenheit * pow(relative_humidity, 2) +
             c9 * pow(temp_fahrenheit, 2) * pow(relative_humidity, 2);
@@ -102,3 +101,5 @@ void HeatIndexEffect::set_input(float input, uint8_t inputChannel) {
 
   this->emit(heat_index_effect);
 }
+
+}  // namespace sensesp

@@ -3,6 +3,8 @@
 
 #include "lambda_transform.h"
 
+namespace sensesp {
+
 // Web UI parameter name definition
 const ParamInfo hysteresis_param_info[4] = {
     {"lower_threshold", "Lower threshold"},
@@ -53,4 +55,5 @@ class Hysteresis : public LambdaTransform<IN, OUT, IN, IN, OUT, OUT> {
   OUT last_value_;
 };
 
+}  // namespace sensesp
 #endif

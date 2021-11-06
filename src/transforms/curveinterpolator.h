@@ -3,9 +3,11 @@
 
 #include "transforms/transform.h"
 
+namespace sensesp {
+
 /**
  * @brief Uses a collection of input/output samples that approximate
- * a non-linear curve and outputs a value on that curve. 
+ * a non-linear curve and outputs a value on that curve.
  * The output is the linear interpolation between the two
  * sample points that the input falls between. It is used primarily for
  * non-linear analog gauges such as temperature gauges and oil pressure gauges,
@@ -50,8 +52,7 @@ class CurveInterpolator : public FloatTransform {
   void add_sample(const Sample& new_sample);
   // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
   // [[deprecated("Use add_sample(...) instead.")]]
-  void addSample(
-      const Sample& new_sample) {
+  void addSample(const Sample& new_sample) {
     debugW("Use add_sample(...) instead");
     add_sample(new_sample);
   }
@@ -59,5 +60,7 @@ class CurveInterpolator : public FloatTransform {
  protected:
   std::set<Sample> samples;
 };
+
+}  // namespace sensesp
 
 #endif

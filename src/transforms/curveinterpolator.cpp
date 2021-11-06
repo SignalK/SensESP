@@ -2,6 +2,8 @@
 
 #include <RemoteDebug.h>
 
+namespace sensesp {
+
 CurveInterpolator::Sample::Sample() {}
 
 CurveInterpolator::Sample::Sample(float input, float output)
@@ -114,3 +116,5 @@ void CurveInterpolator::add_sample(const Sample& sample) {
   Sample* pSampleCopy = new Sample(sample);
   samples.insert(*pSampleCopy);
 }
+
+}  // namespace sensesp

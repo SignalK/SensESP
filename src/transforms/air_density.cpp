@@ -2,6 +2,8 @@
 
 #include "math.h"
 
+namespace sensesp {
+
 // dew point
 
 AirDensity::AirDensity() : FloatTransform() {}
@@ -46,3 +48,5 @@ void AirDensity::set_input(float input, uint8_t inputChannel) {
     this->emit(air_density_humid_air);
   }
 }
+
+}  // namespace sensesp

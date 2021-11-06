@@ -11,6 +11,8 @@
 #include "system/observable.h"
 #include "system/valueproducer.h"
 
+namespace sensesp {
+
 /**
  * @brief An Obervable class that listens for Signal K stream deltas
  * and notifies any observers of value changes. This serves as a
@@ -49,5 +51,7 @@ class SKListener : virtual public Observable {
   static std::vector<SKListener*> listeners;
   int listen_delay;
 };
+
+}  // namespace sensesp
 
 #endif

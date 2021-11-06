@@ -3,10 +3,14 @@
 
 #include "system/resettable.h"
 
+namespace sensesp {
+
 class Filesystem : public Resettable {
  public:
   Filesystem();
   virtual void reset() override;
 };
+
+}  // namespace sensesp
 
 #endif

@@ -4,6 +4,8 @@
 
 #include <algorithm>
 
+namespace sensesp {
+
 #ifdef ESP32
 // For info on frequency and resolution for ESP32, see
 // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#ledc-api-supported-range-frequency-duty-resolution
@@ -78,3 +80,5 @@ void PWMOutput::set_pwm(int pwm_channel, float value) {
     debugW("No pin assigned to channel %d. Ignoring set_pwm()", pwm_channel);
   }
 }
+
+}  // namespace sensesp

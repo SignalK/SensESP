@@ -1,5 +1,7 @@
 #include "voltage_multiplier.h"
 
+namespace sensesp {
+
 VoltageMultiplier::VoltageMultiplier(uint16_t R1, uint16_t R2,
                                      String config_path)
     : FloatTransform(config_path), R1_{R1}, R2_{R2} {}
@@ -35,3 +37,5 @@ bool VoltageMultiplier::set_configuration(const JsonObject& config) {
   R2_ = config["R2"];
   return true;
 }
+
+}  // namespace sensesp

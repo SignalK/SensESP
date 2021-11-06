@@ -12,13 +12,14 @@
 #include "system/observable.h"
 #include "system/valueproducer.h"
 
+namespace sensesp {
+
 /**
  * @brief A class that produces Signal K output to be
  * forwarded to the Signal K server (if the system is connected
  * to one).  Signal K is reported via the as_signalK() method.
  */
 class SKEmitter : virtual public Observable {
-
  public:
   /**
    * The constructor
@@ -33,7 +34,6 @@ class SKEmitter : virtual public Observable {
    */
   virtual String as_signalk() { return "not implemented"; }
 
-
   /**
    * Returns a Metadata structure that describes the sk_path this SKEmitter
    * is associated with. If this emitter has no metadata, NULL is
@@ -42,17 +42,15 @@ class SKEmitter : virtual public Observable {
    */
   virtual SKMetadata* get_metadata() { return NULL; }
 
-
   /**
    * Adds this emitter's Signal K meta data to the specified
-   * meta object. The default implementation calls the 
+   * meta object. The default implementation calls the
    * `add_entry()` method of the `SKMetadata` class returned by
    * `get_metadata()`. If `get_metadata()` returns NULL, this
    * method does nothing.
    * @see get_metdata()
    */
   virtual void add_metadata(JsonArray& meta);
-
 
   /**
    * Returns the current Signal K path.  An empty string
@@ -71,5 +69,7 @@ class SKEmitter : virtual public Observable {
  private:
   static std::vector<SKEmitter*> sources;
 };
+
+}  // namespace sensesp
 
 #endif

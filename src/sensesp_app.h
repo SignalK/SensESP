@@ -21,6 +21,8 @@
 #include "signalk/signalk_delta_queue.h"
 #include "system/system_status_led.h"
 
+namespace sensesp {
+
 void SetupSerialDebug(uint32_t baudrate);
 
 /**
@@ -117,5 +119,7 @@ class SensESPApp : public SensESPBaseApp {
 };
 
 extern SensESPApp* sensesp_app;
+
+}  // namespace sensesp
 
 #endif

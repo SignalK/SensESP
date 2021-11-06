@@ -19,6 +19,8 @@
 #include "signalk/signalk_put_request_listener.h"
 #include "system/uuid.h"
 
+namespace sensesp {
+
 WSClient* ws_client;
 
 static const char* kRequestPermission = "readwrite";
@@ -592,3 +594,5 @@ bool WSClient::set_configuration(const JsonObject& config) {
 
   return true;
 }
+
+}  // namespace sensesp

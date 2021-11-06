@@ -1,6 +1,8 @@
 
 #include "signalk_time.h"
 
+namespace sensesp {
+
 SKOutputTime::SKOutputTime(String sk_path, String config_path)
     : TimeString(config_path), SKEmitter(sk_path) {
   load_configuration();
@@ -41,3 +43,5 @@ bool SKOutputTime::set_configuration(const JsonObject& config) {
   sk_path = config["sk_path"].as<String>();
   return true;
 }
+
+}  // namespace sensesp

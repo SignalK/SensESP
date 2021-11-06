@@ -5,6 +5,8 @@
 #include "sensesp.h"
 #include "sensesp_app.h"
 
+namespace sensesp {
+
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
 BaseBlinker::BaseBlinker(int pin) : pin_{pin} { pinMode(pin, OUTPUT); }
@@ -146,3 +148,5 @@ void PatternBlinker::restart() {
     this->tick();
   }
 }
+
+}  // namespace sensesp

@@ -11,6 +11,8 @@
 #include "system/configurable.h"
 #include "system/valueconsumer.h"
 
+namespace sensesp {
+
 /**
  * @brief A base class for all objects that are capable of sending
  * "requests" to the SignalK server (and optionally receiving the responses)
@@ -96,7 +98,7 @@ class SKPutRequestBase : public SKRequest, public Configurable {
 
   /**
    * Returns TRUE if there is currently a PUT request pending
-   * (i.e. this class has send a request, and it has not yet 
+   * (i.e. this class has send a request, and it has not yet
    * received a reply or timeout)
    */
   bool request_pending();
@@ -152,11 +154,10 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
       return;
     }
     if (!request_pending()) {
-       this->value = new_value;
-       send_put_request();
-    }
-    else {
-       debugW("Ignoring PUT request (previous request still outstanding)");
+      this->value = new_value;
+      send_put_request();
+    } else {
+      debugW("Ignoring PUT request (previous request still outstanding)");
     }
   };
 
@@ -173,5 +174,7 @@ typedef SKPutRequest<float> FloatSKPutRequest;
 typedef SKPutRequest<int> IntSKPutRequest;
 typedef SKPutRequest<bool> BoolSKPutRequest;
 typedef SKPutRequest<String> StringSKPutRequest;
+
+}  // namespace sensesp
 
 #endif

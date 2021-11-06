@@ -3,12 +3,17 @@
 
 #include "system/startable.h"
 
+namespace sensesp {
+
 class OTA : public Startable {
  public:
   OTA() : Startable{0} {}
   virtual void start() override;
+
  private:
   static void handle_ota();
 };
+
+}  // namespace sensesp
 
 #endif

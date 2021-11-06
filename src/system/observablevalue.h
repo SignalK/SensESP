@@ -4,6 +4,8 @@
 #include "observable.h"
 #include "valueproducer.h"
 
+namespace sensesp {
+
 // forward declaration for the operator overloading functions
 template <class T>
 class ObservableValue;
@@ -40,5 +42,7 @@ class ObservableValue : public ValueProducer<T> {
   template <class U>
   friend bool operator!=(ObservableValue<U> const& lhs, U const& rhs);
 };
+
+}  // namespace sensesp
 
 #endif

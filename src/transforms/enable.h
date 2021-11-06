@@ -3,6 +3,8 @@
 
 #include "transforms/transform.h"
 
+namespace sensesp {
+
 static const char ENABLE_TRANSFORM_SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
@@ -50,5 +52,7 @@ class Enable : public Transform<T, T> {
  private:
   bool enabled_;
 };
+
+}  // namespace sensesp
 
 #endif

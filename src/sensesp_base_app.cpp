@@ -1,5 +1,7 @@
 #include "sensesp_base_app.h"
 
+namespace sensesp {
+
 #ifndef DEBUG_DISABLED
 RemoteDebug Debug;
 #endif
@@ -59,3 +61,5 @@ void SensESPBaseApp::reset() {
 ObservableValue<String>* SensESPBaseApp::get_hostname_observable() {
   return hostname_;
 }
+
+}  // namespace sensesp

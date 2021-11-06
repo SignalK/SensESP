@@ -6,6 +6,8 @@
 #include "system/system_status_led.h"
 #include "transforms/debounce.h"
 
+namespace sensesp {
+
 SensESPApp* SensESPApp::get() {
   if (instance_ == nullptr) {
     instance_ = new SensESPApp();
@@ -69,3 +71,5 @@ ObservableValue<String>* SensESPApp::get_hostname_observable() {
 }
 
 SensESPApp* sensesp_app;
+
+}  // namespace sensesp

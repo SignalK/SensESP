@@ -4,6 +4,8 @@
 #include "signalk/signalk_emitter.h"
 #include "transforms/transform.h"
 
+namespace sensesp {
+
 static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
       "type": "object",
       "properties": {
@@ -22,13 +24,16 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
 
   /**
    * The constructor
-   * @param sk_path The Signal K path the output value of this transform is sent on
-   * @param config_path The optional configuration path that allows an end user to
-   *   change the configuration of this object. See the Configurable class for more information.
-   * @param meta Optional metadata that is associated with the value output by this class
-   *   A value specified here will cause the path's metadata to be emitted on the first
-   *   delta sent to the server. Use NULL if this path has no metadata to report (or
-   *   if the path is already an official part of the Signal K specification)
+   * @param sk_path The Signal K path the output value of this transform is sent
+   * on
+   * @param config_path The optional configuration path that allows an end user
+   * to change the configuration of this object. See the Configurable class for
+   * more information.
+   * @param meta Optional metadata that is associated with the value output by
+   * this class A value specified here will cause the path's metadata to be
+   * emitted on the first delta sent to the server. Use NULL if this path has no
+   * metadata to report (or if the path is already an official part of the
+   * Signal K specification)
    */
   SKOutput(String sk_path, String config_path = "", SKMetadata* meta = NULL)
       : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
@@ -36,10 +41,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
     this->load_configuration();
   }
 
-
-  SKOutput(String sk_path, SKMetadata* meta) :
-    SKOutput(sk_path, "", meta) {}
-
+  SKOutput(String sk_path, SKMetadata* meta) : SKOutput(sk_path, "", meta) {}
 
   virtual void set_input(T new_value, uint8_t input_channel = 0) override {
     this->ValueProducer<T>::emit(new_value);
@@ -76,13 +78,11 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    */
   virtual void set_metadata(SKMetadata* meta) { this->meta_ = meta; }
 
-
   virtual SKMetadata* get_metadata() override { return meta_; }
 
-  protected:
-    SKMetadata* meta_;
+ protected:
+  SKMetadata* meta_;
 };
-
 
 /**
  * @brief A special class for sending numeric values to
@@ -90,30 +90,31 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
  */
 template <typename T>
 class SKOutputNumeric : public SKOutput<T> {
+ public:
+  SKOutputNumeric(String sk_path, String config_path = "",
+                  SKMetadata* meta = NULL);
 
-   public:
-      SKOutputNumeric(String sk_path, String config_path = "", SKMetadata* meta = NULL);
+  SKOutputNumeric(String sk_path, SKMetadata* meta)
+      : SKOutputNumeric(sk_path, "", meta) {}
 
-
-      SKOutputNumeric(String sk_path, SKMetadata* meta) :
-        SKOutputNumeric(sk_path, "", meta) {}
-
-
-      /// The Signal K specification requires that numeric values sent
-      /// to the server should at minimum specify a "units". This
-      /// constructor allows you to conveniently specify the numeric
-      /// units as a third parameter.
-      /// @param units The unit value for the number this outputs on the specified
-      ///  Signal K path. See https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
-      ///   
-      /// @see SKMetadata
-      SKOutputNumeric(String sk_path, String config_path, String units) :
-         SKOutputNumeric(sk_path, config_path, new SKMetadata(units)) {}
+  /// The Signal K specification requires that numeric values sent
+  /// to the server should at minimum specify a "units". This
+  /// constructor allows you to conveniently specify the numeric
+  /// units as a third parameter.
+  /// @param units The unit value for the number this outputs on the specified
+  ///  Signal K path. See
+  ///  https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
+  ///
+  /// @see SKMetadata
+  SKOutputNumeric(String sk_path, String config_path, String units)
+      : SKOutputNumeric(sk_path, config_path, new SKMetadata(units)) {}
 };
 
 typedef SKOutputNumeric<float> SKOutputFloat;
 typedef SKOutputNumeric<int> SKOutputInt;
 typedef SKOutput<bool> SKOutputBool;
 typedef SKOutput<String> SKOutputString;
+
+}  // namespace sensesp
 
 #endif

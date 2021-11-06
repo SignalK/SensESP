@@ -5,6 +5,8 @@
 #include <functional>
 #include <vector>
 
+namespace sensesp {
+
 /**
  * @brief A base class which allow observers
  * to attach callbacks to themselves. The callbacks
@@ -24,5 +26,7 @@ class Observable {
  private:
   std::forward_list<std::function<void()> > observers;
 };
+
+}  // namespace sensesp
 
 #endif

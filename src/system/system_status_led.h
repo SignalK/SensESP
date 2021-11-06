@@ -5,6 +5,8 @@
 #include "led_blinker.h"
 #include "system/lambda_consumer.h"
 
+namespace sensesp {
+
 /**
  * @brief Consumes the networking and websocket states and delta counts
  * and updates the device LED accordingly. Inherit this class and override
@@ -31,5 +33,7 @@ class SystemStatusLed : public ValueConsumer<SystemStatus>,
                          uint8_t input_channel = 0) override;
   virtual void set_input(int new_value, uint8_t input_channel = 0) override;
 };
+
+}  // namespace sensesp
 
 #endif

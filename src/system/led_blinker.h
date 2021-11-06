@@ -3,9 +3,11 @@
 
 #include <ReactESP.h>
 
-#include "startable.h"
 #include "net/networking.h"
 #include "net/ws_client.h"
+#include "startable.h"
+
+namespace sensesp {
 
 #define PATTERN_END (-1)
 
@@ -85,5 +87,7 @@ class PatternBlinker : public BaseBlinker {
   int* pattern_;
   unsigned int pattern_ptr_ = 0;
 };
+
+}  // namespace sensesp
 
 #endif

@@ -5,16 +5,18 @@
 
 #include "transforms/transform.h"
 
+namespace sensesp {
+
 /**
  * @brief Ensures that values that do not change frequently are still
  * reported at a specified maximum silence interval. If the value has not
  * changed in max_silence_interval milliseconds, the current value is emmitted
  * again.
- * 
+ *
  * @param max_silence_interval Maximum time, in ms, before the previous value
- * is emitted again. Default is 15000 (15 seconds). Setting the interval to 
+ * is emitted again. Default is 15000 (15 seconds). Setting the interval to
  * zero disables the repeating.
- * 
+ *
  * @param config_path Path to configure this transform in the Config UI.
  */
 template <typename T>
@@ -36,5 +38,7 @@ class RepeatReport : public SymmetricTransform<T> {
   long max_silence_interval_;
   elapsedMillis last_update_interval_;
 };
+
+}  // namespace sensesp
 
 #endif

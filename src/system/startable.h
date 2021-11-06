@@ -3,11 +3,13 @@
 
 #include <queue>
 
+namespace sensesp {
+
 class StartableCompare;
 
 /**
  * @brief Automatic calling of the start() method at startup
- * 
+ *
  * Classes that implement "Startable" will have their start() method
  * called automatically at startup when the SensESP app itself
  * is started.  The optional priority allows for certain classes
@@ -41,17 +43,22 @@ class Startable {
   static void start_all();
 
   friend class StartableCompare;
+
  private:
   int priority_;
 
-  static std::priority_queue<Startable*, std::vector<Startable*>, StartableCompare> startable_list_;
+  static std::priority_queue<Startable*, std::vector<Startable*>,
+                             StartableCompare>
+      startable_list_;
 };
 
 class StartableCompare {
-  public:
-    bool operator()(const Startable* lhs, const Startable* rhs) const {
-      return lhs->priority_ < rhs->priority_;
-    }
+ public:
+  bool operator()(const Startable* lhs, const Startable* rhs) const {
+    return lhs->priority_ < rhs->priority_;
+  }
 };
+
+}  // namespace sensesp
 
 #endif

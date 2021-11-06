@@ -6,10 +6,13 @@
 #include "signalk_listener.h"
 #include "system/observable.h"
 #include "system/valueproducer.h"
+
+namespace sensesp {
+
 /**
  * @brief An ValueProducer that listens to specific Signal K paths
  * and emits its value whenever it changes.
- */ 
+ */
 template <class T>
 class SKValueListener : public SKListener, public ValueProducer<T> {
  public:
@@ -33,4 +36,7 @@ typedef SKValueListener<float> FloatSKListener;
 typedef SKValueListener<int> IntSKListener;
 typedef SKValueListener<bool> BoolSKListener;
 typedef SKValueListener<String> StringSKListener;
+
+}  // namespace sensesp
+
 #endif

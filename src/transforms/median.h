@@ -5,14 +5,16 @@
 
 #include "transforms/transform.h"
 
+namespace sensesp {
+
 /**
  * @brief Outputs the median value of sample_size inputs.
- * 
+ *
  * Creates a sorted list of sample_size values and outputs the one
  * in the middle (i.e. element number 'sample_size / 2').
- * 
+ *
  * @param sample_size Number of values you want to take the median of.
- * 
+ *
  * @param config_path Path to configure this transform in the Config UI.
  */
 class Median : public FloatTransform {
@@ -28,4 +30,5 @@ class Median : public FloatTransform {
   unsigned int sample_size_;
 };
 
+}  // namespace sensesp
 #endif

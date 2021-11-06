@@ -8,10 +8,12 @@
 #include "Arduino.h"
 #include "sensesp.h"
 #include "system/configurable.h"
-#include "system/startable.h"
 #include "system/observable.h"
+#include "system/startable.h"
 #include "system/valueconsumer.h"
 #include "system/valueproducer.h"
+
+namespace sensesp {
 
 // TODO: Split into multiple files
 
@@ -21,10 +23,10 @@
 /**
  * @brief The base class for all transforms. A transforms takes a value
  * in, transforms it in some way, and outputs the transformed value.
- * 
+ *
  * All transforms are subscribed
  * to by calling attach() (inherited from Observable).
- * 
+ *
  * @param config_path The path to configure the Transform in the Config UI.
  */
 class TransformBase : public Configurable, public Startable {
@@ -34,7 +36,9 @@ class TransformBase : public Configurable, public Startable {
   // Primary purpose of this was to supply Signal K sources
   // (now handled by SKEmitter::get_sources). Should
   // this be deprecated?
-  static const std::set<TransformBase*>& get_transforms() { return transforms_; }
+  static const std::set<TransformBase*>& get_transforms() {
+    return transforms_;
+  }
 
  private:
   static std::set<TransformBase*> transforms_;
@@ -108,5 +112,7 @@ typedef SymmetricTransform<float> FloatTransform;
 typedef SymmetricTransform<int> IntegerTransform;
 typedef SymmetricTransform<bool> BooleanTransform;
 typedef SymmetricTransform<String> StringTransform;
+
+}  // namespace sensesp
 
 #endif

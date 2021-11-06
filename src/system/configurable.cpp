@@ -8,6 +8,8 @@
 #include "SPIFFS.h"
 #endif
 
+namespace sensesp {
+
 // Define a global configurable map. Rationale for a global variable:
 // Every Configurable with an id gets registered, and carrying an object
 // reference around would unnecessarily reduce readability of the code.
@@ -74,3 +76,5 @@ void Configurable::save_configuration() {
   serializeJson(obj, f);
   f.close();
 }
+
+}  // namespace sensesp
