@@ -23,7 +23,7 @@ DigitalInputState::DigitalInputState(uint8_t pin, int pin_mode,
 }
 
 void DigitalInputState::start() {
-  app.onRepeat(read_delay_, [this]() { emit(digitalRead(pin_)); });
+  ReactESP::app->onRepeat(read_delay_, [this]() { emit(digitalRead(pin_)); });
 }
 
 void DigitalInputState::get_configuration(JsonObject& root) {
@@ -60,9 +60,9 @@ DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode,
 }
 
 void DigitalInputCounter::start() {
-  app.onInterrupt(pin_, interrupt_type_, [this]() { this->counter_++; });
+  ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() { this->counter_++; });
 
-  app.onRepeat(read_delay_, [this]() {
+  ReactESP::app->onRepeat(read_delay_, [this]() {
     noInterrupts();
     output = counter_;
     counter_ = 0;
@@ -108,12 +108,12 @@ DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
 }
 
 void DigitalInputChange::start() {
-  app.onInterrupt(pin_, interrupt_type_, [this]() {
+  ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() {
     output = (bool)digitalRead(pin_);
     triggered_ = true;
   });
 
-  app.onRepeat(read_delay_, [this]() {
+  ReactESP::app->onRepeat(read_delay_, [this]() {
     if (triggered_ && (output != last_output_ || value_sent_ == false)) {
       noInterrupts();
       triggered_ = false;

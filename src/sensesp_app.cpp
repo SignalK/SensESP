@@ -53,7 +53,7 @@ void SensESPApp::setup() {
         if (input == SystemStatus::kWifiDisconnected ||
             input == SystemStatus::kWifiNoAP) {
           debugW("Unable to connect to wifi for too long; restarting.");
-          app.onDelay(1000, []() { ESP.restart(); });
+          ReactESP::app->onDelay(1000, []() { ESP.restart(); });
         }
       }));
 

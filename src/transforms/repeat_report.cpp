@@ -11,7 +11,7 @@ void RepeatReport<T>::set_input(T input, uint8_t inputChannel) {
 template <typename T>
 void RepeatReport<T>::start() {
   SymmetricTransform<T>::start();
-  app.onRepeat(10, [this]() {
+  ReactESP::app->onRepeat(10, [this]() {
     if (max_silence_interval_ > 0 &&
         last_update_interval_ > max_silence_interval_) {
       this->last_update_interval_ = 0;

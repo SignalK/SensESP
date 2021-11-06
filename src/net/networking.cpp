@@ -158,7 +158,7 @@ void Networking::setup_wifi_manager() {
     this->ap_password = WiFi.psk();
     save_configuration();
     debugW("Restarting in 500ms");
-    app.onDelay(500, []() { ESP.restart(); });
+    ReactESP::app->onDelay(500, []() { ESP.restart(); });
   }
 }
 

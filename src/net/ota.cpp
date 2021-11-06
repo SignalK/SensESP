@@ -36,7 +36,7 @@ void OTA::start() {
     }
   });
   ArduinoOTA.begin();
-  app.onRepeat(20, OTA::handle_ota);
+  ReactESP::app->onRepeat(20, OTA::handle_ota);
 }
 
 void OTA::handle_ota() { ArduinoOTA.handle(); }

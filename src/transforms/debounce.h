@@ -55,7 +55,7 @@ class DebounceTemplate : public SymmetricTransform<T> {
         reaction_->remove();
         reaction_ = nullptr;
       }
-      reaction_ = app.onDelay(ms_min_delay_, [this, input]() {
+      reaction_ = ReactESP::app->onDelay(ms_min_delay_, [this, input]() {
         this->reaction_ = nullptr;
         this->debounced_value_ = input;
         this->emit(input);

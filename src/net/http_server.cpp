@@ -199,12 +199,12 @@ void HTTPServer::handle_device_reset(AsyncWebServerRequest* request) {
   request->send(
       200, "text/plain",
       "OK, resetting the device settings back to factory defaults.\n");
-  app.onDelay(500, [this]() { SensESPBaseApp::get()->reset(); });
+  ReactESP::app->onDelay(500, [this]() { SensESPBaseApp::get()->reset(); });
 }
 
 void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
   request->send(200, "text/plain", "OK, restarting\n");
-  app.onDelay(50, []() { ESP.restart(); });
+  ReactESP::app->onDelay(50, []() { ESP.restart(); });
 }
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {

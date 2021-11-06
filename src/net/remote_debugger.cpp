@@ -12,7 +12,7 @@ void RemoteDebugger::start() {
 #ifndef DEBUG_DISABLED
   // Debug.begin(SensESPBaseApp::get()->get_hostname());
   // Debug.setResetCmdEnabled(true);
-  // app.onRepeat(1, []() { Debug.handle(); });
+  // ReactESP::app->onRepeat(1, []() { Debug.handle(); });
 #endif
 }
 

@@ -23,14 +23,15 @@ String SKRequest::send_request(
 
   // After 10 seconds, if we haven't already handled a response,
   // assume its not coming.
-  pending_request->timeout_cleanup = app.onDelay(timeout, [pending_request]() {
-    // Mark the delay reaction null as it will be cleaned up by the ReactESP
-    // framework if this executes...
-    debugW("No response from server for request Id %s",
-           pending_request->request_id.c_str());
-    pending_request->timeout_cleanup = nullptr;
-    SKRequest::remove_request(pending_request->request_id);
-  });
+  pending_request->timeout_cleanup =
+      ReactESP::app->onDelay(timeout, [pending_request]() {
+        // Mark the delay reaction null as it will be cleaned up by the ReactESP
+        // framework if this executes...
+        debugW("No response from server for request Id %s",
+               pending_request->request_id.c_str());
+        pending_request->timeout_cleanup = nullptr;
+        SKRequest::remove_request(pending_request->request_id);
+      });
 
   request_map[pending_request->request_id] = pending_request;
 

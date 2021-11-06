@@ -41,7 +41,7 @@ class IntegratorT : public Transform<C, P> {
     // save the integrator value every 10 s
     // NOTE: Disabled for now because interrupts start throwing
     // exceptions.
-    // app.onRepeat(10000, [this](){ this->save_configuration(); });
+    // ReactESP::app->onRepeat(10000, [this](){ this->save_configuration(); });
   }
 
   virtual void set_input(C input, uint8_t inputChannel = 0) override final {

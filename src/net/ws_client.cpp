@@ -71,10 +71,10 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
 }
 
 void WSClient::start() {
-  app.onDelay(0, [this]() { this->connect(); });
-  app.onRepeat(20, [this]() { this->loop(); });
-  app.onRepeat(5, [this]() { this->send_delta(); });
-  app.onRepeat(10000, [this]() { this->connect_loop(); });
+  ReactESP::app->onDelay(0, [this]() { this->connect(); });
+  ReactESP::app->onRepeat(20, [this]() { this->loop(); });
+  ReactESP::app->onRepeat(5, [this]() { this->send_delta(); });
+  ReactESP::app->onRepeat(10000, [this]() { this->connect_loop(); });
 }
 
 void WSClient::connect_loop() {
@@ -411,7 +411,7 @@ void WSClient::send_access_request(const String server_address,
   save_configuration();
 
   debugD("Polling %s in 5 seconds", polling_href_.c_str());
-  app.onDelay(5000, [this, server_address, server_port, href]() {
+  ReactESP::app->onDelay(5000, [this, server_address, server_port, href]() {
     this->poll_access_request(server_address, server_port, this->polling_href_);
   });
 }
@@ -439,7 +439,7 @@ void WSClient::poll_access_request(const String server_address,
     String state = doc["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
-      app.onDelay(5000, [this, server_address, server_port, href]() {
+      ReactESP::app->onDelay(5000, [this, server_address, server_port, href]() {
         this->poll_access_request(server_address, server_port, href);
       });
       return;
@@ -461,7 +461,7 @@ void WSClient::poll_access_request(const String server_address,
         String token = access_req["token"];
         auth_token_ = token;
         save_configuration();
-        app.onDelay(0, [this, server_address, server_port]() {
+        ReactESP::app->onDelay(0, [this, server_address, server_port]() {
           this->connect_ws(server_address, server_port);
         });
         return;
