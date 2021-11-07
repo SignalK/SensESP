@@ -117,9 +117,9 @@ class IPAddrDev : public StringSensor {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class WifiSignal : public FloatSensor {
+class WiFiSignal : public FloatSensor {
  public:
-  WifiSignal() {}
+  WiFiSignal() {}
   void start() override final;
   String get_value_name() { return "wifisignal"; }
 

@@ -51,10 +51,10 @@ void IPAddrDev::start() {
   ReactESP::app->onRepeat(10000, [this]() { this->update(); });
 }
 
-void WifiSignal::start() {
+void WiFiSignal::start() {
   ReactESP::app->onRepeat(3000, [this]() { this->update(); });
 }
 
-void WifiSignal::update() { this->emit(WiFi.RSSI()); }
+void WiFiSignal::update() { this->emit(WiFi.RSSI()); }
 
 }  // namespace sensesp
