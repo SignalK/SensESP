@@ -38,28 +38,18 @@ class Sensor : virtual public Observable,
 };
 
 /**
- * @brief A Sensor whose output is a float.
+ * @brief Sensor template class for any sensor producing actual values.
  **/
-class FloatSensor : public Sensor, public FloatProducer {
+template <typename T>
+class SensorT : public Sensor, public ValueProducer<T> {
  public:
-  FloatSensor(String config_path = "");
+  SensorT<T>(String config_path = "")
+      : Sensor(config_path), ValueProducer<T>() {}
 };
 
-/**
- * @brief A Sensor whose output is an integer.
- **/
-class IntSensor : public Sensor, public IntProducer {
- public:
-  IntSensor(String config_path = "");
-};
-
-/**
- * @brief A Sensor whose output is a String.
- **/
-class StringSensor : public Sensor, public StringProducer {
- public:
-  StringSensor(String config_path = "");
-};
+typedef SensorT<float> FloatSensor;
+typedef SensorT<int> IntSensor;
+typedef SensorT<String> StringSensor;
 
 }  // namespace sensesp
 
