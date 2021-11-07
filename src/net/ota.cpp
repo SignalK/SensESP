@@ -5,6 +5,8 @@
 
 #include "sensesp.h"
 
+namespace sensesp {
+
 // Password for Over-the-air (OTA) updates
 #ifndef OTA_PASSWORD
 //#define OTA_PASSWORD "bonvoyage"
@@ -34,9 +36,9 @@ void OTA::start() {
     }
   });
   ArduinoOTA.begin();
-  app.onRepeat(20, OTA::handle_ota);
+  ReactESP::app->onRepeat(20, OTA::handle_ota);
 }
 
-void OTA::handle_ota() {
-  ArduinoOTA.handle();
-}
+void OTA::handle_ota() { ArduinoOTA.handle(); }
+
+}  // namespace sensesp

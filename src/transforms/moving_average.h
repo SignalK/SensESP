@@ -5,9 +5,11 @@
 
 #include "transform.h"
 
+namespace sensesp {
+
 /**
  * @brief Outputs the moving average of the last sample_size inputs.
- * 
+ *
  * Used to smooth the output of a value (signal) that has
  * frequent variations. For example, the output of a temperature sensor may vary
  * from 180 to 185 several times over a short period, but you just want to see
@@ -20,16 +22,18 @@
 class MovingAverage : public FloatTransform {
  public:
   /**
-   * @param sample_size The number of most recent values you want to average for your
-   * output.
+   * @param sample_size The number of most recent values you want to average for
+   * your output.
    *
-   * @param multiplier Moving average will be multiplied by multiplier before it is output -
-   * make it something other than 1. if you need to scale your output up or down
-   * by a fixed percentage.
+   * @param multiplier Moving average will be multiplied by multiplier before it
+   * is output - make it something other than 1. if you need to scale your
+   * output up or down by a fixed percentage.
    *
-   * @param config_path The path used to configure this transform in the Config UI.
+   * @param config_path The path used to configure this transform in the Config
+   * UI.
    * */
-  MovingAverage(int sample_size, float multiplier = 1.0, String config_path = "");
+  MovingAverage(int sample_size, float multiplier = 1.0,
+                String config_path = "");
   virtual void set_input(float input, uint8_t inputChannel = 0) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
@@ -43,4 +47,5 @@ class MovingAverage : public FloatTransform {
   bool initialized_;
 };
 
+}  // namespace sensesp
 #endif

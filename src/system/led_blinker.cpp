@@ -5,6 +5,8 @@
 #include "sensesp.h"
 #include "sensesp_app.h"
 
+namespace sensesp {
+
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
 BaseBlinker::BaseBlinker(int pin) : pin_{pin} { pinMode(pin, OUTPUT); }
@@ -44,12 +46,12 @@ void BaseBlinker::blip(int duration) {
   bool orig_state = this->state_;
   this->set_state(false);
   int current_counter = this->update_counter_;
-  app.onDelay(duration, [this, duration, orig_state, current_counter]() {
+  ReactESP::app->onDelay(duration, [this, duration, orig_state, current_counter]() {
     // only update if no-one has touched the LED in the meanwhile
     if (this->update_counter_ == current_counter) {
       this->set_state(true);
       int new_counter = this->update_counter_;
-      app.onDelay(duration, [this, orig_state, new_counter]() {
+      ReactESP::app->onDelay(duration, [this, orig_state, new_counter]() {
         // again, only update if no-one has touched the LED
         if (this->update_counter_ == new_counter) {
           this->set_state(orig_state);
@@ -91,7 +93,7 @@ void EvenBlinker::tick() {
     return;
   }
   this->flip_state();
-  reaction_ = app.onDelay(period_, [this]() { this->tick(); });
+  reaction_ = ReactESP::app->onDelay(period_, [this]() { this->tick(); });
 }
 
 RatioBlinker::RatioBlinker(int pin, unsigned int period, float ratio)
@@ -105,7 +107,7 @@ void RatioBlinker::tick() {
   int on_duration = ratio_ * period_;
   int off_duration = max(0, period_ - on_duration);
   unsigned int ref_duration = state_ == false ? off_duration : on_duration;
-  reaction_ = app.onDelay(ref_duration, [this]() { this->tick(); });
+  reaction_ = ReactESP::app->onDelay(ref_duration, [this]() { this->tick(); });
 }
 
 PatternBlinker::PatternBlinker(int pin, int pattern[])
@@ -134,7 +136,7 @@ void PatternBlinker::tick() {
   // odd indices indicate times when LED should be OFF, even when ON
   bool new_state = (pattern_ptr_ % 2) == 0;
   this->set_state(new_state);
-  reaction_ = app.onDelay(pattern_[pattern_ptr_++], [this]() { this->tick(); });
+  reaction_ = ReactESP::app->onDelay(pattern_[pattern_ptr_++], [this]() { this->tick(); });
 }
 
 void PatternBlinker::restart() {
@@ -146,3 +148,5 @@ void PatternBlinker::restart() {
     this->tick();
   }
 }
+
+}  // namespace sensesp

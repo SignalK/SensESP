@@ -3,6 +3,8 @@
 
 #include <queue>
 
+namespace sensesp {
+
 class ResettableCompare;
 
 /**
@@ -43,5 +45,7 @@ class ResettableCompare {
     return a->priority < b->priority;
   }
 };
+
+}  // namespace sensesp
 
 #endif

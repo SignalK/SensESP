@@ -1,5 +1,7 @@
 #include "system_status_led.h"
 
+namespace sensesp {
+
 // These patterns indicate how many milliseconds the led should be on and off,
 // repeating until PATTERN_END is reached
 
@@ -83,3 +85,5 @@ void SystemStatusLed::set_input(SystemStatus new_value, uint8_t input_channel) {
 void SystemStatusLed::set_input(int new_value, uint8_t input_channel) {
   blinker_->blip();
 }
+
+}  // namespace sensesp

@@ -21,6 +21,8 @@
 #include "web/js_sensesp.h"
 #include "web/setup.h"
 
+namespace sensesp {
+
 // HTTP port for the configuration interface
 #ifndef HTTP_SERVER_PORT
 #define HTTP_SERVER_PORT 80
@@ -197,32 +199,36 @@ void HTTPServer::handle_device_reset(AsyncWebServerRequest* request) {
   request->send(
       200, "text/plain",
       "OK, resetting the device settings back to factory defaults.\n");
-  app.onDelay(500, [this]() { SensESPBaseApp::get()->reset(); });
+  ReactESP::app->onDelay(500, [this]() { SensESPBaseApp::get()->reset(); });
 }
 
 void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
   request->send(200, "text/plain", "OK, restarting\n");
-  app.onDelay(50, []() { ESP.restart(); });
+  ReactESP::app->onDelay(50, []() { ESP.restart(); });
 }
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto* response = request->beginResponseStream("text/plain");
 
   response->setCode(200);
-  response->printf("Name: %s, build at %s %s\n",
-                   SensESPBaseApp::get()->get_hostname_observable()->get().c_str(),
-                   __DATE__, __TIME__);
+  response->printf(
+      "Name: %s, build at %s %s\n",
+      SensESPBaseApp::get()->get_hostname_observable()->get().c_str(), __DATE__,
+      __TIME__);
 
   response->printf("MAC: %s\n", WiFi.macAddress().c_str());
   response->printf("WiFi signal: %d\n", WiFi.RSSI());
 
   response->printf("SSID: %s\n", WiFi.SSID().c_str());
 
-  // TODO: use inversion of control to acquire information on different subsystems
+  // TODO: use inversion of control to acquire information on different
+  // subsystems
   //  response->printf("Signal K server address: %s\n",
   //                   SensESPApp::get()->ws_client_->get_server_address().c_str());
   //  response->printf("Signal K server port: %d\n",
   //                   SensESPApp::get()->ws_client_->get_server_port());
   //
-    request->send(response);
+  request->send(response);
 }
+
+}  // namespace sensesp

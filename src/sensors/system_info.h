@@ -1,12 +1,15 @@
 #ifndef _systeminfo_H_
 #define _systeminfo_H_
 
-#include "sensor.h"
 #include <elapsedMillis.h>
 
+#include "sensor.h"
+
+namespace sensesp {
+
 /**
- * @brief Reports the current clock speed of the ESP. 
- * 
+ * @brief Reports the current clock speed of the ESP.
+ *
  * Nothing about it is configurable, except whether or not it
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
@@ -26,8 +29,8 @@ class SystemHz : public FloatSensor {
 };
 
 /**
- * @brief Reports the current amount of unused memory of the ESP. 
- * 
+ * @brief Reports the current amount of unused memory of the ESP.
+ *
  * Nothing about it is configurable, except whether or not it
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
@@ -44,8 +47,8 @@ class FreeMem : public Sensor, public ValueProducer<uint32_t> {
 
 /**
  * @brief Reports the number of seconds since the last restart of
- * the ESP. 
- * 
+ * the ESP.
+ *
  * Nothing about it is configurable, except whether or not it
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
@@ -62,8 +65,8 @@ class Uptime : public FloatSensor {
 
 /**
  * @brief Reports the IP address of the ESP once it's connected
- * to wifi. 
- * 
+ * to wifi.
+ *
  * Nothing about it is configurable, except whether or not it
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
@@ -81,7 +84,7 @@ class IPAddrDev : public StringSensor {
 /**
  * @brief Reports the current strength of the wifi signal that
  * the ESP is connected to.
- * 
+ *
  * Nothing about it is configurable, except whether or not it
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
@@ -95,5 +98,7 @@ class WifiSignal : public FloatSensor {
  private:
   void update();
 };
+
+}  // namespace sensesp
 
 #endif

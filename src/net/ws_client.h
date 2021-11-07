@@ -8,9 +8,11 @@
 #include "sensesp.h"
 #include "signalk/signalk_delta_queue.h"
 #include "system/configurable.h"
-#include "system/startable.h"
 #include "system/observablevalue.h"
+#include "system/startable.h"
 #include "system/valueproducer.h"
+
+namespace sensesp {
 
 static const char* NULL_AUTH_TOKEN = "";
 
@@ -25,10 +27,12 @@ enum class WSConnectionState {
  * @brief The websocket connection to the Signal K server.
  * @see SensESPApp
  */
-class WSClient : public Configurable, public Startable, public ValueProducer<WSConnectionState> {
+class WSClient : public Configurable,
+                 public Startable,
+                 public ValueProducer<WSConnectionState> {
  public:
-  WSClient(String config_path, SKDeltaQueue* sk_delta_queue, String server_address,
-           uint16_t server_port);
+  WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
+           String server_address, uint16_t server_port);
   virtual void start() override;
   void on_disconnected();
   void on_error();
@@ -99,5 +103,7 @@ class WSClient : public Configurable, public Startable, public ValueProducer<WSC
   void subscribe_listeners();
   bool get_mdns_service(String& server_address, uint16_t& server_port);
 };
+
+}  // namespace sensesp
 
 #endif

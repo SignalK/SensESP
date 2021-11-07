@@ -3,6 +3,8 @@
 
 #include "transform.h"
 
+namespace sensesp {
+
 // y = k1 * x1 - k2 * x2
 class Difference : public FloatTransform {
  public:
@@ -18,5 +20,7 @@ class Difference : public FloatTransform {
   float k1;
   float k2;
 };
+
+}  // namespace sensesp
 
 #endif

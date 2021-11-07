@@ -5,6 +5,8 @@
 
 #include "transforms/transform.h"
 
+namespace sensesp {
+
 /**
  * ClickTypes defines the types of clicks and button presses a ClickType
  * transform can detect
@@ -19,8 +21,8 @@ enum class ClickTypes {
 };
 
 /**
- * @brief ClickType is a transform that consumes button clicks and translates them
- * as events of type `ClickTypes`.
+ * @brief ClickType is a transform that consumes button clicks and translates
+ * them as events of type `ClickTypes`.
  * @see ClickTypes
  */
 class ClickType : public Transform<bool, ClickTypes> {
@@ -118,5 +120,7 @@ class ClickType : public Transform<bool, ClickTypes> {
    */
   void emitDelayed(ClickTypes value);
 };
+
+}  // namespace sensesp
 
 #endif

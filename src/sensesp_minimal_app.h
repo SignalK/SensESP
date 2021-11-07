@@ -3,6 +3,8 @@
 
 #include "sensesp_base_app.h"
 
+namespace sensesp {
+
 class SensESPMinimalApp : public SensESPBaseApp {
  public:
   SensESPMinimalApp(SensESPMinimalApp &other) = delete;
@@ -18,5 +20,7 @@ class SensESPMinimalApp : public SensESPBaseApp {
 
   friend class SensESPMinimalAppBuilder;
 };
+
+}  // namespace sensesp
 
 #endif

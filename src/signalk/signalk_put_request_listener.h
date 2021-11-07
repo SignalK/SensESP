@@ -11,6 +11,8 @@
 #include "system/observable.h"
 #include "system/valueproducer.h"
 
+namespace sensesp {
+
 /**
  * @brief An Obervable class that listens for Signal K PUT
  * requests coming over the websocket connection and notifies
@@ -30,7 +32,9 @@ class SKPutListener : virtual public Observable {
 
   virtual void parse_value(JsonObject& put) = 0;
 
-  static const std::vector<SKPutListener*>& get_listeners() { return listeners; }
+  static const std::vector<SKPutListener*>& get_listeners() {
+    return listeners;
+  }
 
  protected:
   String sk_path;
@@ -40,7 +44,6 @@ class SKPutListener : virtual public Observable {
   int listen_delay;
 };
 
-
 /**
  * @brief  An object that listens for PUT requests to come in
  * for the specified SignalK path. The value is then emitted for
@@ -49,10 +52,10 @@ class SKPutListener : virtual public Observable {
 template <class T>
 class SKPutRequestListener : public SKPutListener, public ValueProducer<T> {
  public:
-  SKPutRequestListener(String sk_path)
-      : SKPutListener(sk_path) {
+  SKPutRequestListener(String sk_path) : SKPutListener(sk_path) {
     if (sk_path == "") {
-      debugE("SKPutRequestListener: User has provided no sk_path to respond to.");
+      debugE(
+          "SKPutRequestListener: User has provided no sk_path to respond to.");
     }
   }
 
@@ -65,5 +68,7 @@ typedef SKPutRequestListener<float> FloatSKPutRequestListener;
 typedef SKPutRequestListener<int> IntSKPutRequestListener;
 typedef SKPutRequestListener<bool> BoolSKPutRequestListener;
 typedef SKPutRequestListener<String> StringSKPutRequestListener;
+
+}  // namespace sensesp
 
 #endif

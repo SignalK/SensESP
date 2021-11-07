@@ -3,6 +3,8 @@
 #include "Arduino.h"
 #include "sensesp.h"
 
+namespace sensesp {
+
 AnalogInput::AnalogInput(uint8_t pin, uint read_delay, String config_path,
                          float output_scale)
     : FloatSensor(config_path),
@@ -13,13 +15,11 @@ AnalogInput::AnalogInput(uint8_t pin, uint read_delay, String config_path,
   load_configuration();
 }
 
-void AnalogInput::update() {
-  this->emit(output_scale * analog_reader->read());
-}
+void AnalogInput::update() { this->emit(output_scale * analog_reader->read()); }
 
 void AnalogInput::start() {
   if (this->analog_reader->configure()) {
-    app.onRepeat(read_delay, [this]() { this->update(); });
+    ReactESP::app->onRepeat(read_delay, [this]() { this->update(); });
   }
 }
 
@@ -46,3 +46,5 @@ bool AnalogInput::set_configuration(const JsonObject& config) {
   read_delay = config["read_delay"];
   return true;
 }
+
+}  // namespace sensesp

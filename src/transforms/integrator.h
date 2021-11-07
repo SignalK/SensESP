@@ -3,6 +3,8 @@
 
 #include "transform.h"
 
+namespace sensesp {
+
 static const char INTEGRATOR_SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
@@ -13,10 +15,10 @@ static const char INTEGRATOR_SCHEMA[] PROGMEM = R"({
 
 /**
  * @brief Integrator integrates (accumulates) the incoming values.
- * 
+ *
  * The integrator output value is the sum of the all previous values plus
  * the latest value, multiplied by the coefficient k.
- * 
+ *
  * @tparam C Consumer (incoming) data type
  * @tparam P Producer (output) data type
  */
@@ -25,7 +27,7 @@ class IntegratorT : public Transform<C, P> {
  public:
   /**
    * @brief Construct a new Integrator T object
-   * 
+   *
    * @param k Multiplier coefficient
    * @param value Initial value of the accumulator
    * @param config_path Configuration path
@@ -39,7 +41,7 @@ class IntegratorT : public Transform<C, P> {
     // save the integrator value every 10 s
     // NOTE: Disabled for now because interrupts start throwing
     // exceptions.
-    // app.onRepeat(10000, [this](){ this->save_configuration(); });
+    // ReactESP::app->onRepeat(10000, [this](){ this->save_configuration(); });
   }
 
   virtual void set_input(C input, uint8_t inputChannel = 0) override final {
@@ -64,7 +66,9 @@ class IntegratorT : public Transform<C, P> {
     value = config["value"];
     return true;
   }
-  virtual String get_config_schema() override { return FPSTR(INTEGRATOR_SCHEMA); }
+  virtual String get_config_schema() override {
+    return FPSTR(INTEGRATOR_SCHEMA);
+  }
 
  private:
   P k;
@@ -74,4 +78,5 @@ class IntegratorT : public Transform<C, P> {
 typedef IntegratorT<float, float> Integrator;
 typedef IntegratorT<int, int> Accumulator;
 
+}  // namespace sensesp
 #endif

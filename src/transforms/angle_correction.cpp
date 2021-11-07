@@ -1,5 +1,7 @@
 #include "angle_correction.h"
 
+namespace sensesp {
+
 #define M_PI 3.14159265358979323846
 
 AngleCorrection::AngleCorrection(float offset, float min_angle,
@@ -46,3 +48,5 @@ bool AngleCorrection::set_configuration(const JsonObject& config) {
   min_angle_ = config["min_angle"];
   return true;
 }
+
+}  // namespace sensesp

@@ -7,10 +7,12 @@
 #include "esp_adc_cal.h"
 #endif
 
+namespace sensesp {
+
 /**
  * @brief Used by AnalogInput to properly read the very different ADC's of
  * the ESP8266 and ESP32.
- **/ 
+ **/
 class BaseAnalogReader {
  private:
   int output_scale_;
@@ -76,5 +78,7 @@ class ESP32AnalogReader : public BaseAnalogReader {
 };
 typedef ESP32AnalogReader AnalogReader;
 #endif
+
+}  // namespace sensesp
 
 #endif

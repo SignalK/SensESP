@@ -1,14 +1,14 @@
 #include "signalk_metadata.h"
 
+namespace sensesp {
+
 SKMetadata::SKMetadata(String units, String display_name, String description,
                        String short_name, float timeout)
     : units_{units},
       display_name_{display_name},
       description_{description},
       short_name_{short_name},
-      timeout_{timeout} {        
-}
-
+      timeout_{timeout} {}
 
 void SKMetadata::add_entry(String sk_path, JsonArray& meta) {
   JsonObject json = meta.createNestedObject();
@@ -35,3 +35,5 @@ void SKMetadata::add_entry(String sk_path, JsonArray& meta) {
     val["timeout"] = this->timeout_;
   }
 }
+
+}  // namespace sensesp

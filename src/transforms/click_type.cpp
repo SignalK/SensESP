@@ -2,8 +2,11 @@
 
 #include "ReactESP.h"
 
+namespace sensesp {
+
 ClickType::ClickType(String config_path, uint16_t long_click_delay,
-                     uint16_t double_click_interval, uint16_t ultra_long_click_delay)
+                     uint16_t double_click_interval,
+                     uint16_t ultra_long_click_delay)
     : Transform<bool, ClickTypes>(config_path),
       click_count_{0},
       long_click_delay_{long_click_delay},
@@ -95,7 +98,7 @@ void ClickType::on_button_release() {
       unsigned long time_of_event = millis();
       long pd = (long)press_duration_;
       delayed_click_report_ =
-          app.onDelay(double_click_interval_ + 20, [this, pd, time_of_event]() {
+          ReactESP::app->onDelay(double_click_interval_ + 20, [this, pd, time_of_event]() {
             debugD(
                 "ClickType detected SingleClick (millis: %ld, queue time: %ld, "
                 "press duration %ld ms)",
@@ -119,7 +122,7 @@ void ClickType::on_button_release() {
 }
 
 void ClickType::emitDelayed(ClickTypes value) {
-  app.onDelay(5, [this, value]() { this->emit(value); });
+  ReactESP::app->onDelay(5, [this, value]() { this->emit(value); });
 }
 
 void ClickType::on_click_completed() {
@@ -168,3 +171,5 @@ bool ClickType::set_configuration(const JsonObject& config) {
   double_click_interval_ = config["double_click_interval"];
   return true;
 }
+
+}  // namespace sensesp

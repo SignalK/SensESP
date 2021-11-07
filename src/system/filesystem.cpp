@@ -6,9 +6,10 @@
 #define SPIFFS_BEGIN SPIFFS.begin()
 #endif
 
-
 #include "filesystem.h"
 #include "sensesp.h"
+
+namespace sensesp {
 
 Filesystem::Filesystem() : Resettable(-100) {
   if (!SPIFFS_BEGIN) {
@@ -21,3 +22,5 @@ void Filesystem::reset() {
   debugI("Formatting filesystem");
   SPIFFS.format();
 }
+
+}  // namespace sensesp

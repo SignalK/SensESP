@@ -7,6 +7,8 @@
 
 #include "Arduino.h"
 
+namespace sensesp {
+
 /**
  * @brief An object that is capable of having configuration data
  * that can be set remotely using a RESTful API, and can be persisted to the
@@ -68,5 +70,7 @@ class Configurable {
 };
 
 extern std::map<String, Configurable*> configurables;
+
+}
 
 #endif

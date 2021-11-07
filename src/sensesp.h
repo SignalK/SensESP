@@ -4,12 +4,14 @@
 #include <ReactESP.h>
 #include <RemoteDebug.h>
 
-typedef std::function<void()> void_cb_func;
+namespace sensesp {
 
-extern ReactESP app;
+typedef std::function<void()> void_cb_func;
 
 #ifndef DEBUG_DISABLED
 extern RemoteDebug Debug;
 #endif
+
+}  // namespace sensesp
 
 #endif

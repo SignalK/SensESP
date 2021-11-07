@@ -1,5 +1,7 @@
 #include "median.h"
 
+namespace sensesp {
+
 Median::Median(unsigned int sample_size, String config_path)
     : FloatTransform(config_path), sample_size_{sample_size} {
   load_configuration();
@@ -47,3 +49,5 @@ bool Median::set_configuration(const JsonObject& config) {
   }
   return true;
 }
+
+}  // namespace sensesp

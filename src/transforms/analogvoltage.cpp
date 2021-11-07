@@ -1,5 +1,7 @@
 #include "analogvoltage.h"
 
+namespace sensesp {
+
 AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
                              String config_path)
     : FloatTransform(config_path),
@@ -43,3 +45,5 @@ bool AnalogVoltage::set_configuration(const JsonObject& config) {
   offset_ = config["offset"];
   return true;
 }
+
+}  // namespace sensesp

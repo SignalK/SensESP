@@ -12,10 +12,12 @@
 #include <ESPAsyncWiFiManager.h>
 
 #include "system/configurable.h"
-#include "system/startable.h"
-#include "system/resettable.h"
 #include "system/observablevalue.h"
+#include "system/resettable.h"
+#include "system/startable.h"
 #include "system/valueproducer.h"
+
+namespace sensesp {
 
 enum class WifiState {
   kWifiNoAP = 0,
@@ -27,7 +29,10 @@ enum class WifiState {
 /**
  * @brief Manages the ESP's connection to the Wifi network.
  */
-class Networking : public Configurable, public Startable, public Resettable, public ValueProducer<WifiState> {
+class Networking : public Configurable,
+                   public Startable,
+                   public Resettable,
+                   public ValueProducer<WifiState> {
  public:
   Networking(String config_path, String ssid, String password, String hostname);
   virtual void start() override;
@@ -36,7 +41,6 @@ class Networking : public Configurable, public Startable, public Resettable, pub
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
-
 
  protected:
   void setup_saved_ssid();
@@ -67,5 +71,7 @@ class Networking : public Configurable, public Startable, public Resettable, pub
   String preset_password = "";
   String preset_hostname = "";
 };
+
+}  // namespace sensesp
 
 #endif

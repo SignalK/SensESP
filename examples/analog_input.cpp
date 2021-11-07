@@ -7,6 +7,8 @@
 #include "signalk/signalk_output.h"
 #include "transforms/linear.h"
 
+using namespace sensesp;
+
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object vs defining a "main()" method.
 ReactESP app([]() {

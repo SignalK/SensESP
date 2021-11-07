@@ -1,9 +1,9 @@
 #include "uuid.h"
 
+namespace sensesp {
+
 #ifdef ESP8266
-static uint32_t esp_random() {
-  return RANDOM_REG32;
-}
+static uint32_t esp_random() { return RANDOM_REG32; }
 #endif
 
 String generate_uuid4() {
@@ -30,3 +30,5 @@ String generate_uuid4() {
   }
   return uuid_str;
 }
+
+}  // namespace sensesp

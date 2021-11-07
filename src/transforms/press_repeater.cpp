@@ -1,5 +1,7 @@
 #include "transforms/press_repeater.h"
 
+namespace sensesp {
+
 PressRepeater::PressRepeater(String config_path, int integer_false,
                              int repeat_start_interval, int repeat_interval)
     : BooleanTransform(config_path),
@@ -12,7 +14,7 @@ PressRepeater::PressRepeater(String config_path, int integer_false,
 }
 
 void PressRepeater::start() {
-  app.onRepeat(10, [this]() {
+  ReactESP::app->onRepeat(10, [this]() {
     if (pushed_) {
       // A press is currently in progress
       if (repeating_) {
@@ -74,3 +76,5 @@ bool PressRepeater::set_configuration(const JsonObject& config) {
   repeat_interval_ = config["repeat_interval"];
   return true;
 }
+
+}  // namespace sensesp

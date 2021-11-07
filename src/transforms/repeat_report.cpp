@@ -1,5 +1,7 @@
 #include "transforms/repeat_report.h"
 
+namespace sensesp {
+
 template <typename T>
 void RepeatReport<T>::set_input(T input, uint8_t inputChannel) {
   last_update_interval_ = 0;
@@ -9,8 +11,9 @@ void RepeatReport<T>::set_input(T input, uint8_t inputChannel) {
 template <typename T>
 void RepeatReport<T>::start() {
   SymmetricTransform<T>::start();
-  app.onRepeat(10, [this]() {
-    if (max_silence_interval_ > 0 && last_update_interval_ > max_silence_interval_) {
+  ReactESP::app->onRepeat(10, [this]() {
+    if (max_silence_interval_ > 0 &&
+        last_update_interval_ > max_silence_interval_) {
       this->last_update_interval_ = 0;
       this->notify();
     }
@@ -51,3 +54,5 @@ template class RepeatReport<float>;
 template class RepeatReport<int>;
 template class RepeatReport<bool>;
 template class RepeatReport<String>;
+
+}  // namespace sensesp

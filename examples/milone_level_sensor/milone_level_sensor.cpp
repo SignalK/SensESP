@@ -11,6 +11,8 @@
 #include "transforms/analogvoltage.h"
 #include "transforms/curveinterpolator.h"
 
+using namespace sensesp;
+
 class ETapeInterpreter : public CurveInterpolator
 {
 
@@ -62,7 +64,6 @@ ReactESP app([]() {
   // browser pointed to 192.168.4.1 to configure the wifi parameters.
 
   sensesp_app = builder.set_hostname("milone")
-                    ->set_standard_sensors(IP_ADDRESS)
                     ->set_sk_server("192.168.0.1", 3000)
                     ->get_app();
 

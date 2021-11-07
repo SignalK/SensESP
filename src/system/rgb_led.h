@@ -4,6 +4,8 @@
 #include "system/configurable.h"
 #include "system/valueconsumer.h"
 
+namespace sensesp {
+
 /**
  * @brief A special device object that can be used to control
  * a multi-channel color rgb LED light using up to 3 digital output
@@ -74,5 +76,7 @@ class RgbLed : public Configurable,
   long led_off_rgb_;
   bool common_anode_;
 };
+
+}  // namespace sensesp
 
 #endif

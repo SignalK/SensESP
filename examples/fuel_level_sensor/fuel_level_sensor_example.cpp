@@ -7,6 +7,8 @@
 
 #define SERIAL_DEBUG_DISABLED = true
 
+using namespace sensesp;
+
 ReactESP app([]() {
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);

@@ -6,6 +6,8 @@
 #include "signalk/signalk_output.h"
 #include "transforms/hysteresis.h"
 
+using namespace sensesp;
+
 ReactESP app([]() {
   SetupSerialDebug(115200);
 

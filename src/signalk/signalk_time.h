@@ -4,6 +4,8 @@
 #include "signalk_emitter.h"
 #include "transforms/timestring.h"
 
+namespace sensesp {
+
 class SKOutputTime : public TimeString, public SKEmitter {
  public:
   SKOutputTime(String sk_path, String config_path = "");
@@ -12,5 +14,7 @@ class SKOutputTime : public TimeString, public SKEmitter {
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };
+
+}  // namespace sensesp
 
 #endif

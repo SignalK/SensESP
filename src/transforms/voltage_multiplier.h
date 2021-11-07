@@ -3,11 +3,13 @@
 
 #include "transforms/transform.h"
 
+namespace sensesp {
+
 /**
  * @brief OBSOLETE: Since you can now apply an "output_scale" to the
  * AnalogInput sensor, you don't need this transform anymore. See the
  * description of "output_scale" in analog_input.h.
- * 
+ *
  * A transform that does the opposite of what a physical voltage divider circuit
  * does: convert the voltage that comes out of a voltage divider back
  * into the original voltage that went into the voltage divider.
@@ -19,7 +21,7 @@
  * effect of the voltage divider circuit to know the original source voltage.
  *
  * @param R1 The value, in ohms, of R1 in your voltage divider circuit.
- * 
+ *
  * @param R2 The value, in ohms, of R2 in your voltage divider circuit.
  *
  * For maximum accuracy, you should measure the actual ohms value of your
@@ -39,4 +41,5 @@ class VoltageMultiplier : public FloatTransform {
   virtual String get_config_schema() override;
 };
 
+}  // namespace sensesp
 #endif

@@ -1,5 +1,7 @@
 #include "threshold.h"
 
+namespace sensesp {
+
 template <class C, class P>
 void ThresholdTransform<C, P>::set_input(C input, uint8_t input_channel) {
   if (input >= min_value_ && input <= max_value_) {
@@ -70,3 +72,5 @@ bool IntThreshold::set_configuration(const JsonObject& config) {
 }
 
 String IntThreshold::get_config_schema() { return FPSTR(INT_SCHEMA); }
+
+}  // namespace sensesp

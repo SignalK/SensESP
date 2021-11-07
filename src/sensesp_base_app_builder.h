@@ -3,6 +3,8 @@
 
 #include "sensesp_base_app.h"
 
+namespace sensesp {
+
 class SensESPBaseAppBuilder {
  protected:
   String hostname_ = "SensESP";
@@ -11,5 +13,7 @@ class SensESPBaseAppBuilder {
   virtual SensESPBaseAppBuilder* set_hostname(String hostname) = 0;
   virtual SensESPBaseApp* get_app() = 0;
 };
+
+}  // namespace sensesp
 
 #endif

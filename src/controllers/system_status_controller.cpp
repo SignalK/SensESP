@@ -1,5 +1,7 @@
 #include "system_status_controller.h"
 
+namespace sensesp {
+
 void SystemStatusController::set_input(WifiState new_value,
                                        uint8_t input_channel) {
   // FIXME: If pointers to member functions would be held in an array,
@@ -42,3 +44,5 @@ void SystemStatusController::set_input(WSConnectionState new_value,
       break;
   }
 }
+
+}  // namespace sensesp

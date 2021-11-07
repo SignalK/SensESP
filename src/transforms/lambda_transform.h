@@ -3,6 +3,8 @@
 
 #include "transform.h"
 
+namespace sensesp {
+
 // template snippets for configuration schema
 
 static const char kLambdaTransformSchemaHead[] PROGMEM = R"({
@@ -63,16 +65,15 @@ struct ParamInfo {
  * @tparam P6 Transform function parameter 6 type
  * */
 template <class IN, class OUT, class P1 = bool, class P2 = bool,
-          class P3 = bool, class P4 = bool, class P5 = bool,
-          class P6 = bool>
+          class P3 = bool, class P4 = bool, class P5 = bool, class P6 = bool>
 class LambdaTransform : public Transform<IN, OUT> {
  public:
-  LambdaTransform(std::function<OUT (IN)> function, String config_path = "")
+  LambdaTransform(std::function<OUT(IN)> function, String config_path = "")
       : Transform<IN, OUT>(config_path), function0{function}, num_params{0} {
     this->load_configuration();
   }
 
-  LambdaTransform(std::function<OUT (IN)> function, const ParamInfo* param_info,
+  LambdaTransform(std::function<OUT(IN)> function, const ParamInfo* param_info,
                   String config_path = "")
       : Transform<IN, OUT>(config_path),
         function0{function},
@@ -81,7 +82,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     this->load_configuration();
   }
 
-  LambdaTransform(std::function<OUT (IN, P1)> function, P1 param1,
+  LambdaTransform(std::function<OUT(IN, P1)> function, P1 param1,
                   const ParamInfo* param_info, String config_path = "")
       : Transform<IN, OUT>(config_path),
         function1{function},
@@ -104,9 +105,8 @@ class LambdaTransform : public Transform<IN, OUT> {
    * @param param_info Keys and Descriptions of each configuration parameter
    * @param config_path Configuration path for the transform
    **/
-  LambdaTransform(std::function<OUT (IN, P1, P2)> function, P1 param1,
-                  P2 param2, const ParamInfo* param_info,
-                  String config_path = "")
+  LambdaTransform(std::function<OUT(IN, P1, P2)> function, P1 param1, P2 param2,
+                  const ParamInfo* param_info, String config_path = "")
       : Transform<IN, OUT>(config_path),
         function2{function},
         param1{param1},
@@ -116,8 +116,8 @@ class LambdaTransform : public Transform<IN, OUT> {
     this->load_configuration();
   }
 
-  LambdaTransform(std::function<OUT (IN, P1, P2, P3)> function,
-                  P1 param1, P2 param2, P3 param3, const ParamInfo* param_info,
+  LambdaTransform(std::function<OUT(IN, P1, P2, P3)> function, P1 param1,
+                  P2 param2, P3 param3, const ParamInfo* param_info,
                   String config_path = "")
       : Transform<IN, OUT>(config_path),
         function3{function},
@@ -129,9 +129,9 @@ class LambdaTransform : public Transform<IN, OUT> {
     this->load_configuration();
   }
 
-  LambdaTransform(std::function<OUT (IN, P1, P2, P3, P4)> function,
-                  P1 param1, P2 param2, P3 param3, P4 param4,
-                  const ParamInfo* param_info, String config_path = "")
+  LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4)> function, P1 param1,
+                  P2 param2, P3 param3, P4 param4, const ParamInfo* param_info,
+                  String config_path = "")
       : Transform<IN, OUT>(config_path),
         function4{function},
         param1{param1},
@@ -143,7 +143,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     this->load_configuration();
   }
 
-  LambdaTransform(std::function<OUT (IN, P1, P2, P3, P4, P5)> function,
+  LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4, P5)> function,
                   P1 param1, P2 param2, P3 param3, P4 param4, P5 param5,
                   const ParamInfo* param_info, String config_path = "")
       : Transform<IN, OUT>(config_path),
@@ -158,7 +158,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     this->load_configuration();
   }
 
-  LambdaTransform(std::function<OUT (IN, P1, P2, P3, P4, P5, P6)> function,
+  LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4, P5, P6)> function,
                   P1 param1, P2 param2, P3 param3, P4 param4, P5 param5,
                   P6 param6, const ParamInfo* param_info,
                   String config_path = "")
@@ -193,8 +193,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         this->output = function4(input, param1, param2, param3, param4);
         break;
       case 5:
-        this->output =
-            function5(input, param1, param2, param3, param4, param5);
+        this->output = function5(input, param1, param2, param3, param4, param5);
         break;
       case 6:
         this->output =
@@ -323,13 +322,13 @@ class LambdaTransform : public Transform<IN, OUT> {
   int num_params;
   const ParamInfo* param_info;
 
-  std::function<OUT (IN)> function0;
-  std::function<OUT (IN, P1)> function1;
-  std::function<OUT (IN, P1, P2)> function2;
-  std::function<OUT (IN, P1, P2, P3)> function3;
-  std::function<OUT (IN, P1, P2, P3, P4)> function4;
-  std::function<OUT (IN, P1, P2, P3, P4, P5)> function5;
-  std::function<OUT (IN, P1, P2, P3, P4, P5, P6)> function6;
+  std::function<OUT(IN)> function0;
+  std::function<OUT(IN, P1)> function1;
+  std::function<OUT(IN, P1, P2)> function2;
+  std::function<OUT(IN, P1, P2, P3)> function3;
+  std::function<OUT(IN, P1, P2, P3, P4)> function4;
+  std::function<OUT(IN, P1, P2, P3, P4, P5)> function5;
+  std::function<OUT(IN, P1, P2, P3, P4, P5, P6)> function6;
 
   static String format_schema_row(const char key[], const char title[],
                                   const char type[], const bool read_only) {
@@ -345,5 +344,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     return String(row);
   }
 };
+
+}  // namespace sensesp
 
 #endif

@@ -4,6 +4,8 @@
 #include "sensesp_app.h"
 #include "sensesp_base_app_builder.h"
 
+namespace sensesp {
+
 /**
  * @brief A class for quickly configuring a SensESP application object before
  * wiring up your sensors.
@@ -48,5 +50,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     return app_;
   }
 };
+
+}  // namespace sensesp
 
 #endif

@@ -9,6 +9,8 @@
 #include "transforms/linear.h"
 #include "transforms/voltagedivider.h"
 
+using namespace sensesp;
+
 /*
   Illustrates a custom transform that takes a resistance value in ohms and
   returns the estimated temperature in Kelvin. Note that you

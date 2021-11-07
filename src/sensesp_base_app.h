@@ -9,6 +9,8 @@
 #include "system/filesystem.h"
 #include "system/observablevalue.h"
 
+namespace sensesp {
+
 void SetupSerialDebug(uint32_t baudrate);
 
 /**
@@ -75,5 +77,7 @@ class SensESPBaseApp {
     return this;
   }
 };
+
+}  // namespace sensesp
 
 #endif

@@ -2,6 +2,8 @@
 
 #include "sensesp.h"
 
+namespace sensesp {
+
 std::priority_queue<Resettable*, std::vector<Resettable*>, ResettableCompare>
     Resettable::reset_list;
 
@@ -17,3 +19,5 @@ void Resettable::reset_all() {
     reset_list.pop();
   }
 }
+
+}  // namespace sensesp

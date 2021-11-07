@@ -3,6 +3,8 @@
 
 #include "transform.h"
 
+namespace sensesp {
+
 /**
  * @brief Transforms temperature and relative humidity in heat index
  * temperature.
@@ -33,5 +35,7 @@ class HeatIndexEffect : public Transform<float, String> {
   HeatIndexEffect();
   virtual void set_input(float input, uint8_t inputChannel = 0) override;
 };
+
+}  // namespace sensesp
 
 #endif

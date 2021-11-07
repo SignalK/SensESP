@@ -6,12 +6,12 @@
 #include "sensesp_app.h"
 #include "signalk/signalk_emitter.h"
 
+namespace sensesp {
+
 SKDeltaQueue::SKDeltaQueue(unsigned int max_buffer_size)
     : Startable{0}, max_buffer_size{max_buffer_size}, meta_sent_{false} {}
 
-void SKDeltaQueue::start() {
-  this->connect_emitters();
-}
+void SKDeltaQueue::start() { this->connect_emitters(); }
 
 void SKDeltaQueue::append(const String val) {
   if (buffer.size() >= max_buffer_size) {
@@ -23,9 +23,8 @@ void SKDeltaQueue::append(const String val) {
 void SKDeltaQueue::connect_emitters() {
   for (auto const& sk_source : SKEmitter::get_sources()) {
     if (sk_source->get_sk_path() != "") {
-      sk_source->attach([sk_source, this]() {
-        this->append(sk_source->as_signalk());
-      });
+      sk_source->attach(
+          [sk_source, this]() { this->append(sk_source->as_signalk()); });
     }
   }
 }
@@ -45,7 +44,7 @@ unsigned int SKDeltaQueue::get_doc_size_estimate() {
     // also reserve space for the pre-rendered strings
     estimate += item.length() + 1;
   }
-  return estimate;  
+  return estimate;
 }
 
 unsigned int SKDeltaQueue::get_metadata_size_estimate() {
@@ -70,7 +69,7 @@ unsigned int SKDeltaQueue::get_metadata_size_estimate() {
     update_estimate(metadata->display_name_);
     update_estimate(metadata->description_);
     update_estimate(metadata->short_name_);
-    
+
     estimate += JSON_OBJECT_SIZE(num_fields);
   }
   return estimate;
@@ -117,3 +116,5 @@ void SKDeltaQueue::add_metadata(JsonArray updates) {
   }
   meta_sent_ = true;
 }
+
+}  // namespace sensesp

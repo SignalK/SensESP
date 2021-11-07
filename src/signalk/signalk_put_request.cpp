@@ -3,13 +3,15 @@
 #include "sensesp_app.h"
 #include "system/uuid.h"
 
+namespace sensesp {
+
 extern ReactESP app;
 
 std::map<String, SKRequest::PendingRequest*> SKRequest::request_map;
 
-String SKRequest::send_request(DynamicJsonDocument& request,
-                               std::function<void(DynamicJsonDocument&)> callback,
-                               uint32_t timeout) {
+String SKRequest::send_request(
+    DynamicJsonDocument& request,
+    std::function<void(DynamicJsonDocument&)> callback, uint32_t timeout) {
   // Create a new PendingRequest object to track this request...
   PendingRequest* pending_request = new PendingRequest();
 
@@ -21,14 +23,15 @@ String SKRequest::send_request(DynamicJsonDocument& request,
 
   // After 10 seconds, if we haven't already handled a response,
   // assume its not coming.
-  pending_request->timeout_cleanup = app.onDelay(timeout, [pending_request]() {
-    // Mark the delay reaction null as it will be cleaned up by the ReactESP
-    // framework if this executes...
-    debugW("No response from server for request Id %s",
-           pending_request->request_id.c_str());
-    pending_request->timeout_cleanup = nullptr;
-    SKRequest::remove_request(pending_request->request_id);
-  });
+  pending_request->timeout_cleanup =
+      ReactESP::app->onDelay(timeout, [pending_request]() {
+        // Mark the delay reaction null as it will be cleaned up by the ReactESP
+        // framework if this executes...
+        debugW("No response from server for request Id %s",
+               pending_request->request_id.c_str());
+        pending_request->timeout_cleanup = nullptr;
+        SKRequest::remove_request(pending_request->request_id);
+      });
 
   request_map[pending_request->request_id] = pending_request;
 
@@ -100,18 +103,15 @@ void SKPutRequestBase::send_put_request() {
   JsonObject put_data = root.createNestedObject("put");
   put_data["path"] = sk_path;
   set_put_value(put_data);
-  this->pending_request_id_ =
-     SKRequest::send_request(
-         doc,
-         [this](DynamicJsonDocument& response) { this->on_response(response); },
-         timeout);
+  this->pending_request_id_ = SKRequest::send_request(
+      doc,
+      [this](DynamicJsonDocument& response) { this->on_response(response); },
+      timeout);
 }
-
 
 bool SKPutRequestBase::request_pending() {
   return (get_request(this->pending_request_id_) != nullptr);
 }
-
 
 void SKPutRequestBase::on_response(DynamicJsonDocument& response) {
   String request_id = response["requestId"];
@@ -143,3 +143,5 @@ bool SKPutRequestBase::set_configuration(const JsonObject& config) {
   this->sk_path = config["sk_path"].as<String>();
   return true;
 }
+
+}  // namespace sensesp

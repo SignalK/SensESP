@@ -3,10 +3,14 @@
 
 #include "system/startable.h"
 
+namespace sensesp {
+
 class MDNSDiscovery : public Startable {
  public:
   MDNSDiscovery() : Startable(0) {}
   virtual void start() override;
 };
+
+}  // namespace sensesp
 
 #endif
