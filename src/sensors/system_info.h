@@ -1,11 +1,39 @@
-#ifndef _systeminfo_H_
-#define _systeminfo_H_
+#ifndef _system_info_H_
+#define _system_info_H_
 
+#include <Arduino.h>
 #include <elapsedMillis.h>
 
+#include "sensesp_base_app.h"
 #include "sensor.h"
+#include "signalk/signalk_output.h"
 
 namespace sensesp {
+
+/**
+ * @brief Connect a system information sensor to SKOutput
+ **/
+template <typename T>
+void connect_system_info_sensor(SensorT<T>* sensor, String prefix, String name) {
+  auto hostname_obs = SensESPBaseApp::get()->get_hostname_observable();
+  String hostname = hostname_obs->get();
+  String path = prefix + hostname + "." + name;
+
+  auto* sk_output = new SKOutput<T>(path);
+
+  // connect an observer to hostname to change the output path
+  // if the hostname is changed
+  auto update_output_sk_path = [hostname_obs, sk_output, prefix, name]() {
+    String path = prefix + hostname_obs->get() + "." + name;
+    sk_output->set_sk_path(path);
+  };
+  update_output_sk_path();
+
+  hostname_obs->attach(update_output_sk_path);
+
+  // connect the sensor to the output
+  sensor->connect_to(sk_output);
+}
 
 /**
  * @brief Reports the current clock speed of the ESP.
@@ -35,7 +63,7 @@ class SystemHz : public FloatSensor {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class FreeMem : public Sensor, public ValueProducer<uint32_t> {
+class FreeMem : public IntSensor {
  public:
   FreeMem() {}
   void start() override final;

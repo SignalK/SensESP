@@ -3,6 +3,9 @@
 
 #include "sensesp_app.h"
 #include "sensesp_base_app_builder.h"
+#include "sensors/system_info.h"
+
+constexpr char* kDefaultSystemInfoSensorPrefix = "sensorDevice.";
 
 namespace sensesp {
 
@@ -45,6 +48,32 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     WSClient::test_auth_on_each_connect_ = val;
     return this;
   }
+  SensESPAppBuilder* enable_system_hz_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new SystemHz(), prefix, "systemHz");
+    return this;
+  }
+  SensESPAppBuilder* enable_free_mem_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new FreeMem(), prefix, "freeMemory");
+    return this;
+  }
+  SensESPAppBuilder* enable_uptime_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new Uptime(), prefix, "uptime");
+    return this;
+  }
+  SensESPAppBuilder* enable_ip_address_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new IPAddrDev(), prefix, "ipAddress");
+    return this;
+  }
+  SensESPAppBuilder* enable_wifi_signal_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new WiFiSignal(), prefix, "wifiSignalLevel");
+    return this;
+  }
+
+  SensESPAppBuilder* enable_system_info_sensors(String prefix=kDefaultSystemInfoSensorPrefix) {
+
+    return this;
+  }
+
   SensESPApp* get_app() override final {
     app_->setup();
     return app_;
