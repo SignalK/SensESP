@@ -51,7 +51,7 @@ bool DigitalInputState::set_configuration(const JsonObject& config) {
 }
 
 DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode,
-                                         int interrupt_type, uint read_delay,
+                                         int interrupt_type, unsigned int read_delay,
                                          String config_path)
     : DigitalInput{pin, pin_mode, interrupt_type, config_path},
       IntProducer(),
@@ -96,7 +96,7 @@ bool DigitalInputCounter::set_configuration(const JsonObject& config) {
 }
 
 DigitalInputChange::DigitalInputChange(uint8_t pin, int pin_mode,
-                                       int interrupt_type, uint read_delay,
+                                       int interrupt_type, unsigned int read_delay,
                                        String config_path)
     : DigitalInput(pin, pin_mode, interrupt_type, config_path),
       BoolProducer(),

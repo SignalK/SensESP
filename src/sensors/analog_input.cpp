@@ -5,7 +5,7 @@
 
 namespace sensesp {
 
-AnalogInput::AnalogInput(uint8_t pin, uint read_delay, String config_path,
+AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay, String config_path,
                          float output_scale)
     : FloatSensor(config_path),
       pin{pin},

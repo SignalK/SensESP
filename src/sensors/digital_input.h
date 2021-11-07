@@ -90,13 +90,13 @@ typedef DigitalInputState DigitalInputValue;
 class DigitalInputCounter : public DigitalInput, public IntProducer {
  public:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
-                      uint read_delay, String config_path = "");
+                      unsigned int read_delay, String config_path = "");
 
   void start() override final;
 
  private:
-  uint read_delay_;
-  volatile uint counter_ = 0;
+  unsigned int read_delay_;
+  volatile unsigned int counter_ = 0;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
@@ -129,11 +129,11 @@ class DigitalInputCounter : public DigitalInput, public IntProducer {
 class DigitalInputChange : public DigitalInput, public BoolProducer {
  public:
   DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type,
-                     uint read_delay = 10, String config_path = "");
+                     unsigned int read_delay = 10, String config_path = "");
   virtual void start() override final;
 
  private:
-  uint read_delay_;
+  unsigned int read_delay_;
   bool triggered_;
   uint8_t last_output_;
   bool value_sent_;

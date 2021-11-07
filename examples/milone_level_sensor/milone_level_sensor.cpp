@@ -88,7 +88,7 @@ ReactESP app([]() {
   // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
 
   uint8_t pin = A0;
-  uint read_delay = 500;
+  unsigned int read_delay = 500;
 
   auto *analog_input = new AnalogInput(pin, read_delay, kAnalogInConfigPath);
 
@@ -108,7 +108,7 @@ ReactESP app([]() {
   const float scale = 1.0;
   const float Vin = 5.0;
   const float R2 = 100;
-  const uint samples = 10;
+  const unsigned int samples = 10;
 
   // Wire up the output of the analog input to the VoltageDividerR1 transform.
   // and then output the results to the SignalK server.
