@@ -14,7 +14,7 @@
 #include "net/http_server.h"
 #include "net/networking.h"
 #include "net/ota.h"
-#include "net/remote_debugger.h"
+#include "net/debug_output.h"
 #include "net/ws_client.h"
 #include "sensesp_base_app.h"
 #include "sensors/sensor.h"
@@ -104,7 +104,7 @@ class SensESPApp : public SensESPBaseApp {
   ObservableValue<String>* hostname_;
 
   Filesystem* filesystem_;
-  RemoteDebugger* remote_debugger_;
+  DebugOutput* debug_output_;
   MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;
   SystemStatusLed* system_status_led_ = NULL;

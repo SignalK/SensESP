@@ -2,10 +2,6 @@
 
 namespace sensesp {
 
-#ifndef DEBUG_DISABLED
-RemoteDebug Debug;
-#endif
-
 void SetupSerialDebug(uint32_t baudrate) {
   Serial.begin(baudrate);
 
@@ -16,7 +12,7 @@ void SetupSerialDebug(uint32_t baudrate) {
   Debug.setSerialEnabled(true);
   delay(100);
 #endif
-  debugI("\nSerial debug enabled");
+  debugI("\nSerial debugging enabled");
 }
 
 SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
@@ -37,7 +33,7 @@ void SensESPBaseApp::setup() {
   hostname_ = new ObservableValue<String>(preset_hostname_);
 
   // create a remote debugger object
-  remote_debugger_ = new RemoteDebugger();
+  debug_output_ = new DebugOutput();
 }
 
 void SensESPBaseApp::start() {
