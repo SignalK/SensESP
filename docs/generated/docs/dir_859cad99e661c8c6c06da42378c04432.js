@@ -21,7 +21,7 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     [ "curveinterpolator.cpp", "curveinterpolator_8cpp.html", null ],
     [ "curveinterpolator.h", "curveinterpolator_8h.html", [
       [ "CurveInterpolator", "class_curve_interpolator.html", "class_curve_interpolator" ],
-      [ "Sample", "class_curve_interpolator_1_1_sample.html", "class_curve_interpolator_1_1_sample" ]
+      [ "CurveInterpolator::Sample", "class_curve_interpolator_1_1_sample.html", "class_curve_interpolator_1_1_sample" ]
     ] ],
     [ "debounce.h", "debounce_8h.html", "debounce_8h" ],
     [ "dew_point.cpp", "dew__point_8cpp.html", null ],
@@ -64,11 +64,11 @@ var dir_859cad99e661c8c6c06da42378c04432 =
     ] ],
     [ "repeat_report.cpp", "repeat__report_8cpp.html", null ],
     [ "repeat_report.h", "repeat__report_8h.html", [
-      [ "RepeatReport", "class_repeat_report.html", "class_repeat_report" ]
+      [ "RepeatReport< T >", "class_repeat_report.html", "class_repeat_report" ]
     ] ],
     [ "threshold.cpp", "threshold_8cpp.html", null ],
     [ "threshold.h", "threshold_8h.html", [
-      [ "ThresholdTransform", "class_threshold_transform.html", "class_threshold_transform" ],
+      [ "ThresholdTransform< C, P >", "class_threshold_transform.html", "class_threshold_transform" ],
       [ "NumericThreshold", "class_numeric_threshold.html", "class_numeric_threshold" ],
       [ "IntegerThreshold", "class_integer_threshold.html", "class_integer_threshold" ]
     ] ],

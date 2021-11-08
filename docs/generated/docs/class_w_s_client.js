@@ -6,7 +6,7 @@ var class_w_s_client =
     [ "get_config_schema", "class_w_s_client.html#a78fbe2ccf0f84423abbf9d1047aff0bc", null ],
     [ "get_configuration", "class_w_s_client.html#ae4b637b051ecf7ee14181208c6f37855", null ],
     [ "get_connection_state", "class_w_s_client.html#adfd23fc03da65055e4ffa175f7c36d14", null ],
-    [ "get_delta_count_producer", "class_w_s_client.html#ab7d65a4170d2bcc9356ceabdfa8c8fa9", null ],
+    [ "get_delta_count_producer", "class_w_s_client.html#a0a0a58e0c9a77bc175dbabdce35ed66e", null ],
     [ "get_server_address", "class_w_s_client.html#a5d9426cc45ae12822ca114fcb599aeb8", null ],
     [ "get_server_port", "class_w_s_client.html#a182276a74d4886630a5493f6fa4e7ab9", null ],
     [ "is_connected", "class_w_s_client.html#a6ae43b80f511194b43b0dff2763d68b1", null ],

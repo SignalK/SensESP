@@ -9,6 +9,17 @@ Class documentation for SensESP is [here](http://signalk.org/SensESP/generated/d
 
 A Wiki page with more detailed information about using SensESP is [here](https://github.com/SignalK/SensESP/wiki).
 
+## Important News
+
+As of now (Nov. 2021), SensESP version 2 is under heavy development and will be released at some point in the near future.
+This major release will have backwards-incompatible changes and will only support the ESP32 platform.
+If you are only starting your SensESP journey now, only use ESP32 devices!
+
+Version 1.0.x releases will be indefinitely available and can be used to support your existing projects, also on ESP8266.
+To peg the SensESP version, use the following (or similar) line in your `platformio.ini` file `lib_deps` section:
+
+    SignalK/SensESP @ ^1.0.7
+
 ## Getting Started
 
 You must have a Signal K Server running on your network, or SensESP has nothing to connect to. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md).
@@ -24,10 +35,7 @@ You need to have PlatformIO installed. First, download and install [Visual Studi
 Then, select "Extensions" from the left toolbar. Search for "platformio", select the first result, and click "Install".
 
 Once you have PlatformIO installed, its home screen should open automatically when you start VSCode. On the PIO Home, 
-select "New Project". Enter a name (something like SensESPTest for your first project) and then select "WeMos
-D1 R2 and mini" in the board dropdown. (This assumes you're using the most commonly used microcontroller with SensESP, 
-the Wemos D1 mini, an implementation of the ESP8266 chip. If you're using a different ESP, select that in the 
-board dropdown. If you're using an ESP32 that isn't in the board list, choose "Espressif ESP32 Dev Module".)
+select "New Project". Enter a name (something like SensESPTest for your first project) and then select "Espressif ESP32 Dev Module" in the board dropdown. (This assumes you're using an ESP32 based development board. If you're using a different ESP, select that in the board dropdown.)
 The Arduino framework should become automatically selected. Complete the New Project dialog, then open the project you created.
 
 Once you have your new project open, open the automatically generated `platformio.ini` file that's in your project's directory (NOT the one that you find if you go down into the .pio/libdeps/... folders). Save it as `platformio.ini.auto` so you can refer back to it.

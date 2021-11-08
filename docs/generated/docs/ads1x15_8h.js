@@ -1,8 +1,8 @@
 var ads1x15_8h =
 [
-    [ "ADS1x15", "class_a_d_s1x15.html", "class_a_d_s1x15" ],
-    [ "ADS1x15RawValue", "class_a_d_s1x15_raw_value.html", "class_a_d_s1x15_raw_value" ],
-    [ "ADS1x15Voltage", "class_a_d_s1x15_voltage.html", "class_a_d_s1x15_voltage" ],
+    [ "ADS1x15< T_Ada_1x15 >", "class_a_d_s1x15.html", "class_a_d_s1x15" ],
+    [ "ADS1x15RawValue< T_ads_1x15 >", "class_a_d_s1x15_raw_value.html", "class_a_d_s1x15_raw_value" ],
+    [ "ADS1x15Voltage< T_ads_1x15, chip >", "class_a_d_s1x15_voltage.html", "class_a_d_s1x15_voltage" ],
     [ "ADS1015", "ads1x15_8h.html#a6f6b131100a4dd4ca22e4152b2180db8", null ],
     [ "ADS1015RawValue", "ads1x15_8h.html#a78c9be62b1660901fedd3db0be870497", null ],
     [ "ADS1015value", "ads1x15_8h.html#ab2547b60408d5ce2ad6faf2ccc135bb2", null ],
