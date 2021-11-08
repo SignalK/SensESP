@@ -1,6 +1,6 @@
 var valueconsumer_8h =
 [
-    [ "ValueConsumer", "class_value_consumer.html", "class_value_consumer" ],
+    [ "ValueConsumer< T >", "class_value_consumer.html", "class_value_consumer" ],
     [ "BooleanConsumer", "valueconsumer_8h.html#abea8a189967941972b3e7c5a329c4963", null ],
     [ "IntegerConsumer", "valueconsumer_8h.html#a45a844f7269f830a1f708f965627248c", null ],
     [ "NumericConsumer", "valueconsumer_8h.html#a1220e1ddede7c4512fde395262841b74", null ],

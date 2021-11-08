@@ -7,7 +7,7 @@ var dir_d501334aeb1b78ad67cd3c72c37b1e87 =
       [ "Enable", "class_enable.html", "class_enable" ]
     ] ],
     [ "lambda_consumer.h", "lambda__consumer_8h.html", [
-      [ "LambdaConsumer", "class_lambda_consumer.html", "class_lambda_consumer" ]
+      [ "LambdaConsumer< IN >", "class_lambda_consumer.html", "class_lambda_consumer" ]
     ] ],
     [ "led_blinker.cpp", "led__blinker_8cpp.html", "led__blinker_8cpp" ],
     [ "led_blinker.h", "led__blinker_8h.html", "led__blinker_8h" ],
