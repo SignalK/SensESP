@@ -21,7 +21,7 @@ void SensESPApp::setup() {
 
   // create the networking object
   networking_ = new Networking("/system/networking", ssid_, wifi_password_,
-                               preset_hostname_);
+                               SensESPBaseApp::get()->get_hostname_observable()->get());
 
   // create the OTA object
   ota_ = new OTA();

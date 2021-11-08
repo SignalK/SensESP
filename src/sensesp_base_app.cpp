@@ -17,7 +17,11 @@ void SetupSerialDebug(uint32_t baudrate) {
 
 SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
 
-SensESPBaseApp::SensESPBaseApp() {}
+SensESPBaseApp::SensESPBaseApp() {
+  // create the hostname_ observable - this needs to be done before
+  // the builder methods are called
+  hostname_ = new ObservableValue<String>(kDefaultHostname);
+}
 
 /**
  * Get the singleton SensESPBaseApp singleton instance.
@@ -28,9 +32,6 @@ SensESPBaseApp* SensESPBaseApp::get() { return instance_; }
 void SensESPBaseApp::setup() {
   // initialize the filesystem
   filesystem_ = new Filesystem();
-
-  // create the hostname_ observable
-  hostname_ = new ObservableValue<String>(preset_hostname_);
 
   // create a remote debugger object
   debug_output_ = new DebugOutput();

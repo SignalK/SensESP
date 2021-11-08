@@ -13,7 +13,7 @@ class SensESPMinimalAppBuilder : public SensESPBaseAppBuilder {
  public:
   SensESPMinimalAppBuilder() { app_ = SensESPMinimalApp::get(); }
   SensESPMinimalAppBuilder* set_hostname(String hostname) override {
-    app_->set_preset_hostname(hostname);
+    app_->set_hostname(hostname);
     return this;
   }
   SensESPMinimalApp* get_app() override final {
