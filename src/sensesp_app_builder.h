@@ -5,7 +5,7 @@
 #include "sensesp_base_app_builder.h"
 #include "sensors/system_info.h"
 
-constexpr char* kDefaultSystemInfoSensorPrefix = "sensorDevice.";
+const char* kDefaultSystemInfoSensorPrefix = "sensorDevice.";
 
 namespace sensesp {
 
@@ -37,7 +37,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     return this;
   }
   SensESPAppBuilder* set_hostname(String hostname) override final {
-    app_->set_preset_hostname(hostname);
+    app_->set_hostname(hostname);
     return this;
   }
   SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
@@ -70,7 +70,11 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
   }
 
   SensESPAppBuilder* enable_system_info_sensors(String prefix=kDefaultSystemInfoSensorPrefix) {
-
+    this->enable_system_hz_sensor(prefix);
+    this->enable_free_mem_sensor(prefix);
+    this->enable_uptime_sensor(prefix);
+    this->enable_ip_address_sensor(prefix);
+    this->enable_wifi_signal_sensor(prefix);
     return this;
   }
 

@@ -11,6 +11,10 @@
 
 namespace sensesp {
 
+constexpr auto kDefaultHostname = "SensESP";
+
+void SetupSerialDebug(uint32_t baudrate);
+
 /**
  * @brief The base class for SensESP applications.
  *
@@ -64,14 +68,13 @@ class SensESPBaseApp {
 
   static SensESPBaseApp* instance_;
 
-  String preset_hostname_ = "SensESP";
   ObservableValue<String>* hostname_;
 
   Filesystem* filesystem_;
   DebugOutput* debug_output_;
 
-  const SensESPBaseApp* set_preset_hostname(String preset_hostname) {
-    preset_hostname_ = preset_hostname;
+  const SensESPBaseApp* set_hostname(String hostname) {
+    hostname_->set(hostname);
     return this;
   }
 };
