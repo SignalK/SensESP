@@ -1,6 +1,6 @@
 var typecast_8h =
 [
-    [ "Typecast", "class_typecast.html", "class_typecast" ],
+    [ "Typecast< IN, OUT >", "class_typecast.html", "class_typecast" ],
     [ "RoundToInt", "class_round_to_int.html", "class_round_to_int" ],
     [ "BoolToInt", "typecast_8h.html#a657482afcbd3a4679e1fa2f7c97d0e09", null ],
     [ "FloatToInt", "typecast_8h.html#a67a9729ee9c0b128947a49f9042fe78b", null ],

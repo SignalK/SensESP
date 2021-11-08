@@ -42,6 +42,15 @@ var hierarchy =
         ] ]
       ] ],
       [ "TransformBase", "class_transform_base.html", [
+        [ "Transform< bool, ClickTypes >", "class_transform.html", [
+          [ "ClickType", "class_click_type.html", null ]
+        ] ],
+        [ "Transform< int, float >", "class_transform.html", [
+          [ "Frequency", "class_frequency.html", null ]
+        ] ],
+        [ "Transform< float, String >", "class_transform.html", [
+          [ "HeatIndexEffect", "class_heat_index_effect.html", null ]
+        ] ],
         [ "Transform< IN, OUT >", "class_transform.html", [
           [ "LambdaTransform< IN, OUT, IN, IN, OUT, OUT >", "class_lambda_transform.html", [
             [ "Hysteresis< IN, OUT >", "class_hysteresis.html", null ]
@@ -51,20 +60,6 @@ var hierarchy =
               [ "RoundToInt", "class_round_to_int.html", null ]
             ] ],
             [ "Typecast< IN, OUT >", "class_typecast.html", null ]
-          ] ]
-        ] ],
-        [ "Transform< bool, String >", "class_transform.html", [
-          [ "TruthToText", "class_truth_to_text.html", null ]
-        ] ],
-        [ "Transform< int, float >", "class_transform.html", [
-          [ "Frequency", "class_frequency.html", null ]
-        ] ],
-        [ "Transform< float, String >", "class_transform.html", [
-          [ "HeatIndexEffect", "class_heat_index_effect.html", null ]
-        ] ],
-        [ "Transform< time_t, String >", "class_transform.html", [
-          [ "TimeString", "class_time_string.html", [
-            [ "SKOutputTime", "class_s_k_output_time.html", null ]
           ] ]
         ] ],
         [ "Transform< T, T >", "class_transform.html", [
@@ -82,8 +77,13 @@ var hierarchy =
         [ "Transform< String, bool >", "class_transform.html", [
           [ "TextToTruth", "class_text_to_truth.html", null ]
         ] ],
-        [ "Transform< bool, ClickTypes >", "class_transform.html", [
-          [ "ClickType", "class_click_type.html", null ]
+        [ "Transform< time_t, String >", "class_transform.html", [
+          [ "TimeString", "class_time_string.html", [
+            [ "SKOutputTime", "class_s_k_output_time.html", null ]
+          ] ]
+        ] ],
+        [ "Transform< bool, String >", "class_transform.html", [
+          [ "TruthToText", "class_truth_to_text.html", null ]
         ] ],
         [ "Transform< C, P >", "class_transform.html", [
           [ "LambdaTransform< float, float, float, float >", "class_lambda_transform.html", [
@@ -133,20 +133,19 @@ var hierarchy =
     [ "NMEAData", "struct_n_m_e_a_data.html", null ],
     [ "NMEAParser", "class_n_m_e_a_parser.html", null ],
     [ "Observable", "class_observable.html", [
-      [ "ValueProducer< WifiState >", "class_value_producer.html", [
-        [ "Networking", "class_networking.html", null ]
-      ] ],
       [ "ValueProducer< uint32_t >", "class_value_producer.html", [
         [ "FreeMem", "class_free_mem.html", null ]
       ] ],
-      [ "ValueProducer< P >", "class_value_producer.html", [
-        [ "Transform< C, P >", "class_transform.html", null ]
+      [ "ValueProducer< WifiState >", "class_value_producer.html", [
+        [ "Networking", "class_networking.html", null ]
       ] ],
       [ "ValueProducer< SystemStatus >", "class_value_producer.html", [
         [ "SystemStatusController", "class_system_status_controller.html", null ]
       ] ],
+      [ "ValueProducer< P >", "class_value_producer.html", [
+        [ "Transform< C, P >", "class_transform.html", null ]
+      ] ],
       [ "ValueProducer< WSConnectionState >", "class_value_producer.html", [
-        [ "ObservableValue< WSConnectionState >", "class_observable_value.html", null ],
         [ "WSClient", "class_w_s_client.html", null ]
       ] ],
       [ "SKEmitter", "class_s_k_emitter.html", [
@@ -161,20 +160,14 @@ var hierarchy =
       ] ],
       [ "Sensor", "class_sensor.html", null ],
       [ "ValueProducer< T >", "class_value_producer.html", [
-        [ "ObservableValue< Position >", "class_observable_value.html", null ],
-        [ "ObservableValue< ENUVector >", "class_observable_value.html", null ],
-        [ "ObservableValue< float >", "class_observable_value.html", null ],
-        [ "ObservableValue< int >", "class_observable_value.html", null ],
-        [ "ObservableValue< time_t >", "class_observable_value.html", null ],
-        [ "ObservableValue< String >", "class_observable_value.html", null ],
-        [ "Transform< IN, OUT >", "class_transform.html", null ],
-        [ "Transform< bool, String >", "class_transform.html", null ],
+        [ "Transform< bool, ClickTypes >", "class_transform.html", null ],
         [ "Transform< int, float >", "class_transform.html", null ],
         [ "Transform< float, String >", "class_transform.html", null ],
-        [ "Transform< time_t, String >", "class_transform.html", null ],
+        [ "Transform< IN, OUT >", "class_transform.html", null ],
         [ "Transform< T, T >", "class_transform.html", null ],
         [ "Transform< String, bool >", "class_transform.html", null ],
-        [ "Transform< bool, ClickTypes >", "class_transform.html", null ],
+        [ "Transform< time_t, String >", "class_transform.html", null ],
+        [ "Transform< bool, String >", "class_transform.html", null ],
         [ "DigitalInputChange", "class_digital_input_change.html", null ],
         [ "DigitalInputCounter", "class_digital_input_counter.html", null ],
         [ "DigitalInputState", "class_digital_input_state.html", null ],
@@ -208,13 +201,13 @@ var hierarchy =
     ] ],
     [ "SmartSwitchController::SyncPath", "class_smart_switch_controller_1_1_sync_path.html", null ],
     [ "ValueConsumer< T >", "class_value_consumer.html", [
-      [ "Transform< time_t, String >", "class_transform.html", null ],
       [ "Transform< T, T >", "class_transform.html", null ],
+      [ "Transform< time_t, String >", "class_transform.html", null ],
       [ "SKPutRequest< T >", "class_s_k_put_request.html", null ]
     ] ],
     [ "ValueConsumer< bool >", "class_value_consumer.html", [
-      [ "Transform< bool, String >", "class_transform.html", null ],
       [ "Transform< bool, ClickTypes >", "class_transform.html", null ],
+      [ "Transform< bool, String >", "class_transform.html", null ],
       [ "RgbLed", "class_rgb_led.html", null ]
     ] ],
     [ "ValueConsumer< C >", "class_value_consumer.html", [

@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title="Classes that implement &quot;Enable&quot; will have their enable() method called automatically at startup when ..." alt="" coords="5,756,69,783"/>
 <area shape="rect" id="node2" href="$class_base_blinker.html" title="A base class for LED blinker classes." alt="" coords="128,267,221,293"/>
 <area shape="rect" id="node7" href="$class_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="143,756,207,783"/>
-<area shape="rect" id="node32" href="$class_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="119,1223,231,1249"/>
+<area shape="rect" id="node32" href="$class_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="119,1199,231,1225"/>
 <area shape="rect" id="node3" href="$class_pattern_blinker.html" title="A blinker that blinks the LED according to a defined repeating pattern." alt="" coords="319,267,424,293"/>
 <area shape="rect" id="node4" href="$class_periodic_blinker.html" title="A base class for periodic blinkers." alt="" coords="316,56,427,83"/>
 <area shape="rect" id="node5" href="$class_even_blinker.html" title="An LED blinker class that blinks the LED 50% off, 50% on, at a given period." alt="" coords="689,5,783,32"/>
@@ -31,21 +31,21 @@
 <area shape="rect" id="node28" href="$class_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="704,512,768,539"/>
 <area shape="rect" id="node29" href="$class_wifi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="695,563,777,589"/>
 <area shape="rect" id="node31" href="$class_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="693,731,779,757"/>
-<area shape="rect" id="node33" href="$class_transform.html" title=" " alt="" coords="659,1031,813,1057"/>
-<area shape="rect" id="node36" href="$class_transform.html" title=" " alt="" coords="649,1123,823,1149"/>
-<area shape="rect" id="node38" href="$class_transform.html" title=" " alt="" coords="660,1197,812,1224"/>
-<area shape="rect" id="node40" href="$class_transform.html" title=" " alt="" coords="649,1372,823,1399"/>
-<area shape="rect" id="node42" href="$class_transform.html" title=" " alt="" coords="669,1434,803,1475"/>
-<area shape="rect" id="node44" href="$class_transform.html" title=" " alt="" coords="673,1557,799,1584"/>
-<area shape="rect" id="node46" href="$class_transform.html" title=" " alt="" coords="670,1249,802,1290"/>
-<area shape="rect" id="node48" href="$class_transform.html" title=" " alt="" coords="635,1315,837,1341"/>
+<area shape="rect" id="node33" href="$class_transform.html" title=" " alt="" coords="635,1023,837,1049"/>
+<area shape="rect" id="node35" href="$class_transform.html" title=" " alt="" coords="660,1107,812,1133"/>
+<area shape="rect" id="node37" href="$class_transform.html" title=" " alt="" coords="649,1177,823,1204"/>
+<area shape="rect" id="node39" href="$class_transform.html" title=" " alt="" coords="659,1463,813,1489"/>
+<area shape="rect" id="node42" href="$class_transform.html" title=" " alt="" coords="673,1519,799,1545"/>
+<area shape="rect" id="node44" href="$class_transform.html" title=" " alt="" coords="670,1589,802,1630"/>
+<area shape="rect" id="node46" href="$class_transform.html" title=" " alt="" coords="669,1235,803,1277"/>
+<area shape="rect" id="node48" href="$class_transform.html" title=" " alt="" coords="649,1353,823,1380"/>
 <area shape="rect" id="node49" href="$class_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="306,1263,437,1289"/>
-<area shape="rect" id="node34" href="$class_lambda_transform.html" title=" " alt="" coords="1219,1011,1393,1053"/>
-<area shape="rect" id="node35" href="$class_lambda_transform.html" title="Construct a new transform based on a single function." alt="" coords="895,1036,1054,1092"/>
-<area shape="rect" id="node37" href="$class_truth_to_text.html" title="Consumes a boolean value and outputs one the appropriate truth string specified in the constructor...." alt="" coords="929,1123,1020,1149"/>
-<area shape="rect" id="node39" href="$class_frequency.html" title="Transforms its input into frequency (Hz: cycles per second)" alt="" coords="932,1197,1017,1224"/>
-<area shape="rect" id="node41" href="$class_heat_index_effect.html" title="Transforms heat index temperature to heat index effect." alt="" coords="917,1372,1033,1399"/>
-<area shape="rect" id="node43" href="$class_time_string.html" title="Consumes a time_t time object and produces a human readable string of the time for UTC in ISO 8601 fo..." alt="" coords="932,1441,1017,1468"/>
-<area shape="rect" id="node45" href="$class_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="887,1557,1063,1584"/>
-<area shape="rect" id="node47" href="$class_text_to_truth.html" title="Consumes a string and outputs boolean &quot;true&quot; if the text represents a human readable version of &quot;true..." alt="" coords="929,1256,1020,1283"/>
+<area shape="rect" id="node34" href="$class_click_type.html" title="ClickType is a transform that consumes button clicks and translates them as events of type ClickTypes..." alt="" coords="935,1023,1015,1049"/>
+<area shape="rect" id="node36" href="$class_frequency.html" title="Transforms its input into frequency (Hz: cycles per second)" alt="" coords="932,1107,1017,1133"/>
+<area shape="rect" id="node38" href="$class_heat_index_effect.html" title="Transforms heat index temperature to heat index effect." alt="" coords="917,1177,1033,1204"/>
+<area shape="rect" id="node40" href="$class_lambda_transform.html" title=" " alt="" coords="1219,1434,1393,1475"/>
+<area shape="rect" id="node41" href="$class_lambda_transform.html" title="Construct a new transform based on a single function." alt="" coords="895,1383,1054,1439"/>
+<area shape="rect" id="node43" href="$class_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="887,1519,1063,1545"/>
+<area shape="rect" id="node45" href="$class_text_to_truth.html" title="Consumes a string and outputs boolean &quot;true&quot; if the text represents a human readable version of &quot;true..." alt="" coords="929,1596,1020,1623"/>
+<area shape="rect" id="node47" href="$class_time_string.html" title="Consumes a time_t time object and produces a human readable string of the time for UTC in ISO 8601 fo..." alt="" coords="932,1243,1017,1269"/>
 </map>
