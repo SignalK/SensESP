@@ -4,14 +4,12 @@
 // Required for RemoteDebug
 #define USE_LIB_WEBSOCKET true
 
-#include "net/remote_debugger.h"
+#include "net/debug_output.h"
 #include "sensesp.h"
 #include "system/filesystem.h"
 #include "system/observablevalue.h"
 
 namespace sensesp {
-
-void SetupSerialDebug(uint32_t baudrate);
 
 /**
  * @brief The base class for SensESP applications.
@@ -70,7 +68,7 @@ class SensESPBaseApp {
   ObservableValue<String>* hostname_;
 
   Filesystem* filesystem_;
-  RemoteDebugger* remote_debugger_;
+  DebugOutput* debug_output_;
 
   const SensESPBaseApp* set_preset_hostname(String preset_hostname) {
     preset_hostname_ = preset_hostname;

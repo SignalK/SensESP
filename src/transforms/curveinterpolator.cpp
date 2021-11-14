@@ -1,6 +1,6 @@
 #include "curveinterpolator.h"
 
-#include <RemoteDebug.h>
+#include "sensesp.h"
 
 namespace sensesp {
 
