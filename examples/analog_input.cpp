@@ -47,7 +47,7 @@ ReactESP app([]() {
   // When it's dark, the sensor's output (as read by analogRead()) is 120, and
   // when it's bright, the output is 850, for a range of 730.
   uint8_t pin = A0;
-  uint read_delay = 500;
+  unsigned int read_delay = 500;
 
   auto* analog_input = new AnalogInput(pin, read_delay, analog_in_config_path);
 

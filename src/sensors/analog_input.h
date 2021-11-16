@@ -39,13 +39,13 @@ namespace sensesp {
  */
 class AnalogInput : public FloatSensor {
  public:
-  AnalogInput(uint8_t pin = A0, uint read_delay = 200, String config_path = "",
+  AnalogInput(uint8_t pin = A0, unsigned int read_delay = 200, String config_path = "",
               float output_scale = 1024.);
   void start() override final;
 
  private:
   uint8_t pin;
-  uint read_delay;
+  unsigned int read_delay;
   float output_scale;
   BaseAnalogReader* analog_reader;
   virtual void get_configuration(JsonObject& doc) override;

@@ -47,7 +47,7 @@ ReactESP app([]() {
  * every counter_read_delay ms, which can be configured in the Config UI at
  * counter_config_path.
  */
-uint counter_read_delay = 1000;
+unsigned int counter_read_delay = 1000;
 String counter_config_path = "/chain_counter/read_delay";
 auto *chain_counter = new DigitalInputCounter(COUNTER_PIN, INPUT_PULLUP, RISING,
                           counter_read_delay, counter_config_path);

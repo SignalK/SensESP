@@ -21,7 +21,7 @@ ReactESP app([]() {
   const char* sk_path = "environment.indoor.illuminance";
   const char* analog_in_config_path = "/indoor_illuminance/analog_in";
 
-  uint read_delay = 500;
+  unsigned int read_delay = 500;
 
 #ifdef ESP8266
   uint8_t pin = A0;

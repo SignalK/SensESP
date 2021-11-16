@@ -30,7 +30,7 @@ class Frequency : public Transform<int, float> {
  private:
   float multiplier_;
   int ticks_ = 0;
-  uint last_update_ = 0;
+  unsigned int last_update_ = 0;
 };
 
 }  // namespace sensesp

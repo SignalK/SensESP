@@ -62,7 +62,7 @@ ReactESP app([]() {
   // a frequency. The sample multiplier converts the 97 tooth
   // tach output into Hz, SK native units.
   const float multiplier = 1.0 / 97.0;
-  const uint read_delay = 500;
+  const unsigned int read_delay = 500;
 
   // Wire it all up by connecting the producer directly to the consumer
   // ESP8266 pins are specified as DX

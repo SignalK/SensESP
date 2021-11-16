@@ -5,6 +5,9 @@
 
 namespace sensesp {
 
+/**
+ * @brief Abstract base class for other SensESP*AppBuilder classes.
+ **/
 class SensESPBaseAppBuilder {
  protected:
   String hostname_ = "SensESP";
