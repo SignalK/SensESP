@@ -23,8 +23,6 @@
 
 namespace sensesp {
 
-void SetupSerialDebug(uint32_t baudrate);
-
 /**
  * The default SensESP application object with networking and Signal K
  * communication.
@@ -70,8 +68,8 @@ class SensESPApp : public SensESPBaseApp {
 
   // setters for all constructor arguments
 
-  const SensESPApp* set_preset_hostname(String preset_hostname) {
-    this->SensESPBaseApp::set_preset_hostname(preset_hostname);
+  const SensESPApp* set_hostname(String hostname) {
+    this->SensESPBaseApp::set_hostname(hostname);
     return this;
   }
   const SensESPApp* set_ssid(String ssid) {

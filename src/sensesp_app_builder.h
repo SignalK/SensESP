@@ -3,6 +3,9 @@
 
 #include "sensesp_app.h"
 #include "sensesp_base_app_builder.h"
+#include "sensors/system_info.h"
+
+const char* kDefaultSystemInfoSensorPrefix = "sensorDevice.";
 
 namespace sensesp {
 
@@ -34,7 +37,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     return this;
   }
   SensESPAppBuilder* set_hostname(String hostname) override final {
-    app_->set_preset_hostname(hostname);
+    app_->set_hostname(hostname);
     return this;
   }
   SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
@@ -45,6 +48,36 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     WSClient::test_auth_on_each_connect_ = val;
     return this;
   }
+  SensESPAppBuilder* enable_system_hz_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new SystemHz(), prefix, "systemHz");
+    return this;
+  }
+  SensESPAppBuilder* enable_free_mem_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new FreeMem(), prefix, "freeMemory");
+    return this;
+  }
+  SensESPAppBuilder* enable_uptime_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new Uptime(), prefix, "uptime");
+    return this;
+  }
+  SensESPAppBuilder* enable_ip_address_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new IPAddrDev(), prefix, "ipAddress");
+    return this;
+  }
+  SensESPAppBuilder* enable_wifi_signal_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+    connect_system_info_sensor(new WiFiSignal(), prefix, "wifiSignalLevel");
+    return this;
+  }
+
+  SensESPAppBuilder* enable_system_info_sensors(String prefix=kDefaultSystemInfoSensorPrefix) {
+    this->enable_system_hz_sensor(prefix);
+    this->enable_free_mem_sensor(prefix);
+    this->enable_uptime_sensor(prefix);
+    this->enable_ip_address_sensor(prefix);
+    this->enable_wifi_signal_sensor(prefix);
+    return this;
+  }
+
   SensESPApp* get_app() override final {
     app_->setup();
     return app_;
