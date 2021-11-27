@@ -8,7 +8,9 @@
 
 using namespace sensesp;
 
-ReactESP app([]() {
+ReactESP app;
+
+void setup() {
   SetupSerialDebug(115200);
 
   // Create a new SensESPApp object. This is the direct constructor call, and
@@ -85,4 +87,10 @@ ReactESP app([]() {
       ->connect_to(new SKOutputFloat(sk_path));
 
   sensesp_app->start();
-});
+}
+
+// The loop function is called in an endless loop during program execution.
+// It simply calls `app.tick()` which will then execute all reactions as needed.
+void loop() {
+  app.tick();
+}
