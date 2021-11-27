@@ -23,6 +23,7 @@ fi
 # udpate the doxygen docs
 
 git rm -rf docs/generated
+mkdir -p docs/generated
 doxygen
 git add docs/generated
 git commit -m "Update the Doxygen docs for version ${VERSION}"
