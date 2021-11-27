@@ -8,7 +8,9 @@
 
 using namespace sensesp;
 
-ReactESP app([]() {
+ReactESP app;
+
+void setup() {
   SetupSerialDebug(115200);
 
   SensESPAppBuilder builder;
@@ -49,4 +51,11 @@ ReactESP app([]() {
       ->connect_to(new SKOutputBool(sk_path));
 
   sensesp_app->start();
-});
+}
+
+// The loop function is called in an endless loop during program execution.
+// It simply calls `app.tick()` which will then execute all reactions as needed.
+void loop() {
+  app.tick();
+}
+
