@@ -6,17 +6,11 @@
 
 namespace sensesp {
 
-#ifdef ESP32
 // For info on frequency and resolution for ESP32, see
 // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#ledc-api-supported-range-frequency-duty-resolution
 #define CHANNEL_FREQUENCY 5000
 #define CHANNEL_RESOLUTION 13
 #define PWMRANGE 4095
-#endif
-
-#ifdef ESP8266
-#define PWMRANGE 1023
-#endif
 
 std::map<uint8_t, int8_t> PWMOutput::channel_to_pin_;
 

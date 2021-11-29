@@ -3,13 +3,8 @@
 #include <ArduinoJson.h>
 
 #include "Arduino.h"
-#ifdef ESP8266
-#include <ESP8266HTTPClient.h>
-#include <ESP8266mDNS.h>  // Include the mDNS library
-#elif defined(ESP32)
 #include <ESPmDNS.h>
 #include <HTTPClient.h>
-#endif
 
 #include <WiFiClient.h>
 

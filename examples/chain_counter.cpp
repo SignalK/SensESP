@@ -34,13 +34,8 @@ void setup() {
                     ->set_wifi("YourSSID", "YourPassword")
                     ->get_app();
 
-#ifdef ESP8266
-  uint8_t COUNTER_PIN = D7;
-  uint8_t BUTTON_PIN = D5;
-#elif defined(ESP32)
   uint8_t COUNTER_PIN = 32;
   uint8_t BUTTON_PIN = 34;
-#endif
 
   /**
    * DigitalInputCounter will count the revolutions of the windlass with a

@@ -1,10 +1,5 @@
-#ifdef ESP32
 #include "SPIFFS.h"
 #define SPIFFS_BEGIN SPIFFS.begin(true)
-#elif defined(ESP8266)
-#include "FS.h"
-#define SPIFFS_BEGIN SPIFFS.begin()
-#endif
 
 #include "filesystem.h"
 #include "sensesp.h"

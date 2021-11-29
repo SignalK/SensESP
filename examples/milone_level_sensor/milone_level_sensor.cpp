@@ -86,10 +86,10 @@ void setup() {
 
   // Create a sensor that is the source of our data, that will be read every 500 ms.
   // It's a Milone depth sensor that's connected to the ESP's AnalogIn pin.
-  // The AnalogIn pin on ESP8266 is always A0, but ESP32 has many pins that can be
+  // ESP32 has many pins that can be
   // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
+  uint8_t pin = 36;
 
-  uint8_t pin = A0;
   unsigned int read_delay = 500;
 
   auto *analog_input = new AnalogInput(pin, read_delay, kAnalogInConfigPath);
