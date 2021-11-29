@@ -26,6 +26,7 @@
   ],
   "dependencies": [
     {
+      "owner": "mairas",
       "name": "ReactESP",
       "version": "^2.0.0"
     },
@@ -34,14 +35,12 @@
       "platforms": "espressif8266"
     },
     {
-      "name": "DNSServer"
-    },
-    {
+      "owner": "me-no-dev",
       "name": "ESPAsyncTCP"
     },
     {
-      "name": "ESP Async WebServer",
-      "version": "https://github.com/me-no-dev/ESPAsyncWebServer"
+      "owner": "me-no-dev",
+      "name": "ESP Async WebServer"
     },
     {
       "name": "ESP8266WiFi",
@@ -52,17 +51,20 @@
       "platforms": "espressif8266"
     },
     {
+      "owner": "alanswx",
       "name": "ESPAsyncWiFiManager"
     },
     {
+      "owner": "bblanchon",
       "name": "ArduinoJson"
     },
     {
+      "owner": "links2004",
       "name": "WebSockets"
     },
     {
-      "name": "elapsedMillis",
-      "version": "https://github.com/pfeerick/elapsedMillis"
+      "owner": "pfeerick",
+      "name": "elapsedMillis"
     },
     {
       "name": "RemoteDebug",
