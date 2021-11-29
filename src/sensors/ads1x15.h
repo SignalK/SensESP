@@ -67,7 +67,7 @@ class ADS1x15RawValue : public NumericSensor {
   T_ads_1x15* ads1x15_;
   ADS1x15Channel_t channel_;
   uint read_delay_;
-  uint16_t raw_value_ = 0;
+  int16_t raw_value_ = 0;
 
  private:
   virtual void get_configuration(JsonObject& doc) override;
