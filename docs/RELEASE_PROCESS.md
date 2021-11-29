@@ -63,7 +63,7 @@ The release process is as follows:
 8. All that remains is to update the master branch. Create a new `release_x.y.z_to_master` branch based
    on `latest`. Run
    
-       bumpversion release
+       bumpversion patch
 
    to bump the version to `x.y.z+1-alpha`.
 

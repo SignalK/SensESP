@@ -17,6 +17,11 @@
 
 namespace sensesp {
 
+// Typically, pulling a namespace into another is something to be avoided,
+// but ReactESP and SensESP are tightly knit together, and having to explicitly
+// manage the reactesp namespace might be confusing for some users.
+using namespace reactesp;
+
 typedef std::function<void()> void_cb_func;
 
 #ifndef DEBUG_DISABLED

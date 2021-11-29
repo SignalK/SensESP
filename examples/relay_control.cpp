@@ -18,8 +18,10 @@ using namespace sensesp;
 // light when it gets dark outside.
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
-// defines an "app" object (vs. defining a "main()" method).
-ReactESP app([]() {
+// defines an "app" object.
+ReactESP app;
+
+void setup() {
 
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
@@ -60,4 +62,11 @@ ReactESP app([]() {
 
   // Start the SensESP application running
   sensesp_app->start();
-});
+}
+
+// The loop function is called in an endless loop during program execution.
+// It simply calls `app.tick()` which will then execute all reactions as needed.
+void loop() {
+  app.tick();
+}
+

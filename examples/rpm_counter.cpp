@@ -10,8 +10,10 @@
 using namespace sensesp;
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
-// defines an "app" object vs defining a "main()" method.
-ReactESP app([]() {
+// defines an "app" object.
+ReactESP app;
+
+void setup() {
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
 #endif
@@ -86,4 +88,10 @@ ReactESP app([]() {
   // set up above, it constantly monitors the interrupt pin, and every
   // read_delay ms, it sends the calculated frequency to Signal K.
   sensesp_app->start();
-});
+}
+
+// The loop function is called in an endless loop during program execution.
+// It simply calls `app.tick()` which will then execute all reactions as needed.
+void loop() {
+  app.tick();
+}

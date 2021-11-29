@@ -9,7 +9,9 @@
 
 using namespace sensesp;
 
-ReactESP app([]() {
+ReactESP app;
+
+void setup() {
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
 #endif
@@ -39,4 +41,10 @@ ReactESP app([]() {
       new SKOutputFloat("tanks.fuel.0.currentLevel"));
 
   sensesp_app->start();
-});
+}
+
+// The loop function is called in an endless loop during program execution.
+// It simply calls `app.tick()` which will then execute all reactions as needed.
+void loop() {
+  app.tick();
+}
