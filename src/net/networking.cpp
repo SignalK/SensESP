@@ -50,16 +50,6 @@ void Networking::start() {
 }
 
 void Networking::setup_wifi_callbacks() {
-#if defined(ESP8266)
-  got_ip_event_handler_ =
-      WiFi.onStationModeGotIP([this](const WiFiEventStationModeGotIP& event) {
-        this->wifi_station_connected();
-      });
-  wifi_disconnected_event_handler_ = WiFi.onStationModeDisconnected(
-      [this](const WiFiEventStationModeDisconnected& event) {
-        this->wifi_station_disconnected();
-      });
-#elif defined(ESP32)
   WiFi.onEvent([this](WiFiEvent_t event,
                       WiFiEventInfo_t info) { this->wifi_station_connected(); },
                WiFiEvent_t::SYSTEM_EVENT_STA_GOT_IP);
@@ -68,7 +58,6 @@ void Networking::setup_wifi_callbacks() {
         this->wifi_station_disconnected();
       },
       WiFiEvent_t::SYSTEM_EVENT_STA_DISCONNECTED);
-#endif
 }
 
 void Networking::setup_saved_ssid() {
@@ -78,11 +67,7 @@ void Networking::setup_saved_ssid() {
   const char* hostname =
       SensESPBaseApp::get()->get_hostname_observable()->get().c_str();
 
-#ifdef ESP32
   WiFi.setHostname(hostname);
-#elif defined(ESP8266)
-  WiFi.hostname(hostname);
-#endif
 
   WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
 
@@ -94,9 +79,6 @@ void Networking::wifi_station_connected() {
          WiFi.RSSI());
   debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
   this->emit(WifiState::kWifiConnectedToAP);
-#if defined(ESP8266)
-  WiFi.mode(WIFI_STA);  // so "Configure <hostname>" AP won't appear
-#endif
 }
 
 void Networking::wifi_station_disconnected() {
@@ -130,12 +112,8 @@ void Networking::setup_wifi_manager() {
 
   this->emit(WifiState::kWifiManagerActivated);
 
-#ifdef ESP32
   WiFi.setHostname(
       SensESPBaseApp::get()->get_hostname_observable()->get().c_str());
-#elif defined(ESP8266)
-  WiFi.hostname(sensesp_app->get_hostname_observable()->get().c_str());
-#endif
 
   if (!wifi_manager->autoConnect(pconfig_ssid)) {
     debugE("Failed to connect to wifi and config timed out. Restarting...");

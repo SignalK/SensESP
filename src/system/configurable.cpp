@@ -2,11 +2,7 @@
 
 #include "sensesp.h"
 
-#ifdef ESP8266
-#include "FS.h"
-#elif defined(ESP32)
 #include "SPIFFS.h"
-#endif
 
 namespace sensesp {
 

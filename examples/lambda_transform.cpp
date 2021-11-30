@@ -31,11 +31,7 @@ void setup() {
 
   unsigned int read_delay = 500;
 
-#ifdef ESP8266
-  uint8_t pin = A0;
-#elif defined(ESP32)
   uint8_t pin = 32;
-#endif
 
   float output_scale = 3.3;
 

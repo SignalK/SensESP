@@ -23,8 +23,7 @@ namespace sensesp {
  * <p>On an esp32, the "channel" corresponds to one of the timer
  * channels available on the onboard chip.  Explicit declaration
  * of a channel may or may not be necessary depending on other
- * libraries that you may be using. On an esp8266, the channel
- * is an artificial concept. Unless you have a need to use an
+ * libraries that you may be using. Unless you have a need to use an
  * explicit channel (e.g. if some other software is already using
  * a particular esp32 timer channel), the channel auto-assign
  * feature is the easiest to use. In either event, using this

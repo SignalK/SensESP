@@ -2,10 +2,6 @@
 
 namespace sensesp {
 
-#ifdef ESP8266
-static uint32_t esp_random() { return RANDOM_REG32; }
-#endif
-
 String generate_uuid4() {
   // implementation copied from https://github.com/protohaus/ESP_UUID
   // to avoid additional external dependencies.

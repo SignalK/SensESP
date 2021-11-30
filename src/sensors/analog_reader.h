@@ -10,8 +10,7 @@
 namespace sensesp {
 
 /**
- * @brief Used by AnalogInput to properly read the very different ADC's of
- * the ESP8266 and ESP32.
+ * @brief Used by AnalogInput as a hardware abstraction layer
  **/
 class BaseAnalogReader {
  private:
@@ -22,21 +21,6 @@ class BaseAnalogReader {
   virtual float read() = 0;
 };
 
-#ifdef ESP8266
-class ESP8266AnalogReader : public BaseAnalogReader {
- private:
-  uint8_t pin_;
-  const unsigned int kAdcMax_ = 1024;
-
- public:
-  ESP8266AnalogReader(uint8_t pin) : pin_{pin} { pinMode(pin, INPUT); }
-  bool configure() { return true; }
-  float read() { return (float)analogRead(pin_) / kAdcMax_; }
-};
-typedef ESP8266AnalogReader AnalogReader;
-#endif
-
-#ifdef ESP32
 class ESP32AnalogReader : public BaseAnalogReader {
  private:
   int pin_;
@@ -77,7 +61,6 @@ class ESP32AnalogReader : public BaseAnalogReader {
   }
 };
 typedef ESP32AnalogReader AnalogReader;
-#endif
 
 }  // namespace sensesp
 

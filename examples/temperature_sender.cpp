@@ -145,10 +145,10 @@ void setup() {
   const float R1 = 51.0;
 
   // An AnalogInput gets the value from the microcontroller's AnalogIn pin,
-  // which is a value from 0 to 1023. The AnalogIn pin on ESP8266 is always A0,
-  // but ESP32 has many pins that can be used for AnalogIn, and they're
+  // which is a value from 0 to 1023.
+  // ESP32 has many pins that can be used for AnalogIn, and they're
   // expressed here as the XX in GPIOXX.
-  auto* analog_input = new AnalogInput(A0);
+  auto* analog_input = new AnalogInput(36);
 
   /* Translating the number returned by AnalogInput into a temperature, and
      sending it to Signal K, requires several transforms. Wire them up in
