@@ -174,6 +174,22 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     app_->enable_ota(password);
     return this;
   }
+
+  /**
+   * @brief Set the wifi manager password.
+   *
+   * Set the password for the WiFi configuration access point
+   * that is enabled after device reset if no wifi configuration
+   * is provided in the application code.
+   *
+   * @param password
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* set_wifi_manager_password(const char* password) {
+    app_->set_wifi_manager_password(password);
+    return this;
+  }
+
   /**
    * @brief Get the SensESPApp object.
    *
