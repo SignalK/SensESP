@@ -92,12 +92,15 @@ class SensESPApp : public SensESPBaseApp {
     this->system_status_led_ = system_status_led;
     return this;
   }
+  const SensESPApp* enable_ota(const char* password) {
+    ota_password_ = password;
+  }
 
- protected:
   String ssid_ = "";
   String wifi_password_ = "";
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
+  const char* ota_password_ = nullptr;
 
   ObservableValue<String>* hostname_;
 

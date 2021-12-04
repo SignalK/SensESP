@@ -78,6 +78,16 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     return this;
   }
 
+  /**
+   * @brief Enable over-the-air updates for the device.
+   *
+   * @param password OTA authentication password.
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* enable_ota(const char* password) {
+    app_->enable_ota(password);
+    return this;
+  }
   SensESPApp* get_app() override final {
     app_->setup();
     return app_;
