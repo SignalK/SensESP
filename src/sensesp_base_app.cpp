@@ -59,4 +59,13 @@ ObservableValue<String>* SensESPBaseApp::get_hostname_observable() {
   return hostname_;
 }
 
+/**
+ * @brief Get the current hostname.
+ *
+ * @return String
+ */
+String SensESPBaseApp::get_hostname() {
+  return SensESPBaseApp::get()->get_hostname_observable()->get();
+}
+
 }  // namespace sensesp

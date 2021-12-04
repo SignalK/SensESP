@@ -56,6 +56,8 @@ class SensESPBaseApp {
    */
   ObservableValue<String>* get_hostname_observable();
 
+  static String get_hostname();
+
  protected:
   /**
    * @brief Construct a new SensESP Base App object

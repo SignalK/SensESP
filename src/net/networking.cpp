@@ -65,7 +65,7 @@ void Networking::setup_saved_ssid() {
   setup_wifi_callbacks();
 
   const char* hostname =
-      SensESPBaseApp::get()->get_hostname_observable()->get().c_str();
+      SensESPBaseApp::get_hostname().c_str();
 
   WiFi.setHostname(hostname);
 
@@ -89,7 +89,7 @@ void Networking::wifi_station_disconnected() {
 void Networking::setup_wifi_manager() {
   should_save_config = false;
 
-  String hostname = SensESPBaseApp::get()->get_hostname_observable()->get();
+  String hostname = SensESPBaseApp::get_hostname();
 
   setup_wifi_callbacks();
 
@@ -106,14 +106,14 @@ void Networking::setup_wifi_manager() {
   wifi_manager->addParameter(&custom_hostname);
 
   // Create a unique SSID for configuring each SensESP Device
-  String config_ssid = SensESPBaseApp::get()->get_hostname_observable()->get();
+  String config_ssid = SensESPBaseApp::get_hostname();
   config_ssid = "Configure " + config_ssid;
   const char* pconfig_ssid = config_ssid.c_str();
 
   this->emit(WifiState::kWifiManagerActivated);
 
   WiFi.setHostname(
-      SensESPBaseApp::get()->get_hostname_observable()->get().c_str());
+      SensESPBaseApp::get_hostname().c_str());
 
   if (!wifi_manager->autoConnect(pconfig_ssid, wifi_manager_password_)) {
     debugE("Failed to connect to wifi and config timed out. Restarting...");
@@ -173,7 +173,7 @@ String Networking::get_config_schema() {
 // FIXME: hostname should be saved in SensESPApp
 
 void Networking::get_configuration(JsonObject& root) {
-  // root["hostname"] = SensESPBaseApp::get()->get_hostname_observable()->get();
+  // root["hostname"] = SensESPBaseApp::get_hostname();
 }
 
 bool Networking::set_configuration(const JsonObject& config) {

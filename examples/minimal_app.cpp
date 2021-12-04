@@ -40,7 +40,7 @@ void setup() {
   // the HTTP configuration interface
 
   auto* networking = new Networking(
-      "/system/net", "", "", sensesp_app->get_hostname_observable()->get(),
+      "/system/net", "", "", sensesp_app->get_hostname(),
       "thisisfine");
   auto* http_server = new HTTPServer();
 
