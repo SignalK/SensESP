@@ -20,8 +20,10 @@ void SensESPApp::setup() {
   SensESPBaseApp::setup();
 
   // create the networking object
-  networking_ = new Networking("/system/networking", ssid_, wifi_password_,
-                               SensESPBaseApp::get()->get_hostname_observable()->get());
+  networking_ =
+      new Networking("/system/networking", ssid_, wifi_password_,
+                     SensESPBaseApp::get()->get_hostname_observable()->get(),
+                     wifi_manager_password_);
 
   if (ota_password_ != nullptr) {
     // create the OTA object

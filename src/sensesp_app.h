@@ -101,6 +101,7 @@ class SensESPApp : public SensESPBaseApp {
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
   const char* ota_password_ = nullptr;
+  const char* wifi_manager_password_ = "thisisfine";
 
   ObservableValue<String>* hostname_;
 
