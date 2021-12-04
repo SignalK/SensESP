@@ -25,21 +25,62 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
   SensESPApp* app_;
 
  public:
+  /**
+   * @brief Construct a new SensESPApp Builder object.
+   *
+   * SensESPAppBuilder is used to instantiate a SensESPApp
+   * object with non-trivial configuration.
+   */
   SensESPAppBuilder() { app_ = SensESPApp::get(); }
+  /**
+   * @brief Set the Wi-Fi network SSID and password.
+   *
+   * If not set, WiFiManager is used to create an access point for configuring
+   * the settings.
+   *
+   * @param ssid
+   * @param password
+   * @return SensESPAppBuilder*
+   */
   SensESPAppBuilder* set_wifi(String ssid, String password) {
     app_->set_ssid(ssid);
     app_->set_wifi_password(password);
     return this;
   }
+  /**
+   * @brief Set the Signal K server address and port.
+   *
+   * If not set, mDNS is used to discover the Signal K server.
+   *
+   * @param address
+   * @param port
+   * @return SensESPAppBuilder*
+   */
   SensESPAppBuilder* set_sk_server(String address, uint16_t port) {
     app_->set_sk_server_address(address);
     app_->set_sk_server_port(port);
     return this;
   }
+  /**
+   * @brief Set the device hostname.
+   *
+   * If not set, the device hostname is set to "SensESP".
+   *
+   * @param hostname
+   * @return SensESPAppBuilder*
+   */
   SensESPAppBuilder* set_hostname(String hostname) override final {
     app_->set_hostname(hostname);
     return this;
   }
+  /**
+   * @brief Set the system status led object.
+   *
+   * This allows custom status LED patterns to be used.
+   *
+   * @param system_status_led
+   * @return SensESPAppBuilder*
+   */
   SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
     app_->set_system_status_led(system_status_led);
     return this;
@@ -48,28 +89,73 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     WSClient::test_auth_on_each_connect_ = val;
     return this;
   }
-  SensESPAppBuilder* enable_system_hz_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+  /**
+   * @brief Enable the System Hz sensor.
+   *
+   * The System Hz sensor is a built-in sensor that measures how many
+   * times the system loop is executed per second.
+   *
+   * @param prefix
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* enable_system_hz_sensor(
+      String prefix = kDefaultSystemInfoSensorPrefix) {
     connect_system_info_sensor(new SystemHz(), prefix, "systemHz");
     return this;
   }
-  SensESPAppBuilder* enable_free_mem_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+  /**
+   * @brief Enable the free memory sensor.
+   *
+   * @param prefix
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* enable_free_mem_sensor(
+      String prefix = kDefaultSystemInfoSensorPrefix) {
     connect_system_info_sensor(new FreeMem(), prefix, "freeMemory");
     return this;
   }
-  SensESPAppBuilder* enable_uptime_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+  /**
+   * @brief Report the system uptime in seconds since the last reboot.
+   *
+   * @param prefix
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* enable_uptime_sensor(
+      String prefix = kDefaultSystemInfoSensorPrefix) {
     connect_system_info_sensor(new Uptime(), prefix, "uptime");
     return this;
   }
-  SensESPAppBuilder* enable_ip_address_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+  /**
+   * @brief Report the IP address of the device.
+   *
+   * @param prefix
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* enable_ip_address_sensor(
+      String prefix = kDefaultSystemInfoSensorPrefix) {
     connect_system_info_sensor(new IPAddrDev(), prefix, "ipAddress");
     return this;
   }
-  SensESPAppBuilder* enable_wifi_signal_sensor(String prefix=kDefaultSystemInfoSensorPrefix) {
+  /**
+   * @brief Report the Wi-Fi signal strength.
+   *
+   * @param prefix
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* enable_wifi_signal_sensor(
+      String prefix = kDefaultSystemInfoSensorPrefix) {
     connect_system_info_sensor(new WiFiSignal(), prefix, "wifiSignalLevel");
     return this;
   }
 
-  SensESPAppBuilder* enable_system_info_sensors(String prefix=kDefaultSystemInfoSensorPrefix) {
+  /**
+   * @brief Enable all built-in system info sensors.
+   *
+   * @param prefix
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* enable_system_info_sensors(
+      String prefix = kDefaultSystemInfoSensorPrefix) {
     this->enable_system_hz_sensor(prefix);
     this->enable_free_mem_sensor(prefix);
     this->enable_uptime_sensor(prefix);
@@ -88,6 +174,13 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     app_->enable_ota(password);
     return this;
   }
+  /**
+   * @brief Get the SensESPApp object.
+   *
+   * Return a SensESPApp object that has been setup.
+   *
+   * @return SensESPApp*
+   */
   SensESPApp* get_app() override final {
     app_->setup();
     return app_;
