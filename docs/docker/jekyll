@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+export JEKYLL_VERSION=latest
+docker run --rm \
+  --volume="$PWD:/srv/jekyll" \
+  --volume="$PWD/.bundle:/usr/local/bundle" \
+  --publish 4000:4000/tcp \
+  -it jekyll-dev-builder:$JEKYLL_VERSION \
+  "$@"
