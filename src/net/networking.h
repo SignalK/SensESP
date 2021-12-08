@@ -30,7 +30,8 @@ class Networking : public Configurable,
                    public Resettable,
                    public ValueProducer<WifiState> {
  public:
-  Networking(String config_path, String ssid, String password, String hostname);
+  Networking(String config_path, String ssid, String password, String hostname,
+             const char* wifi_manager_password);
   virtual void start() override;
   virtual void reset() override;
 
@@ -60,6 +61,7 @@ class Networking : public Configurable,
   String preset_ssid = "";
   String preset_password = "";
   String preset_hostname = "";
+  const char* wifi_manager_password_;
 };
 
 }  // namespace sensesp

@@ -19,8 +19,8 @@ bool should_save_config = false;
 void save_config_callback() { should_save_config = true; }
 
 Networking::Networking(String config_path, String ssid, String password,
-                       String hostname)
-    : Configurable{config_path}, Startable(80), Resettable(0) {
+                       String hostname, const char* wifi_manager_password)
+    : Configurable{config_path}, wifi_manager_password_{wifi_manager_password}, Startable(80), Resettable(0) {
   this->output = WifiState::kWifiNoAP;
 
   preset_ssid = ssid;
@@ -115,7 +115,7 @@ void Networking::setup_wifi_manager() {
   WiFi.setHostname(
       SensESPBaseApp::get()->get_hostname_observable()->get().c_str());
 
-  if (!wifi_manager->autoConnect(pconfig_ssid)) {
+  if (!wifi_manager->autoConnect(pconfig_ssid, wifi_manager_password_)) {
     debugE("Failed to connect to wifi and config timed out. Restarting...");
 
     this->emit(WifiState::kWifiDisconnected);
