@@ -2,6 +2,7 @@
 layout: default
 title: How do I ... ?
 nav_order: 60
+has_children: true
 ---
 
 # How do I ... ?
