@@ -9,7 +9,7 @@ namespace sensesp {
 
 void MDNSDiscovery::start() {
   const char* hostname =
-      SensESPBaseApp::get()->get_hostname_observable()->get().c_str();
+      SensESPBaseApp::get_hostname().c_str();
 
   // MDNS.begin(hostname) will crash if hostname is blank
   if ((hostname == NULL) || (hostname[0] == '\0')) {

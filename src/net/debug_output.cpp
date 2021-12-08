@@ -16,7 +16,7 @@ DEBUG_CLASS Debug;
 
 void DebugOutput::start() {
 #ifndef DEBUG_DISABLED
-  Debug.begin(SensESPBaseApp::get()->get_hostname_observable()->get());
+  Debug.begin(SensESPBaseApp::get_hostname());
   Debug.setResetCmdEnabled(true);
 // serial port debugging happens synchronously
 #ifdef REMOTE_DEBUG

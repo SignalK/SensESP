@@ -95,7 +95,7 @@ void SKDeltaQueue::get_delta(String& output) {
 
   JsonObject current = updates.createNestedObject();
   JsonObject source = current.createNestedObject("source");
-  source["label"] = SensESPBaseApp::get()->get_hostname_observable()->get();
+  source["label"] = SensESPBaseApp::get_hostname();
   JsonArray values = current.createNestedArray("values");
 
   while (!buffer.empty()) {
