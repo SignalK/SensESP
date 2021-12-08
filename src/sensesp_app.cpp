@@ -23,8 +23,10 @@ void SensESPApp::setup() {
   networking_ = new Networking("/system/networking", ssid_, wifi_password_,
                                SensESPBaseApp::get()->get_hostname_observable()->get());
 
-  // create the OTA object
-  ota_ = new OTA();
+  if (ota_password_ != nullptr) {
+    // create the OTA object
+    ota_ = new OTA(ota_password_);
+  }
 
   // create the HTTP server
   this->http_server_ = new HTTPServer();

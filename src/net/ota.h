@@ -7,10 +7,16 @@ namespace sensesp {
 
 class OTA : public Startable {
  public:
-  OTA() : Startable{0} {}
+  /**
+   * @brief Construct a new OTA (Over-the-air update) object
+   *
+   * @param password A password to be used for the OTA update.
+   */
+  OTA(const char* password) : Startable{0}, password_{password} {}
   virtual void start() override;
 
  private:
+  const char* password_;
   static void handle_ota();
 };
 

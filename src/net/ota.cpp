@@ -7,15 +7,8 @@
 
 namespace sensesp {
 
-// Password for Over-the-air (OTA) updates
-#ifndef OTA_PASSWORD
-//#define OTA_PASSWORD "bonvoyage"
-#endif
-
 void OTA::start() {
-#ifdef OTA_PASSWORD
-  ArduinoOTA.setPassword((const char *)OTA_PASSWORD);
-#endif
+  ArduinoOTA.setPassword(password_);
   ArduinoOTA.onStart([]() { debugW("Starting OTA"); });
   ArduinoOTA.onEnd([]() { debugW("OTA End"); });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
