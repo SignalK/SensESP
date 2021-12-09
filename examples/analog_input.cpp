@@ -7,7 +7,7 @@
 #include "transforms/linear.h"
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
-// defines an "app" object vs defining a "main()" method.
+// defines an "app" object vs. defining a "main()" method.
 ReactESP app([]() {
 
 // Some initialization boilerplate when in debug mode...
@@ -27,7 +27,7 @@ ReactESP app([]() {
 
   // The "Configuration path" is combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
-  // It is ALSO used to specify a path to the SPIFFS file system
+  // It is ALSO used to specify a path to the file system
   // where configuration data is saved on the MCU board. It should
   // ALWAYS start with a forward slash if specified. If left blank,
   // that indicates this sensor or transform does not have any
@@ -36,7 +36,7 @@ ReactESP app([]() {
   const char* analog_in_config_path = "/indoor_illuminance/analog_in";
   const char* linear_config_path = "/indoor_illuminance/linear";
 
-  // Create a sensor that is the source of our data, that will be read every 500
+  // Create a sensor that is the source of the data, which will be read every 500
   // ms. It's a light sensor that's connected to the ESP's AnalogIn pin. The
   // AnalogIn pin on ESP8266 is always A0, but ESP32 has many pins that can be
   // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
@@ -48,24 +48,41 @@ ReactESP app([]() {
   auto* analog_input = new AnalogInput(pin, read_delay, analog_in_config_path);
 
   // A Linear transform takes its input, multiplies it by the multiplier, then
-  // adds the offset, to calculate its output. In this example, we want to see
-  // the final output presented as a percentage, where dark = 0% and bright =
-  // 100%. To get a percentage, we use this formula: sensor output * (100 / 730)
-  // - 16.44 = output (a percentage from 0 to 100). Dark = 120 * (100 / 730) +
-  // (-16.44) = 0% Bright = 850 * (100 / 730) + (-16.44) = 100%
-  const float multiplier =
-      0.137;  // 100% divided by 730 = 0.137 "percent per analogRead() unit"
-  const float offset = -16.44;
-
-  // Wire up the output of the analog input to the Linear transform,
-  // and then output the results to the Signal K server. As part of
-  // that output, send some metadata to indicate that the "units"
-  // of the value we are sending is a "ratio" - which is the official
-  // unit type for a percentage represented as a float between 0.0 and 1.0
+  // adds the offset, to calculate its output. In this example, the final output
+  // will be presented as a ratio, where dark = 0.0 and bright = 1.0.
+  // (In the final output, on a gauge in Instrument Panel, for example, it will
+  // look like a percentage from 0 to 100, but the official "unit"  in the
+  // Signal K specification for a percentage is "ratio".)
   // See https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
   // for more details.
+  //
+  // First, calculate the multiplier. Since the total measurement range
+  // is 730 "analogRead units", and that will be represented by a total
+  // output range of 1.000 (from 0.000 to 1.000), divide 1.000 by 730 to
+  // get the "value per analogRead unit": 1.000 / 730 = 0.00137
+  //
+  // To calculate the offset, multiply the analogRead units at Dark times
+  // the multiplier: 120 * 0.00137 = 0.1644
+  // and make it negative, because the final value for "dark" needs to be 0.000.
+  //
+  // Proof:
+  // Dark = 120 analogRead units x 0.00137 = 0.1644
+  //        0.1644 + -0.1644 = 0.000
+  // Bright = 850 analogRead units x 0.00137 = 1.1645
+  //        1.1645 + -0.1644 = 1.0001 (rounds to 1.000)
+  
+  const float multiplier = 0.00137;
+  const float offset = -0.1644;
+
+  // Connect the output of the analog input to the Linear transform,
+  // and then output the results to the Signal K server. As part of
+  // that output, send some metadata to indicate that the "units"
+  // to be used to display this value is "ratio". Also specify that
+  // the display name for this value, to be used by any Signal K
+  // consumer that displays it, is "Indoor light".
   analog_input->connect_to(new Linear(multiplier, offset, linear_config_path))
-      ->connect_to(new SKOutputNumber(sk_path, "", new SKMetadata("ratio")));
+      ->connect_to(new SKOutputNumber(sk_path, "",
+                                      new SKMetadata("ratio", "Indoor light")));
 
   // Start the SensESP application running
   sensesp_app->enable();
