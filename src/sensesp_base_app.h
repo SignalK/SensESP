@@ -32,12 +32,6 @@ class SensESPBaseApp {
   static SensESPBaseApp* get();
 
   /**
-   * @brief Initialize the app
-   *
-   */
-  virtual void setup();
-
-  /**
    * @brief Start the app (activate all the subcomponents)
    *
    */
@@ -67,6 +61,8 @@ class SensESPBaseApp {
    * refactored into a singleton.
    */
   SensESPBaseApp();
+
+  virtual void setup();
 
   static SensESPBaseApp* instance_;
 
