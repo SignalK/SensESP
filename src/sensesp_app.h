@@ -109,8 +109,6 @@ class SensESPApp : public SensESPBaseApp {
   const char* ota_password_ = nullptr;
   const char* wifi_manager_password_ = "thisisfine";
 
-  ObservableValue<String>* hostname_;
-
   Filesystem* filesystem_;
   DebugOutput* debug_output_;
   MDNSDiscovery* mdns_discovery_;
