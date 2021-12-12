@@ -15,6 +15,13 @@ SensESPApp* SensESPApp::get() {
   return (SensESPApp*)instance_;
 }
 
+/**
+ * @brief Perform initialization of SensESPApp once builder configuration is
+ * done.
+ *
+ * This should be only called from the builder!
+ *
+ */
 void SensESPApp::setup() {
   // call the parent setup()
   SensESPBaseApp::setup();
@@ -22,8 +29,7 @@ void SensESPApp::setup() {
   // create the networking object
   networking_ =
       new Networking("/system/networking", ssid_, wifi_password_,
-                     SensESPBaseApp::get_hostname(),
-                     wifi_manager_password_);
+                     SensESPBaseApp::get_hostname(), wifi_manager_password_);
 
   if (ota_password_ != nullptr) {
     // create the OTA object
