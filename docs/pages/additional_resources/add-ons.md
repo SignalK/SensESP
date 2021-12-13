@@ -1,6 +1,13 @@
+---
+layout: default
+title: Add-ons and related projects
+parent: Additional resources
+nav_order: 10
+---
+
 # List of SensESP add-ons and related projects
 
-This page lists different add-ons and other projects related to [SensESP](https://github.com/SignalK/SensESP).
+This page lists different add-ons and other projects related to SensESP.
 
 If you want to have your own project added to the list, [make a PR](https://github.com/SignalK/SensESP/pulls) or [create an issue](https://github.com/SignalK/SensESP/issues) for it.
 
