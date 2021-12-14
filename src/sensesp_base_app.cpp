@@ -29,6 +29,13 @@ SensESPBaseApp::SensESPBaseApp() {
  */
 SensESPBaseApp* SensESPBaseApp::get() { return instance_; }
 
+/**
+ * @brief Perform initialization of SensESPBaseApp once builder configuration is
+ * done.
+ *
+ * This should be only called from the builder!
+ *
+ */
 void SensESPBaseApp::setup() {
   // initialize the filesystem
   filesystem_ = new Filesystem();

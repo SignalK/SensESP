@@ -45,7 +45,6 @@ class SensESPApp : public SensESPBaseApp {
    */
   static SensESPApp* get();
 
-  void setup();
   ObservableValue<String>* get_hostname_observable();
 
   // getters for internal members
@@ -99,14 +98,16 @@ class SensESPApp : public SensESPBaseApp {
     wifi_manager_password_ = password;
   }
 
+  void setup();
+
+
+
   String ssid_ = "";
   String wifi_password_ = "";
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
   const char* ota_password_ = nullptr;
   const char* wifi_manager_password_ = "thisisfine";
-
-  ObservableValue<String>* hostname_;
 
   Filesystem* filesystem_;
   DebugOutput* debug_output_;
