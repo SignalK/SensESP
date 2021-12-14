@@ -1,13 +1,11 @@
 #include "ws_client.h"
 
 #include <ArduinoJson.h>
-
-#include "Arduino.h"
 #include <ESPmDNS.h>
 #include <HTTPClient.h>
-
 #include <WiFiClient.h>
 
+#include "Arduino.h"
 #include "sensesp_app.h"
 #include "signalk/signalk_listener.h"
 #include "signalk/signalk_put_request.h"
@@ -19,8 +17,6 @@ namespace sensesp {
 WSClient* ws_client;
 
 static const char* kRequestPermission = "readwrite";
-
-bool WSClient::test_auth_on_each_connect_ = true;
 
 void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   switch (type) {
@@ -299,16 +295,8 @@ void WSClient::connect() {
     return;
   }
 
-  if (test_auth_on_each_connect_ || !token_test_success_) {
-    // Test the validity of the authorization token for the first time...
-    this->test_token(server_address, server_port);
-  } else {
-    // The token has already been validated once,
-    // so we must be trying a subsequent reconnect.
-    // Jump directly to opening up the websocket...
-    server_detected_ = true;
-    this->connect_ws(server_address, server_port);
-  }
+  // Test the validity of the authorization token
+  this->test_token(server_address, server_port);
 }
 
 void WSClient::test_token(const String server_address,
@@ -364,8 +352,8 @@ void WSClient::send_access_request(const String server_address,
   // create a new access request
   DynamicJsonDocument doc(1024);
   doc["clientId"] = client_id_;
-  doc["description"] = String("SensESP device: ") +
-                       SensESPBaseApp::get_hostname();
+  doc["description"] =
+      String("SensESP device: ") + SensESPBaseApp::get_hostname();
   doc["permissions"] = kRequestPermission;
   String json_req = "";
   serializeJson(doc, json_req);

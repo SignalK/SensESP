@@ -85,10 +85,6 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     app_->set_system_status_led(system_status_led);
     return this;
   }
-  SensESPAppBuilder* set_test_auth_on_each_connect(bool val) {
-    WSClient::test_auth_on_each_connect_ = val;
-    return this;
-  }
   /**
    * @brief Enable the System Hz sensor.
    *
