@@ -51,6 +51,35 @@ typedef SensorT<float> FloatSensor;
 typedef SensorT<int> IntSensor;
 typedef SensorT<String> StringSensor;
 
+template <class T>
+class RepeatSensor : public SensorT<T> {
+ public:
+  /**
+   * @brief Construct a new RepeatSensor object.
+   *
+   * RepeatSensor is a sensor that calls a callback function at given intervals
+   * and produces the value returned by the callback function. It can be used
+   * to wrap any generic Arduino sensor library into a SensESP sensor.
+   *
+   * @param repeat_interval_ms The repeating interval, in milliseconds.
+   * @param callback A callback function that returns the value the sensor will produce.
+   * @tparam T The type of the value returned by the callback function.
+   */
+  RepeatSensor<T>(unsigned int repeat_interval_ms, std::function<T()> callback)
+      : SensorT<T>(""),
+        repeat_interval_ms_(repeat_interval_ms),
+        callback_(callback) {}
+  void start() override final {
+    ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
+      this->emit(this->callback_());
+    });
+  }
+
+ protected:
+  unsigned int repeat_interval_ms_;
+  std::function<T()> callback_;
+};
+
 }  // namespace sensesp
 
 #endif
