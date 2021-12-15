@@ -16,6 +16,8 @@ jobs:
           - examples/minimal_app.cpp
           - examples/relay_control.cpp
           - examples/rpm_counter.cpp
+          - examples/async_repeat_sensor.cpp
+          - examples/repeat_sensor_analog_input.cpp
         target_device:
           - esp32dev
     steps:
