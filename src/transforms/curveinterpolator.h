@@ -43,19 +43,8 @@ class CurveInterpolator : public FloatTransform {
 
   // For manually adding sample points
   void clear_samples();
-  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
-  // [[deprecated("Use clear_samples() instead.")]]
-  void clearSamples() {
-    debugW("Use clear_samples() instead.");
-    clear_samples();
-  }
+
   void add_sample(const Sample& new_sample);
-  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
-  // [[deprecated("Use add_sample(...) instead.")]]
-  void addSample(const Sample& new_sample) {
-    debugW("Use add_sample(...) instead");
-    add_sample(new_sample);
-  }
 
  protected:
   std::set<Sample> samples;

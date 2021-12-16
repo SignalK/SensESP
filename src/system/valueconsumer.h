@@ -44,12 +44,6 @@ class ValueConsumer {
       this->set_input(producer->get(), input_channel);
     });
   }
-  // FIXME: Uncomment the following once the PIO Xtensa toolchain is updated
-  // [[deprecated("Use connect_from() instead.")]]
-  void connectFrom(ValueProducer<T>* producer, uint8_t input_channel = 0) {
-    debugW("Use connect_from() instead.");
-    connect_from(producer, input_channel);
-  }
 };
 
 typedef ValueConsumer<float> FloatConsumer;

@@ -86,16 +86,6 @@ class Transform : public TransformBase,
     }
     return this;
   }
-
-  // deprecated! use connect_from instead
-  Transform<C, P>* connectFrom(ValueProducer<P>* producer0,
-                               ValueProducer<P>* producer1 = NULL,
-                               ValueProducer<P>* producer2 = NULL,
-                               ValueProducer<P>* producer3 = NULL,
-                               ValueProducer<P>* producer4 = NULL) {
-    return this->connect_from(producer0, producer1, producer2, producer3,
-                              producer4);
-  }
 };
 
 /**
