@@ -10,7 +10,6 @@
 
 #include "sensesp_app_builder.h"
 #include "signalk/signalk_output.h"
-#include "transforms/linear.h"
 
 using namespace sensesp;
 
@@ -27,44 +26,36 @@ void setup() {
   SensESPAppBuilder builder;
   sensesp_app = builder.get_app();
 
+  // GPIO pin that we'll be using for the digital input.
   const uint8_t kDigitalInputPin = 15;
 
   // Do here any sensor initialization you need. For a more complex sensor,
   // this might include initializing the hardware, setting the I2C pins, etc.
   pinMode(kDigitalInputPin, INPUT_PULLUP);
 
-  // GPIO pin that we'll be using for the analog input.
-
   // define an asynchronous callback function that reads a digital input pin
   // after a delay of 1000 ms.
-  auto analog_read_callback = [](RepeatSensor<bool>* sensor) {
+  auto digital_read_callback = [](RepeatSensor<bool>* sensor) {
     debugI("Pretend to trigger an asynchronous measurement operation here.");
-    app.onDelay(
-        1000, [sensor]() { sensor->emit(digitalRead(kDigitalInputPin)); });
+    app.onDelay(1000,
+                [sensor]() { sensor->emit(digitalRead(kDigitalInputPin)); });
   };
 
   // Let's read the sensor every 2000 ms.
   unsigned int read_interval = 2000;
 
-  // Create a RepeatSensor with float output that reads the analog input.
-  auto* digital =
-      new RepeatSensor<bool>(read_interval, analog_read_callback);
+  // Create a RepeatSensor with float output that reads the digital input.
+  auto* digital = new RepeatSensor<bool>(read_interval, digital_read_callback);
 
-  // The "Signal K path" identifies this sensor to the Signal K server. Leaving
-  // this blank would indicate this particular sensor (or transform) does not
-  // broadcast Signal K data.
+  // The "Signal K path" identifies this sensor to the Signal K server.
+  //
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "environment.bool.pin15";
 
-  // Connect the output of the analog input to the Linear transform,
-  // and then output the results to the Signal K server. As part of
-  // that output, send some metadata to indicate that the "units"
-  // to be used to display this value is "ratio". Also specify that
-  // the display name for this value, to be used by any Signal K
-  // consumer that displays it, is "Indoor light".
-  digital->connect_to(
-      new SKOutputFloat(sk_path, ""));
+  // Connect the output of the digital input to the SKOutput object which
+  // transmits the results to the Signal K server.
+  digital->connect_to(new SKOutputFloat(sk_path, ""));
 
   // Start the SensESP application running
   sensesp_app->start();

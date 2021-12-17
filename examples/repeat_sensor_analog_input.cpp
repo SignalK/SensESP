@@ -52,15 +52,14 @@ void setup() {
   auto* analog_input =
       new RepeatSensor<float>(read_interval, analog_read_callback);
 
-  // The "Signal K path" identifies this sensor to the Signal K server. Leaving
-  // this blank would indicate this particular sensor (or transform) does not
-  // broadcast Signal K data.
+  // The "Signal K path" identifies this sensor to the Signal K server.
+  //
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "environment.indoor.illuminance";
 
-  // Connect the output of the analog input to the Linear transform,
-  // and then output the results to the Signal K server. As part of
+  // Connect the output of the analog input to the SKOutput object which
+  // transmits the results to the Signal K server. As part of
   // that output, send some metadata to indicate that the "units"
   // to be used to display this value is "ratio". Also specify that
   // the display name for this value, to be used by any Signal K
