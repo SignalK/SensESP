@@ -2,10 +2,10 @@
 
 //#define SERIAL_DEBUG_DISABLED
 
+#include "sensesp/sensors/digital_input.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/transforms/frequency.h"
 #include "sensesp_app_builder.h"
-#include "sensors/digital_input.h"
-#include "signalk/signalk_output.h"
-#include "transforms/frequency.h"
 
 using namespace sensesp;
 
@@ -23,13 +23,13 @@ void setup() {
 
   // The "Signal K path" identifies the output of the sensor to the Signal K
   // network. If you have multiple sensors connected to your microcontoller
-  // (ESP), each one of them will (probably) have its own Signal K path variable.
-  // For example, if you have two propulsion engines, and you want the RPM of
-  // each of them to go to Signal K, you might have sk_path_portEngine =
+  // (ESP), each one of them will (probably) have its own Signal K path
+  // variable. For example, if you have two propulsion engines, and you want the
+  // RPM of each of them to go to Signal K, you might have sk_path_portEngine =
   // "propulsion.port.revolutions" and sk_path_starboardEngine =
   // "propulsion.starboard.revolutions" In this example, there is only one
-  // propulsion engine, and its RPM is the only thing being reported to Signal K.
-  // To find valid Signal K Paths that fits your need you look at this link:
+  // propulsion engine, and its RPM is the only thing being reported to Signal
+  // K. To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "propulsion.main.revolutions";
 
@@ -88,6 +88,4 @@ void setup() {
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }

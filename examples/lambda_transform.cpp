@@ -1,10 +1,10 @@
-#include <Arduino.h>
+#include "sensesp/transforms/lambda_transform.h"
 
-#include "math.h"
+#include <math.h>
+
+#include "sensesp/sensors/analog_input.h"
+#include "sensesp/signalk/signalk_output.h"
 #include "sensesp_app_builder.h"
-#include "sensors/analog_input.h"
-#include "signalk/signalk_output.h"
-#include "transforms/lambda_transform.h"
 
 using namespace sensesp;
 
@@ -18,11 +18,10 @@ void setup() {
 
   SensESPAppBuilder builder;
 
-  sensesp_app = builder
-                  .set_hostname("sensesp-illum-example")
-                  ->set_wifi("My WiFi SSID", "my_wifi_password")
-                  ->set_sk_server("192.168.1.13", 80)
-                  ->get_app();
+  sensesp_app = builder.set_hostname("sensesp-illum-example")
+                    ->set_wifi("My WiFi SSID", "my_wifi_password")
+                    ->set_sk_server("192.168.1.13", 80)
+                    ->get_app();
 
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
@@ -87,6 +86,4 @@ void setup() {
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }

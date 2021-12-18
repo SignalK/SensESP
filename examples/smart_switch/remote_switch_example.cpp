@@ -1,19 +1,19 @@
 #include <Arduino.h>
 
+#include "sensesp/controllers/smart_switch_controller.h"
+#include "sensesp/sensors/digital_input.h"
+#include "sensesp/sensors/digital_output.h"
+#include "sensesp/signalk/signalk_listener.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/signalk/signalk_put_request.h"
+#include "sensesp/signalk/signalk_value_listener.h"
+#include "sensesp/system/rgb_led.h"
+#include "sensesp/transforms/click_type.h"
+#include "sensesp/transforms/debounce.h"
+#include "sensesp/transforms/press_repeater.h"
+#include "sensesp/transforms/repeat_report.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "sensors/digital_input.h"
-#include "sensors/digital_output.h"
-#include "controllers/smart_switch_controller.h"
-#include "signalk/signalk_listener.h"
-#include "signalk/signalk_output.h"
-#include "signalk/signalk_put_request.h"
-#include "signalk/signalk_value_listener.h"
-#include "system/rgb_led.h"
-#include "transforms/debounce.h"
-#include "transforms/click_type.h"
-#include "transforms/repeat_report.h"
-#include "transforms/press_repeater.h"
 
 using namespace sensesp;
 
@@ -35,13 +35,11 @@ using namespace sensesp;
 #define LED_ON_COLOR 0x004700
 #define LED_OFF_COLOR 0x261900
 
-
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object.
 ReactESP app;
 
 void setup() {
-
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
@@ -56,7 +54,6 @@ void setup() {
                     ->set_wifi("YOUR_WIFI_SSID", "YOUR_WIFI_PASSWORD")
                     ->get_app();
 
-
   // Define the SK Path of the device that controls the load that this
   // switch should control remotely.  Clicking the virtual switch will
   // send a PUT request on this path to the main device. This virtual
@@ -65,7 +62,6 @@ void setup() {
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "electrical.switches.lights.engineroom.state";
-
 
   // "Configuration paths" are combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
@@ -79,12 +75,9 @@ void setup() {
   const char* config_path_sk_output = "/signalk/path";
   const char* config_path_repeat = "/signalk/repeat";
 
-
   // An led that represents the current state of the switch.
   auto* led = new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B,
-                         config_path_status_light,
-                         LED_ON_COLOR, LED_OFF_COLOR);
-
+                         config_path_status_light, LED_ON_COLOR, LED_OFF_COLOR);
 
   // Create a switch controller to handle the user press logic and
   // connect it a server PUT request...
@@ -94,14 +87,12 @@ void setup() {
   // Also connect the controller to an onboard LED...
   controller->connect_to(led);
 
-
-  // Connect a physical button that will feed manual click types into the controller...
+  // Connect a physical button that will feed manual click types into the
+  // controller...
   DigitalInputState* btn = new DigitalInputState(PIN_BUTTON, INPUT, 100);
   PressRepeater* pr = new PressRepeater();
   btn->connect_to(pr);
-  pr->connect_to(new ClickType(config_path_button_c))
-     ->connect_to(controller);
-
+  pr->connect_to(new ClickType(config_path_button_c))->connect_to(controller);
 
   // In addition to the manual button "click types", a
   // SmartSwitchController accepts explicit state settings via
@@ -116,14 +107,10 @@ void setup() {
   auto* sk_listener = new SKValueListener<bool>(sk_path);
   sk_listener->connect_to(controller);
 
-
   // Start the SensESP application running
   sensesp_app->start();
-
 }
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }

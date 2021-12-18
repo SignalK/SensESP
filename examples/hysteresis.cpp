@@ -1,10 +1,10 @@
-#include <Arduino.h>
 
-#include "math.h"
+#include <math.h>
+
+#include "sensesp/sensors/analog_input.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/transforms/hysteresis.h"
 #include "sensesp_app_builder.h"
-#include "sensors/analog_input.h"
-#include "signalk/signalk_output.h"
-#include "transforms/hysteresis.h"
 
 using namespace sensesp;
 
@@ -14,11 +14,10 @@ void setup() {
   SetupSerialDebug(115200);
 
   SensESPAppBuilder builder;
-  sensesp_app = builder
-                  .set_hostname("sensesp-hysteresis-example")
-                  ->set_wifi("My WiFi SSID", "my_wifi_password")
-                  ->set_sk_server("192.168.10.3", 80)
-                  ->get_app();
+  sensesp_app = builder.set_hostname("sensesp-hysteresis-example")
+                    ->set_wifi("My WiFi SSID", "my_wifi_password")
+                    ->set_sk_server("192.168.10.3", 80)
+                    ->get_app();
 
   const char* sk_path = "environment.indoor.illuminance";
   const char* analog_in_config_path = "/indoor_illuminance/analog_in";
@@ -51,7 +50,4 @@ void setup() {
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
-
+void loop() { app.tick(); }

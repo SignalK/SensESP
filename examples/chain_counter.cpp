@@ -1,12 +1,10 @@
-#include <Arduino.h>
-
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "sensors/digital_input.h"
-#include "signalk/signalk_output.h"
-#include "system/lambda_consumer.h"
-#include "transforms/debounce.h"
-#include "transforms/integrator.h"
+#include "sensesp/sensors/digital_input.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/system/lambda_consumer.h"
+#include "sensesp/transforms/debounce.h"
+#include "sensesp/transforms/integrator.h"
 
 using namespace sensesp;
 

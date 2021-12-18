@@ -8,8 +8,8 @@
  *
  */
 
+#include "sensesp/signalk/signalk_output.h"
 #include "sensesp_app_builder.h"
-#include "signalk/signalk_output.h"
 
 using namespace sensesp;
 

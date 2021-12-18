@@ -1,13 +1,13 @@
 #include <Arduino.h>
 
+#include "sensesp/sensors/analog_input.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/transforms/analogvoltage.h"
+#include "sensesp/transforms/curveinterpolator.h"
+#include "sensesp/transforms/linear.h"
+#include "sensesp/transforms/voltagedivider.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "sensors/analog_input.h"
-#include "signalk/signalk_output.h"
-#include "transforms/analogvoltage.h"
-#include "transforms/curveinterpolator.h"
-#include "transforms/linear.h"
-#include "transforms/voltagedivider.h"
 
 using namespace sensesp;
 

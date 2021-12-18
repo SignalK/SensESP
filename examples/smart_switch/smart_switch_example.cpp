@@ -1,23 +1,23 @@
 #include <Arduino.h>
 
+#include "sensesp/controllers/smart_switch_controller.h"
+#include "sensesp/sensors/digital_input.h"
+#include "sensesp/sensors/digital_output.h"
+#include "sensesp/signalk/signalk_listener.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/signalk/signalk_put_request_listener.h"
+#include "sensesp/system/rgb_led.h"
+#include "sensesp/transforms/click_type.h"
+#include "sensesp/transforms/debounce.h"
+#include "sensesp/transforms/press_repeater.h"
+#include "sensesp/transforms/repeat_report.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "sensors/digital_input.h"
-#include "sensors/digital_output.h"
-#include "controllers/smart_switch_controller.h"
-#include "signalk/signalk_listener.h"
-#include "signalk/signalk_output.h"
-#include "signalk/signalk_put_request_listener.h"
-#include "system/rgb_led.h"
-#include "transforms/debounce.h"
-#include "transforms/click_type.h"
-#include "transforms/repeat_report.h"
-#include "transforms/press_repeater.h"
 
 using namespace sensesp;
 
-// This example implements a smart light switch which can control a load either via
-// a manual button press, or via Signal K PUT requests.
+// This example implements a smart light switch which can control a load either
+// via a manual button press, or via Signal K PUT requests.
 
 // Control devices are wired to the following digital pins
 
@@ -38,13 +38,11 @@ using namespace sensesp;
 #define LED_ON_COLOR 0x004700
 #define LED_OFF_COLOR 0x261900
 
-
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object.
 ReactESP app;
 
 void setup() {
-
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
@@ -59,14 +57,12 @@ void setup() {
                     ->set_wifi("YOUR_WIFI_SSID", "YOUR_WIFI_PASSWORD")
                     ->get_app();
 
-
   // Define the SK Path that represents the load this device controls.
   // This device will report its status on this path, as well as
   // respond to PUT requests to change its status.
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "electrical.switches.lights.engineroom.state";
-
 
   // "Configuration paths" are combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
@@ -80,31 +76,26 @@ void setup() {
   const char* config_path_sk_output = "/signalk/path";
   const char* config_path_repeat = "/signalk/repeat";
 
-
-
   // Create a digital output that is assumed to be connected to the
   // control channel of a relay or a MOSFET that will control the
   // electric light.  Also connect this pin's state to an LED to get
   // a visual indicator of load's state.
   auto* load_switch = new DigitalOutput(PIN_RELAY);
   load_switch->connect_to(new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B,
-                                     config_path_status_light,
-                                     LED_ON_COLOR, LED_OFF_COLOR));
-
+                                     config_path_status_light, LED_ON_COLOR,
+                                     LED_OFF_COLOR));
 
   // Create a switch controller to handle the user press logic and
   // connect it to the load switch...
   SmartSwitchController* controller = new SmartSwitchController();
   controller->connect_to(load_switch);
 
-
-  // Connect a physical button that will feed manual click types into the controller...
+  // Connect a physical button that will feed manual click types into the
+  // controller...
   DigitalInputState* btn = new DigitalInputState(PIN_BUTTON, INPUT, 100);
   PressRepeater* pr = new PressRepeater();
   btn->connect_to(pr);
-  pr->connect_to(new ClickType(config_path_button_c))
-     ->connect_to(controller);
-
+  pr->connect_to(new ClickType(config_path_button_c))->connect_to(controller);
 
   // In addition to the manual button "click types", a
   // SmartSwitchController accepts explicit state settings via
@@ -117,7 +108,6 @@ void setup() {
   auto* sk_listener = new StringSKPutRequestListener(sk_path);
   sk_listener->connect_to(controller);
 
-
   // Finally, connect the load switch to an SKOutput so it reports its state
   // to the Signal K server.  Since the load switch only reports its state
   // whenever it changes (and switches like light switches change infrequently),
@@ -126,15 +116,12 @@ void setup() {
   // or not it has changed.  That keeps the value on the server fresh and
   // lets the server know the switch is still alive.
   load_switch->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
-             ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
+      ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
 
   // Start the SensESP application running
   sensesp_app->start();
-
 }
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }
