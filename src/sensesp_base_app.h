@@ -4,10 +4,10 @@
 // Required for RemoteDebug
 #define USE_LIB_WEBSOCKET true
 
-#include "net/debug_output.h"
 #include "sensesp.h"
-#include "system/filesystem.h"
-#include "system/observablevalue.h"
+#include "sensesp/net/debug_output.h"
+#include "sensesp/system/filesystem.h"
+#include "sensesp/system/observablevalue.h"
 
 namespace sensesp {
 

@@ -9,17 +9,17 @@
 #define ENABLE_LED false
 #endif
 
-#include "controllers/system_status_controller.h"
-#include "net/discovery.h"
-#include "net/http_server.h"
-#include "net/networking.h"
-#include "net/ota.h"
-#include "net/debug_output.h"
-#include "net/ws_client.h"
+#include "sensesp/controllers/system_status_controller.h"
+#include "sensesp/net/debug_output.h"
+#include "sensesp/net/discovery.h"
+#include "sensesp/net/http_server.h"
+#include "sensesp/net/networking.h"
+#include "sensesp/net/ota.h"
+#include "sensesp/net/ws_client.h"
+#include "sensesp/sensors/sensor.h"
+#include "sensesp/signalk/signalk_delta_queue.h"
+#include "sensesp/system/system_status_led.h"
 #include "sensesp_base_app.h"
-#include "sensors/sensor.h"
-#include "signalk/signalk_delta_queue.h"
-#include "system/system_status_led.h"
 
 namespace sensesp {
 
@@ -99,8 +99,6 @@ class SensESPApp : public SensESPBaseApp {
   }
 
   void setup();
-
-
 
   String ssid_ = "";
   String wifi_password_ = "";

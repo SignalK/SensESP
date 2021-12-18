@@ -1,9 +1,9 @@
 #ifndef SENSESP_APP_BUILDER_H
 #define SENSESP_APP_BUILDER_H
 
+#include "sensesp/sensors/system_info.h"
 #include "sensesp_app.h"
 #include "sensesp_base_app_builder.h"
-#include "sensors/system_info.h"
 
 const char* kDefaultSystemInfoSensorPrefix = "sensorDevice.";
 

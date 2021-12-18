@@ -1,10 +1,10 @@
 #include "sensesp_app.h"
 
-#include "net/discovery.h"
-#include "net/networking.h"
-#include "net/ota.h"
-#include "system/system_status_led.h"
-#include "transforms/debounce.h"
+#include "sensesp/net/discovery.h"
+#include "sensesp/net/networking.h"
+#include "sensesp/net/ota.h"
+#include "sensesp/system/system_status_led.h"
+#include "sensesp/transforms/debounce.h"
 
 namespace sensesp {
 
