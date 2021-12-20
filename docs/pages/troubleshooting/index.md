@@ -4,19 +4,23 @@ title: Troubleshooting
 nav_order: 50
 ---
 
-# Troubleshooting
+## Troubleshooting
 
 A not-at-all-organized assortment of common problems and solutions.
 
-## Missing Libraries
+### Help on Slack
 
-You're trying to build a SensESP project, and you get an error about a particular library not being found, or not installed, or something like that. Likely problems are `ESP Async WebServer`, `ESPTrueRandom`, and `RemoteDebug` (but on the future, it could be others).
+Slack is an online collaboration platform used by developers. You can join in the Signal K discussion on Slack at 
+http://slack-invite.signalk.org/. The `#sensors` channel is the best place for you to ask questions about SensESP.
 
-Try installing `git` on your computer: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+### Missing Libraries
 
-The libraries listed above can be installed only from their git repo url, and without `git`, that won't work.
+SensESP is a complex library and unfortunately, library dependency issues are not uncommon, especially if you last built the project some time ago, because some of the dependencies have changed. The first thing you should _always_ try is deleting your local `.pio` directory within your project directory. That will make PlatformIO re-download and recompile all dependency libraries and is often enough to resolve problems. 
 
-## Problems Connecting To, or Staying Connected To, Your Network, or Your SK Server
+If you do that, and then you get an error about a particular library not being found, or not installed, or something like that, it could be that you don't have `git` installed on your computer. Some of the libraries used by SensESP can be installed only from their git repo URL, and without `git`, that won't work. 
+https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+### Problems Connecting To, or Staying Connected To, Your Network, or Your SK Server
 
 If the Signal K Server on your computer was installed by some other program, like OpenPlotter, it may have made some settings about network sharing, or some other settings, that just don't work with SensESP in certain situations.
 
@@ -50,11 +54,11 @@ If the Pi is to be permanently connected to a network with an ethernet cable, yo
 
 (Thanks to @Graham Kendall for doing all the testing and documentation of the above!)
 
-## Can't Get Past Token Authorization
+### Can't Get Past Token Authorization
 
-If you see something like this, repeating over and over in your Serial Monitor, try a Device Reset. If SensESP gets to this point, you should be able to connect to it by going to its IP address (identified on the fourth line below) in a browser. That will bring up the device's menu, and "Reset device" is the last item on that menu. Choose it, and if necessary, restart your device with its Reset button. Keep watching the Serial Monitor - if you didn't hard-code your wifi SSID and password in `main.cpp`, you may have to go through the steps to configure those things again, and you'll definitely need to authorize a new access request from the SK Server.
+If you see something like this, repeating over and over in your Serial Monitor, try a Device Reset. If SensESP gets to this point, you should be able to connect to it by going to its IP address (identified on the fourth line below) in a browser. That will bring up the device's menu, and "Reset device" is the last item on that menu. Choose it, and if necessary, restart your device with its physical Reset button. Keep watching the Serial Monitor - if you didn't hard-code your wifi SSID and password in `main.cpp`, you will have to go through the steps to configure those things again, and you'll definitely need to authorize a new access request from the SK Server.
 
-```
+```text
 (I) (connect)(C1) WSClient websocket connect attempt (state=0)
 (I) (connect)(C1) WiFi is disconnected. SignalK client connection will connect when WiFi is connected.
 (I) (wifi_station_connected)(C1) Connected to wifi, SSID: WiFi-2.4-7C4D (signal: -45)
@@ -71,8 +75,9 @@ If you see something like this, repeating over and over in your Serial Monitor, 
 (I) (connect)(C1) WSClient websocket connect attempt (state=0)
 (D) (connect)(C1) Initiating websocket connection with server...
 ```
+
 etc, etc, etc.
 
-At the time of this writing, it isn't known what's happening or why; only that a Device Reset seems to clear it up.
+At the time of this writing, it isn't known exactly what's happening or why; only that a Device Reset seems to clear it up.
 
 Thanks to @Sailabout on Slack for documenting this!
