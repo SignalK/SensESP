@@ -4,7 +4,7 @@ title: Concepts
 nav_order: 30
 ---
 
-## Concepts
+# Concepts
 
 - ReactESP basics (Matti)
 - DONE Sensors
@@ -16,17 +16,17 @@ nav_order: 30
 - DONE Configuration interface
   - Configuration API (Matti)
 
-### Sensors
+## Sensors
 
 A "Sensor" in SensESP is a C++ class that knows how to get data from an actual, physical sensor and pass it along to a Transform (see below). For example, an AnalogInput Sensor knows how to read an AnalogIn pin on the MCU, and a DigitalInputCounter Sensor knows how to read a GPIO pin on the MCU using an interrupt. A BME280value Sensor knows how to read the temperature, humidity, and pressure from a phyical Adafruit BME280 sensor.
 
-The two generic types of sensor data - AnalogInput and DigitalInput (including various versions of DigitalInput, like DigitalInputState and DigitalInputCounter) - are built into the core SensESP code. 
+The two generic types of sensor data - AnalogInput and DigitalInput (including various versions of DigitalInput, like DigitalInputState and DigitalInputCounter) - are built into the core SensESP code.
 
-Sensors for many specific types of physical sensors, like the BME280, or the SHT31, or the INAxxx, can be implemented by incorporating the relevant sensor library (often from Adafruit) and a few lines of code in `main.cpp`. (BAS: Need to link to some examples of this - which you need to write, first). 
+Sensors for many specific types of physical sensors, like the BME280, or the SHT31, or the INAxxx, can be implemented by incorporating the relevant sensor library (often from Adafruit) and a few lines of code in `main.cpp`. (BAS: Need to link to some examples of this - which you need to write, first).
 
 Some specific sensors - for example, the MAX31856 thermocouple sensor - require a little more complex programming to read them, so they can be found [here](https://github.com/SensESP). These "add-on" Sensor libraries can easily be included in a SensESP project by adding them to your `platformio.ini` file. If you have a physical sensor that you think fits in this category, and you want some help writing an add-on to read it, make a post in the #sensors channel on the Signalk-dev Slack.
 
-### Transforms
+## Transforms
 
 A Transform is a class that takes a value as input (from a Sensor, or from another Transform), does something with that value (transforms it in some way), then outputs the new value, either to another Transform, or to the Signal K Server. In the `rpm_counter.cpp` example referred to above, the meat of the code is these three lines:
 
@@ -56,7 +56,7 @@ In this example, there is still only one Sensor (AnalogInput), but several Trans
 
 You can also include multiple Sensors, each with at least one Transform, in the same program, such as including both of the examples above into the same `main.cpp`, one after the other. See (BAS: link to the multiple_sensors_exaple.cpp after you convert it, using only AnalogInput and DigitalInput - no "external" sensors.)
 
-### Configuration Paths
+## Configuration Paths
 
 Some Sensors and Transform have parameters that can be configured "live", by accessing the MCU through its IP address, entered as a URL in any browser. For example, entering `192.168.1.236` (the IP address of the ESP32 I'm currently using as I write this documentation) in a browser will bring up the following web page that's hosted by the MCU itself:
 
@@ -116,7 +116,7 @@ or by putting the configuration path string directly into the parameter list of 
 auto* analog_input = new AnalogInput(250, "/analogInput");
 ```
 
-### Naming Configuration Paths
+## Naming Configuration Paths
 
 The naming of the paths is important, especially when you have multiple Sensors and / or multiple Transforms in your Project, so to be safe, please follow these guidelines:
 
@@ -134,7 +134,7 @@ Two Sensors (one for black water and one for fresh water), each using a Moving A
 
 This will group the configuration entries in the web interface into two groups: "blackWater" and "freshWater". Each group will have three entries: "analogInput", "movingAvg", and "SKOutput". Each "analogInput" entry will have one configurable value: "Read delay"; each "movingAvg" entry will have two configurable values: "Number of samples" and "Multiplier"; and each "skPath" entry will have one configurable value: "SignalK Path".
 
-### Signal K Paths
+## Signal K Paths
 
 All data that you send to a Signal K Server must have a "path" that will look something like this: `environment.outside.temperature`. The [Signal K Specification](https://signalk.org/specification/1.5.0/doc/vesselsBranch.html) includes a long list of paths that have already been defined. You should use one of them if you can find one that fits your data, because the various programs that "consume" Signal K data (such as Instrument Panel, KIP, and Wilhelm SK) will know how to properly display many of them. For example, they may know that `environment.outside.temperature` is a temperature, and will offer appropriate instruments to display a temperature.
 
@@ -142,7 +142,7 @@ But not all data you might send will be in the Specification. In that case, you 
 
 If you do create a path for any data you're sending out of SensESP, you'll want to provide the appropriate unit of measurement for that data, if there is one. See below for details.
 
-### Signal K Output and Metadata
+## Signal K Output and Metadata
 
 SensESP can send data to Signal K as any of these data types, using (this particular Transform).
 

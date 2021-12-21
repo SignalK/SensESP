@@ -4,13 +4,13 @@ title: Get in touch
 nav_order: 45
 ---
 
-## Get In Touch
+# Get In Touch
 
 By far the best way to get in touch with someone who can help you with a SensESP issue is through the #sensors channel on the Signalk-dev Slack. If you're not already a member there (it's free), [start here](http://slack-invite.signalk.org/).
 
 Please do NOT create an Issue on the SensESP GitHub repo unless you have already posted about it on the #sensors channel on Slack. You might think it's a bug, but you're just doing something wrong. You might want to request an enhancement, but it may already do what you want. Ask first, then create an Issue only if it's still appropriate.
 
-### Contributing Code to SensESP
+## Contributing Code to SensESP
 
 If you like SensESP and want to make it even better, please do! It's written in C++ and uses some JSON. There are always some active Issues that you could tackle here on the GitHub page, or feel free to write the interface for a new Sensor, or create a new Transform - there are lots of great examples of these two things to get you started. But if you're going to contribute, please follow these guidelines:
 
@@ -30,7 +30,7 @@ If you like SensESP and want to make it even better, please do! It's written in 
 
 - Normally, you should not need to modify `platformio.ini` for your PR. However, if you're adding code that requires a new library dependency, add the dependency both to `library.json` and `platformio.ini`. If you have questions, the best place to discuss SensESP is on [Slack](https://signalk-dev.slack.com), in the `#sensors` channel.
 
-### Write Comments That Create Interactive Documentation
+## Write Comments That Create Interactive Documentation
 
 SensESP is set up to generate Doxygen documentation files from the comments in the .h files, if you follow the appropriate formatting for your comments. So if you create a new .h file, or if you're working on an existing one, please use the following comment format for every Class definition.
 
@@ -61,7 +61,7 @@ If your Class uses a template, you can describe the template parameters like thi
 
 All other Doxygen commenting key words are recognized, so use them if you like.
 
-### Using Your Modified SensESP Files
+## Using Your Modified SensESP Files
 
 If you create `my_cool_project` and want it to use your locally modified version of SensESP, do the following:
 

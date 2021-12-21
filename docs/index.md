@@ -5,7 +5,7 @@ nav_order: 1
 description: "SensESP is a universal sensor development framework for the ESP32 platform."
 permalink: /
 ---
-## Introduction
+# Introduction
 
 SensESP is a [Signal K](https://signalk.org) sensor development toolkit for the [ESP32](https://en.wikipedia.org/wiki/ESP32) platform.
 If you are a boater (or a professional developer!) who wants to build a custom Wi-Fi connected sensor for your boat, this is the toolkit you need.

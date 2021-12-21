@@ -4,9 +4,9 @@ title: Getting Started
 nav_order: 20
 ---
 
-## Getting Started
+# Getting Started
 
-### Introduction
+## Introduction
 
 SensESP is a library of functions that makes it relatively simple to create a program for an ESP32 microcontroller ("MCU"), that collects data from one or more sensors, processes the data, and sends it along to some "consumer", typically a Signal K Server. It can also be used to monitor information coming from a Signal K Server and take action based on that information, such as turning on your anchor light when it gets dark outside.
 
@@ -16,11 +16,11 @@ It can work with virtually any kind of sensor that can work with an Arduino, usu
 
 The best way to learn how to use SensESP is by looking at a few examples. They won't be installed on your computer until after you've built your first Project (described below), but in the meantime, you can see all of them in the [examples folder in the GitHub repo](https://github.com/SignalK/SensESP/tree/master/examples). `rpm_counter.cpp` is a good one to start with, as it illustrates a simple implementation - reading the value of a sensor connected to a GPIO pin on the MCU, converting that value to hertz (the native unit of measurement for a tachometer in Signal K), then sending the value in hertz to the Signal K Server. But there are many other examples, illustrating many other concepts, so have a look at several of them.
 
-If you're only interested in using SensESP in a new Project, DO NOT clone or otherwise download the SensESP GitHub repo to your computer. All of those files will be automatically downloaded by PlatformIO (the IDE you'll be using) when they're needed to compile and build your Project. The only files you'll be working with are your Project's `main.cpp` and `platformio.ini`, following the instructions below. 
+If you're only interested in using SensESP in a new Project, DO NOT clone or otherwise download the SensESP GitHub repo to your computer. All of those files will be automatically downloaded by PlatformIO (the IDE you'll be using) when they're needed to compile and build your Project. The only files you'll be working with are your Project's `main.cpp` and `platformio.ini`, following the instructions below.
 
 If you want to make changes or additions to the core SensESP functionality, [click here](get_in_touch/) for more information. (BAS: this link doesn't work.)
 
-### Getting Ready to Get Started
+## Getting Ready to Get Started
 
 You must have a Signal K Server running on your network, or SensESP has nothing to connect to*. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md). Be sure to turn SSL OFF as you go through the installation - SensESP won't work if it's enabled.
 
@@ -30,7 +30,7 @@ To build a SensESP project and upload it to your ESP, you'll need to [install Vi
 
 (* This is not strictly true - it's possible to use SensESP for something other than connecting to a Signal K Server, as described [here](BAS: link to the Tutorial page that describes a super-basic SensESP program). However, the typical SensESP user will be connecting to a Signal K Server.)
 
-### Start a New Project in PlatformIO
+## Start a New Project in PlatformIO
 
 1. Start Visual Studio Code.
 2. On the far left edge, click on the icon that looks like an alien face. That will start the PlatformIO extension.
@@ -42,7 +42,7 @@ To build a SensESP project and upload it to your ESP, you'll need to [install Vi
 8. Click the "Finish" button, and your new Project will be created.
 9. A new `platformio.ini` file should open in the editor, and in the file navigator, if you click on "src", you'll see that there is a `main.cpp` file. Double-click on that to open it in the editor, and now you'll be looking at the only two files you should need to work with to create your first SensESP project.
 
-### Getting a Good platformio.ini File
+## Getting a Good platformio.ini File
 
 Now, all you need to do is modify the `platformio.ini` and `main.cpp` files. Once you have your new project open, open the `platformio.ini` file that's in your Project's directory - the file that was auto-generated. Save the file as `platformio.ini.saved`.
 
@@ -80,13 +80,13 @@ Now you should have a `platformio.ini` that will work for your board, and that h
 
 Note that the `platformio.ini` file you now have points to the most recent "Release" version of SensESP. (`lib_deps = SignalK/SensESP`) It's the version that's in the branch called `latest` in the GitHub repo. If you want to use the `master` branch, which has all of the most recently-merged Pull Requests since `latest` was published, you need to change that to `lib_deps = https://github.com/SignalK/SensESP`. The `latest` branch is the safest, but the `master` branch is the most up-to-date. It's also not really supported - only the `latest` branch is - so unless you know you need something that's in `master` that's not yet in `latest`, you should stick with `latest`.
 
-### Working with maincpp
+## Working with maincpp
 
 In a Platformio Project, the primary source code file is called `main.cpp` (not `YourProject.ino` like it is in the Arduino IDE). When you create a new Project, PlatformIO creates a `main.cpp` for you, but you can't use it for SensESP.
 
 Open `/YourProjectName/src/main.cpp`. The default file is for the Arduino IDE, but a SensESP `main.cpp` file will look very different. Replace the entire contents of `main.cpp` with the contents of one of the SensESP examples in <https://github.com/SignalK/SensESP/tree/master/examples>. (This is a good one to start with: <https://github.com/SignalK/SensESP/blob/master/examples/analog_input.cpp>.) Check that the settings (pin numbers, etc.) match your hardware. Then click on the checkmark icon on the blue status bar along the bottom of your screen. (That's the "Build" shortcut.) If the build succeeds, you can plug in your ESP board and press the right-arrow icon, which will upload the firmware to your ESP32 and start to run it. Also click on the icon that looks like a wall outlet plug - that will open the Serial Monitor window so you can see what the program is doing.
 
-### After It's Built, Uploaded, and Running
+## After It's Built, Uploaded, and Running
 
 If the project compiles and uploads, your ESP will be running the example code. (If you get errors about missing libraries, see the [Troubleshooting page](pages/troubleshooting) (BAS: this link doesn't work.)). Since the first thing it needs to do is connect to a wifi network, and it doesn't know what network to connect to, it will broadcast a wifi SSID for you to connect to so you can configure it. Connect your computer or phone wifi to the "Configure SensESP" network; the password is `thisisfine`. A captive portal may pop up, but if it doesn't, open a browser and go to 192.168.4.1. Enter the SSID and password of your boat's wifi to allow the device to access the network that your Signal K Server is on. Also enter a suitable name for the ESP, for example BilgeMonitor or EngineTemps. (No more than 32 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the ESP will restart and try to connect to your wifi network.
 
@@ -102,7 +102,7 @@ At this point, if you have a successfully running SensESP example and it's sendi
 
 Be sure to read about [Sensors](#sensors) and [Transforms](#transforms) below - you'll need to know what they are and how they work.
 
-### Hard-coding Certain Program Attributes
+## Hard-coding Certain Program Attributes
 
 In all of the [example programs](https://github.com/SignalK/SensESP/tree/master/examples), you'll see something similar to this:
 
