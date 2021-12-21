@@ -22,13 +22,13 @@ If you want to make changes or additions to the core SensESP functionality, [cli
 
 ## Getting Ready to Get Started
 
-You must have a Signal K Server running on your network, or SensESP has nothing to connect to*. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md). Be sure to turn SSL OFF as you go through the installation - SensESP won't work if it's enabled.
+You must have a Signal K Server running on your network, or SensESP has nothing to connect to[^1]. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md). Be sure to turn SSL OFF as you go through the installation - SensESP won't work if it's enabled.
 
 Once the SK Server is installed and running, go to the Dashboard (enter `localhost:3000` into the Raspberry Pi's browser to start it), select Server - Settings from the left side menu, and make sure the "mdns" option is ON.
 
 To build a SensESP project and upload it to your ESP, you'll need to [install Visual Studio Code, then install the PlatformIO extension](https://platformio.org/install/ide?install=vscode). SensESP doesn't work with the Arduino IDE. (Throughout the documentation, there will be many references to PlatformIO, which is an extension to Visual Studio Code. So when you see something like "Start PlatformIO", it really means, "Start Visual Studio Code and get into the PlatformIO extension.")
 
-(* This is not strictly true - it's possible to use SensESP for something other than connecting to a Signal K Server, as described [here](BAS: link to the Tutorial page that describes a super-basic SensESP program). However, the typical SensESP user will be connecting to a Signal K Server.)
+[^1]: This is not strictly true - it's possible to use SensESP for something other than connecting to a Signal K Server, as described [here](BAS: link to the Tutorial page that describes a super-basic SensESP program). However, the typical SensESP user will be connecting to a Signal K Server.
 
 ## Start a New Project in PlatformIO
 

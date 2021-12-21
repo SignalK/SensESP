@@ -65,9 +65,9 @@ Some Sensors and Transform have parameters that can be configured "live", by acc
 "Device information" displays some information about the MCU, the firmware, the wifi network, etc.
 "Configure device" is explained below.
 "Restart device" will restart the MCU.
-"Reset device" will not erase the program, but it will erase all the wifi information, the Signal K server information and authorization token, and any Sensor and Transform configuration you've done. The next time the device boots, you'll need to re-enter the wifi SSID and password*, all configurable values will be back at the defaults set in the program, and you will have to authorize the device with Read/Write access on the Signal K Server.
+"Reset device" will not erase the program, but it will erase all the wifi information, the Signal K server information and authorization token, and any Sensor and Transform configuration you've done. The next time the device boots, you'll need to re-enter the wifi SSID and password[^1], all configurable values will be back at the defaults set in the program, and you will have to authorize the device with Read/Write access on the Signal K Server.
 
-(* Unless you have hard-coded the wifi info.)
+[^1]: Unless you have hard-coded the wifi info.
 
 Click on "Configure device" to bring up the /setup page, which will look something like this:
 
