@@ -1,9 +1,7 @@
-#include <Arduino.h>
-
 #include "sensesp_app_builder.h"
-#include "sensors/analog_input.h"
-#include "signalk/signalk_output.h"
-#include "transforms/moving_average.h"
+#include "sensesp/sensors/analog_input.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/transforms/moving_average.h"
 
 #define SERIAL_DEBUG_DISABLED = true
 

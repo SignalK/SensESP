@@ -1,25 +1,19 @@
-#include <Arduino.h>
-#include <EEPROM.h> // Should not be necessary
-
+#include "sensesp/sensors/analog_input.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/transforms/analogvoltage.h"
+#include "sensesp/transforms/curveinterpolator.h"
+#include "sensesp/transforms/linear.h"
+#include "sensesp/transforms/moving_average.h"
+#include "sensesp/transforms/voltagedivider.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "sensors/analog_input.h"
-#include "transforms/linear.h"
-#include "signalk/signalk_output.h"
-#include "transforms/moving_average.h"
-#include "transforms/voltagedivider.h"
-#include "transforms/analogvoltage.h"
-#include "transforms/curveinterpolator.h"
 
 using namespace sensesp;
 
-class ETapeInterpreter : public CurveInterpolator
-{
-
-public:
-  ETapeInterpreter(String config_path = "") : CurveInterpolator(NULL, config_path)
-  {
-
+class ETapeInterpreter : public CurveInterpolator {
+ public:
+  ETapeInterpreter(String config_path = "")
+      : CurveInterpolator(NULL, config_path) {
     // Populate a lookup table to translate the ohm values returned by
     // our level sensor to inches on the sensor scale
     clear_samples();
@@ -52,7 +46,6 @@ public:
 ReactESP app;
 
 void setup() {
-
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
@@ -61,9 +54,11 @@ void setup() {
   // Create a builder object
   SensESPAppBuilder builder;
 
-  // Create the global SensESPApp() object. If you add the line ->set_wifi("your ssid", "your password") you can specify
-  // the wifi parameters in the builder. If you do not do that, the SensESP device wifi configuration hotspot will appear and you can use a web
-  // browser pointed to 192.168.4.1 to configure the wifi parameters.
+  // Create the global SensESPApp() object. If you add the line ->set_wifi("your
+  // ssid", "your password") you can specify the wifi parameters in the builder.
+  // If you do not do that, the SensESP device wifi configuration hotspot will
+  // appear and you can use a web browser pointed to 192.168.4.1 to configure
+  // the wifi parameters.
 
   sensesp_app = builder.set_hostname("milone")
                     ->set_sk_server("192.168.0.1", 3000)
@@ -71,7 +66,8 @@ void setup() {
 
   // The "SignalK path" identifies this sensor to the SignalK server. Leaving
   // this blank would indicate this particular sensor (or transform) does not
-  // broadcast SignalK data. This path should appear as an argument in the SKOutputNumber transform.
+  // broadcast SignalK data. This path should appear as an argument in the
+  // SKOutputNumber transform.
 
   // The "Configuration path" is combined with "/config" to formulate a URL
   // used by the RESTful API for retrieving or setting configuration data.
@@ -84,8 +80,8 @@ void setup() {
 
   const char *kAnalogInConfigPath = "/freshWaterTank_starboard/analogin";
 
-  // Create a sensor that is the source of our data, that will be read every 500 ms.
-  // It's a Milone depth sensor that's connected to the ESP's AnalogIn pin.
+  // Create a sensor that is the source of our data, that will be read every 500
+  // ms. It's a Milone depth sensor that's connected to the ESP's AnalogIn pin.
   // ESP32 has many pins that can be
   // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
   uint8_t pin = 36;
@@ -94,18 +90,23 @@ void setup() {
 
   auto *analog_input = new AnalogInput(pin, read_delay, kAnalogInConfigPath);
 
-  // comment out the following line to suppress the output of the raw ADC measurement values.
-  // analog_input->connect_to(new SKOutputNumber("tanks.freshWater.starboard.rawADC"));
+  // comment out the following line to suppress the output of the raw ADC
+  // measurement values. analog_input->connect_to(new
+  // SKOutputNumber("tanks.freshWater.starboard.rawADC"));
 
-  // Comment out the following 2 lines to suppress the output of the ADC measurement in volts.
-  // analog_input->connect_to(new AnalogVoltage(1.0, 1.0, 0))
-  //             ->connect_to(new SKOutputNumber("tanks.freshWater.starboard.voltsADC"));
+  // Comment out the following 2 lines to suppress the output of the ADC
+  // measurement in volts. analog_input->connect_to(new AnalogVoltage(1.0, 1.0,
+  // 0))
+  //             ->connect_to(new
+  //             SKOutputNumber("tanks.freshWater.starboard.voltsADC"));
 
-  // The Milone depth sensor is wired as a voltage divider with Vin connected to the sensor,
-  // a variable resistor. The sensor is then connected to R2, a fixed resistor then connected to gnd.
-  // The voltrage across the fixed resistor is measured by the MCU analog input ADC.
+  // The Milone depth sensor is wired as a voltage divider with Vin connected to
+  // the sensor, a variable resistor. The sensor is then connected to R2, a
+  // fixed resistor then connected to gnd. The voltrage across the fixed
+  // resistor is measured by the MCU analog input ADC.
 
-  // A VoltageDeviderR1 transform is used to extract the Milone sensor resistance from the data.
+  // A VoltageDeviderR1 transform is used to extract the Milone sensor
+  // resistance from the data.
 
   const float scale = 1.0;
   const float Vin = 5.0;
@@ -115,19 +116,23 @@ void setup() {
   // Wire up the output of the analog input to the VoltageDividerR1 transform.
   // and then output the results to the SignalK server.
 
-  // Comment out the following 3 lines to suppress the output of the eTape sensor resistance.
+  // Comment out the following 3 lines to suppress the output of the eTape
+  // sensor resistance.
   analog_input->connect_to(new AnalogVoltage(1.0, 1.0, 0.))
-      ->connect_to(new VoltageDividerR1(R2, Vin, "/freshWaterTank_starboard/divider"))
+      ->connect_to(
+          new VoltageDividerR1(R2, Vin, "/freshWaterTank_starboard/divider"))
       ->connect_to(new SKOutputFloat("tanks.freshWater.starboard.R1"));
 
-  // Use the ETapeInterpolator to output the water level depth in the tank and pass it through
-  // the MovingAverage transport before outputting the result.
+  // Use the ETapeInterpolator to output the water level depth in the tank and
+  // pass it through the MovingAverage transport before outputting the result.
 
   analog_input->connect_to(new AnalogVoltage(1.0, 1.0, 0.))
       ->connect_to(new VoltageDividerR1(R2, Vin, ""))
       ->connect_to(new ETapeInterpreter(""))
-      ->connect_to(new MovingAverage(samples, scale, "/freshWaterTank_starboard/samples"))
-      ->connect_to(new SKOutputFloat("tanks.freshwater.starboard.currentLevel"));
+      ->connect_to(new MovingAverage(samples, scale,
+                                     "/freshWaterTank_starboard/samples"))
+      ->connect_to(
+          new SKOutputFloat("tanks.freshwater.starboard.currentLevel"));
 
   // Start the SensESP application running
   sensesp_app->start();
@@ -135,6 +140,4 @@ void setup() {
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }

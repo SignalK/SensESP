@@ -1,13 +1,12 @@
-#include <Arduino.h>
+#include <math.h>
 
-#include "math.h"
-#include "net/http_server.h"
-#include "net/networking.h"
+#include "sensesp/net/http_server.h"
+#include "sensesp/net/networking.h"
+#include "sensesp/sensors/digital_input.h"
+#include "sensesp/transforms/lambda_transform.h"
+#include "sensesp/transforms/linear.h"
+#include "sensesp/transforms/typecast.h"
 #include "sensesp_minimal_app_builder.h"
-#include "sensors/digital_input.h"
-#include "transforms/lambda_transform.h"
-#include "transforms/linear.h"
-#include "transforms/typecast.h"
 
 using namespace sensesp;
 
@@ -33,15 +32,13 @@ void setup() {
   SetupSerialDebug(115200);
 
   SensESPMinimalAppBuilder builder;
-  auto sensesp_app =
-      builder.set_hostname("counter-test")->get_app();
+  auto sensesp_app = builder.set_hostname("counter-test")->get_app();
 
   // manually create Networking and HTTPServer objects to enable
   // the HTTP configuration interface
 
   auto* networking = new Networking(
-      "/system/net", "", "", SensESPBaseApp::get_hostname(),
-      "thisisfine");
+      "/system/net", "", "", SensESPBaseApp::get_hostname(), "thisisfine");
   auto* http_server = new HTTPServer();
 
   auto* digin1 = new DigitalInputCounter(input_pin1, INPUT, RISING, read_delay);
@@ -64,20 +61,16 @@ void setup() {
       }));
 
   pinMode(output_pin1, OUTPUT);
-  app.onRepeat(5, []() {
-    digitalWrite(output_pin1, !digitalRead(output_pin1));
-  });
+  app.onRepeat(5,
+               []() { digitalWrite(output_pin1, !digitalRead(output_pin1)); });
 
   pinMode(output_pin2, OUTPUT);
-  app.onRepeat(100, []() {
-    digitalWrite(output_pin2, !digitalRead(output_pin2));
-  });
+  app.onRepeat(100,
+               []() { digitalWrite(output_pin2, !digitalRead(output_pin2)); });
 
   sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }

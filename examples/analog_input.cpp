@@ -1,11 +1,11 @@
-#include "sensors/analog_input.h"
 
 #include <Arduino.h>
 
+#include "sensesp/sensors/analog_input.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/transforms/linear.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "signalk/signalk_output.h"
-#include "transforms/linear.h"
 
 using namespace sensesp;
 
@@ -15,7 +15,6 @@ reactesp::ReactESP app;
 
 // The setup function performs one-time application initialization.
 void setup() {
-
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
@@ -43,8 +42,8 @@ void setup() {
   const char* analog_in_config_path = "/indoor_illuminance/analog_in";
   const char* linear_config_path = "/indoor_illuminance/linear";
 
-  // Create a sensor that is the source of the data, which will be read every 500
-  // ms. It's a light sensor that's connected to the ESP's AnalogIn pin.
+  // Create a sensor that is the source of the data, which will be read every
+  // 500 ms. It's a light sensor that's connected to the ESP's AnalogIn pin.
   // ESP32 has many pins that can be
   // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
   // When it's dark, the sensor's output (as read by analogRead()) is 120, and
@@ -60,7 +59,8 @@ void setup() {
   // (In the final output, on a gauge in Instrument Panel, for example, it will
   // look like a percentage from 0 to 100, but the official "unit"  in the
   // Signal K specification for a percentage is "ratio".)
-  // See https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
+  // See
+  // https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
   // for more details.
   //
   // First, calculate the multiplier. Since the total measurement range
@@ -97,6 +97,4 @@ void setup() {
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }

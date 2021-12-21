@@ -1,5 +1,5 @@
-#ifndef _sensesp_H_
-#define _sensesp_H_
+#ifndef _SENSESP_H_
+#define _SENSESP_H_
 
 #include <ReactESP.h>
 
@@ -9,7 +9,7 @@
 #define DEBUG_CLASS RemoteDebug
 #endif  // DEBUG_DISABLED
 #else  // REMOTE_DEBUG
-#include "system/local_debug.h"
+#include "sensesp/system/local_debug.h"
 #ifndef DEBUG_DISABLED
 #define DEBUG_CLASS LocalDebug
 #endif  // DEBUG_DISABLED

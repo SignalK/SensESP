@@ -1,13 +1,13 @@
 #include <Arduino.h>
 
+#include "sensesp/sensors/analog_input.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/transforms/analogvoltage.h"
+#include "sensesp/transforms/curveinterpolator.h"
+#include "sensesp/transforms/linear.h"
+#include "sensesp/transforms/voltagedivider.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "sensors/analog_input.h"
-#include "signalk/signalk_output.h"
-#include "transforms/analogvoltage.h"
-#include "transforms/curveinterpolator.h"
-#include "transforms/linear.h"
-#include "transforms/voltagedivider.h"
 
 using namespace sensesp;
 
@@ -40,18 +40,18 @@ class TemperatureInterpreter : public CurveInterpolator {
       : CurveInterpolator(NULL, config_path) {
     // Populate a lookup table tp translate the ohm values returned by
     // our temperature sender to degrees Kelvin
-    clearSamples();
+    clear_samples();
     // addSample(CurveInterpolator::Sample(knownOhmValue, knownKelvin));
-    addSample(CurveInterpolator::Sample(0, 418.9));
-    addSample(CurveInterpolator::Sample(5, 414.71));
-    addSample(CurveInterpolator::Sample(36, 388.71));
-    addSample(CurveInterpolator::Sample(56, 371.93));
-    addSample(CurveInterpolator::Sample(59, 366.48));
-    addSample(CurveInterpolator::Sample(81, 355.37));
-    addSample(CurveInterpolator::Sample(112, 344.26));
-    addSample(CurveInterpolator::Sample(240, 322.04));
-    addSample(CurveInterpolator::Sample(550, 255.37));
-    addSample(CurveInterpolator::Sample(10000, 237.6));
+    add_sample(CurveInterpolator::Sample(0, 418.9));
+    add_sample(CurveInterpolator::Sample(5, 414.71));
+    add_sample(CurveInterpolator::Sample(36, 388.71));
+    add_sample(CurveInterpolator::Sample(56, 371.93));
+    add_sample(CurveInterpolator::Sample(59, 366.48));
+    add_sample(CurveInterpolator::Sample(81, 355.37));
+    add_sample(CurveInterpolator::Sample(112, 344.26));
+    add_sample(CurveInterpolator::Sample(240, 322.04));
+    add_sample(CurveInterpolator::Sample(550, 255.37));
+    add_sample(CurveInterpolator::Sample(10000, 237.6));
   }
 };
 
@@ -60,7 +60,6 @@ class TemperatureInterpreter : public CurveInterpolator {
 ReactESP app;
 
 void setup() {
-
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
@@ -93,7 +92,6 @@ void setup() {
   metadata->display_name_ = "Alternator Temperature";
   metadata->short_name_ = "Alt Temp";
   metadata->units_ = "K";
-
 
   /*
   Connecting a physical temperature sender to the MCU involves using a "voltage
@@ -164,7 +162,8 @@ void setup() {
       ->connect_to(new VoltageDividerR2(R1, Vin, "/12V_alternator/temp/sender"))
       ->connect_to(new TemperatureInterpreter("/12V_alternator/temp/curve"))
       ->connect_to(new Linear(1.0, 0.0, "/12V_alternator/temp/calibrate"))
-      ->connect_to(new SKOutputFloat(sk_path, "/12V_alternator/temp/sk", metadata));
+      ->connect_to(
+          new SKOutputFloat(sk_path, "/12V_alternator/temp/sk", metadata));
 
   // Start the SensESP application running, which simply activates everything
   // that's been set up above
@@ -173,6 +172,4 @@ void setup() {
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }

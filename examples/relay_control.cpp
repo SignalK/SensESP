@@ -1,12 +1,12 @@
 #include <Arduino.h>
 
+#include "sensesp/sensors/digital_output.h"
+#include "sensesp/signalk/signalk_listener.h"
+#include "sensesp/signalk/signalk_output.h"
+#include "sensesp/signalk/signalk_value_listener.h"
+#include "sensesp/transforms/threshold.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
-#include "sensors/digital_output.h"
-#include "signalk/signalk_listener.h"
-#include "signalk/signalk_output.h"
-#include "signalk/signalk_value_listener.h"
-#include "transforms/threshold.h"
 
 using namespace sensesp;
 
@@ -22,7 +22,6 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-
 // Some initialization boilerplate when in debug mode...
 #ifndef SERIAL_DEBUG_DISABLED
   SetupSerialDebug(115200);
@@ -66,7 +65,4 @@ void setup() {
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
-
+void loop() { app.tick(); }
