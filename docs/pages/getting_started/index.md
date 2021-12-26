@@ -12,8 +12,6 @@ SensESP is a library of functions that makes it relatively simple to create a pr
 
 It can work with virtually any kind of sensor that can work with an Arduino, usually without having to write more than a few lines of code. It can also work with sensors requiring more complex coding, although you may have to do that coding yourself. One of its great strengths is that it insulates you from the code that connects to your wifi and interfaces with your Signal K Server - those things just happen when SensESP runs!
 
-(BAS: create a couple of very basic examples, with accompanying Tutorial pages that explain them in detail.)
-
 The best way to learn how to use SensESP is by looking at a few examples. They won't be installed on your computer until after you've built your first Project (described below), but in the meantime, you can see all of them in the [examples folder in the GitHub repo](https://github.com/SignalK/SensESP/tree/master/examples). `rpm_counter.cpp` is a good one to start with, as it illustrates a simple implementation - reading the value of a sensor connected to a GPIO pin on the MCU, converting that value to hertz (the native unit of measurement for a tachometer in Signal K), then sending the value in hertz to the Signal K Server. But there are many other examples, illustrating many other concepts, so have a look at several of them.
 
 If you're only interested in using SensESP in a new Project, DO NOT clone or otherwise download the SensESP GitHub repo to your computer. All of those files will be automatically downloaded by PlatformIO (the IDE you'll be using) when they're needed to compile and build your Project. The only files you'll be working with are your Project's `main.cpp` and `platformio.ini`, following the instructions below.
@@ -28,7 +26,7 @@ Once the SK Server is installed and running, go to the Dashboard (enter `localho
 
 To build a SensESP project and upload it to your ESP, you'll need to [install Visual Studio Code, then install the PlatformIO extension](https://platformio.org/install/ide?install=vscode). SensESP doesn't work with the Arduino IDE. (Throughout the documentation, there will be many references to PlatformIO, which is an extension to Visual Studio Code. So when you see something like "Start PlatformIO", it really means, "Start Visual Studio Code and get into the PlatformIO extension.")
 
-[^1]: This is not strictly true - it's possible to use SensESP for something other than connecting to a Signal K Server, as described [here](BAS: link to the Tutorial page that describes a super-basic SensESP program). However, the typical SensESP user will be connecting to a Signal K Server.
+[^1]: This is not strictly true - it's possible to use SensESP for something other than connecting to a Signal K Server, as described [here](https://github.com/SignalK/SensESP/blob/master/examples/minimal_app.cpp). However, the typical SensESP user will be connecting to a Signal K Server.
 
 ## Start a New Project in PlatformIO
 
@@ -60,7 +58,7 @@ Look in the file you saved as `platformio.ini.saved` to see how YOUR board is re
 If your board is NOT an `esp32dev`, you need to do a few things:
 
 1. Replace `esp32dev` with the name of your board. You'll know how your board is represented by looking at the `board =` section of `platformio.ini.saved`.
-2. Copy-paste the entire contents of `platformio.ini.saved` into the very bottom of `platformio.ini`. That will look something like this: (BAS: make a PR to modify the example platformio.ini, to remove the reference to the d1_mini.)
+2. Copy-paste the entire contents of `platformio.ini.saved` into the very bottom of `platformio.ini`. That will look something like this:
 
     ```c++
     [env:your_board_name]
@@ -80,7 +78,7 @@ Now you should have a `platformio.ini` that will work for your board, and that h
 
 Note that the `platformio.ini` file you now have points to the most recent "Release" version of SensESP. (`lib_deps = SignalK/SensESP`) It's the version that's in the branch called `latest` in the GitHub repo. If you want to use the `master` branch, which has all of the most recently-merged Pull Requests since `latest` was published, you need to change that to `lib_deps = https://github.com/SignalK/SensESP`. The `latest` branch is the safest, but the `master` branch is the most up-to-date. It's also not really supported - only the `latest` branch is - so unless you know you need something that's in `master` that's not yet in `latest`, you should stick with `latest`.
 
-## Working with maincpp
+## Working with main.cpp
 
 In a Platformio Project, the primary source code file is called `main.cpp` (not `YourProject.ino` like it is in the Arduino IDE). When you create a new Project, PlatformIO creates a `main.cpp` for you, but you can't use it for SensESP.
 
@@ -131,8 +129,8 @@ In the first instance above, where nothing is set or enabled, SensESP will use s
 In the second instance above, you can see that the hostname, wifi credentials, and Signal K Server information are hard-coded. You may find this valuable:
 
 * Your SensESP device will be named something meaningful, like `main_engine_temps` or `bilge_monitor`, rather than just "SensESP".
-* You won't have to manually configure your wifi credentials.
-* mDNS *usually* works, but not always; hard-coding the Signal K Server address and port should *always* work.
+* You won't have to manually configure your wifi credentials. But be aware that if you hard-code the wifi credentials, and then later change your wifi SSID or password, you'll have to physically connect your computer to the ESP device to reflash it with the updated `main.cpp` that reflects the new SSID and password. Also, hard-coded credentials could accidentally be uploaded to a GitHub repo and exposed to the world. Be careful!
+* mDNS *usually* works, but there are many components of it that are beyond the control of SensESP that could cause it to not work for you. If you encounter any issues connecting with it, you can try hard-coding the Signal K Server address and port.
 
 In addition, there are other settings you may want to make with the above approach:
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Add-ons and related projects
+title: Add-ons and Related Projects
 parent: Additional resources
 nav_order: 10
 ---
@@ -9,7 +9,7 @@ nav_order: 10
 
 This page lists different add-ons and other projects related to SensESP.
 
-If you want to have your own project added to the list, [make a PR](https://github.com/SignalK/SensESP/pulls) or [create an issue](https://github.com/SignalK/SensESP/issues) for it. (BAS: I don't think this is how someone would add a project to this list. I think each thing on this list is going to be its own repo. Discuss w/ @mairas.)
+If you want to have your own project added to the list, [create an issue](https://github.com/SignalK/SensESP/issues) requesting that it be added, or [make a PR](https://github.com/SignalK/SensESP/pulls) to modify this page (/SensESP/docs/pages/additional_resources/add-ons.md).
 
 # Sensor Libraries
 
