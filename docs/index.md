@@ -12,13 +12,13 @@ If you are a boater (or a professional developer!) who wants to build a custom W
 SensESP runs on commonly available ESP32 boards and helps you get sensor readings from physical sensors and transform them to meaningful data for Signal K or other outputs.
 
 SensESP is built on the [Arduino](https://github.com/espressif/arduino-esp32) software development framework, a popular open source platform for embedded development.
-(Note that this only refers to the software stack - Arduino hardware is not supported.)
+(Note that this refers only to the software stack - Arduino hardware is not supported.)
 To automate the management of external libraries, it also heavily relies on PlatformIO, a cross-platform build system for embedded devices (in other words, Arduino IDE is not supported).
 
 SensESP features include:
 
 * High-level programming interfaces for sensor development
-* Support for a wide range of common sensor hardware with a set of [add-on libraries](pages/additional_resources/add-ons/) - and if native support is missing, using existing Arduino libraries directly is also possible
+* Support for a wide range of common sensor hardware with a set of [add-on libraries](pages/additional_resources/add-ons/) - and if native support is missing, using existing Arduino libraries directly is also quite simple in most cases
 * A Web configuration user interface for sensors, transforms, and output paths
 * Easy on-boarding with a Wi-Fi configuration tool and fully automated server discovery
 * Full Signal K integration with authentication, and transmission and reception of data
