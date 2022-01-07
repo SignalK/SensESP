@@ -1,6 +1,8 @@
 #ifndef _digital_input_H_
 #define _digital_input_H_
 
+#include <elapsedMillis.h>
+
 #include "sensor.h"
 
  /**
@@ -94,9 +96,56 @@ class DigitalInputCounter : public DigitalInput, public IntegerProducer {
 
   void enable() override final;
 
- private:
-  uint read_delay_;
+ protected:
+   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
+                      uint read_delay, String config_path,
+                      std::function<void()> interrupt_handler);
+
+  std::function<void()> interrupt_handler_;
+
+ protected:
   volatile uint counter_ = 0;
+  uint read_delay_;
+
+ private:
+  virtual void get_configuration(JsonObject& doc) override;
+  virtual bool set_configuration(const JsonObject& config) override;
+  virtual String get_config_schema() override;
+};
+
+/**
+ * @brief DigitalInputDebounceCounter counts interrupts and reports the count
+ * every read_delay ms, but ignores events that happen within
+ * ignore_interval_ms.
+ *
+ * You can use this class if, for example, you have a noisy reed switch that
+ * generates multiple interrupts every time it is actuated.
+ *
+ * @param pin The GPIO pin to which the device is connected
+ *
+ * @param pin_mode Will be INPUT or INPUT_PULLUP
+ *
+ * @param interrupt_type Will be RISING, FALLING, or CHANGE
+ *
+ * @param read_delay_ms How often you want to read the pin, in ms
+ *
+ * @param ignore_interval_ms Ignore events within this interval after a recorded
+ * event.
+ *
+ * @param config_path The path to configuring read_delay in the Config UI
+ */
+class DigitalInputDebounceCounter : public DigitalInputCounter {
+ public:
+  DigitalInputDebounceCounter(uint8_t pin, int pin_mode, int interrupt_type,
+                              unsigned int read_delay_ms,
+                              unsigned int ignore_interval_ms,
+                              String config_path = "");
+
+ private:
+  void handleInterrupt();
+
+  unsigned int ignore_interval_ms_;
+  elapsedMillis since_last_event_ = 0;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
