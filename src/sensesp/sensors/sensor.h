@@ -39,6 +39,7 @@ class Sensor : virtual public Observable,
 
 /**
  * @brief Sensor template class for any sensor producing actual values.
+ *
  **/
 template <typename T>
 class SensorT : public Sensor, public ValueProducer<T> {
@@ -49,6 +50,7 @@ class SensorT : public Sensor, public ValueProducer<T> {
 
 typedef SensorT<float> FloatSensor;
 typedef SensorT<int> IntSensor;
+typedef SensorT<bool> BoolSensor;
 typedef SensorT<String> StringSensor;
 
 template <class T>
