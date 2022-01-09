@@ -6,8 +6,6 @@ nav_order: 30
 
 # Concepts
 
-- Configuration API (Matti)
-
 ## ReactESP
 
 ### Basics
@@ -202,7 +200,7 @@ or by putting the configuration path string directly into the parameter list of 
 auto* analog_input = new AnalogInput(250, "/analogInput");
 ```
 
-## Naming Configuration Paths
+### Naming Configuration Paths
 
 The naming of the paths is important, especially when you have multiple Sensors and / or multiple Transforms in your Project, so to be safe, please follow these guidelines:
 

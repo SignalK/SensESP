@@ -1,0 +1,15 @@
+/*
+    A simplified example of an observable and three observers.
+*/
+digraph G {
+    rankdir=LR;
+
+    observable [shape=box];
+    observer1 [shape=box];
+    observer2 [shape=box];
+    observer3 [shape=box];
+
+    observable -> observer1;
+    observable -> observer2;
+    observable -> observer3;
+}
