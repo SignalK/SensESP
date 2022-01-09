@@ -97,7 +97,7 @@ The brackets `[]` define the start of the lambda expression.
 They may also contain definitions for variable capture.
 To learn more about that topic, see the [cppreference.com discussion and examples](https://en.cppreference.com/w/cpp/language/lambda).
 
-### Reaction types
+### Reaction Types
 
 ReactESP is not limited to just delays or repeating reactions.
 It also supports the following:
@@ -106,7 +106,7 @@ It also supports the following:
 - `ISRReaction`: a reaction that is called when an interrupt is triggered (for example, when a GPIO pin is toggled)
 - `TickReaction`: a reaction that is called every time the main event loop is executed
 
-### Removing reactions
+### Removing Reactions
 
 All of the `app.onXXX()` calls return a `Reaction` object.
 If this object is stored, it can be used to access and manipulate the reaction later.

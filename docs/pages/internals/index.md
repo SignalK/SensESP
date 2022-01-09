@@ -16,7 +16,7 @@ Any class inheriting from `Observable` can be observed.
 In practical terms, you can call `observable->attach(cb)` to attach the callback `cb` to the `Observable` instance.
 When the `Observable` instance value is updated, the `notify()` method is called, causing all the attached callbacks to be called in turn.
 
-The value in having Observables is that you don't have to know in advance who is interested in an object value updates, or how many interested parties there are.
+The value in having Observables is that you don't have to know in advance who is interested in object value updates, or how many interested parties there are.
 
 Usually, the attached callback will propagate the new value of the `Observable` to the observer object.
 
@@ -32,16 +32,16 @@ This is the same graph with the callbacks shown:
 
 Moving forward from Observables, we have Producers and Consumers, implemented in the `ValueProducer` and `ValueConsumer` classes respectively.
 
-Producers are Observables that additionally define a `connect_to()` method that can be used to connect the producer to a consumer.
+Producers are Observables that additionally define a `connect_to()` method that can be used to connect the Producer to a Consumer.
 The `connect_to()` method creates a standardized callback between the two objects, thus allowing you to connect the two without having to define the callback yourself.
 
 Consumers, on their turn, are classes that implement the `set_input()` method that the Observable callback will call.
-Consumers also define a `connect_from()` convenience method for connecting the consumer to a producer.
-`connect_from()` is a bit more complex than `connect_to()` because it "goes against the flow", so to speak, but it can come handy in many situations.
+Consumers also define a `connect_from()` convenience method for connecting the Consumer to a Producer.
+`connect_from()` is a bit more complex than `connect_to()` because it "goes against the flow", so to speak, but it can come in handy in many situations.
 
 It is common for a class to be both a `ValueProducer` and a `ValueConsumer`. Such classes typically receive values, perform some operations, and then notify their consumers, thus creating a _transform_ of the input. `Transform` classes are described in the [Transforms](#Transforms) section.
 
-An important difference between Observables and Producers is that Producers are typed. `ValueProducers` is a template class that, when instantiated, will also have its output type defined.
+An important difference between Observables and Producers is that Producers are typed. `ValueProducer` is a template class that, when instantiated, will also have its output type defined.
 This means that a `StringProducer` cannot be connected to an `IntConsumer` because the types don't match.
 
 There is nothing wrong in using the `ValueProducer<T>` and `ValueConsumer<T>` classes directly, but some pre-specialized convenience classes have been defined for common use cases:
@@ -64,11 +64,11 @@ Manual conversion can be created with a `LambdaTransform`, for example.
 `ObservableValue` is one of the simplest Producers.
 By itself, it does nothing, but it implements the `ValueProducer` interface, and you can connect `ValueConsumer` objects to it.
 If you update the value of the `ObservableValue`, all the connected consumers will be notified.
-This approach can be used to inject arbitrary data to SensESP processing networks.
+This approach can be used to inject arbitrary data into SensESP processing networks.
 
 ## Configurables
 
-Many SensESP object benefit from having a configuration interface and means for storing and retriveing configuration values from a persistent storage.
+Many SensESP objects benefit from having a configuration interface and means for storing and retriveing configuration values from a persistent storage.
 The `Configurable` class is a base class for all such objects.
 
 `Configurable` objects can read and write their configuration values by defining `set_configuration()` and `get_configuration()` methods.
@@ -106,9 +106,9 @@ The priority definitions are arbitrary, but some of the currently defined values
 | 0            | Default value        |
 
 A `Resettable` object is something that should be called when the ESP device is factory reset.
-Example use cases include initializing the file system or the WiFi network settings (to be honest, those are the only use cases at the moment...).
+Currently, the only use cases for `Resettable` are initializing the file system and the WiFi network settings.
 
-Similarly to `Startable`, the `Resettable` constructor has an optional `priority` parameter that can be used to control the object reset order.
+Similar to `Startable`, the `Resettable` constructor has an optional `priority` parameter that can be used to control the object reset order.
 
 The currently defined values are:
 
@@ -120,7 +120,7 @@ The currently defined values are:
 ## Sensors
 
 Sensors are classes that read value from some real-world source and provide them to the rest of the system.
-Building on the concepts described above, a `Sensor` subclass is a `ValueProducer` of certain type, a `Configurable`, and a `Startable` (even though the default `start()` method does nothing and is usually not overridden). In other words, it is something that you can attach Observables or Consumers to, which can store and retrieve its own configuration (and can be configured via the web interface), and can define its own startup routine.
+Building on the concepts described above, a `Sensor` subclass is a `ValueProducer` of a certain type, a `Configurable`, and a `Startable` (even though the default `start()` method does nothing and is usually not overridden). In other words, it is something that you can attach Observables or Consumers to, which can store and retrieve its own configuration (and can be configured via the web interface), and can define its own startup routine.
 
 Like ValueProducers, all Sensors inherit from the `SensorT<T>` template class, and there are pre-specialized classes for convenience: `FloatSensor`, `IntSensor`, `BoolSensor`, and `StringSensor`.
 
@@ -144,7 +144,7 @@ Transforms are further discussed on the [Transforms section of the Concepts page
 
 ## Configuration API
 
-The web user interface of the SensESP system is implemented using a RESTful configuration API that can be used independently of the web UI.
+The web user interface of SensESP is implemented using a RESTful configuration API that can be used independently of the web UI.
 It would, for example, be possible to create a Signal K plugin for configuring all connected sensors over their configuration interfaces.
 
 Regular SensESP devices listen to HTTP port 80. The following calls are supported:
