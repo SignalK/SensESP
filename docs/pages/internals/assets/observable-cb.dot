@@ -1,0 +1,20 @@
+/*
+    An example of an observable and three observers with callbacks.
+*/
+digraph G {
+    rankdir=LR;
+
+    observable [shape=box];
+
+    cb1 [shape=ellipse];
+    cb2 [shape=ellipse];
+    cb3 [shape=ellipse];
+
+    observer1 [shape=box];
+    observer2 [shape=box];
+    observer3 [shape=box];
+
+    observable -> cb1 -> observer1;
+    observable -> cb2 -> observer2;
+    observable -> cb3 -> observer3;
+}

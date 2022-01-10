@@ -1,0 +1,15 @@
+/*
+    An example of a producer and three consumers
+*/
+digraph G {
+    rankdir=LR;
+
+    producer [label="intProducer", shape=box];
+    consumer1 [label="intConsumer1", shape=box];
+    consumer2 [label="intConsumer2", shape=box];
+    consumer3 [label="intConsumer3", shape=box];
+
+    producer -> consumer1;
+    producer -> consumer2;
+    producer -> consumer3;
+}
