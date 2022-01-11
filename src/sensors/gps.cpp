@@ -9,6 +9,7 @@ GPSInput::GPSInput(Stream* rx_stream)
   rx_stream_ = rx_stream;
 
   nmea_parser_.add_sentence_parser(new GPGGASentenceParser(&nmea_data_));
+  nmea_parser_.add_sentence_parser(new GNGLLSentenceParser(&nmea_data_));
   nmea_parser_.add_sentence_parser(new GPGLLSentenceParser(&nmea_data_));
   nmea_parser_.add_sentence_parser(new GPRMCSentenceParser(&nmea_data_));
   nmea_parser_.add_sentence_parser(new PSTISentenceParser(&nmea_data_));
