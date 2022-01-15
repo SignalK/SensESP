@@ -2,7 +2,6 @@
 layout: default
 title: Tutorials
 nav_order: 42
-has_children: true
 ---
 
 # Tutorials
