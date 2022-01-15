@@ -7,9 +7,10 @@ has_children: true
 
 # Tutorials
 
-If you're new to SensESP, and you like learning through tutorials, this is the page for you! We've made a tutorial for every important concept we can think of to help you learn in a step-by-step manner. Each one will teach you something new, but in a way that builds on one or more other tutorials.
+This page lists the tutorials available on the SensESP website.
+The tutorials are down-to-earth guides that teach you how to achieve specific goals with SensESP.
+They can vary a lot in scope and complexity, and often also discuss not just SensESP itself but also how to integrate SensESP with external hardware and software components.
 
-In most cases, there is a `main.cpp` file in the SensESP examples, or in a special GitHub repository, that corresponds with the tutorial, so you can see exactly the code that the tutorial is talking about, and can easily build it, upload it to your ESP, and try it out.
 
 Each of the Tutorials is briefly described below.
 
