@@ -6,142 +6,157 @@ nav_order: 20
 
 # Getting Started
 
-## Introduction
+## Expected Skills
 
-SensESP is a library of functions that makes it relatively simple to create a program for an ESP32 microcontroller ("MCU"), that collects data from one or more sensors, processes the data, and sends it along to some "consumer", typically a Signal K Server. It can also be used to monitor information coming from a Signal K Server and take action based on that information, such as turning on your anchor light when it gets dark outside.
+The Quick Start Guide is intended for people with at least some basic software development skills.
+If you are a total newbie to software development and microcontrollers, see the [tutorials](../tutorials/) for slower-paced guides.
 
-It can work with virtually any kind of sensor that can work with an Arduino, usually without having to write more than a few lines of code. It can also work with sensors requiring more complex coding, although you may have to do that coding yourself. One of its great strengths is that it insulates you from the code that connects to your wifi and interfaces with your Signal K Server - those things just happen when SensESP runs!
+## Prerequisites: Hardware
 
-The best way to learn how to use SensESP is by looking at a few examples. They won't be installed on your computer until after you've built your first Project (described below), but in the meantime, you can see all of them in the [examples folder in the GitHub repo](https://github.com/SignalK/SensESP/tree/master/examples). `rpm_counter.cpp` is a good one to start with, as it illustrates a simple implementation - reading the value of a sensor connected to a GPIO pin on the MCU, converting that value to hertz (the native unit of measurement for a tachometer in Signal K), then sending the value in hertz to the Signal K Server. But there are many other examples, illustrating many other concepts, so have a look at several of them.
+To get started with SensESP development, first you need some suitable hardware.
+A good low-cost option is an ESP32-DevKit board.
+Search AliExpress, Amazon, Ebay, or other marketplace of your choice for "ESP32-DevKitC v4".
+Pick one with a WROOM-32D or WROOM-32E module.
+Others are available and will likely work, but those are the sure-fire ones.
 
-If you're only interested in using SensESP in a new Project, DO NOT clone or otherwise download the SensESP GitHub repo to your computer. All of those files will be automatically downloaded by PlatformIO (the IDE you'll be using) when they're needed to compile and build your Project. The only files you'll be working with are your Project's `main.cpp` and `platformio.ini`, following the instructions below.
+The ESP32-DevKit boards are dirt cheap and great for testing and development on a lab desk, but integrating them in a "production" environment on a boat requires external power sources and enclosures and can be a hassle.
+For onboard purposes, a [Sailor Hat with ESP32 (SH-ESP32)](https://hatlabs.fi/product/sailor-hat-with-esp32/) is a great option.
+The SH-ESP32 has an integrated wide voltage range power supply, an NMEA-2000 compatible isolated CAN interface, a selection of suitable enclosures and connectors, and lots of other goodies for marine sensor development.
+And by purchasing one, you'll support SensESP development. ;-)
 
-If you want to make changes or additions to the core SensESP functionality, [click here](get_in_touch/) for more information. (BAS: this link doesn't work.)
+While usable as is, you will get the most out of a SensESP device if you can connect it to a [Signal K](http://signalk.org/) server.
+Read the Signal K [Info](https://signalk.org/overview.html) and [Installation](https://signalk.org/installation.html) pages for more information on the hardware choices and setting one up.
+This tutorial assumes that you already have a Signal K server running on your local network.
 
-## Getting Ready to Get Started
+## Prerequisites: Software
 
-You must have a Signal K Server running on your network, or SensESP has nothing to connect to[^1]. The most common installation is the Signal K node server running on a Raspberry Pi. Installation instructions for that are [here](https://github.com/SignalK/signalk-server-node/blob/master/raspberry_pi_installation.md). Be sure to turn SSL OFF as you go through the installation - SensESP won't work if it's enabled.
+It is possible to work on SensESP projects on Linux, Mac, or Windows.
+Linux and Mac or both equally convenient.
+On Windows, you might have to install some additional tools like a Git client, and adapt the instructions accordingly.
 
-Once the SK Server is installed and running, go to the Dashboard (enter `localhost:3000` into the Raspberry Pi's browser to start it), select Server - Settings from the left side menu, and make sure the "mdns" option is ON.
+SensESP projects use [PlatformIO](https://platformio.org/) to build and upload the device firmware.
+You would normally use [Visual Studio Code](https://code.visualstudio.com/) as a development IDE.
+If you're happy with that, install Visual Studio Code.
+PlatformIO will be installed automatically when you open the project.
 
-To build a SensESP project and upload it to your ESP, you'll need to [install Visual Studio Code, then install the PlatformIO extension](https://platformio.org/install/ide?install=vscode). SensESP doesn't work with the Arduino IDE. (Throughout the documentation, there will be many references to PlatformIO, which is an extension to Visual Studio Code. So when you see something like "Start PlatformIO", it really means, "Start Visual Studio Code and get into the PlatformIO extension.")
+If Visual Studio Code is not the way you roll, install the [PlatformIO Core command-line interface](https://docs.platformio.org/en/latest/core/index.html).
+You will be able to utilize all of PlatformIO's features but you might have to adapt the instructions accordingly.
 
-[^1]: This is not strictly true - it's possible to use SensESP for something other than connecting to a Signal K Server, as described [here](https://github.com/SignalK/SensESP/blob/master/examples/minimal_app.cpp). However, the typical SensESP user will be connecting to a Signal K Server.
+## Downloading a Project Template
 
-## Start a New Project in PlatformIO
+For a running start, it is strongly recommended to start with a ready-made project template.
+Download the [SensESP Project Template](https://github.com/SensESP/SensESP-project-template).
+You can either clone the repo (if you’re comfortable with Git) or download the source code as a zip file by clicking on the green “Code” button and selecting “Download ZIP”.
+If you went with the Zip file, unzip the package in a directory of your choice.
 
-1. Start Visual Studio Code.
-2. On the far left edge, click on the icon that looks like an alien face. That will start the PlatformIO extension.
-3. The PlatformIO: Quick Access menu will appear. Under "PIO Home", click on "Projects & Configuration", which will open the Projects view.
-4. Click on the "Create New Project" button and the Project Wizard will open.
-5. Give your new Project a name. If you know what it's going to be, like a Bilge Monitor, give it a descriptive name. Otherwise, call it something like SensESPTest. (No more than 32 characters, no spaces.)
-6. Select a board. This refers to the microcontroller you'll be using. If you type `esp32` into the "Board" field, the list will show all the ESP32 boards that PIO works with. Select your specific board, unless you don't see it in the list, in which case select "Espressif ESP32 Dev Module".
-7. The "Framework" field should change automatically to "Arduino". Leave it that way.
-8. Click the "Finish" button, and your new Project will be created.
-9. A new `platformio.ini` file should open in the editor, and in the file navigator, if you click on "src", you'll see that there is a `main.cpp` file. Double-click on that to open it in the editor, and now you'll be looking at the only two files you should need to work with to create your first SensESP project.
+## Building and Installing the Project Template
 
-## Getting a Good platformio.ini File
+Open the project template directory in Visual Studio Code.
+VSCode should automagically detect that the directory is a PlatformIO project and recommend installing it.
+Play along and reload the window when requested.
+Next, PlatformIO will pick up and download the ESP32 SDKs and all dependencies in the background.
+This is indicated by the "PlatformIO: Rebuilding IntelliSense Index" message in the status bar.
+When the download is complete, the message will disappear and the project template is ready to use.
 
-Now, all you need to do is modify the `platformio.ini` and `main.cpp` files. Once you have your new project open, open the `platformio.ini` file that's in your Project's directory - the file that was auto-generated. Save the file as `platformio.ini.saved`.
+At this point, connect your ESP32 device to your computer with a MicroUSB cable (not provided).
+You're now ready to build and upload the project to the device.
 
-Use File_New File to create a new, empty file. Copy-paste the entire contents of [the example SensESP platformio.ini file](https://github.com/SignalK/SensESP/blob/master/examples/platformio.ini) into this new file. Then File_Save this new file as "platformio.ini". Near the top of that file is a section that looks something like this:
+If not already visible, open the PlatformIO sidebar by clicking the PlatformIO alien icon in the left sidebar.
+Then, upload the project by selecting "Project Tasks -> esp32dev -> General -> Upload and Monitor" in the left hand side PlatformIO menu.
+This will perform three things:
 
-```c++
-[platformio]
-;set default_envs to whichever board(s) you use. Build/Run/etc processes those envs
-default_envs =
-   esp32dev
-```
+1. Build the firmware
+2. Upload the firmware to the device
+3. Start the serial port monitor
 
-Look in the file you saved as `platformio.ini.saved` to see how YOUR board is represented. If it's in there as `esp32dev`, your `platformio.ini` file should be good to go, and can move on to "Working with main.cpp", below.
+(If any of these fail, try the individual Build, Upload, and Monitor steps and observe the output in the Terminal window.)
 
-If your board is NOT an `esp32dev`, you need to do a few things:
+Assuming everything went smoothly, you should see some output in the Terminal tab at the bottom panel, indicating that the project template has been successfully installed and started on the device.
 
-1. Replace `esp32dev` with the name of your board. You'll know how your board is represented by looking at the `board =` section of `platformio.ini.saved`.
-2. Copy-paste the entire contents of `platformio.ini.saved` into the very bottom of `platformio.ini`. That will look something like this:
+If you're playing along on the command line, `pio run -t upload` will build and upload the project.
+You have to start the serial monitor manually by running `pio device monitor`.
 
-    ```c++
-    [env:your_board_name]
-    platform = espressif32
-    board = your_board_name
-    framework = arduino
-    ```
+## WiFi Configuration
 
-3. On a new line immediately after `[env:your_board_name]`, copy this: `extends = espressif32_base`.
-4. Remove the `platform =` line. (It's already in the "base" section that the previous line points to.)
-5. Remove the `framework = arduino` line. (It's already in the global `[env]` section earlier in the file.)
-6. If there are other lines in the `[env:your_board_name]` section of `platformio.ini.saved`, you should leave them.
-7. If there are other sections (besides the `[env:your_board_name]` section) in `platformio.ini.saved`, they're there because PlatformIO thinks you need them, so you should leave them in your modified `platformio.ini`.
-8. Look through the entire `platformio.ini` file, looking at all of the comments, to determine if any of them pertain to your board or your project.
+If a WiFi access point hasn't been configured yet, SensESP will create a special configuration access point for you.
+Open the list of nearby WiFi APs on your phone or computer and connect to the network named "Configure my-sensesp-project".
+The default network password is `thisisfine`.
 
-Now you should have a `platformio.ini` that will work for your board, and that has all the settings that have been determined to be necessary for SensESP.
+Normally, the WiFiManager configuration screen should automatically pop up.
+If that doesn't happen, browse to the captive portal IP address `192.168.4.1` in your web browser.
 
-Note that the `platformio.ini` file you now have points to the most recent "Release" version of SensESP. (`lib_deps = SignalK/SensESP`) It's the version that's in the branch called `latest` in the GitHub repo. If you want to use the `master` branch, which has all of the most recently-merged Pull Requests since `latest` was published, you need to change that to `lib_deps = https://github.com/SignalK/SensESP`. The `latest` branch is the safest, but the `master` branch is the most up-to-date. It's also not really supported - only the `latest` branch is - so unless you know you need something that's in `master` that's not yet in `latest`, you should stick with `latest`.
+Select the Wi-Fi network you prefer and enter the password, save and close.
+The device should now automatically connect to the network.
 
-## Working with main.cpp
+Verify in the serial monitor output that the device connects properly to the WiFi.
+Assuming that is the case, you can now continue with the next step.
 
-In a Platformio Project, the primary source code file is called `main.cpp` (not `YourProject.ino` like it is in the Arduino IDE). When you create a new Project, PlatformIO creates a `main.cpp` for you, but you can't use it for SensESP.
+## Signal K Authorization
 
-Open `/YourProjectName/src/main.cpp`. The default file is for the Arduino IDE, but a SensESP `main.cpp` file will look very different. Replace the entire contents of `main.cpp` with the contents of one of the SensESP examples in <https://github.com/SignalK/SensESP/tree/master/examples>. (This is a good one to start with: <https://github.com/SignalK/SensESP/blob/master/examples/analog_input.cpp>.) Check that the settings (pin numbers, etc.) match your hardware. Then click on the checkmark icon on the blue status bar along the bottom of your screen. (That's the "Build" shortcut.) If the build succeeds, you can plug in your ESP board and press the right-arrow icon, which will upload the firmware to your ESP32 and start to run it. Also click on the icon that looks like a wall outlet plug - that will open the Serial Monitor window so you can see what the program is doing.
+The device is now on the WiFi network.
+If you have a Signal K server running
+and automatic mDNS/Avahi service discovery correctly configured, you should immediately have a device access request appear on the Signal K server web UI:
 
-## After It's Built, Uploaded, and Running
+![Device Access Request](assets/device_access_request.png "Device Access Request"){:width="50%"}
 
-If the project compiles and uploads, your ESP will be running the example code. (If you get errors about missing libraries, see the [Troubleshooting page](pages/troubleshooting) (BAS: this link doesn't work.)). Since the first thing it needs to do is connect to a wifi network, and it doesn't know what network to connect to, it will broadcast a wifi SSID for you to connect to so you can configure it. Connect your computer or phone wifi to the "Configure SensESP" network; the password is `thisisfine`. A captive portal may pop up, but if it doesn't, open a browser and go to 192.168.4.1. Enter the SSID and password of your boat's wifi to allow the device to access the network that your Signal K Server is on. Also enter a suitable name for the ESP, for example BilgeMonitor or EngineTemps. (No more than 32 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the ESP will restart and try to connect to your wifi network.
+Open the access request, set authentication timeout to “NEVER”, and click Approve.
+You should immediately get new data on the Signal K server dashboard and data browser.
 
-Once on the network, SensESP should automatically find your Signal K Server, assuming it has mDNS enabled. If it doesn't connect, you can try to troubleshoot it, or you can hard-code the Server's IP address and port - see below.
+SensESP device on the dashboard:
 
-If your Signal K Server has security enabled (it does by default), you should see an access request for your ESP in the Signal K Dashboard, under Security - Access Requests. (You must be logged into the Signal K Server to see the Security sub-menu.) Set the "Authentication Timeout" field to "NEVER", set the Permission to "Read / Write", then Approve it.
+![Dashboard view](assets/dashboard_view.png "Dashboard view"){:width="50%"}
 
-You should start seeing data from your ESP on the Signal K Data Browser (on the Server's main menu). You can also see lots of activity in the Visual Studio Code Serial Monitor, including the connection to the Signal K Server, the request for and approval of the security token, and the flow of data. Of course, the data is not likely to be valid, since you probably haven't yet connected anything to your ESP32. That's OK - if you've got data flowing at this point, you're ready to move on.
+Published paths on the data browser:
 
-If you have any problems with configuring the wifi credentials, or with SensESP finding your Signal K Server, you can hard-code those settings, as explained in the next section.
+![Data browser view](assets/data_browser_view.png "Data browser view")
 
-At this point, if you have a successfully running SensESP example and it's sending data to your Signal K Server, you're ready to start a real Project, to do some real work. Assemble your ESP32 and the physical sensors, find an example that's close to what you want to do, copy-paste it into your `main.cpp`, and modify it to make it work. The comments in the examples should make it clear what you need to modify.
+## Observe Data from the Device
 
-Be sure to read about [Sensors](#sensors) and [Transforms](#transforms) below - you'll need to know what they are and how they work.
+You should have two new paths visible on the Signal K data browser:
 
-## Hard-coding Certain Program Attributes
+- `sensors.analog_input.voltage`
+- `sensors.digital_input2.value`
 
-In all of the [example programs](https://github.com/SignalK/SensESP/tree/master/examples), you'll see something similar to this:
+These are not terribly interesting as is, but let's make the values change!
 
-```c++
-  SensESPAppBuilder builder;
-  sensesp_app = builder.get_app();
-  ```
+Connect a piece of jumper wire from a 3.3V pin to the GPIO pin 36 on the ESP32 device.
+(On SH-ESP32 boards, the pin is labeled `VP`.)
+You should see the analog input voltage jump to close to 3.3V.
 
-or it may look more like this:
+Next, connect the jumper wire between GND and GPIO pin 13.
+This should make the digital input 2 value change to `false`.
 
-```c++
-  SensESPAppBuilder builder;
-  sensesp_app = builder
-                  .set_hostname("main_engine_temps")
-                  ->set_wifi("My WiFi SSID", "my_wifi_password")
-                  ->set_sk_server("192.168.10.3", 80)
-                  ->get_app();
-```
+Finally, you can connect a jumper wire between GPIO pins 15 and 13.
+This should make the digital input 2 value toggle periodically between `false` and `true`.
 
-In the first instance above, where nothing is set or enabled, SensESP will use some default values and exhibit some default behavior, as follows:
+Congratulations!
+You've successfully installed and configured your new SensESP device.
 
-* The SensESP device will get the default hostname of `SensESP`, which is what will appear in many places throughout the Signal K ecosystem to identify this device.
-* When SensESP runs, since it can't connect to wifi without knowing the wifi SSID and password, it will host a little webpage that you can access from your computer or phone to configure the wifi credentials. Once it successfully connects to your network, it will save those credentials for all future connection attempts.
-* Once connected to your network, SensESP will use mDNS to try to find your Signal K Server to connect to it.
+## Next Steps
 
-In the second instance above, you can see that the hostname, wifi credentials, and Signal K Server information are hard-coded. You may find this valuable:
+Now that your device is up and running, have a look at the source code in the `src` directory.
+The project template illustrates some core SensESP concepts.
+Remove the pieces you don't need and start adding new stuff.
 
-* Your SensESP device will be named something meaningful, like `main_engine_temps` or `bilge_monitor`, rather than just "SensESP".
-* You won't have to manually configure your wifi credentials. But be aware that if you hard-code the wifi credentials, and then later change your wifi SSID or password, you'll have to physically connect your computer to the ESP device to reflash it with the updated `main.cpp` that reflects the new SSID and password. Also, hard-coded credentials could accidentally be uploaded to a GitHub repo and exposed to the world. Be careful!
-* mDNS *usually* works, but there are many components of it that are beyond the control of SensESP that could cause it to not work for you. If you encounter any issues connecting with it, you can try hard-coding the Signal K Server address and port.
+If you want to use an external sensor device, check first the [Add-ons page](..//additional_resources/add-ons/) to see if a SensESP specific add-on is available.
+However, if a device has an ESP32-compatible Arduino framework library available, you can usually add support for it using the `RepeatSensor` class.
+See the [BMP280 Tutorial](../tutorials/bmp280/) for an example.
 
-In addition, there are other settings you may want to make with the above approach:
+If you have created someting that works for you, share your work so that others can use your code as an example!
 
-* `enable_ota(const char* password)` enables Over-The-Air firmware updates for your SensESP device.
-* `set_wifi_manager_password(const char* password)` changes the password that allows you to set the wifi credentials from your phone or computer (if you don't hard-code the credentials as shown above).
-* `set_system_status_led()` allows you to change the default blinking patterns of the ESP32's LED that indicate various conditions, like "wifi disconnected", "websocket connection authorizing", etc.
-* `enable_wifi_signal_sensor()` sends the strength of the wifi signal, measured at the ESP32, to the Signal K Server as data that can be displayed by any other Signal K consumer, just like wind speed, oil pressure, etc.
-* `enable_uptime_sensor()` sends the number of seconds since the last reboot of the ESP32 to the Signal K Server.
-* `enable_free_mem_sensor()` sends the current free memory of the ESP32 to Signal K.
-* `enable_system_hz_sensor()` sends the current clock speed of the ESP32 to Signal K.
-* `enable_ip_address_sensor()` sends the IP address of the ESP32 to Signal K.
-* `enable_system_info_sensors()` enables all five of the previous "sensors" with a single line.
+These are the steps required to make a project based on the template your own:
 
-You can use as many of the above `set / enable` options as you like. Just make sure that the first one is preceeded by a dot (like `builder.set_hostname`), that all the rest of them are preceeded by the right arrow (like `->set_wifi`), and that the last one is always `->get_app();`.
+1. Rename the project directory to describe your project.
+2. If you cloned the project from GitHub, the project `origin` remote repository points to the template repo.
+   To remove that link, run this: `git remote remove origin`.
+3. Update the `README.md` file contents to describe the project.
+   It is recommended to do so regardless of whether you are going to share the project or not.
+   Your future self will thank you!
+
+If you want to share your work, follow these three additional steps:
+
+[comment]: <> (Just-the-docs CSS always resets the OL counter. An issue filed: https://github.com/pmarsceill/just-the-docs/issues/750)
+{:start="4"}
+4. Verify that the project license (as defined in the `LICENSE` file) suits your preferences.
+5. Create a new repo on GitHub and push the project to it.
+6. Get your project added to the [examples list](../additional_resources/add-ons/#examples-and-related-projects) by creating either a new issue or a pull request in the [SensESP repository](https://github.com/SignalK/SensESP).
