@@ -47,11 +47,3 @@ This Tutorial shows how to read more than one value from the same physical senso
 ## Reading Multiple Values from Multiple Sensors
 
 This Tutorial combines everything in the previous Tutorials, showing you how to read multiple values from multiple sensors in the same SensESP project. [Click here to see it](multiple_sensors).
-
-## BAS: other tutorials to write
-
-Transforms
-Lambda transform
-Metadata
-Relay control (the example could use some more explanation)
-Using SensESP for something other than sending data to SK (need a good example)
