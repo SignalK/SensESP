@@ -90,6 +90,7 @@ class DigitalInputCounter : public DigitalInput, public SensorT<int> {
                       unsigned int read_delay, String config_path = "")
       : DigitalInput{pin, pin_mode},
         SensorT<int>(config_path),
+        interrupt_type_{interrupt_type},
         read_delay_{read_delay} {
     load_configuration();
   }
