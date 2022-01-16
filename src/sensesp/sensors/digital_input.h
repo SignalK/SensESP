@@ -3,6 +3,8 @@
 
 #include "sensor.h"
 
+#include <elapsedMillis.h>
+
 namespace sensesp {
 
 /**
@@ -88,15 +90,11 @@ class DigitalInputCounter : public DigitalInput, public SensorT<int> {
  public:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       unsigned int read_delay, String config_path = "")
-      : DigitalInput{pin, pin_mode},
-        SensorT<int>(config_path),
-        interrupt_type_{interrupt_type},
-        read_delay_{read_delay} {
-    load_configuration();
-  }
+      : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
+                            config_path, [this]() { this->counter_++; }) {}
 
   void start() override final {
-    ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() { this->counter_++; });
+    ReactESP::app->onInterrupt(pin_, interrupt_type_, interrupt_handler_);
 
     ReactESP::app->onRepeat(read_delay_, [this]() {
       noInterrupts();
@@ -107,10 +105,65 @@ class DigitalInputCounter : public DigitalInput, public SensorT<int> {
     });
   }
 
- private:
-  int interrupt_type_;
+ protected:
+  DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
+                      unsigned int read_delay, String config_path,
+                      std::function<void()> interrupt_handler)
+      : DigitalInput{pin, pin_mode},
+        SensorT<int>(config_path),
+        interrupt_type_{interrupt_type},
+        interrupt_handler_{interrupt_handler},
+        read_delay_{read_delay} {
+    load_configuration();
+  }
+
   unsigned int read_delay_;
   volatile unsigned int counter_ = 0;
+
+ private:
+  int interrupt_type_;
+  std::function<void()> interrupt_handler_;
+  virtual void get_configuration(JsonObject& doc) override;
+  virtual bool set_configuration(const JsonObject& config) override;
+  virtual String get_config_schema() override;
+};
+
+/**
+ * @brief DigitalInputDebounceCounter counts interrupts and reports the count
+ * every read_delay ms, but ignores events that happen within
+ * ignore_interval_ms.
+ *
+ * You can use this class if, for example, you have a noisy reed switch that
+ * generates multiple interrupts every time it is actuated.
+ *
+ * @param pin The GPIO pin to which the device is connected
+ *
+ * @param pin_mode Will be INPUT or INPUT_PULLUP
+ *
+ * @param interrupt_type Will be RISING, FALLING, or CHANGE
+ *
+ * @param read_delay_ms How often you want to read the pin, in ms
+ *
+ * @param ignore_interval_ms Ignore events within this interval after a recorded
+ * event.
+ *
+ * @param config_path The path to configuring read_delay in the Config UI
+ */
+class DigitalInputDebounceCounter : public DigitalInputCounter {
+ public:
+  DigitalInputDebounceCounter(uint8_t pin, int pin_mode, int interrupt_type,
+                              unsigned int read_delay,
+                              unsigned int ignore_interval_ms,
+                              String config_path = "")
+      : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
+                            config_path, [this]() { this->handleInterrupt(); }),
+        ignore_interval_ms_{ignore_interval_ms} {}
+
+ private:
+  void handleInterrupt();
+
+  unsigned int ignore_interval_ms_;
+  elapsedMillis since_last_event_;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
