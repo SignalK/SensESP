@@ -24,6 +24,6 @@ The following labels are used to categorize the tutorials:
 
 There are literally hundreds of sensor libraries that are compatible with the ESP32 and the Arduino Framework. The vast majority of them are read following the same pattern: initiate the hardware, do any required configuration, then call a specific function to read a specific value. SensESP interfaces with these types of sensors very easily, as illustrated in this Tutorial, which shows how to read temperature and barometric pressure with an Adafruit-compatible BMP280.
 
-### &#x1f4cc; [Using Any External Sensor Libraries](bmp280_part_2)
+### &#x1f4cc; [Using `RepeatSensor` with ANY External Hardware Sensor Library](bmp280_part_2)
 
 This tutorial illustrates how to integrate an arbitrary Arduino Framework compatible sensor library with SensESP.
