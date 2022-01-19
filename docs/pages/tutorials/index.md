@@ -27,3 +27,14 @@ There are literally hundreds of sensor libraries that are compatible with the ES
 ### &#x1f4cc; [Using `RepeatSensor` with ANY External Hardware Sensor Library](bmp280_part_2)
 
 This tutorial illustrates how to integrate an arbitrary Arduino Framework compatible sensor library with SensESP.
+
+## SensESP Concepts
+
+### &#x1F424; &#x1f4cc; [Implementing Arbitrary Transforms with `LambdaTransform`](lambda_transform)
+
+This tutorial shows how to define custom transforms using the `LambdaTransform` class.
+
+### &#x1F424; [Using `AnalogInput` to Calculate a Tank Level](tank_level)
+
+Confused about how to calculate a tank level from a single analog input?
+This tutorial shows how to do it.
