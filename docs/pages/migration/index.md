@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Migrating From Version 1
-nav_order: 41
+nav_order: 70
 ---
 
 # Migrating SensESP Version 1 Projects to Version 2

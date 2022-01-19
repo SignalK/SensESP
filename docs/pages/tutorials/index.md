@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Tutorials
-nav_order: 42
+nav_order: 90
 ---
 
 # Tutorials
