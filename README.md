@@ -1,5 +1,22 @@
 # SensESP
 
+## Note About the Repository Branches
+
+As part of the Version 2.0.0 release, version 1 content has been moved to the [v1](https://github.com/SignalK/SensESP/tree/v1) branch.
+The long-lived `v2-dev` feature branch has been renamed to `main` and is now the default branch.
+To highlight the change, the `master` branch is now gone.
+
+To update your local repository to reflect the branch renames, run the following commands:
+
+```bash
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
+
+## Introduction
+
 **TL;DR: [Click here for the Getting Started documentation!](https://signalk.org/SensESP/pages/getting_started/)**
 
 SensESP is a [Signal K](https://signalk.org) sensor development toolkit for the [ESP32](https://en.wikipedia.org/wiki/ESP32) platform.
