@@ -1,9 +1,9 @@
 var typecast_8h =
 [
-    [ "Typecast", "class_typecast.html", "class_typecast" ],
-    [ "RoundToInt", "class_round_to_int.html", "class_round_to_int" ],
-    [ "BoolToInt", "typecast_8h.html#a657482afcbd3a4679e1fa2f7c97d0e09", null ],
-    [ "FloatToInt", "typecast_8h.html#a67a9729ee9c0b128947a49f9042fe78b", null ],
-    [ "IntToBool", "typecast_8h.html#a6675900a33f9310dc2175ecf2a4f05c8", null ],
-    [ "IntToFloat", "typecast_8h.html#afdf58ffed33a0debf5ee233dc6ce9029", null ]
+    [ "sensesp::Typecast< IN, OUT >", "classsensesp_1_1_typecast.html", "classsensesp_1_1_typecast" ],
+    [ "sensesp::RoundToInt", "classsensesp_1_1_round_to_int.html", "classsensesp_1_1_round_to_int" ],
+    [ "BoolToInt", "typecast_8h.html#a83b6453db4ee358dd8eab3052877e3fd", null ],
+    [ "FloatToInt", "typecast_8h.html#a7be62e1088cc857cf52153051a361978", null ],
+    [ "IntToBool", "typecast_8h.html#afa9d78a85f1d5142d3e862ed0ef16b3b", null ],
+    [ "IntToFloat", "typecast_8h.html#a1a7f688f27f521399abd127142390129", null ]
 ];

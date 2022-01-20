@@ -1,6 +1,6 @@
 var sensesp_8h =
 [
-    [ "void_cb_func", "sensesp_8h.html#abb3668fa85a914138ab7c0c4329681ec", null ],
-    [ "app", "sensesp_8h.html#aaa2ffd80e6f851dc6bb43c95a2c7d26f", null ],
-    [ "Debug", "sensesp_8h.html#a5ae2f374710d648c2027c78237f5df01", null ]
+    [ "DEBUG_CLASS", "sensesp_8h.html#a03812ed51648501f4a4bd0ec7bd1b33d", null ],
+    [ "void_cb_func", "sensesp_8h.html#af69114aa7205860f5705dab5c93c55c8", null ],
+    [ "Debug", "sensesp_8h.html#a400482a88888fb760a3905b036bc101d", null ]
 ];

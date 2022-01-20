@@ -25,6 +25,16 @@
 var NAVTREE =
 [
   [ "SensESP", "index.html", [
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -33,20 +43,15 @@ var NAVTREE =
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Enumerations", "functions_enum.html", null ],
-        [ "Enumerator", "functions_eval.html", null ],
         [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", "globals_dup" ],
+        [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -55,12 +60,14 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"ads1x15_8cpp.html",
-"class_frequency.html#a99df388f446a8aa46f465fe464023f55",
-"class_s_k_metadata.html#aa383628fc6ca0038c5265d0bb9a1042b",
-"click__type_8h.html#a4a760072c8c7ae604f801ff82824b666",
-"nmea__parser_8cpp.html#ae6214acf1027a76f58e3b83767cc4520a1b64cc0e9a9ebc1afccab8e472ed2e3c",
-"transform_8cpp.html"
+"air__density_8cpp.html",
+"classsensesp_1_1_digital_input_counter.html#a5764b32f239f5d5125463286bfc598e0",
+"classsensesp_1_1_o_t_a.html#a4b1a0b360e1b9700e33fc2fd7b4a60d0",
+"classsensesp_1_1_s_k_output.html#ad1adbcf7d2d93c2c8b25db102c9c2f2e",
+"classsensesp_1_1_sensor.html#a3f199b73692e2906aa2fb768c4844c34",
+"classsensesp_1_1_w_s_client.html#ad4f5e127d60388594ca6caf5e585ed9a",
+"namespacesensesp.html#a21975f0611649b430d00a47945332495a99f490e53ed16a6580a350b42e1143a9",
+"system__info_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

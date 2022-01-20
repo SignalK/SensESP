@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sensespappbuilder_1615',['SensESPAppBuilder',['../class_sens_e_s_p_app.html#a1c94b1836273e4d6f132f5e2c29ba648',1,'SensESPApp']]]
+  ['resettablecompare_0',['ResettableCompare',['../classsensesp_1_1_resettable.html#a31fbadab9aef8b1296b64b6bc1efce9a',1,'sensesp::Resettable']]]
 ];

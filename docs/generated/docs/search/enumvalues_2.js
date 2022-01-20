@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['cal16_5f400_1565',['cal16_400',['../ina219_8h.html#af0f21d23ba16939156ae369e49fc59d0a01a08da826cf9ddb397bf94f3cea755c',1,'ina219.h']]],
-  ['cal32_5f1_1566',['cal32_1',['../ina219_8h.html#af0f21d23ba16939156ae369e49fc59d0a588648d40e059f0ff2d9297aedbbf915',1,'ina219.h']]],
-  ['cal32_5f2_1567',['cal32_2',['../ina219_8h.html#af0f21d23ba16939156ae369e49fc59d0ae0ccdd359f693e07141b4bcef13e149a',1,'ina219.h']]],
-  ['channel_5f0_1568',['channel_0',['../ads1x15_8h.html#a622b3e2ec3ddaaca3ab4c36719a0ed27a9c2b0338a4f47253d627c1d18bf17a70',1,'ads1x15.h']]],
-  ['channel_5f1_1569',['channel_1',['../ads1x15_8h.html#a622b3e2ec3ddaaca3ab4c36719a0ed27ad054e06749b443bbe86d5a0c4a5617aa',1,'ads1x15.h']]],
-  ['channel_5f2_1570',['channel_2',['../ads1x15_8h.html#a622b3e2ec3ddaaca3ab4c36719a0ed27ad7e5d36e5cf0f180c85034a78ff7ce13',1,'ads1x15.h']]],
-  ['channel_5f3_1571',['channel_3',['../ads1x15_8h.html#a622b3e2ec3ddaaca3ab4c36719a0ed27a579446105e594bfa7c35a163c13c23fa',1,'ads1x15.h']]],
-  ['channels_5f0_5f1_1572',['channels_0_1',['../ads1x15_8h.html#a622b3e2ec3ddaaca3ab4c36719a0ed27aca3253cd34e7c6d9c91f79df13b08c5a',1,'ads1x15.h']]],
-  ['channels_5f2_5f3_1573',['channels_2_3',['../ads1x15_8h.html#a622b3e2ec3ddaaca3ab4c36719a0ed27a54c0bd8abeca70d8b990d006d08ef252',1,'ads1x15.h']]],
-  ['current_1574',['current',['../class_i_n_a219_value.html#a3e9bd0837f3e8b5cbe6f0cb1d2ed9110a77652857aea75187a18d2846cda7cbbc',1,'INA219Value']]]
+  ['kwificonnectedtoap_0',['kWifiConnectedToAP',['../namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aa151c0fa5b476a21aeb84de0c5fa986c8',1,'sensesp']]],
+  ['kwifidisconnected_1',['kWifiDisconnected',['../namespacesensesp.html#af833775127368fc26658b6d3a070f2abadfe8409a3feb30a0acc8624fd85556c5',1,'sensesp::kWifiDisconnected()'],['../namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aadfe8409a3feb30a0acc8624fd85556c5',1,'sensesp::kWifiDisconnected()']]],
+  ['kwifimanageractivated_2',['kWifiManagerActivated',['../namespacesensesp.html#af833775127368fc26658b6d3a070f2abaae3791bed82b89b55c2b64785d125410',1,'sensesp::kWifiManagerActivated()'],['../namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410',1,'sensesp::kWifiManagerActivated()']]],
+  ['kwifinoap_3',['kWifiNoAP',['../namespacesensesp.html#af833775127368fc26658b6d3a070f2aba91fb26167a66932c36d148bb5fdf98da',1,'sensesp::kWifiNoAP()'],['../namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aa91fb26167a66932c36d148bb5fdf98da',1,'sensesp::kWifiNoAP()']]],
+  ['kwsauthorizing_4',['kWSAuthorizing',['../namespacesensesp.html#af833775127368fc26658b6d3a070f2aba53396694885ba110633752f7b4dcbc37',1,'sensesp::kWSAuthorizing()'],['../namespacesensesp.html#a80ea75be3339693d942aeca17329641fa53396694885ba110633752f7b4dcbc37',1,'sensesp::kWSAuthorizing()']]],
+  ['kwsconnected_5',['kWSConnected',['../namespacesensesp.html#af833775127368fc26658b6d3a070f2aba1082607a601695536faefdbca5e45db0',1,'sensesp::kWSConnected()'],['../namespacesensesp.html#a80ea75be3339693d942aeca17329641fa1082607a601695536faefdbca5e45db0',1,'sensesp::kWSConnected()']]],
+  ['kwsconnecting_6',['kWSConnecting',['../namespacesensesp.html#af833775127368fc26658b6d3a070f2aba06ee8fe02fa081d715323bf64473cfc9',1,'sensesp::kWSConnecting()'],['../namespacesensesp.html#a80ea75be3339693d942aeca17329641fa06ee8fe02fa081d715323bf64473cfc9',1,'sensesp::kWSConnecting()']]],
+  ['kwsdisconnected_7',['kWSDisconnected',['../namespacesensesp.html#af833775127368fc26658b6d3a070f2abafc5d8075e090bc270813d73c4c87c74a',1,'sensesp::kWSDisconnected()'],['../namespacesensesp.html#a80ea75be3339693d942aeca17329641fafc5d8075e090bc270813d73c4c87c74a',1,'sensesp::kWSDisconnected()']]]
 ];

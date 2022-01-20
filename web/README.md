@@ -1,7 +1,7 @@
 # SensESP Mock Web Environment
 
 This directory is for development and testing of the HTML and Javascript code that is utilized in the
-configuration UI of SensESP.  
+configuration UI of SensESP.
 
 # Setting up mock development environment
 
@@ -30,8 +30,8 @@ For information on how this build target works, see the project file extra_scrip
 
 # Files used by WebUI
 
-The following files converted to header files for use by the SensESP web UI.  See the 
-src/net/web directory for the results of this conversion.
+The following files converted to header files for use by the SensESP web UI.  See the
+src/sensesp/net/web directory for the results of this conversion.
 
 1. docroot/index.html
 1. docroot/js/jsoneditor.min.js

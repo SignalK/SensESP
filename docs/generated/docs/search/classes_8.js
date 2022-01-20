@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['ina219_797',['INA219',['../class_i_n_a219.html',1,'']]],
-  ['ina219value_798',['INA219Value',['../class_i_n_a219_value.html',1,'']]],
-  ['integersensor_799',['IntegerSensor',['../class_integer_sensor.html',1,'']]],
-  ['integerthreshold_800',['IntegerThreshold',['../class_integer_threshold.html',1,'']]],
-  ['integratort_801',['IntegratorT',['../class_integrator_t.html',1,'']]],
-  ['ipaddrdev_802',['IPAddrDev',['../class_i_p_addr_dev.html',1,'']]]
+  ['lambdaconsumer_0',['LambdaConsumer',['../classsensesp_1_1_lambda_consumer.html',1,'sensesp']]],
+  ['lambdatransform_1',['LambdaTransform',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
+  ['lambdatransform_3c_20float_2c_20float_2c_20float_2c_20float_20_3e_2',['LambdaTransform&lt; float, float, float, float &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
+  ['lambdatransform_3c_20in_2c_20out_2c_20in_2c_20in_2c_20out_2c_20out_20_3e_3',['LambdaTransform&lt; IN, OUT, IN, IN, OUT, OUT &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
+  ['linear_4',['Linear',['../classsensesp_1_1_linear.html',1,'sensesp']]],
+  ['localdebug_5',['LocalDebug',['../class_local_debug.html',1,'']]]
 ];

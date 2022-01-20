@@ -1,9 +1,9 @@
 var signalk__put__request__listener_8h =
 [
-    [ "SKPutListener", "class_s_k_put_listener.html", "class_s_k_put_listener" ],
-    [ "SKPutRequestListener", "class_s_k_put_request_listener.html", "class_s_k_put_request_listener" ],
-    [ "SKBoolPutRequestListener", "signalk__put__request__listener_8h.html#ac43cde4404d54a19b83c3b758ec66300", null ],
-    [ "SKIntPutRequestListener", "signalk__put__request__listener_8h.html#acbfa9c8e08de7d1784136b08d92763a5", null ],
-    [ "SKNumericPutRequestListener", "signalk__put__request__listener_8h.html#a4a7c4535d95d1bedd9234f9b2fd9ae24", null ],
-    [ "SKStringPutRequestListener", "signalk__put__request__listener_8h.html#a7c45e8c82b2f585abede904c40117f5f", null ]
+    [ "sensesp::SKPutListener", "classsensesp_1_1_s_k_put_listener.html", "classsensesp_1_1_s_k_put_listener" ],
+    [ "sensesp::SKPutRequestListener< T >", "classsensesp_1_1_s_k_put_request_listener.html", "classsensesp_1_1_s_k_put_request_listener" ],
+    [ "BoolSKPutRequestListener", "signalk__put__request__listener_8h.html#a93740a1a29894f57068d5a22f2ad01fb", null ],
+    [ "FloatSKPutRequestListener", "signalk__put__request__listener_8h.html#ac7f4c32570a6f0bef049aab41c077128", null ],
+    [ "IntSKPutRequestListener", "signalk__put__request__listener_8h.html#a8c9160c46de8420705474a78aeb61dd1", null ],
+    [ "StringSKPutRequestListener", "signalk__put__request__listener_8h.html#a9e9cffb55d8564db9ce0a75d53a7489c", null ]
 ];

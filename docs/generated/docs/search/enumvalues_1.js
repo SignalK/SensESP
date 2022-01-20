@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['bus_5fvoltage_1562',['bus_voltage',['../class_i_n_a219_value.html#a3e9bd0837f3e8b5cbe6f0cb1d2ed9110a6a7c7ba59fd86975b97fc7a8b7efce23',1,'INA219Value']]],
-  ['buttonpress_1563',['ButtonPress',['../click__type_8h.html#a4a760072c8c7ae604f801ff82824b666ae331802be240d79912c365112ad41ddb',1,'click_type.h']]],
-  ['buttonrelease_1564',['ButtonRelease',['../click__type_8h.html#a4a760072c8c7ae604f801ff82824b666ac58a283b80d411649376455b98710c95',1,'click_type.h']]]
+  ['doubleclick_0',['DoubleClick',['../namespacesensesp.html#a21975f0611649b430d00a47945332495a99f490e53ed16a6580a350b42e1143a9',1,'sensesp']]]
 ];

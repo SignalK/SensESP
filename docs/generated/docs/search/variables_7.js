@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['horizontal_5fdilution_1388',['horizontal_dilution',['../struct_n_m_e_a_data.html#aa6d1ee7ee222393032e1f57cde891b31',1,'NMEAData']]],
-  ['hostname_1389',['hostname',['../sensesp__app_8cpp.html#ad73d4df2ce4b897a6f527dcc95adde4c',1,'sensesp_app.cpp']]],
-  ['http_5fserver_5f_1390',['http_server_',['../sensesp__app_8cpp.html#a92ddc70020f06857d8f5a44f05cfaf7d',1,'sensesp_app.cpp']]],
-  ['hysteresis_5fparam_5finfo_1391',['hysteresis_param_info',['../hysteresis_8h.html#a7e7f7cc8e64ad4edaf12f0937589db19',1,'hysteresis.h']]]
+  ['ignore_5fduplicates_0',['ignore_duplicates',['../classsensesp_1_1_s_k_put_request.html#adf1eda754d05859b0cfa0d7f58cbd466',1,'sensesp::SKPutRequest']]],
+  ['in_5frange_5f_1',['in_range_',['../classsensesp_1_1_threshold_transform.html#abb126a795a1d9bade961dab99851f590',1,'sensesp::ThresholdTransform']]],
+  ['info_2',['INFO',['../class_local_debug.html#a929d8538595442a18cab1ead41f74856',1,'LocalDebug']]],
+  ['input_3',['input',['../classsensesp_1_1_curve_interpolator_1_1_sample.html#aecd6c2fc42ce78f4674dad5128e1532f',1,'sensesp::CurveInterpolator::Sample']]],
+  ['instance_5f_4',['instance_',['../classsensesp_1_1_sens_e_s_p_base_app.html#a775c80a83adf027205c767c080597f08',1,'sensesp::SensESPBaseApp']]],
+  ['integer_5ffalse_5f_5',['integer_false_',['../classsensesp_1_1_press_repeater.html#a19db0814d6091d4ca43eaed21cdc7005',1,'sensesp::PressRepeater']]],
+  ['is_5fon_6',['is_on',['../classsensesp_1_1_smart_switch_controller.html#ad5b37c68337a920e7ec8ac1f3c474771',1,'sensesp::SmartSwitchController']]]
 ];

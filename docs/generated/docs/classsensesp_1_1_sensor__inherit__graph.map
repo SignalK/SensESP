@@ -1,0 +1,20 @@
+<map id="sensesp::Sensor" name="sensesp::Sensor">
+<area shape="rect" id="node1" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="209,243,331,269"/>
+<area shape="rect" id="node5" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="649,31,826,57"/>
+<area shape="rect" id="node8" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="654,448,821,475"/>
+<area shape="rect" id="node12" href="$classsensesp_1_1_sensor_t.html" title="Sensor template class for any sensor producing actual values." alt="" coords="380,243,540,269"/>
+<area shape="rect" id="node2" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="9,192,156,219"/>
+<area shape="rect" id="node3" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,243,160,269"/>
+<area shape="rect" id="node4" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="17,293,149,320"/>
+<area shape="rect" id="node6" href="$classsensesp_1_1_digital_input_change.html" title="DigitalInputChange provides output whenever a digital pin changes its state." alt="" coords="885,5,1077,32"/>
+<area shape="rect" id="node7" href="$classsensesp_1_1_digital_input_state.html" title="DigitalInputState polls the state of an input pin every read_delay ms." alt="" coords="892,56,1069,83"/>
+<area shape="rect" id="node9" href="$classsensesp_1_1_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="884,423,1077,449"/>
+<area shape="rect" id="node11" href="$classsensesp_1_1_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="913,473,1049,500"/>
+<area shape="rect" id="node10" href="$classsensesp_1_1_digital_input_debounce_counter.html" title="DigitalInputDebounceCounter counts interrupts and reports the count every read_delay ms,..." alt="" coords="1127,415,1333,457"/>
+<area shape="rect" id="node13" href="$classsensesp_1_1_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="662,82,813,123"/>
+<area shape="rect" id="node14" href="$classsensesp_1_1_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="666,147,809,189"/>
+<area shape="rect" id="node15" href="$classsensesp_1_1_repeat_sensor.html" title=" " alt="" coords="640,213,835,240"/>
+<area shape="rect" id="node16" href="$classsensesp_1_1_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="663,265,811,306"/>
+<area shape="rect" id="node17" href="$classsensesp_1_1_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="653,331,822,357"/>
+<area shape="rect" id="node18" href="$classsensesp_1_1_wi_fi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="666,382,809,423"/>
+</map>

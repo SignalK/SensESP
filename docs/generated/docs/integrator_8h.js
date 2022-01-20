@@ -1,6 +1,6 @@
 var integrator_8h =
 [
-    [ "IntegratorT", "class_integrator_t.html", "class_integrator_t" ],
-    [ "Accumulator", "integrator_8h.html#a9738309f33810b7bd9dac98c07a46890", null ],
-    [ "Integrator", "integrator_8h.html#a45a263764a295d1aed9fecf04d98e525", null ]
+    [ "sensesp::IntegratorT< C, P >", "classsensesp_1_1_integrator_t.html", "classsensesp_1_1_integrator_t" ],
+    [ "Accumulator", "integrator_8h.html#accc81f375d9b4400b3da820ea6b5765d", null ],
+    [ "Integrator", "integrator_8h.html#adcfedd9942a120cec3107a5b47da02dc", null ]
 ];

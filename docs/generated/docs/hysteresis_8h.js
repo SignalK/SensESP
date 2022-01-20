@@ -1,5 +1,5 @@
 var hysteresis_8h =
 [
-    [ "Hysteresis", "class_hysteresis.html", "class_hysteresis" ],
-    [ "hysteresis_param_info", "hysteresis_8h.html#a7e7f7cc8e64ad4edaf12f0937589db19", null ]
+    [ "sensesp::Hysteresis< IN, OUT >", "classsensesp_1_1_hysteresis.html", "classsensesp_1_1_hysteresis" ],
+    [ "hysteresis_param_info", "hysteresis_8h.html#a018643e365493945bdfa43db85b03fb3", null ]
 ];

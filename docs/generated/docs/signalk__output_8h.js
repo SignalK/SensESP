@@ -1,9 +1,9 @@
 var signalk__output_8h =
 [
-    [ "SKOutput", "class_s_k_output.html", "class_s_k_output" ],
-    [ "SKOutputNumeric", "class_s_k_output_numeric.html", "class_s_k_output_numeric" ],
-    [ "SKOutputBool", "signalk__output_8h.html#a1a26c344db2dff33a77cf620aafa6c0c", null ],
-    [ "SKOutputInt", "signalk__output_8h.html#a621a2d442e4ef01c9fcdd71f496ab12e", null ],
-    [ "SKOutputNumber", "signalk__output_8h.html#a4d7e8d82175eee43e47bbc5499bde0e8", null ],
-    [ "SKOutputString", "signalk__output_8h.html#a008f63a91ea787950cb6c17e4c031859", null ]
+    [ "sensesp::SKOutput< T >", "classsensesp_1_1_s_k_output.html", "classsensesp_1_1_s_k_output" ],
+    [ "sensesp::SKOutputNumeric< T >", "classsensesp_1_1_s_k_output_numeric.html", "classsensesp_1_1_s_k_output_numeric" ],
+    [ "SKOutputBool", "signalk__output_8h.html#af79c1d21ff7b9cc12fa9fb723524df06", null ],
+    [ "SKOutputFloat", "signalk__output_8h.html#abd02b12aec490b877075b2b7a3ad97a3", null ],
+    [ "SKOutputInt", "signalk__output_8h.html#aa18b24b31d9092fc5ea2908c7df8c96f", null ],
+    [ "SKOutputString", "signalk__output_8h.html#a8df9d8b457d5e0cc1bc1c31a7bbc2370", null ]
 ];

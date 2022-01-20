@@ -1,13 +1,14 @@
 var searchData=
 [
-  ['dallastemperaturesensors_1097',['DallasTemperatureSensors',['../class_dallas_temperature_sensors.html#a778aa28e0e329028f2811c5ed71cb11d',1,'DallasTemperatureSensors']]],
-  ['data_5favailable_1098',['data_available',['../class_s_k_delta.html#a74ab20a661a4f80a336b50fccc4bd9bc',1,'SKDelta']]],
-  ['debouncetemplate_1099',['DebounceTemplate',['../class_debounce_template.html#a9e01d0463e661167b1bb931bdb75e468',1,'DebounceTemplate']]],
-  ['dewpoint_1100',['DewPoint',['../class_dew_point.html#a3426da3249695da661bf7f0930400c3a',1,'DewPoint']]],
-  ['difference_1101',['Difference',['../class_difference.html#ab37fbe4fe6592f7591a124c1b90f8f48',1,'Difference']]],
-  ['digitalinput_1102',['DigitalInput',['../class_digital_input.html#ac87da1c4d7b53427d71d71b34d25c6eb',1,'DigitalInput']]],
-  ['digitalinputchange_1103',['DigitalInputChange',['../class_digital_input_change.html#aa4e3287984a2c17e9e6f2564701cecb2',1,'DigitalInputChange']]],
-  ['digitalinputcounter_1104',['DigitalInputCounter',['../class_digital_input_counter.html#adde82c1aeae1f8f452b3bbb31a3114a5',1,'DigitalInputCounter']]],
-  ['digitalinputstate_1105',['DigitalInputState',['../class_digital_input_state.html#a0f38e7681a37f213ee58bb876ffa39eb',1,'DigitalInputState']]],
-  ['digitaloutput_1106',['DigitalOutput',['../class_digital_output.html#a49b9011baf6e4280e6a4f8be0177bc1b',1,'DigitalOutput']]]
+  ['data_5favailable_0',['data_available',['../classsensesp_1_1_s_k_delta_queue.html#a739868615cbe7d97bdc30b7c42c3e9f9',1,'sensesp::SKDeltaQueue']]],
+  ['debouncetemplate_1',['DebounceTemplate',['../classsensesp_1_1_debounce_template.html#a79010988ba294a986fc13cb6ef18ba8f',1,'sensesp::DebounceTemplate']]],
+  ['debugoutput_2',['DebugOutput',['../classsensesp_1_1_debug_output.html#ac66d73470e7907b13c1c1676fc88b36e',1,'sensesp::DebugOutput']]],
+  ['dewpoint_3',['DewPoint',['../classsensesp_1_1_dew_point.html#a3ba9a1e1abf45485c805616ad45990ca',1,'sensesp::DewPoint']]],
+  ['difference_4',['Difference',['../classsensesp_1_1_difference.html#a92f7f31aa570da47cf80a061b4f6c1bf',1,'sensesp::Difference']]],
+  ['digitalinput_5',['DigitalInput',['../classsensesp_1_1_digital_input.html#a95fa64f075a2fd8c82d43c87999fa3dc',1,'sensesp::DigitalInput']]],
+  ['digitalinputchange_6',['DigitalInputChange',['../classsensesp_1_1_digital_input_change.html#afdbdc05bb8cd2bbe78f365e7a48ba2f5',1,'sensesp::DigitalInputChange']]],
+  ['digitalinputcounter_7',['DigitalInputCounter',['../classsensesp_1_1_digital_input_counter.html#a975136b19da7044d042f34b0bef59e4e',1,'sensesp::DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type, unsigned int read_delay, String config_path=&quot;&quot;)'],['../classsensesp_1_1_digital_input_counter.html#a5764b32f239f5d5125463286bfc598e0',1,'sensesp::DigitalInputCounter::DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type, unsigned int read_delay, String config_path, std::function&lt; void()&gt; interrupt_handler)']]],
+  ['digitalinputdebouncecounter_8',['DigitalInputDebounceCounter',['../classsensesp_1_1_digital_input_debounce_counter.html#a1a4bdb655fda628d7b69a9bc8a50afe6',1,'sensesp::DigitalInputDebounceCounter']]],
+  ['digitalinputstate_9',['DigitalInputState',['../classsensesp_1_1_digital_input_state.html#a323b536f360d477b94e10df4ebda9730',1,'sensesp::DigitalInputState']]],
+  ['digitaloutput_10',['DigitalOutput',['../classsensesp_1_1_digital_output.html#a16353e73f6aa27e5cedb549e286b2249',1,'sensesp::DigitalOutput']]]
 ];
