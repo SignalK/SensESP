@@ -44,7 +44,7 @@ The release process is as follows:
    Merge it.
 
 7. Navigate to https://github.com/SignalK/SensESP/releases and click on
-   "Draft a new release". Tag version is "x.y.z". Title is ordinarily "Version x.y.z". Description would ideally
+   "Draft a new release". Tag version is "vx.y.z". Title is ordinarily "Version x.y.z". Description would ideally
    be a listing of new features and bugfixes.
 
 7. Notify PlatformIO about the new release. This command may create a new
@@ -59,7 +59,7 @@ The release process is as follows:
 
 8. All that remains is to update the main branch version number to `x.y.z+1-alpha`. Create a new `post_release_x.y.z`. Run
 
-       bumpversion release
+       bumpversion patch
 
    to bump the version to `x.y.z+1-alpha`.
 
