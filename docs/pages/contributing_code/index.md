@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Contributing Code to SensESP
-nav_order: 50
+title: Contributing
+nav_order: 110
 ---
 
 ## Contributing Code to SensESP
@@ -65,6 +65,6 @@ In the platformio.ini file of your Project, add this in the `lib_deps` section:
 Then comment out the existing line in that section that points to the SensESP GitHub repo:
 `;    https://github.com/SignalK/SensESP.git`
 
-That tells PlatformIO to pull all the files for the SensESP library from your git "working directory" on your computer, rather than from the latest version on SignalK/SensESP. 
+That tells PlatformIO to pull all the files for the SensESP library from your git "working directory" on your computer, rather than from the latest version on SignalK/SensESP.
 
 Any time you change where `lib_deps` points to (as you have just done above), you need to exit PlatformIO, delete the `.pio` directory in your Project directory, then restart PlatformIO. Give it a minute to update everthing before you try to build your project. Whenever there is no `.pio` directory in the Project's directory, PlatformIO will pull the files from wherever `lib_deps` points, then compile and build those.

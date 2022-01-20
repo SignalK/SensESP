@@ -1,10 +1,9 @@
 ---
 layout: default
-title: Implementing arbitrary transforms
-parent: How do I ... ?
-nav_order: 10
+title: Implementing Arbitrary Transforms
+parent: Tutorials
 ---
-# Implementing arbitrary transforms with Lambda transform
+# Implementing Arbitrary Transforms with `LambdaTransform`
 
 In SensESP, a Transform is a class that takes in a value, does something to it, and then outputs the result, the "transformed" value. At least one Transform, a specialized Transform called SKOutput, is used with virtually every sensor you connect to the ESP. (It takes the final value from the sensor and sends it to the Signal K Server.) [Click here](https://github.com/SignalK/SensESP/wiki/SensESP-Overview-and-Programming-Details#transforms) for more information about Transforms.
 

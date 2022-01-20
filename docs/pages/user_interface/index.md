@@ -1,7 +1,7 @@
 ---
 layout: default
 title: User Interface
-nav_order: 35
+nav_order: 30
 ---
 
 # User Interface
@@ -67,7 +67,7 @@ Most ESP32's have a built-in LED that can be programmed. SensESP uses that capab
 
 Each item below represents one of the LED System Status blink patterns. The `*` represent the time the LED is on, the `_` represent the time it's off.) The numbers are the milliseconds that correspond to the `*` and the `_`.
 
-*___________________ 
+*___________________
 no_ap 50, 950 (BAS: what does this one represent? It can't find the SSID it's looking for, or does it have something to do with the Wifi Manager AP?)
 
 Wifi credentials have not been set up yet, either by hard-coding in `main.cpp` or using the Wifi Manager web UI. If you see this, you need to go through the steps described above in the [Initial Setup](##initial-setup-(wifi-and-hostname)).

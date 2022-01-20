@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Tank level calculations
-parent: How do I ... ?
-nav_order: 20
+title: Tank level Calculations
+parent: Tutorials
 ---
-# Using AnalogInput to Calculate a Tank Level
+
+# Using `AnalogInput` to Calculate a Tank Level
 
 After many, many exchanges with users about using SensESP to send a tank level to Signal K, it's obvious that it's a complex topic. Hopefully, this page will make it easy to understand - or at least make it possible to work. There are four distinct examples - make sure that the description of the example fits your situation.
 

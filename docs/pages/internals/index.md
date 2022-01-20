@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Internals
-nav_order: 70
+nav_order: 60
 ---
 
 # Internals
