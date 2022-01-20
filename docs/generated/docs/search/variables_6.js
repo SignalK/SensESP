@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['gain_1383',['gain',['../class_a_d_s1x15_voltage.html#a203c5de138972cc1816552d4588e532d',1,'ADS1x15Voltage']]],
-  ['gain_5f_1384',['gain_',['../class_a_d_s1x15.html#a9bb0d4001a9495f2b840ff8e4304920d',1,'ADS1x15']]],
-  ['geoidal_5fseparation_1385',['geoidal_separation',['../struct_n_m_e_a_data.html#a3acdff78f354082419d01ebfe8846f7f',1,'NMEAData']]],
-  ['gnss_5fquality_1386',['gnss_quality',['../struct_n_m_e_a_data.html#a8048e071ffb9f37ff425305525f2223a',1,'NMEAData']]],
-  ['gnssqualitystrings_1387',['gnssQualityStrings',['../nmea__parser_8cpp.html#a78e0374f91eaf4035ec29121f7e40064',1,'nmea_parser.cpp']]]
+  ['hostname_5f_0',['hostname_',['../classsensesp_1_1_sens_e_s_p_base_app.html#a5181d8856ce1e4abe9015bafe4ed544c',1,'sensesp::SensESPBaseApp::hostname_()'],['../classsensesp_1_1_sens_e_s_p_base_app_builder.html#a7c8c11c6c664fdd74af187abd86a3171',1,'sensesp::SensESPBaseAppBuilder::hostname_()']]],
+  ['http_5fserver_5f_1',['http_server_',['../classsensesp_1_1_sens_e_s_p_app.html#a7403602b7bdf5c022aed80051c6ab3ad',1,'sensesp::SensESPApp']]],
+  ['hysteresis_5fparam_5finfo_2',['hysteresis_param_info',['../namespacesensesp.html#a018643e365493945bdfa43db85b03fb3',1,'sensesp']]]
 ];

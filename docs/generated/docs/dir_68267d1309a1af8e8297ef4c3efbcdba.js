@@ -1,21 +1,21 @@
 var dir_68267d1309a1af8e8297ef4c3efbcdba =
 [
-    [ "controllers", "dir_bbd6674d859f4cefaacb708974cac240.html", "dir_bbd6674d859f4cefaacb708974cac240" ],
-    [ "net", "dir_c72b25b75abe208498b36a3e44a3726c.html", "dir_c72b25b75abe208498b36a3e44a3726c" ],
-    [ "sensors", "dir_7349e89ef19c117195f8e371603e1b1f.html", "dir_7349e89ef19c117195f8e371603e1b1f" ],
-    [ "signalk", "dir_846aa835ffd15ea225ad18b5b4aa0d4f.html", "dir_846aa835ffd15ea225ad18b5b4aa0d4f" ],
-    [ "system", "dir_d501334aeb1b78ad67cd3c72c37b1e87.html", "dir_d501334aeb1b78ad67cd3c72c37b1e87" ],
-    [ "transforms", "dir_859cad99e661c8c6c06da42378c04432.html", "dir_859cad99e661c8c6c06da42378c04432" ],
+    [ "sensesp", "dir_748434fffbff9d3255c614694d35d3cd.html", "dir_748434fffbff9d3255c614694d35d3cd" ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
     [ "sensesp.h", "sensesp_8h.html", "sensesp_8h" ],
     [ "sensesp_app.cpp", "sensesp__app_8cpp.html", "sensesp__app_8cpp" ],
     [ "sensesp_app.h", "sensesp__app_8h.html", "sensesp__app_8h" ],
-    [ "sensesp_app_builder.h", "sensesp__app__builder_8h.html", [
-      [ "SensESPAppBuilder", "class_sens_e_s_p_app_builder.html", "class_sens_e_s_p_app_builder" ]
+    [ "sensesp_app_builder.h", "sensesp__app__builder_8h.html", "sensesp__app__builder_8h" ],
+    [ "sensesp_base_app.cpp", "sensesp__base__app_8cpp.html", "sensesp__base__app_8cpp" ],
+    [ "sensesp_base_app.h", "sensesp__base__app_8h.html", "sensesp__base__app_8h" ],
+    [ "sensesp_base_app_builder.h", "sensesp__base__app__builder_8h.html", [
+      [ "sensesp::SensESPBaseAppBuilder", "classsensesp_1_1_sens_e_s_p_base_app_builder.html", "classsensesp_1_1_sens_e_s_p_base_app_builder" ]
     ] ],
-    [ "sensesp_app_builder_pre.h", "sensesp__app__builder__pre_8h.html", [
-      [ "SensESPAppBuilder", "class_sens_e_s_p_app_builder.html", "class_sens_e_s_p_app_builder" ]
+    [ "sensesp_minimal_app.cpp", "sensesp__minimal__app_8cpp.html", null ],
+    [ "sensesp_minimal_app.h", "sensesp__minimal__app_8h.html", [
+      [ "sensesp::SensESPMinimalApp", "classsensesp_1_1_sens_e_s_p_minimal_app.html", "classsensesp_1_1_sens_e_s_p_minimal_app" ]
     ] ],
-    [ "wiring_helpers.cpp", "wiring__helpers_8cpp.html", "wiring__helpers_8cpp" ],
-    [ "wiring_helpers.h", "wiring__helpers_8h.html", "wiring__helpers_8h" ]
+    [ "sensesp_minimal_app_builder.h", "sensesp__minimal__app__builder_8h.html", [
+      [ "sensesp::SensESPMinimalAppBuilder", "classsensesp_1_1_sens_e_s_p_minimal_app_builder.html", "classsensesp_1_1_sens_e_s_p_minimal_app_builder" ]
+    ] ]
 ];

@@ -1,8 +1,8 @@
 var valueconsumer_8h =
 [
-    [ "ValueConsumer", "class_value_consumer.html", "class_value_consumer" ],
-    [ "BooleanConsumer", "valueconsumer_8h.html#abea8a189967941972b3e7c5a329c4963", null ],
-    [ "IntegerConsumer", "valueconsumer_8h.html#a45a844f7269f830a1f708f965627248c", null ],
-    [ "NumericConsumer", "valueconsumer_8h.html#a1220e1ddede7c4512fde395262841b74", null ],
-    [ "StringConsumer", "valueconsumer_8h.html#a1d91b84157f6818bb8b8b04caede8a02", null ]
+    [ "sensesp::ValueConsumer< T >", "classsensesp_1_1_value_consumer.html", "classsensesp_1_1_value_consumer" ],
+    [ "BoolConsumer", "valueconsumer_8h.html#a37b4b3e0f9bd730e0c8050477598c68d", null ],
+    [ "FloatConsumer", "valueconsumer_8h.html#a63177ab371fe27d7fa72593c47e284fa", null ],
+    [ "IntConsumer", "valueconsumer_8h.html#a8f5caff5c968908780d465cd1bfd440f", null ],
+    [ "StringConsumer", "valueconsumer_8h.html#a88095944ec96ea99cace0b4ef5941258", null ]
 ];

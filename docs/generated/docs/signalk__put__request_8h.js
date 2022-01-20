@@ -1,11 +1,11 @@
 var signalk__put__request_8h =
 [
-    [ "SKRequest", "class_s_k_request.html", "class_s_k_request" ],
-    [ "PendingRequest", "class_s_k_request_1_1_pending_request.html", "class_s_k_request_1_1_pending_request" ],
-    [ "SKPutRequestBase", "class_s_k_put_request_base.html", "class_s_k_put_request_base" ],
-    [ "SKPutRequest", "class_s_k_put_request.html", "class_s_k_put_request" ],
-    [ "SKBooleanPutRequest", "signalk__put__request_8h.html#af5482ebc1fef3acd7221abc3e56dd31d", null ],
-    [ "SKIntegerPutRequest", "signalk__put__request_8h.html#ac32c376aa0a2d19b3036517860dce77d", null ],
-    [ "SKNumericPutRequest", "signalk__put__request_8h.html#a2095be88166518081ffd7114f9bbc67b", null ],
-    [ "SKStringPutRequest", "signalk__put__request_8h.html#a4860f447e24f7c31d9152d3964839eaa", null ]
+    [ "sensesp::SKRequest", "classsensesp_1_1_s_k_request.html", "classsensesp_1_1_s_k_request" ],
+    [ "sensesp::SKRequest::PendingRequest", "classsensesp_1_1_s_k_request_1_1_pending_request.html", "classsensesp_1_1_s_k_request_1_1_pending_request" ],
+    [ "sensesp::SKPutRequestBase", "classsensesp_1_1_s_k_put_request_base.html", "classsensesp_1_1_s_k_put_request_base" ],
+    [ "sensesp::SKPutRequest< T >", "classsensesp_1_1_s_k_put_request.html", "classsensesp_1_1_s_k_put_request" ],
+    [ "BoolSKPutRequest", "signalk__put__request_8h.html#ac06cd768219ba797fe0efa390c7cfc8b", null ],
+    [ "FloatSKPutRequest", "signalk__put__request_8h.html#ae3b1e82b9b3b1d1d0d8367347d5ade06", null ],
+    [ "IntSKPutRequest", "signalk__put__request_8h.html#a815dc403361e4f2a72f2c666821094f8", null ],
+    [ "StringSKPutRequest", "signalk__put__request_8h.html#afa937fcb2693d4d73b8294e55d4e1b4e", null ]
 ];

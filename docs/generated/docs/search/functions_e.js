@@ -1,20 +1,16 @@
 var searchData=
 [
-  ['ratioblinker_1225',['RatioBlinker',['../class_ratio_blinker.html#aac05ace7076c931c321488d9b3e126f5',1,'RatioBlinker']]],
-  ['read_1226',['read',['../class_base_analog_reader.html#a47be844ead62b7e39e44b00587b756e7',1,'BaseAnalogReader']]],
-  ['read_5fjson_1227',['read_json',['../spiffs__storage_8h.html#a3ca6038ce2edba53098d8ca7ffdaa35d',1,'spiffs_storage.h']]],
-  ['read_5fraw_5fvalue_1228',['read_raw_value',['../class_a_d_s1x15_raw_value.html#a58dc8641ac71c6f6dd42dc52671482a7',1,'ADS1x15RawValue']]],
-  ['read_5fstring_1229',['read_string',['../spiffs__storage_8cpp.html#a7429780969e66149e25ea6088bf65b7a',1,'read_string(const String filename):&#160;spiffs_storage.cpp'],['../spiffs__storage_8h.html#a7429780969e66149e25ea6088bf65b7a',1,'read_string(const String filename):&#160;spiffs_storage.cpp']]],
-  ['reconstruct_5fnmea_5fsentence_1230',['reconstruct_nmea_sentence',['../nmea__parser_8cpp.html#a69a390886762ecd9593ebeada6f3e52d',1,'nmea_parser.cpp']]],
-  ['register_5faddress_1231',['register_address',['../class_dallas_temperature_sensors.html#a020ae149bf4372f926d4414ac5c67f5a',1,'DallasTemperatureSensors']]],
-  ['remove_5frequest_1232',['remove_request',['../class_s_k_request.html#a352a0cb6824802651e8cf58b286af81c',1,'SKRequest']]],
-  ['repeatreport_1233',['RepeatReport',['../class_repeat_report.html#a6726de9f4d7cbc9cd28ca4e22628f7bc',1,'RepeatReport']]],
-  ['report_5fsuccess_1234',['report_success',['../nmea__parser_8cpp.html#af7a3600deec155122015fcfedfc126a7',1,'nmea_parser.cpp']]],
-  ['request_5fpending_1235',['request_pending',['../class_s_k_put_request_base.html#a767ea4f2107526f914fe8ebfe936b17b',1,'SKPutRequestBase']]],
-  ['reset_1236',['reset',['../class_sens_e_s_p_app.html#a0f7605a2c63a3ed250e1c742608956b2',1,'SensESPApp::reset()'],['../class_integrator_t.html#a29335b4dcaa4672f242779dd1a33c476',1,'IntegratorT::reset()']]],
-  ['reset_5fmeta_5fsend_1237',['reset_meta_send',['../class_s_k_delta.html#a39c8edf6268d4caf854e5cf5d3f283b7',1,'SKDelta']]],
-  ['reset_5fsettings_1238',['reset_settings',['../class_networking.html#a207f306c10b8f65ca0904cc26a9ef15c',1,'Networking']]],
-  ['restart_1239',['restart',['../class_w_s_client.html#a478877d14e5a303c24ea60a4cc4f8752',1,'WSClient::restart()'],['../class_pattern_blinker.html#acd7cdf3ec3693c715548321a8221fb00',1,'PatternBlinker::restart()']]],
-  ['rgbled_1240',['RgbLed',['../class_rgb_led.html#aba030d17728a89a1b7ff1a241a6abcbe',1,'RgbLed']]],
-  ['roundtoint_1241',['RoundToInt',['../class_round_to_int.html#a72d711ad613569a42c0659750275b567',1,'RoundToInt']]]
+  ['ratioblinker_0',['RatioBlinker',['../classsensesp_1_1_ratio_blinker.html#aab0c04c7007c7113ccf36d8f430c3dca',1,'sensesp::RatioBlinker']]],
+  ['read_1',['read',['../classsensesp_1_1_base_analog_reader.html#a4f80dcc0a09d47ca74314f4e51bd4300',1,'sensesp::BaseAnalogReader::read()'],['../classsensesp_1_1_e_s_p32_analog_reader.html#a48881f69b0cab201a6a54c20c8524d8f',1,'sensesp::ESP32AnalogReader::read()']]],
+  ['remove_5frequest_2',['remove_request',['../classsensesp_1_1_s_k_request.html#af3556571b45b5ce5ab74831cb5605ded',1,'sensesp::SKRequest']]],
+  ['repeatreport_3',['RepeatReport',['../classsensesp_1_1_repeat_report.html#ad8c861c05fcbbe3d66ac6c6b2a2ca2e5',1,'sensesp::RepeatReport']]],
+  ['repeatsensor_4',['RepeatSensor',['../classsensesp_1_1_repeat_sensor.html#a98160dd25e73ca29963f68b0e350f161',1,'sensesp::RepeatSensor::RepeatSensor(unsigned int repeat_interval_ms, std::function&lt; T()&gt; callback)'],['../classsensesp_1_1_repeat_sensor.html#ad4d76fbcd86d486f939ac8b87619e7c7',1,'sensesp::RepeatSensor::RepeatSensor(unsigned int repeat_interval_ms, std::function&lt; void(RepeatSensor&lt; T &gt; *)&gt; callback)']]],
+  ['request_5fpending_5',['request_pending',['../classsensesp_1_1_s_k_put_request_base.html#a869f1d2df93c2490605bf0f81c1b933d',1,'sensesp::SKPutRequestBase']]],
+  ['reset_6',['reset',['../classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159',1,'sensesp::Networking::reset()'],['../classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211',1,'sensesp::Filesystem::reset()'],['../classsensesp_1_1_resettable.html#a3986291418428372569706c6e7d13708',1,'sensesp::Resettable::reset()'],['../classsensesp_1_1_integrator_t.html#a3e5cdee6b841d957f26bf99b36753d58',1,'sensesp::IntegratorT::reset()'],['../classsensesp_1_1_sens_e_s_p_base_app.html#a42d3c5c9ed56c0a0a925fac4e49dd659',1,'sensesp::SensESPBaseApp::reset()']]],
+  ['reset_5fall_7',['reset_all',['../classsensesp_1_1_resettable.html#a062ebaddf82e34977e6bb38175a86310',1,'sensesp::Resettable']]],
+  ['reset_5fmeta_5fsend_8',['reset_meta_send',['../classsensesp_1_1_s_k_delta_queue.html#add56c07207ea03780ac30a48ce4f38ab',1,'sensesp::SKDeltaQueue']]],
+  ['resettable_9',['Resettable',['../classsensesp_1_1_resettable.html#a8ea93b67d80ff4769925d6398074c30b',1,'sensesp::Resettable']]],
+  ['restart_10',['restart',['../classsensesp_1_1_w_s_client.html#af712f9956fb8cccee7eef67aa39b8737',1,'sensesp::WSClient::restart()'],['../classsensesp_1_1_pattern_blinker.html#a07379ab468fd98211d8af6ef285105a6',1,'sensesp::PatternBlinker::restart()']]],
+  ['rgbled_11',['RgbLed',['../classsensesp_1_1_rgb_led.html#ad86afd2de62362f1e9b0d3202b3ddd8a',1,'sensesp::RgbLed']]],
+  ['roundtoint_12',['RoundToInt',['../classsensesp_1_1_round_to_int.html#a06a6358515262f715b2212ee40d78dbb',1,'sensesp::RoundToInt']]]
 ];

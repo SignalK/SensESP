@@ -1,5 +1,5 @@
 var ws__client_8cpp =
 [
-    [ "webSocketClientEvent", "ws__client_8cpp.html#a5e74f160471b58a262cceef5edaea7e0", null ],
-    [ "ws_client", "ws__client_8cpp.html#a4d8d7cfce2bd21646b059e9aa4d0349b", null ]
+    [ "webSocketClientEvent", "ws__client_8cpp.html#a4f37392d0637be5754c86b87b263d0d3", null ],
+    [ "ws_client", "ws__client_8cpp.html#a01c9e413ed693e0b956363d0b2c5a26e", null ]
 ];

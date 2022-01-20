@@ -1,255 +1,240 @@
 var hierarchy =
 [
-    [ "ADS1x15< T_Ada_1x15 >", "class_a_d_s1x15.html", null ],
-    [ "BaseAnalogReader", "class_base_analog_reader.html", null ],
-    [ "BME280", "class_b_m_e280.html", null ],
-    [ "BMP280", "class_b_m_p280.html", null ],
-    [ "Configurable", "class_configurable.html", [
-      [ "Networking", "class_networking.html", null ],
-      [ "RgbLed", "class_rgb_led.html", null ],
-      [ "SKPutRequestBase", "class_s_k_put_request_base.html", [
-        [ "SKPutRequest< T >", "class_s_k_put_request.html", null ]
-      ] ],
-      [ "Sensor", "class_sensor.html", [
-        [ "DallasTemperatureSensors", "class_dallas_temperature_sensors.html", null ],
-        [ "DigitalInput", "class_digital_input.html", [
-          [ "DigitalInputChange", "class_digital_input_change.html", null ],
-          [ "DigitalInputCounter", "class_digital_input_counter.html", null ],
-          [ "DigitalInputState", "class_digital_input_state.html", null ]
-        ] ],
-        [ "FreeMem", "class_free_mem.html", null ],
-        [ "GPSInput", "class_g_p_s_input.html", null ],
-        [ "INA219", "class_i_n_a219.html", null ],
-        [ "IntegerSensor", "class_integer_sensor.html", null ],
-        [ "NumericSensor", "class_numeric_sensor.html", [
-          [ "ADS1x15RawValue< T_ads_1x15 >", "class_a_d_s1x15_raw_value.html", [
-            [ "ADS1x15Voltage< T_ads_1x15, chip >", "class_a_d_s1x15_voltage.html", null ]
-          ] ],
-          [ "AnalogInput", "class_analog_input.html", null ],
-          [ "BME280Value", "class_b_m_e280_value.html", null ],
-          [ "BMP280Value", "class_b_m_p280_value.html", null ],
-          [ "INA219Value", "class_i_n_a219_value.html", null ],
-          [ "MAX31856Thermocouple", "class_m_a_x31856_thermocouple.html", null ],
-          [ "OneWireTemperature", "class_one_wire_temperature.html", null ],
-          [ "SHT31Value", "class_s_h_t31_value.html", null ],
-          [ "SystemHz", "class_system_hz.html", null ],
-          [ "UltrasonicDistance", "class_ultrasonic_distance.html", null ],
-          [ "Uptime", "class_uptime.html", null ],
-          [ "WifiSignal", "class_wifi_signal.html", null ]
-        ] ],
-        [ "StringSensor", "class_string_sensor.html", [
-          [ "IPAddrDev", "class_i_p_addr_dev.html", null ]
-        ] ]
-      ] ],
-      [ "TransformBase", "class_transform_base.html", [
-        [ "Transform< IN, OUT >", "class_transform.html", [
-          [ "LambdaTransform< IN, OUT, IN, IN, OUT, OUT >", "class_lambda_transform.html", [
-            [ "Hysteresis< IN, OUT >", "class_hysteresis.html", null ]
-          ] ],
-          [ "LambdaTransform< IN, OUT, P1, P2, P3, P4, P5, P6 >", "class_lambda_transform.html", [
-            [ "Typecast< float, int >", "class_typecast.html", [
-              [ "RoundToInt", "class_round_to_int.html", null ]
-            ] ],
-            [ "Typecast< IN, OUT >", "class_typecast.html", null ]
-          ] ]
-        ] ],
-        [ "Transform< bool, String >", "class_transform.html", [
-          [ "TruthToText", "class_truth_to_text.html", null ]
-        ] ],
-        [ "Transform< int, float >", "class_transform.html", [
-          [ "Frequency", "class_frequency.html", null ]
-        ] ],
-        [ "Transform< float, String >", "class_transform.html", [
-          [ "HeatIndexEffect", "class_heat_index_effect.html", null ]
-        ] ],
-        [ "Transform< time_t, String >", "class_transform.html", [
-          [ "TimeString", "class_time_string.html", [
-            [ "SKOutputTime", "class_s_k_output_time.html", null ]
-          ] ]
-        ] ],
-        [ "Transform< T, T >", "class_transform.html", [
-          [ "SymmetricTransform< T >", "class_symmetric_transform.html", [
-            [ "DebounceTemplate< T >", "class_debounce_template.html", null ],
-            [ "DigitalOutput", "class_digital_output.html", null ],
-            [ "PressRepeater", "class_press_repeater.html", null ],
-            [ "RepeatReport< T >", "class_repeat_report.html", null ],
-            [ "SKOutput< T >", "class_s_k_output.html", [
-              [ "SKOutputNumeric< T >", "class_s_k_output_numeric.html", null ]
-            ] ],
-            [ "SmartSwitchController", "class_smart_switch_controller.html", null ]
-          ] ]
-        ] ],
-        [ "Transform< String, bool >", "class_transform.html", [
-          [ "TextToTruth", "class_text_to_truth.html", null ]
-        ] ],
-        [ "Transform< bool, ClickTypes >", "class_transform.html", [
-          [ "ClickType", "class_click_type.html", null ]
-        ] ],
-        [ "Transform< C, P >", "class_transform.html", [
-          [ "LambdaTransform< float, float, float, float >", "class_lambda_transform.html", [
-            [ "Linear", "class_linear.html", null ]
-          ] ],
-          [ "SymmetricTransform< float >", "class_symmetric_transform.html", [
-            [ "ADS1x15Voltage< T_ads_1x15, chip >", "class_a_d_s1x15_voltage.html", null ],
-            [ "AirDensity", "class_air_density.html", null ],
-            [ "AnalogVoltage", "class_analog_voltage.html", null ],
-            [ "AngleCorrection", "class_angle_correction.html", null ],
-            [ "ChangeFilter", "class_change_filter.html", null ],
-            [ "CurveInterpolator", "class_curve_interpolator.html", null ],
-            [ "DewPoint", "class_dew_point.html", null ],
-            [ "Difference", "class_difference.html", null ],
-            [ "HeatIndexTemperature", "class_heat_index_temperature.html", null ],
-            [ "Median", "class_median.html", null ],
-            [ "MovingAverage", "class_moving_average.html", null ],
-            [ "VoltageDividerR1", "class_voltage_divider_r1.html", null ],
-            [ "VoltageDividerR2", "class_voltage_divider_r2.html", null ],
-            [ "VoltageMultiplier", "class_voltage_multiplier.html", null ]
-          ] ],
-          [ "ThresholdTransform< int, bool >", "class_threshold_transform.html", [
-            [ "IntegerThreshold", "class_integer_threshold.html", null ]
-          ] ],
-          [ "ThresholdTransform< float, bool >", "class_threshold_transform.html", [
-            [ "NumericThreshold", "class_numeric_threshold.html", null ]
-          ] ],
-          [ "IntegratorT< C, P >", "class_integrator_t.html", null ],
-          [ "ThresholdTransform< C, P >", "class_threshold_transform.html", null ]
-        ] ]
-      ] ],
-      [ "WSClient", "class_w_s_client.html", null ]
+    [ "sensesp::BaseAnalogReader", "classsensesp_1_1_base_analog_reader.html", [
+      [ "sensesp::ESP32AnalogReader", "classsensesp_1_1_e_s_p32_analog_reader.html", null ]
     ] ],
-    [ "Enable", "class_enable.html", [
-      [ "BaseBlinker", "class_base_blinker.html", [
-        [ "PatternBlinker", "class_pattern_blinker.html", null ],
-        [ "PeriodicBlinker", "class_periodic_blinker.html", [
-          [ "EvenBlinker", "class_even_blinker.html", null ],
-          [ "RatioBlinker", "class_ratio_blinker.html", null ]
+    [ "sensesp::Configurable", "classsensesp_1_1_configurable.html", [
+      [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ],
+      [ "sensesp::RgbLed", "classsensesp_1_1_rgb_led.html", null ],
+      [ "sensesp::SKPutRequestBase", "classsensesp_1_1_s_k_put_request_base.html", [
+        [ "sensesp::SKPutRequest< T >", "classsensesp_1_1_s_k_put_request.html", null ]
+      ] ],
+      [ "sensesp::Sensor", "classsensesp_1_1_sensor.html", [
+        [ "sensesp::SensorT< bool >", "classsensesp_1_1_sensor_t.html", [
+          [ "sensesp::DigitalInputChange", "classsensesp_1_1_digital_input_change.html", null ],
+          [ "sensesp::DigitalInputState", "classsensesp_1_1_digital_input_state.html", null ]
+        ] ],
+        [ "sensesp::SensorT< int >", "classsensesp_1_1_sensor_t.html", [
+          [ "sensesp::DigitalInputCounter", "classsensesp_1_1_digital_input_counter.html", [
+            [ "sensesp::DigitalInputDebounceCounter", "classsensesp_1_1_digital_input_debounce_counter.html", null ]
+          ] ],
+          [ "sensesp::FreeMem", "classsensesp_1_1_free_mem.html", null ]
+        ] ],
+        [ "sensesp::SensorT< T >", "classsensesp_1_1_sensor_t.html", [
+          [ "sensesp::AnalogInput", "classsensesp_1_1_analog_input.html", null ],
+          [ "sensesp::IPAddrDev", "classsensesp_1_1_i_p_addr_dev.html", null ],
+          [ "sensesp::RepeatSensor< T >", "classsensesp_1_1_repeat_sensor.html", null ],
+          [ "sensesp::SystemHz", "classsensesp_1_1_system_hz.html", null ],
+          [ "sensesp::Uptime", "classsensesp_1_1_uptime.html", null ],
+          [ "sensesp::WiFiSignal", "classsensesp_1_1_wi_fi_signal.html", null ]
         ] ]
       ] ],
-      [ "Sensor", "class_sensor.html", null ],
-      [ "TransformBase", "class_transform_base.html", null ]
+      [ "sensesp::TransformBase", "classsensesp_1_1_transform_base.html", [
+        [ "sensesp::Transform< bool, ClickTypes >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::ClickType", "classsensesp_1_1_click_type.html", null ]
+        ] ],
+        [ "sensesp::Transform< T, T >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::Enable< T >", "classsensesp_1_1_enable.html", null ],
+          [ "sensesp::SymmetricTransform< T >", "classsensesp_1_1_symmetric_transform.html", [
+            [ "sensesp::DebounceTemplate< T >", "classsensesp_1_1_debounce_template.html", null ],
+            [ "sensesp::DigitalOutput", "classsensesp_1_1_digital_output.html", null ],
+            [ "sensesp::PressRepeater", "classsensesp_1_1_press_repeater.html", null ],
+            [ "sensesp::RepeatReport< T >", "classsensesp_1_1_repeat_report.html", null ],
+            [ "sensesp::SKOutput< T >", "classsensesp_1_1_s_k_output.html", [
+              [ "sensesp::SKOutputNumeric< T >", "classsensesp_1_1_s_k_output_numeric.html", null ]
+            ] ],
+            [ "sensesp::SmartSwitchController", "classsensesp_1_1_smart_switch_controller.html", null ]
+          ] ]
+        ] ],
+        [ "sensesp::Transform< int, float >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::Frequency", "classsensesp_1_1_frequency.html", null ]
+        ] ],
+        [ "sensesp::Transform< float, String >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::HeatIndexEffect", "classsensesp_1_1_heat_index_effect.html", null ]
+        ] ],
+        [ "sensesp::Transform< IN, OUT >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::LambdaTransform< IN, OUT, IN, IN, OUT, OUT >", "classsensesp_1_1_lambda_transform.html", [
+            [ "sensesp::Hysteresis< IN, OUT >", "classsensesp_1_1_hysteresis.html", null ]
+          ] ],
+          [ "sensesp::LambdaTransform< IN, OUT, P1, P2, P3, P4, P5, P6 >", "classsensesp_1_1_lambda_transform.html", [
+            [ "sensesp::Typecast< float, int >", "classsensesp_1_1_typecast.html", [
+              [ "sensesp::RoundToInt", "classsensesp_1_1_round_to_int.html", null ]
+            ] ],
+            [ "sensesp::Typecast< IN, OUT >", "classsensesp_1_1_typecast.html", null ]
+          ] ]
+        ] ],
+        [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::TextToTruth", "classsensesp_1_1_text_to_truth.html", null ]
+        ] ],
+        [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::TimeString", "classsensesp_1_1_time_string.html", [
+            [ "sensesp::SKOutputTime", "classsensesp_1_1_s_k_output_time.html", null ]
+          ] ]
+        ] ],
+        [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::TruthToText", "classsensesp_1_1_truth_to_text.html", null ]
+        ] ],
+        [ "sensesp::Transform< C, P >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::LambdaTransform< float, float, float, float >", "classsensesp_1_1_lambda_transform.html", [
+            [ "sensesp::Linear", "classsensesp_1_1_linear.html", null ]
+          ] ],
+          [ "sensesp::SymmetricTransform< float >", "classsensesp_1_1_symmetric_transform.html", [
+            [ "sensesp::AirDensity", "classsensesp_1_1_air_density.html", null ],
+            [ "sensesp::AnalogVoltage", "classsensesp_1_1_analog_voltage.html", null ],
+            [ "sensesp::AngleCorrection", "classsensesp_1_1_angle_correction.html", null ],
+            [ "sensesp::ChangeFilter", "classsensesp_1_1_change_filter.html", null ],
+            [ "sensesp::CurveInterpolator", "classsensesp_1_1_curve_interpolator.html", null ],
+            [ "sensesp::DewPoint", "classsensesp_1_1_dew_point.html", null ],
+            [ "sensesp::Difference", "classsensesp_1_1_difference.html", null ],
+            [ "sensesp::HeatIndexTemperature", "classsensesp_1_1_heat_index_temperature.html", null ],
+            [ "sensesp::Median", "classsensesp_1_1_median.html", null ],
+            [ "sensesp::MovingAverage", "classsensesp_1_1_moving_average.html", null ],
+            [ "sensesp::VoltageDividerR1", "classsensesp_1_1_voltage_divider_r1.html", null ],
+            [ "sensesp::VoltageDividerR2", "classsensesp_1_1_voltage_divider_r2.html", null ],
+            [ "sensesp::VoltageMultiplier", "classsensesp_1_1_voltage_multiplier.html", null ]
+          ] ],
+          [ "sensesp::ThresholdTransform< float, bool >", "classsensesp_1_1_threshold_transform.html", [
+            [ "sensesp::FloatThreshold", "classsensesp_1_1_float_threshold.html", null ]
+          ] ],
+          [ "sensesp::ThresholdTransform< int, bool >", "classsensesp_1_1_threshold_transform.html", [
+            [ "sensesp::IntThreshold", "classsensesp_1_1_int_threshold.html", null ]
+          ] ],
+          [ "sensesp::IntegratorT< C, P >", "classsensesp_1_1_integrator_t.html", null ],
+          [ "sensesp::ThresholdTransform< C, P >", "classsensesp_1_1_threshold_transform.html", null ]
+        ] ]
+      ] ],
+      [ "sensesp::WSClient", "classsensesp_1_1_w_s_client.html", null ]
     ] ],
-    [ "ENUVector", "struct_e_n_u_vector.html", null ],
-    [ "HTTPServer", "class_h_t_t_p_server.html", null ],
-    [ "NMEAData", "struct_n_m_e_a_data.html", null ],
-    [ "NMEAParser", "class_n_m_e_a_parser.html", null ],
-    [ "Observable", "class_observable.html", [
-      [ "ValueProducer< WifiState >", "class_value_producer.html", [
-        [ "Networking", "class_networking.html", null ]
+    [ "sensesp::DigitalInput", "classsensesp_1_1_digital_input.html", [
+      [ "sensesp::DigitalInputChange", "classsensesp_1_1_digital_input_change.html", null ],
+      [ "sensesp::DigitalInputCounter", "classsensesp_1_1_digital_input_counter.html", null ],
+      [ "sensesp::DigitalInputState", "classsensesp_1_1_digital_input_state.html", null ]
+    ] ],
+    [ "LocalDebug", "class_local_debug.html", null ],
+    [ "sensesp::Observable", "classsensesp_1_1_observable.html", [
+      [ "sensesp::ValueProducer< WifiState >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ]
       ] ],
-      [ "ValueProducer< uint32_t >", "class_value_producer.html", [
-        [ "FreeMem", "class_free_mem.html", null ]
+      [ "sensesp::ValueProducer< SystemStatus >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::SystemStatusController", "classsensesp_1_1_system_status_controller.html", null ]
       ] ],
-      [ "ValueProducer< P >", "class_value_producer.html", [
-        [ "Transform< C, P >", "class_transform.html", null ]
+      [ "sensesp::ValueProducer< P >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::Transform< C, P >", "classsensesp_1_1_transform.html", null ]
       ] ],
-      [ "ValueProducer< SystemStatus >", "class_value_producer.html", [
-        [ "SystemStatusController", "class_system_status_controller.html", null ]
+      [ "sensesp::ValueProducer< WSConnectionState >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::WSClient", "classsensesp_1_1_w_s_client.html", null ]
       ] ],
-      [ "ValueProducer< WSConnectionState >", "class_value_producer.html", [
-        [ "ObservableValue< WSConnectionState >", "class_observable_value.html", null ],
-        [ "WSClient", "class_w_s_client.html", null ]
+      [ "sensesp::SKEmitter", "classsensesp_1_1_s_k_emitter.html", [
+        [ "sensesp::SKOutput< T >", "classsensesp_1_1_s_k_output.html", null ],
+        [ "sensesp::SKOutputTime", "classsensesp_1_1_s_k_output_time.html", null ]
       ] ],
-      [ "SKEmitter", "class_s_k_emitter.html", [
-        [ "SKOutput< T >", "class_s_k_output.html", null ],
-        [ "SKOutputTime", "class_s_k_output_time.html", null ]
+      [ "sensesp::SKListener", "classsensesp_1_1_s_k_listener.html", [
+        [ "sensesp::SKValueListener< T >", "classsensesp_1_1_s_k_value_listener.html", null ]
       ] ],
-      [ "SKListener", "class_s_k_listener.html", [
-        [ "SKValueListener< T >", "class_s_k_value_listener.html", null ]
+      [ "sensesp::SKPutListener", "classsensesp_1_1_s_k_put_listener.html", [
+        [ "sensesp::SKPutRequestListener< T >", "classsensesp_1_1_s_k_put_request_listener.html", null ]
       ] ],
-      [ "SKPutListener", "class_s_k_put_listener.html", [
-        [ "SKPutRequestListener< T >", "class_s_k_put_request_listener.html", null ]
-      ] ],
-      [ "Sensor", "class_sensor.html", null ],
-      [ "ValueProducer< T >", "class_value_producer.html", [
-        [ "ObservableValue< Position >", "class_observable_value.html", null ],
-        [ "ObservableValue< ENUVector >", "class_observable_value.html", null ],
-        [ "ObservableValue< float >", "class_observable_value.html", null ],
-        [ "ObservableValue< int >", "class_observable_value.html", null ],
-        [ "ObservableValue< time_t >", "class_observable_value.html", null ],
-        [ "ObservableValue< String >", "class_observable_value.html", null ],
-        [ "Transform< IN, OUT >", "class_transform.html", null ],
-        [ "Transform< bool, String >", "class_transform.html", null ],
-        [ "Transform< int, float >", "class_transform.html", null ],
-        [ "Transform< float, String >", "class_transform.html", null ],
-        [ "Transform< time_t, String >", "class_transform.html", null ],
-        [ "Transform< T, T >", "class_transform.html", null ],
-        [ "Transform< String, bool >", "class_transform.html", null ],
-        [ "Transform< bool, ClickTypes >", "class_transform.html", null ],
-        [ "DigitalInputChange", "class_digital_input_change.html", null ],
-        [ "DigitalInputCounter", "class_digital_input_counter.html", null ],
-        [ "DigitalInputState", "class_digital_input_state.html", null ],
-        [ "IntegerSensor", "class_integer_sensor.html", null ],
-        [ "NumericSensor", "class_numeric_sensor.html", null ],
-        [ "ObservableValue< T >", "class_observable_value.html", null ],
-        [ "SKPutRequestListener< T >", "class_s_k_put_request_listener.html", null ],
-        [ "SKValueListener< T >", "class_s_k_value_listener.html", null ],
-        [ "StringSensor", "class_string_sensor.html", null ]
+      [ "sensesp::Sensor", "classsensesp_1_1_sensor.html", null ],
+      [ "sensesp::ValueProducer< T >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::SensorT< bool >", "classsensesp_1_1_sensor_t.html", null ],
+        [ "sensesp::SensorT< int >", "classsensesp_1_1_sensor_t.html", null ],
+        [ "sensesp::Transform< bool, ClickTypes >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< T, T >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< int, float >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< float, String >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< IN, OUT >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::ObservableValue< T >", "classsensesp_1_1_observable_value.html", null ],
+        [ "sensesp::SKPutRequestListener< T >", "classsensesp_1_1_s_k_put_request_listener.html", null ],
+        [ "sensesp::SKValueListener< T >", "classsensesp_1_1_s_k_value_listener.html", null ],
+        [ "sensesp::SensorT< T >", "classsensesp_1_1_sensor_t.html", null ]
       ] ]
     ] ],
-    [ "ParamInfo", "struct_param_info.html", null ],
-    [ "SKRequest::PendingRequest", "class_s_k_request_1_1_pending_request.html", null ],
-    [ "Position", "struct_position.html", null ],
-    [ "CurveInterpolator::Sample", "class_curve_interpolator_1_1_sample.html", null ],
-    [ "SensESPApp", "class_sens_e_s_p_app.html", null ],
-    [ "SensESPAppBuilder", "class_sens_e_s_p_app_builder.html", null ],
-    [ "SentenceParser", "class_sentence_parser.html", [
-      [ "GPGGASentenceParser", "class_g_p_g_g_a_sentence_parser.html", null ],
-      [ "GPGLLSentenceParser", "class_g_p_g_l_l_sentence_parser.html", null ],
-      [ "GPRMCSentenceParser", "class_g_p_r_m_c_sentence_parser.html", null ],
-      [ "PSTI030SentenceParser", "class_p_s_t_i030_sentence_parser.html", null ],
-      [ "PSTI032SentenceParser", "class_p_s_t_i032_sentence_parser.html", null ],
-      [ "PSTISentenceParser", "class_p_s_t_i_sentence_parser.html", null ]
+    [ "sensesp::ParamInfo", "structsensesp_1_1_param_info.html", null ],
+    [ "sensesp::SKRequest::PendingRequest", "classsensesp_1_1_s_k_request_1_1_pending_request.html", null ],
+    [ "sensesp::Resettable", "classsensesp_1_1_resettable.html", [
+      [ "sensesp::Filesystem", "classsensesp_1_1_filesystem.html", null ],
+      [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ]
     ] ],
-    [ "SHT31", "class_s_h_t31.html", null ],
-    [ "SKDelta", "class_s_k_delta.html", null ],
-    [ "SKMetadata", "class_s_k_metadata.html", null ],
-    [ "SKRequest", "class_s_k_request.html", [
-      [ "SKPutRequestBase", "class_s_k_put_request_base.html", null ]
+    [ "sensesp::ResettableCompare", "classsensesp_1_1_resettable_compare.html", null ],
+    [ "sensesp::CurveInterpolator::Sample", "classsensesp_1_1_curve_interpolator_1_1_sample.html", null ],
+    [ "sensesp::SensESPBaseApp", "classsensesp_1_1_sens_e_s_p_base_app.html", [
+      [ "sensesp::SensESPApp", "classsensesp_1_1_sens_e_s_p_app.html", null ],
+      [ "sensesp::SensESPMinimalApp", "classsensesp_1_1_sens_e_s_p_minimal_app.html", null ]
     ] ],
-    [ "SmartSwitchController::SyncPath", "class_smart_switch_controller_1_1_sync_path.html", null ],
-    [ "ValueConsumer< T >", "class_value_consumer.html", [
-      [ "Transform< time_t, String >", "class_transform.html", null ],
-      [ "Transform< T, T >", "class_transform.html", null ],
-      [ "SKPutRequest< T >", "class_s_k_put_request.html", null ]
+    [ "sensesp::SensESPBaseAppBuilder", "classsensesp_1_1_sens_e_s_p_base_app_builder.html", [
+      [ "sensesp::SensESPAppBuilder", "classsensesp_1_1_sens_e_s_p_app_builder.html", null ],
+      [ "sensesp::SensESPMinimalAppBuilder", "classsensesp_1_1_sens_e_s_p_minimal_app_builder.html", null ]
     ] ],
-    [ "ValueConsumer< bool >", "class_value_consumer.html", [
-      [ "Transform< bool, String >", "class_transform.html", null ],
-      [ "Transform< bool, ClickTypes >", "class_transform.html", null ],
-      [ "RgbLed", "class_rgb_led.html", null ]
+    [ "sensesp::SKMetadata", "classsensesp_1_1_s_k_metadata.html", null ],
+    [ "sensesp::SKRequest", "classsensesp_1_1_s_k_request.html", [
+      [ "sensesp::SKPutRequestBase", "classsensesp_1_1_s_k_put_request_base.html", null ]
     ] ],
-    [ "ValueConsumer< C >", "class_value_consumer.html", [
-      [ "Transform< C, P >", "class_transform.html", null ]
+    [ "sensesp::Startable", "classsensesp_1_1_startable.html", [
+      [ "sensesp::BaseBlinker", "classsensesp_1_1_base_blinker.html", [
+        [ "sensesp::PatternBlinker", "classsensesp_1_1_pattern_blinker.html", null ],
+        [ "sensesp::PeriodicBlinker", "classsensesp_1_1_periodic_blinker.html", [
+          [ "sensesp::EvenBlinker", "classsensesp_1_1_even_blinker.html", null ],
+          [ "sensesp::RatioBlinker", "classsensesp_1_1_ratio_blinker.html", null ]
+        ] ]
+      ] ],
+      [ "sensesp::DebugOutput", "classsensesp_1_1_debug_output.html", null ],
+      [ "sensesp::HTTPServer", "classsensesp_1_1_h_t_t_p_server.html", null ],
+      [ "sensesp::MDNSDiscovery", "classsensesp_1_1_m_d_n_s_discovery.html", null ],
+      [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ],
+      [ "sensesp::OTA", "classsensesp_1_1_o_t_a.html", null ],
+      [ "sensesp::SKDeltaQueue", "classsensesp_1_1_s_k_delta_queue.html", null ],
+      [ "sensesp::Sensor", "classsensesp_1_1_sensor.html", null ],
+      [ "sensesp::TransformBase", "classsensesp_1_1_transform_base.html", null ],
+      [ "sensesp::WSClient", "classsensesp_1_1_w_s_client.html", null ]
     ] ],
-    [ "ValueConsumer< ClickTypes >", "class_value_consumer.html", [
-      [ "SmartSwitchController", "class_smart_switch_controller.html", null ]
+    [ "sensesp::StartableCompare", "classsensesp_1_1_startable_compare.html", null ],
+    [ "sensesp::SmartSwitchController::SyncPath", "classsensesp_1_1_smart_switch_controller_1_1_sync_path.html", null ],
+    [ "sensesp::ValueConsumer< T >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< T, T >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::SKPutRequest< T >", "classsensesp_1_1_s_k_put_request.html", null ]
     ] ],
-    [ "ValueConsumer< float >", "class_value_consumer.html", [
-      [ "Transform< float, String >", "class_transform.html", null ],
-      [ "PWMOutput", "class_p_w_m_output.html", null ]
+    [ "sensesp::ValueConsumer< bool >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< bool, ClickTypes >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::RgbLed", "classsensesp_1_1_rgb_led.html", null ]
     ] ],
-    [ "ValueConsumer< IN >", "class_value_consumer.html", [
-      [ "Transform< IN, OUT >", "class_transform.html", null ],
-      [ "LambdaConsumer< IN >", "class_lambda_consumer.html", null ]
+    [ "sensesp::ValueConsumer< C >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< C, P >", "classsensesp_1_1_transform.html", null ]
     ] ],
-    [ "ValueConsumer< int >", "class_value_consumer.html", [
-      [ "Transform< int, float >", "class_transform.html", null ],
-      [ "PressRepeater", "class_press_repeater.html", null ],
-      [ "SystemStatusLed", "class_system_status_led.html", null ]
+    [ "sensesp::ValueConsumer< ClickTypes >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::SmartSwitchController", "classsensesp_1_1_smart_switch_controller.html", null ]
     ] ],
-    [ "ValueConsumer< long >", "class_value_consumer.html", [
-      [ "RgbLed", "class_rgb_led.html", null ]
+    [ "sensesp::ValueConsumer< float >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< float, String >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::PWMOutput", "classsensesp_1_1_p_w_m_output.html", null ]
     ] ],
-    [ "ValueConsumer< String >", "class_value_consumer.html", [
-      [ "Transform< String, bool >", "class_transform.html", null ],
-      [ "SmartSwitchController", "class_smart_switch_controller.html", null ]
+    [ "sensesp::ValueConsumer< IN >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< IN, OUT >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::LambdaConsumer< IN >", "classsensesp_1_1_lambda_consumer.html", null ]
     ] ],
-    [ "ValueConsumer< SystemStatus >", "class_value_consumer.html", [
-      [ "SystemStatusLed", "class_system_status_led.html", null ]
+    [ "sensesp::ValueConsumer< int >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< int, float >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::PressRepeater", "classsensesp_1_1_press_repeater.html", null ],
+      [ "sensesp::SystemStatusLed", "classsensesp_1_1_system_status_led.html", null ]
     ] ],
-    [ "ValueConsumer< WifiState >", "class_value_consumer.html", [
-      [ "SystemStatusController", "class_system_status_controller.html", null ]
+    [ "sensesp::ValueConsumer< long >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::RgbLed", "classsensesp_1_1_rgb_led.html", null ]
     ] ],
-    [ "ValueConsumer< WSConnectionState >", "class_value_consumer.html", [
-      [ "SystemStatusController", "class_system_status_controller.html", null ]
+    [ "sensesp::ValueConsumer< String >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::SmartSwitchController", "classsensesp_1_1_smart_switch_controller.html", null ]
+    ] ],
+    [ "sensesp::ValueConsumer< SystemStatus >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::SystemStatusLed", "classsensesp_1_1_system_status_led.html", null ]
+    ] ],
+    [ "sensesp::ValueConsumer< WifiState >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::SystemStatusController", "classsensesp_1_1_system_status_controller.html", null ]
+    ] ],
+    [ "sensesp::ValueConsumer< WSConnectionState >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::SystemStatusController", "classsensesp_1_1_system_status_controller.html", null ]
     ] ]
 ];

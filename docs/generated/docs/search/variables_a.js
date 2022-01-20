@@ -1,12 +1,10 @@
 var searchData=
 [
-  ['last_5fvalue_5fsent_5f_1401',['last_value_sent_',['../class_press_repeater.html#a4a2b81bdd657be585e667d7df29e000e',1,'PressRepeater']]],
-  ['latitude_1402',['latitude',['../struct_position.html#ac6606384ff43b39b8614dd3b590d6b36',1,'Position']]],
-  ['led_5fb_5fchannel_5f_1403',['led_b_channel_',['../class_rgb_led.html#a238603d95b8ccca17d8edc6d6e33a384',1,'RgbLed']]],
-  ['led_5fg_5fchannel_5f_1404',['led_g_channel_',['../class_rgb_led.html#ad560df49fe0dcca94a413b4f33f50889',1,'RgbLed']]],
-  ['led_5foff_5frgb_5f_1405',['led_off_rgb_',['../class_rgb_led.html#a44ae44275a9b3d5596c947e264565161',1,'RgbLed']]],
-  ['led_5fon_5frgb_5f_1406',['led_on_rgb_',['../class_rgb_led.html#ac301bf491bde3a882687d8f271a41e56',1,'RgbLed']]],
-  ['led_5fr_5fchannel_5f_1407',['led_r_channel_',['../class_rgb_led.html#a6b2495e27ba564ae5268b0565783659f',1,'RgbLed']]],
-  ['long_5fclick_5fdelay_5f_1408',['long_click_delay_',['../class_click_type.html#a4b61fd5d3364a7f11f1b0c121fd50b03',1,'ClickType']]],
-  ['longitude_1409',['longitude',['../struct_position.html#a76a87a4287c53ae7e53eba716e740c12',1,'Position']]]
+  ['max_5fdelta_5f_0',['max_delta_',['../classsensesp_1_1_change_filter.html#a3b880754ff548c1ce87aa354a64b656b',1,'sensesp::ChangeFilter']]],
+  ['max_5fskips_5f_1',['max_skips_',['../classsensesp_1_1_change_filter.html#a516c659a8bb36767f8f490502c76d278',1,'sensesp::ChangeFilter']]],
+  ['max_5fvalue_5f_2',['max_value_',['../classsensesp_1_1_threshold_transform.html#a90f42f5ec73c1cee25429efd5aff2ebe',1,'sensesp::ThresholdTransform']]],
+  ['mdns_5fdiscovery_5f_3',['mdns_discovery_',['../classsensesp_1_1_sens_e_s_p_app.html#ad8983d6d916176f12c7d5725f30ba9d7',1,'sensesp::SensESPApp']]],
+  ['meta_5f_4',['meta_',['../classsensesp_1_1_s_k_output.html#acc9fe0ecf987a18a5876f3bea4f009cb',1,'sensesp::SKOutput']]],
+  ['min_5fdelta_5f_5',['min_delta_',['../classsensesp_1_1_change_filter.html#afc47aadd4585084479abb4fad0ebc841',1,'sensesp::ChangeFilter']]],
+  ['min_5fvalue_5f_6',['min_value_',['../classsensesp_1_1_threshold_transform.html#a8fc7620cdc6872bfbd4d56fe4964cbd9',1,'sensesp::ThresholdTransform']]]
 ];

@@ -1,13 +1,16 @@
 var searchData=
 [
-  ['pattern_5f_1427',['pattern_',['../class_pattern_blinker.html#ae6cc27858c0bbf562bd72c56299b3c65',1,'PatternBlinker']]],
-  ['pattern_5fptr_5f_1428',['pattern_ptr_',['../class_pattern_blinker.html#a65c62883de67e685fafe3146c3b8b531',1,'PatternBlinker']]],
-  ['pending_5frequest_5fid_5f_1429',['pending_request_id_',['../class_s_k_put_request_base.html#a4e93038957b5726f30e3a54ecc03651b',1,'SKPutRequestBase']]],
-  ['period_5f_1430',['period_',['../class_periodic_blinker.html#a4aef70889d39e3d7d1a38c358d3ffff7',1,'PeriodicBlinker']]],
-  ['pin_5f_1431',['pin_',['../class_digital_input.html#a73ffd8c88ce508420381c9c8324f6c60',1,'DigitalInput::pin_()'],['../class_base_blinker.html#a019ddc5bb7c8089102ca68dddadc6a65',1,'BaseBlinker::pin_()']]],
-  ['position_1432',['position',['../struct_n_m_e_a_data.html#a249d831d604857b04284d4c33719005e',1,'NMEAData']]],
-  ['press_5fduration_5f_1433',['press_duration_',['../class_click_type.html#a0d5d3bf1f68cc1024b1e02edef16ca12',1,'ClickType']]],
-  ['progmem_1434',['PROGMEM',['../index_8h.html#a9e09bea0eddc6841460f6654d2ba1a5f',1,'PROGMEM():&#160;index.h'],['../js__jsoneditor_8h.html#a53fb277b2065a969013a1bc4b071abd1',1,'PROGMEM():&#160;js_jsoneditor.h'],['../js__sensesp_8h.html#a8de262bdd3fe0e74c591a5174112011f',1,'PROGMEM():&#160;js_sensesp.h'],['../setup_8h.html#a183306764a8509f2c9635a13289ea64f',1,'PROGMEM():&#160;setup.h']]],
-  ['pushed_5f_1435',['pushed_',['../class_press_repeater.html#a56c70bacd6afcc6e597377219cf986df',1,'PressRepeater']]],
-  ['put_5frequest_1436',['put_request',['../class_smart_switch_controller_1_1_sync_path.html#a35a473883a2ce28d41fbd7b70ccefd24',1,'SmartSwitchController::SyncPath']]]
+  ['r1_5f_0',['R1_',['../classsensesp_1_1_voltage_divider_r2.html#a15a5a4f7266550854cac1173a1428f8a',1,'sensesp::VoltageDividerR2']]],
+  ['r2_5f_1',['R2_',['../classsensesp_1_1_voltage_divider_r1.html#a303e6a8f59175a72658cdf8ffec832e7',1,'sensesp::VoltageDividerR1']]],
+  ['ratio_5f_2',['ratio_',['../classsensesp_1_1_ratio_blinker.html#a486383facbd2a68547b0c6b94d4b5fa3',1,'sensesp::RatioBlinker']]],
+  ['reaction_5f_3',['reaction_',['../classsensesp_1_1_base_blinker.html#a85919295641e4aca6d0dd9249aedce5f',1,'sensesp::BaseBlinker']]],
+  ['read_5fdelay_5f_4',['read_delay_',['../classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b',1,'sensesp::DigitalInputCounter']]],
+  ['release_5fduration_5f_5',['release_duration_',['../classsensesp_1_1_click_type.html#a2cd1bda27f648772ad24cac6a700d55c',1,'sensesp::ClickType']]],
+  ['repeat_5finterval_5f_6',['repeat_interval_',['../classsensesp_1_1_press_repeater.html#ad05c3d98b192e2c3dc461d832e8e7dfe',1,'sensesp::PressRepeater']]],
+  ['repeat_5finterval_5fms_5f_7',['repeat_interval_ms_',['../classsensesp_1_1_repeat_sensor.html#a1434df343b33438d94c407876979dbb2',1,'sensesp::RepeatSensor']]],
+  ['repeat_5fstart_5finterval_5f_8',['repeat_start_interval_',['../classsensesp_1_1_press_repeater.html#a59f4d64a3001da748eccee84b98b8ccc',1,'sensesp::PressRepeater']]],
+  ['repeating_5f_9',['repeating_',['../classsensesp_1_1_press_repeater.html#af07b646e5a9885bf143eadaddf20ea8f',1,'sensesp::PressRepeater']]],
+  ['request_5fid_10',['request_id',['../classsensesp_1_1_s_k_request_1_1_pending_request.html#a754fe20025eda4610676ac38d914c966',1,'sensesp::SKRequest::PendingRequest']]],
+  ['request_5fmap_11',['request_map',['../classsensesp_1_1_s_k_request.html#a1b9232410aa8733fce6d408761af0f12',1,'sensesp::SKRequest']]],
+  ['returning_5fcallback_5f_12',['returning_callback_',['../classsensesp_1_1_repeat_sensor.html#acf7aa7f053644ad2677f6043e8736a15',1,'sensesp::RepeatSensor']]]
 ];

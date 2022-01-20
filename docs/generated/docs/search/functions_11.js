@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['ultrasonicdistance_1331',['UltrasonicDistance',['../class_ultrasonic_distance.html#a5aaf744be7d7be1fbb3a96cbda8e1cbd',1,'UltrasonicDistance']]],
-  ['update_5fstate_1332',['update_state',['../class_system_status_controller.html#aebcc7bbbf1529c04d7ac9d5ace9a0292',1,'SystemStatusController']]],
-  ['uptime_1333',['Uptime',['../class_uptime.html#a3723d5d7c5b11879065dc3defb6e171f',1,'Uptime']]]
+  ['update_5fstate_0',['update_state',['../classsensesp_1_1_system_status_controller.html#a7f7d05d211337dcc6b2bc201cd309cf7',1,'sensesp::SystemStatusController']]],
+  ['uptime_1',['Uptime',['../classsensesp_1_1_uptime.html#a389653f52423ec784b2230537084581b',1,'sensesp::Uptime']]]
 ];
