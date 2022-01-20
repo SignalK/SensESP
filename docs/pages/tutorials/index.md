@@ -18,7 +18,7 @@ The following labels are used to categorize the tutorials:
 | &#x1F424; | Newbie: Slow-paced tutorials suitable for people with little programming experience |
 | &#x1F47D; | Advanced: Intermediate or advanced content that highlight quirks or interesting techniques |
 
-## Interfacing with Software Libraries and Hardware
+## Interfacing SensESP with Software Libraries and Hardware
 
 ### &#x1f4cc; [Using `RepeatSensor` to Interface a Hardware Sensor Library: BMP280](bmp280)
 
