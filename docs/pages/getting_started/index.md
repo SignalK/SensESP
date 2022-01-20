@@ -138,7 +138,7 @@ Now that your device is up and running, have a look at the source code in the `s
 The project template illustrates some core SensESP concepts.
 Remove the pieces you don't need and start adding new stuff.
 
-If you want to use an external sensor device, check first the [Add-ons page](..//additional_resources/add-ons/) to see if a SensESP specific add-on is available.
+If you want to use an external sensor device, check first the [Add-ons page](../additional_resources/) to see if a SensESP specific add-on is available.
 However, if a device has an ESP32-compatible Arduino framework library available, you can usually add support for it using the `RepeatSensor` class.
 See the [BMP280 Tutorial](../tutorials/bmp280/) for an example.
 
@@ -159,4 +159,4 @@ If you want to share your work, follow these three additional steps:
 {:start="4"}
 4. Verify that the project license (as defined in the `LICENSE` file) suits your preferences.
 5. Create a new repo on GitHub and push the project to it.
-6. Get your project added to the [examples list](../additional_resources/add-ons/#examples-and-related-projects) by creating either a new issue or a pull request in the [SensESP repository](https://github.com/SignalK/SensESP).
+6. Get your project added to the [examples list](../additional_resources/#examples-and-related-projects) by creating either a new issue or a pull request in the [SensESP repository](https://github.com/SignalK/SensESP).
