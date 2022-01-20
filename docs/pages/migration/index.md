@@ -24,7 +24,7 @@ lib_deps =
 
 ### Setup and Loop Functions
 
-SensESP builds on ReactESP, which is an event-based framework for developing ESP32 firmware.
+SensESP builds on [ReactESP](https://github.com/mairas/ReactESP), which is an event-based framework for developing ESP32 firmware.
 Previous versions of ReactESP defined the Arduino Framework default `setup()` and `loop()` functions internally and relied on a lambda function for initializing the program and defining the top-level functionality:
 
 ```c++
@@ -89,7 +89,7 @@ All Sensor classes requiring external libraries have been removed.
 Reducing the number of external dependencies improves code stability and improves build times.
 
 Some Sensors are now available as [add-on libraries](../../additional_resources).
-Most, however, have been removed in favor of a more generic approach, namely the `RepeatSensor` class.
+Most, however, have been removed in favor of a more generic approach, namely the [`RepeatSensor`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_repeat_sensor.html) class.
 The `RepeatSensor` class allows you to easily interface any external hardware sensor libraries with SensESP.
 See the `RepeatSensor` tutorials ([part 1](../tutorials/bmp280), [part 2](../tutorials/bmp280)) for more details.
 
@@ -109,9 +109,9 @@ To better reflect the intent and the functionality, the `Enable` class has been 
 
 Some class public interfaces have been changed.
 
-The `DigitalInputState` constructor no longer accepts the `interrupt_type` argument because that class never used interrupts.
+The [`DigitalInputState`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_digital_input_state.html) constructor no longer accepts the `interrupt_type` argument because that class never used interrupts.
 
-The `DigitalInputChange` implementation has been simplified and the constructor no longer requres the `read_delay` argument.
+The [`DigitalInputChange`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_digital_input_change.html) implementation has been simplified and the constructor no longer requres the `read_delay` argument.
 
 ## System Info Sensors
 

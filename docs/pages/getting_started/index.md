@@ -139,7 +139,7 @@ The project template illustrates some core SensESP concepts.
 Remove the pieces you don't need and start adding new stuff.
 
 If you want to use an external sensor device, check first the [Add-ons page](../additional_resources/) to see if a SensESP specific add-on is available.
-However, if a device has an ESP32-compatible Arduino framework library available, you can usually add support for it using the `RepeatSensor` class.
+However, if a device has an ESP32-compatible Arduino framework library available, you can usually add support for it using the [`RepeatSensor`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_repeat_sensor.html) class.
 See the [BMP280 Tutorial](../tutorials/bmp280/) for an example.
 
 If you have created someting that works for you, share your work so that others can use your code as an example!

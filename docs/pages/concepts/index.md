@@ -119,17 +119,18 @@ You must ensure that you don't try to call the methods of an object that has bee
 
 ## Sensors
 
-A "Sensor" in SensESP is a C++ class that knows how to get data from an actual, physical sensor and pass it along to a Transform (see below). For example, an AnalogInput Sensor knows how to read an AnalogIn pin on the MCU, and a DigitalInputCounter Sensor knows how to read a GPIO pin on the MCU using an interrupt. A BME280value Sensor knows how to read the temperature, humidity, and pressure from a phyical Adafruit BME280 sensor.
+A "Sensor" in SensESP is a [C++ class](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_sensor_t.html) that knows how to get data from an actual, physical sensor and pass it along to a Transform (see below).
+For example, an AnalogInput Sensor knows how to read an AnalogIn pin on the MCU, and a [DigitalInputCounter](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_digital_input_counter.html) Sensor knows how to read a GPIO pin on the MCU using an interrupt.
 
-The two generic types of sensor data - AnalogInput and DigitalInput (including various versions of DigitalInput, like DigitalInputState and DigitalInputCounter) - are built into the core SensESP code.
+The two generic types of sensor data - [AnalogInput](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_analog_input.html) and [DigitalInput](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_digital_input.html) (including various versions of DigitalInput, like [DigitalInputState](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_digital_input_state.html) and [DigitalInputCounter](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_digital_input_counter.html)) - are built into the core SensESP code.
 
 Sensors for many specific types of physical sensors, like the BME280, or the SHT31, or the INAxxx, can be implemented by incorporating the relevant sensor library (often from Adafruit) and a few lines of code in `main.cpp`.
 
-Some specific sensors - for example, the MAX31856 thermocouple sensor - require a little more complex programming to read them, so they can be found [here](https://github.com/SensESP). These "add-on" Sensor libraries can easily be included in a SensESP project by adding them to your `platformio.ini` file. If you have a physical sensor that you think fits in this category, and you want some help writing an add-on to read it, make a post in the #sensors channel on the Signalk-dev Slack.
+Some specific sensors - for example, the MAX31856 thermocouple sensor - require a little more complex programming to read them, so they can be found [here](../additional_resources/). These "add-on" Sensor libraries can easily be included in a SensESP project by adding them to your `platformio.ini` file. If you have a physical sensor that you think fits in this category, and you want some help writing an add-on to read it, make a post in the #sensors channel on the Signalk-dev Slack.
 
 ## Transforms
 
-A Transform is a class that takes a value as input (from a Sensor, or from another Transform), does something with that value (transforms it in some way), then outputs the new value, either to another Transform, or to the Signal K Server. In the `rpm_counter.cpp` example referred to above, the meat of the code is these three lines:
+A [Transform](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_transform.html) is a class that takes a value as input (from a Sensor, or from another Transform), does something with that value (transforms it in some way), then outputs the new value, either to another Transform, or to the Signal K Server. In the `rpm_counter.cpp` example referred to above, the meat of the code is these three lines:
 
 ```c++
 auto* sensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
@@ -139,7 +140,7 @@ sensor
     ->connectTo(new SKOutputFloat(sk_path, config_path_skpath));
 ```
 
-The first line instantiates a Sensor of type DigitalInputCounter. The second line is a Transform of type Frequency - it takes a raw number from the DigitalInputCounter Sensor and converts it to hertz, then passes it along to SKOutputFloat. SKOutputFloat is a special Transform whose purpose is to send a float value to the Signal K Server.
+The first line instantiates a Sensor of type DigitalInputCounter. The second line is a Transform of type [Frequency](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_frequency.html) - it takes a raw number from the DigitalInputCounter Sensor and converts it to hertz, then passes it along to [SKOutputFloat](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_s_k_output_numeric.html). SKOutputFloat is a special Transform whose purpose is to send a float value to the Signal K Server.
 
 A much more complex example is `temperature_sender.cpp`, where the meat of the program is this:
 
