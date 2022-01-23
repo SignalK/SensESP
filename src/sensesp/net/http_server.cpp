@@ -19,6 +19,7 @@
 #include "web/js_jsoneditor.h"
 #include "web/js_sensesp.h"
 #include "web/setup.h"
+#include "web/css_bootstrap.h"
 
 namespace sensesp {
 
@@ -100,23 +101,39 @@ HTTPServer::HTTPServer() : Startable(50) {
 
   server->on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
     debugD("Serving index.html");
-    request->send_P(200, "text/html", PAGE_index);
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    response->addHeader("Content-Encoding", "gzip");
+    request->send_P(200, "text/html", PAGE_index, PAGE_index_size);
   });
 
   server->on("/setup", HTTP_GET, [](AsyncWebServerRequest* request) {
     debugD("Serving setup.html");
-    request->send_P(200, "text/html", PAGE_setup);
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    response->addHeader("Content-Encoding", "gzip");
+    request->send_P(200, "text/html", PAGE_setup, PAGE_setup_size);
+  });
+
+  server->on("/js/bootstrap.min.css", HTTP_GET,
+  [](AsyncWebServerRequest* request) {
+    debugD("Serving bootstrap.min.css");
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    response->addHeader("Content-Encoding", "gzip");
+    request->send_P(200, "text/stylesheet", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
   });
 
   server->on("/js/jsoneditor.min.js", HTTP_GET,
-             [](AsyncWebServerRequest* request) {
-               debugD("Serving jsoneditor.min.js");
-               request->send_P(200, "text/javascript", PAGE_js_jsoneditor);
-             });
+  [](AsyncWebServerRequest* request) {
+    debugD("Serving jsoneditor.min.js");
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    response->addHeader("Content-Encoding", "gzip");
+    request->send_P(200, "text/javascript", PAGE_js_jsoneditor, PAGE_js_jsoneditor_size);
+  });
 
   server->on("/js/sensesp.js", HTTP_GET, [](AsyncWebServerRequest* request) {
     debugD("Serving sensesp.js");
-    request->send_P(200, "text/javascript", PAGE_js_sensesp);
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    response->addHeader("Content-Encoding", "gzip");
+    request->send_P(200, "text/javascript", PAGE_js_sensesp, PAGE_js_jsoneditor_size);
   });
 
   server->on("/device/reset", HTTP_GET,

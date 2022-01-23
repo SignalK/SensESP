@@ -1,0 +1,27 @@
+{
+    "config": {
+        "hostname": "relays",
+        "ap_ssid": "DryII",
+        "ap_password": "xxxxxxxxxxxxxx"
+    },
+    "schema": {
+        "type": "object",
+        "properties": {
+            "hostname": {
+                "title": "ESP device hostname (readonly)",
+                "type": "string",
+                "readOnly": true
+            },
+            "ap_ssid": {
+                "title": "Wifi Access Point SSID (readonly)",
+                "type": "string",
+                "readOnly": true
+            },
+            "ap_password": {
+                "title": "Wifi Access Point Password (readonly)",
+                "type": "string",
+                "readOnly": true
+            }
+        }
+    }
+}

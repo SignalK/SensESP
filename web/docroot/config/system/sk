@@ -1,0 +1,10 @@
+{"config":{"sk_address":"pi.boat","sk_port":3000,"token":"eyzzzzzzzzz...........","client_id":"a321b....","polling_href":""},"schema":{
+    "type": "object",
+    "properties": {
+        "sk_address": { "title": "Signal K server address", "type": "string" },
+        "sk_port": { "title": "Signal K server port", "type": "integer" },
+        "client_id": { "title": "Client ID (readonly)", "type": "string", "readOnly": true },
+        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
+        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
+    }
+  }}

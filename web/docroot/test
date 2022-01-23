@@ -1,0 +1,19 @@
+<div class="row g-3">
+    <div class="card card-body">
+        <label for="calibrationA" class="form-label">Calibration value A</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">mA</span>
+            <input type="number" class="form-control" id="calibrationA" placeholder="input calibration value in mA">
+        </div>
+        <label for="calibrationB" class="form-label">Calibration value B</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">mA</span>
+            <input type="number" class="form-control" id="calibrationB" placeholder="input calibration value in mA">
+        </div>
+    </div>
+    <div class="col-12">
+        <button class='btn btn-primary'>Save</button>
+    </div>
+</div>
+
+<p class="text-muted">This page will generated in C++ code on device.</p>
