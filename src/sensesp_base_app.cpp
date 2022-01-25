@@ -21,6 +21,9 @@ SensESPBaseApp::SensESPBaseApp() {
   // create the hostname_ observable - this needs to be done before
   // the builder methods are called
   hostname_ = new ObservableValue<String>(kDefaultHostname);
+  //Create buildInfo and system name properties
+  auto buildInfo = new SystemProperty<String>("Build at", __DATE__ " " __TIME__);
+  hostname_->connect_to(new SystemProperty<String>("Name"));
 }
 
 /**

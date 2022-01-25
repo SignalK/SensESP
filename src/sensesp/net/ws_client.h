@@ -11,6 +11,7 @@
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/startable.h"
 #include "sensesp/system/valueproducer.h"
+#include "sensesp/system/system_property.h"
 
 namespace sensesp {
 
@@ -81,6 +82,9 @@ class WSClient : public Configurable,
   String auth_token_ = NULL_AUTH_TOKEN;
   bool server_detected_ = false;
   bool token_test_success_ = false;
+  SystemProperty<String>* sk_server_property_ = new SystemProperty<String>("SK address", "--");
+  SystemProperty<uint16_t>* sk_server_port_property_ = new SystemProperty<uint16_t>("SK server port", 0);
+  SystemProperty<String>* sk_server_connection_ = new SystemProperty<String>("SK connection status");
 
   ObservableValue<WSConnectionState> connection_state_ =
       WSConnectionState::kWSDisconnected;

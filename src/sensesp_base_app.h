@@ -8,6 +8,7 @@
 #include "sensesp/net/debug_output.h"
 #include "sensesp/system/filesystem.h"
 #include "sensesp/system/observablevalue.h"
+#include "sensesp/system/system_property.h"
 
 namespace sensesp {
 

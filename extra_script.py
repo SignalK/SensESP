@@ -1,5 +1,5 @@
 Import("env")
-import zlib
+import gzip
 
 def make_c_header(inName, outName):
 
@@ -8,9 +8,9 @@ def make_c_header(inName, outName):
    infile = open('web/docroot/' + inName, "rb")
    inFileBytes = infile.read()
    print('Compressing into gzip...')
-   inFileGziped = zlib.compress(inFileBytes)
+   inFileGziped = gzip.compress(inFileBytes)
    print('Non compressed size is ', str(len(inFileBytes)), ", gziped size is ", str(len(inFileGziped)), ".")
-   outfile = open("src/net/web/" + outName + ".h","w") 
+   outfile = open("src/sensesp/net/web/" + outName + ".h","w") 
    print('Generating header file...')
    outfile.write("#include <pgmspace.h>\n")
    outfile.write("const uint8_t PAGE_")
@@ -40,11 +40,10 @@ def make_c_header(inName, outName):
 
 
 def build_webUI(*args, **kwargs):
-   env.Execute("terser --compress --output web/docroot/js/sensesp.min.js -- web/docroot/js/sensesp.js")
+   env.Execute("terser --compress --output /web/docroot/js/sensesp.min.js -- /web/docroot/js/sensesp.js")
    make_c_header("js/sensesp.min.js", "js_sensesp")
    make_c_header("js/jsoneditor.min.js", "js_jsoneditor")
    make_c_header("css/bootstrap.min.css", "css_bootstrap")
    make_c_header("index.html", "index")
-   make_c_header("setup/index.html", "setup")
 
 env.AlwaysBuild(env.Alias("webUI", None, build_webUI))

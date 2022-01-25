@@ -13,12 +13,12 @@
 #include "AsyncJson.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp_base_app.h"
+#include "sensesp/system/system_property.h"
 
 // Include the web UI stored in PROGMEM space
 #include "web/index.h"
 #include "web/js_jsoneditor.h"
 #include "web/js_sensesp.h"
-#include "web/setup.h"
 #include "web/css_bootstrap.h"
 
 namespace sensesp {
@@ -100,40 +100,33 @@ HTTPServer::HTTPServer() : Startable(50) {
   });
 
   server->on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
-    debugD("Serving index.html");
-    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    debugD("Serving gziped index.html");
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", PAGE_index, PAGE_index_size, NULL);
     response->addHeader("Content-Encoding", "gzip");
-    request->send_P(200, "text/html", PAGE_index, PAGE_index_size);
+    request->send(response);
   });
-
-  server->on("/setup", HTTP_GET, [](AsyncWebServerRequest* request) {
-    debugD("Serving setup.html");
-    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
-    response->addHeader("Content-Encoding", "gzip");
-    request->send_P(200, "text/html", PAGE_setup, PAGE_setup_size);
-  });
-
-  server->on("/js/bootstrap.min.css", HTTP_GET,
+  
+  server->on("/css/bootstrap.min.css", HTTP_GET,
   [](AsyncWebServerRequest* request) {
-    debugD("Serving bootstrap.min.css");
-    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    debugD("Serving gziped bootstrap.min.css");
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/css", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
     response->addHeader("Content-Encoding", "gzip");
-    request->send_P(200, "text/stylesheet", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
+    request->send(response);
   });
 
   server->on("/js/jsoneditor.min.js", HTTP_GET,
   [](AsyncWebServerRequest* request) {
-    debugD("Serving jsoneditor.min.js");
-    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    debugD("Serving gziped jsoneditor.min.js");
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", PAGE_js_jsoneditor, PAGE_js_jsoneditor_size);
     response->addHeader("Content-Encoding", "gzip");
-    request->send_P(200, "text/javascript", PAGE_js_jsoneditor, PAGE_js_jsoneditor_size);
+    request->send(response);
   });
 
   server->on("/js/sensesp.js", HTTP_GET, [](AsyncWebServerRequest* request) {
-    debugD("Serving sensesp.js");
-    AsyncWebServerResponse *response = request->beginResponse(200, "text/html", "OK");
+    debugD("Serving gziped sensesp.js");
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/javascript", PAGE_js_sensesp, PAGE_js_jsoneditor_size);
     response->addHeader("Content-Encoding", "gzip");
-    request->send_P(200, "text/javascript", PAGE_js_sensesp, PAGE_js_jsoneditor_size);
+    request->send(response);
   });
 
   server->on("/device/reset", HTTP_GET,
@@ -224,16 +217,62 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
 }
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
-  auto* response = request->beginResponseStream("text/plain");
-
+  auto* response = request->beginResponseStream("application/json");
+  char buff[128];
   response->setCode(200);
-  response->printf("Name: %s, build at %s %s\n",
-                   SensESPBaseApp::get_hostname().c_str(), __DATE__, __TIME__);
+  auto output_buffer_size = (200 * configurables.size()) + 512;
+  DynamicJsonDocument json_doc(output_buffer_size);
+  auto properties = json_doc.createNestedObject("Properties");
+  auto commands = json_doc.createNestedArray("Commands");
+  auto pages = json_doc.createNestedArray("Pages");
+  auto config = json_doc.createNestedArray("Config");
 
-  response->printf("MAC: %s\n", WiFi.macAddress().c_str());
-  response->printf("WiFi signal: %d\n", WiFi.RSSI());
+  //properties["Name"] = SensESPBaseApp::get_hostname();
+  //sprintf(buff, "%s %s", __DATE__, __TIME__);
+  //properties["Build at"] = buff;
+  //properties["MAC"] = WiFi.macAddress();
+  //properties["WiFi signal"] = WiFi.RSSI();
 
-  response->printf("SSID: %s\n", WiFi.SSID().c_str());
+  for(auto property = systemProperties.begin(); property != systemProperties.end(); ++property)
+  {
+    debugD("Info - updating property %s", property->first.c_str());
+
+    property->second->set_json(properties);
+  }
+  //add all configuration paths
+  for (auto it = configurables.begin(); it != configurables.end(); ++it) {
+    config.add(it->first);
+  }
+
+  serializeJson(json_doc, *response);
+  /*
+{
+    "Properties": {
+        "Name": "relays",
+        "Build at": "Oct 11 2021 18:26:22",
+        "MAC": "24:A1:60:46:01:7C",
+        "WiFi signal": -12,
+        "SSID": "DryII",
+        "Signal K server address": "pi.boat",
+        "Signal K server port": 3000
+    },
+    "Commands": [
+        {
+            "Title": "ADC Calibration",
+            "Name": "calibration",
+            "Confirm": true
+        }
+    ],
+    "Pages": {
+        "Test": "/test"
+    },
+    "Config": [
+        "/sk/pwm0",
+        "/sk/pwmcontrol0",
+        "/system/networking",
+        "/system/sk"
+    ]
+}*/
 
   // TODO: use inversion of control to acquire information on different
   // subsystems
