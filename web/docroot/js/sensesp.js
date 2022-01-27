@@ -6,35 +6,33 @@ var pagesLoaded = false;
 var targets = {};
 
 function ajax(method, url, data, contentType) {
-  return new Promise(function(resolve, reject) {
-    var request = new XMLHttpRequest();
+    return new Promise(function (resolve, reject) {
+        var request = new XMLHttpRequest();
 
-    request.open(method, url, true);
+        request.open(method, url, true);
 
-    request.onload = function() {
-        if (request.status === 200) {
-            resolve(request.response);
-        } else {
-            reject(Error(request.statusText));
+        request.onload = function () {
+            if (request.status === 200) {
+                resolve(request.response);
+            } else {
+                reject(Error(request.statusText));
+            }
+        };
+
+        request.onerror = function () {
+            reject(Error("Network Error"));
+        };
+
+        if (contentType) {
+            request.setRequestHeader("Content-Type", contentType);
         }
-    };
 
-    request.onerror = function() {
-      reject(Error("Network Error"));
-    };
-
-    if (contentType) {
-        request.setRequestHeader("Content-Type", contentType);
-    }
-
-    request.send(data);
-  });
+        request.send(data);
+    });
 }
 
-class NavTarget
-{
-    constructor(key, invokeFunction, link)
-    {
+class NavTarget {
+    constructor(key, invokeFunction, link) {
         this.Key = key;
         this.TargetFunction = invokeFunction;
         this.Link = link;
@@ -57,23 +55,23 @@ function editConfig(config_path) {
 
     ajax('GET', '/config' + config_path)
 
-    .then(response => {
+        .then(response => {
 
-        showLoader(false);
-        var json = JSON.parse(response);
-        var config = json.config;
-        var schema = json.schema;
+            showLoader(false);
+            var json = JSON.parse(response);
+            var config = json.config;
+            var schema = json.schema;
 
-        if (Object.keys(schema).length == 0) {
-            alert(`No schema available for ${config_path}`);
-            return;
-        }
+            if (Object.keys(schema).length == 0) {
+                alert(`No schema available for ${config_path}`);
+                return;
+            }
 
-        if (!schema.title) {
-            schema.title = `Configuration for ${config_path}`;
-        }
+            if (!schema.title) {
+                schema.title = `Configuration for ${config_path}`;
+            }
 
-        main.innerHTML = `<div class='row g-3 m-4'>
+            main.innerHTML = `<div class='row g-3 m-4'>
         <div id='editor_holder'></div>
         <div class='col-12'>
         <button id='submit' type='button' class='btn btn-primary'>Save</button>
@@ -81,45 +79,45 @@ function editConfig(config_path) {
         </div>
         </div>`;
 
-        globalEditor = new JSONEditor(document.getElementById('editor_holder'), 
-                                        {   
-                                        'schema': schema, 
-                                        'startval': config,
-                                        'no_additional_properties': true,
-                                        'disable_collapse': true,
-                                        'disable_properties': true,
-                                        'disable_edit_json': true,
-                                        'show_opt_in': true,
-                                        'theme': 'bootstrap4'
-                                        });        
+            globalEditor = new JSONEditor(document.getElementById('editor_holder'),
+                {
+                    'schema': schema,
+                    'startval': config,
+                    'no_additional_properties': true,
+                    'disable_collapse': true,
+                    'disable_properties': true,
+                    'disable_edit_json': true,
+                    'show_opt_in': true,
+                    'theme': 'bootstrap4'
+                });
 
-        document.getElementById('submit').addEventListener('click',function() {
-            saveConfig(config_path, globalEditor.getValue());
+            document.getElementById('submit').addEventListener('click', function () {
+                saveConfig(config_path, globalEditor.getValue());
+            });
+
+            // Hook up the validation indicator to update its 
+            // status whenever the editor changes
+            globalEditor.on('change', function () {
+                // Get an array of errors from the validator
+                var errors = globalEditor.validate();
+                var indicator = document.getElementById('valid_indicator');
+
+                // Not valid
+                if (errors.length) {
+                    indicator.className = 'text-danger';
+                    indicator.textContent = 'not valid';
+                }
+                // Valid
+                else {
+                    indicator.className = 'text-success';
+                    indicator.textContent = 'valid';
+                }
+            })
+        })
+        .catch(err => {
+            showLoader(false);
+            alert(`Error retrieving configuration ${config_path}: ${err.message}`);
         });
-      
-      // Hook up the validation indicator to update its 
-      // status whenever the editor changes
-      globalEditor.on('change',function() {
-        // Get an array of errors from the validator
-        var errors = globalEditor.validate();        
-        var indicator = document.getElementById('valid_indicator');
-        
-        // Not valid
-        if(errors.length) {
-          indicator.className = 'text-danger';
-          indicator.textContent = 'not valid';
-        }
-        // Valid
-        else {
-          indicator.className = 'text-success';
-          indicator.textContent = 'valid';
-        }
-      })
-    })
-    .catch(err => {
-        showLoader(false);
-        alert(`Error retrieving configuration ${config_path}: ${err.message}`);
-    });
 
 }
 
@@ -127,89 +125,90 @@ function editConfig(config_path) {
 function saveConfig(config_path, values) {
     showLoader(true, "Saving configuration...");
     ajax('PUT', '/config' + config_path, JSON.stringify(values), 'application/json')
-    .then(response => {
-        showLoader(false);
-    })
-    .catch(err => {
-        showLoader(false);
-        alert(`Error saving configuration ${config_path}: ${err.message}`);
-    });
+        .then(response => {
+            showLoader(false);
+        })
+        .catch(err => {
+            showLoader(false);
+            alert(`Error saving configuration ${config_path}: ${err.message}`);
+        });
 }
 
 
-Element.prototype.empty = function() {
-    var child = this.lastElementChild;  
-    while (child) { 
-       this.removeChild(child); 
-       child = this.lastElementChild; 
+Element.prototype.empty = function () {
+    var child = this.lastElementChild;
+    while (child) {
+        this.removeChild(child);
+        child = this.lastElementChild;
     }
 }
 
-function showLoader(show, status)
-{
+function showLoader(show, status) {
     var loader = document.getElementById("loader");
-    if(show)
-    {
-        if(status == null || status == undefined)
-        {
+    if (show) {
+        if (status == null || status == undefined) {
             status = "Loading...";
         }
 
         loadertext.innerHTML = status;
         loader.classList.remove("visually-hidden");
     }
-    else
-    {
+    else {
         loader.classList.add("visually-hidden");
     }
 }
 
-function executeCommand(name, shouldConfirm)
-{
-    if(shouldConfirm == true && !confirm("Execute " + name + "?"))
-    {
+function executeCommand(name, shouldConfirm) {
+    if (shouldConfirm == true && !confirm("Execute " + name + "?")) {
         return;
     }
 
     showLoader(true, "Executing " + name + "...");
 
     ajax("GET", "/command?id=" + name)
-        .then((r) =>
-        {
+        .then((r) => {
             showLoader(false);
             alert(r);
         })
-        .catch(err =>
-            {
-                showLoader(false);
-                alert(err);
-            });
+        .catch(err => {
+            showLoader(false);
+            alert(err);
+        });
 }
 
-function showAdvanced()
-{
+function runDeviceCommand(confirmText, command) {
+    if (confirm(confirmText)) {
+        ajax("GET", "/device/" + command)
+            .then(r => {
+                alert(r);
+            })
+            .catch(err => {
+                alert(err);
+            });
+    }
+}
+
+function showAdvanced() {
     var div = getEmptyContentDiv();
 
     var content = `
     <div class='card'>
         <div class="card-body">
         <h5 class="card-title mb-4">Device commands</h5>
-        <a href="/device/restart" onclick='return confirm("Restart device?");' class="btn btn-primary">Restart</a>
-        <a href="/device/reset" onclick='return confirm("Are you sure you want to reset device to factory settings?");' class="btn btn-danger">Reset to defaults</a>
+        <a href="#" onclick='runDeviceCommand("Restart device?", "restart");' class="btn btn-primary">Restart</a>
+        <a href="#" onclick='runDeviceCommand("Are you sure you want to reset device to factory settings?", "reset");' class="btn btn-danger">Reset to defaults</a>
         </div>
     </div>`;
 
     var commands = deviceInfo.Commands;
 
-    if(commands.length > 0)
-    {
-        content += 
-        "<div class='card mt-3'>" +
+    if (commands.length > 0) {
+        content +=
+            "<div class='card mt-3'>" +
             "<div class='card-body'>" +
             "<h5 class='card-title mb-4'>Custom commands</h5>";
 
-        for(var i = 0; i < commands.length; i++)
-        {
+        for (var i = 0; i < commands.length; i++) {
             var command = commands[i];
             content += `<a class="btn btn-primary" onclick="executeCommand('${command.Name}',${command.Confirm})" href="#">${command.Title}</a>`;
         }
@@ -217,121 +216,103 @@ function showAdvanced()
         content += "</div></div>";
 
     }
-    
+
     div.innerHTML = content;
 }
 
-function showCustom(target)
-{
-        showLoader(true);
-        ajax("GET", target.Link)
-        .then(v => 
-            {
-                showLoader(false);
-                var div = getEmptyContentDiv();
+function showCustom(target) {
+    showLoader(true);
+    ajax("GET", target.Link)
+        .then(v => {
+            showLoader(false);
+            var div = getEmptyContentDiv();
 
-                div.innerHTML = "<h1>" + target.Key + "</h1>" + v;
-            })
-            .catch(err =>
-                {
-                    showLoader(false);
-                    alert(err);
-                });
+            div.innerHTML = "<h1>" + target.Key + "</h1>" + v;
+        })
+        .catch(err => {
+            showLoader(false);
+            alert(err);
+        });
 }
 
-function loadInfo()
-{
+function loadInfo() {
     ajax("GET", "/info")
-        .then(response =>
-            {
-                deviceInfo = JSON.parse(response);
-                var content = getEmptyContentDiv();
+        .then(response => {
+            deviceInfo = JSON.parse(response);
+            var content = getEmptyContentDiv();
 
-                for (const property in deviceInfo.Properties) 
-                {
-                    var value = deviceInfo.Properties[property];
-                    content.innerHTML += ("<div class='mb-3'>" +
+            for (const property in deviceInfo.Properties) {
+                var value = deviceInfo.Properties[property];
+                content.innerHTML += ("<div class='mb-3'>" +
                     "<label class='form-label'>" + property + "</label>" +
                     "<input type='text' readonly class='form-control' value='" + value + "'></div>");
-                    if(property === "Name")
-                    {
-                        document.getElementById("devicename").innerHTML = value;
-                        document.title = value + " - WebUI";
-                    }
+                if (property === "Name") {
+                    document.getElementById("devicename").innerHTML = value;
+                    document.title = value + " - WebUI";
+                }
+            }
+
+            if (!pagesLoaded) {
+                pagesLoaded = true;
+                var mainMenu = document.getElementById("mainmenu");
+
+                for (const page in deviceInfo.Pages) {
+                    var link = deviceInfo.Pages[page];
+                    var navItem = document.createElement("li");
+                    navItem.innerHTML = "<a href='#' data-target='" + page + "' class='nav-link' aria-current='page'>" + page + "</a></li>";
+                    mainMenu.append(navItem);
+                    targets[page] = new NavTarget(page, showCustom, link);
                 }
 
-                if(!pagesLoaded)
-                {
-                    pagesLoaded = true;
-                    var mainMenu = document.getElementById("mainmenu");
-
-                    for (const page in deviceInfo.Pages) 
-                    {
-                        var link = deviceInfo.Pages[page];
-                        var navItem = document.createElement("li");
-                        navItem.innerHTML = "<a href='#' data-target='" + page + "' class='nav-link' aria-current='page'>" + page + "</a></li>";
-                        mainMenu.append(navItem);
-                        targets[page] = new NavTarget(page, showCustom, link);
+                var configmenu = document.getElementById("configmenu");
+                var lastRoot = null;
+                for (var i = 0; i < deviceInfo.Config.length; i++) {
+                    var configPath = deviceInfo.Config[i];
+                    var parts = configPath.split("/");
+                    var rootName = parts[1];
+                    rootName = rootName[0].toUpperCase() + rootName.substring(1);
+                    if (lastRoot == null || lastRoot != rootName) {
+                        if (lastRoot != null) {
+                            configmenu.innerHTML += "<li><hr class='dropdown-divider'></li>";
+                        }
+                        configmenu.innerHTML += "<li class='d-flex align-items-center mb-1'><svg class='ms-2' width='16' height='16' viewBox='0 0 32 32'><use xlink:href='#i-settings'/></svg>&nbsp;<span class='text-center'>" + rootName + "</span></li>";
+                        lastRoot = rootName;
                     }
-
-                    var configmenu = document.getElementById("configmenu");
-                    var lastRoot = null;
-                    for(var i = 0; i < deviceInfo.Config.length; i++)
-                    {
-                        var configPath = deviceInfo.Config[i];
-                        var parts = configPath.split("/");
-                        var rootName = parts[1];
-                        rootName = rootName[0].toUpperCase() + rootName.substring(1);
-                        if(lastRoot == null || lastRoot != rootName)
-                        {
-                            if(lastRoot != null)
-                            {
-                                configmenu.innerHTML += "<li><hr class='dropdown-divider'></li>";
-                            }
-                            configmenu.innerHTML += "<li class='d-flex align-items-center mb-1'><svg class='ms-2' width='16' height='16' viewBox='0 0 32 32'><use xlink:href='#i-settings'/></svg>&nbsp;<span class='text-center'>" + rootName + "</span></li>";
-                            lastRoot = rootName;
-                        }
-                        var linkName = parts[parts.length - 1];
-                        linkName = linkName[0].toUpperCase() + linkName.substring(1);
-                        configmenu.innerHTML += "<li><a class='dropdown-item d-flex align-items-center' onclick='editConfig(\"" + configPath + "\");' href='#'><span class='d-inline-block bg-primary rounded-circle' style='width: .5em;height:0.5em'></span>&nbsp;" + linkName + "</a></li>";
-                    }
-
-                    var dropDown = document.getElementById("configdrop");
-                    dropDown.addEventListener("click", () =>{
-                        if(configmenu.classList.contains("show"))
-                        {
-                            configmenu.classList.remove("show");
-                        }
-                        else
-                        {
-                            configmenu.classList.add("show");
-                        }
-                    })
+                    var linkName = parts[parts.length - 1];
+                    linkName = linkName[0].toUpperCase() + linkName.substring(1);
+                    configmenu.innerHTML += "<li><a class='dropdown-item d-flex align-items-center' onclick='editConfig(\"" + configPath + "\");' href='#'><span class='d-inline-block bg-primary rounded-circle' style='width: .5em;height:0.5em'></span>&nbsp;" + linkName + "</a></li>";
                 }
 
-                showLoader(false);                
-            })
-        .catch(err =>
-            {
-                alert('Device info load failed: ' + err.statusText);
-            });
+                var dropDown = document.getElementById("configdrop");
+                dropDown.addEventListener("click", () => {
+                    if (configmenu.classList.contains("show")) {
+                        configmenu.classList.remove("show");
+                    }
+                    else {
+                        configmenu.classList.add("show");
+                    }
+                })
+            }
+
+            showLoader(false);
+        })
+        .catch(err => {
+            alert('Device info load failed: ' + err.statusText);
+        });
 }
 
-function initialize()
-{
+function initialize() {
     loadInfo();
     targets["status"] = new NavTarget("status", loadInfo);
     targets["advanced"] = new NavTarget("advanced", showAdvanced);
 
-    
+
     var mainMenu = document.getElementById("mainmenu");
 
-    mainMenu.addEventListener("click", (e) =>
-    {
+    mainMenu.addEventListener("click", (e) => {
         var targetKey = e.target.dataset["target"];
         var target = targets[targetKey];
-        if(target != undefined)
-        {
+        if (target != undefined) {
             target.TargetFunction(target);
         }
     });
