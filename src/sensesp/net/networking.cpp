@@ -73,8 +73,6 @@ void Networking::setup_saved_ssid() {
 
   WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
 
-  this->ssid_->set(ap_ssid);
-
   debugI("Connecting to wifi %s.", ap_ssid.c_str());
 }
 

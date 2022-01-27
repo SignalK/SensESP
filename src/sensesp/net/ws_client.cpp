@@ -85,13 +85,11 @@ void WSClient::on_disconnected() {
     save_configuration();
   }
   this->connection_state_ = WSConnectionState::kWSDisconnected;
-  this->sk_server_connection_->set("Disconnected");
   server_detected_ = false;
 }
 
 void WSClient::on_error() {
   this->connection_state_ = WSConnectionState::kWSDisconnected;
-  this->sk_server_connection_->set("Connection error!");
   debugW("Websocket client error.");
 }
 
@@ -100,7 +98,6 @@ void WSClient::on_connected(uint8_t* payload) {
   this->sk_delta_queue_->reset_meta_send();
   debugI("Websocket client connected to URL: %s\n", payload);
   debugI("Subscribing to Signal K listeners...");
-  this->sk_server_connection_->set("Connected");
   this->subscribe_listeners();
 }
 
@@ -263,8 +260,6 @@ void WSClient::connect() {
   debugD("Initiating websocket connection with server...");
 
   connection_state_ = WSConnectionState::kWSAuthorizing;
-  sk_server_connection_->set("Authorizing");
-
   String server_address = this->server_address_;
   uint16_t server_port = this->server_port_;
 
@@ -274,16 +269,12 @@ void WSClient::connect() {
     } else {
       debugI("Signal K server has been found at address %s:%d by mDNS.",
              server_address.c_str(), server_port);
-             sk_server_property_->set(server_address_);
-             sk_server_port_property_->set(server_port_);
     }
   }
 
   if (!server_address.isEmpty() && server_port > 0) {
     debugD("Websocket is connecting to Signal K server on address %s:%d",
            server_address.c_str(), server_port);
-           sk_server_property_->set(server_address_);
-           sk_server_port_property_->set(server_port_);
   } else {
     // host and port not defined - wait for mDNS
     connection_state_ = WSConnectionState::kWSDisconnected;
@@ -311,7 +302,6 @@ void WSClient::test_token(const String server_address,
                           const uint16_t server_port) {
   // FIXME: implement async HTTP client!
   HTTPClient http;
-  sk_server_connection_->set("Checking token...");
 
   String url =
       String("http://") + server_address + ":" + server_port + "/signalk/";
@@ -412,8 +402,6 @@ void WSClient::poll_access_request(const String server_address,
                                    const uint16_t server_port,
                                    const String href) {
   debugD("Polling SK Server for authentication token");
-
-  sk_server_connection_->set("Waiting for authorization in SK");
   
   HTTPClient http;
 
@@ -579,8 +567,6 @@ bool WSClient::set_configuration(const JsonObject& config) {
   } else {
     this->server_address_ = config["sk_address"].as<String>();
     this->server_port_ = config["sk_port"].as<int>();
-    this->sk_server_property_->set(server_address_);
-    this->sk_server_port_property_->set(server_port_);
   }
 
   // FIXME: setting the token should not be allowed via the REST API.
@@ -589,6 +575,24 @@ bool WSClient::set_configuration(const JsonObject& config) {
   this->polling_href_ = config["polling_href"].as<String>();
 
   return true;
+}
+
+String WSClient::get_connection_status()
+{
+  auto state = connection_state_.get();
+  switch (state)
+  {
+    case WSConnectionState::kWSAuthorizing:
+      return "Authorizing with SignalK";
+    case WSConnectionState::kWSConnected:
+      return "Connected";
+    case WSConnectionState::kWSConnecting:
+      return "Connecting";
+    case WSConnectionState::kWSDisconnected:
+      return "Disconnected";
+  }
+
+  return "Unknown";
 }
 
 }  // namespace sensesp

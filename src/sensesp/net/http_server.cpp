@@ -13,7 +13,7 @@
 #include "AsyncJson.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp_base_app.h"
-#include "sensesp/system/system_property.h"
+#include "sensesp/system/ui_output.h"
 
 // Include the web UI stored in PROGMEM space
 #include "web/index.h"
@@ -227,60 +227,16 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto pages = json_doc.createNestedArray("Pages");
   auto config = json_doc.createNestedArray("Config");
 
-  //properties["Name"] = SensESPBaseApp::get_hostname();
-  //sprintf(buff, "%s %s", __DATE__, __TIME__);
-  //properties["Build at"] = buff;
-  //properties["MAC"] = WiFi.macAddress();
-  //properties["WiFi signal"] = WiFi.RSSI();
-
-  for(auto property = systemProperties.begin(); property != systemProperties.end(); ++property)
+  for(auto property = uiOutputs.begin(); property != uiOutputs.end(); ++property)
   {
-    debugD("Info - updating property %s", property->first.c_str());
-
     property->second->set_json(properties);
   }
   //add all configuration paths
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     config.add(it->first);
   }
-
+  
   serializeJson(json_doc, *response);
-  /*
-{
-    "Properties": {
-        "Name": "relays",
-        "Build at": "Oct 11 2021 18:26:22",
-        "MAC": "24:A1:60:46:01:7C",
-        "WiFi signal": -12,
-        "SSID": "DryII",
-        "Signal K server address": "pi.boat",
-        "Signal K server port": 3000
-    },
-    "Commands": [
-        {
-            "Title": "ADC Calibration",
-            "Name": "calibration",
-            "Confirm": true
-        }
-    ],
-    "Pages": {
-        "Test": "/test"
-    },
-    "Config": [
-        "/sk/pwm0",
-        "/sk/pwmcontrol0",
-        "/system/networking",
-        "/system/sk"
-    ]
-}*/
-
-  // TODO: use inversion of control to acquire information on different
-  // subsystems
-  //  response->printf("Signal K server address: %s\n",
-  //                   SensESPApp::get()->ws_client_->get_server_address().c_str());
-  //  response->printf("Signal K server port: %d\n",
-  //                   SensESPApp::get()->ws_client_->get_server_port());
-  //
   request->send(response);
 }
 

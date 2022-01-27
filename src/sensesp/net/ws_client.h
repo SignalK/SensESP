@@ -11,7 +11,7 @@
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/startable.h"
 #include "sensesp/system/valueproducer.h"
-#include "sensesp/system/system_property.h"
+#include "sensesp/system/ui_output.h"
 
 namespace sensesp {
 
@@ -82,9 +82,9 @@ class WSClient : public Configurable,
   String auth_token_ = NULL_AUTH_TOKEN;
   bool server_detected_ = false;
   bool token_test_success_ = false;
-  SystemProperty<String>* sk_server_property_ = new SystemProperty<String>("SK address", "--");
-  SystemProperty<uint16_t>* sk_server_port_property_ = new SystemProperty<uint16_t>("SK server port", 0);
-  SystemProperty<String>* sk_server_connection_ = new SystemProperty<String>("SK connection status");
+  UILambdaOutput<String>* sk_server_property_ = new UILambdaOutput<String>("SK address", [this](){ return this->server_address_; });
+  UILambdaOutput<uint16_t>* sk_server_port_property_ = new UILambdaOutput<uint16_t>("SK server port", [this]() { return this->server_port_;});
+  UILambdaOutput<String>* sk_server_connection_ = new UILambdaOutput<String>("SK connection status", [this]() { return this->get_connection_status();});
 
   ObservableValue<WSConnectionState> connection_state_ =
       WSConnectionState::kWSDisconnected;
@@ -100,6 +100,8 @@ class WSClient : public Configurable,
   void connect_ws(const String host, const uint16_t port);
   void subscribe_listeners();
   bool get_mdns_service(String& server_address, uint16_t& server_port);
+
+  String get_connection_status();
 };
 
 }  // namespace sensesp
