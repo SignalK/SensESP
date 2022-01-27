@@ -216,8 +216,9 @@ function showAdvanced()
 
         content += "</div></div>";
 
-        div.innerHTML = content;
     }
+    
+    div.innerHTML = content;
 }
 
 function showCustom(target)
