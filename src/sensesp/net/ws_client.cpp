@@ -402,7 +402,7 @@ void WSClient::poll_access_request(const String server_address,
                                    const uint16_t server_port,
                                    const String href) {
   debugD("Polling SK Server for authentication token");
-  
+
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port + href;
@@ -577,11 +577,9 @@ bool WSClient::set_configuration(const JsonObject& config) {
   return true;
 }
 
-String WSClient::get_connection_status()
-{
+String WSClient::get_connection_status() {
   auto state = connection_state_.get();
-  switch (state)
-  {
+  switch (state) {
     case WSConnectionState::kWSAuthorizing:
       return "Authorizing with SignalK";
     case WSConnectionState::kWSConnected:

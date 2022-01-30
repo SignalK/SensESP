@@ -24,6 +24,9 @@ SensESPBaseApp::SensESPBaseApp() {
   //Create buildInfo and system name properties
   auto buildInfo = new UIOutput<String>("Build at", __DATE__ " " __TIME__);
   hostname_->connect_to(new UIOutput<String>("Name"));
+  #ifdef SENSESP_VERSION
+  auto verionInfo = new UIOutput<String>("SenseESP version", SENSESP_VERSION);
+  #endif
 }
 
 /**

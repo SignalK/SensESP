@@ -1,10 +1,10 @@
 #include "ui_output.h"
 namespace sensesp {
-  std::map<String, UIOutputBase*> uiOutputs;
+std::map<String, UIOutputBase*> ui_outputs;
 
-  UIOutputBase::UIOutputBase(String name) {
-    name_ = name;
+UIOutputBase::UIOutputBase(String name) {
+  name_ = name;
 
-    uiOutputs[name] = this;
-  }
+  ui_outputs[name] = this;
 }
+}  // namespace sensesp
