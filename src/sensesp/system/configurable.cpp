@@ -1,8 +1,8 @@
 #include "configurable.h"
 
-#include "sensesp.h"
-
 #include "SPIFFS.h"
+#include "sensesp.h"
+#include "sensesp/system/hash.h"
 
 namespace sensesp {
 
@@ -39,13 +39,18 @@ void Configurable::load_configuration() {
            config_path.c_str());
     return;
   }
-  if (!SPIFFS.exists(config_path)) {
-    debugI("Not loading configuration: file does not exist: %s",
-           config_path.c_str());
+  String hash_path = String("/") + Base64Sha1(config_path);
+
+  if (!SPIFFS.exists(hash_path)) {
+    debugI("Not loading configuration for path %s: file does not exist: %s",
+           config_path.c_str(), hash_path.c_str());
     return;
   }
 
-  File f = SPIFFS.open(config_path, "r");
+  debugD("Loading configuration for path %s from file %s", config_path.c_str(),
+         hash_path.c_str());
+
+  File f = SPIFFS.open(hash_path, "r");
   DynamicJsonDocument jsonDoc(
       1024);  // TODO: set the size of ALL DynamicJsonDocuments throughout the
               // project
@@ -65,10 +70,15 @@ void Configurable::save_configuration() {
   if (config_path == "") {
     debugI("WARNING: Could not save configuration (config_path not set)");
   }
+  String hash_path = String("/") + Base64Sha1(config_path);
+
+  debugD("Saving configuration path %s to file %s", config_path.c_str(),
+         hash_path.c_str());
+
   DynamicJsonDocument jsonDoc(1024);
   JsonObject obj = jsonDoc.createNestedObject("root");
   get_configuration(obj);
-  File f = SPIFFS.open(config_path, "w");
+  File f = SPIFFS.open(hash_path, "w");
   serializeJson(obj, f);
   f.close();
 }
