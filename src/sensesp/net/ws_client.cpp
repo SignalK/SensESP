@@ -260,7 +260,6 @@ void WSClient::connect() {
   debugD("Initiating websocket connection with server...");
 
   connection_state_ = WSConnectionState::kWSAuthorizing;
-
   String server_address = this->server_address_;
   uint16_t server_port = this->server_port_;
 
@@ -576,6 +575,22 @@ bool WSClient::set_configuration(const JsonObject& config) {
   this->polling_href_ = config["polling_href"].as<String>();
 
   return true;
+}
+
+String WSClient::get_connection_status() {
+  auto state = connection_state_.get();
+  switch (state) {
+    case WSConnectionState::kWSAuthorizing:
+      return "Authorizing with SignalK";
+    case WSConnectionState::kWSConnected:
+      return "Connected";
+    case WSConnectionState::kWSConnecting:
+      return "Connecting";
+    case WSConnectionState::kWSDisconnected:
+      return "Disconnected";
+  }
+
+  return "Unknown";
 }
 
 }  // namespace sensesp

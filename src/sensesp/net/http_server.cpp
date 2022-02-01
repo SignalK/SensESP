@@ -13,12 +13,13 @@
 #include "AsyncJson.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp_base_app.h"
+#include "sensesp/system/ui_output.h"
 
 // Include the web UI stored in PROGMEM space
 #include "web/index.h"
 #include "web/js_jsoneditor.h"
 #include "web/js_sensesp.h"
-#include "web/setup.h"
+#include "web/css_bootstrap.h"
 
 namespace sensesp {
 
@@ -99,24 +100,33 @@ HTTPServer::HTTPServer() : Startable(50) {
   });
 
   server->on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
-    debugD("Serving index.html");
-    request->send_P(200, "text/html", PAGE_index);
+    debugD("Serving gziped index.html");
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", PAGE_index, PAGE_index_size, NULL);
+    response->addHeader("Content-Encoding", "gzip");
+    request->send(response);
   });
-
-  server->on("/setup", HTTP_GET, [](AsyncWebServerRequest* request) {
-    debugD("Serving setup.html");
-    request->send_P(200, "text/html", PAGE_setup);
+  
+  server->on("/css/bootstrap.min.css", HTTP_GET,
+  [](AsyncWebServerRequest* request) {
+    debugD("Serving gziped bootstrap.min.css");
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/css", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
+    response->addHeader("Content-Encoding", "gzip");
+    request->send(response);
   });
 
   server->on("/js/jsoneditor.min.js", HTTP_GET,
-             [](AsyncWebServerRequest* request) {
-               debugD("Serving jsoneditor.min.js");
-               request->send_P(200, "text/javascript", PAGE_js_jsoneditor);
-             });
+  [](AsyncWebServerRequest* request) {
+    debugD("Serving gziped jsoneditor.min.js");
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", PAGE_js_jsoneditor, PAGE_js_jsoneditor_size);
+    response->addHeader("Content-Encoding", "gzip");
+    request->send(response);
+  });
 
   server->on("/js/sensesp.js", HTTP_GET, [](AsyncWebServerRequest* request) {
-    debugD("Serving sensesp.js");
-    request->send_P(200, "text/javascript", PAGE_js_sensesp);
+    debugD("Serving gziped sensesp.js");
+    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/javascript", PAGE_js_sensesp, PAGE_js_jsoneditor_size);
+    response->addHeader("Content-Encoding", "gzip");
+    request->send(response);
   });
 
   server->on("/device/reset", HTTP_GET,
@@ -207,24 +217,25 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
 }
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
-  auto* response = request->beginResponseStream("text/plain");
-
+  auto* response = request->beginResponseStream("application/json");
   response->setCode(200);
-  response->printf("Name: %s, build at %s %s\n",
-                   SensESPBaseApp::get_hostname().c_str(), __DATE__, __TIME__);
+  auto output_buffer_size = (200 * configurables.size()) + 512;
+  DynamicJsonDocument json_doc(output_buffer_size);
+  auto properties = json_doc.createNestedObject("Properties");
+  auto commands = json_doc.createNestedArray("Commands");
+  auto pages = json_doc.createNestedArray("Pages");
+  auto config = json_doc.createNestedArray("Config");
 
-  response->printf("MAC: %s\n", WiFi.macAddress().c_str());
-  response->printf("WiFi signal: %d\n", WiFi.RSSI());
-
-  response->printf("SSID: %s\n", WiFi.SSID().c_str());
-
-  // TODO: use inversion of control to acquire information on different
-  // subsystems
-  //  response->printf("Signal K server address: %s\n",
-  //                   SensESPApp::get()->ws_client_->get_server_address().c_str());
-  //  response->printf("Signal K server port: %d\n",
-  //                   SensESPApp::get()->ws_client_->get_server_port());
-  //
+  for(auto property = ui_outputs.begin(); property != ui_outputs.end(); ++property)
+  {
+    property->second->set_json(properties);
+  }
+  //add all configuration paths
+  for (auto it = configurables.begin(); it != configurables.end(); ++it) {
+    config.add(it->first);
+  }
+  
+  serializeJson(json_doc, *response);
   request->send(response);
 }
 

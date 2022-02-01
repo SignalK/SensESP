@@ -1,0 +1,27 @@
+{
+    "Properties": {
+        "Name": "relays",
+        "Build at": "Oct 11 2021 18:26:22",
+        "MAC": "24:A1:60:46:01:7C",
+        "WiFi signal": -12,
+        "SSID": "DryII",
+        "Signal K server address": "pi.boat",
+        "Signal K server port": 3000
+    },
+    "Commands": [
+        {
+            "Title": "ADC Calibration",
+            "Name": "calibration",
+            "Confirm": true
+        }
+    ],
+    "Pages": {
+        "Test": "/test"
+    },
+    "Config": [
+        "/sk/pwm0",
+        "/sk/pwmcontrol0",
+        "/system/networking",
+        "/system/sk"
+    ]
+}
