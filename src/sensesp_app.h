@@ -16,10 +16,13 @@
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
 #include "sensesp/net/ws_client.h"
+#include "sensesp/sensesp_version.h"
 #include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/system/system_status_led.h"
+#include "sensesp/system/ui_output.h"
 #include "sensesp_base_app.h"
+
 
 namespace sensesp {
 
@@ -63,7 +66,12 @@ class SensESPApp : public SensESPBaseApp {
    * be instantiated using SensESPAppBuilder.
    *
    */
-  SensESPApp() : SensESPBaseApp() {}
+  SensESPApp() : SensESPBaseApp() {
+    ui_build_info_ = new UIOutput<String>("Build at", __DATE__ " " __TIME__);
+    ui_sensesp_version_ = new UIOutput<String>("SenseESP version", kSensESPVersion);
+    ui_hostname_ = new UIOutput<String>("Name");
+    hostname_->connect_to(ui_hostname_);
+  }
 
   // setters for all constructor arguments
 
@@ -117,6 +125,10 @@ class SensESPApp : public SensESPBaseApp {
   OTA* ota_;
   SKDeltaQueue* sk_delta_queue_;
   WSClient* ws_client_;
+
+  UIOutput<String>* ui_build_info_;
+  UIOutput<String>* ui_sensesp_version_;
+  UIOutput<String>* ui_hostname_;
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
