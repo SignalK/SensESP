@@ -31,12 +31,20 @@ class CurveInterpolator : public FloatTransform {
   };
 
  public:
-  CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path = "",
-                    String input_title = "input",
-                    String output_title = "output");
+  CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path = "");
 
   // Set and retrieve the transformed value
   void set_input(float input, uint8_t input_channel = 0) override;
+
+  // Web UI configuration methods
+  CurveInterpolator* set_input_title(String input_title) {
+    input_title_ = input_title;
+    return this;
+  }
+  CurveInterpolator* set_output_title(String output_title) {
+    output_title_ = output_title;
+    return this;
+  }
 
   // For reading and writing the configuration of this transformation
   virtual void get_configuration(JsonObject& doc) override;
@@ -48,10 +56,12 @@ class CurveInterpolator : public FloatTransform {
 
   void add_sample(const Sample& new_sample);
 
+  const std::set<Sample>& get_samples() const { return samples_; }
+
  protected:
-  std::set<Sample> samples;
-  String input_title_;
-  String output_title_;
+  std::set<Sample> samples_;
+  String input_title_ = "Input";
+  String output_title_ = "Output";
 };
 
 }  // namespace sensesp
