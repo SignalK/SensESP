@@ -30,7 +30,7 @@ class Configurable {
    */
   Configurable(String config_path);
 
-  const String config_path;
+  const String config_path_;
 
   /**
    * Returns the current configuration data as a JsonObject. In

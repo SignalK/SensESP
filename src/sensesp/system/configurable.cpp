@@ -1,8 +1,8 @@
 #include "configurable.h"
 
-#include "sensesp.h"
-
 #include "SPIFFS.h"
+#include "sensesp.h"
+#include "sensesp/system/hash.h"
 
 namespace sensesp {
 
@@ -11,7 +11,7 @@ namespace sensesp {
 // reference around would unnecessarily reduce readability of the code.
 std::map<String, Configurable*> configurables;
 
-Configurable::Configurable(String config_path = "") : config_path{config_path} {
+Configurable::Configurable(String config_path = "") : config_path_{config_path} {
   if (config_path != "") {
     auto it = configurables.find(config_path);
     if (it != configurables.end()) {
@@ -34,41 +34,62 @@ bool Configurable::set_configuration(const JsonObject& config) {
 String Configurable::get_config_schema() { return "{}"; }
 
 void Configurable::load_configuration() {
-  if (config_path == "") {
+
+  if (config_path_ == "") {
     debugI("Not loading configuration: no config_path specified: %s",
-           config_path.c_str());
+           config_path_.c_str());
     return;
   }
-  if (!SPIFFS.exists(config_path)) {
-    debugI("Not loading configuration: file does not exist: %s",
-           config_path.c_str());
+  String hash_path = String("/") + Base64Sha1(config_path_);
+
+  const String* filename;
+
+  if (SPIFFS.exists(hash_path)) {
+    filename = &hash_path;
+    debugD("Loading configuration for path %s from %s", config_path_.c_str(),
+           hash_path.c_str());
+  } else if (config_path_.length() < 32 && SPIFFS.exists(config_path_)) {
+    filename = &config_path_;
+    debugD("Loading configuration for path %s", config_path_.c_str());
+  } else {
+    debugI("Could not find configuration for path %s", config_path_.c_str());
     return;
   }
 
-  File f = SPIFFS.open(config_path, "r");
+  File f = SPIFFS.open(*filename, "r");
   DynamicJsonDocument jsonDoc(
       1024);  // TODO: set the size of ALL DynamicJsonDocuments throughout the
               // project
   auto error = deserializeJson(jsonDoc, f);
   if (error) {
     debugW("WARNING: Could not parse configuration for %s",
-           config_path.c_str());
+           config_path_.c_str());
     return;
   }  //
   if (!set_configuration(jsonDoc.as<JsonObject>())) {
-    debugW("WARNING: Could not set configuration for %s", config_path.c_str());
+    debugW("WARNING: Could not set configuration for %s", config_path_.c_str());
   }
   f.close();
 }
 
 void Configurable::save_configuration() {
-  if (config_path == "") {
+  if (config_path_ == "") {
     debugI("WARNING: Could not save configuration (config_path not set)");
   }
+  String hash_path = String("/") + Base64Sha1(config_path_);
+
+  if (config_path_.length() < 32 && SPIFFS.exists(config_path_)) {
+    debugD("Deleting legacy configuration file %s", config_path_.c_str());
+    SPIFFS.remove(config_path_);
+  }
+
+  debugD("Saving configuration path %s to file %s", config_path_.c_str(),
+         hash_path.c_str());
+
   DynamicJsonDocument jsonDoc(1024);
   JsonObject obj = jsonDoc.createNestedObject("root");
   get_configuration(obj);
-  File f = SPIFFS.open(config_path, "w");
+  File f = SPIFFS.open(hash_path, "w");
   serializeJson(obj, f);
   f.close();
 }

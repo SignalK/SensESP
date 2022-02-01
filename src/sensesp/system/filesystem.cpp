@@ -1,5 +1,4 @@
 #include "SPIFFS.h"
-#define SPIFFS_BEGIN SPIFFS.begin(true)
 
 #include "filesystem.h"
 #include "sensesp.h"
@@ -7,7 +6,7 @@
 namespace sensesp {
 
 Filesystem::Filesystem() : Resettable(-100) {
-  if (!SPIFFS_BEGIN) {
+  if (!SPIFFS.begin(true)) {
     debugE("FATAL: Filesystem initialization failed.");
     ESP.restart();
   }
