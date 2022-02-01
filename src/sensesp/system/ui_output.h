@@ -39,7 +39,7 @@ class UILambdaOutput : public UIOutputBase {
   void set_json(const JsonObject& obj) override { obj[name_] = get(); }
 };
 
-extern std::map<String, UIOutputBase*> uiOutputs;
+extern std::map<String, UIOutputBase*> ui_outputs;
 
 template <typename T>
 class UIOutput : public UIOutputBase,

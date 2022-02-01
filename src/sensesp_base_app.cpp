@@ -1,4 +1,5 @@
 #include "sensesp_base_app.h"
+#include "sensesp/sensesp_version.h"
 
 namespace sensesp {
 
@@ -22,11 +23,9 @@ SensESPBaseApp::SensESPBaseApp() {
   // the builder methods are called
   hostname_ = new ObservableValue<String>(kDefaultHostname);
   //Create buildInfo and system name properties
-  auto buildInfo = new UIOutput<String>("Build at", __DATE__ " " __TIME__);
+  new UIOutput<String>("Build at", __DATE__ " " __TIME__);
   hostname_->connect_to(new UIOutput<String>("Name"));
-  #ifdef SENSESP_VERSION
-  auto verionInfo = new UIOutput<String>("SenseESP version", SENSESP_VERSION);
-  #endif
+  new UIOutput<String>("SenseESP version", kSensESPVersion);
 }
 
 /**

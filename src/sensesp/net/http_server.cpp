@@ -218,7 +218,6 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
 
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto* response = request->beginResponseStream("application/json");
-  char buff[128];
   response->setCode(200);
   auto output_buffer_size = (200 * configurables.size()) + 512;
   DynamicJsonDocument json_doc(output_buffer_size);
