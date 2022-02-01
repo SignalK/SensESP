@@ -31,7 +31,9 @@ class CurveInterpolator : public FloatTransform {
   };
 
  public:
-  CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path = "");
+  CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path = "",
+                    String input_title = "input",
+                    String output_title = "output");
 
   // Set and retrieve the transformed value
   void set_input(float input, uint8_t input_channel = 0) override;
@@ -48,6 +50,8 @@ class CurveInterpolator : public FloatTransform {
 
  protected:
   std::set<Sample> samples;
+  String input_title_;
+  String output_title_;
 };
 
 }  // namespace sensesp

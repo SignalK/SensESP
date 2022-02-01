@@ -12,9 +12,20 @@ CurveInterpolator::Sample::Sample(float input, float output)
 CurveInterpolator::Sample::Sample(JsonObject& obj)
     : input{obj["input"]}, output{obj["output"]} {}
 
+/**
+ * @brief Construct a new CurveInterpolator object
+ *
+ * @param defaults Default sample values
+ * @param config_path
+ * @param input_title Display name for the input sample values
+ * @param output_title Display name for the output sample values
+ */
 CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
-                                     String config_path)
-    : FloatTransform(config_path) {
+                                     String config_path, String input_title,
+                                     String output_title)
+    : FloatTransform(config_path),
+      input_title_{input_title},
+      output_title_{output_title} {
   // Load default values if no configuration present...
   if (defaults != NULL) {
     samples.clear();
@@ -74,16 +85,23 @@ static const char SCHEMA[] PROGMEM = R"({
     "properties": {
         "samples": { "title": "Sample values",
                     "type": "array",
-                    "items": { "title": "Sample",
-                                "type": "object",
-                                "properties": {
-                                    "input": { "type": "number" },
-                                    "output": { "type": "number" }
-                              }}}
+                    "format": "table",
+                    "items": { "type": "object",
+                               "properties": {
+                                   "input": { "type": "number",
+                                              "title": "%s" },
+                                   "output": { "type": "number",
+                                              "title": "%s" }
+                             }}}
     }
   })";
 
-String CurveInterpolator::get_config_schema() { return FPSTR(SCHEMA); }
+String CurveInterpolator::get_config_schema() {
+  char buf[sizeof(SCHEMA) + 160];
+  snprintf_P(buf, sizeof(buf), SCHEMA, input_title_.c_str(),
+             output_title_.c_str());
+  return String(buf);
+}
 
 bool CurveInterpolator::set_configuration(const JsonObject& config) {
   String expected[] = {"samples"};
