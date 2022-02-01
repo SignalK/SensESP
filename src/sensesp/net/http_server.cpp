@@ -3,9 +3,6 @@
 #include <FS.h>
 
 #include <functional>
-#ifdef ESP32
-#include "SPIFFS.h"
-#endif
 
 #include <ESPAsyncWebServer.h>
 
@@ -105,7 +102,7 @@ HTTPServer::HTTPServer() : Startable(50) {
     response->addHeader("Content-Encoding", "gzip");
     request->send(response);
   });
-  
+
   server->on("/css/bootstrap.min.css", HTTP_GET,
   [](AsyncWebServerRequest* request) {
     debugD("Serving gziped bootstrap.min.css");
@@ -234,7 +231,7 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     config.add(it->first);
   }
-  
+
   serializeJson(json_doc, *response);
   request->send(response);
 }
