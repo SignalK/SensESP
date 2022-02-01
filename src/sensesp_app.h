@@ -101,9 +101,11 @@ class SensESPApp : public SensESPBaseApp {
   }
   const SensESPApp* enable_ota(const char* password) {
     ota_password_ = password;
+    return this;
   }
   const SensESPApp* set_wifi_manager_password(const char* password) {
     wifi_manager_password_ = password;
+    return this;
   }
 
   void setup();
