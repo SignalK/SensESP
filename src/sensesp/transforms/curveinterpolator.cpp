@@ -12,13 +12,21 @@ CurveInterpolator::Sample::Sample(float input, float output)
 CurveInterpolator::Sample::Sample(JsonObject& obj)
     : input{obj["input"]}, output{obj["output"]} {}
 
+/**
+ * @brief Construct a new CurveInterpolator object
+ *
+ * @param defaults Default sample values
+ * @param config_path
+ * @param input_title Display name for the input sample values
+ * @param output_title Display name for the output sample values
+ */
 CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
                                      String config_path)
     : FloatTransform(config_path) {
   // Load default values if no configuration present...
   if (defaults != NULL) {
-    samples.clear();
-    samples = *defaults;
+    samples_.clear();
+    samples_ = *defaults;
   }
 
   load_configuration();
@@ -28,9 +36,9 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
   float x0 = 0.0;
   float y0 = 0.0;
 
-  std::set<Sample>::iterator it = samples.begin();
+  std::set<Sample>::iterator it = samples_.begin();
 
-  while (it != samples.end()) {
+  while (it != samples_.end()) {
     auto& sample = *it;
 
     if (input > sample.input) {
@@ -43,7 +51,7 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
     it++;
   }
 
-  if (it != samples.end()) {
+  if (it != samples_.end()) {
     // We found our range. "input" is between
     // minInput and it->input. CurveInterpolator the result
     Sample max = *it;
@@ -61,9 +69,9 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
 }
 
 void CurveInterpolator::get_configuration(JsonObject& root) {
-  JsonArray jSamples = root.createNestedArray("samples");
-  for (auto& sample : samples) {
-    auto entry = jSamples.createNestedObject();
+  JsonArray json_samples = root.createNestedArray("samples");
+  for (auto& sample : samples_) {
+    auto entry = json_samples.createNestedObject();
     entry["input"] = sample.input;
     entry["output"] = sample.output;
   }
@@ -74,16 +82,23 @@ static const char SCHEMA[] PROGMEM = R"({
     "properties": {
         "samples": { "title": "Sample values",
                     "type": "array",
-                    "items": { "title": "Sample",
-                                "type": "object",
-                                "properties": {
-                                    "input": { "type": "number" },
-                                    "output": { "type": "number" }
-                              }}}
+                    "format": "table",
+                    "items": { "type": "object",
+                               "properties": {
+                                   "input": { "type": "number",
+                                              "title": "%s" },
+                                   "output": { "type": "number",
+                                              "title": "%s" }
+                             }}}
     }
   })";
 
-String CurveInterpolator::get_config_schema() { return FPSTR(SCHEMA); }
+String CurveInterpolator::get_config_schema() {
+  char buf[sizeof(SCHEMA) + 160];
+  snprintf_P(buf, sizeof(buf), SCHEMA, input_title_.c_str(),
+             output_title_.c_str());
+  return String(buf);
+}
 
 bool CurveInterpolator::set_configuration(const JsonObject& config) {
   String expected[] = {"samples"};
@@ -99,22 +114,22 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
 
   JsonArray arr = config["samples"];
   if (arr.size() > 0) {
-    samples.clear();
+    samples_.clear();
     for (auto jentry : arr) {
-      auto jObject = jentry.as<JsonObject>();
-      Sample sample(jObject);
-      samples.insert(sample);
+      auto json_object = jentry.as<JsonObject>();
+      Sample sample(json_object);
+      samples_.insert(sample);
     }
   }
 
   return true;
 }
 
-void CurveInterpolator::clear_samples() { samples.clear(); }
+void CurveInterpolator::clear_samples() { samples_.clear(); }
 
 void CurveInterpolator::add_sample(const Sample& sample) {
-  Sample* pSampleCopy = new Sample(sample);
-  samples.insert(*pSampleCopy);
+  Sample* sample_copy = new Sample(sample);
+  samples_.insert(*sample_copy);
 }
 
 }  // namespace sensesp
