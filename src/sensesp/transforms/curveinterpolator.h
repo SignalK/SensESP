@@ -6,10 +6,28 @@
 namespace sensesp {
 
 /**
- * @brief Uses a collection of input/output samples that approximate
- * a non-linear curve and outputs a value on that curve.
- * The output is the linear interpolation between the two
- * sample points that the input falls between. It is used primarily for
+ * @brief Implement a piecewise linear interpolation transform.
+ *
+ * Piecewise linear functions are defined by a collection of x,y pairs, in which
+ * the x values are monotonically increasing. The y values are the corresponding
+ * values of the function at the x values. The interpolator will linearly
+ * interpolate between the y values to produce a value for any x value.
+ *
+ * As a practical example, consider the following samples:
+ *
+ * - 0, 0
+ * - 1, 0
+ * - 2, 1
+ * - 3, 1
+ *
+ * At different input values, the following happens:
+ *
+ * - At x = 0, the interpolator will return 0.
+ * - At x = 0.5, the interpolator will still return 0 because both adjacent samples have y = 0.
+ * - At x = 1.4, the adjacent outputs are 0 and 1, so the interpolator will return 0.4.
+ * - At x = 2.5, the interpolator will return 1.0 because the adjacent outputs are both 1.
+ *
+ * It can be used e.g. for
  * non-linear analog gauges such as temperature gauges and oil pressure gauges,
  * which get their input from analog sensors that are variable resistors.
  */
