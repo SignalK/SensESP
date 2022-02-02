@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['use_5flib_5fwebsocket_0',['USE_LIB_WEBSOCKET',['../sensesp__base__app_8h.html#a8abe44af131f55591035d3587ca9484d',1,'sensesp_base_app.h']]]
+  ['wifi_5fconfig_5fportal_5ftimeout_0',['WIFI_CONFIG_PORTAL_TIMEOUT',['../networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce',1,'networking.cpp']]]
 ];

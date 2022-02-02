@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['samples_0',['samples',['../classsensesp_1_1_curve_interpolator.html#af485618fdd8dd9d61e1999a71d1cbcbd',1,'sensesp::CurveInterpolator']]],
+  ['samples_5f_0',['samples_',['../classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41',1,'sensesp::CurveInterpolator']]],
   ['sensesp_5fapp_1',['sensesp_app',['../namespacesensesp.html#aaf87e022a3c4111a8e24045e297e14ba',1,'sensesp']]],
   ['short_5fname_5f_2',['short_name_',['../classsensesp_1_1_s_k_metadata.html#ae6b3d49adf22c282ede7f5d407e9bc2b',1,'sensesp::SKMetadata']]],
   ['should_5fsave_5fconfig_3',['should_save_config',['../namespacesensesp.html#aad2887cc9dde673d6b763a780179c1ef',1,'sensesp']]],

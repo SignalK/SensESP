@@ -32,6 +32,9 @@ var classsensesp_1_1_sens_e_s_p_app =
     [ "ssid_", "classsensesp_1_1_sens_e_s_p_app.html#a1c6b52097317eed09c5cc95c75b4cc58", null ],
     [ "system_status_controller_", "classsensesp_1_1_sens_e_s_p_app.html#aab1042e7dee9fe32acdb8618c973bef5", null ],
     [ "system_status_led_", "classsensesp_1_1_sens_e_s_p_app.html#a92195fb3e8fd2ebd2497156995d566de", null ],
+    [ "ui_build_info_", "classsensesp_1_1_sens_e_s_p_app.html#a9036145ce9d6b64138e865a1d7716e88", null ],
+    [ "ui_hostname_", "classsensesp_1_1_sens_e_s_p_app.html#a7643e37519b485c0403c5434e007d82e", null ],
+    [ "ui_sensesp_version_", "classsensesp_1_1_sens_e_s_p_app.html#ab9fa0ae0d3d959e56a50dc18c1aa2004", null ],
     [ "wifi_manager_password_", "classsensesp_1_1_sens_e_s_p_app.html#aca1cbefd07d48d9d1a8f6cac772045ec", null ],
     [ "wifi_password_", "classsensesp_1_1_sens_e_s_p_app.html#a3664578acdbca622142b04caceacf330", null ],
     [ "ws_client_", "classsensesp_1_1_sens_e_s_p_app.html#a2d677fd17521c6b548149867118b86fb", null ]

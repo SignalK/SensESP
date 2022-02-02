@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   7: "csw",
   8: "bdklsu",
   9: "hors",
-  10: "cdehlmprsuw"
+  10: "cdehlmpruw"
 };
 
 var indexSectionNames =

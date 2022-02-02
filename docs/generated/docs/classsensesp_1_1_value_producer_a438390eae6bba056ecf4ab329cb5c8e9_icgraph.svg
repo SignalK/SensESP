@@ -59,8 +59,8 @@ var sectionId = 'dynsection-8';
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="black" points="708,-152 708,-171 852,-171 852,-152 708,-152"/>
-<text text-anchor="middle" x="780" y="-159" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::ValueProducer::get</text>
+<polygon fill="#bfbfbf" stroke="black" points="708,-128 708,-147 852,-147 852,-128 708,-128"/>
+<text text-anchor="middle" x="780" y="-135" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::ValueProducer::get</text>
 </a>
 </g>
 </g>
@@ -77,8 +77,8 @@ var sectionId = 'dynsection-8';
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M703.81,-172.49C693.24,-174.04 682.45,-175.62 672.11,-177.13"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="704.48,-175.93 713.86,-171.02 703.46,-169.01 704.48,-175.93"/>
+<path fill="none" stroke="midnightblue" d="M735.85,-149.87C712.95,-156.43 684.63,-164.54 660.48,-171.46"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="736.97,-153.18 745.62,-147.06 735.05,-146.45 736.97,-153.18"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
@@ -93,8 +93,24 @@ var sectionId = 'dynsection-8';
 <!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M700.96,-150.55C690.49,-149.08 679.88,-147.59 669.74,-146.17"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="700.54,-154.02 710.92,-151.95 701.51,-147.09 700.54,-154.02"/>
+<path fill="none" stroke="midnightblue" d="M697.73,-137.5C688.25,-137.5 678.7,-137.5 669.55,-137.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="697.97,-141 707.97,-137.5 697.97,-134 697.97,-141"/>
+</g>
+<!-- Node15 -->
+<g id="node15" class="node">
+<title>Node15</title>
+<g id="a_node15"><a xlink:href="classsensesp_1_1_u_i_output.html#a7c4a4aa6774a43feb0be012e08aabe26" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="554.5,-73.5 554.5,-103.5 659.5,-103.5 659.5,-73.5 554.5,-73.5"/>
+<text text-anchor="start" x="562.5" y="-91.5" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::UIOutput::</text>
+<text text-anchor="middle" x="607" y="-80.5" font-family="Helvetica,sans-Serif" font-size="10.00">set_json</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node15 -->
+<g id="edge18" class="edge">
+<title>Node1&#45;&gt;Node15</title>
+<path fill="none" stroke="midnightblue" d="M735.76,-125.11C712.67,-118.49 684.08,-110.3 659.81,-103.35"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="735.05,-128.55 745.62,-127.94 736.97,-121.82 735.05,-128.55"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
@@ -141,8 +157,8 @@ var sectionId = 'dynsection-8';
 <!-- Node4&#45;&gt;Node12 -->
 <g id="edge15" class="edge">
 <title>Node4&#45;&gt;Node12</title>
-<path fill="none" stroke="midnightblue" d="M562.49,-118.25C535.18,-106.17 500.46,-90.81 475.14,-79.61"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="561.25,-121.53 571.81,-122.37 564.08,-115.13 561.25,-121.53"/>
+<path fill="none" stroke="midnightblue" d="M554.68,-118.74C550.37,-117.02 546.1,-115.26 542,-113.5 517.46,-102.97 490.26,-89.68 470.28,-79.6"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="553.53,-122.05 564.12,-122.43 556.08,-115.53 553.53,-122.05"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">

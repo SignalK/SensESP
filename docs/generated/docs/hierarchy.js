@@ -135,6 +135,10 @@ var hierarchy =
         [ "sensesp::SKPutRequestListener< T >", "classsensesp_1_1_s_k_put_request_listener.html", null ]
       ] ],
       [ "sensesp::Sensor", "classsensesp_1_1_sensor.html", null ],
+      [ "sensesp::UIOutputBase", "classsensesp_1_1_u_i_output_base.html", [
+        [ "sensesp::UILambdaOutput< T >", "classsensesp_1_1_u_i_lambda_output.html", null ],
+        [ "sensesp::UIOutput< T >", "classsensesp_1_1_u_i_output.html", null ]
+      ] ],
       [ "sensesp::ValueProducer< T >", "classsensesp_1_1_value_producer.html", [
         [ "sensesp::SensorT< bool >", "classsensesp_1_1_sensor_t.html", null ],
         [ "sensesp::SensorT< int >", "classsensesp_1_1_sensor_t.html", null ],
@@ -146,7 +150,9 @@ var hierarchy =
         [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ],
-        [ "sensesp::ObservableValue< T >", "classsensesp_1_1_observable_value.html", null ],
+        [ "sensesp::ObservableValue< T >", "classsensesp_1_1_observable_value.html", [
+          [ "sensesp::UIOutput< T >", "classsensesp_1_1_u_i_output.html", null ]
+        ] ],
         [ "sensesp::SKPutRequestListener< T >", "classsensesp_1_1_s_k_put_request_listener.html", null ],
         [ "sensesp::SKValueListener< T >", "classsensesp_1_1_s_k_value_listener.html", null ],
         [ "sensesp::SensorT< T >", "classsensesp_1_1_sensor_t.html", null ]
@@ -195,7 +201,8 @@ var hierarchy =
     [ "sensesp::ValueConsumer< T >", "classsensesp_1_1_value_consumer.html", [
       [ "sensesp::Transform< T, T >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
-      [ "sensesp::SKPutRequest< T >", "classsensesp_1_1_s_k_put_request.html", null ]
+      [ "sensesp::SKPutRequest< T >", "classsensesp_1_1_s_k_put_request.html", null ],
+      [ "sensesp::UIOutput< T >", "classsensesp_1_1_u_i_output.html", null ]
     ] ],
     [ "sensesp::ValueConsumer< bool >", "classsensesp_1_1_value_consumer.html", [
       [ "sensesp::Transform< bool, ClickTypes >", "classsensesp_1_1_transform.html", null ],

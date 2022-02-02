@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -99,10 +99,10 @@ $(document).ready(function(){initNavTree('classsensesp_1_1_curve_interpolator.ht
 </div><!--header-->
 <div class="contents">
 
-<p>Uses a collection of input/output samples that approximate a non-linear curve and outputs a value on that curve. The output is the linear interpolation between the two sample points that the input falls between. It is used primarily for non-linear analog gauges such as temperature gauges and oil pressure gauges, which get their input from analog sensors that are variable resistors.  
+<p>Implement a piecewise linear interpolation transform.  
  <a href="classsensesp_1_1_curve_interpolator.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="curveinterpolator_8h_source.html">sensesp/transforms/curveinterpolator.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for sensesp::CurveInterpolator:</div>
 <div class="dyncontent">
@@ -117,10 +117,15 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad980a198e6b699f03557f250a2608d2d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#ad980a198e6b699f03557f250a2608d2d">CurveInterpolator</a> (std::set&lt; <a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> &gt; *defaults=NULL, String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:ad980a198e6b699f03557f250a2608d2d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#ad980a198e6b699f03557f250a2608d2d">CurveInterpolator</a> (std::set&lt; <a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> &gt; *defaults=NULL, String config_path=&quot;&quot;)</td></tr>
+<tr class="memdesc:ad980a198e6b699f03557f250a2608d2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classsensesp_1_1_curve_interpolator.html" title="Implement a piecewise linear interpolation transform.">CurveInterpolator</a> object.  <a href="classsensesp_1_1_curve_interpolator.html#ad980a198e6b699f03557f250a2608d2d">More...</a><br /></td></tr>
 <tr class="separator:ad980a198e6b699f03557f250a2608d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9531577b66f1a105dc66c6d8e57816e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#aa9531577b66f1a105dc66c6d8e57816e">set_input</a> (float input, uint8_t input_channel=0) override</td></tr>
 <tr class="separator:aa9531577b66f1a105dc66c6d8e57816e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e89c2d5011ff8e9614384f2d28fc385"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_curve_interpolator.html">CurveInterpolator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#a2e89c2d5011ff8e9614384f2d28fc385">set_input_title</a> (String input_title)</td></tr>
+<tr class="separator:a2e89c2d5011ff8e9614384f2d28fc385"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47334aa664661bcf655cc2d5e58352ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_curve_interpolator.html">CurveInterpolator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#a47334aa664661bcf655cc2d5e58352ab">set_output_title</a> (String output_title)</td></tr>
+<tr class="separator:a47334aa664661bcf655cc2d5e58352ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8d489227d5b43374f4ffaa85d5187a2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#aa8d489227d5b43374f4ffaa85d5187a2">get_configuration</a> (JsonObject &amp;doc) override</td></tr>
 <tr class="separator:aa8d489227d5b43374f4ffaa85d5187a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4590048e0fdecd5203a8a5f37a5c841f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#a4590048e0fdecd5203a8a5f37a5c841f">set_configuration</a> (const JsonObject &amp;config) override</td></tr>
@@ -131,19 +136,21 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a217e0e3cb72cd661d19548e575633214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9ae195be28d12c733777990aeda78ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#ab9ae195be28d12c733777990aeda78ea">add_sample</a> (const <a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> &amp;new_sample)</td></tr>
 <tr class="separator:ab9ae195be28d12c733777990aeda78ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbc577281e761aa9489d6c84621f9c93"><td class="memItemLeft" align="right" valign="top">const std::set&lt; <a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#afbc577281e761aa9489d6c84621f9c93">get_samples</a> () const</td></tr>
+<tr class="separator:afbc577281e761aa9489d6c84621f9c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_symmetric_transform"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_symmetric_transform')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_symmetric_transform.html">sensesp::SymmetricTransform&lt; float &gt;</a></td></tr>
-<tr class="memitem:a845f332dccbfd0a8b0bd2be5b709eeef inherit pub_methods_classsensesp_1_1_symmetric_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_symmetric_transform.html#a845f332dccbfd0a8b0bd2be5b709eeef">SymmetricTransform</a> (String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:a845f332dccbfd0a8b0bd2be5b709eeef inherit pub_methods_classsensesp_1_1_symmetric_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_symmetric_transform.html#a845f332dccbfd0a8b0bd2be5b709eeef">SymmetricTransform</a> (String config_path=&quot;&quot;)</td></tr>
 <tr class="separator:a845f332dccbfd0a8b0bd2be5b709eeef inherit pub_methods_classsensesp_1_1_symmetric_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_transform"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_transform')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_transform.html">sensesp::Transform&lt; C, P &gt;</a></td></tr>
-<tr class="memitem:aa40027f0a8f0c6515c6881da4ad22c69 inherit pub_methods_classsensesp_1_1_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform.html#aa40027f0a8f0c6515c6881da4ad22c69">Transform</a> (String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:aa40027f0a8f0c6515c6881da4ad22c69 inherit pub_methods_classsensesp_1_1_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform.html#aa40027f0a8f0c6515c6881da4ad22c69">Transform</a> (String config_path=&quot;&quot;)</td></tr>
 <tr class="separator:aa40027f0a8f0c6515c6881da4ad22c69 inherit pub_methods_classsensesp_1_1_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5c91be8fb39a4f4ade791d500ae210a inherit pub_methods_classsensesp_1_1_transform"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; C, P &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform.html#ae5c91be8fb39a4f4ade791d500ae210a">connect_from</a> (<a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer0, <a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer1=NULL, <a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer2=NULL, <a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer3=NULL, <a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer4=NULL)</td></tr>
 <tr class="separator:ae5c91be8fb39a4f4ade791d500ae210a inherit pub_methods_classsensesp_1_1_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_transform_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_transform_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_transform_base.html">sensesp::TransformBase</a></td></tr>
-<tr class="memitem:af565e79f6ebcb3945211c13494deb7b1 inherit pub_methods_classsensesp_1_1_transform_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform_base.html#af565e79f6ebcb3945211c13494deb7b1">TransformBase</a> (String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:af565e79f6ebcb3945211c13494deb7b1 inherit pub_methods_classsensesp_1_1_transform_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform_base.html#af565e79f6ebcb3945211c13494deb7b1">TransformBase</a> (String config_path=&quot;&quot;)</td></tr>
 <tr class="separator:af565e79f6ebcb3945211c13494deb7b1 inherit pub_methods_classsensesp_1_1_transform_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b">Configurable</a> (String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>)</td></tr>
+<tr class="memitem:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b">Configurable</a> (String config_path)</td></tr>
 <tr class="separator:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4202ce8a5b9ad23d2a2be27de11153f4 inherit pub_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4">save_configuration</a> ()</td></tr>
 <tr class="separator:a4202ce8a5b9ad23d2a2be27de11153f4 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,8 +198,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af485618fdd8dd9d61e1999a71d1cbcbd"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#af485618fdd8dd9d61e1999a71d1cbcbd">samples</a></td></tr>
-<tr class="separator:af485618fdd8dd9d61e1999a71d1cbcbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c4c42a7152a21d9b3e25f5381e91c41"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a></td></tr>
+<tr class="separator:a9c4c42a7152a21d9b3e25f5381e91c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0bc599b7492cd5036f55dfff1d9d46d"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#aa0bc599b7492cd5036f55dfff1d9d46d">input_title_</a> = &quot;Input&quot;</td></tr>
+<tr class="separator:aa0bc599b7492cd5036f55dfff1d9d46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa08e7c4c89847a00b48984e5d8d23bb7"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html#aa08e7c4c89847a00b48984e5d8d23bb7">output_title_</a> = &quot;Output&quot;</td></tr>
+<tr class="separator:aa08e7c4c89847a00b48984e5d8d23bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; P &gt;</a></td></tr>
 <tr class="memitem:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">P&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a></td></tr>
 <tr class="separator:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,16 +217,32 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ab1f2dfc4941396dd3fdb81e0c3c8b09c inherit pub_static_methods_classsensesp_1_1_startable"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_startable.html#ab1f2dfc4941396dd3fdb81e0c3c8b09c">start_all</a> ()</td></tr>
 <tr class="separator:ab1f2dfc4941396dd3fdb81e0c3c8b09c inherit pub_static_methods_classsensesp_1_1_startable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:a76117fed95121d7576e9aa6acfbcbe12 inherit pub_attribs_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a></td></tr>
-<tr class="separator:a76117fed95121d7576e9aa6acfbcbe12 inherit pub_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#aded48ebfe23c7bee1845c7ab99c63a6e">config_path_</a></td></tr>
+<tr class="separator:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
 <tr class="memitem:ac97542fd5a24ae306adb77f3d1ba563a inherit pro_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a> ()</td></tr>
 <tr class="separator:ac97542fd5a24ae306adb77f3d1ba563a inherit pro_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Uses a collection of input/output samples that approximate a non-linear curve and outputs a value on that curve. The output is the linear interpolation between the two sample points that the input falls between. It is used primarily for non-linear analog gauges such as temperature gauges and oil pressure gauges, which get their input from analog sensors that are variable resistors. </p>
+<div class="textblock"><p >Implement a piecewise linear interpolation transform. </p>
+<p >Piecewise linear functions are defined by a collection of x,y pairs, in which the x values are monotonically increasing. The y values are the corresponding values of the function at the x values. The interpolator will linearly interpolate between the y values to produce a value for any x value.</p>
+<p >As a practical example, consider the following samples:</p>
+<ul>
+<li>0, 0</li>
+<li>1, 0</li>
+<li>2, 1</li>
+<li>3, 1</li>
+</ul>
+<p >At different input values, the following happens:</p>
+<ul>
+<li>At x = 0, the interpolator will return 0.</li>
+<li>At x = 0.5, the interpolator will still return 0 because both adjacent samples have y = 0.</li>
+<li>At x = 1.4, the adjacent outputs are 0 and 1, so the interpolator will return 0.4.</li>
+<li>At x = 2.5, the interpolator will return 1.0 because the adjacent outputs are both 1.</li>
+</ul>
+<p >It can be used e.g. for non-linear analog gauges such as temperature gauges and oil pressure gauges, which get their input from analog sensors that are variable resistors. </p>
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00017">17</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00035">35</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad980a198e6b699f03557f250a2608d2d" name="ad980a198e6b699f03557f250a2608d2d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad980a198e6b699f03557f250a2608d2d">&#9670;&nbsp;</a></span>CurveInterpolator()</h2>
@@ -243,11 +270,22 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00015">15</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
+<p>Construct a new <a class="el" href="classsensesp_1_1_curve_interpolator.html" title="Implement a piecewise linear interpolation transform.">CurveInterpolator</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">defaults</td><td>Default sample values </td></tr>
+    <tr><td class="paramname">config_path</td><td></td></tr>
+    <tr><td class="paramname">input_title</td><td>Display name for the input sample values </td></tr>
+    <tr><td class="paramname">output_title</td><td>Display name for the output sample values </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00023">23</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_curve_interpolator_ad980a198e6b699f03557f250a2608d2d_cgraph.svg" width="599" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_curve_interpolator_ad980a198e6b699f03557f250a2608d2d_cgraph.svg" width="100%" height="378"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
@@ -270,7 +308,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00115">115</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00130">130</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
 
 </div>
 </div>
@@ -289,7 +327,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00113">113</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00128">128</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
 
 </div>
 </div>
@@ -319,7 +357,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a2a0b1727f0e7fca0730381e030360a1a">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00086">86</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00096">96</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
 
 </div>
 </div>
@@ -350,7 +388,34 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a7785e86a2e662ff0291f7a6fb043ea91">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00063">63</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00071">71</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
+
+</div>
+</div>
+<a id="afbc577281e761aa9489d6c84621f9c93" name="afbc577281e761aa9489d6c84621f9c93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbc577281e761aa9489d6c84621f9c93">&#9670;&nbsp;</a></span>get_samples()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::set&lt; <a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> &gt; &amp; sensesp::CurveInterpolator::get_samples </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00077">77</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
 
 </div>
 </div>
@@ -381,7 +446,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a0deaa5b717cd0f60d0105835cd6b595a">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00088">88</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00103">103</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
 
 </div>
 </div>
@@ -419,7 +484,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00027">27</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8cpp_source.html#l00035">35</a> of file <a class="el" href="curveinterpolator_8cpp_source.html">curveinterpolator.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -429,9 +494,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="af485618fdd8dd9d61e1999a71d1cbcbd" name="af485618fdd8dd9d61e1999a71d1cbcbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af485618fdd8dd9d61e1999a71d1cbcbd">&#9670;&nbsp;</a></span>samples</h2>
+<a id="a2e89c2d5011ff8e9614384f2d28fc385" name="a2e89c2d5011ff8e9614384f2d28fc385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e89c2d5011ff8e9614384f2d28fc385">&#9670;&nbsp;</a></span>set_input_title()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,7 +504,64 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::set&lt;<a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a>&gt; sensesp::CurveInterpolator::samples</td>
+          <td class="memname"><a class="el" href="classsensesp_1_1_curve_interpolator.html">CurveInterpolator</a> * sensesp::CurveInterpolator::set_input_title </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>input_title</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00058">58</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+
+</div>
+</div>
+<a id="a47334aa664661bcf655cc2d5e58352ab" name="a47334aa664661bcf655cc2d5e58352ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47334aa664661bcf655cc2d5e58352ab">&#9670;&nbsp;</a></span>set_output_title()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsensesp_1_1_curve_interpolator.html">CurveInterpolator</a> * sensesp::CurveInterpolator::set_output_title </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>output_title</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00062">62</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa0bc599b7492cd5036f55dfff1d9d46d" name="aa0bc599b7492cd5036f55dfff1d9d46d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0bc599b7492cd5036f55dfff1d9d46d">&#9670;&nbsp;</a></span>input_title_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String sensesp::CurveInterpolator::input_title_ = &quot;Input&quot;</td>
         </tr>
       </table>
   </td>
@@ -450,7 +571,55 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00050">50</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00081">81</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+
+</div>
+</div>
+<a id="aa08e7c4c89847a00b48984e5d8d23bb7" name="aa08e7c4c89847a00b48984e5d8d23bb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa08e7c4c89847a00b48984e5d8d23bb7">&#9670;&nbsp;</a></span>output_title_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String sensesp::CurveInterpolator::output_title_ = &quot;Output&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00082">82</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
+
+</div>
+</div>
+<a id="a9c4c42a7152a21d9b3e25f5381e91c41" name="a9c4c42a7152a21d9b3e25f5381e91c41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c4c42a7152a21d9b3e25f5381e91c41">&#9670;&nbsp;</a></span>samples_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;<a class="el" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a>&gt; sensesp::CurveInterpolator::samples_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="curveinterpolator_8h_source.html#l00080">80</a> of file <a class="el" href="curveinterpolator_8h_source.html">curveinterpolator.h</a>.</p>
 
 </div>
 </div>

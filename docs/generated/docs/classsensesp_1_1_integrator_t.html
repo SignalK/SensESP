@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('classsensesp_1_1_integrator_t.html',''
 <p>Integrator integrates (accumulates) the incoming values.  
  <a href="classsensesp_1_1_integrator_t.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="integrator_8h_source.html">integrator.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="integrator_8h_source.html">sensesp/transforms/integrator.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for sensesp::IntegratorT&lt; C, P &gt;:</div>
 <div class="dyncontent">
@@ -110,7 +110,7 @@ Inheritance diagram for sensesp::IntegratorT&lt; C, P &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4415838d9103db6166b6410fc5a42fb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_integrator_t.html#a4415838d9103db6166b6410fc5a42fb7">IntegratorT</a> (P k=1, P value=0, String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:a4415838d9103db6166b6410fc5a42fb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_integrator_t.html#a4415838d9103db6166b6410fc5a42fb7">IntegratorT</a> (P k=1, P value=0, String config_path=&quot;&quot;)</td></tr>
 <tr class="memdesc:a4415838d9103db6166b6410fc5a42fb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Integrator T object.  <a href="classsensesp_1_1_integrator_t.html#a4415838d9103db6166b6410fc5a42fb7">More...</a><br /></td></tr>
 <tr class="separator:a4415838d9103db6166b6410fc5a42fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a565445e290724a4f59c8422d36238531"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_integrator_t.html#a565445e290724a4f59c8422d36238531">start</a> () override final</td></tr>
@@ -126,15 +126,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adc6656c064e76922fee68d45fb47087d"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_integrator_t.html#adc6656c064e76922fee68d45fb47087d">get_config_schema</a> () override</td></tr>
 <tr class="separator:adc6656c064e76922fee68d45fb47087d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_transform"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_transform')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_transform.html">sensesp::Transform&lt; C, P &gt;</a></td></tr>
-<tr class="memitem:aa40027f0a8f0c6515c6881da4ad22c69 inherit pub_methods_classsensesp_1_1_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform.html#aa40027f0a8f0c6515c6881da4ad22c69">Transform</a> (String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:aa40027f0a8f0c6515c6881da4ad22c69 inherit pub_methods_classsensesp_1_1_transform"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform.html#aa40027f0a8f0c6515c6881da4ad22c69">Transform</a> (String config_path=&quot;&quot;)</td></tr>
 <tr class="separator:aa40027f0a8f0c6515c6881da4ad22c69 inherit pub_methods_classsensesp_1_1_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5c91be8fb39a4f4ade791d500ae210a inherit pub_methods_classsensesp_1_1_transform"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; C, P &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform.html#ae5c91be8fb39a4f4ade791d500ae210a">connect_from</a> (<a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer0, <a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer1=NULL, <a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer2=NULL, <a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer3=NULL, <a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; P &gt; *producer4=NULL)</td></tr>
 <tr class="separator:ae5c91be8fb39a4f4ade791d500ae210a inherit pub_methods_classsensesp_1_1_transform"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_transform_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_transform_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_transform_base.html">sensesp::TransformBase</a></td></tr>
-<tr class="memitem:af565e79f6ebcb3945211c13494deb7b1 inherit pub_methods_classsensesp_1_1_transform_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform_base.html#af565e79f6ebcb3945211c13494deb7b1">TransformBase</a> (String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>=&quot;&quot;)</td></tr>
+<tr class="memitem:af565e79f6ebcb3945211c13494deb7b1 inherit pub_methods_classsensesp_1_1_transform_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_transform_base.html#af565e79f6ebcb3945211c13494deb7b1">TransformBase</a> (String config_path=&quot;&quot;)</td></tr>
 <tr class="separator:af565e79f6ebcb3945211c13494deb7b1 inherit pub_methods_classsensesp_1_1_transform_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b">Configurable</a> (String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>)</td></tr>
+<tr class="memitem:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b">Configurable</a> (String config_path)</td></tr>
 <tr class="separator:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4202ce8a5b9ad23d2a2be27de11153f4 inherit pub_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4">save_configuration</a> ()</td></tr>
 <tr class="separator:a4202ce8a5b9ad23d2a2be27de11153f4 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,8 +185,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ab1f2dfc4941396dd3fdb81e0c3c8b09c inherit pub_static_methods_classsensesp_1_1_startable"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_startable.html#ab1f2dfc4941396dd3fdb81e0c3c8b09c">start_all</a> ()</td></tr>
 <tr class="separator:ab1f2dfc4941396dd3fdb81e0c3c8b09c inherit pub_static_methods_classsensesp_1_1_startable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:a76117fed95121d7576e9aa6acfbcbe12 inherit pub_attribs_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a></td></tr>
-<tr class="separator:a76117fed95121d7576e9aa6acfbcbe12 inherit pub_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#aded48ebfe23c7bee1845c7ab99c63a6e">config_path_</a></td></tr>
+<tr class="separator:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
 <tr class="memitem:ac97542fd5a24ae306adb77f3d1ba563a inherit pro_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a> ()</td></tr>
 <tr class="separator:ac97542fd5a24ae306adb77f3d1ba563a inherit pro_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -264,7 +264,7 @@ template&lt;class C , class P &gt; </div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_integrator_t_a4415838d9103db6166b6410fc5a42fb7_cgraph.svg" width="560" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_integrator_t_a4415838d9103db6166b6410fc5a42fb7_cgraph.svg" width="662" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 

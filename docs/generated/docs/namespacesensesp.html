@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -130,7 +130,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An object that is capable of having configuration data that can be set remotely using a RESTful API, and can be persisted to the local file system.  <a href="classsensesp_1_1_configurable.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_curve_interpolator.html">CurveInterpolator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses a collection of input/output samples that approximate a non-linear curve and outputs a value on that curve. The output is the linear interpolation between the two sample points that the input falls between. It is used primarily for non-linear analog gauges such as temperature gauges and oil pressure gauges, which get their input from analog sensors that are variable resistors.  <a href="classsensesp_1_1_curve_interpolator.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement a piecewise linear interpolation transform.  <a href="classsensesp_1_1_curve_interpolator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_debounce_template.html">DebounceTemplate</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements debounce code for a button or switch.  <a href="classsensesp_1_1_debounce_template.html#details">More...</a><br /></td></tr>
@@ -364,6 +364,12 @@ it must have &lt;tt&gt;units&lt;/tt&gt;". Thus, any paths that you output that a
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_typecast.html">Typecast</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts input from one data type to another, then outputs the new type.  <a href="classsensesp_1_1_typecast.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_lambda_output.html">UILambdaOutput</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output.html">UIOutput</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_uptime.html">Uptime</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reports the number of seconds since the last restart of the ESP.  <a href="classsensesp_1_1_uptime.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -565,6 +571,8 @@ Variables</h2></td></tr>
 <tr class="separator:aad2887cc9dde673d6b763a780179c1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_w_s_client.html">WSClient</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a01c9e413ed693e0b956363d0b2c5a26e">ws_client</a></td></tr>
 <tr class="separator:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.1.0&quot;</td></tr>
+<tr class="separator:a415d47efb7e756b1be52067ac1792c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc35a8f1394e257344015e4042bc7d1"><td class="memItemLeft" align="right" valign="top">ReactESP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">app</a></td></tr>
 <tr class="separator:a2bc35a8f1394e257344015e4042bc7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4a9f78977011238ed7fa188e74b46d6"><td class="memItemLeft" align="right" valign="top">std::map&lt; String, <a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ac4a9f78977011238ed7fa188e74b46d6">configurables</a></td></tr>
@@ -585,6 +593,8 @@ Variables</h2></td></tr>
 <tr class="separator:a048a12a0033281a7ea316123fec959f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad205805904dd5fd707bf89379a37d29d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad205805904dd5fd707bf89379a37d29d">ws_authorizing_pattern</a> [] = {200, 200, <a class="el" href="led__blinker_8h.html#ad81bcd446e2fd6404bb991a66217348b">PATTERN_END</a>}</td></tr>
 <tr class="separator:ad205805904dd5fd707bf89379a37d29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa01e83386efacaf36f7b13a7b677318"><td class="memItemLeft" align="right" valign="top">std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#afa01e83386efacaf36f7b13a7b677318">ui_outputs</a></td></tr>
+<tr class="separator:afa01e83386efacaf36f7b13a7b677318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a018643e365493945bdfa43db85b03fb3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structsensesp_1_1_param_info.html">ParamInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a018643e365493945bdfa43db85b03fb3">hysteresis_param_info</a> [4]</td></tr>
 <tr class="separator:a018643e365493945bdfa43db85b03fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf87e022a3c4111a8e24045e297e14ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_sens_e_s_p_app.html">SensESPApp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aaf87e022a3c4111a8e24045e297e14ba">sensesp_app</a></td></tr>
@@ -1390,7 +1400,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410" name="a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410"></a>kWifiManagerActivated&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="networking_8h_source.html#l00018">18</a> of file <a class="el" href="networking_8h_source.html">networking.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8h_source.html#l00019">19</a> of file <a class="el" href="networking_8h_source.html">networking.h</a>.</p>
 
 </div>
 </div>
@@ -1420,7 +1430,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a80ea75be3339693d942aeca17329641fa1082607a601695536faefdbca5e45db0" name="a80ea75be3339693d942aeca17329641fa1082607a601695536faefdbca5e45db0"></a>kWSConnected&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00019">19</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00020">20</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
 
 </div>
 </div>
@@ -1921,6 +1931,22 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="a415d47efb7e756b1be52067ac1792c44" name="a415d47efb7e756b1be52067ac1792c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a415d47efb7e756b1be52067ac1792c44">&#9670;&nbsp;</a></span>kSensESPVersion</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.1.0&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__version_8h_source.html#l00006">6</a> of file <a class="el" href="sensesp__version_8h_source.html">sensesp_version.h</a>.</p>
+
+</div>
+</div>
 <a id="a63cb27a0ef59894b731d42770d67aef3" name="a63cb27a0ef59894b731d42770d67aef3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a63cb27a0ef59894b731d42770d67aef3">&#9670;&nbsp;</a></span>no_ap_pattern</h2>
 
@@ -1966,6 +1992,22 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00017">17</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+
+</div>
+</div>
+<a id="afa01e83386efacaf36f7b13a7b677318" name="afa01e83386efacaf36f7b13a7b677318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa01e83386efacaf36f7b13a7b677318">&#9670;&nbsp;</a></span>ui_outputs</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a> * &gt; sensesp::ui_outputs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui__output_8cpp_source.html#l00003">3</a> of file <a class="el" href="ui__output_8cpp_source.html">ui_output.cpp</a>.</p>
 
 </div>
 </div>
