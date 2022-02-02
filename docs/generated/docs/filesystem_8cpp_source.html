@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -94,30 +94,28 @@ $(document).ready(function(){initNavTree('filesystem_8cpp_source.html',''); init
 </div><!--header-->
 <div class="contents">
 <a href="filesystem_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;SPIFFS.h&quot;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno"><a class="line" href="filesystem_8cpp.html#a28d82e93d6c3850f10b14ca980ee8114">    2</a></span><span class="preprocessor">#define SPIFFS_BEGIN SPIFFS.begin(true)</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="filesystem_8h.html">filesystem.h</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="sensesp_8h.html">sensesp.h</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classsensesp_1_1_filesystem.html#ab9408ffdc47e97d43f6a2d77de654c48">    9</a></span><a class="code hl_function" href="classsensesp_1_1_filesystem.html#ab9408ffdc47e97d43f6a2d77de654c48">Filesystem::Filesystem</a>() : <a class="code hl_class" href="classsensesp_1_1_resettable.html">Resettable</a>(-100) {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  <span class="keywordflow">if</span> (!<a class="code hl_define" href="filesystem_8cpp.html#a28d82e93d6c3850f10b14ca980ee8114">SPIFFS_BEGIN</a>) {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_define" href="local__debug_8h.html#a361626aa880f4f9696fbd87dc0597649">debugE</a>(<span class="stringliteral">&quot;FATAL: Filesystem initialization failed.&quot;</span>);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    ESP.restart();</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  }</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">   16</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">Filesystem::reset</a>() {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <a class="code hl_define" href="local__debug_8h.html#a0aab3bd3a9b0d1c82b35612d19caa250">debugI</a>(<span class="stringliteral">&quot;Formatting filesystem&quot;</span>);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  SPIFFS.format();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>}</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_filesystem_html_ab9408ffdc47e97d43f6a2d77de654c48"><div class="ttname"><a href="classsensesp_1_1_filesystem.html#ab9408ffdc47e97d43f6a2d77de654c48">sensesp::Filesystem::Filesystem</a></div><div class="ttdeci">Filesystem()</div><div class="ttdef"><b>Definition:</b> <a href="filesystem_8cpp_source.html#l00009">filesystem.cpp:9</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_filesystem_html_ad74cbbbd2ea256f715b694d8aa3a9211"><div class="ttname"><a href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">sensesp::Filesystem::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition:</b> <a href="filesystem_8cpp_source.html#l00016">filesystem.cpp:16</a></div></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="filesystem_8h.html">filesystem.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="sensesp_8h.html">sensesp.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classsensesp_1_1_filesystem.html#ab9408ffdc47e97d43f6a2d77de654c48">    8</a></span><a class="code hl_function" href="classsensesp_1_1_filesystem.html#ab9408ffdc47e97d43f6a2d77de654c48">Filesystem::Filesystem</a>() : <a class="code hl_class" href="classsensesp_1_1_resettable.html">Resettable</a>(-100) {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  <span class="keywordflow">if</span> (!SPIFFS.begin(<span class="keyword">true</span>)) {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_define" href="local__debug_8h.html#a361626aa880f4f9696fbd87dc0597649">debugE</a>(<span class="stringliteral">&quot;FATAL: Filesystem initialization failed.&quot;</span>);</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    ESP.restart();</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  }</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">   15</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">Filesystem::reset</a>() {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_define" href="local__debug_8h.html#a0aab3bd3a9b0d1c82b35612d19caa250">debugI</a>(<span class="stringliteral">&quot;Formatting filesystem&quot;</span>);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  SPIFFS.format();</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_filesystem_html_ab9408ffdc47e97d43f6a2d77de654c48"><div class="ttname"><a href="classsensesp_1_1_filesystem.html#ab9408ffdc47e97d43f6a2d77de654c48">sensesp::Filesystem::Filesystem</a></div><div class="ttdeci">Filesystem()</div><div class="ttdef"><b>Definition:</b> <a href="filesystem_8cpp_source.html#l00008">filesystem.cpp:8</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_filesystem_html_ad74cbbbd2ea256f715b694d8aa3a9211"><div class="ttname"><a href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">sensesp::Filesystem::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition:</b> <a href="filesystem_8cpp_source.html#l00015">filesystem.cpp:15</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_resettable_html"><div class="ttname"><a href="classsensesp_1_1_resettable.html">sensesp::Resettable</a></div><div class="ttdoc">Automatic calling of the reset() method when the device needs to be reset.</div><div class="ttdef"><b>Definition:</b> <a href="resettable_8h_source.html#l00020">resettable.h:20</a></div></div>
-<div class="ttc" id="afilesystem_8cpp_html_a28d82e93d6c3850f10b14ca980ee8114"><div class="ttname"><a href="filesystem_8cpp.html#a28d82e93d6c3850f10b14ca980ee8114">SPIFFS_BEGIN</a></div><div class="ttdeci">#define SPIFFS_BEGIN</div><div class="ttdef"><b>Definition:</b> <a href="filesystem_8cpp_source.html#l00002">filesystem.cpp:2</a></div></div>
 <div class="ttc" id="afilesystem_8h_html"><div class="ttname"><a href="filesystem_8h.html">filesystem.h</a></div></div>
 <div class="ttc" id="alocal__debug_8h_html_a0aab3bd3a9b0d1c82b35612d19caa250"><div class="ttname"><a href="local__debug_8h.html#a0aab3bd3a9b0d1c82b35612d19caa250">debugI</a></div><div class="ttdeci">#define debugI(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00046">local_debug.h:46</a></div></div>
 <div class="ttc" id="alocal__debug_8h_html_a361626aa880f4f9696fbd87dc0597649"><div class="ttname"><a href="local__debug_8h.html#a361626aa880f4f9696fbd87dc0597649">debugE</a></div><div class="ttdeci">#define debugE(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00048">local_debug.h:48</a></div></div>

@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('classsensesp_1_1_configurable.html',''
 <p>An object that is capable of having configuration data that can be set remotely using a RESTful API, and can be persisted to the local file system.  
  <a href="classsensesp_1_1_configurable.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="configurable_8h_source.html">configurable.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="configurable_8h_source.html">sensesp/system/configurable.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for sensesp::Configurable:</div>
 <div class="dyncontent">
@@ -112,7 +112,7 @@ Inheritance diagram for sensesp::Configurable:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae24b0359ade0718a19659af65e94d05b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b">Configurable</a> (String <a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a>)</td></tr>
+<tr class="memitem:ae24b0359ade0718a19659af65e94d05b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b">Configurable</a> (String config_path)</td></tr>
 <tr class="separator:ae24b0359ade0718a19659af65e94d05b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7785e86a2e662ff0291f7a6fb043ea91"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a7785e86a2e662ff0291f7a6fb043ea91">get_configuration</a> (JsonObject &amp;configObject)</td></tr>
 <tr class="separator:a7785e86a2e662ff0291f7a6fb043ea91"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,8 +125,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a76117fed95121d7576e9aa6acfbcbe12"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12">config_path</a></td></tr>
-<tr class="separator:a76117fed95121d7576e9aa6acfbcbe12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded48ebfe23c7bee1845c7ab99c63a6e"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#aded48ebfe23c7bee1845c7ab99c63a6e">config_path_</a></td></tr>
+<tr class="separator:aded48ebfe23c7bee1845c7ab99c63a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -267,7 +267,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_configurable_ac97542fd5a24ae306adb77f3d1ba563a_cgraph.svg" width="368" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_configurable_ac97542fd5a24ae306adb77f3d1ba563a_cgraph.svg" width="470" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">
@@ -303,11 +303,11 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <p >Persists the configuration returned by <a class="el" href="classsensesp_1_1_configurable.html#a7785e86a2e662ff0291f7a6fb043ea91">get_configuration()</a> to the local file system. </p>
 
-<p class="definition">Definition at line <a class="el" href="configurable_8cpp_source.html#l00064">64</a> of file <a class="el" href="configurable_8cpp_source.html">configurable.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="configurable_8cpp_source.html#l00075">75</a> of file <a class="el" href="configurable_8cpp_source.html">configurable.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_configurable_a4202ce8a5b9ad23d2a2be27de11153f4_cgraph.svg" width="368" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_configurable_a4202ce8a5b9ad23d2a2be27de11153f4_cgraph.svg" width="470" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">
@@ -357,14 +357,14 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a76117fed95121d7576e9aa6acfbcbe12" name="a76117fed95121d7576e9aa6acfbcbe12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76117fed95121d7576e9aa6acfbcbe12">&#9670;&nbsp;</a></span>config_path</h2>
+<a id="aded48ebfe23c7bee1845c7ab99c63a6e" name="aded48ebfe23c7bee1845c7ab99c63a6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aded48ebfe23c7bee1845c7ab99c63a6e">&#9670;&nbsp;</a></span>config_path_</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const String sensesp::Configurable::config_path</td>
+          <td class="memname">const String sensesp::Configurable::config_path_</td>
         </tr>
       </table>
 </div><div class="memdoc">

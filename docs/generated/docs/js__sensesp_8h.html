@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -113,25 +113,40 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a8de262bdd3fe0e74c591a5174112011f"><td class="memItemLeft" align="right" valign="top">const char PAGE_js_sensesp[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="js__sensesp_8h.html#a8de262bdd3fe0e74c591a5174112011f">PROGMEM</a></td></tr>
-<tr class="separator:a8de262bdd3fe0e74c591a5174112011f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfd907806a0b25ef6a79b5bbd5390223"><td class="memItemLeft" align="right" valign="top">const uint8_t PAGE_js_sensesp[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="js__sensesp_8h.html#abfd907806a0b25ef6a79b5bbd5390223">PROGMEM</a></td></tr>
+<tr class="separator:abfd907806a0b25ef6a79b5bbd5390223"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad02c051a020313fdd7df1130fa9b3fc8"><td class="memItemLeft" align="right" valign="top">const uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="js__sensesp_8h.html#ad02c051a020313fdd7df1130fa9b3fc8">PAGE_js_sensesp_size</a> = 2475</td></tr>
+<tr class="separator:ad02c051a020313fdd7df1130fa9b3fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a8de262bdd3fe0e74c591a5174112011f" name="a8de262bdd3fe0e74c591a5174112011f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8de262bdd3fe0e74c591a5174112011f">&#9670;&nbsp;</a></span>PROGMEM</h2>
+<a id="ad02c051a020313fdd7df1130fa9b3fc8" name="ad02c051a020313fdd7df1130fa9b3fc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad02c051a020313fdd7df1130fa9b3fc8">&#9670;&nbsp;</a></span>PAGE_js_sensesp_size</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char PAGE_js_sensesp [] PROGMEM</td>
+          <td class="memname">const uint PAGE_js_sensesp_size = 2475</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= R<span class="stringliteral">&quot;=====(</span></div>
-<div class="line"><span class="stringliteral">function ajax(method,url,data,contentType){return new Promise((function(resolve,reject){var request=new XMLHttpRequest;request.open(method,url,!0),request.onload=function(){200===request.status?resolve(request.response):reject(Error(request.statusText))},request.onerror=function(){reject(Error(&quot;Network Error&quot;))},contentType&amp;&amp;request.setRequestHeader(&quot;Content-Type&quot;,contentType),request.send(data)}))}class TreeList{constructor(main,pathList){this.main=main,this.main.appendChild(document.createElement(&quot;div&quot;)),this.root=document.createElement(&quot;ul&quot;),this.root.id=&quot;tree&quot;,this.main.appendChild(this.root);for(var i=0;i&lt;pathList.length;i++){var entry=pathList[i],fullPath=entry,parts=entry.split(&quot;/&quot;),nodeName=parts.pop(),section=this.main;for(parts.shift();parts.length&gt;0;){var sectionName=parts.shift();section=this.findNode(section,sectionName)}this.addEntry(section,nodeName,fullPath)}var toggler=document.getElementsByClassName(&quot;caret&quot;);for(i=0;i&lt;toggler.length;i++)toggler[i].addEventListener(&quot;click&quot;,(function(){this.parentElement.querySelector(&quot;.nested&quot;).classList.toggle(&quot;active&quot;),this.classList.toggle(&quot;caret-down&quot;)}))}makeSectionNode(name){var section=document.createElement(&quot;li&quot;),caret=document.createElement(&quot;span&quot;);caret.className=&quot;caret&quot;,caret.innerHTML=name,section.appendChild(caret);var ul=document.createElement(&quot;ul&quot;);return ul.className=&quot;nested&quot;,section.appendChild(ul),section}addEntry(section,name,fullPath){var entry=document.createElement(&quot;li&quot;);entry.innerHTML=name,section.children[1].appendChild(entry),entry.className=&quot;selectable&quot;,entry.addEventListener(&quot;click&quot;,(function(){editConfig(fullPath)}))}findNode(sectionRoot,nodeName){if(&quot;&quot;!=nodeName){var i,nextEntry,searchChildren=sectionRoot.children[1].childNodes;for(i=0;i&lt;searchChildren.length;i++)if((nextEntry=searchChildren[i]).childNodes[0].textContent==nodeName)return nextEntry;return nextEntry=this.makeSectionNode(nodeName),sectionRoot.children[1].appendChild(nextEntry),nextEntry}return sectionRoot}}var globalEditor=null;function getEmptyMountDiv(){var main=document.getElementById(&quot;mountNode&quot;);return main.empty(),globalEditor=null,main}function editConfig(config_path){var main=getEmptyMountDiv();ajax(&quot;GET&quot;,&quot;/config&quot;+config_path).then((response=&gt;{var json=JSON.parse(response),config=json.config,schema=json.schema;if(0==Object.keys(schema).length)return alert(`No schema available for ${config_path}`),void showConfigTree();schema.title||(schema.title=`Configuration for ${config_path}`),main.innerHTML=&quot;\n        &lt;div class=&#39;row&#39;&gt;\n        &lt;div id=&#39;editor_holder&#39; class=&#39;medium-12 columns&#39;&gt;&lt;/div&gt;        \n        &lt;/div&gt;\n        &lt;div class=&#39;row&#39;&gt;\n        &lt;div class=&#39;medium-12-columns&#39;&gt;\n        &lt;button id=&#39;submit&#39; class=&#39;tiny&#39;&gt;Save&lt;/button&gt;\n        &lt;button id=&#39;cancel&#39; class=&#39;tiny&#39;&gt;Cancel&lt;/button&gt;\n        &lt;span id=&#39;valid_indicator&#39; class=&#39;label&#39;&gt;&lt;/span&gt;\n        &lt;/div&gt;\n        &lt;/div&gt;\n      &quot;,globalEditor=new JSONEditor(document.getElementById(&quot;editor_holder&quot;),{schema:schema,startval:config,no_additional_properties:!0,disable_collapse:!0,disable_properties:!0,disable_edit_json:!0,show_opt_in:!0}),document.getElementById(&quot;submit&quot;).addEventListener(&quot;click&quot;,(function(){saveConfig(config_path,globalEditor.getValue())})),document.getElementById(&quot;cancel&quot;).addEventListener(&quot;click&quot;,(function(){showConfigTree()})),globalEditor.on(&quot;change&quot;,(function(){var errors=globalEditor.validate(),indicator=document.getElementById(&quot;valid_indicator&quot;);errors.length?(indicator.className=&quot;label alert&quot;,indicator.textContent=&quot;not valid&quot;):(indicator.className=&quot;label success&quot;,indicator.textContent=&quot;valid&quot;)}))})).catch((err=&gt;{alert(`Error retrieving configuration ${config_path}: ${err.message}`),showConfigTree()}))}function saveConfig(config_path,values){ajax(&quot;PUT&quot;,&quot;/config&quot;+config_path,JSON.stringify(values),&quot;application/json&quot;).then((response=&gt;{showConfigTree()})).catch((err=&gt;{alert(`Error saving configuration ${config_path}: ${err.message}`),showConfigTree()}))}function showConfigTree(){var main=getEmptyMountDiv();ajax(&quot;GET&quot;,&quot;/config&quot;).then((response=&gt;{var configList=JSON.parse(response).keys;return configList.sort(),configList})).then((configList=&gt;{new TreeList(main,configList)})).catch((err=&gt;{alert(&quot;Error: &quot;+err.statusText)}))}Element.prototype.empty=function(){for(var child=this.lastElementChild;child;)this.removeChild(child),child=this.lastElementChild};</span></div>
-<div class="line"><span class="stringliteral">)=====&quot;</span></div>
-</div><!-- fragment -->
+
+<p class="definition">Definition at line <a class="el" href="js__sensesp_8h_source.html#l00314">314</a> of file <a class="el" href="js__sensesp_8h_source.html">js_sensesp.h</a>.</p>
+
+</div>
+</div>
+<a id="abfd907806a0b25ef6a79b5bbd5390223" name="abfd907806a0b25ef6a79b5bbd5390223"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfd907806a0b25ef6a79b5bbd5390223">&#9670;&nbsp;</a></span>PROGMEM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t PAGE_js_sensesp [] PROGMEM</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 <p class="definition">Definition at line <a class="el" href="js__sensesp_8h_source.html#l00002">2</a> of file <a class="el" href="js__sensesp_8h_source.html">js_sensesp.h</a>.</p>
 
 </div>

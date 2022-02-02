@@ -1,4 +1,5 @@
 var index_8h =
 [
-    [ "PROGMEM", "index_8h.html#a9e09bea0eddc6841460f6654d2ba1a5f", null ]
+    [ "PAGE_index_size", "index_8h.html#af01c5827c44296f52b8d1edd57062e2e", null ],
+    [ "PROGMEM", "index_8h.html#ae9c93d9fef208c39822b3d2ea3318aee", null ]
 ];

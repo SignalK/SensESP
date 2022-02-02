@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['spiffs_5fbegin_0',['SPIFFS_BEGIN',['../filesystem_8cpp.html#a28d82e93d6c3850f10b14ca980ee8114',1,'filesystem.cpp']]]
+  ['use_5flib_5fwebsocket_0',['USE_LIB_WEBSOCKET',['../sensesp__base__app_8h.html#a8abe44af131f55591035d3587ca9484d',1,'sensesp_base_app.h']]]
 ];

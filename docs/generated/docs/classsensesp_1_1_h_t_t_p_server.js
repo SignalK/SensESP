@@ -7,5 +7,6 @@ var classsensesp_1_1_h_t_t_p_server =
     [ "handle_device_restart", "classsensesp_1_1_h_t_t_p_server.html#aced1ce7dbfb702bcda79959d21d38e6a", null ],
     [ "handle_info", "classsensesp_1_1_h_t_t_p_server.html#a268b820a7b0eeac765e16b005cb6b8b2", null ],
     [ "handle_not_found", "classsensesp_1_1_h_t_t_p_server.html#ae0d15f1c4b4868e667b12f8099e00412", null ],
+    [ "handle_static_reponse", "classsensesp_1_1_h_t_t_p_server.html#a2b58d8e99d20c70da992883baa83bbd5", null ],
     [ "start", "classsensesp_1_1_h_t_t_p_server.html#a3ddd8b19e286ff3df37912a1e9fb503b", null ]
 ];

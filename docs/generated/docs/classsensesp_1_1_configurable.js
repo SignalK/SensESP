@@ -6,5 +6,5 @@ var classsensesp_1_1_configurable =
     [ "load_configuration", "classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a", null ],
     [ "save_configuration", "classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4", null ],
     [ "set_configuration", "classsensesp_1_1_configurable.html#a0deaa5b717cd0f60d0105835cd6b595a", null ],
-    [ "config_path", "classsensesp_1_1_configurable.html#a76117fed95121d7576e9aa6acfbcbe12", null ]
+    [ "config_path_", "classsensesp_1_1_configurable.html#aded48ebfe23c7bee1845c7ab99c63a6e", null ]
 ];
