@@ -2,6 +2,8 @@
 
 #include "local_debug.h"
 
+namespace sensesp {
+
 bool LocalDebug::begin(String hostname, uint8_t startingDebugLevel) {
   _lastDebugLevel = startingDebugLevel;
 }
@@ -10,10 +12,10 @@ boolean LocalDebug::isActive(uint8_t debugLevel) {
   return (debugLevel >= _lastDebugLevel);
 }
 
-//size_t LocalDebug::write(uint8_t character) {
-//  Serial.write(character);
-//  return 1;
-//}
+// size_t LocalDebug::write(uint8_t character) {
+//   Serial.write(character);
+//   return 1;
+// }
 
 #else  // DEBUG_DISABLED
 
@@ -22,3 +24,5 @@ boolean LocalDebug::isActive(uint8_t debugLevel) {
 #include "local_debug.h"
 
 #endif  // DEBUG_DISABLED
+
+}  // namespace sensesp

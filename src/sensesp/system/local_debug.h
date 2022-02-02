@@ -6,6 +6,8 @@
 #include "Arduino.h"
 #include "Print.h"
 
+namespace sensesp {
+
 #define rdebugA(fmt, ...)        \
   if (Debug.isActive(Debug.ANY)) \
   Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
@@ -85,5 +87,7 @@ class LocalDebug {
 #define debugE(...)
 
 #endif
+
+}  // namespace sensesp
 
 #endif
