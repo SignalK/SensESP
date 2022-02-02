@@ -29,37 +29,42 @@ If you're not seeing these messages, they may be disabled in `main.cpp`. All of 
 ```
 so if you see `#define SERIAL_DEBUG_DISABLED` anywhere above those lines, that will disable the Serial Monitor messages from SensESP.
 
-## Initial Setup (Wifi and Hostname)
+## Initial Setup (WiFi and Hostname)
 
-When you start your ESP the first time after uploading SensESP onto it, it needs to know what wifi network to connect to[^1]. It will broadcast a wifi SSID for you to connect to so you can configure it. Connect your computer or phone to the “Configure SensESP”[^2] network; the password is `thisisfine`. A captive portal may pop up, but if it doesn’t, open a browser and go to 192.168.4.1, and you should see this:
+When you start your ESP32 device the first time after uploading SensESP onto it, it needs to know what wifi network to connect to -- unless you have hard-coded the WiFi credentials, of course. SensESP will automatically create a WiFi Access Point of its own for configuration purposes. Connect your computer or phone to the “Configure SensESP” network; the password is `thisisfine`. Note: If you hard-coded the `hostname` in `main.cpp`, the SSID will be called "Configure yourHostname". A captive portal may pop up, but if it doesn’t, open a browser and go to 192.168.4.1, and you should see this:
 
-(BAS: Picture here of the Wifi Manager on a phone.)
+![WiFiManager landing page](assets/wifimanager_landing_page.png){:width="250px"}
 
-Enter the SSID and password of your boat’s wifi - the network that your Signal K Server is on. Also enter a suitable name for the ESP: for example, "BilgeMonitor" or "EngineTemps". (No more than 32 characters, no spaces.) Save the configuration with the button on the bottom of the page, and the ESP will restart and try to connect to your wifi network. If it connects successfully, you'll never have to bring this configuration page up again, unless you change your wifi's SSID or password.
+Click on "Configure WiFi". You should then see a list of nearby WiFi networks:
 
-[^1]: Unless you [hard-coded](pages/getting_started/index.md#hard-coding-certain-program-attributes)(BAS: this link doesn't work) the wifi credentials in `main.cpp`.
-[^2]: If you hard-coded the `hostname` in `main.cpp`, the SSID will be called "Configure yourHostname".
+![WiFiManager network selection](assets/wifimanager_network_selection.png){:width="250px"}
+
+Pick the SSID and enter the password of your WiFi network that your Signal K Server is on. You can also change the device hostname, if you want.
+
+Save the configuration with the button on the bottom of the page, and the device will restart and try to connect to your wifi network. If it connects successfully, you'll never have to bring this configuration page up again, unless you change your wifi's SSID or password.
 
 ## Run-time Configuration
 
-Some Sensors and Transform have parameters that can be configured "live", by accessing the ESP through its IP address, entered as a URL in any browser. (For details on how to set this up in your `main.cpp`, [click here](../concepts/index.md). (BAS: this link doesn't work.) For example, entering `192.168.1.236` (the IP address of the ESP32 I'm currently using as I write this documentation) in a browser will bring up the following web page that's hosted by the ESP itself:
+Some Sensors and Transform have parameters that can be configured "live", by accessing the SensESP device through its hostname or IP address, entered as a URL in any browser. On many operating systems, mDNS hostnames are the easiest solution: the SensESP device will be discoverable as [`https://sensesp.local`](https://sensesp.local), or `myhostname.local` if you have changed the hostname to `myhostname`. Alternatively, you can find out the device IP address by looking at the top of the Serial Monitor or viewing the client list on your router. If you enter the URL in a browser, you should see the SensESP web UI Status Page:
 
-![image](config_ui_menu.png)
+![Status page](assets/ui_status.png){:width="400px"}
 
-* "Device information" displays some information about the ESP, the firmware, the wifi network, etc.
-* "Configure device" is explained below.
+The status page displays all kinds of information about the device.
+
+The top menu allows you to configure the device or control it. First, the configuration menu:
+
+![Configuration menu](assets/ui_config_menu.png){:width="200px"}
+
+The configuration menu shows all available config paths. You can click on any of them to see the configuration options for that path. For example, the Tank A Level Curve menu shows the following:
+
+![Configuration menu](assets/ui_path_configuration.png){:width="400px"}
+
+Finally, the Advanced menu shows different built-in and application controls you can use to control the device behavior.
+
+![Control menu](assets/ui_advanced.png){:width="400px"}
+
 * "Restart device" will restart the ESP.
-* "Reset device" will not erase the program, but it will erase all the wifi information, the Signal K server information and authorization token, and any Sensor and Transform configuration you've done. The next time the device boots, you'll need to re-enter the wifi SSID and password[^3] (see above), all configurable values will be back at the defaults set in the program, and you will have to authorize the device with Read/Write access on the Signal K Server.
-
-[^3]: Unless you have hard-coded the wifi info.
-
-Click on "Configure device" to bring up the /setup page, which will look something like this:
-
-![image](config_ui_details.png)
-
-The only menu item that will always be present is "system", which has two sub-menus: "networking" (which lets you see and edit your wifi SSID and password, and the ESP's hostname), and "sk", which displays some networking info, but can't currently be used for editing that info.
-
-Other menu item(s) (in this example, only "blackWater") are there only if you've provided a configuration path in the constructor of one or more of the Sensors and Transforms in `main.cpp`.
+* "Reset device" will not erase the program, but it will erase all the wifi information, the Signal K server information and authorization token, and any Sensor and Transform configuration you've done. The next time the device boots, you'll need to re-enter the wifi SSID and password (unless you have hard-coded the WiFi information, of course). All configurable values will be back at the defaults set in the program, and you will have to authorize the device with Read/Write access on the Signal K Server.
 
 ## The Blinking LED
 
