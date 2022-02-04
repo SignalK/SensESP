@@ -6,6 +6,7 @@
 #include <functional>
 
 #include "sensesp/system/startable.h"
+#include "http_command.h"
 
 namespace sensesp {
 
@@ -23,7 +24,8 @@ class HTTPServer : public Startable {
   void handle_device_restart(AsyncWebServerRequest* request);
   void handle_info(AsyncWebServerRequest* request);
   void handle_static_reponse(AsyncWebServerRequest* request, const uint8_t*content, uint32_t size);
-
+  void handle_command(AsyncWebServerRequest* request);
+  HTTPCommand* add_command(String name, String title, bool mustConfirm = true);
  private:
   AsyncWebServer* server;
   void handle_config_list(AsyncWebServerRequest* request);

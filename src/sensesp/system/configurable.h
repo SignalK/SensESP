@@ -54,6 +54,11 @@ class Configurable {
    * @see https://json-schema.org
    */
   virtual String get_config_schema();
+  /**
+   * Returns a configuration description that is visible in WebUI
+   * you can use HTML tags to make description more readable
+   */
+  virtual String get_config_description() { return ""; }
 
   /**
    * Persists the configuration returned by get_configuration()
@@ -67,6 +72,7 @@ class Configurable {
    * passes the configuration to set_configuration().
    */
   virtual void load_configuration();
+
 };
 
 extern std::map<String, Configurable*> configurables;

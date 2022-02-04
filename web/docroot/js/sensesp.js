@@ -67,11 +67,15 @@ function editConfig(config_path) {
                 return;
             }
 
-            if (!schema.title) {
-                schema.title = `Configuration for ${config_path}`;
+            var description = "";
+            if(json.description != undefined && json.description != "")
+            {
+                description = `<div class='container'>${json.description}</div>`
             }
 
             main.innerHTML = `<div class='row g-3 m-4'>
+            <h1>Configuration for ${config_path}</h1>
+        ${description}
         <div id='editor_holder'></div>
         <div class='col-12'>
         <button id='submit' type='button' class='btn btn-primary'>Save</button>
@@ -188,34 +192,34 @@ function runDeviceCommand(confirmText, command) {
     }
 }
 
-function showAdvanced() {
+function showControl() {
     var div = getEmptyContentDiv();
 
+    var commands = deviceInfo.Commands;
+    var appCommands = "";
+    if (commands.length > 0) {
+        appCommands = `<h5 class="card-title my-4">Application commands</h5>
+        <div class="btn-group">`;
+        for (var i = 0; i < commands.length; i++) {
+            var command = commands[i];
+            appCommands += `<a class="btn btn-primary" onclick="executeCommand('${command.Name}',${command.Confirm})" href="#">${command.Title}</a>`;
+        }
+        appCommands += "</div>";
+    }
     var content = `
     <div class='card'>
         <div class="card-body">
-        <h5 class="card-title mb-4">Device commands</h5>
+        <h5 class="card-title my-4">Device commands</h5>
+        <p>This commands allows you to restart device or reset it's configuration.</p>
+        <div class="btn-group">
         <a href="#" onclick='runDeviceCommand("Restart device?", "restart");' class="btn btn-primary">Restart</a>
         <a href="#" onclick='runDeviceCommand("Are you sure you want to reset device to factory settings?", "reset");' class="btn btn-danger">Reset to defaults</a>
         </div>
+        ${appCommands}
+        </div>
     </div>`;
 
-    var commands = deviceInfo.Commands;
-
-    if (commands.length > 0) {
-        content +=
-            "<div class='card mt-3'>" +
-            "<div class='card-body'>" +
-            "<h5 class='card-title mb-4'>Custom commands</h5>";
-
-        for (var i = 0; i < commands.length; i++) {
-            var command = commands[i];
-            content += `<a class="btn btn-primary" onclick="executeCommand('${command.Name}',${command.Confirm})" href="#">${command.Title}</a>`;
-        }
-
-        content += "</div></div>";
-
-    }
+    
 
     div.innerHTML = content;
 }
@@ -240,16 +244,46 @@ function loadInfo() {
         .then(response => {
             deviceInfo = JSON.parse(response);
             var content = getEmptyContentDiv();
+            var groups = {};    
 
             for (const property in deviceInfo.Properties) {
-                var value = deviceInfo.Properties[property];
-                content.innerHTML += ("<div class='mb-3'>" +
-                    "<label class='form-label'>" + property + "</label>" +
-                    "<input type='text' readonly class='form-control' value='" + value + "'></div>");
-                if (property === "Name") {
-                    document.getElementById("devicename").innerHTML = value;
-                    document.title = value + " - WebUI";
+                var propertyObj = deviceInfo.Properties[property];
+                propertyObj.Name = property;
+                var group = null;
+                if(groups[propertyObj.Group] == undefined)
+                {
+                    group = groups[propertyObj.Group] = 
+                    {
+                        "Name" : propertyObj.Group,
+                        "Properties" : []
+                    };
                 }
+                else
+                {
+                    group = groups[propertyObj.Group];
+                }
+
+                group.Properties.push(propertyObj);
+
+                if (property === "Name") {
+                    document.getElementById("devicename").innerHTML = propertyObj.Value;
+                    document.title = propertyObj.Value + " - WebUI";
+                }
+            }
+
+            for(const key in groups)
+            {
+                var group = groups[key];
+                group.Properties.sort((a,b) => a.Order - b.Order);
+
+                content.innerHTML += `<div class='col'><h3>${group.Name}</h3>`;
+
+                for(i = 0; i < group.Properties.length; i++)
+                {
+                    content.innerHTML += `<div class='ms-2 mb-3'><label class='form-label'>${group.Properties[i].Name}</label><input type='text' readonly class='form-control' value='${group.Properties[i].Value}'></div>`;
+                }
+
+                content.innerHTML += "</div>";
             }
 
             if (!pagesLoaded) {
@@ -304,7 +338,7 @@ function loadInfo() {
 function initialize() {
     loadInfo();
     targets["status"] = new NavTarget("status", loadInfo);
-    targets["advanced"] = new NavTarget("advanced", showAdvanced);
+    targets["control"] = new NavTarget("control", showControl);
 
 
     var mainMenu = document.getElementById("mainmenu");

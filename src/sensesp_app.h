@@ -57,6 +57,7 @@ class SensESPApp : public SensESPBaseApp {
   }
   Networking* get_networking() { return this->networking_; }
   WSClient* get_ws_client() { return this->ws_client_; }
+  HTTPServer* get_http_server() { return this->http_server_; }
 
  protected:
   /**
@@ -67,9 +68,9 @@ class SensESPApp : public SensESPBaseApp {
    *
    */
   SensESPApp() : SensESPBaseApp() {
-    ui_build_info_ = new UIOutput<String>("Build at", __DATE__ " " __TIME__);
-    ui_sensesp_version_ = new UIOutput<String>("SenseESP version", kSensESPVersion);
-    ui_hostname_ = new UIOutput<String>("Name");
+    ui_build_info_ = new UIOutput<String>("Build at", __DATE__ " " __TIME__, UI_OUTPUT_GROUP_GENERAL, 2);
+    ui_sensesp_version_ = new UIOutput<String>("SenseESP version", kSensESPVersion, UI_OUTPUT_GROUP_GENERAL, 3);
+    ui_hostname_ = new UIOutput<String>("Name", UI_OUTPUT_GROUP_GENERAL, 1);
     hostname_->connect_to(ui_hostname_);
   }
 

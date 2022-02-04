@@ -1,22 +1,22 @@
 #include "http_server.h"
 
+#include <ESPAsyncWebServer.h>
 #include <FS.h>
 
 #include <functional>
-
-#include <ESPAsyncWebServer.h>
+#include <map>
 
 #include "ArduinoJson.h"
 #include "AsyncJson.h"
 #include "sensesp/system/configurable.h"
-#include "sensesp_base_app.h"
 #include "sensesp/system/ui_output.h"
+#include "sensesp_base_app.h"
 
 // Include the web UI stored in PROGMEM space
+#include "web/css_bootstrap.h"
 #include "web/index.h"
 #include "web/js_jsoneditor.h"
 #include "web/js_sensesp.h"
-#include "web/css_bootstrap.h"
 
 namespace sensesp {
 
@@ -24,6 +24,8 @@ namespace sensesp {
 #ifndef HTTP_SERVER_PORT
 #define HTTP_SERVER_PORT 80
 #endif
+
+std::map<String, HTTPCommand*> http_commands;
 
 HTTPServer::HTTPServer() : Startable(50) {
   server = new AsyncWebServer(HTTP_SERVER_PORT);
@@ -92,36 +94,50 @@ HTTPServer::HTTPServer() : Startable(50) {
     JsonObject config = json_doc.createNestedObject("config");
     confable->get_configuration(config);
     json_doc["schema"] = serialized(confable->get_config_schema());
+    json_doc["description"] = confable->get_config_description();
     serializeJson(json_doc, *response);
     request->send(response);
   });
 
   server->on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
     debugD("Serving gziped index.html");
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", PAGE_index, PAGE_index_size, NULL);
+    AsyncWebServerResponse* response = request->beginResponse_P(
+        200, "text/html", PAGE_index, PAGE_index_size, NULL);
     response->addHeader("Content-Encoding", "gzip");
     request->send(response);
   });
 
-  server->on("/css/bootstrap.min.css", HTTP_GET,
-  [](AsyncWebServerRequest* request) {
-    debugD("Serving gziped bootstrap.min.css");
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/css", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
-    response->addHeader("Content-Encoding", "gzip");
-    request->send(response);
-  });
+  server->on(
+      "/css/bootstrap.min.css", HTTP_GET, [](AsyncWebServerRequest* request) {
+        debugD("Serving gziped bootstrap.min.css");
+        AsyncWebServerResponse* response = request->beginResponse_P(
+            200, "text/css", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
+        response->addHeader("Content-Encoding", "gzip");
+        request->send(response);
+      });
 
-  server->on("/js/jsoneditor.min.js", HTTP_GET,
-  [](AsyncWebServerRequest* request) {
-    debugD("Serving gziped jsoneditor.min.js");
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", PAGE_js_jsoneditor, PAGE_js_jsoneditor_size);
-    response->addHeader("Content-Encoding", "gzip");
-    request->send(response);
-  });
+  server->on(
+      "/css/bootstrap.min.css", HTTP_GET, [](AsyncWebServerRequest* request) {
+        debugD("Serving gziped bootstrap.min.css");
+        AsyncWebServerResponse* response = request->beginResponse_P(
+            200, "text/css", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
+        response->addHeader("Content-Encoding", "gzip");
+        request->send(response);
+      });
+
+  server->on(
+      "/js/jsoneditor.min.js", HTTP_GET, [](AsyncWebServerRequest* request) {
+        debugD("Serving gziped jsoneditor.min.js");
+        AsyncWebServerResponse* response = request->beginResponse_P(
+            200, "text/html", PAGE_js_jsoneditor, PAGE_js_jsoneditor_size);
+        response->addHeader("Content-Encoding", "gzip");
+        request->send(response);
+      });
 
   server->on("/js/sensesp.js", HTTP_GET, [](AsyncWebServerRequest* request) {
     debugD("Serving gziped sensesp.js");
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/javascript", PAGE_js_sensesp, PAGE_js_jsoneditor_size);
+    AsyncWebServerResponse* response = request->beginResponse_P(
+        200, "text/javascript", PAGE_js_sensesp, PAGE_js_jsoneditor_size);
     response->addHeader("Content-Encoding", "gzip");
     request->send(response);
   });
@@ -131,6 +147,9 @@ HTTPServer::HTTPServer() : Startable(50) {
   server->on("/device/restart", HTTP_GET,
              std::bind(&HTTPServer::handle_device_restart, this, _1));
   server->on("/info", HTTP_GET, std::bind(&HTTPServer::handle_info, this, _1));
+
+  server->on("/command", HTTP_GET,
+             std::bind(&HTTPServer::handle_command, this, _1));
 }
 
 void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
@@ -223,17 +242,51 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto pages = json_doc.createNestedArray("Pages");
   auto config = json_doc.createNestedArray("Config");
 
-  for(auto property = ui_outputs.begin(); property != ui_outputs.end(); ++property)
-  {
+  for (auto property = ui_outputs.begin(); property != ui_outputs.end();
+       ++property) {
     property->second->set_json(properties);
   }
-  //add all configuration paths
+  // add all configuration paths
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     config.add(it->first);
   }
 
+  for (auto command = http_commands.begin(); command != http_commands.end();
+       ++command) {
+    auto jCommand = commands.createNestedObject();
+    jCommand["Name"] = command->second->get_name();
+    jCommand["Title"] = command->second->get_title();
+    jCommand["Confirm"] = command->second->get_mustConfirm();
+  }
+
   serializeJson(json_doc, *response);
   request->send(response);
+}
+
+void HTTPServer::handle_command(AsyncWebServerRequest* request) {
+  if (request->hasParam("id")) {
+    auto id = request->getParam("id")->value();
+    auto command = http_commands.find(id);
+
+    if (command != http_commands.end()) {
+      debugI("Handle command %s id=%s", request->url().c_str(), id.c_str());
+      command->second->notify();
+      request->send(200, "text/html", "Success!");
+    } else {
+      request->send(404, "text/html", "Command not found!");
+    }
+  } else {
+    request->send(400, "text/html", "Missing id parameter.");
+  }
+}
+
+HTTPCommand* HTTPServer::add_command(String name, String title,
+                                     bool mustConfirm) {
+  auto ret = new HTTPCommand(title, name, mustConfirm);
+
+  http_commands[name] = ret;
+
+  return ret;
 }
 
 }  // namespace sensesp

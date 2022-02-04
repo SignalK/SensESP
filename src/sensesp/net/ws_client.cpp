@@ -593,4 +593,13 @@ String WSClient::get_connection_status() {
   return "Unknown";
 }
 
+String WSClient::get_config_description() {
+  if (!preset_server_address_.isEmpty()) {
+    return "Here you can configure <i>Signal K</i> address and port.";
+  } else {
+    return "<i>Signal K</i> server address and port has been hardcoded in "
+           "code.";
+  }
+}
+
 }  // namespace sensesp

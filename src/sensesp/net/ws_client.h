@@ -82,9 +82,9 @@ class WSClient : public Configurable,
   String auth_token_ = NULL_AUTH_TOKEN;
   bool server_detected_ = false;
   bool token_test_success_ = false;
-  UILambdaOutput<String>* sk_server_property_ = new UILambdaOutput<String>("SK address", [this](){ return this->server_address_; });
-  UILambdaOutput<uint16_t>* sk_server_port_property_ = new UILambdaOutput<uint16_t>("SK server port", [this]() { return this->server_port_;});
-  UILambdaOutput<String>* sk_server_connection_ = new UILambdaOutput<String>("SK connection status", [this]() { return this->get_connection_status();});
+  UILambdaOutput<String>* sk_server_property_ = new UILambdaOutput<String>("SK address", [this](){ return this->server_address_; }, UI_OUTPUT_GROUP_SIGNALK, 1);
+  UILambdaOutput<uint16_t>* sk_server_port_property_ = new UILambdaOutput<uint16_t>("SK server port", [this]() { return this->server_port_;}, UI_OUTPUT_GROUP_SIGNALK, 2);
+  UILambdaOutput<String>* sk_server_connection_ = new UILambdaOutput<String>("SK connection status", [this]() { return this->get_connection_status();}, UI_OUTPUT_GROUP_SIGNALK, 3);
 
   ObservableValue<WSConnectionState> connection_state_ =
       WSConnectionState::kWSDisconnected;
@@ -102,6 +102,7 @@ class WSClient : public Configurable,
   bool get_mdns_service(String& server_address, uint16_t& server_port);
 
   String get_connection_status();
+  String get_config_description() override;
 };
 
 }  // namespace sensesp
