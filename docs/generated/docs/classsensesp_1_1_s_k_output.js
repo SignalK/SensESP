@@ -3,6 +3,8 @@ var classsensesp_1_1_s_k_output =
     [ "SKOutput", "classsensesp_1_1_s_k_output.html#aea99c1145932a2f0e87d8d1216298d12", null ],
     [ "SKOutput", "classsensesp_1_1_s_k_output.html#a5a0094a2f0d4231438bff480a82e2257", null ],
     [ "SKOutput", "classsensesp_1_1_s_k_output.html#af774b547c2e0290800f55f3eddb1cdac", null ],
+    [ "as_signalk", "classsensesp_1_1_s_k_output.html#a678b3485d40dd5566542ab6694f3665c", null ],
+    [ "as_signalk", "classsensesp_1_1_s_k_output.html#a678b3485d40dd5566542ab6694f3665c", null ],
     [ "as_signalk", "classsensesp_1_1_s_k_output.html#a0e17fbd689a2c316ddc2838c97e01753", null ],
     [ "get_config_schema", "classsensesp_1_1_s_k_output.html#ad1adbcf7d2d93c2c8b25db102c9c2f2e", null ],
     [ "get_configuration", "classsensesp_1_1_s_k_output.html#a41ad9087fc10d33d6cb604f7ddc28321", null ],

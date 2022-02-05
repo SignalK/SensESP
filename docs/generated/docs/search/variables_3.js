@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['debug_0',['DEBUG',['../class_local_debug.html#a497bfbe9d618d39472036bc371cd80fe',1,'LocalDebug']]],
+  ['debug_0',['DEBUG',['../classsensesp_1_1_local_debug.html#a7ca22fcda057e07d1c5779a0cc4c5faf',1,'sensesp::LocalDebug']]],
   ['debug_1',['Debug',['../namespacesensesp.html#a400482a88888fb760a3905b036bc101d',1,'sensesp']]],
   ['debug_5foutput_5f_2',['debug_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a550d0cf9e465434986e97d76f5a4aa5d',1,'sensesp::SensESPApp::debug_output_()'],['../classsensesp_1_1_sens_e_s_p_base_app.html#a75474f701f3152b5ab588f42d6cbd0eb',1,'sensesp::SensESPBaseApp::debug_output_()']]],
   ['default_5fchannel_5f_3',['default_channel_',['../classsensesp_1_1_p_w_m_output.html#afb2eab9de43ebf7768b9326ed1317cb1',1,'sensesp::PWMOutput']]],

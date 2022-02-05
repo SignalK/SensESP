@@ -6,5 +6,6 @@ var searchData=
   ['networking_2eh_3',['networking.h',['../networking_8h.html',1,'']]],
   ['networking_5f_4',['networking_',['../classsensesp_1_1_sens_e_s_p_app.html#ae785dad48b2a062abf4e02f0da8105b5',1,'sensesp::SensESPApp']]],
   ['no_5fap_5fpattern_5',['no_ap_pattern',['../namespacesensesp.html#a63cb27a0ef59894b731d42770d67aef3',1,'sensesp']]],
-  ['notify_6',['notify',['../classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9',1,'sensesp::Observable']]]
+  ['north_6',['north',['../structsensesp_1_1_e_n_u_vector.html#a489eb85a15932d92b76a51e68794192e',1,'sensesp::ENUVector']]],
+  ['notify_7',['notify',['../classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9',1,'sensesp::Observable']]]
 ];

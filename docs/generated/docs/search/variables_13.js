@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['warning_0',['WARNING',['../class_local_debug.html#a91aaf667f6004173ab35aa9e9aa54f11',1,'LocalDebug']]],
+  ['warning_0',['WARNING',['../classsensesp_1_1_local_debug.html#a98fde0a2fbdddfe87adc1242151a0031',1,'sensesp::LocalDebug']]],
   ['wifi_5fconnected_5fpattern_1',['wifi_connected_pattern',['../namespacesensesp.html#ab97a03fa114165f852d3e9f7ef14ad7e',1,'sensesp']]],
   ['wifi_5fdisconnected_5fpattern_2',['wifi_disconnected_pattern',['../namespacesensesp.html#ad53b505f128cf2dbb5e01bea56399524',1,'sensesp']]],
   ['wifi_5fmanager_5fpassword_5f_3',['wifi_manager_password_',['../classsensesp_1_1_sens_e_s_p_app.html#aca1cbefd07d48d9d1a8f6cac772045ec',1,'sensesp::SensESPApp']]],

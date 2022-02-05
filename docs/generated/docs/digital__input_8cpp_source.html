@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -192,12 +192,12 @@ $(document).ready(function(){initNavTree('digital__input_8cpp_source.html',''); 
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classsensesp_1_1_digital_input_change.html#a6cba9b69493c48bbf887fa20de2a96d4">   99</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_digital_input_change.html#a6cba9b69493c48bbf887fa20de2a96d4">DigitalInputChange::start</a>() {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onInterrupt(<a class="code hl_variable" href="classsensesp_1_1_digital_input.html#a71b5761d094ade92a4ee9283a455c238">pin_</a>, interrupt_type_, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onInterrupt(<a class="code hl_variable" href="classsensesp_1_1_digital_input.html#a71b5761d094ade92a4ee9283a455c238">pin_</a>, interrupt_type_, [<span class="keyword">this</span>]() {</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> = (bool)digitalRead(<a class="code hl_variable" href="classsensesp_1_1_digital_input.html#a71b5761d094ade92a4ee9283a455c238">pin_</a>);</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    triggered_ = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  });</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onTick([<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onTick([<span class="keyword">this</span>]() {</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">if</span> (triggered_ &amp;&amp; (<a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> != last_output_)) {</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      noInterrupts();</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      triggered_ = <span class="keyword">false</span>;</div>
@@ -217,9 +217,9 @@ $(document).ready(function(){initNavTree('digital__input_8cpp_source.html',''); 
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a08032702dc65bfc839eeeb5b006195d4"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">sensesp::ValueProducer::output</a></div><div class="ttdeci">T output</div><div class="ttdef"><b>Definition:</b> <a href="valueproducer_8h_source.html#l00119">valueproducer.h:119</a></div></div>
 <div class="ttc" id="acss__bootstrap_8h_html_ade1d7051ddbe6cc839076fcd0de2203a"><div class="ttname"><a href="css__bootstrap_8h.html#ade1d7051ddbe6cc839076fcd0de2203a">PROGMEM</a></div><div class="ttdeci">const uint8_t PAGE_css_bootstrap[] PROGMEM</div><div class="ttdef"><b>Definition:</b> <a href="css__bootstrap_8h_source.html#l00002">css_bootstrap.h:2</a></div></div>
 <div class="ttc" id="adigital__input_8h_html"><div class="ttname"><a href="digital__input_8h.html">digital_input.h</a></div></div>
-<div class="ttc" id="alocal__debug_8h_html_a361626aa880f4f9696fbd87dc0597649"><div class="ttname"><a href="local__debug_8h.html#a361626aa880f4f9696fbd87dc0597649">debugE</a></div><div class="ttdeci">#define debugE(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00048">local_debug.h:48</a></div></div>
-<div class="ttc" id="amain_8cpp_html_ae94fcfeeff9366a65097e20b6d7a2d37"><div class="ttname"><a href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">app</a></div><div class="ttdeci">reactesp::ReactESP app</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00017">main.cpp:17</a></div></div>
+<div class="ttc" id="alocal__debug_8h_html_a361626aa880f4f9696fbd87dc0597649"><div class="ttname"><a href="local__debug_8h.html#a361626aa880f4f9696fbd87dc0597649">debugE</a></div><div class="ttdeci">#define debugE(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00050">local_debug.h:50</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a2bc35a8f1394e257344015e4042bc7d1"><div class="ttname"><a href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">sensesp::app</a></div><div class="ttdeci">ReactESP app</div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

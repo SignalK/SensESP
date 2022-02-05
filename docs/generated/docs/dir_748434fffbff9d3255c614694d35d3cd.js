@@ -6,5 +6,6 @@ var dir_748434fffbff9d3255c614694d35d3cd =
     [ "signalk", "dir_9589b29454ff5cfb122a833ce99379e5.html", "dir_9589b29454ff5cfb122a833ce99379e5" ],
     [ "system", "dir_c7390c05c87f2404a3d820add6901ffa.html", "dir_c7390c05c87f2404a3d820add6901ffa" ],
     [ "transforms", "dir_8b763442d326984d19f542e14cef0a81.html", "dir_8b763442d326984d19f542e14cef0a81" ],
+    [ "types", "dir_447657536ad2cfa68e0029d7f31c7ca1.html", "dir_447657536ad2cfa68e0029d7f31c7ca1" ],
     [ "sensesp_version.h", "sensesp__version_8h.html", "sensesp__version_8h" ]
 ];

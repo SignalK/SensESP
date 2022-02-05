@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['warning_0',['WARNING',['../class_local_debug.html#a91aaf667f6004173ab35aa9e9aa54f11',1,'LocalDebug']]],
+  ['warning_0',['WARNING',['../classsensesp_1_1_local_debug.html#a98fde0a2fbdddfe87adc1242151a0031',1,'sensesp::LocalDebug']]],
   ['websocketclientevent_1',['webSocketClientEvent',['../namespacesensesp.html#a4f37392d0637be5754c86b87b263d0d3',1,'sensesp']]],
   ['wifi_5fconfig_5fportal_5ftimeout_2',['WIFI_CONFIG_PORTAL_TIMEOUT',['../networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce',1,'networking.cpp']]],
   ['wifi_5fconnected_5fpattern_3',['wifi_connected_pattern',['../namespacesensesp.html#ab97a03fa114165f852d3e9f7ef14ad7e',1,'sensesp']]],

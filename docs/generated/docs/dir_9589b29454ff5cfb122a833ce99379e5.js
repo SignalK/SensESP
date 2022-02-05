@@ -18,6 +18,8 @@ var dir_9589b29454ff5cfb122a833ce99379e5 =
     ] ],
     [ "signalk_output.cpp", "signalk__output_8cpp.html", null ],
     [ "signalk_output.h", "signalk__output_8h.html", "signalk__output_8h" ],
+    [ "signalk_position.cpp", "signalk__position_8cpp.html", null ],
+    [ "signalk_position.h", "signalk__position_8h.html", "signalk__position_8h" ],
     [ "signalk_put_request.cpp", "signalk__put__request_8cpp.html", "signalk__put__request_8cpp" ],
     [ "signalk_put_request.h", "signalk__put__request_8h.html", "signalk__put__request_8h" ],
     [ "signalk_put_request_listener.cpp", "signalk__put__request__listener_8cpp.html", null ],

@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -131,6 +131,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a04136285fe398306a634d716acaf2e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9821f4d246652e6089d88ab97c014007"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classsensesp_1_1_s_k_metadata.html">SKMetadata</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_output.html#a9821f4d246652e6089d88ab97c014007">get_metadata</a> () override</td></tr>
 <tr class="separator:a9821f4d246652e6089d88ab97c014007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a678b3485d40dd5566542ab6694f3665c"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_output.html#a678b3485d40dd5566542ab6694f3665c">as_signalk</a> ()</td></tr>
+<tr class="memdesc:a678b3485d40dd5566542ab6694f3665c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template specialization for <a class="el" href="classsensesp_1_1_s_k_output.html#a0e17fbd689a2c316ddc2838c97e01753">SKOutputPosition::as_signalk()</a>  <a href="classsensesp_1_1_s_k_output.html#a678b3485d40dd5566542ab6694f3665c">More...</a><br /></td></tr>
+<tr class="separator:a678b3485d40dd5566542ab6694f3665c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a678b3485d40dd5566542ab6694f3665c"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_output.html#a678b3485d40dd5566542ab6694f3665c">as_signalk</a> ()</td></tr>
+<tr class="separator:a678b3485d40dd5566542ab6694f3665c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_s_k_emitter"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_s_k_emitter')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_s_k_emitter.html">sensesp::SKEmitter</a></td></tr>
 <tr class="memitem:abb5dbd51ba3d2f2e3e8f90fd8dc0ce02 inherit pub_methods_classsensesp_1_1_s_k_emitter"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_emitter.html#abb5dbd51ba3d2f2e3e8f90fd8dc0ce02">SKEmitter</a> (String <a class="el" href="classsensesp_1_1_s_k_emitter.html#a05d07fbeb5c4d180f1e6291d0c640749">sk_path</a>)</td></tr>
 <tr class="separator:abb5dbd51ba3d2f2e3e8f90fd8dc0ce02 inherit pub_methods_classsensesp_1_1_s_k_emitter"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -370,8 +375,75 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a678b3485d40dd5566542ab6694f3665c" name="a678b3485d40dd5566542ab6694f3665c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a678b3485d40dd5566542ab6694f3665c">&#9670;&nbsp;</a></span>as_signalk() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String <a class="el" href="classsensesp_1_1_s_k_output.html">sensesp::SKOutput</a>&lt; <a class="el" href="structsensesp_1_1_position.html">Position</a> &gt;::as_signalk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Template specialization for <a class="el" href="classsensesp_1_1_s_k_output.html#a0e17fbd689a2c316ddc2838c97e01753">SKOutputPosition::as_signalk()</a> </p>
+<p >This specialization allows <code><a class="el" href="structsensesp_1_1_position.html" title="Position data container.">Position</a></code> objects to be output as Signal K deltas.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname"></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>return String </p>
+
+<p>Reimplemented from <a class="el" href="classsensesp_1_1_s_k_emitter.html#a691f2386145387be36e82b42752917a3">sensesp::SKEmitter</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="signalk__position_8cpp_source.html#l00016">16</a> of file <a class="el" href="signalk__position_8cpp_source.html">signalk_position.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a678b3485d40dd5566542ab6694f3665c" name="a678b3485d40dd5566542ab6694f3665c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a678b3485d40dd5566542ab6694f3665c">&#9670;&nbsp;</a></span>as_signalk() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String <a class="el" href="classsensesp_1_1_s_k_output.html">sensesp::SKOutput</a>&lt; <a class="el" href="structsensesp_1_1_position.html">Position</a> &gt;::as_signalk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Returns the data to be reported to the server as a Signal K json string. </p>
+
+<p>Reimplemented from <a class="el" href="classsensesp_1_1_s_k_emitter.html#a691f2386145387be36e82b42752917a3">sensesp::SKEmitter</a>.</p>
+
+</div>
+</div>
 <a id="a0e17fbd689a2c316ddc2838c97e01753" name="a0e17fbd689a2c316ddc2838c97e01753"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e17fbd689a2c316ddc2838c97e01753">&#9670;&nbsp;</a></span>as_signalk()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e17fbd689a2c316ddc2838c97e01753">&#9670;&nbsp;</a></span>as_signalk() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

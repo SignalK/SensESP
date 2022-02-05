@@ -3,7 +3,7 @@ var searchData=
   ['ignore_5fduplicates_0',['ignore_duplicates',['../classsensesp_1_1_s_k_put_request.html#adf1eda754d05859b0cfa0d7f58cbd466',1,'sensesp::SKPutRequest']]],
   ['in_5frange_5f_1',['in_range_',['../classsensesp_1_1_threshold_transform.html#abb126a795a1d9bade961dab99851f590',1,'sensesp::ThresholdTransform']]],
   ['index_2eh_2',['index.h',['../index_8h.html',1,'']]],
-  ['info_3',['INFO',['../class_local_debug.html#a929d8538595442a18cab1ead41f74856',1,'LocalDebug']]],
+  ['info_3',['INFO',['../classsensesp_1_1_local_debug.html#a914bf2add31e5805b27b5cbad48a3e22',1,'sensesp::LocalDebug']]],
   ['input_4',['input',['../classsensesp_1_1_curve_interpolator_1_1_sample.html#aecd6c2fc42ce78f4674dad5128e1532f',1,'sensesp::CurveInterpolator::Sample']]],
   ['input_5ftitle_5f_5',['input_title_',['../classsensesp_1_1_curve_interpolator.html#aa0bc599b7492cd5036f55dfff1d9d46d',1,'sensesp::CurveInterpolator']]],
   ['instance_5f_6',['instance_',['../classsensesp_1_1_sens_e_s_p_base_app.html#a775c80a83adf027205c767c080597f08',1,'sensesp::SensESPBaseApp']]],
@@ -27,5 +27,5 @@ var searchData=
   ['is_5fon_24',['is_on',['../classsensesp_1_1_smart_switch_controller.html#ad5b37c68337a920e7ec8ac1f3c474771',1,'sensesp::SmartSwitchController']]],
   ['is_5fvalid_5ffalse_25',['is_valid_false',['../classsensesp_1_1_text_to_truth.html#a480c52f1ab3a3508ee9dffd779a606ae',1,'sensesp::TextToTruth']]],
   ['is_5fvalid_5ftrue_26',['is_valid_true',['../classsensesp_1_1_text_to_truth.html#a539c0ddd60469ccace3713233673ccdc',1,'sensesp::TextToTruth']]],
-  ['isactive_27',['isActive',['../class_local_debug.html#a3e15defe97facccf77b4cc7c7b41b887',1,'LocalDebug']]]
+  ['isactive_27',['isActive',['../classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50',1,'sensesp::LocalDebug']]]
 ];
