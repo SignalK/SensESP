@@ -3,7 +3,7 @@ var searchData=
   ['base64sha1_0',['Base64Sha1',['../hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5',1,'Base64Sha1(String payload_str):&#160;hash.cpp'],['../hash_8h.html#acb0d85917e87a85ddaf682ebde0872a5',1,'Base64Sha1(String payload_str):&#160;hash.cpp']]],
   ['baseanalogreader_1',['BaseAnalogReader',['../classsensesp_1_1_base_analog_reader.html',1,'sensesp']]],
   ['baseblinker_2',['BaseBlinker',['../classsensesp_1_1_base_blinker.html#ae5fca05fb3566bdba709bf9444605372',1,'sensesp::BaseBlinker::BaseBlinker()'],['../classsensesp_1_1_base_blinker.html',1,'sensesp::BaseBlinker']]],
-  ['begin_3',['begin',['../class_local_debug.html#a895f039236b65e70575be573bf35a758',1,'LocalDebug']]],
+  ['begin_3',['begin',['../classsensesp_1_1_local_debug.html#a81930b424ff1ab5210a1421e04fecf03',1,'sensesp::LocalDebug']]],
   ['blinker_5f_4',['blinker_',['../classsensesp_1_1_system_status_led.html#a77b10f40160e62b0937ccef675d94257',1,'sensesp::SystemStatusLed']]],
   ['blip_5',['blip',['../classsensesp_1_1_base_blinker.html#a57b7d3c89f709c2731aedfffdbd2853b',1,'sensesp::BaseBlinker']]],
   ['boolconsumer_6',['BoolConsumer',['../namespacesensesp.html#a37b4b3e0f9bd730e0c8050477598c68d',1,'sensesp']]],

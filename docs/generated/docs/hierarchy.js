@@ -110,7 +110,8 @@ var hierarchy =
       [ "sensesp::DigitalInputCounter", "classsensesp_1_1_digital_input_counter.html", null ],
       [ "sensesp::DigitalInputState", "classsensesp_1_1_digital_input_state.html", null ]
     ] ],
-    [ "LocalDebug", "class_local_debug.html", null ],
+    [ "sensesp::ENUVector", "structsensesp_1_1_e_n_u_vector.html", null ],
+    [ "sensesp::LocalDebug", "classsensesp_1_1_local_debug.html", null ],
     [ "sensesp::Observable", "classsensesp_1_1_observable.html", [
       [ "sensesp::ValueProducer< WifiState >", "classsensesp_1_1_value_producer.html", [
         [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ]
@@ -160,6 +161,7 @@ var hierarchy =
     ] ],
     [ "sensesp::ParamInfo", "structsensesp_1_1_param_info.html", null ],
     [ "sensesp::SKRequest::PendingRequest", "classsensesp_1_1_s_k_request_1_1_pending_request.html", null ],
+    [ "sensesp::Position", "structsensesp_1_1_position.html", null ],
     [ "sensesp::Resettable", "classsensesp_1_1_resettable.html", [
       [ "sensesp::Filesystem", "classsensesp_1_1_filesystem.html", null ],
       [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ]

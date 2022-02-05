@@ -20,7 +20,7 @@ var searchData=
   ['valueproducer_3c_20systemstatus_20_3e_17',['ValueProducer&lt; SystemStatus &gt;',['../classsensesp_1_1_value_producer.html',1,'sensesp']]],
   ['valueproducer_3c_20wifistate_20_3e_18',['ValueProducer&lt; WifiState &gt;',['../classsensesp_1_1_value_producer.html',1,'sensesp']]],
   ['valueproducer_3c_20wsconnectionstate_20_3e_19',['ValueProducer&lt; WSConnectionState &gt;',['../classsensesp_1_1_value_producer.html',1,'sensesp']]],
-  ['verbose_20',['VERBOSE',['../class_local_debug.html#a0219dbfa5c45169603ee30a3c1b2d25c',1,'LocalDebug']]],
+  ['verbose_20',['VERBOSE',['../classsensesp_1_1_local_debug.html#a752443d74bf7514798a600bfd782c502',1,'sensesp::LocalDebug']]],
   ['vin_5f_21',['Vin_',['../classsensesp_1_1_voltage_divider_r2.html#a9b5bb941414628dc60da67789f3095ce',1,'sensesp::VoltageDividerR2::Vin_()'],['../classsensesp_1_1_voltage_divider_r1.html#a4d0a8f6ea885cb7808bd4ca973048ee6',1,'sensesp::VoltageDividerR1::Vin_()']]],
   ['void_5fcb_5ffunc_22',['void_cb_func',['../namespacesensesp.html#af69114aa7205860f5705dab5c93c55c8',1,'sensesp']]],
   ['voltage_5fmultiplier_2ecpp_23',['voltage_multiplier.cpp',['../voltage__multiplier_8cpp.html',1,'']]],

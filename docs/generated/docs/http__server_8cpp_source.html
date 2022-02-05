@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -300,12 +300,12 @@ $(document).ready(function(){initNavTree('http__server_8cpp_source.html',''); in
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  request-&gt;send(</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      200, <span class="stringliteral">&quot;text/plain&quot;</span>,</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      <span class="stringliteral">&quot;OK, resetting the device settings back to factory defaults.\n&quot;</span>);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onDelay(500, [<span class="keyword">this</span>]() { <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6">SensESPBaseApp::get</a>()-&gt;<a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a42d3c5c9ed56c0a0a925fac4e49dd659">reset</a>(); });</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onDelay(500, [<span class="keyword">this</span>]() { <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6">SensESPBaseApp::get</a>()-&gt;<a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a42d3c5c9ed56c0a0a925fac4e49dd659">reset</a>(); });</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno"><a class="line" href="classsensesp_1_1_h_t_t_p_server.html#aced1ce7dbfb702bcda79959d21d38e6a">  211</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_h_t_t_p_server.html#aced1ce7dbfb702bcda79959d21d38e6a">HTTPServer::handle_device_restart</a>(AsyncWebServerRequest* request) {</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  request-&gt;send(200, <span class="stringliteral">&quot;text/plain&quot;</span>, <span class="stringliteral">&quot;OK, restarting\n&quot;</span>);</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onDelay(50, []() { ESP.restart(); });</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onDelay(50, []() { ESP.restart(); });</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>}</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="classsensesp_1_1_h_t_t_p_server.html#a268b820a7b0eeac765e16b005cb6b8b2">  216</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_h_t_t_p_server.html#a268b820a7b0eeac765e16b005cb6b8b2">HTTPServer::handle_info</a>(AsyncWebServerRequest* request) {</div>
@@ -355,9 +355,9 @@ $(document).ready(function(){initNavTree('http__server_8cpp_source.html',''); in
 <div class="ttc" id="ajs__jsoneditor_8h_html"><div class="ttname"><a href="js__jsoneditor_8h.html">js_jsoneditor.h</a></div></div>
 <div class="ttc" id="ajs__jsoneditor_8h_html_a9ffb63d4581c1893af8098df28f577c1"><div class="ttname"><a href="js__jsoneditor_8h.html#a9ffb63d4581c1893af8098df28f577c1">PAGE_js_jsoneditor_size</a></div><div class="ttdeci">const uint PAGE_js_jsoneditor_size</div><div class="ttdef"><b>Definition:</b> <a href="js__jsoneditor_8h_source.html#l04713">js_jsoneditor.h:4713</a></div></div>
 <div class="ttc" id="ajs__sensesp_8h_html"><div class="ttname"><a href="js__sensesp_8h.html">js_sensesp.h</a></div></div>
-<div class="ttc" id="alocal__debug_8h_html_aaf33de7d1f8dfc6cc52ace6bd031f684"><div class="ttname"><a href="local__debug_8h.html#aaf33de7d1f8dfc6cc52ace6bd031f684">debugD</a></div><div class="ttdeci">#define debugD(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00045">local_debug.h:45</a></div></div>
-<div class="ttc" id="amain_8cpp_html_ae94fcfeeff9366a65097e20b6d7a2d37"><div class="ttname"><a href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">app</a></div><div class="ttdeci">reactesp::ReactESP app</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00017">main.cpp:17</a></div></div>
+<div class="ttc" id="alocal__debug_8h_html_aaf33de7d1f8dfc6cc52ace6bd031f684"><div class="ttname"><a href="local__debug_8h.html#aaf33de7d1f8dfc6cc52ace6bd031f684">debugD</a></div><div class="ttdeci">#define debugD(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00047">local_debug.h:47</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a2bc35a8f1394e257344015e4042bc7d1"><div class="ttname"><a href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">sensesp::app</a></div><div class="ttdeci">ReactESP app</div></div>
 <div class="ttc" id="anamespacesensesp_html_ac4a9f78977011238ed7fa188e74b46d6"><div class="ttname"><a href="namespacesensesp.html#ac4a9f78977011238ed7fa188e74b46d6">sensesp::configurables</a></div><div class="ttdeci">std::map&lt; String, Configurable * &gt; configurables</div><div class="ttdef"><b>Definition:</b> <a href="configurable_8cpp_source.html#l00012">configurable.cpp:12</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_afa01e83386efacaf36f7b13a7b677318"><div class="ttname"><a href="namespacesensesp.html#afa01e83386efacaf36f7b13a7b677318">sensesp::ui_outputs</a></div><div class="ttdeci">std::map&lt; String, UIOutputBase * &gt; ui_outputs</div><div class="ttdef"><b>Definition:</b> <a href="ui__output_8cpp_source.html#l00003">ui_output.cpp:3</a></div></div>
 <div class="ttc" id="asensesp__base__app_8h_html"><div class="ttname"><a href="sensesp__base__app_8h.html">sensesp_base_app.h</a></div></div>

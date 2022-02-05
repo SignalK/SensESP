@@ -22,6 +22,7 @@ var annotated_dup =
       [ "DigitalInputState", "classsensesp_1_1_digital_input_state.html", "classsensesp_1_1_digital_input_state" ],
       [ "DigitalOutput", "classsensesp_1_1_digital_output.html", "classsensesp_1_1_digital_output" ],
       [ "Enable", "classsensesp_1_1_enable.html", "classsensesp_1_1_enable" ],
+      [ "ENUVector", "structsensesp_1_1_e_n_u_vector.html", "structsensesp_1_1_e_n_u_vector" ],
       [ "ESP32AnalogReader", "classsensesp_1_1_e_s_p32_analog_reader.html", "classsensesp_1_1_e_s_p32_analog_reader" ],
       [ "EvenBlinker", "classsensesp_1_1_even_blinker.html", "classsensesp_1_1_even_blinker" ],
       [ "Filesystem", "classsensesp_1_1_filesystem.html", "classsensesp_1_1_filesystem" ],
@@ -38,6 +39,7 @@ var annotated_dup =
       [ "LambdaConsumer", "classsensesp_1_1_lambda_consumer.html", "classsensesp_1_1_lambda_consumer" ],
       [ "LambdaTransform", "classsensesp_1_1_lambda_transform.html", "classsensesp_1_1_lambda_transform" ],
       [ "Linear", "classsensesp_1_1_linear.html", "classsensesp_1_1_linear" ],
+      [ "LocalDebug", "classsensesp_1_1_local_debug.html", "classsensesp_1_1_local_debug" ],
       [ "MDNSDiscovery", "classsensesp_1_1_m_d_n_s_discovery.html", "classsensesp_1_1_m_d_n_s_discovery" ],
       [ "Median", "classsensesp_1_1_median.html", "classsensesp_1_1_median" ],
       [ "MovingAverage", "classsensesp_1_1_moving_average.html", "classsensesp_1_1_moving_average" ],
@@ -48,6 +50,7 @@ var annotated_dup =
       [ "ParamInfo", "structsensesp_1_1_param_info.html", "structsensesp_1_1_param_info" ],
       [ "PatternBlinker", "classsensesp_1_1_pattern_blinker.html", "classsensesp_1_1_pattern_blinker" ],
       [ "PeriodicBlinker", "classsensesp_1_1_periodic_blinker.html", "classsensesp_1_1_periodic_blinker" ],
+      [ "Position", "structsensesp_1_1_position.html", "structsensesp_1_1_position" ],
       [ "PressRepeater", "classsensesp_1_1_press_repeater.html", "classsensesp_1_1_press_repeater" ],
       [ "PWMOutput", "classsensesp_1_1_p_w_m_output.html", "classsensesp_1_1_p_w_m_output" ],
       [ "RatioBlinker", "classsensesp_1_1_ratio_blinker.html", "classsensesp_1_1_ratio_blinker" ],
@@ -103,6 +106,5 @@ var annotated_dup =
       [ "VoltageMultiplier", "classsensesp_1_1_voltage_multiplier.html", "classsensesp_1_1_voltage_multiplier" ],
       [ "WiFiSignal", "classsensesp_1_1_wi_fi_signal.html", "classsensesp_1_1_wi_fi_signal" ],
       [ "WSClient", "classsensesp_1_1_w_s_client.html", "classsensesp_1_1_w_s_client" ]
-    ] ],
-    [ "LocalDebug", "class_local_debug.html", "class_local_debug" ]
+    ] ]
 ];

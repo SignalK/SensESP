@@ -1,6 +1,6 @@
 var local__debug_8h =
 [
-    [ "LocalDebug", "class_local_debug.html", "class_local_debug" ],
+    [ "sensesp::LocalDebug", "classsensesp_1_1_local_debug.html", "classsensesp_1_1_local_debug" ],
     [ "debugA", "local__debug_8h.html#a1a32352300e27214e0f5904252f3ece6", null ],
     [ "debugD", "local__debug_8h.html#aaf33de7d1f8dfc6cc52ace6bd031f684", null ],
     [ "debugE", "local__debug_8h.html#a361626aa880f4f9696fbd87dc0597649", null ],

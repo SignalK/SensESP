@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('digital__input_8h_source.html',''); in
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  }</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classsensesp_1_1_digital_input_state.html#a8c74760ef9a8d24996434d9eea857299">   59</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_digital_input_state.html#a8c74760ef9a8d24996434d9eea857299">start</a>() override final {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onRepeat(read_delay_, [<span class="keyword">this</span>]() { <a class="code hl_function" href="classsensesp_1_1_value_producer.html#ae34225039d68b6f0e786266e76c2dace">emit</a>(digitalRead(<a class="code hl_variable" href="classsensesp_1_1_digital_input.html#a71b5761d094ade92a4ee9283a455c238">pin_</a>)); });</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onRepeat(read_delay_, [<span class="keyword">this</span>]() { <a class="code hl_function" href="classsensesp_1_1_value_producer.html#ae34225039d68b6f0e786266e76c2dace">emit</a>(digitalRead(<a class="code hl_variable" href="classsensesp_1_1_digital_input.html#a71b5761d094ade92a4ee9283a455c238">pin_</a>)); });</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  }</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> <span class="keyword">private</span>:</div>
@@ -143,9 +143,9 @@ $(document).ready(function(){initNavTree('digital__input_8h_source.html',''); in
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                            config_path, [this]() { this-&gt;<a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07">counter_</a>++; }) {}</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classsensesp_1_1_digital_input_counter.html#aa90d196f47120159dbcbc6f6f2c18117">   96</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_digital_input_counter.html#aa90d196f47120159dbcbc6f6f2c18117">start</a>() override final {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onInterrupt(<a class="code hl_variable" href="classsensesp_1_1_digital_input.html#a71b5761d094ade92a4ee9283a455c238">pin_</a>, interrupt_type_, interrupt_handler_);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onInterrupt(<a class="code hl_variable" href="classsensesp_1_1_digital_input.html#a71b5761d094ade92a4ee9283a455c238">pin_</a>, interrupt_type_, interrupt_handler_);</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onRepeat(<a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a>, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onRepeat(<a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a>, [<span class="keyword">this</span>]() {</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      noInterrupts();</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> = <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07">counter_</a>;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07">counter_</a> = 0;</div>
@@ -246,8 +246,8 @@ $(document).ready(function(){initNavTree('digital__input_8h_source.html',''); in
 <div class="ttc" id="aclasssensesp_1_1_sensor_t_html"><div class="ttname"><a href="classsensesp_1_1_sensor_t.html">sensesp::SensorT</a></div><div class="ttdoc">Sensor template class for any sensor producing actual values.</div><div class="ttdef"><b>Definition:</b> <a href="sensor_8h_source.html#l00045">sensor.h:45</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a08032702dc65bfc839eeeb5b006195d4"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">sensesp::ValueProducer::output</a></div><div class="ttdeci">T output</div><div class="ttdef"><b>Definition:</b> <a href="valueproducer_8h_source.html#l00119">valueproducer.h:119</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_ae34225039d68b6f0e786266e76c2dace"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#ae34225039d68b6f0e786266e76c2dace">sensesp::ValueProducer::emit</a></div><div class="ttdeci">void emit(T new_value)</div><div class="ttdef"><b>Definition:</b> <a href="valueproducer_8h_source.html#l00109">valueproducer.h:109</a></div></div>
-<div class="ttc" id="amain_8cpp_html_ae94fcfeeff9366a65097e20b6d7a2d37"><div class="ttname"><a href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">app</a></div><div class="ttdeci">reactesp::ReactESP app</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00017">main.cpp:17</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a2bc35a8f1394e257344015e4042bc7d1"><div class="ttname"><a href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">sensesp::app</a></div><div class="ttdeci">ReactESP app</div></div>
 <div class="ttc" id="asensor_8h_html"><div class="ttname"><a href="sensor_8h.html">sensor.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

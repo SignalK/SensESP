@@ -7,5 +7,5 @@ var searchData=
   ['is_5fconnected_4',['is_connected',['../classsensesp_1_1_w_s_client.html#a3774f0c173ecd87176a8be7f679f39c0',1,'sensesp::WSClient']]],
   ['is_5fvalid_5ffalse_5',['is_valid_false',['../classsensesp_1_1_text_to_truth.html#a480c52f1ab3a3508ee9dffd779a606ae',1,'sensesp::TextToTruth']]],
   ['is_5fvalid_5ftrue_6',['is_valid_true',['../classsensesp_1_1_text_to_truth.html#a539c0ddd60469ccace3713233673ccdc',1,'sensesp::TextToTruth']]],
-  ['isactive_7',['isActive',['../class_local_debug.html#a3e15defe97facccf77b4cc7c7b41b887',1,'LocalDebug']]]
+  ['isactive_7',['isActive',['../classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50',1,'sensesp::LocalDebug']]]
 ];

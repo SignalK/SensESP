@@ -8,7 +8,7 @@ var searchData=
   ['debounceint_5',['DebounceInt',['../namespacesensesp.html#ae8f733f17114829d088ac527222db7c6',1,'sensesp']]],
   ['debouncetemplate_6',['DebounceTemplate',['../classsensesp_1_1_debounce_template.html#a79010988ba294a986fc13cb6ef18ba8f',1,'sensesp::DebounceTemplate::DebounceTemplate()'],['../classsensesp_1_1_debounce_template.html',1,'sensesp::DebounceTemplate&lt; T &gt;']]],
   ['debug_7',['Debug',['../namespacesensesp.html#a400482a88888fb760a3905b036bc101d',1,'sensesp']]],
-  ['debug_8',['DEBUG',['../class_local_debug.html#a497bfbe9d618d39472036bc371cd80fe',1,'LocalDebug']]],
+  ['debug_8',['DEBUG',['../classsensesp_1_1_local_debug.html#a7ca22fcda057e07d1c5779a0cc4c5faf',1,'sensesp::LocalDebug']]],
   ['debug_5fclass_9',['DEBUG_CLASS',['../sensesp_8h.html#a03812ed51648501f4a4bd0ec7bd1b33d',1,'sensesp.h']]],
   ['debug_5foutput_2ecpp_10',['debug_output.cpp',['../debug__output_8cpp.html',1,'']]],
   ['debug_5foutput_2eh_11',['debug_output.h',['../debug__output_8h.html',1,'']]],

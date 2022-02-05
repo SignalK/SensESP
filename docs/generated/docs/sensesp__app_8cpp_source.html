@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('sensesp__app_8cpp_source.html',''); in
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">if</span> (input == <a class="code hl_enumvalue" href="namespacesensesp.html#af833775127368fc26658b6d3a070f2abadfe8409a3feb30a0acc8624fd85556c5">SystemStatus::kWifiDisconnected</a> ||</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            input == <a class="code hl_enumvalue" href="namespacesensesp.html#af833775127368fc26658b6d3a070f2aba91fb26167a66932c36d148bb5fdf98da">SystemStatus::kWifiNoAP</a>) {</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>          <a class="code hl_define" href="local__debug_8h.html#ad938ba86bbcd347ce0679c18739136d7">debugW</a>(<span class="stringliteral">&quot;Unable to connect to wifi for too long; restarting.&quot;</span>);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>          <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onDelay(1000, []() { ESP.restart(); });</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>          <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onDelay(1000, []() { ESP.restart(); });</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        }</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      }));</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
@@ -208,10 +208,10 @@ $(document).ready(function(){initNavTree('sensesp__app_8cpp_source.html',''); in
 <div class="ttc" id="aclasssensesp_1_1_w_s_client_html_aefe5d59e839fde1b57b054b131dcb70c"><div class="ttname"><a href="classsensesp_1_1_w_s_client.html#aefe5d59e839fde1b57b054b131dcb70c">sensesp::WSClient::get_delta_count_producer</a></div><div class="ttdeci">ValueProducer&lt; int &gt; &amp; get_delta_count_producer()</div><div class="ttdef"><b>Definition:</b> <a href="ws__client_8h_source.html#l00071">ws_client.h:71</a></div></div>
 <div class="ttc" id="adebounce_8h_html"><div class="ttname"><a href="debounce_8h.html">debounce.h</a></div></div>
 <div class="ttc" id="adiscovery_8h_html"><div class="ttname"><a href="discovery_8h.html">discovery.h</a></div></div>
-<div class="ttc" id="alocal__debug_8h_html_aaf33de7d1f8dfc6cc52ace6bd031f684"><div class="ttname"><a href="local__debug_8h.html#aaf33de7d1f8dfc6cc52ace6bd031f684">debugD</a></div><div class="ttdeci">#define debugD(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00045">local_debug.h:45</a></div></div>
-<div class="ttc" id="alocal__debug_8h_html_ad938ba86bbcd347ce0679c18739136d7"><div class="ttname"><a href="local__debug_8h.html#ad938ba86bbcd347ce0679c18739136d7">debugW</a></div><div class="ttdeci">#define debugW(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00047">local_debug.h:47</a></div></div>
-<div class="ttc" id="amain_8cpp_html_ae94fcfeeff9366a65097e20b6d7a2d37"><div class="ttname"><a href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">app</a></div><div class="ttdeci">reactesp::ReactESP app</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00017">main.cpp:17</a></div></div>
+<div class="ttc" id="alocal__debug_8h_html_aaf33de7d1f8dfc6cc52ace6bd031f684"><div class="ttname"><a href="local__debug_8h.html#aaf33de7d1f8dfc6cc52ace6bd031f684">debugD</a></div><div class="ttdeci">#define debugD(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00047">local_debug.h:47</a></div></div>
+<div class="ttc" id="alocal__debug_8h_html_ad938ba86bbcd347ce0679c18739136d7"><div class="ttname"><a href="local__debug_8h.html#ad938ba86bbcd347ce0679c18739136d7">debugW</a></div><div class="ttdeci">#define debugW(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00049">local_debug.h:49</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a2bc35a8f1394e257344015e4042bc7d1"><div class="ttname"><a href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">sensesp::app</a></div><div class="ttdeci">ReactESP app</div></div>
 <div class="ttc" id="anamespacesensesp_html_aaf87e022a3c4111a8e24045e297e14ba"><div class="ttname"><a href="namespacesensesp.html#aaf87e022a3c4111a8e24045e297e14ba">sensesp::sensesp_app</a></div><div class="ttdeci">SensESPApp * sensesp_app</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__app_8cpp_source.html#l00083">sensesp_app.cpp:83</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_af833775127368fc26658b6d3a070f2ab"><div class="ttname"><a href="namespacesensesp.html#af833775127368fc26658b6d3a070f2ab">sensesp::SystemStatus</a></div><div class="ttdeci">SystemStatus</div><div class="ttdef"><b>Definition:</b> <a href="system__status__controller_8h_source.html#l00010">system_status_controller.h:10</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_af833775127368fc26658b6d3a070f2aba91fb26167a66932c36d148bb5fdf98da"><div class="ttname"><a href="namespacesensesp.html#af833775127368fc26658b6d3a070f2aba91fb26167a66932c36d148bb5fdf98da">sensesp::SystemStatus::kWifiNoAP</a></div><div class="ttdeci">@ kWifiNoAP</div></div>
