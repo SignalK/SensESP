@@ -11,16 +11,14 @@ SKOutputTime::SKOutputTime(String sk_path, String config_path)
 String SKOutputTime::as_signalk() {
   DynamicJsonDocument json_doc(1024);
   String json;
-  JsonObject root = json_doc.as<JsonObject>();
-  root["path"] = this->sk_path;
-  root["value"] = output;
-  serializeJson(root, json);
+  json_doc["path"] = this->sk_path;
+  json_doc["value"] = output;
+  serializeJson(json_doc, json);
   return json;
 }
 
 void SKOutputTime::get_configuration(JsonObject& root) {
   root["sk_path"] = sk_path;
-  root["value"] = output;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
