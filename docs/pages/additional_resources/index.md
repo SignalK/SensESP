@@ -35,6 +35,10 @@ If you want to have your own project added to the list, [create an issue](https:
 - [Electronic "analog" gauge](https://github.com/joelkoz/signalk-analog-gauge): Replace an old analog gauge with an electronic version of one, that also sends its data to Signal K
 - [SmartSwitch Controller](https://github.com/joelkoz/CommonSens/tree/main/signalk-smart-switch): Library to use various SmartSwitch devices (from Sonoff, Shelly, and M5) with Signal K
 
+### NMEA 0183
+
+- [NMEA 0183 input parser](https://github.com/SensESP/NMEA0183/): NMEA 0183 parser for SensESP. This library supports common GNSS (GPS, GLONASS, Galileo) receiver devices out of the box and can be easily extended to support other NMEA 0183 sentences as well.
+
 ### Temperature and Humidity
 
 - [Adafruit MAX31856 thermocouple sensor shield](https://github.com/SensESP/MAX31856): Library for reading a Type K thermocouple with an Adafruit MAX31856 breakout board
