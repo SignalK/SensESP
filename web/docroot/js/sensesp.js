@@ -210,7 +210,7 @@ function showControl() {
     <div class='card'>
         <div class="card-body">
         <h5 class="card-title my-4">Device commands</h5>
-        <p>This commands allows you to restart device or reset it's configuration.</p>
+        <p>These commands allows you to restart device or reset its configuration.</p>
         <div class="btn-group">
         <a href="#" onclick='runDeviceCommand("Restart device?", "restart");' class="btn btn-primary">Restart</a>
         <a href="#" onclick='runDeviceCommand("Are you sure you want to reset device to factory settings?", "reset");' class="btn btn-danger">Reset to defaults</a>
