@@ -55,6 +55,9 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
   this->connection_state_.attach(
       [this]() { this->emit(this->connection_state_.get()); });
 
+  // process any received updates in the main loop
+  ReactESP::app->onRepeat(1, [this]() { this->process_received_updates(); });
+
   // set the singleton object pointer
   ws_client = this;
 
@@ -102,11 +105,15 @@ void WSClient::on_connected(uint8_t* payload) {
 }
 
 void WSClient::subscribe_listeners() {
+  bool output_available = false;
+  DynamicJsonDocument subscription(1024);
+  subscription["context"] = "vessels.self";
+
+  SKListener::take_semaphore();
   const std::vector<SKListener*>& listeners = SKListener::get_listeners();
 
   if (listeners.size() > 0) {
-    DynamicJsonDocument subscription(1024);
-    subscription["context"] = "vessels.self";
+    output_available = true;
     JsonArray subscribe = subscription.createNestedArray("subscribe");
 
     for (size_t i = 0; i < listeners.size(); i++) {
@@ -121,7 +128,10 @@ void WSClient::subscribe_listeners() {
       debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(),
              listen_delay);
     }
+  }
+  SKListener::release_semaphore();
 
+  if (output_available) {
     String messageJson;
 
     serializeJson(subscription, messageJson);
@@ -160,6 +170,7 @@ void WSClient::on_receive_updates(DynamicJsonDocument& message) {
   // Process updates from subscriptions...
   JsonArray updates = message["updates"];
 
+  take_received_updates_semaphore();
   for (size_t i = 0; i < updates.size(); i++) {
     JsonObject update = updates[i];
 
@@ -171,54 +182,79 @@ void WSClient::on_receive_updates(DynamicJsonDocument& message) {
       const char* path = value["path"];
       debugD("Got update of value %s\n", path);
 
-      const std::vector<SKListener*>& listeners = SKListener::get_listeners();
+      // push all values into a separate list for processing
+      // in the main task
+      received_updates_.push_back(value);
+    }
+  }
+  release_received_updates_semaphore();
+}
 
-      for (size_t i = 0; i < listeners.size(); i++) {
-        SKListener* listener = listeners[i];
-        if (listener->get_sk_path().equals(path)) {
-          listener->parse_value(value);
-        }
+/// Loop through received updates and process them.
+void WSClient::process_received_updates() {
+  SKListener::take_semaphore();
+
+  const std::vector<SKListener*>& listeners = SKListener::get_listeners();
+
+  take_received_updates_semaphore();
+  while (!received_updates_.empty()) {
+    JsonObject value = received_updates_.front();
+    received_updates_.pop_front();
+    const char* path = value["path"];
+
+    for (size_t i = 0; i < listeners.size(); i++) {
+      SKListener* listener = listeners[i];
+      if (listener->get_sk_path().equals(path)) {
+        listener->parse_value(value);
       }
     }
   }
+  release_received_updates_semaphore();
+
+  SKListener::release_semaphore();
 }
 
 void WSClient::on_receive_put(DynamicJsonDocument& message) {
   // Process PUT requests...
   JsonArray puts = message["put"];
-  size_t responseCount = 0;
+  size_t response_count = 0;
   for (size_t i = 0; i < puts.size(); i++) {
-    JsonObject put = puts[i];
-    const char* path = put["path"];
-    String strVal = put["value"].as<String>();
+    JsonObject value = puts[i];
+    const char* path = value["path"];
+    String strVal = value["value"].as<String>();
     debugD("Received PUT request for path %s (value %s)\n", path,
            strVal.c_str());
+
+    SKListener::take_semaphore();
     const std::vector<SKPutListener*>& listeners =
         SKPutListener::get_listeners();
     for (size_t i = 0; i < listeners.size(); i++) {
       SKPutListener* listener = listeners[i];
       if (listener->get_sk_path().equals(path)) {
-        listener->parse_value(put);
-        responseCount++;
+        take_received_updates_semaphore();
+        received_updates_.push_back(value);
+        release_received_updates_semaphore();
+        response_count++;
       }
     }
+    SKListener::release_semaphore();
 
-    // Send back a request reasponse...
-    DynamicJsonDocument putResponse(512);
-    putResponse["requestId"] = message["requestId"];
-    if (responseCount == puts.size()) {
+    // Send back a request response...
+    DynamicJsonDocument put_response(512);
+    put_response["requestId"] = message["requestId"];
+    if (response_count == puts.size()) {
       // We found a response for every PUT request
-      putResponse["state"] = "COMPLETED";
-      putResponse["statusCode"] = 200;
+      put_response["state"] = "COMPLETED";
+      put_response["statusCode"] = 200;
     } else {
       // One or more requests did not have a matching path
-      putResponse["state"] = "FAILED";
-      putResponse["statusCode"] = 405;
+      put_response["state"] = "FAILED";
+      put_response["statusCode"] = 405;
     }
-    String responseTxt;
-    serializeJson(putResponse, responseTxt);
-    debugD("Replying to PUT request with %s", responseTxt.c_str());
-    this->client_.sendTXT(responseTxt);
+    String response_text;
+    serializeJson(put_response, response_text);
+    debugD("Replying to PUT request with %s", response_text.c_str());
+    this->client_.sendTXT(response_text);
   }
 }
 

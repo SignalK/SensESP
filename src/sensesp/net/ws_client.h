@@ -92,6 +92,19 @@ class WSClient : public Configurable,
   WebSocketsClient client_;
   SKDeltaQueue* sk_delta_queue_;
   ObservableValue<int> delta_count_producer_ = 0;
+
+  SemaphoreHandle_t received_updates_semaphore_ = xSemaphoreCreateRecursiveMutex();
+  std::list<JsonObject> received_updates_;
+
+  bool take_received_updates_semaphore(unsigned long int timeout_ms = 0) {
+    if (timeout_ms == 0) {
+      return xSemaphoreTake(received_updates_semaphore_, portMAX_DELAY) == pdTRUE;
+    } else {
+      return xSemaphoreTake(received_updates_semaphore_, timeout_ms) == pdTRUE;
+    }
+  }
+  void release_received_updates_semaphore() { xSemaphoreGive(received_updates_semaphore_); }
+
   void connect_loop();
   void test_token(const String host, const uint16_t port);
   void send_access_request(const String host, const uint16_t port);
@@ -100,6 +113,8 @@ class WSClient : public Configurable,
   void connect_ws(const String host, const uint16_t port);
   void subscribe_listeners();
   bool get_mdns_service(String& server_address, uint16_t& server_port);
+
+  void process_received_updates();
 
   String get_connection_status();
 };
