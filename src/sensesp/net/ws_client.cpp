@@ -18,6 +18,15 @@ WSClient* ws_client;
 
 static const char* kRequestPermission = "readwrite";
 
+/**
+ * @brief WebSocket event handler.
+ *
+ * This function will be called in the websocket task.
+ *
+ * @param type
+ * @param payload
+ * @param length
+ */
 void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
   switch (type) {
     case WStype_DISCONNECTED:
@@ -77,6 +86,12 @@ void WSClient::connect_loop() {
   }
 }
 
+/**
+ * @brief Called when the websocket connection is disconnected.
+ *
+ * This method is called in the websocket task context.
+ *
+ */
 void WSClient::on_disconnected() {
   if (this->connection_state_ == WSConnectionState::kWSConnecting &&
       server_detected_ && !token_test_success_) {
@@ -91,11 +106,24 @@ void WSClient::on_disconnected() {
   server_detected_ = false;
 }
 
+/**
+ * @brief Called when the websocket connection encounters an error.
+ *
+ * Called in the websocket task context.
+ *
+ */
 void WSClient::on_error() {
   this->connection_state_ = WSConnectionState::kWSDisconnected;
   debugW("Websocket client error.");
 }
 
+/**
+ * @brief Called when the websocket connection is established.
+ *
+ * Called in the websocket task context.
+ *
+ * @param payload
+ */
 void WSClient::on_connected(uint8_t* payload) {
   this->connection_state_ = WSConnectionState::kWSConnected;
   this->sk_delta_queue_->reset_meta_send();
@@ -104,6 +132,12 @@ void WSClient::on_connected(uint8_t* payload) {
   this->subscribe_listeners();
 }
 
+/**
+ * @brief Subscribes the SK delta paths to the websocket.
+ *
+ * Called in the websocket task context.
+ *
+ */
 void WSClient::subscribe_listeners() {
   bool output_available = false;
   DynamicJsonDocument subscription(1024);
@@ -140,6 +174,13 @@ void WSClient::subscribe_listeners() {
   }
 }
 
+/**
+ * @brief Called when the websocket receives a delta.
+ *
+ * Called in the websocket task context.
+ *
+ * @param payload
+ */
 void WSClient::on_receive_delta(uint8_t* payload) {
 #ifdef SIGNALK_PRINT_RCV_DELTA
   debugD("Websocket payload received: %s", (char*)payload);
@@ -166,6 +207,13 @@ void WSClient::on_receive_delta(uint8_t* payload) {
   }
 }
 
+/**
+ * @brief Called when a delta update is received.
+ *
+ * Called in the websocket task context.
+ *
+ * @param message
+ */
 void WSClient::on_receive_updates(DynamicJsonDocument& message) {
   // Process updates from subscriptions...
   JsonArray updates = message["updates"];
@@ -190,7 +238,12 @@ void WSClient::on_receive_updates(DynamicJsonDocument& message) {
   release_received_updates_semaphore();
 }
 
-/// Loop through received updates and process them.
+/**
+ * @brief Loop through the received updates and process them.
+ *
+ * This method is called in the main task context.
+ *
+ */
 void WSClient::process_received_updates() {
   SKListener::take_semaphore();
 
@@ -214,6 +267,13 @@ void WSClient::process_received_updates() {
   SKListener::release_semaphore();
 }
 
+/**
+ * @brief Called when a PUT event is received.
+ *
+ * Called in the websocket task context.
+ *
+ * @param message
+ */
 void WSClient::on_receive_put(DynamicJsonDocument& message) {
   // Process PUT requests...
   JsonArray puts = message["put"];
@@ -258,6 +318,13 @@ void WSClient::on_receive_put(DynamicJsonDocument& message) {
   }
 }
 
+/**
+ * @brief Send some processed data to the websocket.
+ *
+ * Called in the websocket task context.
+ *
+ * @param payload
+ */
 void WSClient::sendTXT(String& payload) {
   if (connection_state_ == WSConnectionState::kWSConnected) {
     this->client_.sendTXT(payload);
