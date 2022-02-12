@@ -43,12 +43,16 @@ class SKListener : virtual public Observable {
 
   static const std::vector<SKListener*>& get_listeners() { return listeners; }
 
+  static bool take_semaphore(unsigned long int timeout_ms = 0);
+  static void release_semaphore();
+
  protected:
   String sk_path;
 
  private:
   static std::vector<SKListener*> listeners;
   int listen_delay;
+  static SemaphoreHandle_t semaphore_;
 };
 
 }  // namespace sensesp
