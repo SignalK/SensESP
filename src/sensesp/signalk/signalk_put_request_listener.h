@@ -29,7 +29,7 @@ class SKPutListener : virtual public Observable {
 
   String& get_sk_path() { return sk_path; }
 
-  virtual void parse_value(JsonObject& put) = 0;
+  virtual void parse_value(const JsonObject& put) = 0;
 
   static const std::vector<SKPutListener*>& get_listeners() {
     return listeners;
@@ -58,7 +58,7 @@ class SKPutRequestListener : public SKPutListener, public ValueProducer<T> {
     }
   }
 
-  void parse_value(JsonObject& put) override {
+  void parse_value(const JsonObject& put) override {
     this->emit(put["value"].as<T>());
   }
 };

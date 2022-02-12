@@ -39,7 +39,7 @@ class SKListener : virtual public Observable {
 
   int get_listen_delay() { return listen_delay; }
 
-  virtual void parse_value(JsonObject& json) {}
+  virtual void parse_value(const JsonObject& json) {}
 
   static const std::vector<SKListener*>& get_listeners() { return listeners; }
 
