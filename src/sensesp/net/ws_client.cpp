@@ -6,6 +6,7 @@
 #include <WiFiClient.h>
 
 #include "Arduino.h"
+#include "elapsedMillis.h"
 #include "sensesp/signalk/signalk_listener.h"
 #include "sensesp/signalk/signalk_put_request.h"
 #include "sensesp/signalk/signalk_put_request_listener.h"
@@ -14,9 +15,35 @@
 
 namespace sensesp {
 
+constexpr int ws_client_task_stack_size = 8192;
+
 WSClient* ws_client;
 
 static const char* kRequestPermission = "readwrite";
+
+void ExecuteWebSocketTask(void* parameter) {
+  elapsedMillis connect_loop_elapsed = 0;
+  elapsedMillis delta_loop_elapsed = 0;
+  elapsedMillis ws_client_loop_elapsed = 0;
+
+  ws_client->connect();
+
+  while (true) {
+    if (connect_loop_elapsed > 2000) {
+      connect_loop_elapsed = 0;
+      ws_client->connect();
+    }
+    if (delta_loop_elapsed > 5) {
+      delta_loop_elapsed = 0;
+      ws_client->send_delta();
+    }
+    if (ws_client_loop_elapsed > 20) {
+      ws_client_loop_elapsed = 0;
+      ws_client->loop();
+    }
+    delay(1);
+  }
+}
 
 /**
  * @brief WebSocket event handler.
@@ -64,7 +91,7 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
   this->connection_state_.attach(
       [this]() { this->emit(this->connection_state_.get()); });
 
-  // process any received updates in the main loop
+  // process any received updates in the main task
   ReactESP::app->onRepeat(1, [this]() { this->process_received_updates(); });
 
   // set the singleton object pointer
@@ -74,10 +101,7 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
 }
 
 void WSClient::start() {
-  ReactESP::app->onDelay(0, [this]() { this->connect(); });
-  ReactESP::app->onRepeat(20, [this]() { this->loop(); });
-  ReactESP::app->onRepeat(5, [this]() { this->send_delta(); });
-  ReactESP::app->onRepeat(10000, [this]() { this->connect_loop(); });
+  xTaskCreate(ExecuteWebSocketTask, "WSClient", ws_client_task_stack_size, this, 1, NULL);
 }
 
 void WSClient::connect_loop() {
@@ -496,9 +520,8 @@ void WSClient::send_access_request(const String server_address,
   save_configuration();
 
   debugD("Polling %s in 5 seconds", polling_href_.c_str());
-  ReactESP::app->onDelay(5000, [this, server_address, server_port, href]() {
-    this->poll_access_request(server_address, server_port, this->polling_href_);
-  });
+  delay(5000);
+  this->poll_access_request(server_address, server_port, this->polling_href_);
 }
 
 void WSClient::poll_access_request(const String server_address,
@@ -524,9 +547,8 @@ void WSClient::poll_access_request(const String server_address,
     String state = doc["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
-      ReactESP::app->onDelay(5000, [this, server_address, server_port, href]() {
-        this->poll_access_request(server_address, server_port, href);
-      });
+      delay(5000);
+      this->poll_access_request(server_address, server_port, href);
       return;
     } else if (state == "COMPLETED") {
       JsonObject access_req = doc["accessRequest"];
@@ -546,9 +568,7 @@ void WSClient::poll_access_request(const String server_address,
         String token = access_req["token"];
         auth_token_ = token;
         save_configuration();
-        ReactESP::app->onDelay(0, [this, server_address, server_port]() {
-          this->connect_ws(server_address, server_port);
-        });
+        this->connect_ws(server_address, server_port);
         return;
       }
     }

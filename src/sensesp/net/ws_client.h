@@ -88,11 +88,17 @@ class WSClient : public Configurable,
   UILambdaOutput<String>* sk_server_connection_ = new UILambdaOutput<String>("SK connection status", [this]() { return this->get_connection_status();});
 
   TaskQueueProducer<WSConnectionState> connection_state_ =
+      TaskQueueProducer<WSConnectionState>(WSConnectionState::kWSDisconnected);
+
+  /// task_connection_state is used to track the internal task state which might
+  /// be out of sync with the published connection state.
+  WSConnectionState task_connection_state_ =
       WSConnectionState::kWSDisconnected;
+
   WiFiClient wifi_client_;
   WebSocketsClient client_;
   SKDeltaQueue* sk_delta_queue_;
-  TaskQueueProducer<int> delta_count_producer_ = 0;
+  TaskQueueProducer<int> delta_count_producer_ = TaskQueueProducer<int>(0);
 
   SemaphoreHandle_t received_updates_semaphore_ = xSemaphoreCreateRecursiveMutex();
   std::list<JsonObject> received_updates_;
@@ -118,10 +124,11 @@ class WSClient : public Configurable,
   void process_received_updates();
 
   void set_connection_state(WSConnectionState state) {
+    task_connection_state_ = state;
     connection_state_.set(state);
   }
   WSConnectionState get_connection_state() {
-    return connection_state_.get();
+    return task_connection_state_;
   }
 
   String get_connection_status();
