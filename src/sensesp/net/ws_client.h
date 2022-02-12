@@ -116,6 +116,13 @@ class WSClient : public Configurable,
 
   void process_received_updates();
 
+  void set_connection_state(WSConnectionState state) {
+    connection_state_.set(state);
+  }
+  WSConnectionState get_connection_state() {
+    return connection_state_.get();
+  }
+
   String get_connection_status();
 };
 
