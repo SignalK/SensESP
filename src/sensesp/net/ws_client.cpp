@@ -101,7 +101,8 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
 }
 
 void WSClient::start() {
-  xTaskCreate(ExecuteWebSocketTask, "WSClient", ws_client_task_stack_size, this, 1, NULL);
+  xTaskCreate(ExecuteWebSocketTask, "WSClient", ws_client_task_stack_size, this,
+              1, NULL);
 }
 
 void WSClient::connect_loop() {
