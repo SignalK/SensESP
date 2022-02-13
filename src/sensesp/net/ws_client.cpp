@@ -367,9 +367,6 @@ bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
 }
 
 void WSClient::connect() {
-  debugI("WSClient websocket connect attempt (state=%d)",
-         get_connection_state());
-
   if (get_connection_state() != WSConnectionState::kWSDisconnected) {
     return;
   }
