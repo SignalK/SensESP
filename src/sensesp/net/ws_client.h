@@ -9,6 +9,7 @@
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
+#include "sensesp/system/task_queue_producer.h"
 #include "sensesp/system/startable.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp/system/ui_output.h"
@@ -86,12 +87,12 @@ class WSClient : public Configurable,
   UILambdaOutput<uint16_t>* sk_server_port_property_ = new UILambdaOutput<uint16_t>("SK server port", [this]() { return this->server_port_;});
   UILambdaOutput<String>* sk_server_connection_ = new UILambdaOutput<String>("SK connection status", [this]() { return this->get_connection_status();});
 
-  ObservableValue<WSConnectionState> connection_state_ =
+  TaskQueueProducer<WSConnectionState> connection_state_ =
       WSConnectionState::kWSDisconnected;
   WiFiClient wifi_client_;
   WebSocketsClient client_;
   SKDeltaQueue* sk_delta_queue_;
-  ObservableValue<int> delta_count_producer_ = 0;
+  TaskQueueProducer<int> delta_count_producer_ = 0;
 
   SemaphoreHandle_t received_updates_semaphore_ = xSemaphoreCreateRecursiveMutex();
   std::list<JsonObject> received_updates_;
