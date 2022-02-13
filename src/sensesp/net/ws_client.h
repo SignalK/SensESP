@@ -11,7 +11,6 @@
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/startable.h"
 #include "sensesp/system/task_queue_producer.h"
-#include "sensesp/system/ui_output.h"
 #include "sensesp/system/valueproducer.h"
 
 namespace sensesp {

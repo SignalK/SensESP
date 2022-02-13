@@ -223,7 +223,9 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto pages = json_doc.createNestedArray("Pages");
   auto config = json_doc.createNestedArray("Config");
 
-  for(auto property = ui_outputs.begin(); property != ui_outputs.end(); ++property)
+  auto ui_outputs = UIOutputBase::get_ui_outputs();
+
+  for(auto property = ui_outputs->begin(); property != ui_outputs->end(); ++property)
   {
     property->second->set_json(properties);
   }

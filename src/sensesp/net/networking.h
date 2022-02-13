@@ -12,7 +12,6 @@
 #include "sensesp/system/resettable.h"
 #include "sensesp/system/startable.h"
 #include "sensesp/system/valueproducer.h"
-#include "sensesp/system/ui_output.h"
 
 namespace sensesp {
 
