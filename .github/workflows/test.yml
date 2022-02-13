@@ -18,6 +18,7 @@ jobs:
           - examples/rpm_counter.cpp
           - examples/async_repeat_sensor.cpp
           - examples/repeat_sensor_analog_input.cpp
+          - examples/freertos_tasks.cpp
         target_device:
           - esp32dev
     steps:
