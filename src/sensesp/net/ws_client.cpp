@@ -253,7 +253,6 @@ void WSClient::on_receive_updates(DynamicJsonDocument& message) {
       JsonObject value = values[vi];
 
       const char* path = value["path"];
-      debugD("Got update of value %s\n", path);
 
       // push all values into a separate list for processing
       // in the main task
@@ -307,8 +306,6 @@ void WSClient::on_receive_put(DynamicJsonDocument& message) {
     JsonObject value = puts[i];
     const char* path = value["path"];
     String strVal = value["value"].as<String>();
-    debugD("Received PUT request for path %s (value %s)\n", path,
-           strVal.c_str());
 
     SKListener::take_semaphore();
     const std::vector<SKPutListener*>& listeners =
@@ -338,7 +335,6 @@ void WSClient::on_receive_put(DynamicJsonDocument& message) {
     }
     String response_text;
     serializeJson(put_response, response_text);
-    debugD("Replying to PUT request with %s", response_text.c_str());
     this->client_.sendTXT(response_text);
   }
 }
@@ -385,7 +381,7 @@ void WSClient::connect() {
     return;
   }
 
-  debugD("Initiating websocket connection with server...");
+  debugI("Initiating websocket connection with server...");
 
   set_connection_state(WSConnectionState::kWSAuthorizing);
   String server_address = this->server_address_;
@@ -445,7 +441,6 @@ void WSClient::test_token(const String server_address,
     if (payload.length() > 0) {
       debugD("Returned payload (length %d) is: ", payload.length());
       debugD("%s", payload.c_str());
-      debugD("End of payload output");
     } else {
       debugD("Returned payload is empty");
     }
@@ -520,7 +515,6 @@ void WSClient::send_access_request(const String server_address,
   polling_href_ = href;
   save_configuration();
 
-  debugD("Polling %s in 5 seconds", polling_href_.c_str());
   delay(5000);
   this->poll_access_request(server_address, server_port, this->polling_href_);
 }
