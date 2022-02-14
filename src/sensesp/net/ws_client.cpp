@@ -479,10 +479,13 @@ void WSClient::send_access_request(const String server_address,
   String json_req = "";
   serializeJson(doc, json_req);
 
+  debugD("Access request: %s", json_req.c_str());
+
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/access/requests";
+  debugD("Access request url: %s", url.c_str());
   http.begin(wifi_client_, url);
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(json_req);
