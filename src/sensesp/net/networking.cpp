@@ -80,6 +80,8 @@ void Networking::wifi_station_connected() {
   debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
          WiFi.RSSI());
   debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
+  debugI("Default route: %s", WiFi.gatewayIP().toString().c_str());
+  debugI("DNS server: %s", WiFi.dnsIP().toString().c_str());
   this->emit(WifiState::kWifiConnectedToAP);
 }
 
