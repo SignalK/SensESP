@@ -425,10 +425,11 @@ void WSClient::test_token(const String server_address,
   HTTPClient http;
 
   String url =
-      String("http://") + server_address + ":" + server_port + "/signalk/";
+      String("http://") + server_address + ":" + server_port + "/signalk/v1/stream";
   debugD("Testing token with url %s", url.c_str());
   http.begin(wifi_client_, url);
-  String full_token = String("JWT ") + auth_token_;
+  String full_token = String("Bearer ") + auth_token_;
+  debugD("Authorization: %s", full_token.c_str());
   http.addHeader("Authorization", full_token.c_str());
   int httpCode = http.GET();
   if (httpCode > 0) {
@@ -441,8 +442,9 @@ void WSClient::test_token(const String server_address,
     } else {
       debugD("Returned payload is empty");
     }
-    if (httpCode == 200) {
-      // our token is valid, go ahead and connect
+    if (httpCode == 426) {
+      // HTTP status 426 is "Upgrade Required", which is the expected
+      // response for a websocket connection.
       debugD("Attempting to connect to Signal K Websocket...");
       server_detected_ = true;
       token_test_success_ = true;
@@ -588,7 +590,7 @@ void WSClient::connect_ws(const String host, const uint16_t port) {
   set_connection_state(WSConnectionState::kWSConnecting);
   this->client_.begin(host, port, path);
   this->client_.onEvent(webSocketClientEvent);
-  String full_token = String("JWT ") + auth_token_;
+  String full_token = String("Bearer ") + auth_token_;
   this->client_.setAuthorization(full_token.c_str());
 }
 
