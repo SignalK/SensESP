@@ -18,7 +18,7 @@ void MDNSDiscovery::start() {
   if (!MDNS.begin(hostname.c_str())) {  // Start the mDNS responder for hostname.local
     debugW("Error setting up mDNS responder");
   } else {
-    debugI("mDNS responder started at %s", hostname);
+    debugI("mDNS responder started for hostname '%s'", hostname.c_str());
   }
   mdns_instance_name_set(hostname.c_str());  // mDNS hostname for ESP32
   MDNS.addService("http", "tcp", 80);
