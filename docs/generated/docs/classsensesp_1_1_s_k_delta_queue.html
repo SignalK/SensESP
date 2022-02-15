@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -124,6 +124,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:add56c07207ea03780ac30a48ce4f38ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4806971a1a246092b9e6584b325b1678"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_delta_queue.html#a4806971a1a246092b9e6584b325b1678">start</a> () override</td></tr>
 <tr class="separator:a4806971a1a246092b9e6584b325b1678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aacaa1a4bb077c829240a2f165f9a44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_delta_queue.html#a9aacaa1a4bb077c829240a2f165f9a44">take_semaphore</a> (unsigned long int timeout_ms=0)</td></tr>
+<tr class="separator:a9aacaa1a4bb077c829240a2f165f9a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c79cbfdc595e971219eb12e99387ea7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_delta_queue.html#a8c79cbfdc595e971219eb12e99387ea7">release_semaphore</a> ()</td></tr>
+<tr class="separator:a8c79cbfdc595e971219eb12e99387ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_startable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_startable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_startable.html">sensesp::Startable</a></td></tr>
 <tr class="memitem:ac416d7636395d365bcb8a989e53ebffa inherit pub_methods_classsensesp_1_1_startable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_startable.html#ac416d7636395d365bcb8a989e53ebffa">Startable</a> (int priority=0)</td></tr>
 <tr class="separator:ac416d7636395d365bcb8a989e53ebffa inherit pub_methods_classsensesp_1_1_startable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,7 +185,13 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00016">16</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00028">28</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_ac50caa77fc6156ec5f9e08576b7d0850_cgraph.svg" width="395" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -206,11 +216,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00023">23</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00037">37</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a0bbb7e3cafe2088f9ba989f367d76808_cgraph.svg" width="395" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a0bbb7e3cafe2088f9ba989f367d76808_cgraph.svg" width="611" height="150"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">
@@ -237,11 +247,17 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00032">32</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00046">46</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a739868615cbe7d97bdc30b7c42c3e9f9_cgraph.svg" width="395" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a739868615cbe7d97bdc30b7c42c3e9f9_icgraph.svg" width="560" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a739868615cbe7d97bdc30b7c42c3e9f9_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
@@ -263,17 +279,42 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00078">78</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00099">99</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a26dc17fc9fa31804552240f81efa35ac_cgraph.svg" width="100%" height="378"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a26dc17fc9fa31804552240f81efa35ac_cgraph.svg" width="100%" height="454"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a26dc17fc9fa31804552240f81efa35ac_icgraph.svg" width="560" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a26dc17fc9fa31804552240f81efa35ac_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a8c79cbfdc595e971219eb12e99387ea7" name="a8c79cbfdc595e971219eb12e99387ea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c79cbfdc595e971219eb12e99387ea7">&#9670;&nbsp;</a></span>release_semaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKDeltaQueue::release_semaphore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00026">26</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a8c79cbfdc595e971219eb12e99387ea7_icgraph.svg" width="100%" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
@@ -304,6 +345,12 @@ Here is the caller graph for this function:</div>
 <p >Used to indicate that the next update generated by this delta should have metadata added to it. </p>
 
 <p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8h_source.html#l00030">30</a> of file <a class="el" href="signalk__delta__queue_8h_source.html">signalk_delta_queue.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_add56c07207ea03780ac30a48ce4f38ab_cgraph.svg" width="395" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -339,11 +386,37 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_startable.html#abfaf030e62b0240713caa740f6beccb7">sensesp::Startable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00014">14</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00016">16</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a4806971a1a246092b9e6584b325b1678_cgraph.svg" width="611" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a4806971a1a246092b9e6584b325b1678_cgraph.svg" width="100%" height="412"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a9aacaa1a4bb077c829240a2f165f9a44" name="a9aacaa1a4bb077c829240a2f165f9a44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aacaa1a4bb077c829240a2f165f9a44">&#9670;&nbsp;</a></span>take_semaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKDeltaQueue::take_semaphore </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long int&#160;</td>
+          <td class="paramname"><em>timeout_ms</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__delta__queue_8cpp_source.html#l00018">18</a> of file <a class="el" href="signalk__delta__queue_8cpp_source.html">signalk_delta_queue.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_delta_queue_a9aacaa1a4bb077c829240a2f165f9a44_icgraph.svg" width="100%" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 

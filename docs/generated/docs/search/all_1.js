@@ -14,6 +14,7 @@ var searchData=
   ['boolskputrequest_11',['BoolSKPutRequest',['../namespacesensesp.html#ac06cd768219ba797fe0efa390c7cfc8b',1,'sensesp']]],
   ['boolskputrequestlistener_12',['BoolSKPutRequestListener',['../namespacesensesp.html#a93740a1a29894f57068d5a22f2ad01fb',1,'sensesp']]],
   ['booltoint_13',['BoolToInt',['../namespacesensesp.html#a83b6453db4ee358dd8eab3052877e3fd',1,'sensesp']]],
-  ['buttonpress_14',['ButtonPress',['../namespacesensesp.html#a21975f0611649b430d00a47945332495ae331802be240d79912c365112ad41ddb',1,'sensesp']]],
-  ['buttonrelease_15',['ButtonRelease',['../namespacesensesp.html#a21975f0611649b430d00a47945332495ac58a283b80d411649376455b98710c95',1,'sensesp']]]
+  ['build_5finfo_5fui_5foutput_5f_14',['build_info_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#aacec28a85b76ccdf7584be1ff1c5fbb5',1,'sensesp::SensESPApp']]],
+  ['buttonpress_15',['ButtonPress',['../namespacesensesp.html#a21975f0611649b430d00a47945332495ae331802be240d79912c365112ad41ddb',1,'sensesp']]],
+  ['buttonrelease_16',['ButtonRelease',['../namespacesensesp.html#a21975f0611649b430d00a47945332495ac58a283b80d411649376455b98710c95',1,'sensesp']]]
 ];

@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -114,17 +114,38 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9c8f2cbe5fa9fe454d1c2439b27862c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64ae48ad175825edc9248575033eb9f5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a64ae48ad175825edc9248575033eb9f5">start</a> () override</td></tr>
 <tr class="separator:a64ae48ad175825edc9248575033eb9f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4f5e127d60388594ca6caf5e585ed9a"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#ad4f5e127d60388594ca6caf5e585ed9a">get_server_address</a> () const</td></tr>
+<tr class="separator:ad4f5e127d60388594ca6caf5e585ed9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed72f47ba517f202e5ace56eafa5516e"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#aed72f47ba517f202e5ace56eafa5516e">get_server_port</a> () const</td></tr>
+<tr class="separator:aed72f47ba517f202e5ace56eafa5516e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554d1b1a10188d2efd2a44052affa3f1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a554d1b1a10188d2efd2a44052affa3f1">get_configuration</a> (JsonObject &amp;doc) override final</td></tr>
+<tr class="separator:a554d1b1a10188d2efd2a44052affa3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af09488d9cad4f02899af79966f3ec8be"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#af09488d9cad4f02899af79966f3ec8be">set_configuration</a> (const JsonObject &amp;config) override final</td></tr>
+<tr class="separator:af09488d9cad4f02899af79966f3ec8be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade77f3744154179dbbc0ddbd64eb267"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#aade77f3744154179dbbc0ddbd64eb267">get_config_schema</a> () override</td></tr>
+<tr class="separator:aade77f3744154179dbbc0ddbd64eb267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefe5d59e839fde1b57b054b131dcb70c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; int &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#aefe5d59e839fde1b57b054b131dcb70c">get_delta_count_producer</a> ()</td></tr>
+<tr class="separator:aefe5d59e839fde1b57b054b131dcb70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1bb63c716caeb08a5243f8a030735ce"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#ac1bb63c716caeb08a5243f8a030735ce">get_connection_status</a> ()</td></tr>
+<tr class="memdesc:ac1bb63c716caeb08a5243f8a030735ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a String representation of the current connection state.  <a href="classsensesp_1_1_w_s_client.html#ac1bb63c716caeb08a5243f8a030735ce">More...</a><br /></td></tr>
+<tr class="separator:ac1bb63c716caeb08a5243f8a030735ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0922a2adc80807c20f3e6977b18ed079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a0922a2adc80807c20f3e6977b18ed079">on_disconnected</a> ()</td></tr>
+<tr class="memdesc:a0922a2adc80807c20f3e6977b18ed079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the websocket connection is disconnected.  <a href="classsensesp_1_1_w_s_client.html#a0922a2adc80807c20f3e6977b18ed079">More...</a><br /></td></tr>
 <tr class="separator:a0922a2adc80807c20f3e6977b18ed079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57421b2bb0416d40d9c10ac9a2c70118"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a57421b2bb0416d40d9c10ac9a2c70118">on_error</a> ()</td></tr>
+<tr class="memdesc:a57421b2bb0416d40d9c10ac9a2c70118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the websocket connection encounters an error.  <a href="classsensesp_1_1_w_s_client.html#a57421b2bb0416d40d9c10ac9a2c70118">More...</a><br /></td></tr>
 <tr class="separator:a57421b2bb0416d40d9c10ac9a2c70118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b9a87e920e3d907d857f161dcc07e34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a7b9a87e920e3d907d857f161dcc07e34">on_connected</a> (uint8_t *payload)</td></tr>
+<tr class="memdesc:a7b9a87e920e3d907d857f161dcc07e34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the websocket connection is established.  <a href="classsensesp_1_1_w_s_client.html#a7b9a87e920e3d907d857f161dcc07e34">More...</a><br /></td></tr>
 <tr class="separator:a7b9a87e920e3d907d857f161dcc07e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51ade9c1649eb19106207777ab7ca7f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a51ade9c1649eb19106207777ab7ca7f7">on_receive_delta</a> (uint8_t *payload)</td></tr>
+<tr class="memdesc:a51ade9c1649eb19106207777ab7ca7f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the websocket receives a delta.  <a href="classsensesp_1_1_w_s_client.html#a51ade9c1649eb19106207777ab7ca7f7">More...</a><br /></td></tr>
 <tr class="separator:a51ade9c1649eb19106207777ab7ca7f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8aa28c06a5ab66981a3be092ef322705"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a8aa28c06a5ab66981a3be092ef322705">on_receive_updates</a> (DynamicJsonDocument &amp;message)</td></tr>
+<tr class="memdesc:a8aa28c06a5ab66981a3be092ef322705"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a delta update is received.  <a href="classsensesp_1_1_w_s_client.html#a8aa28c06a5ab66981a3be092ef322705">More...</a><br /></td></tr>
 <tr class="separator:a8aa28c06a5ab66981a3be092ef322705"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3b6acb41e15e96d05107433c7e92045"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#ae3b6acb41e15e96d05107433c7e92045">on_receive_put</a> (DynamicJsonDocument &amp;message)</td></tr>
+<tr class="memdesc:ae3b6acb41e15e96d05107433c7e92045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a PUT event is received.  <a href="classsensesp_1_1_w_s_client.html#ae3b6acb41e15e96d05107433c7e92045">More...</a><br /></td></tr>
 <tr class="separator:ae3b6acb41e15e96d05107433c7e92045"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcf72e6105190db47956fc9a2ead87b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#abcf72e6105190db47956fc9a2ead87b9">connect</a> ()</td></tr>
 <tr class="separator:abcf72e6105190db47956fc9a2ead87b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,21 +158,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5553fc62b2382a529d1ff86f219ea7c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a5553fc62b2382a529d1ff86f219ea7c5">send_delta</a> ()</td></tr>
 <tr class="separator:a5553fc62b2382a529d1ff86f219ea7c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8beb3aff4ca6e75a2c49b808cc95f2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#ae8beb3aff4ca6e75a2c49b808cc95f2a">sendTXT</a> (String &amp;payload)</td></tr>
+<tr class="memdesc:ae8beb3aff4ca6e75a2c49b808cc95f2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send some processed data to the websocket.  <a href="classsensesp_1_1_w_s_client.html#ae8beb3aff4ca6e75a2c49b808cc95f2a">More...</a><br /></td></tr>
 <tr class="separator:ae8beb3aff4ca6e75a2c49b808cc95f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4f5e127d60388594ca6caf5e585ed9a"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#ad4f5e127d60388594ca6caf5e585ed9a">get_server_address</a> () const</td></tr>
-<tr class="separator:ad4f5e127d60388594ca6caf5e585ed9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed72f47ba517f202e5ace56eafa5516e"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#aed72f47ba517f202e5ace56eafa5516e">get_server_port</a> () const</td></tr>
-<tr class="separator:aed72f47ba517f202e5ace56eafa5516e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15b51edea69030c6a3109f4457dea0c4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacesensesp.html#a80ea75be3339693d942aeca17329641f">WSConnectionState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a15b51edea69030c6a3109f4457dea0c4">get_connection_state</a> () const</td></tr>
-<tr class="separator:a15b51edea69030c6a3109f4457dea0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a554d1b1a10188d2efd2a44052affa3f1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#a554d1b1a10188d2efd2a44052affa3f1">get_configuration</a> (JsonObject &amp;doc) override final</td></tr>
-<tr class="separator:a554d1b1a10188d2efd2a44052affa3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af09488d9cad4f02899af79966f3ec8be"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#af09488d9cad4f02899af79966f3ec8be">set_configuration</a> (const JsonObject &amp;config) override final</td></tr>
-<tr class="separator:af09488d9cad4f02899af79966f3ec8be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aade77f3744154179dbbc0ddbd64eb267"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#aade77f3744154179dbbc0ddbd64eb267">get_config_schema</a> () override</td></tr>
-<tr class="separator:aade77f3744154179dbbc0ddbd64eb267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefe5d59e839fde1b57b054b131dcb70c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; int &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_w_s_client.html#aefe5d59e839fde1b57b054b131dcb70c">get_delta_count_producer</a> ()</td></tr>
-<tr class="separator:aefe5d59e839fde1b57b054b131dcb70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
 <tr class="memitem:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b">Configurable</a> (String config_path)</td></tr>
 <tr class="separator:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -251,7 +259,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00041">41</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00077">77</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -277,11 +285,11 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00245">245</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00369">369</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_abcf72e6105190db47956fc9a2ead87b9_icgraph.svg" width="344" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_abcf72e6105190db47956fc9a2ead87b9_icgraph.svg" width="615" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -313,7 +321,7 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a2a0b1727f0e7fca0730381e030360a1a">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00544">544</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00664">664</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 
 </div>
 </div>
@@ -344,34 +352,29 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a7785e86a2e662ff0291f7a6fb043ea91">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00510">510</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00630">630</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a15b51edea69030c6a3109f4457dea0c4" name="a15b51edea69030c6a3109f4457dea0c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15b51edea69030c6a3109f4457dea0c4">&#9670;&nbsp;</a></span>get_connection_state()</h2>
+<a id="ac1bb63c716caeb08a5243f8a030735ce" name="ac1bb63c716caeb08a5243f8a030735ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1bb63c716caeb08a5243f8a030735ce">&#9670;&nbsp;</a></span>get_connection_status()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespacesensesp.html#a80ea75be3339693d942aeca17329641f">WSConnectionState</a> sensesp::WSClient::get_connection_state </td>
+          <td class="memname">String sensesp::WSClient::get_connection_status </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00059">59</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
+<p>Get a String representation of the current connection state. </p>
+<dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00705">705</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 
 </div>
 </div>
@@ -397,8 +400,9 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Return a delta update <a class="el" href="classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a> that produces the number of sent deltas (ordinarily always 1) </p>
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00071">71</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00053">53</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -431,7 +435,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00057">57</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00042">42</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
 
 </div>
 </div>
@@ -458,7 +462,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00058">58</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8h_source.html#l00043">43</a> of file <a class="el" href="ws__client_8h_source.html">ws_client.h</a>.</p>
 
 </div>
 </div>
@@ -477,7 +481,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00487">487</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00607">607</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 
 </div>
 </div>
@@ -496,11 +500,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00480">480</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00600">600</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a37c79af799d21e51d238f40d00e49ceb_icgraph.svg" width="368" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a37c79af799d21e51d238f40d00e49ceb_icgraph.svg" width="639" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -522,11 +526,20 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00096">96</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p>Called when the websocket connection is established. </p>
+<p >Called in the websocket task context.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">payload</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00152">152</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a7b9a87e920e3d907d857f161dcc07e34_cgraph.svg" width="370" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a7b9a87e920e3d907d857f161dcc07e34_cgraph.svg" width="586" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">
@@ -553,7 +566,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00077">77</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p>Called when the websocket connection is disconnected. </p>
+<p >This method is called in the websocket task context. </p>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00120">120</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -584,7 +600,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00091">91</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p>Called when the websocket connection encounters an error. </p>
+<p >Called in the websocket task context. </p>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00140">140</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -610,11 +629,20 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00133">133</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p>Called when the websocket receives a delta. </p>
+<p >Called in the websocket task context.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">payload</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00209">209</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a51ade9c1649eb19106207777ab7ca7f7_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a51ade9c1649eb19106207777ab7ca7f7_cgraph.svg" width="100%" height="557"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <div class="dynheader">
@@ -642,11 +670,20 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00186">186</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p>Called when a PUT event is received. </p>
+<p >Called in the websocket task context.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00301">301</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_ae3b6acb41e15e96d05107433c7e92045_cgraph.svg" width="366" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_ae3b6acb41e15e96d05107433c7e92045_cgraph.svg" width="366" height="248"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">
@@ -674,13 +711,16 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00159">159</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a8aa28c06a5ab66981a3be092ef322705_cgraph.svg" width="346" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
+<p>Called when a delta update is received. </p>
+<p >Called in the websocket task context.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00242">242</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -705,7 +745,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00491">491</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00611">611</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 
 </div>
 </div>
@@ -724,17 +764,17 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00498">498</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00618">618</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a5553fc62b2382a529d1ff86f219ea7c5_cgraph.svg" width="100%" height="410"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a5553fc62b2382a529d1ff86f219ea7c5_cgraph.svg" width="100%" height="459"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a5553fc62b2382a529d1ff86f219ea7c5_icgraph.svg" width="344" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a5553fc62b2382a529d1ff86f219ea7c5_icgraph.svg" width="615" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -755,9 +795,18 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Sends the specified payload to the server over the websocket this client is connected to. If no connection currently exist, the call is safely ignored. </p>
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00225">225</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p>Send some processed data to the websocket. </p>
+<p >Sends the specified payload to the server over the websocket this client is connected to. If no connection currently exist, the call is safely ignored.</p>
+<p >Called in the websocket task context.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">payload</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00349">349</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -794,7 +843,7 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a0deaa5b717cd0f60d0105835cd6b595a">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00552">552</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00672">672</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 
 </div>
 </div>
@@ -824,11 +873,11 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_startable.html#abfaf030e62b0240713caa740f6beccb7">sensesp::Startable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00064">64</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00103">103</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a64ae48ad175825edc9248575033eb9f5_cgraph.svg" width="100%" height="473"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_w_s_client_a64ae48ad175825edc9248575033eb9f5_cgraph.svg" width="100%" height="522"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 

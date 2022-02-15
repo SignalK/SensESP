@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -351,6 +351,9 @@ it must have &lt;tt&gt;units&lt;/tt&gt;". Thus, any paths that you output that a
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_system_status_led.html">SystemStatusLed</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consumes the networking and websocket states and delta counts and updates the device LED accordingly. Inherit this class and override the methods to customize the behavior.  <a href="classsensesp_1_1_system_status_led.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Producer class that works across task boundaries.  <a href="classsensesp_1_1_task_queue_producer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_text_to_truth.html">TextToTruth</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consumes a string and outputs boolean "true" if the text represents a human readable version of "true".  <a href="classsensesp_1_1_text_to_truth.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -542,7 +545,10 @@ Functions</h2></td></tr>
 <tr class="separator:aaf3e860cdeae5f7452ecac2b923439d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb4bd018d7b40883280f446f3112b73d"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#afb4bd018d7b40883280f446f3112b73d">get_property_row</a> (String key, String title, bool readonly)</td></tr>
 <tr class="separator:afb4bd018d7b40883280f446f3112b73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a922a4380d70b3a01a7e117644805de09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a922a4380d70b3a01a7e117644805de09">ExecuteWebSocketTask</a> (void *parameter)</td></tr>
+<tr class="separator:a922a4380d70b3a01a7e117644805de09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f37392d0637be5754c86b87b263d0d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a4f37392d0637be5754c86b87b263d0d3">webSocketClientEvent</a> (WStype_t type, uint8_t *payload, size_t length)</td></tr>
+<tr class="memdesc:a4f37392d0637be5754c86b87b263d0d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">WebSocket event handler.  <a href="namespacesensesp.html#a4f37392d0637be5754c86b87b263d0d3">More...</a><br /></td></tr>
 <tr class="separator:a4f37392d0637be5754c86b87b263d0d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af967e4af8221a3bf2d5fd79522ada711"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:af967e4af8221a3bf2d5fd79522ada711"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#af967e4af8221a3bf2d5fd79522ada711">connect_system_info_sensor</a> (<a class="el" href="classsensesp_1_1_sensor_t.html">SensorT</a>&lt; T &gt; *sensor, String prefix, String name)</td></tr>
@@ -579,9 +585,11 @@ Variables</h2></td></tr>
 <tr class="separator:a400482a88888fb760a3905b036bc101d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad2887cc9dde673d6b763a780179c1ef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aad2887cc9dde673d6b763a780179c1ef">should_save_config</a> = false</td></tr>
 <tr class="separator:aad2887cc9dde673d6b763a780179c1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e1fbe9a6800a64f87c85f5bc364aed6"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2e1fbe9a6800a64f87c85f5bc364aed6">ws_client_task_stack_size</a> = 8192</td></tr>
+<tr class="separator:a2e1fbe9a6800a64f87c85f5bc364aed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_w_s_client.html">WSClient</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a01c9e413ed693e0b956363d0b2c5a26e">ws_client</a></td></tr>
 <tr class="separator:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.1.1&quot;</td></tr>
+<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.2.0&quot;</td></tr>
 <tr class="separator:a415d47efb7e756b1be52067ac1792c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc35a8f1394e257344015e4042bc7d1"><td class="memItemLeft" align="right" valign="top">ReactESP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">app</a></td></tr>
 <tr class="separator:a2bc35a8f1394e257344015e4042bc7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -603,8 +611,8 @@ Variables</h2></td></tr>
 <tr class="separator:a048a12a0033281a7ea316123fec959f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad205805904dd5fd707bf89379a37d29d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad205805904dd5fd707bf89379a37d29d">ws_authorizing_pattern</a> [] = {200, 200, <a class="el" href="led__blinker_8h.html#ad81bcd446e2fd6404bb991a66217348b">PATTERN_END</a>}</td></tr>
 <tr class="separator:ad205805904dd5fd707bf89379a37d29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa01e83386efacaf36f7b13a7b677318"><td class="memItemLeft" align="right" valign="top">std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#afa01e83386efacaf36f7b13a7b677318">ui_outputs</a></td></tr>
-<tr class="separator:afa01e83386efacaf36f7b13a7b677318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3569f86651e88333a4dc211de64bf44"><td class="memItemLeft" align="right" valign="top">std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44">ui_outputs</a></td></tr>
+<tr class="separator:ad3569f86651e88333a4dc211de64bf44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a018643e365493945bdfa43db85b03fb3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structsensesp_1_1_param_info.html">ParamInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a018643e365493945bdfa43db85b03fb3">hysteresis_param_info</a> [4]</td></tr>
 <tr class="separator:a018643e365493945bdfa43db85b03fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaa007a16d5fc4ce1651bb0fc28f8be9"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aaaa007a16d5fc4ce1651bb0fc28f8be9">kPositionInvalidAltitude</a> = std::numeric_limits&lt;float&gt;::lowest()</td></tr>
@@ -1429,7 +1437,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410" name="a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410"></a>kWifiManagerActivated&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="networking_8h_source.html#l00019">19</a> of file <a class="el" href="networking_8h_source.html">networking.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8h_source.html#l00018">18</a> of file <a class="el" href="networking_8h_source.html">networking.h</a>.</p>
 
 </div>
 </div>
@@ -1516,6 +1524,38 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a922a4380d70b3a01a7e117644805de09" name="a922a4380d70b3a01a7e117644805de09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a922a4380d70b3a01a7e117644805de09">&#9670;&nbsp;</a></span>ExecuteWebSocketTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::ExecuteWebSocketTask </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>parameter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00024">24</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="namespacesensesp_a922a4380d70b3a01a7e117644805de09_cgraph.svg" width="100%" height="522"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_a922a4380d70b3a01a7e117644805de09_icgraph.svg" width="424" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 <a id="a270290236513f91972b435ad45c4f70b" name="a270290236513f91972b435ad45c4f70b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a270290236513f91972b435ad45c4f70b">&#9670;&nbsp;</a></span>generate_uuid4()</h2>
 
@@ -1576,7 +1616,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00149">149</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00151">151</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -1809,6 +1849,12 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00005">5</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_ad936ebc9566baaae0039265987a6ea54_icgraph.svg" width="300" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -1844,7 +1890,18 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00021">21</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p>WebSocket event handler. </p>
+<p >This function will be called in the websocket task.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td></td></tr>
+    <tr><td class="paramname">payload</td><td></td></tr>
+    <tr><td class="paramname">length</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00057">57</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1987,7 +2044,7 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.1.1&quot;</td>
+          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.2.0&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2044,19 +2101,25 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="afa01e83386efacaf36f7b13a7b677318" name="afa01e83386efacaf36f7b13a7b677318"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa01e83386efacaf36f7b13a7b677318">&#9670;&nbsp;</a></span>ui_outputs</h2>
+<a id="ad3569f86651e88333a4dc211de64bf44" name="ad3569f86651e88333a4dc211de64bf44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3569f86651e88333a4dc211de64bf44">&#9670;&nbsp;</a></span>ui_outputs</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a> * &gt; sensesp::ui_outputs</td>
+          <td class="memname">std::map&lt;String, <a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a>*&gt; sensesp::ui_outputs</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ui__output_8cpp_source.html#l00003">3</a> of file <a class="el" href="ui__output_8cpp_source.html">ui_output.cpp</a>.</p>
 
 </div>
 </div>
@@ -2136,7 +2199,31 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00017">17</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00020">20</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2e1fbe9a6800a64f87c85f5bc364aed6" name="a2e1fbe9a6800a64f87c85f5bc364aed6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e1fbe9a6800a64f87c85f5bc364aed6">&#9670;&nbsp;</a></span>ws_client_task_stack_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int sensesp::ws_client_task_stack_size = 8192</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ws__client_8cpp_source.html#l00018">18</a> of file <a class="el" href="ws__client_8cpp_source.html">ws_client.cpp</a>.</p>
 
 </div>
 </div>

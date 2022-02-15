@@ -4,7 +4,7 @@ var classsensesp_1_1_w_s_client =
     [ "connect", "classsensesp_1_1_w_s_client.html#abcf72e6105190db47956fc9a2ead87b9", null ],
     [ "get_config_schema", "classsensesp_1_1_w_s_client.html#aade77f3744154179dbbc0ddbd64eb267", null ],
     [ "get_configuration", "classsensesp_1_1_w_s_client.html#a554d1b1a10188d2efd2a44052affa3f1", null ],
-    [ "get_connection_state", "classsensesp_1_1_w_s_client.html#a15b51edea69030c6a3109f4457dea0c4", null ],
+    [ "get_connection_status", "classsensesp_1_1_w_s_client.html#ac1bb63c716caeb08a5243f8a030735ce", null ],
     [ "get_delta_count_producer", "classsensesp_1_1_w_s_client.html#aefe5d59e839fde1b57b054b131dcb70c", null ],
     [ "get_server_address", "classsensesp_1_1_w_s_client.html#ad4f5e127d60388594ca6caf5e585ed9a", null ],
     [ "get_server_port", "classsensesp_1_1_w_s_client.html#aed72f47ba517f202e5ace56eafa5516e", null ],

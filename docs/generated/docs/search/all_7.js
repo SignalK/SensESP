@@ -14,12 +14,13 @@ var searchData=
   ['heatindexeffect_11',['HeatIndexEffect',['../classsensesp_1_1_heat_index_effect.html#aee5e1ba9c7090decf9e8376cfea55da3',1,'sensesp::HeatIndexEffect::HeatIndexEffect()'],['../classsensesp_1_1_heat_index_effect.html',1,'sensesp::HeatIndexEffect']]],
   ['heatindextemperature_12',['HeatIndexTemperature',['../classsensesp_1_1_heat_index_temperature.html#a5da208d4896a5f7f2b2bd2d92fd91beb',1,'sensesp::HeatIndexTemperature::HeatIndexTemperature()'],['../classsensesp_1_1_heat_index_temperature.html',1,'sensesp::HeatIndexTemperature']]],
   ['hostname_5f_13',['hostname_',['../classsensesp_1_1_sens_e_s_p_base_app.html#a5181d8856ce1e4abe9015bafe4ed544c',1,'sensesp::SensESPBaseApp::hostname_()'],['../classsensesp_1_1_sens_e_s_p_base_app_builder.html#a7c8c11c6c664fdd74af187abd86a3171',1,'sensesp::SensESPBaseAppBuilder::hostname_()']]],
-  ['http_5fserver_2ecpp_14',['http_server.cpp',['../http__server_8cpp.html',1,'']]],
-  ['http_5fserver_2eh_15',['http_server.h',['../http__server_8h.html',1,'']]],
-  ['http_5fserver_5f_16',['http_server_',['../classsensesp_1_1_sens_e_s_p_app.html#a7403602b7bdf5c022aed80051c6ab3ad',1,'sensesp::SensESPApp']]],
-  ['http_5fserver_5fport_17',['HTTP_SERVER_PORT',['../http__server_8cpp.html#a4f905ddd4da1a3e205a8935f4babb25b',1,'http_server.cpp']]],
-  ['httpserver_18',['HTTPServer',['../classsensesp_1_1_sens_e_s_p_app.html#adb5f6061831be202d2cc58ebdffa44d5',1,'sensesp::SensESPApp::HTTPServer()'],['../classsensesp_1_1_h_t_t_p_server.html#aaff846f90a54be25ac7135c2952e71ee',1,'sensesp::HTTPServer::HTTPServer()'],['../classsensesp_1_1_h_t_t_p_server.html',1,'sensesp::HTTPServer']]],
-  ['hysteresis_19',['Hysteresis',['../classsensesp_1_1_hysteresis.html#ad66b79a9b0e02ed5d7617e09fb968060',1,'sensesp::Hysteresis::Hysteresis()'],['../classsensesp_1_1_hysteresis.html',1,'sensesp::Hysteresis&lt; IN, OUT &gt;']]],
-  ['hysteresis_2eh_20',['hysteresis.h',['../hysteresis_8h.html',1,'']]],
-  ['hysteresis_5fparam_5finfo_21',['hysteresis_param_info',['../namespacesensesp.html#a018643e365493945bdfa43db85b03fb3',1,'sensesp']]]
+  ['hostname_5fui_5foutput_5f_14',['hostname_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#af2f10914447b3219ae425534a0700f25',1,'sensesp::SensESPApp']]],
+  ['http_5fserver_2ecpp_15',['http_server.cpp',['../http__server_8cpp.html',1,'']]],
+  ['http_5fserver_2eh_16',['http_server.h',['../http__server_8h.html',1,'']]],
+  ['http_5fserver_5f_17',['http_server_',['../classsensesp_1_1_sens_e_s_p_app.html#a7403602b7bdf5c022aed80051c6ab3ad',1,'sensesp::SensESPApp']]],
+  ['http_5fserver_5fport_18',['HTTP_SERVER_PORT',['../http__server_8cpp.html#a4f905ddd4da1a3e205a8935f4babb25b',1,'http_server.cpp']]],
+  ['httpserver_19',['HTTPServer',['../classsensesp_1_1_sens_e_s_p_app.html#adb5f6061831be202d2cc58ebdffa44d5',1,'sensesp::SensESPApp::HTTPServer()'],['../classsensesp_1_1_h_t_t_p_server.html#aaff846f90a54be25ac7135c2952e71ee',1,'sensesp::HTTPServer::HTTPServer()'],['../classsensesp_1_1_h_t_t_p_server.html',1,'sensesp::HTTPServer']]],
+  ['hysteresis_20',['Hysteresis',['../classsensesp_1_1_hysteresis.html#ad66b79a9b0e02ed5d7617e09fb968060',1,'sensesp::Hysteresis::Hysteresis()'],['../classsensesp_1_1_hysteresis.html',1,'sensesp::Hysteresis&lt; IN, OUT &gt;']]],
+  ['hysteresis_2eh_21',['hysteresis.h',['../hysteresis_8h.html',1,'']]],
+  ['hysteresis_5fparam_5finfo_22',['hysteresis_param_info',['../namespacesensesp.html#a018643e365493945bdfa43db85b03fb3',1,'sensesp']]]
 ];

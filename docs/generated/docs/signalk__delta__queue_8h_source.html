@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -113,32 +113,51 @@ $(document).ready(function(){initNavTree('signalk__delta__queue_8h_source.html',
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a0bbb7e3cafe2088f9ba989f367d76808">connect_emitters</a>();</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_delta_queue.html#add56c07207ea03780ac30a48ce4f38ab">   30</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#add56c07207ea03780ac30a48ce4f38ab">reset_meta_send</a>() { this-&gt;meta_sent_ = <span class="keyword">false</span>; }</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a4806971a1a246092b9e6584b325b1678">start</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> max_buffer_size;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  std::list&lt;String&gt; buffer;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">bool</span> meta_sent_;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> get_doc_size_estimate();</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> get_metadata_size_estimate();</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">// Adds Signal K meta data to the specified document</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordtype">void</span> add_metadata(JsonArray updates);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>};</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_delta_queue.html#add56c07207ea03780ac30a48ce4f38ab">   30</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#add56c07207ea03780ac30a48ce4f38ab">reset_meta_send</a>() {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a9aacaa1a4bb077c829240a2f165f9a44">take_semaphore</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    this-&gt;meta_sent_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a8c79cbfdc595e971219eb12e99387ea7">release_semaphore</a>();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  }</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a4806971a1a246092b9e6584b325b1678">start</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a9aacaa1a4bb077c829240a2f165f9a44">take_semaphore</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> timeout_ms = 0);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a8c79cbfdc595e971219eb12e99387ea7">release_semaphore</a>();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> max_buffer_size;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  std::list&lt;String&gt; buffer;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">bool</span> meta_sent_;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> get_doc_size_estimate();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> get_metadata_size_estimate();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  std::size_t get_buffer_size() {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    std::size_t size;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a9aacaa1a4bb077c829240a2f165f9a44">take_semaphore</a>();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    size = buffer.size();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a8c79cbfdc595e971219eb12e99387ea7">release_semaphore</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">return</span> size;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="comment">// Adds Signal K meta data to the specified document</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordtype">void</span> add_metadata(JsonArray updates);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  SemaphoreHandle_t semaphore_ = NULL;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>};</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html">sensesp::SKDeltaQueue</a></div><div class="ttdoc">Signal K delta queue.</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8h_source.html#l00019">signalk_delta_queue.h:19</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a0bbb7e3cafe2088f9ba989f367d76808"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a0bbb7e3cafe2088f9ba989f367d76808">sensesp::SKDeltaQueue::connect_emitters</a></div><div class="ttdeci">void connect_emitters()</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00023">signalk_delta_queue.cpp:23</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a0bbb7e3cafe2088f9ba989f367d76808"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a0bbb7e3cafe2088f9ba989f367d76808">sensesp::SKDeltaQueue::connect_emitters</a></div><div class="ttdeci">void connect_emitters()</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00037">signalk_delta_queue.cpp:37</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a130c4f0ea878551c17809cc8a1b79412"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a130c4f0ea878551c17809cc8a1b79412">sensesp::SKDeltaQueue::SKDeltaQueue</a></div><div class="ttdeci">SKDeltaQueue(unsigned int max_buffer_size=20)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00011">signalk_delta_queue.cpp:11</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a26dc17fc9fa31804552240f81efa35ac"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a26dc17fc9fa31804552240f81efa35ac">sensesp::SKDeltaQueue::get_delta</a></div><div class="ttdeci">void get_delta(String &amp;output)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00078">signalk_delta_queue.cpp:78</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a4806971a1a246092b9e6584b325b1678"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a4806971a1a246092b9e6584b325b1678">sensesp::SKDeltaQueue::start</a></div><div class="ttdeci">virtual void start() override</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00014">signalk_delta_queue.cpp:14</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a739868615cbe7d97bdc30b7c42c3e9f9"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a739868615cbe7d97bdc30b7c42c3e9f9">sensesp::SKDeltaQueue::data_available</a></div><div class="ttdeci">bool data_available()</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00032">signalk_delta_queue.cpp:32</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_ac50caa77fc6156ec5f9e08576b7d0850"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#ac50caa77fc6156ec5f9e08576b7d0850">sensesp::SKDeltaQueue::append</a></div><div class="ttdeci">void append(const String val)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00016">signalk_delta_queue.cpp:16</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a26dc17fc9fa31804552240f81efa35ac"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a26dc17fc9fa31804552240f81efa35ac">sensesp::SKDeltaQueue::get_delta</a></div><div class="ttdeci">void get_delta(String &amp;output)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00099">signalk_delta_queue.cpp:99</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a4806971a1a246092b9e6584b325b1678"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a4806971a1a246092b9e6584b325b1678">sensesp::SKDeltaQueue::start</a></div><div class="ttdeci">virtual void start() override</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00016">signalk_delta_queue.cpp:16</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a739868615cbe7d97bdc30b7c42c3e9f9"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a739868615cbe7d97bdc30b7c42c3e9f9">sensesp::SKDeltaQueue::data_available</a></div><div class="ttdeci">bool data_available()</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00046">signalk_delta_queue.cpp:46</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a8c79cbfdc595e971219eb12e99387ea7"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a8c79cbfdc595e971219eb12e99387ea7">sensesp::SKDeltaQueue::release_semaphore</a></div><div class="ttdeci">void release_semaphore()</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00026">signalk_delta_queue.cpp:26</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_a9aacaa1a4bb077c829240a2f165f9a44"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#a9aacaa1a4bb077c829240a2f165f9a44">sensesp::SKDeltaQueue::take_semaphore</a></div><div class="ttdeci">bool take_semaphore(unsigned long int timeout_ms=0)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00018">signalk_delta_queue.cpp:18</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_ac50caa77fc6156ec5f9e08576b7d0850"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#ac50caa77fc6156ec5f9e08576b7d0850">sensesp::SKDeltaQueue::append</a></div><div class="ttdeci">void append(const String val)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8cpp_source.html#l00028">signalk_delta_queue.cpp:28</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_add56c07207ea03780ac30a48ce4f38ab"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#add56c07207ea03780ac30a48ce4f38ab">sensesp::SKDeltaQueue::reset_meta_send</a></div><div class="ttdeci">void reset_meta_send()</div><div class="ttdef"><b>Definition:</b> <a href="signalk__delta__queue_8h_source.html#l00030">signalk_delta_queue.h:30</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_startable_html"><div class="ttname"><a href="classsensesp_1_1_startable.html">sensesp::Startable</a></div><div class="ttdoc">Automatic calling of the start() method at startup.</div><div class="ttdef"><b>Definition:</b> <a href="startable_8h_source.html#l00020">startable.h:20</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
