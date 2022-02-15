@@ -40,10 +40,12 @@ This approach emphasized the event-based nature of ReactESP but also looked alie
 Additionally, some use cases might benefit from being able to tweak the details of the `setup()` and `loop()` functions, which is not possible with the lambda function approach.
 
 Therefore, ReactESP v2 was updated to explicitly define the `setup()` and `loop()` functions.
-To update your code, define the `setup()` and `loop()` functions in the `main.cpp` file.
+To update your code, declare a default ReactESP app object and define the `setup()` and `loop()` functions in the `main.cpp` file.
 Then, move the contents of the lambda function into the `setup()` function. `loop()` should only have a call to `app.tick()`:
 
 ```c++
+ReactESP app;
+
 void setup() {
   pinMode(LED_PIN, OUTPUT);
   app.onRepeat(400, [] () {
@@ -64,6 +66,8 @@ All internal SensESP code is now wrapped in a `sensesp` namespace. To account fo
 #include "..."
 
 using namespace sensesp;
+
+ReactESP app;
 
 void setup() {
   ...
