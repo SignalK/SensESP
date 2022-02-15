@@ -2,7 +2,7 @@
 layout: default
 title: Additional Resources
 nav_order: 120
-has_children: true
+has_children: false
 ---
 
 # Additional Resources
