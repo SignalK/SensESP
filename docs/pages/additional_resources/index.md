@@ -26,7 +26,6 @@ If you want to have your own project added to the list, [create an issue](https:
 
 ### Current and Power
 
-- [INA2xx](https://github.com/SensESP/INA2xx): Library for reading one or more of the INA2xx (INA219, INA226, INA3221) current and power sensors
 - [ve.direct_mppt](https://github.com/SensESP/ve.direct_mppt): Library for reading one victron mppt unit via the ve.direct hardware interface into SignalK/SensESP
 
 ### Control and Display Libraries
