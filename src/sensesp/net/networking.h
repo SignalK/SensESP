@@ -12,7 +12,6 @@
 #include "sensesp/system/resettable.h"
 #include "sensesp/system/startable.h"
 #include "sensesp/system/valueproducer.h"
-#include "sensesp/system/ui_output.h"
 
 namespace sensesp {
 
@@ -63,9 +62,7 @@ class Networking : public Configurable,
   String preset_password = "";
   String preset_hostname = "";
   const char* wifi_manager_password_;
-  UILambdaOutput<String>* ssid_ = new UILambdaOutput<String>("SSID", [this]() { return this->ap_ssid; });
-  UIOutput<String>* mac_ = new UIOutput<String>("MAC", WiFi.macAddress());
-  UILambdaOutput<int8_t>* rssi_ = new UILambdaOutput<int8_t>("WiFi Signal Strength", [this]() { return WiFi.RSSI(); });
+
 };
 
 }  // namespace sensesp

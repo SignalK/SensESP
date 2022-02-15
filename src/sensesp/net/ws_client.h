@@ -11,7 +11,6 @@
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/startable.h"
 #include "sensesp/system/task_queue_producer.h"
-#include "sensesp/system/ui_output.h"
 #include "sensesp/system/valueproducer.h"
 
 namespace sensesp {
@@ -54,6 +53,8 @@ class WSClient : public Configurable,
   ValueProducer<int>& get_delta_count_producer() {
     return delta_count_producer_;
   };
+
+  String get_connection_status();
 
   /////////////////////////////////////////////////////////
   // WSClient task methods
@@ -123,18 +124,7 @@ class WSClient : public Configurable,
   /////////////////////////////////////////////////////////
   // main task methods
 
-  UILambdaOutput<String>* sk_server_property_ = new UILambdaOutput<String>(
-      "SK address", [this]() { return this->server_address_; });
-  UILambdaOutput<uint16_t>* sk_server_port_property_ =
-      new UILambdaOutput<uint16_t>("SK server port",
-                                   [this]() { return this->server_port_; });
-  UILambdaOutput<String>* sk_server_connection_ = new UILambdaOutput<String>(
-      "SK connection status",
-      [this]() { return this->get_connection_status(); });
-
   void process_received_updates();
-
-  String get_connection_status();
 
   /////////////////////////////////////////////////////////
   // WSClient task methods

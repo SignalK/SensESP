@@ -15,12 +15,17 @@ namespace sensesp {
 class UIOutputBase : virtual public Observable {
  protected:
   String name_;
+  static std::map<String, UIOutputBase*> ui_outputs_;
 
  public:
   UIOutputBase(String name);
   String& get_name() { return name_; }
 
   virtual void set_json(const JsonObject& obj) {}
+
+  static const std::map<String, UIOutputBase*>* get_ui_outputs() {
+    return &ui_outputs_;
+  }
 };
 
 template <typename T>

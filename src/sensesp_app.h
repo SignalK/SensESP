@@ -23,7 +23,6 @@
 #include "sensesp/system/ui_output.h"
 #include "sensesp_base_app.h"
 
-
 namespace sensesp {
 
 /**
@@ -67,10 +66,7 @@ class SensESPApp : public SensESPBaseApp {
    *
    */
   SensESPApp() : SensESPBaseApp() {
-    ui_build_info_ = new UIOutput<String>("Build at", __DATE__ " " __TIME__);
-    ui_sensesp_version_ = new UIOutput<String>("SenseESP version", kSensESPVersion);
-    ui_hostname_ = new UIOutput<String>("Name");
-    hostname_->connect_to(ui_hostname_);
+    hostname_->connect_to(hostname_ui_output_);
   }
 
   // setters for all constructor arguments
@@ -128,9 +124,26 @@ class SensESPApp : public SensESPBaseApp {
   SKDeltaQueue* sk_delta_queue_;
   WSClient* ws_client_;
 
-  UIOutput<String>* ui_build_info_;
-  UIOutput<String>* ui_sensesp_version_;
-  UIOutput<String>* ui_hostname_;
+  UIOutput<String>* build_info_ui_output_ =
+      new UIOutput<String>("Built at", __DATE__ " " __TIME__);
+  UIOutput<String>* sensesp_version_ui_output_ =
+      new UIOutput<String>("SenseESP version", kSensESPVersion);
+  UIOutput<String>* hostname_ui_output_ = new UIOutput<String>("Name");
+  UIOutput<String>* mac_address_ui_output_ =
+      new UIOutput<String>("MAC", WiFi.macAddress());
+  UILambdaOutput<String>* wifi_ssid_ui_output_ =
+      new UILambdaOutput<String>("SSID", [this]() { return WiFi.SSID(); });
+  UILambdaOutput<int8_t>* wifi_rssi_ui_output_ = new UILambdaOutput<int8_t>(
+      "WiFi signal strength", [this]() { return WiFi.RSSI(); });
+  UILambdaOutput<String>* sk_server_address_ui_output_ = new UILambdaOutput<String>(
+      "SK address", [this]() { return ws_client_->get_server_address(); });
+  UILambdaOutput<uint16_t>* sk_server_port_ui_output_ =
+      new UILambdaOutput<uint16_t>(
+          "SK server port", [this]() { return ws_client_->get_server_port(); });
+  UILambdaOutput<String>* sk_server_connection_ui_output_ =
+      new UILambdaOutput<String>("SK connection status", [this]() {
+        return ws_client_->get_connection_status();
+      });
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
