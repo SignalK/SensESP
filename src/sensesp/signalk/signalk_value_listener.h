@@ -27,7 +27,7 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
     }
   }
 
-  void parse_value(JsonObject& json) override {
+  void parse_value(const JsonObject& json) override {
     this->emit(json["value"].as<T>());
   }
 };

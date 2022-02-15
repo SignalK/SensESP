@@ -10,8 +10,9 @@
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/startable.h"
-#include "sensesp/system/valueproducer.h"
+#include "sensesp/system/task_queue_producer.h"
 #include "sensesp/system/ui_output.h"
+#include "sensesp/system/valueproducer.h"
 
 namespace sensesp {
 
@@ -32,9 +33,31 @@ class WSClient : public Configurable,
                  public Startable,
                  public ValueProducer<WSConnectionState> {
  public:
+  /////////////////////////////////////////////////////////
+  // main task methods
+
   WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
            String server_address, uint16_t server_port);
   virtual void start() override;
+
+  const String get_server_address() const { return server_address_; }
+  const uint16_t get_server_port() const { return server_port_; }
+
+  virtual void get_configuration(JsonObject& doc) override final;
+  virtual bool set_configuration(const JsonObject& config) override final;
+  virtual String get_config_schema() override;
+
+  /**
+   * Return a delta update ValueProducer that produces the number of sent deltas
+   * (ordinarily always 1)
+   */
+  ValueProducer<int>& get_delta_count_producer() {
+    return delta_count_producer_;
+  };
+
+  /////////////////////////////////////////////////////////
+  // WSClient task methods
+
   void on_disconnected();
   void on_error();
   void on_connected(uint8_t* payload);
@@ -54,24 +77,6 @@ class WSClient : public Configurable,
    */
   void sendTXT(String& payload);
 
-  const String get_server_address() const { return server_address_; }
-  const uint16_t get_server_port() const { return server_port_; }
-  const WSConnectionState get_connection_state() const {
-    return connection_state_.get();
-  }
-
-  virtual void get_configuration(JsonObject& doc) override final;
-  virtual bool set_configuration(const JsonObject& config) override final;
-  virtual String get_config_schema() override;
-
-  /*
-   * Return a delta update ValueProducer that produces the number of sent deltas
-   * (ordinarily always 1)
-   */
-  ValueProducer<int>& get_delta_count_producer() {
-    return delta_count_producer_;
-  };
-
  private:
   String server_address_ = "";
   uint16_t server_port_ = 80;
@@ -82,16 +87,58 @@ class WSClient : public Configurable,
   String auth_token_ = NULL_AUTH_TOKEN;
   bool server_detected_ = false;
   bool token_test_success_ = false;
-  UILambdaOutput<String>* sk_server_property_ = new UILambdaOutput<String>("SK address", [this](){ return this->server_address_; });
-  UILambdaOutput<uint16_t>* sk_server_port_property_ = new UILambdaOutput<uint16_t>("SK server port", [this]() { return this->server_port_;});
-  UILambdaOutput<String>* sk_server_connection_ = new UILambdaOutput<String>("SK connection status", [this]() { return this->get_connection_status();});
 
-  ObservableValue<WSConnectionState> connection_state_ =
-      WSConnectionState::kWSDisconnected;
+  TaskQueueProducer<WSConnectionState> connection_state_ =
+      TaskQueueProducer<WSConnectionState>(WSConnectionState::kWSDisconnected);
+
+  /// task_connection_state is used to track the internal task state which might
+  /// be out of sync with the published connection state.
+  WSConnectionState task_connection_state_ = WSConnectionState::kWSDisconnected;
+
   WiFiClient wifi_client_;
   WebSocketsClient client_;
   SKDeltaQueue* sk_delta_queue_;
-  ObservableValue<int> delta_count_producer_ = 0;
+  TaskQueueProducer<int> delta_count_producer_ =
+      TaskQueueProducer<int>(0, 5, 990);
+
+  SemaphoreHandle_t received_updates_semaphore_ =
+      xSemaphoreCreateRecursiveMutex();
+  std::list<JsonObject> received_updates_;
+
+  /////////////////////////////////////////////////////////
+  // methods for all tasks
+
+  bool take_received_updates_semaphore(unsigned long int timeout_ms = 0) {
+    if (timeout_ms == 0) {
+      return xSemaphoreTake(received_updates_semaphore_, portMAX_DELAY) ==
+             pdTRUE;
+    } else {
+      return xSemaphoreTake(received_updates_semaphore_, timeout_ms) == pdTRUE;
+    }
+  }
+  void release_received_updates_semaphore() {
+    xSemaphoreGive(received_updates_semaphore_);
+  }
+
+  /////////////////////////////////////////////////////////
+  // main task methods
+
+  UILambdaOutput<String>* sk_server_property_ = new UILambdaOutput<String>(
+      "SK address", [this]() { return this->server_address_; });
+  UILambdaOutput<uint16_t>* sk_server_port_property_ =
+      new UILambdaOutput<uint16_t>("SK server port",
+                                   [this]() { return this->server_port_; });
+  UILambdaOutput<String>* sk_server_connection_ = new UILambdaOutput<String>(
+      "SK connection status",
+      [this]() { return this->get_connection_status(); });
+
+  void process_received_updates();
+
+  String get_connection_status();
+
+  /////////////////////////////////////////////////////////
+  // WSClient task methods
+
   void connect_loop();
   void test_token(const String host, const uint16_t port);
   void send_access_request(const String host, const uint16_t port);
@@ -101,7 +148,12 @@ class WSClient : public Configurable,
   void subscribe_listeners();
   bool get_mdns_service(String& server_address, uint16_t& server_port);
 
-  String get_connection_status();
+  void set_connection_state(WSConnectionState state) {
+    task_connection_state_ = state;
+    connection_state_.set(state);
+  }
+  WSConnectionState get_connection_state() { return task_connection_state_; }
+
 };
 
 }  // namespace sensesp

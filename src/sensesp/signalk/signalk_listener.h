@@ -39,9 +39,12 @@ class SKListener : virtual public Observable {
 
   int get_listen_delay() { return listen_delay; }
 
-  virtual void parse_value(JsonObject& json) {}
+  virtual void parse_value(const JsonObject& json) {}
 
   static const std::vector<SKListener*>& get_listeners() { return listeners; }
+
+  static bool take_semaphore(unsigned long int timeout_ms = 0);
+  static void release_semaphore();
 
  protected:
   String sk_path;
@@ -49,6 +52,7 @@ class SKListener : virtual public Observable {
  private:
   static std::vector<SKListener*> listeners;
   int listen_delay;
+  static SemaphoreHandle_t semaphore_;
 };
 
 }  // namespace sensesp
