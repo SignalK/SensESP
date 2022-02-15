@@ -18,5 +18,6 @@ var searchData=
   ['enuvector_15',['ENUVector',['../structsensesp_1_1_e_n_u_vector.html',1,'sensesp']]],
   ['error_16',['ERROR',['../classsensesp_1_1_local_debug.html#addd7ddaa7608175e464dc9fb2c33a75b',1,'sensesp::LocalDebug']]],
   ['esp32analogreader_17',['ESP32AnalogReader',['../classsensesp_1_1_e_s_p32_analog_reader.html#a822aca07ca6a90dac5d5852fef21e040',1,'sensesp::ESP32AnalogReader::ESP32AnalogReader()'],['../classsensesp_1_1_e_s_p32_analog_reader.html',1,'sensesp::ESP32AnalogReader']]],
-  ['evenblinker_18',['EvenBlinker',['../classsensesp_1_1_even_blinker.html#a5516f3944507707a0192306db22a61ef',1,'sensesp::EvenBlinker::EvenBlinker()'],['../classsensesp_1_1_even_blinker.html',1,'sensesp::EvenBlinker']]]
+  ['evenblinker_18',['EvenBlinker',['../classsensesp_1_1_even_blinker.html#a5516f3944507707a0192306db22a61ef',1,'sensesp::EvenBlinker::EvenBlinker()'],['../classsensesp_1_1_even_blinker.html',1,'sensesp::EvenBlinker']]],
+  ['executewebsockettask_19',['ExecuteWebSocketTask',['../namespacesensesp.html#a922a4380d70b3a01a7e117644805de09',1,'sensesp']]]
 ];

@@ -11,5 +11,6 @@ var searchData=
   ['enable_5fuptime_5fsensor_8',['enable_uptime_sensor',['../classsensesp_1_1_sens_e_s_p_app_builder.html#aec8b05c9896ddc46d747ffea671dad70',1,'sensesp::SensESPAppBuilder']]],
   ['enable_5fwifi_5fsignal_5fsensor_9',['enable_wifi_signal_sensor',['../classsensesp_1_1_sens_e_s_p_app_builder.html#afabc97d522db0964e161d42e1d54df4e',1,'sensesp::SensESPAppBuilder']]],
   ['esp32analogreader_10',['ESP32AnalogReader',['../classsensesp_1_1_e_s_p32_analog_reader.html#a822aca07ca6a90dac5d5852fef21e040',1,'sensesp::ESP32AnalogReader']]],
-  ['evenblinker_11',['EvenBlinker',['../classsensesp_1_1_even_blinker.html#a5516f3944507707a0192306db22a61ef',1,'sensesp::EvenBlinker']]]
+  ['evenblinker_11',['EvenBlinker',['../classsensesp_1_1_even_blinker.html#a5516f3944507707a0192306db22a61ef',1,'sensesp::EvenBlinker']]],
+  ['executewebsockettask_12',['ExecuteWebSocketTask',['../namespacesensesp.html#a922a4380d70b3a01a7e117644805de09',1,'sensesp']]]
 ];

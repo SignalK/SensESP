@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -118,8 +118,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a99c420883085d955c44c885917ed977f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a221d6f505b0d11726eabf30b5f242ae6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_listener.html#a221d6f505b0d11726eabf30b5f242ae6">get_listen_delay</a> ()</td></tr>
 <tr class="separator:a221d6f505b0d11726eabf30b5f242ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96f9f1855de167f6a5ad582ca0592c55"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_listener.html#a96f9f1855de167f6a5ad582ca0592c55">parse_value</a> (JsonObject &amp;json)</td></tr>
-<tr class="separator:a96f9f1855de167f6a5ad582ca0592c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2842c17e486c8861d8d136f30fd5359b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_listener.html#a2842c17e486c8861d8d136f30fd5359b">parse_value</a> (const JsonObject &amp;json)</td></tr>
+<tr class="separator:a2842c17e486c8861d8d136f30fd5359b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_observable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_observable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_observable.html">sensesp::Observable</a></td></tr>
 <tr class="memitem:a427ed25e82e6ae156743732c2f55a49e inherit pub_methods_classsensesp_1_1_observable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_observable.html#a427ed25e82e6ae156743732c2f55a49e">Observable</a> ()</td></tr>
 <tr class="separator:a427ed25e82e6ae156743732c2f55a49e inherit pub_methods_classsensesp_1_1_observable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,6 +135,10 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5875c60b11cb6b405038b16ef148740"><td class="memItemLeft" align="right" valign="top">static const std::vector&lt; <a class="el" href="classsensesp_1_1_s_k_listener.html">SKListener</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_listener.html#aa5875c60b11cb6b405038b16ef148740">get_listeners</a> ()</td></tr>
 <tr class="separator:aa5875c60b11cb6b405038b16ef148740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82b925675da32e3367e2dd6971dd0391"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_listener.html#a82b925675da32e3367e2dd6971dd0391">take_semaphore</a> (unsigned long int timeout_ms=0)</td></tr>
+<tr class="separator:a82b925675da32e3367e2dd6971dd0391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16e7abf03f11f1734cb33388c0517cd8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">release_semaphore</a> ()</td></tr>
+<tr class="separator:a16e7abf03f11f1734cb33388c0517cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -180,7 +184,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="signalk__listener_8cpp_source.html#l00007">7</a> of file <a class="el" href="signalk__listener_8cpp_source.html">signalk_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__listener_8cpp_source.html#l00009">9</a> of file <a class="el" href="signalk__listener_8cpp_source.html">signalk_listener.cpp</a>.</p>
 
 </div>
 </div>
@@ -236,12 +240,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="signalk__listener_8h_source.html#l00044">44</a> of file <a class="el" href="signalk__listener_8h_source.html">signalk_listener.h</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_listener_aa5875c60b11cb6b405038b16ef148740_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div>
 
 </div>
 </div>
@@ -270,17 +268,11 @@ Here is the caller graph for this function:</div>
 <p >Returns the current Signal K path. An empty string is returned if this particular source is not configured or intended to return actual data. </p>
 
 <p class="definition">Definition at line <a class="el" href="signalk__listener_8h_source.html#l00038">38</a> of file <a class="el" href="signalk__listener_8h_source.html">signalk_listener.h</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_listener_a99c420883085d955c44c885917ed977f_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div>
 
 </div>
 </div>
-<a id="a96f9f1855de167f6a5ad582ca0592c55" name="a96f9f1855de167f6a5ad582ca0592c55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96f9f1855de167f6a5ad582ca0592c55">&#9670;&nbsp;</a></span>parse_value()</h2>
+<a id="a2842c17e486c8861d8d136f30fd5359b" name="a2842c17e486c8861d8d136f30fd5359b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2842c17e486c8861d8d136f30fd5359b">&#9670;&nbsp;</a></span>parse_value()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,7 +283,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">virtual void sensesp::SKListener::parse_value </td>
           <td>(</td>
-          <td class="paramtype">JsonObject &amp;&#160;</td>
+          <td class="paramtype">const JsonObject &amp;&#160;</td>
           <td class="paramname"><em>json</em></td><td>)</td>
           <td></td>
         </tr>
@@ -303,13 +295,74 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classsensesp_1_1_s_k_value_listener.html#ae17d119ae5a9c073e16f1e0293a4c916">sensesp::SKValueListener&lt; T &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="classsensesp_1_1_s_k_value_listener.html#a84c4e459882a03c0685e8c6c506818dd">sensesp::SKValueListener&lt; T &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="signalk__listener_8h_source.html#l00042">42</a> of file <a class="el" href="signalk__listener_8h_source.html">signalk_listener.h</a>.</p>
+
+</div>
+</div>
+<a id="a16e7abf03f11f1734cb33388c0517cd8" name="a16e7abf03f11f1734cb33388c0517cd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16e7abf03f11f1734cb33388c0517cd8">&#9670;&nbsp;</a></span>release_semaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKListener::release_semaphore </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__listener_8cpp_source.html#l00022">22</a> of file <a class="el" href="signalk__listener_8cpp_source.html">signalk_listener.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_listener_a96f9f1855de167f6a5ad582ca0592c55_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_listener_a16e7abf03f11f1734cb33388c0517cd8_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a82b925675da32e3367e2dd6971dd0391" name="a82b925675da32e3367e2dd6971dd0391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82b925675da32e3367e2dd6971dd0391">&#9670;&nbsp;</a></span>take_semaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKListener::take_semaphore </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long int&#160;</td>
+          <td class="paramname"><em>timeout_ms</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__listener_8cpp_source.html#l00014">14</a> of file <a class="el" href="signalk__listener_8cpp_source.html">signalk_listener.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_listener_a82b925675da32e3367e2dd6971dd0391_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
@@ -336,7 +389,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__listener_8h_source.html#l00047">47</a> of file <a class="el" href="signalk__listener_8h_source.html">signalk_listener.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__listener_8h_source.html#l00050">50</a> of file <a class="el" href="signalk__listener_8h_source.html">signalk_listener.h</a>.</p>
 
 </div>
 </div>

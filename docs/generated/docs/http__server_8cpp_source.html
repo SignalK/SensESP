@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -300,12 +300,12 @@ $(document).ready(function(){initNavTree('http__server_8cpp_source.html',''); in
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  request-&gt;send(</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      200, <span class="stringliteral">&quot;text/plain&quot;</span>,</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      <span class="stringliteral">&quot;OK, resetting the device settings back to factory defaults.\n&quot;</span>);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onDelay(500, [<span class="keyword">this</span>]() { <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6">SensESPBaseApp::get</a>()-&gt;<a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a42d3c5c9ed56c0a0a925fac4e49dd659">reset</a>(); });</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onDelay(500, [<span class="keyword">this</span>]() { <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6">SensESPBaseApp::get</a>()-&gt;<a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a42d3c5c9ed56c0a0a925fac4e49dd659">reset</a>(); });</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno"><a class="line" href="classsensesp_1_1_h_t_t_p_server.html#aced1ce7dbfb702bcda79959d21d38e6a">  211</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_h_t_t_p_server.html#aced1ce7dbfb702bcda79959d21d38e6a">HTTPServer::handle_device_restart</a>(AsyncWebServerRequest* request) {</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  request-&gt;send(200, <span class="stringliteral">&quot;text/plain&quot;</span>, <span class="stringliteral">&quot;OK, restarting\n&quot;</span>);</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <a class="code hl_variable" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">ReactESP::app</a>-&gt;onDelay(50, []() { ESP.restart(); });</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <a class="code hl_variable" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">ReactESP::app</a>-&gt;onDelay(50, []() { ESP.restart(); });</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>}</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="classsensesp_1_1_h_t_t_p_server.html#a268b820a7b0eeac765e16b005cb6b8b2">  216</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_h_t_t_p_server.html#a268b820a7b0eeac765e16b005cb6b8b2">HTTPServer::handle_info</a>(AsyncWebServerRequest* request) {</div>
@@ -318,20 +318,22 @@ $(document).ready(function(){initNavTree('http__server_8cpp_source.html',''); in
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  <span class="keyword">auto</span> pages = json_doc.createNestedArray(<span class="stringliteral">&quot;Pages&quot;</span>);</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <span class="keyword">auto</span> config = json_doc.createNestedArray(<span class="stringliteral">&quot;Config&quot;</span>);</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  <span class="keywordflow">for</span>(<span class="keyword">auto</span> property = <a class="code hl_variable" href="namespacesensesp.html#afa01e83386efacaf36f7b13a7b677318">ui_outputs</a>.begin(); property != <a class="code hl_variable" href="namespacesensesp.html#afa01e83386efacaf36f7b13a7b677318">ui_outputs</a>.end(); ++property)</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  {</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keyword">property</span>-&gt;second-&gt;set_json(properties);</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  }</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  <span class="comment">//add all configuration paths</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="namespacesensesp.html#ac4a9f78977011238ed7fa188e74b46d6">configurables</a>.begin(); it != <a class="code hl_variable" href="namespacesensesp.html#ac4a9f78977011238ed7fa188e74b46d6">configurables</a>.end(); ++it) {</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    config.add(it-&gt;first);</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  }</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  serializeJson(json_doc, *response);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  request-&gt;send(response);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>}</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  <span class="keyword">auto</span> <a class="code hl_variable" href="namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44">ui_outputs</a> = <a class="code hl_function" href="classsensesp_1_1_u_i_output_base.html#a013953335d1f7a269cbabba2d838c7ed">UIOutputBase::get_ui_outputs</a>();</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <span class="keywordflow">for</span>(<span class="keyword">auto</span> property = <a class="code hl_variable" href="namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44">ui_outputs</a>-&gt;begin(); property != <a class="code hl_variable" href="namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44">ui_outputs</a>-&gt;end(); ++property)</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  {</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keyword">property</span>-&gt;second-&gt;set_json(properties);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  }</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  <span class="comment">//add all configuration paths</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = <a class="code hl_variable" href="namespacesensesp.html#ac4a9f78977011238ed7fa188e74b46d6">configurables</a>.begin(); it != <a class="code hl_variable" href="namespacesensesp.html#ac4a9f78977011238ed7fa188e74b46d6">configurables</a>.end(); ++it) {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    config.add(it-&gt;first);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  }</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  serializeJson(json_doc, *response);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  request-&gt;send(response);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>}  <span class="comment">// namespace sensesp</span></div>
 <div class="ttc" id="aclasssensesp_1_1_configurable_html"><div class="ttname"><a href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></div><div class="ttdoc">An object that is capable of having configuration data that can be set remotely using a RESTful API,...</div><div class="ttdef"><b>Definition:</b> <a href="configurable_8h_source.html#l00017">configurable.h:17</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_configurable_html_a2a0b1727f0e7fca0730381e030360a1a"><div class="ttname"><a href="classsensesp_1_1_configurable.html#a2a0b1727f0e7fca0730381e030360a1a">sensesp::Configurable::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema()</div><div class="ttdef"><b>Definition:</b> <a href="configurable_8cpp_source.html#l00034">configurable.cpp:34</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_configurable_html_a4202ce8a5b9ad23d2a2be27de11153f4"><div class="ttname"><a href="classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4">sensesp::Configurable::save_configuration</a></div><div class="ttdeci">virtual void save_configuration()</div><div class="ttdef"><b>Definition:</b> <a href="configurable_8cpp_source.html#l00075">configurable.cpp:75</a></div></div>
@@ -345,6 +347,7 @@ $(document).ready(function(){initNavTree('http__server_8cpp_source.html',''); in
 <div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a2df22469c69a8a1234ab673386f574d6"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6">sensesp::SensESPBaseApp::get</a></div><div class="ttdeci">static SensESPBaseApp * get()</div><div class="ttdoc">Get the singleton instance of the SensESPBaseApp.</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__base__app_8cpp_source.html#l00030">sensesp_base_app.cpp:30</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a42d3c5c9ed56c0a0a925fac4e49dd659"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a42d3c5c9ed56c0a0a925fac4e49dd659">sensesp::SensESPBaseApp::reset</a></div><div class="ttdeci">virtual void reset()</div><div class="ttdoc">Reset the device to factory defaults.</div><div class="ttdef"><b>Definition:</b> <a href="sensesp__base__app_8cpp_source.html#l00055">sensesp_base_app.cpp:55</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_startable_html"><div class="ttname"><a href="classsensesp_1_1_startable.html">sensesp::Startable</a></div><div class="ttdoc">Automatic calling of the start() method at startup.</div><div class="ttdef"><b>Definition:</b> <a href="startable_8h_source.html#l00020">startable.h:20</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_u_i_output_base_html_a013953335d1f7a269cbabba2d838c7ed"><div class="ttname"><a href="classsensesp_1_1_u_i_output_base.html#a013953335d1f7a269cbabba2d838c7ed">sensesp::UIOutputBase::get_ui_outputs</a></div><div class="ttdeci">static const std::map&lt; String, UIOutputBase * &gt; * get_ui_outputs()</div><div class="ttdef"><b>Definition:</b> <a href="ui__output_8h_source.html#l00026">ui_output.h:26</a></div></div>
 <div class="ttc" id="aconfigurable_8h_html"><div class="ttname"><a href="configurable_8h.html">configurable.h</a></div></div>
 <div class="ttc" id="acss__bootstrap_8h_html"><div class="ttname"><a href="css__bootstrap_8h.html">css_bootstrap.h</a></div></div>
 <div class="ttc" id="acss__bootstrap_8h_html_a2d3d87779995753b1747174d2d98ddfb"><div class="ttname"><a href="css__bootstrap_8h.html#a2d3d87779995753b1747174d2d98ddfb">PAGE_css_bootstrap_size</a></div><div class="ttdeci">const uint PAGE_css_bootstrap_size</div><div class="ttdef"><b>Definition:</b> <a href="css__bootstrap_8h_source.html#l02967">css_bootstrap.h:2967</a></div></div>
@@ -356,10 +359,10 @@ $(document).ready(function(){initNavTree('http__server_8cpp_source.html',''); in
 <div class="ttc" id="ajs__jsoneditor_8h_html_a9ffb63d4581c1893af8098df28f577c1"><div class="ttname"><a href="js__jsoneditor_8h.html#a9ffb63d4581c1893af8098df28f577c1">PAGE_js_jsoneditor_size</a></div><div class="ttdeci">const uint PAGE_js_jsoneditor_size</div><div class="ttdef"><b>Definition:</b> <a href="js__jsoneditor_8h_source.html#l04713">js_jsoneditor.h:4713</a></div></div>
 <div class="ttc" id="ajs__sensesp_8h_html"><div class="ttname"><a href="js__sensesp_8h.html">js_sensesp.h</a></div></div>
 <div class="ttc" id="alocal__debug_8h_html_aaf33de7d1f8dfc6cc52ace6bd031f684"><div class="ttname"><a href="local__debug_8h.html#aaf33de7d1f8dfc6cc52ace6bd031f684">debugD</a></div><div class="ttdeci">#define debugD(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00047">local_debug.h:47</a></div></div>
+<div class="ttc" id="amain_8cpp_html_ae94fcfeeff9366a65097e20b6d7a2d37"><div class="ttname"><a href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">app</a></div><div class="ttdeci">reactesp::ReactESP app</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00027">main.cpp:27</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a2bc35a8f1394e257344015e4042bc7d1"><div class="ttname"><a href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">sensesp::app</a></div><div class="ttdeci">ReactESP app</div></div>
 <div class="ttc" id="anamespacesensesp_html_ac4a9f78977011238ed7fa188e74b46d6"><div class="ttname"><a href="namespacesensesp.html#ac4a9f78977011238ed7fa188e74b46d6">sensesp::configurables</a></div><div class="ttdeci">std::map&lt; String, Configurable * &gt; configurables</div><div class="ttdef"><b>Definition:</b> <a href="configurable_8cpp_source.html#l00012">configurable.cpp:12</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_afa01e83386efacaf36f7b13a7b677318"><div class="ttname"><a href="namespacesensesp.html#afa01e83386efacaf36f7b13a7b677318">sensesp::ui_outputs</a></div><div class="ttdeci">std::map&lt; String, UIOutputBase * &gt; ui_outputs</div><div class="ttdef"><b>Definition:</b> <a href="ui__output_8cpp_source.html#l00003">ui_output.cpp:3</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_ad3569f86651e88333a4dc211de64bf44"><div class="ttname"><a href="namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44">sensesp::ui_outputs</a></div><div class="ttdeci">std::map&lt; String, UIOutputBase * &gt; ui_outputs</div></div>
 <div class="ttc" id="asensesp__base__app_8h_html"><div class="ttname"><a href="sensesp__base__app_8h.html">sensesp_base_app.h</a></div></div>
 <div class="ttc" id="aui__output_8h_html"><div class="ttname"><a href="ui__output_8h.html">ui_output.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

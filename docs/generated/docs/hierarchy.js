@@ -152,6 +152,7 @@ var hierarchy =
         [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::ObservableValue< T >", "classsensesp_1_1_observable_value.html", [
+          [ "sensesp::TaskQueueProducer< T >", "classsensesp_1_1_task_queue_producer.html", null ],
           [ "sensesp::UIOutput< T >", "classsensesp_1_1_u_i_output.html", null ]
         ] ],
         [ "sensesp::SKPutRequestListener< T >", "classsensesp_1_1_s_k_put_request_listener.html", null ],

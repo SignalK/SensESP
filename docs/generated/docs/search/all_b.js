@@ -27,5 +27,5 @@ var searchData=
   ['long_5fclick_5fdelay_5f_24',['long_click_delay_',['../classsensesp_1_1_click_type.html#a49ab4f06ec2a1bffe384533b96e18bda',1,'sensesp::ClickType']]],
   ['longitude_25',['longitude',['../structsensesp_1_1_position.html#a45ab87c9b3068e644a56df8364c175e5',1,'sensesp::Position']]],
   ['longsingleclick_26',['LongSingleClick',['../namespacesensesp.html#a21975f0611649b430d00a47945332495ad0fff85d3541aedaddfb3c5e67e897b4',1,'sensesp']]],
-  ['loop_27',['loop',['../classsensesp_1_1_w_s_client.html#a37c79af799d21e51d238f40d00e49ceb',1,'sensesp::WSClient']]]
+  ['loop_27',['loop',['../classsensesp_1_1_w_s_client.html#a37c79af799d21e51d238f40d00e49ceb',1,'sensesp::WSClient::loop()'],['../main_8cpp.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;main.cpp']]]
 ];

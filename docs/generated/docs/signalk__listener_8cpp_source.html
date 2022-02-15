@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.1.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -99,13 +99,28 @@ $(document).ready(function(){initNavTree('signalk__listener_8cpp_source.html',''
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>std::vector&lt;SKListener*&gt; SKListener::listeners;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#ac5d183726644589beb520a6524902109">    7</a></span><a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#ac5d183726644589beb520a6524902109">SKListener::SKListener</a>(String sk_path, <span class="keywordtype">int</span> listen_delay)</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    : sk_path{sk_path}, listen_delay{listen_delay} {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  listeners.push_back(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>}</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_ac5d183726644589beb520a6524902109"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#ac5d183726644589beb520a6524902109">sensesp::SKListener::SKListener</a></div><div class="ttdeci">SKListener(String sk_path, int listen_delay)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__listener_8cpp_source.html#l00007">signalk_listener.cpp:7</a></div></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>SemaphoreHandle_t SKListener::semaphore_ = xSemaphoreCreateRecursiveMutex();</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#ac5d183726644589beb520a6524902109">    9</a></span><a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#ac5d183726644589beb520a6524902109">SKListener::SKListener</a>(String sk_path, <span class="keywordtype">int</span> listen_delay)</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    : sk_path{sk_path}, listen_delay{listen_delay} {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  listeners.push_back(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#a82b925675da32e3367e2dd6971dd0391">   14</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a82b925675da32e3367e2dd6971dd0391">SKListener::take_semaphore</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> timeout_ms) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordflow">if</span> (timeout_ms == 0) {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordflow">return</span> xSemaphoreTakeRecursive(semaphore_, portMAX_DELAY) == pdTRUE;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">return</span> xSemaphoreTakeRecursive(semaphore_, timeout_ms) == pdTRUE;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  }</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">   22</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">SKListener::release_semaphore</a>() { xSemaphoreGiveRecursive(semaphore_); }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a16e7abf03f11f1734cb33388c0517cd8"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">sensesp::SKListener::release_semaphore</a></div><div class="ttdeci">static void release_semaphore()</div><div class="ttdef"><b>Definition:</b> <a href="signalk__listener_8cpp_source.html#l00022">signalk_listener.cpp:22</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a82b925675da32e3367e2dd6971dd0391"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a82b925675da32e3367e2dd6971dd0391">sensesp::SKListener::take_semaphore</a></div><div class="ttdeci">static bool take_semaphore(unsigned long int timeout_ms=0)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__listener_8cpp_source.html#l00014">signalk_listener.cpp:14</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_ac5d183726644589beb520a6524902109"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#ac5d183726644589beb520a6524902109">sensesp::SKListener::SKListener</a></div><div class="ttdeci">SKListener(String sk_path, int listen_delay)</div><div class="ttdef"><b>Definition:</b> <a href="signalk__listener_8cpp_source.html#l00009">signalk_listener.cpp:9</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
 <div class="ttc" id="asignalk__listener_8h_html"><div class="ttname"><a href="signalk__listener_8h.html">signalk_listener.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

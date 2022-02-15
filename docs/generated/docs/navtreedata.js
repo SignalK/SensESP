@@ -63,11 +63,11 @@ var NAVTREEINDEX =
 "air__density_8cpp.html",
 "classsensesp_1_1_digital_input_change.html#afdbdc05bb8cd2bbe78f365e7a48ba2f5",
 "classsensesp_1_1_networking.html#a2f35cb371a96fc50b598b7a1a2368e2f",
-"classsensesp_1_1_s_k_output.html",
-"classsensesp_1_1_sens_e_s_p_base_app_builder.html#a7c8c11c6c664fdd74af187abd86a3171",
-"classsensesp_1_1_voltage_divider_r1.html#ab101fa0973f1503e615ccc89f5582776",
-"lambda__transform_8cpp_source.html",
-"sensor_8h.html#a3a7cb31c1564fd26daed039a805ef2f2"
+"classsensesp_1_1_s_k_metadata.html#ae6b3d49adf22c282ede7f5d407e9bc2b",
+"classsensesp_1_1_sens_e_s_p_base_app.html#a6480199c42124d844eadd89d6fac5c60",
+"classsensesp_1_1_value_producer.html#aa29790dfe4e22903e061662be0fc7f68",
+"index_8h.html#af01c5827c44296f52b8d1edd57062e2e",
+"sensesp__app_8cpp.html#aaf87e022a3c4111a8e24045e297e14ba"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
