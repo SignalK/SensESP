@@ -54,30 +54,3 @@ If the Pi is to be permanently connected to a network with an ethernet cable, yo
 
 (Thanks to @Graham Kendall for doing all the testing and documentation of the above!)
 
-## Can't Get Past Token Authorization
-
-If you see something like this, repeating over and over in your Serial Monitor, try a Device Reset. If SensESP gets to this point, you should be able to connect to it by going to its IP address (identified on the fourth line below) in a browser. That will bring up the device's menu, and "Reset device" is the last item on that menu. Choose it, and if necessary, restart your device with its physical Reset button. Keep watching the Serial Monitor - if you didn't hard-code your wifi SSID and password in `main.cpp`, you will have to go through the steps to configure those things again, and you'll definitely need to authorize a new access request from the SK Server.
-
-```text
-(I) (connect)(C1) WSClient websocket connect attempt (state=0)
-(I) (connect)(C1) WiFi is disconnected. SignalK client connection will connect when WiFi is connected.
-(I) (wifi_station_connected)(C1) Connected to wifi, SSID: WiFi-2.4-7C4D (signal: -45)
-(I) (wifi_station_connected)(C1) IP address of Device: 192.168.1.25
-(I) (connect)(C1) WSClient websocket connect attempt (state=0)
-(D) (connect)(C1) Initiating websocket connection with server...
-(D) (connect)(C1) Websocket is connecting to Signal K server on address 192.168.1.5:3000
-(D) (test_token)(C1) Testing token with url http://192.168.1.5:3000/signalk/
-(D) (test_token)(C1) Testing resulted in http status 200
-(D) (test_token)(C1) Returned payload (length 249) is:
-(D) (test_token)(C1) {"endpoints":{"v1":{"version":"1.37.6","signalk-http":"http://192.168.1.5:3000/signalk/v1/api/","signalk-ws":"ws://192.168.1.5:3000/signalk/v1/stream","signalk-tcp":"tcp://192.168.1.5:8375"}},"server":{"id":"signalk-server-node","version":"1.37.6"}}
-(D) (test_token)(C1) End of payload output
-(D) (test_token)(C1) Attempting to connect to Signal K Websocket...
-(I) (connect)(C1) WSClient websocket connect attempt (state=0)
-(D) (connect)(C1) Initiating websocket connection with server...
-```
-
-etc, etc, etc.
-
-At the time of this writing, it isn't known exactly what's happening or why; only that a Device Reset seems to clear it up.
-
-Thanks to @Sailabout on Slack for documenting this!
