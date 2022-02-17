@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SENSESP_TYPES_POSITION_H_
+#define SENSESP_TYPES_POSITION_H_
 
 #include <limits>
 
@@ -9,10 +10,10 @@ constexpr float kPositionInvalidAltitude = std::numeric_limits<float>::lowest();
 
 /**
  * @brief Position data container.
- * 
+ *
  * Position data as latitudes and longitudes, in decimal degrees, and altitude,
  * in meters.
- * 
+ *
  */
 struct Position {
   double latitude;
@@ -22,10 +23,10 @@ struct Position {
 
 /**
  * @brief Container for local tangent plane coordinates.
- * 
+ *
  * East-North-Up coordinates, in reference to the local tangent plane.
  * Static locations are in meters, velocities in m/s.
- * 
+ *
  */
 struct ENUVector {
   float east;
@@ -34,3 +35,5 @@ struct ENUVector {
 };
 
 }
+
+#endif  // SENSESP_TYPES_POSITION_H_
