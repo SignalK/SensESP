@@ -64,7 +64,7 @@ HTTPServer::HTTPServer() : Startable(50) {
             confable->save_configuration();
             request->send(200, "text/plain", F("Configuration successful.\n"));
             return;
-          });
+          }, 4096);
   config_put_handler->setMethod(HTTP_PUT);
   server->addHandler(config_put_handler);
 
@@ -88,7 +88,7 @@ HTTPServer::HTTPServer() : Startable(50) {
 
     AsyncResponseStream* response =
         request->beginResponseStream("application/json");
-    DynamicJsonDocument json_doc(1024);
+    DynamicJsonDocument json_doc(4096);
     JsonObject config = json_doc.createNestedObject("config");
     confable->get_configuration(config);
     json_doc["schema"] = serialized(confable->get_config_schema());
