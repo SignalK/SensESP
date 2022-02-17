@@ -152,29 +152,29 @@ void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
   } else {
     debugD("UNKNOWN");
   }
-  debugD(" http://%s%s\n", request->host().c_str(), request->url().c_str());
+  debugD(" http://%s%s", request->host().c_str(), request->url().c_str());
 
   if (request->contentLength()) {
-    debugD("_CONTENT_TYPE: %s\n", request->contentType().c_str());
-    debugD("_CONTENT_LENGTH: %u\n", request->contentLength());
+    debugD("_CONTENT_TYPE: %s", request->contentType().c_str());
+    debugD("_CONTENT_LENGTH: %u", request->contentLength());
   }
 
   int headers = request->headers();
   for (int i = 0; i < headers; i++) {
     AsyncWebHeader* h = request->getHeader(i);
-    debugD("_HEADER[%s]: %s\n", h->name().c_str(), h->value().c_str());
+    debugD("_HEADER[%s]: %s", h->name().c_str(), h->value().c_str());
   }
 
   int params = request->params();
   for (int i = 0; i < params; i++) {
     AsyncWebParameter* p = request->getParam(i);
     if (p->isFile()) {
-      debugD("_FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(),
+      debugD("_FILE[%s]: %s, size: %u", p->name().c_str(), p->value().c_str(),
              p->size());
     } else if (p->isPost()) {
-      debugD("_POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
+      debugD("_POST[%s]: %s", p->name().c_str(), p->value().c_str());
     } else {
-      debugD("_GET[%s]: %s\n", p->name().c_str(), p->value().c_str());
+      debugD("_GET[%s]: %s", p->name().c_str(), p->value().c_str());
     }
   }
 
