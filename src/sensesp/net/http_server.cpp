@@ -1,22 +1,21 @@
 #include "http_server.h"
 
+#include <ESPAsyncWebServer.h>
 #include <FS.h>
 
 #include <functional>
 
-#include <ESPAsyncWebServer.h>
-
 #include "ArduinoJson.h"
 #include "AsyncJson.h"
 #include "sensesp/system/configurable.h"
-#include "sensesp_base_app.h"
 #include "sensesp/system/ui_output.h"
+#include "sensesp_base_app.h"
 
 // Include the web UI stored in PROGMEM space
+#include "web/css_bootstrap.h"
 #include "web/index.h"
 #include "web/js_jsoneditor.h"
 #include "web/js_sensesp.h"
-#include "web/css_bootstrap.h"
 
 namespace sensesp {
 
@@ -64,7 +63,7 @@ HTTPServer::HTTPServer() : Startable(50) {
             confable->save_configuration();
             request->send(200, "text/plain", F("Configuration successful.\n"));
             return;
-          });
+          }, 4096);
   config_put_handler->setMethod(HTTP_PUT);
   server->addHandler(config_put_handler);
 
@@ -88,7 +87,7 @@ HTTPServer::HTTPServer() : Startable(50) {
 
     AsyncResponseStream* response =
         request->beginResponseStream("application/json");
-    DynamicJsonDocument json_doc(1024);
+    DynamicJsonDocument json_doc(4096);
     JsonObject config = json_doc.createNestedObject("config");
     confable->get_configuration(config);
     json_doc["schema"] = serialized(confable->get_config_schema());
@@ -98,30 +97,34 @@ HTTPServer::HTTPServer() : Startable(50) {
 
   server->on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
     debugD("Serving gziped index.html");
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", PAGE_index, PAGE_index_size, NULL);
+    AsyncWebServerResponse* response = request->beginResponse_P(
+        200, "text/html", PAGE_index, PAGE_index_size, NULL);
     response->addHeader("Content-Encoding", "gzip");
     request->send(response);
   });
 
-  server->on("/css/bootstrap.min.css", HTTP_GET,
-  [](AsyncWebServerRequest* request) {
-    debugD("Serving gziped bootstrap.min.css");
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/css", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
-    response->addHeader("Content-Encoding", "gzip");
-    request->send(response);
-  });
+  server->on(
+      "/css/bootstrap.min.css", HTTP_GET, [](AsyncWebServerRequest* request) {
+        debugD("Serving gziped bootstrap.min.css");
+        AsyncWebServerResponse* response = request->beginResponse_P(
+            200, "text/css", PAGE_css_bootstrap, PAGE_css_bootstrap_size);
+        response->addHeader("Content-Encoding", "gzip");
+        request->send(response);
+      });
 
-  server->on("/js/jsoneditor.min.js", HTTP_GET,
-  [](AsyncWebServerRequest* request) {
-    debugD("Serving gziped jsoneditor.min.js");
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/html", PAGE_js_jsoneditor, PAGE_js_jsoneditor_size);
-    response->addHeader("Content-Encoding", "gzip");
-    request->send(response);
-  });
+  server->on(
+      "/js/jsoneditor.min.js", HTTP_GET, [](AsyncWebServerRequest* request) {
+        debugD("Serving gziped jsoneditor.min.js");
+        AsyncWebServerResponse* response = request->beginResponse_P(
+            200, "text/html", PAGE_js_jsoneditor, PAGE_js_jsoneditor_size);
+        response->addHeader("Content-Encoding", "gzip");
+        request->send(response);
+      });
 
   server->on("/js/sensesp.js", HTTP_GET, [](AsyncWebServerRequest* request) {
     debugD("Serving gziped sensesp.js");
-    AsyncWebServerResponse *response = request->beginResponse_P(200, "text/javascript", PAGE_js_sensesp, PAGE_js_jsoneditor_size);
+    AsyncWebServerResponse* response = request->beginResponse_P(
+        200, "text/javascript", PAGE_js_sensesp, PAGE_js_jsoneditor_size);
     response->addHeader("Content-Encoding", "gzip");
     request->send(response);
   });
@@ -152,29 +155,29 @@ void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
   } else {
     debugD("UNKNOWN");
   }
-  debugD(" http://%s%s\n", request->host().c_str(), request->url().c_str());
+  debugD(" http://%s%s", request->host().c_str(), request->url().c_str());
 
   if (request->contentLength()) {
-    debugD("_CONTENT_TYPE: %s\n", request->contentType().c_str());
-    debugD("_CONTENT_LENGTH: %u\n", request->contentLength());
+    debugD("_CONTENT_TYPE: %s", request->contentType().c_str());
+    debugD("_CONTENT_LENGTH: %u", request->contentLength());
   }
 
   int headers = request->headers();
   for (int i = 0; i < headers; i++) {
     AsyncWebHeader* h = request->getHeader(i);
-    debugD("_HEADER[%s]: %s\n", h->name().c_str(), h->value().c_str());
+    debugD("_HEADER[%s]: %s", h->name().c_str(), h->value().c_str());
   }
 
   int params = request->params();
   for (int i = 0; i < params; i++) {
     AsyncWebParameter* p = request->getParam(i);
     if (p->isFile()) {
-      debugD("_FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(),
+      debugD("_FILE[%s]: %s, size: %u", p->name().c_str(), p->value().c_str(),
              p->size());
     } else if (p->isPost()) {
-      debugD("_POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
+      debugD("_POST[%s]: %s", p->name().c_str(), p->value().c_str());
     } else {
-      debugD("_GET[%s]: %s\n", p->name().c_str(), p->value().c_str());
+      debugD("_GET[%s]: %s", p->name().c_str(), p->value().c_str());
     }
   }
 
@@ -225,11 +228,11 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
 
   auto ui_outputs = UIOutputBase::get_ui_outputs();
 
-  for(auto property = ui_outputs->begin(); property != ui_outputs->end(); ++property)
-  {
+  for (auto property = ui_outputs->begin(); property != ui_outputs->end();
+       ++property) {
     property->second->set_json(properties);
   }
-  //add all configuration paths
+  // add all configuration paths
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
     config.add(it->first);
   }
