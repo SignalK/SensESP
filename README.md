@@ -76,7 +76,7 @@ Everything that is configurable on a "live" device will be in the menu that appe
 
 Going forward, SensESP attempts to focus on providing the core "scaffolding" for building asynchronous and Signal K aware sensor devices. It will not include sensor classes for every possible piece of hardware but those can be provided by third parties and pulled in as dependencies as any other library. Thus, SensESP will hopefully become more like a network of affiliated projects.
 
-A list of SensESP add-on libraries can be found on a separate page: [SensESP add-ons and related projects](https://github.com/SignalK/SensESP/blob/master/docs/Add-ons.md).
+A list of SensESP add-on libraries can be found on a separate page: [SensESP add-ons and related projects](https://github.com/SignalK/SensESP/blob/v1/docs/Add-ons.md).
 
 
 ## Getting help
