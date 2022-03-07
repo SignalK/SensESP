@@ -16,6 +16,11 @@ namespace sensesp {
 
 bool should_save_config = false;
 
+/**
+ * @brief Callback used by WiFiManager to indicate that the configuration
+ * should be saved.
+ *
+ */
 void save_config_callback() { should_save_config = true; }
 
 Networking::Networking(String config_path, String ssid, String password,
@@ -63,6 +68,9 @@ void Networking::setup_wifi_callbacks() {
       WiFiEvent_t::SYSTEM_EVENT_STA_DISCONNECTED);
 }
 
+/**
+ * @brief Start WiFi using preset SSID and password.
+ */
 void Networking::setup_saved_ssid() {
   this->emit(WifiState::kWifiDisconnected);
   setup_wifi_callbacks();
@@ -76,6 +84,10 @@ void Networking::setup_saved_ssid() {
   debugI("Connecting to wifi %s.", ap_ssid.c_str());
 }
 
+/**
+ * This method gets called when WiFi is connected to the AP and has
+ * received an IP address.
+ */
 void Networking::wifi_station_connected() {
   debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
          WiFi.RSSI());
@@ -85,11 +97,21 @@ void Networking::wifi_station_connected() {
   this->emit(WifiState::kWifiConnectedToAP);
 }
 
+/**
+ * This method gets called when WiFi is disconnected from the AP.
+ */
 void Networking::wifi_station_disconnected() {
   debugI("Disconnected from wifi.");
   this->emit(WifiState::kWifiDisconnected);
 }
 
+/**
+ * @brief Start WiFi using WiFi Manager.
+ *
+ * If the setup process has been completed before, this method will start
+ * the WiFi connection using the saved SSID and password. Otherwise, it will
+ * start the WiFi Manager.
+ */
 void Networking::setup_wifi_manager() {
   should_save_config = false;
 
