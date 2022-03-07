@@ -7,6 +7,7 @@
 #include <ESPAsyncWebServer.h>
 #include <ESPAsyncWiFiManager.h>
 
+#include "sensesp/net/wifi_state.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/resettable.h"
@@ -14,13 +15,6 @@
 #include "sensesp/system/valueproducer.h"
 
 namespace sensesp {
-
-enum class WifiState {
-  kWifiNoAP = 0,
-  kWifiDisconnected,
-  kWifiConnectedToAP,
-  kWifiManagerActivated
-};
 
 /**
  * @brief Manages the ESP's connection to the Wifi network.
