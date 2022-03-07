@@ -39,6 +39,9 @@ class Networking : public Configurable,
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
 
+  void enable_wifi_manager(bool state) {
+    wifi_manager_enabled_ = state;
+  }
  protected:
   void setup_saved_ssid();
   void setup_wifi_callbacks();
@@ -55,6 +58,8 @@ class Networking : public Configurable,
   // respective methods to save some runtime memory
   DNSServer* dns;
   AsyncWiFiManager* wifi_manager = nullptr;
+
+  bool wifi_manager_enabled_ = true;
 
   String ap_ssid = "";
   String ap_password = "";

@@ -50,8 +50,11 @@ void Networking::start() {
   debugD("Enabling Networking object");
   if (ap_ssid != "" && ap_password != "") {
     setup_saved_ssid();
+  } else if (ap_ssid == "" && WiFi.status() != WL_CONNECTED && wifi_manager_enabled_) {
+    setup_wifi_manager();
   }
-  if (ap_ssid == "" && WiFi.status() != WL_CONNECTED) {
+  // otherwise, fall through and WiFi will remain disconnected
+}
     setup_wifi_manager();
   }
 }
