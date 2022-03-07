@@ -29,7 +29,7 @@ Networking::Networking(String config_path, String ssid, String password,
       wifi_manager_password_{wifi_manager_password},
       Startable(80),
       Resettable(0) {
-  this->output = WifiState::kWifiNoAP;
+  this->output = WiFiState::kWifiNoAP;
 
   preset_ssid = ssid;
   preset_password = password;
@@ -78,7 +78,7 @@ void Networking::setup_wifi_callbacks() {
  * @brief Start WiFi using preset SSID and password.
  */
 void Networking::setup_saved_ssid() {
-  this->emit(WifiState::kWifiDisconnected);
+  this->emit(WiFiState::kWifiDisconnected);
   setup_wifi_callbacks();
 
   const char* hostname = SensESPBaseApp::get_hostname().c_str();
@@ -100,7 +100,7 @@ void Networking::wifi_station_connected() {
   debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
   debugI("Default route: %s", WiFi.gatewayIP().toString().c_str());
   debugI("DNS server: %s", WiFi.dnsIP().toString().c_str());
-  this->emit(WifiState::kWifiConnectedToAP);
+  this->emit(WiFiState::kWifiConnectedToAP);
 }
 
 /**
@@ -108,7 +108,7 @@ void Networking::wifi_station_connected() {
  */
 void Networking::wifi_station_disconnected() {
   debugI("Disconnected from wifi.");
-  this->emit(WifiState::kWifiDisconnected);
+  this->emit(WiFiState::kWifiDisconnected);
 }
 
 /**
@@ -145,21 +145,21 @@ void Networking::setup_wifi_manager() {
   config_ssid = "Configure " + config_ssid;
   const char* pconfig_ssid = config_ssid.c_str();
 
-  this->emit(WifiState::kWifiManagerActivated);
+  this->emit(WiFiState::kWifiManagerActivated);
 
   WiFi.setHostname(SensESPBaseApp::get_hostname().c_str());
 
   if (!wifi_manager->autoConnect(pconfig_ssid, wifi_manager_password_)) {
     debugE("Failed to connect to wifi and config timed out. Restarting...");
 
-    this->emit(WifiState::kWifiDisconnected);
+    this->emit(WiFiState::kWifiDisconnected);
 
     ESP.restart();
   }
 
   debugI("Connected to wifi,");
   debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
-  this->emit(WifiState::kWifiConnectedToAP);
+  this->emit(WiFiState::kWifiConnectedToAP);
 
   if (should_save_config) {
     String new_hostname = custom_hostname.getValue();

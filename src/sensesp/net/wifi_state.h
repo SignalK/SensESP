@@ -3,12 +3,15 @@
 
 namespace sensesp {
 
-enum class WifiState {
+enum class WiFiState {
   kWifiNoAP = 0,
   kWifiDisconnected,
   kWifiConnectedToAP,
   kWifiManagerActivated
 };
+
+// alias WiFiState for backward compatibility
+using WifiState = WiFiState;
 
 }  // namespace sensesp
 

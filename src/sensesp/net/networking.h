@@ -22,7 +22,7 @@ namespace sensesp {
 class Networking : public Configurable,
                    public Startable,
                    public Resettable,
-                   public ValueProducer<WifiState> {
+                   public ValueProducer<WiFiState> {
  public:
   Networking(String config_path, String ssid, String password, String hostname,
              const char* wifi_manager_password);

@@ -2,21 +2,21 @@
 
 namespace sensesp {
 
-void SystemStatusController::set_input(WifiState new_value,
+void SystemStatusController::set_input(WiFiState new_value,
                                        uint8_t input_channel) {
   // FIXME: If pointers to member functions would be held in an array,
   // this would be a simple array dereferencing
   switch (new_value) {
-    case WifiState::kWifiNoAP:
+    case WiFiState::kWifiNoAP:
       this->update_state(SystemStatus::kWifiNoAP);
       break;
-    case WifiState::kWifiDisconnected:
+    case WiFiState::kWifiDisconnected:
       this->update_state(SystemStatus::kWifiDisconnected);
       break;
-    case WifiState::kWifiConnectedToAP:
+    case WiFiState::kWifiConnectedToAP:
       this->update_state(SystemStatus::kWSDisconnected);
       break;
-    case WifiState::kWifiManagerActivated:
+    case WiFiState::kWifiManagerActivated:
       this->update_state(SystemStatus::kWifiManagerActivated);
       break;
   }
