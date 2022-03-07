@@ -42,6 +42,8 @@ class Networking : public Configurable,
   void enable_wifi_manager(bool state) {
     wifi_manager_enabled_ = state;
   }
+
+  void activate_wifi_manager();
  protected:
   void setup_saved_ssid();
   void setup_wifi_callbacks();

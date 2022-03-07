@@ -55,6 +55,10 @@ void Networking::start() {
   }
   // otherwise, fall through and WiFi will remain disconnected
 }
+
+void Networking::activate_wifi_manager() {
+  debugD("Activating WiFiManager");
+  if (WiFi.status() != WL_CONNECTED) {
     setup_wifi_manager();
   }
 }
