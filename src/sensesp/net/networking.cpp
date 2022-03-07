@@ -44,7 +44,6 @@ Networking::Networking(String config_path, String ssid, String password,
   }
   server = new AsyncWebServer(80);
   dns = new DNSServer();
-  wifi_manager = new AsyncWiFiManager(server, dns);
 }
 
 void Networking::start() {
@@ -113,6 +112,9 @@ void Networking::wifi_station_disconnected() {
  * start the WiFi Manager.
  */
 void Networking::setup_wifi_manager() {
+
+  wifi_manager = new AsyncWiFiManager(server, dns);
+
   should_save_config = false;
 
   String hostname = SensESPBaseApp::get_hostname();

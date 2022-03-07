@@ -54,7 +54,7 @@ class Networking : public Configurable,
   // FIXME: DNSServer and AsyncWiFiManager could be instantiated in
   // respective methods to save some runtime memory
   DNSServer* dns;
-  AsyncWiFiManager* wifi_manager;
+  AsyncWiFiManager* wifi_manager = nullptr;
 
   String ap_ssid = "";
   String ap_password = "";
