@@ -81,13 +81,23 @@ void Networking::setup_saved_ssid() {
   this->emit(WiFiState::kWifiDisconnected);
   setup_wifi_callbacks();
 
-  const char* hostname = SensESPBaseApp::get_hostname().c_str();
+  String hostname = SensESPBaseApp::get_hostname();
+  WiFi.setHostname(hostname.c_str());
 
-  WiFi.setHostname(hostname);
+  auto reconnect_cb = [this]() {
+    if (WiFi.status() != WL_CONNECTED) {
+      debugI("Connecting to wifi SSID %s.", ap_ssid.c_str());
+      WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
+    }
+  };
 
-  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
+  // Perform an initial connection without a delay.
+  reconnect_cb();
 
-  debugI("Connecting to wifi %s.", ap_ssid.c_str());
+  // Launch a separate onRepeat reaction to (re-)establish WiFi connection.
+  // Connecting is attempted only every 20 s to allow the previous connection
+  // attempt to complete even if the network is slow.
+  ReactESP::app->onRepeat(20000, reconnect_cb);
 }
 
 /**
