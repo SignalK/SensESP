@@ -16,7 +16,7 @@ class HTTPServer : public Startable {
  public:
   HTTPServer();
   ~HTTPServer() { delete server; }
-  virtual void start() override { server->begin(); }
+  virtual void start() override;
   void handle_not_found(AsyncWebServerRequest* request);
   void handle_config(AsyncWebServerRequest* request);
   void handle_device_reset(AsyncWebServerRequest* request);

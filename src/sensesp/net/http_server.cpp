@@ -136,6 +136,24 @@ HTTPServer::HTTPServer() : Startable(50) {
   server->on("/info", HTTP_GET, std::bind(&HTTPServer::handle_info, this, _1));
 }
 
+
+
+void HTTPServer::start() {
+  // only start the server if WiFi is connected
+  if (WiFi.status() == WL_CONNECTED) {
+    server->begin();
+    debugI("HTTP server started");
+  } else {
+    debugW("HTTP server not started, WiFi not connected");
+  }
+  WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
+    if (event == SYSTEM_EVENT_STA_GOT_IP) {
+      server->begin();
+      debugI("HTTP server started");
+    }
+  });
+}
+
 void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {
   debugD("NOT_FOUND: ");
   if (request->method() == HTTP_GET) {
