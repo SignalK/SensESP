@@ -14,15 +14,6 @@ namespace sensesp {
 #define WIFI_CONFIG_PORTAL_TIMEOUT 180
 #endif
 
-bool should_save_config = false;
-
-/**
- * @brief Callback used by WiFiManager to indicate that the configuration
- * should be saved.
- *
- */
-void save_config_callback() { should_save_config = true; }
-
 Networking::Networking(String config_path, String ssid, String password,
                        String hostname, const char* wifi_manager_password)
     : Configurable{config_path},
@@ -48,9 +39,16 @@ Networking::Networking(String config_path, String ssid, String password,
 
 void Networking::start() {
   debugD("Enabling Networking object");
+
+  // If we have preset or saved WiFi config, always use it. Otherwise,
+  // start WiFiManager. WiFiManager always starts the configuration portal
+  // instead of trying to connect.
+
   if (ap_ssid != "" && ap_password != "") {
+    debugI("Using hard-coded SSID %s and password", ap_ssid.c_str());
     setup_saved_ssid();
   } else if (ap_ssid == "" && WiFi.status() != WL_CONNECTED && wifi_manager_enabled_) {
+    debugI("Starting WiFiManager");
     setup_wifi_manager();
   }
   // otherwise, fall through and WiFi will remain disconnected
@@ -132,14 +130,12 @@ void Networking::setup_wifi_manager() {
 
   wifi_manager = new AsyncWiFiManager(server, dns);
 
-  should_save_config = false;
-
   String hostname = SensESPBaseApp::get_hostname();
 
   setup_wifi_callbacks();
 
   // set config save notify callback
-  wifi_manager->setSaveConfigCallback(save_config_callback);
+  wifi_manager->setBreakAfterConfig(true);
 
   wifi_manager->setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
 
@@ -147,8 +143,9 @@ void Networking::setup_wifi_manager() {
   wifi_manager->setDebugOutput(false);
 #endif
   AsyncWiFiManagerParameter custom_hostname(
-      "hostname", "Set ESP Device custom hostname", hostname.c_str(), 20);
+      "hostname", "Set ESP32 device custom hostname", hostname.c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
+  wifi_manager->setTryConnectDuringConfigPortal(false);
 
   // Create a unique SSID for configuring each SensESP Device
   String config_ssid = SensESPBaseApp::get_hostname();
@@ -159,29 +156,39 @@ void Networking::setup_wifi_manager() {
 
   WiFi.setHostname(SensESPBaseApp::get_hostname().c_str());
 
-  if (!wifi_manager->autoConnect(pconfig_ssid, wifi_manager_password_)) {
-    debugE("Failed to connect to wifi and config timed out. Restarting...");
+  wifi_manager->startConfigPortal(pconfig_ssid, wifi_manager_password_);
 
-    this->emit(WiFiState::kWifiDisconnected);
+  // WiFiManager attempts to connect to the new SSID, but that doesn't seem to
+  // work reliably. Instead, we'll just attempt to connect manually.
 
-    ESP.restart();
+  bool connected = false;
+  this->ap_ssid = wifi_manager->getConfiguredSTASSID();
+  this->ap_password = wifi_manager->getConfiguredSTAPassword();
+
+  // attempt to connect with the new SSID and password
+  if (this->ap_ssid != "" && this->ap_password != "") {
+    debugD("Attempting to connect to acquired SSID %s and password", this->ap_ssid.c_str());
+    WiFi.begin(this->ap_ssid.c_str(), this->ap_password.c_str());
+    for (int i = 0; i < 20; i++) {
+      if (WiFi.status() == WL_CONNECTED) {
+        connected = true;
+        break;
+      }
+      delay(1000);
+    }
   }
 
-  debugI("Connected to wifi,");
-  debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
-  this->emit(WiFiState::kWifiConnectedToAP);
+  // Only save the new configuration if we were able to connect to the new SSID.
 
-  if (should_save_config) {
+  if (connected) {
     String new_hostname = custom_hostname.getValue();
     debugI("Got new custom hostname: %s", new_hostname.c_str());
     SensESPBaseApp::get()->get_hostname_observable()->set(new_hostname);
-    this->ap_ssid = WiFi.SSID();
     debugI("Got new SSID and password: %s", ap_ssid.c_str());
-    this->ap_password = WiFi.psk();
     save_configuration();
-    debugW("Restarting in 500ms");
-    ReactESP::app->onDelay(500, []() { ESP.restart(); });
   }
+  debugW("Restarting...");
+  ESP.restart();
 }
 
 static const char SCHEMA_PREFIX[] PROGMEM = R"({
@@ -217,19 +224,22 @@ String Networking::get_config_schema() {
 // FIXME: hostname should be saved in SensESPApp
 
 void Networking::get_configuration(JsonObject& root) {
-  // root["hostname"] = SensESPBaseApp::get_hostname();
+  String hostname = SensESPBaseApp::get_hostname();
+  root["hostname"] = hostname;
+  root["ssid"] = ap_ssid;
+  root["password"] = ap_password;
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
-  debugD("%s\n", __func__);
-  // if (!config.containsKey("hostname")) {
-  //  return false;
-  //}
-  //
-  // if (preset_hostname == "SensESP") {
-  //  SensESPBaseApp::get()->get_hostname_observable()->set(
-  //      config["hostname"].as<String>());
-  //}
+  if (!config.containsKey("hostname")) {
+    return false;
+  }
+
+  SensESPBaseApp::get()->get_hostname_observable()->set(
+      config["hostname"].as<String>());
+
+  ap_ssid = config["ssid"].as<String>();
+  ap_password = config["password"].as<String>();
 
   return true;
 }
