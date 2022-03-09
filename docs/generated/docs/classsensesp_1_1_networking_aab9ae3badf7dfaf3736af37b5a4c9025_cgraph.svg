@@ -48,7 +48,7 @@ if (edges && edges.length) {
 <script type="text/javascript">
 var viewWidth = 650;
 var viewHeight = 212;
-var sectionId = 'dynsection-4';
+var sectionId = 'dynsection-6';
 </script>
 <script xlink:href="svgpan.js"/>
 <svg id="graph" class="graph">
@@ -58,7 +58,7 @@ var sectionId = 'dynsection-4';
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Start WiFi using preset SSID and password.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-117.5 0,-147.5 109,-147.5 109,-117.5 0,-117.5"/>
 <text text-anchor="start" x="8" y="-135.5" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::Networking</text>
 <text text-anchor="middle" x="54.5" y="-124.5" font-family="Helvetica,sans-Serif" font-size="10.00">::setup_saved_ssid</text>
@@ -71,7 +71,7 @@ var sectionId = 'dynsection-4';
 <g id="a_node2"><a xlink:href="classsensesp_1_1_value_producer.html#ae34225039d68b6f0e786266e76c2dace" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="520,-49.5 520,-79.5 642,-79.5 642,-49.5 520,-49.5"/>
 <text text-anchor="start" x="528" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::ValueProducer</text>
-<text text-anchor="middle" x="581" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; WifiState &gt;::emit</text>
+<text text-anchor="middle" x="581" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; WiFiState &gt;::emit</text>
 </a>
 </g>
 </g>

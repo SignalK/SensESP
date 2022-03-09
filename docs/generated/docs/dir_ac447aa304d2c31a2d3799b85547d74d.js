@@ -12,11 +12,14 @@ var dir_ac447aa304d2c31a2d3799b85547d74d =
       [ "sensesp::HTTPServer", "classsensesp_1_1_h_t_t_p_server.html", "classsensesp_1_1_h_t_t_p_server" ]
     ] ],
     [ "networking.cpp", "networking_8cpp.html", "networking_8cpp" ],
-    [ "networking.h", "networking_8h.html", "networking_8h" ],
+    [ "networking.h", "networking_8h.html", [
+      [ "sensesp::Networking", "classsensesp_1_1_networking.html", "classsensesp_1_1_networking" ]
+    ] ],
     [ "ota.cpp", "ota_8cpp.html", null ],
     [ "ota.h", "ota_8h.html", [
       [ "sensesp::OTA", "classsensesp_1_1_o_t_a.html", "classsensesp_1_1_o_t_a" ]
     ] ],
+    [ "wifi_state.h", "wifi__state_8h.html", "wifi__state_8h" ],
     [ "ws_client.cpp", "ws__client_8cpp.html", "ws__client_8cpp" ],
     [ "ws_client.h", "ws__client_8h.html", "ws__client_8h" ]
 ];

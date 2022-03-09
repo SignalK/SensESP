@@ -113,7 +113,7 @@ var hierarchy =
     [ "sensesp::ENUVector", "structsensesp_1_1_e_n_u_vector.html", null ],
     [ "sensesp::LocalDebug", "classsensesp_1_1_local_debug.html", null ],
     [ "sensesp::Observable", "classsensesp_1_1_observable.html", [
-      [ "sensesp::ValueProducer< WifiState >", "classsensesp_1_1_value_producer.html", [
+      [ "sensesp::ValueProducer< WiFiState >", "classsensesp_1_1_value_producer.html", [
         [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ]
       ] ],
       [ "sensesp::ValueProducer< SystemStatus >", "classsensesp_1_1_value_producer.html", [
@@ -241,7 +241,7 @@ var hierarchy =
     [ "sensesp::ValueConsumer< SystemStatus >", "classsensesp_1_1_value_consumer.html", [
       [ "sensesp::SystemStatusLed", "classsensesp_1_1_system_status_led.html", null ]
     ] ],
-    [ "sensesp::ValueConsumer< WifiState >", "classsensesp_1_1_value_consumer.html", [
+    [ "sensesp::ValueConsumer< WiFiState >", "classsensesp_1_1_value_consumer.html", [
       [ "sensesp::SystemStatusController", "classsensesp_1_1_system_status_controller.html", null ]
     ] ],
     [ "sensesp::ValueConsumer< WSConnectionState >", "classsensesp_1_1_value_consumer.html", [
