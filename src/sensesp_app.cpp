@@ -28,7 +28,7 @@ void SensESPApp::setup() {
 
   // create the networking object
   networking_ =
-      new Networking("/system/networking", ssid_, wifi_password_,
+      new Networking("/System/WiFi Settings", ssid_, wifi_password_,
                      SensESPBaseApp::get_hostname(), wifi_manager_password_);
 
   if (ota_password_ != nullptr) {
@@ -43,7 +43,7 @@ void SensESPApp::setup() {
   sk_delta_queue_ = new SKDeltaQueue();
 
   // create the websocket client
-  this->ws_client_ = new WSClient("/system/sk", sk_delta_queue_,
+  this->ws_client_ = new WSClient("/System/Signal K Settings", sk_delta_queue_,
                                   sk_server_address_, sk_server_port_);
 
   // connect the system status controller

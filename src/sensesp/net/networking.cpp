@@ -14,9 +14,12 @@ namespace sensesp {
 #define WIFI_CONFIG_PORTAL_TIMEOUT 180
 #endif
 
-bool should_save_config = false;
-
-void save_config_callback() { should_save_config = true; }
+// Network configuration logic:
+// 1. Use hard-coded hostname and WiFi credentials by default
+// 2. If the hostname or credentials have been changed in WiFiManager or
+//    the web UI, use the updated values.
+// 3. If the hard-coded hostname is changed, use that instead of the saved one.
+//    (But keep using the saved WiFi credentials!)
 
 Networking::Networking(String config_path, String ssid, String password,
                        String hostname, const char* wifi_manager_password)
@@ -24,30 +27,46 @@ Networking::Networking(String config_path, String ssid, String password,
       wifi_manager_password_{wifi_manager_password},
       Startable(80),
       Resettable(0) {
-  this->output = WifiState::kWifiNoAP;
+  this->output = WiFiState::kWifiNoAP;
 
   preset_ssid = ssid;
   preset_password = password;
   preset_hostname = hostname;
+  default_hostname = hostname;
 
-  if (!ssid.isEmpty()) {
-    debugI("Using hard-coded SSID %s and password", ssid.c_str());
-    this->ap_ssid = ssid;
-    this->ap_password = password;
-  } else {
-    load_configuration();
+  load_configuration();
+
+  if (default_hostname != preset_hostname) {
+    // if the preset hostname has changed, use it instead of the loaded one
+    SensESPBaseApp::get()->get_hostname_observable()->set(preset_hostname);
+    default_hostname = preset_hostname;
   }
+
   server = new AsyncWebServer(80);
   dns = new DNSServer();
-  wifi_manager = new AsyncWiFiManager(server, dns);
 }
 
 void Networking::start() {
   debugD("Enabling Networking object");
+
+  // If we have preset or saved WiFi config, always use it. Otherwise,
+  // start WiFiManager. WiFiManager always starts the configuration portal
+  // instead of trying to connect.
+
   if (ap_ssid != "" && ap_password != "") {
+    debugI("Using SSID %s", ap_ssid.c_str());
     setup_saved_ssid();
+  } else if (ap_ssid == "" && WiFi.status() != WL_CONNECTED &&
+             wifi_manager_enabled_) {
+    debugI("Starting WiFiManager");
+    setup_wifi_manager();
   }
-  if (ap_ssid == "" && WiFi.status() != WL_CONNECTED) {
+  // otherwise, fall through and WiFi will remain disconnected
+}
+
+void Networking::activate_wifi_manager() {
+  debugD("Activating WiFiManager");
+  if (WiFi.status() != WL_CONNECTED) {
     setup_wifi_manager();
   }
 }
@@ -63,42 +82,69 @@ void Networking::setup_wifi_callbacks() {
       WiFiEvent_t::SYSTEM_EVENT_STA_DISCONNECTED);
 }
 
+/**
+ * @brief Start WiFi using preset SSID and password.
+ */
 void Networking::setup_saved_ssid() {
-  this->emit(WifiState::kWifiDisconnected);
+  this->emit(WiFiState::kWifiDisconnected);
   setup_wifi_callbacks();
 
-  const char* hostname = SensESPBaseApp::get_hostname().c_str();
+  String hostname = SensESPBaseApp::get_hostname();
+  WiFi.setHostname(hostname.c_str());
 
-  WiFi.setHostname(hostname);
+  auto reconnect_cb = [this]() {
+    if (WiFi.status() != WL_CONNECTED) {
+      debugI("Connecting to wifi SSID %s.", ap_ssid.c_str());
+      WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
+    }
+  };
 
-  WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
+  // Perform an initial connection without a delay.
+  reconnect_cb();
 
-  debugI("Connecting to wifi %s.", ap_ssid.c_str());
+  // Launch a separate onRepeat reaction to (re-)establish WiFi connection.
+  // Connecting is attempted only every 20 s to allow the previous connection
+  // attempt to complete even if the network is slow.
+  ReactESP::app->onRepeat(20000, reconnect_cb);
 }
 
+/**
+ * This method gets called when WiFi is connected to the AP and has
+ * received an IP address.
+ */
 void Networking::wifi_station_connected() {
   debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
          WiFi.RSSI());
   debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
   debugI("Default route: %s", WiFi.gatewayIP().toString().c_str());
   debugI("DNS server: %s", WiFi.dnsIP().toString().c_str());
-  this->emit(WifiState::kWifiConnectedToAP);
+  this->emit(WiFiState::kWifiConnectedToAP);
 }
 
+/**
+ * This method gets called when WiFi is disconnected from the AP.
+ */
 void Networking::wifi_station_disconnected() {
   debugI("Disconnected from wifi.");
-  this->emit(WifiState::kWifiDisconnected);
+  this->emit(WiFiState::kWifiDisconnected);
 }
 
+/**
+ * @brief Start WiFi using WiFi Manager.
+ *
+ * If the setup process has been completed before, this method will start
+ * the WiFi connection using the saved SSID and password. Otherwise, it will
+ * start the WiFi Manager.
+ */
 void Networking::setup_wifi_manager() {
-  should_save_config = false;
+  wifi_manager = new AsyncWiFiManager(server, dns);
 
   String hostname = SensESPBaseApp::get_hostname();
 
   setup_wifi_callbacks();
 
   // set config save notify callback
-  wifi_manager->setSaveConfigCallback(save_config_callback);
+  wifi_manager->setBreakAfterConfig(true);
 
   wifi_manager->setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
 
@@ -106,89 +152,91 @@ void Networking::setup_wifi_manager() {
   wifi_manager->setDebugOutput(false);
 #endif
   AsyncWiFiManagerParameter custom_hostname(
-      "hostname", "Set ESP Device custom hostname", hostname.c_str(), 20);
+      "hostname", "Set ESP32 device custom hostname", hostname.c_str(), 20);
   wifi_manager->addParameter(&custom_hostname);
+  wifi_manager->setTryConnectDuringConfigPortal(false);
 
   // Create a unique SSID for configuring each SensESP Device
   String config_ssid = SensESPBaseApp::get_hostname();
   config_ssid = "Configure " + config_ssid;
   const char* pconfig_ssid = config_ssid.c_str();
 
-  this->emit(WifiState::kWifiManagerActivated);
+  this->emit(WiFiState::kWifiManagerActivated);
 
   WiFi.setHostname(SensESPBaseApp::get_hostname().c_str());
 
-  if (!wifi_manager->autoConnect(pconfig_ssid, wifi_manager_password_)) {
-    debugE("Failed to connect to wifi and config timed out. Restarting...");
+  wifi_manager->startConfigPortal(pconfig_ssid, wifi_manager_password_);
 
-    this->emit(WifiState::kWifiDisconnected);
+  // WiFiManager attempts to connect to the new SSID, but that doesn't seem to
+  // work reliably. Instead, we'll just attempt to connect manually.
 
-    ESP.restart();
+  bool connected = false;
+  this->ap_ssid = wifi_manager->getConfiguredSTASSID();
+  this->ap_password = wifi_manager->getConfiguredSTAPassword();
+
+  // attempt to connect with the new SSID and password
+  if (this->ap_ssid != "" && this->ap_password != "") {
+    debugD("Attempting to connect to acquired SSID %s and password",
+           this->ap_ssid.c_str());
+    WiFi.begin(this->ap_ssid.c_str(), this->ap_password.c_str());
+    for (int i = 0; i < 20; i++) {
+      if (WiFi.status() == WL_CONNECTED) {
+        connected = true;
+        break;
+      }
+      delay(1000);
+    }
   }
 
-  debugI("Connected to wifi,");
-  debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
-  this->emit(WifiState::kWifiConnectedToAP);
+  // Only save the new configuration if we were able to connect to the new SSID.
 
-  if (should_save_config) {
+  if (connected) {
     String new_hostname = custom_hostname.getValue();
     debugI("Got new custom hostname: %s", new_hostname.c_str());
     SensESPBaseApp::get()->get_hostname_observable()->set(new_hostname);
-    this->ap_ssid = WiFi.SSID();
     debugI("Got new SSID and password: %s", ap_ssid.c_str());
-    this->ap_password = WiFi.psk();
     save_configuration();
-    debugW("Restarting in 500ms");
-    ReactESP::app->onDelay(500, []() { ESP.restart(); });
   }
-}
-
-static const char SCHEMA_PREFIX[] PROGMEM = R"({
-"type": "object",
-"properties": {
-)";
-
-String get_property_row(String key, String title, bool readonly) {
-  String readonly_title = "";
-  String readonly_property = "";
-
-  if (readonly) {
-    readonly_title = " (readonly)";
-    readonly_property = ",\"readOnly\":true";
-  }
-
-  return "\"" + key + "\":{\"title\":\"" + title + readonly_title + "\"," +
-         "\"type\":\"string\"" + readonly_property + "}";
+  debugW("Restarting...");
+  ESP.restart();
 }
 
 String Networking::get_config_schema() {
-  String schema;
-  // If hostname is not set by SensESPAppBuilder::set_hostname() in main.cpp,
-  // then preset_hostname will be "SensESP", and should not be read-only in the
-  // Config UI. If preset_hostname is not "SensESP", then it was set in
-  // main.cpp, so it should be read-only.
-  bool hostname_preset = preset_hostname != "SensESP";
-  return String(FPSTR(SCHEMA_PREFIX)) +
-         get_property_row("hostname", "ESP device hostname", hostname_preset) +
-         "}}";
+  static const char kSchema[] = R"###({
+    "type": "object",
+    "properties": {
+      "ssid": { "title": "WiFi SSID", "type": "string" },
+      "password": { "title": "WiFi password", "type": "string", "format": "password" },
+      "hostname": { "title": "Device hostname", "type": "string" }
+    }
+  })###";
+
+  return String(kSchema);
 }
 
 // FIXME: hostname should be saved in SensESPApp
 
 void Networking::get_configuration(JsonObject& root) {
-  // root["hostname"] = SensESPBaseApp::get_hostname();
+  String hostname = SensESPBaseApp::get_hostname();
+  root["hostname"] = hostname;
+  root["default_hostname"] = default_hostname;
+  root["ssid"] = ap_ssid;
+  root["password"] = ap_password;
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
-  debugD("%s\n", __func__);
-  // if (!config.containsKey("hostname")) {
-  //  return false;
-  //}
-  //
-  // if (preset_hostname == "SensESP") {
-  //  SensESPBaseApp::get()->get_hostname_observable()->set(
-  //      config["hostname"].as<String>());
-  //}
+  if (!config.containsKey("hostname")) {
+    return false;
+  }
+
+  SensESPBaseApp::get()->get_hostname_observable()->set(
+      config["hostname"].as<String>());
+
+  if (config.containsKey("default_hostname")) {
+    default_hostname = config["default_hostname"].as<String>();
+  }
+  ap_ssid = config["ssid"].as<String>();
+  ap_password = config["password"].as<String>();
 
   return true;
 }

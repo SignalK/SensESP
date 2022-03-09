@@ -24,15 +24,15 @@ enum class SystemStatus {
  * set_wifi_* and set_ws_* methods to take the relevant action when such
  * an event occurs.
  */
-class SystemStatusController : public ValueConsumer<WifiState>,
+class SystemStatusController : public ValueConsumer<WiFiState>,
                                public ValueConsumer<WSConnectionState>,
                                public ValueProducer<SystemStatus> {
  public:
   SystemStatusController() {}
 
-  /// ValueConsumer interface for ValueConsumer<WifiState> (Networking object
+  /// ValueConsumer interface for ValueConsumer<WiFiState> (Networking object
   /// state updates)
-  virtual void set_input(WifiState new_value,
+  virtual void set_input(WiFiState new_value,
                          uint8_t input_channel = 0) override;
   /// ValueConsumer interface for ValueConsumer<WSConnectionState>
   /// (WSClient object state updates)
