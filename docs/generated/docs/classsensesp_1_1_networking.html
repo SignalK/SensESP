@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.3.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -123,6 +123,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acc268ce1d647c01d7a9b01ed34f55bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f35cb371a96fc50b598b7a1a2368e2f"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_networking.html#a2f35cb371a96fc50b598b7a1a2368e2f">get_config_schema</a> () override</td></tr>
 <tr class="separator:a2f35cb371a96fc50b598b7a1a2368e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa59d6f62115ba60c85ca3f8b105007c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_networking.html#aaa59d6f62115ba60c85ca3f8b105007c">enable_wifi_manager</a> (bool state)</td></tr>
+<tr class="separator:aaa59d6f62115ba60c85ca3f8b105007c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a244ebad7e0726fdedc742990ff78d7a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_networking.html#a244ebad7e0726fdedc742990ff78d7a0">activate_wifi_manager</a> ()</td></tr>
+<tr class="separator:a244ebad7e0726fdedc742990ff78d7a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
 <tr class="memitem:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b">Configurable</a> (String config_path)</td></tr>
 <tr class="separator:ae24b0359ade0718a19659af65e94d05b inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,22 +146,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9f3d3e7e5e7df7b940599f21529904f7 inherit pub_methods_classsensesp_1_1_resettable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6c6a8be09f41f1bca75571d13b47055 inherit pub_methods_classsensesp_1_1_resettable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_resettable.html#ac6c6a8be09f41f1bca75571d13b47055">set_reset_priority</a> (int priority)</td></tr>
 <tr class="separator:ac6c6a8be09f41f1bca75571d13b47055 inherit pub_methods_classsensesp_1_1_resettable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; WifiState &gt;</a></td></tr>
+<tr class="inherit_header pub_methods_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; WiFiState &gt;</a></td></tr>
 <tr class="memitem:aa29790dfe4e22903e061662be0fc7f68 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#aa29790dfe4e22903e061662be0fc7f68">ValueProducer</a> ()</td></tr>
 <tr class="separator:aa29790dfe4e22903e061662be0fc7f68 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a438390eae6bba056ecf4ab329cb5c8e9 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a">WifiState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9">get</a> () const</td></tr>
+<tr class="memitem:a438390eae6bba056ecf4ab329cb5c8e9 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9">get</a> () const</td></tr>
 <tr class="separator:a438390eae6bba056ecf4ab329cb5c8e9 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a168e379778dd79bc926aff69d9a87663 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a168e379778dd79bc926aff69d9a87663">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a">WifiState</a> &gt; *consumer, uint8_t input_channel=0)</td></tr>
+<tr class="memitem:a168e379778dd79bc926aff69d9a87663 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a168e379778dd79bc926aff69d9a87663">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a> &gt; *consumer, uint8_t input_channel=0)</td></tr>
 <tr class="separator:a168e379778dd79bc926aff69d9a87663 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdeaf06267cabf4ebd94e844fb9df345 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#acdeaf06267cabf4ebd94e844fb9df345">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; CT &gt; *consumer, uint8_t input_channel=0)</td></tr>
 <tr class="memdesc:acdeaf06267cabf4ebd94e844fb9df345 inherit pub_methods_classsensesp_1_1_value_producer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a producer to a consumer of a different type.  <a href="classsensesp_1_1_value_producer.html#acdeaf06267cabf4ebd94e844fb9df345">More...</a><br /></td></tr>
 <tr class="separator:acdeaf06267cabf4ebd94e844fb9df345 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbb8d14a259798f3a71b11b64722fd0a inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a">WifiState</a>, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#abbb8d14a259798f3a71b11b64722fd0a">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a">WifiState</a>, T2 &gt; *consumer_producer, uint8_t input_channel=0)</td></tr>
+<tr class="memitem:abbb8d14a259798f3a71b11b64722fd0a inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a>, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#abbb8d14a259798f3a71b11b64722fd0a">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a>, T2 &gt; *consumer_producer, uint8_t input_channel=0)</td></tr>
 <tr class="separator:abbb8d14a259798f3a71b11b64722fd0a inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdb4d7a52d071eb2f380fb9d31e8c34f inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#afdb4d7a52d071eb2f380fb9d31e8c34f">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; *consumer_producer, uint8_t input_channel=0)</td></tr>
 <tr class="memdesc:afdb4d7a52d071eb2f380fb9d31e8c34f inherit pub_methods_classsensesp_1_1_value_producer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a producer to a transform with a different input type.  <a href="classsensesp_1_1_value_producer.html#afdb4d7a52d071eb2f380fb9d31e8c34f">More...</a><br /></td></tr>
 <tr class="separator:afdb4d7a52d071eb2f380fb9d31e8c34f inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae34225039d68b6f0e786266e76c2dace inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#ae34225039d68b6f0e786266e76c2dace">emit</a> (<a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a">WifiState</a> new_value)</td></tr>
+<tr class="memitem:ae34225039d68b6f0e786266e76c2dace inherit pub_methods_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#ae34225039d68b6f0e786266e76c2dace">emit</a> (<a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a> new_value)</td></tr>
 <tr class="separator:ae34225039d68b6f0e786266e76c2dace inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_observable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classsensesp_1_1_observable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_observable.html">sensesp::Observable</a></td></tr>
 <tr class="memitem:a427ed25e82e6ae156743732c2f55a49e inherit pub_methods_classsensesp_1_1_observable"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_observable.html#a427ed25e82e6ae156743732c2f55a49e">Observable</a> ()</td></tr>
@@ -173,10 +177,12 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:aab9ae3badf7dfaf3736af37b5a4c9025"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_networking.html#aab9ae3badf7dfaf3736af37b5a4c9025">setup_saved_ssid</a> ()</td></tr>
+<tr class="memdesc:aab9ae3badf7dfaf3736af37b5a4c9025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start WiFi using preset SSID and password.  <a href="classsensesp_1_1_networking.html#aab9ae3badf7dfaf3736af37b5a4c9025">More...</a><br /></td></tr>
 <tr class="separator:aab9ae3badf7dfaf3736af37b5a4c9025"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7186c3fc3668f3aa2439fb8f1263c0f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_networking.html#a7186c3fc3668f3aa2439fb8f1263c0f4">setup_wifi_callbacks</a> ()</td></tr>
 <tr class="separator:a7186c3fc3668f3aa2439fb8f1263c0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28dcf335a69d16f9206e0e5b9886d66a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_networking.html#a28dcf335a69d16f9206e0e5b9886d66a">setup_wifi_manager</a> ()</td></tr>
+<tr class="memdesc:a28dcf335a69d16f9206e0e5b9886d66a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start WiFi using WiFi Manager.  <a href="classsensesp_1_1_networking.html#a28dcf335a69d16f9206e0e5b9886d66a">More...</a><br /></td></tr>
 <tr class="separator:a28dcf335a69d16f9206e0e5b9886d66a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad75261059cb20d55e7cd2c58e8a06738"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_networking.html#ad75261059cb20d55e7cd2c58e8a06738">wifi_station_connected</a> ()</td></tr>
 <tr class="separator:ad75261059cb20d55e7cd2c58e8a06738"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,14 +203,14 @@ Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
 <tr class="memitem:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#aded48ebfe23c7bee1845c7ab99c63a6e">config_path_</a></td></tr>
 <tr class="separator:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; WifiState &gt;</a></td></tr>
-<tr class="memitem:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a">WifiState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a></td></tr>
+<tr class="inherit_header pro_attribs_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; WiFiState &gt;</a></td></tr>
+<tr class="memitem:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a></td></tr>
 <tr class="separator:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Manages the ESP's connection to the Wifi network. </p>
 
-<p class="definition">Definition at line <a class="el" href="networking_8h_source.html#l00028">28</a> of file <a class="el" href="networking_8h_source.html">networking.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8h_source.html#l00022">22</a> of file <a class="el" href="networking_8h_source.html">networking.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ada452657788120737d28fd55ea74f3bf" name="ada452657788120737d28fd55ea74f3bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ada452657788120737d28fd55ea74f3bf">&#9670;&nbsp;</a></span>Networking()</h2>
@@ -250,17 +256,70 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00021">21</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00024">24</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_ada452657788120737d28fd55ea74f3bf_cgraph.svg" width="656" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_ada452657788120737d28fd55ea74f3bf_cgraph.svg" width="100%" height="449"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a244ebad7e0726fdedc742990ff78d7a0" name="a244ebad7e0726fdedc742990ff78d7a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a244ebad7e0726fdedc742990ff78d7a0">&#9670;&nbsp;</a></span>activate_wifi_manager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::Networking::activate_wifi_manager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00067">67</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_a244ebad7e0726fdedc742990ff78d7a0_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aaa59d6f62115ba60c85ca3f8b105007c" name="aaa59d6f62115ba60c85ca3f8b105007c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa59d6f62115ba60c85ca3f8b105007c">&#9670;&nbsp;</a></span>enable_wifi_manager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::Networking::enable_wifi_manager </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="networking_8h_source.html#l00036">36</a> of file <a class="el" href="networking_8h_source.html">networking.h</a>.</p>
+
+</div>
+</div>
 <a id="a2f35cb371a96fc50b598b7a1a2368e2f" name="a2f35cb371a96fc50b598b7a1a2368e2f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f35cb371a96fc50b598b7a1a2368e2f">&#9670;&nbsp;</a></span>get_config_schema()</h2>
 
@@ -287,13 +346,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a2a0b1727f0e7fca0730381e030360a1a">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00164">164</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_a2f35cb371a96fc50b598b7a1a2368e2f_cgraph.svg" width="383" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00204">204</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 
 </div>
 </div>
@@ -324,7 +377,13 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a7785e86a2e662ff0291f7a6fb043ea91">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00178">178</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00219">219</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_a0c6f1129ddbf501e4bc26c1e210f0245_cgraph.svg" width="656" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -353,7 +412,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_resettable.html#a3986291418428372569706c6e7d13708">sensesp::Resettable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00196">196</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00244">244</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -390,7 +449,13 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a0deaa5b717cd0f60d0105835cd6b595a">sensesp::Configurable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00182">182</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00227">227</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_acc268ce1d647c01d7a9b01ed34f55bee_cgraph.svg" width="419" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -417,7 +482,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00066">66</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p>Start WiFi using preset SSID and password. </p>
+
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00088">88</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -456,7 +523,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00055">55</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00074">74</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -466,7 +533,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_a7186c3fc3668f3aa2439fb8f1263c0f4_icgraph.svg" width="550" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_a7186c3fc3668f3aa2439fb8f1263c0f4_icgraph.svg" width="564" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -495,7 +562,10 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00093">93</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p>Start WiFi using WiFi Manager. </p>
+<p >If the setup process has been completed before, this method will start the WiFi connection using the saved SSID and password. Otherwise, it will start the WiFi Manager. </p>
+
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00139">139</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -505,7 +575,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_a28dcf335a69d16f9206e0e5b9886d66a_icgraph.svg" width="351" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_networking_a28dcf335a69d16f9206e0e5b9886d66a_icgraph.svg" width="366" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -537,7 +607,7 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_startable.html#abfaf030e62b0240713caa740f6beccb7">sensesp::Startable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00045">45</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00049">49</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -569,8 +639,9 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >This method gets called when WiFi is connected to the AP and has received an IP address. </p>
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00079">79</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00115">115</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -608,8 +679,9 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >This method gets called when WiFi is disconnected from the AP. </p>
 
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00088">88</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00127">127</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">

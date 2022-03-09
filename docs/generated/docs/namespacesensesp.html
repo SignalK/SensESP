@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.2.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.3.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -410,6 +410,8 @@ it must have &lt;tt&gt;units&lt;/tt&gt;". Thus, any paths that you output that a
 Typedefs</h2></td></tr>
 <tr class="memitem:af69114aa7205860f5705dab5c93c55c8"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#af69114aa7205860f5705dab5c93c55c8">void_cb_func</a></td></tr>
 <tr class="separator:af69114aa7205860f5705dab5c93c55c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4849d1b172024ae723cfbe92af0ca1c1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a4849d1b172024ae723cfbe92af0ca1c1">WifiState</a> = <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a></td></tr>
+<tr class="separator:a4849d1b172024ae723cfbe92af0ca1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a246daad91fcc12046af99985f827b89d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classsensesp_1_1_e_s_p32_analog_reader.html">ESP32AnalogReader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a246daad91fcc12046af99985f827b89d">AnalogReader</a></td></tr>
 <tr class="separator:a246daad91fcc12046af99985f827b89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21e5856b92e575cd64d78a0608317ef9"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classsensesp_1_1_sensor_t.html">SensorT</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a21e5856b92e575cd64d78a0608317ef9">FloatSensor</a></td></tr>
@@ -513,12 +515,12 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:af833775127368fc26658b6d3a070f2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24623fb1498841601fa8b7ee3329738a"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a">WifiState</a> { <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aa91fb26167a66932c36d148bb5fdf98da">kWifiNoAP</a> = 0
-, <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aadfe8409a3feb30a0acc8624fd85556c5">kWifiDisconnected</a>
-, <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aa151c0fa5b476a21aeb84de0c5fa986c8">kWifiConnectedToAP</a>
-, <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410">kWifiManagerActivated</a>
+<tr class="memitem:ad84e6e6c52f84bf796580e527b57b3ae"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a> { <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da">kWifiNoAP</a> = 0
+, <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5">kWifiDisconnected</a>
+, <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8">kWifiConnectedToAP</a>
+, <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410">kWifiManagerActivated</a>
  }</td></tr>
-<tr class="separator:a24623fb1498841601fa8b7ee3329738a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ad84e6e6c52f84bf796580e527b57b3ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80ea75be3339693d942aeca17329641f"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a80ea75be3339693d942aeca17329641f">WSConnectionState</a> { <a class="el" href="namespacesensesp.html#a80ea75be3339693d942aeca17329641fafc5d8075e090bc270813d73c4c87c74a">kWSDisconnected</a>
 , <a class="el" href="namespacesensesp.html#a80ea75be3339693d942aeca17329641fa53396694885ba110633752f7b4dcbc37">kWSAuthorizing</a>
 , <a class="el" href="namespacesensesp.html#a80ea75be3339693d942aeca17329641fa06ee8fe02fa081d715323bf64473cfc9">kWSConnecting</a>
@@ -541,10 +543,6 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ad936ebc9566baaae0039265987a6ea54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad936ebc9566baaae0039265987a6ea54">SetupSerialDebug</a> (uint32_t baudrate)</td></tr>
 <tr class="separator:ad936ebc9566baaae0039265987a6ea54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf3e860cdeae5f7452ecac2b923439d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aaf3e860cdeae5f7452ecac2b923439d5">save_config_callback</a> ()</td></tr>
-<tr class="separator:aaf3e860cdeae5f7452ecac2b923439d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb4bd018d7b40883280f446f3112b73d"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#afb4bd018d7b40883280f446f3112b73d">get_property_row</a> (String key, String title, bool readonly)</td></tr>
-<tr class="separator:afb4bd018d7b40883280f446f3112b73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a922a4380d70b3a01a7e117644805de09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a922a4380d70b3a01a7e117644805de09">ExecuteWebSocketTask</a> (void *parameter)</td></tr>
 <tr class="separator:a922a4380d70b3a01a7e117644805de09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f37392d0637be5754c86b87b263d0d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a4f37392d0637be5754c86b87b263d0d3">webSocketClientEvent</a> (WStype_t type, uint8_t *payload, size_t length)</td></tr>
@@ -583,13 +581,11 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a400482a88888fb760a3905b036bc101d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sensesp_8h.html#a03812ed51648501f4a4bd0ec7bd1b33d">DEBUG_CLASS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a400482a88888fb760a3905b036bc101d">Debug</a></td></tr>
 <tr class="separator:a400482a88888fb760a3905b036bc101d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad2887cc9dde673d6b763a780179c1ef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aad2887cc9dde673d6b763a780179c1ef">should_save_config</a> = false</td></tr>
-<tr class="separator:aad2887cc9dde673d6b763a780179c1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e1fbe9a6800a64f87c85f5bc364aed6"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2e1fbe9a6800a64f87c85f5bc364aed6">ws_client_task_stack_size</a> = 8192</td></tr>
 <tr class="separator:a2e1fbe9a6800a64f87c85f5bc364aed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_w_s_client.html">WSClient</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a01c9e413ed693e0b956363d0b2c5a26e">ws_client</a></td></tr>
 <tr class="separator:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.2.1&quot;</td></tr>
+<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.3.0&quot;</td></tr>
 <tr class="separator:a415d47efb7e756b1be52067ac1792c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc35a8f1394e257344015e4042bc7d1"><td class="memItemLeft" align="right" valign="top">ReactESP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">app</a></td></tr>
 <tr class="separator:a2bc35a8f1394e257344015e4042bc7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1344,6 +1340,22 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a4849d1b172024ae723cfbe92af0ca1c1" name="a4849d1b172024ae723cfbe92af0ca1c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4849d1b172024ae723cfbe92af0ca1c1">&#9670;&nbsp;</a></span>WifiState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">sensesp::WifiState</a> = typedef <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="wifi__state_8h_source.html#l00014">14</a> of file <a class="el" href="wifi__state_8h_source.html">wifi_state.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a21975f0611649b430d00a47945332495" name="a21975f0611649b430d00a47945332495"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a21975f0611649b430d00a47945332495">&#9670;&nbsp;</a></span>ClickTypes</h2>
@@ -1411,8 +1423,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a24623fb1498841601fa8b7ee3329738a" name="a24623fb1498841601fa8b7ee3329738a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24623fb1498841601fa8b7ee3329738a">&#9670;&nbsp;</a></span>WifiState</h2>
+<a id="ad84e6e6c52f84bf796580e527b57b3ae" name="ad84e6e6c52f84bf796580e527b57b3ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad84e6e6c52f84bf796580e527b57b3ae">&#9670;&nbsp;</a></span>WiFiState</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1421,7 +1433,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a">sensesp::WifiState</a></td>
+          <td class="memname">enum class <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">sensesp::WiFiState</a></td>
         </tr>
       </table>
   </td>
@@ -1431,13 +1443,13 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a24623fb1498841601fa8b7ee3329738aa91fb26167a66932c36d148bb5fdf98da" name="a24623fb1498841601fa8b7ee3329738aa91fb26167a66932c36d148bb5fdf98da"></a>kWifiNoAP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a24623fb1498841601fa8b7ee3329738aadfe8409a3feb30a0acc8624fd85556c5" name="a24623fb1498841601fa8b7ee3329738aadfe8409a3feb30a0acc8624fd85556c5"></a>kWifiDisconnected&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a24623fb1498841601fa8b7ee3329738aa151c0fa5b476a21aeb84de0c5fa986c8" name="a24623fb1498841601fa8b7ee3329738aa151c0fa5b476a21aeb84de0c5fa986c8"></a>kWifiConnectedToAP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410" name="a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410"></a>kWifiManagerActivated&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da" name="ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da"></a>kWifiNoAP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5" name="ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5"></a>kWifiDisconnected&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8" name="ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8"></a>kWifiConnectedToAP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410" name="ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410"></a>kWifiManagerActivated&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="networking_8h_source.html#l00018">18</a> of file <a class="el" href="networking_8h_source.html">networking.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wifi__state_8h_source.html#l00006">6</a> of file <a class="el" href="wifi__state_8h_source.html">wifi_state.h</a>.</p>
 
 </div>
 </div>
@@ -1579,48 +1591,6 @@ Here is the caller graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="namespacesensesp_a270290236513f91972b435ad45c4f70b_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div>
-
-</div>
-</div>
-<a id="afb4bd018d7b40883280f446f3112b73d" name="afb4bd018d7b40883280f446f3112b73d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb4bd018d7b40883280f446f3112b73d">&#9670;&nbsp;</a></span>get_property_row()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">String sensesp::get_property_row </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>title</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>readonly</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00151">151</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_afb4bd018d7b40883280f446f3112b73d_icgraph.svg" width="383" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -1804,31 +1774,6 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="observablevalue_8h_source.html#l00014">14</a> of file <a class="el" href="observablevalue_8h_source.html">observablevalue.h</a>.</p>
-
-</div>
-</div>
-<a id="aaf3e860cdeae5f7452ecac2b923439d5" name="aaf3e860cdeae5f7452ecac2b923439d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf3e860cdeae5f7452ecac2b923439d5">&#9670;&nbsp;</a></span>save_config_callback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void sensesp::save_config_callback </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00019">19</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_aaf3e860cdeae5f7452ecac2b923439d5_icgraph.svg" width="548" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
 
 </div>
 </div>
@@ -2044,7 +1989,7 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.2.1&quot;</td>
+          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.3.0&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2082,22 +2027,6 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="sensesp__app_8cpp_source.html#l00083">83</a> of file <a class="el" href="sensesp__app_8cpp_source.html">sensesp_app.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aad2887cc9dde673d6b763a780179c1ef" name="aad2887cc9dde673d6b763a780179c1ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad2887cc9dde673d6b763a780179c1ef">&#9670;&nbsp;</a></span>should_save_config</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool sensesp::should_save_config = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="networking_8cpp_source.html#l00017">17</a> of file <a class="el" href="networking_8cpp_source.html">networking.cpp</a>.</p>
 
 </div>
 </div>

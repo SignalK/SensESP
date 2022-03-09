@@ -151,6 +151,7 @@ var namespacesensesp =
     [ "StringSKPutRequestListener", "namespacesensesp.html#a9e9cffb55d8564db9ce0a75d53a7489c", null ],
     [ "StringTransform", "namespacesensesp.html#a699a1fad20b0b7a81ab592b909402983", null ],
     [ "void_cb_func", "namespacesensesp.html#af69114aa7205860f5705dab5c93c55c8", null ],
+    [ "WifiState", "namespacesensesp.html#a4849d1b172024ae723cfbe92af0ca1c1", null ],
     [ "ClickTypes", "namespacesensesp.html#a21975f0611649b430d00a47945332495", [
       [ "ButtonPress", "namespacesensesp.html#a21975f0611649b430d00a47945332495ae331802be240d79912c365112ad41ddb", null ],
       [ "ButtonRelease", "namespacesensesp.html#a21975f0611649b430d00a47945332495ac58a283b80d411649376455b98710c95", null ],
@@ -168,11 +169,11 @@ var namespacesensesp =
       [ "kWSConnecting", "namespacesensesp.html#af833775127368fc26658b6d3a070f2aba06ee8fe02fa081d715323bf64473cfc9", null ],
       [ "kWSConnected", "namespacesensesp.html#af833775127368fc26658b6d3a070f2aba1082607a601695536faefdbca5e45db0", null ]
     ] ],
-    [ "WifiState", "namespacesensesp.html#a24623fb1498841601fa8b7ee3329738a", [
-      [ "kWifiNoAP", "namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aa91fb26167a66932c36d148bb5fdf98da", null ],
-      [ "kWifiDisconnected", "namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aadfe8409a3feb30a0acc8624fd85556c5", null ],
-      [ "kWifiConnectedToAP", "namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aa151c0fa5b476a21aeb84de0c5fa986c8", null ],
-      [ "kWifiManagerActivated", "namespacesensesp.html#a24623fb1498841601fa8b7ee3329738aaae3791bed82b89b55c2b64785d125410", null ]
+    [ "WiFiState", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae", [
+      [ "kWifiNoAP", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da", null ],
+      [ "kWifiDisconnected", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5", null ],
+      [ "kWifiConnectedToAP", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8", null ],
+      [ "kWifiManagerActivated", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410", null ]
     ] ],
     [ "WSConnectionState", "namespacesensesp.html#a80ea75be3339693d942aeca17329641f", [
       [ "kWSDisconnected", "namespacesensesp.html#a80ea75be3339693d942aeca17329641fafc5d8075e090bc270813d73c4c87c74a", null ],
@@ -183,7 +184,6 @@ var namespacesensesp =
     [ "connect_system_info_sensor", "namespacesensesp.html#af967e4af8221a3bf2d5fd79522ada711", null ],
     [ "ExecuteWebSocketTask", "namespacesensesp.html#a922a4380d70b3a01a7e117644805de09", null ],
     [ "generate_uuid4", "namespacesensesp.html#a270290236513f91972b435ad45c4f70b", null ],
-    [ "get_property_row", "namespacesensesp.html#afb4bd018d7b40883280f446f3112b73d", null ],
     [ "get_schema_type_string", "namespacesensesp.html#a262289c4dde77cc0a59a41f304b9f47b", null ],
     [ "get_schema_type_string", "namespacesensesp.html#ae6d4acd2d823b7e142f6a3e8106708b0", null ],
     [ "get_schema_type_string", "namespacesensesp.html#ab312ceec1223ad902af42b4b8ca0ad3e", null ],
@@ -191,7 +191,6 @@ var namespacesensesp =
     [ "get_schema_type_string", "namespacesensesp.html#a395f3bd428b2b51fe147e84287a8e7c3", null ],
     [ "operator!=", "namespacesensesp.html#a85fc3656cea89e333664441057db3584", null ],
     [ "operator==", "namespacesensesp.html#aa6a475cd9be10780f70d15372c13c36b", null ],
-    [ "save_config_callback", "namespacesensesp.html#aaf3e860cdeae5f7452ecac2b923439d5", null ],
     [ "SetupSerialDebug", "namespacesensesp.html#ad936ebc9566baaae0039265987a6ea54", null ],
     [ "webSocketClientEvent", "namespacesensesp.html#a4f37392d0637be5754c86b87b263d0d3", null ],
     [ "app", "namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1", null ],
@@ -203,7 +202,6 @@ var namespacesensesp =
     [ "kSensESPVersion", "namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44", null ],
     [ "no_ap_pattern", "namespacesensesp.html#a63cb27a0ef59894b731d42770d67aef3", null ],
     [ "sensesp_app", "namespacesensesp.html#aaf87e022a3c4111a8e24045e297e14ba", null ],
-    [ "should_save_config", "namespacesensesp.html#aad2887cc9dde673d6b763a780179c1ef", null ],
     [ "ui_outputs", "namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44", null ],
     [ "wifi_connected_pattern", "namespacesensesp.html#ab97a03fa114165f852d3e9f7ef14ad7e", null ],
     [ "wifi_disconnected_pattern", "namespacesensesp.html#ad53b505f128cf2dbb5e01bea56399524", null ],

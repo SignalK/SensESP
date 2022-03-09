@@ -1,6 +1,8 @@
 var classsensesp_1_1_networking =
 [
     [ "Networking", "classsensesp_1_1_networking.html#ada452657788120737d28fd55ea74f3bf", null ],
+    [ "activate_wifi_manager", "classsensesp_1_1_networking.html#a244ebad7e0726fdedc742990ff78d7a0", null ],
+    [ "enable_wifi_manager", "classsensesp_1_1_networking.html#aaa59d6f62115ba60c85ca3f8b105007c", null ],
     [ "get_config_schema", "classsensesp_1_1_networking.html#a2f35cb371a96fc50b598b7a1a2368e2f", null ],
     [ "get_configuration", "classsensesp_1_1_networking.html#a0c6f1129ddbf501e4bc26c1e210f0245", null ],
     [ "reset", "classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159", null ],
