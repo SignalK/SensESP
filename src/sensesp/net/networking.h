@@ -59,9 +59,16 @@ class Networking : public Configurable,
 
   String ap_ssid = "";
   String ap_password = "";
+
+  /// hardcoded values provided as constructor parameters
   String preset_ssid = "";
   String preset_password = "";
   String preset_hostname = "";
+
+  // original value of hardcoded hostname; used to detect changes
+  // in the hardcoded value
+  String default_hostname = "";
+
   const char* wifi_manager_password_;
 
 };

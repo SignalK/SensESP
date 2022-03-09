@@ -14,6 +14,13 @@ namespace sensesp {
 #define WIFI_CONFIG_PORTAL_TIMEOUT 180
 #endif
 
+// Network configuration logic:
+// 1. Use hard-coded hostname and WiFi credentials by default
+// 2. If the hostname or credentials have been changed in WiFiManager or
+//    the web UI, use the updated values.
+// 3. If the hard-coded hostname is changed, use that instead of the saved one.
+//    (But keep using the saved WiFi credentials!)
+
 Networking::Networking(String config_path, String ssid, String password,
                        String hostname, const char* wifi_manager_password)
     : Configurable{config_path},
@@ -25,14 +32,16 @@ Networking::Networking(String config_path, String ssid, String password,
   preset_ssid = ssid;
   preset_password = password;
   preset_hostname = hostname;
+  default_hostname = hostname;
 
-  if (!ssid.isEmpty()) {
-    debugI("Using hard-coded SSID %s and password", ssid.c_str());
-    this->ap_ssid = ssid;
-    this->ap_password = password;
-  } else {
-    load_configuration();
+  load_configuration();
+
+  if (default_hostname != preset_hostname) {
+    // if the preset hostname has changed, use it instead of the loaded one
+    SensESPBaseApp::get()->get_hostname_observable()->set(preset_hostname);
+    default_hostname = preset_hostname;
   }
+
   server = new AsyncWebServer(80);
   dns = new DNSServer();
 }
@@ -45,7 +54,7 @@ void Networking::start() {
   // instead of trying to connect.
 
   if (ap_ssid != "" && ap_password != "") {
-    debugI("Using hard-coded SSID %s and password", ap_ssid.c_str());
+    debugI("Using SSID %s", ap_ssid.c_str());
     setup_saved_ssid();
   } else if (ap_ssid == "" && WiFi.status() != WL_CONNECTED &&
              wifi_manager_enabled_) {
@@ -210,6 +219,7 @@ String Networking::get_config_schema() {
 void Networking::get_configuration(JsonObject& root) {
   String hostname = SensESPBaseApp::get_hostname();
   root["hostname"] = hostname;
+  root["default_hostname"] = default_hostname;
   root["ssid"] = ap_ssid;
   root["password"] = ap_password;
 }
@@ -222,6 +232,9 @@ bool Networking::set_configuration(const JsonObject& config) {
   SensESPBaseApp::get()->get_hostname_observable()->set(
       config["hostname"].as<String>());
 
+  if (config.containsKey("default_hostname")) {
+    default_hostname = config["default_hostname"].as<String>();
+  }
   ap_ssid = config["ssid"].as<String>();
   ap_password = config["password"].as<String>();
 
