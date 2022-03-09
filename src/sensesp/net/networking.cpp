@@ -47,7 +47,8 @@ void Networking::start() {
   if (ap_ssid != "" && ap_password != "") {
     debugI("Using hard-coded SSID %s and password", ap_ssid.c_str());
     setup_saved_ssid();
-  } else if (ap_ssid == "" && WiFi.status() != WL_CONNECTED && wifi_manager_enabled_) {
+  } else if (ap_ssid == "" && WiFi.status() != WL_CONNECTED &&
+             wifi_manager_enabled_) {
     debugI("Starting WiFiManager");
     setup_wifi_manager();
   }
@@ -127,7 +128,6 @@ void Networking::wifi_station_disconnected() {
  * start the WiFi Manager.
  */
 void Networking::setup_wifi_manager() {
-
   wifi_manager = new AsyncWiFiManager(server, dns);
 
   String hostname = SensESPBaseApp::get_hostname();
@@ -167,7 +167,8 @@ void Networking::setup_wifi_manager() {
 
   // attempt to connect with the new SSID and password
   if (this->ap_ssid != "" && this->ap_password != "") {
-    debugD("Attempting to connect to acquired SSID %s and password", this->ap_ssid.c_str());
+    debugD("Attempting to connect to acquired SSID %s and password",
+           this->ap_ssid.c_str());
     WiFi.begin(this->ap_ssid.c_str(), this->ap_password.c_str());
     for (int i = 0; i < 20; i++) {
       if (WiFi.status() == WL_CONNECTED) {
@@ -191,34 +192,17 @@ void Networking::setup_wifi_manager() {
   ESP.restart();
 }
 
-static const char SCHEMA_PREFIX[] PROGMEM = R"({
-"type": "object",
-"properties": {
-)";
-
-String get_property_row(String key, String title, bool readonly) {
-  String readonly_title = "";
-  String readonly_property = "";
-
-  if (readonly) {
-    readonly_title = " (readonly)";
-    readonly_property = ",\"readOnly\":true";
-  }
-
-  return "\"" + key + "\":{\"title\":\"" + title + readonly_title + "\"," +
-         "\"type\":\"string\"" + readonly_property + "}";
-}
-
 String Networking::get_config_schema() {
-  String schema;
-  // If hostname is not set by SensESPAppBuilder::set_hostname() in main.cpp,
-  // then preset_hostname will be "SensESP", and should not be read-only in the
-  // Config UI. If preset_hostname is not "SensESP", then it was set in
-  // main.cpp, so it should be read-only.
-  bool hostname_preset = preset_hostname != "SensESP";
-  return String(FPSTR(SCHEMA_PREFIX)) +
-         get_property_row("hostname", "ESP device hostname", hostname_preset) +
-         "}}";
+  static const char kSchema[] = R"###({
+    "type": "object",
+    "properties": {
+      "ssid": { "title": "WiFi SSID", "type": "string" },
+      "password": { "title": "WiFi password", "type": "string", "format": "password" },
+      "hostname": { "title": "Device hostname", "type": "string" }
+    }
+  })###";
+
+  return String(kSchema);
 }
 
 // FIXME: hostname should be saved in SensESPApp
