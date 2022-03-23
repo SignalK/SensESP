@@ -1,8 +1,8 @@
-#ifndef DEBUG_DISABLED
-
 #include "local_debug.h"
 
 namespace sensesp {
+
+#ifndef DEBUG_DISABLED
 
 bool LocalDebug::begin(String hostname, uint8_t startingDebugLevel) {
   _lastDebugLevel = startingDebugLevel;
@@ -16,12 +16,6 @@ boolean LocalDebug::isActive(uint8_t debugLevel) {
 //   Serial.write(character);
 //   return 1;
 // }
-
-#else  // DEBUG_DISABLED
-
-// define empty debug macros
-
-#include "local_debug.h"
 
 #endif  // DEBUG_DISABLED
 
