@@ -1,12 +1,12 @@
 #ifndef _local_debug_H_
 #define _local_debug_H_
 
-#ifndef DEBUG_DISABLED
-
 #include "Arduino.h"
 #include "Print.h"
 
 namespace sensesp {
+
+#ifndef DEBUG_DISABLED
 
 #define rdebugA(fmt, ...)        \
   if (Debug.isActive(Debug.ANY)) \
