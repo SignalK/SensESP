@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"hysteresis_8h.html":[2,0,0,0,5,22],
+"hysteresis_8h.html#a018643e365493945bdfa43db85b03fb3":[2,0,0,0,5,22,1],
 "hysteresis_8h_source.html":[2,0,0,0,5,22],
 "index.html":[],
 "index_8h.html":[2,0,0,0,1,0,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "sensesp__app_8cpp.html#aaf87e022a3c4111a8e24045e297e14ba":[2,0,0,3,0],
 "sensesp__app_8cpp_source.html":[2,0,0,3],
 "sensesp__app_8h.html":[2,0,0,4],
-"sensesp__app_8h.html#ab4553be4db9860d940f81d7447173b2f":[2,0,0,4,2],
-"sensesp__app_8h.html#add0ff5bdcc203b4a438aa1f46260283d":[2,0,0,4,1],
-"sensesp__app_8h_source.html":[2,0,0,4]
+"sensesp__app_8h.html#ab4553be4db9860d940f81d7447173b2f":[2,0,0,4,2]
 };
