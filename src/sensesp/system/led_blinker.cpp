@@ -2,7 +2,6 @@
 #include "led_blinker.h"
 
 #include "sensesp.h"
-#include "sensesp/net/networking.h"
 #include "sensesp_app.h"
 
 namespace sensesp {

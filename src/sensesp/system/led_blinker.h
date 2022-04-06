@@ -3,7 +3,6 @@
 
 #include <ReactESP.h>
 
-#include "sensesp/net/networking.h"
 #include "sensesp/net/ws_client.h"
 #include "startable.h"
 

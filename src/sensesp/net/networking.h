@@ -38,6 +38,11 @@ class Networking : public Configurable,
   }
 
   void activate_wifi_manager();
+
+  void set_wifi_manager_ap_ssid(String ssid) {
+    wifi_manager_ap_ssid_ = ssid;
+  }
+
  protected:
   void setup_saved_ssid();
   void setup_wifi_callbacks();
@@ -59,6 +64,7 @@ class Networking : public Configurable,
 
   String ap_ssid = "";
   String ap_password = "";
+  String wifi_manager_ap_ssid_ = "";
 
   /// hardcoded values provided as constructor parameters
   String preset_ssid = "";

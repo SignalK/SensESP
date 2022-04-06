@@ -157,8 +157,12 @@ void Networking::setup_wifi_manager() {
   wifi_manager->setTryConnectDuringConfigPortal(false);
 
   // Create a unique SSID for configuring each SensESP Device
-  String config_ssid = SensESPBaseApp::get_hostname();
-  config_ssid = "Configure " + config_ssid;
+  String config_ssid;
+  if (wifi_manager_ap_ssid_ != "") {
+    config_ssid = wifi_manager_ap_ssid_;
+  } else {
+    config_ssid = "Configure " + hostname;
+  }
   const char* pconfig_ssid = config_ssid.c_str();
 
   this->emit(WiFiState::kWifiManagerActivated);
