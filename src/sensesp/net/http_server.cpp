@@ -1,6 +1,7 @@
 #include "http_server.h"
 
 #include <ESPAsyncWebServer.h>
+#include <ESPmDNS.h>
 #include <FS.h>
 
 #include <functional>
@@ -34,7 +35,8 @@ HTTPServer::HTTPServer() : Startable(50) {
   // /config
   AsyncCallbackJsonWebHandler* config_put_handler =
       new AsyncCallbackJsonWebHandler(
-          "/config", [](AsyncWebServerRequest* request, JsonVariant& json) {
+          "/config",
+          [](AsyncWebServerRequest* request, JsonVariant& json) {
             // omit the "/config" part of the url
             String url_tail = request->url().substring(7);
 
@@ -63,7 +65,8 @@ HTTPServer::HTTPServer() : Startable(50) {
             confable->save_configuration();
             request->send(200, "text/plain", F("Configuration successful.\n"));
             return;
-          }, 4096);
+          },
+          4096);
   config_put_handler->setMethod(HTTP_PUT);
   server->addHandler(config_put_handler);
 
@@ -136,8 +139,6 @@ HTTPServer::HTTPServer() : Startable(50) {
   server->on("/info", HTTP_GET, std::bind(&HTTPServer::handle_info, this, _1));
 }
 
-
-
 void HTTPServer::start() {
   // only start the server if WiFi is connected
   if (WiFi.status() == WL_CONNECTED) {
@@ -152,6 +153,9 @@ void HTTPServer::start() {
       debugI("HTTP server started");
     }
   });
+
+  // announce the server over mDNS
+  MDNS.addService("http", "tcp", 80);
 }
 
 void HTTPServer::handle_not_found(AsyncWebServerRequest* request) {

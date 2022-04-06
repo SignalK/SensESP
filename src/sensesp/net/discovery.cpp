@@ -21,8 +21,6 @@ void MDNSDiscovery::start() {
     debugI("mDNS responder started for hostname '%s'", hostname.c_str());
   }
   mdns_instance_name_set(hostname.c_str());  // mDNS hostname for ESP32
-  MDNS.addService("http", "tcp", 80);
-  MDNS.addService("signalk-sensesp", "tcp", 80);
 }
 
 }  // namespace sensesp
