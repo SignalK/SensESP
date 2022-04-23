@@ -1,6 +1,8 @@
 #ifndef _remote_debug_H_
 #define _remote_debug_H_
 
+#include <cstdint>
+
 #include "sensesp/system/startable.h"
 
 namespace sensesp {
