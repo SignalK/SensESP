@@ -62,11 +62,14 @@ class Networking : public Configurable,
 
   bool wifi_manager_enabled_ = true;
 
+  // values provided by WiFiManager or saved from previous configuration
+
   String ap_ssid = "";
   String ap_password = "";
-  String wifi_manager_ap_ssid_ = "";
 
-  /// hardcoded values provided as constructor parameters
+  // hardcoded values provided as constructor parameters
+
+  String wifi_manager_ap_ssid_ = "";
   String preset_ssid = "";
   String preset_password = "";
   String preset_hostname = "";

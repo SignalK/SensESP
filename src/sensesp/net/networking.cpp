@@ -42,6 +42,16 @@ Networking::Networking(String config_path, String ssid, String password,
     default_hostname = preset_hostname;
   }
 
+  if (ap_ssid == "" && preset_ssid != "") {
+    // there is no saved config and preset config is available
+    ap_ssid = preset_ssid;
+  }
+
+  if (ap_password == "" && preset_password != "") {
+    // there is no saved config and preset config is available
+    ap_password = preset_password;
+  }
+
   server = new AsyncWebServer(80);
   dns = new DNSServer();
 }
