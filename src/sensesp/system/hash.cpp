@@ -1,10 +1,11 @@
 #include "hash.h"
 
 #include "mbedtls/md.h"
+#include "mbedtls/base64.h"
 
-extern "C" {
-#include "crypto/base64.h"
-}
+#include "sensesp/net/debug_output.h"
+
+using namespace sensesp;
 
 /**
  * @brief SHA-1 hash function
@@ -45,18 +46,22 @@ void Sha1(String payload_str, uint8_t *hash_output) {
 String Base64Sha1(String payload_str) {
   uint8_t hash_output[20];
 
+  uint8_t encoded[32];
+
   size_t output_length;
 
   Sha1(payload_str, hash_output);
 
-  unsigned char *encoded =
-      base64_encode((const unsigned char *)hash_output, 20, &output_length);
+  int retval = mbedtls_base64_encode(encoded, sizeof(encoded), &output_length, hash_output, 20);
+
+  if (retval != 0) {
+    debugE("Base64 encoding failed");
+    return "";
+  }
 
   String encoded_str((char *)encoded);
 
   encoded_str.replace("/", "_");
-
-  free(encoded);
 
   return encoded_str;
 }
