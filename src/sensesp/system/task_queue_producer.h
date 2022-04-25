@@ -23,7 +23,6 @@ class TaskQueueProducer : public ObservableValue<T> {
   TaskQueueProducer(const T& value, int queue_size = 1,
                     unsigned int poll_rate = 990)
       : ObservableValue<T>(value), queue_size_{queue_size} {
-    debugD("In TaskQueueProducer constructor");
     queue_ = xQueueCreate(queue_size, sizeof(T));
     if (queue_ == NULL) {
       debugE("Failed to create queue");
