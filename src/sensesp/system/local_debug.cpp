@@ -6,6 +6,7 @@ namespace sensesp {
 
 bool LocalDebug::begin(String hostname, uint8_t startingDebugLevel) {
   lastDebugLevel_ = startingDebugLevel;
+  return true;
 }
 
 boolean LocalDebug::isActive(uint8_t debugLevel) {
