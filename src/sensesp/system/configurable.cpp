@@ -46,9 +46,17 @@ void Configurable::load_configuration() {
 
   if (SPIFFS.exists(hash_path)) {
     filename = &hash_path;
-    debugD("Loading configuration for path %s from %s", config_path_.c_str(),
+    debugD("Loading configuration for path '%s' from '%s'", config_path_.c_str(),
+           hash_path.c_str());
+  } else if (SPIFFS.exists(hash_path + "\n")) {
+    // Up to SensESP v2.4.0, the config path hash had an accidental newline
+    // appended to it.
+    hash_path += "\n";
+    filename = &hash_path;
+    debugD("Loading configuration for path '%s' from '%s'", config_path_.c_str(),
            hash_path.c_str());
   } else if (config_path_.length() < 32 && SPIFFS.exists(config_path_)) {
+    // Prior to SensESP v2.1.0, the config path was a plain filename.
     filename = &config_path_;
     debugD("Loading configuration for path %s", config_path_.c_str());
   } else {
