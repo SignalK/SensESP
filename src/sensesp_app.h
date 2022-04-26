@@ -125,25 +125,32 @@ class SensESPApp : public SensESPBaseApp {
   WSClient* ws_client_;
 
   UIOutput<String>* build_info_ui_output_ =
-      new UIOutput<String>("Built at", __DATE__ " " __TIME__);
-  UIOutput<String>* sensesp_version_ui_output_ =
-      new UIOutput<String>("SenseESP version", kSensESPVersion);
-  UIOutput<String>* hostname_ui_output_ = new UIOutput<String>("Name");
+      new UIOutput<String>("Built at", __DATE__ " " __TIME__, "Software", 2000);
+  UIOutput<String>* sensesp_version_ui_output_ = new UIOutput<String>(
+      "SenseESP version", kSensESPVersion, "Software", 1900);
+  UIOutput<String>* hostname_ui_output_ =
+      new UIOutput<String>("Hostname", "", "Network", 500);
   UIOutput<String>* mac_address_ui_output_ =
-      new UIOutput<String>("MAC", WiFi.macAddress());
-  UILambdaOutput<String>* wifi_ssid_ui_output_ =
-      new UILambdaOutput<String>("SSID", [this]() { return WiFi.SSID(); });
+      new UIOutput<String>("MAC Address", WiFi.macAddress(), "Network", 1100);
+  UILambdaOutput<String>* wifi_ssid_ui_output_ = new UILambdaOutput<String>(
+      "SSID", [this]() { return WiFi.SSID(); }, "Network", 1200);
   UILambdaOutput<int8_t>* wifi_rssi_ui_output_ = new UILambdaOutput<int8_t>(
-      "WiFi signal strength", [this]() { return WiFi.RSSI(); });
-  UILambdaOutput<String>* sk_server_address_ui_output_ = new UILambdaOutput<String>(
-      "SK address", [this]() { return ws_client_->get_server_address(); });
+      "WiFi signal strength", [this]() { return WiFi.RSSI(); }, "Network",
+      1300);
+  UILambdaOutput<String>* sk_server_address_ui_output_ =
+      new UILambdaOutput<String>(
+          "Signal K server address",
+          [this]() { return ws_client_->get_server_address(); }, "Network",
+          1400);
   UILambdaOutput<uint16_t>* sk_server_port_ui_output_ =
       new UILambdaOutput<uint16_t>(
-          "SK server port", [this]() { return ws_client_->get_server_port(); });
+          "Signal K server port",
+          [this]() { return ws_client_->get_server_port(); }, "Network", 1500);
   UILambdaOutput<String>* sk_server_connection_ui_output_ =
-      new UILambdaOutput<String>("SK connection status", [this]() {
-        return ws_client_->get_connection_status();
-      });
+      new UILambdaOutput<String>(
+          "SK connection status",
+          [this]() { return ws_client_->get_connection_status(); }, "Network",
+          1600);
 
   friend class HTTPServer;
   friend class SensESPAppBuilder;
