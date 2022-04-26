@@ -5,6 +5,7 @@
 
 #include <functional>
 
+#include "sensesp/ui/ui_button.h"
 #include "sensesp/system/startable.h"
 
 namespace sensesp {
@@ -22,7 +23,10 @@ class HTTPServer : public Startable {
   void handle_device_reset(AsyncWebServerRequest* request);
   void handle_device_restart(AsyncWebServerRequest* request);
   void handle_info(AsyncWebServerRequest* request);
-  void handle_static_reponse(AsyncWebServerRequest* request, const uint8_t*content, uint32_t size);
+  void handle_static_reponse(AsyncWebServerRequest* request,
+                             const uint8_t* content, uint32_t size);
+
+  void handle_command(AsyncWebServerRequest* request);
 
  private:
   AsyncWebServer* server;
