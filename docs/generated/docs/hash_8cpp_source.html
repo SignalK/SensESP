@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -96,50 +96,58 @@ $(document).ready(function(){initNavTree('hash_8cpp_source.html',''); initResiza
 <a href="hash_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="hash_8h.html">hash.h</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;mbedtls/md.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;crypto/base64.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>}</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce">   18</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce">Sha1</a>(String payload_str, uint8_t *hash_output) {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *payload = payload_str.c_str();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 20;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  mbedtls_md_context_t ctx;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  mbedtls_md_type_t md_type = MBEDTLS_MD_SHA1;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> payload_length = strlen(payload);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  mbedtls_md_init(&amp;ctx);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  mbedtls_md_setup(&amp;ctx, mbedtls_md_info_from_type(md_type), 0);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  mbedtls_md_starts(&amp;ctx);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  mbedtls_md_update(&amp;ctx, (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)payload, payload_length);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  mbedtls_md_finish(&amp;ctx, hash_output);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  mbedtls_md_free(&amp;ctx);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5">   45</a></span>String <a class="code hl_function" href="hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5">Base64Sha1</a>(String payload_str) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  uint8_t hash_output[20];</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordtype">size_t</span> output_length;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <a class="code hl_function" href="hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce">Sha1</a>(payload_str, hash_output);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *encoded =</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      base64_encode((<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)hash_output, 20, &amp;output_length);</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;mbedtls/base64.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="debug__output_8h.html">sensesp/net/debug_output.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce">Sha1</a>(String payload_str, uint8_t *hash_output) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *payload = payload_str.c_str();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 20;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  mbedtls_md_context_t ctx;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  mbedtls_md_type_t md_type = MBEDTLS_MD_SHA1;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> payload_length = strlen(payload);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  mbedtls_md_init(&amp;ctx);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  mbedtls_md_setup(&amp;ctx, mbedtls_md_info_from_type(md_type), 0);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  mbedtls_md_starts(&amp;ctx);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  mbedtls_md_update(&amp;ctx, (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)payload, payload_length);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  mbedtls_md_finish(&amp;ctx, hash_output);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  mbedtls_md_free(&amp;ctx);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5">   46</a></span>String <a class="code hl_function" href="hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5">Base64Sha1</a>(String payload_str) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  uint8_t hash_output[20];</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  uint8_t encoded[32];</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordtype">size_t</span> output_length;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <a class="code hl_function" href="hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce">Sha1</a>(payload_str, hash_output);</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  String encoded_str((<span class="keywordtype">char</span> *)encoded);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordtype">int</span> retval = mbedtls_base64_encode(encoded, <span class="keyword">sizeof</span>(encoded), &amp;output_length, hash_output, 20);</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  encoded_str.replace(<span class="stringliteral">&quot;/&quot;</span>, <span class="stringliteral">&quot;_&quot;</span>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  free(encoded);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordflow">return</span> encoded_str;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
-<div class="ttc" id="ahash_8cpp_html_a5c78d7f77047179963ffda330a0a00ce"><div class="ttname"><a href="hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce">Sha1</a></div><div class="ttdeci">void Sha1(String payload_str, uint8_t *hash_output)</div><div class="ttdoc">SHA-1 hash function.</div><div class="ttdef"><b>Definition:</b> <a href="hash_8cpp_source.html#l00018">hash.cpp:18</a></div></div>
-<div class="ttc" id="ahash_8cpp_html_acb0d85917e87a85ddaf682ebde0872a5"><div class="ttname"><a href="hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5">Base64Sha1</a></div><div class="ttdeci">String Base64Sha1(String payload_str)</div><div class="ttdoc">A base64-encoded SHA-1 hash function.</div><div class="ttdef"><b>Definition:</b> <a href="hash_8cpp_source.html#l00045">hash.cpp:45</a></div></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">if</span> (retval != 0) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_define" href="local__debug_8h.html#a361626aa880f4f9696fbd87dc0597649">debugE</a>(<span class="stringliteral">&quot;Base64 encoding failed&quot;</span>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  String encoded_str((<span class="keywordtype">char</span> *)encoded);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  encoded_str.replace(<span class="stringliteral">&quot;/&quot;</span>, <span class="stringliteral">&quot;_&quot;</span>);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordflow">return</span> encoded_str;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+<div class="ttc" id="adebug__output_8h_html"><div class="ttname"><a href="debug__output_8h.html">debug_output.h</a></div></div>
+<div class="ttc" id="ahash_8cpp_html_a5c78d7f77047179963ffda330a0a00ce"><div class="ttname"><a href="hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce">Sha1</a></div><div class="ttdeci">void Sha1(String payload_str, uint8_t *hash_output)</div><div class="ttdoc">SHA-1 hash function.</div><div class="ttdef"><b>Definition:</b> <a href="hash_8cpp_source.html#l00019">hash.cpp:19</a></div></div>
+<div class="ttc" id="ahash_8cpp_html_acb0d85917e87a85ddaf682ebde0872a5"><div class="ttname"><a href="hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5">Base64Sha1</a></div><div class="ttdeci">String Base64Sha1(String payload_str)</div><div class="ttdoc">A base64-encoded SHA-1 hash function.</div><div class="ttdef"><b>Definition:</b> <a href="hash_8cpp_source.html#l00046">hash.cpp:46</a></div></div>
 <div class="ttc" id="ahash_8h_html"><div class="ttname"><a href="hash_8h.html">hash.h</a></div></div>
+<div class="ttc" id="alocal__debug_8h_html_a361626aa880f4f9696fbd87dc0597649"><div class="ttname"><a href="local__debug_8h.html#a361626aa880f4f9696fbd87dc0597649">debugE</a></div><div class="ttdeci">#define debugE(fmt,...)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8h_source.html#l00050">local_debug.h:50</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

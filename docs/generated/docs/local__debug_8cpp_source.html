@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -100,22 +100,23 @@ $(document).ready(function(){initNavTree('local__debug_8cpp_source.html',''); in
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef DEBUG_DISABLED</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classsensesp_1_1_local_debug.html#a81930b424ff1ab5210a1421e04fecf03">    7</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_local_debug.html#a81930b424ff1ab5210a1421e04fecf03">LocalDebug::begin</a>(String hostname, uint8_t startingDebugLevel) {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  _lastDebugLevel = startingDebugLevel;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>}</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50">   11</a></span><span class="keywordtype">boolean</span> <a class="code hl_function" href="classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50">LocalDebug::isActive</a>(uint8_t debugLevel) {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="keywordflow">return</span> (debugLevel &gt;= _lastDebugLevel);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// size_t LocalDebug::write(uint8_t character) {</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//   Serial.write(character);</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//   return 1;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// }</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#endif  </span><span class="comment">// DEBUG_DISABLED</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_local_debug_html_a3e34d4c2f6a1230301494d8bea336a50"><div class="ttname"><a href="classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50">sensesp::LocalDebug::isActive</a></div><div class="ttdeci">boolean isActive(uint8_t debugLevel=DEBUG)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8cpp_source.html#l00011">local_debug.cpp:11</a></div></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  lastDebugLevel_ = startingDebugLevel;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>}</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50">   12</a></span><span class="keywordtype">boolean</span> <a class="code hl_function" href="classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50">LocalDebug::isActive</a>(uint8_t debugLevel) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordflow">return</span> (debugLevel &gt;= lastDebugLevel_);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// size_t LocalDebug::write(uint8_t character) {</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//   Serial.write(character);</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//   return 1;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// }</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif  </span><span class="comment">// DEBUG_DISABLED</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_local_debug_html_a3e34d4c2f6a1230301494d8bea336a50"><div class="ttname"><a href="classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50">sensesp::LocalDebug::isActive</a></div><div class="ttdeci">boolean isActive(uint8_t debugLevel=DEBUG)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8cpp_source.html#l00012">local_debug.cpp:12</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_local_debug_html_a81930b424ff1ab5210a1421e04fecf03"><div class="ttname"><a href="classsensesp_1_1_local_debug.html#a81930b424ff1ab5210a1421e04fecf03">sensesp::LocalDebug::begin</a></div><div class="ttdeci">bool begin(String hostname, uint8_t startingDebugLevel=DEBUG)</div><div class="ttdef"><b>Definition:</b> <a href="local__debug_8cpp_source.html#l00007">local_debug.cpp:7</a></div></div>
 <div class="ttc" id="alocal__debug_8h_html"><div class="ttname"><a href="local__debug_8h.html">local_debug.h</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>

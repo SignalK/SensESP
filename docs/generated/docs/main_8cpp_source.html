@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('main_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <a class="code hl_class" href="classsensesp_1_1_sens_e_s_p_minimal_app.html">SensESPMinimalApp</a> *<a class="code hl_variable" href="namespacesensesp.html#aaf87e022a3c4111a8e24045e297e14ba">sensesp_app</a> = builder.<a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_minimal_app_builder.html#a650d6c129456d8b1914e5c9fe5798d23">set_hostname</a>(<span class="stringliteral">&quot;asyncnew&quot;</span>)-&gt;<a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_minimal_app_builder.html#a08c9afb532ed555ec1716105eeb137fa">get_app</a>();</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">auto</span> *networking = <span class="keyword">new</span> <a class="code hl_class" href="classsensesp_1_1_networking.html">Networking</a>(</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <span class="stringliteral">&quot;/System/WiFi Settings&quot;</span>, <span class="stringliteral">&quot;Hat Labs Sensors&quot;</span>, <span class="stringliteral">&quot;kanneluuri2406&quot;</span>, SensESPBaseApp::get_hostname(), <span class="stringliteral">&quot;thisisfine&quot;</span>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <span class="stringliteral">&quot;/System/WiFi Settings&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, SensESPBaseApp::get_hostname(), <span class="stringliteral">&quot;thisisfine&quot;</span>);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  networking-&gt;set_wifi_manager_ap_ssid(<span class="stringliteral">&quot;My Little Pony&quot;</span>);</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
