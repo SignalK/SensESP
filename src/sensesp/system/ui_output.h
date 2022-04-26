@@ -1,5 +1,5 @@
-#ifndef _SYSTEM_PROPERTY_H_
-#define _SYSTEM_PROPERTY_H_
+#ifndef _SENSESP_SYSTEM_UI_OUTPUT_H_
+#define _SENSESP_SYSTEM_UI_OUTPUT_H_
 #include <ArduinoJson.h>
 
 #include <functional>
