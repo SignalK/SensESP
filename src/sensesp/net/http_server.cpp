@@ -148,7 +148,7 @@ void HTTPServer::start() {
     debugW("HTTP server not started, WiFi not connected");
   }
   WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
-    if (event == SYSTEM_EVENT_STA_GOT_IP) {
+    if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP) {
       server->begin();
       debugI("HTTP server started");
     }

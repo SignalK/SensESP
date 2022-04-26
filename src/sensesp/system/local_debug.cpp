@@ -5,11 +5,12 @@ namespace sensesp {
 #ifndef DEBUG_DISABLED
 
 bool LocalDebug::begin(String hostname, uint8_t startingDebugLevel) {
-  _lastDebugLevel = startingDebugLevel;
+  lastDebugLevel_ = startingDebugLevel;
+  return true;
 }
 
 boolean LocalDebug::isActive(uint8_t debugLevel) {
-  return (debugLevel >= _lastDebugLevel);
+  return (debugLevel >= lastDebugLevel_);
 }
 
 // size_t LocalDebug::write(uint8_t character) {

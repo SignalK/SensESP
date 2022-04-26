@@ -73,7 +73,7 @@ class LocalDebug {
       6;  // Used for show always messages, for any current debug level
 
  private:
-  uint8_t _lastDebugLevel = DEBUG;
+  uint8_t lastDebugLevel_ = DEBUG;
 };
 
 #else  // DEBUG_DISABLED

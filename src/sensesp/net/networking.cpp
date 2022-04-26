@@ -42,6 +42,16 @@ Networking::Networking(String config_path, String ssid, String password,
     default_hostname = preset_hostname;
   }
 
+  if (ap_ssid == "" && preset_ssid != "") {
+    // there is no saved config and preset config is available
+    ap_ssid = preset_ssid;
+  }
+
+  if (ap_password == "" && preset_password != "") {
+    // there is no saved config and preset config is available
+    ap_password = preset_password;
+  }
+
   server = new AsyncWebServer(80);
   dns = new DNSServer();
 }
@@ -74,12 +84,12 @@ void Networking::activate_wifi_manager() {
 void Networking::setup_wifi_callbacks() {
   WiFi.onEvent([this](WiFiEvent_t event,
                       WiFiEventInfo_t info) { this->wifi_station_connected(); },
-               WiFiEvent_t::SYSTEM_EVENT_STA_GOT_IP);
+               WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_GOT_IP);
   WiFi.onEvent(
       [this](WiFiEvent_t event, WiFiEventInfo_t info) {
         this->wifi_station_disconnected();
       },
-      WiFiEvent_t::SYSTEM_EVENT_STA_DISCONNECTED);
+      WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_DISCONNECTED);
 }
 
 /**
