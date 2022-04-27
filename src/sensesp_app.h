@@ -20,7 +20,7 @@
 #include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/system/system_status_led.h"
-#include "sensesp/system/ui_output.h"
+#include "sensesp/ui/ui_output.h"
 #include "sensesp_base_app.h"
 
 namespace sensesp {
