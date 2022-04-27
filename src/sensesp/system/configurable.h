@@ -27,8 +27,10 @@ class Configurable {
    * configuration path should always start with a forward slash.  Leaving the
    * config_path blank indicates that this object does not need or want
    * configuration data support.
+   * @param description A description of the Configurable that can be used e.g.
+   * in the web UI.
    */
-  Configurable(String config_path);
+  Configurable(String config_path = "", String description = "");
 
   const String config_path_;
 
@@ -56,6 +58,17 @@ class Configurable {
   virtual String get_config_schema();
 
   /**
+   * Returns a configuration description that is visible in WebUI
+   * you can use HTML tags to make description more readable
+   */
+  String get_description() { return description_; }
+
+  /**
+   * @brief Set the description of the Configurable.
+   */
+  void set_description(String description) { description_ = description; }
+
+  /**
    * Persists the configuration returned by get_configuration()
    * to the local file system.
    */
@@ -67,6 +80,8 @@ class Configurable {
    * passes the configuration to set_configuration().
    */
   virtual void load_configuration();
+
+  String description_ = "";
 };
 
 extern std::map<String, Configurable*> configurables;

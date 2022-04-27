@@ -11,7 +11,8 @@ namespace sensesp {
 // reference around would unnecessarily reduce readability of the code.
 std::map<String, Configurable*> configurables;
 
-Configurable::Configurable(String config_path = "") : config_path_{config_path} {
+Configurable::Configurable(String config_path, String description)
+    : config_path_{config_path}, description_{description} {
   if (config_path != "") {
     auto it = configurables.find(config_path);
     if (it != configurables.end()) {
@@ -34,7 +35,6 @@ bool Configurable::set_configuration(const JsonObject& config) {
 String Configurable::get_config_schema() { return "{}"; }
 
 void Configurable::load_configuration() {
-
   if (config_path_ == "") {
     debugI("Not loading configuration: no config_path specified: %s",
            config_path_.c_str());
@@ -46,15 +46,15 @@ void Configurable::load_configuration() {
 
   if (SPIFFS.exists(hash_path)) {
     filename = &hash_path;
-    debugD("Loading configuration for path '%s' from '%s'", config_path_.c_str(),
-           hash_path.c_str());
+    debugD("Loading configuration for path '%s' from '%s'",
+           config_path_.c_str(), hash_path.c_str());
   } else if (SPIFFS.exists(hash_path + "\n")) {
     // Up to SensESP v2.4.0, the config path hash had an accidental newline
     // appended to it.
     hash_path += "\n";
     filename = &hash_path;
-    debugD("Loading configuration for path '%s' from '%s'", config_path_.c_str(),
-           hash_path.c_str());
+    debugD("Loading configuration for path '%s' from '%s'",
+           config_path_.c_str(), hash_path.c_str());
   } else if (config_path_.length() < 32 && SPIFFS.exists(config_path_)) {
     // Prior to SensESP v2.1.0, the config path was a plain filename.
     filename = &config_path_;
