@@ -8,6 +8,7 @@
 
 #include "ArduinoJson.h"
 #include "AsyncJson.h"
+#include "sensesp/ui/ui_button.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/ui_output.h"
 #include "sensesp_base_app.h"
@@ -137,6 +138,9 @@ HTTPServer::HTTPServer() : Startable(50) {
   server->on("/device/restart", HTTP_GET,
              std::bind(&HTTPServer::handle_device_restart, this, _1));
   server->on("/info", HTTP_GET, std::bind(&HTTPServer::handle_info, this, _1));
+
+  server->on("/command", HTTP_GET,
+             std::bind(&HTTPServer::handle_command, this, _1));
 }
 
 void HTTPServer::start() {
@@ -259,8 +263,37 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
     config.add(it->first);
   }
 
+  auto ui_buttons = UIButton::get_ui_buttons();
+
+  for (auto button_it = ui_buttons.begin(); button_it != ui_buttons.end();
+       ++button_it) {
+    auto command_obj = commands.createNestedObject();
+    command_obj["Name"] = button_it->second->get_name();
+    command_obj["Title"] = button_it->second->get_title();
+    command_obj["Confirm"] = button_it->second->get_must_confirm();
+  }
+
   serializeJson(json_doc, *response);
   request->send(response);
+}
+
+void HTTPServer::handle_command(AsyncWebServerRequest* request) {
+  auto ui_buttons = UIButton::get_ui_buttons();
+
+  if (request->hasParam("id")) {
+    String id = request->getParam("id")->value();
+    auto button_it = ui_buttons.find(id);
+
+    if (button_it != ui_buttons.end()) {
+      debugI("Handle button_it %s id=%s", request->url().c_str(), id.c_str());
+      button_it->second->notify();
+      request->send(200, "text/html", "Success!");
+    } else {
+      request->send(404, "text/html", "Command not found!");
+    }
+  } else {
+    request->send(400, "text/html", "Missing id parameter.");
+  }
 }
 
 }  // namespace sensesp

@@ -188,8 +188,20 @@ function runDeviceCommand(confirmText, command) {
     }
 }
 
-function showAdvanced() {
+function showControl() {
     var div = getEmptyContentDiv();
+
+    var commands = deviceInfo.Commands;
+    var appCommands = "";
+    if (commands.length > 0) {
+        appCommands = `<h5 class="card-title my-4">Application commands</h5>
+        <div class="btn-group">`;
+        for (var i = 0; i < commands.length; i++) {
+            var command = commands[i];
+            appCommands += `<§ class="btn btn-primary" onclick="executeCommand('${command.Name}',${command.Confirm})" href="#">${command.Title}</a>`;
+        }
+        appCommands += "</div>";
+    }
 
     var content = `
     <div class='card'>
@@ -330,7 +342,7 @@ function loadInfo() {
 function initialize() {
     loadInfo();
     targets["status"] = new NavTarget("status", loadInfo);
-    targets["advanced"] = new NavTarget("advanced", showAdvanced);
+    targets["control"] = new NavTarget("control", showControl);
 
 
     var mainMenu = document.getElementById("mainmenu");
