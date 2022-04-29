@@ -56,8 +56,8 @@ void SensESPApp::setup() {
   // create the wifi disconnect watchdog
   this->system_status_controller_
       .connect_to(new DebounceTemplate<SystemStatus>(
-          3 * 60 * 1000,  // 180 s = 180000 ms = 3 minutes
-          "/system/wifi_reboot_watchdog"))
+          3 * 60 * 1000  // 180 s = 180000 ms = 3 minutes
+          ))
       ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {
         debugD("Got system status: %d", (int)input);
         if (input == SystemStatus::kWifiDisconnected ||
