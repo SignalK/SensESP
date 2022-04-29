@@ -1,27 +1,57 @@
 {
     "Properties": {
-        "Name": "relays",
-        "Build at": "Oct 11 2021 18:26:22",
-        "MAC": "24:A1:60:46:01:7C",
-        "WiFi signal": -12,
-        "SSID": "DryII",
-        "Signal K server address": "pi.boat",
-        "Signal K server port": 3000
-    },
-    "Commands": [
-        {
-            "Title": "ADC Calibration",
-            "Name": "calibration",
-            "Confirm": true
+        "Built at": {
+            "Value": "Apr 27 2022 13:10:23",
+            "Group": "Software",
+            "Order": 2000
+        },
+        "Hostname": {
+            "Value": "asyncnew",
+            "Group": "Network",
+            "Order": 500
+        },
+        "MAC Address": {
+            "Value": "94:3C:C6:9A:xx:xx",
+            "Group": "Network",
+            "Order": 1100
+        },
+        "SK connection status": {
+            "Value": "Connected",
+            "Group": "Network",
+            "Order": 1600
+        },
+        "SSID": {
+            "Value": "Sensors",
+            "Group": "Network",
+            "Order": 1200
+        },
+        "SenseESP version": {
+            "Value": "2.4.2-alpha",
+            "Group": "Software",
+            "Order": 1900
+        },
+        "Signal K server address": {
+            "Value": "",
+            "Group": "Network",
+            "Order": 1400
+        },
+        "Signal K server port": {
+            "Value": 0,
+            "Group": "Network",
+            "Order": 1500
+        },
+        "WiFi signal strength": {
+            "Value": -45,
+            "Group": "Network",
+            "Order": 1300
         }
-    ],
-    "Pages": {
-        "Test": "/test"
     },
+    "Commands": [],
+    "Pages": [],
     "Config": [
-        "/sk/pwm0",
-        "/sk/pwmcontrol0",
-        "/system/networking",
-        "/system/sk"
+        "/System/Signal K Settings",
+        "/System/WiFi Settings",
+        "/Transforms/Linear",
+        "/system/wifi_reboot_watchdog"
     ]
 }

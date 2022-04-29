@@ -68,16 +68,23 @@ function editConfig(config_path) {
             }
 
             if (!schema.title) {
-                schema.title = `Configuration for ${ config_path }`;
+                schema.title = " ";
+            }
+            var description = "";
+            if (json.description != undefined && json.description != "") {
+                description = `<div class='container'>${ json.description }</div>`
             }
 
             main.innerHTML = `<div class='row g-3 m-4'>
-        <div id='editor_holder'></div>
-        <div class='col-12'>
-        <button id='submit' type='button' class='btn btn-primary'>Save</button>
-        <span id='valid_indicator' class='label ms-5'></span>
-        </div>
-        </div>`;
+                <h1>Configuration for ${ config_path }</h1>
+                ${ description }
+
+                <div id='editor_holder'></div>
+                <div class='col-12'>
+                <button id='submit' type='button' class='btn btn-primary'>Save</button>
+                <span id='valid_indicator' class='label ms-5'></span>
+                </div>
+                </div>`;
 
             globalEditor = new JSONEditor(document.getElementById('editor_holder'),
                 {
@@ -198,7 +205,7 @@ function showControl() {
         <div class="btn-group">`;
         for (var i = 0; i < commands.length; i++) {
             var command = commands[i];
-            appCommands += `<§ class="btn btn-primary" onclick="executeCommand('${command.Name}',${command.Confirm})" href="#">${command.Title}</a>`;
+            appCommands += `<§ class="btn btn-primary" onclick="executeCommand('${ command.Name }',${ command.Confirm })" href="#">${ command.Title }</a>`;
         }
         appCommands += "</div>";
     }

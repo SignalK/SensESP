@@ -95,6 +95,7 @@ HTTPServer::HTTPServer() : Startable(50) {
     JsonObject config = json_doc.createNestedObject("config");
     confable->get_configuration(config);
     json_doc["schema"] = serialized(confable->get_config_schema());
+    json_doc["description"] = confable->get_description();
     serializeJson(json_doc, *response);
     request->send(response);
   });
