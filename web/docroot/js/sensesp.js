@@ -1,5 +1,5 @@
 
-var globalEditor = null;
+var activeEditors = [];
 var deviceInfo = null;
 var currentPage = "info";
 var pagesLoaded = false;
@@ -40,128 +40,156 @@ class NavTarget {
 }
 
 function getEmptyContentDiv() {
-
     var main = document.getElementById("content");
     main.empty();
     globalEditor = null;
     return main;
 }
 
-function editConfig(config_path) {
-
-    var main = getEmptyContentDiv();
-
-    showLoader(true, "Loading configuration from device...");
-
-    ajax('GET', '/config' + config_path)
-
-        .then(response => {
-
-            showLoader(false);
-            var json = JSON.parse(response);
-            var config = json.config;
-            var schema = json.schema;
-
-            if (Object.keys(schema).length == 0) {
-                alert(`No schema available for ${ config_path }`);
-                return;
-            }
-
-            if (!schema.title) {
-                schema.title = " ";
-            }
-            var description = "";
-            if (json.description != undefined && json.description != "") {
-                description = `<div class='container'>${ json.description }</div>`
-            }
-
-            main.innerHTML = `<div class='row g-3 m-4'>
-                <h1>Configuration for ${ config_path }</h1>
-                ${ description }
-
-                <div id='editor_holder'></div>
-                <div class='col-12'>
-                <button id='submit' type='button' class='btn btn-primary'>Save</button>
-                <span id='valid_indicator' class='label ms-5'></span>
-                </div>
-                </div>`;
-
-            globalEditor = new JSONEditor(document.getElementById('editor_holder'),
-                {
-                    'schema': schema,
-                    'startval': config,
-                    'no_additional_properties': true,
-                    'disable_collapse': true,
-                    'disable_properties': true,
-                    'disable_edit_json': true,
-                    'show_opt_in': true,
-                    'theme': 'bootstrap4'
-                });
-
-            document.getElementById('submit').addEventListener('click', function () {
-                saveConfig(config_path, globalEditor.getValue());
-            });
-
-            // Hook up the validation indicator to update its
-            // status whenever the editor changes
-            globalEditor.on('change', function () {
-                // Get an array of errors from the validator
-                var errors = globalEditor.validate();
-                var indicator = document.getElementById('valid_indicator');
-
-                // Not valid
-                if (errors.length) {
-                    indicator.className = 'text-danger';
-                    indicator.textContent = 'not valid';
-                }
-                // Valid
-                else {
-                    indicator.className = 'text-success';
-                    indicator.textContent = 'valid';
-                }
-            })
-        })
-        .catch(err => {
-            showLoader(false);
-            alert(`Error retrieving configuration ${ config_path }: ${ err.message }`);
+function getSingleJsonEditor(element, config, schema) {
+    const editor = new JSONEditor(element,
+        {
+            'schema': schema,
+            'startval': config,
+            'no_additional_properties': true,
+            'disable_collapse': true,
+            'disable_properties': true,
+            'disable_edit_json': true,
+            'show_opt_in': true,
+            'theme': 'bootstrap4'
         });
 
+    return editor;
 }
 
+function createEmptyConfigEditorDiv(index) {
+    const content = `
+    <div class='card mb-3'>
+    <div class="card-body">
+    <h5 id='card_title_${ index }' class="card-title mb-4">Configuration</h5>
+    <div id='card_description_${ index }' class='container ps-0 mb-3'></div>
+    <div id='editor_holder_${ index }'></div>
+    <div class='col-12'>
+    <button id='submit_${ index }' type='button' class='btn btn-primary mt-3'>Save</button>
+    </div>
+    </div>
+    </div>
+    `;
+    return content;
+}
+
+async function loadConfig(configPath) {
+    let response = await ajax('GET', '/config' + configPath);
+    let json = JSON.parse(response);
+    let config = json.config;
+    let schema = json.schema;
+    let description = json.description;
+
+    return {
+        'config': config,
+        'schema': schema,
+        'description': description
+    };
+}
+
+function loadAllConfigs(configPaths) {
+    let configDataPromises = configPaths.map(configPath => {
+        return loadConfig(configPath);
+    });
+
+    return configDataPromises;
+}
+
+function insertLoaderSpinner(elementId) {
+    var element = document.getElementById(elementId);
+    element.innerHTML = `
+    <div id="loader" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span id="loadertext" class="ms-2">Loading...</span>
+    </div>`;
+}
+
+function clearLoaderSpinner(element) {
+    element.innerHTML = "";
+}
+
+async function showSingleConfigEditor(configPath, configDataPromise, index) {
+    let configData = await configDataPromise;
+    let schema = configData.schema;
+    if (!schema.title) {
+        schema.title = " ";
+    }
+    let element = document.getElementById(`editor_holder_${ index }`);
+
+    clearLoaderSpinner(element);
+
+    let editor = getSingleJsonEditor(element, configData.config, schema);
+
+    const heading = configPath.substring(1);
+    const headingElement = document.getElementById(`card_title_${ index }`);
+    headingElement.textContent = heading;
+
+    const descriptionElement = document.getElementById(`card_description_${ index }`);
+    descriptionElement.innerHTML = configData.description;
+
+    const buttonElement = document.getElementById(`submit_${ index }`);
+    buttonElement.addEventListener('click', function () {
+        saveConfig(deviceInfo.Config[index], editor.getValue());
+    });
+
+    return editor;
+}
 
 function saveConfig(config_path, values) {
-    showLoader(true, "Saving configuration...");
     ajax('PUT', '/config' + config_path, JSON.stringify(values), 'application/json')
         .then(response => {
-            showLoader(false);
+            alert(`Saved configuration for ${ config_path } successfully.`);
         })
         .catch(err => {
-            showLoader(false);
             alert(`Error saving configuration ${ config_path }: ${ err.message }`);
         });
 }
 
+function showConfig() {
+    let main = getEmptyContentDiv();
+
+    // Get the number of config paths
+    const numConfigs = deviceInfo.Config.length;
+
+    // load all configs
+    let configDataPromises = loadAllConfigs(deviceInfo.Config);
+
+    // create a new card div for each config path
+
+    const cardsHTML = Array.from(Array(numConfigs), (x, i) => {
+        return createEmptyConfigEditorDiv(i);
+    }).join("\n");
+
+    // insert the card divs into the main div
+    main.innerHTML = cardsHTML;
+
+    // insert spinners into each card div
+
+    for (let i = 0; i < numConfigs; i++) {
+        insertLoaderSpinner(`editor_holder_${ i }`);
+    }
+
+    // Create JSON editors for each config path
+    for (let i = 0; i < numConfigs; i++) {
+        showSingleConfigEditor(deviceInfo.Config[i], configDataPromises[i], i)
+            .then(editor => {
+                activeEditors.push(editor);
+            });
+    }
+}
 
 Element.prototype.empty = function () {
     var child = this.lastElementChild;
     while (child) {
         this.removeChild(child);
         child = this.lastElementChild;
-    }
-}
-
-function showLoader(show, status) {
-    var loader = document.getElementById("loader");
-    if (show) {
-        if (status == null || status == undefined) {
-            status = "Loading...";
-        }
-
-        loadertext.innerHTML = status;
-        loader.classList.remove("visually-hidden");
-    }
-    else {
-        loader.classList.add("visually-hidden");
     }
 }
 
@@ -297,49 +325,6 @@ function loadInfo() {
                 content.innerHTML += "</div>";
             }
 
-            if (!pagesLoaded) {
-                pagesLoaded = true;
-                var mainMenu = document.getElementById("mainmenu");
-
-                for (const page in deviceInfo.Pages) {
-                    var link = deviceInfo.Pages[page];
-                    var navItem = document.createElement("li");
-                    navItem.innerHTML = "<a href='#' data-target='" + page + "' class='nav-link' aria-current='page'>" + page + "</a></li>";
-                    mainMenu.append(navItem);
-                    targets[page] = new NavTarget(page, showCustom, link);
-                }
-
-                var configmenu = document.getElementById("configmenu");
-                var lastRoot = null;
-                for (var i = 0; i < deviceInfo.Config.length; i++) {
-                    var configPath = deviceInfo.Config[i];
-                    var parts = configPath.split("/");
-                    var rootName = parts[1];
-                    rootName = rootName[0].toUpperCase() + rootName.substring(1);
-                    if (lastRoot == null || lastRoot != rootName) {
-                        if (lastRoot != null) {
-                            configmenu.innerHTML += "<li><hr class='dropdown-divider'></li>";
-                        }
-                        configmenu.innerHTML += "<li class='d-flex align-items-center mb-1'><svg class='ms-2' width='16' height='16' viewBox='0 0 32 32'><use xlink:href='#i-settings'/></svg>&nbsp;<span class='text-center'>" + rootName + "</span></li>";
-                        lastRoot = rootName;
-                    }
-                    var linkName = parts[parts.length - 1];
-                    linkName = linkName[0].toUpperCase() + linkName.substring(1);
-                    configmenu.innerHTML += "<li><a class='dropdown-item d-flex align-items-center' onclick='editConfig(\"" + configPath + "\");' href='#'><span class='d-inline-block bg-primary rounded-circle' style='width: .5em;height:0.5em'></span>&nbsp;" + linkName + "</a></li>";
-                }
-
-                var dropDown = document.getElementById("configdrop");
-                dropDown.addEventListener("click", () => {
-                    if (configmenu.classList.contains("show")) {
-                        configmenu.classList.remove("show");
-                    }
-                    else {
-                        configmenu.classList.add("show");
-                    }
-                })
-            }
-
-            showLoader(false);
         })
         .catch(err => {
             alert('Device info load failed: ' + err.statusText);
@@ -349,6 +334,7 @@ function loadInfo() {
 function initialize() {
     loadInfo();
     targets["status"] = new NavTarget("status", loadInfo);
+    targets["configuration"] = new NavTarget("configuration", showConfig);
     targets["control"] = new NavTarget("control", showControl);
 
 
