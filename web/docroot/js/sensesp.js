@@ -306,7 +306,7 @@ function loadInfo() {
 
                 group.Properties.push(propertyObj);
 
-                if (property === "Name") {
+                if (property === "Hostname") {
                     document.getElementById("devicename").innerHTML = propertyObj.Value;
                     document.title = propertyObj.Value + " - WebUI";
                 }
