@@ -11,8 +11,11 @@ namespace sensesp {
 // reference around would unnecessarily reduce readability of the code.
 std::map<String, Configurable*> configurables;
 
-Configurable::Configurable(String config_path, String description)
-    : config_path_{config_path}, description_{description} {
+Configurable::Configurable(String config_path, String description,
+                           int sort_order)
+    : config_path_{config_path},
+      description_{description},
+      sort_order_{sort_order} {
   if (config_path != "") {
     auto it = configurables.find(config_path);
     if (it != configurables.end()) {

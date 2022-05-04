@@ -243,6 +243,21 @@ void HTTPServer::handle_device_restart(AsyncWebServerRequest* request) {
   ReactESP::app->onDelay(50, []() { ESP.restart(); });
 }
 
+void HTTPServer::add_sorted_configurables(JsonArray& config) {
+  // sort the configurables by their sort_order
+  std::vector<std::pair<int, String>> pairs;
+  for (auto it = configurables.begin(); it != configurables.end(); ++it) {
+    pairs.push_back(std::make_pair(it->second->get_sort_order(), it->first));
+  }
+
+  std::sort(pairs.begin(), pairs.end());
+
+  // add all configuration paths
+  for (auto it = pairs.begin(); it != pairs.end(); ++it) {
+    config.add(it->second);
+  }
+}
+
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto* response = request->beginResponseStream("application/json");
   response->setCode(200);
@@ -259,10 +274,8 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
        ++property) {
     property->second->set_json(properties);
   }
-  // add all configuration paths
-  for (auto it = configurables.begin(); it != configurables.end(); ++it) {
-    config.add(it->first);
-  }
+
+  add_sorted_configurables(config);
 
   auto ui_buttons = UIButton::get_ui_buttons();
 

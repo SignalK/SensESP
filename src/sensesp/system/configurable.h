@@ -30,7 +30,8 @@ class Configurable {
    * @param description A description of the Configurable that can be used e.g.
    * in the web UI.
    */
-  Configurable(String config_path = "", String description = "");
+  Configurable(String config_path = "", String description = "",
+               int sort_order = 1000);
 
   const String config_path_;
 
@@ -68,6 +69,10 @@ class Configurable {
    */
   void set_description(String description) { description_ = description; }
 
+  int get_sort_order() { return sort_order_; }
+
+  void set_sort_order(int sort_order) { sort_order_ = sort_order; }
+
   /**
    * Persists the configuration returned by get_configuration()
    * to the local file system.
@@ -82,10 +87,13 @@ class Configurable {
   virtual void load_configuration();
 
   String description_ = "";
+  /// The sort order of Configurable on the web UI. Lower numbers have
+  /// preference.
+  int sort_order_ = 1000;
 };
 
 extern std::map<String, Configurable*> configurables;
 
-}
+}  // namespace sensesp
 
 #endif
