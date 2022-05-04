@@ -1,0 +1,27 @@
+{
+  "config": {
+    "hostname": "asyncnew",
+    "default_hostname": "asyncnew",
+    "ssid": "Hat Labs Sensors",
+    "password": "kanneluuri2406"
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "ssid": {
+        "title": "WiFi SSID",
+        "type": "string"
+      },
+      "password": {
+        "title": "WiFi password",
+        "type": "string",
+        "format": "password"
+      },
+      "hostname": {
+        "title": "Device hostname",
+        "type": "string"
+      }
+    }
+  },
+  "description": ""
+}
