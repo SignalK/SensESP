@@ -23,7 +23,7 @@ namespace sensesp {
 
 Networking::Networking(String config_path, String ssid, String password,
                        String hostname, const char* wifi_manager_password)
-    : Configurable{config_path},
+    : Configurable{config_path, "Basic WiFi Setup", 100},
       wifi_manager_password_{wifi_manager_password},
       Startable(80),
       Resettable(0) {
