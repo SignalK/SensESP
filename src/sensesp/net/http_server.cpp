@@ -10,7 +10,7 @@
 #include "AsyncJson.h"
 #include "sensesp/ui/ui_button.h"
 #include "sensesp/system/configurable.h"
-#include "sensesp/system/ui_output.h"
+#include "sensesp/ui/ui_output.h"
 #include "sensesp_base_app.h"
 
 // Include the web UI stored in PROGMEM space
