@@ -1,9 +1,8 @@
-#include "sensesp/transforms/lambda_transform.h"
-
 #include <math.h>
 
 #include "sensesp/sensors/analog_input.h"
 #include "sensesp/signalk/signalk_output.h"
+#include "sensesp/transforms/lambda_transform.h"
 #include "sensesp_app_builder.h"
 
 using namespace sensesp;
@@ -26,7 +25,7 @@ void setup() {
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "environment.indoor.illuminance";
-  const char* analog_in_config_path = "/indoor_illuminance/analog_in";
+  const char* analog_in_config_path = "/Sensors/Analog Input";
 
   unsigned int read_delay = 500;
 
@@ -40,6 +39,11 @@ void setup() {
 
   auto* analog_input =
       new AnalogInput(pin, read_delay, analog_in_config_path, output_scale);
+
+  analog_input->set_description(
+      "Connect the analog input at pin 32 to a "
+      "photoresistor or potentiometer with a voltage "
+      "divider to get an illustrative test input.");
 
   // This is our transform function. The example is artificial; a log transform
   // with configurable multiplier, base, and offset parameters. The
@@ -73,7 +77,12 @@ void setup() {
   // 6. Configuration path for the transform
 
   auto log_transform = new LambdaTransform<float, float, float, float, float>(
-      log_function, 10, 2, 100, log_lambda_param_data, "/transforms/log");
+      log_function, 10, 2, 100, log_lambda_param_data,
+      "/Transforms/Log Transform");
+
+  log_transform->set_description(
+      "Log transform performs a configurable logarithmic "
+      "transform on the input.");
 
   // Finally, connect the analog input via the freshly-generated log_transform
   // to an SKOutputNumber object
