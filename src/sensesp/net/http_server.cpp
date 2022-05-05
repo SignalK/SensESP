@@ -146,14 +146,14 @@ HTTPServer::HTTPServer() : Startable(50) {
 
 void HTTPServer::start() {
   // only start the server if WiFi is connected
-  if (WiFi.status() == WL_CONNECTED) {
+  if (WiFi.status() == WL_CONNECTED || WiFi.getMode() == WIFI_MODE_AP) {
     server->begin();
     debugI("HTTP server started");
   } else {
     debugW("HTTP server not started, WiFi not connected");
   }
   WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
-    if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP) {
+    if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP || event == ARDUINO_EVENT_WIFI_AP_START) {
       server->begin();
       debugI("HTTP server started");
     }

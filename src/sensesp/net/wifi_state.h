@@ -7,7 +7,8 @@ enum class WiFiState {
   kWifiNoAP = 0,
   kWifiDisconnected,
   kWifiConnectedToAP,
-  kWifiManagerActivated
+  kWifiManagerActivated,
+  kWifiAPModeActivated
 };
 
 // alias WiFiState for backward compatibility
