@@ -186,15 +186,15 @@ void Networking::setup_wifi_manager() {
   wifi_manager->setDebugOutput(false);
 #endif
   AsyncWiFiManagerParameter custom_hostname("hostname", "Device hostname",
-                                            hostname.c_str(), 20);
+                                            hostname.c_str(), 64);
   wifi_manager->addParameter(&custom_hostname);
 
   AsyncWiFiManagerParameter custom_ap_ssid(
-      "ap_ssid", "Custom Access Point SSID", ap_ssid.c_str(), 20);
+      "ap_ssid", "Custom Access Point SSID", ap_ssid.c_str(), 33);
   wifi_manager->addParameter(&custom_ap_ssid);
 
   AsyncWiFiManagerParameter custom_ap_password(
-      "ap_password", "Custom Access Point Password", ap_password.c_str(), 20);
+      "ap_password", "Custom Access Point Password", ap_password.c_str(), 64);
   wifi_manager->addParameter(&custom_ap_password);
 
   wifi_manager->setTryConnectDuringConfigPortal(false);
