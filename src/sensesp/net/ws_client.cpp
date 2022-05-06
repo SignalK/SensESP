@@ -76,7 +76,8 @@ void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
 
 WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
                    String server_address, uint16_t server_port)
-    : Configurable{config_path}, Startable(60) {
+    : Configurable{config_path, "Signal K Server Settings", 200},
+      Startable(60) {
   this->sk_delta_queue_ = sk_delta_queue;
 
   preset_server_address_ = server_address;
@@ -425,8 +426,8 @@ void WSClient::test_token(const String server_address,
   // FIXME: implement async HTTP client!
   HTTPClient http;
 
-  String url =
-      String("http://") + server_address + ":" + server_port + "/signalk/v1/stream";
+  String url = String("http://") + server_address + ":" + server_port +
+               "/signalk/v1/stream";
   debugD("Testing token with url %s", url.c_str());
   http.begin(wifi_client_, url);
   String full_token = String("Bearer ") + auth_token_;

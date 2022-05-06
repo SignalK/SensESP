@@ -5,6 +5,7 @@
 
 #include <functional>
 
+#include "ArduinoJson.h"
 #include "sensesp/ui/ui_button.h"
 #include "sensesp/system/startable.h"
 
@@ -27,6 +28,9 @@ class HTTPServer : public Startable {
                              const uint8_t* content, uint32_t size);
 
   void handle_command(AsyncWebServerRequest* request);
+
+ protected:
+  void add_sorted_configurables(JsonArray& config);
 
  private:
   AsyncWebServer* server;

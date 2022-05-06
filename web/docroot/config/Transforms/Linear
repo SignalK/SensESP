@@ -1,0 +1,28 @@
+{
+  "config": {
+    "offset": 0,
+    "multiplier": 1,
+    "value": 80.20713806
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "multiplier": {
+        "title": "Multiplier",
+        "type": "number",
+        "readOnly": false
+      },
+      "offset": {
+        "title": "Constant offset",
+        "type": "number",
+        "readOnly": false
+      },
+      "value": {
+        "title": "Last value",
+        "type": "number",
+        "readOnly": true
+      }
+    }
+  },
+  "description": "Linear transform custom description"
+}
