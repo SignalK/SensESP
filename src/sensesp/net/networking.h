@@ -33,15 +33,13 @@ class Networking : public Configurable,
   virtual bool set_configuration(const JsonObject& config) override final;
   virtual String get_config_schema() override;
 
-  void enable_wifi_manager(bool state) {
-    wifi_manager_enabled_ = state;
-  }
+  void enable_wifi_manager(bool state) { wifi_manager_enabled_ = state; }
 
   void activate_wifi_manager();
 
-  void set_wifi_manager_ap_ssid(String ssid) {
-    wifi_manager_ap_ssid_ = ssid;
-  }
+  void set_wifi_manager_ap_ssid(String ssid) { wifi_manager_ap_ssid_ = ssid; }
+
+  void set_ap_mode(bool state) { ap_mode_ = state; }
 
  protected:
   void setup_saved_ssid();
@@ -51,7 +49,8 @@ class Networking : public Configurable,
   // callbacks
 
   void wifi_station_connected();
-  void wifi_station_disconnected();
+  void wifi_ap_enabled();
+  void wifi_disconnected();
 
  private:
   AsyncWebServer* server;
@@ -61,6 +60,10 @@ class Networking : public Configurable,
   AsyncWiFiManager* wifi_manager = nullptr;
 
   bool wifi_manager_enabled_ = true;
+
+  // If true, the device will set up its own WiFi access point
+
+  bool ap_mode_ = false;
 
   // values provided by WiFiManager or saved from previous configuration
 
@@ -79,7 +82,6 @@ class Networking : public Configurable,
   String default_hostname = "";
 
   const char* wifi_manager_password_;
-
 };
 
 }  // namespace sensesp

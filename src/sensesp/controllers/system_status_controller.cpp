@@ -14,6 +14,7 @@ void SystemStatusController::set_input(WiFiState new_value,
       this->update_state(SystemStatus::kWifiDisconnected);
       break;
     case WiFiState::kWifiConnectedToAP:
+    case WiFiState::kWifiAPModeActivated:
       this->update_state(SystemStatus::kWSDisconnected);
       break;
     case WiFiState::kWifiManagerActivated:

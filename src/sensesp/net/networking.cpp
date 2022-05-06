@@ -82,14 +82,25 @@ void Networking::activate_wifi_manager() {
 }
 
 void Networking::setup_wifi_callbacks() {
+
+
   WiFi.onEvent([this](WiFiEvent_t event,
                       WiFiEventInfo_t info) { this->wifi_station_connected(); },
                WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_GOT_IP);
+  WiFi.onEvent([this](WiFiEvent_t event,
+                      WiFiEventInfo_t info) { this->wifi_ap_enabled(); },
+               WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_START);
   WiFi.onEvent(
       [this](WiFiEvent_t event, WiFiEventInfo_t info) {
-        this->wifi_station_disconnected();
+        this->wifi_disconnected();
       },
       WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_DISCONNECTED);
+    WiFi.onEvent(
+      [this](WiFiEvent_t event, WiFiEventInfo_t info) {
+        this->wifi_disconnected();
+      },
+      WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_STOP);
+
 }
 
 /**
@@ -102,20 +113,27 @@ void Networking::setup_saved_ssid() {
   String hostname = SensESPBaseApp::get_hostname();
   WiFi.setHostname(hostname.c_str());
 
-  auto reconnect_cb = [this]() {
-    if (WiFi.status() != WL_CONNECTED) {
-      debugI("Connecting to wifi SSID %s.", ap_ssid.c_str());
-      WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
-    }
-  };
+  if (ap_mode_ == false) {
+    // set up WiFi in regular STA (client) mode
+    auto reconnect_cb = [this]() {
+      if (WiFi.status() != WL_CONNECTED) {
+        debugI("Connecting to wifi SSID %s.", ap_ssid.c_str());
+        WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
+      }
+    };
 
-  // Perform an initial connection without a delay.
-  reconnect_cb();
+    // Perform an initial connection without a delay.
+    reconnect_cb();
 
-  // Launch a separate onRepeat reaction to (re-)establish WiFi connection.
-  // Connecting is attempted only every 20 s to allow the previous connection
-  // attempt to complete even if the network is slow.
-  ReactESP::app->onRepeat(20000, reconnect_cb);
+    // Launch a separate onRepeat reaction to (re-)establish WiFi connection.
+    // Connecting is attempted only every 20 s to allow the previous connection
+    // attempt to complete even if the network is slow.
+    ReactESP::app->onRepeat(20000, reconnect_cb);
+  } else {
+    // Set up WiFi in AP mode. In this case, we don't need a reconnect loop.
+    debugI("Setting up a WiFi access point...");
+    WiFi.softAP(ap_ssid.c_str(), ap_password.c_str());
+  }
 }
 
 /**
@@ -131,10 +149,16 @@ void Networking::wifi_station_connected() {
   this->emit(WiFiState::kWifiConnectedToAP);
 }
 
+void Networking::wifi_ap_enabled() {
+  debugI("WiFi Access Point enabled, SSID: %s", WiFi.SSID().c_str());
+  debugI("IP address of Device: %s", WiFi.softAPIP().toString().c_str());
+  this->emit(WiFiState::kWifiAPModeActivated);
+}
+
 /**
  * This method gets called when WiFi is disconnected from the AP.
  */
-void Networking::wifi_station_disconnected() {
+void Networking::wifi_disconnected() {
   debugI("Disconnected from wifi.");
   this->emit(WiFiState::kWifiDisconnected);
 }
@@ -161,9 +185,18 @@ void Networking::setup_wifi_manager() {
 #ifdef SERIAL_DEBUG_DISABLED
   wifi_manager->setDebugOutput(false);
 #endif
-  AsyncWiFiManagerParameter custom_hostname(
-      "hostname", "Set ESP32 device custom hostname", hostname.c_str(), 20);
+  AsyncWiFiManagerParameter custom_hostname("hostname", "Device hostname",
+                                            hostname.c_str(), 64);
   wifi_manager->addParameter(&custom_hostname);
+
+  AsyncWiFiManagerParameter custom_ap_ssid(
+      "ap_ssid", "Custom Access Point SSID", ap_ssid.c_str(), 33);
+  wifi_manager->addParameter(&custom_ap_ssid);
+
+  AsyncWiFiManagerParameter custom_ap_password(
+      "ap_password", "Custom Access Point Password", ap_password.c_str(), 64);
+  wifi_manager->addParameter(&custom_ap_password);
+
   wifi_manager->setTryConnectDuringConfigPortal(false);
 
   // Create a unique SSID for configuring each SensESP Device
@@ -181,24 +214,38 @@ void Networking::setup_wifi_manager() {
 
   wifi_manager->startConfigPortal(pconfig_ssid, wifi_manager_password_);
 
-  // WiFiManager attempts to connect to the new SSID, but that doesn't seem to
-  // work reliably. Instead, we'll just attempt to connect manually.
+  String configured_custom_ap_ssid = custom_ap_ssid.getValue();
+  String configured_custom_ap_password = custom_ap_password.getValue();
 
   bool connected = false;
-  this->ap_ssid = wifi_manager->getConfiguredSTASSID();
-  this->ap_password = wifi_manager->getConfiguredSTAPassword();
 
-  // attempt to connect with the new SSID and password
-  if (this->ap_ssid != "" && this->ap_password != "") {
-    debugD("Attempting to connect to acquired SSID %s and password",
-           this->ap_ssid.c_str());
-    WiFi.begin(this->ap_ssid.c_str(), this->ap_password.c_str());
-    for (int i = 0; i < 20; i++) {
-      if (WiFi.status() == WL_CONNECTED) {
-        connected = true;
-        break;
+  if (configured_custom_ap_ssid != "" && configured_custom_ap_password != "") {
+    // AP mode is desired
+    ap_ssid = configured_custom_ap_ssid;
+    ap_password = configured_custom_ap_password;
+    ap_mode_ = true;
+
+    // always assume we can launch a soft AP
+    connected = true;
+  } else {
+    // WiFiManager attempts to connect to the new SSID, but that doesn't seem to
+    // work reliably. Instead, we'll just attempt to connect manually.
+
+    this->ap_ssid = wifi_manager->getConfiguredSTASSID();
+    this->ap_password = wifi_manager->getConfiguredSTAPassword();
+
+    // attempt to connect with the new SSID and password
+    if (this->ap_ssid != "" && this->ap_password != "") {
+      debugD("Attempting to connect to acquired SSID %s and password",
+             this->ap_ssid.c_str());
+      WiFi.begin(this->ap_ssid.c_str(), this->ap_password.c_str());
+      for (int i = 0; i < 20; i++) {
+        if (WiFi.status() == WL_CONNECTED) {
+          connected = true;
+          break;
+        }
+        delay(1000);
       }
-      delay(1000);
     }
   }
 
@@ -219,9 +266,10 @@ String Networking::get_config_schema() {
   static const char kSchema[] = R"###({
     "type": "object",
     "properties": {
+      "hostname": { "title": "Device hostname", "type": "string" },
       "ssid": { "title": "WiFi SSID", "type": "string" },
       "password": { "title": "WiFi password", "type": "string", "format": "password" },
-      "hostname": { "title": "Device hostname", "type": "string" }
+      "ap_mode": { "type": "string", "format": "radio", "title": "WiFi mode", "enum": ["Client", "Hotspot"] }
     }
   })###";
 
@@ -236,6 +284,7 @@ void Networking::get_configuration(JsonObject& root) {
   root["default_hostname"] = default_hostname;
   root["ssid"] = ap_ssid;
   root["password"] = ap_password;
+  root["ap_mode"] = ap_mode_ ? "Hotspot" : "Client";
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
@@ -251,6 +300,10 @@ bool Networking::set_configuration(const JsonObject& config) {
   }
   ap_ssid = config["ssid"].as<String>();
   ap_password = config["password"].as<String>();
+
+  if (config.containsKey("ap_mode")) {
+    ap_mode_ = config["ap_mode"].as<String>() == "Hotspot";
+  }
 
   return true;
 }

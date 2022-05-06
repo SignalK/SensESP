@@ -373,7 +373,7 @@ void WSClient::connect() {
     return;
   }
 
-  if (!WiFi.isConnected()) {
+  if (!WiFi.isConnected() && WiFi.getMode() != WIFI_MODE_AP) {
     debugI(
         "WiFi is disconnected. SignalK client connection will connect when "
         "WiFi is connected.");
