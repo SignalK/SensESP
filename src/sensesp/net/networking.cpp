@@ -150,9 +150,13 @@ void Networking::wifi_station_connected() {
 }
 
 void Networking::wifi_ap_enabled() {
-  debugI("WiFi Access Point enabled, SSID: %s", WiFi.SSID().c_str());
+  debugI("WiFi Access Point enabled, SSID: %s", WiFi.softAPSSID().c_str());
   debugI("IP address of Device: %s", WiFi.softAPIP().toString().c_str());
-  this->emit(WiFiState::kWifiAPModeActivated);
+
+  // Setting the AP mode happens immediately,
+  // so this callback is likely called already before all startables have been
+  // initiated. Delay the WiFi state update until the start of the event loop.
+  ReactESP::app->onDelay(0, [this]() {this->emit(WiFiState::kWifiAPModeActivated);});
 }
 
 /**
