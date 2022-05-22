@@ -25,7 +25,8 @@ class ESP32AnalogReader : public BaseAnalogReader {
  private:
   int pin_;
   adc_atten_t attenuation_ = ADC_ATTEN_DB_11;
-  adc_bits_width_t bit_width_ = ADC_WIDTH_BIT_12;
+   // This should work with ESP32 and newer variants, ADCs are different
+  adc_bits_width_t  bit_width_ = (adc_bits_width_t)  ADC_WIDTH_BIT_DEFAULT;
   // maximum voltage readout for 3.3V VDDA when attenuation_ is set to 11 dB
   const float kVmax_ = 3300;
   int8_t adc_channel_;
