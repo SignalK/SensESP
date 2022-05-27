@@ -30,7 +30,7 @@ To automate the management of external libraries, it also heavily relies on Plat
 SensESP features include:
 
 * High-level programming interfaces for sensor development
-* Support for a wide range of common sensor hardware with a set of [add-on libraries](pages/additional_resources/) - and if native support is missing, using existing Arduino libraries directly is also quite simple in most cases
+* Support for a wide range of common sensor hardware with a set of [add-on libraries](https://signalk.org/SensESP/pages/additional_resources/) - and if native support is missing, using existing Arduino libraries directly is also quite simple in most cases
 * A Web configuration user interface for sensors, transforms, and output paths
 * Easy on-boarding with a Wi-Fi configuration tool and fully automated server discovery
 * Full Signal K integration with authentication, and transmission and reception of data
