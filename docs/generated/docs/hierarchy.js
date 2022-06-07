@@ -136,6 +136,7 @@ var hierarchy =
         [ "sensesp::SKPutRequestListener< T >", "classsensesp_1_1_s_k_put_request_listener.html", null ]
       ] ],
       [ "sensesp::Sensor", "classsensesp_1_1_sensor.html", null ],
+      [ "sensesp::UIButton", "classsensesp_1_1_u_i_button.html", null ],
       [ "sensesp::UIOutputBase", "classsensesp_1_1_u_i_output_base.html", [
         [ "sensesp::UILambdaOutput< T >", "classsensesp_1_1_u_i_lambda_output.html", null ],
         [ "sensesp::UIOutput< T >", "classsensesp_1_1_u_i_output.html", null ]

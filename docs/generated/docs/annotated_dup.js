@@ -96,6 +96,7 @@ var annotated_dup =
       [ "TransformBase", "classsensesp_1_1_transform_base.html", "classsensesp_1_1_transform_base" ],
       [ "TruthToText", "classsensesp_1_1_truth_to_text.html", "classsensesp_1_1_truth_to_text" ],
       [ "Typecast", "classsensesp_1_1_typecast.html", "classsensesp_1_1_typecast" ],
+      [ "UIButton", "classsensesp_1_1_u_i_button.html", "classsensesp_1_1_u_i_button" ],
       [ "UILambdaOutput", "classsensesp_1_1_u_i_lambda_output.html", "classsensesp_1_1_u_i_lambda_output" ],
       [ "UIOutput", "classsensesp_1_1_u_i_output.html", "classsensesp_1_1_u_i_output" ],
       [ "UIOutputBase", "classsensesp_1_1_u_i_output_base.html", "classsensesp_1_1_u_i_output_base" ],

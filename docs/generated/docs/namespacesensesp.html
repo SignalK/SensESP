@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.5.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -375,6 +375,9 @@ it must have &lt;tt&gt;units&lt;/tt&gt;". Thus, any paths that you output that a
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_typecast.html">Typecast</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts input from one data type to another, then outputs the new type.  <a href="classsensesp_1_1_typecast.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsensesp_1_1_u_i_button.html" title="UIButton implements a button interface on the web UI.">UIButton</a> implements a button interface on the web UI.  <a href="classsensesp_1_1_u_i_button.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_lambda_output.html">UILambdaOutput</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output.html">UIOutput</a></td></tr>
@@ -515,10 +518,14 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:af833775127368fc26658b6d3a070f2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad84e6e6c52f84bf796580e527b57b3ae"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a> { <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da">kWifiNoAP</a> = 0
+<tr class="memitem:ad84e6e6c52f84bf796580e527b57b3ae"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a> { <br />
+&#160;&#160;<a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da">kWifiNoAP</a> = 0
 , <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5">kWifiDisconnected</a>
 , <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8">kWifiConnectedToAP</a>
 , <a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410">kWifiManagerActivated</a>
+, <br />
+&#160;&#160;<a class="el" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019">kWifiAPModeActivated</a>
+<br />
  }</td></tr>
 <tr class="separator:ad84e6e6c52f84bf796580e527b57b3ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80ea75be3339693d942aeca17329641f"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a80ea75be3339693d942aeca17329641f">WSConnectionState</a> { <a class="el" href="namespacesensesp.html#a80ea75be3339693d942aeca17329641fafc5d8075e090bc270813d73c4c87c74a">kWSDisconnected</a>
@@ -585,7 +592,7 @@ Variables</h2></td></tr>
 <tr class="separator:a2e1fbe9a6800a64f87c85f5bc364aed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_w_s_client.html">WSClient</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a01c9e413ed693e0b956363d0b2c5a26e">ws_client</a></td></tr>
 <tr class="separator:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.4.1&quot;</td></tr>
+<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.5.0&quot;</td></tr>
 <tr class="separator:a415d47efb7e756b1be52067ac1792c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc35a8f1394e257344015e4042bc7d1"><td class="memItemLeft" align="right" valign="top">ReactESP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">app</a></td></tr>
 <tr class="separator:a2bc35a8f1394e257344015e4042bc7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -607,13 +614,17 @@ Variables</h2></td></tr>
 <tr class="separator:a048a12a0033281a7ea316123fec959f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad205805904dd5fd707bf89379a37d29d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad205805904dd5fd707bf89379a37d29d">ws_authorizing_pattern</a> [] = {200, 200, <a class="el" href="led__blinker_8h.html#ad81bcd446e2fd6404bb991a66217348b">PATTERN_END</a>}</td></tr>
 <tr class="separator:ad205805904dd5fd707bf89379a37d29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3569f86651e88333a4dc211de64bf44"><td class="memItemLeft" align="right" valign="top">std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44">ui_outputs</a></td></tr>
-<tr class="separator:ad3569f86651e88333a4dc211de64bf44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a018643e365493945bdfa43db85b03fb3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structsensesp_1_1_param_info.html">ParamInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a018643e365493945bdfa43db85b03fb3">hysteresis_param_info</a> [4]</td></tr>
 <tr class="separator:a018643e365493945bdfa43db85b03fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaa007a16d5fc4ce1651bb0fc28f8be9"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aaaa007a16d5fc4ce1651bb0fc28f8be9">kPositionInvalidAltitude</a> = std::numeric_limits&lt;float&gt;::lowest()</td></tr>
 <tr class="memdesc:aaaa007a16d5fc4ce1651bb0fc28f8be9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Value used to indicate an invalid or missing altitude.  <a href="namespacesensesp.html#aaaa007a16d5fc4ce1651bb0fc28f8be9">More...</a><br /></td></tr>
 <tr class="separator:aaaa007a16d5fc4ce1651bb0fc28f8be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b87d522bfe38fb6f0f3412645759ad0"><td class="memItemLeft" align="right" valign="top">constexpr char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0">kUIOutputDefaultGroup</a> [] = &quot;Default&quot;</td></tr>
+<tr class="separator:a8b87d522bfe38fb6f0f3412645759ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63c8d27e4a9b85afbd8d5ea02af7294f"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a63c8d27e4a9b85afbd8d5ea02af7294f">kUIOutputDefaultOrder</a> = 1000</td></tr>
+<tr class="separator:a63c8d27e4a9b85afbd8d5ea02af7294f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3569f86651e88333a4dc211de64bf44"><td class="memItemLeft" align="right" valign="top">std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_output_base.html">UIOutputBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44">ui_outputs</a></td></tr>
+<tr class="separator:ad3569f86651e88333a4dc211de64bf44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf87e022a3c4111a8e24045e297e14ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_sens_e_s_p_app.html">SensESPApp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aaf87e022a3c4111a8e24045e297e14ba">sensesp_app</a></td></tr>
 <tr class="separator:aaf87e022a3c4111a8e24045e297e14ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a437b0fd9df427f63ba01e0a83377d126"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a437b0fd9df427f63ba01e0a83377d126">kDefaultHostname</a> = &quot;SensESP&quot;</td></tr>
@@ -648,7 +659,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="analog__reader_8h_source.html#l00063">63</a> of file <a class="el" href="analog__reader_8h_source.html">analog_reader.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="analog__reader_8h_source.html#l00064">64</a> of file <a class="el" href="analog__reader_8h_source.html">analog_reader.h</a>.</p>
 
 </div>
 </div>
@@ -1352,7 +1363,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="wifi__state_8h_source.html#l00014">14</a> of file <a class="el" href="wifi__state_8h_source.html">wifi_state.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="wifi__state_8h_source.html#l00015">15</a> of file <a class="el" href="wifi__state_8h_source.html">wifi_state.h</a>.</p>
 
 </div>
 </div>
@@ -1447,6 +1458,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5" name="ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5"></a>kWifiDisconnected&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8" name="ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8"></a>kWifiConnectedToAP&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410" name="ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410"></a>kWifiManagerActivated&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019" name="ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019"></a>kWifiAPModeActivated&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="wifi__state_8h_source.html#l00006">6</a> of file <a class="el" href="wifi__state_8h_source.html">wifi_state.h</a>.</p>
@@ -1989,12 +2001,60 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.4.1&quot;</td>
+          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.5.0&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="sensesp__version_8h_source.html#l00006">6</a> of file <a class="el" href="sensesp__version_8h_source.html">sensesp_version.h</a>.</p>
+
+</div>
+</div>
+<a id="a8b87d522bfe38fb6f0f3412645759ad0" name="a8b87d522bfe38fb6f0f3412645759ad0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b87d522bfe38fb6f0f3412645759ad0">&#9670;&nbsp;</a></span>kUIOutputDefaultGroup</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr char sensesp::kUIOutputDefaultGroup[] = &quot;Default&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00015">15</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
+
+</div>
+</div>
+<a id="a63c8d27e4a9b85afbd8d5ea02af7294f" name="a63c8d27e4a9b85afbd8d5ea02af7294f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63c8d27e4a9b85afbd8d5ea02af7294f">&#9670;&nbsp;</a></span>kUIOutputDefaultOrder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int sensesp::kUIOutputDefaultOrder = 1000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00016">16</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
 
 </div>
 </div>

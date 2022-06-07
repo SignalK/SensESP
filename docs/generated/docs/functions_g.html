@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.5.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -100,12 +100,14 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <li>get_connection_status()&#160;:&#160;<a class="el" href="classsensesp_1_1_w_s_client.html#ac1bb63c716caeb08a5243f8a030735ce">sensesp::WSClient</a></li>
 <li>get_delta()&#160;:&#160;<a class="el" href="classsensesp_1_1_s_k_delta_queue.html#a26dc17fc9fa31804552240f81efa35ac">sensesp::SKDeltaQueue</a></li>
 <li>get_delta_count_producer()&#160;:&#160;<a class="el" href="classsensesp_1_1_w_s_client.html#aefe5d59e839fde1b57b054b131dcb70c">sensesp::WSClient</a></li>
+<li>get_description()&#160;:&#160;<a class="el" href="classsensesp_1_1_configurable.html#aeaa2d08f0dcb649f8fabbc3df93464b4">sensesp::Configurable</a></li>
 <li>get_hostname()&#160;:&#160;<a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html#a928c309a2dc17f82edefe9e5bc7ef33d">sensesp::SensESPBaseApp</a></li>
 <li>get_hostname_observable()&#160;:&#160;<a class="el" href="classsensesp_1_1_sens_e_s_p_app.html#aac33818674ffe424e8d1183aa4ff5232">sensesp::SensESPApp</a>, <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html#ade8960b96e439f4cc0b387c312999dd5">sensesp::SensESPBaseApp</a></li>
 <li>get_listen_delay()&#160;:&#160;<a class="el" href="classsensesp_1_1_s_k_listener.html#a221d6f505b0d11726eabf30b5f242ae6">sensesp::SKListener</a></li>
 <li>get_listeners()&#160;:&#160;<a class="el" href="classsensesp_1_1_s_k_listener.html#aa5875c60b11cb6b405038b16ef148740">sensesp::SKListener</a>, <a class="el" href="classsensesp_1_1_s_k_put_listener.html#aacf306d816cfd5590cbbb8df9981a7fe">sensesp::SKPutListener</a></li>
 <li>get_metadata()&#160;:&#160;<a class="el" href="classsensesp_1_1_s_k_emitter.html#a2300291c1953e96bcb2d3982672160d4">sensesp::SKEmitter</a>, <a class="el" href="classsensesp_1_1_s_k_output.html#a9821f4d246652e6089d88ab97c014007">sensesp::SKOutput&lt; T &gt;</a></li>
-<li>get_name()&#160;:&#160;<a class="el" href="classsensesp_1_1_u_i_output_base.html#a1daef779d767a005f0b3037f49d89aaa">sensesp::UIOutputBase</a></li>
+<li>get_must_confirm()&#160;:&#160;<a class="el" href="classsensesp_1_1_u_i_button.html#a9e20d80883f7af0eb1f138d49ed009d2">sensesp::UIButton</a></li>
+<li>get_name()&#160;:&#160;<a class="el" href="classsensesp_1_1_u_i_button.html#ac2a10dfd036fed12537ad3c18a5fcae8">sensesp::UIButton</a>, <a class="el" href="classsensesp_1_1_u_i_output_base.html#a1daef779d767a005f0b3037f49d89aaa">sensesp::UIOutputBase</a></li>
 <li>get_networking()&#160;:&#160;<a class="el" href="classsensesp_1_1_sens_e_s_p_app.html#ac86ccc0464d1754824a03eacc869b39c">sensesp::SensESPApp</a></li>
 <li>get_request()&#160;:&#160;<a class="el" href="classsensesp_1_1_s_k_request.html#a9af8d69fb226c27304ceff7646bc86ca">sensesp::SKRequest</a></li>
 <li>get_reset_priority()&#160;:&#160;<a class="el" href="classsensesp_1_1_resettable.html#a9f3d3e7e5e7df7b940599f21529904f7">sensesp::Resettable</a></li>
@@ -115,13 +117,17 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <li>get_server_port()&#160;:&#160;<a class="el" href="classsensesp_1_1_w_s_client.html#aed72f47ba517f202e5ace56eafa5516e">sensesp::WSClient</a></li>
 <li>get_sk_delta()&#160;:&#160;<a class="el" href="classsensesp_1_1_sens_e_s_p_app.html#accf609b641804d9ac3079f33313ba1b9">sensesp::SensESPApp</a></li>
 <li>get_sk_path()&#160;:&#160;<a class="el" href="classsensesp_1_1_s_k_emitter.html#a292710e5dc52da9cad9d1b992a886ff7">sensesp::SKEmitter</a>, <a class="el" href="classsensesp_1_1_s_k_listener.html#a99c420883085d955c44c885917ed977f">sensesp::SKListener</a>, <a class="el" href="classsensesp_1_1_s_k_put_listener.html#a38101840c1a916d99622e72b0a4e5b42">sensesp::SKPutListener</a>, <a class="el" href="classsensesp_1_1_s_k_put_request_base.html#a73249d0021992f9224fd0c6da11d1566">sensesp::SKPutRequestBase</a></li>
+<li>get_sort_order()&#160;:&#160;<a class="el" href="classsensesp_1_1_configurable.html#af5635a8edf667b2b280cd7d2acb0bdc8">sensesp::Configurable</a></li>
 <li>get_sources()&#160;:&#160;<a class="el" href="classsensesp_1_1_s_k_emitter.html#aa26c3595b259be779621017a9292d741">sensesp::SKEmitter</a></li>
 <li>get_start_priority()&#160;:&#160;<a class="el" href="classsensesp_1_1_startable.html#ae428884a067987e87c410e57f7885eba">sensesp::Startable</a></li>
 <li>get_system_status_controller()&#160;:&#160;<a class="el" href="classsensesp_1_1_sens_e_s_p_app.html#a5a452f05a4394cac8de700fdb8a13a5f">sensesp::SensESPApp</a></li>
+<li>get_title()&#160;:&#160;<a class="el" href="classsensesp_1_1_u_i_button.html#acb3dbe9a06212a472b568dc99947b0b8">sensesp::UIButton</a></li>
 <li>get_transforms()&#160;:&#160;<a class="el" href="classsensesp_1_1_transform_base.html#a7d65be03f0b2257d23f048fa46b6b88e">sensesp::TransformBase</a></li>
+<li>get_ui_buttons()&#160;:&#160;<a class="el" href="classsensesp_1_1_u_i_button.html#a08b41958cdef2ce33588483f9efc71ce">sensesp::UIButton</a></li>
 <li>get_ui_outputs()&#160;:&#160;<a class="el" href="classsensesp_1_1_u_i_output_base.html#a013953335d1f7a269cbabba2d838c7ed">sensesp::UIOutputBase</a></li>
 <li>get_value_name()&#160;:&#160;<a class="el" href="classsensesp_1_1_free_mem.html#a17aedd3c1091905703b7f2cb601bc9eb">sensesp::FreeMem</a>, <a class="el" href="classsensesp_1_1_i_p_addr_dev.html#ad2762545c9c409334777d6692b231478">sensesp::IPAddrDev</a>, <a class="el" href="classsensesp_1_1_system_hz.html#a1f6500b6058c2ae40ea1354c7f595eb4">sensesp::SystemHz</a>, <a class="el" href="classsensesp_1_1_uptime.html#a2ae4a423e2724dd6440eb31796f85d12">sensesp::Uptime</a>, <a class="el" href="classsensesp_1_1_wi_fi_signal.html#a283970e345a364d0eeb5925628fcb3a2">sensesp::WiFiSignal</a></li>
 <li>get_ws_client()&#160;:&#160;<a class="el" href="classsensesp_1_1_sens_e_s_p_app.html#aee6f3237f702cd76e052dbe1fa3fb9cc">sensesp::SensESPApp</a></li>
+<li>group_&#160;:&#160;<a class="el" href="classsensesp_1_1_u_i_output_base.html#a7b817319d4c5f56cfed22b3f27a527a4">sensesp::UIOutputBase</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

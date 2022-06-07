@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SensESP: src/sensesp/system/ui_output.cpp Source File</title>
+<title>SensESP: src/sensesp/ui/ui_output.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.5.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -93,29 +93,22 @@ $(document).ready(function(){initNavTree('ui__output_8cpp_source.html',''); init
   <div class="headertitle"><div class="title">ui_output.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="ui__output_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="ui__output_8h.html">ui_output.h</a>&quot;</span></div>
+<a href="ui__output_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="ui_2ui__output_8h.html">ui_output.h</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>std::map&lt;String, UIOutputBase*&gt; <a class="code hl_variable" href="classsensesp_1_1_u_i_output_base.html#aaa64f407b10b0a3ce75608729b26d54e">UIOutputBase::ui_outputs_</a>;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classsensesp_1_1_u_i_output_base.html#a4a2349790fe1b709193bd6adf4cd83ab">    7</a></span><a class="code hl_function" href="classsensesp_1_1_u_i_output_base.html#a4a2349790fe1b709193bd6adf4cd83ab">UIOutputBase::UIOutputBase</a>(String name) {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_variable" href="classsensesp_1_1_u_i_output_base.html#a0b7ce6ab8a19008847a1494d6b6be5d3">name_</a> = name;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  <a class="code hl_variable" href="classsensesp_1_1_u_i_output_base.html#aaa64f407b10b0a3ce75608729b26d54e">ui_outputs_</a>[name] = <span class="keyword">this</span>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>}</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_u_i_output_base_html_a0b7ce6ab8a19008847a1494d6b6be5d3"><div class="ttname"><a href="classsensesp_1_1_u_i_output_base.html#a0b7ce6ab8a19008847a1494d6b6be5d3">sensesp::UIOutputBase::name_</a></div><div class="ttdeci">String name_</div><div class="ttdef"><b>Definition:</b> <a href="ui__output_8h_source.html#l00017">ui_output.h:17</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_u_i_output_base_html_a4a2349790fe1b709193bd6adf4cd83ab"><div class="ttname"><a href="classsensesp_1_1_u_i_output_base.html#a4a2349790fe1b709193bd6adf4cd83ab">sensesp::UIOutputBase::UIOutputBase</a></div><div class="ttdeci">UIOutputBase(String name)</div><div class="ttdef"><b>Definition:</b> <a href="ui__output_8cpp_source.html#l00007">ui_output.cpp:7</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_u_i_output_base_html_aaa64f407b10b0a3ce75608729b26d54e"><div class="ttname"><a href="classsensesp_1_1_u_i_output_base.html#aaa64f407b10b0a3ce75608729b26d54e">sensesp::UIOutputBase::ui_outputs_</a></div><div class="ttdeci">static std::map&lt; String, UIOutputBase * &gt; ui_outputs_</div><div class="ttdef"><b>Definition:</b> <a href="ui__output_8h_source.html#l00018">ui_output.h:18</a></div></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_u_i_output_base_html_aaa64f407b10b0a3ce75608729b26d54e"><div class="ttname"><a href="classsensesp_1_1_u_i_output_base.html#aaa64f407b10b0a3ce75608729b26d54e">sensesp::UIOutputBase::ui_outputs_</a></div><div class="ttdeci">static std::map&lt; String, UIOutputBase * &gt; ui_outputs_</div><div class="ttdef"><b>Definition:</b> <a href="ui_2ui__output_8h_source.html#l00023">ui_output.h:23</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition:</b> <a href="sensesp_8h_source.html#l00022">sensesp.h:22</a></div></div>
-<div class="ttc" id="aui__output_8h_html"><div class="ttname"><a href="ui__output_8h.html">ui_output.h</a></div></div>
+<div class="ttc" id="aui_2ui__output_8h_html"><div class="ttname"><a href="ui_2ui__output_8h.html">ui_output.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_748434fffbff9d3255c614694d35d3cd.html">sensesp</a></li><li class="navelem"><a class="el" href="dir_c7390c05c87f2404a3d820add6901ffa.html">system</a></li><li class="navelem"><a class="el" href="ui__output_8cpp.html">ui_output.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_748434fffbff9d3255c614694d35d3cd.html">sensesp</a></li><li class="navelem"><a class="el" href="dir_b4e3c2ca4f683ae7814bb151961c1752.html">ui</a></li><li class="navelem"><a class="el" href="ui__output_8cpp.html">ui_output.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>

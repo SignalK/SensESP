@@ -18,5 +18,6 @@ var searchData=
   ['min_5fvalue_5f_15',['min_value_',['../classsensesp_1_1_threshold_transform.html#a8fc7620cdc6872bfbd4d56fe4964cbd9',1,'sensesp::ThresholdTransform']]],
   ['moving_5faverage_2ecpp_16',['moving_average.cpp',['../moving__average_8cpp.html',1,'']]],
   ['moving_5faverage_2eh_17',['moving_average.h',['../moving__average_8h.html',1,'']]],
-  ['movingaverage_18',['MovingAverage',['../classsensesp_1_1_moving_average.html#afd18a13f0e434a0648623522b3e80a3c',1,'sensesp::MovingAverage::MovingAverage()'],['../classsensesp_1_1_moving_average.html',1,'sensesp::MovingAverage']]]
+  ['movingaverage_18',['MovingAverage',['../classsensesp_1_1_moving_average.html#afd18a13f0e434a0648623522b3e80a3c',1,'sensesp::MovingAverage::MovingAverage()'],['../classsensesp_1_1_moving_average.html',1,'sensesp::MovingAverage']]],
+  ['must_5fconfirm_5f_19',['must_confirm_',['../classsensesp_1_1_u_i_button.html#ad8efc0f1c72eb3be2dabf29de8bae427',1,'sensesp::UIButton']]]
 ];

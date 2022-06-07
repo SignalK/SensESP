@@ -21,12 +21,13 @@ var searchData=
   ['operator_3c_18',['operator&lt;',['../classsensesp_1_1_smart_switch_controller_1_1_sync_path.html#af521f75af5f7abd10344dd092e426d8c',1,'sensesp::SmartSwitchController::SyncPath::operator&lt;()'],['../classsensesp_1_1_curve_interpolator_1_1_sample.html#a1cf03a106b3a98056fdb448df6fb9c17',1,'sensesp::CurveInterpolator::Sample::operator&lt;()']]],
   ['operator_3d_19',['operator=',['../classsensesp_1_1_observable_value.html#abe9007274a80489e92ff58a1dd6b5d0b',1,'sensesp::ObservableValue::operator=()'],['../classsensesp_1_1_sens_e_s_p_app.html#a0de0037811cf7cbab666730fc29e3c0d',1,'sensesp::SensESPApp::operator=()'],['../classsensesp_1_1_sens_e_s_p_minimal_app.html#afdaa4b87918cf2cdbec31b9960c0afae',1,'sensesp::SensESPMinimalApp::operator=()']]],
   ['operator_3d_3d_20',['operator==',['../classsensesp_1_1_observable_value.html#a49f8c1d1478be140a92f9020a02fefa6',1,'sensesp::ObservableValue::operator==()'],['../namespacesensesp.html#aa6a475cd9be10780f70d15372c13c36b',1,'sensesp::operator==()']]],
-  ['ota_21',['OTA',['../classsensesp_1_1_o_t_a.html#a9efbb67a2b9b8882971a28837d6e7e6e',1,'sensesp::OTA::OTA()'],['../classsensesp_1_1_o_t_a.html',1,'sensesp::OTA']]],
-  ['ota_2ecpp_22',['ota.cpp',['../ota_8cpp.html',1,'']]],
-  ['ota_2eh_23',['ota.h',['../ota_8h.html',1,'']]],
-  ['ota_5f_24',['ota_',['../classsensesp_1_1_sens_e_s_p_app.html#abd702cb05ced207a3060c98273b9d381',1,'sensesp::SensESPApp']]],
-  ['ota_5fpassword_5f_25',['ota_password_',['../classsensesp_1_1_sens_e_s_p_app.html#a84976d320bbdc24bc68a7e8e4b88bc7f',1,'sensesp::SensESPApp']]],
-  ['out_5frange_5f_26',['out_range_',['../classsensesp_1_1_threshold_transform.html#af2ecb4a020049e3ee00729c55466003d',1,'sensesp::ThresholdTransform']]],
-  ['output_27',['output',['../classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4',1,'sensesp::ValueProducer::output()'],['../classsensesp_1_1_curve_interpolator_1_1_sample.html#a01741c6d5022d75384c060fef182831e',1,'sensesp::CurveInterpolator::Sample::output()']]],
-  ['output_5ftitle_5f_28',['output_title_',['../classsensesp_1_1_curve_interpolator.html#aa08e7c4c89847a00b48984e5d8d23bb7',1,'sensesp::CurveInterpolator']]]
+  ['order_5f_21',['order_',['../classsensesp_1_1_u_i_output_base.html#ada88bf2e78053b2bb522506c77b6cb5a',1,'sensesp::UIOutputBase']]],
+  ['ota_22',['OTA',['../classsensesp_1_1_o_t_a.html#a9efbb67a2b9b8882971a28837d6e7e6e',1,'sensesp::OTA::OTA()'],['../classsensesp_1_1_o_t_a.html',1,'sensesp::OTA']]],
+  ['ota_2ecpp_23',['ota.cpp',['../ota_8cpp.html',1,'']]],
+  ['ota_2eh_24',['ota.h',['../ota_8h.html',1,'']]],
+  ['ota_5f_25',['ota_',['../classsensesp_1_1_sens_e_s_p_app.html#abd702cb05ced207a3060c98273b9d381',1,'sensesp::SensESPApp']]],
+  ['ota_5fpassword_5f_26',['ota_password_',['../classsensesp_1_1_sens_e_s_p_app.html#a84976d320bbdc24bc68a7e8e4b88bc7f',1,'sensesp::SensESPApp']]],
+  ['out_5frange_5f_27',['out_range_',['../classsensesp_1_1_threshold_transform.html#af2ecb4a020049e3ee00729c55466003d',1,'sensesp::ThresholdTransform']]],
+  ['output_28',['output',['../classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4',1,'sensesp::ValueProducer::output()'],['../classsensesp_1_1_curve_interpolator_1_1_sample.html#a01741c6d5022d75384c060fef182831e',1,'sensesp::CurveInterpolator::Sample::output()']]],
+  ['output_5ftitle_5f_29',['output_title_',['../classsensesp_1_1_curve_interpolator.html#aa08e7c4c89847a00b48984e5d8d23bb7',1,'sensesp::CurveInterpolator']]]
 ];

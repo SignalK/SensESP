@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['kdefaulthostname_0',['kDefaultHostname',['../namespacesensesp.html#a437b0fd9df427f63ba01e0a83377d126',1,'sensesp']]],
-  ['kdefaultsysteminfosensorprefix_1',['kDefaultSystemInfoSensorPrefix',['../sensesp__app__builder_8h.html#a46e606cb312522a79ddc558fe11983f2',1,'sensesp_app_builder.h']]],
-  ['kdigitalinputpin_2',['kDigitalInputPin',['../main_8cpp.html#a8d51bd29c2a949b4d1e12fbb7b177c26',1,'main.cpp']]],
-  ['key_3',['key',['../structsensesp_1_1_param_info.html#afc1c1665ea087a76a8ff202543110cac',1,'sensesp::ParamInfo']]],
-  ['kpositioninvalidaltitude_4',['kPositionInvalidAltitude',['../namespacesensesp.html#aaaa007a16d5fc4ce1651bb0fc28f8be9',1,'sensesp']]],
-  ['ksensespversion_5',['kSensESPVersion',['../namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44',1,'sensesp']]],
-  ['ktestoutputinterval_6',['kTestOutputInterval',['../main_8cpp.html#a56f31fc85ce8c04d90cc3c756c0d6967',1,'main.cpp']]],
-  ['ktestoutputpin_7',['kTestOutputPin',['../main_8cpp.html#ad5f6af13b76f89ba561e473c3ef0a8a4',1,'main.cpp']]]
+  ['ignore_5fduplicates_0',['ignore_duplicates',['../classsensesp_1_1_s_k_put_request.html#adf1eda754d05859b0cfa0d7f58cbd466',1,'sensesp::SKPutRequest']]],
+  ['in_5frange_5f_1',['in_range_',['../classsensesp_1_1_threshold_transform.html#abb126a795a1d9bade961dab99851f590',1,'sensesp::ThresholdTransform']]],
+  ['info_2',['INFO',['../classsensesp_1_1_local_debug.html#a914bf2add31e5805b27b5cbad48a3e22',1,'sensesp::LocalDebug']]],
+  ['input_3',['input',['../classsensesp_1_1_curve_interpolator_1_1_sample.html#aecd6c2fc42ce78f4674dad5128e1532f',1,'sensesp::CurveInterpolator::Sample']]],
+  ['input_5ftitle_5f_4',['input_title_',['../classsensesp_1_1_curve_interpolator.html#aa0bc599b7492cd5036f55dfff1d9d46d',1,'sensesp::CurveInterpolator']]],
+  ['instance_5f_5',['instance_',['../classsensesp_1_1_sens_e_s_p_base_app.html#a775c80a83adf027205c767c080597f08',1,'sensesp::SensESPBaseApp']]],
+  ['integer_5ffalse_5f_6',['integer_false_',['../classsensesp_1_1_press_repeater.html#a19db0814d6091d4ca43eaed21cdc7005',1,'sensesp::PressRepeater']]],
+  ['is_5fon_7',['is_on',['../classsensesp_1_1_smart_switch_controller.html#ad5b37c68337a920e7ec8ac1f3c474771',1,'sensesp::SmartSwitchController']]]
 ];
