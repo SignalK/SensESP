@@ -47,8 +47,7 @@ var dir_c7390c05c87f2404a3d820add6901ffa =
     [ "task_queue_producer.h", "task__queue__producer_8h.html", [
       [ "sensesp::TaskQueueProducer< T >", "classsensesp_1_1_task_queue_producer.html", "classsensesp_1_1_task_queue_producer" ]
     ] ],
-    [ "ui_output.cpp", "ui__output_8cpp.html", null ],
-    [ "ui_output.h", "ui__output_8h.html", "ui__output_8h" ],
+    [ "ui_output.h", "system_2ui__output_8h.html", null ],
     [ "uuid.cpp", "uuid_8cpp.html", "uuid_8cpp" ],
     [ "uuid.h", "uuid_8h.html", "uuid_8h" ],
     [ "valueconsumer.h", "valueconsumer_8h.html", "valueconsumer_8h" ],

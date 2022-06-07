@@ -15,7 +15,7 @@ var searchData=
   ['clicktypes_12',['ClickTypes',['../namespacesensesp.html#a21975f0611649b430d00a47945332495',1,'sensesp']]],
   ['common_5fanode_5f_13',['common_anode_',['../classsensesp_1_1_rgb_led.html#a5ed4f859be11e2384918894198d627ac',1,'sensesp::RgbLed']]],
   ['config_5fpath_5f_14',['config_path_',['../classsensesp_1_1_configurable.html#aded48ebfe23c7bee1845c7ab99c63a6e',1,'sensesp::Configurable']]],
-  ['configurable_15',['Configurable',['../classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b',1,'sensesp::Configurable::Configurable()'],['../classsensesp_1_1_configurable.html',1,'sensesp::Configurable']]],
+  ['configurable_15',['Configurable',['../classsensesp_1_1_configurable.html#ae53942d74ca264464ff6e272950c1e68',1,'sensesp::Configurable::Configurable()'],['../classsensesp_1_1_configurable.html',1,'sensesp::Configurable']]],
   ['configurable_2ecpp_16',['configurable.cpp',['../configurable_8cpp.html',1,'']]],
   ['configurable_2eh_17',['configurable.h',['../configurable_8h.html',1,'']]],
   ['configurables_18',['configurables',['../namespacesensesp.html#ac4a9f78977011238ed7fa188e74b46d6',1,'sensesp']]],

@@ -3,7 +3,7 @@ var searchData=
   ['changefilter_0',['ChangeFilter',['../classsensesp_1_1_change_filter.html#a1b3ba9c05f6309188de3e32da83b0203',1,'sensesp::ChangeFilter']]],
   ['clear_5fsamples_1',['clear_samples',['../classsensesp_1_1_curve_interpolator.html#a217e0e3cb72cd661d19548e575633214',1,'sensesp::CurveInterpolator']]],
   ['clicktype_2',['ClickType',['../classsensesp_1_1_click_type.html#a1ce6518ab611ae4e7157cf4f8722ba48',1,'sensesp::ClickType']]],
-  ['configurable_3',['Configurable',['../classsensesp_1_1_configurable.html#ae24b0359ade0718a19659af65e94d05b',1,'sensesp::Configurable']]],
+  ['configurable_3',['Configurable',['../classsensesp_1_1_configurable.html#ae53942d74ca264464ff6e272950c1e68',1,'sensesp::Configurable']]],
   ['configure_4',['configure',['../classsensesp_1_1_base_analog_reader.html#a842d9ce2ad958fbf5e38cc424cef5bf4',1,'sensesp::BaseAnalogReader::configure()'],['../classsensesp_1_1_e_s_p32_analog_reader.html#a3a5f9ec95bae9cc8fcaca84ed2b9a550',1,'sensesp::ESP32AnalogReader::configure()']]],
   ['connect_5',['connect',['../classsensesp_1_1_w_s_client.html#abcf72e6105190db47956fc9a2ead87b9',1,'sensesp::WSClient']]],
   ['connect_5femitters_6',['connect_emitters',['../classsensesp_1_1_s_k_delta_queue.html#a0bbb7e3cafe2088f9ba989f367d76808',1,'sensesp::SKDeltaQueue']]],

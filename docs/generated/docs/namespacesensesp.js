@@ -95,6 +95,7 @@ var namespacesensesp =
     [ "TransformBase", "classsensesp_1_1_transform_base.html", "classsensesp_1_1_transform_base" ],
     [ "TruthToText", "classsensesp_1_1_truth_to_text.html", "classsensesp_1_1_truth_to_text" ],
     [ "Typecast", "classsensesp_1_1_typecast.html", "classsensesp_1_1_typecast" ],
+    [ "UIButton", "classsensesp_1_1_u_i_button.html", "classsensesp_1_1_u_i_button" ],
     [ "UILambdaOutput", "classsensesp_1_1_u_i_lambda_output.html", "classsensesp_1_1_u_i_lambda_output" ],
     [ "UIOutput", "classsensesp_1_1_u_i_output.html", "classsensesp_1_1_u_i_output" ],
     [ "UIOutputBase", "classsensesp_1_1_u_i_output_base.html", "classsensesp_1_1_u_i_output_base" ],
@@ -173,7 +174,8 @@ var namespacesensesp =
       [ "kWifiNoAP", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da", null ],
       [ "kWifiDisconnected", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5", null ],
       [ "kWifiConnectedToAP", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8", null ],
-      [ "kWifiManagerActivated", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410", null ]
+      [ "kWifiManagerActivated", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeaae3791bed82b89b55c2b64785d125410", null ],
+      [ "kWifiAPModeActivated", "namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019", null ]
     ] ],
     [ "WSConnectionState", "namespacesensesp.html#a80ea75be3339693d942aeca17329641f", [
       [ "kWSDisconnected", "namespacesensesp.html#a80ea75be3339693d942aeca17329641fafc5d8075e090bc270813d73c4c87c74a", null ],
@@ -200,6 +202,8 @@ var namespacesensesp =
     [ "kDefaultHostname", "namespacesensesp.html#a437b0fd9df427f63ba01e0a83377d126", null ],
     [ "kPositionInvalidAltitude", "namespacesensesp.html#aaaa007a16d5fc4ce1651bb0fc28f8be9", null ],
     [ "kSensESPVersion", "namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44", null ],
+    [ "kUIOutputDefaultGroup", "namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0", null ],
+    [ "kUIOutputDefaultOrder", "namespacesensesp.html#a63c8d27e4a9b85afbd8d5ea02af7294f", null ],
     [ "no_ap_pattern", "namespacesensesp.html#a63cb27a0ef59894b731d42770d67aef3", null ],
     [ "sensesp_app", "namespacesensesp.html#aaf87e022a3c4111a8e24045e297e14ba", null ],
     [ "ui_outputs", "namespacesensesp.html#ad3569f86651e88333a4dc211de64bf44", null ],

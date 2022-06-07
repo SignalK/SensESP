@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['mac_5faddress_5fui_5foutput_5f_0',['mac_address_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a9c07774ddcd05e2f367df31061ff94c4',1,'sensesp::SensESPApp']]],
-  ['max_5fdelta_5f_1',['max_delta_',['../classsensesp_1_1_change_filter.html#a3b880754ff548c1ce87aa354a64b656b',1,'sensesp::ChangeFilter']]],
-  ['max_5fskips_5f_2',['max_skips_',['../classsensesp_1_1_change_filter.html#a516c659a8bb36767f8f490502c76d278',1,'sensesp::ChangeFilter']]],
-  ['max_5fvalue_5f_3',['max_value_',['../classsensesp_1_1_threshold_transform.html#a90f42f5ec73c1cee25429efd5aff2ebe',1,'sensesp::ThresholdTransform']]],
-  ['mdns_5fdiscovery_5f_4',['mdns_discovery_',['../classsensesp_1_1_sens_e_s_p_app.html#ad8983d6d916176f12c7d5725f30ba9d7',1,'sensesp::SensESPApp']]],
-  ['meta_5f_5',['meta_',['../classsensesp_1_1_s_k_output.html#acc9fe0ecf987a18a5876f3bea4f009cb',1,'sensesp::SKOutput']]],
-  ['min_5fdelta_5f_6',['min_delta_',['../classsensesp_1_1_change_filter.html#afc47aadd4585084479abb4fad0ebc841',1,'sensesp::ChangeFilter']]],
-  ['min_5fvalue_5f_7',['min_value_',['../classsensesp_1_1_threshold_transform.html#a8fc7620cdc6872bfbd4d56fe4964cbd9',1,'sensesp::ThresholdTransform']]]
+  ['last_5fvalue_5fsent_5f_0',['last_value_sent_',['../classsensesp_1_1_press_repeater.html#a6d39879a0a7965fc816fff4cfdeb731b',1,'sensesp::PressRepeater']]],
+  ['latitude_1',['latitude',['../structsensesp_1_1_position.html#a79e2f065699201c96317a2caa85287c8',1,'sensesp::Position']]],
+  ['led_5fb_5fchannel_5f_2',['led_b_channel_',['../classsensesp_1_1_rgb_led.html#a2f8a6378620fbb8896f52b7a53937e27',1,'sensesp::RgbLed']]],
+  ['led_5fg_5fchannel_5f_3',['led_g_channel_',['../classsensesp_1_1_rgb_led.html#a2939fb7af9b706109ef9d0affe1f1e12',1,'sensesp::RgbLed']]],
+  ['led_5foff_5frgb_5f_4',['led_off_rgb_',['../classsensesp_1_1_rgb_led.html#a18a2a1ad0a3dc791102ff79f653c8669',1,'sensesp::RgbLed']]],
+  ['led_5fon_5frgb_5f_5',['led_on_rgb_',['../classsensesp_1_1_rgb_led.html#a5359badfe59c94d8e36742f7e0fe7589',1,'sensesp::RgbLed']]],
+  ['led_5fr_5fchannel_5f_6',['led_r_channel_',['../classsensesp_1_1_rgb_led.html#af172d2eb0ea8543f7ddd40de4e5619a0',1,'sensesp::RgbLed']]],
+  ['long_5fclick_5fdelay_5f_7',['long_click_delay_',['../classsensesp_1_1_click_type.html#a49ab4f06ec2a1bffe384533b96e18bda',1,'sensesp::ClickType']]],
+  ['longitude_8',['longitude',['../structsensesp_1_1_position.html#a45ab87c9b3068e644a56df8364c175e5',1,'sensesp::Position']]]
 ];

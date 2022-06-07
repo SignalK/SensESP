@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.5.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -107,7 +107,8 @@ $(document).ready(function(){initNavTree('main_8cpp.html',''); initResizable(); 
 <code>#include &quot;<a class="el" href="signalk__value__listener_8h_source.html">sensesp/signalk/signalk_value_listener.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="lambda__consumer_8h_source.html">sensesp/system/lambda_consumer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="system__status__led_8h_source.html">sensesp/system/system_status_led.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="sensesp__minimal__app__builder_8h_source.html">sensesp_minimal_app_builder.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="linear_8h_source.html">sensesp/transforms/linear.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
@@ -134,6 +135,8 @@ Variables</h2></td></tr>
 <tr class="separator:a56f31fc85ce8c04d90cc3c756c0d6967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d51bd29c2a949b4d1e12fbb7b177c26"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a8d51bd29c2a949b4d1e12fbb7b177c26">kDigitalInputPin</a> = 15</td></tr>
 <tr class="separator:a8d51bd29c2a949b4d1e12fbb7b177c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa928c1f223c24fc11aa9ad61b983652f"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa928c1f223c24fc11aa9ad61b983652f">kButtonOutputPin</a> = 21</td></tr>
+<tr class="separator:aa928c1f223c24fc11aa9ad61b983652f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae94fcfeeff9366a65097e20b6d7a2d37"><td class="memItemLeft" align="right" valign="top">reactesp::ReactESP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae94fcfeeff9366a65097e20b6d7a2d37">app</a></td></tr>
 <tr class="separator:ae94fcfeeff9366a65097e20b6d7a2d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -153,7 +156,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00109">109</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00099">99</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -172,11 +175,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00037">37</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00041">41</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph.svg" width="555" height="287"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
@@ -198,7 +201,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00029">29</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00033">33</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -221,7 +224,23 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00027">27</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00031">31</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa928c1f223c24fc11aa9ad61b983652f" name="aa928c1f223c24fc11aa9ad61b983652f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa928c1f223c24fc11aa9ad61b983652f">&#9670;&nbsp;</a></span>kButtonOutputPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t kButtonOutputPin = 21</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00029">29</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -237,7 +256,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00025">25</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00027">27</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -253,7 +272,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00023">23</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00025">25</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -269,7 +288,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00021">21</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00023">23</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>

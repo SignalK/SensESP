@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.4.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.5.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('classsensesp_1_1_u_i_output_base.html'
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="ui__output_8h_source.html">sensesp/system/ui_output.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="ui_2ui__output_8h_source.html">sensesp/ui/ui_output.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for sensesp::UIOutputBase:</div>
 <div class="dyncontent">
@@ -110,8 +110,8 @@ Inheritance diagram for sensesp::UIOutputBase:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4a2349790fe1b709193bd6adf4cd83ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output_base.html#a4a2349790fe1b709193bd6adf4cd83ab">UIOutputBase</a> (String name)</td></tr>
-<tr class="separator:a4a2349790fe1b709193bd6adf4cd83ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c8fbcb5b61893b20b09763394dc35a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output_base.html#a7c8fbcb5b61893b20b09763394dc35a4">UIOutputBase</a> (String name, String group, int order)</td></tr>
+<tr class="separator:a7c8fbcb5b61893b20b09763394dc35a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1daef779d767a005f0b3037f49d89aaa"><td class="memItemLeft" align="right" valign="top">String &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output_base.html#a1daef779d767a005f0b3037f49d89aaa">get_name</a> ()</td></tr>
 <tr class="separator:a1daef779d767a005f0b3037f49d89aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1e28f6cf41c18d6d84b234497e8a970"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output_base.html#ae1e28f6cf41c18d6d84b234497e8a970">set_json</a> (const JsonObject &amp;obj)</td></tr>
@@ -136,6 +136,10 @@ Static Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a0b7ce6ab8a19008847a1494d6b6be5d3"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output_base.html#a0b7ce6ab8a19008847a1494d6b6be5d3">name_</a></td></tr>
 <tr class="separator:a0b7ce6ab8a19008847a1494d6b6be5d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b817319d4c5f56cfed22b3f27a527a4"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output_base.html#a7b817319d4c5f56cfed22b3f27a527a4">group_</a> = <a class="el" href="namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0">kUIOutputDefaultGroup</a></td></tr>
+<tr class="separator:a7b817319d4c5f56cfed22b3f27a527a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada88bf2e78053b2bb522506c77b6cb5a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_u_i_output_base.html#ada88bf2e78053b2bb522506c77b6cb5a">order_</a> = <a class="el" href="namespacesensesp.html#a63c8d27e4a9b85afbd8d5ea02af7294f">kUIOutputDefaultOrder</a></td></tr>
+<tr class="separator:ada88bf2e78053b2bb522506c77b6cb5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -144,25 +148,49 @@ Static Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="ui__output_8h_source.html#l00015">15</a> of file <a class="el" href="ui__output_8h_source.html">ui_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00018">18</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4a2349790fe1b709193bd6adf4cd83ab" name="a4a2349790fe1b709193bd6adf4cd83ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a2349790fe1b709193bd6adf4cd83ab">&#9670;&nbsp;</a></span>UIOutputBase()</h2>
+<a id="a7c8fbcb5b61893b20b09763394dc35a4" name="a7c8fbcb5b61893b20b09763394dc35a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c8fbcb5b61893b20b09763394dc35a4">&#9670;&nbsp;</a></span>UIOutputBase()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">sensesp::UIOutputBase::UIOutputBase </td>
           <td>(</td>
           <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>group</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>order</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__output_8cpp_source.html#l00007">7</a> of file <a class="el" href="ui__output_8cpp_source.html">ui_output.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00026">26</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
 
 </div>
 </div>
@@ -190,7 +218,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__output_8h_source.html#l00022">22</a> of file <a class="el" href="ui__output_8h_source.html">ui_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00031">31</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
 
 </div>
 </div>
@@ -217,7 +245,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__output_8h_source.html#l00026">26</a> of file <a class="el" href="ui__output_8h_source.html">ui_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00035">35</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -253,11 +281,35 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="classsensesp_1_1_u_i_lambda_output.html#a61cdcd75b4a4bee6965817a6eda550b4">sensesp::UILambdaOutput&lt; T &gt;</a>, and <a class="el" href="classsensesp_1_1_u_i_output.html#a7c4a4aa6774a43feb0be012e08aabe26">sensesp::UIOutput&lt; T &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ui__output_8h_source.html#l00024">24</a> of file <a class="el" href="ui__output_8h_source.html">ui_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00033">33</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7b817319d4c5f56cfed22b3f27a527a4" name="a7b817319d4c5f56cfed22b3f27a527a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b817319d4c5f56cfed22b3f27a527a4">&#9670;&nbsp;</a></span>group_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String sensesp::UIOutputBase::group_ = <a class="el" href="namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0">kUIOutputDefaultGroup</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00021">21</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
+
+</div>
+</div>
 <a id="a0b7ce6ab8a19008847a1494d6b6be5d3" name="a0b7ce6ab8a19008847a1494d6b6be5d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b7ce6ab8a19008847a1494d6b6be5d3">&#9670;&nbsp;</a></span>name_</h2>
 
@@ -278,7 +330,31 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__output_8h_source.html#l00017">17</a> of file <a class="el" href="ui__output_8h_source.html">ui_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00020">20</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
+
+</div>
+</div>
+<a id="ada88bf2e78053b2bb522506c77b6cb5a" name="ada88bf2e78053b2bb522506c77b6cb5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada88bf2e78053b2bb522506c77b6cb5a">&#9670;&nbsp;</a></span>order_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sensesp::UIOutputBase::order_ = <a class="el" href="namespacesensesp.html#a63c8d27e4a9b85afbd8d5ea02af7294f">kUIOutputDefaultOrder</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00022">22</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
 
 </div>
 </div>
@@ -302,13 +378,13 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__output_8h_source.html#l00018">18</a> of file <a class="el" href="ui__output_8h_source.html">ui_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui_2ui__output_8h_source.html#l00023">23</a> of file <a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/sensesp/system/<a class="el" href="ui__output_8h_source.html">ui_output.h</a></li>
-<li>src/sensesp/system/<a class="el" href="ui__output_8cpp_source.html">ui_output.cpp</a></li>
+<li>src/sensesp/ui/<a class="el" href="ui_2ui__output_8h_source.html">ui_output.h</a></li>
+<li>src/sensesp/ui/<a class="el" href="ui__output_8cpp_source.html">ui_output.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
