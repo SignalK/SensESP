@@ -47,3 +47,4 @@ If you want to have your own project added to the list, [create an issue](https:
 ## Examples and Related Projects
 
 - [SH-ESP32-test-jig](https://github.com/hatlabs/SH-ESP32-test-jig): A test jig implementation for the [SH-ESP32](https://hatlabs.github.io/sh-esp32/). While not generally useful in itself, these two projects showcase NMEA 2000 communication and how to use SensESP constructs without having to instantiate a SensESPApp object.
+- [Sailor Hat Wireless Gateway (SH-wg)](https://github.com/hatlabs/SH-wg-firmware): NMEA 2000 WiFi gateway firmware implemented using SensESP.
