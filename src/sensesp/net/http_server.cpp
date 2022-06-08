@@ -8,8 +8,8 @@
 
 #include "ArduinoJson.h"
 #include "AsyncJson.h"
-#include "sensesp/ui/ui_button.h"
 #include "sensesp/system/configurable.h"
+#include "sensesp/ui/ui_button.h"
 #include "sensesp/ui/ui_output.h"
 #include "sensesp_base_app.h"
 
@@ -153,7 +153,8 @@ void HTTPServer::start() {
     debugW("HTTP server not started, WiFi not connected");
   }
   WiFi.onEvent([this](WiFiEvent_t event, WiFiEventInfo_t info) {
-    if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP || event == ARDUINO_EVENT_WIFI_AP_START) {
+    if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP ||
+        event == ARDUINO_EVENT_WIFI_AP_START) {
       server->begin();
       debugI("HTTP server started");
     }
@@ -261,14 +262,21 @@ void HTTPServer::add_sorted_configurables(JsonArray& config) {
 void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   auto* response = request->beginResponseStream("application/json");
   response->setCode(200);
-  auto output_buffer_size = (200 * configurables.size()) + 512;
+
+  auto ui_outputs = UIOutputBase::get_ui_outputs();
+  auto ui_buttons = UIButton::get_ui_buttons();
+
+  std::size_t output_buffer_size =
+      (200 * configurables.size() +  // configuration cards
+       200 * ui_outputs->size() +    // status output entities
+       200 * ui_buttons.size())      // custom UI controls
+      + 512;
   DynamicJsonDocument json_doc(output_buffer_size);
+
   auto properties = json_doc.createNestedObject("Properties");
   auto commands = json_doc.createNestedArray("Commands");
   auto pages = json_doc.createNestedArray("Pages");
   auto config = json_doc.createNestedArray("Config");
-
-  auto ui_outputs = UIOutputBase::get_ui_outputs();
 
   for (auto property = ui_outputs->begin(); property != ui_outputs->end();
        ++property) {
@@ -276,8 +284,6 @@ void HTTPServer::handle_info(AsyncWebServerRequest* request) {
   }
 
   add_sorted_configurables(config);
-
-  auto ui_buttons = UIButton::get_ui_buttons();
 
   for (auto button_it = ui_buttons.begin(); button_it != ui_buttons.end();
        ++button_it) {
