@@ -34,6 +34,19 @@ struct ENUVector {
   float up = kPositionInvalidAltitude;
 };
 
+void convertFromJson(JsonVariantConst src, Position &dst) {
+  dst.longitude = src["longitude"].as<double>();
+  dst.latitude = src["latitude"].as<double>();
+
+  if (src.containsKey("altitude")) {
+    dst.altitude = src["altitude"].as<float>();
+  }
 }
+
+bool canConvertFromJson(JsonVariantConst src, const Position &) {
+  return src.containsKey("latitude") && src.containsKey("longitude");
+}
+
+}  // namespace sensesp
 
 #endif  // SENSESP_TYPES_POSITION_H_
