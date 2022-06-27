@@ -392,6 +392,9 @@ void WSClient::connect() {
     } else {
       debugI("Signal K server has been found at address %s:%d by mDNS.",
              server_address.c_str(), server_port);
+      // Store the discovered server details so they can be retrieved later on
+      this->server_address_ = server_address;
+      this->server_port_ = server_port;
     }
   }
 
