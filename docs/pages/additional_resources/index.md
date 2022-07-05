@@ -24,8 +24,9 @@ If you want to have your own project added to the list, [create an issue](https:
 - [NXP Sensor Fusion](https://github.com/BjarneBitscrambler/OrientationSensorFusion-ESP): Orientation sensing and sensor fusion using NXP FXOS8700 magnetometer/accelerometer and FXAS21002 gyroscope sensors
 - [SignalK-Orientation](https://github.com/BjarneBitscrambler/SignalK-Orientation): Library providing vessel and vehicle orientation information in Signal K message format
 
-### Current and Power
+### Victron Energy devices
 
+- [SensESP/VEDirect](https://github.com/SensESP/VEDirect): Connect any Victron Energy device with a VE.Direct interface to SensESP. Should support all VE.Direct fields, meaning that information from all devices types can be read. At the moment, only input of VE.Direct Text mode is supported.
 - [ve.direct_mppt](https://github.com/SensESP/ve.direct_mppt): Library for reading one victron mppt unit via the ve.direct hardware interface into SignalK/SensESP
 
 ### Control and Display Libraries
