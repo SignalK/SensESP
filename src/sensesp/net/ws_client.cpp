@@ -226,7 +226,8 @@ void WSClient::on_receive_delta(uint8_t* payload) {
       on_receive_put(message);
     }
 
-    if (message.containsKey("requestId")) {
+    // Putrequest contains also requestId Key  GA 
+    if (message.containsKey("requestId") && !message.containsKey("put")) {
       SKRequest::handle_response(message);
     }
   } else {
@@ -274,7 +275,7 @@ void WSClient::process_received_updates() {
   SKListener::take_semaphore();
 
   const std::vector<SKListener*>& listeners = SKListener::get_listeners();
-
+  const std::vector<SKPutListener*>& Plisteners = SKPutListener::get_listeners();
   take_received_updates_semaphore();
   while (!received_updates_.empty()) {
     JsonObject value = received_updates_.front();
@@ -283,6 +284,13 @@ void WSClient::process_received_updates() {
 
     for (size_t i = 0; i < listeners.size(); i++) {
       SKListener* listener = listeners[i];
+      if (listener->get_sk_path().equals(path)) {
+        listener->parse_value(value);
+      }
+    }
+    //   to be able to parse values of Put Listeners    GA
+    for (size_t i = 0; i < Plisteners.size(); i++) {
+      SKPutListener* listener = Plisteners[i];
       if (listener->get_sk_path().equals(path)) {
         listener->parse_value(value);
       }
