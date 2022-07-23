@@ -275,7 +275,8 @@ void WSClient::process_received_updates() {
   SKListener::take_semaphore();
 
   const std::vector<SKListener*>& listeners = SKListener::get_listeners();
-  const std::vector<SKPutListener*>& Plisteners = SKPutListener::get_listeners();
+  const std::vector<SKPutListener*>& put_listeners = SKPutListener::get_listeners();
+
   take_received_updates_semaphore();
   while (!received_updates_.empty()) {
     JsonObject value = received_updates_.front();
@@ -289,8 +290,8 @@ void WSClient::process_received_updates() {
       }
     }
     //   to be able to parse values of Put Listeners    GA
-    for (size_t i = 0; i < Plisteners.size(); i++) {
-      SKPutListener* listener = Plisteners[i];
+    for (size_t i = 0; i < put_listeners.size(); i++) {
+      SKPutListener* listener = put_listeners[i];
       if (listener->get_sk_path().equals(path)) {
         listener->parse_value(value);
       }
