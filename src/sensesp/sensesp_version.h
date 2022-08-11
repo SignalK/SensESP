@@ -3,7 +3,7 @@
 
 namespace sensesp {
 
-const char* const kSensESPVersion = "2.5.2";
+const char* const kSensESPVersion = "2.5.3-alpha";
 
 }
 
