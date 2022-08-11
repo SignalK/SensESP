@@ -8,14 +8,8 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "sensesp_app_builder.h", "sensesp__app__builder_8h.html", "sensesp__app__builder_8h" ],
     [ "sensesp_base_app.cpp", "sensesp__base__app_8cpp.html", "sensesp__base__app_8cpp" ],
     [ "sensesp_base_app.h", "sensesp__base__app_8h.html", "sensesp__base__app_8h" ],
-    [ "sensesp_base_app_builder.h", "sensesp__base__app__builder_8h.html", [
-      [ "sensesp::SensESPBaseAppBuilder", "classsensesp_1_1_sens_e_s_p_base_app_builder.html", "classsensesp_1_1_sens_e_s_p_base_app_builder" ]
-    ] ],
+    [ "sensesp_base_app_builder.h", "sensesp__base__app__builder_8h.html", "sensesp__base__app__builder_8h" ],
     [ "sensesp_minimal_app.cpp", "sensesp__minimal__app_8cpp.html", null ],
-    [ "sensesp_minimal_app.h", "sensesp__minimal__app_8h.html", [
-      [ "sensesp::SensESPMinimalApp", "classsensesp_1_1_sens_e_s_p_minimal_app.html", "classsensesp_1_1_sens_e_s_p_minimal_app" ]
-    ] ],
-    [ "sensesp_minimal_app_builder.h", "sensesp__minimal__app__builder_8h.html", [
-      [ "sensesp::SensESPMinimalAppBuilder", "classsensesp_1_1_sens_e_s_p_minimal_app_builder.html", "classsensesp_1_1_sens_e_s_p_minimal_app_builder" ]
-    ] ]
+    [ "sensesp_minimal_app.h", "sensesp__minimal__app_8h.html", "sensesp__minimal__app_8h" ],
+    [ "sensesp_minimal_app_builder.h", "sensesp__minimal__app__builder_8h.html", "sensesp__minimal__app__builder_8h" ]
 ];
