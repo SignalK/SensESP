@@ -67,8 +67,8 @@ var NAVTREEINDEX =
 "classsensesp_1_1_sens_e_s_p_app_builder.html#aa36af1a2298d0a4db7f6efdf88baf07a",
 "classsensesp_1_1_u_i_output.html",
 "functions_func_~.html",
-"observablevalue_8h.html",
-"valueproducer_8h.html#ad8e3cfff3b2da46d1544e06e066c1505"
+"networking_8h.html",
+"valueconsumer_8h.html#a37b4b3e0f9bd730e0c8050477598c68d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
