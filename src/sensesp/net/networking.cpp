@@ -273,7 +273,7 @@ String Networking::get_config_schema() {
       "hostname": { "title": "Device hostname", "type": "string" },
       "ssid": { "title": "WiFi SSID", "type": "string" },
       "password": { "title": "WiFi password", "type": "string", "format": "password" },
-      "ap_mode": { "type": "string", "format": "radio", "title": "WiFi mode", "enum": ["Client", "Hotspot"] }
+      "ap_mode": { "type": "string", "format": "radio", "title": "WiFi mode", "enum": ["Client", "Access Point"] }
     }
   })###";
 
@@ -288,7 +288,7 @@ void Networking::get_configuration(JsonObject& root) {
   root["default_hostname"] = default_hostname;
   root["ssid"] = ap_ssid;
   root["password"] = ap_password;
-  root["ap_mode"] = ap_mode_ ? "Hotspot" : "Client";
+  root["ap_mode"] = ap_mode_ ? "Access Point" : "Client";
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
@@ -306,7 +306,12 @@ bool Networking::set_configuration(const JsonObject& config) {
   ap_password = config["password"].as<String>();
 
   if (config.containsKey("ap_mode")) {
-    ap_mode_ = config["ap_mode"].as<String>() == "Hotspot";
+    if (config["ap_mode"].as<String>() == "Access Point" ||
+        config["ap_mode"].as<String>() == "Hotspot") {
+      ap_mode_ = true;
+    } else {
+      ap_mode_ = false;
+    }
   }
 
   return true;
