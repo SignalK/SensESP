@@ -10,7 +10,7 @@ namespace sensesp {
  *
  * Normal ObservableValues call the observer callbacks within the same
  * task content. In a multi-task software, this is not always preferable.
- * This class allows you to produce values in one class and consume them
+ * This class allows you to produce values in one task and consume them
  * in another.
  *
  * @tparam T

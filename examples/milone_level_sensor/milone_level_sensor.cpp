@@ -56,9 +56,9 @@ void setup() {
 
   // Create the global SensESPApp() object. If you add the line ->set_wifi("your
   // ssid", "your password") you can specify the wifi parameters in the builder.
-  // If you do not do that, the SensESP device wifi configuration hotspot will
-  // appear and you can use a web browser pointed to 192.168.4.1 to configure
-  // the wifi parameters.
+  // If you do not do that, the SensESP device wifi configuration access point
+  // will appear and you can use a web browser pointed to 192.168.4.1 to
+  // configure the wifi parameters.
 
   sensesp_app = builder.set_hostname("milone")
                     ->set_sk_server("192.168.0.1", 3000)
