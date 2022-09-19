@@ -20,9 +20,11 @@ static const char kLambdaTransformSchemaTail[] PROGMEM = R"(
  * Convert the variable type to a string representation of the type using
  * template specializations.
  **/
+// an unknown type may not be rendered in Json editor
 template <class T>
-const char* get_schema_type_string(const T dummy);
-
+const char* get_schema_type_string(const T dummy) {
+  return "unknown";
+}
 template <>
 const char* get_schema_type_string(const int dummy);
 

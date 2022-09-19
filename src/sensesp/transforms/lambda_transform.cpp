@@ -2,11 +2,6 @@
 
 namespace sensesp {
 
-template <class T>
-const char* get_schema_type_string(const T dummy) {
-  return "string";
-}
-
 template <>
 const char* get_schema_type_string(const int dummy) {
   return "number";
