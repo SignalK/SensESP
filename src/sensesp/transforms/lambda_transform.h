@@ -224,7 +224,6 @@ class LambdaTransform : public Transform<IN, OUT> {
       default:
         break;
     }
-    doc["value"] = this->output;
   }
 
   bool set_configuration(const JsonObject& config) override {
@@ -273,40 +272,37 @@ class LambdaTransform : public Transform<IN, OUT> {
       output.concat(format_schema_row(param_info[0].key,
                                       param_info[0].description,
                                       get_schema_type_string(param1), false));
-      output.concat(",");
     }
     if (num_params > 1) {
+      output.concat(",");
       output.concat(format_schema_row(param_info[1].key,
                                       param_info[1].description,
                                       get_schema_type_string(param2), false));
-      output.concat(",");
     }
     if (num_params > 2) {
+      output.concat(",");
       output.concat(format_schema_row(param_info[2].key,
                                       param_info[2].description,
                                       get_schema_type_string(param3), false));
-      output.concat(",");
     }
     if (num_params > 3) {
+      output.concat(",");
       output.concat(format_schema_row(param_info[3].key,
                                       param_info[3].description,
                                       get_schema_type_string(param4), false));
-      output.concat(",");
     }
     if (num_params > 4) {
+      output.concat(",");
       output.concat(format_schema_row(param_info[4].key,
                                       param_info[4].description,
                                       get_schema_type_string(param5), false));
-      output.concat(",");
     }
     if (num_params > 5) {
+      output.concat(",");
       output.concat(format_schema_row(param_info[5].key,
                                       param_info[5].description,
                                       get_schema_type_string(param6), false));
-      output.concat(",");
     }
-    output.concat(format_schema_row(
-        "value", "Last value", get_schema_type_string(this->output), true));
     output.concat(FPSTR(kLambdaTransformSchemaTail));
 
     debugD("Prepared config schema.");
