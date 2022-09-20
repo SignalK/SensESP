@@ -1,8 +1,8 @@
 #ifndef _signalk_output_H_
 #define _signalk_output_H_
 
-#include "signalk_emitter.h"
 #include "sensesp/transforms/transform.h"
+#include "signalk_emitter.h"
 
 namespace sensesp {
 
@@ -82,6 +82,25 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
 
  protected:
   SKMetadata* meta_;
+};
+
+/**
+ * @brief Class for sending raw Json strings on a specific Signal K path.
+ */
+class SKOutputRawJson : public SKOutput<String> {
+ public:
+  SKOutputRawJson(String sk_path, String config_path = "",
+                  SKMetadata* meta = NULL)
+      : SKOutput<String>(sk_path, config_path, meta) {}
+
+  virtual String as_signalk() override {
+    DynamicJsonDocument json_doc(4096);
+    String json;
+    json_doc["path"] = this->get_sk_path();
+    json_doc["value"] = serialized(ValueProducer<String>::output);
+    serializeJson(json_doc, json);
+    return json;
+  }
 };
 
 /**
