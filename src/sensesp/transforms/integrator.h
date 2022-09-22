@@ -8,8 +8,7 @@ namespace sensesp {
 static const char INTEGRATOR_SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
-        "k": { "title": "Multiplier", "type": "number" },
-        "value": { "title": "Current value", "type" : "number", "readOnly": false }
+        "k": { "title": "Multiplier", "type": "number" }
     }
   })";
 
@@ -53,7 +52,6 @@ class IntegratorT : public Transform<C, P> {
 
   virtual void get_configuration(JsonObject& doc) override final {
     doc["k"] = k;
-    doc["value"] = value;
   }
   virtual bool set_configuration(const JsonObject& config) override final {
     String expected[] = {"k"};
@@ -63,7 +61,6 @@ class IntegratorT : public Transform<C, P> {
       }
     }
     k = config["k"];
-    value = config["value"];
     return true;
   }
   virtual String get_config_schema() override {

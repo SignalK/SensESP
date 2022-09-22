@@ -21,15 +21,13 @@ void Difference::set_input(float input, uint8_t inputChannel) {
 void Difference::get_configuration(JsonObject& root) {
   root["k1"] = k1;
   root["k2"] = k2;
-  root["value"] = output;
 }
 
 static const char SCHEMA[] PROGMEM = R"({
     "type": "object",
     "properties": {
         "k1": { "title": "Input #1 multiplier", "type": "number" },
-        "k2": { "title": "Input #2 multiplier", "type": "number" },
-        "value": { "title": "Last value", "type" : "number", "readOnly": true }
+        "k2": { "title": "Input #2 multiplier", "type": "number" }
     }
   })";
 
