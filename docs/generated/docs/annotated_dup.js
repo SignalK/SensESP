@@ -74,6 +74,7 @@ var annotated_dup =
       [ "SKMetadata", "classsensesp_1_1_s_k_metadata.html", "classsensesp_1_1_s_k_metadata" ],
       [ "SKOutput", "classsensesp_1_1_s_k_output.html", "classsensesp_1_1_s_k_output" ],
       [ "SKOutputNumeric", "classsensesp_1_1_s_k_output_numeric.html", "classsensesp_1_1_s_k_output_numeric" ],
+      [ "SKOutputRawJson", "classsensesp_1_1_s_k_output_raw_json.html", "classsensesp_1_1_s_k_output_raw_json" ],
       [ "SKOutputTime", "classsensesp_1_1_s_k_output_time.html", "classsensesp_1_1_s_k_output_time" ],
       [ "SKPutListener", "classsensesp_1_1_s_k_put_listener.html", "classsensesp_1_1_s_k_put_listener" ],
       [ "SKPutRequest", "classsensesp_1_1_s_k_put_request.html", "classsensesp_1_1_s_k_put_request" ],

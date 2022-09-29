@@ -19,10 +19,11 @@ var searchData=
   ['transform_3c_20int_2c_20bool_20_3e_16',['Transform&lt; int, bool &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
   ['transform_3c_20int_2c_20float_20_3e_17',['Transform&lt; int, float &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
   ['transform_3c_20string_2c_20bool_20_3e_18',['Transform&lt; String, bool &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
-  ['transform_3c_20t_2c_20t_20_3e_19',['Transform&lt; T, T &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
-  ['transform_3c_20time_5ft_2c_20string_20_3e_20',['Transform&lt; time_t, String &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
-  ['transformbase_21',['TransformBase',['../classsensesp_1_1_transform_base.html',1,'sensesp']]],
-  ['truthtotext_22',['TruthToText',['../classsensesp_1_1_truth_to_text.html',1,'sensesp']]],
-  ['typecast_23',['Typecast',['../classsensesp_1_1_typecast.html',1,'sensesp']]],
-  ['typecast_3c_20float_2c_20int_20_3e_24',['Typecast&lt; float, int &gt;',['../classsensesp_1_1_typecast.html',1,'sensesp']]]
+  ['transform_3c_20string_2c_20string_20_3e_19',['Transform&lt; String, String &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
+  ['transform_3c_20t_2c_20t_20_3e_20',['Transform&lt; T, T &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
+  ['transform_3c_20time_5ft_2c_20string_20_3e_21',['Transform&lt; time_t, String &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
+  ['transformbase_22',['TransformBase',['../classsensesp_1_1_transform_base.html',1,'sensesp']]],
+  ['truthtotext_23',['TruthToText',['../classsensesp_1_1_truth_to_text.html',1,'sensesp']]],
+  ['typecast_24',['Typecast',['../classsensesp_1_1_typecast.html',1,'sensesp']]],
+  ['typecast_3c_20float_2c_20int_20_3e_25',['Typecast&lt; float, int &gt;',['../classsensesp_1_1_typecast.html',1,'sensesp']]]
 ];
