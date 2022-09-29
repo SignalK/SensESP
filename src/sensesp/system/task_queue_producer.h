@@ -1,6 +1,7 @@
 #ifndef SENSESP_SYSTEM_TASK_QUEUE_PRODUCER_H_
 #define SENSESP_SYSTEM_TASK_QUEUE_PRODUCER_H_
 
+#include "ReactESP.h"
 #include "observablevalue.h"
 
 namespace sensesp {
@@ -14,13 +15,14 @@ namespace sensesp {
  * in another.
  *
  * @tparam T
+ * @param consumer_app The app object in which the values should be consumed.
  * @param queue_size Size of the queue.
  * @param poll_rate How often to poll the queue. Note: in microseconds!
  */
 template <class T>
 class TaskQueueProducer : public ObservableValue<T> {
  public:
-  TaskQueueProducer(const T& value, int queue_size = 1,
+  TaskQueueProducer(const T& value, reactesp::ReactESP* consumer_app = ReactESP::app, int queue_size = 1,
                     unsigned int poll_rate = 990)
       : ObservableValue<T>(value), queue_size_{queue_size} {
     queue_ = xQueueCreate(queue_size, sizeof(T));
@@ -29,7 +31,7 @@ class TaskQueueProducer : public ObservableValue<T> {
     }
 
     // Create a repeat reaction that will poll the queue and emit the values
-    ReactESP::app->onRepeatMicros(poll_rate, [this]() {
+    consumer_app->onRepeatMicros(poll_rate, [this]() {
       T value;
       while (xQueueReceive(queue_, &value, 0) == pdTRUE) {
         this->emit(value);
@@ -37,12 +39,20 @@ class TaskQueueProducer : public ObservableValue<T> {
     });
   }
 
-  void set(const T& value) {
+  TaskQueueProducer(const T& value, int queue_size = 1, unsigned int poll_rate = 990)
+      : TaskQueueProducer(value, ReactESP::app, queue_size, poll_rate) {}
+
+  bool set(const T& value) {
+    int retval;
     if (queue_size_ == 1) {
-      xQueueOverwrite(queue_, &value);
+      retval = xQueueOverwrite(queue_, &value);
     } else {
-      xQueueSend(queue_, &value, 0);
+      retval = xQueueSend(queue_, &value, 0);
     }
+    if (retval != pdTRUE) {
+      return false;
+    }
+    return true;
   }
 
  private:
