@@ -37,12 +37,17 @@ class TaskQueueProducer : public ObservableValue<T> {
     });
   }
 
-  void set(const T& value) {
+  bool set(const T& value) {
+    int retval;
     if (queue_size_ == 1) {
-      xQueueOverwrite(queue_, &value);
+      retval = xQueueOverwrite(queue_, &value);
     } else {
-      xQueueSend(queue_, &value, 0);
+      retval = xQueueSend(queue_, &value, 0);
     }
+    if (retval != pdTRUE) {
+      return false;
+    }
+    return true;
   }
 
  private:
