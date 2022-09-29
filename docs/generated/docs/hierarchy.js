@@ -97,6 +97,13 @@ var hierarchy =
             ] ]
           ] ]
         ] ],
+        [ "sensesp::Transform< String, String >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::SymmetricTransform< String >", "classsensesp_1_1_symmetric_transform.html", [
+            [ "sensesp::SKOutput< String >", "classsensesp_1_1_s_k_output.html", [
+              [ "sensesp::SKOutputRawJson", "classsensesp_1_1_s_k_output_raw_json.html", null ]
+            ] ]
+          ] ]
+        ] ],
         [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", [
           [ "sensesp::TextToTruth", "classsensesp_1_1_text_to_truth.html", null ]
         ] ],
@@ -148,6 +155,7 @@ var hierarchy =
           [ "sensesp::UIOutput< String >", "classsensesp_1_1_u_i_output.html", null ]
         ] ],
         [ "sensesp::Transform< float, String >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< String, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ]
       ] ],
@@ -170,6 +178,7 @@ var hierarchy =
         [ "sensesp::WSClient", "classsensesp_1_1_w_s_client.html", null ]
       ] ],
       [ "sensesp::SKEmitter", "classsensesp_1_1_s_k_emitter.html", [
+        [ "sensesp::SKOutput< String >", "classsensesp_1_1_s_k_output.html", null ],
         [ "sensesp::SKOutput< T >", "classsensesp_1_1_s_k_output.html", null ],
         [ "sensesp::SKOutputTime", "classsensesp_1_1_s_k_output_time.html", null ]
       ] ],
@@ -278,6 +287,7 @@ var hierarchy =
       [ "sensesp::RgbLed", "classsensesp_1_1_rgb_led.html", null ]
     ] ],
     [ "sensesp::ValueConsumer< String >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< String, String >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::UIOutput< String >", "classsensesp_1_1_u_i_output.html", null ],
       [ "sensesp::SmartSwitchController", "classsensesp_1_1_smart_switch_controller.html", null ]

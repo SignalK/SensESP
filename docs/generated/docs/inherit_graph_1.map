@@ -1,146 +1,150 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,1769,157,1795"/>
-<area shape="rect" id="node2" href="$classsensesp_1_1_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="508,2345,653,2371"/>
-<area shape="rect" id="node3" href="$classsensesp_1_1_rgb_led.html" title="A special device object that can be used to control a multi&#45;channel color rgb LED light using up to 3..." alt="" coords="519,2047,643,2074"/>
-<area shape="rect" id="node4" href="$classsensesp_1_1_s_k_put_request_base.html" title="A base class for all template variations of the PUT request class SKPutRequest. This base class keeps..." alt="" coords="210,271,406,298"/>
-<area shape="rect" id="node6" href="$classsensesp_1_1_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="248,1319,368,1346"/>
-<area shape="rect" id="node21" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="224,1437,392,1463"/>
-<area shape="rect" id="node80" href="$classsensesp_1_1_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="513,2151,648,2178"/>
-<area shape="rect" id="node5" href="$classsensesp_1_1_s_k_put_request.html" title="Used to send requests to the server to change the value of the specified path to a specific value acc..." alt="" coords="481,271,680,298"/>
-<area shape="rect" id="node7" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="493,1071,669,1098"/>
-<area shape="rect" id="node10" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="497,1421,664,1447"/>
-<area shape="rect" id="node14" href="$classsensesp_1_1_sensor_t.html" title="Sensor template class for any sensor producing actual values." alt="" coords="501,1370,661,1397"/>
-<area shape="rect" id="node8" href="$classsensesp_1_1_digital_input_change.html" title="DigitalInputChange provides output whenever a digital pin changes its state." alt="" coords="772,1086,963,1113"/>
-<area shape="rect" id="node9" href="$classsensesp_1_1_digital_input_state.html" title="DigitalInputState polls the state of an input pin every read_delay ms." alt="" coords="779,1035,955,1062"/>
-<area shape="rect" id="node11" href="$classsensesp_1_1_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="772,1187,963,1214"/>
-<area shape="rect" id="node13" href="$classsensesp_1_1_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="800,1674,935,1701"/>
-<area shape="rect" id="node12" href="$classsensesp_1_1_digital_input_debounce_counter.html" title="DigitalInputDebounceCounter counts interrupts and reports the count every read_delay ms,..." alt="" coords="1041,1176,1245,1217"/>
-<area shape="rect" id="node15" href="$classsensesp_1_1_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="793,1573,941,1599"/>
-<area shape="rect" id="node16" href="$classsensesp_1_1_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="797,1623,938,1650"/>
-<area shape="rect" id="node17" href="$classsensesp_1_1_repeat_sensor.html" title=" " alt="" coords="770,1370,965,1397"/>
-<area shape="rect" id="node18" href="$classsensesp_1_1_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="797,1421,938,1447"/>
-<area shape="rect" id="node19" href="$classsensesp_1_1_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="807,1471,928,1498"/>
-<area shape="rect" id="node20" href="$classsensesp_1_1_wi_fi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="796,1522,939,1549"/>
-<area shape="rect" id="node22" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="509,1785,652,1827"/>
-<area shape="rect" id="node24" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,475,650,516"/>
-<area shape="rect" id="node34" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1472,650,1513"/>
-<area shape="rect" id="node37" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1589,650,1631"/>
-<area shape="rect" id="node39" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1173,650,1215"/>
-<area shape="rect" id="node41" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1851,650,1892"/>
-<area shape="rect" id="node46" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,875,650,916"/>
-<area shape="rect" id="node49" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1655,650,1696"/>
-<area shape="rect" id="node66" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1239,650,1280"/>
-<area shape="rect" id="node70" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,940,650,981"/>
-<area shape="rect" id="node72" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,809,650,851"/>
-<area shape="rect" id="node75" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1720,650,1761"/>
-<area shape="rect" id="node77" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="511,1981,650,2023"/>
-<area shape="rect" id="node23" href="$classsensesp_1_1_click_type.html" title="ClickType is a transform that consumes button clicks and translates them as events of type ClickTypes..." alt="" coords="799,2039,936,2066"/>
-<area shape="rect" id="node25" href="$classsensesp_1_1_enable.html" title="On/off switch for signals: input is emitted as&#45;is if the enable flag is set in the web UI." alt="" coords="792,515,943,542"/>
-<area shape="rect" id="node26" href="$classsensesp_1_1_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="751,465,984,491"/>
-<area shape="rect" id="node27" href="$classsensesp_1_1_debounce_template.html" title="Implements debounce code for a button or switch." alt="" coords="1032,414,1255,441"/>
-<area shape="rect" id="node28" href="$classsensesp_1_1_digital_output.html" title="Sets a GPIO pin to whatever the input is (true = HIGH, false = LOW), and passes the value on to the n..." alt="" coords="1066,465,1221,491"/>
-<area shape="rect" id="node29" href="$classsensesp_1_1_press_repeater.html" title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users." alt="" coords="1060,214,1227,241"/>
-<area shape="rect" id="node30" href="$classsensesp_1_1_repeat_report.html" title="Ensures that values that do not change frequently are still reported at a specified maximum silence i..." alt="" coords="1047,515,1239,542"/>
-<area shape="rect" id="node31" href="$classsensesp_1_1_s_k_output.html" title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network." alt="" coords="1059,566,1227,593"/>
-<area shape="rect" id="node33" href="$classsensesp_1_1_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press..." alt="" coords="1038,683,1249,710"/>
-<area shape="rect" id="node32" href="$classsensesp_1_1_s_k_output_numeric.html" title="A special class for sending numeric values to the Signal K server on a specific Signal K path." alt="" coords="1303,566,1520,593"/>
-<area shape="rect" id="node35" href="$classsensesp_1_1_threshold_transform.html" title=" " alt="" coords="770,1725,965,1767"/>
-<area shape="rect" id="node36" href="$classsensesp_1_1_float_threshold.html" title="Translates a float value into a boolean value, which depends on whether the float value is &quot;in range&quot;..." alt="" coords="1061,1445,1226,1471"/>
-<area shape="rect" id="node38" href="$classsensesp_1_1_frequency.html" title="Transforms its input into frequency (Hz: cycles per second)" alt="" coords="797,1791,937,1818"/>
-<area shape="rect" id="node40" href="$classsensesp_1_1_heat_index_effect.html" title="Transforms heat index temperature to heat index effect." alt="" coords="780,1137,955,1163"/>
-<area shape="rect" id="node42" href="$classsensesp_1_1_lambda_transform.html" title=" " alt="" coords="763,2171,971,2212"/>
-<area shape="rect" id="node44" href="$classsensesp_1_1_lambda_transform.html" title="Construct a new transform based on a single function." alt="" coords="775,2090,959,2146"/>
-<area shape="rect" id="node43" href="$classsensesp_1_1_hysteresis.html" title="Hysteresis function." alt="" coords="1072,2271,1215,2312"/>
-<area shape="rect" id="node45" href="$classsensesp_1_1_typecast.html" title="Converts input from one data type to another, then outputs the new type." alt="" coords="1073,2205,1213,2247"/>
-<area shape="rect" id="node47" href="$classsensesp_1_1_threshold_transform.html" title=" " alt="" coords="770,852,965,893"/>
-<area shape="rect" id="node48" href="$classsensesp_1_1_int_threshold.html" title="Translates an integer value into a boolean value, which depends on whether the integer value is &quot;in r..." alt="" coords="1068,859,1219,886"/>
-<area shape="rect" id="node50" href="$classsensesp_1_1_lambda_transform.html" title=" " alt="" coords="775,1909,959,1965"/>
-<area shape="rect" id="node52" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="767,1843,968,1884"/>
-<area shape="rect" id="node51" href="$classsensesp_1_1_linear.html" title="Performs a linear transform on the input value: output = (input * multiplier) + offset." alt="" coords="1086,2154,1201,2181"/>
-<area shape="rect" id="node53" href="$classsensesp_1_1_air_density.html" title="Transforms temperature, relative humidity and pressure in air density." alt="" coords="1073,1951,1213,1978"/>
-<area shape="rect" id="node54" href="$classsensesp_1_1_analog_voltage.html" title="A transform that takes the output of an analog&#45;to&#45;digital converter and outputs the voltage that went..." alt="" coords="1062,2002,1225,2029"/>
-<area shape="rect" id="node55" href="$classsensesp_1_1_angle_correction.html" title="Add a value to an angle input (in radians). The output value is wrapped to a range between [0,..." alt="" coords="1057,2053,1229,2079"/>
-<area shape="rect" id="node56" href="$classsensesp_1_1_change_filter.html" title="A float passthrough transform that will only pass that value through if it is &quot;sufficiently different..." alt="" coords="1067,2103,1220,2130"/>
-<area shape="rect" id="node57" href="$classsensesp_1_1_curve_interpolator.html" title="Implement a piecewise linear interpolation transform." alt="" coords="1054,1495,1233,1522"/>
-<area shape="rect" id="node58" href="$classsensesp_1_1_dew_point.html" title="Transforms temperature and relative humidity in dew point temperature." alt="" coords="1075,1546,1211,1573"/>
-<area shape="rect" id="node59" href="$classsensesp_1_1_difference.html" title=" " alt="" coords="1074,1597,1213,1623"/>
-<area shape="rect" id="node60" href="$classsensesp_1_1_heat_index_temperature.html" title="Transforms temperature and relative humidity in heat index temperature." alt="" coords="1038,1647,1249,1674"/>
-<area shape="rect" id="node61" href="$classsensesp_1_1_median.html" title="Outputs the median value of sample_size inputs." alt="" coords="1083,1698,1204,1725"/>
-<area shape="rect" id="node62" href="$classsensesp_1_1_moving_average.html" title="Outputs the moving average of the last sample_size inputs." alt="" coords="1059,1749,1228,1775"/>
-<area shape="rect" id="node63" href="$classsensesp_1_1_voltage_divider_r1.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit." alt="" coords="1053,1799,1234,1826"/>
-<area shape="rect" id="node64" href="$classsensesp_1_1_voltage_divider_r2.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R2 in the circuit." alt="" coords="1053,1850,1234,1877"/>
-<area shape="rect" id="node65" href="$classsensesp_1_1_voltage_multiplier.html" title="OBSOLETE: Since you can now apply an &quot;output_scale&quot; to the AnalogInput sensor, you don&#39;t need this tr..." alt="" coords="1056,1901,1231,1927"/>
-<area shape="rect" id="node67" href="$classsensesp_1_1_lambda_transform.html" title=" " alt="" coords="775,1239,959,1280"/>
-<area shape="rect" id="node68" href="$classsensesp_1_1_typecast.html" title=" " alt="" coords="1073,1241,1213,1283"/>
-<area shape="rect" id="node69" href="$classsensesp_1_1_round_to_int.html" title="Takes as its input a float, rounds it to the nearest whole number, then outputs it as an int." alt="" coords="1338,1249,1485,1275"/>
-<area shape="rect" id="node71" href="$classsensesp_1_1_text_to_truth.html" title="Consumes a string and outputs boolean &quot;true&quot; if the text represents a human readable version of &quot;true..." alt="" coords="793,918,941,945"/>
-<area shape="rect" id="node73" href="$classsensesp_1_1_time_string.html" title="Consumes a time_t time object and produces a human readable string of the time for UTC in ISO 8601 fo..." alt="" coords="796,801,939,827"/>
-<area shape="rect" id="node74" href="$classsensesp_1_1_s_k_output_time.html" title=" " alt="" coords="1061,767,1226,794"/>
-<area shape="rect" id="node76" href="$classsensesp_1_1_truth_to_text.html" title="Consumes a boolean value and outputs one the appropriate truth string specified in the constructor...." alt="" coords="793,1989,941,2015"/>
-<area shape="rect" id="node78" href="$classsensesp_1_1_integrator_t.html" title="Integrator integrates (accumulates) the incoming values." alt="" coords="796,2236,939,2277"/>
-<area shape="rect" id="node79" href="$classsensesp_1_1_threshold_transform.html" title="A Transform base class that translates the value of type C into value of type P. Base class for class..." alt="" coords="770,2301,965,2343"/>
-<area shape="rect" id="node81" href="$classsensesp_1_1_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="508,1122,653,1149"/>
-<area shape="rect" id="node82" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="9,1319,154,1346"/>
-<area shape="rect" id="node83" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1619,389,1660"/>
-<area shape="rect" id="node84" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1121,389,1163"/>
-<area shape="rect" id="node85" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1244,389,1285"/>
-<area shape="rect" id="node88" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1488,389,1529"/>
-<area shape="rect" id="node89" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1056,389,1097"/>
-<area shape="rect" id="node92" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1801,389,1843"/>
-<area shape="rect" id="node93" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,2253,389,2295"/>
-<area shape="rect" id="node94" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,2523,389,2564"/>
-<area shape="rect" id="node96" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="210,1933,406,1959"/>
-<area shape="rect" id="node97" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="225,1553,391,1595"/>
-<area shape="rect" id="node100" href="$classsensesp_1_1_s_k_emitter.html" title="A class that produces Signal K output to be forwarded to the Signal K server (if the system is connec..." alt="" coords="798,566,937,593"/>
-<area shape="rect" id="node101" href="$classsensesp_1_1_s_k_listener.html" title="An Obervable class that listens for Signal K stream deltas and notifies any observers of value change..." alt="" coords="237,439,379,466"/>
-<area shape="rect" id="node103" href="$classsensesp_1_1_s_k_put_listener.html" title="An Obervable class that listens for Signal K PUT requests coming over the websocket connection and no..." alt="" coords="227,541,389,567"/>
-<area shape="rect" id="node105" href="$classsensesp_1_1_u_i_button.html" title="UIButton implements a button interface on the web UI." alt="" coords="243,1685,373,1711"/>
-<area shape="rect" id="node106" href="$classsensesp_1_1_u_i_output_base.html" title=" " alt="" coords="499,221,662,247"/>
-<area shape="rect" id="node112" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="211,490,405,517"/>
-<area shape="rect" id="node86" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="492,1005,669,1047"/>
-<area shape="rect" id="node87" href="$classsensesp_1_1_task_queue_producer.html" title=" " alt="" coords="769,969,966,1011"/>
-<area shape="rect" id="node90" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="492,744,669,785"/>
-<area shape="rect" id="node91" href="$classsensesp_1_1_u_i_output.html" title=" " alt="" coords="797,617,937,659"/>
-<area shape="rect" id="node95" href="$classsensesp_1_1_system_status_controller.html" title="Base class for a controller that can react to system status events." alt="" coords="471,2749,690,2775"/>
-<area shape="rect" id="node98" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="492,1304,669,1345"/>
-<area shape="rect" id="node99" href="$classsensesp_1_1_task_queue_producer.html" title=" " alt="" coords="769,1304,966,1345"/>
-<area shape="rect" id="node102" href="$classsensesp_1_1_s_k_value_listener.html" title="An ValueProducer that listens to specific Signal K paths and emits its value whenever it changes." alt="" coords="477,373,684,399"/>
-<area shape="rect" id="node104" href="$classsensesp_1_1_s_k_put_request_listener.html" title="An object that listens for PUT requests to come in for the specified SignalK path...." alt="" coords="459,541,703,567"/>
-<area shape="rect" id="node107" href="$classsensesp_1_1_u_i_lambda_output.html" title=" " alt="" coords="778,232,957,273"/>
-<area shape="rect" id="node108" href="$classsensesp_1_1_u_i_lambda_output.html" title=" " alt="" coords="778,297,957,339"/>
-<area shape="rect" id="node109" href="$classsensesp_1_1_u_i_lambda_output.html" title=" " alt="" coords="778,115,957,156"/>
-<area shape="rect" id="node110" href="$classsensesp_1_1_u_i_lambda_output.html" title=" " alt="" coords="762,181,973,207"/>
-<area shape="rect" id="node111" href="$classsensesp_1_1_u_i_output.html" title=" " alt="" coords="785,363,949,390"/>
-<area shape="rect" id="node113" href="$classsensesp_1_1_observable_value.html" title="A value that notifies its observers if it gets changed." alt="" coords="476,423,685,450"/>
-<area shape="rect" id="node114" href="$classsensesp_1_1_task_queue_producer.html" title="Producer class that works across task boundaries." alt="" coords="753,414,982,441"/>
-<area shape="rect" id="node115" href="$classsensesp_1_1_resettable.html" title="Automatic calling of the reset() method when the device needs to be reset." alt="" coords="237,2421,379,2447"/>
-<area shape="rect" id="node116" href="$classsensesp_1_1_filesystem.html" title=" " alt="" coords="509,2421,652,2447"/>
-<area shape="rect" id="node117" href="$classsensesp_1_1_s_k_request.html" title="A base class for all objects that are capable of sending &quot;requests&quot; to the SignalK server (and option..." alt="" coords="8,271,155,298"/>
-<area shape="rect" id="node118" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="16,2530,147,2557"/>
-<area shape="rect" id="node119" href="$classsensesp_1_1_base_blinker.html" title="A base class for LED blinker classes." alt="" coords="233,2471,383,2498"/>
-<area shape="rect" id="node124" href="$classsensesp_1_1_debug_output.html" title="Initialize logging/debug output." alt="" coords="230,2639,386,2666"/>
-<area shape="rect" id="node125" href="$classsensesp_1_1_h_t_t_p_server.html" title="Handles external interactions with the device via the web interface." alt="" coords="232,2923,384,2950"/>
-<area shape="rect" id="node126" href="$classsensesp_1_1_m_d_n_s_discovery.html" title=" " alt="" coords="219,2690,397,2717"/>
-<area shape="rect" id="node127" href="$classsensesp_1_1_o_t_a.html" title=" " alt="" coords="255,2873,361,2899"/>
-<area shape="rect" id="node128" href="$classsensesp_1_1_s_k_delta_queue.html" title="Signal K delta queue." alt="" coords="225,2589,391,2615"/>
-<area shape="rect" id="node120" href="$classsensesp_1_1_pattern_blinker.html" title="A blinker that blinks the LED according to a defined repeating pattern." alt="" coords="500,2471,661,2498"/>
-<area shape="rect" id="node121" href="$classsensesp_1_1_periodic_blinker.html" title="A base class for periodic blinkers." alt="" coords="497,2522,664,2549"/>
-<area shape="rect" id="node122" href="$classsensesp_1_1_even_blinker.html" title="An LED blinker class that blinks the LED 50% off, 50% on, at a given period." alt="" coords="793,2497,942,2523"/>
-<area shape="rect" id="node123" href="$classsensesp_1_1_ratio_blinker.html" title="A periodic blinker that defines both the on&#45;ratio and the period length." alt="" coords="792,2547,943,2574"/>
-<area shape="rect" id="node129" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="207,322,409,349"/>
-<area shape="rect" id="node130" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1736,393,1777"/>
-<area shape="rect" id="node131" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="205,1983,411,2010"/>
-<area shape="rect" id="node132" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="782,735,953,776"/>
-<area shape="rect" id="node133" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1371,393,1412"/>
-<area shape="rect" id="node134" href="$classsensesp_1_1_p_w_m_output.html" title="Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GP..." alt="" coords="505,1538,656,1565"/>
-<area shape="rect" id="node135" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1867,393,1908"/>
-<area shape="rect" id="node136" href="$classsensesp_1_1_lambda_consumer.html" title="Provides an easy way of calling a function based on the output of any ValueProducer." alt="" coords="488,1916,673,1957"/>
-<area shape="rect" id="node137" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,373,393,415"/>
-<area shape="rect" id="node138" href="$classsensesp_1_1_system_status_led.html" title="Consumes the networking and websocket states and delta counts and updates the device LED accordingly...." alt="" coords="489,13,672,39"/>
-<area shape="rect" id="node139" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,2035,393,2076"/>
-<area shape="rect" id="node140" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,685,393,727"/>
-<area shape="rect" id="node141" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,5,393,47"/>
-<area shape="rect" id="node142" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,809,393,851"/>
-<area shape="rect" id="node143" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,2741,393,2783"/>
-<area shape="rect" id="node144" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,2807,393,2848"/>
+<area shape="rect" id="node1" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,1861,157,1887"/>
+<area shape="rect" id="node2" href="$classsensesp_1_1_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="508,2590,653,2617"/>
+<area shape="rect" id="node3" href="$classsensesp_1_1_rgb_led.html" title="A special device object that can be used to control a multi&#45;channel color rgb LED light using up to 3..." alt="" coords="519,2073,643,2099"/>
+<area shape="rect" id="node4" href="$classsensesp_1_1_s_k_put_request_base.html" title="A base class for all template variations of the PUT request class SKPutRequest. This base class keeps..." alt="" coords="210,667,406,694"/>
+<area shape="rect" id="node6" href="$classsensesp_1_1_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="248,1258,368,1285"/>
+<area shape="rect" id="node21" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="224,1703,392,1730"/>
+<area shape="rect" id="node84" href="$classsensesp_1_1_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="513,2386,648,2413"/>
+<area shape="rect" id="node5" href="$classsensesp_1_1_s_k_put_request.html" title="Used to send requests to the server to change the value of the specified path to a specific value acc..." alt="" coords="481,465,680,491"/>
+<area shape="rect" id="node7" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="493,1097,669,1123"/>
+<area shape="rect" id="node10" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="497,1265,664,1291"/>
+<area shape="rect" id="node14" href="$classsensesp_1_1_sensor_t.html" title="Sensor template class for any sensor producing actual values." alt="" coords="501,701,661,727"/>
+<area shape="rect" id="node8" href="$classsensesp_1_1_digital_input_change.html" title="DigitalInputChange provides output whenever a digital pin changes its state." alt="" coords="772,1163,963,1190"/>
+<area shape="rect" id="node9" href="$classsensesp_1_1_digital_input_state.html" title="DigitalInputState polls the state of an input pin every read_delay ms." alt="" coords="779,1214,955,1241"/>
+<area shape="rect" id="node11" href="$classsensesp_1_1_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="772,1265,963,1291"/>
+<area shape="rect" id="node13" href="$classsensesp_1_1_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="800,1315,935,1342"/>
+<area shape="rect" id="node12" href="$classsensesp_1_1_digital_input_debounce_counter.html" title="DigitalInputDebounceCounter counts interrupts and reports the count every read_delay ms,..." alt="" coords="1041,1071,1245,1112"/>
+<area shape="rect" id="node15" href="$classsensesp_1_1_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="793,675,941,702"/>
+<area shape="rect" id="node16" href="$classsensesp_1_1_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="797,726,938,753"/>
+<area shape="rect" id="node17" href="$classsensesp_1_1_repeat_sensor.html" title=" " alt="" coords="770,777,965,803"/>
+<area shape="rect" id="node18" href="$classsensesp_1_1_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="797,827,938,854"/>
+<area shape="rect" id="node19" href="$classsensesp_1_1_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="807,574,928,601"/>
+<area shape="rect" id="node20" href="$classsensesp_1_1_wi_fi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="796,625,939,651"/>
+<area shape="rect" id="node22" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="509,2007,652,2048"/>
+<area shape="rect" id="node24" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,399,650,440"/>
+<area shape="rect" id="node34" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1628,650,1669"/>
+<area shape="rect" id="node37" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1497,650,1539"/>
+<area shape="rect" id="node39" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1824,650,1865"/>
+<area shape="rect" id="node41" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,2124,650,2165"/>
+<area shape="rect" id="node46" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1432,650,1473"/>
+<area shape="rect" id="node49" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1693,650,1735"/>
+<area shape="rect" id="node66" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1759,650,1800"/>
+<area shape="rect" id="node70" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1367,650,1408"/>
+<area shape="rect" id="node74" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,980,650,1021"/>
+<area shape="rect" id="node76" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1563,650,1604"/>
+<area shape="rect" id="node79" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="511,1889,650,1931"/>
+<area shape="rect" id="node81" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="511,2255,650,2296"/>
+<area shape="rect" id="node23" href="$classsensesp_1_1_click_type.html" title="ClickType is a transform that consumes button clicks and translates them as events of type ClickTypes..." alt="" coords="799,2014,936,2041"/>
+<area shape="rect" id="node25" href="$classsensesp_1_1_enable.html" title="On/off switch for signals: input is emitted as&#45;is if the enable flag is set in the web UI." alt="" coords="792,406,943,433"/>
+<area shape="rect" id="node26" href="$classsensesp_1_1_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="751,355,984,382"/>
+<area shape="rect" id="node27" href="$classsensesp_1_1_debounce_template.html" title="Implements debounce code for a button or switch." alt="" coords="1032,305,1255,331"/>
+<area shape="rect" id="node28" href="$classsensesp_1_1_digital_output.html" title="Sets a GPIO pin to whatever the input is (true = HIGH, false = LOW), and passes the value on to the n..." alt="" coords="1066,355,1221,382"/>
+<area shape="rect" id="node29" href="$classsensesp_1_1_press_repeater.html" title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users." alt="" coords="1060,490,1227,517"/>
+<area shape="rect" id="node30" href="$classsensesp_1_1_repeat_report.html" title="Ensures that values that do not change frequently are still reported at a specified maximum silence i..." alt="" coords="1047,406,1239,433"/>
+<area shape="rect" id="node31" href="$classsensesp_1_1_s_k_output.html" title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network." alt="" coords="1059,1014,1227,1041"/>
+<area shape="rect" id="node33" href="$classsensesp_1_1_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press..." alt="" coords="1038,945,1249,971"/>
+<area shape="rect" id="node32" href="$classsensesp_1_1_s_k_output_numeric.html" title="A special class for sending numeric values to the Signal K server on a specific Signal K path." alt="" coords="1303,1014,1520,1041"/>
+<area shape="rect" id="node35" href="$classsensesp_1_1_threshold_transform.html" title=" " alt="" coords="770,1600,965,1641"/>
+<area shape="rect" id="node36" href="$classsensesp_1_1_float_threshold.html" title="Translates a float value into a boolean value, which depends on whether the float value is &quot;in range&quot;..." alt="" coords="1061,1303,1226,1330"/>
+<area shape="rect" id="node38" href="$classsensesp_1_1_frequency.html" title="Transforms its input into frequency (Hz: cycles per second)" alt="" coords="797,1498,937,1525"/>
+<area shape="rect" id="node40" href="$classsensesp_1_1_heat_index_effect.html" title="Transforms heat index temperature to heat index effect." alt="" coords="780,1878,955,1905"/>
+<area shape="rect" id="node42" href="$classsensesp_1_1_lambda_transform.html" title=" " alt="" coords="763,2108,971,2149"/>
+<area shape="rect" id="node44" href="$classsensesp_1_1_lambda_transform.html" title="Construct a new transform based on a single function." alt="" coords="775,2174,959,2230"/>
+<area shape="rect" id="node43" href="$classsensesp_1_1_hysteresis.html" title="Hysteresis function." alt="" coords="1072,2129,1215,2171"/>
+<area shape="rect" id="node45" href="$classsensesp_1_1_typecast.html" title="Converts input from one data type to another, then outputs the new type." alt="" coords="1073,2195,1213,2236"/>
+<area shape="rect" id="node47" href="$classsensesp_1_1_threshold_transform.html" title=" " alt="" coords="770,1432,965,1473"/>
+<area shape="rect" id="node48" href="$classsensesp_1_1_int_threshold.html" title="Translates an integer value into a boolean value, which depends on whether the integer value is &quot;in r..." alt="" coords="1068,1253,1219,1279"/>
+<area shape="rect" id="node50" href="$classsensesp_1_1_lambda_transform.html" title=" " alt="" coords="775,1731,959,1787"/>
+<area shape="rect" id="node52" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="767,1665,968,1707"/>
+<area shape="rect" id="node51" href="$classsensesp_1_1_linear.html" title="Performs a linear transform on the input value: output = (input * multiplier) + offset." alt="" coords="1086,2013,1201,2039"/>
+<area shape="rect" id="node53" href="$classsensesp_1_1_air_density.html" title="Transforms temperature, relative humidity and pressure in air density." alt="" coords="1073,1354,1213,1381"/>
+<area shape="rect" id="node54" href="$classsensesp_1_1_analog_voltage.html" title="A transform that takes the output of an analog&#45;to&#45;digital converter and outputs the voltage that went..." alt="" coords="1062,1405,1225,1431"/>
+<area shape="rect" id="node55" href="$classsensesp_1_1_angle_correction.html" title="Add a value to an angle input (in radians). The output value is wrapped to a range between [0,..." alt="" coords="1057,1455,1229,1482"/>
+<area shape="rect" id="node56" href="$classsensesp_1_1_change_filter.html" title="A float passthrough transform that will only pass that value through if it is &quot;sufficiently different..." alt="" coords="1067,1506,1220,1533"/>
+<area shape="rect" id="node57" href="$classsensesp_1_1_curve_interpolator.html" title="Implement a piecewise linear interpolation transform." alt="" coords="1054,1557,1233,1583"/>
+<area shape="rect" id="node58" href="$classsensesp_1_1_dew_point.html" title="Transforms temperature and relative humidity in dew point temperature." alt="" coords="1075,1607,1211,1634"/>
+<area shape="rect" id="node59" href="$classsensesp_1_1_difference.html" title=" " alt="" coords="1074,1658,1213,1685"/>
+<area shape="rect" id="node60" href="$classsensesp_1_1_heat_index_temperature.html" title="Transforms temperature and relative humidity in heat index temperature." alt="" coords="1038,1709,1249,1735"/>
+<area shape="rect" id="node61" href="$classsensesp_1_1_median.html" title="Outputs the median value of sample_size inputs." alt="" coords="1083,1759,1204,1786"/>
+<area shape="rect" id="node62" href="$classsensesp_1_1_moving_average.html" title="Outputs the moving average of the last sample_size inputs." alt="" coords="1059,1810,1228,1837"/>
+<area shape="rect" id="node63" href="$classsensesp_1_1_voltage_divider_r1.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit." alt="" coords="1053,1861,1234,1887"/>
+<area shape="rect" id="node64" href="$classsensesp_1_1_voltage_divider_r2.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R2 in the circuit." alt="" coords="1053,1911,1234,1938"/>
+<area shape="rect" id="node65" href="$classsensesp_1_1_voltage_multiplier.html" title="OBSOLETE: Since you can now apply an &quot;output_scale&quot; to the AnalogInput sensor, you don&#39;t need this tr..." alt="" coords="1056,1962,1231,1989"/>
+<area shape="rect" id="node67" href="$classsensesp_1_1_lambda_transform.html" title=" " alt="" coords="775,1812,959,1853"/>
+<area shape="rect" id="node68" href="$classsensesp_1_1_typecast.html" title=" " alt="" coords="1073,2064,1213,2105"/>
+<area shape="rect" id="node69" href="$classsensesp_1_1_round_to_int.html" title="Takes as its input a float, rounds it to the nearest whole number, then outputs it as an int." alt="" coords="1338,2071,1485,2098"/>
+<area shape="rect" id="node71" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="767,1367,968,1408"/>
+<area shape="rect" id="node72" href="$classsensesp_1_1_s_k_output.html" title=" " alt="" coords="1071,1136,1215,1177"/>
+<area shape="rect" id="node73" href="$classsensesp_1_1_s_k_output_raw_json.html" title="Class for sending raw Json strings on a specific Signal K path." alt="" coords="1316,1143,1507,1170"/>
+<area shape="rect" id="node75" href="$classsensesp_1_1_text_to_truth.html" title="Consumes a string and outputs boolean &quot;true&quot; if the text represents a human readable version of &quot;true..." alt="" coords="793,995,941,1022"/>
+<area shape="rect" id="node77" href="$classsensesp_1_1_time_string.html" title="Consumes a time_t time object and produces a human readable string of the time for UTC in ISO 8601 fo..." alt="" coords="796,1549,939,1575"/>
+<area shape="rect" id="node78" href="$classsensesp_1_1_s_k_output_time.html" title=" " alt="" coords="1061,1202,1226,1229"/>
+<area shape="rect" id="node80" href="$classsensesp_1_1_truth_to_text.html" title="Consumes a boolean value and outputs one the appropriate truth string specified in the constructor...." alt="" coords="793,1929,941,1955"/>
+<area shape="rect" id="node82" href="$classsensesp_1_1_integrator_t.html" title="Integrator integrates (accumulates) the incoming values." alt="" coords="796,2255,939,2296"/>
+<area shape="rect" id="node83" href="$classsensesp_1_1_threshold_transform.html" title="A Transform base class that translates the value of type C into value of type P. Base class for class..." alt="" coords="770,2320,965,2361"/>
+<area shape="rect" id="node85" href="$classsensesp_1_1_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="508,1214,653,1241"/>
+<area shape="rect" id="node86" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="9,1447,154,1474"/>
+<area shape="rect" id="node87" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1824,389,1865"/>
+<area shape="rect" id="node88" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1440,389,1481"/>
+<area shape="rect" id="node89" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1192,389,1233"/>
+<area shape="rect" id="node92" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1571,389,1612"/>
+<area shape="rect" id="node93" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,1636,389,1677"/>
+<area shape="rect" id="node96" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,2072,389,2113"/>
+<area shape="rect" id="node97" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,2473,389,2515"/>
+<area shape="rect" id="node98" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="227,2844,389,2885"/>
+<area shape="rect" id="node100" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="210,2203,406,2230"/>
+<area shape="rect" id="node101" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="225,2305,391,2347"/>
+<area shape="rect" id="node104" href="$classsensesp_1_1_s_k_emitter.html" title="A class that produces Signal K output to be forwarded to the Signal K server (if the system is connec..." alt="" coords="798,1113,937,1139"/>
+<area shape="rect" id="node105" href="$classsensesp_1_1_s_k_listener.html" title="An Obervable class that listens for Signal K stream deltas and notifies any observers of value change..." alt="" coords="237,210,379,237"/>
+<area shape="rect" id="node107" href="$classsensesp_1_1_s_k_put_listener.html" title="An Obervable class that listens for Signal K PUT requests coming over the websocket connection and no..." alt="" coords="227,286,389,313"/>
+<area shape="rect" id="node109" href="$classsensesp_1_1_u_i_button.html" title="UIButton implements a button interface on the web UI." alt="" coords="243,1141,373,1167"/>
+<area shape="rect" id="node110" href="$classsensesp_1_1_u_i_output_base.html" title=" " alt="" coords="499,145,662,171"/>
+<area shape="rect" id="node116" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="211,351,405,378"/>
+<area shape="rect" id="node90" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="492,516,669,557"/>
+<area shape="rect" id="node91" href="$classsensesp_1_1_task_queue_producer.html" title=" " alt="" coords="769,457,966,499"/>
+<area shape="rect" id="node94" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="492,1148,669,1189"/>
+<area shape="rect" id="node95" href="$classsensesp_1_1_u_i_output.html" title=" " alt="" coords="797,879,937,920"/>
+<area shape="rect" id="node99" href="$classsensesp_1_1_system_status_controller.html" title="Base class for a controller that can react to system status events." alt="" coords="471,3019,690,3046"/>
+<area shape="rect" id="node102" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="492,2320,669,2361"/>
+<area shape="rect" id="node103" href="$classsensesp_1_1_task_queue_producer.html" title=" " alt="" coords="769,2385,966,2427"/>
+<area shape="rect" id="node106" href="$classsensesp_1_1_s_k_value_listener.html" title="An ValueProducer that listens to specific Signal K paths and emits its value whenever it changes." alt="" coords="477,195,684,222"/>
+<area shape="rect" id="node108" href="$classsensesp_1_1_s_k_put_request_listener.html" title="An object that listens for PUT requests to come in for the specified SignalK path...." alt="" coords="459,246,703,273"/>
+<area shape="rect" id="node111" href="$classsensesp_1_1_u_i_lambda_output.html" title=" " alt="" coords="778,188,957,229"/>
+<area shape="rect" id="node112" href="$classsensesp_1_1_u_i_lambda_output.html" title=" " alt="" coords="778,5,957,47"/>
+<area shape="rect" id="node113" href="$classsensesp_1_1_u_i_lambda_output.html" title=" " alt="" coords="778,71,957,112"/>
+<area shape="rect" id="node114" href="$classsensesp_1_1_u_i_lambda_output.html" title=" " alt="" coords="762,137,973,163"/>
+<area shape="rect" id="node115" href="$classsensesp_1_1_u_i_output.html" title=" " alt="" coords="785,254,949,281"/>
+<area shape="rect" id="node117" href="$classsensesp_1_1_observable_value.html" title="A value that notifies its observers if it gets changed." alt="" coords="476,347,685,374"/>
+<area shape="rect" id="node118" href="$classsensesp_1_1_task_queue_producer.html" title="Producer class that works across task boundaries." alt="" coords="753,305,982,331"/>
+<area shape="rect" id="node119" href="$classsensesp_1_1_resettable.html" title="Automatic calling of the reset() method when the device needs to be reset." alt="" coords="237,2691,379,2718"/>
+<area shape="rect" id="node120" href="$classsensesp_1_1_filesystem.html" title=" " alt="" coords="509,2691,652,2718"/>
+<area shape="rect" id="node121" href="$classsensesp_1_1_s_k_request.html" title="A base class for all objects that are capable of sending &quot;requests&quot; to the SignalK server (and option..." alt="" coords="8,667,155,694"/>
+<area shape="rect" id="node122" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="16,2691,147,2718"/>
+<area shape="rect" id="node123" href="$classsensesp_1_1_base_blinker.html" title="A base class for LED blinker classes." alt="" coords="233,2793,383,2819"/>
+<area shape="rect" id="node128" href="$classsensesp_1_1_debug_output.html" title="Initialize logging/debug output." alt="" coords="230,2961,386,2987"/>
+<area shape="rect" id="node129" href="$classsensesp_1_1_h_t_t_p_server.html" title="Handles external interactions with the device via the web interface." alt="" coords="232,3078,384,3105"/>
+<area shape="rect" id="node130" href="$classsensesp_1_1_m_d_n_s_discovery.html" title=" " alt="" coords="219,2590,397,2617"/>
+<area shape="rect" id="node131" href="$classsensesp_1_1_o_t_a.html" title=" " alt="" coords="255,2742,361,2769"/>
+<area shape="rect" id="node132" href="$classsensesp_1_1_s_k_delta_queue.html" title="Signal K delta queue." alt="" coords="225,2910,391,2937"/>
+<area shape="rect" id="node124" href="$classsensesp_1_1_pattern_blinker.html" title="A blinker that blinks the LED according to a defined repeating pattern." alt="" coords="500,2818,661,2845"/>
+<area shape="rect" id="node125" href="$classsensesp_1_1_periodic_blinker.html" title="A base class for periodic blinkers." alt="" coords="497,2767,664,2794"/>
+<area shape="rect" id="node126" href="$classsensesp_1_1_even_blinker.html" title="An LED blinker class that blinks the LED 50% off, 50% on, at a given period." alt="" coords="793,2793,942,2819"/>
+<area shape="rect" id="node127" href="$classsensesp_1_1_ratio_blinker.html" title="A periodic blinker that defines both the on&#45;ratio and the period length." alt="" coords="792,2742,943,2769"/>
+<area shape="rect" id="node133" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="207,406,409,433"/>
+<area shape="rect" id="node134" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1889,393,1931"/>
+<area shape="rect" id="node135" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="205,2254,411,2281"/>
+<area shape="rect" id="node136" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="782,1047,953,1088"/>
+<area shape="rect" id="node137" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1759,393,1800"/>
+<area shape="rect" id="node138" href="$classsensesp_1_1_p_w_m_output.html" title="Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GP..." alt="" coords="505,1955,656,1982"/>
+<area shape="rect" id="node139" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,2137,393,2179"/>
+<area shape="rect" id="node140" href="$classsensesp_1_1_lambda_consumer.html" title="Provides an easy way of calling a function based on the output of any ValueProducer." alt="" coords="488,2189,673,2231"/>
+<area shape="rect" id="node141" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1375,393,1416"/>
+<area shape="rect" id="node142" href="$classsensesp_1_1_system_status_led.html" title="Consumes the networking and websocket states and delta counts and updates the device LED accordingly...." alt="" coords="489,1315,672,1342"/>
+<area shape="rect" id="node143" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1955,393,1996"/>
+<area shape="rect" id="node144" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,951,393,992"/>
+<area shape="rect" id="node145" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1309,393,1351"/>
+<area shape="rect" id="node146" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,1505,393,1547"/>
+<area shape="rect" id="node147" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,3129,393,3171"/>
+<area shape="rect" id="node148" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="223,3012,393,3053"/>
 </map>

@@ -1,6 +1,7 @@
 var signalk__output_8h =
 [
     [ "sensesp::SKOutput< T >", "classsensesp_1_1_s_k_output.html", "classsensesp_1_1_s_k_output" ],
+    [ "sensesp::SKOutputRawJson", "classsensesp_1_1_s_k_output_raw_json.html", "classsensesp_1_1_s_k_output_raw_json" ],
     [ "sensesp::SKOutputNumeric< T >", "classsensesp_1_1_s_k_output_numeric.html", "classsensesp_1_1_s_k_output_numeric" ],
     [ "SKOutputBool", "signalk__output_8h.html#af79c1d21ff7b9cc12fa9fb723524df06", null ],
     [ "SKOutputFloat", "signalk__output_8h.html#abd02b12aec490b877075b2b7a3ad97a3", null ],

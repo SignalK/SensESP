@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;2.5.2</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;2.6.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -311,6 +311,9 @@ it must have &lt;tt&gt;units&lt;/tt&gt;". Thus, any paths that you output that a
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_output_numeric.html">SKOutputNumeric</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A special class for sending numeric values to the Signal K server on a specific Signal K path.  <a href="classsensesp_1_1_s_k_output_numeric.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_output_raw_json.html">SKOutputRawJson</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for sending raw Json strings on a specific Signal K path.  <a href="classsensesp_1_1_s_k_output_raw_json.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_output_time.html">SKOutputTime</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_s_k_put_listener.html">SKPutListener</a></td></tr>
@@ -568,9 +571,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a270290236513f91972b435ad45c4f70b"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a270290236513f91972b435ad45c4f70b">generate_uuid4</a> ()</td></tr>
 <tr class="memdesc:a270290236513f91972b435ad45c4f70b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random UUIDv4 string.  <a href="namespacesensesp.html#a270290236513f91972b435ad45c4f70b">More...</a><br /></td></tr>
 <tr class="separator:a270290236513f91972b435ad45c4f70b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a395f3bd428b2b51fe147e84287a8e7c3"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a395f3bd428b2b51fe147e84287a8e7c3"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a395f3bd428b2b51fe147e84287a8e7c3">get_schema_type_string</a> (const T dummy)</td></tr>
-<tr class="separator:a395f3bd428b2b51fe147e84287a8e7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab312ceec1223ad902af42b4b8ca0ad3e"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:ab312ceec1223ad902af42b4b8ca0ad3e"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ab312ceec1223ad902af42b4b8ca0ad3e">get_schema_type_string</a> (const int dummy)</td></tr>
 <tr class="separator:ab312ceec1223ad902af42b4b8ca0ad3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -583,6 +583,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a262289c4dde77cc0a59a41f304b9f47b"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:a262289c4dde77cc0a59a41f304b9f47b"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a262289c4dde77cc0a59a41f304b9f47b">get_schema_type_string</a> (const bool dummy)</td></tr>
 <tr class="separator:a262289c4dde77cc0a59a41f304b9f47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395f3bd428b2b51fe147e84287a8e7c3"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a395f3bd428b2b51fe147e84287a8e7c3"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a395f3bd428b2b51fe147e84287a8e7c3">get_schema_type_string</a> (const T dummy)</td></tr>
+<tr class="separator:a395f3bd428b2b51fe147e84287a8e7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab312ceec1223ad902af42b4b8ca0ad3e"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:ab312ceec1223ad902af42b4b8ca0ad3e"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ab312ceec1223ad902af42b4b8ca0ad3e">get_schema_type_string</a> (const int dummy)</td></tr>
 <tr class="separator:ab312ceec1223ad902af42b4b8ca0ad3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -610,7 +613,7 @@ Variables</h2></td></tr>
 <tr class="separator:a2e1fbe9a6800a64f87c85f5bc364aed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_w_s_client.html">WSClient</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a01c9e413ed693e0b956363d0b2c5a26e">ws_client</a></td></tr>
 <tr class="separator:a01c9e413ed693e0b956363d0b2c5a26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.5.2&quot;</td></tr>
+<tr class="memitem:a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;2.6.0&quot;</td></tr>
 <tr class="separator:a415d47efb7e756b1be52067ac1792c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc35a8f1394e257344015e4042bc7d1"><td class="memItemLeft" align="right" valign="top">ReactESP&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2bc35a8f1394e257344015e4042bc7d1">app</a></td></tr>
 <tr class="separator:a2bc35a8f1394e257344015e4042bc7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -661,7 +664,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="integrator_8h_source.html#l00079">79</a> of file <a class="el" href="integrator_8h_source.html">integrator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integrator_8h_source.html#l00076">76</a> of file <a class="el" href="integrator_8h_source.html">integrator.h</a>.</p>
 
 </div>
 </div>
@@ -1045,7 +1048,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="integrator_8h_source.html#l00078">78</a> of file <a class="el" href="integrator_8h_source.html">integrator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integrator_8h_source.html#l00075">75</a> of file <a class="el" href="integrator_8h_source.html">integrator.h</a>.</p>
 
 </div>
 </div>
@@ -1173,7 +1176,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__output_8h_source.html#l00115">115</a> of file <a class="el" href="signalk__output_8h_source.html">signalk_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__output_8h_source.html#l00134">134</a> of file <a class="el" href="signalk__output_8h_source.html">signalk_output.h</a>.</p>
 
 </div>
 </div>
@@ -1189,7 +1192,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__output_8h_source.html#l00113">113</a> of file <a class="el" href="signalk__output_8h_source.html">signalk_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__output_8h_source.html#l00132">132</a> of file <a class="el" href="signalk__output_8h_source.html">signalk_output.h</a>.</p>
 
 </div>
 </div>
@@ -1205,7 +1208,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__output_8h_source.html#l00114">114</a> of file <a class="el" href="signalk__output_8h_source.html">signalk_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__output_8h_source.html#l00133">133</a> of file <a class="el" href="signalk__output_8h_source.html">signalk_output.h</a>.</p>
 
 </div>
 </div>
@@ -1237,7 +1240,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="signalk__output_8h_source.html#l00116">116</a> of file <a class="el" href="signalk__output_8h_source.html">signalk_output.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__output_8h_source.html#l00135">135</a> of file <a class="el" href="signalk__output_8h_source.html">signalk_output.h</a>.</p>
 
 </div>
 </div>
@@ -1726,7 +1729,7 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00026">26</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00021">21</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
 
 </div>
 </div>
@@ -1748,7 +1751,7 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00026">26</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00021">21</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
 
 </div>
 </div>
@@ -1770,7 +1773,7 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00016">16</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00011">11</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
 
 </div>
 </div>
@@ -1792,7 +1795,7 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00016">16</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00011">11</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
 
 </div>
 </div>
@@ -1814,7 +1817,13 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00011">11</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00006">6</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_ab312ceec1223ad902af42b4b8ca0ad3e_icgraph.svg" width="394" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -1836,7 +1845,13 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00011">11</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00006">6</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_ab312ceec1223ad902af42b4b8ca0ad3e_icgraph.svg" width="394" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -1858,7 +1873,7 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00021">21</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00016">16</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
 
 </div>
 </div>
@@ -1880,7 +1895,7 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00021">21</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00016">16</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
 
 </div>
 </div>
@@ -1903,13 +1918,7 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 <p >Convert the variable type to a string representation of the type using template specializations. </p>
 
-<p class="definition">Definition at line <a class="el" href="lambda__transform_8cpp_source.html#l00006">6</a> of file <a class="el" href="lambda__transform_8cpp_source.html">lambda_transform.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_a395f3bd428b2b51fe147e84287a8e7c3_icgraph.svg" width="394" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
+<p class="definition">Definition at line <a class="el" href="lambda__transform_8h_source.html#l00025">25</a> of file <a class="el" href="lambda__transform_8h_source.html">lambda_transform.h</a>.</p>
 
 </div>
 </div>
@@ -2189,7 +2198,7 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.5.2&quot;</td>
+          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;2.6.0&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
