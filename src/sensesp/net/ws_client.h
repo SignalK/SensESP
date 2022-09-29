@@ -90,7 +90,7 @@ class WSClient : public Configurable,
   bool token_test_success_ = false;
 
   TaskQueueProducer<WSConnectionState> connection_state_ =
-      TaskQueueProducer<WSConnectionState>(WSConnectionState::kWSDisconnected);
+      TaskQueueProducer<WSConnectionState>(WSConnectionState::kWSDisconnected, ReactESP::app);
 
   /// task_connection_state is used to track the internal task state which might
   /// be out of sync with the published connection state.
@@ -100,7 +100,7 @@ class WSClient : public Configurable,
   WebSocketsClient client_;
   SKDeltaQueue* sk_delta_queue_;
   TaskQueueProducer<int> delta_count_producer_ =
-      TaskQueueProducer<int>(0, 5, 990);
+      TaskQueueProducer<int>(0, ReactESP::app, 5, 990);
 
   SemaphoreHandle_t received_updates_semaphore_ =
       xSemaphoreCreateRecursiveMutex();
