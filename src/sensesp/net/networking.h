@@ -17,6 +17,86 @@
 namespace sensesp {
 
 /**
+ * @brief Provide information about the current WiFi state.
+ *
+ * WiFiStateProducer reads the current network state using
+ * Arduino Core callbacks. It is a replacement for the Networking class
+ * ValueProducer output and effectively decouples the Networkig class
+ * from the rest of the system. This allows for replacing the Networking
+ * class with a different implementation.
+ */
+class WiFiStateProducer : public ValueProducer<WiFiState>, public Startable {
+ public:
+  /**
+   * Singletons should not be cloneable
+   */
+  WiFiStateProducer(WiFiStateProducer& other) = delete;
+
+  /**
+   * Singletons should not be assignable
+   */
+  void operator=(const WiFiStateProducer&) = delete;
+
+  /**
+   * @brief Get the singleton instance of the WiFiStateProducer
+   */
+  static WiFiStateProducer* get_singleton();
+
+  virtual void start() override {
+    setup_wifi_callbacks();
+    // Emit the current state immediately
+    this->emit(this->output);
+  }
+
+ protected:
+  WiFiStateProducer() : Startable(81) { this->output = WiFiState::kWifiNoAP; }
+
+  void setup_wifi_callbacks() {
+    WiFi.onEvent(
+        [this](WiFiEvent_t event, WiFiEventInfo_t info) {
+          this->wifi_station_connected();
+        },
+        WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_GOT_IP);
+    WiFi.onEvent([this](WiFiEvent_t event,
+                        WiFiEventInfo_t info) { this->wifi_ap_enabled(); },
+                 WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_START);
+    WiFi.onEvent([this](WiFiEvent_t event,
+                        WiFiEventInfo_t info) { this->wifi_disconnected(); },
+                 WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_DISCONNECTED);
+    WiFi.onEvent([this](WiFiEvent_t event,
+                        WiFiEventInfo_t info) { this->wifi_disconnected(); },
+                 WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_STOP);
+  }
+
+  void wifi_station_connected() {
+    debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
+           WiFi.RSSI());
+    debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
+    debugI("Default route: %s", WiFi.gatewayIP().toString().c_str());
+    debugI("DNS server: %s", WiFi.dnsIP().toString().c_str());
+    this->emit(WiFiState::kWifiConnectedToAP);
+  }
+
+  void wifi_ap_enabled() {
+    debugI("WiFi Access Point enabled, SSID: %s", WiFi.softAPSSID().c_str());
+    debugI("IP address of Device: %s", WiFi.softAPIP().toString().c_str());
+
+    // Setting the AP mode happens immediately,
+    // so this callback is likely called already before all startables have been
+    // initiated. Delay the WiFi state update until the start of the event loop.
+    ReactESP::app->onDelay(
+        0, [this]() { this->emit(WiFiState::kWifiAPModeActivated); });
+  }
+
+  void wifi_disconnected() {
+    debugI("Disconnected from wifi.");
+    this->emit(WiFiState::kWifiDisconnected);
+  }
+
+  static WiFiStateProducer* instance_;
+};
+
+/**
  * @brief Manages the ESP's connection to the Wifi network.
  */
 class Networking : public Configurable,
@@ -43,7 +123,6 @@ class Networking : public Configurable,
 
  protected:
   void setup_saved_ssid();
-  void setup_wifi_callbacks();
   void setup_wifi_manager();
 
   // callbacks
@@ -80,6 +159,8 @@ class Networking : public Configurable,
   // original value of hardcoded hostname; used to detect changes
   // in the hardcoded value
   String default_hostname = "";
+
+  WiFiStateProducer* wifi_state_producer;
 
   const char* wifi_manager_password_;
 };

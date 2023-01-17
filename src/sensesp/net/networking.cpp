@@ -27,7 +27,11 @@ Networking::Networking(String config_path, String ssid, String password,
       wifi_manager_password_{wifi_manager_password},
       Startable(80),
       Resettable(0) {
-  this->output = WiFiState::kWifiNoAP;
+
+  // Get the WiFi state producer singleton and make it update this object output
+  wifi_state_producer = WiFiStateProducer::get_singleton();
+  wifi_state_producer->connect_to(new LambdaConsumer<WiFiState>(
+      [this](WiFiState state) { this->emit(state); }));
 
   preset_ssid = ssid;
   preset_password = password;
@@ -81,35 +85,10 @@ void Networking::activate_wifi_manager() {
   }
 }
 
-void Networking::setup_wifi_callbacks() {
-
-
-  WiFi.onEvent([this](WiFiEvent_t event,
-                      WiFiEventInfo_t info) { this->wifi_station_connected(); },
-               WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_GOT_IP);
-  WiFi.onEvent([this](WiFiEvent_t event,
-                      WiFiEventInfo_t info) { this->wifi_ap_enabled(); },
-               WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_START);
-  WiFi.onEvent(
-      [this](WiFiEvent_t event, WiFiEventInfo_t info) {
-        this->wifi_disconnected();
-      },
-      WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_DISCONNECTED);
-    WiFi.onEvent(
-      [this](WiFiEvent_t event, WiFiEventInfo_t info) {
-        this->wifi_disconnected();
-      },
-      WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_STOP);
-
-}
-
 /**
  * @brief Start WiFi using preset SSID and password.
  */
 void Networking::setup_saved_ssid() {
-  this->emit(WiFiState::kWifiDisconnected);
-  setup_wifi_callbacks();
-
   String hostname = SensESPBaseApp::get_hostname();
   WiFi.setHostname(hostname.c_str());
 
@@ -137,37 +116,6 @@ void Networking::setup_saved_ssid() {
 }
 
 /**
- * This method gets called when WiFi is connected to the AP and has
- * received an IP address.
- */
-void Networking::wifi_station_connected() {
-  debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
-         WiFi.RSSI());
-  debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
-  debugI("Default route: %s", WiFi.gatewayIP().toString().c_str());
-  debugI("DNS server: %s", WiFi.dnsIP().toString().c_str());
-  this->emit(WiFiState::kWifiConnectedToAP);
-}
-
-void Networking::wifi_ap_enabled() {
-  debugI("WiFi Access Point enabled, SSID: %s", WiFi.softAPSSID().c_str());
-  debugI("IP address of Device: %s", WiFi.softAPIP().toString().c_str());
-
-  // Setting the AP mode happens immediately,
-  // so this callback is likely called already before all startables have been
-  // initiated. Delay the WiFi state update until the start of the event loop.
-  ReactESP::app->onDelay(0, [this]() {this->emit(WiFiState::kWifiAPModeActivated);});
-}
-
-/**
- * This method gets called when WiFi is disconnected from the AP.
- */
-void Networking::wifi_disconnected() {
-  debugI("Disconnected from wifi.");
-  this->emit(WiFiState::kWifiDisconnected);
-}
-
-/**
  * @brief Start WiFi using WiFi Manager.
  *
  * If the setup process has been completed before, this method will start
@@ -178,8 +126,6 @@ void Networking::setup_wifi_manager() {
   wifi_manager = new AsyncWiFiManager(server, dns);
 
   String hostname = SensESPBaseApp::get_hostname();
-
-  setup_wifi_callbacks();
 
   // set config save notify callback
   wifi_manager->setBreakAfterConfig(true);
@@ -212,6 +158,7 @@ void Networking::setup_wifi_manager() {
   }
   const char* pconfig_ssid = config_ssid.c_str();
 
+  // this is the only WiFi state we actively still emit
   this->emit(WiFiState::kWifiManagerActivated);
 
   WiFi.setHostname(SensESPBaseApp::get_hostname().c_str());
@@ -328,6 +275,15 @@ void Networking::reset() {
   // On ESP32, disconnect does not erase previous credentials. Let's connect
   // to a bogus network instead
   WiFi.begin("0", "0");
+}
+
+WiFiStateProducer* WiFiStateProducer::instance_ = nullptr;
+
+WiFiStateProducer* WiFiStateProducer::get_singleton() {
+  if (instance_ == nullptr) {
+    instance_ = new WiFiStateProducer();
+  }
+  return instance_;
 }
 
 }  // namespace sensesp
