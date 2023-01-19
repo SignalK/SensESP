@@ -80,10 +80,8 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
       Startable(60) {
   this->sk_delta_queue_ = sk_delta_queue;
 
-  preset_server_address_ = server_address;
-  preset_server_port_ = server_port;
-  this->server_address_ = server_address;
-  this->server_port_ = server_port;
+  conf_server_address_ = server_address;
+  conf_server_port_ = server_port;
 
   // a WSClient object observes its own connection_state_ member
   // and simply passes through any notification it emits. As a result,
@@ -226,7 +224,7 @@ void WSClient::on_receive_delta(uint8_t* payload) {
       on_receive_put(message);
     }
 
-    // Putrequest contains also requestId Key  GA 
+    // Putrequest contains also requestId Key  GA
     if (message.containsKey("requestId") && !message.containsKey("put")) {
       SKRequest::handle_response(message);
     }
@@ -275,7 +273,8 @@ void WSClient::process_received_updates() {
   SKListener::take_semaphore();
 
   const std::vector<SKListener*>& listeners = SKListener::get_listeners();
-  const std::vector<SKPutListener*>& put_listeners = SKPutListener::get_listeners();
+  const std::vector<SKPutListener*>& put_listeners =
+      SKPutListener::get_listeners();
 
   take_received_updates_semaphore();
   while (!received_updates_.empty()) {
@@ -395,7 +394,7 @@ void WSClient::connect() {
   String server_address = this->server_address_;
   uint16_t server_port = this->server_port_;
 
-  if (this->server_address_.isEmpty()) {
+  if (this->conf_server_address_.isEmpty()) {
     if (!get_mdns_service(server_address, server_port)) {
       debugE("No Signal K server found in network when using mDNS service!");
     } else {
@@ -405,6 +404,9 @@ void WSClient::connect() {
       this->server_address_ = server_address;
       this->server_port_ = server_port;
     }
+  } else {
+    server_address = this->conf_server_address_;
+    server_port = this->conf_server_port_;
   }
 
   if (!server_address.isEmpty() && server_port > 0) {
@@ -642,8 +644,8 @@ void WSClient::send_delta() {
 }
 
 void WSClient::get_configuration(JsonObject& root) {
-  root["sk_address"] = this->server_address_;
-  root["sk_port"] = this->server_port_;
+  root["sk_address"] = this->conf_server_address_;
+  root["sk_port"] = this->conf_server_port_;
 
   root["token"] = this->auth_token_;
   root["client_id"] = this->client_id_;
@@ -661,27 +663,7 @@ static const char SCHEMA[] PROGMEM = R"~({
     }
   })~";
 
-// TODO: FIXME: Don't Repeat Yourself
-static const char SCHEMA_READONLY[] PROGMEM = R"~(
-  {
-    "type": "object",
-    "properties": {
-        "sk_address": { "title": "Signal K server address (readonly)", "type": "string", "readOnly": true },
-        "sk_port": { "title": "Signal K server port (readonly)", "type": "integer", "readOnly": true },
-        "client_id": { "title": "Client ID  (readonly)", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
-        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
-    }
-  }
-  )~";
-
-String WSClient::get_config_schema() {
-  if (!preset_server_address_.isEmpty()) {
-    return FPSTR(SCHEMA);
-  } else {
-    return FPSTR(SCHEMA_READONLY);
-  }
-}
+String WSClient::get_config_schema() { return FPSTR(SCHEMA); }
 
 bool WSClient::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_address", "sk_port", "token", "client_id"};
@@ -695,13 +677,8 @@ bool WSClient::set_configuration(const JsonObject& config) {
     }
   }
 
-  if (!preset_server_address_.isEmpty()) {
-    debugI(
-        "Saved Signal K server configuration ignored due to hardcoded values.");
-  } else {
-    this->server_address_ = config["sk_address"].as<String>();
-    this->server_port_ = config["sk_port"].as<int>();
-  }
+  this->conf_server_address_ = config["sk_address"].as<String>();
+  this->conf_server_port_ = config["sk_port"].as<int>();
 
   // FIXME: setting the token should not be allowed via the REST API.
   this->auth_token_ = config["token"].as<String>();
