@@ -47,7 +47,7 @@ void SensESPApp::setup() {
                                   sk_server_address_, sk_server_port_);
 
   // connect the system status controller
-  this->networking_->connect_to(&system_status_controller_);
+  WiFiStateProducer::get_singleton()->connect_to(&system_status_controller_);
   this->ws_client_->connect_to(&system_status_controller_);
 
   // create the MDNS discovery object
