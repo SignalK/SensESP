@@ -391,27 +391,21 @@ void WSClient::connect() {
   debugI("Initiating websocket connection with server...");
 
   set_connection_state(WSConnectionState::kWSAuthorizing);
-  String server_address = this->server_address_;
-  uint16_t server_port = this->server_port_;
-
   if (this->conf_server_address_.isEmpty()) {
-    if (!get_mdns_service(server_address, server_port)) {
+    if (!get_mdns_service(this->server_address_, this->server_port_)) {
       debugE("No Signal K server found in network when using mDNS service!");
     } else {
       debugI("Signal K server has been found at address %s:%d by mDNS.",
-             server_address.c_str(), server_port);
-      // Store the discovered server details so they can be retrieved later on
-      this->server_address_ = server_address;
-      this->server_port_ = server_port;
+             this->server_address_.c_str(), this->server_port_);
     }
   } else {
-    server_address = this->conf_server_address_;
-    server_port = this->conf_server_port_;
+    this->server_address_ = this->conf_server_address_;
+    this->server_port_ = this->conf_server_port_;
   }
 
-  if (!server_address.isEmpty() && server_port > 0) {
+  if (!this->server_address_.isEmpty() && this->server_port_ > 0) {
     debugD("Websocket is connecting to Signal K server on address %s:%d",
-           server_address.c_str(), server_port);
+           this->server_address_.c_str(), this->server_port_);
   } else {
     // host and port not defined - wait for mDNS
     set_connection_state(WSConnectionState::kWSDisconnected);
@@ -420,19 +414,19 @@ void WSClient::connect() {
 
   if (this->polling_href_ != "") {
     // existing pending request
-    this->poll_access_request(server_address, server_port, this->polling_href_);
+    this->poll_access_request(this->server_address_, this->server_port_, this->polling_href_);
     return;
   }
 
   if (this->auth_token_ == NULL_AUTH_TOKEN) {
     // initiate HTTP authentication
     debugD("No prior authorization token present.");
-    this->send_access_request(server_address, server_port);
+    this->send_access_request(this->server_address_, this->server_port_);
     return;
   }
 
   // Test the validity of the authorization token
-  this->test_token(server_address, server_port);
+  this->test_token(this->server_address_, this->server_port_);
 }
 
 void WSClient::test_token(const String server_address,
