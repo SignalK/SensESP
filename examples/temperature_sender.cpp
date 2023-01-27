@@ -118,7 +118,7 @@ void setup() {
   this example, that's an AnalogInput().
   - That input is then sent through one or more transforms so that the end
   result is the value we want to send to Signal K. In this example, the
-  transforms are AnalogVoltage(), then VoltageDivider2(), then
+  transforms are VoltageDivider2(), then
   TemperatureInterpreter(), then Linear().
   - Finally, the value we want is sent to the final "consumer", in this case
   SKOutputNumber().
@@ -143,22 +143,20 @@ void setup() {
   const float R1 = 51.0;
 
   // An AnalogInput gets the value from the microcontroller's AnalogIn pin,
-  // which is a value from 0 to 1023.
+  // which is a value from 0 to 1023 and then scales it to Vin, giving the pin voltage.
   // ESP32 has many pins that can be used for AnalogIn, and they're
   // expressed here as the XX in GPIOXX.
-  auto* analog_input = new AnalogInput(36);
+  auto* analog_input = new AnalogInput(36, 1000, "/temp_analog_in/", Vin);
 
   /* Translating the number returned by AnalogInput into a temperature, and
      sending it to Signal K, requires several transforms. Wire them up in
      sequence:
-     - convert the value from the AnalogIn pin into an AnalogVoltage()
      - convert voltage into ohms with VoltageDividerR2()
      - find the Kelvin value for the given ohms value with
      TemperatureInterpreter()
      - use Linear() in case you want to calibrate the output at runtime
      - send calibrated Kelvin value to Signal K with SKOutputNumber()
   */
-  analog_input->connect_to(new AnalogVoltage())
       ->connect_to(new VoltageDividerR2(R1, Vin, "/12V_alternator/temp/sender"))
       ->connect_to(new TemperatureInterpreter("/12V_alternator/temp/curve"))
       ->connect_to(new Linear(1.0, 0.0, "/12V_alternator/temp/calibrate"))
