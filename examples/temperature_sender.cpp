@@ -118,7 +118,7 @@ void setup() {
   this example, that's an AnalogInput().
   - That input is then sent through one or more transforms so that the end
   result is the value we want to send to Signal K. In this example, the
-  transforms are AnalogVoltage(), then VoltageDivider2(), then
+  transforms are VoltageDivider2(), then
   TemperatureInterpreter(), then Linear().
   - Finally, the value we want is sent to the final "consumer", in this case
   SKOutputNumber().
@@ -137,29 +137,28 @@ void setup() {
 
   // Voltage sent into the voltage divider circuit that includes the analog
   // sender
-  const float Vin = 3.3;
+  const float volt_div_v_in = 3.3;
   // The resistance, in ohms, of the fixed resistor (R1) in the voltage divider
   // circuit
   const float R1 = 51.0;
 
   // An AnalogInput gets the value from the microcontroller's AnalogIn pin,
-  // which is a value from 0 to 1023.
+  // which is a value from 0 to 1023 and then scales it to the max pin voltage (max_analog_in_voltage), giving the pin voltage.
+  const float max_analog_in_voltage = 3.3;
   // ESP32 has many pins that can be used for AnalogIn, and they're
   // expressed here as the XX in GPIOXX.
-  auto* analog_input = new AnalogInput(36);
+  auto* analog_input = new AnalogInput(36, 1000, "/12V_alternator/temp/analog_in/", max_analog_in_voltage);
 
   /* Translating the number returned by AnalogInput into a temperature, and
      sending it to Signal K, requires several transforms. Wire them up in
      sequence:
-     - convert the value from the AnalogIn pin into an AnalogVoltage()
      - convert voltage into ohms with VoltageDividerR2()
      - find the Kelvin value for the given ohms value with
      TemperatureInterpreter()
      - use Linear() in case you want to calibrate the output at runtime
      - send calibrated Kelvin value to Signal K with SKOutputNumber()
   */
-  analog_input->connect_to(new AnalogVoltage())
-      ->connect_to(new VoltageDividerR2(R1, Vin, "/12V_alternator/temp/sender"))
+      ->connect_to(new VoltageDividerR2(R1, volt_div_v_in, "/12V_alternator/temp/sender"))
       ->connect_to(new TemperatureInterpreter("/12V_alternator/temp/curve"))
       ->connect_to(new Linear(1.0, 0.0, "/12V_alternator/temp/calibrate"))
       ->connect_to(
