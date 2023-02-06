@@ -10,8 +10,7 @@ A not-at-all-organized assortment of common problems and solutions.
 
 ## Help on Slack
 
-Slack is an online collaboration platform used by developers. You can join in the Signal K discussion on Slack at
-http://slack-invite.signalk.org/. The `#sensors` channel is the best place for you to ask questions about SensESP.
+Slack is an online collaboration platform used by developers. You can join in the [Signal K discussion on Slack](https://signalk-dev.slack.com/) via [signalk.org][https://signalk.org]. The `#sensors` channel is the best place for you to ask questions about SensESP.
 
 ## Missing Libraries
 
