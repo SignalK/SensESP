@@ -29,37 +29,73 @@ class ESP32AnalogReader : public BaseAnalogReader {
   adc_bits_width_t  bit_width_ = (adc_bits_width_t)  ADC_WIDTH_BIT_DEFAULT;
   // maximum voltage readout for 3.3V VDDA when attenuation_ is set to 11 dB
   const float kVmax_ = 3300;
-  int8_t adc_channel_;
+  adc_channel_t adc_channel_;
   esp_adc_cal_characteristics_t adc_characteristics_;
   const int kVref_ = 1100;  // voltage reference, in mV
+  adc_unit_t adc_unit; // ADC1 or ADC2
+  bool config_successful = true;
 
  public:
   ESP32AnalogReader(int pin) : pin_{pin} {
-    if (!(32 <= pin && pin <= 39)) {
-      debugE("Only ADC1 is supported at the moment");
-      adc_channel_ = -1;
-      return;
+    if (32 <= pin_ && pin_ <= 39) {
+      adc_unit = ADC_UNIT_1;
+      adc_channel_ = (adc_channel_t)digitalPinToAnalogChannel(pin_);
     }
-    adc_channel_ = digitalPinToAnalogChannel(pin);
+    else {
+      adc_unit = ADC_UNIT_2;
+      if (pin_ == 13) adc_channel_ = ADC_CHANNEL_4;
+      else if (pin_ == 25) adc_channel_ = ADC_CHANNEL_8;
+      else if (pin_ == 26) adc_channel_ = ADC_CHANNEL_9;
+      else if (pin_ == 27) adc_channel_ = ADC_CHANNEL_7;
+    }
+    
+    if (!configure()) {
+      config_successful = false;
+    }
   }
 
-  bool configure() {
-    if (adc_channel_ == -1) {
-      return false;
+ /**
+   * @brief Configure (calibrate) the ADC for this specific ESP32
+   * 
+   * @return false if any of the configuration functions fail, otherwise true
+   */
+ 
+ bool configure() {
+    if (adc_unit == ADC_UNIT_1) {
+        if (adc1_config_width(bit_width_) != ESP_OK) {
+          return false;
+        }
+        if (adc1_config_channel_atten((adc1_channel_t)adc_channel_, attenuation_) != ESP_OK) {
+          return false;
+        }
+    } else {
+        if (adc2_config_channel_atten((adc2_channel_t)adc_channel_, attenuation_) != ESP_OK) {
+          return false;
+        }
     }
-    adc1_config_width(bit_width_);
-    adc1_config_channel_atten((adc1_channel_t)adc_channel_, attenuation_);
-    esp_adc_cal_characterize(ADC_UNIT_1, attenuation_, bit_width_, kVref_,
+    esp_adc_cal_characterize(adc_unit, attenuation_, bit_width_, kVref_,
                              &adc_characteristics_);
     return true;
   }
 
-  float read() {
-    uint32_t voltage;
-    esp_adc_cal_get_voltage((adc_channel_t)adc_channel_, &adc_characteristics_,
-                            &voltage);
-    return voltage / kVmax_;
+ float read() {
+    uint32_t volts_mV;
+    if (adc_unit == ADC_UNIT_1) {
+      // returns the raw value of an adc1_channel_t and assigns it to volts_mV
+      esp_adc_cal_get_voltage(adc_channel_, &adc_characteristics_,
+                            &volts_mV);
+      return (float)volts_mV / kVmax_;
+    } 
+    else { // ADC_UNIT_2
+      int raw;
+      // puts the raw value of an adc2_channel_t into raw
+      adc2_get_raw((adc2_channel_t)adc_channel_, bit_width_, &raw);
+      // convert raw adc reading to mV
+      volts_mV = esp_adc_cal_raw_to_voltage(raw, &adc_characteristics_);
+      return (float)volts_mV / kVmax_;
+    }
   }
+
 };
 typedef ESP32AnalogReader AnalogReader;
 
