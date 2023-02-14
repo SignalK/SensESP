@@ -79,10 +79,13 @@ class WSClient : public Configurable,
   void sendTXT(String& payload);
 
  private:
+  // these are the actually used values
   String server_address_ = "";
   uint16_t server_port_ = 80;
-  String preset_server_address_ = "";
-  uint16_t preset_server_port_ = 0;
+  // these are the hardcoded and/or conf file values
+  String conf_server_address_ = "";
+  uint16_t conf_server_port_ = 0;
+
   String client_id_ = "";
   String polling_href_ = "";
   String auth_token_ = NULL_AUTH_TOKEN;
