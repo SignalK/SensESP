@@ -7,7 +7,7 @@ void ThresholdTransform<C, P>::set_input(C input, uint8_t input_channel) {
   if (input >= min_value_ && input <= max_value_) {
     this->output = in_range_;
   } else {
-    this->output = out_range_;
+    this->output = !in_range_;
   }
 
   this->notify();
@@ -29,7 +29,7 @@ static const char FLOAT_SCHEMA[] PROGMEM = R"({
   })";
 
 bool FloatThreshold::set_configuration(const JsonObject& config) {
-  String expected[] = {"min", "max", "in_range", "value"};
+  String expected[] = {"min", "max", "in_range"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
