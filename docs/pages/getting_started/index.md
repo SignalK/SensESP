@@ -95,12 +95,22 @@ Assuming that is the case, you can now continue with the next step.
 
 The device is now on the WiFi network.
 If you have a Signal K server running
-and automatic mDNS/Avahi service discovery correctly configured, you should immediately have a device access request appear on the Signal K server web UI:
+and automatic mDNS/Avahi service discovery correctly configured (see Note 2 below),  you should immediately have a device access request appear on the Signal K server web UI:
 
 ![Device Access Request](assets/device_access_request.png "Device Access Request"){:width="50%"}
 
 Open the access request, set authentication timeout to “NEVER”, and click Approve.
 You should immediately get new data on the Signal K server dashboard and data browser.
+
+Notes:
+
+1. if you enabled SSL when setting up signalk server, sensESP will fail to connect to the server. Run the setup again and ensure you select NO when prompted for SSL.
+
+(Hint: command for setting up signalk server)
+
+- `sudo signalk-server-setup`
+
+2. mdns is enabled under the signalk server tab Server /Settings
 
 SensESP device on the dashboard:
 
