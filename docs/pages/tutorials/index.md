@@ -38,3 +38,7 @@ This tutorial shows how to define custom transforms using the `LambdaTransform` 
 
 Confused about how to calculate a tank level from a single analog input?
 This tutorial shows how to do it.
+
+### &#x1F424; &#x1F47D; [Mix and Match SensESP with Arduino Style Code](arduino_style)
+
+Even though the SensESP coding style provides a lot of convenient features, it's not for everyone. This tutorial shows how to use SensESP to only deal with the Signal K networking, and use Arduino-style code to handle the rest.
