@@ -104,7 +104,7 @@ void printValues() {
 
 ## Running the Arduino Sketch on SH-ESP32
 
-The following text assumes you have already installed PlatformIO and git. If you haven't, please read the [Getting Started](/pages/getting_started/) Section first.
+The following text assumes you have already installed PlatformIO and git. If you haven't, please read the [Getting Started](../../getting_started/) Section first.
 
 First, we will download the SensESP Project Template, rename the folder and open it in PlatformIO.
 The last command might fail if you haven't installed the VSCode shell command yet (Cmd/Ctrl-Shift-P, type "shell", select "Shell Command: Install 'code' command in PATH" and press Enter).
@@ -120,7 +120,7 @@ You might first want to build and upload the project to make sure everything is 
 
 Next, let's add the BME280 library to the project. We'll use the [Adafruit BME280 Library](https://github.com/adafruit/Adafruit_BME280_Library) for this. Open the `platformio.ini` file in the root of the project and add the following line to the `lib_deps` section:
 
-```ini
+```
 adafruit/Adafruit BME280 Library @ ^2.2.2
 ```
 
@@ -380,3 +380,5 @@ void loop() {
 ## Summary
 
 In this tutorial, we've learned how to adapt a basic Arduino example program to output data to Signal K. We have consciously minimized the use of SensESP and ReactESP constructs, to illustrate that SensESP can be used with any Arduino program, not just those that are written with SensESP in mind. In other words, you don't have to go all-in with SensESP!
+
+----
