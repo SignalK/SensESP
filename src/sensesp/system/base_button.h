@@ -12,6 +12,12 @@ namespace sensesp {
 
 using namespace ace_button;
 
+/**
+ * @brief Base class for button handlers.
+ *
+ * Button handlers are used to handle button presses. This is an abstract base
+ * class that should be extended to implement a specific button handler.
+ */
 class BaseButtonHandler : public Configurable, public Startable, public IEventHandler {
  public:
   BaseButtonHandler(int pin, String config_path = "")

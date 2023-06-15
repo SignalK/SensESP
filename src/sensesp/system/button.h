@@ -14,6 +14,12 @@ namespace sensesp {
 
 using namespace ace_button;
 
+/**
+ * @brief Default Button Handler for SensESPApp applications.
+ *
+ * This button handler implements restart on short press, network settings reset
+ * on a long press, and factory reset on a very long press.
+ */
 class ButtonHandler : public MinimalButtonHandler {
  public:
   ButtonHandler(int pin, String config_path = "")

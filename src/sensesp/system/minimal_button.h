@@ -13,6 +13,14 @@ namespace sensesp {
 
 using namespace ace_button;
 
+/**
+ * @brief Minimal Button Handler
+ * 
+ * This is a minimal button handler that implements restart on short press and
+ * factory reset on a very long press.
+ * 
+ * This class may be extended to implement more complex button handlers.
+ */
 class MinimalButtonHandler : public BaseButtonHandler {
  public:
   MinimalButtonHandler(int pin, String config_path = "")
