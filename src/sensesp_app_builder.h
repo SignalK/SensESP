@@ -145,6 +145,16 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
   }
 
   /**
+   * @brief Set the button GPIO pin.
+   *
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* set_button_pin(int pin) {
+    app_->set_button_pin(pin);
+    return this;
+  }
+
+  /**
    * @brief Enable all built-in system info sensors.
    *
    * @param prefix
