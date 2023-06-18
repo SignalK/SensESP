@@ -10,7 +10,6 @@ var classsensesp_1_1_networking =
     [ "set_configuration", "classsensesp_1_1_networking.html#acc268ce1d647c01d7a9b01ed34f55bee", null ],
     [ "set_wifi_manager_ap_ssid", "classsensesp_1_1_networking.html#a4ab365e96684c31554e9771153984e37", null ],
     [ "setup_saved_ssid", "classsensesp_1_1_networking.html#aab9ae3badf7dfaf3736af37b5a4c9025", null ],
-    [ "setup_wifi_callbacks", "classsensesp_1_1_networking.html#a7186c3fc3668f3aa2439fb8f1263c0f4", null ],
     [ "setup_wifi_manager", "classsensesp_1_1_networking.html#a28dcf335a69d16f9206e0e5b9886d66a", null ],
     [ "start", "classsensesp_1_1_networking.html#ad111629b0d17e42207a97909313cc567", null ],
     [ "wifi_ap_enabled", "classsensesp_1_1_networking.html#afaee1b4db5e498e99855aa490f93758a", null ],

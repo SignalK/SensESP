@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['use_5flib_5fwebsocket_0',['USE_LIB_WEBSOCKET',['../sensesp__base__app_8h.html#a8abe44af131f55591035d3587ca9484d',1,'sensesp_base_app.h']]]
+  ['sensesp_5fbutton_5fpin_0',['SENSESP_BUTTON_PIN',['../sensesp__base__app_8h.html#a7e32d5469101c0b619eb2f2cf2e69101',1,'sensesp_base_app.h']]]
 ];
