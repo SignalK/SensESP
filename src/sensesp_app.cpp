@@ -3,6 +3,7 @@
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
+#include "sensesp/system/button.h"
 #include "sensesp/system/system_status_led.h"
 #include "sensesp/transforms/debounce.h"
 
@@ -74,6 +75,11 @@ void SensESPApp::setup() {
   }
   this->system_status_controller_.connect_to(system_status_led_);
   this->ws_client_->get_delta_count_producer().connect_to(system_status_led_);
+
+  // create the button handler
+  if (button_gpio_pin_ != -1) {
+    button_handler_ = new ButtonHandler(button_gpio_pin_);
+  }
 }
 
 ObservableValue<String>* SensESPApp::get_hostname_observable() {

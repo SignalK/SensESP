@@ -20,6 +20,7 @@
 #include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/system/system_status_led.h"
+#include "sensesp/system/button.h"
 #include "sensesp/ui/ui_output.h"
 #include "sensesp_base_app.h"
 
@@ -99,6 +100,10 @@ class SensESPApp : public SensESPBaseApp {
     ota_password_ = password;
     return this;
   }
+  const SensESPApp* set_button_pin(int pin) {
+    button_gpio_pin_ = pin;
+    return this;
+  }
   const SensESPApp* set_wifi_manager_password(const char* password) {
     wifi_manager_password_ = password;
     return this;
@@ -119,7 +124,10 @@ class SensESPApp : public SensESPBaseApp {
   HTTPServer* http_server_;
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;
-  Networking* networking_;
+  int button_gpio_pin_ = SENSESP_BUTTON_PIN;
+  ButtonHandler* button_handler_ = nullptr;
+
+  Networking* networking_ = NULL;
   OTA* ota_;
   SKDeltaQueue* sk_delta_queue_;
   WSClient* ws_client_;

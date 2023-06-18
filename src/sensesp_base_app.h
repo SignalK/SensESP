@@ -4,6 +4,11 @@
 // Required for RemoteDebug
 #define USE_LIB_WEBSOCKET true
 
+#ifndef SENSESP_BUTTON_PIN
+// Default button pin is 0 (GPIO0), normally connected to the BOOT button
+#define SENSESP_BUTTON_PIN 0
+#endif
+
 #include "sensesp.h"
 #include "sensesp/net/debug_output.h"
 #include "sensesp/system/filesystem.h"
