@@ -9,6 +9,7 @@ var classsensesp_1_1_sens_e_s_p_app_builder =
     [ "enable_uptime_sensor", "classsensesp_1_1_sens_e_s_p_app_builder.html#aec8b05c9896ddc46d747ffea671dad70", null ],
     [ "enable_wifi_signal_sensor", "classsensesp_1_1_sens_e_s_p_app_builder.html#afabc97d522db0964e161d42e1d54df4e", null ],
     [ "get_app", "classsensesp_1_1_sens_e_s_p_app_builder.html#ac348bac39d057253e3d291a3c4d7d79f", null ],
+    [ "set_button_pin", "classsensesp_1_1_sens_e_s_p_app_builder.html#aba398aecdf9a1b8aa3c56dbb8adf9026", null ],
     [ "set_hostname", "classsensesp_1_1_sens_e_s_p_app_builder.html#a2279d09dcc313b1c4299c3d914fbd6a7", null ],
     [ "set_sk_server", "classsensesp_1_1_sens_e_s_p_app_builder.html#a5a069b7609135e4450e7c402ac444baf", null ],
     [ "set_system_status_led", "classsensesp_1_1_sens_e_s_p_app_builder.html#ace354c8281e0db0301996a9cd8829ec7", null ],

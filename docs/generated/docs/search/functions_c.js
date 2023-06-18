@@ -15,7 +15,7 @@ var searchData=
   ['on_5fultra_5flong_5fclick_12',['on_ultra_long_click',['../classsensesp_1_1_click_type.html#a7cef6ec74f8d73633853e560a3872e3a',1,'sensesp::ClickType']]],
   ['operator_21_3d_13',['operator!=',['../namespacesensesp.html#a85fc3656cea89e333664441057db3584',1,'sensesp']]],
   ['operator_28_29_14',['operator()',['../classsensesp_1_1_resettable_compare.html#aede7b703d03b950e7d854c1c1a46279f',1,'sensesp::ResettableCompare::operator()()'],['../classsensesp_1_1_startable_compare.html#a32f5307e81dbbeebe107407a1644452e',1,'sensesp::StartableCompare::operator()()']]],
-  ['operator_3d_15',['operator=',['../classsensesp_1_1_observable_value.html#abe9007274a80489e92ff58a1dd6b5d0b',1,'sensesp::ObservableValue::operator=()'],['../classsensesp_1_1_sens_e_s_p_app.html#a0de0037811cf7cbab666730fc29e3c0d',1,'sensesp::SensESPApp::operator=()'],['../classsensesp_1_1_sens_e_s_p_minimal_app.html#afdaa4b87918cf2cdbec31b9960c0afae',1,'sensesp::SensESPMinimalApp::operator=()']]],
+  ['operator_3d_15',['operator=',['../classsensesp_1_1_wi_fi_state_producer.html#a95aaee61acaaae09d8e3c9d558da1519',1,'sensesp::WiFiStateProducer::operator=()'],['../classsensesp_1_1_observable_value.html#abe9007274a80489e92ff58a1dd6b5d0b',1,'sensesp::ObservableValue::operator=()'],['../classsensesp_1_1_sens_e_s_p_app.html#a0de0037811cf7cbab666730fc29e3c0d',1,'sensesp::SensESPApp::operator=()'],['../classsensesp_1_1_sens_e_s_p_minimal_app.html#afdaa4b87918cf2cdbec31b9960c0afae',1,'sensesp::SensESPMinimalApp::operator=()']]],
   ['operator_3d_3d_16',['operator==',['../namespacesensesp.html#aa6a475cd9be10780f70d15372c13c36b',1,'sensesp']]],
   ['ota_17',['OTA',['../classsensesp_1_1_o_t_a.html#a9efbb67a2b9b8882971a28837d6e7e6e',1,'sensesp::OTA']]]
 ];
