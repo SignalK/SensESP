@@ -11,6 +11,12 @@
 #include "sensesp/system/valueproducer.h"
 
 namespace sensesp {
+static const char SIGNALKINPUT_SCHEMA[] PROGMEM = R"({
+      "type": "object",
+      "properties": {
+            "sk_path": { "title": "Signal K Path", "type": "string" }
+      }
+  })";
 
 /**
  * @brief An Obervable class that listens for Signal K stream deltas
@@ -19,7 +25,7 @@ namespace sensesp {
  * the most common descendant being `SKValueListener`
  * @see SKValueListener
  */
-class SKListener : virtual public Observable {
+class SKListener : virtual public Observable, public Configurable {
  public:
   /**
    * The constructor
@@ -27,8 +33,11 @@ class SKListener : virtual public Observable {
    * this particular subscription to value
    * @param listen_delay How often you want the SK Server to send the
    * data you're subscribing to
+   * @param config_path The optional configuration path that allows an end user
+   * to change the configuration of this object. See the Configurable class for
+   * more information.
    */
-  SKListener(String sk_path, int listen_delay);
+  SKListener(String sk_path, int listen_delay, String config_path);
 
   /**
    * Returns the current Signal K path. An empty string
@@ -53,6 +62,12 @@ class SKListener : virtual public Observable {
   static std::vector<SKListener*> listeners;
   int listen_delay;
   static SemaphoreHandle_t semaphore_;
+
+  virtual void get_configuration(JsonObject& doc) override;
+  virtual bool set_configuration(const JsonObject& config) override;
+  virtual String get_config_schema() override;
+
+  void set_sk_path(const String& path);
 };
 
 }  // namespace sensesp
