@@ -37,7 +37,7 @@ class SKListener : virtual public Observable, public Configurable {
    * to change the configuration of this object. See the Configurable class for
    * more information.
    */
-  SKListener(String sk_path, int listen_delay, String config_path);
+  SKListener(String sk_path, int listen_delay, String config_path="");
 
   /**
    * Returns the current Signal K path. An empty string
