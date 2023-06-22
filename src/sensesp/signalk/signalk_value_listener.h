@@ -20,8 +20,9 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
    * @param sk_path The Signal K path you want to listen to for value changes
    * @param listen_delay The minimum interval between updates in ms
    */
-  SKValueListener(String sk_path, int listen_delay = 1000)
-      : SKListener(sk_path, listen_delay) {
+  SKValueListener(String sk_path, int listen_delay = 1000,
+                  String config_path = "")
+      : SKListener(sk_path, listen_delay, config_path) {
     if (sk_path == "") {
       debugE("SKValueListener: User has provided no sk_path to listen to.");
     }
