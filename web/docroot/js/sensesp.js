@@ -193,6 +193,21 @@ Element.prototype.empty = function () {
     }
 }
 
+function showLoader(show, status) {
+    var loader = document.getElementById("loader");
+    if (show) {
+        if (status == null || status == undefined) {
+            status = "Loading...";
+        }
+
+        loadertext.innerHTML = status;
+        loader.classList.remove("visually-hidden");
+    }
+    else {
+        loader.classList.add("visually-hidden");
+    }
+}
+
 function executeCommand(name, shouldConfirm) {
     if (shouldConfirm == true && !confirm("Execute " + name + "?")) {
         return;
