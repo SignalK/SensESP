@@ -15,19 +15,15 @@ namespace sensesp {
  * in_range.
  *
  *   @param in_range Output value if input value is in range.
- *
- *   @param out_range Output value if input value is out of the range.
  */
 template <typename C, typename P>
 class ThresholdTransform : public Transform<C, P> {
  public:
-  ThresholdTransform(C min_value, C max_value, P in_range, P out_range,
-                     String config_path = "")
+  ThresholdTransform(C min_value, C max_value, P in_range, String config_path = "")
       : Transform<C, P>(config_path),
         min_value_{min_value},
         max_value_{max_value},
-        in_range_{in_range},
-        out_range_{out_range} {
+        in_range_{in_range} {
     this->load_configuration();
   };
   virtual void set_input(C new_value, uint8_t input_channel = 0) override;
@@ -36,7 +32,6 @@ class ThresholdTransform : public Transform<C, P> {
   C min_value_;
   C max_value_;
   P in_range_;
-  P out_range_;
 };
 
 /**
@@ -59,8 +54,7 @@ class FloatThreshold : public ThresholdTransform<float, bool> {
  public:
   FloatThreshold(float min_value, float max_value, bool in_range = true,
                  String config_path = "")
-      : ThresholdTransform<float, bool>(min_value, max_value, in_range,
-                                        !in_range, config_path) {}
+      : ThresholdTransform<float, bool>(min_value, max_value, in_range, config_path) {}
 
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
@@ -87,8 +81,7 @@ class IntThreshold : public ThresholdTransform<int, bool> {
  public:
   IntThreshold(int min_value, int max_value, bool in_range = true,
                String config_path = "")
-      : ThresholdTransform<int, bool>(min_value, max_value, in_range, !in_range,
-                                      config_path) {}
+      : ThresholdTransform<int, bool>(min_value, max_value, in_range, config_path) {}
 
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
