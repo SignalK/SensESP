@@ -20,7 +20,7 @@ namespace sensesp {
  * The sensor has a getValue() and a setValue() method to interact with the
  * sensor from normal code;
  *
- * @param send_delay[in] Time delay in seconds between consecutive emissions of
+ * @param send_interval[in] Time interval in seconds between consecutive emissions of
  * the sensor value.
  *
  * @param[in] config_path Configuration path for the sensor.
@@ -38,7 +38,7 @@ static const char SCHEMA_CONSTANT_SENSOR[] PROGMEM = R"###({
 // ..........................................
 class ConstantSensor : public SensorT<float> {
  public:
-  ConstantSensor(int send_delay, String config_path);
+  ConstantSensor(int send_interval, String config_path);
   void start() override final;
 
  protected:
@@ -49,7 +49,7 @@ class ConstantSensor : public SensorT<float> {
 
  private:
   float value_;
-  int send_delay_ = 30;  // seconds
+  int send_interval_ = 30;  // seconds
 };
 
 // ..........................................
@@ -59,7 +59,7 @@ class ConstantSensor : public SensorT<float> {
 // float constant
 class ConstantFloat : public ConstantSensor {
  public:
-  ConstantFloat(int send_delay, String config_path);
+  ConstantFloat(int send_interval, String config_path);
   void setValue(float value);
   float getValue();
 
@@ -70,7 +70,7 @@ class ConstantFloat : public ConstantSensor {
 // float constant
 class ConstantInt : public ConstantSensor {
  public:
-  ConstantInt(int send_delay, String config_path);
+  ConstantInt(int send_interval, String config_path);
   void setValue(int value);
   int getValue();
 
@@ -81,7 +81,7 @@ class ConstantInt : public ConstantSensor {
 // String constant
 class ConstantString : public ConstantSensor {
  public:
-  ConstantString(int send_delay, String config_path);
+  ConstantString(int send_interval, String config_path);
   void setValue(String value);
   String getValue();
 

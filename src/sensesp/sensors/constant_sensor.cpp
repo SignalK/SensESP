@@ -6,13 +6,13 @@ namespace sensesp {
 // base class for constant sensors
 // ..........................................
 
-ConstantSensor::ConstantSensor(int send_delay, String config_path = "")
-    : SensorT<float>(config_path), send_delay_{send_delay} {
+ConstantSensor::ConstantSensor(int send_interval, String config_path = "")
+    : SensorT<float>(config_path), send_interval_{send_interval} {
   load_configuration();
 }
 
 void ConstantSensor::start() {
-  ReactESP::app->onRepeat(send_delay_ * 1000, [this]() { this->emit(value_); });
+  ReactESP::app->onRepeat(send_interval_ * 1000, [this]() { this->emit(value_); });
 }
 
 void ConstantSensor::update() { this->emit(value_); }
