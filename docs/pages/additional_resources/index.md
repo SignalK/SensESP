@@ -38,6 +38,7 @@ If you want to have your own project added to the list, [create an issue](https:
 ### NMEA 0183
 
 - [NMEA 0183 input parser](https://github.com/SensESP/NMEA0183/): NMEA 0183 parser for SensESP. This library supports common GNSS (GPS, GLONASS, Galileo) receiver devices out of the box and can be easily extended to support other NMEA 0183 sentences as well.
+- Example project for implementing a Signal K GPS receiver using [SH-ESP32](https://shop.hatlabs.fi/products/sh-esp32) and a Beitian BN-880 GPS receiver module: [SensESP-BN-880](https://github.com/hatlabs/SensESP-BN-880).
 
 ### Temperature and Humidity
 
