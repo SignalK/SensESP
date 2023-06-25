@@ -17,7 +17,7 @@ namespace sensesp {
  *
  * The sensor value and send delay can be configured via the web ui.
  *
- * The sensor has a getValue() and a setValue() method to interact with the
+ * The sensor has a get_value() and a set_value() method to interact with the
  * sensor from normal code;
  *
  * @param send_interval[in] Time interval in seconds between consecutive
@@ -48,6 +48,9 @@ class ConstantSensor : public SensorT<T> {
                             [this]() { this->emit(value_); });
   }
 
+  void set_value(T value) { value_ = value; }
+  T get_value() { return value_; }
+
  protected:
   virtual void get_configuration(JsonObject &doc) override {
     root["value"] = value_;
@@ -67,12 +70,8 @@ class ConstantSensor : public SensorT<T> {
   }
   void update() { this->emit(value_); }
 
- private:
   T value_;
   int send_interval_;  // seconds
-
-  void setValue(T value) { value_ = value; }
-  T getValue() { return value_; }
 };
 
 // ..........................................
