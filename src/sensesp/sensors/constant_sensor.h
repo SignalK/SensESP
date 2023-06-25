@@ -33,10 +33,10 @@ static const char SCHEMA_CONSTANT_SENSOR[] PROGMEM = R"###({
         }
     })###";
 
-// ..........................................
-//  base class for constant value sensors
-// ..........................................
 template <typename T>
+/**
+ * @brief Base class for constant value sensors.
+ */
 class ConstantSensor : public SensorT<T> {
  public:
   ConstantSensor(int send_interval = 30, String config_path = "");
