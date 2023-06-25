@@ -18,7 +18,20 @@ namespace sensesp {
  * The sensor value and send delay can be configured via the web ui.
  *
  * The sensor has a get_value() and a set_value() method to interact with the
- * sensor from normal code;
+ * sensor from normal code.
+ *
+ * Example: send the water tank capacity every 30 seconds to SignalK:
+ *
+ *    int send_delay = 30;
+ *    const char* config_path = "/tanks.water_capacity";
+ *    auto *capacity = new ConstantFloatSensor(send_delay,config_path);
+ *    capacity->connect_to(new SKOutputFloat(sk_path, sk_config_path, sk_metadata));
+ *
+ * To set or get the the value of the virtual sensor for use in your code:
+ *
+ *    capacity->set_value(value);
+ *
+ *    value = capacity->get_value();
  *
  * @param send_interval[in] Time interval in seconds between consecutive
  * emissions of the sensor value.
