@@ -53,16 +53,17 @@ class ConstantSensor : public SensorT<T> {
 
  protected:
   virtual void get_configuration(JsonObject &doc) override {
-    root["value"] = value_;
+    doc["value"] = value_;
+    doc["interval"] = send_interval_;
   }
   virtual bool set_configuration(const JsonObject &config) override {
-    String expected[] = {"value"};
-    for (auto str : expected) {
-      if (!config.containsKey(str)) {
-        return false;
-      }
+    // Neither of the configuration parameters are mandatory
+    if (config.containsKey("value")) {
+      value_ = config["value"];
     }
-    value_ = config["value"];
+    if (config.containsKey("interval")) {
+      send_interval_ = config["interval"];
+    }
     return true;
   }
   virtual String get_config_schema() override {
