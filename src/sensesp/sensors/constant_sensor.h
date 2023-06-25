@@ -39,21 +39,40 @@ static const char SCHEMA_CONSTANT_SENSOR[] PROGMEM = R"###({
 template <class T>
 class ConstantSensor : public SensorT<T> {
  public:
-  ConstantSensor(int send_interval = 30, String config_path = "");
-  void start() override final;
+  ConstantSensor(int send_interval = 30, String config_path = "")
+      : SensorT<T>(config_path), send_interval_{send_interval} {
+    this->load_configuration();
+  }
+  void start() override {
+    ReactESP::app->onRepeat(send_interval_ * 1000,
+                            [this]() { this->emit(value_); });
+  }
 
  protected:
-  virtual void get_configuration(JsonObject &doc) override;
-  virtual bool set_configuration(const JsonObject &config) override;
-  virtual String get_config_schema() override;
-  void update();
+  virtual void get_configuration(JsonObject &doc) override {
+    root["value"] = value_;
+  }
+  virtual bool set_configuration(const JsonObject &config) override {
+    String expected[] = {"value"};
+    for (auto str : expected) {
+      if (!config.containsKey(str)) {
+        return false;
+      }
+    }
+    value_ = config["value"];
+    return true;
+  }
+  virtual String get_config_schema() override {
+    return FPSTR(SCHEMA_CONSTANT_SENSOR);
+  }
+  void update() { this->emit(value_); }
 
  private:
   T value_;
   int send_interval_;  // seconds
 
-  void setValue(T value);
-  T getValue();
+  void setValue(T value) { value_ = value; }
+  T getValue() { return value_; }
 };
 
 // ..........................................
