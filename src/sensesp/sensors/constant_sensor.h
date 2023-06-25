@@ -39,8 +39,8 @@ static const char SCHEMA_CONSTANT_SENSOR[] PROGMEM = R"###({
 template <class T>
 class ConstantSensor : public SensorT<T> {
  public:
-  ConstantSensor(int send_interval = 30, String config_path = "")
-      : SensorT<T>(config_path), send_interval_{send_interval} {
+  ConstantSensor(T value, int send_interval = 30, String config_path = "")
+      : SensorT<T>(config_path), value_{value}, send_interval_{send_interval} {
     this->load_configuration();
   }
   void start() override {
