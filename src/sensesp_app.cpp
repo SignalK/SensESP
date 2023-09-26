@@ -40,6 +40,11 @@ void SensESPApp::setup() {
   // create the HTTP server
   this->http_server_ = new HTTPServer();
 
+  // Add the default HTTP server response handlers
+  this->http_static_page_handler_ = new HTTPStaticPageHandler();
+  this->http_command_handler_ = new HTTPCommandHandler();
+  this->http_config_handler_ = new HTTPConfigHandler();
+
   // create the SK delta object
   sk_delta_queue_ = new SKDeltaQueue();
 

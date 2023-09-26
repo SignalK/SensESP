@@ -13,6 +13,9 @@
 #include "sensesp/net/debug_output.h"
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
+#include "sensesp/net/web/static_page_handler.h"
+#include "sensesp/net/web/config_handler.h"
+#include "sensesp/net/web/command_handler.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
 #include "sensesp/net/ws_client.h"
@@ -122,6 +125,10 @@ class SensESPApp : public SensESPBaseApp {
   DebugOutput* debug_output_;
   MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;
+  HTTPStaticPageHandler* http_static_page_handler_ = nullptr;
+  HTTPConfigHandler* http_config_handler_ = nullptr;
+  HTTPCommandHandler* http_command_handler_ = nullptr;
+
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;
   int button_gpio_pin_ = SENSESP_BUTTON_PIN;
@@ -160,7 +167,7 @@ class SensESPApp : public SensESPBaseApp {
           [this]() { return ws_client_->get_connection_status(); }, "Network",
           1600);
 
-  friend class HTTPServer;
+  friend class WebServer;
   friend class SensESPAppBuilder;
 };
 

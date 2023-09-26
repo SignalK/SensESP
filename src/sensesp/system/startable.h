@@ -49,7 +49,7 @@ class Startable {
 
   static std::priority_queue<Startable*, std::vector<Startable*>,
                              StartableCompare>
-      startable_list_;
+      startable_queue_;
 };
 
 class StartableCompare {
