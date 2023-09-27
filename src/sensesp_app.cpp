@@ -41,7 +41,7 @@ void SensESPApp::setup() {
   this->http_server_ = new HTTPServer();
 
   // Add the default HTTP server response handlers
-  this->http_static_page_handler_ = new HTTPStaticPageHandler();
+  this->http_static_file_handler_ = new HTTPStaticFileHandler();
   this->http_command_handler_ = new HTTPCommandHandler();
   this->http_config_handler_ = new HTTPConfigHandler();
 

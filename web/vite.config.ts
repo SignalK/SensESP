@@ -35,11 +35,11 @@ export default defineConfig({
   build: {
     minify: true,
     target: 'esnext',
-    rollupOptions: {
-      // https://rollupjs.org/configuration-options/
-      plugins: [
-        brotli(),
-      ],
-    },
+    // rollupOptions: {
+    //   // https://rollupjs.org/configuration-options/
+    //   plugins: [
+    //     brotli(),
+    //   ],
+    // },
   }
 });

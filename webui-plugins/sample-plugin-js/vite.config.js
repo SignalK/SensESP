@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
 import federation from "@originjs/vite-plugin-federation";
-import brotli from "rollup-plugin-brotli";
 
 
 export default defineConfig({
+  base: '/api/plugins/sensesp-plugin/',
   plugins: [
     preact(),
     federation({
@@ -21,10 +21,10 @@ export default defineConfig({
     minify: true,
     cssCodeSplit: false,
     target: 'esnext',
-    rollupOptions: {
-      plugins: [
-        brotli(),
-      ],
-    }
+    // rollupOptions: {
+    //   plugins: [
+    //     brotli(),
+    //   ],
+    // }
   }
 })

@@ -13,7 +13,7 @@
 #include "sensesp/net/debug_output.h"
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
-#include "sensesp/net/web/static_page_handler.h"
+#include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/net/web/config_handler.h"
 #include "sensesp/net/web/command_handler.h"
 #include "sensesp/net/networking.h"
@@ -125,7 +125,7 @@ class SensESPApp : public SensESPBaseApp {
   DebugOutput* debug_output_;
   MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;
-  HTTPStaticPageHandler* http_static_page_handler_ = nullptr;
+  HTTPStaticFileHandler* http_static_file_handler_ = nullptr;
   HTTPConfigHandler* http_config_handler_ = nullptr;
   HTTPCommandHandler* http_command_handler_ = nullptr;
 
