@@ -1,9 +1,6 @@
 #ifndef _sensesp_base_app_H_
 #define _sensesp_base_app_H_
 
-// Required for RemoteDebug
-#define USE_LIB_WEBSOCKET true
-
 #ifndef SENSESP_BUTTON_PIN
 // Default button pin is 0 (GPIO0), normally connected to the BOOT button
 #define SENSESP_BUTTON_PIN 0

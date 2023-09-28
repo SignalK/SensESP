@@ -1,10 +1,6 @@
 #include "debug_output.h"
 
-#ifdef REMOTE_DEBUG
-#include <RemoteDebug.h>
-#else
 #include "sensesp/system/local_debug.h"
-#endif
 
 #include "sensesp_app.h"
 

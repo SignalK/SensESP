@@ -3,17 +3,10 @@
 
 #include <ReactESP.h>
 
-#ifdef REMOTE_DEBUG
-#include <RemoteDebug.h>
-#ifndef DEBUG_DISABLED
-#define DEBUG_CLASS RemoteDebug
-#endif  // DEBUG_DISABLED
-#else  // REMOTE_DEBUG
 #include "sensesp/system/local_debug.h"
 #ifndef DEBUG_DISABLED
 #define DEBUG_CLASS LocalDebug
 #endif  // DEBUG_DISABLED
-#endif  // REMOTE_DEBUG
 
 #if ESP8266
 #error "ESP8266 isn't supported by SensESP version 2. To compile an existing project, add @^1.0.0 to the SensESP depdenency in platformio.ini."
