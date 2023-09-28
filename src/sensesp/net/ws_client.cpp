@@ -1,3 +1,4 @@
+#include "sensesp.h"
 #include "ws_client.h"
 
 #include <ArduinoJson.h>
@@ -37,39 +38,38 @@ void ExecuteWebSocketTask(void* parameter) {
       delta_loop_elapsed = 0;
       ws_client->send_delta();
     }
-    if (ws_client_loop_elapsed > 20) {
-      ws_client_loop_elapsed = 0;
-      ws_client->loop();
-    }
     delay(1);
   }
 }
 
 /**
- * @brief WebSocket event handler.
+ * @brief Websocket event handler.
  *
- * This function will be called in the websocket task.
- *
- * @param type
- * @param payload
- * @param length
+ * @param handler_args
+ * @param base
+ * @param event_id
+ * @param event_data
  */
-void webSocketClientEvent(WStype_t type, uint8_t* payload, size_t length) {
-  switch (type) {
-    case WStype_DISCONNECTED:
+static void websocket_event_handler(void* handler_args, esp_event_base_t base,
+                                    int32_t event_id, void* event_data) {
+  esp_websocket_event_data_t* data = (esp_websocket_event_data_t*)event_data;
+  switch (event_id) {
+    case WEBSOCKET_EVENT_CONNECTED:
+      debugD("WEBSOCKET_EVENT_CONNECTED");
+      ws_client->on_connected();
+      break;
+    case WEBSOCKET_EVENT_DISCONNECTED:
+      debugD("WEBSOCKET_EVENT_DISCONNECTED");
       ws_client->on_disconnected();
       break;
-    case WStype_ERROR:
+    case WEBSOCKET_EVENT_DATA:
+      // check if the payload is text)
+      if (data->op_code == 0x01) {
+        ws_client->on_receive_delta((uint8_t*)data->data_ptr);
+      }
+      break;
+    case WEBSOCKET_EVENT_ERROR:
       ws_client->on_error();
-      break;
-    case WStype_CONNECTED:
-      ws_client->on_connected(payload);
-      break;
-    case WStype_TEXT:
-      ws_client->on_receive_delta(payload);
-      break;
-    default:
-      // Do nothing for other types
       break;
   }
 }
@@ -146,13 +146,10 @@ void WSClient::on_error() {
  * @brief Called when the websocket connection is established.
  *
  * Called in the websocket task context.
- *
- * @param payload
  */
-void WSClient::on_connected(uint8_t* payload) {
+void WSClient::on_connected() {
   this->set_connection_state(WSConnectionState::kWSConnected);
   this->sk_delta_queue_->reset_meta_send();
-  debugI("Websocket client connected to URL: %s\n", payload);
   debugI("Subscribing to Signal K listeners...");
   this->subscribe_listeners();
 }
@@ -195,7 +192,8 @@ void WSClient::subscribe_listeners() {
 
     serializeJson(subscription, messageJson);
     debugI("Subscription JSON message:\n %s", messageJson.c_str());
-    this->client_.sendTXT(messageJson);
+    esp_websocket_client_send_text(this->client_, messageJson.c_str(),
+                                   messageJson.length(), portMAX_DELAY);
   }
 }
 
@@ -345,7 +343,8 @@ void WSClient::on_receive_put(DynamicJsonDocument& message) {
     }
     String response_text;
     serializeJson(put_response, response_text);
-    this->client_.sendTXT(response_text);
+    esp_websocket_client_send_text(this->client_, response_text.c_str(),
+                                   response_text.length(), portMAX_DELAY);
   }
 }
 
@@ -358,7 +357,8 @@ void WSClient::on_receive_put(DynamicJsonDocument& message) {
  */
 void WSClient::sendTXT(String& payload) {
   if (get_connection_state() == WSConnectionState::kWSConnected) {
-    this->client_.sendTXT(payload);
+    esp_websocket_client_send_text(this->client_, payload.c_str(),
+                                   payload.length(), portMAX_DELAY);
   }
 }
 
@@ -383,8 +383,8 @@ void WSClient::connect() {
 
   if (!WiFi.isConnected() && WiFi.getMode() != WIFI_MODE_AP) {
     debugI(
-        "WiFi is disconnected. SignalK client connection will connect when "
-        "WiFi is connected.");
+        "WiFi is disconnected. SignalK client connection will be initiated "
+        "when WiFi is connected.");
     return;
   }
 
@@ -414,7 +414,8 @@ void WSClient::connect() {
 
   if (this->polling_href_ != "") {
     // existing pending request
-    this->poll_access_request(this->server_address_, this->server_port_, this->polling_href_);
+    this->poll_access_request(this->server_address_, this->server_port_,
+                              this->polling_href_);
     return;
   }
 
@@ -441,32 +442,32 @@ void WSClient::test_token(const String server_address,
   String full_token = String("Bearer ") + auth_token_;
   debugD("Authorization: %s", full_token.c_str());
   http.addHeader("Authorization", full_token.c_str());
-  int httpCode = http.GET();
-  if (httpCode > 0) {
+  int http_code = http.GET();
+  if (http_code > 0) {
     String payload = http.getString();
     http.end();
-    debugD("Testing resulted in http status %d", httpCode);
+    debugD("Testing resulted in http status %d", http_code);
     if (payload.length() > 0) {
       debugD("Returned payload (length %d) is: ", payload.length());
       debugD("%s", payload.c_str());
     } else {
       debugD("Returned payload is empty");
     }
-    if (httpCode == 426) {
+    if (http_code == 426) {
       // HTTP status 426 is "Upgrade Required", which is the expected
       // response for a websocket connection.
       debugD("Attempting to connect to Signal K Websocket...");
       server_detected_ = true;
       token_test_success_ = true;
       this->connect_ws(server_address, server_port);
-    } else if (httpCode == 401) {
+    } else if (http_code == 401) {
       this->client_id_ = "";
       this->send_access_request(server_address, server_port);
     } else {
       set_connection_state(WSConnectionState::kWSDisconnected);
     }
   } else {
-    debugE("GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+    debugE("GET... failed, error: %s\n", http.errorToString(http_code).c_str());
     set_connection_state(WSConnectionState::kWSDisconnected);
   }
 }
@@ -601,17 +602,34 @@ void WSClient::poll_access_request(const String server_address,
 void WSClient::connect_ws(const String host, const uint16_t port) {
   String path = "/signalk/v1/stream?subscribe=none";
   set_connection_state(WSConnectionState::kWSConnecting);
-  this->client_.begin(host, port, path);
-  this->client_.onEvent(webSocketClientEvent);
-  String full_token = String("Bearer ") + auth_token_;
-  this->client_.setAuthorization(full_token.c_str());
-}
 
-void WSClient::loop() {
-  if (get_connection_state() == WSConnectionState::kWSConnecting ||
-      get_connection_state() == WSConnectionState::kWSConnected) {
-    this->client_.loop();
+  esp_err_t error;
+
+  String url = String("ws://") + host + ":" + port + path;
+
+  esp_websocket_client_config_t websocket_cfg = {};
+  websocket_cfg.uri = url.c_str();
+
+  String full_auth_header =
+      String("Authorization: Bearer ") + auth_token_ + "\r\n";
+
+  websocket_cfg.headers = full_auth_header.c_str();
+
+  debugD("Websocket config: %s", websocket_cfg.uri);
+  debugD("Initializing websocket client...");
+  this->client_ = esp_websocket_client_init(&websocket_cfg);
+  debugD("Registering websocket event handler...");
+  error = esp_websocket_register_events(this->client_, WEBSOCKET_EVENT_ANY,
+                                websocket_event_handler, (void*)this->client_);
+  if (error != ESP_OK) {
+    debugE("Error registering websocket event handler: %d", error);
   }
+  debugD("Starting websocket client...");
+  error = esp_websocket_client_start(this->client_);
+  if (error != ESP_OK) {
+    debugE("Error starting websocket client: %d", error);
+  }
+  debugD("Websocket client started.");
 }
 
 bool WSClient::is_connected() {
@@ -620,7 +638,7 @@ bool WSClient::is_connected() {
 
 void WSClient::restart() {
   if (get_connection_state() == WSConnectionState::kWSConnected) {
-    this->client_.disconnect();
+    esp_websocket_client_close(this->client_, portMAX_DELAY);
     set_connection_state(WSConnectionState::kWSDisconnected);
   }
 }
@@ -630,7 +648,8 @@ void WSClient::send_delta() {
   if (get_connection_state() == WSConnectionState::kWSConnected) {
     if (sk_delta_queue_->data_available()) {
       sk_delta_queue_->get_delta(output);
-      this->client_.sendTXT(output);
+      esp_websocket_client_send_text(this->client_, output.c_str(),
+                                     output.length(), portMAX_DELAY);
       // This automatically notifies the observers
       this->delta_count_producer_.set(1);
     }

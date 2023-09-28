@@ -1,9 +1,11 @@
 #ifndef _ws_client_H_
 #define _ws_client_H_
-#include <WebSocketsClient.h>
 
 #include <functional>
 #include <set>
+
+#include <WiFi.h>
+#include <esp_websocket_client.h>
 
 #include "sensesp.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
@@ -61,7 +63,7 @@ class WSClient : public Configurable,
 
   void on_disconnected();
   void on_error();
-  void on_connected(uint8_t* payload);
+  void on_connected();
   void on_receive_delta(uint8_t* payload);
   void on_receive_updates(DynamicJsonDocument& message);
   void on_receive_put(DynamicJsonDocument& message);
@@ -100,7 +102,7 @@ class WSClient : public Configurable,
   WSConnectionState task_connection_state_ = WSConnectionState::kWSDisconnected;
 
   WiFiClient wifi_client_;
-  WebSocketsClient client_;
+  esp_websocket_client_handle_t client_;
   SKDeltaQueue* sk_delta_queue_;
   TaskQueueProducer<int> delta_count_producer_ =
       TaskQueueProducer<int>(0, ReactESP::app, 5, 990);
