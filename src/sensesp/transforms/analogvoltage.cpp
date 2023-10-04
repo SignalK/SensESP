@@ -27,7 +27,7 @@ static const char SCHEMA[] PROGMEM = R"({
     "properties": {
         "max_voltage": { "title": "Max voltage", "type": "number", "description": "The maximum voltage allowed into your ESP's Analog Input pin" },
         "multiplier": { "title": "Mulitplier", "type": "number", "description": "Output will be multiplied by this before sending to SK" },
-        "offsest": { "title": "Offset", "type": "number", "description": "This will be added to output before sending to SK" }
+        "offset": { "title": "Offset", "type": "number", "description": "This will be added to output before sending to SK" }
     }
   })";
 
