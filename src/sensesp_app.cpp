@@ -6,6 +6,7 @@
 #include "sensesp/system/button.h"
 #include "sensesp/system/system_status_led.h"
 #include "sensesp/transforms/debounce.h"
+#include "sensesp/net/web/autogen/web_ui_files.h"
 
 namespace sensesp {
 
@@ -41,8 +42,9 @@ void SensESPApp::setup() {
   this->http_server_ = new HTTPServer();
 
   // Add the default HTTP server response handlers
-  this->http_static_file_handler_ = new HTTPStaticFileHandler();
-  this->http_command_handler_ = new HTTPCommandHandler();
+  this->http_static_file_handler_ = new HTTPStaticFileHandler(kWebUIFiles);
+  add_http_command_handlers(this->http_server_);
+
   this->http_config_handler_ = new HTTPConfigHandler();
 
   // create the SK delta object
