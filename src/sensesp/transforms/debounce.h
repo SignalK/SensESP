@@ -74,7 +74,7 @@ class DebounceTemplate : public SymmetricTransform<T> {
   }
 
   virtual bool set_configuration(const JsonObject& config) override {
-    String expected[] = {"min_delay"};
+    const String expected[] = {"min_delay"};
     for (auto str : expected) {
       if (!config.containsKey(str)) {
         return false;

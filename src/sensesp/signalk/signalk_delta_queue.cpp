@@ -72,7 +72,7 @@ unsigned int SKDeltaQueue::get_metadata_size_estimate() {
   int num_metadata = SKEmitter::get_sources().size();
   int estimate = JSON_ARRAY_SIZE(num_metadata);
 
-  int num_fields;
+  int num_fields = 0;
   auto update_estimate = [&](String& field) {
     if (!field.isEmpty()) {
       num_fields++;

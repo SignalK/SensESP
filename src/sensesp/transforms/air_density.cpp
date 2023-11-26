@@ -22,7 +22,7 @@ void AirDensity::set_input(float input, uint8_t inputChannel) {
     float temp_kelvin = inputs[0];
     float temp_celsius = temp_kelvin - 273.15;
     float relative_humidity = inputs[1];
-    float pressure = inputs[3];
+    float pressure = inputs[2];
 
     // Saturation vapor pressure of water
     float saturation_pressure =

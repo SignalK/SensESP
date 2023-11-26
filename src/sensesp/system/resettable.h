@@ -41,7 +41,7 @@ class Resettable {
 
 class ResettableCompare {
  public:
-  bool operator()(Resettable* a, Resettable* b) {
+  bool operator()(const Resettable* a, const Resettable* b) {
     return a->priority < b->priority;
   }
 };
