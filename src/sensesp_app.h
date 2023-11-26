@@ -121,11 +121,10 @@ class SensESPApp : public SensESPBaseApp {
   const char* ota_password_ = nullptr;
   const char* wifi_manager_password_ = "thisisfine";
 
-  Filesystem* filesystem_;
-  DebugOutput* debug_output_;
   MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;
   HTTPStaticFileHandler* http_static_file_handler_ = nullptr;
+
   HTTPConfigHandler* http_config_handler_ = nullptr;
 
   SystemStatusLed* system_status_led_ = NULL;
@@ -139,7 +138,7 @@ class SensESPApp : public SensESPBaseApp {
   WSClient* ws_client_;
 
   UIOutput<String>* build_info_ui_output_ =
-      new UIOutput<String>("Built at", __DATE__ " " __TIME__, "Software", 2000);
+      new UIOutput<String>("Build date", __DATE__ " " __TIME__, "Software", 2000);
   UIOutput<String>* sensesp_version_ui_output_ = new UIOutput<String>(
       "SenseESP version", kSensESPVersion, "Software", 1900);
   UILambdaOutput<String>* hostname_ui_output_ = new UILambdaOutput<String>(

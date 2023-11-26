@@ -30,7 +30,7 @@ class UIOutputBase : virtual public Observable {
 
   String& get_name() { return name_; }
 
-  virtual void set_json(const JsonObject& obj) {}
+  virtual DynamicJsonDocument as_json() = 0;
 
   static const std::map<String, UIOutputBase*>* get_ui_outputs() {
     return &ui_outputs_;
@@ -50,11 +50,13 @@ class UILambdaOutput : public UIOutputBase {
 
   T get() { return value_function_(); }
 
-  void set_json(const JsonObject& obj) override {
-    JsonObject output = obj.createNestedObject(name_);
-    output["Value"] = get();
-    output["Group"] = group_;
-    output["Order"] = order_;
+  virtual DynamicJsonDocument as_json() override {
+    DynamicJsonDocument obj(200);
+    obj["name"] = name_;
+    obj["value"] = get();
+    obj["group"] = group_;
+    obj["order"] = order_;
+    return obj;
   }
 };
 
@@ -74,11 +76,14 @@ class UIOutput : public UIOutputBase,
     this->ObservableValue<T>::emit(value);
   }
 
-  void set_json(const JsonObject& obj) override {
-    JsonObject output = obj.createNestedObject(name_);
-    output["Value"] = ObservableValue<T>::get();
-    output["Group"] = group_;
-    output["Order"] = order_;
+  virtual DynamicJsonDocument as_json() override {
+    DynamicJsonDocument obj(200);
+    obj["name"] = name_;
+    obj["value"] = ObservableValue<T>::get();
+    obj["group"] = group_;
+    obj["order"] = order_;
+
+    return obj;
   }
 
   void set_input(T new_value, uint8_t input_channel = 0) override {
