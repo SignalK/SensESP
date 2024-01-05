@@ -79,6 +79,12 @@ class Configurable {
    */
   virtual void save_configuration();
 
+  /**
+   * @brief Clear existing configuration data.
+   *
+   */
+  virtual void clear_configuration();
+
  protected:
   /**
    * Loads a configuration previously saved with save_configuration() and

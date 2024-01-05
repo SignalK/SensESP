@@ -103,4 +103,16 @@ void Configurable::save_configuration() {
   f.close();
 }
 
+void Configurable::clear_configuration() {
+  if (config_path_ == "") {
+    debugI("WARNING: Could not clear configuration (config_path not set)");
+  }
+  String hash_path = String("/") + Base64Sha1(config_path_);
+
+  if (SPIFFS.exists(hash_path)) {
+    debugD("Deleting configuration file %s", hash_path.c_str());
+    SPIFFS.remove(hash_path);
+  }
+}
+
 }  // namespace sensesp
