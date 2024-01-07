@@ -1,52 +1,103 @@
 <map id="src/sensesp/transforms/transform.h" name="src/sensesp/transforms/transform.h">
-<area shape="rect" id="node1" title=" " alt="" coords="2591,5,2749,45"/>
-<area shape="rect" id="node2" href="$digital__output_8h.html" title=" " alt="" coords="171,93,313,133"/>
-<area shape="rect" id="node4" href="$signalk__output_8h.html" title=" " alt="" coords="421,93,559,133"/>
-<area shape="rect" id="node8" href="$air__density_8h.html" title=" " alt="" coords="665,93,824,133"/>
-<area shape="rect" id="node10" href="$analogvoltage_8h.html" title=" " alt="" coords="848,93,1007,133"/>
-<area shape="rect" id="node12" href="$angle__correction_8h.html" title=" " alt="" coords="1031,93,1189,133"/>
-<area shape="rect" id="node14" href="$change__filter_8h.html" title=" " alt="" coords="1217,93,1376,133"/>
-<area shape="rect" id="node16" href="$click__type_8h.html" title=" " alt="" coords="1404,93,1563,133"/>
-<area shape="rect" id="node19" href="$curveinterpolator_8h.html" title=" " alt="" coords="1587,93,1745,133"/>
-<area shape="rect" id="node21" href="$debounce_8h.html" title=" " alt="" coords="1769,93,1928,133"/>
-<area shape="rect" id="node23" href="$dew__point_8h.html" title=" " alt="" coords="1952,93,2111,133"/>
-<area shape="rect" id="node25" href="$difference_8h.html" title=" " alt="" coords="2135,93,2293,133"/>
-<area shape="rect" id="node27" href="$enable_8h.html" title=" " alt="" coords="2317,93,2476,133"/>
-<area shape="rect" id="node28" href="$frequency_8h.html" title=" " alt="" coords="2500,93,2659,133"/>
-<area shape="rect" id="node30" href="$heat__index_8h.html" title=" " alt="" coords="2683,93,2841,133"/>
-<area shape="rect" id="node32" href="$integrator_8h.html" title=" " alt="" coords="2865,93,3024,133"/>
-<area shape="rect" id="node33" href="$lambda__transform_8h.html" title=" " alt="" coords="3048,93,3207,133"/>
-<area shape="rect" id="node39" href="$median_8h.html" title=" " alt="" coords="3231,93,3389,133"/>
-<area shape="rect" id="node41" href="$moving__average_8h.html" title=" " alt="" coords="3413,93,3572,133"/>
-<area shape="rect" id="node43" href="$press__repeater_8h.html" title=" " alt="" coords="3596,93,3755,133"/>
-<area shape="rect" id="node44" href="$repeat__report_8h.html" title=" " alt="" coords="3779,93,3937,133"/>
-<area shape="rect" id="node45" href="$threshold_8h.html" title=" " alt="" coords="3961,93,4120,133"/>
-<area shape="rect" id="node46" href="$timestring_8h.html" title=" " alt="" coords="4144,93,4303,133"/>
-<area shape="rect" id="node47" href="$transform_8cpp.html" title=" " alt="" coords="4327,93,4485,133"/>
-<area shape="rect" id="node48" href="$truth__text_8h.html" title=" " alt="" coords="4509,93,4668,133"/>
-<area shape="rect" id="node49" href="$voltage__multiplier_8h.html" title=" " alt="" coords="4692,93,4851,133"/>
-<area shape="rect" id="node50" href="$voltagedivider_8h.html" title=" " alt="" coords="4875,93,5033,133"/>
-<area shape="rect" id="node3" href="$digital__output_8cpp.html" title=" " alt="" coords="5,181,148,221"/>
-<area shape="rect" id="node5" href="$system__info_8h.html" title=" " alt="" coords="172,181,315,221"/>
-<area shape="rect" id="node6" href="$signalk__output_8cpp.html" title=" " alt="" coords="339,181,478,221"/>
-<area shape="rect" id="node7" href="$signalk__position_8h.html" title=" " alt="" coords="502,181,641,221"/>
-<area shape="rect" id="node9" href="$air__density_8cpp.html" title=" " alt="" coords="665,181,824,221"/>
-<area shape="rect" id="node11" href="$analogvoltage_8cpp.html" title=" " alt="" coords="848,181,1007,221"/>
-<area shape="rect" id="node13" href="$angle__correction_8cpp.html" title=" " alt="" coords="1031,181,1189,221"/>
-<area shape="rect" id="node15" href="$change__filter_8cpp.html" title=" " alt="" coords="1213,181,1372,221"/>
-<area shape="rect" id="node17" href="$smart__switch__controller_8h.html" title=" " alt="" coords="1396,181,1571,221"/>
-<area shape="rect" id="node18" href="$click__type_8cpp.html" title=" " alt="" coords="1595,181,1753,221"/>
-<area shape="rect" id="node20" href="$curveinterpolator_8cpp.html" title=" " alt="" coords="1777,181,1936,221"/>
-<area shape="rect" id="node22" href="$sensesp__app_8cpp.html" title=" " alt="" coords="1961,189,2107,214"/>
-<area shape="rect" id="node24" href="$dew__point_8cpp.html" title=" " alt="" coords="2132,181,2291,221"/>
-<area shape="rect" id="node26" href="$difference_8cpp.html" title=" " alt="" coords="2315,181,2473,221"/>
-<area shape="rect" id="node29" href="$frequency_8cpp.html" title=" " alt="" coords="2497,181,2656,221"/>
-<area shape="rect" id="node31" href="$heat__index_8cpp.html" title=" " alt="" coords="2680,181,2839,221"/>
-<area shape="rect" id="node34" href="$main_8cpp.html" title=" " alt="" coords="2863,189,2960,214"/>
-<area shape="rect" id="node35" href="$hysteresis_8h.html" title=" " alt="" coords="2984,181,3143,221"/>
-<area shape="rect" id="node36" href="$lambda__transform_8cpp.html" title=" " alt="" coords="3167,181,3325,221"/>
-<area shape="rect" id="node37" href="$linear_8h.html" title=" " alt="" coords="3349,181,3508,221"/>
-<area shape="rect" id="node38" href="$typecast_8h.html" title=" " alt="" coords="3532,181,3691,221"/>
-<area shape="rect" id="node40" href="$median_8cpp.html" title=" " alt="" coords="3715,181,3873,221"/>
-<area shape="rect" id="node42" href="$moving__average_8cpp.html" title=" " alt="" coords="3897,181,4056,221"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="2673,5,2832,46"/>
+<area shape="rect" id="Node000002" href="$digital__output_8h.html" title=" " alt="" coords="168,94,310,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2658,29,2294,31,1738,39,1079,59,737,76,402,97,311,106,310,101,402,91,737,70,1078,54,1738,34,2294,26,2658,24"/>
+<area shape="rect" id="Node000004" href="$signalk__output_8h.html" title=" " alt="" coords="415,94,552,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="2658,30,2328,33,1833,43,1248,63,946,78,650,97,553,106,552,101,650,91,946,72,1248,57,1833,37,2328,28,2658,25"/>
+<area shape="rect" id="Node000012" href="$air__density_8h.html" title=" " alt="" coords="661,94,820,135"/>
+<area shape="poly" id="edge7_Node000001_Node000012" title=" " alt="" coords="2658,31,2282,37,1755,49,1222,69,1001,82,833,97,821,98,820,93,832,91,1000,76,1222,64,1754,44,2282,32,2658,26"/>
+<area shape="rect" id="Node000014" href="$analogvoltage_8h.html" title=" " alt="" coords="844,94,1002,135"/>
+<area shape="poly" id="edge9_Node000001_Node000014" title=" " alt="" coords="2658,31,1840,51,1364,71,1166,83,1015,97,1003,98,1002,93,1015,91,1165,78,1363,65,1839,46,2658,26"/>
+<area shape="rect" id="Node000016" href="$angle__correction_8h.html" title=" " alt="" coords="1027,94,1185,135"/>
+<area shape="poly" id="edge11_Node000001_Node000016" title=" " alt="" coords="2658,32,1926,54,1506,73,1332,84,1199,97,1186,99,1185,93,1199,91,1331,79,1506,67,1926,48,2658,26"/>
+<area shape="rect" id="Node000018" href="$change__filter_8h.html" title=" " alt="" coords="1211,94,1369,135"/>
+<area shape="poly" id="edge13_Node000001_Node000018" title=" " alt="" coords="2658,29,2432,32,2116,41,1752,61,1566,77,1384,97,1370,99,1369,93,1383,91,1565,71,1752,56,2116,35,2432,26,2658,24"/>
+<area shape="rect" id="Node000020" href="$click__type_8h.html" title=" " alt="" coords="1395,94,1553,135"/>
+<area shape="poly" id="edge15_Node000001_Node000020" title=" " alt="" coords="2658,30,2459,34,2188,45,1879,64,1721,79,1566,97,1554,98,1553,93,1565,91,1720,73,1878,59,2187,39,2459,29,2658,25"/>
+<area shape="rect" id="Node000024" href="$curveinterpolator_8h.html" title=" " alt="" coords="1577,94,1736,135"/>
+<area shape="poly" id="edge18_Node000001_Node000024" title=" " alt="" coords="2658,32,2487,37,2261,49,2006,68,1749,97,1737,98,1736,93,1748,91,2005,63,2261,44,2487,32,2658,26"/>
+<area shape="rect" id="Node000026" href="$debounce_8h.html" title=" " alt="" coords="1760,94,1918,135"/>
+<area shape="poly" id="edge20_Node000001_Node000026" title=" " alt="" coords="2658,34,2335,54,2134,72,1932,97,1919,99,1918,93,1931,91,2133,67,2335,48,2657,28"/>
+<area shape="rect" id="Node000028" href="$dew__point_8h.html" title=" " alt="" coords="1943,94,2101,135"/>
+<area shape="poly" id="edge22_Node000001_Node000028" title=" " alt="" coords="2658,37,2411,59,2263,76,2114,97,2102,99,2101,93,2113,91,2262,71,2411,54,2658,31"/>
+<area shape="rect" id="Node000030" href="$difference_8h.html" title=" " alt="" coords="2125,94,2284,135"/>
+<area shape="poly" id="edge24_Node000001_Node000030" title=" " alt="" coords="2658,42,2490,66,2297,97,2285,99,2284,94,2296,91,2489,60,2657,37"/>
+<area shape="rect" id="Node000032" href="$enable_8h.html" title=" " alt="" coords="2308,94,2466,135"/>
+<area shape="poly" id="edge26_Node000001_Node000032" title=" " alt="" coords="2659,52,2467,97,2466,92,2657,47"/>
+<area shape="rect" id="Node000033" href="$frequency_8h.html" title=" " alt="" coords="2673,94,2832,135"/>
+<area shape="poly" id="edge27_Node000001_Node000033" title=" " alt="" coords="2755,62,2755,94,2750,94,2750,62"/>
+<area shape="rect" id="Node000035" href="$heat__index_8h.html" title=" " alt="" coords="2491,94,2649,135"/>
+<area shape="poly" id="edge30_Node000001_Node000035" title=" " alt="" coords="2699,55,2612,96,2610,91,2696,50"/>
+<area shape="rect" id="Node000037" href="$integrator_8h.html" title=" " alt="" coords="2856,94,3014,135"/>
+<area shape="poly" id="edge32_Node000001_Node000037" title=" " alt="" coords="2809,50,2895,91,2893,96,2806,55"/>
+<area shape="rect" id="Node000038" href="$lambda__transform_8h.html" title=" " alt="" coords="3221,94,3380,135"/>
+<area shape="poly" id="edge33_Node000001_Node000038" title=" " alt="" coords="2848,37,3016,60,3209,91,3221,94,3220,99,3208,97,3015,66,2847,42"/>
+<area shape="rect" id="Node000045" href="$median_8h.html" title=" " alt="" coords="4135,94,4293,135"/>
+<area shape="poly" id="edge39_Node000001_Node000045" title=" " alt="" coords="2847,24,3073,26,3389,35,3753,55,3940,71,4122,91,4135,93,4134,98,4121,97,3939,76,3753,61,3389,40,3073,31,2847,29"/>
+<area shape="rect" id="Node000047" href="$moving__average_8h.html" title=" " alt="" coords="3404,94,3562,135"/>
+<area shape="poly" id="edge41_Node000001_Node000047" title=" " alt="" coords="2847,31,3094,54,3243,71,3392,91,3404,93,3403,99,3391,97,3242,76,3094,59,2847,37"/>
+<area shape="rect" id="Node000049" href="$press__repeater_8h.html" title=" " alt="" coords="3587,94,3745,135"/>
+<area shape="poly" id="edge42_Node000001_Node000049" title=" " alt="" coords="2848,28,3170,48,3372,67,3574,91,3587,93,3586,99,3573,97,3371,72,3170,54,2847,34"/>
+<area shape="rect" id="Node000051" href="$repeat__report_8h.html" title=" " alt="" coords="3769,94,3928,135"/>
+<area shape="poly" id="edge43_Node000001_Node000051" title=" " alt="" coords="2847,26,3018,32,3244,44,3500,63,3757,91,3769,93,3768,98,3756,97,3499,68,3244,49,3018,37,2847,32"/>
+<area shape="rect" id="Node000053" href="$threshold_8h.html" title=" " alt="" coords="3952,94,4110,135"/>
+<area shape="poly" id="edge44_Node000001_Node000053" title=" " alt="" coords="2847,25,3046,29,3318,39,3627,59,3785,73,3940,91,3952,93,3951,98,3939,97,3784,79,3626,64,3317,45,3046,34,2847,30"/>
+<area shape="rect" id="Node000055" href="$time__counter_8h.html" title=" " alt="" coords="3039,94,3197,135"/>
+<area shape="poly" id="edge45_Node000001_Node000055" title=" " alt="" coords="2848,47,3039,92,3038,97,2846,52"/>
+<area shape="rect" id="Node000056" href="$timestring_8h.html" title=" " alt="" coords="4317,94,4476,135"/>
+<area shape="poly" id="edge47_Node000001_Node000056" title=" " alt="" coords="2847,26,3579,48,3998,67,4172,79,4305,91,4317,93,4316,98,4304,97,4172,84,3998,73,3579,54,2847,32"/>
+<area shape="rect" id="Node000060" href="$transform_8cpp.html" title=" " alt="" coords="4500,94,4658,135"/>
+<area shape="poly" id="edge48_Node000001_Node000060" title=" " alt="" coords="2848,26,3665,46,4140,65,4338,78,4487,91,4500,93,4499,98,4487,97,4337,83,4139,71,3665,51,2847,31"/>
+<area shape="rect" id="Node000061" href="$truth__text_8h.html" title=" " alt="" coords="4683,94,4841,135"/>
+<area shape="poly" id="edge49_Node000001_Node000061" title=" " alt="" coords="2847,26,3222,32,3749,44,4281,64,4502,76,4670,91,4683,93,4682,98,4670,97,4502,82,4280,69,3749,49,3222,37,2847,31"/>
+<area shape="rect" id="Node000063" href="$voltage__multiplier_8h.html" title=" " alt="" coords="4865,94,5024,135"/>
+<area shape="poly" id="edge50_Node000001_Node000063" title=" " alt="" coords="2847,25,3255,30,3834,42,4422,62,4667,75,4853,91,4865,93,4864,98,4852,97,4667,80,4422,67,3834,47,3255,36,2847,31"/>
+<area shape="rect" id="Node000065" href="$voltagedivider_8h.html" title=" " alt="" coords="5048,94,5206,135"/>
+<area shape="poly" id="edge51_Node000001_Node000065" title=" " alt="" coords="2847,25,3286,29,3919,40,4563,60,4832,74,5035,91,5048,93,5047,98,5035,97,4832,79,4563,65,3919,45,3286,35,2847,30"/>
+<area shape="rect" id="Node000003" href="$digital__output_8cpp.html" title=" " alt="" coords="5,183,148,223"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="190,145,115,185,112,180,188,140"/>
+<area shape="rect" id="Node000005" href="$system__info_8h.html" title=" " alt="" coords="495,183,637,223"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="514,144,549,180,545,184,511,148"/>
+<area shape="rect" id="Node000009" href="$signalk__output_8cpp.html" title=" " alt="" coords="172,183,309,223"/>
+<area shape="poly" id="edge5_Node000004_Node000009" title=" " alt="" coords="415,143,297,185,295,180,413,138"/>
+<area shape="rect" id="Node000010" href="$signalk__position_8h.html" title=" " alt="" coords="333,183,471,223"/>
+<area shape="poly" id="edge6_Node000004_Node000010" title=" " alt="" coords="456,148,422,184,418,180,452,144"/>
+<area shape="rect" id="Node000013" href="$air__density_8cpp.html" title=" " alt="" coords="661,183,820,223"/>
+<area shape="poly" id="edge8_Node000012_Node000013" title=" " alt="" coords="743,150,743,182,738,182,738,150"/>
+<area shape="rect" id="Node000015" href="$analogvoltage_8cpp.html" title=" " alt="" coords="844,183,1002,223"/>
+<area shape="poly" id="edge10_Node000014_Node000015" title=" " alt="" coords="926,150,926,182,921,182,921,150"/>
+<area shape="rect" id="Node000017" href="$angle__correction_8cpp.html" title=" " alt="" coords="1027,183,1185,223"/>
+<area shape="poly" id="edge12_Node000016_Node000017" title=" " alt="" coords="1109,150,1109,182,1103,182,1103,150"/>
+<area shape="rect" id="Node000019" href="$change__filter_8cpp.html" title=" " alt="" coords="1209,183,1368,223"/>
+<area shape="poly" id="edge14_Node000018_Node000019" title=" " alt="" coords="1292,150,1291,182,1286,182,1287,150"/>
+<area shape="rect" id="Node000021" href="$smart__switch__controller_8h.html" title=" " alt="" coords="1391,183,1565,223"/>
+<area shape="poly" id="edge16_Node000020_Node000021" title=" " alt="" coords="1478,150,1480,182,1474,182,1473,150"/>
+<area shape="rect" id="Node000023" href="$click__type_8cpp.html" title=" " alt="" coords="1588,183,1746,223"/>
+<area shape="poly" id="edge17_Node000020_Node000023" title=" " alt="" coords="1533,139,1624,180,1622,185,1531,144"/>
+<area shape="rect" id="Node000025" href="$curveinterpolator_8cpp.html" title=" " alt="" coords="1771,183,1929,223"/>
+<area shape="poly" id="edge19_Node000024_Node000025" title=" " alt="" coords="1715,139,1807,180,1805,185,1713,144"/>
+<area shape="rect" id="Node000027" href="$sensesp__app_8cpp.html" title=" " alt="" coords="1953,190,2099,216"/>
+<area shape="poly" id="edge21_Node000026_Node000027" title=" " alt="" coords="1896,139,2001,187,1999,192,1894,144"/>
+<area shape="rect" id="Node000029" href="$dew__point_8cpp.html" title=" " alt="" coords="2123,183,2281,223"/>
+<area shape="poly" id="edge23_Node000028_Node000029" title=" " alt="" coords="2078,139,2162,180,2160,185,2075,144"/>
+<area shape="rect" id="Node000031" href="$difference_8cpp.html" title=" " alt="" coords="2305,183,2464,223"/>
+<area shape="poly" id="edge25_Node000030_Node000031" title=" " alt="" coords="2260,139,2345,180,2343,185,2258,144"/>
+<area shape="rect" id="Node000008" href="$main_8cpp.html" title=" " alt="" coords="2918,190,3014,216"/>
+<area shape="poly" id="edge28_Node000033_Node000008" title=" " alt="" coords="2816,138,2937,187,2935,192,2814,143"/>
+<area shape="rect" id="Node000034" href="$frequency_8cpp.html" title=" " alt="" coords="2673,183,2832,223"/>
+<area shape="poly" id="edge29_Node000033_Node000034" title=" " alt="" coords="2755,150,2755,182,2750,182,2750,150"/>
+<area shape="rect" id="Node000036" href="$heat__index_8cpp.html" title=" " alt="" coords="2491,183,2649,223"/>
+<area shape="poly" id="edge31_Node000035_Node000036" title=" " alt="" coords="2573,150,2573,182,2567,182,2567,150"/>
+<area shape="poly" id="edge34_Node000038_Node000008" title=" " alt="" coords="3207,140,3028,185,3004,192,3003,187,3026,180,3206,135"/>
+<area shape="rect" id="Node000039" href="$hysteresis_8h.html" title=" " alt="" coords="3587,183,3745,223"/>
+<area shape="poly" id="edge35_Node000038_Node000039" title=" " alt="" coords="3396,135,3587,180,3586,186,3394,140"/>
+<area shape="rect" id="Node000040" href="$lambda__transform_8cpp.html" title=" " alt="" coords="3039,183,3197,223"/>
+<area shape="poly" id="edge36_Node000038_Node000040" title=" " alt="" coords="3247,144,3160,185,3158,180,3244,139"/>
+<area shape="rect" id="Node000041" href="$linear_8h.html" title=" " alt="" coords="3221,183,3380,223"/>
+<area shape="poly" id="edge37_Node000038_Node000041" title=" " alt="" coords="3303,150,3303,182,3298,182,3298,150"/>
+<area shape="rect" id="Node000043" href="$typecast_8h.html" title=" " alt="" coords="3404,183,3562,223"/>
+<area shape="poly" id="edge38_Node000038_Node000043" title=" " alt="" coords="3357,139,3443,180,3441,185,3354,144"/>
+<area shape="rect" id="Node000046" href="$median_8cpp.html" title=" " alt="" coords="4135,183,4293,223"/>
+<area shape="poly" id="edge40_Node000045_Node000046" title=" " alt="" coords="4217,150,4217,182,4211,182,4211,150"/>
+<area shape="poly" id="edge46_Node000055_Node000008" title=" " alt="" coords="3072,145,2988,192,2986,187,3069,140"/>
 </map>

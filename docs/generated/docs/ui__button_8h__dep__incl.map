@@ -1,18 +1,35 @@
 <map id="src/sensesp/ui/ui_button.h" name="src/sensesp/ui/ui_button.h">
-<area shape="rect" id="node1" title=" " alt="" coords="839,5,1014,31"/>
-<area shape="rect" id="node2" href="$http__server_8cpp.html" title=" " alt="" coords="748,167,889,207"/>
-<area shape="rect" id="node3" href="$http__server_8h.html" title=" " alt="" coords="856,79,997,119"/>
-<area shape="rect" id="node16" href="$ui__button_8cpp.html" title=" " alt="" coords="1021,86,1211,111"/>
-<area shape="rect" id="node4" href="$sensesp__app_8h.html" title=" " alt="" coords="914,174,1046,199"/>
-<area shape="rect" id="node5" href="$debug__output_8cpp.html" title=" " alt="" coords="5,255,160,295"/>
-<area shape="rect" id="node6" href="$discovery_8cpp.html" title=" " alt="" coords="185,262,383,287"/>
-<area shape="rect" id="node7" href="$networking_8cpp.html" title=" " alt="" coords="407,262,614,287"/>
-<area shape="rect" id="node8" href="$ws__client_8cpp.html" title=" " alt="" coords="639,255,775,295"/>
-<area shape="rect" id="node9" href="$signalk__delta__queue_8cpp.html" title=" " alt="" coords="799,255,969,295"/>
-<area shape="rect" id="node10" href="$signalk__put__request_8cpp.html" title=" " alt="" coords="993,255,1159,295"/>
-<area shape="rect" id="node11" href="$button_8cpp.html" title=" " alt="" coords="1183,255,1323,295"/>
-<area shape="rect" id="node12" href="$led__blinker_8cpp.html" title=" " alt="" coords="1347,255,1487,295"/>
-<area shape="rect" id="node13" href="$sensesp__app_8cpp.html" title=" " alt="" coords="1512,262,1659,287"/>
-<area shape="rect" id="node14" href="$sensesp__app__builder_8h.html" title=" " alt="" coords="1683,262,1859,287"/>
-<area shape="rect" id="node15" href="$main_8cpp.html" title=" " alt="" coords="1722,343,1819,368"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="761,5,935,31"/>
+<area shape="rect" id="Node000002" href="$http__server_8cpp.html" title=" " alt="" coords="670,168,810,208"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="811,41,787,59,767,81,756,102,749,125,743,168,738,167,744,124,752,100,763,77,784,55,808,37"/>
+<area shape="rect" id="Node000003" href="$http__server_8h.html" title=" " alt="" coords="778,79,918,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="851,46,851,79,845,79,845,46"/>
+<area shape="rect" id="Node000016" href="$ui__button_8cpp.html" title=" " alt="" coords="942,87,1130,112"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="892,35,1008,84,1006,88,890,40"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="813,132,766,169,763,165,810,128"/>
+<area shape="rect" id="Node000004" href="$sensesp__app_8h.html" title=" " alt="" coords="834,175,966,201"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="870,132,895,174,891,176,865,134"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title=" " alt="" coords="838,345,935,371"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="842,207,823,211,765,214,668,215,408,215,274,219,155,226,64,239,34,248,16,258,10,267,8,277,10,286,16,295,32,305,60,314,143,329,254,340,382,347,643,354,838,354,838,360,643,359,381,353,253,345,142,335,58,320,30,310,13,299,5,288,3,277,5,265,13,254,32,243,63,233,154,220,274,213,408,210,668,210,765,209,822,206,841,202"/>
+<area shape="rect" id="Node000006" href="$debug__output_8cpp.html" title=" " alt="" coords="27,256,181,297"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="842,207,823,211,728,224,647,232,508,237,370,241,289,247,194,259,181,261,180,256,193,254,288,242,370,236,508,231,646,226,727,219,822,206,841,202"/>
+<area shape="rect" id="Node000007" href="$discovery_8cpp.html" title=" " alt="" coords="205,264,403,290"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="841,207,823,211,709,229,619,237,530,245,415,259,372,266,371,261,414,254,529,240,619,232,708,223,822,206,840,202"/>
+<area shape="rect" id="Node000008" href="$networking_8cpp.html" title=" " alt="" coords="426,264,632,290"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="837,208,823,211,584,266,583,261,822,206,836,202"/>
+<area shape="rect" id="Node000009" href="$ws__client_8cpp.html" title=" " alt="" coords="656,256,792,297"/>
+<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="863,211,765,258,763,253,860,206"/>
+<area shape="rect" id="Node000010" href="$signalk__delta__queue_8cpp.html" title=" " alt="" coords="816,256,984,297"/>
+<area shape="poly" id="edge10_Node000004_Node000010" title=" " alt="" coords="903,217,903,256,897,256,897,217"/>
+<area shape="rect" id="Node000011" href="$signalk__put__request_8cpp.html" title=" " alt="" coords="1009,256,1175,297"/>
+<area shape="poly" id="edge11_Node000004_Node000011" title=" " alt="" coords="942,205,1049,253,1047,258,940,210"/>
+<area shape="rect" id="Node000012" href="$button_8cpp.html" title=" " alt="" coords="1200,256,1339,297"/>
+<area shape="poly" id="edge12_Node000004_Node000012" title=" " alt="" coords="967,202,1200,256,1199,262,966,207"/>
+<area shape="rect" id="Node000013" href="$led__blinker_8cpp.html" title=" " alt="" coords="1364,256,1503,297"/>
+<area shape="poly" id="edge13_Node000004_Node000013" title=" " alt="" coords="982,197,1152,221,1351,254,1364,256,1362,261,1350,259,1151,226,981,202"/>
+<area shape="rect" id="Node000014" href="$sensesp__app_8cpp.html" title=" " alt="" coords="1527,264,1673,290"/>
+<area shape="poly" id="edge14_Node000004_Node000014" title=" " alt="" coords="982,193,1221,215,1368,232,1515,254,1551,261,1550,266,1514,259,1367,238,1221,220,981,198"/>
+<area shape="rect" id="Node000015" href="$sensesp__app__builder_8h.html" title=" " alt="" coords="1696,264,1872,290"/>
+<area shape="poly" id="edge15_Node000004_Node000015" title=" " alt="" coords="981,191,1291,212,1488,230,1686,254,1727,261,1726,266,1685,259,1487,235,1290,217,981,196"/>
+<area shape="poly" id="edge16_Node000015_Node000005" title=" " alt="" coords="1713,295,1686,300,1467,324,1251,341,936,357,935,352,1251,336,1466,319,1685,294,1712,290"/>
 </map>

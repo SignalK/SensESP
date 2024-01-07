@@ -1,51 +1,115 @@
 <map id="sensesp::Startable" name="sensesp::Startable">
-<area shape="rect" id="node1" title="Automatic calling of the start() method at startup." alt="" coords="5,388,136,413"/>
-<area shape="rect" id="node2" href="$classsensesp_1_1_base_blinker.html" title="A base class for LED blinker classes." alt="" coords="207,55,356,80"/>
-<area shape="rect" id="node7" href="$classsensesp_1_1_base_button_handler.html" title="Base class for button handlers." alt="" coords="185,125,377,151"/>
-<area shape="rect" id="node10" href="$classsensesp_1_1_debug_output.html" title="Initialize logging/debug output." alt="" coords="203,215,359,240"/>
-<area shape="rect" id="node11" href="$classsensesp_1_1_h_t_t_p_server.html" title="Handles external interactions with the device via the web interface." alt="" coords="205,264,357,289"/>
-<area shape="rect" id="node12" href="$classsensesp_1_1_m_d_n_s_discovery.html" title=" " alt="" coords="192,313,371,339"/>
-<area shape="rect" id="node13" href="$classsensesp_1_1_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="209,363,354,388"/>
-<area shape="rect" id="node14" href="$classsensesp_1_1_o_t_a.html" title=" " alt="" coords="229,412,334,437"/>
-<area shape="rect" id="node15" href="$classsensesp_1_1_s_k_delta_queue.html" title="Signal K delta queue." alt="" coords="198,461,365,487"/>
-<area shape="rect" id="node16" href="$classsensesp_1_1_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="221,511,341,536"/>
-<area shape="rect" id="node30" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="197,924,365,949"/>
-<area shape="rect" id="node48" href="$classsensesp_1_1_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="214,973,349,999"/>
-<area shape="rect" id="node49" href="$classsensesp_1_1_wi_fi_state_producer.html" title="Provide information about the current WiFi state." alt="" coords="187,1023,376,1048"/>
-<area shape="rect" id="node3" href="$classsensesp_1_1_pattern_blinker.html" title="A blinker that blinks the LED according to a defined repeating pattern." alt="" coords="449,5,611,31"/>
-<area shape="rect" id="node4" href="$classsensesp_1_1_periodic_blinker.html" title="A base class for periodic blinkers." alt="" coords="447,55,613,80"/>
-<area shape="rect" id="node5" href="$classsensesp_1_1_even_blinker.html" title="An LED blinker class that blinks the LED 50% off, 50% on, at a given period." alt="" coords="829,55,979,80"/>
-<area shape="rect" id="node6" href="$classsensesp_1_1_ratio_blinker.html" title="A periodic blinker that defines both the on&#45;ratio and the period length." alt="" coords="829,5,979,31"/>
-<area shape="rect" id="node8" href="$classsensesp_1_1_minimal_button_handler.html" title="Minimal Button Handler." alt="" coords="427,104,633,129"/>
-<area shape="rect" id="node9" href="$classsensesp_1_1_button_handler.html" title="Default Button Handler for SensESPApp applications." alt="" coords="823,104,985,129"/>
-<area shape="rect" id="node17" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="816,561,992,587"/>
-<area shape="rect" id="node20" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="821,153,987,179"/>
-<area shape="rect" id="node23" href="$classsensesp_1_1_sensor_t.html" title="Sensor template class for any sensor producing actual values." alt="" coords="450,389,610,415"/>
-<area shape="rect" id="node18" href="$classsensesp_1_1_digital_input_change.html" title="DigitalInputChange provides output whenever a digital pin changes its state." alt="" coords="1072,585,1263,611"/>
-<area shape="rect" id="node19" href="$classsensesp_1_1_digital_input_state.html" title="DigitalInputState polls the state of an input pin every read_delay ms." alt="" coords="1079,536,1255,561"/>
-<area shape="rect" id="node21" href="$classsensesp_1_1_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="1072,179,1263,204"/>
-<area shape="rect" id="node22" href="$classsensesp_1_1_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="1100,129,1235,155"/>
-<area shape="rect" id="node24" href="$classsensesp_1_1_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="830,203,978,243"/>
-<area shape="rect" id="node25" href="$classsensesp_1_1_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="833,267,975,307"/>
-<area shape="rect" id="node26" href="$classsensesp_1_1_repeat_sensor.html" title=" " alt="" coords="807,332,1001,357"/>
-<area shape="rect" id="node27" href="$classsensesp_1_1_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="829,382,979,422"/>
-<area shape="rect" id="node28" href="$classsensesp_1_1_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="819,447,989,472"/>
-<area shape="rect" id="node29" href="$classsensesp_1_1_wi_fi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="833,497,975,537"/>
-<area shape="rect" id="node31" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="833,991,975,1031"/>
-<area shape="rect" id="node33" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,1099,973,1139"/>
-<area shape="rect" id="node36" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,1187,973,1227"/>
-<area shape="rect" id="node37" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,1270,973,1310"/>
-<area shape="rect" id="node38" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,1341,973,1381"/>
-<area shape="rect" id="node39" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,1435,973,1475"/>
-<area shape="rect" id="node40" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,1499,973,1539"/>
-<area shape="rect" id="node41" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,1563,973,1603"/>
-<area shape="rect" id="node42" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,613,973,653"/>
-<area shape="rect" id="node43" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,681,973,721"/>
-<area shape="rect" id="node44" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,751,973,791"/>
-<area shape="rect" id="node45" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,830,973,870"/>
-<area shape="rect" id="node46" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="835,922,973,962"/>
-<area shape="rect" id="node47" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="461,1019,599,1059"/>
-<area shape="rect" id="node32" href="$classsensesp_1_1_click_type.html" title="ClickType is a transform that consumes button clicks and translates them as events of type ClickTypes..." alt="" coords="1099,999,1236,1024"/>
-<area shape="rect" id="node34" href="$classsensesp_1_1_enable.html" title="On/off switch for signals: input is emitted as&#45;is if the enable flag is set in the web UI." alt="" coords="1092,1131,1243,1156"/>
-<area shape="rect" id="node35" href="$classsensesp_1_1_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="1051,1081,1284,1107"/>
+<area shape="rect" id="Node000001" title="Automatic calling of the start() method at startup." alt="" coords="5,417,136,443"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_base_blinker.html" title="A base class for LED blinker classes." alt="" coords="207,55,355,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,401,83,344,103,270,136,190,157,152,183,118,210,95,240,79,243,83,213,99,187,121,162,155,141,193,109,271,89,345,78,402"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_base_button_handler.html" title="Base class for button handlers." alt="" coords="185,132,376,158"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="82,402,122,322,151,275,183,230,223,188,260,156,264,160,226,192,187,233,155,278,127,324,86,404"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_debug_output.html" title="Initialize logging/debug output." alt="" coords="203,244,358,270"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="82,402,122,340,150,307,184,279,204,268,207,273,186,283,154,310,126,343,87,405"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_h_t_t_p_server.html" title="Handles external interactions with the device via the web interface." alt="" coords="205,293,356,319"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="91,404,131,365,184,328,209,317,211,322,186,333,135,369,94,408"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_m_d_n_s_discovery.html" title=" " alt="" coords="192,343,369,368"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="111,408,184,377,219,366,221,371,186,382,113,413"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="209,392,353,418"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="150,418,208,411,208,416,151,423"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_o_t_a.html" title=" " alt="" coords="229,441,333,467"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="151,437,228,446,228,451,150,442"/>
+<area shape="rect" id="Node000015" href="$classsensesp_1_1_s_k_delta_queue.html" title="Signal K delta queue." alt="" coords="198,491,363,516"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="114,448,186,477,221,488,220,493,184,482,112,452"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="221,540,340,566"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="95,453,135,491,186,526,221,540,219,545,184,531,132,495,92,457"/>
+<area shape="rect" id="Node000032" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="197,1005,364,1031"/>
+<area shape="poly" id="edge32_Node000001_Node000032" title=" " alt="" coords="84,457,277,1004,272,1006,79,459"/>
+<area shape="rect" id="Node000097" href="$classsensesp_1_1_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="214,1055,348,1080"/>
+<area shape="poly" id="edge63_Node000001_Node000097" title=" " alt="" coords="76,459,84,584,103,759,118,849,137,930,160,997,173,1022,187,1042,199,1052,214,1059,212,1063,197,1056,183,1045,168,1025,155,999,131,932,113,850,98,760,79,584,70,459"/>
+<area shape="rect" id="Node000098" href="$classsensesp_1_1_wi_fi_state_producer.html" title="Provide information about the current WiFi state." alt="" coords="187,1104,375,1130"/>
+<area shape="poly" id="edge64_Node000001_Node000098" title=" " alt="" coords="77,458,105,687,130,847,162,1010,168,1055,173,1073,187,1091,201,1101,198,1106,183,1095,168,1075,162,1056,157,1011,125,848,100,688,72,459"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_pattern_blinker.html" title="A blinker that blinks the LED according to a defined repeating pattern." alt="" coords="449,5,609,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="364,48,460,29,461,34,365,54"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_periodic_blinker.html" title="A base class for periodic blinkers." alt="" coords="446,55,612,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="370,65,446,65,446,70,370,70"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_even_blinker.html" title="An LED blinker class that blinks the LED 50% off, 50% on, at a given period." alt="" coords="833,5,981,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="627,50,656,46,832,24,833,29,656,51,627,56"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_ratio_blinker.html" title="A periodic blinker that defines both the on&#45;ratio and the period length." alt="" coords="833,55,982,80"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="627,65,832,65,832,70,627,70"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_minimal_button_handler.html" title="Minimal Button Handler." alt="" coords="426,104,632,130"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="392,130,425,126,425,131,392,135"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_button_handler.html" title="Default Button Handler for SensESPApp applications." alt="" coords="827,104,988,130"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="648,114,826,114,826,120,648,120"/>
+<area shape="rect" id="Node000017" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="820,153,995,179"/>
+<area shape="poly" id="edge16_Node000016_Node000017" title=" " alt="" coords="354,540,375,527,388,511,397,496,403,464,407,430,413,411,423,391,474,318,520,265,576,223,655,184,695,170,738,162,819,157,819,162,739,167,697,175,657,189,579,228,524,269,478,322,428,394,418,413,412,431,408,465,402,498,393,514,378,531,356,544"/>
+<area shape="rect" id="Node000020" href="$classsensesp_1_1_sensor_t.html" title=" " alt="" coords="825,612,990,638"/>
+<area shape="poly" id="edge19_Node000016_Node000020" title=" " alt="" coords="356,558,781,606,824,612,824,617,781,611,355,563"/>
+<area shape="rect" id="Node000024" href="$classsensesp_1_1_sensor_t.html" title="Sensor template class for any sensor producing actual values." alt="" coords="449,405,609,431"/>
+<area shape="poly" id="edge22_Node000016_Node000024" title=" " alt="" coords="354,535,375,526,416,504,455,477,512,430,515,434,458,481,419,508,377,531,356,540"/>
+<area shape="rect" id="Node000018" href="$classsensesp_1_1_digital_input_change.html" title="DigitalInputChange provides output whenever a digital pin changes its state." alt="" coords="1059,129,1249,155"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="1010,153,1058,149,1059,154,1011,159"/>
+<area shape="rect" id="Node000019" href="$classsensesp_1_1_digital_input_state.html" title="DigitalInputState polls the state of an input pin every read_delay ms." alt="" coords="1066,179,1242,204"/>
+<area shape="poly" id="edge18_Node000017_Node000019" title=" " alt="" coords="1011,174,1066,180,1065,185,1010,179"/>
+<area shape="rect" id="Node000021" href="$classsensesp_1_1_digital_input_counter.html" title="DigitalInputCounter counts interrupts and reports the count every read_delay ms." alt="" coords="1059,588,1249,614"/>
+<area shape="poly" id="edge20_Node000020_Node000021" title=" " alt="" coords="1005,613,1058,607,1058,613,1006,618"/>
+<area shape="rect" id="Node000023" href="$classsensesp_1_1_free_mem.html" title="Reports the current amount of unused memory of the ESP." alt="" coords="1087,637,1221,663"/>
+<area shape="poly" id="edge21_Node000020_Node000023" title=" " alt="" coords="1006,632,1087,641,1086,646,1005,638"/>
+<area shape="poly" id="edge30_Node000024_Node000017" title=" " alt="" coords="546,391,592,333,622,300,654,271,727,226,804,189,841,177,843,182,806,194,730,231,658,275,625,304,596,336,550,394"/>
+<area shape="poly" id="edge31_Node000024_Node000020" title=" " alt="" coords="551,442,596,494,625,520,657,541,690,553,719,554,748,556,783,569,795,584,807,597,832,609,829,614,803,602,791,587,779,574,747,561,719,560,689,558,655,546,622,524,592,497,547,446"/>
+<area shape="rect" id="Node000025" href="$classsensesp_1_1_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="834,203,981,244"/>
+<area shape="poly" id="edge23_Node000024_Node000025" title=" " alt="" coords="554,393,599,354,655,316,695,294,727,280,804,253,836,242,838,247,806,258,729,285,697,299,657,320,602,359,557,397"/>
+<area shape="rect" id="Node000026" href="$classsensesp_1_1_constant_sensor.html" title="Base class for constant value sensors." alt="" coords="805,268,1009,294"/>
+<area shape="poly" id="edge24_Node000024_Node000026" title=" " alt="" coords="569,395,655,356,729,327,804,304,848,292,849,297,806,309,731,332,657,361,571,400"/>
+<area shape="rect" id="Node000027" href="$classsensesp_1_1_i_p_addr_dev.html" title="Reports the IP address of the ESP once it&#39;s connected to wifi." alt="" coords="837,318,977,359"/>
+<area shape="poly" id="edge25_Node000024_Node000027" title=" " alt="" coords="601,399,655,386,836,349,837,354,657,391,602,404"/>
+<area shape="rect" id="Node000028" href="$classsensesp_1_1_repeat_sensor.html" title=" " alt="" coords="811,383,1004,408"/>
+<area shape="poly" id="edge26_Node000024_Node000028" title=" " alt="" coords="624,410,810,399,810,404,624,415"/>
+<area shape="rect" id="Node000029" href="$classsensesp_1_1_system_hz.html" title="Reports the current clock speed of the ESP." alt="" coords="833,433,981,473"/>
+<area shape="poly" id="edge27_Node000024_Node000029" title=" " alt="" coords="624,424,833,443,833,449,624,429"/>
+<area shape="rect" id="Node000030" href="$classsensesp_1_1_uptime.html" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="823,497,992,523"/>
+<area shape="poly" id="edge28_Node000024_Node000030" title=" " alt="" coords="601,433,852,494,851,499,599,438"/>
+<area shape="rect" id="Node000031" href="$classsensesp_1_1_wi_fi_signal.html" title="Reports the current strength of the wifi signal that the ESP is connected to." alt="" coords="837,547,978,588"/>
+<area shape="poly" id="edge29_Node000024_Node000031" title=" " alt="" coords="568,436,657,481,719,503,782,524,806,533,839,544,837,549,804,538,780,529,717,508,655,486,565,441"/>
+<area shape="rect" id="Node000033" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="836,1453,978,1493"/>
+<area shape="poly" id="edge33_Node000032_Node000033" title=" " alt="" coords="378,1040,378,1041,389,1057,396,1078,402,1131,402,1193,399,1260,396,1326,398,1386,407,1434,416,1452,427,1465,448,1473,485,1478,595,1481,836,1474,836,1479,595,1487,485,1483,446,1478,424,1470,411,1455,402,1436,393,1386,391,1326,393,1260,397,1193,397,1131,390,1080,384,1059,374,1044,374,1043"/>
+<area shape="rect" id="Node000035" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,1698,976,1739"/>
+<area shape="poly" id="edge35_Node000032_Node000035" title=" " alt="" coords="378,1040,379,1041,385,1055,391,1077,398,1140,402,1314,401,1490,403,1595,405,1651,410,1673,427,1693,474,1724,526,1744,581,1755,638,1759,694,1758,747,1752,838,1735,839,1740,748,1758,694,1763,638,1765,581,1760,525,1749,472,1728,424,1698,405,1675,400,1652,398,1596,396,1490,397,1314,393,1140,386,1078,380,1056,374,1044,374,1043"/>
+<area shape="rect" id="Node000062" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,1525,976,1565"/>
+<area shape="poly" id="edge36_Node000032_Node000062" title=" " alt="" coords="378,1040,379,1041,387,1066,393,1110,398,1232,399,1355,403,1428,411,1460,428,1487,480,1542,528,1578,583,1603,657,1625,692,1635,720,1640,748,1638,780,1625,788,1618,791,1610,795,1601,803,1591,847,1563,850,1568,807,1595,800,1603,796,1613,792,1622,782,1630,749,1643,720,1645,691,1640,655,1630,582,1608,526,1582,477,1546,424,1490,406,1462,398,1429,394,1355,392,1232,388,1111,382,1067,374,1043,374,1043"/>
+<area shape="rect" id="Node000063" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,1605,976,1645"/>
+<area shape="poly" id="edge37_Node000032_Node000063" title=" " alt="" coords="378,1040,379,1041,388,1067,394,1112,400,1237,403,1440,402,1495,396,1542,396,1562,400,1582,410,1602,428,1623,450,1642,474,1657,528,1677,585,1687,645,1687,704,1681,759,1670,851,1643,853,1648,760,1675,704,1686,645,1693,585,1692,526,1682,472,1661,447,1646,424,1627,405,1605,395,1584,391,1563,391,1541,397,1495,398,1439,395,1237,389,1113,383,1068,374,1043,374,1043"/>
+<area shape="rect" id="Node000065" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,883,976,924"/>
+<area shape="poly" id="edge38_Node000032_Node000065" title=" " alt="" coords="303,993,360,940,443,874,492,841,544,809,599,782,655,761,691,749,722,742,751,744,783,761,793,773,798,786,798,811,796,837,799,849,807,862,822,875,840,885,837,889,819,879,803,865,794,851,791,838,793,811,793,787,789,776,779,766,750,749,722,747,693,754,657,766,601,787,546,814,495,845,446,878,364,944,307,997"/>
+<area shape="rect" id="Node000067" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,1035,976,1076"/>
+<area shape="poly" id="edge39_Node000032_Node000067" title=" " alt="" coords="380,1004,466,997,567,994,675,997,781,1009,822,1019,860,1032,858,1037,820,1024,781,1014,674,1002,567,999,466,1002,380,1009"/>
+<area shape="rect" id="Node000077" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,958,976,999"/>
+<area shape="poly" id="edge40_Node000032_Node000077" title=" " alt="" coords="335,998,379,986,425,978,539,970,652,967,838,972,838,977,652,973,539,975,426,983,380,991,336,1003"/>
+<area shape="rect" id="Node000078" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,1373,976,1413"/>
+<area shape="poly" id="edge41_Node000032_Node000078" title=" " alt="" coords="377,1039,378,1041,387,1055,394,1073,400,1117,400,1227,399,1284,402,1335,410,1376,418,1391,427,1403,477,1433,532,1452,590,1459,650,1458,708,1451,763,1439,853,1411,855,1416,764,1444,709,1456,650,1463,590,1464,531,1457,474,1438,424,1407,413,1394,405,1378,396,1335,394,1284,395,1227,395,1118,389,1074,383,1057,374,1044,373,1043"/>
+<area shape="rect" id="Node000079" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,666,976,707"/>
+<area shape="poly" id="edge42_Node000032_Node000079" title=" " alt="" coords="283,989,295,928,320,849,339,808,362,768,390,733,424,703,473,675,527,656,583,646,640,642,696,643,749,648,838,665,838,670,748,654,696,649,640,647,584,651,529,661,476,680,427,707,394,736,366,771,343,810,325,851,300,929,288,990"/>
+<area shape="rect" id="Node000080" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,1194,976,1235"/>
+<area shape="poly" id="edge43_Node000032_Node000080" title=" " alt="" coords="375,1038,378,1040,393,1057,402,1075,407,1109,411,1144,417,1163,428,1182,478,1247,525,1292,580,1326,657,1356,692,1368,722,1375,750,1372,779,1356,789,1346,793,1336,793,1314,792,1289,795,1275,803,1262,820,1245,840,1233,843,1237,824,1250,807,1265,800,1277,797,1289,798,1313,798,1337,793,1349,783,1360,751,1378,722,1380,691,1373,655,1361,578,1331,522,1297,474,1251,423,1185,412,1165,406,1146,402,1110,397,1076,389,1060,374,1044,372,1042"/>
+<area shape="rect" id="Node000081" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,738,976,779"/>
+<area shape="poly" id="edge44_Node000032_Node000081" title=" " alt="" coords="287,989,303,939,330,875,370,810,395,781,424,756,470,725,512,704,553,691,592,685,634,685,678,689,782,708,855,735,853,740,780,713,677,695,633,690,593,690,554,696,514,709,473,730,427,760,399,785,375,813,335,877,308,940,292,991"/>
+<area shape="rect" id="Node000083" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,811,976,852"/>
+<area shape="poly" id="edge45_Node000032_Node000083" title=" " alt="" coords="291,990,312,951,341,902,379,853,424,811,482,774,533,754,587,743,656,733,721,718,750,719,783,733,794,746,797,761,799,775,807,788,839,810,837,814,803,792,794,777,792,762,789,749,779,738,749,724,722,723,656,738,588,748,534,759,484,778,427,815,383,857,345,905,316,953,296,993"/>
+<area shape="rect" id="Node000085" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,1275,976,1316"/>
+<area shape="poly" id="edge46_Node000032_Node000085" title=" " alt="" coords="377,1039,379,1041,392,1067,400,1105,403,1199,406,1291,414,1327,428,1351,455,1369,495,1382,544,1391,597,1396,702,1395,746,1389,780,1380,792,1371,803,1359,869,1314,872,1319,807,1363,796,1375,782,1385,747,1394,702,1400,597,1401,543,1396,494,1387,453,1373,424,1355,409,1329,401,1291,397,1199,394,1106,387,1069,374,1044,373,1042"/>
+<area shape="rect" id="Node000088" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="839,1121,976,1161"/>
+<area shape="poly" id="edge47_Node000032_Node000088" title=" " alt="" coords="380,1010,487,1007,604,1009,709,1019,751,1029,782,1043,793,1053,797,1064,800,1075,807,1086,829,1103,854,1118,852,1122,826,1108,803,1089,795,1077,792,1066,788,1056,780,1047,750,1034,708,1025,603,1014,487,1012,380,1015"/>
+<area shape="rect" id="Node000090" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="460,1131,598,1172"/>
+<area shape="poly" id="edge48_Node000032_Node000090" title=" " alt="" coords="366,1034,378,1040,391,1049,402,1060,498,1128,495,1133,399,1064,387,1053,375,1044,363,1039"/>
+<area shape="rect" id="Node000034" href="$classsensesp_1_1_click_type.html" title="ClickType is a transform that consumes button clicks and translates them as events of type ClickTypes..." alt="" coords="1086,1460,1222,1486"/>
+<area shape="poly" id="edge34_Node000033_Node000034" title=" " alt="" coords="994,1470,1085,1470,1085,1476,994,1476"/>
+<area shape="poly" id="edge49_Node000090_Node000033" title=" " alt="" coords="550,1184,594,1257,624,1296,658,1333,705,1370,756,1403,852,1450,850,1454,754,1408,702,1375,654,1336,620,1300,590,1260,545,1187"/>
+<area shape="poly" id="edge50_Node000090_Node000035" title=" " alt="" coords="533,1187,539,1269,557,1378,573,1437,595,1495,623,1550,658,1599,698,1636,745,1665,794,1686,839,1701,838,1706,792,1691,742,1669,695,1640,654,1603,618,1552,590,1497,568,1438,552,1379,534,1270,528,1188"/>
+<area shape="poly" id="edge51_Node000090_Node000062" title=" " alt="" coords="540,1186,554,1240,577,1306,612,1375,633,1407,658,1435,699,1469,746,1495,794,1514,839,1528,837,1533,792,1519,744,1500,696,1473,654,1439,629,1410,607,1377,572,1308,549,1242,535,1188"/>
+<area shape="poly" id="edge52_Node000090_Node000063" title=" " alt="" coords="535,1187,543,1258,563,1350,579,1398,600,1446,626,1490,658,1530,682,1543,728,1562,842,1601,840,1606,727,1567,680,1548,654,1534,621,1493,595,1448,574,1400,558,1351,538,1259,529,1188"/>
+<area shape="poly" id="edge53_Node000090_Node000065" title=" " alt="" coords="552,1117,597,1065,654,1013,700,984,749,959,839,922,841,927,751,964,703,989,658,1018,601,1069,556,1121"/>
+<area shape="poly" id="edge54_Node000090_Node000067" title=" " alt="" coords="612,1138,694,1123,780,1103,859,1074,861,1079,782,1108,695,1128,613,1143"/>
+<area shape="poly" id="edge55_Node000090_Node000077" title=" " alt="" coords="584,1122,655,1088,857,997,859,1001,657,1093,586,1127"/>
+<area shape="poly" id="edge56_Node000090_Node000078" title=" " alt="" coords="557,1182,601,1229,628,1253,657,1274,690,1289,718,1296,747,1302,782,1314,833,1342,878,1370,875,1374,831,1346,780,1319,745,1307,717,1301,688,1294,655,1278,625,1257,597,1233,553,1185"/>
+<area shape="poly" id="edge57_Node000090_Node000079" title=" " alt="" coords="532,1115,545,1052,567,971,603,885,626,844,654,807,695,769,742,739,792,717,837,701,839,706,794,722,745,744,698,774,658,811,631,847,607,888,572,973,550,1053,538,1116"/>
+<area shape="poly" id="edge58_Node000090_Node000080" title=" " alt="" coords="613,1163,839,1200,838,1206,612,1168"/>
+<area shape="poly" id="edge59_Node000090_Node000081" title=" " alt="" coords="532,1115,544,1057,566,986,582,949,602,914,626,881,654,852,671,841,686,835,716,833,746,833,762,829,780,822,791,810,803,797,842,777,845,781,807,802,795,814,782,826,764,834,747,838,716,838,687,840,673,846,658,856,630,884,607,917,587,952,571,988,549,1059,537,1116"/>
+<area shape="poly" id="edge60_Node000090_Node000083" title=" " alt="" coords="539,1115,556,1073,581,1022,613,971,654,927,686,907,733,887,837,850,839,855,735,892,689,912,658,931,617,975,585,1025,561,1075,544,1117"/>
+<area shape="poly" id="edge61_Node000090_Node000085" title=" " alt="" coords="585,1176,657,1209,752,1244,839,1273,837,1278,750,1249,655,1214,583,1181"/>
+<area shape="poly" id="edge62_Node000090_Node000088" title=" " alt="" coords="613,1150,781,1148,838,1144,838,1150,781,1153,613,1155"/>
 </map>

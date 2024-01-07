@@ -38,6 +38,7 @@ var dir_8b763442d326984d19f542e14cef0a81 =
     [ "repeat_report.h", "repeat__report_8h.html", "repeat__report_8h" ],
     [ "threshold.cpp", "threshold_8cpp.html", null ],
     [ "threshold.h", "threshold_8h.html", "threshold_8h" ],
+    [ "time_counter.h", "time__counter_8h.html", "time__counter_8h" ],
     [ "timestring.cpp", "timestring_8cpp.html", null ],
     [ "timestring.h", "timestring_8h.html", "timestring_8h" ],
     [ "transform.cpp", "transform_8cpp.html", null ],

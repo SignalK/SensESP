@@ -1,9 +1,16 @@
 <map id="sensesp::Uptime" name="sensesp::Uptime">
-<area shape="rect" id="node1" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="271,225,393,251"/>
-<area shape="rect" id="node2" href="$classsensesp_1_1_sensor_t.html" title="Sensor template class for any sensor producing actual values." alt="" coords="286,152,378,177"/>
-<area shape="rect" id="node3" href="$classsensesp_1_1_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="181,79,301,104"/>
-<area shape="rect" id="node4" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="346,5,491,31"/>
-<area shape="rect" id="node7" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="325,79,520,104"/>
-<area shape="rect" id="node5" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,5,157,31"/>
-<area shape="rect" id="node6" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="181,5,312,31"/>
+<area shape="rect" id="Node000001" title="Reports the number of seconds since the last restart of the ESP." alt="" coords="272,226,392,252"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_sensor_t.html" title="Sensor template class for any sensor producing actual values." alt="" coords="286,153,377,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="334,194,334,226,329,226,329,194"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="181,79,301,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="270,112,318,150,315,154,266,117"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="345,5,489,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="374,40,272,81,270,76,372,35"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="325,79,520,105"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="422,46,424,78,419,79,416,47"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,5,157,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="123,35,215,76,213,81,121,40"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="181,5,312,31"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="247,47,245,79,239,78,242,46"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="397,117,348,154,345,150,394,112"/>
 </map>

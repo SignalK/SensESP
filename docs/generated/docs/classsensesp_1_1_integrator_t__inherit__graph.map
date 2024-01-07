@@ -1,12 +1,22 @@
 <map id="sensesp::IntegratorT&lt; C, P &gt;" name="sensesp::IntegratorT&lt; C, P &gt;">
-<area shape="rect" id="node1" title="Integrator integrates (accumulates) the incoming values." alt="" coords="932,97,1075,137"/>
-<area shape="rect" id="node2" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="744,97,883,137"/>
-<area shape="rect" id="node3" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="508,55,676,80"/>
-<area shape="rect" id="node4" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="225,5,377,31"/>
-<area shape="rect" id="node5" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="236,55,367,80"/>
-<area shape="rect" id="node6" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="489,104,695,129"/>
-<area shape="rect" id="node7" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="200,104,403,129"/>
-<area shape="rect" id="node8" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="494,155,690,180"/>
-<area shape="rect" id="node9" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,180,151,205"/>
-<area shape="rect" id="node10" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="204,205,399,231"/>
+<area shape="rect" id="Node000001" title="Integrator integrates (accumulates) the incoming values." alt="" coords="928,97,1069,137"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="741,97,878,137"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="894,114,927,114,927,120,894,120"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="506,55,673,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="666,82,741,99,740,104,665,87"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="225,5,376,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="392,31,511,51,510,57,391,36"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="235,55,365,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="381,65,506,65,506,70,381,70"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="487,104,692,130"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="707,114,740,114,740,120,707,120"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="199,104,401,130"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="417,114,487,114,487,120,417,120"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="492,155,687,180"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="663,148,740,130,741,135,664,153"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,180,150,206"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="165,184,174,184,491,169,492,174,174,189,166,189"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="203,205,397,231"/>
+<area shape="poly" id="edge10_Node000010_Node000009" title=" " alt="" coords="166,200,203,204,202,210,165,205"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="412,206,463,199,545,178,546,183,464,204,413,211"/>
 </map>
