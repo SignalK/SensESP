@@ -1,15 +1,25 @@
 <map id="sensesp::Networking::start" name="sensesp::Networking::start">
-<area shape="rect" id="node1" title=" " alt="" coords="5,86,151,126"/>
-<area shape="rect" id="node2" href="$classsensesp_1_1_networking.html#aab9ae3badf7dfaf3736af37b5a4c9025" title="Start WiFi using preset SSID and password." alt="" coords="199,33,345,73"/>
-<area shape="rect" id="node7" href="$classsensesp_1_1_networking.html#a28dcf335a69d16f9206e0e5b9886d66a" title="Start WiFi using WiFi Manager." alt="" coords="199,118,345,158"/>
-<area shape="rect" id="node3" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a928c309a2dc17f82edefe9e5bc7ef33d" title="Get the current hostname." alt="" coords="400,10,589,50"/>
-<area shape="rect" id="node4" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="644,55,859,80"/>
-<area shape="rect" id="node5" href="$classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9" title=" " alt="" coords="657,5,846,31"/>
-<area shape="rect" id="node6" href="$classsensesp_1_1_sens_e_s_p_base_app.html#ade8960b96e439f4cc0b387c312999dd5" title="Get the hostname observable object." alt="" coords="657,105,846,145"/>
-<area shape="rect" id="node8" href="$classsensesp_1_1_value_producer.html#ae34225039d68b6f0e786266e76c2dace" title=" " alt="" coords="670,283,833,323"/>
-<area shape="rect" id="node9" href="$classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4" title=" " alt="" coords="419,175,571,215"/>
-<area shape="rect" id="node13" href="$classsensesp_1_1_observable_value.html#afa3fd1d165f7097cd4021e6a7b6a7c70" title=" " alt="" coords="393,240,596,265"/>
-<area shape="rect" id="node10" href="$hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="703,233,799,259"/>
-<area shape="rect" id="node12" href="$classsensesp_1_1_configurable.html#a7785e86a2e662ff0291f7a6fb043ea91" title=" " alt="" coords="675,169,827,209"/>
-<area shape="rect" id="node11" href="$hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce" title="SHA&#45;1 hash function." alt="" coords="907,233,959,259"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,150,79"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_networking.html#aab9ae3badf7dfaf3736af37b5a4c9025" title="Start WiFi using preset SSID and password." alt="" coords="198,5,343,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,44,183,38,184,43,151,49"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_networking.html#a28dcf335a69d16f9206e0e5b9886d66a" title="Start WiFi using WiFi Manager." alt="" coords="198,71,343,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="151,68,183,74,182,79,150,74"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a928c309a2dc17f82edefe9e5bc7ef33d" title="Get the current hostname." alt="" coords="391,5,579,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="343,23,375,23,375,28,343,28"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="627,66,842,92"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="580,43,657,60,656,65,579,48"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9" title=" " alt="" coords="640,13,829,39"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="580,23,625,23,625,28,580,28"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="339,68,400,49,402,54,340,73"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="343,86,612,79,612,85,343,92"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_producer.html#ae34225039d68b6f0e786266e76c2dace" title=" " alt="" coords="404,120,566,161"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="344,105,390,116,389,121,343,110"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4" title=" " alt="" coords="410,185,561,226"/>
+<area shape="poly" id="edge9_Node000006_Node000008" title=" " alt="" coords="299,110,342,140,392,170,406,177,404,181,390,175,339,144,296,114"/>
+<area shape="rect" id="Node000009" href="$hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="687,164,782,189"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="561,194,671,181,671,186,561,199"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_configurable.html#a7785e86a2e662ff0291f7a6fb043ea91" title=" " alt="" coords="659,213,810,254"/>
+<area shape="poly" id="edge12_Node000008_Node000011" title=" " alt="" coords="561,211,643,221,643,226,561,217"/>
+<area shape="rect" id="Node000010" href="$hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce" title="SHA&#45;1 hash function." alt="" coords="890,164,941,189"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="783,174,874,174,874,179,783,179"/>
 </map>

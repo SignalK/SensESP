@@ -1,39 +1,79 @@
 <map id="sensesp::SymmetricTransform&lt; T &gt;" name="sensesp::SymmetricTransform&lt; T &gt;">
-<area shape="rect" id="node1" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="1389,214,1623,240"/>
-<area shape="rect" id="node14" href="$classsensesp_1_1_s_k_output.html" title=" " alt="" coords="2103,60,2247,100"/>
-<area shape="rect" id="node16" href="$classsensesp_1_1_debounce_template.html" title="Implements debounce code for a button or switch." alt="" coords="1733,36,1956,61"/>
-<area shape="rect" id="node17" href="$classsensesp_1_1_digital_output.html" title="Sets a GPIO pin to whatever the input is (true = HIGH, false = LOW), and passes the value on to the n..." alt="" coords="1767,86,1922,126"/>
-<area shape="rect" id="node18" href="$classsensesp_1_1_press_repeater.html" title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users." alt="" coords="1761,150,1928,190"/>
-<area shape="rect" id="node19" href="$classsensesp_1_1_repeat_report.html" title="Ensures that values that do not change frequently are still reported at a specified maximum silence i..." alt="" coords="1749,214,1941,240"/>
-<area shape="rect" id="node20" href="$classsensesp_1_1_s_k_output.html" title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network." alt="" coords="1761,264,1929,289"/>
-<area shape="rect" id="node22" href="$classsensesp_1_1_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press..." alt="" coords="1739,314,1950,354"/>
-<area shape="rect" id="node23" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="1744,378,1945,418"/>
-<area shape="rect" id="node24" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="1744,510,1945,550"/>
-<area shape="rect" id="node2" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1201,207,1340,247"/>
-<area shape="rect" id="node3" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="664,245,832,270"/>
-<area shape="rect" id="node9" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="932,176,1071,216"/>
-<area shape="rect" id="node4" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="225,245,377,270"/>
-<area shape="rect" id="node5" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="236,294,367,320"/>
-<area shape="rect" id="node6" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="900,296,1103,321"/>
-<area shape="rect" id="node7" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="427,54,621,80"/>
-<area shape="rect" id="node8" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,96,151,121"/>
-<area shape="rect" id="node12" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="650,145,846,170"/>
-<area shape="rect" id="node13" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="204,146,399,172"/>
-<area shape="rect" id="node10" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="645,194,851,220"/>
-<area shape="rect" id="node11" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="200,196,403,221"/>
-<area shape="rect" id="node15" href="$classsensesp_1_1_s_k_output_raw_json.html" title="Class for sending raw Json strings on a specific Signal K path." alt="" coords="2333,68,2524,93"/>
-<area shape="rect" id="node21" href="$classsensesp_1_1_s_k_output_numeric.html" title="A special class for sending numeric values to the Signal K server on a specific Signal K path." alt="" coords="2067,196,2284,221"/>
-<area shape="rect" id="node25" href="$classsensesp_1_1_air_density.html" title="Transforms temperature, relative humidity and pressure in air density." alt="" coords="2105,393,2245,418"/>
-<area shape="rect" id="node26" href="$classsensesp_1_1_analog_voltage.html" title="A transform that takes the output of an analog&#45;to&#45;digital converter and outputs the voltage that went..." alt="" coords="2094,442,2257,468"/>
-<area shape="rect" id="node27" href="$classsensesp_1_1_angle_correction.html" title="Add a value to an angle input (in radians). The output value is wrapped to a range between [0,..." alt="" coords="2089,492,2261,517"/>
-<area shape="rect" id="node28" href="$classsensesp_1_1_change_filter.html" title="A float passthrough transform that will only pass that value through if it is &quot;sufficiently different..." alt="" coords="2099,541,2252,566"/>
-<area shape="rect" id="node29" href="$classsensesp_1_1_curve_interpolator.html" title="Implement a piecewise linear interpolation transform." alt="" coords="2086,590,2265,616"/>
-<area shape="rect" id="node30" href="$classsensesp_1_1_dew_point.html" title="Transforms temperature and relative humidity in dew point temperature." alt="" coords="2107,640,2243,665"/>
-<area shape="rect" id="node31" href="$classsensesp_1_1_difference.html" title=" " alt="" coords="2106,689,2245,714"/>
-<area shape="rect" id="node32" href="$classsensesp_1_1_heat_index_temperature.html" title="Transforms temperature and relative humidity in heat index temperature." alt="" coords="2070,738,2281,764"/>
-<area shape="rect" id="node33" href="$classsensesp_1_1_median.html" title="Outputs the median value of sample_size inputs." alt="" coords="2115,788,2236,813"/>
-<area shape="rect" id="node34" href="$classsensesp_1_1_moving_average.html" title="Outputs the moving average of the last sample_size inputs." alt="" coords="2091,837,2260,862"/>
-<area shape="rect" id="node35" href="$classsensesp_1_1_voltage_divider_r1.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit." alt="" coords="2085,245,2266,270"/>
-<area shape="rect" id="node36" href="$classsensesp_1_1_voltage_divider_r2.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R2 in the circuit." alt="" coords="2085,294,2266,320"/>
-<area shape="rect" id="node37" href="$classsensesp_1_1_voltage_multiplier.html" title="OBSOLETE: Since you can now apply an &quot;output_scale&quot; to the AnalogInput sensor, you don&#39;t need this tr..." alt="" coords="2088,344,2263,369"/>
+<area shape="rect" id="Node000001" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="1384,215,1617,241"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_s_k_output.html" title=" " alt="" coords="2096,61,2239,102"/>
+<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="1516,201,1549,157,1597,105,1656,56,1690,35,1726,20,1778,8,1833,3,1887,5,1941,11,2039,33,2116,58,2114,63,2038,38,1940,16,1887,10,1833,8,1779,13,1727,26,1692,40,1659,60,1600,109,1553,161,1521,204"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_debounce_template.html" title="Implements debounce code for a button or switch." alt="" coords="1727,35,1949,61"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="1527,203,1612,137,1667,102,1726,71,1760,59,1762,64,1728,76,1670,106,1615,142,1530,207"/>
+<area shape="rect" id="Node000017" href="$classsensesp_1_1_digital_output.html" title="Sets a GPIO pin to whatever the input is (true = HIGH, false = LOW), and passes the value on to the n..." alt="" coords="1761,85,1915,126"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="1546,207,1726,136,1764,124,1766,129,1728,141,1548,212"/>
+<area shape="rect" id="Node000018" href="$classsensesp_1_1_press_repeater.html" title="A transform that takes boolean inputs and adds button behaviors familiar to many device end users." alt="" coords="1755,151,1921,191"/>
+<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="1594,210,1755,182,1755,188,1595,215"/>
+<area shape="rect" id="Node000019" href="$classsensesp_1_1_repeat_report.html" title="Ensures that values that do not change frequently are still reported at a specified maximum silence i..." alt="" coords="1742,215,1934,241"/>
+<area shape="poly" id="edge21_Node000001_Node000019" title=" " alt="" coords="1632,226,1742,226,1742,231,1632,231"/>
+<area shape="rect" id="Node000020" href="$classsensesp_1_1_s_k_output.html" title="A specialized transform whose primary purpose is to output Signal K data on the Signal K network." alt="" coords="1754,265,1922,290"/>
+<area shape="poly" id="edge22_Node000001_Node000020" title=" " alt="" coords="1609,241,1754,263,1753,268,1608,247"/>
+<area shape="rect" id="Node000022" href="$classsensesp_1_1_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press..." alt="" coords="1733,315,1943,355"/>
+<area shape="poly" id="edge25_Node000001_Node000022" title=" " alt="" coords="1555,244,1727,300,1764,311,1762,317,1726,306,1554,249"/>
+<area shape="rect" id="Node000023" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="1738,380,1938,421"/>
+<area shape="poly" id="edge26_Node000001_Node000023" title=" " alt="" coords="1533,248,1618,306,1672,337,1728,365,1760,377,1758,382,1726,369,1669,342,1616,310,1530,253"/>
+<area shape="rect" id="Node000024" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="1738,512,1938,553"/>
+<area shape="poly" id="edge27_Node000001_Node000024" title=" " alt="" coords="1526,251,1578,308,1642,372,1733,449,1810,509,1807,513,1730,453,1639,376,1574,311,1522,255"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1198,208,1335,249"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1350,226,1384,226,1384,231,1350,231"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="662,246,830,272"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="844,251,1197,230,1197,235,845,256"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="930,177,1067,218"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="816,239,929,212,930,217,817,245"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="225,246,376,272"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="391,256,662,256,662,262,391,262"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_startable.html" title="Automatic calling of the start() method at startup." alt="" coords="235,295,365,321"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="380,297,662,266,662,271,381,302"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="897,297,1100,322"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="1114,291,1173,275,1231,247,1233,252,1175,280,1115,296"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="425,55,620,81"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="636,78,852,111,977,134,1100,163,1163,183,1219,205,1217,210,1161,188,1099,168,976,140,851,116,635,84"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,97,150,122"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="156,91,173,88,305,75,425,69,425,74,305,81,174,94,156,96"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="648,146,844,172"/>
+<area shape="poly" id="edge13_Node000012_Node000008" title=" " alt="" coords="166,109,373,119,620,138,662,143,661,148,619,143,373,124,165,115"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="203,147,397,173"/>
+<area shape="poly" id="edge15_Node000013_Node000008" title=" " alt="" coords="152,124,241,144,240,149,151,129"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="1083,205,1198,218,1197,223,1082,210"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="644,195,848,221"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="863,201,929,198,929,203,863,206"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="199,197,401,222"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="417,207,643,206,643,211,417,212"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="849,172,930,184,929,190,849,177"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="413,157,648,157,648,162,413,163"/>
+<area shape="rect" id="Node000015" href="$classsensesp_1_1_s_k_output_raw_json.html" title="Class for sending raw Json strings on a specific Signal K path." alt="" coords="2325,69,2515,94"/>
+<area shape="poly" id="edge17_Node000014_Node000015" title=" " alt="" coords="2255,79,2324,79,2324,84,2255,84"/>
+<area shape="poly" id="edge24_Node000020_Node000014" title=" " alt="" coords="1935,259,1947,252,1955,244,1960,235,1971,215,2009,179,2050,148,2126,100,2128,105,2053,152,2013,184,1975,218,1964,237,1960,247,1951,256,1937,264"/>
+<area shape="rect" id="Node000021" href="$classsensesp_1_1_s_k_output_numeric.html" title="A special class for sending numeric values to the Signal K server on a specific Signal K path." alt="" coords="2059,198,2275,224"/>
+<area shape="poly" id="edge23_Node000020_Node000021" title=" " alt="" coords="1926,258,1948,251,1972,239,2058,220,2059,225,1974,244,1950,256,1928,263"/>
+<area shape="rect" id="Node000025" href="$classsensesp_1_1_air_density.html" title="Transforms temperature, relative humidity and pressure in air density." alt="" coords="2098,395,2237,421"/>
+<area shape="poly" id="edge28_Node000024_Node000025" title=" " alt="" coords="1891,502,1969,465,2058,430,2096,419,2098,424,2060,435,1971,470,1893,507"/>
+<area shape="rect" id="Node000026" href="$classsensesp_1_1_analog_voltage.html" title="A transform that takes the output of an analog&#45;to&#45;digital converter and outputs the voltage that went..." alt="" coords="2086,445,2248,470"/>
+<area shape="poly" id="edge29_Node000024_Node000026" title=" " alt="" coords="1940,505,1972,498,2103,469,2104,474,1974,503,1941,510"/>
+<area shape="rect" id="Node000027" href="$classsensesp_1_1_angle_correction.html" title="Add a value to an angle input (in radians). The output value is wrapped to a range between [0,..." alt="" coords="2082,494,2253,520"/>
+<area shape="poly" id="edge30_Node000024_Node000027" title=" " alt="" coords="1954,521,2081,511,2081,516,1954,526"/>
+<area shape="rect" id="Node000028" href="$classsensesp_1_1_change_filter.html" title="A float passthrough transform that will only pass that value through if it is &quot;sufficiently different..." alt="" coords="2091,543,2243,569"/>
+<area shape="poly" id="edge31_Node000024_Node000028" title=" " alt="" coords="1954,538,2091,548,2091,553,1953,543"/>
+<area shape="rect" id="Node000029" href="$classsensesp_1_1_curve_interpolator.html" title="Implement a piecewise linear interpolation transform." alt="" coords="2078,593,2256,618"/>
+<area shape="poly" id="edge32_Node000024_Node000029" title=" " alt="" coords="1948,554,2107,590,2105,595,1946,559"/>
+<area shape="rect" id="Node000030" href="$classsensesp_1_1_dew_point.html" title="Transforms temperature and relative humidity in dew point temperature." alt="" coords="2100,642,2235,668"/>
+<area shape="poly" id="edge33_Node000024_Node000030" title=" " alt="" coords="1894,558,1971,594,2060,628,2100,640,2098,645,2058,633,1969,599,1891,562"/>
+<area shape="rect" id="Node000031" href="$classsensesp_1_1_difference.html" title=" " alt="" coords="2098,691,2236,717"/>
+<area shape="poly" id="edge34_Node000024_Node000031" title=" " alt="" coords="1876,561,1957,621,2007,652,2060,678,2098,690,2097,695,2058,683,2005,657,1954,626,1873,565"/>
+<area shape="rect" id="Node000032" href="$classsensesp_1_1_heat_index_temperature.html" title="Transforms temperature and relative humidity in heat index temperature." alt="" coords="2062,741,2272,766"/>
+<area shape="poly" id="edge35_Node000024_Node000032" title=" " alt="" coords="1865,563,1899,603,1945,649,1999,693,2060,727,2091,738,2089,743,2058,732,1996,697,1941,653,1895,607,1861,566"/>
+<area shape="rect" id="Node000033" href="$classsensesp_1_1_median.html" title="Outputs the median value of sample_size inputs." alt="" coords="2107,790,2227,816"/>
+<area shape="poly" id="edge36_Node000024_Node000033" title=" " alt="" coords="1859,565,1890,616,1935,676,1992,734,2025,758,2060,777,2107,791,2106,796,2058,781,2022,762,1988,738,1931,680,1886,619,1854,568"/>
+<area shape="rect" id="Node000034" href="$classsensesp_1_1_moving_average.html" title="Outputs the moving average of the last sample_size inputs." alt="" coords="2083,839,2251,865"/>
+<area shape="poly" id="edge37_Node000024_Node000034" title=" " alt="" coords="1855,566,1902,660,1936,715,1975,765,2013,801,2060,826,2090,836,2088,841,2058,831,2010,806,1971,769,1931,718,1897,663,1851,568"/>
+<area shape="rect" id="Node000035" href="$classsensesp_1_1_voltage_divider_r1.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R1 in the circuit." alt="" coords="2077,247,2257,273"/>
+<area shape="poly" id="edge38_Node000024_Node000035" title=" " alt="" coords="1881,500,1916,469,1947,431,1956,409,1958,390,1960,370,1971,347,1990,323,2008,307,2058,282,2087,271,2089,276,2060,287,2011,311,1994,326,1975,350,1965,371,1963,390,1961,410,1951,434,1920,473,1884,504"/>
+<area shape="rect" id="Node000036" href="$classsensesp_1_1_voltage_divider_r2.html" title="Uses the voltage divider formula to calculate (and output) the resistance of R2 in the circuit." alt="" coords="2077,297,2257,322"/>
+<area shape="poly" id="edge39_Node000024_Node000036" title=" " alt="" coords="1876,500,1912,468,1947,431,1958,410,1971,389,2010,354,2058,331,2089,320,2091,326,2060,336,2013,359,1975,393,1963,413,1951,434,1916,472,1880,504"/>
+<area shape="rect" id="Node000037" href="$classsensesp_1_1_voltage_multiplier.html" title="OBSOLETE: Since you can now apply an &quot;output_scale&quot; to the AnalogInput sensor, you don&#39;t need this tr..." alt="" coords="2080,346,2254,372"/>
+<area shape="poly" id="edge40_Node000024_Node000037" title=" " alt="" coords="1872,500,1953,438,2004,406,2058,380,2091,370,2093,375,2060,385,2007,411,1956,442,1875,504"/>
 </map>

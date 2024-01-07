@@ -11,6 +11,9 @@ var hierarchy =
       ] ],
       [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ],
       [ "sensesp::RgbLed", "classsensesp_1_1_rgb_led.html", null ],
+      [ "sensesp::SKListener", "classsensesp_1_1_s_k_listener.html", [
+        [ "sensesp::SKValueListener< T >", "classsensesp_1_1_s_k_value_listener.html", null ]
+      ] ],
       [ "sensesp::SKPutRequestBase", "classsensesp_1_1_s_k_put_request_base.html", [
         [ "sensesp::SKPutRequest< T >", "classsensesp_1_1_s_k_put_request.html", null ]
       ] ],
@@ -27,6 +30,7 @@ var hierarchy =
         ] ],
         [ "sensesp::SensorT< T >", "classsensesp_1_1_sensor_t.html", [
           [ "sensesp::AnalogInput", "classsensesp_1_1_analog_input.html", null ],
+          [ "sensesp::ConstantSensor< T >", "classsensesp_1_1_constant_sensor.html", null ],
           [ "sensesp::IPAddrDev", "classsensesp_1_1_i_p_addr_dev.html", null ],
           [ "sensesp::RepeatSensor< T >", "classsensesp_1_1_repeat_sensor.html", null ],
           [ "sensesp::SystemHz", "classsensesp_1_1_system_hz.html", null ],
@@ -78,6 +82,9 @@ var hierarchy =
         [ "sensesp::Transform< String, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", [
           [ "sensesp::TextToTruth", "classsensesp_1_1_text_to_truth.html", null ]
+        ] ],
+        [ "sensesp::Transform< T, float >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::TimeCounter< T >", "classsensesp_1_1_time_counter.html", null ]
         ] ],
         [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", [
           [ "sensesp::TimeString", "classsensesp_1_1_time_string.html", [
@@ -155,9 +162,7 @@ var hierarchy =
         [ "sensesp::SKOutput< T >", "classsensesp_1_1_s_k_output.html", null ],
         [ "sensesp::SKOutputTime", "classsensesp_1_1_s_k_output_time.html", null ]
       ] ],
-      [ "sensesp::SKListener", "classsensesp_1_1_s_k_listener.html", [
-        [ "sensesp::SKValueListener< T >", "classsensesp_1_1_s_k_value_listener.html", null ]
-      ] ],
+      [ "sensesp::SKListener", "classsensesp_1_1_s_k_listener.html", null ],
       [ "sensesp::SKPutListener", "classsensesp_1_1_s_k_put_listener.html", [
         [ "sensesp::SKPutRequestListener< T >", "classsensesp_1_1_s_k_put_request_listener.html", null ]
       ] ],
@@ -188,6 +193,7 @@ var hierarchy =
         [ "sensesp::Transform< float, int >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< String, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", null ],
+        [ "sensesp::Transform< T, float >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ],
         [ "sensesp::ObservableValue< T >", "classsensesp_1_1_observable_value.html", [
@@ -257,6 +263,7 @@ var hierarchy =
       [ "sensesp::Transform< float, int >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< String, String >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", null ],
+      [ "sensesp::Transform< T, float >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::UIOutput< String >", "classsensesp_1_1_u_i_output.html", null ],

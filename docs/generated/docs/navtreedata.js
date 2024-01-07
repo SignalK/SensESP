@@ -43,7 +43,7 @@ var NAVTREE =
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Related Functions", "functions_rela.html", null ]
+        [ "Related Symbols", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -61,14 +61,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "air__density_8cpp.html",
-"classsensesp_1_1_debug_output.html#ac61ed9521c65b2da872d53d08e9aaefb",
-"classsensesp_1_1_m_d_n_s_discovery.html#a92a5eea6085988a188e9d4b7ec887ea2",
-"classsensesp_1_1_s_k_delta_queue.html#a130c4f0ea878551c17809cc8a1b79412",
-"classsensesp_1_1_sens_e_s_p_app.html#aac33818674ffe424e8d1183aa4ff5232",
-"classsensesp_1_1_time_string.html#aeb516b69e78564ae94b6b0dc397c1521",
-"dew__point_8h_source.html",
-"namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0",
-"system__status__controller_8h.html#af833775127368fc26658b6d3a070f2aba91fb26167a66932c36d148bb5fdf98da"
+"classsensesp_1_1_curve_interpolator_1_1_sample.html",
+"classsensesp_1_1_lambda_transform.html#aaa9baa8f1ad27aa4426aa9bffb146dc3",
+"classsensesp_1_1_rgb_led.html#a5359badfe59c94d8e36742f7e0fe7589",
+"classsensesp_1_1_sens_e_s_p_app.html#a6e3bcef5a855acd8589f51e4974e7819",
+"classsensesp_1_1_text_to_truth.html",
+"classsensesp_1_1_wi_fi_state_producer.html#af936cca265f9b9fd7a3cb1360fdc909d",
+"namespacesensesp.html#a048a12a0033281a7ea316123fec959f2",
+"signalk__time_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
