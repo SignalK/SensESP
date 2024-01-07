@@ -3,6 +3,8 @@
 
 #include <limits>
 
+#include "ArduinoJson.h"
+
 namespace sensesp {
 
 /// Value used to indicate an invalid or missing altitude
@@ -46,14 +48,7 @@ struct ENUVector {
  * @param src The JSON document containing the position data
  * @param dst The address to a Position struct to write the data to
  */
-void convertFromJson(JsonVariantConst src, Position &dst) {
-  dst.longitude = src["longitude"].as<double>();
-  dst.latitude = src["latitude"].as<double>();
-
-  if (src.containsKey("altitude")) {
-    dst.altitude = src["altitude"].as<float>();
-  }
-}
+void convertFromJson(JsonVariantConst src, Position &dst);
 
 /**
  * @brief Tells ArduinoJson whether the given JSON is a Position or not
@@ -66,9 +61,7 @@ void convertFromJson(JsonVariantConst src, Position &dst) {
  * @return false if the given JSON doesn't contain "latitude" or "longitude"
  * keys
  */
-bool canConvertFromJson(JsonVariantConst src, const Position &) {
-  return src.containsKey("latitude") && src.containsKey("longitude");
-}
+bool canConvertFromJson(JsonVariantConst src, const Position &);
 
 }  // namespace sensesp
 
