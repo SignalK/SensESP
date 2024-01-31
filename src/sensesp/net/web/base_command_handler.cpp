@@ -1,4 +1,4 @@
-#include "command_handler.h"
+#include "base_command_handler.h"
 
 namespace sensesp {
 
@@ -11,7 +11,7 @@ void HTTPRoutesHandler::get_routes() {
                                      "ConfigurationPage"));
   }
 
-void add_http_command_handlers(HTTPServer* server) {
+void add_base_app_http_command_handlers(HTTPServer* server) {
   HTTPResetHandler* reset_handler = new HTTPResetHandler();
   HTTPRestartHandler* restart_handler = new HTTPRestartHandler();
   HTTPInfoHandler* info_handler = new HTTPInfoHandler();

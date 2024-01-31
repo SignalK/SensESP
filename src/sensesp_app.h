@@ -15,7 +15,8 @@
 #include "sensesp/net/http_server.h"
 #include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/net/web/config_handler.h"
-#include "sensesp/net/web/command_handler.h"
+#include "sensesp/net/web/base_command_handler.h"
+#include "sensesp/net/web/app_command_handler.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
 #include "sensesp/net/ws_client.h"
@@ -84,7 +85,7 @@ class SensESPApp : public SensESPBaseApp {
     return this;
   }
   const SensESPApp* set_wifi_password(String wifi_password) {
-    this->wifi_password_ = wifi_password;
+    this->wifi_client_password_ = wifi_password;
     return this;
   }
   const SensESPApp* set_sk_server_address(String sk_server_address) {
@@ -115,7 +116,7 @@ class SensESPApp : public SensESPBaseApp {
   void setup();
 
   String ssid_ = "";
-  String wifi_password_ = "";
+  String wifi_client_password_ = "";
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
   const char* ota_password_ = nullptr;

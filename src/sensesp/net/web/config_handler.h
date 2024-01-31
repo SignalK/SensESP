@@ -20,9 +20,9 @@ class HTTPConfigHandler : public HTTPServerHandler {
  public:
   HTTPConfigHandler() : HTTPServerHandler(){};
   virtual void set_handler(HTTPServer* server) override {
-    // handler for GET /config
+    // handler for GET /api/config
     const httpd_uri_t config_get_handler = {
-        .uri = "/config*",
+        .uri = "/api/config*",
         .method = HTTP_GET,
         .handler =
             [](httpd_req_t* req) {
@@ -34,7 +34,7 @@ class HTTPConfigHandler : public HTTPServerHandler {
 
     // handler for PUT /config
     const httpd_uri_t config_put_handler = {
-        .uri = "/config/*",
+        .uri = "/api/config/*",
         .method = HTTP_PUT,
         .handler =
             [](httpd_req_t* req) {
@@ -73,8 +73,8 @@ class HTTPConfigHandler : public HTTPServerHandler {
    * @return esp_err_t
    */
   esp_err_t handle_config_get(httpd_req_t* req) {
-    // get the URL tail after /config
-    String url_tail = String(req->uri).substring(7);
+    // get the URL tail after /api/config
+    String url_tail = String(req->uri).substring(11);
     char url_tail_cstr[url_tail.length() + 1];
     urldecode2(url_tail_cstr, url_tail.c_str());
     url_tail = String(url_tail_cstr);
@@ -120,8 +120,8 @@ class HTTPConfigHandler : public HTTPServerHandler {
       return ESP_FAIL;
     }
 
-    // get the URL tail after /config
-    String url_tail = String(req->uri).substring(7);
+    // get the URL tail after /api/config
+    String url_tail = String(req->uri).substring(11);
     if (url_tail.length() == 0) {
       httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST,
                           "No configuration path specified");

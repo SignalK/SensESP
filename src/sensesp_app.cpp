@@ -30,8 +30,7 @@ void SensESPApp::setup() {
 
   // create the networking object
   networking_ =
-      new Networking("/System/WiFi Settings", ssid_, wifi_password_,
-                     SensESPBaseApp::get_hostname());
+      new Networking("/System/WiFi Settings", ssid_, wifi_client_password_);
 
   if (ota_password_ != nullptr) {
     // create the OTA object
@@ -43,7 +42,8 @@ void SensESPApp::setup() {
 
   // Add the default HTTP server response handlers
   this->http_static_file_handler_ = new HTTPStaticFileHandler(kWebUIFiles);
-  add_http_command_handlers(this->http_server_);
+  add_base_app_http_command_handlers(this->http_server_);
+  add_app_http_command_handlers(this->http_server_);
 
   this->http_config_handler_ = new HTTPConfigHandler();
 

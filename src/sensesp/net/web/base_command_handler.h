@@ -1,5 +1,5 @@
-#ifndef SENSESP_NET_HTTP_COMMAND_HANDLER_H_
-#define SENSESP_NET_HTTP_COMMAND_HANDLER_H_
+#ifndef SENSESP_NET_WEB_BASE_COMMAND_HANDLER_H_
+#define SENSESP_NET_WEB_BASE_COMMAND_HANDLER_H_
 
 #include <esp_http_server.h>
 
@@ -182,7 +182,47 @@ class HTTPRoutesHandler : public HTTPServerHandler {
   virtual void get_routes();
 };
 
-void add_http_command_handlers(HTTPServer* server);
+class HTTPScanNetworksHandler : public HTTPServerHandler {
+ public:
+  HTTPScanNetworksHandler() : HTTPServerHandler(){};
+  virtual void set_handler(HTTPServer* server) override {
+    // handler for GET /device/restart
+    const httpd_uri_t scan_networks_handler = {
+        .uri = "/api/networks",
+        .method = HTTP_GET,
+        .handler =
+            [](httpd_req_t* req) {
+              return call_member_handler(req,
+                                         &HTTPScanNetworksHandler::handle_get);
+            },
+        .user_ctx = (void*)this,
+    };
+    server->register_handler(&scan_networks_handler);
+  };
+
+ protected:
+  esp_err_t handle_get(httpd_req_t* req) {
+    int buffer_size = 4000;
+    DynamicJsonDocument json_doc(buffer_size);
+    JsonArray networks_json = json_doc.to<JsonArray>();
+
+    int16_t num_networks = WiFi.scanNetworks();
+    for (int i = 0; i < num_networks; i++) {
+      JsonObject network_json = json_doc.createNestedObject();
+      network_json["ssid"] = WiFi.SSID(i);
+      network_json["rssi"] = WiFi.RSSI(i);
+      network_json["encryption"] = WiFi.encryptionType(i);
+    }
+
+    String response;
+    serializeJson(json_doc, response);
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_sendstr(req, response.c_str());
+    return ESP_OK;
+  }
+};
+
+void add_base_app_http_command_handlers(HTTPServer* server);
 
 }  // namespace sensesp
 

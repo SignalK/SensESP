@@ -2,9 +2,7 @@
 #define _networking_H_
 
 #include "Arduino.h"
-
 #include "WiFi.h"
-
 #include "sensesp/net/wifi_state.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
@@ -13,6 +11,8 @@
 #include "sensesp/system/valueproducer.h"
 
 namespace sensesp {
+
+constexpr int kMaxNumClientConfigs = 3;
 
 /**
  * @brief Provide information about the current WiFi state.
@@ -95,6 +95,128 @@ class WiFiStateProducer : public ValueProducer<WiFiState>, public Startable {
 };
 
 /**
+ * @brief Storage object for WiFi access point settings.
+ *
+ */
+class AccessPointSettings {
+ public:
+  AccessPointSettings(bool enabled = true, String ssid = "SensESP",
+                      String password = "thisisfine", int channel = 9,
+                      bool hidden = false)
+      : enabled_{enabled},
+        ssid_{ssid},
+        password_{password},
+        channel_{channel},
+        hidden_{hidden} {};
+
+  bool enabled_;
+  String ssid_;
+  String password_;
+  int channel_;
+  bool hidden_;
+
+  static AccessPointSettings from_json(const JsonObject& json) {
+    AccessPointSettings settings;
+    settings.enabled_ = json["enabled"] | false;
+    settings.ssid_ = json["name"] | "";
+    settings.password_ = json["password"] | "";
+    settings.channel_ = json["channel"] | 1;
+    settings.hidden_ = json["hidden"] | false;
+    return settings;
+  }
+
+  void as_json(JsonObject& doc) {
+    doc["enabled"] = enabled_;
+    doc["name"] = ssid_;
+    doc["password"] = password_;
+    doc["channel"] = channel_;
+    doc["hidden"] = hidden_;
+  }
+};
+
+/**
+ * @brief Storage object for WiFi client settings.
+ *
+ */
+class ClientSSIDConfig {
+ public:
+  ClientSSIDConfig(String ssid = "", String password = "", bool use_dhcp = true,
+                   IPAddress ip = IPAddress(169, 254, 0, 1),
+                   IPAddress netmask = IPAddress(255, 255, 255, 0),
+                   IPAddress gateway = IPAddress(192, 168, 0, 1),
+                   IPAddress dns_server = IPAddress(8, 8, 8, 8))
+      : ssid_{ssid},
+        password_{password},
+        use_dhcp_{use_dhcp},
+        ip_{ip},
+        netmask_{netmask},
+        gateway_{gateway},
+        dns_server_{dns_server} {};
+
+  String ssid_;
+  String password_;
+  bool use_dhcp_;
+  IPAddress ip_;
+  IPAddress netmask_;
+  IPAddress gateway_;
+  IPAddress dns_server_;
+
+  static ClientSSIDConfig from_json(const JsonObject& json) {
+    ClientSSIDConfig config;
+    config.ssid_ = json["name"] | "";
+    config.password_ = json["password"] | "";
+    config.use_dhcp_ = json["useDHCP"] | true;
+    config.ip_.fromString(json["ipAddress"] | "169.254.0.1");
+    config.netmask_.fromString(json["netmask"] | "255.255.255.0");
+    config.gateway_.fromString(json["gateway"] | "192.168.0.1");
+    config.dns_server_.fromString(json["dnsServer"] | "8.8.8.8");
+    return config;
+  }
+
+  void as_json(JsonObject& doc) {
+    doc["name"] = ssid_;
+    doc["password"] = password_;
+    doc["useDHCP"] = use_dhcp_;
+    doc["ipAddress"] = ip_.toString();
+    doc["netmask"] = netmask_.toString();
+    doc["gateway"] = gateway_.toString();
+    doc["dnsServer"] = dns_server_.toString();
+  }
+};
+
+/**
+ * @brief WiFi Network Information storage class.
+ *
+ */
+class WiFiNetworkInfo {
+ public:
+  WiFiNetworkInfo()
+      : ssid_{""}, rssi_{0}, encryption_{0}, bssid_{0}, channel_{0} {}
+  WiFiNetworkInfo(String ssid, int32_t rssi, uint8_t encryption, uint8_t* bssid,
+                  int32_t channel)
+      : ssid_{ssid}, rssi_{rssi}, encryption_{encryption}, channel_{channel} {
+    memcpy(bssid_, bssid, 6);
+  }
+
+  String ssid_;
+  int32_t rssi_;
+  uint8_t encryption_;
+  uint8_t bssid_[6];
+  int32_t channel_;
+
+  void as_json(JsonObject& doc) {
+    doc["ssid"] = ssid_;
+    doc["rssi"] = rssi_;
+    doc["encryption"] = encryption_;
+    doc["channel"] = channel_;
+    // Add bssid as a string
+    doc["bssid"] = String(bssid_[0], HEX) + ":" + String(bssid_[1], HEX) + ":" +
+                   String(bssid_[2], HEX) + ":" + String(bssid_[3], HEX) + ":" +
+                   String(bssid_[4], HEX) + ":" + String(bssid_[5], HEX);
+  }
+};
+
+/**
  * @brief Manages the ESP's connection to the Wifi network.
  */
 class Networking : public Configurable,
@@ -102,18 +224,20 @@ class Networking : public Configurable,
                    public Resettable,
                    public ValueProducer<WiFiState> {
  public:
-  Networking(String config_path, String ssid, String password, String hostname);
+  Networking(String config_path, String client_ssid = "",
+             String client_password = "");
   virtual void start() override;
   virtual void reset() override;
 
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
-  virtual String get_config_schema() override;
 
-  void set_ap_mode(bool state) { ap_mode_ = state; }
+  void start_wifi_scan();
+  int16_t get_wifi_scan_results(std::vector<WiFiNetworkInfo>& ssid_list);
 
  protected:
-  void setup_client();
+  void start_access_point();
+  void start_client_autoconnect();
 
   // callbacks
 
@@ -122,24 +246,10 @@ class Networking : public Configurable,
   void wifi_disconnected();
 
  private:
-  // If true, the device will set up its own WiFi access point
+  AccessPointSettings ap_settings_;
 
-  bool ap_mode_ = false;
-
-  // Values saved from previous configuration
-
-  String ap_ssid = "";
-  String ap_password = "";
-
-  // hardcoded values provided as constructor parameters
-
-  String preset_ssid = "";
-  String preset_password = "";
-  String preset_hostname = "";
-
-  // original value of hardcoded hostname; used to detect changes
-  // in the hardcoded value
-  String default_hostname = "";
+  bool client_enabled_ = false;
+  std::vector<ClientSSIDConfig> client_settings_;
 
   WiFiStateProducer* wifi_state_producer;
 };
