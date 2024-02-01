@@ -1,6 +1,7 @@
 #ifndef _observablevalue_H
 #define _observablevalue_H
 
+#include "configurable.h"
 #include "observable.h"
 #include "valueproducer.h"
 
@@ -26,21 +27,54 @@ bool operator!=(ObservableValue<T> const& lhs, T const& rhs) {
 template <class T>
 class ObservableValue : public ValueProducer<T> {
  public:
-  ObservableValue() {}
+  ObservableValue() : ValueProducer<T>() {}
 
-  ObservableValue(const T& value) { ValueProducer<T>::output = value; }
+  ObservableValue(const T& value) : ValueProducer<T>(value) {}
 
-  void set(const T& value) { this->ValueProducer<T>::emit(value); }
+  virtual void set(const T& value) { this->ValueProducer<T>::emit(value); }
 
   const T& operator=(const T& value) {
     set(value);
     return value;
   }
 
+ protected:
   template <class U>
   friend bool operator==(ObservableValue<U> const& lhs, U const& rhs);
   template <class U>
   friend bool operator!=(ObservableValue<U> const& lhs, U const& rhs);
+};
+
+template <class T>
+class PersistingObservableValue : public ObservableValue<T>,
+                                  public Configurable {
+ public:
+  PersistingObservableValue() : Configurable() {}
+
+  PersistingObservableValue(const T& value, String config_path = "",
+                            String description = "", int sort_order = 0)
+      : ObservableValue<T>(value),
+        Configurable(config_path, description, sort_order) {
+    load_configuration();
+  }
+
+  virtual void set(const T& value) override {
+    ObservableValue<T>::set(value);
+    this->save_configuration();
+  }
+
+ protected:
+  virtual void get_configuration(JsonObject& doc) override {
+    doc["value"] = this->output;
+  }
+
+  virtual bool set_configuration(const JsonObject& config) override {
+    if (!config.containsKey("value")) {
+      return false;
+    }
+    ObservableValue<T>::set(config["value"]);
+    return true;
+  }
 };
 
 }  // namespace sensesp

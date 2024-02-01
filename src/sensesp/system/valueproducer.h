@@ -24,6 +24,7 @@ template <typename T>
 class ValueProducer : virtual public Observable {
  public:
   ValueProducer() {}
+  ValueProducer(const T& initial_value) : output(initial_value) {}
 
   /**
    * Returns the current value of this producer

@@ -68,7 +68,7 @@ class SensESPBaseApp {
 
   static SensESPBaseApp* instance_;
 
-  ObservableValue<String>* hostname_;
+  PersistingObservableValue<String>* hostname_;
 
   Filesystem* filesystem_;
   DebugOutput* debug_output_;
