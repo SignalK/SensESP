@@ -81,7 +81,7 @@ void SensESPApp::setup() {
     system_status_led_ = new SystemStatusLed(LED_PIN);
   }
   this->system_status_controller_.connect_to(system_status_led_);
-  this->ws_client_->get_delta_count_producer().connect_to(system_status_led_);
+  this->ws_client_->get_delta_tx_count_producer().connect_to(system_status_led_);
 
   // create the button handler
   if (button_gpio_pin_ != -1) {

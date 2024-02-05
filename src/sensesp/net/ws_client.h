@@ -1,11 +1,11 @@
 #ifndef _ws_client_H_
 #define _ws_client_H_
 
-#include <functional>
-#include <set>
-
 #include <WiFi.h>
 #include <esp_websocket_client.h>
+
+#include <functional>
+#include <set>
 
 #include "sensesp.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
@@ -14,6 +14,7 @@
 #include "sensesp/system/startable.h"
 #include "sensesp/system/task_queue_producer.h"
 #include "sensesp/system/valueproducer.h"
+#include "sensesp/transforms/integrator.h"
 
 namespace sensesp {
 
@@ -48,11 +49,20 @@ class WSClient : public Configurable,
   virtual bool set_configuration(const JsonObject& config) override final;
 
   /**
-   * Return a delta update ValueProducer that produces the number of sent deltas
-   * (ordinarily always 1)
+   * Return a delta update ValueProducer that produces the number of sent
+   * deltas.
    */
-  ValueProducer<int>& get_delta_count_producer() {
-    return delta_count_producer_;
+  ValueProducer<int>& get_delta_tx_count_producer() {
+    return delta_tx_count_producer_;
+  };
+
+  /**
+   * @brief Get the delta rx count producer object.
+   *
+   * @return ValueProducer<int>&
+   */
+  ValueProducer<int>& get_delta_rx_count_producer() {
+    return delta_rx_count_producer_;
   };
 
   String get_connection_status();
@@ -94,7 +104,8 @@ class WSClient : public Configurable,
   bool token_test_success_ = false;
 
   TaskQueueProducer<WSConnectionState> connection_state_ =
-      TaskQueueProducer<WSConnectionState>(WSConnectionState::kWSDisconnected, ReactESP::app);
+      TaskQueueProducer<WSConnectionState>(WSConnectionState::kWSDisconnected,
+                                           ReactESP::app);
 
   /// task_connection_state is used to track the internal task state which might
   /// be out of sync with the published connection state.
@@ -103,8 +114,11 @@ class WSClient : public Configurable,
   WiFiClient wifi_client_;
   esp_websocket_client_handle_t client_;
   SKDeltaQueue* sk_delta_queue_;
-  TaskQueueProducer<int> delta_count_producer_ =
+  /// @brief Emits the number of deltas sent since last report
+  TaskQueueProducer<int> delta_tx_tick_producer_ =
       TaskQueueProducer<int>(0, ReactESP::app, 5, 990);
+  IntegratorT<int, int> delta_tx_count_producer_{1, 0, ""};
+  IntegratorT<int, int> delta_rx_count_producer_{1, 0, ""};
 
   SemaphoreHandle_t received_updates_semaphore_ =
       xSemaphoreCreateRecursiveMutex();
@@ -147,7 +161,6 @@ class WSClient : public Configurable,
     connection_state_.set(state);
   }
   WSConnectionState get_connection_state() { return task_connection_state_; }
-
 };
 
 }  // namespace sensesp

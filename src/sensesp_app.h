@@ -13,18 +13,18 @@
 #include "sensesp/net/debug_output.h"
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
-#include "sensesp/net/web/static_file_handler.h"
-#include "sensesp/net/web/config_handler.h"
-#include "sensesp/net/web/base_command_handler.h"
-#include "sensesp/net/web/app_command_handler.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
+#include "sensesp/net/web/app_command_handler.h"
+#include "sensesp/net/web/base_command_handler.h"
+#include "sensesp/net/web/config_handler.h"
+#include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/net/ws_client.h"
 #include "sensesp/sensesp_version.h"
 #include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
-#include "sensesp/system/system_status_led.h"
 #include "sensesp/system/button.h"
+#include "sensesp/system/system_status_led.h"
 #include "sensesp/ui/ui_output.h"
 #include "sensesp_base_app.h"
 
@@ -70,9 +70,7 @@ class SensESPApp : public SensESPBaseApp {
    * be instantiated using SensESPAppBuilder.
    *
    */
-  SensESPApp() : SensESPBaseApp() {
-    hostname_->connect_to(hostname_ui_output_);
-  }
+  SensESPApp() : SensESPBaseApp() {}
 
   // setters for all constructor arguments
 
@@ -138,10 +136,10 @@ class SensESPApp : public SensESPBaseApp {
   SKDeltaQueue* sk_delta_queue_;
   WSClient* ws_client_;
 
-  UIOutput<String>* build_info_ui_output_ =
-      new UIOutput<String>("Build date", __DATE__ " " __TIME__, "Software", 2000);
   UIOutput<String>* sensesp_version_ui_output_ = new UIOutput<String>(
       "SenseESP version", kSensESPVersion, "Software", 1900);
+  UIOutput<String>* build_info_ui_output_ = new UIOutput<String>(
+      "Build date", __DATE__ " " __TIME__, "Software", 2000);
   UILambdaOutput<String>* hostname_ui_output_ = new UILambdaOutput<String>(
       "Hostname", [this]() { return this->hostname_->get(); }, "Network", 500);
   UIOutput<String>* mac_address_ui_output_ =
@@ -154,17 +152,25 @@ class SensESPApp : public SensESPBaseApp {
   UILambdaOutput<String>* sk_server_address_ui_output_ =
       new UILambdaOutput<String>(
           "Signal K server address",
-          [this]() { return ws_client_->get_server_address(); }, "Network",
+          [this]() { return ws_client_->get_server_address(); }, "Signal K",
           1400);
   UILambdaOutput<uint16_t>* sk_server_port_ui_output_ =
       new UILambdaOutput<uint16_t>(
           "Signal K server port",
-          [this]() { return ws_client_->get_server_port(); }, "Network", 1500);
+          [this]() { return ws_client_->get_server_port(); }, "Signal K", 1500);
   UILambdaOutput<String>* sk_server_connection_ui_output_ =
       new UILambdaOutput<String>(
           "SK connection status",
-          [this]() { return ws_client_->get_connection_status(); }, "Network",
+          [this]() { return ws_client_->get_connection_status(); }, "Signal K",
           1600);
+  UILambdaOutput<int>* delta_tx_count_ui_output_ = new UILambdaOutput<int>(
+      "SK Delta TX count",
+      [this]() { return ws_client_->get_delta_tx_count_producer().get(); },
+      "Signal K", 1700);
+  UILambdaOutput<int>* delta_rx_count_ui_output_ = new UILambdaOutput<int>(
+      "SK Delta RX count",
+      [this]() { return ws_client_->get_delta_rx_count_producer().get(); },
+      "Signal K", 1800);
 
   friend class WebServer;
   friend class SensESPAppBuilder;

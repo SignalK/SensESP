@@ -1,4 +1,3 @@
-#include "sensesp.h"
 #include "ws_client.h"
 
 #include <ArduinoJson.h>
@@ -8,6 +7,7 @@
 
 #include "Arduino.h"
 #include "elapsedMillis.h"
+#include "sensesp.h"
 #include "sensesp/signalk/signalk_listener.h"
 #include "sensesp/signalk/signalk_put_request.h"
 #include "sensesp/signalk/signalk_put_request_listener.h"
@@ -97,6 +97,9 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
   ws_client = this;
 
   load_configuration();
+
+  // Connect the counters
+  delta_tx_tick_producer_.connect_to(&delta_tx_count_producer_);
 }
 
 void WSClient::start() {
@@ -275,6 +278,7 @@ void WSClient::process_received_updates() {
       SKPutListener::get_listeners();
 
   take_received_updates_semaphore();
+  int num_updates = received_updates_.size();
   while (!received_updates_.empty()) {
     JsonObject value = received_updates_.front();
     received_updates_.pop_front();
@@ -295,6 +299,7 @@ void WSClient::process_received_updates() {
     }
   }
   release_received_updates_semaphore();
+  delta_rx_count_producer_.set_input(num_updates);
 
   SKListener::release_semaphore();
 }
@@ -620,7 +625,8 @@ void WSClient::connect_ws(const String host, const uint16_t port) {
   this->client_ = esp_websocket_client_init(&websocket_cfg);
   debugD("Registering websocket event handler...");
   error = esp_websocket_register_events(this->client_, WEBSOCKET_EVENT_ANY,
-                                websocket_event_handler, (void*)this->client_);
+                                        websocket_event_handler,
+                                        (void*)this->client_);
   if (error != ESP_OK) {
     debugE("Error registering websocket event handler: %d", error);
   }
@@ -651,7 +657,7 @@ void WSClient::send_delta() {
       esp_websocket_client_send_text(this->client_, output.c_str(),
                                      output.length(), portMAX_DELAY);
       // This automatically notifies the observers
-      this->delta_count_producer_.set(1);
+      this->delta_tx_tick_producer_.set(1);
     }
   }
 }
