@@ -15,8 +15,9 @@ namespace sensesp {
  * SensESP supports the ADS1015 and ADS1115 ADC's.
  *
  * @param[in] pin The GPIO pin to read. On ESP32, at
- * the moment only ADC channel 1 (pins 32..39) is supported because
- * ADC2 clashes with Wi-Fi.
+ * the moment only ADC channel 1 (pins 32..39) is fully supported because
+ * ADC2 clashes with WiFi. But you can use pins 13, 25, 26, and 27 on ADC2
+ * if you aren't using WiFi in your project.
  *
  * @param[in] read_delay Time delay between consecutive readings, in ms
  *
