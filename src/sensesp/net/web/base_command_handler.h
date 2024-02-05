@@ -7,6 +7,8 @@
 
 #include "ArduinoJson.h"
 #include "sensesp/net/http_server.h"
+#include "sensesp/net/web/autogen/web_ui_files.h"
+#include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/ui/ui_output.h"
 #include "sensesp_base_app.h"
@@ -140,9 +142,7 @@ class RouteDefinition {
 
 class HTTPRoutesHandler : public HTTPServerHandler {
  public:
-  HTTPRoutesHandler() : HTTPServerHandler() {
-    this->get_routes();
-  };
+  HTTPRoutesHandler() : HTTPServerHandler() { this->get_routes(); };
 
   virtual void set_handler(HTTPServer* server) override {
     // handler for GET /device/restart
@@ -156,6 +156,33 @@ class HTTPRoutesHandler : public HTTPServerHandler {
         .user_ctx = (void*)this,
     };
     server->register_handler(&routes_handler);
+
+    StaticFileData* root_page = nullptr;
+    for (int i = 0; i < sizeof(kWebUIFiles) / sizeof(StaticFileData); i++) {
+      if (strcmp(kWebUIFiles[i].url, "/") == 0) {
+        root_page = (StaticFileData*)&kWebUIFiles[i];
+        break;
+      }
+    }
+    if (root_page == nullptr) {
+      debugE("Root page not found in kWebUIFiles");
+      return;
+    }
+
+    // Loop through routes and register to return the root page
+    for (auto it = routes_.begin(); it != routes_.end(); ++it) {
+      String path = it->get_path();
+      const httpd_uri_t route_handler = {
+          .uri = path.c_str(),
+          .method = HTTP_GET,
+          .handler =
+              [](httpd_req_t* req) {
+                return call_static_handler(
+                    req, &HTTPStaticFileHandler::string_handler);
+              },
+          .user_ctx = (void*)root_page};
+      server->register_handler(&route_handler);
+    }
   };
 
  protected:
@@ -186,7 +213,6 @@ class HTTPScanNetworksHandler : public HTTPServerHandler {
  public:
   HTTPScanNetworksHandler() : HTTPServerHandler(){};
   virtual void set_handler(HTTPServer* server) override {
-    // handler for GET /device/restart
     const httpd_uri_t scan_networks_handler = {
         .uri = "/api/networks",
         .method = HTTP_GET,
