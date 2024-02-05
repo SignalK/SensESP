@@ -142,8 +142,8 @@ class SensESPApp : public SensESPBaseApp {
       new UIOutput<String>("Built at", __DATE__ " " __TIME__, "Software", 2000);
   UIOutput<String>* sensesp_version_ui_output_ = new UIOutput<String>(
       "SenseESP version", kSensESPVersion, "Software", 1900);
-  UIOutput<String>* hostname_ui_output_ =
-      new UIOutput<String>("Hostname", "", "Network", 500);
+  UILambdaOutput<String>* hostname_ui_output_ = new UILambdaOutput<String>(
+      "Hostname", [this]() { return this->hostname_->get(); }, "Network", 500);
   UIOutput<String>* mac_address_ui_output_ =
       new UIOutput<String>("MAC Address", WiFi.macAddress(), "Network", 1100);
   UILambdaOutput<String>* wifi_ssid_ui_output_ = new UILambdaOutput<String>(
