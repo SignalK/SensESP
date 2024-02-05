@@ -69,9 +69,9 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
 }
 
 void CurveInterpolator::get_configuration(JsonObject& root) {
-  JsonArray json_samples = root.createNestedArray("samples");
+  JsonArray json_samples = root["samples"].to<JsonArray>();
   for (auto& sample : samples_) {
-    auto entry = json_samples.createNestedObject();
+    auto entry = json_samples.add<JsonObject>();
     if( entry.isNull() ) {
       debugE("No memory for sample");
     }

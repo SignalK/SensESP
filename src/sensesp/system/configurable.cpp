@@ -68,7 +68,7 @@ void Configurable::load_configuration() {
   }
 
   File f = SPIFFS.open(*filename, "r");
-  DynamicJsonDocument jsonDoc(2048);
+  JsonDocument jsonDoc;
   auto error = deserializeJson(jsonDoc, f);
   if (error) {
     debugW("WARNING: Could not parse configuration for %s",
@@ -95,8 +95,8 @@ void Configurable::save_configuration() {
   debugD("Saving configuration path %s to file %s", config_path_.c_str(),
          hash_path.c_str());
 
-  DynamicJsonDocument jsonDoc(2048);
-  JsonObject obj = jsonDoc.createNestedObject("root");
+  JsonDocument jsonDoc;
+  JsonObject obj = jsonDoc["root"].to<JsonObject>();
   get_configuration(obj);
   File f = SPIFFS.open(hash_path, "w");
   serializeJson(obj, f);

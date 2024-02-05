@@ -160,19 +160,18 @@ void Networking::start_client_autoconnect() {
  *
  */
 void Networking::get_configuration(JsonObject& root) {
-  JsonObject apSettingsJson = root.createNestedObject("apSettings");
+  JsonObject apSettingsJson = root["apSettings"].to<JsonObject>();
   ap_settings_.as_json(apSettingsJson);
 
-  JsonObject clientSettingsJson = root.createNestedObject("clientSettings");
+  JsonObject clientSettingsJson = root["clientSettings"].to<JsonObject>();
   clientSettingsJson["enabled"] = client_enabled_;
-  JsonArray clientConfigsJson =
-      clientSettingsJson.createNestedArray("settings");
+  JsonArray clientConfigsJson = clientSettingsJson["settings"].to<JsonArray>();
   int num_serialized = 0;
   for (auto& config : client_settings_) {
     if (num_serialized++ >= kMaxNumClientConfigs) {
       break;
     }
-    JsonObject clientConfigJson = clientConfigsJson.createNestedObject();
+    JsonObject clientConfigJson = clientConfigsJson.add<JsonObject>();
     config.as_json(clientConfigJson);
   }
 }

@@ -30,7 +30,7 @@ class UIOutputBase : virtual public Observable {
 
   String& get_name() { return name_; }
 
-  virtual DynamicJsonDocument as_json() = 0;
+  virtual JsonDocument as_json() = 0;
 
   static const std::map<String, UIOutputBase*>* get_ui_outputs() {
     return &ui_outputs_;
@@ -50,8 +50,8 @@ class UILambdaOutput : public UIOutputBase {
 
   T get() { return value_function_(); }
 
-  virtual DynamicJsonDocument as_json() override {
-    DynamicJsonDocument obj(200);
+  virtual JsonDocument as_json() override {
+    JsonDocument obj;
     obj["name"] = name_;
     obj["value"] = get();
     obj["group"] = group_;
@@ -76,8 +76,8 @@ class UIOutput : public UIOutputBase,
     this->ObservableValue<T>::emit(value);
   }
 
-  virtual DynamicJsonDocument as_json() override {
-    DynamicJsonDocument obj(200);
+  virtual JsonDocument as_json() override {
+    JsonDocument obj;
     obj["name"] = name_;
     obj["value"] = ObservableValue<T>::get();
     obj["group"] = group_;

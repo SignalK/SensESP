@@ -53,9 +53,8 @@ class HTTPConfigHandler : public HTTPServerHandler {
    * @return esp_err_t
    */
   esp_err_t handle_config_list(httpd_req_t* req) {
-    auto output_buffer_size = 200 * configurables.size();
-    DynamicJsonDocument json_doc(output_buffer_size);
-    JsonArray arr = json_doc.createNestedArray("keys");
+    JsonDocument json_doc;
+    JsonArray arr = json_doc["keys"].to<JsonArray>();
     for (auto it = configurables.begin(); it != configurables.end(); ++it) {
       arr.add(it->first);
     }
@@ -93,9 +92,9 @@ class HTTPConfigHandler : public HTTPServerHandler {
     Configurable* confable = it->second;
 
     // get the configuration
-    DynamicJsonDocument doc(2048);
+    JsonDocument doc;
     String response;
-    JsonObject config = doc.createNestedObject("config");
+    JsonObject config = doc["config"].to<JsonObject>();
     confable->get_configuration(config);
     doc["schema"] = serialized(confable->get_config_schema());
     doc["description"] = confable->get_description();
@@ -154,7 +153,7 @@ class HTTPConfigHandler : public HTTPServerHandler {
     content[content_len] = '\0';
 
     // parse the content as JSON
-    DynamicJsonDocument doc(1024);
+    JsonDocument doc;
     DeserializationError error = deserializeJson(doc, content);
     if (error) {
       httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST,

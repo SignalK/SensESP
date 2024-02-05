@@ -28,7 +28,7 @@ void setup() {
   // take some boolean input and convert it into a simple serialized JSON
   // document
   auto jsonify = new LambdaTransform<bool, String>([](bool input) -> String {
-    DynamicJsonDocument doc(1024);
+    JsonDocument doc;
     doc["output_1"] = input;
     String output;
     serializeJson(doc, output);

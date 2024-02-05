@@ -74,8 +74,8 @@ class WSClient : public Configurable,
   void on_error();
   void on_connected();
   void on_receive_delta(uint8_t* payload);
-  void on_receive_updates(DynamicJsonDocument& message);
-  void on_receive_put(DynamicJsonDocument& message);
+  void on_receive_updates(JsonDocument& message);
+  void on_receive_put(JsonDocument& message);
   void connect();
   void loop();
   bool is_connected();

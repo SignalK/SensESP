@@ -45,10 +45,10 @@ void HTTPScanWiFiNetworksHandler::set_handler(HTTPServer* server) {
           return ESP_OK;
         }
         // Construct a JSON array of the scan results
-        DynamicJsonDocument doc(4096);
-        JsonArray networks = doc.createNestedArray("networks");
+        JsonDocument doc;
+        JsonArray networks = doc["networks"].to<JsonArray>();
         for (auto& ssid_info : ssid_list) {
-          JsonObject network = networks.createNestedObject();
+          JsonObject network = networks.add<JsonObject>();
           ssid_info.as_json(network);
         }
         String json_str;

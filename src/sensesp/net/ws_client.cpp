@@ -165,7 +165,7 @@ void WSClient::on_connected() {
  */
 void WSClient::subscribe_listeners() {
   bool output_available = false;
-  DynamicJsonDocument subscription(1024);
+  JsonDocument subscription;
   subscription["context"] = "vessels.self";
 
   SKListener::take_semaphore();
@@ -173,14 +173,14 @@ void WSClient::subscribe_listeners() {
 
   if (listeners.size() > 0) {
     output_available = true;
-    JsonArray subscribe = subscription.createNestedArray("subscribe");
+    JsonArray subscribe = subscription["subscribe"].to<JsonArray>();
 
     for (size_t i = 0; i < listeners.size(); i++) {
       auto* listener = listeners.at(i);
       String sk_path = listener->get_sk_path();
       int listen_delay = listener->get_listen_delay();
 
-      JsonObject subscribePath = subscribe.createNestedObject();
+      JsonObject subscribePath = subscribe.add<JsonObject>();
 
       subscribePath["path"] = sk_path;
       subscribePath["period"] = listen_delay;
@@ -212,7 +212,7 @@ void WSClient::on_receive_delta(uint8_t* payload) {
   debugD("Websocket payload received: %s", (char*)payload);
 #endif
 
-  DynamicJsonDocument message(1024);
+  JsonDocument message;
   // JsonObject message = jsonDoc.as<JsonObject>();
   auto error = deserializeJson(message, payload);
 
@@ -241,7 +241,7 @@ void WSClient::on_receive_delta(uint8_t* payload) {
  *
  * @param message
  */
-void WSClient::on_receive_updates(DynamicJsonDocument& message) {
+void WSClient::on_receive_updates(JsonDocument& message) {
   // Process updates from subscriptions...
   JsonArray updates = message["updates"];
 
@@ -311,7 +311,7 @@ void WSClient::process_received_updates() {
  *
  * @param message
  */
-void WSClient::on_receive_put(DynamicJsonDocument& message) {
+void WSClient::on_receive_put(JsonDocument& message) {
   // Process PUT requests...
   JsonArray puts = message["put"];
   size_t response_count = 0;
@@ -335,7 +335,7 @@ void WSClient::on_receive_put(DynamicJsonDocument& message) {
     SKListener::release_semaphore();
 
     // Send back a request response...
-    DynamicJsonDocument put_response(512);
+    JsonDocument put_response;
     put_response["requestId"] = message["requestId"];
     if (response_count == puts.size()) {
       // We found a response for every PUT request
@@ -487,7 +487,7 @@ void WSClient::send_access_request(const String server_address,
   }
 
   // create a new access request
-  DynamicJsonDocument doc(1024);
+  JsonDocument doc;
   doc["clientId"] = client_id_;
   doc["description"] =
       String("SensESP device: ") + SensESPBaseApp::get_hostname();
@@ -550,7 +550,7 @@ void WSClient::poll_access_request(const String server_address,
   if (httpCode == 200 or httpCode == 202) {
     String payload = http.getString();
     http.end();
-    DynamicJsonDocument doc(1024);
+    JsonDocument doc;
     auto error = deserializeJson(doc, payload.c_str());
     if (error) {
       debugW("WARNING: Could not deserialize http payload.");

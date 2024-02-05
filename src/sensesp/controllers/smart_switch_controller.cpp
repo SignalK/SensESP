@@ -71,7 +71,7 @@ void SmartSwitchController::set_input(String new_value, uint8_t input_channel) {
 }
 
 void SmartSwitchController::get_configuration(JsonObject& root) {
-  JsonArray jPaths = root.createNestedArray("sync_paths");
+  JsonArray jPaths = root["sync_paths"].to<JsonArray>();
   for (auto& path : sync_paths) {
     jPaths.add(path.sk_sync_path);
   }

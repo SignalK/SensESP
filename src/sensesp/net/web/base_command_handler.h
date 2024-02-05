@@ -77,10 +77,7 @@ class HTTPInfoHandler : public HTTPServerHandler {
   esp_err_t handle_get(httpd_req_t* req) {
     auto ui_outputs = UIOutputBase::get_ui_outputs();
 
-    std::size_t output_buffer_size =
-        (200 * ui_outputs->size())     // status output entities
-        + 512;
-    DynamicJsonDocument json_doc(output_buffer_size);
+    JsonDocument json_doc;
     JsonArray info_items = json_doc.to<JsonArray>();
 
     for (auto info_item = ui_outputs->begin(); info_item != ui_outputs->end();
@@ -125,8 +122,8 @@ class RouteDefinition {
   String get_path() { return path_; }
   String get_component_name() { return component_name_; }
 
-  DynamicJsonDocument as_json() {
-    DynamicJsonDocument doc(200);
+  JsonDocument as_json() {
+    JsonDocument doc;
     doc["name"] = name_;
     doc["path"] = path_;
     doc["componentName"] = component_name_;
@@ -189,8 +186,7 @@ class HTTPRoutesHandler : public HTTPServerHandler {
   std::vector<RouteDefinition> routes_;
 
   esp_err_t handle_get(httpd_req_t* req) {
-    int buffer_size = 4000;
-    DynamicJsonDocument json_doc(buffer_size);
+    JsonDocument json_doc;
     JsonArray routes_json = json_doc.to<JsonArray>();
 
     int sz = routes_.size();
@@ -228,13 +224,12 @@ class HTTPScanNetworksHandler : public HTTPServerHandler {
 
  protected:
   esp_err_t handle_get(httpd_req_t* req) {
-    int buffer_size = 4000;
-    DynamicJsonDocument json_doc(buffer_size);
+    JsonDocument json_doc;
     JsonArray networks_json = json_doc.to<JsonArray>();
 
     int16_t num_networks = WiFi.scanNetworks();
     for (int i = 0; i < num_networks; i++) {
-      JsonObject network_json = json_doc.createNestedObject();
+      JsonObject network_json = json_doc.add<JsonObject>();
       network_json["ssid"] = WiFi.SSID(i);
       network_json["rssi"] = WiFi.RSSI(i);
       network_json["encryption"] = WiFi.encryptionType(i);

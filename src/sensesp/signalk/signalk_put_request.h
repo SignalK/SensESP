@@ -31,15 +31,15 @@ class SKRequest {
    *  FAILED response to be received from the server
    * @return The request Id that is sent to the server.
    */
-  static String send_request(DynamicJsonDocument& request,
-                             std::function<void(DynamicJsonDocument&)> callback,
+  static String send_request(JsonDocument& request,
+                             std::function<void(JsonDocument&)> callback,
                              uint32_t timeout = 5000);
 
   /**
    * Is called by the web socket code to handle any incoming request responses
    * that is receives.
    */
-  static void handle_response(DynamicJsonDocument& response);
+  static void handle_response(JsonDocument& response);
 
  protected:
   /// PendingRequest is a utility class used internally for
@@ -47,7 +47,7 @@ class SKRequest {
   class PendingRequest {
    public:
     String request_id;
-    std::function<void(DynamicJsonDocument&)> callback;
+    std::function<void(JsonDocument&)> callback;
     DelayReaction* timeout_cleanup;
   };
 
@@ -117,7 +117,7 @@ class SKPutRequestBase : public SKRequest, public Configurable {
    * Called whenever a response to a request has been
    * received from the server
    */
-  virtual void on_response(DynamicJsonDocument& response);
+  virtual void on_response(JsonDocument& response);
 
   String sk_path;
   uint32_t timeout;
