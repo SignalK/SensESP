@@ -1,6 +1,7 @@
 #include "hash.h"
 
 #include "mbedtls/md.h"
+#include "mbedtls/md5.h"
 #include "mbedtls/base64.h"
 
 #include "sensesp/net/debug_output.h"
@@ -13,8 +14,7 @@ using namespace sensesp;
  * Calculate a SHA-1 hash of the given payload.
  *
  * @param payload_str
- * @param hash_output A 20-character output array
- * @return String
+ * @param hash_output A 20-character binary output array
  */
 void Sha1(String payload_str, uint8_t *hash_output) {
   const char *payload = payload_str.c_str();
@@ -24,7 +24,7 @@ void Sha1(String payload_str, uint8_t *hash_output) {
   mbedtls_md_context_t ctx;
   mbedtls_md_type_t md_type = MBEDTLS_MD_SHA1;
 
-  const size_t payload_length = strlen(payload);
+  const size_t payload_length = payload_str.length();
 
   mbedtls_md_init(&ctx);
   mbedtls_md_setup(&ctx, mbedtls_md_info_from_type(md_type), 0);
@@ -32,6 +32,33 @@ void Sha1(String payload_str, uint8_t *hash_output) {
   mbedtls_md_update(&ctx, (const unsigned char *)payload, payload_length);
   mbedtls_md_finish(&ctx, hash_output);
   mbedtls_md_free(&ctx);
+}
+
+/**
+ * @brief MD5 hash function
+ *
+ * Calculate an MD5 hash of the given payload.
+ *
+ * @param payload_str
+ */
+String MD5(String payload_str){
+  const char *payload = payload_str.c_str();
+  char output[33] = {0};
+
+  const size_t payload_length = payload_str.length();
+
+  mbedtls_md5_context _ctx;
+  uint8_t i;
+  uint8_t _buf[16] = {0};
+  mbedtls_md5_init(&_ctx);
+  mbedtls_md5_starts_ret(&_ctx);
+  mbedtls_md5_update_ret(&_ctx, (const uint8_t *)payload, payload_length);
+  mbedtls_md5_finish_ret(&_ctx, _buf);
+  mbedtls_md5_free(&_ctx);
+  for(i = 0; i < 16; i++) {
+    sprintf(output + (i * 2), "%02x", _buf[i]);
+  }
+  return String(output);
 }
 
 /**
@@ -65,3 +92,4 @@ String Base64Sha1(String payload_str) {
 
   return encoded_str;
 }
+

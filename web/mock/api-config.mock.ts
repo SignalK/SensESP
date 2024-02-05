@@ -58,7 +58,7 @@ export default defineMock(
       }
     },
     {
-      url: '/api/config/system/authentication',
+      url: '/api/config/system/httpserver',
       response(req, resp) {
         if (req.method === 'GET') {
           const doc = {

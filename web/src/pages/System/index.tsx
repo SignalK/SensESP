@@ -37,187 +37,6 @@ function SystemCards(): JSX.Element {
       <ResetCard />
     </div>
   );
-
-  function DeviceNameCard(): JSX.Element {
-    const [origData, setOrigData] = useState<JsonObject>({});
-    const [data, setData] = useState<JsonObject>({});
-    const [errorMessage, setErrorMessage] = useState<string>("");
-
-    const configPath = "/system/hostname";
-
-    const isDirty = origData !== data;
-
-    const fetchData = async (): Promise<void> => {
-      const data: ConfigData = await fetchConfigData(configPath);
-      // Get data.config and set it to config
-      setOrigData(data.config);
-      setData(data.config);
-    };
-
-    async function handleSaveData(): Promise<void> {
-      const success = await saveConfigData(configPath, JSON.stringify(data), (e) => {
-        console.log("Error saving config data", e);
-        setErrorMessage(e.message);
-      });
-      if (success) {
-        setOrigData(data);
-      }
-    }
-
-    const hostname = String(data?.value ?? "");
-    function setHostname(hostname: string): void {
-      // Use immer to update the hostname property of the config object
-      setData(
-        produce(data, (draft) => {
-          draft.value = hostname;
-        }),
-      );
-    }
-
-    useEffect(() => {
-      void fetchData();
-    }, []);
-
-    return (
-      <SystemSettingsCard
-        title={<h5 className="card-title">Device Name</h5>}
-        isDirty={isDirty}
-        handleSaveData={handleSaveData}
-        errorMessage={errorMessage}
-        setErrorMessage={setErrorMessage}
-      >
-        <p className="card-text">
-          The device name is used to identify this device on the network. It is
-          used both as a hostname (e.g. <code>my-device.local</code>) and as an
-          identifying name in the Signal K network.
-        </p>
-        <FormInput
-          label="Hostname"
-          id={`${id}-name`}
-          type="text"
-          value={hostname}
-          onInput={(e: ChangeEvent<HTMLInputElement>) =>
-            setHostname(e.currentTarget.value)
-          }
-        />
-      </SystemSettingsCard>
-    );
-  }
-}
-
-function AuthCard(): JSX.Element {
-  const [origData, setOrigData] = useState<JsonObject>({});
-  const [data, setData] = useState<JsonObject>({});
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const id = useId();
-
-  const configPath = "/system/authentication";
-
-  const isDirty = origData !== data;
-
-  const authEnabled = data?.authEnabled === true;
-  const username = String(data?.username ?? "");
-  const password = String(data?.password ?? "");
-
-  const fetchData = async (): Promise<void> => {
-    const data: ConfigData = await fetchConfigData(configPath);
-    // Get data.config and set it to config
-    setOrigData(data.config);
-    setData(data.config);
-  };
-
-  useEffect(() => {
-    void fetchData();
-  }, []);
-
-  async function handleSaveData(): Promise<void> {
-    const success = await saveConfigData(configPath, JSON.stringify(data), (e) => {
-      console.log("Error saving config data", e);
-      setErrorMessage(e.message);
-    });
-    if (success) {
-      setOrigData(data);
-    }
-  }
-
-  function setAuthEnabled(authEnabled: boolean): void {
-    setData(
-      produce(data, (draft) => {
-        draft.authEnabled = authEnabled;
-      }),
-    );
-  }
-
-  function setUsername(username: string): void {
-    setData(
-      produce(data, (draft) => {
-        draft.username = username;
-      }),
-    );
-  }
-
-  function setPassword(password: string): void {
-    setData(
-      produce(data, (draft) => {
-        draft.password = password;
-      }),
-    );
-  }
-
-  return (
-    <SystemSettingsCard
-      title={<h5 className="card-title">Authentication</h5>}
-      isDirty={isDirty}
-      handleSaveData={handleSaveData}
-      errorMessage={errorMessage}
-      setErrorMessage={setErrorMessage}
-    >
-      <p className="card-text">
-        Authentication is used to restrict access to the configuration
-        interface. You should disable authentication only if you are using this
-        device on a trusted private network.
-      </p>
-      <div>
-        <FormSwitch
-          label="Enable authentication"
-          id={`${id}-enableAuth`}
-          type="checkbox"
-          checked={authEnabled}
-          onInput={(e) => {
-            setAuthEnabled(e.currentTarget.checked);
-          }}
-        />
-      </div>
-      <div className="row">
-        <div className="col-sm-6">
-          <FormInput
-            label="Username"
-            id={`${id}-username`}
-            type="text"
-            placeholder="Username"
-            value={username}
-            disabled={!authEnabled}
-            onInput={(e: ChangeEvent<HTMLInputElement>) => {
-              setUsername(e.currentTarget.value);
-            }}
-          />
-        </div>
-        <div className="col-sm-6">
-          <FormInput
-            label="Password"
-            id={`${id}-password`}
-            type="password"
-            placeholder="Password"
-            value={password}
-            disabled={!authEnabled}
-            onInput={(e: ChangeEvent<HTMLInputElement>) => {
-              setPassword(e.currentTarget.value);
-            }}
-          />
-        </div>
-      </div>
-    </SystemSettingsCard>
-  );
 }
 
 interface SystemCardProps {
@@ -297,6 +116,197 @@ function SystemSettingsCard({
         </div>
       </SystemCard>
     </>
+  );
+}
+
+function DeviceNameCard(): JSX.Element {
+  const [origData, setOrigData] = useState<JsonObject>({});
+  const [data, setData] = useState<JsonObject>({});
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const id = useId();
+
+  const configPath = "/system/hostname";
+
+  const isDirty = origData !== data;
+
+  const fetchData = async (): Promise<void> => {
+    const data: ConfigData = await fetchConfigData(configPath);
+    // Get data.config and set it to config
+    setOrigData(data.config);
+    setData(data.config);
+  };
+
+  async function handleSaveData(): Promise<void> {
+    const success = await saveConfigData(
+      configPath,
+      JSON.stringify(data),
+      (e) => {
+        console.log("Error saving config data", e);
+        setErrorMessage(e.message);
+      },
+    );
+    if (success) {
+      setOrigData(data);
+    }
+  }
+
+  const hostname = String(data?.value ?? "");
+  function setHostname(hostname: string): void {
+    // Use immer to update the hostname property of the config object
+    setData(
+      produce(data, (draft) => {
+        draft.value = hostname;
+      }),
+    );
+  }
+
+  useEffect(() => {
+    void fetchData();
+  }, []);
+
+  return (
+    <SystemSettingsCard
+      title={<h5 className="card-title">Device Name</h5>}
+      isDirty={isDirty}
+      handleSaveData={handleSaveData}
+      errorMessage={errorMessage}
+      setErrorMessage={setErrorMessage}
+    >
+      <p className="card-text">
+        The device name is used to identify this device on the network. It is
+        used both as a hostname (e.g. <code>my-device.local</code>) and as an
+        identifying name in the Signal K network.
+      </p>
+      <FormInput
+        label="Hostname"
+        id={`${id}-name`}
+        type="text"
+        value={hostname}
+        onInput={(e: ChangeEvent<HTMLInputElement>) =>
+          setHostname(e.currentTarget.value)
+        }
+      />
+    </SystemSettingsCard>
+  );
+}
+
+function AuthCard(): JSX.Element {
+  const [origData, setOrigData] = useState<JsonObject>({});
+  const [data, setData] = useState<JsonObject>({});
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const id = useId();
+
+  const configPath = "/system/httpserver";
+
+  const isDirty = origData !== data;
+
+  const authEnabled = data?.auth_required === true;
+  const username = String(data?.username ?? "");
+  const password = String(data?.password ?? "");
+
+  const fetchData = async (): Promise<void> => {
+    const data: ConfigData = await fetchConfigData(configPath);
+    // Get data.config and set it to config
+    setOrigData(data.config);
+    setData(data.config);
+  };
+
+  useEffect(() => {
+    void fetchData();
+  }, []);
+
+  async function handleSaveData(): Promise<void> {
+    const success = await saveConfigData(
+      configPath,
+      JSON.stringify(data),
+      (e) => {
+        console.log("Error saving config data", e);
+        setErrorMessage(e.message);
+      },
+    );
+    if (success) {
+      setOrigData(data);
+    }
+  }
+
+  function setAuthEnabled(authEnabled: boolean): void {
+    setData(
+      produce(data, (draft) => {
+        draft.auth_required = authEnabled;
+      }),
+    );
+  }
+
+  function setUsername(username: string): void {
+    setData(
+      produce(data, (draft) => {
+        draft.username = username;
+      }),
+    );
+  }
+
+  function setPassword(password: string): void {
+    setData(
+      produce(data, (draft) => {
+        draft.password = password;
+      }),
+    );
+  }
+
+  return (
+    <SystemSettingsCard
+      title={<h5 className="card-title">Authentication</h5>}
+      isDirty={isDirty}
+      handleSaveData={handleSaveData}
+      errorMessage={errorMessage}
+      setErrorMessage={setErrorMessage}
+    >
+      <p className="card-text">
+        Authentication is used to restrict access to the configuration
+        interface. You should disable authentication only if you are using this
+        device on a trusted private network.
+      </p>
+      <div>
+        <FormSwitch
+          label="Enable authentication"
+          id={`${id}-enableAuth`}
+          type="checkbox"
+          checked={authEnabled}
+          onInput={(e) => {
+            setAuthEnabled(e.currentTarget.checked);
+          }}
+        />
+      </div>
+      <div className="row">
+        <div className="col-sm-6">
+          <FormInput
+            label="Username"
+            id={`${id}-username`}
+            type="text"
+            placeholder="Username"
+            value={username}
+            disabled={!authEnabled}
+            onInput={(e: ChangeEvent<HTMLInputElement>) => {
+              setUsername(e.currentTarget.value);
+            }}
+          />
+        </div>
+        <div className="col-sm-6">
+          <FormInput
+            label="Password"
+            id={`${id}-password`}
+            type="password"
+            placeholder="Password"
+            value={password}
+            disabled={!authEnabled}
+            onInput={(e: ChangeEvent<HTMLInputElement>) => {
+              setPassword(e.currentTarget.value);
+            }}
+          />
+        </div>
+      </div>
+    </SystemSettingsCard>
   );
 }
 

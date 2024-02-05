@@ -4,11 +4,15 @@
 #include <ESPmDNS.h>
 #include <esp_http_server.h>
 
+#include <functional>
 #include <list>
 
 #include "WiFi.h"
 #include "sensesp.h"
+#include "sensesp/net/http_authenticator.h"
+#include "sensesp/system/configurable.h"
 #include "sensesp/system/startable.h"
+#include "sensesp_base_app.h"
 
 namespace sensesp {
 
@@ -16,12 +20,13 @@ namespace sensesp {
 #define HTTP_DEFAULT_PORT 80
 #endif
 
-class HTTPServer;
-
 #include <ctype.h>
 #include <stdlib.h>
 
-void urldecode2(char *dst, const char *src);
+void urldecode2(char* dst, const char* src);
+
+
+class HTTPServer;
 
 /**
  * @brief Base class for HTTP server handlers.
@@ -37,15 +42,16 @@ class HTTPServerHandler {
     // add this handler to the list of handlers
     handlers_.push_back(this);
   }
-  virtual void set_handler(HTTPServer* server) = 0;
 
   static void register_handlers(HTTPServer* server) {
     for (auto& handler : handlers_) {
-      handler->set_handler(server);
+      handler->register_handler(server);
     }
   }
 
  protected:
+  virtual void set_handler(HTTPServer* server) = 0;
+
   String get_content_type(httpd_req_t* req) {
     if (httpd_req_get_hdr_value_len(req, "Content-Type") != 16) {
       debugE("Invalid content type");
@@ -57,37 +63,46 @@ class HTTPServerHandler {
     }
   }
 
+  void register_handler(HTTPServer* server) {
+    this->set_handler(server);
+  }
+
  private:
   static std::list<HTTPServerHandler*> handlers_;
+
+  template <class T>
+  friend esp_err_t call_member_handler(httpd_req_t* req,
+                                       esp_err_t (T::*member)(httpd_req_t*));
 };
 
-/**
- * @brief Call a member function of class T as a request handler.
- *
- * The object pointer is cast from the user_ctx of the request.
- *
- * @tparam T
- * @param req
- * @param member
- * @return esp_err_t
- */
-template <typename T>
-esp_err_t call_member_handler(httpd_req_t* req,
-                              esp_err_t (T::*member)(httpd_req_t*)) {
-  return (static_cast<T*>(req->user_ctx)->*member)(req);
-}
 
 /**
  * @brief HTTP server class wrapping the esp-idf http server.
  *
  */
-class HTTPServer : public Startable {
+class HTTPServer : public Startable, public Configurable {
  public:
-  HTTPServer(int port = HTTP_DEFAULT_PORT)
-      : config_(HTTPD_DEFAULT_CONFIG()), Startable(50) {
+  HTTPServer(int port = HTTP_DEFAULT_PORT,
+             String config_path = "/system/httpserver", String description = "",
+             int sort_order = 0)
+      : config_(HTTPD_DEFAULT_CONFIG()),
+        Startable(50),
+        Configurable(config_path, description, sort_order) {
     config_.server_port = port;
     config_.max_uri_handlers = 20;
     config_.uri_match_fn = httpd_uri_match_wildcard;
+    String auth_realm_ = "Login required for " + SensESPBaseApp::get_hostname();
+    load_configuration();
+    if (auth_required_) {
+      authenticator_ =
+          new HTTPDigestAuthenticator(username_, password_, auth_realm_);
+    }
+    if (singleton_ == nullptr) {
+      singleton_ = this;
+      debugD("HTTPServer instance created");
+    } else {
+      debugE("Only one HTTPServer instance is allowed");
+    }
   };
   ~HTTPServer() {}
 
@@ -105,18 +120,88 @@ class HTTPServer : public Startable {
   }
   void stop() { httpd_stop(server_); }
 
-  void register_handler(const httpd_uri_t* uri_handler) {
-    esp_err_t error = httpd_register_uri_handler(server_, uri_handler);
-    if (error != ESP_OK) {
-      debugE("Error registering URI handler for %s: %s", uri_handler->uri,
-             esp_err_to_name(error));
+  void register_handler(const httpd_uri_t* uri_handler);
+
+  void set_auth_credentials(const String& username, const String& password,
+                            bool auth_required = true) {
+    username_ = username;
+    password_ = password;
+    auth_required_ = auth_required;
+  }
+
+  virtual void get_configuration(JsonObject& config) override {
+    config["auth_required"] = auth_required_;
+    config["username"] = username_;
+    config["password"] = password_;
+  }
+
+  virtual bool set_configuration(const JsonObject& config) override {
+    if (config.containsKey("auth_required")) {
+      auth_required_ = config["auth_required"];
     }
-  };
+    if (config.containsKey("username")) {
+      username_ = config["username"].as<String>();
+    }
+    if (config.containsKey("password")) {
+      password_ = config["password"].as<String>();
+    }
+    return true;
+  }
 
  protected:
+  static HTTPServer* get_server() { return singleton_; }
+  static HTTPServer* singleton_;
   httpd_handle_t server_ = nullptr;
   httpd_config_t config_;
+  String username_;
+  String password_;
+  bool auth_required_ = false;
+  HTTPAuthenticator* authenticator_ = nullptr;
+
+  template <class T>
+  friend esp_err_t call_member_handler(httpd_req_t* req,
+                                       esp_err_t (T::*member)(httpd_req_t*));
+  friend esp_err_t call_static_handler(httpd_req_t* req,
+                                       esp_err_t (*handler)(httpd_req_t*));
 };
+
+esp_err_t authenticate_request(HTTPAuthenticator* auth,
+                               std::function<esp_err_t(httpd_req_t*)> handler,
+                               httpd_req_t* req);
+
+/**
+ * @brief Call a member function of class T as a request handler.
+ *
+ * The object pointer is cast from the user_ctx of the request.
+ *
+ * @tparam T
+ * @param req
+ * @param member
+ * @return esp_err_t
+ */
+template <typename T>
+esp_err_t call_member_handler(httpd_req_t* req,
+                              esp_err_t (T::*member)(httpd_req_t*)) {
+  HTTPServer* server = HTTPServer::get_server();
+  auto* handler = static_cast<T*>(req->user_ctx);
+  bool continue_;
+
+  std::function<esp_err_t(httpd_req_t*)> memberfunc =
+      [handler, member](httpd_req_t* req) { return (handler->*member)(req); };
+
+  HTTPAuthenticator* auth = server->authenticator_;
+  return authenticate_request(auth, memberfunc, req);
+}
+
+/**
+ * @brief Call a static function as a request handler.
+ *
+ * @param req
+ * @param handler
+ * @return esp_err_t
+ */
+esp_err_t call_static_handler(httpd_req_t* req,
+                              esp_err_t (*handler)(httpd_req_t*));
 
 }  // namespace sensesp
 

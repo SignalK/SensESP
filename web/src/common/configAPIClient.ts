@@ -51,7 +51,7 @@ export async function saveConfigData(
 ): Promise<boolean> {
   try {
     const response = await fetch(APP_CONFIG.config_path + path, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": contentType,
       },

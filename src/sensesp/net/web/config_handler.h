@@ -34,7 +34,7 @@ class HTTPConfigHandler : public HTTPServerHandler {
 
     // handler for PUT /config
     const httpd_uri_t config_put_handler = {
-        .uri = "/api/config/*",
+        .uri = "/api/config*",
         .method = HTTP_PUT,
         .handler =
             [](httpd_req_t* req) {
