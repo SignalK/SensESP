@@ -46,7 +46,6 @@ class WSClient : public Configurable,
 
   virtual void get_configuration(JsonObject& doc) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
-  virtual String get_config_schema() override;
 
   /**
    * Return a delta update ValueProducer that produces the number of sent deltas

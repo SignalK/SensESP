@@ -263,6 +263,10 @@ class LambdaTransform : public Transform<IN, OUT> {
     // a character array pointer as an argument for writing the output to.
     String output = "";
 
+    if (num_params == 0) {
+      return "{}";
+    }
+
     debugD("Preparing config schema");
 
     output.concat(FPSTR(kLambdaTransformSchemaHead));

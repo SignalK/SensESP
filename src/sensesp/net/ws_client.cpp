@@ -665,19 +665,6 @@ void WSClient::get_configuration(JsonObject& root) {
   root["polling_href"] = this->polling_href_;
 }
 
-static const char SCHEMA[] PROGMEM = R"~({
-    "type": "object",
-    "properties": {
-        "sk_address": { "title": "Signal K server address", "type": "string" },
-        "sk_port": { "title": "Signal K server port", "type": "integer" },
-        "client_id": { "title": "Client ID (readonly)", "type": "string", "readOnly": true },
-        "token": { "title": "Server authorization token (readonly)", "type": "string", "readOnly": true },
-        "polling_href": { "title": "Server authorization polling href (readonly)", "type": "string", "readOnly": true }
-    }
-  })~";
-
-String WSClient::get_config_schema() { return FPSTR(SCHEMA); }
-
 bool WSClient::set_configuration(const JsonObject& config) {
   String expected[] = {"sk_address", "sk_port", "token", "client_id"};
   for (auto str : expected) {
