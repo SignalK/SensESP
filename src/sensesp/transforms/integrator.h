@@ -34,6 +34,7 @@ class IntegratorT : public Transform<C, P> {
   IntegratorT(P k = 1, P value = 0, String config_path = "")
       : Transform<C, P>(config_path), k{k}, value{value} {
     this->load_configuration();
+    this->emit(value);
   }
 
   virtual void set(C input, uint8_t inputChannel = 0) override final {
