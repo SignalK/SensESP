@@ -66,9 +66,6 @@ void setup() {
   // consumer that displays it, is "Indoor light".
   analog_input->connect_to(
       new SKOutputFloat(sk_path, "", new SKMetadata("ratio", "Indoor light")));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

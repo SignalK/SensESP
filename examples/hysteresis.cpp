@@ -1,9 +1,10 @@
 
+#include "sensesp/transforms/hysteresis.h"
+
 #include <math.h>
 
 #include "sensesp/sensors/analog_input.h"
 #include "sensesp/signalk/signalk_output.h"
-#include "sensesp/transforms/hysteresis.h"
 #include "sensesp_app_builder.h"
 
 using namespace sensesp;
@@ -44,8 +45,6 @@ void setup() {
       ->connect_to(new Hysteresis<float, bool>(0.3, 0.5, false, true,
                                                "/transforms/hysteresis"))
       ->connect_to(new SKOutputBool(sk_path));
-
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

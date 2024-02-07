@@ -59,8 +59,6 @@ void setup() {
   }));
 
   digin->connect_to(new SKOutputBool("electrical.switches.0.state", "/digin/state"));
-
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

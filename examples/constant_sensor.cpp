@@ -12,6 +12,7 @@
  */
 
 #include "sensesp/sensors/constant_sensor.h"
+
 #include "sensesp_app_builder.h"
 
 using namespace sensesp;
@@ -37,9 +38,6 @@ void setup() {
   constant_sensor->connect_to(
       new SKOutputFloat("tanks.freshWater.capacity", "",
                         new SKMetadata("m3", "Fresh Water Tank Capacity")));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 void loop() { app.tick(); }

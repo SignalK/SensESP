@@ -56,9 +56,6 @@ void setup() {
   // Connect the output of the digital input to the SKOutput object which
   // transmits the results to the Signal K server.
   digital->connect_to(new SKOutputFloat(sk_path, ""));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

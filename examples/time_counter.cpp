@@ -110,9 +110,6 @@ void setup() {
   engine_hours->connect_to(
       new SKOutput<float>("propulsion.main.runTime", "",
                           new SKMetadata("s", "Main Engine running time")));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 void loop() { app.tick(); }

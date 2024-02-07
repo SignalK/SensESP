@@ -43,8 +43,7 @@ void setup() {
   SensESPMinimalAppBuilder builder;
   SensESPMinimalApp *sensesp_app = builder.set_hostname("async")->get_app();
 
-  auto *networking = new Networking(
-      "/system/net", "", "", SensESPBaseApp::get_hostname(), "thisisfine");
+  auto *networking = new Networking("/system/net", "", "");
   auto *http_server = new HTTPServer();
 
   // create the SK delta object
@@ -65,7 +64,7 @@ void setup() {
   auto *system_status_led = new SystemStatusLed(LED_BUILTIN);
 
   system_status_controller->connect_to(system_status_led);
-  ws_client_->get_delta_count_producer().connect_to(system_status_led);
+  ws_client_->get_delta_tx_count_producer().connect_to(system_status_led);
 
   // create a new task for toggling the output pin
 
@@ -88,17 +87,11 @@ void setup() {
   // create a new SKListener for navigation.headingMagnetic
 
   auto hdg = new SKValueListener<float>("navigation.headingMagnetic");
-  hdg->connect_to(new LambdaConsumer<float>([](float input) {
-    debugD("Heading: %f", input);
-  }));
+  hdg->connect_to(new LambdaConsumer<float>(
+      [](float input) { debugD("Heading: %f", input); }));
 
   // print out free heap
-  app.onRepeat(2000, []() {
-    debugD("Free heap: %d", ESP.getFreeHeap());
-  });
-
-  // Start the SensESP application running
-  sensesp_app->start();
+  app.onRepeat(2000, []() { debugD("Free heap: %d", ESP.getFreeHeap()); });
 }
 
 // The loop function is called in an endless loop during program execution.

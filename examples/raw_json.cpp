@@ -45,8 +45,6 @@ void setup() {
 
   const char *sk_path = "environment.json.pin15";
   jsonify->connect_to(new SKOutputRawJson(sk_path, ""));
-
-  sensesp_app->start();
 }
 
 void loop() { app.tick(); }

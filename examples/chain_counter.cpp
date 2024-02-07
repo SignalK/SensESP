@@ -1,10 +1,10 @@
-#include "sensesp_app.h"
-#include "sensesp_app_builder.h"
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp/system/lambda_consumer.h"
 #include "sensesp/transforms/debounce.h"
 #include "sensesp/transforms/integrator.h"
+#include "sensesp_app.h"
+#include "sensesp_app_builder.h"
 
 using namespace sensesp;
 
@@ -96,8 +96,8 @@ void setup() {
    */
   int read_delay = 10;
   String read_delay_config_path = "/button_watcher/read_delay";
-  auto* button_watcher = new DigitalInputChange(
-      BUTTON_PIN, INPUT, read_delay, read_delay_config_path);
+  auto* button_watcher = new DigitalInputChange(BUTTON_PIN, INPUT, read_delay,
+                                                read_delay_config_path);
 
   /**
    * Create a DebounceInt to make sure we get a nice, clean signal from the
@@ -144,9 +144,6 @@ void setup() {
 
   /* Connect the button_watcher to the debounce to the button_consumer. */
   button_watcher->connect_to(debounce)->connect_to(button_consumer);
-
-  /* Finally, start the SensESPApp */
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

@@ -58,9 +58,6 @@ void setup() {
   auto* listener = new FloatSKListener(sk_path);
   listener->connect_to(new FloatThreshold(0.0f, 100.0f, true, config_path))
       ->connect_to(new DigitalOutput(5));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

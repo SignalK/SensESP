@@ -143,30 +143,30 @@ void setup() {
   const float R1 = 51.0;
 
   // An AnalogInput gets the value from the microcontroller's AnalogIn pin,
-  // which is a value from 0 to 1023 and then scales it to the max pin voltage (max_analog_in_voltage), giving the pin voltage.
+  // which is a value from 0 to 1023 and then scales it to the max pin voltage
+  // (max_analog_in_voltage), giving the pin voltage.
   const float max_analog_in_voltage = 3.3;
   // ESP32 has many pins that can be used for AnalogIn, and they're
   // expressed here as the XX in GPIOXX.
-  auto* analog_input = new AnalogInput(36, 1000, "/12V_alternator/temp/analog_in/", max_analog_in_voltage);
+  auto* analog_input = new AnalogInput(
+      36, 1000, "/12V_alternator/temp/analog_in/", max_analog_in_voltage);
 
-  /* Translating the number returned by AnalogInput into a temperature, and
-     sending it to Signal K, requires several transforms. Wire them up in
-     sequence:
+  /* Translating the number returned by AnalogInput into a temperature,
+     and sending it to Signal K, requires several transforms. Wire them
+     up in sequence:
      - convert voltage into ohms with VoltageDividerR2()
      - find the Kelvin value for the given ohms value with
      TemperatureInterpreter()
      - use Linear() in case you want to calibrate the output at runtime
      - send calibrated Kelvin value to Signal K with SKOutputNumber()
   */
-      ->connect_to(new VoltageDividerR2(R1, volt_div_v_in, "/12V_alternator/temp/sender"))
+  analog_input
+      ->connect_to(new VoltageDividerR2(R1, volt_div_v_in,
+                                        "/12V_alternator/temp/sender"))
       ->connect_to(new TemperatureInterpreter("/12V_alternator/temp/curve"))
       ->connect_to(new Linear(1.0, 0.0, "/12V_alternator/temp/calibrate"))
       ->connect_to(
           new SKOutputFloat(sk_path, "/12V_alternator/temp/sk", metadata));
-
-  // Start the SensESP application running, which simply activates everything
-  // that's been set up above
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

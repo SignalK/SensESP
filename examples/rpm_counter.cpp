@@ -79,11 +79,6 @@ void setup() {
       ->connect_to(new SKOutputFloat(
           sk_path, config_path_skpath));  // connect the output of Frequency()
                                           // to a Signal K Output as a number
-
-  // Start the SensESP application running. Because of everything that's been
-  // set up above, it constantly monitors the interrupt pin, and every
-  // read_delay ms, it sends the calculated frequency to Signal K.
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

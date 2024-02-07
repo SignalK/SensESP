@@ -133,9 +133,6 @@ void setup() {
                                      "/freshWaterTank_starboard/samples"))
       ->connect_to(
           new SKOutputFloat("tanks.freshwater.starboard.currentLevel"));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

@@ -117,9 +117,6 @@ void setup() {
   // lets the server know the switch is still alive.
   load_switch->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
       ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

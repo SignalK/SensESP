@@ -106,9 +106,6 @@ void setup() {
   // confirms it has made the change in state.
   auto* sk_listener = new SKValueListener<bool>(sk_path);
   sk_listener->connect_to(controller);
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.
