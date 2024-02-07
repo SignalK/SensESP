@@ -3,7 +3,7 @@
 namespace sensesp {
 
 template <typename T>
-void RepeatReport<T>::set_input(T input, uint8_t inputChannel) {
+void RepeatReport<T>::set(T input, uint8_t inputChannel) {
   last_update_interval_ = 0;
   this->emit(input);
 }

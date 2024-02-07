@@ -299,7 +299,7 @@ void WSClient::process_received_updates() {
     }
   }
   release_received_updates_semaphore();
-  delta_rx_count_producer_.set_input(num_updates);
+  delta_rx_count_producer_.set(num_updates);
 
   SKListener::release_semaphore();
 }

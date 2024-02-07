@@ -61,9 +61,9 @@ class SmartSwitchController : public BooleanTransform,
    */
   SmartSwitchController(bool auto_initialize = true, String config_path = "",
                         const char* sk_sync_paths[] = NULL);
-  void set_input(bool new_value, uint8_t input_channel = 0) override;
-  void set_input(String new_value, uint8_t input_channel = 0) override;
-  void set_input(ClickTypes new_value, uint8_t input_channel = 0) override;
+  void set(bool new_value, uint8_t input_channel = 0) override;
+  void set(String new_value, uint8_t input_channel = 0) override;
+  void set(ClickTypes new_value, uint8_t input_channel = 0) override;
 
   // For reading and writing the configuration of this transformation
   virtual void get_configuration(JsonObject& doc) override;

@@ -16,7 +16,7 @@ namespace sensesp {
 class HeatIndexTemperature : public FloatTransform {
  public:
   HeatIndexTemperature();
-  virtual void set_input(float input, uint8_t inputChannel) override;
+  virtual void set(float input, uint8_t inputChannel) override;
 
  private:
   uint8_t received = 0;
@@ -33,7 +33,7 @@ class HeatIndexTemperature : public FloatTransform {
 class HeatIndexEffect : public Transform<float, String> {
  public:
   HeatIndexEffect();
-  virtual void set_input(float input, uint8_t inputChannel = 0) override;
+  virtual void set(float input, uint8_t inputChannel = 0) override;
 };
 
 }  // namespace sensesp

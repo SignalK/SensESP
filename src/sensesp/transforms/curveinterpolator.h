@@ -52,7 +52,7 @@ class CurveInterpolator : public FloatTransform {
   CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path = "");
 
   // Set and retrieve the transformed value
-  void set_input(float input, uint8_t input_channel = 0) override;
+  void set(float input, uint8_t input_channel = 0) override;
 
   // Web UI configuration methods
   CurveInterpolator* set_input_title(String input_title) {

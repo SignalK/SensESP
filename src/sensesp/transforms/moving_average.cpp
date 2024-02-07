@@ -14,7 +14,7 @@ MovingAverage::MovingAverage(int sample_size, float multiplier,
   load_configuration();
 }
 
-void MovingAverage::set_input(float input, uint8_t inputChannel) {
+void MovingAverage::set(float input, uint8_t inputChannel) {
   // So the first value to be included in the average doesn't default to 0.0
   if (!initialized_) {
     buf_.assign(sample_size_, input);

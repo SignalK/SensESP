@@ -147,7 +147,7 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
       : SKPutRequestBase(sk_path, config_path, timeout),
         ignore_duplicates{ignore_duplicates} {}
 
-  virtual void set_input(T new_value, uint8_t input_channel = 0) override {
+  virtual void set(T new_value, uint8_t input_channel = 0) override {
     if (ignore_duplicates && new_value == value) {
       return;
     }

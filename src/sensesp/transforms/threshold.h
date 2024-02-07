@@ -26,7 +26,7 @@ class ThresholdTransform : public Transform<C, P> {
         in_range_{in_range} {
     this->load_configuration();
   };
-  virtual void set_input(C new_value, uint8_t input_channel = 0) override;
+  virtual void set(C new_value, uint8_t input_channel = 0) override;
 
  protected:
   C min_value_;

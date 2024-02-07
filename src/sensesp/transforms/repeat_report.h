@@ -36,7 +36,7 @@ class RepeatReport : public SymmetricTransform<T> {
     });
   }
 
-  virtual void set_input(T input, uint8_t inputChannel = 0) override;
+  virtual void set(T input, uint8_t inputChannel = 0) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

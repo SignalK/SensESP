@@ -9,7 +9,7 @@ Difference::Difference(float k1, float k2, String config_path)
   load_configuration();
 }
 
-void Difference::set_input(float input, uint8_t inputChannel) {
+void Difference::set(float input, uint8_t inputChannel) {
   inputs[inputChannel] = input;
   received |= 1 << inputChannel;
   if (received == 0b11) {

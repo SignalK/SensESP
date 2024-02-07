@@ -29,9 +29,9 @@ class SystemStatusLed : public ValueConsumer<SystemStatus>,
  public:
   SystemStatusLed(int pin);
 
-  virtual void set_input(SystemStatus new_value,
+  virtual void set(SystemStatus new_value,
                          uint8_t input_channel = 0) override;
-  virtual void set_input(int new_value, uint8_t input_channel = 0) override;
+  virtual void set(int new_value, uint8_t input_channel = 0) override;
 };
 
 }  // namespace sensesp

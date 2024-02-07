@@ -11,7 +11,7 @@ Frequency::Frequency(float multiplier, String config_path)
   last_update_ = millis();
 }
 
-void Frequency::set_input(int input, uint8_t inputChannel) {
+void Frequency::set(int input, uint8_t inputChannel) {
   unsigned long cur_millis = millis();
   unsigned long elapsed_millis = cur_millis - last_update_;
   last_update_ = cur_millis;

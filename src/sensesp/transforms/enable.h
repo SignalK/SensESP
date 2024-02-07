@@ -29,7 +29,7 @@ class Enable : public Transform<T, T> {
     this->enabled_ = enabled;
     this->load_configuration();
   }
-  virtual void set_input(T input, uint8_t input_channel = 0) override {
+  virtual void set(T input, uint8_t input_channel = 0) override {
     if (enabled_) {
       this->emit(input);
     }

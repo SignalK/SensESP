@@ -86,7 +86,7 @@ class UIOutput : public UIOutputBase,
     return obj;
   }
 
-  void set_input(T new_value, uint8_t input_channel = 0) override {
+  void set(T new_value, uint8_t input_channel = 0) override {
     this->ValueProducer<T>::emit(new_value);
   }
 };

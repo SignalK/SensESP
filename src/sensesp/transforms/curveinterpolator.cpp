@@ -32,7 +32,7 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
   load_configuration();
 }
 
-void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
+void CurveInterpolator::set(float input, uint8_t inputChannel) {
   float x0 = 0.0;
   float y0 = 0.0;
 

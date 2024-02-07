@@ -14,7 +14,7 @@ class ValueProducer;
 /**
  *  @brief A base class for piece of code (like a transform) that
  *  accepts data for input. ValueConsumers can accept one or more input values
- *  via the set_input() method. They are connected to `ValueProducers`
+ *  via the set() method. They are connected to `ValueProducers`
  *  via the `connect_to()` method.
  *  @see ValueProducer::connect_to()
  */
@@ -29,7 +29,16 @@ class ValueConsumer {
    *  This parameter allows you to specify which input number the producer
    *  is connecting to. For single input consumers, leave the index at zero.
    */
-  virtual void set_input(T new_value, uint8_t input_channel = 0) {}
+  virtual void set(T new_value, uint8_t input_channel = 0) {}
+
+  virtual void set_input(T new_value, uint8_t input_channel = 0) {
+    static bool warned = false;
+    if (!warned) {
+      warned = true;
+      debugW("set_input() is deprecated. Use set() instead.");
+    }
+    set(new_value, input_channel);
+  }
 
   /**
    * Registers this consumer with the specified producer, letting it
@@ -41,7 +50,7 @@ class ValueConsumer {
    */
   void connect_from(ValueProducer<T>* producer, uint8_t input_channel = 0) {
     producer->attach([producer, this, input_channel]() {
-      this->set_input(producer->get(), input_channel);
+      this->set(producer->get(), input_channel);
     });
   }
 };

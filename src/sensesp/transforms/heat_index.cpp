@@ -6,7 +6,7 @@ namespace sensesp {
 
 HeatIndexTemperature::HeatIndexTemperature() : FloatTransform() {}
 
-void HeatIndexTemperature::set_input(float input, uint8_t inputChannel) {
+void HeatIndexTemperature::set(float input, uint8_t inputChannel) {
   inputs[inputChannel] = input;
   received |= 1 << inputChannel;
   if (received ==
@@ -86,7 +86,7 @@ void HeatIndexTemperature::set_input(float input, uint8_t inputChannel) {
 
 HeatIndexEffect::HeatIndexEffect() : Transform<float, String>() {}
 
-void HeatIndexEffect::set_input(float input, uint8_t inputChannel) {
+void HeatIndexEffect::set(float input, uint8_t inputChannel) {
   float heat_index_temperature = input - 273.15;  // celsius = kelvin - 273.15
   String heat_index_effect = "";
   if (heat_index_temperature > 54) {

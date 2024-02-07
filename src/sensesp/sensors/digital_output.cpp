@@ -9,7 +9,7 @@ DigitalOutput::DigitalOutput(int pin) {
   pinMode(pin, OUTPUT);
 }
 
-void DigitalOutput::set_input(bool new_value, uint8_t inputChannel) {
+void DigitalOutput::set(bool new_value, uint8_t inputChannel) {
   digitalWrite(pin_number_, new_value);
   this->emit(new_value);
 }

@@ -56,7 +56,7 @@ void SystemStatusLed::set_ws_connected() {
   blinker_->set_pattern(ws_connected_pattern);
 }
 
-void SystemStatusLed::set_input(SystemStatus new_value, uint8_t input_channel) {
+void SystemStatusLed::set(SystemStatus new_value, uint8_t input_channel) {
   switch (new_value) {
     case SystemStatus::kWifiNoAP:
       this->set_wifi_no_ap();
@@ -82,7 +82,7 @@ void SystemStatusLed::set_input(SystemStatus new_value, uint8_t input_channel) {
   }
 }
 
-void SystemStatusLed::set_input(int new_value, uint8_t input_channel) {
+void SystemStatusLed::set(int new_value, uint8_t input_channel) {
   blinker_->blip();
 }
 

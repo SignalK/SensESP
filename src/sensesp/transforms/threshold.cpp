@@ -3,7 +3,7 @@
 namespace sensesp {
 
 template <class C, class P>
-void ThresholdTransform<C, P>::set_input(C input, uint8_t input_channel) {
+void ThresholdTransform<C, P>::set(C input, uint8_t input_channel) {
   if (input >= min_value_ && input <= max_value_) {
     this->output = in_range_;
   } else {

@@ -34,7 +34,7 @@ class VoltageDividerR1 : public SymmetricTransform<float> {
  public:
   VoltageDividerR1(float R2, float Vin = 3.3, String config_path = "");
 
-  virtual void set_input(float Vout, uint8_t ignored = 0) override;
+  virtual void set(float Vout, uint8_t ignored = 0) override;
 
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
@@ -74,7 +74,7 @@ class VoltageDividerR2 : public SymmetricTransform<float> {
  public:
   VoltageDividerR2(float R1, float Vin = 3.3, String config_path = "");
 
-  virtual void set_input(float Vout, uint8_t ignored = 0) override;
+  virtual void set(float Vout, uint8_t ignored = 0) override;
 
   // For reading and writing the configuration of this transformation
   virtual void get_configuration(JsonObject& doc) override;

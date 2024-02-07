@@ -2,7 +2,7 @@
 
 namespace sensesp {
 
-void SystemStatusController::set_input(WiFiState new_value,
+void SystemStatusController::set(WiFiState new_value,
                                        uint8_t input_channel) {
   // FIXME: If pointers to member functions would be held in an array,
   // this would be a simple array dereferencing
@@ -23,7 +23,7 @@ void SystemStatusController::set_input(WiFiState new_value,
   }
 }
 
-void SystemStatusController::set_input(WSConnectionState new_value,
+void SystemStatusController::set(WSConnectionState new_value,
                                        uint8_t input_channel) {
   switch (new_value) {
     case WSConnectionState::kWSDisconnected:

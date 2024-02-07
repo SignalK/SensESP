@@ -38,11 +38,11 @@ class ValueProducer : virtual public Observable {
    *   This parameter allows you to specify which input number this producer
    *   is connecting to. For single input consumers, leave the index at
    *   zero.
-   *  @see ValueConsumer::set_input()
+   *  @see ValueConsumer::set()
    */
   void connect_to(ValueConsumer<T>* consumer, uint8_t input_channel = 0) {
     this->attach([this, consumer, input_channel]() {
-      consumer->set_input(this->get(), input_channel);
+      consumer->set(this->get(), input_channel);
     });
   }
 
@@ -59,7 +59,7 @@ class ValueProducer : virtual public Observable {
   template <typename CT>
   void connect_to(ValueConsumer<CT>* consumer, uint8_t input_channel = 0) {
     this->attach([this, consumer, input_channel]() {
-      consumer->set_input(CT(this->get()), input_channel);
+      consumer->set(CT(this->get()), input_channel);
     });
   }
 
@@ -72,13 +72,13 @@ class ValueProducer : virtual public Observable {
    *   This parameter allows you to specify which input number this producer
    *   is connecting to. For single input consumers, leave the index at
    *   zero.
-   *  @see ValueConsumer::set_input()
+   *  @see ValueConsumer::set()
    */
   template <typename T2>
   Transform<T, T2>* connect_to(Transform<T, T2>* consumer_producer,
                                uint8_t input_channel = 0) {
     this->attach([this, consumer_producer, input_channel]() {
-      consumer_producer->set_input(T(this->get()), input_channel);
+      consumer_producer->set(T(this->get()), input_channel);
     });
     return consumer_producer;
   }
@@ -99,7 +99,7 @@ class ValueProducer : virtual public Observable {
   Transform<TT, T2>* connect_to(Transform<TT, T2>* consumer_producer,
                                 uint8_t input_channel = 0) {
     this->attach([this, consumer_producer, input_channel]() {
-      consumer_producer->set_input(TT(this->get()), input_channel);
+      consumer_producer->set(TT(this->get()), input_channel);
     });
     return consumer_producer;
   }

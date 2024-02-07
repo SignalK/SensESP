@@ -32,7 +32,7 @@ static float get_pwm(long rgb, int shift_right, bool common_anode) {
   }
 }
 
-void RgbLed::set_input(long new_value, uint8_t input_channel) {
+void RgbLed::set(long new_value, uint8_t input_channel) {
   if (led_r_channel_ >= 0) {
     float r = get_pwm(new_value, 16, common_anode_);
     PWMOutput::set_pwm(led_r_channel_, r);
@@ -49,11 +49,11 @@ void RgbLed::set_input(long new_value, uint8_t input_channel) {
   }
 }
 
-void RgbLed::set_input(bool new_value, uint8_t input_channel) {
+void RgbLed::set(bool new_value, uint8_t input_channel) {
   if (new_value) {
-    set_input(led_on_rgb_, input_channel);
+    set(led_on_rgb_, input_channel);
   } else {
-    set_input(led_off_rgb_, input_channel);
+    set(led_off_rgb_, input_channel);
   }
 }
 

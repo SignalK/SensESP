@@ -26,12 +26,12 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
   }
 }
 
-void SmartSwitchController::set_input(bool new_value, uint8_t input_channel) {
+void SmartSwitchController::set(bool new_value, uint8_t input_channel) {
   is_on = new_value;
   this->emit(is_on);
 }
 
-void SmartSwitchController::set_input(ClickTypes new_value,
+void SmartSwitchController::set(ClickTypes new_value,
                                       uint8_t input_channel) {
   if (!ClickType::is_click(new_value)) {
     // Ignore button presses (we only want interpreted clicks)
@@ -52,12 +52,12 @@ void SmartSwitchController::set_input(ClickTypes new_value,
     // Sync any specified sync paths...
     for (auto& path : sync_paths) {
       debugD("Sync status to %s", path.sk_sync_path.c_str());
-      path.put_request->set_input(is_on);
+      path.put_request->set(is_on);
     }
   }
 }
 
-void SmartSwitchController::set_input(String new_value, uint8_t input_channel) {
+void SmartSwitchController::set(String new_value, uint8_t input_channel) {
   if (TextToTruth::is_valid_true(new_value)) {
     is_on = true;
   } else if (TextToTruth::is_valid_false(new_value)) {

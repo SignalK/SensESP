@@ -36,7 +36,7 @@ class IntegratorT : public Transform<C, P> {
     this->load_configuration();
   }
 
-  virtual void set_input(C input, uint8_t inputChannel = 0) override final {
+  virtual void set(C input, uint8_t inputChannel = 0) override final {
     value += input * k;
     this->emit(value);
   }
