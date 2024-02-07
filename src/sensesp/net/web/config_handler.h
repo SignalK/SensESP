@@ -113,6 +113,7 @@ class HTTPConfigHandler : public HTTPServerHandler {
    */
   esp_err_t handle_config_put(httpd_req_t* req) {
     // check that the content type is JSON
+    debugI("Handling PUT request to URL %s", req->uri);
     if (get_content_type(req) != "application/json") {
       httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST,
                           "application/json content type expected");
@@ -126,6 +127,11 @@ class HTTPConfigHandler : public HTTPServerHandler {
                           "No configuration path specified");
       return ESP_FAIL;
     }
+
+    // urldecode the URL tail
+    char url_tail_cstr[url_tail.length() + 1];
+    urldecode2(url_tail_cstr, url_tail.c_str());
+    url_tail = String(url_tail_cstr);
 
     // find the Configurable object with the matching config_path
     std::map<String, Configurable*>::iterator it = configurables.find(url_tail);
