@@ -560,8 +560,8 @@ void WSClient::poll_access_request(const String server_address,
     String state = doc["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
+      set_connection_state(WSConnectionState::kWSDisconnected);
       delay(5000);
-      this->poll_access_request(server_address, server_port, href);
       return;
     } else if (state == "COMPLETED") {
       JsonObject access_req = doc["accessRequest"];
