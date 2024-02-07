@@ -96,21 +96,4 @@ bool DigitalInputDebounceCounter::set_configuration(const JsonObject& config) {
   return true;
 }
 
-void DigitalInputChange::start() {
-  ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() {
-    output = (bool)digitalRead(pin_);
-    triggered_ = true;
-  });
-
-  ReactESP::app->onTick([this]() {
-    if (triggered_ && (output != last_output_)) {
-      noInterrupts();
-      triggered_ = false;
-      last_output_ = output;
-      interrupts();
-      notify();
-    }
-  });
-}
-
 }  // namespace sensesp

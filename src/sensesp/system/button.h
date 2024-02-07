@@ -8,7 +8,6 @@
 #include "sensesp.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/minimal_button.h"
-#include "sensesp/system/startable.h"
 
 namespace sensesp {
 

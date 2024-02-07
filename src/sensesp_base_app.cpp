@@ -46,9 +46,7 @@ void SensESPBaseApp::setup() {}
 void SensESPBaseApp::start() {
   // start all individual startable components
 
-  debugI("Starting subsystems");
-  Startable::start_all();
-  debugD("All sensors and transforms started");
+  debugW("start() call is deprecated and can be removed.");
 }
 
 void SensESPBaseApp::reset() {

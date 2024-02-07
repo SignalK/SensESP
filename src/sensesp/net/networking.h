@@ -7,7 +7,6 @@
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/resettable.h"
-#include "sensesp/system/startable.h"
 #include "sensesp/system/valueproducer.h"
 
 namespace sensesp {
@@ -23,7 +22,7 @@ constexpr int kMaxNumClientConfigs = 3;
  * from the rest of the system. This allows for replacing the Networking
  * class with a different implementation.
  */
-class WiFiStateProducer : public ValueProducer<WiFiState>, public Startable {
+class WiFiStateProducer : public ValueProducer<WiFiState> {
  public:
   /**
    * Singletons should not be cloneable
@@ -40,14 +39,15 @@ class WiFiStateProducer : public ValueProducer<WiFiState>, public Startable {
    */
   static WiFiStateProducer* get_singleton();
 
-  virtual void start() override {
-    setup_wifi_callbacks();
-    // Emit the current state immediately
-    this->emit(this->output);
-  }
-
  protected:
-  WiFiStateProducer() : Startable(81) { this->output = WiFiState::kWifiNoAP; }
+  WiFiStateProducer() {
+    this->output = WiFiState::kWifiNoAP;
+
+    setup_wifi_callbacks();
+
+    // Emit the current state as soon as the event loop starts
+    ReactESP::app->onDelay(0, [this]() { this->emit(this->output); });
+  }
 
   void setup_wifi_callbacks() {
     WiFi.onEvent(
@@ -220,13 +220,11 @@ class WiFiNetworkInfo {
  * @brief Manages the ESP's connection to the Wifi network.
  */
 class Networking : public Configurable,
-                   public Startable,
                    public Resettable,
                    public ValueProducer<WiFiState> {
  public:
   Networking(String config_path, String client_ssid = "",
              String client_password = "");
-  virtual void start() override;
   virtual void reset() override;
 
   virtual void get_configuration(JsonObject& doc) override final;

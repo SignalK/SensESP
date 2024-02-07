@@ -9,11 +9,11 @@
 namespace sensesp {
 
 SKDeltaQueue::SKDeltaQueue(unsigned int max_buffer_size)
-    : Startable{0}, max_buffer_size{max_buffer_size}, meta_sent_{false} {
+    : max_buffer_size{max_buffer_size}, meta_sent_{false} {
   semaphore_ = xSemaphoreCreateRecursiveMutex();
-}
 
-void SKDeltaQueue::start() { this->connect_emitters(); }
+  ReactESP::app->onDelay(0, [this]() { this->connect_emitters(); });
+}
 
 bool SKDeltaQueue::take_semaphore(unsigned long int timeout_ms) {
   if (timeout_ms == 0) {

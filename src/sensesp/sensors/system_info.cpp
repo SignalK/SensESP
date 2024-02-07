@@ -1,7 +1,8 @@
 #include "system_info.h"
 
-#include "Arduino.h"
 #include <WiFi.h>
+
+#include "Arduino.h"
 #include "sensesp.h"
 
 namespace sensesp {
@@ -22,34 +23,11 @@ void SystemHz::update() {
   this->notify();
 }
 
-void SystemHz::start() {
-  elapsed_millis_ = 0;
-
-  ReactESP::app->onTick([this]() { this->tick(); });
-  ReactESP::app->onRepeat(1000, [this]() { this->update(); });
-}
-
 void FreeMem::update() { this->emit(ESP.getFreeHeap()); }
-
-void FreeMem::start() {
-  ReactESP::app->onRepeat(1000, [this]() { this->update(); });
-}
 
 void Uptime::update() { this->emit(millis() / 1000.); }
 
-void Uptime::start() {
-  ReactESP::app->onRepeat(1000, [this]() { this->update(); });
-}
-
 void IPAddrDev::update() { this->emit(WiFi.localIP().toString()); }
-
-void IPAddrDev::start() {
-  ReactESP::app->onRepeat(10000, [this]() { this->update(); });
-}
-
-void WiFiSignal::start() {
-  ReactESP::app->onRepeat(3000, [this]() { this->update(); });
-}
 
 void WiFiSignal::update() { this->emit(WiFi.RSSI()); }
 

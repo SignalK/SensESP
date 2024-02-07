@@ -11,7 +11,6 @@
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
-#include "sensesp/system/startable.h"
 #include "sensesp/system/task_queue_producer.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp/transforms/integrator.h"
@@ -32,7 +31,6 @@ enum class WSConnectionState {
  * @see SensESPApp
  */
 class WSClient : public Configurable,
-                 public Startable,
                  public ValueProducer<WSConnectionState> {
  public:
   /////////////////////////////////////////////////////////
@@ -40,7 +38,6 @@ class WSClient : public Configurable,
 
   WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
            String server_address, uint16_t server_port);
-  virtual void start() override;
 
   const String get_server_address() const { return server_address_; }
   const uint16_t get_server_port() const { return server_port_; }

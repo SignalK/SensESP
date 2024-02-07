@@ -23,9 +23,7 @@ namespace sensesp {
 
 Networking::Networking(String config_path, String client_ssid,
                        String client_password)
-    : Configurable{config_path, "Basic WiFi Setup", 100},
-      Startable(80),
-      Resettable(0) {
+    : Configurable{config_path, "Basic WiFi Setup", 100}, Resettable(0) {
   // Get the WiFi state producer singleton and make it update this object output
   wifi_state_producer = WiFiStateProducer::get_singleton();
   wifi_state_producer->connect_to(new LambdaConsumer<WiFiState>(
@@ -46,35 +44,39 @@ Networking::Networking(String config_path, String client_ssid,
     client_settings_.push_back(preset_client_config);
     client_enabled_ = true;
   }
-}
 
-void Networking::start() {
-  debugD("Enabling Networking");
+    debugD("Enabling Networking");
 
-  // If both saved AP settings and saved client settings
-  // are available, start in STA+AP mode.
+    // If both saved AP settings and saved client settings
+    // are available, start in STA+AP mode.
 
-  if (this->ap_settings_.enabled_ && this->client_enabled_ == true) {
-    WiFi.mode(WIFI_AP_STA);
-    start_access_point();
-    start_client_autoconnect();
-  }
+    if (this->ap_settings_.enabled_ && this->client_enabled_ == true) {
+      WiFi.mode(WIFI_AP_STA);
+      start_access_point();
+      start_client_autoconnect();
+    }
 
-  // If saved AP settings are available, use them.
+    // If saved AP settings are available, use them.
 
-  else if (this->ap_settings_.enabled_) {
-    WiFi.mode(WIFI_AP);
-    start_access_point();
-  }
+    else if (this->ap_settings_.enabled_) {
+      WiFi.mode(WIFI_AP);
+      start_access_point();
+    }
 
-  // If saved client settings are available, use them.
+    // If saved client settings are available, use them.
 
-  else if (this->client_enabled_) {
-    WiFi.mode(WIFI_STA);
-    start_client_autoconnect();
-  }
+    else if (this->client_enabled_) {
+      WiFi.mode(WIFI_STA);
+      start_client_autoconnect();
+    } else {
+      // Start WiFi with a bogus SSID to initialize the network stack but
+      // don't connect to any network.
+      WiFi.begin("0", "0");
+    }
 
-  // Otherwise we'll fall through and keep WiFi disabled.
+    debugD("Networking enabled - probably");
+
+    // Otherwise we'll fall through and keep WiFi disabled.
 }
 
 /**

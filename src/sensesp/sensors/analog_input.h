@@ -42,7 +42,6 @@ class AnalogInput : public FloatSensor {
  public:
   AnalogInput(uint8_t pin = A0, unsigned int read_delay = 200, String config_path = "",
               float output_scale = 1024.);
-  void start() override final;
 
  private:
   uint8_t pin;

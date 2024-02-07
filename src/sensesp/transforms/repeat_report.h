@@ -26,10 +26,17 @@ class RepeatReport : public SymmetricTransform<T> {
       : SymmetricTransform<T>(config_path),
         max_silence_interval_{max_silence_interval} {
     this->load_configuration();
+
+    ReactESP::app->onRepeat(10, [this]() {
+      if (max_silence_interval_ > 0 &&
+          last_update_interval_ > max_silence_interval_) {
+        this->last_update_interval_ = 0;
+        this->notify();
+      }
+    });
   }
 
   virtual void set_input(T input, uint8_t inputChannel = 0) override;
-  virtual void start() override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

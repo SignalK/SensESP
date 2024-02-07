@@ -76,8 +76,7 @@ static void websocket_event_handler(void* handler_args, esp_event_base_t base,
 
 WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
                    String server_address, uint16_t server_port)
-    : Configurable{config_path, "Signal K Server Settings", 200},
-      Startable(60) {
+    : Configurable{config_path, "Signal K Server Settings", 200} {
   this->sk_delta_queue_ = sk_delta_queue;
 
   conf_server_address_ = server_address;
@@ -100,12 +99,13 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
 
   // Connect the counters
   delta_tx_tick_producer_.connect_to(&delta_tx_count_producer_);
-}
 
-void WSClient::start() {
-  xTaskCreate(ExecuteWebSocketTask, "WSClient", ws_client_task_stack_size, this,
-              1, NULL);
-  MDNS.addService("signalk-sensesp", "tcp", 80);
+  ReactESP::app->onDelay(0, [this]() {
+    debugD("Starting WSClient");
+    xTaskCreate(ExecuteWebSocketTask, "WSClient", ws_client_task_stack_size,
+                this, 1, NULL);
+    MDNS.addService("signalk-sensesp", "tcp", 80);
+  });
 }
 
 void WSClient::connect_loop() {

@@ -9,18 +9,6 @@ void RepeatReport<T>::set_input(T input, uint8_t inputChannel) {
 }
 
 template <typename T>
-void RepeatReport<T>::start() {
-  SymmetricTransform<T>::start();
-  ReactESP::app->onRepeat(10, [this]() {
-    if (max_silence_interval_ > 0 &&
-        last_update_interval_ > max_silence_interval_) {
-      this->last_update_interval_ = 0;
-      this->notify();
-    }
-  });
-}
-
-template <typename T>
 void RepeatReport<T>::get_configuration(JsonObject& root) {
   root["max_silence_interval"] = max_silence_interval_;
 }

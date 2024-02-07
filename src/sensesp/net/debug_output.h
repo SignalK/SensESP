@@ -3,8 +3,6 @@
 
 #include <cstdint>
 
-#include "sensesp/system/startable.h"
-
 namespace sensesp {
 
 void SetupSerialDebug(uint32_t baudrate);
@@ -20,10 +18,9 @@ void SetupSerialDebug(uint32_t baudrate);
  * and over telnet on port 23.
  * By default, output is enabled only on the serial interface.
  **/
-class DebugOutput : public Startable {
+class DebugOutput {
  public:
-  DebugOutput() : Startable{0} {}
-  virtual void start() override;
+  DebugOutput();
 };
 
 }  // namespace sensesp

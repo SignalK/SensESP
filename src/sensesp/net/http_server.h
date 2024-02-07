@@ -11,7 +11,6 @@
 #include "sensesp.h"
 #include "sensesp/net/http_authenticator.h"
 #include "sensesp/system/configurable.h"
-#include "sensesp/system/startable.h"
 #include "sensesp_base_app.h"
 
 namespace sensesp {
@@ -24,7 +23,6 @@ namespace sensesp {
 #include <stdlib.h>
 
 void urldecode2(char* dst, const char* src);
-
 
 class HTTPServer;
 
@@ -63,9 +61,7 @@ class HTTPServerHandler {
     }
   }
 
-  void register_handler(HTTPServer* server) {
-    this->set_handler(server);
-  }
+  void register_handler(HTTPServer* server) { this->set_handler(server); }
 
  private:
   static std::list<HTTPServerHandler*> handlers_;
@@ -75,18 +71,16 @@ class HTTPServerHandler {
                                        esp_err_t (T::*member)(httpd_req_t*));
 };
 
-
 /**
  * @brief HTTP server class wrapping the esp-idf http server.
  *
  */
-class HTTPServer : public Startable, public Configurable {
+class HTTPServer : public Configurable {
  public:
   HTTPServer(int port = HTTP_DEFAULT_PORT,
              String config_path = "/system/httpserver", String description = "",
              int sort_order = 0)
       : config_(HTTPD_DEFAULT_CONFIG()),
-        Startable(50),
         Configurable(config_path, description, sort_order) {
     config_.server_port = port;
     config_.max_uri_handlers = 20;
@@ -102,22 +96,23 @@ class HTTPServer : public Startable, public Configurable {
       debugD("HTTPServer instance created");
     } else {
       debugE("Only one HTTPServer instance is allowed");
+      return;
     }
+    ReactESP::app->onDelay(0, [this]() {
+      esp_err_t error = httpd_start(&server_, &config_);
+      if (error != ESP_OK) {
+        debugE("Error starting HTTP server: %s", esp_err_to_name(error));
+      } else {
+        debugI("HTTP server started");
+      }
+      HTTPServerHandler::register_handlers(this);
+
+      // announce the server over mDNS
+      MDNS.addService("http", "tcp", 80);
+    });
   };
   ~HTTPServer() {}
 
-  virtual void start() override {
-    esp_err_t error = httpd_start(&server_, &config_);
-    if (error != ESP_OK) {
-      debugE("Error starting HTTP server: %s", esp_err_to_name(error));
-    } else {
-      debugI("HTTP server started");
-    }
-    HTTPServerHandler::register_handlers(this);
-
-    // announce the server over mDNS
-    MDNS.addService("http", "tcp", 80);
-  }
   void stop() { httpd_stop(server_); }
 
   void register_handler(const httpd_uri_t* uri_handler);

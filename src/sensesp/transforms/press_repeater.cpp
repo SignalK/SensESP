@@ -11,9 +11,7 @@ PressRepeater::PressRepeater(String config_path, int integer_false,
       pushed_{false},
       repeating_{false} {
   load_configuration();
-}
 
-void PressRepeater::start() {
   ReactESP::app->onRepeat(10, [this]() {
     if (pushed_) {
       // A press is currently in progress

@@ -5,7 +5,6 @@
 
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
-#include "sensesp/system/startable.h"
 #include "sensesp/system/valueproducer.h"
 
 namespace sensesp {
@@ -25,9 +24,7 @@ namespace sensesp {
  * variable to be configurable at run-time in your project, don't provide a
  * config_path when you construct the class.
  */
-class Sensor : virtual public Observable,
-               public Configurable,
-               public Startable {
+class Sensor : virtual public Observable, public Configurable {
  public:
   Sensor(String config_path = "");
 
@@ -90,15 +87,14 @@ class RepeatSensor : public SensorT<T> {
                   std::function<void(RepeatSensor<T>*)> callback)
       : SensorT<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
-        emitting_callback_(callback) {}
-
-  void start() override final {
+        emitting_callback_(callback) {
     if (emitting_callback_ != nullptr) {
       ReactESP::app->onRepeat(repeat_interval_ms_,
                               [this]() { emitting_callback_(this); });
     } else {
-      ReactESP::app->onRepeat(repeat_interval_ms_,
-                              [this]() { this->emit(this->returning_callback_()); });
+      ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
+        this->emit(this->returning_callback_());
+      });
     }
   }
 

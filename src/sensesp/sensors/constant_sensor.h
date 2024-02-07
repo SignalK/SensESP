@@ -25,7 +25,8 @@ namespace sensesp {
  *    int send_delay = 30;
  *    const char* config_path = "/tanks.water_capacity";
  *    auto *capacity = new ConstantFloatSensor(send_delay,config_path);
- *    capacity->connect_to(new SKOutputFloat(sk_path, sk_config_path, sk_metadata));
+ *    capacity->connect_to(new SKOutputFloat(sk_path, sk_config_path,
+ * sk_metadata));
  *
  * To set or get the the value of the virtual sensor for use in your code:
  *
@@ -55,8 +56,7 @@ class ConstantSensor : public SensorT<T> {
   ConstantSensor(T value, int send_interval = 30, String config_path = "")
       : SensorT<T>(config_path), value_{value}, send_interval_{send_interval} {
     this->load_configuration();
-  }
-  void start() override {
+
     ReactESP::app->onRepeat(send_interval_ * 1000,
                             [this]() { this->emit(value_); });
   }

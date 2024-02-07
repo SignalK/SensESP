@@ -1,7 +1,6 @@
 #include "debug_output.h"
 
 #include "sensesp/system/local_debug.h"
-
 #include "sensesp_app.h"
 
 namespace sensesp {
@@ -10,9 +9,9 @@ namespace sensesp {
 DEBUG_CLASS Debug;
 #endif
 
-void DebugOutput::start() {
+DebugOutput::DebugOutput() {
 #ifndef DEBUG_DISABLED
-  Debug.begin(SensESPBaseApp::get_hostname());
+  Debug.begin();
   Debug.setResetCmdEnabled(true);
 // serial port debugging happens synchronously
 #ifdef REMOTE_DEBUG

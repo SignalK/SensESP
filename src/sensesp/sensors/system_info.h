@@ -45,8 +45,12 @@ void connect_system_info_sensor(SensorT<T>* sensor, String prefix,
  **/
 class SystemHz : public FloatSensor {
  public:
-  SystemHz() {}
-  void start() override final;
+  SystemHz() {
+    elapsed_millis_ = 0;
+
+    ReactESP::app->onTick([this]() { this->tick(); });
+    ReactESP::app->onRepeat(1000, [this]() { this->update(); });
+  }
   String get_value_name() { return "systemhz"; }
 
  private:
@@ -66,8 +70,9 @@ class SystemHz : public FloatSensor {
  **/
 class FreeMem : public IntSensor {
  public:
-  FreeMem() {}
-  void start() override final;
+  FreeMem() {
+    ReactESP::app->onRepeat(1000, [this]() { this->update(); });
+  }
   String get_value_name() { return "freemem"; }
 
  private:
@@ -84,8 +89,9 @@ class FreeMem : public IntSensor {
  **/
 class Uptime : public FloatSensor {
  public:
-  Uptime() {}
-  void start() override final;
+  Uptime() {
+    ReactESP::app->onRepeat(1000, [this]() { this->update(); });
+  }
   String get_value_name() { return "uptime"; }
 
  private:
@@ -102,8 +108,9 @@ class Uptime : public FloatSensor {
  **/
 class IPAddrDev : public StringSensor {
  public:
-  IPAddrDev() {}
-  void start() override final;
+  IPAddrDev() {
+    ReactESP::app->onRepeat(10000, [this]() { this->update(); });
+  }
   String get_value_name() { return "ipaddr"; }
 
  private:
@@ -120,8 +127,9 @@ class IPAddrDev : public StringSensor {
  **/
 class WiFiSignal : public FloatSensor {
  public:
-  WiFiSignal() {}
-  void start() override final;
+  WiFiSignal() {
+    ReactESP::app->onRepeat(3000, [this]() { this->update(); });
+  }
   String get_value_name() { return "wifisignal"; }
 
  private:

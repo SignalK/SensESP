@@ -19,11 +19,10 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
   }
 
   load_configuration();
-}
 
-void SmartSwitchController::start() {
+  // Emit the initial state once the event loop starts
   if (auto_initialize_) {
-    this->emit(is_on);
+    ReactESP::app->onDelay(0, [this]() { this->emit(is_on); });
   }
 }
 

@@ -52,7 +52,7 @@ namespace sensesp {
 
 class LocalDebug {
  public:
-  bool begin(String hostname, uint8_t startingDebugLevel = DEBUG);
+  bool begin(uint8_t startingDebugLevel = DEBUG);
 
   void setSerialEnabled(bool enable) {}  // No-op
 

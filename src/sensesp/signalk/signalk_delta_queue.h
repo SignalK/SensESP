@@ -5,8 +5,6 @@
 
 #include <list>
 
-#include "sensesp/system/startable.h"
-
 namespace sensesp {
 
 /**
@@ -16,7 +14,7 @@ namespace sensesp {
  * for each possible output channel (WSClient, NMEA 2000 messages,
  * carrier pigeons).
  */
-class SKDeltaQueue : public Startable {
+class SKDeltaQueue {
  public:
   SKDeltaQueue(unsigned int max_buffer_size = 20);
   void append(const String val);
@@ -32,8 +30,6 @@ class SKDeltaQueue : public Startable {
     this->meta_sent_ = false;
     release_semaphore();
   }
-
-  virtual void start() override;
 
   bool take_semaphore(unsigned long int timeout_ms = 0);
   void release_semaphore();

@@ -8,7 +8,10 @@ namespace sensesp {
 
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
-BaseBlinker::BaseBlinker(int pin) : pin_{pin} { pinMode(pin, OUTPUT); }
+BaseBlinker::BaseBlinker(int pin) : pin_{pin} {
+  pinMode(pin, OUTPUT);
+  ReactESP::app->onDelay(1, [this]() { this->tick(); });
+}
 
 /**
  * Turn the LED on or off.
@@ -74,8 +77,6 @@ void BaseBlinker::set_enabled(bool state) {
     }
   }
 }
-
-void BaseBlinker::start() { this->tick(); }
 
 PeriodicBlinker::PeriodicBlinker(int pin, unsigned int period)
     : BaseBlinker(pin), period_{period} {}
