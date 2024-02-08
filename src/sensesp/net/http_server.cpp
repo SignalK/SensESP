@@ -7,7 +7,7 @@
 
 namespace sensesp {
 
-std::list<HTTPServerHandler *> HTTPServerHandler::handlers_;
+std::list<HTTPRequestHandler *> HTTPRequestHandler::handlers_;
 
 // from:
 // https://stackoverflow.com/questions/2673207/c-c-url-decode-library/2766963

@@ -16,9 +16,9 @@ namespace sensesp {
  * to provide a RESTful API for configuring Configurable objects.
  *
  */
-class HTTPConfigHandler : public HTTPServerHandler {
+class HTTPConfigHandler : public HTTPRequestHandler {
  public:
-  HTTPConfigHandler() : HTTPServerHandler(){};
+  HTTPConfigHandler() : HTTPRequestHandler(){};
   virtual void set_handler(HTTPServer* server) override {
     // handler for GET /api/config
     const httpd_uri_t config_get_handler = {

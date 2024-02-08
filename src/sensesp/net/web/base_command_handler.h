@@ -19,9 +19,9 @@ namespace sensesp {
  * @brief Handle HTTP requests to different action endpoints.
  *
  */
-class HTTPResetHandler : public HTTPServerHandler {
+class HTTPResetHandler : public HTTPRequestHandler {
  public:
-  HTTPResetHandler() : HTTPServerHandler(){};
+  HTTPResetHandler() : HTTPRequestHandler(){};
   virtual void set_handler(HTTPServer* server) override {
     // handler for GET /device/reset
     const httpd_uri_t reset_handler = {
@@ -39,9 +39,9 @@ class HTTPResetHandler : public HTTPServerHandler {
   };
 };
 
-class HTTPRestartHandler : public HTTPServerHandler {
+class HTTPRestartHandler : public HTTPRequestHandler {
  public:
-  HTTPRestartHandler() : HTTPServerHandler(){};
+  HTTPRestartHandler() : HTTPRequestHandler(){};
   virtual void set_handler(HTTPServer* server) override {
     // handler for GET /device/restart
     const httpd_uri_t restart_handler = {
@@ -56,9 +56,9 @@ class HTTPRestartHandler : public HTTPServerHandler {
   };
 };
 
-class HTTPInfoHandler : public HTTPServerHandler {
+class HTTPInfoHandler : public HTTPRequestHandler {
  public:
-  HTTPInfoHandler() : HTTPServerHandler(){};
+  HTTPInfoHandler() : HTTPRequestHandler(){};
   virtual void set_handler(HTTPServer* server) override {
     // handler for GET /api/info
     const httpd_uri_t info_handler = {
@@ -93,9 +93,9 @@ class HTTPInfoHandler : public HTTPServerHandler {
   }
 };
 
-class HTTPConfigListHandler : public HTTPServerHandler {
+class HTTPConfigListHandler : public HTTPRequestHandler {
  public:
-  HTTPConfigListHandler() : HTTPServerHandler(){};
+  HTTPConfigListHandler() : HTTPRequestHandler(){};
 
   void add_sorted_configurables(JsonArray& config) {
     // sort the configurables by their sort_order
@@ -137,9 +137,9 @@ class RouteDefinition {
   String component_name_;
 };
 
-class HTTPRoutesHandler : public HTTPServerHandler {
+class HTTPRoutesHandler : public HTTPRequestHandler {
  public:
-  HTTPRoutesHandler() : HTTPServerHandler() { this->get_routes(); };
+  HTTPRoutesHandler() : HTTPRequestHandler() { this->get_routes(); };
 
   virtual void set_handler(HTTPServer* server) override {
     // handler for GET /device/restart
@@ -205,9 +205,9 @@ class HTTPRoutesHandler : public HTTPServerHandler {
   virtual void get_routes();
 };
 
-class HTTPScanNetworksHandler : public HTTPServerHandler {
+class HTTPScanNetworksHandler : public HTTPRequestHandler {
  public:
-  HTTPScanNetworksHandler() : HTTPServerHandler(){};
+  HTTPScanNetworksHandler() : HTTPRequestHandler(){};
   virtual void set_handler(HTTPServer* server) override {
     const httpd_uri_t scan_networks_handler = {
         .uri = "/api/networks",

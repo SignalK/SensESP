@@ -29,14 +29,14 @@ class HTTPServer;
 /**
  * @brief Base class for HTTP server handlers.
  *
- * A class that inherits from HTTPServerHandler can be will have its
+ * A class that inherits from HTTPRequestHandler can be will have its
  * `set_handler` method called when the HTTP server starts. This method
  * should register the handler with the server.
  *
  */
-class HTTPServerHandler {
+class HTTPRequestHandler {
  public:
-  HTTPServerHandler() {
+  HTTPRequestHandler() {
     // add this handler to the list of handlers
     handlers_.push_back(this);
   }
@@ -64,7 +64,7 @@ class HTTPServerHandler {
   void register_handler(HTTPServer* server) { this->set_handler(server); }
 
  private:
-  static std::list<HTTPServerHandler*> handlers_;
+  static std::list<HTTPRequestHandler*> handlers_;
 
   template <class T>
   friend esp_err_t call_member_handler(httpd_req_t* req,
@@ -105,7 +105,7 @@ class HTTPServer : public Configurable {
       } else {
         debugI("HTTP server started");
       }
-      HTTPServerHandler::register_handlers(this);
+      HTTPRequestHandler::register_handlers(this);
 
       // announce the server over mDNS
       MDNS.addService("http", "tcp", 80);

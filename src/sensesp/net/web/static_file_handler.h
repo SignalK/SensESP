@@ -14,10 +14,10 @@ namespace sensesp {
  * @brief Provide handlers for static web content.
  *
  */
-class HTTPStaticFileHandler : public HTTPServerHandler {
+class HTTPStaticFileHandler : public HTTPRequestHandler {
  public:
   HTTPStaticFileHandler(const StaticFileData* page_data)
-      : HTTPServerHandler(), pages_{page_data} {}
+      : HTTPRequestHandler(), pages_{page_data} {}
 
   virtual void set_handler(HTTPServer* server) override;
 
