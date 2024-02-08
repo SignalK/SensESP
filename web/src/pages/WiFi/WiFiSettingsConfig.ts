@@ -29,6 +29,7 @@ export class APSettingsConfig implements IAPSettingsConfig {
   password: string;
   channel: number;
   hidden: boolean;
+  captivePortalEnabled: boolean;
 
   constructor() {
     this.enabled = false;

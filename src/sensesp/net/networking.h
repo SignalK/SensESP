@@ -3,6 +3,8 @@
 
 #include "Arduino.h"
 #include "WiFi.h"
+#include <DNSServer.h>
+
 #include "sensesp/net/wifi_state.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
@@ -102,18 +104,20 @@ class AccessPointSettings {
  public:
   AccessPointSettings(bool enabled = true, String ssid = "SensESP",
                       String password = "thisisfine", int channel = 9,
-                      bool hidden = false)
+                      bool hidden = false, bool captive_portal_enabled = true)
       : enabled_{enabled},
         ssid_{ssid},
         password_{password},
         channel_{channel},
-        hidden_{hidden} {};
+        hidden_{hidden},
+        captive_portal_enabled_{captive_portal_enabled} {};
 
   bool enabled_;
   String ssid_;
   String password_;
   int channel_;
   bool hidden_;
+  bool captive_portal_enabled_ = true;
 
   static AccessPointSettings from_json(const JsonObject& json) {
     AccessPointSettings settings;
@@ -122,6 +126,7 @@ class AccessPointSettings {
     settings.password_ = json["password"] | "";
     settings.channel_ = json["channel"] | 1;
     settings.hidden_ = json["hidden"] | false;
+    settings.captive_portal_enabled_ = json["captivePortalEnabled"] | true;
     return settings;
   }
 
@@ -131,6 +136,7 @@ class AccessPointSettings {
     doc["password"] = password_;
     doc["channel"] = channel_;
     doc["hidden"] = hidden_;
+    doc["captivePortalEnabled"] = captive_portal_enabled_;
   }
 };
 
@@ -233,6 +239,8 @@ class Networking : public Configurable,
   void start_wifi_scan();
   int16_t get_wifi_scan_results(std::vector<WiFiNetworkInfo>& ssid_list);
 
+  bool is_captive_portal_enabled() { return ap_settings_.captive_portal_enabled_; }
+
  protected:
   void start_access_point();
   void start_client_autoconnect();
@@ -248,6 +256,8 @@ class Networking : public Configurable,
 
   bool client_enabled_ = false;
   std::vector<ClientSSIDConfig> client_settings_;
+
+  DNSServer* dns_server_ = nullptr;
 
   WiFiStateProducer* wifi_state_producer;
 };

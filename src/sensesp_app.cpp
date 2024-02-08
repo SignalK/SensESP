@@ -37,15 +37,17 @@ void SensESPApp::setup() {
     ota_ = new OTA(ota_password_);
   }
 
+  bool captive_portal_enabled = networking_->is_captive_portal_enabled();
+
   // create the HTTP server
   this->http_server_ = new HTTPServer();
+  this->http_server_->set_captive_portal(captive_portal_enabled);
 
   // Add the default HTTP server response handlers
-  this->http_static_file_handler_ = new HTTPStaticFileHandler(kWebUIFiles);
+  add_static_file_handlers(this->http_server_);
   add_base_app_http_command_handlers(this->http_server_);
   add_app_http_command_handlers(this->http_server_);
-
-  this->http_config_handler_ = new HTTPConfigHandler();
+  add_config_handlers(this->http_server_);
 
   // create the SK delta object
   sk_delta_queue_ = new SKDeltaQueue();

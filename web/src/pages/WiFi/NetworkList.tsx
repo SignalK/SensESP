@@ -27,7 +27,7 @@ export function NetworkList({
 
   async function updateNetworks(): Promise<void> {
     // Initiate a WiFi scan. This should return status code 202.
-    const response = await fetch(APP_CONFIG.wifi_scan_path);
+    const response = await fetch(APP_CONFIG.wifi_scan_path, { method: "POST" });
     if (response.status !== 202) {
       throw new Error(`HTTP Error ${response.status} ${response.statusText}`);
     }

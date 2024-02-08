@@ -122,9 +122,6 @@ class SensESPApp : public SensESPBaseApp {
 
   MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;
-  HTTPStaticFileHandler* http_static_file_handler_ = nullptr;
-
-  HTTPConfigHandler* http_config_handler_ = nullptr;
 
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;

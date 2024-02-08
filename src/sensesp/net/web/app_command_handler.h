@@ -10,18 +10,6 @@
 
 namespace sensesp {
 
-/**
- * @brief WiFi network scanning handler.
- *
- */
-class HTTPScanWiFiNetworksHandler : public HTTPRequestHandler {
- public:
-  HTTPScanWiFiNetworksHandler() : HTTPRequestHandler() {
-  };
-
-  virtual void set_handler(HTTPServer* server) override;
-};
-
 void add_app_http_command_handlers(HTTPServer* server);
 
 }  // namespace sensesp

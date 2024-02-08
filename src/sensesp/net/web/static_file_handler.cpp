@@ -1,32 +1,23 @@
 #include "static_file_handler.h"
 
+#include "autogen/web_ui_files.h"
+
 namespace sensesp {
 
-void HTTPStaticFileHandler::set_handler(HTTPServer* server) {
-    for (int i = 0; pages_[i].url != nullptr; i++) {
-      const StaticFileData& page = pages_[i];
-      httpd_uri_t handler{.uri = page.url,
-                          .method = HTTP_GET,
-                          .handler =
-                              [](httpd_req_t* req) {
-                                return call_static_handler(
-                                    req,
-                                    &HTTPStaticFileHandler::string_handler);
-                              },
-                          .user_ctx = (void*)&page};
-      server->register_handler(&handler);
-    }
-  };
-
-  esp_err_t HTTPStaticFileHandler::string_handler(httpd_req_t* req) {
-    const StaticFileData* page = (const StaticFileData*)req->user_ctx;
-    httpd_resp_set_type(req, page->content_type);
-    if (page->content_encoding != nullptr) {
-      httpd_resp_set_hdr(req, kContentEncoding, page->content_encoding);
-    }
-    httpd_resp_send(req, page->content, page->content_length);
-    return ESP_OK;
+void add_static_file_handlers(HTTPServer* server) {
+  for (int i = 0; kWebUIFiles[i].url != nullptr; i++) {
+    const StaticFileData& data = kWebUIFiles[i];
+    HTTPRequestHandler* handler = new HTTPRequestHandler(
+        1 << HTTP_GET, kWebUIFiles[i].url, [data](httpd_req_t* req) {
+          httpd_resp_set_type(req, data.content_type);
+          if (data.content_encoding != nullptr) {
+            httpd_resp_set_hdr(req, kContentEncoding, data.content_encoding);
+          }
+          httpd_resp_send(req, data.content, data.content_length);
+          return ESP_OK;
+        });
+    server->add_handler(handler);
   }
-
+}
 
 }  // namespace sensesp

@@ -14,18 +14,7 @@ namespace sensesp {
  * @brief Provide handlers for static web content.
  *
  */
-class HTTPStaticFileHandler : public HTTPRequestHandler {
- public:
-  HTTPStaticFileHandler(const StaticFileData* page_data)
-      : HTTPRequestHandler(), pages_{page_data} {}
-
-  virtual void set_handler(HTTPServer* server) override;
-
-  static esp_err_t string_handler(httpd_req_t* req);
- protected:
-  const StaticFileData* pages_;
-
-};
+void add_static_file_handlers(HTTPServer* server);
 
 }  // namespace sensesp
 

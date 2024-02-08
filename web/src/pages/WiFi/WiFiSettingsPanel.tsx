@@ -189,6 +189,15 @@ function APSettingsPanel({
             checked={config.hidden ?? false}
             onChange={handleApSettingsChange("hidden")}
           />
+
+          <FormSwitch
+            id={`${id}-captivePortal`}
+            label="Captive Portal"
+            type="checkbox"
+            checked={config.captivePortalEnabled ?? false}
+            onChange={handleApSettingsChange("captivePortalEnabled")}
+          />
+
         </div>
       </form>
     </CollapseCard>

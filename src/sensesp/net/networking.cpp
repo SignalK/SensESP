@@ -45,38 +45,44 @@ Networking::Networking(String config_path, String client_ssid,
     client_enabled_ = true;
   }
 
-    debugD("Enabling Networking");
+  debugD("Enabling Networking");
 
-    // If both saved AP settings and saved client settings
-    // are available, start in STA+AP mode.
+  // If both saved AP settings and saved client settings
+  // are available, start in STA+AP mode.
 
-    if (this->ap_settings_.enabled_ && this->client_enabled_ == true) {
-      WiFi.mode(WIFI_AP_STA);
-      start_access_point();
-      start_client_autoconnect();
-    }
+  if (this->ap_settings_.enabled_ && this->client_enabled_ == true) {
+    WiFi.mode(WIFI_AP_STA);
+    start_access_point();
+    start_client_autoconnect();
+  }
 
-    // If saved AP settings are available, use them.
+  // If saved AP settings are available, use them.
 
-    else if (this->ap_settings_.enabled_) {
-      WiFi.mode(WIFI_AP);
-      start_access_point();
-    }
+  else if (this->ap_settings_.enabled_) {
+    WiFi.mode(WIFI_AP);
+    start_access_point();
+  }
 
-    // If saved client settings are available, use them.
+  // If saved client settings are available, use them.
 
-    else if (this->client_enabled_) {
-      WiFi.mode(WIFI_STA);
-      start_client_autoconnect();
-    } else {
-      // Start WiFi with a bogus SSID to initialize the network stack but
-      // don't connect to any network.
-      WiFi.begin("0", "0");
-    }
+  else if (this->client_enabled_) {
+    WiFi.mode(WIFI_STA);
+    start_client_autoconnect();
+  } else {
+    // Start WiFi with a bogus SSID to initialize the network stack but
+    // don't connect to any network.
+    WiFi.begin("0", "0");
+  }
 
-    debugD("Networking enabled - probably");
+  if (this->ap_settings_.enabled_ &&
+      this->ap_settings_.captive_portal_enabled_) {
+    dns_server_ = new DNSServer();
 
-    // Otherwise we'll fall through and keep WiFi disabled.
+    dns_server_->setErrorReplyCode(DNSReplyCode::NoError);
+    dns_server_->start(53, "*", WiFi.softAPIP());
+
+    ReactESP::app->onRepeat(1, [this]() { dns_server_->processNextRequest(); });
+  }
 }
 
 /**
@@ -270,7 +276,6 @@ int16_t Networking::get_wifi_scan_results(
     ssid_list.push_back(info);
   }
 
-  WiFi.scanDelete();
   return num_networks;
 }
 
