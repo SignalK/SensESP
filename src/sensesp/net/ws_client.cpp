@@ -75,13 +75,12 @@ static void websocket_event_handler(void* handler_args, esp_event_base_t base,
 }
 
 WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
-                   String server_address, uint16_t server_port)
-    : Configurable{config_path, "Signal K Server Settings", 200} {
-  this->sk_delta_queue_ = sk_delta_queue;
-
-  conf_server_address_ = server_address;
-  conf_server_port_ = server_port;
-
+                   String server_address, uint16_t server_port, bool use_mdns)
+    : Configurable{config_path, "/System/Signal K Settings", 200},
+      sk_delta_queue_{sk_delta_queue},
+      conf_server_address_{server_address},
+      conf_server_port_{server_port},
+      use_mdns_{use_mdns} {
   // a WSClient object observes its own connection_state_ member
   // and simply passes through any notification it emits. As a result,
   // whenever the value of connection_state_ is updated, observers of the
@@ -396,7 +395,7 @@ void WSClient::connect() {
   debugI("Initiating websocket connection with server...");
 
   set_connection_state(WSConnectionState::kWSAuthorizing);
-  if (this->conf_server_address_.isEmpty()) {
+  if (use_mdns_) {
     if (!get_mdns_service(this->server_address_, this->server_port_)) {
       debugE("No Signal K server found in network when using mDNS service!");
     } else {
@@ -412,7 +411,10 @@ void WSClient::connect() {
     debugD("Websocket is connecting to Signal K server on address %s:%d",
            this->server_address_.c_str(), this->server_port_);
   } else {
-    // host and port not defined - wait for mDNS
+    // host and port not defined - don't try to connect
+    debugD(
+        "Websocket is not connecting to Signal K server because host and "
+        "port are not defined.");
     set_connection_state(WSConnectionState::kWSDisconnected);
     return;
   }
@@ -665,6 +667,7 @@ void WSClient::send_delta() {
 void WSClient::get_configuration(JsonObject& root) {
   root["sk_address"] = this->conf_server_address_;
   root["sk_port"] = this->conf_server_port_;
+  root["use_mdns"] = this->use_mdns_;
 
   root["token"] = this->auth_token_;
   root["client_id"] = this->client_id_;
@@ -672,24 +675,24 @@ void WSClient::get_configuration(JsonObject& root) {
 }
 
 bool WSClient::set_configuration(const JsonObject& config) {
-  String expected[] = {"sk_address", "sk_port", "token", "client_id"};
-  for (auto str : expected) {
-    if (!config.containsKey(str)) {
-      debugI(
-          "Websocket configuration update rejected. Missing following "
-          "parameter: %s",
-          str.c_str());
-      return false;
-    }
+  if (config.containsKey("sk_address")) {
+    this->conf_server_address_ = config["sk_address"].as<String>();
   }
-
-  this->conf_server_address_ = config["sk_address"].as<String>();
-  this->conf_server_port_ = config["sk_port"].as<int>();
-
-  // FIXME: setting the token should not be allowed via the REST API.
-  this->auth_token_ = config["token"].as<String>();
-  this->client_id_ = config["client_id"].as<String>();
-  this->polling_href_ = config["polling_href"].as<String>();
+  if (config.containsKey("sk_port")) {
+    this->conf_server_port_ = config["sk_port"].as<int>();
+  }
+  if (config.containsKey("use_mdns")) {
+    this->use_mdns_ = config["use_mdns"].as<bool>();
+  }
+  if (config.containsKey("token")) {
+    this->auth_token_ = config["token"].as<String>();
+  }
+  if (config.containsKey("client_id")) {
+    this->client_id_ = config["client_id"].as<String>();
+  }
+  if (config.containsKey("polling_href")) {
+    this->polling_href_ = config["polling_href"].as<String>();
+  }
 
   return true;
 }

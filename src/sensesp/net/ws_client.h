@@ -37,7 +37,7 @@ class WSClient : public Configurable,
   // main task methods
 
   WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
-           String server_address, uint16_t server_port);
+           String server_address, uint16_t server_port, bool use_mdns = true);
 
   const String get_server_address() const { return server_address_; }
   const uint16_t get_server_port() const { return server_port_; }
@@ -93,6 +93,7 @@ class WSClient : public Configurable,
   // these are the hardcoded and/or conf file values
   String conf_server_address_ = "";
   uint16_t conf_server_port_ = 0;
+  bool use_mdns_ = true;
 
   String client_id_ = "";
   String polling_href_ = "";

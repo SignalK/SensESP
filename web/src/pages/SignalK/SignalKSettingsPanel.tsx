@@ -6,6 +6,8 @@ import { useContext, useEffect, useId, useState } from "preact/hooks";
 import { fetchConfigData, saveConfigData } from "../../common/configAPIClient";
 import { Collapse } from "../../components/Collapse";
 
+const CONFIG_PATH = "/System/Signal K Settings";
+
 export function SignalKSettingsPanel(): JSX.Element {
   const [config, setConfig] = useState({});
   const [requestSave, setRequestSave] = useState(false);
@@ -21,7 +23,7 @@ export function SignalKSettingsPanel(): JSX.Element {
     if (requestSave) {
       // save config data to server
       void saveConfigData(
-        "/System/Signal K Settings",
+        CONFIG_PATH,
         JSON.stringify(config),
         handleError,
       );
@@ -31,7 +33,7 @@ export function SignalKSettingsPanel(): JSX.Element {
 
   async function updateConfig(): Promise<void> {
     try {
-      const data = await fetchConfigData("/System/Signal K Settings");
+      const data = await fetchConfigData(CONFIG_PATH);
       setConfig(data.config);
     } catch (e) {
       setErrorText(e.message);
@@ -87,9 +89,17 @@ function SKConnectionSettings({
   const [mdns, setMdns] = useState(false);
   const id = useId();
 
+  function setHostname(hostname: string): void {
+    setConfig({ ...config, sk_address: hostname });
+  }
+
+  function setPort(port: number): void {
+    setConfig({ ...config, sk_port: port });
+  }
+
   function handleMDNSChange(event): void {
     setMdns(event.target.checked);
-    setConfig({ ...config, mdns: event.target.checked });
+    setConfig({ ...config, use_mdns: event.target.checked });
   }
 
   return (
@@ -110,7 +120,7 @@ function SKConnectionSettings({
                 type="checkbox"
                 className="form-check-input switch"
                 id={`${id}-mdns`}
-                checked={config.mdns === true}
+                checked={config.use_mdns === true}
                 onChange={handleMDNSChange}
               />
             </div>
@@ -125,6 +135,7 @@ function SKConnectionSettings({
                   className="form-control"
                   id={`${id}-hostname`}
                   value={String(config.sk_address)}
+                  onInput={(e) => setHostname(e.currentTarget.value)}
                 />
               </div>
               <div className="mb-3">
@@ -136,6 +147,7 @@ function SKConnectionSettings({
                   step={1}
                   className="form-control"
                   value={Number(config.sk_port)}
+                  onInput={(e) => setPort(Number(e.currentTarget.value))}
                   id={`${id}-port`}
                 />
               </div>

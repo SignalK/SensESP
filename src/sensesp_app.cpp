@@ -3,10 +3,10 @@
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
+#include "sensesp/net/web/autogen/web_ui_files.h"
 #include "sensesp/system/button.h"
 #include "sensesp/system/system_status_led.h"
 #include "sensesp/transforms/debounce.h"
-#include "sensesp/net/web/autogen/web_ui_files.h"
 
 namespace sensesp {
 
@@ -53,8 +53,10 @@ void SensESPApp::setup() {
   sk_delta_queue_ = new SKDeltaQueue();
 
   // create the websocket client
-  this->ws_client_ = new WSClient("/System/Signal K Settings", sk_delta_queue_,
-                                  sk_server_address_, sk_server_port_);
+  bool use_mdns = sk_server_address_ == "";
+  this->ws_client_ =
+      new WSClient("/System/Signal K Settings", sk_delta_queue_,
+                   sk_server_address_, sk_server_port_, use_mdns);
 
   // connect the system status controller
   WiFiStateProducer::get_singleton()->connect_to(&system_status_controller_);
@@ -83,7 +85,8 @@ void SensESPApp::setup() {
     system_status_led_ = new SystemStatusLed(LED_PIN);
   }
   this->system_status_controller_.connect_to(system_status_led_);
-  this->ws_client_->get_delta_tx_count_producer().connect_to(system_status_led_);
+  this->ws_client_->get_delta_tx_count_producer().connect_to(
+      system_status_led_);
 
   // create the button handler
   if (button_gpio_pin_ != -1) {
