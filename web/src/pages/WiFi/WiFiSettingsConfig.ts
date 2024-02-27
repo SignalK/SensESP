@@ -21,6 +21,7 @@ export interface IAPSettingsConfig {
   password: string;
   channel: number;
   hidden: boolean;
+  captivePortalEnabled: boolean;
 }
 
 export class APSettingsConfig implements IAPSettingsConfig {

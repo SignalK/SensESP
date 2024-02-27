@@ -17,7 +17,8 @@ export default defineMock(
         keys: [
           "/System/WiFi Settings",
           "/System/Signal K Settings",
-          "/Transforms/Linear"
+          "/Transforms/Linear",
+          "/Curves/Level Curve",
         ]
       },
       delay: 800,
@@ -158,5 +159,34 @@ export default defineMock(
       },
       delay: 400,
     },
+    {
+      url: '/api/config/Curves/Level Curve',
+      method: 'GET',
+      body: {
+        "config": { "samples": [{ "input": 0, "output": 0 }, { "input": 180, "output": 1 }, { "input": 300, "output": 1 }] }, "schema": {
+          "type": "object",
+          "properties": {
+            "samples": {
+              "title": "Sample values",
+              "type": "array",
+              "format": "table",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "input": {
+                    "type": "number",
+                    "title": "Sender Resistance (ohms)"
+                  },
+                  "output": {
+                    "type": "number",
+                    "title": "Fill Level (ratio)"
+                  }
+                }
+              }
+            }
+          }
+        }, "description": "Piecewise linear conversion of the resistance of the A3 sender to a fill level ratio between 0 and 1. First value on each row is the resistance in ohms, second value is the corresponding fill level ratio (between 0 and 1)."
+      }
+    }
   ]
 )

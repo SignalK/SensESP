@@ -3,9 +3,9 @@ import {
   fetchConfigData,
   saveConfigData,
 } from "common/configAPIClient";
-import { JsonObject } from "common/jsonTypes";
+import { JsonObject, JsonValue } from "common/jsonTypes";
 import { ButtonCard } from "components/Card";
-import { FormInput, FormSwitch } from "components/Form";
+import { FormSwitch, FormTextInput } from "components/Form";
 import { produce } from "immer";
 import { AppPage } from "pages/AppPage";
 import { type JSX } from "preact";
@@ -178,14 +178,11 @@ function DeviceNameCard(): JSX.Element {
         used both as a hostname (e.g. <code>my-device.local</code>) and as an
         identifying name in the Signal K network.
       </p>
-      <FormInput
+      <FormTextInput
         label="Hostname"
-        id={`${id}-name`}
         type="text"
         value={hostname}
-        onInput={(e: ChangeEvent<HTMLInputElement>) =>
-          setHostname(e.currentTarget.value)
-        }
+        setValue={(value: JsonValue) => setHostname(String(value))}
       />
     </SystemSettingsCard>
   );
@@ -280,28 +277,24 @@ function AuthCard(): JSX.Element {
       </div>
       <div className="row">
         <div className="col-sm-6">
-          <FormInput
+          <FormTextInput
             label="Username"
-            id={`${id}-username`}
             type="text"
-            placeholder="Username"
             value={username}
             disabled={!authEnabled}
-            onInput={(e: ChangeEvent<HTMLInputElement>) => {
-              setUsername(e.currentTarget.value);
+            setValue={(value: JsonValue) => {
+              setUsername(String(value));
             }}
           />
         </div>
         <div className="col-sm-6">
-          <FormInput
+          <FormTextInput
             label="Password"
-            id={`${id}-password`}
             type="password"
-            placeholder="Password"
             value={password}
             disabled={!authEnabled}
-            onInput={(e: ChangeEvent<HTMLInputElement>) => {
-              setPassword(e.currentTarget.value);
+            setValue={(value: JsonValue) => {
+              setPassword(String(value));
             }}
           />
         </div>

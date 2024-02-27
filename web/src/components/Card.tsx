@@ -3,6 +3,8 @@ import { useId, type ReactNode } from "preact/compat";
 import { Collapse } from "./Collapse";
 
 interface CardProps {
+  id?: string;
+  key?: string;
   title: string;
   children: ReactNode;
 }
@@ -122,7 +124,6 @@ function CheckToggle({ expanded, setExpanded }: CheckToggleProps): JSX.Element {
       <input
         className="form-check-input"
         type="checkbox"
-        value=""
         id={id}
         checked={expanded}
         onClick={() => {

@@ -2,11 +2,23 @@ import { useEffect, useId, useState } from "preact/hooks";
 import { fetchConfigData, saveConfigData } from "../../common/configAPIClient";
 
 import { type ConfigData } from "common/configAPIClient";
-import { type JsonObject } from "common/jsonTypes";
+import { JsonValue, type JsonObject } from "common/jsonTypes";
 import { Card } from "components/Card";
-import { FormInput } from "components/Form";
+import {
+  FormCheckboxInput,
+  FormNumberInput,
+  FormRadioInput,
+  FormSelectInput,
+  FormTextAreaInput,
+  FormTextInput,
+} from "components/Form";
 import { ModalError } from "components/ModalError";
-import { type ChangeEvent, type JSX } from "preact/compat";
+import { type JSX } from "preact/compat";
+
+interface ItemsProps {
+  type: string;
+  enum: string[];
+}
 
 interface EditControlProps {
   id: string;
@@ -14,103 +26,162 @@ interface EditControlProps {
     type: string;
     title: string;
     readOnly?: boolean;
+    uniqueItems?: boolean;
+    format?: string;
+    items?: ItemsProps;
   };
-  value: string | number;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: JsonValue;
+  setValue: (value: JsonValue) => void;
 }
 
-function EditControl({
+export function EditControl({
   id,
   schema,
   value,
-  onChange,
+  setValue,
 }: EditControlProps): JSX.Element {
-  let type: string = schema.type;
   let step: number | undefined;
   let as: string | undefined;
+  let checked: boolean = false;
 
-  switch (type) {
+  let valueString = String(value);
+
+  switch (schema.type) {
     case "string":
-      type = "text";
-      break;
+      return (
+        <FormTextInput
+          key={id}
+          label={schema.title}
+          value={valueString}
+          readOnly={schema.readOnly ?? false}
+          setValue={(value: string) => {
+            setValue(value);
+          }}
+        />
+      );
     case "number":
-      type = "number";
-      break;
+      return (
+        <FormNumberInput
+          key={id}
+          label={schema.title}
+          value={Number(value)}
+          readOnly={schema.readOnly ?? false}
+          setValue={(value: number) => {
+            setValue(value);
+          }}
+        />
+      );
     case "integer":
-      type = "number";
-      step = 1;
+      return (
+        <FormNumberInput
+          key={id}
+          label={schema.title}
+          value={Number(value)}
+          readOnly={schema.readOnly ?? false}
+          step={1}
+          setValue={(value: number) => {
+            setValue(value);
+          }}
+        />
+      );
       break;
     case "boolean":
-      type = "checkbox";
-      break;
+      checked = value === "true";
+      return (
+        <FormCheckboxInput
+          key={id}
+          type="checkbox"
+          label={schema.title}
+          checked={checked}
+          setValue={(checked: boolean) => {
+            setValue(checked);
+          }}
+        />
+      );
     case "array":
-      as = "textarea";
-      break;
-    case "object":
-      as = "textarea";
-      break;
-    default:
-      type = "text";
-      break;
-  }
-
-  return (
-    <div>
-      <FormInput
-        type={type}
-        as={as}
-        id={id}
-        label={schema.title}
-        value={value}
-        readOnly={schema.readOnly ?? false}
-        step={step}
-        onchange={onChange}
-      />
-    </div>
-  );
-}
-
-export default EditControl;
-
-interface CardContentsProps {
-  config: JsonObject;
-  schema: JsonObject | null;
-  description: string;
-  setConfig: (config: JsonObject) => void;
-}
-
-function CardContents({
-  config,
-  schema,
-  description,
-  setConfig,
-}: CardContentsProps): JSX.Element {
-  const updateConfig = (key: string, value: string | number): void => {
-    setConfig({ ...config, [key]: value });
-  };
-
-  const properties = schema?.properties ?? {};
-  const keys = Object.keys(properties);
-
-  return (
-    <>
-      {description !== "" || null}
-
-      {keys.map((key) => {
+      if (schema.uniqueItems === true) {
+        if (schema.format === "radiobutton") {
+          return (
+            <FormRadioInput
+              key={id}
+              label={schema.title}
+              items={schema.items ?? { type: "string", enum: [] }}
+              value={valueString}
+              setValue={(value: string) => {
+                setValue(value);
+              }}
+            />
+          );
+        } else if (schema.format === "select") {
+          return (
+            <FormSelectInput
+              key={id}
+              label={schema.title}
+              items={schema.items ?? { type: "string", enum: [] }}
+              value={valueString}
+              setValue={(value: string) => {
+                setValue(value);
+              }}
+            />
+          );
+        } else {
+          throw new Error("Unsupported array format");
+        }
+      } else {
+        // Complex arrays are implemented as textareas for now
+        let jsonString: string | null;
+        if (value === null) {
+          jsonString = null;
+        } else {
+          jsonString = JSON.stringify(value, null, 2);
+        }
+        const stringToJson = (value: string): JsonValue | null => {
+          try {
+            return JSON.parse(value);
+          } catch (e) {
+            return null;
+          }
+        };
         return (
-          <EditControl
-            id={key}
-            key={key}
-            schema={properties[key]}
-            value={String(config[key] ?? "")}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              updateConfig(key, event.currentTarget.value);
+          <FormTextAreaInput
+            key={id}
+            label={schema.title}
+            value={jsonString}
+            setValue={(newValue: string | null) => {
+              if (newValue === null) {
+                setValue(newValue);
+              } else {
+                // Only update if JSON is different. This allows for
+                // whitepace changes.
+                const nvJson = stringToJson(newValue ?? "");
+                const nvJsonString = JSON.stringify(nvJson, null, 2);
+                if (nvJsonString !== jsonString) {
+                  setValue(nvJson);
+                }
+              }
             }}
+            readOnly={schema.readOnly ?? false}
           />
         );
-      })}
-    </>
-  );
+      }
+      break;
+    case "object":
+      throw new Error("Unsupported object type");
+      break;
+    default:
+      // same as text
+      return (
+        <FormTextInput
+          key={id}
+          label={schema.title}
+          value={valueString}
+          readOnly={schema.readOnly ?? false}
+          setValue={(value: string) => {
+            setValue(value);
+          }}
+        />
+      );
+  }
 }
 
 interface ConfigCardProps {
@@ -124,6 +195,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
   const [saving, setSaving] = useState<boolean>(false);
   const [httpErrorText, setHttpErrorText] = useState<string>("");
   const [isDirty, setIsDirty] = useState<boolean>(false);
+  const [isValid, setIsValid] = useState<boolean>(true);
 
   const id = useId();
 
@@ -143,6 +215,12 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     }
   }, [path]);
 
+  useEffect(() => {
+    // config is valid if none of the values are null
+    const isValid = Object.values(config).every((v) => v !== null);
+    setIsValid(isValid);
+  }, [config]);
+
   async function handleSave(e: MouseEvent): Promise<void> {
     e.preventDefault();
     setSaving(true);
@@ -151,6 +229,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
       setIsDirty(true);
       setHttpErrorText(e.message);
     });
+    setConfig(config);
     setIsDirty(false);
     setSaving(false);
   }
@@ -175,6 +254,13 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     );
   }
 
+  const updateConfig = (key: string, value: JsonValue): void => {
+    setConfig({ ...config, [key]: value });
+  };
+
+  const properties = schema?.properties ?? {};
+  const keys = Object.keys(properties);
+
   return (
     <>
       <ModalError
@@ -189,7 +275,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         <p>{httpErrorText}</p>
       </ModalError>
 
-      <Card title={title}>
+      <Card id={`${id}-card`} key={`${id}-card`} title={title}>
         <form>
           <div
             onInput={() => {
@@ -197,12 +283,23 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
             }}
             className="mb-2"
           >
-            <CardContents
-              config={config}
-              schema={schema}
-              description={description}
-              setConfig={setConfig}
-            />
+            {description !== "" ? (
+              <p dangerouslySetInnerHTML={{ __html: description }}></p>
+            ) : null}
+
+            {keys.map((key) => {
+              return (
+                <EditControl
+                  id={`${id}-editcontrol-${key}`}
+                  key={`${id}-editcontrol-${key}`}
+                  schema={properties[key]}
+                  value={config[key] ?? null}
+                  setValue={(value: JsonValue) => {
+                    updateConfig(key, value);
+                  }}
+                />
+              );
+            })}
           </div>
           <div className="d-flex justify-content-begin">
             <div
@@ -220,7 +317,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
               onClick={(e: MouseEvent): void => {
                 void handleSave(e);
               }}
-              disabled={saving || !isDirty}
+              disabled={saving || (!isDirty || !isValid)}
             >
               Save
             </button>

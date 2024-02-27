@@ -1,6 +1,7 @@
 import { fetchConfigData, saveConfigData } from "common/configAPIClient";
+import { JsonValue } from "common/jsonTypes";
 import { CollapseCard } from "components/Card";
-import { FormInput, FormSwitch } from "components/Form";
+import { FormCheckboxInput, FormNumberInput, FormSwitch, FormTextInput } from "components/Form";
 import { ModalError } from "components/ModalError";
 import { Tabs } from "components/Tab";
 import { produce } from "immer";
@@ -119,18 +120,15 @@ function APSettingsPanel({
 }: APSettingsPanelProps): JSX.Element {
   const id = useId();
 
-  function handleApSettingsChange(
-    field,
-  ): (event: JSX.TargetedEvent<HTMLInputElement, Event>) => void {
-    return (event) => {
-      setConfig({
-        ...config,
-        [field]:
-          event.currentTarget?.type === "checkbox"
-            ? event.currentTarget?.checked
-            : event.currentTarget?.value,
-      });
-    };
+  function updateSettingsField(
+    field: string,
+    value: string | number | boolean,
+  ): void {
+    setConfig(
+      produce(config, (draft) => {
+        draft[field] = value;
+      }),
+    );
   }
 
   function setExpanded(expanded: boolean): void {
@@ -155,49 +153,50 @@ function APSettingsPanel({
     >
       <form>
         <div className="vstack gap-2">
-          <FormInput
-            id={`${id}-name`}
+          <FormTextInput
             label="Name"
-            type="text"
-            placeholder="Network Name"
             value={config.name ?? ""}
-            onchange={handleApSettingsChange("name")}
+            setValue={(value: JsonValue) =>
+              updateSettingsField("name", String(value))
+            }
           />
 
-          <FormInput
-            id={`${id}-password`}
+          <FormTextInput
             label="Password"
             type="password"
-            placeholder="Network Password"
             value={config.password ?? ""}
-            onchange={handleApSettingsChange("password")}
+            setValue={(value: JsonValue) =>
+              updateSettingsField("password", String(value))
+            }
           />
 
-          <FormInput
-            id={`${id}-channel`}
+          <FormNumberInput
             label="Channel"
-            type="number"
+            step={1}
             aria-label="Select WiFi channel"
             value={config.channel ?? 1}
-            onchange={handleApSettingsChange("channel")}
+            setValue={(value: JsonValue) =>
+              updateSettingsField("channel", Number(value))
+            }
           />
 
-          <FormSwitch
-            id={`${id}-hidden`}
+          <FormCheckboxInput
             label="Hidden"
             type="checkbox"
             checked={config.hidden ?? false}
-            onChange={handleApSettingsChange("hidden")}
+            setValue={(value: JsonValue) =>
+              updateSettingsField("hidden", Boolean(value))
+            }
           />
 
-          <FormSwitch
-            id={`${id}-captivePortal`}
+          <FormCheckboxInput
             label="Captive Portal"
             type="checkbox"
             checked={config.captivePortalEnabled ?? false}
-            onChange={handleApSettingsChange("captivePortalEnabled")}
+            setValue={(value: JsonValue) =>
+              updateSettingsField("captivePortalEnabled", Boolean(value))
+            }
           />
-
         </div>
       </form>
     </CollapseCard>
@@ -270,7 +269,10 @@ function ClientSettingsPanel({
             <div className="d-flex align-items-center">
               <h4>Available Networks</h4>
               {isScanning && (
-                <div className="spinner-border spinner-border-sm ms-auto" role="status">
+                <div
+                  className="spinner-border spinner-border-sm ms-auto"
+                  role="status"
+                >
                   <span className="visually-hidden">Scanning...</span>
                 </div>
               )}

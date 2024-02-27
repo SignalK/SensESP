@@ -1,9 +1,10 @@
 import { Collapse } from "components/Collapse";
-import { FormCheck, FormInput } from "components/Form";
+import { FormCheck, FormCheckboxInput, FormTextInput } from "components/Form";
 import { produce } from "immer";
 import { type JSX } from "preact";
 import { useId } from "preact/hooks";
 import { type ISingleClientConfig } from "./WiFiSettingsConfig";
+import { JsonValue } from "common/jsonTypes";
 
 interface SingleClientConfigPanelProps {
   config: ISingleClientConfig;
@@ -29,47 +30,39 @@ export function SingleClientConfigPanel({
   return (
     <>
       <div className="vstack gap-2">
-        <FormInput
-          id={`${id}-name`}
+        <FormTextInput
           type="text"
-          label="Name"
-          placeholder="Network Name"
+          label="Network Name"
           value={config.name ?? "WiFi Name"}
-          onchange={(event) => {
-            updateConfigField("name", event.currentTarget.value);
+          setValue={(value: JsonValue) => {
+            updateConfigField("name", value);
           }}
         />
-        <FormInput
-          id={`${id}-password`}
+        <FormTextInput
           type="password"
           label="Password"
-          placeholder="WiFi Password"
           value={config.password ?? ""}
-          onchange={(event) => {
-            updateConfigField("password", event.currentTarget.value);
+          setValue={(value: JsonValue) => {
+            updateConfigField("password", value);
           }}
         />
 
         <div>
-          <FormCheck
-            id={`${id}-dhcp`}
-            name={id}
+          <FormCheckboxInput
             type="radio"
             label="DHCP"
             checked={useDHCP}
-            onchange={(event) => {
-              updateConfigField("useDHCP", event.currentTarget.checked);
+            setValue={(checked: JsonValue) => {
+              updateConfigField("useDHCP", checked);
             }}
           />
 
-          <FormCheck
-            id={`${id}-static`}
-            name={id}
+          <FormCheckboxInput
             type="radio"
             label="Static"
             checked={!useDHCP}
-            onchange={(event) => {
-              updateConfigField("useDHCP", !event.currentTarget.checked);
+            setValue={(checked: JsonValue) => {
+              updateConfigField("useDHCP", !checked);
             }}
           />
         </div>
@@ -98,47 +91,39 @@ function StaticIPConfig({
   const id = useId();
   return (
     <div>
-      <FormInput
-        id={`${id}-ipAddress`}
+      <FormTextInput
         type="text"
         label="IP Address"
-        placeholder="IP Address"
         value={config.ipAddress ?? "192.168.0.2"}
-        onchange={(event) => {
-          updateConfigField("ipAddress", event.currentTarget.value);
+        setValue={(value: JsonValue) => {
+          updateConfigField("ipAddress", String(value));
         }}
       />
 
-      <FormInput
-        id={`${id}-netmask`}
+      <FormTextInput
         type="text"
         label="Netmask"
-        placeholder="Netmask"
         value={config.netmask ?? "255.255.255.0"}
-        onchange={(event) => {
-          updateConfigField("netmask", event.currentTarget.value);
+        setValue={(value: JsonValue) => {
+          updateConfigField("netmask", String(value));
         }}
       />
 
-      <FormInput
-        id={`${id}-gateway`}
+      <FormTextInput
         type="text"
         label="Gateway"
-        placeholder="Gateway"
         value={config.gateway ?? "192.168.0.1"}
-        onchange={(event) => {
-          updateConfigField("gateway", event.currentTarget.value);
+        setValue={(value: JsonValue) => {
+          updateConfigField("gateway", String(value));
         }}
       />
 
-      <FormInput
-        id={`${id}-dnsServer`}
+      <FormTextInput
         type="text"
         label="DNS Server"
-        placeholder="DNS Server"
         value={config.dnsServer ?? "8.8.8.8"}
-        onchange={(event) => {
-          updateConfigField("dnsServer", event.currentTarget.value);
+        setValue={(value: JsonValue) => {
+          updateConfigField("dnsServer", String(value));
         }}
       />
     </div>
