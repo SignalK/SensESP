@@ -4,6 +4,7 @@
 #include <ArduinoJson.h>
 
 #include <map>
+#include <vector>
 
 #include "Arduino.h"
 
@@ -67,11 +68,17 @@ class Configurable {
   /**
    * @brief Set the description of the Configurable.
    */
-  void set_description(String description) { description_ = description; }
+  Configurable* set_description(String description) {
+    description_ = description;
+    return this;
+  }
 
   int get_sort_order() { return sort_order_; }
 
-  void set_sort_order(int sort_order) { sort_order_ = sort_order; }
+  Configurable* set_sort_order(int sort_order) {
+    sort_order_ = sort_order;
+    return this;
+  }
 
   /**
    * Persists the configuration returned by get_configuration()
@@ -85,7 +92,39 @@ class Configurable {
    */
   virtual void clear_configuration();
 
+  /**
+   * @brief Get configurables.
+   *
+   */
+  static std::vector<Configurable*> get_configurables() {
+    // Sort configurables by sort_order
+    std::vector<Configurable*> sorted_configurables;
+    for (auto& it : Configurable::configurables_) {
+      sorted_configurables.push_back(it.second);
+    }
+    std::sort(sorted_configurables.begin(), sorted_configurables.end(),
+              [](Configurable* a, Configurable* b) {
+                return a->get_sort_order() < b->get_sort_order();
+              });
+
+    return sorted_configurables;
+  }
+
+  /**
+   * @brief Get a single Configurable by key.
+   *
+   * Return nullptr if not found.
+   */
+  static Configurable* get_configurable(String key) {
+    auto it = Configurable::configurables_.find(key);
+    if (it != Configurable::configurables_.end()) {
+      return it->second;
+    }
+    return nullptr;
+  }
+
  protected:
+  static std::map<String, Configurable*> configurables_;
   /**
    * Loads a configuration previously saved with save_configuration() and
    * passes the configuration to set_configuration().
@@ -97,8 +136,6 @@ class Configurable {
   /// preference.
   int sort_order_ = 1000;
 };
-
-extern std::map<String, Configurable*> configurables;
 
 }  // namespace sensesp
 

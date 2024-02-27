@@ -7,9 +7,13 @@ namespace sensesp {
 esp_err_t handle_config_list(httpd_req_t* req) {
   JsonDocument json_doc;
   JsonArray arr = json_doc["keys"].to<JsonArray>();
+
+  std::vector<Configurable*> configurables = Configurable::get_configurables();
+
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
-    arr.add(it->first);
+    arr.add((*it)->config_path_);
   }
+
   String response;
   serializeJson(json_doc, response);
   httpd_resp_set_type(req, "application/json");
@@ -35,14 +39,12 @@ void add_config_get_handler(HTTPServer* server) {
         }
 
         // find the Configurable object with the matching config_path
-        std::map<String, Configurable*>::iterator it =
-            configurables.find(url_tail);
-        if (it == configurables.end()) {
+        Configurable* confable = Configurable::get_configurable(url_tail);
+        if (confable == nullptr) {
           httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
                               "No Configurable found with that path");
           return ESP_FAIL;
         }
-        Configurable* confable = it->second;
 
         // get the configuration
         JsonDocument doc;
@@ -83,14 +85,12 @@ void add_config_put_handler(HTTPServer* server) {
         url_tail = String(url_tail_cstr);
 
         // find the Configurable object with the matching config_path
-        std::map<String, Configurable*>::iterator it =
-            configurables.find(url_tail);
-        if (it == configurables.end()) {
+        Configurable* confable = Configurable::get_configurable(url_tail);
+        if (confable == nullptr) {
           httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
                               "No Configurable found with that path");
           return ESP_FAIL;
         }
-        Configurable* confable = it->second;
 
         // receive the content
         size_t content_len = req->content_len;

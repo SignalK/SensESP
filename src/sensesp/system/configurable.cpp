@@ -6,10 +6,7 @@
 
 namespace sensesp {
 
-// Define a global configurable map. Rationale for a global variable:
-// Every Configurable with an id gets registered, and carrying an object
-// reference around would unnecessarily reduce readability of the code.
-std::map<String, Configurable*> configurables;
+std::map<String, Configurable*> Configurable::configurables_;
 
 Configurable::Configurable(String config_path, String description,
                            int sort_order)
@@ -17,11 +14,11 @@ Configurable::Configurable(String config_path, String description,
       description_{description},
       sort_order_{sort_order} {
   if (config_path != "") {
-    auto it = configurables.find(config_path);
-    if (it != configurables.end()) {
+    Configurable* confable = Configurable::get_configurable(config_path);
+    if (confable != nullptr) {
       debugW("WARNING: Overriding id %s", config_path.c_str());
     }
-    configurables[config_path] = this;
+    Configurable::configurables_[config_path] = this;
   }
 }
 
