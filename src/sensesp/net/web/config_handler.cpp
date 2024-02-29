@@ -11,7 +11,9 @@ esp_err_t handle_config_list(httpd_req_t* req) {
   std::vector<Configurable*> configurables = Configurable::get_configurables();
 
   for (auto it = configurables.begin(); it != configurables.end(); ++it) {
-    arr.add((*it)->config_path_);
+    if ((*it)->get_config_schema() != "{}") {
+      arr.add((*it)->config_path_);
+    }
   }
 
   String response;
