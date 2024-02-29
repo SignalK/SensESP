@@ -8,9 +8,8 @@ namespace sensesp {
 
 class StringConfig : public Configurable {
  public:
-  StringConfig(String& value, String& config_path, String& description,
-               int sort_order = 1000)
-      : value_(value), Configurable(config_path, description, sort_order) {
+  StringConfig(String& value, String& config_path)
+      : value_(value), Configurable(config_path) {
     load_configuration();
   }
 
@@ -27,9 +26,8 @@ class StringConfig : public Configurable {
 
 class NumberConfig : public Configurable {
  public:
-  NumberConfig(float& value, String& config_path, String& description,
-               int sort_order = 1000)
-      : value_(value), Configurable(config_path, description, sort_order) {
+  NumberConfig(float& value, String& config_path)
+      : value_(value), Configurable(config_path) {
     load_configuration();
   }
 
@@ -46,11 +44,10 @@ class NumberConfig : public Configurable {
 
 class CheckboxConfig : public Configurable {
  public:
-  CheckboxConfig(bool value, String title, String config_path,
-                 String description, int sort_order = 1000)
+  CheckboxConfig(bool value, String title, String config_path)
       : value_(value),
         title_(title),
-        Configurable(config_path, description, sort_order) {
+        Configurable(config_path) {
     load_configuration();
   }
 
@@ -74,13 +71,13 @@ enum class SelectType {
 class SelectConfig : public Configurable {
  public:
   SelectConfig(String value, String title, String config_path,
-               String description, std::vector<String> options,
-               SelectType format, int sort_order = 1000)
+               std::vector<String> options,
+               SelectType format)
       : value_(value),
         title_(title),
         options_(options),
         format_(format),
-        Configurable(config_path, description, sort_order) {
+        Configurable(config_path) {
     load_configuration();
   }
 
