@@ -68,7 +68,11 @@ class RepeatSensor : public SensorT<T> {
   RepeatSensor<T>(unsigned int repeat_interval_ms, std::function<T()> callback)
       : SensorT<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
-        returning_callback_(callback) {}
+        returning_callback_(callback) {
+    ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
+      this->emit(this->returning_callback_());
+    });
+  }
 
   /**
    * @brief Construct a new RepeatSensor object (supporting asynchronous
@@ -88,14 +92,8 @@ class RepeatSensor : public SensorT<T> {
       : SensorT<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         emitting_callback_(callback) {
-    if (emitting_callback_ != nullptr) {
-      ReactESP::app->onRepeat(repeat_interval_ms_,
-                              [this]() { emitting_callback_(this); });
-    } else {
-      ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
-        this->emit(this->returning_callback_());
-      });
-    }
+    ReactESP::app->onRepeat(repeat_interval_ms_,
+                            [this]() { emitting_callback_(this); });
   }
 
  protected:
