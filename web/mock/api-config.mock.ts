@@ -19,6 +19,7 @@ export default defineMock(
           "/System/Signal K Settings",
           "/Transforms/Linear",
           "/Curves/Level Curve",
+          "/A2 Enabled",
         ]
       },
       delay: 800,
@@ -187,6 +188,19 @@ export default defineMock(
           }
         }, "description": "Piecewise linear conversion of the resistance of the A3 sender to a fill level ratio between 0 and 1. First value on each row is the resistance in ohms, second value is the corresponding fill level ratio (between 0 and 1)."
       }
+    },
+    {
+      url: '/api/config/A2 Enabled',
+      method: 'GET',
+      body: {
+        "config": { "value": true }, "schema": {
+          "type": "object",
+          "properties": {
+            "value": { "title": "Enable A2 Input", "type": "boolean" }
+          }
+        }, "description": "Enable analog tank level input A2. Requires a reboot to take effect."
+      }
     }
+
   ]
 )

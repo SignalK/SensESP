@@ -10,6 +10,7 @@ interface ItemsProps {
 interface FormRadioInputProps {
   label: string;
   value: string;
+  readOnly?: boolean;
   setValue: (value: string) => void;
   items: ItemsProps;
 }
@@ -28,6 +29,7 @@ export function FormRadioInput(props: FormRadioInputProps): JSX.Element {
             id={id + item}
             name={item}
             value={item}
+            disabled={props.readOnly}
             checked={props.value === item}
             onChange={(e) => props.setValue(e.currentTarget.value)}
           />
@@ -43,6 +45,7 @@ export function FormRadioInput(props: FormRadioInputProps): JSX.Element {
 interface FormSelectInputProps {
   label: string;
   value: string;
+  readOnly?: boolean;
   items: ItemsProps;
   setValue: (value: string) => void;
 }
@@ -56,6 +59,7 @@ export function FormSelectInput(props: FormSelectInputProps): JSX.Element {
         className="form-select"
         id={id}
         value={props.value}
+        readOnly={props.readOnly}
         onChange={(e) => props.setValue(e.currentTarget.value)}
       >
         {props.items?.enum.map((item, index) => (
@@ -75,6 +79,7 @@ interface FormCheckboxInputProps {
   label: string;
   type: string;
   checked: boolean;
+  readOnly?: boolean;
   setValue: (value: JsonValue) => void;
 }
 
@@ -88,7 +93,8 @@ export function FormCheckboxInput(props: FormCheckboxInputProps): JSX.Element {
         type={props.type || "checkbox"}
         id={id}
         checked={props.checked}
-        onChange={(e) => props.setValue(e.currentTarget.value)}
+        disabled={ props.readOnly }
+        onChange={(e) => props.setValue(!props.checked)}
       />
       <label className="form-check-label" htmlFor={id}>
         {props.label}

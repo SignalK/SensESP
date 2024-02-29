@@ -86,13 +86,14 @@ export function EditControl({
       );
       break;
     case "boolean":
-      checked = value === "true";
+      checked = value === true;
       return (
         <FormCheckboxInput
           key={id}
           type="checkbox"
           label={schema.title}
           checked={checked}
+          readOnly={schema.readOnly ?? false}
           setValue={(checked: boolean) => {
             setValue(checked);
           }}
@@ -107,6 +108,7 @@ export function EditControl({
               label={schema.title}
               items={schema.items ?? { type: "string", enum: [] }}
               value={valueString}
+              readOnly={schema.readOnly ?? false}
               setValue={(value: string) => {
                 setValue(value);
               }}
@@ -119,6 +121,7 @@ export function EditControl({
               label={schema.title}
               items={schema.items ?? { type: "string", enum: [] }}
               value={valueString}
+              readOnly={schema.readOnly ?? false}
               setValue={(value: string) => {
                 setValue(value);
               }}
@@ -236,15 +239,8 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
 
   const title = path.slice(1).replace(/\//g, " ▸ ");
 
-  if (
-    schema === null ||
-    schema === undefined ||
-    Object.keys(schema)?.length === 0
-  ) {
-    return null;
-  }
-
   if (Object.keys(config)?.length === 0) {
+    console.log("No config data");
     return (
       <div className="d-flex align-items-center justify-content-center min">
         <div className="spinner-border" role="status">
@@ -252,6 +248,14 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         </div>
       </div>
     );
+  }
+
+  if (
+    schema === null ||
+    schema === undefined ||
+    Object.keys(schema)?.length === 0
+  ) {
+    return null;
   }
 
   const updateConfig = (key: string, value: JsonValue): void => {
