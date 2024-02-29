@@ -129,7 +129,6 @@ bool HTTPServer::handle_captive_portal(httpd_req_t* req) {
 
   // We should only apply the captive portal to the soft AP IP address
   if (ap_ip != ipstr) {
-    debugD("Not a captive portal request");
     return false;
   }
 
