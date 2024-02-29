@@ -267,7 +267,7 @@ class LambdaTransform : public Transform<IN, OUT> {
       return "{}";
     }
 
-    debugD("Preparing config schema");
+    debugD("Preparing config schema for %d parameters", num_params);
 
     output.concat(FPSTR(kLambdaTransformSchemaHead));
     if (num_params > 0) {
@@ -334,7 +334,7 @@ class LambdaTransform : public Transform<IN, OUT> {
 
   static String format_schema_row(const char key[], const char title[],
                                   const char type[], const bool read_only) {
-    char row[100] = "";
+    char row[400] = "";
     const char* read_only_str = read_only ? "true" : "false";
 
     static const char schema_row[] = R"(
