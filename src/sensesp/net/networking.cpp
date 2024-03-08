@@ -1,5 +1,7 @@
 #include "networking.h"
 
+#include <esp_wifi.h>
+
 #include "sensesp.h"
 #include "sensesp/system/led_blinker.h"
 #include "sensesp_app.h"
@@ -47,6 +49,15 @@ Networking::Networking(String config_path, String client_ssid,
 
   debugD("Enabling Networking");
 
+  // Hate to do this, but Raspberry Pi AP setup is going to be much more
+  // complicated with enforced WPA2. BAD Raspberry Pi! BAD!
+  WiFi.setMinSecurity(WIFI_AUTH_WPA_PSK);
+
+  // Start WiFi with a bogus SSID to initialize the network stack but
+  // don't connect to any network.
+  WiFi.begin("0", "0", 0, nullptr, false);
+
+
   // If both saved AP settings and saved client settings
   // are available, start in STA+AP mode.
 
@@ -68,10 +79,6 @@ Networking::Networking(String config_path, String client_ssid,
   else if (this->client_enabled_) {
     WiFi.mode(WIFI_STA);
     start_client_autoconnect();
-  } else {
-    // Start WiFi with a bogus SSID to initialize the network stack but
-    // don't connect to any network.
-    WiFi.begin("0", "0");
   }
 
   if (this->ap_settings_.enabled_ &&
@@ -117,8 +124,16 @@ void Networking::start_client_autoconnect() {
     static uint32_t attempt_num = 0;
     static uint32_t current_config_idx = 0;
 
+    int num_configs = client_settings_.size();
+
+    if (WiFi.status() == WL_CONNECTED) {
+      attempt_num = 0;
+      current_config_idx = 0;
+      return;
+    }
+
     // First check if any of the client settings are defined
-    if (client_settings_.size() == 0) {
+    if (num_configs == 0) {
       debugW("No client settings defined. Leaving WiFi client disconnected.");
       return;
     }
@@ -127,31 +142,38 @@ void Networking::start_client_autoconnect() {
 
     ClientSSIDConfig config;
 
-    while (true) {
-      config = client_settings_[current_config_idx % client_settings_.size()];
-      current_config_idx += 1;
+    // Get next valid client config
+    for (current_config_idx = current_config_idx;
+         current_config_idx < prev_config_idx + num_configs;
+         current_config_idx++) {
+      config = client_settings_[current_config_idx % num_configs];
       if (config.ssid_ != "" && config.password_ != "") {
         break;
       }
-      if (current_config_idx == prev_config_idx + client_settings_.size()) {
-        debugW(
-            "No enabled client settings found. Leaving WiFi client "
-            "disconnected.");
-        return;
-      }
     }
 
-    if (client_enabled_ && WiFi.status() != WL_CONNECTED) {
-      debugI("Connecting to wifi SSID %s (connection attempt #%d).",
-             config.ssid_.c_str(), attempt_num);
-      if (!config.use_dhcp_) {
-        debugI("Using static IP address: %s", config.ip_.toString().c_str());
-        WiFi.config(config.ip_, config.dns_server_, config.gateway_,
-                    config.netmask_);
-      }
-      WiFi.begin(config.ssid_.c_str(), config.password_.c_str());
-      attempt_num++;
+    debugD("Current client config index: %d", current_config_idx);
+    debugD("Attempt number: %d", attempt_num);
+    debugD("Config SSID: %s", config.ssid_.c_str());
+
+    // If no valid client config found, leave WiFi client disconnected
+    if (config.ssid_ == "" || config.password_ == "") {
+      debugW(
+          "No valid client settings found. Leaving WiFi client disconnected.");
+      return;
     }
+
+    debugI("Connecting to wifi SSID %s (connection attempt #%d).",
+           config.ssid_.c_str(), attempt_num);
+
+    if (!config.use_dhcp_) {
+      debugI("Using static IP address: %s", config.ip_.toString().c_str());
+      WiFi.config(config.ip_, config.dns_server_, config.gateway_,
+                  config.netmask_);
+    }
+    WiFi.begin(config.ssid_.c_str(), config.password_.c_str());
+    attempt_num++;
+    current_config_idx++;  // Move to the next config for the next attempt
   };
 
   // Perform an initial connection without a delay.
@@ -243,7 +265,7 @@ void Networking::reset() {
   WiFi.disconnect(true);
   // On ESP32, disconnect does not erase previous credentials. Let's connect
   // to a bogus network instead
-  WiFi.begin("0", "0");
+  WiFi.begin("0", "0", 0, nullptr, false);
 }
 
 WiFiStateProducer* WiFiStateProducer::instance_ = nullptr;
@@ -256,8 +278,16 @@ WiFiStateProducer* WiFiStateProducer::get_singleton() {
 }
 
 void Networking::start_wifi_scan() {
+  // Scan fails if WiFi is connecting. Disconnect to allow scanning.
+  if (WiFi.status() != WL_CONNECTED) {
+    debugD("WiFi is not connected. Disconnecting to allow scanning.");
+    WiFi.disconnect();
+  }
   debugI("Starting WiFi network scan");
-  WiFi.scanNetworks(true);
+  int result = WiFi.scanNetworks(true);
+  if (result == WIFI_SCAN_FAILED) {
+    debugE("WiFi scan failed to start");
+  }
 }
 
 int16_t Networking::get_wifi_scan_results(
