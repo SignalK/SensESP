@@ -98,6 +98,10 @@ class SensESPApp : public SensESPBaseApp {
     this->system_status_led_ = system_status_led;
     return this;
   }
+  const SensESPApp* set_admin_user(const char* username, const char* password) {
+    this->http_server_->set_auth_credentials(username, password, true);
+    return this;
+  }
   const SensESPApp* enable_ota(const char* password) {
     ota_password_ = password;
     return this;

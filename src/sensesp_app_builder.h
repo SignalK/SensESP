@@ -74,6 +74,16 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     app_->set_hostname(hostname);
     return this;
   }
+
+  /**
+   * @brief Set admin username and password for the web interface.
+   *
+   */
+  SensESPAppBuilder* set_admin_user(const char* username, const char* password) {
+    app_->set_admin_user(username, password);
+    return this;
+  }
+
   /**
    * @brief Set the system status led object.
    *
