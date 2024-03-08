@@ -22,8 +22,10 @@ SensESPBaseApp::SensESPBaseApp() {
   filesystem_ = new Filesystem();
   // create the hostname_ observable - this needs to be done before
   // the builder methods are called
-  hostname_ = new PersistingObservableValue<String>(
-      kDefaultHostname, "/system/hostname", "Hostname", 0);
+  hostname_ = new PersistingObservableValue<String>(kDefaultHostname,
+                                                    "/system/hostname");
+  hostname_->set_description("Device hostname");
+  hostname_->set_sort_order(0);
   // create a remote debugger object
   debug_output_ = new DebugOutput();
 }

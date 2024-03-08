@@ -56,10 +56,9 @@ class HTTPRequestHandler {
 class HTTPServer : public Configurable {
  public:
   HTTPServer(int port = HTTP_DEFAULT_PORT,
-             String config_path = "/system/httpserver", String description = "",
-             int sort_order = 0)
+             String config_path = "/system/httpserver")
       : config_(HTTPD_DEFAULT_CONFIG()),
-        Configurable(config_path, description, sort_order) {
+        Configurable(config_path) {
     config_.server_port = port;
     config_.stack_size = 4096;
     config_.max_uri_handlers = 20;

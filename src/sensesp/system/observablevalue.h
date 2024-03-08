@@ -51,10 +51,9 @@ class PersistingObservableValue : public ObservableValue<T>,
  public:
   PersistingObservableValue() : Configurable() {}
 
-  PersistingObservableValue(const T& value, String config_path = "",
-                            String description = "", int sort_order = 0)
+  PersistingObservableValue(const T& value, String config_path = "")
       : ObservableValue<T>(value),
-        Configurable(config_path, description, sort_order) {
+        Configurable(config_path) {
     load_configuration();
   }
 
