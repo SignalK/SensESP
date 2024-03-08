@@ -123,7 +123,6 @@ bool HTTPServer::handle_captive_portal(httpd_req_t* req) {
     return false;
   }
   inet_ntop(AF_INET, &addr.sin6_addr.un.u32_addr[3], ipstr, sizeof(ipstr));
-  debugD("Local IP address: %s", ipstr);
 
   String ap_ip = WiFi.softAPIP().toString();
 

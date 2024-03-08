@@ -334,7 +334,7 @@ class LambdaTransform : public Transform<IN, OUT> {
 
   static String format_schema_row(const char key[], const char title[],
                                   const char type[], const bool read_only) {
-    char row[400] = "";
+    char row[1024] = "";
     const char* read_only_str = read_only ? "true" : "false";
 
     static const char schema_row[] = R"(
@@ -342,6 +342,8 @@ class LambdaTransform : public Transform<IN, OUT> {
   )";
 
     sprintf(row, schema_row, key, title, type, read_only_str);
+
+    debugD("Formatted schema row: %s", row);
 
     return String(row);
   }
