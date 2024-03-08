@@ -65,20 +65,6 @@ void SensESPApp::setup() {
   // create the MDNS discovery object
   mdns_discovery_ = new MDNSDiscovery();
 
-  // create the wifi disconnect watchdog
-  this->system_status_controller_
-      .connect_to(new DebounceTemplate<SystemStatus>(
-          3 * 60 * 1000  // 180 s = 180000 ms = 3 minutes
-          ))
-      ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {
-        debugD("Got system status: %d", (int)input);
-        if (input == SystemStatus::kWifiDisconnected ||
-            input == SystemStatus::kWifiNoAP) {
-          debugW("Unable to connect to wifi for too long; restarting.");
-          ReactESP::app->onDelay(1000, []() { ESP.restart(); });
-        }
-      }));
-
   // create a system status led and connect it
 
   if (system_status_led_ == NULL) {
