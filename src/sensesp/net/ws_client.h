@@ -115,8 +115,8 @@ class WSClient : public Configurable,
   /// @brief Emits the number of deltas sent since last report
   TaskQueueProducer<int> delta_tx_tick_producer_ =
       TaskQueueProducer<int>(0, ReactESP::app, 5, 990);
-  IntegratorT<int, int> delta_tx_count_producer_{1, 0, ""};
-  IntegratorT<int, int> delta_rx_count_producer_{1, 0, ""};
+  Integrator<int, int> delta_tx_count_producer_{1, 0, ""};
+  Integrator<int, int> delta_rx_count_producer_{1, 0, ""};
 
   SemaphoreHandle_t received_updates_semaphore_ =
       xSemaphoreCreateRecursiveMutex();

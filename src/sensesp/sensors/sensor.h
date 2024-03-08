@@ -24,14 +24,14 @@ namespace sensesp {
  * variable to be configurable at run-time in your project, don't provide a
  * config_path when you construct the class.
  */
-class Sensor : virtual public Observable, public Configurable {
+class SensorConfig : virtual public Observable, public Configurable {
  public:
-  Sensor(String config_path = "");
+  SensorConfig(String config_path = "");
 
-  static const std::set<Sensor*>& get_sensors() { return sensors_; }
+  static const std::set<SensorConfig*>& get_sensors() { return sensors_; }
 
  private:
-  static std::set<Sensor*> sensors_;
+  static std::set<SensorConfig*> sensors_;
 };
 
 /**
@@ -39,19 +39,19 @@ class Sensor : virtual public Observable, public Configurable {
  *
  **/
 template <typename T>
-class SensorT : public Sensor, public ValueProducer<T> {
+class Sensor : public SensorConfig, public ValueProducer<T> {
  public:
-  SensorT<T>(String config_path = "")
-      : Sensor(config_path), ValueProducer<T>() {}
+  Sensor<T>(String config_path = "")
+      : SensorConfig(config_path), ValueProducer<T>() {}
 };
 
-typedef SensorT<float> FloatSensor;
-typedef SensorT<int> IntSensor;
-typedef SensorT<bool> BoolSensor;
-typedef SensorT<String> StringSensor;
+typedef Sensor<float> FloatSensor;
+typedef Sensor<int> IntSensor;
+typedef Sensor<bool> BoolSensor;
+typedef Sensor<String> StringSensor;
 
 template <class T>
-class RepeatSensor : public SensorT<T> {
+class RepeatSensor : public Sensor<T> {
  public:
   /**
    * @brief Construct a new RepeatSensor object.
@@ -66,7 +66,7 @@ class RepeatSensor : public SensorT<T> {
    * @tparam T The type of the value returned by the callback function.
    */
   RepeatSensor<T>(unsigned int repeat_interval_ms, std::function<T()> callback)
-      : SensorT<T>(""),
+      : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         returning_callback_(callback) {
     ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
@@ -89,7 +89,7 @@ class RepeatSensor : public SensorT<T> {
    */
   RepeatSensor<T>(unsigned int repeat_interval_ms,
                   std::function<void(RepeatSensor<T>*)> callback)
-      : SensorT<T>(""),
+      : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         emitting_callback_(callback) {
     ReactESP::app->onRepeat(repeat_interval_ms_,

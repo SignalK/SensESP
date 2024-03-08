@@ -51,10 +51,10 @@ static const char SCHEMA_CONSTANT_SENSOR[] PROGMEM = R"###({
  * @brief Base class for constant value sensors.
  */
 template <class T>
-class ConstantSensor : public SensorT<T> {
+class ConstantSensor : public Sensor<T> {
  public:
   ConstantSensor(T value, int send_interval = 30, String config_path = "")
-      : SensorT<T>(config_path), value_{value}, send_interval_{send_interval} {
+      : Sensor<T>(config_path), value_{value}, send_interval_{send_interval} {
     this->load_configuration();
 
     ReactESP::app->onRepeat(send_interval_ * 1000,

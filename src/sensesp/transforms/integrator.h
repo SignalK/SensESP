@@ -22,7 +22,7 @@ static const char INTEGRATOR_SCHEMA[] PROGMEM = R"({
  * @tparam P Producer (output) data type
  */
 template <class C, class P>
-class IntegratorT : public Transform<C, P> {
+class Integrator : public Transform<C, P> {
  public:
   /**
    * @brief Construct a new Integrator T object
@@ -31,7 +31,7 @@ class IntegratorT : public Transform<C, P> {
    * @param value Initial value of the accumulator
    * @param config_path Configuration path
    */
-  IntegratorT(P k = 1, P value = 0, String config_path = "")
+  Integrator(P k = 1, P value = 0, String config_path = "")
       : Transform<C, P>(config_path), k{k}, value{value} {
     this->load_configuration();
     this->emit(value);
@@ -66,8 +66,8 @@ class IntegratorT : public Transform<C, P> {
   P value = 0;
 };
 
-typedef IntegratorT<float, float> Integrator;
-typedef IntegratorT<int, int> Accumulator;
+typedef Integrator<float, float> FloatIntegrator;
+typedef Integrator<int, int> Accumulator;
 
 }  // namespace sensesp
 #endif

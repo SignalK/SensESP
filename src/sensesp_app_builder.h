@@ -210,7 +210,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
   const SensESPAppBuilder* enable_wifi_watchdog() {
     // create the wifi disconnect watchdog
     app_->system_status_controller_
-        .connect_to(new DebounceTemplate<SystemStatus>(
+        .connect_to(new Debounce<SystemStatus>(
             3 * 60 * 1000  // 180 s = 180000 ms = 3 minutes
             ))
         ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {

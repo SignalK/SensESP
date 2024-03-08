@@ -14,7 +14,7 @@ namespace sensesp {
  * @brief Connect a system information sensor to SKOutput
  **/
 template <typename T>
-void connect_system_info_sensor(SensorT<T>* sensor, String prefix,
+void connect_system_info_sensor(Sensor<T>* sensor, String prefix,
                                 String name) {
   auto hostname_obs = SensESPBaseApp::get()->get_hostname_observable();
   String hostname = hostname_obs->get();

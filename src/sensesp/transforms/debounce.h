@@ -35,16 +35,14 @@ static const char DEBOUNCE_SCHEMA[] PROGMEM = R"###({
  * @see DigitalInputChange
  */
 template <class T>
-class DebounceTemplate : public SymmetricTransform<T> {
+class Debounce : public SymmetricTransform<T> {
  public:
-  DebounceTemplate(int ms_min_delay = 15, String config_path = "")
-      : SymmetricTransform<T>(config_path),
-        ms_min_delay_{ms_min_delay} {
+  Debounce(int ms_min_delay = 15, String config_path = "")
+      : SymmetricTransform<T>(config_path), ms_min_delay_{ms_min_delay} {
     this->load_configuration();
   }
 
   virtual void set(T input, uint8_t input_channel = 0) override {
-
     // Input has changed since the last emit, or this is the first
     // input since the program started to run.
 
@@ -87,13 +85,11 @@ class DebounceTemplate : public SymmetricTransform<T> {
   virtual String get_config_schema() override { return FPSTR(DEBOUNCE_SCHEMA); }
 };
 
-typedef DebounceTemplate<bool> DebounceBool;
-typedef DebounceTemplate<bool>
-    Debounce;  // for backward-compatibility with original class
-typedef DebounceTemplate<int> DebounceInt;
-typedef DebounceTemplate<float>
-    DebounceFloat;  // not sure this works - test it if you use it
+typedef Debounce<bool> DebounceBool;
+typedef Debounce<int> DebounceInt;
+typedef Debounce<float>
+    DebounceFloat;
 
-}
+}  // namespace sensesp
 
 #endif

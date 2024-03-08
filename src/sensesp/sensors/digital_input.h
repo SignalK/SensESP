@@ -45,12 +45,12 @@ class DigitalInput {
  * @param config_path The path to configuring read_delay in the Config UI.
  *
  * */
-class DigitalInputState : public DigitalInput, public SensorT<bool> {
+class DigitalInputState : public DigitalInput, public Sensor<bool> {
  public:
   DigitalInputState(uint8_t pin, int pin_mode, int read_delay = 1000,
                     String config_path = "")
       : DigitalInput{pin, pin_mode},
-        SensorT<bool>(config_path),
+        Sensor<bool>(config_path),
         read_delay_{read_delay},
         triggered_{false} {
     load_configuration();
@@ -84,7 +84,7 @@ class DigitalInputState : public DigitalInput, public SensorT<bool> {
  * @param config_path The path to configuring read_delay in the Config UI
  *
  * */
-class DigitalInputCounter : public DigitalInput, public SensorT<int> {
+class DigitalInputCounter : public DigitalInput, public Sensor<int> {
  public:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       unsigned int read_delay, String config_path = "")
@@ -106,7 +106,7 @@ class DigitalInputCounter : public DigitalInput, public SensorT<int> {
                       unsigned int read_delay, String config_path,
                       std::function<void()> interrupt_handler)
       : DigitalInput{pin, pin_mode},
-        SensorT<int>(config_path),
+        Sensor<int>(config_path),
         interrupt_type_{interrupt_type},
         interrupt_handler_{interrupt_handler},
         read_delay_{read_delay} {
@@ -185,12 +185,12 @@ class DigitalInputDebounceCounter : public DigitalInputCounter {
  *
  * @see Debounce
  * */
-class DigitalInputChange : public DigitalInput, public SensorT<bool> {
+class DigitalInputChange : public DigitalInput, public Sensor<bool> {
  public:
   DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type,
                      String config_path = "")
       : DigitalInput{pin, pin_mode},
-        SensorT<bool>(config_path),
+        Sensor<bool>(config_path),
         interrupt_type_{interrupt_type},
         triggered_{true} {
     load_configuration();
