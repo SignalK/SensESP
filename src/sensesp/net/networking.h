@@ -1,15 +1,16 @@
 #ifndef _networking_H_
 #define _networking_H_
 
-#include "Arduino.h"
-#include "WiFi.h"
+#include <Arduino.h>
 #include <DNSServer.h>
+#include <WiFi.h>
 
 #include "sensesp/net/wifi_state.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/resettable.h"
 #include "sensesp/system/valueproducer.h"
+#include "sensesp_base_app.h"
 
 namespace sensesp {
 
@@ -102,7 +103,7 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
  */
 class AccessPointSettings {
  public:
-  AccessPointSettings(bool enabled = true, String ssid = "SensESP",
+  AccessPointSettings(bool enabled = true, String ssid = "",
                       String password = "thisisfine", int channel = 9,
                       bool hidden = false, bool captive_portal_enabled = true)
       : enabled_{enabled},
@@ -110,7 +111,12 @@ class AccessPointSettings {
         password_{password},
         channel_{channel},
         hidden_{hidden},
-        captive_portal_enabled_{captive_portal_enabled} {};
+        captive_portal_enabled_{captive_portal_enabled} {
+    if (ssid_ == "") {
+      // If no SSID is provided, use the hostname as the SSID
+      ssid_ = SensESPBaseApp::get_hostname();
+    }
+  };
 
   bool enabled_;
   String ssid_;
@@ -239,7 +245,9 @@ class Networking : public Configurable,
   void start_wifi_scan();
   int16_t get_wifi_scan_results(std::vector<WiFiNetworkInfo>& ssid_list);
 
-  bool is_captive_portal_enabled() { return ap_settings_.captive_portal_enabled_; }
+  bool is_captive_portal_enabled() {
+    return ap_settings_.captive_portal_enabled_;
+  }
 
  protected:
   void start_access_point();
