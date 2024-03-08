@@ -51,7 +51,29 @@ esp_err_t HTTPServer::dispatch_request(httpd_req_t* req) {
     }
   }
 
-  if (auth_required_) {
+  // Get the HTTP request socket local IP address
+  int sockfd = httpd_req_to_sockfd(req);
+  char ipstr[INET6_ADDRSTRLEN];
+  struct sockaddr_in6 addr;  // esp_http_server uses IPv6 addressing
+  socklen_t addr_size = sizeof(addr);
+  if (getsockname(sockfd, (struct sockaddr*)&addr, &addr_size) < 0) {
+    debugE("Error getting client IP");
+    return false;
+  }
+  inet_ntop(AF_INET, &addr.sin6_addr.un.u32_addr[3], ipstr, sizeof(ipstr));
+
+  String ap_ip = WiFi.softAPIP().toString();
+
+  bool auth_required;
+
+  // Don't require authentication for the captive portal
+  if (ap_ip != ipstr) {
+    auth_required = auth_required_;
+  } else {
+    auth_required = false;
+  }
+
+  if (auth_required) {
     bool success;
     success =
         authenticate_request(authenticator_, call_request_dispatcher, req);
