@@ -40,10 +40,10 @@ namespace sensesp {
  * @param[in] config_path Configuration path for the sensor.
  */
 
-static const char SCHEMA_CONSTANT_SENSOR[] PROGMEM = R"###({
+static const char SCHEMA_CONSTANT_SENSOR[] = R"###({
         "type": "object",
         "properties": {
-            "value": { "title": "Constant Value", "type": "number", "description": "Constant value" }
+            "value": { "title": "Constant Value", "type": "%TYPE%", "description": "Constant value" }
         }
     })###";
 
@@ -72,7 +72,7 @@ class ConstantSensor : public Sensor<T> {
   virtual bool set_configuration(const JsonObject &config) override {
     // Neither of the configuration parameters are mandatory
     if (config.containsKey("value")) {
-      value_ = config["value"];
+      value_ = config["value"].as<T>();
     }
     if (config.containsKey("interval")) {
       send_interval_ = config["interval"];
@@ -80,13 +80,28 @@ class ConstantSensor : public Sensor<T> {
     return true;
   }
   virtual String get_config_schema() override {
-    return FPSTR(SCHEMA_CONSTANT_SENSOR);
+    String schema = SCHEMA_CONSTANT_SENSOR;
+    schema.replace("%TYPE%", sensor_type_);
+    return schema;
   }
   void update() { this->emit(value_); }
 
   T value_;
   int send_interval_;  // seconds
+
+  static const String sensor_type_;
 };
+
+template <class T>
+const String ConstantSensor<T>::sensor_type_ = "";
+template <>
+const String ConstantSensor<int>::sensor_type_;
+template <>
+const String ConstantSensor<float>::sensor_type_;
+template <>
+const String ConstantSensor<String>::sensor_type_;
+template <>
+const String ConstantSensor<bool>::sensor_type_;
 
 // ..........................................
 //  constant value sensors
