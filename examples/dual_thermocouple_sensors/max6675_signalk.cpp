@@ -53,6 +53,7 @@ void setup() {
   auto* temp0 = new RepeatSensor<float>(1000, temp0_callback); 
   auto* temp1 = new RepeatSensor<float>(1000, temp1_callback);
 
+  // not sure if this is the correct path, but you can change to whatever you like
   temp0->connect_to(new SKOutputFloat("propulsion.0.exhaustTemperature"));
   temp1->connect_to(new SKOutputFloat("propulsion.1.exhaustTemperature"));
 
