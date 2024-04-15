@@ -35,38 +35,50 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
 void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
   float x0 = 0.0;
   float y0 = 0.0;
+  bool inputTooLow = false;
+  bool inputTooHigh = false;
 
   std::set<Sample>::iterator it = samples_.begin();
 
   while (it != samples_.end()) {
     auto& sample = *it;
 
-    if (input > sample.input) {
+    if (input < sample.input) {
+      // Input is lower than the current sample input
+      inputTooLow = true;
+      break;
+    } else if (input > sample.input) {
       x0 = sample.input;
       y0 = sample.output;
     } else {
+      // Input matches a sample exactly
+      x0 = sample.input;
+      y0 = sample.output;
       break;
     }
 
     it++;
   }
 
-  if (it != samples_.end()) {
+  if (!inputTooLow && it != samples_.end()) {
     // We found our range. "input" is between
-    // minInput and it->input. CurveInterpolator the result
+    // x0 and it->input. Interpolate the result
     Sample max = *it;
     float x1 = max.input;
     float y1 = max.output;
 
     output = (y0 * (x1 - input) + y1 * (input - x0)) / (x1 - x0);
+  } else if (inputTooLow) {
+    // Input is too low, return the minimum sample input
+    output = samples_.begin()->output;
   } else {
-    // Hit the end of the table with no match.
-    output = 9999.9;
-    //    debugW("Could not find sample interval for input %0f", input);
+    // Input is too high, return the maximum sample input
+    output = samples_.rbegin()->output;
   }
 
   notify();
 }
+
 
 void CurveInterpolator::get_configuration(JsonObject& root) {
   JsonArray json_samples = root.createNestedArray("samples");
