@@ -67,16 +67,16 @@ void SystemStatusLed::set(SystemStatus new_value, uint8_t input_channel) {
     case SystemStatus::kWifiManagerActivated:
       this->set_wifimanager_activated();
       break;
-    case SystemStatus::kWSDisconnected:
+    case SystemStatus::kSKWSDisconnected:
       this->set_ws_disconnected();
       break;
-    case SystemStatus::kWSConnecting:
+    case SystemStatus::kSKWSConnecting:
       this->set_ws_connecting();
       break;
-    case SystemStatus::kWSAuthorizing:
+    case SystemStatus::kSKWSAuthorizing:
       this->set_ws_authorizing();
       break;
-    case SystemStatus::kWSConnected:
+    case SystemStatus::kSKWSConnected:
       this->set_ws_connected();
       break;
   }

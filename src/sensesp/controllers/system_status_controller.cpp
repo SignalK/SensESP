@@ -15,7 +15,7 @@ void SystemStatusController::set(WiFiState new_value,
       break;
     case WiFiState::kWifiConnectedToAP:
     case WiFiState::kWifiAPModeActivated:
-      this->update_state(SystemStatus::kWSDisconnected);
+      this->update_state(SystemStatus::kSKWSDisconnected);
       break;
     case WiFiState::kWifiManagerActivated:
       this->update_state(SystemStatus::kWifiManagerActivated);
@@ -23,25 +23,25 @@ void SystemStatusController::set(WiFiState new_value,
   }
 }
 
-void SystemStatusController::set(WSConnectionState new_value,
+void SystemStatusController::set(SKWSConnectionState new_value,
                                        uint8_t input_channel) {
   switch (new_value) {
-    case WSConnectionState::kWSDisconnected:
+    case SKWSConnectionState::kSKWSDisconnected:
       if (current_state_ != SystemStatus::kWifiDisconnected &&
           current_state_ != SystemStatus::kWifiNoAP &&
           current_state_ != SystemStatus::kWifiManagerActivated) {
         // Wifi disconnection states override the higher level protocol state
-        this->update_state(SystemStatus::kWSDisconnected);
+        this->update_state(SystemStatus::kSKWSDisconnected);
       }
       break;
-    case WSConnectionState::kWSConnecting:
-      this->update_state(SystemStatus::kWSConnecting);
+    case SKWSConnectionState::kSKWSConnecting:
+      this->update_state(SystemStatus::kSKWSConnecting);
       break;
-    case WSConnectionState::kWSAuthorizing:
-      this->update_state(SystemStatus::kWSAuthorizing);
+    case SKWSConnectionState::kSKWSAuthorizing:
+      this->update_state(SystemStatus::kSKWSAuthorizing);
       break;
-    case WSConnectionState::kWSConnected:
-      this->update_state(SystemStatus::kWSConnected);
+    case SKWSConnectionState::kSKWSConnected:
+      this->update_state(SystemStatus::kSKWSConnected);
       break;
   }
 }

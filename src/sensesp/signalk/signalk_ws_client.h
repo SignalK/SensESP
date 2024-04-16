@@ -1,5 +1,5 @@
-#ifndef _ws_client_H_
-#define _ws_client_H_
+#ifndef SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_WS_CLIENT_H_
+#define SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_WS_CLIENT_H_
 
 #include <WiFi.h>
 #include <esp_websocket_client.h>
@@ -19,24 +19,24 @@ namespace sensesp {
 
 static const char* NULL_AUTH_TOKEN = "";
 
-enum class WSConnectionState {
-  kWSDisconnected,
-  kWSAuthorizing,
-  kWSConnecting,
-  kWSConnected
+enum class SKWSConnectionState {
+  kSKWSDisconnected,
+  kSKWSAuthorizing,
+  kSKWSConnecting,
+  kSKWSConnected
 };
 
 /**
  * @brief The websocket connection to the Signal K server.
  * @see SensESPApp
  */
-class WSClient : public Configurable,
-                 public ValueProducer<WSConnectionState> {
+class SKWSClient : public Configurable,
+                 public ValueProducer<SKWSConnectionState> {
  public:
   /////////////////////////////////////////////////////////
   // main task methods
 
-  WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
+  SKWSClient(String config_path, SKDeltaQueue* sk_delta_queue,
            String server_address, uint16_t server_port, bool use_mdns = true);
 
   const String get_server_address() const { return server_address_; }
@@ -65,7 +65,7 @@ class WSClient : public Configurable,
   String get_connection_status();
 
   /////////////////////////////////////////////////////////
-  // WSClient task methods
+  // SKWSClient task methods
 
   void on_disconnected();
   void on_error();
@@ -101,13 +101,13 @@ class WSClient : public Configurable,
   bool server_detected_ = false;
   bool token_test_success_ = false;
 
-  TaskQueueProducer<WSConnectionState> connection_state_ =
-      TaskQueueProducer<WSConnectionState>(WSConnectionState::kWSDisconnected,
+  TaskQueueProducer<SKWSConnectionState> connection_state_ =
+      TaskQueueProducer<SKWSConnectionState>(SKWSConnectionState::kSKWSDisconnected,
                                            ReactESP::app);
 
   /// task_connection_state is used to track the internal task state which might
   /// be out of sync with the published connection state.
-  WSConnectionState task_connection_state_ = WSConnectionState::kWSDisconnected;
+  SKWSConnectionState task_connection_state_ = SKWSConnectionState::kSKWSDisconnected;
 
   WiFiClient wifi_client_;
   esp_websocket_client_handle_t client_;
@@ -143,7 +143,7 @@ class WSClient : public Configurable,
   void process_received_updates();
 
   /////////////////////////////////////////////////////////
-  // WSClient task methods
+  // SKWSClient task methods
 
   void connect_loop();
   void test_token(const String host, const uint16_t port);
@@ -154,11 +154,11 @@ class WSClient : public Configurable,
   void subscribe_listeners();
   bool get_mdns_service(String& server_address, uint16_t& server_port);
 
-  void set_connection_state(WSConnectionState state) {
+  void set_connection_state(SKWSConnectionState state) {
     task_connection_state_ = state;
     connection_state_.set(state);
   }
-  WSConnectionState get_connection_state() { return task_connection_state_; }
+  SKWSConnectionState get_connection_state() { return task_connection_state_; }
 };
 
 }  // namespace sensesp

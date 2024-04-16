@@ -1,4 +1,4 @@
-#include "ws_client.h"
+#include "signalk_ws_client.h"
 
 #include <ArduinoJson.h>
 #include <ESPmDNS.h>
@@ -18,7 +18,7 @@ namespace sensesp {
 
 constexpr int ws_client_task_stack_size = 8192;
 
-WSClient* ws_client;
+SKWSClient* ws_client;
 
 static const char* kRequestPermission = "readwrite";
 
@@ -74,17 +74,17 @@ static void websocket_event_handler(void* handler_args, esp_event_base_t base,
   }
 }
 
-WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
+SKWSClient::SKWSClient(String config_path, SKDeltaQueue* sk_delta_queue,
                    String server_address, uint16_t server_port, bool use_mdns)
     : Configurable{config_path, "/System/Signal K Settings", 200},
       sk_delta_queue_{sk_delta_queue},
       conf_server_address_{server_address},
       conf_server_port_{server_port},
       use_mdns_{use_mdns} {
-  // a WSClient object observes its own connection_state_ member
+  // a SKWSClient object observes its own connection_state_ member
   // and simply passes through any notification it emits. As a result,
   // whenever the value of connection_state_ is updated, observers of the
-  // WSClient object get automatically notified.
+  // SKWSClient object get automatically notified.
   this->connection_state_.attach(
       [this]() { this->emit(this->connection_state_.get()); });
 
@@ -100,15 +100,15 @@ WSClient::WSClient(String config_path, SKDeltaQueue* sk_delta_queue,
   delta_tx_tick_producer_.connect_to(&delta_tx_count_producer_);
 
   ReactESP::app->onDelay(0, [this]() {
-    debugD("Starting WSClient");
-    xTaskCreate(ExecuteWebSocketTask, "WSClient", ws_client_task_stack_size,
+    debugD("Starting SKWSClient");
+    xTaskCreate(ExecuteWebSocketTask, "SKWSClient", ws_client_task_stack_size,
                 this, 1, NULL);
     MDNS.addService("signalk-sensesp", "tcp", 80);
   });
 }
 
-void WSClient::connect_loop() {
-  if (this->get_connection_state() == WSConnectionState::kWSDisconnected) {
+void SKWSClient::connect_loop() {
+  if (this->get_connection_state() == SKWSConnectionState::kSKWSDisconnected) {
     this->connect();
   }
 }
@@ -119,8 +119,8 @@ void WSClient::connect_loop() {
  * This method is called in the websocket task context.
  *
  */
-void WSClient::on_disconnected() {
-  if (this->get_connection_state() == WSConnectionState::kWSConnecting &&
+void SKWSClient::on_disconnected() {
+  if (this->get_connection_state() == SKWSConnectionState::kSKWSConnecting &&
       server_detected_ && !token_test_success_) {
     // Going from connecting directly to disconnect when we
     // know we have found and talked to the server usually means
@@ -129,7 +129,7 @@ void WSClient::on_disconnected() {
     auth_token_ = NULL_AUTH_TOKEN;
     save_configuration();
   }
-  this->set_connection_state(WSConnectionState::kWSDisconnected);
+  this->set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   server_detected_ = false;
 }
 
@@ -139,8 +139,8 @@ void WSClient::on_disconnected() {
  * Called in the websocket task context.
  *
  */
-void WSClient::on_error() {
-  this->set_connection_state(WSConnectionState::kWSDisconnected);
+void SKWSClient::on_error() {
+  this->set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   debugW("Websocket client error.");
 }
 
@@ -149,8 +149,8 @@ void WSClient::on_error() {
  *
  * Called in the websocket task context.
  */
-void WSClient::on_connected() {
-  this->set_connection_state(WSConnectionState::kWSConnected);
+void SKWSClient::on_connected() {
+  this->set_connection_state(SKWSConnectionState::kSKWSConnected);
   this->sk_delta_queue_->reset_meta_send();
   debugI("Subscribing to Signal K listeners...");
   this->subscribe_listeners();
@@ -162,7 +162,7 @@ void WSClient::on_connected() {
  * Called in the websocket task context.
  *
  */
-void WSClient::subscribe_listeners() {
+void SKWSClient::subscribe_listeners() {
   bool output_available = false;
   JsonDocument subscription;
   subscription["context"] = "vessels.self";
@@ -206,7 +206,7 @@ void WSClient::subscribe_listeners() {
  *
  * @param payload
  */
-void WSClient::on_receive_delta(uint8_t* payload) {
+void SKWSClient::on_receive_delta(uint8_t* payload) {
 #ifdef SIGNALK_PRINT_RCV_DELTA
   debugD("Websocket payload received: %s", (char*)payload);
 #endif
@@ -240,7 +240,7 @@ void WSClient::on_receive_delta(uint8_t* payload) {
  *
  * @param message
  */
-void WSClient::on_receive_updates(JsonDocument& message) {
+void SKWSClient::on_receive_updates(JsonDocument& message) {
   // Process updates from subscriptions...
   JsonArray updates = message["updates"];
 
@@ -269,7 +269,7 @@ void WSClient::on_receive_updates(JsonDocument& message) {
  * This method is called in the main task context.
  *
  */
-void WSClient::process_received_updates() {
+void SKWSClient::process_received_updates() {
   SKListener::take_semaphore();
 
   const std::vector<SKListener*>& listeners = SKListener::get_listeners();
@@ -310,7 +310,7 @@ void WSClient::process_received_updates() {
  *
  * @param message
  */
-void WSClient::on_receive_put(JsonDocument& message) {
+void SKWSClient::on_receive_put(JsonDocument& message) {
   // Process PUT requests...
   JsonArray puts = message["put"];
   size_t response_count = 0;
@@ -359,14 +359,14 @@ void WSClient::on_receive_put(JsonDocument& message) {
  *
  * @param payload
  */
-void WSClient::sendTXT(String& payload) {
-  if (get_connection_state() == WSConnectionState::kWSConnected) {
+void SKWSClient::sendTXT(String& payload) {
+  if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     esp_websocket_client_send_text(this->client_, payload.c_str(),
                                    payload.length(), portMAX_DELAY);
   }
 }
 
-bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
+bool SKWSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
   // get IP address using an mDNS query
   int n = MDNS.queryService("signalk-ws", "tcp");
   if (n == 0) {
@@ -380,8 +380,8 @@ bool WSClient::get_mdns_service(String& server_address, uint16_t& server_port) {
   }
 }
 
-void WSClient::connect() {
-  if (get_connection_state() != WSConnectionState::kWSDisconnected) {
+void SKWSClient::connect() {
+  if (get_connection_state() != SKWSConnectionState::kSKWSDisconnected) {
     return;
   }
 
@@ -394,7 +394,7 @@ void WSClient::connect() {
 
   debugI("Initiating websocket connection with server...");
 
-  set_connection_state(WSConnectionState::kWSAuthorizing);
+  set_connection_state(SKWSConnectionState::kSKWSAuthorizing);
   if (use_mdns_) {
     if (!get_mdns_service(this->server_address_, this->server_port_)) {
       debugE("No Signal K server found in network when using mDNS service!");
@@ -415,7 +415,7 @@ void WSClient::connect() {
     debugD(
         "Websocket is not connecting to Signal K server because host and "
         "port are not defined.");
-    set_connection_state(WSConnectionState::kWSDisconnected);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     return;
   }
 
@@ -437,7 +437,7 @@ void WSClient::connect() {
   this->test_token(this->server_address_, this->server_port_);
 }
 
-void WSClient::test_token(const String server_address,
+void SKWSClient::test_token(const String server_address,
                           const uint16_t server_port) {
   // FIXME: implement async HTTP client!
   HTTPClient http;
@@ -471,15 +471,15 @@ void WSClient::test_token(const String server_address,
       this->client_id_ = "";
       this->send_access_request(server_address, server_port);
     } else {
-      set_connection_state(WSConnectionState::kWSDisconnected);
+      set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     }
   } else {
     debugE("GET... failed, error: %s\n", http.errorToString(http_code).c_str());
-    set_connection_state(WSConnectionState::kWSDisconnected);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   }
 }
 
-void WSClient::send_access_request(const String server_address,
+void SKWSClient::send_access_request(const String server_address,
                                    const uint16_t server_port) {
   debugD("Preparing a new access request");
   if (client_id_ == "") {
@@ -514,7 +514,7 @@ void WSClient::send_access_request(const String server_address,
   if (httpCode != 202) {
     debugW("Can't handle response %d to access request.", httpCode);
     debugD("%s", payload.c_str());
-    set_connection_state(WSConnectionState::kWSDisconnected);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     client_id_ = "";
     return;
   }
@@ -526,7 +526,7 @@ void WSClient::send_access_request(const String server_address,
 
   if (state != "PENDING") {
     debugW("Got unknown state: %s", state.c_str());
-    set_connection_state(WSConnectionState::kWSDisconnected);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     client_id_ = "";
     return;
   }
@@ -539,7 +539,7 @@ void WSClient::send_access_request(const String server_address,
   this->poll_access_request(server_address, server_port, this->polling_href_);
 }
 
-void WSClient::poll_access_request(const String server_address,
+void SKWSClient::poll_access_request(const String server_address,
                                    const uint16_t server_port,
                                    const String href) {
   debugD("Polling SK Server for authentication token");
@@ -562,7 +562,7 @@ void WSClient::poll_access_request(const String server_address,
     String state = doc["state"];
     debugD("%s", state.c_str());
     if (state == "PENDING") {
-      set_connection_state(WSConnectionState::kWSDisconnected);
+      set_connection_state(SKWSConnectionState::kSKWSDisconnected);
       delay(5000);
       return;
     } else if (state == "COMPLETED") {
@@ -576,7 +576,7 @@ void WSClient::poll_access_request(const String server_address,
 
       if (permission == "DENIED") {
         debugW("Permission denied");
-        set_connection_state(WSConnectionState::kWSDisconnected);
+        set_connection_state(SKWSConnectionState::kSKWSDisconnected);
         return;
       } else if (permission == "APPROVED") {
         debugI("Permission granted");
@@ -596,19 +596,19 @@ void WSClient::poll_access_request(const String server_address,
       debugD("Got 500, probably a non-existing request.");
       polling_href_ = "";
       save_configuration();
-      set_connection_state(WSConnectionState::kWSDisconnected);
+      set_connection_state(SKWSConnectionState::kSKWSDisconnected);
       return;
     }
     // any other HTTP status code
     debugW("Can't handle response %d to pending access request.\n", httpCode);
-    set_connection_state(WSConnectionState::kWSDisconnected);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     return;
   }
 }
 
-void WSClient::connect_ws(const String host, const uint16_t port) {
+void SKWSClient::connect_ws(const String host, const uint16_t port) {
   String path = "/signalk/v1/stream?subscribe=none";
-  set_connection_state(WSConnectionState::kWSConnecting);
+  set_connection_state(SKWSConnectionState::kSKWSConnecting);
 
   esp_err_t error;
 
@@ -640,20 +640,20 @@ void WSClient::connect_ws(const String host, const uint16_t port) {
   debugD("Websocket client started.");
 }
 
-bool WSClient::is_connected() {
-  return get_connection_state() == WSConnectionState::kWSConnected;
+bool SKWSClient::is_connected() {
+  return get_connection_state() == SKWSConnectionState::kSKWSConnected;
 }
 
-void WSClient::restart() {
-  if (get_connection_state() == WSConnectionState::kWSConnected) {
+void SKWSClient::restart() {
+  if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     esp_websocket_client_close(this->client_, portMAX_DELAY);
-    set_connection_state(WSConnectionState::kWSDisconnected);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   }
 }
 
-void WSClient::send_delta() {
+void SKWSClient::send_delta() {
   String output;
-  if (get_connection_state() == WSConnectionState::kWSConnected) {
+  if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     if (sk_delta_queue_->data_available()) {
       sk_delta_queue_->get_delta(output);
       esp_websocket_client_send_text(this->client_, output.c_str(),
@@ -664,7 +664,7 @@ void WSClient::send_delta() {
   }
 }
 
-void WSClient::get_configuration(JsonObject& root) {
+void SKWSClient::get_configuration(JsonObject& root) {
   root["sk_address"] = this->conf_server_address_;
   root["sk_port"] = this->conf_server_port_;
   root["use_mdns"] = this->use_mdns_;
@@ -674,7 +674,7 @@ void WSClient::get_configuration(JsonObject& root) {
   root["polling_href"] = this->polling_href_;
 }
 
-bool WSClient::set_configuration(const JsonObject& config) {
+bool SKWSClient::set_configuration(const JsonObject& config) {
   if (config.containsKey("sk_address")) {
     this->conf_server_address_ = config["sk_address"].as<String>();
   }
@@ -702,16 +702,16 @@ bool WSClient::set_configuration(const JsonObject& config) {
  *
  * @return String
  */
-String WSClient::get_connection_status() {
+String SKWSClient::get_connection_status() {
   auto state = get_connection_state();
   switch (state) {
-    case WSConnectionState::kWSAuthorizing:
+    case SKWSConnectionState::kSKWSAuthorizing:
       return "Authorizing with SignalK";
-    case WSConnectionState::kWSConnected:
+    case SKWSConnectionState::kSKWSConnected:
       return "Connected";
-    case WSConnectionState::kWSConnecting:
+    case SKWSConnectionState::kSKWSConnecting:
       return "Connecting";
-    case WSConnectionState::kWSDisconnected:
+    case SKWSConnectionState::kSKWSDisconnected:
       return "Disconnected";
   }
 

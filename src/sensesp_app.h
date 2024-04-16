@@ -19,7 +19,7 @@
 #include "sensesp/net/web/base_command_handler.h"
 #include "sensesp/net/web/config_handler.h"
 #include "sensesp/net/web/static_file_handler.h"
-#include "sensesp/net/ws_client.h"
+#include "sensesp/signalk/signalk_ws_client.h"
 #include "sensesp/sensesp_version.h"
 #include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
@@ -60,7 +60,7 @@ class SensESPApp : public SensESPBaseApp {
     return &(this->system_status_controller_);
   }
   Networking* get_networking() { return this->networking_; }
-  WSClient* get_ws_client() { return this->ws_client_; }
+  SKWSClient* get_ws_client() { return this->ws_client_; }
 
  protected:
   /**
@@ -135,7 +135,7 @@ class SensESPApp : public SensESPBaseApp {
   Networking* networking_ = NULL;
   OTA* ota_;
   SKDeltaQueue* sk_delta_queue_;
-  WSClient* ws_client_;
+  SKWSClient* ws_client_;
 
   UIOutput<String>* sensesp_version_ui_output_ = new UIOutput<String>(
       "SenseESP version", kSensESPVersion, "Software", 1900);

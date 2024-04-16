@@ -7,7 +7,7 @@
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
 #include "sensesp/net/networking.h"
-#include "sensesp/net/ws_client.h"
+#include "sensesp/signalk/signalk_ws_client.h"
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/signalk/signalk_output.h"
@@ -50,10 +50,10 @@ void setup() {
   auto sk_delta_queue_ = new SKDeltaQueue();
 
   // create the websocket client
-  auto ws_client_ = new WSClient("/system/sk", sk_delta_queue_, "", 0);
+  auto ws_client_ = new SKWSClient("/system/sk", sk_delta_queue_, "", 0);
 
-  ws_client_->connect_to(new LambdaConsumer<WSConnectionState>(
-      [](WSConnectionState input) { debugD("WSConnectionState: %d", input); }));
+  ws_client_->connect_to(new LambdaConsumer<SKWSConnectionState>(
+      [](SKWSConnectionState input) { debugD("SKWSConnectionState: %d", input); }));
 
   // create the MDNS discovery object
   auto mdns_discovery_ = new MDNSDiscovery();
