@@ -70,7 +70,7 @@ class SKWSClient : public Configurable,
   void on_disconnected();
   void on_error();
   void on_connected();
-  void on_receive_delta(uint8_t* payload);
+  void on_receive_delta(uint8_t* payload, size_t length);
   void on_receive_updates(JsonDocument& message);
   void on_receive_put(JsonDocument& message);
   void connect();
@@ -120,7 +120,7 @@ class SKWSClient : public Configurable,
 
   SemaphoreHandle_t received_updates_semaphore_ =
       xSemaphoreCreateRecursiveMutex();
-  std::list<JsonObject> received_updates_;
+  std::list<JsonDocument> received_updates_;
 
   /////////////////////////////////////////////////////////
   // methods for all tasks
