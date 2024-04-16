@@ -33,40 +33,67 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
 }
 
 void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
-  float x0 = 0.0;
-  float y0 = 0.0;
-
-  std::set<Sample>::iterator it = samples_.begin();
-
-  while (it != samples_.end()) {
-    auto& sample = *it;
-
-    if (input > sample.input) {
-      x0 = sample.input;
-      y0 = sample.output;
-    } else {
-      break;
+    if (samples_.empty()) {
+        output = 0;  // or any default output if no samples are available
+        notify();
+        return;
     }
 
-    it++;
-  }
+    std::set<Sample>::iterator it = samples_.begin();
+    float x0 = it->input;
+    float y0 = it->output;
 
-  if (it != samples_.end()) {
-    // We found our range. "input" is between
-    // minInput and it->input. CurveInterpolator the result
-    Sample max = *it;
-    float x1 = max.input;
-    float y1 = max.output;
+    // Check if the input is below the lowest sample point
+    if (input < x0) {
+        // Need to extrapolate below the first point
+        if (samples_.size() > 1) {
+            auto second_it = std::next(it);
+            float x1 = second_it->input;
+            float y1 = second_it->output;
+            float gradient = (y1 - y0) / (x1 - x0);
 
-    output = (y0 * (x1 - input) + y1 * (input - x0)) / (x1 - x0);
-  } else {
-    // Hit the end of the table with no match.
-    output = 9999.9;
-    //    debugW("Could not find sample interval for input %0f", input);
-  }
+            output = y0 + gradient * (input - x0);  // Extrapolate using the first segment's gradient
+        } else {
+            output = y0;  // Only one sample, output its value
+        }
+        notify();
+        return;
+    }
 
-  notify();
+    // Search for the correct interval or the last sample point
+    while (it != samples_.end()) {
+        if (input > it->input) {
+            x0 = it->input;
+            y0 = it->output;
+            ++it;
+        } else {
+            break;
+        }
+    }
+
+    // Interpolate or extrapolate above the highest point
+    if (it != samples_.end()) {
+        float x1 = it->input;
+        float y1 = it->output;
+        output = (y0 * (x1 - input) + y1 * (input - x0)) / (x1 - x0);
+    } else {
+        // Hit the end of the table with no match, calculate output using the gradient from the last two points
+        auto last = samples_.rbegin();
+        auto second_last = std::next(last);
+        float x1 = last->input;
+        float y1 = last->output;
+        float x2 = second_last->input;
+        float y2 = second_last->output;
+        float gradient = (y1 - y2) / (x1 - x2);
+
+        // Extrapolate using the gradient
+        output = y1 + gradient * (input - x1);
+    }
+
+    notify();
 }
+
+
 
 void CurveInterpolator::get_configuration(JsonObject& root) {
   JsonArray json_samples = root.createNestedArray("samples");
