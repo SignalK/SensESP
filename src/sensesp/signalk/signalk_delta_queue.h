@@ -11,7 +11,7 @@ namespace sensesp {
  * @brief Signal K delta queue
  *
  * This class implements a Signal K delta queue. There should be a unique queue
- * for each possible output channel (WSClient, NMEA 2000 messages,
+ * for each possible output channel (SKWSClient, NMEA 2000 messages,
  * carrier pigeons).
  */
 class SKDeltaQueue {

@@ -55,7 +55,7 @@ void SensESPApp::setup() {
   // create the websocket client
   bool use_mdns = sk_server_address_ == "";
   this->ws_client_ =
-      new WSClient("/System/Signal K Settings", sk_delta_queue_,
+      new SKWSClient("/System/Signal K Settings", sk_delta_queue_,
                    sk_server_address_, sk_server_port_, use_mdns);
 
   // connect the system status controller

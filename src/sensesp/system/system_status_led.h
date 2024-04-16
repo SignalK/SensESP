@@ -1,5 +1,5 @@
-#ifndef _LED_CONTROLLER_H_
-#define _LED_CONTROLLER_H_
+#ifndef SENSESP_SRC_SENSESP_SYSTEM_SYSTEM_STATUS_LED_H_
+#define SENSESP_SRC_SENSESP_SYSTEM_SYSTEM_STATUS_LED_H_
 
 #include "lambda_consumer.h"
 #include "led_blinker.h"

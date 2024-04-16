@@ -1,9 +1,9 @@
-#ifndef _led_blinker_H_
-#define _led_blinker_H_
+#ifndef SENSESP_SRC_SENSESP_SYSTEM_LED_BLINKER_H_
+#define SENSESP_SRC_SENSESP_SYSTEM_LED_BLINKER_H_
 
 #include <ReactESP.h>
 
-#include "sensesp/net/ws_client.h"
+#include "sensesp/signalk/signalk_ws_client.h"
 
 namespace sensesp {
 
