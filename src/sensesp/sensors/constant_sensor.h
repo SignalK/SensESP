@@ -65,7 +65,7 @@ class ConstantSensor : public Sensor<T> {
                             [this]() { this->emit(value_); });
   }
 
-  void set_value(T value) { value_ = value; }
+  void set(T value) { value_ = value; }
 
  protected:
   virtual void get_configuration(JsonObject &doc) override {
