@@ -62,7 +62,6 @@ class ConstantSensor : public Sensor<T> {
   }
 
   void set_value(T value) { value_ = value; }
-  T get_value() { return value_; }
 
  protected:
   virtual void get_configuration(JsonObject &doc) override {
