@@ -35,20 +35,20 @@ function all {
   checks
 }
 
-function install_pio {
+function install-pio {
   echo "📦 Installing PlatformIO project"
   pio project init
 }
 
-function install_frontend {
+function install-frontend {
   echo "📦 Installing frontend dependencies"
   ( cd web && npm install )
 }
 
 function install {
   echo "📦 Installing project and dependencies"
-  install_pio
-  install_frontend
+  install-pio
+  install-frontend
 }
 
 function clean {
@@ -57,20 +57,22 @@ function clean {
   rm -rf web/node_modules/
 }
 
-function build_pio {
+function build-pio {
   echo "🏗️ Building the PlatformIO project"
   pio run
 }
 
-function build_frontend {
+function build-frontend {
   echo "🏗️ Building the frontend"
+  ( cd web && npm run css-compile )
+  ( cd web && npm run build )
   pio run -t webUI
 }
 
 function build {
   echo "🏗️ Building the project"
-  build_frontend
-  build_pio
+  build-frontend
+  build-pio
 }
 
 function upload {
@@ -79,7 +81,7 @@ function upload {
   pio run -t upload
 }
 
-function upload_monitor {
+function upload-monitor {
   echo "🚀 🖥️ Uploading the project and opening the serial monitor"
   build
   pio run -t upload --target monitor
