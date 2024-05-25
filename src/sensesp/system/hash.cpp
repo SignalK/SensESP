@@ -4,8 +4,6 @@
 #include "mbedtls/md5.h"
 #include "mbedtls/base64.h"
 
-#include "sensesp/net/debug_output.h"
-
 using namespace sensesp;
 
 /**
@@ -92,4 +90,3 @@ String Base64Sha1(String payload_str) {
 
   return encoded_str;
 }
-

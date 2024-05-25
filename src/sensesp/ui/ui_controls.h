@@ -2,6 +2,7 @@
 #define SENSESP_SRC_UI_CONTROLS_H_
 
 #include "sensesp.h"
+
 #include "sensesp/system/configurable.h"
 
 namespace sensesp {
@@ -45,9 +46,7 @@ class NumberConfig : public Configurable {
 class CheckboxConfig : public Configurable {
  public:
   CheckboxConfig(bool value, String title, String config_path)
-      : value_(value),
-        title_(title),
-        Configurable(config_path) {
+      : value_(value), title_(title), Configurable(config_path) {
     load_configuration();
   }
 
@@ -71,8 +70,7 @@ enum class SelectType {
 class SelectConfig : public Configurable {
  public:
   SelectConfig(String value, String title, String config_path,
-               std::vector<String> options,
-               SelectType format)
+               std::vector<String> options, SelectType format)
       : value_(value),
         title_(title),
         options_(options),

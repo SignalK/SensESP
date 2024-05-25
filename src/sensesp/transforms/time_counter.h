@@ -1,6 +1,7 @@
+#ifndef SENSESP_SRC_TRANSFORMS_TIME_COUNTER_H_
+#define SENSESP_SRC_TRANSFORMS_TIME_COUNTER_H_
+
 #include "sensesp/transforms/transform.h"
-#ifndef SENSESP_TRANSFORMS_TIME_COUNTER_H_
-#define SENSESP_TRANSFORMS_TIME_COUNTER_H_
 
 namespace sensesp {
 
@@ -30,8 +31,7 @@ static const char kTimeCounterSchema[] = R"({
 template <typename T>
 class TimeCounter : public Transform<T, float> {
  public:
-  TimeCounter(String config_path)
-      : Transform<T, float>(config_path) {
+  TimeCounter(String config_path) : Transform<T, float>(config_path) {
     this->load_configuration();
   }
 
@@ -82,9 +82,7 @@ class TimeCounter : public Transform<T, float> {
     return true;
   }
 
-  virtual String get_config_schema() override {
-    return kTimeCounterSchema;
-  }
+  virtual String get_config_schema() override { return kTimeCounterSchema; }
 
  protected:
   int previous_state_ = -1;  // -1 means uninitialized

@@ -1,34 +1,19 @@
 #ifndef _local_debug_H_
 #define _local_debug_H_
 
+#include "esp32-hal-log.h"
 #include "Arduino.h"
 #include "Print.h"
 
 namespace sensesp {
 
-#ifndef DEBUG_DISABLED
-
-#define rdebugA(fmt, ...)        \
-  if (Debug.isActive(Debug.ANY)) \
-  Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
-#define rdebugP(fmt, ...)             \
-  if (Debug.isActive(Debug.PROFILER)) \
-  Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
-#define rdebugV(fmt, ...)            \
-  if (Debug.isActive(Debug.VERBOSE)) \
-  Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
-#define rdebugD(fmt, ...)          \
-  if (Debug.isActive(Debug.DEBUG)) \
-  Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
-#define rdebugI(fmt, ...)         \
-  if (Debug.isActive(Debug.INFO)) \
-  Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
-#define rdebugW(fmt, ...)            \
-  if (Debug.isActive(Debug.WARNING)) \
-  Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
-#define rdebugE(fmt, ...)          \
-  if (Debug.isActive(Debug.ERROR)) \
-  Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
+#define rdebugA(fmt, ...) ESP_LOGV("SensESP", fmt, ##__VA_ARGS__)
+#define rdebugP(fmt, ...) ESP_LOGV("SensESP", fmt, ##__VA_ARGS__)
+#define rdebugV(fmt, ...) ESP_LOGV("SensESP", fmt, ##__VA_ARGS__)
+#define rdebugD(fmt, ...) ESP_LOGD("SensESP", fmt, ##__VA_ARGS__)
+#define rdebugI(fmt, ...) ESP_LOGI("SensESP", fmt, ##__VA_ARGS__)
+#define rdebugW(fmt, ...) ESP_LOGW("SensESP", fmt, ##__VA_ARGS__)
+#define rdebugE(fmt, ...) ESP_LOGE("SensESP", fmt, ##__VA_ARGS__)
 
 // With newline
 
@@ -43,12 +28,12 @@ namespace sensesp {
 // New way: To compatibility with SerialDebug (can use RemoteDebug or
 // SerialDebug) This is my favorite :)
 
-#define debugV(fmt, ...) rdebugVln(fmt, ##__VA_ARGS__)
-#define debugD(fmt, ...) rdebugDln(fmt, ##__VA_ARGS__)
-#define debugI(fmt, ...) rdebugIln(fmt, ##__VA_ARGS__)
-#define debugW(fmt, ...) rdebugWln(fmt, ##__VA_ARGS__)
-#define debugE(fmt, ...) rdebugEln(fmt, ##__VA_ARGS__)
-#define debugA(fmt, ...) rdebugVln(fmt, ##__VA_ARGS__)
+#define debugV(fmt, ...) rdebugV(fmt, ##__VA_ARGS__)
+#define debugD(fmt, ...) rdebugD(fmt, ##__VA_ARGS__)
+#define debugI(fmt, ...) rdebugI(fmt, ##__VA_ARGS__)
+#define debugW(fmt, ...) rdebugW(fmt, ##__VA_ARGS__)
+#define debugE(fmt, ...) rdebugE(fmt, ##__VA_ARGS__)
+#define debugA(fmt, ...) rdebugV(fmt, ##__VA_ARGS__)
 
 class LocalDebug {
  public:
@@ -75,18 +60,6 @@ class LocalDebug {
  private:
   uint8_t lastDebugLevel_ = DEBUG;
 };
-
-#else  // DEBUG_DISABLED
-
-#define debugA(...)
-#define debugP(...)
-#define debugV(...)
-#define debugD(...)
-#define debugI(...)
-#define debugW(...)
-#define debugE(...)
-
-#endif
 
 }  // namespace sensesp
 
