@@ -28,12 +28,12 @@ export function ConfigCards(): JSX.Element {
   }
 
   useEffect(() => {
-    if (cards === null || cards.length === 0) {
+    if (cards === null) {
       void updateFunc();
     }
   }, [cards]);
 
-  if (cards === null || cards.length === 0) {
+  if (cards === null) {
     // Display a spinner while waiting for data. Center the spinner
     // in the page.
     return (
