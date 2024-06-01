@@ -25,7 +25,7 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-  SetupSerialDebug(115200);
+  SetupLogging();
 
   SensESPAppBuilder builder;
   sensesp_app = builder.set_hostname("ChainCounter")

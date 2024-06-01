@@ -60,10 +60,7 @@ class TemperatureInterpreter : public CurveInterpolator {
 ReactESP app;
 
 void setup() {
-// Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Create the global SensESPApp() object by first creating a
   // SensESPAppBuilder object, then setting some hard-coded

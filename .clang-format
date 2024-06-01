@@ -1,3 +1,9 @@
 ---
 BasedOnStyle: Google
 IndentWidth: 2
+IncludeBlocksStyle: Regroup
+IncludeCategories:
+  - Regex: '"sensesp\.h"'
+    Priority: -1000
+  - Regex: '"esp32-hal-log\.h"'
+    Priority: -900

@@ -32,12 +32,11 @@ class SystemStatusController : public ValueConsumer<WiFiState>,
 
   /// ValueConsumer interface for ValueConsumer<WiFiState> (Networking object
   /// state updates)
-  virtual void set(WiFiState new_value,
-                         uint8_t input_channel = 0) override;
+  virtual void set(WiFiState new_value, uint8_t input_channel = 0) override;
   /// ValueConsumer interface for ValueConsumer<SKWSConnectionState>
   /// (SKWSClient object state updates)
   virtual void set(SKWSConnectionState new_value,
-                         uint8_t input_channel = 0) override;
+                   uint8_t input_channel = 0) override;
 
  protected:
   void update_state(const SystemStatus new_state) {

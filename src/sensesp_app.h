@@ -10,7 +10,6 @@
 #endif
 
 #include "sensesp/controllers/system_status_controller.h"
-#include "sensesp/net/debug_output.h"
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
 #include "sensesp/net/networking.h"

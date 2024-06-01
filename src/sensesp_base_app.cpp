@@ -3,16 +3,15 @@
 namespace sensesp {
 
 void SetupSerialDebug(uint32_t baudrate) {
-  Serial.begin(baudrate);
+  SetupLogging();
 
-  // A small delay and one debugI() are required so that
-  // the serial output displays everything
-#ifndef DEBUG_DISABLED
-  delay(100);
-  Debug.setSerialEnabled(true);
-  delay(100);
-#endif
-  debugI("\nSerial debugging enabled");
+  if (baudrate != 115200) {
+    ESP_LOGW("SensESP", "SetupSerialDebug baudrate parameter is ignored.");
+  }
+}
+
+void SetupLogging(esp_log_level_t default_level) {
+  esp_log_level_set("*", default_level);
 }
 
 SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
@@ -26,8 +25,6 @@ SensESPBaseApp::SensESPBaseApp() {
                                                     "/system/hostname");
   hostname_->set_description("Device hostname");
   hostname_->set_sort_order(0);
-  // create a remote debugger object
-  debug_output_ = new DebugOutput();
 }
 
 /**

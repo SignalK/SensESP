@@ -29,7 +29,7 @@ const uint8_t output_pin2 = 21;
 ReactESP app;
 
 void setup() {
-  SetupSerialDebug(115200);
+  SetupLogging();
 
   SensESPMinimalAppBuilder builder;
   auto sensesp_app = builder.set_hostname("counter-test")->get_app();

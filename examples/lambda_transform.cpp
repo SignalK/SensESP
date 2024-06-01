@@ -11,7 +11,7 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-  SetupSerialDebug(115200);
+  SetupLogging();
 
   // Create a new SensESPApp object. This is the direct constructor call, and
   // an equivalent alternative to using the SensESPAppBuilder class.

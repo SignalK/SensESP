@@ -1,7 +1,7 @@
-#ifndef _enable_H_
-#define _enable_H_
+#ifndef SENSESP_SRC_SENSESP_TRANSFORMS_ENABLE_H_
+#define SENSESP_SRC_SENSESP_TRANSFORMS_ENABLE_H_
 
-#include "transforms/transform.h"
+#include "sensesp/transforms/transform.h"
 
 namespace sensesp {
 
