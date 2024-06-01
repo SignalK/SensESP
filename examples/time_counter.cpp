@@ -31,10 +31,7 @@ unsigned long freq_start_time = 0;
 int freq = 0;
 
 void setup() {
-  // Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Create the builder object
   SensESPAppBuilder builder;

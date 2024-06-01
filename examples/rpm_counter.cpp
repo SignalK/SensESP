@@ -14,9 +14,7 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   SensESPAppBuilder builder;
   sensesp_app = builder.get_app();

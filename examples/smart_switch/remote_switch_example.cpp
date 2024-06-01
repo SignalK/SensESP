@@ -40,10 +40,7 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-// Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Create a builder object
   SensESPAppBuilder builder;

@@ -14,9 +14,7 @@ reactesp::ReactESP app;
 ObservableValue<bool> toggler;
 
 void setup() {
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   SensESPAppBuilder builder;
   SensESPApp *sensesp_app = builder.set_hostname("json_demo")
