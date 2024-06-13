@@ -45,6 +45,11 @@ class ValueProducer : virtual public Observable {
       consumer->set(this->get(), input_channel);
     });
   }
+  void connect_to(ValueConsumer<T>& consumer, uint8_t input_channel = 0) {
+    this->attach([this, consumer, input_channel]() {
+      consumer.set(this->get(), input_channel);
+    });
+  }
 
   /**
    * @brief Connect a producer to a consumer of a different type.
@@ -60,6 +65,12 @@ class ValueProducer : virtual public Observable {
   void connect_to(ValueConsumer<CT>* consumer, uint8_t input_channel = 0) {
     this->attach([this, consumer, input_channel]() {
       consumer->set(CT(this->get()), input_channel);
+    });
+  }
+  template <typename CT>
+  void connect_to(ValueConsumer<CT>& consumer, uint8_t input_channel = 0) {
+    this->attach([this, consumer, input_channel]() {
+      consumer.set(CT(this->get()), input_channel);
     });
   }
 
@@ -82,6 +93,14 @@ class ValueProducer : virtual public Observable {
     });
     return consumer_producer;
   }
+  template <typename T2>
+  Transform<T, T2>* connect_to(Transform<T, T2>& consumer_producer,
+                               uint8_t input_channel = 0) {
+    this->attach([this, consumer_producer, input_channel]() {
+      consumer_producer.set(T(this->get()), input_channel);
+    });
+    return &consumer_producer;
+  }
 
   /**
    * @brief Connect a producer to a transform with a different input type
@@ -102,6 +121,14 @@ class ValueProducer : virtual public Observable {
       consumer_producer->set(TT(this->get()), input_channel);
     });
     return consumer_producer;
+  }
+  template <typename TT, typename T2>
+  Transform<TT, T2>* connect_to(Transform<TT, T2>& consumer_producer,
+                                uint8_t input_channel = 0) {
+    this->attach([this, consumer_producer, input_channel]() {
+      consumer_producer->set(TT(this->get()), input_channel);
+    });
+    return &consumer_producer;
   }
 
   /*
