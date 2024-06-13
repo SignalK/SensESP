@@ -1,7 +1,6 @@
+import { APP_CONFIG } from "config";
 import { useEffect, useId, useState } from "preact/hooks";
-import { fetchConfigData, saveConfigData } from "../../common/configAPIClient";
 
-import { type ConfigData } from "common/configAPIClient";
 import { JsonValue, type JsonObject } from "common/jsonTypes";
 import { Card } from "components/Card";
 import {
@@ -29,6 +28,8 @@ interface EditControlProps {
     uniqueItems?: boolean;
     format?: string;
     items?: ItemsProps;
+    displayMultiplier?: number;
+    displayOffset?: number;
   };
   value: JsonValue;
   setValue: (value: JsonValue) => void;
@@ -64,10 +65,16 @@ export function EditControl({
         <FormNumberInput
           key={id}
           label={schema.title}
-          value={Number(value)}
+          value={
+            (Number(value) - (schema.displayOffset ?? 0)) /
+            (schema.displayMultiplier ?? 1)
+          }
           readOnly={schema.readOnly ?? false}
           setValue={(value: number) => {
-            setValue(value);
+            setValue(
+              value * (schema.displayMultiplier ?? 1) +
+                (schema.displayOffset ?? 0),
+            );
           }}
         />
       );
@@ -76,11 +83,17 @@ export function EditControl({
         <FormNumberInput
           key={id}
           label={schema.title}
-          value={Number(value)}
+          value={
+            Number(value) * (schema.displayMultiplier ?? 1) +
+            (schema.displayOffset ?? 0)
+          }
           readOnly={schema.readOnly ?? false}
           step={1}
           setValue={(value: number) => {
-            setValue(value);
+            setValue(
+              value / (schema.displayMultiplier ?? 1) -
+                (schema.displayOffset ?? 0),
+            );
           }}
         />
       );
@@ -203,18 +216,32 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
   const id = useId();
 
   const updateFunc = async (path: string): Promise<void> => {
-    const data: ConfigData = await fetchConfigData(path);
-    if (data === null) {
+    const response = await fetch(APP_CONFIG.config_path + path);
+    if (!response.ok) {
+      console.log(`HTTP Error ${response.status} ${response.statusText}`);
+      setHttpErrorText(
+        `Received error ${response.status} ${response.statusText} when ` +
+          `fetching the configuration: ${await response.text()}`,
+      );
       return;
     }
-    setConfig(data.config);
-    setSchema(data.schema);
-    setDescription(data.description);
+    const data = await response.json();
+    if (response.status === 202 && data.status === "pending") {
+      // The configuration is being updated, so wait and try again
+      setHttpErrorText("Can't handle an async response yet.");
+      return;
+    } else {
+      setConfig(data.config);
+      setSchema(data.schema);
+      setDescription(data.description);
+    }
   };
 
   useEffect(() => {
     if (Object.keys(config)?.length === 0) {
+      console.log(`Fetching config data from ${path}...`);
       void updateFunc(path);
+      console.log(`Fetched config data from ${path}`);
     }
   }, [path]);
 
@@ -224,17 +251,65 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     setIsValid(isValid);
   }, [config]);
 
+  async function pollSaveResult(url: string): Promise<void> {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.log(`HTTP Error ${response.status} ${response.statusText}`);
+      setHttpErrorText(
+        `Received error ${response.status} ${response.statusText} when ` +
+          `fetching the configuration: ${response.text}`,
+      );
+      return;
+    }
+    const data = await response.json();
+    if (response.status === 202 && data.status === "pending") {
+      // The configuration is being updated, so wait and try again
+      setTimeout(() => {
+        void pollSaveResult(url);
+      }, 500);
+    } else {
+      setSaving(false);
+      setIsDirty(false);
+    }
+  }
+
   async function handleSave(e: MouseEvent): Promise<void> {
     e.preventDefault();
     setSaving(true);
-    await saveConfigData(path, JSON.stringify(config), (e) => {
-      console.log("Error saving config data", e);
-      setIsDirty(true);
-      setHttpErrorText(e.message);
-    });
-    setConfig(config);
-    setIsDirty(false);
-    setSaving(false);
+    const contentType = "application/json";
+    try {
+      const response = await fetch(APP_CONFIG.config_path + path, {
+        method: "PUT",
+        headers: {
+          "Content-Type": contentType,
+        },
+        body: JSON.stringify(config),
+      });
+      if (!response.ok) {
+        console.log("HTTP Error", response.status, response.statusText);
+        setHttpErrorText(
+          `Received error ${response.status} ${response.statusText} when ` +
+            `saving the configuration: ${response.text}`,
+        );
+        setSaving(false);
+        setIsDirty(false);
+        return;
+      } else {
+        console.log("Config data saved to server");
+        if (response.status === 202) {
+          const data = await response.json();
+          const pollUrl = data.poll;
+          console.log("About to poll", pollUrl);
+          setTimeout(() => {
+            void pollSaveResult(pollUrl);
+          }, 500);
+        }
+      }
+    } catch (e) {
+      console.log(`Error saving config data to server: ${e.message}`);
+      setHttpErrorText(`Error saving config data to server: ` + `${e.message}`);
+      setSaving(false);
+    }
   }
 
   const title = path.slice(1).replace(/\//g, " ▸ ");
@@ -275,8 +350,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
           setHttpErrorText("");
         }}
       >
-        <p>There was an error saving the configuration:</p>
-        <p>{httpErrorText}</p>
+        {httpErrorText}
       </ModalError>
 
       <Card id={`${id}-card`} key={`${id}-card`} title={title}>
@@ -306,6 +380,17 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
             })}
           </div>
           <div className="d-flex justify-content-begin">
+            <button
+              className="btn btn-primary me-2"
+              type="submit"
+              onClick={(e: MouseEvent): void => {
+                e.stopPropagation();
+                void handleSave(e);
+              }}
+              disabled={saving || !isDirty || !isValid}
+            >
+              Save
+            </button>
             <div
               className={
                 `spinner-border me-2${saving}` === "" ? "" : " visually-hidden"
@@ -314,17 +399,6 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
             >
               <span className="visually-hidden">Loading...</span>
             </div>
-
-            <button
-              className="btn btn-primary"
-              type="submit"
-              onClick={(e: MouseEvent): void => {
-                void handleSave(e);
-              }}
-              disabled={saving || (!isDirty || !isValid)}
-            >
-              Save
-            </button>
           </div>
         </form>
       </Card>

@@ -1,7 +1,8 @@
+#include "sensesp.h"
+
 #include "configurable.h"
 
 #include "SPIFFS.h"
-#include "sensesp.h"
 #include "sensesp/system/hash.h"
 
 namespace sensesp {
@@ -20,10 +21,6 @@ Configurable::Configurable(String config_path, String description,
     }
     Configurable::configurables_[config_path] = this;
   }
-}
-
-void Configurable::get_configuration(JsonObject& doc) {
-  debugW("WARNING: get_configuration not defined");
 }
 
 // Sets and saves the configuration
