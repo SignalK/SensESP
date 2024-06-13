@@ -64,8 +64,7 @@ extern std::map<String, UIOutputBase*> ui_outputs;
 
 template <typename T>
 class UIOutput : public UIOutputBase,
-                 public ObservableValue<T>,
-                 public ValueConsumer<T> {
+                 public ObservableValue<T> {
  public:
   UIOutput(String name)
       : UIOutputBase(name, kUIOutputDefaultGroup, kUIOutputDefaultOrder) {}
