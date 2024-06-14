@@ -16,7 +16,7 @@ ClickType::ClickType(String config_path, uint16_t long_click_delay,
   load_configuration();
 }
 
-void ClickType::set(bool input, uint8_t inputChannel) {
+void ClickType::set(bool input) {
   if (input) {
     on_button_press();
   } else {
@@ -97,8 +97,8 @@ void ClickType::on_button_release() {
       // DoubleClick
       unsigned long time_of_event = millis();
       long pd = (long)press_duration_;
-      delayed_click_report_ =
-          ReactESP::app->onDelay(double_click_interval_ + 20, [this, pd, time_of_event]() {
+      delayed_click_report_ = ReactESP::app->onDelay(
+          double_click_interval_ + 20, [this, pd, time_of_event]() {
             debugD(
                 "ClickType detected SingleClick (millis: %ld, queue time: %ld, "
                 "press duration %ld ms)",

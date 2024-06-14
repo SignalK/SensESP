@@ -42,7 +42,7 @@ class Debounce : public SymmetricTransform<T> {
     this->load_configuration();
   }
 
-  virtual void set(T input, uint8_t input_channel = 0) override {
+  virtual void set(T input) override {
     // Input has changed since the last emit, or this is the first
     // input since the program started to run.
 
@@ -87,8 +87,7 @@ class Debounce : public SymmetricTransform<T> {
 
 typedef Debounce<bool> DebounceBool;
 typedef Debounce<int> DebounceInt;
-typedef Debounce<float>
-    DebounceFloat;
+typedef Debounce<float> DebounceFloat;
 
 }  // namespace sensesp
 

@@ -11,7 +11,7 @@ AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
   load_configuration();
 }
 
-void AnalogVoltage::set(float input, uint8_t inputChannel) {
+void AnalogVoltage::set(float input) {
   this->emit(((input * (max_voltage_ / MAX_ANALOG_OUTPUT)) * multiplier_) +
              offset_);
 }

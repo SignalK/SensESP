@@ -42,7 +42,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
 
   SKOutput(String sk_path, SKMetadata* meta) : SKOutput(sk_path, "", meta) {}
 
-  virtual void set(T new_value, uint8_t input_channel = 0) override {
+  virtual void set(T new_value) override {
     this->ValueProducer<T>::emit(new_value);
   }
 

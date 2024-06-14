@@ -31,11 +31,11 @@ PressRepeater::PressRepeater(String config_path, int integer_false,
   });
 }
 
-void PressRepeater::set(int new_value, uint8_t input_channel) {
-  this->set(new_value != integer_false_, input_channel);
+void PressRepeater::set(int new_value) {
+  this->set(new_value != integer_false_);
 }
 
-void PressRepeater::set(bool new_value, uint8_t input_channel) {
+void PressRepeater::set(bool new_value) {
   if (new_value != pushed_) {
     pushed_ = new_value;
 
