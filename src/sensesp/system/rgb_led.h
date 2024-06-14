@@ -55,14 +55,14 @@ class RgbLed : public Configurable,
    * Used to set the current display state of the LED.
    * @param new_value The RGB color to display.
    */
-  virtual void set(long new_value, uint8_t input_channel = 0) override;
+  virtual void set(long new_value) override;
 
   /**
    * Used to set the current display state of the LED with a simple on/off
    * boolean value.  Using TRUE for new_value sets the color to the ON color.
    * Using FALSE uses the OFF color.
    */
-  virtual void set(bool new_value, uint8_t input_channel = 0) override;
+  virtual void set(bool new_value) override;
 
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;

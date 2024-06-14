@@ -9,7 +9,7 @@ namespace sensesp {
 class Difference : public FloatTransform {
  public:
   Difference(float k1, float k2, String config_path = "");
-  virtual void set(float input, uint8_t inputChannel) override;
+  virtual void set(float input) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

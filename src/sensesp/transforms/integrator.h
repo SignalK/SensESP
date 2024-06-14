@@ -37,7 +37,7 @@ class Integrator : public Transform<C, P> {
     this->emit(value);
   }
 
-  virtual void set(C input, uint8_t inputChannel = 0) override final {
+  virtual void set(C input) override final {
     value += input * k;
     this->emit(value);
   }
