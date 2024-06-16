@@ -251,6 +251,10 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     setIsValid(isValid);
   }, [config]);
 
+  useEffect(() => {
+    console.log("Saving:", saving);
+  }, [saving]);
+
   async function pollSaveResult(url: string): Promise<void> {
     const response = await fetch(url);
     if (!response.ok) {
@@ -268,8 +272,14 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         void pollSaveResult(url);
       }, 500);
     } else {
+      // Check the status of the save operation
+      if (data.status === "error") {
+        console.log("Error saving config data to server", data.error);
+        setHttpErrorText("Error saving config data to remote device.");
+      } else {
+        setIsDirty(false);
+      }
       setSaving(false);
-      setIsDirty(false);
     }
   }
 
@@ -295,7 +305,6 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         setIsDirty(false);
         return;
       } else {
-        console.log("Config data saved to server");
         if (response.status === 202) {
           const data = await response.json();
           const pollUrl = data.poll;
@@ -381,24 +390,24 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
           </div>
           <div className="d-flex justify-content-begin">
             <button
-              className="btn btn-primary me-2"
+              class="btn btn-primary me-2"
               type="submit"
+              disabled={saving || !isDirty || !isValid}
               onClick={(e: MouseEvent): void => {
                 e.stopPropagation();
                 void handleSave(e);
               }}
-              disabled={saving || !isDirty || !isValid}
             >
-              Save
+              <span class="me-1" role="status">
+                {saving ? "Saving..." : "Save"}
+              </span>
+              {saving && (
+                <span
+                  class="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                ></span>
+              )}
             </button>
-            <div
-              className={
-                `spinner-border me-2${saving}` === "" ? "" : " visually-hidden"
-              }
-              role="status"
-            >
-              <span className="visually-hidden">Loading...</span>
-            </div>
           </div>
         </form>
       </Card>
