@@ -20,7 +20,7 @@ ChangeFilter::ChangeFilter(float min_delta, float max_delta, int max_skips,
   skips_ = max_skips_ + 1;
 }
 
-void ChangeFilter::set(float new_value, uint8_t input_channel) {
+void ChangeFilter::set(float new_value) {
   float delta = absf(new_value - output);
   if ((delta >= min_delta_ && delta <= max_delta_) || skips_ > max_skips_) {
     skips_ = 0;

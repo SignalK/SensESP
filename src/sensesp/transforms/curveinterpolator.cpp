@@ -1,6 +1,6 @@
-#include "curveinterpolator.h"
-
 #include "sensesp.h"
+
+#include "curveinterpolator.h"
 
 namespace sensesp {
 
@@ -32,7 +32,7 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
   load_configuration();
 }
 
-void CurveInterpolator::set(float input, uint8_t inputChannel) {
+void CurveInterpolator::set(float input) {
   float x0 = 0.0;
   float y0 = 0.0;
 
@@ -72,7 +72,7 @@ void CurveInterpolator::get_configuration(JsonObject& root) {
   JsonArray json_samples = root["samples"].to<JsonArray>();
   for (auto& sample : samples_) {
     auto entry = json_samples.add<JsonObject>();
-    if( entry.isNull() ) {
+    if (entry.isNull()) {
       debugE("No memory for sample");
     }
     entry["input"] = sample.input;

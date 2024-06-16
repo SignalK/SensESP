@@ -14,10 +14,9 @@ namespace sensesp {
 class AirDensity : public FloatTransform {
  public:
   AirDensity();
-  virtual void set(float input, uint8_t inputChannel) override;
+  virtual void set(float input) override;
 
  private:
-  uint8_t received = 0;
   float inputs[3];
 };
 

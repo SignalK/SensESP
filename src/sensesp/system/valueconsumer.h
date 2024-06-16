@@ -1,10 +1,10 @@
 #ifndef _value_consumer_H_
 #define _value_consumer_H_
 
+#include "sensesp.h"
+
 #include <ArduinoJson.h>
 #include <stdint.h>
-
-#include "sensesp.h"
 
 namespace sensesp {
 
@@ -25,33 +25,25 @@ class ValueConsumer {
    * Used to set an input of this consumer. It is usually called
    * automatically by a ValueProducer.
    * @param new_value the value of the input
-   * @param input_channel Consumers can have one or more inputs feeding them.
-   *  This parameter allows you to specify which input number the producer
-   *  is connecting to. For single input consumers, leave the index at zero.
    */
-  virtual void set(T new_value, uint8_t input_channel = 0) {}
+  virtual void set(T new_value) {}
 
-  virtual void set_input(T new_value, uint8_t input_channel = 0) {
+  virtual void set_input(T new_value) {
     static bool warned = false;
     if (!warned) {
       warned = true;
       debugW("set_input() is deprecated. Use set() instead.");
     }
-    set(new_value, input_channel);
+    set(new_value);
   }
 
   /**
    * Registers this consumer with the specified producer, letting it
    * know that this consumer would like to receive notifications whenever
    * its value changes.
-   * @param input_channel Consumers can have one or more inputs feeding them.
-   *  This parameter allows you to specify which input number the producer
-   *  is connecting to. For single input consumers, leave the index at zero.
    */
-  void connect_from(ValueProducer<T>* producer, uint8_t input_channel = 0) {
-    producer->attach([producer, this, input_channel]() {
-      this->set(producer->get(), input_channel);
-    });
+  void connect_from(ValueProducer<T>* producer) {
+    producer->attach([producer, this]() { this->set(producer->get()); });
   }
 };
 

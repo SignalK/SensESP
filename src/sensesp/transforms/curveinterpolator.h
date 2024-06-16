@@ -23,9 +23,12 @@ namespace sensesp {
  * At different input values, the following happens:
  *
  * - At x = 0, the interpolator will return 0.
- * - At x = 0.5, the interpolator will still return 0 because both adjacent samples have y = 0.
- * - At x = 1.4, the adjacent outputs are 0 and 1, so the interpolator will return 0.4.
- * - At x = 2.5, the interpolator will return 1.0 because the adjacent outputs are both 1.
+ * - At x = 0.5, the interpolator will still return 0 because both adjacent
+ * samples have y = 0.
+ * - At x = 1.4, the adjacent outputs are 0 and 1, so the interpolator will
+ * return 0.4.
+ * - At x = 2.5, the interpolator will return 1.0 because the adjacent outputs
+ * are both 1.
  *
  * It can be used e.g. for
  * non-linear analog gauges such as temperature gauges and oil pressure gauges,
@@ -52,7 +55,7 @@ class CurveInterpolator : public FloatTransform {
   CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path = "");
 
   // Set and retrieve the transformed value
-  void set(float input, uint8_t input_channel = 0) override;
+  void set(float input) override;
 
   // Web UI configuration methods
   CurveInterpolator* set_input_title(String input_title) {

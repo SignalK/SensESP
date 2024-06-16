@@ -20,7 +20,7 @@ namespace sensesp {
 class AngleCorrection : public FloatTransform {
  public:
   AngleCorrection(float offset, float min_angle = 0, String config_path = "");
-  virtual void set(float input, uint8_t inputChannel = 0) override;
+  virtual void set(float input) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

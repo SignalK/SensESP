@@ -93,7 +93,7 @@ export function FormCheckboxInput(props: FormCheckboxInputProps): JSX.Element {
         type={props.type || "checkbox"}
         id={id}
         checked={props.checked}
-        disabled={ props.readOnly }
+        disabled={props.readOnly}
         onChange={(e) => props.setValue(!props.checked)}
       />
       <label className="form-check-label" htmlFor={id}>
@@ -169,7 +169,7 @@ export function FormTextInput(props: FormTextInputProps): JSX.Element {
   const inputProps = {
     id: id,
     type: props.type || "text",
-    value: String(props.value),
+    defaultValue: String(props.value),
     readOnly: props.readOnly,
     disabled: props.disabled,
     onChange: (e: Event) =>
@@ -197,15 +197,18 @@ interface FormNumberInputProps {
 
 export function FormNumberInput(props: FormNumberInputProps): JSX.Element {
   const id = useId();
+  const decimals = props.step
+    ? Math.max(0, Math.ceil(Math.log10(1 / (props.step || 1))))
+    : 3;
   const inputProps = {
     id: id,
     type: "number",
-    value: Number(props.value),
+    defaultValue: String(Number(props.value).toFixed(decimals)),
     readOnly: props.readOnly,
     disabled: props.disabled,
     step: props.step,
     onChange: (e: Event) =>
-      props.setValue((e.currentTarget as HTMLInputElement).value),
+      props.setValue(Number((e.currentTarget as HTMLInputElement).value)),
   };
   return (
     <div className="form-floating mb-3">

@@ -9,7 +9,7 @@ Median::Median(unsigned int sample_size, String config_path)
   buf_.clear();
 }
 
-void Median::set(float input, uint8_t inputChannel) {
+void Median::set(float input) {
   buf_.push_back(input);
   if (buf_.size() >= sample_size_) {
     // Its time to output a value

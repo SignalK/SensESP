@@ -9,13 +9,8 @@ Difference::Difference(float k1, float k2, String config_path)
   load_configuration();
 }
 
-void Difference::set(float input, uint8_t inputChannel) {
-  inputs[inputChannel] = input;
-  received |= 1 << inputChannel;
-  if (received == 0b11) {
-    received = 0;
-    this->emit(k1 * inputs[0] - k2 * inputs[1]);
-  }
+void Difference::set(float input) {
+  this->emit(k1 * inputs[0] - k2 * inputs[1]);
 }
 
 void Difference::get_configuration(JsonObject& root) {

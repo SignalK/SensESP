@@ -20,7 +20,7 @@ const updateCards = async (): Promise<string[]> => {
 };
 
 export function ConfigCards(): JSX.Element {
-  const [cards, setCards] = useState<string[]>([]);
+  const [cards, setCards] = useState<string[] | null>(null);
 
   async function updateFunc(): Promise<void> {
     const items = await updateCards();
@@ -28,10 +28,8 @@ export function ConfigCards(): JSX.Element {
   }
 
   useEffect(() => {
-    if (cards === null) {
-      void updateFunc();
-    }
-  }, [cards]);
+    void updateFunc();
+  }, []);
 
   if (cards === null) {
     // Display a spinner while waiting for data. Center the spinner

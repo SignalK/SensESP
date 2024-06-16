@@ -177,7 +177,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     this->load_configuration();
   }
 
-  void set(IN input, uint8_t input_channel = 0) override {
+  void set(IN input) override {
     switch (num_params) {
       case 0:
         this->output = function0(input);

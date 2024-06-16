@@ -31,7 +31,7 @@ class Throttle : public SymmetricTransform<T> {
   Throttle(long min_interval)
       : SymmetricTransform<T>(), min_interval_{min_interval} {}
 
-  void set(T input, uint8_t inputChannel = 0) override {
+  void set(T input) override {
     if (age_ < min_interval_) {
       return;
     }
