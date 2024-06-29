@@ -52,8 +52,7 @@ void add_config_get_handler(HTTPServer* server) {
         url_tail = String(path_cstr);
 
         ESP_LOGV("ConfigHandler", "URL parts: %s, %s", path.c_str(),
-                 query.c_str()
-        );
+                 query.c_str());
 
         if (path.length() == 0) {
           // return a list of all Configurable objects
@@ -78,20 +77,28 @@ void add_config_get_handler(HTTPServer* server) {
         // - schema, optional: the configuration schema
         // - description, optional: the configuration description
 
-        ConfigurableResult status = ConfigurableResult::kConfigOk;
+        ConfigurableResult status = ConfigurableResult::kOk;
 
         if (confable->is_async()) {
-          if (query == "result") {
+          if (query.startsWith("poll_get_result")) {
+            // Poll the status of a previous async GET (get) request
+            status = confable->poll_get_result(config);
+            if (status == ConfigurableResult::kPending) {
+              // Set result code 202
+              httpd_resp_set_status(req, "202 Accepted");
+            }
+          } else
+          if (query.startsWith("poll_put_result")) {
             // Poll the status of a previous async PUT (set) request
             status = confable->poll_set_result();
-            if (status == ConfigurableResult::kConfigPending) {
+            if (status == ConfigurableResult::kPending) {
               // Set result code 202
               httpd_resp_set_status(req, "202 Accepted");
             }
           } else {
             // Initiate an async GET (get) request
             status = confable->async_get_configuration();
-            if (status == ConfigurableResult::kConfigOk) {
+            if (status == ConfigurableResult::kOk) {
               // Return the resulting config object immediately
               confable->poll_get_result(config);
             } else {
@@ -104,20 +111,21 @@ void add_config_get_handler(HTTPServer* server) {
           doc["status"] = poll_status_strings[static_cast<int>(status)];
         } else {
           // Synchronous GET (get) request
-          if (query == "result") {
+          if (query.startsWith("poll")) {
             // Polling is not supported for synchronous requests
             httpd_resp_send_err(
                 req, HTTPD_400_BAD_REQUEST,
                 "Polling is not supported for synchronous requests");
           }
 
-          doc["status"] = poll_status_strings[static_cast<int>(
-              ConfigurableResult::kConfigOk)];
-          confable->get_configuration(config);
+          doc["status"] =
+              poll_status_strings[static_cast<int>(ConfigurableResult::kOk)];
 
           doc["schema"] = serialized(confable->get_config_schema());
           doc["description"] = confable->get_description();
         }
+
+        confable->get_configuration(config);
 
         String response;
         serializeJson(doc, response);
@@ -185,16 +193,14 @@ void add_config_put_handler(HTTPServer* server) {
           // Initiate an async PUT (set) request
           ConfigurableResult result =
               confable->async_set_configuration(doc.as<JsonObject>());
-          if (result == ConfigurableResult::kConfigError) {
+          if (result == ConfigurableResult::kError) {
             httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST,
                                 "Error setting configuration");
             return ESP_FAIL;
           }
           confable->save_configuration();
           String result_string = poll_status_strings[static_cast<int>(result)];
-          String poll_url = "/api/config" + url_tail + "?result";
-          response = "{\"status\":\"" + result_string + "\",\"poll\":\"" +
-                     poll_url + "\"}";
+          response = "{\"status\":\"" + result_string + "\"}";
           // Set result code 202
           httpd_resp_set_status(req, "202 Accepted");
         } else {
