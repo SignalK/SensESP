@@ -9,10 +9,10 @@
 
 #include "Arduino.h"
 
-enum ConfigurableResult {
-  kConfigError,
-  kConfigOk,
-  kConfigPending,
+enum class ConfigurableResult {
+  kError,
+  kOk,
+  kPending,
 };
 
 namespace sensesp {
@@ -74,7 +74,7 @@ class Configurable {
    */
   virtual ConfigurableResult async_get_configuration() {
     ESP_LOGE("Configurable", "async_get_configuration not implemented");
-    return ConfigurableResult::kConfigError;
+    return ConfigurableResult::kError;
   }
 
   /**
@@ -83,9 +83,9 @@ class Configurable {
    * Override to implement support for polling.
    *
    */
-  virtual ConfigurableResult poll_get_result(JsonObject& config_object) {
+  virtual ConfigurableResult poll_get_result(JsonObject& config) {
     ESP_LOGE("Configurable", "poll_get_result not implemented");
-    return ConfigurableResult::kConfigError;
+    return ConfigurableResult::kError;
   }
 
   /**
@@ -104,7 +104,7 @@ class Configurable {
    */
   virtual ConfigurableResult async_set_configuration(const JsonObject& config) {
     ESP_LOGE("Configurable", "async_set_configuration not implemented");
-    return ConfigurableResult::kConfigError;
+    return ConfigurableResult::kError;
   }
 
   /**
@@ -115,7 +115,7 @@ class Configurable {
    */
   virtual ConfigurableResult poll_set_result() {
     ESP_LOGE("Configurable", "poll_set_result not implemented");
-    return ConfigurableResult::kConfigError;
+    return ConfigurableResult::kError;
   }
 
   /**
