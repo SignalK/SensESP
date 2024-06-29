@@ -109,7 +109,7 @@ class ValueProducer : virtual public Observable {
   /*
    * Set a new output value and notify consumers about it
    */
-  void emit(T new_value) {
+  void emit(const T& new_value) {
     this->output = new_value;
     Observable::notify();
   }

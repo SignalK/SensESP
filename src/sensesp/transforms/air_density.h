@@ -14,7 +14,7 @@ namespace sensesp {
 class AirDensity : public FloatTransform {
  public:
   AirDensity();
-  virtual void set(float input) override;
+  virtual void set(const float& input) override;
 
  private:
   float inputs[3];

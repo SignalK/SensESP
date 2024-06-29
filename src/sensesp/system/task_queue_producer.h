@@ -44,7 +44,7 @@ class TaskQueueProducer : public ObservableValue<T> {
                     unsigned int poll_rate = 990)
       : TaskQueueProducer(value, ReactESP::app, queue_size, poll_rate) {}
 
-  virtual void set(T value) override {
+  virtual void set(const T& value) override {
     int retval;
     if (queue_size_ == 1) {
       retval = xQueueOverwrite(queue_, &value);

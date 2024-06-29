@@ -67,7 +67,7 @@ class RepeatStopping : public Repeat<T> {
         this->interval_, [this]() { this->repeat_function(); });
   }
 
-  virtual void set(T input) override {
+  virtual void set(const T& input) override {
     this->emit(input);
     age_ = 0;
     if (this->repeat_reaction_ != nullptr) {
@@ -117,7 +117,7 @@ class RepeatExpiring : public Repeat<T> {
         this->interval_, [this]() { this->repeat_function(); });
   }
 
-  virtual void set(T input) override {
+  virtual void set(const T& input) override {
     this->emit(input);
     age_ = 0;
     if (this->repeat_reaction_ != nullptr) {

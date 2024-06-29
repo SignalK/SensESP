@@ -35,7 +35,7 @@ class TimeCounter : public Transform<T, float> {
     this->load_configuration();
   }
 
-  virtual void set(T input) override {
+  virtual void set(const T& input) override {
     if (previous_state_ == -1) {
       // Initialize the previous state
       previous_state_ = (bool)input;

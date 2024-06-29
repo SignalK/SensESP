@@ -31,7 +31,7 @@ class VoltageMultiplier : public FloatTransform {
  public:
   VoltageMultiplier(uint16_t R1, uint16_t R2, String config_path = "");
 
-  virtual void set(float input);
+  virtual void set(const float& input);
 
  private:
   uint16_t R1_;

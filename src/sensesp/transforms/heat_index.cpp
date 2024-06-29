@@ -6,7 +6,7 @@ namespace sensesp {
 
 HeatIndexTemperature::HeatIndexTemperature() : FloatTransform() {}
 
-void HeatIndexTemperature::set(float input) {
+void HeatIndexTemperature::set(const float& input) {
   // The following equation approximate the heat index
   // using both Steadman's and Rothfusz equations
   // See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3801457/
@@ -77,7 +77,7 @@ void HeatIndexTemperature::set(float input) {
 
 HeatIndexEffect::HeatIndexEffect() : Transform<float, String>() {}
 
-void HeatIndexEffect::set(float input) {
+void HeatIndexEffect::set(const float& input) {
   float heat_index_temperature = input - 273.15;  // celsius = kelvin - 273.15
   String heat_index_effect = "";
   if (heat_index_temperature > 54) {

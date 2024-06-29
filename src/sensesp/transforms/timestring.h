@@ -15,7 +15,7 @@ namespace sensesp {
 class TimeString : public Transform<time_t, String> {
  public:
   TimeString(String config_path = "");
-  virtual void set(time_t input) override;
+  virtual void set(const time_t& input) override;
 };
 
 }  // namespace sensesp

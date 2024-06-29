@@ -29,8 +29,8 @@ class SystemStatusLed : public ValueConsumer<SystemStatus>,
  public:
   SystemStatusLed(int pin);
 
-  virtual void set(SystemStatus new_value) override;
-  virtual void set(int new_value) override;
+  virtual void set(const SystemStatus& new_value) override;
+  virtual void set(const int& new_value) override;
 };
 
 }  // namespace sensesp

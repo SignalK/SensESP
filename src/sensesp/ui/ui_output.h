@@ -83,7 +83,7 @@ class UIOutput : public UIOutputBase, public ObservableValue<T> {
     return obj;
   }
 
-  void set(T new_value) override { this->ValueProducer<T>::emit(new_value); }
+  void set(const T& new_value) override { this->ValueProducer<T>::emit(new_value); }
 };
 }  // namespace sensesp
 

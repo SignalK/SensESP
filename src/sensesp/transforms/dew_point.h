@@ -15,7 +15,7 @@ namespace sensesp {
 class DewPoint : public FloatTransform {
  public:
   DewPoint();
-  virtual void set(float input) override;
+  virtual void set(const float& input) override;
 
  private:
   float inputs[2];

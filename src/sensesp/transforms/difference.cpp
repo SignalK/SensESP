@@ -9,7 +9,7 @@ Difference::Difference(float k1, float k2, String config_path)
   load_configuration();
 }
 
-void Difference::set(float input) {
+void Difference::set(const float& input) {
   this->emit(k1 * inputs[0] - k2 * inputs[1]);
 }
 

@@ -20,7 +20,7 @@ namespace sensesp {
 class Median : public FloatTransform {
  public:
   Median(unsigned int sample_size = 10, String config_path = "");
-  virtual void set(float input) override;
+  virtual void set(const float& input) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

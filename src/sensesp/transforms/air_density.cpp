@@ -8,7 +8,7 @@ namespace sensesp {
 
 AirDensity::AirDensity() : FloatTransform() {}
 
-void AirDensity::set(float input) {
+void AirDensity::set(const float& input) {
   // For more info on the calculation see
   // https://en.wikipedia.org/wiki/Density_of_air
 

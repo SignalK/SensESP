@@ -16,7 +16,7 @@ ClickType::ClickType(String config_path, uint16_t long_click_delay,
   load_configuration();
 }
 
-void ClickType::set(bool input) {
+void ClickType::set(const bool& input) {
   if (input) {
     on_button_press();
   } else {

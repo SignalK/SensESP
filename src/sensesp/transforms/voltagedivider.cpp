@@ -7,7 +7,7 @@ VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path)
   load_configuration();
 }
 
-void VoltageDividerR1::set(float Vout) {
+void VoltageDividerR1::set(const float& Vout) {
   this->emit((Vin_ - Vout) * R2_ / Vout);
 }
 
@@ -48,7 +48,7 @@ VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path)
   load_configuration();
 }
 
-void VoltageDividerR2::set(float Vout) {
+void VoltageDividerR2::set(const float& Vout) {
   this->emit((Vout * R1_) / (Vin_ - Vout));
 }
 
