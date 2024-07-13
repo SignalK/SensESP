@@ -226,9 +226,16 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
       return;
     }
     const data = await response.json();
+    console.log("Fetched config data", data);
     if (response.status === 202 && data.status === "pending") {
-      // The configuration is being updated, so wait and try again
-      setHttpErrorText("Can't handle an async response yet.");
+      setSchema(data.schema);
+      setDescription(data.description);
+      const pollUrl = new URL(response.url);
+      pollUrl.searchParams.append("poll_get_result", "");
+      console.log("About to poll", pollUrl);
+      setTimeout(() => {
+        void pollLoadResult(String(pollUrl));
+      }, 500);
       return;
     } else {
       setConfig(data.config);
@@ -255,13 +262,35 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     console.log("Saving:", saving);
   }, [saving]);
 
-  async function pollSaveResult(url: string): Promise<void> {
+  async function pollLoadResult(url: string): Promise<void> {
     const response = await fetch(url);
     if (!response.ok) {
       console.log(`HTTP Error ${response.status} ${response.statusText}`);
       setHttpErrorText(
         `Received error ${response.status} ${response.statusText} when ` +
           `fetching the configuration: ${response.text}`,
+      );
+      return;
+    }
+    const data = await response.json();
+    if (response.status === 202 && data.status === "pending") {
+      // The configuration is being updated, so wait and try again
+      setTimeout(() => {
+        void pollLoadResult(url);
+      }, 500);
+    } else {
+      console.log("Loaded config data", data);
+      setConfig(data.config);
+    }
+  }
+
+  async function pollSaveResult(url: string): Promise<void> {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.log(`HTTP Error ${response.status} ${response.statusText}`);
+      setHttpErrorText(
+        `Received error ${response.status} ${response.statusText} when ` +
+          `saving the configuration: ${response.text}`,
       );
       return;
     }
@@ -307,10 +336,12 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
       } else {
         if (response.status === 202) {
           const data = await response.json();
-          const pollUrl = data.poll;
+          // poll URL is the current URL with ?result appended
+          const pollUrl = new URL(response.url);
+          pollUrl.searchParams.append("poll_put_result", "");
           console.log("About to poll", pollUrl);
           setTimeout(() => {
-            void pollSaveResult(pollUrl);
+            void pollSaveResult(String(pollUrl));
           }, 500);
         }
       }
@@ -323,8 +354,8 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
 
   const title = path.slice(1).replace(/\//g, " ▸ ");
 
-  if (Object.keys(config)?.length === 0) {
-    console.log("No config data");
+  if (Object.keys(schema ?? {})?.length === 0) {
+    console.log("No config schema");
     return (
       <div className="d-flex align-items-center justify-content-center min">
         <div className="spinner-border" role="status">
@@ -332,14 +363,6 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         </div>
       </div>
     );
-  }
-
-  if (
-    schema === null ||
-    schema === undefined ||
-    Object.keys(schema)?.length === 0
-  ) {
-    return null;
   }
 
   const updateConfig = (key: string, value: JsonValue): void => {
