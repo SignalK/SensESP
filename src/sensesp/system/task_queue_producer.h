@@ -45,12 +45,18 @@ class TaskQueueProducer : public ObservableValue<T> {
       : TaskQueueProducer(value, ReactESP::app, queue_size, poll_rate) {}
 
   virtual void set(const T& value) override {
+    // WARNING: This does not check if the queue is full.
+    xQueueSend(queue_, &value, 0);
+  }
+
+  int push(const T& value) {
     int retval;
     if (queue_size_ == 1) {
       retval = xQueueOverwrite(queue_, &value);
     } else {
       retval = xQueueSend(queue_, &value, 0);
     }
+    return retval;
   }
 
  private:
