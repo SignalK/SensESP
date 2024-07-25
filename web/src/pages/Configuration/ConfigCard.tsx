@@ -343,6 +343,10 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
           setTimeout(() => {
             void pollSaveResult(String(pollUrl));
           }, 500);
+        } else if (response.status === 200) {
+          setIsDirty(false);
+          setSaving(false);
+          // TODO: Show success message
         }
       }
     } catch (e) {
