@@ -1,8 +1,14 @@
-#include "config_handler.h"
-
 #include "sensesp.h"
 
+#include "config_handler.h"
+
 namespace sensesp {
+
+const char* poll_status_strings[] = {
+    "error",
+    "ok",
+    "pending",
+};
 
 esp_err_t handle_config_list(httpd_req_t* req) {
   JsonDocument json_doc;
@@ -31,11 +37,24 @@ void add_config_list_handler(HTTPServer* server) {
 void add_config_get_handler(HTTPServer* server) {
   server->add_handler(new HTTPRequestHandler(
       1 << HTTP_GET, "/api/config/*", [](httpd_req_t* req) {
+        ESP_LOGD("ConfigHandler", "GET request to URL %s", req->uri);
         String url_tail = String(req->uri).substring(11);
-        char url_tail_cstr[url_tail.length() + 1];
-        urldecode2(url_tail_cstr, url_tail.c_str());
-        url_tail = String(url_tail_cstr);
-        if (url_tail.length() == 0) {
+        String path;
+        String query = "";
+        if (url_tail.indexOf('?') != -1) {
+          path = url_tail.substring(0, url_tail.indexOf('?'));
+          query = url_tail.substring(url_tail.indexOf('?') + 1);
+        } else {
+          path = url_tail;
+        }
+        char path_cstr[path.length() + 1];
+        urldecode2(path_cstr, path.c_str());
+        url_tail = String(path_cstr);
+
+        ESP_LOGV("ConfigHandler", "URL parts: %s, %s", path.c_str(),
+                 query.c_str());
+
+        if (path.length() == 0) {
           // return a list of all Configurable objects
           return handle_config_list(req);
         }
@@ -48,14 +67,69 @@ void add_config_get_handler(HTTPServer* server) {
           return ESP_FAIL;
         }
 
-        // get the configuration
         JsonDocument doc;
-        String response;
-        JsonObject config = doc["config"].to<JsonObject>();
+        JsonObject config;
+        config = doc["config"].to<JsonObject>();
+
+        // Should return a JSON object with the following keys:
+        // - status: "ok", "pending" or "error"
+        // - config, optional: the configuration object
+        // - schema, optional: the configuration schema
+        // - description, optional: the configuration description
+
+        ConfigurableResult status = ConfigurableResult::kOk;
+
+        if (confable->is_async()) {
+          if (query.startsWith("poll_get_result")) {
+            // Poll the status of a previous async GET (get) request
+            status = confable->poll_get_result(config);
+            if (status == ConfigurableResult::kPending) {
+              // Set result code 202
+              httpd_resp_set_status(req, "202 Accepted");
+            }
+          } else
+          if (query.startsWith("poll_put_result")) {
+            // Poll the status of a previous async PUT (set) request
+            status = confable->poll_set_result();
+            if (status == ConfigurableResult::kPending) {
+              // Set result code 202
+              httpd_resp_set_status(req, "202 Accepted");
+            }
+          } else {
+            // Initiate an async GET (get) request
+            status = confable->async_get_configuration();
+            if (status == ConfigurableResult::kOk) {
+              // Return the resulting config object immediately
+              confable->poll_get_result(config);
+            } else {
+              // Set result code 202
+              httpd_resp_set_status(req, "202 Accepted");
+            }
+            doc["schema"] = serialized(confable->get_config_schema());
+            doc["description"] = confable->get_description();
+          }
+          doc["status"] = poll_status_strings[static_cast<int>(status)];
+        } else {
+          // Synchronous GET (get) request
+          if (query.startsWith("poll")) {
+            // Polling is not supported for synchronous requests
+            httpd_resp_send_err(
+                req, HTTPD_400_BAD_REQUEST,
+                "Polling is not supported for synchronous requests");
+          }
+
+          doc["status"] =
+              poll_status_strings[static_cast<int>(ConfigurableResult::kOk)];
+
+          doc["schema"] = serialized(confable->get_config_schema());
+          doc["description"] = confable->get_description();
+        }
+
         confable->get_configuration(config);
-        doc["schema"] = serialized(confable->get_config_schema());
-        doc["description"] = confable->get_description();
+
+        String response;
         serializeJson(doc, response);
+        ESP_LOGV("ConfigHandler", "Response: %s", response.c_str());
         httpd_resp_set_type(req, "application/json");
         httpd_resp_sendstr(req, response.c_str());
         return ESP_OK;
@@ -114,17 +188,37 @@ void add_config_put_handler(HTTPServer* server) {
           return ESP_FAIL;
         }
 
-        // set the configuration
-        if (!confable->set_configuration(doc.as<JsonObject>())) {
-          httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST,
-                              "Error setting configuration");
-          return ESP_FAIL;
+        String response;
+        if (confable->is_async()) {
+          // Initiate an async PUT (set) request
+          ConfigurableResult result =
+              confable->async_set_configuration(doc.as<JsonObject>());
+          if (result == ConfigurableResult::kError) {
+            httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST,
+                                "Error setting configuration");
+            return ESP_FAIL;
+          }
+          confable->save_configuration();
+          String result_string = poll_status_strings[static_cast<int>(result)];
+          response = "{\"status\":\"" + result_string + "\"}";
+          // Set result code 202
+          httpd_resp_set_status(req, "202 Accepted");
+        } else {
+          // Synchronous PUT (set) request
+          bool result = confable->set_configuration(doc.as<JsonObject>());
+          if (!result) {
+            httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST,
+                                "Error setting configuration");
+            return ESP_FAIL;
+          }
+          confable->save_configuration();
+          response = "{\"status\":\"ok\"}";
         }
 
-        // save the configuration
-        confable->save_configuration();
-        httpd_resp_sendstr(req, "OK");
+        httpd_resp_set_type(req, "application/json");
+        httpd_resp_sendstr(req, response.c_str());
         return ESP_OK;
+
       }));
 }
 

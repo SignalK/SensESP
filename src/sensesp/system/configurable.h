@@ -1,12 +1,19 @@
 #ifndef _configurable_H_
 #define _configurable_H_
 
-#include <ArduinoJson.h>
+#include "sensesp.h"
 
+#include <ArduinoJson.h>
 #include <map>
 #include <vector>
 
 #include "Arduino.h"
+
+enum class ConfigurableResult {
+  kError,
+  kOk,
+  kPending,
+};
 
 namespace sensesp {
 
@@ -37,18 +44,79 @@ class Configurable {
   const String config_path_;
 
   /**
+   * @brief Return true if the Configurable is asynchronous.
+   *
+   * If the Configurable is asynchronous, async_get_configuration() and
+   * async_set_configuration() must be used instead of the standard
+   * get_configuration() and set_configuration() functions.
+   *
+   * @return true
+   * @return false
+   */
+  virtual bool is_async() { return false; }
+
+  /**
    * Returns the current configuration data as a JsonObject. In
    * general, the current state of local member variables are
    * saved to a new object created with JsonDocument::as<JsonObject>()
    * and returned.
    */
-  virtual void get_configuration(JsonObject& configObject);
+  virtual void get_configuration(JsonObject& configObject) {
+    debugW("WARNING: get_configuration not defined");
+  }
+
+  /**
+   * @brief Initiate an asynchronous request to get the current configuration.
+   *
+   * Override to implement support for asynchronous configuration.
+   *
+   * @return ConfigurableResult
+   */
+  virtual ConfigurableResult async_get_configuration() {
+    ESP_LOGE("Configurable", "async_get_configuration not implemented");
+    return ConfigurableResult::kError;
+  }
+
+  /**
+   * @brief Return the current status of the last async_get_configuration() call.
+   *
+   * Override to implement support for polling.
+   *
+   */
+  virtual ConfigurableResult poll_get_result(JsonObject& config) {
+    ESP_LOGE("Configurable", "poll_get_result not implemented");
+    return ConfigurableResult::kError;
+  }
 
   /**
    * Sets the current state of local member variables using
    * the data stored in config.
    */
   virtual bool set_configuration(const JsonObject& config);
+
+  /**
+   * @brief Initiate an asynchronous request to set the configuration.
+   *
+   * Override to implement support for asynchronous configuration.
+   *
+   * @param config
+   * @return ConfigurableResult
+   */
+  virtual ConfigurableResult async_set_configuration(const JsonObject& config) {
+    ESP_LOGE("Configurable", "async_set_configuration not implemented");
+    return ConfigurableResult::kError;
+  }
+
+  /**
+   * @brief Return the current status of the last async set_configuration call.
+   *
+   * Override to implement support for polling.
+   *
+   */
+  virtual ConfigurableResult poll_set_result() {
+    ESP_LOGE("Configurable", "poll_set_result not implemented");
+    return ConfigurableResult::kError;
+  }
 
   /**
    * Returns a configuration schema that specifies the key/value pairs
@@ -127,7 +195,8 @@ class Configurable {
   static std::map<String, Configurable*> configurables_;
   /**
    * Loads a configuration previously saved with save_configuration() and
-   * passes the configuration to set_configuration().
+   * passes the configuration to set_configuration(). This function is typically
+   * only called by a child class constructor.
    */
   virtual void load_configuration();
 
