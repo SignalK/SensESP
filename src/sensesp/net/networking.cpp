@@ -1,8 +1,9 @@
+#include "sensesp.h"
+
 #include "networking.h"
 
 #include <esp_wifi.h>
 
-#include "sensesp.h"
 #include "sensesp/system/led_blinker.h"
 #include "sensesp_app.h"
 
@@ -53,10 +54,13 @@ Networking::Networking(String config_path, String client_ssid,
   // complicated with enforced WPA2. BAD Raspberry Pi! BAD!
   WiFi.setMinSecurity(WIFI_AUTH_WPA_PSK);
 
+  // Try setting hostname already here.
+  String hostname = SensESPBaseApp::get_hostname();
+  WiFi.setHostname(hostname.c_str());
+
   // Start WiFi with a bogus SSID to initialize the network stack but
   // don't connect to any network.
   WiFi.begin("0", "0", 0, nullptr, false);
-
 
   // If both saved AP settings and saved client settings
   // are available, start in STA+AP mode.
