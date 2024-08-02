@@ -4,30 +4,28 @@
 #include "Arduino.h"
 #include "Print.h"
 
-namespace sensesp {
-
 #ifndef DEBUG_DISABLED
 
 #define rdebugA(fmt, ...)        \
-  if (Debug.isActive(Debug.ANY)) \
+  if (sensesp::Debug.isActive(sensesp::Debug.ANY)) \
   Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
 #define rdebugP(fmt, ...)             \
-  if (Debug.isActive(Debug.PROFILER)) \
+  if (sensesp::Debug.isActive(sensesp::Debug.PROFILER)) \
   Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
 #define rdebugV(fmt, ...)            \
-  if (Debug.isActive(Debug.VERBOSE)) \
+  if (sensesp::Debug.isActive(sensesp::Debug.VERBOSE)) \
   Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
 #define rdebugD(fmt, ...)          \
-  if (Debug.isActive(Debug.DEBUG)) \
+  if (sensesp::Debug.isActive(sensesp::Debug.DEBUG)) \
   Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
 #define rdebugI(fmt, ...)         \
-  if (Debug.isActive(Debug.INFO)) \
+  if (sensesp::Debug.isActive(sensesp::Debug.INFO)) \
   Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
 #define rdebugW(fmt, ...)            \
-  if (Debug.isActive(Debug.WARNING)) \
+  if (sensesp::Debug.isActive(sensesp::Debug.WARNING)) \
   Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
 #define rdebugE(fmt, ...)          \
-  if (Debug.isActive(Debug.ERROR)) \
+  if (sensesp::Debug.isActive(sensesp::Debug.ERROR)) \
   Serial.printf("(%s)(C%d) " fmt, __func__, xPortGetCoreID(), ##__VA_ARGS__)
 
 // With newline
@@ -49,6 +47,8 @@ namespace sensesp {
 #define debugW(fmt, ...) rdebugWln(fmt, ##__VA_ARGS__)
 #define debugE(fmt, ...) rdebugEln(fmt, ##__VA_ARGS__)
 #define debugA(fmt, ...) rdebugVln(fmt, ##__VA_ARGS__)
+
+namespace sensesp {
 
 class LocalDebug {
  public:
