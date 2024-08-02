@@ -26,9 +26,9 @@ class ValueConsumer {
    * automatically by a ValueProducer.
    * @param new_value the value of the input
    */
-  virtual void set(T new_value) {}
+  virtual void set(const T& new_value) {}
 
-  virtual void set_input(T new_value) {
+  virtual void set_input(const T& new_value) {
     static bool warned = false;
     if (!warned) {
       warned = true;

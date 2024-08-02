@@ -10,7 +10,7 @@ AngleCorrection::AngleCorrection(float offset, float min_angle,
   load_configuration();
 }
 
-void AngleCorrection::set(float input) {
+void AngleCorrection::set(const float& input) {
   // first the correction
   float x = input + offset_;
 

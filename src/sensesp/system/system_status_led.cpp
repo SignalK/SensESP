@@ -56,7 +56,7 @@ void SystemStatusLed::set_ws_connected() {
   blinker_->set_pattern(ws_connected_pattern);
 }
 
-void SystemStatusLed::set(SystemStatus new_value) {
+void SystemStatusLed::set(const SystemStatus& new_value) {
   switch (new_value) {
     case SystemStatus::kWifiNoAP:
       this->set_wifi_no_ap();
@@ -82,6 +82,6 @@ void SystemStatusLed::set(SystemStatus new_value) {
   }
 }
 
-void SystemStatusLed::set(int new_value) { blinker_->blip(); }
+void SystemStatusLed::set(const int& new_value) { blinker_->blip(); }
 
 }  // namespace sensesp

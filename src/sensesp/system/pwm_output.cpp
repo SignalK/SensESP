@@ -18,7 +18,7 @@ PWMOutput::PWMOutput(int pin, int pwm_channel) {
   }
 }
 
-void PWMOutput::set(float new_value) {
+void PWMOutput::set(const float& new_value) {
   uint8_t pwm_channel = default_channel_;
 
   set_pwm(pwm_channel, new_value);

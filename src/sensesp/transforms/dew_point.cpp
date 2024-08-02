@@ -6,7 +6,7 @@ namespace sensesp {
 
 DewPoint::DewPoint() : FloatTransform() {}
 
-void DewPoint::set(float input) {
+void DewPoint::set(const float& input) {
   // Dew point is calculated with Arden Buck Equation and Arden Buck valuation
   // sets For more info on the calculation see
   // https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point

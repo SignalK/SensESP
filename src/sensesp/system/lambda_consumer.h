@@ -27,7 +27,7 @@ class LambdaConsumer : public ValueConsumer<IN> {
   LambdaConsumer(std::function<void(IN)> function)
       : ValueConsumer<IN>(), function{function} {}
 
-  void set(IN input) override { function(input); }
+  void set(const IN& input) override { function(input); }
 
  protected:
   std::function<void(IN)> function;

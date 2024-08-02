@@ -35,7 +35,7 @@ class ChangeFilter : public FloatTransform {
   ChangeFilter(float min_delta = 0.0, float max_delta = 9999.0,
                int max_skips = 99, String config_path = "");
 
-  virtual void set(float new_value) override;
+  virtual void set(const float& new_value) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

@@ -58,7 +58,7 @@ class ClickType : public Transform<bool, ClickTypes> {
    */
   static bool is_click(ClickTypes value);
 
-  virtual void set(bool input) override;
+  virtual void set(const bool& input) override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;

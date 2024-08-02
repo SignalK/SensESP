@@ -48,7 +48,7 @@ class PWMOutput : public ValueConsumer<float> {
    * pwm_channel is zero, the channel assigned when the PWMOutput instance
    * was instantiated will be used.
    */
-  virtual void set(float new_value) override;
+  virtual void set(const float& new_value) override;
 
   /**
    * Assigns the specified GPIO pin to the specified pwm channel.

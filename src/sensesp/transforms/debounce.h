@@ -42,7 +42,7 @@ class Debounce : public SymmetricTransform<T> {
     this->load_configuration();
   }
 
-  virtual void set(T input) override {
+  virtual void set(const T& input) override {
     // Input has changed since the last emit, or this is the first
     // input since the program started to run.
 
