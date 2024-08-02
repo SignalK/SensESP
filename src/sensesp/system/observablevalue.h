@@ -32,9 +32,7 @@ class ObservableValue : public ValueConsumer<T>, public ValueProducer<T> {
   ObservableValue(const T& value)
       : ValueConsumer<T>(), ValueProducer<T>(value) {}
 
-  void set(T value, uint8_t input_channel = 0) override {
-    this->ValueProducer<T>::emit(value);
-  }
+  void set(T value) override { this->ValueProducer<T>::emit(value); }
 
   const T& operator=(const T& value) {
     set(value);
@@ -67,7 +65,7 @@ class PersistingObservableValue : public ObservableValue<T>,
     load_configuration();
   }
 
-  virtual void set(T value, uint8_t input_channel = 0) override {
+  virtual void set(T value) override {
     ObservableValue<T>::set(value);
     this->save_configuration();
   }

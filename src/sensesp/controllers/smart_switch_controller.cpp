@@ -26,13 +26,12 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
   }
 }
 
-void SmartSwitchController::set(bool new_value, uint8_t input_channel) {
+void SmartSwitchController::set(bool new_value) {
   is_on = new_value;
   this->emit(is_on);
 }
 
-void SmartSwitchController::set(ClickTypes new_value,
-                                      uint8_t input_channel) {
+void SmartSwitchController::set(ClickTypes new_value) {
   if (!ClickType::is_click(new_value)) {
     // Ignore button presses (we only want interpreted clicks)
     return;
@@ -57,7 +56,7 @@ void SmartSwitchController::set(ClickTypes new_value,
   }
 }
 
-void SmartSwitchController::set(String new_value, uint8_t input_channel) {
+void SmartSwitchController::set(String new_value) {
   if (TextToTruth::is_valid_true(new_value)) {
     is_on = true;
   } else if (TextToTruth::is_valid_false(new_value)) {

@@ -1,7 +1,6 @@
 #ifndef _SENSESP_UI_UI_OUTPUT_H_
 #define _SENSESP_UI_UI_OUTPUT_H_
 #include <ArduinoJson.h>
-
 #include <functional>
 #include <map>
 
@@ -63,8 +62,7 @@ class UILambdaOutput : public UIOutputBase {
 extern std::map<String, UIOutputBase*> ui_outputs;
 
 template <typename T>
-class UIOutput : public UIOutputBase,
-                 public ObservableValue<T> {
+class UIOutput : public UIOutputBase, public ObservableValue<T> {
  public:
   UIOutput(String name)
       : UIOutputBase(name, kUIOutputDefaultGroup, kUIOutputDefaultOrder) {}
@@ -85,9 +83,7 @@ class UIOutput : public UIOutputBase,
     return obj;
   }
 
-  void set(T new_value, uint8_t input_channel = 0) override {
-    this->ValueProducer<T>::emit(new_value);
-  }
+  void set(T new_value) override { this->ValueProducer<T>::emit(new_value); }
 };
 }  // namespace sensesp
 

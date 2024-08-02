@@ -18,12 +18,9 @@ PWMOutput::PWMOutput(int pin, int pwm_channel) {
   }
 }
 
-void PWMOutput::set(float new_value, uint8_t pwm_channel) {
-  if (pwm_channel == 0) {
-    // Use the default channel, as zero is the SensESP default
-    // input_channel for ValueConsumers
-    pwm_channel = default_channel_;
-  }
+void PWMOutput::set(float new_value) {
+  uint8_t pwm_channel = default_channel_;
+
   set_pwm(pwm_channel, new_value);
 }
 

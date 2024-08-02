@@ -27,7 +27,7 @@ class Repeat : public SymmetricTransform<T> {
  public:
   Repeat(long interval) : SymmetricTransform<T>(), interval_{interval} {}
 
-  void set(T input, uint8_t inputChannel = 0) override {
+  void set(T input) override {
     this->emit(input);
     if (repeat_reaction_ != nullptr) {
       // Delete the old repeat reaction
@@ -67,7 +67,7 @@ class RepeatStopping : public Repeat<T> {
         this->interval_, [this]() { this->repeat_function(); });
   }
 
-  virtual void set(T input, uint8_t inputChannel = 0) override {
+  virtual void set(T input) override {
     this->emit(input);
     age_ = 0;
     if (this->repeat_reaction_ != nullptr) {
@@ -96,7 +96,6 @@ class RepeatStopping : public Repeat<T> {
   };
 };
 
-
 /**
  * @brief Repeat transform that emits an expired value if the value age exceeds
  * max_age.
@@ -118,7 +117,7 @@ class RepeatExpiring : public Repeat<T> {
         this->interval_, [this]() { this->repeat_function(); });
   }
 
-  virtual void set(T input, uint8_t inputChannel = 0) override {
+  virtual void set(T input) override {
     this->emit(input);
     age_ = 0;
     if (this->repeat_reaction_ != nullptr) {
@@ -171,7 +170,7 @@ class RepeatConstantRate : public RepeatExpiring<T> {
         interval, [this]() { this->repeat_function(); });
   }
 
-  void set(T input, uint8_t inputChannel = 0) override {
+  void set(T input) override {
     this->output = input;
     this->age_ = 0;
   }

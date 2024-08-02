@@ -33,22 +33,13 @@ class ValueProducer : virtual public Observable {
 
   /**
    * Connects this producer to the specified consumer, registering that
-   * consumer for notifications to when this producer's value changes
-   * @param input_channel Consumers can have one or more inputs feeding them
-   *   This parameter allows you to specify which input number this producer
-   *   is connecting to. For single input consumers, leave the index at
-   *   zero.
-   *  @see ValueConsumer::set()
+   * consumer for notifications to when this producer's value changes.
    */
-  void connect_to(ValueConsumer<T>* consumer, uint8_t input_channel = 0) {
-    this->attach([this, consumer, input_channel]() {
-      consumer->set(this->get(), input_channel);
-    });
+  void connect_to(ValueConsumer<T>* consumer) {
+    this->attach([this, consumer]() { consumer->set(this->get()); });
   }
-  void connect_to(ValueConsumer<T>& consumer, uint8_t input_channel = 0) {
-    this->attach([this, consumer, input_channel]() {
-      consumer.set(this->get(), input_channel);
-    });
+  void connect_to(ValueConsumer<T>& consumer) {
+    this->attach([this, consumer]() { consumer.set(this->get()); });
   }
 
   /**
@@ -59,19 +50,14 @@ class ValueProducer : virtual public Observable {
    *
    * @tparam CT Consumer type
    * @param consumer Consumer object to connect to
-   * @param input_channel
    */
   template <typename CT>
-  void connect_to(ValueConsumer<CT>* consumer, uint8_t input_channel = 0) {
-    this->attach([this, consumer, input_channel]() {
-      consumer->set(CT(this->get()), input_channel);
-    });
+  void connect_to(ValueConsumer<CT>* consumer) {
+    this->attach([this, consumer]() { consumer->set(CT(this->get())); });
   }
   template <typename CT>
-  void connect_to(ValueConsumer<CT>& consumer, uint8_t input_channel = 0) {
-    this->attach([this, consumer, input_channel]() {
-      consumer.set(CT(this->get()), input_channel);
-    });
+  void connect_to(ValueConsumer<CT>& consumer) {
+    this->attach([this, consumer]() { consumer.set(CT(this->get())); });
   }
 
   /**
@@ -79,26 +65,18 @@ class ValueProducer : virtual public Observable {
    *  of values of the same type, connect_to() calls can be chained
    *  together, as this specialized version returns the producer/consumer
    *  being conencted to so connect_to() can be called on THAT object.
-   * @param input_channel Consumers can have one or more inputs feeding them
-   *   This parameter allows you to specify which input number this producer
-   *   is connecting to. For single input consumers, leave the index at
-   *   zero.
-   *  @see ValueConsumer::set()
    */
   template <typename T2>
-  Transform<T, T2>* connect_to(Transform<T, T2>* consumer_producer,
-                               uint8_t input_channel = 0) {
-    this->attach([this, consumer_producer, input_channel]() {
-      consumer_producer->set(T(this->get()), input_channel);
+  Transform<T, T2>* connect_to(Transform<T, T2>* consumer_producer) {
+    this->attach([this, consumer_producer]() {
+      consumer_producer->set(T(this->get()));
     });
     return consumer_producer;
   }
   template <typename T2>
-  Transform<T, T2>* connect_to(Transform<T, T2>& consumer_producer,
-                               uint8_t input_channel = 0) {
-    this->attach([this, consumer_producer, input_channel]() {
-      consumer_producer.set(T(this->get()), input_channel);
-    });
+  Transform<T, T2>* connect_to(Transform<T, T2>& consumer_producer) {
+    this->attach(
+        [this, consumer_producer]() { consumer_producer.set(T(this->get())); });
     return &consumer_producer;
   }
 
@@ -111,22 +89,19 @@ class ValueProducer : virtual public Observable {
    * @tparam TT Transform input type
    * @tparam T2 Transform output type
    * @param consumer_producer Transform object to connect to
-   * @param input_channel
    * @return Transform<TT, T2>*
    */
   template <typename TT, typename T2>
-  Transform<TT, T2>* connect_to(Transform<TT, T2>* consumer_producer,
-                                uint8_t input_channel = 0) {
-    this->attach([this, consumer_producer, input_channel]() {
-      consumer_producer->set(TT(this->get()), input_channel);
+  Transform<TT, T2>* connect_to(Transform<TT, T2>* consumer_producer) {
+    this->attach([this, consumer_producer]() {
+      consumer_producer->set(TT(this->get()));
     });
     return consumer_producer;
   }
   template <typename TT, typename T2>
-  Transform<TT, T2>* connect_to(Transform<TT, T2>& consumer_producer,
-                                uint8_t input_channel = 0) {
-    this->attach([this, consumer_producer, input_channel]() {
-      consumer_producer->set(TT(this->get()), input_channel);
+  Transform<TT, T2>* connect_to(Transform<TT, T2>& consumer_producer) {
+    this->attach([this, consumer_producer]() {
+      consumer_producer->set(TT(this->get()));
     });
     return &consumer_producer;
   }
