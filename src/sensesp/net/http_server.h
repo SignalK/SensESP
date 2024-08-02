@@ -13,6 +13,10 @@
 #include "sensesp/system/configurable.h"
 #include "sensesp_base_app.h"
 
+#ifndef HTTP_SERVER_STACK_SIZE
+#define HTTP_SERVER_STACK_SIZE 8192
+#endif
+
 namespace sensesp {
 
 #ifndef HTTP_DEFAULT_PORT
@@ -60,7 +64,7 @@ class HTTPServer : public Configurable {
       : config_(HTTPD_DEFAULT_CONFIG()),
         Configurable(config_path) {
     config_.server_port = port;
-    config_.stack_size = 4096;
+    config_.stack_size = HTTP_SERVER_STACK_SIZE;
     config_.max_uri_handlers = 20;
     config_.uri_match_fn = httpd_uri_match_wildcard;
     String auth_realm_ = "Login required for " + SensESPBaseApp::get_hostname();

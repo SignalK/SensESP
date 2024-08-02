@@ -199,7 +199,7 @@ export function FormNumberInput(props: FormNumberInputProps): JSX.Element {
   const id = useId();
   const decimals = props.step
     ? Math.max(0, Math.ceil(Math.log10(1 / (props.step || 1))))
-    : 3;
+    : 5;
   const inputProps = {
     id: id,
     type: "number",
