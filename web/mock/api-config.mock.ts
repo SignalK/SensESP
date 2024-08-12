@@ -1,5 +1,5 @@
 import { JsonObject } from 'common/jsonTypes';
-import { defineMock } from 'vite-plugin-mock-dev-server'
+import { defineMock } from 'vite-plugin-mock-dev-server';
 
 let hostname = "localhost";
 let authenticationSettings: JsonObject = {
@@ -15,8 +15,6 @@ export default defineMock(
       method: 'GET',
       body: {
         keys: [
-          "/System/WiFi Settings",
-          "/System/Signal K Settings",
           "/Transforms/Linear",
           "/Curves/Level Curve",
           "/A2 Enabled",
