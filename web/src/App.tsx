@@ -1,4 +1,5 @@
 import NavPathContext from "common/NavPathContext";
+import { RestartRequiredProvider } from "common/RestartRequiredContext";
 import { Header } from "components/Header";
 import { ConfigurationPage } from "pages/Configuration";
 import { SignalKPage } from "pages/SignalK";
@@ -124,12 +125,16 @@ export function App(): JSX.Element {
 
   return (
     <>
-      <NavPathContext.Provider value={navPath}>
-        <Header routes={routes} />
-      </NavPathContext.Provider>
-      {routes.length === 0 ? null : (
-        <Router onChange={handleRouteChange}>{routeComponents}</Router>
-      )}
+      <RestartRequiredProvider>
+        <>
+          <NavPathContext.Provider value={navPath}>
+            <Header routes={routes} />
+          </NavPathContext.Provider>
+          {routes.length === 0 ? null : (
+            <Router onChange={handleRouteChange}>{routeComponents}</Router>
+          )}
+        </>
+      </RestartRequiredProvider>
     </>
   );
 }

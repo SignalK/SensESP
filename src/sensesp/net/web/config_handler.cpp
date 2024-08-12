@@ -87,8 +87,7 @@ void add_config_get_handler(HTTPServer* server) {
               // Set result code 202
               httpd_resp_set_status(req, "202 Accepted");
             }
-          } else
-          if (query.startsWith("poll_put_result")) {
+          } else if (query.startsWith("poll_put_result")) {
             // Poll the status of a previous async PUT (set) request
             status = confable->poll_set_result();
             if (status == ConfigurableResult::kPending) {
@@ -105,8 +104,6 @@ void add_config_get_handler(HTTPServer* server) {
               // Set result code 202
               httpd_resp_set_status(req, "202 Accepted");
             }
-            doc["schema"] = serialized(confable->get_config_schema());
-            doc["description"] = confable->get_description();
           }
           doc["status"] = poll_status_strings[static_cast<int>(status)];
         } else {
@@ -120,9 +117,15 @@ void add_config_get_handler(HTTPServer* server) {
 
           doc["status"] =
               poll_status_strings[static_cast<int>(ConfigurableResult::kOk)];
+        }
 
-          doc["schema"] = serialized(confable->get_config_schema());
-          doc["description"] = confable->get_description();
+        doc["schema"] = serialized(confable->get_config_schema());
+        doc["description"] = confable->get_description();
+
+        if (confable->requires_restart()) {
+          doc["requires_restart"] = true;
+        } else {
+          doc["requires_restart"] = false;
         }
 
         confable->get_configuration(config);
