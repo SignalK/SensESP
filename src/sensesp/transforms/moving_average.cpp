@@ -9,6 +9,7 @@ MovingAverage::MovingAverage(int sample_size, float multiplier,
     : FloatTransform(config_path),
       sample_size_{sample_size},
       multiplier_{multiplier} {
+  set_requires_restart(true);
   buf_.resize(sample_size_, 0);
   initialized_ = false;
   load_configuration();
