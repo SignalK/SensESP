@@ -11,6 +11,7 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
       pin{pin},
       read_delay{read_delay},
       output_scale{output_scale} {
+  this->set_requires_restart(true);
   analog_reader = new AnalogReader(pin);
   load_configuration();
 
