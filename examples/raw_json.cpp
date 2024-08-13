@@ -37,7 +37,7 @@ void setup() {
 
   // print the JSON document to the serial console
   jsonify->connect_to(new LambdaConsumer<String>(
-      [](String input) { debugD("JSONified output: %s", input.c_str()); }));
+      [](String input) { ESP_LOGD("Example", "JSONified output: %s", input.c_str()); }));
 
   // connect jsonify to the SK delta queue
 

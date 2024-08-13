@@ -11,7 +11,8 @@
 #endif
 
 #ifndef CORE_DEBUG_LEVEL
-#error "SensESP v3 requires CORE_DEBUG_LEVEL to be defined. See https://signalk.org/SensESP/pages/migration/."
+#error \
+    "SensESP v3 requires CORE_DEBUG_LEVEL to be defined. See https://signalk.org/SensESP/pages/migration/."
 #endif
 
 namespace sensesp {

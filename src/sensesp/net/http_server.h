@@ -1,14 +1,14 @@
 #ifndef SENSESP_NET_HTTP_SERVER_H_
 #define SENSESP_NET_HTTP_SERVER_H_
 
+#include "sensesp.h"
+
 #include <ESPmDNS.h>
 #include <esp_http_server.h>
-
 #include <functional>
 #include <list>
 
 #include "WiFi.h"
-#include "sensesp.h"
 #include "sensesp/net/http_authenticator.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp_base_app.h"
@@ -61,8 +61,7 @@ class HTTPServer : public Configurable {
  public:
   HTTPServer(int port = HTTP_DEFAULT_PORT,
              String config_path = "/system/httpserver")
-      : config_(HTTPD_DEFAULT_CONFIG()),
-        Configurable(config_path) {
+      : config_(HTTPD_DEFAULT_CONFIG()), Configurable(config_path) {
     config_.server_port = port;
     config_.stack_size = HTTP_SERVER_STACK_SIZE;
     config_.max_uri_handlers = 20;
@@ -75,17 +74,18 @@ class HTTPServer : public Configurable {
     }
     if (singleton_ == nullptr) {
       singleton_ = this;
-      debugD("HTTPServer instance created");
+      ESP_LOGD(__FILENAME__, "HTTPServer instance created");
     } else {
-      debugE("Only one HTTPServer instance is allowed");
+      ESP_LOGE(__FILENAME__, "Only one HTTPServer instance is allowed");
       return;
     }
     ReactESP::app->onDelay(0, [this]() {
       esp_err_t error = httpd_start(&server_, &config_);
       if (error != ESP_OK) {
-        debugE("Error starting HTTP server: %s", esp_err_to_name(error));
+        ESP_LOGE(__FILENAME__, "Error starting HTTP server: %s",
+                 esp_err_to_name(error));
       } else {
-        debugI("HTTP server started");
+        ESP_LOGI(__FILENAME__, "HTTP server started");
       }
 
       // register the request dispatcher for all methods and all URIs

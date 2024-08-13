@@ -2,18 +2,19 @@
 #define _local_debug_H_
 
 #include "esp32-hal-log.h"
+
 #include "Arduino.h"
 #include "Print.h"
 
 namespace sensesp {
 
-#define rdebugA(fmt, ...) ESP_LOGV("SensESP", fmt, ##__VA_ARGS__)
-#define rdebugP(fmt, ...) ESP_LOGV("SensESP", fmt, ##__VA_ARGS__)
-#define rdebugV(fmt, ...) ESP_LOGV("SensESP", fmt, ##__VA_ARGS__)
-#define rdebugD(fmt, ...) ESP_LOGD("SensESP", fmt, ##__VA_ARGS__)
-#define rdebugI(fmt, ...) ESP_LOGI("SensESP", fmt, ##__VA_ARGS__)
-#define rdebugW(fmt, ...) ESP_LOGW("SensESP", fmt, ##__VA_ARGS__)
-#define rdebugE(fmt, ...) ESP_LOGE("SensESP", fmt, ##__VA_ARGS__)
+#define rdebugA(fmt, ...) ESP_LOGV(__FILENAME__, fmt, ##__VA_ARGS__)
+#define rdebugP(fmt, ...) ESP_LOGV(__FILENAME__, fmt, ##__VA_ARGS__)
+#define rdebugV(fmt, ...) ESP_LOGV(__FILENAME__, fmt, ##__VA_ARGS__)
+#define rdebugD(fmt, ...) ESP_LOGD(__FILENAME__, fmt, ##__VA_ARGS__)
+#define rdebugI(fmt, ...) ESP_LOGI(__FILENAME__, fmt, ##__VA_ARGS__)
+#define rdebugW(fmt, ...) ESP_LOGW(__FILENAME__, fmt, ##__VA_ARGS__)
+#define rdebugE(fmt, ...) ESP_LOGE(__FILENAME__, fmt, ##__VA_ARGS__)
 
 // With newline
 

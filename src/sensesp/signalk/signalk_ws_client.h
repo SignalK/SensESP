@@ -1,13 +1,13 @@
 #ifndef SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_WS_CLIENT_H_
 #define SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_WS_CLIENT_H_
 
+#include "sensesp.h"
+
 #include <WiFi.h>
 #include <esp_websocket_client.h>
-
 #include <functional>
 #include <set>
 
-#include "sensesp.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
@@ -31,13 +31,13 @@ enum class SKWSConnectionState {
  * @see SensESPApp
  */
 class SKWSClient : public Configurable,
-                 public ValueProducer<SKWSConnectionState> {
+                   public ValueProducer<SKWSConnectionState> {
  public:
   /////////////////////////////////////////////////////////
   // main task methods
 
   SKWSClient(String config_path, SKDeltaQueue* sk_delta_queue,
-           String server_address, uint16_t server_port, bool use_mdns = true);
+             String server_address, uint16_t server_port, bool use_mdns = true);
 
   const String get_server_address() const { return server_address_; }
   const uint16_t get_server_port() const { return server_port_; }
@@ -102,12 +102,13 @@ class SKWSClient : public Configurable,
   bool token_test_success_ = false;
 
   TaskQueueProducer<SKWSConnectionState> connection_state_ =
-      TaskQueueProducer<SKWSConnectionState>(SKWSConnectionState::kSKWSDisconnected,
-                                           ReactESP::app);
+      TaskQueueProducer<SKWSConnectionState>(
+          SKWSConnectionState::kSKWSDisconnected, ReactESP::app);
 
   /// task_connection_state is used to track the internal task state which might
   /// be out of sync with the published connection state.
-  SKWSConnectionState task_connection_state_ = SKWSConnectionState::kSKWSDisconnected;
+  SKWSConnectionState task_connection_state_ =
+      SKWSConnectionState::kSKWSDisconnected;
 
   WiFiClient wifi_client_;
   esp_websocket_client_handle_t client_;

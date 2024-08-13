@@ -28,7 +28,7 @@ class TaskQueueProducer : public ObservableValue<T> {
       : ObservableValue<T>(value), queue_size_{queue_size} {
     queue_ = xQueueCreate(queue_size, sizeof(T));
     if (queue_ == NULL) {
-      debugE("Failed to create queue");
+      ESP_LOGE(__FILENAME__, "Failed to create queue");
     }
 
     // Create a repeat reaction that will poll the queue and emit the values

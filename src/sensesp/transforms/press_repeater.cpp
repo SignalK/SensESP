@@ -17,12 +17,12 @@ PressRepeater::PressRepeater(String config_path, int integer_false,
       // A press is currently in progress
       if (repeating_) {
         if (last_value_sent_ > (unsigned long)repeat_interval_) {
-          debugD("Repeating press report");
+          ESP_LOGD(__FILENAME__, "Repeating press report");
           last_value_sent_ = 0;
           this->emit(true);
         }
       } else if (last_value_sent_ > (unsigned long)repeat_start_interval_) {
-        debugD("Starting press report repeat");
+        ESP_LOGD(__FILENAME__, "Starting press report repeat");
         repeating_ = true;
         last_value_sent_ = 0;
         this->emit(true);

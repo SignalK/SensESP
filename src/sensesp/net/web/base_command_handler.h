@@ -2,7 +2,6 @@
 #define SENSESP_NET_WEB_BASE_COMMAND_HANDLER_H_
 
 #include <esp_http_server.h>
-
 #include <vector>
 
 #include "ArduinoJson.h"
@@ -18,7 +17,7 @@ namespace sensesp {
 class RouteDefinition {
  public:
   RouteDefinition(String name, String path, String component_name)
-      : name_(name), path_(path), component_name_(component_name){};
+      : name_(name), path_(path), component_name_(component_name) {};
 
   String get_name() { return name_; }
   String get_path() { return path_; }

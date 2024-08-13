@@ -1,8 +1,9 @@
+#include "sensesp.h"
+
 #include "signalk_delta_queue.h"
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
-#include "sensesp.h"
 #include "sensesp_app.h"
 #include "signalk_emitter.h"
 
@@ -76,7 +77,7 @@ void SKDeltaQueue::get_delta(String& output) {
 
   serializeJson(jsonDoc, output);
 
-  debugD("delta: %s", output.c_str());
+  ESP_LOGD(__FILENAME__, "delta: %s", output.c_str());
 }
 
 void SKDeltaQueue::add_metadata(JsonArray updates) {

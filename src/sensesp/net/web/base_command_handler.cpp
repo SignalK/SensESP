@@ -89,7 +89,7 @@ void add_routes_handlers(HTTPServer* server) {
     }
   }
   if (root_page == nullptr) {
-    debugE("Root page not found in kWebUIFiles");
+    ESP_LOGE(__FILENAME__, "Root page not found in kWebUIFiles");
     return;
   }
 

@@ -7,11 +7,11 @@
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
 #include "sensesp/net/networking.h"
-#include "sensesp/signalk/signalk_ws_client.h"
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp/signalk/signalk_value_listener.h"
+#include "sensesp/signalk/signalk_ws_client.h"
 #include "sensesp/system/lambda_consumer.h"
 #include "sensesp/system/system_status_led.h"
 #include "sensesp_minimal_app_builder.h"
@@ -49,8 +49,10 @@ void setup() {
   // create the websocket client
   auto ws_client_ = new SKWSClient("/system/sk", sk_delta_queue_, "", 0);
 
-  ws_client_->connect_to(new LambdaConsumer<SKWSConnectionState>(
-      [](SKWSConnectionState input) { debugD("SKWSConnectionState: %d", input); }));
+  ws_client_->connect_to(
+      new LambdaConsumer<SKWSConnectionState>([](SKWSConnectionState input) {
+        ESP_LOGD("Example", "SKWSConnectionState: %d", input);
+      }));
 
   // create the MDNS discovery object
   auto mdns_discovery_ = new MDNSDiscovery();
@@ -73,7 +75,7 @@ void setup() {
   auto digin = new DigitalInputChange(kDigitalInputPin, INPUT_PULLUP, CHANGE);
 
   digin->connect_to(new LambdaConsumer<bool>([](bool input) {
-    debugD("(%d ms) Digital input changed to %d", millis(), input);
+    ESP_LOGD("Example", "(%d ms) Digital input changed to %d", millis(), input);
   }));
 
   // connect digin to the SK delta queue
@@ -85,10 +87,11 @@ void setup() {
 
   auto hdg = new SKValueListener<float>("navigation.headingMagnetic");
   hdg->connect_to(new LambdaConsumer<float>(
-      [](float input) { debugD("Heading: %f", input); }));
+      [](float input) { ESP_LOGD("Example", "Heading: %f", input); }));
 
   // print out free heap
-  app.onRepeat(2000, []() { debugD("Free heap: %d", ESP.getFreeHeap()); });
+  app.onRepeat(
+      2000, []() { ESP_LOGD("Example", "Free heap: %d", ESP.getFreeHeap()); });
 }
 
 // The loop function is called in an endless loop during program execution.

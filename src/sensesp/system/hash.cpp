@@ -1,8 +1,8 @@
 #include "hash.h"
 
+#include "mbedtls/base64.h"
 #include "mbedtls/md.h"
 #include "mbedtls/md5.h"
-#include "mbedtls/base64.h"
 
 using namespace sensesp;
 
@@ -39,7 +39,7 @@ void Sha1(String payload_str, uint8_t *hash_output) {
  *
  * @param payload_str
  */
-String MD5(String payload_str){
+String MD5(String payload_str) {
   const char *payload = payload_str.c_str();
   char output[33] = {0};
 
@@ -53,7 +53,7 @@ String MD5(String payload_str){
   mbedtls_md5_update_ret(&_ctx, (const uint8_t *)payload, payload_length);
   mbedtls_md5_finish_ret(&_ctx, _buf);
   mbedtls_md5_free(&_ctx);
-  for(i = 0; i < 16; i++) {
+  for (i = 0; i < 16; i++) {
     sprintf(output + (i * 2), "%02x", _buf[i]);
   }
   return String(output);
@@ -77,10 +77,11 @@ String Base64Sha1(String payload_str) {
 
   Sha1(payload_str, hash_output);
 
-  int retval = mbedtls_base64_encode(encoded, sizeof(encoded), &output_length, hash_output, 20);
+  int retval = mbedtls_base64_encode(encoded, sizeof(encoded), &output_length,
+                                     hash_output, 20);
 
   if (retval != 0) {
-    debugE("Base64 encoding failed");
+    ESP_LOGE(__FILENAME__, "Base64 encoding failed");
     return "";
   }
 

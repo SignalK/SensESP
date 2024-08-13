@@ -48,7 +48,7 @@ Networking::Networking(String config_path, String client_ssid,
     client_enabled_ = true;
   }
 
-  debugD("Enabling Networking");
+  ESP_LOGD(__FILENAME__, "Enabling Networking");
 
   // Hate to do this, but Raspberry Pi AP setup is going to be much more
   // complicated with enforced WPA2. BAD Raspberry Pi! BAD!
@@ -104,14 +104,14 @@ void Networking::start_access_point() {
   String hostname = SensESPBaseApp::get_hostname();
   WiFi.setHostname(hostname.c_str());
 
-  debugI("Starting access point %s", ap_settings_.ssid_.c_str());
+  ESP_LOGI(__FILENAME__, "Starting access point %s", ap_settings_.ssid_.c_str());
 
   bool result =
       WiFi.softAP(ap_settings_.ssid_.c_str(), ap_settings_.password_.c_str(),
                   ap_settings_.channel_, ap_settings_.hidden_);
 
   if (!result) {
-    debugE("Failed to start access point.");
+    ESP_LOGE(__FILENAME__, "Failed to start access point.");
     return;
   }
 }
@@ -138,7 +138,8 @@ void Networking::start_client_autoconnect() {
 
     // First check if any of the client settings are defined
     if (num_configs == 0) {
-      debugW("No client settings defined. Leaving WiFi client disconnected.");
+      ESP_LOGW(__FILENAME__,
+               "No client settings defined. Leaving WiFi client disconnected.");
       return;
     }
 
@@ -156,22 +157,24 @@ void Networking::start_client_autoconnect() {
       }
     }
 
-    debugD("Current client config index: %d", current_config_idx);
-    debugD("Attempt number: %d", attempt_num);
-    debugD("Config SSID: %s", config.ssid_.c_str());
+    ESP_LOGD(__FILENAME__, "Current client config index: %d", current_config_idx);
+    ESP_LOGD(__FILENAME__, "Attempt number: %d", attempt_num);
+    ESP_LOGD(__FILENAME__, "Config SSID: %s", config.ssid_.c_str());
 
     // If no valid client config found, leave WiFi client disconnected
     if (config.ssid_ == "" || config.password_ == "") {
-      debugW(
+      ESP_LOGW(
+          __FILENAME__,
           "No valid client settings found. Leaving WiFi client disconnected.");
       return;
     }
 
-    debugI("Connecting to wifi SSID %s (connection attempt #%d).",
-           config.ssid_.c_str(), attempt_num);
+    ESP_LOGI(__FILENAME__, "Connecting to wifi SSID %s (connection attempt #%d).",
+             config.ssid_.c_str(), attempt_num);
 
     if (!config.use_dhcp_) {
-      debugI("Using static IP address: %s", config.ip_.toString().c_str());
+      ESP_LOGI(__FILENAME__, "Using static IP address: %s",
+               config.ip_.toString().c_str());
       WiFi.config(config.ip_, config.dns_server_, config.gateway_,
                   config.netmask_);
     }
@@ -263,7 +266,7 @@ bool Networking::set_configuration(const JsonObject& config) {
 }
 
 void Networking::reset() {
-  debugI("Resetting WiFi SSID settings");
+  ESP_LOGI(__FILENAME__, "Resetting WiFi SSID settings");
 
   clear_configuration();
   WiFi.disconnect(true);
@@ -284,13 +287,14 @@ WiFiStateProducer* WiFiStateProducer::get_singleton() {
 void Networking::start_wifi_scan() {
   // Scan fails if WiFi is connecting. Disconnect to allow scanning.
   if (WiFi.status() != WL_CONNECTED) {
-    debugD("WiFi is not connected. Disconnecting to allow scanning.");
+    ESP_LOGD(__FILENAME__,
+             "WiFi is not connected. Disconnecting to allow scanning.");
     WiFi.disconnect();
   }
-  debugI("Starting WiFi network scan");
+  ESP_LOGI(__FILENAME__, "Starting WiFi network scan");
   int result = WiFi.scanNetworks(true);
   if (result == WIFI_SCAN_FAILED) {
-    debugE("WiFi scan failed to start");
+    ESP_LOGE(__FILENAME__, "WiFi scan failed to start");
   }
 }
 

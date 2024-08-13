@@ -4,7 +4,6 @@
 #include <set>
 
 #include "sensesp/signalk/signalk_output.h"
-
 #include "sensesp/types/position.h"
 
 namespace sensesp {
@@ -14,6 +13,6 @@ String SKOutput<Position>::as_signalk();
 
 typedef SKOutput<Position> SKOutputPosition;
 
-}
+}  // namespace sensesp
 
 #endif

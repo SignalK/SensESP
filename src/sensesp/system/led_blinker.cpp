@@ -1,7 +1,8 @@
 
+#include "sensesp.h"
+
 #include "led_blinker.h"
 
-#include "sensesp.h"
 #include "sensesp_app.h"
 
 namespace sensesp {

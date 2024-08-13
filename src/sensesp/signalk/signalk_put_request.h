@@ -154,7 +154,8 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
       this->value = new_value;
       send_put_request();
     } else {
-      debugW("Ignoring PUT request (previous request still outstanding)");
+      ESP_LOGW(__FILENAME__,
+               "Ignoring PUT request (previous request still outstanding)");
     }
   };
 

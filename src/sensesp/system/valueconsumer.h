@@ -32,7 +32,7 @@ class ValueConsumer {
     static bool warned = false;
     if (!warned) {
       warned = true;
-      debugW("set_input() is deprecated. Use set() instead.");
+      ESP_LOGW(__FILENAME__, "set_input() is deprecated. Use set() instead.");
     }
     set(new_value);
   }

@@ -56,7 +56,7 @@ void SensESPApp::setup() {
   bool use_mdns = sk_server_address_ == "";
   this->ws_client_ =
       new SKWSClient("/System/Signal K Settings", sk_delta_queue_,
-                   sk_server_address_, sk_server_port_, use_mdns);
+                     sk_server_address_, sk_server_port_, use_mdns);
 
   // connect the system status controller
   WiFiStateProducer::get_singleton()->connect_to(&system_status_controller_);

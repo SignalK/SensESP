@@ -77,7 +77,7 @@ class Configurable {
    * and returned.
    */
   virtual void get_configuration(JsonObject& configObject) {
-    debugW("WARNING: get_configuration not defined");
+    ESP_LOGW(__FILENAME__, "WARNING: get_configuration not defined");
   }
 
   /**
@@ -93,7 +93,8 @@ class Configurable {
   }
 
   /**
-   * @brief Return the current status of the last async_get_configuration() call.
+   * @brief Return the current status of the last async_get_configuration()
+   * call.
    *
    * Override to implement support for polling.
    *

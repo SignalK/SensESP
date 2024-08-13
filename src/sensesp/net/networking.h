@@ -70,17 +70,21 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
   }
 
   void wifi_station_connected() {
-    debugI("Connected to wifi, SSID: %s (signal: %d)", WiFi.SSID().c_str(),
-           WiFi.RSSI());
-    debugI("IP address of Device: %s", WiFi.localIP().toString().c_str());
-    debugI("Default route: %s", WiFi.gatewayIP().toString().c_str());
-    debugI("DNS server: %s", WiFi.dnsIP().toString().c_str());
+    ESP_LOGI(__FILENAME__, "Connected to wifi, SSID: %s (signal: %d)",
+             WiFi.SSID().c_str(), WiFi.RSSI());
+    ESP_LOGI(__FILENAME__, "IP address of Device: %s",
+             WiFi.localIP().toString().c_str());
+    ESP_LOGI(__FILENAME__, "Default route: %s",
+             WiFi.gatewayIP().toString().c_str());
+    ESP_LOGI(__FILENAME__, "DNS server: %s", WiFi.dnsIP().toString().c_str());
     this->emit(WiFiState::kWifiConnectedToAP);
   }
 
   void wifi_ap_enabled() {
-    debugI("WiFi Access Point enabled, SSID: %s", WiFi.softAPSSID().c_str());
-    debugI("IP address of Device: %s", WiFi.softAPIP().toString().c_str());
+    ESP_LOGI(__FILENAME__, "WiFi Access Point enabled, SSID: %s",
+             WiFi.softAPSSID().c_str());
+    ESP_LOGI(__FILENAME__, "IP address of Device: %s",
+             WiFi.softAPIP().toString().c_str());
 
     // Setting the AP mode happens immediately,
     // so this callback is likely called already before all startables have been
@@ -90,7 +94,7 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
   }
 
   void wifi_disconnected() {
-    debugI("Disconnected from wifi.");
+    ESP_LOGI(__FILENAME__, "Disconnected from wifi.");
     this->emit(WiFiState::kWifiDisconnected);
   }
 

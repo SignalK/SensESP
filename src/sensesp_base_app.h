@@ -9,7 +9,6 @@
 #include "sensesp.h"
 
 #include "esp_log.h"
-
 #include "sensesp/system/filesystem.h"
 #include "sensesp/system/observablevalue.h"
 
@@ -18,7 +17,7 @@ namespace sensesp {
 constexpr auto kDefaultHostname = "SensESP";
 
 void SetupSerialDebug(uint32_t baudrate);
-void SetupLogging(esp_log_level_t default_level=ESP_LOG_VERBOSE);
+void SetupLogging(esp_log_level_t default_level = ESP_LOG_VERBOSE);
 
 /**
  * @brief The base class for SensESP applications.

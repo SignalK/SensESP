@@ -1,19 +1,20 @@
-#include "SPIFFS.h"
+#include "sensesp.h"
 
 #include "filesystem.h"
-#include "sensesp.h"
+
+#include "SPIFFS.h"
 
 namespace sensesp {
 
 Filesystem::Filesystem() : Resettable(-100) {
   if (!SPIFFS.begin(true)) {
-    debugE("FATAL: Filesystem initialization failed.");
+    ESP_LOGE(__FILENAME__, "FATAL: Filesystem initialization failed.");
     ESP.restart();
   }
 }
 
 void Filesystem::reset() {
-  debugI("Formatting filesystem");
+  ESP_LOGI(__FILENAME__, "Formatting filesystem");
   SPIFFS.format();
 }
 
