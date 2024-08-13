@@ -1,4 +1,8 @@
 import {
+  RestartRequiredContext,
+  RestartRequiredContextProps,
+} from "common/RestartRequiredContext";
+import {
   ConfigData,
   fetchConfigData,
   saveConfigData,
@@ -6,12 +10,11 @@ import {
 import { JsonObject, JsonValue } from "common/jsonTypes";
 import { ButtonCard } from "components/Card";
 import { FormSwitch, FormTextInput } from "components/Form";
+import { ToastMessage } from "components/ToastMessage";
 import { produce } from "immer";
 import { AppPage } from "pages/AppPage";
 import { type JSX } from "preact";
-import { ChangeEvent } from "preact/compat";
-import { useEffect, useId, useState } from "preact/hooks";
-import { ModalError } from "../../components/ModalError";
+import { useContext, useEffect, useId, useState } from "preact/hooks";
 import { PageContents } from "../PageContents";
 import { PageHeading } from "../PageHeading";
 
@@ -70,25 +73,25 @@ function SystemSettingsCard({
   const id = useId();
 
   async function handleSave(e: MouseEvent): Promise<void> {
+    const { restartRequired, setRestartRequired } =
+      useContext<RestartRequiredContextProps>(RestartRequiredContext);
     e.preventDefault();
     setSaving(true);
     await handleSaveData();
+    setRestartRequired(true);
     setSaving(false);
   }
 
   return (
     <>
-      <ModalError
-        id={`${id}-modal`}
-        title="Error"
+      <ToastMessage
+        color="text-bg-danger"
         show={errorMessage !== ""}
-        onHide={() => {
-          setErrorMessage("");
-        }}
+        onHide={() => setErrorMessage("")}
       >
         <p>There was an error saving the configuration:</p>
         <p>{errorMessage}</p>
-      </ModalError>
+      </ToastMessage>
 
       <SystemCard>
         <div className="card-header">{title}</div>
@@ -138,6 +141,9 @@ function DeviceNameCard(): JSX.Element {
   };
 
   async function handleSaveData(): Promise<void> {
+    const { restartRequired, setRestartRequired } =
+      useContext<RestartRequiredContextProps>(RestartRequiredContext);
+
     const success = await saveConfigData(
       configPath,
       JSON.stringify(data),
@@ -147,6 +153,7 @@ function DeviceNameCard(): JSX.Element {
       },
     );
     if (success) {
+      setRestartRequired(true);
       setOrigData(data);
     }
   }
@@ -214,6 +221,9 @@ function AuthCard(): JSX.Element {
   }, []);
 
   async function handleSaveData(): Promise<void> {
+    const { restartRequired, setRestartRequired } =
+      useContext<RestartRequiredContextProps>(RestartRequiredContext);
+
     const success = await saveConfigData(
       configPath,
       JSON.stringify(data),
@@ -223,6 +233,7 @@ function AuthCard(): JSX.Element {
       },
     );
     if (success) {
+      setRestartRequired(true);
       setOrigData(data);
     }
   }
@@ -332,17 +343,13 @@ function RestartCard(): JSX.Element {
 
   return (
     <>
-      <ModalError
-        id={`${id}-modal`}
-        title="Error"
+      <ToastMessage
+        color="text-bg-warning"
         show={httpErrorText !== ""}
-        onHide={() => {
-          setHttpErrorText("");
-        }}
+        onHide={() => setHttpErrorText("")}
       >
-        <p>Failed to restart the device:</p>
-        <p>{httpErrorText}</p>
-      </ModalError>
+        <p>Failed to restart: {httpErrorText}</p>
+      </ToastMessage>
       <ButtonCard
         title="Restart the device"
         buttonText="Restart"
@@ -390,17 +397,14 @@ function ResetCard(): JSX.Element {
 
   return (
     <>
-      <ModalError
-        id={`${id}-modal`}
-        title="Error"
+      <ToastMessage
+        color="text-bg-danger"
         show={httpErrorText !== ""}
-        onHide={() => {
-          setHttpErrorText("");
-        }}
+        onHide={() => setHttpErrorText("")}
       >
         <p>Failed to reset the device:</p>
         <p>{httpErrorText}</p>
-      </ModalError>
+      </ToastMessage>
       <ButtonCard
         title="Reset the device to factory defaults"
         buttonText="Reset"

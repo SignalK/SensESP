@@ -1,12 +1,17 @@
+import { RestartRequiredContext } from "common/RestartRequiredContext";
 import { fetchConfigData, saveConfigData } from "common/configAPIClient";
 import { JsonValue } from "common/jsonTypes";
 import { CollapseCard } from "components/Card";
-import { FormCheckboxInput, FormNumberInput, FormSwitch, FormTextInput } from "components/Form";
-import { ModalError } from "components/ModalError";
+import {
+  FormCheckboxInput,
+  FormNumberInput,
+  FormTextInput,
+} from "components/Form";
 import { Tabs } from "components/Tab";
+import { ToastMessage } from "components/ToastMessage";
 import { produce } from "immer";
 import { type JSX } from "preact";
-import { useEffect, useId, useState } from "preact/hooks";
+import { useContext, useEffect, useId, useState } from "preact/hooks";
 import { NetworkList } from "./NetworkList";
 import { SingleClientConfigPanel } from "./SingleClientConfigPanel";
 import {
@@ -22,7 +27,6 @@ export function WiFiSettingsPanel(): JSX.Element {
   const [config, setConfig] = useState<IWiFiSettingsConfig>(
     new WiFiSettingsConfig(),
   );
-  const [requestSave, setRequestSave] = useState(false);
   const [errorText, setErrorText] = useState("");
 
   const id = useId();
@@ -31,17 +35,23 @@ export function WiFiSettingsPanel(): JSX.Element {
     setErrorText(e.message);
   }
 
-  useEffect(() => {
-    if (requestSave) {
-      // save config data to server
-      void saveConfigData(
+  async function handleSave(): Promise<void> {
+    const { restartRequired, setRestartRequired } = useContext(
+      RestartRequiredContext,
+    );
+    try {
+      await saveConfigData(
         "/System/WiFi Settings",
         JSON.stringify(config),
-        handleError,
+        (e: Error) => {
+          setErrorText(e.message);
+        },
       );
-      setRequestSave(false);
+      setRestartRequired(true);
+    } catch (e) {
+      setErrorText(`Failed to save data: ${e.message}`);
     }
-  }, [config, requestSave]);
+  }
 
   async function updateConfig(): Promise<void> {
     try {
@@ -77,16 +87,14 @@ export function WiFiSettingsPanel(): JSX.Element {
 
   return (
     <>
-      <ModalError
-        id={`${id}-modal`}
-        title="Error"
+      <ToastMessage
+        color="text-bg-warning"
         show={errorText !== ""}
-        onHide={() => {
-          setErrorText("");
-        }}
+        onHide={() => setErrorText("")}
       >
         <p>{errorText}</p>
-      </ModalError>
+      </ToastMessage>
+
       <div className="mb-3">
         <div className="vstack gap-4">
           <APSettingsPanel config={config.apSettings} setConfig={setAPConfig} />
@@ -96,13 +104,7 @@ export function WiFiSettingsPanel(): JSX.Element {
           />
         </div>
       </div>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => {
-          setRequestSave(true);
-        }}
-      >
+      <button type="button" className="btn btn-primary" onClick={handleSave}>
         Save
       </button>
     </>
