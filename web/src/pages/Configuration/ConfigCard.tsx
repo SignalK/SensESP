@@ -1,8 +1,11 @@
 import { APP_CONFIG } from "config";
 import { useContext, useEffect, useId, useState } from "preact/hooks";
 
+import {
+  RestartRequiredContext,
+  RestartRequiredContextProps,
+} from "common/RestartRequiredContext";
 import { JsonValue, type JsonObject } from "common/jsonTypes";
-import { RestartRequiredContext, RestartRequiredContextProps } from "common/RestartRequiredContext";
 import { Card } from "components/Card";
 import {
   FormCheckboxInput,
@@ -12,7 +15,7 @@ import {
   FormTextAreaInput,
   FormTextInput,
 } from "components/Form";
-import { ModalError } from "components/ModalError";
+import { ToastMessage } from "components/ToastMessage";
 import { type JSX } from "preact/compat";
 
 interface ItemsProps {
@@ -385,16 +388,14 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
 
   return (
     <>
-      <ModalError
-        id={`${id}-modal`}
-        title="Error"
+      <ToastMessage
+        color="text-bg-danger"
         show={httpErrorText !== ""}
-        onHide={() => {
-          setHttpErrorText("");
-        }}
+        onHide={() => setHttpErrorText("")}
       >
-        {httpErrorText}
-      </ModalError>
+        <p>Unable to set configuration:</p>
+        <p>{httpErrorText}</p>
+      </ToastMessage>
 
       <Card id={`${id}-card`} key={`${id}-card`} title={title}>
         <form>

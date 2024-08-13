@@ -1,8 +1,8 @@
 import { type JsonObject } from "common/jsonTypes";
 import { Card } from "components/Card";
-import { ModalError } from "components/ModalError";
+import { ToastMessage } from "components/ToastMessage";
 import { type JSX } from "preact";
-import { useContext, useEffect, useId, useState } from "preact/hooks";
+import { useEffect, useId, useState } from "preact/hooks";
 import { fetchConfigData, saveConfigData } from "../../common/configAPIClient";
 import { Collapse } from "../../components/Collapse";
 
@@ -10,26 +10,19 @@ const CONFIG_PATH = "/System/Signal K Settings";
 
 export function SignalKSettingsPanel(): JSX.Element {
   const [config, setConfig] = useState({});
-  const [requestSave, setRequestSave] = useState(false);
   const [errorText, setErrorText] = useState("");
 
   const id = useId();
 
-  function handleError(e: Error): void {
-    setErrorText(e.message);
-  }
-
-  useEffect(() => {
-    if (requestSave) {
-      // save config data to server
-      void saveConfigData(
-        CONFIG_PATH,
-        JSON.stringify(config),
-        handleError,
-      );
-      setRequestSave(false);
+  async function handleSave(): Promise<void> {
+    try {
+      await saveConfigData(CONFIG_PATH, JSON.stringify(config), (e: Error) => {
+        setErrorText(e.message);
+      });
+    } catch (e) {
+      setErrorText(e.message);
     }
-  }, [config, requestSave]);
+  }
 
   async function updateConfig(): Promise<void> {
     try {
@@ -48,27 +41,24 @@ export function SignalKSettingsPanel(): JSX.Element {
 
   return (
     <>
-      <ModalError
-        id={`${id}-modal`}
-        title="Error"
+      <ToastMessage
+        color="text-bg-danger"
         show={errorText !== ""}
-        onHide={() => {
-          setErrorText("");
-        }}
+        onHide={() => setErrorText("")}
       >
         <p>{errorText}</p>
-      </ModalError>
+      </ToastMessage>
 
       <div className="vstack gap-4">
         <SKConnectionSettings
           config={config}
           setConfig={setConfig}
-          setRequestSave={setRequestSave}
+          setRequestSave={handleSave}
         />
         <SKAuthToken
           config={config}
           setConfig={setConfig}
-          setRequestSave={setRequestSave}
+          setRequestSave={handleSave}
         />
       </div>
     </>
@@ -201,7 +191,7 @@ function SKAuthToken({
     <Card title="Authentication Token">
       <p>
         Click the button to clear the Signal K authentication token. This causes
-        the device to request a new token from the Signal K server.
+        the device to request re-authorization from the Signal K server.
       </p>
       <button className="btn btn-primary" onClick={handleClearToken}>
         Clear Token

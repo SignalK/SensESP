@@ -1,4 +1,4 @@
-import { ModalError } from "components/ModalError";
+import { ToastMessage } from "components/ToastMessage";
 import { APP_CONFIG } from "config";
 import { type JSX } from "preact";
 import { useEffect, useId, useState } from "preact/hooks";
@@ -106,25 +106,20 @@ export function InfoGroups(): JSX.Element {
 
   return (
     <>
-      <ModalError
-        id={`${id}-modal`}
-        title="Error"
+      <ToastMessage
+        color="text-bg-danger"
         show={errorText !== ""}
-        onHide={() => {
-          setErrorText("");
-        }}
+        onHide={() => setErrorText("")}
       >
         <p>{errorText}</p>
-      </ModalError>
+      </ToastMessage>
 
       <div>
         <div className="vstack gap-4">
           {Array.from(groups.keys()).map((name_) => {
-            return <InfoGroup
-              key={name_}
-              name={name_}
-              items={groups.get(name_)!}
-            />
+            return (
+              <InfoGroup key={name_} name={name_} items={groups.get(name_)!} />
+            );
           })}
         </div>
       </div>
