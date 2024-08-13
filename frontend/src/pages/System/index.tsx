@@ -319,6 +319,7 @@ function AuthCard(): JSX.Element {
  */
 function RestartCard(): JSX.Element {
   const [httpErrorText, setHttpErrorText] = useState("");
+  const [showRestartToast, setShowRestartToast] = useState(false);
 
   const id = useId();
 
@@ -336,6 +337,7 @@ function RestartCard(): JSX.Element {
       setTimeout(() => {
         window.location.reload();
       }, 5000);
+      setShowRestartToast(true);
     } catch (e) {
       setHttpErrorText(`Error restarting the device: ${e}`);
     }
@@ -344,11 +346,18 @@ function RestartCard(): JSX.Element {
   return (
     <>
       <ToastMessage
-        color="text-bg-warning"
+        color="text-bg-danger"
         show={httpErrorText !== ""}
         onHide={() => setHttpErrorText("")}
       >
         <p>Failed to restart: {httpErrorText}</p>
+      </ToastMessage>
+      <ToastMessage
+        color="text-bg-warning"
+        show={showRestartToast}
+        onHide={() => {setShowRestartToast(false)}}
+      >
+        <p>Restarting the device...</p>
       </ToastMessage>
       <ButtonCard
         title="Restart the device"
