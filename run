@@ -42,7 +42,7 @@ function install-pio {
 
 function install-frontend {
   echo "📦 Installing frontend dependencies"
-  ( cd web && npm install )
+  ( cd frontend && pnpm install )
 }
 
 function install {
@@ -54,7 +54,7 @@ function install {
 function clean {
   echo "🧹 Cleaning up"
   rm -rf .pio/
-  rm -rf web/node_modules/
+  rm -rf frontend/node_modules/
 }
 
 function build-pio {
@@ -64,9 +64,9 @@ function build-pio {
 
 function build-frontend {
   echo "🏗️ Building the frontend"
-  ( cd web && npm run css-compile )
-  ( cd web && npm run build )
-  pio run -t webUI
+  ( cd frontend && pnpm run css-compile )
+  ( cd frontend && pnpm run build )
+  pio run -t frontend
 }
 
 function build {

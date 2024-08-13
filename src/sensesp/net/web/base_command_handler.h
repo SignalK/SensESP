@@ -6,7 +6,7 @@
 
 #include "ArduinoJson.h"
 #include "sensesp/net/http_server.h"
-#include "sensesp/net/web/autogen/web_ui_files.h"
+#include "sensesp/net/web/autogen/frontend_files.h"
 #include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/ui/ui_output.h"

@@ -144,8 +144,8 @@ class Configurable {
   virtual String get_config_schema();
 
   /**
-   * Returns a configuration description that is visible in WebUI
-   * you can use HTML tags to make description more readable
+   * Returns a configuration description that is visible in Frontend.
+   * You can use HTML tags to make description more readable.
    */
   String get_description() { return description_; }
 

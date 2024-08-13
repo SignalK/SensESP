@@ -3,7 +3,7 @@
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
-#include "sensesp/net/web/autogen/web_ui_files.h"
+#include "sensesp/net/web/autogen/frontend_files.h"
 #include "sensesp/system/button.h"
 #include "sensesp/system/system_status_led.h"
 #include "sensesp/transforms/debounce.h"

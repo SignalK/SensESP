@@ -23,7 +23,7 @@ export default defineMock(
       headers: {
         'Content-Type': 'application/javascript'
       },
-      body: await readFile('../webui-plugins/sample-plugin-js/dist/assets/sensesp-plugin.js', 'utf-8'),
+      body: await readFile('../frontend-plugins/sample-plugin-js/dist/assets/sensesp-plugin.js', 'utf-8'),
     },
     {
       url: '/api/plugins/sensesp-plugin/__federation_fn_import.js',
@@ -31,7 +31,7 @@ export default defineMock(
       headers: {
         'Content-Type': 'application/javascript'
       },
-      body: await readFile('../webui-plugins/sample-plugin-js/dist/assets/__federation_fn_import.js', 'utf-8'),
+      body: await readFile('../frontend-plugins/sample-plugin-js/dist/assets/__federation_fn_import.js', 'utf-8'),
     },
     {
       url: '/api/plugins/sensesp-plugin/__federation_shared_preact-8_xvI4no.js',
@@ -39,7 +39,7 @@ export default defineMock(
       headers: {
         'Content-Type': 'application/javascript'
       },
-      body: await readFile('../webui-plugins/sample-plugin-js/dist/assets/__federation_shared_preact-8_xvI4no.js', 'utf-8'),
+      body: await readFile('../frontend-plugins/sample-plugin-js/dist/assets/__federation_shared_preact-8_xvI4no.js', 'utf-8'),
     },
     {
       url: '/api/plugins/sensesp-plugin/preload-helper-xR9xMGMN.js',
@@ -47,7 +47,7 @@ export default defineMock(
       headers: {
         'Content-Type': 'application/javascript'
       },
-      body: await readFile('../webui-plugins/sample-plugin-js/dist/assets/preload-helper-xR9xMGMN.js', 'utf-8'),
+      body: await readFile('../frontend-plugins/sample-plugin-js/dist/assets/preload-helper-xR9xMGMN.js', 'utf-8'),
     },
     {
       url: '/api/plugins/sensesp-plugin/__federation_expose_SensESPPlugin-jc4KNWOO.js',
@@ -55,7 +55,7 @@ export default defineMock(
       headers: {
         'Content-Type': 'application/javascript'
       },
-      body: await readFile('../webui-plugins/sample-plugin-js/dist/assets/__federation_expose_SensESPPlugin-jc4KNWOO.js', 'utf-8'),
+      body: await readFile('../frontend-plugins/sample-plugin-js/dist/assets/__federation_expose_SensESPPlugin-jc4KNWOO.js', 'utf-8'),
     }
   ]
 )

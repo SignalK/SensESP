@@ -82,9 +82,9 @@ void add_routes_handlers(HTTPServer* server) {
   // Find the root page
 
   StaticFileData* root_page = nullptr;
-  for (int i = 0; i < sizeof(kWebUIFiles) / sizeof(StaticFileData); i++) {
-    if (strcmp(kWebUIFiles[i].url, "/") == 0) {
-      root_page = (StaticFileData*)&kWebUIFiles[i];
+  for (int i = 0; i < sizeof(kFrontendFiles) / sizeof(StaticFileData); i++) {
+    if (strcmp(kFrontendFiles[i].url, "/") == 0) {
+      root_page = (StaticFileData*)&kFrontendFiles[i];
       break;
     }
   }
