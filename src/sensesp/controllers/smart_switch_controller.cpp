@@ -50,7 +50,7 @@ void SmartSwitchController::set(const ClickTypes& new_value) {
   if (new_value == ClickTypes::DoubleClick) {
     // Sync any specified sync paths...
     for (auto& path : sync_paths) {
-      debugD("Sync status to %s", path.sk_sync_path.c_str());
+      ESP_LOGD(__FILENAME__, "Sync status to %s", path.sk_sync_path.c_str());
       path.put_request->set(is_on);
     }
   }
@@ -104,7 +104,7 @@ SmartSwitchController::SyncPath::SyncPath() {}
 
 SmartSwitchController::SyncPath::SyncPath(String sk_sync_path)
     : sk_sync_path{sk_sync_path} {
-  debugD("DoubleClick will also sync %s", sk_sync_path.c_str());
+  ESP_LOGD(__FILENAME__, "DoubleClick will also sync %s", sk_sync_path.c_str());
   this->put_request = new BoolSKPutRequest(sk_sync_path, "", false);
 }
 

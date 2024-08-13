@@ -1,11 +1,10 @@
-#include "sensesp/net/http_server.h"
+#include "sensesp.h"
 
-#include <lwip/sockets.h>
+#include "sensesp/net/http_server.h"
 
 #include <functional>
 #include <list>
-
-#include "sensesp.h"
+#include <lwip/sockets.h>
 
 namespace sensesp {
 
@@ -41,7 +40,7 @@ void urldecode2(char* dst, const char* src) {
 HTTPServer* HTTPServer::singleton_ = nullptr;
 
 esp_err_t HTTPServer::dispatch_request(httpd_req_t* req) {
-  debugI("Handling request: %s", req->uri);
+  ESP_LOGI(__FILENAME__, "Handling request: %s", req->uri);
 
   if (captive_portal_) {
     bool captured;
@@ -57,7 +56,7 @@ esp_err_t HTTPServer::dispatch_request(httpd_req_t* req) {
   struct sockaddr_in6 addr;  // esp_http_server uses IPv6 addressing
   socklen_t addr_size = sizeof(addr);
   if (getsockname(sockfd, (struct sockaddr*)&addr, &addr_size) < 0) {
-    debugE("Error getting client IP");
+    ESP_LOGE(__FILENAME__, "Error getting client IP");
     return false;
   }
   inet_ntop(AF_INET, &addr.sin6_addr.un.u32_addr[3], ipstr, sizeof(ipstr));
@@ -141,7 +140,7 @@ bool HTTPServer::handle_captive_portal(httpd_req_t* req) {
   struct sockaddr_in6 addr;  // esp_http_server uses IPv6 addressing
   socklen_t addr_size = sizeof(addr);
   if (getsockname(sockfd, (struct sockaddr*)&addr, &addr_size) < 0) {
-    debugE("Error getting client IP");
+    ESP_LOGE(__FILENAME__, "Error getting client IP");
     return false;
   }
   inet_ntop(AF_INET, &addr.sin6_addr.un.u32_addr[3], ipstr, sizeof(ipstr));
@@ -187,7 +186,7 @@ esp_err_t call_request_dispatcher(httpd_req_t* req) {
 
 String get_content_type(httpd_req_t* req) {
   if (httpd_req_get_hdr_value_len(req, "Content-Type") != 16) {
-    debugE("Invalid content type");
+    ESP_LOGE(__FILENAME__, "Invalid content type");
     return "";
   } else {
     char content_type[32];

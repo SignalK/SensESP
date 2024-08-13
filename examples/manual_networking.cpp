@@ -45,7 +45,7 @@ void setup() {
 
   Serial.println("");
 
-  debugD("Connected to WiFi. IP address: %s", WiFi.localIP().toString().c_str());
+  ESP_LOGD("Example", "Connected to WiFi. IP address: %s", WiFi.localIP().toString().c_str());
 
   WiFi.setHostname(SensESPBaseApp::get_hostname().c_str());
 

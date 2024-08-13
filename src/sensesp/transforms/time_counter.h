@@ -72,13 +72,13 @@ class TimeCounter : public Transform<T, float> {
   }
 
   virtual bool set_configuration(const JsonObject& config) override {
-    debugD("Setting TimeCounter configuration");
+    ESP_LOGD(__FILENAME__, "Setting TimeCounter configuration");
     if (!config.containsKey("duration")) {
       return false;
     }
     duration_at_start_ = config["duration"];
     duration_ = duration_at_start_;
-    debugD("duration_at_start_ = %ld", duration_at_start_);
+    ESP_LOGD(__FILENAME__, "duration_at_start_ = %ld", duration_at_start_);
     return true;
   }
 

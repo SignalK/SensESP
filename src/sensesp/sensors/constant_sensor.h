@@ -58,8 +58,7 @@ class ConstantSensor : public Sensor<T> {
     this->load_configuration();
 
     // Emit the initial value once to set the output
-    ReactESP::app->onDelay(0,
-                            [this]() { this->emit(value_); });
+    ReactESP::app->onDelay(0, [this]() { this->emit(value_); });
     // Then, emit the value at the specified interval
     ReactESP::app->onRepeat(send_interval_ * 1000,
                             [this]() { this->emit(value_); });

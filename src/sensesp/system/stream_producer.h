@@ -57,7 +57,7 @@ class StreamLineProducer : public ValueProducer<String> {
 
  protected:
   const int max_line_length_;
-  char *buf_;
+  char* buf_;
   Stream* stream_;
   StreamReaction* read_reaction_;
 };

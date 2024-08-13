@@ -1,8 +1,9 @@
 #ifndef _analog_reader_H_
 #define _analog_reader_H_
 
-#include "Arduino.h"
 #include "sensesp.h"
+
+#include "Arduino.h"
 #if defined(ESP32)
 #include "esp_adc_cal.h"
 #endif
@@ -25,8 +26,8 @@ class ESP32AnalogReader : public BaseAnalogReader {
  private:
   int pin_;
   adc_atten_t attenuation_ = ADC_ATTEN_DB_12;
-   // This should work with ESP32 and newer variants, ADCs are different
-  adc_bits_width_t  bit_width_ = (adc_bits_width_t)  ADC_WIDTH_BIT_DEFAULT;
+  // This should work with ESP32 and newer variants, ADCs are different
+  adc_bits_width_t bit_width_ = (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT;
   // maximum voltage readout for 3.3V VDDA when attenuation_ is set to 11 dB
   const float kVmax_ = 3300;
   int8_t adc_channel_;
@@ -36,7 +37,7 @@ class ESP32AnalogReader : public BaseAnalogReader {
  public:
   ESP32AnalogReader(int pin) : pin_{pin} {
     if (!(32 <= pin && pin <= 39)) {
-      debugE("Only ADC1 is supported at the moment");
+      ESP_LOGE(__FILENAME__, "Only ADC1 is supported at the moment");
       adc_channel_ = -1;
       return;
     }

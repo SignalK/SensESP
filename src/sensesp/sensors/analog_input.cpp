@@ -1,7 +1,8 @@
+#include "sensesp.h"
+
 #include "analog_input.h"
 
 #include "Arduino.h"
-#include "sensesp.h"
 
 namespace sensesp {
 

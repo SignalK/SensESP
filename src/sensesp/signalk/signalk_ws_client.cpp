@@ -55,11 +55,11 @@ static void websocket_event_handler(void* handler_args, esp_event_base_t base,
   esp_websocket_event_data_t* data = (esp_websocket_event_data_t*)event_data;
   switch (event_id) {
     case WEBSOCKET_EVENT_CONNECTED:
-      debugD("WEBSOCKET_EVENT_CONNECTED");
+      ESP_LOGD(__FILENAME__, "WEBSOCKET_EVENT_CONNECTED");
       ws_client->on_connected();
       break;
     case WEBSOCKET_EVENT_DISCONNECTED:
-      debugD("WEBSOCKET_EVENT_DISCONNECTED");
+      ESP_LOGD(__FILENAME__, "WEBSOCKET_EVENT_DISCONNECTED");
       ws_client->on_disconnected();
       break;
     case WEBSOCKET_EVENT_DATA:
@@ -100,7 +100,7 @@ SKWSClient::SKWSClient(String config_path, SKDeltaQueue* sk_delta_queue,
   delta_tx_tick_producer_.connect_to(&delta_tx_count_producer_);
 
   ReactESP::app->onDelay(0, [this]() {
-    debugD("Starting SKWSClient");
+    ESP_LOGD(__FILENAME__, "Starting SKWSClient");
     xTaskCreate(ExecuteWebSocketTask, "SKWSClient", ws_client_task_stack_size,
                 this, 1, NULL);
     MDNS.addService("signalk-sensesp", "tcp", 80);
@@ -125,7 +125,7 @@ void SKWSClient::on_disconnected() {
     // Going from connecting directly to disconnect when we
     // know we have found and talked to the server usually means
     // the authentication token is bad.
-    debugW("Bad access token detected. Setting token to null.");
+    ESP_LOGW(__FILENAME__, "Bad access token detected. Setting token to null.");
     auth_token_ = NULL_AUTH_TOKEN;
     save_configuration();
   }
@@ -141,7 +141,7 @@ void SKWSClient::on_disconnected() {
  */
 void SKWSClient::on_error() {
   this->set_connection_state(SKWSConnectionState::kSKWSDisconnected);
-  debugW("Websocket client error.");
+  ESP_LOGW(__FILENAME__, "Websocket client error.");
 }
 
 /**
@@ -152,7 +152,7 @@ void SKWSClient::on_error() {
 void SKWSClient::on_connected() {
   this->set_connection_state(SKWSConnectionState::kSKWSConnected);
   this->sk_delta_queue_->reset_meta_send();
-  debugI("Subscribing to Signal K listeners...");
+  ESP_LOGI(__FILENAME__, "Subscribing to Signal K listeners...");
   this->subscribe_listeners();
 }
 
@@ -183,7 +183,7 @@ void SKWSClient::subscribe_listeners() {
 
       subscribePath["path"] = sk_path;
       subscribePath["period"] = listen_delay;
-      debugI("Adding %s subscription with listen_delay %d\n", sk_path.c_str(),
+      ESP_LOGI(__FILENAME__, "Adding %s subscription with listen_delay %d\n", sk_path.c_str(),
              listen_delay);
     }
   }
@@ -193,7 +193,7 @@ void SKWSClient::subscribe_listeners() {
     String messageJson;
 
     serializeJson(subscription, messageJson);
-    debugI("Subscription JSON message:\n %s", messageJson.c_str());
+    ESP_LOGI(__FILENAME__, "Subscription JSON message:\n %s", messageJson.c_str());
     esp_websocket_client_send_text(this->client_, messageJson.c_str(),
                                    messageJson.length(), portMAX_DELAY);
   }
@@ -213,7 +213,7 @@ void SKWSClient::on_receive_delta(uint8_t* payload, size_t length) {
   buf[length] = 0;
 
 #ifdef SIGNALK_PRINT_RCV_DELTA
-  debugD("Websocket payload received: %s", (char*)buf);
+  ESP_LOGD(__FILENAME__, "Websocket payload received: %s", (char*)buf);
 #endif
 
   JsonDocument message;
@@ -234,7 +234,7 @@ void SKWSClient::on_receive_delta(uint8_t* payload, size_t length) {
       SKRequest::handle_response(message);
     }
   } else {
-    debugE("deserializeJson error: %s", error.c_str());
+    ESP_LOGE(__FILENAME__, "deserializeJson error: %s", error.c_str());
   }
 }
 
@@ -380,7 +380,7 @@ bool SKWSClient::get_mdns_service(String& server_address, uint16_t& server_port)
   } else {
     server_address = MDNS.IP(0).toString();
     server_port = MDNS.port(0);
-    debugI("Found server %s (port %d)", server_address.c_str(), server_port);
+    ESP_LOGI(__FILENAME__, "Found server %s (port %d)", server_address.c_str(), server_port);
     return true;
   }
 }
@@ -391,20 +391,20 @@ void SKWSClient::connect() {
   }
 
   if (!WiFi.isConnected() && WiFi.getMode() != WIFI_MODE_AP) {
-    debugI(
+    ESP_LOGI(__FILENAME__,
         "WiFi is disconnected. SignalK client connection will be initiated "
         "when WiFi is connected.");
     return;
   }
 
-  debugI("Initiating websocket connection with server...");
+  ESP_LOGI(__FILENAME__, "Initiating websocket connection with server...");
 
   set_connection_state(SKWSConnectionState::kSKWSAuthorizing);
   if (use_mdns_) {
     if (!get_mdns_service(this->server_address_, this->server_port_)) {
-      debugE("No Signal K server found in network when using mDNS service!");
+      ESP_LOGE(__FILENAME__, "No Signal K server found in network when using mDNS service!");
     } else {
-      debugI("Signal K server has been found at address %s:%d by mDNS.",
+      ESP_LOGI(__FILENAME__, "Signal K server has been found at address %s:%d by mDNS.",
              this->server_address_.c_str(), this->server_port_);
     }
   } else {
@@ -413,11 +413,11 @@ void SKWSClient::connect() {
   }
 
   if (!this->server_address_.isEmpty() && this->server_port_ > 0) {
-    debugD("Websocket is connecting to Signal K server on address %s:%d",
+    ESP_LOGD(__FILENAME__, "Websocket is connecting to Signal K server on address %s:%d",
            this->server_address_.c_str(), this->server_port_);
   } else {
     // host and port not defined - don't try to connect
-    debugD(
+    ESP_LOGD(__FILENAME__,
         "Websocket is not connecting to Signal K server because host and "
         "port are not defined.");
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
@@ -433,7 +433,7 @@ void SKWSClient::connect() {
 
   if (this->auth_token_ == NULL_AUTH_TOKEN) {
     // initiate HTTP authentication
-    debugD("No prior authorization token present.");
+    ESP_LOGD(__FILENAME__, "No prior authorization token present.");
     this->send_access_request(this->server_address_, this->server_port_);
     return;
   }
@@ -449,26 +449,26 @@ void SKWSClient::test_token(const String server_address,
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/stream";
-  debugD("Testing token with url %s", url.c_str());
+  ESP_LOGD(__FILENAME__, "Testing token with url %s", url.c_str());
   http.begin(wifi_client_, url);
   String full_token = String("Bearer ") + auth_token_;
-  debugD("Authorization: %s", full_token.c_str());
+  ESP_LOGD(__FILENAME__, "Authorization: %s", full_token.c_str());
   http.addHeader("Authorization", full_token.c_str());
   int http_code = http.GET();
   if (http_code > 0) {
     String payload = http.getString();
     http.end();
-    debugD("Testing resulted in http status %d", http_code);
+    ESP_LOGD(__FILENAME__, "Testing resulted in http status %d", http_code);
     if (payload.length() > 0) {
-      debugD("Returned payload (length %d) is: ", payload.length());
-      debugD("%s", payload.c_str());
+      ESP_LOGD(__FILENAME__, "Returned payload (length %d) is: ", payload.length());
+      ESP_LOGD(__FILENAME__, "%s", payload.c_str());
     } else {
-      debugD("Returned payload is empty");
+      ESP_LOGD(__FILENAME__, "Returned payload is empty");
     }
     if (http_code == 426) {
       // HTTP status 426 is "Upgrade Required", which is the expected
       // response for a websocket connection.
-      debugD("Attempting to connect to Signal K Websocket...");
+      ESP_LOGD(__FILENAME__, "Attempting to connect to Signal K Websocket...");
       server_detected_ = true;
       token_test_success_ = true;
       this->connect_ws(server_address, server_port);
@@ -479,14 +479,14 @@ void SKWSClient::test_token(const String server_address,
       set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     }
   } else {
-    debugE("GET... failed, error: %s\n", http.errorToString(http_code).c_str());
+    ESP_LOGE(__FILENAME__, "GET... failed, error: %s\n", http.errorToString(http_code).c_str());
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   }
 }
 
 void SKWSClient::send_access_request(const String server_address,
                                    const uint16_t server_port) {
-  debugD("Preparing a new access request");
+  ESP_LOGD(__FILENAME__, "Preparing a new access request");
   if (client_id_ == "") {
     // generate a client ID
     client_id_ = generate_uuid4();
@@ -502,13 +502,13 @@ void SKWSClient::send_access_request(const String server_address,
   String json_req = "";
   serializeJson(doc, json_req);
 
-  debugD("Access request: %s", json_req.c_str());
+  ESP_LOGD(__FILENAME__, "Access request: %s", json_req.c_str());
 
   HTTPClient http;
 
   String url = String("http://") + server_address + ":" + server_port +
                "/signalk/v1/access/requests";
-  debugD("Access request url: %s", url.c_str());
+  ESP_LOGD(__FILENAME__, "Access request url: %s", url.c_str());
   http.begin(wifi_client_, url);
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(json_req);
@@ -517,8 +517,8 @@ void SKWSClient::send_access_request(const String server_address,
 
   // if we get a response we can't handle, try to reconnect later
   if (httpCode != 202) {
-    debugW("Can't handle response %d to access request.", httpCode);
-    debugD("%s", payload.c_str());
+    ESP_LOGW(__FILENAME__, "Can't handle response %d to access request.", httpCode);
+    ESP_LOGD(__FILENAME__, "%s", payload.c_str());
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     client_id_ = "";
     return;
@@ -530,7 +530,7 @@ void SKWSClient::send_access_request(const String server_address,
   String state = doc["state"];
 
   if (state != "PENDING") {
-    debugW("Got unknown state: %s", state.c_str());
+    ESP_LOGW(__FILENAME__, "Got unknown state: %s", state.c_str());
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     client_id_ = "";
     return;
@@ -547,7 +547,7 @@ void SKWSClient::send_access_request(const String server_address,
 void SKWSClient::poll_access_request(const String server_address,
                                    const uint16_t server_port,
                                    const String href) {
-  debugD("Polling SK Server for authentication token");
+  ESP_LOGD(__FILENAME__, "Polling SK Server for authentication token");
 
   HTTPClient http;
 
@@ -560,12 +560,12 @@ void SKWSClient::poll_access_request(const String server_address,
     JsonDocument doc;
     auto error = deserializeJson(doc, payload.c_str());
     if (error) {
-      debugW("WARNING: Could not deserialize http payload.");
-      debugW("DeserializationError: %s", error.c_str());
+      ESP_LOGW(__FILENAME__, "WARNING: Could not deserialize http payload.");
+      ESP_LOGW(__FILENAME__, "DeserializationError: %s", error.c_str());
       return;  // TODO: return at this point, or keep going?
     }
     String state = doc["state"];
-    debugD("%s", state.c_str());
+    ESP_LOGD(__FILENAME__, "%s", state.c_str());
     if (state == "PENDING") {
       set_connection_state(SKWSConnectionState::kSKWSDisconnected);
       delay(5000);
@@ -580,11 +580,11 @@ void SKWSClient::poll_access_request(const String server_address,
       save_configuration();
 
       if (permission == "DENIED") {
-        debugW("Permission denied");
+        ESP_LOGW(__FILENAME__, "Permission denied");
         set_connection_state(SKWSConnectionState::kSKWSDisconnected);
         return;
       } else if (permission == "APPROVED") {
-        debugI("Permission granted");
+        ESP_LOGI(__FILENAME__, "Permission granted");
         String token = access_req["token"];
         auth_token_ = token;
         save_configuration();
@@ -598,14 +598,14 @@ void SKWSClient::poll_access_request(const String server_address,
       // this is probably the server barfing due to
       // us polling a non-existing request. Just
       // delete the polling href.
-      debugD("Got 500, probably a non-existing request.");
+      ESP_LOGD(__FILENAME__, "Got 500, probably a non-existing request.");
       polling_href_ = "";
       save_configuration();
       set_connection_state(SKWSConnectionState::kSKWSDisconnected);
       return;
     }
     // any other HTTP status code
-    debugW("Can't handle response %d to pending access request.\n", httpCode);
+    ESP_LOGW(__FILENAME__, "Can't handle response %d to pending access request.\n", httpCode);
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     return;
   }
@@ -627,22 +627,22 @@ void SKWSClient::connect_ws(const String host, const uint16_t port) {
 
   websocket_cfg.headers = full_auth_header.c_str();
 
-  debugD("Websocket config: %s", websocket_cfg.uri);
-  debugD("Initializing websocket client...");
+  ESP_LOGD(__FILENAME__, "Websocket config: %s", websocket_cfg.uri);
+  ESP_LOGD(__FILENAME__, "Initializing websocket client...");
   this->client_ = esp_websocket_client_init(&websocket_cfg);
-  debugD("Registering websocket event handler...");
+  ESP_LOGD(__FILENAME__, "Registering websocket event handler...");
   error = esp_websocket_register_events(this->client_, WEBSOCKET_EVENT_ANY,
                                         websocket_event_handler,
                                         (void*)this->client_);
   if (error != ESP_OK) {
-    debugE("Error registering websocket event handler: %d", error);
+    ESP_LOGE(__FILENAME__, "Error registering websocket event handler: %d", error);
   }
-  debugD("Starting websocket client...");
+  ESP_LOGD(__FILENAME__, "Starting websocket client...");
   error = esp_websocket_client_start(this->client_);
   if (error != ESP_OK) {
-    debugE("Error starting websocket client: %d", error);
+    ESP_LOGE(__FILENAME__, "Error starting websocket client: %d", error);
   }
-  debugD("Websocket client started.");
+  ESP_LOGD(__FILENAME__, "Websocket client started.");
 }
 
 bool SKWSClient::is_connected() {

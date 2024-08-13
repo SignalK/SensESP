@@ -62,7 +62,8 @@ void CurveInterpolator::set(const float& input) {
   } else {
     // Hit the end of the table with no match.
     output = 9999.9;
-    //    debugW("Could not find sample interval for input %0f", input);
+    //    ESP_LOGW(__FILENAME__, "Could not find sample interval for input %0f",
+    //    input);
   }
 
   notify();
@@ -73,7 +74,7 @@ void CurveInterpolator::get_configuration(JsonObject& root) {
   for (auto& sample : samples_) {
     auto entry = json_samples.add<JsonObject>();
     if (entry.isNull()) {
-      debugE("No memory for sample");
+      ESP_LOGE(__FILENAME__, "No memory for sample");
     }
     entry["input"] = sample.input;
     entry["output"] = sample.output;
@@ -107,7 +108,8 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
   String expected[] = {"samples"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE(
+      ESP_LOGE(
+          __FILENAME__,
           "Can not set CurveInterpolator configuration: missing json field "
           "%s\n",
           str.c_str());

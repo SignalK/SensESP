@@ -2,7 +2,6 @@
 #define _signalk_delta_queue_H_
 
 #include <ArduinoJson.h>
-
 #include <list>
 
 namespace sensesp {

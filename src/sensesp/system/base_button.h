@@ -1,9 +1,10 @@
 #ifndef SENSESP_SRC_SENSESP_SYSTEM_BASE_BUTTON_H_
 #define SENSESP_SRC_SENSESP_SYSTEM_BASE_BUTTON_H_
 
+#include "sensesp.h"
+
 #include "AceButton.h"
 #include "elapsedMillis.h"
-#include "sensesp.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp_base_app.h"
 
@@ -29,7 +30,7 @@ class BaseButtonHandler : public Configurable, public IEventHandler {
     button_config->setFeature(ButtonConfig::kFeatureLongPress);
     button_config->setFeature(ButtonConfig::kFeatureSuppressAfterLongPress);
 
-    debugD("Button handler started");
+    ESP_LOGD(__FILENAME__, "Button handler started");
 
     ReactESP::app->onRepeat(4, [this]() { this->button_->check(); });
   }

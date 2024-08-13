@@ -79,7 +79,8 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    * @brief Set admin username and password for the web interface.
    *
    */
-  SensESPAppBuilder* set_admin_user(const char* username, const char* password) {
+  SensESPAppBuilder* set_admin_user(const char* username,
+                                    const char* password) {
     app_->set_admin_user(username, password);
     return this;
   }
@@ -214,10 +215,11 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
             3 * 60 * 1000  // 180 s = 180000 ms = 3 minutes
             ))
         ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {
-          debugD("Got system status: %d", (int)input);
+          ESP_LOGD(__FILENAME__, "Got system status: %d", (int)input);
           if (input == SystemStatus::kWifiDisconnected ||
               input == SystemStatus::kWifiNoAP) {
-            debugW("Unable to connect to wifi for too long; restarting.");
+            ESP_LOGW(__FILENAME__,
+                     "Unable to connect to wifi for too long; restarting.");
             ReactESP::app->onDelay(1000, []() { ESP.restart(); });
           }
         }));

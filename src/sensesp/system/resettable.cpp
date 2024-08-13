@@ -1,6 +1,6 @@
-#include "resettable.h"
-
 #include "sensesp.h"
+
+#include "resettable.h"
 
 namespace sensesp {
 
@@ -12,7 +12,7 @@ Resettable::Resettable(int priority) : priority(priority) {
 }
 
 void Resettable::reset_all() {
-  debugI("Resetting all resettable objects");
+  ESP_LOGI(__FILENAME__, "Resetting all resettable objects");
   while (!reset_list.empty()) {
     auto& resettable = *reset_list.top();
     resettable.reset();

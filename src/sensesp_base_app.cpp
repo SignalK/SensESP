@@ -6,7 +6,7 @@ void SetupSerialDebug(uint32_t baudrate) {
   SetupLogging();
 
   if (baudrate != 115200) {
-    ESP_LOGW("SensESP", "SetupSerialDebug baudrate parameter is ignored.");
+    ESP_LOGW(__FILENAME__, "SetupSerialDebug baudrate parameter is ignored.");
   }
 }
 
@@ -45,11 +45,11 @@ void SensESPBaseApp::setup() {}
 void SensESPBaseApp::start() {
   // start all individual startable components
 
-  debugW("start() call is deprecated and can be removed.");
+  ESP_LOGW(__FILENAME__, "start() call is deprecated and can be removed.");
 }
 
 void SensESPBaseApp::reset() {
-  debugW("Resetting the device configuration to system defaults.");
+  ESP_LOGW(__FILENAME__, "Resetting the device configuration to system defaults.");
   Resettable::reset_all();
 
   ReactESP::app->onDelay(1000, []() {

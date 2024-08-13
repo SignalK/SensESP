@@ -16,7 +16,7 @@ reactesp::ReactESP app;
 
 // The setup function performs one-time application initialization.
 void setup() {
-// Some initialization boilerplate when in debug mode...
+  // Some initialization boilerplate when in debug mode...
   SetupLogging();
 
   // Create the global SensESPApp() object.

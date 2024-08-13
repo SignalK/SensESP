@@ -33,7 +33,8 @@ void setup() {
   // define an asynchronous callback function that reads a digital input pin
   // after a delay of 1000 ms.
   auto digital_read_callback = [](RepeatSensor<bool>* sensor) {
-    debugI("Pretend to trigger an asynchronous measurement operation here.");
+    ESP_LOGI("Example",
+             "Pretend to trigger an asynchronous measurement operation here.");
     app.onDelay(1000,
                 [sensor]() { sensor->emit(digitalRead(kDigitalInputPin)); });
   };

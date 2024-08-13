@@ -5,8 +5,8 @@
 namespace sensesp {
 
 void add_scan_wifi_networks_handlers(HTTPServer* server) {
-  HTTPRequestHandler* scan_wifi_networks_handler =
-      new HTTPRequestHandler(1 << HTTP_POST, "/api/wifi/scan", [](httpd_req_t* req) {
+  HTTPRequestHandler* scan_wifi_networks_handler = new HTTPRequestHandler(
+      1 << HTTP_POST, "/api/wifi/scan", [](httpd_req_t* req) {
         auto networking = SensESPApp::get()->get_networking();
         networking->start_wifi_scan();
         // Return status code 202 and "SCAN STARTED" message
@@ -17,9 +17,8 @@ void add_scan_wifi_networks_handlers(HTTPServer* server) {
 
   server->add_handler(scan_wifi_networks_handler);
 
-  HTTPRequestHandler* scan_results_handler =
-      new HTTPRequestHandler(1 << HTTP_GET, "/api/wifi/scan-results",
-                             [](httpd_req_t* req) {
+  HTTPRequestHandler* scan_results_handler = new HTTPRequestHandler(
+      1 << HTTP_GET, "/api/wifi/scan-results", [](httpd_req_t* req) {
         auto networking = SensESPApp::get()->get_networking();
         std::vector<WiFiNetworkInfo> ssid_list;
         int16_t result = networking->get_wifi_scan_results(ssid_list);

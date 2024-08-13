@@ -1,9 +1,8 @@
 #ifndef SENSESP_SRC_SENSESP_SYSTEM_SERIAL_NUMBER_H_
 #define SENSESP_SRC_SENSESP_SYSTEM_SERIAL_NUMBER_H_
 
-#include <esp_mac.h>
-
 #include <cstdint>
+#include <esp_mac.h>
 
 uint64_t GetBoardSerialNumber() {
   uint8_t chipid[6];

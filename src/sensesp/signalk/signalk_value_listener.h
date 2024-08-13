@@ -24,7 +24,8 @@ class SKValueListener : public SKListener, public ValueProducer<T> {
                   String config_path = "")
       : SKListener(sk_path, listen_delay, config_path) {
     if (sk_path == "") {
-      debugE("SKValueListener: User has provided no sk_path to listen to.");
+      ESP_LOGE(__FILENAME__,
+               "SKValueListener: User has provided no sk_path to listen to.");
     }
   }
 

@@ -1,12 +1,12 @@
 #ifndef SENSESP_SRC_SENSESP_NET_HTTP_AUTHENTICATOR_H_
 #define SENSESP_SRC_SENSESP_NET_HTTP_AUTHENTICATOR_H_
 
+#include "sensesp.h"
+
 #include <esp_http_server.h>
+#include <list>
 #include <mbedtls/base64.h>
 
-#include <list>
-
-#include "sensesp.h"
 #include "sensesp/system/hash.h"
 
 namespace sensesp {

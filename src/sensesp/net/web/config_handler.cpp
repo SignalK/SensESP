@@ -143,7 +143,7 @@ void add_config_put_handler(HTTPServer* server) {
   server->add_handler(new HTTPRequestHandler(
       1 << HTTP_PUT, "/api/config/*",
       [](httpd_req_t* req) {  // check that the content type is JSON
-        debugI("Handling PUT request to URL %s", req->uri);
+        ESP_LOGI(__FILENAME__, "Handling PUT request to URL %s", req->uri);
         if (get_content_type(req) != "application/json") {
           httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST,
                               "application/json content type expected");
