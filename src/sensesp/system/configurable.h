@@ -56,6 +56,21 @@ class Configurable {
   virtual bool is_async() { return false; }
 
   /**
+   * @brief Return true if the Configurable requires restart after saving.
+   *
+   */
+  bool requires_restart() { return requires_restart_; }
+
+  /**
+   * @brief Set the requires_restart flag.
+   *
+   * @param requires_restart
+   */
+  void set_requires_restart(bool requires_restart) {
+    requires_restart_ = requires_restart;
+  }
+
+  /**
    * Returns the current configuration data as a JsonObject. In
    * general, the current state of local member variables are
    * saved to a new object created with JsonDocument::as<JsonObject>()
@@ -204,6 +219,9 @@ class Configurable {
   /// The sort order of Configurable on the web UI. Lower numbers have
   /// preference.
   int sort_order_ = 1000;
+  /// @brief Flag to indicate if the Configurable requires a restart after
+  /// saving the configuration.
+  bool requires_restart_ = false;
 };
 
 }  // namespace sensesp

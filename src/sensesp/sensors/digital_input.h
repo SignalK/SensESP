@@ -53,6 +53,7 @@ class DigitalInputState : public DigitalInput, public Sensor<bool> {
         Sensor<bool>(config_path),
         read_delay_{read_delay},
         triggered_{false} {
+    set_requires_restart(true);
     load_configuration();
 
     ReactESP::app->onRepeat(read_delay_, [this]() { emit(digitalRead(pin_)); });

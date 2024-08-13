@@ -1,7 +1,8 @@
 import { APP_CONFIG } from "config";
-import { useEffect, useId, useState } from "preact/hooks";
+import { useContext, useEffect, useId, useState } from "preact/hooks";
 
 import { JsonValue, type JsonObject } from "common/jsonTypes";
+import { RestartRequiredContext, RestartRequiredContextProps } from "common/RestartRequiredContext";
 import { Card } from "components/Card";
 import {
   FormCheckboxInput,
@@ -205,6 +206,9 @@ interface ConfigCardProps {
 }
 
 export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
+  const { restartRequired, setRestartRequired } =
+    useContext<RestartRequiredContextProps>(RestartRequiredContext);
+
   const [config, setConfig] = useState<JsonObject>({});
   const [schema, setSchema] = useState<JsonObject | null>({});
   const [description, setDescription] = useState<string>("");
@@ -212,6 +216,8 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
   const [httpErrorText, setHttpErrorText] = useState<string>("");
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(true);
+  const [componentRequiresRestart, setComponentRequiresRestart] =
+    useState<boolean>(false);
 
   const id = useId();
 
@@ -230,6 +236,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     if (response.status === 202 && data.status === "pending") {
       setSchema(data.schema);
       setDescription(data.description);
+      setComponentRequiresRestart(data.requires_restart);
       const pollUrl = new URL(response.url);
       pollUrl.searchParams.append("poll_get_result", "");
       console.log("About to poll", pollUrl);
@@ -241,6 +248,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
       setConfig(data.config);
       setSchema(data.schema);
       setDescription(data.description);
+      setComponentRequiresRestart(data.requires_restart);
     }
   };
 
@@ -257,10 +265,6 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     const isValid = Object.values(config).every((v) => v !== null);
     setIsValid(isValid);
   }, [config]);
-
-  useEffect(() => {
-    console.log("Saving:", saving);
-  }, [saving]);
 
   async function pollLoadResult(url: string): Promise<void> {
     const response = await fetch(url);
@@ -346,6 +350,9 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         } else if (response.status === 200) {
           setIsDirty(false);
           setSaving(false);
+          if (componentRequiresRestart) {
+            setRestartRequired(true);
+          }
           // TODO: Show success message
         }
       }
@@ -401,19 +408,21 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
               <p dangerouslySetInnerHTML={{ __html: description }}></p>
             ) : null}
 
-            {keys.map((key) => {
-              return (
-                <EditControl
-                  id={`${id}-editcontrol-${key}`}
-                  key={`${id}-editcontrol-${key}`}
-                  schema={properties[key]}
-                  value={config[key] ?? null}
-                  setValue={(value: JsonValue) => {
-                    updateConfig(key, value);
-                  }}
-                />
-              );
-            })}
+            {keys
+              .filter((key) => !key.startsWith("_"))
+              .map((key) => {
+                return (
+                  <EditControl
+                    id={`${id}-editcontrol-${key}`}
+                    key={`${id}-editcontrol-${key}`}
+                    schema={properties[key]}
+                    value={config[key] ?? null}
+                    setValue={(value: JsonValue) => {
+                      updateConfig(key, value);
+                    }}
+                  />
+                );
+              })}
           </div>
           <div className="d-flex justify-content-begin">
             <button

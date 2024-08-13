@@ -70,15 +70,11 @@ class ConstantSensor : public Sensor<T> {
  protected:
   virtual void get_configuration(JsonObject &doc) override {
     doc["value"] = value_;
-    doc["interval"] = send_interval_;
   }
   virtual bool set_configuration(const JsonObject &config) override {
     // Neither of the configuration parameters are mandatory
     if (config.containsKey("value")) {
       value_ = config["value"].as<T>();
-    }
-    if (config.containsKey("interval")) {
-      send_interval_ = config["interval"];
     }
     return true;
   }

@@ -4,6 +4,7 @@ namespace sensesp {
 
 Median::Median(unsigned int sample_size, String config_path)
     : FloatTransform(config_path), sample_size_{sample_size} {
+  set_requires_restart(true);
   load_configuration();
   buf_.reserve(sample_size_);
   buf_.clear();
