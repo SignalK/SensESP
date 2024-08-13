@@ -1,18 +1,121 @@
 # SensESP
 
-## Note About the Repository Branches
+## Getting Started with Version 3
 
-As part of the Version 2.0.0 release, version 1 content has been moved to the [v1](https://github.com/SignalK/SensESP/tree/v1) branch.
-The long-lived `v2-dev` feature branch has been renamed to `main` and is now the default branch.
-To highlight the change, the `master` branch is now gone.
+### Major Changes
 
-To update your local repository to reflect the branch renames, run the following commands:
+- WiFiManager replaced with built-in implementation
+  - Supports simultaneous client and AP
+  - Same frontend used as captive portal
+  - Support for multiple alternative WiFi networks
+- Web server replaced with ESP-IDF standard implementation
+- Websockets replaced with ESP-IDF standard implementation
+- AsyncTCP dependencies removed
+- RemoteDebug replaced with ESP-IDF debugging macros
+- Web Frontend rewritten from scratch with Preact and Bootstrap
+  - JSONEditor no longer used
+  - More flexible and user-friendly UI
+  - Support for authentication
+  - Support for frontend plugins (app-defined React pages)
+  - Indicate when a ocnfiguration change requires a restart
 
-```bash
-git branch -m master main
-git fetch origin
-git branch -u origin/main main
-git remote set-head origin -a
+- Remove Startable class
+- Rename classes:
+  - `SensorT` -> `Sensor`
+  - `IntegratorT` -> `Integrator`
+  - `DebounceTemplate` -> `Debounce`
+  - `WSClient` -> `SKWSClient`
+  -
+- Add a run script to help with SensESP development
+- Function signature changes:
+  - Pass received JSON objects
+  - Rename `ValueConsumer::set_input` to `ValueConsumer::set`. The value parameter
+    is now passed as a const reference. The input_channel parameter is removed.
+
+- Add new transforms:
+  - `ExpiringValue`: output value expires after a given time unless updated
+  - `Repeat`: repeats the input value at a given interval
+  - `RepeatStopping`: repeats the input value at a given interval, stopping after a given time
+  - `RepeatExpiring`: repeats the input value at a given interval, expiring after a given time
+  - `RepeatConstantRate`: repeats the input value at a constant rate, regardless of input rate
+  - `Join`: joins multiple input values into a single output tuple that is emitted when any inputs are updated
+  - `Zip`: joins multiple input values into a single output tuple that is emitted when all inputs are updated
+  - `Throttle`: limits the rate of output updates
+  - `Filter`: emits the input value only if it passes a given test
+
+- Support asynchronous configurables for setting remote device configuration
+  using the web interface
+
+- Implement stream producers that emit characters or lines from a stream
+  (e.g., a serial port)
+-
+
+### Migrating Existing Projects
+
+- Update your project's `platformio.ini` file to use the new version of SensESP:
+
+  ```ini
+  lib_deps =
+    SignalK/SensESP @ >=3.0.0-beta.1,<4
+    # https://github.com/SignalK/SensESP.git  # Use this line to use the latest git version
+    # symlink:///Users/mairas/src/SignalK/SensESP  # Use this line to use a local copy
+  ```
+
+- Adjust the build flags in your project's `platformio.ini` file as follows:
+
+  ```ini
+  build_flags =
+    -D LED_BUILTIN=2
+    ; Max (and default) debugging level in Arduino ESP32 Core
+    -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE
+    ; Arduino Core bug workaround: define the log tag for the Arduino
+    ; logging macros.
+    -D TAG='"Arduino"'
+    ; Use the ESP-IDF logging library - required by SensESP.
+    -D USE_ESP_IDF_LOG
+  ```
+
+- If you have the following in the beginning of your `setup()` function:
+
+  ```cpp
+  #ifndef SERIAL_DEBUG_DISABLED
+    SetupSerialDebug(115200);
+  #endif
+  ```
+  replace it with:
+
+  ```cpp
+  SetupLogging();
+  ```
+
+- Remove the final `sensesp_app->start();` call from your `setup()` function.
+
+- If your project depends on any external libraries, they may need to be updated
+  to work with the new version of SensESP.
+
+
+### Development
+
+The frontend project is in the `frontend` directory tree. To build the frontend,
+you need to have Node and `pnpm` installed. Install the required dependencies:
+
+```sh
+./run install-frontend
+```
+
+Then build the frontend:
+
+```sh
+./run build-frontend
+```
+
+This will both build the project and save the deployment files in C++ source files suitable for embedding in the SensESP firmware.
+
+To start the development server, run:
+
+```sh
+cd frontend
+pnpm run dev
 ```
 
 ## Introduction
