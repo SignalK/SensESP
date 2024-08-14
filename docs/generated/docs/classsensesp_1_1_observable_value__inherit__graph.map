@@ -1,26 +1,33 @@
 <map id="sensesp::ObservableValue&lt; T &gt;" name="sensesp::ObservableValue&lt; T &gt;">
-<area shape="rect" id="Node000001" title="A value that notifies its observers if it gets changed." alt="" coords="443,191,651,216"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_task_queue_producer.html" title=" " alt="" coords="1269,8,1466,49"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="565,176,610,127,640,101,674,81,750,50,830,29,911,14,992,6,1071,3,1145,4,1269,13,1269,18,1145,9,1071,8,993,11,912,19,831,34,751,56,676,86,643,106,614,130,569,180"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_task_queue_producer.html" title=" " alt="" coords="1269,103,1466,144"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="643,185,675,181,1001,148,1269,127,1269,132,1001,153,675,186,644,190"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_u_i_output.html" title=" " alt="" coords="1298,178,1437,218"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="667,200,1297,196,1297,201,667,205"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_task_queue_producer.html" title="Producer class that works across task boundaries." alt="" coords="846,72,1074,98"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="572,178,617,144,674,114,716,101,760,92,845,82,846,88,761,97,718,106,676,119,620,148,575,182"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_u_i_output.html" title=" " alt="" coords="879,224,1042,250"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="667,210,879,228,878,233,666,216"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="872,274,1048,314"/>
-<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="600,219,676,242,777,264,872,280,871,285,776,269,674,248,598,224"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="872,339,1048,380"/>
-<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="576,225,621,260,676,292,725,311,776,326,872,346,871,351,774,331,723,316,674,297,618,264,572,229"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="872,404,1048,445"/>
-<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="565,228,609,293,640,328,676,356,724,380,774,397,825,409,872,416,872,422,824,414,773,402,721,385,674,361,637,332,605,297,560,231"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="199,191,393,216"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="409,201,442,201,442,206,409,206"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,191,150,216"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="165,201,199,201,199,206,165,206"/>
-<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="1073,67,1269,40,1269,45,1074,72"/>
-<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="1090,94,1269,111,1268,117,1090,100"/>
-<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="1057,231,1149,226,1245,217,1297,209,1298,214,1246,222,1149,231,1058,236"/>
+<area shape="rect" id="Node000001" title="A value container that notifies its observers if it gets changed." alt="" coords="451,283,659,309"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_persisting_observable_value.html" title=" " alt="" coords="1313,39,1516,79"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="563,267,579,228,604,180,638,133,659,112,682,94,720,71,761,52,847,24,937,9,1027,3,1114,5,1196,13,1330,35,1329,41,1195,18,1114,10,1027,8,938,14,849,30,763,57,723,76,684,98,662,116,642,136,609,183,584,230,568,269"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_task_queue_producer.html" title=" " alt="" coords="1316,152,1513,193"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="589,273,632,249,682,228,766,205,853,188,941,175,1028,167,1188,161,1316,163,1316,169,1188,167,1028,173,942,181,854,193,768,210,684,233,634,254,591,277"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_task_queue_producer.html" title=" " alt="" coords="1316,247,1513,287"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="675,289,1316,268,1316,273,675,295"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_u_i_output.html" title=" " alt="" coords="1345,329,1484,370"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="629,310,684,322,777,340,872,352,986,356,1100,352,1344,348,1344,354,1100,358,986,361,872,358,777,346,682,327,628,315"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_persisting_observable_value.html" title="An ObservableValue that saves its value to the configuration." alt="" coords="885,77,1087,118"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="567,268,585,236,610,199,643,163,682,134,731,112,783,99,835,92,884,89,885,94,836,97,784,104,732,117,684,139,646,167,615,202,589,239,571,271"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_task_queue_producer.html" title="Producer class that works across task boundaries." alt="" coords="872,215,1100,241"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="611,276,682,258,779,243,871,233,872,238,779,248,684,263,612,281"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_u_i_output.html" title=" " alt="" coords="904,317,1068,342"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="675,303,904,321,904,326,674,308"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="895,417,1077,458"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="577,320,622,369,651,393,684,411,736,429,791,439,845,443,895,443,895,448,845,448,790,444,735,434,682,416,648,397,618,373,573,323"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="898,483,1074,523"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="570,322,588,355,613,394,645,432,684,462,736,485,791,499,847,505,898,507,897,512,846,510,790,504,734,490,682,467,642,436,609,397,583,358,566,324"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_observable_value.html" title=" " alt="" coords="898,548,1074,589"/>
+<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="565,323,580,369,603,425,638,480,660,504,684,525,735,551,790,566,846,573,897,574,897,579,845,578,789,571,733,556,682,529,656,508,634,483,599,427,575,371,560,325"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="199,258,401,284"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="417,280,450,283,450,288,417,285"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="203,307,397,333"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="413,307,450,303,450,309,413,312"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,307,150,333"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="165,318,203,318,203,323,165,323"/>
+<area shape="poly" id="edge9_Node000009_Node000005" title=" " alt="" coords="1103,87,1289,71,1313,69,1313,74,1290,77,1103,92"/>
+<area shape="poly" id="edge11_Node000010_Node000006" title=" " alt="" coords="1105,210,1289,186,1315,182,1316,188,1290,191,1106,215"/>
+<area shape="poly" id="edge12_Node000010_Node000007" title=" " alt="" coords="1116,237,1316,255,1316,261,1115,243"/>
+<area shape="poly" id="edge14_Node000011_Node000008" title=" " alt="" coords="1083,331,1344,344,1344,349,1083,337"/>
 </map>

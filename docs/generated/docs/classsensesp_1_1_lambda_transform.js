@@ -10,6 +10,6 @@ var classsensesp_1_1_lambda_transform =
     [ "LambdaTransform", "classsensesp_1_1_lambda_transform.html#aa4fac0c104609141002846c9163ab726", null ],
     [ "get_config_schema", "classsensesp_1_1_lambda_transform.html#af435085e439215b9081b2724f5f94e9c", null ],
     [ "get_configuration", "classsensesp_1_1_lambda_transform.html#ae7062a1158415022821903f38a73a3dd", null ],
-    [ "set_configuration", "classsensesp_1_1_lambda_transform.html#a15f97f9263e14f14eb4ef8e0febfcce6", null ],
-    [ "set_input", "classsensesp_1_1_lambda_transform.html#a089103b08c2608896c48346c09bc229e", null ]
+    [ "set", "classsensesp_1_1_lambda_transform.html#aeeb025a48bf35e072945cbc0f254f1d1", null ],
+    [ "set_configuration", "classsensesp_1_1_lambda_transform.html#a15f97f9263e14f14eb4ef8e0febfcce6", null ]
 ];

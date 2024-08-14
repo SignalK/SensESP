@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['clicktypes_0',['ClickTypes',['../namespacesensesp.html#a21975f0611649b430d00a47945332495',1,'sensesp']]]
+  ['asyncresponsestatus_0',['AsyncResponseStatus',['../namespacesensesp.html#adb94dae0cf4a1e26d3e71c3fbb8bca76',1,'sensesp']]]
 ];

@@ -9,8 +9,8 @@ var classsensesp_1_1_s_k_output =
     [ "get_config_schema", "classsensesp_1_1_s_k_output.html#ad1adbcf7d2d93c2c8b25db102c9c2f2e", null ],
     [ "get_configuration", "classsensesp_1_1_s_k_output.html#a41ad9087fc10d33d6cb604f7ddc28321", null ],
     [ "get_metadata", "classsensesp_1_1_s_k_output.html#a9821f4d246652e6089d88ab97c014007", null ],
+    [ "set", "classsensesp_1_1_s_k_output.html#af56c46e065c444e5b799d16ec948eeb5", null ],
     [ "set_configuration", "classsensesp_1_1_s_k_output.html#a7cf63cd792b4ace352013c098df3a3d9", null ],
-    [ "set_input", "classsensesp_1_1_s_k_output.html#ac8dfddd370d7a630262cbbd3bde495cc", null ],
     [ "set_metadata", "classsensesp_1_1_s_k_output.html#a04136285fe398306a634d716acaf2e8e", null ],
     [ "meta_", "classsensesp_1_1_s_k_output.html#acc9fe0ecf987a18a5876f3bea4f009cb", null ]
 ];

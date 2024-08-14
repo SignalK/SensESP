@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['observable_0',['Observable',['../classsensesp_1_1_observable.html',1,'sensesp']]],
-  ['observablevalue_1',['ObservableValue',['../classsensesp_1_1_observable_value.html',1,'sensesp']]],
-  ['observablevalue_3c_20int_20_3e_2',['ObservableValue&lt; int &gt;',['../classsensesp_1_1_observable_value.html',1,'sensesp']]],
-  ['observablevalue_3c_20string_20_3e_3',['ObservableValue&lt; String &gt;',['../classsensesp_1_1_observable_value.html',1,'sensesp']]],
-  ['observablevalue_3c_20wsconnectionstate_20_3e_4',['ObservableValue&lt; WSConnectionState &gt;',['../classsensesp_1_1_observable_value.html',1,'sensesp']]],
-  ['ota_5',['OTA',['../classsensesp_1_1_o_t_a.html',1,'sensesp']]]
+  ['networking_0',['Networking',['../classsensesp_1_1_networking.html',1,'sensesp']]],
+  ['noncedata_1',['NonceData',['../structsensesp_1_1_nonce_data.html',1,'sensesp']]],
+  ['numberconfig_2',['NumberConfig',['../classsensesp_1_1_number_config.html',1,'sensesp']]]
 ];

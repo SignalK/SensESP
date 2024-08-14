@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['websocketclientevent_0',['webSocketClientEvent',['../namespacesensesp.html#a4f37392d0637be5754c86b87b263d0d3',1,'sensesp']]],
-  ['wifi_5fap_5fenabled_1',['wifi_ap_enabled',['../classsensesp_1_1_networking.html#afaee1b4db5e498e99855aa490f93758a',1,'sensesp::Networking::wifi_ap_enabled()'],['../classsensesp_1_1_wi_fi_state_producer.html#a11cee5b6718a0cd0e05379714d2c2328',1,'sensesp::WiFiStateProducer::wifi_ap_enabled()']]],
-  ['wifi_5fdisconnected_2',['wifi_disconnected',['../classsensesp_1_1_wi_fi_state_producer.html#af5fd4ab02afc8ac88f41ea749bcb0523',1,'sensesp::WiFiStateProducer::wifi_disconnected()'],['../classsensesp_1_1_networking.html#ae982ec3f422ca1d9535b6ce510b5ffe9',1,'sensesp::Networking::wifi_disconnected()']]],
-  ['wifi_5fstation_5fconnected_3',['wifi_station_connected',['../classsensesp_1_1_wi_fi_state_producer.html#a56206e0c2e3d9faf5360dfb816dbbbe6',1,'sensesp::WiFiStateProducer::wifi_station_connected()'],['../classsensesp_1_1_networking.html#ad75261059cb20d55e7cd2c58e8a06738',1,'sensesp::Networking::wifi_station_connected()']]],
-  ['wifisignal_4',['WiFiSignal',['../classsensesp_1_1_wi_fi_signal.html#a231c838e41c49d81e57e7c9becf30f8b',1,'sensesp::WiFiSignal']]],
-  ['wifistateproducer_5',['wifistateproducer',['../classsensesp_1_1_wi_fi_state_producer.html#af936cca265f9b9fd7a3cb1360fdc909d',1,'sensesp::WiFiStateProducer::WiFiStateProducer(WiFiStateProducer &amp;other)=delete'],['../classsensesp_1_1_wi_fi_state_producer.html#a2a64fa7edd035de465cc257cf6fe5b30',1,'sensesp::WiFiStateProducer::WiFiStateProducer()']]],
-  ['wsclient_6',['WSClient',['../classsensesp_1_1_w_s_client.html#a9c8f2cbe5fa9fe454d1c2439b27862c3',1,'sensesp::WSClient']]]
+  ['valueproducer_0',['ValueProducer',['../classsensesp_1_1_value_producer.html#aa29790dfe4e22903e061662be0fc7f68',1,'sensesp::ValueProducer::ValueProducer()'],['../classsensesp_1_1_value_producer.html#a84103531d1d430e29cf3dd6a14eff977',1,'sensesp::ValueProducer::ValueProducer(const T &amp;initial_value)']]],
+  ['voltagedividerr1_1',['VoltageDividerR1',['../classsensesp_1_1_voltage_divider_r1.html#ab101fa0973f1503e615ccc89f5582776',1,'sensesp::VoltageDividerR1']]],
+  ['voltagedividerr2_2',['VoltageDividerR2',['../classsensesp_1_1_voltage_divider_r2.html#aaaf082fb5371d60d87bdf65c60399a60',1,'sensesp::VoltageDividerR2']]],
+  ['voltagemultiplier_3',['VoltageMultiplier',['../classsensesp_1_1_voltage_multiplier.html#a32d15219e5879df723a4c5da8664f619',1,'sensesp::VoltageMultiplier']]]
 ];

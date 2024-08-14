@@ -7,6 +7,5 @@ var classsensesp_1_1_s_k_delta_queue =
     [ "get_delta", "classsensesp_1_1_s_k_delta_queue.html#a26dc17fc9fa31804552240f81efa35ac", null ],
     [ "release_semaphore", "classsensesp_1_1_s_k_delta_queue.html#a8c79cbfdc595e971219eb12e99387ea7", null ],
     [ "reset_meta_send", "classsensesp_1_1_s_k_delta_queue.html#add56c07207ea03780ac30a48ce4f38ab", null ],
-    [ "start", "classsensesp_1_1_s_k_delta_queue.html#a4806971a1a246092b9e6584b325b1678", null ],
     [ "take_semaphore", "classsensesp_1_1_s_k_delta_queue.html#a9aacaa1a4bb077c829240a2f165f9a44", null ]
 ];
