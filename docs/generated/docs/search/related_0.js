@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['httpserver_0',['HTTPServer',['../classsensesp_1_1_sens_e_s_p_app.html#adb5f6061831be202d2cc58ebdffa44d5',1,'sensesp::SensESPApp']]]
+  ['call_5frequest_5fdispatcher_0',['call_request_dispatcher',['../classsensesp_1_1_h_t_t_p_server.html#a770fed412b33e5ce744c496c9fb50ced',1,'sensesp::HTTPServer']]]
 ];

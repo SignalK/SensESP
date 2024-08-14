@@ -1,19 +1,28 @@
 <map id="sensesp::Configurable::save_configuration" name="sensesp::Configurable::save_configuration">
-<area shape="rect" id="Node000001" title=" " alt="" coords="432,136,583,177"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_h_t_t_p_server.html#aaff846f90a54be25ac7135c2952e71ee" title=" " alt="" coords="232,5,383,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="471,127,430,94,383,61,359,49,362,44,385,57,433,90,474,123"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_w_s_client.html#a0922a2adc80807c20f3e6977b18ed079" title="Called when the websocket connection is disconnected." alt="" coords="236,71,379,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="428,133,371,115,373,109,430,128"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159" title=" " alt="" coords="235,136,380,177"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="417,159,380,159,380,154,417,154"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_time_counter.html#abed17d36e340a890f66effa7f11d0b78" title=" " alt="" coords="231,201,384,242"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="430,184,373,203,371,198,428,179"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_networking.html#a28dcf335a69d16f9206e0e5b9886d66a" title="Start WiFi using WiFi Manager." alt="" coords="235,267,380,307"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="474,189,433,223,385,256,362,268,359,264,383,251,430,219,471,185"/>
-<area shape="rect" id="Node000004" href="$namespacesensesp.html#a4f37392d0637be5754c86b87b263d0d3" title="WebSocket event handler." alt="" coords="5,71,183,111"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="221,94,183,94,183,88,221,88"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_networking.html#a244ebad7e0726fdedc742990ff78d7a0" title=" " alt="" coords="14,233,174,274"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="219,276,174,269,175,264,220,271"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_networking.html#ad111629b0d17e42207a97909313cc567" title=" " alt="" coords="22,299,166,339"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="219,303,167,311,166,306,219,298"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="1089,100,1240,141"/>
+<area shape="rect" id="Node000002" href="$namespacesensesp.html#ad5ce92b1f694218d027785e7348f1421" title=" " alt="" coords="869,5,1010,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1111,95,1040,61,1007,49,1009,44,1042,57,1113,90"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_s_k_w_s_client.html#a963d6aa9d1d835a394338ba64fe1c6cc" title="Called when the websocket connection is disconnected." alt="" coords="864,71,1016,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1073,111,1016,104,1017,98,1074,106"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_time_counter.html#ab0a62d5f4eebebafb8435837e025cccc" title=" " alt="" coords="850,136,1030,161"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1074,134,1030,140,1029,135,1074,129"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_persisting_observable_value.html#a3fee2008981100077e240eaa5e9966ef" title=" " alt="" coords="839,185,1041,226"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1105,150,1042,176,1011,187,1009,182,1040,171,1103,145"/>
+<area shape="rect" id="Node000003" href="$namespacesensesp.html#a66af6e0617fab1bba4fbe606ae8a6062" title="Handle HTTP requests to /config." alt="" coords="626,9,767,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="854,30,768,31,768,26,854,24"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_app.html#a49534d134dbae3ce35f4bac5879a8640" title="Perform initialization of SensESPApp once builder configuration is done." alt="" coords="374,12,531,53"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="610,33,531,34,531,29,610,28"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#ac348bac39d057253e3d291a3c4d7d79f" title="Get the SensESPApp object." alt="" coords="107,15,303,55"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="359,36,303,37,303,31,359,31"/>
+<area shape="rect" id="Node000006" href="$main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="5,57,59,82"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="92,60,60,67,59,62,91,55"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a6480199c42124d844eadd89d6fac5c60" title=" " alt="" coords="602,161,791,202"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="823,197,791,194,791,188,823,192"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_sens_e_s_p_app.html#a1596cc43fd096207872708add2d96b34" title=" " alt="" coords="374,84,531,125"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="615,159,519,128,520,123,616,154"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_sens_e_s_p_minimal_app_builder.html#a650d6c129456d8b1914e5c9fe5798d23" title=" " alt="" coords="351,161,554,202"/>
+<area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="587,184,555,184,555,179,587,179"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a2279d09dcc313b1c4299c3d914fbd6a7" title="Set the device hostname." alt="" coords="107,81,303,122"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="359,106,303,105,303,100,359,101"/>
+<area shape="poly" id="edge12_Node000012_Node000006" title=" " alt="" coords="91,83,59,77,60,72,92,78"/>
 </map>

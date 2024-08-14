@@ -42,7 +42,7 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", null ],
+        [ "Variables", "functions_vars.html", "functions_vars" ],
         [ "Related Symbols", "functions_rela.html", null ]
       ] ]
     ] ],
@@ -52,6 +52,7 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -61,14 +62,16 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "air__density_8cpp.html",
-"classsensesp_1_1_curve_interpolator_1_1_sample.html",
-"classsensesp_1_1_lambda_transform.html#aaa9baa8f1ad27aa4426aa9bffb146dc3",
-"classsensesp_1_1_rgb_led.html#a5359badfe59c94d8e36742f7e0fe7589",
-"classsensesp_1_1_sens_e_s_p_app.html#a6e3bcef5a855acd8589f51e4974e7819",
-"classsensesp_1_1_text_to_truth.html",
-"classsensesp_1_1_wi_fi_state_producer.html#af936cca265f9b9fd7a3cb1360fdc909d",
-"namespacesensesp.html#a048a12a0033281a7ea316123fec959f2",
-"signalk__put__request__listener_8h.html#ac7f4c32570a6f0bef049aab41c077128"
+"classsensesp_1_1_client_s_s_i_d_config.html#a58311c9a2775a9ebe7fd6d043d511658",
+"classsensesp_1_1_float_threshold.html#a314ba7cc634b5e64bc15e754dd83e940",
+"classsensesp_1_1_local_debug.html",
+"classsensesp_1_1_repeat_stopping.html#a606febcbc3dae350f6b8b1141989b7a3",
+"classsensesp_1_1_s_k_request_1_1_pending_request.html#af98a9e3b7dd5dba4a91df19de785dff2",
+"classsensesp_1_1_sens_e_s_p_minimal_app_builder.html#ae87b6bdf071764e9d81e669c90451ced",
+"classsensesp_1_1_u_i_output.html#aeb2c805b7c4961455237624787db4716",
+"digital__input_8h.html",
+"namespacesensesp.html#a21975f0611649b430d00a47945332495a6276db3bdb34c277449d4bfe85e107fd",
+"signalk__output_8cpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

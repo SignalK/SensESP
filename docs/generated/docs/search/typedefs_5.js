@@ -8,7 +8,7 @@ var searchData=
   ['stringconstantsensor_5',['StringConstantSensor',['../namespacesensesp.html#a727b5410eea255d097e47f376179d0e0',1,'sensesp']]],
   ['stringconsumer_6',['StringConsumer',['../namespacesensesp.html#a88095944ec96ea99cace0b4ef5941258',1,'sensesp']]],
   ['stringproducer_7',['StringProducer',['../namespacesensesp.html#af2058b64781310657bbb12f660a810b1',1,'sensesp']]],
-  ['stringsensor_8',['StringSensor',['../namespacesensesp.html#a0d599558fce76efc14d938a933cf2fc1',1,'sensesp']]],
+  ['stringsensor_8',['StringSensor',['../namespacesensesp.html#aff4d79bc2e02235714d0334e7607d216',1,'sensesp']]],
   ['stringsklistener_9',['StringSKListener',['../namespacesensesp.html#a71b2cfc6dbad86772553591f8454caf9',1,'sensesp']]],
   ['stringskputrequest_10',['StringSKPutRequest',['../namespacesensesp.html#afa937fcb2693d4d73b8294e55d4e1b4e',1,'sensesp']]],
   ['stringskputrequestlistener_11',['StringSKPutRequestListener',['../namespacesensesp.html#a9e9cffb55d8564db9ce0a75d53a7489c',1,'sensesp']]],

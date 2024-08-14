@@ -18,5 +18,7 @@ var dir_9589b29454ff5cfb122a833ce99379e5 =
     [ "signalk_put_request_listener.h", "signalk__put__request__listener_8h.html", "signalk__put__request__listener_8h" ],
     [ "signalk_time.cpp", "signalk__time_8cpp.html", null ],
     [ "signalk_time.h", "signalk__time_8h.html", "signalk__time_8h" ],
-    [ "signalk_value_listener.h", "signalk__value__listener_8h.html", "signalk__value__listener_8h" ]
+    [ "signalk_value_listener.h", "signalk__value__listener_8h.html", "signalk__value__listener_8h" ],
+    [ "signalk_ws_client.cpp", "signalk__ws__client_8cpp.html", "signalk__ws__client_8cpp" ],
+    [ "signalk_ws_client.h", "signalk__ws__client_8h.html", "signalk__ws__client_8h" ]
 ];

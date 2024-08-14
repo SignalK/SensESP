@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['lambdaconsumer_0',['LambdaConsumer',['../classsensesp_1_1_lambda_consumer.html',1,'sensesp']]],
-  ['lambdatransform_1',['LambdaTransform',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
-  ['lambdatransform_3c_20float_2c_20float_2c_20float_2c_20float_20_3e_2',['LambdaTransform&lt; float, float, float, float &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
-  ['lambdatransform_3c_20float_2c_20int_20_3e_3',['LambdaTransform&lt; float, int &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
-  ['lambdatransform_3c_20in_2c_20out_2c_20in_2c_20in_2c_20out_2c_20out_20_3e_4',['LambdaTransform&lt; IN, OUT, IN, IN, OUT, OUT &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
-  ['linear_5',['Linear',['../classsensesp_1_1_linear.html',1,'sensesp']]],
-  ['localdebug_6',['LocalDebug',['../classsensesp_1_1_local_debug.html',1,'sensesp']]]
+  ['join_0',['Join',['../classsensesp_1_1_join.html',1,'sensesp']]],
+  ['join3_1',['Join3',['../classsensesp_1_1_join3.html',1,'sensesp']]],
+  ['join4_2',['Join4',['../classsensesp_1_1_join4.html',1,'sensesp']]],
+  ['join5_3',['Join5',['../classsensesp_1_1_join5.html',1,'sensesp']]],
+  ['joinbase_4',['JoinBase',['../classsensesp_1_1_join_base.html',1,'sensesp']]],
+  ['joinbase_3c_202_20_3e_5',['JoinBase&lt; 2 &gt;',['../classsensesp_1_1_join_base.html',1,'sensesp']]],
+  ['joinbase_3c_203_20_3e_6',['JoinBase&lt; 3 &gt;',['../classsensesp_1_1_join_base.html',1,'sensesp']]],
+  ['joinbase_3c_204_20_3e_7',['JoinBase&lt; 4 &gt;',['../classsensesp_1_1_join_base.html',1,'sensesp']]],
+  ['joinbase_3c_205_20_3e_8',['JoinBase&lt; 5 &gt;',['../classsensesp_1_1_join_base.html',1,'sensesp']]]
 ];

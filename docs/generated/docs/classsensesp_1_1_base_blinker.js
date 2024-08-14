@@ -5,7 +5,6 @@ var classsensesp_1_1_base_blinker =
     [ "flip_state", "classsensesp_1_1_base_blinker.html#ab58e08ff07f1e534db66c99b74a01805", null ],
     [ "set_enabled", "classsensesp_1_1_base_blinker.html#a54bc8f32345f10f21af2b4d4ef4b9be2", null ],
     [ "set_state", "classsensesp_1_1_base_blinker.html#a094e850c60f9c314e114d347070b4978", null ],
-    [ "start", "classsensesp_1_1_base_blinker.html#af8241db2017ccc7c8067481c8876a36e", null ],
     [ "tick", "classsensesp_1_1_base_blinker.html#ab5ed0e780c44eb4f8f495382326989fd", null ],
     [ "enabled_", "classsensesp_1_1_base_blinker.html#a3ec494c9235f63eb87017fe2a733f02d", null ],
     [ "pin_", "classsensesp_1_1_base_blinker.html#a6c21f2b031a69f6ea1b6e2adedc53064", null ],
