@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['observable_0',['Observable',['../classsensesp_1_1_observable.html#a427ed25e82e6ae156743732c2f55a49e',1,'sensesp::Observable::Observable()'],['../classsensesp_1_1_observable.html#a0ad7c31ca3baf22ff3fe76ba39ad40c3',1,'sensesp::Observable::Observable(Observable &amp;&amp;other)']]],
-  ['observablevalue_1',['ObservableValue',['../classsensesp_1_1_observable_value.html#a557d56e3286d170e9cfc2ffa6cfa3346',1,'sensesp::ObservableValue::ObservableValue()'],['../classsensesp_1_1_observable_value.html#ab6bb2143ea0d635e37ee596744c78fb1',1,'sensesp::ObservableValue::ObservableValue(const T &amp;value)']]],
+  ['observable_0',['observable',['../classsensesp_1_1_observable.html#a427ed25e82e6ae156743732c2f55a49e',1,'sensesp::Observable::Observable()'],['../classsensesp_1_1_observable.html#a0ad7c31ca3baf22ff3fe76ba39ad40c3',1,'sensesp::Observable::Observable(Observable &amp;&amp;other)']]],
+  ['observablevalue_1',['observablevalue',['../classsensesp_1_1_observable_value.html#a557d56e3286d170e9cfc2ffa6cfa3346',1,'sensesp::ObservableValue::ObservableValue()'],['../classsensesp_1_1_observable_value.html#ab6bb2143ea0d635e37ee596744c78fb1',1,'sensesp::ObservableValue::ObservableValue(const T &amp;value)']]],
   ['on_5fbutton_5fpress_2',['on_button_press',['../classsensesp_1_1_click_type.html#adf5c465844609d1d0f461c37fc114ac5',1,'sensesp::ClickType']]],
   ['on_5fbutton_5frelease_3',['on_button_release',['../classsensesp_1_1_click_type.html#ae42d90645326071c653be889138e0926',1,'sensesp::ClickType']]],
   ['on_5fclick_5fcompleted_4',['on_click_completed',['../classsensesp_1_1_click_type.html#aec294bafe9a6cb81599f6dfe84eafcf3',1,'sensesp::ClickType']]],

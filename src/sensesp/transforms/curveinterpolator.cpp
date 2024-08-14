@@ -99,7 +99,7 @@ void CurveInterpolator::get_configuration(JsonObject& root) {
   JsonArray json_samples = root["samples"].to<JsonArray>();
   for (auto& sample : samples_) {
     // Add a new JsonObject to the array
-    JsonObject entry = json_samples.createNestedObject();
+    JsonObject entry = json_samples.add<JsonObject>();
     if (entry.isNull()) {
       ESP_LOGE(__FILENAME__, "No memory for sample");
       return;

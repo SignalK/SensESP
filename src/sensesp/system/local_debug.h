@@ -6,8 +6,6 @@
 #include "Arduino.h"
 #include "Print.h"
 
-namespace sensesp {
-
 #define rdebugA(fmt, ...) ESP_LOGV(__FILENAME__, fmt, ##__VA_ARGS__)
 #define rdebugP(fmt, ...) ESP_LOGV(__FILENAME__, fmt, ##__VA_ARGS__)
 #define rdebugV(fmt, ...) ESP_LOGV(__FILENAME__, fmt, ##__VA_ARGS__)
@@ -35,6 +33,8 @@ namespace sensesp {
 #define debugW(fmt, ...) rdebugW(fmt, ##__VA_ARGS__)
 #define debugE(fmt, ...) rdebugE(fmt, ##__VA_ARGS__)
 #define debugA(fmt, ...) rdebugV(fmt, ##__VA_ARGS__)
+
+namespace sensesp {
 
 class LocalDebug {
  public:

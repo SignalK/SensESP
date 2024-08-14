@@ -1,6 +1,6 @@
-#include "sensesp/types/position.h"
+#include "position.h"
 
-#include <ArduinoJson.h>
+#include "ArduinoJson.h"
 
 namespace sensesp {
 
@@ -16,6 +16,5 @@ void convertFromJson(JsonVariantConst src, Position &dst) {
 bool canConvertFromJson(JsonVariantConst src, const Position &) {
   return src.containsKey("latitude") && src.containsKey("longitude");
 }
-
 
 }  // namespace sensesp

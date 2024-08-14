@@ -4,6 +4,8 @@
 #include <ArduinoJson.h>
 #include <limits>
 
+#include "ArduinoJson.h"
+
 namespace sensesp {
 
 /// Value used to indicate an invalid or missing altitude
