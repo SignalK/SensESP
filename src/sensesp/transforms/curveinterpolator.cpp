@@ -98,9 +98,11 @@ void CurveInterpolator::set(const float& input) {
 void CurveInterpolator::get_configuration(JsonObject& root) {
   JsonArray json_samples = root["samples"].to<JsonArray>();
   for (auto& sample : samples_) {
-    auto entry = json_samples.add<JsonObject>();
+    // Add a new JsonObject to the array
+    JsonObject entry = json_samples.createNestedObject();
     if (entry.isNull()) {
       ESP_LOGE(__FILENAME__, "No memory for sample");
+      return;
     }
     entry["input"] = sample.input;
     entry["output"] = sample.output;
