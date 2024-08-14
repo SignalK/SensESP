@@ -1,8 +1,9 @@
+#include "sensesp/transforms/lambda_transform.h"
+
 #include <math.h>
 
 #include "sensesp/sensors/analog_input.h"
 #include "sensesp/signalk/signalk_output.h"
-#include "sensesp/transforms/lambda_transform.h"
 #include "sensesp_app_builder.h"
 
 using namespace sensesp;
@@ -10,7 +11,7 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-  SetupSerialDebug(115200);
+  SetupLogging();
 
   // Create a new SensESPApp object. This is the direct constructor call, and
   // an equivalent alternative to using the SensESPAppBuilder class.
@@ -89,8 +90,6 @@ void setup() {
 
   analog_input->connect_to(log_transform)
       ->connect_to(new SKOutputFloat(sk_path));
-
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

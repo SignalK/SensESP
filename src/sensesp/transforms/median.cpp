@@ -4,12 +4,13 @@ namespace sensesp {
 
 Median::Median(unsigned int sample_size, String config_path)
     : FloatTransform(config_path), sample_size_{sample_size} {
+  set_requires_restart(true);
   load_configuration();
   buf_.reserve(sample_size_);
   buf_.clear();
 }
 
-void Median::set_input(float input, uint8_t inputChannel) {
+void Median::set(const float& input) {
   buf_.push_back(input);
   if (buf_.size() >= sample_size_) {
     // Its time to output a value

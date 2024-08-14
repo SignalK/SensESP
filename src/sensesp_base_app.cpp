@@ -3,24 +3,28 @@
 namespace sensesp {
 
 void SetupSerialDebug(uint32_t baudrate) {
-  Serial.begin(baudrate);
+  SetupLogging();
 
-  // A small delay and one debugI() are required so that
-  // the serial output displays everything
-#ifndef DEBUG_DISABLED
-  delay(100);
-  Debug.setSerialEnabled(true);
-  delay(100);
-#endif
-  debugI("\nSerial debugging enabled");
+  if (baudrate != 115200) {
+    ESP_LOGW(__FILENAME__, "SetupSerialDebug baudrate parameter is ignored.");
+  }
+}
+
+void SetupLogging(esp_log_level_t default_level) {
+  esp_log_level_set("*", default_level);
 }
 
 SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
 
 SensESPBaseApp::SensESPBaseApp() {
+  // initialize the filesystem
+  filesystem_ = new Filesystem();
   // create the hostname_ observable - this needs to be done before
   // the builder methods are called
-  hostname_ = new ObservableValue<String>(kDefaultHostname);
+  hostname_ = new PersistingObservableValue<String>(kDefaultHostname,
+                                                    "/system/hostname");
+  hostname_->set_description("Device hostname");
+  hostname_->set_sort_order(0);
 }
 
 /**
@@ -36,24 +40,16 @@ SensESPBaseApp* SensESPBaseApp::get() { return instance_; }
  * This should be only called from the builder!
  *
  */
-void SensESPBaseApp::setup() {
-  // initialize the filesystem
-  filesystem_ = new Filesystem();
-
-  // create a remote debugger object
-  debug_output_ = new DebugOutput();
-}
+void SensESPBaseApp::setup() {}
 
 void SensESPBaseApp::start() {
   // start all individual startable components
 
-  debugI("Starting subsystems");
-  Startable::start_all();
-  debugD("All sensors and transforms started");
+  ESP_LOGW(__FILENAME__, "start() call is deprecated and can be removed.");
 }
 
 void SensESPBaseApp::reset() {
-  debugW("Resetting the device configuration to system defaults.");
+  ESP_LOGW(__FILENAME__, "Resetting the device configuration to system defaults.");
   Resettable::reset_all();
 
   ReactESP::app->onDelay(1000, []() {

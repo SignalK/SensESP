@@ -12,5 +12,5 @@ insert_final_newline = true
 [Makefile]
 indent_style = tab
 
-[*.{c,h,cpp,hpp}]
+[*.{c,h,cpp,hpp,js,ts,jsx,tsx,css,scss,html,xml,json,yml,md}]
 indent_size = 2

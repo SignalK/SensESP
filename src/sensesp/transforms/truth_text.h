@@ -23,7 +23,7 @@ namespace sensesp {
  */
 class TextToTruth : public Transform<String, bool> {
  public:
-  virtual void set_input(String input, uint8_t input_channel = 0) override;
+  virtual void set(const String& input) override;
 
   /**
    * Returns TRUE if `value` represents one of the truth values recognized by
@@ -49,7 +49,7 @@ class TruthToText : public Transform<bool, String> {
  public:
   TruthToText(String true_value = "ON", String false_value = "OFF");
 
-  virtual void set_input(bool input, uint8_t input_channel = 0) override;
+  virtual void set(const bool& input) override;
 
  protected:
   String* truth_value_;

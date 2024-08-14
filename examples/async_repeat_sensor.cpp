@@ -17,10 +17,7 @@ reactesp::ReactESP app;
 
 // The setup function performs one-time application initialization.
 void setup() {
-// Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Create the global SensESPApp() object.
   SensESPAppBuilder builder;
@@ -36,7 +33,8 @@ void setup() {
   // define an asynchronous callback function that reads a digital input pin
   // after a delay of 1000 ms.
   auto digital_read_callback = [](RepeatSensor<bool>* sensor) {
-    debugI("Pretend to trigger an asynchronous measurement operation here.");
+    ESP_LOGI("Example",
+             "Pretend to trigger an asynchronous measurement operation here.");
     app.onDelay(1000,
                 [sensor]() { sensor->emit(digitalRead(kDigitalInputPin)); });
   };
@@ -56,9 +54,6 @@ void setup() {
   // Connect the output of the digital input to the SKOutput object which
   // transmits the results to the Signal K server.
   digital->connect_to(new SKOutputFloat(sk_path, ""));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

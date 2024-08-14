@@ -1,10 +1,10 @@
-#include "sensesp_app.h"
-#include "sensesp_app_builder.h"
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp/system/lambda_consumer.h"
 #include "sensesp/transforms/debounce.h"
 #include "sensesp/transforms/integrator.h"
+#include "sensesp_app.h"
+#include "sensesp_app_builder.h"
 
 using namespace sensesp;
 
@@ -25,7 +25,7 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-  SetupSerialDebug(115200);
+  SetupLogging();
 
   SensESPAppBuilder builder;
   sensesp_app = builder.set_hostname("ChainCounter")
@@ -48,17 +48,17 @@ void setup() {
                               counter_read_delay, counter_config_path);
 
   /**
-   * An IntegratorT<int, float> called "accumulator" adds up all the counts it
+   * An Integrator<int, float> called "accumulator" adds up all the counts it
    * receives (which are ints) and multiplies each count by gypsy_circum, which
    * is the amount of chain, in meters, that is moved by each revolution of the
    * windlass. (Since gypsy_circum is a float, the output of this transform must
-   * be a float, which is why we use IntegratorT<int, float>). It can be
+   * be a float, which is why we use Integrator<int, float>). It can be
    * configured in the Config UI at accum_config_path.
    */
   float gypsy_circum = 0.32;
   String accum_config_path = "/accumulator/circum";
   auto* accumulator =
-      new IntegratorT<int, float>(gypsy_circum, 0.0, accum_config_path);
+      new Integrator<int, float>(gypsy_circum, 0.0, accum_config_path);
 
   /**
    * There is no path for the amount of anchor rode deployed in the current
@@ -96,8 +96,8 @@ void setup() {
    */
   int read_delay = 10;
   String read_delay_config_path = "/button_watcher/read_delay";
-  auto* button_watcher = new DigitalInputChange(
-      BUTTON_PIN, INPUT, read_delay, read_delay_config_path);
+  auto* button_watcher = new DigitalInputChange(BUTTON_PIN, INPUT, read_delay,
+                                                read_delay_config_path);
 
   /**
    * Create a DebounceInt to make sure we get a nice, clean signal from the
@@ -144,9 +144,6 @@ void setup() {
 
   /* Connect the button_watcher to the debounce to the button_consumer. */
   button_watcher->connect_to(debounce)->connect_to(button_consumer);
-
-  /* Finally, start the SensESPApp */
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

@@ -11,20 +11,18 @@ PressRepeater::PressRepeater(String config_path, int integer_false,
       pushed_{false},
       repeating_{false} {
   load_configuration();
-}
 
-void PressRepeater::start() {
   ReactESP::app->onRepeat(10, [this]() {
     if (pushed_) {
       // A press is currently in progress
       if (repeating_) {
         if (last_value_sent_ > (unsigned long)repeat_interval_) {
-          debugD("Repeating press report");
+          ESP_LOGD(__FILENAME__, "Repeating press report");
           last_value_sent_ = 0;
           this->emit(true);
         }
       } else if (last_value_sent_ > (unsigned long)repeat_start_interval_) {
-        debugD("Starting press report repeat");
+        ESP_LOGD(__FILENAME__, "Starting press report repeat");
         repeating_ = true;
         last_value_sent_ = 0;
         this->emit(true);
@@ -33,11 +31,11 @@ void PressRepeater::start() {
   });
 }
 
-void PressRepeater::set_input(int new_value, uint8_t input_channel) {
-  this->set_input(new_value != integer_false_, input_channel);
+void PressRepeater::set(const int& new_value) {
+  this->set(new_value != integer_false_);
 }
 
-void PressRepeater::set_input(bool new_value, uint8_t input_channel) {
+void PressRepeater::set(const bool& new_value) {
   if (new_value != pushed_) {
     pushed_ = new_value;
 

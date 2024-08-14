@@ -30,10 +30,7 @@ float analog_read_callback() { return analogRead(kAnalogInputPin) / 4096.0; }
 
 // The setup function performs one-time application initialization.
 void setup() {
-// Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Create the global SensESPApp() object.
   SensESPAppBuilder builder;
@@ -66,9 +63,6 @@ void setup() {
   // consumer that displays it, is "Indoor light".
   analog_input->connect_to(
       new SKOutputFloat(sk_path, "", new SKMetadata("ratio", "Indoor light")));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

@@ -9,7 +9,7 @@ SKOutputTime::SKOutputTime(String sk_path, String config_path)
 }
 
 String SKOutputTime::as_signalk() {
-  DynamicJsonDocument json_doc(1024);
+  JsonDocument json_doc;
   String json;
   json_doc["path"] = this->sk_path;
   json_doc["value"] = output;

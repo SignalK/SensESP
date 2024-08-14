@@ -17,7 +17,7 @@ namespace sensesp {
 class DigitalOutput : public BooleanTransform {
  public:
   DigitalOutput(int pin);
-  void set_input(bool new_value, uint8_t input_channel = 0) override;
+  void set(const bool& new_value) override;
 
  private:
   int pin_number_;

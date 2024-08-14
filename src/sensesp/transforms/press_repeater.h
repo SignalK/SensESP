@@ -43,10 +43,8 @@ class PressRepeater : public BooleanTransform, public IntConsumer {
   PressRepeater(String config_path = "", int integer_false = 0,
                 int repeat_start_interval = 1500, int repeat_interval = 250);
 
-  virtual void start() override;
-
-  virtual void set_input(bool new_value, uint8_t input_channel = 0) override;
-  virtual void set_input(int new_value, uint8_t input_channel = 0) override;
+  virtual void set(const bool& new_value) override;
+  virtual void set(const int& new_value) override;
 
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;

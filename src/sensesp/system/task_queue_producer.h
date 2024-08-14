@@ -22,12 +22,13 @@ namespace sensesp {
 template <class T>
 class TaskQueueProducer : public ObservableValue<T> {
  public:
-  TaskQueueProducer(const T& value, reactesp::ReactESP* consumer_app = ReactESP::app, int queue_size = 1,
-                    unsigned int poll_rate = 990)
+  TaskQueueProducer(const T& value,
+                    reactesp::ReactESP* consumer_app = ReactESP::app,
+                    int queue_size = 1, unsigned int poll_rate = 990)
       : ObservableValue<T>(value), queue_size_{queue_size} {
     queue_ = xQueueCreate(queue_size, sizeof(T));
     if (queue_ == NULL) {
-      debugE("Failed to create queue");
+      ESP_LOGE(__FILENAME__, "Failed to create queue");
     }
 
     // Create a repeat reaction that will poll the queue and emit the values
@@ -39,20 +40,23 @@ class TaskQueueProducer : public ObservableValue<T> {
     });
   }
 
-  TaskQueueProducer(const T& value, int queue_size = 1, unsigned int poll_rate = 990)
+  TaskQueueProducer(const T& value, int queue_size = 1,
+                    unsigned int poll_rate = 990)
       : TaskQueueProducer(value, ReactESP::app, queue_size, poll_rate) {}
 
-  bool set(const T& value) {
+  virtual void set(const T& value) override {
+    // WARNING: This does not check if the queue is full.
+    xQueueSend(queue_, &value, 0);
+  }
+
+  int push(const T& value) {
     int retval;
     if (queue_size_ == 1) {
       retval = xQueueOverwrite(queue_, &value);
     } else {
       retval = xQueueSend(queue_, &value, 0);
     }
-    if (retval != pdTRUE) {
-      return false;
-    }
-    return true;
+    return retval;
   }
 
  private:

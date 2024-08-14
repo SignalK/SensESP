@@ -16,7 +16,7 @@ ClickType::ClickType(String config_path, uint16_t long_click_delay,
   load_configuration();
 }
 
-void ClickType::set_input(bool input, uint8_t inputChannel) {
+void ClickType::set(const bool& input) {
   if (input) {
     on_button_press();
   } else {
@@ -30,7 +30,8 @@ bool ClickType::is_click(ClickTypes value) {
 }
 
 void ClickType::on_button_press() {
-  debugD(
+  ESP_LOGD(
+      __FILENAME__,
       "ClickType received PRESS on click count %d (millis: %ld, last release: "
       "%ld ms ago)",
       click_count_, millis(), (long)release_duration_);
@@ -54,9 +55,9 @@ void ClickType::on_button_press() {
       if (delayed_click_report_ != NULL) {
         delayed_click_report_->remove();
         delayed_click_report_ = NULL;
-        debugD(
-            "ClickType press is double click. Removed queued SingleClick "
-            "report");
+        ESP_LOGD(__FILENAME__,
+                 "ClickType press is double click. Removed queued SingleClick "
+                 "report");
       }
       click_count_++;
     }
@@ -66,10 +67,10 @@ void ClickType::on_button_press() {
 }
 
 void ClickType::on_button_release() {
-  debugD(
-      "ClickType received UNPRESS for click count %d (millis: %ld, press "
-      "duration: %ld ms)",
-      click_count_, millis(), (long)press_duration_);
+  ESP_LOGD(__FILENAME__,
+           "ClickType received UNPRESS for click count %d (millis: %ld, press "
+           "duration: %ld ms)",
+           click_count_, millis(), (long)press_duration_);
 
   if (click_count_ > 0) {
     // This is the "release" of a click we are tracking...
@@ -77,7 +78,8 @@ void ClickType::on_button_release() {
       on_ultra_long_click();
       this->on_click_completed();
     } else if (press_duration_ >= this->long_click_delay_) {
-      debugD(
+      ESP_LOGD(
+          __FILENAME__,
           "ClickType detected LongSingleClick (millis: %ld, press duration %ld "
           "ms)",
           millis(), (long)press_duration_);
@@ -85,7 +87,8 @@ void ClickType::on_button_release() {
       this->on_click_completed();
     } else if (this->click_count_ > 1) {
       // We have just ended a double click.  Sent it immediately...
-      debugD(
+      ESP_LOGD(
+          __FILENAME__,
           "ClickType detected DoubleClick (millis: %ld, press duration %ld ms)",
           millis(), (long)press_duration_);
       this->emitDelayed(ClickTypes::DoubleClick);
@@ -97,9 +100,10 @@ void ClickType::on_button_release() {
       // DoubleClick
       unsigned long time_of_event = millis();
       long pd = (long)press_duration_;
-      delayed_click_report_ =
-          ReactESP::app->onDelay(double_click_interval_ + 20, [this, pd, time_of_event]() {
-            debugD(
+      delayed_click_report_ = ReactESP::app->onDelay(
+          double_click_interval_ + 20, [this, pd, time_of_event]() {
+            ESP_LOGD(
+                __FILENAME__,
                 "ClickType detected SingleClick (millis: %ld, queue time: %ld, "
                 "press duration %ld ms)",
                 millis(), time_of_event, pd);
@@ -116,8 +120,9 @@ void ClickType::on_button_release() {
     // an UltraLongClick has already been sent, or the producer
     // is feeding us weird values...
     release_duration_ = 0;
-    debugW("ClickType detected UNPRESS with no pending PRESS (millis=%ld)",
-           millis());
+    ESP_LOGW(__FILENAME__,
+             "ClickType detected UNPRESS with no pending PRESS (millis=%ld)",
+             millis());
   }
 }
 
@@ -133,7 +138,8 @@ void ClickType::on_click_completed() {
 }
 
 void ClickType::on_ultra_long_click() {
-  debugD(
+  ESP_LOGD(
+      __FILENAME__,
       "ClickType detected UltraLongSingleClick (millis: %ld, press duration "
       "%ld ms)",
       millis(), (long)press_duration_);

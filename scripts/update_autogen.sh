@@ -14,7 +14,7 @@ fi
 
 # udpate the html and js source files
 
-pio run -e esp32dev -t webUI
+pio run -e esp32dev -t frontend
 
 if ! git diff-index --quiet HEAD --; then
     git commit -am "Update the web UI source files for version ${VERSION}"
@@ -27,4 +27,3 @@ mkdir -p docs/generated
 doxygen
 git add docs/generated
 git commit -m "Update the Doxygen docs for version ${VERSION}"
-

@@ -14,10 +14,10 @@ namespace sensesp {
  */
 template <>
 String SKOutput<Position>::as_signalk() {
-  DynamicJsonDocument json_doc(1024);
+  JsonDocument json_doc;
   String json;
   json_doc["path"] = this->get_sk_path();
-  JsonObject value = json_doc.createNestedObject("value");
+  JsonObject value = json_doc["value"].to<JsonObject>();
   value["latitude"] = output.latitude;
   value["longitude"] = output.longitude;
   if (output.altitude != kPositionInvalidAltitude) {

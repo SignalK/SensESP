@@ -1,7 +1,7 @@
-#include "sensesp_app_builder.h"
 #include "sensesp/sensors/analog_input.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp/transforms/moving_average.h"
+#include "sensesp_app_builder.h"
 
 #define SERIAL_DEBUG_DISABLED = true
 
@@ -10,9 +10,7 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Set up sensesp
   SensESPAppBuilder builder;
@@ -37,12 +35,8 @@ void setup() {
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html#vesselsregexptanks
   input->connect_to(avg)->connect_to(
       new SKOutputFloat("tanks.fuel.0.currentLevel"));
-
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.
 // It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() {
-  app.tick();
-}
+void loop() { app.tick(); }

@@ -1,14 +1,13 @@
 #ifndef _discovery_H_
 #define _discovery_H_
 
-#include "sensesp/system/startable.h"
+#include <ESPmDNS.h>
 
 namespace sensesp {
 
-class MDNSDiscovery : public Startable {
+class MDNSDiscovery {
  public:
-  MDNSDiscovery() : Startable(79) {}
-  virtual void start() override;
+  MDNSDiscovery();
 };
 
 }  // namespace sensesp

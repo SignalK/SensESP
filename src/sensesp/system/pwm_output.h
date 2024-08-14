@@ -19,7 +19,7 @@ namespace sensesp {
  * <p>Channels can be auto-assigned to a pin or they can be declared
  * explicitly in your code. The PWM value is set either by
  * calling `set_pwm()`, or by using an instance of `PWMOutput`
- * and calling the `set_input()` method as defined in `ValueConsumer<>`.
+ * and calling the `set()` method as defined in `ValueConsumer<>`.
  * <p>On an esp32, the "channel" corresponds to one of the timer
  * channels available on the onboard chip.  Explicit declaration
  * of a channel may or may not be necessary depending on other
@@ -48,7 +48,7 @@ class PWMOutput : public ValueConsumer<float> {
    * pwm_channel is zero, the channel assigned when the PWMOutput instance
    * was instantiated will be used.
    */
-  virtual void set_input(float new_value, uint8_t pwm_channel = 0) override;
+  virtual void set(const float& new_value) override;
 
   /**
    * Assigns the specified GPIO pin to the specified pwm channel.

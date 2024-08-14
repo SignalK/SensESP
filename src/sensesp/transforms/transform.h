@@ -8,7 +8,6 @@
 #include "sensesp.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
-#include "sensesp/system/startable.h"
 #include "sensesp/system/valueconsumer.h"
 #include "sensesp/system/valueproducer.h"
 
@@ -28,7 +27,7 @@ namespace sensesp {
  *
  * @param config_path The path to configure the Transform in the Config UI.
  */
-class TransformBase : public Configurable, public Startable {
+class TransformBase : public Configurable {
  public:
   TransformBase(String config_path = "");
 

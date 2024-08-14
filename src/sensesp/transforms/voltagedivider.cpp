@@ -7,7 +7,7 @@ VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path)
   load_configuration();
 }
 
-void VoltageDividerR1::set_input(float Vout, uint8_t ignored) {
+void VoltageDividerR1::set(const float& Vout) {
   this->emit((Vin_ - Vout) * R2_ / Vout);
 }
 
@@ -30,7 +30,8 @@ bool VoltageDividerR1::set_configuration(const JsonObject& config) {
   String expected[] = {"Vin", "R2"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE(
+      ESP_LOGE(
+          __FILENAME__,
           "Cannot set VoltageDividerR1: configuration: missing json field %s\n",
           str.c_str());
       return false;
@@ -48,7 +49,7 @@ VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path)
   load_configuration();
 }
 
-void VoltageDividerR2::set_input(float Vout, uint8_t ignored) {
+void VoltageDividerR2::set(const float& Vout) {
   this->emit((Vout * R1_) / (Vin_ - Vout));
 }
 
@@ -71,7 +72,8 @@ bool VoltageDividerR2::set_configuration(const JsonObject& config) {
   String expected[] = {"Vin", "R1"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE(
+      ESP_LOGE(
+          __FILENAME__,
           "Cannot set VoltageDividerR2: configuration: missing json field %s\n",
           str.c_str());
       return false;

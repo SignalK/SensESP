@@ -24,7 +24,7 @@ const uint8_t input_pin1 = 0;
 ReactESP app;
 
 void setup() {
-  SetupSerialDebug(115200);
+  SetupLogging();
 
   SensESPMinimalAppBuilder builder;
   auto sensesp_app = builder.set_hostname("counter-test")->get_app();
@@ -45,7 +45,7 @@ void setup() {
 
   Serial.println("");
 
-  debugD("Connected to WiFi. IP address: %s", WiFi.localIP().toString().c_str());
+  ESP_LOGD("Example", "Connected to WiFi. IP address: %s", WiFi.localIP().toString().c_str());
 
   WiFi.setHostname(SensESPBaseApp::get_hostname().c_str());
 
@@ -59,8 +59,6 @@ void setup() {
   }));
 
   digin->connect_to(new SKOutputBool("electrical.switches.0.state", "/digin/state"));
-
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

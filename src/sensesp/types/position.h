@@ -1,6 +1,7 @@
 #ifndef SENSESP_TYPES_POSITION_H_
 #define SENSESP_TYPES_POSITION_H_
 
+#include <ArduinoJson.h>
 #include <limits>
 
 #include "ArduinoJson.h"

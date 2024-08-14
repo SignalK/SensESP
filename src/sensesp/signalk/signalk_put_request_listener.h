@@ -1,11 +1,11 @@
 #ifndef _signalk_putrequestlistener_H_
 #define _signalk_putrequestlistener_H_
 
-#include <ArduinoJson.h>
+#include "sensesp.h"
 
+#include <ArduinoJson.h>
 #include <set>
 
-#include "sensesp.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"
@@ -53,7 +53,8 @@ class SKPutRequestListener : public SKPutListener, public ValueProducer<T> {
  public:
   SKPutRequestListener(String sk_path) : SKPutListener(sk_path) {
     if (sk_path == "") {
-      debugE(
+      ESP_LOGE(
+          __FILENAME__,
           "SKPutRequestListener: User has provided no sk_path to respond to.");
     }
   }

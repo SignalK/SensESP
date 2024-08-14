@@ -11,7 +11,13 @@ void Observable::notify() {
 }
 
 void Observable::attach(std::function<void()> observer) {
-  observers.push_front(observer);
+  // First iterate to the last element
+  auto before_end = observers.before_begin();
+  for (auto& _ : observers) {
+    ++before_end;
+  }
+  // Then insert the new observer
+  observers.insert_after(before_end, observer);
 }
 
 }  // namespace sensesp

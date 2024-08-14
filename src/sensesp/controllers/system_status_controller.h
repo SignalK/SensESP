@@ -2,7 +2,7 @@
 #define _SYSTEM_STATUS_CONTROLLER_H_
 
 #include "sensesp/net/networking.h"
-#include "sensesp/net/ws_client.h"
+#include "sensesp/signalk/signalk_ws_client.h"
 #include "sensesp/system/valueproducer.h"
 
 namespace sensesp {
@@ -11,10 +11,10 @@ enum class SystemStatus {
   kWifiNoAP = 100,
   kWifiDisconnected,
   kWifiManagerActivated,
-  kWSDisconnected,
-  kWSAuthorizing,
-  kWSConnecting,
-  kWSConnected
+  kSKWSDisconnected,
+  kSKWSAuthorizing,
+  kSKWSConnecting,
+  kSKWSConnected
 };
 
 /**
@@ -25,19 +25,17 @@ enum class SystemStatus {
  * an event occurs.
  */
 class SystemStatusController : public ValueConsumer<WiFiState>,
-                               public ValueConsumer<WSConnectionState>,
+                               public ValueConsumer<SKWSConnectionState>,
                                public ValueProducer<SystemStatus> {
  public:
   SystemStatusController() {}
 
   /// ValueConsumer interface for ValueConsumer<WiFiState> (Networking object
   /// state updates)
-  virtual void set_input(WiFiState new_value,
-                         uint8_t input_channel = 0) override;
-  /// ValueConsumer interface for ValueConsumer<WSConnectionState>
-  /// (WSClient object state updates)
-  virtual void set_input(WSConnectionState new_value,
-                         uint8_t input_channel = 0) override;
+  virtual void set(const WiFiState& new_value) override;
+  /// ValueConsumer interface for ValueConsumer<SKWSConnectionState>
+  /// (SKWSClient object state updates)
+  virtual void set(const SKWSConnectionState& new_value) override;
 
  protected:
   void update_state(const SystemStatus new_state) {

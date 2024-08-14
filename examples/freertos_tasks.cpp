@@ -7,11 +7,11 @@
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
 #include "sensesp/net/networking.h"
-#include "sensesp/net/ws_client.h"
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp/signalk/signalk_value_listener.h"
+#include "sensesp/signalk/signalk_ws_client.h"
 #include "sensesp/system/lambda_consumer.h"
 #include "sensesp/system/system_status_led.h"
 #include "sensesp_minimal_app_builder.h"
@@ -35,26 +35,24 @@ void ToggleTestOutputPin(void *parameter) {
 
 // The setup function performs one-time application initialization.
 void setup() {
-// Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   SensESPMinimalAppBuilder builder;
   SensESPMinimalApp *sensesp_app = builder.set_hostname("async")->get_app();
 
-  auto *networking = new Networking(
-      "/system/net", "", "", SensESPBaseApp::get_hostname(), "thisisfine");
+  auto *networking = new Networking("/system/net", "", "");
   auto *http_server = new HTTPServer();
 
   // create the SK delta object
   auto sk_delta_queue_ = new SKDeltaQueue();
 
   // create the websocket client
-  auto ws_client_ = new WSClient("/system/sk", sk_delta_queue_, "", 0);
+  auto ws_client_ = new SKWSClient("/system/sk", sk_delta_queue_, "", 0);
 
-  ws_client_->connect_to(new LambdaConsumer<WSConnectionState>(
-      [](WSConnectionState input) { debugD("WSConnectionState: %d", input); }));
+  ws_client_->connect_to(
+      new LambdaConsumer<SKWSConnectionState>([](SKWSConnectionState input) {
+        ESP_LOGD("Example", "SKWSConnectionState: %d", input);
+      }));
 
   // create the MDNS discovery object
   auto mdns_discovery_ = new MDNSDiscovery();
@@ -65,7 +63,7 @@ void setup() {
   auto *system_status_led = new SystemStatusLed(LED_BUILTIN);
 
   system_status_controller->connect_to(system_status_led);
-  ws_client_->get_delta_count_producer().connect_to(system_status_led);
+  ws_client_->get_delta_tx_count_producer().connect_to(system_status_led);
 
   // create a new task for toggling the output pin
 
@@ -77,7 +75,7 @@ void setup() {
   auto digin = new DigitalInputChange(kDigitalInputPin, INPUT_PULLUP, CHANGE);
 
   digin->connect_to(new LambdaConsumer<bool>([](bool input) {
-    debugD("(%d ms) Digital input changed to %d", millis(), input);
+    ESP_LOGD("Example", "(%d ms) Digital input changed to %d", millis(), input);
   }));
 
   // connect digin to the SK delta queue
@@ -88,17 +86,12 @@ void setup() {
   // create a new SKListener for navigation.headingMagnetic
 
   auto hdg = new SKValueListener<float>("navigation.headingMagnetic");
-  hdg->connect_to(new LambdaConsumer<float>([](float input) {
-    debugD("Heading: %f", input);
-  }));
+  hdg->connect_to(new LambdaConsumer<float>(
+      [](float input) { ESP_LOGD("Example", "Heading: %f", input); }));
 
   // print out free heap
-  app.onRepeat(2000, []() {
-    debugD("Free heap: %d", ESP.getFreeHeap());
-  });
-
-  // Start the SensESP application running
-  sensesp_app->start();
+  app.onRepeat(
+      2000, []() { ESP_LOGD("Example", "Free heap: %d", ESP.getFreeHeap()); });
 }
 
 // The loop function is called in an endless loop during program execution.

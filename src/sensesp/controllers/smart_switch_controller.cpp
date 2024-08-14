@@ -19,21 +19,19 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
   }
 
   load_configuration();
-}
 
-void SmartSwitchController::start() {
+  // Emit the initial state once the event loop starts
   if (auto_initialize_) {
-    this->emit(is_on);
+    ReactESP::app->onDelay(0, [this]() { this->emit(is_on); });
   }
 }
 
-void SmartSwitchController::set_input(bool new_value, uint8_t input_channel) {
+void SmartSwitchController::set(const bool& new_value) {
   is_on = new_value;
   this->emit(is_on);
 }
 
-void SmartSwitchController::set_input(ClickTypes new_value,
-                                      uint8_t input_channel) {
+void SmartSwitchController::set(const ClickTypes& new_value) {
   if (!ClickType::is_click(new_value)) {
     // Ignore button presses (we only want interpreted clicks)
     return;
@@ -52,13 +50,13 @@ void SmartSwitchController::set_input(ClickTypes new_value,
   if (new_value == ClickTypes::DoubleClick) {
     // Sync any specified sync paths...
     for (auto& path : sync_paths) {
-      debugD("Sync status to %s", path.sk_sync_path.c_str());
-      path.put_request->set_input(is_on);
+      ESP_LOGD(__FILENAME__, "Sync status to %s", path.sk_sync_path.c_str());
+      path.put_request->set(is_on);
     }
   }
 }
 
-void SmartSwitchController::set_input(String new_value, uint8_t input_channel) {
+void SmartSwitchController::set(const String& new_value) {
   if (TextToTruth::is_valid_true(new_value)) {
     is_on = true;
   } else if (TextToTruth::is_valid_false(new_value)) {
@@ -71,7 +69,7 @@ void SmartSwitchController::set_input(String new_value, uint8_t input_channel) {
 }
 
 void SmartSwitchController::get_configuration(JsonObject& root) {
-  JsonArray jPaths = root.createNestedArray("sync_paths");
+  JsonArray jPaths = root["sync_paths"].to<JsonArray>();
   for (auto& path : sync_paths) {
     jPaths.add(path.sk_sync_path);
   }
@@ -106,7 +104,7 @@ SmartSwitchController::SyncPath::SyncPath() {}
 
 SmartSwitchController::SyncPath::SyncPath(String sk_sync_path)
     : sk_sync_path{sk_sync_path} {
-  debugD("DoubleClick will also sync %s", sk_sync_path.c_str());
+  ESP_LOGD(__FILENAME__, "DoubleClick will also sync %s", sk_sync_path.c_str());
   this->put_request = new BoolSKPutRequest(sk_sync_path, "", false);
 }
 

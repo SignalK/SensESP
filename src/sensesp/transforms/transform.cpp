@@ -10,7 +10,7 @@ namespace sensesp {
 std::set<TransformBase*> TransformBase::transforms_;
 
 TransformBase::TransformBase(String config_path)
-    : Configurable{config_path}, Startable(5) {
+    : Configurable{config_path} {
   transforms_.insert(this);
 }
 

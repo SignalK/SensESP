@@ -2,6 +2,7 @@
 #define SENSESP_APP_BUILDER_H
 
 #include "sensesp/sensors/system_info.h"
+#include "sensesp/transforms/debounce.h"
 #include "sensesp_app.h"
 #include "sensesp_base_app_builder.h"
 
@@ -73,6 +74,17 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     app_->set_hostname(hostname);
     return this;
   }
+
+  /**
+   * @brief Set admin username and password for the web interface.
+   *
+   */
+  SensESPAppBuilder* set_admin_user(const char* username,
+                                    const char* password) {
+    app_->set_admin_user(username, password);
+    return this;
+  }
+
   /**
    * @brief Set the system status led object.
    *
@@ -193,6 +205,25 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    */
   SensESPAppBuilder* set_wifi_manager_password(const char* password) {
     app_->set_wifi_manager_password(password);
+    return this;
+  }
+
+  const SensESPAppBuilder* enable_wifi_watchdog() {
+    // create the wifi disconnect watchdog
+    app_->system_status_controller_
+        .connect_to(new Debounce<SystemStatus>(
+            3 * 60 * 1000  // 180 s = 180000 ms = 3 minutes
+            ))
+        ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {
+          ESP_LOGD(__FILENAME__, "Got system status: %d", (int)input);
+          if (input == SystemStatus::kWifiDisconnected ||
+              input == SystemStatus::kWifiNoAP) {
+            ESP_LOGW(__FILENAME__,
+                     "Unable to connect to wifi for too long; restarting.");
+            ReactESP::app->onDelay(1000, []() { ESP.restart(); });
+          }
+        }));
+
     return this;
   }
 

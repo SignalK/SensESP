@@ -1,6 +1,9 @@
+#include "sensesp.h"
+
 #include "networking.h"
 
-#include "sensesp.h"
+#include <esp_wifi.h>
+
 #include "sensesp/system/led_blinker.h"
 #include "sensesp_app.h"
 
@@ -21,260 +24,255 @@ namespace sensesp {
 // 3. If the hard-coded hostname is changed, use that instead of the saved one.
 //    (But keep using the saved WiFi credentials!)
 
-Networking::Networking(String config_path, String ssid, String password,
-                       String hostname, const char* wifi_manager_password)
-    : Configurable{config_path, "Basic WiFi Setup", 100},
-      wifi_manager_password_{wifi_manager_password},
-      Startable(80),
-      Resettable(0) {
-
+Networking::Networking(String config_path, String client_ssid,
+                       String client_password)
+    : Configurable{config_path, "Basic WiFi Setup", 100}, Resettable(0) {
   // Get the WiFi state producer singleton and make it update this object output
   wifi_state_producer = WiFiStateProducer::get_singleton();
   wifi_state_producer->connect_to(new LambdaConsumer<WiFiState>(
       [this](WiFiState state) { this->emit(state); }));
 
-  preset_ssid = ssid;
-  preset_password = password;
-  preset_hostname = hostname;
-  default_hostname = hostname;
-
   load_configuration();
 
-  if (default_hostname != preset_hostname) {
-    // if the preset hostname has changed, use it instead of the loaded one
-    SensESPBaseApp::get()->get_hostname_observable()->set(preset_hostname);
-    default_hostname = preset_hostname;
+  // Fill in the rest of the client settings array with empty configs
+  int num_fill = kMaxNumClientConfigs - client_settings_.size();
+  for (int i = 0; i < num_fill; i++) {
+    client_settings_.push_back(ClientSSIDConfig());
   }
 
-  if (ap_ssid == "" && preset_ssid != "") {
-    // there is no saved config and preset config is available
-    ap_ssid = preset_ssid;
+  if (client_ssid != "" && client_password != "" &&
+      client_settings_.size() == 0) {
+    ClientSSIDConfig preset_client_config = {client_ssid, client_password,
+                                             true};
+    client_settings_.push_back(preset_client_config);
+    client_enabled_ = true;
   }
 
-  if (ap_password == "" && preset_password != "") {
-    // there is no saved config and preset config is available
-    ap_password = preset_password;
+  ESP_LOGD(__FILENAME__, "Enabling Networking");
+
+  // Hate to do this, but Raspberry Pi AP setup is going to be much more
+  // complicated with enforced WPA2. BAD Raspberry Pi! BAD!
+  WiFi.setMinSecurity(WIFI_AUTH_WPA_PSK);
+
+  // Try setting hostname already here.
+  String hostname = SensESPBaseApp::get_hostname();
+  WiFi.setHostname(hostname.c_str());
+
+  // Start WiFi with a bogus SSID to initialize the network stack but
+  // don't connect to any network.
+  WiFi.begin("0", "0", 0, nullptr, false);
+
+  // If both saved AP settings and saved client settings
+  // are available, start in STA+AP mode.
+
+  if (this->ap_settings_.enabled_ && this->client_enabled_ == true) {
+    WiFi.mode(WIFI_AP_STA);
+    start_access_point();
+    start_client_autoconnect();
   }
 
-  server = new AsyncWebServer(80);
-  dns = new DNSServer();
+  // If saved AP settings are available, use them.
+
+  else if (this->ap_settings_.enabled_) {
+    WiFi.mode(WIFI_AP);
+    start_access_point();
+  }
+
+  // If saved client settings are available, use them.
+
+  else if (this->client_enabled_) {
+    WiFi.mode(WIFI_STA);
+    start_client_autoconnect();
+  }
+
+  if (this->ap_settings_.enabled_ &&
+      this->ap_settings_.captive_portal_enabled_) {
+    dns_server_ = new DNSServer();
+
+    dns_server_->setErrorReplyCode(DNSReplyCode::NoError);
+    dns_server_->start(53, "*", WiFi.softAPIP());
+
+    ReactESP::app->onRepeat(1, [this]() { dns_server_->processNextRequest(); });
+  }
 }
 
-void Networking::start() {
-  debugD("Enabling Networking object");
+/**
+ * @brief Start an access point.
+ *
+ */
+void Networking::start_access_point() {
+  String hostname = SensESPBaseApp::get_hostname();
+  WiFi.setHostname(hostname.c_str());
 
-  // If we have preset or saved WiFi config, always use it. Otherwise,
-  // start WiFiManager. WiFiManager always starts the configuration portal
-  // instead of trying to connect.
+  ESP_LOGI(__FILENAME__, "Starting access point %s", ap_settings_.ssid_.c_str());
 
-  if (ap_ssid != "" && ap_password != "") {
-    debugI("Using SSID %s", ap_ssid.c_str());
-    setup_saved_ssid();
-  } else if (ap_ssid == "" && WiFi.status() != WL_CONNECTED &&
-             wifi_manager_enabled_) {
-    debugI("Starting WiFiManager");
-    setup_wifi_manager();
-  }
-  // otherwise, fall through and WiFi will remain disconnected
-}
+  bool result =
+      WiFi.softAP(ap_settings_.ssid_.c_str(), ap_settings_.password_.c_str(),
+                  ap_settings_.channel_, ap_settings_.hidden_);
 
-void Networking::activate_wifi_manager() {
-  debugD("Activating WiFiManager");
-  if (WiFi.status() != WL_CONNECTED) {
-    setup_wifi_manager();
+  if (!result) {
+    ESP_LOGE(__FILENAME__, "Failed to start access point.");
+    return;
   }
 }
 
 /**
  * @brief Start WiFi using preset SSID and password.
  */
-void Networking::setup_saved_ssid() {
+void Networking::start_client_autoconnect() {
   String hostname = SensESPBaseApp::get_hostname();
   WiFi.setHostname(hostname.c_str());
 
-  if (ap_mode_ == false) {
-    // set up WiFi in regular STA (client) mode
-    auto reconnect_cb = [this]() {
-      if (WiFi.status() != WL_CONNECTED) {
-        debugI("Connecting to wifi SSID %s.", ap_ssid.c_str());
-        WiFi.begin(ap_ssid.c_str(), ap_password.c_str());
+  // set up WiFi in regular STA (client) mode
+  auto reconnect_cb = [this]() {
+    static uint32_t attempt_num = 0;
+    static uint32_t current_config_idx = 0;
+
+    int num_configs = client_settings_.size();
+
+    if (WiFi.status() == WL_CONNECTED) {
+      attempt_num = 0;
+      current_config_idx = 0;
+      return;
+    }
+
+    // First check if any of the client settings are defined
+    if (num_configs == 0) {
+      ESP_LOGW(__FILENAME__,
+               "No client settings defined. Leaving WiFi client disconnected.");
+      return;
+    }
+
+    uint32_t prev_config_idx = current_config_idx;
+
+    ClientSSIDConfig config;
+
+    // Get next valid client config
+    for (current_config_idx = current_config_idx;
+         current_config_idx < prev_config_idx + num_configs;
+         current_config_idx++) {
+      config = client_settings_[current_config_idx % num_configs];
+      if (config.ssid_ != "" && config.password_ != "") {
+        break;
       }
-    };
+    }
 
-    // Perform an initial connection without a delay.
-    reconnect_cb();
+    ESP_LOGD(__FILENAME__, "Current client config index: %d", current_config_idx);
+    ESP_LOGD(__FILENAME__, "Attempt number: %d", attempt_num);
+    ESP_LOGD(__FILENAME__, "Config SSID: %s", config.ssid_.c_str());
 
-    // Launch a separate onRepeat reaction to (re-)establish WiFi connection.
-    // Connecting is attempted only every 20 s to allow the previous connection
-    // attempt to complete even if the network is slow.
-    ReactESP::app->onRepeat(20000, reconnect_cb);
-  } else {
-    // Set up WiFi in AP mode. In this case, we don't need a reconnect loop.
-    debugI("Setting up a WiFi access point...");
-    WiFi.softAP(ap_ssid.c_str(), ap_password.c_str());
-  }
+    // If no valid client config found, leave WiFi client disconnected
+    if (config.ssid_ == "" || config.password_ == "") {
+      ESP_LOGW(
+          __FILENAME__,
+          "No valid client settings found. Leaving WiFi client disconnected.");
+      return;
+    }
+
+    ESP_LOGI(__FILENAME__, "Connecting to wifi SSID %s (connection attempt #%d).",
+             config.ssid_.c_str(), attempt_num);
+
+    if (!config.use_dhcp_) {
+      ESP_LOGI(__FILENAME__, "Using static IP address: %s",
+               config.ip_.toString().c_str());
+      WiFi.config(config.ip_, config.dns_server_, config.gateway_,
+                  config.netmask_);
+    }
+    WiFi.begin(config.ssid_.c_str(), config.password_.c_str());
+    attempt_num++;
+    current_config_idx++;  // Move to the next config for the next attempt
+  };
+
+  // Perform an initial connection without a delay.
+  reconnect_cb();
+
+  // Launch a separate onRepeat reaction to (re-)establish WiFi connection.
+  // Connecting is attempted only every 20 s to allow the previous connection
+  // attempt to complete even if the network is slow.
+  ReactESP::app->onRepeat(20000, reconnect_cb);
 }
 
 /**
- * @brief Start WiFi using WiFi Manager.
+ * @brief Serialize the current configuration to a JSON document.
  *
- * If the setup process has been completed before, this method will start
- * the WiFi connection using the saved SSID and password. Otherwise, it will
- * start the WiFi Manager.
  */
-void Networking::setup_wifi_manager() {
-  wifi_manager = new AsyncWiFiManager(server, dns);
-
-  String hostname = SensESPBaseApp::get_hostname();
-
-  // set config save notify callback
-  wifi_manager->setBreakAfterConfig(true);
-
-  wifi_manager->setConfigPortalTimeout(WIFI_CONFIG_PORTAL_TIMEOUT);
-
-#ifdef SERIAL_DEBUG_DISABLED
-  wifi_manager->setDebugOutput(false);
-#endif
-  AsyncWiFiManagerParameter custom_hostname("hostname", "Device hostname",
-                                            hostname.c_str(), 64);
-  wifi_manager->addParameter(&custom_hostname);
-
-  AsyncWiFiManagerParameter custom_ap_ssid(
-      "ap_ssid", "Custom Access Point SSID", ap_ssid.c_str(), 33);
-  wifi_manager->addParameter(&custom_ap_ssid);
-
-  AsyncWiFiManagerParameter custom_ap_password(
-      "ap_password", "Custom Access Point Password", ap_password.c_str(), 64);
-  wifi_manager->addParameter(&custom_ap_password);
-
-  wifi_manager->setTryConnectDuringConfigPortal(false);
-
-  // Create a unique SSID for configuring each SensESP Device
-  String config_ssid;
-  if (wifi_manager_ap_ssid_ != "") {
-    config_ssid = wifi_manager_ap_ssid_;
-  } else {
-    config_ssid = "Configure " + hostname;
-  }
-  const char* pconfig_ssid = config_ssid.c_str();
-
-  // this is the only WiFi state we actively still emit
-  this->emit(WiFiState::kWifiManagerActivated);
-
-  WiFi.setHostname(SensESPBaseApp::get_hostname().c_str());
-
-  wifi_manager->startConfigPortal(pconfig_ssid, wifi_manager_password_);
-
-  String configured_custom_ap_ssid = custom_ap_ssid.getValue();
-  String configured_custom_ap_password = custom_ap_password.getValue();
-
-  bool connected = false;
-
-  if (configured_custom_ap_ssid != "" && configured_custom_ap_password != "") {
-    // AP mode is desired
-    ap_ssid = configured_custom_ap_ssid;
-    ap_password = configured_custom_ap_password;
-    ap_mode_ = true;
-
-    // always assume we can launch a soft AP
-    connected = true;
-  } else {
-    // WiFiManager attempts to connect to the new SSID, but that doesn't seem to
-    // work reliably. Instead, we'll just attempt to connect manually.
-
-    this->ap_ssid = wifi_manager->getConfiguredSTASSID();
-    this->ap_password = wifi_manager->getConfiguredSTAPassword();
-
-    // attempt to connect with the new SSID and password
-    if (this->ap_ssid != "" && this->ap_password != "") {
-      debugD("Attempting to connect to acquired SSID %s and password",
-             this->ap_ssid.c_str());
-      WiFi.begin(this->ap_ssid.c_str(), this->ap_password.c_str());
-      for (int i = 0; i < 20; i++) {
-        if (WiFi.status() == WL_CONNECTED) {
-          connected = true;
-          break;
-        }
-        delay(1000);
-      }
-    }
-  }
-
-  // Only save the new configuration if we were able to connect to the new SSID.
-
-  if (connected) {
-    String new_hostname = custom_hostname.getValue();
-    debugI("Got new custom hostname: %s", new_hostname.c_str());
-    SensESPBaseApp::get()->get_hostname_observable()->set(new_hostname);
-    debugI("Got new SSID and password: %s", ap_ssid.c_str());
-    save_configuration();
-  }
-  debugW("Restarting...");
-  ESP.restart();
-}
-
-String Networking::get_config_schema() {
-  static const char kSchema[] = R"###({
-    "type": "object",
-    "properties": {
-      "hostname": { "title": "Device hostname", "type": "string" },
-      "ssid": { "title": "WiFi SSID", "type": "string" },
-      "password": { "title": "WiFi password", "type": "string", "format": "password" },
-      "ap_mode": { "type": "string", "format": "radio", "title": "WiFi mode", "enum": ["Client", "Access Point"] }
-    }
-  })###";
-
-  return String(kSchema);
-}
-
-// FIXME: hostname should be saved in SensESPApp
-
 void Networking::get_configuration(JsonObject& root) {
-  String hostname = SensESPBaseApp::get_hostname();
-  root["hostname"] = hostname;
-  root["default_hostname"] = default_hostname;
-  root["ssid"] = ap_ssid;
-  root["password"] = ap_password;
-  root["ap_mode"] = ap_mode_ ? "Access Point" : "Client";
+  JsonObject apSettingsJson = root["apSettings"].to<JsonObject>();
+  ap_settings_.as_json(apSettingsJson);
+
+  JsonObject clientSettingsJson = root["clientSettings"].to<JsonObject>();
+  clientSettingsJson["enabled"] = client_enabled_;
+  JsonArray clientConfigsJson = clientSettingsJson["settings"].to<JsonArray>();
+  int num_serialized = 0;
+  for (auto& config : client_settings_) {
+    if (num_serialized++ >= kMaxNumClientConfigs) {
+      break;
+    }
+    JsonObject clientConfigJson = clientConfigsJson.add<JsonObject>();
+    config.as_json(clientConfigJson);
+  }
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
-  if (!config.containsKey("hostname")) {
-    return false;
-  }
+  if (config.containsKey("hostname")) {
+    // deal with the legacy Json format
+    String hostname = config["hostname"].as<String>();
+    SensESPBaseApp::get()->get_hostname_observable()->set(hostname);
 
-  SensESPBaseApp::get()->get_hostname_observable()->set(
-      config["hostname"].as<String>());
+    if (config.containsKey("ssid")) {
+      String ssid = config["ssid"].as<String>();
+      String password = config["password"].as<String>();
 
-  if (config.containsKey("default_hostname")) {
-    default_hostname = config["default_hostname"].as<String>();
-  }
-  ap_ssid = config["ssid"].as<String>();
-  ap_password = config["password"].as<String>();
-
-  if (config.containsKey("ap_mode")) {
-    if (config["ap_mode"].as<String>() == "Access Point" ||
-        config["ap_mode"].as<String>() == "Hotspot") {
-      ap_mode_ = true;
-    } else {
-      ap_mode_ = false;
+      if (config.containsKey("ap_mode")) {
+        bool ap_mode;
+        if (config["ap_mode"].as<String>() == "Access Point" ||
+            config["ap_mode"].as<String>() == "Hotspot") {
+          ap_settings_ = {true, ssid, password};
+        } else {
+          ClientSSIDConfig client_settings = {ssid, password};
+          client_settings_.clear();
+          client_settings_.push_back(client_settings);
+          client_enabled_ = true;
+        }
+      }
     }
+  } else {
+    // Either an empty config or a new-style config
+    if (config.containsKey("apSettings")) {
+      ap_settings_ = AccessPointSettings::from_json(config["apSettings"]);
+    } else {
+      ap_settings_ = AccessPointSettings(true);
+    }
+    if (config.containsKey("clientSettings")) {
+      const JsonObject& client_settings_json = config["clientSettings"];
+      client_enabled_ = client_settings_json["enabled"] | false;
+      client_settings_.clear();
+      const JsonArray& client_settings_json_array =
+          client_settings_json["settings"];
+      for (const JsonObject& cfg_json : client_settings_json_array) {
+        client_settings_.push_back(ClientSSIDConfig::from_json(cfg_json));
+      }
+      if (client_settings_.size() == 0) {
+        client_enabled_ = false;
+      }
+    }
+  }
+  // Fill in the rest of the client settings array with empty configs
+  while (client_settings_.size() < kMaxNumClientConfigs) {
+    client_settings_.push_back(ClientSSIDConfig());
   }
 
   return true;
 }
 
 void Networking::reset() {
-  debugI("Resetting WiFi SSID settings");
+  ESP_LOGI(__FILENAME__, "Resetting WiFi SSID settings");
 
-  ap_ssid = preset_ssid;
-  ap_password = preset_password;
-
-  save_configuration();
+  clear_configuration();
   WiFi.disconnect(true);
   // On ESP32, disconnect does not erase previous credentials. Let's connect
   // to a bogus network instead
-  WiFi.begin("0", "0");
+  WiFi.begin("0", "0", 0, nullptr, false);
 }
 
 WiFiStateProducer* WiFiStateProducer::instance_ = nullptr;
@@ -284,6 +282,39 @@ WiFiStateProducer* WiFiStateProducer::get_singleton() {
     instance_ = new WiFiStateProducer();
   }
   return instance_;
+}
+
+void Networking::start_wifi_scan() {
+  // Scan fails if WiFi is connecting. Disconnect to allow scanning.
+  if (WiFi.status() != WL_CONNECTED) {
+    ESP_LOGD(__FILENAME__,
+             "WiFi is not connected. Disconnecting to allow scanning.");
+    WiFi.disconnect();
+  }
+  ESP_LOGI(__FILENAME__, "Starting WiFi network scan");
+  int result = WiFi.scanNetworks(true);
+  if (result == WIFI_SCAN_FAILED) {
+    ESP_LOGE(__FILENAME__, "WiFi scan failed to start");
+  }
+}
+
+int16_t Networking::get_wifi_scan_results(
+    std::vector<WiFiNetworkInfo>& ssid_list) {
+  int num_networks = WiFi.scanComplete();
+  if (num_networks == WIFI_SCAN_RUNNING) {
+    return WIFI_SCAN_RUNNING;
+  }
+  if (num_networks == WIFI_SCAN_FAILED) {
+    return WIFI_SCAN_FAILED;
+  }
+  ssid_list.clear();
+  for (int i = 0; i < num_networks; i++) {
+    WiFiNetworkInfo info(WiFi.SSID(i), WiFi.RSSI(i), WiFi.encryptionType(i),
+                         WiFi.BSSID(i), WiFi.channel(i));
+    ssid_list.push_back(info);
+  }
+
+  return num_networks;
 }
 
 }  // namespace sensesp

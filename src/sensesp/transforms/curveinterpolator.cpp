@@ -1,6 +1,6 @@
-#include "curveinterpolator.h"
-
 #include "sensesp.h"
+
+#include "curveinterpolator.h"
 
 namespace sensesp {
 
@@ -32,7 +32,7 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
   load_configuration();
 }
 
-void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
+void CurveInterpolator::set(const float& input) {
     if (samples_.empty()) {
         output = 0;  // or any default output if no samples are available
         notify();
@@ -96,11 +96,13 @@ void CurveInterpolator::set_input(float input, uint8_t inputChannel) {
 
 
 void CurveInterpolator::get_configuration(JsonObject& root) {
-  JsonArray json_samples = root.createNestedArray("samples");
+  JsonArray json_samples = root["samples"].to<JsonArray>();
   for (auto& sample : samples_) {
-    auto entry = json_samples.createNestedObject();
-    if( entry.isNull() ) {
-      debugE("No memory for sample");
+    // Add a new JsonObject to the array
+    JsonObject entry = json_samples.add<JsonObject>();
+    if (entry.isNull()) {
+      ESP_LOGE(__FILENAME__, "No memory for sample");
+      return;
     }
     entry["input"] = sample.input;
     entry["output"] = sample.output;
@@ -134,7 +136,8 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
   String expected[] = {"samples"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE(
+      ESP_LOGE(
+          __FILENAME__,
           "Can not set CurveInterpolator configuration: missing json field "
           "%s\n",
           str.c_str());

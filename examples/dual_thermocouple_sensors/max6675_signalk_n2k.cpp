@@ -46,9 +46,7 @@ float temp1_callback() {
 }
 
 void setup() {
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   SensESPAppBuilder builder;
 
@@ -61,7 +59,7 @@ void setup() {
                   //->set_sk_server("XXXXXXXX", 3443)
                   ->get_app();
 
-  auto* engine_0_egt_temperature = new RepeatSensor<float>(1000, temp0_callback); 
+  auto* engine_0_egt_temperature = new RepeatSensor<float>(1000, temp0_callback);
   auto* engine_1_egt_temperature = new RepeatSensor<float>(1000, temp1_callback);
 
   // define metadata for sensors
@@ -144,8 +142,6 @@ void setup() {
         nmea2000->SendMsg(N2kMsg);
       }));
 
-
-  sensesp_app->start();
 }
 
 // main program loop

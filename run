@@ -1,0 +1,216 @@
+#!/usr/bin/env bash
+#
+# usage: ./run.sh command [argument ...]
+#
+# Commands used during development / CI.
+# Also, executable documentation for project dev practices.
+#
+# See https://death.andgravity.com/run-sh
+# for an explanation of how it works and why it's useful.
+
+# First, set up the environment.
+# (Check the notes at the end when changing this.)
+
+set -o nounset
+set -o pipefail
+set -o errexit
+
+# Enable this to echo commands as they are executed.
+#set -o xtrace
+
+# Change the current directory to the project root.
+PROJECT_ROOT=${0%/*}
+if [[ $0 != $PROJECT_ROOT && $PROJECT_ROOT != "" ]]; then
+  cd "$PROJECT_ROOT"
+fi
+readonly PROJECT_ROOT=$(pwd)
+
+# Store the absolute path to this script (useful for recursion).
+readonly SCRIPT="$PROJECT_ROOT/$(basename "$0")"
+
+################################################################################
+# Commands follow.
+
+function all {
+  checks
+}
+
+function install-pio {
+  echo "📦 Installing PlatformIO project"
+  pio project init
+}
+
+function install-frontend {
+  echo "📦 Installing frontend dependencies"
+  ( cd frontend && pnpm install )
+}
+
+function install {
+  echo "📦 Installing project and dependencies"
+  install-pio
+  install-frontend
+}
+
+function clean {
+  echo "🧹 Cleaning up"
+  rm -rf .pio/
+  rm -rf frontend/node_modules/
+}
+
+function build-pio {
+  echo "🏗️ Building the PlatformIO project"
+  pio run
+}
+
+function build-frontend {
+  echo "🏗️ Building the frontend"
+  ( cd frontend && pnpm run css-compile )
+  ( cd frontend && pnpm run build )
+  pio run -t frontend
+}
+
+function build {
+  echo "🏗️ Building the project"
+  build-frontend
+  build-pio
+}
+
+function upload {
+  echo "🚀 Uploading the project"
+  build
+  pio run -t upload
+}
+
+function upload-monitor {
+  echo "🚀 🖥️ Uploading the project and opening the serial monitor"
+  build
+  pio run -t upload --target monitor
+}
+
+function dev {
+  echo "👩‍💻 Starting development environment"
+  # TODO
+}
+
+function format {
+  echo "📝 Formatting code"
+  # TODO
+}
+
+function lint {
+  echo "🔍 Linting code"
+  # TODO
+}
+
+function test {
+  echo "🧪 Running unit tests"
+  # Run tests
+}
+
+function checks {
+  echo "🔍 Running all checks"
+  # Run all checks
+  format
+  lint
+  test
+}
+
+function ci-test {
+  echo "🧪 Running tests in CI"
+
+}
+
+
+function help {
+  # list all "public" functions (those not beginning with an underscore)
+  # defined in this file
+  printf "%s <task> [args]\n\nTasks:\n" "${0}"
+  compgen -A function | grep -v "^_" | cat -n
+
+  printf "\nExtended help:\n  Each task has comments for general usage\n"
+}
+
+################################################################################
+# Helper functions
+
+once_hash_array=()
+function _once {
+  # Run a command only once during the execution of this script, even if it's
+  # called multiple times.
+  #
+  # Usage:
+  #   _once <command> [argument ...]
+  #
+  # Example:
+  #   _once echo "Hello"
+  #   _once echo "Hello"  # won't be executed
+
+  local command="$*"
+  local hash=$(echo "$command" | shasum | cut -d' ' -f1)
+  if [[ ! " ${once_hash_array[@]} " =~ " ${hash} " ]]; then
+    once_hash_array+=("$hash")
+    eval "$command"
+  fi
+}
+
+compose_flags=""
+function _dc {
+  docker compose $compose_flags "$@"
+}
+
+function _env {
+  echo "🗝️ Setting environment from .env and .env.defaults"
+  # Go through the files and export all variables not already present in
+  # the environment. First file has precedence!
+  if [ -f .env ]; then
+    _export_unset .env
+  else
+    # Make sure a .env file exists, otherwise docker-compose will complain
+    cp .env.defaults .env
+  fi
+  _export_unset .env.defaults
+}
+
+function _export_unset {
+  local file="$1"
+
+  # Need to use a temp file to avoid a subshell
+  local tmpfile=$(mktemp)
+  grep -v '^#' $file > $tmpfile
+
+  while read -r line; do
+    if [[ ! "$line" =~ ^[[:space:]]*$ ]]; then
+      varname=$(echo "$line" | cut -d= -f1)
+      if [[ -z "${!varname:-}" ]]; then
+        eval $line
+        export $varname
+      fi
+    fi
+  done < $tmpfile
+  rm $tmpfile
+}
+
+function _test_export_unset {
+  _export_unset .env
+  env | sort
+}
+
+################################################################################
+# Commands end.
+
+# Dispatch to command. A simpler version would be just "$@" (with the quotes!).
+
+TIMEFORMAT=$'\nTask completed in %3lR'
+time "${@:-help}"
+
+# Some dev notes for this script.
+#
+# The commands *require*:
+#
+# * The current working directory is the project root.
+# * The shell options and globals are set as they are.
+#
+# Inspired by the following:
+#  - https://death.andgravity.com/run-sh
+#  - http://www.oilshell.org/blog/2020/02/good-parts-sketch.html
+#  - https://www.youtube.com/watch?v=SdmYd5hJISM&t=7s

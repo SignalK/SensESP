@@ -1,27 +1,27 @@
+#include "sensesp.h"
+
 #include "analog_input.h"
 
 #include "Arduino.h"
-#include "sensesp.h"
 
 namespace sensesp {
 
-AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay, String config_path,
-                         float output_scale)
+AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
+                         String config_path, float output_scale)
     : FloatSensor(config_path),
       pin{pin},
       read_delay{read_delay},
       output_scale{output_scale} {
+  this->set_requires_restart(true);
   analog_reader = new AnalogReader(pin);
   load_configuration();
-}
 
-void AnalogInput::update() { this->emit(output_scale * analog_reader->read()); }
-
-void AnalogInput::start() {
   if (this->analog_reader->configure()) {
     ReactESP::app->onRepeat(read_delay, [this]() { this->update(); });
   }
 }
+
+void AnalogInput::update() { this->emit(output_scale * analog_reader->read()); }
 
 void AnalogInput::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;

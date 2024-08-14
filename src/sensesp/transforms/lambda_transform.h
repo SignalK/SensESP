@@ -177,7 +177,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     this->load_configuration();
   }
 
-  void set_input(IN input, uint8_t input_channel = 0) override {
+  void set(const IN& input) override {
     switch (num_params) {
       case 0:
         this->output = function0(input);
@@ -229,11 +229,11 @@ class LambdaTransform : public Transform<IN, OUT> {
   bool set_configuration(const JsonObject& config) override {
     // test that each argument key (as defined by param_info)
     // exists in the received Json object
-    debugD("Preparing to restore configuration from FS.");
+    ESP_LOGD(__FILENAME__, "Preparing to restore configuration from FS.");
     for (int i = 0; i < num_params; i++) {
       const char* expected = param_info[i].key;
       if (!config.containsKey(expected)) {
-        debugD("Didn't find all keys.");
+        ESP_LOGD(__FILENAME__, "Didn't find all keys.");
         return false;
       }
     }
@@ -253,7 +253,7 @@ class LambdaTransform : public Transform<IN, OUT> {
       default:
         break;
     }
-    debugD("Restored configuration");
+    ESP_LOGD(__FILENAME__, "Restored configuration");
     return true;
   }
 
@@ -263,12 +263,18 @@ class LambdaTransform : public Transform<IN, OUT> {
     // a character array pointer as an argument for writing the output to.
     String output = "";
 
-    debugD("Preparing config schema");
+    if (num_params == 0) {
+      return "{}";
+    }
+
+    ESP_LOGD(__FILENAME__, "Preparing config schema for %d parameters",
+             num_params);
 
     output.concat(FPSTR(kLambdaTransformSchemaHead));
     if (num_params > 0) {
-      debugD("getting param_info:");
-      debugD("%s -> %s", param_info[0].key, param_info[0].description);
+      ESP_LOGD(__FILENAME__, "getting param_info:");
+      ESP_LOGD(__FILENAME__, "%s -> %s", param_info[0].key,
+               param_info[0].description);
       output.concat(format_schema_row(param_info[0].key,
                                       param_info[0].description,
                                       get_schema_type_string(param1), false));
@@ -305,7 +311,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     }
     output.concat(FPSTR(kLambdaTransformSchemaTail));
 
-    debugD("Prepared config schema.");
+    ESP_LOGD(__FILENAME__, "Prepared config schema.");
 
     return output;
   }
@@ -330,7 +336,7 @@ class LambdaTransform : public Transform<IN, OUT> {
 
   static String format_schema_row(const char key[], const char title[],
                                   const char type[], const bool read_only) {
-    char row[100] = "";
+    char row[1024] = "";
     const char* read_only_str = read_only ? "true" : "false";
 
     static const char schema_row[] = R"(
@@ -338,6 +344,8 @@ class LambdaTransform : public Transform<IN, OUT> {
   )";
 
     sprintf(row, schema_row, key, title, type, read_only_str);
+
+    ESP_LOGD(__FILENAME__, "Formatted schema row: %s", row);
 
     return String(row);
   }

@@ -1,11 +1,11 @@
 #ifndef _signalk_listener_H_
 #define _signalk_listener_H_
 
-#include <ArduinoJson.h>
+#include "sensesp.h"
 
+#include <ArduinoJson.h>
 #include <set>
 
-#include "sensesp.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"
@@ -37,7 +37,7 @@ class SKListener : virtual public Observable, public Configurable {
    * to change the configuration of this object. See the Configurable class for
    * more information.
    */
-  SKListener(String sk_path, int listen_delay, String config_path="");
+  SKListener(String sk_path, int listen_delay, String config_path = "");
 
   /**
    * Returns the current Signal K path. An empty string

@@ -35,9 +35,7 @@ float temp1_callback() {
 }
 
 void setup() {
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Construct the global SensESPApp() object
   SensESPAppBuilder builder;
@@ -50,15 +48,13 @@ void setup() {
                     //->set_sk_server("192.168.8.10", 3443)
                     ->get_app();
 
-  auto* temp0 = new RepeatSensor<float>(1000, temp0_callback); 
+  auto* temp0 = new RepeatSensor<float>(1000, temp0_callback);
   auto* temp1 = new RepeatSensor<float>(1000, temp1_callback);
 
   // not sure if this is the correct path, but you can change to whatever you like
   temp0->connect_to(new SKOutputFloat("propulsion.0.exhaustTemperature"));
   temp1->connect_to(new SKOutputFloat("propulsion.1.exhaustTemperature"));
 
-  // Start networking, SK server connections and other SensESP internals
-  sensesp_app->start();
 }
 
 void loop() { app.tick(); }

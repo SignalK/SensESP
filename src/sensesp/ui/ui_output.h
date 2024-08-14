@@ -1,7 +1,6 @@
 #ifndef _SENSESP_UI_UI_OUTPUT_H_
 #define _SENSESP_UI_UI_OUTPUT_H_
 #include <ArduinoJson.h>
-
 #include <functional>
 #include <map>
 
@@ -30,7 +29,7 @@ class UIOutputBase : virtual public Observable {
 
   String& get_name() { return name_; }
 
-  virtual void set_json(const JsonObject& obj) {}
+  virtual JsonDocument as_json() = 0;
 
   static const std::map<String, UIOutputBase*>* get_ui_outputs() {
     return &ui_outputs_;
@@ -50,20 +49,20 @@ class UILambdaOutput : public UIOutputBase {
 
   T get() { return value_function_(); }
 
-  void set_json(const JsonObject& obj) override {
-    JsonObject output = obj.createNestedObject(name_);
-    output["Value"] = get();
-    output["Group"] = group_;
-    output["Order"] = order_;
+  virtual JsonDocument as_json() override {
+    JsonDocument obj;
+    obj["name"] = name_;
+    obj["value"] = get();
+    obj["group"] = group_;
+    obj["order"] = order_;
+    return obj;
   }
 };
 
 extern std::map<String, UIOutputBase*> ui_outputs;
 
 template <typename T>
-class UIOutput : public UIOutputBase,
-                 public ObservableValue<T>,
-                 public ValueConsumer<T> {
+class UIOutput : public UIOutputBase, public ObservableValue<T> {
  public:
   UIOutput(String name)
       : UIOutputBase(name, kUIOutputDefaultGroup, kUIOutputDefaultOrder) {}
@@ -74,16 +73,17 @@ class UIOutput : public UIOutputBase,
     this->ObservableValue<T>::emit(value);
   }
 
-  void set_json(const JsonObject& obj) override {
-    JsonObject output = obj.createNestedObject(name_);
-    output["Value"] = ObservableValue<T>::get();
-    output["Group"] = group_;
-    output["Order"] = order_;
+  virtual JsonDocument as_json() override {
+    JsonDocument obj;
+    obj["name"] = name_;
+    obj["value"] = ObservableValue<T>::get();
+    obj["group"] = group_;
+    obj["order"] = order_;
+
+    return obj;
   }
 
-  void set_input(T new_value, uint8_t input_channel = 0) override {
-    this->ValueProducer<T>::emit(new_value);
-  }
+  void set(const T& new_value) override { this->ValueProducer<T>::emit(new_value); }
 };
 }  // namespace sensesp
 

@@ -9,9 +9,9 @@ extern ReactESP app;
 
 std::map<String, SKRequest::PendingRequest*> SKRequest::request_map;
 
-String SKRequest::send_request(
-    DynamicJsonDocument& request,
-    std::function<void(DynamicJsonDocument&)> callback, uint32_t timeout) {
+String SKRequest::send_request(JsonDocument& request,
+                               std::function<void(JsonDocument&)> callback,
+                               uint32_t timeout) {
   // Create a new PendingRequest object to track this request...
   PendingRequest* pending_request = new PendingRequest();
 
@@ -27,8 +27,8 @@ String SKRequest::send_request(
       ReactESP::app->onDelay(timeout, [pending_request]() {
         // Mark the delay reaction null as it will be cleaned up by the ReactESP
         // framework if this executes...
-        debugW("No response from server for request Id %s",
-               pending_request->request_id.c_str());
+        ESP_LOGW(__FILENAME__, "No response from server for request Id %s",
+                 pending_request->request_id.c_str());
         pending_request->timeout_cleanup = nullptr;
         SKRequest::remove_request(pending_request->request_id);
       });
@@ -40,7 +40,8 @@ String SKRequest::send_request(
 
   String request_txt;
   serializeJson(request, request_txt);
-  debugD("Sending websocket request to server: %s", request_txt.c_str());
+  ESP_LOGD(__FILENAME__, "Sending websocket request to server: %s",
+           request_txt.c_str());
 
   SensESPApp::get()->get_ws_client()->sendTXT(request_txt);
 
@@ -56,7 +57,7 @@ SKRequest::PendingRequest* SKRequest::get_request(String request_id) {
   }
 }
 
-void SKRequest::handle_response(DynamicJsonDocument& response) {
+void SKRequest::handle_response(JsonDocument& response) {
   String request_id = response["requestId"];
   PendingRequest* pending_request = get_request(request_id);
   if (pending_request != nullptr) {
@@ -68,8 +69,9 @@ void SKRequest::handle_response(DynamicJsonDocument& response) {
       remove_request(request_id);
     }
   } else {
-    debugW("Received request response for an untracked request: %s",
-           request_id.c_str());
+    ESP_LOGW(__FILENAME__,
+             "Received request response for an untracked request: %s",
+             request_id.c_str());
   }
 }
 
@@ -98,14 +100,13 @@ SKPutRequestBase::SKPutRequestBase(String sk_path, String config_path,
 }
 
 void SKPutRequestBase::send_put_request() {
-  DynamicJsonDocument doc(1024);
+  JsonDocument doc;
   JsonObject root = doc.to<JsonObject>();
-  JsonObject put_data = root.createNestedObject("put");
+  JsonObject put_data = root["put"].to<JsonObject>();
   put_data["path"] = sk_path;
   set_put_value(put_data);
   this->pending_request_id_ = SKRequest::send_request(
-      doc,
-      [this](DynamicJsonDocument& response) { this->on_response(response); },
+      doc, [this](JsonDocument& response) { this->on_response(response); },
       timeout);
 }
 
@@ -113,11 +114,11 @@ bool SKPutRequestBase::request_pending() {
   return (get_request(this->pending_request_id_) != nullptr);
 }
 
-void SKPutRequestBase::on_response(DynamicJsonDocument& response) {
+void SKPutRequestBase::on_response(JsonDocument& response) {
   String request_id = response["requestId"];
   String state = response["state"];
-  debugD("Response %s received for PUT request: %s", state.c_str(),
-         request_id.c_str());
+  ESP_LOGD(__FILENAME__, "Response %s received for PUT request: %s", state.c_str(),
+           request_id.c_str());
 }
 
 void SKPutRequestBase::get_configuration(JsonObject& root) {

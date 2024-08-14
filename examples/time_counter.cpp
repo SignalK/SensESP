@@ -31,10 +31,7 @@ unsigned long freq_start_time = 0;
 int freq = 0;
 
 void setup() {
-  // Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Create the builder object
   SensESPAppBuilder builder;
@@ -110,9 +107,6 @@ void setup() {
   engine_hours->connect_to(
       new SKOutput<float>("propulsion.main.runTime", "",
                           new SKMetadata("s", "Main Engine running time")));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 void loop() { app.tick(); }

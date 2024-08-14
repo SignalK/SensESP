@@ -10,17 +10,20 @@
 #endif
 
 #include "sensesp/controllers/system_status_controller.h"
-#include "sensesp/net/debug_output.h"
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
-#include "sensesp/net/ws_client.h"
+#include "sensesp/net/web/app_command_handler.h"
+#include "sensesp/net/web/base_command_handler.h"
+#include "sensesp/net/web/config_handler.h"
+#include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/sensesp_version.h"
 #include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
-#include "sensesp/system/system_status_led.h"
+#include "sensesp/signalk/signalk_ws_client.h"
 #include "sensesp/system/button.h"
+#include "sensesp/system/system_status_led.h"
 #include "sensesp/ui/ui_output.h"
 #include "sensesp_base_app.h"
 
@@ -56,7 +59,7 @@ class SensESPApp : public SensESPBaseApp {
     return &(this->system_status_controller_);
   }
   Networking* get_networking() { return this->networking_; }
-  WSClient* get_ws_client() { return this->ws_client_; }
+  SKWSClient* get_ws_client() { return this->ws_client_; }
 
  protected:
   /**
@@ -66,9 +69,7 @@ class SensESPApp : public SensESPBaseApp {
    * be instantiated using SensESPAppBuilder.
    *
    */
-  SensESPApp() : SensESPBaseApp() {
-    hostname_->connect_to(hostname_ui_output_);
-  }
+  SensESPApp() : SensESPBaseApp() {}
 
   // setters for all constructor arguments
 
@@ -81,7 +82,7 @@ class SensESPApp : public SensESPBaseApp {
     return this;
   }
   const SensESPApp* set_wifi_password(String wifi_password) {
-    this->wifi_password_ = wifi_password;
+    this->wifi_client_password_ = wifi_password;
     return this;
   }
   const SensESPApp* set_sk_server_address(String sk_server_address) {
@@ -94,6 +95,10 @@ class SensESPApp : public SensESPBaseApp {
   }
   const SensESPApp* set_system_status_led(SystemStatusLed* system_status_led) {
     this->system_status_led_ = system_status_led;
+    return this;
+  }
+  const SensESPApp* set_admin_user(const char* username, const char* password) {
+    this->http_server_->set_auth_credentials(username, password, true);
     return this;
   }
   const SensESPApp* enable_ota(const char* password) {
@@ -112,16 +117,15 @@ class SensESPApp : public SensESPBaseApp {
   void setup();
 
   String ssid_ = "";
-  String wifi_password_ = "";
+  String wifi_client_password_ = "";
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
   const char* ota_password_ = nullptr;
   const char* wifi_manager_password_ = "thisisfine";
 
-  Filesystem* filesystem_;
-  DebugOutput* debug_output_;
   MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;
+
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;
   int button_gpio_pin_ = SENSESP_BUTTON_PIN;
@@ -130,14 +134,14 @@ class SensESPApp : public SensESPBaseApp {
   Networking* networking_ = NULL;
   OTA* ota_;
   SKDeltaQueue* sk_delta_queue_;
-  WSClient* ws_client_;
+  SKWSClient* ws_client_;
 
-  UIOutput<String>* build_info_ui_output_ =
-      new UIOutput<String>("Built at", __DATE__ " " __TIME__, "Software", 2000);
   UIOutput<String>* sensesp_version_ui_output_ = new UIOutput<String>(
       "SenseESP version", kSensESPVersion, "Software", 1900);
-  UIOutput<String>* hostname_ui_output_ =
-      new UIOutput<String>("Hostname", "", "Network", 500);
+  UIOutput<String>* build_info_ui_output_ = new UIOutput<String>(
+      "Build date", __DATE__ " " __TIME__, "Software", 2000);
+  UILambdaOutput<String>* hostname_ui_output_ = new UILambdaOutput<String>(
+      "Hostname", [this]() { return this->hostname_->get(); }, "Network", 500);
   UIOutput<String>* mac_address_ui_output_ =
       new UIOutput<String>("MAC Address", WiFi.macAddress(), "Network", 1100);
   UILambdaOutput<String>* wifi_ssid_ui_output_ = new UILambdaOutput<String>(
@@ -148,19 +152,27 @@ class SensESPApp : public SensESPBaseApp {
   UILambdaOutput<String>* sk_server_address_ui_output_ =
       new UILambdaOutput<String>(
           "Signal K server address",
-          [this]() { return ws_client_->get_server_address(); }, "Network",
+          [this]() { return ws_client_->get_server_address(); }, "Signal K",
           1400);
   UILambdaOutput<uint16_t>* sk_server_port_ui_output_ =
       new UILambdaOutput<uint16_t>(
           "Signal K server port",
-          [this]() { return ws_client_->get_server_port(); }, "Network", 1500);
+          [this]() { return ws_client_->get_server_port(); }, "Signal K", 1500);
   UILambdaOutput<String>* sk_server_connection_ui_output_ =
       new UILambdaOutput<String>(
           "SK connection status",
-          [this]() { return ws_client_->get_connection_status(); }, "Network",
+          [this]() { return ws_client_->get_connection_status(); }, "Signal K",
           1600);
+  UILambdaOutput<int>* delta_tx_count_ui_output_ = new UILambdaOutput<int>(
+      "SK Delta TX count",
+      [this]() { return ws_client_->get_delta_tx_count_producer().get(); },
+      "Signal K", 1700);
+  UILambdaOutput<int>* delta_rx_count_ui_output_ = new UILambdaOutput<int>(
+      "SK Delta RX count",
+      [this]() { return ws_client_->get_delta_rx_count_producer().get(); },
+      "Signal K", 1800);
 
-  friend class HTTPServer;
+  friend class WebServer;
   friend class SensESPAppBuilder;
 };
 

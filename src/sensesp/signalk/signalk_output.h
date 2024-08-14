@@ -37,18 +37,17 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    */
   SKOutput(String sk_path, String config_path = "", SKMetadata* meta = NULL)
       : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
-    Startable::set_start_priority(-5);
     this->load_configuration();
   }
 
   SKOutput(String sk_path, SKMetadata* meta) : SKOutput(sk_path, "", meta) {}
 
-  virtual void set_input(T new_value, uint8_t input_channel = 0) override {
+  virtual void set(const T& new_value) override {
     this->ValueProducer<T>::emit(new_value);
   }
 
   virtual String as_signalk() override {
-    DynamicJsonDocument json_doc(1024);
+    JsonDocument json_doc;
     String json;
     json_doc["path"] = this->get_sk_path();
     json_doc["value"] = ValueProducer<T>::output;
@@ -94,7 +93,7 @@ class SKOutputRawJson : public SKOutput<String> {
       : SKOutput<String>(sk_path, config_path, meta) {}
 
   virtual String as_signalk() override {
-    DynamicJsonDocument json_doc(4096);
+    JsonDocument json_doc;
     String json;
     json_doc["path"] = this->get_sk_path();
     json_doc["value"] = serialized(ValueProducer<String>::output);

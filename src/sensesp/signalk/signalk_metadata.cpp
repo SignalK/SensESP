@@ -11,9 +11,9 @@ SKMetadata::SKMetadata(String units, String display_name, String description,
       timeout_{timeout} {}
 
 void SKMetadata::add_entry(String sk_path, JsonArray& meta) {
-  JsonObject json = meta.createNestedObject();
+  JsonObject json = meta.add<JsonObject>();
   json["path"] = sk_path;
-  JsonObject val = json.createNestedObject("value");
+  JsonObject val = json["value"].to<JsonObject>();
 
   if (!this->display_name_.isEmpty()) {
     val["displayName"] = this->display_name_;

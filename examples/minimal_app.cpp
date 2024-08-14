@@ -29,7 +29,7 @@ const uint8_t output_pin2 = 21;
 ReactESP app;
 
 void setup() {
-  SetupSerialDebug(115200);
+  SetupLogging();
 
   SensESPMinimalAppBuilder builder;
   auto sensesp_app = builder.set_hostname("counter-test")->get_app();
@@ -37,8 +37,7 @@ void setup() {
   // manually create Networking and HTTPServer objects to enable
   // the HTTP configuration interface
 
-  auto* networking = new Networking(
-      "/system/net", "", "", SensESPBaseApp::get_hostname(), "thisisfine");
+  auto* networking = new Networking("/system/net", "", "");
   auto* http_server = new HTTPServer();
 
   auto* digin1 = new DigitalInputCounter(input_pin1, INPUT, RISING, read_delay);
@@ -67,8 +66,6 @@ void setup() {
   pinMode(output_pin2, OUTPUT);
   app.onRepeat(100,
                []() { digitalWrite(output_pin2, !digitalRead(output_pin2)); });
-
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

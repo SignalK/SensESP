@@ -13,8 +13,8 @@ namespace sensesp {
  * depth numbers composed of three 8 bit channels for Red, Green,
  * and Blue (see https://techterms.com/definition/rgb)
  * <p>Color LEDs can be controlled by either setting the specific
- * color to be displayed via the set_input(long), or by setting the
- * on/off state via set_input(bool). When specifying a simple on/off
+ * color to be displayed via the set(long), or by setting the
+ * on/off state via set(bool). When specifying a simple on/off
  * via the the bool input, the default ON or OFF colors specified in the
  * constructor are used.
  * <p>You do not have to define all three channels (for example, if
@@ -55,14 +55,14 @@ class RgbLed : public Configurable,
    * Used to set the current display state of the LED.
    * @param new_value The RGB color to display.
    */
-  virtual void set_input(long new_value, uint8_t input_channel = 0) override;
+  virtual void set(const long& new_value) override;
 
   /**
    * Used to set the current display state of the LED with a simple on/off
    * boolean value.  Using TRUE for new_value sets the color to the ON color.
    * Using FALSE uses the OFF color.
    */
-  virtual void set_input(bool new_value, uint8_t input_channel = 0) override;
+  virtual void set(const bool& new_value) override;
 
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;

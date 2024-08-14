@@ -56,7 +56,7 @@ void SystemStatusLed::set_ws_connected() {
   blinker_->set_pattern(ws_connected_pattern);
 }
 
-void SystemStatusLed::set_input(SystemStatus new_value, uint8_t input_channel) {
+void SystemStatusLed::set(const SystemStatus& new_value) {
   switch (new_value) {
     case SystemStatus::kWifiNoAP:
       this->set_wifi_no_ap();
@@ -67,23 +67,21 @@ void SystemStatusLed::set_input(SystemStatus new_value, uint8_t input_channel) {
     case SystemStatus::kWifiManagerActivated:
       this->set_wifimanager_activated();
       break;
-    case SystemStatus::kWSDisconnected:
+    case SystemStatus::kSKWSDisconnected:
       this->set_ws_disconnected();
       break;
-    case SystemStatus::kWSConnecting:
+    case SystemStatus::kSKWSConnecting:
       this->set_ws_connecting();
       break;
-    case SystemStatus::kWSAuthorizing:
+    case SystemStatus::kSKWSAuthorizing:
       this->set_ws_authorizing();
       break;
-    case SystemStatus::kWSConnected:
+    case SystemStatus::kSKWSConnected:
       this->set_ws_connected();
       break;
   }
 }
 
-void SystemStatusLed::set_input(int new_value, uint8_t input_channel) {
-  blinker_->blip();
-}
+void SystemStatusLed::set(const int& new_value) { blinker_->blip(); }
 
 }  // namespace sensesp

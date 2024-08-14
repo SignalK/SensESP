@@ -1,10 +1,9 @@
-#ifndef _led_blinker_H_
-#define _led_blinker_H_
+#ifndef SENSESP_SRC_SENSESP_SYSTEM_LED_BLINKER_H_
+#define SENSESP_SRC_SENSESP_SYSTEM_LED_BLINKER_H_
 
 #include <ReactESP.h>
 
-#include "sensesp/net/ws_client.h"
-#include "startable.h"
+#include "sensesp/signalk/signalk_ws_client.h"
 
 namespace sensesp {
 
@@ -13,7 +12,7 @@ namespace sensesp {
 /**
  * @brief A base class for LED blinker classes.
  */
-class BaseBlinker : public Startable {
+class BaseBlinker {
  public:
   BaseBlinker(int pin);
   void set_state(bool state);
@@ -25,7 +24,6 @@ class BaseBlinker : public Startable {
    * change the LED state.
    */
   virtual void tick() = 0;
-  void start() override;
 
  protected:
   int pin_;

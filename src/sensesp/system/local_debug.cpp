@@ -4,7 +4,7 @@ namespace sensesp {
 
 #ifndef DEBUG_DISABLED
 
-bool LocalDebug::begin(String hostname, uint8_t startingDebugLevel) {
+bool LocalDebug::begin(uint8_t startingDebugLevel) {
   lastDebugLevel_ = startingDebugLevel;
   return true;
 }

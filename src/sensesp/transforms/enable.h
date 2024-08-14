@@ -1,7 +1,7 @@
-#ifndef _enable_H_
-#define _enable_H_
+#ifndef SENSESP_SRC_SENSESP_TRANSFORMS_ENABLE_H_
+#define SENSESP_SRC_SENSESP_TRANSFORMS_ENABLE_H_
 
-#include "transforms/transform.h"
+#include "sensesp/transforms/transform.h"
 
 namespace sensesp {
 
@@ -29,7 +29,7 @@ class Enable : public Transform<T, T> {
     this->enabled_ = enabled;
     this->load_configuration();
   }
-  virtual void set_input(T input, uint8_t input_channel = 0) override {
+  virtual void set(const T& input) override {
     if (enabled_) {
       this->emit(input);
     }

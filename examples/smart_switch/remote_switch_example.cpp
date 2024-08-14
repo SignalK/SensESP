@@ -40,10 +40,7 @@ using namespace sensesp;
 ReactESP app;
 
 void setup() {
-// Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Create a builder object
   SensESPAppBuilder builder;
@@ -106,9 +103,6 @@ void setup() {
   // confirms it has made the change in state.
   auto* sk_listener = new SKValueListener<bool>(sk_path);
   sk_listener->connect_to(controller);
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 // The loop function is called in an endless loop during program execution.

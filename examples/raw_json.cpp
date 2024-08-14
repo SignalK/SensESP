@@ -14,9 +14,7 @@ reactesp::ReactESP app;
 ObservableValue<bool> toggler;
 
 void setup() {
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   SensESPAppBuilder builder;
   SensESPApp *sensesp_app = builder.set_hostname("json_demo")
@@ -28,7 +26,7 @@ void setup() {
   // take some boolean input and convert it into a simple serialized JSON
   // document
   auto jsonify = new LambdaTransform<bool, String>([](bool input) -> String {
-    DynamicJsonDocument doc(1024);
+    JsonDocument doc;
     doc["output_1"] = input;
     String output;
     serializeJson(doc, output);
@@ -39,14 +37,12 @@ void setup() {
 
   // print the JSON document to the serial console
   jsonify->connect_to(new LambdaConsumer<String>(
-      [](String input) { debugD("JSONified output: %s", input.c_str()); }));
+      [](String input) { ESP_LOGD("Example", "JSONified output: %s", input.c_str()); }));
 
   // connect jsonify to the SK delta queue
 
   const char *sk_path = "environment.json.pin15";
   jsonify->connect_to(new SKOutputRawJson(sk_path, ""));
-
-  sensesp_app->start();
 }
 
 void loop() { app.tick(); }

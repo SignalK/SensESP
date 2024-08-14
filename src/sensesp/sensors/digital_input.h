@@ -1,9 +1,9 @@
 #ifndef _digital_input_H_
 #define _digital_input_H_
 
-#include "sensor.h"
-
 #include <elapsedMillis.h>
+
+#include "sensor.h"
 
 namespace sensesp {
 
@@ -45,18 +45,17 @@ class DigitalInput {
  * @param config_path The path to configuring read_delay in the Config UI.
  *
  * */
-class DigitalInputState : public DigitalInput, public SensorT<bool> {
+class DigitalInputState : public DigitalInput, public Sensor<bool> {
  public:
   DigitalInputState(uint8_t pin, int pin_mode, int read_delay = 1000,
                     String config_path = "")
       : DigitalInput{pin, pin_mode},
-        SensorT<bool>(config_path),
+        Sensor<bool>(config_path),
         read_delay_{read_delay},
         triggered_{false} {
+    set_requires_restart(true);
     load_configuration();
-  }
 
-  virtual void start() override final {
     ReactESP::app->onRepeat(read_delay_, [this]() { emit(digitalRead(pin_)); });
   }
 
@@ -86,14 +85,12 @@ class DigitalInputState : public DigitalInput, public SensorT<bool> {
  * @param config_path The path to configuring read_delay in the Config UI
  *
  * */
-class DigitalInputCounter : public DigitalInput, public SensorT<int> {
+class DigitalInputCounter : public DigitalInput, public Sensor<int> {
  public:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       unsigned int read_delay, String config_path = "")
       : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
-                            config_path, [this]() { this->counter_++; }) {}
-
-  void start() override final {
+                            config_path, [this]() { this->counter_++; }) {
     ReactESP::app->onInterrupt(pin_, interrupt_type_, interrupt_handler_);
 
     ReactESP::app->onRepeat(read_delay_, [this]() {
@@ -110,7 +107,7 @@ class DigitalInputCounter : public DigitalInput, public SensorT<int> {
                       unsigned int read_delay, String config_path,
                       std::function<void()> interrupt_handler)
       : DigitalInput{pin, pin_mode},
-        SensorT<int>(config_path),
+        Sensor<int>(config_path),
         interrupt_type_{interrupt_type},
         interrupt_handler_{interrupt_handler},
         read_delay_{read_delay} {
@@ -189,19 +186,33 @@ class DigitalInputDebounceCounter : public DigitalInputCounter {
  *
  * @see Debounce
  * */
-class DigitalInputChange : public DigitalInput, public SensorT<bool> {
+class DigitalInputChange : public DigitalInput, public Sensor<bool> {
  public:
   DigitalInputChange(uint8_t pin, int pin_mode, int interrupt_type,
                      String config_path = "")
       : DigitalInput{pin, pin_mode},
-        SensorT<bool>(config_path),
+        Sensor<bool>(config_path),
         interrupt_type_{interrupt_type},
         triggered_{true} {
     load_configuration();
     output = (bool)digitalRead(pin_);
     last_output_ = !output;  // ensure that we always send the first output
+
+    ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() {
+      output = (bool)digitalRead(pin_);
+      triggered_ = true;
+    });
+
+    ReactESP::app->onTick([this]() {
+      if (triggered_ && (output != last_output_)) {
+        noInterrupts();
+        triggered_ = false;
+        last_output_ = output;
+        interrupts();
+        notify();
+      }
+    });
   }
-  virtual void start() override final;
 
  private:
   int interrupt_type_;

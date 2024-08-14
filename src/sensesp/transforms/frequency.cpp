@@ -7,11 +7,11 @@ namespace sensesp {
 Frequency::Frequency(float multiplier, String config_path)
     : Transform<int, float>(config_path), multiplier_{multiplier} {
   load_configuration();
+
+  last_update_ = millis();
 }
 
-void Frequency::start() { last_update_ = millis(); }
-
-void Frequency::set_input(int input, uint8_t inputChannel) {
+void Frequency::set(const int& input) {
   unsigned long cur_millis = millis();
   unsigned long elapsed_millis = cur_millis - last_update_;
   last_update_ = cur_millis;

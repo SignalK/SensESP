@@ -2,7 +2,6 @@
 #define _signalk_put_request_H_
 
 #include <ArduinoJson.h>
-
 #include <functional>
 #include <map>
 
@@ -31,15 +30,15 @@ class SKRequest {
    *  FAILED response to be received from the server
    * @return The request Id that is sent to the server.
    */
-  static String send_request(DynamicJsonDocument& request,
-                             std::function<void(DynamicJsonDocument&)> callback,
+  static String send_request(JsonDocument& request,
+                             std::function<void(JsonDocument&)> callback,
                              uint32_t timeout = 5000);
 
   /**
    * Is called by the web socket code to handle any incoming request responses
    * that is receives.
    */
-  static void handle_response(DynamicJsonDocument& response);
+  static void handle_response(JsonDocument& response);
 
  protected:
   /// PendingRequest is a utility class used internally for
@@ -47,7 +46,7 @@ class SKRequest {
   class PendingRequest {
    public:
     String request_id;
-    std::function<void(DynamicJsonDocument&)> callback;
+    std::function<void(JsonDocument&)> callback;
     DelayReaction* timeout_cleanup;
   };
 
@@ -117,7 +116,7 @@ class SKPutRequestBase : public SKRequest, public Configurable {
    * Called whenever a response to a request has been
    * received from the server
    */
-  virtual void on_response(DynamicJsonDocument& response);
+  virtual void on_response(JsonDocument& response);
 
   String sk_path;
   uint32_t timeout;
@@ -147,7 +146,7 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
       : SKPutRequestBase(sk_path, config_path, timeout),
         ignore_duplicates{ignore_duplicates} {}
 
-  virtual void set_input(T new_value, uint8_t input_channel = 0) override {
+  virtual void set(const T& new_value) override {
     if (ignore_duplicates && new_value == value) {
       return;
     }
@@ -155,7 +154,8 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
       this->value = new_value;
       send_put_request();
     } else {
-      debugW("Ignoring PUT request (previous request still outstanding)");
+      ESP_LOGW(__FILENAME__,
+               "Ignoring PUT request (previous request still outstanding)");
     }
   };
 

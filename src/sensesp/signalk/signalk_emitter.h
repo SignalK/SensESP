@@ -1,11 +1,11 @@
 #ifndef _signalk_emitter_H_
 #define _signalk_emitter_H_
 
-#include <ArduinoJson.h>
+#include "sensesp.h"
 
+#include <ArduinoJson.h>
 #include <set>
 
-#include "sensesp.h"
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"

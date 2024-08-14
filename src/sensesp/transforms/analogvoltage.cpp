@@ -11,7 +11,7 @@ AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
   load_configuration();
 }
 
-void AnalogVoltage::set_input(float input, uint8_t inputChannel) {
+void AnalogVoltage::set(const float& input) {
   this->emit(((input * (max_voltage_ / MAX_ANALOG_OUTPUT)) * multiplier_) +
              offset_);
 }
@@ -27,7 +27,7 @@ static const char SCHEMA[] PROGMEM = R"({
     "properties": {
         "max_voltage": { "title": "Max voltage", "type": "number", "description": "The maximum voltage allowed into your ESP's Analog Input pin" },
         "multiplier": { "title": "Mulitplier", "type": "number", "description": "Output will be multiplied by this before sending to SK" },
-        "offsest": { "title": "Offset", "type": "number", "description": "This will be added to output before sending to SK" }
+        "offset": { "title": "Offset", "type": "number", "description": "This will be added to output before sending to SK" }
     }
   })";
 

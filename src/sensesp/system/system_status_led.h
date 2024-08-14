@@ -1,5 +1,5 @@
-#ifndef _LED_CONTROLLER_H_
-#define _LED_CONTROLLER_H_
+#ifndef SENSESP_SRC_SENSESP_SYSTEM_SYSTEM_STATUS_LED_H_
+#define SENSESP_SRC_SENSESP_SYSTEM_SYSTEM_STATUS_LED_H_
 
 #include "lambda_consumer.h"
 #include "led_blinker.h"
@@ -29,9 +29,8 @@ class SystemStatusLed : public ValueConsumer<SystemStatus>,
  public:
   SystemStatusLed(int pin);
 
-  virtual void set_input(SystemStatus new_value,
-                         uint8_t input_channel = 0) override;
-  virtual void set_input(int new_value, uint8_t input_channel = 0) override;
+  virtual void set(const SystemStatus& new_value) override;
+  virtual void set(const int& new_value) override;
 };
 
 }  // namespace sensesp

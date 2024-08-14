@@ -22,7 +22,7 @@ static const char INTEGRATOR_SCHEMA[] PROGMEM = R"({
  * @tparam P Producer (output) data type
  */
 template <class C, class P>
-class IntegratorT : public Transform<C, P> {
+class Integrator : public Transform<C, P> {
  public:
   /**
    * @brief Construct a new Integrator T object
@@ -31,19 +31,13 @@ class IntegratorT : public Transform<C, P> {
    * @param value Initial value of the accumulator
    * @param config_path Configuration path
    */
-  IntegratorT(P k = 1, P value = 0, String config_path = "")
+  Integrator(P k = 1, P value = 0, String config_path = "")
       : Transform<C, P>(config_path), k{k}, value{value} {
     this->load_configuration();
+    this->emit(value);
   }
 
-  virtual void start() override final {
-    // save the integrator value every 10 s
-    // NOTE: Disabled for now because interrupts start throwing
-    // exceptions.
-    // ReactESP::app->onRepeat(10000, [this](){ this->save_configuration(); });
-  }
-
-  virtual void set_input(C input, uint8_t inputChannel = 0) override final {
+  virtual void set(const C& input) override final {
     value += input * k;
     this->emit(value);
   }
@@ -72,8 +66,8 @@ class IntegratorT : public Transform<C, P> {
   P value = 0;
 };
 
-typedef IntegratorT<float, float> Integrator;
-typedef IntegratorT<int, int> Accumulator;
+typedef Integrator<float, float> FloatIntegrator;
+typedef Integrator<int, int> Accumulator;
 
 }  // namespace sensesp
 #endif

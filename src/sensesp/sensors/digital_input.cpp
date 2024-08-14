@@ -1,9 +1,9 @@
+#include "sensesp.h"
+
 #include "digital_input.h"
 
-#include <elapsedMillis.h>
 #include <FunctionalInterrupt.h>
-
-#include "sensesp.h"
+#include <elapsedMillis.h>
 
 namespace sensesp {
 
@@ -83,7 +83,8 @@ bool DigitalInputDebounceCounter::set_configuration(const JsonObject& config) {
   String expected[] = {"read_delay", "ignore_interval"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
-      debugE(
+      ESP_LOGE(
+          __FILENAME__,
           "Cannot set DigitalInputDebounceConfiguration configuration: missing "
           "json field %s",
           str.c_str());
@@ -94,23 +95,6 @@ bool DigitalInputDebounceCounter::set_configuration(const JsonObject& config) {
   read_delay_ = config["read_delay"];
   ignore_interval_ms_ = config["ignore_interval"];
   return true;
-}
-
-void DigitalInputChange::start() {
-  ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() {
-    output = (bool)digitalRead(pin_);
-    triggered_ = true;
-  });
-
-  ReactESP::app->onTick([this]() {
-    if (triggered_ && (output != last_output_)) {
-      noInterrupts();
-      triggered_ = false;
-      last_output_ = output;
-      interrupts();
-      notify();
-    }
-  });
 }
 
 }  // namespace sensesp

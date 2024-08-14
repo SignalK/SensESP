@@ -18,12 +18,9 @@ PWMOutput::PWMOutput(int pin, int pwm_channel) {
   }
 }
 
-void PWMOutput::set_input(float new_value, uint8_t pwm_channel) {
-  if (pwm_channel == 0) {
-    // Use the default channel, as zero is the SensESP default
-    // input_channel for ValueConsumers
-    pwm_channel = default_channel_;
-  }
+void PWMOutput::set(const float& new_value) {
+  uint8_t pwm_channel = default_channel_;
+
   set_pwm(pwm_channel, new_value);
 }
 
@@ -40,7 +37,7 @@ int PWMOutput::assign_channel(int pin, int pwm_channel) {
 
   channel_to_pin_[pwm_channel] = pin;
 
-  debugD("PWM channel %d assigned to pin %d", pwm_channel, pin);
+  ESP_LOGD(__FILENAME__, "PWM channel %d assigned to pin %d", pwm_channel, pin);
 
   pinMode(pin, OUTPUT);
 #ifdef ESP32
@@ -57,8 +54,8 @@ void PWMOutput::set_pwm(int pwm_channel, float value) {
   if (it != channel_to_pin_.end()) {
     int pin = it->second;
     int output_val = value * PWMRANGE;
-    debugD("Outputting %d to pwm channel %d (pin %d)", output_val, pwm_channel,
-           pin);
+    ESP_LOGD(__FILENAME__, "Outputting %d to pwm channel %d (pin %d)", output_val,
+             pwm_channel, pin);
 
 #ifdef ESP32
     uint32_t levels = pow(2, CHANNEL_RESOLUTION);
@@ -69,7 +66,8 @@ void PWMOutput::set_pwm(int pwm_channel, float value) {
     analogWrite(pin, output_val);
 #endif
   } else {
-    debugW("No pin assigned to channel %d. Ignoring set_pwm()", pwm_channel);
+    ESP_LOGW(__FILENAME__, "No pin assigned to channel %d. Ignoring set_pwm()",
+             pwm_channel);
   }
 }
 

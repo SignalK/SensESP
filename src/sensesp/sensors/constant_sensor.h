@@ -25,7 +25,8 @@ namespace sensesp {
  *    int send_delay = 30;
  *    const char* config_path = "/tanks.water_capacity";
  *    auto *capacity = new ConstantFloatSensor(send_delay,config_path);
- *    capacity->connect_to(new SKOutputFloat(sk_path, sk_config_path, sk_metadata));
+ *    capacity->connect_to(new SKOutputFloat(sk_path, sk_config_path,
+ * sk_metadata));
  *
  * To set or get the the value of the virtual sensor for use in your code:
  *
@@ -39,10 +40,10 @@ namespace sensesp {
  * @param[in] config_path Configuration path for the sensor.
  */
 
-static const char SCHEMA_CONSTANT_SENSOR[] PROGMEM = R"###({
+static const char SCHEMA_CONSTANT_SENSOR[] = R"###({
         "type": "object",
         "properties": {
-            "value": { "title": "Constant Value", "type": "number", "description": "Constant value" }
+            "value": { "title": "Constant Value", "type": "%TYPE%", "description": "Constant value" }
         }
     })###";
 
@@ -50,43 +51,55 @@ static const char SCHEMA_CONSTANT_SENSOR[] PROGMEM = R"###({
  * @brief Base class for constant value sensors.
  */
 template <class T>
-class ConstantSensor : public SensorT<T> {
+class ConstantSensor : public Sensor<T> {
  public:
   ConstantSensor(T value, int send_interval = 30, String config_path = "")
-      : SensorT<T>(config_path), value_{value}, send_interval_{send_interval} {
+      : Sensor<T>(config_path), value_{value}, send_interval_{send_interval} {
     this->load_configuration();
-  }
-  void start() override {
+
+    // Emit the initial value once to set the output
+    ReactESP::app->onDelay(0, [this]() { this->emit(value_); });
+    // Then, emit the value at the specified interval
     ReactESP::app->onRepeat(send_interval_ * 1000,
                             [this]() { this->emit(value_); });
   }
 
-  void set_value(T value) { value_ = value; }
-  T get_value() { return value_; }
+  void set(T value) { value_ = value; }
 
  protected:
   virtual void get_configuration(JsonObject &doc) override {
     doc["value"] = value_;
-    doc["interval"] = send_interval_;
   }
   virtual bool set_configuration(const JsonObject &config) override {
     // Neither of the configuration parameters are mandatory
     if (config.containsKey("value")) {
-      value_ = config["value"];
-    }
-    if (config.containsKey("interval")) {
-      send_interval_ = config["interval"];
+      value_ = config["value"].as<T>();
     }
     return true;
   }
   virtual String get_config_schema() override {
-    return FPSTR(SCHEMA_CONSTANT_SENSOR);
+    String schema = SCHEMA_CONSTANT_SENSOR;
+    schema.replace("%TYPE%", sensor_type_);
+    return schema;
   }
   void update() { this->emit(value_); }
 
   T value_;
   int send_interval_;  // seconds
+
+  static const String sensor_type_;
 };
+
+template <class T>
+const String ConstantSensor<T>::sensor_type_ = "";
+template <>
+const String ConstantSensor<int>::sensor_type_;
+template <>
+const String ConstantSensor<float>::sensor_type_;
+template <>
+const String ConstantSensor<String>::sensor_type_;
+template <>
+const String ConstantSensor<bool>::sensor_type_;
 
 // ..........................................
 //  constant value sensors

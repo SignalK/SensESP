@@ -35,7 +35,7 @@ bool TextToTruth::is_valid_false(String input) {
   return false;
 }
 
-void TextToTruth::set_input(String input, uint8_t input_channel) {
+void TextToTruth::set(const String& input) {
   this->emit(TextToTruth::is_valid_true(input));
 }
 
@@ -46,7 +46,7 @@ TruthToText::TruthToText(String true_value, String false_value)
   truth_value_[1] = true_value;
 }
 
-void TruthToText::set_input(bool input, uint8_t input_channel) {
+void TruthToText::set(const bool& input) {
   if (input) {
     this->emit(truth_value_[1]);
   } else {

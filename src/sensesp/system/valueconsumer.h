@@ -1,10 +1,10 @@
 #ifndef _value_consumer_H_
 #define _value_consumer_H_
 
+#include "sensesp.h"
+
 #include <ArduinoJson.h>
 #include <stdint.h>
-
-#include "sensesp.h"
 
 namespace sensesp {
 
@@ -14,7 +14,7 @@ class ValueProducer;
 /**
  *  @brief A base class for piece of code (like a transform) that
  *  accepts data for input. ValueConsumers can accept one or more input values
- *  via the set_input() method. They are connected to `ValueProducers`
+ *  via the set() method. They are connected to `ValueProducers`
  *  via the `connect_to()` method.
  *  @see ValueProducer::connect_to()
  */
@@ -25,24 +25,25 @@ class ValueConsumer {
    * Used to set an input of this consumer. It is usually called
    * automatically by a ValueProducer.
    * @param new_value the value of the input
-   * @param input_channel Consumers can have one or more inputs feeding them.
-   *  This parameter allows you to specify which input number the producer
-   *  is connecting to. For single input consumers, leave the index at zero.
    */
-  virtual void set_input(T new_value, uint8_t input_channel = 0) {}
+  virtual void set(const T& new_value) {}
+
+  virtual void set_input(const T& new_value) {
+    static bool warned = false;
+    if (!warned) {
+      warned = true;
+      ESP_LOGW(__FILENAME__, "set_input() is deprecated. Use set() instead.");
+    }
+    set(new_value);
+  }
 
   /**
    * Registers this consumer with the specified producer, letting it
    * know that this consumer would like to receive notifications whenever
    * its value changes.
-   * @param input_channel Consumers can have one or more inputs feeding them.
-   *  This parameter allows you to specify which input number the producer
-   *  is connecting to. For single input consumers, leave the index at zero.
    */
-  void connect_from(ValueProducer<T>* producer, uint8_t input_channel = 0) {
-    producer->attach([producer, this, input_channel]() {
-      this->set_input(producer->get(), input_channel);
-    });
+  void connect_from(ValueProducer<T>* producer) {
+    producer->attach([producer, this]() { this->set(producer->get()); });
   }
 };
 

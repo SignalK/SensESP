@@ -12,6 +12,7 @@
  */
 
 #include "sensesp/sensors/constant_sensor.h"
+
 #include "sensesp_app_builder.h"
 
 using namespace sensesp;
@@ -19,10 +20,7 @@ using namespace sensesp;
 reactesp::ReactESP app;
 
 void setup() {
-  // Some initialization boilerplate when in debug mode...
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
+  SetupLogging();
 
   // Create the builder object
   SensESPAppBuilder builder;
@@ -37,9 +35,6 @@ void setup() {
   constant_sensor->connect_to(
       new SKOutputFloat("tanks.freshWater.capacity", "",
                         new SKMetadata("m3", "Fresh Water Tank Capacity")));
-
-  // Start the SensESP application running
-  sensesp_app->start();
 }
 
 void loop() { app.tick(); }
