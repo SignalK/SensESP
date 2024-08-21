@@ -22,7 +22,7 @@ If you like SensESP and want to make it even better, please do! It's written in 
 
 - Do not commit PRs with internal merge commits. The information that you've merged changes from upstream at some point benefit no-one, probably not even you. You can avoid those merge commits by doing a `git pull --rebase upstream master` (or `git fetch` followed by `git rebase`, but that's more intricate) during your own work.
 
-- Normally, you should not need to modify `platformio.ini` for your PR. However, if you're adding code that requires a new library dependency, add the dependency both to `library.json` and `platformio.ini`. If you have questions, the best place to discuss SensESP is on [Slack](https://signalk-dev.slack.com), in the `#sensors` channel.
+- Normally, you should not need to modify `platformio.ini` for your PR. However, if you're adding code that requires a new library dependency, add the dependency both to `library.json` and `platformio.ini`. If you have questions, the best place to discuss SensESP is on [Signal K Discord Server](https://github.com/SignalK/SensESP/discussions), in the `#sensesp` channel.
 
 ## Write Comments That Create Interactive Documentation
 

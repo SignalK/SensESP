@@ -169,4 +169,6 @@ For reference, the old SensESP version 1 documentation is still available at the
 
 ## Getting help
 
-Discussion about SensESP happens mostly in [Signalk-dev Slack](https://signalk-dev.slack.com/) on the #sensors channel. Don't hesitate to join (get invite via [signalk.org](https://signalk.org/)and ask if you ever have problems with getting your project working!
+Discussion about SensESP happens mostly on the [Signal K Discord](https://discord.com/channels/1170433917761892493/1170433918592368684) on the #sensesp channel. To register as a new user, follow the invite link at [signalk.org](https://signalk.org/).
+
+Another place for SensESP discussions is the [discussion board on the SensESP GitHub repository](https://github.com/SignalK/SensESP/discussions).

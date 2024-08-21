@@ -8,9 +8,9 @@ nav_order: 80
 
 A not-at-all-organized assortment of common problems and solutions.
 
-## Help on Slack
+## Help on Discord
 
-Slack is an online collaboration platform used by developers. You can join in the [Signal K discussion on Slack](https://signalk-dev.slack.com/) via [signalk.org][https://signalk.org]. The `#sensors` channel is the best place for you to ask questions about SensESP.
+Discord is an online messaging collaboration platform popular with open source projects. You can join the [Signal K Discord Server](https://discord.com/channels/1170433917761892493/1170433918592368684) via the invite link on [signalk.org][https://signalk.org]. The `#sensesp` channel is the best place for you to ask questions about SensESP.
 
 ## Missing Libraries
 
@@ -52,4 +52,3 @@ If the Pi is to be permanently connected to a network with an ethernet cable, yo
 12. When finished in Signal K, if the Pi is not connected to the network with an ethernet cable, you will probably need to undo all the changes you made above. Change everything back to how you found it in Step 3 above.
 
 (Thanks to @Graham Kendall for doing all the testing and documentation of the above!)
-
