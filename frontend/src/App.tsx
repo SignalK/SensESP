@@ -126,14 +126,12 @@ export function App(): JSX.Element {
   return (
     <>
       <RestartRequiredProvider>
-        <>
-          <NavPathContext.Provider value={navPath}>
-            <Header routes={routes} />
-          </NavPathContext.Provider>
-          {routes.length === 0 ? null : (
-            <Router onChange={handleRouteChange}>{routeComponents}</Router>
-          )}
-        </>
+        <NavPathContext.Provider value={navPath}>
+          <Header routes={routes} />
+        </NavPathContext.Provider>
+        {routes.length === 0 ? null : (
+          <Router onChange={handleRouteChange}>{routeComponents}</Router>
+        )}
       </RestartRequiredProvider>
     </>
   );

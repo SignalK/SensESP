@@ -69,12 +69,12 @@ function SystemSettingsCard({
   children,
 }: SystemSettingsCardProps): JSX.Element {
   const [saving, setSaving] = useState<boolean>(false);
+  const { restartRequired, setRestartRequired } =
+    useContext<RestartRequiredContextProps>(RestartRequiredContext);
 
   const id = useId();
 
   async function handleSave(e: MouseEvent): Promise<void> {
-    const { restartRequired, setRestartRequired } =
-      useContext<RestartRequiredContextProps>(RestartRequiredContext);
     e.preventDefault();
     setSaving(true);
     await handleSaveData();
@@ -126,6 +126,8 @@ function DeviceNameCard(): JSX.Element {
   const [origData, setOrigData] = useState<JsonObject>({});
   const [data, setData] = useState<JsonObject>({});
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const { restartRequired, setRestartRequired } =
+    useContext<RestartRequiredContextProps>(RestartRequiredContext);
 
   const id = useId();
 
@@ -141,9 +143,6 @@ function DeviceNameCard(): JSX.Element {
   };
 
   async function handleSaveData(): Promise<void> {
-    const { restartRequired, setRestartRequired } =
-      useContext<RestartRequiredContextProps>(RestartRequiredContext);
-
     const success = await saveConfigData(
       configPath,
       JSON.stringify(data),
@@ -199,6 +198,9 @@ function AuthCard(): JSX.Element {
   const [origData, setOrigData] = useState<JsonObject>({});
   const [data, setData] = useState<JsonObject>({});
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const { restartRequired, setRestartRequired } =
+    useContext<RestartRequiredContextProps>(RestartRequiredContext);
+
   const id = useId();
 
   const configPath = "/system/httpserver";
@@ -221,9 +223,6 @@ function AuthCard(): JSX.Element {
   }, []);
 
   async function handleSaveData(): Promise<void> {
-    const { restartRequired, setRestartRequired } =
-      useContext<RestartRequiredContextProps>(RestartRequiredContext);
-
     const success = await saveConfigData(
       configPath,
       JSON.stringify(data),
@@ -355,7 +354,9 @@ function RestartCard(): JSX.Element {
       <ToastMessage
         color="text-bg-warning"
         show={showRestartToast}
-        onHide={() => {setShowRestartToast(false)}}
+        onHide={() => {
+          setShowRestartToast(false);
+        }}
       >
         <p>Restarting the device...</p>
       </ToastMessage>
