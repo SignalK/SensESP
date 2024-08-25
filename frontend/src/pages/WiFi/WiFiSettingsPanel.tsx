@@ -1,4 +1,7 @@
-import { RestartRequiredContext } from "common/RestartRequiredContext";
+import {
+  RestartRequiredContext,
+  RestartRequiredContextProps,
+} from "common/RestartRequiredContext";
 import { fetchConfigData, saveConfigData } from "common/configAPIClient";
 import { JsonValue } from "common/jsonTypes";
 import { CollapseCard } from "components/Card";
@@ -28,6 +31,8 @@ export function WiFiSettingsPanel(): JSX.Element {
     new WiFiSettingsConfig(),
   );
   const [errorText, setErrorText] = useState("");
+  const { restartRequired, setRestartRequired } =
+    useContext<RestartRequiredContextProps>(RestartRequiredContext);
 
   const id = useId();
 
@@ -36,9 +41,6 @@ export function WiFiSettingsPanel(): JSX.Element {
   }
 
   async function handleSave(): Promise<void> {
-    const { restartRequired, setRestartRequired } = useContext(
-      RestartRequiredContext,
-    );
     try {
       await saveConfigData(
         "/System/WiFi Settings",

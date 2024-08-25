@@ -1,4 +1,4 @@
-import { createContext, JSX } from "preact";
+import { createContext } from "preact";
 import { useState } from "preact/hooks";
 
 export interface RestartRequiredContextProps {
@@ -6,17 +6,14 @@ export interface RestartRequiredContextProps {
   setRestartRequired: (value: boolean) => void;
 }
 
-export const RestartRequiredContext = createContext<RestartRequiredContextProps>({
-  restartRequired: false,
-  setRestartRequired: () => {},
-});
+export const RestartRequiredContext =
+  createContext<RestartRequiredContextProps>({
+    restartRequired: false,
+    setRestartRequired: () => {},
+  });
 
-export const RestartRequiredProvider = ({
-  children,
-}: {
-  children: JSX.Element;
-}) => {
-  const [restartRequired, setRestartRequired] = useState<boolean>(false);
+export const RestartRequiredProvider = ({ children }) => {
+  const [restartRequired, setRestartRequired] = useState(false);
 
   return (
     <RestartRequiredContext.Provider
