@@ -23,7 +23,11 @@ export function Collapse({
   useEffect(() => {
     const collapseEl = document.getElementById(id) ?? "";
     const bsCollapse = new BSCollapse(collapseEl, { toggle: false });
-    expanded ? bsCollapse.show() : bsCollapse.hide();
+    if (expanded) {
+      bsCollapse.show();
+    } else {
+      bsCollapse.hide();
+    }
   });
 
   return (

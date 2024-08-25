@@ -94,6 +94,7 @@ export function FormCheckboxInput(props: FormCheckboxInputProps): JSX.Element {
         id={id}
         checked={props.checked}
         disabled={props.readOnly}
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onChange={(e) => props.setValue(!props.checked)}
       />
       <label className="form-check-label" htmlFor={id}>

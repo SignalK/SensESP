@@ -30,8 +30,6 @@ export function SystemPage(): JSX.Element {
 }
 
 function SystemCards(): JSX.Element {
-  const id = useId();
-
   return (
     <div className="vstack gap-4">
       <DeviceNameCard />
@@ -69,10 +67,9 @@ function SystemSettingsCard({
   children,
 }: SystemSettingsCardProps): JSX.Element {
   const [saving, setSaving] = useState<boolean>(false);
-  const { restartRequired, setRestartRequired } =
-    useContext<RestartRequiredContextProps>(RestartRequiredContext);
-
-  const id = useId();
+  const { setRestartRequired } = useContext<RestartRequiredContextProps>(
+    RestartRequiredContext,
+  );
 
   async function handleSave(e: MouseEvent): Promise<void> {
     e.preventDefault();
@@ -126,10 +123,9 @@ function DeviceNameCard(): JSX.Element {
   const [origData, setOrigData] = useState<JsonObject>({});
   const [data, setData] = useState<JsonObject>({});
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const { restartRequired, setRestartRequired } =
-    useContext<RestartRequiredContextProps>(RestartRequiredContext);
-
-  const id = useId();
+  const { setRestartRequired } = useContext<RestartRequiredContextProps>(
+    RestartRequiredContext,
+  );
 
   const configPath = "/system/hostname";
 
@@ -198,8 +194,9 @@ function AuthCard(): JSX.Element {
   const [origData, setOrigData] = useState<JsonObject>({});
   const [data, setData] = useState<JsonObject>({});
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const { restartRequired, setRestartRequired } =
-    useContext<RestartRequiredContextProps>(RestartRequiredContext);
+  const { setRestartRequired } = useContext<RestartRequiredContextProps>(
+    RestartRequiredContext,
+  );
 
   const id = useId();
 
@@ -320,8 +317,6 @@ function RestartCard(): JSX.Element {
   const [httpErrorText, setHttpErrorText] = useState("");
   const [showRestartToast, setShowRestartToast] = useState(false);
 
-  const id = useId();
-
   async function handleRestart(): Promise<void> {
     console.log("Restarting the device");
 
@@ -383,8 +378,6 @@ function RestartCard(): JSX.Element {
  */
 function ResetCard(): JSX.Element {
   const [httpErrorText, setHttpErrorText] = useState("");
-
-  const id = useId();
 
   async function handleReset(): Promise<void> {
     console.log("Resetting the device");

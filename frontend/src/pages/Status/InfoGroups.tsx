@@ -1,7 +1,7 @@
 import { ToastMessage } from "components/ToastMessage";
 import { APP_CONFIG } from "config";
 import { type JSX } from "preact";
-import { useEffect, useId, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { InfoGroup, type InfoItemData } from "./InfoGroup";
 
 async function updateGroups(): Promise<Map<string, InfoItemData[]>> {
@@ -12,7 +12,7 @@ async function updateGroups(): Promise<Map<string, InfoItemData[]>> {
   const data = await response.json();
 
   // Make data an array of InfoItemData objects
-  const infoItems = data.map((item: Record<string, any>) => {
+  const infoItems = data.map((item: Record<string, unknown>) => {
     return {
       name: item.name,
       value: item.value,
@@ -40,8 +40,6 @@ async function updateGroups(): Promise<Map<string, InfoItemData[]>> {
 export function InfoGroups(): JSX.Element {
   const [groups, setGroups] = useState<Map<string, InfoItemData[]>>(new Map());
   const [errorText, setErrorText] = useState("");
-
-  const id = useId();
 
   async function timerFunc(): Promise<void> {
     // fetch updated group items from server

@@ -30,13 +30,19 @@ type HeaderProps = {
 };
 
 export function Header({ routes }: HeaderProps): JSX.Element {
-  const { restartRequired, setRestartRequired } =
-    useContext<RestartRequiredContextProps>(RestartRequiredContext);
+  const { restartRequired } = useContext<RestartRequiredContextProps>(
+    RestartRequiredContext,
+  );
   const [showToast, setShowToast] = useState(false);
 
   async function handleRestart(e: MouseEvent): Promise<void> {
     e.preventDefault();
     const response = await fetch("/api/device/restart", { method: "POST" });
+    if (!response.ok) {
+      throw new Error(
+        `HTTP Error ${response.status} ${response.statusText}: ${await response.text()}`,
+      );
+    }
     setShowToast(true);
     // Wait for the device to restart and then reload the page.
     setTimeout(() => {

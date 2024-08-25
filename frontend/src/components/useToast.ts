@@ -8,7 +8,6 @@ interface useToastProps {
 }
 
 export default function useToast({ autohide, delay, onHide }: useToastProps) {
-
   const [isVisible, setIsVisible] = useState(false);
 
   const toastRef = useRef<HTMLDivElement>(null);
@@ -35,5 +34,5 @@ export default function useToast({ autohide, delay, onHide }: useToastProps) {
     setIsVisible(false);
   };
 
-  return {toastRef, showToast, hideToast};
+  return { toastRef, showToast, hideToast };
 }

@@ -45,11 +45,9 @@ export function EditControl({
   value,
   setValue,
 }: EditControlProps): JSX.Element {
-  let step: number | undefined;
-  let as: string | undefined;
   let checked: boolean = false;
 
-  let valueString = String(value);
+  const valueString = String(value);
 
   switch (schema.type) {
     case "string":
@@ -159,6 +157,7 @@ export function EditControl({
           try {
             return JSON.parse(value);
           } catch (e) {
+            console.log("Error parsing JSON", e);
             return null;
           }
         };
@@ -209,8 +208,9 @@ interface ConfigCardProps {
 }
 
 export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
-  const { restartRequired, setRestartRequired } =
-    useContext<RestartRequiredContextProps>(RestartRequiredContext);
+  const { setRestartRequired } = useContext<RestartRequiredContextProps>(
+    RestartRequiredContext,
+  );
 
   const [config, setConfig] = useState<JsonObject>({});
   const [schema, setSchema] = useState<JsonObject | null>({});
@@ -342,7 +342,6 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         return;
       } else {
         if (response.status === 202) {
-          const data = await response.json();
           // poll URL is the current URL with ?result appended
           const pollUrl = new URL(response.url);
           pollUrl.searchParams.append("poll_put_result", "");
@@ -427,7 +426,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
           </div>
           <div className="d-flex justify-content-begin">
             <button
-              class="btn btn-primary me-2"
+              className="btn btn-primary me-2"
               type="submit"
               disabled={saving || !isDirty || !isValid}
               onClick={(e: MouseEvent): void => {
@@ -435,12 +434,12 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
                 void handleSave(e);
               }}
             >
-              <span class="me-1" role="status">
+              <span className="me-1" role="status">
                 {saving ? "Saving..." : "Save"}
               </span>
               {saving && (
                 <span
-                  class="spinner-border spinner-border-sm"
+                  className="spinner-border spinner-border-sm"
                   aria-hidden="true"
                 ></span>
               )}

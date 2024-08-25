@@ -1,10 +1,10 @@
+import { JsonValue } from "common/jsonTypes";
 import { Collapse } from "components/Collapse";
-import { FormCheck, FormCheckboxInput, FormTextInput } from "components/Form";
+import { FormCheckboxInput, FormTextInput } from "components/Form";
 import { produce } from "immer";
 import { type JSX } from "preact";
 import { useId } from "preact/hooks";
 import { type ISingleClientConfig } from "./WiFiSettingsConfig";
-import { JsonValue } from "common/jsonTypes";
 
 interface SingleClientConfigPanelProps {
   config: ISingleClientConfig;
@@ -88,7 +88,6 @@ function StaticIPConfig({
   config,
   updateConfigField,
 }: StaticIPConfigProps): JSX.Element {
-  const id = useId();
   return (
     <div>
       <FormTextInput

@@ -40,7 +40,7 @@ interface RedirectProps {
   to: string;
 }
 
-function Redirect({ path, to }: RedirectProps): JSX.Element {
+function Redirect({ to }: RedirectProps): JSX.Element {
   useEffect(() => {
     route(to);
     // Also update the browser URL
@@ -61,7 +61,7 @@ export function App(): JSX.Element {
       const data = await res.json();
       setRoutes(data);
 
-      let populatedRoutes: RouteInstruction[] = [];
+      const populatedRoutes: RouteInstruction[] = [];
       for (const route of data) {
         if (route.loadPath) {
           const remoteInfo = {

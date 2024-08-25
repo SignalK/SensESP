@@ -7,5 +7,5 @@ export interface InputDirtyContextType {
 
 export const InputDirtyContext = createContext<InputDirtyContextType>({
   isInputDirty: false,
-  setInputDirty: (v) => {},
+  setInputDirty: () => {},
 });
