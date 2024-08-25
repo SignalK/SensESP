@@ -19,7 +19,7 @@ export function TabItem({
   return (
     <li className="nav-item">
       <button
-        className={`nav-link${active ?? false ? " active" : ""}`}
+        className={`nav-link${(active ?? false) ? " active" : ""}`}
         id={id}
         type="button"
         data-bs-toggle="tab"
@@ -42,7 +42,7 @@ interface TabPanelProps {
 function TabPanel({ id, active, children }: TabPanelProps): JSX.Element {
   return (
     <div
-      className={`tab-pane fade${active ?? false ? " show active" : ""}`}
+      className={`tab-pane fade${(active ?? false) ? " show active" : ""}`}
       id={id}
       role="tabpanel"
     >

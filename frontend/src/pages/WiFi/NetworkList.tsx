@@ -31,7 +31,6 @@ export function NetworkList({
     if (response.status !== 202) {
       throw new Error(`HTTP Error ${response.status} ${response.statusText}`);
     }
-    const data = await response.text();
     setIsScanning(true);
     setTimeout(getScannedWiFiNetworks, 1000);
   }

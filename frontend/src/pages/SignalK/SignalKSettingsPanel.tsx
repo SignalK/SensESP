@@ -12,8 +12,6 @@ export function SignalKSettingsPanel(): JSX.Element {
   const [config, setConfig] = useState({});
   const [errorText, setErrorText] = useState("");
 
-  const id = useId();
-
   async function handleSave(): Promise<void> {
     try {
       await saveConfigData(CONFIG_PATH, JSON.stringify(config), (e: Error) => {

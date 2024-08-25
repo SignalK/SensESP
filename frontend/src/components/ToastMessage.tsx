@@ -19,7 +19,11 @@ export function ToastMessage({
   delay = 5000,
   onHide,
 }: ToastMessageProps): JSX.Element {
-  const {toastRef, showToast, hideToast} = useToast({autohide, delay, onHide});
+  const { toastRef, showToast, hideToast } = useToast({
+    autohide,
+    delay,
+    onHide,
+  });
 
   useEffect(() => {
     if (show) {

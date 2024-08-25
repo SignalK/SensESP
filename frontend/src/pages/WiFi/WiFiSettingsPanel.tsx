@@ -31,14 +31,9 @@ export function WiFiSettingsPanel(): JSX.Element {
     new WiFiSettingsConfig(),
   );
   const [errorText, setErrorText] = useState("");
-  const { restartRequired, setRestartRequired } =
-    useContext<RestartRequiredContextProps>(RestartRequiredContext);
-
-  const id = useId();
-
-  function handleError(e: Error): void {
-    setErrorText(e.message);
-  }
+  const { setRestartRequired } = useContext<RestartRequiredContextProps>(
+    RestartRequiredContext,
+  );
 
   async function handleSave(): Promise<void> {
     try {
