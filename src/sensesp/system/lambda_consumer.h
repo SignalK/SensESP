@@ -1,5 +1,5 @@
-#ifndef _lambda_consumer_H_
-#define _lambda_consumer_H_
+#ifndef SENSESP_SYSTEM_LAMBDA_CONSUMER_H
+#define SENSESP_SYSTEM_LAMBDA_CONSUMER_H
 
 #include "valueconsumer.h"
 

@@ -16,12 +16,13 @@ class OTA {
    * @param password A password to be used for the OTA update.
    */
   OTA(const char* password) : password_{password} {
-    ReactESP::app->onDelay(0, [this]() {
+    reactesp::ReactESP::app->onDelay(0, [this]() {
       ArduinoOTA.setPassword(password_);
       ArduinoOTA.onStart([]() { ESP_LOGW(__FILENAME__, "Starting OTA"); });
       ArduinoOTA.onEnd([]() { ESP_LOGW(__FILENAME__, "OTA End"); });
       ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-        ESP_LOGI(__FILENAME__, "OTA Progress: %u%%\r", (progress / (total / 100)));
+        ESP_LOGI(__FILENAME__, "OTA Progress: %u%%\r",
+                 (progress / (total / 100)));
       });
       ArduinoOTA.onError([](ota_error_t error) {
         ESP_LOGE(__FILENAME__, "OTA Error[%u]: ", error);
@@ -38,7 +39,7 @@ class OTA {
         }
       });
       ArduinoOTA.begin();
-      ReactESP::app->onRepeat(20, OTA::handle_ota);
+      reactesp::ReactESP::app->onRepeat(20, OTA::handle_ota);
     });
   }
 

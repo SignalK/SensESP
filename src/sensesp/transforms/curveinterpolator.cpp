@@ -4,7 +4,7 @@
 
 namespace sensesp {
 
-CurveInterpolator::Sample::Sample() {}
+CurveInterpolator::Sample::Sample() = default;
 
 CurveInterpolator::Sample::Sample(float input, float output)
     : input{input}, output{output} {}
@@ -21,7 +21,7 @@ CurveInterpolator::Sample::Sample(JsonObject& obj)
  * @param output_title Display name for the output sample values
  */
 CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
-                                     String config_path)
+                                     const String& config_path)
     : FloatTransform(config_path) {
   // Load default values if no configuration present...
   if (defaults != NULL) {
@@ -33,67 +33,68 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
 }
 
 void CurveInterpolator::set(const float& input) {
-    if (samples_.empty()) {
-        output = 0;  // or any default output if no samples are available
-        notify();
-        return;
-    }
-
-    std::set<Sample>::iterator it = samples_.begin();
-    float x0 = it->input;
-    float y0 = it->output;
-
-    // Check if the input is below the lowest sample point
-    if (input < x0) {
-        // Need to extrapolate below the first point
-        if (samples_.size() > 1) {
-            auto second_it = std::next(it);
-            float x1 = second_it->input;
-            float y1 = second_it->output;
-            float gradient = (y1 - y0) / (x1 - x0);
-
-            output = y0 + gradient * (input - x0);  // Extrapolate using the first segment's gradient
-        } else {
-            output = y0;  // Only one sample, output its value
-        }
-        notify();
-        return;
-    }
-
-    // Search for the correct interval or the last sample point
-    while (it != samples_.end()) {
-        if (input > it->input) {
-            x0 = it->input;
-            y0 = it->output;
-            ++it;
-        } else {
-            break;
-        }
-    }
-
-    // Interpolate or extrapolate above the highest point
-    if (it != samples_.end()) {
-        float x1 = it->input;
-        float y1 = it->output;
-        output = (y0 * (x1 - input) + y1 * (input - x0)) / (x1 - x0);
-    } else {
-        // Hit the end of the table with no match, calculate output using the gradient from the last two points
-        auto last = samples_.rbegin();
-        auto second_last = std::next(last);
-        float x1 = last->input;
-        float y1 = last->output;
-        float x2 = second_last->input;
-        float y2 = second_last->output;
-        float gradient = (y1 - y2) / (x1 - x2);
-
-        // Extrapolate using the gradient
-        output = y1 + gradient * (input - x1);
-    }
-
+  if (samples_.empty()) {
+    output = 0;  // or any default output if no samples are available
     notify();
+    return;
+  }
+
+  std::set<Sample>::iterator it = samples_.begin();
+  float x0 = it->input;
+  float y0 = it->output;
+
+  // Check if the input is below the lowest sample point
+  if (input < x0) {
+    // Need to extrapolate below the first point
+    if (samples_.size() > 1) {
+      auto second_it = std::next(it);
+      float x1 = second_it->input;
+      float y1 = second_it->output;
+      float const gradient = (y1 - y0) / (x1 - x0);
+
+      output = y0 + gradient *
+                        (input -
+                         x0);  // Extrapolate using the first segment's gradient
+    } else {
+      output = y0;  // Only one sample, output its value
+    }
+    notify();
+    return;
+  }
+
+  // Search for the correct interval or the last sample point
+  while (it != samples_.end()) {
+    if (input > it->input) {
+      x0 = it->input;
+      y0 = it->output;
+      ++it;
+    } else {
+      break;
+    }
+  }
+
+  // Interpolate or extrapolate above the highest point
+  if (it != samples_.end()) {
+    float x1 = it->input;
+    float y1 = it->output;
+    output = (y0 * (x1 - input) + y1 * (input - x0)) / (x1 - x0);
+  } else {
+    // Hit the end of the table with no match, calculate output using the
+    // gradient from the last two points
+    auto last = samples_.rbegin();
+    auto second_last = std::next(last);
+    float x1 = last->input;
+    float y1 = last->output;
+    float x2 = second_last->input;
+    float y2 = second_last->output;
+    float const gradient = (y1 - y2) / (x1 - x2);
+
+    // Extrapolate using the gradient
+    output = y1 + gradient * (input - x1);
+  }
+
+  notify();
 }
-
-
 
 void CurveInterpolator::get_configuration(JsonObject& root) {
   JsonArray json_samples = root["samples"].to<JsonArray>();
@@ -109,7 +110,7 @@ void CurveInterpolator::get_configuration(JsonObject& root) {
   }
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char kSchema[] PROGMEM = R"({
     "type": "object",
     "properties": {
         "samples": { "title": "Sample values",
@@ -126,14 +127,14 @@ static const char SCHEMA[] PROGMEM = R"({
   })";
 
 String CurveInterpolator::get_config_schema() {
-  char buf[sizeof(SCHEMA) + 160];
-  snprintf_P(buf, sizeof(buf), SCHEMA, input_title_.c_str(),
+  char buf[sizeof(kSchema) + 160];
+  snprintf_P(buf, sizeof(buf), kSchema, input_title_.c_str(),
              output_title_.c_str());
-  return String(buf);
+  return {buf};
 }
 
 bool CurveInterpolator::set_configuration(const JsonObject& config) {
-  String expected[] = {"samples"};
+  String const expected[] = {"samples"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       ESP_LOGE(
@@ -161,7 +162,7 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
 void CurveInterpolator::clear_samples() { samples_.clear(); }
 
 void CurveInterpolator::add_sample(const Sample& sample) {
-  Sample* sample_copy = new Sample(sample);
+  auto* sample_copy = new Sample(sample);
   samples_.insert(*sample_copy);
 }
 

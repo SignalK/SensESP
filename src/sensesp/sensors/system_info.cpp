@@ -26,7 +26,7 @@ void SystemHz::update() {
 
 void FreeMem::update() { this->emit(ESP.getFreeHeap()); }
 
-void Uptime::update() { this->emit(millis() / 1000.); }
+void Uptime::update() { this->emit(static_cast<double>(millis()) / 1000.); }
 
 void IPAddrDev::update() { this->emit(WiFi.localIP().toString()); }
 

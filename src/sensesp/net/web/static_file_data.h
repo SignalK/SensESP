@@ -14,6 +14,6 @@ struct StaticFileData {
   const char* content_encoding;
 };
 
-} // namespace sensesp
+}  // namespace sensesp
 
 #endif  // SENSESP_NET_WEB_STATIC_PAGE_DATA_H

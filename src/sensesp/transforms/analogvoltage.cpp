@@ -3,7 +3,7 @@
 namespace sensesp {
 
 AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
-                             String config_path)
+                             const String& config_path)
     : FloatTransform(config_path),
       max_voltage_{max_voltage},
       multiplier_{multiplier},
@@ -22,7 +22,7 @@ void AnalogVoltage::get_configuration(JsonObject& root) {
   root["offset"] = offset_;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char kSchema[] = R"({
     "type": "object",
     "properties": {
         "max_voltage": { "title": "Max voltage", "type": "number", "description": "The maximum voltage allowed into your ESP's Analog Input pin" },
@@ -31,10 +31,10 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String AnalogVoltage::get_config_schema() { return FPSTR(SCHEMA); }
+String AnalogVoltage::get_config_schema() { return kSchema; }
 
 bool AnalogVoltage::set_configuration(const JsonObject& config) {
-  String expected[] = {"max_voltage", "multiplier", "offset"};
+  const String expected[] = {"max_voltage", "multiplier", "offset"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

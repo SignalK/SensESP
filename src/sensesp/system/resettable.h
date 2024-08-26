@@ -1,5 +1,5 @@
-#ifndef _resettable_H_
-#define _resettable_H_
+#ifndef SENSESP_SYSTEM_RESETTABLE_H_
+#define SENSESP_SYSTEM_RESETTABLE_H_
 
 #include <queue>
 

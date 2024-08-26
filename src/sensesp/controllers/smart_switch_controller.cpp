@@ -22,7 +22,7 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
 
   // Emit the initial state once the event loop starts
   if (auto_initialize_) {
-    ReactESP::app->onDelay(0, [this]() { this->emit(is_on); });
+    reactesp::ReactESP::app->onDelay(0, [this]() { this->emit(is_on); });
   }
 }
 

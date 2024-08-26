@@ -1,14 +1,14 @@
-#ifndef SENSESP_SRC_SENSESP_SYSTEM_EXPIRING_VALUE_H_
-#define SENSESP_SRC_SENSESP_SYSTEM_EXPIRING_VALUE_H_
+#ifndef SENSESP_SYSTEM_EXPIRING_VALUE_H_
+#define SENSESP_SYSTEM_EXPIRING_VALUE_H_
 
 namespace sensesp {
 
 /**
  * @brief Value container that keeps track of its expiration time.
  *
- * The value is considered expired if the time since the last update is greater
- * than the expiration duration. When expired, the value is replaced with an
- * expiration placeholder value.
+ * The value is considered expired if the time since the last update is
+ * greater than the expiration duration. When expired, the value is replaced
+ * with an expiration placeholder value.
  *
  * @tparam T
  */

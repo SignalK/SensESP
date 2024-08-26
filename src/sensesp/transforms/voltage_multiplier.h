@@ -1,5 +1,5 @@
 #ifndef _voltage_multiplier_H
-#define _voltage_multiplier_H
+#define voltage_multiplier_H
 
 #include "transform.h"
 
@@ -29,14 +29,14 @@ namespace sensesp {
  */
 class VoltageMultiplier : public FloatTransform {
  public:
-  VoltageMultiplier(uint16_t R1, uint16_t R2, String config_path = "");
+  VoltageMultiplier(uint16_t R1, uint16_t R2, const String& config_path = "");
 
   virtual void set(const float& input);
 
  private:
-  uint16_t R1_;
-  uint16_t R2_;
-  virtual void get_configuration(JsonObject& doc) override;
+  uint16_t R1_{};
+  uint16_t R2_{};
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };

@@ -1,5 +1,5 @@
-#ifndef _sensesp_base_app_H_
-#define _sensesp_base_app_H_
+#ifndef SENSESP_BASE_APP_H_
+#define SENSESP_BASE_APP_H_
 
 #ifndef SENSESP_BUTTON_PIN
 // Default button pin is 0 (GPIO0), normally connected to the BOOT button
@@ -70,7 +70,7 @@ class SensESPBaseApp {
 
   static SensESPBaseApp* instance_;
 
-  PersistingObservableValue<String>* hostname_;
+  PersistingObservableValue<String>* hostname_{};
 
   Filesystem* filesystem_;
 

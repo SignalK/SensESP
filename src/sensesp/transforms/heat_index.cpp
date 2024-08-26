@@ -6,15 +6,17 @@ namespace sensesp {
 
 HeatIndexTemperature::HeatIndexTemperature() : FloatTransform() {}
 
-void HeatIndexTemperature::set(const float& input) {
+void HeatIndexTemperature::set(const float& /*input*/) {
   // The following equation approximate the heat index
   // using both Steadman's and Rothfusz equations
   // See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3801457/
   // Algorithm 1 (table 1) (algorithm in figure 3)
 
-  float temp_fahrenheit = 1.8 * (inputs[0] - 273.15) +
-                          32;  // dry-bulb temperature in degrees fahrenheit
-  float relative_humidity = inputs[1] * 100;  // relative humidity in percent
+  float const temp_fahrenheit =
+      1.8 * (inputs[0] - 273.15) +
+      32;  // dry-bulb temperature in degrees fahrenheit
+  float const relative_humidity =
+      inputs[1] * 100;  // relative humidity in percent
 
   // step 1: if temperature is less than 40°F then heat index temperature is
   // dry bulb temperature.
@@ -30,15 +32,15 @@ void HeatIndexTemperature::set(const float& input) {
     if (heat_index_temperature > 79) {
       // step 3: calculate heat index temperature for other temperatures
       // Coefficients for temperature in Fahrenheit
-      const double c1 = -42.379;
-      const double c2 = 2.04901523;
-      const double c3 = 10.14333127;
-      const double c4 = -0.22475541;
-      const double c5 = -0.00683783;
-      const double c6 = -0.05481717;
-      const double c7 = 0.00122874;
-      const double c8 = 0.00085282;
-      const double c9 = -0.00000199;
+      const float c1 = -42.379;
+      const float c2 = 2.04901523;
+      const float c3 = 10.14333127;
+      const float c4 = -0.22475541;
+      const float c5 = -0.00683783;
+      const float c6 = -0.05481717;
+      const float c7 = 0.00122874;
+      const float c8 = 0.00085282;
+      const float c9 = -0.00000199;
 
       // equation for heat index
       float heat_index_temperature =
@@ -78,7 +80,8 @@ void HeatIndexTemperature::set(const float& input) {
 HeatIndexEffect::HeatIndexEffect() : Transform<float, String>() {}
 
 void HeatIndexEffect::set(const float& input) {
-  float heat_index_temperature = input - 273.15;  // celsius = kelvin - 273.15
+  const float heat_index_temperature =
+      input - 273.15;  // celsius = kelvin - 273.15
   String heat_index_effect = "";
   if (heat_index_temperature > 54) {
     heat_index_effect = "Extreme danger";

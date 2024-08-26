@@ -1,5 +1,5 @@
 #ifndef _median_H_
-#define _median_H_
+#define median_H_
 
 #include <vector>
 
@@ -19,14 +19,14 @@ namespace sensesp {
  */
 class Median : public FloatTransform {
  public:
-  Median(unsigned int sample_size = 10, String config_path = "");
+  Median(unsigned int sample_size = 10, const String& config_path = "");
   virtual void set(const float& input) override;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
  private:
-  std::vector<float> buf_;
+  std::vector<float> buf_{};
   unsigned int sample_size_;
 };
 

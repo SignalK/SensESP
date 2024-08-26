@@ -12,22 +12,20 @@ namespace sensesp {
  */
 template <typename T>
 class Filter : public Transform<T, T> {
-  public:
-    Filter(std::function<bool(const T&)> filter, String config_path = "")
-        : Transform<T, T>(config_path), filter_{filter} {
-      this->load_configuration();
+ public:
+  Filter(std::function<bool(const T&)> filter, String config_path = "")
+      : Transform<T, T>(config_path), filter_{filter} {
+    this->load_configuration();
+  }
+  virtual void set(const T& new_value) override {
+    if (filter_(new_value)) {
+      this->emit(new_value);
     }
-    virtual void set(const T& new_value) override {
-      if (filter_(new_value)) {
-        this->emit(new_value);
-      }
-    }
+  }
 
-  private:
-    std::function<bool(const T&)> filter_;
-
+ private:
+  std::function<bool(const T&)> filter_;
 };
-
 
 }  // namespace sensesp
 

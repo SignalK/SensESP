@@ -1,5 +1,5 @@
 #ifndef _press_repeater_H_
-#define _press_repeater_H_
+#define press_repeater_H_
 
 #include <elapsedMillis.h>
 
@@ -12,6 +12,7 @@ namespace sensesp {
 /**
  * @brief A transform that takes boolean inputs and adds
  * button behaviors familiar to many device end users.
+ * Deprecated: use AceButton for button inputs.
  *
  * It emits a value only when the state of the input changes
  * (i.e. when the input changes from TRUE to FALSE, and vice versa).
@@ -38,15 +39,18 @@ namespace sensesp {
  * @param repeat_interval How often to repeat the repeated output, in ms.
  * The default is 250.
  */
-class PressRepeater : public BooleanTransform, public IntConsumer {
+class [[deprecated(
+    "PressRepeater is deprecated. Please use AceButton "
+    "instead.")]] PressRepeater : public BooleanTransform,
+                                  public IntConsumer {
  public:
-  PressRepeater(String config_path = "", int integer_false = 0,
+  PressRepeater(const String& config_path = "", int integer_false = 0,
                 int repeat_start_interval = 1500, int repeat_interval = 250);
 
   virtual void set(const bool& new_value) override;
   virtual void set(const int& new_value) override;
 
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

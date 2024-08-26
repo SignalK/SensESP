@@ -32,9 +32,8 @@ int ws_disconnected_pattern[] = {50, 50, 50, 50, 50, 50, 50, 650, PATTERN_END};
 // PATTERN: ****____
 int ws_authorizing_pattern[] = {200, 200, PATTERN_END};
 
-SystemStatusLed::SystemStatusLed(int pin) {
-  blinker_ = new PatternBlinker(pin, no_ap_pattern);
-}
+SystemStatusLed::SystemStatusLed(int pin)
+    : blinker_(new PatternBlinker(pin, no_ap_pattern)) {}
 
 void SystemStatusLed::set_wifi_no_ap() { blinker_->set_pattern(no_ap_pattern); }
 void SystemStatusLed::set_wifi_disconnected() {
@@ -82,6 +81,6 @@ void SystemStatusLed::set(const SystemStatus& new_value) {
   }
 }
 
-void SystemStatusLed::set(const int& new_value) { blinker_->blip(); }
+void SystemStatusLed::set(const int& /*new_value*/) { blinker_->blip(); }
 
 }  // namespace sensesp

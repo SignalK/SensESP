@@ -1,5 +1,5 @@
-#ifndef SENSESP_SRC_UI_CONTROLS_H_
-#define SENSESP_SRC_UI_CONTROLS_H_
+#ifndef USERS_MAIRAS_SRC_SIGNALK_SENSESP_SRC_SENSESP_UI_UI_CONTROLS_H
+#define USERS_MAIRAS_SRC_SIGNALK_SENSESP_SRC_SENSESP_UI_UI_CONTROLS_H
 
 #include "sensesp.h"
 
@@ -94,4 +94,4 @@ class SelectConfig : public Configurable {
 
 }  // namespace sensesp
 
-#endif  // SENSESP_SRC_UI_CONTROLS_H_
+#endif  // USERS_MAIRAS_SRC_SIGNALK_SENSESP_SRC_SENSESP_UI_UI_CONTROLS_H

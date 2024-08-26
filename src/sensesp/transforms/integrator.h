@@ -1,5 +1,5 @@
 #ifndef _integrator_H_
-#define _integrator_H_
+#define integrator_H_
 
 #include "transform.h"
 

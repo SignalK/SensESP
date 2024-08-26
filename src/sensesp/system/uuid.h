@@ -1,5 +1,5 @@
-#ifndef _uuid_H_
-#define _uuid_H_
+#ifndef SENSESP_SYSTEM_UUID_H
+#define SENSESP_SYSTEM_UUID_H
 
 #include "Arduino.h"
 

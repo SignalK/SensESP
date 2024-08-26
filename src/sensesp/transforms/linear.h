@@ -1,5 +1,5 @@
 #ifndef _linear_H_
-#define _linear_H_
+#define linear_H_
 
 #include "lambda_transform.h"
 
@@ -17,7 +17,7 @@ namespace sensesp {
  **/
 class Linear : public LambdaTransform<float, float, float, float> {
  public:
-  Linear(float multiplier, float offset, String config_path = "");
+  Linear(float multiplier, float offset, const String& config_path = "");
 
  private:
   static float (*function_)(float, float, float);

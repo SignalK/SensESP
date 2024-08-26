@@ -1,5 +1,5 @@
 #ifndef _hysteresis_H_
-#define _hysteresis_H_
+#define hysteresis_H_
 
 #include "lambda_transform.h"
 

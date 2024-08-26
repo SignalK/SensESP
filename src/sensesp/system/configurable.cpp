@@ -24,8 +24,9 @@ Configurable::Configurable(String config_path, String description,
 }
 
 // Sets and saves the configuration
-bool Configurable::set_configuration(const JsonObject& config) {
-  ESP_LOGW(__FILENAME__, "WARNING: set_configuration not defined for this Class");
+bool Configurable::set_configuration(const JsonObject& /*config*/) {
+  ESP_LOGW(__FILENAME__,
+           "WARNING: set_configuration not defined for this Class");
   return false;
 }
 
@@ -65,14 +66,14 @@ void Configurable::load_configuration() {
   }
 
   File f = SPIFFS.open(*filename, "r");
-  JsonDocument jsonDoc;
-  auto error = deserializeJson(jsonDoc, f);
+  JsonDocument json_doc;
+  auto error = deserializeJson(json_doc, f);
   if (error) {
     ESP_LOGW(__FILENAME__, "WARNING: Could not parse configuration for %s",
              config_path_.c_str());
     return;
   }  //
-  if (!set_configuration(jsonDoc.as<JsonObject>())) {
+  if (!set_configuration(json_doc.as<JsonObject>())) {
     ESP_LOGW(__FILENAME__, "WARNING: Could not set configuration for %s",
              config_path_.c_str());
   }
@@ -95,8 +96,8 @@ void Configurable::save_configuration() {
   ESP_LOGD(__FILENAME__, "Saving configuration path %s to file %s",
            config_path_.c_str(), hash_path.c_str());
 
-  JsonDocument jsonDoc;
-  JsonObject obj = jsonDoc["root"].to<JsonObject>();
+  JsonDocument json_doc;
+  JsonObject obj = json_doc["root"].to<JsonObject>();
   get_configuration(obj);
   File f = SPIFFS.open(hash_path, "w");
   serializeJson(obj, f);

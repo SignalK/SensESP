@@ -1,5 +1,5 @@
-#ifndef _heat_index_H_
-#define _heat_index_H_
+#ifndef SENSESP_TRANSFORMS_HEAT_INDEX_H_
+#define SENSESP_TRANSFORMS_HEAT_INDEX_H_
 
 #include "transform.h"
 
@@ -19,7 +19,7 @@ class HeatIndexTemperature : public FloatTransform {
   virtual void set(const float& input) override;
 
  private:
-  float inputs[2];
+  float inputs[2]{};
 };
 
 /**

@@ -1,5 +1,5 @@
-#ifndef _SENSESP_SYSTEM_UI_OUTPUT_H_
-#define _SENSESP_SYSTEM_UI_OUTPUT_H_
+#ifndef SENSESP_SYSTEM_UI_OUTPUT_H
+#define SENSESP_SYSTEM_UI_OUTPUT_H
 
 #warning \
     "This header file has been moved. For future code, use the new location."

@@ -1,5 +1,5 @@
 #ifndef _typecast_H_
-#define _typecast_H_
+#define typecast_H_
 
 #include <functional>
 
@@ -34,7 +34,7 @@ template <typename IN, typename OUT>
 class Typecast : public LambdaTransform<IN, OUT> {
  public:
   Typecast(std::function<OUT(IN)> cast = [](IN input) -> OUT {
-    return (OUT)input;
+    return static_cast<OUT>(input);
   })
       : LambdaTransform<IN, OUT>(cast) {}
 };

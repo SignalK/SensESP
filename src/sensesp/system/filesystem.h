@@ -1,5 +1,5 @@
-#ifndef _filesystem_H_
-#define _filesystem_H_
+#ifndef SENSESP_SYSTEM_FILESYSTEM_H
+#define SENSESP_SYSTEM_FILESYSTEM_H
 
 #include "resettable.h"
 

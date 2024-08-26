@@ -1,5 +1,5 @@
 #ifndef _signalk_putrequestlistener_H_
-#define _signalk_putrequestlistener_H_
+#define signalk_putrequestlistener_H_
 
 #include "sensesp.h"
 
@@ -25,22 +25,22 @@ class SKPutListener : virtual public Observable {
    * @param sk_path The Signal K path that identifies the signal k path
    * this particular listener responds to
    */
-  SKPutListener(String sk_path);
+  SKPutListener(const String& sk_path);
 
   String& get_sk_path() { return sk_path; }
 
   virtual void parse_value(const JsonObject& put) = 0;
 
   static const std::vector<SKPutListener*>& get_listeners() {
-    return listeners;
+    return listeners_;
   }
 
  protected:
-  String sk_path;
+  String sk_path{};
 
  private:
-  static std::vector<SKPutListener*> listeners;
-  int listen_delay;
+  static std::vector<SKPutListener*> listeners_;
+  int listen_delay{};
 };
 
 /**

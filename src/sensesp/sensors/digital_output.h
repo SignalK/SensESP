@@ -1,5 +1,5 @@
-#ifndef _digital_output_H
-#define _digital_output_H
+#ifndef SENSESP_SENSORS_DIGITAL_OUTPUT_H
+#define SENSESP_SENSORS_DIGITAL_OUTPUT_H
 
 #include <ArduinoJson.h>
 

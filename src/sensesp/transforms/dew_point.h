@@ -1,5 +1,5 @@
 #ifndef _dew_point_H_
-#define _dew_point_H_
+#define dew_point_H_
 
 #include "transform.h"
 
@@ -18,7 +18,7 @@ class DewPoint : public FloatTransform {
   virtual void set(const float& input) override;
 
  private:
-  float inputs[2];
+  float inputs[2]{};
 };
 
 }  // namespace sensesp

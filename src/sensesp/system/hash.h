@@ -1,5 +1,5 @@
-#ifndef __SRC_SENSESP_SYSTEM_HASH_H__
-#define __SRC_SENSESP_SYSTEM_HASH_H__
+#ifndef SENSESP_SYSTEM_HASH_H
+#define SENSESP_SYSTEM_HASH_H
 
 #include "sensesp.h"
 

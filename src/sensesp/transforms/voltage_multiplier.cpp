@@ -3,7 +3,7 @@
 namespace sensesp {
 
 VoltageMultiplier::VoltageMultiplier(uint16_t R1, uint16_t R2,
-                                     String config_path)
+                                     const String& config_path)
     : FloatTransform(config_path), R1_{R1}, R2_{R2} {}
 
 void VoltageMultiplier::set(const float& input) {
@@ -16,7 +16,7 @@ void VoltageMultiplier::get_configuration(JsonObject& root) {
   root["R2"] = R2_;
 };
 
-static const char SCHEMA[] PROGMEM = R"###({
+static const char kSchema[] = R"###({
     "type": "object",
     "properties": {
         "R1": { "title": "R1", "type": "number", "description": "The measured value of resistor R1" },
@@ -24,10 +24,10 @@ static const char SCHEMA[] PROGMEM = R"###({
     }
   })###";
 
-String VoltageMultiplier::get_config_schema() { return FPSTR(SCHEMA); }
+String VoltageMultiplier::get_config_schema() { return (kSchema); }
 
 bool VoltageMultiplier::set_configuration(const JsonObject& config) {
-  String expected[] = {"R1", "R2"};
+  String const expected[] = {"R1", "R2"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

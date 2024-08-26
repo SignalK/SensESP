@@ -2,10 +2,10 @@
 
 namespace sensesp {
 
-std::vector<SKEmitter*> SKEmitter::sources;
+std::vector<SKEmitter*> SKEmitter::sources_;
 
-SKEmitter::SKEmitter(String sk_path) : sk_path{sk_path} {
-  sources.push_back(this);
+SKEmitter::SKEmitter(const String& sk_path) : sk_path_{sk_path} {
+  sources_.push_back(this);
 }
 
 void SKEmitter::add_metadata(JsonArray& meta) {

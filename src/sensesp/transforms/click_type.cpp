@@ -4,7 +4,7 @@
 
 namespace sensesp {
 
-ClickType::ClickType(String config_path, uint16_t long_click_delay,
+ClickType::ClickType(const String& config_path, uint16_t long_click_delay,
                      uint16_t double_click_interval,
                      uint16_t ultra_long_click_delay)
     : Transform<bool, ClickTypes>(config_path),
@@ -98,9 +98,9 @@ void ClickType::on_button_release() {
       // SingleClick report, but delay it in case another click comes in prior
       // to the double_click_interval, which would turn this click into a
       // DoubleClick
-      unsigned long time_of_event = millis();
-      long pd = (long)press_duration_;
-      delayed_click_report_ = ReactESP::app->onDelay(
+      uint64_t const time_of_event = millis();
+      int64_t const pd = (long)press_duration_;
+      delayed_click_report_ = reactesp::ReactESP::app->onDelay(
           double_click_interval_ + 20, [this, pd, time_of_event]() {
             ESP_LOGD(
                 __FILENAME__,
@@ -127,7 +127,7 @@ void ClickType::on_button_release() {
 }
 
 void ClickType::emitDelayed(ClickTypes value) {
-  ReactESP::app->onDelay(5, [this, value]() { this->emit(value); });
+  reactesp::ReactESP::app->onDelay(5, [this, value]() { this->emit(value); });
 }
 
 void ClickType::on_click_completed() {
@@ -153,7 +153,7 @@ void ClickType::get_configuration(JsonObject& root) {
   root["double_click_interval"] = double_click_interval_;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char kSchema[] = R"({
     "type": "object",
     "properties": {
         "long_click_delay": { "title": "Long click milliseconds", "type": "integer" },
@@ -162,11 +162,11 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String ClickType::get_config_schema() { return FPSTR(SCHEMA); }
+String ClickType::get_config_schema() { return (kSchema); }
 
 bool ClickType::set_configuration(const JsonObject& config) {
-  String expected[] = {"long_click_delay", "ultra_long_click_delay",
-                       "double_click_interval"};
+  String const expected[] = {"long_click_delay", "ultra_long_click_delay",
+                             "double_click_interval"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

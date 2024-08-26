@@ -1,6 +1,6 @@
 #include "transform.h"
 #ifndef _threshold_h
-#define _threshold_h
+#define threshold_h
 
 namespace sensesp {
 
@@ -27,7 +27,7 @@ class ThresholdTransform : public Transform<C, P> {
         in_range_{in_range} {
     this->load_configuration();
   };
-  virtual void set(const C& new_value) override;
+  virtual void set(const C& value) override;
 
  protected:
   C min_value_;
@@ -58,7 +58,7 @@ class FloatThreshold : public ThresholdTransform<float, bool> {
       : ThresholdTransform<float, bool>(min_value, max_value, in_range,
                                         config_path) {}
 
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };
@@ -86,7 +86,7 @@ class IntThreshold : public ThresholdTransform<int, bool> {
       : ThresholdTransform<int, bool>(min_value, max_value, in_range,
                                       config_path) {}
 
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };

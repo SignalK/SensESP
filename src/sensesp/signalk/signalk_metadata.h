@@ -1,5 +1,5 @@
 #ifndef _signalk_metadata_H_
-#define _signalk_metadata_H_
+#define signalk_metadata_H_
 
 #include <ArduinoJson.h>
 
@@ -44,8 +44,9 @@ class SKMetadata {
    * valid. This value is specified in seconds. Specify -1.0 if you do not
    * want to specify a timeout.
    */
-  SKMetadata(String units, String display_name = "", String description = "",
-             String short_name = "", float timeout = -1.0);
+  SKMetadata(const String& units, const String& display_name = "",
+             const String& description = "", const String& short_name = "",
+             float timeout = -1.0);
 
   /// Default constructor creates a blank Metadata structure
   SKMetadata() : timeout_{-1} {}
@@ -57,7 +58,7 @@ class SKMetadata {
    * @param[in] sk_path The Signal K path this metadata represents
    * @param[out] meta The array the metadata entry is supposed to be added to
    */
-  virtual void add_entry(String sk_path, JsonArray& meta);
+  virtual void add_entry(const String& sk_path, JsonArray& meta);
 };
 
 }  // namespace sensesp

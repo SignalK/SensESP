@@ -1,5 +1,5 @@
-#ifndef _click_types_H_
-#define _click_types_H_
+#ifndef SENSESP_TRANSFORMS_CLICK_TYPE_H_
+#define SENSESP_TRANSFORMS_CLICK_TYPE_H_
 
 #include <elapsedMillis.h>
 
@@ -22,10 +22,12 @@ enum class ClickTypes {
 
 /**
  * @brief ClickType is a transform that consumes button clicks and translates
- * them as events of type `ClickTypes`.
+ * them as events of type `ClickTypes`. Use AceButton instead.
  * @see ClickTypes
  */
-class ClickType : public Transform<bool, ClickTypes> {
+class [[deprecated(
+    "ClickType is deprecated. Please use AceButton instead.")]] ClickType
+    : public Transform<bool, ClickTypes> {
  public:
   /**
    * The constructor
@@ -47,7 +49,7 @@ class ClickType : public Transform<bool, ClickTypes> {
    * than long_click_delay
    *
    */
-  ClickType(String config_path = "", uint16_t long_click_delay = 1300,
+  ClickType(const String& config_path = "", uint16_t long_click_delay = 1300,
             uint16_t double_click_interval = 400,
             uint16_t ultra_long_click_delay = 5000);
 
@@ -59,7 +61,7 @@ class ClickType : public Transform<bool, ClickTypes> {
   static bool is_click(ClickTypes value);
 
   virtual void set(const bool& input) override;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
@@ -73,15 +75,15 @@ class ClickType : public Transform<bool, ClickTypes> {
 
   /// How many milliseconds a button is pressed to distinguish between
   /// a normal SingleClick and a LongSingleClick
-  uint16_t long_click_delay_;
+  uint16_t long_click_delay_{};
 
   /// How many milliseoncs a button is pressed to distinguish between
   /// a normal SingleClick and an UltraLongSingleClick
-  uint16_t ultra_long_click_delay_;
+  uint16_t ultra_long_click_delay_{};
 
   /// The maximum number of milliseconds that can pass before two
   /// clicks in a row are combined into a single DoubleClick
-  uint16_t double_click_interval_;
+  uint16_t double_click_interval_{};
 
   /// Timmer to time button presses
   elapsedMillis press_duration_;
@@ -93,7 +95,7 @@ class ClickType : public Transform<bool, ClickTypes> {
   /// if the second click of a double click comes through. This
   /// value will be NULL if no click report is currently
   /// queued up.
-  DelayReaction* delayed_click_report_;
+  reactesp::DelayReaction* delayed_click_report_{};
 
   /// Processes incoming values that represent a "ButonPress" event
   void on_button_press();

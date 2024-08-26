@@ -1,7 +1,10 @@
+#include "sensesp.h"
+
 #include "transform.h"
 
+#include <utility>
+
 #include "ArduinoJson.h"
-#include "sensesp.h"
 
 namespace sensesp {
 
@@ -9,8 +12,8 @@ namespace sensesp {
 
 std::set<TransformBase*> TransformBase::transforms_;
 
-TransformBase::TransformBase(String config_path)
-    : Configurable{config_path} {
+TransformBase::TransformBase(const String& config_path)
+    : Configurable{std::move(config_path)} {
   transforms_.insert(this);
 }
 

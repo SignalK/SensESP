@@ -1,5 +1,5 @@
-#ifndef SENSESP_SRC_SENSESP_SYSTEM_MINIMAL_BUTTON_H_
-#define SENSESP_SRC_SENSESP_SYSTEM_MINIMAL_BUTTON_H_
+#ifndef SENSESP_SYSTEM_MINIMAL_BUTTON_H_
+#define SENSESP_SYSTEM_MINIMAL_BUTTON_H_
 
 #include "sensesp.h"
 
@@ -58,7 +58,8 @@ class MinimalButtonHandler : public BaseButtonHandler {
    *
    */
   virtual void handle_button_press() {
-    ESP_LOGD(__FILENAME__, "Short release, duration: %d", time_since_press_event);
+    ESP_LOGD(__FILENAME__, "Short release, duration: %d",
+             time_since_press_event);
     ESP_LOGD(__FILENAME__, "Restarting");
     ESP.restart();
   }

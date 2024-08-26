@@ -1,5 +1,5 @@
-#ifndef SENSESP_SRC_SENSESP_SYSTEM_LED_BLINKER_H_
-#define SENSESP_SRC_SENSESP_SYSTEM_LED_BLINKER_H_
+#ifndef SENSESP_SYSTEM_LED_BLINKER_H_
+#define SENSESP_SYSTEM_LED_BLINKER_H_
 
 #include <ReactESP.h>
 
@@ -30,7 +30,7 @@ class BaseBlinker {
   bool enabled_ = true;
   bool state_ = false;
   int update_counter_ = 0;
-  Reaction* reaction_ = NULL;
+  reactesp::Reaction* reaction_ = NULL;
 };
 
 /**

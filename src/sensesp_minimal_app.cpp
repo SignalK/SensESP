@@ -6,7 +6,7 @@ SensESPMinimalApp* SensESPMinimalApp::get() {
   if (instance_ == nullptr) {
     instance_ = new SensESPMinimalApp();
   }
-  return (SensESPMinimalApp*)instance_;
+  return static_cast<SensESPMinimalApp*>(instance_);
 }
 
 }  // namespace sensesp

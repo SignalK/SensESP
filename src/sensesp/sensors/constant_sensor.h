@@ -1,5 +1,5 @@
-#ifndef CONSTANT_SENSOR_H_
-#define CONSTANT_SENSOR_H_
+#ifndef SENSESP_SENSORS_CONSTANT_SENSOR_H_
+#define SENSESP_SENSORS_CONSTANT_SENSOR_H_
 
 #include "Arduino.h"
 #include "sensesp/sensors/sensor.h"
@@ -58,10 +58,10 @@ class ConstantSensor : public Sensor<T> {
     this->load_configuration();
 
     // Emit the initial value once to set the output
-    ReactESP::app->onDelay(0, [this]() { this->emit(value_); });
+    reactesp::ReactESP::app->onDelay(0, [this]() { this->emit(value_); });
     // Then, emit the value at the specified interval
-    ReactESP::app->onRepeat(send_interval_ * 1000,
-                            [this]() { this->emit(value_); });
+    reactesp::ReactESP::app->onRepeat(send_interval_ * 1000,
+                                      [this]() { this->emit(value_); });
   }
 
   void set(T value) { value_ = value; }

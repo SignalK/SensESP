@@ -16,7 +16,7 @@ float (*Linear::function_)(float, float, float) =
 
 // Constructor definition
 
-Linear::Linear(float multiplier, float offset, String config_path)
+Linear::Linear(float multiplier, float offset, const String& config_path)
     : LambdaTransform<float, float, float, float>(function_, multiplier, offset,
                                                   param_info_, config_path) {}
 

@@ -3,8 +3,8 @@
 namespace sensesp {
 
 template <class C, class P>
-void ThresholdTransform<C, P>::set(const C& input) {
-  if (input >= min_value_ && input <= max_value_) {
+void ThresholdTransform<C, P>::set(const C& value) {
+  if (value >= min_value_ && value <= max_value_) {
     this->output = in_range_;
   } else {
     this->output = !in_range_;
@@ -19,7 +19,7 @@ void FloatThreshold::get_configuration(JsonObject& root) {
   root["in_range"] = in_range_;
 }
 
-static const char FLOAT_SCHEMA[] PROGMEM = R"({
+static const char kFloatSchema[] = R"({
     "type": "object",
     "properties": {
         "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
@@ -29,7 +29,7 @@ static const char FLOAT_SCHEMA[] PROGMEM = R"({
   })";
 
 bool FloatThreshold::set_configuration(const JsonObject& config) {
-  String expected[] = {"min", "max", "in_range"};
+  String const expected[] = {"min", "max", "in_range"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
@@ -41,7 +41,7 @@ bool FloatThreshold::set_configuration(const JsonObject& config) {
   return true;
 }
 
-String FloatThreshold::get_config_schema() { return FPSTR(FLOAT_SCHEMA); }
+String FloatThreshold::get_config_schema() { return (kFloatSchema); }
 
 void IntThreshold::get_configuration(JsonObject& root) {
   root["min"] = min_value_;
@@ -49,7 +49,7 @@ void IntThreshold::get_configuration(JsonObject& root) {
   root["in_range"] = in_range_;
 }
 
-static const char INT_SCHEMA[] PROGMEM = R"({
+static const char kIntSchema[] = R"({
       "type": "object",
       "properties": {
           "min": { "title": "Minimum value", "type": "number", "description" : "Minimum value to be 'in range'" },
@@ -59,7 +59,7 @@ static const char INT_SCHEMA[] PROGMEM = R"({
     })";
 
 bool IntThreshold::set_configuration(const JsonObject& config) {
-  String expected[] = {"min", "max", "in_range"};
+  String const expected[] = {"min", "max", "in_range"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
@@ -71,6 +71,6 @@ bool IntThreshold::set_configuration(const JsonObject& config) {
   return true;
 }
 
-String IntThreshold::get_config_schema() { return FPSTR(INT_SCHEMA); }
+String IntThreshold::get_config_schema() { return (kIntSchema); }
 
 }  // namespace sensesp

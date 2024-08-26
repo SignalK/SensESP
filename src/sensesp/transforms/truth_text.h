@@ -1,5 +1,5 @@
 #ifndef _truth_text_H_
-#define _truth_text_H_
+#define truth_text_H_
 
 #include "transform.h"
 
@@ -29,14 +29,14 @@ class TextToTruth : public Transform<String, bool> {
    * Returns TRUE if `value` represents one of the truth values recognized by
    * TextToTruth
    */
-  static bool is_valid_true(String value);
+  static bool is_valid_true(const String& value);
 
   /**
    * Returns TRUE if `value` represents one of the boolean values recognized
    * as a "false" value. FALSE is returned if `value` is a value that is
    * normally associated with a boolean false.
    */
-  static bool is_valid_false(String value);
+  static bool is_valid_false(const String& value);
 };
 
 /**
@@ -47,12 +47,13 @@ class TextToTruth : public Transform<String, bool> {
  */
 class TruthToText : public Transform<bool, String> {
  public:
-  TruthToText(String true_value = "ON", String false_value = "OFF");
+  TruthToText(const String& true_value = "ON",
+              const String& false_value = "OFF");
 
   virtual void set(const bool& input) override;
 
  protected:
-  String* truth_value_;
+  String truth_value_[2];
 };
 
 }  // namespace sensesp

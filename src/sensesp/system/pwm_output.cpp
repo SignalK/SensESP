@@ -6,9 +6,9 @@ namespace sensesp {
 
 // For info on frequency and resolution for ESP32, see
 // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#ledc-api-supported-range-frequency-duty-resolution
-#define CHANNEL_FREQUENCY 5000
-#define CHANNEL_RESOLUTION 13
-#define PWMRANGE 4095
+constexpr int CHANNEL_FREQUENCY = 5000;
+constexpr int CHANNEL_RESOLUTION = 13;
+constexpr int PWMRANGE = 4095;
 
 std::map<uint8_t, int8_t> PWMOutput::channel_to_pin_;
 
@@ -53,9 +53,9 @@ void PWMOutput::set_pwm(int pwm_channel, float value) {
   it = channel_to_pin_.find(pwm_channel);
   if (it != channel_to_pin_.end()) {
     int pin = it->second;
-    int output_val = value * PWMRANGE;
-    ESP_LOGD(__FILENAME__, "Outputting %d to pwm channel %d (pin %d)", output_val,
-             pwm_channel, pin);
+    int const output_val = value * PWMRANGE;
+    ESP_LOGD(__FILENAME__, "Outputting %d to pwm channel %d (pin %d)",
+             output_val, pwm_channel, pin);
 
 #ifdef ESP32
     uint32_t levels = pow(2, CHANNEL_RESOLUTION);

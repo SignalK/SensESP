@@ -2,7 +2,7 @@
 
 namespace sensesp {
 
-PressRepeater::PressRepeater(String config_path, int integer_false,
+PressRepeater::PressRepeater(const String& config_path, int integer_false,
                              int repeat_start_interval, int repeat_interval)
     : BooleanTransform(config_path),
       integer_false_{integer_false},
@@ -12,16 +12,17 @@ PressRepeater::PressRepeater(String config_path, int integer_false,
       repeating_{false} {
   load_configuration();
 
-  ReactESP::app->onRepeat(10, [this]() {
+  reactesp::ReactESP::app->onRepeat(10, [this]() {
     if (pushed_) {
       // A press is currently in progress
       if (repeating_) {
-        if (last_value_sent_ > (unsigned long)repeat_interval_) {
+        if (last_value_sent_ > static_cast<uint64_t>(repeat_interval_)) {
           ESP_LOGD(__FILENAME__, "Repeating press report");
           last_value_sent_ = 0;
           this->emit(true);
         }
-      } else if (last_value_sent_ > (unsigned long)repeat_start_interval_) {
+      } else if (last_value_sent_ >
+                 static_cast<uint64_t>(repeat_start_interval_)) {
         ESP_LOGD(__FILENAME__, "Starting press report repeat");
         repeating_ = true;
         last_value_sent_ = 0;
@@ -53,7 +54,7 @@ void PressRepeater::get_configuration(JsonObject& root) {
   root["repeat_interval"] = repeat_interval_;
 }
 
-static const char SCHEMA[] PROGMEM = R"###({
+static const char kSchema[] = R"###({
     "type": "object",
     "properties": {
         "repeat_start_interval": { "title": "Start repeating after (ms)", "type": "integer" },
@@ -61,10 +62,10 @@ static const char SCHEMA[] PROGMEM = R"###({
     }
 })###";
 
-String PressRepeater::get_config_schema() { return FPSTR(SCHEMA); }
+String PressRepeater::get_config_schema() { return (kSchema); }
 
 bool PressRepeater::set_configuration(const JsonObject& config) {
-  String expected[] = {"repeat_start_interval", "repeat_interval"};
+  String const expected[] = {"repeat_start_interval", "repeat_interval"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

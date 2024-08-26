@@ -4,7 +4,7 @@
 #include "mbedtls/md.h"
 #include "mbedtls/md5.h"
 
-using namespace sensesp;
+namespace sensesp {
 
 /**
  * @brief SHA-1 hash function
@@ -27,7 +27,8 @@ void Sha1(String payload_str, uint8_t *hash_output) {
   mbedtls_md_init(&ctx);
   mbedtls_md_setup(&ctx, mbedtls_md_info_from_type(md_type), 0);
   mbedtls_md_starts(&ctx);
-  mbedtls_md_update(&ctx, (const unsigned char *)payload, payload_length);
+  mbedtls_md_update(&ctx, reinterpret_cast<const unsigned char *>(payload),
+                    payload_length);
   mbedtls_md_finish(&ctx, hash_output);
   mbedtls_md_free(&ctx);
 }
@@ -45,16 +46,16 @@ String MD5(String payload_str) {
 
   const size_t payload_length = payload_str.length();
 
-  mbedtls_md5_context _ctx;
+  mbedtls_md5_context ctx_;
   uint8_t i;
-  uint8_t _buf[16] = {0};
-  mbedtls_md5_init(&_ctx);
-  mbedtls_md5_starts_ret(&_ctx);
-  mbedtls_md5_update_ret(&_ctx, (const uint8_t *)payload, payload_length);
-  mbedtls_md5_finish_ret(&_ctx, _buf);
-  mbedtls_md5_free(&_ctx);
+  uint8_t buf_[16] = {0};
+  mbedtls_md5_init(&ctx_);
+  mbedtls_md5_starts_ret(&ctx_);
+  mbedtls_md5_update_ret(&ctx_, (const uint8_t *)payload, payload_length);
+  mbedtls_md5_finish_ret(&ctx_, buf_);
+  mbedtls_md5_free(&ctx_);
   for (i = 0; i < 16; i++) {
-    sprintf(output + (i * 2), "%02x", _buf[i]);
+    sprintf(output + (i * 2), "%02x", buf_[i]);
   }
   return String(output);
 }
@@ -91,3 +92,5 @@ String Base64Sha1(String payload_str) {
 
   return encoded_str;
 }
+
+}  // namespace sensesp

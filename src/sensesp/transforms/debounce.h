@@ -53,11 +53,12 @@ class Debounce : public SymmetricTransform<T> {
         reaction_->remove();
         reaction_ = nullptr;
       }
-      reaction_ = ReactESP::app->onDelay(ms_min_delay_, [this, input]() {
-        this->reaction_ = nullptr;
-        this->debounced_value_ = input;
-        this->emit(input);
-      });
+      reaction_ =
+          reactesp::ReactESP::app->onDelay(ms_min_delay_, [this, input]() {
+            this->reaction_ = nullptr;
+            this->debounced_value_ = input;
+            this->emit(input);
+          });
       value_received_ = true;
     }
   }
@@ -66,7 +67,7 @@ class Debounce : public SymmetricTransform<T> {
   int ms_min_delay_;
   bool value_received_ = false;
   T debounced_value_;
-  DelayReaction* reaction_ = nullptr;
+  reactesp::DelayReaction* reaction_ = nullptr;
   virtual void get_configuration(JsonObject& doc) override {
     doc["min_delay"] = ms_min_delay_;
   }

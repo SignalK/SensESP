@@ -1,5 +1,5 @@
 #ifndef _CurveInterpolator_H_
-#define _CurveInterpolator_H_
+#define CurveInterpolator_H_
 
 #include "transform.h"
 
@@ -39,8 +39,8 @@ class CurveInterpolator : public FloatTransform {
  public:
   class Sample {
    public:
-    float input;
-    float output;
+    float input{};
+    float output{};
 
     Sample();
     Sample(float input, float output);
@@ -52,7 +52,8 @@ class CurveInterpolator : public FloatTransform {
   };
 
  public:
-  CurveInterpolator(std::set<Sample>* defaults = NULL, String config_path = "");
+  CurveInterpolator(std::set<Sample>* defaults = NULL,
+                    const String& config_path = "");
 
   // Set and retrieve the transformed value
   void set(const float& input) override;
@@ -68,7 +69,7 @@ class CurveInterpolator : public FloatTransform {
   }
 
   // For reading and writing the configuration of this transformation
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
@@ -80,7 +81,7 @@ class CurveInterpolator : public FloatTransform {
   const std::set<Sample>& get_samples() const { return samples_; }
 
  protected:
-  std::set<Sample> samples_;
+  std::set<Sample> samples_{};
   String input_title_ = "Input";
   String output_title_ = "Output";
 };

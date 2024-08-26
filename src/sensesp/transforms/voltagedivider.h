@@ -1,5 +1,5 @@
-#ifndef _voltage_divider_H
-#define _voltage_divider_H
+#ifndef SENSESP_TRANSFORMS_VOLTAGE_DIVIDER_H_
+#define SENSESP_TRANSFORMS_VOLTAGE_DIVIDER_H_
 
 #include "transform.h"
 
@@ -32,11 +32,11 @@ namespace sensesp {
  * */
 class VoltageDividerR1 : public SymmetricTransform<float> {
  public:
-  VoltageDividerR1(float R2, float Vin = 3.3, String config_path = "");
+  VoltageDividerR1(float R2, float Vin = 3.3, const String& config_path = "");
 
   virtual void set(const float& Vout) override;
 
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
@@ -72,12 +72,12 @@ class VoltageDividerR1 : public SymmetricTransform<float> {
  */
 class VoltageDividerR2 : public SymmetricTransform<float> {
  public:
-  VoltageDividerR2(float R1, float Vin = 3.3, String config_path = "");
+  VoltageDividerR2(float R1, float Vin = 3.3, const String& config_path = "");
 
   virtual void set(const float& Vout) override;
 
   // For reading and writing the configuration of this transformation
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

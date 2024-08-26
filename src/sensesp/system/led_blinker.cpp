@@ -11,7 +11,7 @@ namespace sensesp {
 
 BaseBlinker::BaseBlinker(int pin) : pin_{pin} {
   pinMode(pin, OUTPUT);
-  ReactESP::app->onDelay(1, [this]() { this->tick(); });
+  reactesp::ReactESP::app->onDelay(1, [this]() { this->tick(); });
 }
 
 /**
@@ -41,22 +41,23 @@ void BaseBlinker::blip(int duration) {
   }
   blipping = true;
 
-  bool orig_state = this->state_;
+  bool const orig_state = this->state_;
   this->set_state(false);
-  int current_counter = this->update_counter_;
-  ReactESP::app->onDelay(
+  int const current_counter = this->update_counter_;
+  reactesp::ReactESP::app->onDelay(
       duration, [this, duration, orig_state, current_counter]() {
         // only update if no-one has touched the LED in the meanwhile
         if (this->update_counter_ == current_counter) {
           this->set_state(true);
-          int new_counter = this->update_counter_;
-          ReactESP::app->onDelay(duration, [this, orig_state, new_counter]() {
-            // again, only update if no-one has touched the LED
-            if (this->update_counter_ == new_counter) {
-              this->set_state(orig_state);
-            }
-            blipping = false;
-          });
+          int const new_counter = this->update_counter_;
+          reactesp::ReactESP::app->onDelay(
+              duration, [this, orig_state, new_counter]() {
+                // again, only update if no-one has touched the LED
+                if (this->update_counter_ == new_counter) {
+                  this->set_state(orig_state);
+                }
+                blipping = false;
+              });
         } else {
           blipping = false;
         }
@@ -67,7 +68,7 @@ void BaseBlinker::blip(int duration) {
  * Enable or disable the blinker.
  */
 void BaseBlinker::set_enabled(bool state) {
-  bool was_enabled = this->enabled_;
+  bool const was_enabled = this->enabled_;
   this->enabled_ = state;
   if (this->enabled_) {
     this->tick();
@@ -90,7 +91,8 @@ void EvenBlinker::tick() {
     return;
   }
   this->flip_state();
-  reaction_ = ReactESP::app->onDelay(period_, [this]() { this->tick(); });
+  reaction_ =
+      reactesp::ReactESP::app->onDelay(period_, [this]() { this->tick(); });
 }
 
 RatioBlinker::RatioBlinker(int pin, unsigned int period, float ratio)
@@ -101,10 +103,12 @@ void RatioBlinker::tick() {
     return;
   }
   this->flip_state();
-  int on_duration = ratio_ * period_;
-  int off_duration = max(0, period_ - on_duration);
-  unsigned int ref_duration = state_ == false ? off_duration : on_duration;
-  reaction_ = ReactESP::app->onDelay(ref_duration, [this]() { this->tick(); });
+  int const on_duration = ratio_ * period_;
+  int const off_duration = max(0, period_ - on_duration);
+  unsigned int const ref_duration =
+      state_ == false ? off_duration : on_duration;
+  reaction_ = reactesp::ReactESP::app->onDelay(ref_duration,
+                                               [this]() { this->tick(); });
 }
 
 PatternBlinker::PatternBlinker(int pin, int pattern[])
@@ -131,10 +135,10 @@ void PatternBlinker::tick() {
     pattern_ptr_ = 0;
   }
   // odd indices indicate times when LED should be OFF, even when ON
-  bool new_state = (pattern_ptr_ % 2) == 0;
+  bool const new_state = (pattern_ptr_ % 2) == 0;
   this->set_state(new_state);
-  reaction_ = ReactESP::app->onDelay(pattern_[pattern_ptr_++],
-                                     [this]() { this->tick(); });
+  reaction_ = reactesp::ReactESP::app->onDelay(pattern_[pattern_ptr_++],
+                                               [this]() { this->tick(); });
 }
 
 void PatternBlinker::restart() {

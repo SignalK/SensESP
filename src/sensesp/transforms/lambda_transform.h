@@ -1,5 +1,5 @@
 #ifndef _lambda_transform_H_
-#define _lambda_transform_H_
+#define lambda_transform_H_
 
 #include "transform.h"
 

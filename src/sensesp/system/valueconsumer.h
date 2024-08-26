@@ -1,5 +1,5 @@
-#ifndef _value_consumer_H_
-#define _value_consumer_H_
+#ifndef SENSESP_SYSTEM_VALUECONSUMER_H_
+#define SENSESP_SYSTEM_VALUECONSUMER_H_
 
 #include "sensesp.h"
 

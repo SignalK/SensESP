@@ -14,7 +14,7 @@ SensESPApp* SensESPApp::get() {
   if (instance_ == nullptr) {
     instance_ = new SensESPApp();
   }
-  return (SensESPApp*)instance_;
+  return static_cast<SensESPApp*>(instance_);
 }
 
 /**
@@ -53,7 +53,7 @@ void SensESPApp::setup() {
   sk_delta_queue_ = new SKDeltaQueue();
 
   // create the websocket client
-  bool use_mdns = sk_server_address_ == "";
+  bool const use_mdns = sk_server_address_ == "";
   this->ws_client_ =
       new SKWSClient("/System/Signal K Settings", sk_delta_queue_,
                      sk_server_address_, sk_server_port_, use_mdns);

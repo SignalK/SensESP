@@ -1,5 +1,5 @@
-#ifndef _sk_value_listener_H
-#define _sk_value_listener_H
+#ifndef SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_VALUE_LISTENER_H_
+#define SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_VALUE_LISTENER_H_
 
 #include <ArduinoJson.h>
 

@@ -1,5 +1,5 @@
-#ifndef _analog_reader_H_
-#define _analog_reader_H_
+#ifndef SENSESP_SENSORS_ANALOG_READER_H_
+#define SENSESP_SENSORS_ANALOG_READER_H_
 
 #include "sensesp.h"
 

@@ -5,15 +5,17 @@
 namespace sensesp {
 
 RgbLed::RgbLed(int led_r_pin, int led_g_pin, int led_b_pin, String config_path,
-               long led_on_rgb, long led_off_rgb, bool common_anode)
+               long int led_on_rgb, long int led_off_rgb, bool common_anode)
     : Configurable(config_path),
+      led_r_channel_((led_r_pin < 0) ? -1
+                                     : PWMOutput::assign_channel(led_r_pin)),
+      led_g_channel_((led_g_pin < 0) ? -1
+                                     : PWMOutput::assign_channel(led_g_pin)),
+      led_b_channel_((led_b_pin < 0) ? -1
+                                     : PWMOutput::assign_channel(led_b_pin)),
       led_on_rgb_{led_on_rgb},
       led_off_rgb_{led_off_rgb},
       common_anode_{common_anode} {
-  led_r_channel_ = (led_r_pin < 0) ? -1 : PWMOutput::assign_channel(led_r_pin);
-  led_g_channel_ = (led_g_pin < 0) ? -1 : PWMOutput::assign_channel(led_g_pin);
-  led_b_channel_ = (led_b_pin < 0) ? -1 : PWMOutput::assign_channel(led_b_pin);
-
   this->load_configuration();
 }
 
@@ -21,15 +23,14 @@ RgbLed::RgbLed(int led_r_pin, int led_g_pin, int led_b_pin, String config_path,
 // color value. When using analogWrite(), the closer to zero, the
 // brighter the color. The closer to PWMRANGE, the darker the
 // color.
-static float get_pwm(long rgb, int shift_right, bool common_anode) {
+static float get_pwm(int64_t rgb, int shift_right, bool common_anode) {
   int color_val = (rgb >> shift_right) & 0xFF;
-  float color_pct = color_val / 255.0;
+  float const color_pct = color_val / 255.0;
 
   if (common_anode) {
     return 1.0 - color_pct;
-  } else {
-    return color_pct;
   }
+  return color_pct;
 }
 
 void RgbLed::set(const long& new_value) {
@@ -62,7 +63,7 @@ void RgbLed::get_configuration(JsonObject& root) {
   root["led_off_rgb"] = led_off_rgb_;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char kSchema[] = R"({
     "type": "object",
     "properties": {
         "led_on_rgb": { "title": "RGB color for led ON", "type": "integer" },
@@ -70,7 +71,7 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String RgbLed::get_config_schema() { return FPSTR(SCHEMA); }
+String RgbLed::get_config_schema() { return kSchema; }
 
 bool RgbLed::set_configuration(const JsonObject& config) {
   String expected[] = {"led_on_rgb", "led_off_rgb"};

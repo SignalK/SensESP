@@ -36,13 +36,14 @@ class SKWSClient : public Configurable,
   /////////////////////////////////////////////////////////
   // main task methods
 
-  SKWSClient(String config_path, SKDeltaQueue* sk_delta_queue,
-             String server_address, uint16_t server_port, bool use_mdns = true);
+  SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
+             const String& server_address, uint16_t server_port,
+             bool use_mdns = true);
 
   const String get_server_address() const { return server_address_; }
   const uint16_t get_server_port() const { return server_port_; }
 
-  virtual void get_configuration(JsonObject& doc) override final;
+  virtual void get_configuration(JsonObject& root) override final;
   virtual bool set_configuration(const JsonObject& config) override final;
 
   /**
@@ -103,25 +104,25 @@ class SKWSClient : public Configurable,
 
   TaskQueueProducer<SKWSConnectionState> connection_state_ =
       TaskQueueProducer<SKWSConnectionState>(
-          SKWSConnectionState::kSKWSDisconnected, ReactESP::app);
+          SKWSConnectionState::kSKWSDisconnected, reactesp::ReactESP::app);
 
   /// task_connection_state is used to track the internal task state which might
   /// be out of sync with the published connection state.
   SKWSConnectionState task_connection_state_ =
       SKWSConnectionState::kSKWSDisconnected;
 
-  WiFiClient wifi_client_;
-  esp_websocket_client_handle_t client_;
+  WiFiClient wifi_client_{};
+  esp_websocket_client_handle_t client_{};
   SKDeltaQueue* sk_delta_queue_;
   /// @brief Emits the number of deltas sent since last report
   TaskQueueProducer<int> delta_tx_tick_producer_ =
-      TaskQueueProducer<int>(0, ReactESP::app, 5, 990);
+      TaskQueueProducer<int>(0, reactesp::ReactESP::app, 5, 990);
   Integrator<int, int> delta_tx_count_producer_{1, 0, ""};
   Integrator<int, int> delta_rx_count_producer_{1, 0, ""};
 
   SemaphoreHandle_t received_updates_semaphore_ =
       xSemaphoreCreateRecursiveMutex();
-  std::list<JsonDocument> received_updates_;
+  std::list<JsonDocument> received_updates_{};
 
   /////////////////////////////////////////////////////////
   // methods for all tasks
@@ -151,7 +152,7 @@ class SKWSClient : public Configurable,
   void send_access_request(const String host, const uint16_t port);
   void poll_access_request(const String host, const uint16_t port,
                            const String href);
-  void connect_ws(const String host, const uint16_t port);
+  void connect_ws(const String& host, const uint16_t port);
   void subscribe_listeners();
   bool get_mdns_service(String& server_address, uint16_t& server_port);
 

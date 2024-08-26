@@ -1,11 +1,11 @@
-#ifndef _transform_H_
-#define _transform_H_
-
-#include <ArduinoJson.h>
-
-#include <set>
+#ifndef SENSESP_TRANSFORMS_TRANSFORM_H_
+#define SENSESP_TRANSFORMS_TRANSFORM_H_
 
 #include "sensesp.h"
+
+#include <ArduinoJson.h>
+#include <set>
+
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueconsumer.h"
@@ -13,7 +13,7 @@
 
 namespace sensesp {
 
-// TODO: Split into multiple files
+// TODO(mairas): Split into multiple files
 
 ///////////////////
 // Transforms transform raw device readouts into useful sensor values.
@@ -29,7 +29,7 @@ namespace sensesp {
  */
 class TransformBase : public Configurable {
  public:
-  TransformBase(String config_path = "");
+  TransformBase(const String& config_path = "");
 
   // Primary purpose of this was to supply Signal K sources
   // (now handled by SKEmitter::get_sources). Should

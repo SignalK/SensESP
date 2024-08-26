@@ -1,5 +1,5 @@
-#ifndef _signalk_time_H_
-#define _signalk_time_H_
+#ifndef SENSP_SRC_SENSESP_SIGNALK_SIGNALK_TIME_H_
+#define SENSP_SRC_SENSESP_SIGNALK_SIGNALK_TIME_H_
 
 #include "sensesp/transforms/timestring.h"
 #include "signalk_emitter.h"
@@ -8,7 +8,7 @@ namespace sensesp {
 
 class SKOutputTime : public TimeString, public SKEmitter {
  public:
-  SKOutputTime(String sk_path, String config_path = "");
+  SKOutputTime(const String& sk_path, const String& config_path = "");
   virtual String as_signalk() override;
   virtual void get_configuration(JsonObject& doc) override;
   virtual bool set_configuration(const JsonObject& config) override;

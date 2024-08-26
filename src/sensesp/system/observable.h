@@ -1,5 +1,5 @@
-#ifndef _observable_H_
-#define _observable_H_
+#ifndef SENSESP_SYSTEM_OBSERVABLE_H
+#define SENSESP_SYSTEM_OBSERVABLE_H
 
 #include <forward_list>
 #include <functional>
@@ -24,7 +24,7 @@ class Observable {
   void attach(std::function<void()> observer);
 
  private:
-  std::forward_list<std::function<void()> > observers;
+  std::forward_list<std::function<void()> > observers_;
 };
 
 }  // namespace sensesp

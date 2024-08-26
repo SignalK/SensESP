@@ -1,5 +1,5 @@
 #ifndef _signalk_put_request_H_
-#define _signalk_put_request_H_
+#define signalk_put_request_H_
 
 #include <ArduinoJson.h>
 #include <functional>
@@ -47,12 +47,12 @@ class SKRequest {
    public:
     String request_id;
     std::function<void(JsonDocument&)> callback;
-    DelayReaction* timeout_cleanup;
+    reactesp::DelayReaction* timeout_cleanup;
   };
 
   /// A map to hold all of the requests we are expecting future
   /// responses from...
-  static std::map<String, PendingRequest*> request_map;
+  static std::map<String, PendingRequest*> request_map_;
 
   /// Removes the specified request_id from the request_map,
   /// cleaning up outstanding reactions if necessary
@@ -80,11 +80,11 @@ class SKPutRequestBase : public SKRequest, public Configurable {
    * @param timeout The number of milliseconds to wait for a COMPLETED or
    *  FAILED response to be received from the server
    */
-  SKPutRequestBase(String sk_path, String config_path = "",
+  SKPutRequestBase(const String& sk_path, const String& config_path = "",
                    uint32_t timeout = 5000);
 
   // For reading and writing the configuration
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
@@ -118,9 +118,9 @@ class SKPutRequestBase : public SKRequest, public Configurable {
    */
   virtual void on_response(JsonDocument& response);
 
-  String sk_path;
-  uint32_t timeout;
-  String pending_request_id_;
+  String sk_path{};
+  uint32_t timeout{};
+  String pending_request_id_{};
 };
 
 /**
