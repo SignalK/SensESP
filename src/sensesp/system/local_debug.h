@@ -1,5 +1,5 @@
-#ifndef _local_debug_H_
-#define local_debug_H_
+#ifndef SENSESP_SYSTEM_LOCAL_DEBUG_H_
+#define SENSESP_SYSTEM_LOCAL_DEBUG_H_
 
 #include "esp32-hal-log.h"
 

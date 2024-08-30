@@ -1,5 +1,5 @@
-#ifndef _signalk_put_request_H_
-#define signalk_put_request_H_
+#ifndef SENSESP_SIGNALK_SIGNALK_PUT_REQUEST_H_
+#define SENSESP_SIGNALK_SIGNALK_PUT_REQUEST_H_
 
 #include <ArduinoJson.h>
 #include <functional>

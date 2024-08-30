@@ -106,7 +106,8 @@ void ClickType::on_button_release() {
                 __FILENAME__,
                 "ClickType detected SingleClick (millis: %ld, queue time: %ld, "
                 "press duration %ld ms)",
-                millis(), time_of_event, pd);
+                millis(), static_cast<long>(time_of_event),
+                static_cast<long>(pd));
             this->emit(ClickTypes::SingleClick);
             this->on_click_completed();
           });

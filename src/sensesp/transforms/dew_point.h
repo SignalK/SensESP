@@ -1,5 +1,5 @@
-#ifndef _dew_point_H_
-#define dew_point_H_
+#ifndef SENSESP_TRANSFORMS_DEW_POINT_H_
+#define SENSESP_TRANSFORMS_DEW_POINT_H_
 
 #include "transform.h"
 

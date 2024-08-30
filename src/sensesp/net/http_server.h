@@ -60,8 +60,8 @@ class HTTPRequestHandler {
 class HTTPServer : public Configurable {
  public:
   HTTPServer(int port = HTTP_DEFAULT_PORT,
-             String config_path = "/system/httpserver")
-      : config_(HTTPD_DEFAULT_CONFIG()), Configurable(config_path) {
+             const String& config_path = "/system/httpserver")
+      : Configurable(config_path), config_(HTTPD_DEFAULT_CONFIG()) {
     config_.server_port = port;
     config_.stack_size = HTTP_SERVER_STACK_SIZE;
     config_.max_uri_handlers = 20;
@@ -94,6 +94,7 @@ class HTTPServer : public Configurable {
           .method = HTTP_GET,
           .handler = call_request_dispatcher,
           .user_ctx = this,
+          .is_websocket = false,
       };
       httpd_register_uri_handler(server_, &uri);
       uri.method = HTTP_HEAD;

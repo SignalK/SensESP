@@ -1,5 +1,5 @@
-#ifndef _voltage_multiplier_H
-#define voltage_multiplier_H
+#ifndef SENSESP_TRANSFORMS_VOLTAGE_MULTIPLIER_H_
+#define SENSESP_TRANSFORMS_VOLTAGE_MULTIPLIER_H_
 
 #include "transform.h"
 

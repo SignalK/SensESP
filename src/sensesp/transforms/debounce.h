@@ -1,5 +1,5 @@
-#ifndef debounce_H
-#define debounce_H
+#ifndef SENSESP_TRANSFORMS_DEBOUNCE_H_
+#define SENSESP_TRANSFORMS_DEBOUNCE_H_
 
 #include "transform.h"
 

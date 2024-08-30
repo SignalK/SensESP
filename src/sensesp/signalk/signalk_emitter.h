@@ -1,5 +1,5 @@
-#ifndef _signalk_emitter_H_
-#define signalk_emitter_H_
+#ifndef SENSESP_SIGNALK_SIGNALK_EMITTER_H_
+#define SENSESP_SIGNALK_SIGNALK_EMITTER_H_
 
 #include "sensesp.h"
 

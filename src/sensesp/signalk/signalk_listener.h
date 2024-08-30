@@ -1,5 +1,5 @@
-#ifndef _signalk_listener_H_
-#define signalk_listener_H_
+#ifndef SENSESP_SIGNALK_LISTENER_H_
+#define SENSESP_SIGNALK_LISTENER_H_
 
 #include "sensesp.h"
 

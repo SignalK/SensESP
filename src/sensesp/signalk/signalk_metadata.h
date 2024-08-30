@@ -1,5 +1,5 @@
-#ifndef _signalk_metadata_H_
-#define signalk_metadata_H_
+#ifndef SENSESP_SIGNALK_SIGNALK_METADATA_H_
+#define SENSESP_SIGNALK_SIGNALK_METADATA_H_
 
 #include <ArduinoJson.h>
 

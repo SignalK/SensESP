@@ -46,11 +46,11 @@ class HTTPDigestAuthenticator : public HTTPAuthenticator {
  public:
   HTTPDigestAuthenticator(String username, String password, String realm,
                           unsigned long nonce_max_age = 900000)
-      : username_(username),
+      : HTTPAuthenticator(),
+        username_(username),
         password_(password),
         realm_(realm),
-        nonce_max_age_(nonce_max_age),
-        HTTPAuthenticator() {
+        nonce_max_age_(nonce_max_age) {
     secret_ = get_random_hex_string();
   }
 

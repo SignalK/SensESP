@@ -78,10 +78,10 @@ SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
                        const String& server_address, uint16_t server_port,
                        bool use_mdns)
     : Configurable{config_path, "/System/Signal K Settings", 200},
-      sk_delta_queue_{sk_delta_queue},
       conf_server_address_{server_address},
       conf_server_port_{server_port},
-      use_mdns_{use_mdns} {
+      use_mdns_{use_mdns},
+      sk_delta_queue_{sk_delta_queue} {
   // a SKWSClient object observes its own connection_state_ member
   // and simply passes through any notification it emits. As a result,
   // whenever the value of connection_state_ is updated, observers of the
@@ -259,7 +259,8 @@ void SKWSClient::on_receive_updates(JsonDocument& message) {
     JsonArray values = update["values"];
 
     for (size_t vi = 0; vi < values.size(); vi++) {
-      JsonDocument value_doc = static_cast<JsonDocument>(values[vi]);
+      JsonDocument value_doc =
+          static_cast<JsonDocument>(static_cast<JsonObject>((values[vi])));
 
       // push all values into a separate list for processing
       // in the main task

@@ -110,9 +110,9 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
                       std::function<void()> interrupt_handler)
       : DigitalInput{pin, pin_mode},
         Sensor<int>(config_path),
+        read_delay_{read_delay},
         interrupt_type_{interrupt_type},
-        interrupt_handler_{interrupt_handler},
-        read_delay_{read_delay} {
+        interrupt_handler_{interrupt_handler} {
     load_configuration();
   }
 

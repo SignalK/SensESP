@@ -1,5 +1,5 @@
-#ifndef _press_repeater_H_
-#define press_repeater_H_
+#ifndef SENSESP_TRANSFORMS_PRESS_REPEATER_H_
+#define SENSESP_TRANSFORMS_PRESS_REPEATER_H_
 
 #include <elapsedMillis.h>
 

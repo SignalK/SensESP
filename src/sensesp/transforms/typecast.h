@@ -1,5 +1,5 @@
-#ifndef _typecast_H_
-#define typecast_H_
+#ifndef SENSESP_TRANSFORMS_TYPECAST_H_
+#define SENSESP_TRANSFORMS_TYPECAST_H_
 
 #include <functional>
 

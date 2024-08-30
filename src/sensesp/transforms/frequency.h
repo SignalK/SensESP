@@ -1,5 +1,5 @@
-#ifndef _frequency_H_
-#define frequency_H_
+#ifndef SENSESP_TRANSFORMS_FREQUENCY_H_
+#define SENSESP_TRANSFORMS_FREQUENCY_H_
 
 #include "transform.h"
 

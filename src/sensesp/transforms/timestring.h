@@ -1,5 +1,5 @@
-#ifndef _timestring_H_
-#define timestring_H_
+#ifndef SENSESP_TRANSFORMS_TIMESTRING_H_
+#define SENSESP_TRANSFORMS_TIMESTRING_H_
 
 #include <ctime>
 

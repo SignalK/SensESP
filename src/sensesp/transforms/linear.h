@@ -1,5 +1,5 @@
-#ifndef _linear_H_
-#define linear_H_
+#ifndef SENSESP_TRANSFORMS_LINEAR_H_
+#define SENSESP_TRANSFORMS_LINEAR_H_
 
 #include "lambda_transform.h"
 

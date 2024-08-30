@@ -1,5 +1,5 @@
-#ifndef _median_H_
-#define median_H_
+#ifndef SENSESP_TRANSFORMS_MEDIAN_H_
+#define SENSESP_TRANSFORMS_MEDIAN_H_
 
 #include <vector>
 

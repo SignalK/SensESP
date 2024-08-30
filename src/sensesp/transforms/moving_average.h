@@ -1,5 +1,5 @@
-#ifndef _moving_average_H_
-#define moving_average_H_
+#ifndef SENSP_TRANSFORMS_MOVING_AVERAGE_H_
+#define SENSP_TRANSFORMS_MOVING_AVERAGE_H_
 
 #include <vector>
 

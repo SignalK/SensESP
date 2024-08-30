@@ -1,5 +1,5 @@
-#ifndef _CurveInterpolator_H_
-#define CurveInterpolator_H_
+#ifndef SENSESP_TRANSFORMS_CURVEINTERPOLATOR_H_
+#define SENSESP_TRANSFORMS_CURVEINTERPOLATOR_H_
 
 #include "transform.h"
 

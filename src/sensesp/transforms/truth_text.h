@@ -1,5 +1,5 @@
-#ifndef _truth_text_H_
-#define truth_text_H_
+#ifndef SENSESP_TRANSFORMS_TRUTH_TEXT_H_
+#define SENSESP_TRANSFORMS_TRUTH_TEXT_H_
 
 #include "transform.h"
 

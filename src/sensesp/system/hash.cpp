@@ -14,7 +14,7 @@ namespace sensesp {
  * @param payload_str
  * @param hash_output A 20-character binary output array
  */
-void Sha1(String payload_str, uint8_t *hash_output) {
+void Sha1(const String& payload_str, uint8_t *hash_output) {
   const char *payload = payload_str.c_str();
 
   const int size = 20;
@@ -40,7 +40,7 @@ void Sha1(String payload_str, uint8_t *hash_output) {
  *
  * @param payload_str
  */
-String MD5(String payload_str) {
+String MD5(const String& payload_str) {
   const char *payload = payload_str.c_str();
   char output[33] = {0};
 
@@ -69,14 +69,14 @@ String MD5(String payload_str) {
  * @param payload_str
  * @return String
  */
-String Base64Sha1(String payload_str) {
+String Base64Sha1(const String& payload_str) {
   uint8_t hash_output[20];
 
   uint8_t encoded[32];
 
   size_t output_length;
 
-  Sha1(payload_str, hash_output);
+  sensesp::Sha1(payload_str, hash_output);
 
   int retval = mbedtls_base64_encode(encoded, sizeof(encoded), &output_length,
                                      hash_output, 20);

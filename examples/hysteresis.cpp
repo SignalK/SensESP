@@ -9,7 +9,7 @@
 
 using namespace sensesp;
 
-ReactESP app;
+reactesp::ReactESP app;
 
 void setup() {
   SetupLogging();

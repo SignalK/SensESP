@@ -1,5 +1,5 @@
-#ifndef _networking_H_
-#define _networking_H_
+#ifndef SENSESP_NET_NETWORKING_H_
+#define SENSESP_NET_NETWORKING_H_
 
 #include <Arduino.h>
 #include <DNSServer.h>

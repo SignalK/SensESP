@@ -1,5 +1,5 @@
-#ifndef _signalk_putrequestlistener_H_
-#define signalk_putrequestlistener_H_
+#ifndef SENSESP_SIGNALK_SIGNALK_PUT_REQUEST_LISTENER_H_
+#define SENSESP_SIGNALK_SIGNALK_PUT_REQUEST_LISTENER_H_
 
 #include "sensesp.h"
 

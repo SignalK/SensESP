@@ -1,5 +1,5 @@
-#ifndef _ota_H_
-#define _ota_H_
+#ifndef SENSESP_NET_OTA_H_
+#define SENSESP_NET_OTA_H_
 
 #include "sensesp.h"
 

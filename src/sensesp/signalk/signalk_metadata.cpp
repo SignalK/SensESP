@@ -5,8 +5,8 @@ namespace sensesp {
 SKMetadata::SKMetadata(const String& units, const String& display_name,
                        const String& description, const String& short_name,
                        float timeout)
-    : units_{units},
-      display_name_{display_name},
+    : display_name_{display_name},
+      units_{units},
       description_{description},
       short_name_{short_name},
       timeout_{timeout} {}

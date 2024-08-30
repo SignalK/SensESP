@@ -1,6 +1,7 @@
+#ifndef SENSESP_TRANSFORMS_THRESHOLD_H_
+#define SENSESP_TRANSFORMS_THRESHOLD_H_
+
 #include "transform.h"
-#ifndef _threshold_h
-#define threshold_h
 
 namespace sensesp {
 
