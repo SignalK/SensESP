@@ -95,8 +95,15 @@
 
 - The `reactesp` namespace is no longer imported. If you have any references to
   classes in this namespace, you will need to update them to use the namespace
-  explicitly. For example, `ReactESP` class should be referred to as
-  `reactesp::ReactESP`. In particular, this change probably needs to be made
+  explicitly.
+
+  Additionally, ReactESP classes have been renamed:
+
+  - `ReactESP` -> `reactesp::EventLoop`
+  - `*Reaction` -> `reactesp::*Event`
+
+  For example, `ReactESP` class should be referred to as
+  `reactesp::EventLoop`. In particular, this change probably needs to be made
   in your project's `main.cpp` file.
 
 ### Development
