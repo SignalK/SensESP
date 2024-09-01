@@ -100,7 +100,7 @@ void ClickType::on_button_release() {
       // DoubleClick
       uint64_t const time_of_event = millis();
       int64_t const pd = (long)press_duration_;
-      delayed_click_report_ = reactesp::ReactESP::app->onDelay(
+      delayed_click_report_ = reactesp::EventLoop::app->onDelay(
           double_click_interval_ + 20, [this, pd, time_of_event]() {
             ESP_LOGD(
                 __FILENAME__,
@@ -128,7 +128,7 @@ void ClickType::on_button_release() {
 }
 
 void ClickType::emitDelayed(ClickTypes value) {
-  reactesp::ReactESP::app->onDelay(5, [this, value]() { this->emit(value); });
+  reactesp::EventLoop::app->onDelay(5, [this, value]() { this->emit(value); });
 }
 
 void ClickType::on_click_completed() {

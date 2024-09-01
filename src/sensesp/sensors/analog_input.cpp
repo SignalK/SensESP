@@ -17,7 +17,7 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
   load_configuration();
 
   if (this->analog_reader->configure()) {
-    reactesp::ReactESP::app->onRepeat(read_delay, [this]() { this->update(); });
+    reactesp::EventLoop::app->onRepeat(read_delay, [this]() { this->update(); });
   }
 }
 

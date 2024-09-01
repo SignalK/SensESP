@@ -12,7 +12,7 @@ using namespace sensesp;
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // must instantiate the "app" object.
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 // The setup function performs one-time application initialization.
 void setup() {
@@ -92,5 +92,5 @@ void setup() {
 }
 
 // The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
+// It simply calls `app.tick()` which will then execute all events as needed.
 void loop() { app.tick(); }

@@ -51,7 +51,7 @@ void SensESPBaseApp::reset() {
            "Resetting the device configuration to system defaults.");
   Resettable::reset_all();
 
-  reactesp::ReactESP::app->onDelay(1000, []() {
+  reactesp::EventLoop::app->onDelay(1000, []() {
     ESP.restart();
     delay(1000);
   });

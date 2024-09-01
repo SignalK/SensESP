@@ -5,7 +5,7 @@
 
 namespace sensesp {
 
-extern reactesp::ReactESP app;
+extern reactesp::EventLoop app;
 
 std::map<String, SKRequest::PendingRequest*> SKRequest::request_map_;
 
@@ -24,8 +24,8 @@ String SKRequest::send_request(JsonDocument& request,
   // After 10 seconds, if we haven't already handled a response,
   // assume its not coming.
   pending_request->timeout_cleanup =
-      reactesp::ReactESP::app->onDelay(timeout, [pending_request]() {
-        // Mark the delay reaction null as it will be cleaned up by the ReactESP
+      reactesp::EventLoop::app->onDelay(timeout, [pending_request]() {
+        // Mark the delay eventll as it will be cleaned up by the ReactESP
         // framework if this executes...
         ESP_LOGW(__FILENAME__, "No response from server for request Id %s",
                  pending_request->request_id.c_str());

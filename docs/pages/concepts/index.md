@@ -36,7 +36,7 @@ void setup() {
     // initialize the GPIO pin
     pinMode(kGpioPin, OUTPUT);
 
-    // create the repeat reaction
+    // create the repeat event
     app.onRepeat(interval, toggle_gpio);
 
     // setup continues
@@ -47,18 +47,18 @@ void setup() {
 What happens in the above example?
 We define a callback function `toggle_gpio()`.
 Then, we set the pin mode to OUTPUT.
-And finally, we create a repeat reaction with the interval `interval`.
+And finally, we create a repeat event with the interval `interval`.
 
-Once the program is running, the repeat reaction is triggered automatically every 350 milliseconds.
+Once the program is running, the repeat event is triggered automatically every 350 milliseconds.
 The interval is calculated from the previous trigger time - if the callback function takes 4 milliseconds to complete, the actual interval still remains 350 ms instead of 354 ms.
 
-Another commonly used and useful time-based reaction is `DelayReaction`.
+Another commonly used and useful time-based event is `DelayEvent`.
 It triggers after a certain amount of time has passed but does not repeat.
 Example use cases for that would be sensor devices in which you trigger the read operation and then come back to get the value after a certain amount of time.
 For example, the 1-Wire DS18B20 sensor can take up to 750 ms before the conversion is ready.
 In that case, you would first trigger the call and then have something like `app.onDelay(750, read_sensor);` to come back later to read the value.
 
-You can also use `app.onDelay(...)` with a zero delay to trigger the reaction as soon as possible, without blocking the main event loop.
+You can also use `app.onDelay(...)` with a zero delay to trigger the event as soon as possible, without blocking the main event loop.
 
 ### Lambdas
 
@@ -77,7 +77,7 @@ void setup() {
     // initialize the GPIO pin
     pinMode(kGpioPin, OUTPUT);
 
-    // create the repeat reaction
+    // create the repeat event
     app.onRepeat(
         interval,
         []() {
@@ -97,25 +97,25 @@ The brackets `[]` define the start of the lambda expression.
 They may also contain definitions for variable capture.
 To learn more about that topic, see the [cppreference.com discussion and examples](https://en.cppreference.com/w/cpp/language/lambda).
 
-### Reaction Types
+### Event Types
 
-ReactESP is not limited to just delays or repeating reactions.
+ReactESP is not limited to just delays or repeating events.
 It also supports the following:
 
-- `StreamReaction`: a reaction that triggers when data is available on a stream, for example on a serial port
-- `ISRReaction`: a reaction that is called when an interrupt is triggered (for example, when a GPIO pin is toggled)
-- `TickReaction`: a reaction that is called every time the main event loop is executed
+- `StreamEvent`: an event that triggers when data is available on a stream, for example on a serial port
+- `ISREvent`: an event that is called when an interrupt is triggered (for example, when a GPIO pin is toggled)
+- `TickEvent`: an event that is called every time the main event loop is executed
 
-### Removing Reactions
+### Removing Events
 
-All of the `app.onXXX()` calls return a `Reaction` object.
-If this object is stored, it can be used to access and manipulate the reaction later.
-In practice, you can disable the reaction by calling `reaction->remove()`.
-The same reaction can be re-added later by calling `reaction->add()`.
+All of the `app.onXXX()` calls return a `Event` object.
+If this object is stored, it can be used to access and manipulate the event later.
+In practice, you can disable the event by calling `event->remove()`.
+The same event can be re-added later by calling `event->add()`.
 
-Some attention needs to be paid with `DelayReaction` objects, though.
-Since they are by nature one-off operations, the corresponding object is deleted after the reaction is triggered.
-You must ensure that you don't try to call the methods of an object that has been deleted, for example by setting a flag in the callback function and checking the flag value before trying to remove the reaction.
+Some attention needs to be paid with `DelayEvent` objects, though.
+Since they are by nature one-off operations, the corresponding object is deleted after the event is triggered.
+You must ensure that you don't try to call the methods of an object that has been deleted, for example by setting a flag in the callback function and checking the flag value before trying to remove the event.
 
 ## Sensors
 

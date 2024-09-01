@@ -24,7 +24,7 @@ const int kTestOutputInterval = 410;
 
 const uint8_t kDigitalInputPin = 15;
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 void ToggleTestOutputPin(void *parameter) {
   while (true) {
@@ -95,5 +95,5 @@ void setup() {
 }
 
 // The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
+// It simply calls `app.tick()` which will then execute all events as needed.
 void loop() { app.tick(); }

@@ -48,17 +48,17 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
     status_ = AsyncResponseStatus::kPending;
     this->emit(status_);
 
-    if (timeout_reaction_ != nullptr) {
-      reactesp::ReactESP::app->remove(timeout_reaction_);
-      timeout_reaction_ = nullptr;
+    if (timeout_event_ != nullptr) {
+      reactesp::EventLoop::app->remove(timeout_event_);
+      timeout_event_ = nullptr;
     }
-    timeout_reaction_ = reactesp::ReactESP::app->onDelay(timeout_, [this]() {
+    timeout_event_ = reactesp::EventLoop::app->onDelay(timeout_, [this]() {
       if (status_ == AsyncResponseStatus::kPending) {
         ESP_LOGV("AsyncResponseHandler", "Timeout");
         status_ = AsyncResponseStatus::kTimeout;
         this->emit(status_);
       }
-      this->timeout_reaction_ = nullptr;
+      this->timeout_event_ = nullptr;
     });
   }
 
@@ -70,10 +70,10 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
       return;
     }
 
-    // Clear the timeout reaction
-    if (timeout_reaction_ != nullptr) {
-      reactesp::ReactESP::app->remove(timeout_reaction_);
-      timeout_reaction_ = nullptr;
+    // Clear the timeout event
+    if (timeout_event_ != nullptr) {
+      reactesp::EventLoop::app->remove(timeout_event_);
+      timeout_event_ = nullptr;
     }
 
     ESP_LOGV("AsyncResponseHandler", "Received response: %d", success);
@@ -89,7 +89,7 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
   const AsyncResponseStatus get_status() const { return status_; }
 
  protected:
-  reactesp::DelayReaction* timeout_reaction_ = nullptr;
+  reactesp::DelayEvent* timeout_event_ = nullptr;
   AsyncResponseStatus status_ = AsyncResponseStatus::kReady;
   String result_message_;
   int timeout_ = 3000;  // Default timeout in ms

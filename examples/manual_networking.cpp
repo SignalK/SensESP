@@ -21,7 +21,7 @@ const uint8_t input_pin1 = 0;
 // The program reacts to changes on GPIO pin 0 and prints the value to the
 // serial console.
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 void setup() {
   SetupLogging();
@@ -62,5 +62,5 @@ void setup() {
 }
 
 // The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
+// It simply calls `app.tick()` which will then execute all events as needed.
 void loop() { app.tick(); }

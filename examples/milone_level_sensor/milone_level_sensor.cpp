@@ -43,7 +43,7 @@ class ETapeInterpreter : public CurveInterpolator {
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object.
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 void setup() {
 // Some initialization boilerplate when in debug mode...
@@ -134,5 +134,5 @@ void setup() {
 }
 
 // The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
+// It simply calls `app.tick()` which will then execute all events as needed.
 void loop() { app.tick(); }

@@ -26,7 +26,7 @@ using namespace sensesp;
 
 tNMEA2000* nmea2000;
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 // MAX6675 setup
 MAX6675 thermocouple0(thermoCLK, thermo1CS, thermoDO);

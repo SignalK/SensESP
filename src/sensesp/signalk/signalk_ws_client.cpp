@@ -90,7 +90,7 @@ SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
       [this]() { this->emit(this->connection_state_.get()); });
 
   // process any received updates in the main task
-  reactesp::ReactESP::app->onRepeat(
+  reactesp::EventLoop::app->onRepeat(
       1, [this]() { this->process_received_updates(); });
 
   // set the singleton object pointer
@@ -101,7 +101,7 @@ SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
   // Connect the counters
   delta_tx_tick_producer_.connect_to(&delta_tx_count_producer_);
 
-  reactesp::ReactESP::app->onDelay(0, [this]() {
+  reactesp::EventLoop::app->onDelay(0, [this]() {
     ESP_LOGD(__FILENAME__, "Starting SKWSClient");
     xTaskCreate(ExecuteWebSocketTask, "SKWSClient", kWsClientTaskStackSize,
                 this, 1, NULL);

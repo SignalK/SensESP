@@ -92,7 +92,7 @@ Networking::Networking(String config_path, String client_ssid,
     dns_server_->setErrorReplyCode(DNSReplyCode::NoError);
     dns_server_->start(53, "*", WiFi.softAPIP());
 
-    reactesp::ReactESP::app->onRepeat(
+    reactesp::EventLoop::app->onRepeat(
         1, [this]() { dns_server_->processNextRequest(); });
   }
 }
@@ -190,10 +190,10 @@ void Networking::start_client_autoconnect() {
   // Perform an initial connection without a delay.
   reconnect_cb();
 
-  // Launch a separate onRepeat reaction to (re-)establish WiFi connection.
+  // Launch a separate onRepeat event to (re-)establish WiFi connection.
   // Connecting is attempted only every 20 s to allow the previous connection
   // attempt to complete even if the network is slow.
-  reactesp::ReactESP::app->onRepeat(20000, reconnect_cb);
+  reactesp::EventLoop::app->onRepeat(20000, reconnect_cb);
 }
 
 /**

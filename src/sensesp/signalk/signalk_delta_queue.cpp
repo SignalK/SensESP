@@ -13,7 +13,7 @@ SKDeltaQueue::SKDeltaQueue(unsigned int max_buffer_size)
     : max_buffer_size{max_buffer_size}, meta_sent_{false} {
   semaphore_ = xSemaphoreCreateRecursiveMutex();
 
-  reactesp::ReactESP::app->onDelay(0, [this]() { this->connect_emitters(); });
+  reactesp::EventLoop::app->onDelay(0, [this]() { this->connect_emitters(); });
 }
 
 bool SKDeltaQueue::take_semaphore(uint64_t timeout_ms) {

@@ -24,7 +24,7 @@
 
 using namespace sensesp;
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 unsigned long cycle_start_time = 0;
 unsigned long freq_start_time = 0;

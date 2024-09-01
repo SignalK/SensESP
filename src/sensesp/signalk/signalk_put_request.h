@@ -47,7 +47,7 @@ class SKRequest {
    public:
     String request_id;
     std::function<void(JsonDocument&)> callback;
-    reactesp::DelayReaction* timeout_cleanup;
+    reactesp::DelayEvent* timeout_cleanup;
   };
 
   /// A map to hold all of the requests we are expecting future
@@ -55,7 +55,7 @@ class SKRequest {
   static std::map<String, PendingRequest*> request_map_;
 
   /// Removes the specified request_id from the request_map,
-  /// cleaning up outstanding reactions if necessary
+  /// cleaning up outstanding events if necessary
   static void remove_request(String request_id);
 
   /// Returns the pending request object associated with

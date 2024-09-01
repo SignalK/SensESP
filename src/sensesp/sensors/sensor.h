@@ -69,7 +69,7 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         returning_callback_(callback) {
-    reactesp::ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
+    reactesp::EventLoop::app->onRepeat(repeat_interval_ms_, [this]() {
       this->emit(this->returning_callback_());
     });
   }
@@ -92,7 +92,7 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         emitting_callback_(callback) {
-    reactesp::ReactESP::app->onRepeat(repeat_interval_ms_,
+    reactesp::EventLoop::app->onRepeat(repeat_interval_ms_,
                                       [this]() { emitting_callback_(this); });
   }
 

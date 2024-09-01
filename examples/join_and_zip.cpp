@@ -24,7 +24,7 @@
 
 using namespace sensesp;
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 SensESPMinimalApp* sensesp_app;
 

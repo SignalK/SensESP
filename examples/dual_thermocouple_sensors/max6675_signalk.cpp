@@ -16,7 +16,7 @@
 
 using namespace sensesp;
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 MAX6675 thermocouple0(thermoCLK, thermo1CS, thermoDO);
 MAX6675 thermocouple1(thermoCLK, thermo2CS, thermoDO);

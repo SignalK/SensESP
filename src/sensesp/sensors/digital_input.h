@@ -56,7 +56,7 @@ class DigitalInputState : public DigitalInput, public Sensor<bool> {
     set_requires_restart(true);
     load_configuration();
 
-    reactesp::ReactESP::app->onRepeat(read_delay_,
+    reactesp::EventLoop::app->onRepeat(read_delay_,
                                       [this]() { emit(digitalRead(pin_)); });
   }
 
@@ -92,10 +92,10 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
                       unsigned int read_delay, String config_path = "")
       : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
                             config_path, [this]() { this->counter_++; }) {
-    reactesp::ReactESP::app->onInterrupt(pin_, interrupt_type_,
+    reactesp::EventLoop::app->onInterrupt(pin_, interrupt_type_,
                                          interrupt_handler_);
 
-    reactesp::ReactESP::app->onRepeat(read_delay_, [this]() {
+    reactesp::EventLoop::app->onRepeat(read_delay_, [this]() {
       noInterrupts();
       output = counter_;
       counter_ = 0;
@@ -200,12 +200,12 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
     output = (bool)digitalRead(pin_);
     last_output_ = !output;  // ensure that we always send the first output
 
-    reactesp::ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() {
+    reactesp::EventLoop::app->onInterrupt(pin_, interrupt_type_, [this]() {
       output = (bool)digitalRead(pin_);
       triggered_ = true;
     });
 
-    reactesp::ReactESP::app->onTick([this]() {
+    reactesp::EventLoop::app->onTick([this]() {
       if (triggered_ && (output != last_output_)) {
         noInterrupts();
         triggered_ = false;

@@ -17,7 +17,7 @@
 
 using namespace sensesp;
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 void setup() {
   SetupLogging();

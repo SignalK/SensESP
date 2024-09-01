@@ -20,7 +20,7 @@
 
 using namespace sensesp;
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 // GPIO pin that we'll be using for the analog input.
 const uint8_t kAnalogInputPin = 36;
@@ -66,5 +66,5 @@ void setup() {
 }
 
 // The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
+// It simply calls `app.tick()` which will then execute all events as needed.
 void loop() { app.tick(); }

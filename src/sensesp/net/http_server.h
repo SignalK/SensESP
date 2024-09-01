@@ -79,7 +79,7 @@ class HTTPServer : public Configurable {
       ESP_LOGE(__FILENAME__, "Only one HTTPServer instance is allowed");
       return;
     }
-    reactesp::ReactESP::app->onDelay(0, [this]() {
+    reactesp::EventLoop::app->onDelay(0, [this]() {
       esp_err_t error = httpd_start(&server_, &config_);
       if (error != ESP_OK) {
         ESP_LOGE(__FILENAME__, "Error starting HTTP server: %s",

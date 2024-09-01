@@ -26,7 +26,7 @@ const uint8_t output_pin2 = 21;
 // with a jumper wire, you should see changes in the reported values on the
 // serial console.
 
-reactesp::ReactESP app;
+reactesp::EventLoop app;
 
 void setup() {
   SetupLogging();
@@ -69,5 +69,5 @@ void setup() {
 }
 
 // The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
+// It simply calls `app.tick()` which will then execute all events as needed.
 void loop() { app.tick(); }

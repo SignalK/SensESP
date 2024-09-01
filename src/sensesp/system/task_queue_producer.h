@@ -23,7 +23,7 @@ template <class T>
 class TaskQueueProducer : public ObservableValue<T> {
  public:
   TaskQueueProducer(const T& value,
-                    reactesp::ReactESP* consumer_app = reactesp::ReactESP::app,
+                    reactesp::EventLoop* consumer_app = reactesp::EventLoop::app,
                     int queue_size = 1, unsigned int poll_rate = 990)
       : ObservableValue<T>(value), queue_size_{queue_size} {
     queue_ = xQueueCreate(queue_size, sizeof(T));
@@ -31,7 +31,7 @@ class TaskQueueProducer : public ObservableValue<T> {
       ESP_LOGE(__FILENAME__, "Failed to create queue");
     }
 
-    // Create a repeat reaction that will poll the queue and emit the values
+    // Create a repeat event that will poll the queue and emit the values
     consumer_app->onRepeatMicros(poll_rate, [this]() {
       T value;
       while (xQueueReceive(queue_, &value, 0) == pdTRUE) {
@@ -42,7 +42,7 @@ class TaskQueueProducer : public ObservableValue<T> {
 
   TaskQueueProducer(const T& value, int queue_size = 1,
                     unsigned int poll_rate = 990)
-      : TaskQueueProducer(value, reactesp::ReactESP::app, queue_size,
+      : TaskQueueProducer(value, reactesp::EventLoop::app, queue_size,
                           poll_rate) {}
 
   virtual void set(const T& value) override {

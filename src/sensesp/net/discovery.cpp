@@ -5,7 +5,7 @@
 namespace sensesp {
 
 MDNSDiscovery::MDNSDiscovery() {
-  reactesp::ReactESP::app->onDelay(0, [this]() {
+  reactesp::EventLoop::app->onDelay(0, [this]() {
     String hostname = SensESPBaseApp::get_hostname();
 
     // MDNS.begin(hostname) will crash if hostname is blank
