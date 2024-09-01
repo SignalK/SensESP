@@ -24,8 +24,6 @@ const int kTestOutputInterval = 410;
 
 const uint8_t kDigitalInputPin = 15;
 
-reactesp::EventLoop app;
-
 void ToggleTestOutputPin(void *parameter) {
   while (true) {
     digitalWrite(kTestOutputPin, !digitalRead(kTestOutputPin));
@@ -90,10 +88,13 @@ void setup() {
       [](float input) { ESP_LOGD("Example", "Heading: %f", input); }));
 
   // print out free heap
-  app.onRepeat(
+  SensESPBaseApp::get_event_loop()->onRepeat(
       2000, []() { ESP_LOGD("Example", "Free heap: %d", ESP.getFreeHeap()); });
 }
 
-// The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all events as needed.
-void loop() { app.tick(); }
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}

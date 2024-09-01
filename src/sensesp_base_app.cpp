@@ -32,6 +32,14 @@ SensESPBaseApp::SensESPBaseApp() : filesystem_(new Filesystem()) {
 SensESPBaseApp* SensESPBaseApp::get() { return instance_; }
 
 /**
+ * @brief Get the event loop object from the singleton SensESPBaseApp instance.
+ *
+ */
+ reactesp::EventLoop* SensESPBaseApp::get_event_loop() {
+  return &(SensESPBaseApp::get()->event_loop_);
+}
+
+/**
  * @brief Perform initialization of SensESPBaseApp once builder configuration is
  * done.
  *
@@ -51,7 +59,7 @@ void SensESPBaseApp::reset() {
            "Resetting the device configuration to system defaults.");
   Resettable::reset_all();
 
-  reactesp::EventLoop::app->onDelay(1000, []() {
+  this->event_loop_.onDelay(1000, []() {
     ESP.restart();
     delay(1000);
   });

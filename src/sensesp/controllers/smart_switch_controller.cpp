@@ -1,6 +1,7 @@
 #include "smart_switch_controller.h"
 
 #include "sensesp/transforms/truth_text.h"
+#include "sensesp_base_app.h"
 
 namespace sensesp {
 
@@ -22,7 +23,8 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
 
   // Emit the initial state once the event loop starts
   if (auto_initialize_) {
-    reactesp::EventLoop::app->onDelay(0, [this]() { this->emit(is_on); });
+    SensESPBaseApp::get_event_loop()->onDelay(0,
+                                              [this]() { this->emit(is_on); });
   }
 }
 

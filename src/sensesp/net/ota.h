@@ -6,6 +6,8 @@
 #include <Arduino.h>
 #include <ArduinoOTA.h>
 
+#include "sensesp_base_app.h"
+
 namespace sensesp {
 
 class OTA {
@@ -16,7 +18,7 @@ class OTA {
    * @param password A password to be used for the OTA update.
    */
   OTA(const char* password) : password_{password} {
-    reactesp::EventLoop::app->onDelay(0, [this]() {
+    SensESPBaseApp::get_event_loop()->onDelay(0, [this]() {
       ArduinoOTA.setPassword(password_);
       ArduinoOTA.onStart([]() { ESP_LOGW(__FILENAME__, "Starting OTA"); });
       ArduinoOTA.onEnd([]() { ESP_LOGW(__FILENAME__, "OTA End"); });
@@ -39,7 +41,7 @@ class OTA {
         }
       });
       ArduinoOTA.begin();
-      reactesp::EventLoop::app->onRepeat(20, OTA::handle_ota);
+      SensESPBaseApp::get_event_loop()->onRepeat(20, OTA::handle_ota);
     });
   }
 

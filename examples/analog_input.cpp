@@ -10,10 +10,6 @@
 
 using namespace sensesp;
 
-// SensESP builds upon the ReactESP framework. Every ReactESP application
-// must instantiate the "app" object.
-reactesp::EventLoop app;
-
 // The setup function performs one-time application initialization.
 void setup() {
   // Some initialization boilerplate when in debug mode...
@@ -91,6 +87,9 @@ void setup() {
                                      new SKMetadata("ratio", "Indoor light")));
 }
 
-// The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all events as needed.
-void loop() { app.tick(); }
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}

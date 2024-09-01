@@ -24,8 +24,6 @@
 
 using namespace sensesp;
 
-reactesp::EventLoop app;
-
 unsigned long cycle_start_time = 0;
 unsigned long freq_start_time = 0;
 int freq = 0;
@@ -39,7 +37,7 @@ void setup() {
 
   // set GPIO 18 to output mode
   pinMode(18, OUTPUT);
-  app.onRepeat(10, []() {
+  SensESPBaseApp::get_event_loop()->onRepeat(10, []() {
     if (freq == 0) {
       if (millis() - freq_start_time >= 10000) {
         freq = 10;
@@ -109,4 +107,9 @@ void setup() {
                           new SKMetadata("s", "Main Engine running time")));
 }
 
-void loop() { app.tick(); }
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}

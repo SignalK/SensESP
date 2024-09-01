@@ -3,6 +3,7 @@
 #include "analog_input.h"
 
 #include "Arduino.h"
+#include "sensesp_base_app.h"
 
 namespace sensesp {
 
@@ -17,7 +18,7 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
   load_configuration();
 
   if (this->analog_reader->configure()) {
-    reactesp::EventLoop::app->onRepeat(read_delay, [this]() { this->update(); });
+    SensESPBaseApp::get_event_loop()->onRepeat(read_delay, [this]() { this->update(); });
   }
 }
 

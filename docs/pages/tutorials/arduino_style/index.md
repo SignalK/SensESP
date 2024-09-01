@@ -176,12 +176,10 @@ First, let's add the required header file include statements to the `src/main.cp
 
 The `sensesp_app_builder.h` file contains the `SensESPAppBuilder` class, which we'll use to build the SensESP app. The `signalk_output.h` file contains the `SKOutput` class, which we'll use to create the Signal K output objects.
 
-We'll also need to add a namespace definition and create the ReactESP app that SensESP uses to run the code. Add the following lines after the `#define` statements:
+We also need to add a namespace definition. Add the following lines after the `#include` statements:
 
 ```cpp
 using namespace sensesp;
-
-reactesp::EventLoop app;
 ```
 
 Next, we'll create the SensESP application using the builder class. Add the following lines to the `setup()` function, right before the `Wire.begin()` line:
@@ -303,8 +301,6 @@ Here's the complete code for the `src/main.cpp` file:
 #define SCL 17
 
 using namespace sensesp;
-
-reactesp::EventLoop app;
 
 Adafruit_BME280 bme;
 

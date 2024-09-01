@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include "sensesp/sensors/sensor.h"
+#include "sensesp_base_app.h"
 
 namespace sensesp {
 
@@ -58,9 +59,9 @@ class ConstantSensor : public Sensor<T> {
     this->load_configuration();
 
     // Emit the initial value once to set the output
-    reactesp::EventLoop::app->onDelay(0, [this]() { this->emit(value_); });
+    SensESPBaseApp::get_event_loop()->onDelay(0, [this]() { this->emit(value_); });
     // Then, emit the value at the specified interval
-    reactesp::EventLoop::app->onRepeat(send_interval_ * 1000,
+    SensESPBaseApp::get_event_loop()->onRepeat(send_interval_ * 1000,
                                       [this]() { this->emit(value_); });
   }
 
