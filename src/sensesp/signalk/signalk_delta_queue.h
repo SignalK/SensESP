@@ -1,5 +1,5 @@
-#ifndef _signalk_delta_queue_H_
-#define _signalk_delta_queue_H_
+#ifndef SENSESP_SIGNALK_DELTA_QUEUE_H_
+#define SENSESP_SIGNALK_DELTA_QUEUE_H_
 
 #include <ArduinoJson.h>
 #include <list>
@@ -16,7 +16,7 @@ namespace sensesp {
 class SKDeltaQueue {
  public:
   SKDeltaQueue(unsigned int max_buffer_size = 20);
-  void append(const String val);
+  void append(const String& val);
   bool data_available();
   void get_delta(String& output);
 
@@ -30,12 +30,12 @@ class SKDeltaQueue {
     release_semaphore();
   }
 
-  bool take_semaphore(unsigned long int timeout_ms = 0);
+  bool take_semaphore(uint64_t timeout_ms = 0);
   void release_semaphore();
 
  private:
   unsigned int max_buffer_size;
-  std::list<String> buffer;
+  std::list<String> buffer{};
   bool meta_sent_;
 
   unsigned int get_doc_size_estimate();

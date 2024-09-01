@@ -130,7 +130,7 @@ class Zip4 : public ZipBase<4>,
   Zip4(long max_age = 0) : ZipBase<4>(max_age) {}
 
   std::tuple<LambdaConsumer<T1>, LambdaConsumer<T2>, LambdaConsumer<T3>,
-                   LambdaConsumer<T4>>
+             LambdaConsumer<T4>>
       consumers = {LambdaConsumer<T1>([this](T1 value) {
                      std::get<0>(values) = value;
                      age_[0] = 0;
@@ -178,7 +178,7 @@ class Zip5 : public ZipBase<5>,
   // The consumers member is a tuple of LambdaConsumers. Each LambdaConsumer
   // has a different type, hence necessitating the use of a tuple.
   std::tuple<LambdaConsumer<T1>, LambdaConsumer<T2>, LambdaConsumer<T3>,
-                   LambdaConsumer<T4>, LambdaConsumer<T5>>
+             LambdaConsumer<T4>, LambdaConsumer<T5>>
       consumers = {LambdaConsumer<T1>([this](T1 value) {
                      std::get<0>(values) = value;
                      age_[0] = 0;

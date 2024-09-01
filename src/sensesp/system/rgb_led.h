@@ -1,5 +1,5 @@
-#ifndef _rgb_led_H_
-#define _rgb_led_H_
+#ifndef SENSESP_SYSTEM_RGB_LED_H
+#define SENSESP_SYSTEM_RGB_LED_H
 
 #include "configurable.h"
 #include "valueconsumer.h"
@@ -48,8 +48,8 @@ class RgbLed : public Configurable,
    *   if the led is a common cathode
    */
   RgbLed(int led_r_pin = -1, int led_g_pin = -1, int led_b_pin = -1,
-         String config_path = "", long led_on_rgb = 0x00FF00,
-         long led_off_rgb = 0xFF0000, bool common_anode = true);
+         String config_path = "", long int led_on_rgb = 0x00FF00,
+         long int led_off_rgb = 0xFF0000, bool common_anode = true);
 
   /**
    * Used to set the current display state of the LED.
@@ -64,7 +64,7 @@ class RgbLed : public Configurable,
    */
   virtual void set(const bool& new_value) override;
 
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

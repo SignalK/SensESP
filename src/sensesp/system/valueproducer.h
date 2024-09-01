@@ -1,5 +1,5 @@
-#ifndef _value_producer_H_
-#define _value_producer_H_
+#ifndef SENSESP_SYSTEM_VALUE_PRODUCER_H_
+#define SENSESP_SYSTEM_VALUE_PRODUCER_H_
 
 #include <ArduinoJson.h>
 

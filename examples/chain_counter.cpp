@@ -22,7 +22,7 @@ using namespace sensesp;
  * A bi-directional chain counter is possible, but this is not one.
  */
 
-ReactESP app;
+reactesp::ReactESP app;
 
 void setup() {
   SetupLogging();

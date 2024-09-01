@@ -1,5 +1,5 @@
-#ifndef _timestring_H_
-#define _timestring_H_
+#ifndef SENSESP_TRANSFORMS_TIMESTRING_H_
+#define SENSESP_TRANSFORMS_TIMESTRING_H_
 
 #include <ctime>
 
@@ -14,7 +14,7 @@ namespace sensesp {
  */
 class TimeString : public Transform<time_t, String> {
  public:
-  TimeString(String config_path = "");
+  TimeString(const String& config_path = "");
   virtual void set(const time_t& input) override;
 };
 

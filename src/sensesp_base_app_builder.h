@@ -1,5 +1,5 @@
-#ifndef _sensesp_base_app_builder_H_
-#define _sensesp_base_app_builder_H_
+#ifndef SENSESP_BASE_APP_BUILDER_H_
+#define SENSESP_BASE_APP_BUILDER_H_
 
 #include "sensesp_base_app.h"
 

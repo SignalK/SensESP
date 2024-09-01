@@ -1,5 +1,5 @@
-#ifndef _SENSESP_UI_UI_BUTTON_H_
-#define _SENSESP_UI_UI_BUTTON_H_
+#ifndef SENSESP_UI_UI_BUTTON_H
+#define SENSESP_UI_UI_BUTTON_H
 
 #include <map>
 

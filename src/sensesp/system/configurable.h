@@ -1,5 +1,5 @@
-#ifndef _configurable_H_
-#define _configurable_H_
+#ifndef SENSESP_SYSTEM_CONFIGURABLE_H
+#define SENSESP_SYSTEM_CONFIGURABLE_H
 
 #include "sensesp.h"
 
@@ -41,7 +41,7 @@ class Configurable {
   Configurable(String config_path = "", String description = "",
                int sort_order = 1000);
 
-  const String config_path_;
+  const String config_path_{};
 
   /**
    * @brief Return true if the Configurable is asynchronous.

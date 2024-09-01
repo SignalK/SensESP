@@ -1,5 +1,5 @@
-#ifndef _angle_correction_H_
-#define _angle_correction_H_
+#ifndef SENSESP_TRANSFORMS_ANGLE_CORRECTION_H_
+#define SENSESP_TRANSFORMS_ANGLE_CORRECTION_H_
 
 #include "transform.h"
 
@@ -19,9 +19,10 @@ namespace sensesp {
  */
 class AngleCorrection : public FloatTransform {
  public:
-  AngleCorrection(float offset, float min_angle = 0, String config_path = "");
+  AngleCorrection(float offset, float min_angle = 0,
+                  const String& config_path = "");
   virtual void set(const float& input) override;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

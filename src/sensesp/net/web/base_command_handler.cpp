@@ -9,7 +9,8 @@ void add_http_reset_handler(HTTPServer* server) {
                         "Resetting device back to factory defaults. "
                         "You may have to reconfigure the WiFi settings.",
                         0);
-        ReactESP::app->onDelay(500, []() { SensESPBaseApp::get()->reset(); });
+        reactesp::ReactESP::app->onDelay(
+            500, []() { SensESPBaseApp::get()->reset(); });
         return ESP_OK;
       });
   server->add_handler(reset_handler);
@@ -19,7 +20,7 @@ void add_http_restart_handler(HTTPServer* server) {
   HTTPRequestHandler* restart_handler = new HTTPRequestHandler(
       1 << HTTP_POST, "/api/device/restart", [](httpd_req_t* req) {
         httpd_resp_send(req, "Restarting device", 0);
-        ReactESP::app->onDelay(500, []() { ESP.restart(); });
+        reactesp::ReactESP::app->onDelay(500, []() { ESP.restart(); });
         return ESP_OK;
       });
   server->add_handler(restart_handler);

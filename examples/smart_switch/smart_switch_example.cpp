@@ -40,7 +40,7 @@ using namespace sensesp;
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object.
-ReactESP app;
+reactesp::ReactESP app;
 
 void setup() {
   SetupLogging();
@@ -71,7 +71,6 @@ void setup() {
   const char* config_path_button_c = "/button/clicktime";
   const char* config_path_status_light = "/button/statusLight";
   const char* config_path_sk_output = "/signalk/path";
-  const char* config_path_repeat = "/signalk/repeat";
 
   // Create a digital output that is assumed to be connected to the
   // control channel of a relay or a MOSFET that will control the
@@ -112,7 +111,7 @@ void setup() {
   // to be reported to the server every 10 seconds, regardless of whether
   // or not it has changed.  That keeps the value on the server fresh and
   // lets the server know the switch is still alive.
-  load_switch->connect_to(new RepeatReport<bool>(10000, config_path_repeat))
+  load_switch->connect_to(new Repeat<bool>(10000))
       ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
 }
 

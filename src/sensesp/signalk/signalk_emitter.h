@@ -1,5 +1,5 @@
-#ifndef _signalk_emitter_H_
-#define _signalk_emitter_H_
+#ifndef SENSESP_SIGNALK_SIGNALK_EMITTER_H_
+#define SENSESP_SIGNALK_SIGNALK_EMITTER_H_
 
 #include "sensesp.h"
 
@@ -25,7 +25,7 @@ class SKEmitter : virtual public Observable {
    * @param sk_path The Signal K path that identifies
    * this particular output
    */
-  SKEmitter(String sk_path);
+  SKEmitter(const String& sk_path);
 
   /**
    * Returns the data to be reported to the server as
@@ -56,17 +56,17 @@ class SKEmitter : virtual public Observable {
    * is returned if this particular source is not configured
    * or intended to return actual data.
    */
-  String& get_sk_path() { return sk_path; }
+  String& get_sk_path() { return sk_path_; }
 
-  void set_sk_path(const String& path) { sk_path = path; }
+  void set_sk_path(const String& path) { sk_path_ = path; }
 
-  static const std::vector<SKEmitter*>& get_sources() { return sources; }
+  static const std::vector<SKEmitter*>& get_sources() { return sources_; }
 
  protected:
-  String sk_path;
+  String sk_path_{};
 
  private:
-  static std::vector<SKEmitter*> sources;
+  static std::vector<SKEmitter*> sources_;
 };
 
 }  // namespace sensesp

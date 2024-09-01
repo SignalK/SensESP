@@ -1,5 +1,5 @@
-#ifndef _moving_average_H_
-#define _moving_average_H_
+#ifndef SENSP_TRANSFORMS_MOVING_AVERAGE_H_
+#define SENSP_TRANSFORMS_MOVING_AVERAGE_H_
 
 #include <vector>
 
@@ -33,14 +33,14 @@ class MovingAverage : public FloatTransform {
    * UI.
    * */
   MovingAverage(int sample_size, float multiplier = 1.0,
-                String config_path = "");
+                const String& config_path = "");
   virtual void set(const float& input) override;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 
  private:
-  std::vector<float> buf_;
+  std::vector<float> buf_{};
   int ptr_ = 0;
   int sample_size_;
   float multiplier_;

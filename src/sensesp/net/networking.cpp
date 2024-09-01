@@ -92,7 +92,8 @@ Networking::Networking(String config_path, String client_ssid,
     dns_server_->setErrorReplyCode(DNSReplyCode::NoError);
     dns_server_->start(53, "*", WiFi.softAPIP());
 
-    ReactESP::app->onRepeat(1, [this]() { dns_server_->processNextRequest(); });
+    reactesp::ReactESP::app->onRepeat(
+        1, [this]() { dns_server_->processNextRequest(); });
   }
 }
 
@@ -104,7 +105,8 @@ void Networking::start_access_point() {
   String hostname = SensESPBaseApp::get_hostname();
   WiFi.setHostname(hostname.c_str());
 
-  ESP_LOGI(__FILENAME__, "Starting access point %s", ap_settings_.ssid_.c_str());
+  ESP_LOGI(__FILENAME__, "Starting access point %s",
+           ap_settings_.ssid_.c_str());
 
   bool result =
       WiFi.softAP(ap_settings_.ssid_.c_str(), ap_settings_.password_.c_str(),
@@ -157,7 +159,8 @@ void Networking::start_client_autoconnect() {
       }
     }
 
-    ESP_LOGD(__FILENAME__, "Current client config index: %d", current_config_idx);
+    ESP_LOGD(__FILENAME__, "Current client config index: %d",
+             current_config_idx);
     ESP_LOGD(__FILENAME__, "Attempt number: %d", attempt_num);
     ESP_LOGD(__FILENAME__, "Config SSID: %s", config.ssid_.c_str());
 
@@ -169,7 +172,8 @@ void Networking::start_client_autoconnect() {
       return;
     }
 
-    ESP_LOGI(__FILENAME__, "Connecting to wifi SSID %s (connection attempt #%d).",
+    ESP_LOGI(__FILENAME__,
+             "Connecting to wifi SSID %s (connection attempt #%d).",
              config.ssid_.c_str(), attempt_num);
 
     if (!config.use_dhcp_) {
@@ -189,7 +193,7 @@ void Networking::start_client_autoconnect() {
   // Launch a separate onRepeat reaction to (re-)establish WiFi connection.
   // Connecting is attempted only every 20 s to allow the previous connection
   // attempt to complete even if the network is slow.
-  ReactESP::app->onRepeat(20000, reconnect_cb);
+  reactesp::ReactESP::app->onRepeat(20000, reconnect_cb);
 }
 
 /**

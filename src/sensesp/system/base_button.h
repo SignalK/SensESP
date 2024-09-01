@@ -32,7 +32,7 @@ class BaseButtonHandler : public Configurable, public IEventHandler {
 
     ESP_LOGD(__FILENAME__, "Button handler started");
 
-    ReactESP::app->onRepeat(4, [this]() { this->button_->check(); });
+    reactesp::ReactESP::app->onRepeat(4, [this]() { this->button_->check(); });
   }
 
  protected:

@@ -7,7 +7,7 @@
 namespace sensesp {
 
 AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
-                         String config_path, float output_scale)
+                         const String& config_path, float output_scale)
     : FloatSensor(config_path),
       pin{pin},
       read_delay{read_delay},
@@ -17,7 +17,7 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
   load_configuration();
 
   if (this->analog_reader->configure()) {
-    ReactESP::app->onRepeat(read_delay, [this]() { this->update(); });
+    reactesp::ReactESP::app->onRepeat(read_delay, [this]() { this->update(); });
   }
 }
 
@@ -27,17 +27,17 @@ void AnalogInput::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay;
 };
 
-static const char SCHEMA[] PROGMEM = R"###({
+static const char kSchema[] = R"###({
     "type": "object",
     "properties": {
         "read_delay": { "title": "Read delay", "type": "number", "description": "Number of milliseconds between each analogRead(A0)" }
     }
   })###";
 
-String AnalogInput::get_config_schema() { return FPSTR(SCHEMA); }
+String AnalogInput::get_config_schema() { return kSchema; }
 
 bool AnalogInput::set_configuration(const JsonObject& config) {
-  String expected[] = {"read_delay"};
+  String const expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

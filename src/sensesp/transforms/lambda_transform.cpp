@@ -3,22 +3,22 @@
 namespace sensesp {
 
 template <>
-const char* get_schema_type_string(const int dummy) {
+const char* get_schema_type_string(const int /*dummy*/) {
   return "number";
 }
 
 template <>
-const char* get_schema_type_string(const float dummy) {
+const char* get_schema_type_string(const float /*dummy*/) {
   return "number";
 }
 
 template <>
-const char* get_schema_type_string(const String dummy) {
+const char* get_schema_type_string(const String& /*dummy*/) {
   return "string";
 }
 
 template <>
-const char* get_schema_type_string(const bool dummy) {
+const char* get_schema_type_string(const bool /*dummy*/) {
   return "boolean";
 }
 

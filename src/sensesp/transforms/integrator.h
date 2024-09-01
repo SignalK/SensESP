@@ -1,5 +1,5 @@
-#ifndef _integrator_H_
-#define _integrator_H_
+#ifndef SENSESP_TRANSFORMS_INTEGRATOR_H_
+#define SENSESP_TRANSFORMS_INTEGRATOR_H_
 
 #include "transform.h"
 

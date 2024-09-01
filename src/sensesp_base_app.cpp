@@ -16,9 +16,7 @@ void SetupLogging(esp_log_level_t default_level) {
 
 SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
 
-SensESPBaseApp::SensESPBaseApp() {
-  // initialize the filesystem
-  filesystem_ = new Filesystem();
+SensESPBaseApp::SensESPBaseApp() : filesystem_(new Filesystem()) {
   // create the hostname_ observable - this needs to be done before
   // the builder methods are called
   hostname_ = new PersistingObservableValue<String>(kDefaultHostname,
@@ -49,10 +47,11 @@ void SensESPBaseApp::start() {
 }
 
 void SensESPBaseApp::reset() {
-  ESP_LOGW(__FILENAME__, "Resetting the device configuration to system defaults.");
+  ESP_LOGW(__FILENAME__,
+           "Resetting the device configuration to system defaults.");
   Resettable::reset_all();
 
-  ReactESP::app->onDelay(1000, []() {
+  reactesp::ReactESP::app->onDelay(1000, []() {
     ESP.restart();
     delay(1000);
   });

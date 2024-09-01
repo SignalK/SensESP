@@ -21,7 +21,7 @@ const uint8_t input_pin1 = 0;
 // The program reacts to changes on GPIO pin 0 and prints the value to the
 // serial console.
 
-ReactESP app;
+reactesp::ReactESP app;
 
 void setup() {
   SetupLogging();

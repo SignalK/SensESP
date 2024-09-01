@@ -1,5 +1,5 @@
-#ifndef _signalk_output_H_
-#define _signalk_output_H_
+#ifndef SENSESP_SIGNALK_SIGNALK_OUTPUT_H_
+#define SENSESP_SIGNALK_SIGNALK_OUTPUT_H_
 
 #include "sensesp/transforms/transform.h"
 #include "signalk_emitter.h"

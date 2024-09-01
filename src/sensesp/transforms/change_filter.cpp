@@ -5,19 +5,18 @@ namespace sensesp {
 static float absf(float val) {
   if (val < 0) {
     return -val;
-  } else {
-    return val;
   }
+  return val;
 }
 
 ChangeFilter::ChangeFilter(float min_delta, float max_delta, int max_skips,
-                           String config_path)
+                           const String& config_path)
     : FloatTransform(config_path),
       min_delta_{min_delta},
       max_delta_{max_delta},
-      max_skips_{max_skips} {
+      max_skips_{max_skips},
+      skips_(max_skips_ + 1) {
   load_configuration();
-  skips_ = max_skips_ + 1;
 }
 
 void ChangeFilter::set(const float& new_value) {
@@ -36,7 +35,7 @@ void ChangeFilter::get_configuration(JsonObject& root) {
   root["max_skips"] = max_skips_;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char kSchema[] = R"({
     "type": "object",
     "properties": {
         "min_delta": { "title": "Minimum delta", "description": "Minimum difference in change of value before forwarding", "type": "number" },
@@ -45,10 +44,10 @@ static const char SCHEMA[] PROGMEM = R"({
     }
   })";
 
-String ChangeFilter::get_config_schema() { return FPSTR(SCHEMA); }
+String ChangeFilter::get_config_schema() { return (kSchema); }
 
 bool ChangeFilter::set_configuration(const JsonObject& config) {
-  String expected[] = {"min_delta", "max_delta", "max_skips"};
+  String const expected[] = {"min_delta", "max_delta", "max_skips"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

@@ -1,5 +1,5 @@
-#ifndef SENSESP_SRC_SENSESP_SYSTEM_STREAM_PRODUCER_H_
-#define SENSESP_SRC_SENSESP_SYSTEM_STREAM_PRODUCER_H_
+#ifndef SENSESP_SYSTEM_STREAM_PRODUCER_H
+#define SENSESP_SYSTEM_STREAM_PRODUCER_H
 
 #include "sensesp.h"
 
@@ -14,7 +14,7 @@ namespace sensesp {
 class StreamCharProducer : public ValueProducer<char> {
  public:
   StreamCharProducer(Stream* stream) : stream_{stream} {
-    read_reaction_ = ReactESP::app->onAvailable(*stream_, [this]() {
+    read_reaction_ = reactesp::ReactESP::app->onAvailable(*stream_, [this]() {
       while (stream_->available()) {
         char c = stream_->read();
         this->emit(c);
@@ -24,7 +24,7 @@ class StreamCharProducer : public ValueProducer<char> {
 
  protected:
   Stream* stream_;
-  StreamReaction* read_reaction_;
+  reactesp::StreamReaction* read_reaction_;
 };
 
 /**
@@ -36,7 +36,7 @@ class StreamLineProducer : public ValueProducer<String> {
       : stream_{stream}, max_line_length_{max_line_length} {
     static int buf_pos = 0;
     buf_ = new char[max_line_length_ + 1];
-    read_reaction_ = ReactESP::app->onAvailable(*stream_, [this]() {
+    read_reaction_ = reactesp::ReactESP::app->onAvailable(*stream_, [this]() {
       while (stream_->available()) {
         char c = stream_->read();
         if (c == '\n') {
@@ -59,7 +59,7 @@ class StreamLineProducer : public ValueProducer<String> {
   const int max_line_length_;
   char* buf_;
   Stream* stream_;
-  StreamReaction* read_reaction_;
+  reactesp::StreamReaction* read_reaction_;
 };
 
 }  // namespace sensesp

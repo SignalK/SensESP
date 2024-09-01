@@ -1,5 +1,5 @@
-#ifndef _sensesp_minimal_app_builder_H_
-#define _sensesp_minimal_app_builder_H_
+#ifndef SENSESP_MINIMAL_APP_BUILDER_H
+#define SENSESP_MINIMAL_APP_BUILDER_H
 
 #include "sensesp_base_app_builder.h"
 #include "sensesp_minimal_app.h"

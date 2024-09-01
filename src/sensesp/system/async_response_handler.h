@@ -49,10 +49,10 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
     this->emit(status_);
 
     if (timeout_reaction_ != nullptr) {
-      ReactESP::app->remove(timeout_reaction_);
+      reactesp::ReactESP::app->remove(timeout_reaction_);
       timeout_reaction_ = nullptr;
     }
-    timeout_reaction_ = ReactESP::app->onDelay(timeout_, [this]() {
+    timeout_reaction_ = reactesp::ReactESP::app->onDelay(timeout_, [this]() {
       if (status_ == AsyncResponseStatus::kPending) {
         ESP_LOGV("AsyncResponseHandler", "Timeout");
         status_ = AsyncResponseStatus::kTimeout;
@@ -72,7 +72,7 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
 
     // Clear the timeout reaction
     if (timeout_reaction_ != nullptr) {
-      ReactESP::app->remove(timeout_reaction_);
+      reactesp::ReactESP::app->remove(timeout_reaction_);
       timeout_reaction_ = nullptr;
     }
 
@@ -89,7 +89,7 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
   const AsyncResponseStatus get_status() const { return status_; }
 
  protected:
-  DelayReaction* timeout_reaction_ = nullptr;
+  reactesp::DelayReaction* timeout_reaction_ = nullptr;
   AsyncResponseStatus status_ = AsyncResponseStatus::kReady;
   String result_message_;
   int timeout_ = 3000;  // Default timeout in ms

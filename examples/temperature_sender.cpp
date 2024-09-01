@@ -57,7 +57,7 @@ class TemperatureInterpreter : public CurveInterpolator {
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object.
-ReactESP app;
+reactesp::ReactESP app;
 
 void setup() {
   SetupLogging();

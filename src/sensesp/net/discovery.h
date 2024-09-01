@@ -1,5 +1,5 @@
-#ifndef _discovery_H_
-#define _discovery_H_
+#ifndef SENSESP_NET_DISCOVERY_H_
+#define SENSESP_NET_DISCOVERY_H_
 
 #include <ESPmDNS.h>
 

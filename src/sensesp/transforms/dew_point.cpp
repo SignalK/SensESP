@@ -4,15 +4,13 @@ namespace sensesp {
 
 // dew point
 
-DewPoint::DewPoint() : FloatTransform() {}
-
-void DewPoint::set(const float& input) {
+void DewPoint::set(const float& /*input*/) {
   // Dew point is calculated with Arden Buck Equation and Arden Buck valuation
   // sets For more info on the calculation see
   // https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
 
-  float temp_celsius = inputs[0] - 273.15;
-  float relative_humidity = inputs[1];
+  float const temp_celsius = inputs[0] - 273.15;
+  float const relative_humidity = inputs[1];
 
   // valuation set for temperatures above 0°C
   float b = 17.368;
@@ -28,7 +26,7 @@ void DewPoint::set(const float& input) {
   float gamma =
       log(relative_humidity *
           exp((b - (temp_celsius / d)) * (temp_celsius / (c + temp_celsius))));
-  float dew_point = (c * gamma) / (b - gamma);
+  float const dew_point = (c * gamma) / (b - gamma);
 
   this->emit(dew_point + 273.15);  // Kelvin is Celsius + 273.15
 }

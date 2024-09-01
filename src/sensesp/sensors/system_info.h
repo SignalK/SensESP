@@ -1,5 +1,5 @@
-#ifndef _system_info_H_
-#define _system_info_H_
+#ifndef SENSESP_SENSORS_SYSTEM_INFO_H_
+#define SENSESP_SENSORS_SYSTEM_INFO_H_
 
 #include <Arduino.h>
 #include <elapsedMillis.h>
@@ -47,8 +47,8 @@ class SystemHz : public FloatSensor {
   SystemHz() {
     elapsed_millis_ = 0;
 
-    ReactESP::app->onTick([this]() { this->tick(); });
-    ReactESP::app->onRepeat(1000, [this]() { this->update(); });
+    reactesp::ReactESP::app->onTick([this]() { this->tick(); });
+    reactesp::ReactESP::app->onRepeat(1000, [this]() { this->update(); });
   }
   String get_value_name() { return "systemhz"; }
 
@@ -70,7 +70,7 @@ class SystemHz : public FloatSensor {
 class FreeMem : public IntSensor {
  public:
   FreeMem() {
-    ReactESP::app->onRepeat(1000, [this]() { this->update(); });
+    reactesp::ReactESP::app->onRepeat(1000, [this]() { this->update(); });
   }
   String get_value_name() { return "freemem"; }
 
@@ -89,7 +89,7 @@ class FreeMem : public IntSensor {
 class Uptime : public FloatSensor {
  public:
   Uptime() {
-    ReactESP::app->onRepeat(1000, [this]() { this->update(); });
+    reactesp::ReactESP::app->onRepeat(1000, [this]() { this->update(); });
   }
   String get_value_name() { return "uptime"; }
 
@@ -108,7 +108,7 @@ class Uptime : public FloatSensor {
 class IPAddrDev : public StringSensor {
  public:
   IPAddrDev() {
-    ReactESP::app->onRepeat(10000, [this]() { this->update(); });
+    reactesp::ReactESP::app->onRepeat(10000, [this]() { this->update(); });
   }
   String get_value_name() { return "ipaddr"; }
 
@@ -127,7 +127,7 @@ class IPAddrDev : public StringSensor {
 class WiFiSignal : public FloatSensor {
  public:
   WiFiSignal() {
-    ReactESP::app->onRepeat(3000, [this]() { this->update(); });
+    reactesp::ReactESP::app->onRepeat(3000, [this]() { this->update(); });
   }
   String get_value_name() { return "wifisignal"; }
 

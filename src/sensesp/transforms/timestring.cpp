@@ -3,7 +3,7 @@
 
 namespace sensesp {
 
-TimeString::TimeString(String config_path)
+TimeString::TimeString(const String& config_path)
     : Transform<time_t, String>(config_path) {}
 
 void TimeString::set(const time_t& input) {

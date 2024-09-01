@@ -4,8 +4,7 @@
 
 namespace sensesp {
 
-DigitalOutput::DigitalOutput(int pin) {
-  pin_number_ = pin;
+DigitalOutput::DigitalOutput(int pin) : pin_number_(pin) {
   pinMode(pin, OUTPUT);
 }
 

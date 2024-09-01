@@ -13,7 +13,7 @@ void convertFromJson(JsonVariantConst src, Position &dst) {
   }
 }
 
-bool canConvertFromJson(JsonVariantConst src, const Position &) {
+bool canConvertFromJson(JsonVariantConst src, const Position & /*position*/) {
   return src.containsKey("latitude") && src.containsKey("longitude");
 }
 

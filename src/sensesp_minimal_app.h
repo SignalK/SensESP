@@ -1,5 +1,5 @@
-#ifndef _sensesp_minimal_app_H_
-#define _sensesp_minimal_app_H_
+#ifndef SENSESP_MINIMAL_APP_H_
+#define SENSESP_MINIMAL_APP_H_
 
 #include "sensesp_base_app.h"
 

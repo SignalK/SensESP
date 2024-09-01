@@ -1,5 +1,5 @@
-#ifndef _air_density_H_
-#define _air_density_H_
+#ifndef SENSESP_TRANSFORMS_AIR_DENSITY_H_
+#define SENSESP_TRANSFORMS_AIR_DENSITY_H_
 
 #include "transform.h"
 
@@ -17,7 +17,7 @@ class AirDensity : public FloatTransform {
   virtual void set(const float& input) override;
 
  private:
-  float inputs[3];
+  float inputs[3]{};
 };
 
 }  // namespace sensesp

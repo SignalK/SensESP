@@ -1,5 +1,5 @@
-#ifndef _sensesp_app_H_
-#define _sensesp_app_H_
+#ifndef SENSESP_APP_H_
+#define SENSESP_APP_H_
 
 #ifdef LED_BUILTIN
 #define LED_PIN LED_BUILTIN

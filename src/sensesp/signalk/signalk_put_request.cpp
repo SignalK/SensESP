@@ -5,15 +5,15 @@
 
 namespace sensesp {
 
-extern ReactESP app;
+extern reactesp::ReactESP app;
 
-std::map<String, SKRequest::PendingRequest*> SKRequest::request_map;
+std::map<String, SKRequest::PendingRequest*> SKRequest::request_map_;
 
 String SKRequest::send_request(JsonDocument& request,
                                std::function<void(JsonDocument&)> callback,
                                uint32_t timeout) {
   // Create a new PendingRequest object to track this request...
-  PendingRequest* pending_request = new PendingRequest();
+  auto* pending_request = new PendingRequest();
 
   // Generate a uuid for the request...
   pending_request->request_id = generate_uuid4();
@@ -24,7 +24,7 @@ String SKRequest::send_request(JsonDocument& request,
   // After 10 seconds, if we haven't already handled a response,
   // assume its not coming.
   pending_request->timeout_cleanup =
-      ReactESP::app->onDelay(timeout, [pending_request]() {
+      reactesp::ReactESP::app->onDelay(timeout, [pending_request]() {
         // Mark the delay reaction null as it will be cleaned up by the ReactESP
         // framework if this executes...
         ESP_LOGW(__FILENAME__, "No response from server for request Id %s",
@@ -33,7 +33,7 @@ String SKRequest::send_request(JsonDocument& request,
         SKRequest::remove_request(pending_request->request_id);
       });
 
-  request_map[pending_request->request_id] = pending_request;
+  request_map_[pending_request->request_id] = pending_request;
 
   // Now, send the actual request to the server...
   request["requestId"] = pending_request->request_id;
@@ -49,12 +49,11 @@ String SKRequest::send_request(JsonDocument& request,
 }
 
 SKRequest::PendingRequest* SKRequest::get_request(String request_id) {
-  auto it = request_map.find(request_id);
-  if (it != request_map.end()) {
-    return (it->second);
-  } else {
-    return nullptr;
+  auto iterator = request_map_.find(request_id);
+  if (iterator != request_map_.end()) {
+    return (iterator->second);
   }
+  return nullptr;
 }
 
 void SKRequest::handle_response(JsonDocument& response) {
@@ -86,15 +85,15 @@ void SKRequest::remove_request(String request_id) {
     }
 
     // Now, remove the request from the map...
-    request_map.erase(request_id);
+    request_map_.erase(request_id);
 
     // Finally, discard the request tracker...
     delete pending_request;
   }
 }
 
-SKPutRequestBase::SKPutRequestBase(String sk_path, String config_path,
-                                   uint32_t timeout)
+SKPutRequestBase::SKPutRequestBase(const String& sk_path,
+                                   const String& config_path, uint32_t timeout)
     : Configurable(config_path), sk_path{sk_path}, timeout{timeout} {
   load_configuration();
 }
@@ -117,25 +116,25 @@ bool SKPutRequestBase::request_pending() {
 void SKPutRequestBase::on_response(JsonDocument& response) {
   String request_id = response["requestId"];
   String state = response["state"];
-  ESP_LOGD(__FILENAME__, "Response %s received for PUT request: %s", state.c_str(),
-           request_id.c_str());
+  ESP_LOGD(__FILENAME__, "Response %s received for PUT request: %s",
+           state.c_str(), request_id.c_str());
 }
 
 void SKPutRequestBase::get_configuration(JsonObject& root) {
   root["sk_path"] = sk_path;
 }
 
-static const char SCHEMA[] PROGMEM = R"###({
+static const char kSchema[] = R"###({
     "type": "object",
       "properties": {
           "sk_path": { "title": "Signal K Path", "type": "string" }
       }
   })###";
 
-String SKPutRequestBase::get_config_schema() { return FPSTR(SCHEMA); }
+String SKPutRequestBase::get_config_schema() { return kSchema; }
 
 bool SKPutRequestBase::set_configuration(const JsonObject& config) {
-  String expected[] = {"sk_path"};
+  const String expected[] = {"sk_path"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;

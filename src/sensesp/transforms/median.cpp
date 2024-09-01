@@ -2,7 +2,7 @@
 
 namespace sensesp {
 
-Median::Median(unsigned int sample_size, String config_path)
+Median::Median(unsigned int sample_size, const String& config_path)
     : FloatTransform(config_path), sample_size_{sample_size} {
   set_requires_restart(true);
   load_configuration();
@@ -15,7 +15,7 @@ void Median::set(const float& input) {
   if (buf_.size() >= sample_size_) {
     // Its time to output a value
     sort(buf_.begin(), buf_.end());
-    int mid = sample_size_ / 2;
+    const unsigned int mid = sample_size_ / 2;
     output = buf_[mid];
     buf_.clear();
     notify();
@@ -26,23 +26,23 @@ void Median::get_configuration(JsonObject& root) {
   root["sample_size"] = sample_size_;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
+static const char kSchema[] = R"({
     "type": "object",
     "properties": {
         "sample_size": { "title": "Sample size", "description": "Number of samples to take before outputing a value", "type": "integer" }
     }
   })";
 
-String Median::get_config_schema() { return FPSTR(SCHEMA); }
+String Median::get_config_schema() { return (kSchema); }
 
 bool Median::set_configuration(const JsonObject& config) {
-  String expected[] = {"sample_size"};
+  String const expected[] = {"sample_size"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
     }
   }
-  unsigned int sample_size_new = config["sample_size"];
+  unsigned int const sample_size_new = config["sample_size"];
   if (sample_size_ != sample_size_new) {
     sample_size_ = sample_size_new;
     buf_.reserve(sample_size_);

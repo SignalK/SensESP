@@ -19,7 +19,7 @@ using namespace sensesp;
 
 // SensESP builds upon the ReactESP framework. Every ReactESP application
 // defines an "app" object.
-ReactESP app;
+reactesp::ReactESP app;
 
 void setup() {
 // Some initialization boilerplate when in debug mode...

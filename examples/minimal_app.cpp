@@ -26,7 +26,7 @@ const uint8_t output_pin2 = 21;
 // with a jumper wire, you should see changes in the reported values on the
 // serial console.
 
-ReactESP app;
+reactesp::ReactESP app;
 
 void setup() {
   SetupLogging();

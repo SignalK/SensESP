@@ -1,5 +1,5 @@
-#ifndef _observablevalue_H
-#define _observablevalue_H
+#ifndef SENSESP_SYSTEM_OBSERVABLEVALUE_H
+#define SENSESP_SYSTEM_OBSERVABLEVALUE_H
 
 #include "configurable.h"
 #include "observable.h"

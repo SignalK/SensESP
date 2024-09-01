@@ -1,5 +1,5 @@
-#ifndef SENSESP_SRC_UI_CONTROLS_H_
-#define SENSESP_SRC_UI_CONTROLS_H_
+#ifndef SENSESP_UI_UI_CONTROLS_H
+#define SENSESP_UI_UI_CONTROLS_H
 
 #include "sensesp.h"
 
@@ -10,7 +10,7 @@ namespace sensesp {
 class StringConfig : public Configurable {
  public:
   StringConfig(String& value, String& config_path)
-      : value_(value), Configurable(config_path) {
+      : Configurable(config_path), value_(value)  {
     load_configuration();
   }
 
@@ -28,7 +28,7 @@ class StringConfig : public Configurable {
 class NumberConfig : public Configurable {
  public:
   NumberConfig(float& value, String& config_path)
-      : value_(value), Configurable(config_path) {
+      : Configurable(config_path), value_(value)  {
     load_configuration();
   }
 
@@ -46,7 +46,7 @@ class NumberConfig : public Configurable {
 class CheckboxConfig : public Configurable {
  public:
   CheckboxConfig(bool value, String title, String config_path)
-      : value_(value), title_(title), Configurable(config_path) {
+      : Configurable(config_path), value_(value), title_(title) {
     load_configuration();
   }
 
@@ -71,11 +71,11 @@ class SelectConfig : public Configurable {
  public:
   SelectConfig(String value, String title, String config_path,
                std::vector<String> options, SelectType format)
-      : value_(value),
+      : Configurable(config_path),
+        value_(value),
         title_(title),
         options_(options),
-        format_(format),
-        Configurable(config_path) {
+        format_(format) {
     load_configuration();
   }
 
@@ -94,4 +94,4 @@ class SelectConfig : public Configurable {
 
 }  // namespace sensesp
 
-#endif  // SENSESP_SRC_UI_CONTROLS_H_
+#endif  // USERS_MAIRAS_SRC_SIGNALK_SENSESP_SRC_SENSESP_UI_UI_CONTROLS_H

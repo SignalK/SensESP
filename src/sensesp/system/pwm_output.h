@@ -1,5 +1,5 @@
-#ifndef _pwm_output_H_
-#define _pwm_output_H_
+#ifndef SENSESP_SYSTEM_PWM_OUTPUT_H
+#define SENSESP_SYSTEM_PWM_OUTPUT_H
 
 #include <map>
 
@@ -71,7 +71,7 @@ class PWMOutput : public ValueConsumer<float> {
 
  protected:
   static std::map<uint8_t, int8_t> channel_to_pin_;
-  uint8_t default_channel_;
+  uint8_t default_channel_{};
 };
 
 }  // namespace sensesp

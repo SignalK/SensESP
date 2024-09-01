@@ -1,5 +1,5 @@
-#ifndef _signalk_position_H_
-#define _signalk_position_H_
+#ifndef SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_POSITION_H_
+#define SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_POSITION_H_
 
 #include <set>
 

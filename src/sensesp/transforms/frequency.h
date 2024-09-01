@@ -1,5 +1,5 @@
-#ifndef _frequency_H_
-#define _frequency_H_
+#ifndef SENSESP_TRANSFORMS_FREQUENCY_H_
+#define SENSESP_TRANSFORMS_FREQUENCY_H_
 
 #include "transform.h"
 
@@ -20,9 +20,9 @@ namespace sensesp {
  */
 class Frequency : public Transform<int, float> {
  public:
-  Frequency(float multiplier = 1, String config_path = "");
+  Frequency(float multiplier = 1, const String& config_path = "");
   virtual void set(const int& input) override;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

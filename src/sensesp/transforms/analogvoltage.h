@@ -1,13 +1,9 @@
-#ifndef _analog_voltage_H
-#define _analog_voltage_H
+#ifndef SENSESP_TRANSFORMS_ANALOGVOLTAGE_H_
+#define SENSESP_TRANSFORMS_ANALOGVOLTAGE_H_
 
 #include "transform.h"
 
-#ifdef ESP32
 #define MAX_ANALOG_OUTPUT 4096
-#else
-#define MAX_ANALOG_OUTPUT 1024
-#endif
 
 namespace sensesp {
 
@@ -41,9 +37,9 @@ namespace sensesp {
 class AnalogVoltage : public FloatTransform {
  public:
   AnalogVoltage(float max_voltage = 3.3, float multiplier = 1.0,
-                float offset = 0.0, String config_path = "");
+                float offset = 0.0, const String& config_path = "");
   virtual void set(const float& input) override;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

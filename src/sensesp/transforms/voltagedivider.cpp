@@ -2,7 +2,8 @@
 
 namespace sensesp {
 
-VoltageDividerR1::VoltageDividerR1(float R2, float Vin, String config_path)
+VoltageDividerR1::VoltageDividerR1(float R2, float Vin,
+                                   const String& config_path)
     : SymmetricTransform<float>(config_path), R2_{R2}, Vin_{Vin} {
   load_configuration();
 }
@@ -16,7 +17,7 @@ void VoltageDividerR1::get_configuration(JsonObject& root) {
   root["R2"] = R2_;
 }
 
-static const char SCHEMA_R1[] PROGMEM = R"({
+static const char kSchemaR1[] = R"({
     "type": "object",
     "properties": {
         "Vin": { "title": "Voltage in", "type": "number" },
@@ -24,10 +25,10 @@ static const char SCHEMA_R1[] PROGMEM = R"({
     }
   })";
 
-String VoltageDividerR1::get_config_schema() { return FPSTR(SCHEMA_R1); }
+String VoltageDividerR1::get_config_schema() { return (kSchemaR1); }
 
 bool VoltageDividerR1::set_configuration(const JsonObject& config) {
-  String expected[] = {"Vin", "R2"};
+  String const expected[] = {"Vin", "R2"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       ESP_LOGE(
@@ -44,7 +45,8 @@ bool VoltageDividerR1::set_configuration(const JsonObject& config) {
   return true;
 }
 
-VoltageDividerR2::VoltageDividerR2(float R1, float Vin, String config_path)
+VoltageDividerR2::VoltageDividerR2(float R1, float Vin,
+                                   const String& config_path)
     : SymmetricTransform<float>(config_path), R1_{R1}, Vin_{Vin} {
   load_configuration();
 }
@@ -58,7 +60,7 @@ void VoltageDividerR2::get_configuration(JsonObject& root) {
   root["R1"] = R1_;
 }
 
-static const char SCHEMA_R2[] PROGMEM = R"({
+static const char kSchemaR2[] = R"({
     "type": "object",
     "properties": {
         "Vin": { "title": "Voltage in", "type": "number" },
@@ -66,10 +68,10 @@ static const char SCHEMA_R2[] PROGMEM = R"({
     }
   })";
 
-String VoltageDividerR2::get_config_schema() { return FPSTR(SCHEMA_R2); }
+String VoltageDividerR2::get_config_schema() { return (kSchemaR2); }
 
 bool VoltageDividerR2::set_configuration(const JsonObject& config) {
-  String expected[] = {"Vin", "R1"};
+  String const expected[] = {"Vin", "R1"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       ESP_LOGE(

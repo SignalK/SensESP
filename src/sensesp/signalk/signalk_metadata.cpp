@@ -2,15 +2,16 @@
 
 namespace sensesp {
 
-SKMetadata::SKMetadata(String units, String display_name, String description,
-                       String short_name, float timeout)
-    : units_{units},
-      display_name_{display_name},
+SKMetadata::SKMetadata(const String& units, const String& display_name,
+                       const String& description, const String& short_name,
+                       float timeout)
+    : display_name_{display_name},
+      units_{units},
       description_{description},
       short_name_{short_name},
       timeout_{timeout} {}
 
-void SKMetadata::add_entry(String sk_path, JsonArray& meta) {
+void SKMetadata::add_entry(const String& sk_path, JsonArray& meta) {
   JsonObject json = meta.add<JsonObject>();
   json["path"] = sk_path;
   JsonObject val = json["value"].to<JsonObject>();

@@ -1,5 +1,5 @@
-#ifndef _signalk_listener_H_
-#define _signalk_listener_H_
+#ifndef SENSESP_SIGNALK_LISTENER_H_
+#define SENSESP_SIGNALK_LISTENER_H_
 
 #include "sensesp.h"
 
@@ -37,7 +37,8 @@ class SKListener : virtual public Observable, public Configurable {
    * to change the configuration of this object. See the Configurable class for
    * more information.
    */
-  SKListener(String sk_path, int listen_delay, String config_path = "");
+  SKListener(const String& sk_path, int listen_delay,
+             const String& config_path = "");
 
   /**
    * Returns the current Signal K path. An empty string
@@ -50,20 +51,20 @@ class SKListener : virtual public Observable, public Configurable {
 
   virtual void parse_value(const JsonObject& json) {}
 
-  static const std::vector<SKListener*>& get_listeners() { return listeners; }
+  static const std::vector<SKListener*>& get_listeners() { return listeners_; }
 
-  static bool take_semaphore(unsigned long int timeout_ms = 0);
+  static bool take_semaphore(uint64_t timeout_ms = 0);
   static void release_semaphore();
 
  protected:
-  String sk_path;
+  String sk_path{};
 
  private:
-  static std::vector<SKListener*> listeners;
+  static std::vector<SKListener*> listeners_;
   int listen_delay;
   static SemaphoreHandle_t semaphore_;
 
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 

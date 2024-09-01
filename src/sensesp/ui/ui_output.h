@@ -1,5 +1,6 @@
-#ifndef _SENSESP_UI_UI_OUTPUT_H_
-#define _SENSESP_UI_UI_OUTPUT_H_
+#ifndef SENSESP_UI_UI_OUTPUT_H
+#define SENSESP_UI_UI_OUTPUT_H
+
 #include <ArduinoJson.h>
 #include <functional>
 #include <map>
@@ -83,7 +84,9 @@ class UIOutput : public UIOutputBase, public ObservableValue<T> {
     return obj;
   }
 
-  void set(const T& new_value) override { this->ValueProducer<T>::emit(new_value); }
+  void set(const T& new_value) override {
+    this->ValueProducer<T>::emit(new_value);
+  }
 };
 }  // namespace sensesp
 

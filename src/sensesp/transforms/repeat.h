@@ -33,13 +33,13 @@ class Repeat : public SymmetricTransform<T> {
       // Delete the old repeat reaction
       repeat_reaction_->remove();
     }
-    repeat_reaction_ =
-        ReactESP::app->onRepeat(interval_, [this]() { this->notify(); });
+    repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
+        interval_, [this]() { this->notify(); });
   }
 
  protected:
   long interval_;
-  RepeatReaction* repeat_reaction_ = nullptr;
+  reactesp::RepeatReaction* repeat_reaction_ = nullptr;
 };
 
 // For compatibility with the old RepeatReport class
@@ -63,7 +63,7 @@ class RepeatStopping : public Repeat<T> {
       // Delete the old repeat reaction
       this->repeat_reaction_->remove();
     }
-    this->repeat_reaction_ = ReactESP::app->onRepeat(
+    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -74,7 +74,7 @@ class RepeatStopping : public Repeat<T> {
       // Delete the old repeat reaction
       this->repeat_reaction_->remove();
     }
-    this->repeat_reaction_ = ReactESP::app->onRepeat(
+    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -113,7 +113,7 @@ class RepeatExpiring : public Repeat<T> {
       // Delete the old repeat reaction
       this->repeat_reaction_->remove();
     }
-    this->repeat_reaction_ = ReactESP::app->onRepeat(
+    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -124,7 +124,7 @@ class RepeatExpiring : public Repeat<T> {
       // Delete the old repeat reaction
       this->repeat_reaction_->remove();
     }
-    this->repeat_reaction_ = ReactESP::app->onRepeat(
+    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -166,7 +166,7 @@ class RepeatConstantRate : public RepeatExpiring<T> {
       this->repeat_reaction_->remove();
     }
 
-    this->repeat_reaction_ = ReactESP::app->onRepeat(
+    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
         interval, [this]() { this->repeat_function(); });
   }
 

@@ -94,7 +94,8 @@ function dev {
 
 function format {
   echo "📝 Formatting code"
-  # TODO
+  find src -print0 -name '*.cpp' -o -name '*.h' | xargs -0 xargs clang-format -i
+  ( cd frontend && pnpm run format )
 }
 
 function lint {

@@ -21,7 +21,8 @@ void setup() {
                                 ->set_wifi("Hat Labs Sensors", "kanneluuri2406")
                                 ->get_app();
 
-  ReactESP::app->onRepeat(1000, []() { toggler.set(!toggler.get()); });
+  reactesp::ReactESP::app->onRepeat(1000,
+                                    []() { toggler.set(!toggler.get()); });
 
   // take some boolean input and convert it into a simple serialized JSON
   // document
@@ -36,8 +37,9 @@ void setup() {
   toggler.connect_to(jsonify);
 
   // print the JSON document to the serial console
-  jsonify->connect_to(new LambdaConsumer<String>(
-      [](String input) { ESP_LOGD("Example", "JSONified output: %s", input.c_str()); }));
+  jsonify->connect_to(new LambdaConsumer<String>([](String input) {
+    ESP_LOGD("Example", "JSONified output: %s", input.c_str());
+  }));
 
   // connect jsonify to the SK delta queue
 

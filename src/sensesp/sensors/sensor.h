@@ -1,5 +1,5 @@
-#ifndef _sensor_H_
-#define _sensor_H_
+#ifndef SENSESP_SENSORS_SENSOR_H_
+#define SENSESP_SENSORS_SENSOR_H_
 
 #include <set>
 
@@ -26,7 +26,7 @@ namespace sensesp {
  */
 class SensorConfig : virtual public Observable, public Configurable {
  public:
-  SensorConfig(String config_path = "");
+  SensorConfig(const String& config_path = "");
 
   static const std::set<SensorConfig*>& get_sensors() { return sensors_; }
 
@@ -69,7 +69,7 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         returning_callback_(callback) {
-    ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
+    reactesp::ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
       this->emit(this->returning_callback_());
     });
   }
@@ -92,8 +92,8 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         emitting_callback_(callback) {
-    ReactESP::app->onRepeat(repeat_interval_ms_,
-                            [this]() { emitting_callback_(this); });
+    reactesp::ReactESP::app->onRepeat(repeat_interval_ms_,
+                                      [this]() { emitting_callback_(this); });
   }
 
  protected:

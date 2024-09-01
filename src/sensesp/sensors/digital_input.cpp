@@ -11,17 +11,17 @@ void DigitalInputState::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay_;
 }
 
-static const char SCHEMA2[] PROGMEM = R"###({
+static const char kSchema2[] = R"###({
     "type": "object",
     "properties": {
         "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
     }
   })###";
 
-String DigitalInputState::get_config_schema() { return FPSTR(SCHEMA2); }
+String DigitalInputState::get_config_schema() { return kSchema2; }
 
 bool DigitalInputState::set_configuration(const JsonObject& config) {
-  String expected[] = {"read_delay"};
+  String const expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
@@ -35,17 +35,17 @@ void DigitalInputCounter::get_configuration(JsonObject& root) {
   root["read_delay"] = read_delay_;
 }
 
-static const char SCHEMA[] PROGMEM = R"###({
+static const char kSchema[] = R"###({
     "type": "object",
     "properties": {
         "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
     }
   })###";
 
-String DigitalInputCounter::get_config_schema() { return FPSTR(SCHEMA); }
+String DigitalInputCounter::get_config_schema() { return kSchema; }
 
 bool DigitalInputCounter::set_configuration(const JsonObject& config) {
-  String expected[] = {"read_delay"};
+  String const expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       return false;
@@ -67,7 +67,7 @@ void DigitalInputDebounceCounter::get_configuration(JsonObject& root) {
   root["ignore_interval"] = ignore_interval_ms_;
 }
 
-static const char DEBOUNCE_SCHEMA[] PROGMEM = R"###({
+static const char kDebounceSchema[] = R"###({
     "type": "object",
     "properties": {
         "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
@@ -76,11 +76,11 @@ static const char DEBOUNCE_SCHEMA[] PROGMEM = R"###({
   })###";
 
 String DigitalInputDebounceCounter::get_config_schema() {
-  return FPSTR(DEBOUNCE_SCHEMA);
+  return kDebounceSchema;
 }
 
 bool DigitalInputDebounceCounter::set_configuration(const JsonObject& config) {
-  String expected[] = {"read_delay", "ignore_interval"};
+  String const expected[] = {"read_delay", "ignore_interval"};
   for (auto str : expected) {
     if (!config.containsKey(str)) {
       ESP_LOGE(

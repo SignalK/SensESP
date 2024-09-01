@@ -13,10 +13,10 @@ SKDeltaQueue::SKDeltaQueue(unsigned int max_buffer_size)
     : max_buffer_size{max_buffer_size}, meta_sent_{false} {
   semaphore_ = xSemaphoreCreateRecursiveMutex();
 
-  ReactESP::app->onDelay(0, [this]() { this->connect_emitters(); });
+  reactesp::ReactESP::app->onDelay(0, [this]() { this->connect_emitters(); });
 }
 
-bool SKDeltaQueue::take_semaphore(unsigned long int timeout_ms) {
+bool SKDeltaQueue::take_semaphore(uint64_t timeout_ms) {
   if (timeout_ms == 0) {
     return xSemaphoreTakeRecursive(semaphore_, portMAX_DELAY) == pdTRUE;
   } else {
@@ -26,7 +26,7 @@ bool SKDeltaQueue::take_semaphore(unsigned long int timeout_ms) {
 
 void SKDeltaQueue::release_semaphore() { xSemaphoreGiveRecursive(semaphore_); }
 
-void SKDeltaQueue::append(const String val) {
+void SKDeltaQueue::append(const String& val) {
   take_semaphore();
   if (get_buffer_size() >= max_buffer_size) {
     buffer.pop_back();
@@ -54,10 +54,10 @@ bool SKDeltaQueue::data_available() {
 void SKDeltaQueue::get_delta(String& output) {
   // estimate the size of the serialized json string
 
-  JsonDocument jsonDoc;
+  JsonDocument json_doc;
 
   // JsonObject delta = jsonDoc.as<JsonObject>();
-  JsonArray updates = jsonDoc["updates"].to<JsonArray>();
+  JsonArray updates = json_doc["updates"].to<JsonArray>();
 
   if (!meta_sent_) {
     this->add_metadata(updates);
@@ -75,7 +75,7 @@ void SKDeltaQueue::get_delta(String& output) {
   }
   release_semaphore();
 
-  serializeJson(jsonDoc, output);
+  serializeJson(json_doc, output);
 
   ESP_LOGD(__FILENAME__, "delta: %s", output.c_str());
 }

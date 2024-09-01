@@ -23,7 +23,7 @@ template <class T>
 class TaskQueueProducer : public ObservableValue<T> {
  public:
   TaskQueueProducer(const T& value,
-                    reactesp::ReactESP* consumer_app = ReactESP::app,
+                    reactesp::ReactESP* consumer_app = reactesp::ReactESP::app,
                     int queue_size = 1, unsigned int poll_rate = 990)
       : ObservableValue<T>(value), queue_size_{queue_size} {
     queue_ = xQueueCreate(queue_size, sizeof(T));
@@ -42,7 +42,8 @@ class TaskQueueProducer : public ObservableValue<T> {
 
   TaskQueueProducer(const T& value, int queue_size = 1,
                     unsigned int poll_rate = 990)
-      : TaskQueueProducer(value, ReactESP::app, queue_size, poll_rate) {}
+      : TaskQueueProducer(value, reactesp::ReactESP::app, queue_size,
+                          poll_rate) {}
 
   virtual void set(const T& value) override {
     // WARNING: This does not check if the queue is full.

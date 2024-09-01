@@ -1,5 +1,5 @@
-#ifndef _hysteresis_H_
-#define _hysteresis_H_
+#ifndef SENSESP_TRANSFORMS_HYSTERESIS_H_
+#define SENSESP_TRANSFORMS_HYSTERESIS_H_
 
 #include "lambda_transform.h"
 

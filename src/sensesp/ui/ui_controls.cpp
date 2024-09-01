@@ -17,16 +17,14 @@ String StringConfig::get_config_schema() {
   return schema;
 }
 
-void StringConfig::get_configuration(JsonObject& root) {
-  root["value"] = value_;
-}
+void StringConfig::get_configuration(JsonObject& doc) { doc["value"] = value_; }
 
 bool StringConfig::set_configuration(const JsonObject& config) {
   if (!config.containsKey("value")) {
     return false;
-  } else {
-    value_ = config["value"].as<String>();
   }
+
+  value_ = config["value"].as<String>();
 
   return true;
 }
@@ -44,16 +42,14 @@ String NumberConfig::get_config_schema() {
   return schema;
 }
 
-void NumberConfig::get_configuration(JsonObject& root) {
-  root["value"] = value_;
-}
+void NumberConfig::get_configuration(JsonObject& doc) { doc["value"] = value_; }
 
 bool NumberConfig::set_configuration(const JsonObject& config) {
   if (!config.containsKey("value")) {
     return false;
-  } else {
-    value_ = config["value"];
   }
+
+  value_ = config["value"];
 
   return true;
 }
@@ -71,16 +67,16 @@ String CheckboxConfig::get_config_schema() {
   return schema;
 }
 
-void CheckboxConfig::get_configuration(JsonObject& root) {
-  root["value"] = value_;
+void CheckboxConfig::get_configuration(JsonObject& doc) {
+  doc["value"] = value_;
 }
 
 bool CheckboxConfig::set_configuration(const JsonObject& config) {
   if (!config.containsKey("value")) {
     return false;
-  } else {
-    value_ = config["value"];
   }
+
+  value_ = config["value"];
 
   return true;
 }
@@ -121,16 +117,14 @@ String SelectConfig::get_config_schema() {
   return schema;
 }
 
-void SelectConfig::get_configuration(JsonObject& root) {
-  root["value"] = value_;
-}
+void SelectConfig::get_configuration(JsonObject& doc) { doc["value"] = value_; }
 
 bool SelectConfig::set_configuration(const JsonObject& config) {
   if (!config.containsKey("value")) {
     return false;
-  } else {
-    value_ = config["value"].as<String>();
   }
+
+  value_ = config["value"].as<String>();
 
   return true;
 }

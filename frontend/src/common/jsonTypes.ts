@@ -6,7 +6,7 @@ export type JsonValue =
   | JsonArray
   | JsonObject;
 
-export type JsonArray = Array<JsonValue>
+export type JsonArray = Array<JsonValue>;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface JsonObject extends Record<string, JsonValue> {}

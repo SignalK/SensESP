@@ -1,5 +1,5 @@
-#ifndef _lambda_transform_H_
-#define _lambda_transform_H_
+#ifndef SENSESP_TRANSFORMS_LAMBDA_TRANSFORM_H_
+#define SENSESP_TRANSFORMS_LAMBDA_TRANSFORM_H_
 
 #include "transform.h"
 
@@ -70,27 +70,27 @@ template <class IN, class OUT, class P1 = bool, class P2 = bool,
           class P3 = bool, class P4 = bool, class P5 = bool, class P6 = bool>
 class LambdaTransform : public Transform<IN, OUT> {
  public:
-  LambdaTransform(std::function<OUT(IN)> function, String config_path = "")
-      : Transform<IN, OUT>(config_path), function0{function}, num_params{0} {
+  LambdaTransform(std::function<OUT(IN)> function, const String& config_path = "")
+      : Transform<IN, OUT>(config_path), num_params_{0}, function0_{function} {
     this->load_configuration();
   }
 
   LambdaTransform(std::function<OUT(IN)> function, const ParamInfo* param_info,
-                  String config_path = "")
+                  const String& config_path = "")
       : Transform<IN, OUT>(config_path),
-        function0{function},
-        num_params{0},
-        param_info{param_info} {
+        num_params_{0},
+        function0_{function},
+        param_info_{param_info} {
     this->load_configuration();
   }
 
   LambdaTransform(std::function<OUT(IN, P1)> function, P1 param1,
-                  const ParamInfo* param_info, String config_path = "")
+                  const ParamInfo* param_info, const String& config_path = "")
       : Transform<IN, OUT>(config_path),
-        function1{function},
-        param1{param1},
-        num_params{1},
-        param_info{param_info} {
+        num_params_{1},
+        function1_{function},
+        param1_{param1},
+        param_info_{param_info} {
     this->load_configuration();
   }
 
@@ -108,98 +108,98 @@ class LambdaTransform : public Transform<IN, OUT> {
    * @param config_path Configuration path for the transform
    **/
   LambdaTransform(std::function<OUT(IN, P1, P2)> function, P1 param1, P2 param2,
-                  const ParamInfo* param_info, String config_path = "")
+                  const ParamInfo* param_info, const String& config_path = "")
       : Transform<IN, OUT>(config_path),
-        function2{function},
-        param1{param1},
-        param2{param2},
-        num_params{2},
-        param_info{param_info} {
+        num_params_{2},
+        function2_{function},
+        param1_{param1},
+        param2_{param2},
+        param_info_{param_info} {
     this->load_configuration();
   }
 
   LambdaTransform(std::function<OUT(IN, P1, P2, P3)> function, P1 param1,
                   P2 param2, P3 param3, const ParamInfo* param_info,
-                  String config_path = "")
+                  const String& config_path = "")
       : Transform<IN, OUT>(config_path),
-        function3{function},
-        param1{param1},
-        param2{param2},
-        param3{param3},
-        num_params{3},
-        param_info{param_info} {
+        num_params_{3},
+        function3_{function},
+        param1_{param1},
+        param2_{param2},
+        param3_{param3},
+        param_info_{param_info} {
     this->load_configuration();
   }
 
   LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4)> function, P1 param1,
                   P2 param2, P3 param3, P4 param4, const ParamInfo* param_info,
-                  String config_path = "")
+                  const String& config_path = "")
       : Transform<IN, OUT>(config_path),
-        function4{function},
-        param1{param1},
-        param2{param2},
-        param3{param3},
-        param4{param4},
-        num_params{4},
-        param_info{param_info} {
+        num_params_{4},
+        function4_{function},
+        param1_{param1},
+        param2_{param2},
+        param3_{param3},
+        param4_{param4},
+        param_info_{param_info} {
     this->load_configuration();
   }
 
   LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4, P5)> function,
                   P1 param1, P2 param2, P3 param3, P4 param4, P5 param5,
-                  const ParamInfo* param_info, String config_path = "")
+                  const ParamInfo* param_info, const String& config_path = "")
       : Transform<IN, OUT>(config_path),
-        function5{function},
-        param1{param1},
-        param2{param2},
-        param3{param3},
-        param4{param4},
-        param5{param5},
-        num_params{5},
-        param_info{param_info} {
+        num_params_{5},
+        function5_{function},
+        param1_{param1},
+        param2_{param2},
+        param3_{param3},
+        param4_{param4},
+        param5_{param5},
+        param_info_{param_info} {
     this->load_configuration();
   }
 
   LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4, P5, P6)> function,
                   P1 param1, P2 param2, P3 param3, P4 param4, P5 param5,
                   P6 param6, const ParamInfo* param_info,
-                  String config_path = "")
+                  const String& config_path = "")
       : Transform<IN, OUT>(config_path),
-        function6{function},
-        param1{param1},
-        param2{param2},
-        param3{param3},
-        param4{param4},
-        param5{param5},
-        param6{param6},
-        num_params{6},
-        param_info{param_info} {
+        num_params_{6},
+        function6_{function},
+        param1_{param1},
+        param2_{param2},
+        param3_{param3},
+        param4_{param4},
+        param5_{param5},
+        param6_{param6},
+        param_info_{param_info} {
     this->load_configuration();
   }
 
   void set(const IN& input) override {
-    switch (num_params) {
+    switch (num_params_) {
       case 0:
-        this->output = function0(input);
+        this->output = function0_(input);
         break;
       case 1:
-        this->output = function1(input, param1);
+        this->output = function1_(input, param1_);
         break;
       case 2:
-        this->output = function2(input, param1, param2);
+        this->output = function2_(input, param1_, param2_);
         break;
       case 3:
-        this->output = function3(input, param1, param2, param3);
+        this->output = function3_(input, param1_, param2_, param3_);
         break;
       case 4:
-        this->output = function4(input, param1, param2, param3, param4);
+        this->output = function4_(input, param1_, param2_, param3_, param4_);
         break;
       case 5:
-        this->output = function5(input, param1, param2, param3, param4, param5);
+        this->output = function5_(input, param1_, param2_, param3_, param4_, param5_);
         break;
       case 6:
         this->output =
-            function6(input, param1, param2, param3, param4, param5, param6);
+            function6_(input, param1_, param2_, param3_, param4_, param5_, param6_);
         break;
       default:
         break;
@@ -208,19 +208,19 @@ class LambdaTransform : public Transform<IN, OUT> {
   }
 
   void get_configuration(JsonObject& doc) override {
-    switch (num_params) {
+    switch (num_params_) {
       case 6:
-        doc[param_info[5].key] = param6;
+        doc[param_info_[5].key] = param6_;
       case 5:
-        doc[param_info[4].key] = param5;
+        doc[param_info_[4].key] = param5_;
       case 4:
-        doc[param_info[3].key] = param4;
+        doc[param_info_[3].key] = param4_;
       case 3:
-        doc[param_info[2].key] = param3;
+        doc[param_info_[2].key] = param3_;
       case 2:
-        doc[param_info[1].key] = param2;
+        doc[param_info_[1].key] = param2_;
       case 1:
-        doc[param_info[0].key] = param1;
+        doc[param_info_[0].key] = param1_;
       default:
         break;
     }
@@ -230,26 +230,26 @@ class LambdaTransform : public Transform<IN, OUT> {
     // test that each argument key (as defined by param_info)
     // exists in the received Json object
     ESP_LOGD(__FILENAME__, "Preparing to restore configuration from FS.");
-    for (int i = 0; i < num_params; i++) {
-      const char* expected = param_info[i].key;
+    for (int i = 0; i < num_params_; i++) {
+      const char* expected = param_info_[i].key;
       if (!config.containsKey(expected)) {
         ESP_LOGD(__FILENAME__, "Didn't find all keys.");
         return false;
       }
     }
-    switch (num_params) {
+    switch (num_params_) {
       case 6:
-        param6 = config[param_info[5].key];
+        param6_ = config[param_info_[5].key];
       case 5:
-        param5 = config[param_info[4].key];
+        param5_ = config[param_info_[4].key];
       case 4:
-        param4 = config[param_info[3].key];
+        param4_ = config[param_info_[3].key];
       case 3:
-        param3 = config[param_info[2].key];
+        param3_ = config[param_info_[2].key];
       case 2:
-        param2 = config[param_info[1].key];
+        param2_ = config[param_info_[1].key];
       case 1:
-        param1 = config[param_info[0].key];
+        param1_ = config[param_info_[0].key];
       default:
         break;
     }
@@ -263,51 +263,51 @@ class LambdaTransform : public Transform<IN, OUT> {
     // a character array pointer as an argument for writing the output to.
     String output = "";
 
-    if (num_params == 0) {
+    if (num_params_ == 0) {
       return "{}";
     }
 
     ESP_LOGD(__FILENAME__, "Preparing config schema for %d parameters",
-             num_params);
+             num_params_);
 
     output.concat(FPSTR(kLambdaTransformSchemaHead));
-    if (num_params > 0) {
+    if (num_params_ > 0) {
       ESP_LOGD(__FILENAME__, "getting param_info:");
-      ESP_LOGD(__FILENAME__, "%s -> %s", param_info[0].key,
-               param_info[0].description);
-      output.concat(format_schema_row(param_info[0].key,
-                                      param_info[0].description,
-                                      get_schema_type_string(param1), false));
+      ESP_LOGD(__FILENAME__, "%s -> %s", param_info_[0].key,
+               param_info_[0].description);
+      output.concat(format_schema_row(param_info_[0].key,
+                                      param_info_[0].description,
+                                      get_schema_type_string(param1_), false));
     }
-    if (num_params > 1) {
+    if (num_params_ > 1) {
       output.concat(",");
-      output.concat(format_schema_row(param_info[1].key,
-                                      param_info[1].description,
-                                      get_schema_type_string(param2), false));
+      output.concat(format_schema_row(param_info_[1].key,
+                                      param_info_[1].description,
+                                      get_schema_type_string(param2_), false));
     }
-    if (num_params > 2) {
+    if (num_params_ > 2) {
       output.concat(",");
-      output.concat(format_schema_row(param_info[2].key,
-                                      param_info[2].description,
-                                      get_schema_type_string(param3), false));
+      output.concat(format_schema_row(param_info_[2].key,
+                                      param_info_[2].description,
+                                      get_schema_type_string(param3_), false));
     }
-    if (num_params > 3) {
+    if (num_params_ > 3) {
       output.concat(",");
-      output.concat(format_schema_row(param_info[3].key,
-                                      param_info[3].description,
-                                      get_schema_type_string(param4), false));
+      output.concat(format_schema_row(param_info_[3].key,
+                                      param_info_[3].description,
+                                      get_schema_type_string(param4_), false));
     }
-    if (num_params > 4) {
+    if (num_params_ > 4) {
       output.concat(",");
-      output.concat(format_schema_row(param_info[4].key,
-                                      param_info[4].description,
-                                      get_schema_type_string(param5), false));
+      output.concat(format_schema_row(param_info_[4].key,
+                                      param_info_[4].description,
+                                      get_schema_type_string(param5_), false));
     }
-    if (num_params > 5) {
+    if (num_params_ > 5) {
       output.concat(",");
-      output.concat(format_schema_row(param_info[5].key,
-                                      param_info[5].description,
-                                      get_schema_type_string(param6), false));
+      output.concat(format_schema_row(param_info_[5].key,
+                                      param_info_[5].description,
+                                      get_schema_type_string(param6_), false));
     }
     output.concat(FPSTR(kLambdaTransformSchemaTail));
 
@@ -317,22 +317,24 @@ class LambdaTransform : public Transform<IN, OUT> {
   }
 
  private:
-  P1 param1;
-  P2 param2;
-  P3 param3;
-  P4 param4;
-  P5 param5;
-  P6 param6;
-  int num_params;
-  const ParamInfo* param_info;
+  int num_params_;
 
-  std::function<OUT(IN)> function0;
-  std::function<OUT(IN, P1)> function1;
-  std::function<OUT(IN, P1, P2)> function2;
-  std::function<OUT(IN, P1, P2, P3)> function3;
-  std::function<OUT(IN, P1, P2, P3, P4)> function4;
-  std::function<OUT(IN, P1, P2, P3, P4, P5)> function5;
-  std::function<OUT(IN, P1, P2, P3, P4, P5, P6)> function6;
+  std::function<OUT(IN)> function0_;
+  std::function<OUT(IN, P1)> function1_;
+  std::function<OUT(IN, P1, P2)> function2_;
+  std::function<OUT(IN, P1, P2, P3)> function3_;
+  std::function<OUT(IN, P1, P2, P3, P4)> function4_;
+  std::function<OUT(IN, P1, P2, P3, P4, P5)> function5_;
+  std::function<OUT(IN, P1, P2, P3, P4, P5, P6)> function6_;
+
+  P1 param1_;
+  P2 param2_;
+  P3 param3_;
+  P4 param4_;
+  P5 param5_;
+  P6 param6_;
+
+  const ParamInfo* param_info_;
 
   static String format_schema_row(const char key[], const char title[],
                                   const char type[], const bool read_only) {

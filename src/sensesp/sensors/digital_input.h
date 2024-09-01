@@ -1,5 +1,5 @@
-#ifndef _digital_input_H_
-#define _digital_input_H_
+#ifndef SENSESP_SENSORS_DIGITAL_INPUT_H_
+#define SENSESP_SENSORS_DIGITAL_INPUT_H_
 
 #include <elapsedMillis.h>
 
@@ -56,13 +56,14 @@ class DigitalInputState : public DigitalInput, public Sensor<bool> {
     set_requires_restart(true);
     load_configuration();
 
-    ReactESP::app->onRepeat(read_delay_, [this]() { emit(digitalRead(pin_)); });
+    reactesp::ReactESP::app->onRepeat(read_delay_,
+                                      [this]() { emit(digitalRead(pin_)); });
   }
 
  private:
   int read_delay_;
   bool triggered_;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };
@@ -91,9 +92,10 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
                       unsigned int read_delay, String config_path = "")
       : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
                             config_path, [this]() { this->counter_++; }) {
-    ReactESP::app->onInterrupt(pin_, interrupt_type_, interrupt_handler_);
+    reactesp::ReactESP::app->onInterrupt(pin_, interrupt_type_,
+                                         interrupt_handler_);
 
-    ReactESP::app->onRepeat(read_delay_, [this]() {
+    reactesp::ReactESP::app->onRepeat(read_delay_, [this]() {
       noInterrupts();
       output = counter_;
       counter_ = 0;
@@ -108,9 +110,9 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
                       std::function<void()> interrupt_handler)
       : DigitalInput{pin, pin_mode},
         Sensor<int>(config_path),
+        read_delay_{read_delay},
         interrupt_type_{interrupt_type},
-        interrupt_handler_{interrupt_handler},
-        read_delay_{read_delay} {
+        interrupt_handler_{interrupt_handler} {
     load_configuration();
   }
 
@@ -120,7 +122,7 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
  private:
   int interrupt_type_;
   std::function<void()> interrupt_handler_;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };
@@ -161,7 +163,7 @@ class DigitalInputDebounceCounter : public DigitalInputCounter {
 
   unsigned int ignore_interval_ms_;
   elapsedMillis since_last_event_;
-  virtual void get_configuration(JsonObject& doc) override;
+  virtual void get_configuration(JsonObject& root) override;
   virtual bool set_configuration(const JsonObject& config) override;
   virtual String get_config_schema() override;
 };
@@ -198,12 +200,12 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
     output = (bool)digitalRead(pin_);
     last_output_ = !output;  // ensure that we always send the first output
 
-    ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() {
+    reactesp::ReactESP::app->onInterrupt(pin_, interrupt_type_, [this]() {
       output = (bool)digitalRead(pin_);
       triggered_ = true;
     });
 
-    ReactESP::app->onTick([this]() {
+    reactesp::ReactESP::app->onTick([this]() {
       if (triggered_ && (output != last_output_)) {
         noInterrupts();
         triggered_ = false;
