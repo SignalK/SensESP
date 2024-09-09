@@ -6,6 +6,7 @@
 #include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"
+#include "sensesp_base_app.h"
 
 namespace sensesp {
 
@@ -69,7 +70,7 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         returning_callback_(callback) {
-    reactesp::ReactESP::app->onRepeat(repeat_interval_ms_, [this]() {
+    SensESPBaseApp::get_event_loop()->onRepeat(repeat_interval_ms_, [this]() {
       this->emit(this->returning_callback_());
     });
   }
@@ -92,8 +93,8 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         emitting_callback_(callback) {
-    reactesp::ReactESP::app->onRepeat(repeat_interval_ms_,
-                                      [this]() { emitting_callback_(this); });
+    SensESPBaseApp::get_event_loop()->onRepeat(
+        repeat_interval_ms_, [this]() { emitting_callback_(this); });
   }
 
  protected:

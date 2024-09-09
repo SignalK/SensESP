@@ -16,8 +16,6 @@
 
 using namespace sensesp;
 
-reactesp::ReactESP app;
-
 MAX6675 thermocouple0(thermoCLK, thermo1CS, thermoDO);
 MAX6675 thermocouple1(thermoCLK, thermo2CS, thermoDO);
 
@@ -57,4 +55,9 @@ void setup() {
 
 }
 
-void loop() { app.tick(); }
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}

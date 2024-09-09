@@ -21,8 +21,6 @@ const uint8_t input_pin1 = 0;
 // The program reacts to changes on GPIO pin 0 and prints the value to the
 // serial console.
 
-reactesp::ReactESP app;
-
 void setup() {
   SetupLogging();
 
@@ -61,6 +59,9 @@ void setup() {
   digin->connect_to(new SKOutputBool("electrical.switches.0.state", "/digin/state"));
 }
 
-// The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() { app.tick(); }
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}

@@ -1,6 +1,7 @@
 #include "click_type.h"
 
 #include "ReactESP.h"
+#include "sensesp_base_app.h"
 
 namespace sensesp {
 
@@ -53,7 +54,7 @@ void ClickType::on_button_press() {
       // of the double_click_interval.  Remove any "SingleClick" report that may
       // have been queued up....
       if (delayed_click_report_ != NULL) {
-        delayed_click_report_->remove();
+        delayed_click_report_->remove(SensESPBaseApp::get_event_loop());
         delayed_click_report_ = NULL;
         ESP_LOGD(__FILENAME__,
                  "ClickType press is double click. Removed queued SingleClick "
@@ -100,7 +101,7 @@ void ClickType::on_button_release() {
       // DoubleClick
       uint64_t const time_of_event = millis();
       int64_t const pd = (long)press_duration_;
-      delayed_click_report_ = reactesp::ReactESP::app->onDelay(
+      delayed_click_report_ = SensESPBaseApp::get_event_loop()->onDelay(
           double_click_interval_ + 20, [this, pd, time_of_event]() {
             ESP_LOGD(
                 __FILENAME__,
@@ -128,7 +129,8 @@ void ClickType::on_button_release() {
 }
 
 void ClickType::emitDelayed(ClickTypes value) {
-  reactesp::ReactESP::app->onDelay(5, [this, value]() { this->emit(value); });
+  SensESPBaseApp::get_event_loop()->onDelay(
+      5, [this, value]() { this->emit(value); });
 }
 
 void ClickType::on_click_completed() {

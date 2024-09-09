@@ -26,8 +26,6 @@ const uint8_t output_pin2 = 21;
 // with a jumper wire, you should see changes in the reported values on the
 // serial console.
 
-reactesp::ReactESP app;
-
 void setup() {
   SetupLogging();
 
@@ -60,14 +58,17 @@ void setup() {
       }));
 
   pinMode(output_pin1, OUTPUT);
-  app.onRepeat(5,
+  SensESPBaseApp::get_event_loop()->onRepeat(5,
                []() { digitalWrite(output_pin1, !digitalRead(output_pin1)); });
 
   pinMode(output_pin2, OUTPUT);
-  app.onRepeat(100,
+  SensESPBaseApp::get_event_loop()->onRepeat(100,
                []() { digitalWrite(output_pin2, !digitalRead(output_pin2)); });
 }
 
-// The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() { app.tick(); }
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}

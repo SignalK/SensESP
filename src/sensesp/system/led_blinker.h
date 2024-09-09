@@ -30,7 +30,7 @@ class BaseBlinker {
   bool enabled_ = true;
   bool state_ = false;
   int update_counter_ = 0;
-  reactesp::Reaction* reaction_ = NULL;
+  reactesp::Event* event_ = NULL;
 };
 
 /**

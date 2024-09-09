@@ -220,7 +220,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
               input == SystemStatus::kWifiNoAP) {
             ESP_LOGW(__FILENAME__,
                      "Unable to connect to wifi for too long; restarting.");
-            reactesp::ReactESP::app->onDelay(1000, []() { ESP.restart(); });
+            SensESPBaseApp::get_event_loop()->onDelay(1000, []() { ESP.restart(); });
           }
         }));
 

@@ -49,7 +49,7 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
     setup_wifi_callbacks();
 
     // Emit the current state as soon as the event loop starts
-    reactesp::ReactESP::app->onDelay(0, [this]() { this->emit(this->output); });
+    SensESPBaseApp::get_event_loop()->onDelay(0, [this]() { this->emit(this->output); });
   }
 
   void setup_wifi_callbacks() {
@@ -89,7 +89,7 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
     // Setting the AP mode happens immediately,
     // so this callback is likely called already before all startables have been
     // initiated. Delay the WiFi state update until the start of the event loop.
-    reactesp::ReactESP::app->onDelay(
+    SensESPBaseApp::get_event_loop()->onDelay(
         0, [this]() { this->emit(WiFiState::kWifiAPModeActivated); });
   }
 

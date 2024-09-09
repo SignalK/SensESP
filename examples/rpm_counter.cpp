@@ -9,10 +9,6 @@
 
 using namespace sensesp;
 
-// SensESP builds upon the ReactESP framework. Every ReactESP application
-// defines an "app" object.
-reactesp::ReactESP app;
-
 void setup() {
   SetupLogging();
 
@@ -79,6 +75,9 @@ void setup() {
                                           // to a Signal K Output as a number
 }
 
-// The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() { app.tick(); }
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}

@@ -29,17 +29,17 @@ class Repeat : public SymmetricTransform<T> {
 
   void set(T input) override {
     this->emit(input);
-    if (repeat_reaction_ != nullptr) {
-      // Delete the old repeat reaction
-      repeat_reaction_->remove();
+    if (repeat_event_ != nullptr) {
+      // Delete the old repeat event
+      repeat_event_->remove();
     }
-    repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
+    repeat_event_ = reactesp::EventLoop::app->onRepeat(
         interval_, [this]() { this->notify(); });
   }
 
  protected:
   long interval_;
-  reactesp::RepeatReaction* repeat_reaction_ = nullptr;
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
 };
 
 // For compatibility with the old RepeatReport class
@@ -59,22 +59,22 @@ class RepeatStopping : public Repeat<T> {
       : Repeat<T>(interval), max_age_{max_age} {
     age_ = max_age;
 
-    if (this->repeat_reaction_ != nullptr) {
-      // Delete the old repeat reaction
-      this->repeat_reaction_->remove();
+    if (this->repeat_event_ != nullptr) {
+      // Delete the old repeat event
+      this->repeat_event_->remove();
     }
-    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
+    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
   virtual void set(const T& input) override {
     this->emit(input);
     age_ = 0;
-    if (this->repeat_reaction_ != nullptr) {
-      // Delete the old repeat reaction
-      this->repeat_reaction_->remove();
+    if (this->repeat_event_ != nullptr) {
+      // Delete the old repeat event
+      this->repeat_event_->remove();
     }
-    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
+    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -87,10 +87,10 @@ class RepeatStopping : public Repeat<T> {
     if (age_ < max_age_) {
       this->notify();
     } else {
-      if (this->repeat_reaction_ != nullptr) {
-        // Delete the old repeat reaction
-        this->repeat_reaction_->remove();
-        this->repeat_reaction_ = nullptr;
+      if (this->repeat_event_ != nullptr) {
+        // Delete the old repeat event
+        this->repeat_event_->remove();
+        this->repeat_event_ = nullptr;
       }
     }
   };
@@ -109,22 +109,22 @@ class RepeatExpiring : public Repeat<T> {
       : Repeat<T>(interval), max_age_{max_age}, expired_value_{expired_value} {
     age_ = max_age;
 
-    if (this->repeat_reaction_ != nullptr) {
-      // Delete the old repeat reaction
-      this->repeat_reaction_->remove();
+    if (this->repeat_event_ != nullptr) {
+      // Delete the old repeat event
+      this->repeat_event_->remove();
     }
-    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
+    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
   virtual void set(const T& input) override {
     this->emit(input);
     age_ = 0;
-    if (this->repeat_reaction_ != nullptr) {
-      // Delete the old repeat reaction
-      this->repeat_reaction_->remove();
+    if (this->repeat_event_ != nullptr) {
+      // Delete the old repeat event
+      this->repeat_event_->remove();
     }
-    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
+    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -161,12 +161,12 @@ class RepeatConstantRate : public RepeatExpiring<T> {
  public:
   RepeatConstantRate(long interval, long max_age, T expired_value)
       : RepeatExpiring<T>(interval, max_age, expired_value) {
-    if (this->repeat_reaction_ != nullptr) {
-      // Delete the old repeat reaction
-      this->repeat_reaction_->remove();
+    if (this->repeat_event_ != nullptr) {
+      // Delete the old repeat event
+      this->repeat_event_->remove();
     }
 
-    this->repeat_reaction_ = reactesp::ReactESP::app->onRepeat(
+    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
         interval, [this]() { this->repeat_function(); });
   }
 

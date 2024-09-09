@@ -6,7 +6,7 @@ parent: Tutorials
 
 # Mix and Match SensESP with Arduino Style Code
 
-While the ReactESP and SensESP features such as the reactions and the producers, consumers and transforms are very powerful, they are not for everyone. This tutorial shows how to use SensESP to only deal with the Signal K networking, and use Arduino-style code to handle the rest.
+While the ReactESP and SensESP features such as the events and the producers, consumers and transforms are very powerful, they are not for everyone. This tutorial shows how to use SensESP to only deal with the Signal K networking, and use Arduino-style code to handle the rest.
 
 After reading this tutorial, you should be able to use SensESP together with existing Arduino style code examples. SensESP will take care of initializing the WiFi and the Signal K connection, and you can use the Arduino style code to read sensors and send data to Signal K.
 
@@ -176,12 +176,10 @@ First, let's add the required header file include statements to the `src/main.cp
 
 The `sensesp_app_builder.h` file contains the `SensESPAppBuilder` class, which we'll use to build the SensESP app. The `signalk_output.h` file contains the `SKOutput` class, which we'll use to create the Signal K output objects.
 
-We'll also need to add a namespace definition and create the ReactESP app that SensESP uses to run the code. Add the following lines after the `#define` statements:
+We also need to add a namespace definition. Add the following lines after the `#include` statements:
 
 ```cpp
 using namespace sensesp;
-
-reactesp::ReactESP app;
 ```
 
 Next, we'll create the SensESP application using the builder class. Add the following lines to the `setup()` function, right before the `Wire.begin()` line:
@@ -195,7 +193,7 @@ Next, we'll create the SensESP application using the builder class. Add the foll
 
 This will create a SensESP app with the hostname `sensesp-bme280`. You can change this to whatever you want, but make sure it's unique on your network. The builder class also allows you to set the WiFi SSID and password and other settings, if needed. See the [SensESPAppBuilder](/generated/docs/classsensesp_1_1_sens_e_s_p_app_builder.html) documentation for more information.
 
-One more thing to do is to add the `app.tick();` command to the end of the `loop()` function. This call triggers execution of any ReactESP reactions that have been scheduled.
+One more thing to do is to add the `app.tick();` command to the end of the `loop()` function. This call triggers execution of any ReactESP events that have been scheduled.
 
 Now, let's start our program. Add the line `sensesp_app->start();` at the very end of the `setup()` function. This will start the SensESP app and connect to the WiFi network.
 
@@ -214,7 +212,7 @@ Every time it is run, after printing the values, the software will sleep for `de
 
 A major, fundamental rule in asynchronous programming (of which ReactESP is a simple example) is that you should never block the main loop. If you do, you'll block all the other tasks as well. So, let's remove the `delay(delayTime);` line from the `loop()` function.
 
-Normally, we'd add an `onRepeat` reaction to call the `printValues()` function every second, but since I promised to minimise the use of ReactESP and SensESP constructs, we'll implement a simple timer using the Arduino `millis()` function. Replace the `loop()` function with the following code:
+Normally, we'd add an `onRepeat` event to call the `printValues()` function every second, but since I promised to minimise the use of ReactESP and SensESP constructs, we'll implement a simple timer using the Arduino `millis()` function. Replace the `loop()` function with the following code:
 
 ```cpp
 void loop() {
@@ -303,8 +301,6 @@ Here's the complete code for the `src/main.cpp` file:
 #define SCL 17
 
 using namespace sensesp;
-
-reactesp::ReactESP app;
 
 Adafruit_BME280 bme;
 

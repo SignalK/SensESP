@@ -95,7 +95,7 @@ class [[deprecated(
   /// if the second click of a double click comes through. This
   /// value will be NULL if no click report is currently
   /// queued up.
-  reactesp::DelayReaction* delayed_click_report_{};
+  reactesp::DelayEvent* delayed_click_report_{};
 
   /// Processes incoming values that represent a "ButonPress" event
   void on_button_press();

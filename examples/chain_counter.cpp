@@ -22,8 +22,6 @@ using namespace sensesp;
  * A bi-directional chain counter is possible, but this is not one.
  */
 
-reactesp::ReactESP app;
-
 void setup() {
   SetupLogging();
 
@@ -147,5 +145,10 @@ void setup() {
 }
 
 // The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() { app.tick(); }
+// It simply calls `app.tick()` which will then execute all events needed.
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}

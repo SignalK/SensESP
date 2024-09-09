@@ -56,6 +56,8 @@ class SensESPBaseApp {
 
   static String get_hostname();
 
+  static reactesp::EventLoop* get_event_loop();
+
  protected:
   /**
    * @brief Construct a new SensESP Base App object
@@ -67,6 +69,8 @@ class SensESPBaseApp {
   SensESPBaseApp();
 
   virtual void setup();
+
+  reactesp::EventLoop event_loop_;
 
   static SensESPBaseApp* instance_;
 

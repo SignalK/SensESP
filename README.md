@@ -56,7 +56,7 @@
 
   ```ini
   lib_deps =
-    SignalK/SensESP @ >=3.0.0-beta.1,<4
+    SignalK/SensESP @ >=3.0.0-beta.2,<4
     # https://github.com/SignalK/SensESP.git  # Use this line to use the latest git version
     # symlink:///Users/mairas/src/SignalK/SensESP  # Use this line to use a local copy
   ```
@@ -95,9 +95,28 @@
 
 - The `reactesp` namespace is no longer imported. If you have any references to
   classes in this namespace, you will need to update them to use the namespace
-  explicitly. For example, `ReactESP` class should be referred to as
-  `reactesp::ReactESP`. In particular, this change probably needs to be made
+  explicitly.
+
+  Additionally, ReactESP classes have been renamed:
+
+  - `ReactESP` -> `reactesp::EventLoop`
+  - `*Reaction` -> `reactesp::*Event`
+
+  For example, `ReactESP` class should be referred to as
+  `reactesp::EventLoop`. In particular, this change probably needs to be made
   in your project's `main.cpp` file.
+
+- `ReactESP` is no longer a singleton. Earlier, you could refer to the singleton
+  instance of `ReactESP` using `ReactESP::app`. Now, the object pointer is
+  maintained by the `SensESPBaseApp` class, and you can refer to it using
+  `sensesp_app->get_event_loop()`. For example:
+
+  ```cpp
+  SensESPBaseApp::get_event_loop()->onRepeat(
+    1000,
+    []() { Serial.println("Hello, world!"); }
+  );
+  ```
 
 ### Development
 

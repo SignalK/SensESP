@@ -12,7 +12,7 @@ PressRepeater::PressRepeater(const String& config_path, int integer_false,
       repeating_{false} {
   load_configuration();
 
-  reactesp::ReactESP::app->onRepeat(10, [this]() {
+  SensESPBaseApp::get_event_loop()->onRepeat(10, [this]() {
     if (pushed_) {
       // A press is currently in progress
       if (repeating_) {

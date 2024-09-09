@@ -20,8 +20,6 @@
 
 using namespace sensesp;
 
-reactesp::ReactESP app;
-
 // GPIO pin that we'll be using for the analog input.
 const uint8_t kAnalogInputPin = 36;
 
@@ -65,6 +63,9 @@ void setup() {
       new SKOutputFloat(sk_path, "", new SKMetadata("ratio", "Indoor light")));
 }
 
-// The loop function is called in an endless loop during program execution.
-// It simply calls `app.tick()` which will then execute all reactions as needed.
-void loop() { app.tick(); }
+void loop() {
+  // We're storing the event loop in a static variable so that it's only
+  // acquired once. Saves a few function calls per loop iteration.
+  static auto event_loop = SensESPBaseApp::get_event_loop();
+  event_loop->tick();
+}
