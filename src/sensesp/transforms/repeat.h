@@ -3,6 +3,7 @@
 
 #include <elapsedMillis.h>
 
+#include "sensesp/types/nullable.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -103,10 +104,10 @@ class RepeatStopping : public Repeat<T> {
  * @tparam T
  */
 template <typename T>
-class RepeatExpiring : public Repeat<T> {
+class RepeatExpiring : public Repeat<Nullable<T>> {
  public:
-  RepeatExpiring(long interval, long max_age, T expired_value)
-      : Repeat<T>(interval), max_age_{max_age}, expired_value_{expired_value} {
+  RepeatExpiring(long interval, long max_age)
+      : Repeat<T>(interval), max_age_{max_age} {
     age_ = max_age;
 
     if (this->repeat_event_ != nullptr) {
@@ -131,7 +132,6 @@ class RepeatExpiring : public Repeat<T> {
  protected:
   elapsedMillis age_;
   long max_age_;
-  T expired_value_;
 
  protected:
   void repeat_function() {
@@ -140,7 +140,7 @@ class RepeatExpiring : public Repeat<T> {
     if (age_ < max_age_) {
       this->notify();
     } else {
-      this->emit(expired_value_);
+      this->emit(Nullable::invalid());
     }
   };
 };
@@ -159,8 +159,8 @@ class RepeatExpiring : public Repeat<T> {
 template <typename T>
 class RepeatConstantRate : public RepeatExpiring<T> {
  public:
-  RepeatConstantRate(long interval, long max_age, T expired_value)
-      : RepeatExpiring<T>(interval, max_age, expired_value) {
+  RepeatConstantRate(long interval, long max_age)
+      : RepeatExpiring<T>(interval, max_age) {
     if (this->repeat_event_ != nullptr) {
       // Delete the old repeat event
       this->repeat_event_->remove();
