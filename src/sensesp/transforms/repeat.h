@@ -33,7 +33,7 @@ class Repeat : public SymmetricTransform<T> {
       // Delete the old repeat event
       repeat_event_->remove();
     }
-    repeat_event_ = reactesp::EventLoop::app->onRepeat(
+    repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         interval_, [this]() { this->notify(); });
   }
 
@@ -63,7 +63,7 @@ class RepeatStopping : public Repeat<T> {
       // Delete the old repeat event
       this->repeat_event_->remove();
     }
-    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
+    this->repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -74,7 +74,7 @@ class RepeatStopping : public Repeat<T> {
       // Delete the old repeat event
       this->repeat_event_->remove();
     }
-    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
+    this->repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -113,7 +113,7 @@ class RepeatExpiring : public Repeat<T> {
       // Delete the old repeat event
       this->repeat_event_->remove();
     }
-    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
+    this->repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -124,7 +124,7 @@ class RepeatExpiring : public Repeat<T> {
       // Delete the old repeat event
       this->repeat_event_->remove();
     }
-    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
+    this->repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
   }
 
@@ -166,7 +166,7 @@ class RepeatConstantRate : public RepeatExpiring<T> {
       this->repeat_event_->remove();
     }
 
-    this->repeat_event_ = reactesp::EventLoop::app->onRepeat(
+    this->repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         interval, [this]() { this->repeat_function(); });
   }
 

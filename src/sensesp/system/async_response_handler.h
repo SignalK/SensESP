@@ -6,6 +6,7 @@
 #include <Arduino.h>
 #include <elapsedMillis.h>
 
+#include "sensesp_base_app.h"
 #include "valueproducer.h"
 
 namespace sensesp {
@@ -49,17 +50,18 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
     this->emit(status_);
 
     if (timeout_event_ != nullptr) {
-      reactesp::EventLoop::app->remove(timeout_event_);
+      SensESPBaseApp::get_event_loop()->remove(timeout_event_);
       timeout_event_ = nullptr;
     }
-    timeout_event_ = reactesp::EventLoop::app->onDelay(timeout_, [this]() {
-      if (status_ == AsyncResponseStatus::kPending) {
-        ESP_LOGV("AsyncResponseHandler", "Timeout");
-        status_ = AsyncResponseStatus::kTimeout;
-        this->emit(status_);
-      }
-      this->timeout_event_ = nullptr;
-    });
+    timeout_event_ =
+        SensESPBaseApp::get_event_loop()->onDelay(timeout_, [this]() {
+          if (status_ == AsyncResponseStatus::kPending) {
+            ESP_LOGV("AsyncResponseHandler", "Timeout");
+            status_ = AsyncResponseStatus::kTimeout;
+            this->emit(status_);
+          }
+          this->timeout_event_ = nullptr;
+        });
   }
 
   void set(const bool& success) override {
@@ -72,7 +74,7 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
 
     // Clear the timeout event
     if (timeout_event_ != nullptr) {
-      reactesp::EventLoop::app->remove(timeout_event_);
+      SensESPBaseApp::get_event_loop()->remove(timeout_event_);
       timeout_event_ = nullptr;
     }
 
