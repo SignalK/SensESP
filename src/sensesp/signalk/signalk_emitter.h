@@ -29,9 +29,13 @@ class SKEmitter : virtual public Observable {
 
   /**
    * Returns the data to be reported to the server as
-   * a Signal K json string.
+   * a Signal K json object.
    */
-  virtual String as_signalk() { return "not implemented"; }
+  virtual void as_signalk_json(JsonDocument& doc) {
+    ESP_LOGE("SKEmitter", "as_signalk_json() not implemented");
+    JsonVariant obj = doc.as<JsonVariant>();
+    obj.set("ERROR! Not implemented");
+  }
 
   /**
    * Returns a Metadata structure that describes the sk_path this SKEmitter

@@ -8,13 +8,9 @@ SKOutputTime::SKOutputTime(const String& sk_path, const String& config_path)
   load_configuration();
 }
 
-String SKOutputTime::as_signalk() {
-  JsonDocument json_doc;
-  String json;
-  json_doc["path"] = this->sk_path_;
-  json_doc["value"] = output;
-  serializeJson(json_doc, json);
-  return json;
+void SKOutputTime::as_signalk_json(JsonDocument& doc){
+  doc["path"] = this->sk_path_;
+  doc["value"] = output;
 }
 
 void SKOutputTime::get_configuration(JsonObject& doc) {

@@ -46,13 +46,9 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
     this->ValueProducer<T>::emit(new_value);
   }
 
-  virtual String as_signalk() override {
-    JsonDocument json_doc;
-    String json;
-    json_doc["path"] = this->get_sk_path();
-    json_doc["value"] = ValueProducer<T>::output;
-    serializeJson(json_doc, json);
-    return json;
+  virtual void as_signalk_json(JsonDocument& doc) override {
+    doc["path"] = this->get_sk_path();
+    doc["value"] = ValueProducer<T>::output;
   }
 
   virtual void get_configuration(JsonObject& root) override {
@@ -92,13 +88,9 @@ class SKOutputRawJson : public SKOutput<String> {
                   SKMetadata* meta = NULL)
       : SKOutput<String>(sk_path, config_path, meta) {}
 
-  virtual String as_signalk() override {
-    JsonDocument json_doc;
-    String json;
-    json_doc["path"] = this->get_sk_path();
-    json_doc["value"] = serialized(ValueProducer<String>::output);
-    serializeJson(json_doc, json);
-    return json;
+  virtual void as_signalk_json(JsonDocument& doc) override {
+    doc["path"] = this->get_sk_path();
+    doc["value"] = serialized(ValueProducer<String>::output);
   }
 };
 

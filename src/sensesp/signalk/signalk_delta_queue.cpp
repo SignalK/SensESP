@@ -39,8 +39,13 @@ void SKDeltaQueue::append(const String& val) {
 void SKDeltaQueue::connect_emitters() {
   for (auto const& sk_source : SKEmitter::get_sources()) {
     if (sk_source->get_sk_path() != "") {
-      sk_source->attach(
-          [sk_source, this]() { this->append(sk_source->as_signalk()); });
+      sk_source->attach([sk_source, this]() {
+        String output;
+        JsonDocument doc;
+        sk_source->as_signalk_json(doc);
+        serializeJson(doc, output);
+        this->append(output);
+      });
     }
   }
 }

@@ -48,7 +48,9 @@
 
 - Implement stream producers that emit characters or lines from a stream
   (e.g., a serial port)
--
+- SKEmitter::as_signalk() has been renamed to SKEmitter::as_signalk_json().
+  It now writes its output to a JsonDocument reference instead
+  of returning a String.
 
 ### Migrating Existing Projects
 
