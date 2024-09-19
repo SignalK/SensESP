@@ -146,8 +146,11 @@ class SensESPApp : public SensESPBaseApp {
       new UIOutput<String>("MAC Address", WiFi.macAddress(), "Network", 1100);
   UILambdaOutput<String>* wifi_ssid_ui_output_ = new UILambdaOutput<String>(
       "SSID", [this]() { return WiFi.SSID(); }, "Network", 1200);
+  UILambdaOutput<String>* free_memory_ui_output_ = new UILambdaOutput<String>(
+      "Free memory (bytes)", []() { return String(ESP.getFreeHeap()); }, "System",
+      1250);
   UILambdaOutput<int8_t>* wifi_rssi_ui_output_ = new UILambdaOutput<int8_t>(
-      "WiFi signal strength", [this]() { return WiFi.RSSI(); }, "Network",
+      "WiFi signal strength (dB)", [this]() { return WiFi.RSSI(); }, "Network",
       1300);
   UILambdaOutput<String>* sk_server_address_ui_output_ =
       new UILambdaOutput<String>(
