@@ -36,8 +36,10 @@
   - `ExpiringValue`: output value expires after a given time unless updated
   - `Repeat`: repeats the input value at a given interval
   - `RepeatStopping`: repeats the input value at a given interval, stopping after a given time
-  - `RepeatExpiring`: repeats the input value at a given interval, expiring after a given time
-  - `RepeatConstantRate`: repeats the input value at a constant rate, regardless of input rate
+  - `RepeatExpiring`: repeats the input value at a given interval, expiring after a given time.
+    `RepeatExpiring` outputs an `Nullable<T>` value, where the value is invalid/`null` after expiration.
+  - `RepeatConstantRate`: repeats the input value at a constant rate, regardless of input rate.
+    `RepeatConstantRate` outputs an `Nullable<T>` value, where the value is invalid/`null` after expiration.
   - `Join`: joins multiple input values into a single output tuple that is emitted when any inputs are updated
   - `Zip`: joins multiple input values into a single output tuple that is emitted when all inputs are updated
   - `Throttle`: limits the rate of output updates
@@ -51,6 +53,12 @@
 - SKEmitter::as_signalk() has been renamed to SKEmitter::as_signalk_json().
   It now writes its output to a JsonDocument reference instead
   of returning a String.
+
+- Custom Signal K output is done differently than before. Instead of implementing
+  an `as_signalk()` method in your `SKOutput` specialization that returned a
+  serialized string, you should
+  implement an `as_signalk_json()` method that writes constructs an ArduinoJson
+  object in the provided `JsonObject` reference.
 
 ### Migrating Existing Projects
 
