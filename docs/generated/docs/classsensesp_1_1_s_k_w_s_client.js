@@ -1,13 +1,13 @@
 var classsensesp_1_1_s_k_w_s_client =
 [
-    [ "SKWSClient", "classsensesp_1_1_s_k_w_s_client.html#afd450fed15aea99d8b846deef864c35f", null ],
+    [ "SKWSClient", "classsensesp_1_1_s_k_w_s_client.html#aabb8d52b1b30f1ccc9e61a68747bb271", null ],
     [ "connect", "classsensesp_1_1_s_k_w_s_client.html#a71c4787c20640979d0f21e722fdf161a", null ],
-    [ "get_configuration", "classsensesp_1_1_s_k_w_s_client.html#abb70f79557e75bb39c0315518bb711dc", null ],
+    [ "get_configuration", "classsensesp_1_1_s_k_w_s_client.html#a3cf28326ed522edc3f2df87fad367897", null ],
     [ "get_connection_status", "classsensesp_1_1_s_k_w_s_client.html#ad7e2b5675a5fc16b4e71fdc938124a2d", null ],
     [ "get_delta_rx_count_producer", "classsensesp_1_1_s_k_w_s_client.html#ac215811c50ad83fde84244b447b29016", null ],
     [ "get_delta_tx_count_producer", "classsensesp_1_1_s_k_w_s_client.html#a98b7f8de43ef5ff4105285e3609b8b51", null ],
     [ "get_server_address", "classsensesp_1_1_s_k_w_s_client.html#ae448df2754d0958abe5f42587516840d", null ],
-    [ "get_server_port", "classsensesp_1_1_s_k_w_s_client.html#a972d7b2ccee87874abdd683a76d44409", null ],
+    [ "get_server_port", "classsensesp_1_1_s_k_w_s_client.html#a6dbcea9c948711827a7c672c3375e561", null ],
     [ "is_connected", "classsensesp_1_1_s_k_w_s_client.html#a1edbfa57e491c2e3fe0025758d395845", null ],
     [ "loop", "classsensesp_1_1_s_k_w_s_client.html#a24be571bdd7183f50711457a9be96fd6", null ],
     [ "on_connected", "classsensesp_1_1_s_k_w_s_client.html#afbe265351213c154f3977b8fb56fc91d", null ],

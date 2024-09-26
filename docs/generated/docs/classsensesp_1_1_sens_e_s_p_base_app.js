@@ -6,6 +6,7 @@ var classsensesp_1_1_sens_e_s_p_base_app =
     [ "set_hostname", "classsensesp_1_1_sens_e_s_p_base_app.html#a6480199c42124d844eadd89d6fac5c60", null ],
     [ "setup", "classsensesp_1_1_sens_e_s_p_base_app.html#ac987bc8c9b4a04ca24199a09a2b29b99", null ],
     [ "start", "classsensesp_1_1_sens_e_s_p_base_app.html#a9bb8791c56e28547e416818f95c34d1f", null ],
+    [ "event_loop_", "classsensesp_1_1_sens_e_s_p_base_app.html#ae516965980ce05d7ffbe3cec1837d66d", null ],
     [ "filesystem_", "classsensesp_1_1_sens_e_s_p_base_app.html#a7d281f5428ba4b7b2ee4ddbff7bdbbbc", null ],
     [ "hostname_", "classsensesp_1_1_sens_e_s_p_base_app.html#ac63e51311fbc70ee4cb925a02ecd5542", null ]
 ];

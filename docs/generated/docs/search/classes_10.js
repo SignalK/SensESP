@@ -23,7 +23,7 @@ var searchData=
   ['transform_3c_20int_2c_20int_20_3e_20',['Transform&lt; int, int &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
   ['transform_3c_20string_2c_20bool_20_3e_21',['Transform&lt; String, bool &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
   ['transform_3c_20string_2c_20string_20_3e_22',['Transform&lt; String, String &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
-  ['transform_3c_20t_2c_20float_20_3e_23',['Transform&lt; T, float &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
+  ['transform_3c_20t_2c_20double_20_3e_23',['Transform&lt; T, double &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
   ['transform_3c_20t_2c_20t_20_3e_24',['Transform&lt; T, T &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
   ['transform_3c_20time_5ft_2c_20string_20_3e_25',['Transform&lt; time_t, String &gt;',['../classsensesp_1_1_transform.html',1,'sensesp']]],
   ['transformbase_26',['TransformBase',['../classsensesp_1_1_transform_base.html',1,'sensesp']]],

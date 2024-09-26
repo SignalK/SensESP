@@ -1,5 +1,8 @@
 var annotated_dup =
 [
+    [ "ArduinoJson", "namespace_arduino_json.html", [
+      [ "Converter< std::vector< T > >", "struct_arduino_json_1_1_converter_3_01std_1_1vector_3_01_t_01_4_01_4.html", null ]
+    ] ],
     [ "sensesp", "namespacesensesp.html", [
       [ "AccessPointSettings", "classsensesp_1_1_access_point_settings.html", "classsensesp_1_1_access_point_settings" ],
       [ "AirDensity", "classsensesp_1_1_air_density.html", "classsensesp_1_1_air_density" ],
@@ -7,6 +10,7 @@ var annotated_dup =
       [ "AnalogVoltage", "classsensesp_1_1_analog_voltage.html", "classsensesp_1_1_analog_voltage" ],
       [ "AngleCorrection", "classsensesp_1_1_angle_correction.html", "classsensesp_1_1_angle_correction" ],
       [ "AsyncResponseHandler", "classsensesp_1_1_async_response_handler.html", "classsensesp_1_1_async_response_handler" ],
+      [ "AttitudeVector", "structsensesp_1_1_attitude_vector.html", "structsensesp_1_1_attitude_vector" ],
       [ "BaseAnalogReader", "classsensesp_1_1_base_analog_reader.html", "classsensesp_1_1_base_analog_reader" ],
       [ "BaseBlinker", "classsensesp_1_1_base_blinker.html", "classsensesp_1_1_base_blinker" ],
       [ "BaseButtonHandler", "classsensesp_1_1_base_button_handler.html", "classsensesp_1_1_base_button_handler" ],
@@ -20,7 +24,6 @@ var annotated_dup =
       [ "CurveInterpolator", "classsensesp_1_1_curve_interpolator.html", "classsensesp_1_1_curve_interpolator" ],
       [ "Debounce", "classsensesp_1_1_debounce.html", "classsensesp_1_1_debounce" ],
       [ "DewPoint", "classsensesp_1_1_dew_point.html", "classsensesp_1_1_dew_point" ],
-      [ "Difference", "classsensesp_1_1_difference.html", "classsensesp_1_1_difference" ],
       [ "DigitalInput", "classsensesp_1_1_digital_input.html", "classsensesp_1_1_digital_input" ],
       [ "DigitalInputChange", "classsensesp_1_1_digital_input_change.html", "classsensesp_1_1_digital_input_change" ],
       [ "DigitalInputCounter", "classsensesp_1_1_digital_input_counter.html", "classsensesp_1_1_digital_input_counter" ],
@@ -62,6 +65,7 @@ var annotated_dup =
       [ "MovingAverage", "classsensesp_1_1_moving_average.html", "classsensesp_1_1_moving_average" ],
       [ "Networking", "classsensesp_1_1_networking.html", "classsensesp_1_1_networking" ],
       [ "NonceData", "structsensesp_1_1_nonce_data.html", "structsensesp_1_1_nonce_data" ],
+      [ "Nullable", "classsensesp_1_1_nullable.html", "classsensesp_1_1_nullable" ],
       [ "NumberConfig", "classsensesp_1_1_number_config.html", "classsensesp_1_1_number_config" ],
       [ "Observable", "classsensesp_1_1_observable.html", "classsensesp_1_1_observable" ],
       [ "ObservableValue", "classsensesp_1_1_observable_value.html", "classsensesp_1_1_observable_value" ],

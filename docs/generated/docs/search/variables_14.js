@@ -11,8 +11,7 @@ var searchData=
   ['ws_5fauthorizing_5fpattern_8',['ws_authorizing_pattern',['../namespacesensesp.html#ad205805904dd5fd707bf89379a37d29d',1,'sensesp']]],
   ['ws_5fclient_9',['ws_client',['../namespacesensesp.html#a59300ccd7271c89738149da446486a3b',1,'sensesp']]],
   ['ws_5fclient_5f_10',['ws_client_',['../classsensesp_1_1_sens_e_s_p_app.html#ade8dcb0cd6e7cbd01e73e99a7595f8c2',1,'sensesp::SensESPApp']]],
-  ['ws_5fclient_5ftask_5fstack_5fsize_11',['ws_client_task_stack_size',['../namespacesensesp.html#a2e1fbe9a6800a64f87c85f5bc364aed6',1,'sensesp']]],
-  ['ws_5fconnected_5fpattern_12',['ws_connected_pattern',['../namespacesensesp.html#aff963dfc2628977311980b540060e5d1',1,'sensesp']]],
-  ['ws_5fconnecting_5fpattern_13',['ws_connecting_pattern',['../namespacesensesp.html#ab1f00fb5ce1be4c8291be223e68a6be7',1,'sensesp']]],
-  ['ws_5fdisconnected_5fpattern_14',['ws_disconnected_pattern',['../namespacesensesp.html#a048a12a0033281a7ea316123fec959f2',1,'sensesp']]]
+  ['ws_5fconnected_5fpattern_11',['ws_connected_pattern',['../namespacesensesp.html#aff963dfc2628977311980b540060e5d1',1,'sensesp']]],
+  ['ws_5fconnecting_5fpattern_12',['ws_connecting_pattern',['../namespacesensesp.html#ab1f00fb5ce1be4c8291be223e68a6be7',1,'sensesp']]],
+  ['ws_5fdisconnected_5fpattern_13',['ws_disconnected_pattern',['../namespacesensesp.html#a048a12a0033281a7ea316123fec959f2',1,'sensesp']]]
 ];

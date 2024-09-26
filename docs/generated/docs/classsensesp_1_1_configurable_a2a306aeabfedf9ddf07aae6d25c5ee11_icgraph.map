@@ -1,24 +1,23 @@
 <map id="sensesp::Configurable::requires_restart" name="sensesp::Configurable::requires_restart">
-<area shape="rect" id="Node000001" title="Return true if the Configurable requires restart after saving." alt="" coords="978,121,1129,162"/>
-<area shape="rect" id="Node000002" href="$namespacesensesp.html#aa56239cde954cbed1f5ebdff2cdefab1" title=" " alt="" coords="784,47,925,87"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="982,118,910,90,912,85,984,113"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_configurable.html#afa020e0768f7c988d808f7b4ce5fb3ff" title="Set the requires_restart flag." alt="" coords="779,153,930,194"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="963,159,931,164,930,159,962,154"/>
+<area shape="rect" id="Node000001" title="Return true if the Configurable requires restart after saving." alt="" coords="978,104,1129,145"/>
+<area shape="rect" id="Node000002" href="$namespacesensesp.html#aa56239cde954cbed1f5ebdff2cdefab1" title=" " alt="" coords="784,39,925,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="975,101,918,83,920,77,976,96"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_configurable.html#afa020e0768f7c988d808f7b4ce5fb3ff" title="Set the requires_restart flag." alt="" coords="779,136,930,177"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="963,142,931,147,930,142,962,136"/>
 <area shape="rect" id="Node000003" href="$namespacesensesp.html#a66af6e0617fab1bba4fbe606ae8a6062" title="Handle HTTP requests to /config." alt="" coords="572,5,714,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="768,53,714,42,715,37,769,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="768,48,714,39,715,34,769,43"/>
 <area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_app.html#a49534d134dbae3ce35f4bac5879a8640" title="Perform initialization of SensESPApp once builder configuration is done." alt="" coords="351,5,507,46"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="557,28,508,28,508,23,557,23"/>
 <area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#ac348bac39d057253e3d291a3c4d7d79f" title="Get the SensESPApp object." alt="" coords="107,5,303,46"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="336,28,304,28,304,23,336,23"/>
-<area shape="rect" id="Node000006" href="$main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="5,42,59,68"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="92,48,60,53,59,48,91,42"/>
-<area shape="poly" id="edge11_Node000007_Node000006" title=" " alt="" coords="809,148,771,127,730,111,614,96,414,80,59,59,59,54,415,75,615,90,731,106,774,122,812,143"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_analog_input.html#a5ca4793c70e90a20a4ab116f9392bff9" title=" " alt="" coords="569,120,717,161"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="763,162,717,155,718,149,764,157"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_digital_input_state.html#a323b536f360d477b94e10df4ebda9730" title=" " alt="" coords="555,185,731,226"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="764,190,731,195,731,190,763,185"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_median.html#a589961dc1b8c656c7df6c81fcfbbd83c" title=" " alt="" coords="558,250,728,276"/>
-<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="806,204,732,240,697,252,695,247,730,235,803,199"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_moving_average.html#afd18a13f0e434a0648623522b3e80a3c" title=" " alt="" coords="559,300,727,341"/>
-<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="827,208,785,250,732,291,711,302,708,297,729,286,781,246,824,204"/>
+<area shape="rect" id="Node000006" href="$main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="5,13,59,38"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="91,28,59,28,59,23,91,23"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_analog_input.html#a4b27168640332b403ec93974a5c6ef7c" title=" " alt="" coords="569,71,717,111"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="771,134,711,115,712,109,773,128"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_digital_input_state.html#a323b536f360d477b94e10df4ebda9730" title=" " alt="" coords="555,136,731,177"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="763,159,731,159,731,154,763,154"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_median.html#ac9354051b4140d8cc308b160625b98cc" title=" " alt="" coords="558,201,728,226"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="764,183,694,203,692,198,763,178"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_moving_average.html#a93fb5bbf3076efcf486a36fb197efffb" title=" " alt="" coords="559,251,727,291"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="816,188,776,215,732,241,708,252,705,248,729,237,773,211,813,184"/>
 </map>

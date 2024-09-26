@@ -26,6 +26,7 @@ var classsensesp_1_1_sens_e_s_p_app =
     [ "button_handler_", "classsensesp_1_1_sens_e_s_p_app.html#ac877500cbb51e8b638343e439a0510ab", null ],
     [ "delta_rx_count_ui_output_", "classsensesp_1_1_sens_e_s_p_app.html#acd2794a5ea79afc0ade467877547ead0", null ],
     [ "delta_tx_count_ui_output_", "classsensesp_1_1_sens_e_s_p_app.html#a3c0ff098db2544973297e3d626fa9161", null ],
+    [ "free_memory_ui_output_", "classsensesp_1_1_sens_e_s_p_app.html#aa2c17964704c41c5d0ef9afae4c0eb03", null ],
     [ "hostname_ui_output_", "classsensesp_1_1_sens_e_s_p_app.html#adef98534b793d5d731c0974deb36b30c", null ],
     [ "http_server_", "classsensesp_1_1_sens_e_s_p_app.html#a7403602b7bdf5c022aed80051c6ab3ad", null ],
     [ "mac_address_ui_output_", "classsensesp_1_1_sens_e_s_p_app.html#a9c07774ddcd05e2f367df31061ff94c4", null ],

@@ -12,6 +12,6 @@ var searchData=
   ['httpauthenticator_9',['HTTPAuthenticator',['../classsensesp_1_1_h_t_t_p_authenticator.html#a3da39583fc581993b6e62c7b52d75087',1,'sensesp::HTTPAuthenticator']]],
   ['httpdigestauthenticator_10',['HTTPDigestAuthenticator',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#ac0c22a9a21545870dd2523ea023b540b',1,'sensesp::HTTPDigestAuthenticator']]],
   ['httprequesthandler_11',['HTTPRequestHandler',['../classsensesp_1_1_h_t_t_p_request_handler.html#a50bd5cca28a01abbce11b847e527da34',1,'sensesp::HTTPRequestHandler']]],
-  ['httpserver_12',['HTTPServer',['../classsensesp_1_1_h_t_t_p_server.html#ad47f5bfa53b3166b57e65dcf08d20481',1,'sensesp::HTTPServer']]],
+  ['httpserver_12',['HTTPServer',['../classsensesp_1_1_h_t_t_p_server.html#ad582006382529c29bc52b8773b8362c7',1,'sensesp::HTTPServer']]],
   ['hysteresis_13',['Hysteresis',['../classsensesp_1_1_hysteresis.html#ad66b79a9b0e02ed5d7617e09fb968060',1,'sensesp::Hysteresis']]]
 ];

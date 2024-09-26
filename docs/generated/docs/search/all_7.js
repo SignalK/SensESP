@@ -7,7 +7,7 @@ var searchData=
   ['handle_5fresponse_4',['handle_response',['../classsensesp_1_1_s_k_request.html#a272df2b3fe96d053c12597866212ac29',1,'sensesp::SKRequest']]],
   ['handle_5fvery_5flong_5fpress_5',['handle_very_long_press',['../classsensesp_1_1_minimal_button_handler.html#ae0765a640028979faa385b57ba6374df',1,'sensesp::MinimalButtonHandler']]],
   ['handleevent_6',['handleEvent',['../classsensesp_1_1_minimal_button_handler.html#aaabccc6e10fbfa51d7c34f95c93c847f',1,'sensesp::MinimalButtonHandler']]],
-  ['handler_5ffunc_5f_7',['handler_func_',['../classsensesp_1_1_h_t_t_p_request_handler.html#a1efd8e1d81253679596bf33ad67861aa',1,'sensesp::HTTPRequestHandler']]],
+  ['handler_5ffunc_5f_7',['handler_func_',['../classsensesp_1_1_h_t_t_p_request_handler.html#a6531dee37a8ce923d76f7051bdd87568',1,'sensesp::HTTPRequestHandler']]],
   ['handlers_5f_8',['handlers_',['../classsensesp_1_1_h_t_t_p_server.html#ad6be71fe05a2428f5c25ff3a42a6228b',1,'sensesp::HTTPServer']]],
   ['hash_2ecpp_9',['hash.cpp',['../hash_8cpp.html',1,'']]],
   ['hash_2eh_10',['hash.h',['../hash_8h.html',1,'']]],
@@ -28,7 +28,7 @@ var searchData=
   ['httpauthenticator_25',['HTTPAuthenticator',['../classsensesp_1_1_h_t_t_p_authenticator.html',1,'sensesp::HTTPAuthenticator'],['../classsensesp_1_1_h_t_t_p_authenticator.html#a3da39583fc581993b6e62c7b52d75087',1,'sensesp::HTTPAuthenticator::HTTPAuthenticator()']]],
   ['httpdigestauthenticator_26',['HTTPDigestAuthenticator',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html',1,'sensesp::HTTPDigestAuthenticator'],['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#ac0c22a9a21545870dd2523ea023b540b',1,'sensesp::HTTPDigestAuthenticator::HTTPDigestAuthenticator()']]],
   ['httprequesthandler_27',['HTTPRequestHandler',['../classsensesp_1_1_h_t_t_p_request_handler.html',1,'sensesp::HTTPRequestHandler'],['../classsensesp_1_1_h_t_t_p_request_handler.html#a50bd5cca28a01abbce11b847e527da34',1,'sensesp::HTTPRequestHandler::HTTPRequestHandler()']]],
-  ['httpserver_28',['HTTPServer',['../classsensesp_1_1_h_t_t_p_server.html',1,'sensesp::HTTPServer'],['../classsensesp_1_1_h_t_t_p_server.html#ad47f5bfa53b3166b57e65dcf08d20481',1,'sensesp::HTTPServer::HTTPServer()']]],
+  ['httpserver_28',['HTTPServer',['../classsensesp_1_1_h_t_t_p_server.html',1,'sensesp::HTTPServer'],['../classsensesp_1_1_h_t_t_p_server.html#ad582006382529c29bc52b8773b8362c7',1,'sensesp::HTTPServer::HTTPServer()']]],
   ['hysteresis_29',['Hysteresis',['../classsensesp_1_1_hysteresis.html',1,'sensesp::Hysteresis&lt; IN, OUT &gt;'],['../classsensesp_1_1_hysteresis.html#ad66b79a9b0e02ed5d7617e09fb968060',1,'sensesp::Hysteresis::Hysteresis()']]],
   ['hysteresis_2eh_30',['hysteresis.h',['../hysteresis_8h.html',1,'']]],
   ['hysteresis_5fparam_5finfo_31',['hysteresis_param_info',['../namespacesensesp.html#a018643e365493945bdfa43db85b03fb3',1,'sensesp']]]

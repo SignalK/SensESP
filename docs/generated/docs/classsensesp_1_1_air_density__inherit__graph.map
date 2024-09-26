@@ -1,37 +1,43 @@
 <map id="sensesp::AirDensity" name="sensesp::AirDensity">
-<area shape="rect" id="Node000001" title="Transforms temperature, relative humidity and pressure in air density." alt="" coords="1876,66,2016,92"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="1718,66,1827,92"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1843,76,1876,76,1876,82,1843,82"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="930,33,1067,74"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1083,52,1354,57,1694,70,1718,71,1717,77,1694,75,1354,62,1083,57"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="662,13,830,39"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="845,34,930,43,929,49,845,39"/>
-<area shape="rect" id="Node000012" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1198,91,1335,131"/>
-<area shape="poly" id="edge13_Node000012_Node000004" title=" " alt="" coords="845,9,903,4,968,3,1035,7,1100,19,1140,32,1177,50,1238,88,1236,92,1175,55,1138,37,1099,24,1034,13,968,8,903,9,845,14"/>
-<area shape="rect" id="Node000015" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="930,148,1067,189"/>
-<area shape="poly" id="edge18_Node000015_Node000004" title=" " alt="" coords="811,42,850,65,866,83,875,101,883,118,899,134,931,151,928,156,896,138,879,121,870,103,862,86,846,69,808,47"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="224,13,376,39"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="391,23,662,23,662,28,391,28"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="644,80,848,105"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="849,74,929,62,930,67,849,79"/>
-<area shape="poly" id="edge19_Node000015_Node000006" title=" " alt="" coords="807,108,930,145,929,150,805,113"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="199,77,401,103"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="417,88,643,89,643,94,417,93"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="648,154,844,180"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="789,145,847,115,871,99,896,83,929,70,931,75,899,88,874,103,849,120,792,150"/>
-<area shape="poly" id="edge20_Node000015_Node000008" title=" " alt="" coords="859,171,873,171,930,169,930,174,873,176,859,176"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,178,150,204"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="146,172,199,163,319,153,441,151,648,157,647,162,441,156,320,159,199,168,147,177"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="203,178,397,204"/>
-<area shape="poly" id="edge10_Node000010_Node000009" title=" " alt="" coords="165,188,203,188,203,194,165,194"/>
-<area shape="rect" id="Node000014" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="425,226,620,252"/>
-<area shape="poly" id="edge16_Node000014_Node000009" title=" " alt="" coords="150,205,199,214,316,226,425,233,425,238,316,232,199,219,149,210"/>
-<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="413,182,620,171,648,170,648,175,620,177,413,188"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="1384,93,1617,119"/>
-<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="1632,91,1693,85,1717,82,1718,88,1694,90,1632,96"/>
-<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="1350,106,1384,106,1384,111,1350,112"/>
-<area shape="rect" id="Node000013" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="897,98,1100,124"/>
-<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="1115,108,1197,108,1197,114,1115,114"/>
-<area shape="poly" id="edge15_Node000012_Node000014" title=" " alt="" coords="635,243,735,244,853,239,977,224,1039,213,1099,198,1137,184,1174,166,1234,130,1237,134,1176,171,1139,189,1100,203,1040,218,978,230,853,244,736,249,635,248"/>
-<area shape="poly" id="edge17_Node000012_Node000015" title=" " alt="" coords="1082,148,1173,129,1197,124,1198,129,1174,134,1083,154"/>
+<area shape="rect" id="Node000001" title="Transforms temperature, relative humidity and pressure in air density." alt="" coords="2081,174,2221,200"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_symmetric_transform.html" title=" " alt="" coords="1923,174,2032,200"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2048,184,2081,184,2081,190,2048,190"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1403,132,1540,173"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1556,155,1899,178,1923,180,1922,185,1898,183,1555,160"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="662,197,830,222"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="845,192,872,188,1167,164,1402,152,1402,157,1167,169,872,194,845,197"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="1099,189,1236,230"/>
+<area shape="poly" id="edge12_Node000011_Node000004" title=" " alt="" coords="845,207,1099,207,1099,212,845,212"/>
+<area shape="rect" id="Node000015" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1403,256,1540,297"/>
+<area shape="poly" id="edge20_Node000015_Node000004" title=" " alt="" coords="846,217,1067,239,1402,268,1402,273,1066,244,845,223"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="224,213,376,238"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="391,221,620,214,661,212,662,217,620,219,391,226"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="872,5,1042,46"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="1058,15,1131,15,1213,21,1298,37,1340,49,1380,65,1403,78,1424,95,1456,130,1452,133,1420,99,1400,82,1378,69,1338,54,1297,42,1212,27,1130,21,1058,21"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="199,29,401,54"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="417,36,871,25,872,30,417,42"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="644,60,848,85"/>
+<area shape="poly" id="edge14_Node000012_Node000007" title=" " alt="" coords="375,55,426,63,538,71,643,72,643,77,538,76,425,69,374,61"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="665,109,827,150"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="842,122,1086,117,1232,120,1379,131,1403,134,1402,140,1378,136,1232,126,1086,122,842,127"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,214,150,240"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="104,202,147,173,198,149,259,131,323,119,387,111,450,108,568,109,664,116,664,121,568,114,450,113,387,117,323,124,260,136,200,153,149,178,107,207"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="203,164,397,189"/>
+<area shape="poly" id="edge10_Node000010_Node000009" title=" " alt="" coords="151,208,240,187,241,192,152,213"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="648,246,844,272"/>
+<area shape="poly" id="edge16_Node000013_Node000009" title=" " alt="" coords="151,241,199,248,320,258,441,262,648,260,648,266,441,267,320,263,199,254,150,246"/>
+<area shape="rect" id="Node000017" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="425,314,620,340"/>
+<area shape="poly" id="edge23_Node000017_Node000009" title=" " alt="" coords="105,248,137,272,175,293,238,311,303,322,367,327,425,329,425,334,367,333,303,327,236,316,173,297,134,277,102,252"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="413,163,619,142,664,137,665,142,620,147,413,168"/>
+<area shape="poly" id="edge17_Node000013_Node000010" title=" " alt="" coords="389,190,673,243,672,248,388,195"/>
+<area shape="poly" id="edge11_Node000003_Node000011" title=" " alt="" coords="1251,202,1314,195,1378,183,1419,171,1421,176,1379,189,1315,201,1252,208"/>
+<area shape="poly" id="edge24_Node000015_Node000011" title=" " alt="" coords="1252,225,1403,259,1402,264,1251,231"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="820,87,849,95,992,142,1112,186,1111,191,990,147,847,100,818,92"/>
+<area shape="poly" id="edge15_Node000011_Node000013" title=" " alt="" coords="858,243,1098,215,1099,220,859,249"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="1589,209,1822,234"/>
+<area shape="poly" id="edge18_Node000002_Node000014" title=" " alt="" coords="1826,204,1922,191,1922,197,1827,209"/>
+<area shape="poly" id="edge19_Node000014_Node000015" title=" " alt="" coords="1554,254,1646,233,1648,238,1556,260"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="1066,365,1269,390"/>
+<area shape="poly" id="edge21_Node000015_Node000016" title=" " alt="" coords="1284,368,1331,358,1378,343,1416,321,1447,295,1451,299,1419,325,1380,348,1333,364,1285,373"/>
+<area shape="poly" id="edge22_Node000015_Node000017" title=" " alt="" coords="635,318,1402,277,1402,283,635,324"/>
 </map>

@@ -5,8 +5,9 @@ var classsensesp_1_1_time_counter =
     [ "get_configuration", "classsensesp_1_1_time_counter.html#a22914b2fd1b3bcd9644b965c217a54f4", null ],
     [ "set", "classsensesp_1_1_time_counter.html#ab0a62d5f4eebebafb8435837e025cccc", null ],
     [ "set_configuration", "classsensesp_1_1_time_counter.html#a88533e1ca4b2e260ea05e442b2ad8c94", null ],
-    [ "duration_", "classsensesp_1_1_time_counter.html#a2f3179ef16832af0e76017a4acf1c881", null ],
-    [ "duration_at_start_", "classsensesp_1_1_time_counter.html#a8875078f961409584a4e8df85c9850f7", null ],
-    [ "previous_state_", "classsensesp_1_1_time_counter.html#afc93519a60d68ee3bdab732509113f16", null ],
-    [ "start_time_", "classsensesp_1_1_time_counter.html#a6a977d92875259b0db353c9bb03e6027", null ]
+    [ "duration_at_start_ms_", "classsensesp_1_1_time_counter.html#a74ebbc18a49227e32511251897eb384c", null ],
+    [ "duration_ms_", "classsensesp_1_1_time_counter.html#af02c40f8dc412c93a67546bdda89df8f", null ],
+    [ "initialized_", "classsensesp_1_1_time_counter.html#a390fd6584db3c1df53b25d3a2275973a", null ],
+    [ "previous_state_", "classsensesp_1_1_time_counter.html#a72f890d52207330eea58613d1c09ce3c", null ],
+    [ "start_time_ms_", "classsensesp_1_1_time_counter.html#ad658016ca6437729399c26729b6d3112", null ]
 ];

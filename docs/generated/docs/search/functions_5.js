@@ -6,6 +6,7 @@ var searchData=
   ['flip_5fstate_3',['flip_state',['../classsensesp_1_1_base_blinker.html#ab58e08ff07f1e534db66c99b74a01805',1,'sensesp::BaseBlinker']]],
   ['floatthreshold_4',['FloatThreshold',['../classsensesp_1_1_float_threshold.html#a7c796b2810c9db0405b9f8874ea64a60',1,'sensesp::FloatThreshold']]],
   ['freemem_5',['FreeMem',['../classsensesp_1_1_free_mem.html#ae9ced6316b567ae9e89526ef3a90527a',1,'sensesp::FreeMem']]],
-  ['frequency_6',['Frequency',['../classsensesp_1_1_frequency.html#a6fe4341177bfed51716ab1b07cec83c6',1,'sensesp::Frequency']]],
-  ['from_5fjson_7',['from_json',['../classsensesp_1_1_access_point_settings.html#a1d26085b98cdf68b1fb5607454fd83a0',1,'sensesp::AccessPointSettings::from_json()'],['../classsensesp_1_1_client_s_s_i_d_config.html#a54c78249be4dd0824fa318a7a37dec81',1,'sensesp::ClientSSIDConfig::from_json()']]]
+  ['frequency_6',['Frequency',['../classsensesp_1_1_frequency.html#ac6999a501b5ba3c3560d031e9f4e87aa',1,'sensesp::Frequency']]],
+  ['from_5fjson_7',['from_json',['../classsensesp_1_1_access_point_settings.html#a1d26085b98cdf68b1fb5607454fd83a0',1,'sensesp::AccessPointSettings::from_json()'],['../classsensesp_1_1_client_s_s_i_d_config.html#a54c78249be4dd0824fa318a7a37dec81',1,'sensesp::ClientSSIDConfig::from_json()']]],
+  ['fromjson_8',['fromJson',['../struct_arduino_json_1_1_converter_3_01std_1_1vector_3_01_t_01_4_01_4.html#aa71398d03c4e415b65d3ea36983bb61a',1,'ArduinoJson::Converter&lt; std::vector&lt; T &gt; &gt;']]]
 ];

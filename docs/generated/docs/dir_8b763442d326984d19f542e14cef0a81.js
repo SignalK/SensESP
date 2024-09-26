@@ -15,8 +15,6 @@ var dir_8b763442d326984d19f542e14cef0a81 =
     [ "debounce.h", "debounce_8h.html", "debounce_8h" ],
     [ "dew_point.cpp", "dew__point_8cpp.html", null ],
     [ "dew_point.h", "dew__point_8h.html", "dew__point_8h" ],
-    [ "difference.cpp", "difference_8cpp.html", null ],
-    [ "difference.h", "difference_8h.html", "difference_8h" ],
     [ "enable.h", "enable_8h.html", "enable_8h" ],
     [ "filter.h", "filter_8h.html", "filter_8h" ],
     [ "frequency.cpp", "frequency_8cpp.html", null ],
