@@ -30,7 +30,7 @@ String SKOutputTime::get_config_schema() { return kSchema; }
 bool SKOutputTime::set_configuration(const JsonObject& config) {
   const String expected[] = {"sk_path"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

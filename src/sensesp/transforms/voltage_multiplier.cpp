@@ -29,7 +29,7 @@ String VoltageMultiplier::get_config_schema() { return (kSchema); }
 bool VoltageMultiplier::set_configuration(const JsonObject& config) {
   String const expected[] = {"R1", "R2"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

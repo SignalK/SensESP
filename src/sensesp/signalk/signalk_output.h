@@ -58,7 +58,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
   String get_config_schema() override { return FPSTR(SIGNALKOUTPUT_SCHEMA); }
 
   virtual bool set_configuration(const JsonObject& config) override {
-    if (!config.containsKey("sk_path")) {
+    if (!config["sk_path"].is<String>()) {
       return false;
     }
     this->set_sk_path(config["sk_path"].as<String>());

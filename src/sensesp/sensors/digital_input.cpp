@@ -23,7 +23,7 @@ String DigitalInputState::get_config_schema() { return kSchema2; }
 bool DigitalInputState::set_configuration(const JsonObject& config) {
   String const expected[] = {"read_delay"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }
@@ -47,7 +47,7 @@ String DigitalInputCounter::get_config_schema() { return kSchema; }
 bool DigitalInputCounter::set_configuration(const JsonObject& config) {
   String const expected[] = {"read_delay"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }
@@ -82,7 +82,7 @@ String DigitalInputDebounceCounter::get_config_schema() {
 bool DigitalInputDebounceCounter::set_configuration(const JsonObject& config) {
   String const expected[] = {"read_delay", "ignore_interval"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       ESP_LOGE(
           __FILENAME__,
           "Cannot set DigitalInputDebounceConfiguration configuration: missing "

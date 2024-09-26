@@ -30,7 +30,7 @@ void SKListener::get_configuration(JsonObject &root) {
 }
 
 bool SKListener::set_configuration(const JsonObject &config) {
-  if (!config.containsKey("sk_path")) {
+  if (!config["sk_path"].is<String>()) {
     return false;
   }
   this->set_sk_path(config["sk_path"].as<String>());

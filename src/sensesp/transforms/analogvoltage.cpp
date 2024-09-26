@@ -36,7 +36,7 @@ String AnalogVoltage::get_config_schema() { return kSchema; }
 bool AnalogVoltage::set_configuration(const JsonObject& config) {
   const String expected[] = {"max_voltage", "multiplier", "offset"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

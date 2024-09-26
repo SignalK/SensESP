@@ -30,7 +30,7 @@ String VoltageDividerR1::get_config_schema() { return (kSchemaR1); }
 bool VoltageDividerR1::set_configuration(const JsonObject& config) {
   String const expected[] = {"Vin", "R2"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       ESP_LOGE(
           __FILENAME__,
           "Cannot set VoltageDividerR1: configuration: missing json field %s\n",
@@ -73,7 +73,7 @@ String VoltageDividerR2::get_config_schema() { return (kSchemaR2); }
 bool VoltageDividerR2::set_configuration(const JsonObject& config) {
   String const expected[] = {"Vin", "R1"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       ESP_LOGE(
           __FILENAME__,
           "Cannot set VoltageDividerR2: configuration: missing json field %s\n",

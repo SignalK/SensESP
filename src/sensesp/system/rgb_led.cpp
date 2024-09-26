@@ -76,7 +76,7 @@ String RgbLed::get_config_schema() { return kSchema; }
 bool RgbLed::set_configuration(const JsonObject& config) {
   String expected[] = {"led_on_rgb", "led_off_rgb"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

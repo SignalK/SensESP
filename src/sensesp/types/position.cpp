@@ -8,7 +8,7 @@ void convertFromJson(JsonVariantConst src, Position &dst) {
   dst.longitude = src["longitude"].as<double>();
   dst.latitude = src["latitude"].as<double>();
 
-  if (src.containsKey("altitude")) {
+  if (src["altitude"].is<float>()) {
     dst.altitude = src["altitude"].as<float>();
   }
 }
@@ -17,7 +17,7 @@ void convertFromJson(JsonVariantConst src, ENUVector &dst) {
   dst.east = src["east"].as<float>();
   dst.north = src["north"].as<float>();
 
-  if (src.containsKey("up")) {
+  if (src["up"].is<float>()) {
     dst.up = src["up"].as<float>();
   }
 }
@@ -29,17 +29,17 @@ void convertFromJson(JsonVariantConst src, AttitudeVector &dst) {
 }
 
 bool canConvertFromJson(JsonVariantConst src, const Position & /*position*/) {
-  return src.containsKey("latitude") && src.containsKey("longitude");
+  return src["latitude"].is<double>() && src["longitude"].is<double>();
 }
 
 bool canConvertFromJson(JsonVariantConst src, const ENUVector & /*enu*/) {
-  return src.containsKey("east") && src.containsKey("north");
+  return src["east"].is<double>() && src["north"].is<double>();
 }
 
 bool canConvertFromJson(JsonVariantConst src,
                         const AttitudeVector & /*attitude*/) {
-  return src.containsKey("roll") && src.containsKey("pitch") &&
-         src.containsKey("yaw");
+  return src["roll"].is<float>() && src["pitch"].is<float>() &&
+         src["yaw"].is<float>();
 }
 
 void convertToJson(const Position &src, JsonVariant dst) {

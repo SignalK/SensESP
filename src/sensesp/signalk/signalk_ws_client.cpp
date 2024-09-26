@@ -224,16 +224,16 @@ void SKWSClient::on_receive_delta(uint8_t* payload, size_t length) {
   auto error = deserializeJson(message, buf);
 
   if (!error) {
-    if (message.containsKey("updates")) {
+    if (message["updates"].is<JsonVariant>()) {
       on_receive_updates(message);
     }
 
-    if (message.containsKey("put")) {
+    if (message["put"].is<JsonVariant>()) {
       on_receive_put(message);
     }
 
     // Putrequest contains also requestId Key  GA
-    if (message.containsKey("requestId") && !message.containsKey("put")) {
+    if (message["requestId"].is<JsonVariant>() && !message["put"].is<JsonVariant>()) {
       SKRequest::handle_response(message);
     }
   } else {
@@ -696,22 +696,22 @@ void SKWSClient::get_configuration(JsonObject& root) {
 }
 
 bool SKWSClient::set_configuration(const JsonObject& config) {
-  if (config.containsKey("sk_address")) {
+  if (config["sk_address"].is<String>()) {
     this->conf_server_address_ = config["sk_address"].as<String>();
   }
-  if (config.containsKey("sk_port")) {
+  if (config["sk_port"].is<int>()) {
     this->conf_server_port_ = config["sk_port"].as<int>();
   }
-  if (config.containsKey("use_mdns")) {
+  if (config["use_mdns"].is<bool>()) {
     this->use_mdns_ = config["use_mdns"].as<bool>();
   }
-  if (config.containsKey("token")) {
+  if (config["token"].is<String>()) {
     this->auth_token_ = config["token"].as<String>();
   }
-  if (config.containsKey("client_id")) {
+  if (config["client_id"].is<String>()) {
     this->client_id_ = config["client_id"].as<String>();
   }
-  if (config.containsKey("polling_href")) {
+  if (config["polling_href"].is<String>()) {
     this->polling_href_ = config["polling_href"].as<String>();
   }
 

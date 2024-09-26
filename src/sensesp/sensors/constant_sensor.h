@@ -73,7 +73,7 @@ class ConstantSensor : public Sensor<T> {
   }
   virtual bool set_configuration(const JsonObject &config) override {
     // Neither of the configuration parameters are mandatory
-    if (config.containsKey("value")) {
+    if (config["value"].is<T>()) {
       value_ = config["value"].as<T>();
     }
     return true;

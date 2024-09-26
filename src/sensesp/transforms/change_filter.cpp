@@ -49,7 +49,7 @@ String ChangeFilter::get_config_schema() { return (kSchema); }
 bool ChangeFilter::set_configuration(const JsonObject& config) {
   String const expected[] = {"min_delta", "max_delta", "max_skips"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

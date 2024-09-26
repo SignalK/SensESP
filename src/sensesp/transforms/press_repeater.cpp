@@ -67,7 +67,7 @@ String PressRepeater::get_config_schema() { return (kSchema); }
 bool PressRepeater::set_configuration(const JsonObject& config) {
   String const expected[] = {"repeat_start_interval", "repeat_interval"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }
