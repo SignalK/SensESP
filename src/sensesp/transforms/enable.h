@@ -38,7 +38,7 @@ class Enable : public Transform<T, T> {
     doc["enabled"] = enabled_;
   }
   virtual bool set_configuration(const JsonObject& config) override {
-    if (config.containsKey("enabled")) {
+    if (config["enabled"].is<bool>()) {
       enabled_ = config["enabled"];
     } else {
       return false;

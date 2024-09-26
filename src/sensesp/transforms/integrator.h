@@ -48,11 +48,8 @@ class Integrator : public Transform<C, P> {
     doc["k"] = k;
   }
   virtual bool set_configuration(const JsonObject& config) override final {
-    String expected[] = {"k"};
-    for (auto str : expected) {
-      if (!config.containsKey(str)) {
-        return false;
-      }
+    if (!config["k"].is<P>()) {
+      return false;
     }
     k = config["k"];
     return true;

@@ -232,7 +232,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     ESP_LOGD(__FILENAME__, "Preparing to restore configuration from FS.");
     for (int i = 0; i < num_params_; i++) {
       const char* expected = param_info_[i].key;
-      if (!config.containsKey(expected)) {
+      if (!config[expected].is<JsonVariant>()) {
         ESP_LOGD(__FILENAME__, "Didn't find all keys.");
         return false;
       }

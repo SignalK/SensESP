@@ -171,7 +171,7 @@ bool ClickType::set_configuration(const JsonObject& config) {
   String const expected[] = {"long_click_delay", "ultra_long_click_delay",
                              "double_click_interval"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

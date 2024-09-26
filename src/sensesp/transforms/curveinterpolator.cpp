@@ -136,7 +136,7 @@ String CurveInterpolator::get_config_schema() {
 bool CurveInterpolator::set_configuration(const JsonObject& config) {
   String const expected[] = {"samples"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       ESP_LOGE(
           __FILENAME__,
           "Can not set CurveInterpolator configuration: missing json field "

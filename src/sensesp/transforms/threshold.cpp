@@ -31,7 +31,7 @@ static const char kFloatSchema[] = R"({
 bool FloatThreshold::set_configuration(const JsonObject& config) {
   String const expected[] = {"min", "max", "in_range"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }
@@ -61,7 +61,7 @@ static const char kIntSchema[] = R"({
 bool IntThreshold::set_configuration(const JsonObject& config) {
   String const expected[] = {"min", "max", "in_range"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

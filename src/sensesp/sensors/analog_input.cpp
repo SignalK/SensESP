@@ -40,7 +40,7 @@ String AnalogInput::get_config_schema() { return kSchema; }
 bool AnalogInput::set_configuration(const JsonObject& config) {
   String const expected[] = {"read_delay"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

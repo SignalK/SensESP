@@ -20,7 +20,7 @@ String StringConfig::get_config_schema() {
 void StringConfig::get_configuration(JsonObject& doc) { doc["value"] = value_; }
 
 bool StringConfig::set_configuration(const JsonObject& config) {
-  if (!config.containsKey("value")) {
+  if (!config["value"].is<String>()) {
     return false;
   }
 
@@ -45,7 +45,7 @@ String NumberConfig::get_config_schema() {
 void NumberConfig::get_configuration(JsonObject& doc) { doc["value"] = value_; }
 
 bool NumberConfig::set_configuration(const JsonObject& config) {
-  if (!config.containsKey("value")) {
+  if (!config["value"].is<float>()) {
     return false;
   }
 
@@ -72,7 +72,7 @@ void CheckboxConfig::get_configuration(JsonObject& doc) {
 }
 
 bool CheckboxConfig::set_configuration(const JsonObject& config) {
-  if (!config.containsKey("value")) {
+  if (!config["value"].is<bool>()) {
     return false;
   }
 
@@ -120,7 +120,7 @@ String SelectConfig::get_config_schema() {
 void SelectConfig::get_configuration(JsonObject& doc) { doc["value"] = value_; }
 
 bool SelectConfig::set_configuration(const JsonObject& config) {
-  if (!config.containsKey("value")) {
+  if (!config["value"].is<String>()) {
     return false;
   }
 

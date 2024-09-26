@@ -218,16 +218,16 @@ void Networking::get_configuration(JsonObject& root) {
 }
 
 bool Networking::set_configuration(const JsonObject& config) {
-  if (config.containsKey("hostname")) {
+  if (config["hostname"].is<String>()) {
     // deal with the legacy Json format
     String hostname = config["hostname"].as<String>();
     SensESPBaseApp::get()->get_hostname_observable()->set(hostname);
 
-    if (config.containsKey("ssid")) {
+    if (config["ssid"].is<String>()) {
       String ssid = config["ssid"].as<String>();
       String password = config["password"].as<String>();
 
-      if (config.containsKey("ap_mode")) {
+      if (config["ap_mode"].is<String>()) {
         bool ap_mode;
         if (config["ap_mode"].as<String>() == "Access Point" ||
             config["ap_mode"].as<String>() == "Hotspot") {
@@ -242,12 +242,12 @@ bool Networking::set_configuration(const JsonObject& config) {
     }
   } else {
     // Either an empty config or a new-style config
-    if (config.containsKey("apSettings")) {
+    if (config["apSettings"].is<JsonVariant>()) {
       ap_settings_ = AccessPointSettings::from_json(config["apSettings"]);
     } else {
       ap_settings_ = AccessPointSettings(true);
     }
-    if (config.containsKey("clientSettings")) {
+    if (config["clientSettings"].is<JsonVariant>()) {
       const JsonObject& client_settings_json = config["clientSettings"];
       client_enabled_ = client_settings_json["enabled"] | false;
       client_settings_.clear();

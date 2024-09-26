@@ -76,7 +76,7 @@ class PersistingObservableValue : public ObservableValue<T>,
   }
 
   virtual bool set_configuration(const JsonObject& config) override {
-    if (!config.containsKey("value")) {
+    if (!config["value"].is<T>()) {
       return false;
     }
     ObservableValue<T>::set(config["value"]);

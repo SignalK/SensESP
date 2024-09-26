@@ -38,7 +38,7 @@ String Median::get_config_schema() { return (kSchema); }
 bool Median::set_configuration(const JsonObject& config) {
   String const expected[] = {"sample_size"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }

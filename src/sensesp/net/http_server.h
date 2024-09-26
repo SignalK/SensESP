@@ -132,13 +132,13 @@ class HTTPServer : public Configurable {
   }
 
   virtual bool set_configuration(const JsonObject& config) override {
-    if (config.containsKey("auth_required")) {
+    if (config["auth_required"].is<bool>()) {
       auth_required_ = config["auth_required"];
     }
-    if (config.containsKey("username")) {
+    if (config["username"].is<String>()) {
       username_ = config["username"].as<String>();
     }
-    if (config.containsKey("password")) {
+    if (config["password"].is<String>()) {
       password_ = config["password"].as<String>();
     }
     return true;

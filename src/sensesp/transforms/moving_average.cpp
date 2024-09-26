@@ -53,7 +53,7 @@ String MovingAverage::get_config_schema() { return (kSchema); }
 bool MovingAverage::set_configuration(const JsonObject& config) {
   String const expected[] = {"multiplier", "sample_size"};
   for (auto str : expected) {
-    if (!config.containsKey(str)) {
+    if (!config[str].is<JsonVariant>()) {
       return false;
     }
   }
