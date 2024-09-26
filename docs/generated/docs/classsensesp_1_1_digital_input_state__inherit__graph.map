@@ -1,22 +1,25 @@
 <map id="sensesp::DigitalInputState" name="sensesp::DigitalInputState">
-<area shape="rect" id="Node000001" title="DigitalInputState polls the state of an input pin every read_delay ms." alt="" coords="10,343,185,369"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="9,268,153,294"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,309,97,343,92,344,85,310"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="178,268,345,294"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,303,126,345,124,340,219,298"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="350,80,508,106"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="417,121,378,181,351,215,320,246,286,270,283,266,317,242,347,212,373,178,413,118"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="186,180,337,205"/>
-<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="397,116,283,182,281,177,394,112"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="157,5,301,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="278,34,396,77,395,82,276,39"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="5,130,200,156"/>
-<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="180,40,148,58,122,82,110,106,106,130,101,129,105,104,118,79,145,53,177,35"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="132,80,326,106"/>
-<area shape="poly" id="edge11_Node000009_Node000005" title=" " alt="" coords="232,46,232,80,226,80,226,46"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="354,5,505,31"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="432,46,432,80,426,80,426,46"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="129,164,175,203,249,266,245,270,171,207,126,168"/>
-<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="264,221,264,268,258,268,258,221"/>
-<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="240,120,260,178,255,180,235,121"/>
+<area shape="rect" id="Node000001" title="DigitalInputState polls the state of an input pin every read_delay ms." alt="" coords="979,49,1155,75"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_digital_input.html" title="DigitalInput is the base class for reading a digital GPIO pin." alt="" coords="774,24,918,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="934,44,979,49,979,55,934,50"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="763,73,930,99"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="945,73,978,69,979,74,945,78"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="224,56,382,82"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="397,69,762,81,762,86,397,74"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="506,23,657,48"/>
+<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="397,55,505,42,506,47,397,60"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="9,88,153,114"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="168,86,224,78,224,83,169,91"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="500,123,663,164"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="127,117,165,131,206,141,284,150,362,153,500,148,500,154,362,158,283,155,206,146,164,136,125,122"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="206,105,400,131"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="169,105,206,108,205,113,168,110"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="206,7,400,32"/>
+<area shape="poly" id="edge13_Node000010_Node000005" title=" " alt="" coords="120,78,205,41,240,30,242,35,207,46,122,83"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,5,157,31"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="156,32,244,53,243,58,155,38"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="678,120,783,97,784,102,679,125"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="416,126,500,133,500,139,416,131"/>
+<area shape="poly" id="edge10_Node000003_Node000009" title=" " alt="" coords="668,49,776,70,775,75,667,54"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="416,23,506,29,505,34,416,29"/>
 </map>

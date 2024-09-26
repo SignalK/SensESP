@@ -1,8 +1,8 @@
 var classsensesp_1_1_press_repeater =
 [
-    [ "PressRepeater", "classsensesp_1_1_press_repeater.html#a4d26c7de5e5e257a17c9bea3ba383c93", null ],
+    [ "PressRepeater", "classsensesp_1_1_press_repeater.html#a4487165f599b2e6f494ff7b12bb3a823", null ],
     [ "get_config_schema", "classsensesp_1_1_press_repeater.html#ad3c1e0b2555ec3b8ce178b02b8582da1", null ],
-    [ "get_configuration", "classsensesp_1_1_press_repeater.html#a48e0303960941eea2410f0a9d1c3861f", null ],
+    [ "get_configuration", "classsensesp_1_1_press_repeater.html#a630a45ec922b14035982088f37a22316", null ],
     [ "set", "classsensesp_1_1_press_repeater.html#a8625cbdcf948f6840c9f2903235c9ebe", null ],
     [ "set", "classsensesp_1_1_press_repeater.html#aa70da8a1b8fc78d015264d8581a663bf", null ],
     [ "set_configuration", "classsensesp_1_1_press_repeater.html#a725c0fa7bb696406bc93634eb52f3700", null ],

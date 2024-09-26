@@ -1,8 +1,8 @@
 var classsensesp_1_1_s_k_metadata =
 [
-    [ "SKMetadata", "classsensesp_1_1_s_k_metadata.html#a5e302dfc230c1a042fb06953cf2077ce", null ],
+    [ "SKMetadata", "classsensesp_1_1_s_k_metadata.html#a7598058dc4bfa4c027fecddbaa1f89e0", null ],
     [ "SKMetadata", "classsensesp_1_1_s_k_metadata.html#ac28f97ab032bccb203023402e47cd6ad", null ],
-    [ "add_entry", "classsensesp_1_1_s_k_metadata.html#a4da9ad3273c01fe5efa814c68ee0f712", null ],
+    [ "add_entry", "classsensesp_1_1_s_k_metadata.html#a2f36c00e6d11a094f243c320bc8c63ee", null ],
     [ "description_", "classsensesp_1_1_s_k_metadata.html#a7ff429692c4d289572a73f418c423b16", null ],
     [ "display_name_", "classsensesp_1_1_s_k_metadata.html#a0edb674bc0b8f8d59788f1cea17084e1", null ],
     [ "short_name_", "classsensesp_1_1_s_k_metadata.html#ae6b3d49adf22c282ede7f5d407e9bc2b", null ],

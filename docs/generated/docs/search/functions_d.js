@@ -13,9 +13,10 @@ var searchData=
   ['on_5freceive_5fupdates_10',['on_receive_updates',['../classsensesp_1_1_s_k_w_s_client.html#aa4ebce0c621f3800bfd40aa0fc75302d',1,'sensesp::SKWSClient']]],
   ['on_5fresponse_11',['on_response',['../classsensesp_1_1_s_k_put_request_base.html#afd6b42e2993be9c0ce60a779d1427aa9',1,'sensesp::SKPutRequestBase']]],
   ['on_5fultra_5flong_5fclick_12',['on_ultra_long_click',['../classsensesp_1_1_click_type.html#a7cef6ec74f8d73633853e560a3872e3a',1,'sensesp::ClickType']]],
-  ['operator_21_3d_13',['operator!=',['../namespacesensesp.html#a85fc3656cea89e333664441057db3584',1,'sensesp']]],
-  ['operator_28_29_14',['operator()',['../classsensesp_1_1_resettable_compare.html#a2f614851878579dbb5ea4ca94d577888',1,'sensesp::ResettableCompare']]],
-  ['operator_3d_15',['operator=',['../classsensesp_1_1_wi_fi_state_producer.html#a95aaee61acaaae09d8e3c9d558da1519',1,'sensesp::WiFiStateProducer::operator=()'],['../classsensesp_1_1_observable_value.html#abe9007274a80489e92ff58a1dd6b5d0b',1,'sensesp::ObservableValue::operator=()'],['../classsensesp_1_1_sens_e_s_p_app.html#a0de0037811cf7cbab666730fc29e3c0d',1,'sensesp::SensESPApp::operator=()'],['../classsensesp_1_1_sens_e_s_p_minimal_app.html#afdaa4b87918cf2cdbec31b9960c0afae',1,'sensesp::SensESPMinimalApp::operator=()']]],
-  ['operator_3d_3d_16',['operator==',['../namespacesensesp.html#aa6a475cd9be10780f70d15372c13c36b',1,'sensesp']]],
-  ['ota_17',['OTA',['../classsensesp_1_1_o_t_a.html#a9efbb67a2b9b8882971a28837d6e7e6e',1,'sensesp::OTA']]]
+  ['operator_20t_13',['operator T',['../classsensesp_1_1_nullable.html#aa6b7e37de915892b51ed025dd01643e6',1,'sensesp::Nullable']]],
+  ['operator_21_3d_14',['operator!=',['../namespacesensesp.html#a85fc3656cea89e333664441057db3584',1,'sensesp']]],
+  ['operator_28_29_15',['operator()',['../classsensesp_1_1_resettable_compare.html#a2f614851878579dbb5ea4ca94d577888',1,'sensesp::ResettableCompare']]],
+  ['operator_3d_16',['operator=',['../classsensesp_1_1_wi_fi_state_producer.html#a95aaee61acaaae09d8e3c9d558da1519',1,'sensesp::WiFiStateProducer::operator=()'],['../classsensesp_1_1_observable_value.html#abe9007274a80489e92ff58a1dd6b5d0b',1,'sensesp::ObservableValue::operator=()'],['../classsensesp_1_1_nullable.html#a37bc27a5b7ed6a4b6322b8d81a0c13ea',1,'sensesp::Nullable::operator=(T &amp;value)'],['../classsensesp_1_1_nullable.html#a37ca409dbd710c16fd3242b4e2d32168',1,'sensesp::Nullable::operator=(const Nullable&lt; T &gt; &amp;other)'],['../classsensesp_1_1_sens_e_s_p_app.html#a0de0037811cf7cbab666730fc29e3c0d',1,'sensesp::SensESPApp::operator=()'],['../classsensesp_1_1_sens_e_s_p_minimal_app.html#afdaa4b87918cf2cdbec31b9960c0afae',1,'sensesp::SensESPMinimalApp::operator=()']]],
+  ['operator_3d_3d_17',['operator==',['../namespacesensesp.html#aa6a475cd9be10780f70d15372c13c36b',1,'sensesp']]],
+  ['ota_18',['OTA',['../classsensesp_1_1_o_t_a.html#a9efbb67a2b9b8882971a28837d6e7e6e',1,'sensesp::OTA']]]
 ];

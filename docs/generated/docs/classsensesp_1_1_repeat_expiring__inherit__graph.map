@@ -1,11 +1,13 @@
 <map id="sensesp::RepeatExpiring&lt; T &gt;" name="sensesp::RepeatExpiring&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Repeat transform that emits an expired value if the value age exceeds max_age." alt="" coords="1868,163,2067,188"/>
-<area shape="rect" id="Node000015" href="$classsensesp_1_1_repeat_constant_rate.html" title="Repeat transform that emits the last value at a constant interval." alt="" coords="2116,163,2350,188"/>
-<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="2082,173,2116,173,2116,178,2082,178"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_repeat.html" title="Repeat the input at specific intervals." alt="" coords="1666,163,1818,188"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1834,173,1867,173,1867,178,1834,178"/>
+<area shape="rect" id="Node000001" title="Repeat transform that emits an expired value if the value age exceeds max_age." alt="" coords="2202,163,2401,188"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_repeat_constant_rate.html" title="Repeat transform that emits the last value at a constant interval." alt="" coords="2451,163,2684,188"/>
+<area shape="poly" id="edge19_Node000001_Node000016" title=" " alt="" coords="2417,173,2450,173,2450,178,2417,178"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_repeat.html" title=" " alt="" coords="1973,155,2153,196"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2168,173,2202,173,2202,178,2168,178"/>
 <area shape="rect" id="Node000003" href="$classsensesp_1_1_symmetric_transform.html" title="A common type of transform that consumes, transforms, then outputs values of the same data type." alt="" coords="1384,163,1617,188"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1632,173,1666,173,1666,178,1632,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1632,168,1784,165,1949,166,1973,167,1973,172,1949,171,1784,170,1633,173"/>
+<area shape="rect" id="Node000015" href="$classsensesp_1_1_repeat.html" title="Repeat the input at specific intervals." alt="" coords="1666,188,1818,214"/>
+<area shape="poly" id="edge18_Node000015_Node000003" title=" " alt="" coords="1632,187,1666,190,1665,196,1632,192"/>
 <area shape="rect" id="Node000004" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1198,155,1335,196"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1350,173,1384,173,1384,178,1350,178"/>
 <area shape="rect" id="Node000005" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="662,196,830,222"/>
@@ -17,7 +19,7 @@
 <area shape="rect" id="Node000007" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="897,247,1100,272"/>
 <area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="1115,241,1173,225,1204,211,1233,194,1236,199,1207,215,1175,230,1116,246"/>
 <area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="425,5,620,31"/>
-<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="636,28,852,60,977,83,1100,112,1162,131,1218,152,1216,157,1160,136,1099,117,976,88,851,65,635,33"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="635,29,852,61,977,84,1100,112,1162,131,1218,152,1216,157,1160,136,1099,117,976,89,851,66,635,34"/>
 <area shape="rect" id="Node000009" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,45,150,71"/>
 <area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="148,39,199,30,316,20,425,16,425,21,316,25,199,35,149,44"/>
 <area shape="rect" id="Node000013" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="648,96,844,122"/>
@@ -31,4 +33,5 @@
 <area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="417,156,643,156,643,161,417,162"/>
 <area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="853,122,930,133,929,139,852,127"/>
 <area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="413,66,620,89,650,93,649,98,619,94,413,72"/>
+<area shape="poly" id="edge17_Node000002_Node000015" title=" " alt="" coords="1834,191,1972,180,1973,185,1834,196"/>
 </map>

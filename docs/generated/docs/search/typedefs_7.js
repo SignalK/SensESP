@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wifistate_0',['WifiState',['../namespacesensesp.html#a3513136599ec1b735d375392291d6619',1,'sensesp']]]
+  ['void_5fcb_5ffunc_0',['void_cb_func',['../namespacesensesp.html#af69114aa7205860f5705dab5c93c55c8',1,'sensesp']]]
 ];

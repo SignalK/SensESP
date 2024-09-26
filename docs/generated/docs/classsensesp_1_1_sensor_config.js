@@ -1,4 +1,4 @@
 var classsensesp_1_1_sensor_config =
 [
-    [ "SensorConfig", "classsensesp_1_1_sensor_config.html#aa763b808e3718a5c4e8a338567094add", null ]
+    [ "SensorConfig", "classsensesp_1_1_sensor_config.html#a2558b8fbe4b52b18613eb16605e00220", null ]
 ];

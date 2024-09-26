@@ -6,7 +6,9 @@ var searchData=
   ['persistingobservablevalue_3',['PersistingObservableValue',['../classsensesp_1_1_persisting_observable_value.html#aaf92209988ae466a70747d3b35a91b31',1,'sensesp::PersistingObservableValue::PersistingObservableValue()'],['../classsensesp_1_1_persisting_observable_value.html#a42d71d59977b6c998c96a6096b9cbe5f',1,'sensesp::PersistingObservableValue::PersistingObservableValue(const T &amp;value, String config_path=&quot;&quot;)']]],
   ['poll_5fget_5fresult_4',['poll_get_result',['../classsensesp_1_1_configurable.html#a157ca4711739ec5183e0148814e277b8',1,'sensesp::Configurable']]],
   ['poll_5fset_5fresult_5',['poll_set_result',['../classsensesp_1_1_configurable.html#a2958e89a462e6cdbd977996cc20411fd',1,'sensesp::Configurable']]],
-  ['pressrepeater_6',['PressRepeater',['../classsensesp_1_1_press_repeater.html#a4d26c7de5e5e257a17c9bea3ba383c93',1,'sensesp::PressRepeater']]],
-  ['push_7',['push',['../classsensesp_1_1_task_queue_producer.html#a200f504fc9566d46ecd3413bc82ec62f',1,'sensesp::TaskQueueProducer']]],
-  ['pwmoutput_8',['PWMOutput',['../classsensesp_1_1_p_w_m_output.html#ac613d375428ba5a45eed3a3c72f8213e',1,'sensesp::PWMOutput']]]
+  ['position_6',['Position',['../structsensesp_1_1_position.html#a729f3381f8d651da5812c71f47fbb7d9',1,'sensesp::Position::Position()'],['../structsensesp_1_1_position.html#a261fc5455fd4b347278811921709f619',1,'sensesp::Position::Position(double latitude, double longitude, float altitude=kPositionInvalidAltitude)']]],
+  ['pressrepeater_7',['PressRepeater',['../classsensesp_1_1_press_repeater.html#a4487165f599b2e6f494ff7b12bb3a823',1,'sensesp::PressRepeater']]],
+  ['ptr_8',['ptr',['../classsensesp_1_1_nullable.html#a9a07b8e17e7dcb4df1c0cd48c220e54e',1,'sensesp::Nullable']]],
+  ['push_9',['push',['../classsensesp_1_1_task_queue_producer.html#a200f504fc9566d46ecd3413bc82ec62f',1,'sensesp::TaskQueueProducer']]],
+  ['pwmoutput_10',['PWMOutput',['../classsensesp_1_1_p_w_m_output.html#ac613d375428ba5a45eed3a3c72f8213e',1,'sensesp::PWMOutput']]]
 ];

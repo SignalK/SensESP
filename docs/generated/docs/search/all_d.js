@@ -13,5 +13,11 @@ var searchData=
   ['nonces_5f_10',['nonces_',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#a37b27b72158f4992dc9d1ba01e1f7809',1,'sensesp::HTTPDigestAuthenticator']]],
   ['north_11',['north',['../structsensesp_1_1_e_n_u_vector.html#a489eb85a15932d92b76a51e68794192e',1,'sensesp::ENUVector']]],
   ['notify_12',['notify',['../classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9',1,'sensesp::Observable']]],
-  ['numberconfig_13',['NumberConfig',['../classsensesp_1_1_number_config.html',1,'sensesp::NumberConfig'],['../classsensesp_1_1_number_config.html#acbe6bf70297ef819ab7ce0df25176999',1,'sensesp::NumberConfig::NumberConfig()']]]
+  ['nullable_13',['Nullable',['../classsensesp_1_1_nullable.html',1,'sensesp::Nullable&lt; T &gt;'],['../classsensesp_1_1_nullable.html#a5b579a1362efdd7bb4d45fb6458425b8',1,'sensesp::Nullable::Nullable()'],['../classsensesp_1_1_nullable.html#ad1be7901a6a2ecbc0ea48fa13670c8bd',1,'sensesp::Nullable::Nullable(T value)']]],
+  ['nullable_2ecpp_14',['nullable.cpp',['../nullable_8cpp.html',1,'']]],
+  ['nullable_2eh_15',['nullable.h',['../nullable_8h.html',1,'']]],
+  ['nullabledouble_16',['NullableDouble',['../namespacesensesp.html#a7f2f9b6fff2dfe37da50c6bc7989ca03',1,'sensesp']]],
+  ['nullablefloat_17',['NullableFloat',['../namespacesensesp.html#afd04db69d3990ea7a33b47a086a87b83',1,'sensesp']]],
+  ['nullableint_18',['NullableInt',['../namespacesensesp.html#a49fb36f3a5c947cde2a43a604a63fe2c',1,'sensesp']]],
+  ['numberconfig_19',['NumberConfig',['../classsensesp_1_1_number_config.html',1,'sensesp::NumberConfig'],['../classsensesp_1_1_number_config.html#acbe6bf70297ef819ab7ce0df25176999',1,'sensesp::NumberConfig::NumberConfig()']]]
 ];

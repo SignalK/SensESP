@@ -1,38 +1,29 @@
 <map id="sensesp::add_config_get_handler" name="sensesp::add_config_get_handler">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,324,147,365"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_configurable.html#acc2acfdde683ac228935c7a9d70af14a" title="Initiate an asynchronous request to get the current configuration." alt="" coords="201,5,371,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,323,88,270,108,199,142,124,165,88,193,57,197,53,201,57,197,61,170,92,147,126,113,201,93,272,83,324"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_enable.html#ad5b1c1421b4e4a4ed864aa7a016b7c37" title=" " alt="" coords="214,71,358,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="80,323,94,281,117,228,150,172,170,145,193,122,199,118,202,122,196,126,174,149,154,175,122,230,99,283,85,324"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_configurable.html#a4f62ba6b0f431ba98afe3a1e2f596356" title="Get a single Configurable by key." alt="" coords="210,136,362,177"/>
-<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="86,322,127,257,157,220,193,188,201,182,204,186,196,192,161,224,131,260,90,325"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_enable.html#a8ebbacc8248a9c431fc2ddfc170d4897" title=" " alt="" coords="214,201,358,242"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="98,322,141,287,193,253,206,246,208,251,196,257,144,291,102,326"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_configurable.html#aeaa2d08f0dcb649f8fabbc3df93464b4" title=" " alt="" coords="210,267,362,307"/>
-<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="146,323,194,309,196,314,148,328"/>
-<area shape="rect" id="Node000012" href="$namespacesensesp.html#ac6469a43cce0796908a0228643b9c7fc" title=" " alt="" coords="195,332,377,357"/>
-<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="147,342,179,342,179,347,147,347"/>
-<area shape="rect" id="Node000014" href="$classsensesp_1_1_configurable.html#adcefc3c29f2b52a626a9787b92122a1c" title="Return true if the Configurable is asynchronous." alt="" coords="210,381,362,422"/>
-<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="148,361,196,374,194,380,146,366"/>
-<area shape="rect" id="Node000015" href="$classsensesp_1_1_configurable.html#a157ca4711739ec5183e0148814e277b8" title="Return the current status of the last async_get_configuration() call." alt="" coords="210,447,362,487"/>
-<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="102,363,144,397,196,431,208,438,206,442,193,436,141,402,98,367"/>
-<area shape="rect" id="Node000016" href="$classsensesp_1_1_configurable.html#a2958e89a462e6cdbd977996cc20411fd" title="Return the current status of the last async set_configuration call." alt="" coords="210,512,362,553"/>
-<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="90,363,131,429,161,465,196,497,204,502,201,507,193,501,157,469,127,432,86,366"/>
-<area shape="rect" id="Node000017" href="$classsensesp_1_1_configurable.html#a2a306aeabfedf9ddf07aae6d25c5ee11" title="Return true if the Configurable requires restart after saving." alt="" coords="210,577,362,618"/>
-<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="85,364,99,406,122,459,154,514,174,540,196,562,202,567,199,571,193,566,170,543,150,517,117,461,94,407,80,366"/>
-<area shape="rect" id="Node000018" href="$namespacesensesp.html#a7f904f4cb9b672e259f8838b24fbcd21" title=" " alt="" coords="215,642,356,668"/>
-<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="82,365,92,418,112,489,127,527,145,564,169,598,196,628,203,633,200,637,193,632,164,601,141,566,122,529,107,491,87,419,77,366"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_enable.html#a38d97a516e01d76e923582134faa7d55" title=" " alt="" coords="425,78,591,104"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="358,88,409,88,409,94,358,94"/>
-<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="474,79,467,70,471,60,485,54,508,52,534,54,547,61,544,66,532,59,508,57,486,59,475,64,472,69,478,76"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a" title=" " alt="" coords="639,71,791,111"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="592,88,624,88,624,94,592,94"/>
-<area shape="rect" id="Node000006" href="$hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="867,49,962,74"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="791,77,851,68,852,73,792,82"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_configurable.html#a0deaa5b717cd0f60d0105835cd6b595a" title=" " alt="" coords="839,99,990,139"/>
-<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="792,99,824,104,823,109,791,104"/>
-<area shape="rect" id="Node000007" href="$hash_8cpp.html#a5c78d7f77047179963ffda330a0a00ce" title="SHA&#45;1 hash function." alt="" coords="1038,49,1089,74"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="962,59,1022,59,1022,64,962,64"/>
-<area shape="rect" id="Node000013" href="$classsensesp_1_1_configurable.html#ac31c21262105587a2ea4034d23d3d4df" title="Get configurables." alt="" coords="432,324,584,365"/>
-<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="377,342,417,342,417,347,377,347"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,361,147,402"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_h_t_t_p_server.html#a24bdc7401745f64a486a1eec40e65382" title=" " alt="" coords="210,5,362,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,360,85,302,104,221,119,177,138,134,163,93,193,57,197,53,201,57,197,61,167,96,143,136,124,179,109,222,90,303,82,361"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_configurable.html#acc2acfdde683ac228935c7a9d70af14a" title="Initiate an asynchronous request to get the current configuration." alt="" coords="201,71,371,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="79,360,90,312,112,249,145,182,167,150,193,122,197,118,201,122,197,126,171,154,150,184,117,251,95,314,84,361"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_configurable.html#a2a0b1727f0e7fca0730381e030360a1a" title=" " alt="" coords="210,136,362,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="82,360,97,324,121,277,153,230,193,188,199,183,202,187,196,192,157,233,126,280,102,326,87,362"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_configurable.html#a4f62ba6b0f431ba98afe3a1e2f596356" title="Get a single Configurable by key." alt="" coords="210,201,362,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="90,359,132,307,161,278,193,253,203,247,205,252,196,257,165,282,136,310,94,363"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_configurable.html#accb44b286a13d98d573b15d88ca58fd4" title=" " alt="" coords="210,267,362,307"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="113,358,194,318,210,311,212,316,196,323,115,363"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_configurable.html#aeaa2d08f0dcb649f8fabbc3df93464b4" title=" " alt="" coords="210,332,362,373"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="147,369,194,362,195,368,147,374"/>
+<area shape="rect" id="Node000008" href="$namespacesensesp.html#ac6469a43cce0796908a0228643b9c7fc" title=" " alt="" coords="195,397,377,422"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="147,388,180,393,179,398,147,394"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_configurable.html#adcefc3c29f2b52a626a9787b92122a1c" title="Return true if the Configurable is asynchronous." alt="" coords="210,447,362,487"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="122,400,196,433,210,438,208,443,194,437,120,405"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_configurable.html#a157ca4711739ec5183e0148814e277b8" title="Return the current status of the last async_get_configuration() call." alt="" coords="210,512,362,553"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="95,401,138,449,166,474,196,497,206,503,203,507,193,501,162,478,134,452,91,404"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_configurable.html#a2958e89a462e6cdbd977996cc20411fd" title="Return the current status of the last async set_configuration call." alt="" coords="210,577,362,618"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="88,401,103,436,127,479,158,524,196,562,203,567,200,572,193,566,154,527,123,482,99,438,83,403"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_configurable.html#a2a306aeabfedf9ddf07aae6d25c5ee11" title="Return true if the Configurable requires restart after saving." alt="" coords="210,643,362,683"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="84,402,96,448,118,508,151,572,172,602,197,628,202,632,198,636,193,632,168,605,147,575,113,511,91,450,79,403"/>
+<area shape="rect" id="Node000014" href="$namespacesensesp.html#a7f904f4cb9b672e259f8838b24fbcd21" title=" " alt="" coords="215,708,356,733"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="81,402,89,460,108,538,123,580,142,621,167,660,196,693,203,699,200,703,193,697,162,663,138,624,118,582,103,540,84,461,76,403"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_configurable.html#ac31c21262105587a2ea4034d23d3d4df" title="Get configurables." alt="" coords="425,389,576,430"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="377,407,410,407,410,412,377,412"/>
 </map>

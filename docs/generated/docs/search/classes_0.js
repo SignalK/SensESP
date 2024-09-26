@@ -5,5 +5,6 @@ var searchData=
   ['analoginput_2',['AnalogInput',['../classsensesp_1_1_analog_input.html',1,'sensesp']]],
   ['analogvoltage_3',['AnalogVoltage',['../classsensesp_1_1_analog_voltage.html',1,'sensesp']]],
   ['anglecorrection_4',['AngleCorrection',['../classsensesp_1_1_angle_correction.html',1,'sensesp']]],
-  ['asyncresponsehandler_5',['AsyncResponseHandler',['../classsensesp_1_1_async_response_handler.html',1,'sensesp']]]
+  ['asyncresponsehandler_5',['AsyncResponseHandler',['../classsensesp_1_1_async_response_handler.html',1,'sensesp']]],
+  ['attitudevector_6',['AttitudeVector',['../structsensesp_1_1_attitude_vector.html',1,'sensesp']]]
 ];

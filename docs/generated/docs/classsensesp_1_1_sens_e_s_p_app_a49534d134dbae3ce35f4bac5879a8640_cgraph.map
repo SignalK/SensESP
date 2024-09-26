@@ -1,109 +1,118 @@
 <map id="sensesp::SensESPApp::setup" name="sensesp::SensESPApp::setup">
-<area shape="rect" id="Node000001" title="Perform initialization of SensESPApp once builder configuration is done." alt="" coords="5,901,162,942"/>
-<area shape="rect" id="Node000002" href="$namespacesensesp.html#ac33c6816ec8423c79caf587d07465b5d" title=" " alt="" coords="226,59,382,99"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,901,97,759,122,543,139,428,159,321,182,230,207,164,230,133,258,107,261,111,234,136,212,167,187,232,164,322,144,429,127,543,102,760,89,901"/>
-<area shape="rect" id="Node000006" href="$namespacesensesp.html#a8a933b02d533cea6b08661090eac0c54" title=" " alt="" coords="219,201,389,242"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="89,900,289,256,294,258,94,902"/>
-<area shape="rect" id="Node000013" href="$namespacesensesp.html#a66af6e0617fab1bba4fbe606ae8a6062" title="Handle HTTP requests to /config." alt="" coords="233,737,374,778"/>
-<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="97,899,143,845,174,815,208,789,218,783,220,788,211,793,177,819,147,849,102,903"/>
-<area shape="rect" id="Node000039" href="$namespacesensesp.html#ab56c67c4e10303dadd1cf8e645068b89" title="Provide handlers for static web content." alt="" coords="235,803,373,843"/>
-<area shape="poly" id="edge41_Node000001_Node000039" title=" " alt="" coords="120,898,209,854,225,847,227,852,211,859,123,903"/>
-<area shape="rect" id="Node000040" href="$classsensesp_1_1_value_producer.html#a0d2ecdd23525edbf82eb29eb851a9d25" title=" " alt="" coords="223,868,385,909"/>
-<area shape="poly" id="edge42_Node000001_Node000040" title=" " alt="" coords="162,907,207,900,208,906,163,912"/>
-<area shape="rect" id="Node000046" href="$classsensesp_1_1_s_k_w_s_client.html#a98b7f8de43ef5ff4105285e3609b8b51" title=" " alt="" coords="228,998,380,1054"/>
-<area shape="poly" id="edge48_Node000001_Node000046" title=" " alt="" coords="125,940,211,983,223,989,220,994,209,988,123,945"/>
-<area shape="rect" id="Node000047" href="$classsensesp_1_1_wi_fi_state_producer.html#a648a8faa7d3d3a60acc752d125cc554c" title="Get the singleton instance of the WiFiStateProducer." alt="" coords="210,933,398,974"/>
-<area shape="poly" id="edge49_Node000001_Node000047" title=" " alt="" coords="163,930,195,935,194,940,162,936"/>
-<area shape="rect" id="Node000053" href="$classsensesp_1_1_networking.html#adf89c37cb67988990b2debeab4391f79" title=" " alt="" coords="232,1078,376,1134"/>
-<area shape="poly" id="edge55_Node000001_Node000053" title=" " alt="" coords="100,941,146,1001,177,1034,211,1064,220,1069,217,1074,208,1068,173,1038,142,1004,96,944"/>
-<area shape="rect" id="Node000054" href="$classsensesp_1_1_h_t_t_p_server.html#a20c5d1ae64666146614a2aa56143f346" title=" " alt="" coords="228,1157,380,1198"/>
-<area shape="poly" id="edge56_Node000001_Node000054" title=" " alt="" coords="93,942,108,984,132,1038,167,1095,188,1121,211,1144,217,1148,213,1152,208,1148,184,1124,162,1098,128,1041,103,986,88,943"/>
-<area shape="rect" id="Node000055" href="$classsensesp_1_1_sens_e_s_p_base_app.html#ac987bc8c9b4a04ca24199a09a2b29b99" title="Perform initialization of SensESPBaseApp once builder configuration is done." alt="" coords="210,1223,398,1263"/>
-<area shape="poly" id="edge57_Node000001_Node000055" title=" " alt="" coords="91,942,102,995,124,1066,160,1142,184,1177,212,1208,216,1212,212,1216,208,1212,179,1180,155,1144,119,1068,97,996,85,943"/>
-<area shape="rect" id="Node000003" href="$namespacesensesp.html#a56cb54cc94d3c4d9624dcd60072cf402" title=" " alt="" coords="460,5,621,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="382,59,444,45,445,50,383,64"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_app.html#a0d691348bffb9c65548ad23cd2188ca9" title="Get the singleton instance of the SensESPApp." alt="" coords="698,13,881,38"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="621,23,683,23,683,28,621,28"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_app.html#a05ebb118abaf137b414a8736fb1fc3ba" title="SensESPApp constructor." alt="" coords="961,5,1117,46"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="881,23,945,23,945,28,881,28"/>
-<area shape="poly" id="edge6_Node000006_Node000006" title=" " alt="" coords="262,201,260,191,267,182,282,177,304,175,328,177,342,183,340,188,326,182,304,180,283,182,270,187,265,193,267,200"/>
-<area shape="rect" id="Node000007" href="$namespacesensesp.html#a0e579e84b757eae4139e6effecf64a3e" title=" " alt="" coords="462,71,618,111"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="329,199,381,161,445,122,459,115,461,120,447,127,384,165,332,203"/>
-<area shape="rect" id="Node000009" href="$namespacesensesp.html#a5f5a0a2cad66e66dd5b98b9f59289ccb" title=" " alt="" coords="458,136,622,177"/>
-<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="379,198,448,179,450,184,380,203"/>
-<area shape="rect" id="Node000011" href="$namespacesensesp.html#aedad6ff772b19a81dc8be40ec06abb0b" title=" " alt="" coords="454,201,626,242"/>
-<area shape="poly" id="edge11_Node000006_Node000011" title=" " alt="" coords="390,219,438,219,438,224,390,224"/>
-<area shape="rect" id="Node000012" href="$namespacesensesp.html#ace21ab824d48a880608b44093832f2c7" title=" " alt="" coords="469,267,611,307"/>
-<area shape="poly" id="edge12_Node000006_Node000012" title=" " alt="" coords="380,240,455,261,453,266,379,245"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_u_i_output_base.html#a013953335d1f7a269cbabba2d838c7ed" title=" " alt="" coords="709,67,870,107"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="619,87,693,86,693,91,619,92"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="682,132,897,157"/>
-<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="623,150,666,148,667,153,623,155"/>
-<area shape="rect" id="Node000014" href="$namespacesensesp.html#aa56239cde954cbed1f5ebdff2cdefab1" title=" " alt="" coords="470,737,611,778"/>
-<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="375,755,454,755,454,760,375,760"/>
-<area shape="rect" id="Node000032" href="$namespacesensesp.html#a79894232dbafa2635e0241e5db4a1847" title=" " alt="" coords="470,803,611,843"/>
-<area shape="poly" id="edge29_Node000013_Node000032" title=" " alt="" coords="375,775,455,797,454,802,374,780"/>
-<area shape="rect" id="Node000033" href="$namespacesensesp.html#ad5ce92b1f694218d027785e7348f1421" title=" " alt="" coords="470,395,611,435"/>
-<area shape="poly" id="edge31_Node000013_Node000033" title=" " alt="" coords="317,735,514,446,519,449,322,738"/>
-<area shape="rect" id="Node000015" href="$classsensesp_1_1_configurable.html#acc2acfdde683ac228935c7a9d70af14a" title="Initiate an asynchronous request to get the current configuration." alt="" coords="704,737,875,778"/>
-<area shape="poly" id="edge15_Node000014_Node000015" title=" " alt="" coords="611,755,689,755,689,760,611,760"/>
-<area shape="rect" id="Node000016" href="$classsensesp_1_1_enable.html#ad5b1c1421b4e4a4ed864aa7a016b7c37" title=" " alt="" coords="717,803,862,843"/>
-<area shape="poly" id="edge16_Node000014_Node000016" title=" " alt="" coords="612,773,703,798,701,803,610,779"/>
-<area shape="rect" id="Node000022" href="$classsensesp_1_1_configurable.html#a4f62ba6b0f431ba98afe3a1e2f596356" title="Get a single Configurable by key." alt="" coords="714,427,865,467"/>
-<area shape="poly" id="edge19_Node000014_Node000022" title=" " alt="" coords="544,736,558,684,585,615,625,542,651,508,681,478,699,466,702,471,684,482,655,511,630,545,590,617,563,686,549,738"/>
-<area shape="rect" id="Node000023" href="$classsensesp_1_1_enable.html#a8ebbacc8248a9c431fc2ddfc170d4897" title=" " alt="" coords="717,868,862,909"/>
-<area shape="poly" id="edge20_Node000014_Node000023" title=" " alt="" coords="613,775,636,789,652,805,661,822,669,838,684,853,704,864,701,869,681,857,664,841,656,824,648,809,633,793,610,780"/>
-<area shape="rect" id="Node000024" href="$classsensesp_1_1_configurable.html#aeaa2d08f0dcb649f8fabbc3df93464b4" title=" " alt="" coords="714,933,865,974"/>
-<area shape="poly" id="edge21_Node000014_Node000024" title=" " alt="" coords="613,773,636,789,649,806,657,823,661,856,665,888,672,903,684,918,701,931,698,935,681,922,667,906,660,889,655,856,651,824,645,809,633,793,610,777"/>
-<area shape="rect" id="Node000025" href="$namespacesensesp.html#ac6469a43cce0796908a0228643b9c7fc" title=" " alt="" coords="698,1064,881,1089"/>
-<area shape="poly" id="edge22_Node000014_Node000025" title=" " alt="" coords="613,771,636,789,657,823,665,857,664,890,659,923,654,955,654,987,663,1018,684,1049,688,1053,684,1056,680,1053,658,1020,649,987,649,955,654,922,659,890,660,858,652,825,632,793,610,775"/>
-<area shape="rect" id="Node000027" href="$classsensesp_1_1_configurable.html#adcefc3c29f2b52a626a9787b92122a1c" title="Return true if the Configurable is asynchronous." alt="" coords="714,492,865,533"/>
-<area shape="poly" id="edge24_Node000014_Node000027" title=" " alt="" coords="547,736,565,695,594,643,632,589,655,564,681,542,698,532,701,536,684,546,659,568,636,592,598,646,570,698,552,738"/>
-<area shape="rect" id="Node000028" href="$classsensesp_1_1_configurable.html#a157ca4711739ec5183e0148814e277b8" title="Return the current status of the last async_get_configuration() call." alt="" coords="714,999,865,1039"/>
-<area shape="poly" id="edge25_Node000014_Node000028" title=" " alt="" coords="613,772,636,789,653,815,661,840,662,865,661,889,659,913,660,937,668,960,684,984,702,998,699,1002,680,988,663,963,655,938,653,913,655,889,657,865,656,841,649,817,632,793,610,776"/>
-<area shape="rect" id="Node000029" href="$classsensesp_1_1_configurable.html#a2958e89a462e6cdbd977996cc20411fd" title="Return the current status of the last async set_configuration call." alt="" coords="714,607,865,647"/>
-<area shape="poly" id="edge26_Node000014_Node000029" title=" " alt="" coords="565,735,617,696,681,658,699,650,701,655,684,663,620,701,568,739"/>
-<area shape="rect" id="Node000030" href="$classsensesp_1_1_configurable.html#a2a306aeabfedf9ddf07aae6d25c5ee11" title="Return true if the Configurable requires restart after saving." alt="" coords="714,672,865,713"/>
-<area shape="poly" id="edge27_Node000014_Node000030" title=" " alt="" coords="610,737,698,714,699,719,612,742"/>
-<area shape="rect" id="Node000031" href="$namespacesensesp.html#a7f904f4cb9b672e259f8838b24fbcd21" title=" " alt="" coords="719,557,860,582"/>
-<area shape="poly" id="edge28_Node000014_Node000031" title=" " alt="" coords="551,736,601,665,638,626,681,593,703,582,706,587,684,597,642,630,605,668,556,739"/>
-<area shape="rect" id="Node000017" href="$classsensesp_1_1_enable.html#a38d97a516e01d76e923582134faa7d55" title=" " alt="" coords="956,810,1122,836"/>
-<area shape="poly" id="edge17_Node000016_Node000017" title=" " alt="" coords="862,820,940,820,940,826,862,826"/>
-<area shape="poly" id="edge18_Node000017_Node000017" title=" " alt="" coords="1002,811,994,802,999,792,1014,786,1039,784,1066,786,1080,793,1078,798,1065,791,1039,789,1015,791,1002,796,1000,801,1006,808"/>
-<area shape="rect" id="Node000026" href="$classsensesp_1_1_configurable.html#ac31c21262105587a2ea4034d23d3d4df" title="Get configurables." alt="" coords="963,1049,1114,1090"/>
-<area shape="poly" id="edge23_Node000025_Node000026" title=" " alt="" coords="881,1071,948,1069,948,1075,881,1077"/>
-<area shape="poly" id="edge30_Node000032_Node000025" title=" " alt="" coords="613,837,636,854,653,880,661,905,662,931,660,955,658,979,659,1003,667,1026,684,1049,688,1052,684,1056,680,1053,662,1029,654,1004,652,979,654,955,656,930,655,906,649,882,632,858,610,841"/>
-<area shape="poly" id="edge33_Node000033_Node000022" title=" " alt="" coords="611,421,698,433,698,438,611,427"/>
-<area shape="poly" id="edge35_Node000033_Node000027" title=" " alt="" coords="585,434,683,477,705,484,703,489,681,481,583,438"/>
-<area shape="poly" id="edge40_Node000033_Node000031" title=" " alt="" coords="560,434,612,489,646,518,684,542,705,551,703,556,681,547,643,522,608,493,556,438"/>
-<area shape="rect" id="Node000034" href="$classsensesp_1_1_configurable.html#a635ec17d090123e74637c79c6806fca2" title="Initiate an asynchronous request to set the configuration." alt="" coords="704,361,875,402"/>
-<area shape="poly" id="edge32_Node000033_Node000034" title=" " alt="" coords="611,403,688,392,689,398,611,408"/>
-<area shape="rect" id="Node000035" href="$namespacesensesp.html#af593cb0e46e8acff9f96fdbe9897ffd9" title=" " alt="" coords="700,181,879,206"/>
-<area shape="poly" id="edge34_Node000033_Node000035" title=" " alt="" coords="564,392,598,359,632,318,646,290,652,265,660,241,681,217,688,212,691,216,684,221,665,243,657,266,651,292,637,320,602,362,567,396"/>
-<area shape="rect" id="Node000036" href="$classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4" title=" " alt="" coords="714,231,865,271"/>
-<area shape="poly" id="edge36_Node000033_Node000036" title=" " alt="" coords="560,392,622,331,681,282,698,273,701,278,684,287,626,335,564,396"/>
-<area shape="rect" id="Node000038" href="$classsensesp_1_1_enable.html#a6a2128e819db41d8d094a9fdb4162ecf" title=" " alt="" coords="717,296,862,337"/>
-<area shape="poly" id="edge39_Node000033_Node000038" title=" " alt="" coords="582,392,681,347,702,340,704,345,683,352,584,397"/>
-<area shape="rect" id="Node000019" href="$hash_8cpp.html#acb0d85917e87a85ddaf682ebde0872a5" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="991,210,1086,236"/>
-<area shape="poly" id="edge37_Node000036_Node000019" title=" " alt="" coords="865,240,975,227,976,233,866,245"/>
-<area shape="rect" id="Node000037" href="$classsensesp_1_1_configurable.html#accb44b286a13d98d573b15d88ca58fd4" title=" " alt="" coords="963,260,1114,301"/>
-<area shape="poly" id="edge38_Node000036_Node000037" title=" " alt="" coords="866,257,948,267,947,272,865,263"/>
-<area shape="rect" id="Node000041" href="$classsensesp_1_1_observable.html#a1bd8a207de69d386a7f05c28544df109" title=" " alt="" coords="468,868,612,909"/>
-<area shape="poly" id="edge43_Node000040_Node000041" title=" " alt="" coords="386,886,453,886,453,891,386,891"/>
-<area shape="rect" id="Node000042" href="$classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9" title=" " alt="" coords="446,933,634,958"/>
-<area shape="poly" id="edge44_Node000040_Node000042" title=" " alt="" coords="386,905,470,926,469,931,385,911"/>
-<area shape="rect" id="Node000043" href="$classsensesp_1_1_enable.html#a9bbb0b455792c1b955b6c782047961cd" title=" " alt="" coords="967,1114,1111,1140"/>
-<area shape="poly" id="edge45_Node000040_Node000043" title=" " alt="" coords="376,907,399,919,415,932,425,944,448,969,509,1015,558,1049,611,1075,683,1099,752,1115,823,1124,951,1128,951,1134,822,1129,751,1120,682,1104,609,1080,555,1053,505,1020,444,973,421,947,411,936,397,924,373,911"/>
-<area shape="rect" id="Node000044" href="$classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2" title=" " alt="" coords="1181,1164,1343,1205"/>
-<area shape="poly" id="edge46_Node000043_Node000044" title=" " alt="" coords="1093,1138,1166,1157,1165,1162,1091,1143"/>
-<area shape="rect" id="Node000045" href="$classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9" title=" " alt="" coords="1391,1164,1536,1205"/>
-<area shape="poly" id="edge47_Node000044_Node000045" title=" " alt="" coords="1344,1182,1376,1182,1376,1187,1344,1187"/>
-<area shape="rect" id="Node000048" href="$classsensesp_1_1_wi_fi_state_producer.html#a2a64fa7edd035de465cc257cf6fe5b30" title=" " alt="" coords="446,1164,634,1205"/>
-<area shape="poly" id="edge50_Node000047_Node000048" title=" " alt="" coords="386,972,400,984,415,1004,423,1025,425,1065,427,1104,434,1124,448,1144,458,1153,455,1157,444,1147,429,1126,422,1105,420,1065,418,1026,410,1007,396,988,382,976"/>
-<area shape="poly" id="edge51_Node000048_Node000044" title=" " alt="" coords="620,1203,683,1214,809,1227,908,1231,1007,1227,1133,1214,1175,1206,1176,1211,1133,1219,1007,1232,908,1237,809,1232,682,1219,619,1208"/>
-<area shape="rect" id="Node000049" href="$classsensesp_1_1_wi_fi_state_producer.html#a200024c6ceaade999731beb109c62f2a" title=" " alt="" coords="695,1164,884,1205"/>
-<area shape="poly" id="edge52_Node000048_Node000049" title=" " alt="" coords="635,1182,680,1182,680,1187,635,1187"/>
-<area shape="rect" id="Node000050" href="$classsensesp_1_1_wi_fi_state_producer.html#a11cee5b6718a0cd0e05379714d2c2328" title=" " alt="" coords="945,1164,1133,1205"/>
-<area shape="poly" id="edge53_Node000049_Node000050" title=" " alt="" coords="884,1182,929,1182,929,1187,884,1187"/>
-<area shape="poly" id="edge54_Node000050_Node000044" title=" " alt="" coords="1133,1182,1166,1182,1166,1187,1133,1187"/>
+<area shape="rect" id="Node000001" title="Perform initialization of SensESPApp once builder configuration is done." alt="" coords="5,1133,162,1174"/>
+<area shape="rect" id="Node000002" href="$namespacesensesp.html#ac33c6816ec8423c79caf587d07465b5d" title=" " alt="" coords="226,272,382,313"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,1133,83,1018,88,932,98,834,113,727,135,616,166,507,207,402,234,358,266,322,270,325,239,361,212,404,171,508,141,618,118,728,103,834,94,933,89,1018,87,1133"/>
+<area shape="rect" id="Node000010" href="$namespacesensesp.html#a8a933b02d533cea6b08661090eac0c54" title=" " alt="" coords="219,439,389,479"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="87,1132,132,952,167,825,207,695,248,584,285,493,290,495,253,586,212,697,172,826,137,953,92,1134"/>
+<area shape="rect" id="Node000020" href="$namespacesensesp.html#a66af6e0617fab1bba4fbe606ae8a6062" title="Handle HTTP requests to /config." alt="" coords="233,921,374,962"/>
+<area shape="poly" id="edge25_Node000001_Node000020" title=" " alt="" coords="104,1131,269,971,273,974,108,1135"/>
+<area shape="rect" id="Node000042" href="$namespacesensesp.html#ab56c67c4e10303dadd1cf8e645068b89" title="Provide handlers for static web content." alt="" coords="235,708,373,749"/>
+<area shape="poly" id="edge52_Node000001_Node000042" title=" " alt="" coords="93,1132,207,908,283,761,288,763,212,911,98,1134"/>
+<area shape="rect" id="Node000043" href="$classsensesp_1_1_value_producer.html#a0d2ecdd23525edbf82eb29eb851a9d25" title=" " alt="" coords="223,1097,385,1138"/>
+<area shape="poly" id="edge54_Node000001_Node000043" title=" " alt="" coords="162,1138,207,1131,208,1136,163,1144"/>
+<area shape="rect" id="Node000047" href="$classsensesp_1_1_s_k_w_s_client.html#a98b7f8de43ef5ff4105285e3609b8b51" title=" " alt="" coords="228,1162,380,1218"/>
+<area shape="poly" id="edge58_Node000001_Node000047" title=" " alt="" coords="163,1164,213,1172,212,1177,162,1169"/>
+<area shape="rect" id="Node000048" href="$classsensesp_1_1_wi_fi_state_producer.html#a648a8faa7d3d3a60acc752d125cc554c" title="Get the singleton instance of the WiFiStateProducer." alt="" coords="210,1241,398,1282"/>
+<area shape="poly" id="edge59_Node000001_Node000048" title=" " alt="" coords="117,1172,160,1200,211,1227,223,1233,221,1238,208,1232,158,1205,114,1177"/>
+<area shape="rect" id="Node000055" href="$classsensesp_1_1_networking.html#adf89c37cb67988990b2debeab4391f79" title=" " alt="" coords="232,1306,376,1362"/>
+<area shape="poly" id="edge64_Node000001_Node000055" title=" " alt="" coords="101,1173,146,1231,177,1263,211,1292,220,1297,217,1302,208,1296,173,1267,142,1234,97,1176"/>
+<area shape="rect" id="Node000056" href="$classsensesp_1_1_h_t_t_p_server.html#a20c5d1ae64666146614a2aa56143f346" title=" " alt="" coords="228,1385,380,1426"/>
+<area shape="poly" id="edge65_Node000001_Node000056" title=" " alt="" coords="94,1174,109,1215,133,1268,167,1324,188,1349,211,1372,217,1376,213,1380,208,1376,184,1353,163,1327,128,1271,104,1217,89,1175"/>
+<area shape="rect" id="Node000057" href="$classsensesp_1_1_sens_e_s_p_base_app.html#ac987bc8c9b4a04ca24199a09a2b29b99" title="Perform initialization of SensESPBaseApp once builder configuration is done." alt="" coords="210,1451,398,1491"/>
+<area shape="poly" id="edge66_Node000001_Node000057" title=" " alt="" coords="91,1174,102,1226,125,1296,160,1371,184,1405,212,1436,216,1440,212,1444,208,1440,180,1409,156,1373,120,1298,97,1228,86,1175"/>
+<area shape="rect" id="Node000003" href="$namespacesensesp.html#a56cb54cc94d3c4d9624dcd60072cf402" title=" " alt="" coords="464,161,625,202"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="349,269,483,206,486,211,351,274"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_h_t_t_p_server.html#a24bdc7401745f64a486a1eec40e65382" title=" " alt="" coords="709,439,860,479"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="569,201,607,242,645,295,659,332,664,364,671,394,679,408,692,424,698,429,694,433,688,428,675,411,666,396,659,365,654,334,640,298,603,246,565,204"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_app.html#a0d691348bffb9c65548ad23cd2188ca9" title="Get the singleton instance of the SensESPApp." alt="" coords="693,13,876,38"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="561,159,614,104,650,74,689,49,703,42,706,47,692,53,653,78,618,108,565,163"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_sens_e_s_p_app.html#ac86ccc0464d1754824a03eacc869b39c" title=" " alt="" coords="706,63,863,103"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="588,158,689,114,708,107,710,111,691,119,591,163"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_networking.html#a9a2b6724dc67b259ba3d7162e87d41a4" title=" " alt="" coords="707,128,862,169"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="625,168,691,159,692,164,626,173"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_networking.html#aa95b7bb3f7dd4f3b798ee32d1542a9ff" title=" " alt="" coords="712,193,857,234"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="626,190,697,199,697,205,625,195"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_sens_e_s_p_app.html#a05ebb118abaf137b414a8736fb1fc3ba" title="SensESPApp constructor." alt="" coords="956,5,1112,46"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="876,23,940,23,940,28,876,28"/>
+<area shape="poly" id="edge10_Node000010_Node000010" title=" " alt="" coords="262,439,260,429,267,420,282,414,304,412,328,414,342,421,340,426,326,420,304,417,283,419,270,424,265,430,267,437"/>
+<area shape="rect" id="Node000011" href="$namespacesensesp.html#a0e579e84b757eae4139e6effecf64a3e" title=" " alt="" coords="466,308,622,349"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="329,436,381,398,445,359,459,352,462,357,447,364,384,402,332,440"/>
+<area shape="rect" id="Node000013" href="$namespacesensesp.html#a5f5a0a2cad66e66dd5b98b9f59289ccb" title=" " alt="" coords="462,373,626,414"/>
+<area shape="poly" id="edge14_Node000010_Node000013" title=" " alt="" coords="380,436,451,416,453,421,382,441"/>
+<area shape="rect" id="Node000018" href="$namespacesensesp.html#aedad6ff772b19a81dc8be40ec06abb0b" title=" " alt="" coords="458,504,630,545"/>
+<area shape="poly" id="edge20_Node000010_Node000018" title=" " alt="" coords="382,477,453,497,451,502,380,482"/>
+<area shape="rect" id="Node000019" href="$namespacesensesp.html#ace21ab824d48a880608b44093832f2c7" title=" " alt="" coords="473,439,615,479"/>
+<area shape="poly" id="edge23_Node000010_Node000019" title=" " alt="" coords="390,456,457,456,457,462,390,462"/>
+<area shape="poly" id="edge12_Node000011_Node000004" title=" " alt="" coords="622,347,644,360,660,376,669,392,677,408,692,424,700,429,697,433,689,428,673,411,664,395,656,379,641,364,619,351"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_u_i_output_base.html#a013953335d1f7a269cbabba2d838c7ed" title=" " alt="" coords="704,259,865,299"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="622,310,688,296,689,301,623,315"/>
+<area shape="poly" id="edge15_Node000013_Node000004" title=" " alt="" coords="622,412,695,432,693,437,621,417"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="927,418,1141,444"/>
+<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="624,370,680,359,744,352,812,351,879,359,944,381,999,408,996,412,942,385,878,364,812,356,745,357,681,365,625,375"/>
+<area shape="rect" id="Node000015" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a9068b65bf976f1d1bd5faf1e3126e8ff" title="Get the event loop object from the singleton SensESPBaseApp instance." alt="" coords="690,504,879,545"/>
+<area shape="poly" id="edge17_Node000013_Node000015" title=" " alt="" coords="622,412,644,425,660,441,669,458,677,473,692,489,700,494,697,499,689,493,673,477,664,460,656,444,641,429,619,417"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a42d3c5c9ed56c0a0a925fac4e49dd659" title="Reset the device to factory defaults." alt="" coords="690,373,879,414"/>
+<area shape="poly" id="edge19_Node000013_Node000016" title=" " alt="" coords="627,391,674,391,674,396,627,396"/>
+<area shape="poly" id="edge18_Node000015_Node000014" title=" " alt="" coords="844,501,878,489,984,447,986,452,880,493,846,506"/>
+<area shape="poly" id="edge21_Node000018_Node000004" title=" " alt="" coords="621,501,693,481,695,486,622,506"/>
+<area shape="poly" id="edge22_Node000018_Node000015" title=" " alt="" coords="631,522,675,522,675,527,631,527"/>
+<area shape="poly" id="edge24_Node000019_Node000004" title=" " alt="" coords="616,456,693,456,693,462,616,462"/>
+<area shape="rect" id="Node000021" href="$namespacesensesp.html#aa56239cde954cbed1f5ebdff2cdefab1" title=" " alt="" coords="474,880,615,921"/>
+<area shape="poly" id="edge26_Node000020_Node000021" title=" " alt="" coords="374,927,458,912,459,918,375,932"/>
+<area shape="rect" id="Node000034" href="$namespacesensesp.html#a79894232dbafa2635e0241e5db4a1847" title=" " alt="" coords="474,619,615,659"/>
+<area shape="poly" id="edge39_Node000020_Node000034" title=" " alt="" coords="319,919,515,670,519,673,324,923"/>
+<area shape="rect" id="Node000035" href="$namespacesensesp.html#ad5ce92b1f694218d027785e7348f1421" title=" " alt="" coords="474,1081,615,1122"/>
+<area shape="poly" id="edge42_Node000020_Node000035" title=" " alt="" coords="338,960,501,1070,498,1075,335,965"/>
+<area shape="poly" id="edge27_Node000021_Node000004" title=" " alt="" coords="553,879,593,789,640,670,651,618,653,575,661,534,671,513,688,491,694,485,698,489,692,494,676,516,666,536,658,576,656,619,645,672,598,791,558,881"/>
+<area shape="rect" id="Node000022" href="$classsensesp_1_1_configurable.html#acc2acfdde683ac228935c7a9d70af14a" title="Initiate an asynchronous request to get the current configuration." alt="" coords="699,815,870,855"/>
+<area shape="poly" id="edge28_Node000021_Node000022" title=" " alt="" coords="614,879,692,857,693,862,616,884"/>
+<area shape="rect" id="Node000023" href="$classsensesp_1_1_configurable.html#a2a0b1727f0e7fca0730381e030360a1a" title=" " alt="" coords="709,880,860,921"/>
+<area shape="poly" id="edge29_Node000021_Node000023" title=" " alt="" coords="615,898,693,898,693,903,615,903"/>
+<area shape="rect" id="Node000024" href="$classsensesp_1_1_configurable.html#a4f62ba6b0f431ba98afe3a1e2f596356" title="Get a single Configurable by key." alt="" coords="709,1109,860,1150"/>
+<area shape="poly" id="edge30_Node000021_Node000024" title=" " alt="" coords="558,920,578,957,607,1004,646,1053,692,1096,697,1099,694,1104,689,1100,642,1057,603,1007,573,960,553,922"/>
+<area shape="rect" id="Node000025" href="$classsensesp_1_1_configurable.html#accb44b286a13d98d573b15d88ca58fd4" title=" " alt="" coords="958,1088,1110,1129"/>
+<area shape="poly" id="edge31_Node000021_Node000025" title=" " alt="" coords="616,913,773,950,880,981,916,1002,949,1026,1004,1075,1001,1079,946,1030,913,1006,878,985,771,955,615,918"/>
+<area shape="rect" id="Node000026" href="$classsensesp_1_1_configurable.html#aeaa2d08f0dcb649f8fabbc3df93464b4" title=" " alt="" coords="709,995,860,1035"/>
+<area shape="poly" id="edge32_Node000021_Node000026" title=" " alt="" coords="584,919,691,974,718,986,716,991,689,979,582,924"/>
+<area shape="rect" id="Node000027" href="$namespacesensesp.html#ac6469a43cce0796908a0228643b9c7fc" title=" " alt="" coords="693,569,876,594"/>
+<area shape="poly" id="edge33_Node000021_Node000027" title=" " alt="" coords="551,878,611,734,650,656,670,626,689,605,695,600,698,604,692,609,674,629,655,658,615,736,556,880"/>
+<area shape="rect" id="Node000029" href="$classsensesp_1_1_configurable.html#adcefc3c29f2b52a626a9787b92122a1c" title="Return true if the Configurable is asynchronous." alt="" coords="709,1175,860,1215"/>
+<area shape="poly" id="edge34_Node000021_Node000029" title=" " alt="" coords="560,920,645,1068,657,1096,664,1118,674,1139,692,1160,698,1164,695,1169,688,1164,669,1142,659,1120,652,1098,640,1071,555,922"/>
+<area shape="rect" id="Node000030" href="$classsensesp_1_1_configurable.html#a157ca4711739ec5183e0148814e277b8" title="Return the current status of the last async_get_configuration() call." alt="" coords="709,619,860,659"/>
+<area shape="poly" id="edge35_Node000021_Node000030" title=" " alt="" coords="551,878,569,835,599,780,639,721,662,694,689,670,696,665,699,669,692,674,666,698,643,725,603,782,574,838,556,881"/>
+<area shape="rect" id="Node000031" href="$classsensesp_1_1_configurable.html#a2958e89a462e6cdbd977996cc20411fd" title="Return the current status of the last async set_configuration call." alt="" coords="709,684,860,725"/>
+<area shape="poly" id="edge36_Node000021_Node000031" title=" " alt="" coords="556,878,609,809,646,770,689,735,698,730,701,734,692,740,650,774,613,813,561,881"/>
+<area shape="rect" id="Node000032" href="$classsensesp_1_1_configurable.html#a2a306aeabfedf9ddf07aae6d25c5ee11" title="Return true if the Configurable requires restart after saving." alt="" coords="709,749,860,790"/>
+<area shape="poly" id="edge37_Node000021_Node000032" title=" " alt="" coords="570,877,624,839,689,801,703,794,706,799,692,805,627,844,574,882"/>
+<area shape="rect" id="Node000033" href="$namespacesensesp.html#a7f904f4cb9b672e259f8838b24fbcd21" title=" " alt="" coords="714,1060,855,1085"/>
+<area shape="poly" id="edge38_Node000021_Node000033" title=" " alt="" coords="562,920,615,982,651,1016,692,1045,704,1051,702,1056,689,1049,648,1020,611,986,558,923"/>
+<area shape="poly" id="edge40_Node000034_Node000004" title=" " alt="" coords="614,617,641,598,651,585,658,572,663,546,669,518,677,504,688,490,694,485,698,489,692,494,681,507,674,520,669,547,663,574,656,588,644,602,617,621"/>
+<area shape="poly" id="edge41_Node000034_Node000027" title=" " alt="" coords="614,620,712,596,713,601,616,625"/>
+<area shape="poly" id="edge43_Node000035_Node000004" title=" " alt="" coords="559,1080,601,1016,622,975,640,932,648,889,651,835,652,706,654,641,659,580,670,529,688,491,694,484,698,488,693,494,675,530,664,581,659,641,658,706,657,835,653,890,645,933,627,977,605,1018,563,1083"/>
+<area shape="poly" id="edge45_Node000035_Node000024" title=" " alt="" coords="615,1107,694,1116,693,1122,615,1112"/>
+<area shape="poly" id="edge47_Node000035_Node000029" title=" " alt="" coords="616,1120,644,1131,692,1159,707,1166,705,1171,689,1164,641,1136,614,1125"/>
+<area shape="poly" id="edge51_Node000035_Node000033" title=" " alt="" coords="615,1090,698,1080,699,1085,615,1096"/>
+<area shape="rect" id="Node000036" href="$classsensesp_1_1_configurable.html#a635ec17d090123e74637c79c6806fca2" title="Initiate an asynchronous request to set the configuration." alt="" coords="699,1371,870,1411"/>
+<area shape="poly" id="edge44_Node000035_Node000036" title=" " alt="" coords="617,1113,644,1132,664,1161,672,1189,672,1218,669,1246,666,1273,667,1301,674,1328,692,1356,695,1359,691,1363,688,1359,669,1330,661,1301,661,1273,664,1245,667,1218,666,1190,659,1163,640,1136,614,1117"/>
+<area shape="rect" id="Node000037" href="$namespacesensesp.html#af593cb0e46e8acff9f96fdbe9897ffd9" title=" " alt="" coords="695,1436,874,1461"/>
+<area shape="poly" id="edge46_Node000035_Node000037" title=" " alt="" coords="617,1112,631,1120,644,1132,668,1170,676,1207,674,1244,668,1280,662,1315,661,1351,669,1386,692,1421,695,1424,691,1428,688,1425,664,1388,655,1351,656,1315,663,1279,669,1243,671,1207,663,1172,640,1135,628,1125,614,1117"/>
+<area shape="rect" id="Node000038" href="$classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4" title=" " alt="" coords="709,1240,860,1281"/>
+<area shape="poly" id="edge48_Node000035_Node000038" title=" " alt="" coords="617,1115,644,1132,662,1156,669,1179,675,1203,692,1225,697,1229,694,1233,688,1229,671,1205,664,1181,657,1158,641,1136,614,1120"/>
+<area shape="rect" id="Node000041" href="$classsensesp_1_1_configurable.html#a0deaa5b717cd0f60d0105835cd6b595a" title=" " alt="" coords="709,1305,860,1346"/>
+<area shape="poly" id="edge50_Node000035_Node000041" title=" " alt="" coords="617,1113,644,1132,659,1152,667,1173,669,1213,671,1252,678,1271,692,1291,698,1296,694,1300,688,1294,673,1274,666,1253,664,1213,662,1174,655,1155,640,1136,614,1118"/>
+<area shape="poly" id="edge49_Node000038_Node000025" title=" " alt="" coords="851,1237,877,1225,943,1182,997,1137,1000,1141,946,1186,880,1229,853,1242"/>
+<area shape="poly" id="edge53_Node000042_Node000004" title=" " alt="" coords="322,706,374,655,408,628,445,605,473,592,499,586,546,582,591,577,615,569,641,554,656,539,664,524,673,507,689,490,697,485,700,489,692,494,677,510,669,526,660,543,644,558,617,574,592,582,546,587,500,591,475,597,447,609,411,632,377,659,325,709"/>
+<area shape="rect" id="Node000044" href="$classsensesp_1_1_observable.html#a1bd8a207de69d386a7f05c28544df109" title=" " alt="" coords="472,1245,616,1286"/>
+<area shape="poly" id="edge55_Node000043_Node000044" title=" " alt="" coords="383,1136,400,1148,417,1169,424,1191,431,1212,448,1232,460,1240,457,1244,444,1236,427,1214,419,1193,412,1172,396,1152,380,1141"/>
+<area shape="rect" id="Node000045" href="$classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9" title=" " alt="" coords="450,1146,638,1172"/>
+<area shape="poly" id="edge56_Node000043_Node000045" title=" " alt="" coords="386,1129,451,1140,450,1146,385,1134"/>
+<area shape="rect" id="Node000046" href="$classsensesp_1_1_value_consumer.html#a3734612c1b7022e9bd08d2c8fb8e30de" title=" " alt="" coords="446,1196,642,1221"/>
+<area shape="poly" id="edge57_Node000043_Node000046" title=" " alt="" coords="375,1136,399,1147,423,1165,447,1182,461,1188,459,1193,445,1187,420,1170,397,1152,372,1141"/>
+<area shape="rect" id="Node000049" href="$classsensesp_1_1_wi_fi_state_producer.html#a2a64fa7edd035de465cc257cf6fe5b30" title=" " alt="" coords="450,1384,638,1425"/>
+<area shape="poly" id="edge60_Node000048_Node000049" title=" " alt="" coords="375,1280,399,1291,460,1330,511,1371,507,1375,457,1335,397,1296,373,1285"/>
+<area shape="poly" id="edge62_Node000049_Node000015" title=" " alt="" coords="571,1382,609,1345,626,1322,640,1297,650,1265,656,1227,660,1136,657,1031,650,919,645,809,647,706,652,660,660,619,672,584,688,555,689,554,693,558,693,558,676,586,665,620,657,661,652,706,651,808,656,919,662,1031,666,1136,661,1228,655,1266,645,1299,631,1325,613,1348,575,1385"/>
+<area shape="rect" id="Node000050" href="$classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2" title=" " alt="" coords="703,1485,866,1526"/>
+<area shape="poly" id="edge61_Node000049_Node000050" title=" " alt="" coords="587,1423,691,1471,706,1477,704,1482,689,1476,585,1428"/>
+<area shape="rect" id="Node000051" href="$classsensesp_1_1_wi_fi_state_producer.html#a200024c6ceaade999731beb109c62f2a" title=" " alt="" coords="690,1551,879,1591"/>
+<area shape="poly" id="edge63_Node000049_Node000051" title=" " alt="" coords="565,1423,619,1478,654,1509,692,1535,702,1541,700,1546,689,1540,650,1513,615,1482,561,1427"/>
 </map>
