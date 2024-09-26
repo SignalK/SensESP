@@ -3,6 +3,7 @@
 
 #include <elapsedMillis.h>
 
+#include "sensesp_base_app.h"
 #include "sensesp/types/nullable.h"
 #include "transform.h"
 
@@ -23,29 +24,29 @@ namespace sensesp {
  *
  * @param config_path Path to configure this transform in the Config UI.
  */
-template <typename T>
-class Repeat : public SymmetricTransform<T> {
+template <typename FROM, typename TO>
+class Repeat : public Transform<FROM, TO> {
  public:
-  Repeat(long interval) : SymmetricTransform<T>(), interval_{interval} {}
+  Repeat(unsigned long interval) : Transform<FROM, TO>(), interval_{interval} {}
 
-  void set(T input) override {
+  virtual void set(const FROM& input) override {
     this->emit(input);
     if (repeat_event_ != nullptr) {
       // Delete the old repeat event
-      repeat_event_->remove();
+      repeat_event_->remove(SensESPBaseApp::get_event_loop());
     }
     repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         interval_, [this]() { this->notify(); });
   }
 
  protected:
-  long interval_;
+  unsigned long interval_;
   reactesp::RepeatEvent* repeat_event_ = nullptr;
 };
 
 // For compatibility with the old RepeatReport class
 template <typename T>
-class RepeatReport : public Repeat<T> {};
+class RepeatReport : public Repeat<T, T> {};
 
 /**
  * @brief Repeat transform that stops emitting if the value age exceeds
@@ -54,10 +55,10 @@ class RepeatReport : public Repeat<T> {};
  * @tparam T
  */
 template <typename T>
-class RepeatStopping : public Repeat<T> {
+class RepeatStopping : public Repeat<T, T> {
  public:
-  RepeatStopping(long interval, long max_age)
-      : Repeat<T>(interval), max_age_{max_age} {
+  RepeatStopping(unsigned long interval, unsigned long max_age)
+      : Repeat<T, T>(interval), max_age_{max_age} {
     age_ = max_age;
 
     if (this->repeat_event_ != nullptr) {
@@ -81,7 +82,7 @@ class RepeatStopping : public Repeat<T> {
 
  protected:
   elapsedMillis age_;
-  long max_age_;
+  unsigned long max_age_;
 
  protected:
   void repeat_function() {
@@ -104,15 +105,15 @@ class RepeatStopping : public Repeat<T> {
  * @tparam T
  */
 template <typename T>
-class RepeatExpiring : public Repeat<Nullable<T>> {
+class RepeatExpiring : public Repeat<T, Nullable<T>> {
  public:
-  RepeatExpiring(long interval, long max_age)
-      : Repeat<T>(interval), max_age_{max_age} {
+    RepeatExpiring(unsigned long interval, unsigned long max_age)
+      : Repeat<T, Nullable<T>>(interval), max_age_{max_age} {
     age_ = max_age;
 
     if (this->repeat_event_ != nullptr) {
       // Delete the old repeat event
-      this->repeat_event_->remove();
+      this->repeat_event_->remove(SensESPBaseApp::get_event_loop());
     }
     this->repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
@@ -123,7 +124,7 @@ class RepeatExpiring : public Repeat<Nullable<T>> {
     age_ = 0;
     if (this->repeat_event_ != nullptr) {
       // Delete the old repeat event
-      this->repeat_event_->remove();
+      this->repeat_event_->remove(SensESPBaseApp::get_event_loop());
     }
     this->repeat_event_ = SensESPBaseApp::get_event_loop()->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
@@ -131,7 +132,7 @@ class RepeatExpiring : public Repeat<Nullable<T>> {
 
  protected:
   elapsedMillis age_;
-  long max_age_;
+  unsigned long max_age_;
 
  protected:
   void repeat_function() {
@@ -140,7 +141,7 @@ class RepeatExpiring : public Repeat<Nullable<T>> {
     if (age_ < max_age_) {
       this->notify();
     } else {
-      this->emit(Nullable::invalid());
+      this->emit(this->get().invalid());
     }
   };
 };
@@ -159,7 +160,7 @@ class RepeatExpiring : public Repeat<Nullable<T>> {
 template <typename T>
 class RepeatConstantRate : public RepeatExpiring<T> {
  public:
-  RepeatConstantRate(long interval, long max_age)
+  RepeatConstantRate(unsigned long interval, unsigned long max_age)
       : RepeatExpiring<T>(interval, max_age) {
     if (this->repeat_event_ != nullptr) {
       // Delete the old repeat event
