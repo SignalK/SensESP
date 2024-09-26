@@ -68,14 +68,14 @@ export function EditControl({
           key={id}
           label={schema.title}
           value={
-            (Number(value) - (schema.displayOffset ?? 0)) /
-            (schema.displayMultiplier ?? 1)
+            (schema.displayMultiplier ?? 1) * Number(value) +
+            (schema.displayOffset ?? 0)
           }
           readOnly={schema.readOnly ?? false}
           setValue={(value: number) => {
             setValue(
-              value * (schema.displayMultiplier ?? 1) +
-                (schema.displayOffset ?? 0),
+              (value - (schema.displayOffset ?? 0)) /
+                (schema.displayMultiplier ?? 1),
             );
           }}
         />
@@ -86,15 +86,15 @@ export function EditControl({
           key={id}
           label={schema.title}
           value={
-            Number(value) * (schema.displayMultiplier ?? 1) +
+            (schema.displayMultiplier ?? 1) * Number(value) +
             (schema.displayOffset ?? 0)
           }
           readOnly={schema.readOnly ?? false}
           step={1}
           setValue={(value: number) => {
             setValue(
-              value / (schema.displayMultiplier ?? 1) -
-                (schema.displayOffset ?? 0),
+              (value - (schema.displayOffset ?? 0)) /
+                (schema.displayMultiplier ?? 1),
             );
           }}
         />
