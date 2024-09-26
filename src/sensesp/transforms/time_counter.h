@@ -5,16 +5,18 @@
 
 namespace sensesp {
 
+uint64_t ARDUINO_ISR_ATTR millis64() { return esp_timer_get_time() / 1000ULL; }
+
 static const char kTimeCounterSchema[] = R"({
     "type": "object",
     "properties": {
-        "duration": {
+        "duration_s": {
           "type": "number",
-          "title": "Total Duration",
-          "description": "Total accumulated duration while the input state is non-zero or true, in seconds"
+          "displayMultiplier": 0.0002777777777777778,
+          "title": "Total Duration [hours]"
         }
     },
-    "required": ["duration"]
+    "required": ["duration_s"]
 
 })";
 
@@ -29,66 +31,75 @@ static const char kTimeCounterSchema[] = R"({
  * @tparam T The type of the input value. Must be castable to a boolean.
  */
 template <typename T>
-class TimeCounter : public Transform<T, float> {
+class TimeCounter : public Transform<T, double> {
  public:
-  TimeCounter(String config_path) : Transform<T, float>(config_path) {
+  TimeCounter(String config_path) : Transform<T, double>(config_path) {
     this->load_configuration();
   }
 
   virtual void set(const T& input) override {
-    if (previous_state_ == -1) {
+    if (!initialized_) {
       // Initialize the previous state
+      initialized_ = true;
       previous_state_ = (bool)input;
-      start_time_ = millis();
-      duration_at_start_ = duration_;
+      start_time_ms_ = millis64();
+      duration_at_start_ms_ = duration_ms_;
     }
 
     // if previous_state_ is true, accumulate duration
     if (previous_state_) {
-      duration_ = duration_at_start_ + (millis() - start_time_);
+      duration_ms_ = duration_at_start_ms_ + (millis64() - start_time_ms_);
     }
 
     if (input) {
       if (previous_state_ == 0) {
         // State change from false to true
         previous_state_ = 1;
-        start_time_ = millis();
-        duration_at_start_ = duration_;
+        start_time_ms_ = millis64();
+        duration_at_start_ms_ = duration_ms_;
+        this->save_configuration();  // Save configuration to flash, so that
+                                     // the duration is persistent
       }
     } else {
       if (previous_state_ == 1) {
         // State change from true to false
         previous_state_ = 0;
-        duration_ = duration_at_start_ + (millis() - start_time_);
+        duration_ms_ = duration_at_start_ms_ + (millis64() - start_time_ms_);
         this->save_configuration();  // Save configuration to flash, so that
                                      // the duration is persistent
       }
     }
-    this->emit((float)duration_ / 1000.);
+    this->emit((double)duration_ms_ / 1000.);
   }
 
   virtual void get_configuration(JsonObject& root) override {
-    root["duration"] = duration_;
+    root["duration_s"] = duration_ms_ / 1000.;  // convert to seconds
   }
 
   virtual bool set_configuration(const JsonObject& config) override {
     ESP_LOGD(__FILENAME__, "Setting TimeCounter configuration");
-    if (!config.containsKey("duration")) {
+    if (config["duration_s"].is<double>()) {
+      duration_at_start_ms_ = config["duration_s"].as<double>() * 1000;  // convert to milliseconds
+    } else if (!config["duration"].is<double>()) {
+      // If the duration is not in seconds, try to read it in milliseconds
+      duration_at_start_ms_ = config["duration"];
+    } else {
       return false;
     }
-    duration_at_start_ = config["duration"];
-    duration_ = duration_at_start_;
-    ESP_LOGD(__FILENAME__, "duration_at_start_ = %ld", duration_at_start_);
+
+    duration_ms_ = duration_at_start_ms_;
+    ESP_LOGD(__FILENAME__, "duration_at_start_ms_ = %ld", duration_at_start_ms_);
     return true;
   }
 
   virtual String get_config_schema() override { return kTimeCounterSchema; }
 
  protected:
-  int previous_state_ = -1;  // -1 means uninitialized
-  unsigned long start_time_;
-  unsigned long duration_ = 0.;
-  unsigned long duration_at_start_ = 0.;
+  bool initialized_ = false;
+  bool previous_state_ = false;
+  uint64_t start_time_ms_;
+  uint64_t duration_ms_ = 0;
+  uint64_t duration_at_start_ms_ = 0;
 };
 
 }  // namespace sensesp
