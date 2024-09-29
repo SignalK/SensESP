@@ -1,5 +1,8 @@
 #include "base_command_handler.h"
 
+#include "sensesp/net/web/autogen/frontend_files.h"
+#include "sensesp/ui/status_page_item.h"
+
 namespace sensesp {
 
 void add_http_reset_handler(HTTPServer* server) {
@@ -9,8 +12,7 @@ void add_http_reset_handler(HTTPServer* server) {
                         "Resetting device back to factory defaults. "
                         "You may have to reconfigure the WiFi settings.",
                         0);
-        event_loop()->onDelay(
-            500, []() { SensESPBaseApp::get()->reset(); });
+        event_loop()->onDelay(500, []() { SensESPBaseApp::get()->reset(); });
         return ESP_OK;
       });
   server->add_handler(reset_handler);
@@ -29,13 +31,13 @@ void add_http_restart_handler(HTTPServer* server) {
 void add_http_info_handler(HTTPServer* server) {
   HTTPRequestHandler* info_handler =
       new HTTPRequestHandler(1 << HTTP_GET, "/api/info", [](httpd_req_t* req) {
-        auto ui_outputs = UIOutputBase::get_ui_outputs();
+        auto status_page_items = StatusPageItemBase::get_status_page_items();
 
         JsonDocument json_doc;
         JsonArray info_items = json_doc.to<JsonArray>();
 
-        for (auto info_item = ui_outputs->begin();
-             info_item != ui_outputs->end(); ++info_item) {
+        for (auto info_item = status_page_items->begin();
+             info_item != status_page_items->end(); ++info_item) {
           info_items.add(info_item->second->as_json());
         }
 
