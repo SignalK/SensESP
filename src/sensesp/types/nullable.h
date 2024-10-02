@@ -52,6 +52,7 @@ class Nullable {
 typedef Nullable<int> NullableInt;
 typedef Nullable<float> NullableFloat;
 typedef Nullable<double> NullableDouble;
+typedef Nullable<bool> NullableBool;
 
 template <typename T>
 void convertFromJson(JsonVariantConst src, Nullable<T> &dst) {
