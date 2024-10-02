@@ -1,6 +1,8 @@
-#include "lambda_transform.h"
+#include "config_item.h"
 
 namespace sensesp {
+
+std::map<String, ConfigItemBase*> ConfigItemBase::config_items_;
 
 template <>
 const char* get_schema_type_string(const int /*dummy*/) {

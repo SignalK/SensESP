@@ -2,6 +2,7 @@
 #define SENSESP_SENSORS_CONSTANT_SENSOR_H_
 
 #include "Arduino.h"
+#include "sensesp/ui/config_item.h"
 #include "sensesp/sensors/sensor.h"
 #include "sensesp_base_app.h"
 
@@ -41,13 +42,6 @@ namespace sensesp {
  * @param[in] config_path Configuration path for the sensor.
  */
 
-static const char SCHEMA_CONSTANT_SENSOR[] = R"###({
-        "type": "object",
-        "properties": {
-            "value": { "title": "Constant Value", "type": "%TYPE%", "description": "Constant value" }
-        }
-    })###";
-
 /**
  * @brief Base class for constant value sensors.
  */
@@ -56,52 +50,69 @@ class ConstantSensor : public Sensor<T> {
  public:
   ConstantSensor(T value, int send_interval = 30, String config_path = "")
       : Sensor<T>(config_path), value_{value}, send_interval_{send_interval} {
-    this->load_configuration();
+    this->load();
 
     // Emit the initial value once to set the output
-    event_loop()->onDelay(0,
-                                              [this]() { this->emit(value_); });
+    event_loop()->onDelay(0, [this]() { this->emit(value_); });
     // Then, emit the value at the specified interval
-    event_loop()->onRepeat(
-        send_interval_ * 1000, [this]() { this->emit(value_); });
+    event_loop()->onRepeat(send_interval_ * 1000,
+                           [this]() { this->emit(value_); });
   }
 
   void set(T value) { value_ = value; }
 
- protected:
-  virtual void get_configuration(JsonObject &doc) override {
+  virtual bool to_json(JsonObject& doc) override {
     doc["value"] = value_;
+    return true;
   }
-  virtual bool set_configuration(const JsonObject &config) override {
+  virtual bool from_json(const JsonObject& config) override {
     // Neither of the configuration parameters are mandatory
     if (config["value"].is<T>()) {
       value_ = config["value"].as<T>();
     }
     return true;
   }
-  virtual String get_config_schema() override {
-    String schema = SCHEMA_CONSTANT_SENSOR;
-    schema.replace("%TYPE%", sensor_type_);
-    return schema;
-  }
+
+ protected:
   void update() { this->emit(value_); }
 
   T value_;
   int send_interval_;  // seconds
-
-  static const String sensor_type_;
 };
 
-template <class T>
-const String ConstantSensor<T>::sensor_type_ = "";
+template <typename T>
+const String ConfigSchemaSensorType(const T& obj) {
+  return "";
+}
 template <>
-const String ConstantSensor<int>::sensor_type_;
+const String ConfigSchemaSensorType<int>(const int& obj) {
+  return "integer";
+}
 template <>
-const String ConstantSensor<float>::sensor_type_;
+const String ConfigSchemaSensorType<float>(const float& obj) {
+  return "number";
+}
 template <>
-const String ConstantSensor<String>::sensor_type_;
+const String ConfigSchemaSensorType<String>(const String& obj) {
+  return "string";
+}
 template <>
-const String ConstantSensor<bool>::sensor_type_;
+const String ConfigSchemaSensorType<bool>(const bool& obj) {
+  return "boolean";
+}
+
+template <typename T>
+const String ConfigSchema(const ConstantSensor<T>& obj) {
+  String schema = R"###({
+        "type": "object",
+        "properties": {
+            "value": { "title": "Constant Value", "type": "%TYPE%", "description": "Constant value" }
+        }
+    })###";
+  ;
+  schema.replace("%TYPE%", ConfigSchemaSensorType(obj));
+  return schema.c_str();
+}
 
 // ..........................................
 //  constant value sensors

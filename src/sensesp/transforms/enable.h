@@ -1,16 +1,10 @@
 #ifndef SENSESP_SRC_SENSESP_TRANSFORMS_ENABLE_H_
 #define SENSESP_SRC_SENSESP_TRANSFORMS_ENABLE_H_
 
+#include "sensesp/ui/config_item.h"
 #include "sensesp/transforms/transform.h"
 
 namespace sensesp {
-
-static const char ENABLE_TRANSFORM_SCHEMA[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-      "enabled": { "type": "boolean", "title": "Enable", "description": "Enable or disable the transform output" }
-    }
-  })";
 
 /**
  * @brief On/off switch for signals: input is emitted as-is if the enable flag
@@ -27,17 +21,18 @@ class Enable : public Transform<T, T> {
   Enable(bool enabled = true, String config_path = "")
       : Transform<T, T>(config_path) {
     this->enabled_ = enabled;
-    this->load_configuration();
+    this->load();
   }
   virtual void set(const T& input) override {
     if (enabled_) {
       this->emit(input);
     }
   }
-  virtual void get_configuration(JsonObject& doc) override {
+  virtual bool to_json(JsonObject& doc) override {
     doc["enabled"] = enabled_;
+    return true;
   }
-  virtual bool set_configuration(const JsonObject& config) override {
+  virtual bool from_json(const JsonObject& config) override {
     if (config["enabled"].is<bool>()) {
       enabled_ = config["enabled"];
     } else {
@@ -45,13 +40,20 @@ class Enable : public Transform<T, T> {
     }
     return true;
   }
-  virtual String get_config_schema() override {
-    return FPSTR(ENABLE_TRANSFORM_SCHEMA);
-  };
 
  private:
   bool enabled_;
 };
+
+template <typename U>
+const String ConfigSchema(const Enable<U>& obj) {
+  return R"({
+    "type": "object",
+    "properties": {
+      "enabled": { "type": "boolean", "title": "Enable", "description": "Enable or disable the transform output" }
+    }
+  })";
+}
 
 }  // namespace sensesp
 

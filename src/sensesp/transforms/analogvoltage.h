@@ -1,6 +1,7 @@
 #ifndef SENSESP_TRANSFORMS_ANALOGVOLTAGE_H_
 #define SENSESP_TRANSFORMS_ANALOGVOLTAGE_H_
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 #define MAX_ANALOG_OUTPUT 4096
@@ -39,15 +40,16 @@ class AnalogVoltage : public FloatTransform {
   AnalogVoltage(float max_voltage = 3.3, float multiplier = 1.0,
                 float offset = 0.0, const String& config_path = "");
   virtual void set(const float& input) override;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  private:
   float max_voltage_;
   float multiplier_;
   float offset_;
 };
+
+const String ConfigSchema(const AnalogVoltage& obj);
 
 }  // namespace sensesp
 

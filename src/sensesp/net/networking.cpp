@@ -26,13 +26,13 @@ namespace sensesp {
 
 Networking::Networking(String config_path, String client_ssid,
                        String client_password)
-    : Configurable{config_path, "Basic WiFi Setup", 100}, Resettable(0) {
+    : FileSystemSaveable{config_path}, Resettable(0) {
   // Get the WiFi state producer singleton and make it update this object output
   wifi_state_producer = WiFiStateProducer::get_singleton();
   wifi_state_producer->connect_to(new LambdaConsumer<WiFiState>(
       [this](WiFiState state) { this->emit(state); }));
 
-  load_configuration();
+  load();
 
   // Fill in the rest of the client settings array with empty configs
   int num_fill = kMaxNumClientConfigs - client_settings_.size();
@@ -200,7 +200,7 @@ void Networking::start_client_autoconnect() {
  * @brief Serialize the current configuration to a JSON document.
  *
  */
-void Networking::get_configuration(JsonObject& root) {
+bool Networking::to_json(JsonObject& root) {
   JsonObject apSettingsJson = root["apSettings"].to<JsonObject>();
   ap_settings_.as_json(apSettingsJson);
 
@@ -215,9 +215,10 @@ void Networking::get_configuration(JsonObject& root) {
     JsonObject clientConfigJson = clientConfigsJson.add<JsonObject>();
     config.as_json(clientConfigJson);
   }
+  return true;
 }
 
-bool Networking::set_configuration(const JsonObject& config) {
+bool Networking::from_json(const JsonObject& config) {
   if (config["hostname"].is<String>()) {
     // deal with the legacy Json format
     String hostname = config["hostname"].as<String>();
@@ -272,7 +273,7 @@ bool Networking::set_configuration(const JsonObject& config) {
 void Networking::reset() {
   ESP_LOGI(__FILENAME__, "Resetting WiFi SSID settings");
 
-  clear_configuration();
+  remove();
   WiFi.disconnect(true);
   // On ESP32, disconnect does not erase previous credentials. Let's connect
   // to a bogus network instead

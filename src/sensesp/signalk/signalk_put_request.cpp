@@ -93,8 +93,8 @@ void SKRequest::remove_request(String request_id) {
 
 SKPutRequestBase::SKPutRequestBase(const String& sk_path,
                                    const String& config_path, uint32_t timeout)
-    : Configurable(config_path), sk_path{sk_path}, timeout{timeout} {
-  load_configuration();
+    : FileSystemSaveable(config_path), sk_path{sk_path}, timeout{timeout} {
+  load();
 }
 
 void SKPutRequestBase::send_put_request() {
@@ -119,20 +119,12 @@ void SKPutRequestBase::on_response(JsonDocument& response) {
            state.c_str(), request_id.c_str());
 }
 
-void SKPutRequestBase::get_configuration(JsonObject& root) {
+bool SKPutRequestBase::to_json(JsonObject& root) {
   root["sk_path"] = sk_path;
+  return true;
 }
 
-static const char kSchema[] = R"###({
-    "type": "object",
-      "properties": {
-          "sk_path": { "title": "Signal K Path", "type": "string" }
-      }
-  })###";
-
-String SKPutRequestBase::get_config_schema() { return kSchema; }
-
-bool SKPutRequestBase::set_configuration(const JsonObject& config) {
+bool SKPutRequestBase::from_json(const JsonObject& config) {
   const String expected[] = {"sk_path"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {

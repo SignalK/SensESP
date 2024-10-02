@@ -6,7 +6,7 @@
 #include <WiFi.h>
 
 #include "sensesp/net/wifi_state.h"
-#include "sensesp/system/configurable.h"
+#include "sensesp/system/serializable.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/resettable.h"
 #include "sensesp/system/valueproducer.h"
@@ -235,7 +235,7 @@ class WiFiNetworkInfo {
 /**
  * @brief Manages the ESP's connection to the Wifi network.
  */
-class Networking : public Configurable,
+class Networking : virtual public FileSystemSaveable,
                    public Resettable,
                    public ValueProducer<WiFiState> {
  public:
@@ -243,8 +243,8 @@ class Networking : public Configurable,
              String client_password = "");
   virtual void reset() override;
 
-  virtual void get_configuration(JsonObject& doc) override final;
-  virtual bool set_configuration(const JsonObject& config) override final;
+  virtual bool to_json(JsonObject& doc) override;
+  virtual bool from_json(const JsonObject& config) override;
 
   void start_wifi_scan();
   int16_t get_wifi_scan_results(std::vector<WiFiNetworkInfo>& ssid_list);
@@ -273,6 +273,8 @@ class Networking : public Configurable,
 
   WiFiStateProducer* wifi_state_producer;
 };
+
+inline bool ConfigRequiresRestart(const Networking& obj) { return true; }
 
 }  // namespace sensesp
 

@@ -13,7 +13,7 @@ namespace sensesp {
 std::set<TransformBase*> TransformBase::transforms_;
 
 TransformBase::TransformBase(const String& config_path)
-    : Configurable{std::move(config_path)} {
+    : FileSystemSaveable{config_path} {
   transforms_.insert(this);
 }
 

@@ -5,7 +5,6 @@
 
 #include "AceButton.h"
 #include "elapsedMillis.h"
-#include "sensesp/system/configurable.h"
 #include "sensesp_base_app.h"
 
 namespace sensesp {
@@ -18,10 +17,9 @@ using namespace ace_button;
  * Button handlers are used to handle button presses. This is an abstract base
  * class that should be extended to implement a specific button handler.
  */
-class BaseButtonHandler : public Configurable, public IEventHandler {
+class BaseButtonHandler : public IEventHandler {
  public:
-  BaseButtonHandler(int pin, String config_path = "")
-      : Configurable{config_path} {
+  BaseButtonHandler(int pin, String config_path = "") {
     button_ = new AceButton(pin);
     pinMode(pin, INPUT_PULLUP);
 

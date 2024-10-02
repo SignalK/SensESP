@@ -6,7 +6,7 @@ namespace sensesp {
 
 RgbLed::RgbLed(int led_r_pin, int led_g_pin, int led_b_pin, String config_path,
                long int led_on_rgb, long int led_off_rgb, bool common_anode)
-    : Configurable(config_path),
+    : FileSystemSaveable(config_path),
       led_r_channel_((led_r_pin < 0) ? -1
                                      : PWMOutput::assign_channel(led_r_pin)),
       led_g_channel_((led_g_pin < 0) ? -1
@@ -16,7 +16,7 @@ RgbLed::RgbLed(int led_r_pin, int led_g_pin, int led_b_pin, String config_path,
       led_on_rgb_{led_on_rgb},
       led_off_rgb_{led_off_rgb},
       common_anode_{common_anode} {
-  this->load_configuration();
+  this->load();
 }
 
 // Calculate the PWM value to send to analogWrite() based on the specified
@@ -58,22 +58,13 @@ void RgbLed::set(const bool& new_value) {
   }
 }
 
-void RgbLed::get_configuration(JsonObject& root) {
+bool RgbLed::to_json(JsonObject& root) {
   root["led_on_rgb"] = led_on_rgb_;
   root["led_off_rgb"] = led_off_rgb_;
+  return true;
 }
 
-static const char kSchema[] = R"({
-    "type": "object",
-    "properties": {
-        "led_on_rgb": { "title": "RGB color for led ON", "type": "integer" },
-        "led_off_rgb": { "title": "RGB color for led OFF", "type": "integer" }
-    }
-  })";
-
-String RgbLed::get_config_schema() { return kSchema; }
-
-bool RgbLed::set_configuration(const JsonObject& config) {
+bool RgbLed::from_json(const JsonObject& config) {
   String expected[] = {"led_on_rgb", "led_off_rgb"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -83,6 +74,16 @@ bool RgbLed::set_configuration(const JsonObject& config) {
   led_on_rgb_ = config["led_on_rgb"];
   led_off_rgb_ = config["led_off_rgb"];
   return true;
+}
+
+const String ConfigSchema(const RgbLed& obj) {
+  return R"({
+    "type": "object",
+    "properties": {
+        "led_on_rgb": { "title": "RGB color for led ON", "type": "integer" },
+        "led_off_rgb": { "title": "RGB color for led OFF", "type": "integer" }
+    }
+  })";
 }
 
 }  // namespace sensesp

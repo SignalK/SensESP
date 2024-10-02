@@ -5,7 +5,7 @@ namespace sensesp {
 
 SKOutputTime::SKOutputTime(const String& sk_path, const String& config_path)
     : TimeString(config_path), SKEmitter(sk_path) {
-  load_configuration();
+  load();
 }
 
 void SKOutputTime::as_signalk_json(JsonDocument& doc){
@@ -13,21 +13,12 @@ void SKOutputTime::as_signalk_json(JsonDocument& doc){
   doc["value"] = output;
 }
 
-void SKOutputTime::get_configuration(JsonObject& doc) {
+bool SKOutputTime::to_json(JsonObject& doc) {
   doc["sk_path"] = sk_path_;
+  return true;
 }
 
-static const char kSchema[] = R"({
-    "type": "object",
-    "properties": {
-        "sk_path": { "title": "Signal K Path", "type": "string" },
-        "value": { "title": "Last value", "type" : "string", "readOnly": true }
-    }
-  })";
-
-String SKOutputTime::get_config_schema() { return kSchema; }
-
-bool SKOutputTime::set_configuration(const JsonObject& config) {
+bool SKOutputTime::from_json(const JsonObject& config) {
   const String expected[] = {"sk_path"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -36,6 +27,15 @@ bool SKOutputTime::set_configuration(const JsonObject& config) {
   }
   sk_path_ = config["sk_path"].as<String>();
   return true;
+}
+
+const String ConfigSchema(const SKOutputTime& obj) {
+  return R"({
+    "type": "object",
+    "properties": {
+        "sk_path": { "title": "Signal K Path", "type": "string" }
+    }
+  })";
 }
 
 }  // namespace sensesp

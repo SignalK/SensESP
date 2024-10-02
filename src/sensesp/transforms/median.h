@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -21,14 +22,19 @@ class Median : public FloatTransform {
  public:
   Median(unsigned int sample_size = 10, const String& config_path = "");
   virtual void set(const float& input) override;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  private:
   std::vector<float> buf_{};
   unsigned int sample_size_;
 };
+
+const String ConfigSchema(const Median& obj);
+
+inline bool ConfigRequiresRestart(const Median& obj) {
+  return true;
+}
 
 }  // namespace sensesp
 #endif

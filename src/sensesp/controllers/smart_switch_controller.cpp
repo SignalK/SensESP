@@ -19,7 +19,7 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
     }  // while
   }
 
-  load_configuration();
+  load();
 
   // Emit the initial state once the event loop starts
   if (auto_initialize_) {
@@ -70,26 +70,15 @@ void SmartSwitchController::set(const String& new_value) {
   this->emit(is_on);
 }
 
-void SmartSwitchController::get_configuration(JsonObject& root) {
+bool SmartSwitchController::to_json(JsonObject& root) {
   JsonArray jPaths = root["sync_paths"].to<JsonArray>();
   for (auto& path : sync_paths) {
     jPaths.add(path.sk_sync_path);
   }
+  return true;
 }
 
-static const char SCHEMA[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "sync_paths": { "title": "Sync on double click",
-                        "type": "array",
-                        "items": { "type": "string"}
-        }
-    }
-  })";
-
-String SmartSwitchController::get_config_schema() { return FPSTR(SCHEMA); }
-
-bool SmartSwitchController::set_configuration(const JsonObject& config) {
+bool SmartSwitchController::from_json(const JsonObject& config) {
   JsonArray arr = config["sync_paths"];
   if (arr.size() > 0) {
     sync_paths.clear();

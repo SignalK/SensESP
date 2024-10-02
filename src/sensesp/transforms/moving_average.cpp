@@ -10,10 +10,10 @@ MovingAverage::MovingAverage(int sample_size, float multiplier,
       sample_size_{sample_size},
       multiplier_{multiplier},
       initialized_(false) {
-  set_requires_restart(true);
+
   buf_.resize(sample_size_, 0);
 
-  load_configuration();
+  load();
 }
 
 void MovingAverage::set(const float& input) {
@@ -35,22 +35,13 @@ void MovingAverage::set(const float& input) {
   notify();
 }
 
-void MovingAverage::get_configuration(JsonObject& root) {
+bool MovingAverage::to_json(JsonObject& root) {
   root["multiplier"] = multiplier_;
   root["sample_size"] = sample_size_;
+  return true;
 }
 
-static const char kSchema[] = R"({
-    "type": "object",
-    "properties": {
-        "sample_size": { "title": "Number of samples in average", "type": "integer" },
-        "multiplier": { "title": "Multiplier", "type": "number" }
-    }
-  })";
-
-String MovingAverage::get_config_schema() { return (kSchema); }
-
-bool MovingAverage::set_configuration(const JsonObject& config) {
+bool MovingAverage::from_json(const JsonObject& config) {
   String const expected[] = {"multiplier", "sample_size"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -67,6 +58,15 @@ bool MovingAverage::set_configuration(const JsonObject& config) {
     sample_size_ = n_new;
   }
   return true;
+}
+const String ConfigSchema(const MovingAverage& obj) {
+  return R"({
+    "type": "object",
+    "properties": {
+        "sample_size": { "title": "Number of samples in average", "type": "integer" },
+        "multiplier": { "title": "Multiplier", "type": "number" }
+    }
+  })";
 }
 
 }  // namespace sensesp

@@ -2,6 +2,7 @@
 #define SENSESP_SENSORS_ANALOG_INPUT_H_
 
 #include "analog_reader.h"
+#include "sensesp/ui/config_item.h"
 #include "sensor.h"
 
 namespace sensesp {
@@ -43,16 +44,20 @@ class AnalogInput : public FloatSensor {
   AnalogInput(uint8_t pin = A0, unsigned int read_delay = 200,
               const String& config_path = "", float output_scale = 1024.);
 
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
+
  private:
   uint8_t pin{};
   unsigned int read_delay;
   float output_scale;
   BaseAnalogReader* analog_reader{};
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
   void update();
 };
+
+const String ConfigSchema(AnalogInput& obj);
+
+inline bool ConfigRequiresRestart(const AnalogInput& obj) { return true; }
 
 }  // namespace sensesp
 

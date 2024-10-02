@@ -2,6 +2,7 @@
 #define SENSESP_TRANSFORMS_VOLTAGE_DIVIDER_H_
 
 #include "transform.h"
+#include "sensesp/ui/config_item.h"
 
 namespace sensesp {
 
@@ -36,14 +37,15 @@ class VoltageDividerR1 : public SymmetricTransform<float> {
 
   virtual void set(const float& Vout) override;
 
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  protected:
   float R2_;
   float Vin_;
 };
+
+const String ConfigSchema(const VoltageDividerR1& obj);
 
 /**
  * @brief Uses the voltage divider formula to calculate (and output) the
@@ -77,14 +79,15 @@ class VoltageDividerR2 : public SymmetricTransform<float> {
   virtual void set(const float& Vout) override;
 
   // For reading and writing the configuration of this transformation
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  protected:
   float R1_;
   float Vin_;
 };
+
+const String ConfigSchema(const VoltageDividerR2& obj);
 
 }  // namespace sensesp
 #endif

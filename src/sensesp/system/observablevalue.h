@@ -1,8 +1,9 @@
 #ifndef SENSESP_SYSTEM_OBSERVABLEVALUE_H
 #define SENSESP_SYSTEM_OBSERVABLEVALUE_H
 
-#include "configurable.h"
+#include "saveable.h"
 #include "observable.h"
+#include "sensesp/ui/config_item.h"
 #include "valueproducer.h"
 
 namespace sensesp {
@@ -56,33 +57,49 @@ class ObservableValue : public ValueConsumer<T>, public ValueProducer<T> {
  */
 template <class T>
 class PersistingObservableValue : public ObservableValue<T>,
-                                  public Configurable {
+                                  virtual public FileSystemSaveable {
  public:
-  PersistingObservableValue() : Configurable() {}
-
   PersistingObservableValue(const T& value, String config_path = "")
-      : ObservableValue<T>(value), Configurable(config_path) {
-    load_configuration();
+      : ObservableValue<T>(value), FileSystemSaveable(config_path) {
+    load();
+
+    // Emit the current state as soon as the event loop starts
+    event_loop()->onDelay(0, [this]() { this->emit(this->output); });
   }
 
   virtual void set(const T& value) override {
     ObservableValue<T>::set(value);
-    this->save_configuration();
+    this->save();
   }
 
- protected:
-  virtual void get_configuration(JsonObject& doc) override {
+  virtual bool to_json(JsonObject& doc) override {
     doc["value"] = this->output;
+    return true;
   }
 
-  virtual bool set_configuration(const JsonObject& config) override {
+  virtual bool from_json(const JsonObject& config) override {
     if (!config["value"].is<T>()) {
       return false;
     }
     ObservableValue<T>::set(config["value"]);
     return true;
   }
+
+ protected:
 };
+
+template <class T>
+const String ConfigSchema(const PersistingObservableValue<T>& obj) {
+  String schema = R"({
+    "type": "object",
+    "properties": {
+        "value": { "title": "Value", "type": "{{type_string}}" }
+    }
+  })";
+  const T value = obj.get();
+  schema.replace("{{type_string}}", get_schema_type_string(value));
+  return schema;
+}
 
 }  // namespace sensesp
 

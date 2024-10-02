@@ -14,7 +14,7 @@ ClickType::ClickType(const String& config_path, uint16_t long_click_delay,
       ultra_long_click_delay_{ultra_long_click_delay},
       double_click_interval_{double_click_interval},
       delayed_click_report_{NULL} {
-  load_configuration();
+  load();
 }
 
 void ClickType::set(const bool& input) {
@@ -150,24 +150,14 @@ void ClickType::on_ultra_long_click() {
   on_click_completed();
 }
 
-void ClickType::get_configuration(JsonObject& root) {
+bool ClickType::to_json(JsonObject& root) {
   root["long_click_delay"] = long_click_delay_;
   root["ultra_long_click_delay"] = ultra_long_click_delay_;
   root["double_click_interval"] = double_click_interval_;
+  return true;
 }
 
-static const char kSchema[] = R"({
-    "type": "object",
-    "properties": {
-        "long_click_delay": { "title": "Long click milliseconds", "type": "integer" },
-        "ultra_long_click_delay": { "title": "Ultra long click milliseconds", "type": "integer" },
-        "double_click_interval": { "title": "Max millisecond interval between double clicks", "type" : "integer" }
-    }
-  })";
-
-String ClickType::get_config_schema() { return (kSchema); }
-
-bool ClickType::set_configuration(const JsonObject& config) {
+bool ClickType::from_json(const JsonObject& config) {
   String const expected[] = {"long_click_delay", "ultra_long_click_delay",
                              "double_click_interval"};
   for (auto str : expected) {
@@ -179,6 +169,17 @@ bool ClickType::set_configuration(const JsonObject& config) {
   ultra_long_click_delay_ = config["ultra_long_click_delay"];
   double_click_interval_ = config["double_click_interval"];
   return true;
+}
+
+const String ConfigSchema(const ClickType& obj) {
+  return R"({
+    "type": "object",
+    "properties": {
+      "long_click_delay": { "title": "Long Click Delay", "type": "integer" },
+      "double_click_interval": { "title": "Double Click Interval", "type": "integer" },
+      "ultra_long_click_delay": { "title": "Ultra Long Click Delay", "type": "integer" }
+    }
+  })";
 }
 
 }  // namespace sensesp

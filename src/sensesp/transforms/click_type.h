@@ -3,6 +3,7 @@
 
 #include <elapsedMillis.h>
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -25,9 +26,7 @@ enum class ClickTypes {
  * them as events of type `ClickTypes`. Use AceButton instead.
  * @see ClickTypes
  */
-class [[deprecated(
-    "ClickType is deprecated. Please use AceButton instead.")]] ClickType
-    : public Transform<bool, ClickTypes> {
+class ClickType : public Transform<bool, ClickTypes> {
  public:
   /**
    * The constructor
@@ -61,9 +60,8 @@ class [[deprecated(
   static bool is_click(ClickTypes value);
 
   virtual void set(const bool& input) override;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  protected:
   /// A counter to specify how many clicks are currently being
@@ -122,6 +120,8 @@ class [[deprecated(
    */
   void emitDelayed(ClickTypes value);
 };
+
+const String ConfigSchema(const ClickType& obj);
 
 }  // namespace sensesp
 

@@ -1,6 +1,7 @@
 #ifndef SENSESP_TRANSFORMS_VOLTAGE_MULTIPLIER_H_
 #define SENSESP_TRANSFORMS_VOLTAGE_MULTIPLIER_H_
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -36,10 +37,11 @@ class VoltageMultiplier : public FloatTransform {
  private:
   uint16_t R1_{};
   uint16_t R2_{};
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 };
+
+const String ConfigSchema(const VoltageMultiplier& obj);
 
 }  // namespace sensesp
 #endif

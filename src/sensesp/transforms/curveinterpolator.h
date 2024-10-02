@@ -1,6 +1,7 @@
 #ifndef SENSESP_TRANSFORMS_CURVEINTERPOLATOR_H_
 #define SENSESP_TRANSFORMS_CURVEINTERPOLATOR_H_
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -69,9 +70,8 @@ class CurveInterpolator : public FloatTransform {
   }
 
   // For reading and writing the configuration of this transformation
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& doc) override;
+  virtual bool from_json(const JsonObject& doc) override;
 
   // For manually adding sample points
   void clear_samples();
@@ -84,7 +84,31 @@ class CurveInterpolator : public FloatTransform {
   std::set<Sample> samples_{};
   String input_title_ = "Input";
   String output_title_ = "Output";
+
+  friend const char* ConfigSchema(const CurveInterpolator& obj);
 };
+
+const char* ConfigSchema(const CurveInterpolator& obj) {
+  static const char schema[] = R"({
+    "type": "object",
+    "properties": {
+        "samples": { "title": "Sample values",
+                    "type": "array",
+                    "format": "table",
+                    "items": { "type": "object",
+                               "properties": {
+                                   "input": { "type": "number",
+                                              "title": "%s" },
+                                   "output": { "type": "number",
+                                              "title": "%s" }
+                             }}}
+    }
+  })";
+  static char buf[sizeof(schema) + 160];
+  snprintf(buf, sizeof(buf), schema, obj.input_title_.c_str(),
+           obj.output_title_.c_str());
+  return buf;
+}
 
 }  // namespace sensesp
 

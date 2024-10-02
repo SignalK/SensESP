@@ -3,7 +3,7 @@
 
 #include <set>
 
-#include "sensesp/system/configurable.h"
+#include "sensesp/system/saveable.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp_base_app.h"
@@ -25,14 +25,11 @@ namespace sensesp {
  * variable to be configurable at run-time in your project, don't provide a
  * config_path when you construct the class.
  */
-class SensorConfig : virtual public Observable, public Configurable {
+class SensorConfig : virtual public Observable, public FileSystemSaveable {
  public:
-  SensorConfig(const String& config_path = "");
-
-  static const std::set<SensorConfig*>& get_sensors() { return sensors_; }
+  SensorConfig(const String& config_path) : FileSystemSaveable(config_path) {}
 
  private:
-  static std::set<SensorConfig*> sensors_;
 };
 
 /**
@@ -40,9 +37,9 @@ class SensorConfig : virtual public Observable, public Configurable {
  *
  **/
 template <typename T>
-class Sensor : public SensorConfig, public ValueProducer<T> {
+class Sensor : public SensorConfig, virtual public ValueProducer<T> {
  public:
-  Sensor<T>(String config_path = "")
+  Sensor<T>(String config_path)
       : SensorConfig(config_path), ValueProducer<T>() {}
 };
 
@@ -70,7 +67,7 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         returning_callback_(callback) {
-    SensESPBaseApp::get_event_loop()->onRepeat(repeat_interval_ms_, [this]() {
+    event_loop()->onRepeat(repeat_interval_ms_, [this]() {
       this->emit(this->returning_callback_());
     });
   }
@@ -93,8 +90,8 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         emitting_callback_(callback) {
-    SensESPBaseApp::get_event_loop()->onRepeat(
-        repeat_interval_ms_, [this]() { emitting_callback_(this); });
+    event_loop()->onRepeat(repeat_interval_ms_,
+                           [this]() { emitting_callback_(this); });
   }
 
  protected:

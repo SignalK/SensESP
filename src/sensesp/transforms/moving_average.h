@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -35,9 +36,8 @@ class MovingAverage : public FloatTransform {
   MovingAverage(int sample_size, float multiplier = 1.0,
                 const String& config_path = "");
   virtual void set(const float& input) override;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  private:
   std::vector<float> buf_{};
@@ -46,6 +46,12 @@ class MovingAverage : public FloatTransform {
   float multiplier_;
   bool initialized_;
 };
+
+const String ConfigSchema(const MovingAverage& obj);
+
+inline bool ConfigRequiresRestart(const MovingAverage& obj) {
+  return true;
+}
 
 }  // namespace sensesp
 #endif

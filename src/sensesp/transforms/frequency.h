@@ -1,6 +1,7 @@
 #ifndef SENSESP_TRANSFORMS_FREQUENCY_H_
 #define SENSESP_TRANSFORMS_FREQUENCY_H_
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -22,9 +23,8 @@ class Frequency : public Transform<int, float> {
  public:
   Frequency(float multiplier = 1, const String& config_path = "");
   virtual void set(const int& input) override;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  private:
   float multiplier_;
@@ -32,5 +32,8 @@ class Frequency : public Transform<int, float> {
   unsigned int last_update_ = 0;
 };
 
+const String ConfigSchema(const Frequency& obj);
+
 }  // namespace sensesp
+
 #endif

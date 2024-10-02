@@ -1,41 +1,12 @@
 #ifndef SENSESP_TRANSFORMS_LAMBDA_TRANSFORM_H_
 #define SENSESP_TRANSFORMS_LAMBDA_TRANSFORM_H_
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
 
 // template snippets for configuration schema
-
-static const char kLambdaTransformSchemaHead[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-  )";
-
-static const char kLambdaTransformSchemaTail[] PROGMEM = R"(
-    }
-  })";
-
-/**
- * Convert the variable type to a string representation of the type using
- * template specializations.
- **/
-// an unknown type may not be rendered in Json editor
-template <class T>
-const char* get_schema_type_string(const T dummy) {
-  return "unknown";
-}
-template <>
-const char* get_schema_type_string(const int dummy);
-
-template <>
-const char* get_schema_type_string(const float dummy);
-
-template <>
-const char* get_schema_type_string(const String dummy);
-
-template <>
-const char* get_schema_type_string(const bool dummy);
 
 /**
  * Configuration parameter information struct
@@ -70,9 +41,10 @@ template <class IN, class OUT, class P1 = bool, class P2 = bool,
           class P3 = bool, class P4 = bool, class P5 = bool, class P6 = bool>
 class LambdaTransform : public Transform<IN, OUT> {
  public:
-  LambdaTransform(std::function<OUT(IN)> function, const String& config_path = "")
+  LambdaTransform(std::function<OUT(IN)> function,
+                  const String& config_path = "")
       : Transform<IN, OUT>(config_path), num_params_{0}, function0_{function} {
-    this->load_configuration();
+    this->load();
   }
 
   LambdaTransform(std::function<OUT(IN)> function, const ParamInfo* param_info,
@@ -81,7 +53,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         num_params_{0},
         function0_{function},
         param_info_{param_info} {
-    this->load_configuration();
+    this->load();
   }
 
   LambdaTransform(std::function<OUT(IN, P1)> function, P1 param1,
@@ -91,7 +63,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         function1_{function},
         param1_{param1},
         param_info_{param_info} {
-    this->load_configuration();
+    this->load();
   }
 
   /**
@@ -115,7 +87,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         param1_{param1},
         param2_{param2},
         param_info_{param_info} {
-    this->load_configuration();
+    this->load();
   }
 
   LambdaTransform(std::function<OUT(IN, P1, P2, P3)> function, P1 param1,
@@ -128,7 +100,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         param2_{param2},
         param3_{param3},
         param_info_{param_info} {
-    this->load_configuration();
+    this->load();
   }
 
   LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4)> function, P1 param1,
@@ -142,7 +114,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         param3_{param3},
         param4_{param4},
         param_info_{param_info} {
-    this->load_configuration();
+    this->load();
   }
 
   LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4, P5)> function,
@@ -157,7 +129,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         param4_{param4},
         param5_{param5},
         param_info_{param_info} {
-    this->load_configuration();
+    this->load();
   }
 
   LambdaTransform(std::function<OUT(IN, P1, P2, P3, P4, P5, P6)> function,
@@ -174,7 +146,7 @@ class LambdaTransform : public Transform<IN, OUT> {
         param5_{param5},
         param6_{param6},
         param_info_{param_info} {
-    this->load_configuration();
+    this->load();
   }
 
   void set(const IN& input) override {
@@ -195,11 +167,12 @@ class LambdaTransform : public Transform<IN, OUT> {
         this->output = function4_(input, param1_, param2_, param3_, param4_);
         break;
       case 5:
-        this->output = function5_(input, param1_, param2_, param3_, param4_, param5_);
+        this->output =
+            function5_(input, param1_, param2_, param3_, param4_, param5_);
         break;
       case 6:
-        this->output =
-            function6_(input, param1_, param2_, param3_, param4_, param5_, param6_);
+        this->output = function6_(input, param1_, param2_, param3_, param4_,
+                                  param5_, param6_);
         break;
       default:
         break;
@@ -207,7 +180,7 @@ class LambdaTransform : public Transform<IN, OUT> {
     Observable::notify();
   }
 
-  void get_configuration(JsonObject& doc) override {
+  bool to_json(JsonObject& doc) override {
     switch (num_params_) {
       case 6:
         doc[param_info_[5].key] = param6_;
@@ -224,9 +197,10 @@ class LambdaTransform : public Transform<IN, OUT> {
       default:
         break;
     }
+    return true;
   }
 
-  bool set_configuration(const JsonObject& config) override {
+  bool from_json(const JsonObject& config) override {
     // test that each argument key (as defined by param_info)
     // exists in the received Json object
     ESP_LOGD(__FILENAME__, "Preparing to restore configuration from FS.");
@@ -257,64 +231,14 @@ class LambdaTransform : public Transform<IN, OUT> {
     return true;
   }
 
-  String get_config_schema() override {
-    // FIXME: The heavy use of Strings puts a lot of faith in that class's
-    // ability to not leak or corrupt memory. Would be better to receive
-    // a character array pointer as an argument for writing the output to.
-    String output = "";
+  const ParamInfo* get_param_info() const { return param_info_; }
 
-    if (num_params_ == 0) {
-      return "{}";
-    }
-
-    ESP_LOGD(__FILENAME__, "Preparing config schema for %d parameters",
-             num_params_);
-
-    output.concat(FPSTR(kLambdaTransformSchemaHead));
-    if (num_params_ > 0) {
-      ESP_LOGD(__FILENAME__, "getting param_info:");
-      ESP_LOGD(__FILENAME__, "%s -> %s", param_info_[0].key,
-               param_info_[0].description);
-      output.concat(format_schema_row(param_info_[0].key,
-                                      param_info_[0].description,
-                                      get_schema_type_string(param1_), false));
-    }
-    if (num_params_ > 1) {
-      output.concat(",");
-      output.concat(format_schema_row(param_info_[1].key,
-                                      param_info_[1].description,
-                                      get_schema_type_string(param2_), false));
-    }
-    if (num_params_ > 2) {
-      output.concat(",");
-      output.concat(format_schema_row(param_info_[2].key,
-                                      param_info_[2].description,
-                                      get_schema_type_string(param3_), false));
-    }
-    if (num_params_ > 3) {
-      output.concat(",");
-      output.concat(format_schema_row(param_info_[3].key,
-                                      param_info_[3].description,
-                                      get_schema_type_string(param4_), false));
-    }
-    if (num_params_ > 4) {
-      output.concat(",");
-      output.concat(format_schema_row(param_info_[4].key,
-                                      param_info_[4].description,
-                                      get_schema_type_string(param5_), false));
-    }
-    if (num_params_ > 5) {
-      output.concat(",");
-      output.concat(format_schema_row(param_info_[5].key,
-                                      param_info_[5].description,
-                                      get_schema_type_string(param6_), false));
-    }
-    output.concat(FPSTR(kLambdaTransformSchemaTail));
-
-    ESP_LOGD(__FILENAME__, "Prepared config schema.");
-
-    return output;
-  }
+  P1 param1_;
+  P2 param2_;
+  P3 param3_;
+  P4 param4_;
+  P5 param5_;
+  P6 param6_;
 
  private:
   int num_params_;
@@ -327,31 +251,180 @@ class LambdaTransform : public Transform<IN, OUT> {
   std::function<OUT(IN, P1, P2, P3, P4, P5)> function5_;
   std::function<OUT(IN, P1, P2, P3, P4, P5, P6)> function6_;
 
-  P1 param1_;
-  P2 param2_;
-  P3 param3_;
-  P4 param4_;
-  P5 param5_;
-  P6 param6_;
-
   const ParamInfo* param_info_;
+};
 
-  static String format_schema_row(const char key[], const char title[],
-                                  const char type[], const bool read_only) {
-    char row[1024] = "";
-    const char* read_only_str = read_only ? "true" : "false";
-
-    static const char schema_row[] = R"(
-      "%s": { "title": "%s", "type": "%s", "readOnly": %s }
+static const char kLambdaTransformSchemaHead[] = R"({
+    "type": "object",
+    "properties": {
   )";
 
-    sprintf(row, schema_row, key, title, type, read_only_str);
+static const char kLambdaTransformSchemaTail[] = R"(
+    }
+  })";
 
-    ESP_LOGD(__FILENAME__, "Formatted schema row: %s", row);
+static const String format_schema_row(const char key[], const char title[],
+                                      const char type[], const bool read_only) {
+  char row[1024] = "";
+  const char* read_only_str = read_only ? "true" : "false";
 
-    return String(row);
-  }
-};
+  static const char schema_row[] = R"(
+    "%s": { "title": "%s", "type": "%s", "readOnly": %s }
+)";
+
+  sprintf(row, schema_row, key, title, type, read_only_str);
+
+  return row;
+}
+
+template <class IN, class OUT>
+const String ConfigSchema(const LambdaTransform<IN, OUT>& obj) {
+  return "{}";
+}
+
+// This is stupid. I hope this can be fixed with variadic templates.
+
+template <class IN, class OUT, class P1>
+const String ConfigSchema(const LambdaTransform<IN, OUT, P1>& obj) {
+  String output = kLambdaTransformSchemaHead;
+  const ParamInfo* param_info = obj.get_param_info();
+  output.concat(format_schema_row(param_info[0].key, param_info[0].description,
+                                  get_schema_type_string(obj.param1_), false));
+  output.concat(kLambdaTransformSchemaTail);
+  return output;
+}
+
+// This is stupid x2
+
+template <class IN, class OUT, class P1, class P2>
+const String ConfigSchema(const LambdaTransform<IN, OUT, P1, P2>& obj) {
+  String output = kLambdaTransformSchemaHead;
+  const ParamInfo* param_info = obj.get_param_info();
+  output.concat(format_schema_row(param_info[0].key,
+                                  param_info[0].description,
+                                  get_schema_type_string(obj.param1_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[1].key,
+                                  param_info[1].description,
+                                  get_schema_type_string(obj.param2_), false));
+  output.concat(kLambdaTransformSchemaTail);
+  return output;
+}
+
+// This is stupid x3
+
+template <class IN, class OUT, class P1, class P2, class P3>
+const String ConfigSchema(const LambdaTransform<IN, OUT, P1, P2, P3>& obj) {
+  String output = kLambdaTransformSchemaHead;
+  const ParamInfo* param_info = obj.get_param_info();
+
+  output.concat(format_schema_row(param_info[0].key,
+                                  param_info[0].description,
+                                  get_schema_type_string(obj.param1_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[1].key,
+                                  param_info[1].description,
+                                  get_schema_type_string(obj.param2_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[2].key,
+                                  param_info[2].description,
+                                  get_schema_type_string(obj.param3_), false));
+  output.concat(kLambdaTransformSchemaTail);
+  return output;
+}
+
+// This is stupid x4
+
+template <class IN, class OUT, class P1, class P2, class P3, class P4>
+const String ConfigSchema(const LambdaTransform<IN, OUT, P1, P2, P3, P4>& obj) {
+  String output = kLambdaTransformSchemaHead;
+  const ParamInfo* param_info = obj.get_param_info();
+
+  output.concat(format_schema_row(param_info[0].key,
+                                  param_info[0].description,
+                                  get_schema_type_string(obj.param1_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[1].key,
+                                  param_info[1].description,
+                                  get_schema_type_string(obj.param2_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[2].key,
+                                  param_info[2].description,
+                                  get_schema_type_string(obj.param3_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[3].key,
+                                  param_info[3].description,
+                                  get_schema_type_string(obj.param4_), false));
+  output.concat(kLambdaTransformSchemaTail);
+  return output;
+}
+
+// This is stupid x5
+
+template <class IN, class OUT, class P1, class P2, class P3, class P4, class P5>
+const String ConfigSchema(
+    const LambdaTransform<IN, OUT, P1, P2, P3, P4, P5>* obj) {
+  String output = kLambdaTransformSchemaHead;
+  const ParamInfo* param_info = obj.get_param_info();
+
+  output.concat(format_schema_row(param_info[0].key,
+                                  param_info[0].description,
+                                  get_schema_type_string(obj.param1_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[1].key,
+                                  param_info[1].description,
+                                  get_schema_type_string(obj.param2_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[2].key,
+                                  param_info[2].description,
+                                  get_schema_type_string(obj.param3_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[3].key,
+                                  param_info[3].description,
+                                  get_schema_type_string(obj.param4_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[4].key,
+                                  param_info[4].description,
+                                  get_schema_type_string(obj.param5_), false));
+  output.concat(kLambdaTransformSchemaTail);
+  return output;
+}
+
+// This is stupid x6
+
+template <class IN, class OUT, class P1, class P2, class P3, class P4, class P5,
+          class P6>
+const String ConfigSchema(
+    const LambdaTransform<IN, OUT, P1, P2, P3, P4, P5, P6>* obj) {
+  String output = kLambdaTransformSchemaHead;
+  const ParamInfo* param_info = obj.get_param_info();
+
+  output.concat(format_schema_row(param_info[0].key,
+                                  param_info[0].description,
+                                  get_schema_type_string(obj.param1_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[1].key,
+                                  param_info[1].description,
+                                  get_schema_type_string(obj.param2_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[2].key,
+                                  param_info[2].description,
+                                  get_schema_type_string(obj.param3_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[3].key,
+                                  param_info[3].description,
+                                  get_schema_type_string(obj.param4_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[4].key,
+                                  param_info[4].description,
+                                  get_schema_type_string(obj.param5_), false));
+  output.concat(",");
+  output.concat(format_schema_row(param_info[5].key,
+                                  param_info[5].description,
+                                  get_schema_type_string(obj.param6_), false));
+  output.concat(kLambdaTransformSchemaTail);
+  return output;
+}
 
 }  // namespace sensesp
 

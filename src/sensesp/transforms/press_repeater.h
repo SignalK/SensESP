@@ -3,6 +3,7 @@
 
 #include <elapsedMillis.h>
 
+#include "sensesp/ui/config_item.h"
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/system/valueconsumer.h"
 #include "transform.h"
@@ -12,7 +13,7 @@ namespace sensesp {
 /**
  * @brief A transform that takes boolean inputs and adds
  * button behaviors familiar to many device end users.
- * Deprecated: use AceButton for button inputs.
+ * DEPRECATED: use AceButton for button inputs.
  *
  * It emits a value only when the state of the input changes
  * (i.e. when the input changes from TRUE to FALSE, and vice versa).
@@ -39,10 +40,7 @@ namespace sensesp {
  * @param repeat_interval How often to repeat the repeated output, in ms.
  * The default is 250.
  */
-class [[deprecated(
-    "PressRepeater is deprecated. Please use AceButton "
-    "instead.")]] PressRepeater : public BooleanTransform,
-                                  public IntConsumer {
+class PressRepeater : public BooleanTransform, public IntConsumer {
  public:
   PressRepeater(const String& config_path = "", int integer_false = 0,
                 int repeat_start_interval = 1500, int repeat_interval = 250);
@@ -50,9 +48,8 @@ class [[deprecated(
   virtual void set(const bool& new_value) override;
   virtual void set(const int& new_value) override;
 
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  protected:
   int integer_false_;
@@ -62,6 +59,8 @@ class [[deprecated(
   bool pushed_;
   bool repeating_;
 };
+
+const String ConfigSchema(const PressRepeater& obj);
 
 }  // namespace sensesp
 #endif

@@ -5,7 +5,6 @@
 
 #include "ArduinoJson.h"
 #include "sensesp/net/http_server.h"
-#include "sensesp/system/configurable.h"
 #include "static_file_data.h"
 
 namespace sensesp {

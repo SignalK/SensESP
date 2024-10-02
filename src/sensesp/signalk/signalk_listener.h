@@ -6,17 +6,11 @@
 #include <ArduinoJson.h>
 #include <set>
 
-#include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"
+#include "sensesp/ui/config_item.h"
 
 namespace sensesp {
-static const char SIGNALKINPUT_SCHEMA[] PROGMEM = R"({
-      "type": "object",
-      "properties": {
-            "sk_path": { "title": "Signal K Path", "type": "string" }
-      }
-  })";
 
 /**
  * @brief An Obervable class that listens for Signal K stream deltas
@@ -25,7 +19,7 @@ static const char SIGNALKINPUT_SCHEMA[] PROGMEM = R"({
  * the most common descendant being `SKValueListener`
  * @see SKValueListener
  */
-class SKListener : virtual public Observable, public Configurable {
+class SKListener : virtual public Observable, public FileSystemSaveable {
  public:
   /**
    * The constructor
@@ -64,12 +58,13 @@ class SKListener : virtual public Observable, public Configurable {
   int listen_delay;
   static SemaphoreHandle_t semaphore_;
 
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
   void set_sk_path(const String& path);
 };
+
+const String ConfigSchema(const SKListener& obj);
 
 }  // namespace sensesp
 

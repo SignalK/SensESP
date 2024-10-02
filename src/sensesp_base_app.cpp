@@ -1,5 +1,7 @@
 #include "sensesp_base_app.h"
 
+#include "sensesp/ui/config_item.h"
+
 namespace sensesp {
 
 void SetupSerialDebug(uint32_t baudrate) {
@@ -17,12 +19,10 @@ void SetupLogging(esp_log_level_t default_level) {
 SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
 
 SensESPBaseApp::SensESPBaseApp() : filesystem_(new Filesystem()) {
-  // create the hostname_ observable - this needs to be done before
-  // the builder methods are called
+  instance_ = this;
   hostname_ = new PersistingObservableValue<String>(kDefaultHostname,
                                                     "/system/hostname");
-  hostname_->set_description("Device hostname");
-  hostname_->set_sort_order(0);
+  ConfigItem(hostname_);  // Make hostname configurable
 }
 
 /**
@@ -35,7 +35,7 @@ SensESPBaseApp* SensESPBaseApp::get() { return instance_; }
  * @brief Get the event loop object from the singleton SensESPBaseApp instance.
  *
  */
- reactesp::EventLoop* SensESPBaseApp::get_event_loop() {
+reactesp::EventLoop* SensESPBaseApp::get_event_loop() {
   return &(SensESPBaseApp::get()->event_loop_);
 }
 

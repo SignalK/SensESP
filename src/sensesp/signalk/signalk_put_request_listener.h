@@ -6,7 +6,6 @@
 #include <ArduinoJson.h>
 #include <set>
 
-#include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"
 

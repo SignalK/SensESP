@@ -1,6 +1,7 @@
 #ifndef SENSESP_TRANSFORMS_CHANGE_FILTER_H_
 #define SENSESP_TRANSFORMS_CHANGE_FILTER_H_
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -36,9 +37,8 @@ class ChangeFilter : public FloatTransform {
                int max_skips = 99, const String& config_path = "");
 
   virtual void set(const float& new_value) override;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  protected:
   float min_delta_;
@@ -47,6 +47,7 @@ class ChangeFilter : public FloatTransform {
   int skips_;
 };
 
+const String ConfigSchema(ChangeFilter& obj);
 }  // namespace sensesp
 
 #endif

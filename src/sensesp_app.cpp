@@ -4,6 +4,7 @@
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
 #include "sensesp/net/web/autogen/frontend_files.h"
+#include "sensesp/ui/config_item.h"
 #include "sensesp/system/button.h"
 #include "sensesp/system/system_status_led.h"
 #include "sensesp/transforms/debounce.h"
@@ -32,6 +33,8 @@ void SensESPApp::setup() {
   networking_ =
       new Networking("/System/WiFi Settings", ssid_, wifi_client_password_);
 
+  ConfigItem(networking_);
+
   if (ota_password_ != nullptr) {
     // create the OTA object
     ota_ = new OTA(ota_password_);
@@ -49,6 +52,8 @@ void SensESPApp::setup() {
   add_app_http_command_handlers(this->http_server_);
   add_config_handlers(this->http_server_);
 
+  ConfigItem(this->http_server_);
+
   // create the SK delta object
   sk_delta_queue_ = new SKDeltaQueue();
 
@@ -57,6 +62,8 @@ void SensESPApp::setup() {
   this->ws_client_ =
       new SKWSClient("/System/Signal K Settings", sk_delta_queue_,
                      sk_server_address_, sk_server_port_, use_mdns);
+
+  ConfigItem(this->ws_client_);
 
   // connect the system status controller
   WiFiStateProducer::get_singleton()->connect_to(&system_status_controller_);
