@@ -16,7 +16,7 @@ class StreamCharProducer : public ValueProducer<char> {
  public:
   StreamCharProducer(Stream* stream) : stream_{stream} {
     read_event_ =
-        SensESPBaseApp::get_event_loop()->onAvailable(*stream_, [this]() {
+        event_loop()->onAvailable(*stream_, [this]() {
           while (stream_->available()) {
             char c = stream_->read();
             this->emit(c);
@@ -39,7 +39,7 @@ class StreamLineProducer : public ValueProducer<String> {
     static int buf_pos = 0;
     buf_ = new char[max_line_length_ + 1];
     read_event_ =
-        SensESPBaseApp::get_event_loop()->onAvailable(*stream_, [this]() {
+        event_loop()->onAvailable(*stream_, [this]() {
           while (stream_->available()) {
             char c = stream_->read();
             if (c == '\n') {

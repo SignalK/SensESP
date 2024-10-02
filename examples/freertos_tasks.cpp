@@ -88,13 +88,8 @@ void setup() {
       [](float input) { ESP_LOGD("Example", "Heading: %f", input); }));
 
   // print out free heap
-  SensESPBaseApp::get_event_loop()->onRepeat(
+  event_loop()->onRepeat(
       2000, []() { ESP_LOGD("Example", "Free heap: %d", ESP.getFreeHeap()); });
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

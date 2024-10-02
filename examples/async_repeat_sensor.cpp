@@ -33,7 +33,7 @@ void setup() {
   auto digital_read_callback = [](RepeatSensor<bool>* sensor) {
     ESP_LOGI("Example",
              "Pretend to trigger an asynchronous measurement operation here.");
-    SensESPBaseApp::get_event_loop()->onDelay(1000,
+    event_loop()->onDelay(1000,
                 [sensor]() { sensor->emit(digitalRead(kDigitalInputPin)); });
   };
 
@@ -55,8 +55,5 @@ void setup() {
 }
 
 void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
+  event_loop()->tick();
 }

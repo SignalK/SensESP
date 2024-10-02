@@ -92,7 +92,7 @@ Networking::Networking(String config_path, String client_ssid,
     dns_server_->setErrorReplyCode(DNSReplyCode::NoError);
     dns_server_->start(53, "*", WiFi.softAPIP());
 
-    SensESPBaseApp::get_event_loop()->onRepeat(
+    event_loop()->onRepeat(
         1, [this]() { dns_server_->processNextRequest(); });
   }
 }
@@ -193,7 +193,7 @@ void Networking::start_client_autoconnect() {
   // Launch a separate onRepeat event to (re-)establish WiFi connection.
   // Connecting is attempted only every 20 s to allow the previous connection
   // attempt to complete even if the network is slow.
-  SensESPBaseApp::get_event_loop()->onRepeat(20000, reconnect_cb);
+  event_loop()->onRepeat(20000, reconnect_cb);
 }
 
 /**

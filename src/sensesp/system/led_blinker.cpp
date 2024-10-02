@@ -11,7 +11,7 @@ namespace sensesp {
 
 BaseBlinker::BaseBlinker(int pin) : pin_{pin} {
   pinMode(pin, OUTPUT);
-  SensESPBaseApp::get_event_loop()->onDelay(1, [this]() { this->tick(); });
+  event_loop()->onDelay(1, [this]() { this->tick(); });
 }
 
 /**
@@ -44,13 +44,13 @@ void BaseBlinker::blip(int duration) {
   bool const orig_state = this->state_;
   this->set_state(false);
   int const current_counter = this->update_counter_;
-  SensESPBaseApp::get_event_loop()->onDelay(
+  event_loop()->onDelay(
       duration, [this, duration, orig_state, current_counter]() {
         // only update if no-one has touched the LED in the meanwhile
         if (this->update_counter_ == current_counter) {
           this->set_state(true);
           int const new_counter = this->update_counter_;
-          SensESPBaseApp::get_event_loop()->onDelay(
+          event_loop()->onDelay(
               duration, [this, orig_state, new_counter]() {
                 // again, only update if no-one has touched the LED
                 if (this->update_counter_ == new_counter) {
@@ -75,7 +75,7 @@ void BaseBlinker::set_enabled(bool state) {
   } else {
     this->set_state(false);
     if (was_enabled) {
-      event_->remove(SensESPBaseApp::get_event_loop());
+      event_->remove(event_loop());
     }
   }
 }
@@ -91,7 +91,7 @@ void EvenBlinker::tick() {
     return;
   }
   this->flip_state();
-  event_ = SensESPBaseApp::get_event_loop()->onDelay(
+  event_ = event_loop()->onDelay(
       period_, [this]() { this->tick(); });
 }
 
@@ -107,7 +107,7 @@ void RatioBlinker::tick() {
   int const off_duration = max(0, period_ - on_duration);
   unsigned int const ref_duration =
       state_ == false ? off_duration : on_duration;
-  event_ = SensESPBaseApp::get_event_loop()->onDelay(
+  event_ = event_loop()->onDelay(
       ref_duration, [this]() { this->tick(); });
 }
 
@@ -137,7 +137,7 @@ void PatternBlinker::tick() {
   // odd indices indicate times when LED should be OFF, even when ON
   bool const new_state = (pattern_ptr_ % 2) == 0;
   this->set_state(new_state);
-  event_ = SensESPBaseApp::get_event_loop()->onDelay(
+  event_ = event_loop()->onDelay(
       pattern_[pattern_ptr_++], [this]() { this->tick(); });
 }
 
@@ -145,7 +145,7 @@ void PatternBlinker::restart() {
   state_ = false;
   pattern_ptr_ = 0;
   if (event_ != NULL) {
-    event_->remove(SensESPBaseApp::get_event_loop());
+    event_->remove(event_loop());
     event_ = NULL;
     this->tick();
   }

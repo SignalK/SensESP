@@ -19,8 +19,7 @@ void setup() {
                                 ->set_wifi("Hat Labs Sensors", "kanneluuri2406")
                                 ->get_app();
 
-  SensESPBaseApp::get_event_loop()->onRepeat(1000,
-                                    []() { toggler.set(!toggler.get()); });
+  event_loop()->onRepeat(1000, []() { toggler.set(!toggler.get()); });
 
   // take some boolean input and convert it into a simple serialized JSON
   // document
@@ -45,9 +44,4 @@ void setup() {
   jsonify->connect_to(new SKOutputRawJson(sk_path, ""));
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

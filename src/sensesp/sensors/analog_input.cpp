@@ -18,7 +18,7 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
   load_configuration();
 
   if (this->analog_reader->configure()) {
-    SensESPBaseApp::get_event_loop()->onRepeat(read_delay, [this]() { this->update(); });
+    event_loop()->onRepeat(read_delay, [this]() { this->update(); });
   }
 }
 

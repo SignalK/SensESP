@@ -13,7 +13,7 @@ SKDeltaQueue::SKDeltaQueue(unsigned int max_buffer_size)
     : max_buffer_size{max_buffer_size}, meta_sent_{false} {
   semaphore_ = xSemaphoreCreateRecursiveMutex();
 
-  SensESPBaseApp::get_event_loop()->onDelay(
+  event_loop()->onDelay(
       0, [this]() { this->connect_emitters(); });
 }
 

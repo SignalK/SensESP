@@ -32,7 +32,7 @@ class BaseButtonHandler : public Configurable, public IEventHandler {
 
     ESP_LOGD(__FILENAME__, "Button handler started");
 
-    SensESPBaseApp::get_event_loop()->onRepeat(
+    event_loop()->onRepeat(
         4, [this]() { this->button_->check(); });
   }
 

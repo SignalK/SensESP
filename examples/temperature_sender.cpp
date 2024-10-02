@@ -162,9 +162,4 @@ void setup() {
           new SKOutputFloat(sk_path, "/12V_alternator/temp/sk", metadata));
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

@@ -106,7 +106,7 @@ class SKWSClient : public Configurable,
   TaskQueueProducer<SKWSConnectionState> connection_state_ =
       TaskQueueProducer<SKWSConnectionState>(
           SKWSConnectionState::kSKWSDisconnected,
-          SensESPBaseApp::get_event_loop());
+          event_loop());
 
   /// task_connection_state is used to track the internal task state which might
   /// be out of sync with the published connection state.
@@ -118,7 +118,7 @@ class SKWSClient : public Configurable,
   SKDeltaQueue* sk_delta_queue_;
   /// @brief Emits the number of deltas sent since last report
   TaskQueueProducer<int> delta_tx_tick_producer_ =
-      TaskQueueProducer<int>(0, SensESPBaseApp::get_event_loop(), 5, 990);
+      TaskQueueProducer<int>(0, event_loop(), 5, 990);
   Integrator<int, int> delta_tx_count_producer_{1, 0, ""};
   Integrator<int, int> delta_rx_count_producer_{1, 0, ""};
 

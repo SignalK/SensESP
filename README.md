@@ -122,7 +122,7 @@
   `sensesp_app->get_event_loop()`. For example:
 
   ```cpp
-  SensESPBaseApp::get_event_loop()->onRepeat(
+  event_loop()->onRepeat(
     1000,
     []() { Serial.println("Hello, world!"); }
   );

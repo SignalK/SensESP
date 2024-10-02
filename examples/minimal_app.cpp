@@ -58,17 +58,12 @@ void setup() {
       }));
 
   pinMode(output_pin1, OUTPUT);
-  SensESPBaseApp::get_event_loop()->onRepeat(5,
-               []() { digitalWrite(output_pin1, !digitalRead(output_pin1)); });
+  event_loop()->onRepeat(
+      5, []() { digitalWrite(output_pin1, !digitalRead(output_pin1)); });
 
   pinMode(output_pin2, OUTPUT);
-  SensESPBaseApp::get_event_loop()->onRepeat(100,
-               []() { digitalWrite(output_pin2, !digitalRead(output_pin2)); });
+  event_loop()->onRepeat(
+      100, []() { digitalWrite(output_pin2, !digitalRead(output_pin2)); });
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

@@ -47,8 +47,8 @@ class SystemHz : public FloatSensor {
   SystemHz() {
     elapsed_millis_ = 0;
 
-    SensESPBaseApp::get_event_loop()->onTick([this]() { this->tick(); });
-    SensESPBaseApp::get_event_loop()->onRepeat(1000,
+    event_loop()->onTick([this]() { this->tick(); });
+    event_loop()->onRepeat(1000,
                                                [this]() { this->update(); });
   }
   String get_value_name() { return "systemhz"; }
@@ -71,7 +71,7 @@ class SystemHz : public FloatSensor {
 class FreeMem : public IntSensor {
  public:
   FreeMem() {
-    SensESPBaseApp::get_event_loop()->onRepeat(1000,
+    event_loop()->onRepeat(1000,
                                                [this]() { this->update(); });
   }
   String get_value_name() { return "freemem"; }
@@ -91,7 +91,7 @@ class FreeMem : public IntSensor {
 class Uptime : public FloatSensor {
  public:
   Uptime() {
-    SensESPBaseApp::get_event_loop()->onRepeat(1000,
+    event_loop()->onRepeat(1000,
                                                [this]() { this->update(); });
   }
   String get_value_name() { return "uptime"; }
@@ -111,7 +111,7 @@ class Uptime : public FloatSensor {
 class IPAddrDev : public StringSensor {
  public:
   IPAddrDev() {
-    SensESPBaseApp::get_event_loop()->onRepeat(10000,
+    event_loop()->onRepeat(10000,
                                                [this]() { this->update(); });
   }
   String get_value_name() { return "ipaddr"; }
@@ -131,7 +131,7 @@ class IPAddrDev : public StringSensor {
 class WiFiSignal : public FloatSensor {
  public:
   WiFiSignal() {
-    SensESPBaseApp::get_event_loop()->onRepeat(3000,
+    event_loop()->onRepeat(3000,
                                                [this]() { this->update(); });
   }
   String get_value_name() { return "wifisignal"; }
