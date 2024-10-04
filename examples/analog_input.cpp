@@ -48,6 +48,14 @@ void setup() {
 
   auto* analog_input = new AnalogInput(pin, read_delay, analog_in_config_path);
 
+  // Create a configuration item for the analog input sensor.
+  // This is needed to make the sensor configurable via the web interface.
+
+  ConfigItem(analog_input)
+      ->set_title("Analog Input")
+      ->set_description("Analog input read interval.")
+      ->set_sort_order(1000);
+
   // A Linear transform takes its input, multiplies it by the multiplier, then
   // adds the offset, to calculate its output. In this example, the final output
   // will be presented as a ratio, where dark = 0.0 and bright = 1.0.
@@ -76,15 +84,34 @@ void setup() {
   const float multiplier = 0.00137;
   const float offset = -0.1644;
 
-  // Connect the output of the analog input to the Linear transform,
-  // and then output the results to the Signal K server. As part of
+  // Create a linear transform for calibrating the raw input value.
+  // Connect the analog input to the linear transform.
+
+  auto input_calibration = new Linear(multiplier, offset, linear_config_path);
+  analog_input->connect_to(input_calibration);
+
+  // Create a ConfigItem for the linear transform.
+
+  ConfigItem(input_calibration)
+      ->set_title("Input Calibration")
+      ->set_description("Analog input value adjustment.")
+      ->set_sort_order(1100);
+
+  // Connect the calibration output to the Signal K output.
+  // This will send the calibrated value to the Signal K server
+  // on the specified Signal K path. As part of
   // that output, send some metadata to indicate that the "units"
   // to be used to display this value is "ratio". Also specify that
   // the display name for this value, to be used by any Signal K
   // consumer that displays it, is "Indoor light".
-  analog_input->connect_to(new Linear(multiplier, offset, linear_config_path))
-      ->connect_to(new SKOutputFloat(sk_path, "",
-                                     new SKMetadata("ratio", "Indoor light")));
+
+  // If you want to make the SK Output path configurable, you can
+  // assign the SKOutputFloat to a variable and then call
+  // ConfigItem on that variable. In that case, config_path needs to be
+  // defined in the constructor of the SKOutputFloat.
+
+  input_calibration->connect_to(
+      new SKOutputFloat(sk_path, "", new SKMetadata("ratio", "Indoor light")));
 }
 
 void loop() {

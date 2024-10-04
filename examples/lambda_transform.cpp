@@ -39,10 +39,13 @@ void setup() {
   auto* analog_input =
       new AnalogInput(pin, read_delay, analog_in_config_path, output_scale);
 
-  analog_input->set_description(
-      "Connect the analog input at pin 32 to a "
-      "photoresistor or potentiometer with a voltage "
-      "divider to get an illustrative test input.");
+  ConfigItem(analog_input)
+      ->set_title("Analog Input")
+      ->set_description(
+          "Connect the analog input at pin 32 to a photoresistor or "
+          "potentiometer with a voltage divider to get an illustrative test "
+          "input.")
+      ->set_sort_order(1000);
 
   // This is our transform function. The example is artificial; a log transform
   // with configurable multiplier, base, and offset parameters. The
@@ -79,9 +82,12 @@ void setup() {
       log_function, 10, 2, 100, log_lambda_param_data,
       "/Transforms/Log Transform");
 
-  log_transform->set_description(
-      "Log transform performs a configurable logarithmic "
-      "transform on the input.");
+  ConfigItem(log_transform)
+      ->set_title("Log Transform")
+      ->set_description(
+          "Log transform performs a configurable logarithmic "
+          "transform on the input.")
+      ->set_sort_order(1100);
 
   // Finally, connect the analog input via the freshly-generated log_transform
   // to an SKOutputNumber object

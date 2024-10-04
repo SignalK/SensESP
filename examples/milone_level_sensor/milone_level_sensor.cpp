@@ -84,6 +84,11 @@ void setup() {
 
   auto *analog_input = new AnalogInput(pin, read_delay, kAnalogInConfigPath);
 
+  ConfigItem(analog_input)
+      ->set_title("Analog Input")
+      ->set_description("Analog input from Milone depth sensor")
+      ->set_sort_order(1000);
+
   // comment out the following line to suppress the output of the raw ADC
   // measurement values. analog_input->connect_to(new
   // SKOutputNumber("tanks.freshWater.starboard.rawADC"));
@@ -112,19 +117,45 @@ void setup() {
 
   // Comment out the following 3 lines to suppress the output of the eTape
   // sensor resistance.
-  analog_input->connect_to(new AnalogVoltage(1.0, 1.0, 0.))
-      ->connect_to(
-          new VoltageDividerR1(R2, Vin, "/freshWaterTank_starboard/divider"))
+
+  auto analog_voltage = new AnalogVoltage(1.0, 1.0, 0.);
+
+  ConfigItem(analog_voltage)
+      ->set_title("Analog Voltage")
+      ->set_description("Voltage from Milone depth sensor")
+      ->set_sort_order(1000);
+
+  auto voltage_divider = new VoltageDividerR1(R2, Vin, "/freshWaterTank_starboard/divider");
+
+  ConfigItem(voltage_divider)
+      ->set_title("Voltage Divider")
+      ->set_sort_order(1100);
+
+  analog_input->connect_to(analog_voltage)
+      ->connect_to(voltage_divider)
       ->connect_to(new SKOutputFloat("tanks.freshWater.starboard.R1"));
 
   // Use the ETapeInterpolator to output the water level depth in the tank and
   // pass it through the MovingAverage transport before outputting the result.
 
-  analog_input->connect_to(new AnalogVoltage(1.0, 1.0, 0.))
-      ->connect_to(new VoltageDividerR1(R2, Vin, ""))
+  auto analog_voltage2 = new AnalogVoltage(1.0, 1.0, 0.);
+
+  ConfigItem(analog_voltage2)
+      ->set_title("Analog Voltage 2")
+      ->set_sort_order(1200);
+
+  auto voltage_divider2 = new VoltageDividerR1(R2, Vin, "/freshWaterTank_starboard/divider2");
+
+  ConfigItem(voltage_divider2)
+      ->set_title("Voltage Divider 2")
+      ->set_sort_order(1300);
+
+  auto moving_average = new MovingAverage(samples, scale, "/freshWaterTank_starboard/samples");
+
+  analog_input->connect_to(analog_voltage2)
+      ->connect_to(voltage_divider2)
       ->connect_to(new ETapeInterpreter(""))
-      ->connect_to(new MovingAverage(samples, scale,
-                                     "/freshWaterTank_starboard/samples"))
+      ->connect_to(moving_average)
       ->connect_to(
           new SKOutputFloat("tanks.freshwater.starboard.currentLevel"));
 }

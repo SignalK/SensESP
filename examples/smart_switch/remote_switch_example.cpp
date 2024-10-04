@@ -85,7 +85,14 @@ void setup() {
   DigitalInputState* btn = new DigitalInputState(PIN_BUTTON, INPUT, 100);
   PressRepeater* pr = new PressRepeater();
   btn->connect_to(pr);
-  pr->connect_to(new ClickType(config_path_button_c))->connect_to(controller);
+
+  auto click_type = new ClickType(config_path_button_c);
+
+  ConfigItem(click_type)
+      ->set_title("Click Type")
+      ->set_sort_order(1000);
+
+  pr->connect_to(click_type)->connect_to(controller);
 
   // In addition to the manual button "click types", a
   // SmartSwitchController accepts explicit state settings via

@@ -38,7 +38,7 @@ void setup() {
   SensESPMinimalAppBuilder builder;
   SensESPMinimalApp *sensesp_app = builder.set_hostname("async")->get_app();
 
-  auto *networking = new Networking("/system/net", "", "");
+  auto *networking = new Networking("/system/networking", "", "");
   auto *http_server = new HTTPServer();
 
   // create the SK delta object

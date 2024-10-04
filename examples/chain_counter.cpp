@@ -106,6 +106,11 @@ void setup() {
   String debounce_config_path = "/debounce/delay";
   auto* debounce = new DebounceInt(debounce_delay, debounce_config_path);
 
+  ConfigItem(debounce)
+      ->set_title("Button Debounce")
+      ->set_description("Button debounce delay")
+      ->set_sort_order(1000);
+
   /**
    * When the button is pressed (or released), it will call the lambda
    * expression (or "function") that's called by the LambdaConsumer. This is the

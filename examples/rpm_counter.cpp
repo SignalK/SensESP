@@ -66,12 +66,23 @@ void setup() {
 
   auto* sensor = new DigitalInputCounter(pin, INPUT_PULLUP, RISING, read_delay);
 
+  auto frequency = new Frequency(multiplier, config_path_calibrate);
+
+  ConfigItem(frequency)
+      ->set_title("Frequency")
+      ->set_description("Frequency of the engine RPM signal")
+      ->set_sort_order(1000);
+
+  auto frequency_sk_output = new SKOutput<float>(sk_path, config_path_skpath);
+
+  ConfigItem(frequency_sk_output)
+      ->set_title("Frequency SK Output Path")
+      ->set_sort_order(1001);
+
   sensor
-      ->connect_to(new Frequency(
-          multiplier, config_path_calibrate))  // connect the output of sensor
-                                               // to the input of Frequency()
-      ->connect_to(new SKOutputFloat(
-          sk_path, config_path_skpath));  // connect the output of Frequency()
+      ->connect_to(frequency)             // connect the output of sensor
+                                          // to the input of Frequency()
+      ->connect_to(frequency_sk_output);  // connect the output of Frequency()
                                           // to a Signal K Output as a number
 }
 

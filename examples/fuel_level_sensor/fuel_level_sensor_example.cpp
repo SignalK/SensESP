@@ -28,11 +28,17 @@ void setup() {
   // Takes a moving average for every 10 values, with scale factor
   MovingAverage* avg = new MovingAverage(10, scale);
 
+  ConfigItem(avg)->set_title("Fuel Level Moving Average")->set_sort_order(1000);
+
   // Connect avg. value to a SK path
   // See this link for available tank paths:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html#vesselsregexptanks
-  input->connect_to(avg)->connect_to(
-      new SKOutputFloat("tanks.fuel.0.currentLevel"));
+
+  auto avg_output = new SKOutputFloat("tanks.fuel.0.currentLevel");
+
+  ConfigItem(avg_output)->set_title("Fuel Level SK Path")->set_sort_order(1100);
+
+  input->connect_to(avg)->connect_to(avg_output);
 }
 
 void loop() { event_loop()->tick(); }
