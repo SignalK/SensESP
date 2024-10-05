@@ -18,7 +18,7 @@ class OTA {
    * @param password A password to be used for the OTA update.
    */
   OTA(const char* password) : password_{password} {
-    SensESPBaseApp::get_event_loop()->onDelay(0, [this]() {
+    event_loop()->onDelay(0, [this]() {
       ArduinoOTA.setPassword(password_);
       ArduinoOTA.onStart([]() { ESP_LOGW(__FILENAME__, "Starting OTA"); });
       ArduinoOTA.onEnd([]() { ESP_LOGW(__FILENAME__, "OTA End"); });
@@ -41,7 +41,7 @@ class OTA {
         }
       });
       ArduinoOTA.begin();
-      SensESPBaseApp::get_event_loop()->onRepeat(20, OTA::handle_ota);
+      event_loop()->onRepeat(20, OTA::handle_ota);
     });
   }
 

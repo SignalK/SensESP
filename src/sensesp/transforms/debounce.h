@@ -50,11 +50,11 @@ class Debounce : public SymmetricTransform<T> {
       debounced_value_ = input;
 
       if (event_) {
-        event_->remove(SensESPBaseApp::get_event_loop());
+        event_->remove(event_loop());
         event_ = nullptr;
       }
-      event_ =
-          SensESPBaseApp::get_event_loop()->onDelay(ms_min_delay_, [this, input]() {
+      event_ = event_loop()->onDelay(
+          ms_min_delay_, [this, input]() {
             this->event_ = nullptr;
             this->debounced_value_ = input;
             this->emit(input);

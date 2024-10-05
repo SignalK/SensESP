@@ -90,7 +90,7 @@ SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
       [this]() { this->emit(this->connection_state_.get()); });
 
   // process any received updates in the main task
-  SensESPBaseApp::get_event_loop()->onRepeat(
+  event_loop()->onRepeat(
       1, [this]() { this->process_received_updates(); });
 
   // set the singleton object pointer
@@ -101,7 +101,7 @@ SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
   // Connect the counters
   delta_tx_tick_producer_.connect_to(&delta_tx_count_producer_);
 
-  SensESPBaseApp::get_event_loop()->onDelay(0, [this]() {
+  event_loop()->onDelay(0, [this]() {
     ESP_LOGD(__FILENAME__, "Starting SKWSClient");
     xTaskCreate(ExecuteWebSocketTask, "SKWSClient", kWsClientTaskStackSize,
                 this, 1, NULL);

@@ -3,11 +3,11 @@
 #include "sensesp/net/http_server.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/sensors/digital_input.h"
+#include "sensesp/signalk/signalk_output.h"
 #include "sensesp/system/lambda_consumer.h"
 #include "sensesp/transforms/linear.h"
 #include "sensesp/transforms/typecast.h"
 #include "sensesp_minimal_app_builder.h"
-#include "sensesp/signalk/signalk_output.h"
 
 using namespace sensesp;
 
@@ -43,7 +43,8 @@ void setup() {
 
   Serial.println("");
 
-  ESP_LOGD("Example", "Connected to WiFi. IP address: %s", WiFi.localIP().toString().c_str());
+  ESP_LOGD("Example", "Connected to WiFi. IP address: %s",
+           WiFi.localIP().toString().c_str());
 
   WiFi.setHostname(SensESPBaseApp::get_hostname().c_str());
 
@@ -56,12 +57,8 @@ void setup() {
     Serial.printf("Digin: %d\n", input);
   }));
 
-  digin->connect_to(new SKOutputBool("electrical.switches.0.state", "/digin/state"));
+  digin->connect_to(
+      new SKOutputBool("electrical.switches.0.state", "/digin/state"));
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

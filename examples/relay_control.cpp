@@ -18,7 +18,7 @@ using namespace sensesp;
 // light when it gets dark outside.
 
 void setup() {
-// Some initialization boilerplate when in debug mode...
+  // Some initialization boilerplate when in debug mode...
   SetupLogging();
 
   // Create a builder object
@@ -54,9 +54,4 @@ void setup() {
       ->connect_to(new DigitalOutput(5));
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

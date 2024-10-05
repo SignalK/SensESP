@@ -50,11 +50,11 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
     this->emit(status_);
 
     if (timeout_event_ != nullptr) {
-      SensESPBaseApp::get_event_loop()->remove(timeout_event_);
+      event_loop()->remove(timeout_event_);
       timeout_event_ = nullptr;
     }
     timeout_event_ =
-        SensESPBaseApp::get_event_loop()->onDelay(timeout_, [this]() {
+        event_loop()->onDelay(timeout_, [this]() {
           if (status_ == AsyncResponseStatus::kPending) {
             ESP_LOGV("AsyncResponseHandler", "Timeout");
             status_ = AsyncResponseStatus::kTimeout;
@@ -74,7 +74,7 @@ class AsyncResponseHandler : public ValueConsumer<bool>,
 
     // Clear the timeout event
     if (timeout_event_ != nullptr) {
-      SensESPBaseApp::get_event_loop()->remove(timeout_event_);
+      event_loop()->remove(timeout_event_);
       timeout_event_ = nullptr;
     }
 

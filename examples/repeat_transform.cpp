@@ -77,9 +77,9 @@ void setup() {
 
   // Repeat the values every 2 seconds
 
-  auto repeat_A = new Repeat<char>(2000);
-  auto repeat_a = new Repeat<char>(2000);
-  auto repeat_int = new Repeat<int>(2000);
+  auto repeat_A = new Repeat<char, char>(2000);
+  auto repeat_a = new Repeat<char, char>(2000);
+  auto repeat_int = new Repeat<int, int>(2000);
 
   // Pay attention to the individual columns of the program console output.
   // Capital letters are produced every second. Repeat gets always triggered as
@@ -138,9 +138,4 @@ void setup() {
       [](int value) { ESP_LOGD("App", "Repeat:     %d", value); }));
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

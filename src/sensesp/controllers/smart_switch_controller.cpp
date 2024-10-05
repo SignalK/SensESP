@@ -23,7 +23,7 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
 
   // Emit the initial state once the event loop starts
   if (auto_initialize_) {
-    SensESPBaseApp::get_event_loop()->onDelay(0,
+    event_loop()->onDelay(0,
                                               [this]() { this->emit(is_on); });
   }
 }

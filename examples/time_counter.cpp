@@ -15,11 +15,12 @@
  *
  */
 
-#include "sensesp_app.h"
-#include "sensesp/sensors/digital_input.h"
-#include "sensesp/transforms/lambda_transform.h"
 #include "sensesp/transforms/time_counter.h"
+
+#include "sensesp/sensors/digital_input.h"
 #include "sensesp/transforms/frequency.h"
+#include "sensesp/transforms/lambda_transform.h"
+#include "sensesp_app.h"
 #include "sensesp_app_builder.h"
 
 using namespace sensesp;
@@ -37,7 +38,7 @@ void setup() {
 
   // set GPIO 18 to output mode
   pinMode(18, OUTPUT);
-  SensESPBaseApp::get_event_loop()->onRepeat(10, []() {
+  event_loop()->onRepeat(10, []() {
     if (freq == 0) {
       if (millis() - freq_start_time >= 10000) {
         freq = 10;
@@ -86,20 +87,18 @@ void setup() {
   frequency->connect_to(propulsion_state);
 
   // create engine hours counter using PersistentDuration
-  auto* engine_hours =
-      new TimeCounter<float>("/Transforms/Engine Hours");
+  auto* engine_hours = new TimeCounter<float>("/Transforms/Engine Hours");
 
   frequency->connect_to(engine_hours);
 
   // create and connect the frequency output object
   frequency->connect_to(
       new SKOutput<float>("propulsion.main.revolutions", "",
-                      new SKMetadata("Hz", "Main Engine Revolutions")));
+                          new SKMetadata("Hz", "Main Engine Revolutions")));
 
   // create and connect the propulsion state output object
-  propulsion_state->connect_to(
-      new SKOutput<String>("propulsion.main.state", "",
-                           new SKMetadata("", "Main Engine State")));
+  propulsion_state->connect_to(new SKOutput<String>(
+      "propulsion.main.state", "", new SKMetadata("", "Main Engine State")));
 
   // create and connect the engine hours output object
   engine_hours->connect_to(
@@ -107,9 +106,4 @@ void setup() {
                           new SKMetadata("s", "Main Engine running time")));
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

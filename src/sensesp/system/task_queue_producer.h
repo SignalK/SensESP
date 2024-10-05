@@ -24,7 +24,7 @@ template <class T>
 class TaskQueueProducer : public ObservableValue<T> {
  public:
   TaskQueueProducer(const T& value,
-                    reactesp::EventLoop* consumer_app = SensESPBaseApp::get_event_loop(),
+                    reactesp::EventLoop* consumer_app = event_loop(),
                     int queue_size = 1, unsigned int poll_rate = 990)
       : ObservableValue<T>(value), queue_size_{queue_size} {
     queue_ = xQueueCreate(queue_size, sizeof(T));
@@ -43,7 +43,7 @@ class TaskQueueProducer : public ObservableValue<T> {
 
   TaskQueueProducer(const T& value, int queue_size = 1,
                     unsigned int poll_rate = 990)
-      : TaskQueueProducer(value, SensESPBaseApp::get_event_loop(), queue_size,
+      : TaskQueueProducer(value, event_loop(), queue_size,
                           poll_rate) {}
 
   virtual void set(const T& value) override {

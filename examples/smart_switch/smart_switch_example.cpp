@@ -107,13 +107,8 @@ void setup() {
   // to be reported to the server every 10 seconds, regardless of whether
   // or not it has changed.  That keeps the value on the server fresh and
   // lets the server know the switch is still alive.
-  load_switch->connect_to(new Repeat<bool>(10000))
+  load_switch->connect_to(new Repeat<bool, bool>(10000))
       ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
 }
 
-void loop() {
-  // We're storing the event loop in a static variable so that it's only
-  // acquired once. Saves a few function calls per loop iteration.
-  static auto event_loop = SensESPBaseApp::get_event_loop();
-  event_loop->tick();
-}
+void loop() { event_loop()->tick(); }

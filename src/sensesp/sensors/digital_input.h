@@ -57,7 +57,7 @@ class DigitalInputState : public DigitalInput, public Sensor<bool> {
     set_requires_restart(true);
     load_configuration();
 
-    SensESPBaseApp::get_event_loop()->onRepeat(
+    event_loop()->onRepeat(
         read_delay_, [this]() { emit(digitalRead(pin_)); });
   }
 
@@ -93,10 +93,10 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
                       unsigned int read_delay, String config_path = "")
       : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
                             config_path, [this]() { this->counter_++; }) {
-    SensESPBaseApp::get_event_loop()->onInterrupt(pin_, interrupt_type_,
+    event_loop()->onInterrupt(pin_, interrupt_type_,
                                                   interrupt_handler_);
 
-    SensESPBaseApp::get_event_loop()->onRepeat(read_delay_, [this]() {
+    event_loop()->onRepeat(read_delay_, [this]() {
       noInterrupts();
       output = counter_;
       counter_ = 0;
@@ -201,13 +201,13 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
     output = (bool)digitalRead(pin_);
     last_output_ = !output;  // ensure that we always send the first output
 
-    SensESPBaseApp::get_event_loop()->onInterrupt(
+    event_loop()->onInterrupt(
         pin_, interrupt_type_, [this]() {
           output = (bool)digitalRead(pin_);
           triggered_ = true;
         });
 
-    SensESPBaseApp::get_event_loop()->onTick([this]() {
+    event_loop()->onTick([this]() {
       if (triggered_ && (output != last_output_)) {
         noInterrupts();
         triggered_ = false;
