@@ -4,6 +4,6 @@
 #warning \
     "This header file has been moved. For future code, use the new location."
 
-#include "sensesp/ui/ui_output.h"
+#include "sensesp/ui/status_page_item.h"
 
 #endif

@@ -78,6 +78,32 @@ void SensESPApp::setup() {
   if (button_gpio_pin_ != -1) {
     button_handler_ = new ButtonHandler(button_gpio_pin_);
   }
+
+  // connect status page items
+  connect_status_page_items();
+}
+
+void SensESPApp::connect_status_page_items() {
+  this->hostname_->connect_to(this->hostname_ui_output_);
+  this->event_loop_.onRepeat(
+      4999, [this]() { wifi_ssid_ui_output_->set(WiFi.SSID()); });
+  this->event_loop_.onRepeat(
+      4998, [this]() { free_memory_ui_output_->set(ESP.getFreeHeap()); });
+  this->event_loop_.onRepeat(
+      4997, [this]() { wifi_rssi_ui_output_->set(WiFi.RSSI()); });
+  this->event_loop_.onRepeat(4996, [this]() {
+    sk_server_address_ui_output_->set(ws_client_->get_server_address());
+  });
+  this->event_loop_.onRepeat(4995, [this]() {
+    sk_server_port_ui_output_->set(ws_client_->get_server_port());
+  });
+  this->event_loop_.onRepeat(4994, [this]() {
+    sk_server_connection_ui_output_->set(ws_client_->get_connection_status());
+  });
+  ws_client_->get_delta_tx_count_producer().connect_to(
+      delta_tx_count_ui_output_);
+  ws_client_->get_delta_rx_count_producer().connect_to(
+      delta_rx_count_ui_output_);
 }
 
 ObservableValue<String>* SensESPApp::get_hostname_observable() {

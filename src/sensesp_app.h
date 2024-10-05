@@ -24,7 +24,7 @@
 #include "sensesp/signalk/signalk_ws_client.h"
 #include "sensesp/system/button.h"
 #include "sensesp/system/system_status_led.h"
-#include "sensesp/ui/ui_output.h"
+#include "sensesp/ui/status_page_item.h"
 #include "sensesp_base_app.h"
 
 namespace sensesp {
@@ -115,6 +115,7 @@ class SensESPApp : public SensESPBaseApp {
   }
 
   void setup();
+  void connect_status_page_items();
 
   String ssid_ = "";
   String wifi_client_password_ = "";
@@ -136,44 +137,32 @@ class SensESPApp : public SensESPBaseApp {
   SKDeltaQueue* sk_delta_queue_;
   SKWSClient* ws_client_;
 
-  UIOutput<String>* sensesp_version_ui_output_ = new UIOutput<String>(
-      "SenseESP version", kSensESPVersion, "Software", 1900);
-  UIOutput<String>* build_info_ui_output_ = new UIOutput<String>(
+  StatusPageItem<String>* sensesp_version_ui_output_ =
+      new StatusPageItem<String>("SenseESP version", kSensESPVersion,
+                                 "Software", 1900);
+  StatusPageItem<String>* build_info_ui_output_ = new StatusPageItem<String>(
       "Build date", __DATE__ " " __TIME__, "Software", 2000);
-  UILambdaOutput<String>* hostname_ui_output_ = new UILambdaOutput<String>(
-      "Hostname", [this]() { return this->hostname_->get(); }, "Network", 500);
-  UIOutput<String>* mac_address_ui_output_ =
-      new UIOutput<String>("MAC Address", WiFi.macAddress(), "Network", 1100);
-  UILambdaOutput<String>* wifi_ssid_ui_output_ = new UILambdaOutput<String>(
-      "SSID", [this]() { return WiFi.SSID(); }, "Network", 1200);
-  UILambdaOutput<String>* free_memory_ui_output_ = new UILambdaOutput<String>(
-      "Free memory (bytes)", []() { return String(ESP.getFreeHeap()); }, "System",
-      1250);
-  UILambdaOutput<int8_t>* wifi_rssi_ui_output_ = new UILambdaOutput<int8_t>(
-      "WiFi signal strength (dB)", [this]() { return WiFi.RSSI(); }, "Network",
-      1300);
-  UILambdaOutput<String>* sk_server_address_ui_output_ =
-      new UILambdaOutput<String>(
-          "Signal K server address",
-          [this]() { return ws_client_->get_server_address(); }, "Signal K",
-          1400);
-  UILambdaOutput<uint16_t>* sk_server_port_ui_output_ =
-      new UILambdaOutput<uint16_t>(
-          "Signal K server port",
-          [this]() { return ws_client_->get_server_port(); }, "Signal K", 1500);
-  UILambdaOutput<String>* sk_server_connection_ui_output_ =
-      new UILambdaOutput<String>(
-          "SK connection status",
-          [this]() { return ws_client_->get_connection_status(); }, "Signal K",
-          1600);
-  UILambdaOutput<int>* delta_tx_count_ui_output_ = new UILambdaOutput<int>(
-      "SK Delta TX count",
-      [this]() { return ws_client_->get_delta_tx_count_producer().get(); },
-      "Signal K", 1700);
-  UILambdaOutput<int>* delta_rx_count_ui_output_ = new UILambdaOutput<int>(
-      "SK Delta RX count",
-      [this]() { return ws_client_->get_delta_rx_count_producer().get(); },
-      "Signal K", 1800);
+  StatusPageItem<String>* hostname_ui_output_ =
+      new StatusPageItem<String>("Hostname", "", "Network", 500);
+  StatusPageItem<String>* mac_address_ui_output_ = new StatusPageItem<String>(
+      "MAC Address", WiFi.macAddress(), "Network", 1100);
+  StatusPageItem<String>* wifi_ssid_ui_output_ =
+      new StatusPageItem<String>("SSID", "", "Network", 1200);
+  StatusPageItem<int>* free_memory_ui_output_ =
+      new StatusPageItem<int>("Free memory (bytes)", 0, "System", 1250);
+  StatusPageItem<int8_t>* wifi_rssi_ui_output_ = new StatusPageItem<int8_t>(
+      "WiFi signal strength (dB)", -128, "Network", 1300);
+  StatusPageItem<String>* sk_server_address_ui_output_ =
+      new StatusPageItem<String>("Signal K server address", "", "Signal K",
+                                 1400);
+  StatusPageItem<uint16_t>* sk_server_port_ui_output_ =
+      new StatusPageItem<uint16_t>("Signal K server port", 0, "Signal K", 1500);
+  StatusPageItem<String>* sk_server_connection_ui_output_ =
+      new StatusPageItem<String>("SK connection status", "", "Signal K", 1600);
+  StatusPageItem<int>* delta_tx_count_ui_output_ =
+      new StatusPageItem<int>("SK Delta TX count", 0, "Signal K", 1700);
+  StatusPageItem<int>* delta_rx_count_ui_output_ =
+      new StatusPageItem<int>("SK Delta RX count", 0, "Signal K", 1800);
 
   friend class WebServer;
   friend class SensESPAppBuilder;

@@ -14,7 +14,7 @@ namespace sensesp {
  * @brief Connect a system information sensor to SKOutput
  **/
 template <typename T>
-void connect_system_info_sensor(Sensor<T>* sensor, String prefix, String name) {
+void connect_system_info_sensor(ValueProducer<T>* sensor, String prefix, String name) {
   auto hostname_obs = SensESPBaseApp::get()->get_hostname_observable();
   String hostname = hostname_obs->get();
   String path = prefix + hostname + "." + name;
@@ -42,7 +42,7 @@ void connect_system_info_sensor(Sensor<T>* sensor, String prefix, String name) {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class SystemHz : public FloatSensor {
+class SystemHz : public ValueProducer<float> {
  public:
   SystemHz() {
     elapsed_millis_ = 0;
@@ -53,10 +53,9 @@ class SystemHz : public FloatSensor {
   }
   String get_value_name() { return "systemhz"; }
 
- private:
+ protected:
   uint32_t tick_count_ = 0;
   elapsedMillis elapsed_millis_;
-  float system_hz_;
   void tick();
   void update();
 };
@@ -68,7 +67,7 @@ class SystemHz : public FloatSensor {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class FreeMem : public IntSensor {
+class FreeMem : public ValueProducer<uint32_t> {
  public:
   FreeMem() {
     event_loop()->onRepeat(1000,
@@ -76,7 +75,7 @@ class FreeMem : public IntSensor {
   }
   String get_value_name() { return "freemem"; }
 
- private:
+ protected:
   void update();
 };
 
@@ -88,7 +87,7 @@ class FreeMem : public IntSensor {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class Uptime : public FloatSensor {
+class Uptime : public ValueProducer<float> {
  public:
   Uptime() {
     event_loop()->onRepeat(1000,
@@ -96,7 +95,7 @@ class Uptime : public FloatSensor {
   }
   String get_value_name() { return "uptime"; }
 
- private:
+ protected:
   void update();
 };
 
@@ -108,7 +107,7 @@ class Uptime : public FloatSensor {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class IPAddrDev : public StringSensor {
+class IPAddrDev : public ValueProducer<String> {
  public:
   IPAddrDev() {
     event_loop()->onRepeat(10000,
@@ -116,7 +115,7 @@ class IPAddrDev : public StringSensor {
   }
   String get_value_name() { return "ipaddr"; }
 
- private:
+ protected:
   void update();
 };
 
@@ -128,7 +127,7 @@ class IPAddrDev : public StringSensor {
  * appears in your project's output. That is configured with
  * SensESPAppBuilder.
  **/
-class WiFiSignal : public FloatSensor {
+class WiFiSignal : public ValueProducer<int> {
  public:
   WiFiSignal() {
     event_loop()->onRepeat(3000,
@@ -136,7 +135,7 @@ class WiFiSignal : public FloatSensor {
   }
   String get_value_name() { return "wifisignal"; }
 
- private:
+ protected:
   void update();
 };
 
