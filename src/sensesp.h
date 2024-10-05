@@ -19,6 +19,8 @@ namespace sensesp {
 
 typedef std::function<void()> void_cb_func;
 
+reactesp::EventLoop* event_loop();
+
 }  // namespace sensesp
 
 #endif
