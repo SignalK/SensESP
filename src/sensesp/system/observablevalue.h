@@ -40,6 +40,38 @@ class ObservableValue : public ValueConsumer<T>, public ValueProducer<T> {
     return value;
   }
 
+  T& operator++() {
+    set(this->output + 1);
+    return this->output;
+  }
+
+  T& operator--() {
+    set(this->output - 1);
+    return this->output;
+  }
+
+  T operator++(int) {
+    T old = this->output;
+    set(this->output + 1);
+    return old;
+  }
+
+  T operator--(int) {
+    T old = this->output;
+    set(this->output - 1);
+    return old;
+  }
+
+  const T& operator+=(const T& value) {
+    set(this->output + value);
+    return this->output;
+  }
+
+  const T& operator-=(const T& value) {
+    set(this->output - value);
+    return this->output;
+  }
+
  protected:
   template <class U>
   friend bool operator==(ObservableValue<U> const& lhs, U const& rhs);
