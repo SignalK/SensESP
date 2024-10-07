@@ -3,6 +3,8 @@
 
 #include <functional>
 
+#include "sensesp/transforms/transform.h"
+
 namespace sensesp {
 
 /**
