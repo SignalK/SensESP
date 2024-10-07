@@ -19,14 +19,10 @@ bool FileSystemSaveable::load() {
     return false;
   }
 
-  ESP_LOGD(__FILENAME__, "Loading configuration for path %s from file %s",
-           config_path_.c_str(), filename.c_str());
-
   File f = SPIFFS.open(filename, "r");
-  String str = f.readString();
-  ESP_LOGD(__FILENAME__, "Configuration file contents: %s", str.c_str());
   JsonDocument json_doc;
-  auto error = deserializeJson(json_doc, str);
+  auto error = deserializeJson(json_doc, f);
+  f.close();
   if (error) {
     ESP_LOGW(__FILENAME__, "Could not parse configuration for %s",
              config_path_.c_str());
@@ -36,8 +32,8 @@ bool FileSystemSaveable::load() {
   if (!from_json(obj)) {
     ESP_LOGW(__FILENAME__, "Could not convert configuration to Json for %s",
              config_path_.c_str());
+    return false;
   }
-  f.close();
   ESP_LOGD(__FILENAME__, "Configuration loaded for %s", config_path_.c_str());
   return true;
 }
@@ -46,20 +42,13 @@ bool FileSystemSaveable::save() {
   if (config_path_ == "") {
     return false;
   }
-  ESP_LOGI(__FILENAME__, "Saving configuration for path %s", config_path_.c_str());
-
   String hash_path = String("/") + Base64Sha1(config_path_);
 
-  // Delete any legacy configuration files
+  // Delete any existing configuration files
   String filename;
   if (find_config_file(config_path_, filename)) {
-    ESP_LOGD(__FILENAME__, "Deleting legacy configuration file %s",
-             filename.c_str());
     SPIFFS.remove(filename);
   }
-
-  ESP_LOGD(__FILENAME__, "Saving configuration path %s to file %s",
-           config_path_.c_str(), hash_path.c_str());
 
   JsonDocument json_doc;
   JsonObject obj = json_doc.as<JsonObject>();
@@ -74,7 +63,7 @@ bool FileSystemSaveable::save() {
 
   String str;
   serializeJson(json_doc, str);
-  ESP_LOGD(__FILENAME__, "Configuration saved for %s: %s", config_path_.c_str(),
+  ESP_LOGI(__FILENAME__, "Configuration saved for %s: %s", config_path_.c_str(),
            str.c_str());
 
   return true;
@@ -82,8 +71,7 @@ bool FileSystemSaveable::save() {
 
 bool FileSystemSaveable::remove() {
   if (config_path_ == "") {
-    ESP_LOGD(__FILENAME__,
-             "Could not clear configuration (config_path not set)");
+    return false;
   }
 
   String filename;
@@ -94,7 +82,6 @@ bool FileSystemSaveable::remove() {
   String hash_path = String("/") + Base64Sha1(config_path_);
 
   if (SPIFFS.exists(hash_path)) {
-    ESP_LOGD(__FILENAME__, "Deleting configuration file %s", hash_path.c_str());
     SPIFFS.remove(hash_path);
   }
   return true;
