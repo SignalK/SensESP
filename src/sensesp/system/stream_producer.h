@@ -15,13 +15,12 @@ namespace sensesp {
 class StreamCharProducer : public ValueProducer<char> {
  public:
   StreamCharProducer(Stream* stream) : stream_{stream} {
-    read_event_ =
-        event_loop()->onAvailable(*stream_, [this]() {
-          while (stream_->available()) {
-            char c = stream_->read();
-            this->emit(c);
-          }
-        });
+    read_event_ = event_loop()->onAvailable(*stream_, [this]() {
+      while (stream_->available()) {
+        char c = stream_->read();
+        this->emit(c);
+      }
+    });
   }
 
  protected:
@@ -34,28 +33,29 @@ class StreamCharProducer : public ValueProducer<char> {
  */
 class StreamLineProducer : public ValueProducer<String> {
  public:
-  StreamLineProducer(Stream* stream, int max_line_length = 256)
+  StreamLineProducer(Stream* stream,
+                     reactesp::EventLoop* event_loop = event_loop(),
+                     int max_line_length = 256)
       : stream_{stream}, max_line_length_{max_line_length} {
     static int buf_pos = 0;
     buf_ = new char[max_line_length_ + 1];
-    read_event_ =
-        event_loop()->onAvailable(*stream_, [this]() {
-          while (stream_->available()) {
-            char c = stream_->read();
-            if (c == '\n') {
-              // Include the newline character in the output
-              buf_[buf_pos++] = c;
-              buf_[buf_pos] = '\0';
-              this->emit(buf_);
-              buf_pos = 0;
-            } else {
-              buf_[buf_pos++] = c;
-              if (buf_pos >= max_line_length_ - 1) {
-                buf_pos = 0;
-              }
-            }
+    read_event_ = event_loop->onAvailable(*stream_, [this]() {
+      while (stream_->available()) {
+        char c = stream_->read();
+        if (c == '\n') {
+          // Include the newline character in the output
+          buf_[buf_pos++] = c;
+          buf_[buf_pos] = '\0';
+          this->emit(buf_);
+          buf_pos = 0;
+        } else {
+          buf_[buf_pos++] = c;
+          if (buf_pos >= max_line_length_ - 1) {
+            buf_pos = 0;
           }
-        });
+        }
+      }
+    });
   }
 
  protected:
