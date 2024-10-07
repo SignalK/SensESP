@@ -7,7 +7,7 @@ namespace sensesp {
 
 /**
  * @brief Performs a linear transform on the input value:
- * output = (input * multiplier) + offset.
+ * output_ = (input * multiplier) + offset.
  *
  * @param multiplier The input is multiplied this value.
  *

@@ -15,7 +15,7 @@ void Median::set(const float& input) {
     // Its time to output a value
     sort(buf_.begin(), buf_.end());
     const unsigned int mid = sample_size_ / 2;
-    output = buf_[mid];
+    output_ = buf_[mid];
     buf_.clear();
     notify();
   }

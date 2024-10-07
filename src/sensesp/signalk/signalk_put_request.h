@@ -145,14 +145,14 @@ class SKPutRequest : public SKPutRequestBase,
   SKPutRequest(String sk_path, String config_path = "",
                bool ignore_duplicates = true, uint32_t timeout = 5000)
       : SKPutRequestBase(sk_path, config_path, timeout),
-        ignore_duplicates{ignore_duplicates} {}
+        ignore_duplicates_{ignore_duplicates} {}
 
   virtual void set(const T& new_value) override {
-    if (ignore_duplicates && new_value == value) {
+    if (ignore_duplicates_ && new_value == value_) {
       return;
     }
     if (!request_pending()) {
-      this->value = new_value;
+      this->value_ = new_value;
       send_put_request();
     } else {
       ESP_LOGW(__FILENAME__,
@@ -161,12 +161,12 @@ class SKPutRequest : public SKPutRequestBase,
   };
 
   virtual void set_put_value(JsonObject& put_data) override {
-    put_data["value"] = value;
+    put_data["value"] = value_;
   };
 
  protected:
-  T value;
-  bool ignore_duplicates;
+  T value_;
+  bool ignore_duplicates_;
 };
 
 template <typename T>

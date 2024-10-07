@@ -10,7 +10,7 @@ SKOutputTime::SKOutputTime(const String& sk_path, const String& config_path)
 
 void SKOutputTime::as_signalk_json(JsonDocument& doc){
   doc["path"] = this->sk_path_;
-  doc["value"] = output;
+  doc["value"] = output_;
 }
 
 bool SKOutputTime::to_json(JsonObject& doc) {

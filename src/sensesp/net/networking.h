@@ -44,12 +44,12 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
 
  protected:
   WiFiStateProducer() {
-    this->output = WiFiState::kWifiNoAP;
+    this->output_ = WiFiState::kWifiNoAP;
 
     setup_wifi_callbacks();
 
     // Emit the current state as soon as the event loop starts
-    event_loop()->onDelay(0, [this]() { this->emit(this->output); });
+    event_loop()->onDelay(0, [this]() { this->emit(this->output_); });
   }
 
   void setup_wifi_callbacks() {

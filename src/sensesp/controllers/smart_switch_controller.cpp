@@ -10,11 +10,11 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
                                              const char* sk_sync_paths[])
     : BooleanTransform(config_path), auto_initialize_{auto_initialize} {
   if (sk_sync_paths != NULL) {
-    sync_paths.clear();
+    sync_paths_.clear();
     int i = 0;
     while (strlen(sk_sync_paths[i]) > 0) {
       SyncPath path(sk_sync_paths[i]);
-      sync_paths.insert(path);
+      sync_paths_.insert(path);
       i++;
     }  // while
   }
@@ -23,14 +23,13 @@ SmartSwitchController::SmartSwitchController(bool auto_initialize,
 
   // Emit the initial state once the event loop starts
   if (auto_initialize_) {
-    event_loop()->onDelay(0,
-                                              [this]() { this->emit(is_on); });
+    event_loop()->onDelay(0, [this]() { this->emit(is_on_); });
   }
 }
 
 void SmartSwitchController::set(const bool& new_value) {
-  is_on = new_value;
-  this->emit(is_on);
+  is_on_ = new_value;
+  this->emit(is_on_);
 }
 
 void SmartSwitchController::set(const ClickTypes& new_value) {
@@ -46,34 +45,34 @@ void SmartSwitchController::set(const ClickTypes& new_value) {
   }
 
   // All other click types toggle the current state...
-  is_on = !is_on;
-  this->emit(is_on);
+  is_on_ = !is_on_;
+  this->emit(is_on_);
 
   if (new_value == ClickTypes::DoubleClick) {
     // Sync any specified sync paths...
-    for (auto& path : sync_paths) {
-      ESP_LOGD(__FILENAME__, "Sync status to %s", path.sk_sync_path.c_str());
-      path.put_request->set(is_on);
+    for (auto& path : sync_paths_) {
+      ESP_LOGD(__FILENAME__, "Sync status to %s", path.sk_sync_path_.c_str());
+      path.put_request_->set(is_on_);
     }
   }
 }
 
 void SmartSwitchController::set(const String& new_value) {
   if (TextToTruth::is_valid_true(new_value)) {
-    is_on = true;
+    is_on_ = true;
   } else if (TextToTruth::is_valid_false(new_value)) {
-    is_on = false;
+    is_on_ = false;
   } else {
     // All other values simply toggle...
-    is_on = !is_on;
+    is_on_ = !is_on_;
   }
-  this->emit(is_on);
+  this->emit(is_on_);
 }
 
 bool SmartSwitchController::to_json(JsonObject& root) {
   JsonArray jPaths = root["sync_paths"].to<JsonArray>();
-  for (auto& path : sync_paths) {
-    jPaths.add(path.sk_sync_path);
+  for (auto& path : sync_paths_) {
+    jPaths.add(path.sk_sync_path_);
   }
   return true;
 }
@@ -81,10 +80,10 @@ bool SmartSwitchController::to_json(JsonObject& root) {
 bool SmartSwitchController::from_json(const JsonObject& config) {
   JsonArray arr = config["sync_paths"];
   if (arr.size() > 0) {
-    sync_paths.clear();
+    sync_paths_.clear();
     for (String sk_path : arr) {
       SyncPath path(sk_path);
-      sync_paths.insert(path);
+      sync_paths_.insert(path);
     }
   }
 
@@ -94,9 +93,9 @@ bool SmartSwitchController::from_json(const JsonObject& config) {
 SmartSwitchController::SyncPath::SyncPath() {}
 
 SmartSwitchController::SyncPath::SyncPath(String sk_sync_path)
-    : sk_sync_path{sk_sync_path} {
+    : sk_sync_path_{sk_sync_path} {
   ESP_LOGD(__FILENAME__, "DoubleClick will also sync %s", sk_sync_path.c_str());
-  this->put_request = new BoolSKPutRequest(sk_sync_path, "", false);
+  this->put_request_ = new BoolSKPutRequest(sk_sync_path, "", false);
 }
 
 }  // namespace sensesp

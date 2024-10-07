@@ -88,7 +88,7 @@ class SKWSClient : virtual public FileSystemSaveable,
    */
   void sendTXT(String& payload);
 
- private:
+ protected:
   // these are the actually used values
   String server_address_ = "";
   uint16_t server_port_ = 80;

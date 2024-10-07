@@ -13,15 +13,15 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
       pin{pin},
       read_delay{read_delay},
       output_scale{output_scale} {
-  analog_reader = new AnalogReader(pin);
+  analog_reader_ = new AnalogReader(pin);
   load();
 
-  if (this->analog_reader->configure()) {
+  if (this->analog_reader_->configure()) {
     event_loop()->onRepeat(read_delay, [this]() { this->update(); });
   }
 }
 
-void AnalogInput::update() { this->emit(output_scale * analog_reader->read()); }
+void AnalogInput::update() { this->emit(output_scale * analog_reader_->read()); }
 
 bool AnalogInput::to_json(JsonObject& root) {
   root["read_delay"] = read_delay;

@@ -40,15 +40,15 @@ class CurveInterpolator : public FloatTransform {
  public:
   class Sample {
    public:
-    float input{};
-    float output{};
+    float input_{};
+    float output_{};
 
     Sample();
     Sample(float input, float output);
     Sample(JsonObject& obj);
 
     friend bool operator<(const Sample& lhs, const Sample& rhs) {
-      return lhs.input < rhs.input;
+      return lhs.input_ < rhs.input_;
     }
   };
 
