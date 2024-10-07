@@ -92,8 +92,14 @@ Networking::Networking(String config_path, String client_ssid,
     dns_server_->setErrorReplyCode(DNSReplyCode::NoError);
     dns_server_->start(53, "*", WiFi.softAPIP());
 
-    event_loop()->onRepeat(
-        1, [this]() { dns_server_->processNextRequest(); });
+    event_loop()->onRepeat(1, [this]() { dns_server_->processNextRequest(); });
+  }
+}
+
+Networking::~Networking() {
+  if (dns_server_) {
+    dns_server_->stop();
+    delete dns_server_;
   }
 }
 
@@ -280,13 +286,9 @@ void Networking::reset() {
   WiFi.begin("0", "0", 0, nullptr, false);
 }
 
-WiFiStateProducer* WiFiStateProducer::instance_ = nullptr;
-
 WiFiStateProducer* WiFiStateProducer::get_singleton() {
-  if (instance_ == nullptr) {
-    instance_ = new WiFiStateProducer();
-  }
-  return instance_;
+  static WiFiStateProducer instance;
+  return &instance;
 }
 
 void Networking::start_wifi_scan() {

@@ -2,6 +2,7 @@
 #define SENSESP_UI_UI_BUTTON_H
 
 #include <map>
+#include <memory>
 
 #include "Arduino.h"
 #include "sensesp/system/observable.h"
@@ -23,15 +24,15 @@ class UIButton : public Observable {
   const String get_title() { return title_; }
   const String get_name() { return name_; }
 
-  static const std::map<String, UIButton*>& get_ui_buttons() {
+  static const std::map<String, std::shared_ptr<UIButton>>& get_ui_buttons() {
     return ui_buttons_;
   }
 
   static UIButton* add(String name, String title, bool must_confirm = true) {
-    UIButton* new_cmd = new UIButton(title, name, must_confirm);
+    auto new_cmd = std::make_shared<UIButton>(title, name, must_confirm);
     ui_buttons_[name] = new_cmd;
 
-    return new_cmd;
+    return new_cmd.get();
   }
 
  protected:
@@ -39,7 +40,7 @@ class UIButton : public Observable {
   String name_;
   bool must_confirm_;
 
-  static std::map<String, UIButton*> ui_buttons_;
+  static std::map<String, std::shared_ptr<UIButton>> ui_buttons_;
 };
 
 }  // namespace sensesp

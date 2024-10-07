@@ -70,6 +70,7 @@ class SensESPBaseApp {
    * refactored into a singleton.
    */
   SensESPBaseApp();
+  ~SensESPBaseApp();
 
   virtual void setup();
 

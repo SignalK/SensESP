@@ -8,6 +8,7 @@ namespace sensesp {
 class Filesystem : public Resettable {
  public:
   Filesystem();
+  ~Filesystem();
   virtual void reset() override;
 };
 

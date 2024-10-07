@@ -1,10 +1,10 @@
 #ifndef _smart_switch_controller_h
 #define _smart_switch_controller_h
 
-#include "sensesp/ui/config_item.h"
 #include "sensesp/signalk/signalk_put_request.h"
 #include "sensesp/system/valueconsumer.h"
 #include "sensesp/transforms/click_type.h"
+#include "sensesp/ui/config_item.h"
 
 namespace sensesp {
 
@@ -74,8 +74,8 @@ class SmartSwitchController : public BooleanTransform,
   /// Used to store configuration internally.
   class SyncPath {
    public:
-    BoolSKPutRequest* put_request_;
     String sk_sync_path_;
+    std::shared_ptr<BoolSKPutRequest> put_request_;
 
     SyncPath();
     SyncPath(String sk_sync_path);

@@ -1,6 +1,7 @@
 #ifndef SENSESP_SENSORS_ANALOG_INPUT_H_
 #define SENSESP_SENSORS_ANALOG_INPUT_H_
 
+#include <memory>
 #include "analog_reader.h"
 #include "sensesp/ui/config_item.h"
 #include "sensor.h"
@@ -47,11 +48,11 @@ class AnalogInput : public FloatSensor {
   virtual bool to_json(JsonObject& root) override;
   virtual bool from_json(const JsonObject& config) override;
 
- private:
+ protected:
   uint8_t pin{};
   unsigned int read_delay;
   float output_scale;
-  BaseAnalogReader* analog_reader_;
+  std::unique_ptr<BaseAnalogReader> analog_reader_{};
   void update();
 };
 

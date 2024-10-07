@@ -13,6 +13,10 @@ Filesystem::Filesystem() : Resettable(-100) {
   }
 }
 
+Filesystem::~Filesystem() {
+  SPIFFS.end();
+}
+
 void Filesystem::reset() {
   ESP_LOGI(__FILENAME__, "Formatting filesystem");
   SPIFFS.format();

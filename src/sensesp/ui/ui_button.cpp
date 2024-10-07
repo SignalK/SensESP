@@ -2,6 +2,6 @@
 
 namespace sensesp {
 
-std::map<String, UIButton*> UIButton::ui_buttons_;
+std::map<String, std::shared_ptr<UIButton>> UIButton::ui_buttons_;
 
 }  // namespace sensesp

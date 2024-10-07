@@ -1,6 +1,8 @@
 #ifndef SENSESP_APP_BUILDER_H
 #define SENSESP_APP_BUILDER_H
 
+#include <memory>
+
 #include "sensesp/sensors/system_info.h"
 #include "sensesp/transforms/debounce.h"
 #include "sensesp_app.h"

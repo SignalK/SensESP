@@ -171,6 +171,7 @@ void add_config_put_handler(HTTPServer* server) {
         // parse the content as JSON
         JsonDocument doc;
         DeserializationError error = deserializeJson(doc, payload);
+        delete[] payload;
         if (error) {
           ESP_LOGE("ConfigHandler", "Error parsing JSON payload: %s",
                    error.c_str());

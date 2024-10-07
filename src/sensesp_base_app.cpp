@@ -25,6 +25,13 @@ SensESPBaseApp::SensESPBaseApp() : filesystem_(new Filesystem()) {
   ConfigItem(hostname_);  // Make hostname configurable
 }
 
+SensESPBaseApp::~SensESPBaseApp() {
+  delete filesystem_;
+  delete hostname_;
+
+  instance_ = nullptr;
+}
+
 /**
  * Get the singleton SensESPBaseApp singleton instance.
  * The instance must be set by the builder.

@@ -1,6 +1,8 @@
 #ifndef SENSESP_SRC_SENSESP_SYSTEM_SYSTEM_STATUS_LED_H_
 #define SENSESP_SRC_SENSESP_SYSTEM_SYSTEM_STATUS_LED_H_
 
+#include <memory>
+
 #include "lambda_consumer.h"
 #include "led_blinker.h"
 #include "sensesp/controllers/system_status_controller.h"
@@ -15,7 +17,7 @@ namespace sensesp {
 class SystemStatusLed : public ValueConsumer<SystemStatus>,
                         public ValueConsumer<int> {
  protected:
-  PatternBlinker* blinker_;
+  std::unique_ptr<PatternBlinker> blinker_;
 
   virtual void set_wifi_no_ap();
   virtual void set_wifi_disconnected();

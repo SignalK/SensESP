@@ -71,6 +71,8 @@ class SensESPApp : public SensESPBaseApp {
    */
   SensESPApp() : SensESPBaseApp() {}
 
+  ~SensESPApp();
+
   // setters for all constructor arguments
 
   const SensESPApp* set_hostname(String hostname) {
@@ -138,32 +140,28 @@ class SensESPApp : public SensESPBaseApp {
   SKDeltaQueue* sk_delta_queue_;
   SKWSClient* ws_client_;
 
-  StatusPageItem<String>* sensesp_version_ui_output_ =
-      new StatusPageItem<String>("SenseESP version", kSensESPVersion,
-                                 "Software", 1900);
-  StatusPageItem<String>* build_info_ui_output_ = new StatusPageItem<String>(
-      "Build date", __DATE__ " " __TIME__, "Software", 2000);
-  StatusPageItem<String>* hostname_ui_output_ =
-      new StatusPageItem<String>("Hostname", "", "Network", 500);
-  StatusPageItem<String>* mac_address_ui_output_ = new StatusPageItem<String>(
-      "MAC Address", WiFi.macAddress(), "Network", 1100);
-  StatusPageItem<String>* wifi_ssid_ui_output_ =
-      new StatusPageItem<String>("SSID", "", "Network", 1200);
-  StatusPageItem<int>* free_memory_ui_output_ =
-      new StatusPageItem<int>("Free memory (bytes)", 0, "System", 1250);
-  StatusPageItem<int8_t>* wifi_rssi_ui_output_ = new StatusPageItem<int8_t>(
-      "WiFi signal strength (dB)", -128, "Network", 1300);
-  StatusPageItem<String>* sk_server_address_ui_output_ =
-      new StatusPageItem<String>("Signal K server address", "", "Signal K",
-                                 1400);
-  StatusPageItem<uint16_t>* sk_server_port_ui_output_ =
-      new StatusPageItem<uint16_t>("Signal K server port", 0, "Signal K", 1500);
-  StatusPageItem<String>* sk_server_connection_ui_output_ =
-      new StatusPageItem<String>("SK connection status", "", "Signal K", 1600);
-  StatusPageItem<int>* delta_tx_count_ui_output_ =
-      new StatusPageItem<int>("SK Delta TX count", 0, "Signal K", 1700);
-  StatusPageItem<int>* delta_rx_count_ui_output_ =
-      new StatusPageItem<int>("SK Delta RX count", 0, "Signal K", 1800);
+  StatusPageItem<String> sensesp_version_ui_output_{
+      "SenseESP version", kSensESPVersion, "Software", 1900};
+  StatusPageItem<String> build_info_ui_output_{
+      "Build date", __DATE__ " " __TIME__, "Software", 2000};
+  StatusPageItem<String> hostname_ui_output_{"Hostname", "", "Network", 500};
+  StatusPageItem<String> mac_address_ui_output_{
+      "MAC Address", WiFi.macAddress(), "Network", 1100};
+  StatusPageItem<String> wifi_ssid_ui_output_{"SSID", "", "Network", 1200};
+  StatusPageItem<int> free_memory_ui_output_{"Free memory (bytes)", 0, "System",
+                                             1250};
+  StatusPageItem<int8_t> wifi_rssi_ui_output_{"WiFi signal strength (dB)", -128,
+                                              "Network", 1300};
+  StatusPageItem<String> sk_server_address_ui_output_{"Signal K server address",
+                                                      "", "Signal K", 1400};
+  StatusPageItem<uint16_t> sk_server_port_ui_output_{"Signal K server port", 0,
+                                                     "Signal K", 1500};
+  StatusPageItem<String> sk_server_connection_ui_output_{"SK connection status",
+                                                         "", "Signal K", 1600};
+  StatusPageItem<int> delta_tx_count_ui_output_{"SK Delta TX count", 0,
+                                                "Signal K", 1700};
+  StatusPageItem<int> delta_rx_count_ui_output_{"SK Delta RX count", 0,
+                                                "Signal K", 1800};
 
   friend class WebServer;
   friend class SensESPAppBuilder;
