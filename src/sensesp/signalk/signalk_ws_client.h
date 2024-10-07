@@ -118,7 +118,7 @@ class SKWSClient : virtual public FileSystemSaveable,
   SKDeltaQueue* sk_delta_queue_;
   /// @brief Emits the number of deltas sent since last report
   TaskQueueProducer<int> delta_tx_tick_producer_ =
-      TaskQueueProducer<int>(0, event_loop(), 5, 990);
+      TaskQueueProducer<int>(0, event_loop(), 990);
   Integrator<int, int> delta_tx_count_producer_{1, 0, ""};
   Integrator<int, int> delta_rx_count_producer_{1, 0, ""};
 
