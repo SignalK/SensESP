@@ -13,7 +13,7 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
       pin{pin},
       read_delay{read_delay},
       output_scale{output_scale} {
-  analog_reader_ = new AnalogReader(pin);
+  analog_reader_ = std::unique_ptr<AnalogReader>(new AnalogReader(pin));
   load();
 
   if (this->analog_reader_->configure()) {
