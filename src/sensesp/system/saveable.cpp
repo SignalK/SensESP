@@ -51,7 +51,7 @@ bool FileSystemSaveable::save() {
   }
 
   JsonDocument json_doc;
-  JsonObject obj = json_doc.as<JsonObject>();
+  JsonObject obj = json_doc.to<JsonObject>();
   if (!to_json(obj)) {
     ESP_LOGW(__FILENAME__, "Could not get configuration from json for %s",
              config_path_.c_str());
@@ -62,8 +62,8 @@ bool FileSystemSaveable::save() {
   f.close();
 
   String str;
-  serializeJson(json_doc, str);
-  ESP_LOGI(__FILENAME__, "Configuration saved for %s: %s", config_path_.c_str(),
+  serializeJson(obj, str);
+  ESP_LOGV(__FILENAME__, "Configuration saved for %s: %s", config_path_.c_str(),
            str.c_str());
 
   return true;
