@@ -1,6 +1,8 @@
 #include "sensesp.h"
 
 #include "sensesp/system/serializable.h"
+
+#include "sensesp/net/networking.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp/transforms/angle_correction.h"
 #include "sensesp_base_app.h"
@@ -96,7 +98,8 @@ void test_from_json() {
 // To access protected members, we need to create a child class
 class AngleCorrection_ : public AngleCorrection {
  public:
-  AngleCorrection_(float offset, float min_angle, const String& config_path = "")
+  AngleCorrection_(float offset, float min_angle,
+                   const String& config_path = "")
       : AngleCorrection(offset, min_angle, config_path) {}
 
   float get_offset() { return offset_; }
@@ -129,6 +132,119 @@ void test_angle_correction_from_json() {
   TEST_ASSERT_EQUAL_FLOAT(4.4, angle_correction.get_min_angle());
 }
 
+// PersistingObservableValue saves itself on change
+void test_persisting_observable_value_schema() {
+  SensESPMinimalAppBuilder builder;
+  SensESPMinimalApp* sensesp_app = builder.get_app();
+  TEST_ASSERT_NOT_NULL(sensesp_app);
+
+  PersistingObservableValue<int> value{2, "/test"};
+
+  auto config_item = ConfigItem(&value);
+
+  String ref_schema =
+      R"###({"type":"object","properties":{"value":{"title":"Value","type":"number"}}})###";
+  String schema = config_item->get_config_schema();
+  ESP_LOGD("test_schema", "schema: %s", schema.c_str());
+
+  TEST_ASSERT_EQUAL_STRING(ref_schema.c_str(), schema.c_str());
+
+  // Test manual serialization
+  value.set(2);
+  JsonDocument doc0;
+  JsonObject root0 = doc0.to<JsonObject>();
+  bool result = value.to_json(root0);
+  TEST_ASSERT_TRUE(result);
+  String str0;
+  serializeJson(doc0, str0);
+  ESP_LOGD("test_schema", "str0: %s", str0.c_str());
+  String ref_str0 = R"###({"value":2})###";
+  TEST_ASSERT_EQUAL_STRING(ref_str0.c_str(), str0.c_str());
+
+  value.set(0);
+  result = value.save();
+  TEST_ASSERT_TRUE(result);
+
+  value.set(3);
+  result = value.load();
+  TEST_ASSERT_TRUE(result);
+
+  TEST_ASSERT_EQUAL(3, value.get());
+
+  value.set(4);
+  result = value.load();
+  TEST_ASSERT_TRUE(result);
+
+  TEST_ASSERT_EQUAL(4, value.get());
+
+  JsonDocument doc;
+  JsonObject root = doc.to<JsonObject>();
+  result = value.to_json(root);
+  TEST_ASSERT_TRUE(result);
+
+  String json_str;
+  serializeJson(doc, json_str);
+
+  String ref_json = R"###({"value":4})###";
+
+  TEST_ASSERT_EQUAL_STRING(ref_json.c_str(), json_str.c_str());
+
+  String json_input = R"###({"value":5})###";
+
+  DeserializationError error = deserializeJson(doc, json_input);
+  TEST_ASSERT_TRUE(error == DeserializationError::Ok);
+
+  result = value.from_json(doc.as<JsonObject>());
+  TEST_ASSERT_TRUE(result);
+
+  TEST_ASSERT_EQUAL(5, value.get());
+}
+
+class Networking_ : public Networking {
+ public:
+  Networking_(const String& config_path, const String& client_ssid,
+              const String& client_password, const String& ap_ssid,
+              const String& ap_password)
+      : FileSystemSaveable{config_path},
+        Networking(config_path, client_ssid, client_password, ap_ssid,
+                   ap_password) {}
+
+ protected:
+  friend void test_networking();
+};
+
+void test_networking() {
+  SensESPMinimalAppBuilder builder;
+  SensESPMinimalApp* sensesp_app = builder.get_app();
+  TEST_ASSERT_NOT_NULL(sensesp_app);
+
+  String wifi_ssid = "Hat Labs Sensors";
+  String wifi_password = "kanneluuri2406";
+  String ap_ssid = "SensESP AP!";
+  String ap_password = "thisisexcellent";
+
+  Networking_* networking = new Networking_(
+      "/System/WiFi Settings", wifi_ssid, wifi_password, ap_ssid, ap_password);
+  networking->remove();
+  delete networking;
+
+  networking = new Networking_("/System/WiFi Settings", wifi_ssid,
+                               wifi_password, ap_ssid, ap_password);
+
+  networking->save();
+
+  networking->load();
+
+  TEST_ASSERT_EQUAL_STRING(wifi_ssid.c_str(),
+                           networking->client_settings_[0].ssid_.c_str());
+  TEST_ASSERT_EQUAL_STRING(wifi_password.c_str(),
+                           networking->client_settings_[0].password_.c_str());
+  TEST_ASSERT_EQUAL_STRING(ap_ssid.c_str(),
+                           networking->ap_settings_.ssid_.c_str());
+  TEST_ASSERT_EQUAL_STRING(ap_password.c_str(),
+                           networking->ap_settings_.password_.c_str());
+}
+
 void setup() {
   esp_log_level_set("*", ESP_LOG_VERBOSE);
 
@@ -138,6 +254,10 @@ void setup() {
   RUN_TEST(test_from_json);
   RUN_TEST(test_angle_correction_to_json);
   RUN_TEST(test_angle_correction_from_json);
+
+  RUN_TEST(test_persisting_observable_value_schema);
+
+  RUN_TEST(test_networking);
 
   UNITY_END();
 }
