@@ -32,7 +32,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    * Signal K specification)
    */
   SKOutput(String sk_path, String config_path = "", SKMetadata* meta = nullptr)
-      : SKOutput(sk_path, config_path, std::make_shared<SKMetadata>(*meta)) {}
+      : SKOutput(sk_path, config_path, std::shared_ptr<SKMetadata>(meta)) {}
 
   SKOutput(String sk_path, String config_path, std::shared_ptr<SKMetadata> meta)
       : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
@@ -112,7 +112,7 @@ template <typename T>
 class SKOutputNumeric : public SKOutput<T> {
  public:
   SKOutputNumeric(String sk_path, String config_path = "",
-                  SKMetadata* meta = NULL);
+                  SKMetadata* meta = nullptr);
 
   SKOutputNumeric(String sk_path, SKMetadata* meta)
       : SKOutputNumeric(sk_path, "", meta) {}
