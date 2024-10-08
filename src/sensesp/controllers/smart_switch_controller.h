@@ -1,6 +1,7 @@
 #ifndef _smart_switch_controller_h
 #define _smart_switch_controller_h
 
+#include "sensesp/ui/config_item.h"
 #include "sensesp/signalk/signalk_put_request.h"
 #include "sensesp/system/valueconsumer.h"
 #include "sensesp/transforms/click_type.h"
@@ -66,9 +67,8 @@ class SmartSwitchController : public BooleanTransform,
   void set(const ClickTypes& new_value) override;
 
   // For reading and writing the configuration of this transformation
-  virtual void get_configuration(JsonObject& doc) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& doc) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  public:
   /// Used to store configuration internally.
@@ -90,6 +90,10 @@ class SmartSwitchController : public BooleanTransform,
   bool auto_initialize_;
   std::set<SyncPath> sync_paths;
 };
+
+const String ConfigSchema(const SmartSwitchController& obj) {
+  return R"({"type":"object","properties":{"sync_paths":{"title":"Sync on double click","type":"array","items":{"type":"string"}}}  })";
+}
 
 }  // namespace sensesp
 

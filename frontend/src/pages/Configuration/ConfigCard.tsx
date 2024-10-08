@@ -214,8 +214,10 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
 
   const [config, setConfig] = useState<JsonObject>({});
   const [schema, setSchema] = useState<JsonObject | null>({});
+  const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [saving, setSaving] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [httpErrorText, setHttpErrorText] = useState<string>("");
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(true);
@@ -236,23 +238,12 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     }
     const data = await response.json();
     console.log("Fetched config data", data);
-    if (response.status === 202 && data.status === "pending") {
-      setSchema(data.schema);
-      setDescription(data.description);
-      setComponentRequiresRestart(data.requires_restart);
-      const pollUrl = new URL(response.url);
-      pollUrl.searchParams.append("poll_get_result", "");
-      console.log("About to poll", pollUrl);
-      setTimeout(() => {
-        void pollLoadResult(String(pollUrl));
-      }, 500);
-      return;
-    } else {
-      setConfig(data.config);
-      setSchema(data.schema);
-      setDescription(data.description);
-      setComponentRequiresRestart(data.requires_restart);
-    }
+
+    setConfig(data.config);
+    setSchema(data.schema);
+    setTitle(data.title);
+    setDescription(data.description);
+    setComponentRequiresRestart(data.requires_restart);
   };
 
   useEffect(() => {
@@ -268,56 +259,6 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     const isValid = Object.values(config).every((v) => v !== null);
     setIsValid(isValid);
   }, [config]);
-
-  async function pollLoadResult(url: string): Promise<void> {
-    const response = await fetch(url);
-    if (!response.ok) {
-      console.log(`HTTP Error ${response.status} ${response.statusText}`);
-      setHttpErrorText(
-        `Received error ${response.status} ${response.statusText} when ` +
-          `fetching the configuration: ${response.text}`,
-      );
-      return;
-    }
-    const data = await response.json();
-    if (response.status === 202 && data.status === "pending") {
-      // The configuration is being updated, so wait and try again
-      setTimeout(() => {
-        void pollLoadResult(url);
-      }, 500);
-    } else {
-      console.log("Loaded config data", data);
-      setConfig(data.config);
-    }
-  }
-
-  async function pollSaveResult(url: string): Promise<void> {
-    const response = await fetch(url);
-    if (!response.ok) {
-      console.log(`HTTP Error ${response.status} ${response.statusText}`);
-      setHttpErrorText(
-        `Received error ${response.status} ${response.statusText} when ` +
-          `saving the configuration: ${response.text}`,
-      );
-      return;
-    }
-    const data = await response.json();
-    if (response.status === 202 && data.status === "pending") {
-      // The configuration is being updated, so wait and try again
-      setTimeout(() => {
-        void pollSaveResult(url);
-      }, 500);
-    } else {
-      // Check the status of the save operation
-      if (data.status === "error") {
-        console.log("Error saving config data to server", data.error);
-        setHttpErrorText("Error saving config data to remote device.");
-      } else {
-        setIsDirty(false);
-      }
-      setSaving(false);
-    }
-  }
 
   async function handleSave(e: MouseEvent): Promise<void> {
     e.preventDefault();
@@ -341,15 +282,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         setIsDirty(false);
         return;
       } else {
-        if (response.status === 202) {
-          // poll URL is the current URL with ?result appended
-          const pollUrl = new URL(response.url);
-          pollUrl.searchParams.append("poll_put_result", "");
-          console.log("About to poll", pollUrl);
-          setTimeout(() => {
-            void pollSaveResult(String(pollUrl));
-          }, 500);
-        } else if (response.status === 200) {
+        if (response.status === 200) {
           setIsDirty(false);
           setSaving(false);
           if (componentRequiresRestart) {
@@ -365,17 +298,10 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     }
   }
 
-  const title = path.slice(1).replace(/\//g, " ▸ ");
-
   if (Object.keys(schema ?? {})?.length === 0) {
-    console.log("No config schema");
-    return (
-      <div className="d-flex align-items-center justify-content-center min">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
+    setLoading(true);
+  } else {
+    setLoading(false);
   }
 
   const updateConfig = (key: string, value: JsonValue): void => {
@@ -396,7 +322,12 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         <p>{httpErrorText}</p>
       </ToastMessage>
 
-      <Card id={`${id}-card`} key={`${id}-card`} title={title}>
+      <Card
+        id={`${id}-card`}
+        key={`${id}-card`}
+        loading={loading}
+        title={title}
+      >
         <form>
           <div
             onInput={() => {

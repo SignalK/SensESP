@@ -5,17 +5,39 @@ import { Collapse } from "./Collapse";
 interface CardProps {
   id?: string;
   key?: string;
+  loading?: boolean;
   title: string;
   children: ReactNode;
 }
 
-export function Card({ title, children }: CardProps): JSX.Element {
-  return (
-    <div className="card">
-      <div className="card-header">{title}</div>
-      <div className="card-body">{children}</div>
-    </div>
-  );
+export function Card({ title, children, loading }: CardProps): JSX.Element {
+  if (loading) {
+    return (
+      <div className="card">
+        <div className="card-header">
+          <div className="placeholder-glow">
+            <span className="placeholder col-7"></span>
+          </div>
+        </div>
+        <div className="card-body">
+          <div className="placeholder-glow">
+            <span class="placeholder col-7"></span>
+            <span class="placeholder col-4"></span>
+            <span class="placeholder col-4"></span>
+            <span class="placeholder col-6"></span>
+            <span class="placeholder col-8"></span>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="card">
+        <div className="card-header">{title}</div>
+        <div className="card-body">{children}</div>
+      </div>
+    );
+  }
 }
 
 interface ButtonCardProps {

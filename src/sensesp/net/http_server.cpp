@@ -111,7 +111,7 @@ esp_err_t HTTPServer::dispatch_request(httpd_req_t* req) {
           return handler->call(req);
         }
       }
-    } else if (handler->match_uri_ == req->uri) {
+    } else if (handler->match_uri_ == decoded_uri_str) {
       if (handler->method_mask_ & (1 << req->method)) {
         return handler->call(req);
       }

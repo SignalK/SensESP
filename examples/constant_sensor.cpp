@@ -28,13 +28,23 @@ void setup() {
   auto* constant_sensor =
       new FloatConstantSensor(0.1, 10, "/Sensors/Frash Water Tank Capacity");
 
+  ConfigItem(constant_sensor)
+      ->set_title("Fresh Water Tank Capacity")
+      ->set_description("Fresh water tank capacity in m3.")
+      ->set_sort_order(1000);
+
   // create and connect the output object
 
-  constant_sensor->connect_to(
+  auto constant_sensor_output =
       new SKOutputFloat("tanks.freshWater.capacity", "",
-                        new SKMetadata("m3", "Fresh Water Tank Capacity")));
+                        new SKMetadata("m3", "Fresh Water Tank Capacity"));
+
+  ConfigItem(constant_sensor_output)
+      ->set_title("Fresh Water Tank SK Path")
+      ->set_description("Signal K path for the fresh water tank capacity.")
+      ->set_sort_order(1100);
+
+  constant_sensor->connect_to(constant_sensor_output);
 }
 
-void loop() {
-  event_loop()->tick();
-}
+void loop() { event_loop()->tick(); }

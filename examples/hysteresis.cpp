@@ -34,15 +34,31 @@ void setup() {
   auto* analog_input =
       new AnalogInput(pin, read_delay, analog_in_config_path, output_scale);
 
+  ConfigItem(analog_input)
+      ->set_title("Analog Input")
+      ->set_sort_order(1000);
+
   // Connect the analog input via a hysteresis transform
   // to an SKOutputBool object. The hysteresis function has arbitrary voltage
   // limits that trigger the function when moving one's hand over a
   // particular photoresistor test setup.
 
+  auto hysteresis = new Hysteresis<float, bool>(0.3, 0.5, false, true,
+                                               "/transforms/hysteresis");
+
+  ConfigItem(hysteresis)
+      ->set_title("Hysteresis")
+      ->set_sort_order(1100);
+
+  auto sk_output = new SKOutputBool(sk_path);
+
+  ConfigItem(sk_output)
+      ->set_title("SK Output")
+      ->set_sort_order(1200);
+
   analog_input
-      ->connect_to(new Hysteresis<float, bool>(0.3, 0.5, false, true,
-                                               "/transforms/hysteresis"))
-      ->connect_to(new SKOutputBool(sk_path));
+      ->connect_to(hysteresis)
+      ->connect_to(sk_output);
 }
 
 void loop() { event_loop()->tick(); }

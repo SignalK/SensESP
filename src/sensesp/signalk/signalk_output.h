@@ -1,17 +1,11 @@
 #ifndef SENSESP_SIGNALK_SIGNALK_OUTPUT_H_
 #define SENSESP_SIGNALK_SIGNALK_OUTPUT_H_
 
+#include "sensesp/ui/config_item.h"
 #include "sensesp/transforms/transform.h"
 #include "signalk_emitter.h"
 
 namespace sensesp {
-
-static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "Signal K Path", "type": "string" }
-      }
-  })";
 
 /**
  *  @brief A specialized transform whose primary purpose is
@@ -20,7 +14,7 @@ static const char SIGNALKOUTPUT_SCHEMA[] PROGMEM = R"({
 template <typename T>
 class SKOutput : public SKEmitter, public SymmetricTransform<T> {
  public:
-  SKOutput() : SKOutput("") { this->load_configuration(); }
+  SKOutput() : SKOutput("") { this->load(); }
 
   /**
    * The constructor
@@ -37,7 +31,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    */
   SKOutput(String sk_path, String config_path = "", SKMetadata* meta = NULL)
       : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
-    this->load_configuration();
+    this->load();
   }
 
   SKOutput(String sk_path, SKMetadata* meta) : SKOutput(sk_path, "", meta) {}
@@ -51,13 +45,12 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
     doc["value"] = ValueProducer<T>::output;
   }
 
-  virtual void get_configuration(JsonObject& root) override {
+  virtual bool to_json(JsonObject& root) override {
     root["sk_path"] = this->get_sk_path();
+    return true;
   }
 
-  String get_config_schema() override { return FPSTR(SIGNALKOUTPUT_SCHEMA); }
-
-  virtual bool set_configuration(const JsonObject& config) override {
+  virtual bool from_json(const JsonObject& config) override {
     if (!config["sk_path"].is<String>()) {
       return false;
     }
@@ -78,6 +71,16 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
  protected:
   SKMetadata* meta_;
 };
+
+template <typename T>
+const String ConfigSchema(const SKOutput<T>& obj) {
+  return R"({"type":"object","properties":{"sk_path":{"title":"Signal K Path","type":"string"}}  })";
+}
+
+template <typename T>
+bool ConfigRequiresRestart(const SKOutput<T>& obj) {
+  return true;
+}
 
 /**
  * @brief Class for sending raw Json strings on a specific Signal K path.

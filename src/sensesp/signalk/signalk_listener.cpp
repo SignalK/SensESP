@@ -1,5 +1,7 @@
 #include "signalk_listener.h"
 
+#include "sensesp/system/saveable.h"
+
 namespace sensesp {
 
 std::vector<SKListener *> SKListener::listeners_;
@@ -8,9 +10,11 @@ SemaphoreHandle_t SKListener::semaphore_ = xSemaphoreCreateRecursiveMutex();
 
 SKListener::SKListener(const String &sk_path, int listen_delay,
                        const String &config_path)
-    : Configurable(config_path), sk_path{sk_path}, listen_delay{listen_delay} {
+    : FileSystemSaveable(config_path),
+      sk_path{sk_path},
+      listen_delay{listen_delay} {
   listeners_.push_back(this);
-  this->load_configuration();
+  this->load();
 }
 
 bool SKListener::take_semaphore(uint64_t timeout_ms) {
@@ -23,13 +27,12 @@ bool SKListener::take_semaphore(uint64_t timeout_ms) {
 
 void SKListener::release_semaphore() { xSemaphoreGiveRecursive(semaphore_); }
 
-String SKListener::get_config_schema() { return SIGNALKINPUT_SCHEMA; }
-
-void SKListener::get_configuration(JsonObject &root) {
+bool SKListener::to_json(JsonObject &root) {
   root["sk_path"] = this->get_sk_path();
+  return true;
 }
 
-bool SKListener::set_configuration(const JsonObject &config) {
+bool SKListener::from_json(const JsonObject &config) {
   if (!config["sk_path"].is<String>()) {
     return false;
   }
@@ -38,5 +41,9 @@ bool SKListener::set_configuration(const JsonObject &config) {
 }
 
 void SKListener::set_sk_path(const String &path) { sk_path = path; }
+
+const String ConfigSchema(const SKListener &obj) {
+  return R"({"type":"object","properties":{"listen_delay":{"title":"Listen delay","type":"number","description":"The time, in milliseconds, between each read of the input"}}  })";
+}
 
 }  // namespace sensesp

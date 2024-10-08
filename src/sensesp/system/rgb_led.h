@@ -1,7 +1,7 @@
 #ifndef SENSESP_SYSTEM_RGB_LED_H
 #define SENSESP_SYSTEM_RGB_LED_H
 
-#include "configurable.h"
+#include "sensesp/ui/config_item.h"
 #include "valueconsumer.h"
 
 namespace sensesp {
@@ -24,7 +24,7 @@ namespace sensesp {
  * the 24 bit color definition however.
  * @see PWMOutput
  */
-class RgbLed : public Configurable,
+class RgbLed : public FileSystemSaveable,
                public ValueConsumer<long>,
                public ValueConsumer<bool> {
  public:
@@ -64,9 +64,8 @@ class RgbLed : public Configurable,
    */
   virtual void set(const bool& new_value) override;
 
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
  protected:
   int led_r_channel_;
@@ -77,6 +76,7 @@ class RgbLed : public Configurable,
   bool common_anode_;
 };
 
+const String ConfigSchema(const RgbLed& obj);
 }  // namespace sensesp
 
 #endif

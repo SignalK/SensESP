@@ -35,7 +35,7 @@ void setup() {
   // manually create Networking and HTTPServer objects to enable
   // the HTTP configuration interface
 
-  auto* networking = new Networking("/system/net", "", "");
+  auto* networking = new Networking("/system/networking", "", "");
   auto* http_server = new HTTPServer();
 
   auto* digin1 = new DigitalInputCounter(input_pin1, INPUT, RISING, read_delay);

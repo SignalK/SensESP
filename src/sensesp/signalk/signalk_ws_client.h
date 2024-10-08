@@ -7,9 +7,9 @@
 #include <esp_websocket_client.h>
 #include <functional>
 #include <set>
+#include <list>
 
 #include "sensesp/signalk/signalk_delta_queue.h"
-#include "sensesp/system/configurable.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/task_queue_producer.h"
 #include "sensesp/system/valueproducer.h"
@@ -31,8 +31,8 @@ enum class SKWSConnectionState {
  * @brief The websocket connection to the Signal K server.
  * @see SensESPApp
  */
-class SKWSClient : public Configurable,
-                   public ValueProducer<SKWSConnectionState> {
+class SKWSClient : virtual public FileSystemSaveable,
+                   virtual public ValueProducer<SKWSConnectionState> {
  public:
   /////////////////////////////////////////////////////////
   // main task methods
@@ -44,8 +44,8 @@ class SKWSClient : public Configurable,
   const String get_server_address() const { return server_address_; }
   uint16_t get_server_port() const { return server_port_; }
 
-  virtual void get_configuration(JsonObject& root) override final;
-  virtual bool set_configuration(const JsonObject& config) override final;
+  virtual bool to_json(JsonObject& root) override final;
+  virtual bool from_json(const JsonObject& config) override final;
 
   /**
    * Return a delta update ValueProducer that produces the number of sent
@@ -164,6 +164,10 @@ class SKWSClient : public Configurable,
   }
   SKWSConnectionState get_connection_state() { return task_connection_state_; }
 };
+
+inline bool ConfigRequiresRestart(const SKWSClient& obj) {
+  return true;
+}
 
 }  // namespace sensesp
 

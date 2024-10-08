@@ -10,7 +10,7 @@ PressRepeater::PressRepeater(const String& config_path, int integer_false,
       repeat_interval_{repeat_interval},
       pushed_{false},
       repeating_{false} {
-  load_configuration();
+  load();
 
   event_loop()->onRepeat(10, [this]() {
     if (pushed_) {
@@ -49,22 +49,13 @@ void PressRepeater::set(const bool& new_value) {
   }
 }
 
-void PressRepeater::get_configuration(JsonObject& root) {
+bool PressRepeater::to_json(JsonObject& root) {
   root["repeat_start_interval"] = repeat_start_interval_;
   root["repeat_interval"] = repeat_interval_;
+  return true;
 }
 
-static const char kSchema[] = R"###({
-    "type": "object",
-    "properties": {
-        "repeat_start_interval": { "title": "Start repeating after (ms)", "type": "integer" },
-        "repeat_interval": { "title": "Repeat report interval (ms)", "type": "integer" }
-    }
-})###";
-
-String PressRepeater::get_config_schema() { return (kSchema); }
-
-bool PressRepeater::set_configuration(const JsonObject& config) {
+bool PressRepeater::from_json(const JsonObject& config) {
   String const expected[] = {"repeat_start_interval", "repeat_interval"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -74,6 +65,10 @@ bool PressRepeater::set_configuration(const JsonObject& config) {
   repeat_start_interval_ = config["repeat_start_interval"];
   repeat_interval_ = config["repeat_interval"];
   return true;
+}
+
+const String ConfigSchema(const PressRepeater& obj) {
+  return R"###({"type":"object","properties":{"repeat_start_interval":{"title":"Start repeating after (ms)","type":"integer"},"repeat_interval":{"title":"Repeat report interval (ms)","type":"integer"}}})###";
 }
 
 }  // namespace sensesp

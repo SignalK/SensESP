@@ -60,6 +60,17 @@
   implement an `as_signalk_json()` method that writes constructs an ArduinoJson
   object in the provided `JsonObject` reference.
 
+- `UIOutput` has been renamed to `StatusPageItem`. `UILambdaOutput` has been
+  removed. Since `StatusPageItem` is now a `ValueConsumer`, you can connect
+  a producer to it.
+
+- `SemaphoreValue` is a new class that can be used to synchronize access to a
+  shared value between multiple threads/tasks.
+
+- `Configurable` base class has been split to `Saveable`, `Serializable` and
+  `ConfigItem`. Web configuration cards are now only rendered for objects that
+  have been wrapped in a `ConfigItem` call.
+
 ### Migrating Existing Projects
 
 - Update your project's `platformio.ini` file to use the new version of SensESP:
@@ -119,13 +130,29 @@
 - `ReactESP` is no longer a singleton. Earlier, you could refer to the singleton
   instance of `ReactESP` using `ReactESP::app`. Now, the object pointer is
   maintained by the `SensESPBaseApp` class, and you can refer to it using
-  `sensesp_app->get_event_loop()`. For example:
+  `event_loop()`. For example:
 
   ```cpp
   event_loop()->onRepeat(
     1000,
     []() { Serial.println("Hello, world!"); }
   );
+  ```
+
+- Objects inheriting from `Configurable` and having a `config_path` defined
+  were automatically added to the web configuration UI. This is no longer the
+  case. Now, you need to explicitly call `ConfigItem` with the object as an
+  argument. For example:
+
+  ```cpp
+  auto input_calibration = new Linear(1.0, 0.0, "/input/calibration");
+
+  ConfigItem(input_calibration)
+      ->set_title("Input Calibration")
+      ->set_description("Analog input value adjustment.")
+      ->set_sort_order(1100);
+
+  analog_input->connect_to(input_calibration);
   ```
 
 ### Development

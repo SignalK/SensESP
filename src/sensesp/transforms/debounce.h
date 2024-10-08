@@ -1,16 +1,10 @@
 #ifndef SENSESP_TRANSFORMS_DEBOUNCE_H_
 #define SENSESP_TRANSFORMS_DEBOUNCE_H_
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
-
-static const char DEBOUNCE_SCHEMA[] PROGMEM = R"###({
-    "type": "object",
-    "properties": {
-        "min_delay": { "title": "Minimum delay", "type": "number", "description": "The minimum time in ms between inputs for output to happen" }
-    }
-  })###";
 
 /**
  * @brief Implements debounce code for a button or switch
@@ -39,7 +33,7 @@ class Debounce : public SymmetricTransform<T> {
  public:
   Debounce(int ms_min_delay = 15, String config_path = "")
       : SymmetricTransform<T>(config_path), ms_min_delay_{ms_min_delay} {
-    this->load_configuration();
+    this->load();
   }
 
   virtual void set(const T& input) override {
@@ -53,12 +47,11 @@ class Debounce : public SymmetricTransform<T> {
         event_->remove(event_loop());
         event_ = nullptr;
       }
-      event_ = event_loop()->onDelay(
-          ms_min_delay_, [this, input]() {
-            this->event_ = nullptr;
-            this->debounced_value_ = input;
-            this->emit(input);
-          });
+      event_ = event_loop()->onDelay(ms_min_delay_, [this, input]() {
+        this->event_ = nullptr;
+        this->debounced_value_ = input;
+        this->emit(input);
+      });
       value_received_ = true;
     }
   }
@@ -68,11 +61,12 @@ class Debounce : public SymmetricTransform<T> {
   bool value_received_ = false;
   T debounced_value_;
   reactesp::DelayEvent* event_ = nullptr;
-  virtual void get_configuration(JsonObject& doc) override {
+  virtual bool to_json(JsonObject& doc) override {
     doc["min_delay"] = ms_min_delay_;
+    return true;
   }
 
-  virtual bool set_configuration(const JsonObject& config) override {
+  virtual bool from_json(const JsonObject& config) override {
     const String expected[] = {"min_delay"};
     for (auto str : expected) {
       if (!config[str].is<JsonVariant>()) {
@@ -82,9 +76,9 @@ class Debounce : public SymmetricTransform<T> {
     ms_min_delay_ = config["min_delay"];
     return true;
   }
-
-  virtual String get_config_schema() override { return FPSTR(DEBOUNCE_SCHEMA); }
 };
+
+const String ConfigSchema(const Debounce<bool>& obj);
 
 typedef Debounce<bool> DebounceBool;
 typedef Debounce<int> DebounceInt;

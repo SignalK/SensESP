@@ -5,29 +5,20 @@ namespace sensesp {
 VoltageDividerR1::VoltageDividerR1(float R2, float Vin,
                                    const String& config_path)
     : SymmetricTransform<float>(config_path), R2_{R2}, Vin_{Vin} {
-  load_configuration();
+  load();
 }
 
 void VoltageDividerR1::set(const float& Vout) {
   this->emit((Vin_ - Vout) * R2_ / Vout);
 }
 
-void VoltageDividerR1::get_configuration(JsonObject& root) {
+bool VoltageDividerR1::to_json(JsonObject& root) {
   root["Vin"] = Vin_;
   root["R2"] = R2_;
+  return true;
 }
 
-static const char kSchemaR1[] = R"({
-    "type": "object",
-    "properties": {
-        "Vin": { "title": "Voltage in", "type": "number" },
-        "R2": { "title": "Resistance (ohms) of R2", "type": "number" }
-    }
-  })";
-
-String VoltageDividerR1::get_config_schema() { return (kSchemaR1); }
-
-bool VoltageDividerR1::set_configuration(const JsonObject& config) {
+bool VoltageDividerR1::from_json(const JsonObject& config) {
   String const expected[] = {"Vin", "R2"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -45,32 +36,27 @@ bool VoltageDividerR1::set_configuration(const JsonObject& config) {
   return true;
 }
 
+const String ConfigSchema(const VoltageDividerR1& obj) {
+  return R"({"type":"object","properties":{"Vin":{"title":"Voltage in","type":"number"},"R2":{"title":"Resistance (ohms) of R2","type":"number"}}})";
+}
+
 VoltageDividerR2::VoltageDividerR2(float R1, float Vin,
                                    const String& config_path)
     : SymmetricTransform<float>(config_path), R1_{R1}, Vin_{Vin} {
-  load_configuration();
+  load();
 }
 
 void VoltageDividerR2::set(const float& Vout) {
   this->emit((Vout * R1_) / (Vin_ - Vout));
 }
 
-void VoltageDividerR2::get_configuration(JsonObject& root) {
+bool VoltageDividerR2::to_json(JsonObject& root) {
   root["Vin"] = Vin_;
   root["R1"] = R1_;
+  return true;
 }
 
-static const char kSchemaR2[] = R"({
-    "type": "object",
-    "properties": {
-        "Vin": { "title": "Voltage in", "type": "number" },
-        "R1": { "title": "Resistance (ohms) of R1", "type": "number" }
-    }
-  })";
-
-String VoltageDividerR2::get_config_schema() { return (kSchemaR2); }
-
-bool VoltageDividerR2::set_configuration(const JsonObject& config) {
+bool VoltageDividerR2::from_json(const JsonObject& config) {
   String const expected[] = {"Vin", "R1"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -86,6 +72,10 @@ bool VoltageDividerR2::set_configuration(const JsonObject& config) {
   R1_ = config["R1"];
 
   return true;
+}
+
+const String ConfigSchema(const VoltageDividerR2& obj) {
+  return R"({"type":"object","properties":{"Vin":{"title":"Voltage in","type":"number"},"R1":{"title":"Resistance (ohms) of R1","type":"number"}}})";
 }
 
 }  // namespace sensesp

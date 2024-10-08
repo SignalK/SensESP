@@ -5,7 +5,7 @@
 #include <functional>
 #include <map>
 
-#include "sensesp/system/configurable.h"
+#include "sensesp/ui/config_item.h"
 #include "sensesp/system/valueconsumer.h"
 
 namespace sensesp {
@@ -71,7 +71,8 @@ class SKRequest {
  * @see SKPutRequest
  * See https://signalk.org/specification/1.5.0/doc/put.html
  */
-class SKPutRequestBase : public SKRequest, public Configurable {
+class SKPutRequestBase : public SKRequest,
+                         public FileSystemSaveable {
  public:
   /**
    * The constructor
@@ -84,9 +85,8 @@ class SKPutRequestBase : public SKRequest, public Configurable {
                    uint32_t timeout = 5000);
 
   // For reading and writing the configuration
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 
   /**
    * Returns the Signal K path this object makes requests to
@@ -130,7 +130,8 @@ class SKPutRequestBase : public SKRequest, public Configurable {
  * https://signalk.org/specification/1.5.0/doc/put.html
  */
 template <typename T>
-class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
+class SKPutRequest : public SKPutRequestBase,
+                     public ValueConsumer<T> {
  public:
   /**
    * The constructor
@@ -167,6 +168,12 @@ class SKPutRequest : public SKPutRequestBase, public ValueConsumer<T> {
   T value;
   bool ignore_duplicates;
 };
+
+template <typename T>
+const String ConfigSchema(const SKPutRequest<T>& obj) {
+  static const char schema[] = R"###({"type":"object","properties":{"sk_path":{"title":"Signal K Path","type":"string"}}  })###";
+  return schema;
+}
 
 typedef SKPutRequest<float> FloatSKPutRequest;
 typedef SKPutRequest<int> IntSKPutRequest;

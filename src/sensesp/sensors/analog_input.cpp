@@ -13,9 +13,8 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
       pin{pin},
       read_delay{read_delay},
       output_scale{output_scale} {
-  this->set_requires_restart(true);
   analog_reader = new AnalogReader(pin);
-  load_configuration();
+  load();
 
   if (this->analog_reader->configure()) {
     event_loop()->onRepeat(read_delay, [this]() { this->update(); });
@@ -24,20 +23,12 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
 
 void AnalogInput::update() { this->emit(output_scale * analog_reader->read()); }
 
-void AnalogInput::get_configuration(JsonObject& root) {
+bool AnalogInput::to_json(JsonObject& root) {
   root["read_delay"] = read_delay;
+  return true;
 };
 
-static const char kSchema[] = R"###({
-    "type": "object",
-    "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "Number of milliseconds between each analogRead(A0)" }
-    }
-  })###";
-
-String AnalogInput::get_config_schema() { return kSchema; }
-
-bool AnalogInput::set_configuration(const JsonObject& config) {
+bool AnalogInput::from_json(const JsonObject& config) {
   String const expected[] = {"read_delay"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -46,6 +37,10 @@ bool AnalogInput::set_configuration(const JsonObject& config) {
   }
   read_delay = config["read_delay"];
   return true;
+}
+
+const String ConfigSchema(AnalogInput& obj) {
+  return R"###({"type":"object","properties":{"read_delay":{"title":"Read delay","type":"number","description":"Number of milliseconds between each analogRead(A0)"}}  })###";
 }
 
 }  // namespace sensesp

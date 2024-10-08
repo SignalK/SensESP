@@ -35,6 +35,15 @@ class StatusPageItemBase {
   static std::map<String, StatusPageItemBase*> status_page_items_;
 };
 
+/**
+ * @brief Item that renders its own value on the web UI status page.
+ *
+ * A StatusPageItem can be connected to a ValueProducer and will render the
+ * value of the producer on the web UI status page. When unconnected, it will
+ * always render the value provided in the constructor.
+ *
+ * @tparam T
+ */
 template <typename T>
 class StatusPageItem : public StatusPageItemBase, public ObservableValue<T> {
  public:

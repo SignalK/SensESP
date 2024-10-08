@@ -1,16 +1,10 @@
 #ifndef SENSESP_TRANSFORMS_INTEGRATOR_H_
 #define SENSESP_TRANSFORMS_INTEGRATOR_H_
 
+#include "sensesp/ui/config_item.h"
 #include "transform.h"
 
 namespace sensesp {
-
-static const char INTEGRATOR_SCHEMA[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "k": { "title": "Multiplier", "type": "number" }
-    }
-  })";
 
 /**
  * @brief Integrator integrates (accumulates) the incoming values.
@@ -33,7 +27,7 @@ class Integrator : public Transform<C, P> {
    */
   Integrator(P k = 1, P value = 0, String config_path = "")
       : Transform<C, P>(config_path), k{k}, value{value} {
-    this->load_configuration();
+    this->load();
     this->emit(value);
   }
 
@@ -44,24 +38,27 @@ class Integrator : public Transform<C, P> {
 
   void reset() { value = 0; }
 
-  virtual void get_configuration(JsonObject& doc) override final {
+  virtual bool to_json(JsonObject& doc) override final {
     doc["k"] = k;
+    return true;
   }
-  virtual bool set_configuration(const JsonObject& config) override final {
+  virtual bool from_json(const JsonObject& config) override final {
     if (!config["k"].is<P>()) {
       return false;
     }
     k = config["k"];
     return true;
   }
-  virtual String get_config_schema() override {
-    return FPSTR(INTEGRATOR_SCHEMA);
-  }
 
  private:
   P k;
   P value = 0;
 };
+
+template <typename T>
+const String ConfigSchema(const Integrator<T, T>& obj) {
+  return R"({"type":"object","properties":{"k":{"title":"Multiplier","type":"number"}}})";
+}
 
 typedef Integrator<float, float> FloatIntegrator;
 typedef Integrator<int, int> Accumulator;

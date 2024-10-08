@@ -29,7 +29,7 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
     samples_ = *defaults;
   }
 
-  load_configuration();
+  load();
 }
 
 void CurveInterpolator::set(const float& input) {
@@ -96,47 +96,25 @@ void CurveInterpolator::set(const float& input) {
   notify();
 }
 
-void CurveInterpolator::get_configuration(JsonObject& root) {
-  JsonArray json_samples = root["samples"].to<JsonArray>();
+bool CurveInterpolator::to_json(JsonObject& doc) {
+  JsonArray json_samples = doc["samples"].to<JsonArray>();
   for (auto& sample : samples_) {
     // Add a new JsonObject to the array
     JsonObject entry = json_samples.add<JsonObject>();
     if (entry.isNull()) {
       ESP_LOGE(__FILENAME__, "No memory for sample");
-      return;
+      return false;
     }
     entry["input"] = sample.input;
     entry["output"] = sample.output;
   }
+  return true;
 }
 
-static const char kSchema[] PROGMEM = R"({
-    "type": "object",
-    "properties": {
-        "samples": { "title": "Sample values",
-                    "type": "array",
-                    "format": "table",
-                    "items": { "type": "object",
-                               "properties": {
-                                   "input": { "type": "number",
-                                              "title": "%s" },
-                                   "output": { "type": "number",
-                                              "title": "%s" }
-                             }}}
-    }
-  })";
-
-String CurveInterpolator::get_config_schema() {
-  char buf[sizeof(kSchema) + 160];
-  snprintf_P(buf, sizeof(buf), kSchema, input_title_.c_str(),
-             output_title_.c_str());
-  return {buf};
-}
-
-bool CurveInterpolator::set_configuration(const JsonObject& config) {
+bool CurveInterpolator::from_json(const JsonObject& doc) {
   String const expected[] = {"samples"};
   for (auto str : expected) {
-    if (!config[str].is<JsonVariant>()) {
+    if (!doc[str].is<JsonVariant>()) {
       ESP_LOGE(
           __FILENAME__,
           "Can not set CurveInterpolator configuration: missing json field "
@@ -146,7 +124,7 @@ bool CurveInterpolator::set_configuration(const JsonObject& config) {
     }
   }
 
-  JsonArray arr = config["samples"];
+  JsonArray arr = doc["samples"];
   if (arr.size() > 0) {
     samples_.clear();
     for (auto jentry : arr) {

@@ -8,7 +8,7 @@ Frequency::Frequency(float multiplier, const String& config_path)
     : Transform<int, float>(config_path),
       multiplier_{multiplier},
       last_update_(millis()) {
-  load_configuration();
+  load();
 }
 
 void Frequency::set(const int& input) {
@@ -18,20 +18,12 @@ void Frequency::set(const int& input) {
   this->emit(multiplier_ * input / (elapsed_millis / 1000.));
 }
 
-void Frequency::get_configuration(JsonObject& root) {
+bool Frequency::to_json(JsonObject& root) {
   root["multiplier"] = multiplier_;
+  return true;
 }
 
-static const char kSchema[] = R"###({
-    "type": "object",
-    "properties": {
-        "multiplier": { "title": "Multiplier", "type": "number" }
-    }
-  })###";
-
-String Frequency::get_config_schema() { return (kSchema); }
-
-bool Frequency::set_configuration(const JsonObject& config) {
+bool Frequency::from_json(const JsonObject& config) {
   String const expected[] = {"multiplier"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -40,6 +32,10 @@ bool Frequency::set_configuration(const JsonObject& config) {
   }
   multiplier_ = config["multiplier"];
   return true;
+}
+
+const String ConfigSchema(const Frequency& obj) {
+  return R"###({"type":"object","properties":{"multiplier":{"title":"Multiplier","type":"number"}}})###";
 }
 
 }  // namespace sensesp

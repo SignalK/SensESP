@@ -1,24 +1,12 @@
 #ifndef SENSESP_SRC_TRANSFORMS_TIME_COUNTER_H_
 #define SENSESP_SRC_TRANSFORMS_TIME_COUNTER_H_
 
+#include "sensesp/ui/config_item.h"
 #include "sensesp/transforms/transform.h"
 
 namespace sensesp {
 
-uint64_t ARDUINO_ISR_ATTR millis64() { return esp_timer_get_time() / 1000ULL; }
-
-static const char kTimeCounterSchema[] = R"({
-    "type": "object",
-    "properties": {
-        "duration_s": {
-          "type": "number",
-          "displayMultiplier": 0.0002777777777777778,
-          "title": "Total Duration [hours]"
-        }
-    },
-    "required": ["duration_s"]
-
-})";
+inline uint64_t ARDUINO_ISR_ATTR millis64() { return esp_timer_get_time() / 1000ULL; }
 
 /**
  * @brief A transform that outputs the duration of the input value being
@@ -34,7 +22,7 @@ template <typename T>
 class TimeCounter : public Transform<T, double> {
  public:
   TimeCounter(String config_path) : Transform<T, double>(config_path) {
-    this->load_configuration();
+    this->load();
   }
 
   virtual void set(const T& input) override {
@@ -57,29 +45,31 @@ class TimeCounter : public Transform<T, double> {
         previous_state_ = 1;
         start_time_ms_ = millis64();
         duration_at_start_ms_ = duration_ms_;
-        this->save_configuration();  // Save configuration to flash, so that
-                                     // the duration is persistent
+        this->save();  // Save configuration to flash, so that
+                       // the duration is persistent
       }
     } else {
       if (previous_state_ == 1) {
         // State change from true to false
         previous_state_ = 0;
         duration_ms_ = duration_at_start_ms_ + (millis64() - start_time_ms_);
-        this->save_configuration();  // Save configuration to flash, so that
-                                     // the duration is persistent
+        this->save();  // Save configuration to flash, so that
+                       // the duration is persistent
       }
     }
     this->emit((double)duration_ms_ / 1000.);
   }
 
-  virtual void get_configuration(JsonObject& root) override {
+  virtual bool to_json(JsonObject& root) override {
     root["duration_s"] = duration_ms_ / 1000.;  // convert to seconds
+    return true;
   }
 
-  virtual bool set_configuration(const JsonObject& config) override {
+  virtual bool from_json(const JsonObject& config) override {
     ESP_LOGD(__FILENAME__, "Setting TimeCounter configuration");
     if (config["duration_s"].is<double>()) {
-      duration_at_start_ms_ = config["duration_s"].as<double>() * 1000;  // convert to milliseconds
+      duration_at_start_ms_ =
+          config["duration_s"].as<double>() * 1000;  // convert to milliseconds
     } else if (!config["duration"].is<double>()) {
       // If the duration is not in seconds, try to read it in milliseconds
       duration_at_start_ms_ = config["duration"];
@@ -88,11 +78,10 @@ class TimeCounter : public Transform<T, double> {
     }
 
     duration_ms_ = duration_at_start_ms_;
-    ESP_LOGD(__FILENAME__, "duration_at_start_ms_ = %ld", duration_at_start_ms_);
+    ESP_LOGD(__FILENAME__, "duration_at_start_ms_ = %ld",
+             duration_at_start_ms_);
     return true;
   }
-
-  virtual String get_config_schema() override { return kTimeCounterSchema; }
 
  protected:
   bool initialized_ = false;
@@ -101,6 +90,11 @@ class TimeCounter : public Transform<T, double> {
   uint64_t duration_ms_ = 0;
   uint64_t duration_at_start_ms_ = 0;
 };
+
+template <typename U>
+const String ConfigSchema(TimeCounter<U>& obj) {
+  return R"({"type":"object","properties":{"duration_s":{"type":"number","displayMultiplier":0.0002777777777777778,"title":"Total Duration [hours]"}},"required":["duration_s"]})";
+}
 
 }  // namespace sensesp
 

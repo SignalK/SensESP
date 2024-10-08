@@ -10,7 +10,7 @@
 
 #include "WiFi.h"
 #include "sensesp/net/http_authenticator.h"
-#include "sensesp/system/configurable.h"
+#include "sensesp/system/serializable.h"
 #include "sensesp_base_app.h"
 
 #ifndef HTTP_SERVER_STACK_SIZE
@@ -57,17 +57,18 @@ class HTTPRequestHandler {
  * @brief HTTP server class wrapping the esp-idf http server.
  *
  */
-class HTTPServer : public Configurable {
+class HTTPServer : virtual public FileSystemSaveable {
  public:
   HTTPServer(int port = HTTP_DEFAULT_PORT,
              const String& config_path = "/system/httpserver")
-      : Configurable(config_path), config_(HTTPD_DEFAULT_CONFIG()) {
+      : FileSystemSaveable(config_path),
+      config_(HTTPD_DEFAULT_CONFIG()) {
     config_.server_port = port;
     config_.stack_size = HTTP_SERVER_STACK_SIZE;
     config_.max_uri_handlers = 20;
     config_.uri_match_fn = httpd_uri_match_wildcard;
     String auth_realm_ = "Login required for " + SensESPBaseApp::get_hostname();
-    load_configuration();
+    load();
     if (auth_required_) {
       authenticator_ =
           new HTTPDigestAuthenticator(username_, password_, auth_realm_);
@@ -125,13 +126,15 @@ class HTTPServer : public Configurable {
     captive_portal_ = captive_portal;
   }
 
-  virtual void get_configuration(JsonObject& config) override {
+  virtual bool to_json(JsonObject& config) override {
     config["auth_required"] = auth_required_;
     config["username"] = username_;
     config["password"] = password_;
+
+    return true;
   }
 
-  virtual bool set_configuration(const JsonObject& config) override {
+  virtual bool from_json(const JsonObject& config) override {
     if (config["auth_required"].is<bool>()) {
       auth_required_ = config["auth_required"];
     }
@@ -185,6 +188,8 @@ class HTTPServer : public Configurable {
 
   friend esp_err_t call_request_dispatcher(httpd_req_t* req);
 };
+
+inline bool ConfigRequiresRestart(const HTTPServer& obj) { return true; }
 
 }  // namespace sensesp
 

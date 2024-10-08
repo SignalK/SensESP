@@ -69,9 +69,13 @@ void setup() {
   auto digin_counter =
       new DigitalInputCounter(15, INPUT, FALLING, 500, "/Sensors/Counter");
 
+  ConfigItem(digin_counter)->set_title("Input Counter")->set_sort_order(1000);
+
   // Create a frequency transform
   auto* frequency = new Frequency(1, "/Transforms/Frequency");
   digin_counter->connect_to(frequency);
+
+  ConfigItem(frequency)->set_title("Frequency")->set_sort_order(1100);
 
   // create a propulsion state lambda transform
   auto* propulsion_state = new LambdaTransform<float, String>(
@@ -84,10 +88,18 @@ void setup() {
       },
       "/Transforms/Propulsion State");
 
+  ConfigItem(propulsion_state)
+      ->set_title("Propulsion State")
+      ->set_sort_order(1200);
+
   frequency->connect_to(propulsion_state);
 
   // create engine hours counter using PersistentDuration
   auto* engine_hours = new TimeCounter<float>("/Transforms/Engine Hours");
+
+  ConfigItem(engine_hours)->set_title("Engine Hours")->set_sort_order(1300);
+
+  ConfigItem(engine_hours)->set_title("Engine Hours")->set_sort_order(1300);
 
   frequency->connect_to(engine_hours);
 

@@ -3,6 +3,7 @@
 
 #include <elapsedMillis.h>
 
+#include "sensesp/ui/config_item.h"
 #include "sensesp_base_app.h"
 #include "sensor.h"
 
@@ -54,20 +55,21 @@ class DigitalInputState : public DigitalInput, public Sensor<bool> {
         Sensor<bool>(config_path),
         read_delay_{read_delay},
         triggered_{false} {
-    set_requires_restart(true);
-    load_configuration();
+    load();
 
-    event_loop()->onRepeat(
-        read_delay_, [this]() { emit(digitalRead(pin_)); });
+    event_loop()->onRepeat(read_delay_, [this]() { emit(digitalRead(pin_)); });
   }
 
  private:
   int read_delay_;
   bool triggered_;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 };
+
+const String ConfigSchema(const DigitalInputState& obj);
+
+bool ConfigRequiresRestart(const DigitalInputState& obj);
 
 /**
  * @brief DigitalInputCounter counts interrupts and reports the count every
@@ -93,8 +95,7 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
                       unsigned int read_delay, String config_path = "")
       : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
                             config_path, [this]() { this->counter_++; }) {
-    event_loop()->onInterrupt(pin_, interrupt_type_,
-                                                  interrupt_handler_);
+    event_loop()->onInterrupt(pin_, interrupt_type_, interrupt_handler_);
 
     event_loop()->onRepeat(read_delay_, [this]() {
       noInterrupts();
@@ -105,6 +106,9 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
     });
   }
 
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
+
  protected:
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       unsigned int read_delay, String config_path,
@@ -114,7 +118,7 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
         read_delay_{read_delay},
         interrupt_type_{interrupt_type},
         interrupt_handler_{interrupt_handler} {
-    load_configuration();
+    load();
   }
 
   unsigned int read_delay_;
@@ -123,10 +127,11 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
  private:
   int interrupt_type_;
   std::function<void()> interrupt_handler_;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
 };
+
+const String ConfigSchema(const DigitalInputCounter& obj);
+
+bool ConfigRequiresRestart(const DigitalInputCounter& obj);
 
 /**
  * @brief DigitalInputDebounceCounter counts interrupts and reports the count
@@ -164,10 +169,13 @@ class DigitalInputDebounceCounter : public DigitalInputCounter {
 
   unsigned int ignore_interval_ms_;
   elapsedMillis since_last_event_;
-  virtual void get_configuration(JsonObject& root) override;
-  virtual bool set_configuration(const JsonObject& config) override;
-  virtual String get_config_schema() override;
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
 };
+
+const String ConfigSchema(const DigitalInputDebounceCounter& obj);
+
+bool ConfigRequiresRestart(const DigitalInputDebounceCounter& obj);
 
 /**
  * @brief DigitalInputChange provides output whenever a digital pin changes its
@@ -197,15 +205,14 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
         Sensor<bool>(config_path),
         interrupt_type_{interrupt_type},
         triggered_{true} {
-    load_configuration();
+    load();
     output = (bool)digitalRead(pin_);
     last_output_ = !output;  // ensure that we always send the first output
 
-    event_loop()->onInterrupt(
-        pin_, interrupt_type_, [this]() {
-          output = (bool)digitalRead(pin_);
-          triggered_ = true;
-        });
+    event_loop()->onInterrupt(pin_, interrupt_type_, [this]() {
+      output = (bool)digitalRead(pin_);
+      triggered_ = true;
+    });
 
     event_loop()->onTick([this]() {
       if (triggered_ && (output != last_output_)) {
@@ -222,10 +229,8 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
   int interrupt_type_;
   bool triggered_;
   bool last_output_;
-  virtual void get_configuration(JsonObject& doc) override {}
-  virtual bool set_configuration(const JsonObject& config) override {
-    return false;
-  }
+  virtual bool to_json(JsonObject& doc) override { return true; }
+  virtual bool from_json(const JsonObject& config) override { return true; }
 };
 
 }  // namespace sensesp

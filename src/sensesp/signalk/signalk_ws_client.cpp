@@ -77,7 +77,7 @@ static void websocket_event_handler(void* handler_args, esp_event_base_t base,
 SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
                        const String& server_address, uint16_t server_port,
                        bool use_mdns)
-    : Configurable{config_path, "/System/Signal K Settings", 200},
+    : FileSystemSaveable{config_path},
       conf_server_address_{server_address},
       conf_server_port_{server_port},
       use_mdns_{use_mdns},
@@ -96,7 +96,7 @@ SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
   // set the singleton object pointer
   ws_client = this;
 
-  load_configuration();
+  load();
 
   // Connect the counters
   delta_tx_tick_producer_.connect_to(&delta_tx_count_producer_);
@@ -129,7 +129,7 @@ void SKWSClient::on_disconnected() {
     // the authentication token is bad.
     ESP_LOGW(__FILENAME__, "Bad access token detected. Setting token to null.");
     auth_token_ = NULL_AUTH_TOKEN;
-    save_configuration();
+    save();
   }
   this->set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   server_detected_ = false;
@@ -233,7 +233,8 @@ void SKWSClient::on_receive_delta(uint8_t* payload, size_t length) {
     }
 
     // Putrequest contains also requestId Key  GA
-    if (message["requestId"].is<JsonVariant>() && !message["put"].is<JsonVariant>()) {
+    if (message["requestId"].is<JsonVariant>() &&
+        !message["put"].is<JsonVariant>()) {
       SKRequest::handle_response(message);
     }
   } else {
@@ -501,7 +502,7 @@ void SKWSClient::send_access_request(const String server_address,
   if (client_id_ == "") {
     // generate a client ID
     client_id_ = generate_uuid4();
-    save_configuration();
+    save();
   }
 
   // create a new access request
@@ -550,7 +551,7 @@ void SKWSClient::send_access_request(const String server_address,
 
   String href = doc["href"];
   polling_href_ = href;
-  save_configuration();
+  save();
 
   delay(5000);
   this->poll_access_request(server_address, server_port, this->polling_href_);
@@ -588,7 +589,7 @@ void SKWSClient::poll_access_request(const String server_address,
       String permission = access_req["permission"];
 
       polling_href_ = "";
-      save_configuration();
+      save();
 
       if (permission == "DENIED") {
         ESP_LOGW(__FILENAME__, "Permission denied");
@@ -600,7 +601,7 @@ void SKWSClient::poll_access_request(const String server_address,
         ESP_LOGI(__FILENAME__, "Permission granted");
         String token = access_req["token"];
         auth_token_ = token;
-        save_configuration();
+        save();
         this->connect_ws(server_address, server_port);
         return;
       }
@@ -613,7 +614,7 @@ void SKWSClient::poll_access_request(const String server_address,
       // delete the polling href.
       ESP_LOGD(__FILENAME__, "Got 500, probably a non-existing request.");
       polling_href_ = "";
-      save_configuration();
+      save();
       set_connection_state(SKWSConnectionState::kSKWSDisconnected);
       return;
     }
@@ -685,7 +686,7 @@ void SKWSClient::send_delta() {
   }
 }
 
-void SKWSClient::get_configuration(JsonObject& root) {
+bool SKWSClient::to_json(JsonObject& root) {
   root["sk_address"] = this->conf_server_address_;
   root["sk_port"] = this->conf_server_port_;
   root["use_mdns"] = this->use_mdns_;
@@ -693,9 +694,10 @@ void SKWSClient::get_configuration(JsonObject& root) {
   root["token"] = this->auth_token_;
   root["client_id"] = this->client_id_;
   root["polling_href"] = this->polling_href_;
+  return true;
 }
 
-bool SKWSClient::set_configuration(const JsonObject& config) {
+bool SKWSClient::from_json(const JsonObject& config) {
   if (config["sk_address"].is<String>()) {
     this->conf_server_address_ = config["sk_address"].as<String>();
   }

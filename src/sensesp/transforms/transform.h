@@ -6,8 +6,8 @@
 #include <ArduinoJson.h>
 #include <set>
 
-#include "sensesp/system/configurable.h"
 #include "sensesp/system/observable.h"
+#include "sensesp/system/saveable.h"
 #include "sensesp/system/valueconsumer.h"
 #include "sensesp/system/valueproducer.h"
 
@@ -27,9 +27,9 @@ namespace sensesp {
  *
  * @param config_path The path to configure the Transform in the Config UI.
  */
-class TransformBase : public Configurable {
+class TransformBase : public FileSystemSaveable {
  public:
-  TransformBase(const String& config_path = "");
+  TransformBase(const String& config_path);
 
   // Primary purpose of this was to supply Signal K sources
   // (now handled by SKEmitter::get_sources). Should

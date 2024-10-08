@@ -29,6 +29,9 @@ void SetupLogging(esp_log_level_t default_level = ESP_LOG_VERBOSE);
  * @see SensESPApp
  */
 class SensESPBaseApp {
+ protected:
+  reactesp::EventLoop event_loop_;
+
  public:
   /**
    * @brief Get the singleton instance of the SensESPBaseApp
@@ -70,11 +73,11 @@ class SensESPBaseApp {
 
   virtual void setup();
 
-  reactesp::EventLoop event_loop_;
-
   static SensESPBaseApp* instance_;
 
-  PersistingObservableValue<String>* hostname_{};
+  void set_instance(SensESPBaseApp* instance) { instance_ = instance; }
+
+  PersistingObservableValue<String>* hostname_;
 
   Filesystem* filesystem_;
 

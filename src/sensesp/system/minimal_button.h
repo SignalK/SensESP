@@ -6,7 +6,6 @@
 #include "AceButton.h"
 #include "elapsedMillis.h"
 #include "sensesp/system/base_button.h"
-#include "sensesp/system/configurable.h"
 #include "sensesp_base_app.h"
 
 namespace sensesp {

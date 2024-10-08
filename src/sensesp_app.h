@@ -133,6 +133,7 @@ class SensESPApp : public SensESPBaseApp {
   ButtonHandler* button_handler_ = nullptr;
 
   Networking* networking_ = NULL;
+
   OTA* ota_;
   SKDeltaQueue* sk_delta_queue_;
   SKWSClient* ws_client_;

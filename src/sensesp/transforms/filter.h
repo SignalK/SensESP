@@ -15,7 +15,7 @@ class Filter : public Transform<T, T> {
  public:
   Filter(std::function<bool(const T&)> filter, String config_path = "")
       : Transform<T, T>(config_path), filter_{filter} {
-    this->load_configuration();
+    this->load();
   }
   virtual void set(const T& new_value) override {
     if (filter_(new_value)) {

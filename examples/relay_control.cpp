@@ -50,8 +50,9 @@ void setup() {
   // "environment.outside.illuminance" to the NumericThreshold, and then output
   // the transformed float to boolean to DigitalOutput
   auto* listener = new FloatSKListener(sk_path);
-  listener->connect_to(new FloatThreshold(0.0f, 100.0f, true, config_path))
-      ->connect_to(new DigitalOutput(5));
+  auto threshold = new FloatThreshold(0.0f, 100.0f, true, config_path);
+  ConfigItem(threshold)->set_title("Threshold")->set_sort_order(1000);
+  listener->connect_to(threshold)->connect_to(new DigitalOutput(5));
 }
 
 void loop() { event_loop()->tick(); }

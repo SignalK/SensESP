@@ -5,13 +5,13 @@ import { ConfigCard } from "./ConfigCard";
 
 const updateCards = async (): Promise<string[]> => {
   try {
-    const response = await fetch(APP_CONFIG.config_path);
+    const response = await fetch(APP_CONFIG.config_path + "?cards");
     if (!response.ok) {
       throw new Error(`HTTP Error ${response.status} ${response.statusText}`);
     }
     const data = await response.json();
 
-    const items = data.keys;
+    const items = data;  // Should be an array of strings
     return items;
   } catch (e) {
     console.log("Error getting config data from server", e);

@@ -16,7 +16,7 @@ ChangeFilter::ChangeFilter(float min_delta, float max_delta, int max_skips,
       max_delta_{max_delta},
       max_skips_{max_skips},
       skips_(max_skips_ + 1) {
-  load_configuration();
+  load();
 }
 
 void ChangeFilter::set(const float& new_value) {
@@ -29,24 +29,14 @@ void ChangeFilter::set(const float& new_value) {
   }
 }
 
-void ChangeFilter::get_configuration(JsonObject& root) {
+bool ChangeFilter::to_json(JsonObject& root) {
   root["min_delta"] = min_delta_;
   root["max_delta"] = max_delta_;
   root["max_skips"] = max_skips_;
+  return true;
 }
 
-static const char kSchema[] = R"({
-    "type": "object",
-    "properties": {
-        "min_delta": { "title": "Minimum delta", "description": "Minimum difference in change of value before forwarding", "type": "number" },
-        "max_delta": { "title": "Maximum delta", "description": "Maximum difference in change of value to allow forwarding", "type": "number" },
-        "max_skips": { "title": "Max skip count", "description": "Maximum number of consecutive filtered values before one is allowed through", "type": "number" }
-    }
-  })";
-
-String ChangeFilter::get_config_schema() { return (kSchema); }
-
-bool ChangeFilter::set_configuration(const JsonObject& config) {
+bool ChangeFilter::from_json(const JsonObject& config) {
   String const expected[] = {"min_delta", "max_delta", "max_skips"};
   for (auto str : expected) {
     if (!config[str].is<JsonVariant>()) {
@@ -58,6 +48,10 @@ bool ChangeFilter::set_configuration(const JsonObject& config) {
   max_skips_ = config["max_skips"];
   skips_ = max_skips_ + 1;
   return true;
+}
+
+const String ConfigSchema(ChangeFilter& obj) {
+  return R"###({"type":"object","properties":{"min_delta":{"title":"Minimum delta","description":"Minimum difference in change of value before forwarding","type":"number"},"max_delta":{"title":"Maximum delta","description":"Maximum difference in change of value to allow forwarding","type":"number"},"max_skips":{"title":"Max skip count","description":"Maximum number of consecutive filtered values before one is allowed through","type":"number"}}})###";
 }
 
 }  // namespace sensesp
