@@ -6,7 +6,7 @@ template <typename T>
 SKOutputNumeric<T>::SKOutputNumeric(String sk_path, String config_path,
                                     SKMetadata* meta)
     : SKOutput<T>(sk_path, config_path, meta) {
-  if (this->meta_ == NULL && !this->sk_path_.isEmpty()) {
+  if (this->meta_ == nullptr && !this->sk_path_.isEmpty()) {
     ESP_LOGW(
         __FILENAME__,
         "WARNING - No metadata for %s. Numeric values should specify units",
