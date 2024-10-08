@@ -106,7 +106,7 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
 class AccessPointSettings {
  public:
   AccessPointSettings(bool enabled = true, String ssid = "",
-                      String password = "thisisfine", int channel = 9,
+                      String password = "", int channel = 9,
                       bool hidden = false, bool captive_portal_enabled = true)
       : enabled_{enabled},
         ssid_{ssid},
@@ -237,8 +237,9 @@ class Networking : virtual public FileSystemSaveable,
                    public Resettable,
                    public ValueProducer<WiFiState> {
  public:
-  Networking(String config_path, String client_ssid = "",
-             String client_password = "");
+  Networking(const String& config_path, const String& client_ssid = "",
+             const String& client_password = "", const String& ap_ssid = "",
+             const String& ap_password = "");
   ~Networking();
 
   virtual void reset() override;
@@ -263,7 +264,7 @@ class Networking : virtual public FileSystemSaveable,
   void wifi_ap_enabled();
   void wifi_disconnected();
 
- private:
+ protected:
   AccessPointSettings ap_settings_;
 
   bool client_enabled_ = false;

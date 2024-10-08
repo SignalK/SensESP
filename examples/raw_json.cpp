@@ -16,7 +16,7 @@ void setup() {
 
   SensESPAppBuilder builder;
   SensESPApp *sensesp_app = builder.set_hostname("json_demo")
-                                ->set_wifi("Hat Labs Sensors", "kanneluuri2406")
+                                ->set_wifi_client("Hat Labs Sensors", "kanneluuri2406")
                                 ->get_app();
 
   event_loop()->onRepeat(1000, []() { toggler.set(!toggler.get()); });

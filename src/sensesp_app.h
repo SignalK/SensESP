@@ -87,6 +87,14 @@ class SensESPApp : public SensESPBaseApp {
     this->wifi_client_password_ = wifi_password;
     return this;
   }
+  const SensESPApp* set_ap_ssid(const String& ssid) {
+    this->ap_ssid_ = ssid;
+    return this;
+  }
+  const SensESPApp* set_ap_password(const String& password) {
+    this->ap_password_ = password;
+    return this;
+  }
   const SensESPApp* set_sk_server_address(String sk_server_address) {
     this->sk_server_address_ = sk_server_address;
     return this;
@@ -111,10 +119,6 @@ class SensESPApp : public SensESPBaseApp {
     button_gpio_pin_ = pin;
     return this;
   }
-  const SensESPApp* set_wifi_manager_password(const char* password) {
-    wifi_manager_password_ = password;
-    return this;
-  }
 
   void setup();
   void connect_status_page_items();
@@ -123,8 +127,9 @@ class SensESPApp : public SensESPBaseApp {
   String wifi_client_password_ = "";
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
+  String ap_ssid_ = SensESPBaseApp::get_hostname();
+  String ap_password_ = "thisisfine";
   const char* ota_password_ = nullptr;
-  const char* wifi_manager_password_ = "thisisfine";
 
   MDNSDiscovery* mdns_discovery_;
   HTTPServer* http_server_;

@@ -4,10 +4,10 @@
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
 #include "sensesp/net/web/autogen/frontend_files.h"
-#include "sensesp/ui/config_item.h"
 #include "sensesp/system/button.h"
 #include "sensesp/system/system_status_led.h"
 #include "sensesp/transforms/debounce.h"
+#include "sensesp/ui/config_item.h"
 
 namespace sensesp {
 
@@ -41,8 +41,8 @@ void SensESPApp::setup() {
   SensESPBaseApp::setup();
 
   // create the networking object
-  networking_ =
-      new Networking("/System/WiFi Settings", ssid_, wifi_client_password_);
+  networking_ = new Networking("/System/WiFi Settings", ssid_,
+                               wifi_client_password_, ap_ssid_, ap_password_);
 
   ConfigItem(networking_);
 

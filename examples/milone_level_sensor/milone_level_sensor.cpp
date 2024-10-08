@@ -48,7 +48,7 @@ void setup() {
   // Create a builder object
   SensESPAppBuilder builder;
 
-  // Create the global SensESPApp() object. If you add the line ->set_wifi("your
+  // Create the global SensESPApp() object. If you add the line ->set_wifi_client("your
   // ssid", "your password") you can specify the wifi parameters in the builder.
   // If you do not do that, the SensESP device wifi configuration access point
   // will appear and you can use a web browser pointed to 192.168.4.1 to

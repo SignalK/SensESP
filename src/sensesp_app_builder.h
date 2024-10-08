@@ -45,11 +45,32 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    * @param password
    * @return SensESPAppBuilder*
    */
-  SensESPAppBuilder* set_wifi(String ssid, String password) {
+  SensESPAppBuilder* set_wifi_client(String ssid, String password) {
     app_->set_ssid(ssid);
     app_->set_wifi_password(password);
     return this;
   }
+
+  [[deprecated("Use set_wifi_client instead")]]
+  SensESPAppBuilder* set_wifi(String ssid, String password) {
+    return set_wifi_client(ssid, password);
+  }
+
+  /**
+   * @brief Set the wifi access point object SSID and password.
+   *
+   * To disable the SSID, set both to empty strings.
+   *
+   * @param ssid
+   * @param password
+   * @return SensESPAppBuilder*
+   */
+  SensESPAppBuilder* set_wifi_access_point(const String& ssid, const String& password) {
+    app_->set_ap_ssid(ssid);
+    app_->set_ap_password(password);
+    return this;
+  }
+
   /**
    * @brief Set the Signal K server address and port.
    *
@@ -76,7 +97,6 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     app_->set_hostname(hostname);
     return this;
   }
-
   /**
    * @brief Set admin username and password for the web interface.
    *
@@ -205,8 +225,9 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    * @param password
    * @return SensESPAppBuilder*
    */
+  [[deprecated("Use set_wifi_access_point instead")]]
   SensESPAppBuilder* set_wifi_manager_password(const char* password) {
-    app_->set_wifi_manager_password(password);
+    app_->set_ap_password(password);
     return this;
   }
 

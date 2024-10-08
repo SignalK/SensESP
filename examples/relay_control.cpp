@@ -27,7 +27,7 @@ void setup() {
   // Create the global SensESPApp() object.
   sensesp_app = builder.set_hostname("relay")
                     ->set_sk_server("10.10.10.1", 3000)
-                    ->set_wifi("yourSSID", "yourPassword")
+                    ->set_wifi_client("yourSSID", "yourPassword")
                     ->get_app();
 
   // To find valid Signal K Paths that fits your need you look at this link:

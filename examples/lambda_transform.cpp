@@ -17,7 +17,7 @@ void setup() {
   SensESPAppBuilder builder;
 
   sensesp_app = builder.set_hostname("sensesp-illum-example")
-                    ->set_wifi("My WiFi SSID", "my_wifi_password")
+                    ->set_wifi_client("My WiFi SSID", "my_wifi_password")
                     ->set_sk_server("192.168.1.13", 80)
                     ->get_app();
 

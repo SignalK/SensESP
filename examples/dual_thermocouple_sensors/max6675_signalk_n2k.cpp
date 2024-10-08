@@ -53,7 +53,7 @@ void setup() {
                   ->set_hostname("egt-temp")
                   // Optionally, hard-code the WiFi and Signal K server
                   // settings. This is normally not needed.
-                  ->set_wifi("XXXXXXX", "XXXXXXXX")
+                  ->set_wifi_client("XXXXXXX", "XXXXXXXX")
                   //->set_sk_server("XXXXXXXX", 3443)
                   ->get_app();
 
