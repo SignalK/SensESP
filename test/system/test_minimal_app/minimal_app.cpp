@@ -38,6 +38,9 @@ void test_sensesp() {
 void setup() {
   UNITY_BEGIN();
   RUN_TEST(test_sensesp);
+  // Run the same test again to ensure that the app can be torn down and
+  // reinitialized.
+  RUN_TEST(test_sensesp);
   UNITY_END();
 }
 
