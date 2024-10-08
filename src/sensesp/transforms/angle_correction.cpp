@@ -41,25 +41,7 @@ bool AngleCorrection::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const AngleCorrection& obj) {
-  return R"###({
-  "type": "object",
-  "properties": {
-    "offset": {
-      "title": "Constant offset",
-      "description": "Value to be added, in degrees",
-      "type": "number",
-      "displayMultiplier": 0.017453292519943295,
-      "displayOffset": 0
-    },
-    "min_angle": {
-      "title": "Minimum angle value",
-      "description": "Typically 0 or -180.",
-      "type": "number",
-      "displayMultiplier": 0.017453292519943295,
-      "displayOffset": 0
-    }
-  }
-})###";
+  return R"###({"type":"object","properties":{"offset":{"title":"Constant offset","description":"Value to be added, in degrees","type":"number","displayMultiplier":0.017453292519943295,"displayOffset":0},"min_angle":{"title":"Minimum angle value","description":"Typically 0 or -180.","type":"number","displayMultiplier":0.017453292519943295,"displayOffset":0}}})###";
 }
 
 }  // namespace sensesp

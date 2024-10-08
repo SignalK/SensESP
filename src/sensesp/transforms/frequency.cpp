@@ -35,12 +35,7 @@ bool Frequency::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const Frequency& obj) {
-  return R"###({
-    "type": "object",
-    "properties": {
-        "multiplier": { "title": "Multiplier", "type": "number" }
-    }
-  })###";
+  return R"###({"type":"object","properties":{"multiplier":{"title":"Multiplier","type":"number"}}})###";
 }
 
 }  // namespace sensesp

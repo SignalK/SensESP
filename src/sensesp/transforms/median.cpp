@@ -43,12 +43,7 @@ bool Median::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const Median& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "sample_size": { "title": "Sample size", "description": "Number of samples to take before outputing a value", "type": "integer" }
-    }
-  })";
+  return R"({"type":"object","properties":{"sample_size":{"title":"Sample size","description":"Number of samples to take before outputing a value","type":"integer"}}})";
 }
 
 }  // namespace sensesp

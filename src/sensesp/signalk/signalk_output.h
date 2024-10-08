@@ -74,12 +74,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
 
 template <typename T>
 const String ConfigSchema(const SKOutput<T>& obj) {
-  return R"({
-      "type": "object",
-      "properties": {
-          "sk_path": { "title": "Signal K Path", "type": "string" }
-      }
-  })";
+  return R"({"type":"object","properties":{"sk_path":{"title":"Signal K Path","type":"string"}}  })";
 }
 
 template <typename T>

@@ -92,15 +92,7 @@ class SmartSwitchController : public BooleanTransform,
 };
 
 const String ConfigSchema(const SmartSwitchController& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "sync_paths": { "title": "Sync on double click",
-                        "type": "array",
-                        "items": { "type": "string"}
-        }
-    }
-  })";
+  return R"({"type":"object","properties":{"sync_paths":{"title":"Sync on double click","type":"array","items":{"type":"string"}}}  })";
 }
 
 }  // namespace sensesp

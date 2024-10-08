@@ -57,12 +57,7 @@ class Integrator : public Transform<C, P> {
 
 template <typename T>
 const String ConfigSchema(const Integrator<T, T>& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "k": { "title": "Multiplier", "type": "number" }
-    }
-  })";
+  return R"({"type":"object","properties":{"k":{"title":"Multiplier","type":"number"}}})";
 }
 
 typedef Integrator<float, float> FloatIntegrator;

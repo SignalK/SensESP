@@ -25,12 +25,7 @@ class StringConfig : public FileSystemSaveable {
 };
 
 inline const String ConfigSchema(const StringConfig& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "value": { "title": "Value", "type": "string" }
-    }
-  })";
+  return R"({"type":"object","properties":{"value":{"title":"Value","type":"string"}}})";
 }
 
 class NumberConfig : public FileSystemSaveable {
@@ -52,12 +47,7 @@ class NumberConfig : public FileSystemSaveable {
 };
 
 inline const String ConfigSchema(const NumberConfig& obj) {
-  String schema = R"({
-    "type": "object",
-    "properties": {
-        "value": { "title": "{{title}}", "type": "number" }
-    }
-    })";
+  String schema = R"({"type":"object","properties":{"value":{"title":"{{title}}","type":"number"}}})";
   schema.replace("{{title}}", obj.title_);
   return schema.c_str();
 }
@@ -82,12 +72,7 @@ class CheckboxConfig : public FileSystemSaveable {
 };
 
 inline const String ConfigSchema(const CheckboxConfig& obj) {
-  String schema = R"({
-    "type": "object",
-    "properties": {
-        "value": { "title": "{{title}}", "type": "boolean" }
-    }
-    })";
+  String schema = R"({"type":"object","properties":{"value":{"title":"{{title}}","type":"boolean"}}})";
   schema.replace("{{title}}", obj.title_);
   return schema.c_str();
 }
@@ -125,21 +110,8 @@ class SelectConfig : public FileSystemSaveable {
 };
 
 inline const String ConfigSchema(const SelectConfig& obj) {
-  String schema = R"({
-    "type": "object",
-    "properties": {
-        "value": {
-            "title": "{{title}}",
-            "type": "array",
-            "format": "{{format}}",
-            "uniqueItems": true,
-            "items": {
-                "type": "string", "enum": [{{options}}]
-            }
-        }
-    }
-    })";
-  schema.replace("{{title}}", obj.title_);
+  String schema = R"({"type":"object","properties":{"value":{"title":"<<title>>","type":"array","format":"<<format>>","uniqueItems":true,"items":{"type":"string","enum":[<<options>>]}}}})";
+  schema.replace("<<title>>", obj.title_);
   String options;
   for (size_t i = 0; i < obj.options_.size(); i++) {
     options += "\"" + obj.options_[i] + "\"";
@@ -147,7 +119,7 @@ inline const String ConfigSchema(const SelectConfig& obj) {
       options += ",";
     }
   }
-  schema.replace("{{options}}", options);
+  schema.replace("<<options>>", options);
   String format;
   if (obj.format_ == SelectType::kUndefined) {
     format = "undefined";
@@ -156,7 +128,7 @@ inline const String ConfigSchema(const SelectConfig& obj) {
   } else if (obj.format_ == SelectType::kSelect) {
     format = "select";
   }
-  schema.replace("{{format}}", format);
+  schema.replace("<<format>>", format);
   return schema.c_str();
 }
 

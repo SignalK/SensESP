@@ -47,12 +47,7 @@ class Enable : public Transform<T, T> {
 
 template <typename U>
 const String ConfigSchema(const Enable<U>& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-      "enabled": { "type": "boolean", "title": "Enable", "description": "Enable or disable the transform output" }
-    }
-  })";
+  return R"({"type":"object","properties":{"enabled":{"type":"boolean","title":"Enable","description":"Enable or disable the transform output"}}})";
 }
 
 }  // namespace sensesp

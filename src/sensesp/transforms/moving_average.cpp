@@ -60,13 +60,7 @@ bool MovingAverage::from_json(const JsonObject& config) {
   return true;
 }
 const String ConfigSchema(const MovingAverage& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "sample_size": { "title": "Number of samples in average", "type": "integer" },
-        "multiplier": { "title": "Multiplier", "type": "number" }
-    }
-  })";
+  return R"({"type":"object","properties":{"sample_size":{"title":"Number of samples in average","type":"integer"},"multiplier":{"title":"Multiplier","type":"number"}}})";
 }
 
 }  // namespace sensesp

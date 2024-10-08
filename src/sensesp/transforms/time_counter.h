@@ -93,17 +93,7 @@ class TimeCounter : public Transform<T, double> {
 
 template <typename U>
 const String ConfigSchema(TimeCounter<U>& obj) {
-  return R"({
-      "type": "object",
-      "properties": {
-          "duration_s": {
-            "type": "number",
-            "displayMultiplier": 0.0002777777777777778,
-            "title": "Total Duration [hours]"
-          }
-      },
-      "required": ["duration_s"]
-    })";
+  return R"({"type":"object","properties":{"duration_s":{"type":"number","displayMultiplier":0.0002777777777777778,"title":"Total Duration [hours]"}},"required":["duration_s"]})";
 }
 
 }  // namespace sensesp

@@ -122,12 +122,7 @@ class PersistingObservableValue : public ObservableValue<T>,
 
 template <class T>
 const String ConfigSchema(const PersistingObservableValue<T>& obj) {
-  String schema = R"({
-    "type": "object",
-    "properties": {
-        "value": { "title": "Value", "type": "{{type_string}}" }
-    }
-  })";
+  String schema = R"({"type":"object","properties":{"value":{"title":"Value","type":"{{type_string}}"}}})";
   const T value = obj.get();
   schema.replace("{{type_string}}", get_schema_type_string(value));
   return schema;

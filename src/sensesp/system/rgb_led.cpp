@@ -77,13 +77,7 @@ bool RgbLed::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const RgbLed& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "led_on_rgb": { "title": "RGB color for led ON", "type": "integer" },
-        "led_off_rgb": { "title": "RGB color for led OFF", "type": "integer" }
-    }
-  })";
+  return R"({"type":"object","properties":{"led_on_rgb":{"title":"RGB color for led ON","type":"integer"},"led_off_rgb":{"title":"RGB color for led OFF","type":"integer"}}})";
 }
 
 }  // namespace sensesp

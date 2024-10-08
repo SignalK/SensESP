@@ -30,13 +30,7 @@ bool VoltageMultiplier::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const VoltageMultiplier& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "R1": { "title": "R1", "type": "number", "description": "The measured value of resistor R1" },
-        "R2": { "title": "R2", "type": "number", "description": "The measured value of resistor R2" }
-    }
-  })";
+  return R"({"type":"object","properties":{"R1":{"title":"R1","type":"number","description":"The measured value of resistor R1"},"R2":{"title":"R2","type":"number","description":"The measured value of resistor R2"}}})";
 }
 
 }  // namespace sensesp

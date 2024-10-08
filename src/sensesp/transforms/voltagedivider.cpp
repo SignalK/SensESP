@@ -37,13 +37,7 @@ bool VoltageDividerR1::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const VoltageDividerR1& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "Vin": { "title": "Voltage in", "type": "number" },
-        "R2": { "title": "Resistance (ohms) of R2", "type": "number" }
-    }
-  })";
+  return R"({"type":"object","properties":{"Vin":{"title":"Voltage in","type":"number"},"R2":{"title":"Resistance (ohms) of R2","type":"number"}}})";
 }
 
 VoltageDividerR2::VoltageDividerR2(float R1, float Vin,
@@ -81,13 +75,7 @@ bool VoltageDividerR2::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const VoltageDividerR2& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "Vin": { "title": "Voltage in", "type": "number" },
-        "R1": { "title": "Resistance (ohms) of R1", "type": "number" }
-    }
-  })";
+  return R"({"type":"object","properties":{"Vin":{"title":"Voltage in","type":"number"},"R1":{"title":"Resistance (ohms) of R1","type":"number"}}})";
 }
 
 }  // namespace sensesp

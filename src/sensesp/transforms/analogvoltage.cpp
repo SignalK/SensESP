@@ -37,14 +37,7 @@ bool AnalogVoltage::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const AnalogVoltage& obj) {
-  return R"###({
-    "type": "object",
-    "properties": {
-        "max_voltage": { "title": "Max voltage", "type": "number", "description": "The maximum voltage allowed into your ESP's Analog Input pin" },
-        "multiplier": { "title": "Multiplier", "type": "number", "description": "Output will be multiplied by this before sending to SK" },
-        "offset": { "title": "Offset", "type": "number", "description": "This will be added to output before sending to SK" }
-    }
-  })###";
+  return R"###({"type":"object","properties":{"max_voltage":{"title":"Max voltage","type":"number","description":"The maximum voltage allowed into your ESP's Analog Input pin"},"multiplier":{"title":"Multiplier","type":"number","description":"Output will be multiplied by this before sending to SK"},"offset":{"title":"Offset","type":"number","description":"This will be added to output before sending to SK"}}})###";
 }
 
 }  // namespace sensesp

@@ -71,12 +71,7 @@ bool DigitalInputDebounceCounter::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(DigitalInputState& obj) {
-  return R"###({
-    "type": "object",
-    "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
-    }
-  })###";
+  return R"###({"type":"object","properties":{"read_delay":{"title":"Read delay","type":"number","description":"The time, in milliseconds, between each read of the input"}}  })###";
 }
 
 bool ConfigRequiresRestart(const DigitalInputState& obj) {
@@ -84,12 +79,7 @@ bool ConfigRequiresRestart(const DigitalInputState& obj) {
 }
 
 const String ConfigSchema(const DigitalInputCounter& obj) {
-  return R"###({
-    "type": "object",
-    "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
-    }
-  })###";
+  return R"###({"type":"object","properties":{"read_delay":{"title":"Read delay","type":"number","description":"The time, in milliseconds, between each read of the input"}}  })###";
 }
 
 bool ConfigRequiresRestart(const DigitalInputCounter& obj) {
@@ -97,13 +87,7 @@ bool ConfigRequiresRestart(const DigitalInputCounter& obj) {
 }
 
 const String ConfigSchema(const DigitalInputDebounceCounter& obj) {
-  return R"###({
-    "type": "object",
-    "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" },
-        "ignore_interval": { "title": "Ignore interval", "type": "number", "description": "The time, in milliseconds, to ignore events after a recorded event" }
-    }
-  })###";
+  return R"###({"type":"object","properties":{"read_delay":{"title":"Read delay","type":"number","description":"The time, in milliseconds, between each read of the input"},"ignore_interval":{"title":"Ignore interval","type":"number","description":"The time, in milliseconds, to ignore events after a recorded event"}}  })###";
 }
 
 bool ConfigRequiresRestart(const DigitalInputDebounceCounter& obj) {

@@ -171,12 +171,7 @@ class SKPutRequest : public SKPutRequestBase,
 
 template <typename T>
 const String ConfigSchema(const SKPutRequest<T>& obj) {
-  static const char schema[] = R"###({
-    "type": "object",
-      "properties": {
-          "sk_path": { "title": "Signal K Path", "type": "string" }
-      }
-  })###";
+  static const char schema[] = R"###({"type":"object","properties":{"sk_path":{"title":"Signal K Path","type":"string"}}  })###";
   return schema;
 }
 

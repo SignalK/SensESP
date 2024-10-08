@@ -30,12 +30,7 @@ bool SKOutputTime::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const SKOutputTime& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-        "sk_path": { "title": "Signal K Path", "type": "string" }
-    }
-  })";
+  return R"({"type":"object","properties":{"sk_path":{"title":"Signal K Path","type":"string"}}})";
 }
 
 }  // namespace sensesp

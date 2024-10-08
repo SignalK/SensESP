@@ -40,12 +40,7 @@ bool AnalogInput::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(AnalogInput& obj) {
-  return R"###({
-    "type": "object",
-    "properties": {
-        "read_delay": { "title": "Read delay", "type": "number", "description": "Number of milliseconds between each analogRead(A0)" }
-    }
-  })###";
+  return R"###({"type":"object","properties":{"read_delay":{"title":"Read delay","type":"number","description":"Number of milliseconds between each analogRead(A0)"}}  })###";
 }
 
 }  // namespace sensesp

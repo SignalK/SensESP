@@ -68,13 +68,7 @@ bool PressRepeater::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const PressRepeater& obj) {
-  return R"###({
-    "type": "object",
-    "properties": {
-        "repeat_start_interval": { "title": "Start repeating after (ms)", "type": "integer" },
-        "repeat_interval": { "title": "Repeat report interval (ms)", "type": "integer" }
-    }
-    })###";
+  return R"###({"type":"object","properties":{"repeat_start_interval":{"title":"Start repeating after (ms)","type":"integer"},"repeat_interval":{"title":"Repeat report interval (ms)","type":"integer"}}})###";
 }
 
 }  // namespace sensesp

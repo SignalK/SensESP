@@ -172,14 +172,7 @@ bool ClickType::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(const ClickType& obj) {
-  return R"({
-    "type": "object",
-    "properties": {
-      "long_click_delay": { "title": "Long Click Delay", "type": "integer" },
-      "double_click_interval": { "title": "Double Click Interval", "type": "integer" },
-      "ultra_long_click_delay": { "title": "Ultra Long Click Delay", "type": "integer" }
-    }
-  })";
+  return R"({"type":"object","properties":{"long_click_delay":{"title":"Long Click Delay","type":"integer"},"double_click_interval":{"title":"Double Click Interval","type":"integer"},"ultra_long_click_delay":{"title":"Ultra Long Click Delay","type":"integer"}}})";
 }
 
 }  // namespace sensesp

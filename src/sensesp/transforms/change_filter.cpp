@@ -51,14 +51,7 @@ bool ChangeFilter::from_json(const JsonObject& config) {
 }
 
 const String ConfigSchema(ChangeFilter& obj) {
-  return R"###({
-    "type": "object",
-    "properties": {
-        "min_delta": { "title": "Minimum delta", "description": "Minimum difference in change of value before forwarding", "type": "number" },
-        "max_delta": { "title": "Maximum delta", "description": "Maximum difference in change of value to allow forwarding", "type": "number" },
-        "max_skips": { "title": "Max skip count", "description": "Maximum number of consecutive filtered values before one is allowed through", "type": "number" }
-    }
-  })###";
+  return R"###({"type":"object","properties":{"min_delta":{"title":"Minimum delta","description":"Minimum difference in change of value before forwarding","type":"number"},"max_delta":{"title":"Maximum delta","description":"Maximum difference in change of value to allow forwarding","type":"number"},"max_skips":{"title":"Max skip count","description":"Maximum number of consecutive filtered values before one is allowed through","type":"number"}}})###";
 }
 
 }  // namespace sensesp

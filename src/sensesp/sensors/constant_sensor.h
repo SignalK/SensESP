@@ -103,12 +103,7 @@ const String ConfigSchemaSensorType<bool>(const bool& obj) {
 
 template <typename T>
 const String ConfigSchema(const ConstantSensor<T>& obj) {
-  String schema = R"###({
-        "type": "object",
-        "properties": {
-            "value": { "title": "Constant Value", "type": "%TYPE%", "description": "Constant value" }
-        }
-    })###";
+  String schema = R"###({"type":"object","properties":{"value":{"title":"Constant Value","type":"%TYPE%","description":"Constant value"}}    })###";
   ;
   schema.replace("%TYPE%", ConfigSchemaSensorType(obj));
   return schema.c_str();

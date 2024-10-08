@@ -43,12 +43,7 @@ bool SKListener::from_json(const JsonObject &config) {
 void SKListener::set_sk_path(const String &path) { sk_path = path; }
 
 const String ConfigSchema(const SKListener &obj) {
-  return R"({
-      "type": "object",
-      "properties": {
-          "listen_delay": { "title": "Listen delay", "type": "number", "description": "The time, in milliseconds, between each read of the input" }
-      }
-  })";
+  return R"({"type":"object","properties":{"listen_delay":{"title":"Listen delay","type":"number","description":"The time, in milliseconds, between each read of the input"}}  })";
 }
 
 }  // namespace sensesp
