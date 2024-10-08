@@ -14,7 +14,7 @@ void setup() {
 
   SensESPAppBuilder builder;
   sensesp_app = builder.set_hostname("sensesp-hysteresis-example")
-                    ->set_wifi("My WiFi SSID", "my_wifi_password")
+                    ->set_wifi_client("My WiFi SSID", "my_wifi_password")
                     ->set_sk_server("192.168.10.3", 80)
                     ->get_app();
 

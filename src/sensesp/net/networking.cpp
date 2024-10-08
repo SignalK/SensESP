@@ -24,28 +24,38 @@ namespace sensesp {
 // 3. If the hard-coded hostname is changed, use that instead of the saved one.
 //    (But keep using the saved WiFi credentials!)
 
-Networking::Networking(String config_path, String client_ssid,
-                       String client_password)
+Networking::Networking(const String& config_path, const String& client_ssid,
+                       const String& client_password, const String& ap_ssid,
+                       const String& ap_password)
     : FileSystemSaveable{config_path}, Resettable(0) {
   // Get the WiFi state producer singleton and make it update this object output
   wifi_state_producer = WiFiStateProducer::get_singleton();
   wifi_state_producer->connect_to(new LambdaConsumer<WiFiState>(
       [this](WiFiState state) { this->emit(state); }));
 
-  load();
+  bool config_loaded = load();
+
+  if (!config_loaded) {
+    if (ap_ssid != "" && ap_password != "") {
+      this->ap_settings_.enabled_ = true;
+      this->ap_settings_.ssid_ = ap_ssid;
+      this->ap_settings_.password_ = ap_password;
+    } else {
+      this->ap_settings_.enabled_ = false;
+    }
+  }
+
+  if (!config_loaded && client_ssid != "" && client_password != "") {
+    ClientSSIDConfig preset_client_config = {client_ssid, client_password,
+                                             true};
+    client_settings_.push_back(preset_client_config);
+    client_enabled_ = true;
+  }
 
   // Fill in the rest of the client settings array with empty configs
   int num_fill = kMaxNumClientConfigs - client_settings_.size();
   for (int i = 0; i < num_fill; i++) {
     client_settings_.push_back(ClientSSIDConfig());
-  }
-
-  if (client_ssid != "" && client_password != "" &&
-      client_settings_.size() == 0) {
-    ClientSSIDConfig preset_client_config = {client_ssid, client_password,
-                                             true};
-    client_settings_.push_back(preset_client_config);
-    client_enabled_ = true;
   }
 
   ESP_LOGD(__FILENAME__, "Enabling Networking");
@@ -101,6 +111,9 @@ Networking::~Networking() {
     dns_server_->stop();
     delete dns_server_;
   }
+
+  // Stop WiFi
+  WiFi.disconnect(true);
 }
 
 /**

@@ -47,7 +47,7 @@ void setup() {
   // Create the global SensESPApp() object.
   sensesp_app = builder.set_hostname("sk-engine-lights")
                     ->set_sk_server("192.168.10.3", 3000)
-                    ->set_wifi("YOUR_WIFI_SSID", "YOUR_WIFI_PASSWORD")
+                    ->set_wifi_client(client("YOUR_WIFI_SSID", "YOUR_WIFI_PASSWORD")
                     ->get_app();
 
   // Define the SK Path that represents the load this device controls.

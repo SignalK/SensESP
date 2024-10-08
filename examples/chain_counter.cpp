@@ -27,7 +27,7 @@ void setup() {
 
   SensESPAppBuilder builder;
   sensesp_app = builder.set_hostname("ChainCounter")
-                    ->set_wifi("YourSSID", "YourPassword")
+                    ->set_wifi_client("YourSSID", "YourPassword")
                     ->get_app();
 
   uint8_t COUNTER_PIN = 32;
