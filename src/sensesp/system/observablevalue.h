@@ -113,7 +113,7 @@ class PersistingObservableValue : public ObservableValue<T>,
     if (!config["value"].is<T>()) {
       return false;
     }
-    ObservableValue<T>::set(config["value"]);
+    this->output_ = config["value"].as<T>();
     return true;
   }
 
