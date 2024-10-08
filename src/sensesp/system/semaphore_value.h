@@ -12,9 +12,12 @@ namespace sensesp {
  *
  * SemaphoreValue is primarily useful for synchronizing access to a value.
  * It is a regular ValueConsumer that can receive values from a ValueProducer.
- * However, the value is wrapped in a mutex, which can be waited on.
+ * The value is wrapped in a semaphore which can be waited on.
  * This allows a thread to wait until the value is updated, making
  * SemaphoreValue useful for synchronizing threads.
+ *
+ * SemaphoreValue is similar to TaskQueueProducer, but it is not a queue and
+ * does not poll or emit the values.
  *
  */
 template <typename T>
