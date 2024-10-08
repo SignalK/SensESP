@@ -56,7 +56,6 @@ class StreamLineProducer : public ValueProducer<String> {
         // Include the newline character in the output
         buf_[buf_pos++] = c;
         buf_[buf_pos] = '\0';
-        ESP_LOGV("StreamLineProducer", "About to emit line: %s", buf_);
         this->emit(buf_);
         buf_pos = 0;
       } else {
