@@ -152,26 +152,26 @@ class LambdaTransform : public Transform<IN, OUT> {
   void set(const IN& input) override {
     switch (num_params_) {
       case 0:
-        this->output = function0_(input);
+        this->output_ = function0_(input);
         break;
       case 1:
-        this->output = function1_(input, param1_);
+        this->output_ = function1_(input, param1_);
         break;
       case 2:
-        this->output = function2_(input, param1_, param2_);
+        this->output_ = function2_(input, param1_, param2_);
         break;
       case 3:
-        this->output = function3_(input, param1_, param2_, param3_);
+        this->output_ = function3_(input, param1_, param2_, param3_);
         break;
       case 4:
-        this->output = function4_(input, param1_, param2_, param3_, param4_);
+        this->output_ = function4_(input, param1_, param2_, param3_, param4_);
         break;
       case 5:
-        this->output =
+        this->output_ =
             function5_(input, param1_, param2_, param3_, param4_, param5_);
         break;
       case 6:
-        this->output = function6_(input, param1_, param2_, param3_, param4_,
+        this->output_ = function6_(input, param1_, param2_, param3_, param4_,
                                   param5_, param6_);
         break;
       default:

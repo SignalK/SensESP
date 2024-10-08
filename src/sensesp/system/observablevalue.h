@@ -14,12 +14,12 @@ class ObservableValue;
 
 template <class T>
 bool operator==(ObservableValue<T> const& lhs, T const& rhs) {
-  return lhs.output == rhs;
+  return lhs.output_ == rhs;
 }
 
 template <class T>
 bool operator!=(ObservableValue<T> const& lhs, T const& rhs) {
-  return lhs.output != rhs;
+  return lhs.output_ != rhs;
 }
 
 /**
@@ -41,35 +41,35 @@ class ObservableValue : public ValueConsumer<T>, public ValueProducer<T> {
   }
 
   T& operator++() {
-    set(this->output + 1);
-    return this->output;
+    set(this->output_ + 1);
+    return this->output_;
   }
 
   T& operator--() {
-    set(this->output - 1);
-    return this->output;
+    set(this->output_ - 1);
+    return this->output_;
   }
 
   T operator++(int) {
-    T old = this->output;
-    set(this->output + 1);
+    T old = this->output_;
+    set(this->output_ + 1);
     return old;
   }
 
   T operator--(int) {
-    T old = this->output;
-    set(this->output - 1);
+    T old = this->output_;
+    set(this->output_ - 1);
     return old;
   }
 
   const T& operator+=(const T& value) {
-    set(this->output + value);
-    return this->output;
+    set(this->output_ + value);
+    return this->output_;
   }
 
   const T& operator-=(const T& value) {
-    set(this->output - value);
-    return this->output;
+    set(this->output_ - value);
+    return this->output_;
   }
 
  protected:
@@ -96,7 +96,7 @@ class PersistingObservableValue : public ObservableValue<T>,
     load();
 
     // Emit the current state as soon as the event loop starts
-    event_loop()->onDelay(0, [this]() { this->emit(this->output); });
+    event_loop()->onDelay(0, [this]() { this->emit(this->output_); });
   }
 
   virtual void set(const T& value) override {
@@ -105,7 +105,7 @@ class PersistingObservableValue : public ObservableValue<T>,
   }
 
   virtual bool to_json(JsonObject& doc) override {
-    doc["value"] = this->output;
+    doc["value"] = this->output_;
     return true;
   }
 

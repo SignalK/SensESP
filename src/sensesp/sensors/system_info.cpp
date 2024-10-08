@@ -16,7 +16,7 @@ void SystemHz::update() {
     return;
   }
 
-  output = (tick_count_ * 1000) / elapsed_millis_;
+  output_ = (tick_count_ * 1000) / elapsed_millis_;
 
   tick_count_ = 0;
   elapsed_millis_ = 0;

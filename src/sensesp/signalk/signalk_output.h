@@ -42,7 +42,7 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
 
   virtual void as_signalk_json(JsonDocument& doc) override {
     doc["path"] = this->get_sk_path();
-    doc["value"] = ValueProducer<T>::output;
+    doc["value"] = ValueProducer<T>::output_;
   }
 
   virtual bool to_json(JsonObject& root) override {
@@ -93,7 +93,7 @@ class SKOutputRawJson : public SKOutput<String> {
 
   virtual void as_signalk_json(JsonDocument& doc) override {
     doc["path"] = this->get_sk_path();
-    doc["value"] = serialized(ValueProducer<String>::output);
+    doc["value"] = serialized(ValueProducer<String>::output_);
   }
 };
 

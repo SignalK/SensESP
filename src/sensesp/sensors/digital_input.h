@@ -99,7 +99,7 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
 
     event_loop()->onRepeat(read_delay_, [this]() {
       noInterrupts();
-      output = counter_;
+      output_ = counter_;
       counter_ = 0;
       interrupts();
       notify();
@@ -206,19 +206,19 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
         interrupt_type_{interrupt_type},
         triggered_{true} {
     load();
-    output = (bool)digitalRead(pin_);
-    last_output_ = !output;  // ensure that we always send the first output
+    output_ = (bool)digitalRead(pin_);
+    last_output_ = !output_;  // ensure that we always send the first output_
 
     event_loop()->onInterrupt(pin_, interrupt_type_, [this]() {
-      output = (bool)digitalRead(pin_);
+      output_ = (bool)digitalRead(pin_);
       triggered_ = true;
     });
 
     event_loop()->onTick([this]() {
-      if (triggered_ && (output != last_output_)) {
+      if (triggered_ && (output_ != last_output_)) {
         noInterrupts();
         triggered_ = false;
-        last_output_ = output;
+        last_output_ = output_;
         interrupts();
         notify();
       }

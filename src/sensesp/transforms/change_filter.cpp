@@ -20,7 +20,7 @@ ChangeFilter::ChangeFilter(float min_delta, float max_delta, int max_skips,
 }
 
 void ChangeFilter::set(const float& new_value) {
-  float delta = absf(new_value - output);
+  float delta = absf(new_value - output_);
   if ((delta >= min_delta_ && delta <= max_delta_) || skips_ > max_skips_) {
     skips_ = 0;
     this->emit(new_value);

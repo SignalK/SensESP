@@ -74,21 +74,21 @@ class SmartSwitchController : public BooleanTransform,
   /// Used to store configuration internally.
   class SyncPath {
    public:
-    String sk_sync_path;
-    BoolSKPutRequest* put_request;
+    BoolSKPutRequest* put_request_;
+    String sk_sync_path_;
 
     SyncPath();
     SyncPath(String sk_sync_path);
 
     friend bool operator<(const SyncPath& lhs, const SyncPath& rhs) {
-      return lhs.sk_sync_path < rhs.sk_sync_path;
+      return lhs.sk_sync_path_ < rhs.sk_sync_path_;
     }
   };
 
  protected:
-  bool is_on = false;
+  bool is_on_ = false;
   bool auto_initialize_;
-  std::set<SyncPath> sync_paths;
+  std::set<SyncPath> sync_paths_;
 };
 
 const String ConfigSchema(const SmartSwitchController& obj) {

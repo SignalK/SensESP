@@ -172,7 +172,7 @@ class RepeatConstantRate : public RepeatExpiring<T> {
   }
 
   void set(T input) override {
-    this->output = input;
+    this->output_ = input;
     this->age_ = 0;
   }
 };

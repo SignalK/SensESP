@@ -51,7 +51,7 @@ class AnalogInput : public FloatSensor {
   uint8_t pin{};
   unsigned int read_delay;
   float output_scale;
-  BaseAnalogReader* analog_reader{};
+  BaseAnalogReader* analog_reader_;
   void update();
 };
 

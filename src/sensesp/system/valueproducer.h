@@ -24,12 +24,12 @@ template <typename T>
 class ValueProducer : virtual public Observable {
  public:
   ValueProducer() {}
-  ValueProducer(const T& initial_value) : output(initial_value) {}
+  ValueProducer(const T& initial_value) : output_(initial_value) {}
 
   /**
    * Returns the current value of this producer
    */
-  virtual const T& get() const { return output; }
+  virtual const T& get() const { return output_; }
 
   /**
    * Connects this producer to the specified consumer, registering that
@@ -110,7 +110,7 @@ class ValueProducer : virtual public Observable {
    * Set a new output value and notify consumers about it
    */
   void emit(const T& new_value) {
-    this->output = new_value;
+    this->output_ = new_value;
     Observable::notify();
   }
 
@@ -119,7 +119,7 @@ class ValueProducer : virtual public Observable {
    * The current value of this producer is stored here in this output member
    * (unless descendant classes override ValueProducer::get())
    */
-  T output;
+  T output_;
 };
 
 typedef ValueProducer<float> FloatProducer;
