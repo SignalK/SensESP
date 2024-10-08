@@ -74,8 +74,8 @@ esp_err_t HTTPServer::dispatch_request(httpd_req_t* req) {
 
   if (auth_required) {
     bool success;
-    success =
-        authenticate_request(authenticator_, call_request_dispatcher, req);
+    success = authenticate_request(authenticator_.get(),
+                                   call_request_dispatcher, req);
     if (!success) {
       // Authentication failed; do not continue but return success.
       // The client already received a 401 response.

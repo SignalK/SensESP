@@ -6,9 +6,9 @@
 #include <WiFi.h>
 
 #include "sensesp/net/wifi_state.h"
-#include "sensesp/system/serializable.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/resettable.h"
+#include "sensesp/system/serializable.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp_base_app.h"
 
@@ -97,8 +97,6 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
     ESP_LOGI(__FILENAME__, "Disconnected from wifi.");
     this->emit(WiFiState::kWifiDisconnected);
   }
-
-  static WiFiStateProducer* instance_;
 };
 
 /**
@@ -241,6 +239,8 @@ class Networking : virtual public FileSystemSaveable,
  public:
   Networking(String config_path, String client_ssid = "",
              String client_password = "");
+  ~Networking();
+
   virtual void reset() override;
 
   virtual bool to_json(JsonObject& doc) override;

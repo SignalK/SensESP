@@ -1,6 +1,7 @@
 #ifndef SENSESP_SENSORS_SYSTEM_INFO_H_
 #define SENSESP_SENSORS_SYSTEM_INFO_H_
 
+#include <memory>
 #include <Arduino.h>
 #include <elapsedMillis.h>
 
@@ -19,7 +20,7 @@ void connect_system_info_sensor(ValueProducer<T>* sensor, String prefix, String 
   String hostname = hostname_obs->get();
   String path = prefix + hostname + "." + name;
 
-  auto* sk_output = new SKOutput<T>(path);
+  auto sk_output = std::make_shared<SKOutput<T>>(path);
 
   // connect an observer to hostname to change the output path
   // if the hostname is changed

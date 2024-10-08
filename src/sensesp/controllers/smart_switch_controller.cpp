@@ -95,7 +95,7 @@ SmartSwitchController::SyncPath::SyncPath() {}
 SmartSwitchController::SyncPath::SyncPath(String sk_sync_path)
     : sk_sync_path_{sk_sync_path} {
   ESP_LOGD(__FILENAME__, "DoubleClick will also sync %s", sk_sync_path.c_str());
-  this->put_request_ = new BoolSKPutRequest(sk_sync_path, "", false);
+  this->put_request_ = std::make_shared<BoolSKPutRequest>(sk_sync_path, "", false);
 }
 
 }  // namespace sensesp

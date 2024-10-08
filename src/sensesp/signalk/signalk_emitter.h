@@ -42,7 +42,7 @@ class SKEmitter : virtual public Observable {
    * returned.
    * @see add_metadata()
    */
-  virtual SKMetadata* get_metadata() { return NULL; }
+  virtual SKMetadata* get_metadata() { return nullptr; }
 
   /**
    * Adds this emitter's Signal K meta data to the specified

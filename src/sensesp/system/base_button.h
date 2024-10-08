@@ -1,6 +1,7 @@
 #ifndef SENSESP_SRC_SENSESP_SYSTEM_BASE_BUTTON_H_
 #define SENSESP_SRC_SENSESP_SYSTEM_BASE_BUTTON_H_
 
+#include <memory>
 #include "sensesp.h"
 
 #include "AceButton.h"
@@ -20,7 +21,7 @@ using namespace ace_button;
 class BaseButtonHandler : public IEventHandler {
  public:
   BaseButtonHandler(int pin, String config_path = "") {
-    button_ = new AceButton(pin);
+    button_ = std::unique_ptr<AceButton>(new AceButton(pin));
     pinMode(pin, INPUT_PULLUP);
 
     ButtonConfig* button_config = button_->getButtonConfig();
@@ -35,7 +36,7 @@ class BaseButtonHandler : public IEventHandler {
   }
 
  protected:
-  AceButton* button_;
+  std::unique_ptr<AceButton> button_;
 };
 
 }  // namespace sensesp

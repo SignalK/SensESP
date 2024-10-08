@@ -1,8 +1,10 @@
 #ifndef SENSESP_SIGNALK_SIGNALK_OUTPUT_H_
 #define SENSESP_SIGNALK_SIGNALK_OUTPUT_H_
 
-#include "sensesp/ui/config_item.h"
+#include <memory>
+
 #include "sensesp/transforms/transform.h"
+#include "sensesp/ui/config_item.h"
 #include "signalk_emitter.h"
 
 namespace sensesp {
@@ -29,7 +31,10 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    * metadata to report (or if the path is already an official part of the
    * Signal K specification)
    */
-  SKOutput(String sk_path, String config_path = "", SKMetadata* meta = NULL)
+  SKOutput(String sk_path, String config_path = "", SKMetadata* meta = nullptr)
+      : SKOutput(sk_path, config_path, std::make_shared<SKMetadata>(*meta)) {}
+
+  SKOutput(String sk_path, String config_path, std::shared_ptr<SKMetadata> meta)
       : SKEmitter(sk_path), SymmetricTransform<T>(config_path), meta_{meta} {
     this->load();
   }
@@ -64,12 +69,14 @@ class SKOutput : public SKEmitter, public SymmetricTransform<T> {
    * method of setting the metadata (the first being a parameter
    * to the constructor).
    */
-  virtual void set_metadata(SKMetadata* meta) { this->meta_ = meta; }
+  virtual void set_metadata(SKMetadata* meta) {
+    this->meta_ = std::make_shared<SKMetadata>(*meta);
+  }
 
-  virtual SKMetadata* get_metadata() override { return meta_; }
+  virtual SKMetadata* get_metadata() override { return meta_.get(); }
 
  protected:
-  SKMetadata* meta_;
+  std::shared_ptr<SKMetadata> meta_;
 };
 
 template <typename T>

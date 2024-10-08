@@ -2,6 +2,7 @@
 #define SENSESP_SYSTEM_VALUE_PRODUCER_H_
 
 #include <ArduinoJson.h>
+#include <memory>
 
 #include "observable.h"
 #include "valueconsumer.h"
@@ -38,6 +39,9 @@ class ValueProducer : virtual public Observable {
   void connect_to(ValueConsumer<T>* consumer) {
     this->attach([this, consumer]() { consumer->set(this->get()); });
   }
+  void connect_to(std::shared_ptr<ValueConsumer<T>> consumer) {
+    this->attach([this, consumer]() { consumer->set(this->get()); });
+  }
   void connect_to(ValueConsumer<T>& consumer) {
     this->attach([this, consumer]() { consumer.set(this->get()); });
   }
@@ -56,6 +60,11 @@ class ValueProducer : virtual public Observable {
     this->attach([this, consumer]() { consumer->set(CT(this->get())); });
   }
   template <typename CT>
+  void connect_to(std::shared_ptr<ValueConsumer<CT>> consumer) const {
+    this->attach([this, consumer]() { consumer->set(CT(this->get())); });
+  }
+
+  template <typename CT>
   void connect_to(ValueConsumer<CT>& consumer) {
     this->attach([this, consumer]() { consumer.set(CT(this->get())); });
   }
@@ -72,6 +81,14 @@ class ValueProducer : virtual public Observable {
       consumer_producer->set(T(this->get()));
     });
     return consumer_producer;
+  }
+  template <typename T2>
+  Transform<T, T2>* connect_to(
+      std::shared_ptr<Transform<T, T2>> consumer_producer) {
+    this->attach([this, consumer_producer]() {
+      consumer_producer->set(T(this->get()));
+    });
+    return consumer_producer.get();
   }
   template <typename T2>
   Transform<T, T2>* connect_to(Transform<T, T2>& consumer_producer) {
@@ -97,6 +114,14 @@ class ValueProducer : virtual public Observable {
       consumer_producer->set(TT(this->get()));
     });
     return consumer_producer;
+  }
+  template <typename TT, typename T2>
+  Transform<TT, T2>* connect_to(
+      std::shared_ptr<Transform<TT, T2>> consumer_producer) {
+    this->attach([this, consumer_producer]() {
+      consumer_producer->set(TT(this->get()));
+    });
+    return consumer_producer.get();
   }
   template <typename TT, typename T2>
   Transform<TT, T2>* connect_to(Transform<TT, T2>& consumer_producer) {

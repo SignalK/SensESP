@@ -11,6 +11,17 @@
 
 namespace sensesp {
 
+SensESPApp::~SensESPApp() {
+  delete networking_;
+  delete ota_;
+  delete ws_client_;
+  delete mdns_discovery_;
+  delete http_server_;
+  delete sk_delta_queue_;
+  delete system_status_led_;
+  delete button_handler_;
+}
+
 SensESPApp* SensESPApp::get() {
   if (instance_ == nullptr) {
     instance_ = new SensESPApp();
@@ -91,26 +102,26 @@ void SensESPApp::setup() {
 }
 
 void SensESPApp::connect_status_page_items() {
-  this->hostname_->connect_to(this->hostname_ui_output_);
+  this->hostname_->connect_to(&this->hostname_ui_output_);
   this->event_loop_.onRepeat(
-      4999, [this]() { wifi_ssid_ui_output_->set(WiFi.SSID()); });
+      4999, [this]() { wifi_ssid_ui_output_.set(WiFi.SSID()); });
   this->event_loop_.onRepeat(
-      4998, [this]() { free_memory_ui_output_->set(ESP.getFreeHeap()); });
+      4998, [this]() { free_memory_ui_output_.set(ESP.getFreeHeap()); });
   this->event_loop_.onRepeat(
-      4997, [this]() { wifi_rssi_ui_output_->set(WiFi.RSSI()); });
+      4997, [this]() { wifi_rssi_ui_output_.set(WiFi.RSSI()); });
   this->event_loop_.onRepeat(4996, [this]() {
-    sk_server_address_ui_output_->set(ws_client_->get_server_address());
+    sk_server_address_ui_output_.set(ws_client_->get_server_address());
   });
   this->event_loop_.onRepeat(4995, [this]() {
-    sk_server_port_ui_output_->set(ws_client_->get_server_port());
+    sk_server_port_ui_output_.set(ws_client_->get_server_port());
   });
   this->event_loop_.onRepeat(4994, [this]() {
-    sk_server_connection_ui_output_->set(ws_client_->get_connection_status());
+    sk_server_connection_ui_output_.set(ws_client_->get_connection_status());
   });
   ws_client_->get_delta_tx_count_producer().connect_to(
-      delta_tx_count_ui_output_);
+      &delta_tx_count_ui_output_);
   ws_client_->get_delta_rx_count_producer().connect_to(
-      delta_rx_count_ui_output_);
+      &delta_rx_count_ui_output_);
 }
 
 ObservableValue<String>* SensESPApp::get_hostname_observable() {

@@ -7,6 +7,7 @@
 #include <esp_http_server.h>
 #include <functional>
 #include <list>
+#include <memory>
 
 #include "WiFi.h"
 #include "sensesp/net/http_authenticator.h"
@@ -61,8 +62,7 @@ class HTTPServer : virtual public FileSystemSaveable {
  public:
   HTTPServer(int port = HTTP_DEFAULT_PORT,
              const String& config_path = "/system/httpserver")
-      : FileSystemSaveable(config_path),
-      config_(HTTPD_DEFAULT_CONFIG()) {
+      : FileSystemSaveable(config_path), config_(HTTPD_DEFAULT_CONFIG()) {
     config_.server_port = port;
     config_.stack_size = HTTP_SERVER_STACK_SIZE;
     config_.max_uri_handlers = 20;
@@ -70,8 +70,8 @@ class HTTPServer : virtual public FileSystemSaveable {
     String auth_realm_ = "Login required for " + SensESPBaseApp::get_hostname();
     load();
     if (auth_required_) {
-      authenticator_ =
-          new HTTPDigestAuthenticator(username_, password_, auth_realm_);
+      authenticator_ = std::unique_ptr<HTTPDigestAuthenticator>(
+          new HTTPDigestAuthenticator(username_, password_, auth_realm_));
     }
     if (singleton_ == nullptr) {
       singleton_ = this;
@@ -111,7 +111,11 @@ class HTTPServer : virtual public FileSystemSaveable {
       MDNS.addService("http", "tcp", 80);
     });
   };
-  ~HTTPServer() {}
+  ~HTTPServer() {
+    if (singleton_ == this) {
+      singleton_ = nullptr;
+    }
+  }
 
   void stop() { httpd_stop(server_); }
 
@@ -148,6 +152,10 @@ class HTTPServer : virtual public FileSystemSaveable {
   }
 
   void add_handler(HTTPRequestHandler* handler) {
+    handlers_.push_back(std::make_shared<HTTPRequestHandler>(*handler));
+  }
+
+  void add_handler(std::shared_ptr<HTTPRequestHandler> handler) {
     handlers_.push_back(handler);
   }
 
@@ -160,7 +168,7 @@ class HTTPServer : virtual public FileSystemSaveable {
   String username_;
   String password_;
   bool auth_required_ = false;
-  HTTPAuthenticator* authenticator_ = nullptr;
+  std::unique_ptr<HTTPAuthenticator> authenticator_;
 
   bool authenticate_request(HTTPAuthenticator* auth,
                             std::function<esp_err_t(httpd_req_t*)> handler,
@@ -184,7 +192,7 @@ class HTTPServer : virtual public FileSystemSaveable {
    */
   bool handle_captive_portal(httpd_req_t* req);
 
-  std::list<HTTPRequestHandler*> handlers_;
+  std::list<std::shared_ptr<HTTPRequestHandler>> handlers_;
 
   friend esp_err_t call_request_dispatcher(httpd_req_t* req);
 };
