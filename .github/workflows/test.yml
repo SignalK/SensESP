@@ -1,6 +1,6 @@
 name: SensESP Automatic Build
 
-on: [pull_request]
+on: [push]
 
 jobs:
   build:
