@@ -6,8 +6,8 @@
 #include <WiFi.h>
 #include <esp_websocket_client.h>
 #include <functional>
-#include <set>
 #include <list>
+#include <set>
 
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/system/observablevalue.h"
@@ -103,10 +103,8 @@ class SKWSClient : public FileSystemSaveable,
   bool server_detected_ = false;
   bool token_test_success_ = false;
 
-  TaskQueueProducer<SKWSConnectionState> connection_state_ =
-      TaskQueueProducer<SKWSConnectionState>(
-          SKWSConnectionState::kSKWSDisconnected,
-          event_loop());
+  TaskQueueProducer<SKWSConnectionState> connection_state_{
+      SKWSConnectionState::kSKWSDisconnected, event_loop()};
 
   /// task_connection_state is used to track the internal task state which might
   /// be out of sync with the published connection state.
@@ -117,8 +115,7 @@ class SKWSClient : public FileSystemSaveable,
   esp_websocket_client_handle_t client_{};
   SKDeltaQueue* sk_delta_queue_;
   /// @brief Emits the number of deltas sent since last report
-  TaskQueueProducer<int> delta_tx_tick_producer_ =
-      TaskQueueProducer<int>(0, event_loop(), 990);
+  TaskQueueProducer<int> delta_tx_tick_producer_{0, event_loop(), 990};
   Integrator<int, int> delta_tx_count_producer_{1, 0, ""};
   Integrator<int, int> delta_rx_count_producer_{1, 0, ""};
 
@@ -165,9 +162,7 @@ class SKWSClient : public FileSystemSaveable,
   SKWSConnectionState get_connection_state() { return task_connection_state_; }
 };
 
-inline bool ConfigRequiresRestart(const SKWSClient& obj) {
-  return true;
-}
+inline bool ConfigRequiresRestart(const SKWSClient& obj) { return true; }
 
 }  // namespace sensesp
 
