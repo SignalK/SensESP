@@ -45,12 +45,12 @@ class Saveable {
    */
   virtual bool save() { return false; }
   /**
-   * @brief Remove the object from a persistent storage.
+   * @brief Delete the data from a persistent storage.
    *
    * @return true
    * @return false
    */
-  virtual bool remove() { return false; }
+  virtual bool clear() { return false; }
 
   const String& get_config_path() const { return config_path_; }
 
@@ -64,7 +64,7 @@ class FileSystemSaveable : public Saveable, virtual public Serializable {
 
   virtual bool load() override;
   virtual bool save() override;
-  virtual bool remove() override;
+  virtual bool clear() override;
 
   bool find_config_file(const String& config_path, String& filename);
 };
