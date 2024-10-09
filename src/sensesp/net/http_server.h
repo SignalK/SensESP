@@ -58,7 +58,7 @@ class HTTPRequestHandler {
  * @brief HTTP server class wrapping the esp-idf http server.
  *
  */
-class HTTPServer : virtual public FileSystemSaveable {
+class HTTPServer : public FileSystemSaveable {
  public:
   HTTPServer(int port = HTTP_DEFAULT_PORT,
              const String& config_path = "/system/httpserver")

@@ -90,8 +90,7 @@ SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
       [this]() { this->emit(this->connection_state_.get()); });
 
   // process any received updates in the main task
-  event_loop()->onRepeat(
-      1, [this]() { this->process_received_updates(); });
+  event_loop()->onRepeat(1, [this]() { this->process_received_updates(); });
 
   // set the singleton object pointer
   ws_client = this;

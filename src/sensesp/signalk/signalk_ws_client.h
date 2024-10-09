@@ -31,7 +31,7 @@ enum class SKWSConnectionState {
  * @brief The websocket connection to the Signal K server.
  * @see SensESPApp
  */
-class SKWSClient : virtual public FileSystemSaveable,
+class SKWSClient : public FileSystemSaveable,
                    virtual public ValueProducer<SKWSConnectionState> {
  public:
   /////////////////////////////////////////////////////////

@@ -78,9 +78,9 @@ class SensESPBaseApp {
 
   void set_instance(SensESPBaseApp* instance) { instance_ = instance; }
 
-  PersistingObservableValue<String>* hostname_;
+  std::shared_ptr<PersistingObservableValue<String>> hostname_;
 
-  Filesystem* filesystem_;
+  std::shared_ptr<Filesystem> filesystem_;
 
   const SensESPBaseApp* set_hostname(String hostname) {
     hostname_->set(hostname);

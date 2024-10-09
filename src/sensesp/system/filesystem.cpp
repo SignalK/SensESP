@@ -11,6 +11,7 @@ Filesystem::Filesystem() : Resettable(-100) {
     ESP_LOGE(__FILENAME__, "FATAL: Filesystem initialization failed.");
     ESP.restart();
   }
+  ESP_LOGI(__FILENAME__, "Filesystem initialized");
 }
 
 Filesystem::~Filesystem() {

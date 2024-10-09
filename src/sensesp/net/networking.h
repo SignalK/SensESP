@@ -233,7 +233,7 @@ class WiFiNetworkInfo {
 /**
  * @brief Manages the ESP's connection to the Wifi network.
  */
-class Networking : virtual public FileSystemSaveable,
+class Networking : public FileSystemSaveable,
                    public Resettable,
                    public ValueProducer<WiFiState> {
  public:

@@ -124,10 +124,6 @@ void SensESPApp::connect_status_page_items() {
       &delta_rx_count_ui_output_);
 }
 
-ObservableValue<String>* SensESPApp::get_hostname_observable() {
-  return hostname_;
-}
-
 SensESPApp* sensesp_app;
 
 }  // namespace sensesp

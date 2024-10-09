@@ -18,19 +18,17 @@ void SetupLogging(esp_log_level_t default_level) {
 
 SensESPBaseApp* SensESPBaseApp::instance_ = nullptr;
 
-SensESPBaseApp::SensESPBaseApp() : filesystem_(new Filesystem()) {
+SensESPBaseApp::SensESPBaseApp() : filesystem_{std::make_shared<Filesystem>()} {
   instance_ = this;
-  hostname_ = new PersistingObservableValue<String>(kDefaultHostname,
-                                                    "/system/hostname");
+
+  hostname_ = std::make_shared<PersistingObservableValue<String>>(
+      kDefaultHostname, "/system/hostname");
+
+
   ConfigItem(hostname_);  // Make hostname configurable
 }
 
-SensESPBaseApp::~SensESPBaseApp() {
-  delete filesystem_;
-  delete hostname_;
-
-  instance_ = nullptr;
-}
+SensESPBaseApp::~SensESPBaseApp() { instance_ = nullptr; }
 
 /**
  * Get the singleton SensESPBaseApp singleton instance.
@@ -73,7 +71,7 @@ void SensESPBaseApp::reset() {
 }
 
 ObservableValue<String>* SensESPBaseApp::get_hostname_observable() {
-  return hostname_;
+  return hostname_.get();
 }
 
 /**

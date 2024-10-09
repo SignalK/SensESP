@@ -89,7 +89,7 @@ class ObservableValue : public ValueConsumer<T>, public ValueProducer<T> {
  */
 template <class T>
 class PersistingObservableValue : public ObservableValue<T>,
-                                  virtual public FileSystemSaveable {
+                                  public FileSystemSaveable {
  public:
   PersistingObservableValue(const T& value, String config_path = "")
       : ObservableValue<T>(value), FileSystemSaveable(config_path) {

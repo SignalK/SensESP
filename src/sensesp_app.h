@@ -51,8 +51,6 @@ class SensESPApp : public SensESPBaseApp {
    */
   static SensESPApp* get();
 
-  ObservableValue<String>* get_hostname_observable();
-
   // getters for internal members
   SKDeltaQueue* get_sk_delta() { return this->sk_delta_queue_; }
   SystemStatusController* get_system_status_controller() {
