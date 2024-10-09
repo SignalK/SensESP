@@ -6,6 +6,7 @@
 #include <WiFi.h>
 
 #include "sensesp/net/wifi_state.h"
+#include "sensesp/system/lambda_consumer.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/resettable.h"
 #include "sensesp/system/serializable.h"
@@ -27,22 +28,6 @@ constexpr int kMaxNumClientConfigs = 3;
  */
 class WiFiStateProducer : public ValueProducer<WiFiState> {
  public:
-  /**
-   * Singletons should not be cloneable
-   */
-  WiFiStateProducer(WiFiStateProducer& other) = delete;
-
-  /**
-   * Singletons should not be assignable
-   */
-  void operator=(const WiFiStateProducer&) = delete;
-
-  /**
-   * @brief Get the singleton instance of the WiFiStateProducer
-   */
-  static WiFiStateProducer* get_singleton();
-
- protected:
   WiFiStateProducer() {
     this->output_ = WiFiState::kWifiNoAP;
 
@@ -52,21 +37,44 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
     event_loop()->onDelay(0, [this]() { this->emit(this->output_); });
   }
 
+  ~WiFiStateProducer() { remove_wifi_callbacks(); }
+
+  WiFiStateProducer(WiFiStateProducer& other) = delete;
+  void operator=(const WiFiStateProducer&) = delete;
+
+ protected:
+  wifi_event_id_t wifi_sta_got_ip_event_id_;
+  wifi_event_id_t wifi_ap_start_event_id_;
+  wifi_event_id_t wifi_sta_disconnected_event_id_;
+  wifi_event_id_t wifi_ap_stop_event_id_;
+
   void setup_wifi_callbacks() {
-    WiFi.onEvent(
+    wifi_sta_got_ip_event_id_ = WiFi.onEvent(
         [this](WiFiEvent_t event, WiFiEventInfo_t info) {
           this->wifi_station_connected();
         },
         WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_GOT_IP);
-    WiFi.onEvent([this](WiFiEvent_t event,
-                        WiFiEventInfo_t info) { this->wifi_ap_enabled(); },
-                 WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_START);
-    WiFi.onEvent([this](WiFiEvent_t event,
-                        WiFiEventInfo_t info) { this->wifi_disconnected(); },
-                 WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_DISCONNECTED);
-    WiFi.onEvent([this](WiFiEvent_t event,
-                        WiFiEventInfo_t info) { this->wifi_disconnected(); },
-                 WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_STOP);
+    wifi_ap_start_event_id_ =
+        WiFi.onEvent([this](WiFiEvent_t event,
+                            WiFiEventInfo_t info) { this->wifi_ap_enabled(); },
+                     WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_START);
+    wifi_sta_disconnected_event_id_ = WiFi.onEvent(
+        [this](WiFiEvent_t event, WiFiEventInfo_t info) {
+          this->wifi_disconnected();
+        },
+        WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_DISCONNECTED);
+    wifi_ap_stop_event_id_ = WiFi.onEvent(
+        [this](WiFiEvent_t event, WiFiEventInfo_t info) {
+          this->wifi_disconnected();
+        },
+        WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_STOP);
+  }
+
+  void remove_wifi_callbacks() {
+    WiFi.removeEvent(wifi_sta_got_ip_event_id_);
+    WiFi.removeEvent(wifi_ap_start_event_id_);
+    WiFi.removeEvent(wifi_sta_disconnected_event_id_);
+    WiFi.removeEvent(wifi_ap_stop_event_id_);
   }
 
   void wifi_station_connected() {
@@ -254,26 +262,26 @@ class Networking : public FileSystemSaveable,
     return ap_settings_.captive_portal_enabled_;
   }
 
+  const std::shared_ptr<WiFiStateProducer>& get_wifi_state_producer() {
+    return wifi_state_producer_;
+  }
+
  protected:
   void start_access_point();
   void start_client_autoconnect();
 
-  // callbacks
-
-  void wifi_station_connected();
-  void wifi_ap_enabled();
-  void wifi_disconnected();
-
- protected:
   AccessPointSettings ap_settings_;
 
   bool client_enabled_ = false;
   std::vector<ClientSSIDConfig> client_settings_;
 
-  DNSServer* dns_server_ = nullptr;
+  std::unique_ptr<DNSServer> dns_server_;
 
-  WiFiStateProducer* wifi_state_producer;
+  std::shared_ptr<WiFiStateProducer> wifi_state_producer_{new WiFiStateProducer()};
+
+  std::shared_ptr<LambdaConsumer<WiFiState>> wifi_state_emitter_;
 };
+
 
 inline bool ConfigRequiresRestart(const Networking& obj) { return true; }
 
