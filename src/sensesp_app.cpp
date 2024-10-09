@@ -77,8 +77,10 @@ void SensESPApp::setup() {
   ConfigItem(this->ws_client_);
 
   // connect the system status controller
-  WiFiStateProducer::get_singleton()->connect_to(&system_status_controller_);
-  this->ws_client_->connect_to(&system_status_controller_);
+  this->networking_->get_wifi_state_producer()->connect_to(
+      &system_status_controller_.get_wifi_state_consumer());
+  this->ws_client_->connect_to(
+      &system_status_controller_.get_ws_connection_state_consumer());
 
   // create the MDNS discovery object
   mdns_discovery_ = new MDNSDiscovery();
@@ -88,9 +90,9 @@ void SensESPApp::setup() {
   if (system_status_led_ == NULL) {
     system_status_led_ = new SystemStatusLed(LED_PIN);
   }
-  this->system_status_controller_.connect_to(system_status_led_);
+  this->system_status_controller_.connect_to(system_status_led_->get_system_status_consumer());
   this->ws_client_->get_delta_tx_count_producer().connect_to(
-      system_status_led_);
+      system_status_led_->get_delta_tx_count_consumer());
 
   // create the button handler
   if (button_gpio_pin_ != -1) {

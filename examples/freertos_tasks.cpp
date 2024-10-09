@@ -57,11 +57,13 @@ void setup() {
 
   // create a system status controller and a led blinker
 
-  auto *system_status_controller = new SystemStatusController();
-  auto *system_status_led = new SystemStatusLed(LED_BUILTIN);
+  auto system_status_controller = new SystemStatusController();
+  auto system_status_led = new SystemStatusLed(LED_BUILTIN);
 
-  system_status_controller->connect_to(system_status_led);
-  ws_client_->get_delta_tx_count_producer().connect_to(system_status_led);
+  system_status_controller->connect_to(
+      system_status_led->get_system_status_consumer());
+  ws_client_->get_delta_tx_count_producer().connect_to(
+      system_status_led->get_delta_tx_count_consumer());
 
   // create a new task for toggling the output pin
 
