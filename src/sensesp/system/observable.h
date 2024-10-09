@@ -18,10 +18,23 @@ class Observable {
   Observable() {}
 
   /// Move constructor
-  Observable(Observable&& other);
+  Observable(Observable&& other) : observers_{other.observers_} {}
 
-  void notify();
-  void attach(std::function<void()> observer);
+  void notify() {
+    for (auto o : observers_) {
+      o();
+    }
+  }
+
+  void attach(std::function<void()> observer) {
+    // First iterate to the last element
+    auto before_end = observers_.before_begin();
+    for (auto& _ : observers_) {
+      ++before_end;
+    }
+    // Then insert the new observer
+    observers_.insert_after(before_end, observer);
+  }
 
  private:
   std::forward_list<std::function<void()> > observers_;
