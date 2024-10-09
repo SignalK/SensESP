@@ -138,9 +138,14 @@ void test_persisting_observable_value_schema() {
   SensESPMinimalApp* sensesp_app = builder.get_app();
   TEST_ASSERT_NOT_NULL(sensesp_app);
 
+  ESP_LOGD("test_persisting_observable_value_schema", "about to create object");
+
+
   PersistingObservableValue<int> value{2, "/test"};
 
-  auto config_item = ConfigItem(&value);
+  ESP_LOGD("test_persisting_observable_value_schema", "object created");
+
+  auto config_item = ConfigItem(value);
 
   String ref_schema =
       R"###({"type":"object","properties":{"value":{"title":"Value","type":"number"}}})###";
@@ -205,15 +210,14 @@ class Networking_ : public Networking {
   Networking_(const String& config_path, const String& client_ssid,
               const String& client_password, const String& ap_ssid,
               const String& ap_password)
-      : FileSystemSaveable{config_path},
-        Networking(config_path, client_ssid, client_password, ap_ssid,
+      : Networking(config_path, client_ssid, client_password, ap_ssid,
                    ap_password) {}
 
  protected:
-  friend void test_networking();
+  friend void test_save_networking();
 };
 
-void test_networking() {
+void test_save_networking() {
   SensESPMinimalAppBuilder builder;
   SensESPMinimalApp* sensesp_app = builder.get_app();
   TEST_ASSERT_NOT_NULL(sensesp_app);
@@ -257,7 +261,9 @@ void setup() {
 
   RUN_TEST(test_persisting_observable_value_schema);
 
-  RUN_TEST(test_networking);
+  RUN_TEST(test_save_networking);
+
+  RUN_TEST(test_weak_ptr_connect_to);
 
   UNITY_END();
 }
