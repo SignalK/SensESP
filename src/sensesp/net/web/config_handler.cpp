@@ -2,11 +2,14 @@
 
 #include "config_handler.h"
 
+#include <memory>
+
 #include "sensesp/ui/config_item.h"
 
 namespace sensesp {
 
-bool get_item_data(JsonDocument& doc, ConfigItemBase* item) {
+bool get_item_data(JsonDocument& doc,
+                   const std::shared_ptr<ConfigItemBase>& item) {
   JsonObject obj = doc.to<JsonObject>();
 
   String str;
@@ -104,7 +107,7 @@ void add_config_get_handler(HTTPServer* server) {
         }
 
         // find the config item object with the matching config_path
-        ConfigItemBase* config_item = ConfigItemBase::get_config_item(url_tail);
+        auto config_item = ConfigItemBase::get_config_item(url_tail);
         if (config_item == nullptr) {
           httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
                               "No ConfigItem found with that path");
@@ -148,7 +151,7 @@ void add_config_put_handler(HTTPServer* server) {
         url_tail = String(url_tail_cstr);
 
         // find the ConfigItemT object with the matching config_path
-        ConfigItemBase* config_item = ConfigItemBase::get_config_item(url_tail);
+        auto config_item = ConfigItemBase::get_config_item(url_tail);
         if (config_item == nullptr) {
           httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
                               "No Configurable found with that path");
