@@ -14,8 +14,7 @@ namespace sensesp {
  * and updates the device LED accordingly. Inherit this class and override
  * the methods to customize the behavior.
  */
-class SystemStatusLed : public ValueConsumer<SystemStatus>,
-                        public ValueConsumer<int> {
+class SystemStatusLed {
  protected:
   std::unique_ptr<PatternBlinker> blinker_;
 
@@ -28,11 +27,45 @@ class SystemStatusLed : public ValueConsumer<SystemStatus>,
   virtual void set_ws_connecting();
   virtual void set_ws_connected();
 
+  LambdaConsumer<SystemStatus> system_status_consumer_{
+      [this](SystemStatus status) {
+        switch (status) {
+          case SystemStatus::kWifiNoAP:
+            this->set_wifi_no_ap();
+            break;
+          case SystemStatus::kWifiDisconnected:
+            this->set_wifi_disconnected();
+            break;
+          case SystemStatus::kWifiManagerActivated:
+            this->set_wifimanager_activated();
+            break;
+          case SystemStatus::kSKWSDisconnected:
+            this->set_ws_disconnected();
+            break;
+          case SystemStatus::kSKWSConnecting:
+            this->set_ws_connecting();
+            break;
+          case SystemStatus::kSKWSAuthorizing:
+            this->set_ws_authorizing();
+            break;
+          case SystemStatus::kSKWSConnected:
+            this->set_ws_connected();
+            break;
+        }
+      }};
+
+  LambdaConsumer<int> delta_tx_count_consumer_{
+      [this](int) { blinker_->blip(); }};
+
  public:
   SystemStatusLed(int pin);
 
-  virtual void set(const SystemStatus& new_value) override;
-  virtual void set(const int& new_value) override;
+  ValueConsumer<SystemStatus>& get_system_status_consumer() {
+    return system_status_consumer_;
+  }
+  ValueConsumer<int>& get_delta_tx_count_consumer() {
+    return delta_tx_count_consumer_;
+  }
 };
 
 }  // namespace sensesp
