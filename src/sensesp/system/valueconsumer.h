@@ -21,6 +21,7 @@ class ValueProducer;
 template <typename T>
 class ValueConsumer {
  public:
+   using input_type = T;
   /**
    * Used to set an input of this consumer. It is called
    * automatically by a ValueProducer but can also be called

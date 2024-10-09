@@ -33,102 +33,56 @@ class ValueProducer : virtual public Observable {
   virtual const T& get() const { return output_; }
 
   /**
-   * Connects this producer to the specified consumer, registering that
-   * consumer for notifications to when this producer's value changes.
-   */
-  void connect_to(ValueConsumer<T>* consumer) {
-    this->attach([this, consumer]() { consumer->set(this->get()); });
-  }
-  void connect_to(std::shared_ptr<ValueConsumer<T>> consumer) {
-    this->attach([this, consumer]() { consumer->set(this->get()); });
-  }
-  void connect_to(ValueConsumer<T>& consumer) {
-    this->attach([this, consumer]() { consumer.set(this->get()); });
-  }
-
-  /**
-   * @brief Connect a producer to a consumer of a different type.
-   *
-   * This allows you to connect a producer to a consumer of a different type.
-   * Automatic type conversion is performed.
-   *
-   * @tparam CT Consumer type
-   * @param consumer Consumer object to connect to
-   */
-  template <typename CT>
-  void connect_to(ValueConsumer<CT>* consumer) {
-    this->attach([this, consumer]() { consumer->set(CT(this->get())); });
-  }
-  template <typename CT>
-  void connect_to(std::shared_ptr<ValueConsumer<CT>> consumer) const {
-    this->attach([this, consumer]() { consumer->set(CT(this->get())); });
-  }
-
-  template <typename CT>
-  void connect_to(ValueConsumer<CT>& consumer) {
-    this->attach([this, consumer]() { consumer.set(CT(this->get())); });
-  }
-
-  /**
-   *  If the consumer this producer is connecting to is ALSO a producer
-   *  of values of the same type, connect_to() calls can be chained
-   *  together, as this specialized version returns the producer/consumer
-   *  being conencted to so connect_to() can be called on THAT object.
-   */
-  template <typename T2>
-  Transform<T, T2>* connect_to(Transform<T, T2>* consumer_producer) {
-    this->attach([this, consumer_producer]() {
-      consumer_producer->set(T(this->get()));
-    });
-    return consumer_producer;
-  }
-  template <typename T2>
-  Transform<T, T2>* connect_to(
-      std::shared_ptr<Transform<T, T2>> consumer_producer) {
-    this->attach([this, consumer_producer]() {
-      consumer_producer->set(T(this->get()));
-    });
-    return consumer_producer.get();
-  }
-  template <typename T2>
-  Transform<T, T2>* connect_to(Transform<T, T2>& consumer_producer) {
-    this->attach(
-        [this, consumer_producer]() { consumer_producer.set(T(this->get())); });
-    return &consumer_producer;
-  }
-
-  /**
    * @brief Connect a producer to a transform with a different input type
    *
    * This allows you to connect a producer to a transform with a different
    * input type. Automatic type conversion is performed.
    *
-   * @tparam TT Transform input type
-   * @tparam T2 Transform output type
+   * @tparam VConsumer ValueConsumer type
+   * @tparam CInput Consumer input type
    * @param consumer_producer Transform object to connect to
-   * @return Transform<TT, T2>*
+   * @return std::shared_ptr<VConsumer> The connected consumer
    */
-  template <typename TT, typename T2>
-  Transform<TT, T2>* connect_to(Transform<TT, T2>* consumer_producer) {
-    this->attach([this, consumer_producer]() {
-      consumer_producer->set(TT(this->get()));
+  template <typename VConsumer>
+  typename std::enable_if<
+    std::is_base_of<ValueConsumer<typename VConsumer::input_type>, VConsumer>::value &&
+    std::is_convertible<T, typename VConsumer::input_type>::value,
+    std::shared_ptr<VConsumer>
+  >::type
+  connect_to(std::shared_ptr<VConsumer> consumer) {
+    using CInput = typename VConsumer::input_type;
+    // Capture consumer_producer as weak_ptr to avoid strong reference cycles
+    std::weak_ptr<VConsumer> weak_consumer = consumer;
+    this->attach([this, weak_consumer]() {
+      if (auto consumer = weak_consumer.lock()) {
+        consumer->set(static_cast<CInput>(this->get()));
+      }
     });
-    return consumer_producer;
+    return consumer;
   }
-  template <typename TT, typename T2>
-  Transform<TT, T2>* connect_to(
-      std::shared_ptr<Transform<TT, T2>> consumer_producer) {
-    this->attach([this, consumer_producer]() {
-      consumer_producer->set(TT(this->get()));
+
+  template <typename VConsumer>
+  typename std::enable_if<
+    std::is_base_of<ValueConsumer<typename VConsumer::input_type>, VConsumer>::value &&
+    std::is_convertible<T, typename VConsumer::input_type>::value,
+    VConsumer*
+  >::type
+  connect_to(VConsumer* consumer) {
+    using CInput = typename VConsumer::input_type;
+    this->attach([this, consumer]() {
+      consumer->set(static_cast<CInput>(this->get()));
     });
-    return consumer_producer.get();
+    return consumer;
   }
-  template <typename TT, typename T2>
-  Transform<TT, T2>* connect_to(Transform<TT, T2>& consumer_producer) {
-    this->attach([this, consumer_producer]() {
-      consumer_producer->set(TT(this->get()));
-    });
-    return &consumer_producer;
+
+  template <typename VConsumer>
+  typename std::enable_if<
+    std::is_base_of<ValueConsumer<typename VConsumer::input_type>, VConsumer>::value &&
+    std::is_convertible<T, typename VConsumer::input_type>::value,
+    VConsumer*
+  >::type
+  connect_to(VConsumer& consumer) {
+    return connect_to(&consumer);
   }
 
   /*
@@ -154,4 +108,4 @@ typedef ValueProducer<String> StringProducer;
 
 }  // namespace sensesp
 
-#endif
+#endif  // SENSESP_SYSTEM_VALUE_PRODUCER_H_
