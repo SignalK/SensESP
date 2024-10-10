@@ -15,7 +15,7 @@ namespace sensesp {
  * to provide a RESTful API for configuring Configurable objects.
  *
  */
-void add_config_handlers(HTTPServer* server);
+void add_config_handlers(std::shared_ptr<HTTPServer>& server);
 
 }  // namespace sensesp
 

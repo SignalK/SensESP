@@ -13,7 +13,7 @@ namespace sensesp {
  * @brief Provide handlers for static web content.
  *
  */
-void add_static_file_handlers(HTTPServer* server);
+void add_static_file_handlers(std::shared_ptr<HTTPServer> server);
 
 }  // namespace sensesp
 

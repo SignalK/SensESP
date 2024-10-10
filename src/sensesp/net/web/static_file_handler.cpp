@@ -4,7 +4,7 @@
 
 namespace sensesp {
 
-void add_static_file_handlers(HTTPServer* server) {
+void add_static_file_handlers(std::shared_ptr<HTTPServer> server) {
   for (int i = 0; kFrontendFiles[i].url != nullptr; i++) {
     const StaticFileData& data = kFrontendFiles[i];
     HTTPRequestHandler* handler = new HTTPRequestHandler(

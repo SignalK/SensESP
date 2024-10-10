@@ -34,7 +34,7 @@ class RouteDefinition {
   String component_name_;
 };
 
-void add_base_app_http_command_handlers(HTTPServer* server);
+void add_base_app_http_command_handlers(std::shared_ptr<HTTPServer>& server);
 
 }  // namespace sensesp
 

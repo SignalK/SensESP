@@ -5,7 +5,7 @@
 
 namespace sensesp {
 
-void add_http_reset_handler(HTTPServer* server) {
+void add_http_reset_handler(std::shared_ptr<HTTPServer>& server) {
   HTTPRequestHandler* reset_handler = new HTTPRequestHandler(
       1 << HTTP_POST, "/api/device/reset", [](httpd_req_t* req) {
         httpd_resp_send(req,
@@ -18,7 +18,7 @@ void add_http_reset_handler(HTTPServer* server) {
   server->add_handler(reset_handler);
 }
 
-void add_http_restart_handler(HTTPServer* server) {
+void add_http_restart_handler(std::shared_ptr<HTTPServer>& server) {
   HTTPRequestHandler* restart_handler = new HTTPRequestHandler(
       1 << HTTP_POST, "/api/device/restart", [](httpd_req_t* req) {
         httpd_resp_send(req, "Restarting device", 0);
@@ -28,7 +28,7 @@ void add_http_restart_handler(HTTPServer* server) {
   server->add_handler(restart_handler);
 }
 
-void add_http_info_handler(HTTPServer* server) {
+void add_http_info_handler(std::shared_ptr<HTTPServer>& server) {
   HTTPRequestHandler* info_handler =
       new HTTPRequestHandler(1 << HTTP_GET, "/api/info", [](httpd_req_t* req) {
         auto status_page_items = StatusPageItemBase::get_status_page_items();
@@ -50,7 +50,7 @@ void add_http_info_handler(HTTPServer* server) {
   server->add_handler(info_handler);
 }
 
-void add_routes_handlers(HTTPServer* server) {
+void add_routes_handlers(std::shared_ptr<HTTPServer>& server) {
   std::vector<RouteDefinition> routes;
 
   routes.push_back(RouteDefinition("Status", "/status", "StatusPage"));
@@ -114,7 +114,7 @@ void add_routes_handlers(HTTPServer* server) {
   }
 }
 
-void add_base_app_http_command_handlers(HTTPServer* server) {
+void add_base_app_http_command_handlers(std::shared_ptr<HTTPServer>& server) {
   add_http_reset_handler(server);
   add_http_restart_handler(server);
   add_http_info_handler(server);
