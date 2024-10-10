@@ -46,8 +46,7 @@ class SensESPApp : public SensESPBaseApp {
    */
   SensESPApp(SensESPApp& other) = delete;
 
-~SensESPApp() {
-    delete networking_;
+  ~SensESPApp() {
     delete ota_;
     delete ws_client_;
     delete mdns_discovery_;
@@ -90,7 +89,7 @@ class SensESPApp : public SensESPBaseApp {
   SystemStatusController* get_system_status_controller() {
     return &(this->system_status_controller_);
   }
-  Networking* get_networking() { return this->networking_; }
+  std::shared_ptr<Networking>& get_networking() { return this->networking_; }
   SKWSClient* get_ws_client() { return this->ws_client_; }
 
  protected:
@@ -164,8 +163,9 @@ class SensESPApp : public SensESPBaseApp {
     ap_ssid_ = SensESPBaseApp::get_hostname();
 
     // create the networking object
-    networking_ = new Networking("/System/WiFi Settings", ssid_,
-                                 wifi_client_password_, ap_ssid_, ap_password_);
+    networking_ = std::make_shared<Networking>("/System/WiFi Settings", ssid_,
+                                               wifi_client_password_, ap_ssid_,
+                                               ap_password_);
 
     ConfigItem(networking_);
 
@@ -266,7 +266,7 @@ class SensESPApp : public SensESPBaseApp {
   int button_gpio_pin_ = SENSESP_BUTTON_PIN;
   ButtonHandler* button_handler_ = nullptr;
 
-  Networking* networking_ = NULL;
+  std::shared_ptr<Networking> networking_;
 
   OTA* ota_;
   SKDeltaQueue* sk_delta_queue_;
