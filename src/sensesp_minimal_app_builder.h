@@ -8,7 +8,7 @@ namespace sensesp {
 
 class SensESPMinimalAppBuilder : public SensESPBaseAppBuilder {
  protected:
-  SensESPMinimalApp* app_;
+  std::shared_ptr<SensESPMinimalApp> app_;
 
  public:
   SensESPMinimalAppBuilder() { app_ = SensESPMinimalApp::get(); }
@@ -16,7 +16,7 @@ class SensESPMinimalAppBuilder : public SensESPBaseAppBuilder {
     app_->set_hostname(hostname);
     return this;
   }
-  SensESPMinimalApp* get_app() override final {
+  std::shared_ptr<SensESPMinimalApp> get_app() {
     app_->setup();
     return app_;
   }

@@ -29,6 +29,11 @@
 
 namespace sensesp {
 
+class SensESPApp;
+// I'd rather not have this global variable here but many legacy examples
+// access it. Use SensESPApp::get() instead.
+extern std::shared_ptr<SensESPApp> sensesp_app;
+
 /**
  * The default SensESP application object with networking and Signal K
  * communication.
@@ -41,6 +46,16 @@ class SensESPApp : public SensESPBaseApp {
    */
   SensESPApp(SensESPApp& other) = delete;
 
+~SensESPApp() {
+    delete networking_;
+    delete ota_;
+    delete ws_client_;
+    delete mdns_discovery_;
+    delete sk_delta_queue_;
+    delete system_status_led_;
+    delete button_handler_;
+  }
+
   /**
    * Singletons should not be assignable
    */
@@ -49,7 +64,26 @@ class SensESPApp : public SensESPBaseApp {
   /**
    * @brief Get the singleton instance of the SensESPApp
    */
-  static SensESPApp* get();
+  static std::shared_ptr<SensESPApp> get() {
+    if (instance_ == nullptr) {
+      instance_ = std::shared_ptr<SensESPApp>(new SensESPApp());
+    }
+    return std::static_pointer_cast<SensESPApp>(instance_);
+  }
+
+  virtual bool destroy() override {
+    bool outside_users = instance_.use_count() > 2;
+    if (outside_users) {
+      ESP_LOGW(
+          __FILENAME__,
+          "SensESPApp instance has active references and won't be properly "
+          "destroyed.");
+    }
+    instance_ = nullptr;
+    // Also destroy the global pointer
+    sensesp_app = nullptr;
+    return !outside_users;
+  }
 
   // getters for internal members
   SKDeltaQueue* get_sk_delta() { return this->sk_delta_queue_; }
@@ -68,8 +102,6 @@ class SensESPApp : public SensESPBaseApp {
    *
    */
   SensESPApp() : SensESPBaseApp() {}
-
-  ~SensESPApp();
 
   // setters for all constructor arguments
 
@@ -118,19 +150,116 @@ class SensESPApp : public SensESPBaseApp {
     return this;
   }
 
-  void setup();
-  void connect_status_page_items();
+  /**
+   * @brief Perform initialization of SensESPApp once builder configuration is
+   * done.
+   *
+   * This should be only called from the builder!
+   *
+   */
+  void setup() {
+    // call the parent setup()
+    SensESPBaseApp::setup();
+
+    ap_ssid_ = SensESPBaseApp::get_hostname();
+
+    // create the networking object
+    networking_ = new Networking("/System/WiFi Settings", ssid_,
+                                 wifi_client_password_, ap_ssid_, ap_password_);
+
+    ConfigItem(networking_);
+
+    if (ota_password_ != nullptr) {
+      // create the OTA object
+      ota_ = new OTA(ota_password_);
+    }
+
+    bool captive_portal_enabled = networking_->is_captive_portal_enabled();
+
+    // create the HTTP server
+    this->http_server_ = std::make_shared<HTTPServer>();
+    this->http_server_->set_captive_portal(captive_portal_enabled);
+
+    // Add the default HTTP server response handlers
+    add_static_file_handlers(this->http_server_);
+    add_base_app_http_command_handlers(this->http_server_);
+    add_app_http_command_handlers(this->http_server_);
+    add_config_handlers(this->http_server_);
+
+    ConfigItem(this->http_server_);
+
+    // create the SK delta object
+    sk_delta_queue_ = new SKDeltaQueue();
+
+    // create the websocket client
+    bool const use_mdns = sk_server_address_ == "";
+    this->ws_client_ =
+        new SKWSClient("/System/Signal K Settings", sk_delta_queue_,
+                       sk_server_address_, sk_server_port_, use_mdns);
+
+    ConfigItem(this->ws_client_);
+
+    // connect the system status controller
+    this->networking_->get_wifi_state_producer()->connect_to(
+        &system_status_controller_.get_wifi_state_consumer());
+    this->ws_client_->connect_to(
+        &system_status_controller_.get_ws_connection_state_consumer());
+
+    // create the MDNS discovery object
+    mdns_discovery_ = new MDNSDiscovery();
+
+    // create a system status led and connect it
+
+    if (system_status_led_ == NULL) {
+      system_status_led_ = new SystemStatusLed(LED_PIN);
+    }
+    this->system_status_controller_.connect_to(
+        system_status_led_->get_system_status_consumer());
+    this->ws_client_->get_delta_tx_count_producer().connect_to(
+        system_status_led_->get_delta_tx_count_consumer());
+
+    // create the button handler
+    if (button_gpio_pin_ != -1) {
+      button_handler_ = new ButtonHandler(button_gpio_pin_);
+    }
+
+    // connect status page items
+    connect_status_page_items();
+  }
+
+  void connect_status_page_items() {
+    this->hostname_->connect_to(&this->hostname_ui_output_);
+    this->event_loop_.onRepeat(
+        4999, [this]() { wifi_ssid_ui_output_.set(WiFi.SSID()); });
+    this->event_loop_.onRepeat(
+        4998, [this]() { free_memory_ui_output_.set(ESP.getFreeHeap()); });
+    this->event_loop_.onRepeat(
+        4997, [this]() { wifi_rssi_ui_output_.set(WiFi.RSSI()); });
+    this->event_loop_.onRepeat(4996, [this]() {
+      sk_server_address_ui_output_.set(ws_client_->get_server_address());
+    });
+    this->event_loop_.onRepeat(4995, [this]() {
+      sk_server_port_ui_output_.set(ws_client_->get_server_port());
+    });
+    this->event_loop_.onRepeat(4994, [this]() {
+      sk_server_connection_ui_output_.set(ws_client_->get_connection_status());
+    });
+    ws_client_->get_delta_tx_count_producer().connect_to(
+        &delta_tx_count_ui_output_);
+    ws_client_->get_delta_rx_count_producer().connect_to(
+        &delta_rx_count_ui_output_);
+  }
 
   String ssid_ = "";
   String wifi_client_password_ = "";
   String sk_server_address_ = "";
   uint16_t sk_server_port_ = 0;
-  String ap_ssid_ = SensESPBaseApp::get_hostname();
+  String ap_ssid_ = "";
   String ap_password_ = "thisisfine";
   const char* ota_password_ = nullptr;
 
   MDNSDiscovery* mdns_discovery_;
-  HTTPServer* http_server_;
+  std::shared_ptr<HTTPServer> http_server_;
 
   SystemStatusLed* system_status_led_ = NULL;
   SystemStatusController system_status_controller_;
@@ -169,8 +298,6 @@ class SensESPApp : public SensESPBaseApp {
   friend class WebServer;
   friend class SensESPAppBuilder;
 };
-
-extern SensESPApp* sensesp_app;
 
 }  // namespace sensesp
 

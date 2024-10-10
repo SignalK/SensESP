@@ -25,7 +25,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
   uint16_t sk_server_port_ = 0;
 
  protected:
-  SensESPApp* app_;
+  std::shared_ptr<SensESPApp> app_;
 
  public:
   /**
@@ -34,7 +34,10 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    * SensESPAppBuilder is used to instantiate a SensESPApp
    * object with non-trivial configuration.
    */
-  SensESPAppBuilder() { app_ = SensESPApp::get(); }
+  SensESPAppBuilder() {
+    app_ = std::shared_ptr<SensESPApp>(new SensESPApp());
+    app_->set_instance(app_);
+  }
   /**
    * @brief Set the Wi-Fi network SSID and password.
    *
@@ -65,7 +68,8 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    * @param password
    * @return SensESPAppBuilder*
    */
-  SensESPAppBuilder* set_wifi_access_point(const String& ssid, const String& password) {
+  SensESPAppBuilder* set_wifi_access_point(const String& ssid,
+                                           const String& password) {
     app_->set_ap_ssid(ssid);
     app_->set_ap_password(password);
     return this;
@@ -257,7 +261,8 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    *
    * @return SensESPApp*
    */
-  SensESPApp* get_app() override final {
+  std::shared_ptr<SensESPApp> get_app() {
+    app_ = SensESPApp::get();
     app_->setup();
     return app_;
   }
