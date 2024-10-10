@@ -1,4 +1,27 @@
 var searchData=
 [
-  ['yaw_0',['yaw',['../structsensesp_1_1_attitude_vector.html#a8f964df7f96bd6b53a226190710c75d7',1,'sensesp::AttitudeVector']]]
+  ['warning_0',['WARNING',['../classsensesp_1_1_local_debug.html#a98fde0a2fbdddfe87adc1242151a0031',1,'sensesp::LocalDebug']]],
+  ['wifi_5fap_5fstart_5fevent_5fid_5f_1',['wifi_ap_start_event_id_',['../classsensesp_1_1_wi_fi_state_producer.html#a74217937a69b65e1ce89a942276323f6',1,'sensesp::WiFiStateProducer']]],
+  ['wifi_5fap_5fstop_5fevent_5fid_5f_2',['wifi_ap_stop_event_id_',['../classsensesp_1_1_wi_fi_state_producer.html#aed96e89a013e81f8d1ba608ff2d59e6e',1,'sensesp::WiFiStateProducer']]],
+  ['wifi_5fclient_5f_3',['wifi_client_',['../classsensesp_1_1_s_k_w_s_client.html#a5c394f5d6dfaae2015a7a1235d257d5b',1,'sensesp::SKWSClient']]],
+  ['wifi_5fclient_5fpassword_5f_4',['wifi_client_password_',['../classsensesp_1_1_sens_e_s_p_app.html#a877715b4c6269d50e3e69466f1df22df',1,'sensesp::SensESPApp']]],
+  ['wifi_5fconnected_5fpattern_5',['wifi_connected_pattern',['../namespacesensesp.html#ab97a03fa114165f852d3e9f7ef14ad7e',1,'sensesp']]],
+  ['wifi_5fdisconnected_5fpattern_6',['wifi_disconnected_pattern',['../namespacesensesp.html#ad53b505f128cf2dbb5e01bea56399524',1,'sensesp']]],
+  ['wifi_5frssi_5fui_5foutput_5f_7',['wifi_rssi_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a34a6716f66a6c0a88f59db4ca0977895',1,'sensesp::SensESPApp']]],
+  ['wifi_5fsignal_5fsensor_5f_8',['wifi_signal_sensor_',['../classsensesp_1_1_sens_e_s_p_app.html#a9549d2136d026a4bd1ecb7bef8746938',1,'sensesp::SensESPApp']]],
+  ['wifi_5fssid_5fui_5foutput_5f_9',['wifi_ssid_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a2754cc0aba7fc002aeb2c733dc802582',1,'sensesp::SensESPApp']]],
+  ['wifi_5fsta_5fdisconnected_5fevent_5fid_5f_10',['wifi_sta_disconnected_event_id_',['../classsensesp_1_1_wi_fi_state_producer.html#adaaafb0cafcd04f5c63f9d36df6000ec',1,'sensesp::WiFiStateProducer']]],
+  ['wifi_5fsta_5fgot_5fip_5fevent_5fid_5f_11',['wifi_sta_got_ip_event_id_',['../classsensesp_1_1_wi_fi_state_producer.html#a30fabe97de1b6f2c2b2ebdf6a5e7f862',1,'sensesp::WiFiStateProducer']]],
+  ['wifi_5fstate_5fconsumer_5f_12',['wifi_state_consumer_',['../classsensesp_1_1_system_status_controller.html#a413af28522c90626076083293ecbdfd9',1,'sensesp::SystemStatusController']]],
+  ['wifi_5fstate_5femitter_5f_13',['wifi_state_emitter_',['../classsensesp_1_1_networking.html#ab8bcbf50dbdda5ca6441c8d03ae2b27c',1,'sensesp::Networking']]],
+  ['wifi_5fstate_5fproducer_5f_14',['wifi_state_producer_',['../classsensesp_1_1_networking.html#af92c7689fc75532ed9b387cbf341c851',1,'sensesp::Networking']]],
+  ['wifimanager_5fpattern_15',['wifimanager_pattern',['../namespacesensesp.html#afd8af50210500a2f97ba8638f1e8ba8c',1,'sensesp']]],
+  ['write_5flock_5f_16',['write_lock_',['../classsensesp_1_1_safe_queue.html#aefed0a3f57419d4e3a2b80d2d8051e72',1,'sensesp::SafeQueue']]],
+  ['ws_5fauthorizing_5fpattern_17',['ws_authorizing_pattern',['../namespacesensesp.html#ad205805904dd5fd707bf89379a37d29d',1,'sensesp']]],
+  ['ws_5fclient_18',['ws_client',['../namespacesensesp.html#a59300ccd7271c89738149da446486a3b',1,'sensesp']]],
+  ['ws_5fclient_5f_19',['ws_client_',['../classsensesp_1_1_sens_e_s_p_app.html#ad51e7425323f65c3b806a0952a3556d4',1,'sensesp::SensESPApp']]],
+  ['ws_5fconnected_5fpattern_20',['ws_connected_pattern',['../namespacesensesp.html#aff963dfc2628977311980b540060e5d1',1,'sensesp']]],
+  ['ws_5fconnecting_5fpattern_21',['ws_connecting_pattern',['../namespacesensesp.html#ab1f00fb5ce1be4c8291be223e68a6be7',1,'sensesp']]],
+  ['ws_5fconnection_5fstate_5fconsumer_5f_22',['ws_connection_state_consumer_',['../classsensesp_1_1_system_status_controller.html#a67231e58fc5bc8a79919243a56dfa520',1,'sensesp::SystemStatusController']]],
+  ['ws_5fdisconnected_5fpattern_23',['ws_disconnected_pattern',['../namespacesensesp.html#a048a12a0033281a7ea316123fec959f2',1,'sensesp']]]
 ];

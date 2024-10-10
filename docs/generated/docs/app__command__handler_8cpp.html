@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -112,6 +112,8 @@ $(function(){initNavTree('app__command__handler_8cpp.html',''); initResizable(tr
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="app__command__handler_8h_source.html">app_command_handler.h</a>&quot;</code><br />
 <code>#include &lt;esp_http_server.h&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &quot;<a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for app_command_handler.cpp:</div>
 <div class="dyncontent">
@@ -127,10 +129,10 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a56cb54cc94d3c4d9624dcd60072cf402" id="r_a56cb54cc94d3c4d9624dcd60072cf402"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a56cb54cc94d3c4d9624dcd60072cf402">sensesp::add_scan_wifi_networks_handlers</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:a56cb54cc94d3c4d9624dcd60072cf402"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac33c6816ec8423c79caf587d07465b5d" id="r_ac33c6816ec8423c79caf587d07465b5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ac33c6816ec8423c79caf587d07465b5d">sensesp::add_app_http_command_handlers</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:ac33c6816ec8423c79caf587d07465b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af71bdd7f16e2d227fe501fd50824018b" id="r_af71bdd7f16e2d227fe501fd50824018b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#af71bdd7f16e2d227fe501fd50824018b">sensesp::add_scan_wifi_networks_handlers</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:af71bdd7f16e2d227fe501fd50824018b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab245c2d40c4d86a216199d80b63b4e4c" id="r_ab245c2d40c4d86a216199d80b63b4e4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ab245c2d40c4d86a216199d80b63b4e4c">sensesp::add_app_http_command_handlers</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:ab245c2d40c4d86a216199d80b63b4e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

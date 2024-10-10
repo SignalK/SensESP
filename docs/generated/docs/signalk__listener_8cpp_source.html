@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -109,58 +109,70 @@ $(function(){initNavTree('signalk__listener_8cpp_source.html',''); initResizable
 <div class="contents">
 <a href="signalk__listener_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="signalk__listener_8h.html">signalk_listener.h</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="saveable_8h.html">sensesp/system/saveable.h</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>std::vector&lt;SKListener *&gt; SKListener::listeners_;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>SemaphoreHandle_t SKListener::semaphore_ = xSemaphoreCreateRecursiveMutex();</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>std::vector&lt;SKListener *&gt; SKListener::listeners_;</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#a58ea9c83d5f0ffeb5ef4a52e9335e5e8">    9</a></span><a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a58ea9c83d5f0ffeb5ef4a52e9335e5e8">SKListener::SKListener</a>(<span class="keyword">const</span> String &amp;sk_path, <span class="keywordtype">int</span> listen_delay,</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>                       <span class="keyword">const</span> String &amp;config_path)</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    : <a class="code hl_class" href="classsensesp_1_1_configurable.html">Configurable</a>(config_path), sk_path{sk_path}, listen_delay{listen_delay} {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  listeners_.push_back(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  this-&gt;<a class="code hl_function" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a>();</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>SemaphoreHandle_t SKListener::semaphore_ = xSemaphoreCreateRecursiveMutex();</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#a58ea9c83d5f0ffeb5ef4a52e9335e5e8">   11</a></span><a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a58ea9c83d5f0ffeb5ef4a52e9335e5e8">SKListener::SKListener</a>(<span class="keyword">const</span> String &amp;sk_path, <span class="keywordtype">int</span> listen_delay,</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>                       <span class="keyword">const</span> String &amp;config_path)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    : <a class="code hl_class" href="classsensesp_1_1_file_system_saveable.html">FileSystemSaveable</a>(config_path),</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>      sk_path{sk_path},</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>      listen_delay{listen_delay} {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  listeners_.push_back(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  this-&gt;<a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a>();</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
 </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#a07c3b13156e9156f03858b5003b1cde5">   16</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a07c3b13156e9156f03858b5003b1cde5">SKListener::take_semaphore</a>(uint64_t timeout_ms) {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordflow">if</span> (timeout_ms == 0) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">return</span> xSemaphoreTakeRecursive(semaphore_, portMAX_DELAY) == pdTRUE;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> xSemaphoreTakeRecursive(semaphore_, timeout_ms) == pdTRUE;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  }</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#a07c3b13156e9156f03858b5003b1cde5">   20</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a07c3b13156e9156f03858b5003b1cde5">SKListener::take_semaphore</a>(uint64_t timeout_ms) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keywordflow">if</span> (timeout_ms == 0) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">return</span> xSemaphoreTakeRecursive(semaphore_, portMAX_DELAY) == pdTRUE;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">return</span> xSemaphoreTakeRecursive(semaphore_, timeout_ms) == pdTRUE;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  }</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
 </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">   24</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">SKListener::release_semaphore</a>() { xSemaphoreGiveRecursive(semaphore_); }</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>String SKListener::get_config_schema() { <span class="keywordflow">return</span> SIGNALKINPUT_SCHEMA; }</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">void</span> SKListener::get_configuration(JsonObject &amp;root) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  root[<span class="stringliteral">&quot;sk_path&quot;</span>] = this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a99c420883085d955c44c885917ed977f">get_sk_path</a>();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">bool</span> SKListener::set_configuration(<span class="keyword">const</span> JsonObject &amp;config) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;sk_path&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  }</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  this-&gt;set_sk_path(config[<span class="stringliteral">&quot;sk_path&quot;</span>].as&lt;String&gt;());</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keywordtype">void</span> SKListener::set_sk_path(<span class="keyword">const</span> String &amp;path) { <a class="code hl_variable" href="classsensesp_1_1_s_k_listener.html#a535f98acf252c744f27ea787ba6c48be">sk_path</a> = path; }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_configurable_html"><div class="ttname"><a href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></div><div class="ttdoc">An object that is capable of having configuration data that can be set remotely using a RESTful API,...</div><div class="ttdef"><b>Definition</b> <a href="configurable_8h_source.html#l00025">configurable.h:25</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_configurable_html_ac97542fd5a24ae306adb77f3d1ba563a"><div class="ttname"><a href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">sensesp::Configurable::load_configuration</a></div><div class="ttdeci">virtual void load_configuration()</div><div class="ttdef"><b>Definition</b> <a href="configurable_8cpp_source.html#l00035">configurable.cpp:35</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a07c3b13156e9156f03858b5003b1cde5"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a07c3b13156e9156f03858b5003b1cde5">sensesp::SKListener::take_semaphore</a></div><div class="ttdeci">static bool take_semaphore(uint64_t timeout_ms=0)</div><div class="ttdef"><b>Definition</b> <a href="#l00016">signalk_listener.cpp:16</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a16e7abf03f11f1734cb33388c0517cd8"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">sensesp::SKListener::release_semaphore</a></div><div class="ttdeci">static void release_semaphore()</div><div class="ttdef"><b>Definition</b> <a href="#l00024">signalk_listener.cpp:24</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a535f98acf252c744f27ea787ba6c48be"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a535f98acf252c744f27ea787ba6c48be">sensesp::SKListener::sk_path</a></div><div class="ttdeci">String sk_path</div><div class="ttdef"><b>Definition</b> <a href="signalk__listener_8h_source.html#l00060">signalk_listener.h:60</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a58ea9c83d5f0ffeb5ef4a52e9335e5e8"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a58ea9c83d5f0ffeb5ef4a52e9335e5e8">sensesp::SKListener::SKListener</a></div><div class="ttdeci">SKListener(const String &amp;sk_path, int listen_delay, const String &amp;config_path=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00009">signalk_listener.cpp:9</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a99c420883085d955c44c885917ed977f"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a99c420883085d955c44c885917ed977f">sensesp::SKListener::get_sk_path</a></div><div class="ttdeci">String &amp; get_sk_path()</div><div class="ttdef"><b>Definition</b> <a href="signalk__listener_8h_source.html#l00048">signalk_listener.h:48</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">   28</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">SKListener::release_semaphore</a>() { xSemaphoreGiveRecursive(semaphore_); }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">bool</span> SKListener::to_json(JsonObject &amp;root) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  root[<span class="stringliteral">&quot;sk_path&quot;</span>] = this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_listener.html#a99c420883085d955c44c885917ed977f">get_sk_path</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">bool</span> SKListener::from_json(<span class="keyword">const</span> JsonObject &amp;config) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;sk_path&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  this-&gt;set_sk_path(config[<span class="stringliteral">&quot;sk_path&quot;</span>].as&lt;String&gt;());</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keywordtype">void</span> SKListener::set_sk_path(<span class="keyword">const</span> String &amp;path) { <a class="code hl_variable" href="classsensesp_1_1_s_k_listener.html#a535f98acf252c744f27ea787ba6c48be">sk_path</a> = path; }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a09335935587167516fbbb6fb214f20b6">   45</a></span><span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_s_k_listener.html">SKListener</a> &amp;obj) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">return</span> R<span class="stringliteral">&quot;({&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;listen_delay&quot;:{&quot;title&quot;:&quot;Listen delay&quot;,&quot;type&quot;:&quot;number&quot;,&quot;description&quot;:&quot;The time, in milliseconds, between each read of the input&quot;}}  })&quot;;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="stringliteral">}</span></div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="stringliteral">}  </span><span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html">sensesp::FileSystemSaveable</a></div><div class="ttdef"><b>Definition</b> <a href="saveable_8h_source.html#l00061">saveable.h:61</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a79b2e2e657112851dfda8785d217578a"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">sensesp::FileSystemSaveable::load</a></div><div class="ttdeci">virtual bool load() override</div><div class="ttdoc">Load and populate the object from a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00008">saveable.cpp:8</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html">sensesp::SKListener</a></div><div class="ttdoc">An Obervable class that listens for Signal K stream deltas and notifies any observers of value change...</div><div class="ttdef"><b>Definition</b> <a href="signalk__listener_8h_source.html#l00022">signalk_listener.h:22</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a07c3b13156e9156f03858b5003b1cde5"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a07c3b13156e9156f03858b5003b1cde5">sensesp::SKListener::take_semaphore</a></div><div class="ttdeci">static bool take_semaphore(uint64_t timeout_ms=0)</div><div class="ttdef"><b>Definition</b> <a href="#l00020">signalk_listener.cpp:20</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a16e7abf03f11f1734cb33388c0517cd8"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a16e7abf03f11f1734cb33388c0517cd8">sensesp::SKListener::release_semaphore</a></div><div class="ttdeci">static void release_semaphore()</div><div class="ttdef"><b>Definition</b> <a href="#l00028">signalk_listener.cpp:28</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a535f98acf252c744f27ea787ba6c48be"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a535f98acf252c744f27ea787ba6c48be">sensesp::SKListener::sk_path</a></div><div class="ttdeci">String sk_path</div><div class="ttdef"><b>Definition</b> <a href="signalk__listener_8h_source.html#l00054">signalk_listener.h:54</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a58ea9c83d5f0ffeb5ef4a52e9335e5e8"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a58ea9c83d5f0ffeb5ef4a52e9335e5e8">sensesp::SKListener::SKListener</a></div><div class="ttdeci">SKListener(const String &amp;sk_path, int listen_delay, const String &amp;config_path=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00011">signalk_listener.cpp:11</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_listener_html_a99c420883085d955c44c885917ed977f"><div class="ttname"><a href="classsensesp_1_1_s_k_listener.html#a99c420883085d955c44c885917ed977f">sensesp::SKListener::get_sk_path</a></div><div class="ttdeci">String &amp; get_sk_path()</div><div class="ttdef"><b>Definition</b> <a href="signalk__listener_8h_source.html#l00042">signalk_listener.h:42</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
+<div class="ttc" id="asaveable_8h_html"><div class="ttname"><a href="saveable_8h.html">saveable.h</a></div></div>
 <div class="ttc" id="asignalk__listener_8h_html"><div class="ttname"><a href="signalk__listener_8h.html">signalk_listener.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

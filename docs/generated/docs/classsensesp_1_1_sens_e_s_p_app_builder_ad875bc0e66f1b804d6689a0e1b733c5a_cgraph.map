@@ -1,32 +1,21 @@
 <map id="sensesp::SensESPAppBuilder::enable_system_info_sensors" name="sensesp::SensESPAppBuilder::enable_system_info_sensors">
-<area shape="rect" id="Node000001" title="Enable all built&#45;in system info sensors." alt="" coords="5,143,204,183"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa90ff7615dce9d7befeb421c7cf6f583" title="Enable the free memory sensor." alt="" coords="252,12,448,53"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,140,185,102,250,63,265,57,267,61,253,68,188,106,134,144"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa36af1a2298d0a4db7f6efdf88baf07a" title="Report the IP address of the device." alt="" coords="252,77,448,118"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="183,139,255,120,257,125,184,145"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#ac7e2cdd591bd78309ab0c838fe6a01ea" title="Enable the System Hz sensor." alt="" coords="252,143,448,183"/>
-<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="204,160,236,160,236,166,204,166"/>
-<area shape="rect" id="Node000012" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aec8b05c9896ddc46d747ffea671dad70" title="Report the system uptime in seconds since the last reboot." alt="" coords="252,208,448,249"/>
-<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="184,181,257,201,255,206,183,187"/>
-<area shape="rect" id="Node000013" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#afabc97d522db0964e161d42e1d54df4e" title="Report the Wi&#45;Fi signal strength." alt="" coords="252,273,448,314"/>
-<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="134,182,188,220,253,258,267,265,265,269,250,263,185,224,131,186"/>
-<area shape="rect" id="Node000003" href="$namespacesensesp.html#a6f52cfe4cac27f4c7fb6430ecb91ce94" title="Connect a system information sensor to SKOutput." alt="" coords="496,143,670,183"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="421,51,449,63,502,96,548,131,545,135,499,100,447,68,419,56"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_value_producer.html#a0d2ecdd23525edbf82eb29eb851a9d25" title=" " alt="" coords="744,60,907,101"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="644,140,748,104,750,109,646,145"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9" title=" " alt="" coords="985,121,1173,146"/>
-<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="671,155,969,137,969,143,671,161"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="718,176,933,201"/>
-<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="671,169,703,173,702,178,670,175"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_sens_e_s_p_base_app.html#ade8960b96e439f4cc0b387c312999dd5" title="Get the hostname observable object." alt="" coords="731,225,920,266"/>
-<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="638,181,719,211,739,218,738,223,717,216,636,186"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_observable.html#a1bd8a207de69d386a7f05c28544df109" title=" " alt="" coords="1007,5,1151,46"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="907,60,991,42,992,47,908,65"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="908,95,1000,114,999,120,907,100"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_consumer.html#a3734612c1b7022e9bd08d2c8fb8e30de" title=" " alt="" coords="981,70,1177,96"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="907,79,965,79,965,84,907,84"/>
-<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="426,116,494,135,492,140,424,121"/>
-<area shape="poly" id="edge13_Node000011_Node000003" title=" " alt="" coords="449,160,480,160,480,166,449,166"/>
-<area shape="poly" id="edge15_Node000012_Node000003" title=" " alt="" coords="424,205,492,186,494,191,426,210"/>
-<area shape="poly" id="edge17_Node000013_Node000003" title=" " alt="" coords="419,270,447,258,499,226,545,191,548,195,502,230,449,263,421,275"/>
+<area shape="rect" id="Node000001" title="Enable all built&#45;in system info sensors." alt="" coords="5,136,204,177"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa90ff7615dce9d7befeb421c7cf6f583" title="Enable the free memory sensor." alt="" coords="252,5,448,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,133,185,95,250,57,265,50,267,55,253,61,188,100,134,138"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa36af1a2298d0a4db7f6efdf88baf07a" title="Report the IP address of the device." alt="" coords="252,71,448,111"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="183,133,255,113,257,118,184,138"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#ac7e2cdd591bd78309ab0c838fe6a01ea" title="Enable the System Hz sensor." alt="" coords="252,136,448,177"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="204,154,236,154,236,159,204,159"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aec8b05c9896ddc46d747ffea671dad70" title="Report the system uptime in seconds since the last reboot." alt="" coords="252,201,448,242"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="184,175,257,194,255,199,183,180"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#afabc97d522db0964e161d42e1d54df4e" title="Report the Wi&#45;Fi signal strength." alt="" coords="252,267,448,307"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="134,175,188,213,253,251,267,258,265,263,250,256,185,217,131,179"/>
+<area shape="rect" id="Node000003" href="$namespacesensesp.html#adf945ce28197f2be0af321d3e9fc6baf" title="Connect a system information sensor to SKOutput." alt="" coords="496,136,670,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="421,44,449,57,502,89,548,124,545,128,499,94,447,61,419,49"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="718,144,933,169"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="671,154,703,154,703,159,671,159"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="426,109,494,129,492,134,424,114"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="449,154,480,154,480,159,449,159"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="424,198,492,179,494,184,426,203"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="419,264,447,251,499,219,545,185,548,189,502,223,449,256,421,269"/>
 </map>

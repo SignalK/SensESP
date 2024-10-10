@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -113,175 +113,96 @@ $(function(){initNavTree('ui__controls_8cpp_source.html',''); initResizable(true
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kStringConfigSchemaTemplate[] = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="stringliteral">        &quot;value&quot;: { &quot;title&quot;: &quot;{{title}}&quot;, &quot;type&quot;: &quot;string&quot; }</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="stringliteral">  })&quot;;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="stringliteral"></span> </div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classsensesp_1_1_string_config.html#a472ef08b40f08167f34dbca9354dd9cb">   14</a></span><span class="stringliteral">String <a class="code hl_function" href="classsensesp_1_1_string_config.html#a472ef08b40f08167f34dbca9354dd9cb">StringConfig::get_config_schema</a>() {</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="stringliteral">  String schema = kStringConfigSchemaTemplate;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="stringliteral">  schema.replace(</span><span class="stringliteral">&quot;{{title}}&quot;</span>, <a class="code hl_variable" href="classsensesp_1_1_string_config.html#a3501e7686072f3c47d27c1e023ef9b3d">title_</a>);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordflow">return</span> schema;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
+<div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classsensesp_1_1_string_config.html#aecab842ea6d2d2f0ee48e8b7733a2aea">    7</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_string_config.html#aecab842ea6d2d2f0ee48e8b7733a2aea">StringConfig::to_json</a>(JsonObject&amp; doc) {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  doc[<span class="stringliteral">&quot;value&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_string_config.html#a7655830271c64dc4b37aaa5dc4da22f9">value_</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>}</div>
 </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classsensesp_1_1_string_config.html#a16995c4520f41478ea6bf0fe32ef32bb">   20</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_string_config.html#a16995c4520f41478ea6bf0fe32ef32bb">StringConfig::get_configuration</a>(JsonObject&amp; doc) { doc[<span class="stringliteral">&quot;value&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_string_config.html#a7655830271c64dc4b37aaa5dc4da22f9">value_</a>; }</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classsensesp_1_1_string_config.html#a41525196b6aaea45a32d3179410def69">   12</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_string_config.html#a41525196b6aaea45a32d3179410def69">StringConfig::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;value&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  }</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <a class="code hl_variable" href="classsensesp_1_1_string_config.html#a7655830271c64dc4b37aaa5dc4da22f9">value_</a> = config[<span class="stringliteral">&quot;value&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
+</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classsensesp_1_1_string_config.html#a7bf786d0df941d06e4c0d2409946557e">   22</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_string_config.html#a7bf786d0df941d06e4c0d2409946557e">StringConfig::set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;value&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classsensesp_1_1_number_config.html#a7c735e19bd0fe6ed1eb2f2eb43bbc48c">   22</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_number_config.html#a7c735e19bd0fe6ed1eb2f2eb43bbc48c">NumberConfig::to_json</a>(JsonObject&amp; doc) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  doc[<span class="stringliteral">&quot;value&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_number_config.html#ae429c215e94ccad7263a4f121d377351">value_</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
+</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <a class="code hl_variable" href="classsensesp_1_1_string_config.html#a7655830271c64dc4b37aaa5dc4da22f9">value_</a> = config[<span class="stringliteral">&quot;value&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
-</div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classsensesp_1_1_number_config.html#af1edd227b1703e5d9194083172886a2e">   27</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_number_config.html#af1edd227b1703e5d9194083172886a2e">NumberConfig::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;value&quot;</span>].is&lt;float&gt;()) {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kNumberConfigSchemaTemplate[] = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="stringliteral">        &quot;value&quot;: { &quot;title&quot;: &quot;{{title}}&quot;, &quot;type&quot;: &quot;number&quot; }</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="stringliteral">  })&quot;;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="stringliteral"></span> </div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classsensesp_1_1_number_config.html#afbfe87962fe96fbc8ad5fbbbc80c009b">   39</a></span><span class="stringliteral">String <a class="code hl_function" href="classsensesp_1_1_number_config.html#afbfe87962fe96fbc8ad5fbbbc80c009b">NumberConfig::get_config_schema</a>() {</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="stringliteral">  String schema = kNumberConfigSchemaTemplate;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="stringliteral">  schema.replace(</span><span class="stringliteral">&quot;{{title}}&quot;</span>, <a class="code hl_variable" href="classsensesp_1_1_number_config.html#aaa364a2017a56f30acbeafbcc039e1f7">title_</a>);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">return</span> schema;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_variable" href="classsensesp_1_1_number_config.html#ae429c215e94ccad7263a4f121d377351">value_</a> = config[<span class="stringliteral">&quot;value&quot;</span>];</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classsensesp_1_1_number_config.html#af2e1fa956169347475478d8c604aa63f">   45</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_number_config.html#af2e1fa956169347475478d8c604aa63f">NumberConfig::get_configuration</a>(JsonObject&amp; doc) { doc[<span class="stringliteral">&quot;value&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_number_config.html#ae429c215e94ccad7263a4f121d377351">value_</a>; }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classsensesp_1_1_checkbox_config.html#ad45f7a0f62d4ce97356de10e5b92942f">   37</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_checkbox_config.html#ad45f7a0f62d4ce97356de10e5b92942f">CheckboxConfig::to_json</a>(JsonObject&amp; doc) {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  doc[<span class="stringliteral">&quot;value&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_checkbox_config.html#a7261aa53de038877af7aff331a33274d">value_</a>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classsensesp_1_1_checkbox_config.html#a86be68db8cf3164f85a9926ee0cbd136">   42</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_checkbox_config.html#a86be68db8cf3164f85a9926ee0cbd136">CheckboxConfig::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;value&quot;</span>].is&lt;bool&gt;()) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classsensesp_1_1_number_config.html#a1b3e0662dcacd8604efb8ef34e1342c0">   47</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_number_config.html#a1b3e0662dcacd8604efb8ef34e1342c0">NumberConfig::set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;value&quot;</span>].is&lt;float&gt;()) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <a class="code hl_variable" href="classsensesp_1_1_checkbox_config.html#a7261aa53de038877af7aff331a33274d">value_</a> = config[<span class="stringliteral">&quot;value&quot;</span>];</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <a class="code hl_variable" href="classsensesp_1_1_number_config.html#ae429c215e94ccad7263a4f121d377351">value_</a> = config[<span class="stringliteral">&quot;value&quot;</span>];</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classsensesp_1_1_select_config.html#abda4f56c369a9977c41e8cbfd3aa23b7">   52</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_select_config.html#abda4f56c369a9977c41e8cbfd3aa23b7">SelectConfig::to_json</a>(JsonObject&amp; doc) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  doc[<span class="stringliteral">&quot;value&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_select_config.html#a690b847923ac2ed271389df7499578a8">value_</a>;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
 </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kCheckboxConfigSchemaTemplate[] = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="stringliteral">        &quot;value&quot;: { &quot;title&quot;: &quot;{{title}}&quot;, &quot;type&quot;: &quot;boolean&quot; }</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="stringliteral">  })&quot;;</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="stringliteral"></span> </div>
-<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classsensesp_1_1_checkbox_config.html#a66f261a74074aee057a549eb209025cd">   64</a></span><span class="stringliteral">String <a class="code hl_function" href="classsensesp_1_1_checkbox_config.html#a66f261a74074aee057a549eb209025cd">CheckboxConfig::get_config_schema</a>() {</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="stringliteral">  String schema = kCheckboxConfigSchemaTemplate;</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="stringliteral">  schema.replace(</span><span class="stringliteral">&quot;{{title}}&quot;</span>, <a class="code hl_variable" href="classsensesp_1_1_checkbox_config.html#a748cb45c3abb102eebf6bd7049a61bc6">title_</a>);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">return</span> schema;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classsensesp_1_1_select_config.html#a627101576ca3eb52cdbcddf47ed2b97f">   57</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_select_config.html#a627101576ca3eb52cdbcddf47ed2b97f">SelectConfig::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;value&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <a class="code hl_variable" href="classsensesp_1_1_select_config.html#a690b847923ac2ed271389df7499578a8">value_</a> = config[<span class="stringliteral">&quot;value&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
 </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classsensesp_1_1_checkbox_config.html#ac23ce8bac29b14c912165787dc46b854">   70</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_checkbox_config.html#ac23ce8bac29b14c912165787dc46b854">CheckboxConfig::get_configuration</a>(JsonObject&amp; doc) {</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  doc[<span class="stringliteral">&quot;value&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_checkbox_config.html#a7261aa53de038877af7aff331a33274d">value_</a>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}</div>
-</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classsensesp_1_1_checkbox_config.html#a0019d515db574d2f27b1e1ab885a0147">   74</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_checkbox_config.html#a0019d515db574d2f27b1e1ab885a0147">CheckboxConfig::set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;value&quot;</span>].is&lt;bool&gt;()) {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  }</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <a class="code hl_variable" href="classsensesp_1_1_checkbox_config.html#a7261aa53de038877af7aff331a33274d">value_</a> = config[<span class="stringliteral">&quot;value&quot;</span>];</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
-</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kSelectConfigSchemaTemplate[] = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="stringliteral">        &quot;value&quot;: {</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="stringliteral">            &quot;title&quot;: &quot;{{title}}&quot;,</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="stringliteral">            &quot;type&quot;: &quot;array&quot;,</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="stringliteral">            &quot;format&quot;: &quot;{format}&quot;,</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="stringliteral">            &quot;uniqueItems&quot;: true,</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="stringliteral">            &quot;items&quot;: {</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="stringliteral">                &quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [{{options}}]</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="stringliteral">            }</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="stringliteral">        }</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="stringliteral">  })&quot;;</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="stringliteral"></span> </div>
-<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classsensesp_1_1_select_config.html#a11d8a4057fbb5044c60b8074861c6ad6">   99</a></span><span class="stringliteral">String <a class="code hl_function" href="classsensesp_1_1_select_config.html#a11d8a4057fbb5044c60b8074861c6ad6">SelectConfig::get_config_schema</a>() {</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="stringliteral">  String schema = kSelectConfigSchemaTemplate;</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="stringliteral">  schema.replace(</span><span class="stringliteral">&quot;{{title}}&quot;</span>, <a class="code hl_variable" href="classsensesp_1_1_select_config.html#a8109de6a2c68301c02f0adc623247d78">title_</a>);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  String options;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_variable" href="classsensesp_1_1_select_config.html#af67a72595a52240684cde91f57d03573">options_</a>.size(); i++) {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    options += <span class="stringliteral">&quot;\&quot;&quot;</span> + <a class="code hl_variable" href="classsensesp_1_1_select_config.html#af67a72595a52240684cde91f57d03573">options_</a>[i] + <span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordflow">if</span> (i &lt; <a class="code hl_variable" href="classsensesp_1_1_select_config.html#af67a72595a52240684cde91f57d03573">options_</a>.size() - 1) {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      options += <span class="stringliteral">&quot;,&quot;</span>;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  }</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  schema.replace(<span class="stringliteral">&quot;{{options}}&quot;</span>, options);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  String format;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_select_config.html#a61502da6fda0eba628a64dbc5ac8ff15">format_</a> == <a class="code hl_enumvalue" href="namespacesensesp.html#ab3039de894b34688453545762b0fe404a7934d40c7c17315d892e8d5d745b1c66">SelectType::kUndefined</a>) {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    format = <a class="code hl_variable" href="classsensesp_1_1_select_config.html#af67a72595a52240684cde91f57d03573">options_</a>.size() &gt;= 8 ? <span class="stringliteral">&quot;select&quot;</span> : <span class="stringliteral">&quot;checkbox&quot;</span>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    format = <a class="code hl_variable" href="classsensesp_1_1_select_config.html#a61502da6fda0eba628a64dbc5ac8ff15">format_</a> == <a class="code hl_enumvalue" href="namespacesensesp.html#ab3039de894b34688453545762b0fe404a90bd63525fa6f50caf90d91c426e018b">SelectType::kCheckbox</a> ? <span class="stringliteral">&quot;checkbox&quot;</span> : <span class="stringliteral">&quot;select&quot;</span>;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  }</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  schema.replace(<span class="stringliteral">&quot;{format}&quot;</span>, <a class="code hl_variable" href="classsensesp_1_1_select_config.html#af67a72595a52240684cde91f57d03573">options_</a>.size() &gt; 3 ? <span class="stringliteral">&quot;checkbox&quot;</span> : <span class="stringliteral">&quot;radio&quot;</span>);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keywordflow">return</span> schema;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
-</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classsensesp_1_1_select_config.html#a9a1beabd04613df4cb6d92e5b0c9bb2e">  120</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_select_config.html#a9a1beabd04613df4cb6d92e5b0c9bb2e">SelectConfig::get_configuration</a>(JsonObject&amp; doc) { doc[<span class="stringliteral">&quot;value&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_select_config.html#a690b847923ac2ed271389df7499578a8">value_</a>; }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classsensesp_1_1_select_config.html#a4cce1f27932e4d5d18fe820d679ab8ac">  122</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_select_config.html#a4cce1f27932e4d5d18fe820d679ab8ac">SelectConfig::set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;value&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <a class="code hl_variable" href="classsensesp_1_1_select_config.html#a690b847923ac2ed271389df7499578a8">value_</a> = config[<span class="stringliteral">&quot;value&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
-</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_checkbox_config_html_a0019d515db574d2f27b1e1ab885a0147"><div class="ttname"><a href="classsensesp_1_1_checkbox_config.html#a0019d515db574d2f27b1e1ab885a0147">sensesp::CheckboxConfig::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00074">ui_controls.cpp:74</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_checkbox_config_html_a66f261a74074aee057a549eb209025cd"><div class="ttname"><a href="classsensesp_1_1_checkbox_config.html#a66f261a74074aee057a549eb209025cd">sensesp::CheckboxConfig::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition</b> <a href="#l00064">ui_controls.cpp:64</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_checkbox_config_html_a7261aa53de038877af7aff331a33274d"><div class="ttname"><a href="classsensesp_1_1_checkbox_config.html#a7261aa53de038877af7aff331a33274d">sensesp::CheckboxConfig::value_</a></div><div class="ttdeci">bool value_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00060">ui_controls.h:60</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_checkbox_config_html_a748cb45c3abb102eebf6bd7049a61bc6"><div class="ttname"><a href="classsensesp_1_1_checkbox_config.html#a748cb45c3abb102eebf6bd7049a61bc6">sensesp::CheckboxConfig::title_</a></div><div class="ttdeci">String title_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00061">ui_controls.h:61</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_checkbox_config_html_ac23ce8bac29b14c912165787dc46b854"><div class="ttname"><a href="classsensesp_1_1_checkbox_config.html#ac23ce8bac29b14c912165787dc46b854">sensesp::CheckboxConfig::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00070">ui_controls.cpp:70</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_number_config_html_a1b3e0662dcacd8604efb8ef34e1342c0"><div class="ttname"><a href="classsensesp_1_1_number_config.html#a1b3e0662dcacd8604efb8ef34e1342c0">sensesp::NumberConfig::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00047">ui_controls.cpp:47</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_number_config_html_aaa364a2017a56f30acbeafbcc039e1f7"><div class="ttname"><a href="classsensesp_1_1_number_config.html#aaa364a2017a56f30acbeafbcc039e1f7">sensesp::NumberConfig::title_</a></div><div class="ttdeci">String title_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00043">ui_controls.h:43</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_number_config_html_ae429c215e94ccad7263a4f121d377351"><div class="ttname"><a href="classsensesp_1_1_number_config.html#ae429c215e94ccad7263a4f121d377351">sensesp::NumberConfig::value_</a></div><div class="ttdeci">float value_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00042">ui_controls.h:42</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_number_config_html_af2e1fa956169347475478d8c604aa63f"><div class="ttname"><a href="classsensesp_1_1_number_config.html#af2e1fa956169347475478d8c604aa63f">sensesp::NumberConfig::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00045">ui_controls.cpp:45</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_number_config_html_afbfe87962fe96fbc8ad5fbbbc80c009b"><div class="ttname"><a href="classsensesp_1_1_number_config.html#afbfe87962fe96fbc8ad5fbbbc80c009b">sensesp::NumberConfig::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition</b> <a href="#l00039">ui_controls.cpp:39</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_select_config_html_a11d8a4057fbb5044c60b8074861c6ad6"><div class="ttname"><a href="classsensesp_1_1_select_config.html#a11d8a4057fbb5044c60b8074861c6ad6">sensesp::SelectConfig::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition</b> <a href="#l00099">ui_controls.cpp:99</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_select_config_html_a4cce1f27932e4d5d18fe820d679ab8ac"><div class="ttname"><a href="classsensesp_1_1_select_config.html#a4cce1f27932e4d5d18fe820d679ab8ac">sensesp::SelectConfig::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00122">ui_controls.cpp:122</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_select_config_html_a61502da6fda0eba628a64dbc5ac8ff15"><div class="ttname"><a href="classsensesp_1_1_select_config.html#a61502da6fda0eba628a64dbc5ac8ff15">sensesp::SelectConfig::format_</a></div><div class="ttdeci">SelectType format_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00092">ui_controls.h:92</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_select_config_html_a690b847923ac2ed271389df7499578a8"><div class="ttname"><a href="classsensesp_1_1_select_config.html#a690b847923ac2ed271389df7499578a8">sensesp::SelectConfig::value_</a></div><div class="ttdeci">String value_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00089">ui_controls.h:89</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_select_config_html_a8109de6a2c68301c02f0adc623247d78"><div class="ttname"><a href="classsensesp_1_1_select_config.html#a8109de6a2c68301c02f0adc623247d78">sensesp::SelectConfig::title_</a></div><div class="ttdeci">String title_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00090">ui_controls.h:90</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_select_config_html_a9a1beabd04613df4cb6d92e5b0c9bb2e"><div class="ttname"><a href="classsensesp_1_1_select_config.html#a9a1beabd04613df4cb6d92e5b0c9bb2e">sensesp::SelectConfig::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00120">ui_controls.cpp:120</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_select_config_html_af67a72595a52240684cde91f57d03573"><div class="ttname"><a href="classsensesp_1_1_select_config.html#af67a72595a52240684cde91f57d03573">sensesp::SelectConfig::options_</a></div><div class="ttdeci">std::vector&lt; String &gt; options_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00091">ui_controls.h:91</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_string_config_html_a16995c4520f41478ea6bf0fe32ef32bb"><div class="ttname"><a href="classsensesp_1_1_string_config.html#a16995c4520f41478ea6bf0fe32ef32bb">sensesp::StringConfig::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00020">ui_controls.cpp:20</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_string_config_html_a3501e7686072f3c47d27c1e023ef9b3d"><div class="ttname"><a href="classsensesp_1_1_string_config.html#a3501e7686072f3c47d27c1e023ef9b3d">sensesp::StringConfig::title_</a></div><div class="ttdeci">String title_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00025">ui_controls.h:25</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_string_config_html_a472ef08b40f08167f34dbca9354dd9cb"><div class="ttname"><a href="classsensesp_1_1_string_config.html#a472ef08b40f08167f34dbca9354dd9cb">sensesp::StringConfig::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition</b> <a href="#l00014">ui_controls.cpp:14</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_string_config_html_a7655830271c64dc4b37aaa5dc4da22f9"><div class="ttname"><a href="classsensesp_1_1_string_config.html#a7655830271c64dc4b37aaa5dc4da22f9">sensesp::StringConfig::value_</a></div><div class="ttdeci">String value_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00024">ui_controls.h:24</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_string_config_html_a7bf786d0df941d06e4c0d2409946557e"><div class="ttname"><a href="classsensesp_1_1_string_config.html#a7bf786d0df941d06e4c0d2409946557e">sensesp::StringConfig::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00022">ui_controls.cpp:22</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_ab3039de894b34688453545762b0fe404a7934d40c7c17315d892e8d5d745b1c66"><div class="ttname"><a href="namespacesensesp.html#ab3039de894b34688453545762b0fe404a7934d40c7c17315d892e8d5d745b1c66">sensesp::SelectType::kUndefined</a></div><div class="ttdeci">@ kUndefined</div></div>
-<div class="ttc" id="anamespacesensesp_html_ab3039de894b34688453545762b0fe404a90bd63525fa6f50caf90d91c426e018b"><div class="ttname"><a href="namespacesensesp.html#ab3039de894b34688453545762b0fe404a90bd63525fa6f50caf90d91c426e018b">sensesp::SelectType::kCheckbox</a></div><div class="ttdeci">@ kCheckbox</div></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_checkbox_config_html_a7261aa53de038877af7aff331a33274d"><div class="ttname"><a href="classsensesp_1_1_checkbox_config.html#a7261aa53de038877af7aff331a33274d">sensesp::CheckboxConfig::value_</a></div><div class="ttdeci">bool value_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00068">ui_controls.h:68</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_checkbox_config_html_a86be68db8cf3164f85a9926ee0cbd136"><div class="ttname"><a href="classsensesp_1_1_checkbox_config.html#a86be68db8cf3164f85a9926ee0cbd136">sensesp::CheckboxConfig::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00042">ui_controls.cpp:42</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_checkbox_config_html_ad45f7a0f62d4ce97356de10e5b92942f"><div class="ttname"><a href="classsensesp_1_1_checkbox_config.html#ad45f7a0f62d4ce97356de10e5b92942f">sensesp::CheckboxConfig::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00037">ui_controls.cpp:37</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_number_config_html_a7c735e19bd0fe6ed1eb2f2eb43bbc48c"><div class="ttname"><a href="classsensesp_1_1_number_config.html#a7c735e19bd0fe6ed1eb2f2eb43bbc48c">sensesp::NumberConfig::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00022">ui_controls.cpp:22</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_number_config_html_ae429c215e94ccad7263a4f121d377351"><div class="ttname"><a href="classsensesp_1_1_number_config.html#ae429c215e94ccad7263a4f121d377351">sensesp::NumberConfig::value_</a></div><div class="ttdeci">float value_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00043">ui_controls.h:43</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_number_config_html_af1edd227b1703e5d9194083172886a2e"><div class="ttname"><a href="classsensesp_1_1_number_config.html#af1edd227b1703e5d9194083172886a2e">sensesp::NumberConfig::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00027">ui_controls.cpp:27</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_select_config_html_a627101576ca3eb52cdbcddf47ed2b97f"><div class="ttname"><a href="classsensesp_1_1_select_config.html#a627101576ca3eb52cdbcddf47ed2b97f">sensesp::SelectConfig::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00057">ui_controls.cpp:57</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_select_config_html_a690b847923ac2ed271389df7499578a8"><div class="ttname"><a href="classsensesp_1_1_select_config.html#a690b847923ac2ed271389df7499578a8">sensesp::SelectConfig::value_</a></div><div class="ttdeci">String value_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00104">ui_controls.h:104</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_select_config_html_abda4f56c369a9977c41e8cbfd3aa23b7"><div class="ttname"><a href="classsensesp_1_1_select_config.html#abda4f56c369a9977c41e8cbfd3aa23b7">sensesp::SelectConfig::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00052">ui_controls.cpp:52</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_string_config_html_a41525196b6aaea45a32d3179410def69"><div class="ttname"><a href="classsensesp_1_1_string_config.html#a41525196b6aaea45a32d3179410def69">sensesp::StringConfig::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00012">ui_controls.cpp:12</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_string_config_html_a7655830271c64dc4b37aaa5dc4da22f9"><div class="ttname"><a href="classsensesp_1_1_string_config.html#a7655830271c64dc4b37aaa5dc4da22f9">sensesp::StringConfig::value_</a></div><div class="ttdeci">String value_</div><div class="ttdef"><b>Definition</b> <a href="ui__controls_8h_source.html#l00023">ui_controls.h:23</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_string_config_html_aecab842ea6d2d2f0ee48e8b7733a2aea"><div class="ttname"><a href="classsensesp_1_1_string_config.html#aecab842ea6d2d2f0ee48e8b7733a2aea">sensesp::StringConfig::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00007">ui_controls.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
 <div class="ttc" id="aui__controls_8h_html"><div class="ttname"><a href="ui__controls_8h.html">ui_controls.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,7 +1,15 @@
 <map id="sensesp::SKListener::release_semaphore" name="sensesp::SKListener::release_semaphore">
-<area shape="rect" id="Node000001" title=" " alt="" coords="406,5,548,46"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_s_k_w_s_client.html#a4f59b0bc0379552b4b3a6a232ed88e62" title="Called when a PUT event is received." alt="" coords="206,5,358,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="391,28,358,28,358,23,391,23"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="438,71,580,111"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_s_k_w_s_client.html#a4f59b0bc0379552b4b3a6a232ed88e62" title="Called when a PUT event is received." alt="" coords="222,5,374,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="426,68,365,49,367,44,428,63"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_s_k_w_s_client.html#a1f653dcdf79aceaf276ec59f26dd3765" title="Loop through the received updates and process them." alt="" coords="206,71,390,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="423,94,391,94,391,88,423,88"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_s_k_w_s_client.html#aa11946c03cd6953741bdb8e2f574952e" title="Subscribes the SK delta paths to the websocket." alt="" coords="222,136,374,177"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="428,119,367,138,365,133,426,114"/>
 <area shape="rect" id="Node000003" href="$classsensesp_1_1_s_k_w_s_client.html#a10433bce2a343bd467b148a5baaaaa08" title="Called when the websocket receives a delta." alt="" coords="5,5,158,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="190,28,158,28,158,23,190,23"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="206,28,158,28,158,23,206,23"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_s_k_w_s_client.html#a06543d390e00ae846df1313247f4f877" title=" " alt="" coords="5,71,158,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="190,94,158,94,158,88,190,88"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_s_k_w_s_client.html#afbe265351213c154f3977b8fb56fc91d" title="Called when the websocket connection is established." alt="" coords="5,136,158,177"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="206,159,158,159,158,154,206,154"/>
 </map>

@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -121,22 +121,30 @@ $(function(){initNavTree('filesystem_8cpp_source.html',''); initResizable(true);
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;FATAL: Filesystem initialization failed.&quot;</span>);</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    ESP.restart();</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  }</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Filesystem initialized&quot;</span>);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
 </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">   16</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">Filesystem::reset</a>() {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Formatting filesystem&quot;</span>);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  SPIFFS.format();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classsensesp_1_1_filesystem.html#a5b2f34d5147474865c0c3aa3f972db6b">   17</a></span><a class="code hl_function" href="classsensesp_1_1_filesystem.html#a5b2f34d5147474865c0c3aa3f972db6b">Filesystem::~Filesystem</a>() {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  SPIFFS.end();</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>}</div>
 </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">   21</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">Filesystem::reset</a>() {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Formatting filesystem&quot;</span>);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  SPIFFS.format();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
+</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_filesystem_html_a5b2f34d5147474865c0c3aa3f972db6b"><div class="ttname"><a href="classsensesp_1_1_filesystem.html#a5b2f34d5147474865c0c3aa3f972db6b">sensesp::Filesystem::~Filesystem</a></div><div class="ttdeci">~Filesystem()</div><div class="ttdef"><b>Definition</b> <a href="#l00017">filesystem.cpp:17</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_filesystem_html_ab9408ffdc47e97d43f6a2d77de654c48"><div class="ttname"><a href="classsensesp_1_1_filesystem.html#ab9408ffdc47e97d43f6a2d77de654c48">sensesp::Filesystem::Filesystem</a></div><div class="ttdeci">Filesystem()</div><div class="ttdef"><b>Definition</b> <a href="#l00009">filesystem.cpp:9</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_filesystem_html_ad74cbbbd2ea256f715b694d8aa3a9211"><div class="ttname"><a href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">sensesp::Filesystem::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition</b> <a href="#l00016">filesystem.cpp:16</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_filesystem_html_ad74cbbbd2ea256f715b694d8aa3a9211"><div class="ttname"><a href="classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211">sensesp::Filesystem::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition</b> <a href="#l00021">filesystem.cpp:21</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_resettable_html"><div class="ttname"><a href="classsensesp_1_1_resettable.html">sensesp::Resettable</a></div><div class="ttdoc">Automatic calling of the reset() method when the device needs to be reset.</div><div class="ttdef"><b>Definition</b> <a href="resettable_8h_source.html#l00020">resettable.h:20</a></div></div>
 <div class="ttc" id="afilesystem_8h_html"><div class="ttname"><a href="filesystem_8h.html">filesystem.h</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

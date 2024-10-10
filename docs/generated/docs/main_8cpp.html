@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -105,16 +105,15 @@ $(function(){initNavTree('main_8cpp.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">main.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="digital__input_8h_source.html">sensesp/sensors/digital_input.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="lambda__transform_8h_source.html">sensesp/transforms/lambda_transform.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="time__counter_8h_source.html">sensesp/transforms/time_counter.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="frequency_8h_source.html">sensesp/transforms/frequency.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="analog__input_8h_source.html">sensesp/sensors/analog_input.h</a>&quot;</code><br />
+<code>#include &lt;Arduino.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="signalk__output_8h_source.html">sensesp/signalk/signalk_output.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="linear_8h_source.html">sensesp/transforms/linear.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
@@ -130,15 +129,6 @@ Functions</h2></td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f" id="r_afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a286f547aa8987082169f873da9e96d72" id="r_a286f547aa8987082169f873da9e96d72"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a286f547aa8987082169f873da9e96d72">cycle_start_time</a> = 0</td></tr>
-<tr class="separator:a286f547aa8987082169f873da9e96d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5df0eb7a79005d7b9c25e258fa872d0" id="r_ac5df0eb7a79005d7b9c25e258fa872d0"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5df0eb7a79005d7b9c25e258fa872d0">freq_start_time</a> = 0</td></tr>
-<tr class="separator:ac5df0eb7a79005d7b9c25e258fa872d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0d22272b68e75d19ac0b80c01f806b6" id="r_ae0d22272b68e75d19ac0b80c01f806b6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0d22272b68e75d19ac0b80c01f806b6">freq</a> = 0</td></tr>
-<tr class="separator:ae0d22272b68e75d19ac0b80c01f806b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="afe461d27b9c48d5921c00d521181f12f" name="afe461d27b9c48d5921c00d521181f12f"></a>
@@ -156,11 +146,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00110">110</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00122">122</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph.svg" width="555" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -180,61 +170,12 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00031">31</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00015">15</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a286f547aa8987082169f873da9e96d72" name="a286f547aa8987082169f873da9e96d72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a286f547aa8987082169f873da9e96d72">&#9670;&#160;</a></span>cycle_start_time</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long cycle_start_time = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00027">27</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ae0d22272b68e75d19ac0b80c01f806b6" name="ae0d22272b68e75d19ac0b80c01f806b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0d22272b68e75d19ac0b80c01f806b6">&#9670;&#160;</a></span>freq</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int freq = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00029">29</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ac5df0eb7a79005d7b9c25e258fa872d0" name="ac5df0eb7a79005d7b9c25e258fa872d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5df0eb7a79005d7b9c25e258fa872d0">&#9670;&#160;</a></span>freq_start_time</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long freq_start_time = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00028">28</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>

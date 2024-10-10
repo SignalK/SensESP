@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -122,16 +122,16 @@ $(function(){initNavTree('transform_8cpp_source.html',''); initResizable(true); 
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>std::set&lt;TransformBase*&gt; TransformBase::transforms_;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classsensesp_1_1_transform_base.html#a88d18184324f881ce8bf6003b7fe8bd3">   15</a></span><a class="code hl_function" href="classsensesp_1_1_transform_base.html#a88d18184324f881ce8bf6003b7fe8bd3">TransformBase::TransformBase</a>(<span class="keyword">const</span> String&amp; config_path)</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    : <a class="code hl_class" href="classsensesp_1_1_configurable.html">Configurable</a>{std::move(config_path)} {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classsensesp_1_1_transform_base.html#ab57b3fe6ceb1f934f0d88dc230a2a293">   15</a></span><a class="code hl_function" href="classsensesp_1_1_transform_base.html#ab57b3fe6ceb1f934f0d88dc230a2a293">TransformBase::TransformBase</a>(<span class="keyword">const</span> String&amp; config_path)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    : <a class="code hl_class" href="classsensesp_1_1_file_system_saveable.html">FileSystemSaveable</a>{config_path} {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  transforms_.insert(<span class="keyword">this</span>);</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
 </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_configurable_html"><div class="ttname"><a href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></div><div class="ttdoc">An object that is capable of having configuration data that can be set remotely using a RESTful API,...</div><div class="ttdef"><b>Definition</b> <a href="configurable_8h_source.html#l00025">configurable.h:25</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_transform_base_html_a88d18184324f881ce8bf6003b7fe8bd3"><div class="ttname"><a href="classsensesp_1_1_transform_base.html#a88d18184324f881ce8bf6003b7fe8bd3">sensesp::TransformBase::TransformBase</a></div><div class="ttdeci">TransformBase(const String &amp;config_path=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00015">transform.cpp:15</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html">sensesp::FileSystemSaveable</a></div><div class="ttdef"><b>Definition</b> <a href="saveable_8h_source.html#l00061">saveable.h:61</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_transform_base_html_ab57b3fe6ceb1f934f0d88dc230a2a293"><div class="ttname"><a href="classsensesp_1_1_transform_base.html#ab57b3fe6ceb1f934f0d88dc230a2a293">sensesp::TransformBase::TransformBase</a></div><div class="ttdeci">TransformBase(const String &amp;config_path)</div><div class="ttdef"><b>Definition</b> <a href="#l00015">transform.cpp:15</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 <div class="ttc" id="atransform_8h_html"><div class="ttname"><a href="transform_8h.html">transform.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

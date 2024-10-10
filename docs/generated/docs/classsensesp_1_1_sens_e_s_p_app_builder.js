@@ -9,13 +9,15 @@ var classsensesp_1_1_sens_e_s_p_app_builder =
     [ "enable_uptime_sensor", "classsensesp_1_1_sens_e_s_p_app_builder.html#aec8b05c9896ddc46d747ffea671dad70", null ],
     [ "enable_wifi_signal_sensor", "classsensesp_1_1_sens_e_s_p_app_builder.html#afabc97d522db0964e161d42e1d54df4e", null ],
     [ "enable_wifi_watchdog", "classsensesp_1_1_sens_e_s_p_app_builder.html#a14a997a2940032d03914a9c63f32dd7e", null ],
-    [ "get_app", "classsensesp_1_1_sens_e_s_p_app_builder.html#ac348bac39d057253e3d291a3c4d7d79f", null ],
+    [ "get_app", "classsensesp_1_1_sens_e_s_p_app_builder.html#ac350562617b1531d0b667a5c0c01b0bc", null ],
     [ "set_admin_user", "classsensesp_1_1_sens_e_s_p_app_builder.html#a1f94d1f51905c2ddc17acf4b97ea99c3", null ],
     [ "set_button_pin", "classsensesp_1_1_sens_e_s_p_app_builder.html#aba398aecdf9a1b8aa3c56dbb8adf9026", null ],
     [ "set_hostname", "classsensesp_1_1_sens_e_s_p_app_builder.html#a2279d09dcc313b1c4299c3d914fbd6a7", null ],
     [ "set_sk_server", "classsensesp_1_1_sens_e_s_p_app_builder.html#a5a069b7609135e4450e7c402ac444baf", null ],
-    [ "set_system_status_led", "classsensesp_1_1_sens_e_s_p_app_builder.html#ace354c8281e0db0301996a9cd8829ec7", null ],
+    [ "set_system_status_led", "classsensesp_1_1_sens_e_s_p_app_builder.html#a5845a5441fec5b8d87d87ffea2bcf567", null ],
     [ "set_wifi", "classsensesp_1_1_sens_e_s_p_app_builder.html#a6722e69579bb08731adc8e82ff49ad0e", null ],
+    [ "set_wifi_access_point", "classsensesp_1_1_sens_e_s_p_app_builder.html#aab705554404c04d954c12e6049519b2d", null ],
+    [ "set_wifi_client", "classsensesp_1_1_sens_e_s_p_app_builder.html#a93703919a632f03cbbbb4c467c430333", null ],
     [ "set_wifi_manager_password", "classsensesp_1_1_sens_e_s_p_app_builder.html#aa258896b0bf6be04dc7db75799c672d8", null ],
-    [ "app_", "classsensesp_1_1_sens_e_s_p_app_builder.html#acf1e91786d18d367b5e46ef22f633860", null ]
+    [ "app_", "classsensesp_1_1_sens_e_s_p_app_builder.html#a8843ff16b40521be866149bd2b3d3f76", null ]
 ];

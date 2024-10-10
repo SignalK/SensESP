@@ -1,22 +1,20 @@
 <map id="sensesp::SKRequest::send_request" name="sensesp::SKRequest::send_request">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,127,151,168"/>
-<area shape="rect" id="Node000002" href="$namespacesensesp.html#a270290236513f91972b435ad45c4f70b" title="Generate a random UUIDv4 string." alt="" coords="207,5,373,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,125,139,82,167,59,197,40,209,34,211,39,200,44,170,64,142,86,99,129"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_sens_e_s_p_app.html#a0d691348bffb9c65548ad23cd2188ca9" title="Get the singleton instance of the SensESPApp." alt="" coords="199,55,381,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,124,198,97,235,83,236,88,200,102,131,129"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a9068b65bf976f1d1bd5faf1e3126e8ff" title="Get the event loop object from the singleton SensESPBaseApp instance." alt="" coords="429,134,617,174"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="151,142,199,141,290,139,381,141,414,142,414,148,381,146,290,145,199,146,151,147"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_sens_e_s_p_app.html#ab211cfe8ab1c617a889805437b2588f3" title=" " alt="" coords="212,155,368,196"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="152,154,197,160,196,166,151,160"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_s_k_request.html#af3556571b45b5ce5ab74831cb5605ded" title=" " alt="" coords="217,220,362,261"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="119,166,200,205,216,212,214,217,198,210,117,171"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_s_k_w_s_client.html#a81bae8cb4e34295666c9ed83fa952482" title="Send some processed data to the websocket." alt="" coords="214,286,366,326"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="96,166,139,218,168,246,200,271,209,276,207,281,197,275,165,250,136,222,92,170"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_app.html#a05ebb118abaf137b414a8736fb1fc3ba" title="SensESPApp constructor." alt="" coords="445,47,601,88"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="381,65,429,65,429,70,381,70"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="665,141,880,167"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="618,152,650,152,650,157,618,157"/>
-<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="347,217,380,205,452,178,454,183,382,210,349,222"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_s_k_request.html#a9af8d69fb226c27304ceff7646bc86ca" title=" " alt="" coords="450,220,596,261"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="363,238,435,238,435,244,363,244"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,61,151,102"/>
+<area shape="rect" id="Node000002" href="$namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57" title=" " alt="" coords="436,13,578,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,58,153,39,198,24,255,15,314,11,421,14,421,19,314,17,256,21,199,30,155,44,116,63"/>
+<area shape="rect" id="Node000005" href="$namespacesensesp.html#a270290236513f91972b435ad45c4f70b" title="Generate a random UUIDv4 string." alt="" coords="207,40,373,65"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="151,69,191,63,192,69,152,74"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_sens_e_s_p_app.html#a05d22a1dee1fbe4c4c4373de61d02090" title="Get the singleton instance of the SensESPApp." alt="" coords="199,156,381,181"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="118,100,200,139,224,148,223,153,198,144,116,105"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_s_k_request.html#af3556571b45b5ce5ab74831cb5605ded" title=" " alt="" coords="217,89,362,130"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="152,89,202,95,201,101,151,94"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a5ac3b07550aed05e92aeb2a536ea0739" title="Get the event loop object from the singleton SensESPBaseApp instance." alt="" coords="633,5,822,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="578,23,618,23,618,28,578,28"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="870,13,1084,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="822,23,854,23,854,28,822,28"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_sens_e_s_p_app.html#a05ebb118abaf137b414a8736fb1fc3ba" title="SensESPApp constructor." alt="" coords="429,152,585,193"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="382,167,413,168,413,173,382,173"/>
+<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="350,86,380,75,460,43,462,48,382,80,352,91"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_s_k_request.html#a9af8d69fb226c27304ceff7646bc86ca" title=" " alt="" coords="434,87,580,127"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="363,106,419,105,419,111,363,111"/>
 </map>

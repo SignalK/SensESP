@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -106,6 +106,8 @@ $(function(){initNavTree('classsensesp_1_1_s_k_w_s_client.html',''); initResizab
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classsensesp_1_1_s_k_w_s_client-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">sensesp::SKWSClient Class Reference</div></div>
 </div><!--header-->
@@ -118,21 +120,21 @@ $(function(){initNavTree('classsensesp_1_1_s_k_w_s_client.html',''); initResizab
 <div class="dynheader">
 Inheritance diagram for sensesp::SKWSClient:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client__inherit__graph.svg" width="498" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client__inherit__graph.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aabb8d52b1b30f1ccc9e61a68747bb271" id="r_aabb8d52b1b30f1ccc9e61a68747bb271"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabb8d52b1b30f1ccc9e61a68747bb271">SKWSClient</a> (const String &amp;config_path, <a class="el" href="classsensesp_1_1_s_k_delta_queue.html">SKDeltaQueue</a> *sk_delta_queue, const String &amp;server_address, uint16_t server_port, bool use_mdns=true)</td></tr>
-<tr class="separator:aabb8d52b1b30f1ccc9e61a68747bb271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06543d390e00ae846df1313247f4f877" id="r_a06543d390e00ae846df1313247f4f877"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06543d390e00ae846df1313247f4f877">SKWSClient</a> (const String &amp;config_path, std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_s_k_delta_queue.html">SKDeltaQueue</a> &gt; sk_delta_queue, const String &amp;server_address, uint16_t server_port, bool use_mdns=true)</td></tr>
+<tr class="separator:a06543d390e00ae846df1313247f4f877"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae448df2754d0958abe5f42587516840d" id="r_ae448df2754d0958abe5f42587516840d"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae448df2754d0958abe5f42587516840d">get_server_address</a> () const</td></tr>
 <tr class="separator:ae448df2754d0958abe5f42587516840d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dbcea9c948711827a7c672c3375e561" id="r_a6dbcea9c948711827a7c672c3375e561"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6dbcea9c948711827a7c672c3375e561">get_server_port</a> () const</td></tr>
 <tr class="separator:a6dbcea9c948711827a7c672c3375e561"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cf28326ed522edc3f2df87fad367897" id="r_a3cf28326ed522edc3f2df87fad367897"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cf28326ed522edc3f2df87fad367897">get_configuration</a> (JsonObject &amp;root) override final</td></tr>
-<tr class="separator:a3cf28326ed522edc3f2df87fad367897"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2289077140d066a8a5abea96f5eff6f" id="r_ac2289077140d066a8a5abea96f5eff6f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2289077140d066a8a5abea96f5eff6f">set_configuration</a> (const JsonObject &amp;config) override final</td></tr>
-<tr class="separator:ac2289077140d066a8a5abea96f5eff6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ce964d6a7a147dc563404324501151d" id="r_a6ce964d6a7a147dc563404324501151d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ce964d6a7a147dc563404324501151d">to_json</a> (JsonObject &amp;root) override final</td></tr>
+<tr class="separator:a6ce964d6a7a147dc563404324501151d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace3c9afd0a99729fb788e3802cb9fd4e" id="r_ace3c9afd0a99729fb788e3802cb9fd4e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace3c9afd0a99729fb788e3802cb9fd4e">from_json</a> (const JsonObject &amp;config) override final</td></tr>
+<tr class="separator:ace3c9afd0a99729fb788e3802cb9fd4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98b7f8de43ef5ff4105285e3609b8b51" id="r_a98b7f8de43ef5ff4105285e3609b8b51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; int &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98b7f8de43ef5ff4105285e3609b8b51">get_delta_tx_count_producer</a> ()</td></tr>
 <tr class="separator:a98b7f8de43ef5ff4105285e3609b8b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac215811c50ad83fde84244b447b29016" id="r_ac215811c50ad83fde84244b447b29016"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_value_producer.html">ValueProducer</a>&lt; int &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac215811c50ad83fde84244b447b29016">get_delta_rx_count_producer</a> ()</td></tr>
@@ -172,46 +174,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a81bae8cb4e34295666c9ed83fa952482" id="r_a81bae8cb4e34295666c9ed83fa952482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81bae8cb4e34295666c9ed83fa952482">sendTXT</a> (String &amp;payload)</td></tr>
 <tr class="memdesc:a81bae8cb4e34295666c9ed83fa952482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send some processed data to the websocket.  <br /></td></tr>
 <tr class="separator:a81bae8cb4e34295666c9ed83fa952482"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:ae53942d74ca264464ff6e272950c1e68 inherit pub_methods_classsensesp_1_1_configurable" id="r_ae53942d74ca264464ff6e272950c1e68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae53942d74ca264464ff6e272950c1e68">Configurable</a> (String config_path=&quot;&quot;, String description=&quot;&quot;, int sort_order=1000)</td></tr>
-<tr class="separator:ae53942d74ca264464ff6e272950c1e68 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcefc3c29f2b52a626a9787b92122a1c inherit pub_methods_classsensesp_1_1_configurable" id="r_adcefc3c29f2b52a626a9787b92122a1c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#adcefc3c29f2b52a626a9787b92122a1c">is_async</a> ()</td></tr>
-<tr class="memdesc:adcefc3c29f2b52a626a9787b92122a1c inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a> is asynchronous.  <br /></td></tr>
-<tr class="separator:adcefc3c29f2b52a626a9787b92122a1c inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a306aeabfedf9ddf07aae6d25c5ee11 inherit pub_methods_classsensesp_1_1_configurable" id="r_a2a306aeabfedf9ddf07aae6d25c5ee11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a2a306aeabfedf9ddf07aae6d25c5ee11">requires_restart</a> ()</td></tr>
-<tr class="memdesc:a2a306aeabfedf9ddf07aae6d25c5ee11 inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a> requires restart after saving.  <br /></td></tr>
-<tr class="separator:a2a306aeabfedf9ddf07aae6d25c5ee11 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa020e0768f7c988d808f7b4ce5fb3ff inherit pub_methods_classsensesp_1_1_configurable" id="r_afa020e0768f7c988d808f7b4ce5fb3ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#afa020e0768f7c988d808f7b4ce5fb3ff">set_requires_restart</a> (bool <a class="el" href="classsensesp_1_1_configurable.html#a2a306aeabfedf9ddf07aae6d25c5ee11">requires_restart</a>)</td></tr>
-<tr class="memdesc:afa020e0768f7c988d808f7b4ce5fb3ff inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the requires_restart flag.  <br /></td></tr>
-<tr class="separator:afa020e0768f7c988d808f7b4ce5fb3ff inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc2acfdde683ac228935c7a9d70af14a inherit pub_methods_classsensesp_1_1_configurable" id="r_acc2acfdde683ac228935c7a9d70af14a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="configurable_8h.html#a874d81f2ff99c2f65213d6db1314a485">ConfigurableResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#acc2acfdde683ac228935c7a9d70af14a">async_get_configuration</a> ()</td></tr>
-<tr class="memdesc:acc2acfdde683ac228935c7a9d70af14a inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiate an asynchronous request to get the current configuration.  <br /></td></tr>
-<tr class="separator:acc2acfdde683ac228935c7a9d70af14a inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a157ca4711739ec5183e0148814e277b8 inherit pub_methods_classsensesp_1_1_configurable" id="r_a157ca4711739ec5183e0148814e277b8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="configurable_8h.html#a874d81f2ff99c2f65213d6db1314a485">ConfigurableResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a157ca4711739ec5183e0148814e277b8">poll_get_result</a> (JsonObject &amp;config)</td></tr>
-<tr class="memdesc:a157ca4711739ec5183e0148814e277b8 inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current status of the last <a class="el" href="classsensesp_1_1_configurable.html#acc2acfdde683ac228935c7a9d70af14a" title="Initiate an asynchronous request to get the current configuration.">async_get_configuration()</a> call.  <br /></td></tr>
-<tr class="separator:a157ca4711739ec5183e0148814e277b8 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a635ec17d090123e74637c79c6806fca2 inherit pub_methods_classsensesp_1_1_configurable" id="r_a635ec17d090123e74637c79c6806fca2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="configurable_8h.html#a874d81f2ff99c2f65213d6db1314a485">ConfigurableResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a635ec17d090123e74637c79c6806fca2">async_set_configuration</a> (const JsonObject &amp;config)</td></tr>
-<tr class="memdesc:a635ec17d090123e74637c79c6806fca2 inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiate an asynchronous request to set the configuration.  <br /></td></tr>
-<tr class="separator:a635ec17d090123e74637c79c6806fca2 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2958e89a462e6cdbd977996cc20411fd inherit pub_methods_classsensesp_1_1_configurable" id="r_a2958e89a462e6cdbd977996cc20411fd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="configurable_8h.html#a874d81f2ff99c2f65213d6db1314a485">ConfigurableResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a2958e89a462e6cdbd977996cc20411fd">poll_set_result</a> ()</td></tr>
-<tr class="memdesc:a2958e89a462e6cdbd977996cc20411fd inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current status of the last async set_configuration call.  <br /></td></tr>
-<tr class="separator:a2958e89a462e6cdbd977996cc20411fd inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a0b1727f0e7fca0730381e030360a1a inherit pub_methods_classsensesp_1_1_configurable" id="r_a2a0b1727f0e7fca0730381e030360a1a"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a2a0b1727f0e7fca0730381e030360a1a">get_config_schema</a> ()</td></tr>
-<tr class="separator:a2a0b1727f0e7fca0730381e030360a1a inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaa2d08f0dcb649f8fabbc3df93464b4 inherit pub_methods_classsensesp_1_1_configurable" id="r_aeaa2d08f0dcb649f8fabbc3df93464b4"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#aeaa2d08f0dcb649f8fabbc3df93464b4">get_description</a> ()</td></tr>
-<tr class="separator:aeaa2d08f0dcb649f8fabbc3df93464b4 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a191293851b1ca48e3dab7a7aef8d07ce inherit pub_methods_classsensesp_1_1_configurable" id="r_a191293851b1ca48e3dab7a7aef8d07ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a191293851b1ca48e3dab7a7aef8d07ce">set_description</a> (String description)</td></tr>
-<tr class="memdesc:a191293851b1ca48e3dab7a7aef8d07ce inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the description of the <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a>.  <br /></td></tr>
-<tr class="separator:a191293851b1ca48e3dab7a7aef8d07ce inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5635a8edf667b2b280cd7d2acb0bdc8 inherit pub_methods_classsensesp_1_1_configurable" id="r_af5635a8edf667b2b280cd7d2acb0bdc8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#af5635a8edf667b2b280cd7d2acb0bdc8">get_sort_order</a> ()</td></tr>
-<tr class="separator:af5635a8edf667b2b280cd7d2acb0bdc8 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6230bb9c6c7658cb1209706ebd2f34db inherit pub_methods_classsensesp_1_1_configurable" id="r_a6230bb9c6c7658cb1209706ebd2f34db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a6230bb9c6c7658cb1209706ebd2f34db">set_sort_order</a> (int sort_order)</td></tr>
-<tr class="separator:a6230bb9c6c7658cb1209706ebd2f34db inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4202ce8a5b9ad23d2a2be27de11153f4 inherit pub_methods_classsensesp_1_1_configurable" id="r_a4202ce8a5b9ad23d2a2be27de11153f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4">save_configuration</a> ()</td></tr>
-<tr class="separator:a4202ce8a5b9ad23d2a2be27de11153f4 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad176fb5df246a2aac2b43572493c1480 inherit pub_methods_classsensesp_1_1_configurable" id="r_ad176fb5df246a2aac2b43572493c1480"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ad176fb5df246a2aac2b43572493c1480">clear_configuration</a> ()</td></tr>
-<tr class="memdesc:ad176fb5df246a2aac2b43572493c1480 inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear existing configuration data.  <br /></td></tr>
-<tr class="separator:ad176fb5df246a2aac2b43572493c1480 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classsensesp_1_1_file_system_saveable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_file_system_saveable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_file_system_saveable.html">sensesp::FileSystemSaveable</a></td></tr>
+<tr class="memitem:a974f062b375cf8637944f121084cf9f7 inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_a974f062b375cf8637944f121084cf9f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#a974f062b375cf8637944f121084cf9f7">FileSystemSaveable</a> (const String &amp;config_path)</td></tr>
+<tr class="separator:a974f062b375cf8637944f121084cf9f7 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b2e2e657112851dfda8785d217578a inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_a79b2e2e657112851dfda8785d217578a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a> () override</td></tr>
+<tr class="memdesc:a79b2e2e657112851dfda8785d217578a inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load and populate the object from a persistent storage.  <br /></td></tr>
+<tr class="separator:a79b2e2e657112851dfda8785d217578a inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fcd302f31b35502d061b769f9efee27 inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_a8fcd302f31b35502d061b769f9efee27"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a> () override</td></tr>
+<tr class="memdesc:a8fcd302f31b35502d061b769f9efee27 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the object to a persistent storage.  <br /></td></tr>
+<tr class="separator:a8fcd302f31b35502d061b769f9efee27 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172c641ef20db18a30b50dd1da1177f4 inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_a172c641ef20db18a30b50dd1da1177f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#a172c641ef20db18a30b50dd1da1177f4">clear</a> () override</td></tr>
+<tr class="memdesc:a172c641ef20db18a30b50dd1da1177f4 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the data from a persistent storage.  <br /></td></tr>
+<tr class="separator:a172c641ef20db18a30b50dd1da1177f4 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0233f7895b5c8915108399420c7cf0b inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_ad0233f7895b5c8915108399420c7cf0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#ad0233f7895b5c8915108399420c7cf0b">find_config_file</a> (const String &amp;config_path, String &amp;filename)</td></tr>
+<tr class="separator:ad0233f7895b5c8915108399420c7cf0b inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classsensesp_1_1_saveable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_saveable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_saveable.html">sensesp::Saveable</a></td></tr>
+<tr class="memitem:abaa7864f4f35be033ad5f32a379051d7 inherit pub_methods_classsensesp_1_1_saveable" id="r_abaa7864f4f35be033ad5f32a379051d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#abaa7864f4f35be033ad5f32a379051d7">Saveable</a> (const String &amp;config_path)</td></tr>
+<tr class="separator:abaa7864f4f35be033ad5f32a379051d7 inherit pub_methods_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95271534e56ac90a819311ec0ed784b8 inherit pub_methods_classsensesp_1_1_saveable" id="r_a95271534e56ac90a819311ec0ed784b8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#a95271534e56ac90a819311ec0ed784b8">refresh</a> ()</td></tr>
+<tr class="memdesc:a95271534e56ac90a819311ec0ed784b8 inherit pub_methods_classsensesp_1_1_saveable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the object. This may or may not access the persistent storage but is not expected to overwrite the object's state.  <br /></td></tr>
+<tr class="separator:a95271534e56ac90a819311ec0ed784b8 inherit pub_methods_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac90b12b215854886b5bf9ce7c7635a36 inherit pub_methods_classsensesp_1_1_saveable" id="r_ac90b12b215854886b5bf9ce7c7635a36"><td class="memItemLeft" align="right" valign="top">const String &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#ac90b12b215854886b5bf9ce7c7635a36">get_config_path</a> () const</td></tr>
+<tr class="separator:ac90b12b215854886b5bf9ce7c7635a36 inherit pub_methods_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classsensesp_1_1_serializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_serializable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_serializable.html">sensesp::Serializable</a></td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; SKWSConnectionState &gt;</a></td></tr>
 <tr class="memitem:aa29790dfe4e22903e061662be0fc7f68 inherit pub_methods_classsensesp_1_1_value_producer" id="r_aa29790dfe4e22903e061662be0fc7f68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#aa29790dfe4e22903e061662be0fc7f68">ValueProducer</a> ()</td></tr>
 <tr class="separator:aa29790dfe4e22903e061662be0fc7f68 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,24 +204,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a84103531d1d430e29cf3dd6a14eff977 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a438390eae6bba056ecf4ab329cb5c8e9 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a438390eae6bba056ecf4ab329cb5c8e9"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9">get</a> () const</td></tr>
 <tr class="separator:a438390eae6bba056ecf4ab329cb5c8e9 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d2ecdd23525edbf82eb29eb851a9d25 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a0d2ecdd23525edbf82eb29eb851a9d25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a0d2ecdd23525edbf82eb29eb851a9d25">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a> &gt; *consumer)</td></tr>
-<tr class="separator:a0d2ecdd23525edbf82eb29eb851a9d25 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50376efbd59e6e5fb51d9acd04daa41e inherit pub_methods_classsensesp_1_1_value_producer" id="r_a50376efbd59e6e5fb51d9acd04daa41e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a50376efbd59e6e5fb51d9acd04daa41e">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a> &gt; &amp;consumer)</td></tr>
-<tr class="separator:a50376efbd59e6e5fb51d9acd04daa41e inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fd97cd5c861c29aff746a7f7157c7bf inherit pub_methods_classsensesp_1_1_value_producer" id="r_a9fd97cd5c861c29aff746a7f7157c7bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a9fd97cd5c861c29aff746a7f7157c7bf">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; CT &gt; *consumer)</td></tr>
-<tr class="memdesc:a9fd97cd5c861c29aff746a7f7157c7bf inherit pub_methods_classsensesp_1_1_value_producer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a producer to a consumer of a different type.  <br /></td></tr>
-<tr class="separator:a9fd97cd5c861c29aff746a7f7157c7bf inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cef93de34649f2cac040d89e8530a33 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a1cef93de34649f2cac040d89e8530a33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a1cef93de34649f2cac040d89e8530a33">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; CT &gt; &amp;consumer)</td></tr>
-<tr class="separator:a1cef93de34649f2cac040d89e8530a33 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42499a248a44a67078e5bf2c7cc1d863 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a42499a248a44a67078e5bf2c7cc1d863"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a42499a248a44a67078e5bf2c7cc1d863">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>, T2 &gt; *consumer_producer)</td></tr>
-<tr class="separator:a42499a248a44a67078e5bf2c7cc1d863 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cfe148ec2d5f2c9f4164bbc3ec48803 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a2cfe148ec2d5f2c9f4164bbc3ec48803"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a2cfe148ec2d5f2c9f4164bbc3ec48803">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>, T2 &gt; &amp;consumer_producer)</td></tr>
-<tr class="separator:a2cfe148ec2d5f2c9f4164bbc3ec48803 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afff20759f042a3fb1c16ef6f7ed59609 inherit pub_methods_classsensesp_1_1_value_producer" id="r_afff20759f042a3fb1c16ef6f7ed59609"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#afff20759f042a3fb1c16ef6f7ed59609">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; *consumer_producer)</td></tr>
-<tr class="memdesc:afff20759f042a3fb1c16ef6f7ed59609 inherit pub_methods_classsensesp_1_1_value_producer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a producer to a transform with a different input type.  <br /></td></tr>
-<tr class="separator:afff20759f042a3fb1c16ef6f7ed59609 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b9610c57ffb0417ed965fe7ee00063b inherit pub_methods_classsensesp_1_1_value_producer" id="r_a7b9610c57ffb0417ed965fe7ee00063b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a7b9610c57ffb0417ed965fe7ee00063b">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; &amp;consumer_producer)</td></tr>
-<tr class="separator:a7b9610c57ffb0417ed965fe7ee00063b inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8eadde061d78ef178ee500ca3069068 inherit pub_methods_classsensesp_1_1_value_producer" id="r_aa8eadde061d78ef178ee500ca3069068"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt; std::is_base_of&lt; <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; typenameVConsumer::input_type &gt;, VConsumer &gt;::value &amp;&amp;std::is_convertible&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>, typenameVConsumer::input_type &gt;::value, std::shared_ptr&lt; VConsumer &gt; &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#aa8eadde061d78ef178ee500ca3069068">connect_to</a> (std::shared_ptr&lt; VConsumer &gt; consumer)</td></tr>
+<tr class="memdesc:aa8eadde061d78ef178ee500ca3069068 inherit pub_methods_classsensesp_1_1_value_producer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a producer to a transform with a different input type.  <br /></td></tr>
+<tr class="separator:aa8eadde061d78ef178ee500ca3069068 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ade04273d35e9df34027dcdbfee7256 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a6ade04273d35e9df34027dcdbfee7256"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt; std::is_base_of&lt; <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; typenameVConsumer::input_type &gt;, VConsumer &gt;::value &amp;&amp;std::is_convertible&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>, typenameVConsumer::input_type &gt;::value, VConsumer * &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a6ade04273d35e9df34027dcdbfee7256">connect_to</a> (VConsumer *consumer)</td></tr>
+<tr class="separator:a6ade04273d35e9df34027dcdbfee7256 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3135c4967cbed2048b76145b6dee78d6 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a3135c4967cbed2048b76145b6dee78d6"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt; std::is_base_of&lt; <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; typenameVConsumer::input_type &gt;, VConsumer &gt;::value &amp;&amp;std::is_convertible&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>, typenameVConsumer::input_type &gt;::value, VConsumer * &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a3135c4967cbed2048b76145b6dee78d6">connect_to</a> (VConsumer &amp;consumer)</td></tr>
+<tr class="separator:a3135c4967cbed2048b76145b6dee78d6 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f5f0259d0d3cd9a0ed17d657cac04e2 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a4f5f0259d0d3cd9a0ed17d657cac04e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a> (const <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a> &amp;new_value)</td></tr>
 <tr class="separator:a4f5f0259d0d3cd9a0ed17d657cac04e2 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_observable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_observable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_observable.html">sensesp::Observable</a></td></tr>
@@ -250,35 +224,84 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1bd8a207de69d386a7f05c28544df109 inherit pub_methods_classsensesp_1_1_observable" id="r_a1bd8a207de69d386a7f05c28544df109"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_observable.html#a1bd8a207de69d386a7f05c28544df109">attach</a> (std::function&lt; void()&gt; observer)</td></tr>
 <tr class="separator:a1bd8a207de69d386a7f05c28544df109 inherit pub_methods_classsensesp_1_1_observable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:ac31c21262105587a2ea4034d23d3d4df inherit pub_static_methods_classsensesp_1_1_configurable" id="r_ac31c21262105587a2ea4034d23d3d4df"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ac31c21262105587a2ea4034d23d3d4df">get_configurables</a> ()</td></tr>
-<tr class="memdesc:ac31c21262105587a2ea4034d23d3d4df inherit pub_static_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configurables.  <br /></td></tr>
-<tr class="separator:ac31c21262105587a2ea4034d23d3d4df inherit pub_static_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f62ba6b0f431ba98afe3a1e2f596356 inherit pub_static_methods_classsensesp_1_1_configurable" id="r_a4f62ba6b0f431ba98afe3a1e2f596356"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a4f62ba6b0f431ba98afe3a1e2f596356">get_configurable</a> (String key)</td></tr>
-<tr class="memdesc:a4f62ba6b0f431ba98afe3a1e2f596356 inherit pub_static_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a single <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a> by key.  <br /></td></tr>
-<tr class="separator:a4f62ba6b0f431ba98afe3a1e2f596356 inherit pub_static_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable" id="r_aded48ebfe23c7bee1845c7ab99c63a6e"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#aded48ebfe23c7bee1845c7ab99c63a6e">config_path_</a> {}</td></tr>
-<tr class="separator:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:ac97542fd5a24ae306adb77f3d1ba563a inherit pro_methods_classsensesp_1_1_configurable" id="r_ac97542fd5a24ae306adb77f3d1ba563a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a> ()</td></tr>
-<tr class="separator:ac97542fd5a24ae306adb77f3d1ba563a inherit pro_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:a2a45b6e6dd2b86eab7f6bb9970cfda6e inherit pro_attribs_classsensesp_1_1_configurable" id="r_a2a45b6e6dd2b86eab7f6bb9970cfda6e"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a2a45b6e6dd2b86eab7f6bb9970cfda6e">description_</a> = &quot;&quot;</td></tr>
-<tr class="separator:a2a45b6e6dd2b86eab7f6bb9970cfda6e inherit pro_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a422efd505a5b7e5d76d761f452390066 inherit pro_attribs_classsensesp_1_1_configurable" id="r_a422efd505a5b7e5d76d761f452390066"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a422efd505a5b7e5d76d761f452390066">sort_order_</a> = 1000</td></tr>
-<tr class="separator:a422efd505a5b7e5d76d761f452390066 inherit pro_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a739b03f0e1adfcdeb0faa6448080d2cb inherit pro_attribs_classsensesp_1_1_configurable" id="r_a739b03f0e1adfcdeb0faa6448080d2cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a739b03f0e1adfcdeb0faa6448080d2cb">requires_restart_</a> = false</td></tr>
-<tr class="memdesc:a739b03f0e1adfcdeb0faa6448080d2cb inherit pro_attribs_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to indicate if the <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a> requires a restart after saving the configuration.  <br /></td></tr>
-<tr class="separator:a739b03f0e1adfcdeb0faa6448080d2cb inherit pro_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac66974c5d91bacc76751592ddb1c979b" id="r_ac66974c5d91bacc76751592ddb1c979b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac66974c5d91bacc76751592ddb1c979b">take_received_updates_semaphore</a> (unsigned long int timeout_ms=0)</td></tr>
+<tr class="separator:ac66974c5d91bacc76751592ddb1c979b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51989a27609077e32aba992bc3554793" id="r_a51989a27609077e32aba992bc3554793"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51989a27609077e32aba992bc3554793">release_received_updates_semaphore</a> ()</td></tr>
+<tr class="separator:a51989a27609077e32aba992bc3554793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f653dcdf79aceaf276ec59f26dd3765" id="r_a1f653dcdf79aceaf276ec59f26dd3765"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f653dcdf79aceaf276ec59f26dd3765">process_received_updates</a> ()</td></tr>
+<tr class="memdesc:a1f653dcdf79aceaf276ec59f26dd3765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loop through the received updates and process them.  <br /></td></tr>
+<tr class="separator:a1f653dcdf79aceaf276ec59f26dd3765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada4c50bafc9ed46c3d89e33af951f7d3" id="r_ada4c50bafc9ed46c3d89e33af951f7d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada4c50bafc9ed46c3d89e33af951f7d3">connect_loop</a> ()</td></tr>
+<tr class="separator:ada4c50bafc9ed46c3d89e33af951f7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab063bdb9564b0c6c564bd1d5573a9631" id="r_ab063bdb9564b0c6c564bd1d5573a9631"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab063bdb9564b0c6c564bd1d5573a9631">test_token</a> (const String host, const uint16_t port)</td></tr>
+<tr class="separator:ab063bdb9564b0c6c564bd1d5573a9631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59a57e892f602b940b6c7c15ec49ca52" id="r_a59a57e892f602b940b6c7c15ec49ca52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59a57e892f602b940b6c7c15ec49ca52">send_access_request</a> (const String host, const uint16_t port)</td></tr>
+<tr class="separator:a59a57e892f602b940b6c7c15ec49ca52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05dc57271aa29fbf4f99228331d2194f" id="r_a05dc57271aa29fbf4f99228331d2194f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05dc57271aa29fbf4f99228331d2194f">poll_access_request</a> (const String host, const uint16_t port, const String href)</td></tr>
+<tr class="separator:a05dc57271aa29fbf4f99228331d2194f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ebcbbfce9e5d6148e69185da36c5040" id="r_a2ebcbbfce9e5d6148e69185da36c5040"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ebcbbfce9e5d6148e69185da36c5040">connect_ws</a> (const String &amp;host, const uint16_t port)</td></tr>
+<tr class="separator:a2ebcbbfce9e5d6148e69185da36c5040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11946c03cd6953741bdb8e2f574952e" id="r_aa11946c03cd6953741bdb8e2f574952e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa11946c03cd6953741bdb8e2f574952e">subscribe_listeners</a> ()</td></tr>
+<tr class="memdesc:aa11946c03cd6953741bdb8e2f574952e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes the SK delta paths to the websocket.  <br /></td></tr>
+<tr class="separator:aa11946c03cd6953741bdb8e2f574952e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f7782736ab42e34692f65dd85024189" id="r_a8f7782736ab42e34692f65dd85024189"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f7782736ab42e34692f65dd85024189">get_mdns_service</a> (String &amp;server_address, uint16_t &amp;server_port)</td></tr>
+<tr class="separator:a8f7782736ab42e34692f65dd85024189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac124cc1b358d613e7ad43b9545a97d26" id="r_ac124cc1b358d613e7ad43b9545a97d26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a> (<a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a> state)</td></tr>
+<tr class="separator:ac124cc1b358d613e7ad43b9545a97d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b743aa1377f34235482a2bbc6400698" id="r_a4b743aa1377f34235482a2bbc6400698"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b743aa1377f34235482a2bbc6400698">get_connection_state</a> ()</td></tr>
+<tr class="separator:a4b743aa1377f34235482a2bbc6400698"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a84547993b48d32c20d3b58fe2106ba39" id="r_a84547993b48d32c20d3b58fe2106ba39"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84547993b48d32c20d3b58fe2106ba39">server_address_</a> = &quot;&quot;</td></tr>
+<tr class="separator:a84547993b48d32c20d3b58fe2106ba39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94447487d138221e8c7a586fc58dcfdf" id="r_a94447487d138221e8c7a586fc58dcfdf"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94447487d138221e8c7a586fc58dcfdf">server_port_</a> = 80</td></tr>
+<tr class="separator:a94447487d138221e8c7a586fc58dcfdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7a9be9cf83aad02fb65499ae194e074" id="r_af7a9be9cf83aad02fb65499ae194e074"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7a9be9cf83aad02fb65499ae194e074">conf_server_address_</a> = &quot;&quot;</td></tr>
+<tr class="separator:af7a9be9cf83aad02fb65499ae194e074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa617a20c684dca2551e156293849cb3a" id="r_aa617a20c684dca2551e156293849cb3a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa617a20c684dca2551e156293849cb3a">conf_server_port_</a> = 0</td></tr>
+<tr class="separator:aa617a20c684dca2551e156293849cb3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9495f4a6eba671ead557ca5180897f9" id="r_aa9495f4a6eba671ead557ca5180897f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9495f4a6eba671ead557ca5180897f9">use_mdns_</a> = true</td></tr>
+<tr class="separator:aa9495f4a6eba671ead557ca5180897f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af283267247845688fc6bcc4d589af886" id="r_af283267247845688fc6bcc4d589af886"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af283267247845688fc6bcc4d589af886">client_id_</a> = &quot;&quot;</td></tr>
+<tr class="separator:af283267247845688fc6bcc4d589af886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a555811bdde8b3a32645cb51c3ace591a" id="r_a555811bdde8b3a32645cb51c3ace591a"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = &quot;&quot;</td></tr>
+<tr class="separator:a555811bdde8b3a32645cb51c3ace591a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be43261c9577347b208744d4f9e88e2" id="r_a0be43261c9577347b208744d4f9e88e2"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0be43261c9577347b208744d4f9e88e2">auth_token_</a> = NULL_AUTH_TOKEN</td></tr>
+<tr class="separator:a0be43261c9577347b208744d4f9e88e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab23374429645b9af024e3438ade73d9f" id="r_ab23374429645b9af024e3438ade73d9f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab23374429645b9af024e3438ade73d9f">server_detected_</a> = false</td></tr>
+<tr class="separator:ab23374429645b9af024e3438ade73d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e9580b5ab17102adb5fe80d1073425c" id="r_a2e9580b5ab17102adb5fe80d1073425c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e9580b5ab17102adb5fe80d1073425c">token_test_success_</a> = false</td></tr>
+<tr class="separator:a2e9580b5ab17102adb5fe80d1073425c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45233367713d782b13cc66bb89f74e66" id="r_a45233367713d782b13cc66bb89f74e66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a>&lt; <a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45233367713d782b13cc66bb89f74e66">connection_state_</a></td></tr>
+<tr class="separator:a45233367713d782b13cc66bb89f74e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5425f1a44b11da1693ee2c24479463bf" id="r_a5425f1a44b11da1693ee2c24479463bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5425f1a44b11da1693ee2c24479463bf">task_connection_state_</a></td></tr>
+<tr class="separator:a5425f1a44b11da1693ee2c24479463bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c394f5d6dfaae2015a7a1235d257d5b" id="r_a5c394f5d6dfaae2015a7a1235d257d5b"><td class="memItemLeft" align="right" valign="top">WiFiClient&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c394f5d6dfaae2015a7a1235d257d5b">wifi_client_</a> {}</td></tr>
+<tr class="separator:a5c394f5d6dfaae2015a7a1235d257d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a109cfb215d2572f0947b6fbdc57f42" id="r_a7a109cfb215d2572f0947b6fbdc57f42"><td class="memItemLeft" align="right" valign="top">esp_websocket_client_handle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> {}</td></tr>
+<tr class="separator:a7a109cfb215d2572f0947b6fbdc57f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af23fe643ac123ced328d95869b6e80ef" id="r_af23fe643ac123ced328d95869b6e80ef"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_s_k_delta_queue.html">SKDeltaQueue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af23fe643ac123ced328d95869b6e80ef">sk_delta_queue_</a></td></tr>
+<tr class="separator:af23fe643ac123ced328d95869b6e80ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae59b6bf5ebe46609f352df33719943e0" id="r_ae59b6bf5ebe46609f352df33719943e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae59b6bf5ebe46609f352df33719943e0">delta_tx_tick_producer_</a> {0, <a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>(), 990}</td></tr>
+<tr class="memdesc:ae59b6bf5ebe46609f352df33719943e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits the number of deltas sent since last report.  <br /></td></tr>
+<tr class="separator:ae59b6bf5ebe46609f352df33719943e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44383fc049764f2a3b877cbf5db6a0cc" id="r_a44383fc049764f2a3b877cbf5db6a0cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_integrator.html">Integrator</a>&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44383fc049764f2a3b877cbf5db6a0cc">delta_tx_count_producer_</a> {1, 0, &quot;&quot;}</td></tr>
+<tr class="separator:a44383fc049764f2a3b877cbf5db6a0cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63f756fd0e08f70c934d223c5df0a3a4" id="r_a63f756fd0e08f70c934d223c5df0a3a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_integrator.html">Integrator</a>&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63f756fd0e08f70c934d223c5df0a3a4">delta_rx_count_producer_</a> {1, 0, &quot;&quot;}</td></tr>
+<tr class="separator:a63f756fd0e08f70c934d223c5df0a3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13b8280a1f0c6bbe13d49c36f5eef220" id="r_a13b8280a1f0c6bbe13d49c36f5eef220"><td class="memItemLeft" align="right" valign="top">SemaphoreHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13b8280a1f0c6bbe13d49c36f5eef220">received_updates_semaphore_</a></td></tr>
+<tr class="separator:a13b8280a1f0c6bbe13d49c36f5eef220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a034846d24a203d0e62b49a96a1400219" id="r_a034846d24a203d0e62b49a96a1400219"><td class="memItemLeft" align="right" valign="top">std::list&lt; JsonDocument &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a034846d24a203d0e62b49a96a1400219">received_updates_</a> {}</td></tr>
+<tr class="separator:a034846d24a203d0e62b49a96a1400219"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classsensesp_1_1_saveable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classsensesp_1_1_saveable')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_saveable.html">sensesp::Saveable</a></td></tr>
+<tr class="memitem:ad023c90c5ce5b7d58f9cbceb8873aafd inherit pro_attribs_classsensesp_1_1_saveable" id="r_ad023c90c5ce5b7d58f9cbceb8873aafd"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#ad023c90c5ce5b7d58f9cbceb8873aafd">config_path_</a></td></tr>
+<tr class="separator:ad023c90c5ce5b7d58f9cbceb8873aafd inherit pro_attribs_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; SKWSConnectionState &gt;</a></td></tr>
-<tr class="memitem:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer" id="r_a08032702dc65bfc839eeeb5b006195d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a></td></tr>
-<tr class="separator:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_static_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_static_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:af4db3155879f166cca955e4e616868ed inherit pro_static_attribs_classsensesp_1_1_configurable" id="r_af4db3155879f166cca955e4e616868ed"><td class="memItemLeft" align="right" valign="top">static std::map&lt; String, <a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#af4db3155879f166cca955e4e616868ed">configurables_</a></td></tr>
-<tr class="separator:af4db3155879f166cca955e4e616868ed inherit pro_static_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ca5ef060f2f824447afa0ff4d0c3de inherit pro_attribs_classsensesp_1_1_value_producer" id="r_a86ca5ef060f2f824447afa0ff4d0c3de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a></td></tr>
+<tr class="separator:a86ca5ef060f2f824447afa0ff4d0c3de inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The websocket connection to the Signal K server. </p>
@@ -286,8 +309,8 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00034">34</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aabb8d52b1b30f1ccc9e61a68747bb271" name="aabb8d52b1b30f1ccc9e61a68747bb271"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabb8d52b1b30f1ccc9e61a68747bb271">&#9670;&#160;</a></span>SKWSClient()</h2>
+<a id="a06543d390e00ae846df1313247f4f877" name="a06543d390e00ae846df1313247f4f877"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06543d390e00ae846df1313247f4f877">&#9670;&#160;</a></span>SKWSClient()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +323,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classsensesp_1_1_s_k_delta_queue.html">SKDeltaQueue</a> *</td>          <td class="paramname"><span class="paramname"><em>sk_delta_queue</em></span>, </td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_s_k_delta_queue.html">SKDeltaQueue</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sk_delta_queue</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -324,7 +347,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_aabb8d52b1b30f1ccc9e61a68747bb271_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a06543d390e00ae846df1313247f4f877_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -347,15 +370,20 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00393">393</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
 <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a71c4787c20640979d0f21e722fdf161a_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a71c4787c20640979d0f21e722fdf161a_icgraph.svg" width="634" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a71c4787c20640979d0f21e722fdf161a_icgraph.svg" width="634" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a3cf28326ed522edc3f2df87fad367897" name="a3cf28326ed522edc3f2df87fad367897"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cf28326ed522edc3f2df87fad367897">&#9670;&#160;</a></span>get_configuration()</h2>
+<a id="ada4c50bafc9ed46c3d89e33af951f7d3" name="ada4c50bafc9ed46c3d89e33af951f7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada4c50bafc9ed46c3d89e33af951f7d3">&#9670;&#160;</a></span>connect_loop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -364,9 +392,82 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void sensesp::SKWSClient::get_configuration </td>
+          <td class="memname">void sensesp::SKWSClient::connect_loop </td>
           <td>(</td>
-          <td class="paramtype">JsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>configObject</em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00111">111</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ada4c50bafc9ed46c3d89e33af951f7d3_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a2ebcbbfce9e5d6148e69185da36c5040" name="a2ebcbbfce9e5d6148e69185da36c5040"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ebcbbfce9e5d6148e69185da36c5040">&#9670;&#160;</a></span>connect_ws()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKWSClient::connect_ws </td>
+          <td>(</td>
+          <td class="paramtype">const String &amp;</td>          <td class="paramname"><span class="paramname"><em>host</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>port</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00629">629</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a2ebcbbfce9e5d6148e69185da36c5040_cgraph.svg" width="635" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a2ebcbbfce9e5d6148e69185da36c5040_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ace3c9afd0a99729fb788e3802cb9fd4e" name="ace3c9afd0a99729fb788e3802cb9fd4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace3c9afd0a99729fb788e3802cb9fd4e">&#9670;&#160;</a></span>from_json()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKWSClient::from_json </td>
+          <td>(</td>
+          <td class="paramtype">const JsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>root</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -376,11 +477,43 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Returns the current configuration data as a JsonObject. In general, the current state of local member variables are saved to a new object created with JsonDocument::as&lt;JsonObject&gt;() and returned. </p>
+<p>Deserializes the current object data from a JsonObject. </p>
 
-<p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#accb44b286a13d98d573b15d88ca58fd4">sensesp::Configurable</a>.</p>
+<p>Reimplemented from <a class="el" href="classsensesp_1_1_serializable.html#a841233a82ef3a7fbcecd5a15b0df12d2">sensesp::Serializable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00688">688</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00699">699</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4b743aa1377f34235482a2bbc6400698" name="a4b743aa1377f34235482a2bbc6400698"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b743aa1377f34235482a2bbc6400698">&#9670;&#160;</a></span>get_connection_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a> sensesp::SKWSClient::get_connection_state </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00162">162</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a4b743aa1377f34235482a2bbc6400698_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -402,7 +535,12 @@ Here is the caller graph for this function:</div>
 <p>Get a String representation of the current connection state. </p>
 <dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00726">726</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00727">727</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ad7e2b5675a5fc16b4e71fdc938124a2d_cgraph.svg" width="372" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -461,10 +599,41 @@ Here is the caller graph for this function:</div>
 <p>Return a delta update <a class="el" href="classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a> that produces the number of sent deltas. </p>
 
 <p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00054">54</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a8f7782736ab42e34692f65dd85024189" name="a8f7782736ab42e34692f65dd85024189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f7782736ab42e34692f65dd85024189">&#9670;&#160;</a></span>get_mdns_service()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKWSClient::get_mdns_service </td>
+          <td>(</td>
+          <td class="paramtype">String &amp;</td>          <td class="paramname"><span class="paramname"><em>server_address</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t &amp;</td>          <td class="paramname"><span class="paramname"><em>server_port</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00378">378</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a98b7f8de43ef5ff4105285e3609b8b51_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a8f7782736ab42e34692f65dd85024189_icgraph.svg" width="100%" height="382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -539,6 +708,11 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00664">664</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a1edbfa57e491c2e3fe0025758d395845_cgraph.svg" width="364" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -577,11 +751,11 @@ Here is the caller graph for this function:</div>
 <p>Called when the websocket connection is established. </p>
 <p>Called in the websocket task context. </p>
 
-<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00154">154</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00153">153</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_afbe265351213c154f3977b8fb56fc91d_cgraph.svg" width="590" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_afbe265351213c154f3977b8fb56fc91d_cgraph.svg" width="635" height="232"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -604,11 +778,11 @@ Here is the call graph for this function:</div>
 <p>Called when the websocket connection is disconnected. </p>
 <p>This method is called in the websocket task context. </p>
 
-<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00124">124</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00123">123</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a963d6aa9d1d835a394338ba64fe1c6cc_cgraph.svg" width="100%" height="376"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a963d6aa9d1d835a394338ba64fe1c6cc_cgraph.svg" width="100%" height="463"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -631,7 +805,12 @@ Here is the call graph for this function:</div>
 <p>Called when the websocket connection encounters an error. </p>
 <p>Called in the websocket task context. </p>
 
-<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00144">144</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00143">143</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a7b4c11c2a4bea42349e5be61166adeb9_cgraph.svg" width="635" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -663,11 +842,11 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00212">212</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00211">211</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a10433bce2a343bd467b148a5baaaaa08_cgraph.svg" width="100%" height="578"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a10433bce2a343bd467b148a5baaaaa08_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -700,7 +879,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a4f59b0bc0379552b4b3a6a232ed88e62_cgraph.svg" width="374" height="248"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a4f59b0bc0379552b4b3a6a232ed88e62_cgraph.svg" width="392" height="406"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -736,9 +915,132 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00251">251</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
 <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_aa4ebce0c621f3800bfd40aa0fc75302d_cgraph.svg" width="392" height="147"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_aa4ebce0c621f3800bfd40aa0fc75302d_icgraph.svg" width="364" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a05dc57271aa29fbf4f99228331d2194f" name="a05dc57271aa29fbf4f99228331d2194f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05dc57271aa29fbf4f99228331d2194f">&#9670;&#160;</a></span>poll_access_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKWSClient::poll_access_request </td>
+          <td>(</td>
+          <td class="paramtype">const String</td>          <td class="paramname"><span class="paramname"><em>host</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>port</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const String</td>          <td class="paramname"><span class="paramname"><em>href</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00559">559</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a05dc57271aa29fbf4f99228331d2194f_cgraph.svg" width="100%" height="474"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a05dc57271aa29fbf4f99228331d2194f_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a1f653dcdf79aceaf276ec59f26dd3765" name="a1f653dcdf79aceaf276ec59f26dd3765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f653dcdf79aceaf276ec59f26dd3765">&#9670;&#160;</a></span>process_received_updates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKWSClient::process_received_updates </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Loop through the received updates and process them. </p>
+<p>This method is called in the main task context. </p>
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00279">279</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a1f653dcdf79aceaf276ec59f26dd3765_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a1f653dcdf79aceaf276ec59f26dd3765_icgraph.svg" width="396" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a51989a27609077e32aba992bc3554793" name="a51989a27609077e32aba992bc3554793"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51989a27609077e32aba992bc3554793">&#9670;&#160;</a></span>release_received_updates_semaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKWSClient::release_received_updates_semaphore </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00137">137</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a51989a27609077e32aba992bc3554793_icgraph.svg" width="624" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -759,6 +1061,52 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00668">668</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_af88e234b684dc0fb1b85e2efea98dc36_cgraph.svg" width="635" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a59a57e892f602b940b6c7c15ec49ca52" name="a59a57e892f602b940b6c7c15ec49ca52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59a57e892f602b940b6c7c15ec49ca52">&#9670;&#160;</a></span>send_access_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKWSClient::send_access_request </td>
+          <td>(</td>
+          <td class="paramtype">const String</td>          <td class="paramname"><span class="paramname"><em>host</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>port</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00498">498</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a59a57e892f602b940b6c7c15ec49ca52_cgraph.svg" width="100%" height="594"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a59a57e892f602b940b6c7c15ec49ca52_icgraph.svg" width="100%" height="382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -781,7 +1129,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ad7f3e4ebde28b680f480cd62860c01b1_cgraph.svg" width="100%" height="480"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ad7f3e4ebde28b680f480cd62860c01b1_cgraph.svg" width="434" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -818,15 +1166,15 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00371">371</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
 <div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a81bae8cb4e34295666c9ed83fa952482_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_a81bae8cb4e34295666c9ed83fa952482_cgraph.svg" width="364" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="ac2289077140d066a8a5abea96f5eff6f" name="ac2289077140d066a8a5abea96f5eff6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2289077140d066a8a5abea96f5eff6f">&#9670;&#160;</a></span>set_configuration()</h2>
+<a id="ac124cc1b358d613e7ad43b9545a97d26" name="ac124cc1b358d613e7ad43b9545a97d26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac124cc1b358d613e7ad43b9545a97d26">&#9670;&#160;</a></span>set_connection_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -835,9 +1183,159 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool sensesp::SKWSClient::set_configuration </td>
+          <td class="memname">void sensesp::SKWSClient::set_connection_state </td>
           <td>(</td>
-          <td class="paramtype">const JsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a></td>          <td class="paramname"><span class="paramname"><em>state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00158">158</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ac124cc1b358d613e7ad43b9545a97d26_cgraph.svg" width="435" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ac124cc1b358d613e7ad43b9545a97d26_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="aa11946c03cd6953741bdb8e2f574952e" name="aa11946c03cd6953741bdb8e2f574952e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa11946c03cd6953741bdb8e2f574952e">&#9670;&#160;</a></span>subscribe_listeners()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKWSClient::subscribe_listeners </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscribes the SK delta paths to the websocket. </p>
+<p>Called in the websocket task context. </p>
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00166">166</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_aa11946c03cd6953741bdb8e2f574952e_cgraph.svg" width="354" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_aa11946c03cd6953741bdb8e2f574952e_icgraph.svg" width="364" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ac66974c5d91bacc76751592ddb1c979b" name="ac66974c5d91bacc76751592ddb1c979b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac66974c5d91bacc76751592ddb1c979b">&#9670;&#160;</a></span>take_received_updates_semaphore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKWSClient::take_received_updates_semaphore </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00129">129</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ac66974c5d91bacc76751592ddb1c979b_icgraph.svg" width="607" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ab063bdb9564b0c6c564bd1d5573a9631" name="ab063bdb9564b0c6c564bd1d5573a9631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab063bdb9564b0c6c564bd1d5573a9631">&#9670;&#160;</a></span>test_token()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SKWSClient::test_token </td>
+          <td>(</td>
+          <td class="paramtype">const String</td>          <td class="paramname"><span class="paramname"><em>host</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t</td>          <td class="paramname"><span class="paramname"><em>port</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00454">454</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ab063bdb9564b0c6c564bd1d5573a9631_cgraph.svg" width="100%" height="546"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_s_k_w_s_client_ab063bdb9564b0c6c564bd1d5573a9631_icgraph.svg" width="100%" height="382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a6ce964d6a7a147dc563404324501151d" name="a6ce964d6a7a147dc563404324501151d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ce964d6a7a147dc563404324501151d">&#9670;&#160;</a></span>to_json()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKWSClient::to_json </td>
+          <td>(</td>
+          <td class="paramtype">JsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>root</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -847,11 +1345,503 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sets the current state of local member variables using the data stored in config. </p>
+<p>Serializes the current object data into a JsonObject. </p>
 
-<p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a0deaa5b717cd0f60d0105835cd6b595a">sensesp::Configurable</a>.</p>
+<p>Reimplemented from <a class="el" href="classsensesp_1_1_serializable.html#a8da15a9036f2333f1f3beb4207a06477">sensesp::Serializable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00698">698</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8cpp_source.html#l00688">688</a> of file <a class="el" href="signalk__ws__client_8cpp_source.html">signalk_ws_client.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0be43261c9577347b208744d4f9e88e2" name="a0be43261c9577347b208744d4f9e88e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0be43261c9577347b208744d4f9e88e2">&#9670;&#160;</a></span>auth_token_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String sensesp::SKWSClient::auth_token_ = NULL_AUTH_TOKEN</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00102">102</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a7a109cfb215d2572f0947b6fbdc57f42" name="a7a109cfb215d2572f0947b6fbdc57f42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a109cfb215d2572f0947b6fbdc57f42">&#9670;&#160;</a></span>client_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_websocket_client_handle_t sensesp::SKWSClient::client_ {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00115">115</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="af283267247845688fc6bcc4d589af886" name="af283267247845688fc6bcc4d589af886"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af283267247845688fc6bcc4d589af886">&#9670;&#160;</a></span>client_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String sensesp::SKWSClient::client_id_ = &quot;&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00100">100</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="af7a9be9cf83aad02fb65499ae194e074" name="af7a9be9cf83aad02fb65499ae194e074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7a9be9cf83aad02fb65499ae194e074">&#9670;&#160;</a></span>conf_server_address_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String sensesp::SKWSClient::conf_server_address_ = &quot;&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00096">96</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="aa617a20c684dca2551e156293849cb3a" name="aa617a20c684dca2551e156293849cb3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa617a20c684dca2551e156293849cb3a">&#9670;&#160;</a></span>conf_server_port_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t sensesp::SKWSClient::conf_server_port_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00097">97</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a45233367713d782b13cc66bb89f74e66" name="a45233367713d782b13cc66bb89f74e66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45233367713d782b13cc66bb89f74e66">&#9670;&#160;</a></span>connection_state_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a>&lt;<a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a>&gt; sensesp::SKWSClient::connection_state_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">      <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>, <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()}</div>
+<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d"><div class="ttname"><a href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">sensesp::SKWSConnectionState::kSKWSDisconnected</a></div><div class="ttdeci">@ kSKWSDisconnected</div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00106">106</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a63f756fd0e08f70c934d223c5df0a3a4" name="a63f756fd0e08f70c934d223c5df0a3a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63f756fd0e08f70c934d223c5df0a3a4">&#9670;&#160;</a></span>delta_rx_count_producer_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsensesp_1_1_integrator.html">Integrator</a>&lt;int, int&gt; sensesp::SKWSClient::delta_rx_count_producer_ {1, 0, &quot;&quot;}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00120">120</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a44383fc049764f2a3b877cbf5db6a0cc" name="a44383fc049764f2a3b877cbf5db6a0cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44383fc049764f2a3b877cbf5db6a0cc">&#9670;&#160;</a></span>delta_tx_count_producer_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsensesp_1_1_integrator.html">Integrator</a>&lt;int, int&gt; sensesp::SKWSClient::delta_tx_count_producer_ {1, 0, &quot;&quot;}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00119">119</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="ae59b6bf5ebe46609f352df33719943e0" name="ae59b6bf5ebe46609f352df33719943e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae59b6bf5ebe46609f352df33719943e0">&#9670;&#160;</a></span>delta_tx_tick_producer_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a>&lt;int&gt; sensesp::SKWSClient::delta_tx_tick_producer_ {0, <a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>(), 990}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Emits the number of deltas sent since last report. </p>
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00118">118</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a555811bdde8b3a32645cb51c3ace591a" name="a555811bdde8b3a32645cb51c3ace591a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a555811bdde8b3a32645cb51c3ace591a">&#9670;&#160;</a></span>polling_href_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String sensesp::SKWSClient::polling_href_ = &quot;&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00101">101</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a034846d24a203d0e62b49a96a1400219" name="a034846d24a203d0e62b49a96a1400219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a034846d24a203d0e62b49a96a1400219">&#9670;&#160;</a></span>received_updates_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt;JsonDocument&gt; sensesp::SKWSClient::received_updates_ {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00124">124</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a13b8280a1f0c6bbe13d49c36f5eef220" name="a13b8280a1f0c6bbe13d49c36f5eef220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13b8280a1f0c6bbe13d49c36f5eef220">&#9670;&#160;</a></span>received_updates_semaphore_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SemaphoreHandle_t sensesp::SKWSClient::received_updates_semaphore_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      xSemaphoreCreateRecursiveMutex()</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00122">122</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a84547993b48d32c20d3b58fe2106ba39" name="a84547993b48d32c20d3b58fe2106ba39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84547993b48d32c20d3b58fe2106ba39">&#9670;&#160;</a></span>server_address_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String sensesp::SKWSClient::server_address_ = &quot;&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00093">93</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="ab23374429645b9af024e3438ade73d9f" name="ab23374429645b9af024e3438ade73d9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab23374429645b9af024e3438ade73d9f">&#9670;&#160;</a></span>server_detected_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKWSClient::server_detected_ = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00103">103</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a94447487d138221e8c7a586fc58dcfdf" name="a94447487d138221e8c7a586fc58dcfdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94447487d138221e8c7a586fc58dcfdf">&#9670;&#160;</a></span>server_port_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t sensesp::SKWSClient::server_port_ = 80</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00094">94</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="af23fe643ac123ced328d95869b6e80ef" name="af23fe643ac123ced328d95869b6e80ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af23fe643ac123ced328d95869b6e80ef">&#9670;&#160;</a></span>sk_delta_queue_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classsensesp_1_1_s_k_delta_queue.html">SKDeltaQueue</a>&gt; sensesp::SKWSClient::sk_delta_queue_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00116">116</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a5425f1a44b11da1693ee2c24479463bf" name="a5425f1a44b11da1693ee2c24479463bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5425f1a44b11da1693ee2c24479463bf">&#9670;&#160;</a></span>task_connection_state_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863">SKWSConnectionState</a> sensesp::SKWSClient::task_connection_state_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a></div>
+</div><!-- fragment --><p>task_connection_state is used to track the internal task state which might be out of sync with the published connection state. </p>
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00111">111</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a2e9580b5ab17102adb5fe80d1073425c" name="a2e9580b5ab17102adb5fe80d1073425c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e9580b5ab17102adb5fe80d1073425c">&#9670;&#160;</a></span>token_test_success_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKWSClient::token_test_success_ = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00104">104</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="aa9495f4a6eba671ead557ca5180897f9" name="aa9495f4a6eba671ead557ca5180897f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9495f4a6eba671ead557ca5180897f9">&#9670;&#160;</a></span>use_mdns_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool sensesp::SKWSClient::use_mdns_ = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00098">98</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
+
+</div>
+</div>
+<a id="a5c394f5d6dfaae2015a7a1235d257d5b" name="a5c394f5d6dfaae2015a7a1235d257d5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c394f5d6dfaae2015a7a1235d257d5b">&#9670;&#160;</a></span>wifi_client_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WiFiClient sensesp::SKWSClient::wifi_client_ {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00114">114</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
 
 </div>
 </div>

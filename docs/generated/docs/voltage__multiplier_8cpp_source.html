@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -124,39 +124,38 @@ $(function(){initNavTree('voltage__multiplier_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
 </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">void</span> VoltageMultiplier::get_configuration(JsonObject&amp; root) {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">bool</span> VoltageMultiplier::to_json(JsonObject&amp; root) {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  root[<span class="stringliteral">&quot;R1&quot;</span>] = R1_;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  root[<span class="stringliteral">&quot;R2&quot;</span>] = R2_;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>};</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kSchema[] = R<span class="stringliteral">&quot;###({</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="stringliteral">        &quot;R1&quot;: { &quot;title&quot;: &quot;R1&quot;, &quot;type&quot;: &quot;number&quot;, &quot;description&quot;: &quot;The measured value of resistor R1&quot; },</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="stringliteral">        &quot;R2&quot;: { &quot;title&quot;: &quot;R2&quot;, &quot;type&quot;: &quot;number&quot;, &quot;description&quot;: &quot;The measured value of resistor R2&quot; }</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="stringliteral">  })###&quot;;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="stringliteral">String VoltageMultiplier::get_config_schema() { </span><span class="keywordflow">return</span> (kSchema); }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">bool</span> VoltageMultiplier::set_configuration(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;R1&quot;</span>, <span class="stringliteral">&quot;R2&quot;</span>};</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    }</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  }</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  R1_ = config[<span class="stringliteral">&quot;R1&quot;</span>];</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  R2_ = config[<span class="stringliteral">&quot;R2&quot;</span>];</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>};</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">bool</span> VoltageMultiplier::from_json(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;R1&quot;</span>, <span class="stringliteral">&quot;R2&quot;</span>};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    }</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  R1_ = config[<span class="stringliteral">&quot;R1&quot;</span>];</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  R2_ = config[<span class="stringliteral">&quot;R2&quot;</span>];</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a1e6a32d880394f79109a4bf9d246b741">   32</a></span><span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_voltage_multiplier.html">VoltageMultiplier</a>&amp; obj) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordflow">return</span> R<span class="stringliteral">&quot;({&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;R1&quot;:{&quot;title&quot;:&quot;R1&quot;,&quot;type&quot;:&quot;number&quot;,&quot;description&quot;:&quot;The measured value of resistor R1&quot;},&quot;R2&quot;:{&quot;title&quot;:&quot;R2&quot;,&quot;type&quot;:&quot;number&quot;,&quot;description&quot;:&quot;The measured value of resistor R2&quot;}}})&quot;;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="stringliteral">}</span></div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="stringliteral">}  </span><span class="comment">// namespace sensesp</span></div>
 <div class="ttc" id="aclasssensesp_1_1_symmetric_transform_html"><div class="ttname"><a href="classsensesp_1_1_symmetric_transform.html">sensesp::SymmetricTransform&lt; float &gt;</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer&lt; float &gt;::emit</a></div><div class="ttdeci">void emit(const float &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00112">valueproducer.h:112</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer&lt; float &gt;::emit</a></div><div class="ttdeci">void emit(const float &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_voltage_multiplier_html"><div class="ttname"><a href="classsensesp_1_1_voltage_multiplier.html">sensesp::VoltageMultiplier</a></div><div class="ttdoc">OBSOLETE: Since you can now apply an &quot;output_scale&quot; to the AnalogInput sensor, you don't need this tr...</div><div class="ttdef"><b>Definition</b> <a href="voltage__multiplier_8h_source.html#l00031">voltage_multiplier.h:31</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_voltage_multiplier_html_a2c81d146d3c2fa9cf418567378e835dd"><div class="ttname"><a href="classsensesp_1_1_voltage_multiplier.html#a2c81d146d3c2fa9cf418567378e835dd">sensesp::VoltageMultiplier::set</a></div><div class="ttdeci">virtual void set(const float &amp;input)</div><div class="ttdef"><b>Definition</b> <a href="#l00009">voltage_multiplier.cpp:9</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_voltage_multiplier_html_a89c4c6b7e839c9b719c70c62234a69a8"><div class="ttname"><a href="classsensesp_1_1_voltage_multiplier.html#a89c4c6b7e839c9b719c70c62234a69a8">sensesp::VoltageMultiplier::VoltageMultiplier</a></div><div class="ttdeci">VoltageMultiplier(uint16_t R1, uint16_t R2, const String &amp;config_path=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00005">voltage_multiplier.cpp:5</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
 <div class="ttc" id="avoltage__multiplier_8h_html"><div class="ttname"><a href="voltage__multiplier_8h.html">voltage_multiplier.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

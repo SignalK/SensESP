@@ -1,14 +1,18 @@
 <map id="sensesp::Networking" name="sensesp::Networking">
-<area shape="rect" id="Node000001" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="180,259,324,285"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="5,176,157,202"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,207,227,256,225,261,119,212"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_resettable.html" title="Automatic calling of the reset() method when the device needs to be reset." alt="" coords="181,176,322,202"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="254,218,254,259,249,259,249,218"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="346,169,509,210"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="372,219,280,261,277,256,370,214"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="326,5,470,31"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="403,46,410,106,425,168,420,169,405,106,398,47"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="420,80,614,106"/>
-<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="432,37,499,78,496,82,430,42"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="497,119,448,170,444,167,493,115"/>
+<area shape="rect" id="Node000001" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="775,73,919,99"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="527,24,726,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="703,51,787,70,786,75,702,56"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_saveable.html" title="Interface for saveable objects." alt="" coords="230,5,362,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="378,20,527,29,527,34,377,25"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_serializable.html" title="Interface for serializable objects." alt="" coords="224,55,369,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="384,57,526,43,527,49,385,62"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_resettable.html" title="Automatic calling of the reset() method when the device needs to be reset." alt="" coords="556,73,697,99"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="712,84,775,84,775,89,712,89"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="545,123,708,164"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="721,116,794,97,795,102,722,121"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,133,150,159"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="165,137,174,137,338,134,503,137,545,138,545,143,503,142,338,139,174,142,165,142"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="199,159,393,184"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="166,154,199,158,198,163,165,159"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="409,160,503,152,545,148,545,153,504,157,409,165"/>
 </map>

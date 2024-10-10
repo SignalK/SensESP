@@ -1,32 +1,28 @@
 <map id="src/sensesp/net/ota.h" name="src/sensesp/net/ota.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="352,5,500,31"/>
-<area shape="rect" id="Node000002" href="$ota_8cpp.html" title=" " alt="" coords="227,79,388,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="394,42,329,81,326,76,392,37"/>
-<area shape="rect" id="Node000003" href="$sensesp__app_8cpp.html" title=" " alt="" coords="5,160,151,186"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="428,47,421,78,413,93,403,107,373,129,346,142,319,149,292,150,234,149,201,150,164,155,132,162,131,157,163,150,200,145,234,143,292,145,318,143,344,137,371,124,399,103,409,91,416,76,422,46"/>
-<area shape="rect" id="Node000004" href="$sensesp__app_8h.html" title=" " alt="" coords="714,79,845,105"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="502,32,720,76,719,81,500,37"/>
-<area shape="poly" id="edge14_Node000004_Node000003" title=" " alt="" coords="698,100,458,119,311,135,164,155,128,162,127,157,163,150,310,130,458,114,698,95"/>
-<area shape="rect" id="Node000005" href="$main_8cpp.html" title=" " alt="" coords="1590,249,1686,274"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="860,90,1069,90,1326,97,1449,105,1555,116,1634,131,1661,140,1677,151,1685,163,1687,176,1681,204,1667,230,1651,250,1647,247,1662,227,1676,202,1682,176,1680,165,1673,155,1658,145,1632,136,1554,121,1449,110,1326,103,1069,96,860,95"/>
-<area shape="rect" id="Node000006" href="$networking_8cpp.html" title=" " alt="" coords="175,160,381,186"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="699,108,394,155,352,162,351,157,394,150,698,103"/>
-<area shape="rect" id="Node000007" href="$app__command__handler_8h.html" title=" " alt="" coords="405,153,575,193"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="714,112,555,155,554,149,713,106"/>
-<area shape="rect" id="Node000009" href="$signalk__delta__queue_8cpp.html" title=" " alt="" coords="599,153,768,193"/>
-<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="755,117,709,154,705,150,751,113"/>
-<area shape="rect" id="Node000010" href="$signalk__put__request_8cpp.html" title=" " alt="" coords="792,153,958,193"/>
-<area shape="poly" id="edge10_Node000004_Node000010" title=" " alt="" coords="807,113,853,150,850,154,804,117"/>
-<area shape="rect" id="Node000011" href="$signalk__ws__client_8cpp.html" title=" " alt="" coords="983,153,1136,193"/>
-<area shape="poly" id="edge11_Node000004_Node000011" title=" " alt="" coords="837,107,990,150,989,155,836,112"/>
-<area shape="rect" id="Node000012" href="$button_8cpp.html" title=" " alt="" coords="1160,153,1300,193"/>
-<area shape="poly" id="edge12_Node000004_Node000012" title=" " alt="" coords="861,102,996,123,1149,150,1161,152,1159,158,1148,155,995,128,860,107"/>
-<area shape="rect" id="Node000013" href="$led__blinker_8cpp.html" title=" " alt="" coords="1324,153,1464,193"/>
-<area shape="poly" id="edge13_Node000004_Node000013" title=" " alt="" coords="861,97,1066,116,1312,150,1324,152,1323,158,1311,155,1065,122,860,102"/>
-<area shape="rect" id="Node000014" href="$sensesp__app__builder_8h.html" title=" " alt="" coords="1488,160,1663,186"/>
-<area shape="poly" id="edge15_Node000004_Node000014" title=" " alt="" coords="861,95,1134,114,1304,130,1476,150,1517,157,1516,162,1475,155,1304,135,1134,119,860,100"/>
-<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="584,146,741,103,742,108,586,151"/>
-<area shape="rect" id="Node000008" href="$app__command__handler_8cpp.html" title=" " alt="" coords="398,241,582,282"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="493,209,493,241,487,241,487,209"/>
-<area shape="poly" id="edge16_Node000014_Node000005" title=" " alt="" coords="1595,197,1632,247,1627,250,1591,200"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="673,5,820,31"/>
+<area shape="rect" id="Node000002" href="$ota_8cpp.html" title=" " alt="" coords="581,79,742,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="722,43,677,81,674,77,719,39"/>
+<area shape="rect" id="Node000003" href="$sensesp__app_8h.html" title=" " alt="" coords="766,79,898,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="774,39,819,77,816,81,771,43"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html" title=" " alt="" coords="750,241,847,267"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="751,107,588,110,354,112,237,117,134,125,57,137,31,145,16,155,10,164,8,173,10,182,16,191,30,201,55,209,128,223,227,233,340,241,574,248,750,250,750,256,573,254,340,246,226,238,127,228,53,214,28,205,13,195,5,184,3,173,5,162,13,151,29,140,56,132,134,119,236,111,354,107,588,104,751,102"/>
+<area shape="rect" id="Node000005" href="$networking_8cpp.html" title=" " alt="" coords="26,160,232,186"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="751,108,608,122,496,131,385,140,244,155,198,162,197,157,244,150,384,134,495,125,607,117,750,102"/>
+<area shape="rect" id="Node000006" href="$app__command__handler_8cpp.html" title=" " alt="" coords="256,153,440,193"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="751,108,452,155,440,157,439,152,451,150,750,103"/>
+<area shape="rect" id="Node000007" href="$signalk__delta__queue_8cpp.html" title=" " alt="" coords="464,153,632,193"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="774,112,620,155,618,150,773,107"/>
+<area shape="rect" id="Node000008" href="$signalk__put__request_8cpp.html" title=" " alt="" coords="657,153,823,193"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="808,117,764,154,761,150,805,113"/>
+<area shape="rect" id="Node000009" href="$signalk__ws__client_8cpp.html" title=" " alt="" coords="847,153,1001,193"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="859,113,903,150,899,154,856,117"/>
+<area shape="rect" id="Node000010" href="$button_8cpp.html" title=" " alt="" coords="1025,153,1164,193"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="888,107,1030,150,1028,155,886,112"/>
+<area shape="rect" id="Node000011" href="$led__blinker_8cpp.html" title=" " alt="" coords="1189,153,1328,193"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="913,103,1176,150,1189,153,1188,158,1175,155,912,109"/>
+<area shape="rect" id="Node000012" href="$sensesp__app_8cpp.html" title=" " alt="" coords="1353,160,1498,186"/>
+<area shape="poly" id="edge11_Node000003_Node000012" title=" " alt="" coords="913,97,1108,118,1340,150,1375,157,1374,162,1339,155,1108,123,913,103"/>
+<area shape="rect" id="Node000013" href="$sensesp__app__builder_8h.html" title=" " alt="" coords="1522,160,1697,186"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="914,95,1180,114,1345,130,1511,150,1552,157,1551,162,1510,155,1344,135,1179,119,913,100"/>
+<area shape="poly" id="edge13_Node000013_Node000004" title=" " alt="" coords="1538,192,1511,196,1319,219,1129,235,847,253,847,248,1129,230,1318,213,1510,191,1537,187"/>
 </map>
