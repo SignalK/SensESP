@@ -1,17 +1,7 @@
 var searchData=
 [
-  ['warning_0',['WARNING',['../classsensesp_1_1_local_debug.html#a98fde0a2fbdddfe87adc1242151a0031',1,'sensesp::LocalDebug']]],
-  ['wifi_5fclient_5fpassword_5f_1',['wifi_client_password_',['../classsensesp_1_1_sens_e_s_p_app.html#a877715b4c6269d50e3e69466f1df22df',1,'sensesp::SensESPApp']]],
-  ['wifi_5fconnected_5fpattern_2',['wifi_connected_pattern',['../namespacesensesp.html#ab97a03fa114165f852d3e9f7ef14ad7e',1,'sensesp']]],
-  ['wifi_5fdisconnected_5fpattern_3',['wifi_disconnected_pattern',['../namespacesensesp.html#ad53b505f128cf2dbb5e01bea56399524',1,'sensesp']]],
-  ['wifi_5fmanager_5fpassword_5f_4',['wifi_manager_password_',['../classsensesp_1_1_sens_e_s_p_app.html#aca1cbefd07d48d9d1a8f6cac772045ec',1,'sensesp::SensESPApp']]],
-  ['wifi_5frssi_5fui_5foutput_5f_5',['wifi_rssi_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a8ae8155052e2cded282a7386eafa9d1b',1,'sensesp::SensESPApp']]],
-  ['wifi_5fssid_5fui_5foutput_5f_6',['wifi_ssid_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a47012e3f70b5268aa62f32ef87ea934b',1,'sensesp::SensESPApp']]],
-  ['wifimanager_5fpattern_7',['wifimanager_pattern',['../namespacesensesp.html#afd8af50210500a2f97ba8638f1e8ba8c',1,'sensesp']]],
-  ['ws_5fauthorizing_5fpattern_8',['ws_authorizing_pattern',['../namespacesensesp.html#ad205805904dd5fd707bf89379a37d29d',1,'sensesp']]],
-  ['ws_5fclient_9',['ws_client',['../namespacesensesp.html#a59300ccd7271c89738149da446486a3b',1,'sensesp']]],
-  ['ws_5fclient_5f_10',['ws_client_',['../classsensesp_1_1_sens_e_s_p_app.html#ade8dcb0cd6e7cbd01e73e99a7595f8c2',1,'sensesp::SensESPApp']]],
-  ['ws_5fconnected_5fpattern_11',['ws_connected_pattern',['../namespacesensesp.html#aff963dfc2628977311980b540060e5d1',1,'sensesp']]],
-  ['ws_5fconnecting_5fpattern_12',['ws_connecting_pattern',['../namespacesensesp.html#ab1f00fb5ce1be4c8291be223e68a6be7',1,'sensesp']]],
-  ['ws_5fdisconnected_5fpattern_13',['ws_disconnected_pattern',['../namespacesensesp.html#a048a12a0033281a7ea316123fec959f2',1,'sensesp']]]
+  ['value_5f_0',['value_',['../classsensesp_1_1_constant_sensor.html#abef21cb249653b5ed2e0f0dc8f8ddfae',1,'sensesp::ConstantSensor::value_'],['../classsensesp_1_1_s_k_put_request.html#a4d906b19af0ce178405ce7513464c73b',1,'sensesp::SKPutRequest::value_'],['../classsensesp_1_1_semaphore_value.html#ab06c0a3eccf9af56fae1931374225611',1,'sensesp::SemaphoreValue::value_'],['../classsensesp_1_1_string_config.html#a7655830271c64dc4b37aaa5dc4da22f9',1,'sensesp::StringConfig::value_'],['../classsensesp_1_1_number_config.html#ae429c215e94ccad7263a4f121d377351',1,'sensesp::NumberConfig::value_'],['../classsensesp_1_1_checkbox_config.html#a7261aa53de038877af7aff331a33274d',1,'sensesp::CheckboxConfig::value_'],['../classsensesp_1_1_select_config.html#a690b847923ac2ed271389df7499578a8',1,'sensesp::SelectConfig::value_']]],
+  ['values_1',['values',['../classsensesp_1_1_join.html#ae5243faf26e0d402a1b79497e16c90d2',1,'sensesp::Join::values'],['../classsensesp_1_1_join3.html#ae41a97a8d4c80a1270d44b9bf8289ee4',1,'sensesp::Join3::values'],['../classsensesp_1_1_join4.html#a025824df3181dfb7be2ec04d9639d4a2',1,'sensesp::Join4::values'],['../classsensesp_1_1_join5.html#a0e3a2b6a9627521de8bffc3614c4fd01',1,'sensesp::Join5::values'],['../classsensesp_1_1_zip.html#a1d9cc5b09b98b34bc49572c0c07435c6',1,'sensesp::Zip::values'],['../classsensesp_1_1_zip3.html#a4512f56260c21def170a8d1d47c8a79e',1,'sensesp::Zip3::values'],['../classsensesp_1_1_zip4.html#a735bd527535f8a87b6d02a34ed2e86f8',1,'sensesp::Zip4::values'],['../classsensesp_1_1_zip5.html#a846dcd92a7adcbcec3cb8628784139de',1,'sensesp::Zip5::values']]],
+  ['verbose_2',['VERBOSE',['../classsensesp_1_1_local_debug.html#a752443d74bf7514798a600bfd782c502',1,'sensesp::LocalDebug']]],
+  ['vin_5f_3',['Vin_',['../classsensesp_1_1_voltage_divider_r1.html#a4d0a8f6ea885cb7808bd4ca973048ee6',1,'sensesp::VoltageDividerR1::Vin_'],['../classsensesp_1_1_voltage_divider_r2.html#a9b5bb941414628dc60da67789f3095ce',1,'sensesp::VoltageDividerR2::Vin_']]]
 ];

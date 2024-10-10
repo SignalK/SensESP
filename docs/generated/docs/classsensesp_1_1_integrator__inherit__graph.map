@@ -1,22 +1,26 @@
 <map id="sensesp::Integrator&lt; C, P &gt;" name="sensesp::Integrator&lt; C, P &gt;">
-<area shape="rect" id="Node000001" title="Integrator integrates (accumulates) the incoming values." alt="" coords="928,47,1061,88"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_integrator.html" title=" " alt="" coords="1173,47,1306,88"/>
-<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="1076,65,1173,65,1173,70,1076,70"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="741,47,878,88"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="894,65,928,65,928,70,894,70"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="506,5,673,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="666,32,741,50,740,55,665,38"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,..." alt="" coords="224,5,376,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="392,16,506,16,506,21,392,21"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="487,55,692,80"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="707,65,740,65,740,70,707,70"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="199,55,401,80"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="417,65,487,65,487,70,417,70"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="492,105,687,131"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="663,99,740,81,741,86,664,104"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="5,131,150,156"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="165,135,174,134,491,119,492,124,174,139,166,140"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="203,156,397,182"/>
-<area shape="poly" id="edge9_Node000009_Node000008" title=" " alt="" coords="166,151,203,155,202,160,165,156"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="412,157,463,149,545,129,546,134,464,154,413,162"/>
+<area shape="rect" id="Node000001" title="Integrator integrates (accumulates) the incoming values." alt="" coords="929,71,1062,112"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_integrator.html" title=" " alt="" coords="1174,71,1307,112"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="1077,89,1174,89,1174,94,1077,94"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="742,71,879,112"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="895,89,929,89,929,94,895,94"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="507,29,674,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="667,56,742,74,741,79,666,62"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="202,29,400,55"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="416,40,506,40,506,45,416,45"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_saveable.html" title="Interface for saveable objects." alt="" coords="12,5,144,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="160,24,202,29,201,34,159,30"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_serializable.html" title="Interface for serializable objects." alt="" coords="5,55,151,80"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="166,55,201,51,202,56,166,60"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_value_consumer.html" title=" " alt="" coords="488,79,693,104"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="708,89,741,89,741,94,708,94"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_consumer.html" title="A base class for piece of code (like a transform) that accepts data for input. ValueConsumers can acc..." alt="" coords="200,79,402,104"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="418,89,488,89,488,94,418,94"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="493,129,688,155"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="664,123,741,105,742,110,665,128"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="6,149,150,175"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="166,156,492,143,493,149,166,161"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="204,180,398,206"/>
+<area shape="poly" id="edge11_Node000011_Node000010" title=" " alt="" coords="166,171,204,177,203,182,165,177"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="413,181,464,173,546,153,547,158,465,178,414,186"/>
 </map>

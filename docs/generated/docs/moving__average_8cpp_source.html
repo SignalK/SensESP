@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -120,10 +120,10 @@ $(function(){initNavTree('moving__average_8cpp_source.html',''); initResizable(t
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>      sample_size_{sample_size},</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>      multiplier_{multiplier},</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>      initialized_(false) {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <a class="code hl_function" href="classsensesp_1_1_configurable.html#afa020e0768f7c988d808f7b4ce5fb3ff">set_requires_restart</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  buf_.resize(sample_size_, 0);</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_function" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a>();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a>();</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}</div>
 </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
@@ -132,12 +132,12 @@ $(function(){initNavTree('moving__average_8cpp_source.html',''); initResizable(t
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="comment">// So the first value to be included in the average doesn&#39;t default to 0.0</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keywordflow">if</span> (!initialized_) {</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    buf_.assign(sample_size_, input);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> = input;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> = input;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    initialized_ = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="comment">// Subtract 1/nth of the oldest value and add 1/nth of the newest value</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> += -multiplier_ * buf_[ptr_] / sample_size_;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> += multiplier_ * input / sample_size_;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> += -multiplier_ * buf_[ptr_] / sample_size_;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> += multiplier_ * input / sample_size_;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">// Save the most recent input, then advance to the next storage location.</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">// When storage location n is reached, start over again at 0.</span></div>
@@ -149,56 +149,52 @@ $(function(){initNavTree('moving__average_8cpp_source.html',''); initResizable(t
 </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classsensesp_1_1_moving_average.html#aa2de12dc34e8b8ee5519e2d448565650">   38</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_moving_average.html#aa2de12dc34e8b8ee5519e2d448565650">MovingAverage::get_configuration</a>(JsonObject&amp; root) {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classsensesp_1_1_moving_average.html#a3b0871c58b1c86145b552ad53ff5691d">   38</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_moving_average.html#a3b0871c58b1c86145b552ad53ff5691d">MovingAverage::to_json</a>(JsonObject&amp; root) {</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  root[<span class="stringliteral">&quot;multiplier&quot;</span>] = multiplier_;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  root[<span class="stringliteral">&quot;sample_size&quot;</span>] = sample_size_;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kSchema[] = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="stringliteral">        &quot;sample_size&quot;: { &quot;title&quot;: &quot;Number of samples in average&quot;, &quot;type&quot;: &quot;integer&quot; },</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="stringliteral">        &quot;multiplier&quot;: { &quot;title&quot;: &quot;Multiplier&quot;, &quot;type&quot;: &quot;number&quot; }</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="stringliteral">  })&quot;;</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classsensesp_1_1_moving_average.html#ad22a7596dcc5424dc0934ed440679304">   51</a></span><span class="stringliteral">String <a class="code hl_function" href="classsensesp_1_1_moving_average.html#ad22a7596dcc5424dc0934ed440679304">MovingAverage::get_config_schema</a>() { </span><span class="keywordflow">return</span> (kSchema); }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classsensesp_1_1_moving_average.html#afba1704cfee01a3435d3d29e95c7aee6">   53</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_moving_average.html#afba1704cfee01a3435d3d29e95c7aee6">MovingAverage::set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;multiplier&quot;</span>, <span class="stringliteral">&quot;sample_size&quot;</span>};</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classsensesp_1_1_moving_average.html#a6dbc1a1d069627a31a8053b6189c8fda">   44</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_moving_average.html#a6dbc1a1d069627a31a8053b6189c8fda">MovingAverage::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;multiplier&quot;</span>, <span class="stringliteral">&quot;sample_size&quot;</span>};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  multiplier_ = config[<span class="stringliteral">&quot;multiplier&quot;</span>];</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordtype">int</span> <span class="keyword">const</span> n_new = config[<span class="stringliteral">&quot;sample_size&quot;</span>];</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="comment">// need to reset the ring buffer if size changes</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordflow">if</span> (sample_size_ != n_new) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    buf_.assign(sample_size_, 0);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    ptr_ = 0;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    initialized_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    sample_size_ = n_new;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  multiplier_ = config[<span class="stringliteral">&quot;multiplier&quot;</span>];</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordtype">int</span> <span class="keyword">const</span> n_new = config[<span class="stringliteral">&quot;sample_size&quot;</span>];</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="comment">// need to reset the ring buffer if size changes</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordflow">if</span> (sample_size_ != n_new) {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    buf_.assign(sample_size_, 0);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    ptr_ = 0;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    initialized_ = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    sample_size_ = n_new;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
 </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_configurable_html_ac97542fd5a24ae306adb77f3d1ba563a"><div class="ttname"><a href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">sensesp::Configurable::load_configuration</a></div><div class="ttdeci">virtual void load_configuration()</div><div class="ttdef"><b>Definition</b> <a href="configurable_8cpp_source.html#l00035">configurable.cpp:35</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_configurable_html_afa020e0768f7c988d808f7b4ce5fb3ff"><div class="ttname"><a href="classsensesp_1_1_configurable.html#afa020e0768f7c988d808f7b4ce5fb3ff">sensesp::Configurable::set_requires_restart</a></div><div class="ttdeci">void set_requires_restart(bool requires_restart)</div><div class="ttdoc">Set the requires_restart flag.</div><div class="ttdef"><b>Definition</b> <a href="configurable_8h_source.html#l00069">configurable.h:69</a></div></div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a198d2b8c5c545f2d6f9b9632d98fcee7">   62</a></span><span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_moving_average.html">MovingAverage</a>&amp; obj) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordflow">return</span> R<span class="stringliteral">&quot;({&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;sample_size&quot;:{&quot;title&quot;:&quot;Number of samples in average&quot;,&quot;type&quot;:&quot;integer&quot;},&quot;multiplier&quot;:{&quot;title&quot;:&quot;Multiplier&quot;,&quot;type&quot;:&quot;number&quot;}}})&quot;;</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="stringliteral">}</span></div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="stringliteral">}  </span><span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a79b2e2e657112851dfda8785d217578a"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">sensesp::FileSystemSaveable::load</a></div><div class="ttdeci">virtual bool load() override</div><div class="ttdoc">Load and populate the object from a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00008">saveable.cpp:8</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_moving_average_html"><div class="ttname"><a href="classsensesp_1_1_moving_average.html">sensesp::MovingAverage</a></div><div class="ttdoc">Outputs the moving average of the last sample_size inputs.</div><div class="ttdef"><b>Definition</b> <a href="moving__average_8h_source.html#l00023">moving_average.h:23</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_moving_average_html_a1eb68e6b84301a9cc25624e216108b53"><div class="ttname"><a href="classsensesp_1_1_moving_average.html#a1eb68e6b84301a9cc25624e216108b53">sensesp::MovingAverage::set</a></div><div class="ttdeci">virtual void set(const float &amp;input) override</div><div class="ttdef"><b>Definition</b> <a href="#l00019">moving_average.cpp:19</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_moving_average_html_a3b0871c58b1c86145b552ad53ff5691d"><div class="ttname"><a href="classsensesp_1_1_moving_average.html#a3b0871c58b1c86145b552ad53ff5691d">sensesp::MovingAverage::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;root) override</div><div class="ttdef"><b>Definition</b> <a href="#l00038">moving_average.cpp:38</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_moving_average_html_a6dbc1a1d069627a31a8053b6189c8fda"><div class="ttname"><a href="classsensesp_1_1_moving_average.html#a6dbc1a1d069627a31a8053b6189c8fda">sensesp::MovingAverage::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00044">moving_average.cpp:44</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_moving_average_html_a93fb5bbf3076efcf486a36fb197efffb"><div class="ttname"><a href="classsensesp_1_1_moving_average.html#a93fb5bbf3076efcf486a36fb197efffb">sensesp::MovingAverage::MovingAverage</a></div><div class="ttdeci">MovingAverage(int sample_size, float multiplier=1.0, const String &amp;config_path=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00007">moving_average.cpp:7</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_moving_average_html_aa2de12dc34e8b8ee5519e2d448565650"><div class="ttname"><a href="classsensesp_1_1_moving_average.html#aa2de12dc34e8b8ee5519e2d448565650">sensesp::MovingAverage::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;root) override</div><div class="ttdef"><b>Definition</b> <a href="#l00038">moving_average.cpp:38</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_moving_average_html_ad22a7596dcc5424dc0934ed440679304"><div class="ttname"><a href="classsensesp_1_1_moving_average.html#ad22a7596dcc5424dc0934ed440679304">sensesp::MovingAverage::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition</b> <a href="#l00051">moving_average.cpp:51</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_moving_average_html_afba1704cfee01a3435d3d29e95c7aee6"><div class="ttname"><a href="classsensesp_1_1_moving_average.html#afba1704cfee01a3435d3d29e95c7aee6">sensesp::MovingAverage::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00053">moving_average.cpp:53</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_observable_html_ab86d00fed8fb85b4c76cb9397667ece9"><div class="ttname"><a href="classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9">sensesp::Observable::notify</a></div><div class="ttdeci">void notify()</div><div class="ttdef"><b>Definition</b> <a href="observable_8cpp_source.html#l00007">observable.cpp:7</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_observable_html_ab86d00fed8fb85b4c76cb9397667ece9"><div class="ttname"><a href="classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9">sensesp::Observable::notify</a></div><div class="ttdeci">void notify()</div><div class="ttdef"><b>Definition</b> <a href="observable_8h_source.html#l00023">observable.h:23</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_symmetric_transform_html"><div class="ttname"><a href="classsensesp_1_1_symmetric_transform.html">sensesp::SymmetricTransform&lt; float &gt;</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a08032702dc65bfc839eeeb5b006195d4"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">sensesp::ValueProducer&lt; float &gt;::output</a></div><div class="ttdeci">float output</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00122">valueproducer.h:122</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a86ca5ef060f2f824447afa0ff4d0c3de"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">sensesp::ValueProducer&lt; float &gt;::output_</a></div><div class="ttdeci">float output_</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00101">valueproducer.h:101</a></div></div>
 <div class="ttc" id="amoving__average_8h_html"><div class="ttname"><a href="moving__average_8h.html">moving_average.h</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

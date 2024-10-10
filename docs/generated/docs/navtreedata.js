@@ -43,6 +43,7 @@ var NAVTREE =
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Typedefs", "functions_type.html", null ],
         [ "Related Symbols", "functions_rela.html", null ]
       ] ]
     ] ],
@@ -52,7 +53,6 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -62,17 +62,18 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "air__density_8cpp.html",
-"classsensesp_1_1_client_s_s_i_d_config.html#a58311c9a2775a9ebe7fd6d043d511658",
-"classsensesp_1_1_free_mem.html#ae9ced6316b567ae9e89526ef3a90527a",
-"classsensesp_1_1_m_d_n_s_discovery.html#a92a5eea6085988a188e9d4b7ec887ea2",
-"classsensesp_1_1_repeat_stopping.html#a078d2b0fa5d006535f7847a60cfaca00",
-"classsensesp_1_1_s_k_put_request_listener.html#a67cb034aecf354936e69057b67877f63",
-"classsensesp_1_1_sens_e_s_p_minimal_app.html#a8d274a915ff177159e2020675f0c3217",
-"classsensesp_1_1_u_i_button.html#ad8efc0f1c72eb3be2dabf29de8bae427",
-"curveinterpolator_8cpp_source.html",
-"minimal__button_8h.html",
-"resettable_8h_source.html",
-"transform_8h.html#a8481b36098cde132456851f920fb8ad0"
+"classsensesp_1_1_click_type.html#ad368374438204d2d593af3af939c1d05",
+"classsensesp_1_1_enable.html#a738aca5f06e2b6bd04476d625717b84a",
+"classsensesp_1_1_lambda_transform.html",
+"classsensesp_1_1_press_repeater.html#a4487165f599b2e6f494ff7b12bb3a823",
+"classsensesp_1_1_s_k_output_numeric.html#aac69146f2353303ad10c8015dd9336f4",
+"classsensesp_1_1_semaphore_value.html#a4444d01b7a1bac5a3617df18bb821204",
+"classsensesp_1_1_smart_switch_controller.html#ae4960ddcc45c2626f35f5365800d13b7",
+"classsensesp_1_1_value_consumer.html#a3734612c1b7022e9bd08d2c8fb8e30de",
+"digital__input_8cpp_source.html",
+"moving__average_8cpp_source.html",
+"nullable_8h.html",
+"structsensesp_1_1_nonce_data.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

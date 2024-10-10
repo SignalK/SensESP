@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -116,101 +116,121 @@ $(function(){initNavTree('digital__input_8cpp_source.html',''); initResizable(tr
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> DigitalInputState::get_configuration(JsonObject&amp; root) {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">bool</span> DigitalInputState::to_json(JsonObject&amp; root) {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  root[<span class="stringliteral">&quot;read_delay&quot;</span>] = read_delay_;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kSchema2[] = R<span class="stringliteral">&quot;###({</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="stringliteral">        &quot;read_delay&quot;: { &quot;title&quot;: &quot;Read delay&quot;, &quot;type&quot;: &quot;number&quot;, &quot;description&quot;: &quot;The time, in milliseconds, between each read of the input&quot; }</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="stringliteral">  })###&quot;;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="stringliteral">String DigitalInputState::get_config_schema() { </span><span class="keywordflow">return</span> kSchema2; }</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">bool</span> DigitalInputState::set_configuration(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;read_delay&quot;</span>};</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  }</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  read_delay_ = config[<span class="stringliteral">&quot;read_delay&quot;</span>];</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> DigitalInputCounter::get_configuration(JsonObject&amp; root) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  root[<span class="stringliteral">&quot;read_delay&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kSchema[] = R<span class="stringliteral">&quot;###({</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="stringliteral">        &quot;read_delay&quot;: { &quot;title&quot;: &quot;Read delay&quot;, &quot;type&quot;: &quot;number&quot;, &quot;description&quot;: &quot;The time, in milliseconds, between each read of the input&quot; }</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="stringliteral">  })###&quot;;</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="stringliteral">String DigitalInputCounter::get_config_schema() { </span><span class="keywordflow">return</span> kSchema; }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">bool</span> DigitalInputCounter::set_configuration(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;read_delay&quot;</span>};</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  }</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a> = config[<span class="stringliteral">&quot;read_delay&quot;</span>];</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keywordtype">void</span> DigitalInputDebounceCounter::handleInterrupt() {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordflow">if</span> (since_last_event_ &gt; ignore_interval_ms_) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07">counter_</a>++;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    since_last_event_ = 0;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordtype">void</span> DigitalInputDebounceCounter::get_configuration(JsonObject&amp; root) {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  root[<span class="stringliteral">&quot;read_delay&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a>;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  root[<span class="stringliteral">&quot;ignore_interval&quot;</span>] = ignore_interval_ms_;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kDebounceSchema[] = R<span class="stringliteral">&quot;###({</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="stringliteral">        &quot;read_delay&quot;: { &quot;title&quot;: &quot;Read delay&quot;, &quot;type&quot;: &quot;number&quot;, &quot;description&quot;: &quot;The time, in milliseconds, between each read of the input&quot; },</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="stringliteral">        &quot;ignore_interval&quot;: { &quot;title&quot;: &quot;Ignore interval&quot;, &quot;type&quot;: &quot;number&quot;, &quot;description&quot;: &quot;The time, in milliseconds, to ignore events after a recorded event&quot; }</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="stringliteral">  })###&quot;;</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="stringliteral">String DigitalInputDebounceCounter::get_config_schema() {</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="stringliteral">  </span><span class="keywordflow">return</span> kDebounceSchema;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keywordtype">bool</span> DigitalInputDebounceCounter::set_configuration(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;read_delay&quot;</span>, <span class="stringliteral">&quot;ignore_interval&quot;</span>};</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      ESP_LOGE(</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>          __FILENAME__,</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>          <span class="stringliteral">&quot;Cannot set DigitalInputDebounceConfiguration configuration: missing &quot;</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>          <span class="stringliteral">&quot;json field %s&quot;</span>,</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>          str.c_str());</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a> = config[<span class="stringliteral">&quot;read_delay&quot;</span>];</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  ignore_interval_ms_ = config[<span class="stringliteral">&quot;ignore_interval&quot;</span>];</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_digital_input_counter_html_a305156ad2c36bd0581ab7c4fa57faa07"><div class="ttname"><a href="classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07">sensesp::DigitalInputCounter::counter_</a></div><div class="ttdeci">volatile unsigned int counter_</div><div class="ttdef"><b>Definition</b> <a href="digital__input_8h_source.html#l00121">digital_input.h:121</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_digital_input_counter_html_a7141c84ddb49b2422fcb5d47950a282b"><div class="ttname"><a href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">sensesp::DigitalInputCounter::read_delay_</a></div><div class="ttdeci">unsigned int read_delay_</div><div class="ttdef"><b>Definition</b> <a href="digital__input_8h_source.html#l00120">digital_input.h:120</a></div></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">bool</span> DigitalInputState::from_json(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;read_delay&quot;</span>};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  read_delay_ = config[<span class="stringliteral">&quot;read_delay&quot;</span>];</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classsensesp_1_1_digital_input_counter.html#a5d8906c704f461844dea40a6124969b2">   26</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_digital_input_counter.html#a5d8906c704f461844dea40a6124969b2">DigitalInputCounter::to_json</a>(JsonObject&amp; root) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  root[<span class="stringliteral">&quot;read_delay&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classsensesp_1_1_digital_input_counter.html#a76fd9c26e3de340860b878706b9b685b">   31</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_digital_input_counter.html#a76fd9c26e3de340860b878706b9b685b">DigitalInputCounter::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;read_delay&quot;</span>};</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a> = config[<span class="stringliteral">&quot;read_delay&quot;</span>];</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">void</span> DigitalInputDebounceCounter::handleInterrupt() {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">if</span> (since_last_event_ &gt; ignore_interval_ms_) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07">counter_</a>++;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    since_last_event_ = 0;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordtype">bool</span> DigitalInputDebounceCounter::to_json(JsonObject&amp; root) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  root[<span class="stringliteral">&quot;read_delay&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  root[<span class="stringliteral">&quot;ignore_interval&quot;</span>] = ignore_interval_ms_;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keywordtype">bool</span> DigitalInputDebounceCounter::from_json(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;read_delay&quot;</span>, <span class="stringliteral">&quot;ignore_interval&quot;</span>};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      ESP_LOGE(</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>          __FILENAME__,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>          <span class="stringliteral">&quot;Cannot set DigitalInputDebounceConfiguration configuration: missing &quot;</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>          <span class="stringliteral">&quot;json field %s&quot;</span>,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>          str.c_str());</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <a class="code hl_variable" href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">read_delay_</a> = config[<span class="stringliteral">&quot;read_delay&quot;</span>];</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  ignore_interval_ms_ = config[<span class="stringliteral">&quot;ignore_interval&quot;</span>];</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a76d26560f6431fc456c8915f4d59de1e">   73</a></span><span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<a class="code hl_class" href="classsensesp_1_1_digital_input_state.html">DigitalInputState</a>&amp; obj) {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="keywordflow">return</span> R<span class="stringliteral">&quot;###({&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;read_delay&quot;:{&quot;title&quot;:&quot;Read delay&quot;,&quot;type&quot;:&quot;number&quot;,&quot;description&quot;:&quot;The time, in milliseconds, between each read of the input&quot;}}  })###&quot;;</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="stringliteral">}</span></div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="stringliteral"></span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a5ad10143ce6a841a86ca6f2bbd33ba0c">   77</a></span><span class="stringliteral"></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacesensesp.html#adf7349083124bc58e3924f546937179f">ConfigRequiresRestart</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_digital_input_state.html">DigitalInputState</a>&amp; obj) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
+</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a70802d1f93220ede6b62137991fef39a">   81</a></span><span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_digital_input_counter.html">DigitalInputCounter</a>&amp; obj) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="keywordflow">return</span> R<span class="stringliteral">&quot;###({&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;read_delay&quot;:{&quot;title&quot;:&quot;Read delay&quot;,&quot;type&quot;:&quot;number&quot;,&quot;description&quot;:&quot;The time, in milliseconds, between each read of the input&quot;}}  })###&quot;;</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="stringliteral">}</span></div>
+</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="stringliteral"></span> </div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="namespacesensesp.html#aa58ffcd690a7f9e889f12f2495d9c42a">   85</a></span><span class="stringliteral"></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacesensesp.html#adf7349083124bc58e3924f546937179f">ConfigRequiresRestart</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_digital_input_counter.html">DigitalInputCounter</a>&amp; obj) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="namespacesensesp.html#abc45487d0712b1fce84ad8443da1637b">   89</a></span><span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_digital_input_debounce_counter.html">DigitalInputDebounceCounter</a>&amp; obj) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="keywordflow">return</span> R<span class="stringliteral">&quot;###({&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;read_delay&quot;:{&quot;title&quot;:&quot;Read delay&quot;,&quot;type&quot;:&quot;number&quot;,&quot;description&quot;:&quot;The time, in milliseconds, between each read of the input&quot;},&quot;ignore_interval&quot;:{&quot;title&quot;:&quot;Ignore interval&quot;,&quot;type&quot;:&quot;number&quot;,&quot;description&quot;:&quot;The time, in milliseconds, to ignore events after a recorded event&quot;}}  })###&quot;;</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="stringliteral">}</span></div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="stringliteral"></span> </div>
+<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="namespacesensesp.html#ad92042a32c932fb1ca7bb704754297b6">   93</a></span><span class="stringliteral"></span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespacesensesp.html#adf7349083124bc58e3924f546937179f">ConfigRequiresRestart</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_digital_input_debounce_counter.html">DigitalInputDebounceCounter</a>&amp; obj) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}</div>
+</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_digital_input_counter_html"><div class="ttname"><a href="classsensesp_1_1_digital_input_counter.html">sensesp::DigitalInputCounter</a></div><div class="ttdoc">DigitalInputCounter counts interrupts and reports the count every read_delay ms.</div><div class="ttdef"><b>Definition</b> <a href="digital__input_8h_source.html#l00092">digital_input.h:92</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_digital_input_counter_html_a305156ad2c36bd0581ab7c4fa57faa07"><div class="ttname"><a href="classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07">sensesp::DigitalInputCounter::counter_</a></div><div class="ttdeci">volatile unsigned int counter_</div><div class="ttdef"><b>Definition</b> <a href="digital__input_8h_source.html#l00125">digital_input.h:125</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_digital_input_counter_html_a5d8906c704f461844dea40a6124969b2"><div class="ttname"><a href="classsensesp_1_1_digital_input_counter.html#a5d8906c704f461844dea40a6124969b2">sensesp::DigitalInputCounter::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;root) override</div><div class="ttdef"><b>Definition</b> <a href="#l00026">digital_input.cpp:26</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_digital_input_counter_html_a7141c84ddb49b2422fcb5d47950a282b"><div class="ttname"><a href="classsensesp_1_1_digital_input_counter.html#a7141c84ddb49b2422fcb5d47950a282b">sensesp::DigitalInputCounter::read_delay_</a></div><div class="ttdeci">unsigned int read_delay_</div><div class="ttdef"><b>Definition</b> <a href="digital__input_8h_source.html#l00124">digital_input.h:124</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_digital_input_counter_html_a76fd9c26e3de340860b878706b9b685b"><div class="ttname"><a href="classsensesp_1_1_digital_input_counter.html#a76fd9c26e3de340860b878706b9b685b">sensesp::DigitalInputCounter::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00031">digital_input.cpp:31</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_digital_input_debounce_counter_html"><div class="ttname"><a href="classsensesp_1_1_digital_input_debounce_counter.html">sensesp::DigitalInputDebounceCounter</a></div><div class="ttdoc">DigitalInputDebounceCounter counts interrupts and reports the count every read_delay ms,...</div><div class="ttdef"><b>Definition</b> <a href="digital__input_8h_source.html#l00157">digital_input.h:157</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_digital_input_state_html"><div class="ttname"><a href="classsensesp_1_1_digital_input_state.html">sensesp::DigitalInputState</a></div><div class="ttdoc">DigitalInputState polls the state of an input pin every read_delay ms.</div><div class="ttdef"><b>Definition</b> <a href="digital__input_8h_source.html#l00050">digital_input.h:50</a></div></div>
 <div class="ttc" id="adigital__input_8h_html"><div class="ttname"><a href="digital__input_8h.html">digital_input.h</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_adf7349083124bc58e3924f546937179f"><div class="ttname"><a href="namespacesensesp.html#adf7349083124bc58e3924f546937179f">sensesp::ConfigRequiresRestart</a></div><div class="ttdeci">bool ConfigRequiresRestart(const HTTPServer &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="http__server_8h_source.html#l00182">http_server.h:182</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

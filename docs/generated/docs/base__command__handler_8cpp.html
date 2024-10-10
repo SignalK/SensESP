@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -111,6 +111,8 @@ $(function(){initNavTree('base__command__handler_8cpp.html',''); initResizable(t
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="base__command__handler_8h_source.html">base_command_handler.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="frontend__files_8h_source.html">sensesp/net/web/autogen/frontend_files.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="status__page__item_8h_source.html">sensesp/ui/status_page_item.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for base_command_handler.cpp:</div>
 <div class="dyncontent">
@@ -126,16 +128,16 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5f5a0a2cad66e66dd5b98b9f59289ccb" id="r_a5f5a0a2cad66e66dd5b98b9f59289ccb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a5f5a0a2cad66e66dd5b98b9f59289ccb">sensesp::add_http_reset_handler</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:a5f5a0a2cad66e66dd5b98b9f59289ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedad6ff772b19a81dc8be40ec06abb0b" id="r_aedad6ff772b19a81dc8be40ec06abb0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aedad6ff772b19a81dc8be40ec06abb0b">sensesp::add_http_restart_handler</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:aedad6ff772b19a81dc8be40ec06abb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e579e84b757eae4139e6effecf64a3e" id="r_a0e579e84b757eae4139e6effecf64a3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a0e579e84b757eae4139e6effecf64a3e">sensesp::add_http_info_handler</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:a0e579e84b757eae4139e6effecf64a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace21ab824d48a880608b44093832f2c7" id="r_ace21ab824d48a880608b44093832f2c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ace21ab824d48a880608b44093832f2c7">sensesp::add_routes_handlers</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:ace21ab824d48a880608b44093832f2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a933b02d533cea6b08661090eac0c54" id="r_a8a933b02d533cea6b08661090eac0c54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a8a933b02d533cea6b08661090eac0c54">sensesp::add_base_app_http_command_handlers</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:a8a933b02d533cea6b08661090eac0c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a15d11fef7ca5585be3b8331c65f5e3" id="r_a6a15d11fef7ca5585be3b8331c65f5e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a6a15d11fef7ca5585be3b8331c65f5e3">sensesp::add_http_reset_handler</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:a6a15d11fef7ca5585be3b8331c65f5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6886cc5acd94f7d484f201461b72ee3f" id="r_a6886cc5acd94f7d484f201461b72ee3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a6886cc5acd94f7d484f201461b72ee3f">sensesp::add_http_restart_handler</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:a6886cc5acd94f7d484f201461b72ee3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2465469ec673aa4bbe8f9845a2b56ae2" id="r_a2465469ec673aa4bbe8f9845a2b56ae2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2465469ec673aa4bbe8f9845a2b56ae2">sensesp::add_http_info_handler</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:a2465469ec673aa4bbe8f9845a2b56ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af57dd38bb0a679d5c2c989215733bbcb" id="r_af57dd38bb0a679d5c2c989215733bbcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#af57dd38bb0a679d5c2c989215733bbcb">sensesp::add_routes_handlers</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:af57dd38bb0a679d5c2c989215733bbcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae13b0281a08c4952d6e803bf958917c4" id="r_ae13b0281a08c4952d6e803bf958917c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ae13b0281a08c4952d6e803bf958917c4">sensesp::add_base_app_http_command_handlers</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:ae13b0281a08c4952d6e803bf958917c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -127,36 +127,45 @@ Inheritance diagram for sensesp::SensESPBaseApp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9bb8791c56e28547e416818f95c34d1f" id="r_a9bb8791c56e28547e416818f95c34d1f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bb8791c56e28547e416818f95c34d1f">start</a> ()</td></tr>
-<tr class="memdesc:a9bb8791c56e28547e416818f95c34d1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the app (activate all the subcomponents)  <br /></td></tr>
-<tr class="separator:a9bb8791c56e28547e416818f95c34d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42d3c5c9ed56c0a0a925fac4e49dd659" id="r_a42d3c5c9ed56c0a0a925fac4e49dd659"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42d3c5c9ed56c0a0a925fac4e49dd659">reset</a> ()</td></tr>
-<tr class="memdesc:a42d3c5c9ed56c0a0a925fac4e49dd659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the device to factory defaults.  <br /></td></tr>
-<tr class="separator:a42d3c5c9ed56c0a0a925fac4e49dd659"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade8960b96e439f4cc0b387c312999dd5" id="r_ade8960b96e439f4cc0b387c312999dd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_observable_value.html">ObservableValue</a>&lt; String &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade8960b96e439f4cc0b387c312999dd5">get_hostname_observable</a> ()</td></tr>
-<tr class="memdesc:ade8960b96e439f4cc0b387c312999dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the hostname observable object.  <br /></td></tr>
-<tr class="separator:ade8960b96e439f4cc0b387c312999dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7938601a4a4b4b00f20a471355574ba" id="r_ab7938601a4a4b4b00f20a471355574ba"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7938601a4a4b4b00f20a471355574ba">destroy</a> ()</td></tr>
+<tr class="memdesc:ab7938601a4a4b4b00f20a471355574ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> instance.  <br /></td></tr>
+<tr class="separator:ab7938601a4a4b4b00f20a471355574ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66fcef158e58eaecc62eed5d5d71a1ab" id="r_a66fcef158e58eaecc62eed5d5d71a1ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66fcef158e58eaecc62eed5d5d71a1ab">start</a> ()</td></tr>
+<tr class="memdesc:a66fcef158e58eaecc62eed5d5d71a1ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the app (activate all the subcomponents)  <br /></td></tr>
+<tr class="separator:a66fcef158e58eaecc62eed5d5d71a1ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2374208af723b1ab83b13e5c03da927" id="r_ab2374208af723b1ab83b13e5c03da927"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2374208af723b1ab83b13e5c03da927">reset</a> ()</td></tr>
+<tr class="memdesc:ab2374208af723b1ab83b13e5c03da927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the device to factory defaults.  <br /></td></tr>
+<tr class="separator:ab2374208af723b1ab83b13e5c03da927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a734ae82f0a67785092cfb8a86f920cf8" id="r_a734ae82f0a67785092cfb8a86f920cf8"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_observable_value.html">ObservableValue</a>&lt; String &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a734ae82f0a67785092cfb8a86f920cf8">get_hostname_observable</a> ()</td></tr>
+<tr class="memdesc:a734ae82f0a67785092cfb8a86f920cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the hostname observable object.  <br /></td></tr>
+<tr class="separator:a734ae82f0a67785092cfb8a86f920cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a2df22469c69a8a1234ab673386f574d6" id="r_a2df22469c69a8a1234ab673386f574d6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2df22469c69a8a1234ab673386f574d6">get</a> ()</td></tr>
-<tr class="memdesc:a2df22469c69a8a1234ab673386f574d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the singleton instance of the <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a>.  <br /></td></tr>
-<tr class="separator:a2df22469c69a8a1234ab673386f574d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a928c309a2dc17f82edefe9e5bc7ef33d" id="r_a928c309a2dc17f82edefe9e5bc7ef33d"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a928c309a2dc17f82edefe9e5bc7ef33d">get_hostname</a> ()</td></tr>
-<tr class="memdesc:a928c309a2dc17f82edefe9e5bc7ef33d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current hostname.  <br /></td></tr>
-<tr class="separator:a928c309a2dc17f82edefe9e5bc7ef33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9068b65bf976f1d1bd5faf1e3126e8ff" id="r_a9068b65bf976f1d1bd5faf1e3126e8ff"><td class="memItemLeft" align="right" valign="top">static reactesp::EventLoop *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9068b65bf976f1d1bd5faf1e3126e8ff">get_event_loop</a> ()</td></tr>
-<tr class="memdesc:a9068b65bf976f1d1bd5faf1e3126e8ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the event loop object from the singleton <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> instance.  <br /></td></tr>
-<tr class="separator:a9068b65bf976f1d1bd5faf1e3126e8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add2c67bb55d095ab9c64f44ab2e82612" id="r_add2c67bb55d095ab9c64f44ab2e82612"><td class="memItemLeft" align="right" valign="top">static const std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add2c67bb55d095ab9c64f44ab2e82612">get</a> ()</td></tr>
+<tr class="memdesc:add2c67bb55d095ab9c64f44ab2e82612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the singleton instance of the <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a>.  <br /></td></tr>
+<tr class="separator:add2c67bb55d095ab9c64f44ab2e82612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21ba3dc3ef0056c32ad5a67e1ae5ff16" id="r_a21ba3dc3ef0056c32ad5a67e1ae5ff16"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21ba3dc3ef0056c32ad5a67e1ae5ff16">get_hostname</a> ()</td></tr>
+<tr class="memdesc:a21ba3dc3ef0056c32ad5a67e1ae5ff16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current hostname.  <br /></td></tr>
+<tr class="separator:a21ba3dc3ef0056c32ad5a67e1ae5ff16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac3b07550aed05e92aeb2a536ea0739" id="r_a5ac3b07550aed05e92aeb2a536ea0739"><td class="memItemLeft" align="right" valign="top">static reactesp::EventLoop *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ac3b07550aed05e92aeb2a536ea0739">get_event_loop</a> ()</td></tr>
+<tr class="memdesc:a5ac3b07550aed05e92aeb2a536ea0739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the event loop object from the singleton <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> instance.  <br /></td></tr>
+<tr class="separator:a5ac3b07550aed05e92aeb2a536ea0739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab20809d53f2c7d030deefc9eb22e5dde" id="r_ab20809d53f2c7d030deefc9eb22e5dde"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab20809d53f2c7d030deefc9eb22e5dde">SensESPBaseApp</a> ()</td></tr>
 <tr class="memdesc:ab20809d53f2c7d030deefc9eb22e5dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new SensESP Base App object.  <br /></td></tr>
 <tr class="separator:ab20809d53f2c7d030deefc9eb22e5dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac987bc8c9b4a04ca24199a09a2b29b99" id="r_ac987bc8c9b4a04ca24199a09a2b29b99"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac987bc8c9b4a04ca24199a09a2b29b99">setup</a> ()</td></tr>
-<tr class="memdesc:ac987bc8c9b4a04ca24199a09a2b29b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform initialization of <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> once builder configuration is done.  <br /></td></tr>
-<tr class="separator:ac987bc8c9b4a04ca24199a09a2b29b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad576442db2d3c194009adea9951a18" id="r_a6ad576442db2d3c194009adea9951a18"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ad576442db2d3c194009adea9951a18">~SensESPBaseApp</a> ()</td></tr>
+<tr class="separator:a6ad576442db2d3c194009adea9951a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6291f4758c617d1de18e383891c6fa56" id="r_a6291f4758c617d1de18e383891c6fa56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6291f4758c617d1de18e383891c6fa56">init_hostname</a> ()</td></tr>
+<tr class="separator:a6291f4758c617d1de18e383891c6fa56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7698b0bb9d6bc33d13f9dea256e98bc3" id="r_a7698b0bb9d6bc33d13f9dea256e98bc3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7698b0bb9d6bc33d13f9dea256e98bc3">setup</a> ()</td></tr>
+<tr class="memdesc:a7698b0bb9d6bc33d13f9dea256e98bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform initialization of <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> once builder configuration is done.  <br /></td></tr>
+<tr class="separator:a7698b0bb9d6bc33d13f9dea256e98bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cc8478d3c2899479ac8baa601031c9f" id="r_a5cc8478d3c2899479ac8baa601031c9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5cc8478d3c2899479ac8baa601031c9f">set_instance</a> (const std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> &gt; &amp;instance)</td></tr>
+<tr class="separator:a5cc8478d3c2899479ac8baa601031c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6480199c42124d844eadd89d6fac5c60" id="r_a6480199c42124d844eadd89d6fac5c60"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6480199c42124d844eadd89d6fac5c60">set_hostname</a> (String hostname)</td></tr>
 <tr class="separator:a6480199c42124d844eadd89d6fac5c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -164,22 +173,22 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ae516965980ce05d7ffbe3cec1837d66d" id="r_ae516965980ce05d7ffbe3cec1837d66d"><td class="memItemLeft" align="right" valign="top">reactesp::EventLoop&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae516965980ce05d7ffbe3cec1837d66d">event_loop_</a></td></tr>
 <tr class="separator:ae516965980ce05d7ffbe3cec1837d66d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac63e51311fbc70ee4cb925a02ecd5542" id="r_ac63e51311fbc70ee4cb925a02ecd5542"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_persisting_observable_value.html">PersistingObservableValue</a>&lt; String &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac63e51311fbc70ee4cb925a02ecd5542">hostname_</a> {}</td></tr>
-<tr class="separator:ac63e51311fbc70ee4cb925a02ecd5542"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d281f5428ba4b7b2ee4ddbff7bdbbbc" id="r_a7d281f5428ba4b7b2ee4ddbff7bdbbbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_filesystem.html">Filesystem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d281f5428ba4b7b2ee4ddbff7bdbbbc">filesystem_</a></td></tr>
-<tr class="separator:a7d281f5428ba4b7b2ee4ddbff7bdbbbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a668fe6e03bea97a8ca7187a4677caa35" id="r_a668fe6e03bea97a8ca7187a4677caa35"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_persisting_observable_value.html">PersistingObservableValue</a>&lt; String &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a668fe6e03bea97a8ca7187a4677caa35">hostname_</a></td></tr>
+<tr class="separator:a668fe6e03bea97a8ca7187a4677caa35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac26b8439bbc078232619fbaf147d8958" id="r_ac26b8439bbc078232619fbaf147d8958"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_filesystem.html">Filesystem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac26b8439bbc078232619fbaf147d8958">filesystem_</a></td></tr>
+<tr class="separator:ac26b8439bbc078232619fbaf147d8958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a775c80a83adf027205c767c080597f08" id="r_a775c80a83adf027205c767c080597f08"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a775c80a83adf027205c767c080597f08">instance_</a> = nullptr</td></tr>
-<tr class="separator:a775c80a83adf027205c767c080597f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47538ec371745e1f5f006a15a120f399" id="r_a47538ec371745e1f5f006a15a120f399"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47538ec371745e1f5f006a15a120f399">instance_</a> = nullptr</td></tr>
+<tr class="separator:a47538ec371745e1f5f006a15a120f399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The base class for SensESP applications. </p>
 <p><a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> is the base class for all apps. It can be either expanded in child classes to provide additional functionality, or used as is to provide a bare-bones application.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classsensesp_1_1_sens_e_s_p_app.html">SensESPApp</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00031">31</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00042">42</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab20809d53f2c7d030deefc9eb22e5dde" name="ab20809d53f2c7d030deefc9eb22e5dde"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab20809d53f2c7d030deefc9eb22e5dde">&#9670;&#160;</a></span>SensESPBaseApp()</h2>
@@ -199,7 +208,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -207,18 +216,12 @@ Static Protected Attributes</h2></td></tr>
 <p>Construct a new SensESP Base App object. </p>
 <p>This constructor must only be used in <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app_builder.html" title="Abstract base class for other SensESP*AppBuilder classes.">SensESPBaseAppBuilder</a>, and must be called only once. For compatibility reasons, the class hasn't been refactored into a singleton. </p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00019">19</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_ab20809d53f2c7d030deefc9eb22e5dde_cgraph.svg" width="399" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00125">125</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2df22469c69a8a1234ab673386f574d6" name="a2df22469c69a8a1234ab673386f574d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2df22469c69a8a1234ab673386f574d6">&#9670;&#160;</a></span>get()</h2>
+<a id="a6ad576442db2d3c194009adea9951a18" name="a6ad576442db2d3c194009adea9951a18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ad576442db2d3c194009adea9951a18">&#9670;&#160;</a></span>~SensESPBaseApp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +230,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> * sensesp::SensESPBaseApp::get </td>
+          <td class="memname">sensesp::SensESPBaseApp::~SensESPBaseApp </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -235,25 +238,83 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00129">129</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab7938601a4a4b4b00f20a471355574ba" name="ab7938601a4a4b4b00f20a471355574ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7938601a4a4b4b00f20a471355574ba">&#9670;&#160;</a></span>destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool sensesp::SensESPBaseApp::destroy </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroy the <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> instance. </p>
+
+<p>Reimplemented in <a class="el" href="classsensesp_1_1_sens_e_s_p_app.html#a3cfcee021ccb94f639bc7fc4bfb79044">sensesp::SensESPApp</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00055">55</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+
+</div>
+</div>
+<a id="add2c67bb55d095ab9c64f44ab2e82612" name="add2c67bb55d095ab9c64f44ab2e82612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add2c67bb55d095ab9c64f44ab2e82612">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> &gt; &amp; sensesp::SensESPBaseApp::get </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get the singleton instance of the <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a>. </p>
-<p>Get the singleton <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> singleton instance. The instance must be set by the builder. </p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00032">32</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00050">50</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a2df22469c69a8a1234ab673386f574d6_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_add2c67bb55d095ab9c64f44ab2e82612_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="a9068b65bf976f1d1bd5faf1e3126e8ff" name="a9068b65bf976f1d1bd5faf1e3126e8ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9068b65bf976f1d1bd5faf1e3126e8ff">&#9670;&#160;</a></span>get_event_loop()</h2>
+<a id="a5ac3b07550aed05e92aeb2a536ea0739" name="a5ac3b07550aed05e92aeb2a536ea0739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ac3b07550aed05e92aeb2a536ea0739">&#9670;&#160;</a></span>get_event_loop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,7 +323,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">reactesp::EventLoop * sensesp::SensESPBaseApp::get_event_loop </td>
+          <td class="memname">static reactesp::EventLoop * sensesp::SensESPBaseApp::get_event_loop </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -270,29 +331,29 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get the event loop object from the singleton <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html" title="The base class for SensESP applications.">SensESPBaseApp</a> instance. </p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00038">38</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00113">113</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a9068b65bf976f1d1bd5faf1e3126e8ff_cgraph.svg" width="462" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a5ac3b07550aed05e92aeb2a536ea0739_cgraph.svg" width="462" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a9068b65bf976f1d1bd5faf1e3126e8ff_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a5ac3b07550aed05e92aeb2a536ea0739_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="a928c309a2dc17f82edefe9e5bc7ef33d" name="a928c309a2dc17f82edefe9e5bc7ef33d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a928c309a2dc17f82edefe9e5bc7ef33d">&#9670;&#160;</a></span>get_hostname()</h2>
+<a id="a21ba3dc3ef0056c32ad5a67e1ae5ff16" name="a21ba3dc3ef0056c32ad5a67e1ae5ff16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21ba3dc3ef0056c32ad5a67e1ae5ff16">&#9670;&#160;</a></span>get_hostname()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,7 +362,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">String sensesp::SensESPBaseApp::get_hostname </td>
+          <td class="memname">static String sensesp::SensESPBaseApp::get_hostname </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -309,7 +370,7 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -317,49 +378,22 @@ Here is the caller graph for this function:</div>
 <p>Get the current hostname. </p>
 <dl class="section return"><dt>Returns</dt><dd>String </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00077">77</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00104">104</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a928c309a2dc17f82edefe9e5bc7ef33d_cgraph.svg" width="462" height="151"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a21ba3dc3ef0056c32ad5a67e1ae5ff16_cgraph.svg" width="462" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a928c309a2dc17f82edefe9e5bc7ef33d_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a21ba3dc3ef0056c32ad5a67e1ae5ff16_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="ade8960b96e439f4cc0b387c312999dd5" name="ade8960b96e439f4cc0b387c312999dd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade8960b96e439f4cc0b387c312999dd5">&#9670;&#160;</a></span>get_hostname_observable()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classsensesp_1_1_observable_value.html">ObservableValue</a>&lt; String &gt; * sensesp::SensESPBaseApp::get_hostname_observable </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the hostname observable object. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classsensesp_1_1_observable_value.html">ObservableValue&lt;String&gt;</a>* </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00068">68</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_ade8960b96e439f4cc0b387c312999dd5_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="a42d3c5c9ed56c0a0a925fac4e49dd659" name="a42d3c5c9ed56c0a0a925fac4e49dd659"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42d3c5c9ed56c0a0a925fac4e49dd659">&#9670;&#160;</a></span>reset()</h2>
+<a id="a734ae82f0a67785092cfb8a86f920cf8" name="a734ae82f0a67785092cfb8a86f920cf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a734ae82f0a67785092cfb8a86f920cf8">&#9670;&#160;</a></span>get_hostname_observable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -368,7 +402,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void sensesp::SensESPBaseApp::reset </td>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_observable_value.html">ObservableValue</a>&lt; String &gt; &gt; sensesp::SensESPBaseApp::get_hostname_observable </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -376,23 +410,85 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the hostname observable object. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classsensesp_1_1_observable_value.html">ObservableValue&lt;String&gt;</a>* </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00095">95</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+
+</div>
+</div>
+<a id="a6291f4758c617d1de18e383891c6fa56" name="a6291f4758c617d1de18e383891c6fa56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6291f4758c617d1de18e383891c6fa56">&#9670;&#160;</a></span>init_hostname()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::SensESPBaseApp::init_hostname </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00131">131</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a6291f4758c617d1de18e383891c6fa56_cgraph.svg" width="390" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a6291f4758c617d1de18e383891c6fa56_icgraph.svg" width="640" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ab2374208af723b1ab83b13e5c03da927" name="ab2374208af723b1ab83b13e5c03da927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2374208af723b1ab83b13e5c03da927">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void sensesp::SensESPBaseApp::reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Reset the device to factory defaults. </p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00057">57</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00079">79</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a42d3c5c9ed56c0a0a925fac4e49dd659_cgraph.svg" width="388" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a42d3c5c9ed56c0a0a925fac4e49dd659_icgraph.svg" width="100%" height="406"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_ab2374208af723b1ab83b13e5c03da927_cgraph.svg" width="388" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -420,22 +516,22 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00081">81</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00160">160</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a6480199c42124d844eadd89d6fac5c60_cgraph.svg" width="100%" height="425"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a6480199c42124d844eadd89d6fac5c60_cgraph.svg" width="626" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a6480199c42124d844eadd89d6fac5c60_icgraph.svg" width="100%" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a6480199c42124d844eadd89d6fac5c60_icgraph.svg" width="404" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="ac987bc8c9b4a04ca24199a09a2b29b99" name="ac987bc8c9b4a04ca24199a09a2b29b99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac987bc8c9b4a04ca24199a09a2b29b99">&#9670;&#160;</a></span>setup()</h2>
+<a id="a5cc8478d3c2899479ac8baa601031c9f" name="a5cc8478d3c2899479ac8baa601031c9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cc8478d3c2899479ac8baa601031c9f">&#9670;&#160;</a></span>set_instance()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -444,7 +540,34 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void sensesp::SensESPBaseApp::setup </td>
+          <td class="memname">void sensesp::SensESPBaseApp::set_instance </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>instance</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00152">152</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+
+</div>
+</div>
+<a id="a7698b0bb9d6bc33d13f9dea256e98bc3" name="a7698b0bb9d6bc33d13f9dea256e98bc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7698b0bb9d6bc33d13f9dea256e98bc3">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void sensesp::SensESPBaseApp::setup </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -452,7 +575,7 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -462,17 +585,22 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="classsensesp_1_1_sens_e_s_p_app.html#a49534d134dbae3ce35f4bac5879a8640">sensesp::SensESPApp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00049">49</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00144">144</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a7698b0bb9d6bc33d13f9dea256e98bc3_cgraph.svg" width="626" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_ac987bc8c9b4a04ca24199a09a2b29b99_icgraph.svg" width="100%" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_base_app_a7698b0bb9d6bc33d13f9dea256e98bc3_icgraph.svg" width="404" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a9bb8791c56e28547e416818f95c34d1f" name="a9bb8791c56e28547e416818f95c34d1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bb8791c56e28547e416818f95c34d1f">&#9670;&#160;</a></span>start()</h2>
+<a id="a66fcef158e58eaecc62eed5d5d71a1ab" name="a66fcef158e58eaecc62eed5d5d71a1ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66fcef158e58eaecc62eed5d5d71a1ab">&#9670;&#160;</a></span>start()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -481,7 +609,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void sensesp::SensESPBaseApp::start </td>
+          <td class="memname">virtual void sensesp::SensESPBaseApp::start </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -489,14 +617,14 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Start the app (activate all the subcomponents) </p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8cpp_source.html#l00051">51</a> of file <a class="el" href="sensesp__base__app_8cpp_source.html">sensesp_base_app.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00071">71</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 
 </div>
 </div>
@@ -521,12 +649,12 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00073">73</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00044">44</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 
 </div>
 </div>
-<a id="a7d281f5428ba4b7b2ee4ddbff7bdbbbc" name="a7d281f5428ba4b7b2ee4ddbff7bdbbbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d281f5428ba4b7b2ee4ddbff7bdbbbc">&#9670;&#160;</a></span>filesystem_</h2>
+<a id="ac26b8439bbc078232619fbaf147d8958" name="ac26b8439bbc078232619fbaf147d8958"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac26b8439bbc078232619fbaf147d8958">&#9670;&#160;</a></span>filesystem_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -535,7 +663,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsensesp_1_1_filesystem.html">Filesystem</a>* sensesp::SensESPBaseApp::filesystem_</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classsensesp_1_1_filesystem.html">Filesystem</a>&gt; sensesp::SensESPBaseApp::filesystem_</td>
         </tr>
       </table>
   </td>
@@ -545,12 +673,12 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00079">79</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00158">158</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 
 </div>
 </div>
-<a id="ac63e51311fbc70ee4cb925a02ecd5542" name="ac63e51311fbc70ee4cb925a02ecd5542"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac63e51311fbc70ee4cb925a02ecd5542">&#9670;&#160;</a></span>hostname_</h2>
+<a id="a668fe6e03bea97a8ca7187a4677caa35" name="a668fe6e03bea97a8ca7187a4677caa35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a668fe6e03bea97a8ca7187a4677caa35">&#9670;&#160;</a></span>hostname_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -559,7 +687,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsensesp_1_1_persisting_observable_value.html">PersistingObservableValue</a>&lt;String&gt;* sensesp::SensESPBaseApp::hostname_ {}</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classsensesp_1_1_persisting_observable_value.html">PersistingObservableValue</a>&lt;String&gt; &gt; sensesp::SensESPBaseApp::hostname_</td>
         </tr>
       </table>
   </td>
@@ -569,12 +697,12 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00077">77</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00156">156</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 
 </div>
 </div>
-<a id="a775c80a83adf027205c767c080597f08" name="a775c80a83adf027205c767c080597f08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a775c80a83adf027205c767c080597f08">&#9670;&#160;</a></span>instance_</h2>
+<a id="a47538ec371745e1f5f006a15a120f399" name="a47538ec371745e1f5f006a15a120f399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47538ec371745e1f5f006a15a120f399">&#9670;&#160;</a></span>instance_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -583,7 +711,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> * sensesp::SensESPBaseApp::instance_ = nullptr</td>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html">SensESPBaseApp</a> &gt; sensesp::SensESPBaseApp::instance_ = nullptr</td>
         </tr>
       </table>
   </td>
@@ -593,7 +721,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00075">75</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__base__app_8h_source.html#l00150">150</a> of file <a class="el" href="sensesp__base__app_8h_source.html">sensesp_base_app.h</a>.</p>
 
 </div>
 </div>

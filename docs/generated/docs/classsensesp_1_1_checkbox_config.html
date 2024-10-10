@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -107,6 +107,7 @@ $(function(){initNavTree('classsensesp_1_1_checkbox_config.html',''); initResiza
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classsensesp_1_1_checkbox_config-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">sensesp::CheckboxConfig Class Reference</div></div>
 </div><!--header-->
@@ -116,59 +117,42 @@ $(function(){initNavTree('classsensesp_1_1_checkbox_config.html',''); initResiza
 <div class="dynheader">
 Inheritance diagram for sensesp::CheckboxConfig:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_checkbox_config__inherit__graph.svg" width="187" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_checkbox_config__inherit__graph.svg" width="312" height="184"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad7b7933870a7779cb7c1ed7f44a5c42d" id="r_ad7b7933870a7779cb7c1ed7f44a5c42d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7b7933870a7779cb7c1ed7f44a5c42d">CheckboxConfig</a> (bool value, String title, String config_path)</td></tr>
 <tr class="separator:ad7b7933870a7779cb7c1ed7f44a5c42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac23ce8bac29b14c912165787dc46b854" id="r_ac23ce8bac29b14c912165787dc46b854"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac23ce8bac29b14c912165787dc46b854">get_configuration</a> (JsonObject &amp;doc) override</td></tr>
-<tr class="separator:ac23ce8bac29b14c912165787dc46b854"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0019d515db574d2f27b1e1ab885a0147" id="r_a0019d515db574d2f27b1e1ab885a0147"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0019d515db574d2f27b1e1ab885a0147">set_configuration</a> (const JsonObject &amp;config) override</td></tr>
-<tr class="separator:a0019d515db574d2f27b1e1ab885a0147"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66f261a74074aee057a549eb209025cd" id="r_a66f261a74074aee057a549eb209025cd"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66f261a74074aee057a549eb209025cd">get_config_schema</a> () override</td></tr>
-<tr class="separator:a66f261a74074aee057a549eb209025cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad45f7a0f62d4ce97356de10e5b92942f" id="r_ad45f7a0f62d4ce97356de10e5b92942f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad45f7a0f62d4ce97356de10e5b92942f">to_json</a> (JsonObject &amp;doc) override</td></tr>
+<tr class="separator:ad45f7a0f62d4ce97356de10e5b92942f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86be68db8cf3164f85a9926ee0cbd136" id="r_a86be68db8cf3164f85a9926ee0cbd136"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a86be68db8cf3164f85a9926ee0cbd136">from_json</a> (const JsonObject &amp;config) override</td></tr>
+<tr class="separator:a86be68db8cf3164f85a9926ee0cbd136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6124180164040488977bccbbfd76f859" id="r_a6124180164040488977bccbbfd76f859"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6124180164040488977bccbbfd76f859">get_value</a> ()</td></tr>
 <tr class="separator:a6124180164040488977bccbbfd76f859"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:ae53942d74ca264464ff6e272950c1e68 inherit pub_methods_classsensesp_1_1_configurable" id="r_ae53942d74ca264464ff6e272950c1e68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ae53942d74ca264464ff6e272950c1e68">Configurable</a> (String config_path=&quot;&quot;, String description=&quot;&quot;, int sort_order=1000)</td></tr>
-<tr class="separator:ae53942d74ca264464ff6e272950c1e68 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcefc3c29f2b52a626a9787b92122a1c inherit pub_methods_classsensesp_1_1_configurable" id="r_adcefc3c29f2b52a626a9787b92122a1c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#adcefc3c29f2b52a626a9787b92122a1c">is_async</a> ()</td></tr>
-<tr class="memdesc:adcefc3c29f2b52a626a9787b92122a1c inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a> is asynchronous.  <br /></td></tr>
-<tr class="separator:adcefc3c29f2b52a626a9787b92122a1c inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a306aeabfedf9ddf07aae6d25c5ee11 inherit pub_methods_classsensesp_1_1_configurable" id="r_a2a306aeabfedf9ddf07aae6d25c5ee11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a2a306aeabfedf9ddf07aae6d25c5ee11">requires_restart</a> ()</td></tr>
-<tr class="memdesc:a2a306aeabfedf9ddf07aae6d25c5ee11 inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a> requires restart after saving.  <br /></td></tr>
-<tr class="separator:a2a306aeabfedf9ddf07aae6d25c5ee11 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa020e0768f7c988d808f7b4ce5fb3ff inherit pub_methods_classsensesp_1_1_configurable" id="r_afa020e0768f7c988d808f7b4ce5fb3ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#afa020e0768f7c988d808f7b4ce5fb3ff">set_requires_restart</a> (bool <a class="el" href="classsensesp_1_1_configurable.html#a2a306aeabfedf9ddf07aae6d25c5ee11">requires_restart</a>)</td></tr>
-<tr class="memdesc:afa020e0768f7c988d808f7b4ce5fb3ff inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the requires_restart flag.  <br /></td></tr>
-<tr class="separator:afa020e0768f7c988d808f7b4ce5fb3ff inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc2acfdde683ac228935c7a9d70af14a inherit pub_methods_classsensesp_1_1_configurable" id="r_acc2acfdde683ac228935c7a9d70af14a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="configurable_8h.html#a874d81f2ff99c2f65213d6db1314a485">ConfigurableResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#acc2acfdde683ac228935c7a9d70af14a">async_get_configuration</a> ()</td></tr>
-<tr class="memdesc:acc2acfdde683ac228935c7a9d70af14a inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiate an asynchronous request to get the current configuration.  <br /></td></tr>
-<tr class="separator:acc2acfdde683ac228935c7a9d70af14a inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a157ca4711739ec5183e0148814e277b8 inherit pub_methods_classsensesp_1_1_configurable" id="r_a157ca4711739ec5183e0148814e277b8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="configurable_8h.html#a874d81f2ff99c2f65213d6db1314a485">ConfigurableResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a157ca4711739ec5183e0148814e277b8">poll_get_result</a> (JsonObject &amp;config)</td></tr>
-<tr class="memdesc:a157ca4711739ec5183e0148814e277b8 inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current status of the last <a class="el" href="classsensesp_1_1_configurable.html#acc2acfdde683ac228935c7a9d70af14a" title="Initiate an asynchronous request to get the current configuration.">async_get_configuration()</a> call.  <br /></td></tr>
-<tr class="separator:a157ca4711739ec5183e0148814e277b8 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a635ec17d090123e74637c79c6806fca2 inherit pub_methods_classsensesp_1_1_configurable" id="r_a635ec17d090123e74637c79c6806fca2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="configurable_8h.html#a874d81f2ff99c2f65213d6db1314a485">ConfigurableResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a635ec17d090123e74637c79c6806fca2">async_set_configuration</a> (const JsonObject &amp;config)</td></tr>
-<tr class="memdesc:a635ec17d090123e74637c79c6806fca2 inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiate an asynchronous request to set the configuration.  <br /></td></tr>
-<tr class="separator:a635ec17d090123e74637c79c6806fca2 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2958e89a462e6cdbd977996cc20411fd inherit pub_methods_classsensesp_1_1_configurable" id="r_a2958e89a462e6cdbd977996cc20411fd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="configurable_8h.html#a874d81f2ff99c2f65213d6db1314a485">ConfigurableResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a2958e89a462e6cdbd977996cc20411fd">poll_set_result</a> ()</td></tr>
-<tr class="memdesc:a2958e89a462e6cdbd977996cc20411fd inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the current status of the last async set_configuration call.  <br /></td></tr>
-<tr class="separator:a2958e89a462e6cdbd977996cc20411fd inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaa2d08f0dcb649f8fabbc3df93464b4 inherit pub_methods_classsensesp_1_1_configurable" id="r_aeaa2d08f0dcb649f8fabbc3df93464b4"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#aeaa2d08f0dcb649f8fabbc3df93464b4">get_description</a> ()</td></tr>
-<tr class="separator:aeaa2d08f0dcb649f8fabbc3df93464b4 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a191293851b1ca48e3dab7a7aef8d07ce inherit pub_methods_classsensesp_1_1_configurable" id="r_a191293851b1ca48e3dab7a7aef8d07ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a191293851b1ca48e3dab7a7aef8d07ce">set_description</a> (String description)</td></tr>
-<tr class="memdesc:a191293851b1ca48e3dab7a7aef8d07ce inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the description of the <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a>.  <br /></td></tr>
-<tr class="separator:a191293851b1ca48e3dab7a7aef8d07ce inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5635a8edf667b2b280cd7d2acb0bdc8 inherit pub_methods_classsensesp_1_1_configurable" id="r_af5635a8edf667b2b280cd7d2acb0bdc8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#af5635a8edf667b2b280cd7d2acb0bdc8">get_sort_order</a> ()</td></tr>
-<tr class="separator:af5635a8edf667b2b280cd7d2acb0bdc8 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6230bb9c6c7658cb1209706ebd2f34db inherit pub_methods_classsensesp_1_1_configurable" id="r_a6230bb9c6c7658cb1209706ebd2f34db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a6230bb9c6c7658cb1209706ebd2f34db">set_sort_order</a> (int sort_order)</td></tr>
-<tr class="separator:a6230bb9c6c7658cb1209706ebd2f34db inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4202ce8a5b9ad23d2a2be27de11153f4 inherit pub_methods_classsensesp_1_1_configurable" id="r_a4202ce8a5b9ad23d2a2be27de11153f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a4202ce8a5b9ad23d2a2be27de11153f4">save_configuration</a> ()</td></tr>
-<tr class="separator:a4202ce8a5b9ad23d2a2be27de11153f4 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad176fb5df246a2aac2b43572493c1480 inherit pub_methods_classsensesp_1_1_configurable" id="r_ad176fb5df246a2aac2b43572493c1480"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ad176fb5df246a2aac2b43572493c1480">clear_configuration</a> ()</td></tr>
-<tr class="memdesc:ad176fb5df246a2aac2b43572493c1480 inherit pub_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear existing configuration data.  <br /></td></tr>
-<tr class="separator:ad176fb5df246a2aac2b43572493c1480 inherit pub_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classsensesp_1_1_file_system_saveable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_file_system_saveable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_file_system_saveable.html">sensesp::FileSystemSaveable</a></td></tr>
+<tr class="memitem:a974f062b375cf8637944f121084cf9f7 inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_a974f062b375cf8637944f121084cf9f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#a974f062b375cf8637944f121084cf9f7">FileSystemSaveable</a> (const String &amp;config_path)</td></tr>
+<tr class="separator:a974f062b375cf8637944f121084cf9f7 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b2e2e657112851dfda8785d217578a inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_a79b2e2e657112851dfda8785d217578a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a> () override</td></tr>
+<tr class="memdesc:a79b2e2e657112851dfda8785d217578a inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load and populate the object from a persistent storage.  <br /></td></tr>
+<tr class="separator:a79b2e2e657112851dfda8785d217578a inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fcd302f31b35502d061b769f9efee27 inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_a8fcd302f31b35502d061b769f9efee27"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a> () override</td></tr>
+<tr class="memdesc:a8fcd302f31b35502d061b769f9efee27 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the object to a persistent storage.  <br /></td></tr>
+<tr class="separator:a8fcd302f31b35502d061b769f9efee27 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172c641ef20db18a30b50dd1da1177f4 inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_a172c641ef20db18a30b50dd1da1177f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#a172c641ef20db18a30b50dd1da1177f4">clear</a> () override</td></tr>
+<tr class="memdesc:a172c641ef20db18a30b50dd1da1177f4 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the data from a persistent storage.  <br /></td></tr>
+<tr class="separator:a172c641ef20db18a30b50dd1da1177f4 inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0233f7895b5c8915108399420c7cf0b inherit pub_methods_classsensesp_1_1_file_system_saveable" id="r_ad0233f7895b5c8915108399420c7cf0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_file_system_saveable.html#ad0233f7895b5c8915108399420c7cf0b">find_config_file</a> (const String &amp;config_path, String &amp;filename)</td></tr>
+<tr class="separator:ad0233f7895b5c8915108399420c7cf0b inherit pub_methods_classsensesp_1_1_file_system_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classsensesp_1_1_saveable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_saveable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_saveable.html">sensesp::Saveable</a></td></tr>
+<tr class="memitem:abaa7864f4f35be033ad5f32a379051d7 inherit pub_methods_classsensesp_1_1_saveable" id="r_abaa7864f4f35be033ad5f32a379051d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#abaa7864f4f35be033ad5f32a379051d7">Saveable</a> (const String &amp;config_path)</td></tr>
+<tr class="separator:abaa7864f4f35be033ad5f32a379051d7 inherit pub_methods_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95271534e56ac90a819311ec0ed784b8 inherit pub_methods_classsensesp_1_1_saveable" id="r_a95271534e56ac90a819311ec0ed784b8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#a95271534e56ac90a819311ec0ed784b8">refresh</a> ()</td></tr>
+<tr class="memdesc:a95271534e56ac90a819311ec0ed784b8 inherit pub_methods_classsensesp_1_1_saveable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the object. This may or may not access the persistent storage but is not expected to overwrite the object's state.  <br /></td></tr>
+<tr class="separator:a95271534e56ac90a819311ec0ed784b8 inherit pub_methods_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac90b12b215854886b5bf9ce7c7635a36 inherit pub_methods_classsensesp_1_1_saveable" id="r_ac90b12b215854886b5bf9ce7c7635a36"><td class="memItemLeft" align="right" valign="top">const String &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#ac90b12b215854886b5bf9ce7c7635a36">get_config_path</a> () const</td></tr>
+<tr class="separator:ac90b12b215854886b5bf9ce7c7635a36 inherit pub_methods_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classsensesp_1_1_serializable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_serializable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_serializable.html">sensesp::Serializable</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -176,37 +160,18 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7261aa53de038877af7aff331a33274d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a748cb45c3abb102eebf6bd7049a61bc6" id="r_a748cb45c3abb102eebf6bd7049a61bc6"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a748cb45c3abb102eebf6bd7049a61bc6">title_</a> = &quot;Enable&quot;</td></tr>
 <tr class="separator:a748cb45c3abb102eebf6bd7049a61bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:a2a45b6e6dd2b86eab7f6bb9970cfda6e inherit pro_attribs_classsensesp_1_1_configurable" id="r_a2a45b6e6dd2b86eab7f6bb9970cfda6e"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a2a45b6e6dd2b86eab7f6bb9970cfda6e">description_</a> = &quot;&quot;</td></tr>
-<tr class="separator:a2a45b6e6dd2b86eab7f6bb9970cfda6e inherit pro_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a422efd505a5b7e5d76d761f452390066 inherit pro_attribs_classsensesp_1_1_configurable" id="r_a422efd505a5b7e5d76d761f452390066"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a422efd505a5b7e5d76d761f452390066">sort_order_</a> = 1000</td></tr>
-<tr class="separator:a422efd505a5b7e5d76d761f452390066 inherit pro_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a739b03f0e1adfcdeb0faa6448080d2cb inherit pro_attribs_classsensesp_1_1_configurable" id="r_a739b03f0e1adfcdeb0faa6448080d2cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a739b03f0e1adfcdeb0faa6448080d2cb">requires_restart_</a> = false</td></tr>
-<tr class="memdesc:a739b03f0e1adfcdeb0faa6448080d2cb inherit pro_attribs_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to indicate if the <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a> requires a restart after saving the configuration.  <br /></td></tr>
-<tr class="separator:a739b03f0e1adfcdeb0faa6448080d2cb inherit pro_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classsensesp_1_1_saveable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classsensesp_1_1_saveable')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_saveable.html">sensesp::Saveable</a></td></tr>
+<tr class="memitem:ad023c90c5ce5b7d58f9cbceb8873aafd inherit pro_attribs_classsensesp_1_1_saveable" id="r_ad023c90c5ce5b7d58f9cbceb8873aafd"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#ad023c90c5ce5b7d58f9cbceb8873aafd">config_path_</a></td></tr>
+<tr class="separator:ad023c90c5ce5b7d58f9cbceb8873aafd inherit pro_attribs_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:ac31c21262105587a2ea4034d23d3d4df inherit pub_static_methods_classsensesp_1_1_configurable" id="r_ac31c21262105587a2ea4034d23d3d4df"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ac31c21262105587a2ea4034d23d3d4df">get_configurables</a> ()</td></tr>
-<tr class="memdesc:ac31c21262105587a2ea4034d23d3d4df inherit pub_static_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get configurables.  <br /></td></tr>
-<tr class="separator:ac31c21262105587a2ea4034d23d3d4df inherit pub_static_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f62ba6b0f431ba98afe3a1e2f596356 inherit pub_static_methods_classsensesp_1_1_configurable" id="r_a4f62ba6b0f431ba98afe3a1e2f596356"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#a4f62ba6b0f431ba98afe3a1e2f596356">get_configurable</a> (String key)</td></tr>
-<tr class="memdesc:a4f62ba6b0f431ba98afe3a1e2f596356 inherit pub_static_methods_classsensesp_1_1_configurable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a single <a class="el" href="classsensesp_1_1_configurable.html" title="An object that is capable of having configuration data that can be set remotely using a RESTful API,...">Configurable</a> by key.  <br /></td></tr>
-<tr class="separator:a4f62ba6b0f431ba98afe3a1e2f596356 inherit pub_static_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable" id="r_aded48ebfe23c7bee1845c7ab99c63a6e"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#aded48ebfe23c7bee1845c7ab99c63a6e">config_path_</a> {}</td></tr>
-<tr class="separator:aded48ebfe23c7bee1845c7ab99c63a6e inherit pub_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:ac97542fd5a24ae306adb77f3d1ba563a inherit pro_methods_classsensesp_1_1_configurable" id="r_ac97542fd5a24ae306adb77f3d1ba563a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a> ()</td></tr>
-<tr class="separator:ac97542fd5a24ae306adb77f3d1ba563a inherit pro_methods_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_static_attribs_classsensesp_1_1_configurable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_static_attribs_classsensesp_1_1_configurable')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classsensesp_1_1_configurable.html">sensesp::Configurable</a></td></tr>
-<tr class="memitem:af4db3155879f166cca955e4e616868ed inherit pro_static_attribs_classsensesp_1_1_configurable" id="r_af4db3155879f166cca955e4e616868ed"><td class="memItemLeft" align="right" valign="top">static std::map&lt; String, <a class="el" href="classsensesp_1_1_configurable.html">Configurable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_configurable.html#af4db3155879f166cca955e4e616868ed">configurables_</a></td></tr>
-<tr class="separator:af4db3155879f166cca955e4e616868ed inherit pro_static_attribs_classsensesp_1_1_configurable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:aacc80d9054fb44c23b124242b44b750b" id="r_aacc80d9054fb44c23b124242b44b750b"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aacc80d9054fb44c23b124242b44b750b">ConfigSchema</a> (const <a class="el" href="classsensesp_1_1_checkbox_config.html">CheckboxConfig</a> &amp;obj)</td></tr>
+<tr class="separator:aacc80d9054fb44c23b124242b44b750b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00046">46</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00055">55</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad7b7933870a7779cb7c1ed7f44a5c42d" name="ad7b7933870a7779cb7c1ed7f44a5c42d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7b7933870a7779cb7c1ed7f44a5c42d">&#9670;&#160;</a></span>CheckboxConfig()</h2>
@@ -240,18 +205,18 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00048">48</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00057">57</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_checkbox_config_ad7b7933870a7779cb7c1ed7f44a5c42d_cgraph.svg" width="100%" height="376"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_checkbox_config_ad7b7933870a7779cb7c1ed7f44a5c42d_cgraph.svg" width="100%" height="403"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a66f261a74074aee057a549eb209025cd" name="a66f261a74074aee057a549eb209025cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66f261a74074aee057a549eb209025cd">&#9670;&#160;</a></span>get_config_schema()</h2>
+<a id="a86be68db8cf3164f85a9926ee0cbd136" name="a86be68db8cf3164f85a9926ee0cbd136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86be68db8cf3164f85a9926ee0cbd136">&#9670;&#160;</a></span>from_json()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -260,9 +225,9 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">String sensesp::CheckboxConfig::get_config_schema </td>
+          <td class="memname">bool sensesp::CheckboxConfig::from_json </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const JsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>root</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -272,41 +237,11 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Returns a configuration schema that specifies the key/value pairs that can be expected when calling <a class="el" href="#ac23ce8bac29b14c912165787dc46b854">get_configuration()</a>, or are expected by <a class="el" href="#a0019d515db574d2f27b1e1ab885a0147">set_configuration()</a>. The schema will be in JSON Schema format </p><dl class="section see"><dt>See also</dt><dd><a href="https://json-schema.org">https://json-schema.org</a> </dd></dl>
+<p>Deserializes the current object data from a JsonObject. </p>
 
-<p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a2a0b1727f0e7fca0730381e030360a1a">sensesp::Configurable</a>.</p>
+<p>Reimplemented from <a class="el" href="classsensesp_1_1_serializable.html#a841233a82ef3a7fbcecd5a15b0df12d2">sensesp::Serializable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ui__controls_8cpp_source.html#l00064">64</a> of file <a class="el" href="ui__controls_8cpp_source.html">ui_controls.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ac23ce8bac29b14c912165787dc46b854" name="ac23ce8bac29b14c912165787dc46b854"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac23ce8bac29b14c912165787dc46b854">&#9670;&#160;</a></span>get_configuration()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void sensesp::CheckboxConfig::get_configuration </td>
-          <td>(</td>
-          <td class="paramtype">JsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>configObject</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns the current configuration data as a JsonObject. In general, the current state of local member variables are saved to a new object created with JsonDocument::as&lt;JsonObject&gt;() and returned. </p>
-
-<p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#accb44b286a13d98d573b15d88ca58fd4">sensesp::Configurable</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="ui__controls_8cpp_source.html#l00070">70</a> of file <a class="el" href="ui__controls_8cpp_source.html">ui_controls.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__controls_8cpp_source.html#l00042">42</a> of file <a class="el" href="ui__controls_8cpp_source.html">ui_controls.cpp</a>.</p>
 
 </div>
 </div>
@@ -333,12 +268,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00057">57</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00065">65</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
 
 </div>
 </div>
-<a id="a0019d515db574d2f27b1e1ab885a0147" name="a0019d515db574d2f27b1e1ab885a0147"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0019d515db574d2f27b1e1ab885a0147">&#9670;&#160;</a></span>set_configuration()</h2>
+<a id="ad45f7a0f62d4ce97356de10e5b92942f" name="ad45f7a0f62d4ce97356de10e5b92942f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad45f7a0f62d4ce97356de10e5b92942f">&#9670;&#160;</a></span>to_json()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -347,9 +282,9 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool sensesp::CheckboxConfig::set_configuration </td>
+          <td class="memname">bool sensesp::CheckboxConfig::to_json </td>
           <td>(</td>
-          <td class="paramtype">const JsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
+          <td class="paramtype">JsonObject &amp;</td>          <td class="paramname"><span class="paramname"><em>root</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -359,11 +294,39 @@ Here is the call graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Sets the current state of local member variables using the data stored in config. </p>
+<p>Serializes the current object data into a JsonObject. </p>
 
-<p>Reimplemented from <a class="el" href="classsensesp_1_1_configurable.html#a0deaa5b717cd0f60d0105835cd6b595a">sensesp::Configurable</a>.</p>
+<p>Reimplemented from <a class="el" href="classsensesp_1_1_serializable.html#a8da15a9036f2333f1f3beb4207a06477">sensesp::Serializable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ui__controls_8cpp_source.html#l00074">74</a> of file <a class="el" href="ui__controls_8cpp_source.html">ui_controls.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__controls_8cpp_source.html#l00037">37</a> of file <a class="el" href="ui__controls_8cpp_source.html">ui_controls.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="aacc80d9054fb44c23b124242b44b750b" name="aacc80d9054fb44c23b124242b44b750b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacc80d9054fb44c23b124242b44b750b">&#9670;&#160;</a></span>ConfigSchema</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const String ConfigSchema </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsensesp_1_1_checkbox_config.html">CheckboxConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>obj</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00074">74</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
 
 </div>
 </div>
@@ -388,7 +351,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00061">61</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00069">69</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
 
 </div>
 </div>
@@ -412,7 +375,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00060">60</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__controls_8h_source.html#l00068">68</a> of file <a class="el" href="ui__controls_8h_source.html">ui_controls.h</a>.</p>
 
 </div>
 </div>

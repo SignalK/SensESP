@@ -7,5 +7,6 @@ var signalk__put__request_8h =
     [ "BoolSKPutRequest", "signalk__put__request_8h.html#ac06cd768219ba797fe0efa390c7cfc8b", null ],
     [ "FloatSKPutRequest", "signalk__put__request_8h.html#ae3b1e82b9b3b1d1d0d8367347d5ade06", null ],
     [ "IntSKPutRequest", "signalk__put__request_8h.html#a815dc403361e4f2a72f2c666821094f8", null ],
-    [ "StringSKPutRequest", "signalk__put__request_8h.html#afa937fcb2693d4d73b8294e55d4e1b4e", null ]
+    [ "StringSKPutRequest", "signalk__put__request_8h.html#afa937fcb2693d4d73b8294e55d4e1b4e", null ],
+    [ "ConfigSchema", "signalk__put__request_8h.html#a1fb06d50f16e27a7e4d9154f0f469a8d", null ]
 ];

@@ -8,8 +8,14 @@ var classsensesp_1_1_lambda_transform =
     [ "LambdaTransform", "classsensesp_1_1_lambda_transform.html#a59e296fe483645aa0ebcd14fe7cfd30f", null ],
     [ "LambdaTransform", "classsensesp_1_1_lambda_transform.html#a6daf9a983ae112ab89b7e746353b2cbb", null ],
     [ "LambdaTransform", "classsensesp_1_1_lambda_transform.html#a618c9fd4eb8573e1a06b901bd29776f0", null ],
-    [ "get_config_schema", "classsensesp_1_1_lambda_transform.html#af435085e439215b9081b2724f5f94e9c", null ],
-    [ "get_configuration", "classsensesp_1_1_lambda_transform.html#ae7062a1158415022821903f38a73a3dd", null ],
+    [ "from_json", "classsensesp_1_1_lambda_transform.html#a7417431fc8a1fec7b8470669427ac52b", null ],
+    [ "get_param_info", "classsensesp_1_1_lambda_transform.html#adee7c472a995f2a90adf518cd64e6443", null ],
     [ "set", "classsensesp_1_1_lambda_transform.html#aeeb025a48bf35e072945cbc0f254f1d1", null ],
-    [ "set_configuration", "classsensesp_1_1_lambda_transform.html#a15f97f9263e14f14eb4ef8e0febfcce6", null ]
+    [ "to_json", "classsensesp_1_1_lambda_transform.html#abf9f2eab4cefae742940cf310108ba68", null ],
+    [ "param1_", "classsensesp_1_1_lambda_transform.html#a33a29b40020c5297c4dfd4c60b4b4315", null ],
+    [ "param2_", "classsensesp_1_1_lambda_transform.html#af11ecf883eececd0e772fc7cefee3931", null ],
+    [ "param3_", "classsensesp_1_1_lambda_transform.html#a0f8d9128982a0ecdf2281e4388bab45a", null ],
+    [ "param4_", "classsensesp_1_1_lambda_transform.html#ab8ec9aec2a8ce41ae48769333dabac39", null ],
+    [ "param5_", "classsensesp_1_1_lambda_transform.html#ad0471138c7b6abb2c2f3e3c819739a34", null ],
+    [ "param6_", "classsensesp_1_1_lambda_transform.html#a4f853140b513dbd6c07f8c25534eb467", null ]
 ];

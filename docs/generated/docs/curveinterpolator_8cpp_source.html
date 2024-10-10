@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -117,12 +117,12 @@ $(function(){initNavTree('curveinterpolator_8cpp_source.html',''); initResizable
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator_1_1_sample.html#a24e477f37a4a2a9fe3fa95d5c8693b29">    9</a></span><a class="code hl_function" href="classsensesp_1_1_curve_interpolator_1_1_sample.html#a8dd5f471e19175853b638b761e80f39b">CurveInterpolator::Sample::Sample</a>(<span class="keywordtype">float</span> input, <span class="keywordtype">float</span> output)</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    : input{input}, output{output} {}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    : input_{input}, output_{output} {}</div>
 </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator_1_1_sample.html#ad013ddb5918b4a4324343aa4001d6fa9">   12</a></span><a class="code hl_function" href="classsensesp_1_1_curve_interpolator_1_1_sample.html#a8dd5f471e19175853b638b761e80f39b">CurveInterpolator::Sample::Sample</a>(JsonObject&amp; obj)</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    : input{obj[<span class="stringliteral">&quot;input&quot;</span>]}, <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a>{obj[<span class="stringliteral">&quot;output&quot;</span>]} {}</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    : input_{obj[<span class="stringliteral">&quot;input&quot;</span>]}, <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a>{obj[<span class="stringliteral">&quot;output&quot;</span>]} {}</div>
 </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
@@ -135,36 +135,36 @@ $(function(){initNavTree('curveinterpolator_8cpp_source.html',''); initResizable
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a> = *defaults;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_function" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a>();</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
 </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#a31e8c98cbc19e87bc4086895631511de">   35</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#a31e8c98cbc19e87bc4086895631511de">CurveInterpolator::set</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; input) {</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.empty()) {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> = 0;  <span class="comment">// or any default output if no samples are available</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> = 0;  <span class="comment">// or any default output if no samples are available</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_function" href="classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9">notify</a>();</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  }</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  std::set&lt;Sample&gt;::iterator it = <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.begin();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordtype">float</span> x0 = it-&gt;input;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">float</span> y0 = it-&gt;output;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordtype">float</span> x0 = it-&gt;input_;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">float</span> y0 = it-&gt;output_;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="comment">// Check if the input is below the lowest sample point</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordflow">if</span> (input &lt; x0) {</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">// Need to extrapolate below the first point</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.size() &gt; 1) {</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      <span class="keyword">auto</span> second_it = std::next(it);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordtype">float</span> x1 = second_it-&gt;input;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordtype">float</span> y1 = second_it-&gt;output;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordtype">float</span> x1 = second_it-&gt;input_;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordtype">float</span> y1 = second_it-&gt;output_;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      <span class="keywordtype">float</span> <span class="keyword">const</span> gradient = (y1 - y0) / (x1 - x0);</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> = y0 + gradient *</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> = y0 + gradient *</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                        (input -</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                         x0);  <span class="comment">// Extrapolate using the first segment&#39;s gradient</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> = y0;  <span class="comment">// Only one sample, output its value</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> = y0;  <span class="comment">// Only one sample, output its value</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_function" href="classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9">notify</a>();</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span>;</div>
@@ -172,9 +172,9 @@ $(function(){initNavTree('curveinterpolator_8cpp_source.html',''); initResizable
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="comment">// Search for the correct interval or the last sample point</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordflow">while</span> (it != <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.end()) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">if</span> (input &gt; it-&gt;input) {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      x0 = it-&gt;input;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      y0 = it-&gt;output;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">if</span> (input &gt; it-&gt;input_) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      x0 = it-&gt;input_;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      y0 = it-&gt;output_;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      ++it;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>      <span class="keywordflow">break</span>;</div>
@@ -183,22 +183,22 @@ $(function(){initNavTree('curveinterpolator_8cpp_source.html',''); initResizable
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="comment">// Interpolate or extrapolate above the highest point</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordflow">if</span> (it != <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.end()) {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">float</span> x1 = it-&gt;input;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">float</span> y1 = it-&gt;output;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> = (y0 * (x1 - input) + y1 * (input - x0)) / (x1 - x0);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">float</span> x1 = it-&gt;input_;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">float</span> y1 = it-&gt;output_;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> = (y0 * (x1 - input) + y1 * (input - x0)) / (x1 - x0);</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="comment">// Hit the end of the table with no match, calculate output using the</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="comment">// gradient from the last two points</span></div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keyword">auto</span> last = <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.rbegin();</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keyword">auto</span> second_last = std::next(last);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">float</span> x1 = last-&gt;input;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">float</span> y1 = last-&gt;output;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">float</span> x2 = second_last-&gt;input;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">float</span> y2 = second_last-&gt;output;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">float</span> x1 = last-&gt;input_;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">float</span> y1 = last-&gt;output_;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">float</span> x2 = second_last-&gt;input_;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">float</span> y2 = second_last-&gt;output_;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">float</span> <span class="keyword">const</span> gradient = (y1 - y2) / (x1 - x2);</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="comment">// Extrapolate using the gradient</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a> = y1 + gradient * (input - x1);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> = y1 + gradient * (input - x1);</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  }</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <a class="code hl_function" href="classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9">notify</a>();</div>
@@ -206,103 +206,75 @@ $(function(){initNavTree('curveinterpolator_8cpp_source.html',''); initResizable
 </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
 <div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#a6e7fcbd6544a7b77e8805ba2f094bb0b">   99</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#a6e7fcbd6544a7b77e8805ba2f094bb0b">CurveInterpolator::get_configuration</a>(JsonObject&amp; root) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  JsonArray json_samples = root[<span class="stringliteral">&quot;samples&quot;</span>].to&lt;JsonArray&gt;();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#aa7043904bd0eb0f9b2ba41022c0cabf0">   99</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#aa7043904bd0eb0f9b2ba41022c0cabf0">CurveInterpolator::to_json</a>(JsonObject&amp; doc) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  JsonArray json_samples = doc[<span class="stringliteral">&quot;samples&quot;</span>].to&lt;JsonArray&gt;();</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; sample : <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>) {</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="comment">// Add a new JsonObject to the array</span></div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    JsonObject entry = json_samples.add&lt;JsonObject&gt;();</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">if</span> (entry.isNull()) {</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;No memory for sample&quot;</span>);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    entry[<span class="stringliteral">&quot;input&quot;</span>] = sample.input;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    entry[<span class="stringliteral">&quot;output&quot;</span>] = sample.output;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    entry[<span class="stringliteral">&quot;input&quot;</span>] = sample.input_;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    entry[<span class="stringliteral">&quot;output&quot;</span>] = sample.output_;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
 </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kSchema[] <a class="code hl_variable" href="css__bootstrap_8h.html#ade1d7051ddbe6cc839076fcd0de2203a">PROGMEM</a> = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="stringliteral">        &quot;samples&quot;: { &quot;title&quot;: &quot;Sample values&quot;,</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="stringliteral">                    &quot;type&quot;: &quot;array&quot;,</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="stringliteral">                    &quot;format&quot;: &quot;table&quot;,</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="stringliteral">                    &quot;items&quot;: { &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="stringliteral">                               &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="stringliteral">                                   &quot;input&quot;: { &quot;type&quot;: &quot;number&quot;,</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="stringliteral">                                              &quot;title&quot;: &quot;%s&quot; },</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="stringliteral">                                   &quot;output&quot;: { &quot;type&quot;: &quot;number&quot;,</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="stringliteral">                                              &quot;title&quot;: &quot;%s&quot; }</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="stringliteral">                             }}}</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="stringliteral">  })&quot;;</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="stringliteral"></span> </div>
-<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#a24b6c4b20d378a25a5cd4519d460520d">  129</a></span><span class="stringliteral">String <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#a24b6c4b20d378a25a5cd4519d460520d">CurveInterpolator::get_config_schema</a>() {</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="stringliteral">  </span><span class="keywordtype">char</span> buf[<span class="keyword">sizeof</span>(kSchema) + 160];</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  snprintf_P(buf, <span class="keyword">sizeof</span>(buf), kSchema, <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#aa0bc599b7492cd5036f55dfff1d9d46d">input_title_</a>.c_str(),</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>             <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#aa08e7c4c89847a00b48984e5d8d23bb7">output_title_</a>.c_str());</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keywordflow">return</span> {buf};</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#ae120ee47f9cfe9d353c67e8f603739aa">  114</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#ae120ee47f9cfe9d353c67e8f603739aa">CurveInterpolator::from_json</a>(<span class="keyword">const</span> JsonObject&amp; doc) {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;samples&quot;</span>};</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">if</span> (!doc[str].is&lt;JsonVariant&gt;()) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      ESP_LOGE(</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>          __FILENAME__,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>          <span class="stringliteral">&quot;Can not set CurveInterpolator configuration: missing json field &quot;</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>          <span class="stringliteral">&quot;%s\n&quot;</span>,</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>          str.c_str());</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  JsonArray arr = doc[<span class="stringliteral">&quot;samples&quot;</span>];</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keywordflow">if</span> (arr.size() &gt; 0) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.clear();</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> jentry : arr) {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>      <span class="keyword">auto</span> json_object = jentry.as&lt;JsonObject&gt;();</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>      <a class="code hl_class" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> sample(json_object);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>      <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.insert(sample);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
 </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="foldopen" id="foldopen00136" data-start="{" data-end="}">
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#a4590048e0fdecd5203a8a5f37a5c841f">  136</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#a4590048e0fdecd5203a8a5f37a5c841f">CurveInterpolator::set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  String <span class="keyword">const</span> expected[] = {<span class="stringliteral">&quot;samples&quot;</span>};</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> str : expected) {</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">if</span> (!config[str].is&lt;JsonVariant&gt;()) {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      ESP_LOGE(</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>          __FILENAME__,</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>          <span class="stringliteral">&quot;Can not set CurveInterpolator configuration: missing json field &quot;</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>          <span class="stringliteral">&quot;%s\n&quot;</span>,</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>          str.c_str());</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  }</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  JsonArray arr = config[<span class="stringliteral">&quot;samples&quot;</span>];</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="keywordflow">if</span> (arr.size() &gt; 0) {</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.clear();</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> jentry : arr) {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>      <span class="keyword">auto</span> json_object = jentry.as&lt;JsonObject&gt;();</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      <a class="code hl_class" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a> sample(json_object);</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>      <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.insert(sample);</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    }</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  }</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>}</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#a217e0e3cb72cd661d19548e575633214">  140</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#a217e0e3cb72cd661d19548e575633214">CurveInterpolator::clear_samples</a>() { <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.clear(); }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="foldopen" id="foldopen00142" data-start="{" data-end="}">
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#ab9ae195be28d12c733777990aeda78ea">  142</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#ab9ae195be28d12c733777990aeda78ea">CurveInterpolator::add_sample</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a>&amp; sample) {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <span class="keyword">auto</span>* sample_copy = <span class="keyword">new</span> <a class="code hl_class" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a>(sample);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.insert(*sample_copy);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>}</div>
 </div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#a217e0e3cb72cd661d19548e575633214">  162</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#a217e0e3cb72cd661d19548e575633214">CurveInterpolator::clear_samples</a>() { <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.clear(); }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="foldopen" id="foldopen00164" data-start="{" data-end="}">
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="classsensesp_1_1_curve_interpolator.html#ab9ae195be28d12c733777990aeda78ea">  164</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_curve_interpolator.html#ab9ae195be28d12c733777990aeda78ea">CurveInterpolator::add_sample</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a>&amp; sample) {</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keyword">auto</span>* sample_copy = <span class="keyword">new</span> <a class="code hl_class" href="classsensesp_1_1_curve_interpolator_1_1_sample.html">Sample</a>(sample);</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  <a class="code hl_variable" href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">samples_</a>.insert(*sample_copy);</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>}</div>
-</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="ttc" id="aclasssensesp_1_1_configurable_html_ac97542fd5a24ae306adb77f3d1ba563a"><div class="ttname"><a href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">sensesp::Configurable::load_configuration</a></div><div class="ttdeci">virtual void load_configuration()</div><div class="ttdef"><b>Definition</b> <a href="configurable_8cpp_source.html#l00035">configurable.cpp:35</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_1_1_sample_html"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator_1_1_sample.html">sensesp::CurveInterpolator::Sample</a></div><div class="ttdef"><b>Definition</b> <a href="curveinterpolator_8h_source.html#l00040">curveinterpolator.h:40</a></div></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_1_1_sample_html"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator_1_1_sample.html">sensesp::CurveInterpolator::Sample</a></div><div class="ttdef"><b>Definition</b> <a href="curveinterpolator_8h_source.html#l00041">curveinterpolator.h:41</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_curve_interpolator_1_1_sample_html_a8dd5f471e19175853b638b761e80f39b"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator_1_1_sample.html#a8dd5f471e19175853b638b761e80f39b">sensesp::CurveInterpolator::Sample::Sample</a></div><div class="ttdeci">Sample()</div></div>
-<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_a217e0e3cb72cd661d19548e575633214"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#a217e0e3cb72cd661d19548e575633214">sensesp::CurveInterpolator::clear_samples</a></div><div class="ttdeci">void clear_samples()</div><div class="ttdef"><b>Definition</b> <a href="#l00162">curveinterpolator.cpp:162</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_a24b6c4b20d378a25a5cd4519d460520d"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#a24b6c4b20d378a25a5cd4519d460520d">sensesp::CurveInterpolator::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition</b> <a href="#l00129">curveinterpolator.cpp:129</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_a217e0e3cb72cd661d19548e575633214"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#a217e0e3cb72cd661d19548e575633214">sensesp::CurveInterpolator::clear_samples</a></div><div class="ttdeci">void clear_samples()</div><div class="ttdef"><b>Definition</b> <a href="#l00140">curveinterpolator.cpp:140</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_a31e8c98cbc19e87bc4086895631511de"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#a31e8c98cbc19e87bc4086895631511de">sensesp::CurveInterpolator::set</a></div><div class="ttdeci">void set(const float &amp;input) override</div><div class="ttdef"><b>Definition</b> <a href="#l00035">curveinterpolator.cpp:35</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_a4590048e0fdecd5203a8a5f37a5c841f"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#a4590048e0fdecd5203a8a5f37a5c841f">sensesp::CurveInterpolator::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00136">curveinterpolator.cpp:136</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_a6e7fcbd6544a7b77e8805ba2f094bb0b"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#a6e7fcbd6544a7b77e8805ba2f094bb0b">sensesp::CurveInterpolator::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;root) override</div><div class="ttdef"><b>Definition</b> <a href="#l00099">curveinterpolator.cpp:99</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_a9c4c42a7152a21d9b3e25f5381e91c41"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#a9c4c42a7152a21d9b3e25f5381e91c41">sensesp::CurveInterpolator::samples_</a></div><div class="ttdeci">std::set&lt; Sample &gt; samples_</div><div class="ttdef"><b>Definition</b> <a href="curveinterpolator_8h_source.html#l00084">curveinterpolator.h:84</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_aa08e7c4c89847a00b48984e5d8d23bb7"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#aa08e7c4c89847a00b48984e5d8d23bb7">sensesp::CurveInterpolator::output_title_</a></div><div class="ttdeci">String output_title_</div><div class="ttdef"><b>Definition</b> <a href="curveinterpolator_8h_source.html#l00086">curveinterpolator.h:86</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_aa0bc599b7492cd5036f55dfff1d9d46d"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#aa0bc599b7492cd5036f55dfff1d9d46d">sensesp::CurveInterpolator::input_title_</a></div><div class="ttdeci">String input_title_</div><div class="ttdef"><b>Definition</b> <a href="curveinterpolator_8h_source.html#l00085">curveinterpolator.h:85</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_ab9ae195be28d12c733777990aeda78ea"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#ab9ae195be28d12c733777990aeda78ea">sensesp::CurveInterpolator::add_sample</a></div><div class="ttdeci">void add_sample(const Sample &amp;new_sample)</div><div class="ttdef"><b>Definition</b> <a href="#l00164">curveinterpolator.cpp:164</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_aa7043904bd0eb0f9b2ba41022c0cabf0"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#aa7043904bd0eb0f9b2ba41022c0cabf0">sensesp::CurveInterpolator::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00099">curveinterpolator.cpp:99</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_ab9ae195be28d12c733777990aeda78ea"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#ab9ae195be28d12c733777990aeda78ea">sensesp::CurveInterpolator::add_sample</a></div><div class="ttdeci">void add_sample(const Sample &amp;new_sample)</div><div class="ttdef"><b>Definition</b> <a href="#l00142">curveinterpolator.cpp:142</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_adf50b114071a555b940cdee8c61b58f5"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#adf50b114071a555b940cdee8c61b58f5">sensesp::CurveInterpolator::CurveInterpolator</a></div><div class="ttdeci">CurveInterpolator(std::set&lt; Sample &gt; *defaults=NULL, const String &amp;config_path=&quot;&quot;)</div><div class="ttdoc">Construct a new CurveInterpolator object.</div><div class="ttdef"><b>Definition</b> <a href="#l00023">curveinterpolator.cpp:23</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_observable_html_ab86d00fed8fb85b4c76cb9397667ece9"><div class="ttname"><a href="classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9">sensesp::Observable::notify</a></div><div class="ttdeci">void notify()</div><div class="ttdef"><b>Definition</b> <a href="observable_8cpp_source.html#l00007">observable.cpp:7</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_curve_interpolator_html_ae120ee47f9cfe9d353c67e8f603739aa"><div class="ttname"><a href="classsensesp_1_1_curve_interpolator.html#ae120ee47f9cfe9d353c67e8f603739aa">sensesp::CurveInterpolator::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00114">curveinterpolator.cpp:114</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a79b2e2e657112851dfda8785d217578a"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">sensesp::FileSystemSaveable::load</a></div><div class="ttdeci">virtual bool load() override</div><div class="ttdoc">Load and populate the object from a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00008">saveable.cpp:8</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_observable_html_ab86d00fed8fb85b4c76cb9397667ece9"><div class="ttname"><a href="classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9">sensesp::Observable::notify</a></div><div class="ttdeci">void notify()</div><div class="ttdef"><b>Definition</b> <a href="observable_8h_source.html#l00023">observable.h:23</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_symmetric_transform_html"><div class="ttname"><a href="classsensesp_1_1_symmetric_transform.html">sensesp::SymmetricTransform&lt; float &gt;</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a08032702dc65bfc839eeeb5b006195d4"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">sensesp::ValueProducer&lt; float &gt;::output</a></div><div class="ttdeci">float output</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00122">valueproducer.h:122</a></div></div>
-<div class="ttc" id="acss__bootstrap_8h_html_ade1d7051ddbe6cc839076fcd0de2203a"><div class="ttname"><a href="css__bootstrap_8h.html#ade1d7051ddbe6cc839076fcd0de2203a">PROGMEM</a></div><div class="ttdeci">const uint8_t PAGE_css_bootstrap[] PROGMEM</div><div class="ttdef"><b>Definition</b> <a href="css__bootstrap_8h_source.html#l00002">css_bootstrap.h:2</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a86ca5ef060f2f824447afa0ff4d0c3de"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">sensesp::ValueProducer&lt; float &gt;::output_</a></div><div class="ttdeci">float output_</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00101">valueproducer.h:101</a></div></div>
 <div class="ttc" id="acurveinterpolator_8h_html"><div class="ttname"><a href="curveinterpolator_8h.html">curveinterpolator.h</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

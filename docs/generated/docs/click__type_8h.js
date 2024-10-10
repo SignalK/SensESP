@@ -8,5 +8,6 @@ var click__type_8h =
       [ "LongSingleClick", "click__type_8h.html#a21975f0611649b430d00a47945332495ad0fff85d3541aedaddfb3c5e67e897b4", null ],
       [ "UltraLongSingleClick", "click__type_8h.html#a21975f0611649b430d00a47945332495a90cdf9b893f111309c5f35d6bf413f90", null ],
       [ "DoubleClick", "click__type_8h.html#a21975f0611649b430d00a47945332495a99f490e53ed16a6580a350b42e1143a9", null ]
-    ] ]
+    ] ],
+    [ "ConfigSchema", "click__type_8h.html#ac36eb49a850068439f6a0a98ecd04f75", null ]
 ];

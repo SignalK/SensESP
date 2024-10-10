@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -110,75 +110,72 @@ $(function(){initNavTree('enable_8h_source.html',''); initResizable(true); });
 <a href="enable_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SENSESP_SRC_SENSESP_TRANSFORMS_ENABLE_H_</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SENSESP_SRC_SENSESP_TRANSFORMS_ENABLE_H_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="transform_8h.html">sensesp/transforms/transform.h</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> ENABLE_TRANSFORM_SCHEMA[] <a class="code hl_variable" href="css__bootstrap_8h.html#ade1d7051ddbe6cc839076fcd0de2203a">PROGMEM</a> = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="stringliteral">      &quot;enabled&quot;: { &quot;type&quot;: &quot;boolean&quot;, &quot;title&quot;: &quot;Enable&quot;, &quot;description&quot;: &quot;Enable or disable the transform output&quot; }</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="stringliteral">  })&quot;;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classsensesp_1_1_enable.html">Enable</a> : <span class="keyword">public</span> <a class="code hl_class" href="classsensesp_1_1_transform.html">Transform</a>&lt;T, T&gt; {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> <span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#a38d97a516e01d76e923582134faa7d55">   27</a></span>  <a class="code hl_function" href="classsensesp_1_1_enable.html#a38d97a516e01d76e923582134faa7d55">Enable</a>(<span class="keywordtype">bool</span> enabled = <span class="keyword">true</span>, String config_path = <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>      : <a class="code hl_class" href="classsensesp_1_1_transform.html">Transform</a>&lt;T, T&gt;(config_path) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    this-&gt;enabled_ = enabled;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a>();</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  }</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="config__item_8h.html">sensesp/ui/config_item.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="transform_8h.html">sensesp/transforms/transform.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html">   19</a></span><span class="keyword">class </span><a class="code hl_class" href="classsensesp_1_1_enable.html">Enable</a> : <span class="keyword">public</span> <a class="code hl_class" href="classsensesp_1_1_transform.html">Transform</a>&lt;T, T&gt; {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#a38d97a516e01d76e923582134faa7d55">   21</a></span>  <a class="code hl_function" href="classsensesp_1_1_enable.html#a38d97a516e01d76e923582134faa7d55">Enable</a>(<span class="keywordtype">bool</span> enabled = <span class="keyword">true</span>, String config_path = <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>      : <a class="code hl_class" href="classsensesp_1_1_transform.html">Transform</a>&lt;T, T&gt;(config_path) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    this-&gt;enabled_ = enabled;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a>();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  }</div>
 </div>
-<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#a9bbb0b455792c1b955b6c782047961cd">   32</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_enable.html#a9bbb0b455792c1b955b6c782047961cd">set</a>(<span class="keyword">const</span> T&amp; input)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> (enabled_) {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>      this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(input);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  }</div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#a9bbb0b455792c1b955b6c782047961cd">   26</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_enable.html#a9bbb0b455792c1b955b6c782047961cd">set</a>(<span class="keyword">const</span> T&amp; input)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">if</span> (enabled_) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>      this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(input);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
 </div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#a8ebbacc8248a9c431fc2ddfc170d4897">   37</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_enable.html#a8ebbacc8248a9c431fc2ddfc170d4897">get_configuration</a>(JsonObject&amp; doc)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    doc[<span class="stringliteral">&quot;enabled&quot;</span>] = enabled_;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  }</div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#a929bfb2759ab59e024b9bec607fb8845">   31</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_enable.html#a929bfb2759ab59e024b9bec607fb8845">to_json</a>(JsonObject&amp; doc)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    doc[<span class="stringliteral">&quot;enabled&quot;</span>] = enabled_;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  }</div>
 </div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#a6a2128e819db41d8d094a9fdb4162ecf">   40</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_enable.html#a6a2128e819db41d8d094a9fdb4162ecf">set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;enabled&quot;</span>].is&lt;bool&gt;()) {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      enabled_ = config[<span class="stringliteral">&quot;enabled&quot;</span>];</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  }</div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#a738aca5f06e2b6bd04476d625717b84a">   35</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_enable.html#a738aca5f06e2b6bd04476d625717b84a">from_json</a>(<span class="keyword">const</span> JsonObject&amp; config)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;enabled&quot;</span>].is&lt;bool&gt;()) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>      enabled_ = config[<span class="stringliteral">&quot;enabled&quot;</span>];</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  }</div>
 </div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classsensesp_1_1_enable.html#ad5b1c1421b4e4a4ed864aa7a016b7c37">   48</a></span>  <span class="keyword">virtual</span> String <a class="code hl_function" href="classsensesp_1_1_enable.html#ad5b1c1421b4e4a4ed864aa7a016b7c37">get_config_schema</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span> FPSTR(ENABLE_TRANSFORM_SCHEMA);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  };</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">bool</span> enabled_;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
 </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keywordtype">bool</span> enabled_;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a4bf292904d4c26a5752557f30909d9b8">   49</a></span><span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_enable.html">Enable&lt;U&gt;</a>&amp; obj) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">return</span> R<span class="stringliteral">&quot;({&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;enabled&quot;:{&quot;type&quot;:&quot;boolean&quot;,&quot;title&quot;:&quot;Enable&quot;,&quot;description&quot;:&quot;Enable or disable the transform output&quot;}}})&quot;;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="stringliteral">}</span></div>
 </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclasssensesp_1_1_configurable_html_ac97542fd5a24ae306adb77f3d1ba563a"><div class="ttname"><a href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">sensesp::Configurable::load_configuration</a></div><div class="ttdeci">virtual void load_configuration()</div><div class="ttdef"><b>Definition</b> <a href="configurable_8cpp_source.html#l00035">configurable.cpp:35</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_enable_html"><div class="ttname"><a href="classsensesp_1_1_enable.html">sensesp::Enable</a></div><div class="ttdoc">On/off switch for signals: input is emitted as-is if the enable flag is set in the web UI.</div><div class="ttdef"><b>Definition</b> <a href="#l00025">enable.h:25</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_enable_html_a38d97a516e01d76e923582134faa7d55"><div class="ttname"><a href="classsensesp_1_1_enable.html#a38d97a516e01d76e923582134faa7d55">sensesp::Enable::Enable</a></div><div class="ttdeci">Enable(bool enabled=true, String config_path=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00027">enable.h:27</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_enable_html_a6a2128e819db41d8d094a9fdb4162ecf"><div class="ttname"><a href="classsensesp_1_1_enable.html#a6a2128e819db41d8d094a9fdb4162ecf">sensesp::Enable::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00040">enable.h:40</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_enable_html_a8ebbacc8248a9c431fc2ddfc170d4897"><div class="ttname"><a href="classsensesp_1_1_enable.html#a8ebbacc8248a9c431fc2ddfc170d4897">sensesp::Enable::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00037">enable.h:37</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_enable_html_a9bbb0b455792c1b955b6c782047961cd"><div class="ttname"><a href="classsensesp_1_1_enable.html#a9bbb0b455792c1b955b6c782047961cd">sensesp::Enable::set</a></div><div class="ttdeci">virtual void set(const T &amp;input) override</div><div class="ttdef"><b>Definition</b> <a href="#l00032">enable.h:32</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_enable_html_ad5b1c1421b4e4a4ed864aa7a016b7c37"><div class="ttname"><a href="classsensesp_1_1_enable.html#ad5b1c1421b4e4a4ed864aa7a016b7c37">sensesp::Enable::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition</b> <a href="#l00048">enable.h:48</a></div></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="stringliteral">}  </span><span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclasssensesp_1_1_enable_html"><div class="ttname"><a href="classsensesp_1_1_enable.html">sensesp::Enable</a></div><div class="ttdoc">On/off switch for signals: input is emitted as-is if the enable flag is set in the web UI.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">enable.h:19</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_enable_html_a38d97a516e01d76e923582134faa7d55"><div class="ttname"><a href="classsensesp_1_1_enable.html#a38d97a516e01d76e923582134faa7d55">sensesp::Enable::Enable</a></div><div class="ttdeci">Enable(bool enabled=true, String config_path=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00021">enable.h:21</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_enable_html_a738aca5f06e2b6bd04476d625717b84a"><div class="ttname"><a href="classsensesp_1_1_enable.html#a738aca5f06e2b6bd04476d625717b84a">sensesp::Enable::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00035">enable.h:35</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_enable_html_a929bfb2759ab59e024b9bec607fb8845"><div class="ttname"><a href="classsensesp_1_1_enable.html#a929bfb2759ab59e024b9bec607fb8845">sensesp::Enable::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override</div><div class="ttdef"><b>Definition</b> <a href="#l00031">enable.h:31</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_enable_html_a9bbb0b455792c1b955b6c782047961cd"><div class="ttname"><a href="classsensesp_1_1_enable.html#a9bbb0b455792c1b955b6c782047961cd">sensesp::Enable::set</a></div><div class="ttdeci">virtual void set(const T &amp;input) override</div><div class="ttdef"><b>Definition</b> <a href="#l00026">enable.h:26</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a79b2e2e657112851dfda8785d217578a"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">sensesp::FileSystemSaveable::load</a></div><div class="ttdeci">virtual bool load() override</div><div class="ttdoc">Load and populate the object from a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00008">saveable.cpp:8</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_transform_html"><div class="ttname"><a href="classsensesp_1_1_transform.html">sensesp::Transform</a></div><div class="ttdoc">The main Transform class. A transform is identified primarily by the type of value that is produces (...</div><div class="ttdef"><b>Definition</b> <a href="transform_8h_source.html#l00051">transform.h:53</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer::emit</a></div><div class="ttdeci">void emit(const T &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00112">valueproducer.h:112</a></div></div>
-<div class="ttc" id="acss__bootstrap_8h_html_ade1d7051ddbe6cc839076fcd0de2203a"><div class="ttname"><a href="css__bootstrap_8h.html#ade1d7051ddbe6cc839076fcd0de2203a">PROGMEM</a></div><div class="ttdeci">const uint8_t PAGE_css_bootstrap[] PROGMEM</div><div class="ttdef"><b>Definition</b> <a href="css__bootstrap_8h_source.html#l00002">css_bootstrap.h:2</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer::emit</a></div><div class="ttdeci">void emit(const T &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>
+<div class="ttc" id="aconfig__item_8h_html"><div class="ttname"><a href="config__item_8h.html">config_item.h</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
 <div class="ttc" id="atransform_8h_html"><div class="ttname"><a href="transform_8h.html">transform.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,44 +1,37 @@
 <map id="src/sensesp/net/wifi_state.h" name="src/sensesp/net/wifi_state.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="566,5,704,46"/>
-<area shape="rect" id="Node000002" href="$networking_8h.html" title=" " alt="" coords="539,94,732,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="638,62,638,93,633,93,633,62"/>
-<area shape="rect" id="Node000003" href="$system__status__controller_8h.html" title=" " alt="" coords="465,168,646,208"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="614,133,577,169,573,165,611,129"/>
-<area shape="rect" id="Node000007" href="$sensesp__app_8cpp.html" title=" " alt="" coords="5,441,151,467"/>
-<area shape="poly" id="edge23_Node000002_Node000007" title=" " alt="" coords="556,126,484,145,401,173,316,210,275,233,237,258,186,305,142,358,108,407,87,442,82,439,104,404,138,355,182,302,234,254,272,228,313,205,399,168,482,140,555,121"/>
-<area shape="rect" id="Node000008" href="$sensesp__app_8h.html" title=" " alt="" coords="607,352,738,378"/>
-<area shape="poly" id="edge24_Node000002_Node000008" title=" " alt="" coords="650,133,661,167,669,221,674,274,676,352,670,352,669,274,664,221,655,168,645,135"/>
-<area shape="rect" id="Node000010" href="$networking_8cpp.html" title=" " alt="" coords="1507,441,1713,467"/>
-<area shape="poly" id="edge22_Node000002_Node000010" title=" " alt="" coords="685,123,1577,438,1575,443,683,128"/>
-<area shape="rect" id="Node000004" href="$system__status__controller_8cpp.html" title=" " alt="" coords="247,256,442,297"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="495,217,394,258,392,253,493,212"/>
-<area shape="rect" id="Node000005" href="$system__status__led_8h.html" title=" " alt="" coords="466,256,612,297"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="552,224,546,256,540,255,546,223"/>
-<area shape="poly" id="edge21_Node000003_Node000008" title=" " alt="" coords="593,217,627,255,655,307,671,351,666,353,650,309,622,258,589,220"/>
-<area shape="rect" id="Node000006" href="$system__status__led_8cpp.html" title=" " alt="" coords="342,345,502,386"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="502,308,450,347,447,342,499,304"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="543,313,537,352,529,371,516,388,486,405,446,416,398,423,345,427,242,430,162,436,129,443,128,438,162,431,241,425,345,422,397,418,445,411,484,400,512,384,524,369,532,351,538,312"/>
-<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="584,304,655,350,653,354,581,308"/>
-<area shape="poly" id="edge18_Node000008_Node000007" title=" " alt="" coords="592,383,558,388,447,402,360,410,273,420,162,436,128,443,127,438,162,431,273,414,359,405,446,397,558,383,591,378"/>
-<area shape="rect" id="Node000009" href="$main_8cpp.html" title=" " alt="" coords="860,530,957,556"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="594,384,477,410,432,424,409,435,401,455,403,463,409,472,431,484,474,495,600,514,743,527,860,536,860,541,743,533,599,519,473,500,429,489,406,476,398,465,396,454,405,432,430,419,476,405,592,379"/>
-<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="754,368,1079,390,1286,408,1496,431,1543,438,1542,443,1495,436,1286,414,1078,396,754,374"/>
-<area shape="rect" id="Node000011" href="$app__command__handler_8h.html" title=" " alt="" coords="175,434,344,474"/>
-<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="594,384,345,436,344,431,593,379"/>
-<area shape="rect" id="Node000013" href="$signalk__delta__queue_8cpp.html" title=" " alt="" coords="419,434,588,474"/>
-<area shape="poly" id="edge13_Node000008_Node000013" title=" " alt="" coords="636,388,543,436,540,431,634,383"/>
-<area shape="rect" id="Node000014" href="$signalk__put__request_8cpp.html" title=" " alt="" coords="612,434,778,474"/>
-<area shape="poly" id="edge14_Node000008_Node000014" title=" " alt="" coords="682,393,693,433,688,434,677,394"/>
-<area shape="rect" id="Node000015" href="$signalk__ws__client_8cpp.html" title=" " alt="" coords="803,434,956,474"/>
-<area shape="poly" id="edge15_Node000008_Node000015" title=" " alt="" coords="717,382,833,431,831,436,715,387"/>
-<area shape="rect" id="Node000016" href="$button_8cpp.html" title=" " alt="" coords="980,434,1120,474"/>
-<area shape="poly" id="edge16_Node000008_Node000016" title=" " alt="" coords="742,379,969,431,981,434,979,439,968,436,741,385"/>
-<area shape="rect" id="Node000017" href="$led__blinker_8cpp.html" title=" " alt="" coords="1144,434,1284,474"/>
-<area shape="poly" id="edge17_Node000008_Node000017" title=" " alt="" coords="754,374,928,398,1132,431,1144,433,1143,439,1131,436,927,403,753,379"/>
-<area shape="rect" id="Node000018" href="$sensesp__app__builder_8h.html" title=" " alt="" coords="1308,441,1483,467"/>
-<area shape="poly" id="edge19_Node000008_Node000018" title=" " alt="" coords="754,371,997,394,1296,431,1336,438,1335,443,1295,436,996,399,754,376"/>
-<area shape="poly" id="edge12_Node000011_Node000008" title=" " alt="" coords="359,431,620,376,621,381,360,436"/>
-<area shape="rect" id="Node000012" href="$app__command__handler_8cpp.html" title=" " alt="" coords="168,522,351,563"/>
-<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="262,490,262,522,257,522,257,490"/>
-<area shape="poly" id="edge20_Node000018_Node000009" title=" " alt="" coords="1318,473,1296,477,957,536,956,531,1295,472,1317,468"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="885,5,1024,46"/>
+<area shape="rect" id="Node000002" href="$networking_8h.html" title=" " alt="" coords="858,94,1051,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="957,62,957,93,952,93,952,62"/>
+<area shape="rect" id="Node000003" href="$system__status__controller_8h.html" title=" " alt="" coords="736,168,917,208"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="924,130,860,170,857,165,921,126"/>
+<area shape="rect" id="Node000006" href="$sensesp__app_8h.html" title=" " alt="" coords="800,352,931,378"/>
+<area shape="poly" id="edge19_Node000002_Node000006" title=" " alt="" coords="951,136,932,209,900,292,873,353,868,351,895,290,927,208,946,134"/>
+<area shape="rect" id="Node000008" href="$networking_8cpp.html" title=" " alt="" coords="1491,441,1698,467"/>
+<area shape="poly" id="edge18_Node000002_Node000008" title=" " alt="" coords="992,125,1573,438,1571,443,989,130"/>
+<area shape="rect" id="Node000004" href="$system__status__led_8h.html" title=" " alt="" coords="681,256,828,297"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="802,222,773,258,769,254,798,219"/>
+<area shape="poly" id="edge17_Node000003_Node000006" title=" " alt="" coords="837,223,865,351,860,352,832,224"/>
+<area shape="rect" id="Node000005" href="$system__status__led_8cpp.html" title=" " alt="" coords="616,345,776,386"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="735,311,711,346,707,343,731,308"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="793,305,852,350,848,354,790,309"/>
+<area shape="rect" id="Node000007" href="$main_8cpp.html" title=" " alt="" coords="636,522,732,548"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="807,385,788,388,639,392,391,394,263,397,149,404,62,417,33,425,16,436,10,445,8,454,10,463,16,472,28,480,48,487,109,500,285,517,482,527,635,531,635,536,482,532,285,523,108,505,46,492,26,485,13,476,5,465,3,454,5,443,13,432,31,420,61,412,148,399,263,392,391,388,639,387,788,383,807,380"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="947,371,1186,396,1480,431,1526,438,1525,443,1480,436,1186,401,946,377"/>
+<area shape="rect" id="Node000009" href="$app__command__handler_8cpp.html" title=" " alt="" coords="27,434,210,474"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="806,385,788,388,630,408,506,415,382,420,223,436,211,438,210,433,222,431,381,415,506,410,629,403,787,383,805,380"/>
+<area shape="rect" id="Node000010" href="$signalk__delta__queue_8cpp.html" title=" " alt="" coords="234,434,403,474"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="805,385,788,388,684,405,602,414,521,422,416,436,403,438,402,433,415,431,520,417,602,408,683,400,787,383,804,380"/>
+<area shape="rect" id="Node000011" href="$signalk__put__request_8cpp.html" title=" " alt="" coords="427,434,594,474"/>
+<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="802,385,789,388,593,436,591,431,787,383,801,380"/>
+<area shape="rect" id="Node000012" href="$signalk__ws__client_8cpp.html" title=" " alt="" coords="618,434,771,474"/>
+<area shape="poly" id="edge11_Node000006_Node000012" title=" " alt="" coords="829,388,734,436,732,431,826,383"/>
+<area shape="rect" id="Node000013" href="$button_8cpp.html" title=" " alt="" coords="796,434,935,474"/>
+<area shape="poly" id="edge12_Node000006_Node000013" title=" " alt="" coords="868,394,868,434,863,434,863,394"/>
+<area shape="rect" id="Node000014" href="$led__blinker_8cpp.html" title=" " alt="" coords="960,434,1099,474"/>
+<area shape="poly" id="edge13_Node000006_Node000014" title=" " alt="" coords="903,384,994,431,991,436,901,388"/>
+<area shape="rect" id="Node000015" href="$sensesp__app_8cpp.html" title=" " alt="" coords="1123,441,1269,467"/>
+<area shape="poly" id="edge14_Node000006_Node000015" title=" " alt="" coords="927,380,1150,438,1149,443,926,385"/>
+<area shape="rect" id="Node000016" href="$sensesp__app__builder_8h.html" title=" " alt="" coords="1292,441,1468,467"/>
+<area shape="poly" id="edge15_Node000006_Node000016" title=" " alt="" coords="947,376,1282,431,1319,438,1318,443,1281,436,946,382"/>
+<area shape="poly" id="edge16_Node000016_Node000007" title=" " alt="" coords="1308,473,1282,477,1125,497,969,513,733,533,732,528,969,508,1124,492,1281,472,1307,467"/>
 </map>

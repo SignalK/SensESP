@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -114,19 +114,17 @@ $(function(){initNavTree('config__handler_8h_source.html',''); initResizable(tru
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;ArduinoJson.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="http__server_8h.html">sensesp/net/http_server.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="configurable_8h.html">sensesp/system/configurable.h</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacesensesp.html#a66af6e0617fab1bba4fbe606ae8a6062">add_config_handlers</a>(HTTPServer* server);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif  </span><span class="comment">// SENSESP_NET_HTTP_CONFIG_HANDLER_H_</span></div>
-<div class="ttc" id="aconfigurable_8h_html"><div class="ttname"><a href="configurable_8h.html">configurable.h</a></div></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacesensesp.html#a2808b5685d7727b96e08b2d01b7033ff">add_config_handlers</a>(std::shared_ptr&lt;HTTPServer&gt;&amp; server);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif  </span><span class="comment">// SENSESP_NET_HTTP_CONFIG_HANDLER_H_</span></div>
 <div class="ttc" id="ahttp__server_8h_html"><div class="ttname"><a href="http__server_8h.html">http_server.h</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a66af6e0617fab1bba4fbe606ae8a6062"><div class="ttname"><a href="namespacesensesp.html#a66af6e0617fab1bba4fbe606ae8a6062">sensesp::add_config_handlers</a></div><div class="ttdeci">void add_config_handlers(HTTPServer *server)</div><div class="ttdoc">Handle HTTP requests to /config.</div><div class="ttdef"><b>Definition</b> <a href="config__handler_8cpp_source.html#l00228">config_handler.cpp:228</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a2808b5685d7727b96e08b2d01b7033ff"><div class="ttname"><a href="namespacesensesp.html#a2808b5685d7727b96e08b2d01b7033ff">sensesp::add_config_handlers</a></div><div class="ttdeci">void add_config_handlers(std::shared_ptr&lt; HTTPServer &gt; &amp;server)</div><div class="ttdoc">Handle HTTP requests to /config.</div><div class="ttdef"><b>Definition</b> <a href="config__handler_8cpp_source.html#l00207">config_handler.cpp:207</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

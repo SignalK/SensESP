@@ -1,7 +1,7 @@
 var classsensesp_1_1_task_queue_producer =
 [
-    [ "TaskQueueProducer", "classsensesp_1_1_task_queue_producer.html#a87f963f8a19bbc5c0770a1bcf288a1d4", null ],
-    [ "TaskQueueProducer", "classsensesp_1_1_task_queue_producer.html#a2d440e18ef6dd97fc172d64e249d6c88", null ],
-    [ "push", "classsensesp_1_1_task_queue_producer.html#a200f504fc9566d46ecd3413bc82ec62f", null ],
-    [ "set", "classsensesp_1_1_task_queue_producer.html#ae3fc9c50c0c606a9ba9e5a8826d32a37", null ]
+    [ "TaskQueueProducer", "classsensesp_1_1_task_queue_producer.html#a3fe2dc6ebe9abeed5541411d90d856fa", null ],
+    [ "TaskQueueProducer", "classsensesp_1_1_task_queue_producer.html#a2b1e50b84e45b48e3f454606bcdc8114", null ],
+    [ "set", "classsensesp_1_1_task_queue_producer.html#ae3fc9c50c0c606a9ba9e5a8826d32a37", null ],
+    [ "wait", "classsensesp_1_1_task_queue_producer.html#ad15ef6fba8feb6fef17dc01164f35229", null ]
 ];

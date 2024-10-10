@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -115,8 +115,8 @@ $(function(){initNavTree('discovery_8cpp_source.html',''); initResizable(true); 
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classsensesp_1_1_m_d_n_s_discovery.html#a92a5eea6085988a188e9d4b7ec887ea2">    7</a></span><a class="code hl_function" href="classsensesp_1_1_m_d_n_s_discovery.html#a92a5eea6085988a188e9d4b7ec887ea2">MDNSDiscovery::MDNSDiscovery</a>() {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a9068b65bf976f1d1bd5faf1e3126e8ff">SensESPBaseApp::get_event_loop</a>()-&gt;onDelay(0, [<span class="keyword">this</span>]() {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    String hostname = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a928c309a2dc17f82edefe9e5bc7ef33d">SensESPBaseApp::get_hostname</a>();</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onDelay(0, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    String hostname = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="comment">// MDNS.begin(hostname) will crash if hostname is blank</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordflow">if</span> ((hostname == <span class="stringliteral">&quot;&quot;</span>)) {</div>
@@ -137,10 +137,10 @@ $(function(){initNavTree('discovery_8cpp_source.html',''); initResizable(true); 
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}  <span class="comment">// namespace sensesp</span></div>
 <div class="ttc" id="aclasssensesp_1_1_m_d_n_s_discovery_html_a92a5eea6085988a188e9d4b7ec887ea2"><div class="ttname"><a href="classsensesp_1_1_m_d_n_s_discovery.html#a92a5eea6085988a188e9d4b7ec887ea2">sensesp::MDNSDiscovery::MDNSDiscovery</a></div><div class="ttdeci">MDNSDiscovery()</div><div class="ttdef"><b>Definition</b> <a href="#l00007">discovery.cpp:7</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a9068b65bf976f1d1bd5faf1e3126e8ff"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a9068b65bf976f1d1bd5faf1e3126e8ff">sensesp::SensESPBaseApp::get_event_loop</a></div><div class="ttdeci">static reactesp::EventLoop * get_event_loop()</div><div class="ttdoc">Get the event loop object from the singleton SensESPBaseApp instance.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8cpp_source.html#l00038">sensesp_base_app.cpp:38</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a928c309a2dc17f82edefe9e5bc7ef33d"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a928c309a2dc17f82edefe9e5bc7ef33d">sensesp::SensESPBaseApp::get_hostname</a></div><div class="ttdeci">static String get_hostname()</div><div class="ttdoc">Get the current hostname.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8cpp_source.html#l00077">sensesp_base_app.cpp:77</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a21ba3dc3ef0056c32ad5a67e1ae5ff16"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">sensesp::SensESPBaseApp::get_hostname</a></div><div class="ttdeci">static String get_hostname()</div><div class="ttdoc">Get the current hostname.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8h_source.html#l00104">sensesp_base_app.h:104</a></div></div>
 <div class="ttc" id="adiscovery_8h_html"><div class="ttname"><a href="discovery_8h.html">discovery.h</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="asensesp__base__app_8h_html"><div class="ttname"><a href="sensesp__base__app_8h.html">sensesp_base_app.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

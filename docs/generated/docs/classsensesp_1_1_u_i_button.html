@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -147,8 +147,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a08b41958cdef2ce33588483f9efc71ce" id="r_a08b41958cdef2ce33588483f9efc71ce"><td class="memItemLeft" align="right" valign="top">static const std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08b41958cdef2ce33588483f9efc71ce">get_ui_buttons</a> ()</td></tr>
-<tr class="separator:a08b41958cdef2ce33588483f9efc71ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15a6c1c141cb7ba477daeed110636af7" id="r_a15a6c1c141cb7ba477daeed110636af7"><td class="memItemLeft" align="right" valign="top">static const std::map&lt; String, std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15a6c1c141cb7ba477daeed110636af7">get_ui_buttons</a> ()</td></tr>
+<tr class="separator:a15a6c1c141cb7ba477daeed110636af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcc655de4639863095b257e28c399435" id="r_adcc655de4639863095b257e28c399435"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adcc655de4639863095b257e28c399435">add</a> (String name, String title, bool must_confirm=true)</td></tr>
 <tr class="separator:adcc655de4639863095b257e28c399435"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -163,14 +163,14 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:ab95578ff9b1c917b2a1d6c82cd321d81" id="r_ab95578ff9b1c917b2a1d6c82cd321d81"><td class="memItemLeft" align="right" valign="top">static std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab95578ff9b1c917b2a1d6c82cd321d81">ui_buttons_</a></td></tr>
-<tr class="separator:ab95578ff9b1c917b2a1d6c82cd321d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1b454291c77ed3ef4af3cec207a4305" id="r_ae1b454291c77ed3ef4af3cec207a4305"><td class="memItemLeft" align="right" valign="top">static std::map&lt; String, std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1b454291c77ed3ef4af3cec207a4305">ui_buttons_</a></td></tr>
+<tr class="separator:ae1b454291c77ed3ef4af3cec207a4305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classsensesp_1_1_u_i_button.html" title="UIButton implements a button interface on the web UI.">UIButton</a> implements a button interface on the web UI. </p>
 <p>Each <a class="el" href="classsensesp_1_1_u_i_button.html" title="UIButton implements a button interface on the web UI.">UIButton</a> object creates a button in the "Control" tab of the web UI. When the button is clicked, the object's observers are notified. </p>
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00017">17</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00018">18</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a35372d35863650683b5f2a3dc36f7a12" name="a35372d35863650683b5f2a3dc36f7a12"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a35372d35863650683b5f2a3dc36f7a12">&#9670;&#160;</a></span>UIButton()</h2>
@@ -204,12 +204,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00019">19</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_u_i_button_a35372d35863650683b5f2a3dc36f7a12_icgraph.svg" width="356" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00020">20</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
@@ -246,12 +241,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00030">30</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_u_i_button_adcc655de4639863095b257e28c399435_cgraph.svg" width="356" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00031">31</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
@@ -278,7 +268,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00022">22</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00023">23</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
@@ -305,7 +295,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00024">24</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00025">25</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
@@ -332,12 +322,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00023">23</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00024">24</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
-<a id="a08b41958cdef2ce33588483f9efc71ce" name="a08b41958cdef2ce33588483f9efc71ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08b41958cdef2ce33588483f9efc71ce">&#9670;&#160;</a></span>get_ui_buttons()</h2>
+<a id="a15a6c1c141cb7ba477daeed110636af7" name="a15a6c1c141cb7ba477daeed110636af7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15a6c1c141cb7ba477daeed110636af7">&#9670;&#160;</a></span>get_ui_buttons()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -346,7 +336,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static const std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> * &gt; &amp; sensesp::UIButton::get_ui_buttons </td>
+          <td class="memname">static const std::map&lt; String, std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> &gt; &gt; &amp; sensesp::UIButton::get_ui_buttons </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -359,7 +349,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00026">26</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00027">27</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
@@ -384,7 +374,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00040">40</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00041">41</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
@@ -408,7 +398,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00039">39</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00040">40</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
@@ -432,12 +422,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00038">38</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00039">39</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>
-<a id="ab95578ff9b1c917b2a1d6c82cd321d81" name="ab95578ff9b1c917b2a1d6c82cd321d81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab95578ff9b1c917b2a1d6c82cd321d81">&#9670;&#160;</a></span>ui_buttons_</h2>
+<a id="ae1b454291c77ed3ef4af3cec207a4305" name="ae1b454291c77ed3ef4af3cec207a4305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1b454291c77ed3ef4af3cec207a4305">&#9670;&#160;</a></span>ui_buttons_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -446,7 +436,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt; String, <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> * &gt; sensesp::UIButton::ui_buttons_</td>
+          <td class="memname">std::map&lt; String, std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_u_i_button.html">UIButton</a> &gt; &gt; sensesp::UIButton::ui_buttons_</td>
         </tr>
       </table>
   </td>
@@ -456,7 +446,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00042">42</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__button_8h_source.html#l00043">43</a> of file <a class="el" href="ui__button_8h_source.html">ui_button.h</a>.</p>
 
 </div>
 </div>

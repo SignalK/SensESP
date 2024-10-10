@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -118,17 +118,15 @@ $(function(){initNavTree('button_8cpp_source.html',''); initResizable(true); });
 <div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classsensesp_1_1_button_handler.html#a2bbaa0329081dcb6616a9e09cde9e3da">    9</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_button_handler.html#a2bbaa0329081dcb6616a9e09cde9e3da">ButtonHandler::handle_long_press</a>() {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Resetting network settings&quot;</span>);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_app.html#a0d691348bffb9c65548ad23cd2188ca9">SensESPApp::get</a>()-&gt;<a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_app.html#ac86ccc0464d1754824a03eacc869b39c">get_networking</a>()-&gt;<a class="code hl_function" href="classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159">reset</a>();</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_app.html#a05d22a1dee1fbe4c4c4373de61d02090">SensESPApp::get</a>()-&gt;get_networking()-&gt;reset();</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
 </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}  <span class="comment">// namespace sensesp</span></div>
 <div class="ttc" id="abutton_8h_html"><div class="ttname"><a href="button_8h.html">button.h</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_button_handler_html_a2bbaa0329081dcb6616a9e09cde9e3da"><div class="ttname"><a href="classsensesp_1_1_button_handler.html#a2bbaa0329081dcb6616a9e09cde9e3da">sensesp::ButtonHandler::handle_long_press</a></div><div class="ttdeci">virtual void handle_long_press() override</div><div class="ttdoc">Handle a long button press (over 1 second).</div><div class="ttdef"><b>Definition</b> <a href="#l00009">button.cpp:9</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_a05daeecff20fd0d5a5af084c74f44159"><div class="ttname"><a href="classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159">sensesp::Networking::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition</b> <a href="networking_8cpp_source.html#l00272">networking.cpp:272</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_app_html_a0d691348bffb9c65548ad23cd2188ca9"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_app.html#a0d691348bffb9c65548ad23cd2188ca9">sensesp::SensESPApp::get</a></div><div class="ttdeci">static SensESPApp * get()</div><div class="ttdoc">Get the singleton instance of the SensESPApp.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__app_8cpp_source.html#l00013">sensesp_app.cpp:13</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_app_html_ac86ccc0464d1754824a03eacc869b39c"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_app.html#ac86ccc0464d1754824a03eacc869b39c">sensesp::SensESPApp::get_networking</a></div><div class="ttdeci">Networking * get_networking()</div><div class="ttdef"><b>Definition</b> <a href="sensesp__app_8h_source.html#l00061">sensesp_app.h:61</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_app_html_a05d22a1dee1fbe4c4c4373de61d02090"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_app.html#a05d22a1dee1fbe4c4c4373de61d02090">sensesp::SensESPApp::get</a></div><div class="ttdeci">static std::shared_ptr&lt; SensESPApp &gt; get()</div><div class="ttdoc">Get the singleton instance of the SensESPApp.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__app_8h_source.html#l00057">sensesp_app.h:57</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 <div class="ttc" id="asensesp__app_8h_html"><div class="ttname"><a href="sensesp__app_8h.html">sensesp_app.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

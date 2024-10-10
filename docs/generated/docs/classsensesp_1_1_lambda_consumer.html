@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -119,7 +119,7 @@ $(function(){initNavTree('classsensesp_1_1_lambda_consumer.html',''); initResiza
 <div class="dynheader">
 Inheritance diagram for sensesp::LambdaConsumer&lt; IN &gt;:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_lambda_consumer__inherit__graph.svg" width="214" height="231"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_lambda_consumer__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -138,6 +138,12 @@ Public Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa373b05937ed4922b8646d7f824c3b94" id="r_aa373b05937ed4922b8646d7f824c3b94"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(IN)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa373b05937ed4922b8646d7f824c3b94">function</a></td></tr>
 <tr class="separator:aa373b05937ed4922b8646d7f824c3b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classsensesp_1_1_value_consumer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classsensesp_1_1_value_consumer')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classsensesp_1_1_value_consumer.html">sensesp::ValueConsumer&lt; IN &gt;</a></td></tr>
+<tr class="memitem:adf4f73afc585ac9698d4e352eb7dd9ab inherit pub_types_classsensesp_1_1_value_consumer" id="r_adf4f73afc585ac9698d4e352eb7dd9ab"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_consumer.html#adf4f73afc585ac9698d4e352eb7dd9ab">input_type</a></td></tr>
+<tr class="separator:adf4f73afc585ac9698d4e352eb7dd9ab inherit pub_types_classsensesp_1_1_value_consumer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class IN&gt;<br />
@@ -212,7 +218,8 @@ template&lt;class IN &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Used to set an input of this consumer. It is usually called automatically by a <a class="el" href="classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Used to set an input of this consumer. It is called automatically by a <a class="el" href="classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a> but can also be called manually.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">new_value</td><td>the value of the input </td></tr>
   </table>

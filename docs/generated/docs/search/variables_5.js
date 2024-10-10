@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['filesystem_5f_0',['filesystem_',['../classsensesp_1_1_sens_e_s_p_base_app.html#a7d281f5428ba4b7b2ee4ddbff7bdbbbc',1,'sensesp::SensESPBaseApp']]],
+  ['filesystem_5f_0',['filesystem_',['../classsensesp_1_1_sens_e_s_p_base_app.html#ac26b8439bbc078232619fbaf147d8958',1,'sensesp::SensESPBaseApp']]],
   ['format_5f_1',['format_',['../classsensesp_1_1_select_config.html#a61502da6fda0eba628a64dbc5ac8ff15',1,'sensesp::SelectConfig']]],
-  ['free_5fmemory_5fui_5foutput_5f_2',['free_memory_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#aa2c17964704c41c5d0ef9afae4c0eb03',1,'sensesp::SensESPApp']]],
-  ['freq_3',['freq',['../main_8cpp.html#ae0d22272b68e75d19ac0b80c01f806b6',1,'main.cpp']]],
-  ['freq_5fstart_5ftime_4',['freq_start_time',['../main_8cpp.html#ac5df0eb7a79005d7b9c25e258fa872d0',1,'main.cpp']]],
-  ['fresh_5f_5',['fresh_',['../classsensesp_1_1_zip_base.html#a63d3892c809fd85e099266311b60fb63',1,'sensesp::ZipBase']]],
-  ['function_6',['function',['../classsensesp_1_1_lambda_consumer.html#aa373b05937ed4922b8646d7f824c3b94',1,'sensesp::LambdaConsumer']]]
+  ['free_5fmem_5fsensor_5f_2',['free_mem_sensor_',['../classsensesp_1_1_sens_e_s_p_app.html#a78aa843f9927acb8a3793b1226c60992',1,'sensesp::SensESPApp']]],
+  ['free_5fmemory_5fui_5foutput_5f_3',['free_memory_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a9dab5bb0d69d6a84bbd2697e5ead62df',1,'sensesp::SensESPApp']]],
+  ['fresh_5f_4',['fresh_',['../classsensesp_1_1_zip_base.html#a63d3892c809fd85e099266311b60fb63',1,'sensesp::ZipBase']]],
+  ['function_5',['function',['../classsensesp_1_1_lambda_consumer.html#aa373b05937ed4922b8646d7f824c3b94',1,'sensesp::LambdaConsumer']]]
 ];

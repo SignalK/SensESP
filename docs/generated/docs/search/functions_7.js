@@ -2,7 +2,7 @@ var searchData=
 [
   ['handle_5fbutton_5fpress_0',['handle_button_press',['../classsensesp_1_1_minimal_button_handler.html#af5c9d85beb27eafdec92b2156a14b053',1,'sensesp::MinimalButtonHandler']]],
   ['handle_5fcaptive_5fportal_1',['handle_captive_portal',['../classsensesp_1_1_h_t_t_p_server.html#ae958cabac51c4d74bd4ed7332d78d2e1',1,'sensesp::HTTPServer']]],
-  ['handle_5fconfig_5flist_2',['handle_config_list',['../namespacesensesp.html#ac6469a43cce0796908a0228643b9c7fc',1,'sensesp']]],
+  ['handle_5fconfig_5fitem_5flist_2',['handle_config_item_list',['../namespacesensesp.html#af0839b7c9f26280de6ca6442f86c9f91',1,'sensesp']]],
   ['handle_5flong_5fpress_3',['handle_long_press',['../classsensesp_1_1_button_handler.html#a2bbaa0329081dcb6616a9e09cde9e3da',1,'sensesp::ButtonHandler::handle_long_press()'],['../classsensesp_1_1_minimal_button_handler.html#a07649aaa592687bf86585aa53da26f67',1,'sensesp::MinimalButtonHandler::handle_long_press()']]],
   ['handle_5fresponse_4',['handle_response',['../classsensesp_1_1_s_k_request.html#a272df2b3fe96d053c12597866212ac29',1,'sensesp::SKRequest']]],
   ['handle_5fvery_5flong_5fpress_5',['handle_very_long_press',['../classsensesp_1_1_minimal_button_handler.html#ae0765a640028979faa385b57ba6374df',1,'sensesp::MinimalButtonHandler']]],

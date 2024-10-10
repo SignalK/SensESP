@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -106,6 +106,7 @@ $(function(){initNavTree('classsensesp_1_1_stream_line_producer.html',''); initR
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classsensesp_1_1_stream_line_producer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">sensesp::StreamLineProducer Class Reference</div></div>
@@ -124,8 +125,8 @@ Inheritance diagram for sensesp::StreamLineProducer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa169afca5584959e7ab9cbdef75a4771" id="r_aa169afca5584959e7ab9cbdef75a4771"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa169afca5584959e7ab9cbdef75a4771">StreamLineProducer</a> (Stream *stream, int max_line_length=256)</td></tr>
-<tr class="separator:aa169afca5584959e7ab9cbdef75a4771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92aa7aeef639dc969cbf0ec5b9d338bc" id="r_a92aa7aeef639dc969cbf0ec5b9d338bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92aa7aeef639dc969cbf0ec5b9d338bc">StreamLineProducer</a> (Stream *stream, reactesp::EventLoop *<a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>=<a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>(), int max_line_length=256)</td></tr>
+<tr class="separator:a92aa7aeef639dc969cbf0ec5b9d338bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; String &gt;</a></td></tr>
 <tr class="memitem:aa29790dfe4e22903e061662be0fc7f68 inherit pub_methods_classsensesp_1_1_value_producer" id="r_aa29790dfe4e22903e061662be0fc7f68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#aa29790dfe4e22903e061662be0fc7f68">ValueProducer</a> ()</td></tr>
 <tr class="separator:aa29790dfe4e22903e061662be0fc7f68 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,24 +134,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a84103531d1d430e29cf3dd6a14eff977 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a438390eae6bba056ecf4ab329cb5c8e9 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a438390eae6bba056ecf4ab329cb5c8e9"><td class="memItemLeft" align="right" valign="top">virtual const String &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9">get</a> () const</td></tr>
 <tr class="separator:a438390eae6bba056ecf4ab329cb5c8e9 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d2ecdd23525edbf82eb29eb851a9d25 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a0d2ecdd23525edbf82eb29eb851a9d25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a0d2ecdd23525edbf82eb29eb851a9d25">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; String &gt; *consumer)</td></tr>
-<tr class="separator:a0d2ecdd23525edbf82eb29eb851a9d25 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50376efbd59e6e5fb51d9acd04daa41e inherit pub_methods_classsensesp_1_1_value_producer" id="r_a50376efbd59e6e5fb51d9acd04daa41e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a50376efbd59e6e5fb51d9acd04daa41e">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; String &gt; &amp;consumer)</td></tr>
-<tr class="separator:a50376efbd59e6e5fb51d9acd04daa41e inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fd97cd5c861c29aff746a7f7157c7bf inherit pub_methods_classsensesp_1_1_value_producer" id="r_a9fd97cd5c861c29aff746a7f7157c7bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a9fd97cd5c861c29aff746a7f7157c7bf">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; CT &gt; *consumer)</td></tr>
-<tr class="memdesc:a9fd97cd5c861c29aff746a7f7157c7bf inherit pub_methods_classsensesp_1_1_value_producer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a producer to a consumer of a different type.  <br /></td></tr>
-<tr class="separator:a9fd97cd5c861c29aff746a7f7157c7bf inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cef93de34649f2cac040d89e8530a33 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a1cef93de34649f2cac040d89e8530a33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a1cef93de34649f2cac040d89e8530a33">connect_to</a> (<a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; CT &gt; &amp;consumer)</td></tr>
-<tr class="separator:a1cef93de34649f2cac040d89e8530a33 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42499a248a44a67078e5bf2c7cc1d863 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a42499a248a44a67078e5bf2c7cc1d863"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; String, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a42499a248a44a67078e5bf2c7cc1d863">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; String, T2 &gt; *consumer_producer)</td></tr>
-<tr class="separator:a42499a248a44a67078e5bf2c7cc1d863 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cfe148ec2d5f2c9f4164bbc3ec48803 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a2cfe148ec2d5f2c9f4164bbc3ec48803"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; String, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a2cfe148ec2d5f2c9f4164bbc3ec48803">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; String, T2 &gt; &amp;consumer_producer)</td></tr>
-<tr class="separator:a2cfe148ec2d5f2c9f4164bbc3ec48803 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afff20759f042a3fb1c16ef6f7ed59609 inherit pub_methods_classsensesp_1_1_value_producer" id="r_afff20759f042a3fb1c16ef6f7ed59609"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#afff20759f042a3fb1c16ef6f7ed59609">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; *consumer_producer)</td></tr>
-<tr class="memdesc:afff20759f042a3fb1c16ef6f7ed59609 inherit pub_methods_classsensesp_1_1_value_producer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a producer to a transform with a different input type.  <br /></td></tr>
-<tr class="separator:afff20759f042a3fb1c16ef6f7ed59609 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b9610c57ffb0417ed965fe7ee00063b inherit pub_methods_classsensesp_1_1_value_producer" id="r_a7b9610c57ffb0417ed965fe7ee00063b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a7b9610c57ffb0417ed965fe7ee00063b">connect_to</a> (<a class="el" href="classsensesp_1_1_transform.html">Transform</a>&lt; TT, T2 &gt; &amp;consumer_producer)</td></tr>
-<tr class="separator:a7b9610c57ffb0417ed965fe7ee00063b inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8eadde061d78ef178ee500ca3069068 inherit pub_methods_classsensesp_1_1_value_producer" id="r_aa8eadde061d78ef178ee500ca3069068"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt; std::is_base_of&lt; <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; typenameVConsumer::input_type &gt;, VConsumer &gt;::value &amp;&amp;std::is_convertible&lt; String, typenameVConsumer::input_type &gt;::value, std::shared_ptr&lt; VConsumer &gt; &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#aa8eadde061d78ef178ee500ca3069068">connect_to</a> (std::shared_ptr&lt; VConsumer &gt; consumer)</td></tr>
+<tr class="memdesc:aa8eadde061d78ef178ee500ca3069068 inherit pub_methods_classsensesp_1_1_value_producer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a producer to a transform with a different input type.  <br /></td></tr>
+<tr class="separator:aa8eadde061d78ef178ee500ca3069068 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ade04273d35e9df34027dcdbfee7256 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a6ade04273d35e9df34027dcdbfee7256"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt; std::is_base_of&lt; <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; typenameVConsumer::input_type &gt;, VConsumer &gt;::value &amp;&amp;std::is_convertible&lt; String, typenameVConsumer::input_type &gt;::value, VConsumer * &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a6ade04273d35e9df34027dcdbfee7256">connect_to</a> (VConsumer *consumer)</td></tr>
+<tr class="separator:a6ade04273d35e9df34027dcdbfee7256 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3135c4967cbed2048b76145b6dee78d6 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a3135c4967cbed2048b76145b6dee78d6"><td class="memItemLeft" align="right" valign="top">std::enable_if&lt; std::is_base_of&lt; <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; typenameVConsumer::input_type &gt;, VConsumer &gt;::value &amp;&amp;std::is_convertible&lt; String, typenameVConsumer::input_type &gt;::value, VConsumer * &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a3135c4967cbed2048b76145b6dee78d6">connect_to</a> (VConsumer &amp;consumer)</td></tr>
+<tr class="separator:a3135c4967cbed2048b76145b6dee78d6 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f5f0259d0d3cd9a0ed17d657cac04e2 inherit pub_methods_classsensesp_1_1_value_producer" id="r_a4f5f0259d0d3cd9a0ed17d657cac04e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a> (const String &amp;new_value)</td></tr>
 <tr class="separator:a4f5f0259d0d3cd9a0ed17d657cac04e2 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_observable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_observable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_observable.html">sensesp::Observable</a></td></tr>
@@ -164,10 +154,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1bd8a207de69d386a7f05c28544df109 inherit pub_methods_classsensesp_1_1_observable" id="r_a1bd8a207de69d386a7f05c28544df109"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_observable.html#a1bd8a207de69d386a7f05c28544df109">attach</a> (std::function&lt; void()&gt; observer)</td></tr>
 <tr class="separator:a1bd8a207de69d386a7f05c28544df109 inherit pub_methods_classsensesp_1_1_observable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae59ea1f7812967cc75f5d2f3d66009c9" id="r_ae59ea1f7812967cc75f5d2f3d66009c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae59ea1f7812967cc75f5d2f3d66009c9">receive_line</a> ()</td></tr>
+<tr class="separator:ae59ea1f7812967cc75f5d2f3d66009c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:afca1f464e89f995a90dab4f84c35ac26" id="r_afca1f464e89f995a90dab4f84c35ac26"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afca1f464e89f995a90dab4f84c35ac26">max_line_length_</a></td></tr>
 <tr class="separator:afca1f464e89f995a90dab4f84c35ac26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abae34d05c1ab338b0931b84988426c73" id="r_abae34d05c1ab338b0931b84988426c73"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abae34d05c1ab338b0931b84988426c73">buf_pos</a> = 0</td></tr>
+<tr class="separator:abae34d05c1ab338b0931b84988426c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ca95e4956c821a5f57e2b05c8583229" id="r_a5ca95e4956c821a5f57e2b05c8583229"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ca95e4956c821a5f57e2b05c8583229">buf_</a></td></tr>
 <tr class="separator:a5ca95e4956c821a5f57e2b05c8583229"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aee75e10b44f7dfe812b97079af92da" id="r_a3aee75e10b44f7dfe812b97079af92da"><td class="memItemLeft" align="right" valign="top">Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3aee75e10b44f7dfe812b97079af92da">stream_</a></td></tr>
@@ -175,16 +172,16 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a50a80ab8e352dcb31d520917f65708fc" id="r_a50a80ab8e352dcb31d520917f65708fc"><td class="memItemLeft" align="right" valign="top">reactesp::StreamEvent *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50a80ab8e352dcb31d520917f65708fc">read_event_</a></td></tr>
 <tr class="separator:a50a80ab8e352dcb31d520917f65708fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; String &gt;</a></td></tr>
-<tr class="memitem:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer" id="r_a08032702dc65bfc839eeeb5b006195d4"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a08032702dc65bfc839eeeb5b006195d4">output</a></td></tr>
-<tr class="separator:a08032702dc65bfc839eeeb5b006195d4 inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ca5ef060f2f824447afa0ff4d0c3de inherit pro_attribs_classsensesp_1_1_value_producer" id="r_a86ca5ef060f2f824447afa0ff4d0c3de"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a></td></tr>
+<tr class="separator:a86ca5ef060f2f824447afa0ff4d0c3de inherit pro_attribs_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a> that reads from a Stream and produces a full line. </p>
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00035">35</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00034">34</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa169afca5584959e7ab9cbdef75a4771" name="aa169afca5584959e7ab9cbdef75a4771"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa169afca5584959e7ab9cbdef75a4771">&#9670;&#160;</a></span>StreamLineProducer()</h2>
+<a id="a92aa7aeef639dc969cbf0ec5b9d338bc" name="a92aa7aeef639dc969cbf0ec5b9d338bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92aa7aeef639dc969cbf0ec5b9d338bc">&#9670;&#160;</a></span>StreamLineProducer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,6 +197,11 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">reactesp::EventLoop *</td>          <td class="paramname"><span class="paramname"><em>event_loop</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>max_line_length</em></span><span class="paramdefsep"> = </span><span class="paramdefval">256</span>&#160;)</td>
         </tr>
       </table>
@@ -210,11 +212,49 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00037">37</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00036">36</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_stream_line_producer_aa169afca5584959e7ab9cbdef75a4771_cgraph.svg" width="100%" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_stream_line_producer_a92aa7aeef639dc969cbf0ec5b9d338bc_cgraph.svg" width="100%" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae59ea1f7812967cc75f5d2f3d66009c9" name="ae59ea1f7812967cc75f5d2f3d66009c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae59ea1f7812967cc75f5d2f3d66009c9">&#9670;&#160;</a></span>receive_line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sensesp::StreamLineProducer::receive_line </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00052">52</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_stream_line_producer_ae59ea1f7812967cc75f5d2f3d66009c9_cgraph.svg" width="418" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_stream_line_producer_ae59ea1f7812967cc75f5d2f3d66009c9_icgraph.svg" width="452" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -240,7 +280,31 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00063">63</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00048">48</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+
+</div>
+</div>
+<a id="abae34d05c1ab338b0931b84988426c73" name="abae34d05c1ab338b0931b84988426c73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abae34d05c1ab338b0931b84988426c73">&#9670;&#160;</a></span>buf_pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sensesp::StreamLineProducer::buf_pos = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00047">47</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>
@@ -264,7 +328,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00062">62</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00046">46</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>
@@ -288,7 +352,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00065">65</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00050">50</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>
@@ -312,7 +376,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00064">64</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00049">49</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>

@@ -47,7 +47,7 @@
   </g>
 </defs>
 <script type="application/ecmascript">
-var viewWidth = 505;
+var viewWidth = 662;
 var viewHeight = 88;
 var sectionId = 'dynsection-2';
 </script>
@@ -68,9 +68,9 @@ var sectionId = 'dynsection-2';
 <g id="Node000002" class="node">
 <title>Node2</title>
 <g id="a_Node000002"><a xlink:href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="290,-79.5 168.25,-79.5 168.25,-49 290,-49 290,-79.5"/>
-<text text-anchor="start" x="176.25" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::ValueProducer</text>
-<text text-anchor="middle" x="229.12" y="-54.75" font-family="Helvetica,sans-Serif" font-size="10.00">::emit</text>
+<polygon fill="white" stroke="#666666" points="280.25,-77.5 158.5,-77.5 158.5,-47 280.25,-47 280.25,-77.5"/>
+<text text-anchor="start" x="166.5" y="-64" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::ValueProducer</text>
+<text text-anchor="middle" x="219.38" y="-52.75" font-family="Helvetica,sans-Serif" font-size="10.00">::emit</text>
 </a>
 </g>
 </g>
@@ -78,18 +78,17 @@ var sectionId = 'dynsection-2';
 <g id="edge1_Node000001_Node000002" class="edge">
 <title>Node1&#45;&gt;Node2</title>
 <g id="a_edge1_Node000001_Node000002"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M122.6,-48.35C133.65,-50.01 145.28,-51.76 156.61,-53.47"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="155.91,-56.91 166.32,-54.93 156.95,-49.98 155.91,-56.91"/>
+<path fill="none" stroke="#63b8ff" d="M122.61,-48.14C130.54,-49.31 138.73,-50.52 146.83,-51.71"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="146.27,-55.17 156.68,-53.16 147.29,-48.24 146.27,-55.17"/>
 </a>
 </g>
 </g>
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="classsensesp_1_1_sens_e_s_p_base_app.html#a9068b65bf976f1d1bd5faf1e3126e8ff" target="_top" xlink:title="Get the event loop object from the singleton SensESPBaseApp instance.">
-<polygon fill="white" stroke="#666666" points="299.75,-30.5 158.5,-30.5 158.5,0 299.75,0 299.75,-30.5"/>
-<text text-anchor="start" x="166.5" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SensESPBaseApp</text>
-<text text-anchor="middle" x="229.12" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">::get_event_loop</text>
+<g id="a_Node000004"><a xlink:href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="272.38,-27.88 166.38,-27.88 166.38,-8.62 272.38,-8.62 272.38,-27.88"/>
+<text text-anchor="middle" x="219.38" y="-14.38" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::event_loop</text>
 </a>
 </g>
 </g>
@@ -97,8 +96,8 @@ var sectionId = 'dynsection-2';
 <g id="edge3_Node000001_Node000004" class="edge">
 <title>Node1&#45;&gt;Node4</title>
 <g id="a_edge3_Node000001_Node000004"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M122.6,-30.52C130.56,-29.37 138.83,-28.17 147.06,-26.98"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="147.35,-30.47 156.75,-25.58 146.35,-23.55 147.35,-30.47"/>
+<path fill="none" stroke="#63b8ff" d="M122.61,-31.13C133.14,-29.72 144.11,-28.24 154.72,-26.81"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="155.11,-30.29 164.55,-25.49 154.17,-23.35 155.11,-30.29"/>
 </a>
 </g>
 </g>
@@ -106,9 +105,9 @@ var sectionId = 'dynsection-2';
 <g id="Node000003" class="node">
 <title>Node3</title>
 <g id="a_Node000003"><a xlink:href="classsensesp_1_1_observable.html#ab86d00fed8fb85b4c76cb9397667ece9" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="470.25,-79.5 362,-79.5 362,-49 470.25,-49 470.25,-79.5"/>
-<text text-anchor="start" x="370" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::Observable</text>
-<text text-anchor="middle" x="416.12" y="-54.75" font-family="Helvetica,sans-Serif" font-size="10.00">::notify</text>
+<polygon fill="white" stroke="#666666" points="441,-79.5 332.75,-79.5 332.75,-49 441,-49 441,-79.5"/>
+<text text-anchor="start" x="340.75" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::Observable</text>
+<text text-anchor="middle" x="386.88" y="-54.75" font-family="Helvetica,sans-Serif" font-size="10.00">::notify</text>
 </a>
 </g>
 </g>
@@ -116,17 +115,18 @@ var sectionId = 'dynsection-2';
 <g id="edge2_Node000002_Node000003" class="edge">
 <title>Node2&#45;&gt;Node3</title>
 <g id="a_edge2_Node000002_Node000003"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M290.44,-64.25C309.66,-64.25 330.99,-64.25 350.5,-64.25"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="350.23,-67.75 360.23,-64.25 350.23,-60.75 350.23,-67.75"/>
+<path fill="none" stroke="#63b8ff" d="M280.59,-62.98C293.67,-63.14 307.57,-63.3 320.83,-63.46"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="320.72,-66.96 330.77,-63.58 320.81,-59.96 320.72,-66.96"/>
 </a>
 </g>
 </g>
 <!-- Node5 -->
 <g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_Node000005"><a xlink:href="classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6" target="_top" xlink:title="Get the singleton instance of the SensESPBaseApp.">
-<polygon fill="white" stroke="#666666" points="496.5,-24.88 335.75,-24.88 335.75,-5.63 496.5,-5.63 496.5,-24.88"/>
-<text text-anchor="middle" x="416.12" y="-11.38" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SensESPBaseApp::get</text>
+<g id="a_Node000005"><a xlink:href="classsensesp_1_1_sens_e_s_p_base_app.html#a5ac3b07550aed05e92aeb2a536ea0739" target="_top" xlink:title="Get the event loop object from the singleton SensESPBaseApp instance.">
+<polygon fill="white" stroke="#666666" points="457.5,-30.5 316.25,-30.5 316.25,0 457.5,0 457.5,-30.5"/>
+<text text-anchor="start" x="324.25" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SensESPBaseApp</text>
+<text text-anchor="middle" x="386.88" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">::get_event_loop</text>
 </a>
 </g>
 </g>
@@ -134,8 +134,26 @@ var sectionId = 'dynsection-2';
 <g id="edge4_Node000004_Node000005" class="edge">
 <title>Node4&#45;&gt;Node5</title>
 <g id="a_edge4_Node000004_Node000005"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M300.07,-15.25C307.92,-15.25 316.01,-15.25 324.09,-15.25"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="323.96,-18.75 333.96,-15.25 323.96,-11.75 323.96,-18.75"/>
+<path fill="none" stroke="#63b8ff" d="M272.74,-17.3C282.93,-17.12 293.84,-16.92 304.71,-16.72"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="304.54,-20.23 314.47,-16.54 304.41,-13.23 304.54,-20.23"/>
+</a>
+</g>
+</g>
+<!-- Node6 -->
+<g id="Node000006" class="node">
+<title>Node6</title>
+<g id="a_Node000006"><a xlink:href="classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612" target="_top" xlink:title="Get the singleton instance of the SensESPBaseApp.">
+<polygon fill="white" stroke="#666666" points="654.25,-24.88 493.5,-24.88 493.5,-5.63 654.25,-5.63 654.25,-24.88"/>
+<text text-anchor="middle" x="573.88" y="-11.38" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SensESPBaseApp::get</text>
+</a>
+</g>
+</g>
+<!-- Node5&#45;&gt;Node6 -->
+<g id="edge5_Node000005_Node000006" class="edge">
+<title>Node5&#45;&gt;Node6</title>
+<g id="a_edge5_Node000005_Node000006"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M457.82,-15.25C465.67,-15.25 473.76,-15.25 481.84,-15.25"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="481.71,-18.75 491.71,-15.25 481.71,-11.75 481.71,-18.75"/>
 </a>
 </g>
 </g>

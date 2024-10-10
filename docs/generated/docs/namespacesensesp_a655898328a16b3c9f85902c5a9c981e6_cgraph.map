@@ -1,27 +1,50 @@
 <map id="sensesp::ExecuteWebSocketTask" name="sensesp::ExecuteWebSocketTask">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,46,227,72"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_s_k_w_s_client.html#a71c4787c20640979d0f21e722fdf161a" title=" " alt="" coords="275,5,427,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,43,259,36,260,41,211,48"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_s_k_w_s_client.html#ad7f3e4ebde28b680f480cd62860c01b1" title=" " alt="" coords="275,71,427,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,70,260,76,259,81,215,75"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_s_k_delta_queue.html#a739868615cbe7d97bdc30b7c42c3e9f9" title=" " alt="" coords="504,5,669,46"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="426,68,495,48,496,53,427,73"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_s_k_delta_queue.html#a26dc17fc9fa31804552240f81efa35ac" title=" " alt="" coords="504,71,669,111"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="427,88,488,88,488,94,427,94"/>
-<area shape="rect" id="Node000012" href="$classsensesp_1_1_task_queue_producer.html#ae3fc9c50c0c606a9ba9e5a8826d32a37" title=" " alt="" coords="475,136,697,161"/>
-<area shape="poly" id="edge13_Node000003_Node000012" title=" " alt="" coords="428,108,476,120,511,129,510,134,474,126,427,114"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_s_k_delta_queue.html#a8c79cbfdc595e971219eb12e99387ea7" title=" " alt="" coords="757,71,922,111"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="669,44,744,64,742,69,667,49"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_s_k_delta_queue.html#acf8751c8a6f917b284aab75d480eda43" title=" " alt="" coords="757,5,922,46"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="669,23,742,23,742,28,669,28"/>
-<area shape="poly" id="edge11_Node000007_Node000005" title=" " alt="" coords="669,88,742,88,742,94,669,94"/>
-<area shape="poly" id="edge12_Node000007_Node000006" title=" " alt="" coords="667,67,742,48,744,53,669,73"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a928c309a2dc17f82edefe9e5bc7ef33d" title="Get the current hostname." alt="" coords="745,136,934,177"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="669,109,744,129,742,134,667,115"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a2df22469c69a8a1234ab673386f574d6" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="982,94,1196,120"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="934,135,1005,121,1006,126,935,140"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_value_producer.html#a438390eae6bba056ecf4ab329cb5c8e9" title=" " alt="" coords="995,144,1183,169"/>
-<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="934,154,979,154,979,159,934,159"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_sens_e_s_p_base_app.html#ade8960b96e439f4cc0b387c312999dd5" title="Get the hostname observable object." alt="" coords="995,193,1183,234"/>
-<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="932,175,983,187,982,192,930,180"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,412,227,437"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_s_k_w_s_client.html#a71c4787c20640979d0f21e722fdf161a" title=" " alt="" coords="275,349,427,390"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,408,259,388,260,394,175,414"/>
+<area shape="rect" id="Node000019" href="$classsensesp_1_1_s_k_w_s_client.html#ad7f3e4ebde28b680f480cd62860c01b1" title=" " alt="" coords="275,457,427,498"/>
+<area shape="poly" id="edge27_Node000001_Node000019" title=" " alt="" coords="177,435,260,454,259,460,175,440"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698" title=" " alt="" coords="475,457,628,498"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="389,388,476,437,497,448,494,452,474,441,387,393"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_s_k_w_s_client.html#a8f7782736ab42e34692f65dd85024189" title=" " alt="" coords="476,292,628,333"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="424,346,463,335,464,340,425,351"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f" title=" " alt="" coords="899,284,1051,325"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="427,361,628,342,883,313,884,318,629,347,427,366"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26" title=" " alt="" coords="1402,316,1555,357"/>
+<area shape="poly" id="edge22_Node000002_Node000007" title=" " alt="" coords="428,382,578,406,666,414,753,418,976,418,1087,412,1198,397,1300,378,1386,358,1387,363,1301,383,1199,403,1088,417,976,423,753,423,665,420,577,411,427,388"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52" title=" " alt="" coords="676,169,833,210"/>
+<area shape="poly" id="edge15_Node000002_Node000014" title=" " alt="" coords="359,348,376,317,401,279,434,242,474,213,519,194,567,183,616,178,661,178,661,183,616,183,568,188,521,199,476,217,438,246,406,282,381,319,364,350"/>
+<area shape="rect" id="Node000018" href="$classsensesp_1_1_s_k_w_s_client.html#ab063bdb9564b0c6c564bd1d5573a9631" title=" " alt="" coords="476,227,628,267"/>
+<area shape="poly" id="edge23_Node000002_Node000018" title=" " alt="" coords="376,347,420,313,474,278,484,272,487,277,476,283,423,317,379,351"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040" title=" " alt="" coords="1148,233,1300,274"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1051,286,1132,270,1133,275,1052,291"/>
+<area shape="poly" id="edge14_Node000005_Node000007" title=" " alt="" coords="1051,306,1386,328,1386,333,1051,312"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27" title="Save the object to a persistent storage." alt="" coords="1125,71,1323,111"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="999,281,1185,120,1189,124,1002,286"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1290,272,1400,308,1398,313,1288,277"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_task_queue_producer.html#ae3fc9c50c0c606a9ba9e5a8826d32a37" title=" " alt="" coords="1626,436,1848,461"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1528,355,1692,426,1690,431,1526,360"/>
+<area shape="rect" id="Node000010" href="$namespacesensesp.html#adad24461f43358c45017cf1cb816ca60" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="1661,74,1813,100"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="1311,109,1380,120,1479,127,1577,120,1674,102,1675,107,1578,126,1479,133,1379,126,1310,115"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_file_system_saveable.html#ad0233f7895b5c8915108399420c7cf0b" title=" " alt="" coords="1379,5,1578,46"/>
+<area shape="poly" id="edge11_Node000009_Node000012" title=" " alt="" coords="1305,67,1381,48,1382,53,1307,73"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_serializable.html#a8da15a9036f2333f1f3beb4207a06477" title=" " alt="" coords="1406,71,1551,111"/>
+<area shape="poly" id="edge13_Node000009_Node000013" title=" " alt="" coords="1324,88,1390,88,1390,94,1324,94"/>
+<area shape="rect" id="Node000011" href="$namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf" title="SHA&#45;1 hash function." alt="" coords="1896,74,2004,100"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="1814,84,1881,84,1881,90,1814,90"/>
+<area shape="poly" id="edge12_Node000012_Node000010" title=" " alt="" coords="1568,44,1665,67,1664,73,1566,49"/>
+<area shape="poly" id="edge19_Node000014_Node000005" title=" " alt="" coords="796,208,922,274,919,279,794,213"/>
+<area shape="poly" id="edge21_Node000014_Node000007" title=" " alt="" coords="833,174,880,168,1010,158,1113,157,1162,162,1213,174,1269,192,1332,219,1366,237,1397,259,1448,303,1445,307,1394,263,1363,242,1330,224,1267,197,1211,179,1161,168,1112,162,1010,163,881,174,833,179"/>
+<area shape="poly" id="edge20_Node000014_Node000009" title=" " alt="" coords="788,167,831,144,880,124,938,110,997,100,1109,90,1110,95,998,106,939,116,881,130,833,149,790,171"/>
+<area shape="rect" id="Node000015" href="$namespacesensesp.html#a270290236513f91972b435ad45c4f70b" title="Generate a random UUIDv4 string." alt="" coords="892,184,1058,209"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="833,189,876,191,876,196,833,195"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16" title="Get the current hostname." alt="" coords="881,13,1069,54"/>
+<area shape="poly" id="edge17_Node000014_Node000016" title=" " alt="" coords="772,167,818,120,879,71,901,59,904,63,882,76,822,124,776,171"/>
+<area shape="rect" id="Node000017" href="$classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="1117,21,1331,46"/>
+<area shape="poly" id="edge18_Node000016_Node000017" title=" " alt="" coords="1069,31,1101,31,1101,36,1069,36"/>
+<area shape="poly" id="edge24_Node000018_Node000006" title=" " alt="" coords="628,245,1132,250,1132,255,628,250"/>
+<area shape="poly" id="edge26_Node000018_Node000007" title=" " alt="" coords="612,265,735,303,808,321,881,334,1018,346,1156,349,1283,347,1386,341,1386,346,1283,352,1156,355,1018,351,880,339,806,326,733,308,610,270"/>
+<area shape="poly" id="edge25_Node000018_Node000014" title=" " alt="" coords="625,224,665,212,666,217,627,229"/>
+<area shape="poly" id="edge28_Node000019_Node000003" title=" " alt="" coords="428,475,459,475,459,480,428,480"/>
+<area shape="poly" id="edge29_Node000019_Node000008" title=" " alt="" coords="425,496,475,507,614,528,753,532,1225,532,1351,525,1475,507,1586,485,1673,463,1675,468,1587,490,1476,512,1352,530,1226,538,753,538,613,533,475,512,424,501"/>
 </map>

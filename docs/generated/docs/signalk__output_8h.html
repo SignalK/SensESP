@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -107,11 +107,14 @@ $(function(){initNavTree('signalk__output_8h.html',''); initResizable(true); });
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">signalk_output.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="transform_8h_source.html">sensesp/transforms/transform.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &quot;<a class="el" href="transform_8h_source.html">sensesp/transforms/transform.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="config__item_8h_source.html">sensesp/ui/config_item.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="signalk__emitter_8h_source.html">signalk_emitter.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for signalk_output.h:</div>
@@ -121,7 +124,7 @@ Include dependency graph for signalk_output.h:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="signalk__output_8h__dep__incl.svg" width="586" height="303"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="signalk__output_8h__dep__incl.svg" width="546" height="303"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="signalk__output_8h_source.html">Go to the source code of this file.</a></p>
@@ -153,6 +156,15 @@ Typedefs</h2></td></tr>
 <tr class="separator:af79c1d21ff7b9cc12fa9fb723524df06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8df9d8b457d5e0cc1bc1c31a7bbc2370" id="r_a8df9d8b457d5e0cc1bc1c31a7bbc2370"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classsensesp_1_1_s_k_output.html">SKOutput</a>&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a8df9d8b457d5e0cc1bc1c31a7bbc2370">sensesp::SKOutputString</a></td></tr>
 <tr class="separator:a8df9d8b457d5e0cc1bc1c31a7bbc2370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a56ae605c426cb53e4323c917b1b4a681" id="r_a56ae605c426cb53e4323c917b1b4a681"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a56ae605c426cb53e4323c917b1b4a681"><td class="memTemplItemLeft" align="right" valign="top">const String&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a56ae605c426cb53e4323c917b1b4a681">sensesp::ConfigSchema</a> (const <a class="el" href="classsensesp_1_1_s_k_output.html">SKOutput</a>&lt; T &gt; &amp;obj)</td></tr>
+<tr class="separator:a56ae605c426cb53e4323c917b1b4a681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa70e0aa9728ed1a5f99dd28f7d54d098" id="r_aa70e0aa9728ed1a5f99dd28f7d54d098"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa70e0aa9728ed1a5f99dd28f7d54d098"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aa70e0aa9728ed1a5f99dd28f7d54d098">sensesp::ConfigRequiresRestart</a> (const <a class="el" href="classsensesp_1_1_s_k_output.html">SKOutput</a>&lt; T &gt; &amp;obj)</td></tr>
+<tr class="separator:aa70e0aa9728ed1a5f99dd28f7d54d098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

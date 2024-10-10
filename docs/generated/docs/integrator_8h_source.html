@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -110,83 +110,80 @@ $(function(){initNavTree('integrator_8h_source.html',''); initResizable(true); }
 <a href="integrator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SENSESP_TRANSFORMS_INTEGRATOR_H_</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SENSESP_TRANSFORMS_INTEGRATOR_H_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="transform_8h.html">transform.h</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> INTEGRATOR_SCHEMA[] <a class="code hl_variable" href="css__bootstrap_8h.html#ade1d7051ddbe6cc839076fcd0de2203a">PROGMEM</a> = R<span class="stringliteral">&quot;({</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="stringliteral">    &quot;type&quot;: &quot;object&quot;,</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="stringliteral">    &quot;properties&quot;: {</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="stringliteral">        &quot;k&quot;: { &quot;title&quot;: &quot;Multiplier&quot;, &quot;type&quot;: &quot;number&quot; }</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="stringliteral">    }</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="stringliteral">  })&quot;;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> C, <span class="keyword">class</span> P&gt;</div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classsensesp_1_1_integrator.html">Integrator</a> : <span class="keyword">public</span> <a class="code hl_class" href="classsensesp_1_1_transform.html">Transform</a>&lt;C, P&gt; {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="config__item_8h.html">sensesp/ui/config_item.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="transform_8h.html">transform.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> C, <span class="keyword">class</span> P&gt;</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html">   19</a></span><span class="keyword">class </span><a class="code hl_class" href="classsensesp_1_1_integrator.html">Integrator</a> : <span class="keyword">public</span> <a class="code hl_class" href="classsensesp_1_1_transform.html">Transform</a>&lt;C, P&gt; {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a40ed521f67dabcb652053f645fa9699a">   28</a></span>  <a class="code hl_function" href="classsensesp_1_1_integrator.html#a40ed521f67dabcb652053f645fa9699a">Integrator</a>(P k = 1, P value = 0, String config_path = <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>      : <a class="code hl_class" href="classsensesp_1_1_transform.html">Transform</a>&lt;C, P&gt;(config_path), k{k}, value{value} {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(value);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  }</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a40ed521f67dabcb652053f645fa9699a">   34</a></span>  <a class="code hl_function" href="classsensesp_1_1_integrator.html#a40ed521f67dabcb652053f645fa9699a">Integrator</a>(P k = 1, P value = 0, String config_path = <span class="stringliteral">&quot;&quot;</span>)</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      : <a class="code hl_class" href="classsensesp_1_1_transform.html">Transform</a>&lt;C, P&gt;(config_path), k{k}, value{value} {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">load_configuration</a>();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(value);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a3e26c3408b54481664f4a5a9812088b0">   34</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_integrator.html#a3e26c3408b54481664f4a5a9812088b0">set</a>(<span class="keyword">const</span> C&amp; input) <span class="keyword">override</span> <span class="keyword">final</span> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    value += input * k;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(value);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  }</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a3e26c3408b54481664f4a5a9812088b0">   40</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_integrator.html#a3e26c3408b54481664f4a5a9812088b0">set</a>(<span class="keyword">const</span> C&amp; input) <span class="keyword">override</span> <span class="keyword">final</span> {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    value += input * k;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(value);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a838476cb3028fd4578884619c369b13e">   39</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_integrator.html#a838476cb3028fd4578884619c369b13e">reset</a>() { value = 0; }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a2020a2c2a547d342f1889da1bd8732e4">   41</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_integrator.html#a2020a2c2a547d342f1889da1bd8732e4">to_json</a>(JsonObject&amp; doc) <span class="keyword">override</span> <span class="keyword">final</span> {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    doc[<span class="stringliteral">&quot;k&quot;</span>] = k;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  }</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a838476cb3028fd4578884619c369b13e">   45</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_integrator.html#a838476cb3028fd4578884619c369b13e">reset</a>() { value = 0; }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a6eddc7c586e9621cd28348258df297e9">   47</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_integrator.html#a6eddc7c586e9621cd28348258df297e9">get_configuration</a>(JsonObject&amp; doc) <span class="keyword">override</span> <span class="keyword">final</span> {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    doc[<span class="stringliteral">&quot;k&quot;</span>] = k;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  }</div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#ade592cf01bdff19ebbfc655772c86b27">   45</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_integrator.html#ade592cf01bdff19ebbfc655772c86b27">from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) <span class="keyword">override</span> <span class="keyword">final</span> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;k&quot;</span>].is&lt;P&gt;()) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    k = config[<span class="stringliteral">&quot;k&quot;</span>];</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
 </div>
-<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a468a9557aa1dc03bd5dc54b46f29b2a6">   50</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_integrator.html#a468a9557aa1dc03bd5dc54b46f29b2a6">set_configuration</a>(<span class="keyword">const</span> JsonObject&amp; config) <span class="keyword">override</span> <span class="keyword">final</span> {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">if</span> (!config[<span class="stringliteral">&quot;k&quot;</span>].is&lt;P&gt;()) {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    k = config[<span class="stringliteral">&quot;k&quot;</span>];</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  P k;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  P value = 0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
 </div>
-<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classsensesp_1_1_integrator.html#a60fe4adc10c9bfcd36d756f1084df9d8">   57</a></span>  <span class="keyword">virtual</span> String <a class="code hl_function" href="classsensesp_1_1_integrator.html#a60fe4adc10c9bfcd36d756f1084df9d8">get_config_schema</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">return</span> FPSTR(INTEGRATOR_SCHEMA);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a5ec08cfccc84898a10dfe02ca14222dc">   59</a></span><span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_integrator.html">Integrator&lt;T, T&gt;</a>&amp; obj) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordflow">return</span> R<span class="stringliteral">&quot;({&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;k&quot;:{&quot;title&quot;:&quot;Multiplier&quot;,&quot;type&quot;:&quot;number&quot;}}})&quot;;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="stringliteral">}</span></div>
 </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  P k;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  P value = 0;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
-</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a1fdc54cba3884870c3d959959a4b83be">   63</a></span><span class="stringliteral"></span><span class="keyword">typedef</span> <a class="code hl_class" href="classsensesp_1_1_integrator.html">Integrator&lt;float, float&gt;</a> <a class="code hl_typedef" href="namespacesensesp.html#a1fdc54cba3884870c3d959959a4b83be">FloatIntegrator</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a9daa7a02f729a177eef406795c1c7459">   64</a></span><span class="keyword">typedef</span> <a class="code hl_class" href="classsensesp_1_1_integrator.html">Integrator&lt;int, int&gt;</a> <a class="code hl_typedef" href="namespacesensesp.html#a9daa7a02f729a177eef406795c1c7459">Accumulator</a>;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a1fdc54cba3884870c3d959959a4b83be">   66</a></span><span class="keyword">typedef</span> <a class="code hl_class" href="classsensesp_1_1_integrator.html">Integrator&lt;float, float&gt;</a> <a class="code hl_typedef" href="namespacesensesp.html#a1fdc54cba3884870c3d959959a4b83be">FloatIntegrator</a>;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a9daa7a02f729a177eef406795c1c7459">   67</a></span><span class="keyword">typedef</span> <a class="code hl_class" href="classsensesp_1_1_integrator.html">Integrator&lt;int, int&gt;</a> <a class="code hl_typedef" href="namespacesensesp.html#a9daa7a02f729a177eef406795c1c7459">Accumulator</a>;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}  <span class="comment">// namespace sensesp</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclasssensesp_1_1_configurable_html_ac97542fd5a24ae306adb77f3d1ba563a"><div class="ttname"><a href="classsensesp_1_1_configurable.html#ac97542fd5a24ae306adb77f3d1ba563a">sensesp::Configurable::load_configuration</a></div><div class="ttdeci">virtual void load_configuration()</div><div class="ttdef"><b>Definition</b> <a href="configurable_8cpp_source.html#l00035">configurable.cpp:35</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_integrator_html"><div class="ttname"><a href="classsensesp_1_1_integrator.html">sensesp::Integrator</a></div><div class="ttdoc">Integrator integrates (accumulates) the incoming values.</div><div class="ttdef"><b>Definition</b> <a href="#l00025">integrator.h:25</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_integrator_html_a3e26c3408b54481664f4a5a9812088b0"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a3e26c3408b54481664f4a5a9812088b0">sensesp::Integrator::set</a></div><div class="ttdeci">virtual void set(const C &amp;input) override final</div><div class="ttdef"><b>Definition</b> <a href="#l00040">integrator.h:40</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_integrator_html_a40ed521f67dabcb652053f645fa9699a"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a40ed521f67dabcb652053f645fa9699a">sensesp::Integrator::Integrator</a></div><div class="ttdeci">Integrator(P k=1, P value=0, String config_path=&quot;&quot;)</div><div class="ttdoc">Construct a new Integrator T object.</div><div class="ttdef"><b>Definition</b> <a href="#l00034">integrator.h:34</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_integrator_html_a468a9557aa1dc03bd5dc54b46f29b2a6"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a468a9557aa1dc03bd5dc54b46f29b2a6">sensesp::Integrator::set_configuration</a></div><div class="ttdeci">virtual bool set_configuration(const JsonObject &amp;config) override final</div><div class="ttdef"><b>Definition</b> <a href="#l00050">integrator.h:50</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_integrator_html_a60fe4adc10c9bfcd36d756f1084df9d8"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a60fe4adc10c9bfcd36d756f1084df9d8">sensesp::Integrator::get_config_schema</a></div><div class="ttdeci">virtual String get_config_schema() override</div><div class="ttdef"><b>Definition</b> <a href="#l00057">integrator.h:57</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_integrator_html_a6eddc7c586e9621cd28348258df297e9"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a6eddc7c586e9621cd28348258df297e9">sensesp::Integrator::get_configuration</a></div><div class="ttdeci">virtual void get_configuration(JsonObject &amp;doc) override final</div><div class="ttdef"><b>Definition</b> <a href="#l00047">integrator.h:47</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_integrator_html_a838476cb3028fd4578884619c369b13e"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a838476cb3028fd4578884619c369b13e">sensesp::Integrator::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition</b> <a href="#l00045">integrator.h:45</a></div></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a79b2e2e657112851dfda8785d217578a"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">sensesp::FileSystemSaveable::load</a></div><div class="ttdeci">virtual bool load() override</div><div class="ttdoc">Load and populate the object from a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00008">saveable.cpp:8</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_integrator_html"><div class="ttname"><a href="classsensesp_1_1_integrator.html">sensesp::Integrator</a></div><div class="ttdoc">Integrator integrates (accumulates) the incoming values.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">integrator.h:19</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_integrator_html_a2020a2c2a547d342f1889da1bd8732e4"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a2020a2c2a547d342f1889da1bd8732e4">sensesp::Integrator::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override final</div><div class="ttdef"><b>Definition</b> <a href="#l00041">integrator.h:41</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_integrator_html_a3e26c3408b54481664f4a5a9812088b0"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a3e26c3408b54481664f4a5a9812088b0">sensesp::Integrator::set</a></div><div class="ttdeci">virtual void set(const C &amp;input) override final</div><div class="ttdef"><b>Definition</b> <a href="#l00034">integrator.h:34</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_integrator_html_a40ed521f67dabcb652053f645fa9699a"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a40ed521f67dabcb652053f645fa9699a">sensesp::Integrator::Integrator</a></div><div class="ttdeci">Integrator(P k=1, P value=0, String config_path=&quot;&quot;)</div><div class="ttdoc">Construct a new Integrator T object.</div><div class="ttdef"><b>Definition</b> <a href="#l00028">integrator.h:28</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_integrator_html_a838476cb3028fd4578884619c369b13e"><div class="ttname"><a href="classsensesp_1_1_integrator.html#a838476cb3028fd4578884619c369b13e">sensesp::Integrator::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition</b> <a href="#l00039">integrator.h:39</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_integrator_html_ade592cf01bdff19ebbfc655772c86b27"><div class="ttname"><a href="classsensesp_1_1_integrator.html#ade592cf01bdff19ebbfc655772c86b27">sensesp::Integrator::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override final</div><div class="ttdef"><b>Definition</b> <a href="#l00045">integrator.h:45</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_transform_html"><div class="ttname"><a href="classsensesp_1_1_transform.html">sensesp::Transform</a></div><div class="ttdoc">The main Transform class. A transform is identified primarily by the type of value that is produces (...</div><div class="ttdef"><b>Definition</b> <a href="transform_8h_source.html#l00051">transform.h:53</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer&lt; P &gt;::emit</a></div><div class="ttdeci">void emit(const P &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00112">valueproducer.h:112</a></div></div>
-<div class="ttc" id="acss__bootstrap_8h_html_ade1d7051ddbe6cc839076fcd0de2203a"><div class="ttname"><a href="css__bootstrap_8h.html#ade1d7051ddbe6cc839076fcd0de2203a">PROGMEM</a></div><div class="ttdeci">const uint8_t PAGE_css_bootstrap[] PROGMEM</div><div class="ttdef"><b>Definition</b> <a href="css__bootstrap_8h_source.html#l00002">css_bootstrap.h:2</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8h_source.html#l00018">sensesp.h:18</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a1fdc54cba3884870c3d959959a4b83be"><div class="ttname"><a href="namespacesensesp.html#a1fdc54cba3884870c3d959959a4b83be">sensesp::FloatIntegrator</a></div><div class="ttdeci">Integrator&lt; float, float &gt; FloatIntegrator</div><div class="ttdef"><b>Definition</b> <a href="#l00066">integrator.h:66</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a9daa7a02f729a177eef406795c1c7459"><div class="ttname"><a href="namespacesensesp.html#a9daa7a02f729a177eef406795c1c7459">sensesp::Accumulator</a></div><div class="ttdeci">Integrator&lt; int, int &gt; Accumulator</div><div class="ttdef"><b>Definition</b> <a href="#l00067">integrator.h:67</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer&lt; P &gt;::emit</a></div><div class="ttdeci">void emit(const P &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>
+<div class="ttc" id="aconfig__item_8h_html"><div class="ttname"><a href="config__item_8h.html">config_item.h</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1fdc54cba3884870c3d959959a4b83be"><div class="ttname"><a href="namespacesensesp.html#a1fdc54cba3884870c3d959959a4b83be">sensesp::FloatIntegrator</a></div><div class="ttdeci">Integrator&lt; float, float &gt; FloatIntegrator</div><div class="ttdef"><b>Definition</b> <a href="#l00063">integrator.h:63</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a9daa7a02f729a177eef406795c1c7459"><div class="ttname"><a href="namespacesensesp.html#a9daa7a02f729a177eef406795c1c7459">sensesp::Accumulator</a></div><div class="ttdeci">Integrator&lt; int, int &gt; Accumulator</div><div class="ttdef"><b>Definition</b> <a href="#l00064">integrator.h:64</a></div></div>
 <div class="ttc" id="atransform_8h_html"><div class="ttname"><a href="transform_8h.html">transform.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

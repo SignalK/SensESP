@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.3</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.4</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -106,13 +106,14 @@ $(function(){initNavTree('config__handler_8cpp.html',''); initResizable(true); }
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">config_handler.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="sensesp_8h_source.html">sensesp.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="config__handler_8h_source.html">config_handler.h</a>&quot;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &quot;<a class="el" href="config__item_8h_source.html">sensesp/ui/config_item.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for config_handler.cpp:</div>
 <div class="dyncontent">
@@ -128,22 +129,19 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac6469a43cce0796908a0228643b9c7fc" id="r_ac6469a43cce0796908a0228643b9c7fc"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ac6469a43cce0796908a0228643b9c7fc">sensesp::handle_config_list</a> (httpd_req_t *req)</td></tr>
-<tr class="separator:ac6469a43cce0796908a0228643b9c7fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79894232dbafa2635e0241e5db4a1847" id="r_a79894232dbafa2635e0241e5db4a1847"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a79894232dbafa2635e0241e5db4a1847">sensesp::add_config_list_handler</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:a79894232dbafa2635e0241e5db4a1847"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa56239cde954cbed1f5ebdff2cdefab1" id="r_aa56239cde954cbed1f5ebdff2cdefab1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aa56239cde954cbed1f5ebdff2cdefab1">sensesp::add_config_get_handler</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:aa56239cde954cbed1f5ebdff2cdefab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5ce92b1f694218d027785e7348f1421" id="r_ad5ce92b1f694218d027785e7348f1421"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ad5ce92b1f694218d027785e7348f1421">sensesp::add_config_put_handler</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="separator:ad5ce92b1f694218d027785e7348f1421"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66af6e0617fab1bba4fbe606ae8a6062" id="r_a66af6e0617fab1bba4fbe606ae8a6062"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a66af6e0617fab1bba4fbe606ae8a6062">sensesp::add_config_handlers</a> (<a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> *server)</td></tr>
-<tr class="memdesc:a66af6e0617fab1bba4fbe606ae8a6062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle HTTP requests to /config.  <br /></td></tr>
-<tr class="separator:a66af6e0617fab1bba4fbe606ae8a6062"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:af477e6f41a9c4f3e5e97dd796af8aa65" id="r_af477e6f41a9c4f3e5e97dd796af8aa65"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#af477e6f41a9c4f3e5e97dd796af8aa65">sensesp::poll_status_strings</a> []</td></tr>
-<tr class="separator:af477e6f41a9c4f3e5e97dd796af8aa65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba06313c473228ea8fd7621b7ee7850d" id="r_aba06313c473228ea8fd7621b7ee7850d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aba06313c473228ea8fd7621b7ee7850d">sensesp::get_item_data</a> (JsonDocument &amp;doc, const std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_config_item_base.html">ConfigItemBase</a> &gt; &amp;item)</td></tr>
+<tr class="separator:aba06313c473228ea8fd7621b7ee7850d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0839b7c9f26280de6ca6442f86c9f91" id="r_af0839b7c9f26280de6ca6442f86c9f91"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#af0839b7c9f26280de6ca6442f86c9f91">sensesp::handle_config_item_list</a> (httpd_req_t *req)</td></tr>
+<tr class="separator:af0839b7c9f26280de6ca6442f86c9f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b9b20109395cf8d95d300605416dee" id="r_aa5b9b20109395cf8d95d300605416dee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aa5b9b20109395cf8d95d300605416dee">sensesp::add_config_list_handler</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:aa5b9b20109395cf8d95d300605416dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac89925040fab4494ac782eebedc4d704" id="r_ac89925040fab4494ac782eebedc4d704"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#ac89925040fab4494ac782eebedc4d704">sensesp::add_config_get_handler</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:ac89925040fab4494ac782eebedc4d704"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e072eeec5cc5100bd208839cb4a1711" id="r_a6e072eeec5cc5100bd208839cb4a1711"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a6e072eeec5cc5100bd208839cb4a1711">sensesp::add_config_put_handler</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="separator:a6e072eeec5cc5100bd208839cb4a1711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2808b5685d7727b96e08b2d01b7033ff" id="r_a2808b5685d7727b96e08b2d01b7033ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a2808b5685d7727b96e08b2d01b7033ff">sensesp::add_config_handlers</a> (std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt; &amp;server)</td></tr>
+<tr class="memdesc:a2808b5685d7727b96e08b2d01b7033ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle HTTP requests to /config.  <br /></td></tr>
+<tr class="separator:a2808b5685d7727b96e08b2d01b7033ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
