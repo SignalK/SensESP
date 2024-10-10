@@ -73,13 +73,6 @@ class HTTPServer : public FileSystemSaveable {
       authenticator_ = std::unique_ptr<HTTPDigestAuthenticator>(
           new HTTPDigestAuthenticator(username_, password_, auth_realm_));
     }
-    if (singleton_ == nullptr) {
-      singleton_ = this;
-      ESP_LOGD(__FILENAME__, "HTTPServer instance created");
-    } else {
-      ESP_LOGE(__FILENAME__, "Only one HTTPServer instance is allowed");
-      return;
-    }
     event_loop()->onDelay(0, [this]() {
       esp_err_t error = httpd_start(&server_, &config_);
       if (error != ESP_OK) {
@@ -111,11 +104,6 @@ class HTTPServer : public FileSystemSaveable {
       MDNS.addService("http", "tcp", 80);
     });
   };
-  ~HTTPServer() {
-    if (singleton_ == this) {
-      singleton_ = nullptr;
-    }
-  }
 
   void stop() { httpd_stop(server_); }
 
@@ -160,8 +148,6 @@ class HTTPServer : public FileSystemSaveable {
   }
 
  protected:
-  static HTTPServer* get_server() { return singleton_; }
-  static HTTPServer* singleton_;
   bool captive_portal_ = false;
   httpd_handle_t server_ = nullptr;
   httpd_config_t config_;
