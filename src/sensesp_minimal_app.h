@@ -15,7 +15,7 @@ class SensESPMinimalApp : public SensESPBaseApp {
   /**
    * @brief Get the singleton instance of the SensESPMinimalApp
    */
-  static const std::shared_ptr<SensESPMinimalApp>& get() {
+  static const std::shared_ptr<SensESPMinimalApp> get() {
     if (instance_ == nullptr) {
       instance_ = std::shared_ptr<SensESPMinimalApp>(new SensESPMinimalApp());
     }

@@ -80,12 +80,13 @@ esp_err_t handle_config_item_list(httpd_req_t* req) {
 }
 
 void add_config_list_handler(std::shared_ptr<HTTPServer>& server) {
-  server->add_handler(new HTTPRequestHandler(1 << HTTP_GET, "/api/config",
-                                             handle_config_item_list));
+  auto handler = std::make_shared<HTTPRequestHandler>(
+      1 << HTTP_GET, "/api/config", handle_config_item_list);
+  server->add_handler(handler);
 }
 
 void add_config_get_handler(std::shared_ptr<HTTPServer>& server) {
-  server->add_handler(new HTTPRequestHandler(
+  auto handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_GET, "/api/config/*", [](httpd_req_t* req) {
         ESP_LOGD("ConfigHandler", "GET request to URL %s", req->uri);
         String url_tail = String(req->uri).substring(11);
@@ -123,11 +124,12 @@ void add_config_get_handler(std::shared_ptr<HTTPServer>& server) {
         httpd_resp_set_type(req, "application/json");
         httpd_resp_sendstr(req, response.c_str());
         return ESP_OK;
-      }));
+      });
+  server->add_handler(handler);
 }
 
 void add_config_put_handler(std::shared_ptr<HTTPServer>& server) {
-  server->add_handler(new HTTPRequestHandler(
+  auto handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_PUT, "/api/config/*",
       [](httpd_req_t* req) {  // check that the content type is JSON
         ESP_LOGI(__FILENAME__, "PUT request to URL %s", req->uri);
@@ -198,7 +200,8 @@ void add_config_put_handler(std::shared_ptr<HTTPServer>& server) {
         httpd_resp_sendstr(req, response.c_str());
         return ESP_OK;
 
-      }));
+      });
+  server->add_handler(handler);
 }
 
 void add_config_handlers(std::shared_ptr<HTTPServer>& server) {

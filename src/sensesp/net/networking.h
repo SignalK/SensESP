@@ -277,11 +277,11 @@ class Networking : public FileSystemSaveable,
 
   std::unique_ptr<DNSServer> dns_server_;
 
-  std::shared_ptr<WiFiStateProducer> wifi_state_producer_{new WiFiStateProducer()};
+  std::shared_ptr<WiFiStateProducer> wifi_state_producer_ =
+      std::make_shared<WiFiStateProducer>();
 
   std::shared_ptr<LambdaConsumer<WiFiState>> wifi_state_emitter_;
 };
-
 
 inline bool ConfigRequiresRestart(const Networking& obj) { return true; }
 

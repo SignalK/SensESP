@@ -74,7 +74,7 @@ static void websocket_event_handler(void* handler_args, esp_event_base_t base,
   }
 }
 
-SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
+SKWSClient::SKWSClient(const String& config_path, std::shared_ptr<SKDeltaQueue> sk_delta_queue,
                        const String& server_address, uint16_t server_port,
                        bool use_mdns)
     : FileSystemSaveable{config_path},

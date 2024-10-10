@@ -138,7 +138,7 @@ void test_angle_correction_from_json() {
 // PersistingObservableValue saves itself on change
 void test_persisting_observable_value_schema() {
   SensESPMinimalAppBuilder builder;
-  SensESPMinimalApp* sensesp_app = builder.get_app();
+  auto sensesp_app = builder.get_app();
   TEST_ASSERT_NOT_NULL(sensesp_app);
 
   ESP_LOGD("test_persisting_observable_value_schema", "about to create object");
@@ -366,7 +366,7 @@ void test_connect_to() {
 // safely delete both the producer and the consumer.
 void test_weak_ptr_connect_to() {
   SensESPMinimalAppBuilder builder;
-  SensESPMinimalApp* sensesp_app = builder.get_app();
+  auto sensesp_app = builder.get_app();
   TEST_ASSERT_NOT_NULL(sensesp_app);
 
   auto value = std::make_shared<ObservableValue<int>>(2);

@@ -3,7 +3,9 @@
 
 #include <memory>
 
+#include "Arduino.h"
 #include "sensesp/sensors/system_info.h"
+#include "sensesp/system/valueproducer.h"
 #include "sensesp/transforms/debounce.h"
 #include "sensesp_app.h"
 #include "sensesp_base_app_builder.h"
@@ -119,7 +121,8 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    * @param system_status_led
    * @return SensESPAppBuilder*
    */
-  SensESPAppBuilder* set_system_status_led(SystemStatusLed* system_status_led) {
+  SensESPAppBuilder* set_system_status_led(
+      std::shared_ptr<SystemStatusLed> system_status_led) {
     app_->set_system_status_led(system_status_led);
     return this;
   }
@@ -134,7 +137,12 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    */
   SensESPAppBuilder* enable_system_hz_sensor(
       String prefix = kDefaultSystemInfoSensorPrefix) {
-    connect_system_info_sensor(new SystemHz(), prefix, "systemHz");
+    auto sensor = std::make_shared<SystemHz>();
+    auto vproducer = std::static_pointer_cast<ValueProducer<float>>(sensor);
+    // We need to store the sensor in the app so it doesn't get garbage
+    // collected.
+    app_->system_hz_sensor_ = vproducer;
+    connect_system_info_sensor(vproducer, prefix, "systemHz");
     return this;
   }
   /**
@@ -145,7 +153,12 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    */
   SensESPAppBuilder* enable_free_mem_sensor(
       String prefix = kDefaultSystemInfoSensorPrefix) {
-    connect_system_info_sensor(new FreeMem(), prefix, "freeMemory");
+    auto sensor = std::make_shared<FreeMem>();
+    auto vproducer = std::static_pointer_cast<ValueProducer<uint32_t>>(sensor);
+    // We need to store the sensor in the app so it doesn't get garbage
+    // collected.
+    app_->free_mem_sensor_ = vproducer;
+    connect_system_info_sensor(vproducer, prefix, "freeMemory");
     return this;
   }
   /**
@@ -156,7 +169,12 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    */
   SensESPAppBuilder* enable_uptime_sensor(
       String prefix = kDefaultSystemInfoSensorPrefix) {
-    connect_system_info_sensor(new Uptime(), prefix, "uptime");
+    auto sensor = std::make_shared<Uptime>();
+    auto vproducer = std::static_pointer_cast<ValueProducer<float>>(sensor);
+    // We need to store the sensor in the app so it doesn't get garbage
+    // collected.
+    app_->uptime_sensor_ = vproducer;
+    connect_system_info_sensor(vproducer, prefix, "uptime");
     return this;
   }
   /**
@@ -167,7 +185,12 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    */
   SensESPAppBuilder* enable_ip_address_sensor(
       String prefix = kDefaultSystemInfoSensorPrefix) {
-    connect_system_info_sensor(new IPAddrDev(), prefix, "ipAddress");
+    auto sensor = std::make_shared<IPAddrDev>();
+    auto vproducer = std::static_pointer_cast<ValueProducer<String>>(sensor);
+    // We need to store the sensor in the app so it doesn't get garbage
+    // collected.
+    app_->ip_address_sensor_ = vproducer;
+    connect_system_info_sensor(vproducer, prefix, "ipAddress");
     return this;
   }
   /**
@@ -178,7 +201,12 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    */
   SensESPAppBuilder* enable_wifi_signal_sensor(
       String prefix = kDefaultSystemInfoSensorPrefix) {
-    connect_system_info_sensor(new WiFiSignal(), prefix, "wifiSignalLevel");
+    auto sensor = std::make_shared<WiFiSignal>();
+    auto vproducer = std::static_pointer_cast<ValueProducer<int>>(sensor);
+    // We need to store the sensor in the app so it doesn't get garbage
+    // collected.
+    app_->wifi_signal_sensor_ = vproducer;
+    connect_system_info_sensor(vproducer, prefix, "wifiSignalLevel");
     return this;
   }
 
@@ -238,7 +266,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
   const SensESPAppBuilder* enable_wifi_watchdog() {
     // create the wifi disconnect watchdog
     app_->system_status_controller_
-        .connect_to(new Debounce<SystemStatus>(
+        ->connect_to(new Debounce<SystemStatus>(
             3 * 60 * 1000  // 180 s = 180000 ms = 3 minutes
             ))
         ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {

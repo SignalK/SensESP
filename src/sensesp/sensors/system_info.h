@@ -1,9 +1,9 @@
 #ifndef SENSESP_SENSORS_SYSTEM_INFO_H_
 #define SENSESP_SENSORS_SYSTEM_INFO_H_
 
-#include <memory>
 #include <Arduino.h>
 #include <elapsedMillis.h>
+#include <memory>
 
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp_base_app.h"
@@ -15,7 +15,8 @@ namespace sensesp {
  * @brief Connect a system information sensor to SKOutput
  **/
 template <typename T>
-void connect_system_info_sensor(ValueProducer<T>* sensor, String prefix, String name) {
+void connect_system_info_sensor(std::shared_ptr<ValueProducer<T>>& sensor,
+                                const String& prefix, const String& name) {
   auto hostname_obs = SensESPBaseApp::get()->get_hostname_observable();
   String hostname = hostname_obs->get();
   String path = prefix + hostname + "." + name;
@@ -49,8 +50,7 @@ class SystemHz : public ValueProducer<float> {
     elapsed_millis_ = 0;
 
     event_loop()->onTick([this]() { this->tick(); });
-    event_loop()->onRepeat(1000,
-                                               [this]() { this->update(); });
+    event_loop()->onRepeat(1000, [this]() { this->update(); });
   }
   String get_value_name() { return "systemhz"; }
 
@@ -71,8 +71,7 @@ class SystemHz : public ValueProducer<float> {
 class FreeMem : public ValueProducer<uint32_t> {
  public:
   FreeMem() {
-    event_loop()->onRepeat(1000,
-                                               [this]() { this->update(); });
+    event_loop()->onRepeat(1000, [this]() { this->update(); });
   }
   String get_value_name() { return "freemem"; }
 
@@ -91,8 +90,7 @@ class FreeMem : public ValueProducer<uint32_t> {
 class Uptime : public ValueProducer<float> {
  public:
   Uptime() {
-    event_loop()->onRepeat(1000,
-                                               [this]() { this->update(); });
+    event_loop()->onRepeat(1000, [this]() { this->update(); });
   }
   String get_value_name() { return "uptime"; }
 
@@ -111,8 +109,7 @@ class Uptime : public ValueProducer<float> {
 class IPAddrDev : public ValueProducer<String> {
  public:
   IPAddrDev() {
-    event_loop()->onRepeat(10000,
-                                               [this]() { this->update(); });
+    event_loop()->onRepeat(10000, [this]() { this->update(); });
   }
   String get_value_name() { return "ipaddr"; }
 
@@ -131,8 +128,7 @@ class IPAddrDev : public ValueProducer<String> {
 class WiFiSignal : public ValueProducer<int> {
  public:
   WiFiSignal() {
-    event_loop()->onRepeat(3000,
-                                               [this]() { this->update(); });
+    event_loop()->onRepeat(3000, [this]() { this->update(); });
   }
   String get_value_name() { return "wifisignal"; }
 

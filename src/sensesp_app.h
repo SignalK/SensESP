@@ -46,15 +46,6 @@ class SensESPApp : public SensESPBaseApp {
    */
   SensESPApp(SensESPApp& other) = delete;
 
-  ~SensESPApp() {
-    delete ota_;
-    delete ws_client_;
-    delete mdns_discovery_;
-    delete sk_delta_queue_;
-    delete system_status_led_;
-    delete button_handler_;
-  }
-
   /**
    * Singletons should not be assignable
    */
@@ -85,12 +76,12 @@ class SensESPApp : public SensESPBaseApp {
   }
 
   // getters for internal members
-  SKDeltaQueue* get_sk_delta() { return this->sk_delta_queue_; }
-  SystemStatusController* get_system_status_controller() {
-    return &(this->system_status_controller_);
+  std::shared_ptr<SKDeltaQueue> get_sk_delta() { return this->sk_delta_queue_; }
+  std::shared_ptr<SystemStatusController> get_system_status_controller() {
+    return this->system_status_controller_;
   }
   std::shared_ptr<Networking>& get_networking() { return this->networking_; }
-  SKWSClient* get_ws_client() { return this->ws_client_; }
+  std::shared_ptr<SKWSClient> get_ws_client() { return this->ws_client_; }
 
  protected:
   /**
@@ -132,7 +123,8 @@ class SensESPApp : public SensESPBaseApp {
     this->sk_server_port_ = sk_server_port;
     return this;
   }
-  const SensESPApp* set_system_status_led(SystemStatusLed* system_status_led) {
+  const SensESPApp* set_system_status_led(
+      std::shared_ptr<SystemStatusLed>& system_status_led) {
     this->system_status_led_ = system_status_led;
     return this;
   }
@@ -171,7 +163,7 @@ class SensESPApp : public SensESPBaseApp {
 
     if (ota_password_ != nullptr) {
       // create the OTA object
-      ota_ = new OTA(ota_password_);
+      ota_ = std::make_shared<OTA>(ota_password_);
     }
 
     bool captive_portal_enabled = networking_->is_captive_portal_enabled();
@@ -189,38 +181,38 @@ class SensESPApp : public SensESPBaseApp {
     ConfigItem(this->http_server_);
 
     // create the SK delta object
-    sk_delta_queue_ = new SKDeltaQueue();
+    sk_delta_queue_ = std::make_shared<SKDeltaQueue>();
 
     // create the websocket client
     bool const use_mdns = sk_server_address_ == "";
-    this->ws_client_ =
-        new SKWSClient("/System/Signal K Settings", sk_delta_queue_,
-                       sk_server_address_, sk_server_port_, use_mdns);
+    this->ws_client_ = std::make_shared<SKWSClient>(
+        "/System/Signal K Settings", sk_delta_queue_, sk_server_address_,
+        sk_server_port_, use_mdns);
 
     ConfigItem(this->ws_client_);
 
     // connect the system status controller
     this->networking_->get_wifi_state_producer()->connect_to(
-        &system_status_controller_.get_wifi_state_consumer());
+        &system_status_controller_->get_wifi_state_consumer());
     this->ws_client_->connect_to(
-        &system_status_controller_.get_ws_connection_state_consumer());
+        &system_status_controller_->get_ws_connection_state_consumer());
 
     // create the MDNS discovery object
-    mdns_discovery_ = new MDNSDiscovery();
+    mdns_discovery_ = std::make_shared<MDNSDiscovery>();
 
     // create a system status led and connect it
 
-    if (system_status_led_ == NULL) {
-      system_status_led_ = new SystemStatusLed(LED_PIN);
+    if (system_status_led_ == nullptr) {
+      system_status_led_ = std::make_shared<SystemStatusLed>(LED_PIN);
     }
-    this->system_status_controller_.connect_to(
+    this->system_status_controller_->connect_to(
         system_status_led_->get_system_status_consumer());
     this->ws_client_->get_delta_tx_count_producer().connect_to(
         system_status_led_->get_delta_tx_count_consumer());
 
     // create the button handler
     if (button_gpio_pin_ != -1) {
-      button_handler_ = new ButtonHandler(button_gpio_pin_);
+      button_handler_ = std::make_shared<ButtonHandler>(button_gpio_pin_);
     }
 
     // connect status page items
@@ -258,19 +250,20 @@ class SensESPApp : public SensESPBaseApp {
   String ap_password_ = "thisisfine";
   const char* ota_password_ = nullptr;
 
-  MDNSDiscovery* mdns_discovery_;
+  std::shared_ptr<MDNSDiscovery> mdns_discovery_;
   std::shared_ptr<HTTPServer> http_server_;
 
-  SystemStatusLed* system_status_led_ = NULL;
-  SystemStatusController system_status_controller_;
+  std::shared_ptr<SystemStatusLed> system_status_led_;
+  std::shared_ptr<SystemStatusController> system_status_controller_ =
+      std::make_shared<SystemStatusController>();
   int button_gpio_pin_ = SENSESP_BUTTON_PIN;
-  ButtonHandler* button_handler_ = nullptr;
+  std::shared_ptr<ButtonHandler> button_handler_;
 
   std::shared_ptr<Networking> networking_;
 
-  OTA* ota_;
-  SKDeltaQueue* sk_delta_queue_;
-  SKWSClient* ws_client_;
+  std::shared_ptr<OTA> ota_;
+  std::shared_ptr<SKDeltaQueue> sk_delta_queue_;
+  std::shared_ptr<SKWSClient> ws_client_;
 
   StatusPageItem<String> sensesp_version_ui_output_{
       "SenseESP version", kSensESPVersion, "Software", 1900};
@@ -294,6 +287,13 @@ class SensESPApp : public SensESPBaseApp {
                                                 "Signal K", 1700};
   StatusPageItem<int> delta_rx_count_ui_output_{"SK Delta RX count", 0,
                                                 "Signal K", 1800};
+
+// Placeholders for system status sensors in case they are created
+std::shared_ptr<ValueProducer<float>> system_hz_sensor_;
+std::shared_ptr<ValueProducer<uint32_t>> free_mem_sensor_;
+std::shared_ptr<ValueProducer<float>> uptime_sensor_;
+std::shared_ptr<ValueProducer<String>> ip_address_sensor_;
+std::shared_ptr<ValueProducer<int>> wifi_signal_sensor_;
 
   friend class WebServer;
   friend class SensESPAppBuilder;

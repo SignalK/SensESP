@@ -37,7 +37,7 @@ class SKWSClient : public FileSystemSaveable,
   /////////////////////////////////////////////////////////
   // main task methods
 
-  SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
+  SKWSClient(const String& config_path, std::shared_ptr<SKDeltaQueue> sk_delta_queue,
              const String& server_address, uint16_t server_port,
              bool use_mdns = true);
 
@@ -113,7 +113,7 @@ class SKWSClient : public FileSystemSaveable,
 
   WiFiClient wifi_client_{};
   esp_websocket_client_handle_t client_{};
-  SKDeltaQueue* sk_delta_queue_;
+  std::shared_ptr<SKDeltaQueue> sk_delta_queue_;
   /// @brief Emits the number of deltas sent since last report
   TaskQueueProducer<int> delta_tx_tick_producer_{0, event_loop(), 990};
   Integrator<int, int> delta_tx_count_producer_{1, 0, ""};

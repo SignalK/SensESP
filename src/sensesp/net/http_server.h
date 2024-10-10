@@ -139,11 +139,7 @@ class HTTPServer : public FileSystemSaveable {
     return true;
   }
 
-  void add_handler(HTTPRequestHandler* handler) {
-    handlers_.push_back(std::make_shared<HTTPRequestHandler>(*handler));
-  }
-
-  void add_handler(std::shared_ptr<HTTPRequestHandler> handler) {
+  void add_handler(std::shared_ptr<HTTPRequestHandler>& handler) {
     handlers_.push_back(handler);
   }
 

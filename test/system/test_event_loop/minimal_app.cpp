@@ -2,8 +2,8 @@
 
 #include "elapsedMillis.h"
 #include "sensesp/sensors/sensor.h"
-#include "sensesp/system/observablevalue.h"
 #include "sensesp/system/lambda_consumer.h"
+#include "sensesp/system/observablevalue.h"
 #include "sensesp_minimal_app_builder.h"
 #include "unity.h"
 
@@ -11,7 +11,7 @@ using namespace sensesp;
 
 void test_sensesp() {
   SensESPMinimalAppBuilder builder;
-  SensESPMinimalApp* sensesp_app = builder.get_app();
+  auto sensesp_app = builder.get_app();
   TEST_ASSERT_NOT_NULL(sensesp_app);
 
   auto sensor = RepeatSensor<int>(10, []() {
