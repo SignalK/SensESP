@@ -4,6 +4,7 @@
 
 #include <esp_wifi.h>
 
+#include "sensesp/system/lambda_consumer.h"
 #include "sensesp/system/led_blinker.h"
 #include "sensesp_app.h"
 
@@ -29,9 +30,10 @@ Networking::Networking(const String& config_path, const String& client_ssid,
                        const String& ap_password)
     : FileSystemSaveable{config_path}, Resettable(0) {
   // Get the WiFi state producer singleton and make it update this object output
-  wifi_state_producer = WiFiStateProducer::get_singleton();
-  wifi_state_producer->connect_to(new LambdaConsumer<WiFiState>(
-      [this](WiFiState state) { this->emit(state); }));
+  wifi_state_emitter_ = std::make_shared<LambdaConsumer<WiFiState>>(
+          [this](WiFiState state) { this->emit(state); });
+
+  wifi_state_producer_->connect_to(wifi_state_emitter_);
 
   bool config_loaded = load();
 
@@ -97,7 +99,7 @@ Networking::Networking(const String& config_path, const String& client_ssid,
 
   if (this->ap_settings_.enabled_ &&
       this->ap_settings_.captive_portal_enabled_) {
-    dns_server_ = new DNSServer();
+    dns_server_ = std::unique_ptr<DNSServer>(new DNSServer());
 
     dns_server_->setErrorReplyCode(DNSReplyCode::NoError);
     dns_server_->start(53, "*", WiFi.softAPIP());
@@ -109,7 +111,6 @@ Networking::Networking(const String& config_path, const String& client_ssid,
 Networking::~Networking() {
   if (dns_server_) {
     dns_server_->stop();
-    delete dns_server_;
   }
 
   // Stop WiFi
@@ -292,16 +293,11 @@ bool Networking::from_json(const JsonObject& config) {
 void Networking::reset() {
   ESP_LOGI(__FILENAME__, "Resetting WiFi SSID settings");
 
-  remove();
+  clear();
   WiFi.disconnect(true);
   // On ESP32, disconnect does not erase previous credentials. Let's connect
   // to a bogus network instead
   WiFi.begin("0", "0", 0, nullptr, false);
-}
-
-WiFiStateProducer* WiFiStateProducer::get_singleton() {
-  static WiFiStateProducer instance;
-  return &instance;
 }
 
 void Networking::start_wifi_scan() {

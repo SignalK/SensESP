@@ -1,10 +1,13 @@
 #include "sensesp.h"
 
-#include "sensesp/system/serializable.h"
+#include <memory>
 
 #include "sensesp/net/networking.h"
+#include "sensesp/system/serializable.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp/transforms/angle_correction.h"
+#include "sensesp/transforms/linear.h"
+#include "sensesp/transforms/typecast.h"
 #include "sensesp_base_app.h"
 #include "sensesp_minimal_app_builder.h"
 #include "unity.h"
@@ -135,10 +138,14 @@ void test_angle_correction_from_json() {
 // PersistingObservableValue saves itself on change
 void test_persisting_observable_value_schema() {
   SensESPMinimalAppBuilder builder;
-  SensESPMinimalApp* sensesp_app = builder.get_app();
+  auto sensesp_app = builder.get_app();
   TEST_ASSERT_NOT_NULL(sensesp_app);
 
+  ESP_LOGD("test_persisting_observable_value_schema", "about to create object");
+
   PersistingObservableValue<int> value{2, "/test"};
+
+  ESP_LOGD("test_persisting_observable_value_schema", "object created");
 
   auto config_item = ConfigItem(&value);
 
@@ -205,31 +212,32 @@ class Networking_ : public Networking {
   Networking_(const String& config_path, const String& client_ssid,
               const String& client_password, const String& ap_ssid,
               const String& ap_password)
-      : FileSystemSaveable{config_path},
-        Networking(config_path, client_ssid, client_password, ap_ssid,
+      : Networking(config_path, client_ssid, client_password, ap_ssid,
                    ap_password) {}
 
  protected:
-  friend void test_networking();
+  friend void test_save_networking();
 };
 
-void test_networking() {
+void test_save_networking() {
   SensESPMinimalAppBuilder builder;
-  SensESPMinimalApp* sensesp_app = builder.get_app();
+  auto sensesp_app = std::shared_ptr<SensESPMinimalApp>(builder.get_app());
   TEST_ASSERT_NOT_NULL(sensesp_app);
 
   String wifi_ssid = "Hat Labs Sensors";
-  String wifi_password = "kanneluuri2406";
+  String wifi_password = "fooba";
   String ap_ssid = "SensESP AP!";
   String ap_password = "thisisexcellent";
 
-  Networking_* networking = new Networking_(
-      "/System/WiFi Settings", wifi_ssid, wifi_password, ap_ssid, ap_password);
-  networking->remove();
-  delete networking;
+  auto networking_ptr = new Networking_("/System/WiFi Settings", wifi_ssid,
+                                        wifi_password, ap_ssid, ap_password);
 
-  networking = new Networking_("/System/WiFi Settings", wifi_ssid,
-                               wifi_password, ap_ssid, ap_password);
+  networking_ptr->clear();
+
+  delete networking_ptr;
+
+  auto networking = std::make_shared<Networking_>(
+      "/System/WiFi Settings", wifi_ssid, wifi_password, ap_ssid, ap_password);
 
   networking->save();
 
@@ -245,6 +253,137 @@ void test_networking() {
                            networking->ap_settings_.password_.c_str());
 }
 
+void test_connect_to() {
+  SensESPMinimalAppBuilder builder;
+  auto sensesp_app = std::shared_ptr<SensESPMinimalApp>(builder.get_app());
+  TEST_ASSERT_NOT_NULL(sensesp_app);
+
+  ObservableValue<int> value{2};
+  ObservableValue<int> value2;
+  ObservableValue<float> float_value;
+
+  // Same types
+
+  value.connect_to(value2);
+  value.set(3);
+  TEST_ASSERT_EQUAL(3, value2.get());
+
+  // Same types, pointers (using smart pointers for automatic cleanup)
+
+  auto value3 = std::make_shared<ObservableValue<int>>(4);
+  auto value4 = std::make_shared<ObservableValue<int>>();
+  value3.get()->connect_to(value4.get());
+  value3.get()->set(5);
+  TEST_ASSERT_EQUAL(5, value4.get()->get());
+
+  // Same types, smart pointers
+
+  auto value5 = std::make_shared<ObservableValue<int>>(6);
+  auto value6 = std::make_shared<ObservableValue<int>>();
+  value5->connect_to(value6);
+  value5->set(7);
+  TEST_ASSERT_EQUAL(7, value6->get());
+
+  // Automatic type conversion
+
+  value.connect_to(float_value);
+  value.set(4);
+  TEST_ASSERT_EQUAL(4, value2.get());
+  TEST_ASSERT_EQUAL(4, float_value.get());
+
+  // Automatic type conversion, pointers
+
+  auto value7 = std::make_shared<ObservableValue<int>>(8);
+  auto value8 = std::make_shared<ObservableValue<float>>();
+  value7.get()->connect_to(value8.get());
+  value7.get()->set(9);
+  TEST_ASSERT_EQUAL(9, value8.get()->get());
+
+  // Automatic type conversion, smart pointers
+
+  auto value9 = std::make_shared<ObservableValue<int>>(10);
+  auto value10 = std::make_shared<ObservableValue<float>>();
+  value9->connect_to(value10);
+  value9->set(11);
+  TEST_ASSERT_EQUAL(11, value10->get());
+
+  // Chaining of same types
+
+  ObservableValue<float> value11{1};
+  Linear linear12{2.0, 3.0};
+  ObservableValue<float> value13;
+  value11.connect_to(linear12)->connect_to(value13);
+  value11.set(2);
+  TEST_ASSERT_EQUAL(7.0, value13.get());
+
+  // Chaining of same types, pointers
+
+  auto value14 = std::make_shared<ObservableValue<float>>(1);
+  auto linear15 = std::make_shared<Linear>(2.0, 3.0);
+  auto value16 = std::make_shared<ObservableValue<float>>();
+  value14.get()->connect_to(linear15.get())->connect_to(value16.get());
+  value14.get()->set(2);
+  TEST_ASSERT_EQUAL(7.0, value16.get()->get());
+
+  // Chaining of same types, smart pointers
+
+  auto value17 = std::make_shared<ObservableValue<float>>(1);
+  auto linear18 = std::make_shared<Linear>(2.0, 3.0);
+  auto value19 = std::make_shared<ObservableValue<float>>();
+  value17->connect_to(linear18)->connect_to(value19);
+  value17->set(2);
+  TEST_ASSERT_EQUAL(7.0, value19->get());
+
+  // Chaining with a transform that changes the type
+
+  ObservableValue<float> value20{1.0};
+  RoundToInt round21;
+  ObservableValue<int> value22;
+  value20.connect_to(round21)->connect_to(value22);
+  value20.set(2.3);
+  TEST_ASSERT_EQUAL(2, value22.get());
+
+  // Chaining with a transform that changes the type, pointers
+
+  auto value23 = std::make_shared<ObservableValue<float>>(1.0);
+  auto round24 = std::make_shared<RoundToInt>();
+  auto value25 = std::make_shared<ObservableValue<int>>();
+  value23.get()->connect_to(round24.get())->connect_to(value25.get());
+  value23.get()->set(2.3);
+  TEST_ASSERT_EQUAL(2, value25.get()->get());
+
+  // Chaining with a transform that changes the type, smart pointers
+
+  auto value26 = std::make_shared<ObservableValue<float>>(1.0);
+  auto round27 = std::make_shared<RoundToInt>();
+  auto value28 = std::make_shared<ObservableValue<int>>();
+  value26->connect_to(round27)->connect_to(value28);
+  value26->set(2.3);
+  TEST_ASSERT_EQUAL(2, value28->get());
+}
+
+// Now that connections can be made with weak_ptrs, we should be able to
+// safely delete both the producer and the consumer.
+void test_weak_ptr_connect_to() {
+  SensESPMinimalAppBuilder builder;
+  auto sensesp_app = builder.get_app();
+  TEST_ASSERT_NOT_NULL(sensesp_app);
+
+  auto value = std::make_shared<ObservableValue<int>>(2);
+  auto value2 = std::make_shared<ObservableValue<int>>();
+
+  value->connect_to(value2);
+
+  value->set(3);
+
+  TEST_ASSERT_EQUAL(3, value2->get());
+
+  // This will crash if the weak_ptr is not handled correctly
+  value->set(4);
+
+  TEST_ASSERT_EQUAL(4, value->get());
+}
+
 void setup() {
   esp_log_level_set("*", ESP_LOG_VERBOSE);
 
@@ -257,7 +396,10 @@ void setup() {
 
   RUN_TEST(test_persisting_observable_value_schema);
 
-  RUN_TEST(test_networking);
+  RUN_TEST(test_save_networking);
+
+  RUN_TEST(test_connect_to);
+  RUN_TEST(test_weak_ptr_connect_to);
 
   UNITY_END();
 }

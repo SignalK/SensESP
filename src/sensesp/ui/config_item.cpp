@@ -2,7 +2,7 @@
 
 namespace sensesp {
 
-std::map<String, ConfigItemBase*> ConfigItemBase::config_items_;
+std::map<String, std::shared_ptr<ConfigItemBase>> ConfigItemBase::config_items_;
 
 template <>
 const char* get_schema_type_string(const int /*dummy*/) {

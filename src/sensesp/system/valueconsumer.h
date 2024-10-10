@@ -21,27 +21,24 @@ class ValueProducer;
 template <typename T>
 class ValueConsumer {
  public:
+   using input_type = T;
   /**
-   * Used to set an input of this consumer. It is usually called
-   * automatically by a ValueProducer.
+   * Used to set an input of this consumer. It is called
+   * automatically by a ValueProducer but can also be called
+   * manually.
+   *
    * @param new_value the value of the input
    */
   virtual void set(const T& new_value) {}
 
+  [[deprecated("Use set() instead")]]
   virtual void set_input(const T& new_value) {
-    static bool warned = false;
-    if (!warned) {
-      warned = true;
-      ESP_LOGW(__FILENAME__, "set_input() is deprecated. Use set() instead.");
-    }
     set(new_value);
   }
 
-  /**
-   * Registers this consumer with the specified producer, letting it
-   * know that this consumer would like to receive notifications whenever
-   * its value changes.
-   */
+  // Pointer safety cannot be guaranteed because we don't know whether
+  // "this" is a shared pointer.
+  [[deprecated("Use ValueProducer<T>::connect_to instead")]]
   void connect_from(ValueProducer<T>* producer) {
     producer->attach([producer, this]() { this->set(producer->get()); });
   }

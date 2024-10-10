@@ -37,8 +37,6 @@ void urldecode2(char* dst, const char* src) {
   *dst++ = '\0';
 }
 
-HTTPServer* HTTPServer::singleton_ = nullptr;
-
 esp_err_t HTTPServer::dispatch_request(httpd_req_t* req) {
   ESP_LOGI(__FILENAME__, "Handling request: %s", req->uri);
 
@@ -178,9 +176,7 @@ bool HTTPServer::authenticate_request(
 }
 
 esp_err_t call_request_dispatcher(httpd_req_t* req) {
-  HTTPServer* server = HTTPServer::get_server();
-  bool continue_;
-
+  HTTPServer* server = (HTTPServer*)req->user_ctx;
   return server->dispatch_request(req);
 }
 

@@ -32,10 +32,6 @@ PressRepeater::PressRepeater(const String& config_path, int integer_false,
   });
 }
 
-void PressRepeater::set(const int& new_value) {
-  this->set(new_value != integer_false_);
-}
-
 void PressRepeater::set(const bool& new_value) {
   if (new_value != pushed_) {
     pushed_ = new_value;

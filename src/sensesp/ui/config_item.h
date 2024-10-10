@@ -46,11 +46,31 @@ const String ConfigSchema(const T& obj) {
 }
 
 template <typename T>
+const String ConfigSchema(const std::shared_ptr<T>& obj) {
+  return ConfigSchema(*obj);
+}
+
+template <typename T>
 bool ConfigRequiresRestart(const T& obj) {
   return false;
 }
 
-class ConfigItemBase {
+template <typename T>
+bool ConfigRequiresRestart(const std::shared_ptr<T>& obj) {
+  return ConfigRequiresRestart(*obj);
+}
+
+// Forward declarations
+
+template <typename T>
+class ConfigItemT;
+
+template <typename T>
+std::shared_ptr<ConfigItemT<T>> ConfigItem(std::shared_ptr<T>);
+
+
+class ConfigItemBase
+    : virtual public std::enable_shared_from_this<ConfigItemBase> {
  public:
   const String& get_title() const { return title_; }
   ConfigItemBase* set_title(const String& title) {
@@ -114,7 +134,7 @@ class ConfigItemBase {
    *
    * Return nullptr if not found.
    */
-  static ConfigItemBase* get_config_item(const String key) {
+  static std::shared_ptr<ConfigItemBase> get_config_item(const String key) {
     auto it = ConfigItemBase::config_items_.find(key);
     if (it != ConfigItemBase::config_items_.end()) {
       return it->second;
@@ -126,15 +146,17 @@ class ConfigItemBase {
    * @brief Get all config items as a vector.
    *
    */
-  static std::unique_ptr<std::vector<ConfigItemBase*>> get_config_items() {
-    std::unique_ptr<std::vector<ConfigItemBase*>> sorted_config_items(
-        new std::vector<ConfigItemBase*>());
+  static std::unique_ptr<std::vector<std::shared_ptr<ConfigItemBase>>>
+  get_config_items() {
+    std::unique_ptr<std::vector<std::shared_ptr<ConfigItemBase>>>
+        sorted_config_items(new std::vector<std::shared_ptr<ConfigItemBase>>());
 
     for (auto& it : ConfigItemBase::config_items_) {
       sorted_config_items->push_back(it.second);
     }
     std::sort(sorted_config_items->begin(), sorted_config_items->end(),
-              [](ConfigItemBase* a, ConfigItemBase* b) {
+              [](std::shared_ptr<ConfigItemBase> a,
+                 std::shared_ptr<ConfigItemBase> b) {
                 return a->get_sort_order() < b->get_sort_order();
               });
 
@@ -149,7 +171,7 @@ class ConfigItemBase {
   virtual const String& get_config_path() const = 0;
 
  protected:
-  static std::map<String, ConfigItemBase*> config_items_;
+  static std::map<String, std::shared_ptr<ConfigItemBase>> config_items_;
 
   /// The path of the ConfigItemT. This is used to identify the ConfigItemT.
   String config_path_ = "";
@@ -167,6 +189,9 @@ class ConfigItemBase {
   bool requires_restart_ = false;
 
   virtual const String get_default_config_schema() const = 0;
+
+  template <typename T>
+  friend std::shared_ptr<ConfigItemT<T>> ConfigItem(std::shared_ptr<T>);
 };
 
 /**
@@ -183,10 +208,8 @@ class ConfigItemT : public ConfigItemBase {
                 "T must inherit from Saveable");
 
  public:
-  ConfigItemT(T& config_object)
-      : ConfigItemBase(), config_object_{&config_object} {
-    ConfigItemT::config_items_[config_object.get_config_path()] = this;
-  }
+  ConfigItemT(std::shared_ptr<T> config_object)
+      : ConfigItemBase(), config_object_{config_object} {}
 
   virtual bool to_json(JsonObject& config) const override {
     return config_object_->to_json(config);
@@ -237,7 +260,8 @@ class ConfigItemT : public ConfigItemBase {
   T* get_config_object() { return config_object_; }
 
  protected:
-  T* config_object_;
+  // The object that this ConfigItemT is managing.
+  std::shared_ptr<T> config_object_;
   /**
    * @brief Get the default configuration schema.
    *
@@ -247,6 +271,7 @@ class ConfigItemT : public ConfigItemBase {
     String schema = ConfigSchema(*config_object_);
     return schema;
   }
+
 };
 
 /**
@@ -264,12 +289,20 @@ class ConfigItemT : public ConfigItemBase {
  * @return T*
  */
 template <typename T>
-ConfigItemT<T>* ConfigItem(T* config_object) {
-  // Constructor will add the ConfigItemT to the config_items_ map
+std::shared_ptr<ConfigItemT<T>> ConfigItem(std::shared_ptr<T> config_object) {
   ESP_LOGD(__FILENAME__, "Registering ConfigItemT with path %s",
            config_object->get_config_path().c_str());
-  auto config_item = new ConfigItemT<T>(*config_object);
+  auto config_item = std::make_shared<ConfigItemT<T>>(config_object);
+  auto base_sptr = std::static_pointer_cast<ConfigItemBase>(config_item);
+  ConfigItemBase::config_items_[config_object->get_config_path()] = base_sptr;
   return config_item;
+}
+
+// Unsafe: We don't know whether other shared_ptrs to the same object exist!
+template <typename T>
+std::shared_ptr<ConfigItemT<T>> ConfigItem(T* config_object) {
+  auto config_object_sptr = std::shared_ptr<T>(config_object);
+  return ConfigItem(config_object_sptr);
 }
 
 }  // namespace sensesp

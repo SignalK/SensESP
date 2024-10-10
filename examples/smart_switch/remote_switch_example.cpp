@@ -78,7 +78,7 @@ void setup() {
   controller->connect_to(new BoolSKPutRequest(sk_path));
 
   // Also connect the controller to an onboard LED...
-  controller->connect_to(led);
+  controller->connect_to(led->on_off_consumer_);
 
   // Connect a physical button that will feed manual click types into the
   // controller...
@@ -92,7 +92,7 @@ void setup() {
       ->set_title("Click Type")
       ->set_sort_order(1000);
 
-  pr->connect_to(click_type)->connect_to(controller);
+  pr->connect_to(click_type)->connect_to(controller->click_consumer_);
 
   // In addition to the manual button "click types", a
   // SmartSwitchController accepts explicit state settings via
@@ -105,7 +105,7 @@ void setup() {
   // sent across the Signal K network when the controlling device
   // confirms it has made the change in state.
   auto* sk_listener = new SKValueListener<bool>(sk_path);
-  sk_listener->connect_to(controller);
+  sk_listener->connect_to(controller->swich_consumer_);
 }
 
 void loop() { event_loop()->tick(); }

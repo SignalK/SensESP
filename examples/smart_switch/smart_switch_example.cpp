@@ -47,7 +47,7 @@ void setup() {
   // Create the global SensESPApp() object.
   sensesp_app = builder.set_hostname("sk-engine-lights")
                     ->set_sk_server("192.168.10.3", 3000)
-                    ->set_wifi_client(client("YOUR_WIFI_SSID", "YOUR_WIFI_PASSWORD")
+                    ->set_wifi_client("YOUR_WIFI_SSID", "YOUR_WIFI_PASSWORD")
                     ->get_app();
 
   // Define the SK Path that represents the load this device controls.
@@ -73,9 +73,10 @@ void setup() {
   // electric light.  Also connect this pin's state to an LED to get
   // a visual indicator of load's state.
   auto* load_switch = new DigitalOutput(PIN_RELAY);
-  load_switch->connect_to(new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B,
-                                     config_path_status_light, LED_ON_COLOR,
-                                     LED_OFF_COLOR));
+  load_switch->connect_to(
+      (new RgbLed(PIN_LED_R, PIN_LED_G, PIN_LED_B, config_path_status_light,
+                  LED_ON_COLOR, LED_OFF_COLOR))
+          ->on_off_consumer_);
 
   // Create a switch controller to handle the user press logic and
   // connect it to the load switch...
@@ -87,7 +88,8 @@ void setup() {
   DigitalInputState* btn = new DigitalInputState(PIN_BUTTON, INPUT, 100);
   PressRepeater* pr = new PressRepeater();
   btn->connect_to(pr);
-  pr->connect_to(new ClickType(config_path_button_c))->connect_to(controller);
+  pr->connect_to(new ClickType(config_path_button_c))
+      ->connect_to(controller->click_consumer_);
 
   // In addition to the manual button "click types", a
   // SmartSwitchController accepts explicit state settings via
@@ -98,7 +100,7 @@ void setup() {
   // This allows any device on the SignalK network that can make
   // such a request to also control the state of our switch.
   auto* sk_listener = new StringSKPutRequestListener(sk_path);
-  sk_listener->connect_to(controller);
+  sk_listener->connect_to(controller->truthy_string_consumer_);
 
   // Finally, connect the load switch to an SKOutput so it reports its state
   // to the Signal K server.  Since the load switch only reports its state

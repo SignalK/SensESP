@@ -2,11 +2,14 @@
 
 #include "config_handler.h"
 
+#include <memory>
+
 #include "sensesp/ui/config_item.h"
 
 namespace sensesp {
 
-bool get_item_data(JsonDocument& doc, ConfigItemBase* item) {
+bool get_item_data(JsonDocument& doc,
+                   const std::shared_ptr<ConfigItemBase>& item) {
   JsonObject obj = doc.to<JsonObject>();
 
   String str;
@@ -76,13 +79,14 @@ esp_err_t handle_config_item_list(httpd_req_t* req) {
   return ESP_OK;
 }
 
-void add_config_list_handler(HTTPServer* server) {
-  server->add_handler(new HTTPRequestHandler(1 << HTTP_GET, "/api/config",
-                                             handle_config_item_list));
+void add_config_list_handler(std::shared_ptr<HTTPServer>& server) {
+  auto handler = std::make_shared<HTTPRequestHandler>(
+      1 << HTTP_GET, "/api/config", handle_config_item_list);
+  server->add_handler(handler);
 }
 
-void add_config_get_handler(HTTPServer* server) {
-  server->add_handler(new HTTPRequestHandler(
+void add_config_get_handler(std::shared_ptr<HTTPServer>& server) {
+  auto handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_GET, "/api/config/*", [](httpd_req_t* req) {
         ESP_LOGD("ConfigHandler", "GET request to URL %s", req->uri);
         String url_tail = String(req->uri).substring(11);
@@ -104,7 +108,7 @@ void add_config_get_handler(HTTPServer* server) {
         }
 
         // find the config item object with the matching config_path
-        ConfigItemBase* config_item = ConfigItemBase::get_config_item(url_tail);
+        auto config_item = ConfigItemBase::get_config_item(url_tail);
         if (config_item == nullptr) {
           httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
                               "No ConfigItem found with that path");
@@ -120,11 +124,12 @@ void add_config_get_handler(HTTPServer* server) {
         httpd_resp_set_type(req, "application/json");
         httpd_resp_sendstr(req, response.c_str());
         return ESP_OK;
-      }));
+      });
+  server->add_handler(handler);
 }
 
-void add_config_put_handler(HTTPServer* server) {
-  server->add_handler(new HTTPRequestHandler(
+void add_config_put_handler(std::shared_ptr<HTTPServer>& server) {
+  auto handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_PUT, "/api/config/*",
       [](httpd_req_t* req) {  // check that the content type is JSON
         ESP_LOGI(__FILENAME__, "PUT request to URL %s", req->uri);
@@ -148,7 +153,7 @@ void add_config_put_handler(HTTPServer* server) {
         url_tail = String(url_tail_cstr);
 
         // find the ConfigItemT object with the matching config_path
-        ConfigItemBase* config_item = ConfigItemBase::get_config_item(url_tail);
+        auto config_item = ConfigItemBase::get_config_item(url_tail);
         if (config_item == nullptr) {
           httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
                               "No Configurable found with that path");
@@ -195,10 +200,11 @@ void add_config_put_handler(HTTPServer* server) {
         httpd_resp_sendstr(req, response.c_str());
         return ESP_OK;
 
-      }));
+      });
+  server->add_handler(handler);
 }
 
-void add_config_handlers(HTTPServer* server) {
+void add_config_handlers(std::shared_ptr<HTTPServer>& server) {
   add_config_list_handler(server);
   add_config_get_handler(server);
   add_config_put_handler(server);

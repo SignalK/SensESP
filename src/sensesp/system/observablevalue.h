@@ -28,10 +28,14 @@ bool operator!=(ObservableValue<T> const& lhs, T const& rhs) {
 template <class T>
 class ObservableValue : public ValueConsumer<T>, public ValueProducer<T> {
  public:
-  ObservableValue() : ValueConsumer<T>(), ValueProducer<T>() {}
+  ObservableValue() = default;
 
   ObservableValue(const T& value)
       : ValueConsumer<T>(), ValueProducer<T>(value) {}
+
+  // Delete copy constructor and assignment operator
+  ObservableValue(const ObservableValue&) = delete;
+  ObservableValue& operator=(const ObservableValue&) = delete;
 
   void set(const T& value) override { this->ValueProducer<T>::emit(value); }
 
@@ -89,7 +93,7 @@ class ObservableValue : public ValueConsumer<T>, public ValueProducer<T> {
  */
 template <class T>
 class PersistingObservableValue : public ObservableValue<T>,
-                                  virtual public FileSystemSaveable {
+                                  public FileSystemSaveable {
  public:
   PersistingObservableValue(const T& value, String config_path = "")
       : ObservableValue<T>(value), FileSystemSaveable(config_path) {

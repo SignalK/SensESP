@@ -35,27 +35,32 @@ void setup() {
   // manually create Networking and HTTPServer objects to enable
   // the HTTP configuration interface
 
-  auto* networking = new Networking("/system/networking", "", "");
-  auto* http_server = new HTTPServer();
+  auto networking = std::make_shared<Networking>("/system/networking", "", "");
+  auto http_server = std::make_shared<HTTPServer>();
 
-  auto* digin1 = new DigitalInputCounter(input_pin1, INPUT, RISING, read_delay);
-  auto* digin2 = new DigitalInputCounter(input_pin2, INPUT, CHANGE, read_delay);
+  auto digin1 = std::make_shared<DigitalInputCounter>(input_pin1, INPUT, RISING,
+                                                      read_delay);
+  auto digin2 = std::make_shared<DigitalInputCounter>(input_pin2, INPUT, CHANGE,
+                                                      read_delay);
 
-  auto* scaled1 = new Linear(2, 1, "/digin1/scale");
-  auto* scaled2 = new Linear(4, -1, "/digin2/scale");
+  auto scaled1 = std::make_shared<Linear>(2, 1, "/digin1/scale");
+  auto scaled2 = std::make_shared<Linear>(4, -1, "/digin2/scale");
   digin1->connect_to(scaled1);
 
-  scaled1->connect_to(new LambdaTransform<int, int>([](int input) {
-    Serial.printf("millis: %d\n", millis());
-    Serial.printf("Counter 1: %d\n", input);
-    return input;
-  }));
-
-  digin2->connect_to(scaled2)->connect_to(
-      new LambdaTransform<int, int>([](int input) {
+  auto lambda_transform1 =
+      std::make_shared<LambdaTransform<int, int>>([](int input) {
+        Serial.printf("millis: %d\n", millis());
+        Serial.printf("Counter 1: %d\n", input);
+        return input;
+      });
+  scaled1->connect_to(lambda_transform1);
+  auto lambda_transform2 =
+      std::make_shared<LambdaTransform<int, int>>([](int input) {
         Serial.printf("Counter 2: %d\n", input);
         return input;
-      }));
+      });
+
+  digin2->connect_to(scaled2)->connect_to(lambda_transform2);
 
   pinMode(output_pin1, OUTPUT);
   event_loop()->onRepeat(

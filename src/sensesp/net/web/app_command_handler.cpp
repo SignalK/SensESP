@@ -1,12 +1,13 @@
 #include "app_command_handler.h"
 
+#include <esp_http_server.h>
 #include <memory>
 
-#include <esp_http_server.h>
+#include "sensesp_app.h"
 
 namespace sensesp {
 
-void add_scan_wifi_networks_handlers(HTTPServer* server) {
+void add_scan_wifi_networks_handlers(std::shared_ptr<HTTPServer>& server) {
   auto scan_wifi_networks_handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_POST, "/api/wifi/scan", [](httpd_req_t* req) {
         auto networking = SensESPApp::get()->get_networking();
@@ -52,7 +53,7 @@ void add_scan_wifi_networks_handlers(HTTPServer* server) {
   server->add_handler(scan_results_handler);
 }
 
-void add_app_http_command_handlers(HTTPServer* server) {
+void add_app_http_command_handlers(std::shared_ptr<HTTPServer>& server) {
   add_scan_wifi_networks_handlers(server);
 }
 

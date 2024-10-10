@@ -1,6 +1,7 @@
 #ifndef SENSESP_SYSTEM_RGB_LED_H
 #define SENSESP_SYSTEM_RGB_LED_H
 
+#include "sensesp/system/lambda_consumer.h"
 #include "sensesp/ui/config_item.h"
 #include "valueconsumer.h"
 
@@ -24,9 +25,7 @@ namespace sensesp {
  * the 24 bit color definition however.
  * @see PWMOutput
  */
-class RgbLed : public FileSystemSaveable,
-               public ValueConsumer<long>,
-               public ValueConsumer<bool> {
+class RgbLed : public FileSystemSaveable {
  public:
   /**
    * The constructor
@@ -55,14 +54,25 @@ class RgbLed : public FileSystemSaveable,
    * Used to set the current display state of the LED.
    * @param new_value The RGB color to display.
    */
-  virtual void set(const long& new_value) override;
+
+  LambdaConsumer<long> rgb_consumer_ =
+      LambdaConsumer<long>([this](long new_value) {
+        set_color(new_value);
+      });
 
   /**
    * Used to set the current display state of the LED with a simple on/off
    * boolean value.  Using TRUE for new_value sets the color to the ON color.
    * Using FALSE uses the OFF color.
    */
-  virtual void set(const bool& new_value) override;
+  LambdaConsumer<bool> on_off_consumer_ =
+      LambdaConsumer<bool>([this](bool new_value) {
+        if (new_value) {
+          set_color(led_on_rgb_);
+        } else {
+          set_color(led_off_rgb_);
+        }
+      });
 
   virtual bool to_json(JsonObject& root) override;
   virtual bool from_json(const JsonObject& config) override;
@@ -74,6 +84,9 @@ class RgbLed : public FileSystemSaveable,
   long led_on_rgb_;
   long led_off_rgb_;
   bool common_anode_;
+
+  void set_color(long new_value);
+
 };
 
 const String ConfigSchema(const RgbLed& obj);

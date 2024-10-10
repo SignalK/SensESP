@@ -40,13 +40,12 @@ namespace sensesp {
  * @param repeat_interval How often to repeat the repeated output, in ms.
  * The default is 250.
  */
-class PressRepeater : public BooleanTransform, public IntConsumer {
+class PressRepeater : public BooleanTransform {
  public:
   PressRepeater(const String& config_path = "", int integer_false = 0,
                 int repeat_start_interval = 1500, int repeat_interval = 250);
 
   virtual void set(const bool& new_value) override;
-  virtual void set(const int& new_value) override;
 
   virtual bool to_json(JsonObject& root) override;
   virtual bool from_json(const JsonObject& config) override;

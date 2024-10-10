@@ -8,6 +8,8 @@
 
 #include "sensesp.h"
 
+#include <memory>
+
 #include "esp_log.h"
 #include "sensesp/system/filesystem.h"
 #include "sensesp/system/observablevalue.h"
@@ -16,8 +18,17 @@ namespace sensesp {
 
 constexpr auto kDefaultHostname = "SensESP";
 
-void SetupSerialDebug(uint32_t baudrate);
-void SetupLogging(esp_log_level_t default_level = ESP_LOG_VERBOSE);
+inline void SetupLogging(esp_log_level_t default_level = ESP_LOG_VERBOSE) {
+  esp_log_level_set("*", default_level);
+}
+
+inline void SetupSerialDebug(uint32_t baudrate) {
+  SetupLogging();
+
+  if (baudrate != 115200) {
+    ESP_LOGW(__FILENAME__, "SetupSerialDebug baudrate parameter is ignored.");
+  }
+}
 
 /**
  * @brief The base class for SensESP applications.
@@ -36,30 +47,72 @@ class SensESPBaseApp {
   /**
    * @brief Get the singleton instance of the SensESPBaseApp
    */
-  static SensESPBaseApp* get();
+  static const std::shared_ptr<SensESPBaseApp>& get() { return instance_; }
+
+  /**
+   * @brief Destroy the SensESPBaseApp instance
+   */
+  virtual bool destroy() {
+    bool outside_users = instance_.use_count() > 1;
+
+    if (outside_users) {
+      ESP_LOGW(__FILENAME__,
+               "SensESPBaseApp instance has active references and won't be "
+               "properly destroyed.");
+    }
+    instance_ = nullptr;
+    return !outside_users;
+  }
 
   /**
    * @brief Start the app (activate all the subcomponents)
    *
    */
-  virtual void start();
+  virtual void start() {
+    ESP_LOGW(__FILENAME__, "start() call is deprecated and can be removed.");
+  }
 
   /**
    * @brief Reset the device to factory defaults
    *
    */
-  virtual void reset();
+  virtual void reset() {
+    ESP_LOGW(__FILENAME__,
+             "Resetting the device configuration to system defaults.");
+    Resettable::reset_all();
+
+    this->event_loop_.onDelay(1000, []() {
+      ESP.restart();
+      delay(1000);
+    });
+  }
 
   /**
    * @brief Get the hostname observable object
    *
    * @return ObservableValue<String>*
    */
-  ObservableValue<String>* get_hostname_observable();
+  std::shared_ptr<ObservableValue<String>> get_hostname_observable() {
+    return std::static_pointer_cast<ObservableValue<String>>(hostname_);
+  }
 
-  static String get_hostname();
+  /**
+   * @brief Get the current hostname.
+   *
+   * @return String
+   */
+  static String get_hostname() {
+    return SensESPBaseApp::get()->get_hostname_observable().get()->get();
+  }
 
-  static reactesp::EventLoop* get_event_loop();
+  /**
+   * @brief Get the event loop object from the singleton SensESPBaseApp
+   * instance.
+   *
+   */
+  static reactesp::EventLoop* get_event_loop() {
+    return &(SensESPBaseApp::get()->event_loop_);
+  }
 
  protected:
   /**
@@ -69,20 +122,45 @@ class SensESPBaseApp {
    * be called only once. For compatibility reasons, the class hasn't been
    * refactored into a singleton.
    */
-  SensESPBaseApp();
-  ~SensESPBaseApp();
+  SensESPBaseApp() : filesystem_{std::make_shared<Filesystem>()} {
+    // Instance is now set by the builder
+  }
 
-  virtual void setup();
+  ~SensESPBaseApp() { instance_ = nullptr; }
 
-  static SensESPBaseApp* instance_;
+  void init_hostname() {
+    hostname_ = std::make_shared<PersistingObservableValue<String>>(
+        kDefaultHostname, "/system/hostname");
+    ConfigItem(hostname_);  // Make hostname configurable
+  }
 
-  void set_instance(SensESPBaseApp* instance) { instance_ = instance; }
+  /**
+   * @brief Perform initialization of SensESPBaseApp once builder configuration
+   * is done.
+   *
+   * This should be only called from the builder!
+   *
+   */
+  virtual void setup() {
+    if (!hostname_) {
+      init_hostname();
+    }
+  }
 
-  PersistingObservableValue<String>* hostname_;
+  static std::shared_ptr<SensESPBaseApp> instance_;
 
-  Filesystem* filesystem_;
+  void set_instance(const std::shared_ptr<SensESPBaseApp>& instance) {
+    instance_ = instance;
+  }
+
+  std::shared_ptr<PersistingObservableValue<String>> hostname_;
+
+  std::shared_ptr<Filesystem> filesystem_;
 
   const SensESPBaseApp* set_hostname(String hostname) {
+    if (!hostname_) {
+      init_hostname();
+    }
     hostname_->set(hostname);
     return this;
   }

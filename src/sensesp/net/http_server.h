@@ -58,7 +58,7 @@ class HTTPRequestHandler {
  * @brief HTTP server class wrapping the esp-idf http server.
  *
  */
-class HTTPServer : virtual public FileSystemSaveable {
+class HTTPServer : public FileSystemSaveable {
  public:
   HTTPServer(int port = HTTP_DEFAULT_PORT,
              const String& config_path = "/system/httpserver")
@@ -72,13 +72,6 @@ class HTTPServer : virtual public FileSystemSaveable {
     if (auth_required_) {
       authenticator_ = std::unique_ptr<HTTPDigestAuthenticator>(
           new HTTPDigestAuthenticator(username_, password_, auth_realm_));
-    }
-    if (singleton_ == nullptr) {
-      singleton_ = this;
-      ESP_LOGD(__FILENAME__, "HTTPServer instance created");
-    } else {
-      ESP_LOGE(__FILENAME__, "Only one HTTPServer instance is allowed");
-      return;
     }
     event_loop()->onDelay(0, [this]() {
       esp_err_t error = httpd_start(&server_, &config_);
@@ -111,11 +104,6 @@ class HTTPServer : virtual public FileSystemSaveable {
       MDNS.addService("http", "tcp", 80);
     });
   };
-  ~HTTPServer() {
-    if (singleton_ == this) {
-      singleton_ = nullptr;
-    }
-  }
 
   void stop() { httpd_stop(server_); }
 
@@ -151,17 +139,11 @@ class HTTPServer : virtual public FileSystemSaveable {
     return true;
   }
 
-  void add_handler(HTTPRequestHandler* handler) {
-    handlers_.push_back(std::make_shared<HTTPRequestHandler>(*handler));
-  }
-
-  void add_handler(std::shared_ptr<HTTPRequestHandler> handler) {
+  void add_handler(std::shared_ptr<HTTPRequestHandler>& handler) {
     handlers_.push_back(handler);
   }
 
  protected:
-  static HTTPServer* get_server() { return singleton_; }
-  static HTTPServer* singleton_;
   bool captive_portal_ = false;
   httpd_handle_t server_ = nullptr;
   httpd_config_t config_;

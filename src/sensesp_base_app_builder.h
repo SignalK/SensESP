@@ -14,7 +14,6 @@ class SensESPBaseAppBuilder {
 
  public:
   virtual SensESPBaseAppBuilder* set_hostname(String hostname) = 0;
-  virtual SensESPBaseApp* get_app() = 0;
 };
 
 }  // namespace sensesp

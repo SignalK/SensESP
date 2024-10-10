@@ -74,7 +74,7 @@ static void websocket_event_handler(void* handler_args, esp_event_base_t base,
   }
 }
 
-SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
+SKWSClient::SKWSClient(const String& config_path, std::shared_ptr<SKDeltaQueue> sk_delta_queue,
                        const String& server_address, uint16_t server_port,
                        bool use_mdns)
     : FileSystemSaveable{config_path},
@@ -90,8 +90,7 @@ SKWSClient::SKWSClient(const String& config_path, SKDeltaQueue* sk_delta_queue,
       [this]() { this->emit(this->connection_state_.get()); });
 
   // process any received updates in the main task
-  event_loop()->onRepeat(
-      1, [this]() { this->process_received_updates(); });
+  event_loop()->onRepeat(1, [this]() { this->process_received_updates(); });
 
   // set the singleton object pointer
   ws_client = this;

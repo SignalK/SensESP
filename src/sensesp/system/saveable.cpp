@@ -69,7 +69,7 @@ bool FileSystemSaveable::save() {
   return true;
 }
 
-bool FileSystemSaveable::remove() {
+bool FileSystemSaveable::clear() {
   if (config_path_ == "") {
     return false;
   }

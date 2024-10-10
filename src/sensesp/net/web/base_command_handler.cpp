@@ -5,8 +5,8 @@
 
 namespace sensesp {
 
-void add_http_reset_handler(HTTPServer* server) {
-  HTTPRequestHandler* reset_handler = new HTTPRequestHandler(
+void add_http_reset_handler(std::shared_ptr<HTTPServer>& server) {
+  auto reset_handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_POST, "/api/device/reset", [](httpd_req_t* req) {
         httpd_resp_send(req,
                         "Resetting device back to factory defaults. "
@@ -18,8 +18,8 @@ void add_http_reset_handler(HTTPServer* server) {
   server->add_handler(reset_handler);
 }
 
-void add_http_restart_handler(HTTPServer* server) {
-  HTTPRequestHandler* restart_handler = new HTTPRequestHandler(
+void add_http_restart_handler(std::shared_ptr<HTTPServer>& server) {
+  auto restart_handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_POST, "/api/device/restart", [](httpd_req_t* req) {
         httpd_resp_send(req, "Restarting device", 0);
         event_loop()->onDelay(500, []() { ESP.restart(); });
@@ -28,9 +28,9 @@ void add_http_restart_handler(HTTPServer* server) {
   server->add_handler(restart_handler);
 }
 
-void add_http_info_handler(HTTPServer* server) {
-  HTTPRequestHandler* info_handler =
-      new HTTPRequestHandler(1 << HTTP_GET, "/api/info", [](httpd_req_t* req) {
+void add_http_info_handler(std::shared_ptr<HTTPServer>& server) {
+  auto info_handler = std::make_shared<HTTPRequestHandler>(
+      1 << HTTP_GET, "/api/info", [](httpd_req_t* req) {
         auto status_page_items = StatusPageItemBase::get_status_page_items();
 
         JsonDocument json_doc;
@@ -50,7 +50,7 @@ void add_http_info_handler(HTTPServer* server) {
   server->add_handler(info_handler);
 }
 
-void add_routes_handlers(HTTPServer* server) {
+void add_routes_handlers(std::shared_ptr<HTTPServer>& server) {
   std::vector<RouteDefinition> routes;
 
   routes.push_back(RouteDefinition("Status", "/status", "StatusPage"));
@@ -74,7 +74,7 @@ void add_routes_handlers(HTTPServer* server) {
 
   serializeJson(routes_json, response);
 
-  HTTPRequestHandler* routes_handler = new HTTPRequestHandler(
+  auto routes_handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_GET, "/api/routes", [response](httpd_req_t* req) {
         httpd_resp_set_type(req, "application/json");
         httpd_resp_sendstr(req, response.c_str());
@@ -100,7 +100,7 @@ void add_routes_handlers(HTTPServer* server) {
 
   for (auto it = routes.begin(); it != routes.end(); ++it) {
     String path = it->get_path();
-    HTTPRequestHandler* route_handler = new HTTPRequestHandler(
+    auto route_handler = std::make_shared<HTTPRequestHandler>(
         1 << HTTP_GET, path.c_str(), [root_page](httpd_req_t* req) {
           httpd_resp_set_type(req, root_page->content_type);
           if (root_page->content_encoding != nullptr) {
@@ -114,7 +114,7 @@ void add_routes_handlers(HTTPServer* server) {
   }
 }
 
-void add_base_app_http_command_handlers(HTTPServer* server) {
+void add_base_app_http_command_handlers(std::shared_ptr<HTTPServer>& server) {
   add_http_reset_handler(server);
   add_http_restart_handler(server);
   add_http_info_handler(server);
