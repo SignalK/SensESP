@@ -33,31 +33,6 @@ static float get_pwm(int64_t rgb, int shift_right, bool common_anode) {
   return color_pct;
 }
 
-void RgbLed::set(const long& new_value) {
-  if (led_r_channel_ >= 0) {
-    float r = get_pwm(new_value, 16, common_anode_);
-    PWMOutput::set_pwm(led_r_channel_, r);
-  }
-
-  if (led_g_channel_ >= 0) {
-    float g = get_pwm(new_value, 8, common_anode_);
-    PWMOutput::set_pwm(led_g_channel_, g);
-  }
-
-  if (led_b_channel_ >= 0) {
-    float b = get_pwm(new_value, 0, common_anode_);
-    PWMOutput::set_pwm(led_b_channel_, b);
-  }
-}
-
-void RgbLed::set(const bool& new_value) {
-  if (new_value) {
-    set(led_on_rgb_);
-  } else {
-    set(led_off_rgb_);
-  }
-}
-
 bool RgbLed::to_json(JsonObject& root) {
   root["led_on_rgb"] = led_on_rgb_;
   root["led_off_rgb"] = led_off_rgb_;

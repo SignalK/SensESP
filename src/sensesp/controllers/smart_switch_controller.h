@@ -2,8 +2,10 @@
 #define _smart_switch_controller_h
 
 #include "sensesp/signalk/signalk_put_request.h"
+#include "sensesp/system/lambda_consumer.h"
 #include "sensesp/system/valueconsumer.h"
 #include "sensesp/transforms/click_type.h"
+#include "sensesp/transforms/truth_text.h"
 #include "sensesp/ui/config_item.h"
 
 namespace sensesp {
@@ -41,9 +43,7 @@ namespace sensesp {
  * @see TextToTruth
  * @see ClickType
  */
-class SmartSwitchController : public BooleanTransform,
-                              public ValueConsumer<ClickTypes>,
-                              public ValueConsumer<String> {
+class SmartSwitchController : public ValueProducer<bool>, FileSystemSaveable {
  public:
   /**
    * The constructor
@@ -62,15 +62,54 @@ class SmartSwitchController : public BooleanTransform,
    */
   SmartSwitchController(bool auto_initialize = true, String config_path = "",
                         const char* sk_sync_paths[] = NULL);
-  void set(const bool& new_value) override;
-  void set(const String& new_value) override;
-  void set(const ClickTypes& new_value) override;
 
   // For reading and writing the configuration of this transformation
   virtual bool to_json(JsonObject& doc) override;
   virtual bool from_json(const JsonObject& config) override;
 
  public:
+  LambdaConsumer<ClickTypes> click_consumer_{[this](ClickTypes new_value) {
+    if (!ClickType::is_click(new_value)) {
+      // Ignore button presses (we only want interpreted clicks)
+      return;
+    }
+
+    if (new_value == ClickTypes::UltraLongSingleClick) {
+      // Long clicks reboot the system...
+      ESP.restart();
+      return;
+    }
+
+    // All other click types toggle the current state...
+    this->is_on_ = !this->is_on_;
+    this->emit(this->is_on_);
+
+    if (new_value == ClickTypes::DoubleClick) {
+      // Sync any specified sync paths...
+      for (auto& path : sync_paths_) {
+        ESP_LOGD(__FILENAME__, "Sync status to %s", path.sk_sync_path_.c_str());
+        path.put_request_->set(this->is_on_);
+      }
+    }
+  }};
+
+  LambdaConsumer<String> truthy_string_consumer_{[this](String new_value) {
+    if (TextToTruth::is_valid_true(new_value)) {
+      this->is_on_ = true;
+    } else if (TextToTruth::is_valid_false(new_value)) {
+      this->is_on_ = false;
+    } else {
+      // All other values simply toggle...
+      this->is_on_ = !this->is_on_;
+    }
+    this->emit(this->is_on_);
+  }};
+
+  LambdaConsumer<bool> swich_consumer_{[this](bool value) {
+    this->is_on_ = value;
+    this->emit(is_on_);
+  }};
+
   /// Used to store configuration internally.
   class SyncPath {
    public:
