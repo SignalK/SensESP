@@ -71,6 +71,11 @@
   `ConfigItem`. Web configuration cards are now only rendered for objects that
   have been wrapped in a `ConfigItem` call.
 
+- [Smart pointers](https://medium.com/@lucky_rydar/guide-over-smart-pointers-in-c-46ed8b04448c)
+  are used internally throughout the project. This reduces the risk of memory
+  leaks or crashes due to dangling pointers. It is also possible, but not
+  mandatory, to use smart pointers in your own code.
+
 ### Migrating Existing Projects
 
 - Update your project's `platformio.ini` file to use the new version of SensESP:
