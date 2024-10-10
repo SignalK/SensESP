@@ -85,22 +85,8 @@ class RgbLed : public FileSystemSaveable {
   long led_off_rgb_;
   bool common_anode_;
 
-  void set_color(long new_value) {
-    if (led_r_channel_ >= 0) {
-      float r = get_pwm(new_value, 16, common_anode_);
-      PWMOutput::set_pwm(led_r_channel_, r);
-    }
+  void set_color(long new_value);
 
-    if (led_g_channel_ >= 0) {
-      float g = get_pwm(new_value, 8, common_anode_);
-      PWMOutput::set_pwm(led_g_channel_, g);
-    }
-
-    if (led_b_channel_ >= 0) {
-      float b = get_pwm(new_value, 0, common_anode_);
-      PWMOutput::set_pwm(led_b_channel_, b);
-    }
-  }
 };
 
 const String ConfigSchema(const RgbLed& obj);

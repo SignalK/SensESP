@@ -36,29 +36,32 @@ void setup() {
   SetupLogging();
 
   SensESPMinimalAppBuilder builder;
-  SensESPMinimalApp *sensesp_app = builder.set_hostname("async")->get_app();
+  auto sensesp_app = builder.set_hostname("async")->get_app();
 
-  auto *networking = new Networking("/system/networking", "", "");
-  auto *http_server = new HTTPServer();
+  auto networking = std::make_shared<Networking>("/system/networking", "", "");
+  auto http_server = std::make_shared<HTTPServer>();
 
   // create the SK delta object
-  auto sk_delta_queue_ = new SKDeltaQueue();
+  auto sk_delta_queue_ = std::make_shared<SKDeltaQueue>();
 
   // create the websocket client
-  auto ws_client_ = new SKWSClient("/system/sk", sk_delta_queue_, "", 0);
+  auto ws_client_ =
+      std::make_shared<SKWSClient>("/system/sk", sk_delta_queue_, "", 0);
 
-  ws_client_->connect_to(
-      new LambdaConsumer<SKWSConnectionState>([](SKWSConnectionState input) {
+  auto output_consumer = std::make_shared<LambdaConsumer<SKWSConnectionState>>(
+      [](SKWSConnectionState input) {
         ESP_LOGD("Example", "SKWSConnectionState: %d", input);
-      }));
+      });
+
+  ws_client_->connect_to(output_consumer);
 
   // create the MDNS discovery object
-  auto mdns_discovery_ = new MDNSDiscovery();
+  auto mdns_discovery_ = std::make_shared<MDNSDiscovery>();
 
   // create a system status controller and a led blinker
 
-  auto system_status_controller = new SystemStatusController();
-  auto system_status_led = new SystemStatusLed(LED_BUILTIN);
+  auto system_status_controller = std::make_shared<SystemStatusController>();
+  auto system_status_led = std::make_shared<SystemStatusLed>(LED_BUILTIN);
 
   system_status_controller->connect_to(
       system_status_led->get_system_status_consumer());

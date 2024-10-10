@@ -24,7 +24,7 @@
 
 using namespace sensesp;
 
-SensESPMinimalApp* sensesp_app;
+std::shared_ptr<SensESPMinimalApp> sensesp_app;
 
 void setup() {
   SetupLogging();
