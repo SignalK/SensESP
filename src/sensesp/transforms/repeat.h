@@ -3,8 +3,8 @@
 
 #include <elapsedMillis.h>
 
-#include "sensesp_base_app.h"
 #include "sensesp/types/nullable.h"
+#include "sensesp_base_app.h"
 #include "transform.h"
 
 namespace sensesp {
@@ -27,7 +27,11 @@ namespace sensesp {
 template <typename FROM, typename TO>
 class Repeat : public Transform<FROM, TO> {
  public:
-  Repeat(unsigned long interval) : Transform<FROM, TO>(), interval_{interval} {}
+  Repeat(unsigned long interval) : Transform<FROM, TO>(), interval_{interval} {
+    if (interval_ == 0) {
+      ESP_LOGW("Repeat", "Interval is 0. This will cause a busy loop.");
+    }
+  }
 
   virtual void set(const FROM& input) override {
     this->emit(input);
@@ -35,8 +39,8 @@ class Repeat : public Transform<FROM, TO> {
       // Delete the old repeat event
       repeat_event_->remove(event_loop());
     }
-    repeat_event_ = event_loop()->onRepeat(
-        interval_, [this]() { this->notify(); });
+    repeat_event_ =
+        event_loop()->onRepeat(interval_, [this]() { this->notify(); });
   }
 
  protected:
@@ -107,8 +111,11 @@ class RepeatStopping : public Repeat<T, T> {
 template <typename T>
 class RepeatExpiring : public Repeat<T, Nullable<T>> {
  public:
-    RepeatExpiring(unsigned long interval, unsigned long max_age)
+  RepeatExpiring(unsigned long interval, unsigned long max_age)
       : Repeat<T, Nullable<T>>(interval), max_age_{max_age} {
+    ESP_LOGD("RepeatExpiring", "interval: %lu, max_age: %lu", interval,
+             max_age);
+
     age_ = max_age;
 
     if (this->repeat_event_ != nullptr) {
@@ -167,8 +174,8 @@ class RepeatConstantRate : public RepeatExpiring<T> {
       this->repeat_event_->remove();
     }
 
-    this->repeat_event_ = event_loop()->onRepeat(
-        interval, [this]() { this->repeat_function(); });
+    this->repeat_event_ =
+        event_loop()->onRepeat(interval, [this]() { this->repeat_function(); });
   }
 
   void set(T input) override {

@@ -219,21 +219,74 @@ class SensESPApp : public SensESPBaseApp {
     connect_status_page_items();
   }
 
+  // Collect metrics for the status page
   void connect_status_page_items() {
     this->hostname_->connect_to(&this->hostname_ui_output_);
-    this->event_loop_.onRepeat(
-        4999, [this]() { wifi_ssid_ui_output_.set(WiFi.SSID()); });
-    this->event_loop_.onRepeat(
-        4998, [this]() { free_memory_ui_output_.set(ESP.getFreeHeap()); });
-    this->event_loop_.onRepeat(
-        4997, [this]() { wifi_rssi_ui_output_.set(WiFi.RSSI()); });
-    this->event_loop_.onRepeat(4996, [this]() {
+    this->event_loop_.onRepeat(4999, [this]() {
+      wifi_ssid_ui_output_.set(WiFi.SSID());
+      free_memory_ui_output_.set(ESP.getFreeHeap());
+      wifi_rssi_ui_output_.set(WiFi.RSSI());
+
+      // Uptime
+      uptime_ui_output_.set(millis() / 1000);
+
+      // Event loop queue sizes
+      int event_loop_queue_size = event_loop_.getEventQueueSize();
+      int event_loop_timed_queue_size = event_loop_.getTimedEventQueueSize();
+      int event_loop_untimed_queue_size =
+          event_loop_.getUntimedEventQueueSize();
+
+      // Total tick count
+      uint64_t current_tick_count = event_loop_.getTickCount();
+      total_tick_count_ui_output_.set(current_tick_count);
+
+      // Event counts
+      uint64_t current_event_count = event_loop_.getEventCount();
+      uint64_t current_timed_event_count = event_loop_.getTimedEventCount();
+      uint64_t current_untimed_event_count = event_loop_.getUntimedEventCount();
+      event_count_ui_output_.set(current_event_count);
+      timed_event_count_ui_output_.set(current_timed_event_count);
+      untimed_event_count_ui_output_.set(current_untimed_event_count);
+
+      // Ticks and events per second during last interval
+      static uint64_t last_tick_count = 0;
+      static uint64_t last_event_count = 0;
+      static uint64_t last_timed_event_count = 0;
+      static uint64_t last_untimed_event_count = 0;
+      static uint64_t last_millis = 0;
+      uint64_t current_millis = millis();
+      float interval_seconds = (current_millis - last_millis) / 1000.0;
+
+      uint64_t ticks_diff = current_tick_count - last_tick_count;
+      uint64_t events_diff = current_event_count - last_event_count;
+      uint64_t timed_events_diff =
+          current_timed_event_count - last_timed_event_count;
+      uint64_t untimed_events_diff =
+          current_untimed_event_count - last_untimed_event_count;
+
+      // Set outputs
+      event_loop_queue_size_ui_output_.set(event_loop_queue_size);
+      event_loop_timed_queue_ui_output_.set(event_loop_timed_queue_size);
+      event_loop_untimed_queue_ui_output_.set(event_loop_untimed_queue_size);
+      event_loop_interrupt_queue_ui_output_.set(
+          event_loop_.getISREventQueueSize());
+
+      ticks_per_second_ui_output_.set(int(ticks_diff / interval_seconds));
+      events_per_second_ui_output_.set(int(events_diff / interval_seconds));
+      timed_events_per_second_ui_output_.set(
+          int(timed_events_diff / interval_seconds));
+      untimed_events_per_second_ui_output_.set(
+          int(untimed_events_diff / interval_seconds));
+
+      // Update last values
+      last_tick_count = current_tick_count;
+      last_event_count = current_event_count;
+      last_timed_event_count = current_timed_event_count;
+      last_untimed_event_count = current_untimed_event_count;
+      last_millis = current_millis;
+
       sk_server_address_ui_output_.set(ws_client_->get_server_address());
-    });
-    this->event_loop_.onRepeat(4995, [this]() {
       sk_server_port_ui_output_.set(ws_client_->get_server_port());
-    });
-    this->event_loop_.onRepeat(4994, [this]() {
       sk_server_connection_ui_output_.set(ws_client_->get_connection_status());
     });
     ws_client_->get_delta_tx_count_producer().connect_to(
@@ -265,35 +318,66 @@ class SensESPApp : public SensESPBaseApp {
   std::shared_ptr<SKDeltaQueue> sk_delta_queue_;
   std::shared_ptr<SKWSClient> ws_client_;
 
-  StatusPageItem<String> sensesp_version_ui_output_{
-      "SenseESP version", kSensESPVersion, "Software", 1900};
-  StatusPageItem<String> build_info_ui_output_{
-      "Build date", __DATE__ " " __TIME__, "Software", 2000};
-  StatusPageItem<String> hostname_ui_output_{"Hostname", "", "Network", 500};
-  StatusPageItem<String> mac_address_ui_output_{
-      "MAC Address", WiFi.macAddress(), "Network", 1100};
-  StatusPageItem<String> wifi_ssid_ui_output_{"SSID", "", "Network", 1200};
   StatusPageItem<int> free_memory_ui_output_{"Free memory (bytes)", 0, "System",
-                                             1250};
-  StatusPageItem<int8_t> wifi_rssi_ui_output_{"WiFi signal strength (dB)", -128,
-                                              "Network", 1300};
-  StatusPageItem<String> sk_server_address_ui_output_{"Signal K server address",
-                                                      "", "Signal K", 1400};
-  StatusPageItem<uint16_t> sk_server_port_ui_output_{"Signal K server port", 0,
-                                                     "Signal K", 1500};
-  StatusPageItem<String> sk_server_connection_ui_output_{"SK connection status",
-                                                         "", "Signal K", 1600};
-  StatusPageItem<int> delta_tx_count_ui_output_{"SK Delta TX count", 0,
-                                                "Signal K", 1700};
-  StatusPageItem<int> delta_rx_count_ui_output_{"SK Delta RX count", 0,
-                                                "Signal K", 1800};
+                                             1000};
+  StatusPageItem<int> uptime_ui_output_{"Uptime (s)", 0, "System", 1100};
 
-// Placeholders for system status sensors in case they are created
-std::shared_ptr<ValueProducer<float>> system_hz_sensor_;
-std::shared_ptr<ValueProducer<uint32_t>> free_mem_sensor_;
-std::shared_ptr<ValueProducer<float>> uptime_sensor_;
-std::shared_ptr<ValueProducer<String>> ip_address_sensor_;
-std::shared_ptr<ValueProducer<int>> wifi_signal_sensor_;
+  StatusPageItem<String> hostname_ui_output_{"Hostname", "", "Network", 1200};
+  StatusPageItem<String> mac_address_ui_output_{
+      "MAC Address", WiFi.macAddress(), "Network", 1300};
+  StatusPageItem<String> wifi_ssid_ui_output_{"SSID", "", "Network", 1400};
+
+  StatusPageItem<int8_t> wifi_rssi_ui_output_{"WiFi signal strength (dB)", -128,
+                                              "Network", 1500};
+
+  StatusPageItem<String> sk_server_address_ui_output_{"Signal K server address",
+                                                      "", "Signal K", 1600};
+  StatusPageItem<uint16_t> sk_server_port_ui_output_{"Signal K server port", 0,
+                                                     "Signal K", 1700};
+  StatusPageItem<String> sk_server_connection_ui_output_{"SK connection status",
+                                                         "", "Signal K", 1800};
+  StatusPageItem<int> delta_tx_count_ui_output_{"SK Delta TX count", 0,
+                                                "Signal K", 1900};
+  StatusPageItem<int> delta_rx_count_ui_output_{"SK Delta RX count", 0,
+                                                "Signal K", 2000};
+
+  StatusPageItem<int> event_loop_queue_size_ui_output_{
+      "Event Loop queue size", 0, "Event Loop Queues", 2100};
+  StatusPageItem<int> event_loop_timed_queue_ui_output_{
+      "Event Loop timed queue size", 0, "Event Loop Queues", 2200};
+  StatusPageItem<int> event_loop_untimed_queue_ui_output_{
+      "Event Loop untimed queue size", 0, "Event Loop Queues", 2300};
+  StatusPageItem<int> event_loop_interrupt_queue_ui_output_{
+      "Event Loop interrupt queue size", 0, "Event Loop Queues", 2400};
+
+  StatusPageItem<uint64_t> total_tick_count_ui_output_{
+      "Total ticks processed", 0, "Event Loop Lifetime", 2500};
+  StatusPageItem<uint64_t> event_count_ui_output_{"Events processed", 0,
+                                                  "Event Loop Lifetime", 2600};
+  StatusPageItem<uint64_t> timed_event_count_ui_output_{
+      "Timed events processed", 0, "Event Loop Lifetime", 2700};
+  StatusPageItem<uint64_t> untimed_event_count_ui_output_{
+      "Untimed events processed", 0, "Event Loop Lifetime", 2800};
+  StatusPageItem<float> ticks_per_second_ui_output_{
+      "Ticks per second", 0, "Event Loop Performance", 2900};
+  StatusPageItem<float> events_per_second_ui_output_{
+      "Events per second", 0, "Event Loop Performance", 3000};
+  StatusPageItem<float> timed_events_per_second_ui_output_{
+      "Timed events per second", 0, "Event Loop Performance", 3100};
+  StatusPageItem<float> untimed_events_per_second_ui_output_{
+      "Untimed events per second", 0, "Event Loop Performance", 3200};
+
+  StatusPageItem<String> sensesp_version_ui_output_{
+      "SenseESP version", kSensESPVersion, "Software", 3300};
+  StatusPageItem<String> build_info_ui_output_{
+      "Build date", __DATE__ " " __TIME__, "Software", 3400};
+
+  // Placeholders for system status sensors in case they are created
+  std::shared_ptr<ValueProducer<float>> system_hz_sensor_;
+  std::shared_ptr<ValueProducer<uint32_t>> free_mem_sensor_;
+  std::shared_ptr<ValueProducer<float>> uptime_sensor_;
+  std::shared_ptr<ValueProducer<String>> ip_address_sensor_;
+  std::shared_ptr<ValueProducer<int>> wifi_signal_sensor_;
 
   friend class WebServer;
   friend class SensESPAppBuilder;
