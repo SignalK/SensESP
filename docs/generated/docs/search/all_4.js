@@ -25,10 +25,16 @@ var searchData=
   ['esp32analogreader_22',['ESP32AnalogReader',['../classsensesp_1_1_e_s_p32_analog_reader.html',1,'sensesp::ESP32AnalogReader'],['../classsensesp_1_1_e_s_p32_analog_reader.html#a822aca07ca6a90dac5d5852fef21e040',1,'sensesp::ESP32AnalogReader::ESP32AnalogReader()']]],
   ['evenblinker_23',['EvenBlinker',['../classsensesp_1_1_even_blinker.html',1,'sensesp::EvenBlinker'],['../classsensesp_1_1_even_blinker.html#a5516f3944507707a0192306db22a61ef',1,'sensesp::EvenBlinker::EvenBlinker()']]],
   ['event_5f_24',['event_',['../classsensesp_1_1_base_blinker.html#afc0745c50d0e432d9508bcb084b7d6a3',1,'sensesp::BaseBlinker']]],
-  ['event_5floop_25',['event_loop',['../namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57',1,'sensesp']]],
-  ['event_5floop_5f_26',['event_loop_',['../classsensesp_1_1_sens_e_s_p_base_app.html#ae516965980ce05d7ffbe3cec1837d66d',1,'sensesp::SensESPBaseApp']]],
-  ['executewebsockettask_27',['ExecuteWebSocketTask',['../namespacesensesp.html#a655898328a16b3c9f85902c5a9c981e6',1,'sensesp']]],
-  ['expiring_5fvalue_2eh_28',['expiring_value.h',['../expiring__value_8h.html',1,'']]],
-  ['expiringvalue_29',['ExpiringValue',['../classsensesp_1_1_expiring_value.html',1,'sensesp::ExpiringValue&lt; T &gt;'],['../classsensesp_1_1_expiring_value.html#a176a7395b0d614aff164e906067be0a3',1,'sensesp::ExpiringValue::ExpiringValue()'],['../classsensesp_1_1_expiring_value.html#a8065027c4b1f45c8da22b9708145dd3c',1,'sensesp::ExpiringValue::ExpiringValue(T value, unsigned long expiration_duration, T expired_value)']]],
-  ['extract_5fparam_30',['extract_param',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#ad5b851fe4ce70606474e2af6f970a0ae',1,'sensesp::HTTPDigestAuthenticator']]]
+  ['event_5fcount_5fui_5foutput_5f_25',['event_count_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#ac724e02ac55520aac57919392094e481',1,'sensesp::SensESPApp']]],
+  ['event_5floop_26',['event_loop',['../namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57',1,'sensesp']]],
+  ['event_5floop_5f_27',['event_loop_',['../classsensesp_1_1_sens_e_s_p_base_app.html#ae516965980ce05d7ffbe3cec1837d66d',1,'sensesp::SensESPBaseApp']]],
+  ['event_5floop_5finterrupt_5fqueue_5fui_5foutput_5f_28',['event_loop_interrupt_queue_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a02a862e07c817d35377c048435c041e4',1,'sensesp::SensESPApp']]],
+  ['event_5floop_5fqueue_5fsize_5fui_5foutput_5f_29',['event_loop_queue_size_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#aa320dfc100a96f5b4999aab6bf1c3c15',1,'sensesp::SensESPApp']]],
+  ['event_5floop_5ftimed_5fqueue_5fui_5foutput_5f_30',['event_loop_timed_queue_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a76d97b90b33254edf9c14e4e11fc3fcb',1,'sensesp::SensESPApp']]],
+  ['event_5floop_5funtimed_5fqueue_5fui_5foutput_5f_31',['event_loop_untimed_queue_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a9ad106fa02e0daa66f921800238e9c86',1,'sensesp::SensESPApp']]],
+  ['events_5fper_5fsecond_5fui_5foutput_5f_32',['events_per_second_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#aeeb9b90735d9b2595bcb40a23fff0f61',1,'sensesp::SensESPApp']]],
+  ['executewebsockettask_33',['ExecuteWebSocketTask',['../namespacesensesp.html#a655898328a16b3c9f85902c5a9c981e6',1,'sensesp']]],
+  ['expiring_5fvalue_2eh_34',['expiring_value.h',['../expiring__value_8h.html',1,'']]],
+  ['expiringvalue_35',['ExpiringValue',['../classsensesp_1_1_expiring_value.html',1,'sensesp::ExpiringValue&lt; T &gt;'],['../classsensesp_1_1_expiring_value.html#a176a7395b0d614aff164e906067be0a3',1,'sensesp::ExpiringValue::ExpiringValue()'],['../classsensesp_1_1_expiring_value.html#a8065027c4b1f45c8da22b9708145dd3c',1,'sensesp::ExpiringValue::ExpiringValue(T value, unsigned long expiration_duration, T expired_value)']]],
+  ['extract_5fparam_36',['extract_param',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#ad5b851fe4ce70606474e2af6f970a0ae',1,'sensesp::HTTPDigestAuthenticator']]]
 ];

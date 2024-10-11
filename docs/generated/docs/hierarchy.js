@@ -99,6 +99,9 @@ var hierarchy =
         [ "sensesp::FreeMem", "classsensesp_1_1_free_mem.html", null ]
       ] ],
       [ "sensesp::ValueProducer< float >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::ObservableValue< float >", "classsensesp_1_1_observable_value.html", [
+          [ "sensesp::StatusPageItem< float >", "classsensesp_1_1_status_page_item.html", null ]
+        ] ],
         [ "sensesp::Transform< int, float >", "classsensesp_1_1_transform.html", [
           [ "sensesp::Frequency", "classsensesp_1_1_frequency.html", null ]
         ] ],
@@ -226,6 +229,11 @@ var hierarchy =
           [ "sensesp::StatusPageItem< uint16_t >", "classsensesp_1_1_status_page_item.html", null ]
         ] ]
       ] ],
+      [ "sensesp::ValueProducer< uint64_t >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::ObservableValue< uint64_t >", "classsensesp_1_1_observable_value.html", [
+          [ "sensesp::StatusPageItem< uint64_t >", "classsensesp_1_1_status_page_item.html", null ]
+        ] ]
+      ] ],
       [ "sensesp::SKEmitter", "classsensesp_1_1_s_k_emitter.html", [
         [ "sensesp::SKOutput< String >", "classsensesp_1_1_s_k_output.html", null ],
         [ "sensesp::SKOutput< T >", "classsensesp_1_1_s_k_output.html", [
@@ -348,10 +356,12 @@ var hierarchy =
     [ "sensesp::Startable", "classsensesp_1_1_startable.html", null ],
     [ "sensesp::StaticFileData", "structsensesp_1_1_static_file_data.html", null ],
     [ "sensesp::StatusPageItemBase", "classsensesp_1_1_status_page_item_base.html", [
-      [ "sensesp::StatusPageItem< String >", "classsensesp_1_1_status_page_item.html", null ],
       [ "sensesp::StatusPageItem< int >", "classsensesp_1_1_status_page_item.html", null ],
+      [ "sensesp::StatusPageItem< String >", "classsensesp_1_1_status_page_item.html", null ],
       [ "sensesp::StatusPageItem< int8_t >", "classsensesp_1_1_status_page_item.html", null ],
       [ "sensesp::StatusPageItem< uint16_t >", "classsensesp_1_1_status_page_item.html", null ],
+      [ "sensesp::StatusPageItem< uint64_t >", "classsensesp_1_1_status_page_item.html", null ],
+      [ "sensesp::StatusPageItem< float >", "classsensesp_1_1_status_page_item.html", null ],
       [ "sensesp::StatusPageItem< T >", "classsensesp_1_1_status_page_item.html", null ]
     ] ],
     [ "sensesp::SmartSwitchController::SyncPath", "classsensesp_1_1_smart_switch_controller_1_1_sync_path.html", null ],
@@ -377,6 +387,7 @@ var hierarchy =
       [ "sensesp::LambdaConsumer< ClickTypes >", "classsensesp_1_1_lambda_consumer.html", null ]
     ] ],
     [ "sensesp::ValueConsumer< float >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::ObservableValue< float >", "classsensesp_1_1_observable_value.html", null ],
       [ "sensesp::Transform< float, String >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< float, float >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< float, int >", "classsensesp_1_1_transform.html", null ],
@@ -419,6 +430,9 @@ var hierarchy =
     ] ],
     [ "sensesp::ValueConsumer< uint16_t >", "classsensesp_1_1_value_consumer.html", [
       [ "sensesp::ObservableValue< uint16_t >", "classsensesp_1_1_observable_value.html", null ]
+    ] ],
+    [ "sensesp::ValueConsumer< uint64_t >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::ObservableValue< uint64_t >", "classsensesp_1_1_observable_value.html", null ]
     ] ],
     [ "sensesp::ValueConsumer< WiFiState >", "classsensesp_1_1_value_consumer.html", [
       [ "sensesp::LambdaConsumer< WiFiState >", "classsensesp_1_1_lambda_consumer.html", null ]
