@@ -8,17 +8,17 @@
 
 namespace sensesp {
 
-void SystemHz::tick() { tick_count_++; }
-
 void SystemHz::update() {
   // getting sporadic divide by 0 exceptions, no harm in skipping a loop.
   if (elapsed_millis_ == 0) {
     return;
   }
 
-  output_ = (tick_count_ * 1000) / elapsed_millis_;
+  uint32_t current_tick_count_ = event_loop()->getTickCount();
+  output_ =
+      (current_tick_count_ - last_tick_count_) / (elapsed_millis_ / 1000.);
 
-  tick_count_ = 0;
+  last_tick_count_ = current_tick_count_;
   elapsed_millis_ = 0;
 
   this->notify();

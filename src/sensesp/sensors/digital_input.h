@@ -57,7 +57,8 @@ class DigitalInputState : public DigitalInput, public Sensor<bool> {
         triggered_{false} {
     load();
 
-    event_loop()->onRepeat(read_delay_, [this]() { emit(digitalRead(pin_)); });
+    event_loop()->onRepeat(read_delay_,
+                           [this]() { this->emit(digitalRead(pin_)); });
   }
 
  private:

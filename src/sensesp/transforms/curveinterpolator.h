@@ -88,7 +88,7 @@ class CurveInterpolator : public FloatTransform {
   friend const char* ConfigSchema(const CurveInterpolator& obj);
 };
 
-const char* ConfigSchema(const CurveInterpolator& obj) {
+inline const char* ConfigSchema(const CurveInterpolator& obj) {
   static const char schema[] = R"({"type":"object","properties":{"samples":{"title":"Sample values","type":"array","format":"table","items":{"type":"object","properties":{"input":{"type":"number","title":"%s"},"output":{"type":"number","title":"%s"}}}}}})";
   static char buf[sizeof(schema) + 160];
   snprintf(buf, sizeof(buf), schema, obj.input_title_.c_str(),

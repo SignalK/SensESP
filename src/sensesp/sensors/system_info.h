@@ -48,16 +48,13 @@ class SystemHz : public ValueProducer<float> {
  public:
   SystemHz() {
     elapsed_millis_ = 0;
-
-    event_loop()->onTick([this]() { this->tick(); });
     event_loop()->onRepeat(1000, [this]() { this->update(); });
   }
   String get_value_name() { return "systemhz"; }
 
  protected:
-  uint32_t tick_count_ = 0;
+  uint32_t last_tick_count_ = 0;
   elapsedMillis elapsed_millis_;
-  void tick();
   void update();
 };
 
