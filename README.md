@@ -76,6 +76,9 @@
   leaks or crashes due to dangling pointers. It is also possible, but not
   mandatory, to use smart pointers in your own code.
 
+- Internal instrumentation has been improved. Web user interface status page
+  now shows memory usage and event loop statistics.
+
 ### Migrating Existing Projects
 
 - Update your project's `platformio.ini` file to use the new version of SensESP:
