@@ -3,7 +3,7 @@
 
 #include "sensesp.h"
 
-#include <freeRTOS/semphr.h>
+#include <freertos/semphr.h>
 
 namespace sensesp {
 
