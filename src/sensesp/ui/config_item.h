@@ -4,6 +4,7 @@
 #include <map>
 #include <memory>
 #include <vector>
+#include <cstddef>
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
@@ -33,21 +34,18 @@ template <>
 const char* get_schema_type_string(const bool dummy);
 
 /**
- * @brief Template function to provide a configuration schema for a
- * ConfigItemT<T>.
+ * @brief Provide a configuration schema for a
+ * ConfigItemT<nullptr>.
+ *
+ * For this to work, an overload or a specialization of this function must
+ * be provided for each type T that is used in a ConfigItemT<T>.
  *
  * @tparam T
  * @param obj
  * @return const char*
  */
-template <typename T>
-const String ConfigSchema(const T& obj) {
+inline const String ConfigSchema(const std::nullptr_t& obj) {
   return "null";
-}
-
-template <typename T>
-const String ConfigSchema(const std::shared_ptr<T>& obj) {
-  return ConfigSchema(*obj);
 }
 
 template <typename T>
@@ -271,7 +269,6 @@ class ConfigItemT : public ConfigItemBase {
     String schema = ConfigSchema(*config_object_);
     return schema;
   }
-
 };
 
 /**
