@@ -179,6 +179,10 @@ class HTTPServer : public FileSystemSaveable {
   friend esp_err_t call_request_dispatcher(httpd_req_t* req);
 };
 
+inline const String ConfigSchema(const HTTPServer& obj) {
+  return "null";
+}
+
 inline bool ConfigRequiresRestart(const HTTPServer& obj) { return true; }
 
 }  // namespace sensesp

@@ -283,6 +283,10 @@ class Networking : public FileSystemSaveable,
   std::shared_ptr<LambdaConsumer<WiFiState>> wifi_state_emitter_;
 };
 
+inline const String ConfigSchema(const Networking& obj) {
+  return "null";
+}
+
 inline bool ConfigRequiresRestart(const Networking& obj) { return true; }
 
 }  // namespace sensesp
