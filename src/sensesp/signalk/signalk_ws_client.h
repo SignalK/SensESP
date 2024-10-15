@@ -162,6 +162,10 @@ class SKWSClient : public FileSystemSaveable,
   SKWSConnectionState get_connection_state() { return task_connection_state_; }
 };
 
+inline const String ConfigSchema(const SKWSClient& obj) {
+  return "null";
+}
+
 inline bool ConfigRequiresRestart(const SKWSClient& obj) { return true; }
 
 }  // namespace sensesp
