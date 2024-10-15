@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.5</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.6</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -412,11 +412,17 @@ $(function(){initNavTree('networking_8h_source.html',''); initResizable(true); }
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>};</div>
 </div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a0a24d935be4e25684d446f61d5495158">  286</a></span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacesensesp.html#adf7349083124bc58e3924f546937179f">ConfigRequiresRestart</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_networking.html">Networking</a>&amp; obj) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="foldopen" id="foldopen00286" data-start="{" data-end="}">
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a06f7952b679fef26f97a2aab157acd8a">  286</a></span><span class="keyword">inline</span> <span class="keyword">const</span> String <a class="code hl_function" href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_networking.html">Networking</a>&amp; obj) {</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="keywordflow">return</span> <span class="stringliteral">&quot;null&quot;</span>;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>}</div>
+</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a0a24d935be4e25684d446f61d5495158">  290</a></span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespacesensesp.html#adf7349083124bc58e3924f546937179f">ConfigRequiresRestart</a>(<span class="keyword">const</span> <a class="code hl_class" href="classsensesp_1_1_networking.html">Networking</a>&amp; obj) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclasssensesp_1_1_access_point_settings_html"><div class="ttname"><a href="classsensesp_1_1_access_point_settings.html">sensesp::AccessPointSettings</a></div><div class="ttdoc">Storage object for WiFi access point settings.</div><div class="ttdef"><b>Definition</b> <a href="#l00114">networking.h:114</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_access_point_settings_html_a14c76bed6266782c40412ee2ff48dcce"><div class="ttname"><a href="classsensesp_1_1_access_point_settings.html#a14c76bed6266782c40412ee2ff48dcce">sensesp::AccessPointSettings::password_</a></div><div class="ttdeci">String password_</div><div class="ttdef"><b>Definition</b> <a href="#l00133">networking.h:133</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_access_point_settings_html_a1d26085b98cdf68b1fb5607454fd83a0"><div class="ttname"><a href="classsensesp_1_1_access_point_settings.html#a1d26085b98cdf68b1fb5607454fd83a0">sensesp::AccessPointSettings::from_json</a></div><div class="ttdeci">static AccessPointSettings from_json(const JsonObject &amp;json)</div><div class="ttdef"><b>Definition</b> <a href="#l00138">networking.h:138</a></div></div>
@@ -487,13 +493,14 @@ $(function(){initNavTree('networking_8h_source.html',''); initResizable(true); }
 <div class="ttc" id="aclasssensesp_1_1_wi_fi_state_producer_html_af936cca265f9b9fd7a3cb1360fdc909d"><div class="ttname"><a href="classsensesp_1_1_wi_fi_state_producer.html#af936cca265f9b9fd7a3cb1360fdc909d">sensesp::WiFiStateProducer::WiFiStateProducer</a></div><div class="ttdeci">WiFiStateProducer(WiFiStateProducer &amp;other)=delete</div></div>
 <div class="ttc" id="alambda__consumer_8h_html"><div class="ttname"><a href="lambda__consumer_8h.html">lambda_consumer.h</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a5bfba1ec2874e5b5ff8b707d8808117c"><div class="ttname"><a href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">sensesp::kMaxNumClientConfigs</a></div><div class="ttdeci">constexpr int kMaxNumClientConfigs</div><div class="ttdef"><b>Definition</b> <a href="#l00018">networking.h:18</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8"><div class="ttname"><a href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8">sensesp::WiFiState::kWifiConnectedToAP</a></div><div class="ttdeci">@ kWifiConnectedToAP</div></div>
 <div class="ttc" id="anamespacesensesp_html_ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019"><div class="ttname"><a href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019">sensesp::WiFiState::kWifiAPModeActivated</a></div><div class="ttdeci">@ kWifiAPModeActivated</div></div>
 <div class="ttc" id="anamespacesensesp_html_ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da"><div class="ttname"><a href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da">sensesp::WiFiState::kWifiNoAP</a></div><div class="ttdeci">@ kWifiNoAP</div></div>
 <div class="ttc" id="anamespacesensesp_html_ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5"><div class="ttname"><a href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aeadfe8409a3feb30a0acc8624fd85556c5">sensesp::WiFiState::kWifiDisconnected</a></div><div class="ttdeci">@ kWifiDisconnected</div></div>
-<div class="ttc" id="anamespacesensesp_html_adf7349083124bc58e3924f546937179f"><div class="ttname"><a href="namespacesensesp.html#adf7349083124bc58e3924f546937179f">sensesp::ConfigRequiresRestart</a></div><div class="ttdeci">bool ConfigRequiresRestart(const HTTPServer &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="http__server_8h_source.html#l00182">http_server.h:182</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_adf7349083124bc58e3924f546937179f"><div class="ttname"><a href="namespacesensesp.html#adf7349083124bc58e3924f546937179f">sensesp::ConfigRequiresRestart</a></div><div class="ttdeci">bool ConfigRequiresRestart(const HTTPServer &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="http__server_8h_source.html#l00186">http_server.h:186</a></div></div>
 <div class="ttc" id="aobservablevalue_8h_html"><div class="ttname"><a href="observablevalue_8h.html">observablevalue.h</a></div></div>
 <div class="ttc" id="aresettable_8h_html"><div class="ttname"><a href="resettable_8h.html">resettable.h</a></div></div>
 <div class="ttc" id="asensesp__base__app_8h_html"><div class="ttname"><a href="sensesp__base__app_8h.html">sensesp_base_app.h</a></div></div>

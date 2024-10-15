@@ -6,5 +6,6 @@ var networking_8h =
     [ "sensesp::WiFiNetworkInfo", "classsensesp_1_1_wi_fi_network_info.html", "classsensesp_1_1_wi_fi_network_info" ],
     [ "sensesp::Networking", "classsensesp_1_1_networking.html", "classsensesp_1_1_networking" ],
     [ "ConfigRequiresRestart", "networking_8h.html#a0a24d935be4e25684d446f61d5495158", null ],
+    [ "ConfigSchema", "networking_8h.html#a06f7952b679fef26f97a2aab157acd8a", null ],
     [ "kMaxNumClientConfigs", "networking_8h.html#a5bfba1ec2874e5b5ff8b707d8808117c", null ]
 ];

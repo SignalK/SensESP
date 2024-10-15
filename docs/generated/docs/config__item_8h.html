@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.5</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0-beta.6</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -114,6 +114,7 @@ $(function(){initNavTree('config__item_8h.html',''); initResizable(true); });
 <div class="textblock"><code>#include &lt;map&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
 <code>#include &quot;Arduino.h&quot;</code><br />
 <code>#include &quot;ArduinoJson.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="saveable_8h_source.html">sensesp/system/saveable.h</a>&quot;</code><br />
@@ -160,13 +161,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a262289c4dde77cc0a59a41f304b9f47b" id="r_a262289c4dde77cc0a59a41f304b9f47b"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:a262289c4dde77cc0a59a41f304b9f47b"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a262289c4dde77cc0a59a41f304b9f47b">sensesp::get_schema_type_string</a> (const bool dummy)</td></tr>
 <tr class="separator:a262289c4dde77cc0a59a41f304b9f47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af54d568f6de8784e8baab62cf3a0ae75" id="r_af54d568f6de8784e8baab62cf3a0ae75"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:af54d568f6de8784e8baab62cf3a0ae75"><td class="memTemplItemLeft" align="right" valign="top">const String&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#af54d568f6de8784e8baab62cf3a0ae75">sensesp::ConfigSchema</a> (const T &amp;obj)</td></tr>
-<tr class="memdesc:af54d568f6de8784e8baab62cf3a0ae75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template function to provide a configuration schema for a ConfigItemT&lt;T&gt;.  <br /></td></tr>
-<tr class="separator:af54d568f6de8784e8baab62cf3a0ae75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90c8a9562b4179651289292ff1e9e8bd" id="r_a90c8a9562b4179651289292ff1e9e8bd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a90c8a9562b4179651289292ff1e9e8bd"><td class="memTemplItemLeft" align="right" valign="top">const String&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#a90c8a9562b4179651289292ff1e9e8bd">sensesp::ConfigSchema</a> (const std::shared_ptr&lt; T &gt; &amp;obj)</td></tr>
-<tr class="separator:a90c8a9562b4179651289292ff1e9e8bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaaf827b7cf85bdae36bab5b2102d786" id="r_abaaf827b7cf85bdae36bab5b2102d786"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#abaaf827b7cf85bdae36bab5b2102d786">sensesp::ConfigSchema</a> (const std::nullptr_t &amp;obj)</td></tr>
+<tr class="memdesc:abaaf827b7cf85bdae36bab5b2102d786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide a configuration schema for a ConfigItemT&lt;nullptr&gt;.  <br /></td></tr>
+<tr class="separator:abaaf827b7cf85bdae36bab5b2102d786"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4e5dcb73c52f176d96645b48dfaee95" id="r_aa4e5dcb73c52f176d96645b48dfaee95"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aa4e5dcb73c52f176d96645b48dfaee95"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesensesp.html#aa4e5dcb73c52f176d96645b48dfaee95">sensesp::ConfigRequiresRestart</a> (const T &amp;obj)</td></tr>
 <tr class="separator:aa4e5dcb73c52f176d96645b48dfaee95"><td class="memSeparator" colspan="2">&#160;</td></tr>
