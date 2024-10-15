@@ -1,5 +1,7 @@
 var NAVTREEINDEX11 =
 {
+"namespacesensesp.html#af71bdd7f16e2d227fe501fd50824018b":[0,0,1,220],
+"namespacesensesp.html#af79c1d21ff7b9cc12fa9fb723524df06":[0,0,1,188],
 "namespacesensesp.html#af833775127368fc26658b6d3a070f2ab":[0,0,1,208],
 "namespacesensesp.html#af833775127368fc26658b6d3a070f2aba1ff64e7ba02f5309e723ffe6f967448d":[0,0,1,208,3],
 "namespacesensesp.html#af833775127368fc26658b6d3a070f2aba358a444cc35191423050af12926f6079":[0,0,1,208,4],
@@ -11,16 +13,17 @@ var NAVTREEINDEX11 =
 "namespacesensesp.html#afa937fcb2693d4d73b8294e55d4e1b4e":[0,0,1,199],
 "namespacesensesp.html#afa9d78a85f1d5142d3e862ed0ef16b3b":[0,0,1,181],
 "namespacesensesp.html#afd04db69d3990ea7a33b47a086a87b83":[0,0,1,185],
-"namespacesensesp.html#afd8af50210500a2f97ba8638f1e8ba8c":[0,0,1,341],
+"namespacesensesp.html#afd8af50210500a2f97ba8638f1e8ba8c":[0,0,1,343],
 "namespacesensesp.html#afdc25a8c2722f9eacd2c7ed6769e5244":[0,0,1,155],
 "namespacesensesp.html#aff4d79bc2e02235714d0334e7607d216":[0,0,1,197],
-"namespacesensesp.html#aff963dfc2628977311980b540060e5d1":[0,0,1,344],
+"namespacesensesp.html#aff963dfc2628977311980b540060e5d1":[0,0,1,346],
 "networking_8cpp.html":[2,0,0,0,1,7],
 "networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce":[2,0,0,0,1,7,0],
 "networking_8cpp_source.html":[2,0,0,0,1,7],
 "networking_8h.html":[2,0,0,0,1,8],
+"networking_8h.html#a06f7952b679fef26f97a2aab157acd8a":[2,0,0,0,1,8,6],
 "networking_8h.html#a0a24d935be4e25684d446f61d5495158":[2,0,0,0,1,8,5],
-"networking_8h.html#a5bfba1ec2874e5b5ff8b707d8808117c":[2,0,0,0,1,8,6],
+"networking_8h.html#a5bfba1ec2874e5b5ff8b707d8808117c":[2,0,0,0,1,8,7],
 "networking_8h_source.html":[2,0,0,0,1,8],
 "nullable_8cpp.html":[2,0,0,0,6,1],
 "nullable_8cpp_source.html":[2,0,0,0,6,1],
@@ -216,6 +219,7 @@ var NAVTREEINDEX11 =
 "signalk__ws__client_8cpp.html#a655898328a16b3c9f85902c5a9c981e6":[2,0,0,0,3,19,0],
 "signalk__ws__client_8cpp_source.html":[2,0,0,0,3,19],
 "signalk__ws__client_8h.html":[2,0,0,0,3,20],
+"signalk__ws__client_8h.html#a0585245c2ada0b231913fdedb754d31e":[2,0,0,0,3,20,3],
 "signalk__ws__client_8h.html#a90664648fd77529191dc5d0f95d1ebf2":[2,0,0,0,3,20,2],
 "signalk__ws__client_8h.html#ad5783ae20a1db2a16319798ed5513863":[2,0,0,0,3,20,1],
 "signalk__ws__client_8h.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d":[2,0,0,0,3,20,1,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX11 =
 "status__page__item_8h.html":[2,0,0,0,7,3],
 "status__page__item_8h.html#a63c8d27e4a9b85afbd8d5ea02af7294f":[2,0,0,0,7,3,3],
 "status__page__item_8h.html#a8b87d522bfe38fb6f0f3412645759ad0":[2,0,0,0,7,3,2],
-"status__page__item_8h_source.html":[2,0,0,0,7,3],
-"stream__producer_8h.html":[2,0,0,0,4,29],
-"stream__producer_8h_source.html":[2,0,0,0,4,29],
-"struct_arduino_json_1_1_converter_3_01std_1_1vector_3_01_t_01_4_01_4.html":[0,0,0,0],
-"struct_arduino_json_1_1_converter_3_01std_1_1vector_3_01_t_01_4_01_4.html":[1,0,0,0]
+"status__page__item_8h_source.html":[2,0,0,0,7,3]
 };

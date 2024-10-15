@@ -7,5 +7,6 @@ var signalk__ws__client_8h =
       [ "kSKWSConnecting", "signalk__ws__client_8h.html#ad5783ae20a1db2a16319798ed5513863a73e03f1549ec11b65c54fbd267aa652f", null ],
       [ "kSKWSConnected", "signalk__ws__client_8h.html#ad5783ae20a1db2a16319798ed5513863ad68f3b8729264c6b9779ab6c6630bae2", null ]
     ] ],
-    [ "ConfigRequiresRestart", "signalk__ws__client_8h.html#a90664648fd77529191dc5d0f95d1ebf2", null ]
+    [ "ConfigRequiresRestart", "signalk__ws__client_8h.html#a90664648fd77529191dc5d0f95d1ebf2", null ],
+    [ "ConfigSchema", "signalk__ws__client_8h.html#a0585245c2ada0b231913fdedb754d31e", null ]
 ];
