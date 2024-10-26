@@ -45,9 +45,6 @@
   - `Throttle`: limits the rate of output updates
   - `Filter`: emits the input value only if it passes a given test
 
-- Support asynchronous configurables for setting remote device configuration
-  using the web interface
-
 - Implement stream producers that emit characters or lines from a stream
   (e.g., a serial port)
 - SKEmitter::as_signalk() has been renamed to SKEmitter::as_signalk_json().
@@ -118,9 +115,6 @@
   ```
 
 - Remove the final `sensesp_app->start();` call from your `setup()` function.
-
-- If your project depends on any external libraries, they may need to be updated
-  to work with the new version of SensESP.
 
 - The `reactesp` namespace is no longer imported. If you have any references to
   classes in this namespace, you will need to update them to use the namespace

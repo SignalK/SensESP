@@ -8,7 +8,118 @@ nav_order: 70
 
 ## Migrating SensESP Version 2 Projects to Version 3
 
+### Quick Changes for the Impatient
 
+SensESP v3 introduces some changes in the main program initialization and structure.
+
+Update your project's `platformio.ini` file to use the new version of SensESP:
+
+```ini
+lib_deps =
+  SignalK/SensESP @ ^3.0.0
+```
+
+Adjust the build flags in your project's `platformio.ini` file as follows:
+
+```ini
+build_flags =
+  -D LED_BUILTIN=2
+  ; Max (and default) debugging level in Arduino ESP32 Core
+  -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE
+  ; Arduino Core bug workaround: define the log tag for the Arduino
+  ; logging macros.
+  -D TAG='"Arduino"'
+  ; Use the ESP-IDF logging library - required by SensESP.
+  -D USE_ESP_IDF_LOG
+```
+
+If you have the following in the beginning of your `setup()` function:
+
+```cpp
+#ifndef SERIAL_DEBUG_DISABLED
+  SetupSerialDebug(115200);
+#endif
+```
+replace it with:
+
+```cpp
+SetupLogging();
+```
+
+The `reactesp` namespace is no longer imported. If you have any references to
+classes in this namespace, you will need to update them to use the namespace
+explicitly.
+
+Additionally, ReactESP classes have been renamed:
+
+- `ReactESP` -> `reactesp::EventLoop`
+- `*Reaction` -> `reactesp::*Event`
+
+For example, `ReactESP` class should be referred to as
+`reactesp::EventLoop`. In particular, this change probably needs to be made
+in your project's `main.cpp` file.
+
+SensESP uses the [ReactESP](https:://github.com/mairas/ReactESP) framework for event-based programming. In previous versions, the ReactESP "app" object had to be instantiated in the main program file. This is no longer the case, and SensESP will take care of this for you. Remove any line such as
+```c++
+reactesp::ReactESP app;
+```
+or
+```c++
+ReactESP app;
+```
+from your `main.cpp` file. Similarly, the ReactESP main class has been renamed to `EventLoop`. If you want to set up ReactESP events (previously called "reactions"), use the `event_loop()` convenience function to get a pointer to the `EventLoop` object.
+
+For example:
+
+```cpp
+event_loop()->onRepeat(
+  1000,
+  []() { Serial.println("Hello, world!"); }
+);
+```
+
+SensESP v3 has removed the `Startable` class. In previous versions, you would have `sensesp_app->start();` as the last line in your `setup()` function. This is no longer necessary. If you need to initialize something after the `setup()` function has finished, create a zero-delay event: `event_loop()->onDelay(0, []() { /* your code here */ });`.
+
+Logging initialization has changed. At the beginning of your `setup()` function, remove these lines:
+
+```c++
+#ifndef SERIAL_DEBUG_DISABLED
+  SetupSerialDebug(115200);
+#endif
+```
+and replace them with this line:
+```c++
+SetupLogging();
+```
+In `platformio.ini`, replace the `build_flags` definition with this:
+```ini
+build_flags =
+   -D LED_BUILTIN=2
+   ; Max (and default) debugging level in Arduino ESP32 Core
+   -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE
+   ; Arduino Core bug workaround: define the log tag for the Arduino
+   ; logging macros.
+   -D TAG='"ARDUINO"'
+   ; Use the ESP-IDF logging library - required by SensESP.
+   -D USE_ESP_IDF_LOG
+```
+
+See the next section how to update your code to the new config item system.
+
+### Exposing Sensors, Transforms, and Outputs to the Web Interface
+
+In previous versions of SensESP, any object inheriting from `Configurable` that had a config path defined, would automatically be added to the web interface. In SensESP v3, this has changed. Now, you need to explicitly expose objects to the web interface. This isdone by calling `ConfigItem` with the object as an argument. For example:
+
+```cpp
+auto input_calibration = new Linear(1.0, 0.0, "/input/calibration");
+
+ConfigItem(input_calibration)
+    ->set_title("Input Calibration")
+    ->set_description("Analog input value adjustment.")
+    ->set_sort_order(1100);
+
+analog_input->connect_to(input_calibration);
+```
 
 ### Logging
 
