@@ -66,56 +66,9 @@ By itself, it does nothing, but it implements the `ValueProducer` interface, and
 If you update the value of the `ObservableValue`, all the connected consumers will be notified.
 This approach can be used to inject arbitrary data into SensESP processing networks.
 
-## Configurables
+## Saveables and Serializables
 
-Many SensESP objects benefit from having a configuration interface and means for storing and retriveing configuration values from a persistent storage.
-The [`Configurable`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_configurable.html) class is a base class for all such objects.
-
-`Configurable` objects can read and write their configuration values by defining `set_configuration()` and `get_configuration()` methods.
-The method naming can be a bit confusing: `set_configuration()` sets the values of object member variables, while `get_configuration()` returns an `ArduinoJson` object filled with the member variable values.
-Hence, `set` loads and `get` saves the configuration.
-
-`Configurable` objects also normally define a config schema, acquired by calling `get_config_schema()`.
-The config schema is used to render the configuration page in the web interface.
-
-## Resettables and Startables
-
-Some additional base classes exist for objects that can be reset and that have additional startup routines.
-These inherit from [`Resettable`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_resettable.html) and [`Startable`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_startable.html) base classes.
-
-`Startable`s are more interesting and will be discussed first.
-
-A `Startable` object is something that should be somehow enabled or started when all other objects have been initialized and we want to actually start running the program.
-The startup routine is defined by the `start()` method implemented by the inheriting class.
-
-For example, basic WiFi networking objects should be initialized before the websocket connection to the Signal K server is attempted because the latter may utilize the former.
-It should be noted, however, that network connections, in particular, are established asynchronously.
-Returning from the `start()` call only signals that we have started establishing the connection, not that the connection already exists.
-
-The `Startable` constructor has an optional `priority` parameter that can be used to control the object startup order.
-Higher numbers come first and negative numbers are allowed.
-The priority definitions are arbitrary, but some of the currently defined values are:
-
-| Priority     | Subsystem            |
-|-------------:|:---------------------|
-| 80           | WiFi networking      |
-| 60           | SK Websocket client  |
-| 50           | HTTP server          |
-| 10           | Sensors              |
-| 5            | Transforms           |
-| 0            | Default value        |
-
-A `Resettable` object is something that should be called when the ESP device is factory reset.
-Currently, the only use cases for `Resettable` are initializing the file system and the WiFi network settings.
-
-Similar to `Startable`, the `Resettable` constructor has an optional `priority` parameter that can be used to control the object reset order.
-
-The currently defined values are:
-
-| Priority     | Subsystem            |
-|-------------:|:---------------------|
-| 0            | WiFi networking      |
-| -100         | File system          |
+SensESP can persist many objects to the local file system. In particular, class objects that inherit from `Serializable` can be serialized to JSON and deserialized back. Likewise, any class inheriting from 'FileSystemSaveable' allows saving and loading of the object to and from the file system.
 
 ## Sensors
 

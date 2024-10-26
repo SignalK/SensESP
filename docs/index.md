@@ -19,14 +19,14 @@ SensESP features include:
 
 * High-level programming interfaces for sensor development
 * Support for a wide range of common sensor hardware with a set of [add-on libraries](pages/additional_resources/) - and if native support is missing, using existing Arduino libraries directly is also quite simple in most cases
-* A Web configuration user interface for sensors, transforms, and output paths
+* A Web user interface for configuring all aspects of the sensor system
 * Easy on-boarding with a Wi-Fi configuration tool and fully automated server discovery
 * Full Signal K integration with authentication, and transmission and reception of data
 * Support for over-the-air (OTA) firmware updates
-* Support for remote debugging over Wi-Fi
+
 
 To use SensESP, you need an ESP32 development board and a way to power it from the boat's 12V or 24V nominal power system.
-This can be done with commonly available ESP32DevKit boards and external DC-DC converters, or alternatively, the [Sailor Hat with ESP32 (SH-ESP32)](https://hatlabs.fi/product/sailor-hat-with-esp32/) has all these features baked into a developer-friendly board and enclosure kit.
+A great option, that will also support SensESP development is any of the [boards offered by Hat Labs](https://shop.hatlabs.fi/collections/sh-esp32-devices). However, any ESP32 board will work fine.
 
 Example use cases of SensESP include:
 

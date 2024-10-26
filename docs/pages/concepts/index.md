@@ -10,7 +10,7 @@ nav_order: 50
 
 ### Basics
 
-[ReactESP](https://github.com/mairas/ReactESP) is an asynchronous programming library for the ESP32 platform.
+[ReactESP](https://github.com/mairas/ReactESP) is an asynchronous programming and event loop library for the ESP32 platform.
 SensESP builds on top of ReactESP and uses it extensively under the hood.
 If you want to build more complex programs on top of SensESP or want to hack on SensESP internals, some basic understanding on the ReactESP basic concepts is highly useful.
 
@@ -37,7 +37,7 @@ void setup() {
     pinMode(kGpioPin, OUTPUT);
 
     // create the repeat event
-    app.onRepeat(interval, toggle_gpio);
+    event_loop()->onRepeat(interval, toggle_gpio);
 
     // setup continues
     ...
@@ -56,9 +56,9 @@ Another commonly used and useful time-based event is `DelayEvent`.
 It triggers after a certain amount of time has passed but does not repeat.
 Example use cases for that would be sensor devices in which you trigger the read operation and then come back to get the value after a certain amount of time.
 For example, the 1-Wire DS18B20 sensor can take up to 750 ms before the conversion is ready.
-In that case, you would first trigger the call and then have something like `app.onDelay(750, read_sensor);` to come back later to read the value.
+In that case, you would first trigger the call and then have something like `event_loop()->onDelay(750, read_sensor);` to come back later to read the value.
 
-You can also use `app.onDelay(...)` with a zero delay to trigger the event as soon as possible, without blocking the main event loop.
+You can also use `event_loop()->onDelay(...)` with a zero delay to trigger the event as soon as possible, without blocking the main event loop.
 
 ### Lambdas
 
@@ -108,7 +108,7 @@ It also supports the following:
 
 ### Removing Events
 
-All of the `app.onXXX()` calls return a `Event` object.
+All of the `event_loop()->onXXX()` calls return a `Event` object.
 If this object is stored, it can be used to access and manipulate the event later.
 In practice, you can disable the event by calling `event->remove()`.
 The same event can be re-added later by calling `event->add()`.
@@ -160,13 +160,11 @@ You can also include multiple Sensors, each with at least one Transform, in the 
 
 ## Configuration Paths
 
-Some Sensors and Transform have parameters that can be configured at run-time. This section explains how to set them up. The user interface to change something at run-time is described [here](../user_interface/index.md). (BAS: this link doesn't work.)
+Configuration paths allow objects to persist their configuration to the device file system. Having a config_path defined also is a requirement for exposing the object to the web interface.
 
-In every case of a configurable value, its value can be set in `main.cpp` with a parameter to the constructor of the Sensor or Transform. By making it configurable, it's easier to make adjustments to your output based on what you're seeing in the real world. For example, the Median Transform is used to smooth output from a "noisy" sensor. By making the "Sample size" configurable, you can experiment with different sample sizes while the MCU is running and outputting data to Signal K, so you can decide when you have the right sample size for your purposes.
+Many Sensors and Transforms have parameters that can be configured at run-time. This section explains how to set them up.
 
-Look at the three lines from the `rpm_counter.cpp` example above. There are three constructors - one for the DigitalInputCounter Sensor, one for the Frequency Transform, and one for the SKOutputFloat Transform. The latter two have a configuration path included as the last item in their parameter list, but the first one doesn't. That means that the first one - the DigitalInputCounter - has no values that can be configured "live", but the latter two do. Actually, it's a little more complicated than that, because it's not entirely consistent among all Sensors and Transforms, and it's always optional whether you enable the ability to do the configuration.
-
-Even though a Sensor or Transform has the *ability* to be configurable, it won't *be* configurable unless you provide a configuration path in the constructor when you use it in `main.cpp`. For example,
+Even though a Sensor or Transform has the *ability* to be configurable, it won't *be* configurable unless you provide a configuration path in the constructor when you use it in `main.cpp` and call `ConfigItem` on it. For example,
 
 ```c++
 auto* analog_input = new AnalogInput();
@@ -180,44 +178,31 @@ auto* analog_input = new AnalogInput(250);
 
 creates a Sensor with a 250 ms Read Delay that still can't be adjusted in real time, because there is no config_path parameter.
 
-But
+Defining a config_path parameter allows the object to save its configuration to the device file system:
 
 ```c++
 auto* analog_input = new AnalogInput(250, "/analogInput");
 ```
 
-creates a Sensor with a 250 ms Read Delay that *can* be adjusted in real time, because of the presence of the config_path parameter (`"/analogInput"`).
-
-Your configuration path parameter can be passed with a variable you create, like this:
+Your configuration path parameter can also be passed with a variable you create, like this:
 
 ```c++
 const char* sensor_config_path = "/analogInput";
 auto* analog_input = new AnalogInput(250, sensor_config_path);
 ```
 
-or by putting the configuration path string directly into the parameter list of the constructor, like this:
+Now, if you want to expose the object to the web interface, call `ConfigItem` on it:
 
 ```c++
-auto* analog_input = new AnalogInput(250, "/analogInput");
+ConfigItem(analog_input)
+  ->set_title("Analogue Input")
+  ->set_description("Analog input read interval adjustment.")
+  ->set_sort_order(1100);
 ```
 
-### Naming Configuration Paths
+That adds the created `analog_input object` to the web UI.
 
-The naming of the paths is important, especially when you have multiple Sensors and / or multiple Transforms in your Project, so to be safe, please follow these guidelines:
-
-- Every configuration path name MUST begin with a forward slash.
-- Use two levels in your names, so that they look like `"/firstLevel/secondLevel"`, with the first level being a word that groups entries together in a logical manner, and the second level referring to the specific Sensor or Transform that the configuration path relates to. For example:
-
-Two Sensors (one for black water and one for fresh water), each using a Moving Average Transform and outputting to the Signal K Server with SKOutputFloat:
-
-- "/blackWater/analogInput" (for the blackwater AnalogInput() constructor in `main.cpp`)
-- "/blackWater/movingAvg" (for the blackwater MovingAverage() constructor in `main.cpp`)
-- "/blackWater/skPath" (for the blackwater SKOutputFloat() constructor in `main.cpp`)
-- "/freshWater/analogInput" (for the fresh water AnalogInput() constructor)
-- "/freshWater/movingAvg" (for the fresh water MovingAverage() constructor)
-- "/freshWater/skPath" (for the fresh water SKOutputFloat() constructor)
-
-This will group the configuration entries in the web interface into two groups: "blackWater" and "freshWater". Each group will have three entries: "analogInput", "movingAvg", and "SKOutput". Each "analogInput" entry will have one configurable value: "Read delay"; each "movingAvg" entry will have two configurable values: "Number of samples" and "Multiplier"; and each "skPath" entry will have one configurable value: "SignalK Path".
+The config_path is used only for saving the configuration to the device file system. The paths must be unique and start with a forward slash.
 
 ## Signal K Paths
 

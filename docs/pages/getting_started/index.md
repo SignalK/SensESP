@@ -14,15 +14,10 @@ If you are a total newbie to software development and microcontrollers, see the 
 ## Prerequisites: Hardware
 
 To get started with SensESP development, first you need some suitable hardware.
-A good low-cost option is an ESP32-DevKit board.
-Search AliExpress, Amazon, Ebay, or other marketplace of your choice for "ESP32-DevKitC v4".
-Pick one with a WROOM-32D or WROOM-32E module.
-Others are available and will likely work, but those are the sure-fire ones.
+The [SH-ESP32](https://shop.hatlabs.fi/products/sh-esp32) or [HALMET](https://shop.hatlabs.fi/products/halmet) boards by Hat Labs are great options, but generic
+ESP32 DevKit boards will work fine as well.
 
 The ESP32-DevKit boards are dirt cheap and great for testing and development on a lab desk, but integrating them in a "production" environment on a boat requires external power sources and enclosures and can be a hassle.
-For onboard purposes, a [Sailor Hat with ESP32 (SH-ESP32)](https://hatlabs.fi/product/sailor-hat-with-esp32/) is a great option.
-The SH-ESP32 has an integrated wide voltage range power supply, an NMEA-2000 compatible isolated CAN interface, a selection of suitable enclosures and connectors, and lots of other goodies for marine sensor development.
-And by purchasing one, you'll support SensESP development. ;-)
 
 While usable as is, you will get the most out of a SensESP device if you can connect it to a [Signal K](http://signalk.org/) server.
 Read the Signal K [Info](https://signalk.org/overview.html) and [Installation](https://signalk.org/installation.html) pages for more information on the hardware choices and setting one up.
@@ -79,14 +74,13 @@ You have to start the serial monitor manually by running `pio device monitor`.
 ## WiFi Configuration
 
 If a WiFi access point hasn't been configured yet, SensESP will create a special configuration access point for you.
-Open the list of nearby WiFi APs on your phone or computer and connect to the network named "Configure my-sensesp-project".
+Open the list of nearby WiFi APs on your phone or computer and connect to the network named "my-sensesp-project".
 The default network password is `thisisfine`.
 
 Normally, the WiFiManager configuration screen should automatically pop up.
 If that doesn't happen, browse to the captive portal IP address `192.168.4.1` in your web browser.
 
-Select the Wi-Fi network you prefer and enter the password, save and close.
-The device should now automatically connect to the network.
+An access point is enabled by default. To connect to an existing WiFi network, click on the WiFi Client checkbox and complete the configuration. Not that the access point will still remain enabled - if you want to disable it, uncheck the WiFi AP checkbox.
 
 Verify in the serial monitor output that the device connects properly to the WiFi.
 Assuming that is the case, you can now continue with the next step.
