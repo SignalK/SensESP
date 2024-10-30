@@ -79,7 +79,8 @@ class SafeQueue : public std::queue<T> {
 template <class T>
 class TaskQueueProducer : public ObservableValue<T> {
  public:
-  TaskQueueProducer(const T& value, reactesp::EventLoop* consumer_event_loop,
+  TaskQueueProducer(const T& value,
+                    std::shared_ptr<reactesp::EventLoop> consumer_event_loop,
                     unsigned int poll_rate = 990)
       : ObservableValue<T>(value) {
     auto func = [this]() {

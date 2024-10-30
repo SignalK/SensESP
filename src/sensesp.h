@@ -2,6 +2,7 @@
 #define SENSESP_H
 
 #include <ReactESP.h>
+#include <memory>
 
 #include "sensesp/system/local_debug.h"
 
@@ -19,7 +20,7 @@ namespace sensesp {
 
 typedef std::function<void()> void_cb_func;
 
-reactesp::EventLoop* event_loop();
+std::shared_ptr<reactesp::EventLoop> event_loop();
 
 }  // namespace sensesp
 

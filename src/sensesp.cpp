@@ -1,10 +1,12 @@
 #include "sensesp.h"
 
+#include <memory>
+
 #include "sensesp_base_app.h"
 
 namespace sensesp {
 
-reactesp::EventLoop* event_loop() {
+std::shared_ptr<reactesp::EventLoop> event_loop() {
   return SensESPBaseApp::get_event_loop();
 }
 

@@ -41,7 +41,7 @@ inline void SetupSerialDebug(uint32_t baudrate) {
  */
 class SensESPBaseApp {
  protected:
-  reactesp::EventLoop event_loop_;
+  std::shared_ptr<reactesp::EventLoop> event_loop_;
 
  public:
   /**
@@ -81,7 +81,7 @@ class SensESPBaseApp {
              "Resetting the device configuration to system defaults.");
     Resettable::reset_all();
 
-    this->event_loop_.onDelay(1000, []() {
+    this->event_loop_->onDelay(1000, []() {
       ESP.restart();
       delay(1000);
     });
@@ -110,8 +110,8 @@ class SensESPBaseApp {
    * instance.
    *
    */
-  static reactesp::EventLoop* get_event_loop() {
-    return &(SensESPBaseApp::get()->event_loop_);
+  static std::shared_ptr<reactesp::EventLoop> get_event_loop() {
+    return SensESPBaseApp::get()->event_loop_;
   }
 
  protected:
@@ -122,7 +122,9 @@ class SensESPBaseApp {
    * be called only once. For compatibility reasons, the class hasn't been
    * refactored into a singleton.
    */
-  SensESPBaseApp() : filesystem_{std::make_shared<Filesystem>()} {
+  SensESPBaseApp()
+      : filesystem_{std::make_shared<Filesystem>()},
+        event_loop_{std::make_shared<reactesp::EventLoop>()} {
     // Instance is now set by the builder
   }
 

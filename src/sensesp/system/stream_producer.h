@@ -3,6 +3,8 @@
 
 #include "sensesp.h"
 
+#include <memory>
+
 #include "ReactESP.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp_base_app.h"
@@ -33,9 +35,10 @@ class StreamCharProducer : public ValueProducer<char> {
  */
 class StreamLineProducer : public ValueProducer<String> {
  public:
-  StreamLineProducer(Stream* stream,
-                     reactesp::EventLoop* event_loop = event_loop(),
-                     int max_line_length = 256)
+  StreamLineProducer(
+      Stream* stream,
+      std::shared_ptr<reactesp::EventLoop> event_loop = event_loop(),
+      int max_line_length = 256)
       : stream_{stream}, max_line_length_{max_line_length} {
     buf_ = new char[max_line_length_ + 1];
     read_event_ =
