@@ -222,7 +222,7 @@ class SensESPApp : public SensESPBaseApp {
   // Collect metrics for the status page
   void connect_status_page_items() {
     this->hostname_->connect_to(&this->hostname_ui_output_);
-    this->event_loop_.onRepeat(4999, [this]() {
+    this->event_loop_->onRepeat(4999, [this]() {
       wifi_ssid_ui_output_.set(WiFi.SSID());
       free_memory_ui_output_.set(ESP.getFreeHeap());
       wifi_rssi_ui_output_.set(WiFi.RSSI());
@@ -231,19 +231,19 @@ class SensESPApp : public SensESPBaseApp {
       uptime_ui_output_.set(millis() / 1000);
 
       // Event loop queue sizes
-      int event_loop_queue_size = event_loop_.getEventQueueSize();
-      int event_loop_timed_queue_size = event_loop_.getTimedEventQueueSize();
+      int event_loop_queue_size = event_loop_->getEventQueueSize();
+      int event_loop_timed_queue_size = event_loop_->getTimedEventQueueSize();
       int event_loop_untimed_queue_size =
-          event_loop_.getUntimedEventQueueSize();
+          event_loop_->getUntimedEventQueueSize();
 
       // Total tick count
-      uint64_t current_tick_count = event_loop_.getTickCount();
+      uint64_t current_tick_count = event_loop_->getTickCount();
       total_tick_count_ui_output_.set(current_tick_count);
 
       // Event counts
-      uint64_t current_event_count = event_loop_.getEventCount();
-      uint64_t current_timed_event_count = event_loop_.getTimedEventCount();
-      uint64_t current_untimed_event_count = event_loop_.getUntimedEventCount();
+      uint64_t current_event_count = event_loop_->getEventCount();
+      uint64_t current_timed_event_count = event_loop_->getTimedEventCount();
+      uint64_t current_untimed_event_count = event_loop_->getUntimedEventCount();
       event_count_ui_output_.set(current_event_count);
       timed_event_count_ui_output_.set(current_timed_event_count);
       untimed_event_count_ui_output_.set(current_untimed_event_count);
@@ -269,7 +269,7 @@ class SensESPApp : public SensESPBaseApp {
       event_loop_timed_queue_ui_output_.set(event_loop_timed_queue_size);
       event_loop_untimed_queue_ui_output_.set(event_loop_untimed_queue_size);
       event_loop_interrupt_queue_ui_output_.set(
-          event_loop_.getISREventQueueSize());
+          event_loop_->getISREventQueueSize());
 
       ticks_per_second_ui_output_.set(int(ticks_diff / interval_seconds));
       events_per_second_ui_output_.set(int(events_diff / interval_seconds));
