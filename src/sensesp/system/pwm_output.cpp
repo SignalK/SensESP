@@ -1,3 +1,5 @@
+#include "sensesp.h"
+
 #include "pwm_output.h"
 
 #include <algorithm>
@@ -6,23 +8,22 @@ namespace sensesp {
 
 // For info on frequency and resolution for ESP32, see
 // https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/ledc.html#ledc-api-supported-range-frequency-duty-resolution
-constexpr int CHANNEL_FREQUENCY = 5000;
-constexpr int CHANNEL_RESOLUTION = 13;
-constexpr int PWMRANGE = 4095;
 
 std::map<uint8_t, int8_t> PWMOutput::channel_to_pin_;
 
-PWMOutput::PWMOutput(int pin, int pwm_channel) {
+PWMOutput::PWMOutput(int pin, int pwm_channel, int channel_frequency,
+                     int channel_resolution)
+    : ValueConsumer<float>(),
+      pwm_channel_{static_cast<uint8_t>(pwm_channel)},
+      channel_frequency_{channel_frequency},
+      channel_resolution_{channel_resolution},
+      pwmrange_{static_cast<int>(pow(2, channel_resolution) - 1)} {
   if (pin >= 0) {
-    default_channel_ = assign_channel(pin, pwm_channel);
+    pwm_channel_ = assign_channel(pin, pwm_channel);
   }
 }
 
-void PWMOutput::set(const float& new_value) {
-  uint8_t pwm_channel = default_channel_;
-
-  set_pwm(pwm_channel, new_value);
-}
+void PWMOutput::set(const float& new_value) { set_pwm(new_value); }
 
 int PWMOutput::assign_channel(int pin, int pwm_channel) {
   if (pwm_channel == -1) {
@@ -40,34 +41,24 @@ int PWMOutput::assign_channel(int pin, int pwm_channel) {
   ESP_LOGD(__FILENAME__, "PWM channel %d assigned to pin %d", pwm_channel, pin);
 
   pinMode(pin, OUTPUT);
-#ifdef ESP32
-  ledcSetup(pwm_channel, CHANNEL_FREQUENCY, CHANNEL_RESOLUTION);
+  ledcSetup(pwm_channel, channel_frequency_, channel_resolution_);
   ledcAttachPin(pin, pwm_channel);
-#endif
 
   return pwm_channel;
 }
 
-void PWMOutput::set_pwm(int pwm_channel, float value) {
+void PWMOutput::set_pwm(float value) {
   std::map<uint8_t, int8_t>::iterator it;
-  it = channel_to_pin_.find(pwm_channel);
+  it = channel_to_pin_.find(pwm_channel_);
   if (it != channel_to_pin_.end()) {
     int pin = it->second;
-    int const output_val = value * PWMRANGE;
+    int const output_val = value * pwmrange_;
     ESP_LOGD(__FILENAME__, "Outputting %d to pwm channel %d (pin %d)",
-             output_val, pwm_channel, pin);
-
-#ifdef ESP32
-    uint32_t levels = pow(2, CHANNEL_RESOLUTION);
-    uint32_t duty =
-        ((levels - 1) / PWMRANGE) * std::min(output_val, (int)PWMRANGE);
-    ledcWrite(pwm_channel, duty);
-#else
-    analogWrite(pin, output_val);
-#endif
+             output_val, pwm_channel_, pin);
+    ledcWrite(pwm_channel_, output_val);
   } else {
     ESP_LOGW(__FILENAME__, "No pin assigned to channel %d. Ignoring set_pwm()",
-             pwm_channel);
+             pwm_channel_);
   }
 }
 

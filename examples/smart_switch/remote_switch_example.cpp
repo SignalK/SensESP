@@ -11,7 +11,7 @@
 #include "sensesp/transforms/click_type.h"
 #include "sensesp/transforms/debounce.h"
 #include "sensesp/transforms/press_repeater.h"
-#include "sensesp/transforms/repeat_report.h"
+#include "sensesp/transforms/repeat.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
 
@@ -88,9 +88,7 @@ void setup() {
 
   auto click_type = new ClickType(config_path_button_c);
 
-  ConfigItem(click_type)
-      ->set_title("Click Type")
-      ->set_sort_order(1000);
+  ConfigItem(click_type)->set_title("Click Type")->set_sort_order(1000);
 
   pr->connect_to(click_type)->connect_to(controller->click_consumer_);
 

@@ -7,12 +7,9 @@ namespace sensesp {
 RgbLed::RgbLed(int led_r_pin, int led_g_pin, int led_b_pin, String config_path,
                long int led_on_rgb, long int led_off_rgb, bool common_anode)
     : FileSystemSaveable(config_path),
-      led_r_channel_((led_r_pin < 0) ? -1
-                                     : PWMOutput::assign_channel(led_r_pin)),
-      led_g_channel_((led_g_pin < 0) ? -1
-                                     : PWMOutput::assign_channel(led_g_pin)),
-      led_b_channel_((led_b_pin < 0) ? -1
-                                     : PWMOutput::assign_channel(led_b_pin)),
+      led_r_output_{std::make_shared<PWMOutput>(led_r_pin)},
+      led_g_output_{std::make_shared<PWMOutput>(led_g_pin)},
+      led_b_output_{std::make_shared<PWMOutput>(led_b_pin)},
       led_on_rgb_{led_on_rgb},
       led_off_rgb_{led_off_rgb},
       common_anode_{common_anode} {
@@ -52,20 +49,14 @@ bool RgbLed::from_json(const JsonObject& config) {
 }
 
 void RgbLed::set_color(long new_value) {
-  if (led_r_channel_ >= 0) {
-    float r = get_pwm(new_value, 16, common_anode_);
-    PWMOutput::set_pwm(led_r_channel_, r);
-  }
+  float r = get_pwm(new_value, 16, common_anode_);
+  led_r_output_->set(r);
 
-  if (led_g_channel_ >= 0) {
-    float g = get_pwm(new_value, 8, common_anode_);
-    PWMOutput::set_pwm(led_g_channel_, g);
-  }
+  float g = get_pwm(new_value, 8, common_anode_);
+  led_g_output_->set(g);
 
-  if (led_b_channel_ >= 0) {
-    float b = get_pwm(new_value, 0, common_anode_);
-    PWMOutput::set_pwm(led_b_channel_, b);
-  }
+  float b = get_pwm(new_value, 0, common_anode_);
+  led_b_output_->set(b);
 }
 
 const String ConfigSchema(const RgbLed& obj) {
