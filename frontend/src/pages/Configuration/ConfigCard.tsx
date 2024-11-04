@@ -32,6 +32,7 @@ interface EditControlProps {
     uniqueItems?: boolean;
     format?: string;
     items?: ItemsProps;
+    description?: string;
     displayMultiplier?: number;
     displayOffset?: number;
   };
@@ -60,6 +61,7 @@ export function EditControl({
           setValue={(value: string) => {
             setValue(value);
           }}
+          description={schema.description}
         />
       );
     case "number":
@@ -78,6 +80,7 @@ export function EditControl({
                 (schema.displayMultiplier ?? 1),
             );
           }}
+          description={schema.description}
         />
       );
     case "integer":
@@ -97,6 +100,7 @@ export function EditControl({
                 (schema.displayMultiplier ?? 1),
             );
           }}
+          description={schema.description}
         />
       );
       break;
@@ -112,6 +116,7 @@ export function EditControl({
           setValue={(checked: boolean) => {
             setValue(checked);
           }}
+          description={schema.description}
         />
       );
     case "array":
@@ -127,6 +132,7 @@ export function EditControl({
               setValue={(value: string) => {
                 setValue(value);
               }}
+              description={schema.description}
             />
           );
         } else if (schema.format === "select") {
@@ -140,6 +146,7 @@ export function EditControl({
               setValue={(value: string) => {
                 setValue(value);
               }}
+              description={schema.description}
             />
           );
         } else {
@@ -180,6 +187,7 @@ export function EditControl({
               }
             }}
             readOnly={schema.readOnly ?? false}
+            description={schema.description}
           />
         );
       }
@@ -198,6 +206,7 @@ export function EditControl({
           setValue={(value: string) => {
             setValue(value);
           }}
+          description={schema.description}
         />
       );
   }
