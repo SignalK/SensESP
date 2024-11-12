@@ -130,7 +130,7 @@ class SmartSwitchController : public ValueProducer<bool>, FileSystemSaveable {
   std::set<SyncPath> sync_paths_;
 };
 
-const String ConfigSchema(const SmartSwitchController& obj) {
+inline const String ConfigSchema(const SmartSwitchController& obj) {
   return R"({"type":"object","properties":{"sync_paths":{"title":"Sync on double click","type":"array","items":{"type":"string"}}}  })";
 }
 

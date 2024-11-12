@@ -1,6 +1,7 @@
 #ifndef SENSESP_SYSTEM_RGB_LED_H
 #define SENSESP_SYSTEM_RGB_LED_H
 
+#include "pwm_output.h"
 #include "sensesp/system/lambda_consumer.h"
 #include "sensesp/ui/config_item.h"
 #include "valueconsumer.h"
@@ -56,9 +57,7 @@ class RgbLed : public FileSystemSaveable {
    */
 
   LambdaConsumer<long> rgb_consumer_ =
-      LambdaConsumer<long>([this](long new_value) {
-        set_color(new_value);
-      });
+      LambdaConsumer<long>([this](long new_value) { set_color(new_value); });
 
   /**
    * Used to set the current display state of the LED with a simple on/off
@@ -78,15 +77,14 @@ class RgbLed : public FileSystemSaveable {
   virtual bool from_json(const JsonObject& config) override;
 
  protected:
-  int led_r_channel_;
-  int led_g_channel_;
-  int led_b_channel_;
+  std::shared_ptr<PWMOutput> led_r_output_ = nullptr;
+  std::shared_ptr<PWMOutput> led_g_output_ = nullptr;
+  std::shared_ptr<PWMOutput> led_b_output_ = nullptr;
   long led_on_rgb_;
   long led_off_rgb_;
   bool common_anode_;
 
   void set_color(long new_value);
-
 };
 
 const String ConfigSchema(const RgbLed& obj);

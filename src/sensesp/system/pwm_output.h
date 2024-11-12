@@ -41,7 +41,8 @@ class PWMOutput : public ValueConsumer<float> {
    *   to.  Pass -1 if you would like the system to auto-select the
    *   next unassigned pin.
    */
-  PWMOutput(int pin = -1, int pwm_channel = -1);
+  PWMOutput(int pin = -1, int pwm_channel = -1, int channel_frequency = 5000,
+            int channel_resolution = 13);
 
   /**
    * Sets the duty cycle of the specified pwm_channel to new_value. If
@@ -49,6 +50,14 @@ class PWMOutput : public ValueConsumer<float> {
    * was instantiated will be used.
    */
   virtual void set(const float& new_value) override;
+
+ protected:
+  int channel_frequency_;
+  int channel_resolution_;
+  int pwmrange_;
+
+  static std::map<uint8_t, int8_t> channel_to_pin_;
+  uint8_t pwm_channel_{};
 
   /**
    * Assigns the specified GPIO pin to the specified pwm channel.
@@ -59,19 +68,14 @@ class PWMOutput : public ValueConsumer<float> {
    * @returns The actual pwm channel assigned to the GPIO pin
    * to the pin
    */
-  static int assign_channel(int pin, int pwm_channel = -1);
+  int assign_channel(int pin, int pwm_channel = -1);
 
   /**
    * Sets duty cycle on specified pwm channel
-   * @param pwm_channel The pwm_channel assigned to the GPIO pin
    * @param value A number between 0.0 and 1.0, where 1.0 is the maximum
    *   duty cycle the output pin supports.
    */
-  static void set_pwm(int pwm_channel, float value);
-
- protected:
-  static std::map<uint8_t, int8_t> channel_to_pin_;
-  uint8_t default_channel_{};
+  void set_pwm(float value);
 };
 
 }  // namespace sensesp
