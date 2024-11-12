@@ -193,9 +193,7 @@ Next, we'll create the SensESP application using the builder class. Add the foll
 
 This will create a SensESP app with the hostname `sensesp-bme280`. You can change this to whatever you want, but make sure it's unique on your network. The builder class also allows you to set the WiFi SSID and password and other settings, if needed. See the [SensESPAppBuilder](/generated/docs/classsensesp_1_1_sens_e_s_p_app_builder.html) documentation for more information.
 
-One more thing to do is to add the `app.tick();` command to the end of the `loop()` function. This call triggers execution of any ReactESP events that have been scheduled.
-
-Now, let's start our program. Add the line `sensesp_app->start();` at the very end of the `setup()` function. This will start the SensESP app and connect to the WiFi network.
+One more thing to do is to add the `event_loopU()->tick();` command to the end of the `loop()` function. This call triggers execution of any ReactESP events that have been scheduled.
 
 We're almost ready to give it a go! There's one more thing that is unobvious but very important. Have a look at the current `loop()` function:
 
@@ -204,11 +202,11 @@ void loop() {
   printValues();
   delay(delayTime);
 
-  app.tick();
+  event_loop()->tick();
 }
 ```
 
-Every time it is run, after printing the values, the software will sleep for `delayTime` (1000) milliseconds, or one second. And only after that it calls the `app.tick()` function that is responsible for handling network connectivity, receiving and transmitting data, updating the web UI and a myriad of tasks. All these would only be called once every second, which is not even nearly enough for the software to work properly!
+Every time it is run, after printing the values, the software will sleep for `delayTime` (1000) milliseconds, or one second. And only after that it calls the `event_loop()->tick()` function that is responsible for handling network connectivity, receiving and transmitting data, updating the web UI and a myriad of tasks. All these would only be called once every second, which is not even nearly enough for the software to work properly!
 
 A major, fundamental rule in asynchronous programming (of which ReactESP is a simple example) is that you should never block the main loop. If you do, you'll block all the other tasks as well. So, let's remove the `delay(delayTime);` line from the `loop()` function.
 
@@ -223,7 +221,7 @@ void loop() {
     last_run = millis();
   }
 
-  app.tick();
+  event_loop()->tick();
 }
 ```
 
@@ -243,7 +241,7 @@ SKOutput<float>* temperature_output;
 SKOutput<float>* humidity_output;
 ```
 
-And then, in `setup()`, let's create the `SKOutput` objects. Add the following lines to the `setup()` function, right before the `sensesp_app->start();` line:
+And then, in `setup()`, let's create the `SKOutput` objects. Add the following lines to the end of `setup()` function:
 
 ```cpp
   pressure_output = new SKOutput<float>(
@@ -357,8 +355,6 @@ void setup() {
     "/sensors/bme280/humidity",
     new SKMetadata("ratio", "Cabin relative humidity")
   );
-
-  sensesp_app->start();
 }
 
 void loop() {
