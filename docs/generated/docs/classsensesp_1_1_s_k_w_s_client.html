@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -285,7 +285,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7a109cfb215d2572f0947b6fbdc57f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af23fe643ac123ced328d95869b6e80ef" id="r_af23fe643ac123ced328d95869b6e80ef"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_s_k_delta_queue.html">SKDeltaQueue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af23fe643ac123ced328d95869b6e80ef">sk_delta_queue_</a></td></tr>
 <tr class="separator:af23fe643ac123ced328d95869b6e80ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae59b6bf5ebe46609f352df33719943e0" id="r_ae59b6bf5ebe46609f352df33719943e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae59b6bf5ebe46609f352df33719943e0">delta_tx_tick_producer_</a> {0, <a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>(), 990}</td></tr>
+<tr class="memitem:ae59b6bf5ebe46609f352df33719943e0" id="r_ae59b6bf5ebe46609f352df33719943e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae59b6bf5ebe46609f352df33719943e0">delta_tx_tick_producer_</a> {0, <a class="el" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>(), 990}</td></tr>
 <tr class="memdesc:ae59b6bf5ebe46609f352df33719943e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits the number of deltas sent since last report.  <br /></td></tr>
 <tr class="separator:ae59b6bf5ebe46609f352df33719943e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44383fc049764f2a3b877cbf5db6a0cc" id="r_a44383fc049764f2a3b877cbf5db6a0cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_integrator.html">Integrator</a>&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44383fc049764f2a3b877cbf5db6a0cc">delta_tx_count_producer_</a> {1, 0, &quot;&quot;}</td></tr>
@@ -1494,8 +1494,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">      <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>, <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()}</div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="line">      <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>, <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()}</div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d"><div class="ttname"><a href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">sensesp::SKWSConnectionState::kSKWSDisconnected</a></div><div class="ttdeci">@ kSKWSDisconnected</div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="signalk__ws__client_8h_source.html#l00106">106</a> of file <a class="el" href="signalk__ws__client_8h_source.html">signalk_ws_client.h</a>.</p>
@@ -1560,7 +1560,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a>&lt;int&gt; sensesp::SKWSClient::delta_tx_tick_producer_ {0, <a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>(), 990}</td>
+          <td class="memname"><a class="el" href="classsensesp_1_1_task_queue_producer.html">TaskQueueProducer</a>&lt;int&gt; sensesp::SKWSClient::delta_tx_tick_producer_ {0, <a class="el" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>(), 990}</td>
         </tr>
       </table>
   </td>

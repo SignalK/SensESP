@@ -11,5 +11,5 @@ var searchData=
   ['process_5freceived_5fupdates_8',['process_received_updates',['../classsensesp_1_1_s_k_w_s_client.html#a1f653dcdf79aceaf276ec59f26dd3765',1,'sensesp::SKWSClient']]],
   ['ptr_9',['ptr',['../classsensesp_1_1_nullable.html#a9a07b8e17e7dcb4df1c0cd48c220e54e',1,'sensesp::Nullable']]],
   ['push_10',['push',['../classsensesp_1_1_safe_queue.html#a78b976a752997c407ca3d9bce0f38c60',1,'sensesp::SafeQueue']]],
-  ['pwmoutput_11',['PWMOutput',['../classsensesp_1_1_p_w_m_output.html#ac613d375428ba5a45eed3a3c72f8213e',1,'sensesp::PWMOutput']]]
+  ['pwmoutput_11',['PWMOutput',['../classsensesp_1_1_p_w_m_output.html#a58786060f1cf312d4c8b37d4d946ca97',1,'sensesp::PWMOutput']]]
 ];

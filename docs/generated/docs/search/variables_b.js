@@ -6,11 +6,13 @@ var searchData=
   ['max_5fdelta_5f_3',['max_delta_',['../classsensesp_1_1_change_filter.html#a3b880754ff548c1ce87aa354a64b656b',1,'sensesp::ChangeFilter']]],
   ['max_5fline_5flength_5f_4',['max_line_length_',['../classsensesp_1_1_stream_line_producer.html#afca1f464e89f995a90dab4f84c35ac26',1,'sensesp::StreamLineProducer']]],
   ['max_5fskips_5f_5',['max_skips_',['../classsensesp_1_1_change_filter.html#a516c659a8bb36767f8f490502c76d278',1,'sensesp::ChangeFilter']]],
-  ['mdns_5fdiscovery_5f_6',['mdns_discovery_',['../classsensesp_1_1_sens_e_s_p_app.html#aecabe0dc0fbaa956d9ac5d0d55adfa01',1,'sensesp::SensESPApp']]],
-  ['meta_5f_7',['meta_',['../classsensesp_1_1_s_k_output.html#a9ed1232b8f59cb0b4a81aae9b4f4c0a5',1,'sensesp::SKOutput']]],
-  ['method_5fmask_5f_8',['method_mask_',['../classsensesp_1_1_h_t_t_p_request_handler.html#a4d0f57c617898e0863577a2d5d6a152d',1,'sensesp::HTTPRequestHandler']]],
-  ['min_5fangle_5f_9',['min_angle_',['../classsensesp_1_1_angle_correction.html#aa0ca6b917e8398b40826faeca99dc450',1,'sensesp::AngleCorrection']]],
-  ['min_5fdelta_5f_10',['min_delta_',['../classsensesp_1_1_change_filter.html#afc47aadd4585084479abb4fad0ebc841',1,'sensesp::ChangeFilter']]],
-  ['min_5finterval_5f_11',['min_interval_',['../classsensesp_1_1_throttle.html#a73c1d88db4079348316d919a9bd2abf8',1,'sensesp::Throttle']]],
-  ['must_5fconfirm_5f_12',['must_confirm_',['../classsensesp_1_1_u_i_button.html#ad8efc0f1c72eb3be2dabf29de8bae427',1,'sensesp::UIButton']]]
+  ['max_5fvalue_5f_6',['max_value_',['../classsensesp_1_1_threshold_transform.html#a09ce93145a977dbb1296517d22fde1af',1,'sensesp::ThresholdTransform']]],
+  ['mdns_5fdiscovery_5f_7',['mdns_discovery_',['../classsensesp_1_1_sens_e_s_p_app.html#aecabe0dc0fbaa956d9ac5d0d55adfa01',1,'sensesp::SensESPApp']]],
+  ['meta_5f_8',['meta_',['../classsensesp_1_1_s_k_output.html#a9ed1232b8f59cb0b4a81aae9b4f4c0a5',1,'sensesp::SKOutput']]],
+  ['method_5fmask_5f_9',['method_mask_',['../classsensesp_1_1_h_t_t_p_request_handler.html#a4d0f57c617898e0863577a2d5d6a152d',1,'sensesp::HTTPRequestHandler']]],
+  ['min_5fangle_5f_10',['min_angle_',['../classsensesp_1_1_angle_correction.html#aa0ca6b917e8398b40826faeca99dc450',1,'sensesp::AngleCorrection']]],
+  ['min_5fdelta_5f_11',['min_delta_',['../classsensesp_1_1_change_filter.html#afc47aadd4585084479abb4fad0ebc841',1,'sensesp::ChangeFilter']]],
+  ['min_5finterval_5f_12',['min_interval_',['../classsensesp_1_1_throttle.html#a73c1d88db4079348316d919a9bd2abf8',1,'sensesp::Throttle']]],
+  ['min_5fvalue_5f_13',['min_value_',['../classsensesp_1_1_threshold_transform.html#a5be2519c3e2efde176cc343f55c92802',1,'sensesp::ThresholdTransform']]],
+  ['must_5fconfirm_5f_14',['must_confirm_',['../classsensesp_1_1_u_i_button.html#ad8efc0f1c72eb3be2dabf29de8bae427',1,'sensesp::UIButton']]]
 ];

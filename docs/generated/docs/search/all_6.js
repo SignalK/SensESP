@@ -19,7 +19,7 @@ var searchData=
   ['get_5fdelta_5ftx_5fcount_5fconsumer_16',['get_delta_tx_count_consumer',['../classsensesp_1_1_system_status_led.html#aa5fad5ffb35c6980ae25cf589f5b57cc',1,'sensesp::SystemStatusLed']]],
   ['get_5fdelta_5ftx_5fcount_5fproducer_17',['get_delta_tx_count_producer',['../classsensesp_1_1_s_k_w_s_client.html#a98b7f8de43ef5ff4105285e3609b8b51',1,'sensesp::SKWSClient']]],
   ['get_5fdescription_18',['get_description',['../classsensesp_1_1_config_item_base.html#ac6c7af2214a085f3b1f75abfcb2ef804',1,'sensesp::ConfigItemBase']]],
-  ['get_5fevent_5floop_19',['get_event_loop',['../classsensesp_1_1_sens_e_s_p_base_app.html#a5ac3b07550aed05e92aeb2a536ea0739',1,'sensesp::SensESPBaseApp']]],
+  ['get_5fevent_5floop_19',['get_event_loop',['../classsensesp_1_1_sens_e_s_p_base_app.html#a28c20eed17bfc460e6686a11c5b3b107',1,'sensesp::SensESPBaseApp']]],
   ['get_5fhostname_20',['get_hostname',['../classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16',1,'sensesp::SensESPBaseApp']]],
   ['get_5fhostname_5fobservable_21',['get_hostname_observable',['../classsensesp_1_1_sens_e_s_p_base_app.html#a734ae82f0a67785092cfb8a86f920cf8',1,'sensesp::SensESPBaseApp']]],
   ['get_5fitem_5fdata_22',['get_item_data',['../namespacesensesp.html#aba06313c473228ea8fd7621b7ee7850d',1,'sensesp']]],

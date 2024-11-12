@@ -131,6 +131,7 @@ var annotated_dup =
       [ "SystemStatusLed", "classsensesp_1_1_system_status_led.html", "classsensesp_1_1_system_status_led" ],
       [ "TaskQueueProducer", "classsensesp_1_1_task_queue_producer.html", "classsensesp_1_1_task_queue_producer" ],
       [ "TextToTruth", "classsensesp_1_1_text_to_truth.html", "classsensesp_1_1_text_to_truth" ],
+      [ "ThresholdTransform", "classsensesp_1_1_threshold_transform.html", "classsensesp_1_1_threshold_transform" ],
       [ "Throttle", "classsensesp_1_1_throttle.html", "classsensesp_1_1_throttle" ],
       [ "TimeCounter", "classsensesp_1_1_time_counter.html", "classsensesp_1_1_time_counter" ],
       [ "TimeString", "classsensesp_1_1_time_string.html", "classsensesp_1_1_time_string" ],

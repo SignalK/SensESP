@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -132,7 +132,7 @@ $(function(){initNavTree('signalk__put__request_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="comment">// After 10 seconds, if we haven&#39;t already handled a response,</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="comment">// assume its not coming.</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  pending_request-&gt;timeout_cleanup =</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>      <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onDelay(timeout, [pending_request]() {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>      <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onDelay(timeout, [pending_request]() {</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="comment">// Mark the delay eventll as it will be cleaned up by the ReactESP</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="comment">// framework if this executes...</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;No response from server for request Id %s&quot;</span>,</div>
@@ -196,7 +196,7 @@ $(function(){initNavTree('signalk__put__request_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      <span class="comment">// The timeout code was not called, so just</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      <span class="comment">// remove it from the ReactESP execution queue...</span></div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      pending_request-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_request_1_1_pending_request.html#a7123e38c1470212558af653aff549336">timeout_cleanup</a>-&gt;remove(</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>          <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>());</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>          <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>());</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="comment">// Now, remove the request from the map...</span></div>
@@ -286,9 +286,9 @@ $(function(){initNavTree('signalk__put__request_8cpp_source.html',''); initResiz
 <div class="ttc" id="aclasssensesp_1_1_s_k_request_html_ae57c011aa6632974231721e2d9e326a6"><div class="ttname"><a href="classsensesp_1_1_s_k_request.html#ae57c011aa6632974231721e2d9e326a6">sensesp::SKRequest::request_map_</a></div><div class="ttdeci">static std::map&lt; String, PendingRequest * &gt; request_map_</div><div class="ttdef"><b>Definition</b> <a href="signalk__put__request_8h_source.html#l00055">signalk_put_request.h:55</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_request_html_af3556571b45b5ce5ab74831cb5605ded"><div class="ttname"><a href="classsensesp_1_1_s_k_request.html#af3556571b45b5ce5ab74831cb5605ded">sensesp::SKRequest::remove_request</a></div><div class="ttdeci">static void remove_request(String request_id)</div><div class="ttdef"><b>Definition</b> <a href="#l00075">signalk_put_request.cpp:75</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_app_html_a05d22a1dee1fbe4c4c4373de61d02090"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_app.html#a05d22a1dee1fbe4c4c4373de61d02090">sensesp::SensESPApp::get</a></div><div class="ttdeci">static std::shared_ptr&lt; SensESPApp &gt; get()</div><div class="ttdoc">Get the singleton instance of the SensESPApp.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__app_8h_source.html#l00057">sensesp_app.h:57</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a270290236513f91972b435ad45c4f70b"><div class="ttname"><a href="namespacesensesp.html#a270290236513f91972b435ad45c4f70b">sensesp::generate_uuid4</a></div><div class="ttdeci">String generate_uuid4()</div><div class="ttdoc">Generate a random UUIDv4 string.</div><div class="ttdef"><b>Definition</b> <a href="uuid_8cpp_source.html#l00005">uuid.cpp:5</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="asensesp__app_8h_html"><div class="ttname"><a href="sensesp__app_8h.html">sensesp_app.h</a></div></div>
 <div class="ttc" id="asignalk__put__request_8h_html"><div class="ttname"><a href="signalk__put__request_8h.html">signalk_put_request.h</a></div></div>
 <div class="ttc" id="auuid_8h_html"><div class="ttname"><a href="uuid_8h.html">uuid.h</a></div></div>

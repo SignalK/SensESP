@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -135,10 +135,10 @@ $(function(){initNavTree('debounce_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      debounced_value_ = input;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      <span class="keywordflow">if</span> (event_) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        event_-&gt;remove(<a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>());</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        event_-&gt;remove(<a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>());</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        event_ = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      event_ = <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onDelay(ms_min_delay_, [<span class="keyword">this</span>, input]() {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      event_ = <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onDelay(ms_min_delay_, [<span class="keyword">this</span>, input]() {</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        this-&gt;event_ = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        this-&gt;debounced_value_ = input;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(input);</div>
@@ -187,10 +187,10 @@ $(function(){initNavTree('debounce_8h_source.html',''); initResizable(true); });
 <div class="ttc" id="aclasssensesp_1_1_symmetric_transform_html"><div class="ttname"><a href="classsensesp_1_1_symmetric_transform.html">sensesp::SymmetricTransform</a></div><div class="ttdoc">A common type of transform that consumes, transforms, then outputs values of the same data type.</div><div class="ttdef"><b>Definition</b> <a href="transform_8h_source.html#l00094">transform.h:94</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer::emit</a></div><div class="ttdeci">void emit(const T &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>
 <div class="ttc" id="aconfig__item_8h_html"><div class="ttname"><a href="config__item_8h.html">config_item.h</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a6465183cc4be06509c4b1fe43a0de4f8"><div class="ttname"><a href="namespacesensesp.html#a6465183cc4be06509c4b1fe43a0de4f8">sensesp::DebounceFloat</a></div><div class="ttdeci">Debounce&lt; float &gt; DebounceFloat</div><div class="ttdef"><b>Definition</b> <a href="#l00085">debounce.h:85</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a988d0bdd8d52ecf65f57778eead1c1d1"><div class="ttname"><a href="namespacesensesp.html#a988d0bdd8d52ecf65f57778eead1c1d1">sensesp::DebounceBool</a></div><div class="ttdeci">Debounce&lt; bool &gt; DebounceBool</div><div class="ttdef"><b>Definition</b> <a href="#l00083">debounce.h:83</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_ac41051be8f86486b8a46eebac6511d72"><div class="ttname"><a href="namespacesensesp.html#ac41051be8f86486b8a46eebac6511d72">sensesp::DebounceInt</a></div><div class="ttdeci">Debounce&lt; int &gt; DebounceInt</div><div class="ttdef"><b>Definition</b> <a href="#l00084">debounce.h:84</a></div></div>
 <div class="ttc" id="atransform_8h_html"><div class="ttname"><a href="transform_8h.html">transform.h</a></div></div>

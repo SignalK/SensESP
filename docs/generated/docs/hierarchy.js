@@ -73,6 +73,9 @@ var hierarchy =
         [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", [
           [ "sensesp::TextToTruth", "classsensesp_1_1_text_to_truth.html", null ]
         ] ],
+        [ "sensesp::Transform< C, bool >", "classsensesp_1_1_transform.html", [
+          [ "sensesp::ThresholdTransform< C >", "classsensesp_1_1_threshold_transform.html", null ]
+        ] ],
         [ "sensesp::SmartSwitchController", "classsensesp_1_1_smart_switch_controller.html", null ]
       ] ],
       [ "sensesp::ValueProducer< int >", "classsensesp_1_1_value_producer.html", [
@@ -329,6 +332,7 @@ var hierarchy =
           [ "sensesp::Transform< float, int >", "classsensesp_1_1_transform.html", null ],
           [ "sensesp::Transform< String, String >", "classsensesp_1_1_transform.html", null ],
           [ "sensesp::Transform< String, bool >", "classsensesp_1_1_transform.html", null ],
+          [ "sensesp::Transform< C, bool >", "classsensesp_1_1_transform.html", null ],
           [ "sensesp::Transform< T, double >", "classsensesp_1_1_transform.html", null ],
           [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
           [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ],
@@ -381,6 +385,7 @@ var hierarchy =
       [ "sensesp::AsyncResponseHandler", "classsensesp_1_1_async_response_handler.html", null ]
     ] ],
     [ "sensesp::ValueConsumer< C >", "classsensesp_1_1_value_consumer.html", [
+      [ "sensesp::Transform< C, bool >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< C, P >", "classsensesp_1_1_transform.html", null ]
     ] ],
     [ "sensesp::ValueConsumer< ClickTypes >", "classsensesp_1_1_value_consumer.html", [

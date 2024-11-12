@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -133,7 +133,7 @@ $(function(){initNavTree('smart__switch__controller_8cpp_source.html',''); initR
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="comment">// Emit the initial state once the event loop starts</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_smart_switch_controller.html#ac7e3acd7488df50a82d0cb1c45fdc842">auto_initialize_</a>) {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onDelay(0, [<span class="keyword">this</span>]() { this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(<a class="code hl_variable" href="classsensesp_1_1_smart_switch_controller.html#a37a2bdf97a33d954f0129ef48fb30f24">is_on_</a>); });</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onDelay(0, [<span class="keyword">this</span>]() { this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(<a class="code hl_variable" href="classsensesp_1_1_smart_switch_controller.html#a37a2bdf97a33d954f0129ef48fb30f24">is_on_</a>); });</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  }</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
 </div>
@@ -186,8 +186,8 @@ $(function(){initNavTree('smart__switch__controller_8cpp_source.html',''); initR
 <div class="ttc" id="aclasssensesp_1_1_smart_switch_controller_html_aee561ce097811bd815498f8e0bb82b98"><div class="ttname"><a href="classsensesp_1_1_smart_switch_controller.html#aee561ce097811bd815498f8e0bb82b98">sensesp::SmartSwitchController::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00038">smart_switch_controller.cpp:38</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_smart_switch_controller_html_af315054e20a6ff730f0290c12425d9db"><div class="ttname"><a href="classsensesp_1_1_smart_switch_controller.html#af315054e20a6ff730f0290c12425d9db">sensesp::SmartSwitchController::SmartSwitchController</a></div><div class="ttdeci">SmartSwitchController(bool auto_initialize=true, String config_path=&quot;&quot;, const char *sk_sync_paths[]=NULL)</div><div class="ttdef"><b>Definition</b> <a href="#l00008">smart_switch_controller.cpp:8</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer&lt; bool &gt;::emit</a></div><div class="ttdeci">void emit(const bool &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="asensesp__base__app_8h_html"><div class="ttname"><a href="sensesp__base__app_8h.html">sensesp_base_app.h</a></div></div>
 <div class="ttc" id="asmart__switch__controller_8h_html"><div class="ttname"><a href="smart__switch__controller_8h.html">smart_switch_controller.h</a></div></div>
 <div class="ttc" id="atruth__text_8h_html"><div class="ttname"><a href="truth__text_8h.html">truth_text.h</a></div></div>

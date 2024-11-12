@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -136,7 +136,7 @@ $(function(){initNavTree('networking_8h_source.html',''); initResizable(true); }
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_function" href="classsensesp_1_1_wi_fi_state_producer.html#a200024c6ceaade999731beb109c62f2a">setup_wifi_callbacks</a>();</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// Emit the current state as soon as the event loop starts</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onDelay(0, [<span class="keyword">this</span>]() { this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(this-&gt;<a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a>); });</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onDelay(0, [<span class="keyword">this</span>]() { this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(this-&gt;<a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a>); });</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  }</div>
 </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
@@ -207,7 +207,7 @@ $(function(){initNavTree('networking_8h_source.html',''); initResizable(true); }
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="comment">// Setting the AP mode happens immediately,</span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="comment">// so this callback is likely called already before all startables have been</span></div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="comment">// initiated. Delay the WiFi state update until the start of the event loop.</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onDelay(</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onDelay(</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        0, [<span class="keyword">this</span>]() { this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019">WiFiState::kWifiAPModeActivated</a>); });</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  }</div>
 </div>
@@ -492,10 +492,10 @@ $(function(){initNavTree('networking_8h_source.html',''); initResizable(true); }
 <div class="ttc" id="aclasssensesp_1_1_wi_fi_state_producer_html_af6826de0f34139009f98d4ff931de216"><div class="ttname"><a href="classsensesp_1_1_wi_fi_state_producer.html#af6826de0f34139009f98d4ff931de216">sensesp::WiFiStateProducer::remove_wifi_callbacks</a></div><div class="ttdeci">void remove_wifi_callbacks()</div><div class="ttdef"><b>Definition</b> <a href="#l00073">networking.h:73</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_wi_fi_state_producer_html_af936cca265f9b9fd7a3cb1360fdc909d"><div class="ttname"><a href="classsensesp_1_1_wi_fi_state_producer.html#af936cca265f9b9fd7a3cb1360fdc909d">sensesp::WiFiStateProducer::WiFiStateProducer</a></div><div class="ttdeci">WiFiStateProducer(WiFiStateProducer &amp;other)=delete</div></div>
 <div class="ttc" id="alambda__consumer_8h_html"><div class="ttname"><a href="lambda__consumer_8h.html">lambda_consumer.h</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a5bfba1ec2874e5b5ff8b707d8808117c"><div class="ttname"><a href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">sensesp::kMaxNumClientConfigs</a></div><div class="ttdeci">constexpr int kMaxNumClientConfigs</div><div class="ttdef"><b>Definition</b> <a href="#l00018">networking.h:18</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8"><div class="ttname"><a href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea151c0fa5b476a21aeb84de0c5fa986c8">sensesp::WiFiState::kWifiConnectedToAP</a></div><div class="ttdeci">@ kWifiConnectedToAP</div></div>
 <div class="ttc" id="anamespacesensesp_html_ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019"><div class="ttname"><a href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea7d27056abb164d5b81c1559d4318f019">sensesp::WiFiState::kWifiAPModeActivated</a></div><div class="ttdeci">@ kWifiAPModeActivated</div></div>
 <div class="ttc" id="anamespacesensesp_html_ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da"><div class="ttname"><a href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3aea91fb26167a66932c36d148bb5fdf98da">sensesp::WiFiState::kWifiNoAP</a></div><div class="ttdeci">@ kWifiNoAP</div></div>

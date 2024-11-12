@@ -28,7 +28,7 @@ var NAVTREE =
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
+        [ "All", "namespacemembers.html", "namespacemembers_dup" ],
         [ "Functions", "namespacemembers_func.html", null ],
         [ "Variables", "namespacemembers_vars.html", null ],
         [ "Typedefs", "namespacemembers_type.html", null ],
@@ -65,15 +65,15 @@ var NAVTREEINDEX =
 "classsensesp_1_1_click_type.html#ad368374438204d2d593af3af939c1d05",
 "classsensesp_1_1_enable.html#a738aca5f06e2b6bd04476d625717b84a",
 "classsensesp_1_1_lambda_transform.html",
-"classsensesp_1_1_press_repeater.html#a4487165f599b2e6f494ff7b12bb3a823",
-"classsensesp_1_1_s_k_output_numeric.html#aac69146f2353303ad10c8015dd9336f4",
-"classsensesp_1_1_semaphore_value.html#a4444d01b7a1bac5a3617df18bb821204",
-"classsensesp_1_1_sensor.html#a837f5d9603388daaca04d78eaedd5d64",
-"classsensesp_1_1_u_i_button.html#a66dfe117d2d0b028cfad48737eccf2cd",
-"curveinterpolator_8h.html",
-"local__debug_8h.html#ab8800d66a182d70173948ef3ce5cd49d",
-"namespacesensesp.html#af71bdd7f16e2d227fe501fd50824018b",
-"stream__producer_8h.html"
+"classsensesp_1_1_persisting_observable_value.html#a42d71d59977b6c998c96a6096b9cbe5f",
+"classsensesp_1_1_s_k_output.html#af56c46e065c444e5b799d16ec948eeb5",
+"classsensesp_1_1_select_config.html#ac314d02cc48aab554cdb438688e5e569",
+"classsensesp_1_1_sens_e_s_p_minimal_app_builder.html#a650d6c129456d8b1914e5c9fe5798d23",
+"classsensesp_1_1_transform.html",
+"config__item_8h.html#a8171f4ac7b81890f9766ecbbdf0e6606",
+"lambda__transform_8h_source.html",
+"namespacesensesp.html#ad205805904dd5fd707bf89379a37d29d",
+"signalk__types_8h.html#a4f141f01862f1cb878978abb0cdaceef"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

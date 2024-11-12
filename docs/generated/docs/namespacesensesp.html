@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -475,6 +475,9 @@ it must have &lt;tt&gt;units&lt;/tt&gt;". Thus, any paths that you output that a
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_text_to_truth.html">TextToTruth</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consumes a string and outputs boolean "true" if the text represents a human readable version of "true".  <a href="classsensesp_1_1_text_to_truth.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (...">Transform</a> base class that translates the value of type C into boolean. Base class for classes FloatThreshold and IntThreshold.  <a href="classsensesp_1_1_threshold_transform.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_throttle.html">Throttle</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsensesp_1_1_throttle.html" title="Throttle the input rate.">Throttle</a> the input rate.  <a href="classsensesp_1_1_throttle.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -629,6 +632,10 @@ Typedefs</h2></td></tr>
 <tr class="separator:a1fdc54cba3884870c3d959959a4b83be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9daa7a02f729a177eef406795c1c7459" id="r_a9daa7a02f729a177eef406795c1c7459"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classsensesp_1_1_integrator.html">Integrator</a>&lt; int, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9daa7a02f729a177eef406795c1c7459">Accumulator</a></td></tr>
 <tr class="separator:a9daa7a02f729a177eef406795c1c7459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab291dd88d1986834063d88d6b6cf0ab9" id="r_ab291dd88d1986834063d88d6b6cf0ab9"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab291dd88d1986834063d88d6b6cf0ab9">FloatThreshold</a></td></tr>
+<tr class="separator:ab291dd88d1986834063d88d6b6cf0ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e59d4845c0705556922525e8fac5b20" id="r_a6e59d4845c0705556922525e8fac5b20"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e59d4845c0705556922525e8fac5b20">IntThreshold</a></td></tr>
+<tr class="separator:a6e59d4845c0705556922525e8fac5b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94d8b3e87aa10f0dd9756d11d8771d04" id="r_a94d8b3e87aa10f0dd9756d11d8771d04"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classsensesp_1_1_symmetric_transform.html">SymmetricTransform</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94d8b3e87aa10f0dd9756d11d8771d04">FloatTransform</a></td></tr>
 <tr class="separator:a94d8b3e87aa10f0dd9756d11d8771d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8481b36098cde132456851f920fb8ad0" id="r_a8481b36098cde132456851f920fb8ad0"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classsensesp_1_1_symmetric_transform.html">SymmetricTransform</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8481b36098cde132456851f920fb8ad0">IntegerTransform</a></td></tr>
@@ -713,8 +720,8 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6dc46d92e5fd3c1e7335f9d650827f57" id="r_a6dc46d92e5fd3c1e7335f9d650827f57"><td class="memItemLeft" align="right" valign="top">reactesp::EventLoop *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a> ()</td></tr>
-<tr class="separator:a6dc46d92e5fd3c1e7335f9d650827f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c1105507d71491cf4e0505eaabb2e49" id="r_a1c1105507d71491cf4e0505eaabb2e49"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; reactesp::EventLoop &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a> ()</td></tr>
+<tr class="separator:a1c1105507d71491cf4e0505eaabb2e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a023600a19dffc71f667a21bc1009ad06" id="r_a023600a19dffc71f667a21bc1009ad06"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a023600a19dffc71f667a21bc1009ad06">ConfigSchema</a> (const <a class="el" href="classsensesp_1_1_smart_switch_controller.html">SmartSwitchController</a> &amp;obj)</td></tr>
 <tr class="separator:a023600a19dffc71f667a21bc1009ad06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79b6e1746e7b0dfdb96b870f2d62a6d5" id="r_a79b6e1746e7b0dfdb96b870f2d62a6d5"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79b6e1746e7b0dfdb96b870f2d62a6d5">get_random_hex_string</a> ()</td></tr>
@@ -896,6 +903,10 @@ Functions</h2></td></tr>
 <tr class="separator:a3dd8ca28865480da2ab3ce1e65b1f785"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad143f51b518044b120d80aa0ee36293d" id="r_ad143f51b518044b120d80aa0ee36293d"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad143f51b518044b120d80aa0ee36293d">ConfigSchema</a> (const <a class="el" href="classsensesp_1_1_press_repeater.html">PressRepeater</a> &amp;obj)</td></tr>
 <tr class="separator:ad143f51b518044b120d80aa0ee36293d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad6557f479f2b8deb7a4eceed93d59ae" id="r_aad6557f479f2b8deb7a4eceed93d59ae"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad6557f479f2b8deb7a4eceed93d59ae">ConfigSchema</a> (const <a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a>&lt; float &gt; &amp;obj)</td></tr>
+<tr class="separator:aad6557f479f2b8deb7a4eceed93d59ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8ef24d0e9ec0f224d9bc127bf35c4c" id="r_aef8ef24d0e9ec0f224d9bc127bf35c4c"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef8ef24d0e9ec0f224d9bc127bf35c4c">ConfigSchema</a> (const <a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a>&lt; int &gt; &amp;obj)</td></tr>
+<tr class="separator:aef8ef24d0e9ec0f224d9bc127bf35c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b16d37db9f144fe4801479d3e141b41" id="r_a5b16d37db9f144fe4801479d3e141b41"><td class="memItemLeft" align="right" valign="top">uint64_t ARDUINO_ISR_ATTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b16d37db9f144fe4801479d3e141b41">millis64</a> ()</td></tr>
 <tr class="separator:a5b16d37db9f144fe4801479d3e141b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9520a4e41c2c007e371ae294e034ca7" id="r_ae9520a4e41c2c007e371ae294e034ca7"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
@@ -999,18 +1010,12 @@ Variables</h2></td></tr>
 <tr class="separator:a24094aaf3725c69238a40dcdf5db45db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13c1c64e6863a218bb521402631c9492" id="r_a13c1c64e6863a218bb521402631c9492"><td class="memItemLeft" align="right" valign="top">const char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13c1c64e6863a218bb521402631c9492">kContentEncoding</a> [] = &quot;Content-Encoding&quot;</td></tr>
 <tr class="separator:a13c1c64e6863a218bb521402631c9492"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a415d47efb7e756b1be52067ac1792c44" id="r_a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;3.0.0&quot;</td></tr>
+<tr class="memitem:a415d47efb7e756b1be52067ac1792c44" id="r_a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;3.0.1&quot;</td></tr>
 <tr class="separator:a415d47efb7e756b1be52067ac1792c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e347f3a29783746e76e25cf2b38240d" id="r_a2e347f3a29783746e76e25cf2b38240d"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e347f3a29783746e76e25cf2b38240d">kWsClientTaskStackSize</a> = 8192</td></tr>
 <tr class="separator:a2e347f3a29783746e76e25cf2b38240d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59300ccd7271c89738149da446486a3b" id="r_a59300ccd7271c89738149da446486a3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_s_k_w_s_client.html">SKWSClient</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59300ccd7271c89738149da446486a3b">ws_client</a></td></tr>
 <tr class="separator:a59300ccd7271c89738149da446486a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9488c4352252d6785c559db7f75ca22" id="r_ad9488c4352252d6785c559db7f75ca22"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9488c4352252d6785c559db7f75ca22">CHANNEL_FREQUENCY</a> = 5000</td></tr>
-<tr class="separator:ad9488c4352252d6785c559db7f75ca22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac46401155f1c817505b0a3e36efe8fe" id="r_aac46401155f1c817505b0a3e36efe8fe"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac46401155f1c817505b0a3e36efe8fe">CHANNEL_RESOLUTION</a> = 13</td></tr>
-<tr class="separator:aac46401155f1c817505b0a3e36efe8fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c79852ea65aaf6c395713349e4f37a3" id="r_a4c79852ea65aaf6c395713349e4f37a3"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c79852ea65aaf6c395713349e4f37a3">PWMRANGE</a> = 4095</td></tr>
-<tr class="separator:a4c79852ea65aaf6c395713349e4f37a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63cb27a0ef59894b731d42770d67aef3" id="r_a63cb27a0ef59894b731d42770d67aef3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63cb27a0ef59894b731d42770d67aef3">no_ap_pattern</a> [] = {50, 950, <a class="el" href="led__blinker_8h.html#ad81bcd446e2fd6404bb991a66217348b">PATTERN_END</a>}</td></tr>
 <tr class="separator:a63cb27a0ef59894b731d42770d67aef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad53b505f128cf2dbb5e01bea56399524" id="r_ad53b505f128cf2dbb5e01bea56399524"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad53b505f128cf2dbb5e01bea56399524">wifi_disconnected_pattern</a> [] = {300, 700, <a class="el" href="led__blinker_8h.html#ad81bcd446e2fd6404bb991a66217348b">PATTERN_END</a>}</td></tr>
@@ -1398,6 +1403,22 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ab291dd88d1986834063d88d6b6cf0ab9" name="ab291dd88d1986834063d88d6b6cf0ab9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab291dd88d1986834063d88d6b6cf0ab9">&#9670;&#160;</a></span>FloatThreshold</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a>&lt;float&gt; <a class="el" href="#ab291dd88d1986834063d88d6b6cf0ab9">sensesp::FloatThreshold</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="threshold_8h_source.html#l00074">74</a> of file <a class="el" href="threshold_8h_source.html">threshold.h</a>.</p>
+
+</div>
+</div>
 <a id="a7be62e1088cc857cf52153051a361978" name="a7be62e1088cc857cf52153051a361978"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7be62e1088cc857cf52153051a361978">&#9670;&#160;</a></span>FloatToInt</h2>
 
@@ -1555,6 +1576,22 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="signalk__put__request__listener_8h_source.html#l00067">67</a> of file <a class="el" href="signalk__put__request__listener_8h_source.html">signalk_put_request_listener.h</a>.</p>
+
+</div>
+</div>
+<a id="a6e59d4845c0705556922525e8fac5b20" name="a6e59d4845c0705556922525e8fac5b20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e59d4845c0705556922525e8fac5b20">&#9670;&#160;</a></span>IntThreshold</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a>&lt;int&gt; <a class="el" href="#a6e59d4845c0705556922525e8fac5b20">sensesp::IntThreshold</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="threshold_8h_source.html#l00075">75</a> of file <a class="el" href="threshold_8h_source.html">threshold.h</a>.</p>
 
 </div>
 </div>
@@ -1906,7 +1943,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp_8h_source.html#l00020">20</a> of file <a class="el" href="sensesp_8h_source.html">sensesp.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp_8h_source.html#l00021">21</a> of file <a class="el" href="sensesp_8h_source.html">sensesp.h</a>.</p>
 
 </div>
 </div>
@@ -2961,7 +2998,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="abb08c96663a5a8f3bbbe8e57394310e0" name="abb08c96663a5a8f3bbbe8e57394310e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb08c96663a5a8f3bbbe8e57394310e0">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[1/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abb08c96663a5a8f3bbbe8e57394310e0">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[1/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2980,7 +3017,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a3f89f71c99e22c967cdc3fdbfb95b249" name="a3f89f71c99e22c967cdc3fdbfb95b249"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f89f71c99e22c967cdc3fdbfb95b249">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[2/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f89f71c99e22c967cdc3fdbfb95b249">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[2/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2999,7 +3036,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a769c3aabf16e3ae36a607bdd5bf28cc8" name="a769c3aabf16e3ae36a607bdd5bf28cc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a769c3aabf16e3ae36a607bdd5bf28cc8">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[3/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a769c3aabf16e3ae36a607bdd5bf28cc8">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[3/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3018,7 +3055,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a9181bb3aa9d55292b2fd566156e8d721" name="a9181bb3aa9d55292b2fd566156e8d721"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9181bb3aa9d55292b2fd566156e8d721">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[4/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9181bb3aa9d55292b2fd566156e8d721">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[4/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3037,7 +3074,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a554546cf9c119b87eba61dc3ac53b8f0" name="a554546cf9c119b87eba61dc3ac53b8f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a554546cf9c119b87eba61dc3ac53b8f0">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[5/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a554546cf9c119b87eba61dc3ac53b8f0">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[5/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3064,7 +3101,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ac36eb49a850068439f6a0a98ecd04f75" name="ac36eb49a850068439f6a0a98ecd04f75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac36eb49a850068439f6a0a98ecd04f75">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[6/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac36eb49a850068439f6a0a98ecd04f75">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[6/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3083,7 +3120,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a3466f4d5816f1375ad82eaacbd434460" name="a3466f4d5816f1375ad82eaacbd434460"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3466f4d5816f1375ad82eaacbd434460">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[7/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3466f4d5816f1375ad82eaacbd434460">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[7/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3109,7 +3146,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a1b940da7150370f46c4a7e47fe1e7ea6" name="a1b940da7150370f46c4a7e47fe1e7ea6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b940da7150370f46c4a7e47fe1e7ea6">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[8/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b940da7150370f46c4a7e47fe1e7ea6">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[8/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3136,7 +3173,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="acecc2afd6873e81e6148c894e0f1cb86" name="acecc2afd6873e81e6148c894e0f1cb86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acecc2afd6873e81e6148c894e0f1cb86">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[9/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acecc2afd6873e81e6148c894e0f1cb86">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[9/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3155,7 +3192,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a70802d1f93220ede6b62137991fef39a" name="a70802d1f93220ede6b62137991fef39a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70802d1f93220ede6b62137991fef39a">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[10/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a70802d1f93220ede6b62137991fef39a">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[10/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3174,7 +3211,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="abc45487d0712b1fce84ad8443da1637b" name="abc45487d0712b1fce84ad8443da1637b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc45487d0712b1fce84ad8443da1637b">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[11/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abc45487d0712b1fce84ad8443da1637b">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[11/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3193,7 +3230,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a5f1c6b56e4bb15e689cc10a71ad6bb01" name="a5f1c6b56e4bb15e689cc10a71ad6bb01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f1c6b56e4bb15e689cc10a71ad6bb01">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[12/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f1c6b56e4bb15e689cc10a71ad6bb01">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[12/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3210,7 +3247,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a4bf292904d4c26a5752557f30909d9b8" name="a4bf292904d4c26a5752557f30909d9b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bf292904d4c26a5752557f30909d9b8">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[13/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bf292904d4c26a5752557f30909d9b8">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[13/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3231,7 +3268,7 @@ template&lt;typename U &gt; </div>
 </div>
 </div>
 <a id="acef4c1ddcc63fb4eccb2aedaab618062" name="acef4c1ddcc63fb4eccb2aedaab618062"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acef4c1ddcc63fb4eccb2aedaab618062">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[14/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acef4c1ddcc63fb4eccb2aedaab618062">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[14/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3250,7 +3287,7 @@ template&lt;typename U &gt; </div>
 </div>
 </div>
 <a id="a3b8cc91e3a9090566bdbe9b7bdbcc0b5" name="a3b8cc91e3a9090566bdbe9b7bdbcc0b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b8cc91e3a9090566bdbe9b7bdbcc0b5">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[15/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b8cc91e3a9090566bdbe9b7bdbcc0b5">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[15/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3277,7 +3314,7 @@ template&lt;typename U &gt; </div>
 </div>
 </div>
 <a id="a5ec08cfccc84898a10dfe02ca14222dc" name="a5ec08cfccc84898a10dfe02ca14222dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ec08cfccc84898a10dfe02ca14222dc">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[16/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ec08cfccc84898a10dfe02ca14222dc">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[16/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3298,7 +3335,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a023de8d97beab9d833af298f54c8c693" name="a023de8d97beab9d833af298f54c8c693"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a023de8d97beab9d833af298f54c8c693">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[17/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a023de8d97beab9d833af298f54c8c693">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[17/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3319,7 +3356,7 @@ template&lt;class IN , class OUT &gt; </div>
 </div>
 </div>
 <a id="aed3210808a21c7eef54abd58bf6550a3" name="aed3210808a21c7eef54abd58bf6550a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed3210808a21c7eef54abd58bf6550a3">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[18/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aed3210808a21c7eef54abd58bf6550a3">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[18/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3345,7 +3382,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="ab8b0f8a5b4cbfc5810dd490367e89d65" name="ab8b0f8a5b4cbfc5810dd490367e89d65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8b0f8a5b4cbfc5810dd490367e89d65">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[19/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8b0f8a5b4cbfc5810dd490367e89d65">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[19/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3371,7 +3408,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a8bf77334bee17aa7b498c3178b6f3094" name="a8bf77334bee17aa7b498c3178b6f3094"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bf77334bee17aa7b498c3178b6f3094">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[20/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bf77334bee17aa7b498c3178b6f3094">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[20/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3397,7 +3434,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a244cc5c6816dbc6da93eade2d6b946e8" name="a244cc5c6816dbc6da93eade2d6b946e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a244cc5c6816dbc6da93eade2d6b946e8">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[21/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a244cc5c6816dbc6da93eade2d6b946e8">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[21/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3423,7 +3460,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a59cc037593c270399cbad75bb30d0ccd" name="a59cc037593c270399cbad75bb30d0ccd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59cc037593c270399cbad75bb30d0ccd">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[22/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a59cc037593c270399cbad75bb30d0ccd">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[22/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3449,7 +3486,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="ac31bbd2833026036ec02e1b3432cb21b" name="ac31bbd2833026036ec02e1b3432cb21b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac31bbd2833026036ec02e1b3432cb21b">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[23/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac31bbd2833026036ec02e1b3432cb21b">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[23/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3475,7 +3512,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a9a26324f121720530981914028c19d1b" name="a9a26324f121720530981914028c19d1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a26324f121720530981914028c19d1b">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[24/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a26324f121720530981914028c19d1b">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[24/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3494,7 +3531,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a198d2b8c5c545f2d6f9b9632d98fcee7" name="a198d2b8c5c545f2d6f9b9632d98fcee7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a198d2b8c5c545f2d6f9b9632d98fcee7">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[25/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a198d2b8c5c545f2d6f9b9632d98fcee7">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[25/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3513,7 +3550,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a06f7952b679fef26f97a2aab157acd8a" name="a06f7952b679fef26f97a2aab157acd8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06f7952b679fef26f97a2aab157acd8a">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[26/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a06f7952b679fef26f97a2aab157acd8a">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[26/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3540,7 +3577,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a409d94653a1c4b9d8906f049a12075bd" name="a409d94653a1c4b9d8906f049a12075bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a409d94653a1c4b9d8906f049a12075bd">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[27/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a409d94653a1c4b9d8906f049a12075bd">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[27/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3567,7 +3604,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a0efe049a09a6b6d89ba588cd79ab127a" name="a0efe049a09a6b6d89ba588cd79ab127a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0efe049a09a6b6d89ba588cd79ab127a">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[28/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0efe049a09a6b6d89ba588cd79ab127a">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[28/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3593,7 +3630,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="ad143f51b518044b120d80aa0ee36293d" name="ad143f51b518044b120d80aa0ee36293d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad143f51b518044b120d80aa0ee36293d">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[29/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad143f51b518044b120d80aa0ee36293d">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[29/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3612,7 +3649,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="accc901597d101a118b8e32ee6114fe17" name="accc901597d101a118b8e32ee6114fe17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accc901597d101a118b8e32ee6114fe17">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[30/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#accc901597d101a118b8e32ee6114fe17">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[30/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3626,12 +3663,12 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8cpp_source.html#l00071">71</a> of file <a class="el" href="rgb__led_8cpp_source.html">rgb_led.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8cpp_source.html#l00062">62</a> of file <a class="el" href="rgb__led_8cpp_source.html">rgb_led.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a41e7c1d0f2973fc3962e8c465df49602" name="a41e7c1d0f2973fc3962e8c465df49602"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41e7c1d0f2973fc3962e8c465df49602">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[31/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a41e7c1d0f2973fc3962e8c465df49602">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[31/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3658,7 +3695,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a09335935587167516fbbb6fb214f20b6" name="a09335935587167516fbbb6fb214f20b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09335935587167516fbbb6fb214f20b6">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[32/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a09335935587167516fbbb6fb214f20b6">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[32/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3677,7 +3714,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <a id="a56ae605c426cb53e4323c917b1b4a681" name="a56ae605c426cb53e4323c917b1b4a681"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56ae605c426cb53e4323c917b1b4a681">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[33/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a56ae605c426cb53e4323c917b1b4a681">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[33/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3698,7 +3735,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="ae6d8dc1583532ff51f8783f5d4248db8" name="ae6d8dc1583532ff51f8783f5d4248db8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6d8dc1583532ff51f8783f5d4248db8">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[34/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6d8dc1583532ff51f8783f5d4248db8">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[34/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3717,7 +3754,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a1fb06d50f16e27a7e4d9154f0f469a8d" name="a1fb06d50f16e27a7e4d9154f0f469a8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fb06d50f16e27a7e4d9154f0f469a8d">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[35/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fb06d50f16e27a7e4d9154f0f469a8d">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[35/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3738,7 +3775,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a0585245c2ada0b231913fdedb754d31e" name="a0585245c2ada0b231913fdedb754d31e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0585245c2ada0b231913fdedb754d31e">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[36/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0585245c2ada0b231913fdedb754d31e">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[36/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3765,10 +3802,13 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a023600a19dffc71f667a21bc1009ad06" name="a023600a19dffc71f667a21bc1009ad06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a023600a19dffc71f667a21bc1009ad06">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[37/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a023600a19dffc71f667a21bc1009ad06">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[37/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const String sensesp::ConfigSchema </td>
@@ -3777,19 +3817,24 @@ template&lt;typename T &gt; </div>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="smart__switch__controller_8h_source.html#l00133">133</a> of file <a class="el" href="smart__switch__controller_8h_source.html">smart_switch_controller.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_a023600a19dffc71f667a21bc1009ad06_icgraph.svg" width="374" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_a023600a19dffc71f667a21bc1009ad06_icgraph.svg" width="374" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <a id="abaaf827b7cf85bdae36bab5b2102d786" name="abaaf827b7cf85bdae36bab5b2102d786"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaaf827b7cf85bdae36bab5b2102d786">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[38/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abaaf827b7cf85bdae36bab5b2102d786">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[38/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3832,7 +3877,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="aba5c86b2b3ceec092ab798138f01f9c3" name="aba5c86b2b3ceec092ab798138f01f9c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba5c86b2b3ceec092ab798138f01f9c3">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[39/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aba5c86b2b3ceec092ab798138f01f9c3">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[39/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3858,8 +3903,46 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="aad6557f479f2b8deb7a4eceed93d59ae" name="aad6557f479f2b8deb7a4eceed93d59ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad6557f479f2b8deb7a4eceed93d59ae">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[40/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const String sensesp::ConfigSchema </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a>&lt; float &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>obj</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="threshold_8cpp_source.html#l00008">8</a> of file <a class="el" href="threshold_8cpp_source.html">threshold.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aef8ef24d0e9ec0f224d9bc127bf35c4c" name="aef8ef24d0e9ec0f224d9bc127bf35c4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef8ef24d0e9ec0f224d9bc127bf35c4c">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[41/46]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const String sensesp::ConfigSchema </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsensesp_1_1_threshold_transform.html">ThresholdTransform</a>&lt; int &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>obj</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="threshold_8cpp_source.html#l00014">14</a> of file <a class="el" href="threshold_8cpp_source.html">threshold.cpp</a>.</p>
+
+</div>
+</div>
 <a id="ae4073c67cae3a1213844e1b252fcce2a" name="ae4073c67cae3a1213844e1b252fcce2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4073c67cae3a1213844e1b252fcce2a">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[40/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4073c67cae3a1213844e1b252fcce2a">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[42/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3878,7 +3961,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="a7673802af7f3c79196c329f1b36205ad" name="a7673802af7f3c79196c329f1b36205ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7673802af7f3c79196c329f1b36205ad">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[41/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7673802af7f3c79196c329f1b36205ad">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[43/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3897,7 +3980,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="a1e6a32d880394f79109a4bf9d246b741" name="a1e6a32d880394f79109a4bf9d246b741"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e6a32d880394f79109a4bf9d246b741">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[42/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e6a32d880394f79109a4bf9d246b741">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[44/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3916,7 +3999,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="a76d26560f6431fc456c8915f4d59de1e" name="a76d26560f6431fc456c8915f4d59de1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76d26560f6431fc456c8915f4d59de1e">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[43/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a76d26560f6431fc456c8915f4d59de1e">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[45/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3935,7 +4018,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="ae9520a4e41c2c007e371ae294e034ca7" name="ae9520a4e41c2c007e371ae294e034ca7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9520a4e41c2c007e371ae294e034ca7">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[44/44]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9520a4e41c2c007e371ae294e034ca7">&#9670;&#160;</a></span>ConfigSchema() <span class="overload">[46/46]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4315,14 +4398,14 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a6dc46d92e5fd3c1e7335f9d650827f57" name="a6dc46d92e5fd3c1e7335f9d650827f57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dc46d92e5fd3c1e7335f9d650827f57">&#9670;&#160;</a></span>event_loop()</h2>
+<a id="a1c1105507d71491cf4e0505eaabb2e49" name="a1c1105507d71491cf4e0505eaabb2e49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c1105507d71491cf4e0505eaabb2e49">&#9670;&#160;</a></span>event_loop()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">reactesp::EventLoop * sensesp::event_loop </td>
+          <td class="memname">std::shared_ptr&lt; reactesp::EventLoop &gt; sensesp::event_loop </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -4330,11 +4413,11 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp_8cpp_source.html#l00007">7</a> of file <a class="el" href="sensesp_8cpp_source.html">sensesp.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp_8cpp_source.html#l00009">9</a> of file <a class="el" href="sensesp_8cpp_source.html">sensesp.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_a6dc46d92e5fd3c1e7335f9d650827f57_cgraph.svg" width="651" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="namespacesensesp_a1c1105507d71491cf4e0505eaabb2e49_cgraph.svg" width="651" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -4946,54 +5029,6 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="ad9488c4352252d6785c559db7f75ca22" name="ad9488c4352252d6785c559db7f75ca22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9488c4352252d6785c559db7f75ca22">&#9670;&#160;</a></span>CHANNEL_FREQUENCY</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int sensesp::CHANNEL_FREQUENCY = 5000</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pwm__output_8cpp_source.html#l00009">9</a> of file <a class="el" href="pwm__output_8cpp_source.html">pwm_output.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aac46401155f1c817505b0a3e36efe8fe" name="aac46401155f1c817505b0a3e36efe8fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac46401155f1c817505b0a3e36efe8fe">&#9670;&#160;</a></span>CHANNEL_RESOLUTION</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int sensesp::CHANNEL_RESOLUTION = 13</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pwm__output_8cpp_source.html#l00010">10</a> of file <a class="el" href="pwm__output_8cpp_source.html">pwm_output.cpp</a>.</p>
-
-</div>
-</div>
 <a id="a018643e365493945bdfa43db85b03fb3" name="a018643e365493945bdfa43db85b03fb3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a018643e365493945bdfa43db85b03fb3">&#9670;&#160;</a></span>hysteresis_param_info</h2>
 
@@ -5192,7 +5227,7 @@ Here is the caller graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;3.0.0&quot;</td>
+          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;3.0.1&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -5286,30 +5321,6 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00012">12</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a4c79852ea65aaf6c395713349e4f37a3" name="a4c79852ea65aaf6c395713349e4f37a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c79852ea65aaf6c395713349e4f37a3">&#9670;&#160;</a></span>PWMRANGE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int sensesp::PWMRANGE = 4095</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pwm__output_8cpp_source.html#l00011">11</a> of file <a class="el" href="pwm__output_8cpp_source.html">pwm_output.cpp</a>.</p>
 
 </div>
 </div>

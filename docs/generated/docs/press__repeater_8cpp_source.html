@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -122,7 +122,7 @@ $(function(){initNavTree('press__repeater_8cpp_source.html',''); initResizable(t
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>      repeating_{false} {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a>();</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onRepeat(10, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onRepeat(10, [<span class="keyword">this</span>]() {</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_press_repeater.html#a535391a744a1f42176f932994dfa5a25">pushed_</a>) {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>      <span class="comment">// A press is currently in progress</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>      <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_press_repeater.html#af07b646e5a9885bf143eadaddf20ea8f">repeating_</a>) {</div>
@@ -200,9 +200,9 @@ $(function(){initNavTree('press__repeater_8cpp_source.html',''); initResizable(t
 <div class="ttc" id="aclasssensesp_1_1_press_repeater_html_af07b646e5a9885bf143eadaddf20ea8f"><div class="ttname"><a href="classsensesp_1_1_press_repeater.html#af07b646e5a9885bf143eadaddf20ea8f">sensesp::PressRepeater::repeating_</a></div><div class="ttdeci">bool repeating_</div><div class="ttdef"><b>Definition</b> <a href="press__repeater_8h_source.html#l00059">press_repeater.h:59</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_symmetric_transform_html"><div class="ttname"><a href="classsensesp_1_1_symmetric_transform.html">sensesp::SymmetricTransform</a></div><div class="ttdoc">A common type of transform that consumes, transforms, then outputs values of the same data type.</div><div class="ttdef"><b>Definition</b> <a href="transform_8h_source.html#l00094">transform.h:94</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer::emit</a></div><div class="ttdeci">void emit(const T &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a023600a19dffc71f667a21bc1009ad06"><div class="ttname"><a href="namespacesensesp.html#a023600a19dffc71f667a21bc1009ad06">sensesp::ConfigSchema</a></div><div class="ttdeci">const String ConfigSchema(const SmartSwitchController &amp;obj)</div><div class="ttdef"><b>Definition</b> <a href="smart__switch__controller_8h_source.html#l00133">smart_switch_controller.h:133</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="apress__repeater_8h_html"><div class="ttname"><a href="press__repeater_8h.html">press_repeater.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -123,7 +123,7 @@ $(function(){initNavTree('signalk__delta__queue_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    : max_buffer_size{max_buffer_size}, meta_sent_{false} {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  semaphore_ = xSemaphoreCreateRecursiveMutex();</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onDelay(</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onDelay(</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>      0, [<span class="keyword">this</span>]() { this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_delta_queue.html#a0bbb7e3cafe2088f9ba989f367d76808">connect_emitters</a>(); });</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
 </div>
@@ -226,8 +226,8 @@ $(function(){initNavTree('signalk__delta__queue_8cpp_source.html',''); initResiz
 <div class="ttc" id="aclasssensesp_1_1_s_k_delta_queue_html_af382e735dbc73c57ec775634a25bc362"><div class="ttname"><a href="classsensesp_1_1_s_k_delta_queue.html#af382e735dbc73c57ec775634a25bc362">sensesp::SKDeltaQueue::append</a></div><div class="ttdeci">void append(const String &amp;val)</div><div class="ttdef"><b>Definition</b> <a href="#l00030">signalk_delta_queue.cpp:30</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_emitter_html_aa26c3595b259be779621017a9292d741"><div class="ttname"><a href="classsensesp_1_1_s_k_emitter.html#aa26c3595b259be779621017a9292d741">sensesp::SKEmitter::get_sources</a></div><div class="ttdeci">static const std::vector&lt; SKEmitter * &gt; &amp; get_sources()</div><div class="ttdef"><b>Definition</b> <a href="signalk__emitter_8h_source.html#l00066">signalk_emitter.h:66</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a21ba3dc3ef0056c32ad5a67e1ae5ff16"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">sensesp::SensESPBaseApp::get_hostname</a></div><div class="ttdeci">static String get_hostname()</div><div class="ttdoc">Get the current hostname.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8h_source.html#l00104">sensesp_base_app.h:104</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 <div class="ttc" id="asensesp__app_8h_html"><div class="ttname"><a href="sensesp__app_8h.html">sensesp_app.h</a></div></div>
 <div class="ttc" id="asignalk__delta__queue_8h_html"><div class="ttname"><a href="signalk__delta__queue_8h.html">signalk_delta_queue.h</a></div></div>
