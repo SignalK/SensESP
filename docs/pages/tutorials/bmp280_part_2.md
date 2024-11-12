@@ -21,7 +21,7 @@ Look at the `lib_deps` section of the `platformio.ini`. It lists two libraries:
 
 ```c++
 lib_deps =
-  SignalK/SensESP @ ^2.0.0
+  SignalK/SensESP @ ^3.0.0
   adafruit/Adafruit BMP280 Library @ ^2.5.0
 ```
 
