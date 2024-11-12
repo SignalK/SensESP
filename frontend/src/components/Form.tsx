@@ -13,6 +13,7 @@ interface FormRadioInputProps {
   readOnly?: boolean;
   setValue: (value: string) => void;
   items: ItemsProps;
+  description?: string;
 }
 
 export function FormRadioInput(props: FormRadioInputProps): JSX.Element {
@@ -38,6 +39,9 @@ export function FormRadioInput(props: FormRadioInputProps): JSX.Element {
           </label>
         </div>
       ))}
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </fieldset>
   );
 }
@@ -48,6 +52,7 @@ interface FormSelectInputProps {
   readOnly?: boolean;
   items: ItemsProps;
   setValue: (value: string) => void;
+  description?: string;
 }
 
 export function FormSelectInput(props: FormSelectInputProps): JSX.Element {
@@ -71,6 +76,9 @@ export function FormSelectInput(props: FormSelectInputProps): JSX.Element {
       <label className="form-label" htmlFor={id}>
         {props.label}
       </label>
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </div>
   );
 }
@@ -81,6 +89,7 @@ interface FormCheckboxInputProps {
   checked: boolean;
   readOnly?: boolean;
   setValue: (value: JsonValue) => void;
+  description?: string;
 }
 
 export function FormCheckboxInput(props: FormCheckboxInputProps): JSX.Element {
@@ -100,6 +109,9 @@ export function FormCheckboxInput(props: FormCheckboxInputProps): JSX.Element {
       <label className="form-check-label" htmlFor={id}>
         {props.label}
       </label>
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </div>
   );
 }
@@ -110,6 +122,7 @@ export interface FormTextAreaInputProps {
   value: string | null;
   setValue: (value: string | null) => void;
   readOnly?: boolean;
+  description?: string;
 }
 
 export function FormTextAreaInput(props: FormTextAreaInputProps): JSX.Element {
@@ -152,6 +165,9 @@ export function FormTextAreaInput(props: FormTextAreaInputProps): JSX.Element {
       <label className="form-label" htmlFor={id}>
         {props.label}
       </label>
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </div>
   );
 }
@@ -161,6 +177,7 @@ interface FormTextInputProps {
   readOnly?: boolean;
   type?: string;
   value: JsonValue;
+  description?: string;
   disabled?: boolean;
   setValue: (value: JsonValue) => void;
 }
@@ -183,6 +200,9 @@ export function FormTextInput(props: FormTextInputProps): JSX.Element {
       <label className="form-label" htmlFor={id}>
         {props.label}
       </label>
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </div>
   );
 }
@@ -194,6 +214,7 @@ interface FormNumberInputProps {
   disabled?: boolean;
   step?: number;
   setValue: (value: JsonValue) => void;
+  description?: string;
 }
 
 export function FormNumberInput(props: FormNumberInputProps): JSX.Element {
@@ -217,6 +238,9 @@ export function FormNumberInput(props: FormNumberInputProps): JSX.Element {
       <label className="form-label" htmlFor={id}>
         {props.label}
       </label>
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </div>
   );
 }
@@ -224,6 +248,7 @@ export function FormNumberInput(props: FormNumberInputProps): JSX.Element {
 interface FormSelectProps {
   label: string;
   children: React.ReactNode;
+  description?: string;
 }
 
 export function FormSelect(props: FormSelectProps): JSX.Element {
@@ -233,8 +258,12 @@ export function FormSelect(props: FormSelectProps): JSX.Element {
       <label className="form-label" htmlFor={id}>
         {props.label}
       </label>
-      <select className="form-select" {...props} />
-      {props.children}
+      <select className="form-select" {...props}>
+        {props.children}
+      </select>
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </div>
   );
 }
@@ -246,6 +275,7 @@ interface FormCheckProps {
   checked: boolean;
   label: string;
   handleValueChange: (value: string) => void;
+  description?: string;
 }
 
 export function FormCheck(props: FormCheckProps): JSX.Element {
@@ -255,19 +285,29 @@ export function FormCheck(props: FormCheckProps): JSX.Element {
       <label className="form-check-label" htmlFor={props.id}>
         {props.label}
       </label>
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </div>
   );
 }
 
-export function FormSwitch(
-  props: JSX.IntrinsicAttributes & JSX.HTMLAttributes<HTMLInputElement>,
-): JSX.Element {
+interface FormSwitchProps {
+  id: string;
+  label: string;
+  description?: string;
+}
+
+export function FormSwitch(props: FormSwitchProps): JSX.Element {
   return (
     <div className="form-check form-switch mb-3">
       <input className="form-check-input" role="switch" {...props} />
       <label className="form-check-label" htmlFor={props.id}>
         {props.label}
       </label>
+      {props.description && (
+        <div className="form-text">{props.description}</div>
+      )}
     </div>
   );
 }
