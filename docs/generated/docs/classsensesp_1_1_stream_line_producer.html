@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -125,8 +125,8 @@ Inheritance diagram for sensesp::StreamLineProducer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a92aa7aeef639dc969cbf0ec5b9d338bc" id="r_a92aa7aeef639dc969cbf0ec5b9d338bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92aa7aeef639dc969cbf0ec5b9d338bc">StreamLineProducer</a> (Stream *stream, reactesp::EventLoop *<a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>=<a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>(), int max_line_length=256)</td></tr>
-<tr class="separator:a92aa7aeef639dc969cbf0ec5b9d338bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac334ae70665fd5b2cdc535a2cca270ee" id="r_ac334ae70665fd5b2cdc535a2cca270ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac334ae70665fd5b2cdc535a2cca270ee">StreamLineProducer</a> (Stream *stream, std::shared_ptr&lt; reactesp::EventLoop &gt; <a class="el" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>=<a class="el" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>(), int max_line_length=256)</td></tr>
+<tr class="separator:ac334ae70665fd5b2cdc535a2cca270ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classsensesp_1_1_value_producer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsensesp_1_1_value_producer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classsensesp_1_1_value_producer.html">sensesp::ValueProducer&lt; String &gt;</a></td></tr>
 <tr class="memitem:aa29790dfe4e22903e061662be0fc7f68 inherit pub_methods_classsensesp_1_1_value_producer" id="r_aa29790dfe4e22903e061662be0fc7f68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_value_producer.html#aa29790dfe4e22903e061662be0fc7f68">ValueProducer</a> ()</td></tr>
 <tr class="separator:aa29790dfe4e22903e061662be0fc7f68 inherit pub_methods_classsensesp_1_1_value_producer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,10 +178,10 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere.">ValueProducer</a> that reads from a Stream and produces a full line. </p>
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00034">34</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00036">36</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a92aa7aeef639dc969cbf0ec5b9d338bc" name="a92aa7aeef639dc969cbf0ec5b9d338bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92aa7aeef639dc969cbf0ec5b9d338bc">&#9670;&#160;</a></span>StreamLineProducer()</h2>
+<a id="ac334ae70665fd5b2cdc535a2cca270ee" name="ac334ae70665fd5b2cdc535a2cca270ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac334ae70665fd5b2cdc535a2cca270ee">&#9670;&#160;</a></span>StreamLineProducer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,7 +197,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">reactesp::EventLoop *</td>          <td class="paramname"><span class="paramname"><em>event_loop</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()</span>, </td>
+          <td class="paramtype">std::shared_ptr&lt; reactesp::EventLoop &gt;</td>          <td class="paramname"><span class="paramname"><em>event_loop</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -212,11 +212,11 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00036">36</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00038">38</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_stream_line_producer_a92aa7aeef639dc969cbf0ec5b9d338bc_cgraph.svg" width="100%" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_stream_line_producer_ac334ae70665fd5b2cdc535a2cca270ee_cgraph.svg" width="100%" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -245,7 +245,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00052">52</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00055">55</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -280,7 +280,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00048">48</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00051">51</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>
@@ -304,7 +304,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00047">47</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00050">50</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>
@@ -328,7 +328,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00046">46</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00049">49</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>
@@ -352,7 +352,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00050">50</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00053">53</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>
@@ -376,7 +376,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00049">49</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stream__producer_8h_source.html#l00052">52</a> of file <a class="el" href="stream__producer_8h_source.html">stream_producer.h</a>.</p>
 
 </div>
 </div>

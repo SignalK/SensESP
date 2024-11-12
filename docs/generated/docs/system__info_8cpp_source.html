@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -124,7 +124,7 @@ $(function(){initNavTree('system__info_8cpp_source.html',''); initResizable(true
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  }</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  uint32_t current_tick_count_ = <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;getTickCount();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  uint32_t current_tick_count_ = <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;getTickCount();</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <a class="code hl_variable" href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">output_</a> =</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>      (current_tick_count_ - <a class="code hl_variable" href="classsensesp_1_1_system_hz.html#aa9d05cfa574e0c1ac83f8b811bb00291">last_tick_count_</a>) / (<a class="code hl_variable" href="classsensesp_1_1_system_hz.html#ae064793429080066b35e9e00f4d507c9">elapsed_millis_</a> / 1000.);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
@@ -154,8 +154,8 @@ $(function(){initNavTree('system__info_8cpp_source.html',''); initResizable(true
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer&lt; uint32_t &gt;::emit</a></div><div class="ttdeci">void emit(const uint32_t &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a86ca5ef060f2f824447afa0ff4d0c3de"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a86ca5ef060f2f824447afa0ff4d0c3de">sensesp::ValueProducer&lt; float &gt;::output_</a></div><div class="ttdeci">float output_</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00101">valueproducer.h:101</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_wi_fi_signal_html_a1b7b1f3eac124c15b6bb68f776e12f4b"><div class="ttname"><a href="classsensesp_1_1_wi_fi_signal.html#a1b7b1f3eac124c15b6bb68f776e12f4b">sensesp::WiFiSignal::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition</b> <a href="#l00033">system_info.cpp:33</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 <div class="ttc" id="asystem__info_8h_html"><div class="ttname"><a href="system__info_8h.html">system_info.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

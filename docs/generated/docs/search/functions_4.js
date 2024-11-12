@@ -16,7 +16,7 @@ var searchData=
   ['enuvector_13',['ENUVector',['../structsensesp_1_1_e_n_u_vector.html#a8ac4a91f03395cd5d18f1a9143bc8db6',1,'sensesp::ENUVector::ENUVector()'],['../structsensesp_1_1_e_n_u_vector.html#ad74d777e2d17ae3808780018f0c60d18',1,'sensesp::ENUVector::ENUVector(float east, float north, float up=kPositionInvalidAltitude)']]],
   ['esp32analogreader_14',['ESP32AnalogReader',['../classsensesp_1_1_e_s_p32_analog_reader.html#a822aca07ca6a90dac5d5852fef21e040',1,'sensesp::ESP32AnalogReader']]],
   ['evenblinker_15',['EvenBlinker',['../classsensesp_1_1_even_blinker.html#a5516f3944507707a0192306db22a61ef',1,'sensesp::EvenBlinker']]],
-  ['event_5floop_16',['event_loop',['../namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57',1,'sensesp']]],
+  ['event_5floop_16',['event_loop',['../namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49',1,'sensesp']]],
   ['executewebsockettask_17',['ExecuteWebSocketTask',['../namespacesensesp.html#a655898328a16b3c9f85902c5a9c981e6',1,'sensesp']]],
   ['expiringvalue_18',['ExpiringValue',['../classsensesp_1_1_expiring_value.html#a176a7395b0d614aff164e906067be0a3',1,'sensesp::ExpiringValue::ExpiringValue()'],['../classsensesp_1_1_expiring_value.html#a8065027c4b1f45c8da22b9708145dd3c',1,'sensesp::ExpiringValue::ExpiringValue(T value, unsigned long expiration_duration, T expired_value)']]],
   ['extract_5fparam_19',['extract_param',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#ad5b851fe4ce70606474e2af6f970a0ae',1,'sensesp::HTTPDigestAuthenticator']]]

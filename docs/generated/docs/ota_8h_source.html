@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -124,7 +124,7 @@ $(function(){initNavTree('ota_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> <span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classsensesp_1_1_o_t_a.html#a9efbb67a2b9b8882971a28837d6e7e6e">   20</a></span>  <a class="code hl_function" href="classsensesp_1_1_o_t_a.html#a9efbb67a2b9b8882971a28837d6e7e6e">OTA</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* password) : password_{password} {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onDelay(0, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onDelay(0, [<span class="keyword">this</span>]() {</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>      ArduinoOTA.setPassword(password_);</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>      ArduinoOTA.onStart([]() { ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;Starting OTA&quot;</span>); });</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>      ArduinoOTA.onEnd([]() { ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;OTA End&quot;</span>); });</div>
@@ -147,7 +147,7 @@ $(function(){initNavTree('ota_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        }</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      });</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      ArduinoOTA.begin();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      <a class="code hl_function" href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">event_loop</a>()-&gt;onRepeat(20, OTA::handle_ota);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onRepeat(20, OTA::handle_ota);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    });</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
 </div>
@@ -163,8 +163,8 @@ $(function(){initNavTree('ota_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclasssensesp_1_1_o_t_a_html"><div class="ttname"><a href="classsensesp_1_1_o_t_a.html">sensesp::OTA</a></div><div class="ttdef"><b>Definition</b> <a href="#l00013">ota.h:13</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_o_t_a_html_a9efbb67a2b9b8882971a28837d6e7e6e"><div class="ttname"><a href="classsensesp_1_1_o_t_a.html#a9efbb67a2b9b8882971a28837d6e7e6e">sensesp::OTA::OTA</a></div><div class="ttdeci">OTA(const char *password)</div><div class="ttdoc">Construct a new OTA (Over-the-air update) object.</div><div class="ttdef"><b>Definition</b> <a href="#l00020">ota.h:20</a></div></div>
-<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00005">sensesp.cpp:5</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a6dc46d92e5fd3c1e7335f9d650827f57"><div class="ttname"><a href="namespacesensesp.html#a6dc46d92e5fd3c1e7335f9d650827f57">sensesp::event_loop</a></div><div class="ttdeci">reactesp::EventLoop * event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="asensesp_8h_html"><div class="ttname"><a href="sensesp_8h.html">sensesp.h</a></div></div>
 <div class="ttc" id="asensesp__base__app_8h_html"><div class="ttname"><a href="sensesp__base__app_8h.html">sensesp_base_app.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

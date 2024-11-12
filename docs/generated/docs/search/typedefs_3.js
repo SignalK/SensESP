@@ -8,6 +8,7 @@ var searchData=
   ['floatsklistener_5',['FloatSKListener',['../namespacesensesp.html#a68f86ab6fed0599ab7c501b25386b09b',1,'sensesp']]],
   ['floatskputrequest_6',['FloatSKPutRequest',['../namespacesensesp.html#ae3b1e82b9b3b1d1d0d8367347d5ade06',1,'sensesp']]],
   ['floatskputrequestlistener_7',['FloatSKPutRequestListener',['../namespacesensesp.html#ac7f4c32570a6f0bef049aab41c077128',1,'sensesp']]],
-  ['floattoint_8',['FloatToInt',['../namespacesensesp.html#a7be62e1088cc857cf52153051a361978',1,'sensesp']]],
-  ['floattransform_9',['FloatTransform',['../namespacesensesp.html#a94d8b3e87aa10f0dd9756d11d8771d04',1,'sensesp']]]
+  ['floatthreshold_8',['FloatThreshold',['../namespacesensesp.html#ab291dd88d1986834063d88d6b6cf0ab9',1,'sensesp']]],
+  ['floattoint_9',['FloatToInt',['../namespacesensesp.html#a7be62e1088cc857cf52153051a361978',1,'sensesp']]],
+  ['floattransform_10',['FloatTransform',['../namespacesensesp.html#a94d8b3e87aa10f0dd9756d11d8771d04',1,'sensesp']]]
 ];

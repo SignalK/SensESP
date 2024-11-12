@@ -26,5 +26,6 @@ var searchData=
   ['progmem_23',['PROGMEM',['../css__bootstrap_8h.html#ade1d7051ddbe6cc839076fcd0de2203a',1,'PROGMEM:&#160;css_bootstrap.h'],['../index_8h.html#ae9c93d9fef208c39822b3d2ea3318aee',1,'PROGMEM:&#160;index.h'],['../js__jsoneditor_8h.html#a22356d871f13b4d75e738343400480e6',1,'PROGMEM:&#160;js_jsoneditor.h'],['../js__sensesp_8h.html#abfd907806a0b25ef6a79b5bbd5390223',1,'PROGMEM:&#160;js_sensesp.h']]],
   ['pushed_5f_24',['pushed_',['../classsensesp_1_1_press_repeater.html#a535391a744a1f42176f932994dfa5a25',1,'sensesp::PressRepeater']]],
   ['put_5frequest_5f_25',['put_request_',['../classsensesp_1_1_smart_switch_controller_1_1_sync_path.html#afe8b828e49a50b349599a191c6753b53',1,'sensesp::SmartSwitchController::SyncPath']]],
-  ['pwmrange_26',['PWMRANGE',['../namespacesensesp.html#a4c79852ea65aaf6c395713349e4f37a3',1,'sensesp']]]
+  ['pwm_5fchannel_5f_26',['pwm_channel_',['../classsensesp_1_1_p_w_m_output.html#a46af6c3b11405839c46a4a5c0585b3cc',1,'sensesp::PWMOutput']]],
+  ['pwmrange_5f_27',['pwmrange_',['../classsensesp_1_1_p_w_m_output.html#a22f741df2e476ac5176c1c351dac69dd',1,'sensesp::PWMOutput']]]
 ];
