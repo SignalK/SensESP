@@ -5,7 +5,6 @@
 #include <esp_wifi.h>
 
 #include "sensesp/system/lambda_consumer.h"
-#include "sensesp/system/led_blinker.h"
 #include "sensesp_app.h"
 
 namespace sensesp {
