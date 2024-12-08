@@ -42,21 +42,34 @@ class PWMOutput : public ValueConsumer<float> {
    *   next unassigned pin.
    */
   PWMOutput(int pin = -1, int pwm_channel = -1, int channel_frequency = 5000,
-            int channel_resolution = 13);
+            int channel_resolution = 13)
+      : ValueConsumer<float>(),
+        pwm_channel_{static_cast<uint8_t>(pwm_channel)},
+        channel_frequency_{channel_frequency},
+        channel_resolution_{channel_resolution},
+        pwmrange_{static_cast<int>(pow(2, channel_resolution) - 1)} {
+    if (pin >= 0) {
+      pwm_channel_ = assign_channel(pin, pwm_channel);
+    }
+  }
 
   /**
    * Sets the duty cycle of the specified pwm_channel to new_value. If
    * pwm_channel is zero, the channel assigned when the PWMOutput instance
    * was instantiated will be used.
    */
-  virtual void set(const float& new_value) override;
+  virtual void set(const float& new_value) override { set_pwm(new_value); }
 
  protected:
   int channel_frequency_;
   int channel_resolution_;
   int pwmrange_;
 
-  static std::map<uint8_t, int8_t> channel_to_pin_;
+  static std::map<uint8_t, int8_t>& channel_map() {
+    static std::map<uint8_t, int8_t> channel_to_pin_;
+    return channel_to_pin_;
+  }
+
   uint8_t pwm_channel_{};
 
   /**
@@ -68,14 +81,49 @@ class PWMOutput : public ValueConsumer<float> {
    * @returns The actual pwm channel assigned to the GPIO pin
    * to the pin
    */
-  int assign_channel(int pin, int pwm_channel = -1);
+  int assign_channel(int pin, int pwm_channel = -1) {
+    if (pwm_channel == -1) {
+      // Do a search for the next available channel
+      std::map<uint8_t, int8_t>::iterator it;
+      pwm_channel = 0;
+      do {
+        pwm_channel++;
+        it = channel_map().find(pwm_channel);
+      } while (it != channel_map().end());
+    }
+
+    channel_map()[pwm_channel] = pin;
+
+    ESP_LOGD(__FILENAME__, "PWM channel %d assigned to pin %d", pwm_channel,
+             pin);
+
+    pinMode(pin, OUTPUT);
+    ledcSetup(pwm_channel, channel_frequency_, channel_resolution_);
+    ledcAttachPin(pin, pwm_channel);
+
+    return pwm_channel;
+  }
 
   /**
    * Sets duty cycle on specified pwm channel
    * @param value A number between 0.0 and 1.0, where 1.0 is the maximum
    *   duty cycle the output pin supports.
    */
-  void set_pwm(float value);
+  void set_pwm(float value) {
+    std::map<uint8_t, int8_t>::iterator it;
+    it = channel_map().find(pwm_channel_);
+    if (it != channel_map().end()) {
+      int pin = it->second;
+      int const output_val = value * pwmrange_;
+      // ESP_LOGD(__FILENAME__, "Setting PWM channel %d to %d", pwm_channel_,
+      //          output_val);
+      ledcWrite(pwm_channel_, output_val);
+    } else {
+      ESP_LOGW(__FILENAME__,
+               "No pin assigned to channel %d. Ignoring set_pwm()",
+               pwm_channel_);
+    }
+  }
 };
 
 }  // namespace sensesp
