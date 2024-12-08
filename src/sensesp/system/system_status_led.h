@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <vector>
 
 #include "lambda_consumer.h"
 #include "led_blinker.h"
@@ -128,7 +129,7 @@ class SystemStatusLed : public BaseSystemStatusLed {
 class RGBSystemStatusLed : public BaseSystemStatusLed {
  public:
   RGBSystemStatusLed(uint8_t pin, uint8_t brightness = 40)
-      : BaseSystemStatusLed(), pin_{pin} {}
+      : BaseSystemStatusLed(), pin_{pin}, brightness_{brightness} {}
 
  protected:
   uint8_t pin_;
