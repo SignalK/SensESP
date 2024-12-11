@@ -167,7 +167,7 @@ class SensESPApp : public SensESPBaseApp {
     // Add the default HTTP server response handlers
     add_static_file_handlers(this->http_server_);
     add_base_app_http_command_handlers(this->http_server_);
-    add_app_http_command_handlers(this->http_server_);
+    add_app_http_command_handlers(this->http_server_, this->networking_);
     add_config_handlers(this->http_server_);
 
     ConfigItem(this->http_server_);

@@ -6,10 +6,12 @@
 
 #include "ArduinoJson.h"
 #include "sensesp/net/http_server.h"
+#include "sensesp/net/networking.h"
 
 namespace sensesp {
 
-void add_app_http_command_handlers(std::shared_ptr<HTTPServer>& server);
+void add_app_http_command_handlers(std::shared_ptr<HTTPServer>& server,
+                                   std::shared_ptr<Networking>& networking);
 
 }  // namespace sensesp
 
