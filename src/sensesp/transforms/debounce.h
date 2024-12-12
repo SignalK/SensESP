@@ -56,11 +56,6 @@ class Debounce : public SymmetricTransform<T> {
     }
   }
 
- private:
-  int ms_min_delay_;
-  bool value_received_ = false;
-  T debounced_value_;
-  reactesp::DelayEvent* event_ = nullptr;
   virtual bool to_json(JsonObject& doc) override {
     doc["min_delay"] = ms_min_delay_;
     return true;
@@ -76,9 +71,18 @@ class Debounce : public SymmetricTransform<T> {
     ms_min_delay_ = config["min_delay"];
     return true;
   }
+
+ protected:
+  int ms_min_delay_;
+  bool value_received_ = false;
+  T debounced_value_;
+  reactesp::DelayEvent* event_ = nullptr;
 };
 
-const String ConfigSchema(const Debounce<bool>& obj);
+template <typename T>
+const String ConfigSchema(const Debounce<T>& obj) {
+  return R"###({"type":"object","properties":{"min_delay":{"title":"Minimum delay","type":"number","description":"The minimum time in ms between inputs for output to happen"}}})###";
+}
 
 typedef Debounce<bool> DebounceBool;
 typedef Debounce<int> DebounceInt;
