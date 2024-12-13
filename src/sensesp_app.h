@@ -172,7 +172,7 @@ class SensESPApp : public SensESPBaseApp {
 
     ConfigItem(this->http_server_);
 
-    // create the SK delta object
+    // create the SK delta queue
     sk_delta_queue_ = std::make_shared<SKDeltaQueue>();
 
     // create the websocket client
