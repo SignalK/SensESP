@@ -1,14 +1,6 @@
 #ifndef SENSESP_APP_H_
 #define SENSESP_APP_H_
 
-#ifdef LED_BUILTIN
-#define LED_PIN LED_BUILTIN
-#define ENABLE_LED true
-#else
-#define LED_PIN 0
-#define ENABLE_LED false
-#endif
-
 #include "sensesp/controllers/system_status_controller.h"
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
@@ -175,7 +167,7 @@ class SensESPApp : public SensESPBaseApp {
     // Add the default HTTP server response handlers
     add_static_file_handlers(this->http_server_);
     add_base_app_http_command_handlers(this->http_server_);
-    add_app_http_command_handlers(this->http_server_);
+    add_app_http_command_handlers(this->http_server_, this->networking_);
     add_config_handlers(this->http_server_);
 
     ConfigItem(this->http_server_);
@@ -203,12 +195,18 @@ class SensESPApp : public SensESPBaseApp {
     // create a system status led and connect it
 
     if (system_status_led_ == nullptr) {
-      system_status_led_ = std::make_shared<SystemStatusLed>(LED_PIN);
+#ifdef PIN_NEOPIXEL
+      system_status_led_ = std::make_shared<RGBSystemStatusLed>(PIN_NEOPIXEL);
+#elif defined(LED_BUILTIN)
+      system_status_led_ = std::make_shared<SystemStatusLed>(LED_BUILTIN);
+#endif
     }
-    this->system_status_controller_->connect_to(
-        system_status_led_->get_system_status_consumer());
-    this->ws_client_->get_delta_tx_count_producer().connect_to(
-        system_status_led_->get_delta_tx_count_consumer());
+    if (system_status_led_ != nullptr) {
+      this->system_status_controller_->connect_to(
+          system_status_led_->system_status_consumer_);
+      this->ws_client_->get_delta_tx_count_producer().connect_to(
+          system_status_led_->get_delta_tx_count_consumer());
+    }
 
     // create the button handler
     if (button_gpio_pin_ != -1) {
@@ -243,7 +241,8 @@ class SensESPApp : public SensESPBaseApp {
       // Event counts
       uint64_t current_event_count = event_loop_->getEventCount();
       uint64_t current_timed_event_count = event_loop_->getTimedEventCount();
-      uint64_t current_untimed_event_count = event_loop_->getUntimedEventCount();
+      uint64_t current_untimed_event_count =
+          event_loop_->getUntimedEventCount();
       event_count_ui_output_.set(current_event_count);
       timed_event_count_ui_output_.set(current_timed_event_count);
       untimed_event_count_ui_output_.set(current_untimed_event_count);
@@ -306,7 +305,7 @@ class SensESPApp : public SensESPBaseApp {
   std::shared_ptr<MDNSDiscovery> mdns_discovery_;
   std::shared_ptr<HTTPServer> http_server_;
 
-  std::shared_ptr<SystemStatusLed> system_status_led_;
+  std::shared_ptr<BaseSystemStatusLed> system_status_led_;
   std::shared_ptr<SystemStatusController> system_status_controller_ =
       std::make_shared<SystemStatusController>();
   int button_gpio_pin_ = SENSESP_BUTTON_PIN;

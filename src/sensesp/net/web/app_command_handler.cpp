@@ -7,10 +7,10 @@
 
 namespace sensesp {
 
-void add_scan_wifi_networks_handlers(std::shared_ptr<HTTPServer>& server) {
+void add_scan_wifi_networks_handlers(std::shared_ptr<HTTPServer>& server,
+                                     std::shared_ptr<Networking>& networking) {
   auto scan_wifi_networks_handler = std::make_shared<HTTPRequestHandler>(
-      1 << HTTP_POST, "/api/wifi/scan", [](httpd_req_t* req) {
-        auto networking = SensESPApp::get()->get_networking();
+      1 << HTTP_POST, "/api/wifi/scan", [networking](httpd_req_t* req) {
         networking->start_wifi_scan();
         // Return status code 202 and "SCAN STARTED" message
         httpd_resp_set_status(req, "202 Accepted");
@@ -21,8 +21,7 @@ void add_scan_wifi_networks_handlers(std::shared_ptr<HTTPServer>& server) {
   server->add_handler(scan_wifi_networks_handler);
 
   auto scan_results_handler = std::make_shared<HTTPRequestHandler>(
-      1 << HTTP_GET, "/api/wifi/scan-results", [](httpd_req_t* req) {
-        auto networking = SensESPApp::get()->get_networking();
+      1 << HTTP_GET, "/api/wifi/scan-results", [networking](httpd_req_t* req) {
         std::vector<WiFiNetworkInfo> ssid_list;
         int16_t result = networking->get_wifi_scan_results(ssid_list);
         if (result == WIFI_SCAN_RUNNING) {
@@ -53,8 +52,9 @@ void add_scan_wifi_networks_handlers(std::shared_ptr<HTTPServer>& server) {
   server->add_handler(scan_results_handler);
 }
 
-void add_app_http_command_handlers(std::shared_ptr<HTTPServer>& server) {
-  add_scan_wifi_networks_handlers(server);
+void add_app_http_command_handlers(std::shared_ptr<HTTPServer>& server,
+                                   std::shared_ptr<Networking>& networking) {
+  add_scan_wifi_networks_handlers(server, networking);
 }
 
 }  // namespace sensesp
