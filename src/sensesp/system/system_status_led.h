@@ -101,7 +101,7 @@ class BaseSystemStatusLed {
 class SystemStatusLed : public BaseSystemStatusLed {
  public:
   SystemStatusLed(uint8_t pin, uint8_t brightness = 255)
-      : pwm_output_{PWMOutput(pin, -1, 2000, 8)},
+      : pwm_output_{PWMOutput(pin, 2000, 8)},
         BaseSystemStatusLed(),
         brightness_{brightness} {}
 
@@ -135,9 +135,8 @@ class RGBSystemStatusLed : public BaseSystemStatusLed {
   uint8_t pin_;
   uint8_t brightness_;
   void show() override {
-    neopixelWrite(pin_, brightness_ * leds_[0].r / 255,
-                  brightness_ * leds_[0].g / 255,
-                  brightness_ * leds_[0].b / 255);
+    rgbLedWrite(pin_, brightness_ * leds_[0].r / 255,
+                brightness_ * leds_[0].g / 255, brightness_ * leds_[0].b / 255);
   }
 
   void set_brightness(uint8_t brightness) override { brightness_ = brightness; }
