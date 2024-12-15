@@ -40,6 +40,7 @@ namespace sensesp {
  * make this parameter be the maximum voltage that you would send into the
  * voltage divider circuit.
  */
+[[deprecated("Use RepeatSensor and Arduino analogReadMilliVolts() instead")]]
 class AnalogInput : public FloatSensor {
  public:
   AnalogInput(uint8_t pin = A0, unsigned int read_delay = 200,
