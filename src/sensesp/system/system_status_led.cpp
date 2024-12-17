@@ -32,7 +32,7 @@ LEDPattern ws_connecting_pattern = {
 
 // PATTERN: ******************__
 LEDPattern ws_connected_pattern = {
-    frag_linear_fade(900, 200, CRGB::Green),
+    frag_linear_fade(900, 200, CRGB::Blue),
     frag_linear_fade(100, 100, CRGB::Black),
 };
 
