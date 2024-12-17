@@ -7,7 +7,6 @@
 
 #include "lambda_consumer.h"
 #include "led_blinker.h"
-#include "pwm_output.h"
 #include "sensesp/controllers/system_status_controller.h"
 
 #include "esp_arduino_version.h"
@@ -108,22 +107,25 @@ class BaseSystemStatusLed {
 class SystemStatusLed : public BaseSystemStatusLed {
  public:
   SystemStatusLed(uint8_t pin, uint8_t brightness = 255)
-      : pwm_output_{PWMOutput(pin, 2000, 8)},
-        BaseSystemStatusLed(),
-        brightness_{brightness} {}
+      : BaseSystemStatusLed(),
+        pin_{pin},
+        brightness_{brightness} {
+          ledcAttach(pin, 2000, 8);
+        }
 
  protected:
-  PWMOutput pwm_output_;
+  uint8_t pin_;
   uint8_t brightness_;
   void show() override {
     // Convert the RGB color to a single brightness value using the
     // perceptual luminance formula.
-    float value = ((0.2126 * leds_[0].r +  // Red contribution
+    // value is scaled to 0-255.
+    int value = ((0.2126 * leds_[0].r +  // Red contribution
                     0.7152 * leds_[0].g +  // Green contribution
                     0.0722 * leds_[0].b    // Blue contribution
                     ) *
-                   brightness_ / (255.0 * 256.0));
-    pwm_output_.set(value);
+                   brightness_ / (255.0));
+    ledcWrite(pin_, value);
   }
 
   void set_brightness(uint8_t brightness) override { brightness_ = brightness; }
