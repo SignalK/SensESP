@@ -10,6 +10,13 @@
 #include "pwm_output.h"
 #include "sensesp/controllers/system_status_controller.h"
 
+#include "esp_arduino_version.h"
+
+#if ESP_ARDUINO_VERSION_MAJOR < 3
+#define rgbLedWrite neopixelWrite
+#endif
+
+
 namespace sensesp {
 
 // LED patterns. It isn't strictly speaking necessary to have these public,
@@ -123,7 +130,7 @@ class SystemStatusLed : public BaseSystemStatusLed {
 };
 
 // Direct use of FastLED breaks when the WiFi client is enabled. Thus,
-// use the Arduino ESP32 Core native neopixelWrite function instead. That
+// use the Arduino ESP32 Core native rgbLedWrite function instead. That
 // seems to work with WiFi as well.
 
 class RGBSystemStatusLed : public BaseSystemStatusLed {
