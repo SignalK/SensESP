@@ -1,5 +1,7 @@
 #include "led_blinker.h"
 
+#include "FastLED.h"
+
 namespace sensesp {
 
 LEDPatternFragment frag_solid_color(uint32_t duration_ms, const CRGB& color) {
