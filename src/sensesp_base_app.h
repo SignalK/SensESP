@@ -18,7 +18,7 @@ namespace sensesp {
 
 constexpr auto kDefaultHostname = "SensESP";
 
-inline void SetupLogging(esp_log_level_t default_level = ESP_LOG_VERBOSE) {
+inline void SetupLogging(esp_log_level_t default_level = ESP_LOG_DEBUG) {
   esp_log_level_set("*", default_level);
 }
 
