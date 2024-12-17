@@ -24,7 +24,6 @@ namespace sensesp {
  * two channel color led). Specify -1 for any pin for that channel
  * to be ignored. The color values used still have to adhere to
  * the 24 bit color definition however.
- * @see PWMOutput
  */
 class RgbLed : public FileSystemSaveable {
  public:
@@ -77,9 +76,9 @@ class RgbLed : public FileSystemSaveable {
   virtual bool from_json(const JsonObject& config) override;
 
  protected:
-  std::shared_ptr<PWMOutput> led_r_output_ = nullptr;
-  std::shared_ptr<PWMOutput> led_g_output_ = nullptr;
-  std::shared_ptr<PWMOutput> led_b_output_ = nullptr;
+  uint8_t led_r_pin_;
+  uint8_t led_g_pin_;
+  uint8_t led_b_pin_;
   long led_on_rgb_;
   long led_off_rgb_;
   bool common_anode_;
