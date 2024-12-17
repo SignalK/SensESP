@@ -1,9 +1,10 @@
 #ifndef SENSESP_BASE_APP_H_
 #define SENSESP_BASE_APP_H_
 
-#ifndef SENSESP_BUTTON_PIN
-// Default button pin is 0 (GPIO0), normally connected to the BOOT button
-#define SENSESP_BUTTON_PIN 0
+#ifndef BUTTON_BUILTIN
+// Default button pin on ESP32-DevKitC devices is 0 (GPIO0),
+// normally connected to the BOOT button.
+#define BUTTON_BUILTIN 0
 #endif
 
 #include "sensesp.h"
