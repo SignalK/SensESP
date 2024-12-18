@@ -16,6 +16,11 @@ using namespace sensesp;
 
 const unsigned int read_delay = 500;
 
+constexpr int input_pin1 = 15;
+constexpr int input_pin2 = 13;
+constexpr int output_pin1 = 18;
+constexpr int output_pin2 = 21;
+
 // This is a sample program to demonstrate how to instantiate a
 // SensESPMinimalApp application and only enable some required components
 // explicitly.
