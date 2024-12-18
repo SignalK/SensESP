@@ -2,9 +2,9 @@
 #define SENSESP_SYSTEM_LED_BLINKER_H_
 
 #include <Arduino.h>
-#include <FastLED.h>
 #include <ReactESP.h>
 
+#include "crgb.h"
 #include "sensesp/signalk/signalk_ws_client.h"
 
 namespace sensesp {
@@ -128,7 +128,9 @@ class LEDPattern {
   LEDPattern(const std::vector<LEDPatternFragment>& fragments)
       : fragments_(fragments) {}
   LEDPattern(const std::initializer_list<LEDPatternFragment>& fragments)
-      : fragments_(fragments), current_fragment_idx_(0), fragment_begin_ms_(0) {}
+      : fragments_(fragments),
+        current_fragment_idx_(0),
+        fragment_begin_ms_(0) {}
 
   // Assignment operator
   LEDPattern& operator=(const LEDPattern& other) {

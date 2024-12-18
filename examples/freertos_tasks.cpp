@@ -7,6 +7,10 @@
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
 #include "sensesp/net/networking.h"
+#include "sensesp/net/web/app_command_handler.h"
+#include "sensesp/net/web/base_command_handler.h"
+#include "sensesp/net/web/config_handler.h"
+#include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/signalk/signalk_output.h"
@@ -40,6 +44,12 @@ void setup() {
 
   auto networking = std::make_shared<Networking>("/system/networking", "", "");
   auto http_server = std::make_shared<HTTPServer>();
+
+  // Add the default HTTP server response handlers
+  add_static_file_handlers(http_server);
+  add_base_app_http_command_handlers(http_server);
+  add_app_http_command_handlers(http_server, networking);
+  add_config_handlers(http_server);
 
   // create the SK delta object
   auto sk_delta_queue_ = std::make_shared<SKDeltaQueue>();

@@ -37,12 +37,12 @@ class StreamLineProducer : public ValueProducer<String> {
  public:
   StreamLineProducer(
       Stream* stream,
-      std::shared_ptr<reactesp::EventLoop> event_loop = event_loop(),
+      std::shared_ptr<reactesp::EventLoop> event_loop_param = event_loop(),
       int max_line_length = 256)
       : stream_{stream}, max_line_length_{max_line_length} {
     buf_ = new char[max_line_length_ + 1];
     read_event_ =
-        event_loop->onAvailable(*stream_, [this]() { this->receive_line(); });
+        event_loop_param->onAvailable(*stream_, [this]() { this->receive_line(); });
   }
 
  protected:

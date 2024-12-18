@@ -195,8 +195,8 @@ class SensESPApp : public SensESPBaseApp {
     // create a system status led and connect it
 
     if (system_status_led_ == nullptr) {
-#ifdef PIN_NEOPIXEL
-      system_status_led_ = std::make_shared<RGBSystemStatusLed>(PIN_NEOPIXEL);
+#ifdef PIN_RGB_LED
+      system_status_led_ = std::make_shared<RGBSystemStatusLed>(PIN_RGB_LED);
 #elif defined(LED_BUILTIN)
       system_status_led_ = std::make_shared<SystemStatusLed>(LED_BUILTIN);
 #endif
@@ -308,7 +308,7 @@ class SensESPApp : public SensESPBaseApp {
   std::shared_ptr<BaseSystemStatusLed> system_status_led_;
   std::shared_ptr<SystemStatusController> system_status_controller_ =
       std::make_shared<SystemStatusController>();
-  int button_gpio_pin_ = SENSESP_BUTTON_PIN;
+  int button_gpio_pin_ = BUTTON_BUILTIN;
   std::shared_ptr<ButtonHandler> button_handler_;
 
   std::shared_ptr<Networking> networking_;

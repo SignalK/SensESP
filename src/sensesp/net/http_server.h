@@ -88,7 +88,6 @@ class HTTPServer : public FileSystemSaveable {
           .method = HTTP_GET,
           .handler = call_request_dispatcher,
           .user_ctx = this,
-          .is_websocket = false,
       };
       httpd_register_uri_handler(server_, &uri);
       uri.method = HTTP_HEAD;

@@ -1,5 +1,7 @@
 #include "hash.h"
 
+#include "esp_arduino_version.h"
+
 #include "mbedtls/base64.h"
 #include "mbedtls/md.h"
 #include "mbedtls/md5.h"
@@ -50,9 +52,15 @@ String MD5(const String& payload_str) {
   uint8_t i;
   uint8_t buf_[16] = {0};
   mbedtls_md5_init(&ctx_);
+#if ESP_ARDUINO_VERSION_MAJOR > 2
+  mbedtls_md5_starts(&ctx_);
+  mbedtls_md5_update(&ctx_, (const uint8_t *)payload, payload_length);
+  mbedtls_md5_finish(&ctx_, buf_);
+#else
   mbedtls_md5_starts_ret(&ctx_);
   mbedtls_md5_update_ret(&ctx_, (const uint8_t *)payload, payload_length);
   mbedtls_md5_finish_ret(&ctx_, buf_);
+#endif
   mbedtls_md5_free(&ctx_);
   for (i = 0; i < 16; i++) {
     sprintf(output + (i * 2), "%02x", buf_[i]);
