@@ -8,31 +8,30 @@ jobs:
     strategy:
       matrix:
         example:
-          - examples/minimal_app.cpp
-          - examples/analog_input.cpp
-          - examples/hysteresis.cpp
           - examples/lambda_transform.cpp
-          - examples/manual_networking.cpp
           - examples/minimal_app.cpp
-          - examples/relay_control.cpp
-          - examples/rpm_counter.cpp
-          - examples/async_repeat_sensor.cpp
+          - examples/listener.cpp
           - examples/repeat_sensor_analog_input.cpp
-          - examples/freertos_tasks.cpp
-          - examples/raw_json.cpp
-          - examples/constant_sensor.cpp
-          - examples/time_counter.cpp
-        target_device:
+          - examples/rpm_counter.cpp
+        device:
           - esp32dev
+          - esp32-c3-devkitm-1
+        platform:
+          - arduino
+          - pioarduino
+          - espard
+        exclude:
+          - platform: arduino
+            device: esp32-c3-devkitm-1
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pip
             ~/.platformio/.cache
           key: ${{ runner.os }}-pio
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
       - name: Install dependencies
@@ -42,4 +41,5 @@ jobs:
         run: ci/run-ci.sh
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
-          CI_TARGET_DEVICE: ${{ matrix.target_device }}
+          CI_DEVICE: ${{ matrix.device }}
+          CI_PLATFORM: ${{ matrix.platform }}
