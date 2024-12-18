@@ -1,10 +1,15 @@
 #include <math.h>
 
+#include "sensesp/net/http_server.h"
+#include "sensesp/net/networking.h"
+#include "sensesp/net/web/app_command_handler.h"
+#include "sensesp/net/web/base_command_handler.h"
 #include "sensesp/net/web/config_handler.h"
 #include "sensesp/net/web/static_file_handler.h"
-#include "sensesp/signalk/signalk_delta_queue.h"
-#include "sensesp/signalk/signalk_ws_client.h"
-#include "sensesp/system/button.h"
+#include "sensesp/sensors/digital_input.h"
+#include "sensesp/transforms/lambda_transform.h"
+#include "sensesp/transforms/linear.h"
+#include "sensesp/transforms/typecast.h"
 #include "sensesp_minimal_app_builder.h"
 
 using namespace sensesp;
@@ -26,46 +31,49 @@ void setup() {
   SensESPMinimalAppBuilder builder;
   auto sensesp_app = builder.set_hostname("counter-test")->get_app();
 
-  auto button_handler = std::make_shared<ButtonHandler>(0);
+  // manually create Networking and HTTPServer objects to enable
+  // the HTTP configuration interface
 
-  // As an example, we'll connect to WiFi manually using the Arduino ESP32 WiFi
-  // library instead of using the SensESP Networking class.
+  auto networking = std::make_shared<Networking>("/system/networking", "", "");
+  auto http_server = std::make_shared<HTTPServer>();
 
-  WiFi.mode(WIFI_STA);  // Optional
-  WiFi.begin("ssid", "password");
-  Serial.println("\nConnecting");
+  // Add the default HTTP server response handlers
+  add_static_file_handlers(http_server);
+  add_base_app_http_command_handlers(http_server);
+  add_app_http_command_handlers(http_server, networking);
+  add_config_handlers(http_server);
 
-  while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
-    delay(100);
-  }
+  auto digin1 = std::make_shared<DigitalInputCounter>(input_pin1, INPUT, RISING,
+                                                      read_delay);
+  auto digin2 = std::make_shared<DigitalInputCounter>(input_pin2, INPUT, CHANGE,
+                                                      read_delay);
 
-  Serial.println("\nConnected to the WiFi network");
-  Serial.print("Local ESP32 IP: ");
-  Serial.println(WiFi.localIP());
+  auto scaled1 = std::make_shared<Linear>(2, 1, "/digin1/scale");
+  auto scaled2 = std::make_shared<Linear>(4, -1, "/digin2/scale");
+  digin1->connect_to(scaled1);
 
-  // Initiate the objects you need for your application here. Have a look
-  // at sensesp_app.h and pick the necessary items from there.
+  auto lambda_transform1 =
+      std::make_shared<LambdaTransform<int, int>>([](int input) {
+        Serial.printf("millis: %d\n", millis());
+        Serial.printf("Counter 1: %d\n", input);
+        return input;
+      });
+  scaled1->connect_to(lambda_transform1);
+  auto lambda_transform2 =
+      std::make_shared<LambdaTransform<int, int>>([](int input) {
+        Serial.printf("Counter 2: %d\n", input);
+        return input;
+      });
 
-  // create the SK delta queue
-  auto sk_delta_queue = std::make_shared<SKDeltaQueue>();
+  digin2->connect_to(scaled2)->connect_to(lambda_transform2);
 
-  // Use this if you want to hardcode the Signal K server address
-  String sk_server_address = "openplotter.local";
-  // Use this if you want to hardcode the Signal K server port
-  uint16_t sk_server_port = 3000;
-  // Set this to true if you want to use mDNS to discover the Signal K server
-  bool use_mdns = false;
+  pinMode(output_pin1, OUTPUT);
+  event_loop()->onRepeat(
+      5, []() { digitalWrite(output_pin1, !digitalRead(output_pin1)); });
 
-  auto ws_client =
-      std::make_shared<SKWSClient>("/System/Signal K Settings", sk_delta_queue,
-                                   sk_server_address, sk_server_port, use_mdns);
-
-  // To avoid garbage collecting all shared pointers
-  // created in setup(), loop from here.
-  while (true) {
-    loop();
-  }
+  pinMode(output_pin2, OUTPUT);
+  event_loop()->onRepeat(
+      100, []() { digitalWrite(output_pin2, !digitalRead(output_pin2)); });
 }
 
 void loop() { event_loop()->tick(); }
