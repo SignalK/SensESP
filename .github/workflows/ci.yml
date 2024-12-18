@@ -19,7 +19,10 @@ jobs:
         platform:
           - arduino
           - pioarduino
-          - espidf
+          # Can't build with espidf until there's a way to copy the
+          # sdkconfig.defaults file to the correct location in the
+          # CI build environment.
+          #- espidf
         exclude:
           - platform: arduino
             device: esp32c3
