@@ -10,8 +10,10 @@
 #include "sensesp/controllers/system_status_controller.h"
 
 #include "esp_arduino_version.h"
+#include "esp_idf_version.h"
 
 #if ESP_ARDUINO_VERSION_MAJOR < 3
+#include "pwm_output.h"
 #define rgbLedWrite neopixelWrite
 #endif
 
@@ -110,11 +112,16 @@ class SystemStatusLed : public BaseSystemStatusLed {
       : BaseSystemStatusLed(),
         pin_{pin},
         brightness_{brightness} {
+#if ESP_ARDUINO_VERSION_MAJOR >= 3
           ledcAttach(pin, 2000, 8);
+#endif
         }
 
  protected:
   uint8_t pin_;
+#if ESP_ARDUINO_VERSION_MAJOR < 3
+  PWMOutput pwm_output_{pin_, -1, 2000, 8};
+#endif
   uint8_t brightness_;
   void show() override {
     // Convert the RGB color to a single brightness value using the
@@ -125,7 +132,11 @@ class SystemStatusLed : public BaseSystemStatusLed {
                     0.0722 * leds_[0].b    // Blue contribution
                     ) *
                    brightness_ / (255.0));
+#if ESP_ARDUINO_VERSION_MAJOR >= 3
     ledcWrite(pin_, value);
+#else
+    pwm_output_.set(value / 255.0);
+#endif
   }
 
   void set_brightness(uint8_t brightness) override { brightness_ = brightness; }

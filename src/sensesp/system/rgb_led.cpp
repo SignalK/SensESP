@@ -4,19 +4,22 @@
 
 namespace sensesp {
 
-constexpr int kPWMResolution = 13;
-
 RgbLed::RgbLed(int led_r_pin, int led_g_pin, int led_b_pin, String config_path,
                long int led_on_rgb, long int led_off_rgb, bool common_anode)
     : FileSystemSaveable(config_path),
       led_on_rgb_{led_on_rgb},
       led_off_rgb_{led_off_rgb},
-      common_anode_{common_anode} {
+      common_anode_{common_anode},
+      led_r_pin_{led_r_pin},
+      led_g_pin_{led_g_pin},
+      led_b_pin_{led_b_pin} {
   this->load();
 
+#if ESP_ARDUINO_VERSION_MAJOR > 2
   ledcAttach(led_r_pin, 5000, kPWMResolution);
   ledcAttach(led_g_pin, 5000, kPWMResolution);
   ledcAttach(led_b_pin, 5000, kPWMResolution);
+#endif
 }
 
 // Calculate the PWM value to send to analogWrite() based on the specified
@@ -54,13 +57,18 @@ bool RgbLed::from_json(const JsonObject& config) {
 void RgbLed::set_color(long new_value) {
   float r = get_pwm(new_value, 16, common_anode_);
   const int max_brightness = 1 << kPWMResolution;
-  ledcWrite(led_r_pin_, static_cast<int>(r * max_brightness));
-
   float g = get_pwm(new_value, 8, common_anode_);
-  ledcWrite(led_g_pin_, static_cast<int>(g * max_brightness));
-
   float b = get_pwm(new_value, 0, common_anode_);
+
+#if ESP_ARDUINO_VERSION_MAJOR > 2
+  ledcWrite(led_r_pin_, static_cast<int>(r * max_brightness));
+  ledcWrite(led_g_pin_, static_cast<int>(g * max_brightness));
   ledcWrite(led_b_pin_, static_cast<int>(b * max_brightness));
+#else
+  pwm_output_r_.set(r);
+  pwm_output_g_.set(g);
+  pwm_output_b_.set(b);
+#endif
 }
 
 const String ConfigSchema(const RgbLed& obj) {

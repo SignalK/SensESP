@@ -5,8 +5,11 @@
 #include "sensesp/system/lambda_consumer.h"
 #include "sensesp/ui/config_item.h"
 #include "valueconsumer.h"
+#include "esp_arduino_version.h"
 
 namespace sensesp {
+
+constexpr int kPWMResolution = 13;
 
 /**
  * @brief A special device object that can be used to control
@@ -76,12 +79,18 @@ class RgbLed : public FileSystemSaveable {
   virtual bool from_json(const JsonObject& config) override;
 
  protected:
-  uint8_t led_r_pin_;
-  uint8_t led_g_pin_;
-  uint8_t led_b_pin_;
+
+  int led_r_pin_;
+  int led_g_pin_;
+  int led_b_pin_;
   long led_on_rgb_;
   long led_off_rgb_;
   bool common_anode_;
+#if ESP_ARDUINO_VERSION_MAJOR < 3
+  PWMOutput pwm_output_r_{led_r_pin_, -1, 5000, kPWMResolution};
+  PWMOutput pwm_output_g_{led_g_pin_, -1, 5000, kPWMResolution};
+  PWMOutput pwm_output_b_{led_b_pin_, -1, 5000, kPWMResolution};
+#endif
 
   void set_color(long new_value);
 };
