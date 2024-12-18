@@ -14,15 +14,15 @@ jobs:
           - examples/repeat_sensor_analog_input.cpp
           - examples/rpm_counter.cpp
         device:
-          - esp32dev
-          - esp32-c3-devkitm-1
+          - esp32
+          - esp32c3
         platform:
           - arduino
           - pioarduino
-          - espard
+          - espidf
         exclude:
           - platform: arduino
-            device: esp32-c3-devkitm-1
+            device: esp32c3
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4

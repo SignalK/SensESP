@@ -8,4 +8,4 @@ export PROJDIR=$(pwd)
 
 # the example to build comes from $PLATFORMIO_CI_SRC
 
-pio ci -c ci/platformio_${CI_PLATFORM}.ini
+pio ci -e ${CI_PLATFORM}_${CI_DEVICE} --project-conf platformio.ini --lib . --exclude examples --exclude docs --exclude .pio
