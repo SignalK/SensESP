@@ -1,10 +1,11 @@
 #ifndef SENSESP_SENSORS_SENSOR_H_
 #define SENSESP_SENSORS_SENSOR_H_
 
+#include <Arduino.h>
 #include <set>
 
-#include "sensesp/system/saveable.h"
 #include "sensesp/system/observable.h"
+#include "sensesp/system/saveable.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp_base_app.h"
 
@@ -39,8 +40,7 @@ class SensorConfig : virtual public Observable, public FileSystemSaveable {
 template <typename T>
 class Sensor : public SensorConfig, virtual public ValueProducer<T> {
  public:
-  Sensor<T>(String config_path)
-      : SensorConfig(config_path), ValueProducer<T>() {}
+  Sensor(String config_path) : SensorConfig(config_path), ValueProducer<T>() {}
 };
 
 typedef Sensor<float> FloatSensor;
@@ -63,7 +63,7 @@ class RepeatSensor : public Sensor<T> {
    * produce.
    * @tparam T The type of the value returned by the callback function.
    */
-  RepeatSensor<T>(unsigned int repeat_interval_ms, std::function<T()> callback)
+  RepeatSensor(unsigned int repeat_interval_ms, std::function<T()> callback)
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         returning_callback_(callback) {
@@ -85,8 +85,8 @@ class RepeatSensor : public Sensor<T> {
    *   to be called when output becomes available.
    * @tparam T The type of the value returned by the callback function.
    */
-  RepeatSensor<T>(unsigned int repeat_interval_ms,
-                  std::function<void(RepeatSensor<T>*)> callback)
+  RepeatSensor(unsigned int repeat_interval_ms,
+               std::function<void(RepeatSensor<T>*)> callback)
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         emitting_callback_(callback) {

@@ -9,6 +9,7 @@
 
 #include "Arduino.h"
 #include "elapsedMillis.h"
+#include "esp_arduino_version.h"
 #include "sensesp/signalk/signalk_listener.h"
 #include "sensesp/signalk/signalk_put_request.h"
 #include "sensesp/signalk/signalk_put_request_listener.h"
@@ -74,7 +75,8 @@ static void websocket_event_handler(void* handler_args, esp_event_base_t base,
   }
 }
 
-SKWSClient::SKWSClient(const String& config_path, std::shared_ptr<SKDeltaQueue> sk_delta_queue,
+SKWSClient::SKWSClient(const String& config_path,
+                       std::shared_ptr<SKDeltaQueue> sk_delta_queue,
                        const String& server_address, uint16_t server_port,
                        bool use_mdns)
     : FileSystemSaveable{config_path},
@@ -383,7 +385,12 @@ bool SKWSClient::get_mdns_service(String& server_address,
     // no service found
     return false;
   }
+
+#if ESP_ARDUINO_VERSION_MAJOR < 3
   server_address = MDNS.IP(0).toString();
+#else
+  server_address = MDNS.address(0).toString();
+#endif
   server_port = MDNS.port(0);
   ESP_LOGI(__FILENAME__, "Found server %s (port %d)", server_address.c_str(),
            server_port);

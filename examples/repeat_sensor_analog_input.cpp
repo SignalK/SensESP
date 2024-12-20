@@ -6,11 +6,9 @@
  * sensor library into a SensESP sensor. This file demonstrates its use with
  * the built-in analog input sensor.
  *
- * Note that for analog input, it's actually better to use the AnalogInput
- * sensor class as demonstrated by the analog_input.cpp example file. The
- * AnalogInput class compensates for the ESP32 ADC nonlinearities. The approach
- * presented here, however, can be used with any sensor library compatible with
- * arduino-esp32.
+ * Note that even though this input reads just an analog voltage,
+ * the approach presented here can be used with any sensor library compatible
+ * with arduino-esp32.
  *
  */
 
@@ -23,8 +21,11 @@ using namespace sensesp;
 // GPIO pin that we'll be using for the analog input.
 const uint8_t kAnalogInputPin = 36;
 
-// define a callback function that reads the analog input
-float analog_read_callback() { return analogRead(kAnalogInputPin) / 4096.0; }
+// define a callback function that reads the analog input and returns the value
+// in volts.
+float analog_read_callback() {
+  return analogReadMilliVolts(kAnalogInputPin) / 1000.;
+}
 
 // The setup function performs one-time application initialization.
 void setup() {
@@ -51,7 +52,7 @@ void setup() {
   //
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
-  const char* sk_path = "environment.indoor.illuminance";
+  const char* sk_path = "example.input.voltage";
 
   // Connect the output of the analog input to the SKOutput object which
   // transmits the results to the Signal K server. As part of
@@ -60,7 +61,7 @@ void setup() {
   // the display name for this value, to be used by any Signal K
   // consumer that displays it, is "Indoor light".
   analog_input->connect_to(
-      new SKOutputFloat(sk_path, "", new SKMetadata("ratio", "Indoor light")));
+      new SKOutputFloat(sk_path, "", new SKMetadata("V", "Voltage")));
 }
 
 void loop() { event_loop()->tick(); }

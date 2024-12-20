@@ -3,11 +3,20 @@
 
 #include <memory>
 #include <vector>
+#include <vector>
 
 #include "lambda_consumer.h"
 #include "led_blinker.h"
-#include "pwm_output.h"
 #include "sensesp/controllers/system_status_controller.h"
+
+#include "esp_arduino_version.h"
+#include "esp_idf_version.h"
+
+#if ESP_ARDUINO_VERSION_MAJOR < 3
+#include "pwm_output.h"
+#define rgbLedWrite neopixelWrite
+#endif
+
 
 namespace sensesp {
 
@@ -100,43 +109,54 @@ class BaseSystemStatusLed {
 class SystemStatusLed : public BaseSystemStatusLed {
  public:
   SystemStatusLed(uint8_t pin, uint8_t brightness = 255)
-      : pwm_output_{PWMOutput(pin, -1, 2000, 8)},
-        BaseSystemStatusLed(),
-        brightness_{brightness} {}
+      : BaseSystemStatusLed(),
+        pin_{pin},
+        brightness_{brightness} {
+#if ESP_ARDUINO_VERSION_MAJOR >= 3
+          ledcAttach(pin, 2000, 8);
+#endif
+        }
 
  protected:
-  PWMOutput pwm_output_;
+  uint8_t pin_;
+#if ESP_ARDUINO_VERSION_MAJOR < 3
+  PWMOutput pwm_output_{pin_, -1, 2000, 8};
+#endif
   uint8_t brightness_;
   void show() override {
     // Convert the RGB color to a single brightness value using the
     // perceptual luminance formula.
-    float value = ((0.2126 * leds_[0].r +  // Red contribution
+    // value is scaled to 0-255.
+    int value = ((0.2126 * leds_[0].r +  // Red contribution
                     0.7152 * leds_[0].g +  // Green contribution
                     0.0722 * leds_[0].b    // Blue contribution
                     ) *
-                   brightness_ / (255.0 * 256.0));
-    pwm_output_.set(value);
+                   brightness_ / (255.0));
+#if ESP_ARDUINO_VERSION_MAJOR >= 3
+    ledcWrite(pin_, value);
+#else
+    pwm_output_.set(value / 255.0);
+#endif
   }
 
   void set_brightness(uint8_t brightness) override { brightness_ = brightness; }
 };
 
 // Direct use of FastLED breaks when the WiFi client is enabled. Thus,
-// use the Arduino ESP32 Core native neopixelWrite function instead. That
+// use the Arduino ESP32 Core native rgbLedWrite function instead. That
 // seems to work with WiFi as well.
 
 class RGBSystemStatusLed : public BaseSystemStatusLed {
  public:
   RGBSystemStatusLed(uint8_t pin, uint8_t brightness = 40)
-      : BaseSystemStatusLed(), pin_{pin} {}
+      : BaseSystemStatusLed(), pin_{pin}, brightness_{brightness} {}
 
  protected:
   uint8_t pin_;
   uint8_t brightness_;
   void show() override {
-    neopixelWrite(pin_, brightness_ * leds_[0].r / 255,
-                  brightness_ * leds_[0].g / 255,
-                  brightness_ * leds_[0].b / 255);
+    rgbLedWrite(pin_, brightness_ * leds_[0].r / 255,
+                brightness_ * leds_[0].g / 255, brightness_ * leds_[0].b / 255);
   }
 
   void set_brightness(uint8_t brightness) override { brightness_ = brightness; }

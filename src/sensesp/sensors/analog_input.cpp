@@ -16,9 +16,7 @@ AnalogInput::AnalogInput(uint8_t pin, unsigned int read_delay,
   analog_reader_ = std::unique_ptr<AnalogReader>(new AnalogReader(pin));
   load();
 
-  if (this->analog_reader_->configure()) {
-    event_loop()->onRepeat(read_delay, [this]() { this->update(); });
-  }
+  event_loop()->onRepeat(read_delay, [this]() { this->update(); });
 }
 
 void AnalogInput::update() { this->emit(output_scale * analog_reader_->read()); }

@@ -1,16 +1,17 @@
 #ifndef SENSESP_SYSTEM_PWM_OUTPUT_H
 #define SENSESP_SYSTEM_PWM_OUTPUT_H
 
+#include <Arduino.h>
 #include <map>
 
+#include "esp_arduino_version.h"
 #include "valueconsumer.h"
 
 namespace sensesp {
 
 /**
- * @brief Provides a cross platform mechanism for generating
- * Pulse Width Modulation signals over one or more GPIO pins
- * on the MCU.
+ * @brief DEPRECATED. Use Android native ledcAttach and ledcWrite instead.
+ *
  * <p>This class works by defining a "PWM channel". GPIO pins
  * are assigned to a channel, and then the channel is used when
  * setting the pwm value. The pwm value is a float number between
@@ -42,12 +43,12 @@ class PWMOutput : public ValueConsumer<float> {
    *   next unassigned pin.
    */
   PWMOutput(int pin = -1, int pwm_channel = -1, int channel_frequency = 5000,
-            int channel_resolution = 13)
+            int channel_resolution = 13) __attribute__((deprecated))
       : ValueConsumer<float>(),
         pwm_channel_{static_cast<uint8_t>(pwm_channel)},
         channel_frequency_{channel_frequency},
         channel_resolution_{channel_resolution},
-        pwmrange_{static_cast<int>(pow(2, channel_resolution) - 1)} {
+        pwmrange_{static_cast<int>((1 << channel_resolution) - 1)} {
     if (pin >= 0) {
       pwm_channel_ = assign_channel(pin, pwm_channel);
     }
@@ -98,8 +99,13 @@ class PWMOutput : public ValueConsumer<float> {
              pin);
 
     pinMode(pin, OUTPUT);
+#if ESP_ARDUINO_VERSION_MAJOR > 2
+    ledcAttachChannel(pin, channel_frequency_, channel_resolution_,
+                      pwm_channel);
+#else
     ledcSetup(pwm_channel, channel_frequency_, channel_resolution_);
     ledcAttachPin(pin, pwm_channel);
+#endif
 
     return pwm_channel;
   }
@@ -117,7 +123,11 @@ class PWMOutput : public ValueConsumer<float> {
       int const output_val = value * pwmrange_;
       // ESP_LOGD(__FILENAME__, "Setting PWM channel %d to %d", pwm_channel_,
       //          output_val);
+#if ESP_ARDUINO_VERSION_MAJOR > 2
+      ledcWriteChannel(pwm_channel_, output_val);
+#else
       ledcWrite(pwm_channel_, output_val);
+#endif
     } else {
       ESP_LOGW(__FILENAME__,
                "No pin assigned to channel %d. Ignoring set_pwm()",

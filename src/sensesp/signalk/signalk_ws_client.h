@@ -3,6 +3,7 @@
 
 #include "sensesp.h"
 
+#include <ArduinoJson.h>
 #include <WiFi.h>
 #include <esp_websocket_client.h>
 #include <functional>
@@ -37,7 +38,8 @@ class SKWSClient : public FileSystemSaveable,
   /////////////////////////////////////////////////////////
   // main task methods
 
-  SKWSClient(const String& config_path, std::shared_ptr<SKDeltaQueue> sk_delta_queue,
+  SKWSClient(const String& config_path,
+             std::shared_ptr<SKDeltaQueue> sk_delta_queue,
              const String& server_address, uint16_t server_port,
              bool use_mdns = true);
 
@@ -162,9 +164,7 @@ class SKWSClient : public FileSystemSaveable,
   SKWSConnectionState get_connection_state() { return task_connection_state_; }
 };
 
-inline const String ConfigSchema(const SKWSClient& obj) {
-  return "null";
-}
+inline const String ConfigSchema(const SKWSClient& obj) { return "null"; }
 
 inline bool ConfigRequiresRestart(const SKWSClient& obj) { return true; }
 
