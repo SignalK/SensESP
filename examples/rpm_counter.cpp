@@ -2,7 +2,7 @@
 
 // #define SERIAL_DEBUG_DISABLED
 
-#include "sensesp/sensors/digital_input.h"
+#include "sensesp/sensors/digital_pcnt_input.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp/transforms/frequency.h"
 #include "sensesp_app_builder.h"
@@ -51,9 +51,10 @@ void setup() {
   const char* config_path_skpath = "/sensors/engine_rpm/sk";
 
   //////////
-  // connect a RPM meter. A DigitalInputCounter implements an interrupt
-  // to count pulses and reports the readings every read_delay ms
-  // (500 in the example). A Frequency
+  // connect a RPM meter. A DigitalInputPcntCounter implements 
+  // access to a pulse counter peripheral. Every read_delay ms, it
+  // reads the number of pulses that have occurred since the last
+  // read, and reports that number (500ms in the example). A Frequency
   // transform takes a number of pulses and converts that into
   // a frequency. The sample multiplier converts the 97 tooth
   // tach output into Hz, SK native units.
@@ -64,7 +65,7 @@ void setup() {
   // ESP32 pins are specified as just the X in GPIOX
   uint8_t pin = 4;
 
-  auto* sensor = new DigitalInputCounter(pin, INPUT_PULLUP, RISING, read_delay);
+  auto* sensor = new DigitalInputPcntCounter(pin, INPUT_PULLUP, RISING, read_delay);
 
   auto frequency = new Frequency(multiplier, config_path_calibrate);
 
