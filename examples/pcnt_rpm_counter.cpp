@@ -1,10 +1,10 @@
 #include <Arduino.h>
 
-// RPM counter example using interrupt-based pulse counting
+// RPM counter example using the Pulse Counter peripheral
 
 // #define SERIAL_DEBUG_DISABLED
 
-#include "sensesp/sensors/digital_input.h"
+#include "sensesp/sensors/digital_pcnt_input.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp/transforms/frequency.h"
 #include "sensesp_app_builder.h"
@@ -67,7 +67,7 @@ void setup() {
   // ESP32 pins are specified as just the X in GPIOX
   uint8_t pin = 4;
 
-  auto* sensor = new DigitalInputCounter(pin, INPUT_PULLUP, RISING, read_delay);
+  auto* sensor = new DigitalInputPcntCounter(pin, INPUT_PULLUP, RISING, read_delay);
 
   auto frequency = new Frequency(multiplier, config_path_calibrate);
 
