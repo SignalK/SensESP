@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -105,25 +105,14 @@ $(function(){initNavTree('main_8cpp.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">main.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="smart__switch__controller_8h_source.html">sensesp/controllers/smart_switch_controller.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="digital__input_8h_source.html">sensesp/sensors/digital_input.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="digital__output_8h_source.html">sensesp/sensors/digital_output.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="signalk__listener_8h_source.html">sensesp/signalk/signalk_listener.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="signalk__output_8h_source.html">sensesp/signalk/signalk_output.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="signalk__put__request_8h_source.html">sensesp/signalk/signalk_put_request.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="signalk__value__listener_8h_source.html">sensesp/signalk/signalk_value_listener.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="rgb__led_8h_source.html">sensesp/system/rgb_led.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="click__type_8h_source.html">sensesp/transforms/click_type.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="debounce_8h_source.html">sensesp/transforms/debounce.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="press__repeater_8h_source.html">sensesp/transforms/press_repeater.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="repeat_8h_source.html">sensesp/transforms/repeat.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="frequency_8h_source.html">sensesp/transforms/frequency.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sensesp__app__builder_8h_source.html">sensesp_app_builder.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
@@ -133,21 +122,6 @@ Include dependency graph for main.cpp:</div>
 </div>
 <p><a href="main_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a525b92c4e8270a8bb32473c8828efd4b" id="r_a525b92c4e8270a8bb32473c8828efd4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a525b92c4e8270a8bb32473c8828efd4b">PIN_LED_R</a>&#160;&#160;&#160;D6</td></tr>
-<tr class="separator:a525b92c4e8270a8bb32473c8828efd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3b8d6412a037a8602ae91319cb98424" id="r_ae3b8d6412a037a8602ae91319cb98424"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3b8d6412a037a8602ae91319cb98424">PIN_LED_G</a>&#160;&#160;&#160;D7</td></tr>
-<tr class="separator:ae3b8d6412a037a8602ae91319cb98424"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b5601f5c41efdc4d1dbb26dc8e2f223" id="r_a8b5601f5c41efdc4d1dbb26dc8e2f223"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b5601f5c41efdc4d1dbb26dc8e2f223">PIN_LED_B</a>&#160;&#160;&#160;D8</td></tr>
-<tr class="separator:a8b5601f5c41efdc4d1dbb26dc8e2f223"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3be8154d350ce65f5e6c1dfc284700af" id="r_a3be8154d350ce65f5e6c1dfc284700af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3be8154d350ce65f5e6c1dfc284700af">PIN_BUTTON</a>&#160;&#160;&#160;D0</td></tr>
-<tr class="separator:a3be8154d350ce65f5e6c1dfc284700af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70e8d60aac6ce311173ed7003e10b8cb" id="r_a70e8d60aac6ce311173ed7003e10b8cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70e8d60aac6ce311173ed7003e10b8cb">LED_ON_COLOR</a>&#160;&#160;&#160;0x004700</td></tr>
-<tr class="separator:a70e8d60aac6ce311173ed7003e10b8cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b300eca68e7e45bc22e9ca968d476c1" id="r_a5b300eca68e7e45bc22e9ca968d476c1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b300eca68e7e45bc22e9ca968d476c1">LED_OFF_COLOR</a>&#160;&#160;&#160;0x261900</td></tr>
-<tr class="separator:a5b300eca68e7e45bc22e9ca968d476c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d" id="r_a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
@@ -155,103 +129,6 @@ Functions</h2></td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f" id="r_afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a5b300eca68e7e45bc22e9ca968d476c1" name="a5b300eca68e7e45bc22e9ca968d476c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b300eca68e7e45bc22e9ca968d476c1">&#9670;&#160;</a></span>LED_OFF_COLOR</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_OFF_COLOR&#160;&#160;&#160;0x261900</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00036">36</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a70e8d60aac6ce311173ed7003e10b8cb" name="a70e8d60aac6ce311173ed7003e10b8cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70e8d60aac6ce311173ed7003e10b8cb">&#9670;&#160;</a></span>LED_ON_COLOR</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LED_ON_COLOR&#160;&#160;&#160;0x004700</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00035">35</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a3be8154d350ce65f5e6c1dfc284700af" name="a3be8154d350ce65f5e6c1dfc284700af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3be8154d350ce65f5e6c1dfc284700af">&#9670;&#160;</a></span>PIN_BUTTON</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PIN_BUTTON&#160;&#160;&#160;D0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00032">32</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a8b5601f5c41efdc4d1dbb26dc8e2f223" name="a8b5601f5c41efdc4d1dbb26dc8e2f223"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b5601f5c41efdc4d1dbb26dc8e2f223">&#9670;&#160;</a></span>PIN_LED_B</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PIN_LED_B&#160;&#160;&#160;D8</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00031">31</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ae3b8d6412a037a8602ae91319cb98424" name="ae3b8d6412a037a8602ae91319cb98424"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3b8d6412a037a8602ae91319cb98424">&#9670;&#160;</a></span>PIN_LED_G</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PIN_LED_G&#160;&#160;&#160;D7</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00030">30</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a525b92c4e8270a8bb32473c8828efd4b" name="a525b92c4e8270a8bb32473c8828efd4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a525b92c4e8270a8bb32473c8828efd4b">&#9670;&#160;</a></span>PIN_LED_R</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PIN_LED_R&#160;&#160;&#160;D6</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00029">29</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="afe461d27b9c48d5921c00d521181f12f" name="afe461d27b9c48d5921c00d521181f12f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe461d27b9c48d5921c00d521181f12f">&#9670;&#160;</a></span>loop()</h2>
@@ -268,7 +145,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00109">109</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00090">90</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -292,11 +169,11 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00038">38</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00012">12</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph.svg" width="100%" height="413"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>

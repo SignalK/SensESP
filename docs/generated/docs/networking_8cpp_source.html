@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -114,342 +114,341 @@ $(function(){initNavTree('networking_8cpp_source.html',''); initResizable(true);
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;esp_wifi.h&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="lambda__consumer_8h.html">sensesp/system/lambda_consumer.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="led__blinker_8h.html">sensesp/system/led_blinker.h</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="sensesp__app_8h.html">sensesp_app.h</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Wifi config portal timeout (seconds). The smaller the value, the faster</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// the device will attempt to reconnect. If set too small, it might</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// become impossible to actually configure the Wifi settings in the captive</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// portal.</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifndef WIFI_CONFIG_PORTAL_TIMEOUT</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce">   18</a></span><span class="preprocessor">#define WIFI_CONFIG_PORTAL_TIMEOUT 180</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// Network configuration logic:</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// 1. Use hard-coded hostname and WiFi credentials by default</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// 2. If the hostname or credentials have been changed in WiFiManager or</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//    the web UI, use the updated values.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// 3. If the hard-coded hostname is changed, use that instead of the saved one.</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//    (But keep using the saved WiFi credentials!)</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#aa23575a20407cb5a2d885d1e7049f416">   28</a></span><a class="code hl_function" href="classsensesp_1_1_networking.html#aa23575a20407cb5a2d885d1e7049f416">Networking::Networking</a>(<span class="keyword">const</span> String&amp; config_path, <span class="keyword">const</span> String&amp; client_ssid,</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                       <span class="keyword">const</span> String&amp; client_password, <span class="keyword">const</span> String&amp; ap_ssid,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                       <span class="keyword">const</span> String&amp; ap_password)</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    : <a class="code hl_class" href="classsensesp_1_1_file_system_saveable.html">FileSystemSaveable</a>{config_path}, <a class="code hl_class" href="classsensesp_1_1_resettable.html">Resettable</a>(0) {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">// Get the WiFi state producer singleton and make it update this object output</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <a class="code hl_variable" href="classsensesp_1_1_networking.html#ab8bcbf50dbdda5ca6441c8d03ae2b27c">wifi_state_emitter_</a> = std::make_shared&lt;LambdaConsumer&lt;WiFiState&gt;&gt;(</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>          [<span class="keyword">this</span>](<a class="code hl_enumeration" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a> state) { this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(state); });</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <a class="code hl_variable" href="classsensesp_1_1_networking.html#af92c7689fc75532ed9b387cbf341c851">wifi_state_producer_</a>-&gt;connect_to(<a class="code hl_variable" href="classsensesp_1_1_networking.html#ab8bcbf50dbdda5ca6441c8d03ae2b27c">wifi_state_emitter_</a>);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordtype">bool</span> config_loaded = <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a>();</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">if</span> (!config_loaded) {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> (ap_ssid != <span class="stringliteral">&quot;&quot;</span> &amp;&amp; ap_password != <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a973e4eafe87eff91726f5d18e14c6dbc">ssid_</a> = ap_ssid;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a14c76bed6266782c40412ee2ff48dcce">password_</a> = ap_password;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">if</span> (!config_loaded &amp;&amp; client_ssid != <span class="stringliteral">&quot;&quot;</span> &amp;&amp; client_password != <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a> preset_client_config = {client_ssid, client_password,</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                                             <span class="keyword">true</span>};</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(preset_client_config);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  }</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="comment">// Fill in the rest of the client settings array with empty configs</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordtype">int</span> num_fill = <a class="code hl_variable" href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">kMaxNumClientConfigs</a> - <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.size();</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_fill; i++) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(<a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a>());</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  }</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Enabling Networking&quot;</span>);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="comment">// Hate to do this, but Raspberry Pi AP setup is going to be much more</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="comment">// complicated with enforced WPA2. BAD Raspberry Pi! BAD!</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  WiFi.setMinSecurity(WIFI_AUTH_WPA_PSK);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="comment">// Try setting hostname already here.</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  String hostname = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  WiFi.setHostname(hostname.c_str());</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="comment">// Start WiFi with a bogus SSID to initialize the network stack but</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="comment">// don&#39;t connect to any network.</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  WiFi.begin(<span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>, 0, <span class="keyword">nullptr</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="comment">// If both saved AP settings and saved client settings</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="comment">// are available, start in STA+AP mode.</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a> &amp;&amp; this-&gt;client_enabled_ == <span class="keyword">true</span>) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    WiFi.mode(WIFI_AP_STA);</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_function" href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">start_access_point</a>();</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <a class="code hl_function" href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">start_client_autoconnect</a>();</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="comment">// If saved AP settings are available, use them.</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a>) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    WiFi.mode(WIFI_AP);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_function" href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">start_access_point</a>();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  }</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="comment">// If saved client settings are available, use them.</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a>) {</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    WiFi.mode(WIFI_STA);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_function" href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">start_client_autoconnect</a>();</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a> &amp;&amp;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      this-&gt;ap_settings_.captive_portal_enabled_) {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a> = std::unique_ptr&lt;DNSServer&gt;(<span class="keyword">new</span> DNSServer());</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>-&gt;setErrorReplyCode(DNSReplyCode::NoError);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>-&gt;start(53, <span class="stringliteral">&quot;*&quot;</span>, WiFi.softAPIP());</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onRepeat(1, [<span class="keyword">this</span>]() { <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>-&gt;processNextRequest(); });</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  }</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="sensesp__app_8h.html">sensesp_app.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// Wifi config portal timeout (seconds). The smaller the value, the faster</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// the device will attempt to reconnect. If set too small, it might</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// become impossible to actually configure the Wifi settings in the captive</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// portal.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifndef WIFI_CONFIG_PORTAL_TIMEOUT</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="networking_8cpp.html#a6beb3d9ab4141921e87c56b399230fce">   17</a></span><span class="preprocessor">#define WIFI_CONFIG_PORTAL_TIMEOUT 180</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// Network configuration logic:</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// 1. Use hard-coded hostname and WiFi credentials by default</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// 2. If the hostname or credentials have been changed in WiFiManager or</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//    the web UI, use the updated values.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// 3. If the hard-coded hostname is changed, use that instead of the saved one.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//    (But keep using the saved WiFi credentials!)</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#aa23575a20407cb5a2d885d1e7049f416">   27</a></span><a class="code hl_function" href="classsensesp_1_1_networking.html#aa23575a20407cb5a2d885d1e7049f416">Networking::Networking</a>(<span class="keyword">const</span> String&amp; config_path, <span class="keyword">const</span> String&amp; client_ssid,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                       <span class="keyword">const</span> String&amp; client_password, <span class="keyword">const</span> String&amp; ap_ssid,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                       <span class="keyword">const</span> String&amp; ap_password)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    : <a class="code hl_class" href="classsensesp_1_1_file_system_saveable.html">FileSystemSaveable</a>{config_path}, <a class="code hl_class" href="classsensesp_1_1_resettable.html">Resettable</a>(0) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="comment">// Get the WiFi state producer singleton and make it update this object output</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <a class="code hl_variable" href="classsensesp_1_1_networking.html#ab8bcbf50dbdda5ca6441c8d03ae2b27c">wifi_state_emitter_</a> = std::make_shared&lt;LambdaConsumer&lt;WiFiState&gt;&gt;(</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>          [<span class="keyword">this</span>](<a class="code hl_enumeration" href="namespacesensesp.html#ad84e6e6c52f84bf796580e527b57b3ae">WiFiState</a> state) { this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(state); });</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <a class="code hl_variable" href="classsensesp_1_1_networking.html#af92c7689fc75532ed9b387cbf341c851">wifi_state_producer_</a>-&gt;connect_to(<a class="code hl_variable" href="classsensesp_1_1_networking.html#ab8bcbf50dbdda5ca6441c8d03ae2b27c">wifi_state_emitter_</a>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">bool</span> config_loaded = <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">load</a>();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">if</span> (!config_loaded) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> (ap_ssid != <span class="stringliteral">&quot;&quot;</span> &amp;&amp; ap_password != <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a973e4eafe87eff91726f5d18e14c6dbc">ssid_</a> = ap_ssid;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a14c76bed6266782c40412ee2ff48dcce">password_</a> = ap_password;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">if</span> (!config_loaded &amp;&amp; client_ssid != <span class="stringliteral">&quot;&quot;</span> &amp;&amp; client_password != <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a> preset_client_config = {client_ssid, client_password,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                                             <span class="keyword">true</span>};</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(preset_client_config);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="comment">// Fill in the rest of the client settings array with empty configs</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordtype">int</span> num_fill = <a class="code hl_variable" href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">kMaxNumClientConfigs</a> - <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.size();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_fill; i++) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(<a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a>());</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Enabling Networking&quot;</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="comment">// Hate to do this, but Raspberry Pi AP setup is going to be much more</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="comment">// complicated with enforced WPA2. BAD Raspberry Pi! BAD!</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  WiFi.setMinSecurity(WIFI_AUTH_WPA_PSK);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="comment">// Try setting hostname already here.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  String hostname = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  WiFi.setHostname(hostname.c_str());</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="comment">// Start WiFi with a bogus SSID to initialize the network stack but</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="comment">// don&#39;t connect to any network.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  WiFi.begin(<span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>, 0, <span class="keyword">nullptr</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="comment">// If both saved AP settings and saved client settings</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="comment">// are available, start in STA+AP mode.</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a> &amp;&amp; this-&gt;client_enabled_ == <span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    WiFi.mode(WIFI_AP_STA);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_function" href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">start_access_point</a>();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_function" href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">start_client_autoconnect</a>();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="comment">// If saved AP settings are available, use them.</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a>) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    WiFi.mode(WIFI_AP);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <a class="code hl_function" href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">start_access_point</a>();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="comment">// If saved client settings are available, use them.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a>) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    WiFi.mode(WIFI_STA);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <a class="code hl_function" href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">start_client_autoconnect</a>();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#af682a444976a0afb253604cd5def956d">enabled_</a> &amp;&amp;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      this-&gt;ap_settings_.captive_portal_enabled_) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a> = std::unique_ptr&lt;DNSServer&gt;(<span class="keyword">new</span> DNSServer());</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>-&gt;setErrorReplyCode(DNSReplyCode::NoError);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>-&gt;start(53, <span class="stringliteral">&quot;*&quot;</span>, WiFi.softAPIP());</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onRepeat(1, [<span class="keyword">this</span>]() { <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>-&gt;processNextRequest(); });</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
 </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="foldopen" id="foldopen00111" data-start="{" data-end="}">
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a243a65fd80707494e03b25e236b7a554">  111</a></span><a class="code hl_function" href="classsensesp_1_1_networking.html#a243a65fd80707494e03b25e236b7a554">Networking::~Networking</a>() {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>) {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>-&gt;stop();</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  }</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="comment">// Stop WiFi</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  WiFi.disconnect(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a243a65fd80707494e03b25e236b7a554">  110</a></span><a class="code hl_function" href="classsensesp_1_1_networking.html#a243a65fd80707494e03b25e236b7a554">Networking::~Networking</a>() {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>) {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">dns_server_</a>-&gt;stop();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="comment">// Stop WiFi</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  WiFi.disconnect(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
 </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">  124</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">Networking::start_access_point</a>() {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  String hostname = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  WiFi.setHostname(hostname.c_str());</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Starting access point %s&quot;</span>,</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>           <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a973e4eafe87eff91726f5d18e14c6dbc">ssid_</a>.c_str());</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keywordtype">bool</span> result =</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>      WiFi.softAP(<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a973e4eafe87eff91726f5d18e14c6dbc">ssid_</a>.c_str(), <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a14c76bed6266782c40412ee2ff48dcce">password_</a>.c_str(),</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                  <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#ae1c10c5470025ee746c29abff04910e2">channel_</a>, <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#adb6a8e0940f6ba7aab60743123c49e05">hidden_</a>);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keywordflow">if</span> (!result) {</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to start access point.&quot;</span>);</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  }</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="foldopen" id="foldopen00123" data-start="{" data-end="}">
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">  123</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">Networking::start_access_point</a>() {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  String hostname = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  WiFi.setHostname(hostname.c_str());</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Starting access point %s&quot;</span>,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>           <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a973e4eafe87eff91726f5d18e14c6dbc">ssid_</a>.c_str());</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  <span class="keywordtype">bool</span> result =</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>      WiFi.softAP(<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a973e4eafe87eff91726f5d18e14c6dbc">ssid_</a>.c_str(), <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#a14c76bed6266782c40412ee2ff48dcce">password_</a>.c_str(),</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                  <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#ae1c10c5470025ee746c29abff04910e2">channel_</a>, <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_variable" href="classsensesp_1_1_access_point_settings.html#adb6a8e0940f6ba7aab60743123c49e05">hidden_</a>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="keywordflow">if</span> (!result) {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to start access point.&quot;</span>);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
 </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">  144</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">Networking::start_client_autoconnect</a>() {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  String hostname = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  WiFi.setHostname(hostname.c_str());</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="comment">// set up WiFi in regular STA (client) mode</span></div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="keyword">auto</span> reconnect_cb = [<span class="keyword">this</span>]() {</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">static</span> uint32_t attempt_num = 0;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">static</span> uint32_t current_config_idx = 0;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordtype">int</span> num_configs = <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.size();</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordflow">if</span> (WiFi.status() == WL_CONNECTED) {</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      attempt_num = 0;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>      current_config_idx = 0;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    }</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="comment">// First check if any of the client settings are defined</span></div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">if</span> (num_configs == 0) {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>      ESP_LOGW(__FILENAME__,</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>               <span class="stringliteral">&quot;No client settings defined. Leaving WiFi client disconnected.&quot;</span>);</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    uint32_t prev_config_idx = current_config_idx;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a> config;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="comment">// Get next valid client config</span></div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordflow">for</span> (current_config_idx = current_config_idx;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>         current_config_idx &lt; prev_config_idx + num_configs;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>         current_config_idx++) {</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      config = <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>[current_config_idx % num_configs];</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>      <span class="keywordflow">if</span> (config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a> != <span class="stringliteral">&quot;&quot;</span> &amp;&amp; config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a6fa5f20b526dc6a34d076652997faad0">password_</a> != <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>      }</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    }</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Current client config index: %d&quot;</span>,</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>             current_config_idx);</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Attempt number: %d&quot;</span>, attempt_num);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Config SSID: %s&quot;</span>, config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a>.c_str());</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="comment">// If no valid client config found, leave WiFi client disconnected</span></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordflow">if</span> (config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a> == <span class="stringliteral">&quot;&quot;</span> || config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a6fa5f20b526dc6a34d076652997faad0">password_</a> == <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>      ESP_LOGW(</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>          __FILENAME__,</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>          <span class="stringliteral">&quot;No valid client settings found. Leaving WiFi client disconnected.&quot;</span>);</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    }</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    ESP_LOGI(__FILENAME__,</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>             <span class="stringliteral">&quot;Connecting to wifi SSID %s (connection attempt #%d).&quot;</span>,</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>             config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a>.c_str(), attempt_num);</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">if</span> (!config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a66a8f02af25998264c6aff923f235ea4">use_dhcp_</a>) {</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>      ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Using static IP address: %s&quot;</span>,</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>               config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#ae7f2aa312470b92f5419deebed498968">ip_</a>.toString().c_str());</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      WiFi.config(config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#ae7f2aa312470b92f5419deebed498968">ip_</a>, config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#af2c1823ac70f670e23122084fe6b128f">dns_server_</a>, config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a58311c9a2775a9ebe7fd6d043d511658">gateway_</a>,</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                  config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a727cc6ea495689887341ac9b309cf08e">netmask_</a>);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    WiFi.begin(config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a>.c_str(), config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a6fa5f20b526dc6a34d076652997faad0">password_</a>.c_str());</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    attempt_num++;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    current_config_idx++;  <span class="comment">// Move to the next config for the next attempt</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  };</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="comment">// Perform an initial connection without a delay.</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  reconnect_cb();</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="comment">// Launch a separate onRepeat event to (re-)establish WiFi connection.</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="comment">// Connecting is attempted only every 20 s to allow the previous connection</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <span class="comment">// attempt to complete even if the network is slow.</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onRepeat(20000, reconnect_cb);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>}</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="foldopen" id="foldopen00143" data-start="{" data-end="}">
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">  143</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">Networking::start_client_autoconnect</a>() {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  String hostname = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  WiFi.setHostname(hostname.c_str());</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <span class="comment">// set up WiFi in regular STA (client) mode</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keyword">auto</span> reconnect_cb = [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keyword">static</span> uint32_t attempt_num = 0;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">static</span> uint32_t current_config_idx = 0;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordtype">int</span> num_configs = <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.size();</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordflow">if</span> (WiFi.status() == WL_CONNECTED) {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>      attempt_num = 0;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      current_config_idx = 0;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="comment">// First check if any of the client settings are defined</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">if</span> (num_configs == 0) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>      ESP_LOGW(__FILENAME__,</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>               <span class="stringliteral">&quot;No client settings defined. Leaving WiFi client disconnected.&quot;</span>);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    uint32_t prev_config_idx = current_config_idx;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a> config;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="comment">// Get next valid client config</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">for</span> (current_config_idx = current_config_idx;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>         current_config_idx &lt; prev_config_idx + num_configs;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>         current_config_idx++) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>      config = <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>[current_config_idx % num_configs];</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>      <span class="keywordflow">if</span> (config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a> != <span class="stringliteral">&quot;&quot;</span> &amp;&amp; config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a6fa5f20b526dc6a34d076652997faad0">password_</a> != <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>      }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    }</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Current client config index: %d&quot;</span>,</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>             current_config_idx);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Attempt number: %d&quot;</span>, attempt_num);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Config SSID: %s&quot;</span>, config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a>.c_str());</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <span class="comment">// If no valid client config found, leave WiFi client disconnected</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordflow">if</span> (config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a> == <span class="stringliteral">&quot;&quot;</span> || config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a6fa5f20b526dc6a34d076652997faad0">password_</a> == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      ESP_LOGW(</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>          __FILENAME__,</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>          <span class="stringliteral">&quot;No valid client settings found. Leaving WiFi client disconnected.&quot;</span>);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    ESP_LOGI(__FILENAME__,</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>             <span class="stringliteral">&quot;Connecting to wifi SSID %s (connection attempt #%d).&quot;</span>,</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>             config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a>.c_str(), attempt_num);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">if</span> (!config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a66a8f02af25998264c6aff923f235ea4">use_dhcp_</a>) {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Using static IP address: %s&quot;</span>,</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>               config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#ae7f2aa312470b92f5419deebed498968">ip_</a>.toString().c_str());</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>      WiFi.config(config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#ae7f2aa312470b92f5419deebed498968">ip_</a>, config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#af2c1823ac70f670e23122084fe6b128f">dns_server_</a>, config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a58311c9a2775a9ebe7fd6d043d511658">gateway_</a>,</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                  config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a727cc6ea495689887341ac9b309cf08e">netmask_</a>);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    WiFi.begin(config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#aee2b95b4769a7729059e1eafe4ef8727">ssid_</a>.c_str(), config.<a class="code hl_variable" href="classsensesp_1_1_client_s_s_i_d_config.html#a6fa5f20b526dc6a34d076652997faad0">password_</a>.c_str());</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    attempt_num++;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    current_config_idx++;  <span class="comment">// Move to the next config for the next attempt</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  };</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="comment">// Perform an initial connection without a delay.</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  reconnect_cb();</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <span class="comment">// Launch a separate onRepeat event to (re-)establish WiFi connection.</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="comment">// Connecting is attempted only every 20 s to allow the previous connection</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <span class="comment">// attempt to complete even if the network is slow.</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <a class="code hl_function" href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">event_loop</a>()-&gt;onRepeat(20000, reconnect_cb);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>}</div>
 </div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="foldopen" id="foldopen00223" data-start="{" data-end="}">
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#aacc436cb3c7e92fab239ec1f0b210caf">  223</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#aacc436cb3c7e92fab239ec1f0b210caf">Networking::to_json</a>(JsonObject&amp; root) {</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  JsonObject apSettingsJson = root[<span class="stringliteral">&quot;apSettings&quot;</span>].to&lt;JsonObject&gt;();</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_function" href="classsensesp_1_1_access_point_settings.html#a6036c1b55e7680a10b685d509e49a70e">as_json</a>(apSettingsJson);</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  JsonObject clientSettingsJson = root[<span class="stringliteral">&quot;clientSettings&quot;</span>].to&lt;JsonObject&gt;();</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  clientSettingsJson[<span class="stringliteral">&quot;enabled&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a>;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  JsonArray clientConfigsJson = clientSettingsJson[<span class="stringliteral">&quot;settings&quot;</span>].to&lt;JsonArray&gt;();</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  <span class="keywordtype">int</span> num_serialized = 0;</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; config : <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>) {</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">if</span> (num_serialized++ &gt;= <a class="code hl_variable" href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">kMaxNumClientConfigs</a>) {</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    }</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    JsonObject clientConfigJson = clientConfigsJson.add&lt;JsonObject&gt;();</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    config.as_json(clientConfigJson);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  }</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="foldopen" id="foldopen00222" data-start="{" data-end="}">
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#aacc436cb3c7e92fab239ec1f0b210caf">  222</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#aacc436cb3c7e92fab239ec1f0b210caf">Networking::to_json</a>(JsonObject&amp; root) {</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  JsonObject apSettingsJson = root[<span class="stringliteral">&quot;apSettings&quot;</span>].to&lt;JsonObject&gt;();</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a>.<a class="code hl_function" href="classsensesp_1_1_access_point_settings.html#a6036c1b55e7680a10b685d509e49a70e">as_json</a>(apSettingsJson);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  JsonObject clientSettingsJson = root[<span class="stringliteral">&quot;clientSettings&quot;</span>].to&lt;JsonObject&gt;();</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  clientSettingsJson[<span class="stringliteral">&quot;enabled&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a>;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  JsonArray clientConfigsJson = clientSettingsJson[<span class="stringliteral">&quot;settings&quot;</span>].to&lt;JsonArray&gt;();</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  <span class="keywordtype">int</span> num_serialized = 0;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; config : <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>) {</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordflow">if</span> (num_serialized++ &gt;= <a class="code hl_variable" href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">kMaxNumClientConfigs</a>) {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    }</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    JsonObject clientConfigJson = clientConfigsJson.add&lt;JsonObject&gt;();</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    config.as_json(clientConfigJson);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  }</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>}</div>
 </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
-<div class="foldopen" id="foldopen00241" data-start="{" data-end="}">
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a879a8054bcfe411f1da2feb18fb1ffd5">  241</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#a879a8054bcfe411f1da2feb18fb1ffd5">Networking::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;hostname&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="comment">// deal with the legacy Json format</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    String hostname = config[<span class="stringliteral">&quot;hostname&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612">SensESPBaseApp::get</a>()-&gt;get_hostname_observable()-&gt;set(hostname);</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;ssid&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      String ssid = config[<span class="stringliteral">&quot;ssid&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>      String password = config[<span class="stringliteral">&quot;password&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;ap_mode&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keywordtype">bool</span> ap_mode;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;ap_mode&quot;</span>].as&lt;String&gt;() == <span class="stringliteral">&quot;Access Point&quot;</span> ||</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            config[<span class="stringliteral">&quot;ap_mode&quot;</span>].as&lt;String&gt;() == <span class="stringliteral">&quot;Hotspot&quot;</span>) {</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>          <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a> = {<span class="keyword">true</span>, ssid, password};</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>          <a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a> client_settings = {ssid, password};</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>          <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.clear();</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>          <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(client_settings);</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>          <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        }</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      }</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    }</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="comment">// Either an empty config or a new-style config</span></div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;apSettings&quot;</span>].is&lt;JsonVariant&gt;()) {</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>      <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a> = <a class="code hl_function" href="classsensesp_1_1_access_point_settings.html#a1d26085b98cdf68b1fb5607454fd83a0">AccessPointSettings::from_json</a>(config[<span class="stringliteral">&quot;apSettings&quot;</span>]);</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>      <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a> = <a class="code hl_class" href="classsensesp_1_1_access_point_settings.html">AccessPointSettings</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    }</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;clientSettings&quot;</span>].is&lt;JsonVariant&gt;()) {</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      <span class="keyword">const</span> JsonObject&amp; client_settings_json = config[<span class="stringliteral">&quot;clientSettings&quot;</span>];</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>      <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a> = client_settings_json[<span class="stringliteral">&quot;enabled&quot;</span>] | <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.clear();</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>      <span class="keyword">const</span> JsonArray&amp; client_settings_json_array =</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>          client_settings_json[<span class="stringliteral">&quot;settings&quot;</span>];</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>      <span class="keywordflow">for</span> (<span class="keyword">const</span> JsonObject&amp; cfg_json : client_settings_json_array) {</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(<a class="code hl_function" href="classsensesp_1_1_client_s_s_i_d_config.html#a54c78249be4dd0824fa318a7a37dec81">ClientSSIDConfig::from_json</a>(cfg_json));</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      }</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.size() == 0) {</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>      }</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    }</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  }</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  <span class="comment">// Fill in the rest of the client settings array with empty configs</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  <span class="keywordflow">while</span> (<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.size() &lt; <a class="code hl_variable" href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">kMaxNumClientConfigs</a>) {</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(<a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a>());</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  }</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>}</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="foldopen" id="foldopen00240" data-start="{" data-end="}">
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a879a8054bcfe411f1da2feb18fb1ffd5">  240</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#a879a8054bcfe411f1da2feb18fb1ffd5">Networking::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;hostname&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <span class="comment">// deal with the legacy Json format</span></div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    String hostname = config[<span class="stringliteral">&quot;hostname&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612">SensESPBaseApp::get</a>()-&gt;get_hostname_observable()-&gt;set(hostname);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;ssid&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>      String ssid = config[<span class="stringliteral">&quot;ssid&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      String password = config[<span class="stringliteral">&quot;password&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>      <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;ap_mode&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keywordtype">bool</span> ap_mode;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;ap_mode&quot;</span>].as&lt;String&gt;() == <span class="stringliteral">&quot;Access Point&quot;</span> ||</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            config[<span class="stringliteral">&quot;ap_mode&quot;</span>].as&lt;String&gt;() == <span class="stringliteral">&quot;Hotspot&quot;</span>) {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>          <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a> = {<span class="keyword">true</span>, ssid, password};</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>          <a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a> client_settings = {ssid, password};</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>          <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.clear();</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>          <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(client_settings);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>          <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        }</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>      }</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    }</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="comment">// Either an empty config or a new-style config</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;apSettings&quot;</span>].is&lt;JsonVariant&gt;()) {</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a> = <a class="code hl_function" href="classsensesp_1_1_access_point_settings.html#a1d26085b98cdf68b1fb5607454fd83a0">AccessPointSettings::from_json</a>(config[<span class="stringliteral">&quot;apSettings&quot;</span>]);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">ap_settings_</a> = <a class="code hl_class" href="classsensesp_1_1_access_point_settings.html">AccessPointSettings</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    }</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;clientSettings&quot;</span>].is&lt;JsonVariant&gt;()) {</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      <span class="keyword">const</span> JsonObject&amp; client_settings_json = config[<span class="stringliteral">&quot;clientSettings&quot;</span>];</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a> = client_settings_json[<span class="stringliteral">&quot;enabled&quot;</span>] | <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>      <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.clear();</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      <span class="keyword">const</span> JsonArray&amp; client_settings_json_array =</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>          client_settings_json[<span class="stringliteral">&quot;settings&quot;</span>];</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>      <span class="keywordflow">for</span> (<span class="keyword">const</span> JsonObject&amp; cfg_json : client_settings_json_array) {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(<a class="code hl_function" href="classsensesp_1_1_client_s_s_i_d_config.html#a54c78249be4dd0824fa318a7a37dec81">ClientSSIDConfig::from_json</a>(cfg_json));</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>      }</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.size() == 0) {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <a class="code hl_variable" href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">client_enabled_</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      }</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    }</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  }</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  <span class="comment">// Fill in the rest of the client settings array with empty configs</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  <span class="keywordflow">while</span> (<a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.size() &lt; <a class="code hl_variable" href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">kMaxNumClientConfigs</a>) {</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <a class="code hl_variable" href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">client_settings_</a>.push_back(<a class="code hl_class" href="classsensesp_1_1_client_s_s_i_d_config.html">ClientSSIDConfig</a>());</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>}</div>
 </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
-<div class="foldopen" id="foldopen00293" data-start="{" data-end="}">
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159">  293</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159">Networking::reset</a>() {</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Resetting WiFi SSID settings&quot;</span>);</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a172c641ef20db18a30b50dd1da1177f4">clear</a>();</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  WiFi.disconnect(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  <span class="comment">// On ESP32, disconnect does not erase previous credentials. Let&#39;s connect</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  <span class="comment">// to a bogus network instead</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  WiFi.begin(<span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>, 0, <span class="keyword">nullptr</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>}</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="foldopen" id="foldopen00292" data-start="{" data-end="}">
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159">  292</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159">Networking::reset</a>() {</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Resetting WiFi SSID settings&quot;</span>);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a172c641ef20db18a30b50dd1da1177f4">clear</a>();</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  WiFi.disconnect(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  <span class="comment">// On ESP32, disconnect does not erase previous credentials. Let&#39;s connect</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  <span class="comment">// to a bogus network instead</span></div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  WiFi.begin(<span class="stringliteral">&quot;0&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>, 0, <span class="keyword">nullptr</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>}</div>
 </div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="foldopen" id="foldopen00303" data-start="{" data-end="}">
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#aa95b7bb3f7dd4f3b798ee32d1542a9ff">  303</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#aa95b7bb3f7dd4f3b798ee32d1542a9ff">Networking::start_wifi_scan</a>() {</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="comment">// Scan fails if WiFi is connecting. Disconnect to allow scanning.</span></div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  <span class="keywordflow">if</span> (WiFi.status() != WL_CONNECTED) {</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    ESP_LOGD(__FILENAME__,</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>             <span class="stringliteral">&quot;WiFi is not connected. Disconnecting to allow scanning.&quot;</span>);</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    WiFi.disconnect();</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  }</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Starting WiFi network scan&quot;</span>);</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <span class="keywordtype">int</span> result = WiFi.scanNetworks(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  <span class="keywordflow">if</span> (result == WIFI_SCAN_FAILED) {</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;WiFi scan failed to start&quot;</span>);</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  }</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>}</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="foldopen" id="foldopen00302" data-start="{" data-end="}">
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#aa95b7bb3f7dd4f3b798ee32d1542a9ff">  302</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_networking.html#aa95b7bb3f7dd4f3b798ee32d1542a9ff">Networking::start_wifi_scan</a>() {</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="comment">// Scan fails if WiFi is connecting. Disconnect to allow scanning.</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="keywordflow">if</span> (WiFi.status() != WL_CONNECTED) {</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    ESP_LOGD(__FILENAME__,</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>             <span class="stringliteral">&quot;WiFi is not connected. Disconnecting to allow scanning.&quot;</span>);</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    WiFi.disconnect();</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  }</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Starting WiFi network scan&quot;</span>);</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  <span class="keywordtype">int</span> result = WiFi.scanNetworks(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <span class="keywordflow">if</span> (result == WIFI_SCAN_FAILED) {</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;WiFi scan failed to start&quot;</span>);</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  }</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>}</div>
 </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
-<div class="foldopen" id="foldopen00317" data-start="{" data-end="}">
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a9a2b6724dc67b259ba3d7162e87d41a4">  317</a></span>int16_t <a class="code hl_function" href="classsensesp_1_1_networking.html#a9a2b6724dc67b259ba3d7162e87d41a4">Networking::get_wifi_scan_results</a>(</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    std::vector&lt;WiFiNetworkInfo&gt;&amp; ssid_list) {</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordtype">int</span> num_networks = WiFi.scanComplete();</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  <span class="keywordflow">if</span> (num_networks == WIFI_SCAN_RUNNING) {</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keywordflow">return</span> WIFI_SCAN_RUNNING;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  }</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  <span class="keywordflow">if</span> (num_networks == WIFI_SCAN_FAILED) {</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <span class="keywordflow">return</span> WIFI_SCAN_FAILED;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  }</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  ssid_list.clear();</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_networks; i++) {</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <a class="code hl_class" href="classsensesp_1_1_wi_fi_network_info.html">WiFiNetworkInfo</a> info(WiFi.SSID(i), WiFi.RSSI(i), WiFi.encryptionType(i),</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>                         WiFi.BSSID(i), WiFi.channel(i));</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    ssid_list.push_back(info);</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  }</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  <span class="keywordflow">return</span> num_networks;</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>}</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="foldopen" id="foldopen00316" data-start="{" data-end="}">
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="classsensesp_1_1_networking.html#a9a2b6724dc67b259ba3d7162e87d41a4">  316</a></span>int16_t <a class="code hl_function" href="classsensesp_1_1_networking.html#a9a2b6724dc67b259ba3d7162e87d41a4">Networking::get_wifi_scan_results</a>(</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    std::vector&lt;WiFiNetworkInfo&gt;&amp; ssid_list) {</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  <span class="keywordtype">int</span> num_networks = WiFi.scanComplete();</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordflow">if</span> (num_networks == WIFI_SCAN_RUNNING) {</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keywordflow">return</span> WIFI_SCAN_RUNNING;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  }</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  <span class="keywordflow">if</span> (num_networks == WIFI_SCAN_FAILED) {</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">return</span> WIFI_SCAN_FAILED;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  }</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  ssid_list.clear();</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_networks; i++) {</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <a class="code hl_class" href="classsensesp_1_1_wi_fi_network_info.html">WiFiNetworkInfo</a> info(WiFi.SSID(i), WiFi.RSSI(i), WiFi.encryptionType(i),</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                         WiFi.BSSID(i), WiFi.channel(i));</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    ssid_list.push_back(info);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  }</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  <span class="keywordflow">return</span> num_networks;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>}</div>
 </div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>}  <span class="comment">// namespace sensesp</span></div>
 <div class="ttc" id="aclasssensesp_1_1_access_point_settings_html"><div class="ttname"><a href="classsensesp_1_1_access_point_settings.html">sensesp::AccessPointSettings</a></div><div class="ttdoc">Storage object for WiFi access point settings.</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00114">networking.h:114</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_access_point_settings_html_a14c76bed6266782c40412ee2ff48dcce"><div class="ttname"><a href="classsensesp_1_1_access_point_settings.html#a14c76bed6266782c40412ee2ff48dcce">sensesp::AccessPointSettings::password_</a></div><div class="ttdeci">String password_</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00133">networking.h:133</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_access_point_settings_html_a1d26085b98cdf68b1fb5607454fd83a0"><div class="ttname"><a href="classsensesp_1_1_access_point_settings.html#a1d26085b98cdf68b1fb5607454fd83a0">sensesp::AccessPointSettings::from_json</a></div><div class="ttdeci">static AccessPointSettings from_json(const JsonObject &amp;json)</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00138">networking.h:138</a></div></div>
@@ -470,28 +469,27 @@ $(function(){initNavTree('networking_8cpp_source.html',''); initResizable(true);
 <div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html">sensesp::FileSystemSaveable</a></div><div class="ttdef"><b>Definition</b> <a href="saveable_8h_source.html#l00061">saveable.h:61</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a172c641ef20db18a30b50dd1da1177f4"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a172c641ef20db18a30b50dd1da1177f4">sensesp::FileSystemSaveable::clear</a></div><div class="ttdeci">virtual bool clear() override</div><div class="ttdoc">Delete the data from a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00072">saveable.cpp:72</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a79b2e2e657112851dfda8785d217578a"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">sensesp::FileSystemSaveable::load</a></div><div class="ttdeci">virtual bool load() override</div><div class="ttdoc">Load and populate the object from a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00008">saveable.cpp:8</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_a05daeecff20fd0d5a5af084c74f44159"><div class="ttname"><a href="classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159">sensesp::Networking::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition</b> <a href="#l00293">networking.cpp:293</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_a05daeecff20fd0d5a5af084c74f44159"><div class="ttname"><a href="classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159">sensesp::Networking::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition</b> <a href="#l00292">networking.cpp:292</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_networking_html_a103d6ad176993a44b01726cec742c985"><div class="ttname"><a href="classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985">sensesp::Networking::dns_server_</a></div><div class="ttdeci">std::unique_ptr&lt; DNSServer &gt; dns_server_</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00278">networking.h:278</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_networking_html_a1c6a1858e2cb0fbb0f7c7d75dbdac1fb"><div class="ttname"><a href="classsensesp_1_1_networking.html#a1c6a1858e2cb0fbb0f7c7d75dbdac1fb">sensesp::Networking::client_enabled_</a></div><div class="ttdeci">bool client_enabled_</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00275">networking.h:275</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_a243a65fd80707494e03b25e236b7a554"><div class="ttname"><a href="classsensesp_1_1_networking.html#a243a65fd80707494e03b25e236b7a554">sensesp::Networking::~Networking</a></div><div class="ttdeci">~Networking()</div><div class="ttdef"><b>Definition</b> <a href="#l00111">networking.cpp:111</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_a277f2f6ba752d443e9724badf2a3f474"><div class="ttname"><a href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">sensesp::Networking::start_client_autoconnect</a></div><div class="ttdeci">void start_client_autoconnect()</div><div class="ttdoc">Start WiFi using preset SSID and password.</div><div class="ttdef"><b>Definition</b> <a href="#l00144">networking.cpp:144</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_a879a8054bcfe411f1da2feb18fb1ffd5"><div class="ttname"><a href="classsensesp_1_1_networking.html#a879a8054bcfe411f1da2feb18fb1ffd5">sensesp::Networking::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00241">networking.cpp:241</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_a98a47f34b83e3f5773054a8c3a3a308c"><div class="ttname"><a href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">sensesp::Networking::start_access_point</a></div><div class="ttdeci">void start_access_point()</div><div class="ttdoc">Start an access point.</div><div class="ttdef"><b>Definition</b> <a href="#l00124">networking.cpp:124</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_a9a2b6724dc67b259ba3d7162e87d41a4"><div class="ttname"><a href="classsensesp_1_1_networking.html#a9a2b6724dc67b259ba3d7162e87d41a4">sensesp::Networking::get_wifi_scan_results</a></div><div class="ttdeci">int16_t get_wifi_scan_results(std::vector&lt; WiFiNetworkInfo &gt; &amp;ssid_list)</div><div class="ttdef"><b>Definition</b> <a href="#l00317">networking.cpp:317</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_aa23575a20407cb5a2d885d1e7049f416"><div class="ttname"><a href="classsensesp_1_1_networking.html#aa23575a20407cb5a2d885d1e7049f416">sensesp::Networking::Networking</a></div><div class="ttdeci">Networking(const String &amp;config_path, const String &amp;client_ssid=&quot;&quot;, const String &amp;client_password=&quot;&quot;, const String &amp;ap_ssid=&quot;&quot;, const String &amp;ap_password=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00028">networking.cpp:28</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_aa95b7bb3f7dd4f3b798ee32d1542a9ff"><div class="ttname"><a href="classsensesp_1_1_networking.html#aa95b7bb3f7dd4f3b798ee32d1542a9ff">sensesp::Networking::start_wifi_scan</a></div><div class="ttdeci">void start_wifi_scan()</div><div class="ttdef"><b>Definition</b> <a href="#l00303">networking.cpp:303</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_networking_html_aacc436cb3c7e92fab239ec1f0b210caf"><div class="ttname"><a href="classsensesp_1_1_networking.html#aacc436cb3c7e92fab239ec1f0b210caf">sensesp::Networking::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override</div><div class="ttdoc">Serialize the current configuration to a JSON document.</div><div class="ttdef"><b>Definition</b> <a href="#l00223">networking.cpp:223</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_a243a65fd80707494e03b25e236b7a554"><div class="ttname"><a href="classsensesp_1_1_networking.html#a243a65fd80707494e03b25e236b7a554">sensesp::Networking::~Networking</a></div><div class="ttdeci">~Networking()</div><div class="ttdef"><b>Definition</b> <a href="#l00110">networking.cpp:110</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_a277f2f6ba752d443e9724badf2a3f474"><div class="ttname"><a href="classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474">sensesp::Networking::start_client_autoconnect</a></div><div class="ttdeci">void start_client_autoconnect()</div><div class="ttdoc">Start WiFi using preset SSID and password.</div><div class="ttdef"><b>Definition</b> <a href="#l00143">networking.cpp:143</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_a879a8054bcfe411f1da2feb18fb1ffd5"><div class="ttname"><a href="classsensesp_1_1_networking.html#a879a8054bcfe411f1da2feb18fb1ffd5">sensesp::Networking::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override</div><div class="ttdef"><b>Definition</b> <a href="#l00240">networking.cpp:240</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_a98a47f34b83e3f5773054a8c3a3a308c"><div class="ttname"><a href="classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c">sensesp::Networking::start_access_point</a></div><div class="ttdeci">void start_access_point()</div><div class="ttdoc">Start an access point.</div><div class="ttdef"><b>Definition</b> <a href="#l00123">networking.cpp:123</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_a9a2b6724dc67b259ba3d7162e87d41a4"><div class="ttname"><a href="classsensesp_1_1_networking.html#a9a2b6724dc67b259ba3d7162e87d41a4">sensesp::Networking::get_wifi_scan_results</a></div><div class="ttdeci">int16_t get_wifi_scan_results(std::vector&lt; WiFiNetworkInfo &gt; &amp;ssid_list)</div><div class="ttdef"><b>Definition</b> <a href="#l00316">networking.cpp:316</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_aa23575a20407cb5a2d885d1e7049f416"><div class="ttname"><a href="classsensesp_1_1_networking.html#aa23575a20407cb5a2d885d1e7049f416">sensesp::Networking::Networking</a></div><div class="ttdeci">Networking(const String &amp;config_path, const String &amp;client_ssid=&quot;&quot;, const String &amp;client_password=&quot;&quot;, const String &amp;ap_ssid=&quot;&quot;, const String &amp;ap_password=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00027">networking.cpp:27</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_aa95b7bb3f7dd4f3b798ee32d1542a9ff"><div class="ttname"><a href="classsensesp_1_1_networking.html#aa95b7bb3f7dd4f3b798ee32d1542a9ff">sensesp::Networking::start_wifi_scan</a></div><div class="ttdeci">void start_wifi_scan()</div><div class="ttdef"><b>Definition</b> <a href="#l00302">networking.cpp:302</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_networking_html_aacc436cb3c7e92fab239ec1f0b210caf"><div class="ttname"><a href="classsensesp_1_1_networking.html#aacc436cb3c7e92fab239ec1f0b210caf">sensesp::Networking::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;doc) override</div><div class="ttdoc">Serialize the current configuration to a JSON document.</div><div class="ttdef"><b>Definition</b> <a href="#l00222">networking.cpp:222</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_networking_html_ab8bcbf50dbdda5ca6441c8d03ae2b27c"><div class="ttname"><a href="classsensesp_1_1_networking.html#ab8bcbf50dbdda5ca6441c8d03ae2b27c">sensesp::Networking::wifi_state_emitter_</a></div><div class="ttdeci">std::shared_ptr&lt; LambdaConsumer&lt; WiFiState &gt; &gt; wifi_state_emitter_</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00283">networking.h:283</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_networking_html_ad10f1e2be89f2ea5ad6013c4137488b2"><div class="ttname"><a href="classsensesp_1_1_networking.html#ad10f1e2be89f2ea5ad6013c4137488b2">sensesp::Networking::client_settings_</a></div><div class="ttdeci">std::vector&lt; ClientSSIDConfig &gt; client_settings_</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00276">networking.h:276</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_networking_html_ad9209052bbdb8131473b70c0ad834e57"><div class="ttname"><a href="classsensesp_1_1_networking.html#ad9209052bbdb8131473b70c0ad834e57">sensesp::Networking::ap_settings_</a></div><div class="ttdeci">AccessPointSettings ap_settings_</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00273">networking.h:273</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_networking_html_af92c7689fc75532ed9b387cbf341c851"><div class="ttname"><a href="classsensesp_1_1_networking.html#af92c7689fc75532ed9b387cbf341c851">sensesp::Networking::wifi_state_producer_</a></div><div class="ttdeci">std::shared_ptr&lt; WiFiStateProducer &gt; wifi_state_producer_</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00280">networking.h:280</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_resettable_html"><div class="ttname"><a href="classsensesp_1_1_resettable.html">sensesp::Resettable</a></div><div class="ttdoc">Automatic calling of the reset() method when the device needs to be reset.</div><div class="ttdef"><b>Definition</b> <a href="resettable_8h_source.html#l00020">resettable.h:20</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a21ba3dc3ef0056c32ad5a67e1ae5ff16"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">sensesp::SensESPBaseApp::get_hostname</a></div><div class="ttdeci">static String get_hostname()</div><div class="ttdoc">Get the current hostname.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8h_source.html#l00104">sensesp_base_app.h:104</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_add2c67bb55d095ab9c64f44ab2e82612"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612">sensesp::SensESPBaseApp::get</a></div><div class="ttdeci">static const std::shared_ptr&lt; SensESPBaseApp &gt; &amp; get()</div><div class="ttdoc">Get the singleton instance of the SensESPBaseApp.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8h_source.html#l00050">sensesp_base_app.h:50</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a21ba3dc3ef0056c32ad5a67e1ae5ff16"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">sensesp::SensESPBaseApp::get_hostname</a></div><div class="ttdeci">static String get_hostname()</div><div class="ttdoc">Get the current hostname.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8h_source.html#l00105">sensesp_base_app.h:105</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_add2c67bb55d095ab9c64f44ab2e82612"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612">sensesp::SensESPBaseApp::get</a></div><div class="ttdeci">static const std::shared_ptr&lt; SensESPBaseApp &gt; &amp; get()</div><div class="ttdoc">Get the singleton instance of the SensESPBaseApp.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8h_source.html#l00051">sensesp_base_app.h:51</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer&lt; WiFiState &gt;::emit</a></div><div class="ttdeci">void emit(const WiFiState &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_wi_fi_network_info_html"><div class="ttname"><a href="classsensesp_1_1_wi_fi_network_info.html">sensesp::WiFiNetworkInfo</a></div><div class="ttdoc">WiFi Network Information storage class.</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00213">networking.h:213</a></div></div>
 <div class="ttc" id="alambda__consumer_8h_html"><div class="ttname"><a href="lambda__consumer_8h.html">lambda_consumer.h</a></div></div>
-<div class="ttc" id="aled__blinker_8h_html"><div class="ttname"><a href="led__blinker_8h.html">led_blinker.h</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a1c1105507d71491cf4e0505eaabb2e49"><div class="ttname"><a href="namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49">sensesp::event_loop</a></div><div class="ttdeci">std::shared_ptr&lt; reactesp::EventLoop &gt; event_loop()</div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00009">sensesp.cpp:9</a></div></div>
 <div class="ttc" id="anamespacesensesp_html_a5bfba1ec2874e5b5ff8b707d8808117c"><div class="ttname"><a href="namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c">sensesp::kMaxNumClientConfigs</a></div><div class="ttdeci">constexpr int kMaxNumClientConfigs</div><div class="ttdef"><b>Definition</b> <a href="networking_8h_source.html#l00018">networking.h:18</a></div></div>

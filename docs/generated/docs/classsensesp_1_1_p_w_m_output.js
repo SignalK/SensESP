@@ -1,8 +1,8 @@
 var classsensesp_1_1_p_w_m_output =
 [
-    [ "PWMOutput", "classsensesp_1_1_p_w_m_output.html#a58786060f1cf312d4c8b37d4d946ca97", null ],
+    [ "PWMOutput", "classsensesp_1_1_p_w_m_output.html#ac7742f7054847185ae881a9c9f6d1026", null ],
     [ "assign_channel", "classsensesp_1_1_p_w_m_output.html#a9ab8404ac236bce150a7fd4976647257", null ],
-    [ "set", "classsensesp_1_1_p_w_m_output.html#af8dffdcff7ed4d9227c560260b544f2b", null ],
+    [ "set", "classsensesp_1_1_p_w_m_output.html#af2dcb6413c0c78d000a1cca4908abba2", null ],
     [ "set_pwm", "classsensesp_1_1_p_w_m_output.html#a1aa17b03632b796aec5c532d8fb87ad6", null ],
     [ "channel_frequency_", "classsensesp_1_1_p_w_m_output.html#a8636edb0007f0e9db6f3e15c4ea31e3c", null ],
     [ "channel_resolution_", "classsensesp_1_1_p_w_m_output.html#ad9e84688c14872834bd9db2f9bcc6a81", null ],

@@ -8,6 +8,8 @@ var dir_fc2d48ca17580ba15ecc0a04d580615a =
     [ "digital_input.h", "digital__input_8h.html", "digital__input_8h" ],
     [ "digital_output.cpp", "digital__output_8cpp.html", null ],
     [ "digital_output.h", "digital__output_8h.html", "digital__output_8h" ],
+    [ "digital_pcnt_input.cpp", "digital__pcnt__input_8cpp.html", null ],
+    [ "digital_pcnt_input.h", "digital__pcnt__input_8h.html", null ],
     [ "sensor.h", "sensor_8h.html", "sensor_8h" ],
     [ "system_info.cpp", "system__info_8cpp.html", null ],
     [ "system_info.h", "system__info_8h.html", "system__info_8h" ]

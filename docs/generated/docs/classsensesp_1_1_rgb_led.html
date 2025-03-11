@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -170,18 +170,24 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aff822ec8bb35bfe093d945869064a9db" id="r_aff822ec8bb35bfe093d945869064a9db"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff822ec8bb35bfe093d945869064a9db">led_r_output_</a> = nullptr</td></tr>
-<tr class="separator:aff822ec8bb35bfe093d945869064a9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e0940b278cd207a16551fabca8c491a" id="r_a8e0940b278cd207a16551fabca8c491a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e0940b278cd207a16551fabca8c491a">led_g_output_</a> = nullptr</td></tr>
-<tr class="separator:a8e0940b278cd207a16551fabca8c491a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afacfd1d40feac3a2ad4a0ed558c1d4cc" id="r_afacfd1d40feac3a2ad4a0ed558c1d4cc"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afacfd1d40feac3a2ad4a0ed558c1d4cc">led_b_output_</a> = nullptr</td></tr>
-<tr class="separator:afacfd1d40feac3a2ad4a0ed558c1d4cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72cba299c322477de4dbdafe9954f7d8" id="r_a72cba299c322477de4dbdafe9954f7d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72cba299c322477de4dbdafe9954f7d8">led_r_pin_</a></td></tr>
+<tr class="separator:a72cba299c322477de4dbdafe9954f7d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a54b3753aa1a13bf06ac4f99f23541f" id="r_a3a54b3753aa1a13bf06ac4f99f23541f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a54b3753aa1a13bf06ac4f99f23541f">led_g_pin_</a></td></tr>
+<tr class="separator:a3a54b3753aa1a13bf06ac4f99f23541f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8de3fe438d954b1b3d27f1365dd62a7d" id="r_a8de3fe438d954b1b3d27f1365dd62a7d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8de3fe438d954b1b3d27f1365dd62a7d">led_b_pin_</a></td></tr>
+<tr class="separator:a8de3fe438d954b1b3d27f1365dd62a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5359badfe59c94d8e36742f7e0fe7589" id="r_a5359badfe59c94d8e36742f7e0fe7589"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5359badfe59c94d8e36742f7e0fe7589">led_on_rgb_</a></td></tr>
 <tr class="separator:a5359badfe59c94d8e36742f7e0fe7589"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18a2a1ad0a3dc791102ff79f653c8669" id="r_a18a2a1ad0a3dc791102ff79f653c8669"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18a2a1ad0a3dc791102ff79f653c8669">led_off_rgb_</a></td></tr>
 <tr class="separator:a18a2a1ad0a3dc791102ff79f653c8669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ed4f859be11e2384918894198d627ac" id="r_a5ed4f859be11e2384918894198d627ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ed4f859be11e2384918894198d627ac">common_anode_</a></td></tr>
 <tr class="separator:a5ed4f859be11e2384918894198d627ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafbecda6aa38d403bf01b2e17b321f7f" id="r_aafbecda6aa38d403bf01b2e17b321f7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafbecda6aa38d403bf01b2e17b321f7f">pwm_output_r_</a> {<a class="el" href="#a72cba299c322477de4dbdafe9954f7d8">led_r_pin_</a>, -1, 5000, <a class="el" href="namespacesensesp.html#ae0dd16d51413477022cf07e5baaff173">kPWMResolution</a>}</td></tr>
+<tr class="separator:aafbecda6aa38d403bf01b2e17b321f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a134958b34c02fb8b2fec743342feaedd" id="r_a134958b34c02fb8b2fec743342feaedd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a134958b34c02fb8b2fec743342feaedd">pwm_output_g_</a> {<a class="el" href="#a3a54b3753aa1a13bf06ac4f99f23541f">led_g_pin_</a>, -1, 5000, <a class="el" href="namespacesensesp.html#ae0dd16d51413477022cf07e5baaff173">kPWMResolution</a>}</td></tr>
+<tr class="separator:a134958b34c02fb8b2fec743342feaedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff544cada3261c7821c57ec138f206d1" id="r_aff544cada3261c7821c57ec138f206d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff544cada3261c7821c57ec138f206d1">pwm_output_b_</a> {<a class="el" href="#a8de3fe438d954b1b3d27f1365dd62a7d">led_b_pin_</a>, -1, 5000, <a class="el" href="namespacesensesp.html#ae0dd16d51413477022cf07e5baaff173">kPWMResolution</a>}</td></tr>
+<tr class="separator:aff544cada3261c7821c57ec138f206d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classsensesp_1_1_saveable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classsensesp_1_1_saveable')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classsensesp_1_1_saveable.html">sensesp::Saveable</a></td></tr>
 <tr class="memitem:ad023c90c5ce5b7d58f9cbceb8873aafd inherit pro_attribs_classsensesp_1_1_saveable" id="r_ad023c90c5ce5b7d58f9cbceb8873aafd"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_saveable.html#ad023c90c5ce5b7d58f9cbceb8873aafd">config_path_</a></td></tr>
 <tr class="separator:ad023c90c5ce5b7d58f9cbceb8873aafd inherit pro_attribs_classsensesp_1_1_saveable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,9 +195,9 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A special device object that can be used to control a multi-channel color rgb LED light using up to 3 digital output channels. A "color" is defined using the standard 24 bit color depth numbers composed of three 8 bit channels for Red, Green, and Blue (see <a href="https://techterms.com/definition/rgb">https://techterms.com/definition/rgb</a>) </p>
 <p>Color LEDs can be controlled by either setting the specific color to be displayed via the set(long), or by setting the on/off state via set(bool). When specifying a simple on/off via the the bool input, the default ON or OFF colors specified in the constructor are used. </p>
-<p>You do not have to define all three channels (for example, if you are short on output pins, or if you happen to be using a two channel color led). Specify -1 for any pin for that channel to be ignored. The color values used still have to adhere to the 24 bit color definition however. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classsensesp_1_1_p_w_m_output.html" title="Provides a cross platform mechanism for generating Pulse Width Modulation signals over one or more GP...">PWMOutput</a> </dd></dl>
+<p>You do not have to define all three channels (for example, if you are short on output pins, or if you happen to be using a two channel color led). Specify -1 for any pin for that channel to be ignored. The color values used still have to adhere to the 24 bit color definition however. </p>
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00029">29</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00031">31</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a12c7e6fcc5767e83f58c3e4bbc14497c" name="a12c7e6fcc5767e83f58c3e4bbc14497c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a12c7e6fcc5767e83f58c3e4bbc14497c">&#9670;&#160;</a></span>RgbLed()</h2>
@@ -285,7 +291,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_serializable.html#a841233a82ef3a7fbcecd5a15b0df12d2">sensesp::Serializable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8cpp_source.html#l00039">39</a> of file <a class="el" href="rgb__led_8cpp_source.html">rgb_led.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8cpp_source.html#l00045">45</a> of file <a class="el" href="rgb__led_8cpp_source.html">rgb_led.cpp</a>.</p>
 
 </div>
 </div>
@@ -312,7 +318,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8cpp_source.html#l00051">51</a> of file <a class="el" href="rgb__led_8cpp_source.html">rgb_led.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8cpp_source.html#l00057">57</a> of file <a class="el" href="rgb__led_8cpp_source.html">rgb_led.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_rgb_led_a567170c0d11abde14538c743d60b5b03_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -342,7 +353,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_serializable.html#a8da15a9036f2333f1f3beb4207a06477">sensesp::Serializable</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8cpp_source.html#l00033">33</a> of file <a class="el" href="rgb__led_8cpp_source.html">rgb_led.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8cpp_source.html#l00039">39</a> of file <a class="el" href="rgb__led_8cpp_source.html">rgb_led.cpp</a>.</p>
 
 </div>
 </div>
@@ -367,12 +378,36 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00088">88</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+
+</div>
+</div>
+<a id="a8de3fe438d954b1b3d27f1365dd62a7d" name="a8de3fe438d954b1b3d27f1365dd62a7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8de3fe438d954b1b3d27f1365dd62a7d">&#9670;&#160;</a></span>led_b_pin_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sensesp::RgbLed::led_b_pin_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 <p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00085">85</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
-<a id="afacfd1d40feac3a2ad4a0ed558c1d4cc" name="afacfd1d40feac3a2ad4a0ed558c1d4cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afacfd1d40feac3a2ad4a0ed558c1d4cc">&#9670;&#160;</a></span>led_b_output_</h2>
+<a id="a3a54b3753aa1a13bf06ac4f99f23541f" name="a3a54b3753aa1a13bf06ac4f99f23541f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a54b3753aa1a13bf06ac4f99f23541f">&#9670;&#160;</a></span>led_g_pin_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -381,7 +416,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a>&gt; sensesp::RgbLed::led_b_output_ = nullptr</td>
+          <td class="memname">int sensesp::RgbLed::led_g_pin_</td>
         </tr>
       </table>
   </td>
@@ -391,31 +426,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00082">82</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
-
-</div>
-</div>
-<a id="a8e0940b278cd207a16551fabca8c491a" name="a8e0940b278cd207a16551fabca8c491a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e0940b278cd207a16551fabca8c491a">&#9670;&#160;</a></span>led_g_output_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a>&gt; sensesp::RgbLed::led_g_output_ = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00081">81</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00084">84</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -439,7 +450,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00084">84</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00087">87</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -463,12 +474,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00083">83</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00086">86</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
-<a id="aff822ec8bb35bfe093d945869064a9db" name="aff822ec8bb35bfe093d945869064a9db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff822ec8bb35bfe093d945869064a9db">&#9670;&#160;</a></span>led_r_output_</h2>
+<a id="a72cba299c322477de4dbdafe9954f7d8" name="a72cba299c322477de4dbdafe9954f7d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72cba299c322477de4dbdafe9954f7d8">&#9670;&#160;</a></span>led_r_pin_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -477,7 +488,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a>&gt; sensesp::RgbLed::led_r_output_ = nullptr</td>
+          <td class="memname">int sensesp::RgbLed::led_r_pin_</td>
         </tr>
       </table>
   </td>
@@ -487,7 +498,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00080">80</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00083">83</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -510,12 +521,84 @@ Here is the call graph for this function:</div>
 <div class="line">          <a class="code hl_function" href="#a567170c0d11abde14538c743d60b5b03">set_color</a>(<a class="code hl_variable" href="#a18a2a1ad0a3dc791102ff79f653c8669">led_off_rgb_</a>);</div>
 <div class="line">        }</div>
 <div class="line">      })</div>
-<div class="ttc" id="aclasssensesp_1_1_rgb_led_html_a18a2a1ad0a3dc791102ff79f653c8669"><div class="ttname"><a href="#a18a2a1ad0a3dc791102ff79f653c8669">sensesp::RgbLed::led_off_rgb_</a></div><div class="ttdeci">long led_off_rgb_</div><div class="ttdef"><b>Definition</b> <a href="rgb__led_8h_source.html#l00084">rgb_led.h:84</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_rgb_led_html_a5359badfe59c94d8e36742f7e0fe7589"><div class="ttname"><a href="#a5359badfe59c94d8e36742f7e0fe7589">sensesp::RgbLed::led_on_rgb_</a></div><div class="ttdeci">long led_on_rgb_</div><div class="ttdef"><b>Definition</b> <a href="rgb__led_8h_source.html#l00083">rgb_led.h:83</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_rgb_led_html_a567170c0d11abde14538c743d60b5b03"><div class="ttname"><a href="#a567170c0d11abde14538c743d60b5b03">sensesp::RgbLed::set_color</a></div><div class="ttdeci">void set_color(long new_value)</div><div class="ttdef"><b>Definition</b> <a href="rgb__led_8cpp_source.html#l00051">rgb_led.cpp:51</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_rgb_led_html_a18a2a1ad0a3dc791102ff79f653c8669"><div class="ttname"><a href="#a18a2a1ad0a3dc791102ff79f653c8669">sensesp::RgbLed::led_off_rgb_</a></div><div class="ttdeci">long led_off_rgb_</div><div class="ttdef"><b>Definition</b> <a href="rgb__led_8h_source.html#l00087">rgb_led.h:87</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_rgb_led_html_a5359badfe59c94d8e36742f7e0fe7589"><div class="ttname"><a href="#a5359badfe59c94d8e36742f7e0fe7589">sensesp::RgbLed::led_on_rgb_</a></div><div class="ttdeci">long led_on_rgb_</div><div class="ttdef"><b>Definition</b> <a href="rgb__led_8h_source.html#l00086">rgb_led.h:86</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_rgb_led_html_a567170c0d11abde14538c743d60b5b03"><div class="ttname"><a href="#a567170c0d11abde14538c743d60b5b03">sensesp::RgbLed::set_color</a></div><div class="ttdeci">void set_color(long new_value)</div><div class="ttdef"><b>Definition</b> <a href="rgb__led_8cpp_source.html#l00057">rgb_led.cpp:57</a></div></div>
 </div><!-- fragment --><p>Used to set the current display state of the LED with a simple on/off boolean value. Using TRUE for new_value sets the color to the ON color. Using FALSE uses the OFF color. </p>
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00067">67</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00069">69</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+
+</div>
+</div>
+<a id="aff544cada3261c7821c57ec138f206d1" name="aff544cada3261c7821c57ec138f206d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff544cada3261c7821c57ec138f206d1">&#9670;&#160;</a></span>pwm_output_b_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a> sensesp::RgbLed::pwm_output_b_ {<a class="el" href="#a8de3fe438d954b1b3d27f1365dd62a7d">led_b_pin_</a>, -1, 5000, <a class="el" href="namespacesensesp.html#ae0dd16d51413477022cf07e5baaff173">kPWMResolution</a>}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00092">92</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+
+</div>
+</div>
+<a id="a134958b34c02fb8b2fec743342feaedd" name="a134958b34c02fb8b2fec743342feaedd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a134958b34c02fb8b2fec743342feaedd">&#9670;&#160;</a></span>pwm_output_g_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a> sensesp::RgbLed::pwm_output_g_ {<a class="el" href="#a3a54b3753aa1a13bf06ac4f99f23541f">led_g_pin_</a>, -1, 5000, <a class="el" href="namespacesensesp.html#ae0dd16d51413477022cf07e5baaff173">kPWMResolution</a>}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00091">91</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+
+</div>
+</div>
+<a id="aafbecda6aa38d403bf01b2e17b321f7f" name="aafbecda6aa38d403bf01b2e17b321f7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafbecda6aa38d403bf01b2e17b321f7f">&#9670;&#160;</a></span>pwm_output_r_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsensesp_1_1_p_w_m_output.html">PWMOutput</a> sensesp::RgbLed::pwm_output_r_ {<a class="el" href="#a72cba299c322477de4dbdafe9954f7d8">led_r_pin_</a>, -1, 5000, <a class="el" href="namespacesensesp.html#ae0dd16d51413477022cf07e5baaff173">kPWMResolution</a>}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00090">90</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>
@@ -539,7 +622,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00059">59</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rgb__led_8h_source.html#l00061">61</a> of file <a class="el" href="rgb__led_8h_source.html">rgb_led.h</a>.</p>
 
 </div>
 </div>

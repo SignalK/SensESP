@@ -5,12 +5,10 @@ var hierarchy =
     [ "sensesp::BaseAnalogReader", "classsensesp_1_1_base_analog_reader.html", [
       [ "sensesp::ESP32AnalogReader", "classsensesp_1_1_e_s_p32_analog_reader.html", null ]
     ] ],
-    [ "sensesp::BaseBlinker", "classsensesp_1_1_base_blinker.html", [
-      [ "sensesp::PatternBlinker", "classsensesp_1_1_pattern_blinker.html", null ],
-      [ "sensesp::PeriodicBlinker", "classsensesp_1_1_periodic_blinker.html", [
-        [ "sensesp::EvenBlinker", "classsensesp_1_1_even_blinker.html", null ],
-        [ "sensesp::RatioBlinker", "classsensesp_1_1_ratio_blinker.html", null ]
-      ] ]
+    [ "sensesp::BaseBlinker", "classsensesp_1_1_base_blinker.html", null ],
+    [ "sensesp::BaseSystemStatusLed", "classsensesp_1_1_base_system_status_led.html", [
+      [ "sensesp::RGBSystemStatusLed", "classsensesp_1_1_r_g_b_system_status_led.html", null ],
+      [ "sensesp::SystemStatusLed", "classsensesp_1_1_system_status_led.html", null ]
     ] ],
     [ "sensesp::ClientSSIDConfig", "classsensesp_1_1_client_s_s_i_d_config.html", null ],
     [ "ArduinoJson::Converter< std::vector< T > >", "struct_arduino_json_1_1_converter_3_01std_1_1vector_3_01_t_01_4_01_4.html", null ],
@@ -52,6 +50,9 @@ var hierarchy =
     [ "sensesp::JoinBase< 5 >", "classsensesp_1_1_join_base.html", [
       [ "sensesp::Join5< T1, T2, T3, T4, T5 >", "classsensesp_1_1_join5.html", null ]
     ] ],
+    [ "sensesp::LEDBlinker", "classsensesp_1_1_l_e_d_blinker.html", null ],
+    [ "sensesp::LEDPattern", "classsensesp_1_1_l_e_d_pattern.html", null ],
+    [ "sensesp::LEDPatternFragment", "classsensesp_1_1_l_e_d_pattern_fragment.html", null ],
     [ "sensesp::LocalDebug", "classsensesp_1_1_local_debug.html", null ],
     [ "sensesp::MDNSDiscovery", "classsensesp_1_1_m_d_n_s_discovery.html", null ],
     [ "sensesp::NonceData", "structsensesp_1_1_nonce_data.html", null ],
@@ -369,7 +370,6 @@ var hierarchy =
       [ "sensesp::StatusPageItem< T >", "classsensesp_1_1_status_page_item.html", null ]
     ] ],
     [ "sensesp::SmartSwitchController::SyncPath", "classsensesp_1_1_smart_switch_controller_1_1_sync_path.html", null ],
-    [ "sensesp::SystemStatusLed", "classsensesp_1_1_system_status_led.html", null ],
     [ "sensesp::ValueConsumer< T >", "classsensesp_1_1_value_consumer.html", [
       [ "sensesp::Transform< T, T >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< T, Nullable< T > >", "classsensesp_1_1_transform.html", null ],
@@ -406,7 +406,6 @@ var hierarchy =
       [ "sensesp::LambdaConsumer< IN >", "classsensesp_1_1_lambda_consumer.html", null ]
     ] ],
     [ "sensesp::ValueConsumer< int >", "classsensesp_1_1_value_consumer.html", [
-      [ "sensesp::LambdaConsumer< int >", "classsensesp_1_1_lambda_consumer.html", null ],
       [ "sensesp::ObservableValue< int >", "classsensesp_1_1_observable_value.html", null ],
       [ "sensesp::Transform< int, float >", "classsensesp_1_1_transform.html", null ],
       [ "sensesp::Transform< int, int >", "classsensesp_1_1_transform.html", null ]

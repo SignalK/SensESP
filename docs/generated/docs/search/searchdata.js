@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   7: "acsw",
   8: "bdklsu",
   9: "corsw",
-  10: "dehlmprsw"
+  10: "bdhmprw"
 };
 
 var indexSectionNames =
