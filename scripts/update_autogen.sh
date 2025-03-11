@@ -14,7 +14,7 @@ fi
 
 # udpate the html and js source files
 
-pio run -e esp32dev -t frontend
+pio run -e pioarduino_esp32 -t frontend
 
 if ! git diff-index --quiet HEAD --; then
     git commit -am "Update the web UI source files for version ${VERSION}"
