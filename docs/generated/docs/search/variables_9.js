@@ -10,10 +10,9 @@ var searchData=
   ['kmaxnumclientconfigs_7',['kMaxNumClientConfigs',['../namespacesensesp.html#a5bfba1ec2874e5b5ff8b707d8808117c',1,'sensesp']]],
   ['kpi_8',['kPi',['../namespacesensesp.html#a5c69e57b991d292c8c1a410b31e28994',1,'sensesp']]],
   ['kpositioninvalidaltitude_9',['kPositionInvalidAltitude',['../namespacesensesp.html#aaaa007a16d5fc4ce1651bb0fc28f8be9',1,'sensesp']]],
-  ['ksensespversion_10',['kSensESPVersion',['../namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44',1,'sensesp']]],
-  ['kuioutputdefaultgroup_11',['kUIOutputDefaultGroup',['../namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0',1,'sensesp']]],
-  ['kuioutputdefaultorder_12',['kUIOutputDefaultOrder',['../namespacesensesp.html#a63c8d27e4a9b85afbd8d5ea02af7294f',1,'sensesp']]],
-  ['kvmax_5f_13',['kVmax_',['../classsensesp_1_1_e_s_p32_analog_reader.html#ab9470bd0050b9e62aeebbda007770325',1,'sensesp::ESP32AnalogReader']]],
-  ['kvref_5f_14',['kVref_',['../classsensesp_1_1_e_s_p32_analog_reader.html#a88dd75da01226891f3e772b4e36de18e',1,'sensesp::ESP32AnalogReader']]],
-  ['kwsclienttaskstacksize_15',['kWsClientTaskStackSize',['../namespacesensesp.html#a2e347f3a29783746e76e25cf2b38240d',1,'sensesp']]]
+  ['kpwmresolution_10',['kPWMResolution',['../namespacesensesp.html#ae0dd16d51413477022cf07e5baaff173',1,'sensesp']]],
+  ['ksensespversion_11',['kSensESPVersion',['../namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44',1,'sensesp']]],
+  ['kuioutputdefaultgroup_12',['kUIOutputDefaultGroup',['../namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0',1,'sensesp']]],
+  ['kuioutputdefaultorder_13',['kUIOutputDefaultOrder',['../namespacesensesp.html#a63c8d27e4a9b85afbd8d5ea02af7294f',1,'sensesp']]],
+  ['kwsclienttaskstacksize_14',['kWsClientTaskStackSize',['../namespacesensesp.html#a2e347f3a29783746e76e25cf2b38240d',1,'sensesp']]]
 ];

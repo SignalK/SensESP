@@ -56,7 +56,7 @@ var classsensesp_1_1_sens_e_s_p_app =
     [ "ssid_", "classsensesp_1_1_sens_e_s_p_app.html#a1c6b52097317eed09c5cc95c75b4cc58", null ],
     [ "system_hz_sensor_", "classsensesp_1_1_sens_e_s_p_app.html#afbc39bcf846537452d8c5cc2ee34f424", null ],
     [ "system_status_controller_", "classsensesp_1_1_sens_e_s_p_app.html#ae636be47b0a2a2f16e0795d7cedeee87", null ],
-    [ "system_status_led_", "classsensesp_1_1_sens_e_s_p_app.html#a0c9628a7bb78f0c6232cfe98d197c9ca", null ],
+    [ "system_status_led_", "classsensesp_1_1_sens_e_s_p_app.html#a8ae7e4b250d29c79c87390797aca5a43", null ],
     [ "ticks_per_second_ui_output_", "classsensesp_1_1_sens_e_s_p_app.html#a32e872771d02c12e15181961d5e12b3b", null ],
     [ "timed_event_count_ui_output_", "classsensesp_1_1_sens_e_s_p_app.html#a1992a8988b4183c64d59d69d7594ff16", null ],
     [ "timed_events_per_second_ui_output_", "classsensesp_1_1_sens_e_s_p_app.html#aa0db6a649829005ebbbce238ae9ffd5f", null ],

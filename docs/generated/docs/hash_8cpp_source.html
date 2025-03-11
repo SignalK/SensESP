@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -109,87 +109,95 @@ $(function(){initNavTree('hash_8cpp_source.html',''); initResizable(true); });
 <div class="contents">
 <a href="hash_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="hash_8h.html">hash.h</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;mbedtls/base64.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;mbedtls/md.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;mbedtls/md5.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;esp_arduino_version.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;mbedtls/base64.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;mbedtls/md.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;mbedtls/md5.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf">   17</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf">Sha1</a>(<span class="keyword">const</span> String&amp; payload_str, uint8_t *hash_output) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *payload = payload_str.c_str();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 20;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf">Sha1</a>(<span class="keyword">const</span> String&amp; payload_str, uint8_t *hash_output) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *payload = payload_str.c_str();</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  mbedtls_md_context_t ctx;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  mbedtls_md_type_t md_type = MBEDTLS_MD_SHA1;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> payload_length = payload_str.length();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 20;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  mbedtls_md_context_t ctx;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  mbedtls_md_type_t md_type = MBEDTLS_MD_SHA1;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  mbedtls_md_init(&amp;ctx);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  mbedtls_md_setup(&amp;ctx, mbedtls_md_info_from_type(md_type), 0);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  mbedtls_md_starts(&amp;ctx);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  mbedtls_md_update(&amp;ctx, <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *<span class="keyword">&gt;</span>(payload),</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                    payload_length);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  mbedtls_md_finish(&amp;ctx, hash_output);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  mbedtls_md_free(&amp;ctx);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> payload_length = payload_str.length();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  mbedtls_md_init(&amp;ctx);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  mbedtls_md_setup(&amp;ctx, mbedtls_md_info_from_type(md_type), 0);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  mbedtls_md_starts(&amp;ctx);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  mbedtls_md_update(&amp;ctx, <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *<span class="keyword">&gt;</span>(payload),</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                    payload_length);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  mbedtls_md_finish(&amp;ctx, hash_output);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  mbedtls_md_free(&amp;ctx);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
 </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a546906666b51e1b7285aab6a5c0f5bee">   43</a></span>String <a class="code hl_function" href="namespacesensesp.html#a546906666b51e1b7285aab6a5c0f5bee">MD5</a>(<span class="keyword">const</span> String&amp; payload_str) {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *payload = payload_str.c_str();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">char</span> output[33] = {0};</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> payload_length = payload_str.length();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a546906666b51e1b7285aab6a5c0f5bee">   45</a></span>String <a class="code hl_function" href="namespacesensesp.html#a546906666b51e1b7285aab6a5c0f5bee">MD5</a>(<span class="keyword">const</span> String&amp; payload_str) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">const</span> <span class="keywordtype">char</span> *payload = payload_str.c_str();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordtype">char</span> output[33] = {0};</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  mbedtls_md5_context ctx_;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  uint8_t i;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  uint8_t buf_[16] = {0};</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  mbedtls_md5_init(&amp;ctx_);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  mbedtls_md5_starts_ret(&amp;ctx_);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  mbedtls_md5_update_ret(&amp;ctx_, (<span class="keyword">const</span> uint8_t *)payload, payload_length);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  mbedtls_md5_finish_ret(&amp;ctx_, buf_);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  mbedtls_md5_free(&amp;ctx_);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">for</span> (i = 0; i &lt; 16; i++) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    sprintf(output + (i * 2), <span class="stringliteral">&quot;%02x&quot;</span>, buf_[i]);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordflow">return</span> String(output);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keyword">const</span> <span class="keywordtype">size_t</span> payload_length = payload_str.length();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  mbedtls_md5_context ctx_;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  uint8_t i;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  uint8_t buf_[16] = {0};</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  mbedtls_md5_init(&amp;ctx_);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#if ESP_ARDUINO_VERSION_MAJOR &gt; 2</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  mbedtls_md5_starts(&amp;ctx_);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  mbedtls_md5_update(&amp;ctx_, (<span class="keyword">const</span> uint8_t *)payload, payload_length);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  mbedtls_md5_finish(&amp;ctx_, buf_);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  mbedtls_md5_starts_ret(&amp;ctx_);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  mbedtls_md5_update_ret(&amp;ctx_, (<span class="keyword">const</span> uint8_t *)payload, payload_length);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  mbedtls_md5_finish_ret(&amp;ctx_, buf_);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  mbedtls_md5_free(&amp;ctx_);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">for</span> (i = 0; i &lt; 16; i++) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    sprintf(output + (i * 2), <span class="stringliteral">&quot;%02x&quot;</span>, buf_[i]);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">return</span> String(output);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="namespacesensesp.html#adad24461f43358c45017cf1cb816ca60">   72</a></span>String <a class="code hl_function" href="namespacesensesp.html#adad24461f43358c45017cf1cb816ca60">Base64Sha1</a>(<span class="keyword">const</span> String&amp; payload_str) {</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  uint8_t hash_output[20];</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  uint8_t encoded[32];</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordtype">size_t</span> output_length;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <a class="code hl_function" href="namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf">sensesp::Sha1</a>(payload_str, hash_output);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordtype">int</span> retval = mbedtls_base64_encode(encoded, <span class="keyword">sizeof</span>(encoded), &amp;output_length,</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                                     hash_output, 20);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  <span class="keywordflow">if</span> (retval != 0) {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Base64 encoding failed&quot;</span>);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="namespacesensesp.html#adad24461f43358c45017cf1cb816ca60">   80</a></span>String <a class="code hl_function" href="namespacesensesp.html#adad24461f43358c45017cf1cb816ca60">Base64Sha1</a>(<span class="keyword">const</span> String&amp; payload_str) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  uint8_t hash_output[20];</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  uint8_t encoded[32];</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keywordtype">size_t</span> output_length;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <a class="code hl_function" href="namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf">sensesp::Sha1</a>(payload_str, hash_output);</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  String encoded_str((<span class="keywordtype">char</span> *)encoded);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  encoded_str.replace(<span class="stringliteral">&quot;/&quot;</span>, <span class="stringliteral">&quot;_&quot;</span>);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordflow">return</span> encoded_str;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keywordtype">int</span> retval = mbedtls_base64_encode(encoded, <span class="keyword">sizeof</span>(encoded), &amp;output_length,</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                                     hash_output, 20);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordflow">if</span> (retval != 0) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Base64 encoding failed&quot;</span>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  String encoded_str((<span class="keywordtype">char</span> *)encoded);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  encoded_str.replace(<span class="stringliteral">&quot;/&quot;</span>, <span class="stringliteral">&quot;_&quot;</span>);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <span class="keywordflow">return</span> encoded_str;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
 </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}  <span class="comment">// namespace sensesp</span></div>
 <div class="ttc" id="ahash_8h_html"><div class="ttname"><a href="hash_8h.html">hash.h</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a37dfeb5f75b7115464a9aa40473d69cf"><div class="ttname"><a href="namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf">sensesp::Sha1</a></div><div class="ttdeci">void Sha1(const String &amp;payload_str, uint8_t *hash_output)</div><div class="ttdoc">SHA-1 hash function.</div><div class="ttdef"><b>Definition</b> <a href="#l00017">hash.cpp:17</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_a546906666b51e1b7285aab6a5c0f5bee"><div class="ttname"><a href="namespacesensesp.html#a546906666b51e1b7285aab6a5c0f5bee">sensesp::MD5</a></div><div class="ttdeci">String MD5(const String &amp;payload_str)</div><div class="ttdoc">MD5 hash function.</div><div class="ttdef"><b>Definition</b> <a href="#l00043">hash.cpp:43</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_adad24461f43358c45017cf1cb816ca60"><div class="ttname"><a href="namespacesensesp.html#adad24461f43358c45017cf1cb816ca60">sensesp::Base64Sha1</a></div><div class="ttdeci">String Base64Sha1(const String &amp;payload_str)</div><div class="ttdoc">A base64-encoded SHA-1 hash function.</div><div class="ttdef"><b>Definition</b> <a href="#l00072">hash.cpp:72</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a37dfeb5f75b7115464a9aa40473d69cf"><div class="ttname"><a href="namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf">sensesp::Sha1</a></div><div class="ttdeci">void Sha1(const String &amp;payload_str, uint8_t *hash_output)</div><div class="ttdoc">SHA-1 hash function.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">hash.cpp:19</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a546906666b51e1b7285aab6a5c0f5bee"><div class="ttname"><a href="namespacesensesp.html#a546906666b51e1b7285aab6a5c0f5bee">sensesp::MD5</a></div><div class="ttdeci">String MD5(const String &amp;payload_str)</div><div class="ttdoc">MD5 hash function.</div><div class="ttdef"><b>Definition</b> <a href="#l00045">hash.cpp:45</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_adad24461f43358c45017cf1cb816ca60"><div class="ttname"><a href="namespacesensesp.html#adad24461f43358c45017cf1cb816ca60">sensesp::Base64Sha1</a></div><div class="ttdeci">String Base64Sha1(const String &amp;payload_str)</div><div class="ttdoc">A base64-encoded SHA-1 hash function.</div><div class="ttdef"><b>Definition</b> <a href="#l00080">hash.cpp:80</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

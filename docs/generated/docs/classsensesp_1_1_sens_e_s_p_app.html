@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -231,11 +231,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aecabe0dc0fbaa956d9ac5d0d55adfa01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21feeaa1db836df649f467d51f5a3475" id="r_a21feeaa1db836df649f467d51f5a3475"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_h_t_t_p_server.html">HTTPServer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21feeaa1db836df649f467d51f5a3475">http_server_</a></td></tr>
 <tr class="separator:a21feeaa1db836df649f467d51f5a3475"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c9628a7bb78f0c6232cfe98d197c9ca" id="r_a0c9628a7bb78f0c6232cfe98d197c9ca"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_system_status_led.html">SystemStatusLed</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c9628a7bb78f0c6232cfe98d197c9ca">system_status_led_</a></td></tr>
-<tr class="separator:a0c9628a7bb78f0c6232cfe98d197c9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae7e4b250d29c79c87390797aca5a43" id="r_a8ae7e4b250d29c79c87390797aca5a43"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_base_system_status_led.html">BaseSystemStatusLed</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ae7e4b250d29c79c87390797aca5a43">system_status_led_</a></td></tr>
+<tr class="separator:a8ae7e4b250d29c79c87390797aca5a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae636be47b0a2a2f16e0795d7cedeee87" id="r_ae636be47b0a2a2f16e0795d7cedeee87"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_system_status_controller.html">SystemStatusController</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae636be47b0a2a2f16e0795d7cedeee87">system_status_controller_</a></td></tr>
 <tr class="separator:ae636be47b0a2a2f16e0795d7cedeee87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cff74d8d56db02a65171aec3f5133be" id="r_a3cff74d8d56db02a65171aec3f5133be"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cff74d8d56db02a65171aec3f5133be">button_gpio_pin_</a> = <a class="el" href="sensesp__base__app_8h.html#a7e32d5469101c0b619eb2f2cf2e69101">SENSESP_BUTTON_PIN</a></td></tr>
+<tr class="memitem:a3cff74d8d56db02a65171aec3f5133be" id="r_a3cff74d8d56db02a65171aec3f5133be"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cff74d8d56db02a65171aec3f5133be">button_gpio_pin_</a> = <a class="el" href="sensesp__base__app_8h.html#ad51635f455b0cddafc1810287d28d9fa">BUTTON_BUILTIN</a></td></tr>
 <tr class="separator:a3cff74d8d56db02a65171aec3f5133be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebbfa0fee12538004f4dd269b9e22619" id="r_aebbfa0fee12538004f4dd269b9e22619"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classsensesp_1_1_button_handler.html">ButtonHandler</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebbfa0fee12538004f4dd269b9e22619">button_handler_</a></td></tr>
 <tr class="separator:aebbfa0fee12538004f4dd269b9e22619"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -331,7 +331,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The default SensESP application object with networking and Signal K communication. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classsensesp_1_1_sens_e_s_p_app_builder.html" title="A class for quickly configuring a SensESP application object before wiring up your sensors.">SensESPAppBuilder</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00042">42</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00034">34</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af09fcf893a98d7502b81080885f658b2" name="af09fcf893a98d7502b81080885f658b2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af09fcf893a98d7502b81080885f658b2">&#9670;&#160;</a></span>SensESPApp() <span class="overload">[1/2]</span></h2>
@@ -385,11 +385,11 @@ Additional Inherited Members</h2></td></tr>
 <p><a class="el" href="classsensesp_1_1_sens_e_s_p_app.html">SensESPApp</a> constructor. </p>
 <p>Note that the constructor is protected, so <a class="el" href="classsensesp_1_1_sens_e_s_p_app.html">SensESPApp</a> should only be instantiated using <a class="el" href="classsensesp_1_1_sens_e_s_p_app_builder.html" title="A class for quickly configuring a SensESP application object before wiring up your sensors.">SensESPAppBuilder</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00094">94</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00086">86</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_app_a05ebb118abaf137b414a8736fb1fc3ba_icgraph.svg" width="100%" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_app_a05ebb118abaf137b414a8736fb1fc3ba_icgraph.svg" width="100%" height="437"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -418,7 +418,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00223">223</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00221">221</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -459,7 +459,7 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html#ab7938601a4a4b4b00f20a471355574ba">sensesp::SensESPBaseApp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00064">64</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00056">56</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -486,7 +486,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00135">135</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00127">127</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -515,7 +515,7 @@ Here is the caller graph for this function:</div>
 
 <p>Get the singleton instance of the <a class="el" href="classsensesp_1_1_sens_e_s_p_app.html">SensESPApp</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00057">57</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00049">49</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -524,7 +524,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_app_a05d22a1dee1fbe4c4c4373de61d02090_icgraph.svg" width="100%" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classsensesp_1_1_sens_e_s_p_app_a05d22a1dee1fbe4c4c4373de61d02090_icgraph.svg" width="100%" height="437"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -552,7 +552,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00083">83</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00075">75</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -579,7 +579,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00079">79</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00071">71</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -606,7 +606,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00080">80</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00072">72</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -633,7 +633,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00084">84</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00076">76</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -690,7 +690,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00131">131</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00123">123</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -717,7 +717,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00114">114</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00106">106</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -744,7 +744,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00110">110</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00102">102</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -771,7 +771,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00139">139</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00131">131</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -798,7 +798,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00098">98</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00090">90</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -830,7 +830,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00118">118</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00110">110</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -857,7 +857,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00122">122</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00114">114</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -884,7 +884,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00102">102</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00094">94</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -911,7 +911,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00126">126</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00118">118</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -938,7 +938,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00106">106</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00098">98</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -970,7 +970,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="classsensesp_1_1_sens_e_s_p_base_app.html#a7698b0bb9d6bc33d13f9dea256e98bc3">sensesp::SensESPBaseApp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00151">151</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00143">143</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1000,7 +1000,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00383">383</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00382">382</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1024,7 +1024,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00382">382</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00381">381</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1049,7 +1049,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00303">303</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00302">302</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1073,7 +1073,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00302">302</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00301">301</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1099,7 +1099,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Build date&quot;</span>, __DATE__ <span class="stringliteral">&quot; &quot;</span> __TIME__, <span class="stringliteral">&quot;Software&quot;</span>, 3400}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00372">372</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00371">371</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1113,7 +1113,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int sensesp::SensESPApp::button_gpio_pin_ = <a class="el" href="sensesp__base__app_8h.html#a7e32d5469101c0b619eb2f2cf2e69101">SENSESP_BUTTON_PIN</a></td>
+          <td class="memname">int sensesp::SensESPApp::button_gpio_pin_ = <a class="el" href="sensesp__base__app_8h.html#ad51635f455b0cddafc1810287d28d9fa">BUTTON_BUILTIN</a></td>
         </tr>
       </table>
   </td>
@@ -1123,7 +1123,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00312">312</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00311">311</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1147,7 +1147,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00313">313</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00312">312</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1173,7 +1173,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{<span class="stringliteral">&quot;SK Delta RX count&quot;</span>, 0,</div>
 <div class="line">                                                <span class="stringliteral">&quot;Signal K&quot;</span>, 2000}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00341">341</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00340">340</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1199,7 +1199,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{<span class="stringliteral">&quot;SK Delta TX count&quot;</span>, 0,</div>
 <div class="line">                                                <span class="stringliteral">&quot;Signal K&quot;</span>, 1900}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00339">339</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00338">338</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1225,7 +1225,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{<span class="stringliteral">&quot;Events processed&quot;</span>, 0,</div>
 <div class="line">                                                  <span class="stringliteral">&quot;Event Loop Lifetime&quot;</span>, 2600}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00355">355</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00354">354</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1251,7 +1251,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Event Loop interrupt queue size&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Queues&quot;</span>, 2400}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00350">350</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00349">349</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1277,7 +1277,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Event Loop queue size&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Queues&quot;</span>, 2100}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00344">344</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00343">343</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1303,7 +1303,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Event Loop timed queue size&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Queues&quot;</span>, 2200}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00346">346</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00345">345</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1329,7 +1329,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Event Loop untimed queue size&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Queues&quot;</span>, 2300}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00348">348</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00347">347</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1355,7 +1355,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Events per second&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Performance&quot;</span>, 3000}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00363">363</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00362">362</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1379,7 +1379,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00377">377</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00376">376</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1405,7 +1405,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{<span class="stringliteral">&quot;Free memory (bytes)&quot;</span>, 0, <span class="stringliteral">&quot;System&quot;</span>,</div>
 <div class="line">                                             1000}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00321">321</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00320">320</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1429,7 +1429,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00325">325</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00324">324</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1453,7 +1453,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00307">307</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00306">306</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1477,7 +1477,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00379">379</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00378">378</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1503,7 +1503,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;MAC Address&quot;</span>, WiFi.macAddress(), <span class="stringliteral">&quot;Network&quot;</span>, 1300}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00326">326</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00325">325</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1527,7 +1527,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00306">306</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00305">305</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1551,7 +1551,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00315">315</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00314">314</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1575,7 +1575,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00317">317</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00316">316</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1599,7 +1599,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00304">304</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00303">303</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1626,7 +1626,7 @@ Here is the call graph for this function:</div>
 <div class="line">      <span class="stringliteral">&quot;SenseESP version&quot;</span>, <a class="code hl_variable" href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a>, <span class="stringliteral">&quot;Software&quot;</span>, 3300}</div>
 <div class="ttc" id="anamespacesensesp_html_a415d47efb7e756b1be52067ac1792c44"><div class="ttname"><a href="namespacesensesp.html#a415d47efb7e756b1be52067ac1792c44">sensesp::kSensESPVersion</a></div><div class="ttdeci">const char *const kSensESPVersion</div><div class="ttdef"><b>Definition</b> <a href="sensesp__version_8h_source.html#l00006">sensesp_version.h:6</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00370">370</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00369">369</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1650,7 +1650,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00318">318</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00317">317</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1674,7 +1674,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00300">300</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00299">299</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1700,7 +1700,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{<span class="stringliteral">&quot;Signal K server address&quot;</span>,</div>
 <div class="line">                                                      <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Signal K&quot;</span>, 1600}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00333">333</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00332">332</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1726,7 +1726,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{<span class="stringliteral">&quot;SK connection status&quot;</span>,</div>
 <div class="line">                                                         <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Signal K&quot;</span>, 1800}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00337">337</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00336">336</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1750,7 +1750,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00301">301</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00300">300</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1776,7 +1776,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{<span class="stringliteral">&quot;Signal K server port&quot;</span>, 0,</div>
 <div class="line">                                                     <span class="stringliteral">&quot;Signal K&quot;</span>, 1700}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00335">335</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00334">334</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1800,7 +1800,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00298">298</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00297">297</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1824,7 +1824,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00376">376</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00375">375</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1850,12 +1850,12 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">      std::make_shared&lt;SystemStatusController&gt;()</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00310">310</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00309">309</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
-<a id="a0c9628a7bb78f0c6232cfe98d197c9ca" name="a0c9628a7bb78f0c6232cfe98d197c9ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c9628a7bb78f0c6232cfe98d197c9ca">&#9670;&#160;</a></span>system_status_led_</h2>
+<a id="a8ae7e4b250d29c79c87390797aca5a43" name="a8ae7e4b250d29c79c87390797aca5a43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ae7e4b250d29c79c87390797aca5a43">&#9670;&#160;</a></span>system_status_led_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1864,7 +1864,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classsensesp_1_1_system_status_led.html">SystemStatusLed</a>&gt; sensesp::SensESPApp::system_status_led_</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classsensesp_1_1_base_system_status_led.html">BaseSystemStatusLed</a>&gt; sensesp::SensESPApp::system_status_led_</td>
         </tr>
       </table>
   </td>
@@ -1874,7 +1874,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00309">309</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00308">308</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1900,7 +1900,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Ticks per second&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Performance&quot;</span>, 2900}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00361">361</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00360">360</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1926,7 +1926,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Timed events processed&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Lifetime&quot;</span>, 2700}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00357">357</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00356">356</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1952,7 +1952,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Timed events per second&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Performance&quot;</span>, 3100}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00365">365</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00364">364</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -1978,7 +1978,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Total ticks processed&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Lifetime&quot;</span>, 2500}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00353">353</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00352">352</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2004,7 +2004,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Untimed events processed&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Lifetime&quot;</span>, 2800}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00359">359</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00358">358</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2030,7 +2030,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">      <span class="stringliteral">&quot;Untimed events per second&quot;</span>, 0, <span class="stringliteral">&quot;Event Loop Performance&quot;</span>, 3200}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00367">367</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00366">366</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2054,7 +2054,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00378">378</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00377">377</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2078,7 +2078,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00323">323</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00322">322</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2102,7 +2102,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00299">299</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00298">298</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2128,7 +2128,7 @@ Here is the call graph for this function:</div>
 <b>Initial value:</b><div class="fragment"><div class="line">{<span class="stringliteral">&quot;WiFi signal strength (dB)&quot;</span>, -128,</div>
 <div class="line">                                              <span class="stringliteral">&quot;Network&quot;</span>, 1500}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00330">330</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00329">329</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2152,7 +2152,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00380">380</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00379">379</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2176,7 +2176,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00328">328</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00327">327</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>
@@ -2200,7 +2200,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00319">319</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sensesp__app_8h_source.html#l00318">318</a> of file <a class="el" href="sensesp__app_8h_source.html">sensesp_app.h</a>.</p>
 
 </div>
 </div>

@@ -1,12 +1,12 @@
 var searchData=
 [
   ['callback_0',['callback',['../classsensesp_1_1_s_k_request_1_1_pending_request.html#abdccec2bc503a192d01e0bb69b12cc3a',1,'sensesp::SKRequest::PendingRequest']]],
-  ['captive_5fportal_5f_1',['captive_portal_',['../classsensesp_1_1_h_t_t_p_server.html#a1f01d2ae8eee357360a738114e4e9cf8',1,'sensesp::HTTPServer']]],
-  ['captive_5fportal_5fenabled_5f_2',['captive_portal_enabled_',['../classsensesp_1_1_access_point_settings.html#a88cccfe09c8125c863edf29be6087954',1,'sensesp::AccessPointSettings']]],
-  ['channel_5f_3',['channel_',['../classsensesp_1_1_access_point_settings.html#ae1c10c5470025ee746c29abff04910e2',1,'sensesp::AccessPointSettings::channel_'],['../classsensesp_1_1_wi_fi_network_info.html#a70f98c3a6e5f9c8b18ebd20e73a79db3',1,'sensesp::WiFiNetworkInfo::channel_']]],
-  ['channel_5ffrequency_5f_4',['channel_frequency_',['../classsensesp_1_1_p_w_m_output.html#a8636edb0007f0e9db6f3e15c4ea31e3c',1,'sensesp::PWMOutput']]],
-  ['channel_5fresolution_5f_5',['channel_resolution_',['../classsensesp_1_1_p_w_m_output.html#ad9e84688c14872834bd9db2f9bcc6a81',1,'sensesp::PWMOutput']]],
-  ['channel_5fto_5fpin_5f_6',['channel_to_pin_',['../classsensesp_1_1_p_w_m_output.html#a5b7a89f286d17e113a4a26d633b8084a',1,'sensesp::PWMOutput']]],
+  ['callback_5f_1',['callback_',['../classsensesp_1_1_l_e_d_pattern_fragment.html#a5161ca008f4cae917b9de819460fdee7',1,'sensesp::LEDPatternFragment']]],
+  ['captive_5fportal_5f_2',['captive_portal_',['../classsensesp_1_1_h_t_t_p_server.html#a1f01d2ae8eee357360a738114e4e9cf8',1,'sensesp::HTTPServer']]],
+  ['captive_5fportal_5fenabled_5f_3',['captive_portal_enabled_',['../classsensesp_1_1_access_point_settings.html#a88cccfe09c8125c863edf29be6087954',1,'sensesp::AccessPointSettings']]],
+  ['channel_5f_4',['channel_',['../classsensesp_1_1_access_point_settings.html#ae1c10c5470025ee746c29abff04910e2',1,'sensesp::AccessPointSettings::channel_'],['../classsensesp_1_1_wi_fi_network_info.html#a70f98c3a6e5f9c8b18ebd20e73a79db3',1,'sensesp::WiFiNetworkInfo::channel_']]],
+  ['channel_5ffrequency_5f_5',['channel_frequency_',['../classsensesp_1_1_p_w_m_output.html#a8636edb0007f0e9db6f3e15c4ea31e3c',1,'sensesp::PWMOutput']]],
+  ['channel_5fresolution_5f_6',['channel_resolution_',['../classsensesp_1_1_p_w_m_output.html#ad9e84688c14872834bd9db2f9bcc6a81',1,'sensesp::PWMOutput']]],
   ['click_5fconsumer_5f_7',['click_consumer_',['../classsensesp_1_1_smart_switch_controller.html#a2d4c270f17c1fe4fa99e82230369527d',1,'sensesp::SmartSwitchController']]],
   ['click_5fcount_5f_8',['click_count_',['../classsensesp_1_1_click_type.html#ad9db305b879da331594e95a7c0911bd4',1,'sensesp::ClickType']]],
   ['client_5f_9',['client_',['../classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42',1,'sensesp::SKWSClient']]],
@@ -29,5 +29,7 @@ var searchData=
   ['content_5flength_26',['content_length',['../structsensesp_1_1_static_file_data.html#ad65b3df71eb7deeffdaeada563396cef',1,'sensesp::StaticFileData']]],
   ['content_5ftype_27',['content_type',['../structsensesp_1_1_static_file_data.html#a3b1caf2c64b953dbe933b65d22864264',1,'sensesp::StaticFileData']]],
   ['count_28',['count',['../structsensesp_1_1_nonce_data.html#a0c38faa9444a8f1619e6e2a8f827af62',1,'sensesp::NonceData']]],
-  ['counter_5f_29',['counter_',['../classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07',1,'sensesp::DigitalInputCounter']]]
+  ['counter_5f_29',['counter_',['../classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07',1,'sensesp::DigitalInputCounter']]],
+  ['crgb_5f_30',['crgb_',['../classsensesp_1_1_l_e_d_blinker.html#affac86393b4b64c79e1597766456a07e',1,'sensesp::LEDBlinker']]],
+  ['current_5ffragment_5fidx_5f_31',['current_fragment_idx_',['../classsensesp_1_1_l_e_d_pattern.html#a8d7e99fe1a5bc827bebfa6eca9f5b7ff',1,'sensesp::LEDPattern']]]
 ];

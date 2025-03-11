@@ -17,7 +17,6 @@ var dir_c7390c05c87f2404a3d820add6901ffa =
     [ "minimal_button.h", "minimal__button_8h.html", "minimal__button_8h" ],
     [ "observable.h", "observable_8h.html", "observable_8h" ],
     [ "observablevalue.h", "observablevalue_8h.html", "observablevalue_8h" ],
-    [ "pwm_output.cpp", "pwm__output_8cpp.html", null ],
     [ "pwm_output.h", "pwm__output_8h.html", "pwm__output_8h" ],
     [ "resettable.cpp", "resettable_8cpp.html", null ],
     [ "resettable.h", "resettable_8h.html", "resettable_8h" ],

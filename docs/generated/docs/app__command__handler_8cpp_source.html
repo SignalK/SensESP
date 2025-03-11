@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -117,10 +117,10 @@ $(function(){initNavTree('app__command__handler_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesensesp.html">sensesp</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespacesensesp.html#af71bdd7f16e2d227fe501fd50824018b">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacesensesp.html#af71bdd7f16e2d227fe501fd50824018b">add_scan_wifi_networks_handlers</a>(std::shared_ptr&lt;HTTPServer&gt;&amp; server) {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>  <span class="keyword">auto</span> scan_wifi_networks_handler = std::make_shared&lt;HTTPRequestHandler&gt;(</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>      1 &lt;&lt; HTTP_POST, <span class="stringliteral">&quot;/api/wifi/scan&quot;</span>, [](httpd_req_t* req) {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        <span class="keyword">auto</span> networking = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_app.html#a05d22a1dee1fbe4c4c4373de61d02090">SensESPApp::get</a>()-&gt;get_networking();</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespacesensesp.html#a8d3c47584902a71a91e3fa0628109a0b">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacesensesp.html#a8d3c47584902a71a91e3fa0628109a0b">add_scan_wifi_networks_handlers</a>(std::shared_ptr&lt;HTTPServer&gt;&amp; server,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>                                     std::shared_ptr&lt;Networking&gt;&amp; networking) {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="keyword">auto</span> scan_wifi_networks_handler = std::make_shared&lt;HTTPRequestHandler&gt;(</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>      1 &lt;&lt; HTTP_POST, <span class="stringliteral">&quot;/api/wifi/scan&quot;</span>, [networking](httpd_req_t* req) {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        networking-&gt;start_wifi_scan();</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="comment">// Return status code 202 and &quot;SCAN STARTED&quot; message</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        httpd_resp_set_status(req, <span class="stringliteral">&quot;202 Accepted&quot;</span>);</div>
@@ -131,51 +131,50 @@ $(function(){initNavTree('app__command__handler_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  server-&gt;add_handler(scan_wifi_networks_handler);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keyword">auto</span> scan_results_handler = std::make_shared&lt;HTTPRequestHandler&gt;(</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>      1 &lt;&lt; HTTP_GET, <span class="stringliteral">&quot;/api/wifi/scan-results&quot;</span>, [](httpd_req_t* req) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">auto</span> networking = <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_app.html#a05d22a1dee1fbe4c4c4373de61d02090">SensESPApp::get</a>()-&gt;get_networking();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        std::vector&lt;WiFiNetworkInfo&gt; ssid_list;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        int16_t result = networking-&gt;get_wifi_scan_results(ssid_list);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">if</span> (result == WIFI_SCAN_RUNNING) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>          <span class="comment">// Return status code 202 and &quot;SCAN RUNNING&quot; message</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>          httpd_resp_set_status(req, <span class="stringliteral">&quot;202 Accepted&quot;</span>);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>          httpd_resp_send(req, <span class="stringliteral">&quot;SCAN RUNNING&quot;</span>, 0);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>          <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (result == WIFI_SCAN_FAILED) {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>          <span class="comment">// Return status code 400 and &quot;SCAN FAILED&quot; message</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>          httpd_resp_set_status(req, <span class="stringliteral">&quot;400 Bad Request&quot;</span>);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>          httpd_resp_send(req, <span class="stringliteral">&quot;SCAN FAILED&quot;</span>, 0);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>          <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="comment">// Construct a JSON array of the scan results</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        JsonDocument doc;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        JsonArray networks = doc[<span class="stringliteral">&quot;networks&quot;</span>].to&lt;JsonArray&gt;();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; ssid_info : ssid_list) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>          JsonObject network = networks.add&lt;JsonObject&gt;();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>          ssid_info.as_json(network);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        String json_str;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        serializeJson(doc, json_str);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        httpd_resp_set_type(req, <span class="stringliteral">&quot;application/json&quot;</span>);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        httpd_resp_send(req, json_str.c_str(), json_str.length());</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span> ESP_OK;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      });</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  server-&gt;add_handler(scan_results_handler);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>      1 &lt;&lt; HTTP_GET, <span class="stringliteral">&quot;/api/wifi/scan-results&quot;</span>, [networking](httpd_req_t* req) {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        std::vector&lt;WiFiNetworkInfo&gt; ssid_list;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        int16_t result = networking-&gt;get_wifi_scan_results(ssid_list);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">if</span> (result == WIFI_SCAN_RUNNING) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>          <span class="comment">// Return status code 202 and &quot;SCAN RUNNING&quot; message</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>          httpd_resp_set_status(req, <span class="stringliteral">&quot;202 Accepted&quot;</span>);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>          httpd_resp_send(req, <span class="stringliteral">&quot;SCAN RUNNING&quot;</span>, 0);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>          <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (result == WIFI_SCAN_FAILED) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>          <span class="comment">// Return status code 400 and &quot;SCAN FAILED&quot; message</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>          httpd_resp_set_status(req, <span class="stringliteral">&quot;400 Bad Request&quot;</span>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>          httpd_resp_send(req, <span class="stringliteral">&quot;SCAN FAILED&quot;</span>, 0);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>          <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="comment">// Construct a JSON array of the scan results</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        JsonDocument doc;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        JsonArray networks = doc[<span class="stringliteral">&quot;networks&quot;</span>].to&lt;JsonArray&gt;();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; ssid_info : ssid_list) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>          JsonObject network = networks.add&lt;JsonObject&gt;();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>          ssid_info.as_json(network);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        String json_str;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        serializeJson(doc, json_str);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        httpd_resp_set_type(req, <span class="stringliteral">&quot;application/json&quot;</span>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        httpd_resp_send(req, json_str.c_str(), json_str.length());</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">return</span> ESP_OK;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      });</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  server-&gt;add_handler(scan_results_handler);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
 </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="namespacesensesp.html#ab245c2d40c4d86a216199d80b63b4e4c">   56</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacesensesp.html#ab245c2d40c4d86a216199d80b63b4e4c">add_app_http_command_handlers</a>(std::shared_ptr&lt;HTTPServer&gt;&amp; server) {</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <a class="code hl_function" href="namespacesensesp.html#af71bdd7f16e2d227fe501fd50824018b">add_scan_wifi_networks_handlers</a>(server);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="namespacesensesp.html#ac387403afe0d503cd6ccb545fa05a685">   55</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacesensesp.html#ac387403afe0d503cd6ccb545fa05a685">add_app_http_command_handlers</a>(std::shared_ptr&lt;HTTPServer&gt;&amp; server,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                                   std::shared_ptr&lt;Networking&gt;&amp; networking) {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <a class="code hl_function" href="namespacesensesp.html#a8d3c47584902a71a91e3fa0628109a0b">add_scan_wifi_networks_handlers</a>(server, networking);</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
 </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}  <span class="comment">// namespace sensesp</span></div>
 <div class="ttc" id="aapp__command__handler_8h_html"><div class="ttname"><a href="app__command__handler_8h.html">app_command_handler.h</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_app_html_a05d22a1dee1fbe4c4c4373de61d02090"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_app.html#a05d22a1dee1fbe4c4c4373de61d02090">sensesp::SensESPApp::get</a></div><div class="ttdeci">static std::shared_ptr&lt; SensESPApp &gt; get()</div><div class="ttdoc">Get the singleton instance of the SensESPApp.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__app_8h_source.html#l00057">sensesp_app.h:57</a></div></div>
 <div class="ttc" id="anamespacesensesp_html"><div class="ttname"><a href="namespacesensesp.html">sensesp</a></div><div class="ttdef"><b>Definition</b> <a href="sensesp_8cpp_source.html#l00007">sensesp.cpp:7</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_ab245c2d40c4d86a216199d80b63b4e4c"><div class="ttname"><a href="namespacesensesp.html#ab245c2d40c4d86a216199d80b63b4e4c">sensesp::add_app_http_command_handlers</a></div><div class="ttdeci">void add_app_http_command_handlers(std::shared_ptr&lt; HTTPServer &gt; &amp;server)</div><div class="ttdef"><b>Definition</b> <a href="#l00056">app_command_handler.cpp:56</a></div></div>
-<div class="ttc" id="anamespacesensesp_html_af71bdd7f16e2d227fe501fd50824018b"><div class="ttname"><a href="namespacesensesp.html#af71bdd7f16e2d227fe501fd50824018b">sensesp::add_scan_wifi_networks_handlers</a></div><div class="ttdeci">void add_scan_wifi_networks_handlers(std::shared_ptr&lt; HTTPServer &gt; &amp;server)</div><div class="ttdef"><b>Definition</b> <a href="#l00010">app_command_handler.cpp:10</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_a8d3c47584902a71a91e3fa0628109a0b"><div class="ttname"><a href="namespacesensesp.html#a8d3c47584902a71a91e3fa0628109a0b">sensesp::add_scan_wifi_networks_handlers</a></div><div class="ttdeci">void add_scan_wifi_networks_handlers(std::shared_ptr&lt; HTTPServer &gt; &amp;server, std::shared_ptr&lt; Networking &gt; &amp;networking)</div><div class="ttdef"><b>Definition</b> <a href="#l00010">app_command_handler.cpp:10</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_ac387403afe0d503cd6ccb545fa05a685"><div class="ttname"><a href="namespacesensesp.html#ac387403afe0d503cd6ccb545fa05a685">sensesp::add_app_http_command_handlers</a></div><div class="ttdeci">void add_app_http_command_handlers(std::shared_ptr&lt; HTTPServer &gt; &amp;server, std::shared_ptr&lt; Networking &gt; &amp;networking)</div><div class="ttdef"><b>Definition</b> <a href="#l00055">app_command_handler.cpp:55</a></div></div>
 <div class="ttc" id="asensesp__app_8h_html"><div class="ttname"><a href="sensesp__app_8h.html">sensesp_app.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -3,7 +3,7 @@ var searchData=
   ['mac_5faddress_5fui_5foutput_5f_0',['mac_address_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a7a0b2c73b5ceffa8ac9f85fd2c83c057',1,'sensesp::SensESPApp']]],
   ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
   ['match_5furi_5f_2',['match_uri_',['../classsensesp_1_1_h_t_t_p_request_handler.html#aaa23b9d7cf373845de477c017c252c9c',1,'sensesp::HTTPRequestHandler']]],
-  ['max_3',['max',['../led__blinker_8cpp.html#affe776513b24d84b39af8ab0930fef7f',1,'led_blinker.cpp']]],
+  ['max_3',['max',['../led__blinker_8h.html#affe776513b24d84b39af8ab0930fef7f',1,'led_blinker.h']]],
   ['max_5fage_5f_4',['max_age_',['../classsensesp_1_1_join_base.html#a86b39ca07d5ff1bf00d033859d67925b',1,'sensesp::JoinBase::max_age_'],['../classsensesp_1_1_repeat_stopping.html#ac73d961d670c1d0f2717c8b78d6a871b',1,'sensesp::RepeatStopping::max_age_'],['../classsensesp_1_1_repeat_expiring.html#adfe33337c8bfe972bc2e37a855d22c6b',1,'sensesp::RepeatExpiring::max_age_'],['../classsensesp_1_1_zip_base.html#a3aa332ca30f1ccff4054135d4d406ec5',1,'sensesp::ZipBase::max_age_']]],
   ['max_5fanalog_5foutput_5',['MAX_ANALOG_OUTPUT',['../analogvoltage_8h.html#acd21751cadfe75b41534fa2d356d29a3',1,'analogvoltage.h']]],
   ['max_5fdelta_5f_6',['max_delta_',['../classsensesp_1_1_change_filter.html#a3b880754ff548c1ce87aa354a64b656b',1,'sensesp::ChangeFilter']]],
@@ -25,8 +25,10 @@ var searchData=
   ['min_5fvalue_5f_22',['min_value_',['../classsensesp_1_1_threshold_transform.html#a5be2519c3e2efde176cc343f55c92802',1,'sensesp::ThresholdTransform']]],
   ['minimal_5fbutton_2eh_23',['minimal_button.h',['../minimal__button_8h.html',1,'']]],
   ['minimalbuttonhandler_24',['MinimalButtonHandler',['../classsensesp_1_1_minimal_button_handler.html',1,'sensesp::MinimalButtonHandler'],['../classsensesp_1_1_minimal_button_handler.html#add4ac269f861816445ba359743c09959',1,'sensesp::MinimalButtonHandler::MinimalButtonHandler()']]],
-  ['moving_5faverage_2ecpp_25',['moving_average.cpp',['../moving__average_8cpp.html',1,'']]],
-  ['moving_5faverage_2eh_26',['moving_average.h',['../moving__average_8h.html',1,'']]],
-  ['movingaverage_27',['MovingAverage',['../classsensesp_1_1_moving_average.html',1,'sensesp::MovingAverage'],['../classsensesp_1_1_moving_average.html#a93fb5bbf3076efcf486a36fb197efffb',1,'sensesp::MovingAverage::MovingAverage()']]],
-  ['must_5fconfirm_5f_28',['must_confirm_',['../classsensesp_1_1_u_i_button.html#ad8efc0f1c72eb3be2dabf29de8bae427',1,'sensesp::UIButton']]]
+  ['modifiers_5f_25',['modifiers_',['../classsensesp_1_1_l_e_d_blinker.html#abbd667ac6703337b4e876475c95ce585',1,'sensesp::LEDBlinker']]],
+  ['moving_5faverage_2ecpp_26',['moving_average.cpp',['../moving__average_8cpp.html',1,'']]],
+  ['moving_5faverage_2eh_27',['moving_average.h',['../moving__average_8h.html',1,'']]],
+  ['movingaverage_28',['MovingAverage',['../classsensesp_1_1_moving_average.html',1,'sensesp::MovingAverage'],['../classsensesp_1_1_moving_average.html#a93fb5bbf3076efcf486a36fb197efffb',1,'sensesp::MovingAverage::MovingAverage()']]],
+  ['ms_5fmin_5fdelay_5f_29',['ms_min_delay_',['../classsensesp_1_1_debounce.html#aec60fbe6fb2c7b220b499f8e48fb556b',1,'sensesp::Debounce']]],
+  ['must_5fconfirm_5f_30',['must_confirm_',['../classsensesp_1_1_u_i_button.html#ad8efc0f1c72eb3be2dabf29de8bae427',1,'sensesp::UIButton']]]
 ];

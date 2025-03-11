@@ -34,7 +34,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.0.1</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.1.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -106,14 +106,19 @@ $(function(){initNavTree('system__status__led_8h.html',''); initResizable(true);
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">system_status_led.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="lambda__consumer_8h_source.html">lambda_consumer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="led__blinker_8h_source.html">led_blinker.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="system__status__controller_8h_source.html">sensesp/controllers/system_status_controller.h</a>&quot;</code><br />
+<code>#include &quot;esp_arduino_version.h&quot;</code><br />
+<code>#include &quot;esp_idf_version.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="pwm__output_8h_source.html">pwm_output.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for system_status_led.h:</div>
 <div class="dyncontent">
@@ -129,15 +134,42 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_base_system_status_led.html">sensesp::BaseSystemStatusLed</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consumes the networking and websocket states and delta counts and updates the device LED accordingly.  <a href="classsensesp_1_1_base_system_status_led.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_system_status_led.html">sensesp::SystemStatusLed</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consumes the networking and websocket states and delta counts and updates the device LED accordingly. Inherit this class and override the methods to customize the behavior.  <a href="classsensesp_1_1_system_status_led.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monochromatic system status LED.  <a href="classsensesp_1_1_system_status_led.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsensesp_1_1_r_g_b_system_status_led.html">sensesp::RGBSystemStatusLed</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesensesp.html">sensesp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a3ae25d6764e3b017f72cd8c8cf7bb3f4" id="r_a3ae25d6764e3b017f72cd8c8cf7bb3f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ae25d6764e3b017f72cd8c8cf7bb3f4">rgbLedWrite</a>&#160;&#160;&#160;neopixelWrite</td></tr>
+<tr class="separator:a3ae25d6764e3b017f72cd8c8cf7bb3f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a3ae25d6764e3b017f72cd8c8cf7bb3f4" name="a3ae25d6764e3b017f72cd8c8cf7bb3f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ae25d6764e3b017f72cd8c8cf7bb3f4">&#9670;&#160;</a></span>rgbLedWrite</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rgbLedWrite&#160;&#160;&#160;neopixelWrite</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="system__status__led_8h_source.html#l00017">17</a> of file <a class="el" href="system__status__led_8h_source.html">system_status_led.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
