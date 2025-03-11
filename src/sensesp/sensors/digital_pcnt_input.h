@@ -6,7 +6,9 @@
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/sensors/sensor.h"
 #include "sensesp_base_app.h"
-
+#if ESP_ARDUINO_VERSION_MAJOR < 3
+#error "The Pulse Counter API is only available in ESP32 Arduino Core 3.0.0 and later"
+#endif
 #include "driver/pulse_cnt.h"
 
 namespace sensesp {
@@ -38,7 +40,7 @@ class DigitalInputPcntCounter : public DigitalInput, public Sensor<int> {
 
   ~DigitalInputPcntCounter();
 
-  
+
 
   virtual bool to_json(JsonObject& root) override;
   virtual bool from_json(const JsonObject& config) override;
