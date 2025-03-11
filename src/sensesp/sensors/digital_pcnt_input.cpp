@@ -1,5 +1,10 @@
 #include "digital_pcnt_input.h"
 
+#if ESP_ARDUINO_VERSION_MAJOR < 3
+#warning "The Pulse Counter API is only available in ESP32 Arduino Core 3.0.0 and later"
+#else
+#include "driver/pulse_cnt.h"
+
 namespace sensesp {
 
 DigitalInputPcntCounter::DigitalInputPcntCounter(uint8_t pin, int pin_mode,
@@ -94,3 +99,5 @@ const String ConfigSchema(const DigitalInputPcntCounter& obj) {
 bool ConfigRequiresRestart(const DigitalInputPcntCounter& obj) { return true; }
 
 }  // namespace sensesp
+
+#endif  // ESP_ARDUINO_VERSION_MAJOR < 3

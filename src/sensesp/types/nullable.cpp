@@ -27,8 +27,10 @@ template <>
 uint32_t Nullable<uint32_t>::invalid_value_ = 0xffffffff;
 template <>
 int32_t Nullable<int32_t>::invalid_value_ = 0x7fffffff;
+#if ESP_ARDUINO_VERSION_MAJOR >= 3
 template <>
 int Nullable<int>::invalid_value_ = 0x7fffffff;
+#endif
 template <>
 uint64_t Nullable<uint64_t>::invalid_value_ = 0xffffffffffffffffLL;
 template <>
