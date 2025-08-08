@@ -5,6 +5,7 @@
 #include <queue>
 
 #include "ReactESP.h"
+#include "esp_log.h"
 #include "observablevalue.h"
 #include "sensesp_base_app.h"
 
@@ -19,47 +20,69 @@ template <typename T>
 class SafeQueue : public std::queue<T> {
  public:
   SafeQueue() : std::queue<T>() {
-    queue_semaphore_ =
-        xSemaphoreCreateCounting(std::numeric_limits<int>::max(), 0);
     write_lock_ = xSemaphoreCreateMutex();
+    if (write_lock_ == nullptr) {
+      // Handle semaphore creation failure
+      ESP_LOGE("SafeQueue", "Failed to create mutex semaphore");
+    }
+  }
+
+  ~SafeQueue() {
+    if (write_lock_ != nullptr) {
+      vSemaphoreDelete(write_lock_);
+    }
   }
 
   void push(const T& value) {
-    xSemaphoreTake(write_lock_, portMAX_DELAY);
-    std::queue<T>::push(value);
-    xSemaphoreGive(queue_semaphore_);
-    xSemaphoreGive(write_lock_);
+    if (write_lock_ == nullptr) return;
+    if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
+      std::queue<T>::push(value);
+      xSemaphoreGive(write_lock_);
+    }
   }
 
   bool pop(T& value, unsigned int max_duration_ms) {
-    if (xSemaphoreTake(queue_semaphore_,
-                       max_duration_ms / portTICK_PERIOD_MS) == pdTRUE) {
-      xSemaphoreTake(write_lock_, portMAX_DELAY);
-      value = std::queue<T>::front();
-      std::queue<T>::pop();
-      xSemaphoreGive(write_lock_);
-      return true;
+    if (write_lock_ == nullptr) {
+      return false;
     }
-    return false;
+    bool result = false;
+    if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
+      if (!std::queue<T>::empty()) {
+        value = std::queue<T>::front();
+        std::queue<T>::pop();
+        result = true;
+      }
+      xSemaphoreGive(write_lock_);
+    }
+    return result;
   }
 
   bool empty() {
-    xSemaphoreTake(write_lock_, portMAX_DELAY);
-    bool result = std::queue<T>::empty();
-    xSemaphoreGive(write_lock_);
+    if (write_lock_ == nullptr) {
+      return true;
+    }
+    bool result = true;
+    if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
+      result = std::queue<T>::empty();
+      xSemaphoreGive(write_lock_);
+    }
     return result;
   }
 
   size_t size() {
-    xSemaphoreTake(write_lock_, portMAX_DELAY);
-    size_t result = std::queue<T>::size();
-    xSemaphoreGive(write_lock_);
+    if (write_lock_ == nullptr) {
+      return 0;
+    }
+    size_t result = 0;
+    if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
+      result = std::queue<T>::size();
+      xSemaphoreGive(write_lock_);
+    }
     return result;
   }
 
  protected:
-  SemaphoreHandle_t queue_semaphore_;  // Mirrors the items in the queue
-  SemaphoreHandle_t write_lock_;       // Lock for writing to the queue
+  SemaphoreHandle_t write_lock_;  // Lock for writing to the queue
 };
 
 /**
