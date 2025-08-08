@@ -18,7 +18,7 @@
 
 namespace sensesp {
 
-constexpr int kWsClientTaskStackSize = 8192;
+constexpr int kWsClientTaskStackSize = 16384;
 
 SKWSClient* ws_client;
 
