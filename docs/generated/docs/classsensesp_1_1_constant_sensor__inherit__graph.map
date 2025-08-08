@@ -1,18 +1,26 @@
 <map id="sensesp::ConstantSensor&lt; T &gt;" name="sensesp::ConstantSensor&lt; T &gt;">
-<area shape="rect" id="Node000001" title="ConstantSensor is the base class for virtual sensors that periodically emit a constant value." alt="" coords="151,300,355,326"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="177,226,328,252"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,267,256,300,250,300,250,267"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="74,153,232,178"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="184,185,237,224,234,228,181,190"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="278,79,422,105"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="304,113,187,155,186,150,302,108"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="256,153,450,178"/>
-<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="354,120,355,152,350,152,349,120"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="54,79,252,105"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="156,120,156,152,150,152,150,120"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_saveable.html" title="Interface for saveable objects." alt="" coords="5,5,138,31"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="98,39,141,77,137,81,95,43"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_serializable.html" title="Interface for serializable objects." alt="" coords="162,5,307,31"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="211,43,168,81,165,77,207,39"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="325,190,271,228,268,224,322,185"/>
+<area shape="rect" id="Node000001" title="ConstantSensor is the base class for virtual sensors that periodically emit a constant value." alt="" coords="892,112,1096,137"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_constant_sensor.html" title=" " alt="" coords="1206,5,1379,46"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="1049,104,1228,44,1230,49,1050,109"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_constant_sensor.html" title=" " alt="" coords="1206,71,1379,111"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="1112,109,1205,98,1206,103,1112,114"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_constant_sensor.html" title=" " alt="" coords="1206,136,1379,177"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="1112,134,1206,144,1205,150,1112,140"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_constant_sensor.html" title=" " alt="" coords="1206,201,1379,242"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="1051,140,1229,198,1227,203,1049,145"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="691,112,843,137"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="858,122,892,122,892,127,858,127"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="466,136,624,161"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="638,136,691,130,691,135,639,141"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="227,96,371,121"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="387,120,466,133,465,138,386,125"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="448,86,642,112"/>
+<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="386,102,447,100,447,105,386,108"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="200,153,398,178"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="414,155,466,151,466,157,414,160"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_saveable.html" title="Interface for saveable objects." alt="" coords="12,128,144,153"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="160,147,200,152,199,157,159,152"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_serializable.html" title="Interface for serializable objects." alt="" coords="5,177,151,202"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="166,177,199,174,200,179,166,183"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="658,109,692,113,691,118,657,114"/>
 </map>

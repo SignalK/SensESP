@@ -10,11 +10,10 @@ var searchData=
   ['lambdaconsumer_3c_20wifistate_20_3e_7',['LambdaConsumer&lt; WiFiState &gt;',['../classsensesp_1_1_lambda_consumer.html',1,'sensesp']]],
   ['lambdatransform_8',['LambdaTransform',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
   ['lambdatransform_3c_20float_2c_20float_2c_20float_2c_20float_20_3e_9',['LambdaTransform&lt; float, float, float, float &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
-  ['lambdatransform_3c_20float_2c_20int_20_3e_10',['LambdaTransform&lt; float, int &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
-  ['lambdatransform_3c_20in_2c_20out_2c_20in_2c_20in_2c_20out_2c_20out_20_3e_11',['LambdaTransform&lt; IN, OUT, IN, IN, OUT, OUT &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
-  ['ledblinker_12',['LEDBlinker',['../classsensesp_1_1_l_e_d_blinker.html',1,'sensesp']]],
-  ['ledpattern_13',['LEDPattern',['../classsensesp_1_1_l_e_d_pattern.html',1,'sensesp']]],
-  ['ledpatternfragment_14',['LEDPatternFragment',['../classsensesp_1_1_l_e_d_pattern_fragment.html',1,'sensesp']]],
-  ['linear_15',['Linear',['../classsensesp_1_1_linear.html',1,'sensesp']]],
-  ['localdebug_16',['LocalDebug',['../classsensesp_1_1_local_debug.html',1,'sensesp']]]
+  ['lambdatransform_3c_20in_2c_20out_2c_20in_2c_20in_2c_20out_2c_20out_20_3e_10',['LambdaTransform&lt; IN, OUT, IN, IN, OUT, OUT &gt;',['../classsensesp_1_1_lambda_transform.html',1,'sensesp']]],
+  ['ledblinker_11',['LEDBlinker',['../classsensesp_1_1_l_e_d_blinker.html',1,'sensesp']]],
+  ['ledpattern_12',['LEDPattern',['../classsensesp_1_1_l_e_d_pattern.html',1,'sensesp']]],
+  ['ledpatternfragment_13',['LEDPatternFragment',['../classsensesp_1_1_l_e_d_pattern_fragment.html',1,'sensesp']]],
+  ['linear_14',['Linear',['../classsensesp_1_1_linear.html',1,'sensesp']]],
+  ['localdebug_15',['LocalDebug',['../classsensesp_1_1_local_debug.html',1,'sensesp']]]
 ];

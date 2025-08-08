@@ -1,22 +1,26 @@
 <map id="sensesp::DigitalInputState::DigitalInputState" name="sensesp::DigitalInputState::DigitalInputState">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,181,103"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2" title=" " alt="" coords="247,5,409,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,60,231,46,232,52,179,65"/>
-<area shape="rect" id="Node000003" href="$namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49" title=" " alt="" coords="257,70,398,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,80,242,80,242,86,181,86"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a" title="Load and populate the object from a persistent storage." alt="" coords="229,135,427,175"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="162,101,246,127,244,132,161,106"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a28c20eed17bfc460e6686a11c5b3b107" title="Get the event loop object from the singleton SensESPBaseApp instance." alt="" coords="480,48,668,89"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="399,76,464,72,464,78,399,81"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="721,56,936,81"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="669,66,706,66,706,71,669,71"/>
-<area shape="rect" id="Node000007" href="$namespacesensesp.html#adad24461f43358c45017cf1cb816ca60" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="752,141,905,166"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="428,149,475,148,673,148,737,149,737,155,673,154,475,154,428,155"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_file_system_saveable.html#ad0233f7895b5c8915108399420c7cf0b" title=" " alt="" coords="475,163,673,203"/>
-<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="428,164,460,167,459,173,427,169"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_serializable.html#a841233a82ef3a7fbcecd5a15b0df12d2" title=" " alt="" coords="502,228,647,269"/>
-<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="379,173,476,213,496,220,494,225,474,217,377,178"/>
-<area shape="rect" id="Node000008" href="$namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf" title="SHA&#45;1 hash function." alt="" coords="984,141,1092,166"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="905,151,968,151,968,156,905,156"/>
-<area shape="poly" id="edge9_Node000009_Node000007" title=" " alt="" coords="674,169,737,162,737,167,674,174"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,128,181,169"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_digital_input.html#a95fa64f075a2fd8c82d43c87999fa3dc" title=" " alt="" coords="256,5,400,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,125,168,91,227,57,243,50,245,55,230,61,171,96,122,130"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2" title=" " alt="" coords="247,71,409,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,125,231,112,232,117,179,130"/>
+<area shape="rect" id="Node000004" href="$namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49" title=" " alt="" coords="257,136,398,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="181,146,242,146,242,151,181,151"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a" title="Load and populate the object from a persistent storage." alt="" coords="229,185,427,226"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="179,167,228,179,226,184,178,172"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_sensor.html#a837f5d9603388daaca04d78eaedd5d64" title=" " alt="" coords="250,251,406,291"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="122,167,171,201,230,235,245,242,243,247,227,240,168,206,119,171"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a28c20eed17bfc460e6686a11c5b3b107" title="Get the event loop object from the singleton SensESPBaseApp instance." alt="" coords="480,99,668,139"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="399,137,464,129,465,135,399,143"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="721,106,936,132"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="669,116,706,116,706,122,669,122"/>
+<area shape="rect" id="Node000008" href="$namespacesensesp.html#adad24461f43358c45017cf1cb816ca60" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="752,192,905,217"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="428,200,475,199,673,199,737,200,737,205,673,204,475,204,428,205"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_file_system_saveable.html#ad0233f7895b5c8915108399420c7cf0b" title=" " alt="" coords="475,213,673,254"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="428,214,460,218,459,223,427,220"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_serializable.html#a841233a82ef3a7fbcecd5a15b0df12d2" title=" " alt="" coords="502,279,647,319"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="397,224,428,237,476,263,493,270,491,275,474,268,426,241,395,229"/>
+<area shape="rect" id="Node000009" href="$namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf" title="SHA&#45;1 hash function." alt="" coords="984,192,1092,217"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="905,202,968,202,968,207,905,207"/>
+<area shape="poly" id="edge10_Node000010_Node000008" title=" " alt="" coords="674,220,737,212,737,217,674,225"/>
 </map>
