@@ -1,32 +1,38 @@
 <map id="sensesp::Networking::Networking" name="sensesp::Networking::Networking">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,149,150,190"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,219,150,259"/>
 <area shape="rect" id="Node000002" href="$classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2" title=" " alt="" coords="216,5,378,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,147,140,105,196,62,218,50,221,55,199,67,143,109,100,151"/>
-<area shape="rect" id="Node000003" href="$namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49" title=" " alt="" coords="472,128,614,153"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="108,147,149,124,197,106,274,95,351,98,423,108,483,121,482,126,422,113,351,103,274,101,198,111,151,129,110,151"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16" title="Get the current hostname." alt="" coords="449,177,637,218"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="150,171,434,188,433,194,150,177"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a" title="Load and populate the object from a persistent storage." alt="" coords="198,300,396,341"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="97,189,140,237,168,262,199,285,210,291,207,295,196,289,165,266,136,240,93,192"/>
-<area shape="rect" id="Node000012" href="$classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c" title="Start an access point." alt="" coords="225,235,369,275"/>
-<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="133,188,229,226,227,231,131,193"/>
-<area shape="rect" id="Node000013" href="$classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474" title="Start WiFi using preset SSID and password." alt="" coords="211,120,382,161"/>
-<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="149,157,196,151,196,156,150,163"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a28c20eed17bfc460e6686a11c5b3b107" title="Get the event loop object from the singleton SensESPBaseApp instance." alt="" coords="690,120,879,161"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="614,138,675,138,675,143,614,143"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="927,157,1141,182"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="879,149,911,153,911,158,879,154"/>
-<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="637,190,911,174,912,179,638,195"/>
-<area shape="rect" id="Node000008" href="$namespacesensesp.html#adad24461f43358c45017cf1cb816ca60" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="708,278,861,304"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="379,297,444,286,574,279,693,282,693,287,574,284,444,291,379,302"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_file_system_saveable.html#ad0233f7895b5c8915108399420c7cf0b" title=" " alt="" coords="444,300,642,341"/>
-<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="397,318,428,318,428,323,397,323"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_serializable.html#a841233a82ef3a7fbcecd5a15b0df12d2" title=" " alt="" coords="470,365,616,406"/>
-<area shape="poly" id="edge12_Node000007_Node000011" title=" " alt="" coords="377,339,456,360,455,365,376,344"/>
-<area shape="rect" id="Node000009" href="$namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf" title="SHA&#45;1 hash function." alt="" coords="980,278,1088,304"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="861,288,964,288,964,294,861,294"/>
-<area shape="poly" id="edge11_Node000010_Node000008" title=" " alt="" coords="643,306,693,299,693,305,643,311"/>
-<area shape="poly" id="edge14_Node000012_Node000006" title=" " alt="" coords="369,236,438,219,439,225,370,241"/>
-<area shape="poly" id="edge16_Node000013_Node000003" title=" " alt="" coords="383,138,457,138,457,143,383,143"/>
-<area shape="poly" id="edge17_Node000013_Node000006" title=" " alt="" coords="384,158,439,171,438,176,382,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,217,101,183,125,140,157,95,196,57,203,52,207,56,199,61,161,99,129,143,105,185,89,220"/>
+<area shape="rect" id="Node000003" href="$namespacesensesp.html#a1c1105507d71491cf4e0505eaabb2e49" title=" " alt="" coords="472,258,614,284"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="92,258,110,285,134,315,164,344,199,366,251,384,295,389,340,381,395,366,430,352,463,333,515,292,519,297,466,337,432,356,397,371,341,387,296,394,250,389,197,371,160,348,130,319,105,288,88,261"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_file_system_saveable.html#a974f062b375cf8637944f121084cf9f7" title=" " alt="" coords="198,71,396,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="95,217,139,172,196,127,218,116,220,120,199,132,142,176,99,220"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16" title="Get the current hostname." alt="" coords="449,187,637,227"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="106,216,147,191,197,171,264,161,333,161,399,169,457,180,456,185,398,174,333,166,265,166,198,176,150,196,108,221"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a" title="Load and populate the object from a persistent storage." alt="" coords="198,431,396,471"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="90,258,131,332,162,374,199,410,215,421,212,425,196,414,158,377,127,335,86,261"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_resettable.html#a8ea93b67d80ff4769925d6398074c30b" title=" " alt="" coords="226,316,368,357"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="115,258,199,301,216,308,214,313,197,305,113,262"/>
+<area shape="rect" id="Node000015" href="$classsensesp_1_1_networking.html#a98a47f34b83e3f5773054a8c3a3a308c" title="Start an access point." alt="" coords="225,185,369,226"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="149,225,209,216,210,222,150,231"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_networking.html#a277f2f6ba752d443e9724badf2a3f474" title="Start WiFi using preset SSID and password." alt="" coords="211,251,382,291"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="150,247,196,254,196,259,149,252"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_base_app.html#a28c20eed17bfc460e6686a11c5b3b107" title="Get the event loop object from the singleton SensESPBaseApp instance." alt="" coords="690,249,879,290"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="614,268,675,268,675,273,614,273"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_base_app.html#add2c67bb55d095ab9c64f44ab2e82612" title="Get the singleton instance of the SensESPBaseApp." alt="" coords="927,228,1141,253"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="879,256,911,252,911,257,879,261"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_saveable.html#abaa7864f4f35be033ad5f32a379051d7" title=" " alt="" coords="473,71,613,111"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="397,88,458,88,458,94,397,94"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="638,211,912,229,911,235,637,216"/>
+<area shape="rect" id="Node000010" href="$namespacesensesp.html#adad24461f43358c45017cf1cb816ca60" title="A base64&#45;encoded SHA&#45;1 hash function." alt="" coords="708,434,861,460"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="379,469,444,480,543,488,642,480,727,462,728,467,643,486,543,493,444,486,379,475"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_file_system_saveable.html#ad0233f7895b5c8915108399420c7cf0b" title=" " alt="" coords="444,365,642,406"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="376,427,448,408,450,413,377,433"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_serializable.html#a841233a82ef3a7fbcecd5a15b0df12d2" title=" " alt="" coords="470,431,616,471"/>
+<area shape="poly" id="edge14_Node000009_Node000013" title=" " alt="" coords="397,448,455,448,455,454,397,454"/>
+<area shape="rect" id="Node000011" href="$namespacesensesp.html#a37dfeb5f75b7115464a9aa40473d69cf" title="SHA&#45;1 hash function." alt="" coords="980,434,1088,460"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="861,444,964,444,964,450,861,450"/>
+<area shape="poly" id="edge13_Node000012_Node000010" title=" " alt="" coords="627,404,717,427,716,432,625,409"/>
+<area shape="poly" id="edge17_Node000015_Node000008" title=" " alt="" coords="369,203,433,204,433,209,369,209"/>
+<area shape="poly" id="edge19_Node000016_Node000003" title=" " alt="" coords="383,268,457,268,457,274,383,274"/>
+<area shape="poly" id="edge20_Node000016_Node000008" title=" " alt="" coords="377,247,447,229,449,234,379,253"/>
 </map>

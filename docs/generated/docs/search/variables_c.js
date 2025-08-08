@@ -7,5 +7,18 @@ var searchData=
   ['nonce_4',['nonce',['../structsensesp_1_1_nonce_data.html#a7930823e4caabed2d4f61f8d2d08455e',1,'sensesp::NonceData']]],
   ['nonce_5fmax_5fage_5f_5',['nonce_max_age_',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#a57541838046140611cfa9dde647fd8b0',1,'sensesp::HTTPDigestAuthenticator']]],
   ['nonces_5f_6',['nonces_',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#a37b27b72158f4992dc9d1ba01e1f7809',1,'sensesp::HTTPDigestAuthenticator']]],
-  ['north_7',['north',['../structsensesp_1_1_e_n_u_vector.html#a489eb85a15932d92b76a51e68794192e',1,'sensesp::ENUVector']]]
+  ['north_7',['north',['../structsensesp_1_1_e_n_u_vector.html#a489eb85a15932d92b76a51e68794192e',1,'sensesp::ENUVector']]],
+  ['nullable_3c_20bool_20_3e_3a_3ainvalid_5fvalue_5f_8',['invalid_value_',['../namespacesensesp.html#aa2fa8168e23499c82450b32478ab5a09',1,'sensesp']]],
+  ['nullable_3c_20char_20_3e_3a_3ainvalid_5fvalue_5f_9',['invalid_value_',['../namespacesensesp.html#a7a1112a3810b00e9ee25255a7ca6eb5b',1,'sensesp']]],
+  ['nullable_3c_20double_20_3e_3a_3ainvalid_5fvalue_5f_10',['invalid_value_',['../namespacesensesp.html#a364322975855f959903e7ef0f6d35a3c',1,'sensesp']]],
+  ['nullable_3c_20float_20_3e_3a_3ainvalid_5fvalue_5f_11',['invalid_value_',['../namespacesensesp.html#aeb0e053b59f10a1aaabb1f23ebab97be',1,'sensesp']]],
+  ['nullable_3c_20int16_5ft_20_3e_3a_3ainvalid_5fvalue_5f_12',['invalid_value_',['../namespacesensesp.html#a0d097932964d7e94e0b261d08a8f0bef',1,'sensesp']]],
+  ['nullable_3c_20int32_5ft_20_3e_3a_3ainvalid_5fvalue_5f_13',['invalid_value_',['../namespacesensesp.html#ac5ff36a51b9048527c49e48af34e0f45',1,'sensesp']]],
+  ['nullable_3c_20int64_5ft_20_3e_3a_3ainvalid_5fvalue_5f_14',['invalid_value_',['../namespacesensesp.html#a67b225dc59836decaa56af14a773b7a0',1,'sensesp']]],
+  ['nullable_3c_20int8_5ft_20_3e_3a_3ainvalid_5fvalue_5f_15',['invalid_value_',['../namespacesensesp.html#af915899c2eaf22a35849de01de8961f5',1,'sensesp']]],
+  ['nullable_3c_20t_20_3e_3a_3ainvalid_5fvalue_5f_16',['invalid_value_',['../namespacesensesp.html#afa09295c6a1eecadada4f793b68ab277',1,'sensesp']]],
+  ['nullable_3c_20uint16_5ft_20_3e_3a_3ainvalid_5fvalue_5f_17',['invalid_value_',['../namespacesensesp.html#a972b428c651c19351f142e7c55eb9282',1,'sensesp']]],
+  ['nullable_3c_20uint32_5ft_20_3e_3a_3ainvalid_5fvalue_5f_18',['invalid_value_',['../namespacesensesp.html#a99dff3629bcc63c9f68ca5099979f222',1,'sensesp']]],
+  ['nullable_3c_20uint64_5ft_20_3e_3a_3ainvalid_5fvalue_5f_19',['invalid_value_',['../namespacesensesp.html#aade575227883996ee06db7994f04422f',1,'sensesp']]],
+  ['nullable_3c_20uint8_5ft_20_3e_3a_3ainvalid_5fvalue_5f_20',['invalid_value_',['../namespacesensesp.html#a6f3e9423aaf01ddac120f22114051c67',1,'sensesp']]]
 ];

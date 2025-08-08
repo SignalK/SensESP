@@ -1,18 +1,27 @@
 <map id="sensesp::AnalogInput" name="sensesp::AnalogInput">
-<area shape="rect" id="Node000001" title="Sensor for reading the MCU analog input pins." alt="" coords="179,300,326,326"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="207,226,298,252"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,267,256,300,250,300,250,267"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="74,153,232,178"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="184,185,237,224,234,228,181,190"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="278,79,422,105"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="304,113,187,155,186,150,302,108"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="256,153,450,178"/>
-<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="354,120,355,152,350,152,349,120"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="54,79,252,105"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="156,120,156,152,150,152,150,120"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_saveable.html" title="Interface for saveable objects." alt="" coords="5,5,138,31"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="98,39,141,77,137,81,95,43"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_serializable.html" title="Interface for serializable objects." alt="" coords="162,5,307,31"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="211,43,168,81,165,77,207,39"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="325,190,271,228,268,224,322,185"/>
+<area shape="rect" id="Node000001" title="Sensor for reading the MCU analog input pins." alt="" coords="1147,97,1294,123"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1006,97,1098,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1114,108,1147,108,1147,113,1114,113"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="466,80,624,106"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="639,93,1006,106,1006,111,639,99"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="748,47,900,72"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="639,79,748,66,748,71,639,84"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="227,112,371,138"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="386,111,465,100,466,106,387,116"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="743,147,905,188"/>
+<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="351,141,398,154,448,165,526,173,604,175,743,171,743,177,604,181,525,178,447,170,397,160,350,146"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="448,129,642,155"/>
+<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="386,128,447,133,447,138,386,134"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="448,31,642,56"/>
+<area shape="poly" id="edge14_Node000011_Node000004" title=" " alt="" coords="345,103,447,65,484,54,486,59,448,70,347,108"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="200,29,398,55"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="380,56,480,77,479,82,379,61"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_saveable.html" title="Interface for saveable objects." alt="" coords="12,5,144,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="160,24,200,29,199,34,159,30"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_serializable.html" title="Interface for serializable objects." alt="" coords="5,55,151,80"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="165,55,199,51,200,56,166,60"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="920,142,982,126,1005,120,1007,125,983,131,921,147"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="658,150,743,157,742,163,657,155"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="907,73,983,90,1007,96,1005,101,982,95,906,79"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="658,47,748,53,748,58,658,53"/>
 </map>

@@ -62,20 +62,19 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "air__density_8cpp.html",
-"classsensesp_1_1_checkbox_config.html#a748cb45c3abb102eebf6bd7049a61bc6",
-"classsensesp_1_1_digital_input_debounce_counter.html",
-"classsensesp_1_1_join_base.html",
-"classsensesp_1_1_observable_value.html#a49f8c1d1478be140a92f9020a02fefa6",
-"classsensesp_1_1_s_k_listener.html#a535f98acf252c744f27ea787ba6c48be",
-"classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886",
-"classsensesp_1_1_sens_e_s_p_app_builder.html#ac7e2cdd591bd78309ab0c838fe6a01ea",
-"classsensesp_1_1_threshold_transform.html#a5be2519c3e2efde176cc343f55c92802",
-"classsensesp_1_1_zip_base.html#a3aa332ca30f1ccff4054135d4d406ec5",
-"http__server_8h.html#a1f192f3009865e9f9a3cd83609c866c2",
-"namespacesensesp.html#a93383d4d8f201716cd5e2848aefa03f4",
-"signalk__delta__queue_8h.html",
-"ui__output_8h_source.html"
+"classsensesp_1_1_click_type.html#ab3bb65e1d99930bd7272896149c0d939",
+"classsensesp_1_1_enable.html#a738aca5f06e2b6bd04476d625717b84a",
+"classsensesp_1_1_l_e_d_blinker.html#abbd667ac6703337b4e876475c95ce585",
+"classsensesp_1_1_p_w_m_output.html#a1aa17b03632b796aec5c532d8fb87ad6",
+"classsensesp_1_1_s_k_output.html#a04136285fe398306a634d716acaf2e8e",
+"classsensesp_1_1_saveable.html#a41ae5eb899f34dec27c9915c8a568b51",
+"classsensesp_1_1_sens_e_s_p_base_app.html#a734ae82f0a67785092cfb8a86f920cf8",
+"classsensesp_1_1_time_counter.html#a98d13d4604747dc11dfc40be3c609f23",
+"curveinterpolator_8cpp.html",
+"namespacesensesp.html",
+"namespacesensesp.html#afdc25a8c2722f9eacd2c7ed6769e5244",
+"uuid_8h.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
