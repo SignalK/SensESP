@@ -222,6 +222,7 @@ class SensESPApp : public SensESPBaseApp {
     this->hostname_->connect_to(&this->hostname_ui_output_);
     this->event_loop_->onRepeat(4999, [this]() {
       wifi_ssid_ui_output_.set(WiFi.SSID());
+      mac_address_ui_output_.set(WiFi.macAddress());
       free_memory_ui_output_.set(ESP.getFreeHeap());
       wifi_rssi_ui_output_.set(WiFi.RSSI());
 
@@ -322,8 +323,8 @@ class SensESPApp : public SensESPBaseApp {
   StatusPageItem<int> uptime_ui_output_{"Uptime (s)", 0, "System", 1100};
 
   StatusPageItem<String> hostname_ui_output_{"Hostname", "", "Network", 1200};
-  StatusPageItem<String> mac_address_ui_output_{
-      "MAC Address", WiFi.macAddress(), "Network", 1300};
+  StatusPageItem<String> mac_address_ui_output_{"MAC Address", "", "Network",
+                                                 1300};
   StatusPageItem<String> wifi_ssid_ui_output_{"SSID", "", "Network", 1400};
 
   StatusPageItem<int8_t> wifi_rssi_ui_output_{"WiFi signal strength (dB)", -128,
