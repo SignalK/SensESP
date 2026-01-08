@@ -7,6 +7,24 @@
 
 namespace sensesp {
 
+void add_tofu_reset_handler(std::shared_ptr<HTTPServer>& server) {
+  auto tofu_reset_handler = std::make_shared<HTTPRequestHandler>(
+      1 << HTTP_POST, "/api/signalk/reset-tofu", [](httpd_req_t* req) {
+        auto ws_client = SensESPApp::get()->get_ws_client();
+        if (ws_client == nullptr) {
+          httpd_resp_set_status(req, "500 Internal Server Error");
+          httpd_resp_send(req, "WebSocket client not available", 0);
+          return ESP_OK;
+        }
+        ws_client->reset_tofu_fingerprint();
+        httpd_resp_set_type(req, "application/json");
+        httpd_resp_send(req, "{\"status\":\"ok\"}", 0);
+        return ESP_OK;
+      });
+
+  server->add_handler(tofu_reset_handler);
+}
+
 void add_scan_wifi_networks_handlers(std::shared_ptr<HTTPServer>& server,
                                      std::shared_ptr<Networking>& networking) {
   auto scan_wifi_networks_handler = std::make_shared<HTTPRequestHandler>(
@@ -55,6 +73,7 @@ void add_scan_wifi_networks_handlers(std::shared_ptr<HTTPServer>& server,
 void add_app_http_command_handlers(std::shared_ptr<HTTPServer>& server,
                                    std::shared_ptr<Networking>& networking) {
   add_scan_wifi_networks_handlers(server, networking);
+  add_tofu_reset_handler(server);
 }
 
 }  // namespace sensesp

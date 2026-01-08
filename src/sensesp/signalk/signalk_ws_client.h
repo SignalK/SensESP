@@ -4,7 +4,6 @@
 #include "sensesp.h"
 
 #include <ArduinoJson.h>
-#include <WiFi.h>
 #include <esp_websocket_client.h>
 #include <functional>
 #include <list>
@@ -90,6 +89,67 @@ class SKWSClient : public FileSystemSaveable,
    */
   void sendTXT(String& payload);
 
+  /**
+   * @brief Check if SSL/TLS is enabled.
+   */
+  bool is_ssl_enabled() const { return ssl_enabled_; }
+
+  /**
+   * @brief Enable or disable SSL/TLS manually.
+   *
+   * Note: SSL is normally auto-detected. Use this only if you need
+   * to override the auto-detection behavior.
+   */
+  void set_ssl_enabled(bool enabled) {
+    ssl_enabled_ = enabled;
+    save();
+  }
+
+  /**
+   * @brief Check if TOFU certificate verification is enabled.
+   */
+  bool is_tofu_enabled() const { return tofu_enabled_; }
+
+  /**
+   * @brief Enable or disable TOFU certificate verification.
+   *
+   * When enabled, the server certificate fingerprint is captured on first
+   * connection and verified on subsequent connections.
+   */
+  void set_tofu_enabled(bool enabled) {
+    tofu_enabled_ = enabled;
+    save();
+  }
+
+  /**
+   * @brief Check if a TOFU fingerprint is stored.
+   */
+  bool has_tofu_fingerprint() const { return !tofu_fingerprint_.isEmpty(); }
+
+  /**
+   * @brief Get the stored TOFU fingerprint.
+   */
+  const String& get_tofu_fingerprint() const { return tofu_fingerprint_; }
+
+  /**
+   * @brief Reset the stored TOFU certificate fingerprint.
+   *
+   * Call this when the server certificate has changed legitimately
+   * and you want to trust the new certificate.
+   */
+  void reset_tofu_fingerprint() {
+    tofu_fingerprint_ = "";
+    save();
+  }
+
+  /**
+   * @brief Set the TOFU fingerprint (called from verify callback).
+   */
+  void set_tofu_fingerprint(const String& fingerprint) {
+    tofu_fingerprint_ = fingerprint;
+    save();
+  }
+
  protected:
   // these are the actually used values
   String server_address_ = "";
@@ -105,6 +165,11 @@ class SKWSClient : public FileSystemSaveable,
   bool server_detected_ = false;
   bool token_test_success_ = false;
 
+  // SSL/TLS configuration
+  bool ssl_enabled_ = false;
+  bool tofu_enabled_ = true;  // TOFU enabled by default
+  String tofu_fingerprint_ = "";  // SHA256 fingerprint in hex (64 chars)
+
   TaskQueueProducer<SKWSConnectionState> connection_state_{
       SKWSConnectionState::kSKWSDisconnected, event_loop()};
 
@@ -113,8 +178,7 @@ class SKWSClient : public FileSystemSaveable,
   SKWSConnectionState task_connection_state_ =
       SKWSConnectionState::kSKWSDisconnected;
 
-  WiFiClient wifi_client_{};
-  esp_websocket_client_handle_t client_{};
+  esp_websocket_client_handle_t client_ = nullptr;
   std::shared_ptr<SKDeltaQueue> sk_delta_queue_;
   /// @brief Emits the number of deltas sent since last report
   TaskQueueProducer<int> delta_tx_tick_producer_{0, event_loop(), 990};
@@ -156,6 +220,7 @@ class SKWSClient : public FileSystemSaveable,
   void connect_ws(const String& host, const uint16_t port);
   void subscribe_listeners();
   bool get_mdns_service(String& server_address, uint16_t& server_port);
+  bool detect_ssl();
 
   void set_connection_state(SKWSConnectionState state) {
     task_connection_state_ = state;
@@ -164,7 +229,13 @@ class SKWSClient : public FileSystemSaveable,
   SKWSConnectionState get_connection_state() { return task_connection_state_; }
 };
 
-inline const String ConfigSchema(const SKWSClient& obj) { return "null"; }
+inline const String ConfigSchema(const SKWSClient& obj) {
+  return "{\"type\":\"object\",\"properties\":{"
+         "\"ssl_enabled\":{\"title\":\"SSL/TLS Enabled\",\"type\":\"boolean\"},"
+         "\"tofu_enabled\":{\"title\":\"TOFU Verification\",\"type\":\"boolean\"},"
+         "\"tofu_fingerprint\":{\"title\":\"Server Fingerprint\",\"type\":\"string\",\"readOnly\":true}"
+         "}}";
+}
 
 inline bool ConfigRequiresRestart(const SKWSClient& obj) { return true; }
 
