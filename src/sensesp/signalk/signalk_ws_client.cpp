@@ -4,8 +4,13 @@
 
 #include <ArduinoJson.h>
 #include <ESPmDNS.h>
-#include <HTTPClient.h>
-#include <WiFiClient.h>
+#include <esp_http_client.h>
+
+#ifdef SENSESP_SSL_SUPPORT
+#include <mbedtls/sha256.h>
+#include <mbedtls/ssl.h>
+#include <mbedtls/x509_crt.h>
+#endif
 
 #include "Arduino.h"
 #include "elapsedMillis.h"
@@ -18,11 +23,114 @@
 
 namespace sensesp {
 
-constexpr int kWsClientTaskStackSize = 16384;
+constexpr int kWsClientTaskStackSize = 8192;  // Reduced from 16KB to save heap
 
 SKWSClient* ws_client;
 
 static const char* kRequestPermission = "readwrite";
+
+#ifdef SENSESP_SSL_SUPPORT
+// Convert a SHA256 hash to hex string
+static void sha256_to_hex(const uint8_t* sha256, char* hex) {
+  for (int i = 0; i < 32; i++) {
+    sprintf(hex + (i * 2), "%02x", sha256[i]);
+  }
+  hex[64] = '\0';
+}
+
+// TOFU verification callback - called during SSL handshake
+// Returns 0 to allow connection, non-zero to reject
+static int tofu_verify_callback(void* ctx, mbedtls_x509_crt* crt,
+                                int depth, uint32_t* flags) {
+  // Only check the server certificate (depth 0), not the CA chain
+  if (depth != 0) {
+    *flags = 0;  // Clear errors for intermediate certs
+    return 0;
+  }
+
+  SKWSClient* client = static_cast<SKWSClient*>(ctx);
+  if (client == nullptr) {
+    ESP_LOGW("SKWSClient", "TOFU: No client context, allowing connection");
+    *flags = 0;
+    return 0;
+  }
+
+  // Compute SHA256 of the certificate
+  uint8_t sha256[32];
+  mbedtls_sha256_context sha256_ctx;
+  mbedtls_sha256_init(&sha256_ctx);
+  mbedtls_sha256_starts(&sha256_ctx, 0);  // 0 = SHA256 (not SHA224)
+  mbedtls_sha256_update(&sha256_ctx, crt->raw.p, crt->raw.len);
+  mbedtls_sha256_finish(&sha256_ctx, sha256);
+  mbedtls_sha256_free(&sha256_ctx);
+
+  char hex[65];
+  sha256_to_hex(sha256, hex);
+  String current_fingerprint = String(hex);
+
+  ESP_LOGD("SKWSClient", "Server certificate fingerprint: %s", hex);
+
+  if (!client->is_tofu_enabled()) {
+    // TOFU disabled, allow any certificate
+    ESP_LOGD("SKWSClient", "TOFU disabled, allowing connection");
+    *flags = 0;
+    return 0;
+  }
+
+  if (!client->has_tofu_fingerprint()) {
+    // First connection - capture the fingerprint
+    ESP_LOGI("SKWSClient", "TOFU: First connection, capturing fingerprint: %s", hex);
+    client->set_tofu_fingerprint(current_fingerprint);
+    *flags = 0;
+    return 0;
+  }
+
+  // Verify against stored fingerprint
+  if (client->get_tofu_fingerprint() == current_fingerprint) {
+    ESP_LOGD("SKWSClient", "TOFU: Fingerprint verified successfully");
+    *flags = 0;
+    return 0;
+  }
+
+  // Fingerprint mismatch!
+  ESP_LOGE("SKWSClient", "TOFU: Fingerprint mismatch!");
+  ESP_LOGE("SKWSClient", "  Expected: %s", client->get_tofu_fingerprint().c_str());
+  ESP_LOGE("SKWSClient", "  Received: %s", hex);
+  // Return error to reject the connection
+  return MBEDTLS_ERR_X509_CERT_VERIFY_FAILED;
+}
+
+// Certificate bundle attach function for TOFU verification
+// Sets up a custom verification callback that implements Trust On First Use
+static esp_err_t tofu_crt_bundle_attach(void* conf) {
+  mbedtls_ssl_config* ssl_conf = static_cast<mbedtls_ssl_config*>(conf);
+  // Use OPTIONAL so we can handle verification ourselves
+  mbedtls_ssl_conf_authmode(ssl_conf, MBEDTLS_SSL_VERIFY_OPTIONAL);
+  mbedtls_ssl_conf_verify(ssl_conf, tofu_verify_callback, ws_client);
+  ESP_LOGD("SKWSClient", "TOFU verification callback installed");
+  return ESP_OK;
+}
+#endif  // SENSESP_SSL_SUPPORT
+
+static void websocket_event_handler(void* handler_args,
+                                    esp_event_base_t base,
+                                    int32_t event_id, void* event_data) {
+  esp_websocket_event_data_t* data = (esp_websocket_event_data_t*)event_data;
+  switch (event_id) {
+    case WEBSOCKET_EVENT_CONNECTED:
+      ws_client->on_connected();
+      break;
+    case WEBSOCKET_EVENT_DISCONNECTED:
+      ws_client->on_disconnected();
+      break;
+    case WEBSOCKET_EVENT_DATA:
+      ws_client->on_receive_delta((uint8_t*)data->data_ptr, data->data_len);
+      break;
+    case WEBSOCKET_EVENT_ERROR:
+      ws_client->on_error();
+      break;
+  }
+}
 
 void ExecuteWebSocketTask(void* /*parameter*/) {
   elapsedMillis connect_loop_elapsed = 0;
@@ -39,41 +147,10 @@ void ExecuteWebSocketTask(void* /*parameter*/) {
       delta_loop_elapsed = 0;
       ws_client->send_delta();
     }
-    delay(1);
+    delay(20);
   }
 }
 
-/**
- * @brief Websocket event handler.
- *
- * @param handler_args
- * @param base
- * @param event_id
- * @param event_data
- */
-static void websocket_event_handler(void* handler_args, esp_event_base_t base,
-                                    int32_t event_id, void* event_data) {
-  esp_websocket_event_data_t* data = (esp_websocket_event_data_t*)event_data;
-  switch (event_id) {
-    case WEBSOCKET_EVENT_CONNECTED:
-      ESP_LOGD(__FILENAME__, "WEBSOCKET_EVENT_CONNECTED");
-      ws_client->on_connected();
-      break;
-    case WEBSOCKET_EVENT_DISCONNECTED:
-      ESP_LOGD(__FILENAME__, "WEBSOCKET_EVENT_DISCONNECTED");
-      ws_client->on_disconnected();
-      break;
-    case WEBSOCKET_EVENT_DATA:
-      // check if the payload is text)
-      if (data->op_code == 0x01) {
-        ws_client->on_receive_delta((uint8_t*)data->data_ptr, data->data_len);
-      }
-      break;
-    case WEBSOCKET_EVENT_ERROR:
-      ws_client->on_error();
-      break;
-  }
-}
 
 SKWSClient::SKWSClient(const String& config_path,
                        std::shared_ptr<SKDeltaQueue> sk_delta_queue,
@@ -198,7 +275,7 @@ void SKWSClient::subscribe_listeners() {
     serializeJson(subscription, json_message);
     ESP_LOGI(__FILENAME__, "Subscription JSON message:\n %s",
              json_message.c_str());
-    esp_websocket_client_send_text(this->client_, json_message.c_str(),
+    esp_websocket_client_send_text(client_, json_message.c_str(),
                                    json_message.length(), portMAX_DELAY);
   }
 }
@@ -358,7 +435,7 @@ void SKWSClient::on_receive_put(JsonDocument& message) {
     }
     String response_text;
     serializeJson(put_response, response_text);
-    esp_websocket_client_send_text(this->client_, response_text.c_str(),
+    esp_websocket_client_send_text(client_, response_text.c_str(),
                                    response_text.length(), portMAX_DELAY);
   }
 }
@@ -372,18 +449,30 @@ void SKWSClient::on_receive_put(JsonDocument& message) {
  */
 void SKWSClient::sendTXT(String& payload) {
   if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
-    esp_websocket_client_send_text(this->client_, payload.c_str(),
-                                   payload.length(), portMAX_DELAY);
+    esp_websocket_client_send_text(client_, payload.c_str(), payload.length(),
+                                   portMAX_DELAY);
   }
 }
 
 bool SKWSClient::get_mdns_service(String& server_address,
                                   uint16_t& server_port) {
   // get IP address using an mDNS query
-  int num = MDNS.queryService("signalk-ws", "tcp");
-  if (num == 0) {
-    // no service found
-    return false;
+  // Try SSL service first, then fall back to non-SSL
+  int num = MDNS.queryService("signalk-wss", "tcp");
+  if (num > 0) {
+    // Found SSL-enabled server
+    ssl_enabled_ = true;
+    ESP_LOGI(__FILENAME__, "Found Signal K server via mDNS (signalk-wss)");
+  } else {
+    // Try non-SSL service
+    num = MDNS.queryService("signalk-ws", "tcp");
+    if (num == 0) {
+      // no service found
+      return false;
+    }
+    // Found non-SSL server, disable SSL
+    ssl_enabled_ = false;
+    ESP_LOGI(__FILENAME__, "Found Signal K server via mDNS (signalk-ws)");
   }
 
 #if ESP_ARDUINO_VERSION_MAJOR < 3
@@ -396,6 +485,55 @@ bool SKWSClient::get_mdns_service(String& server_address,
            server_port);
   return true;
 }
+
+bool SKWSClient::detect_ssl() {
+  // Try to detect if the server requires SSL by checking for HTTP->HTTPS
+  // redirects
+  String url =
+      String("http://") + server_address_ + ":" + server_port_ + "/signalk";
+
+  ESP_LOGD(__FILENAME__, "Probing for SSL redirect at %s", url.c_str());
+
+  esp_http_client_config_t config = {};
+  config.url = url.c_str();
+  config.disable_auto_redirect = true;
+  config.timeout_ms = 10000;
+
+  esp_http_client_handle_t client = esp_http_client_init(&config);
+  if (client == nullptr) {
+    ESP_LOGE(__FILENAME__, "Failed to initialize HTTP client");
+    return false;
+  }
+
+  esp_err_t err = esp_http_client_perform(client);
+  if (err != ESP_OK) {
+    ESP_LOGD(__FILENAME__, "HTTP request failed: %s", esp_err_to_name(err));
+    esp_http_client_cleanup(client);
+    return false;
+  }
+
+  int http_code = esp_http_client_get_status_code(client);
+
+  if (http_code == 301 || http_code == 302 || http_code == 307 ||
+      http_code == 308) {
+    // Check Location header for HTTPS redirect
+    char* location = nullptr;
+    esp_http_client_get_header(client, "Location", &location);
+    esp_http_client_cleanup(client);
+
+    if (location != nullptr && strncmp(location, "https://", 8) == 0) {
+      ESP_LOGI(__FILENAME__, "SSL redirect detected to %s, enabling HTTPS/WSS",
+               location);
+      ssl_enabled_ = true;
+      save();
+      return true;
+    }
+  }
+
+  esp_http_client_cleanup(client);
+  return false;
+}
+
 
 void SKWSClient::connect() {
   if (get_connection_state() != SKWSConnectionState::kSKWSDisconnected) {
@@ -431,6 +569,11 @@ void SKWSClient::connect() {
     ESP_LOGD(__FILENAME__,
              "Websocket is connecting to Signal K server on address %s:%d",
              this->server_address_.c_str(), this->server_port_);
+
+    // Detect if server requires SSL (check for HTTP->HTTPS redirects)
+    if (!ssl_enabled_) {
+      detect_ssl();
+    }
   } else {
     // host and port not defined - don't try to connect
     ESP_LOGD(__FILENAME__,
@@ -458,22 +601,55 @@ void SKWSClient::connect() {
   this->test_token(this->server_address_, this->server_port_);
 }
 
+void SKWSClient::loop() {
+  // No-op: esp_websocket_client handles data via event callbacks
+}
+
 void SKWSClient::test_token(const String server_address,
                             const uint16_t server_port) {
-  // FIXME: implement async HTTP client!
-  HTTPClient http;
-
-  String url = String("http://") + server_address + ":" + server_port +
+  String protocol = ssl_enabled_ ? "https://" : "http://";
+  String url = protocol + server_address + ":" + server_port +
                "/signalk/v1/stream";
   ESP_LOGD(__FILENAME__, "Testing token with url %s", url.c_str());
-  http.begin(wifi_client_, url);
+
   const String full_token = String("Bearer ") + auth_token_;
   ESP_LOGD(__FILENAME__, "Authorization: %s", full_token.c_str());
-  http.addHeader("Authorization", full_token.c_str());
-  int http_code = http.GET();
-  if (http_code > 0) {
-    String payload = http.getString();
-    http.end();
+
+  esp_http_client_config_t config = {};
+  config.url = url.c_str();
+  config.timeout_ms = 10000;
+#ifdef SENSESP_SSL_SUPPORT
+  if (ssl_enabled_) {
+    config.crt_bundle_attach = tofu_crt_bundle_attach;
+    config.skip_cert_common_name_check = true;
+  }
+#endif
+
+  esp_http_client_handle_t client = esp_http_client_init(&config);
+  if (client == nullptr) {
+    ESP_LOGE(__FILENAME__, "Failed to initialize HTTP client");
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    return;
+  }
+
+  esp_http_client_set_header(client, "Authorization", full_token.c_str());
+
+  esp_err_t err = esp_http_client_perform(client);
+  int http_code = esp_http_client_get_status_code(client);
+  int content_length = esp_http_client_get_content_length(client);
+
+  String payload;
+  if (err == ESP_OK && content_length > 0 && content_length < 1024) {
+    char* buffer = new char[content_length + 1];
+    esp_http_client_read(client, buffer, content_length);
+    buffer[content_length] = '\0';
+    payload = String(buffer);
+    delete[] buffer;
+  }
+
+  esp_http_client_cleanup(client);
+
+  if (err == ESP_OK) {
     ESP_LOGD(__FILENAME__, "Testing resulted in http status %d", http_code);
     if (payload.length() > 0) {
       ESP_LOGD(__FILENAME__,
@@ -496,8 +672,7 @@ void SKWSClient::test_token(const String server_address,
       set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     }
   } else {
-    ESP_LOGE(__FILENAME__, "GET... failed, error: %s\n",
-             http.errorToString(http_code).c_str());
+    ESP_LOGE(__FILENAME__, "HTTP request failed: %s", esp_err_to_name(err));
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   }
 }
@@ -522,19 +697,50 @@ void SKWSClient::send_access_request(const String server_address,
 
   ESP_LOGD(__FILENAME__, "Access request: %s", json_req.c_str());
 
-  HTTPClient http;
-
-  String url = String("http://") + server_address + ":" + server_port +
+  String protocol = ssl_enabled_ ? "https://" : "http://";
+  String url = protocol + server_address + ":" + server_port +
                "/signalk/v1/access/requests";
   ESP_LOGD(__FILENAME__, "Access request url: %s", url.c_str());
-  http.begin(wifi_client_, url);
-  http.addHeader("Content-Type", "application/json");
-  int http_code = http.POST(json_req);
-  String payload = http.getString();
-  http.end();
+
+  esp_http_client_config_t config = {};
+  config.url = url.c_str();
+  config.method = HTTP_METHOD_POST;
+  config.timeout_ms = 10000;
+#ifdef SENSESP_SSL_SUPPORT
+  if (ssl_enabled_) {
+    config.crt_bundle_attach = tofu_crt_bundle_attach;
+    config.skip_cert_common_name_check = true;
+  }
+#endif
+
+  esp_http_client_handle_t client = esp_http_client_init(&config);
+  if (client == nullptr) {
+    ESP_LOGE(__FILENAME__, "Failed to initialize HTTP client");
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    client_id_ = "";
+    return;
+  }
+
+  esp_http_client_set_header(client, "Content-Type", "application/json");
+  esp_http_client_set_post_field(client, json_req.c_str(), json_req.length());
+
+  esp_err_t err = esp_http_client_perform(client);
+  int http_code = esp_http_client_get_status_code(client);
+  int content_length = esp_http_client_get_content_length(client);
+
+  String payload;
+  if (err == ESP_OK && content_length > 0 && content_length < 2048) {
+    char* buffer = new char[content_length + 1];
+    esp_http_client_read(client, buffer, content_length);
+    buffer[content_length] = '\0';
+    payload = String(buffer);
+    delete[] buffer;
+  }
+
+  esp_http_client_cleanup(client);
 
   // if we get a response we can't handle, try to reconnect later
-  if (http_code != 202) {
+  if (err != ESP_OK || http_code != 202) {
     ESP_LOGW(__FILENAME__, "Can't handle response %d to access request.",
              http_code);
     ESP_LOGD(__FILENAME__, "%s", payload.c_str());
@@ -568,20 +774,54 @@ void SKWSClient::poll_access_request(const String server_address,
                                      const String href) {
   ESP_LOGD(__FILENAME__, "Polling SK Server for authentication token");
 
-  HTTPClient http;
+  String protocol = ssl_enabled_ ? "https://" : "http://";
+  String url = protocol + server_address + ":" + server_port + href;
 
-  String url = String("http://") + server_address + ":" + server_port + href;
-  http.begin(wifi_client_, url);
-  int http_code = http.GET();
-  if (http_code == 200 or http_code == 202) {
-    String payload = http.getString();
-    http.end();
+  esp_http_client_config_t config = {};
+  config.url = url.c_str();
+  config.timeout_ms = 10000;
+#ifdef SENSESP_SSL_SUPPORT
+  if (ssl_enabled_) {
+    config.crt_bundle_attach = tofu_crt_bundle_attach;
+    config.skip_cert_common_name_check = true;
+  }
+#endif
+
+  esp_http_client_handle_t client = esp_http_client_init(&config);
+  if (client == nullptr) {
+    ESP_LOGE(__FILENAME__, "Failed to initialize HTTP client");
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    return;
+  }
+
+  esp_err_t err = esp_http_client_perform(client);
+  int http_code = esp_http_client_get_status_code(client);
+  int content_length = esp_http_client_get_content_length(client);
+
+  String payload;
+  if (err == ESP_OK && content_length > 0 && content_length < 4096) {
+    char* buffer = new char[content_length + 1];
+    esp_http_client_read(client, buffer, content_length);
+    buffer[content_length] = '\0';
+    payload = String(buffer);
+    delete[] buffer;
+  }
+
+  esp_http_client_cleanup(client);
+
+  if (err != ESP_OK) {
+    ESP_LOGE(__FILENAME__, "HTTP request failed: %s", esp_err_to_name(err));
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    return;
+  }
+
+  if (http_code == 200 || http_code == 202) {
     JsonDocument doc;
     auto error = deserializeJson(doc, payload.c_str());
     if (error) {
       ESP_LOGW(__FILENAME__, "WARNING: Could not deserialize http payload.");
       ESP_LOGW(__FILENAME__, "DeserializationError: %s", error.c_str());
-      return;  // TODO(mairas): return at this point, or keep going?
+      return;
     }
     String state = doc["state"];
     ESP_LOGD(__FILENAME__, "%s", state.c_str());
@@ -613,7 +853,6 @@ void SKWSClient::poll_access_request(const String server_address,
       }
     }
   } else {
-    http.end();
     if (http_code == 500) {
       // this is probably the server barfing due to
       // us polling a non-existing request. Just
@@ -634,38 +873,67 @@ void SKWSClient::poll_access_request(const String server_address,
 }
 
 void SKWSClient::connect_ws(const String& host, const uint16_t port) {
-  String path = "/signalk/v1/stream?subscribe=none";
   set_connection_state(SKWSConnectionState::kSKWSConnecting);
 
-  esp_err_t error;
+  String protocol = ssl_enabled_ ? "wss" : "ws";
+  String path = "/signalk/v1/stream?subscribe=none";
+  String url = protocol + "://" + host + ":" + String(port) + path;
 
-  String url = String("ws://") + host + ":" + port + path;
+  ESP_LOGD(__FILENAME__, "Connecting WebSocket to %s", url.c_str());
 
-  esp_websocket_client_config_t websocket_cfg = {};
-  websocket_cfg.uri = url.c_str();
+  // Configure WebSocket client
+  esp_websocket_client_config_t config = {};
+  config.uri = url.c_str();
+  config.task_stack = 8192;
+  config.buffer_size = 1024;
 
-  const String full_auth_header =
-      String("Authorization: Bearer ") + auth_token_ + "\r\n";
-
-  websocket_cfg.headers = full_auth_header.c_str();
-
-  ESP_LOGD(__FILENAME__, "Websocket config: %s", websocket_cfg.uri);
-  ESP_LOGD(__FILENAME__, "Initializing websocket client...");
-  this->client_ = esp_websocket_client_init(&websocket_cfg);
-  ESP_LOGD(__FILENAME__, "Registering websocket event handler...");
-  error = esp_websocket_register_events(this->client_, WEBSOCKET_EVENT_ANY,
-                                        websocket_event_handler,
-                                        (void*)this->client_);
-  if (error != ESP_OK) {
-    ESP_LOGE(__FILENAME__, "Error registering websocket event handler: %d",
-             error);
+#ifdef SENSESP_SSL_SUPPORT
+  if (ssl_enabled_) {
+    // Use custom crt_bundle_attach to disable SSL verification
+    // This directly configures mbedTLS to skip certificate verification
+    config.crt_bundle_attach = tofu_crt_bundle_attach;
+    config.skip_cert_common_name_check = true;
   }
-  ESP_LOGD(__FILENAME__, "Starting websocket client...");
-  error = esp_websocket_client_start(this->client_);
-  if (error != ESP_OK) {
-    ESP_LOGE(__FILENAME__, "Error starting websocket client: %d", error);
+#endif
+
+  // Destroy any existing client
+  if (client_ != nullptr) {
+    esp_websocket_client_stop(client_);
+    esp_websocket_client_destroy(client_);
+    client_ = nullptr;
   }
-  ESP_LOGD(__FILENAME__, "Websocket client started.");
+
+  client_ = esp_websocket_client_init(&config);
+  if (client_ == nullptr) {
+    ESP_LOGE(__FILENAME__, "Failed to initialize WebSocket client");
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    return;
+  }
+
+  // Register event handler
+  esp_websocket_register_events(client_, WEBSOCKET_EVENT_ANY,
+                                websocket_event_handler, nullptr);
+
+  // Add authorization header if we have a token
+#ifdef SENSESP_SSL_SUPPORT
+  if (auth_token_ != NULL_AUTH_TOKEN) {
+    esp_websocket_client_append_header(client_, "Authorization",
+                                       (String("Bearer ") + auth_token_).c_str());
+  }
+#endif
+
+  // Start the client
+  esp_err_t err = esp_websocket_client_start(client_);
+  if (err != ESP_OK) {
+    ESP_LOGE(__FILENAME__, "Failed to start WebSocket client: %s",
+             esp_err_to_name(err));
+    esp_websocket_client_destroy(client_);
+    client_ = nullptr;
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    return;
+  }
+
+  ESP_LOGD(__FILENAME__, "WebSocket client started, waiting for connection...");
 }
 
 bool SKWSClient::is_connected() {
@@ -673,10 +941,12 @@ bool SKWSClient::is_connected() {
 }
 
 void SKWSClient::restart() {
-  if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
-    esp_websocket_client_close(this->client_, portMAX_DELAY);
-    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+  if (client_ != nullptr) {
+    esp_websocket_client_stop(client_);
+    esp_websocket_client_destroy(client_);
+    client_ = nullptr;
   }
+  set_connection_state(SKWSConnectionState::kSKWSDisconnected);
 }
 
 void SKWSClient::send_delta() {
@@ -684,8 +954,8 @@ void SKWSClient::send_delta() {
   if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     if (sk_delta_queue_->data_available()) {
       sk_delta_queue_->get_delta(output);
-      esp_websocket_client_send_text(this->client_, output.c_str(),
-                                     output.length(), portMAX_DELAY);
+      esp_websocket_client_send_text(client_, output.c_str(), output.length(),
+                                     portMAX_DELAY);
       // This automatically notifies the observers
       this->delta_tx_tick_producer_.set(1);
     }
@@ -700,6 +970,10 @@ bool SKWSClient::to_json(JsonObject& root) {
   root["token"] = this->auth_token_;
   root["client_id"] = this->client_id_;
   root["polling_href"] = this->polling_href_;
+
+  root["ssl_enabled"] = this->ssl_enabled_;
+  root["tofu_enabled"] = this->tofu_enabled_;
+  root["tofu_fingerprint"] = this->tofu_fingerprint_;
   return true;
 }
 
@@ -721,6 +995,16 @@ bool SKWSClient::from_json(const JsonObject& config) {
   }
   if (config["polling_href"].is<String>()) {
     this->polling_href_ = config["polling_href"].as<String>();
+  }
+
+  if (config["ssl_enabled"].is<bool>()) {
+    this->ssl_enabled_ = config["ssl_enabled"].as<bool>();
+  }
+  if (config["tofu_enabled"].is<bool>()) {
+    this->tofu_enabled_ = config["tofu_enabled"].as<bool>();
+  }
+  if (config["tofu_fingerprint"].is<String>()) {
+    this->tofu_fingerprint_ = config["tofu_fingerprint"].as<String>();
   }
 
   return true;

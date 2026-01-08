@@ -53,6 +53,12 @@ export function SignalKSettingsPanel(): JSX.Element {
           setConfig={setConfig}
           setRequestSave={handleSave}
         />
+        <SKSSLSettings
+          config={config}
+          setConfig={setConfig}
+          setRequestSave={handleSave}
+          onConfigUpdate={updateConfig}
+        />
         <SKAuthToken
           config={config}
           setConfig={setConfig}
@@ -139,17 +145,6 @@ function SKConnectionSettings({
                   id={`${id}-port`}
                 />
               </div>
-              <div className="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id={`${id}-tls`}
-                  disabled
-                />
-                <label className="form-check-label" htmlFor={`${id}-tls`}>
-                  Use TLS
-                </label>
-              </div>
             </Collapse>
 
             <button
@@ -194,6 +189,132 @@ function SKAuthToken({
       <button className="btn btn-primary" onClick={handleClearToken}>
         Clear Token
       </button>
+    </Card>
+  );
+}
+
+interface SKSSLSettingsProps {
+  config: JsonObject;
+  setConfig: (cfg: JsonObject) => void;
+  setRequestSave: (b: boolean) => void;
+  onConfigUpdate: () => Promise<void>;
+}
+
+function SKSSLSettings({
+  config,
+  setConfig,
+  setRequestSave,
+  onConfigUpdate,
+}: SKSSLSettingsProps): JSX.Element {
+  const [resetting, setResetting] = useState(false);
+  const id = useId();
+
+  function handleSSLChange(event): void {
+    setConfig({ ...config, ssl_enabled: event.target.checked });
+  }
+
+  function handleVerifyChange(event): void {
+    setConfig({ ...config, tofu_enabled: event.target.checked });
+  }
+
+  async function handleResetTOFU(): Promise<void> {
+    setResetting(true);
+    try {
+      const response = await fetch("/api/signalk/reset-tofu", {
+        method: "POST",
+      });
+      if (response.ok) {
+        // Refresh config to show cleared fingerprint
+        await onConfigUpdate();
+      }
+    } catch (e) {
+      console.error("Failed to reset TOFU:", e);
+    }
+    setResetting(false);
+  }
+
+  const hasFingerprint =
+    config.tofu_fingerprint && config.tofu_fingerprint !== "";
+  const fingerprintDisplay = hasFingerprint
+    ? String(config.tofu_fingerprint).substring(0, 16) + "..."
+    : "Not stored";
+
+  return (
+    <Card title="SSL/TLS Security">
+      <div className="vstack gap-2">
+        <form>
+          <div className="mb-3 form-check form-switch">
+            <input
+              type="checkbox"
+              className="form-check-input switch"
+              id={`${id}-ssl`}
+              checked={config.ssl_enabled === true}
+              onChange={handleSSLChange}
+            />
+            <label htmlFor={`${id}-ssl`} className="form-check-label">
+              SSL/TLS Enabled
+            </label>
+            <div className="form-text">
+              Enable for HTTPS/WSS connections. Auto-detected when server
+              redirects HTTP to HTTPS.
+            </div>
+          </div>
+
+          <div className="mb-3 form-check form-switch">
+            <input
+              type="checkbox"
+              className="form-check-input switch"
+              id={`${id}-verify`}
+              checked={config.tofu_enabled === true}
+              onChange={handleVerifyChange}
+              disabled={!config.ssl_enabled}
+            />
+            <label htmlFor={`${id}-verify`} className="form-check-label">
+              Verify Server Certificate (TOFU)
+            </label>
+            <div className="form-text">
+              When enabled, the server certificate fingerprint is captured on
+              first connection and verified on subsequent connections.
+            </div>
+          </div>
+
+          {config.ssl_enabled && (
+            <div className="mb-3">
+              <label className="form-label">Stored Fingerprint</label>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={fingerprintDisplay}
+                  disabled
+                />
+                <button
+                  className="btn btn-outline-danger"
+                  type="button"
+                  onClick={handleResetTOFU}
+                  disabled={!hasFingerprint || resetting}
+                >
+                  {resetting ? "Resetting..." : "Reset TOFU"}
+                </button>
+              </div>
+              <div className="form-text">
+                Reset if the server certificate has changed legitimately.
+              </div>
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              setRequestSave(true);
+            }}
+          >
+            Save
+          </button>
+        </form>
+      </div>
     </Card>
   );
 }
