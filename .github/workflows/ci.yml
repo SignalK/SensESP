@@ -13,6 +13,7 @@ jobs:
           - examples/listener.cpp
           - examples/repeat_sensor_analog_input.cpp
           - examples/rpm_counter.cpp
+          - examples/ssl_connection.cpp
         device:
           - esp32
           - esp32c3
@@ -26,6 +27,9 @@ jobs:
         exclude:
           - platform: arduino
             device: esp32c3
+          # SSL example requires pioarduino (SENSESP_SSL_SUPPORT)
+          - platform: arduino
+            example: examples/ssl_connection.cpp
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
