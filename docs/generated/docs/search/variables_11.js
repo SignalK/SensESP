@@ -10,8 +10,10 @@ var searchData=
   ['timeout_5fcleanup_7',['timeout_cleanup',['../classsensesp_1_1_s_k_request_1_1_pending_request.html#a7123e38c1470212558af653aff549336',1,'sensesp::SKRequest::PendingRequest']]],
   ['timeout_5fevent_5f_8',['timeout_event_',['../classsensesp_1_1_async_response_handler.html#af1b258f3cededb4f756eaec7816fcf65',1,'sensesp::AsyncResponseHandler']]],
   ['title_5f_9',['title_',['../classsensesp_1_1_config_item_base.html#a92ffc549c9baddf58990be6ab5a086f1',1,'sensesp::ConfigItemBase::title_'],['../classsensesp_1_1_u_i_button.html#a7a1284c4c0edd13b17b4bbfb1da60cc8',1,'sensesp::UIButton::title_'],['../classsensesp_1_1_string_config.html#a3501e7686072f3c47d27c1e023ef9b3d',1,'sensesp::StringConfig::title_'],['../classsensesp_1_1_number_config.html#aaa364a2017a56f30acbeafbcc039e1f7',1,'sensesp::NumberConfig::title_'],['../classsensesp_1_1_checkbox_config.html#a748cb45c3abb102eebf6bd7049a61bc6',1,'sensesp::CheckboxConfig::title_'],['../classsensesp_1_1_select_config.html#a8109de6a2c68301c02f0adc623247d78',1,'sensesp::SelectConfig::title_']]],
-  ['token_5ftest_5fsuccess_5f_10',['token_test_success_',['../classsensesp_1_1_s_k_w_s_client.html#a2e9580b5ab17102adb5fe80d1073425c',1,'sensesp::SKWSClient']]],
-  ['total_5ftick_5fcount_5fui_5foutput_5f_11',['total_tick_count_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a8794ce469108567ee9473fc0fe8deffb',1,'sensesp::SensESPApp']]],
-  ['truth_5fvalue_5f_12',['truth_value_',['../classsensesp_1_1_truth_to_text.html#a3658a3bb2919fc9009532d0edad994ea',1,'sensesp::TruthToText']]],
-  ['truthy_5fstring_5fconsumer_5f_13',['truthy_string_consumer_',['../classsensesp_1_1_smart_switch_controller.html#a133a90c75b8397f21f77274988e96f5e',1,'sensesp::SmartSwitchController']]]
+  ['tofu_5fenabled_5f_10',['tofu_enabled_',['../classsensesp_1_1_s_k_w_s_client.html#ac44448b67a8d320464f20cdcca690de2',1,'sensesp::SKWSClient']]],
+  ['tofu_5ffingerprint_5f_11',['tofu_fingerprint_',['../classsensesp_1_1_s_k_w_s_client.html#a54ace7b020e62f22674b99be737b12c3',1,'sensesp::SKWSClient']]],
+  ['token_5ftest_5fsuccess_5f_12',['token_test_success_',['../classsensesp_1_1_s_k_w_s_client.html#a2e9580b5ab17102adb5fe80d1073425c',1,'sensesp::SKWSClient']]],
+  ['total_5ftick_5fcount_5fui_5foutput_5f_13',['total_tick_count_ui_output_',['../classsensesp_1_1_sens_e_s_p_app.html#a8794ce469108567ee9473fc0fe8deffb',1,'sensesp::SensESPApp']]],
+  ['truth_5fvalue_5f_14',['truth_value_',['../classsensesp_1_1_truth_to_text.html#a3658a3bb2919fc9009532d0edad994ea',1,'sensesp::TruthToText']]],
+  ['truthy_5fstring_5fconsumer_5f_15',['truthy_string_consumer_',['../classsensesp_1_1_smart_switch_controller.html#a133a90c75b8397f21f77274988e96f5e',1,'sensesp::SmartSwitchController']]]
 ];
