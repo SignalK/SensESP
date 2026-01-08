@@ -1,7 +1,7 @@
 var lambda__transform_8h =
 [
     [ "sensesp::ParamInfo", "structsensesp_1_1_param_info.html", "structsensesp_1_1_param_info" ],
-    [ "sensesp::LambdaTransform< IN, OUT, P1, P2, P3, P4, P5, P6 >", "classsensesp_1_1_lambda_transform.html", "classsensesp_1_1_lambda_transform" ],
+    [ "sensesp::LambdaTransform&lt; IN, OUT, P1, P2, P3, P4, P5, P6 &gt;", "classsensesp_1_1_lambda_transform.html", "classsensesp_1_1_lambda_transform" ],
     [ "sensesp::ConfigSchema", "namespacesensesp.html#a023de8d97beab9d833af298f54c8c693", null ],
     [ "sensesp::ConfigSchema", "namespacesensesp.html#aed3210808a21c7eef54abd58bf6550a3", null ],
     [ "sensesp::ConfigSchema", "namespacesensesp.html#ab8b0f8a5b4cbfc5810dd490367e89d65", null ],

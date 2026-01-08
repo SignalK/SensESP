@@ -1,6 +1,6 @@
 var typecast_8h =
 [
-    [ "sensesp::Typecast< IN, OUT >", "classsensesp_1_1_typecast.html", "classsensesp_1_1_typecast" ],
+    [ "sensesp::Typecast&lt; IN, OUT &gt;", "classsensesp_1_1_typecast.html", "classsensesp_1_1_typecast" ],
     [ "sensesp::RoundToInt", "classsensesp_1_1_round_to_int.html", "classsensesp_1_1_round_to_int" ],
     [ "sensesp::BoolToInt", "namespacesensesp.html#a83b6453db4ee358dd8eab3052877e3fd", null ],
     [ "sensesp::FloatToInt", "namespacesensesp.html#a7be62e1088cc857cf52153051a361978", null ],

@@ -1,7 +1,7 @@
 var config__item_8h =
 [
     [ "sensesp::ConfigItemBase", "classsensesp_1_1_config_item_base.html", "classsensesp_1_1_config_item_base" ],
-    [ "sensesp::ConfigItemT< T >", "classsensesp_1_1_config_item_t.html", "classsensesp_1_1_config_item_t" ],
+    [ "sensesp::ConfigItemT&lt; T &gt;", "classsensesp_1_1_config_item_t.html", "classsensesp_1_1_config_item_t" ],
     [ "sensesp::ConfigItem", "namespacesensesp.html#ae883db75c2c50092263d317cdadacabd", null ],
     [ "sensesp::ConfigItem", "namespacesensesp.html#a8171f4ac7b81890f9766ecbbdf0e6606", null ],
     [ "sensesp::ConfigRequiresRestart", "namespacesensesp.html#abfa951d3e5220856267f45158616c5f3", null ],

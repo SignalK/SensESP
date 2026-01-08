@@ -1,27 +1,27 @@
 <map id="sensesp::AnalogInput" name="sensesp::AnalogInput">
-<area shape="rect" id="Node000001" title="Sensor for reading the MCU analog input pins." alt="" coords="1147,97,1294,123"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1006,97,1098,123"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1114,108,1147,108,1147,113,1114,113"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="466,80,624,106"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="639,93,1006,106,1006,111,639,99"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="748,47,900,72"/>
-<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="639,79,748,66,748,71,639,84"/>
+<area shape="rect" id="Node000001" title="Sensor for reading the MCU analog input pins." alt="" coords="1155,93,1302,119"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1014,93,1106,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1122,104,1158,106,1152,106,1122,109"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="466,79,624,104"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="639,91,1017,104,1011,105,639,97"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="752,43,904,68"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="639,77,755,65,750,65,639,82"/>
 <area shape="rect" id="Node000004" href="$classsensesp_1_1_observable.html" title="A base class which allow observers to attach callbacks to themselves. The callbacks will be called wh..." alt="" coords="227,112,371,138"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="386,111,465,100,466,106,387,116"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="743,147,905,188"/>
-<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="351,141,398,154,448,165,526,173,604,175,743,171,743,177,604,181,525,178,447,170,397,160,350,146"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="386,110,468,102,463,103,387,116"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_value_producer.html" title=" " alt="" coords="747,143,909,184"/>
+<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="351,140,398,154,448,165,527,172,607,174,744,171,749,171,607,180,527,178,447,170,397,160,350,146"/>
 <area shape="rect" id="Node000009" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="448,129,642,155"/>
-<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="386,128,447,133,447,138,386,134"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="448,31,642,56"/>
-<area shape="poly" id="edge14_Node000011_Node000004" title=" " alt="" coords="345,103,447,65,484,54,486,59,448,70,347,108"/>
+<area shape="poly" id="edge10_Node000009_Node000004" title=" " alt="" coords="386,128,450,135,445,135,386,134"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_value_producer.html" title="A base class for any sensor or piece of code that outputs a value for consumption elsewhere." alt="" coords="448,28,642,54"/>
+<area shape="poly" id="edge14_Node000011_Node000004" title=" " alt="" coords="344,103,447,64,485,55,490,54,449,69,346,108"/>
 <area shape="rect" id="Node000005" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="200,29,398,55"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="380,56,480,77,479,82,379,61"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="382,56,480,78,475,78,382,61"/>
 <area shape="rect" id="Node000006" href="$classsensesp_1_1_saveable.html" title="Interface for saveable objects." alt="" coords="12,5,144,31"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="160,24,200,29,199,34,159,30"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="159,24,202,30,197,32,160,30"/>
 <area shape="rect" id="Node000007" href="$classsensesp_1_1_serializable.html" title="Interface for serializable objects." alt="" coords="5,55,151,80"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="165,55,199,51,200,56,166,60"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="920,142,982,126,1005,120,1007,125,983,131,921,147"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="658,150,743,157,742,163,657,155"/>
-<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="907,73,983,90,1007,96,1005,101,982,95,906,79"/>
-<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="658,47,748,53,748,58,658,53"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="165,55,202,52,197,55,167,60"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="924,139,990,122,1011,119,1017,118,991,127,925,144"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="657,148,749,157,744,157,657,153"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="913,69,991,86,1017,95,1011,94,990,91,912,75"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="657,44,755,51,749,52,657,49"/>
 </map>

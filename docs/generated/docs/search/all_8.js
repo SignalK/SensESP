@@ -36,8 +36,10 @@ var searchData=
   ['is_5fconnected_33',['is_connected',['../classsensesp_1_1_s_k_w_s_client.html#a1edbfa57e491c2e3fe0025758d395845',1,'sensesp::SKWSClient']]],
   ['is_5fexpired_34',['is_expired',['../classsensesp_1_1_expiring_value.html#aeb8c57293311e40be4e46e4bc2b56e37',1,'sensesp::ExpiringValue']]],
   ['is_5fon_5f_35',['is_on_',['../classsensesp_1_1_smart_switch_controller.html#a37a2bdf97a33d954f0129ef48fb30f24',1,'sensesp::SmartSwitchController']]],
-  ['is_5fvalid_36',['is_valid',['../classsensesp_1_1_nullable.html#afd09a66d0ef246ebf4473a4d9ba07075',1,'sensesp::Nullable']]],
-  ['is_5fvalid_5ffalse_37',['is_valid_false',['../classsensesp_1_1_text_to_truth.html#aa27f270a025a00384c560bbed484de15',1,'sensesp::TextToTruth']]],
-  ['is_5fvalid_5ftrue_38',['is_valid_true',['../classsensesp_1_1_text_to_truth.html#ab0467a1fe3f0889d66b6c26a9159ac6d',1,'sensesp::TextToTruth']]],
-  ['isactive_39',['isActive',['../classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50',1,'sensesp::LocalDebug']]]
+  ['is_5fssl_5fenabled_36',['is_ssl_enabled',['../classsensesp_1_1_s_k_w_s_client.html#af06338ffc9f3e122afa50d014bdfff44',1,'sensesp::SKWSClient']]],
+  ['is_5ftofu_5fenabled_37',['is_tofu_enabled',['../classsensesp_1_1_s_k_w_s_client.html#afc448f6fd16f0449eebfe4bac0fa0821',1,'sensesp::SKWSClient']]],
+  ['is_5fvalid_38',['is_valid',['../classsensesp_1_1_nullable.html#afd09a66d0ef246ebf4473a4d9ba07075',1,'sensesp::Nullable']]],
+  ['is_5fvalid_5ffalse_39',['is_valid_false',['../classsensesp_1_1_text_to_truth.html#aa27f270a025a00384c560bbed484de15',1,'sensesp::TextToTruth']]],
+  ['is_5fvalid_5ftrue_40',['is_valid_true',['../classsensesp_1_1_text_to_truth.html#ab0467a1fe3f0889d66b6c26a9159ac6d',1,'sensesp::TextToTruth']]],
+  ['isactive_41',['isActive',['../classsensesp_1_1_local_debug.html#a3e34d4c2f6a1230301494d8bea336a50',1,'sensesp::LocalDebug']]]
 ];

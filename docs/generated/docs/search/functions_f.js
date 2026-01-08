@@ -19,10 +19,11 @@ var searchData=
   ['reset_16',['reset',['../classsensesp_1_1_networking.html#a05daeecff20fd0d5a5af084c74f44159',1,'sensesp::Networking::reset()'],['../classsensesp_1_1_filesystem.html#ad74cbbbd2ea256f715b694d8aa3a9211',1,'sensesp::Filesystem::reset()'],['../classsensesp_1_1_resettable.html#a3986291418428372569706c6e7d13708',1,'sensesp::Resettable::reset()'],['../classsensesp_1_1_integrator.html#a838476cb3028fd4578884619c369b13e',1,'sensesp::Integrator::reset()'],['../classsensesp_1_1_sens_e_s_p_base_app.html#ab2374208af723b1ab83b13e5c03da927',1,'sensesp::SensESPBaseApp::reset()']]],
   ['reset_5fall_17',['reset_all',['../classsensesp_1_1_resettable.html#a062ebaddf82e34977e6bb38175a86310',1,'sensesp::Resettable']]],
   ['reset_5fmeta_5fsend_18',['reset_meta_send',['../classsensesp_1_1_s_k_delta_queue.html#add56c07207ea03780ac30a48ce4f38ab',1,'sensesp::SKDeltaQueue']]],
-  ['resettable_19',['Resettable',['../classsensesp_1_1_resettable.html#a8ea93b67d80ff4769925d6398074c30b',1,'sensesp::Resettable']]],
-  ['restart_20',['restart',['../classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36',1,'sensesp::SKWSClient']]],
-  ['rgbled_21',['RgbLed',['../classsensesp_1_1_rgb_led.html#a12c7e6fcc5767e83f58c3e4bbc14497c',1,'sensesp::RgbLed']]],
-  ['rgbsystemstatusled_22',['RGBSystemStatusLed',['../classsensesp_1_1_r_g_b_system_status_led.html#a73b4a62a946b0b877401053ea09cb9b4',1,'sensesp::RGBSystemStatusLed']]],
-  ['roundtoint_23',['RoundToInt',['../classsensesp_1_1_round_to_int.html#a06a6358515262f715b2212ee40d78dbb',1,'sensesp::RoundToInt']]],
-  ['routedefinition_24',['RouteDefinition',['../classsensesp_1_1_route_definition.html#a6879a3f3b4be6820399a369805bc4340',1,'sensesp::RouteDefinition']]]
+  ['reset_5ftofu_5ffingerprint_19',['reset_tofu_fingerprint',['../classsensesp_1_1_s_k_w_s_client.html#a0307adfe57c08bf78513cb67f85ee592',1,'sensesp::SKWSClient']]],
+  ['resettable_20',['Resettable',['../classsensesp_1_1_resettable.html#a8ea93b67d80ff4769925d6398074c30b',1,'sensesp::Resettable']]],
+  ['restart_21',['restart',['../classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36',1,'sensesp::SKWSClient']]],
+  ['rgbled_22',['RgbLed',['../classsensesp_1_1_rgb_led.html#a12c7e6fcc5767e83f58c3e4bbc14497c',1,'sensesp::RgbLed']]],
+  ['rgbsystemstatusled_23',['RGBSystemStatusLed',['../classsensesp_1_1_r_g_b_system_status_led.html#a73b4a62a946b0b877401053ea09cb9b4',1,'sensesp::RGBSystemStatusLed']]],
+  ['roundtoint_24',['RoundToInt',['../classsensesp_1_1_round_to_int.html#a06a6358515262f715b2212ee40d78dbb',1,'sensesp::RoundToInt']]],
+  ['routedefinition_25',['RouteDefinition',['../classsensesp_1_1_route_definition.html#a6879a3f3b4be6820399a369805bc4340',1,'sensesp::RouteDefinition']]]
 ];
