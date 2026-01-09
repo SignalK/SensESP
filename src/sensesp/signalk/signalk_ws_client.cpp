@@ -946,11 +946,20 @@ void SKWSClient::connect_ws(const String& host, const uint16_t port) {
 
   ESP_LOGD(__FILENAME__, "Connecting WebSocket to %s", url.c_str());
 
+  // Build authorization header string (must persist through init call)
+  String auth_header;
+  if (auth_token_ != NULL_AUTH_TOKEN) {
+    auth_header = String("Authorization: Bearer ") + auth_token_ + "\r\n";
+  }
+
   // Configure WebSocket client
   esp_websocket_client_config_t config = {};
   config.uri = url.c_str();
   config.task_stack = 8192;
   config.buffer_size = 1024;
+  if (auth_header.length() > 0) {
+    config.headers = auth_header.c_str();
+  }
 
 #ifdef SENSESP_SSL_SUPPORT
   if (ssl_enabled_) {
@@ -978,14 +987,6 @@ void SKWSClient::connect_ws(const String& host, const uint16_t port) {
   // Register event handler
   esp_websocket_register_events(client_, WEBSOCKET_EVENT_ANY,
                                 websocket_event_handler, nullptr);
-
-  // Add authorization header if we have a token
-#ifdef SENSESP_SSL_SUPPORT
-  if (auth_token_ != NULL_AUTH_TOKEN) {
-    esp_websocket_client_append_header(client_, "Authorization",
-                                       (String("Bearer ") + auth_token_).c_str());
-  }
-#endif
 
   // Start the client
   esp_err_t err = esp_websocket_client_start(client_);
