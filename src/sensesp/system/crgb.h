@@ -98,6 +98,35 @@ inline constexpr CRGB CRGB::Yellow{255, 255, 0};
 inline constexpr CRGB CRGB::Blue{0, 0, 255};
 
 /**
+ * @brief Apply gamma correction and brightness scaling to a color value.
+ *
+ * Gamma correction is applied first to ensure perceptually correct colors,
+ * then brightness scaling is applied as a linear dimming factor.
+ *
+ * @param value Color value (0-255)
+ * @param brightness Brightness scale (0-255), where 255 = full brightness
+ * @return Scaled value (0-255)
+ */
+inline uint8_t apply_brightness(uint8_t value, uint8_t brightness) {
+  return static_cast<uint8_t>(gamma_correct(value) * brightness / 255);
+}
+
+/**
+ * @brief Convert RGB color to perceptual luminance.
+ *
+ * Uses the standard luminance formula (ITU-R BT.709) that weights
+ * green most heavily, followed by red, then blue.
+ *
+ * @param r Red component (0-255)
+ * @param g Green component (0-255)
+ * @param b Blue component (0-255)
+ * @return Luminance value (0-255)
+ */
+inline uint8_t rgb_to_luminance(uint8_t r, uint8_t g, uint8_t b) {
+  return static_cast<uint8_t>(0.2126 * r + 0.7152 * g + 0.0722 * b);
+}
+
+/**
  * @brief Linear interpolation (blend) between two colors.
  *
  * @param p1 First color (returned when amountOfP2 == 0)

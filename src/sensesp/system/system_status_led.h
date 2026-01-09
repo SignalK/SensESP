@@ -123,16 +123,9 @@ class SystemStatusLed : public BaseSystemStatusLed {
 #endif
   uint8_t brightness_;
   void show() override {
-    // Convert the RGB color to a single brightness value using the
-    // perceptual luminance formula.
-    // value is scaled to 0-255.
-    int value = ((0.2126 * leds_[0].r +  // Red contribution
-                    0.7152 * leds_[0].g +  // Green contribution
-                    0.0722 * leds_[0].b    // Blue contribution
-                    ) *
-                   brightness_ / (255.0));
-    // Apply gamma correction for perceptually linear brightness
-    value = gamma_correct(value);
+    // Convert RGB to luminance, then apply gamma correction and brightness
+    uint8_t luminance = rgb_to_luminance(leds_[0].r, leds_[0].g, leds_[0].b);
+    uint8_t value = apply_brightness(luminance, brightness_);
 #if ESP_ARDUINO_VERSION_MAJOR >= 3
     ledcWrite(pin_, value);
 #else
@@ -156,10 +149,10 @@ class RGBSystemStatusLed : public BaseSystemStatusLed {
   uint8_t pin_;
   uint8_t brightness_;
   void show() override {
-    // Apply gamma correction for perceptually linear brightness
-    rgbLedWrite(pin_, gamma_correct(brightness_ * leds_[0].r / 255),
-                gamma_correct(brightness_ * leds_[0].g / 255),
-                gamma_correct(brightness_ * leds_[0].b / 255));
+    rgbLedWrite(pin_,
+                apply_brightness(leds_[0].r, brightness_),
+                apply_brightness(leds_[0].g, brightness_),
+                apply_brightness(leds_[0].b, brightness_));
   }
 
   void set_brightness(uint8_t brightness) override { brightness_ = brightness; }
