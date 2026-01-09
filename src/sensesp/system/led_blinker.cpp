@@ -27,7 +27,7 @@ LEDPatternFragment frag_linear_fade(uint32_t duration_ms,
           from_color = crgb;
         }
         last_elapsed_ms = elapsed_ms;
-        if (elapsed_ms >= fade_duration_ms) {
+        if (fade_duration_ms == 0 || elapsed_ms >= fade_duration_ms) {
           crgb = target_color;
           return;
         }
@@ -42,6 +42,10 @@ LEDPatternFragment frag_linear_invert(uint32_t duration_ms, bool reverse) {
   return LEDPatternFragment(
       duration_ms, [duration_ms, reverse](uint32_t elapsed_ms, CRGB& crgb) {
         // Blend the color from current color to inverted
+        if (duration_ms == 0) {
+          crgb = CRGB(255, 255, 255) - crgb;
+          return;
+        }
         if (reverse) {
           crgb = blend(CRGB(255, 255, 255) - crgb, crgb,
                        elapsed_ms * 255 / duration_ms);
@@ -56,6 +60,10 @@ LEDPatternFragment frag_blend(uint32_t duration_ms, const CRGB& target_color,
                               bool reverse) {
   return LEDPatternFragment(duration_ms, [duration_ms, reverse, target_color](
                                              uint32_t elapsed_ms, CRGB& crgb) {
+    if (duration_ms == 0) {
+      crgb = reverse ? crgb : target_color;
+      return;
+    }
     if (reverse) {
       crgb = blend(target_color, crgb, elapsed_ms * 255 / duration_ms);
     } else {

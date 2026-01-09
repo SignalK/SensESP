@@ -6,11 +6,11 @@
 namespace sensesp {
 
 /**
- * @brief Gamma correction lookup table (γ=2.8, inverted).
+ * @brief Gamma correction lookup table (γ=2.2, inverted).
  *
  * Pre-computed values for inverse gamma correction to avoid expensive
  * floating-point math in the hot path. Generated with:
- *   table[i] = round(pow(i/255.0, 1/2.8) * 255)
+ *   table[i] = round(pow(i/255.0, 1/2.2) * 255)
  */
 // clang-format off
 constexpr uint8_t kGammaTable[256] = {
