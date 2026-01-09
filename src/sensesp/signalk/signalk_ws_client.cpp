@@ -583,7 +583,7 @@ void SKWSClient::connect() {
     return;
   }
 
-  if (this->polling_href_ != "") {
+  if (this->polling_href_.length() > 0 && this->polling_href_.startsWith("/")) {
     // existing pending request
     this->poll_access_request(this->server_address_, this->server_port_,
                               this->polling_href_);
@@ -634,52 +634,64 @@ void SKWSClient::test_token(const String server_address,
 
   esp_http_client_set_header(client, "Authorization", full_token.c_str());
 
-  esp_err_t err = esp_http_client_perform(client);
-  int http_code = esp_http_client_get_status_code(client);
-  int content_length = esp_http_client_get_content_length(client);
+  // Use streaming API for GET request
+  esp_err_t err = esp_http_client_open(client, 0);
+  if (err != ESP_OK) {
+    ESP_LOGE(__FILENAME__, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+    esp_http_client_cleanup(client);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    return;
+  }
 
+  int content_length = esp_http_client_fetch_headers(client);
+  int http_code = esp_http_client_get_status_code(client);
+
+  ESP_LOGD(__FILENAME__, "Testing resulted in http status %d", http_code);
+
+  // Read response body if present
   String payload;
-  if (err == ESP_OK && content_length > 0 && content_length < 1024) {
+  if (content_length > 0 && content_length < 1024) {
     char* buffer = new char[content_length + 1];
-    esp_http_client_read(client, buffer, content_length);
-    buffer[content_length] = '\0';
+    int read_len = esp_http_client_read(client, buffer, content_length);
+    buffer[read_len > 0 ? read_len : 0] = '\0';
     payload = String(buffer);
     delete[] buffer;
   }
 
+  esp_http_client_close(client);
   esp_http_client_cleanup(client);
 
-  if (err == ESP_OK) {
-    ESP_LOGD(__FILENAME__, "Testing resulted in http status %d", http_code);
-    if (payload.length() > 0) {
-      ESP_LOGD(__FILENAME__,
-               "Returned payload (length %d) is: ", payload.length());
-      ESP_LOGD(__FILENAME__, "%s", payload.c_str());
-    } else {
-      ESP_LOGD(__FILENAME__, "Returned payload is empty");
-    }
-    if (http_code == 426) {
-      // HTTP status 426 is "Upgrade Required", which is the expected
-      // response for a websocket connection.
-      ESP_LOGD(__FILENAME__, "Attempting to connect to Signal K Websocket...");
-      server_detected_ = true;
-      token_test_success_ = true;
-      this->connect_ws(server_address, server_port);
-    } else if (http_code == 401) {
-      this->client_id_ = "";
-      this->send_access_request(server_address, server_port);
-    } else {
-      set_connection_state(SKWSConnectionState::kSKWSDisconnected);
-    }
+  if (payload.length() > 0) {
+    ESP_LOGD(__FILENAME__, "Returned payload (length %d): %s",
+             payload.length(), payload.c_str());
+  }
+
+  if (http_code == 426) {
+    // HTTP status 426 is "Upgrade Required", which is the expected
+    // response for a websocket connection.
+    ESP_LOGD(__FILENAME__, "Attempting to connect to Signal K Websocket...");
+    server_detected_ = true;
+    token_test_success_ = true;
+    this->connect_ws(server_address, server_port);
+  } else if (http_code == 401) {
+    // Token is invalid/expired - clear it and request new access
+    // Keep client_id_ so we reuse the same device identity
+    ESP_LOGW(__FILENAME__, "Token rejected (401), requesting new access");
+    this->auth_token_ = NULL_AUTH_TOKEN;
+    this->save();
+    this->send_access_request(server_address, server_port);
+  } else if (http_code > 0) {
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   } else {
-    ESP_LOGE(__FILENAME__, "HTTP request failed: %s", esp_err_to_name(err));
+    ESP_LOGE(__FILENAME__, "HTTP request failed with code %d", http_code);
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   }
 }
 
 void SKWSClient::send_access_request(const String server_address,
                                      const uint16_t server_port) {
-  ESP_LOGD(__FILENAME__, "Preparing a new access request");
+  ESP_LOGI(__FILENAME__, "Sending access request (client_id=%s, ssl=%d)",
+           client_id_.c_str(), ssl_enabled_);
   if (client_id_ == "") {
     // generate a client ID
     client_id_ = generate_uuid4();
@@ -717,56 +729,84 @@ void SKWSClient::send_access_request(const String server_address,
   if (client == nullptr) {
     ESP_LOGE(__FILENAME__, "Failed to initialize HTTP client");
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
-    client_id_ = "";
+    // Don't clear client_id_ - keep device identity for retry
     return;
   }
 
   esp_http_client_set_header(client, "Content-Type", "application/json");
-  esp_http_client_set_post_field(client, json_req.c_str(), json_req.length());
 
-  esp_err_t err = esp_http_client_perform(client);
-  int http_code = esp_http_client_get_status_code(client);
-  int content_length = esp_http_client_get_content_length(client);
-
-  String payload;
-  if (err == ESP_OK && content_length > 0 && content_length < 2048) {
-    char* buffer = new char[content_length + 1];
-    esp_http_client_read(client, buffer, content_length);
-    buffer[content_length] = '\0';
-    payload = String(buffer);
-    delete[] buffer;
+  // Use streaming API: open -> write request -> fetch headers -> read response
+  esp_err_t err = esp_http_client_open(client, json_req.length());
+  if (err != ESP_OK) {
+    ESP_LOGE(__FILENAME__, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+    esp_http_client_cleanup(client);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    return;
   }
 
+  int write_len = esp_http_client_write(client, json_req.c_str(), json_req.length());
+  if (write_len < 0) {
+    ESP_LOGE(__FILENAME__, "Failed to write request body");
+    esp_http_client_close(client);
+    esp_http_client_cleanup(client);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+    return;
+  }
+
+  int content_length = esp_http_client_fetch_headers(client);
+  int http_code = esp_http_client_get_status_code(client);
+
+  ESP_LOGD(__FILENAME__, "HTTP response: code=%d, content_length=%d", http_code, content_length);
+
+  // Read response body
+  String payload;
+  char buffer[512];
+  int read_len;
+  while ((read_len = esp_http_client_read(client, buffer, sizeof(buffer) - 1)) > 0) {
+    buffer[read_len] = '\0';
+    payload += String(buffer);
+    if (payload.length() > 4096) break;
+  }
+  ESP_LOGI(__FILENAME__, "Response payload (%d bytes): %s",
+           payload.length(), payload.c_str());
+
+  esp_http_client_close(client);
   esp_http_client_cleanup(client);
 
-  // if we get a response we can't handle, try to reconnect later
-  if (err != ESP_OK || http_code != 202) {
-    ESP_LOGW(__FILENAME__, "Can't handle response %d to access request.",
-             http_code);
-    ESP_LOGD(__FILENAME__, "%s", payload.c_str());
-    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
-    client_id_ = "";
-    return;
-  }
-
-  // http status code 202
-
+  // Parse JSON response for both 202 and 400 status codes
   deserializeJson(doc, payload.c_str());
-  String state = doc["state"];
+  String state = doc["state"].is<const char*>() ? doc["state"].as<String>() : "";
+  String href = doc["href"].is<const char*>() ? doc["href"].as<String>() : "";
+  String message = doc["message"].is<const char*>() ? doc["message"].as<String>() : "";
 
-  if (state != "PENDING") {
-    ESP_LOGW(__FILENAME__, "Got unknown state: %s", state.c_str());
-    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
-    client_id_ = "";
+  ESP_LOGI(__FILENAME__, "Access request response: http=%d, state=%s, href=%s",
+           http_code, state.c_str(), href.c_str());
+  if (message.length() > 0) {
+    ESP_LOGI(__FILENAME__, "Server message: %s", message.c_str());
+  }
+
+  // HTTP 400 with href means "already requested" - we can poll the existing request
+  if (http_code == 400 && href.length() > 0 && href.startsWith("/")) {
+    ESP_LOGI(__FILENAME__, "Existing request found, polling href: %s", href.c_str());
+    polling_href_ = href;
+    save();
+    delay(5000);
+    this->poll_access_request(server_address, server_port, this->polling_href_);
     return;
   }
 
-  String href = doc["href"];
-  polling_href_ = href;
-  save();
+  // HTTP 202 with href means new request pending
+  if (http_code == 202 && href.length() > 0 && href.startsWith("/")) {
+    polling_href_ = href;
+    save();
+    delay(5000);
+    this->poll_access_request(server_address, server_port, this->polling_href_);
+    return;
+  }
 
-  delay(5000);
-  this->poll_access_request(server_address, server_port, this->polling_href_);
+  // Can't proceed - disconnect and retry later
+  ESP_LOGW(__FILENAME__, "Cannot handle response: http=%d, state=%s", http_code, state.c_str());
+  set_connection_state(SKWSConnectionState::kSKWSDisconnected);
 }
 
 void SKWSClient::poll_access_request(const String server_address,
@@ -794,26 +834,41 @@ void SKWSClient::poll_access_request(const String server_address,
     return;
   }
 
-  esp_err_t err = esp_http_client_perform(client);
-  int http_code = esp_http_client_get_status_code(client);
-  int content_length = esp_http_client_get_content_length(client);
-
-  String payload;
-  if (err == ESP_OK && content_length > 0 && content_length < 4096) {
-    char* buffer = new char[content_length + 1];
-    esp_http_client_read(client, buffer, content_length);
-    buffer[content_length] = '\0';
-    payload = String(buffer);
-    delete[] buffer;
-  }
-
-  esp_http_client_cleanup(client);
-
+  // Use streaming API for GET request
+  esp_err_t err = esp_http_client_open(client, 0);
   if (err != ESP_OK) {
-    ESP_LOGE(__FILENAME__, "HTTP request failed: %s", esp_err_to_name(err));
+    ESP_LOGE(__FILENAME__, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+    esp_http_client_cleanup(client);
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     return;
   }
+
+  int content_length = esp_http_client_fetch_headers(client);
+  int http_code = esp_http_client_get_status_code(client);
+
+  // Read response body
+  String payload;
+  if (content_length > 0 && content_length < 4096) {
+    char* buffer = new char[content_length + 1];
+    int read_len = esp_http_client_read(client, buffer, content_length);
+    buffer[read_len > 0 ? read_len : 0] = '\0';
+    payload = String(buffer);
+    delete[] buffer;
+  } else if (content_length < 0) {
+    // Chunked encoding - read in chunks
+    char buffer[512];
+    int read_len;
+    while ((read_len = esp_http_client_read(client, buffer, sizeof(buffer) - 1)) > 0) {
+      buffer[read_len] = '\0';
+      payload += String(buffer);
+      if (payload.length() > 4096) break;
+    }
+  }
+
+  ESP_LOGD(__FILENAME__, "Poll response: http=%d, payload=%s", http_code, payload.c_str());
+
+  esp_http_client_close(client);
+  esp_http_client_cleanup(client);
 
   if (http_code == 200 || http_code == 202) {
     JsonDocument doc;
@@ -994,7 +1049,9 @@ bool SKWSClient::from_json(const JsonObject& config) {
     this->client_id_ = config["client_id"].as<String>();
   }
   if (config["polling_href"].is<String>()) {
-    this->polling_href_ = config["polling_href"].as<String>();
+    String href = config["polling_href"].as<String>();
+    // Only accept valid hrefs (must start with /)
+    this->polling_href_ = href.startsWith("/") ? href : "";
   }
 
   if (config["ssl_enabled"].is<bool>()) {
