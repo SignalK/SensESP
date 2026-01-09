@@ -2,8 +2,25 @@
 #define SENSESP_SYSTEM_CRGB_H_
 
 #include <cstdint>
+#include <cmath>
 
 namespace sensesp {
+
+/**
+ * @brief Apply gamma correction to an 8-bit value.
+ *
+ * LED brightness perception is non-linear - human eyes perceive brightness
+ * logarithmically. This function applies inverse gamma correction to boost
+ * low brightness values, making dim LEDs more visible.
+ *
+ * @param value Linear input value (0-255)
+ * @param gamma Gamma exponent (typical: 2.2-2.8 for LEDs, inverted internally)
+ * @return Gamma-corrected value (0-255)
+ */
+inline uint8_t gamma_correct(uint8_t value, float gamma = 2.8f) {
+  // Apply inverse gamma to boost low values
+  return static_cast<uint8_t>(std::pow(value / 255.0f, 1.0f / gamma) * 255.0f + 0.5f);
+}
 
 /**
  * @brief Minimal RGB color struct.
