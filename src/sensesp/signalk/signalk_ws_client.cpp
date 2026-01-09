@@ -648,21 +648,30 @@ void SKWSClient::test_token(const String server_address,
 
   ESP_LOGD(__FILENAME__, "Testing resulted in http status %d", http_code);
 
-  // Read response body if present
+  // Read response body
   String payload;
-  if (content_length > 0 && content_length < 1024) {
+  if (content_length > 0 && content_length < 4096) {
     char* buffer = new char[content_length + 1];
     int read_len = esp_http_client_read(client, buffer, content_length);
     buffer[read_len > 0 ? read_len : 0] = '\0';
     payload = String(buffer);
     delete[] buffer;
+  } else {
+    // Chunked encoding or unknown/large content length - read in chunks
+    char buffer[512];
+    int read_len;
+    while ((read_len = esp_http_client_read(client, buffer, sizeof(buffer) - 1)) > 0) {
+      buffer[read_len] = '\0';
+      payload += String(buffer);
+      if (payload.length() > 4096) break;
+    }
   }
 
   esp_http_client_close(client);
   esp_http_client_cleanup(client);
 
   if (payload.length() > 0) {
-    ESP_LOGD(__FILENAME__, "Returned payload (length %d): %s",
+    ESP_LOGD(__FILENAME__, "Returned payload (%d bytes): %s",
              payload.length(), payload.c_str());
   }
 
@@ -690,7 +699,7 @@ void SKWSClient::test_token(const String server_address,
 
 void SKWSClient::send_access_request(const String server_address,
                                      const uint16_t server_port) {
-  ESP_LOGI(__FILENAME__, "Sending access request (client_id=%s, ssl=%d)",
+  ESP_LOGD(__FILENAME__, "Sending access request (client_id=%s, ssl=%d)",
            client_id_.c_str(), ssl_enabled_);
   if (client_id_ == "") {
     // generate a client ID
@@ -745,8 +754,9 @@ void SKWSClient::send_access_request(const String server_address,
   }
 
   int write_len = esp_http_client_write(client, json_req.c_str(), json_req.length());
-  if (write_len < 0) {
-    ESP_LOGE(__FILENAME__, "Failed to write request body");
+  if (write_len < 0 || write_len != (int)json_req.length()) {
+    ESP_LOGE(__FILENAME__, "Failed to write request body (wrote %d of %d bytes)",
+             write_len, json_req.length());
     esp_http_client_close(client);
     esp_http_client_cleanup(client);
     set_connection_state(SKWSConnectionState::kSKWSDisconnected);
@@ -767,7 +777,7 @@ void SKWSClient::send_access_request(const String server_address,
     payload += String(buffer);
     if (payload.length() > 4096) break;
   }
-  ESP_LOGI(__FILENAME__, "Response payload (%d bytes): %s",
+  ESP_LOGD(__FILENAME__, "Response payload (%d bytes): %s",
            payload.length(), payload.c_str());
 
   esp_http_client_close(client);
@@ -779,7 +789,7 @@ void SKWSClient::send_access_request(const String server_address,
   String href = doc["href"].is<const char*>() ? doc["href"].as<String>() : "";
   String message = doc["message"].is<const char*>() ? doc["message"].as<String>() : "";
 
-  ESP_LOGI(__FILENAME__, "Access request response: http=%d, state=%s, href=%s",
+  ESP_LOGD(__FILENAME__, "Access request response: http=%d, state=%s, href=%s",
            http_code, state.c_str(), href.c_str());
   if (message.length() > 0) {
     ESP_LOGI(__FILENAME__, "Server message: %s", message.c_str());
@@ -854,8 +864,8 @@ void SKWSClient::poll_access_request(const String server_address,
     buffer[read_len > 0 ? read_len : 0] = '\0';
     payload = String(buffer);
     delete[] buffer;
-  } else if (content_length < 0) {
-    // Chunked encoding - read in chunks
+  } else {
+    // Chunked encoding or unknown/large content length - read in chunks
     char buffer[512];
     int read_len;
     while ((read_len = esp_http_client_read(client, buffer, sizeof(buffer) - 1)) > 0) {
