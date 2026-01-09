@@ -2,9 +2,36 @@
 #define SENSESP_SYSTEM_CRGB_H_
 
 #include <cstdint>
-#include <cmath>
 
 namespace sensesp {
+
+/**
+ * @brief Gamma correction lookup table (γ=2.8, inverted).
+ *
+ * Pre-computed values for inverse gamma correction to avoid expensive
+ * floating-point math in the hot path. Generated with:
+ *   table[i] = round(pow(i/255.0, 1/2.8) * 255)
+ */
+// clang-format off
+constexpr uint8_t kGammaTable[256] = {
+    0,  21,  28,  34,  39,  43,  46,  50,  53,  56,  59,  61,  64,  66,  68,  70,
+   72,  74,  76,  78,  80,  82,  84,  85,  87,  89,  90,  92,  93,  95,  96,  98,
+   99, 101, 102, 103, 105, 106, 107, 109, 110, 111, 112, 114, 115, 116, 117, 118,
+  119, 120, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,
+  136, 137, 138, 139, 140, 141, 142, 143, 144, 144, 145, 146, 147, 148, 149, 150,
+  150, 151, 152, 153, 154, 155, 155, 156, 157, 158, 159, 159, 160, 161, 162, 162,
+  163, 164, 165, 165, 166, 167, 167, 168, 169, 170, 170, 171, 172, 172, 173, 174,
+  174, 175, 176, 176, 177, 178, 178, 179, 180, 180, 181, 181, 182, 183, 183, 184,
+  185, 185, 186, 186, 187, 188, 188, 189, 189, 190, 190, 191, 192, 192, 193, 193,
+  194, 194, 195, 196, 196, 197, 197, 198, 198, 199, 199, 200, 200, 201, 201, 202,
+  202, 203, 203, 204, 204, 205, 205, 206, 206, 207, 207, 208, 208, 209, 209, 210,
+  210, 211, 211, 212, 212, 213, 213, 214, 214, 215, 215, 215, 216, 216, 217, 217,
+  218, 218, 219, 219, 219, 220, 220, 221, 221, 222, 222, 222, 223, 223, 224, 224,
+  225, 225, 225, 226, 226, 227, 227, 227, 228, 228, 229, 229, 229, 230, 230, 231,
+  231, 231, 232, 232, 233, 233, 233, 234, 234, 234, 235, 235, 236, 236, 236, 237,
+  237, 237, 238, 238, 238, 239, 239, 240, 240, 240, 241, 241, 241, 242, 242, 255,
+};
+// clang-format on
 
 /**
  * @brief Apply gamma correction to an 8-bit value.
@@ -13,13 +40,13 @@ namespace sensesp {
  * logarithmically. This function applies inverse gamma correction to boost
  * low brightness values, making dim LEDs more visible.
  *
+ * Uses a lookup table for efficiency (called at 200Hz).
+ *
  * @param value Linear input value (0-255)
- * @param gamma Gamma exponent (typical: 2.2-2.8 for LEDs, inverted internally)
  * @return Gamma-corrected value (0-255)
  */
-inline uint8_t gamma_correct(uint8_t value, float gamma = 2.8f) {
-  // Apply inverse gamma to boost low values
-  return static_cast<uint8_t>(std::pow(value / 255.0f, 1.0f / gamma) * 255.0f + 0.5f);
+inline uint8_t gamma_correct(uint8_t value) {
+  return kGammaTable[value];
 }
 
 /**

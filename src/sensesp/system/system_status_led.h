@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <vector>
-#include <vector>
 
 #include "lambda_consumer.h"
 #include "led_blinker.h"
