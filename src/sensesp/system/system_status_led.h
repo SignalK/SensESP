@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <vector>
-#include <vector>
 
 #include "lambda_consumer.h"
 #include "led_blinker.h"
@@ -132,6 +131,8 @@ class SystemStatusLed : public BaseSystemStatusLed {
                     0.0722 * leds_[0].b    // Blue contribution
                     ) *
                    brightness_ / (255.0));
+    // Apply gamma correction for perceptually linear brightness
+    value = gamma_correct(value);
 #if ESP_ARDUINO_VERSION_MAJOR >= 3
     ledcWrite(pin_, value);
 #else
@@ -155,8 +156,10 @@ class RGBSystemStatusLed : public BaseSystemStatusLed {
   uint8_t pin_;
   uint8_t brightness_;
   void show() override {
-    rgbLedWrite(pin_, brightness_ * leds_[0].r / 255,
-                brightness_ * leds_[0].g / 255, brightness_ * leds_[0].b / 255);
+    // Apply gamma correction for perceptually linear brightness
+    rgbLedWrite(pin_, gamma_correct(brightness_ * leds_[0].r / 255),
+                gamma_correct(brightness_ * leds_[0].g / 255),
+                gamma_correct(brightness_ * leds_[0].b / 255));
   }
 
   void set_brightness(uint8_t brightness) override { brightness_ = brightness; }
