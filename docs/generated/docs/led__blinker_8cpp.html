@@ -33,7 +33,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.2.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.2.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -100,7 +100,8 @@ $(function(){initNavTree('led__blinker_8cpp.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="led__blinker_8h_source.html">led_blinker.h</a>&quot;</code><br />
-<code>#include &quot;FastLED.h&quot;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for led_blinker.cpp:</div>
 <div class="dyncontent">
@@ -115,10 +116,10 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af34f616090eae5c2e70266a732c94802" id="r_af34f616090eae5c2e70266a732c94802"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacesensesp.html#af34f616090eae5c2e70266a732c94802">sensesp::frag_solid_color</a> (uint32_t duration_ms, const CRGB &amp;color)</td></tr>
-<tr class="memitem:a1f21e2f92237425c8b53413f75856f9a" id="r_a1f21e2f92237425c8b53413f75856f9a"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacesensesp.html#a1f21e2f92237425c8b53413f75856f9a">sensesp::frag_linear_fade</a> (uint32_t duration_ms, uint32_t fade_duration_ms, const CRGB &amp;target_color)</td></tr>
+<tr class="memitem:af34f616090eae5c2e70266a732c94802" id="r_af34f616090eae5c2e70266a732c94802"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacesensesp.html#af34f616090eae5c2e70266a732c94802">sensesp::frag_solid_color</a> (uint32_t duration_ms, const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;color)</td></tr>
+<tr class="memitem:a1f21e2f92237425c8b53413f75856f9a" id="r_a1f21e2f92237425c8b53413f75856f9a"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacesensesp.html#a1f21e2f92237425c8b53413f75856f9a">sensesp::frag_linear_fade</a> (uint32_t duration_ms, uint32_t fade_duration_ms, const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;target_color)</td></tr>
 <tr class="memitem:aecd85db6525d8c1cbd8ca0344c68320c" id="r_aecd85db6525d8c1cbd8ca0344c68320c"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacesensesp.html#aecd85db6525d8c1cbd8ca0344c68320c">sensesp::frag_linear_invert</a> (uint32_t duration_ms, bool reverse)</td></tr>
-<tr class="memitem:aacd579ca8d37417f0ecd6f610f19f22a" id="r_aacd579ca8d37417f0ecd6f610f19f22a"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacesensesp.html#aacd579ca8d37417f0ecd6f610f19f22a">sensesp::frag_blend</a> (uint32_t duration_ms, const CRGB &amp;target_color, bool reverse)</td></tr>
+<tr class="memitem:aacd579ca8d37417f0ecd6f610f19f22a" id="r_aacd579ca8d37417f0ecd6f610f19f22a"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacesensesp.html#aacd579ca8d37417f0ecd6f610f19f22a">sensesp::frag_blend</a> (uint32_t duration_ms, const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;target_color, bool reverse)</td></tr>
 <tr class="memitem:a507796e7c39f8249a2dd3ba315c5e29e" id="r_a507796e7c39f8249a2dd3ba315c5e29e"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="namespacesensesp.html#a507796e7c39f8249a2dd3ba315c5e29e">sensesp::frag_nop</a> (uint32_t duration_ms)</td></tr>
 </table>
 </div><!-- contents -->

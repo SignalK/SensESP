@@ -7,5 +7,5 @@ var searchData=
   ['ledpatternfragment_4',['LEDPatternFragment',['../classsensesp_1_1_l_e_d_pattern_fragment.html#ab51bdaa8fed936c872c998066e15fae7',1,'sensesp::LEDPatternFragment::LEDPatternFragment(uint32_t duration_ms, FragmentCallback callback)'],['../classsensesp_1_1_l_e_d_pattern_fragment.html#a0aeed9907743110ff6aba501618e26cb',1,'sensesp::LEDPatternFragment::LEDPatternFragment(const LEDPatternFragment &amp;other)']]],
   ['linear_5',['Linear',['../classsensesp_1_1_linear.html#a4e6da29a8b74a160470f9cc934a4b572',1,'sensesp::Linear']]],
   ['load_6',['load',['../classsensesp_1_1_saveable.html#adaf384fbe58c917879feaf7b054620a1',1,'sensesp::Saveable::load()'],['../classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a',1,'sensesp::FileSystemSaveable::load()'],['../classsensesp_1_1_config_item_base.html#a21fade93e4abce3b060840496353485b',1,'sensesp::ConfigItemBase::load()'],['../classsensesp_1_1_config_item_t.html#a928a4caa4c6f4c1ebda4904720184a44',1,'sensesp::ConfigItemT::load()']]],
-  ['loop_7',['loop',['../classsensesp_1_1_s_k_w_s_client.html#a24be571bdd7183f50711457a9be96fd6',1,'sensesp::SKWSClient::loop()'],['../main_8cpp.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;main.cpp']]]
+  ['loop_7',['loop',['../classsensesp_1_1_s_k_w_s_client.html#a24be571bdd7183f50711457a9be96fd6',1,'sensesp::SKWSClient']]]
 ];

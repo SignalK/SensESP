@@ -33,7 +33,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.2.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.2.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -200,6 +200,8 @@ it must have &lt;tt&gt;units&lt;/tt&gt;". Thus, any paths that you output that a
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for button handlers.  <a href="classsensesp_1_1_base_button_handler.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ButtonHandler" id="r_ButtonHandler"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsensesp_1_1_button_handler.html">ButtonHandler</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Button Handler for <a class="el" href="classsensesp_1_1_sens_e_s_p_app.html">SensESPApp</a> applications.  <a href="classsensesp_1_1_button_handler.html#details">More...</a><br /></td></tr>
+<tr class="memitem:CRGB" id="r_CRGB"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal RGB color struct.  <a href="structsensesp_1_1_c_r_g_b.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ExpiringValue" id="r_ExpiringValue"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsensesp_1_1_expiring_value.html">ExpiringValue</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Value container that keeps track of its expiration time.  <a href="classsensesp_1_1_expiring_value.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Filesystem" id="r_Filesystem"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsensesp_1_1_filesystem.html">Filesystem</a></td></tr>
@@ -411,7 +413,7 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ae4391af3bafa991ddb69426fba458ebd" id="r_ae4391af3bafa991ddb69426fba458ebd"><td class="memItemLeft">typedef <a class="el" href="classsensesp_1_1_s_k_value_listener.html">SKValueListener</a>&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae4391af3bafa991ddb69426fba458ebd">IntSKListener</a></td></tr>
 <tr class="memitem:ae367d054a7ad1a6968713c3ef9560c90" id="r_ae367d054a7ad1a6968713c3ef9560c90"><td class="memItemLeft">typedef <a class="el" href="classsensesp_1_1_s_k_value_listener.html">SKValueListener</a>&lt; bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae367d054a7ad1a6968713c3ef9560c90">BoolSKListener</a></td></tr>
 <tr class="memitem:a71b2cfc6dbad86772553591f8454caf9" id="r_a71b2cfc6dbad86772553591f8454caf9"><td class="memItemLeft">typedef <a class="el" href="classsensesp_1_1_s_k_value_listener.html">SKValueListener</a>&lt; String &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a71b2cfc6dbad86772553591f8454caf9">StringSKListener</a></td></tr>
-<tr class="memitem:abfaef059d40b1255952218e3a2e2b255" id="r_abfaef059d40b1255952218e3a2e2b255"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#abfaef059d40b1255952218e3a2e2b255">FragmentCallback</a> = std::function&lt;void(uint32_t, CRGB&amp;)&gt;</td></tr>
+<tr class="memitem:abfaef059d40b1255952218e3a2e2b255" id="r_abfaef059d40b1255952218e3a2e2b255"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#abfaef059d40b1255952218e3a2e2b255">FragmentCallback</a> = std::function&lt;void(uint32_t, <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a>&amp;)&gt;</td></tr>
 <tr class="memitem:a63177ab371fe27d7fa72593c47e284fa" id="r_a63177ab371fe27d7fa72593c47e284fa"><td class="memItemLeft">typedef <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; float &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a63177ab371fe27d7fa72593c47e284fa">FloatConsumer</a></td></tr>
 <tr class="memitem:a8f5caff5c968908780d465cd1bfd440f" id="r_a8f5caff5c968908780d465cd1bfd440f"><td class="memItemLeft">typedef <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8f5caff5c968908780d465cd1bfd440f">IntConsumer</a></td></tr>
 <tr class="memitem:a37b4b3e0f9bd730e0c8050477598c68d" id="r_a37b4b3e0f9bd730e0c8050477598c68d"><td class="memItemLeft">typedef <a class="el" href="classsensesp_1_1_value_consumer.html">ValueConsumer</a>&lt; bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a37b4b3e0f9bd730e0c8050477598c68d">BoolConsumer</a></td></tr>
@@ -555,16 +557,24 @@ Functions</h2></td></tr>
 <tr class="memitem:a655898328a16b3c9f85902c5a9c981e6" id="r_a655898328a16b3c9f85902c5a9c981e6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a655898328a16b3c9f85902c5a9c981e6">ExecuteWebSocketTask</a> (void *)</td></tr>
 <tr class="memitem:a0585245c2ada0b231913fdedb754d31e" id="r_a0585245c2ada0b231913fdedb754d31e"><td class="memItemLeft">const String&#160;</td><td class="memItemRight"><a class="el" href="#a0585245c2ada0b231913fdedb754d31e">ConfigSchema</a> (const <a class="el" href="classsensesp_1_1_s_k_w_s_client.html">SKWSClient</a> &amp;obj)</td></tr>
 <tr class="memitem:a90664648fd77529191dc5d0f95d1ebf2" id="r_a90664648fd77529191dc5d0f95d1ebf2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a90664648fd77529191dc5d0f95d1ebf2">ConfigRequiresRestart</a> (const <a class="el" href="classsensesp_1_1_s_k_w_s_client.html">SKWSClient</a> &amp;obj)</td></tr>
+<tr class="memitem:a3920fcb653e284f98c9226722b06dfd8" id="r_a3920fcb653e284f98c9226722b06dfd8"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a3920fcb653e284f98c9226722b06dfd8">gamma_correct</a> (uint8_t value)</td></tr>
+<tr class="memdesc:a3920fcb653e284f98c9226722b06dfd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply gamma correction to an 8-bit value.  <br /></td></tr>
+<tr class="memitem:a2be3dd6f38dd5ec7910a23a04cfaad97" id="r_a2be3dd6f38dd5ec7910a23a04cfaad97"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a2be3dd6f38dd5ec7910a23a04cfaad97">apply_brightness</a> (uint8_t value, uint8_t brightness)</td></tr>
+<tr class="memdesc:a2be3dd6f38dd5ec7910a23a04cfaad97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply gamma correction and brightness scaling to a color value.  <br /></td></tr>
+<tr class="memitem:a2fc152f01a4bfb9aec1047cead15db31" id="r_a2fc152f01a4bfb9aec1047cead15db31"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a2fc152f01a4bfb9aec1047cead15db31">rgb_to_luminance</a> (uint8_t r, uint8_t g, uint8_t b)</td></tr>
+<tr class="memdesc:a2fc152f01a4bfb9aec1047cead15db31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert RGB color to perceptual luminance.  <br /></td></tr>
+<tr class="memitem:ad30e68da050ded2e83ddc9c4e03e1de0" id="r_ad30e68da050ded2e83ddc9c4e03e1de0"><td class="memItemLeft"><a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad30e68da050ded2e83ddc9c4e03e1de0">blend</a> (const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;p1, const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;p2, uint8_t amountOfP2)</td></tr>
+<tr class="memdesc:ad30e68da050ded2e83ddc9c4e03e1de0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsensesp_1_1_linear.html" title="Performs a linear transform on the input value: output_ = (input * multiplier) + offset.">Linear</a> interpolation (blend) between two colors.  <br /></td></tr>
 <tr class="memitem:a37dfeb5f75b7115464a9aa40473d69cf" id="r_a37dfeb5f75b7115464a9aa40473d69cf"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a37dfeb5f75b7115464a9aa40473d69cf">Sha1</a> (const String &amp;payload_str, uint8_t *hash_output)</td></tr>
 <tr class="memdesc:a37dfeb5f75b7115464a9aa40473d69cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">SHA-1 hash function.  <br /></td></tr>
 <tr class="memitem:a546906666b51e1b7285aab6a5c0f5bee" id="r_a546906666b51e1b7285aab6a5c0f5bee"><td class="memItemLeft">String&#160;</td><td class="memItemRight"><a class="el" href="#a546906666b51e1b7285aab6a5c0f5bee">MD5</a> (const String &amp;payload_str)</td></tr>
 <tr class="memdesc:a546906666b51e1b7285aab6a5c0f5bee"><td class="mdescLeft">&#160;</td><td class="mdescRight">MD5 hash function.  <br /></td></tr>
 <tr class="memitem:adad24461f43358c45017cf1cb816ca60" id="r_adad24461f43358c45017cf1cb816ca60"><td class="memItemLeft">String&#160;</td><td class="memItemRight"><a class="el" href="#adad24461f43358c45017cf1cb816ca60">Base64Sha1</a> (const String &amp;payload_str)</td></tr>
 <tr class="memdesc:adad24461f43358c45017cf1cb816ca60"><td class="mdescLeft">&#160;</td><td class="mdescRight">A base64-encoded SHA-1 hash function.  <br /></td></tr>
-<tr class="memitem:af34f616090eae5c2e70266a732c94802" id="r_af34f616090eae5c2e70266a732c94802"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="#af34f616090eae5c2e70266a732c94802">frag_solid_color</a> (uint32_t duration_ms, const CRGB &amp;color)</td></tr>
-<tr class="memitem:a1f21e2f92237425c8b53413f75856f9a" id="r_a1f21e2f92237425c8b53413f75856f9a"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a> (uint32_t duration_ms, uint32_t fade_duration_ms, const CRGB &amp;target_color)</td></tr>
+<tr class="memitem:af34f616090eae5c2e70266a732c94802" id="r_af34f616090eae5c2e70266a732c94802"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="#af34f616090eae5c2e70266a732c94802">frag_solid_color</a> (uint32_t duration_ms, const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;color)</td></tr>
+<tr class="memitem:a1f21e2f92237425c8b53413f75856f9a" id="r_a1f21e2f92237425c8b53413f75856f9a"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a> (uint32_t duration_ms, uint32_t fade_duration_ms, const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;target_color)</td></tr>
 <tr class="memitem:aecd85db6525d8c1cbd8ca0344c68320c" id="r_aecd85db6525d8c1cbd8ca0344c68320c"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="#aecd85db6525d8c1cbd8ca0344c68320c">frag_linear_invert</a> (uint32_t duration_ms, bool reverse)</td></tr>
-<tr class="memitem:aacd579ca8d37417f0ecd6f610f19f22a" id="r_aacd579ca8d37417f0ecd6f610f19f22a"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="#aacd579ca8d37417f0ecd6f610f19f22a">frag_blend</a> (uint32_t duration_ms, const CRGB &amp;target_color, bool reverse)</td></tr>
+<tr class="memitem:aacd579ca8d37417f0ecd6f610f19f22a" id="r_aacd579ca8d37417f0ecd6f610f19f22a"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="#aacd579ca8d37417f0ecd6f610f19f22a">frag_blend</a> (uint32_t duration_ms, const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;target_color, bool reverse)</td></tr>
 <tr class="memitem:a507796e7c39f8249a2dd3ba315c5e29e" id="r_a507796e7c39f8249a2dd3ba315c5e29e"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern_fragment.html">LEDPatternFragment</a>&#160;</td><td class="memItemRight"><a class="el" href="#a507796e7c39f8249a2dd3ba315c5e29e">frag_nop</a> (uint32_t duration_ms)</td></tr>
 <tr class="memitem:aa6a475cd9be10780f70d15372c13c36b" id="r_aa6a475cd9be10780f70d15372c13c36b"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
 <tr class="memitem:aa6a475cd9be10780f70d15372c13c36b template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa6a475cd9be10780f70d15372c13c36b">operator==</a> (<a class="el" href="classsensesp_1_1_observable_value.html">ObservableValue</a>&lt; T &gt; const &amp;lhs, T const &amp;rhs)</td></tr>
@@ -671,9 +681,11 @@ Variables</h2></td></tr>
 <tr class="memitem:a6420f6b8baf5b837b32c51acda9faad3" id="r_a6420f6b8baf5b837b32c51acda9faad3"><td class="memItemLeft">const <a class="el" href="structsensesp_1_1_static_file_data.html">StaticFileData</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6420f6b8baf5b837b32c51acda9faad3">kFrontendFiles</a> []</td></tr>
 <tr class="memitem:a24094aaf3725c69238a40dcdf5db45db" id="r_a24094aaf3725c69238a40dcdf5db45db"><td class="memItemLeft">const char&#160;</td><td class="memItemRight"><a class="el" href="#a24094aaf3725c69238a40dcdf5db45db">kContentType</a> [] = &quot;Content-Type&quot;</td></tr>
 <tr class="memitem:a13c1c64e6863a218bb521402631c9492" id="r_a13c1c64e6863a218bb521402631c9492"><td class="memItemLeft">const char&#160;</td><td class="memItemRight"><a class="el" href="#a13c1c64e6863a218bb521402631c9492">kContentEncoding</a> [] = &quot;Content-Encoding&quot;</td></tr>
-<tr class="memitem:a415d47efb7e756b1be52067ac1792c44" id="r_a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;3.2.0&quot;</td></tr>
+<tr class="memitem:a415d47efb7e756b1be52067ac1792c44" id="r_a415d47efb7e756b1be52067ac1792c44"><td class="memItemLeft">const char *const&#160;</td><td class="memItemRight"><a class="el" href="#a415d47efb7e756b1be52067ac1792c44">kSensESPVersion</a> = &quot;3.2.1&quot;</td></tr>
 <tr class="memitem:a2e347f3a29783746e76e25cf2b38240d" id="r_a2e347f3a29783746e76e25cf2b38240d"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#a2e347f3a29783746e76e25cf2b38240d">kWsClientTaskStackSize</a> = 8192</td></tr>
 <tr class="memitem:a59300ccd7271c89738149da446486a3b" id="r_a59300ccd7271c89738149da446486a3b"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_s_k_w_s_client.html">SKWSClient</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a59300ccd7271c89738149da446486a3b">ws_client</a></td></tr>
+<tr class="memitem:a3146539f7843a854842896e49691c922" id="r_a3146539f7843a854842896e49691c922"><td class="memItemLeft">constexpr uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a3146539f7843a854842896e49691c922">kGammaTable</a> [256]</td></tr>
+<tr class="memdesc:a3146539f7843a854842896e49691c922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gamma correction lookup table (γ=2.2, inverted).  <br /></td></tr>
 <tr class="memitem:ae0dd16d51413477022cf07e5baaff173" id="r_ae0dd16d51413477022cf07e5baaff173"><td class="memItemLeft">constexpr int&#160;</td><td class="memItemRight"><a class="el" href="#ae0dd16d51413477022cf07e5baaff173">kPWMResolution</a> = 13</td></tr>
 <tr class="memitem:a21fc4ecaab0f298760c60f62ef2b2c77" id="r_a21fc4ecaab0f298760c60f62ef2b2c77"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern.html">LEDPattern</a>&#160;</td><td class="memItemRight"><a class="el" href="#a21fc4ecaab0f298760c60f62ef2b2c77">no_ap_pattern</a></td></tr>
 <tr class="memitem:ae7e5a0c9b148d1e3d43bc2b364fd3a35" id="r_ae7e5a0c9b148d1e3d43bc2b364fd3a35"><td class="memItemLeft"><a class="el" href="classsensesp_1_1_l_e_d_pattern.html">LEDPattern</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae7e5a0c9b148d1e3d43bc2b364fd3a35">wifi_disconnected_pattern</a></td></tr>
@@ -1127,7 +1139,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#abfaef059d40b1255952218e3a2e2b255">sensesp::FragmentCallback</a> = std::function&lt;void(uint32_t, CRGB&amp;)&gt;</td>
+          <td class="memname">using <a class="el" href="#abfaef059d40b1255952218e3a2e2b255">sensesp::FragmentCallback</a> = std::function&lt;void(uint32_t, <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a>&amp;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2212,6 +2224,58 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a2be3dd6f38dd5ec7910a23a04cfaad97" name="a2be3dd6f38dd5ec7910a23a04cfaad97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2be3dd6f38dd5ec7910a23a04cfaad97">&#9670;&#160;</a></span>apply_brightness()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sensesp::apply_brightness </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>brightness</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply gamma correction and brightness scaling to a color value. </p>
+<p>Gamma correction is applied first to ensure perceptually correct colors, then brightness scaling is applied as a linear dimming factor.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Color value (0-255) </td></tr>
+    <tr><td class="paramname">brightness</td><td>Brightness scale (0-255), where 255 = full brightness </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Scaled value (0-255) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="crgb_8h_source.html#l00110">110</a> of file <a class="el" href="crgb_8h_source.html">crgb.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_a2be3dd6f38dd5ec7910a23a04cfaad97_cgraph.svg" width="404" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_a2be3dd6f38dd5ec7910a23a04cfaad97_icgraph.svg" width="426" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="adad24461f43358c45017cf1cb816ca60" name="adad24461f43358c45017cf1cb816ca60"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adad24461f43358c45017cf1cb816ca60">&#9670;&#160;</a></span>Base64Sha1()</h2>
 
@@ -2247,6 +2311,58 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_adad24461f43358c45017cf1cb816ca60_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ad30e68da050ded2e83ddc9c4e03e1de0" name="ad30e68da050ded2e83ddc9c4e03e1de0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30e68da050ded2e83ddc9c4e03e1de0">&#9670;&#160;</a></span>blend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> sensesp::blend </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>p1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>p2</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>amountOfP2</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classsensesp_1_1_linear.html" title="Performs a linear transform on the input value: output_ = (input * multiplier) + offset.">Linear</a> interpolation (blend) between two colors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p1</td><td>First color (returned when amountOfP2 == 0) </td></tr>
+    <tr><td class="paramname">p2</td><td>Second color (returned when amountOfP2 == 255) </td></tr>
+    <tr><td class="paramname">amountOfP2</td><td>Blend amount: 0 = 100% p1, 255 = 100% p2 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Blended color </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="crgb_8h_source.html#l00137">137</a> of file <a class="el" href="crgb_8h_source.html">crgb.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_ad30e68da050ded2e83ddc9c4e03e1de0_icgraph.svg" width="578" height="151"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -2391,7 +2507,7 @@ template&lt;typename T&gt; </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_ae883db75c2c50092263d317cdadacabd_icgraph.svg" width="100%" height="463"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_ae883db75c2c50092263d317cdadacabd_icgraph.svg" width="100%" height="409"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -4184,7 +4300,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const CRGB &amp;</td>          <td class="paramname"><span class="paramname"><em>target_color</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>target_color</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -4194,7 +4310,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00048">48</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00059">59</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_aacd579ca8d37417f0ecd6f610f19f22a_cgraph.svg" width="307" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -4217,12 +4338,17 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const CRGB &amp;</td>          <td class="paramname"><span class="paramname"><em>target_color</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>target_color</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00012">12</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00013">13</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_a1f21e2f92237425c8b53413f75856f9a_cgraph.svg" width="339" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -4250,7 +4376,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00034">34</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00041">41</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_aecd85db6525d8c1cbd8ca0344c68320c_cgraph.svg" width="307" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -4269,7 +4400,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00060">60</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00075">75</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
 
 </div>
 </div>
@@ -4287,12 +4418,55 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const CRGB &amp;</td>          <td class="paramname"><span class="paramname"><em>color</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="structsensesp_1_1_c_r_g_b.html">CRGB</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>color</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00007">7</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="led__blinker_8cpp_source.html#l00008">8</a> of file <a class="el" href="led__blinker_8cpp_source.html">led_blinker.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3920fcb653e284f98c9226722b06dfd8" name="a3920fcb653e284f98c9226722b06dfd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3920fcb653e284f98c9226722b06dfd8">&#9670;&#160;</a></span>gamma_correct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sensesp::gamma_correct </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply gamma correction to an 8-bit value. </p>
+<p>LED brightness perception is non-linear - human eyes perceive brightness logarithmically. This function applies inverse gamma correction to boost low brightness values, making dim LEDs more visible.</p>
+<p>Uses a lookup table for efficiency (called at 200Hz).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td><a class="el" href="classsensesp_1_1_linear.html" title="Performs a linear transform on the input value: output_ = (input * multiplier) + offset.">Linear</a> input value (0-255) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Gamma-corrected value (0-255) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="crgb_8h_source.html#l00048">48</a> of file <a class="el" href="crgb_8h_source.html">crgb.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_a3920fcb653e284f98c9226722b06dfd8_icgraph.svg" width="642" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -4743,6 +4917,59 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
+<a id="a2fc152f01a4bfb9aec1047cead15db31" name="a2fc152f01a4bfb9aec1047cead15db31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fc152f01a4bfb9aec1047cead15db31">&#9670;&#160;</a></span>rgb_to_luminance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sensesp::rgb_to_luminance </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>r</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>g</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert RGB color to perceptual luminance. </p>
+<p>Uses the standard luminance formula (ITU-R BT.709) that weights green most heavily, followed by red, then blue.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>Red component (0-255) </td></tr>
+    <tr><td class="paramname">g</td><td>Green component (0-255) </td></tr>
+    <tr><td class="paramname">b</td><td>Blue component (0-255) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Luminance value (0-255) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="crgb_8h_source.html#l00125">125</a> of file <a class="el" href="crgb_8h_source.html">crgb.h</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_a2fc152f01a4bfb9aec1047cead15db31_icgraph.svg" width="422" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="af5ae494b402d33e4e46ddeec25ff5ae0" name="af5ae494b402d33e4e46ddeec25ff5ae0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5ae494b402d33e4e46ddeec25ff5ae0">&#9670;&#160;</a></span>SetupLogging()</h2>
 
@@ -4770,7 +4997,7 @@ template&lt;class T&gt; </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_af5ae494b402d33e4e46ddeec25ff5ae0_icgraph.svg" width="400" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesensesp_af5ae494b402d33e4e46ddeec25ff5ae0_icgraph.svg" width="400" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -4886,10 +5113,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                        = {</div>
-<div class="line">    <a class="code hl_function" href="#aacd579ca8d37417f0ecd6f610f19f22a">frag_blend</a>(50, CRGB::Black),</div>
-<div class="line">    <a class="code hl_function" href="#aacd579ca8d37417f0ecd6f610f19f22a">frag_blend</a>(50, CRGB::Black, <span class="keyword">true</span>),</div>
+<div class="line">    <a class="code hl_function" href="#aacd579ca8d37417f0ecd6f610f19f22a">frag_blend</a>(50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
+<div class="line">    <a class="code hl_function" href="#aacd579ca8d37417f0ecd6f610f19f22a">frag_blend</a>(50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>, <span class="keyword">true</span>),</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacesensesp_html_aacd579ca8d37417f0ecd6f610f19f22a"><div class="ttname"><a href="#aacd579ca8d37417f0ecd6f610f19f22a">sensesp::frag_blend</a></div><div class="ttdeci">LEDPatternFragment frag_blend(uint32_t duration_ms, const CRGB &amp;target_color, bool reverse)</div><div class="ttdef"><b>Definition</b> <a href="led__blinker_8cpp_source.html#l00048">led_blinker.cpp:48</a></div></div>
+<div class="ttc" id="anamespacesensesp_html_aacd579ca8d37417f0ecd6f610f19f22a"><div class="ttname"><a href="#aacd579ca8d37417f0ecd6f610f19f22a">sensesp::frag_blend</a></div><div class="ttdeci">LEDPatternFragment frag_blend(uint32_t duration_ms, const CRGB &amp;target_color, bool reverse)</div><div class="ttdef"><b>Definition</b> <a href="led__blinker_8cpp_source.html#l00059">led_blinker.cpp:59</a></div></div>
+<div class="ttc" id="astructsensesp_1_1_c_r_g_b_html_a9f37f024160f9981919e8d70ab4644e4"><div class="ttname"><a href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">sensesp::CRGB::Black</a></div><div class="ttdeci">static const CRGB Black</div><div class="ttdef"><b>Definition</b> <a href="crgb_8h_source.html#l00088">crgb.h:88</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00057">57</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>
 
@@ -4985,6 +5213,51 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="frontend__files_8h_source.html#l00008">8</a> of file <a class="el" href="frontend__files_8h_source.html">frontend_files.h</a>.</p>
+
+</div>
+</div>
+<a id="a3146539f7843a854842896e49691c922" name="a3146539f7843a854842896e49691c922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3146539f7843a854842896e49691c922">&#9670;&#160;</a></span>kGammaTable</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sensesp::kGammaTable[256]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">                              = {</div>
+<div class="line">    0,  21,  28,  34,  39,  43,  46,  50,  53,  56,  59,  61,  64,  66,  68,  70,</div>
+<div class="line">   72,  74,  76,  78,  80,  82,  84,  85,  87,  89,  90,  92,  93,  95,  96,  98,</div>
+<div class="line">   99, 101, 102, 103, 105, 106, 107, 109, 110, 111, 112, 114, 115, 116, 117, 118,</div>
+<div class="line">  119, 120, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135,</div>
+<div class="line">  136, 137, 138, 139, 140, 141, 142, 143, 144, 144, 145, 146, 147, 148, 149, 150,</div>
+<div class="line">  150, 151, 152, 153, 154, 155, 155, 156, 157, 158, 159, 159, 160, 161, 162, 162,</div>
+<div class="line">  163, 164, 165, 165, 166, 167, 167, 168, 169, 170, 170, 171, 172, 172, 173, 174,</div>
+<div class="line">  174, 175, 176, 176, 177, 178, 178, 179, 180, 180, 181, 181, 182, 183, 183, 184,</div>
+<div class="line">  185, 185, 186, 186, 187, 188, 188, 189, 189, 190, 190, 191, 192, 192, 193, 193,</div>
+<div class="line">  194, 194, 195, 196, 196, 197, 197, 198, 198, 199, 199, 200, 200, 201, 201, 202,</div>
+<div class="line">  202, 203, 203, 204, 204, 205, 205, 206, 206, 207, 207, 208, 208, 209, 209, 210,</div>
+<div class="line">  210, 211, 211, 212, 212, 213, 213, 214, 214, 215, 215, 215, 216, 216, 217, 217,</div>
+<div class="line">  218, 218, 219, 219, 219, 220, 220, 221, 221, 222, 222, 222, 223, 223, 224, 224,</div>
+<div class="line">  225, 225, 225, 226, 226, 227, 227, 227, 228, 228, 229, 229, 229, 230, 230, 231,</div>
+<div class="line">  231, 231, 232, 232, 233, 233, 233, 234, 234, 234, 235, 235, 236, 236, 236, 237,</div>
+<div class="line">  237, 237, 238, 238, 238, 239, 239, 240, 240, 240, 241, 241, 241, 242, 242, 255,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Gamma correction lookup table (γ=2.2, inverted). </p>
+<p>Pre-computed values for inverse gamma correction to avoid expensive floating-point math in the hot path. Generated with: table[i] = round(pow(i/255.0, 1/2.2) * 255) </p>
+
+<p class="definition">Definition at line <a class="el" href="crgb_8h_source.html#l00016">16</a> of file <a class="el" href="crgb_8h_source.html">crgb.h</a>.</p>
 
 </div>
 </div>
@@ -5117,7 +5390,7 @@ Here is the caller graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;3.2.0&quot;</td>
+          <td class="memname">const char* const sensesp::kSensESPVersion = &quot;3.2.1&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -5209,9 +5482,10 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(100, 100, CRGB::Red),</div>
-<div class="line">   <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(950, 200, CRGB::Black)}</div>
-<div class="ttc" id="anamespacesensesp_html_a1f21e2f92237425c8b53413f75856f9a"><div class="ttname"><a href="#a1f21e2f92237425c8b53413f75856f9a">sensesp::frag_linear_fade</a></div><div class="ttdeci">LEDPatternFragment frag_linear_fade(uint32_t duration_ms, uint32_t fade_duration_ms, const CRGB &amp;target_color)</div><div class="ttdef"><b>Definition</b> <a href="led__blinker_8cpp_source.html#l00012">led_blinker.cpp:12</a></div></div>
+<b>Initial value:</b><div class="fragment"><div class="line">= {<a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(100, 100, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a6c01627130a6363d12318d42f77e5a98">CRGB::Red</a>),</div>
+<div class="line">   <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(950, 200, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>)}</div>
+<div class="ttc" id="anamespacesensesp_html_a1f21e2f92237425c8b53413f75856f9a"><div class="ttname"><a href="#a1f21e2f92237425c8b53413f75856f9a">sensesp::frag_linear_fade</a></div><div class="ttdeci">LEDPatternFragment frag_linear_fade(uint32_t duration_ms, uint32_t fade_duration_ms, const CRGB &amp;target_color)</div><div class="ttdef"><b>Definition</b> <a href="led__blinker_8cpp_source.html#l00013">led_blinker.cpp:13</a></div></div>
+<div class="ttc" id="astructsensesp_1_1_c_r_g_b_html_a6c01627130a6363d12318d42f77e5a98"><div class="ttname"><a href="structsensesp_1_1_c_r_g_b.html#a6c01627130a6363d12318d42f77e5a98">sensesp::CRGB::Red</a></div><div class="ttdeci">static const CRGB Red</div><div class="ttdef"><b>Definition</b> <a href="crgb_8h_source.html#l00089">crgb.h:89</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00006">6</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>
 
@@ -5479,9 +5753,10 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                                  = {</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(700, 200, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(300, 100, CRGB::Black),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(700, 200, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(300, 100, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
 <div class="line">}</div>
+<div class="ttc" id="astructsensesp_1_1_c_r_g_b_html_ab0825347bfc6916625caeed8950d3e1b"><div class="ttname"><a href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">sensesp::CRGB::Yellow</a></div><div class="ttdeci">static const CRGB Yellow</div><div class="ttdef"><b>Definition</b> <a href="crgb_8h_source.html#l00090">crgb.h:90</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00016">16</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>
 
@@ -5499,8 +5774,8 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                                     = {</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(300, 100, CRGB::Red),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(700, 200, CRGB::Black),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(300, 100, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a6c01627130a6363d12318d42f77e5a98">CRGB::Red</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(700, 200, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00010">10</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>
@@ -5519,8 +5794,8 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                                  = {</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(200, 200, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(200, 200, CRGB::Black),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(200, 200, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(200, 200, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00052">52</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>
@@ -5555,9 +5830,10 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                                = {</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(900, 200, CRGB::Blue),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(100, 100, CRGB::Black),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(900, 200, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a0febf8556a7a92af381fd23233e4318f">CRGB::Blue</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(100, 100, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
 <div class="line">}</div>
+<div class="ttc" id="astructsensesp_1_1_c_r_g_b_html_a0febf8556a7a92af381fd23233e4318f"><div class="ttname"><a href="structsensesp_1_1_c_r_g_b.html#a0febf8556a7a92af381fd23233e4318f">sensesp::CRGB::Blue</a></div><div class="ttdeci">static const CRGB Blue</div><div class="ttdef"><b>Definition</b> <a href="crgb_8h_source.html#l00091">crgb.h:91</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00034">34</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>
 
@@ -5575,14 +5851,14 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                                 = {</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(650, 200, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Black),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Black),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Black),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Black),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(650, 200, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00022">22</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>
@@ -5601,14 +5877,14 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">                                   = {</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Black),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Black),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Black),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, CRGB::Yellow),</div>
-<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(650, 200, CRGB::Black),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(50, 50, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#ab0825347bfc6916625caeed8950d3e1b">CRGB::Yellow</a>),</div>
+<div class="line">    <a class="code hl_function" href="#a1f21e2f92237425c8b53413f75856f9a">frag_linear_fade</a>(650, 200, <a class="code hl_variable" href="structsensesp_1_1_c_r_g_b.html#a9f37f024160f9981919e8d70ab4644e4">CRGB::Black</a>),</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="system__status__led_8cpp_source.html#l00040">40</a> of file <a class="el" href="system__status__led_8cpp_source.html">system_status_led.cpp</a>.</p>

@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.2.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.2.1</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -649,7 +649,7 @@ $(function(){initNavTree('signalk__ws__client_8cpp_source.html','',''); });
 <div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  }</div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span> </div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> != <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a>.length() &gt; 0 &amp;&amp; this-&gt;polling_href_.startsWith(<span class="stringliteral">&quot;/&quot;</span>)) {</div>
 <div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>    <span class="comment">// existing pending request</span></div>
 <div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">poll_access_request</a>(this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a84547993b48d32c20d3b58fe2106ba39">server_address_</a>, this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a94447487d138221e8c7a586fc58dcfdf">server_port_</a>,</div>
 <div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>                              this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a>);</div>
@@ -704,418 +704,485 @@ $(function(){initNavTree('signalk__ws__client_8cpp_source.html','',''); });
 <div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span> </div>
 <div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>  esp_http_client_set_header(client, <span class="stringliteral">&quot;Authorization&quot;</span>, full_token.c_str());</div>
 <div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span> </div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>  esp_err_t err = esp_http_client_perform(client);</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>  <span class="keywordtype">int</span> http_code = esp_http_client_get_status_code(client);</div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>  <span class="keywordtype">int</span> content_length = esp_http_client_get_content_length(client);</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span> </div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>  String payload;</div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>  <span class="keywordflow">if</span> (err == ESP_OK &amp;&amp; content_length &gt; 0 &amp;&amp; content_length &lt; 1024) {</div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    <span class="keywordtype">char</span>* buffer = <span class="keyword">new</span> <span class="keywordtype">char</span>[content_length + 1];</div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    esp_http_client_read(client, buffer, content_length);</div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>    buffer[content_length] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    payload = String(buffer);</div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>    <span class="keyword">delete</span>[] buffer;</div>
-<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>  }</div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span> </div>
-<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>  esp_http_client_cleanup(client);</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span> </div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>  <span class="keywordflow">if</span> (err == ESP_OK) {</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Testing resulted in http status %d&quot;</span>, http_code);</div>
-<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    <span class="keywordflow">if</span> (payload.length() &gt; 0) {</div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>      ESP_LOGD(__FILENAME__,</div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>               <span class="stringliteral">&quot;Returned payload (length %d) is: &quot;</span>, payload.length());</div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>      ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;%s&quot;</span>, payload.c_str());</div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>      ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Returned payload is empty&quot;</span>);</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    }</div>
-<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    <span class="keywordflow">if</span> (http_code == 426) {</div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>      <span class="comment">// HTTP status 426 is &quot;Upgrade Required&quot;, which is the expected</span></div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>      <span class="comment">// response for a websocket connection.</span></div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>      ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Attempting to connect to Signal K Websocket...&quot;</span>);</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>      <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#ab23374429645b9af024e3438ade73d9f">server_detected_</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>      <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a2e9580b5ab17102adb5fe80d1073425c">token_test_success_</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>      this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">connect_ws</a>(server_address, server_port);</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (http_code == 401) {</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>      this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52">send_access_request</a>(server_address, server_port);</div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>      <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>    }</div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;HTTP request failed: %s&quot;</span>, esp_err_to_name(err));</div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>  }</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>}</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>  <span class="comment">// Use streaming API for GET request</span></div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>  esp_err_t err = esp_http_client_open(client, 0);</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>  <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to open HTTP connection: %s&quot;</span>, esp_err_to_name(err));</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>    esp_http_client_cleanup(client);</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>  }</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span> </div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>  <span class="keywordtype">int</span> content_length = esp_http_client_fetch_headers(client);</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>  <span class="keywordtype">int</span> http_code = esp_http_client_get_status_code(client);</div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span> </div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Testing resulted in http status %d&quot;</span>, http_code);</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span> </div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>  <span class="comment">// Read response body</span></div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>  String payload;</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>  <span class="keywordflow">if</span> (content_length &gt; 0 &amp;&amp; content_length &lt; 4096) {</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    <span class="keywordtype">char</span>* buffer = <span class="keyword">new</span> <span class="keywordtype">char</span>[content_length + 1];</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>    <span class="keywordtype">int</span> read_len = esp_http_client_read(client, buffer, content_length);</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    buffer[read_len &gt; 0 ? read_len : 0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    payload = String(buffer);</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    <span class="keyword">delete</span>[] buffer;</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    <span class="comment">// Chunked encoding or unknown/large content length - read in chunks</span></div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    <span class="keywordtype">char</span> buffer[512];</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    <span class="keywordtype">int</span> read_len;</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>    <span class="keywordflow">while</span> ((read_len = esp_http_client_read(client, buffer, <span class="keyword">sizeof</span>(buffer) - 1)) &gt; 0) {</div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>      buffer[read_len] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>      payload += String(buffer);</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>      <span class="keywordflow">if</span> (payload.length() &gt; 4096) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    }</div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>  }</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span> </div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>  esp_http_client_close(client);</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>  esp_http_client_cleanup(client);</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span> </div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>  <span class="keywordflow">if</span> (payload.length() &gt; 0) {</div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Returned payload (%d bytes): %s&quot;</span>,</div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>             payload.length(), payload.c_str());</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>  }</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span> </div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>  <span class="keywordflow">if</span> (http_code == 426) {</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>    <span class="comment">// HTTP status 426 is &quot;Upgrade Required&quot;, which is the expected</span></div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>    <span class="comment">// response for a websocket connection.</span></div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Attempting to connect to Signal K Websocket...&quot;</span>);</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#ab23374429645b9af024e3438ade73d9f">server_detected_</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a2e9580b5ab17102adb5fe80d1073425c">token_test_success_</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">connect_ws</a>(server_address, server_port);</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (http_code == 401) {</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    <span class="comment">// Token is invalid/expired - clear it and request new access</span></div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    <span class="comment">// Keep client_id_ so we reuse the same device identity</span></div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;Token rejected (401), requesting new access&quot;</span>);</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a> = NULL_AUTH_TOKEN;</div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52">send_access_request</a>(server_address, server_port);</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (http_code &gt; 0) {</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;HTTP request failed with code %d&quot;</span>, http_code);</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>  }</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>}</div>
 </div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span> </div>
-<div class="foldopen" id="foldopen00680" data-start="{" data-end="}">
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52">  680</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52">SKWSClient::send_access_request</a>(<span class="keyword">const</span> String server_address,</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>                                     <span class="keyword">const</span> uint16_t server_port) {</div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Preparing a new access request&quot;</span>);</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> == <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>    <span class="comment">// generate a client ID</span></div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> = <a class="code hl_function" href="namespacesensesp.html#a270290236513f91972b435ad45c4f70b">generate_uuid4</a>();</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>  }</div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span> </div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>  <span class="comment">// create a new access request</span></div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>  JsonDocument doc;</div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>  doc[<span class="stringliteral">&quot;clientId&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a>;</div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>  doc[<span class="stringliteral">&quot;description&quot;</span>] =</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>      String(<span class="stringliteral">&quot;SensESP device: &quot;</span>) + <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>  doc[<span class="stringliteral">&quot;permissions&quot;</span>] = kRequestPermission;</div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>  String json_req = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>  serializeJson(doc, json_req);</div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span> </div>
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Access request: %s&quot;</span>, json_req.c_str());</div>
 <div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span> </div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>  String protocol = <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a> ? <span class="stringliteral">&quot;https://&quot;</span> : <span class="stringliteral">&quot;http://&quot;</span>;</div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>  String url = protocol + server_address + <span class="stringliteral">&quot;:&quot;</span> + server_port +</div>
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>               <span class="stringliteral">&quot;/signalk/v1/access/requests&quot;</span>;</div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Access request url: %s&quot;</span>, url.c_str());</div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span> </div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>  esp_http_client_config_t config = {};</div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>  config.url = url.c_str();</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>  config.method = HTTP_METHOD_POST;</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>  config.timeout_ms = 10000;</div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span><span class="preprocessor">#ifdef SENSESP_SSL_SUPPORT</span></div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>) {</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    config.crt_bundle_attach = tofu_crt_bundle_attach;</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>    config.skip_cert_common_name_check = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>  }</div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span> </div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>  esp_http_client_handle_t client = esp_http_client_init(&amp;config);</div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>  <span class="keywordflow">if</span> (client == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to initialize HTTP client&quot;</span>);</div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>  }</div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span> </div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>  esp_http_client_set_header(client, <span class="stringliteral">&quot;Content-Type&quot;</span>, <span class="stringliteral">&quot;application/json&quot;</span>);</div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>  esp_http_client_set_post_field(client, json_req.c_str(), json_req.length());</div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span> </div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>  esp_err_t err = esp_http_client_perform(client);</div>
-<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>  <span class="keywordtype">int</span> http_code = esp_http_client_get_status_code(client);</div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>  <span class="keywordtype">int</span> content_length = esp_http_client_get_content_length(client);</div>
-<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span> </div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>  String payload;</div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>  <span class="keywordflow">if</span> (err == ESP_OK &amp;&amp; content_length &gt; 0 &amp;&amp; content_length &lt; 2048) {</div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>    <span class="keywordtype">char</span>* buffer = <span class="keyword">new</span> <span class="keywordtype">char</span>[content_length + 1];</div>
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>    esp_http_client_read(client, buffer, content_length);</div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>    buffer[content_length] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>    payload = String(buffer);</div>
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>    <span class="keyword">delete</span>[] buffer;</div>
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>  }</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span> </div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>  esp_http_client_cleanup(client);</div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span> </div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>  <span class="comment">// if we get a response we can&#39;t handle, try to reconnect later</span></div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>  <span class="keywordflow">if</span> (err != ESP_OK || http_code != 202) {</div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>    ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;Can&#39;t handle response %d to access request.&quot;</span>,</div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>             http_code);</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;%s&quot;</span>, payload.c_str());</div>
-<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>  }</div>
-<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span> </div>
-<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>  <span class="comment">// http status code 202</span></div>
-<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span> </div>
-<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>  deserializeJson(doc, payload.c_str());</div>
-<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>  String state = doc[<span class="stringliteral">&quot;state&quot;</span>];</div>
-<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span> </div>
-<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>  <span class="keywordflow">if</span> (state != <span class="stringliteral">&quot;PENDING&quot;</span>) {</div>
-<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>    ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;Got unknown state: %s&quot;</span>, state.c_str());</div>
-<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>  }</div>
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span> </div>
-<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>  String href = doc[<span class="stringliteral">&quot;href&quot;</span>];</div>
-<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>  <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = href;</div>
-<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>  <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
-<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span> </div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>  delay(5000);</div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>  this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">poll_access_request</a>(server_address, server_port, this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a>);</div>
-<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>}</div>
+<div class="foldopen" id="foldopen00700" data-start="{" data-end="}">
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52">  700</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52">SKWSClient::send_access_request</a>(<span class="keyword">const</span> String server_address,</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>                                     <span class="keyword">const</span> uint16_t server_port) {</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Sending access request (client_id=%s, ssl=%d)&quot;</span>,</div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>           <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a>.c_str(), <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>);</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>    <span class="comment">// generate a client ID</span></div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> = <a class="code hl_function" href="namespacesensesp.html#a270290236513f91972b435ad45c4f70b">generate_uuid4</a>();</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>  }</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span> </div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>  <span class="comment">// create a new access request</span></div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>  JsonDocument doc;</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>  doc[<span class="stringliteral">&quot;clientId&quot;</span>] = <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a>;</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>  doc[<span class="stringliteral">&quot;description&quot;</span>] =</div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>      String(<span class="stringliteral">&quot;SensESP device: &quot;</span>) + <a class="code hl_function" href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">SensESPBaseApp::get_hostname</a>();</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>  doc[<span class="stringliteral">&quot;permissions&quot;</span>] = kRequestPermission;</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>  String json_req = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>  serializeJson(doc, json_req);</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span> </div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Access request: %s&quot;</span>, json_req.c_str());</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span> </div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>  String protocol = <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a> ? <span class="stringliteral">&quot;https://&quot;</span> : <span class="stringliteral">&quot;http://&quot;</span>;</div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>  String url = protocol + server_address + <span class="stringliteral">&quot;:&quot;</span> + server_port +</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>               <span class="stringliteral">&quot;/signalk/v1/access/requests&quot;</span>;</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Access request url: %s&quot;</span>, url.c_str());</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span> </div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>  esp_http_client_config_t config = {};</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>  config.url = url.c_str();</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>  config.method = HTTP_METHOD_POST;</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>  config.timeout_ms = 10000;</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span><span class="preprocessor">#ifdef SENSESP_SSL_SUPPORT</span></div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>) {</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>    config.crt_bundle_attach = tofu_crt_bundle_attach;</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>    config.skip_cert_common_name_check = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>  }</div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span> </div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>  esp_http_client_handle_t client = esp_http_client_init(&amp;config);</div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>  <span class="keywordflow">if</span> (client == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to initialize HTTP client&quot;</span>);</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>    <span class="comment">// Don&#39;t clear client_id_ - keep device identity for retry</span></div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>  }</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span> </div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>  esp_http_client_set_header(client, <span class="stringliteral">&quot;Content-Type&quot;</span>, <span class="stringliteral">&quot;application/json&quot;</span>);</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span> </div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>  <span class="comment">// Use streaming API: open -&gt; write request -&gt; fetch headers -&gt; read response</span></div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>  esp_err_t err = esp_http_client_open(client, json_req.length());</div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>  <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to open HTTP connection: %s&quot;</span>, esp_err_to_name(err));</div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>    esp_http_client_cleanup(client);</div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>  }</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span> </div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>  <span class="keywordtype">int</span> write_len = esp_http_client_write(client, json_req.c_str(), json_req.length());</div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>  <span class="keywordflow">if</span> (write_len &lt; 0 || write_len != (<span class="keywordtype">int</span>)json_req.length()) {</div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to write request body (wrote %d of %d bytes)&quot;</span>,</div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>             write_len, json_req.length());</div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>    esp_http_client_close(client);</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>    esp_http_client_cleanup(client);</div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>  }</div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span> </div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>  <span class="keywordtype">int</span> content_length = esp_http_client_fetch_headers(client);</div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>  <span class="keywordtype">int</span> http_code = esp_http_client_get_status_code(client);</div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span> </div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;HTTP response: code=%d, content_length=%d&quot;</span>, http_code, content_length);</div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span> </div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>  <span class="comment">// Read response body</span></div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>  String payload;</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>  <span class="keywordtype">char</span> buffer[512];</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>  <span class="keywordtype">int</span> read_len;</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>  <span class="keywordflow">while</span> ((read_len = esp_http_client_read(client, buffer, <span class="keyword">sizeof</span>(buffer) - 1)) &gt; 0) {</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    buffer[read_len] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>    payload += String(buffer);</div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>    <span class="keywordflow">if</span> (payload.length() &gt; 4096) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>  }</div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Response payload (%d bytes): %s&quot;</span>,</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>           payload.length(), payload.c_str());</div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span> </div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>  esp_http_client_close(client);</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>  esp_http_client_cleanup(client);</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span> </div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>  <span class="comment">// Parse JSON response for both 202 and 400 status codes</span></div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>  deserializeJson(doc, payload.c_str());</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>  String state = doc[<span class="stringliteral">&quot;state&quot;</span>].is&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>*&gt;() ? doc[<span class="stringliteral">&quot;state&quot;</span>].as&lt;String&gt;() : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>  String href = doc[<span class="stringliteral">&quot;href&quot;</span>].is&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>*&gt;() ? doc[<span class="stringliteral">&quot;href&quot;</span>].as&lt;String&gt;() : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>  String message = doc[<span class="stringliteral">&quot;message&quot;</span>].is&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>*&gt;() ? doc[<span class="stringliteral">&quot;message&quot;</span>].as&lt;String&gt;() : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span> </div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Access request response: http=%d, state=%s, href=%s&quot;</span>,</div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>           http_code, state.c_str(), href.c_str());</div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>  <span class="keywordflow">if</span> (message.length() &gt; 0) {</div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>    ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Server message: %s&quot;</span>, message.c_str());</div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>  }</div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span> </div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>  <span class="comment">// HTTP 400 with href means &quot;already requested&quot; - we can poll the existing request</span></div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>  <span class="keywordflow">if</span> (http_code == 400 &amp;&amp; href.length() &gt; 0 &amp;&amp; href.startsWith(<span class="stringliteral">&quot;/&quot;</span>)) {</div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>    ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Existing request found, polling href: %s&quot;</span>, href.c_str());</div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = href;</div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>    <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>    delay(5000);</div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">poll_access_request</a>(server_address, server_port, this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a>);</div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>  }</div>
+<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span> </div>
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>  <span class="comment">// HTTP 202 with href means new request pending</span></div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>  <span class="keywordflow">if</span> (http_code == 202 &amp;&amp; href.length() &gt; 0 &amp;&amp; href.startsWith(<span class="stringliteral">&quot;/&quot;</span>)) {</div>
+<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = href;</div>
+<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>    <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>    delay(5000);</div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>    this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">poll_access_request</a>(server_address, server_port, this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a>);</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>  }</div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span> </div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>  <span class="comment">// Can&#39;t proceed - disconnect and retry later</span></div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>  ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;Cannot handle response: http=%d, state=%s&quot;</span>, http_code, state.c_str());</div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>  <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>}</div>
 </div>
-<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span> </div>
-<div class="foldopen" id="foldopen00772" data-start="{" data-end="}">
-<div class="line"><a id="l00772" name="l00772"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">  772</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">SKWSClient::poll_access_request</a>(<span class="keyword">const</span> String server_address,</div>
-<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>                                     <span class="keyword">const</span> uint16_t server_port,</div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>                                     <span class="keyword">const</span> String href) {</div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Polling SK Server for authentication token&quot;</span>);</div>
-<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span> </div>
-<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>  String protocol = <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a> ? <span class="stringliteral">&quot;https://&quot;</span> : <span class="stringliteral">&quot;http://&quot;</span>;</div>
-<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>  String url = protocol + server_address + <span class="stringliteral">&quot;:&quot;</span> + server_port + href;</div>
-<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span> </div>
-<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>  esp_http_client_config_t config = {};</div>
-<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>  config.url = url.c_str();</div>
-<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>  config.timeout_ms = 10000;</div>
-<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span><span class="preprocessor">#ifdef SENSESP_SSL_SUPPORT</span></div>
-<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>) {</div>
-<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>    config.crt_bundle_attach = tofu_crt_bundle_attach;</div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    config.skip_cert_common_name_check = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>  }</div>
-<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span> </div>
-<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>  esp_http_client_handle_t client = esp_http_client_init(&amp;config);</div>
-<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>  <span class="keywordflow">if</span> (client == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to initialize HTTP client&quot;</span>);</div>
-<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>  }</div>
-<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span> </div>
-<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>  esp_err_t err = esp_http_client_perform(client);</div>
-<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>  <span class="keywordtype">int</span> http_code = esp_http_client_get_status_code(client);</div>
-<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>  <span class="keywordtype">int</span> content_length = esp_http_client_get_content_length(client);</div>
-<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span> </div>
-<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>  String payload;</div>
-<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>  <span class="keywordflow">if</span> (err == ESP_OK &amp;&amp; content_length &gt; 0 &amp;&amp; content_length &lt; 4096) {</div>
-<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>    <span class="keywordtype">char</span>* buffer = <span class="keyword">new</span> <span class="keywordtype">char</span>[content_length + 1];</div>
-<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    esp_http_client_read(client, buffer, content_length);</div>
-<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>    buffer[content_length] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>    payload = String(buffer);</div>
-<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>    <span class="keyword">delete</span>[] buffer;</div>
-<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>  }</div>
-<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span> </div>
-<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>  esp_http_client_cleanup(client);</div>
-<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span> </div>
-<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>  <span class="keywordflow">if</span> (err != ESP_OK) {</div>
-<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;HTTP request failed: %s&quot;</span>, esp_err_to_name(err));</div>
-<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>  }</div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span> </div>
-<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>  <span class="keywordflow">if</span> (http_code == 200 || http_code == 202) {</div>
-<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>    JsonDocument doc;</div>
-<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>    <span class="keyword">auto</span> error = deserializeJson(doc, payload.c_str());</div>
-<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>    <span class="keywordflow">if</span> (error) {</div>
-<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>      ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;WARNING: Could not deserialize http payload.&quot;</span>);</div>
-<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>      ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;DeserializationError: %s&quot;</span>, error.c_str());</div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>    }</div>
-<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    String state = doc[<span class="stringliteral">&quot;state&quot;</span>];</div>
-<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;%s&quot;</span>, state.c_str());</div>
-<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>    <span class="keywordflow">if</span> (state == <span class="stringliteral">&quot;PENDING&quot;</span>) {</div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>      <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>      delay(5000);</div>
-<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>    }</div>
-<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>    <span class="keywordflow">if</span> (state == <span class="stringliteral">&quot;COMPLETED&quot;</span>) {</div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>      JsonObject access_req = doc[<span class="stringliteral">&quot;accessRequest&quot;</span>];</div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>      String permission = access_req[<span class="stringliteral">&quot;permission&quot;</span>];</div>
-<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span> </div>
-<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>      <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>      <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span> </div>
+<div class="foldopen" id="foldopen00822" data-start="{" data-end="}">
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">  822</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">SKWSClient::poll_access_request</a>(<span class="keyword">const</span> String server_address,</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>                                     <span class="keyword">const</span> uint16_t server_port,</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>                                     <span class="keyword">const</span> String href) {</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Polling SK Server for authentication token&quot;</span>);</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span> </div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>  String protocol = <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a> ? <span class="stringliteral">&quot;https://&quot;</span> : <span class="stringliteral">&quot;http://&quot;</span>;</div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>  String url = protocol + server_address + <span class="stringliteral">&quot;:&quot;</span> + server_port + href;</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span> </div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>  esp_http_client_config_t config = {};</div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>  config.url = url.c_str();</div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>  config.timeout_ms = 10000;</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span><span class="preprocessor">#ifdef SENSESP_SSL_SUPPORT</span></div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>) {</div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>    config.crt_bundle_attach = tofu_crt_bundle_attach;</div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>    config.skip_cert_common_name_check = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>  }</div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span> </div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>      <span class="keywordflow">if</span> (permission == <span class="stringliteral">&quot;DENIED&quot;</span>) {</div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>        ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;Permission denied&quot;</span>);</div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>        <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>      }</div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span> </div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>      <span class="keywordflow">if</span> (permission == <span class="stringliteral">&quot;APPROVED&quot;</span>) {</div>
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>        ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Permission granted&quot;</span>);</div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>        String token = access_req[<span class="stringliteral">&quot;token&quot;</span>];</div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>        <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a> = token;</div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>        <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
-<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>        this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">connect_ws</a>(server_address, server_port);</div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>      }</div>
-<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>    }</div>
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>    <span class="keywordflow">if</span> (http_code == 500) {</div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>      <span class="comment">// this is probably the server barfing due to</span></div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>      <span class="comment">// us polling a non-existing request. Just</span></div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>      <span class="comment">// delete the polling href.</span></div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>      ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Got 500, probably a non-existing request.&quot;</span>);</div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>      <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>      <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>      <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>    }</div>
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>    <span class="comment">// any other HTTP status code</span></div>
-<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>    ESP_LOGW(__FILENAME__,</div>
-<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>             <span class="stringliteral">&quot;Can&#39;t handle response %d to pending access request.\n&quot;</span>,</div>
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>             http_code);</div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>  }</div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>}</div>
-</div>
-<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span> </div>
-<div class="foldopen" id="foldopen00875" data-start="{" data-end="}">
-<div class="line"><a id="l00875" name="l00875"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">  875</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">SKWSClient::connect_ws</a>(<span class="keyword">const</span> String&amp; host, <span class="keyword">const</span> uint16_t port) {</div>
-<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>  <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a73e03f1549ec11b65c54fbd267aa652f">SKWSConnectionState::kSKWSConnecting</a>);</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>  esp_http_client_handle_t client = esp_http_client_init(&amp;config);</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>  <span class="keywordflow">if</span> (client == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to initialize HTTP client&quot;</span>);</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>  }</div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span> </div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>  <span class="comment">// Use streaming API for GET request</span></div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>  esp_err_t err = esp_http_client_open(client, 0);</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>  <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to open HTTP connection: %s&quot;</span>, esp_err_to_name(err));</div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>    esp_http_client_cleanup(client);</div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>  }</div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span> </div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>  <span class="keywordtype">int</span> content_length = esp_http_client_fetch_headers(client);</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>  <span class="keywordtype">int</span> http_code = esp_http_client_get_status_code(client);</div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span> </div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>  <span class="comment">// Read response body</span></div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>  String payload;</div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>  <span class="keywordflow">if</span> (content_length &gt; 0 &amp;&amp; content_length &lt; 4096) {</div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>    <span class="keywordtype">char</span>* buffer = <span class="keyword">new</span> <span class="keywordtype">char</span>[content_length + 1];</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>    <span class="keywordtype">int</span> read_len = esp_http_client_read(client, buffer, content_length);</div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>    buffer[read_len &gt; 0 ? read_len : 0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>    payload = String(buffer);</div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>    <span class="keyword">delete</span>[] buffer;</div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>    <span class="comment">// Chunked encoding or unknown/large content length - read in chunks</span></div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>    <span class="keywordtype">char</span> buffer[512];</div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    <span class="keywordtype">int</span> read_len;</div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>    <span class="keywordflow">while</span> ((read_len = esp_http_client_read(client, buffer, <span class="keyword">sizeof</span>(buffer) - 1)) &gt; 0) {</div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>      buffer[read_len] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>      payload += String(buffer);</div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>      <span class="keywordflow">if</span> (payload.length() &gt; 4096) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span>    }</div>
+<div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>  }</div>
 <div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span> </div>
-<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>  String protocol = <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a> ? <span class="stringliteral">&quot;wss&quot;</span> : <span class="stringliteral">&quot;ws&quot;</span>;</div>
-<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>  String path = <span class="stringliteral">&quot;/signalk/v1/stream?subscribe=none&quot;</span>;</div>
-<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>  String url = protocol + <span class="stringliteral">&quot;://&quot;</span> + host + <span class="stringliteral">&quot;:&quot;</span> + String(port) + path;</div>
-<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span> </div>
-<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Connecting WebSocket to %s&quot;</span>, url.c_str());</div>
-<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span> </div>
-<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>  <span class="comment">// Configure WebSocket client</span></div>
-<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>  esp_websocket_client_config_t config = {};</div>
-<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>  config.uri = url.c_str();</div>
-<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>  config.task_stack = 8192;</div>
-<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>  config.buffer_size = 1024;</div>
-<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span> </div>
-<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span><span class="preprocessor">#ifdef SENSESP_SSL_SUPPORT</span></div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>) {</div>
-<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>    <span class="comment">// Use custom crt_bundle_attach to disable SSL verification</span></div>
-<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>    <span class="comment">// This directly configures mbedTLS to skip certificate verification</span></div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>    config.crt_bundle_attach = tofu_crt_bundle_attach;</div>
-<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>    config.skip_cert_common_name_check = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>  }</div>
-<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span> </div>
-<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>  <span class="comment">// Destroy any existing client</span></div>
-<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>    esp_websocket_client_stop(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
-<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>    esp_websocket_client_destroy(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
-<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>  }</div>
-<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span> </div>
-<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>  <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> = esp_websocket_client_init(&amp;config);</div>
-<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to initialize WebSocket client&quot;</span>);</div>
-<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>  }</div>
-<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span> </div>
-<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>  <span class="comment">// Register event handler</span></div>
-<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>  esp_websocket_register_events(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>, WEBSOCKET_EVENT_ANY,</div>
-<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>                                websocket_event_handler, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span> </div>
-<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>  <span class="comment">// Add authorization header if we have a token</span></div>
-<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span><span class="preprocessor">#ifdef SENSESP_SSL_SUPPORT</span></div>
-<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a> != NULL_AUTH_TOKEN) {</div>
-<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span>    esp_websocket_client_append_header(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>, <span class="stringliteral">&quot;Authorization&quot;</span>,</div>
-<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>                                       (String(<span class="stringliteral">&quot;Bearer &quot;</span>) + <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a>).c_str());</div>
-<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>  }</div>
-<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span> </div>
-<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>  <span class="comment">// Start the client</span></div>
-<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>  esp_err_t err = esp_websocket_client_start(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
-<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>  <span class="keywordflow">if</span> (err != ESP_OK) {</div>
-<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to start WebSocket client: %s&quot;</span>,</div>
-<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>             esp_err_to_name(err));</div>
-<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>    esp_websocket_client_destroy(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
-<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>  }</div>
-<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span> </div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;WebSocket client started, waiting for connection...&quot;</span>);</div>
-<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>}</div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Poll response: http=%d, payload=%s&quot;</span>, http_code, payload.c_str());</div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span> </div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span>  esp_http_client_close(client);</div>
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>  esp_http_client_cleanup(client);</div>
+<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span> </div>
+<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span>  <span class="keywordflow">if</span> (http_code == 200 || http_code == 202) {</div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>    JsonDocument doc;</div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>    <span class="keyword">auto</span> error = deserializeJson(doc, payload.c_str());</div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>    <span class="keywordflow">if</span> (error) {</div>
+<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>      ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;WARNING: Could not deserialize http payload.&quot;</span>);</div>
+<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>      ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;DeserializationError: %s&quot;</span>, error.c_str());</div>
+<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>    }</div>
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>    String state = doc[<span class="stringliteral">&quot;state&quot;</span>];</div>
+<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span>    ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;%s&quot;</span>, state.c_str());</div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>    <span class="keywordflow">if</span> (state == <span class="stringliteral">&quot;PENDING&quot;</span>) {</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>      <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>      delay(5000);</div>
+<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span>    }</div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>    <span class="keywordflow">if</span> (state == <span class="stringliteral">&quot;COMPLETED&quot;</span>) {</div>
+<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>      JsonObject access_req = doc[<span class="stringliteral">&quot;accessRequest&quot;</span>];</div>
+<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>      String permission = access_req[<span class="stringliteral">&quot;permission&quot;</span>];</div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span> </div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span>      <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>      <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span> </div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span>      <span class="keywordflow">if</span> (permission == <span class="stringliteral">&quot;DENIED&quot;</span>) {</div>
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>        ESP_LOGW(__FILENAME__, <span class="stringliteral">&quot;Permission denied&quot;</span>);</div>
+<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>        <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>      }</div>
+<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span> </div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>      <span class="keywordflow">if</span> (permission == <span class="stringliteral">&quot;APPROVED&quot;</span>) {</div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>        ESP_LOGI(__FILENAME__, <span class="stringliteral">&quot;Permission granted&quot;</span>);</div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>        String token = access_req[<span class="stringliteral">&quot;token&quot;</span>];</div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>        <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a> = token;</div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>        <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>        this-&gt;<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">connect_ws</a>(server_address, server_port);</div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>      }</div>
+<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span>    }</div>
+<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>    <span class="keywordflow">if</span> (http_code == 500) {</div>
+<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>      <span class="comment">// this is probably the server barfing due to</span></div>
+<div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>      <span class="comment">// us polling a non-existing request. Just</span></div>
+<div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span>      <span class="comment">// delete the polling href.</span></div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span>      ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Got 500, probably a non-existing request.&quot;</span>);</div>
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>      <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>      <a class="code hl_function" href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">save</a>();</div>
+<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>      <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span>    }</div>
+<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>    <span class="comment">// any other HTTP status code</span></div>
+<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>    ESP_LOGW(__FILENAME__,</div>
+<div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>             <span class="stringliteral">&quot;Can&#39;t handle response %d to pending access request.\n&quot;</span>,</div>
+<div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span>             http_code);</div>
+<div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>  }</div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>}</div>
 </div>
-<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span> </div>
-<div class="foldopen" id="foldopen00939" data-start="{" data-end="}">
-<div class="line"><a id="l00939" name="l00939"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a1edbfa57e491c2e3fe0025758d395845">  939</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a1edbfa57e491c2e3fe0025758d395845">SKWSClient::is_connected</a>() {</div>
-<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698">get_connection_state</a>() == <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863ad68f3b8729264c6b9779ab6c6630bae2">SKWSConnectionState::kSKWSConnected</a>;</div>
-<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>}</div>
-</div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span> </div>
+<div class="foldopen" id="foldopen00940" data-start="{" data-end="}">
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">  940</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">SKWSClient::connect_ws</a>(<span class="keyword">const</span> String&amp; host, <span class="keyword">const</span> uint16_t port) {</div>
+<div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>  <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a73e03f1549ec11b65c54fbd267aa652f">SKWSConnectionState::kSKWSConnecting</a>);</div>
 <div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span> </div>
-<div class="foldopen" id="foldopen00943" data-start="{" data-end="}">
-<div class="line"><a id="l00943" name="l00943"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36">  943</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36">SKWSClient::restart</a>() {</div>
-<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>    esp_websocket_client_stop(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
-<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>    esp_websocket_client_destroy(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
-<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span>  }</div>
-<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>  <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
-<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>}</div>
+<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>  String protocol = <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a> ? <span class="stringliteral">&quot;wss&quot;</span> : <span class="stringliteral">&quot;ws&quot;</span>;</div>
+<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span>  String path = <span class="stringliteral">&quot;/signalk/v1/stream?subscribe=none&quot;</span>;</div>
+<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>  String url = protocol + <span class="stringliteral">&quot;://&quot;</span> + host + <span class="stringliteral">&quot;:&quot;</span> + String(port) + path;</div>
+<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span> </div>
+<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;Connecting WebSocket to %s&quot;</span>, url.c_str());</div>
+<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span> </div>
+<div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>  <span class="comment">// Configure WebSocket client</span></div>
+<div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span>  esp_websocket_client_config_t config = {};</div>
+<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>  config.uri = url.c_str();</div>
+<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>  config.task_stack = 8192;</div>
+<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>  config.buffer_size = 1024;</div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span> </div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span><span class="preprocessor">#ifdef SENSESP_SSL_SUPPORT</span></div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>) {</div>
+<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>    <span class="comment">// Use custom crt_bundle_attach to disable SSL verification</span></div>
+<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>    <span class="comment">// This directly configures mbedTLS to skip certificate verification</span></div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>    config.crt_bundle_attach = tofu_crt_bundle_attach;</div>
+<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>    config.skip_cert_common_name_check = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>  }</div>
+<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span> </div>
+<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span>  <span class="comment">// Destroy any existing client</span></div>
+<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span>    esp_websocket_client_stop(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
+<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span>    esp_websocket_client_destroy(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
+<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span>  }</div>
+<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span> </div>
+<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span>  <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> = esp_websocket_client_init(&amp;config);</div>
+<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to initialize WebSocket client&quot;</span>);</div>
+<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>  }</div>
+<div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span> </div>
+<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>  <span class="comment">// Register event handler</span></div>
+<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span>  esp_websocket_register_events(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>, WEBSOCKET_EVENT_ANY,</div>
+<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span>                                websocket_event_handler, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span> </div>
+<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>  <span class="comment">// Add authorization header if we have a token</span></div>
+<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span><span class="preprocessor">#ifdef SENSESP_SSL_SUPPORT</span></div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a> != NULL_AUTH_TOKEN) {</div>
+<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span>    esp_websocket_client_append_header(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>, <span class="stringliteral">&quot;Authorization&quot;</span>,</div>
+<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span>                                       (String(<span class="stringliteral">&quot;Bearer &quot;</span>) + <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a>).c_str());</div>
+<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>  }</div>
+<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00989" name="l00989"></a><span class="lineno">  989</span> </div>
+<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>  <span class="comment">// Start the client</span></div>
+<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span>  esp_err_t err = esp_websocket_client_start(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
+<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span>  <span class="keywordflow">if</span> (err != ESP_OK) {</div>
+<div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span>    ESP_LOGE(__FILENAME__, <span class="stringliteral">&quot;Failed to start WebSocket client: %s&quot;</span>,</div>
+<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span>             esp_err_to_name(err));</div>
+<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>    esp_websocket_client_destroy(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
+<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>    <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span>  }</div>
+<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span> </div>
+<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span>  ESP_LOGD(__FILENAME__, <span class="stringliteral">&quot;WebSocket client started, waiting for connection...&quot;</span>);</div>
+<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span>}</div>
 </div>
-<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span> </div>
-<div class="foldopen" id="foldopen00952" data-start="{" data-end="}">
-<div class="line"><a id="l00952" name="l00952"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#ad7f3e4ebde28b680f480cd62860c01b1">  952</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ad7f3e4ebde28b680f480cd62860c01b1">SKWSClient::send_delta</a>() {</div>
-<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>  String output;</div>
-<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698">get_connection_state</a>() == <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863ad68f3b8729264c6b9779ab6c6630bae2">SKWSConnectionState::kSKWSConnected</a>) {</div>
-<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af23fe643ac123ced328d95869b6e80ef">sk_delta_queue_</a>-&gt;data_available()) {</div>
-<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>      <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af23fe643ac123ced328d95869b6e80ef">sk_delta_queue_</a>-&gt;get_delta(output);</div>
-<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>      esp_websocket_client_send_text(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>, output.c_str(), output.length(),</div>
-<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>                                     portMAX_DELAY);</div>
-<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>      <span class="comment">// This automatically notifies the observers</span></div>
-<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#ae59b6bf5ebe46609f352df33719943e0">delta_tx_tick_producer_</a>.set(1);</div>
-<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span>    }</div>
-<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span>  }</div>
-<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>}</div>
+<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span> </div>
+<div class="foldopen" id="foldopen01004" data-start="{" data-end="}">
+<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a1edbfa57e491c2e3fe0025758d395845"> 1004</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a1edbfa57e491c2e3fe0025758d395845">SKWSClient::is_connected</a>() {</div>
+<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698">get_connection_state</a>() == <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863ad68f3b8729264c6b9779ab6c6630bae2">SKWSConnectionState::kSKWSConnected</a>;</div>
+<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>}</div>
 </div>
-<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span> </div>
-<div class="foldopen" id="foldopen00965" data-start="{" data-end="}">
-<div class="line"><a id="l00965" name="l00965"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a6ce964d6a7a147dc563404324501151d">  965</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a6ce964d6a7a147dc563404324501151d">SKWSClient::to_json</a>(JsonObject&amp; root) {</div>
-<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span>  root[<span class="stringliteral">&quot;sk_address&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af7a9be9cf83aad02fb65499ae194e074">conf_server_address_</a>;</div>
-<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span>  root[<span class="stringliteral">&quot;sk_port&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aa617a20c684dca2551e156293849cb3a">conf_server_port_</a>;</div>
-<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span>  root[<span class="stringliteral">&quot;use_mdns&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aa9495f4a6eba671ead557ca5180897f9">use_mdns_</a>;</div>
-<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span> </div>
-<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span>  root[<span class="stringliteral">&quot;token&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a>;</div>
-<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span>  root[<span class="stringliteral">&quot;client_id&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a>;</div>
-<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span>  root[<span class="stringliteral">&quot;polling_href&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a>;</div>
-<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span> </div>
-<div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span>  root[<span class="stringliteral">&quot;ssl_enabled&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>;</div>
-<div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>  root[<span class="stringliteral">&quot;tofu_enabled&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#ac44448b67a8d320464f20cdcca690de2">tofu_enabled_</a>;</div>
-<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>  root[<span class="stringliteral">&quot;tofu_fingerprint&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a54ace7b020e62f22674b99be737b12c3">tofu_fingerprint_</a>;</div>
-<div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>}</div>
+<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span> </div>
+<div class="foldopen" id="foldopen01008" data-start="{" data-end="}">
+<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36"> 1008</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36">SKWSClient::restart</a>() {</div>
+<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span>    esp_websocket_client_stop(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
+<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span>    esp_websocket_client_destroy(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>);</div>
+<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span>    <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span>  }</div>
+<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>  <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">set_connection_state</a>(<a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>);</div>
+<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>}</div>
 </div>
-<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span> </div>
-<div class="foldopen" id="foldopen00980" data-start="{" data-end="}">
-<div class="line"><a id="l00980" name="l00980"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#ace3c9afd0a99729fb788e3802cb9fd4e">  980</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ace3c9afd0a99729fb788e3802cb9fd4e">SKWSClient::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
-<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;sk_address&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af7a9be9cf83aad02fb65499ae194e074">conf_server_address_</a> = config[<span class="stringliteral">&quot;sk_address&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>  }</div>
-<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;sk_port&quot;</span>].is&lt;int&gt;()) {</div>
-<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aa617a20c684dca2551e156293849cb3a">conf_server_port_</a> = config[<span class="stringliteral">&quot;sk_port&quot;</span>].as&lt;<span class="keywordtype">int</span>&gt;();</div>
-<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span>  }</div>
-<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;use_mdns&quot;</span>].is&lt;bool&gt;()) {</div>
-<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aa9495f4a6eba671ead557ca5180897f9">use_mdns_</a> = config[<span class="stringliteral">&quot;use_mdns&quot;</span>].as&lt;<span class="keywordtype">bool</span>&gt;();</div>
-<div class="line"><a id="l00989" name="l00989"></a><span class="lineno">  989</span>  }</div>
-<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;token&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a> = config[<span class="stringliteral">&quot;token&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span>  }</div>
-<div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;client_id&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> = config[<span class="stringliteral">&quot;client_id&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>  }</div>
-<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;polling_href&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = config[<span class="stringliteral">&quot;polling_href&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>  }</div>
-<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span> </div>
-<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;ssl_enabled&quot;</span>].is&lt;bool&gt;()) {</div>
-<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a> = config[<span class="stringliteral">&quot;ssl_enabled&quot;</span>].as&lt;<span class="keywordtype">bool</span>&gt;();</div>
-<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span>  }</div>
-<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;tofu_enabled&quot;</span>].is&lt;bool&gt;()) {</div>
-<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#ac44448b67a8d320464f20cdcca690de2">tofu_enabled_</a> = config[<span class="stringliteral">&quot;tofu_enabled&quot;</span>].as&lt;<span class="keywordtype">bool</span>&gt;();</div>
-<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>  }</div>
-<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;tofu_fingerprint&quot;</span>].is&lt;String&gt;()) {</div>
-<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a54ace7b020e62f22674b99be737b12c3">tofu_fingerprint_</a> = config[<span class="stringliteral">&quot;tofu_fingerprint&quot;</span>].as&lt;String&gt;();</div>
-<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span>  }</div>
-<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span> </div>
-<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span>}</div>
+<div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span> </div>
+<div class="foldopen" id="foldopen01017" data-start="{" data-end="}">
+<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#ad7f3e4ebde28b680f480cd62860c01b1"> 1017</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ad7f3e4ebde28b680f480cd62860c01b1">SKWSClient::send_delta</a>() {</div>
+<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>  String output;</div>
+<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698">get_connection_state</a>() == <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863ad68f3b8729264c6b9779ab6c6630bae2">SKWSConnectionState::kSKWSConnected</a>) {</div>
+<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af23fe643ac123ced328d95869b6e80ef">sk_delta_queue_</a>-&gt;data_available()) {</div>
+<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>      <a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af23fe643ac123ced328d95869b6e80ef">sk_delta_queue_</a>-&gt;get_delta(output);</div>
+<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>      esp_websocket_client_send_text(<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">client_</a>, output.c_str(), output.length(),</div>
+<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span>                                     portMAX_DELAY);</div>
+<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span>      <span class="comment">// This automatically notifies the observers</span></div>
+<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span>      this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#ae59b6bf5ebe46609f352df33719943e0">delta_tx_tick_producer_</a>.set(1);</div>
+<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>    }</div>
+<div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span>  }</div>
+<div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span>}</div>
 </div>
-<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span></div>
-<div class="foldopen" id="foldopen01018" data-start="{" data-end="}">
-<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#ad7e2b5675a5fc16b4e71fdc938124a2d"> 1018</a></span>String <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ad7e2b5675a5fc16b4e71fdc938124a2d">SKWSClient::get_connection_status</a>() {</div>
-<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>  <span class="keyword">auto</span> state = <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698">get_connection_state</a>();</div>
-<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>  <span class="keywordflow">switch</span> (state) {</div>
-<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a358a444cc35191423050af12926f6079">SKWSConnectionState::kSKWSAuthorizing</a>:</div>
-<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Authorizing with SignalK&quot;</span>;</div>
-<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863ad68f3b8729264c6b9779ab6c6630bae2">SKWSConnectionState::kSKWSConnected</a>:</div>
-<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Connected&quot;</span>;</div>
-<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a73e03f1549ec11b65c54fbd267aa652f">SKWSConnectionState::kSKWSConnecting</a>:</div>
-<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Connecting&quot;</span>;</div>
-<div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>:</div>
-<div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Disconnected&quot;</span>;</div>
-<div class="line"><a id="l01029" name="l01029"></a><span class="lineno"> 1029</span>  }</div>
-<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"> 1030</span> </div>
-<div class="line"><a id="l01031" name="l01031"></a><span class="lineno"> 1031</span>  <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown&quot;</span>;</div>
-<div class="line"><a id="l01032" name="l01032"></a><span class="lineno"> 1032</span>}</div>
+<div class="line"><a id="l01029" name="l01029"></a><span class="lineno"> 1029</span> </div>
+<div class="foldopen" id="foldopen01030" data-start="{" data-end="}">
+<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#a6ce964d6a7a147dc563404324501151d"> 1030</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a6ce964d6a7a147dc563404324501151d">SKWSClient::to_json</a>(JsonObject&amp; root) {</div>
+<div class="line"><a id="l01031" name="l01031"></a><span class="lineno"> 1031</span>  root[<span class="stringliteral">&quot;sk_address&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af7a9be9cf83aad02fb65499ae194e074">conf_server_address_</a>;</div>
+<div class="line"><a id="l01032" name="l01032"></a><span class="lineno"> 1032</span>  root[<span class="stringliteral">&quot;sk_port&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aa617a20c684dca2551e156293849cb3a">conf_server_port_</a>;</div>
+<div class="line"><a id="l01033" name="l01033"></a><span class="lineno"> 1033</span>  root[<span class="stringliteral">&quot;use_mdns&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aa9495f4a6eba671ead557ca5180897f9">use_mdns_</a>;</div>
+<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span> </div>
+<div class="line"><a id="l01035" name="l01035"></a><span class="lineno"> 1035</span>  root[<span class="stringliteral">&quot;token&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a>;</div>
+<div class="line"><a id="l01036" name="l01036"></a><span class="lineno"> 1036</span>  root[<span class="stringliteral">&quot;client_id&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a>;</div>
+<div class="line"><a id="l01037" name="l01037"></a><span class="lineno"> 1037</span>  root[<span class="stringliteral">&quot;polling_href&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a>;</div>
+<div class="line"><a id="l01038" name="l01038"></a><span class="lineno"> 1038</span> </div>
+<div class="line"><a id="l01039" name="l01039"></a><span class="lineno"> 1039</span>  root[<span class="stringliteral">&quot;ssl_enabled&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a>;</div>
+<div class="line"><a id="l01040" name="l01040"></a><span class="lineno"> 1040</span>  root[<span class="stringliteral">&quot;tofu_enabled&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#ac44448b67a8d320464f20cdcca690de2">tofu_enabled_</a>;</div>
+<div class="line"><a id="l01041" name="l01041"></a><span class="lineno"> 1041</span>  root[<span class="stringliteral">&quot;tofu_fingerprint&quot;</span>] = this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a54ace7b020e62f22674b99be737b12c3">tofu_fingerprint_</a>;</div>
+<div class="line"><a id="l01042" name="l01042"></a><span class="lineno"> 1042</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l01043" name="l01043"></a><span class="lineno"> 1043</span>}</div>
 </div>
-<div class="line"><a id="l01033" name="l01033"></a><span class="lineno"> 1033</span> </div>
-<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span>}  <span class="comment">// namespace sensesp</span></div>
+<div class="line"><a id="l01044" name="l01044"></a><span class="lineno"> 1044</span> </div>
+<div class="foldopen" id="foldopen01045" data-start="{" data-end="}">
+<div class="line"><a id="l01045" name="l01045"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#ace3c9afd0a99729fb788e3802cb9fd4e"> 1045</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ace3c9afd0a99729fb788e3802cb9fd4e">SKWSClient::from_json</a>(<span class="keyword">const</span> JsonObject&amp; config) {</div>
+<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;sk_address&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l01047" name="l01047"></a><span class="lineno"> 1047</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af7a9be9cf83aad02fb65499ae194e074">conf_server_address_</a> = config[<span class="stringliteral">&quot;sk_address&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l01048" name="l01048"></a><span class="lineno"> 1048</span>  }</div>
+<div class="line"><a id="l01049" name="l01049"></a><span class="lineno"> 1049</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;sk_port&quot;</span>].is&lt;int&gt;()) {</div>
+<div class="line"><a id="l01050" name="l01050"></a><span class="lineno"> 1050</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aa617a20c684dca2551e156293849cb3a">conf_server_port_</a> = config[<span class="stringliteral">&quot;sk_port&quot;</span>].as&lt;<span class="keywordtype">int</span>&gt;();</div>
+<div class="line"><a id="l01051" name="l01051"></a><span class="lineno"> 1051</span>  }</div>
+<div class="line"><a id="l01052" name="l01052"></a><span class="lineno"> 1052</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;use_mdns&quot;</span>].is&lt;bool&gt;()) {</div>
+<div class="line"><a id="l01053" name="l01053"></a><span class="lineno"> 1053</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aa9495f4a6eba671ead557ca5180897f9">use_mdns_</a> = config[<span class="stringliteral">&quot;use_mdns&quot;</span>].as&lt;<span class="keywordtype">bool</span>&gt;();</div>
+<div class="line"><a id="l01054" name="l01054"></a><span class="lineno"> 1054</span>  }</div>
+<div class="line"><a id="l01055" name="l01055"></a><span class="lineno"> 1055</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;token&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l01056" name="l01056"></a><span class="lineno"> 1056</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">auth_token_</a> = config[<span class="stringliteral">&quot;token&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l01057" name="l01057"></a><span class="lineno"> 1057</span>  }</div>
+<div class="line"><a id="l01058" name="l01058"></a><span class="lineno"> 1058</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;client_id&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l01059" name="l01059"></a><span class="lineno"> 1059</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">client_id_</a> = config[<span class="stringliteral">&quot;client_id&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l01060" name="l01060"></a><span class="lineno"> 1060</span>  }</div>
+<div class="line"><a id="l01061" name="l01061"></a><span class="lineno"> 1061</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;polling_href&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l01062" name="l01062"></a><span class="lineno"> 1062</span>    String href = config[<span class="stringliteral">&quot;polling_href&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l01063" name="l01063"></a><span class="lineno"> 1063</span>    <span class="comment">// Only accept valid hrefs (must start with /)</span></div>
+<div class="line"><a id="l01064" name="l01064"></a><span class="lineno"> 1064</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">polling_href_</a> = href.startsWith(<span class="stringliteral">&quot;/&quot;</span>) ? href : <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l01065" name="l01065"></a><span class="lineno"> 1065</span>  }</div>
+<div class="line"><a id="l01066" name="l01066"></a><span class="lineno"> 1066</span> </div>
+<div class="line"><a id="l01067" name="l01067"></a><span class="lineno"> 1067</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;ssl_enabled&quot;</span>].is&lt;bool&gt;()) {</div>
+<div class="line"><a id="l01068" name="l01068"></a><span class="lineno"> 1068</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#aaedada9502fefc08c4ee8a6a9cd21477">ssl_enabled_</a> = config[<span class="stringliteral">&quot;ssl_enabled&quot;</span>].as&lt;<span class="keywordtype">bool</span>&gt;();</div>
+<div class="line"><a id="l01069" name="l01069"></a><span class="lineno"> 1069</span>  }</div>
+<div class="line"><a id="l01070" name="l01070"></a><span class="lineno"> 1070</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;tofu_enabled&quot;</span>].is&lt;bool&gt;()) {</div>
+<div class="line"><a id="l01071" name="l01071"></a><span class="lineno"> 1071</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#ac44448b67a8d320464f20cdcca690de2">tofu_enabled_</a> = config[<span class="stringliteral">&quot;tofu_enabled&quot;</span>].as&lt;<span class="keywordtype">bool</span>&gt;();</div>
+<div class="line"><a id="l01072" name="l01072"></a><span class="lineno"> 1072</span>  }</div>
+<div class="line"><a id="l01073" name="l01073"></a><span class="lineno"> 1073</span>  <span class="keywordflow">if</span> (config[<span class="stringliteral">&quot;tofu_fingerprint&quot;</span>].is&lt;String&gt;()) {</div>
+<div class="line"><a id="l01074" name="l01074"></a><span class="lineno"> 1074</span>    this-&gt;<a class="code hl_variable" href="classsensesp_1_1_s_k_w_s_client.html#a54ace7b020e62f22674b99be737b12c3">tofu_fingerprint_</a> = config[<span class="stringliteral">&quot;tofu_fingerprint&quot;</span>].as&lt;String&gt;();</div>
+<div class="line"><a id="l01075" name="l01075"></a><span class="lineno"> 1075</span>  }</div>
+<div class="line"><a id="l01076" name="l01076"></a><span class="lineno"> 1076</span> </div>
+<div class="line"><a id="l01077" name="l01077"></a><span class="lineno"> 1077</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l01078" name="l01078"></a><span class="lineno"> 1078</span>}</div>
+</div>
+<div class="line"><a id="l01079" name="l01079"></a><span class="lineno"> 1079</span></div>
+<div class="foldopen" id="foldopen01085" data-start="{" data-end="}">
+<div class="line"><a id="l01085" name="l01085"></a><span class="lineno"><a class="line" href="classsensesp_1_1_s_k_w_s_client.html#ad7e2b5675a5fc16b4e71fdc938124a2d"> 1085</a></span>String <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#ad7e2b5675a5fc16b4e71fdc938124a2d">SKWSClient::get_connection_status</a>() {</div>
+<div class="line"><a id="l01086" name="l01086"></a><span class="lineno"> 1086</span>  <span class="keyword">auto</span> state = <a class="code hl_function" href="classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698">get_connection_state</a>();</div>
+<div class="line"><a id="l01087" name="l01087"></a><span class="lineno"> 1087</span>  <span class="keywordflow">switch</span> (state) {</div>
+<div class="line"><a id="l01088" name="l01088"></a><span class="lineno"> 1088</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a358a444cc35191423050af12926f6079">SKWSConnectionState::kSKWSAuthorizing</a>:</div>
+<div class="line"><a id="l01089" name="l01089"></a><span class="lineno"> 1089</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Authorizing with SignalK&quot;</span>;</div>
+<div class="line"><a id="l01090" name="l01090"></a><span class="lineno"> 1090</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863ad68f3b8729264c6b9779ab6c6630bae2">SKWSConnectionState::kSKWSConnected</a>:</div>
+<div class="line"><a id="l01091" name="l01091"></a><span class="lineno"> 1091</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Connected&quot;</span>;</div>
+<div class="line"><a id="l01092" name="l01092"></a><span class="lineno"> 1092</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a73e03f1549ec11b65c54fbd267aa652f">SKWSConnectionState::kSKWSConnecting</a>:</div>
+<div class="line"><a id="l01093" name="l01093"></a><span class="lineno"> 1093</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Connecting&quot;</span>;</div>
+<div class="line"><a id="l01094" name="l01094"></a><span class="lineno"> 1094</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="namespacesensesp.html#ad5783ae20a1db2a16319798ed5513863a1ff64e7ba02f5309e723ffe6f967448d">SKWSConnectionState::kSKWSDisconnected</a>:</div>
+<div class="line"><a id="l01095" name="l01095"></a><span class="lineno"> 1095</span>      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Disconnected&quot;</span>;</div>
+<div class="line"><a id="l01096" name="l01096"></a><span class="lineno"> 1096</span>  }</div>
+<div class="line"><a id="l01097" name="l01097"></a><span class="lineno"> 1097</span> </div>
+<div class="line"><a id="l01098" name="l01098"></a><span class="lineno"> 1098</span>  <span class="keywordflow">return</span> <span class="stringliteral">&quot;Unknown&quot;</span>;</div>
+<div class="line"><a id="l01099" name="l01099"></a><span class="lineno"> 1099</span>}</div>
+</div>
+<div class="line"><a id="l01100" name="l01100"></a><span class="lineno"> 1100</span> </div>
+<div class="line"><a id="l01101" name="l01101"></a><span class="lineno"> 1101</span>}  <span class="comment">// namespace sensesp</span></div>
 <div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a79b2e2e657112851dfda8785d217578a"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a">sensesp::FileSystemSaveable::load</a></div><div class="ttdeci">virtual bool load() override</div><div class="ttdoc">Load and populate the object from a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00008">saveable.cpp:8</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a8fcd302f31b35502d061b769f9efee27"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a8fcd302f31b35502d061b769f9efee27">sensesp::FileSystemSaveable::save</a></div><div class="ttdeci">virtual bool save() override</div><div class="ttdoc">Save the object to a persistent storage.</div><div class="ttdef"><b>Definition</b> <a href="saveable_8cpp_source.html#l00041">saveable.cpp:41</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_file_system_saveable_html_a974f062b375cf8637944f121084cf9f7"><div class="ttname"><a href="classsensesp_1_1_file_system_saveable.html#a974f062b375cf8637944f121084cf9f7">sensesp::FileSystemSaveable::FileSystemSaveable</a></div><div class="ttdeci">FileSystemSaveable(const String &amp;config_path)</div><div class="ttdef"><b>Definition</b> <a href="saveable_8h_source.html#l00063">saveable.h:63</a></div></div>
@@ -1132,16 +1199,16 @@ $(function(){initNavTree('signalk__ws__client_8cpp_source.html','',''); });
 <div class="ttc" id="aclasssensesp_1_1_s_k_request_html_a272df2b3fe96d053c12597866212ac29"><div class="ttname"><a href="classsensesp_1_1_s_k_request.html#a272df2b3fe96d053c12597866212ac29">sensesp::SKRequest::handle_response</a></div><div class="ttdeci">static void handle_response(JsonDocument &amp;response)</div><div class="ttdef"><b>Definition</b> <a href="signalk__put__request_8cpp_source.html#l00057">signalk_put_request.cpp:57</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html">sensesp::SKWSClient</a></div><div class="ttdoc">The websocket connection to the Signal K server.</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00034">signalk_ws_client.h:35</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a034846d24a203d0e62b49a96a1400219"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a034846d24a203d0e62b49a96a1400219">sensesp::SKWSClient::received_updates_</a></div><div class="ttdeci">std::list&lt; JsonDocument &gt; received_updates_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00190">signalk_ws_client.h:190</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a05dc57271aa29fbf4f99228331d2194f"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">sensesp::SKWSClient::poll_access_request</a></div><div class="ttdeci">void poll_access_request(const String host, const uint16_t port, const String href)</div><div class="ttdef"><b>Definition</b> <a href="#l00772">signalk_ws_client.cpp:772</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a05dc57271aa29fbf4f99228331d2194f"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a05dc57271aa29fbf4f99228331d2194f">sensesp::SKWSClient::poll_access_request</a></div><div class="ttdeci">void poll_access_request(const String host, const uint16_t port, const String href)</div><div class="ttdef"><b>Definition</b> <a href="#l00822">signalk_ws_client.cpp:822</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a06543d390e00ae846df1313247f4f877"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a06543d390e00ae846df1313247f4f877">sensesp::SKWSClient::SKWSClient</a></div><div class="ttdeci">SKWSClient(const String &amp;config_path, std::shared_ptr&lt; SKDeltaQueue &gt; sk_delta_queue, const String &amp;server_address, uint16_t server_port, bool use_mdns=true)</div><div class="ttdef"><b>Definition</b> <a href="#l00155">signalk_ws_client.cpp:155</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a0be43261c9577347b208744d4f9e88e2"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a0be43261c9577347b208744d4f9e88e2">sensesp::SKWSClient::auth_token_</a></div><div class="ttdeci">String auth_token_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00164">signalk_ws_client.h:164</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a10433bce2a343bd467b148a5baaaaa08"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a10433bce2a343bd467b148a5baaaaa08">sensesp::SKWSClient::on_receive_delta</a></div><div class="ttdeci">void on_receive_delta(uint8_t *payload, size_t length)</div><div class="ttdoc">Called when the websocket receives a delta.</div><div class="ttdef"><b>Definition</b> <a href="#l00290">signalk_ws_client.cpp:290</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a12738fc1db47ebe9557753905bb62615"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a12738fc1db47ebe9557753905bb62615">sensesp::SKWSClient::detect_ssl</a></div><div class="ttdeci">bool detect_ssl()</div><div class="ttdef"><b>Definition</b> <a href="#l00489">signalk_ws_client.cpp:489</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a1edbfa57e491c2e3fe0025758d395845"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a1edbfa57e491c2e3fe0025758d395845">sensesp::SKWSClient::is_connected</a></div><div class="ttdeci">bool is_connected()</div><div class="ttdef"><b>Definition</b> <a href="#l00939">signalk_ws_client.cpp:939</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a1edbfa57e491c2e3fe0025758d395845"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a1edbfa57e491c2e3fe0025758d395845">sensesp::SKWSClient::is_connected</a></div><div class="ttdeci">bool is_connected()</div><div class="ttdef"><b>Definition</b> <a href="#l01004">signalk_ws_client.cpp:1004</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a1f653dcdf79aceaf276ec59f26dd3765"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a1f653dcdf79aceaf276ec59f26dd3765">sensesp::SKWSClient::process_received_updates</a></div><div class="ttdeci">void process_received_updates()</div><div class="ttdoc">Loop through the received updates and process them.</div><div class="ttdef"><b>Definition</b> <a href="#l00358">signalk_ws_client.cpp:358</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a24be571bdd7183f50711457a9be96fd6"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a24be571bdd7183f50711457a9be96fd6">sensesp::SKWSClient::loop</a></div><div class="ttdeci">void loop()</div><div class="ttdef"><b>Definition</b> <a href="#l00604">signalk_ws_client.cpp:604</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a2e9580b5ab17102adb5fe80d1073425c"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a2e9580b5ab17102adb5fe80d1073425c">sensesp::SKWSClient::token_test_success_</a></div><div class="ttdeci">bool token_test_success_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00166">signalk_ws_client.h:166</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a2ebcbbfce9e5d6148e69185da36c5040"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">sensesp::SKWSClient::connect_ws</a></div><div class="ttdeci">void connect_ws(const String &amp;host, const uint16_t port)</div><div class="ttdef"><b>Definition</b> <a href="#l00875">signalk_ws_client.cpp:875</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a2ebcbbfce9e5d6148e69185da36c5040"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040">sensesp::SKWSClient::connect_ws</a></div><div class="ttdeci">void connect_ws(const String &amp;host, const uint16_t port)</div><div class="ttdef"><b>Definition</b> <a href="#l00940">signalk_ws_client.cpp:940</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a44383fc049764f2a3b877cbf5db6a0cc"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a44383fc049764f2a3b877cbf5db6a0cc">sensesp::SKWSClient::delta_tx_count_producer_</a></div><div class="ttdeci">Integrator&lt; int, int &gt; delta_tx_count_producer_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00185">signalk_ws_client.h:185</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a45233367713d782b13cc66bb89f74e66"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a45233367713d782b13cc66bb89f74e66">sensesp::SKWSClient::connection_state_</a></div><div class="ttdeci">TaskQueueProducer&lt; SKWSConnectionState &gt; connection_state_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00173">signalk_ws_client.h:173</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a4b743aa1377f34235482a2bbc6400698"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698">sensesp::SKWSClient::get_connection_state</a></div><div class="ttdeci">SKWSConnectionState get_connection_state()</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00229">signalk_ws_client.h:229</a></div></div>
@@ -1149,9 +1216,9 @@ $(function(){initNavTree('signalk__ws__client_8cpp_source.html','',''); });
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a51989a27609077e32aba992bc3554793"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a51989a27609077e32aba992bc3554793">sensesp::SKWSClient::release_received_updates_semaphore</a></div><div class="ttdeci">void release_received_updates_semaphore()</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00203">signalk_ws_client.h:203</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a54ace7b020e62f22674b99be737b12c3"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a54ace7b020e62f22674b99be737b12c3">sensesp::SKWSClient::tofu_fingerprint_</a></div><div class="ttdeci">String tofu_fingerprint_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00171">signalk_ws_client.h:171</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a555811bdde8b3a32645cb51c3ace591a"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a555811bdde8b3a32645cb51c3ace591a">sensesp::SKWSClient::polling_href_</a></div><div class="ttdeci">String polling_href_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00163">signalk_ws_client.h:163</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a59a57e892f602b940b6c7c15ec49ca52"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52">sensesp::SKWSClient::send_access_request</a></div><div class="ttdeci">void send_access_request(const String host, const uint16_t port)</div><div class="ttdef"><b>Definition</b> <a href="#l00680">signalk_ws_client.cpp:680</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a59a57e892f602b940b6c7c15ec49ca52"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a59a57e892f602b940b6c7c15ec49ca52">sensesp::SKWSClient::send_access_request</a></div><div class="ttdeci">void send_access_request(const String host, const uint16_t port)</div><div class="ttdef"><b>Definition</b> <a href="#l00700">signalk_ws_client.cpp:700</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a63f756fd0e08f70c934d223c5df0a3a4"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a63f756fd0e08f70c934d223c5df0a3a4">sensesp::SKWSClient::delta_rx_count_producer_</a></div><div class="ttdeci">Integrator&lt; int, int &gt; delta_rx_count_producer_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00186">signalk_ws_client.h:186</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a6ce964d6a7a147dc563404324501151d"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a6ce964d6a7a147dc563404324501151d">sensesp::SKWSClient::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;root) override final</div><div class="ttdef"><b>Definition</b> <a href="#l00965">signalk_ws_client.cpp:965</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a6ce964d6a7a147dc563404324501151d"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a6ce964d6a7a147dc563404324501151d">sensesp::SKWSClient::to_json</a></div><div class="ttdeci">virtual bool to_json(JsonObject &amp;root) override final</div><div class="ttdef"><b>Definition</b> <a href="#l01030">signalk_ws_client.cpp:1030</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a71c4787c20640979d0f21e722fdf161a"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a71c4787c20640979d0f21e722fdf161a">sensesp::SKWSClient::connect</a></div><div class="ttdeci">void connect()</div><div class="ttdef"><b>Definition</b> <a href="#l00538">signalk_ws_client.cpp:538</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a7a109cfb215d2572f0947b6fbdc57f42"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a7a109cfb215d2572f0947b6fbdc57f42">sensesp::SKWSClient::client_</a></div><div class="ttdeci">esp_websocket_client_handle_t client_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00181">signalk_ws_client.h:181</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_a7b4c11c2a4bea42349e5be61166adeb9"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#a7b4c11c2a4bea42349e5be61166adeb9">sensesp::SKWSClient::on_error</a></div><div class="ttdeci">void on_error()</div><div class="ttdoc">Called when the websocket connection encounters an error.</div><div class="ttdef"><b>Definition</b> <a href="#l00222">signalk_ws_client.cpp:222</a></div></div>
@@ -1170,15 +1237,15 @@ $(function(){initNavTree('signalk__ws__client_8cpp_source.html','',''); });
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ac124cc1b358d613e7ad43b9545a97d26"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ac124cc1b358d613e7ad43b9545a97d26">sensesp::SKWSClient::set_connection_state</a></div><div class="ttdeci">void set_connection_state(SKWSConnectionState state)</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00225">signalk_ws_client.h:225</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ac44448b67a8d320464f20cdcca690de2"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ac44448b67a8d320464f20cdcca690de2">sensesp::SKWSClient::tofu_enabled_</a></div><div class="ttdeci">bool tofu_enabled_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00170">signalk_ws_client.h:170</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ac66974c5d91bacc76751592ddb1c979b"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ac66974c5d91bacc76751592ddb1c979b">sensesp::SKWSClient::take_received_updates_semaphore</a></div><div class="ttdeci">bool take_received_updates_semaphore(unsigned long int timeout_ms=0)</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00195">signalk_ws_client.h:195</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ace3c9afd0a99729fb788e3802cb9fd4e"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ace3c9afd0a99729fb788e3802cb9fd4e">sensesp::SKWSClient::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override final</div><div class="ttdef"><b>Definition</b> <a href="#l00980">signalk_ws_client.cpp:980</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ad7e2b5675a5fc16b4e71fdc938124a2d"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ad7e2b5675a5fc16b4e71fdc938124a2d">sensesp::SKWSClient::get_connection_status</a></div><div class="ttdeci">String get_connection_status()</div><div class="ttdoc">Get a String representation of the current connection state.</div><div class="ttdef"><b>Definition</b> <a href="#l01018">signalk_ws_client.cpp:1018</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ad7f3e4ebde28b680f480cd62860c01b1"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ad7f3e4ebde28b680f480cd62860c01b1">sensesp::SKWSClient::send_delta</a></div><div class="ttdeci">void send_delta()</div><div class="ttdef"><b>Definition</b> <a href="#l00952">signalk_ws_client.cpp:952</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ace3c9afd0a99729fb788e3802cb9fd4e"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ace3c9afd0a99729fb788e3802cb9fd4e">sensesp::SKWSClient::from_json</a></div><div class="ttdeci">virtual bool from_json(const JsonObject &amp;config) override final</div><div class="ttdef"><b>Definition</b> <a href="#l01045">signalk_ws_client.cpp:1045</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ad7e2b5675a5fc16b4e71fdc938124a2d"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ad7e2b5675a5fc16b4e71fdc938124a2d">sensesp::SKWSClient::get_connection_status</a></div><div class="ttdeci">String get_connection_status()</div><div class="ttdoc">Get a String representation of the current connection state.</div><div class="ttdef"><b>Definition</b> <a href="#l01085">signalk_ws_client.cpp:1085</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ad7f3e4ebde28b680f480cd62860c01b1"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ad7f3e4ebde28b680f480cd62860c01b1">sensesp::SKWSClient::send_delta</a></div><div class="ttdeci">void send_delta()</div><div class="ttdef"><b>Definition</b> <a href="#l01017">signalk_ws_client.cpp:1017</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ada4c50bafc9ed46c3d89e33af951f7d3"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ada4c50bafc9ed46c3d89e33af951f7d3">sensesp::SKWSClient::connect_loop</a></div><div class="ttdeci">void connect_loop()</div><div class="ttdef"><b>Definition</b> <a href="#l00190">signalk_ws_client.cpp:190</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_ae59b6bf5ebe46609f352df33719943e0"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#ae59b6bf5ebe46609f352df33719943e0">sensesp::SKWSClient::delta_tx_tick_producer_</a></div><div class="ttdeci">TaskQueueProducer&lt; int &gt; delta_tx_tick_producer_</div><div class="ttdoc">Emits the number of deltas sent since last report.</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00184">signalk_ws_client.h:184</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_af23fe643ac123ced328d95869b6e80ef"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#af23fe643ac123ced328d95869b6e80ef">sensesp::SKWSClient::sk_delta_queue_</a></div><div class="ttdeci">std::shared_ptr&lt; SKDeltaQueue &gt; sk_delta_queue_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00182">signalk_ws_client.h:182</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_af283267247845688fc6bcc4d589af886"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#af283267247845688fc6bcc4d589af886">sensesp::SKWSClient::client_id_</a></div><div class="ttdeci">String client_id_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00162">signalk_ws_client.h:162</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_af7a9be9cf83aad02fb65499ae194e074"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#af7a9be9cf83aad02fb65499ae194e074">sensesp::SKWSClient::conf_server_address_</a></div><div class="ttdeci">String conf_server_address_</div><div class="ttdef"><b>Definition</b> <a href="signalk__ws__client_8h_source.html#l00158">signalk_ws_client.h:158</a></div></div>
-<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_af88e234b684dc0fb1b85e2efea98dc36"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36">sensesp::SKWSClient::restart</a></div><div class="ttdeci">void restart()</div><div class="ttdef"><b>Definition</b> <a href="#l00943">signalk_ws_client.cpp:943</a></div></div>
+<div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_af88e234b684dc0fb1b85e2efea98dc36"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36">sensesp::SKWSClient::restart</a></div><div class="ttdeci">void restart()</div><div class="ttdef"><b>Definition</b> <a href="#l01008">signalk_ws_client.cpp:1008</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_s_k_w_s_client_html_afbe265351213c154f3977b8fb56fc91d"><div class="ttname"><a href="classsensesp_1_1_s_k_w_s_client.html#afbe265351213c154f3977b8fb56fc91d">sensesp::SKWSClient::on_connected</a></div><div class="ttdeci">void on_connected()</div><div class="ttdoc">Called when the websocket connection is established.</div><div class="ttdef"><b>Definition</b> <a href="#l00232">signalk_ws_client.cpp:232</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_sens_e_s_p_base_app_html_a21ba3dc3ef0056c32ad5a67e1ae5ff16"><div class="ttname"><a href="classsensesp_1_1_sens_e_s_p_base_app.html#a21ba3dc3ef0056c32ad5a67e1ae5ff16">sensesp::SensESPBaseApp::get_hostname</a></div><div class="ttdeci">static String get_hostname()</div><div class="ttdoc">Get the current hostname.</div><div class="ttdef"><b>Definition</b> <a href="sensesp__base__app_8h_source.html#l00105">sensesp_base_app.h:105</a></div></div>
 <div class="ttc" id="aclasssensesp_1_1_value_producer_html_a4f5f0259d0d3cd9a0ed17d657cac04e2"><div class="ttname"><a href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">sensesp::ValueProducer&lt; SKWSConnectionState &gt;::emit</a></div><div class="ttdeci">void emit(const SKWSConnectionState &amp;new_value)</div><div class="ttdef"><b>Definition</b> <a href="valueproducer_8h_source.html#l00091">valueproducer.h:91</a></div></div>

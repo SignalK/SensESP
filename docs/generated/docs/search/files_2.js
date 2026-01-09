@@ -9,7 +9,8 @@ var searchData=
   ['config_5fitem_2ecpp_6',['config_item.cpp',['../config__item_8cpp.html',1,'']]],
   ['config_5fitem_2eh_7',['config_item.h',['../config__item_8h.html',1,'']]],
   ['constant_5fsensor_2eh_8',['constant_sensor.h',['../constant__sensor_8h.html',1,'']]],
-  ['css_5fbootstrap_2eh_9',['css_bootstrap.h',['../css__bootstrap_8h.html',1,'']]],
-  ['curveinterpolator_2ecpp_10',['curveinterpolator.cpp',['../curveinterpolator_8cpp.html',1,'']]],
-  ['curveinterpolator_2eh_11',['curveinterpolator.h',['../curveinterpolator_8h.html',1,'']]]
+  ['crgb_2eh_9',['crgb.h',['../crgb_8h.html',1,'']]],
+  ['css_5fbootstrap_2eh_10',['css_bootstrap.h',['../css__bootstrap_8h.html',1,'']]],
+  ['curveinterpolator_2ecpp_11',['curveinterpolator.cpp',['../curveinterpolator_8cpp.html',1,'']]],
+  ['curveinterpolator_2eh_12',['curveinterpolator.h',['../curveinterpolator_8h.html',1,'']]]
 ];

@@ -102,13 +102,32 @@ var sectionId = 'dynsection-8';
 </a>
 </g>
 </g>
-<!-- Node7 -->
-<g id="Node000007" class="node">
-<title>Node7</title>
-<g id="a_Node000007"><a xlink:href="classsensesp_1_1_button_handler.html#a2bbaa0329081dcb6616a9e09cde9e3da" target="_top" xlink:title="Handle a long button press (over 1 second).">
+<!-- Node6 -->
+<g id="Node000006" class="node">
+<title>Node6</title>
+<g id="a_Node000006"><a xlink:href="classsensesp_1_1_button_handler.html#a2bbaa0329081dcb6616a9e09cde9e3da" target="_top" xlink:title="Handle a long button press (over 1 second).">
 <polygon fill="white" stroke="#666666" points="476.62,-79.5 355.62,-79.5 355.62,-49 476.62,-49 476.62,-79.5"/>
 <text xml:space="preserve" text-anchor="start" x="363.62" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::ButtonHandler</text>
 <text xml:space="preserve" text-anchor="middle" x="416.12" y="-54.75" font-family="Helvetica,sans-Serif" font-size="10.00">::handle_long_press</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node6 -->
+<g id="edge5_Node000001_Node000006" class="edge">
+<title>Node1&#45;&gt;Node6</title>
+<g id="a_edge5_Node000001_Node000006"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M513.97,-77.46C501.5,-75.76 488.78,-74.02 476.84,-72.39"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="513.45,-80.92 523.83,-78.8 514.4,-73.98 513.45,-80.92"/>
+</a>
+</g>
+</g>
+<!-- Node7 -->
+<g id="Node000007" class="node">
+<title>Node7</title>
+<g id="a_Node000007"><a xlink:href="classsensesp_1_1_s_k_request.html#a67358e04e4e3c3341e0aa1663749b374" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="470.62,-30.5 361.62,-30.5 361.62,0 470.62,0 470.62,-30.5"/>
+<text xml:space="preserve" text-anchor="start" x="369.62" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SKRequest</text>
+<text xml:space="preserve" text-anchor="middle" x="416.12" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">::send_request</text>
 </a>
 </g>
 </g>
@@ -116,25 +135,6 @@ var sectionId = 'dynsection-8';
 <g id="edge6_Node000001_Node000007" class="edge">
 <title>Node1&#45;&gt;Node7</title>
 <g id="a_edge6_Node000001_Node000007"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M513.97,-77.46C501.5,-75.76 488.78,-74.02 476.84,-72.39"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="513.45,-80.92 523.83,-78.8 514.4,-73.98 513.45,-80.92"/>
-</a>
-</g>
-</g>
-<!-- Node8 -->
-<g id="Node000008" class="node">
-<title>Node8</title>
-<g id="a_Node000008"><a xlink:href="classsensesp_1_1_s_k_request.html#a67358e04e4e3c3341e0aa1663749b374" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="470.62,-30.5 361.62,-30.5 361.62,0 470.62,0 470.62,-30.5"/>
-<text xml:space="preserve" text-anchor="start" x="369.62" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SKRequest</text>
-<text xml:space="preserve" text-anchor="middle" x="416.12" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">::send_request</text>
-</a>
-</g>
-</g>
-<!-- Node1&#45;&gt;Node8 -->
-<g id="edge7_Node000001_Node000008" class="edge">
-<title>Node1&#45;&gt;Node8</title>
-<g id="a_edge7_Node000001_Node000008"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M562.94,-73.23C542.52,-63.32 514.8,-50.34 489.75,-40.25 481.83,-37.06 473.34,-33.9 465.04,-30.96"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="561.31,-76.33 571.83,-77.58 564.39,-70.04 561.31,-76.33"/>
 </a>
@@ -178,31 +178,32 @@ var sectionId = 'dynsection-8';
 </a>
 </g>
 </g>
-<!-- Node6 -->
-<g id="Node000006" class="node">
-<title>Node6</title>
-<g id="a_Node000006"><a xlink:href="main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="253.25,-122.88 213.25,-122.88 213.25,-103.62 253.25,-103.62 253.25,-122.88"/>
-<text xml:space="preserve" text-anchor="middle" x="233.25" y="-109.38" font-family="Helvetica,sans-Serif" font-size="10.00">setup</text>
+<!-- Node8 -->
+<g id="Node000008" class="node">
+<title>Node8</title>
+<g id="a_Node000008"><a xlink:href="classsensesp_1_1_s_k_put_request_base.html#a8a60c171c008e367a92d93f62e291dae" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="306.5,-30.5 160,-30.5 160,0 306.5,0 306.5,-30.5"/>
+<text xml:space="preserve" text-anchor="start" x="168" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SKPutRequestBase</text>
+<text xml:space="preserve" text-anchor="middle" x="233.25" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">::send_put_request</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node6 -->
-<g id="edge5_Node000005_Node000006" class="edge">
-<title>Node5&#45;&gt;Node6</title>
-<g id="a_edge5_Node000005_Node000006"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M330.67,-113.25C301.86,-113.25 272.23,-113.25 253.56,-113.25"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="330.56,-116.75 340.56,-113.25 330.56,-109.75 330.56,-116.75"/>
+<!-- Node7&#45;&gt;Node8 -->
+<g id="edge7_Node000007_Node000008" class="edge">
+<title>Node7&#45;&gt;Node8</title>
+<g id="a_edge7_Node000007_Node000008"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M349.87,-15.25C335.93,-15.25 321.11,-15.25 306.91,-15.25"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="349.83,-18.75 359.83,-15.25 349.83,-11.75 349.83,-18.75"/>
 </a>
 </g>
 </g>
 <!-- Node9 -->
 <g id="Node000009" class="node">
 <title>Node9</title>
-<g id="a_Node000009"><a xlink:href="classsensesp_1_1_s_k_put_request_base.html#a8a60c171c008e367a92d93f62e291dae" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="306.5,-30.5 160,-30.5 160,0 306.5,0 306.5,-30.5"/>
-<text xml:space="preserve" text-anchor="start" x="168" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SKPutRequestBase</text>
-<text xml:space="preserve" text-anchor="middle" x="233.25" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">::send_put_request</text>
+<g id="a_Node000009"><a xlink:href="classsensesp_1_1_s_k_put_request.html#aa058e5926050a529176402b4d3a20c44" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="124,-30.5 0,-30.5 0,0 124,0 124,-30.5"/>
+<text xml:space="preserve" text-anchor="start" x="8" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SKPutRequest</text>
+<text xml:space="preserve" text-anchor="middle" x="62" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; float &gt;::set</text>
 </a>
 </g>
 </g>
@@ -210,25 +211,6 @@ var sectionId = 'dynsection-8';
 <g id="edge8_Node000008_Node000009" class="edge">
 <title>Node8&#45;&gt;Node9</title>
 <g id="a_edge8_Node000008_Node000009"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M349.87,-15.25C335.93,-15.25 321.11,-15.25 306.91,-15.25"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="349.83,-18.75 359.83,-15.25 349.83,-11.75 349.83,-18.75"/>
-</a>
-</g>
-</g>
-<!-- Node10 -->
-<g id="Node000010" class="node">
-<title>Node10</title>
-<g id="a_Node000010"><a xlink:href="classsensesp_1_1_s_k_put_request.html#aa058e5926050a529176402b4d3a20c44" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="124,-30.5 0,-30.5 0,0 124,0 124,-30.5"/>
-<text xml:space="preserve" text-anchor="start" x="8" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">sensesp::SKPutRequest</text>
-<text xml:space="preserve" text-anchor="middle" x="62" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; float &gt;::set</text>
-</a>
-</g>
-</g>
-<!-- Node9&#45;&gt;Node10 -->
-<g id="edge9_Node000009_Node000010" class="edge">
-<title>Node9&#45;&gt;Node10</title>
-<g id="a_edge9_Node000009_Node000010"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M148.51,-15.25C140.38,-15.25 132.23,-15.25 124.37,-15.25"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="148.47,-18.75 158.47,-15.25 148.47,-11.75 148.47,-18.75"/>
 </a>

@@ -12,6 +12,7 @@ var hierarchy =
     ] ],
     [ "sensesp::ClientSSIDConfig", "classsensesp_1_1_client_s_s_i_d_config.html", null ],
     [ "ArduinoJson::Converter&lt; std::vector&lt; T &gt; &gt;", "struct_arduino_json_1_1_converter_3_01std_1_1vector_3_01_t_01_4_01_4.html", null ],
+    [ "sensesp::CRGB", "structsensesp_1_1_c_r_g_b.html", null ],
     [ "sensesp::DigitalInput", "classsensesp_1_1_digital_input.html", [
       [ "sensesp::DigitalInputChange", "classsensesp_1_1_digital_input_change.html", null ],
       [ "sensesp::DigitalInputCounter", "classsensesp_1_1_digital_input_counter.html", [
