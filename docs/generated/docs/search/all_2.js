@@ -79,10 +79,12 @@ var searchData=
   ['count_76',['count',['../structsensesp_1_1_nonce_data.html#a0c38faa9444a8f1619e6e2a8f827af62',1,'sensesp::NonceData']]],
   ['counter_5f_77',['counter_',['../classsensesp_1_1_digital_input_counter.html#a305156ad2c36bd0581ab7c4fa57faa07',1,'sensesp::DigitalInputCounter']]],
   ['create_5fnonce_78',['create_nonce',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#a3594ad3f5251bc375f47a1e0a1b69bb2',1,'sensesp::HTTPDigestAuthenticator']]],
-  ['crgb_5f_79',['crgb_',['../classsensesp_1_1_l_e_d_blinker.html#affac86393b4b64c79e1597766456a07e',1,'sensesp::LEDBlinker']]],
-  ['css_5fbootstrap_2eh_80',['css_bootstrap.h',['../css__bootstrap_8h.html',1,'']]],
-  ['current_5ffragment_5fidx_5f_81',['current_fragment_idx_',['../classsensesp_1_1_l_e_d_pattern.html#a8d7e99fe1a5bc827bebfa6eca9f5b7ff',1,'sensesp::LEDPattern']]],
-  ['curveinterpolator_82',['CurveInterpolator',['../classsensesp_1_1_curve_interpolator.html',1,'sensesp::CurveInterpolator'],['../classsensesp_1_1_curve_interpolator.html#adf50b114071a555b940cdee8c61b58f5',1,'sensesp::CurveInterpolator::CurveInterpolator()']]],
-  ['curveinterpolator_2ecpp_83',['curveinterpolator.cpp',['../curveinterpolator_8cpp.html',1,'']]],
-  ['curveinterpolator_2eh_84',['curveinterpolator.h',['../curveinterpolator_8h.html',1,'']]]
+  ['crgb_79',['CRGB',['../structsensesp_1_1_c_r_g_b.html',1,'sensesp::CRGB'],['../structsensesp_1_1_c_r_g_b.html#ad9c10fc841c5c4cded153baafb024b89',1,'sensesp::CRGB::CRGB() noexcept'],['../structsensesp_1_1_c_r_g_b.html#a434b60d8fb20accbd89c73094472b4ac',1,'sensesp::CRGB::CRGB(uint8_t ir, uint8_t ig, uint8_t ib) noexcept'],['../structsensesp_1_1_c_r_g_b.html#a3002d0ee0bb81d6f23991e41b86b40d1',1,'sensesp::CRGB::CRGB(const CRGB &amp;rhs) noexcept=default']]],
+  ['crgb_2eh_80',['crgb.h',['../crgb_8h.html',1,'']]],
+  ['crgb_5f_81',['crgb_',['../classsensesp_1_1_l_e_d_blinker.html#affac86393b4b64c79e1597766456a07e',1,'sensesp::LEDBlinker']]],
+  ['css_5fbootstrap_2eh_82',['css_bootstrap.h',['../css__bootstrap_8h.html',1,'']]],
+  ['current_5ffragment_5fidx_5f_83',['current_fragment_idx_',['../classsensesp_1_1_l_e_d_pattern.html#a8d7e99fe1a5bc827bebfa6eca9f5b7ff',1,'sensesp::LEDPattern']]],
+  ['curveinterpolator_84',['CurveInterpolator',['../classsensesp_1_1_curve_interpolator.html',1,'sensesp::CurveInterpolator'],['../classsensesp_1_1_curve_interpolator.html#adf50b114071a555b940cdee8c61b58f5',1,'sensesp::CurveInterpolator::CurveInterpolator()']]],
+  ['curveinterpolator_2ecpp_85',['curveinterpolator.cpp',['../curveinterpolator_8cpp.html',1,'']]],
+  ['curveinterpolator_2eh_86',['curveinterpolator.h',['../curveinterpolator_8h.html',1,'']]]
 ];

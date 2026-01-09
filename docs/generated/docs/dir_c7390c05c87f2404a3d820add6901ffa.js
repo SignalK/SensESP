@@ -4,6 +4,7 @@ var dir_c7390c05c87f2404a3d820add6901ffa =
     [ "base_button.h", "base__button_8h.html", "base__button_8h" ],
     [ "button.cpp", "button_8cpp.html", null ],
     [ "button.h", "button_8h.html", "button_8h" ],
+    [ "crgb.h", "crgb_8h.html", "crgb_8h" ],
     [ "expiring_value.h", "expiring__value_8h.html", "expiring__value_8h" ],
     [ "filesystem.cpp", "filesystem_8cpp.html", null ],
     [ "filesystem.h", "filesystem_8h.html", "filesystem_8h" ],

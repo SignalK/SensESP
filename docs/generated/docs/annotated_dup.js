@@ -56,6 +56,7 @@ var annotated_dup =
       [ "AsyncResponseHandler", "classsensesp_1_1_async_response_handler.html", "classsensesp_1_1_async_response_handler" ],
       [ "BaseButtonHandler", "classsensesp_1_1_base_button_handler.html", "classsensesp_1_1_base_button_handler" ],
       [ "ButtonHandler", "classsensesp_1_1_button_handler.html", "classsensesp_1_1_button_handler" ],
+      [ "CRGB", "structsensesp_1_1_c_r_g_b.html", "structsensesp_1_1_c_r_g_b" ],
       [ "ExpiringValue", "classsensesp_1_1_expiring_value.html", "classsensesp_1_1_expiring_value" ],
       [ "Filesystem", "classsensesp_1_1_filesystem.html", "classsensesp_1_1_filesystem" ],
       [ "LambdaConsumer", "classsensesp_1_1_lambda_consumer.html", "classsensesp_1_1_lambda_consumer" ],

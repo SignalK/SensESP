@@ -22,8 +22,9 @@ var searchData=
   ['reset_5ftofu_5ffingerprint_19',['reset_tofu_fingerprint',['../classsensesp_1_1_s_k_w_s_client.html#a0307adfe57c08bf78513cb67f85ee592',1,'sensesp::SKWSClient']]],
   ['resettable_20',['Resettable',['../classsensesp_1_1_resettable.html#a8ea93b67d80ff4769925d6398074c30b',1,'sensesp::Resettable']]],
   ['restart_21',['restart',['../classsensesp_1_1_s_k_w_s_client.html#af88e234b684dc0fb1b85e2efea98dc36',1,'sensesp::SKWSClient']]],
-  ['rgbled_22',['RgbLed',['../classsensesp_1_1_rgb_led.html#a12c7e6fcc5767e83f58c3e4bbc14497c',1,'sensesp::RgbLed']]],
-  ['rgbsystemstatusled_23',['RGBSystemStatusLed',['../classsensesp_1_1_r_g_b_system_status_led.html#a73b4a62a946b0b877401053ea09cb9b4',1,'sensesp::RGBSystemStatusLed']]],
-  ['roundtoint_24',['RoundToInt',['../classsensesp_1_1_round_to_int.html#a06a6358515262f715b2212ee40d78dbb',1,'sensesp::RoundToInt']]],
-  ['routedefinition_25',['RouteDefinition',['../classsensesp_1_1_route_definition.html#a6879a3f3b4be6820399a369805bc4340',1,'sensesp::RouteDefinition']]]
+  ['rgb_5fto_5fluminance_22',['rgb_to_luminance',['../namespacesensesp.html#a2fc152f01a4bfb9aec1047cead15db31',1,'sensesp']]],
+  ['rgbled_23',['RgbLed',['../classsensesp_1_1_rgb_led.html#a12c7e6fcc5767e83f58c3e4bbc14497c',1,'sensesp::RgbLed']]],
+  ['rgbsystemstatusled_24',['RGBSystemStatusLed',['../classsensesp_1_1_r_g_b_system_status_led.html#a73b4a62a946b0b877401053ea09cb9b4',1,'sensesp::RGBSystemStatusLed']]],
+  ['roundtoint_25',['RoundToInt',['../classsensesp_1_1_round_to_int.html#a06a6358515262f715b2212ee40d78dbb',1,'sensesp::RoundToInt']]],
+  ['routedefinition_26',['RouteDefinition',['../classsensesp_1_1_route_definition.html#a6879a3f3b4be6820399a369805bc4340',1,'sensesp::RouteDefinition']]]
 ];

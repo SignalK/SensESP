@@ -70,7 +70,7 @@ var searchData=
   ['set_5fws_5fdisconnected_67',['set_ws_disconnected',['../classsensesp_1_1_base_system_status_led.html#a2e5540c9f68f13b2c660a891659fbae9',1,'sensesp::BaseSystemStatusLed']]],
   ['setresetcmdenabled_68',['setResetCmdEnabled',['../classsensesp_1_1_local_debug.html#a7c194523b4171e0b890e2cd734e8b7b6',1,'sensesp::LocalDebug']]],
   ['setserialenabled_69',['setSerialEnabled',['../classsensesp_1_1_local_debug.html#a2b45054d79cb9cf06f4459072c2b3c7f',1,'sensesp::LocalDebug']]],
-  ['setup_70',['setup',['../classsensesp_1_1_sens_e_s_p_app.html#a49534d134dbae3ce35f4bac5879a8640',1,'sensesp::SensESPApp::setup()'],['../classsensesp_1_1_sens_e_s_p_base_app.html#a7698b0bb9d6bc33d13f9dea256e98bc3',1,'sensesp::SensESPBaseApp::setup()'],['../main_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d',1,'setup():&#160;main.cpp']]],
+  ['setup_70',['setup',['../classsensesp_1_1_sens_e_s_p_app.html#a49534d134dbae3ce35f4bac5879a8640',1,'sensesp::SensESPApp::setup()'],['../classsensesp_1_1_sens_e_s_p_base_app.html#a7698b0bb9d6bc33d13f9dea256e98bc3',1,'sensesp::SensESPBaseApp::setup()']]],
   ['setup_5fwifi_5fcallbacks_71',['setup_wifi_callbacks',['../classsensesp_1_1_wi_fi_state_producer.html#a200024c6ceaade999731beb109c62f2a',1,'sensesp::WiFiStateProducer']]],
   ['setuplogging_72',['SetupLogging',['../namespacesensesp.html#af5ae494b402d33e4e46ddeec25ff5ae0',1,'sensesp']]],
   ['setupserialdebug_73',['SetupSerialDebug',['../namespacesensesp.html#ad936ebc9566baaae0039265987a6ea54',1,'sensesp']]],

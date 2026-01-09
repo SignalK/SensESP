@@ -12,5 +12,6 @@ var searchData=
   ['constantsensor_3c_20int_20_3e_9',['ConstantSensor&lt; int &gt;',['../classsensesp_1_1_constant_sensor.html',1,'sensesp']]],
   ['constantsensor_3c_20string_20_3e_10',['ConstantSensor&lt; String &gt;',['../classsensesp_1_1_constant_sensor.html',1,'sensesp']]],
   ['converter_3c_20std_3a_3avector_3c_20t_20_3e_20_3e_11',['Converter&lt; std::vector&lt; T &gt; &gt;',['../struct_arduino_json_1_1_converter_3_01std_1_1vector_3_01_t_01_4_01_4.html',1,'ArduinoJson']]],
-  ['curveinterpolator_12',['CurveInterpolator',['../classsensesp_1_1_curve_interpolator.html',1,'sensesp']]]
+  ['crgb_12',['CRGB',['../structsensesp_1_1_c_r_g_b.html',1,'sensesp']]],
+  ['curveinterpolator_13',['CurveInterpolator',['../classsensesp_1_1_curve_interpolator.html',1,'sensesp']]]
 ];
