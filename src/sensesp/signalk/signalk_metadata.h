@@ -2,8 +2,38 @@
 #define SENSESP_SIGNALK_SIGNALK_METADATA_H_
 
 #include <ArduinoJson.h>
+#include <cmath>
+#include <vector>
 
 namespace sensesp {
+
+/**
+ * @brief Alarm state values for Signal K Zone metadata.
+ * @see https://demo.signalk.org/documentation/_signalk/server-api/ALARM_STATE.html
+ */
+enum class SKAlarmState {
+  kNominal,
+  kNormal,
+  kAlert,
+  kWarn,
+  kAlarm,
+  kEmergency
+};
+
+/**
+ * @brief Represents a single Signal K alarm zone within metadata.
+ * @see https://demo.signalk.org/documentation/_signalk/server-api/Zone.html
+ */
+struct SKZone {
+  float lower_;    ///< Lower bound of the zone; NAN if not set
+  float upper_;    ///< Upper bound of the zone; NAN if not set
+  String message_;
+  SKAlarmState state_;
+
+  SKZone(SKAlarmState state, const String& message,
+         float lower = NAN, float upper = NAN)
+      : lower_{lower}, upper_{upper}, message_{message}, state_{state} {}
+};
 
 /**
  * @brief Holds Signal K meta data that is associated with
@@ -28,6 +58,11 @@ class SKMetadata {
   String description_;
   String short_name_;
   float timeout_;
+  String example_;
+  int supports_put_;            ///< -1 = not set, 0 = false, 1 = true
+  float display_scale_lower_;   ///< NAN = not set
+  float display_scale_upper_;   ///< NAN = not set
+  std::vector<SKZone> zones_;
 
   /**
    * @param units The unit of measurement the value represents. See
@@ -49,7 +84,11 @@ class SKMetadata {
              float timeout = -1.0);
 
   /// Default constructor creates a blank Metadata structure
-  SKMetadata() : timeout_{-1} {}
+  SKMetadata()
+      : timeout_{-1},
+        supports_put_{-1},
+        display_scale_lower_{NAN},
+        display_scale_upper_{NAN} {}
 
   /**
    * Adds an entry to the specified meta array that represents this metadata
@@ -59,6 +98,9 @@ class SKMetadata {
    * @param[out] meta The array the metadata entry is supposed to be added to
    */
   virtual void add_entry(const String& sk_path, JsonArray& meta);
+
+ private:
+  static const char* alarm_state_to_string(SKAlarmState state);
 };
 
 }  // namespace sensesp
