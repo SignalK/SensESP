@@ -7,7 +7,7 @@
 namespace sensesp {
 
 
-ilesystem::Filesystem() : Resettable(-100) {
+Filesystem::Filesystem() : Resettable(-100) {
   // WOKWI-PATCH: Wir geben explizit den Partitionsnamen "vfs" an.
   // Der Parameter 'true' sorgt für die Formatierung, falls sie leer ist.
   if (!SPIFFS.begin(true, "/spiffs", 10, "vfs")) {
