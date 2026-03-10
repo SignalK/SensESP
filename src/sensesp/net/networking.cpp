@@ -34,8 +34,8 @@ Networking::Networking(const String& config_path, const String& client_ssid,
 
   wifi_state_producer_->connect_to(wifi_state_emitter_);
 
-  bool config_loaded = load();
-
+  //bool config_loaded = load();
+  bool config_loaded = true; // WOKWI-PATCH: Ignoriere fehlende Config
   if (!config_loaded) {
     if (ap_ssid != "" && ap_password != "") {
       this->ap_settings_.enabled_ = true;
