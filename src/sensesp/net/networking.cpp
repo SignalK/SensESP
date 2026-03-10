@@ -121,6 +121,11 @@ Networking::~Networking() {
  *
  */
 void Networking::start_access_point() {
+
+ 
+  ESP_LOGW(__FILENAME__, "WOKWI-PATCH: AP-Modus unterdrueckt, bleibe im Station-Modus.");
+  return; // Einfach sofort abbrechen
+
   String hostname = SensESPBaseApp::get_hostname();
   WiFi.setHostname(hostname.c_str());
 
