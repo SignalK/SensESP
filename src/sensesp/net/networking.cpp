@@ -71,17 +71,42 @@ Networking::Networking(const String& config_path, const String& client_ssid,
 
   // Start WiFi with a bogus SSID to initialize the network stack but
   // don't connect to any network.
-  WiFi.begin("0", "0", 0, nullptr, false);
+      // WOKWI-PATCH: Nur initialisieren, wenn wir NICHT schon verbunden sind
+  if (WiFi.status() != WL_CONNECTED) {
+      WiFi.begin("0", "0", 0, nullptr, false);
+  } else {
+      ESP_LOGI(__FILENAME__, "WOKWI-PATCH: WiFi bereits verbunden, überspringe bogus begin.");
+  }
+
 
   // If both saved AP settings and saved client settings
   // are available, start in STA+AP mode.
 
-  if (this->ap_settings_.enabled_ && this->client_enabled_ == true) {
+// If both saved AP settings and saved client settings
+  // are available, start in STA+AP mode.
+
+  // WOKWI-PATCH: Wenn bereits verbunden, nur den Loop starten
+  if (WiFi.status() == WL_CONNECTED) {
+    ESP_LOGI(__FILENAME__, "WOKWI-PATCH: Bereits verbunden, starte nur Autoconnect-Loop.");
+    start_client_autoconnect();
+  }
+  // AB HIER der originale Code (mit else davor!)
+  else if (this->ap_settings_.enabled_ && this->client_enabled_ == true) {
     WiFi.mode(WIFI_AP_STA);
     start_access_point();
     start_client_autoconnect();
   }
-
+  // If saved AP settings are available, use them.
+  else if (this->ap_settings_.enabled_) {
+    WiFi.mode(WIFI_AP);
+    start_access_point();
+  }
+  // If saved client settings are available, use them.
+  else if (this->client_enabled_) {
+    WiFi.mode(WIFI_STA);
+    start_client_autoconnect();
+  }
+      
   // If saved AP settings are available, use them.
 
   else if (this->ap_settings_.enabled_) {
