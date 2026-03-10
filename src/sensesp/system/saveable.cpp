@@ -7,9 +7,9 @@ namespace sensesp {
 
 bool FileSystemSaveable::load() {
   if (config_path_ == "") {
-    ESP_LOGI(__FILENAME__,
-             "Not loading configuration: no config_path specified: %s",
-             config_path_.c_str());
+   // ESP_LOGI(__FILENAME__,
+   //          "Not loading configuration: no config_path specified: %s",
+   //          config_path_.c_str());
     return false;
   }
   String hash_path = String("/") + Base64Sha1(config_path_);
