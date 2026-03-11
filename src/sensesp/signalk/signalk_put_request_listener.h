@@ -17,7 +17,7 @@ namespace sensesp {
  * observers of the change.
  * @see SKPutRequestListener
  */
-class SKPutListener : virtual public Observable {
+class   : virtual public Observable {
  public:
   /**
    * The constructor
@@ -31,21 +31,14 @@ class SKPutListener : virtual public Observable {
   virtual void parse_value(const JsonObject& put) = 0;
 
   static const std::vector<SKPutListener*>& get_listeners() {
-     std::vector<SKPutListener*> result;
-    for (auto* l : SKlisteners_) {
-        if (auto* pl = dynamic_cast<SKPutListener*>(l)) {
-            result.push_back(pl);
-        }
-    }
-    return result;
-    
+     return SKPutListener::listeners_;
   }
 
  protected:
   String sk_path{};
 
  private:
-  //static std::vector<SKPutListener*> listeners_;
+  static std::vector<SKPutListener*> listeners_;
   int listen_delay{};
 };
 
