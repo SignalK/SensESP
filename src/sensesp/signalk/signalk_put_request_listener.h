@@ -8,7 +8,7 @@
 
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"
-#include "signalk_listener.h"
+
 namespace sensesp {
 
 /**
@@ -17,7 +17,7 @@ namespace sensesp {
  * observers of the change.
  * @see SKPutRequestListener
  */
-class   : virtual public Observable {
+class  SKPutListener : virtual public Observable {
  public:
   /**
    * The constructor
