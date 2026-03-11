@@ -31,14 +31,21 @@ class SKPutListener : virtual public Observable {
   virtual void parse_value(const JsonObject& put) = 0;
 
   static const std::vector<SKPutListener*>& get_listeners() {
-    return SKPutListener::listeners_;
+     std::vector<SKPutListener*> result;
+    for (auto* l : listeners_) {
+        if (auto* pl = dynamic_cast<SKPutListener*>(l)) {
+            result.push_back(pl);
+        }
+    }
+    return result;
+    
   }
 
  protected:
   String sk_path{};
 
  private:
-  static std::vector<SKPutListener*> listeners_;
+  //static std::vector<SKPutListener*> listeners_;
   int listen_delay{};
 };
 
