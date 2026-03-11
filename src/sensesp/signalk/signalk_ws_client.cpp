@@ -185,6 +185,43 @@ SKWSClient::SKWSClient(const String& config_path,
                 this, 1, NULL);
     MDNS.addService("signalk-sensesp", "tcp", 80);
   });
+
+  if (use_mdns_) {
+    // Arm mdns_ready_ after a settle delay following each network-got-IP event.
+    // Without this delay, MDNS.queryService() frequently returns 0 results on
+    // Ethernet because the mDNS multicast group join completes asynchronously
+    // after DHCP — the race is especially pronounced on Ethernet which gets an
+    // IP faster than WiFi.
+    Network.onEvent(
+        [this](arduino_event_id_t /*event*/, arduino_event_info_t /*info*/) {
+          mdns_ready_ = false;
+          mdns_retry_interval_ms_ = kMdnsInitialBackoffMs;
+          ESP_LOGI(__FILENAME__,
+                   "Network connected, waiting %lums for mDNS to settle",
+                   kMdnsSettleMs);
+          event_loop()->onDelay(kMdnsSettleMs,
+                                [this]() {
+                                  mdns_ready_ = true;
+                                  ESP_LOGI(__FILENAME__, "mDNS ready");
+                                });
+        },
+        ARDUINO_EVENT_ETH_GOT_IP);
+
+    Network.onEvent(
+        [this](arduino_event_id_t /*event*/, arduino_event_info_t /*info*/) {
+          mdns_ready_ = false;
+          mdns_retry_interval_ms_ = kMdnsInitialBackoffMs;
+          ESP_LOGI(__FILENAME__,
+                   "Network connected, waiting %lums for mDNS to settle",
+                   kMdnsSettleMs);
+          event_loop()->onDelay(kMdnsSettleMs,
+                                [this]() {
+                                  mdns_ready_ = true;
+                                  ESP_LOGI(__FILENAME__, "mDNS ready");
+                                });
+        },
+        ARDUINO_EVENT_WIFI_STA_GOT_IP);
+  }
 }
 
 void SKWSClient::connect_loop() {
@@ -552,14 +589,37 @@ void SKWSClient::connect() {
 
   set_connection_state(SKWSConnectionState::kSKWSAuthorizing);
   if (use_mdns_) {
-    if (!get_mdns_service(this->server_address_, this->server_port_)) {
-      ESP_LOGE(__FILENAME__,
-               "No Signal K server found in network when using mDNS service!");
-    } else {
-      ESP_LOGI(__FILENAME__,
-               "Signal K server has been found at address %s:%d by mDNS.",
-               this->server_address_.c_str(), this->server_port_);
+    if (!mdns_ready_) {
+      // mDNS settle timer hasn't fired yet — don't query, just wait.
+      ESP_LOGI(__FILENAME__, "Waiting for mDNS to settle after network up...");
+      set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+      return;
     }
+
+    unsigned long now_ms = millis();
+    if (now_ms - mdns_last_attempt_ms_ < mdns_retry_interval_ms_) {
+      // Still within the backoff window from the last failed query.
+      set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+      return;
+    }
+    mdns_last_attempt_ms_ = now_ms;
+
+    if (!get_mdns_service(this->server_address_, this->server_port_)) {
+      ESP_LOGW(__FILENAME__,
+               "No Signal K server found via mDNS, retrying in %lums",
+               mdns_retry_interval_ms_);
+      // Exponential backoff, capped at kMdnsMaxBackoffMs
+      mdns_retry_interval_ms_ =
+          min(mdns_retry_interval_ms_ * 2, kMdnsMaxBackoffMs);
+      set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+      return;
+    }
+
+    // Successful lookup — reset backoff for next disconnection cycle
+    mdns_retry_interval_ms_ = kMdnsInitialBackoffMs;
+    ESP_LOGI(__FILENAME__,
+             "Signal K server found at %s:%d via mDNS",
+             this->server_address_.c_str(), this->server_port_);
   } else {
     this->server_address_ = this->conf_server_address_;
     this->server_port_ = this->conf_server_port_;
