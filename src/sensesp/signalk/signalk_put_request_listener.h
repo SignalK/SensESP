@@ -52,6 +52,8 @@ class SKPutRequestListener : public SKPutListener, public ValueProducer<T> {
  public:
   SKPutRequestListener(String sk_path) : SKPutListener(sk_path) {
     if (sk_path == "") {
+      debugI("%s%s",  __FILENAME__,
+          "SKPutRequestListener: User has provided no sk_path to respond to.");
       ESP_LOGE(
           __FILENAME__,
           "SKPutRequestListener: User has provided no sk_path to respond to.");
@@ -59,6 +61,7 @@ class SKPutRequestListener : public SKPutListener, public ValueProducer<T> {
   }
 
   void parse_value(const JsonObject& put) override {
+    debugI("===============this->emit(put["value====================");
     this->emit(put["value"].as<T>());
   }
 };
