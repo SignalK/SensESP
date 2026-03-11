@@ -31,7 +31,7 @@ class SKPutListener : virtual public Observable {
   virtual void parse_value(const JsonObject& put) = 0;
 
   static const std::vector<SKPutListener*>& get_listeners() {
-    return listeners_;
+    return SKPutListener::listeners_;
   }
 
  protected:
