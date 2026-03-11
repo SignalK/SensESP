@@ -161,7 +161,9 @@ class SKWSClient : public FileSystemSaveable,
 
   String client_id_ = "";
   String polling_href_ = "";
+public:  // WOKWI sim mod
   String auth_token_ = NULL_AUTH_TOKEN;
+protected:
   bool server_detected_ = false;
   bool token_test_success_ = false;
 
