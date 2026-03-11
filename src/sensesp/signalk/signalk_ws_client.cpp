@@ -234,6 +234,7 @@ void SKWSClient::on_connected() {
   this->sk_delta_queue_->reset_meta_send();
   ESP_LOGI(__FILENAME__, "Subscribing to Signal K listeners...");
   this->subscribe_listeners();
+  this->subscribe_putlisteners();
 }
 
 /**
