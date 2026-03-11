@@ -280,6 +280,50 @@ debugI("listeners.size()=%i",listeners.size());
   }
 }
 
+
+/**
+ * @brief Subscribes the SK delta paths to the websocket.
+ *
+ * Called in the websocket task context.
+ *
+ */
+void SKWSClient::subscribe_putlisteners() {
+  bool output_available = false;
+  JsonDocument subscription;
+  subscription["context"] = "vessels.self";
+debugI("======================SKWSClient::subscribe_putlisteners()=================");
+  SKPutListener::take_semaphore();
+  const std::vector<SKPutListener*>& listeners = SKPutListener::get_listeners();
+debugI("listeners.size()=%i",listeners.size());
+  if (listeners.size() > 0) {
+    output_available = true;
+    JsonArray subscribe = subscription["subscribe"].to<JsonArray>();
+
+    for (size_t i = 0; i < listeners.size(); i++) {
+      auto* listener = listeners.at(i);
+      String sk_path = listener->get_sk_path();
+      int listen_delay = listener->get_listen_delay();
+
+      JsonObject subscribe_path = subscribe.add<JsonObject>();
+
+      subscribe_path["path"] = sk_path;
+      subscribe_path["period"] = listen_delay;
+      ESP_LOGI(__FILENAME__, "Adding %s subscription with listen_delay %d\n",
+               sk_path.c_str(), listen_delay);
+    }
+  }
+  SKPutListener::release_semaphore();
+
+  if (output_available) {
+    String json_message;
+
+    serializeJson(subscription, json_message);
+    ESP_LOGI(__FILENAME__, "Subscription JSON message:\n %s",
+             json_message.c_str());
+    esp_websocket_client_send_text(client_, json_message.c_str(),
+                                   json_message.length(), portMAX_DELAY);
+  }
+}
 /**
  * @brief Called when the websocket receives a delta.
  *
