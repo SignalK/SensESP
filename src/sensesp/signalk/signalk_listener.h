@@ -41,11 +41,11 @@ class SKListener : virtual public Observable, public FileSystemSaveable {
    */
   String& get_sk_path() { return sk_path; }
 
-  int get_listen_delay() { return listen_delay; }
+  int get_listen_delay() { return SKListener::listen_delay; }
 
   virtual void parse_value(const JsonObject& json) {}
 
-  static const std::vector<SKListener*>& get_listeners() { return listeners_; }
+  static const std::vector<SKListener*>& get_listeners() { return SKListener::listeners_; }
 
   static bool take_semaphore(uint64_t timeout_ms = 0);
   static void release_semaphore();
