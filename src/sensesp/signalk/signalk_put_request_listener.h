@@ -8,7 +8,7 @@
 
 #include "sensesp/system/observable.h"
 #include "sensesp/system/valueproducer.h"
-
+#include "signalk_listener.h"
 namespace sensesp {
 
 /**
@@ -32,7 +32,7 @@ class SKPutListener : virtual public Observable {
 
   static const std::vector<SKPutListener*>& get_listeners() {
      std::vector<SKPutListener*> result;
-    for (auto* l : listeners_) {
+    for (auto* l : SKlisteners_) {
         if (auto* pl = dynamic_cast<SKPutListener*>(l)) {
             result.push_back(pl);
         }
