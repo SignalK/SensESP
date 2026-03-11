@@ -221,6 +221,7 @@ protected:
                            const String href);
   void connect_ws(const String& host, const uint16_t port);
   void subscribe_listeners();
+  void subscribe_putlisteners();
   bool get_mdns_service(String& server_address, uint16_t& server_port);
   bool detect_ssl();
 
