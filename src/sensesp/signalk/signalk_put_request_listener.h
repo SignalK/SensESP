@@ -61,7 +61,7 @@ class SKPutRequestListener : public SKPutListener, public ValueProducer<T> {
   }
 
   void parse_value(const JsonObject& put) override {
-    debugI("===============this->emit(put["value====================");
+    debugI("===============this->emit(put[value====================");
     this->emit(put["value"].as<T>());
   }
 };
