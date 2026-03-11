@@ -246,10 +246,10 @@ void SKWSClient::subscribe_listeners() {
   bool output_available = false;
   JsonDocument subscription;
   subscription["context"] = "vessels.self";
-
+debugI("======================SKWSClient::subscribe_listeners()=================");
   SKListener::take_semaphore();
   const std::vector<SKListener*>& listeners = SKListener::get_listeners();
-
+debugI("listeners.size()=%i",listeners.size());
   if (listeners.size() > 0) {
     output_available = true;
     JsonArray subscribe = subscription["subscribe"].to<JsonArray>();
