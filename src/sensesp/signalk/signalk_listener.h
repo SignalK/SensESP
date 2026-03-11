@@ -53,7 +53,7 @@ class SKListener : virtual public Observable, public FileSystemSaveable {
  protected:
   String sk_path{};
 
- private:
+ protected:
   static std::vector<SKListener*> listeners_;
   int listen_delay;
   static SemaphoreHandle_t semaphore_;
