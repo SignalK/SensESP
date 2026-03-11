@@ -309,6 +309,7 @@ debugI("listeners.size()=%i",listeners.size());
 
       subscribe_path["path"] = sk_path;
       subscribe_path["period"] = listen_delay;
+      subscribe_path["put"] = true;
       ESP_LOGI(__FILENAME__, "Adding %s subscription with listen_delay %d\n",
                sk_path.c_str(), listen_delay);
     }
