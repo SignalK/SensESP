@@ -13,7 +13,7 @@ SKListener::SKListener(const String &sk_path, int listen_delay,
     : FileSystemSaveable(config_path),
       sk_path{sk_path},
       listen_delay{listen_delay} {
-  SKListener::listeners_.push_back(this);
+  listeners_.push_back(this);
   this->load();
 }
 
