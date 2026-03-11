@@ -4,11 +4,11 @@ namespace sensesp {
 
 std::vector<SKPutListener*> SKPutListener::listeners_;
 
-SKPutListener::SKPutListener(const String& sk_path) : sk_path{sk_path} {
+//SKPutListener::SKPutListener(const String& sk_path) : sk_path{sk_path} {
   
-  SKPutListener::listeners_.push_back(this);
-  debugI("SKPutListener(%s)",sk_path.c_str());
-   debugI("===========   SKPutListener::listeners_.size()=%d    ===========",SKPutListener::listeners_.size());
+  SKListener::listeners_.push_back(this);
+  debugI("PutListener(%s)",sk_path.c_str());
+   debugI("===========   SKListener::listeners_.size()=%d    ===========",SKListener::listeners_.size());
 }
 
 }  // namespace sensesp
