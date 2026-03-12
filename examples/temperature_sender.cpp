@@ -1,8 +1,7 @@
 #include <Arduino.h>
 
-#include "sensesp/sensors/analog_input.h"
+#include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_output.h"
-#include "sensesp/transforms/analogvoltage.h"
 #include "sensesp/transforms/curveinterpolator.h"
 #include "sensesp/transforms/linear.h"
 #include "sensesp/transforms/voltagedivider.h"
@@ -90,28 +89,25 @@ void setup() {
   Connecting a physical temperature sender to the MCU involves using a "voltage
   divider" circuit. A resistor (R1) is connected to the voltage output of the
   board (3.3v or 5v, specified in Vin) to an intersection of two wires. One wire
-  connects to the AnalogInput pin of the MCU, and the other wire connects to the
-  sending unit doing the measurement. The sender is itself a variable resistor
-  that is then connected to ground, forming the "R2" of a voltage divider
-  circuit. The transform "VoltageDividerR2" takes a known voltage in (3.3 in
-  this example), a known value for resistor R1 (51 ohms in this example), and
-  based on the voltage read from AnalogInput, computes the resistance of the
-  sender (R2), in ohms.
+  connects to the analog input pin of the MCU, and the other wire connects to
+  the sending unit doing the measurement. The sender is itself a variable
+  resistor that is then connected to ground, forming the "R2" of a voltage
+  divider circuit. The transform "VoltageDividerR2" takes a known voltage in
+  (3.3 in this example), a known value for resistor R1 (51 ohms in this
+  example), and based on the voltage read from the analog input, computes the
+  resistance of the sender (R2), in ohms.
 
-  One important point: the value of the output from the AnalogIn pin is not in
-  volts, as implied above. It's a value in the range 0 - 1023, and it represents
-  the voltage in the range 0.0V - 3.3V. But we need to send an actual voltage to
-  VoltageDivider2(), which means we need to first convert the value of
-  AnalogInput to volts, which is done with AnalogVoltage().
+  Using analogReadMilliVolts() via a RepeatSensor, we get the pin voltage
+  directly in volts, which can be fed straight into VoltageDividerR2().
 
-  Although complex, this example perfectly illustrates the normal "chain" for
-  getting a value from a sensor all the way to the Signal K server:
+  This example illustrates the normal "chain" for getting a value from a sensor
+  all the way to the Signal K server:
   - A real-world sensor sends its output to an input pin on the microcontroller
   - The value read from that pin gives us our actual input to the program. In
-  this example, that's an AnalogInput().
+  this example, that's a RepeatSensor reading analogReadMilliVolts().
   - That input is then sent through one or more transforms so that the end
   result is the value we want to send to Signal K. In this example, the
-  transforms are VoltageDivider2(), then
+  transforms are VoltageDividerR2(), then
   TemperatureInterpreter(), then Linear().
   - Finally, the value we want is sent to the final "consumer", in this case
   SKOutputNumber().
@@ -135,18 +131,17 @@ void setup() {
   // circuit
   const float R1 = 51.0;
 
-  // An AnalogInput gets the value from the microcontroller's AnalogIn pin,
-  // which is a value from 0 to 1023 and then scales it to the max pin voltage
-  // (max_analog_in_voltage), giving the pin voltage.
-  const float max_analog_in_voltage = 3.3;
-  // ESP32 has many pins that can be used for AnalogIn, and they're
+  // A RepeatSensor reads the analog input pin voltage using
+  // analogReadMilliVolts() and converts to volts.
+  // ESP32 has many pins that can be used for analog input, and they're
   // expressed here as the XX in GPIOXX.
-  auto* analog_input = new AnalogInput(
-      36, 1000, "/12V_alternator/temp/analog_in/", max_analog_in_voltage);
+  const uint8_t pin = 36;
+  auto* analog_input = new RepeatSensor<float>(1000, [pin]() {
+    return analogReadMilliVolts(pin) / 1000.;
+  });
 
-  /* Translating the number returned by AnalogInput into a temperature,
-     and sending it to Signal K, requires several transforms. Wire them
-     up in sequence:
+  /* Translating the voltage into a temperature and sending it to Signal K
+     requires several transforms. Wire them up in sequence:
      - convert voltage into ohms with VoltageDividerR2()
      - find the Kelvin value for the given ohms value with
      TemperatureInterpreter()
