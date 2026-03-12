@@ -293,7 +293,7 @@ void SKWSClient::subscribe_putlisteners() {
   JsonDocument subscription;
   subscription["context"] = "vessels.self";
 debugI("======================SKWSClient::subscribe_putlisteners()=================");
-  SKPutListener::take_semaphore();
+  SKListener::take_semaphore();
   const std::vector<SKPutListener*>& listeners = SKPutListener::get_listeners();
 debugI("listeners.size()=%i",listeners.size());
   if (listeners.size() > 0) {
@@ -314,7 +314,7 @@ debugI("listeners.size()=%i",listeners.size());
                sk_path.c_str(), listen_delay);
     }
   }
-  SKPutListener::release_semaphore();
+  SKListener::release_semaphore();
 
   if (output_available) {
     String json_message;
