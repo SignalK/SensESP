@@ -25,7 +25,7 @@ class  SKPutListener : virtual public Observable {
    * this particular listener responds to
    */
   SKPutListener(const String& sk_path);
-
+  int get_listen_delay() { return listen_delay; }
   String& get_sk_path() { return sk_path; }
 
   virtual void parse_value(const JsonObject& put) = 0;
@@ -39,7 +39,7 @@ class  SKPutListener : virtual public Observable {
 
  private:
   static std::vector<SKPutListener*> listeners_;
-  int listen_delay{};
+  int listen_delay;
 };
 
 /**
