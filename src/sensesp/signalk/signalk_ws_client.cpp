@@ -814,6 +814,17 @@ void SKWSClient::send_access_request(const String server_address,
     return;
   }
 
+  // HTTP 404 means the server has no security enabled — access requests are
+  // not available. Connect without a token.
+  if (http_code == 404) {
+    ESP_LOGI(__FILENAME__,
+             "Server security disabled (404 on access request) — connecting "
+             "without token");
+    auth_token_ = NULL_AUTH_TOKEN;
+    this->connect_ws(server_address, server_port);
+    return;
+  }
+
   // Can't proceed - disconnect and retry later
   ESP_LOGW(__FILENAME__, "Cannot handle response: http=%d, state=%s", http_code, state.c_str());
   set_connection_state(SKWSConnectionState::kSKWSDisconnected);
