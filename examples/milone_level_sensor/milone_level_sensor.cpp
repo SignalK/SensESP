@@ -1,6 +1,5 @@
-#include "sensesp/sensors/analog_input.h"
+#include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_output.h"
-#include "sensesp/transforms/analogvoltage.h"
 #include "sensesp/transforms/curveinterpolator.h"
 #include "sensesp/transforms/linear.h"
 #include "sensesp/transforms/moving_average.h"
@@ -63,48 +62,24 @@ void setup() {
   // broadcast SignalK data. This path should appear as an argument in the
   // SKOutputNumber transform.
 
-  // The "Configuration path" is combined with "/config" to formulate a URL
-  // used by the RESTful API for retrieving or setting configuration data.
-  // It is ALSO used to specify a path to the SPIFFS file system
-  // where configuration data is saved on the MCU board. It should
-  // ALWAYS start with a forward slash if specified. If left blank,
-  // that indicates this sensor or transform does not have any
-  // configuration to save, or that you're not interested in doing
-  // run-time configuration.
-
-  const char *kAnalogInConfigPath = "/freshWaterTank_starboard/analogin";
-
   // Create a sensor that is the source of our data, that will be read every 500
-  // ms. It's a Milone depth sensor that's connected to the ESP's AnalogIn pin.
-  // ESP32 has many pins that can be
-  // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
-  uint8_t pin = 36;
+  // ms. It's a Milone depth sensor that's connected to the ESP's analog input
+  // pin. ESP32 has many pins that can be used for analog input, and they're
+  // expressed here as the XX in GPIOXX.
+  const uint8_t pin = 36;
 
   unsigned int read_delay = 500;
 
-  auto *analog_input = new AnalogInput(pin, read_delay, kAnalogInConfigPath);
-
-  ConfigItem(analog_input)
-      ->set_title("Analog Input")
-      ->set_description("Analog input from Milone depth sensor")
-      ->set_sort_order(1000);
-
-  // comment out the following line to suppress the output of the raw ADC
-  // measurement values. analog_input->connect_to(new
-  // SKOutputNumber("tanks.freshWater.starboard.rawADC"));
-
-  // Comment out the following 2 lines to suppress the output of the ADC
-  // measurement in volts. analog_input->connect_to(new AnalogVoltage(1.0, 1.0,
-  // 0))
-  //             ->connect_to(new
-  //             SKOutputNumber("tanks.freshWater.starboard.voltsADC"));
+  auto* analog_input = new RepeatSensor<float>(read_delay, [pin]() {
+    return analogReadMilliVolts(pin) / 1000.;
+  });
 
   // The Milone depth sensor is wired as a voltage divider with Vin connected to
   // the sensor, a variable resistor. The sensor is then connected to R2, a
-  // fixed resistor then connected to gnd. The voltrage across the fixed
+  // fixed resistor then connected to gnd. The voltage across the fixed
   // resistor is measured by the MCU analog input ADC.
 
-  // A VoltageDeviderR1 transform is used to extract the Milone sensor
+  // A VoltageDividerR1 transform is used to extract the Milone sensor
   // resistance from the data.
 
   const float scale = 1.0;
@@ -112,18 +87,10 @@ void setup() {
   const float R2 = 100;
   const unsigned int samples = 10;
 
-  // Wire up the output of the analog input to the VoltageDividerR1 transform.
+  // Wire up the output of the analog input to the VoltageDividerR1 transform
   // and then output the results to the SignalK server.
-
-  // Comment out the following 3 lines to suppress the output of the eTape
-  // sensor resistance.
-
-  auto analog_voltage = new AnalogVoltage(1.0, 1.0, 0.);
-
-  ConfigItem(analog_voltage)
-      ->set_title("Analog Voltage")
-      ->set_description("Voltage from Milone depth sensor")
-      ->set_sort_order(1000);
+  // The RepeatSensor outputs voltage directly, so no AnalogVoltage conversion
+  // is needed.
 
   auto voltage_divider = new VoltageDividerR1(R2, Vin, "/freshWaterTank_starboard/divider");
 
@@ -131,18 +98,11 @@ void setup() {
       ->set_title("Voltage Divider")
       ->set_sort_order(1100);
 
-  analog_input->connect_to(analog_voltage)
-      ->connect_to(voltage_divider)
+  analog_input->connect_to(voltage_divider)
       ->connect_to(new SKOutputFloat("tanks.freshWater.starboard.R1"));
 
   // Use the ETapeInterpolator to output the water level depth in the tank and
   // pass it through the MovingAverage transport before outputting the result.
-
-  auto analog_voltage2 = new AnalogVoltage(1.0, 1.0, 0.);
-
-  ConfigItem(analog_voltage2)
-      ->set_title("Analog Voltage 2")
-      ->set_sort_order(1200);
 
   auto voltage_divider2 = new VoltageDividerR1(R2, Vin, "/freshWaterTank_starboard/divider2");
 
@@ -152,8 +112,7 @@ void setup() {
 
   auto moving_average = new MovingAverage(samples, scale, "/freshWaterTank_starboard/samples");
 
-  analog_input->connect_to(analog_voltage2)
-      ->connect_to(voltage_divider2)
+  analog_input->connect_to(voltage_divider2)
       ->connect_to(new ETapeInterpreter(""))
       ->connect_to(moving_average)
       ->connect_to(

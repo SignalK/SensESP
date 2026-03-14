@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#include "sensesp/sensors/analog_input.h"
+#include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp_app_builder.h"
 
@@ -24,28 +24,18 @@ void setup() {
   // To find valid Signal K Paths that fits your need you look at this link:
   // https://signalk.org/specification/1.4.0/doc/vesselsBranch.html
   const char* sk_path = "environment.indoor.illuminance";
-  const char* analog_in_config_path = "/Sensors/Analog Input";
 
   unsigned int read_delay = 500;
 
-  uint8_t pin = 32;
+  const uint8_t pin = 32;
 
-  float output_scale = 3.3;
+  // Use a RepeatSensor to read the analog input voltage. Connect it e.g. to
+  // a photoresistor or a potentiometer with a voltage divider to get an
+  // illustrative test input.
 
-  // Use AnalogInput as an example sensor. Connect it e.g. to a photoresistor
-  // or a potentiometer with a voltage divider to get an illustrative test
-  // input.
-
-  auto* analog_input =
-      new AnalogInput(pin, read_delay, analog_in_config_path, output_scale);
-
-  ConfigItem(analog_input)
-      ->set_title("Analog Input")
-      ->set_description(
-          "Connect the analog input at pin 32 to a photoresistor or "
-          "potentiometer with a voltage divider to get an illustrative test "
-          "input.")
-      ->set_sort_order(1000);
+  auto* analog_input = new RepeatSensor<float>(read_delay, [pin]() {
+    return analogReadMilliVolts(pin) / 1000.;
+  });
 
   // This is our transform function. The example is artificial; a log transform
   // with configurable multiplier, base, and offset parameters. The
