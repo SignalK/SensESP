@@ -95,7 +95,7 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
   DigitalInputCounter(uint8_t pin, int pin_mode, int interrupt_type,
                       unsigned int read_delay, String config_path = "")
       : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
-                            config_path, [this]() { this->counter_++; }) {
+                            config_path, [this]() { this->counter_ = this->counter_ + 1; }) {
     event_loop()->onInterrupt(pin_, interrupt_type_, interrupt_handler_);
 
     event_loop()->onRepeat(read_delay_, [this]() {
