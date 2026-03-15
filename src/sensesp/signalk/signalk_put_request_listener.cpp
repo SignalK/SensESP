@@ -1,6 +1,6 @@
 #include "signalk_put_request_listener.h"
 
-namespace sensesp {
+namespace sensesp { 
 
 std::vector<SKPutListener*> SKPutListener::listeners_;
 
