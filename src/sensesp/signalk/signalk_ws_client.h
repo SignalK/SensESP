@@ -1,6 +1,6 @@
 #ifndef SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_WS_CLIENT_H_
 #define SENSESP_SRC_SENSESP_SIGNALK_SIGNALK_WS_CLIENT_H_
-
+ 
 #include "sensesp.h"
 
 #include <ArduinoJson.h>
