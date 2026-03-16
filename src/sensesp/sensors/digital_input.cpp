@@ -41,7 +41,7 @@ bool DigitalInputCounter::from_json(const JsonObject& config) {
 
 void DigitalInputDebounceCounter::handleInterrupt() {
   if (since_last_event_ > ignore_interval_ms_) {
-    counter_++;
+    counter_ = counter_ + 1;
     since_last_event_ = 0;
   }
 }

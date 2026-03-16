@@ -28,7 +28,7 @@
  * after the initial connection, without requiring a CA certificate bundle.
  */
 
-#include "sensesp/sensors/analog_input.h"
+#include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_output.h"
 #include "sensesp_app.h"
 #include "sensesp_app_builder.h"
@@ -73,10 +73,12 @@ void setup() {
   ws_client->set_tofu_enabled(true);
 
   // Create a simple sensor to demonstrate the connection is working.
-  // This reads the ESP32's internal hall effect sensor and sends it to
+  // This reads an analog input pin and sends the voltage to
   // the Signal K server.
-  uint8_t pin = 34;
-  auto* analog_input = new AnalogInput(pin, 1000, "/sensors/analog");
+  const uint8_t pin = 34;
+  auto* analog_input = new RepeatSensor<float>(1000, [pin]() {
+    return analogReadMilliVolts(pin) / 1000.;
+  });
 
   analog_input->connect_to(
       new SKOutputFloat("electrical.batteries.house.voltage"));

@@ -1,5 +1,5 @@
 
-#include "sensesp/sensors/analog_input.h"
+#include "sensesp/sensors/sensor.h"
 
 #include <Arduino.h>
 
@@ -34,27 +34,20 @@ void setup() {
   // that indicates this sensor or transform does not have any
   // configuration to save, or that you're not interested in doing
   // run-time configuration.
-  const char* analog_in_config_path = "/indoor_illuminance/analog_in";
   const char* linear_config_path = "/indoor_illuminance/linear";
 
   // Create a sensor that is the source of the data, which will be read every
-  // 500 ms. It's a light sensor that's connected to the ESP's AnalogIn pin.
+  // 500 ms. It's a light sensor that's connected to the ESP's analog input pin.
   // ESP32 has many pins that can be
-  // used for AnalogIn, and they're expressed here as the XX in GPIOXX.
-  // When it's dark, the sensor's output (as read by analogRead()) is 120, and
-  // when it's bright, the output is 850, for a range of 730.
-  uint8_t pin = 34;
+  // used for analog input, and they're expressed here as the XX in GPIOXX.
+  // When it's dark, the sensor's output voltage is about 0.097V, and
+  // when it's bright, the output is about 0.685V, for a range of 0.588V.
+  const uint8_t pin = 34;
   unsigned int read_delay = 500;
 
-  auto* analog_input = new AnalogInput(pin, read_delay, analog_in_config_path);
-
-  // Create a configuration item for the analog input sensor.
-  // This is needed to make the sensor configurable via the web interface.
-
-  ConfigItem(analog_input)
-      ->set_title("Analog Input")
-      ->set_description("Analog input read interval.")
-      ->set_sort_order(1000);
+  auto* analog_input = new RepeatSensor<float>(read_delay, [pin]() {
+    return analogReadMilliVolts(pin) / 1000.;
+  });
 
   // A Linear transform takes its input, multiplies it by the multiplier, then
   // adds the offset, to calculate its output. In this example, the final output
@@ -67,24 +60,24 @@ void setup() {
   // for more details.
   //
   // First, calculate the multiplier. Since the total measurement range
-  // is 730 "analogRead units", and that will be represented by a total
-  // output range of 1.000 (from 0.000 to 1.000), divide 1.000 by 730 to
-  // get the "value per analogRead unit": 1.000 / 730 = 0.00137
+  // is 0.588V, and that will be represented by a total output range of
+  // 1.000 (from 0.000 to 1.000), divide 1.000 by 0.588 to get the
+  // "value per volt": 1.000 / 0.588 = 1.7007
   //
-  // To calculate the offset, multiply the analogRead units at Dark times
-  // the multiplier: 120 * 0.00137 = 0.1644
+  // To calculate the offset, multiply the voltage at Dark times
+  // the multiplier: 0.097 * 1.7007 = 0.1650
   // and make it negative, because the final value for "dark" needs to be 0.000.
   //
   // Proof:
-  // Dark = 120 analogRead units x 0.00137 = 0.1644
-  //        0.1644 + -0.1644 = 0.000
-  // Bright = 850 analogRead units x 0.00137 = 1.1645
-  //        1.1645 + -0.1644 = 1.0001 (rounds to 1.000)
+  // Dark = 0.097V x 1.7007 = 0.1650
+  //        0.1650 + -0.1650 = 0.000
+  // Bright = 0.685V x 1.7007 = 1.1650
+  //        1.1650 + -0.1650 = 1.0000
 
-  const float multiplier = 0.00137;
-  const float offset = -0.1644;
+  const float multiplier = 1.7007;
+  const float offset = -0.1650;
 
-  // Create a linear transform for calibrating the raw input value.
+  // Create a linear transform for calibrating the voltage input value.
   // Connect the analog input to the linear transform.
 
   auto input_calibration = new Linear(multiplier, offset, linear_config_path);
