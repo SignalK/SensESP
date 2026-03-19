@@ -51,12 +51,10 @@ class ValueProducer : virtual public Observable {
   >::type
   connect_to(std::shared_ptr<VConsumer> consumer) {
     using CInput = typename VConsumer::input_type;
-    // Capture consumer_producer as weak_ptr to avoid strong reference cycles
-    std::weak_ptr<VConsumer> weak_consumer = consumer;
-    this->attach([this, weak_consumer]() {
-      if (auto consumer = weak_consumer.lock()) {
-        consumer->set(static_cast<CInput>(this->get()));
-      }
+    // Strong reference: the observer lambda owns the shared_ptr, keeping the
+    // consumer alive. This assumes acyclic signal chains (no A→B→A loops).
+    this->attach([this, consumer]() {
+      consumer->set(static_cast<CInput>(this->get()));
     });
     return consumer;
   }
