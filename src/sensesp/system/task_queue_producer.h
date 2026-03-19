@@ -12,44 +12,42 @@
 namespace sensesp {
 
 /**
- * @brief Thread-safe queue for inter-task communication. Works like std::queue.
+ * @brief Thread-safe queue for inter-task communication.
+ *
+ * Uses a statically allocated FreeRTOS mutex (no heap allocation) to avoid
+ * corruption from heap fragmentation or adjacent stack overflows.
+ *
+ * Instances must outlive all tasks that access them. Destroying a SafeQueue
+ * while another task is blocked on it is undefined behavior.
  *
  * @tparam T
  */
 template <typename T>
-class SafeQueue : public std::queue<T> {
+class SafeQueue {
  public:
-  SafeQueue() : std::queue<T>() {
-    write_lock_ = xSemaphoreCreateMutex();
-    if (write_lock_ == nullptr) {
-      // Handle semaphore creation failure
-      ESP_LOGE("SafeQueue", "Failed to create mutex semaphore");
-    }
+  SafeQueue() {
+    write_lock_ = xSemaphoreCreateMutexStatic(&write_lock_buffer_);
   }
 
-  ~SafeQueue() {
-    if (write_lock_ != nullptr) {
-      vSemaphoreDelete(write_lock_);
-    }
-  }
+  // Non-copyable, non-movable — the semaphore handle is not transferable.
+  SafeQueue(const SafeQueue&) = delete;
+  SafeQueue& operator=(const SafeQueue&) = delete;
+  SafeQueue(SafeQueue&&) = delete;
+  SafeQueue& operator=(SafeQueue&&) = delete;
 
   void push(const T& value) {
-    if (write_lock_ == nullptr) return;
     if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
-      std::queue<T>::push(value);
+      queue_.push(value);
       xSemaphoreGive(write_lock_);
     }
   }
 
   bool pop(T& value, unsigned int max_duration_ms) {
-    if (write_lock_ == nullptr) {
-      return false;
-    }
     bool result = false;
     if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
-      if (!std::queue<T>::empty()) {
-        value = std::queue<T>::front();
-        std::queue<T>::pop();
+      if (!queue_.empty()) {
+        value = queue_.front();
+        queue_.pop();
         result = true;
       }
       xSemaphoreGive(write_lock_);
@@ -58,31 +56,27 @@ class SafeQueue : public std::queue<T> {
   }
 
   bool empty() {
-    if (write_lock_ == nullptr) {
-      return true;
-    }
     bool result = true;
     if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
-      result = std::queue<T>::empty();
+      result = queue_.empty();
       xSemaphoreGive(write_lock_);
     }
     return result;
   }
 
   size_t size() {
-    if (write_lock_ == nullptr) {
-      return 0;
-    }
     size_t result = 0;
     if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
-      result = std::queue<T>::size();
+      result = queue_.size();
       xSemaphoreGive(write_lock_);
     }
     return result;
   }
 
- protected:
-  SemaphoreHandle_t write_lock_;  // Lock for writing to the queue
+ private:
+  std::queue<T> queue_;
+  StaticSemaphore_t write_lock_buffer_;
+  SemaphoreHandle_t write_lock_;
 };
 
 /**
