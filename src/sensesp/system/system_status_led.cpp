@@ -60,11 +60,6 @@ LEDPattern blip_pattern = {
 };
 
 void BaseSystemStatusLed::set_wifi_no_ap() {
-  std::vector<LEDPatternFragment> no_ap_frags;
-  no_ap_frags.push_back(frag_linear_fade(100, 100, CRGB::Red));
-  no_ap_frags.push_back(frag_linear_fade(950, 200, CRGB::Black));
-  LEDPattern no_ap_pattern(no_ap_frags);
-
   blinker_->set_pattern(no_ap_pattern);
   ESP_LOGD("SystemStatusLed", "pattern set to no_ap");
 }
