@@ -1039,12 +1039,14 @@ bool SKWSClient::is_connected() {
 }
 
 void SKWSClient::restart() {
+  // Set state first so event handler callbacks and send callsites see the
+  // disconnected state and skip operations on the client being destroyed.
+  set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   if (client_ != nullptr) {
     esp_websocket_client_stop(client_);
     esp_websocket_client_destroy(client_);
     client_ = nullptr;
   }
-  set_connection_state(SKWSConnectionState::kSKWSDisconnected);
 }
 
 void SKWSClient::send_delta() {
