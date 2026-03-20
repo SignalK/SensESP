@@ -487,6 +487,18 @@ bool SKWSClient::get_mdns_service(String& server_address,
   return true;
 }
 
+// Event handler for detect_ssl() to capture the Location response header
+static esp_err_t detect_ssl_event_handler(esp_http_client_event_t* evt) {
+  if (evt->event_id == HTTP_EVENT_ON_HEADER) {
+    // Check for Location header (case-insensitive)
+    if (strcasecmp(evt->header_key, "Location") == 0) {
+      String* location = static_cast<String*>(evt->user_data);
+      *location = evt->header_value;
+    }
+  }
+  return ESP_OK;
+}
+
 bool SKWSClient::detect_ssl() {
   // Try to detect if the server requires SSL by checking for HTTP->HTTPS
   // redirects
@@ -495,10 +507,14 @@ bool SKWSClient::detect_ssl() {
 
   ESP_LOGD(__FILENAME__, "Probing for SSL redirect at %s", url.c_str());
 
+  String location;
+
   esp_http_client_config_t config = {};
   config.url = url.c_str();
   config.disable_auto_redirect = true;
   config.timeout_ms = 10000;
+  config.event_handler = detect_ssl_event_handler;
+  config.user_data = &location;
 
   esp_http_client_handle_t client = esp_http_client_init(&config);
   if (client == nullptr) {
@@ -507,31 +523,23 @@ bool SKWSClient::detect_ssl() {
   }
 
   esp_err_t err = esp_http_client_perform(client);
+  int status_code = esp_http_client_get_status_code(client);
+  esp_http_client_cleanup(client);
+
   if (err != ESP_OK) {
     ESP_LOGD(__FILENAME__, "HTTP request failed: %s", esp_err_to_name(err));
-    esp_http_client_cleanup(client);
     return false;
   }
 
-  int http_code = esp_http_client_get_status_code(client);
-
-  if (http_code == 301 || http_code == 302 || http_code == 307 ||
-      http_code == 308) {
-    // Check Location header for HTTPS redirect
-    char* location = nullptr;
-    esp_http_client_get_header(client, "Location", &location);
-    esp_http_client_cleanup(client);
-
-    if (location != nullptr && strncmp(location, "https://", 8) == 0) {
-      ESP_LOGI(__FILENAME__, "SSL redirect detected to %s, enabling HTTPS/WSS",
-               location);
-      ssl_enabled_ = true;
-      save();
-      return true;
-    }
+  if ((status_code == 301 || status_code == 302 ||
+       status_code == 307 || status_code == 308) &&
+      location.startsWith("https://")) {
+    ESP_LOGI(__FILENAME__, "SSL redirect detected, enabling HTTPS/WSS");
+    ssl_enabled_ = true;
+    save();
+    return true;
   }
 
-  esp_http_client_cleanup(client);
   return false;
 }
 
