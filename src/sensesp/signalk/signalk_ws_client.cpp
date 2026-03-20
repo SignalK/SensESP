@@ -23,7 +23,8 @@
 
 namespace sensesp {
 
-constexpr int kWsClientTaskStackSize = 8192;  // Reduced from 16KB to save heap
+constexpr int kWsClientTaskStackSize = 8192;  // Stack for ExecuteWebSocketTask
+constexpr int kWsTransportTaskStackSize = 6144;  // Stack for esp_websocket_client internal task
 constexpr TickType_t kWsSendTimeoutTicks = pdMS_TO_TICKS(5000);
 
 SKWSClient* ws_client;
@@ -270,14 +271,19 @@ void SKWSClient::subscribe_listeners() {
   }
   SKListener::release_semaphore();
 
-  if (output_available) {
+  if (output_available &&
+      get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     String json_message;
 
     serializeJson(subscription, json_message);
     ESP_LOGI(__FILENAME__, "Subscription JSON message:\n %s",
              json_message.c_str());
-    esp_websocket_client_send_text(client_, json_message.c_str(),
-                                   json_message.length(), portMAX_DELAY);
+    int result = esp_websocket_client_send_text(
+        client_, json_message.c_str(), json_message.length(),
+        kWsSendTimeoutTicks);
+    if (result < 0) {
+      ESP_LOGE(__FILENAME__, "Subscription send failed (result=%d)", result);
+    }
   }
 }
 
@@ -422,22 +428,26 @@ void SKWSClient::on_receive_put(JsonDocument& message) {
     }
     SKListener::release_semaphore();
 
-    // Send back a request response...
-    JsonDocument put_response;
-    put_response["requestId"] = message["requestId"];
-    if (response_count == puts.size()) {
-      // We found a response for every PUT request
-      put_response["state"] = "COMPLETED";
-      put_response["statusCode"] = 200;
-    } else {
-      // One or more requests did not have a matching path
-      put_response["state"] = "FAILED";
-      put_response["statusCode"] = 405;
+    // Send back a request response if still connected
+    if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
+      JsonDocument put_response;
+      put_response["requestId"] = message["requestId"];
+      if (response_count == puts.size()) {
+        put_response["state"] = "COMPLETED";
+        put_response["statusCode"] = 200;
+      } else {
+        put_response["state"] = "FAILED";
+        put_response["statusCode"] = 405;
+      }
+      String response_text;
+      serializeJson(put_response, response_text);
+      int result = esp_websocket_client_send_text(
+          client_, response_text.c_str(), response_text.length(),
+          kWsSendTimeoutTicks);
+      if (result < 0) {
+        ESP_LOGE(__FILENAME__, "PUT response send failed (result=%d)", result);
+      }
     }
-    String response_text;
-    serializeJson(put_response, response_text);
-    esp_websocket_client_send_text(client_, response_text.c_str(),
-                                   response_text.length(), portMAX_DELAY);
   }
 }
 
@@ -450,8 +460,11 @@ void SKWSClient::on_receive_put(JsonDocument& message) {
  */
 void SKWSClient::sendTXT(String& payload) {
   if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
-    esp_websocket_client_send_text(client_, payload.c_str(), payload.length(),
-                                   portMAX_DELAY);
+    int result = esp_websocket_client_send_text(
+        client_, payload.c_str(), payload.length(), kWsSendTimeoutTicks);
+    if (result < 0) {
+      ESP_LOGE(__FILENAME__, "sendTXT failed (result=%d)", result);
+    }
   }
 }
 
@@ -487,6 +500,18 @@ bool SKWSClient::get_mdns_service(String& server_address,
   return true;
 }
 
+// Event handler for detect_ssl() to capture the Location response header
+static esp_err_t detect_ssl_event_handler(esp_http_client_event_t* evt) {
+  if (evt->event_id == HTTP_EVENT_ON_HEADER) {
+    // Check for Location header (case-insensitive)
+    if (strcasecmp(evt->header_key, "Location") == 0) {
+      String* location = static_cast<String*>(evt->user_data);
+      *location = evt->header_value;
+    }
+  }
+  return ESP_OK;
+}
+
 bool SKWSClient::detect_ssl() {
   // Try to detect if the server requires SSL by checking for HTTP->HTTPS
   // redirects
@@ -495,10 +520,14 @@ bool SKWSClient::detect_ssl() {
 
   ESP_LOGD(__FILENAME__, "Probing for SSL redirect at %s", url.c_str());
 
+  String location;
+
   esp_http_client_config_t config = {};
   config.url = url.c_str();
   config.disable_auto_redirect = true;
   config.timeout_ms = 10000;
+  config.event_handler = detect_ssl_event_handler;
+  config.user_data = &location;
 
   esp_http_client_handle_t client = esp_http_client_init(&config);
   if (client == nullptr) {
@@ -507,31 +536,23 @@ bool SKWSClient::detect_ssl() {
   }
 
   esp_err_t err = esp_http_client_perform(client);
+  int status_code = esp_http_client_get_status_code(client);
+  esp_http_client_cleanup(client);
+
   if (err != ESP_OK) {
     ESP_LOGD(__FILENAME__, "HTTP request failed: %s", esp_err_to_name(err));
-    esp_http_client_cleanup(client);
     return false;
   }
 
-  int http_code = esp_http_client_get_status_code(client);
-
-  if (http_code == 301 || http_code == 302 || http_code == 307 ||
-      http_code == 308) {
-    // Check Location header for HTTPS redirect
-    char* location = nullptr;
-    esp_http_client_get_header(client, "Location", &location);
-    esp_http_client_cleanup(client);
-
-    if (location != nullptr && strncmp(location, "https://", 8) == 0) {
-      ESP_LOGI(__FILENAME__, "SSL redirect detected to %s, enabling HTTPS/WSS",
-               location);
-      ssl_enabled_ = true;
-      save();
-      return true;
-    }
+  if ((status_code == 301 || status_code == 302 ||
+       status_code == 307 || status_code == 308) &&
+      location.startsWith("https://")) {
+    ESP_LOGI(__FILENAME__, "SSL redirect detected, enabling HTTPS/WSS");
+    ssl_enabled_ = true;
+    save();
+    return true;
   }
 
-  esp_http_client_cleanup(client);
   return false;
 }
 
@@ -967,7 +988,7 @@ void SKWSClient::connect_ws(const String& host, const uint16_t port) {
   // Configure WebSocket client
   esp_websocket_client_config_t config = {};
   config.uri = url.c_str();
-  config.task_stack = 8192;
+  config.task_stack = kWsTransportTaskStackSize;
   config.buffer_size = 1024;
   if (auth_header.length() > 0) {
     config.headers = auth_header.c_str();
@@ -1019,12 +1040,14 @@ bool SKWSClient::is_connected() {
 }
 
 void SKWSClient::restart() {
+  // Set state first so event handler callbacks and send callsites see the
+  // disconnected state and skip operations on the client being destroyed.
+  set_connection_state(SKWSConnectionState::kSKWSDisconnected);
   if (client_ != nullptr) {
     esp_websocket_client_stop(client_);
     esp_websocket_client_destroy(client_);
     client_ = nullptr;
   }
-  set_connection_state(SKWSConnectionState::kSKWSDisconnected);
 }
 
 void SKWSClient::send_delta() {
