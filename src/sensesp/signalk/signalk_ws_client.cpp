@@ -987,7 +987,7 @@ void SKWSClient::connect_ws(const String& host, const uint16_t port) {
   // Configure WebSocket client
   esp_websocket_client_config_t config = {};
   config.uri = url.c_str();
-  config.task_stack = 8192;
+  config.task_stack = 6144;
   config.buffer_size = 1024;
   if (auth_header.length() > 0) {
     config.headers = auth_header.c_str();
