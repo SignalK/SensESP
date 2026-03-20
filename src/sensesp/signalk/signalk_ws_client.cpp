@@ -270,14 +270,19 @@ void SKWSClient::subscribe_listeners() {
   }
   SKListener::release_semaphore();
 
-  if (output_available) {
+  if (output_available &&
+      get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     String json_message;
 
     serializeJson(subscription, json_message);
     ESP_LOGI(__FILENAME__, "Subscription JSON message:\n %s",
              json_message.c_str());
-    esp_websocket_client_send_text(client_, json_message.c_str(),
-                                   json_message.length(), portMAX_DELAY);
+    int result = esp_websocket_client_send_text(
+        client_, json_message.c_str(), json_message.length(),
+        kWsSendTimeoutTicks);
+    if (result < 0) {
+      ESP_LOGE(__FILENAME__, "Subscription send failed (result=%d)", result);
+    }
   }
 }
 
@@ -422,22 +427,26 @@ void SKWSClient::on_receive_put(JsonDocument& message) {
     }
     SKListener::release_semaphore();
 
-    // Send back a request response...
-    JsonDocument put_response;
-    put_response["requestId"] = message["requestId"];
-    if (response_count == puts.size()) {
-      // We found a response for every PUT request
-      put_response["state"] = "COMPLETED";
-      put_response["statusCode"] = 200;
-    } else {
-      // One or more requests did not have a matching path
-      put_response["state"] = "FAILED";
-      put_response["statusCode"] = 405;
+    // Send back a request response if still connected
+    if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
+      JsonDocument put_response;
+      put_response["requestId"] = message["requestId"];
+      if (response_count == puts.size()) {
+        put_response["state"] = "COMPLETED";
+        put_response["statusCode"] = 200;
+      } else {
+        put_response["state"] = "FAILED";
+        put_response["statusCode"] = 405;
+      }
+      String response_text;
+      serializeJson(put_response, response_text);
+      int result = esp_websocket_client_send_text(
+          client_, response_text.c_str(), response_text.length(),
+          kWsSendTimeoutTicks);
+      if (result < 0) {
+        ESP_LOGE(__FILENAME__, "PUT response send failed (result=%d)", result);
+      }
     }
-    String response_text;
-    serializeJson(put_response, response_text);
-    esp_websocket_client_send_text(client_, response_text.c_str(),
-                                   response_text.length(), portMAX_DELAY);
   }
 }
 
@@ -450,8 +459,11 @@ void SKWSClient::on_receive_put(JsonDocument& message) {
  */
 void SKWSClient::sendTXT(String& payload) {
   if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
-    esp_websocket_client_send_text(client_, payload.c_str(), payload.length(),
-                                   portMAX_DELAY);
+    int result = esp_websocket_client_send_text(
+        client_, payload.c_str(), payload.length(), kWsSendTimeoutTicks);
+    if (result < 0) {
+      ESP_LOGE(__FILENAME__, "sendTXT failed (result=%d)", result);
+    }
   }
 }
 
