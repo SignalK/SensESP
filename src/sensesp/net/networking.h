@@ -85,7 +85,9 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
     ESP_LOGI(__FILENAME__, "Default route: %s",
              WiFi.gatewayIP().toString().c_str());
     ESP_LOGI(__FILENAME__, "DNS server: %s", WiFi.dnsIP().toString().c_str());
-    this->emit(WiFiState::kWifiConnectedToAP);
+    // Defer to main event loop — WiFi callbacks run on the WiFi task.
+    event_loop()->onDelay(
+        0, [this]() { this->emit(WiFiState::kWifiConnectedToAP); });
   }
 
   void wifi_ap_enabled() {
@@ -103,7 +105,9 @@ class WiFiStateProducer : public ValueProducer<WiFiState> {
 
   void wifi_disconnected() {
     ESP_LOGI(__FILENAME__, "Disconnected from wifi.");
-    this->emit(WiFiState::kWifiDisconnected);
+    // Defer to main event loop — WiFi callbacks run on the WiFi task.
+    event_loop()->onDelay(
+        0, [this]() { this->emit(WiFiState::kWifiDisconnected); });
   }
 };
 

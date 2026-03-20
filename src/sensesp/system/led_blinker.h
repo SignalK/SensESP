@@ -135,6 +135,8 @@ class LEDPattern {
   // Assignment operator
   LEDPattern& operator=(const LEDPattern& other) {
     fragments_ = other.fragments_;
+    current_fragment_idx_ = 0;
+    fragment_begin_ms_ = 0;
     return *this;
   }
 
