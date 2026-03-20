@@ -3,6 +3,8 @@
 
 #include <ArduinoJson.h>
 #include <list>
+#include <map>
+#include <vector>
 
 namespace sensesp {
 
@@ -19,6 +21,7 @@ class SKDeltaQueue {
   void append(const String& val);
   bool data_available();
   void get_delta(String& output);
+  void get_deltas(std::vector<String>& output);
 
   void connect_emitters();
 
