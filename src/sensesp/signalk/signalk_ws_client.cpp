@@ -24,6 +24,7 @@
 namespace sensesp {
 
 constexpr int kWsClientTaskStackSize = 8192;  // Reduced from 16KB to save heap
+constexpr TickType_t kWsSendTimeoutTicks = pdMS_TO_TICKS(5000);
 
 SKWSClient* ws_client;
 
@@ -1031,10 +1032,15 @@ void SKWSClient::send_delta() {
   if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     if (sk_delta_queue_->data_available()) {
       sk_delta_queue_->get_delta(output);
-      esp_websocket_client_send_text(client_, output.c_str(), output.length(),
-                                     portMAX_DELAY);
-      // This automatically notifies the observers
-      this->delta_tx_tick_producer_.set(1);
+      int send_result = esp_websocket_client_send_text(
+          client_, output.c_str(), output.length(), kWsSendTimeoutTicks);
+      if (send_result < 0) {
+        ESP_LOGE(__FILENAME__, "WebSocket send failed (result=%d), restarting",
+                 send_result);
+        this->restart();
+      } else {
+        this->delta_tx_tick_producer_.set(1);
+      }
     }
   }
 }
