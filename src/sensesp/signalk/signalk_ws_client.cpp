@@ -23,7 +23,8 @@
 
 namespace sensesp {
 
-constexpr int kWsClientTaskStackSize = 8192;  // Reduced from 16KB to save heap
+constexpr int kWsClientTaskStackSize = 8192;  // Stack for ExecuteWebSocketTask
+constexpr int kWsTransportTaskStackSize = 6144;  // Stack for esp_websocket_client internal task
 constexpr TickType_t kWsSendTimeoutTicks = pdMS_TO_TICKS(5000);
 
 SKWSClient* ws_client;
@@ -987,7 +988,7 @@ void SKWSClient::connect_ws(const String& host, const uint16_t port) {
   // Configure WebSocket client
   esp_websocket_client_config_t config = {};
   config.uri = url.c_str();
-  config.task_stack = 6144;
+  config.task_stack = kWsTransportTaskStackSize;
   config.buffer_size = 1024;
   if (auth_header.length() > 0) {
     config.headers = auth_header.c_str();
