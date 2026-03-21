@@ -58,32 +58,133 @@ bool SKDeltaQueue::data_available() {
 }
 
 void SKDeltaQueue::get_delta(String& output) {
-  // estimate the size of the serialized json string
-
-  JsonDocument json_doc;
-
-  // JsonObject delta = jsonDoc.as<JsonObject>();
-  JsonArray updates = json_doc["updates"].to<JsonArray>();
-
-  if (!meta_sent_) {
-    this->add_metadata(updates);
+  std::vector<String> deltas;
+  get_deltas(deltas);
+  output = "";
+  for (size_t i = 0; i < deltas.size(); ++i) {
+    if (i > 0) {
+      output += "\n";
+    }
+    output += deltas[i];
   }
+}
 
-  JsonObject current = updates.add<JsonObject>();
-  JsonObject source = current["source"].to<JsonObject>();
-  source["label"] = SensESPBaseApp::get_hostname();
-  JsonArray values = current["values"].to<JsonArray>();
-
+void SKDeltaQueue::get_deltas(std::vector<String>& output) {
+  // Drain the buffer under the semaphore
+  std::list<String> items;
   take_semaphore();
-  while (!buffer.empty()) {
-    values.add(serialized(buffer.back()));
-    buffer.pop_back();
-  }
+  items.swap(buffer);
   release_semaphore();
 
-  serializeJson(json_doc, output);
+  // Fast path: if no item contains a context key, skip the grouping logic.
+  // This avoids deserialize/reserialize overhead for the common case.
+  bool has_contextual = false;
+  for (const auto& item : items) {
+    if (item.indexOf("\"context\"") >= 0) {
+      has_contextual = true;
+      break;
+    }
+  }
 
-  ESP_LOGD(__FILENAME__, "delta: %s", output.c_str());
+  if (!has_contextual) {
+    // All items are self-context: build a single delta (original behavior)
+    JsonDocument json_doc;
+    JsonArray updates = json_doc["updates"].to<JsonArray>();
+
+    if (!meta_sent_) {
+      this->add_metadata(updates);
+    }
+
+    if (!items.empty()) {
+      JsonObject current = updates.add<JsonObject>();
+      JsonObject source = current["source"].to<JsonObject>();
+      source["label"] = SensESPBaseApp::get_hostname();
+      JsonArray values = current["values"].to<JsonArray>();
+
+      // Reverse iteration: buffer is push_front/pop_back (LIFO),
+      // so rbegin gives oldest-first ordering.
+      for (auto it = items.rbegin(); it != items.rend(); ++it) {
+        values.add(serialized(*it));
+      }
+    }
+
+    String delta;
+    serializeJson(json_doc, delta);
+    output.push_back(std::move(delta));
+    ESP_LOGD(__FILENAME__, "delta: %s", output.back().c_str());
+    return;
+  }
+
+  // Slow path: separate items by context
+  std::list<String> self_items;
+  std::map<String, std::list<String>> contextual_items;
+
+  // Reverse iteration: buffer is push_front/pop_back (LIFO),
+  // so rbegin gives oldest-first ordering.
+  for (auto it = items.rbegin(); it != items.rend(); ++it) {
+    JsonDocument item_doc;
+    DeserializationError err = deserializeJson(item_doc, *it);
+    if (err) {
+      ESP_LOGE(__FILENAME__, "Failed to parse buffered item: %s", err.c_str());
+      continue;
+    }
+    if (item_doc["context"].is<const char*>()) {
+      String context = item_doc["context"].as<String>();
+      // Re-serialize without the context key for the values array
+      item_doc.remove("context");
+      String value_json;
+      serializeJson(item_doc, value_json);
+      contextual_items[context].push_back(value_json);
+    } else {
+      self_items.push_back(*it);
+    }
+  }
+
+  // Default (self) delta
+  if (!self_items.empty() || !meta_sent_) {
+    JsonDocument json_doc;
+    JsonArray updates = json_doc["updates"].to<JsonArray>();
+
+    if (!meta_sent_) {
+      this->add_metadata(updates);
+    }
+
+    if (!self_items.empty()) {
+      JsonObject current = updates.add<JsonObject>();
+      JsonObject source = current["source"].to<JsonObject>();
+      source["label"] = SensESPBaseApp::get_hostname();
+      JsonArray values = current["values"].to<JsonArray>();
+
+      for (const auto& item : self_items) {
+        values.add(serialized(item));
+      }
+    }
+
+    String delta;
+    serializeJson(json_doc, delta);
+    ESP_LOGD(__FILENAME__, "delta: %s", delta.c_str());
+    output.push_back(std::move(delta));
+  }
+
+  // Contextual deltas — one per context
+  for (const auto& [context, ctx_items] : contextual_items) {
+    JsonDocument json_doc;
+    json_doc["context"] = context;
+    JsonArray updates = json_doc["updates"].to<JsonArray>();
+    JsonObject current = updates.add<JsonObject>();
+    JsonObject source = current["source"].to<JsonObject>();
+    source["label"] = SensESPBaseApp::get_hostname();
+    JsonArray values = current["values"].to<JsonArray>();
+
+    for (const auto& item : ctx_items) {
+      values.add(serialized(item));
+    }
+
+    String delta;
+    serializeJson(json_doc, delta);
+    ESP_LOGD(__FILENAME__, "delta: %s", delta.c_str());
+    output.push_back(std::move(delta));
+  }
 }
 
 void SKDeltaQueue::add_metadata(JsonArray updates) {

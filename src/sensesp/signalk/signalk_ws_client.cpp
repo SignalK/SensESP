@@ -1051,17 +1051,20 @@ void SKWSClient::restart() {
 }
 
 void SKWSClient::send_delta() {
-  String output;
   if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     if (sk_delta_queue_->data_available()) {
-      sk_delta_queue_->get_delta(output);
-      int send_result = esp_websocket_client_send_text(
-          client_, output.c_str(), output.length(), kWsSendTimeoutTicks);
-      if (send_result < 0) {
-        ESP_LOGE(__FILENAME__, "WebSocket send failed (result=%d), restarting",
-                 send_result);
-        this->restart();
-      } else {
+      std::vector<String> deltas;
+      sk_delta_queue_->get_deltas(deltas);
+      for (const auto& delta : deltas) {
+        int send_result = esp_websocket_client_send_text(
+            client_, delta.c_str(), delta.length(), kWsSendTimeoutTicks);
+        if (send_result < 0) {
+          ESP_LOGE(__FILENAME__,
+                   "WebSocket send failed (result=%d), restarting",
+                   send_result);
+          this->restart();
+          return;
+        }
         this->delta_tx_tick_producer_.set(1);
       }
     }
