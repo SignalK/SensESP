@@ -165,6 +165,18 @@ class SKWSClient : public FileSystemSaveable,
   bool server_detected_ = false;
   bool token_test_success_ = false;
 
+  // mDNS settle tracking: after a network-got-IP event, we wait
+  // kMdnsSettleMs before attempting the first mDNS query to avoid the
+  // race between DHCP completion and mDNS multicast group join on Ethernet.
+  static constexpr unsigned long kMdnsSettleMs = 4000;
+  bool mdns_ready_ = false;
+
+  // Retry backoff for failed mDNS lookups (ms), capped at kMdnsMaxBackoffMs.
+  static constexpr unsigned long kMdnsInitialBackoffMs = 5000;
+  static constexpr unsigned long kMdnsMaxBackoffMs = 60000;
+  unsigned long mdns_retry_interval_ms_ = kMdnsInitialBackoffMs;
+  unsigned long mdns_last_attempt_ms_ = 0;
+
   // SSL/TLS configuration
   bool ssl_enabled_ = false;
   bool tofu_enabled_ = true;  // TOFU enabled by default
