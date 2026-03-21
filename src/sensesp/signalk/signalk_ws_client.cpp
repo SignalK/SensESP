@@ -124,7 +124,11 @@ static void websocket_event_handler(void* handler_args,
       ws_client->on_disconnected();
       break;
     case WEBSOCKET_EVENT_DATA:
-      ws_client->on_receive_delta((uint8_t*)data->data_ptr, data->data_len);
+      // Only process text frames (opcode 0x1) and continuation frames (0x0).
+      // Control frames (ping/pong/close: 0x8-0xA) have no JSON payload.
+      if (data->op_code <= 0x2) {
+        ws_client->on_receive_delta((uint8_t*)data->data_ptr, data->data_len);
+      }
       break;
     case WEBSOCKET_EVENT_ERROR:
       ws_client->on_error();
