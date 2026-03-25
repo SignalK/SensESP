@@ -4,7 +4,7 @@
 #include "sensesp/ui/config_item.h"
 #include "transform.h"
 
-#define MAX_ANALOG_OUTPUT 4096
+constexpr int kMaxAnalogOutput = 4096;
 
 namespace sensesp {
 

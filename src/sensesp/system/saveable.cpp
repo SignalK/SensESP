@@ -12,7 +12,6 @@ bool FileSystemSaveable::load() {
              config_path_.c_str());
     return false;
   }
-  String hash_path = String("/") + Base64Sha1(config_path_);
 
   String filename;
   if (!find_config_file(config_path_, filename)) {
@@ -30,7 +29,7 @@ bool FileSystemSaveable::load() {
   }  //
   JsonObject obj = json_doc.as<JsonObject>();
   if (!from_json(obj)) {
-    ESP_LOGW(__FILENAME__, "Could not convert configuration to Json for %s",
+    ESP_LOGW(__FILENAME__, "Could not parse configuration from Json for %s",
              config_path_.c_str());
     return false;
   }
