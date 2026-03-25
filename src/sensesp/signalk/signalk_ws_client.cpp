@@ -12,6 +12,8 @@
 #include <mbedtls/x509_crt.h>
 #endif
 
+#include <memory>
+
 #include "Arduino.h"
 #include "elapsedMillis.h"
 #include "esp_arduino_version.h"
@@ -300,17 +302,22 @@ void SKWSClient::subscribe_listeners() {
  */
 void SKWSClient::on_receive_delta(uint8_t* payload, size_t length) {
   // Need to work on null-terminated strings
-  char buf[length + 1];
-  memcpy(buf, payload, length);
+  constexpr size_t kMaxWsMessageSize = 4096;
+  if (length > kMaxWsMessageSize) {
+    ESP_LOGW(__FILENAME__, "WebSocket message too large (%d bytes), dropping",
+             length);
+    return;
+  }
+  std::unique_ptr<char[]> buf(new char[length + 1]);
+  memcpy(buf.get(), payload, length);
   buf[length] = 0;
 
 #ifdef SIGNALK_PRINT_RCV_DELTA
-  ESP_LOGD(__FILENAME__, "Websocket payload received: %s", (char*)buf);
+  ESP_LOGD(__FILENAME__, "Websocket payload received: %s", buf.get());
 #endif
 
   JsonDocument message;
-  // JsonObject message = jsonDoc.as<JsonObject>();
-  auto error = deserializeJson(message, buf);
+  auto error = deserializeJson(message, buf.get());
 
   if (!error) {
     if (message["updates"].is<JsonVariant>()) {
