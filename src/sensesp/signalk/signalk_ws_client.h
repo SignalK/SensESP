@@ -218,7 +218,6 @@ class SKWSClient : public FileSystemSaveable,
   /////////////////////////////////////////////////////////
   // SKWSClient task methods
 
-  void connect_loop();
   void test_token(const String host, const uint16_t port);
   void send_access_request(const String host, const uint16_t port);
   void poll_access_request(const String host, const uint16_t port,

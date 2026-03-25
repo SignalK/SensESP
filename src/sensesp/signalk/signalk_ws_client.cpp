@@ -191,12 +191,6 @@ SKWSClient::SKWSClient(const String& config_path,
   });
 }
 
-void SKWSClient::connect_loop() {
-  if (this->get_connection_state() == SKWSConnectionState::kSKWSDisconnected) {
-    this->connect();
-  }
-}
-
 /**
  * @brief Called when the websocket connection is disconnected.
  *
