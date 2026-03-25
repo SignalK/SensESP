@@ -12,7 +12,7 @@ AnalogVoltage::AnalogVoltage(float max_voltage, float multiplier, float offset,
 }
 
 void AnalogVoltage::set(const float& input) {
-  this->emit(((input * (max_voltage_ / MAX_ANALOG_OUTPUT)) * multiplier_) +
+  this->emit(((input * (max_voltage_ / kMaxAnalogOutput)) * multiplier_) +
              offset_);
 }
 

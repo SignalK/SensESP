@@ -10,7 +10,7 @@
 #include "sensesp_app.h"
 #include "sensesp_base_app_builder.h"
 
-const char* kDefaultSystemInfoSensorPrefix = "sensorDevice.";
+constexpr const char* kDefaultSystemInfoSensorPrefix = "sensorDevice.";
 
 namespace sensesp {
 

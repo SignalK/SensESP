@@ -2,6 +2,7 @@
 #define SENSESP_UI_UI_OUTPUT_H
 
 #include <ArduinoJson.h>
+#include <esp_log.h>
 #include <functional>
 #include <map>
 
@@ -49,6 +50,9 @@ class StatusPageItem : public StatusPageItemBase, public ObservableValue<T> {
  public:
   StatusPageItem(String name, const T& value, String group, int order)
       : StatusPageItemBase(name, group, order), ObservableValue<T>(value) {
+          if (status_page_items_.count(name) > 0) {
+            ESP_LOGW("StatusPageItem", "Duplicate status page item name: %s", name.c_str());
+          }
           status_page_items_[name] = this;
   }
 

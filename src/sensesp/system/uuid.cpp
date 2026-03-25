@@ -15,6 +15,9 @@ String generate_uuid4() {
     memcpy(&buffer_[i], &random, 4);
   }
 
+  buffer_[6] = (buffer_[6] & 0x0F) | 0x40;  // version 4
+  buffer_[8] = (buffer_[8] & 0x3F) | 0x80;  // variant 1
+
   uuid_str.reserve(36 + 1);  // Include NULL / terminator byte
 
   for (int i = 0; i < 16; i++) {
