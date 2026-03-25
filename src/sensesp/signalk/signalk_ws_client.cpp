@@ -425,45 +425,49 @@ void SKWSClient::process_received_updates() {
 void SKWSClient::on_receive_put(JsonDocument& message) {
   // Process PUT requests...
   JsonArray puts = message["put"];
-  size_t response_count = 0;
+  bool all_matched = true;
   for (size_t i = 0; i < puts.size(); i++) {
     JsonObject value = puts[i];
     const char* path = value["path"];
-    String str_val = value["value"].as<String>();
+    bool matched = false;
 
     SKListener::take_semaphore();
     const std::vector<SKPutListener*>& listeners =
         SKPutListener::get_listeners();
-    for (size_t i = 0; i < listeners.size(); i++) {
-      SKPutListener* listener = listeners[i];
+    for (size_t j = 0; j < listeners.size(); j++) {
+      SKPutListener* listener = listeners[j];
       if (listener->get_sk_path().equals(path)) {
         take_received_updates_semaphore();
         received_updates_.push_back(value);
         release_received_updates_semaphore();
-        response_count++;
+        matched = true;
       }
     }
     SKListener::release_semaphore();
 
-    // Send back a request response if still connected
-    if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
-      JsonDocument put_response;
-      put_response["requestId"] = message["requestId"];
-      if (response_count == puts.size()) {
-        put_response["state"] = "COMPLETED";
-        put_response["statusCode"] = 200;
-      } else {
-        put_response["state"] = "FAILED";
-        put_response["statusCode"] = 405;
-      }
-      String response_text;
-      serializeJson(put_response, response_text);
-      int result = esp_websocket_client_send_text(
-          client_, response_text.c_str(), response_text.length(),
-          kWsSendTimeoutTicks);
-      if (result < 0) {
-        ESP_LOGE(__FILENAME__, "PUT response send failed (result=%d)", result);
-      }
+    if (!matched) {
+      all_matched = false;
+    }
+  }
+
+  // Send back a single request response if still connected
+  if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
+    JsonDocument put_response;
+    put_response["requestId"] = message["requestId"];
+    if (all_matched) {
+      put_response["state"] = "COMPLETED";
+      put_response["statusCode"] = 200;
+    } else {
+      put_response["state"] = "FAILED";
+      put_response["statusCode"] = 405;
+    }
+    String response_text;
+    serializeJson(put_response, response_text);
+    int result = esp_websocket_client_send_text(
+        client_, response_text.c_str(), response_text.length(),
+        kWsSendTimeoutTicks);
+    if (result < 0) {
+      ESP_LOGE(__FILENAME__, "PUT response send failed (result=%d)", result);
     }
   }
 }
