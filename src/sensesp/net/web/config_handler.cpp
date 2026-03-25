@@ -161,9 +161,14 @@ void add_config_put_handler(std::shared_ptr<HTTPServer>& server) {
         }
 
         // receive the payload
+        constexpr size_t kMaxConfigPayloadSize = 4096;
         size_t payload_len = req->content_len;
-        char* payload = new char[payload_len + 1];
-        int ret = httpd_req_recv(req, payload, payload_len);
+        if (payload_len > kMaxConfigPayloadSize) {
+          httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST, "Payload too large");
+          return ESP_FAIL;
+        }
+        std::unique_ptr<char[]> payload(new char[payload_len + 1]);
+        int ret = httpd_req_recv(req, payload.get(), payload_len);
         if (ret <= 0) {
           httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR,
                               "Error receiving payload");
@@ -171,12 +176,11 @@ void add_config_put_handler(std::shared_ptr<HTTPServer>& server) {
         }
         payload[payload_len] = '\0';
 
-        ESP_LOGV("ConfigHandler", "Received payload: %s", payload);
+        ESP_LOGV("ConfigHandler", "Received payload: %s", payload.get());
 
         // parse the content as JSON
         JsonDocument doc;
-        DeserializationError error = deserializeJson(doc, payload);
-        delete[] payload;
+        DeserializationError error = deserializeJson(doc, payload.get());
         if (error) {
           ESP_LOGE("ConfigHandler", "Error parsing JSON payload: %s",
                    error.c_str());
