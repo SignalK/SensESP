@@ -361,6 +361,12 @@ void SKWSClient::on_receive_updates(JsonDocument& message) {
 
       // push all values into a separate list for processing
       // in the main task
+      constexpr size_t kMaxReceivedUpdates = 20;
+      while (received_updates_.size() >= kMaxReceivedUpdates) {
+        received_updates_.pop_front();
+        ESP_LOGW(__FILENAME__,
+                 "Dropping oldest received update (queue full)");
+      }
       received_updates_.push_back(value_doc);
     }
   }
