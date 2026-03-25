@@ -824,22 +824,22 @@ void SKWSClient::send_access_request(const String server_address,
     ESP_LOGI(__FILENAME__, "Server message: %s", message.c_str());
   }
 
-  // HTTP 400 with href means "already requested" - we can poll the existing request
+  // HTTP 400 with href means "already requested" - save href for polling on
+  // next connect() cycle (after backoff)
   if (http_code == 400 && href.length() > 0 && href.startsWith("/")) {
-    ESP_LOGI(__FILENAME__, "Existing request found, polling href: %s", href.c_str());
+    ESP_LOGI(__FILENAME__, "Existing request found, will poll href: %s", href.c_str());
     polling_href_ = href;
     save();
-    delay(5000);
-    this->poll_access_request(server_address, server_port, this->polling_href_);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     return;
   }
 
-  // HTTP 202 with href means new request pending
+  // HTTP 202 with href means new request pending - save href for polling on
+  // next connect() cycle (after backoff)
   if (http_code == 202 && href.length() > 0 && href.startsWith("/")) {
     polling_href_ = href;
     save();
-    delay(5000);
-    this->poll_access_request(server_address, server_port, this->polling_href_);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     return;
   }
 
@@ -932,7 +932,6 @@ void SKWSClient::poll_access_request(const String server_address,
     ESP_LOGD(__FILENAME__, "%s", state.c_str());
     if (state == "PENDING") {
       set_connection_state(SKWSConnectionState::kSKWSDisconnected);
-      delay(5000);
       return;
     }
     if (state == "COMPLETED") {
