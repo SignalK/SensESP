@@ -25,7 +25,7 @@ namespace sensesp {
 template <typename T>
 class SafeQueue {
  public:
-  SafeQueue() {
+  SafeQueue(size_t max_size = 100) : max_size_(max_size) {
     write_lock_ = xSemaphoreCreateMutexStatic(&write_lock_buffer_);
   }
 
@@ -37,11 +37,18 @@ class SafeQueue {
 
   void push(const T& value) {
     if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
+      if (queue_.size() >= max_size_) {
+        queue_.pop();
+        ESP_LOGW("SafeQueue", "Queue full, dropping oldest entry");
+      }
       queue_.push(value);
       xSemaphoreGive(write_lock_);
     }
   }
 
+  // NOTE: max_duration_ms is currently unused but retained for API
+  // compatibility. The pop is non-blocking; it returns immediately if
+  // the queue is empty.
   bool pop(T& value, unsigned int max_duration_ms) {
     bool result = false;
     if (xSemaphoreTake(write_lock_, portMAX_DELAY) == pdTRUE) {
@@ -75,6 +82,7 @@ class SafeQueue {
 
  private:
   std::queue<T> queue_;
+  size_t max_size_;
   StaticSemaphore_t write_lock_buffer_;
   SemaphoreHandle_t write_lock_;
 };
@@ -126,6 +134,11 @@ class TaskQueueProducer : public ObservableValue<T> {
    * This function will block until a value is available in the queue. When a
    * value becomes available, it will be returned in the reference and
    * emitted to the observers.
+   *
+   * WARNING: wait() calls emit(), which invokes all observers. This is
+   * only safe if wait() is called from the same FreeRTOS task where
+   * observers were registered (typically the main event loop task).
+   * For cross-task use, rely on the polling lambda set up in the constructor.
    *
    * @param value Received value if the function returns true.
    * @param max_duration_ms Maximum duration to wait for the value.
