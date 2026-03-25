@@ -139,21 +139,19 @@ static void websocket_event_handler(void* handler_args,
 }
 
 void ExecuteWebSocketTask(void* /*parameter*/) {
-  elapsedMillis connect_loop_elapsed = 0;
   elapsedMillis delta_loop_elapsed = 0;
 
   ws_client->connect();
 
   while (true) {
-    if (connect_loop_elapsed > 2000) {
-      connect_loop_elapsed = 0;
+    if (ws_client->is_connect_due()) {
       ws_client->connect();
     }
     if (delta_loop_elapsed > 5) {
       delta_loop_elapsed = 0;
       ws_client->send_delta();
     }
-    delay(20);
+    vTaskDelay(pdMS_TO_TICKS(100));
   }
 }
 
