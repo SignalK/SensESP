@@ -179,10 +179,16 @@ int HTTPDigestAuthenticator::find_nonce(String nonce, int count) {
   decoded_nonce = String(decoded);
   for (it = nonces_.begin(); it != nonces_.end(); it++) {
     if (it->nonce == decoded_nonce) {
-      if (count <= it->count) {
-        return 0;  // reject replayed or out-of-order nonce count
+      // Reject replayed nonce counts. Allow a small tolerance window
+      // (nc may arrive slightly out of order with concurrent requests,
+      // e.g., Chrome sends multiple subrequests in parallel).
+      constexpr int kNcTolerance = 5;
+      if (count <= it->count && (it->count - count) >= kNcTolerance) {
+        return 0;  // reject clearly replayed nonce count
       }
-      it->count = count;
+      if (count > it->count) {
+        it->count = count;  // advance high-water mark
+      }
       // Check if the nonce is stale
       String timestamp_str = decoded_nonce.substring(0, nonce.indexOf(' '));
       unsigned long timestamp = timestamp_str.toInt();
