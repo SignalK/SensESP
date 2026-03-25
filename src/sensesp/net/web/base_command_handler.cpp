@@ -1,13 +1,40 @@
 #include "base_command_handler.h"
 
+#include "WiFi.h"
 #include "sensesp/net/web/autogen/frontend_files.h"
 #include "sensesp/ui/status_page_item.h"
 
 namespace sensesp {
 
+namespace {
+
+/// Reject cross-origin POST requests to destructive endpoints.
+bool check_origin(httpd_req_t* req) {
+  char origin[128] = {0};
+  if (httpd_req_get_hdr_value_str(req, "Origin", origin, sizeof(origin)) ==
+      ESP_OK) {
+    String origin_str(origin);
+    String hostname = SensESPBaseApp::get_hostname();
+    if (origin_str.indexOf(hostname) < 0) {
+      String ip = WiFi.localIP().toString();
+      if (origin_str.indexOf(ip) < 0) {
+        httpd_resp_send_err(req, HTTPD_403_FORBIDDEN,
+                            "Cross-origin request rejected");
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+}  // namespace
+
 void add_http_reset_handler(std::shared_ptr<HTTPServer>& server) {
   auto reset_handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_POST, "/api/device/reset", [](httpd_req_t* req) {
+        if (!check_origin(req)) {
+          return ESP_FAIL;
+        }
         httpd_resp_send(req,
                         "Resetting device back to factory defaults. "
                         "You may have to reconfigure the WiFi settings.",
@@ -21,6 +48,9 @@ void add_http_reset_handler(std::shared_ptr<HTTPServer>& server) {
 void add_http_restart_handler(std::shared_ptr<HTTPServer>& server) {
   auto restart_handler = std::make_shared<HTTPRequestHandler>(
       1 << HTTP_POST, "/api/device/restart", [](httpd_req_t* req) {
+        if (!check_origin(req)) {
+          return ESP_FAIL;
+        }
         httpd_resp_send(req, "Restarting device", 0);
         event_loop()->onDelay(500, []() { ESP.restart(); });
         return ESP_OK;
