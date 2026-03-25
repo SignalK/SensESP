@@ -34,13 +34,26 @@ DigitalInputPcntCounter::DigitalInputPcntCounter(uint8_t pin, int pin_mode,
 }
 
 DigitalInputPcntCounter::~DigitalInputPcntCounter() {
+  esp_err_t err;
   if (pcnt_channel_) {
-    ESP_ERROR_CHECK(pcnt_del_channel(pcnt_channel_));
+    err = pcnt_del_channel(pcnt_channel_);
+    if (err != ESP_OK) {
+      ESP_LOGE("PCNT", "Failed to delete PCNT channel: %s", esp_err_to_name(err));
+    }
   }
   if (pcnt_unit_) {
-    ESP_ERROR_CHECK(pcnt_unit_stop(pcnt_unit_));
-    ESP_ERROR_CHECK(pcnt_unit_disable(pcnt_unit_));
-    ESP_ERROR_CHECK(pcnt_del_unit(pcnt_unit_));
+    err = pcnt_unit_stop(pcnt_unit_);
+    if (err != ESP_OK) {
+      ESP_LOGE("PCNT", "Failed to stop PCNT unit: %s", esp_err_to_name(err));
+    }
+    err = pcnt_unit_disable(pcnt_unit_);
+    if (err != ESP_OK) {
+      ESP_LOGE("PCNT", "Failed to disable PCNT unit: %s", esp_err_to_name(err));
+    }
+    err = pcnt_del_unit(pcnt_unit_);
+    if (err != ESP_OK) {
+      ESP_LOGE("PCNT", "Failed to delete PCNT unit: %s", esp_err_to_name(err));
+    }
   }
 }
 
