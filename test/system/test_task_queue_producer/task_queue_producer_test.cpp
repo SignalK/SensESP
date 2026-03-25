@@ -60,6 +60,24 @@ void test_safe_queue_pop_from_empty_returns_false() {
   TEST_ASSERT_EQUAL(99, value);  // value unchanged
 }
 
+void test_safe_queue_eviction() {
+  SafeQueue<int> q(5);  // max 5 entries
+  for (int i = 0; i < 10; i++) {
+    q.push(i);
+  }
+  // Should have evicted oldest, keeping last 5
+  TEST_ASSERT_EQUAL(5, q.size());
+
+  // Verify remaining values are 5..9 (oldest 0..4 evicted)
+  for (int i = 5; i < 10; i++) {
+    int value = -1;
+    bool got = q.pop(value, 0);
+    TEST_ASSERT_TRUE(got);
+    TEST_ASSERT_EQUAL(i, value);
+  }
+  TEST_ASSERT_TRUE(q.empty());
+}
+
 // ---------------------------------------------------------------------------
 // SafeQueue concurrent access from two FreeRTOS tasks
 // ---------------------------------------------------------------------------
@@ -312,6 +330,7 @@ void setup() {
   RUN_TEST(test_safe_queue_push_pop);
   RUN_TEST(test_safe_queue_fifo_order);
   RUN_TEST(test_safe_queue_pop_from_empty_returns_false);
+  RUN_TEST(test_safe_queue_eviction);
 
   // SafeQueue cross-task
   RUN_TEST(test_safe_queue_concurrent_access);
