@@ -29,7 +29,8 @@ class Frequency : public Transform<int, float> {
  private:
   float multiplier_;
   int ticks_ = 0;
-  unsigned int last_update_ = 0;
+  unsigned long last_update_ = 0;
+  bool first_call_ = true;
 };
 
 const String ConfigSchema(const Frequency& obj);
