@@ -140,8 +140,7 @@ bool CurveInterpolator::from_json(const JsonObject& doc) {
 void CurveInterpolator::clear_samples() { samples_.clear(); }
 
 void CurveInterpolator::add_sample(const Sample& sample) {
-  auto* sample_copy = new Sample(sample);
-  samples_.insert(*sample_copy);
+  samples_.insert(sample);
 }
 
 }  // namespace sensesp
