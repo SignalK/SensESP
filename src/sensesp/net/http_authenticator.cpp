@@ -158,7 +158,7 @@ String HTTPDigestAuthenticator::create_nonce() {
   encoded[output_length] = '\0';
   String nonce_str(encoded);
   // Add un-encoded nonce to the list of nonces
-  nonces_.push_front({nonce, 1});
+  nonces_.push_front({nonce, 0});
   constexpr size_t kMaxNonces = 50;
   while (nonces_.size() > kMaxNonces) {
     nonces_.pop_back();
