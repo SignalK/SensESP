@@ -57,7 +57,7 @@ typedef Nullable<bool> NullableBool;
 template <typename T>
 void convertFromJson(JsonVariantConst src, Nullable<T> &dst) {
   if (src.isNull()) {
-    dst = NullableInt::invalid();
+    dst = Nullable<T>::invalid();
   } else {
     dst = src.as<T>();
   }
