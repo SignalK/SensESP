@@ -9,7 +9,6 @@
 
 namespace sensesp {
 
-#define max(a, b) ((a) > (b) ? (a) : (b))
 #define PATTERN_END (-1)
 
 /**
