@@ -165,9 +165,9 @@ class SensESPApp : public SensESPBaseApp {
     this->http_server_ = std::make_shared<HTTPServer>();
     this->http_server_->set_captive_portal(captive_portal_enabled);
 
-    if (pending_admin_user_ != nullptr) {
+    if (pending_admin_user_.length() > 0) {
       http_server_->set_auth_credentials(
-          pending_admin_user_, pending_admin_pass_, true);
+          pending_admin_user_.c_str(), pending_admin_pass_.c_str(), true);
     }
 
     // Add the default HTTP server response handlers
@@ -308,8 +308,8 @@ class SensESPApp : public SensESPBaseApp {
   String ap_ssid_ = "";
   String ap_password_ = "thisisfine";
   const char* ota_password_ = nullptr;
-  const char* pending_admin_user_ = nullptr;
-  const char* pending_admin_pass_ = nullptr;
+  String pending_admin_user_;
+  String pending_admin_pass_;
 
   std::shared_ptr<MDNSDiscovery> mdns_discovery_;
   std::shared_ptr<HTTPServer> http_server_;
