@@ -1,5 +1,7 @@
 #include "digital_pcnt_input.h"
 
+#include "esp_log.h"
+
 #if ESP_ARDUINO_VERSION_MAJOR < 3
 #warning "The Pulse Counter API is only available in ESP32 Arduino Core 3.0.0 and later"
 #else
@@ -20,12 +22,13 @@ DigitalInputPcntCounter::DigitalInputPcntCounter(uint8_t pin, int pin_mode,
   ESP_ERROR_CHECK(configurePcnt(interrupt_type));
 
   event_loop()->onRepeat(read_delay_, [this]() {
-    noInterrupts();
+    // Note: there is a small TOCTOU window between pcnt_unit_get_count and
+    // pcnt_unit_clear_count where pulses can be lost. noInterrupts() does not
+    // help because PCNT is a hardware counter that counts independently.
     int count = 0;
     ESP_ERROR_CHECK(pcnt_unit_get_count(pcnt_unit_, &count));
     ESP_ERROR_CHECK(pcnt_unit_clear_count(pcnt_unit_));
     output_ = count;
-    interrupts();
     notify();
   });
 }
