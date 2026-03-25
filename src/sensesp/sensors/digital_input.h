@@ -216,12 +216,16 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
     });
 
     event_loop()->onTick([this]() {
-      if (triggered_ && (output_ != last_output_)) {
-        noInterrupts();
+      noInterrupts();
+      bool t = triggered_;
+      bool val = output_;
+      if (t && (val != last_output_)) {
         triggered_ = false;
-        last_output_ = output_;
+        last_output_ = val;
         interrupts();
         notify();
+      } else {
+        interrupts();
       }
     });
   }
