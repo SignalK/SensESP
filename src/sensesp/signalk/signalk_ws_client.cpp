@@ -438,6 +438,12 @@ void SKWSClient::on_receive_put(JsonDocument& message) {
       SKPutListener* listener = listeners[j];
       if (listener->get_sk_path().equals(path)) {
         take_received_updates_semaphore();
+        constexpr size_t kMaxReceivedUpdates = 20;
+        while (received_updates_.size() >= kMaxReceivedUpdates) {
+          received_updates_.pop_front();
+          ESP_LOGW(__FILENAME__,
+                   "Dropping oldest received update (queue full)");
+        }
         received_updates_.push_back(value);
         release_received_updates_semaphore();
         matched = true;
