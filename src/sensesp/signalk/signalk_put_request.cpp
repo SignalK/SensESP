@@ -6,7 +6,9 @@
 namespace sensesp {
 
 std::map<String, SKRequest::PendingRequest*> SKRequest::request_map_;
-SemaphoreHandle_t SKRequest::request_map_mutex_ = xSemaphoreCreateMutex();
+StaticSemaphore_t SKRequest::request_map_mutex_buffer_;
+SemaphoreHandle_t SKRequest::request_map_mutex_ =
+    xSemaphoreCreateMutexStatic(&SKRequest::request_map_mutex_buffer_);
 
 String SKRequest::send_request(JsonDocument& request,
                                std::function<void(JsonDocument&)> callback,

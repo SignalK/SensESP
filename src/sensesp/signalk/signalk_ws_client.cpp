@@ -304,8 +304,8 @@ void SKWSClient::on_receive_delta(uint8_t* payload, size_t length) {
   // Need to work on null-terminated strings
   constexpr size_t kMaxWsMessageSize = 4096;
   if (length > kMaxWsMessageSize) {
-    ESP_LOGW(__FILENAME__, "WebSocket message too large (%d bytes), dropping",
-             length);
+    ESP_LOGW(__FILENAME__, "WebSocket message too large (%u bytes), dropping",
+             (unsigned)length);
     return;
   }
   std::unique_ptr<char[]> buf(new char[length + 1]);

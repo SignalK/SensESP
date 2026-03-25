@@ -54,7 +54,10 @@ class SKRequest {
   /// responses from...
   static std::map<String, PendingRequest*> request_map_;
 
-  /// Mutex to protect request_map_ from concurrent access
+  /// Mutex to protect request_map_ from concurrent access.
+  /// Uses static allocation to avoid calling FreeRTOS APIs during
+  /// C++ static initialization (before the scheduler is running).
+  static StaticSemaphore_t request_map_mutex_buffer_;
   static SemaphoreHandle_t request_map_mutex_;
 
   /// Removes the specified request_id from the request_map,
