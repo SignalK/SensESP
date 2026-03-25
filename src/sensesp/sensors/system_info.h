@@ -48,13 +48,19 @@ class SystemHz : public ValueProducer<float> {
  public:
   SystemHz() {
     elapsed_millis_ = 0;
-    event_loop()->onRepeat(1000, [this]() { this->update(); });
+    repeat_event_ = event_loop()->onRepeat(1000, [this]() { this->update(); });
+  }
+  virtual ~SystemHz() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
   }
   String get_value_name() { return "systemhz"; }
 
  protected:
   uint32_t last_tick_count_ = 0;
   elapsedMillis elapsed_millis_;
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
   void update();
 };
 
@@ -68,11 +74,17 @@ class SystemHz : public ValueProducer<float> {
 class FreeMem : public ValueProducer<uint32_t> {
  public:
   FreeMem() {
-    event_loop()->onRepeat(1000, [this]() { this->update(); });
+    repeat_event_ = event_loop()->onRepeat(1000, [this]() { this->update(); });
+  }
+  virtual ~FreeMem() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
   }
   String get_value_name() { return "freemem"; }
 
  protected:
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
   void update();
 };
 
@@ -87,11 +99,17 @@ class FreeMem : public ValueProducer<uint32_t> {
 class Uptime : public ValueProducer<float> {
  public:
   Uptime() {
-    event_loop()->onRepeat(1000, [this]() { this->update(); });
+    repeat_event_ = event_loop()->onRepeat(1000, [this]() { this->update(); });
+  }
+  virtual ~Uptime() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
   }
   String get_value_name() { return "uptime"; }
 
  protected:
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
   void update();
 };
 
@@ -106,11 +124,17 @@ class Uptime : public ValueProducer<float> {
 class IPAddrDev : public ValueProducer<String> {
  public:
   IPAddrDev() {
-    event_loop()->onRepeat(10000, [this]() { this->update(); });
+    repeat_event_ = event_loop()->onRepeat(10000, [this]() { this->update(); });
+  }
+  virtual ~IPAddrDev() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
   }
   String get_value_name() { return "ipaddr"; }
 
  protected:
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
   void update();
 };
 
@@ -125,11 +149,17 @@ class IPAddrDev : public ValueProducer<String> {
 class WiFiSignal : public ValueProducer<int> {
  public:
   WiFiSignal() {
-    event_loop()->onRepeat(3000, [this]() { this->update(); });
+    repeat_event_ = event_loop()->onRepeat(3000, [this]() { this->update(); });
+  }
+  virtual ~WiFiSignal() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
   }
   String get_value_name() { return "wifisignal"; }
 
  protected:
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
   void update();
 };
 

@@ -33,6 +33,12 @@ class Repeat : public Transform<FROM, TO> {
     }
   }
 
+  virtual ~Repeat() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
+  }
+
   virtual void set(const FROM& input) override {
     this->emit(input);
     if (repeat_event_ != nullptr) {

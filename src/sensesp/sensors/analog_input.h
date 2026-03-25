@@ -2,6 +2,8 @@
 #define SENSESP_SENSORS_ANALOG_INPUT_H_
 
 #include <memory>
+
+#include "ReactESP.h"
 #include "analog_reader.h"
 #include "sensesp/ui/config_item.h"
 #include "sensor.h"
@@ -45,6 +47,12 @@ class [[deprecated("Use RepeatSensor and Arduino analogReadMilliVolts() instead"
   AnalogInput(uint8_t pin = A0, unsigned int read_delay = 200,
               const String& config_path = "", float output_scale = 1024.);
 
+  virtual ~AnalogInput() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
+  }
+
   virtual bool to_json(JsonObject& root) override;
   virtual bool from_json(const JsonObject& config) override;
 
@@ -53,6 +61,7 @@ class [[deprecated("Use RepeatSensor and Arduino analogReadMilliVolts() instead"
   unsigned int read_delay;
   float output_scale;
   std::unique_ptr<BaseAnalogReader> analog_reader_{};
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
   void update();
 };
 

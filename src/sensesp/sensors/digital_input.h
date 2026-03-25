@@ -3,6 +3,7 @@
 
 #include <elapsedMillis.h>
 
+#include "ReactESP.h"
 #include "sensesp/ui/config_item.h"
 #include "sensesp_base_app.h"
 #include "sensor.h"
@@ -57,13 +58,20 @@ class DigitalInputState : public DigitalInput, public Sensor<bool> {
         triggered_{false} {
     load();
 
-    event_loop()->onRepeat(read_delay_,
+    repeat_event_ = event_loop()->onRepeat(read_delay_,
                            [this]() { this->emit(digitalRead(pin_)); });
+  }
+
+  virtual ~DigitalInputState() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
   }
 
  private:
   int read_delay_;
   bool triggered_;
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
   virtual bool to_json(JsonObject& root) override;
   virtual bool from_json(const JsonObject& config) override;
 };
@@ -96,15 +104,24 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
                       unsigned int read_delay, String config_path = "")
       : DigitalInputCounter(pin, pin_mode, interrupt_type, read_delay,
                             config_path, [this]() { this->counter_ = this->counter_ + 1; }) {
-    event_loop()->onInterrupt(pin_, interrupt_type_, interrupt_handler_);
+    isr_event_ = event_loop()->onInterrupt(pin_, interrupt_type_, interrupt_handler_);
 
-    event_loop()->onRepeat(read_delay_, [this]() {
+    repeat_event_ = event_loop()->onRepeat(read_delay_, [this]() {
       noInterrupts();
       output_ = counter_;
       counter_ = 0;
       interrupts();
       notify();
     });
+  }
+
+  virtual ~DigitalInputCounter() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
+    if (isr_event_ != nullptr) {
+      isr_event_->remove(event_loop().get());
+    }
   }
 
   virtual bool to_json(JsonObject& root) override;
@@ -124,6 +141,8 @@ class DigitalInputCounter : public DigitalInput, public Sensor<int> {
 
   unsigned int read_delay_;
   volatile unsigned int counter_ = 0;
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
+  reactesp::ISREvent* isr_event_ = nullptr;
 
  private:
   int interrupt_type_;
@@ -210,12 +229,12 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
     output_ = (bool)digitalRead(pin_);
     last_output_ = !output_;  // ensure that we always send the first output_
 
-    event_loop()->onInterrupt(pin_, interrupt_type_, [this]() {
+    isr_event_ = event_loop()->onInterrupt(pin_, interrupt_type_, [this]() {
       output_ = (bool)digitalRead(pin_);
       triggered_ = true;
     });
 
-    event_loop()->onTick([this]() {
+    tick_event_ = event_loop()->onTick([this]() {
       noInterrupts();
       bool t = triggered_;
       bool val = output_;
@@ -230,10 +249,21 @@ class DigitalInputChange : public DigitalInput, public Sensor<bool> {
     });
   }
 
+  virtual ~DigitalInputChange() {
+    if (tick_event_ != nullptr) {
+      tick_event_->remove(event_loop());
+    }
+    if (isr_event_ != nullptr) {
+      isr_event_->remove(event_loop().get());
+    }
+  }
+
  private:
   int interrupt_type_;
   bool triggered_;
   bool last_output_;
+  reactesp::TickEvent* tick_event_ = nullptr;
+  reactesp::ISREvent* isr_event_ = nullptr;
   virtual bool to_json(JsonObject& doc) override { return true; }
   virtual bool from_json(const JsonObject& config) override { return true; }
 };
