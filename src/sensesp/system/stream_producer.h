@@ -39,8 +39,9 @@ class StreamLineProducer : public ValueProducer<String> {
       Stream* stream,
       std::shared_ptr<reactesp::EventLoop> event_loop_param = event_loop(),
       int max_line_length = 256)
-      : stream_{stream}, max_line_length_{max_line_length} {
-    buf_ = new char[max_line_length_ + 1];
+      : stream_{stream},
+        max_line_length_{max_line_length},
+        buf_(new char[max_line_length_ + 1]) {
     read_event_ =
         event_loop_param->onAvailable(*stream_, [this]() { this->receive_line(); });
   }
@@ -48,7 +49,7 @@ class StreamLineProducer : public ValueProducer<String> {
  protected:
   const int max_line_length_;
   int buf_pos = 0;
-  char* buf_;
+  std::unique_ptr<char[]> buf_;
   Stream* stream_;
   reactesp::StreamEvent* read_event_;
 
