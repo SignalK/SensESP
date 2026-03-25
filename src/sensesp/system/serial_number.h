@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <esp_mac.h>
 
-uint64_t GetBoardSerialNumber() {
+inline uint64_t GetBoardSerialNumber() {
   uint8_t chipid[6];
   esp_efuse_mac_get_default(chipid);
   return ((uint64_t)chipid[0] << 0) + ((uint64_t)chipid[1] << 8) +
