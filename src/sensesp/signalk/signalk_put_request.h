@@ -54,6 +54,9 @@ class SKRequest {
   /// responses from...
   static std::map<String, PendingRequest*> request_map_;
 
+  /// Mutex to protect request_map_ from concurrent access
+  static SemaphoreHandle_t request_map_mutex_;
+
   /// Removes the specified request_id from the request_map,
   /// cleaning up outstanding events if necessary
   static void remove_request(String request_id);

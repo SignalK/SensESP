@@ -6,6 +6,7 @@
 namespace sensesp {
 
 std::map<String, SKRequest::PendingRequest*> SKRequest::request_map_;
+SemaphoreHandle_t SKRequest::request_map_mutex_ = xSemaphoreCreateMutex();
 
 String SKRequest::send_request(JsonDocument& request,
                                std::function<void(JsonDocument&)> callback,
@@ -23,15 +24,19 @@ String SKRequest::send_request(JsonDocument& request,
   // assume its not coming.
   pending_request->timeout_cleanup =
       event_loop()->onDelay(timeout, [pending_request]() {
-        // Mark the delay eventll as it will be cleaned up by the ReactESP
+        // Mark the delay event as it will be cleaned up by the ReactESP
         // framework if this executes...
         ESP_LOGW(__FILENAME__, "No response from server for request Id %s",
                  pending_request->request_id.c_str());
         pending_request->timeout_cleanup = nullptr;
+        xSemaphoreTake(request_map_mutex_, portMAX_DELAY);
         SKRequest::remove_request(pending_request->request_id);
+        xSemaphoreGive(request_map_mutex_);
       });
 
+  xSemaphoreTake(request_map_mutex_, portMAX_DELAY);
   request_map_[pending_request->request_id] = pending_request;
+  xSemaphoreGive(request_map_mutex_);
 
   // Now, send the actual request to the server...
   request["requestId"] = pending_request->request_id;
@@ -56,6 +61,7 @@ SKRequest::PendingRequest* SKRequest::get_request(String request_id) {
 
 void SKRequest::handle_response(JsonDocument& response) {
   String request_id = response["requestId"];
+  xSemaphoreTake(request_map_mutex_, portMAX_DELAY);
   PendingRequest* pending_request = get_request(request_id);
   if (pending_request != nullptr) {
     pending_request->callback(response);
@@ -70,9 +76,12 @@ void SKRequest::handle_response(JsonDocument& response) {
              "Received request response for an untracked request: %s",
              request_id.c_str());
   }
+  xSemaphoreGive(request_map_mutex_);
 }
 
 void SKRequest::remove_request(String request_id) {
+  // Note: caller must hold request_map_mutex_ when calling from
+  // handle_response. The timeout lambda acquires it independently.
   PendingRequest* pending_request = SKRequest::get_request(request_id);
   if (pending_request != nullptr) {
     // First, stop any pending timeout handlers...
@@ -109,7 +118,10 @@ void SKPutRequestBase::send_put_request() {
 }
 
 bool SKPutRequestBase::request_pending() {
-  return (get_request(this->pending_request_id_) != nullptr);
+  xSemaphoreTake(request_map_mutex_, portMAX_DELAY);
+  bool pending = (get_request(this->pending_request_id_) != nullptr);
+  xSemaphoreGive(request_map_mutex_);
+  return pending;
 }
 
 void SKPutRequestBase::on_response(JsonDocument& response) {
