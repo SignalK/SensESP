@@ -235,6 +235,7 @@ void SKWSClient::on_error() {
  */
 void SKWSClient::on_connected() {
   this->set_connection_state(SKWSConnectionState::kSKWSConnected);
+  this->reset_reconnect_interval();
   this->sk_delta_queue_->reset_meta_send();
   ESP_LOGI(__FILENAME__, "Subscribing to Signal K listeners...");
   this->subscribe_listeners();
@@ -563,6 +564,10 @@ void SKWSClient::connect() {
   if (get_connection_state() != SKWSConnectionState::kSKWSDisconnected) {
     return;
   }
+
+  // Schedule next attempt with backoff in case this one fails.
+  // Will be reset on successful connection.
+  schedule_reconnect();
 
   if (!WiFi.isConnected() && WiFi.getMode() != WIFI_MODE_AP) {
     ESP_LOGI(
