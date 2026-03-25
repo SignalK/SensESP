@@ -89,7 +89,7 @@ static void producer_task(void* param) {
 }
 
 void test_safe_queue_concurrent_access() {
-  SafeQueue<int> queue;
+  SafeQueue<int> queue(kConcurrentCount + 1);
   ConcurrentTestContext ctx = {};
   ctx.queue = &queue;
   ctx.done = xSemaphoreCreateBinary();
@@ -150,7 +150,7 @@ static void stress_producer_task(void* param) {
 }
 
 void test_safe_queue_stress() {
-  SafeQueue<int> queue;
+  SafeQueue<int> queue(kStressCount + 1);
   StressTestContext ctx = {};
   ctx.queue = &queue;
   ctx.done = xSemaphoreCreateBinary();

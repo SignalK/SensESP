@@ -25,7 +25,7 @@ class SemaphoreValue : public ValueConsumer<T> {
  public:
   SemaphoreValue() : ValueConsumer<T>() {
     semaphore_ = xSemaphoreCreateBinary();
-    mutex_ = xSemaphoreCreateMutex();
+    mutex_ = xSemaphoreCreateMutexStatic(&mutex_buffer_);
   }
 
   /**
@@ -66,6 +66,7 @@ class SemaphoreValue : public ValueConsumer<T> {
  protected:
   T value_;
   SemaphoreHandle_t semaphore_;
+  StaticSemaphore_t mutex_buffer_;
   SemaphoreHandle_t mutex_;
 };
 
