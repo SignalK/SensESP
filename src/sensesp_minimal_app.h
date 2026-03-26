@@ -7,6 +7,9 @@
 
 namespace sensesp {
 
+// NOTE: This class currently adds no functionality over SensESPBaseApp.
+// It exists for type distinction in the builder pattern.
+// See GitHub issue #901 for discussion.
 class SensESPMinimalApp : public SensESPBaseApp {
  public:
   SensESPMinimalApp(SensESPMinimalApp &other) = delete;

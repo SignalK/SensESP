@@ -40,6 +40,10 @@ inline void SetupSerialDebug(uint32_t baudrate) {
  *
  * @see SensESPApp
  */
+// WARNING: This class uses a shared_ptr singleton pattern. Only one instance
+// should exist at a time. Constructing multiple instances or calling get()
+// before the builder sets up the instance will produce unexpected behavior.
+// See GitHub issue #900 for planned improvements.
 class SensESPBaseApp {
  protected:
   std::shared_ptr<reactesp::EventLoop> event_loop_;

@@ -13,10 +13,10 @@ Resettable::Resettable(int priority) : priority(priority) {
 
 void Resettable::reset_all() {
   ESP_LOGI(__FILENAME__, "Resetting all resettable objects");
-  while (!reset_list.empty()) {
-    auto& resettable = *reset_list.top();
-    resettable.reset();
-    reset_list.pop();
+  auto copy = reset_list;
+  while (!copy.empty()) {
+    copy.top()->reset();
+    copy.pop();
   }
 }
 
