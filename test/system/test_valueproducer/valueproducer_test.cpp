@@ -10,6 +10,7 @@
 #include <Arduino.h>
 
 #include "sensesp/system/lambda_consumer.h"
+#include "sensesp/system/observable.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/valueproducer.h"
 #include "sensesp/transforms/lambda_transform.h"
@@ -134,6 +135,41 @@ void test_connect_to_multiple_shared_ptr_consumers() {
 }
 
 // ---------------------------------------------------------------------------
+// Observable::detach removes observer by ID
+// ---------------------------------------------------------------------------
+
+void test_detach_removes_observer() {
+  Observable observable;
+  int call_count = 0;
+
+  int id = observable.attach([&call_count]() { call_count++; });
+  observable.notify();
+  TEST_ASSERT_EQUAL(1, call_count);
+
+  observable.detach(id);
+  observable.notify();
+  TEST_ASSERT_EQUAL(1, call_count);  // not called again
+}
+
+void test_detach_only_removes_target() {
+  Observable observable;
+  int count_a = 0;
+  int count_b = 0;
+
+  int id_a = observable.attach([&count_a]() { count_a++; });
+  observable.attach([&count_b]() { count_b++; });
+
+  observable.notify();
+  TEST_ASSERT_EQUAL(1, count_a);
+  TEST_ASSERT_EQUAL(1, count_b);
+
+  observable.detach(id_a);
+  observable.notify();
+  TEST_ASSERT_EQUAL(1, count_a);  // detached, not called
+  TEST_ASSERT_EQUAL(2, count_b);  // still attached, called
+}
+
+// ---------------------------------------------------------------------------
 // Test runner
 // ---------------------------------------------------------------------------
 
@@ -148,6 +184,8 @@ void setup() {
   RUN_TEST(test_connect_to_inline_make_shared);
   RUN_TEST(test_connect_to_shared_ptr_chain);
   RUN_TEST(test_connect_to_multiple_shared_ptr_consumers);
+  RUN_TEST(test_detach_removes_observer);
+  RUN_TEST(test_detach_only_removes_target);
 
   UNITY_END();
 }
