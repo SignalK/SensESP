@@ -195,14 +195,15 @@ class SKWSClient : public FileSystemSaveable,
 
   bool take_received_updates_semaphore(unsigned long int timeout_ms = 0) {
     if (timeout_ms == 0) {
-      return xSemaphoreTake(received_updates_semaphore_, portMAX_DELAY) ==
-             pdTRUE;
+      return xSemaphoreTakeRecursive(received_updates_semaphore_,
+                                     portMAX_DELAY) == pdTRUE;
     } else {
-      return xSemaphoreTake(received_updates_semaphore_, timeout_ms) == pdTRUE;
+      return xSemaphoreTakeRecursive(received_updates_semaphore_,
+                                     timeout_ms) == pdTRUE;
     }
   }
   void release_received_updates_semaphore() {
-    xSemaphoreGive(received_updates_semaphore_);
+    xSemaphoreGiveRecursive(received_updates_semaphore_);
   }
 
   /////////////////////////////////////////////////////////

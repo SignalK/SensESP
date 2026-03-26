@@ -12,6 +12,8 @@
 #include <mbedtls/x509_crt.h>
 #endif
 
+#include <memory>
+
 #include "Arduino.h"
 #include "elapsedMillis.h"
 #include "esp_arduino_version.h"
@@ -300,17 +302,22 @@ void SKWSClient::subscribe_listeners() {
  */
 void SKWSClient::on_receive_delta(uint8_t* payload, size_t length) {
   // Need to work on null-terminated strings
-  char buf[length + 1];
-  memcpy(buf, payload, length);
+  constexpr size_t kMaxWsMessageSize = 4096;
+  if (length > kMaxWsMessageSize) {
+    ESP_LOGW(__FILENAME__, "WebSocket message too large (%u bytes), dropping",
+             (unsigned)length);
+    return;
+  }
+  std::unique_ptr<char[]> buf(new char[length + 1]);
+  memcpy(buf.get(), payload, length);
   buf[length] = 0;
 
 #ifdef SIGNALK_PRINT_RCV_DELTA
-  ESP_LOGD(__FILENAME__, "Websocket payload received: %s", (char*)buf);
+  ESP_LOGD(__FILENAME__, "Websocket payload received: %s", buf.get());
 #endif
 
   JsonDocument message;
-  // JsonObject message = jsonDoc.as<JsonObject>();
-  auto error = deserializeJson(message, buf);
+  auto error = deserializeJson(message, buf.get());
 
   if (!error) {
     if (message["updates"].is<JsonVariant>()) {
@@ -354,6 +361,12 @@ void SKWSClient::on_receive_updates(JsonDocument& message) {
 
       // push all values into a separate list for processing
       // in the main task
+      constexpr size_t kMaxReceivedUpdates = 20;
+      while (received_updates_.size() >= kMaxReceivedUpdates) {
+        received_updates_.pop_front();
+        ESP_LOGW(__FILENAME__,
+                 "Dropping oldest received update (queue full)");
+      }
       received_updates_.push_back(value_doc);
     }
   }
@@ -412,45 +425,55 @@ void SKWSClient::process_received_updates() {
 void SKWSClient::on_receive_put(JsonDocument& message) {
   // Process PUT requests...
   JsonArray puts = message["put"];
-  size_t response_count = 0;
+  bool all_matched = true;
   for (size_t i = 0; i < puts.size(); i++) {
     JsonObject value = puts[i];
     const char* path = value["path"];
-    String str_val = value["value"].as<String>();
+    bool matched = false;
 
     SKListener::take_semaphore();
     const std::vector<SKPutListener*>& listeners =
         SKPutListener::get_listeners();
-    for (size_t i = 0; i < listeners.size(); i++) {
-      SKPutListener* listener = listeners[i];
+    for (size_t j = 0; j < listeners.size(); j++) {
+      SKPutListener* listener = listeners[j];
       if (listener->get_sk_path().equals(path)) {
         take_received_updates_semaphore();
+        constexpr size_t kMaxReceivedUpdates = 20;
+        while (received_updates_.size() >= kMaxReceivedUpdates) {
+          received_updates_.pop_front();
+          ESP_LOGW(__FILENAME__,
+                   "Dropping oldest received update (queue full)");
+        }
         received_updates_.push_back(value);
         release_received_updates_semaphore();
-        response_count++;
+        matched = true;
       }
     }
     SKListener::release_semaphore();
 
-    // Send back a request response if still connected
-    if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
-      JsonDocument put_response;
-      put_response["requestId"] = message["requestId"];
-      if (response_count == puts.size()) {
-        put_response["state"] = "COMPLETED";
-        put_response["statusCode"] = 200;
-      } else {
-        put_response["state"] = "FAILED";
-        put_response["statusCode"] = 405;
-      }
-      String response_text;
-      serializeJson(put_response, response_text);
-      int result = esp_websocket_client_send_text(
-          client_, response_text.c_str(), response_text.length(),
-          kWsSendTimeoutTicks);
-      if (result < 0) {
-        ESP_LOGE(__FILENAME__, "PUT response send failed (result=%d)", result);
-      }
+    if (!matched) {
+      all_matched = false;
+    }
+  }
+
+  // Send back a single request response if still connected
+  if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
+    JsonDocument put_response;
+    put_response["requestId"] = message["requestId"];
+    if (all_matched) {
+      put_response["state"] = "COMPLETED";
+      put_response["statusCode"] = 200;
+    } else {
+      put_response["state"] = "FAILED";
+      put_response["statusCode"] = 405;
+    }
+    String response_text;
+    serializeJson(put_response, response_text);
+    int result = esp_websocket_client_send_text(
+        client_, response_text.c_str(), response_text.length(),
+        kWsSendTimeoutTicks);
+    if (result < 0) {
+      ESP_LOGE(__FILENAME__, "PUT response send failed (result=%d)", result);
     }
   }
 }
