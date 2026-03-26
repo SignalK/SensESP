@@ -70,7 +70,7 @@ class TimeCounter : public Transform<T, double> {
     if (config["duration_s"].is<double>()) {
       duration_at_start_ms_ =
           config["duration_s"].as<double>() * 1000;  // convert to milliseconds
-    } else if (!config["duration"].is<double>()) {
+    } else if (config["duration"].is<double>()) {
       // If the duration is not in seconds, try to read it in milliseconds
       duration_at_start_ms_ = config["duration"];
     } else {

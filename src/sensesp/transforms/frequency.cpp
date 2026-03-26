@@ -12,8 +12,13 @@ Frequency::Frequency(float multiplier, const String& config_path)
 }
 
 void Frequency::set(const int& input) {
-  uint64_t const cur_millis = millis();
-  uint64_t const elapsed_millis = cur_millis - last_update_;
+  unsigned long const cur_millis = millis();
+  if (first_call_) {
+    first_call_ = false;
+    last_update_ = cur_millis;
+    return;
+  }
+  unsigned long const elapsed_millis = cur_millis - last_update_;
   last_update_ = cur_millis;
   this->emit(multiplier_ * input / (elapsed_millis / 1000.));
 }

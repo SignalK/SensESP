@@ -52,10 +52,10 @@ bool MovingAverage::from_json(const JsonObject& config) {
   int const n_new = config["sample_size"];
   // need to reset the ring buffer if size changes
   if (sample_size_ != n_new) {
+    sample_size_ = n_new;
     buf_.assign(sample_size_, 0);
     ptr_ = 0;
     initialized_ = false;
-    sample_size_ = n_new;
   }
   return true;
 }

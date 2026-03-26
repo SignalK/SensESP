@@ -49,7 +49,8 @@ class Hysteresis : public LambdaTransform<IN, OUT, IN, IN, OUT, OUT> {
               return this->last_value_;
             },
             lower_threshold, upper_threshold, low_output, high_output,
-            hysteresis_param_info, config_path) {}
+            hysteresis_param_info, config_path),
+        last_value_(low_output) {}
 
  private:
   OUT last_value_;

@@ -9,6 +9,7 @@ VoltageDividerR1::VoltageDividerR1(float R2, float Vin,
 }
 
 void VoltageDividerR1::set(const float& Vout) {
+  if (Vout == 0.0f) return;
   this->emit((Vin_ - Vout) * R2_ / Vout);
 }
 
@@ -47,6 +48,7 @@ VoltageDividerR2::VoltageDividerR2(float R1, float Vin,
 }
 
 void VoltageDividerR2::set(const float& Vout) {
+  if (Vin_ == Vout) return;
   this->emit((Vout * R1_) / (Vin_ - Vout));
 }
 
