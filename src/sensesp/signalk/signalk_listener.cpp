@@ -6,7 +6,9 @@ namespace sensesp {
 
 std::vector<SKListener *> SKListener::listeners_;
 
-SemaphoreHandle_t SKListener::semaphore_ = xSemaphoreCreateRecursiveMutex();
+StaticSemaphore_t SKListener::semaphore_buffer_;
+SemaphoreHandle_t SKListener::semaphore_ =
+    xSemaphoreCreateRecursiveMutexStatic(&SKListener::semaphore_buffer_);
 
 SKListener::SKListener(const String &sk_path, int listen_delay,
                        const String &config_path)

@@ -24,7 +24,8 @@ template <typename T>
 class SemaphoreValue : public ValueConsumer<T> {
  public:
   SemaphoreValue() : ValueConsumer<T>() {
-    semaphore_ = xSemaphoreCreateBinary();
+    semaphore_ = xSemaphoreCreateBinaryStatic(&semaphore_buffer_);
+    mutex_ = xSemaphoreCreateMutexStatic(&mutex_buffer_);
   }
 
   /**
@@ -36,7 +37,9 @@ class SemaphoreValue : public ValueConsumer<T> {
   bool wait(T& destination, unsigned int max_duration_ms) {
     if (xSemaphoreTake(semaphore_, max_duration_ms / portTICK_PERIOD_MS) ==
         pdTRUE) {
+      xSemaphoreTake(mutex_, portMAX_DELAY);
       destination = value_;
+      xSemaphoreGive(mutex_);
       return true;
     }
     return false;
@@ -52,7 +55,9 @@ class SemaphoreValue : public ValueConsumer<T> {
   }
 
   void set(const T& new_value) override {
+    xSemaphoreTake(mutex_, portMAX_DELAY);
     value_ = new_value;
+    xSemaphoreGive(mutex_);
     xSemaphoreGive(semaphore_);
   }
 
@@ -60,7 +65,10 @@ class SemaphoreValue : public ValueConsumer<T> {
 
  protected:
   T value_;
+  StaticSemaphore_t semaphore_buffer_;
   SemaphoreHandle_t semaphore_;
+  StaticSemaphore_t mutex_buffer_;
+  SemaphoreHandle_t mutex_;
 };
 
 }  // namespace sensesp

@@ -55,6 +55,7 @@ class SKDeltaQueue {
   // Adds Signal K meta data to the specified document
   void add_metadata(JsonArray updates);
 
+  StaticSemaphore_t semaphore_buffer_;
   SemaphoreHandle_t semaphore_ = NULL;
 };
 
