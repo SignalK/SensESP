@@ -111,9 +111,8 @@ int HTTPDigestAuthenticator::authenticate_digest(httpd_req_t* req) {
   }
 
   // Calculate the expected response
-  String a1 = username_ + ":" + realm_ + ":" + password_;
   String a2 = method_str + ":" + uri;
-  String expected_response = MD5(MD5(a1) + ":" + nonce + ":" + nc + ":" +
+  String expected_response = MD5(ha1_ + ":" + nonce + ":" + nc + ":" +
                                  cnonce + ":" + qop + ":" + MD5(a2));
 
   return response == expected_response ? 1 : 0;
@@ -159,7 +158,11 @@ String HTTPDigestAuthenticator::create_nonce() {
   encoded[output_length] = '\0';
   String nonce_str(encoded);
   // Add un-encoded nonce to the list of nonces
-  nonces_.push_front({nonce, 1});
+  nonces_.push_front({nonce, 0});
+  constexpr size_t kMaxNonces = 50;
+  while (nonces_.size() > kMaxNonces) {
+    nonces_.pop_back();
+  }
   return nonce_str;
 }
 
@@ -176,11 +179,16 @@ int HTTPDigestAuthenticator::find_nonce(String nonce, int count) {
   decoded_nonce = String(decoded);
   for (it = nonces_.begin(); it != nonces_.end(); it++) {
     if (it->nonce == decoded_nonce) {
-      // Disable nonce count checking; at least Chrome sends NC values out of
-      // order if (it->count > count) {
-      //   return 0;
-      // }
-      it->count++;
+      // Reject replayed nonce counts. Allow a small tolerance window
+      // (nc may arrive slightly out of order with concurrent requests,
+      // e.g., Chrome sends multiple subrequests in parallel).
+      constexpr int kNcTolerance = 5;
+      if (count <= it->count && (it->count - count) >= kNcTolerance) {
+        return 0;  // reject clearly replayed nonce count
+      }
+      if (count > it->count) {
+        it->count = count;  // advance high-water mark
+      }
       // Check if the nonce is stale
       String timestamp_str = decoded_nonce.substring(0, nonce.indexOf(' '));
       unsigned long timestamp = timestamp_str.toInt();
@@ -188,7 +196,6 @@ int HTTPDigestAuthenticator::find_nonce(String nonce, int count) {
         nonces_.erase(it);
         return -1;
       }
-      it->count = count + 1;
       return 1;
     }
     // If the nonce age is 4*nonce_max_age_, remove it from the list

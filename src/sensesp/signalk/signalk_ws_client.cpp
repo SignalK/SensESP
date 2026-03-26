@@ -662,7 +662,7 @@ void SKWSClient::test_token(const String server_address,
   ESP_LOGD(__FILENAME__, "Testing token with url %s", url.c_str());
 
   const String full_token = String("Bearer ") + auth_token_;
-  ESP_LOGD(__FILENAME__, "Authorization: %s", full_token.c_str());
+  ESP_LOGD(__FILENAME__, "Authorization: %.8s...[redacted]", full_token.c_str());
 
   esp_http_client_config_t config = {};
   config.url = url.c_str();

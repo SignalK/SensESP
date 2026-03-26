@@ -71,7 +71,9 @@ class HTTPServer : public FileSystemSaveable {
     load();
     if (auth_required_) {
       authenticator_ = std::unique_ptr<HTTPDigestAuthenticator>(
-          new HTTPDigestAuthenticator(username_, password_, auth_realm_));
+          new HTTPDigestAuthenticator(
+              HTTPDigestAuthenticator::PrecomputedHA1{},
+              username_, ha1_, auth_realm_));
     }
     event_loop()->onDelay(0, [this]() {
       esp_err_t error = httpd_start(&server_, &config_);
@@ -109,7 +111,8 @@ class HTTPServer : public FileSystemSaveable {
   void set_auth_credentials(const String& username, const String& password,
                             bool auth_required = true) {
     username_ = username;
-    password_ = password;
+    String realm = "Login required for " + SensESPBaseApp::get_hostname();
+    ha1_ = MD5(username + ":" + realm + ":" + password);
     auth_required_ = auth_required;
   }
 
@@ -120,7 +123,7 @@ class HTTPServer : public FileSystemSaveable {
   virtual bool to_json(JsonObject& config) override {
     config["auth_required"] = auth_required_;
     config["username"] = username_;
-    config["password"] = password_;
+    config["ha1"] = ha1_;
 
     return true;
   }
@@ -132,8 +135,14 @@ class HTTPServer : public FileSystemSaveable {
     if (config["username"].is<String>()) {
       username_ = config["username"].as<String>();
     }
-    if (config["password"].is<String>()) {
-      password_ = config["password"].as<String>();
+    if (config["ha1"].is<String>()) {
+      ha1_ = config["ha1"].as<String>();
+    } else if (config["password"].is<String>()) {
+      // Migrate from old plaintext password format
+      String password = config["password"].as<String>();
+      String realm = "Login required for " + SensESPBaseApp::get_hostname();
+      ha1_ = MD5(username_ + ":" + realm + ":" + password);
+      save();
     }
     return true;
   }
@@ -147,7 +156,7 @@ class HTTPServer : public FileSystemSaveable {
   httpd_handle_t server_ = nullptr;
   httpd_config_t config_;
   String username_;
-  String password_;
+  String ha1_;  ///< Pre-computed MD5(username:realm:password)
   bool auth_required_ = false;
   std::unique_ptr<HTTPAuthenticator> authenticator_;
 

@@ -48,7 +48,20 @@ class HTTPDigestAuthenticator : public HTTPAuthenticator {
                           unsigned long nonce_max_age = 900000)
       : HTTPAuthenticator(),
         username_(username),
-        password_(password),
+        realm_(realm),
+        nonce_max_age_(nonce_max_age) {
+    ha1_ = MD5(username + ":" + realm + ":" + password);
+    secret_ = get_random_hex_string();
+  }
+
+  /// Construct with a pre-computed HA1 hash (avoids storing plaintext password)
+  struct PrecomputedHA1 {};
+  HTTPDigestAuthenticator(PrecomputedHA1, String username, String ha1,
+                          String realm,
+                          unsigned long nonce_max_age = 900000)
+      : HTTPAuthenticator(),
+        username_(username),
+        ha1_(ha1),
         realm_(realm),
         nonce_max_age_(nonce_max_age) {
     secret_ = get_random_hex_string();
@@ -62,7 +75,7 @@ class HTTPDigestAuthenticator : public HTTPAuthenticator {
   esp_err_t request_authentication(httpd_req_t* req, bool stale = false);
 
   String username_;
-  String password_;
+  String ha1_;  ///< Pre-computed MD5(username:realm:password)
   String realm_;
   unsigned long nonce_max_age_;
   String secret_;  ///< Secret used to generate the nonce. Gets reset every
