@@ -141,21 +141,19 @@ static void websocket_event_handler(void* handler_args,
 }
 
 void ExecuteWebSocketTask(void* /*parameter*/) {
-  elapsedMillis connect_loop_elapsed = 0;
   elapsedMillis delta_loop_elapsed = 0;
 
   ws_client->connect();
 
   while (true) {
-    if (connect_loop_elapsed > 2000) {
-      connect_loop_elapsed = 0;
+    if (ws_client->is_connect_due()) {
       ws_client->connect();
     }
     if (delta_loop_elapsed > 5) {
       delta_loop_elapsed = 0;
       ws_client->send_delta();
     }
-    delay(20);
+    vTaskDelay(pdMS_TO_TICKS(100));
   }
 }
 
@@ -193,12 +191,6 @@ SKWSClient::SKWSClient(const String& config_path,
                 this, 1, NULL);
     MDNS.addService("signalk-sensesp", "tcp", 80);
   });
-}
-
-void SKWSClient::connect_loop() {
-  if (this->get_connection_state() == SKWSConnectionState::kSKWSDisconnected) {
-    this->connect();
-  }
 }
 
 /**
@@ -239,6 +231,7 @@ void SKWSClient::on_error() {
  */
 void SKWSClient::on_connected() {
   this->set_connection_state(SKWSConnectionState::kSKWSConnected);
+  this->reset_reconnect_interval();
   this->sk_delta_queue_->reset_meta_send();
   ESP_LOGI(__FILENAME__, "Subscribing to Signal K listeners...");
   this->subscribe_listeners();
@@ -589,6 +582,10 @@ void SKWSClient::connect() {
     return;
   }
 
+  // Schedule next attempt with backoff in case this one fails.
+  // Will be reset on successful connection.
+  schedule_reconnect();
+
   if (!WiFi.isConnected() && WiFi.getMode() != WIFI_MODE_AP) {
     ESP_LOGI(
         __FILENAME__,
@@ -844,22 +841,22 @@ void SKWSClient::send_access_request(const String server_address,
     ESP_LOGI(__FILENAME__, "Server message: %s", message.c_str());
   }
 
-  // HTTP 400 with href means "already requested" - we can poll the existing request
+  // HTTP 400 with href means "already requested" - save href for polling on
+  // next connect() cycle (after backoff)
   if (http_code == 400 && href.length() > 0 && href.startsWith("/")) {
-    ESP_LOGI(__FILENAME__, "Existing request found, polling href: %s", href.c_str());
+    ESP_LOGI(__FILENAME__, "Existing request found, will poll href: %s", href.c_str());
     polling_href_ = href;
     save();
-    delay(5000);
-    this->poll_access_request(server_address, server_port, this->polling_href_);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     return;
   }
 
-  // HTTP 202 with href means new request pending
+  // HTTP 202 with href means new request pending - save href for polling on
+  // next connect() cycle (after backoff)
   if (http_code == 202 && href.length() > 0 && href.startsWith("/")) {
     polling_href_ = href;
     save();
-    delay(5000);
-    this->poll_access_request(server_address, server_port, this->polling_href_);
+    set_connection_state(SKWSConnectionState::kSKWSDisconnected);
     return;
   }
 
@@ -952,7 +949,6 @@ void SKWSClient::poll_access_request(const String server_address,
     ESP_LOGD(__FILENAME__, "%s", state.c_str());
     if (state == "PENDING") {
       set_connection_state(SKWSConnectionState::kSKWSDisconnected);
-      delay(5000);
       return;
     }
     if (state == "COMPLETED") {

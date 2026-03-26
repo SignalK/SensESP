@@ -3,6 +3,8 @@
 
 #include "sensesp.h"
 
+#include <algorithm>
+
 #include <ArduinoJson.h>
 #include <esp_websocket_client.h>
 #include <functional>
@@ -80,6 +82,7 @@ class SKWSClient : public FileSystemSaveable,
   void loop();
   bool is_connected();
   void restart();
+  bool is_connect_due() const { return millis() >= next_attempt_ms_; }
   void send_delta();
 
   /**
@@ -165,6 +168,9 @@ class SKWSClient : public FileSystemSaveable,
   bool server_detected_ = false;
   bool token_test_success_ = false;
 
+  unsigned long next_attempt_ms_ = 0;
+  unsigned long connect_interval_ms_ = 2000;
+
   // SSL/TLS configuration
   bool ssl_enabled_ = false;
   bool tofu_enabled_ = true;  // TOFU enabled by default
@@ -214,7 +220,6 @@ class SKWSClient : public FileSystemSaveable,
   /////////////////////////////////////////////////////////
   // SKWSClient task methods
 
-  void connect_loop();
   void test_token(const String host, const uint16_t port);
   void send_access_request(const String host, const uint16_t port);
   void poll_access_request(const String host, const uint16_t port,
@@ -229,6 +234,17 @@ class SKWSClient : public FileSystemSaveable,
     connection_state_.set(state);
   }
   SKWSConnectionState get_connection_state() { return task_connection_state_; }
+
+  void schedule_reconnect() {
+    next_attempt_ms_ = millis() + connect_interval_ms_ +
+                       (esp_random() % (connect_interval_ms_ / 4 + 1));
+    connect_interval_ms_ =
+        std::min(connect_interval_ms_ * 2, (unsigned long)60000);
+  }
+
+  void reset_reconnect_interval() {
+    connect_interval_ms_ = 2000;
+  }
 };
 
 inline const String ConfigSchema(const SKWSClient& obj) {
