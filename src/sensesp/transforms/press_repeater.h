@@ -3,6 +3,7 @@
 
 #include <elapsedMillis.h>
 
+#include "ReactESP.h"
 #include "sensesp/ui/config_item.h"
 #include "sensesp/sensors/digital_input.h"
 #include "sensesp/system/valueconsumer.h"
@@ -45,6 +46,12 @@ class PressRepeater : public BooleanTransform {
   PressRepeater(const String& config_path = "", int integer_false = 0,
                 int repeat_start_interval = 1500, int repeat_interval = 250);
 
+  virtual ~PressRepeater() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
+  }
+
   virtual void set(const bool& new_value) override;
 
   virtual bool to_json(JsonObject& root) override;
@@ -57,6 +64,7 @@ class PressRepeater : public BooleanTransform {
   elapsedMillis last_value_sent_;
   bool pushed_;
   bool repeating_;
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
 };
 
 const String ConfigSchema(const PressRepeater& obj);

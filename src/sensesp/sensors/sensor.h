@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <set>
 
+#include "ReactESP.h"
 #include "sensesp/system/observable.h"
 #include "sensesp/system/saveable.h"
 #include "sensesp/system/valueproducer.h"
@@ -67,7 +68,7 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         returning_callback_(callback) {
-    event_loop()->onRepeat(repeat_interval_ms_, [this]() {
+    repeat_event_ = event_loop()->onRepeat(repeat_interval_ms_, [this]() {
       this->emit(this->returning_callback_());
     });
   }
@@ -90,14 +91,21 @@ class RepeatSensor : public Sensor<T> {
       : Sensor<T>(""),
         repeat_interval_ms_(repeat_interval_ms),
         emitting_callback_(callback) {
-    event_loop()->onRepeat(repeat_interval_ms_,
+    repeat_event_ = event_loop()->onRepeat(repeat_interval_ms_,
                            [this]() { emitting_callback_(this); });
+  }
+
+  virtual ~RepeatSensor() {
+    if (repeat_event_ != nullptr) {
+      repeat_event_->remove(event_loop());
+    }
   }
 
  protected:
   unsigned int repeat_interval_ms_;
   std::function<T()> returning_callback_ = nullptr;
   std::function<void(RepeatSensor<T>*)> emitting_callback_ = nullptr;
+  reactesp::RepeatEvent* repeat_event_ = nullptr;
 };
 
 }  // namespace sensesp
