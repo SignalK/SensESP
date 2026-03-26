@@ -19,7 +19,7 @@ class OTA {
    */
   OTA(const char* password) : password_{password} {
     event_loop()->onDelay(0, [this]() {
-      ArduinoOTA.setPassword(password_);
+      ArduinoOTA.setPassword(password_.c_str());
       ArduinoOTA.onStart([]() { ESP_LOGW(__FILENAME__, "Starting OTA"); });
       ArduinoOTA.onEnd([]() { ESP_LOGW(__FILENAME__, "OTA End"); });
       ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
@@ -46,7 +46,7 @@ class OTA {
   }
 
  private:
-  const char* password_;
+  String password_;
   static void handle_ota();
 };
 
