@@ -11,7 +11,7 @@ namespace sensesp {
 
 SKDeltaQueue::SKDeltaQueue(unsigned int max_buffer_size)
     : max_buffer_size{max_buffer_size}, meta_sent_{false} {
-  semaphore_ = xSemaphoreCreateRecursiveMutex();
+  semaphore_ = xSemaphoreCreateRecursiveMutexStatic(&semaphore_buffer_);
 
   event_loop()->onDelay(
       0, [this]() { this->connect_emitters(); });

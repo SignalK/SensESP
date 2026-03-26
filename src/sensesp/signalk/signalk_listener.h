@@ -56,6 +56,7 @@ class SKListener : virtual public Observable, public FileSystemSaveable {
  private:
   static std::vector<SKListener*> listeners_;
   int listen_delay;
+  static StaticSemaphore_t semaphore_buffer_;
   static SemaphoreHandle_t semaphore_;
 
   virtual bool to_json(JsonObject& root) override;

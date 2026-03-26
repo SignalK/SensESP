@@ -185,8 +185,9 @@ class SKWSClient : public FileSystemSaveable,
   Integrator<int, int> delta_tx_count_producer_{1, 0, ""};
   Integrator<int, int> delta_rx_count_producer_{1, 0, ""};
 
+  StaticSemaphore_t received_updates_semaphore_buffer_;
   SemaphoreHandle_t received_updates_semaphore_ =
-      xSemaphoreCreateRecursiveMutex();
+      xSemaphoreCreateRecursiveMutexStatic(&received_updates_semaphore_buffer_);
   std::list<JsonDocument> received_updates_{};
 
   /////////////////////////////////////////////////////////

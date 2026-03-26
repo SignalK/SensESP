@@ -25,7 +25,7 @@ namespace sensesp {
 template <typename T>
 class SafeQueue {
  public:
-  SafeQueue(size_t max_size = 100) : max_size_(max_size) {
+  SafeQueue(size_t max_size = 10) : max_size_(max_size) {
     write_lock_ = xSemaphoreCreateMutexStatic(&write_lock_buffer_);
   }
 

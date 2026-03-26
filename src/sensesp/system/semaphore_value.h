@@ -24,7 +24,7 @@ template <typename T>
 class SemaphoreValue : public ValueConsumer<T> {
  public:
   SemaphoreValue() : ValueConsumer<T>() {
-    semaphore_ = xSemaphoreCreateBinary();
+    semaphore_ = xSemaphoreCreateBinaryStatic(&semaphore_buffer_);
     mutex_ = xSemaphoreCreateMutexStatic(&mutex_buffer_);
   }
 
@@ -65,6 +65,7 @@ class SemaphoreValue : public ValueConsumer<T> {
 
  protected:
   T value_;
+  StaticSemaphore_t semaphore_buffer_;
   SemaphoreHandle_t semaphore_;
   StaticSemaphore_t mutex_buffer_;
   SemaphoreHandle_t mutex_;
