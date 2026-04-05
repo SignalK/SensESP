@@ -109,8 +109,16 @@ void setup() {
   // to be reported to the server every 10 seconds, regardless of whether
   // or not it has changed.  That keeps the value on the server fresh and
   // lets the server know the switch is still alive.
+  // To inform other devices that this is a switch that supports "PUT" 
+  // requests, we define appropriate metadata for the sk path.
+  auto* skMetadata = new SKMetadata("bool", 
+                                "Engine Room Lights", 
+                                "Switches lights in the engine room", 
+                                "Engine Room", 
+                                -1.0f,
+                                true);
   load_switch->connect_to(new Repeat<bool, bool>(10000))
-      ->connect_to(new SKOutputBool(sk_path, config_path_sk_output));
+      ->connect_to(new SKOutputBool(sk_path, config_path_sk_output, skMetadata));
 }
 
 void loop() { event_loop()->tick(); }

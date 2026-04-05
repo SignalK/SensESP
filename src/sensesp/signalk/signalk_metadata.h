@@ -28,6 +28,7 @@ class SKMetadata {
   String description_;
   String short_name_;
   float timeout_;
+  bool supports_put_;
 
   /**
    * @param units The unit of measurement the value represents. See
@@ -43,13 +44,15 @@ class SKMetadata {
    * @param timeout Tells the consumer how long it should consider the value
    * valid. This value is specified in seconds. Specify -1.0 if you do not
    * want to specify a timeout.
+   * @param supports_put Indicates whether this path supports PUT requests.
+   * Defaults to false.
    */
   SKMetadata(const String& units, const String& display_name = "",
              const String& description = "", const String& short_name = "",
-             float timeout = -1.0);
+             float timeout = -1.0, bool supports_put = false);
 
   /// Default constructor creates a blank Metadata structure
-  SKMetadata() : timeout_{-1} {}
+  SKMetadata() : timeout_{-1}, supports_put_{false} {}
 
   /**
    * Adds an entry to the specified meta array that represents this metadata
