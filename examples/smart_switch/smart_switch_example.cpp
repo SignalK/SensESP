@@ -110,8 +110,9 @@ void setup() {
   // or not it has changed.  That keeps the value on the server fresh and
   // lets the server know the switch is still alive.
   // To inform other devices that this is a switch that supports "PUT" 
-  // requests, we define appropriate metadata for the sk path.
-  auto* skMetadata = new SKMetadata("bool", 
+  // requests, we define appropriate metadata for the sk path. Note that
+  // "bool" does not need to use the "units" property as it is implied.
+  auto* skMetadata = new SKMetadata("", 
                                 "Engine Room Lights", 
                                 "Switches lights in the engine room", 
                                 "Engine Room", 

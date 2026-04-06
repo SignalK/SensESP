@@ -31,7 +31,8 @@ class SKMetadata {
   bool supports_put_;
 
   /**
-   * @param units The unit of measurement the value represents. See
+   * @param units The unit of measurement the value represents. This is primarily used
+   * for numeric values. If NO unit needs to be specified, pass an empty string. See
    * https://github.com/SignalK/specification/blob/master/schemas/definitions.json#L87
    * @param display_name This is used on or near any display or gauge which
    * shows the data.
