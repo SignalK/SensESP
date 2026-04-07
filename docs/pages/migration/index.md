@@ -345,3 +345,71 @@ sensesp_app = builder.enable_free_mem_sensor()
                      ->enable_ota("my_password")
                      ->get_app();
 ```
+
+## Transport-agnostic networking (v3 minor update)
+
+SensESP used to assume WiFi was the only way to reach the Signal K
+server. The networking layer has been refactored to be transport-
+agnostic: WiFi is still the default and existing sketches compile
+and behave identically, but the library can now also run over
+native Ethernet (on ESP32-P4) and is ready for future transports.
+The refactor RFC is [#849](https://github.com/SignalK/SensESP/issues/849).
+
+### No action required for WiFi users
+
+Every public class name, enum name, and builder method that existed
+before still works via compatibility typedefs:
+
+| Old name                          | New name                               |
+|-----------------------------------|----------------------------------------|
+| `Networking`                      | `WiFiProvisioner`                      |
+| `WiFiState` (enum)                | `NetworkState`                         |
+| `WiFiStateProducer`               | `NetworkStateProducer`                 |
+| `SensESPApp::get_networking()`    | `SensESPApp::get_wifi_provisioner()`   |
+
+The kept aliases mean a user sketch like
+
+```c++
+auto state = sensesp_app->get_networking()->get_wifi_state_producer();
+```
+
+compiles unchanged against the new release.
+
+### Optional: switch to the new names
+
+For new code or if you want to use the new transport-agnostic API,
+prefer:
+
+```c++
+// Include the concrete header directly (not "networking.h")
+#include "sensesp/net/wifi_provisioner.h"
+#include "sensesp/net/network_state.h"
+
+// Access the provisioner through its new accessor
+auto wifi = sensesp_app->get_wifi_provisioner();
+
+// Or, for code that should work on any transport, use the
+// NetworkProvisioner base and the unified state producer:
+auto provisioner = sensesp_app->get_network_provisioner();
+auto ip  = provisioner->local_ip();
+auto mac = provisioner->mac_address();
+
+auto state_producer = sensesp_app->get_network_state_producer();
+state_producer->connect_to(&my_consumer);
+```
+
+### Static-IP WiFi configurations
+
+If you use a saved static-IP configuration on a WiFi client, the
+release in which this refactor lands also fixes a long-standing bug
+in `WiFiProvisioner::start_client_autoconnect()` where the arguments
+to `WiFi.config()` were passed in the wrong order — silently setting
+`gateway = DNS server`, `subnet = gateway`, and `DNS1 = netmask`. If
+your saved WiFi client config has `useDHCP: false`, verify your
+gateway / netmask / DNS values look correct after upgrading; existing
+saved configs should actually start working for the first time.
+
+### Adding Ethernet
+
+See `docs/pages/features/index.md` (section "Network transports")
+for a short usage example.

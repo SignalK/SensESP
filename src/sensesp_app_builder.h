@@ -80,21 +80,57 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
   /**
    * @brief Clear the default WiFi STA/AP settings.
    *
-   * Intended for use by future non-WiFi provisioners (Ethernet,
-   * PPP/cellular, …) that will supply a factory via
+   * Intended for use by non-WiFi provisioners (Ethernet, future
+   * PPP/cellular, …) that supply a factory via
    * SensESPApp::set_network_provisioner_factory(). Without this call,
    * the default WiFi-construction path in SensESPApp::setup() would
    * still produce a WiFiProvisioner alongside the non-WiFi one.
    *
-   * In this PR, only the abstraction is introduced — no non-WiFi
-   * provisioner ships yet, so this method is primarily scaffolding
-   * for the follow-up Ethernet PR that references RFC #849.
+   * set_ethernet() calls this implicitly, so most users do not have
+   * to invoke disable_wifi() directly.
    */
   SensESPAppBuilder* disable_wifi() {
     app_->set_ssid("");
     app_->set_wifi_password("");
     app_->set_ap_ssid("");
     app_->set_ap_password("");
+    return this;
+  }
+
+  /**
+   * @brief Configure the app to use a non-WiFi NetworkProvisioner.
+   *
+   * Today only Ethernet on ESP32-P4 is supported. Use as:
+   *
+   *     #include "sensesp/net/ethernet_provisioner.h"
+   *     ...
+   *     builder.set_ethernet(EthernetConfig::waveshare_esp32p4_poe())
+   *            ->get_app();
+   *
+   * @tparam ProvisionerConfigT  a configuration struct that exposes a
+   *         nested `using ProvisionerType = …;` typedef pointing at
+   *         the concrete NetworkProvisioner implementation.
+   *         EthernetConfig from sensesp/net/ethernet_provisioner.h is
+   *         the only such type today. Templated so this header does
+   *         not need to pull in any provisioner implementation files
+   *         — users who call set_ethernet() must include the relevant
+   *         provisioner header in their own translation unit.
+   *
+   * Calling set_ethernet() on a target whose provisioner header is
+   * empty (e.g. classic ESP32, where EthernetConfig is not declared)
+   * produces a clean compile error at the use site rather than a
+   * silent runtime failure. Implicitly calls disable_wifi() so the
+   * WiFi-specific HTTP handlers and soft-AP fall-back are not
+   * registered.
+   */
+  template <typename ProvisionerConfigT>
+  SensESPAppBuilder* set_ethernet(ProvisionerConfigT config) {
+    disable_wifi();
+    app_->set_network_provisioner_factory(
+        [config]() -> std::shared_ptr<NetworkProvisioner> {
+          return std::make_shared<typename ProvisionerConfigT::ProvisionerType>(
+              config);
+        });
     return this;
   }
 
