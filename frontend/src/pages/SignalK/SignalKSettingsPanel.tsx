@@ -80,8 +80,9 @@ function SKConnectionSettings({
   setConfig,
   setRequestSave,
 }: SKConnectionSettingsProps): JSX.Element {
-  const [mdns, setMdns] = useState(false);
   const id = useId();
+
+  const mdns = config.use_mdns === true;
 
   function setHostname(hostname: string): void {
     setConfig({ ...config, sk_address: hostname });
@@ -91,9 +92,11 @@ function SKConnectionSettings({
     setConfig({ ...config, sk_port: port });
   }
 
-  function handleMDNSChange(event): void {
-    setMdns(event.target.checked);
-    setConfig({ ...config, use_mdns: event.target.checked });
+  function handleMDNSChange(event: Event): void {
+    setConfig({
+      ...config,
+      use_mdns: (event.target as HTMLInputElement).checked,
+    });
   }
 
   return (
@@ -105,8 +108,6 @@ function SKConnectionSettings({
               <label
                 htmlFor={`${id}-mdns`}
                 className="form-label"
-                data-bs-toggle="collapse"
-                data-target={`#${id}-collapse`}
               >
                 Automatic server discovery
               </label>
@@ -114,7 +115,7 @@ function SKConnectionSettings({
                 type="checkbox"
                 className="form-check-input switch"
                 id={`${id}-mdns`}
-                checked={config.use_mdns === true}
+                checked={mdns}
                 onChange={handleMDNSChange}
               />
             </div>
@@ -209,12 +210,18 @@ function SKSSLSettings({
   const [resetting, setResetting] = useState(false);
   const id = useId();
 
-  function handleSSLChange(event): void {
-    setConfig({ ...config, ssl_enabled: event.target.checked });
+  function handleSSLChange(event: Event): void {
+    setConfig({
+      ...config,
+      ssl_enabled: (event.target as HTMLInputElement).checked,
+    });
   }
 
-  function handleVerifyChange(event): void {
-    setConfig({ ...config, tofu_enabled: event.target.checked });
+  function handleVerifyChange(event: Event): void {
+    setConfig({
+      ...config,
+      tofu_enabled: (event.target as HTMLInputElement).checked,
+    });
   }
 
   async function handleResetTOFU(): Promise<void> {

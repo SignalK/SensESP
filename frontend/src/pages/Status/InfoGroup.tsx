@@ -17,7 +17,7 @@ export function InfoGroup(props: InfoGroupProps): JSX.Element {
           {props.items.map((item) => {
             return (
               <InfoItem
-                key={`${this.props.name}:${item.name}`}
+                key={`${props.name}:${item.name}`}
                 name={item.name}
                 value={item.value}
                 group={item.group}

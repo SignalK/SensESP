@@ -10,7 +10,7 @@ interface NetworkListProps {
   setIsScanning: (scanning: boolean) => void;
 }
 
-class WiFiNetworkData {
+interface WiFiNetworkData {
   ssid: string;
   rssi: number;
 }
@@ -125,8 +125,8 @@ export function NetworkList({
     active,
     setActive,
   }: NetworkListItemProps): JSX.Element {
-    function handleSelect(event): void {
-      event.target.active = true;
+    function handleSelect(event: Event): void {
+      event.preventDefault();
       setActive();
     }
 

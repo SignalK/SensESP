@@ -187,10 +187,10 @@ export function FormTextInput(props: FormTextInputProps): JSX.Element {
   const inputProps = {
     id: id,
     type: props.type || "text",
-    defaultValue: String(props.value),
+    value: String(props.value),
     readOnly: props.readOnly,
     disabled: props.disabled,
-    onChange: (e: Event) =>
+    onInput: (e: Event) =>
       props.setValue((e.currentTarget as HTMLInputElement).value),
   };
 
@@ -222,15 +222,32 @@ export function FormNumberInput(props: FormNumberInputProps): JSX.Element {
   const decimals = props.step
     ? Math.max(0, Math.ceil(Math.log10(1 / (props.step || 1))))
     : 5;
+  const formatted = String(Number(props.value).toFixed(decimals));
+  const [localValue, setLocalValue] = useState(formatted);
+  const [hasFocus, setHasFocus] = useState(false);
+
+  useEffect(() => {
+    if (!hasFocus) {
+      setLocalValue(formatted);
+    }
+  }, [formatted, hasFocus]);
+
   const inputProps = {
     id: id,
     type: "number",
-    defaultValue: String(Number(props.value).toFixed(decimals)),
+    value: localValue,
     readOnly: props.readOnly,
     disabled: props.disabled,
     step: props.step,
-    onChange: (e: Event) =>
-      props.setValue(Number((e.currentTarget as HTMLInputElement).value)),
+    onInput: (e: Event) => {
+      const raw = (e.currentTarget as HTMLInputElement).value;
+      setLocalValue(raw);
+    },
+    onFocus: () => setHasFocus(true),
+    onBlur: () => {
+      setHasFocus(false);
+      props.setValue(Number(localValue));
+    },
   };
   return (
     <div className="form-floating mb-3">

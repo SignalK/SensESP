@@ -226,7 +226,6 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [saving, setSaving] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
   const [httpErrorText, setHttpErrorText] = useState<string>("");
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(true);
@@ -285,7 +284,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
         console.log("HTTP Error", response.status, response.statusText);
         setHttpErrorText(
           `Received error ${response.status} ${response.statusText} when ` +
-            `saving the configuration: ${response.text}`,
+            `saving the configuration: ${await response.text()}`,
         );
         setSaving(false);
         setIsDirty(false);
@@ -307,11 +306,7 @@ export function ConfigCard({ path }: ConfigCardProps): JSX.Element | null {
     }
   }
 
-  if (Object.keys(schema ?? {})?.length === 0) {
-    setLoading(true);
-  } else {
-    setLoading(false);
-  }
+  const loading = Object.keys(schema?.properties ?? {}).length === 0;
 
   const updateConfig = (key: string, value: JsonValue): void => {
     setConfig({ ...config, [key]: value });

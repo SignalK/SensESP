@@ -43,9 +43,7 @@ interface RedirectProps {
 function Redirect({ to }: RedirectProps): JSX.Element {
   useEffect(() => {
     route(to);
-    // Also update the browser URL
-    window.history.pushState({}, "", to);
-  }, []);
+  }, [to]);
 
   return <></>;
 }
@@ -53,64 +51,84 @@ function Redirect({ to }: RedirectProps): JSX.Element {
 export function App(): JSX.Element {
   const [routes, setRoutes] = useState<RouteInstruction[]>([]);
   const [navPath, setNavPath] = useState<string>("/");
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    // Fetch routes from the backend API
     void (async () => {
-      const res = await fetch("/api/routes");
-      const data = await res.json();
-      setRoutes(data);
-
-      const populatedRoutes: RouteInstruction[] = [];
-      for (const route of data) {
-        if (route.loadPath) {
-          const remoteInfo = {
-            url: () => Promise.resolve(route.loadPath),
-            format: "esm",
-            from: "vite",
-          };
-
-          __federation_method_setRemote(route.componentName, remoteInfo);
-          const module = await __federation_method_getRemote(
-            route.componentName,
-            "./SensESPPlugin",
-          );
-          const unwrapped = await __federation_method_unwrapDefault(module);
-          populatedRoutes.push({ ...route, component: unwrapped });
-        } else if (route.componentName in KNOWN_COMPONENTS) {
-          populatedRoutes.push({
-            ...route,
-            component: KNOWN_COMPONENTS[route.componentName],
-          });
-        } else {
-          // We don't know about this component - throw an error
-          throw new Error(`Unknown component: ${route.componentName}`);
+      try {
+        const res = await fetch("/api/routes");
+        if (!res.ok) {
+          setError(`Failed to load routes: ${res.status} ${res.statusText}`);
+          return;
         }
-      }
+        const data = await res.json();
 
-      setRoutes(populatedRoutes);
+        const populatedRoutes: RouteInstruction[] = [];
+        for (const routeDef of data) {
+          if (routeDef.loadPath) {
+            const remoteInfo = {
+              url: () => Promise.resolve(routeDef.loadPath),
+              format: "esm",
+              from: "vite",
+            };
+
+            __federation_method_setRemote(routeDef.componentName, remoteInfo);
+            const module = await __federation_method_getRemote(
+              routeDef.componentName,
+              "./SensESPPlugin",
+            );
+            const unwrapped =
+              await __federation_method_unwrapDefault(module);
+            populatedRoutes.push({ ...routeDef, component: unwrapped });
+          } else if (routeDef.componentName in KNOWN_COMPONENTS) {
+            populatedRoutes.push({
+              ...routeDef,
+              component: KNOWN_COMPONENTS[routeDef.componentName],
+            });
+          } else {
+            console.error(`Unknown component: ${routeDef.componentName}`);
+          }
+        }
+
+        setRoutes(populatedRoutes);
+      } catch (e) {
+        setError(`Failed to load routes: ${(e as Error).message}`);
+      }
     })();
   }, []);
 
   const [routeComponents, setRouteComponents] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    // Always add a redirection from root to the first route
+    if (routes.length === 0) {
+      return;
+    }
     const newRouteComponents: JSX.Element[] = [
       <Redirect path="/" to={routes[0].path} />,
     ];
-    routes.forEach((route) => {
-      if (route.component) {
+    routes.forEach((routeDef) => {
+      if (routeDef.component) {
         newRouteComponents.push(
-          <Route path={route.path} component={route.component} />,
+          <Route path={routeDef.path} component={routeDef.component} />,
         );
       }
     });
     setRouteComponents(newRouteComponents);
   }, [routes]);
 
-  async function handleRouteChange(e: RouterOnChangeArgs): Promise<void> {
+  function handleRouteChange(e: RouterOnChangeArgs): void {
     setNavPath(e.url);
+  }
+
+  if (error) {
+    return (
+      <div className="d-flex align-items-center justify-content-center min">
+        <div className="alert alert-danger" role="alert">
+          <h4 className="alert-heading">Error</h4>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
   }
 
   if (routes.length === 0) {
@@ -129,9 +147,7 @@ export function App(): JSX.Element {
         <NavPathContext.Provider value={navPath}>
           <Header routes={routes} />
         </NavPathContext.Provider>
-        {routes.length === 0 ? null : (
-          <Router onChange={handleRouteChange}>{routeComponents}</Router>
-        )}
+        <Router onChange={handleRouteChange}>{routeComponents}</Router>
       </RestartRequiredProvider>
     </>
   );
