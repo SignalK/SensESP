@@ -586,11 +586,14 @@ void SKWSClient::connect() {
   // Will be reset on successful connection.
   schedule_reconnect();
 
-  if (!WiFi.isConnected() && WiFi.getMode() != WIFI_MODE_AP) {
-    ESP_LOGI(
-        __FILENAME__,
-        "WiFi is disconnected. SignalK client connection will be initiated "
-        "when WiFi is connected.");
+  // Wait for the active network provisioner (WiFi, Ethernet, …) to be
+  // up before initiating the WS connection. The provisioner abstracts
+  // away whether we're on WiFi, Ethernet, or some other transport.
+  auto provisioner = SensESPApp::get()->get_network_provisioner();
+  if (!provisioner || !provisioner->is_connected()) {
+    ESP_LOGI(__FILENAME__,
+             "Network is not yet up. SignalK client connection will be "
+             "initiated when the link comes up.");
     return;
   }
 

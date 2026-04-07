@@ -78,6 +78,27 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
   }
 
   /**
+   * @brief Clear the default WiFi STA/AP settings.
+   *
+   * Intended for use by future non-WiFi provisioners (Ethernet,
+   * PPP/cellular, …) that will supply a factory via
+   * SensESPApp::set_network_provisioner_factory(). Without this call,
+   * the default WiFi-construction path in SensESPApp::setup() would
+   * still produce a WiFiProvisioner alongside the non-WiFi one.
+   *
+   * In this PR, only the abstraction is introduced — no non-WiFi
+   * provisioner ships yet, so this method is primarily scaffolding
+   * for the follow-up Ethernet PR that references RFC #849.
+   */
+  SensESPAppBuilder* disable_wifi() {
+    app_->set_ssid("");
+    app_->set_wifi_password("");
+    app_->set_ap_ssid("");
+    app_->set_ap_password("");
+    return this;
+  }
+
+  /**
    * @brief Set the Signal K server address and port.
    *
    * If not set, mDNS is used to discover the Signal K server.

@@ -1,10 +1,9 @@
 #include "sensesp.h"
 
-#include "networking.h"
+#include "wifi_provisioner.h"
 
 #include <esp_wifi.h>
 
-#include "sensesp/system/lambda_consumer.h"
 #include "sensesp_app.h"
 
 namespace sensesp {
@@ -24,16 +23,12 @@ namespace sensesp {
 // 3. If the hard-coded hostname is changed, use that instead of the saved one.
 //    (But keep using the saved WiFi credentials!)
 
-Networking::Networking(const String& config_path, const String& client_ssid,
-                       const String& client_password, const String& ap_ssid,
-                       const String& ap_password)
+WiFiProvisioner::WiFiProvisioner(const String& config_path,
+                                 const String& client_ssid,
+                                 const String& client_password,
+                                 const String& ap_ssid,
+                                 const String& ap_password)
     : FileSystemSaveable{config_path}, Resettable(0) {
-  // Get the WiFi state producer singleton and make it update this object output
-  wifi_state_emitter_ = std::make_shared<LambdaConsumer<WiFiState>>(
-          [this](WiFiState state) { this->emit(state); });
-
-  wifi_state_producer_->connect_to(wifi_state_emitter_);
-
   bool config_loaded = load();
 
   if (!config_loaded) {
@@ -59,7 +54,7 @@ Networking::Networking(const String& config_path, const String& client_ssid,
     client_settings_.push_back(ClientSSIDConfig());
   }
 
-  ESP_LOGD(__FILENAME__, "Enabling Networking");
+  ESP_LOGD(__FILENAME__, "Enabling WiFi provisioner");
 
   // Hate to do this, but Raspberry Pi AP setup is going to be much more
   // complicated with enforced WPA2. BAD Raspberry Pi! BAD!
@@ -107,7 +102,7 @@ Networking::Networking(const String& config_path, const String& client_ssid,
   }
 }
 
-Networking::~Networking() {
+WiFiProvisioner::~WiFiProvisioner() {
   if (dns_server_) {
     dns_server_->stop();
   }
@@ -116,11 +111,7 @@ Networking::~Networking() {
   WiFi.disconnect(true);
 }
 
-/**
- * @brief Start an access point.
- *
- */
-void Networking::start_access_point() {
+void WiFiProvisioner::start_access_point() {
   String hostname = SensESPBaseApp::get_hostname();
   WiFi.setHostname(hostname.c_str());
 
@@ -137,10 +128,7 @@ void Networking::start_access_point() {
   }
 }
 
-/**
- * @brief Start WiFi using preset SSID and password.
- */
-void Networking::start_client_autoconnect() {
+void WiFiProvisioner::start_client_autoconnect() {
   String hostname = SensESPBaseApp::get_hostname();
   WiFi.setHostname(hostname.c_str());
 
@@ -198,8 +186,13 @@ void Networking::start_client_autoconnect() {
     if (!config.use_dhcp_) {
       ESP_LOGI(__FILENAME__, "Using static IP address: %s",
                config.ip_.toString().c_str());
-      WiFi.config(config.ip_, config.dns_server_, config.gateway_,
-                  config.netmask_);
+      // Arduino-ESP32 signature:
+      //   WiFi.config(local_ip, gateway, subnet, dns1, dns2).
+      // The pre-refactor code passed (ip, dns, gateway, netmask) which
+      // silently set gateway=dns, subnet=gateway and dns1=netmask — a
+      // long-standing bug that broke every saved static-IP config.
+      WiFi.config(config.ip_, config.gateway_, config.netmask_,
+                  config.dns_server_);
     }
     WiFi.begin(config.ssid_.c_str(), config.password_.c_str());
     attempt_num++;
@@ -215,11 +208,7 @@ void Networking::start_client_autoconnect() {
   event_loop()->onRepeat(20000, reconnect_cb);
 }
 
-/**
- * @brief Serialize the current configuration to a JSON document.
- *
- */
-bool Networking::to_json(JsonObject& root) {
+bool WiFiProvisioner::to_json(JsonObject& root) {
   JsonObject apSettingsJson = root["apSettings"].to<JsonObject>();
   ap_settings_.as_json(apSettingsJson);
 
@@ -237,7 +226,7 @@ bool Networking::to_json(JsonObject& root) {
   return true;
 }
 
-bool Networking::from_json(const JsonObject& config) {
+bool WiFiProvisioner::from_json(const JsonObject& config) {
   if (config["hostname"].is<String>()) {
     // deal with the legacy Json format
     String hostname = config["hostname"].as<String>();
@@ -248,7 +237,6 @@ bool Networking::from_json(const JsonObject& config) {
       String password = config["password"].as<String>();
 
       if (config["ap_mode"].is<String>()) {
-        bool ap_mode;
         if (config["ap_mode"].as<String>() == "Access Point" ||
             config["ap_mode"].as<String>() == "Hotspot") {
           ap_settings_ = {true, ssid, password};
@@ -289,7 +277,7 @@ bool Networking::from_json(const JsonObject& config) {
   return true;
 }
 
-void Networking::reset() {
+void WiFiProvisioner::reset() {
   ESP_LOGI(__FILENAME__, "Resetting WiFi SSID settings");
 
   clear();
@@ -299,7 +287,7 @@ void Networking::reset() {
   WiFi.begin("0", "0", 0, nullptr, false);
 }
 
-void Networking::start_wifi_scan() {
+void WiFiProvisioner::start_wifi_scan() {
   // Scan fails if WiFi is connecting. Disconnect to allow scanning.
   if (WiFi.status() != WL_CONNECTED) {
     ESP_LOGD(__FILENAME__,
@@ -313,7 +301,7 @@ void Networking::start_wifi_scan() {
   }
 }
 
-int16_t Networking::get_wifi_scan_results(
+int16_t WiFiProvisioner::get_wifi_scan_results(
     std::vector<WiFiNetworkInfo>& ssid_list) {
   int num_networks = WiFi.scanComplete();
   if (num_networks == WIFI_SCAN_RUNNING) {

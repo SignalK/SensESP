@@ -59,7 +59,9 @@ esp_err_t HTTPServer::dispatch_request(httpd_req_t* req) {
   }
   inet_ntop(AF_INET, &addr.sin6_addr.un.u32_addr[3], ipstr, sizeof(ipstr));
 
-  String ap_ip = WiFi.softAPIP().toString();
+  // Captive-portal AP IP is supplied by the network provisioner via
+  // set_captive_portal(); zero on transports without a soft AP.
+  String ap_ip = captive_portal_ap_ip_.toString();
 
   bool auth_required;
 
@@ -143,7 +145,7 @@ bool HTTPServer::handle_captive_portal(httpd_req_t* req) {
   }
   inet_ntop(AF_INET, &addr.sin6_addr.un.u32_addr[3], ipstr, sizeof(ipstr));
 
-  String ap_ip = WiFi.softAPIP().toString();
+  String ap_ip = captive_portal_ap_ip_.toString();
 
   // We should only apply the captive portal to the soft AP IP address
   if (ap_ip != ipstr) {

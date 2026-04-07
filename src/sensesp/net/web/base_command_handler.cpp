@@ -1,8 +1,8 @@
 #include "base_command_handler.h"
 
-#include "WiFi.h"
 #include "sensesp/net/web/autogen/frontend_files.h"
 #include "sensesp/ui/status_page_item.h"
+#include "sensesp_app.h"
 
 namespace sensesp {
 
@@ -16,8 +16,12 @@ bool check_origin(httpd_req_t* req) {
     String origin_str(origin);
     String hostname = SensESPBaseApp::get_hostname();
     if (origin_str.indexOf(hostname) < 0) {
-      String ip = WiFi.localIP().toString();
-      if (origin_str.indexOf(ip) < 0) {
+      // Check the active provisioner's local IP — works for both WiFi
+      // and Ethernet without depending on the WiFi library directly.
+      auto provisioner = SensESPApp::get()->get_network_provisioner();
+      String ip =
+          provisioner ? provisioner->local_ip().toString() : String("");
+      if (ip.length() == 0 || origin_str.indexOf(ip) < 0) {
         httpd_resp_send_err(req, HTTPD_403_FORBIDDEN,
                             "Cross-origin request rejected");
         return false;
