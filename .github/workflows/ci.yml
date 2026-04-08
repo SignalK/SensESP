@@ -1,17 +1,47 @@
-name: SensESP Automatic Build
+name: SensESP CI
 
 on: [push]
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        device:
+          - esp32
+          - esp32c3
+        platform:
+          - arduino
+          - pioarduino
+        exclude:
+          - platform: arduino
+            device: esp32c3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade platformio
+      - name: Compile test suites
+        run: ci/run-tests.sh
+        env:
+          CI_DEVICE: ${{ matrix.device }}
+          CI_PLATFORM: ${{ matrix.platform }}
+
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         example:
-          - examples/lambda_transform.cpp
           - examples/minimal_app.cpp
-          - examples/listener.cpp
-          - examples/repeat_sensor_analog_input.cpp
           - examples/rpm_counter.cpp
           - examples/ssl_connection.cpp
         device:
@@ -20,10 +50,6 @@ jobs:
         platform:
           - arduino
           - pioarduino
-          # Can't build with espidf until there's a way to copy the
-          # sdkconfig.defaults file to the correct location in the
-          # CI build environment.
-          #- espidf
         exclude:
           - platform: arduino
             device: esp32c3
