@@ -19,7 +19,7 @@ export function SingleClientConfigPanel({
 
   const useDHCP = config.useDHCP ?? true;
 
-  function updateConfigField(field: string, value): void {
+  function updateConfigField(field: string, value: JsonValue): void {
     setConfig(
       produce(config, (draft) => {
         draft[field] = value;

@@ -1,17 +1,16 @@
 import { ToastMessage } from "components/ToastMessage";
 import { APP_CONFIG } from "config";
 import { type JSX } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { InfoGroup, type InfoItemData } from "./InfoGroup";
 
-async function updateGroups(): Promise<Map<string, InfoItemData[]>> {
+async function fetchGroups(): Promise<Map<string, InfoItemData[]>> {
   const response = await fetch(APP_CONFIG.info_path);
   if (!response.ok) {
     throw new Error(`HTTP Error ${response.status} ${response.statusText}`);
   }
   const data = await response.json();
 
-  // Make data an array of InfoItemData objects
   const infoItems = data.map((item: Record<string, unknown>) => {
     return {
       name: item.name,
@@ -25,7 +24,6 @@ async function updateGroups(): Promise<Map<string, InfoItemData[]>> {
     return a.order < b.order ? -1 : 1;
   });
 
-  // collect unique groups from the sorted items
   const groups = new Map<string, InfoItemData[]>();
   for (const item of sortedItems) {
     if (!groups.has(item.group)) {
@@ -40,37 +38,35 @@ async function updateGroups(): Promise<Map<string, InfoItemData[]>> {
 export function InfoGroups(): JSX.Element {
   const [groups, setGroups] = useState<Map<string, InfoItemData[]>>(new Map());
   const [errorText, setErrorText] = useState("");
-
-  async function timerFunc(): Promise<void> {
-    // fetch updated group items from server
-    if (errorText !== "") {
-      return; // don't update if there's an error
-    }
-    try {
-      const groupedItems = await updateGroups();
-      setGroups(groupedItems);
-    } catch (e) {
-      setErrorText(e.message);
-    }
-  }
+  const errorRef = useRef(errorText);
+  errorRef.current = errorText;
 
   useEffect(() => {
-    if (errorText !== "") {
-      console.log("Error: ", errorText);
-    }
-  }, [errorText]);
+    let cancelled = false;
 
-  useEffect(() => {
-    if (Array.from(groups.keys()).length === 0 && errorText === "") {
-      timerFunc();
+    async function poll(): Promise<void> {
+      if (errorRef.current !== "") {
+        return;
+      }
+      try {
+        const groupedItems = await fetchGroups();
+        if (!cancelled) {
+          setGroups(groupedItems);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          setErrorText((e as Error).message);
+        }
+      }
     }
-    const interval = setInterval(() => {
-      timerFunc();
-    }, 5000);
+
+    void poll();
+    const interval = setInterval(() => void poll(), 5000);
     return () => {
+      cancelled = true;
       clearInterval(interval);
     };
-  }, [groups, errorText]);
+  }, []);
 
   if (errorText !== "") {
     return (

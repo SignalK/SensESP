@@ -1,5 +1,5 @@
 import { Toast } from "bootstrap";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 interface useToastProps {
   autohide: boolean;
@@ -13,18 +13,24 @@ export default function useToast({ autohide, delay, onHide }: useToastProps) {
   const toastRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (toastRef.current) {
-      const toastElement = new Toast(toastRef.current, { autohide, delay });
-      // Call onHide when the toast is hidden to sync the state
-      toastRef.current.addEventListener("hidden.bs.toast", onHide);
-
-      if (isVisible) {
-        toastElement.show();
-      } else {
-        toastElement.hide();
-      }
+    const el = toastRef.current;
+    if (!el) {
+      return;
     }
-  }, [isVisible]);
+    const toastElement = new Toast(el, { autohide, delay });
+    el.addEventListener("hidden.bs.toast", onHide);
+
+    if (isVisible) {
+      toastElement.show();
+    } else {
+      toastElement.hide();
+    }
+
+    return () => {
+      el.removeEventListener("hidden.bs.toast", onHide);
+      toastElement.dispose();
+    };
+  }, [isVisible, autohide, delay, onHide]);
 
   const showToast = () => {
     setIsVisible(true);

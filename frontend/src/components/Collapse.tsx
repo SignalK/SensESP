@@ -21,14 +21,20 @@ export function Collapse({
   expanded,
 }: ReCollapseProps): JSX.Element {
   useEffect(() => {
-    const collapseEl = document.getElementById(id) ?? "";
+    const collapseEl = document.getElementById(id);
+    if (!collapseEl) {
+      return;
+    }
     const bsCollapse = new BSCollapse(collapseEl, { toggle: false });
     if (expanded) {
       bsCollapse.show();
     } else {
       bsCollapse.hide();
     }
-  });
+    return () => {
+      bsCollapse.dispose();
+    };
+  }, [id, expanded]);
 
   return (
     <div className="collapse" id={id}>

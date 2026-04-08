@@ -38,6 +38,7 @@ export class APSettingsConfig implements IAPSettingsConfig {
     this.password = "";
     this.channel = 1;
     this.hidden = false;
+    this.captivePortalEnabled = false;
   }
 }
 
