@@ -95,6 +95,12 @@ template <class T>
 class PersistingObservableValue : public ObservableValue<T>,
                                   public FileSystemSaveable {
  public:
+  using ObservableValue<T>::operator=;
+  using ObservableValue<T>::operator++;
+  using ObservableValue<T>::operator--;
+  using ObservableValue<T>::operator+=;
+  using ObservableValue<T>::operator-=;
+
   PersistingObservableValue(const T& value, String config_path = "")
       : ObservableValue<T>(value), FileSystemSaveable(config_path) {
     load();
