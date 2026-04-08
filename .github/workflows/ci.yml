@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade platformio
-      - name: Run tests
+      - name: Compile test suites
         run: ci/run-tests.sh
         env:
           CI_DEVICE: ${{ matrix.device }}

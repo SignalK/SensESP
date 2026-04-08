@@ -19,7 +19,7 @@ A new `test` job compiles all test suites (without uploading) for each platform/
 | pioarduino | esp32 |
 | pioarduino | esp32c3 |
 
-Command: `pio test --without-uploading -e {platform}_{device}`
+Command: `pio test --without-uploading --without-testing -e {platform}_{device}`
 
 Exclusion: arduino + esp32c3 (not supported by the arduino platform).
 
