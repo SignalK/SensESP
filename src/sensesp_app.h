@@ -117,7 +117,7 @@ class SensESPApp : public SensESPBaseApp {
    * @deprecated Use get_wifi_provisioner() instead. Kept as a
    * source-compatible alias since the legacy class name was Networking.
    */
-  std::shared_ptr<WiFiProvisioner> get_networking() {
+  std::shared_ptr<WiFiProvisioner>& get_networking() {
     return this->wifi_provisioner_;
   }
 
@@ -248,6 +248,16 @@ class SensESPApp : public SensESPBaseApp {
     // from inside their own constructors.
     if (wifi_provisioner_) {
       ConfigItem(wifi_provisioner_);
+    }
+
+    // Backward compat: the old Networking class was a
+    // ValueProducer<WiFiState>. Forward state from the unified
+    // NetworkStateProducer so code that did networking->connect_to(...)
+    // continues to work.
+    if (wifi_provisioner_ && network_state_producer_) {
+      auto nsp = network_state_producer_;
+      auto wp = wifi_provisioner_;
+      nsp->attach([nsp, wp]() { wp->emit(nsp->get()); });
     }
 
     if (ota_password_ != nullptr) {

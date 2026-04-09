@@ -47,10 +47,13 @@ class NetworkProvisioner {
   virtual String mac_address() const = 0;
 
   /**
-   * @brief True iff the link is currently up and we have an IP address.
+   * @brief True iff the network interface is usable.
    *
-   * The Signal K websocket client uses this to gate connection attempts:
-   * before this returns true, the IP stack is not routable.
+   * For STA/Ethernet this means link up + IP obtained. For WiFi in AP
+   * mode this also returns true — the device is network-reachable via
+   * the soft-AP even though it has no upstream connection. The Signal K
+   * websocket client uses this to gate connection attempts; the HTTP
+   * server uses it to know when the captive portal should be active.
    */
   virtual bool is_connected() const = 0;
 };

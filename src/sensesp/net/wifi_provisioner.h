@@ -169,7 +169,8 @@ class WiFiNetworkInfo {
  */
 class WiFiProvisioner : public FileSystemSaveable,
                        public Resettable,
-                       public NetworkProvisioner {
+                       public NetworkProvisioner,
+                       public ValueProducer<WiFiState> {
  public:
   WiFiProvisioner(const String& config_path, const String& client_ssid = "",
                   const String& client_password = "",
@@ -192,6 +193,14 @@ class WiFiProvisioner : public FileSystemSaveable,
     return WiFi.isConnected() || WiFi.getMode() == WIFI_MODE_AP ||
            WiFi.getMode() == WIFI_MODE_APSTA;
   }
+
+  /**
+   * @deprecated Use SensESPApp::get_network_state_producer() or
+   * connect_to() on this WiFiProvisioner directly (it is now a
+   * ValueProducer<WiFiState>). Kept for source compatibility with
+   * code that called get_networking()->get_wifi_state_producer().
+   */
+  ValueProducer<WiFiState>* get_wifi_state_producer() { return this; }
 
   // -- WiFi-specific methods --
   IPAddress soft_ap_ip() const { return WiFi.softAPIP(); }
