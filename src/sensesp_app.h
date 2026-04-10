@@ -1,15 +1,20 @@
 #ifndef SENSESP_APP_H_
 #define SENSESP_APP_H_
 
+#include <functional>
+
 #include "sensesp/controllers/system_status_controller.h"
 #include "sensesp/net/discovery.h"
 #include "sensesp/net/http_server.h"
+#include "sensesp/net/network_provisioner.h"
+#include "sensesp/net/network_state.h"
 #include "sensesp/net/networking.h"
 #include "sensesp/net/ota.h"
 #include "sensesp/net/web/app_command_handler.h"
 #include "sensesp/net/web/base_command_handler.h"
 #include "sensesp/net/web/config_handler.h"
 #include "sensesp/net/web/static_file_handler.h"
+#include "sensesp/net/wifi_provisioner.h"
 #include "sensesp/sensesp_version.h"
 #include "sensesp/sensors/sensor.h"
 #include "sensesp/signalk/signalk_delta_queue.h"
@@ -72,8 +77,70 @@ class SensESPApp : public SensESPBaseApp {
   std::shared_ptr<SystemStatusController> get_system_status_controller() {
     return this->system_status_controller_;
   }
-  std::shared_ptr<Networking>& get_networking() { return this->networking_; }
+
+  /**
+   * @brief Active network provisioner (transport-agnostic).
+   *
+   * Always non-null after setup() has run. Holds whichever provisioner
+   * the builder selected (WiFi by default, Ethernet via set_ethernet(),
+   * future PPP/cellular via set_ppp(), …).
+   */
+  std::shared_ptr<NetworkProvisioner>& get_network_provisioner() {
+    return this->network_provisioner_;
+  }
+
+  /**
+   * @brief Active WiFi provisioner, or nullptr if a non-WiFi transport
+   * is in use.
+   *
+   * Use this when WiFi-specific functionality is needed (scanning,
+   * captive portal, soft-AP IP). For transport-agnostic queries
+   * (local_ip(), mac_address(), …) prefer get_network_provisioner().
+   */
+  std::shared_ptr<WiFiProvisioner>& get_wifi_provisioner() {
+    return this->wifi_provisioner_;
+  }
+
+  /**
+   * @brief Unified producer that emits NetworkState transitions for any
+   * active interface (WiFi STA, WiFi AP, Ethernet, …).
+   *
+   * Always non-null after setup() has run. The
+   * SystemStatusController subscribes to it during setup(); user code
+   * can attach additional consumers via connect_to().
+   */
+  std::shared_ptr<NetworkStateProducer> get_network_state_producer() {
+    return this->network_state_producer_;
+  }
+
+  /**
+   * @deprecated Use get_wifi_provisioner() instead. Kept as a
+   * source-compatible alias since the legacy class name was Networking.
+   */
+  std::shared_ptr<WiFiProvisioner>& get_networking() {
+    return this->wifi_provisioner_;
+  }
+
   std::shared_ptr<SKWSClient> get_ws_client() { return this->ws_client_; }
+
+  /**
+   * @brief Install a custom factory that setup() will use to construct
+   * the NetworkProvisioner instead of the default WiFiProvisioner.
+   *
+   * This is the extension point for non-WiFi transports (Ethernet,
+   * PPP/cellular, mock provisioners for tests, …). If never called,
+   * setup() falls back to constructing a WiFiProvisioner using the
+   * existing ssid_ / wifi_client_password_ / ap_ssid_ / ap_password_
+   * setters — preserving the legacy default for existing WiFi users.
+   *
+   * A follow-up PR referencing RFC #849 will ship an Ethernet
+   * provisioner plus a SensESPAppBuilder::set_ethernet() convenience
+   * method that wraps this setter.
+   */
+  void set_network_provisioner_factory(
+      std::function<std::shared_ptr<NetworkProvisioner>()> factory) {
+    provisioner_factory_ = std::move(factory);
+  }
 
  protected:
   /**
@@ -147,23 +214,69 @@ class SensESPApp : public SensESPBaseApp {
 
     ap_ssid_ = SensESPBaseApp::get_hostname();
 
-    // create the networking object
-    networking_ = std::make_shared<Networking>("/System/WiFi Settings", ssid_,
-                                               wifi_client_password_, ap_ssid_,
-                                               ap_password_);
+    // Create the unified NetworkStateProducer FIRST so it is subscribed
+    // to Network.onEvent before any provisioner brings its interface up
+    // — that way we cannot miss the GOT_IP that fires when DHCP
+    // completes a few hundred ms later.
+    network_state_producer_ = std::make_shared<NetworkStateProducer>();
 
-    ConfigItem(networking_);
+    // Create the chosen provisioner. If the builder installed a custom
+    // factory (via set_network_provisioner_factory()), use it; otherwise
+    // default to WiFi using the legacy constructor arguments — this
+    // preserves backward compatibility for every existing user app that
+    // calls set_wifi_client() or just relies on the defaults.
+    if (provisioner_factory_) {
+      network_provisioner_ = provisioner_factory_();
+      if (!network_provisioner_) {
+        ESP_LOGE(
+            __FILENAME__,
+            "provisioner_factory_ returned nullptr; falling back to "
+            "WiFiProvisioner so the rest of setup() has a valid object.");
+      }
+    }
+    if (!network_provisioner_) {
+      auto wifi = std::make_shared<WiFiProvisioner>(
+          "/System/WiFi Settings", ssid_, wifi_client_password_, ap_ssid_,
+          ap_password_);
+      network_provisioner_ = wifi;
+      wifi_provisioner_ = wifi;
+    }
+
+    // Register the WiFi-specific provisioner as a ConfigItem so the
+    // existing /System/WiFi Settings web UI continues to work. Other
+    // provisioners are responsible for registering their own ConfigItems
+    // from inside their own constructors.
+    if (wifi_provisioner_) {
+      ConfigItem(wifi_provisioner_);
+    }
+
+    // Backward compat: the old Networking class was a
+    // ValueProducer<WiFiState>. Forward state from the unified
+    // NetworkStateProducer so code that did networking->connect_to(...)
+    // continues to work.
+    if (wifi_provisioner_ && network_state_producer_) {
+      auto nsp = network_state_producer_;
+      auto wp = wifi_provisioner_;
+      nsp->attach([nsp, wp]() { wp->emit(nsp->get()); });
+    }
 
     if (ota_password_ != nullptr) {
       // create the OTA object
       ota_ = std::make_shared<OTA>(ota_password_);
     }
 
-    bool captive_portal_enabled = networking_->is_captive_portal_enabled();
+    // Captive portal is meaningful only on WiFi (where there's a soft-AP).
+    bool captive_portal_enabled = false;
+    IPAddress captive_portal_ap_ip;
+    if (wifi_provisioner_) {
+      captive_portal_enabled = wifi_provisioner_->is_captive_portal_enabled();
+      captive_portal_ap_ip = wifi_provisioner_->soft_ap_ip();
+    }
 
     // create the HTTP server
     this->http_server_ = std::make_shared<HTTPServer>();
-    this->http_server_->set_captive_portal(captive_portal_enabled);
+    this->http_server_->set_captive_portal(captive_portal_enabled,
+                                           captive_portal_ap_ip);
 
     if (pending_admin_user_.length() > 0) {
       http_server_->set_auth_credentials(
@@ -173,7 +286,14 @@ class SensESPApp : public SensESPBaseApp {
     // Add the default HTTP server response handlers
     add_static_file_handlers(this->http_server_);
     add_base_app_http_command_handlers(this->http_server_);
-    add_app_http_command_handlers(this->http_server_, this->networking_);
+    // WiFi-specific REST handlers (/api/wifi/scan etc.) only register
+    // when the active provisioner is WiFi.
+    if (wifi_provisioner_) {
+      add_app_http_command_handlers(this->http_server_, wifi_provisioner_);
+    } else {
+      // Always register the transport-agnostic subset (TOFU reset).
+      add_tofu_reset_handler(this->http_server_);
+    }
     add_config_handlers(this->http_server_);
 
     ConfigItem(this->http_server_);
@@ -189,8 +309,12 @@ class SensESPApp : public SensESPBaseApp {
 
     ConfigItem(this->ws_client_);
 
-    // connect the system status controller
-    this->networking_->get_wifi_state_producer()->connect_to(
+    // Connect the system status controller. The unified
+    // NetworkStateProducer feeds it state from any active interface.
+    // (The consumer is still named get_wifi_state_consumer() for now —
+    // it accepts NetworkState because LinkState=WiFiState=NetworkState
+    // are aliases. Renaming the consumer is a separate cleanup.)
+    this->network_state_producer_->connect_to(
         &system_status_controller_->get_wifi_state_consumer());
     this->ws_client_->connect_to(
         &system_status_controller_->get_ws_connection_state_consumer());
@@ -227,10 +351,18 @@ class SensESPApp : public SensESPBaseApp {
   void connect_status_page_items() {
     this->hostname_->connect_to(&this->hostname_ui_output_);
     this->event_loop_->onRepeat(4999, [this]() {
-      wifi_ssid_ui_output_.set(WiFi.SSID());
-      mac_address_ui_output_.set(WiFi.macAddress());
+      // WiFi-specific status: only populated when WiFi is the active
+      // provisioner. On Ethernet (or other transports), the SSID slot
+      // is left empty and RSSI reads as 0.
+      if (wifi_provisioner_) {
+        wifi_ssid_ui_output_.set(wifi_provisioner_->ssid());
+        wifi_rssi_ui_output_.set(wifi_provisioner_->rssi());
+      } else {
+        wifi_ssid_ui_output_.set(String(""));
+        wifi_rssi_ui_output_.set(0);
+      }
+      mac_address_ui_output_.set(network_provisioner_->mac_address());
       free_memory_ui_output_.set(ESP.getFreeHeap());
-      wifi_rssi_ui_output_.set(WiFi.RSSI());
 
       // Uptime
       uptime_ui_output_.set(millis() / 1000);
@@ -320,7 +452,10 @@ class SensESPApp : public SensESPBaseApp {
   int button_gpio_pin_ = BUTTON_BUILTIN;
   std::shared_ptr<ButtonHandler> button_handler_;
 
-  std::shared_ptr<Networking> networking_;
+  std::shared_ptr<NetworkStateProducer> network_state_producer_;
+  std::shared_ptr<NetworkProvisioner> network_provisioner_;
+  std::shared_ptr<WiFiProvisioner> wifi_provisioner_;
+  std::function<std::shared_ptr<NetworkProvisioner>()> provisioner_factory_;
 
   std::shared_ptr<OTA> ota_;
   std::shared_ptr<SKDeltaQueue> sk_delta_queue_;

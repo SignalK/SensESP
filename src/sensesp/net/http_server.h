@@ -4,12 +4,12 @@
 #include "sensesp.h"
 
 #include <ESPmDNS.h>
+#include <IPAddress.h>
 #include <esp_http_server.h>
 #include <functional>
 #include <list>
 #include <memory>
 
-#include "WiFi.h"
 #include "sensesp/net/http_authenticator.h"
 #include "sensesp/system/serializable.h"
 #include "sensesp_base_app.h"
@@ -116,8 +116,18 @@ class HTTPServer : public FileSystemSaveable {
     auth_required_ = auth_required;
   }
 
-  void set_captive_portal(bool captive_portal) {
+  /**
+   * @brief Enable or disable the captive-portal redirect path.
+   *
+   * The captive-portal path is only meaningful when the underlying
+   * network provisioner is serving a soft-AP (currently WiFi only).
+   * SensESPApp passes the soft-AP IPv4 address here so this class
+   * does not need to depend on the WiFi library directly.
+   */
+  void set_captive_portal(bool captive_portal,
+                          IPAddress ap_ip = IPAddress()) {
     captive_portal_ = captive_portal;
+    captive_portal_ap_ip_ = ap_ip;
   }
 
   virtual bool to_json(JsonObject& config) override {
@@ -153,6 +163,7 @@ class HTTPServer : public FileSystemSaveable {
 
  protected:
   bool captive_portal_ = false;
+  IPAddress captive_portal_ap_ip_;
   httpd_handle_t server_ = nullptr;
   httpd_config_t config_;
   String username_;
