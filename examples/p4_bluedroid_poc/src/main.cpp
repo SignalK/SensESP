@@ -39,7 +39,6 @@ void setup() {
   SensESPAppBuilder builder;
   builder.set_hostname(GATEWAY_HOSTNAME)
       ->set_ethernet(EthernetConfig::waveshare_esp32p4_poe())
-      ->disable_wifi()
       ->enable_ota("bluedroid-poc-ota")
       ->get_app();
 

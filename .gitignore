@@ -17,8 +17,8 @@ managed_components
 # `platformio.ini` (which declares the envs and their custom_sdkconfig)
 # and `sdkconfig.defaults` (the hand-authored baseline). Everything in
 # the list below is machine-generated from those two sources.
-CMakeLists.txt
-src/CMakeLists.txt
-dependencies.lock
+/CMakeLists.txt
+/src/CMakeLists.txt
+/dependencies.lock
 sdkconfig.*
 !sdkconfig.defaults
