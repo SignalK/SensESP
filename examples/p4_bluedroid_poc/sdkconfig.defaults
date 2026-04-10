@@ -1,0 +1,104 @@
+# Project-owned sdkconfig for the P4 + Bluedroid PoC.
+# Consumed by pioarduino's espidf framework build. Unlike the
+# custom_sdkconfig in-place overlay path, this is a real IDF
+# project-level sdkconfig file that the IDF build picks up via
+# -DSDKCONFIG_DEFAULTS, so we own the resolved config cleanly.
+
+# ---------------------------------------------------------------------
+# Arduino-as-IDF-component knob — must be set so the Arduino runtime
+# initialises automatically via app_main, and our setup()/loop() fire.
+# ---------------------------------------------------------------------
+CONFIG_AUTOSTART_ARDUINO=y
+
+# ---------------------------------------------------------------------
+# ESP32-P4 silicon revision — the Waveshare ESP32-P4-WIFI6-POE-ETH
+# uses an ES (Early Sample) die, which corresponds to silicon revisions
+# less than 3.0. Without this, IDF defaults to rev 3.01+ and the app
+# crashes with an Illegal Instruction panic at the entry point because
+# of an incompatible memory-layout / startup code path (different
+# _bss_start naming, different sections.ld source file selection).
+#
+# The pioarduino board manifest esp32-p4.json declares
+# "chip_variant": "esp32p4_es" which selects the ES prebuilt libs
+# path, but that does NOT automatically propagate to the IDF sdkconfig
+# when building with `framework = espidf, arduino`. We have to set it
+# explicitly here.
+# ---------------------------------------------------------------------
+CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y
+CONFIG_ESP32P4_REV_MIN_1=y
+
+# ---------------------------------------------------------------------
+# Flash / PSRAM / CPU — match the Waveshare ESP32-P4-WIFI6-POE-ETH.
+# ---------------------------------------------------------------------
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+CONFIG_ESPTOOLPY_FLASHFREQ="80m"
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_360=y
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ=360
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_HEX=y
+CONFIG_SPIRAM_SPEED_200M=y
+
+# ---------------------------------------------------------------------
+# Partition table — declared in platformio.ini, also point IDF at it.
+# ---------------------------------------------------------------------
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="p4_16mb.csv"
+CONFIG_PARTITION_TABLE_FILENAME="p4_16mb.csv"
+
+# ---------------------------------------------------------------------
+# FreeRTOS / main task — match SensESP's top-level [espidf] defaults
+# so SensESP's own assumptions about stack size hold.
+# ---------------------------------------------------------------------
+CONFIG_FREERTOS_HZ=1000
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# ---------------------------------------------------------------------
+# Bluetooth host selection: Bluedroid, not NimBLE.
+#
+# BT_BLUEDROID_ENABLED and BT_NIMBLE_ENABLED are members of a Kconfig
+# choice, so setting BLUEDROID=y automatically unselects NimBLE.
+# BT_CONTROLLER_DISABLED=y because the P4 has no native BT controller
+# — the controller is provided by the onboard C6 over esp_hosted.
+# ---------------------------------------------------------------------
+CONFIG_BT_ENABLED=y
+CONFIG_BT_BLUEDROID_ENABLED=y
+CONFIG_BT_CONTROLLER_DISABLED=y
+CONFIG_BT_BLE_ENABLED=y
+CONFIG_BT_GATTC_ENABLE=y
+CONFIG_BT_GATTS_ENABLE=n
+CONFIG_BT_CLASSIC_ENABLED=n
+
+# Disable BLE Mesh — we're a BLE central, not a mesh node, and mesh
+# pulls in a pile of helpers that complicate the build.
+CONFIG_BLE_MESH=n
+
+# ---------------------------------------------------------------------
+# esp_hosted — route the BT controller to the C6 companion via SDIO,
+# and bridge HCI to Bluedroid via esp_hosted's VHCI driver.
+#
+# The gating symbol is ESP_HOSTED_ENABLE_BT_BLUEDROID (default n).
+# Turning that on enables the VHCI choice, of which there's currently
+# only one member (BLUEDROID_HCI_VHCI).
+# ---------------------------------------------------------------------
+CONFIG_ESP_HOSTED_ENABLED=y
+CONFIG_ESP_HOSTED_ENABLE_BT_BLUEDROID=y
+CONFIG_ESP_HOSTED_BLUEDROID_HCI_VHCI=y
+
+# ---------------------------------------------------------------------
+# Ethernet — keep the native P4 EMAC enabled, same as the Arduino
+# stock defaults but made explicit to survive sdkconfig regeneration.
+# ---------------------------------------------------------------------
+CONFIG_ETH_ENABLED=y
+CONFIG_ETH_USE_ESP32_EMAC=y
+
+# ---------------------------------------------------------------------
+# Misc — match SensESP's top-level [espidf] env so SensESP internals
+# behave the same here as in other espidf builds.
+# ---------------------------------------------------------------------
+CONFIG_MBEDTLS_PSK_MODES=y
+CONFIG_MBEDTLS_KEY_EXCHANGE_PSK=y
+CONFIG_HTTPD_MAX_REQ_HDR_LEN=1024
+CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1=n

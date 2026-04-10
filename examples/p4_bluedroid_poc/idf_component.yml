@@ -1,0 +1,13 @@
+## IDF component manifest for the SensESP P4 + Bluedroid PoC.
+##
+## pioarduino / IDF will read this and pull esp_hosted from the
+## Espressif Component Registry into managed_components/ at configure
+## time. No need to vendor anything manually.
+##
+## We pin the esp_hosted version that we know exists and contains
+## the vhci_drv.c (the Bluedroid VHCI path) rather than the hci_stub_drv
+## fallback. This matches what the stock pioarduino 55.03.37 bundled.
+
+dependencies:
+  idf: '>=5.3'
+  espressif/esp_hosted: '==2.12.3'

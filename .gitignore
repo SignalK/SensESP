@@ -10,3 +10,15 @@ docs/Gemfile.lock
 docs/.bundle
 docs/_site
 managed_components
+
+# pioarduino's `framework = espidf, arduino` build mode generates these
+# at the repo root on first configure. They are per-environment build
+# artifacts and should not be committed — the project-tracked inputs are
+# `platformio.ini` (which declares the envs and their custom_sdkconfig)
+# and `sdkconfig.defaults` (the hand-authored baseline). Everything in
+# the list below is machine-generated from those two sources.
+/CMakeLists.txt
+/src/CMakeLists.txt
+/dependencies.lock
+sdkconfig.*
+!sdkconfig.defaults

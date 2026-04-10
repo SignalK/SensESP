@@ -1,6 +1,17 @@
 CONFIG_AUTOSTART_ARDUINO=y
 # CONFIG_WS2812_LED_ENABLE is not set
 CONFIG_FREERTOS_HZ=1000
+# ESP32-P4 currently-shipping dev boards (Waveshare ESP32-P4-WIFI6-POE-ETH,
+# ESP32-P4 Function EV Board, etc.) use ES (Early Sample) silicon at chip
+# revision v1.x, well below v3.00. The IDF default assumes v3.01+ and
+# selects a different esp_system startup path + sections.ld linker
+# fragment source, which produces a binary that crashes at the entry
+# point on ES silicon with an Illegal Instruction panic. This symbol
+# is silently ignored on all non-ESP32-P4 targets (gated by
+# IDF_TARGET_ESP32P4 in esp_hw_support/port/esp32p4/Kconfig.hw_support),
+# so placing it in the shared sdkconfig.defaults is safe.
+CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y
+CONFIG_ESP32P4_REV_MIN_1=y
 CONFIG_MBEDTLS_PSK_MODES=y
 CONFIG_MBEDTLS_KEY_EXCHANGE_PSK=y
 CONFIG_ESPTOOLPY_FLASHFREQ="80m"
