@@ -40,6 +40,10 @@ namespace sensesp {
 /// to compile.
 using Networking = WiFiProvisioner;
 
+/// @deprecated Use NetworkStateProducer directly. Kept so code that
+/// references the WiFiStateProducer type by name continues to compile.
+using WiFiStateProducer = NetworkStateProducer;
+
 }  // namespace sensesp
 
 #endif  // SENSESP_NET_NETWORKING_H_
