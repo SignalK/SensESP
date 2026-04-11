@@ -135,10 +135,10 @@ class SensESPBaseApp {
 
   ~SensESPBaseApp() { instance_ = nullptr; }
 
-  void init_hostname() {
+  void init_hostname(const String& default_hostname = kDefaultHostname) {
     hostname_ = std::make_shared<PersistingObservableValue<String>>(
-        kDefaultHostname, "/system/hostname");
-    ConfigItem(hostname_);  // Make hostname configurable
+        default_hostname, "/system/hostname");
+    ConfigItem(hostname_);
   }
 
   /**
@@ -165,10 +165,14 @@ class SensESPBaseApp {
   std::shared_ptr<Filesystem> filesystem_;
 
   const SensESPBaseApp* set_hostname(String hostname) {
+    // Pass the builder's hostname as the default for the
+    // PersistingObservableValue constructor. If a user has
+    // configured a different hostname via the web UI, load()
+    // in the constructor will override this default — no
+    // special-case guard needed.
     if (!hostname_) {
-      init_hostname();
+      init_hostname(hostname);
     }
-    hostname_->set(hostname);
     return this;
   }
 };
