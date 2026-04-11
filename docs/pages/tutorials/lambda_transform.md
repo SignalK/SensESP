@@ -2,6 +2,7 @@
 layout: default
 title: Implementing Arbitrary Transforms
 parent: Tutorials
+nav_order: 30
 ---
 # Implementing Arbitrary Transforms with `LambdaTransform`
 

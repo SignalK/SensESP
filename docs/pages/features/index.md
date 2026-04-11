@@ -6,6 +6,128 @@ nav_order: 40
 
 # Features
 
+## Application Builder
+
+`SensESPAppBuilder` is the entry point for configuring a SensESP application. All methods return the builder for method chaining, except `get_app()` which returns the configured application.
+
+**Identity:**
+
+| Method | Description |
+|--------|-------------|
+| `set_hostname(String hostname)` | Set the device hostname (default: `"SensESP"`). Used for mDNS discovery and WiFi AP name. |
+
+**Networking:**
+
+| Method | Description |
+|--------|-------------|
+| `set_wifi_client(String ssid, String password)` | Set WiFi network credentials |
+| `set_wifi_access_point(String ssid, String password)` | Configure the WiFi soft-AP SSID and password |
+| `disable_wifi()` | Disable WiFi entirely (for Ethernet-only setups) |
+| `set_ethernet(config)` | Configure Ethernet provisioner (ESP32-P4 boards) |
+| `set_sk_server(String address, uint16_t port)` | Set Signal K server address (defaults to mDNS discovery) |
+
+**Security:**
+
+| Method | Description |
+|--------|-------------|
+| `set_admin_user(username, password)` | Set HTTP Digest Authentication credentials for the web UI |
+| `enable_ota(password)` | Enable over-the-air firmware updates |
+
+**Hardware:**
+
+| Method | Description |
+|--------|-------------|
+| `set_button_pin(int pin)` | Set the GPIO pin for the system button (`-1` to disable) |
+| `set_system_status_led(led)` | Install a custom status LED implementation |
+
+**System Sensors:**
+
+| Method | Description |
+|--------|-------------|
+| `enable_system_info_sensors(prefix)` | Enable all built-in system info sensors |
+| `enable_free_mem_sensor(prefix)` | Enable free memory sensor |
+| `enable_uptime_sensor(prefix)` | Enable uptime sensor |
+| `enable_ip_address_sensor(prefix)` | Enable IP address sensor |
+| `enable_wifi_signal_sensor(prefix)` | Enable WiFi signal strength sensor |
+| `enable_system_hz_sensor(prefix)` | Enable event loop frequency sensor |
+
+**Reliability:**
+
+| Method | Description |
+|--------|-------------|
+| `enable_wifi_watchdog()` | Restart device if WiFi disconnected for 3 minutes |
+
+**Finalize:**
+
+| Method | Description |
+|--------|-------------|
+| `get_app()` | Build and return the configured `SensESPApp`. Must be called last. |
+
+Here is a complete builder example:
+
+```c++
+SensESPAppBuilder builder;
+builder.set_hostname("my-engine-monitor")
+       ->set_wifi_client("MyBoatWiFi", "password123")
+       ->enable_ota("otapass")
+       ->set_admin_user("admin", "admin123")
+       ->enable_system_info_sensors()
+       ->enable_wifi_watchdog()
+       ->get_app();
+```
+
+----
+
+## Configuration System
+
+SensESP has a two-part configuration system: persistence on the device file system, and optional exposure through the web UI.
+
+### Persistence
+
+Any Sensor, Transform, or Output with a `config_path` parameter can save its settings to the device file system. The `config_path` must be unique and start with a forward slash:
+
+```c++
+auto* linear = new Linear(1.0, 0.0, "/calibration");
+```
+
+On restart, the saved configuration is loaded automatically, so user-adjusted values survive power cycles.
+
+### Web UI exposure with ConfigItem
+
+To make a configurable object editable through the web UI, wrap it in `ConfigItem()`:
+
+```c++
+auto* linear = new Linear(1.0, 0.0, "/calibration");
+
+ConfigItem(linear)
+    ->set_title("Calibration")
+    ->set_description("Adjust the sensor calibration.")
+    ->set_sort_order(1000)
+    ->set_requires_restart(false);
+```
+
+Available `ConfigItem` methods:
+
+| Method | Description |
+|--------|-------------|
+| `set_title(String)` | Display name in the web UI |
+| `set_description(String)` | Description text (supports HTML) |
+| `set_sort_order(int)` | Controls ordering (lower numbers appear first) |
+| `set_requires_restart(bool)` | Indicates if a restart is needed after changing this value |
+
+### Read-only status with StatusPageItem
+
+For read-only status display on the web UI, use `StatusPageItem`:
+
+```c++
+auto* status = new StatusPageItem<String>("Engine Status", "idle", "Engine", 1000);
+engine_state->connect_to(status);  // auto-updates when engine_state changes
+```
+
+`StatusPageItem` is a `ValueConsumer`, so you can connect any `ValueProducer` to it and it will update the web UI automatically whenever the value changes.
+
+----
+
 ## Button Handling
 
 Commonly used ESP32 devices such as the [SH-ESP32](https://docs.hatlabs.fi/sh-esp32/) or the DevKitC variants have a press button on the GPIO pin 0. SensESP by default recognizes the following button presses:

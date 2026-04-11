@@ -2,6 +2,7 @@
 layout: default
 title: Tank level Calculations
 parent: Tutorials
+nav_order: 40
 ---
 
 # Using `AnalogInput` to Calculate a Tank Level
