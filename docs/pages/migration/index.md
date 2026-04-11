@@ -80,30 +80,6 @@ event_loop()->onRepeat(
 
 SensESP v3 has removed the `Startable` class. In previous versions, you would have `sensesp_app->start();` as the last line in your `setup()` function. This is no longer necessary. If you need to initialize something after the `setup()` function has finished, create a zero-delay event: `event_loop()->onDelay(0, []() { /* your code here */ });`.
 
-Logging initialization has changed. At the beginning of your `setup()` function, remove these lines:
-
-```c++
-#ifndef SERIAL_DEBUG_DISABLED
-  SetupSerialDebug(115200);
-#endif
-```
-and replace them with this line:
-```c++
-SetupLogging();
-```
-In `platformio.ini`, replace the `build_flags` definition with this:
-```ini
-build_flags =
-   -D LED_BUILTIN=2
-   ; Max (and default) debugging level in Arduino ESP32 Core
-   -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE
-   ; Arduino Core bug workaround: define the log tag for the Arduino
-   ; logging macros.
-   -D TAG='"ARDUINO"'
-   ; Use the ESP-IDF logging library - required by SensESP.
-   -D USE_ESP_IDF_LOG
-```
-
 See the next section how to update your code to the new config item system.
 
 ### Exposing Sensors, Transforms, and Outputs to the Web Interface
@@ -121,6 +97,33 @@ ConfigItem(input_calibration)
 analog_input->connect_to(input_calibration);
 ```
 
+### New Transforms
+
+SensESP v3 adds several new transform classes. For detailed usage, see the [Concepts](../concepts/) page.
+
+- `ExpiringValue` — output expires after a given duration unless updated
+- `Repeat` — repeats the last input value at a fixed interval
+- `RepeatStopping` — repeats the input value, stopping after a given time
+- `RepeatExpiring` — repeats the input value, emitting a `Nullable<T>` null after expiration
+- `RepeatConstantRate` — repeats at a constant rate regardless of input rate, using `Nullable<T>`
+- `Join` — combines multiple inputs into a tuple, emitting when any input updates
+- `Zip` — combines multiple inputs into a tuple, emitting only when all inputs have updated
+- `Filter` — passes the input value through only if it satisfies a predicate
+- `Throttle` — limits the rate of output emissions
+- `Hysteresis` — emits a boolean output based on upper and lower thresholds
+
+### StatusPageItem
+
+`UIOutput` and `UILambdaOutput` have been renamed to `StatusPageItem`. Unlike the old classes, `StatusPageItem` is a `ValueConsumer`, so you can connect a producer to it directly rather than polling with a lambda.
+
+### Nullable\<T\>
+
+`Nullable<T>` is a wrapper type that represents a value that may be invalid. It is used by `RepeatExpiring` and `RepeatConstantRate` to signal that a repeated value has expired (the output becomes null/invalid). Downstream consumers can check whether the value is valid before acting on it.
+
+### Smart Pointers
+
+Smart pointers (`std::shared_ptr`) are used internally throughout SensESP v3, reducing the risk of memory leaks and dangling pointer crashes. Using smart pointers in your own code is supported but not required.
+
 ### Logging
 
 Previous SensESP versions logged to the serial port using the `debugX` functions, where `X` is the log level.
@@ -128,19 +131,7 @@ This pattern was inherited from the RemoteDebug library.
 SensESP v3 has switched to using standard ESP-IDF logging functions.
 They allow redirecting log messages to different outputs, which will be used in future SensESP versions to provide logging to the web interface.
 
-To enable logging in SensESP v3, change the `build_flags` in your `platformio.ini` file to include the following:
-
-```ini
-build_flags =
-   -D LED_BUILTIN=2
-   ; Max (and default) debugging level in Arduino ESP32 Core
-   -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE
-   ; Arduino Core bug workaround: define the log tag for the Arduino
-   ; logging macros.
-   -D TAG='"ARDUINO"'
-   ; Use the ESP-IDF logging library - required by SensESP.
-   -D USE_ESP_IDF_LOG
-```
+Adjust your build_flags and setup function as described in the Quick Changes section above.
 
 The `debugX` functions are still available, but they are now just wrappers around the ESP-IDF logging functions.
 In any new code, use the `ESP_LOGX` functions, where `X` is the log level.
@@ -165,10 +156,6 @@ ESP_LOGD(__FILE__, "Sending value %d to fobulator %s", value, fobulator_name);
 ...
 ESP_LOGE(__FILE__, "Failed to initialize NMEA2000");
 ```
-
-To enable logging in previous SensESP versions, you had to call `SetupSerialDebug(115200)` as the first line in your `setup()` function.
-In new SensESP versions, replace this with the new `SetupLogging()` function call to set logging defaults.
-The old `SetupSerialDebug` function is still available, but it is now just a wrapper around `SetupLogging`.
 
 It is possible to change the log level for individual tags.
 Here is an example of how to set the overall log level to `INFO` and the log level for the `main.cpp` tag to `DEBUG`:

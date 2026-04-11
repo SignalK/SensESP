@@ -129,4 +129,42 @@ events through `Network.onEvent`.
 ----
 
 ## WiFi manager
+
+SensESP v3 includes a built-in WiFi provisioner — no external WiFiManager library is needed. The device can run in simultaneous AP (Access Point) and STA (Station/client) mode, so you can configure WiFi credentials while the device is also connected to your network.
+
+The AP mode serves a built-in captive portal with the same web UI used for runtime configuration. Up to 3 WiFi client configurations can be saved; if the current network connection fails, the device cycles through the saved networks automatically.
+
+WiFi configuration is persisted to the device file system and restored on restart. If you hard-code credentials with `set_wifi_client()` in your sketch, those serve as defaults — but they can be overridden by saved configuration through the web UI. This means you can ship a device with initial credentials and let the end user change them later without reflashing.
+
 ## System info sensors
+
+SensESP provides five built-in system info sensors for monitoring device health:
+
+| Sensor | Type | Description |
+|--------|------|-------------|
+| `SystemHz` | `float` | Event loop frequency (iterations per second) |
+| `FreeMem` | `uint32_t` | Free heap memory in bytes |
+| `Uptime` | `float` | Seconds since boot |
+| `IPAddrDev` | `String` | Device IP address |
+| `WiFiSignal` | `int` | WiFi signal strength (RSSI in dBm) |
+
+The easiest way to enable all of them at once is on the builder:
+
+```c++
+SensESPAppBuilder builder;
+auto app = builder.set_hostname("my-device")
+                  ->enable_system_info_sensors()
+                  ->get_app();
+```
+
+You can also enable individual sensors if you only need a subset:
+
+```c++
+builder.enable_free_mem_sensor()
+       ->enable_uptime_sensor()
+       ->enable_system_hz_sensor()
+       ->enable_ip_address_sensor()
+       ->enable_wifi_signal_sensor()
+```
+
+Each sensor is a `ValueProducer` that can be connected to Signal K outputs or other transforms, just like any other sensor in your project. The optional prefix parameter controls the Signal K path prefix (defaults to `"sensors.sensesp"`).
