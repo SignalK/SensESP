@@ -78,7 +78,7 @@ void setup() {
     pinMode(kGpioPin, OUTPUT);
 
     // create the repeat event
-    app.onRepeat(
+    event_loop()->onRepeat(
         interval,
         []() {
             bool current_state = digitalRead(kGpioPin);
@@ -136,8 +136,8 @@ A [Transform](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_transf
 auto* sensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
 
 sensor
-    ->connectTo(new Frequency(multiplier, config_path_calibrate))
-    ->connectTo(new SKOutputFloat(sk_path, config_path_skpath));
+    ->connect_to(new Frequency(multiplier, config_path_calibrate))
+    ->connect_to(new SKOutputFloat(sk_path, config_path_skpath));
 ```
 
 The first line instantiates a Sensor of type DigitalInputCounter. The second line is a Transform of type [Frequency](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_frequency.html) - it takes a raw number from the DigitalInputCounter Sensor and converts it to hertz, then passes it along to [SKOutputFloat](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_s_k_output_numeric.html). SKOutputFloat is a special Transform whose purpose is to send a float value to the Signal K Server.
@@ -147,11 +147,11 @@ A much more complex example is `temperature_sender.cpp`, where the meat of the p
 ```c++
 auto* analog_input = new AnalogInput();
 
-analog_input->connectTo(new AnalogVoltage())
-    ->connectTo(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))
-    ->connectTo(new TemperatureInterpreter("/gen/temp/curve"))
-    ->connectTo(new Linear(1.0, 0.0, "/gen/temp/calibrate"))
-    ->connectTo(new SKOutputFloat(sk_path, "/gen/temp/sk"));
+analog_input->connect_to(new AnalogVoltage())
+    ->connect_to(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))
+    ->connect_to(new TemperatureInterpreter("/gen/temp/curve"))
+    ->connect_to(new Linear(1.0, 0.0, "/gen/temp/calibrate"))
+    ->connect_to(new SKOutputFloat(sk_path, "/gen/temp/sk"));
 ```
 
 In this example, there is still only one Sensor (AnalogInput), but several Transforms, all required to turn the raw value from the Analog Input pin on the MCU into a temperature that's sent to the Signal K Server.
@@ -253,7 +253,7 @@ Here are three different ways to specify the Units for any data you're sending t
 
   /**
    * chain_counter is connected to accumulator, which is connected to an
-   * SKOutputNumber, which sends the final result to the indicated path on the
+   * SKOutputFloat, which sends the final result to the indicated path on the
    * Signal K server. (Note that each data type has its own version of SKOutput:
    * SKOutputFloat, SKOutputInt, SKOutputBool, and SKOutputString.)
    */

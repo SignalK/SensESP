@@ -193,7 +193,7 @@ Next, we'll create the SensESP application using the builder class. Add the foll
 
 This will create a SensESP app with the hostname `sensesp-bme280`. You can change this to whatever you want, but make sure it's unique on your network. The builder class also allows you to set the WiFi SSID and password and other settings, if needed. See the [SensESPAppBuilder](/generated/docs/classsensesp_1_1_sens_e_s_p_app_builder.html) documentation for more information.
 
-One more thing to do is to add the `event_loopU()->tick();` command to the end of the `loop()` function. This call triggers execution of any ReactESP events that have been scheduled.
+One more thing to do is to add the `event_loop()->tick();` command to the end of the `loop()` function. This call triggers execution of any ReactESP events that have been scheduled.
 
 We're almost ready to give it a go! There's one more thing that is unobvious but very important. Have a look at the current `loop()` function:
 
@@ -273,9 +273,9 @@ void printValues() {
   float pressure_Pa = bme.readPressure();
   float humidity_ratio = bme.readHumidity() / 100.0F;
 
-  temperature_output->set_input(temperature_K);
-  pressure_output->set_input(pressure_Pa);
-  humidity_output->set_input(humidity_ratio);
+  temperature_output->set(temperature_K);
+  pressure_output->set(pressure_Pa);
+  humidity_output->set(humidity_ratio);
 
   Serial.println();
 }
@@ -313,9 +313,9 @@ void printValues() {
   float pressure_Pa = bme.readPressure();
   float humidity_ratio = bme.readHumidity() / 100.0F;
 
-  temperature_output->set_input(temperature_K);
-  pressure_output->set_input(pressure_Pa);
-  humidity_output->set_input(humidity_ratio);
+  temperature_output->set(temperature_K);
+  pressure_output->set(pressure_Pa);
+  humidity_output->set(humidity_ratio);
 }
 
 void setup() {
@@ -365,7 +365,7 @@ void loop() {
     last_run = millis();
   }
 
-  app.tick();
+  event_loop()->tick();
 }
 ```
 

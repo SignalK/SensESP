@@ -35,9 +35,9 @@ Moving forward from Observables, we have Producers and Consumers, implemented in
 Producers are Observables that additionally define a `connect_to()` method that can be used to connect the Producer to a Consumer.
 The `connect_to()` method creates a standardized callback between the two objects, thus allowing you to connect the two without having to define the callback yourself.
 
-Consumers, on their turn, are classes that implement the `set_input()` method that the Observable callback will call.
+Consumers, on their turn, are classes that implement the `set()` method that the Observable callback will call.
 Consumers also define a `connect_from()` convenience method for connecting the Consumer to a Producer.
-`connect_from()` is a bit more complex than `connect_to()` because it "goes against the flow", so to speak, but it can come in handy in many situations.
+`connect_from()` is a bit more complex than `connect_to()` because it "goes against the flow", so to speak, but it can come in handy in many situations. Note: `connect_from()` is deprecated in v3; prefer using `connect_to()` instead.
 
 It is common for a class to be both a `ValueProducer` and a `ValueConsumer`. Such classes typically receive values, perform some operations, and then notify their consumers, thus creating a _transform_ of the input. [`Transform`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_transform.html) classes are described in the [Transforms](#Transforms) section.
 
@@ -73,9 +73,9 @@ SensESP can persist many objects to the local file system. In particular, class 
 ## Sensors
 
 [Sensors](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_sensor_t.html) are classes that read value from some real-world source and provide them to the rest of the system.
-Building on the concepts described above, a `Sensor` subclass is a `ValueProducer` of a certain type, a `Configurable`, and a `Startable` (even though the default `start()` method does nothing and is usually not overridden). In other words, it is something that you can attach Observables or Consumers to, which can store and retrieve its own configuration (and can be configured via the web interface), and can define its own startup routine.
+Building on the concepts described above, a `Sensor` subclass is a `ValueProducer` of a certain type and a `SensorConfig`. In other words, it is something that you can attach Observables or Consumers to, which can store and retrieve its own configuration (and can be configured via the web interface). (`Startable` still exists as a backward-compatibility stub but is no longer part of the primary inheritance chain.)
 
-Like ValueProducers, all Sensors inherit from the [`SensorT<T>`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_sensor_t.html) template class, and there are pre-specialized classes for convenience: `FloatSensor`, `IntSensor`, `BoolSensor`, and `StringSensor`.
+Like ValueProducers, all Sensors inherit from the [`Sensor<T>`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_sensor_t.html) template class, and there are pre-specialized classes for convenience: `FloatSensor`, `IntSensor`, `BoolSensor`, and `StringSensor`.
 
 When creating new sensor classes, inheriting from `Sensor` requires writing quite a bit of boilerplate that may not be very relevant for simple sensor classes.
 If you are creating a new sensor that simply reads a value using an external library at given time intervals, you can use the [`RepeatSensor`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_repeat_sensor.html) class instead.

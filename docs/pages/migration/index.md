@@ -59,7 +59,7 @@ For example, `ReactESP` class should be referred to as
 `reactesp::EventLoop`. In particular, this change probably needs to be made
 in your project's `main.cpp` file.
 
-SensESP uses the [ReactESP](https:://github.com/mairas/ReactESP) framework for event-based programming. In previous versions, the ReactESP "app" object had to be instantiated in the main program file. This is no longer the case, and SensESP will take care of this for you. Remove any line such as
+SensESP uses the [ReactESP](https://github.com/mairas/ReactESP) framework for event-based programming. In previous versions, the ReactESP "app" object had to be instantiated in the main program file. This is no longer the case, and SensESP will take care of this for you. Remove any line such as
 ```c++
 reactesp::ReactESP app;
 ```

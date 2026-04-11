@@ -72,7 +72,7 @@ Another place for SensESP discussions is the [discussion board on the SensESP Gi
   - More flexible and user-friendly UI
   - Support for authentication
   - Support for frontend plugins (app-defined React pages)
-  - Indicate when a ocnfiguration change requires a restart
+  - Indicate when a configuration change requires a restart
 
 - Remove Startable class
 - Rename classes:
@@ -80,7 +80,6 @@ Another place for SensESP discussions is the [discussion board on the SensESP Gi
   - `IntegratorT` -> `Integrator`
   - `DebounceTemplate` -> `Debounce`
   - `WSClient` -> `SKWSClient`
-  -
 - Add a run script to help with SensESP development
 - Function signature changes:
   - Pass received JSON objects
@@ -137,7 +136,7 @@ Another place for SensESP discussions is the [discussion board on the SensESP Gi
 
   ```ini
   lib_deps =
-    SignalK/SensESP @ >=3.0.0-beta.2,<4
+    SignalK/SensESP @ ^3.0.0
     # https://github.com/SignalK/SensESP.git  # Use this line to use the latest git version
     # symlink:///Users/mairas/src/SignalK/SensESP  # Use this line to use a local copy
   ```
