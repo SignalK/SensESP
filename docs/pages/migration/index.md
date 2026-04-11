@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Migrating From Version 1
+title: Migrating from Previous Versions
 nav_order: 70
 ---
 

@@ -88,18 +88,16 @@ The **System** tab also contains device control actions:
 
 Most ESP32 boards have a built-in LED that SensESP uses to indicate device status. The LED blink pattern tells you what the device is doing at a glance.
 
-| Pattern | Status | What to do |
-|:--------|:-------|:-----------|
-| `*___________________` | **WiFi not configured** | Connect to the device AP and configure WiFi (see [Initial Setup](#initial-setup-wifi-and-hostname)) |
-| `********************` | **WiFi AP active**, waiting for configuration | Same as above — the LED stays on continuously |
-| `******______________` | **Connecting to WiFi** | Wait — the device is trying to connect |
-| `**************______` | **WiFi connected** | Usually transitions quickly to the next state |
-| `*************_*_*_*_` | **Connecting to Signal K** | Wait — establishing WebSocket connection |
-| `******************__` | **Connected to Signal K** | Normal operation |
-| `****____` | **Checking authorization** | If this persists, approve the access request on the Signal K server web UI |
-| `*_*_*_*_____________` | **WebSocket disconnected** | Check Signal K server and network connectivity |
-
-In the pattern column, `*` = LED on, `_` = LED off. Each character represents roughly 50 ms.
+| LED | Status | What to do |
+|:---:|:-------|:-----------|
+| ![](../../assets/images/blink/wifi_not_configured.gif) | **WiFi not configured** — short flash, long pause | Connect to the device AP and configure WiFi (see [Initial Setup](#initial-setup-wifi-and-hostname)) |
+| ![](../../assets/images/blink/wifi_ap_active.gif) | **WiFi AP active**, waiting for configuration | Same as above — the LED stays on continuously |
+| ![](../../assets/images/blink/connecting_wifi.gif) | **Connecting to WiFi** | Wait — the device is trying to connect |
+| ![](../../assets/images/blink/wifi_connected.gif) | **WiFi connected** | Usually transitions quickly to the next state |
+| ![](../../assets/images/blink/connecting_sk.gif) | **Connecting to Signal K** — long on, quick flicker | Wait — establishing WebSocket connection |
+| ![](../../assets/images/blink/connected_sk.gif) | **Connected to Signal K** | Normal operation |
+| ![](../../assets/images/blink/checking_auth.gif) | **Checking authorization** — steady fast blink | If this persists, approve the access request on the Signal K server web UI |
+| ![](../../assets/images/blink/ws_disconnected.gif) | **WebSocket disconnected** — quick flicker, long pause | Check Signal K server and network connectivity |
 
 ## Remote Debugging
 
@@ -107,4 +105,4 @@ RemoteDebug (the telnet-based remote debugger) was removed in SensESP v3. Loggin
 
 The old `debugX()` functions still work as compatibility wrappers, so existing code won't break — but new code should use the ESP-IDF macros directly.
 
-See the Logging section of the [Migration Guide](../migration_guide/) for details on setting up logging in v3.
+See the Logging section of the [Migration Guide](../migration/) for details on setting up logging in v3.
