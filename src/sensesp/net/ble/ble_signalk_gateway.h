@@ -49,11 +49,14 @@ struct BLESignalKGatewayConfig {
   /// Empty string means use the SensESP library version.
   String firmware_version = "";
 
-  /// Max GATT sessions advertised in the hello message. Currently
-  /// always 0 because GATT support is not implemented yet — the
-  /// server will not send gatt_subscribe commands to a gateway
-  /// that advertises 0 slots.
+  /// Max GATT sessions advertised in the hello message.
   int max_gatt_sessions = 0;
+
+  /// Enable the control WebSocket (hello, status, GATT commands).
+  /// Disable on memory-constrained chips (e.g. C5 with WiFi+BLE)
+  /// where the WS reconnect can exhaust internal RAM. Advertisements
+  /// still flow via HTTP POST when the WS is disabled.
+  bool enable_control_ws = true;
 };
 
 /**

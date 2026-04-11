@@ -36,6 +36,7 @@ void setup() {
   BLESignalKGatewayConfig gw_cfg;
   gw_cfg.max_pending_ads = 50;
   gw_cfg.post_interval_ms = 3000;
+  gw_cfg.enable_control_ws = false;  // Save RAM on the C5
   g_gateway =
       std::make_shared<BLESignalKGateway>(g_ble, app->get_ws_client(), gw_cfg);
   g_gateway->start();

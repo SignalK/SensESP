@@ -86,15 +86,14 @@ void BLESignalKGateway::start() {
       new LambdaConsumer<SKWSConnectionState>([this](SKWSConnectionState s) {
         bool connected = (s == SKWSConnectionState::kSKWSConnected);
         sk_connected_.store(connected);
-        if (connected && control_ws_ == nullptr) {
+        if (config_.enable_control_ws && connected && control_ws_ == nullptr) {
           ESP_LOGI(kTag,
                    "SK main WS connected — starting BLE gateway control WS");
           init_control_ws();
         }
       }));
 
-  // If the SK WS is already connected, start the control WS now.
-  if (sk_client_->is_connected()) {
+  if (config_.enable_control_ws && sk_client_->is_connected()) {
     sk_connected_.store(true);
     init_control_ws();
   }
