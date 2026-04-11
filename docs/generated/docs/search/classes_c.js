@@ -9,5 +9,6 @@ var searchData=
   ['observablevalue_3c_20string_20_3e_6',['ObservableValue&lt; String &gt;',['../classsensesp_1_1_observable_value.html',1,'sensesp']]],
   ['observablevalue_3c_20uint16_5ft_20_3e_7',['ObservableValue&lt; uint16_t &gt;',['../classsensesp_1_1_observable_value.html',1,'sensesp']]],
   ['observablevalue_3c_20uint64_5ft_20_3e_8',['ObservableValue&lt; uint64_t &gt;',['../classsensesp_1_1_observable_value.html',1,'sensesp']]],
-  ['ota_9',['OTA',['../classsensesp_1_1_o_t_a.html',1,'sensesp']]]
+  ['observerentry_9',['ObserverEntry',['../structsensesp_1_1_observable_1_1_observer_entry.html',1,'sensesp::Observable']]],
+  ['ota_10',['OTA',['../classsensesp_1_1_o_t_a.html',1,'sensesp']]]
 ];

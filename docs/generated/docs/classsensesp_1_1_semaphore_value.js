@@ -5,6 +5,9 @@ var classsensesp_1_1_semaphore_value =
     [ "set", "classsensesp_1_1_semaphore_value.html#a5b30fcbd1afa337e8f22e4136adadd25", null ],
     [ "take", "classsensesp_1_1_semaphore_value.html#a42790a8e500b5d7c6841a51401b2f4fe", null ],
     [ "wait", "classsensesp_1_1_semaphore_value.html#a4444d01b7a1bac5a3617df18bb821204", null ],
+    [ "mutex_", "classsensesp_1_1_semaphore_value.html#a7cf4e6b39e939d952c4fd052a2a71fde", null ],
+    [ "mutex_buffer_", "classsensesp_1_1_semaphore_value.html#a46eaf92e9a6fd04311e485f58299e955", null ],
     [ "semaphore_", "classsensesp_1_1_semaphore_value.html#a0301de2d6aa08cabb326994d0a0bfc55", null ],
+    [ "semaphore_buffer_", "classsensesp_1_1_semaphore_value.html#a44235e2eab472a5b356e5dd45fc100ef", null ],
     [ "value_", "classsensesp_1_1_semaphore_value.html#ab06c0a3eccf9af56fae1931374225611", null ]
 ];

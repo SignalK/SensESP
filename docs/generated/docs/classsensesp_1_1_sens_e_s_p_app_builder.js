@@ -1,6 +1,7 @@
 var classsensesp_1_1_sens_e_s_p_app_builder =
 [
     [ "SensESPAppBuilder", "classsensesp_1_1_sens_e_s_p_app_builder.html#a16297b7d511c27217aaa69d8fd53c272", null ],
+    [ "disable_wifi", "classsensesp_1_1_sens_e_s_p_app_builder.html#a270ba3578f110247375e7dcc9dfc9173", null ],
     [ "enable_free_mem_sensor", "classsensesp_1_1_sens_e_s_p_app_builder.html#aa90ff7615dce9d7befeb421c7cf6f583", null ],
     [ "enable_ip_address_sensor", "classsensesp_1_1_sens_e_s_p_app_builder.html#aa36af1a2298d0a4db7f6efdf88baf07a", null ],
     [ "enable_ota", "classsensesp_1_1_sens_e_s_p_app_builder.html#affd5c5fb4583576ae1c533ebdb653c97", null ],
@@ -12,6 +13,7 @@ var classsensesp_1_1_sens_e_s_p_app_builder =
     [ "get_app", "classsensesp_1_1_sens_e_s_p_app_builder.html#ac350562617b1531d0b667a5c0c01b0bc", null ],
     [ "set_admin_user", "classsensesp_1_1_sens_e_s_p_app_builder.html#a1f94d1f51905c2ddc17acf4b97ea99c3", null ],
     [ "set_button_pin", "classsensesp_1_1_sens_e_s_p_app_builder.html#aba398aecdf9a1b8aa3c56dbb8adf9026", null ],
+    [ "set_ethernet", "classsensesp_1_1_sens_e_s_p_app_builder.html#a4ea72273bb563725ca19d935d997b9b8", null ],
     [ "set_hostname", "classsensesp_1_1_sens_e_s_p_app_builder.html#a2279d09dcc313b1c4299c3d914fbd6a7", null ],
     [ "set_sk_server", "classsensesp_1_1_sens_e_s_p_app_builder.html#a5a069b7609135e4450e7c402ac444baf", null ],
     [ "set_system_status_led", "classsensesp_1_1_sens_e_s_p_app_builder.html#a5845a5441fec5b8d87d87ffea2bcf567", null ],

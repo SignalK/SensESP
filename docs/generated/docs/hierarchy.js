@@ -56,6 +56,9 @@ var hierarchy =
     [ "sensesp::LEDPatternFragment", "classsensesp_1_1_l_e_d_pattern_fragment.html", null ],
     [ "sensesp::LocalDebug", "classsensesp_1_1_local_debug.html", null ],
     [ "sensesp::MDNSDiscovery", "classsensesp_1_1_m_d_n_s_discovery.html", null ],
+    [ "sensesp::NetworkProvisioner", "classsensesp_1_1_network_provisioner.html", [
+      [ "sensesp::WiFiProvisioner", "classsensesp_1_1_wi_fi_provisioner.html", null ]
+    ] ],
     [ "sensesp::NonceData", "structsensesp_1_1_nonce_data.html", null ],
     [ "sensesp::Nullable&lt; T &gt;", "classsensesp_1_1_nullable.html", null ],
     [ "sensesp::Observable", "classsensesp_1_1_observable.html", [
@@ -192,9 +195,8 @@ var hierarchy =
         [ "sensesp::Join5< T1, T2, T3, T4, T5 >", "classsensesp_1_1_join5.html", null ],
         [ "sensesp::Zip5< T1, T2, T3, T4, T5 >", "classsensesp_1_1_zip5.html", null ]
       ] ],
-      [ "sensesp::ValueProducer< WiFiState >", "classsensesp_1_1_value_producer.html", [
-        [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ],
-        [ "sensesp::WiFiStateProducer", "classsensesp_1_1_wi_fi_state_producer.html", null ]
+      [ "sensesp::ValueProducer< NetworkState >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::NetworkStateProducer", "classsensesp_1_1_network_state_producer.html", null ]
       ] ],
       [ "sensesp::ValueProducer< TO >", "classsensesp_1_1_value_producer.html", [
         [ "sensesp::Transform< FROM, TO >", "classsensesp_1_1_transform.html", [
@@ -248,6 +250,9 @@ var hierarchy =
           [ "sensesp::ThresholdTransform< int >", "classsensesp_1_1_threshold_transform.html", null ],
           [ "sensesp::Integrator< C, P >", "classsensesp_1_1_integrator.html", null ]
         ] ]
+      ] ],
+      [ "sensesp::ValueProducer< WiFiState >", "classsensesp_1_1_value_producer.html", [
+        [ "sensesp::WiFiProvisioner", "classsensesp_1_1_wi_fi_provisioner.html", null ]
       ] ],
       [ "sensesp::ValueProducer< int8_t >", "classsensesp_1_1_value_producer.html", [
         [ "sensesp::ObservableValue< int8_t >", "classsensesp_1_1_observable_value.html", [
@@ -329,28 +334,25 @@ var hierarchy =
         [ "sensesp::Sensor< T >", "classsensesp_1_1_sensor.html", null ]
       ] ]
     ] ],
+    [ "sensesp::Observable::ObserverEntry", "structsensesp_1_1_observable_1_1_observer_entry.html", null ],
     [ "sensesp::OTA", "classsensesp_1_1_o_t_a.html", null ],
     [ "sensesp::ParamInfo", "structsensesp_1_1_param_info.html", null ],
     [ "sensesp::SKRequest::PendingRequest", "classsensesp_1_1_s_k_request_1_1_pending_request.html", null ],
     [ "sensesp::Position", "structsensesp_1_1_position.html", null ],
-    [ "std::queue&lt; T &gt;", null, [
-      [ "sensesp::SafeQueue< SKWSConnectionState >", "classsensesp_1_1_safe_queue.html", null ],
-      [ "sensesp::SafeQueue< int >", "classsensesp_1_1_safe_queue.html", null ],
-      [ "sensesp::SafeQueue< T >", "classsensesp_1_1_safe_queue.html", null ]
-    ] ],
+    [ "sensesp::HTTPDigestAuthenticator::PrecomputedHA1", "structsensesp_1_1_h_t_t_p_digest_authenticator_1_1_precomputed_h_a1.html", null ],
     [ "sensesp::Resettable", "classsensesp_1_1_resettable.html", [
       [ "sensesp::Filesystem", "classsensesp_1_1_filesystem.html", null ],
-      [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ]
+      [ "sensesp::WiFiProvisioner", "classsensesp_1_1_wi_fi_provisioner.html", null ]
     ] ],
     [ "sensesp::ResettableCompare", "classsensesp_1_1_resettable_compare.html", null ],
     [ "sensesp::RouteDefinition", "classsensesp_1_1_route_definition.html", null ],
+    [ "sensesp::SafeQueue&lt; T &gt;", "classsensesp_1_1_safe_queue.html", null ],
     [ "sensesp::CurveInterpolator::Sample", "classsensesp_1_1_curve_interpolator_1_1_sample.html", null ],
     [ "sensesp::Saveable", "classsensesp_1_1_saveable.html", [
       [ "sensesp::FileSystemSaveable", "classsensesp_1_1_file_system_saveable.html", [
         [ "sensesp::PersistingObservableValue< String >", "classsensesp_1_1_persisting_observable_value.html", null ],
         [ "sensesp::CheckboxConfig", "classsensesp_1_1_checkbox_config.html", null ],
         [ "sensesp::HTTPServer", "classsensesp_1_1_h_t_t_p_server.html", null ],
-        [ "sensesp::Networking", "classsensesp_1_1_networking.html", null ],
         [ "sensesp::NumberConfig", "classsensesp_1_1_number_config.html", null ],
         [ "sensesp::PersistingObservableValue< T >", "classsensesp_1_1_persisting_observable_value.html", null ],
         [ "sensesp::RgbLed", "classsensesp_1_1_rgb_led.html", null ],
@@ -382,7 +384,8 @@ var hierarchy =
           [ "sensesp::Transform< time_t, String >", "classsensesp_1_1_transform.html", null ],
           [ "sensesp::Transform< bool, String >", "classsensesp_1_1_transform.html", null ],
           [ "sensesp::Transform< C, P >", "classsensesp_1_1_transform.html", null ]
-        ] ]
+        ] ],
+        [ "sensesp::WiFiProvisioner", "classsensesp_1_1_wi_fi_provisioner.html", null ]
       ] ]
     ] ],
     [ "sensesp::SensESPBaseApp", "classsensesp_1_1_sens_e_s_p_base_app.html", [
