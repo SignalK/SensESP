@@ -40,6 +40,10 @@ If you want to have your own project added to the list, [create an issue](https:
 - [NMEA 0183 input parser](https://github.com/SensESP/NMEA0183/): NMEA 0183 parser for SensESP. This library supports common GNSS (GPS, GLONASS, Galileo) receiver devices out of the box and can be easily extended to support other NMEA 0183 sentences as well.
 - Example project for implementing a Signal K GPS receiver using [SH-ESP32](https://shop.hatlabs.fi/products/sh-esp32) and a Beitian BN-880 GPS receiver module: [SensESP-BN-880](https://github.com/hatlabs/SensESP-BN-880).
 
+### BLE (Bluetooth Low Energy)
+
+- [SensESP BLE Gateway](https://github.com/dirkwa/sensesp-ble-gateway): BLE gateway that bridges Bluetooth Low Energy devices to signalk-server's BLE provider API. Supports ESP32-P4 (Bluedroid + esp_hosted over Ethernet) and ESP32-C5 (NimBLE over WiFi). Forwards advertisements via HTTP POST with optional control WebSocket for GATT client operations.
+
 ### Temperature and Humidity
 
 - [Adafruit MAX31856 thermocouple sensor shield](https://github.com/SensESP/MAX31856): Library for reading a Type K thermocouple with an Adafruit MAX31856 breakout board
