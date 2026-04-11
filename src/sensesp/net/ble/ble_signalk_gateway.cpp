@@ -2,6 +2,7 @@
 
 #include <HTTPClient.h>
 
+#include "esp_idf_version.h"
 #include "esp_log.h"
 #include "sensesp/sensesp_version.h"
 #include "sensesp/system/lambda_consumer.h"
@@ -203,8 +204,13 @@ void BLESignalKGateway::init_control_ws() {
   cfg.uri = url.c_str();
   cfg.task_stack = 4096;
   cfg.buffer_size = 1024;
+  // reconnect_timeout_ms and network_timeout_ms are only available
+  // in the IDF component version of esp_websocket_client, not in the
+  // Arduino-ESP32 prebuilt. Guard with a version check.
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
   cfg.reconnect_timeout_ms = 5000;
   cfg.network_timeout_ms = 10000;
+#endif
 
   control_ws_ = esp_websocket_client_init(&cfg);
   if (control_ws_ == nullptr) {
@@ -483,7 +489,7 @@ void BLESignalKGateway::handle_gatt_subscribe(JsonDocument& doc) {
     return;
   }
 
-  auto session = std::make_unique<GATTSession>();
+  std::unique_ptr<GATTSession> session(new GATTSession());
   session->session_id = session_id;
   session->mac = mac;
   session->service_uuid = service;
