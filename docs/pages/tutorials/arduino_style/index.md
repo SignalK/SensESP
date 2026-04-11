@@ -229,7 +229,7 @@ The first line instantiates a variable calling `last_run` that is `static`, mean
 
 [^1]: This code has an unobvious but significant flaw: once the `millis()` value overflows, the values will start again from zero, and the `if` statement will never be true again. An `unsigned long` variable is 64 bits long, with the maximum decimal value being 18&nbsp;446&nbsp;744&nbsp;073&nbsp;709&nbsp;551&nbsp;616. If you divide that by 1000, you'll get 18&nbsp;446&nbsp;744&nbsp;073&nbsp;709&nbsp;551 seconds, or 584&nbsp;554&nbsp;049 years. Be sure not to leave your device running for that long!
 
-Try uploading the code. If you get a note that WiFiManager is started, you need to configure the WiFi settings. Connect to the WiFi network named `Configure sensesp-bme280` with password "thisisfine". You should see a captive portal page where you can select your WiFi network and enter the password. After that, the device should connect to the network. At this point, the blue LED should start flashing, indicating that the device is connected to the network. You should also see the sensor values printed on the serial monitor, along with some status messages from SensESP.
+Try uploading the code. If you get a note that WiFiManager is started, you need to configure the WiFi settings. Connect to the WiFi network named `sensesp-bme280` with password "thisisfine". You should see a captive portal page where you can select your WiFi network and enter the password. After that, the device should connect to the network. At this point, the blue LED should start flashing, indicating that the device is connected to the network. You should also see the sensor values printed on the serial monitor, along with some status messages from SensESP.
 
 ## Adding Signal K Output
 

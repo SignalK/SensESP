@@ -35,17 +35,13 @@ If you're not seeing any log messages, check that `SetupLogging()` is present in
 
 When you start your ESP32 device the first time after uploading SensESP onto it, it needs to know what WiFi network to connect to — unless you have hard-coded the WiFi credentials, of course. SensESP has a built-in WiFi provisioner that automatically creates a WiFi access point for configuration purposes.
 
-Connect your computer or phone to the access point named “Configure SensESP” (or “Configure yourHostname” if you set a custom hostname in `main.cpp`). The password is `thisisfine`.
+Connect your computer or phone to the access point named “SensESP” (or whatever you set as the hostname in `main.cpp`). The default password is `thisisfine`.
 
 A captive portal should open automatically. If it doesn’t, open a browser and go to `192.168.4.1`. The captive portal serves the same web UI used for runtime configuration — from here you can configure WiFi client connections, change the hostname, and more.
 
-<!-- TODO: Update screenshot for v3 web UI -->
-![WiFi setup landing page](assets/wifimanager_landing_page.png){:width=”250px”}
+![WiFi client configuration](../../sensesp_wifi_client_config.jpg){:width=”400px”}
 
-<!-- TODO: Update screenshot for v3 web UI -->
-![WiFi network selection](assets/wifimanager_network_selection.png){:width=”250px”}
-
-Pick the SSID and enter the password of your WiFi network that your Signal K Server is on. Save the configuration, and the device will restart and try to connect to your WiFi network.
+Pick the SSID and enter the password of your WiFi network that your Signal K Server is on. You can configure up to three WiFi networks — the device will cycle through them if a connection fails. Save the configuration, and the device will restart and try to connect to your WiFi network.
 
 **Note:** The WiFi access point remains enabled by default even after you configure a client WiFi connection. If you don’t need the AP anymore, disable it explicitly through the web UI. You can also re-enable it at any time if you need to reconfigure the device.
 
@@ -63,25 +59,25 @@ There are several ways to do this:
 
 Once you have found out the hostname or IP address and enter the URL in a browser, you should see the SensESP web UI Status Page:
 
-<!-- TODO: Update screenshot for v3 web UI -->
-![Status page](assets/ui_status.png){:width="400px"}
+![Status page](../../sensesp_device_status.jpg){:width="400px"}
 
-The status page displays useful information about the device.
+The status page displays useful information about the device: free memory, uptime, network details, and Signal K connection status.
 
-The top menu allows you to configure the device or control it.
-First, the configuration page:
+The top menu bar provides access to the different configuration tabs. The **System** tab lets you change the device hostname and configure authentication:
 
-<!-- TODO: Update screenshot for v3 web UI -->
-![Configuration](assets/ui_configuration.png){:width="400px"}
+![System settings](../../sensesp_system_settings.jpg){:width="400px"}
 
-The configuration page shows all available configurable objects as individual editor cards on a single page. Configuration cards are rendered for objects wrapped in `ConfigItem()` in your code. You can adjust the parameter values and save the configuration.
+You can optionally protect the web UI with HTTP Digest Authentication by calling `set_admin_user()` on the SensESP builder during setup, or by enabling it on this page.
 
-You can optionally protect the web UI with HTTP Digest Authentication by calling `set_admin_user()` on the SensESP builder during setup.
+The **WiFi** tab (shown above in the Initial Setup section) lets you manage WiFi client and access point settings. The **Signal K** tab shows the connection security settings and authentication token:
 
-Finally, the Control menu shows different built-in and application controls you can use to control the device behavior.
+![Signal K configuration](../../sensesp_sk_config.jpg){:width="400px"}
 
-<!-- TODO: Update screenshot for v3 web UI -->
-![Control menu](assets/ui_control.png){:width="400px"}
+The **Configuration** tab shows all available configurable objects as individual editor cards. Configuration cards are rendered for objects wrapped in `ConfigItem()` in your code. You can adjust the parameter values and save the configuration.
+
+![Configuration page](../../sensesp_config_ui.jpg){:width="400px"}
+
+The **System** tab also contains device control actions:
 
 * "Restart device" will restart the ESP.
 * "Reset device" will not erase the program, but it will erase all the WiFi information, the Signal K server information and authorization token, and any Sensor and Transform configuration you've done.
@@ -90,72 +86,20 @@ Finally, the Control menu shows different built-in and application controls you 
 
 ## The Blinking LED
 
-Most ESP32's have a built-in LED that can be programmed. SensESP uses that capability to help you know the status of the program, as it goes through its normal phases: starting up, connecting to wifi, making the WebSocket connection to the Signal K Server. (BAS: what does it do when it's up and running and sending data?)
+Most ESP32 boards have a built-in LED that SensESP uses to indicate device status. The LED blink pattern tells you what the device is doing at a glance.
 
-Each item below represents one of the LED System Status blink patterns. The `*` represent the time the LED is on, the `_` represent the time it's off.) The numbers are the milliseconds that correspond to the `*` and the `_`.
+| Pattern | Status | What to do |
+|:--------|:-------|:-----------|
+| `*___________________` | **WiFi not configured** | Connect to the device AP and configure WiFi (see [Initial Setup](#initial-setup-wifi-and-hostname)) |
+| `********************` | **WiFi AP active**, waiting for configuration | Same as above — the LED stays on continuously |
+| `******______________` | **Connecting to WiFi** | Wait — the device is trying to connect |
+| `**************______` | **WiFi connected** | Usually transitions quickly to the next state |
+| `*************_*_*_*_` | **Connecting to Signal K** | Wait — establishing WebSocket connection |
+| `******************__` | **Connected to Signal K** | Normal operation |
+| `****____` | **Checking authorization** | If this persists, approve the access request on the Signal K server web UI |
+| `*_*_*_*_____________` | **WebSocket disconnected** | Check Signal K server and network connectivity |
 
-No WiFi Access Point found
-
-```
-*___________________
-```
-
- 50, 950
-
-Wifi credentials have not been set up yet, either by hard-coding in `main.cpp` or using the Wifi Manager web UI. If you see this, you need to go through the steps described above in the [Initial Setup](##initial-setup-(wifi-and-hostname)).
-
-```
-********************
-```
-
-1000, 0
-
-Trying to connect to wifi (SSID and password already setup)
-
-```
-******______________
-```
-
-300, 700
-
-Connected to wifi (this one doesn't last long, as it goes almost immediately to the next one below)
-```
-**************______
-```
-
-700, 300
-
-Connecting to the Signal K Server (trying to make the WebSocket connection)
-
-```
-*************_*_*_*_
-```
-
-650, 50, 50, 50, 50, 50, 50, 50
-
-Connected to the Signal K Server
-
-```
-******************__
-```
-
-900, 100
-
-Connected to the Server, checking the authorization. If you see this for more than just a few seconds, you probably need to go to the Signal K Server's web interface and authorize the security request
-
-```
-****____
-```
-
-200, 200
-
-Websocket disconnected
-
-```
-*_*_*_*_____________
-```
-
-50, 50, 50, 50, 50, 50, 50, 650
+In the pattern column, `*` = LED on, `_` = LED off. Each character represents roughly 50 ms.
 
 ## Remote Debugging
 
