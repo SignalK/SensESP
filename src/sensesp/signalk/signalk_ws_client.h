@@ -98,6 +98,24 @@ class SKWSClient : public FileSystemSaveable,
   bool is_ssl_enabled() const { return ssl_enabled_; }
 
   /**
+   * @brief Current Signal K access token, or an empty string if none.
+   *
+   * Returned as a bare JWT without the "Bearer " prefix. Intended for
+   * subsystems that need to piggy-back on the same SK credentials as
+   * the main delta websocket — for example, a BLE gateway that also
+   * needs to authenticate against signalk-server's provider API but
+   * does not have its own access-request flow.
+   *
+   * Returns "" when SKWSClient has not yet obtained a token (either
+   * because the server does not require auth, or because the
+   * access-request flow is still in progress). Callers that need
+   * auth must handle the empty-string case, typically by deferring
+   * their own connect attempts until the main SK websocket is
+   * connected (which is a precondition for a valid token anyway).
+   */
+  String get_auth_token() const { return auth_token_; }
+
+  /**
    * @brief Enable or disable SSL/TLS manually.
    *
    * Note: SSL is normally auto-detected. Use this only if you need
