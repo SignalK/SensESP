@@ -1,0 +1,19 @@
+dependencies:
+  idf: '>=5.3'
+  # Exclude components that embed HTTPS certs (pioarduino build bug)
+  espressif/esp_insights:
+    version: '*'
+    rules:
+      - if: "false"
+  espressif/esp_rainmaker:
+    version: '*'
+    rules:
+      - if: "false"
+  espressif/esp_diagnostics:
+    version: '*'
+    rules:
+      - if: "false"
+  espressif/esp_diag_data_store:
+    version: '*'
+    rules:
+      - if: "false"
