@@ -11,7 +11,7 @@ var searchData=
   ['description_8',['description',['../structsensesp_1_1_param_info.html#a89e5aab354b96850f747d8e35bb9f55b',1,'sensesp::ParamInfo']]],
   ['description_5f_9',['description_',['../classsensesp_1_1_s_k_metadata.html#a7ff429692c4d289572a73f418c423b16',1,'sensesp::SKMetadata::description_'],['../classsensesp_1_1_config_item_base.html#a02ea2db20c73b8360c6fb18a252b1905',1,'sensesp::ConfigItemBase::description_']]],
   ['display_5fname_5f_10',['display_name_',['../classsensesp_1_1_s_k_metadata.html#a0edb674bc0b8f8d59788f1cea17084e1',1,'sensesp::SKMetadata']]],
-  ['dns_5fserver_5f_11',['dns_server_',['../classsensesp_1_1_client_s_s_i_d_config.html#af2c1823ac70f670e23122084fe6b128f',1,'sensesp::ClientSSIDConfig::dns_server_'],['../classsensesp_1_1_networking.html#a103d6ad176993a44b01726cec742c985',1,'sensesp::Networking::dns_server_']]],
+  ['dns_5fserver_5f_11',['dns_server_',['../classsensesp_1_1_client_s_s_i_d_config.html#af2c1823ac70f670e23122084fe6b128f',1,'sensesp::ClientSSIDConfig::dns_server_'],['../classsensesp_1_1_wi_fi_provisioner.html#ae84f9b92425463480789b0bedb6dbc2a',1,'sensesp::WiFiProvisioner::dns_server_']]],
   ['double_5fclick_5finterval_5f_12',['double_click_interval_',['../classsensesp_1_1_click_type.html#ab3bb65e1d99930bd7272896149c0d939',1,'sensesp::ClickType']]],
   ['duration_5fat_5fstart_5fms_5f_13',['duration_at_start_ms_',['../classsensesp_1_1_time_counter.html#a74ebbc18a49227e32511251897eb384c',1,'sensesp::TimeCounter']]],
   ['duration_5fms_5f_14',['duration_ms_',['../classsensesp_1_1_l_e_d_pattern_fragment.html#a1f060a9fe24c6c134d83285ec0a959e5',1,'sensesp::LEDPatternFragment::duration_ms_'],['../classsensesp_1_1_time_counter.html#af02c40f8dc412c93a67546bdda89df8f',1,'sensesp::TimeCounter::duration_ms_']]]

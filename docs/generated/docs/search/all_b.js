@@ -31,12 +31,14 @@ var searchData=
   ['linear_28',['Linear',['../classsensesp_1_1_linear.html',1,'sensesp::Linear'],['../classsensesp_1_1_linear.html#a4e6da29a8b74a160470f9cc934a4b572',1,'sensesp::Linear::Linear()']]],
   ['linear_2ecpp_29',['linear.cpp',['../linear_8cpp.html',1,'']]],
   ['linear_2eh_30',['linear.h',['../linear_8h.html',1,'']]],
-  ['load_31',['load',['../classsensesp_1_1_saveable.html#adaf384fbe58c917879feaf7b054620a1',1,'sensesp::Saveable::load()'],['../classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a',1,'sensesp::FileSystemSaveable::load()'],['../classsensesp_1_1_config_item_base.html#a21fade93e4abce3b060840496353485b',1,'sensesp::ConfigItemBase::load()'],['../classsensesp_1_1_config_item_t.html#a928a4caa4c6f4c1ebda4904720184a44',1,'sensesp::ConfigItemT::load()']]],
-  ['local_5fdebug_2ecpp_32',['local_debug.cpp',['../local__debug_8cpp.html',1,'']]],
-  ['local_5fdebug_2eh_33',['local_debug.h',['../local__debug_8h.html',1,'']]],
-  ['localdebug_34',['LocalDebug',['../classsensesp_1_1_local_debug.html',1,'sensesp']]],
-  ['long_5fclick_5fdelay_5f_35',['long_click_delay_',['../classsensesp_1_1_click_type.html#a49ab4f06ec2a1bffe384533b96e18bda',1,'sensesp::ClickType']]],
-  ['longitude_36',['longitude',['../structsensesp_1_1_position.html#a45ab87c9b3068e644a56df8364c175e5',1,'sensesp::Position']]],
-  ['longsingleclick_37',['LongSingleClick',['../namespacesensesp.html#a21975f0611649b430d00a47945332495ad0fff85d3541aedaddfb3c5e67e897b4',1,'sensesp']]],
-  ['loop_38',['loop',['../classsensesp_1_1_s_k_w_s_client.html#a24be571bdd7183f50711457a9be96fd6',1,'sensesp::SKWSClient']]]
+  ['list_31',['Deprecated List',['../deprecated.html',1,'']]],
+  ['load_32',['load',['../classsensesp_1_1_saveable.html#adaf384fbe58c917879feaf7b054620a1',1,'sensesp::Saveable::load()'],['../classsensesp_1_1_file_system_saveable.html#a79b2e2e657112851dfda8785d217578a',1,'sensesp::FileSystemSaveable::load()'],['../classsensesp_1_1_config_item_base.html#a21fade93e4abce3b060840496353485b',1,'sensesp::ConfigItemBase::load()'],['../classsensesp_1_1_config_item_t.html#a928a4caa4c6f4c1ebda4904720184a44',1,'sensesp::ConfigItemT::load()']]],
+  ['local_5fdebug_2ecpp_33',['local_debug.cpp',['../local__debug_8cpp.html',1,'']]],
+  ['local_5fdebug_2eh_34',['local_debug.h',['../local__debug_8h.html',1,'']]],
+  ['local_5fip_35',['local_ip',['../classsensesp_1_1_network_provisioner.html#a6e6e676cb0565fd220d062b156709423',1,'sensesp::NetworkProvisioner::local_ip()'],['../classsensesp_1_1_wi_fi_provisioner.html#a3ed22a707d9edd7828cef147bb937f58',1,'sensesp::WiFiProvisioner::local_ip()']]],
+  ['localdebug_36',['LocalDebug',['../classsensesp_1_1_local_debug.html',1,'sensesp']]],
+  ['long_5fclick_5fdelay_5f_37',['long_click_delay_',['../classsensesp_1_1_click_type.html#a49ab4f06ec2a1bffe384533b96e18bda',1,'sensesp::ClickType']]],
+  ['longitude_38',['longitude',['../structsensesp_1_1_position.html#a45ab87c9b3068e644a56df8364c175e5',1,'sensesp::Position']]],
+  ['longsingleclick_39',['LongSingleClick',['../namespacesensesp.html#a21975f0611649b430d00a47945332495ad0fff85d3541aedaddfb3c5e67e897b4',1,'sensesp']]],
+  ['loop_40',['loop',['../classsensesp_1_1_s_k_w_s_client.html#a24be571bdd7183f50711457a9be96fd6',1,'sensesp::SKWSClient']]]
 ];

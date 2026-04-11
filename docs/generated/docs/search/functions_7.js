@@ -11,7 +11,7 @@ var searchData=
   ['heatindexeffect_8',['HeatIndexEffect',['../classsensesp_1_1_heat_index_effect.html#aee5e1ba9c7090decf9e8376cfea55da3',1,'sensesp::HeatIndexEffect']]],
   ['heatindextemperature_9',['HeatIndexTemperature',['../classsensesp_1_1_heat_index_temperature.html#a5da208d4896a5f7f2b2bd2d92fd91beb',1,'sensesp::HeatIndexTemperature']]],
   ['httpauthenticator_10',['HTTPAuthenticator',['../classsensesp_1_1_h_t_t_p_authenticator.html#a3da39583fc581993b6e62c7b52d75087',1,'sensesp::HTTPAuthenticator']]],
-  ['httpdigestauthenticator_11',['HTTPDigestAuthenticator',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#ac0c22a9a21545870dd2523ea023b540b',1,'sensesp::HTTPDigestAuthenticator']]],
+  ['httpdigestauthenticator_11',['HTTPDigestAuthenticator',['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#ac0c22a9a21545870dd2523ea023b540b',1,'sensesp::HTTPDigestAuthenticator::HTTPDigestAuthenticator(String username, String password, String realm, unsigned long nonce_max_age=900000)'],['../classsensesp_1_1_h_t_t_p_digest_authenticator.html#ac3914892f3cfdd75be15920ccab38c0a',1,'sensesp::HTTPDigestAuthenticator::HTTPDigestAuthenticator(PrecomputedHA1, String username, String ha1, String realm, unsigned long nonce_max_age=900000)']]],
   ['httprequesthandler_12',['HTTPRequestHandler',['../classsensesp_1_1_h_t_t_p_request_handler.html#a50bd5cca28a01abbce11b847e527da34',1,'sensesp::HTTPRequestHandler']]],
   ['httpserver_13',['HTTPServer',['../classsensesp_1_1_h_t_t_p_server.html#ad582006382529c29bc52b8773b8362c7',1,'sensesp::HTTPServer']]],
   ['hysteresis_14',['Hysteresis',['../classsensesp_1_1_hysteresis.html#ad66b79a9b0e02ed5d7617e09fb968060',1,'sensesp::Hysteresis']]]

@@ -1,43 +1,48 @@
 <map id="sensesp::SensESPAppBuilder::SensESPAppBuilder" name="sensesp::SensESPAppBuilder::SensESPAppBuilder">
-<area shape="rect" id="Node000001" title="Construct a new SensESPApp Builder object." alt="" coords="496,512,692,553"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa90ff7615dce9d7befeb421c7cf6f583" title="Enable the free memory sensor." alt="" coords="252,5,448,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="589,496,581,411,560,297,541,235,517,174,485,117,446,66,425,49,424,44,450,62,490,114,522,172,546,233,565,295,587,410,594,497"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#ad875bc0e66f1b804d6689a0e1b733c5a" title="Enable all built&#45;in system info sensors." alt="" coords="5,185,204,226"/>
-<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="591,496,585,413,578,361,566,306,548,250,522,197,489,150,446,110,421,95,398,86,376,82,355,82,308,93,253,111,217,126,183,145,130,186,126,183,180,141,214,121,251,106,307,88,354,77,377,77,400,81,424,90,450,106,493,146,527,194,552,248,571,304,583,360,591,413,596,497"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa36af1a2298d0a4db7f6efdf88baf07a" title="Report the IP address of the device." alt="" coords="252,120,448,161"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="586,496,573,429,547,343,529,298,506,254,479,212,446,176,432,164,431,159,450,172,483,209,511,251,534,296,552,341,578,428,591,497"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#affd5c5fb4583576ae1c533ebdb653c97" title="Enable over&#45;the&#45;air updates for the device." alt="" coords="252,185,448,226"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="582,496,566,442,538,373,499,302,474,270,446,241,430,229,429,224,450,237,478,266,503,299,543,370,571,440,587,497"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#ac7e2cdd591bd78309ab0c838fe6a01ea" title="Enable the System Hz sensor." alt="" coords="252,251,448,291"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="577,497,557,455,528,403,491,351,446,306,429,295,428,289,450,302,496,348,533,400,562,452,582,498"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aec8b05c9896ddc46d747ffea671dad70" title="Report the system uptime in seconds since the last reboot." alt="" coords="252,316,448,357"/>
-<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="569,500,518,436,484,402,447,372,426,360,424,355,449,367,488,398,522,432,574,499"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#afabc97d522db0964e161d42e1d54df4e" title="Report the Wi&#45;Fi signal strength." alt="" coords="252,381,448,422"/>
-<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="552,503,503,470,447,437,420,425,419,420,449,433,506,466,557,502"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a14a997a2940032d03914a9c63f32dd7e" title=" " alt="" coords="252,447,448,487"/>
-<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="499,509,429,491,428,485,504,507"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a1f94d1f51905c2ddc17acf4b97ea99c3" title="Set admin username and password for the web interface." alt="" coords="252,512,448,553"/>
-<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="478,534,450,535,448,530,483,531"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aba398aecdf9a1b8aa3c56dbb8adf9026" title="Set the button GPIO pin." alt="" coords="252,577,448,618"/>
-<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="499,559,430,579,428,574,503,556"/>
-<area shape="rect" id="Node000012" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a2279d09dcc313b1c4299c3d914fbd6a7" title="Set the device hostname." alt="" coords="252,643,448,683"/>
-<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="552,564,506,599,449,632,421,644,418,640,447,627,503,594,556,561"/>
-<area shape="rect" id="Node000013" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a5a069b7609135e4450e7c402ac444baf" title="Set the Signal K server address and port." alt="" coords="252,708,448,749"/>
-<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="573,563,522,632,488,667,449,697,426,710,424,705,447,693,484,663,518,629,569,567"/>
-<area shape="rect" id="Node000014" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a5845a5441fec5b8d87d87ffea2bcf567" title="Set the system status led object." alt="" coords="252,773,448,814"/>
-<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="581,565,562,612,533,664,496,717,450,762,430,775,427,770,446,758,491,713,528,662,557,610,578,569"/>
-<area shape="rect" id="Node000015" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a6722e69579bb08731adc8e82ff49ad0e" title=" " alt="" coords="6,892,203,933"/>
-<area shape="poly" id="edge19_Node000001_Node000015" title=" " alt="" coords="587,566,572,626,545,696,505,767,479,799,449,828,191,894,190,889,447,823,475,796,501,764,540,693,567,624,584,570"/>
-<area shape="rect" id="Node000016" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aab705554404c04d954c12e6049519b2d" title="Set the wifi access point object SSID and password." alt="" coords="252,888,448,929"/>
-<area shape="poly" id="edge20_Node000001_Node000016" title=" " alt="" coords="588,566,574,633,548,713,529,756,507,797,481,837,450,872,424,890,422,885,446,868,477,833,503,795,525,753,543,711,569,631,585,571"/>
-<area shape="rect" id="Node000017" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a93703919a632f03cbbbb4c467c430333" title="Set the Wi&#45;Fi network SSID and password." alt="" coords="252,953,448,994"/>
-<area shape="poly" id="edge21_Node000001_Node000017" title=" " alt="" coords="592,566,583,645,559,745,540,798,516,850,487,899,450,942,433,955,430,951,446,938,482,896,512,847,535,796,554,743,577,644,589,570"/>
-<area shape="rect" id="Node000018" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa258896b0bf6be04dc7db75799c672d8" title="Set the wifi manager password." alt="" coords="252,1019,448,1059"/>
-<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="594,566,588,656,580,712,567,773,549,836,524,898,491,956,450,1008,433,1021,431,1016,446,1004,487,953,519,895,544,834,562,772,575,711,583,655,591,570"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="270,55,253,67,214,96,179,128,125,186,120,184,175,124,211,91,250,62,274,51"/>
-<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="254,167,185,187,182,183,258,163"/>
-<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="254,248,185,229,182,224,258,245"/>
-<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="264,311,250,305,185,267,133,229,132,224,188,262,253,301,269,309"/>
-<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="259,375,250,371,207,336,170,297,119,229,119,224,174,294,211,332,253,366,264,373"/>
-<area shape="poly" id="edge22_Node000017_Node000015" title=" " alt="" coords="248,950,189,936,189,931,253,948"/>
+<area shape="rect" id="Node000001" title="Construct a new SensESPApp Builder object." alt="" coords="496,561,692,602"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a270ba3578f110247375e7dcc9dfc9173" title="Clear the default WiFi STA/AP settings." alt="" coords="252,5,448,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="591,545,585,452,578,391,566,325,547,256,522,188,489,124,446,66,426,49,425,44,450,62,493,121,527,186,552,254,571,324,583,391,591,452,596,547"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a4ea72273bb563725ca19d935d997b9b8" title="Configure the app to use a non&#45;WiFi NetworkProvisioner." alt="" coords="6,35,203,75"/>
+<area shape="poly" id="edge18_Node000001_Node000003" title=" " alt="" coords="591,545,587,457,580,399,568,338,550,275,525,214,490,158,446,110,430,100,406,91,345,77,273,67,204,61,201,57,274,62,346,71,408,86,432,95,450,106,495,155,529,212,555,273,573,337,585,399,592,456,596,547"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa90ff7615dce9d7befeb421c7cf6f583" title="Enable the free memory sensor." alt="" coords="252,120,448,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="587,545,576,471,551,374,533,322,510,271,481,224,446,181,424,164,423,159,450,177,485,221,514,269,538,320,557,372,581,470,592,546"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#ad875bc0e66f1b804d6689a0e1b733c5a" title="Enable all built&#45;in system info sensors." alt="" coords="5,300,204,341"/>
+<area shape="poly" id="edge10_Node000001_Node000005" title=" " alt="" coords="588,545,579,474,556,385,537,339,514,296,484,257,446,225,421,210,398,201,376,198,354,198,308,208,253,226,217,240,183,260,130,301,126,298,180,256,214,235,251,220,307,203,354,193,376,192,399,196,423,206,450,221,487,253,518,293,542,337,561,383,584,473,593,546"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa36af1a2298d0a4db7f6efdf88baf07a" title="Report the IP address of the device." alt="" coords="252,235,448,275"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="582,546,566,491,538,422,499,351,474,319,446,290,430,278,429,273,450,286,478,315,503,348,543,420,571,489,587,547"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#affd5c5fb4583576ae1c533ebdb653c97" title="Enable over&#45;the&#45;air updates for the device." alt="" coords="252,300,448,341"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="577,546,557,504,528,452,491,401,446,356,429,344,428,339,450,352,496,397,533,450,562,502,582,547"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#ac7e2cdd591bd78309ab0c838fe6a01ea" title="Enable the System Hz sensor." alt="" coords="252,365,448,406"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="569,549,518,485,484,451,447,421,426,409,424,404,449,417,488,447,522,482,574,549"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aec8b05c9896ddc46d747ffea671dad70" title="Report the system uptime in seconds since the last reboot." alt="" coords="252,431,448,471"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="552,552,503,520,447,487,420,474,419,469,449,482,506,515,557,551"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#afabc97d522db0964e161d42e1d54df4e" title="Report the Wi&#45;Fi signal strength." alt="" coords="252,496,448,537"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="499,558,430,540,428,535,504,556"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a14a997a2940032d03914a9c63f32dd7e" title=" " alt="" coords="252,561,448,602"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="478,583,450,584,447,579,483,580"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a1f94d1f51905c2ddc17acf4b97ea99c3" title="Set admin username and password for the web interface." alt="" coords="252,627,448,667"/>
+<area shape="poly" id="edge16_Node000001_Node000012" title=" " alt="" coords="499,608,430,628,427,624,503,605"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aba398aecdf9a1b8aa3c56dbb8adf9026" title="Set the button GPIO pin." alt="" coords="252,692,448,733"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="552,613,506,648,449,681,421,694,418,689,447,677,503,644,556,610"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a2279d09dcc313b1c4299c3d914fbd6a7" title="Set the device hostname." alt="" coords="252,757,448,798"/>
+<area shape="poly" id="edge19_Node000001_Node000014" title=" " alt="" coords="573,613,522,682,488,716,449,747,427,759,423,755,447,742,484,712,518,678,570,617"/>
+<area shape="rect" id="Node000015" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a5a069b7609135e4450e7c402ac444baf" title="Set the Signal K server address and port." alt="" coords="252,823,448,863"/>
+<area shape="poly" id="edge20_Node000001_Node000015" title=" " alt="" coords="581,615,562,662,533,714,496,766,450,812,430,824,427,820,446,808,491,763,528,711,557,659,578,619"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a5845a5441fec5b8d87d87ffea2bcf567" title="Set the system status led object." alt="" coords="252,888,448,929"/>
+<area shape="poly" id="edge21_Node000001_Node000016" title=" " alt="" coords="586,615,571,674,543,744,503,815,478,848,450,877,431,890,428,885,446,873,474,844,499,812,538,741,566,672,583,619"/>
+<area shape="rect" id="Node000017" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a6722e69579bb08731adc8e82ff49ad0e" title=" " alt="" coords="6,1007,203,1047"/>
+<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="590,615,579,687,555,775,536,820,513,865,484,906,449,943,191,1009,190,1004,447,938,480,903,508,862,531,818,549,773,574,686,588,620"/>
+<area shape="rect" id="Node000018" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aab705554404c04d954c12e6049519b2d" title="Set the wifi access point object SSID and password." alt="" coords="252,1003,448,1043"/>
+<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="591,615,581,693,557,791,538,843,514,894,485,943,450,986,425,1004,422,1000,446,982,481,940,510,892,533,841,551,789,576,692,588,620"/>
+<area shape="rect" id="Node000019" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#a93703919a632f03cbbbb4c467c430333" title="Set the Wi&#45;Fi network SSID and password." alt="" coords="252,1068,448,1109"/>
+<area shape="poly" id="edge24_Node000001_Node000019" title=" " alt="" coords="594,615,588,705,580,762,567,822,549,885,524,947,491,1005,450,1057,433,1070,431,1065,446,1053,487,1002,519,945,544,883,562,821,575,761,583,705,591,620"/>
+<area shape="rect" id="Node000020" href="$classsensesp_1_1_sens_e_s_p_app_builder.html#aa258896b0bf6be04dc7db75799c672d8" title="Set the wifi manager password." alt="" coords="252,1133,448,1174"/>
+<area shape="poly" id="edge26_Node000001_Node000020" title=" " alt="" coords="595,615,593,716,587,780,575,850,557,923,531,995,496,1062,450,1122,434,1135,432,1130,446,1118,491,1059,526,992,552,921,570,849,582,780,588,716,593,620"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,41,205,45,201,41,238,37"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="270,170,253,181,214,210,179,243,125,301,120,298,175,239,211,206,250,177,274,165"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="254,282,185,301,182,297,258,278"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="254,362,185,344,182,339,258,359"/>
+<area shape="poly" id="edge12_Node000009_Node000005" title=" " alt="" coords="264,425,250,420,185,381,133,344,132,339,188,377,253,415,269,423"/>
+<area shape="poly" id="edge14_Node000010_Node000005" title=" " alt="" coords="259,490,250,485,207,451,170,412,119,343,119,338,174,408,211,447,253,481,264,488"/>
+<area shape="poly" id="edge25_Node000019_Node000017" title=" " alt="" coords="248,1064,189,1051,189,1045,253,1063"/>
 </map>

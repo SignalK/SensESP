@@ -1,125 +1,125 @@
 <map id="sensesp::Saveable" name="sensesp::Saveable">
-<area shape="rect" id="Node000001" title="Interface for saveable objects." alt="" coords="5,430,138,456"/>
-<area shape="rect" id="Node000002" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="187,430,385,456"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,441,189,441,185,445,155,445"/>
-<area shape="rect" id="Node000003" href="$classsensesp_1_1_persisting_observable_value.html" title=" " alt="" coords="760,23,962,63"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="292,415,309,362,338,296,379,228,404,196,433,169,470,142,511,120,596,85,682,62,761,50,757,53,683,67,598,90,513,124,473,147,436,173,408,200,383,231,343,298,314,364,297,416"/>
-<area shape="rect" id="Node000004" href="$classsensesp_1_1_checkbox_config.html" title=" " alt="" coords="452,184,627,209"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="295,415,314,371,344,318,383,264,407,239,433,218,456,208,453,212,436,223,411,243,388,267,348,321,319,374,300,417"/>
-<area shape="rect" id="Node000005" href="$classsensesp_1_1_h_t_t_p_server.html" title="HTTP server class wrapping the esp&#45;idf http server." alt="" coords="464,233,615,258"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="300,416,322,381,352,341,390,301,433,267,465,255,462,259,436,272,393,305,356,344,326,384,305,418"/>
-<area shape="rect" id="Node000006" href="$classsensesp_1_1_networking.html" title="Manages the ESP&#39;s connection to the Wifi network." alt="" coords="467,282,612,308"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="307,418,361,366,396,339,434,317,469,305,465,309,436,321,399,344,365,370,311,420"/>
-<area shape="rect" id="Node000007" href="$classsensesp_1_1_number_config.html" title=" " alt="" coords="458,332,620,357"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="321,420,374,392,434,366,471,356,468,360,436,371,376,397,325,424"/>
-<area shape="rect" id="Node000008" href="$classsensesp_1_1_persisting_observable_value.html" title="An ObservableValue that saves its value to the configuration." alt="" coords="438,5,640,46"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="285,414,292,344,310,249,325,199,346,150,373,103,408,62,439,43,436,47,411,66,378,106,351,152,330,201,315,251,297,344,291,415"/>
-<area shape="rect" id="Node000009" href="$classsensesp_1_1_rgb_led.html" title="A special device object that can be used to control a multi&#45;channel color rgb LED light using up to 3..." alt="" coords="478,381,601,406"/>
-<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="369,425,479,404,475,408,372,429"/>
-<area shape="rect" id="Node000010" href="$classsensesp_1_1_s_k_listener.html" title="An Obervable class that listens for Signal K stream deltas and notifies any observers of value change..." alt="" coords="468,430,610,456"/>
-<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="399,441,470,441,466,445,402,445"/>
-<area shape="rect" id="Node000016" href="$classsensesp_1_1_s_k_put_request_base.html" title="A base class for all template variations of the PUT request class SKPutRequest. This base class keeps..." alt="" coords="442,505,637,530"/>
-<area shape="poly" id="edge20_Node000002_Node000016" title=" " alt="" coords="346,458,495,503,491,506,348,463"/>
-<area shape="rect" id="Node000022" href="$classsensesp_1_1_s_k_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="463,554,616,580"/>
-<area shape="poly" id="edge30_Node000002_Node000022" title=" " alt="" coords="313,463,369,503,436,541,467,552,462,555,434,545,366,508,315,468"/>
-<area shape="rect" id="Node000023" href="$classsensesp_1_1_select_config.html" title=" " alt="" coords="463,604,616,629"/>
-<area shape="poly" id="edge31_Node000002_Node000023" title=" " alt="" coords="305,466,360,530,396,562,436,590,465,603,460,605,433,595,393,567,357,533,306,471"/>
-<area shape="rect" id="Node000024" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="461,857,618,882"/>
-<area shape="poly" id="edge32_Node000002_Node000024" title=" " alt="" coords="303,466,533,856,528,857,303,472"/>
-<area shape="rect" id="Node000041" href="$classsensesp_1_1_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press..." alt="" coords="435,906,644,932"/>
-<area shape="poly" id="edge45_Node000002_Node000041" title=" " alt="" coords="288,468,296,554,304,609,317,668,335,730,361,790,394,845,436,893,453,905,448,907,433,897,390,848,356,792,330,731,312,670,299,610,291,555,288,474"/>
-<area shape="rect" id="Node000042" href="$classsensesp_1_1_string_config.html" title=" " alt="" coords="464,956,614,981"/>
-<area shape="poly" id="edge46_Node000002_Node000042" title=" " alt="" coords="292,468,313,576,344,719,364,791,386,855,410,908,436,942,466,960,461,962,433,946,406,911,381,857,359,792,339,720,308,577,292,474"/>
-<area shape="rect" id="Node000043" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="456,1678,623,1704"/>
-<area shape="poly" id="edge47_Node000002_Node000043" title=" " alt="" coords="295,469,538,1678,533,1678,291,472"/>
-<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="654,30,762,36,757,39,657,34"/>
-<area shape="rect" id="Node000011" href="$classsensesp_1_1_s_k_value_listener.html" title=" " alt="" coords="1143,392,1317,433"/>
-<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="625,437,1144,414,1140,418,627,442"/>
-<area shape="rect" id="Node000012" href="$classsensesp_1_1_s_k_value_listener.html" title=" " alt="" coords="1143,112,1317,153"/>
-<area shape="poly" id="edge12_Node000010_Node000012" title=" " alt="" coords="623,431,642,417,654,401,659,385,658,353,655,318,657,298,666,278,684,248,703,228,726,212,757,195,805,174,855,157,959,135,1058,126,1145,126,1140,129,1058,131,959,141,856,162,807,179,759,200,729,217,707,232,688,251,670,280,663,300,660,318,663,352,664,386,659,403,646,421,627,434"/>
-<area shape="rect" id="Node000013" href="$classsensesp_1_1_s_k_value_listener.html" title=" " alt="" coords="1143,209,1317,250"/>
-<area shape="poly" id="edge13_Node000010_Node000013" title=" " alt="" coords="623,430,642,417,651,406,655,395,655,372,655,348,658,335,666,321,686,302,717,280,802,234,899,193,988,166,1053,156,1082,158,1118,166,1164,184,1203,208,1198,210,1161,189,1117,171,1081,163,1053,161,989,171,901,198,804,239,720,285,689,306,670,325,663,337,660,349,660,373,660,396,655,409,646,421,627,434"/>
-<area shape="rect" id="Node000014" href="$classsensesp_1_1_s_k_value_listener.html" title=" " alt="" coords="1143,317,1317,358"/>
-<area shape="poly" id="edge14_Node000010_Node000014" title=" " alt="" coords="614,425,668,415,794,403,894,400,992,395,1050,388,1117,375,1181,357,1177,360,1118,380,1050,393,993,401,894,406,795,408,668,420,618,429"/>
-<area shape="rect" id="Node000015" href="$classsensesp_1_1_s_k_value_listener.html" title="An ValueProducer that listens to specific Signal K paths and emits its value whenever it changes." alt="" coords="758,286,964,312"/>
-<area shape="poly" id="edge15_Node000010_Node000015" title=" " alt="" coords="623,429,642,417,651,404,654,390,656,374,666,359,688,342,712,328,766,311,762,314,714,333,691,346,670,362,661,376,659,390,656,406,646,421,627,432"/>
-<area shape="poly" id="edge16_Node000015_Node000011" title=" " alt="" coords="902,316,989,351,1068,375,1145,394,1140,396,1066,380,987,357,904,321"/>
-<area shape="poly" id="edge17_Node000015_Node000012" title=" " alt="" coords="893,276,987,222,1079,182,1167,152,1163,155,1081,187,990,227,897,279"/>
-<area shape="poly" id="edge18_Node000015_Node000013" title=" " alt="" coords="947,281,1144,244,1140,248,950,285"/>
-<area shape="poly" id="edge19_Node000015_Node000014" title=" " alt="" coords="979,309,1145,327,1140,330,981,314"/>
-<area shape="rect" id="Node000017" href="$classsensesp_1_1_s_k_put_request.html" title=" " alt="" coords="1147,760,1313,801"/>
-<area shape="poly" id="edge21_Node000016_Node000017" title=" " alt="" coords="641,537,646,540,660,561,663,581,663,602,670,626,705,693,726,717,759,739,807,761,857,776,910,787,962,793,1062,796,1149,791,1145,794,1062,801,961,799,909,792,856,782,805,766,757,744,722,721,700,696,666,628,658,603,657,582,655,562,642,543,643,542"/>
-<area shape="rect" id="Node000018" href="$classsensesp_1_1_s_k_put_request.html" title=" " alt="" coords="1147,476,1313,517"/>
-<area shape="poly" id="edge22_Node000016_Node000018" title=" " alt="" coords="651,511,668,510,988,496,1149,495,1145,498,988,502,668,515,655,515"/>
-<area shape="rect" id="Node000019" href="$classsensesp_1_1_s_k_put_request.html" title=" " alt="" coords="1147,565,1313,606"/>
-<area shape="poly" id="edge23_Node000016_Node000019" title=" " alt="" coords="651,513,907,512,1029,518,1118,530,1159,544,1198,564,1192,566,1157,549,1117,535,1029,523,906,518,654,517"/>
-<area shape="rect" id="Node000020" href="$classsensesp_1_1_s_k_put_request.html" title=" " alt="" coords="1147,668,1313,709"/>
-<area shape="poly" id="edge24_Node000016_Node000020" title=" " alt="" coords="636,535,646,540,654,548,659,556,670,573,712,606,759,633,870,698,921,720,989,739,1053,748,1081,746,1117,739,1158,725,1198,707,1193,711,1160,730,1118,744,1082,751,1053,754,988,744,919,725,868,702,757,637,709,611,666,577,654,559,650,551,642,544,638,540"/>
-<area shape="rect" id="Node000021" href="$classsensesp_1_1_s_k_put_request.html" title="Used to send requests to the server to change the value of the specified path to a specific value acc..." alt="" coords="762,597,960,622"/>
-<area shape="poly" id="edge25_Node000016_Node000021" title=" " alt="" coords="616,532,645,539,669,547,818,595,814,597,667,552,643,544,618,537"/>
-<area shape="poly" id="edge26_Node000021_Node000017" title=" " alt="" coords="891,630,937,662,990,693,1074,729,1157,758,1152,760,1072,734,987,698,934,666,892,635"/>
-<area shape="poly" id="edge27_Node000021_Node000018" title=" " alt="" coords="919,590,1163,515,1159,519,922,594"/>
-<area shape="poly" id="edge28_Node000021_Node000019" title=" " alt="" coords="974,612,1045,611,1117,606,1149,603,1145,606,1118,611,1045,616,976,616"/>
-<area shape="poly" id="edge29_Node000021_Node000020" title=" " alt="" coords="926,624,989,639,1150,673,1145,675,988,645,928,629"/>
-<area shape="rect" id="Node000025" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1146,1129,1314,1154"/>
-<area shape="poly" id="edge33_Node000024_Node000025" title=" " alt="" coords="632,882,646,892,656,905,662,918,663,943,663,969,670,998,688,1033,705,1059,726,1081,759,1101,807,1121,857,1136,909,1146,961,1152,1061,1155,1148,1152,1143,1154,1061,1161,961,1158,909,1152,856,1141,805,1126,757,1105,723,1085,701,1063,684,1036,666,1000,657,970,658,943,656,919,652,908,642,896,633,887"/>
-<area shape="rect" id="Node000028" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1151,870,1309,896"/>
-<area shape="poly" id="edge36_Node000024_Node000028" title=" " alt="" coords="632,861,854,852,986,853,1118,860,1167,868,1162,871,1117,866,986,858,854,857,635,865"/>
-<area shape="rect" id="Node000032" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1146,941,1314,966"/>
-<area shape="poly" id="edge38_Node000024_Node000032" title=" " alt="" coords="633,867,895,871,1024,879,1118,894,1206,940,1200,941,1117,899,1024,885,895,877,635,872"/>
-<area shape="rect" id="Node000036" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1141,1040,1319,1065"/>
-<area shape="poly" id="edge39_Node000024_Node000036" title=" " alt="" coords="631,883,646,892,656,905,660,919,662,932,670,945,695,967,731,990,824,1039,919,1080,989,1103,1053,1112,1081,1110,1117,1103,1166,1085,1210,1064,1206,1067,1168,1090,1118,1108,1082,1115,1053,1118,988,1108,917,1085,821,1044,728,995,692,971,666,949,657,934,654,920,651,907,642,896,633,888"/>
-<area shape="rect" id="Node000038" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="786,961,937,986"/>
-<area shape="poly" id="edge40_Node000024_Node000038" title=" " alt="" coords="630,886,645,891,658,901,669,911,733,939,798,959,793,961,731,944,667,916,654,906,643,896,632,891"/>
-<area shape="rect" id="Node000026" href="$classsensesp_1_1_constant_sensor.html" title=" " alt="" coords="1368,1093,1540,1134"/>
-<area shape="poly" id="edge34_Node000025_Node000026" title=" " alt="" coords="1329,1127,1370,1123,1365,1126,1331,1132"/>
-<area shape="rect" id="Node000027" href="$classsensesp_1_1_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="1380,1158,1528,1184"/>
-<area shape="poly" id="edge35_Node000025_Node000027" title=" " alt="" coords="1329,1152,1383,1161,1378,1162,1330,1157"/>
-<area shape="rect" id="Node000029" href="$classsensesp_1_1_constant_sensor.html" title=" " alt="" coords="1368,863,1540,903"/>
-<area shape="poly" id="edge37_Node000028_Node000029" title=" " alt="" coords="1323,881,1370,882,1365,884,1325,885"/>
-<area shape="poly" id="edge41_Node000038_Node000025" title=" " alt="" coords="891,994,937,1026,990,1057,1088,1098,1179,1127,1174,1129,1086,1103,987,1062,934,1031,892,999"/>
-<area shape="poly" id="edge42_Node000038_Node000028" title=" " alt="" coords="930,954,1177,895,1172,898,933,959"/>
-<area shape="poly" id="edge43_Node000038_Node000032" title=" " alt="" coords="951,975,1032,974,1117,970,1163,966,1158,968,1118,975,1033,980,953,979"/>
-<area shape="poly" id="edge44_Node000038_Node000036" title=" " alt="" coords="926,988,989,1003,1155,1038,1150,1040,988,1009,927,993"/>
-<area shape="rect" id="Node000044" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1159,1993,1301,2034"/>
-<area shape="poly" id="edge48_Node000043_Node000044" title=" " alt="" coords="559,1713,594,1757,641,1810,697,1865,760,1914,819,1950,868,1973,920,1988,989,2003,1077,2014,1161,2017,1156,2018,1076,2019,988,2008,919,1994,866,1978,816,1955,756,1919,693,1869,637,1814,590,1760,559,1719"/>
-<area shape="rect" id="Node000046" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1616,1299,1657"/>
-<area shape="poly" id="edge49_Node000043_Node000046" title=" " alt="" coords="568,1667,614,1636,667,1606,752,1571,823,1553,895,1546,988,1539,1055,1528,1084,1528,1119,1539,1128,1546,1133,1553,1143,1569,1200,1615,1194,1615,1139,1573,1128,1556,1124,1550,1116,1544,1083,1533,1055,1533,989,1544,896,1551,823,1559,754,1576,669,1611,617,1640,572,1671"/>
-<area shape="rect" id="Node000086" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1759,1299,1799"/>
-<area shape="poly" id="edge50_Node000043_Node000086" title=" " alt="" coords="637,1682,761,1677,900,1677,1028,1686,1080,1694,1119,1707,1127,1714,1132,1721,1143,1736,1178,1758,1173,1758,1140,1740,1128,1724,1124,1717,1116,1712,1078,1700,1028,1691,900,1682,761,1683,639,1687"/>
-<area shape="rect" id="Node000088" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,2075,1299,2115"/>
-<area shape="poly" id="edge51_Node000043_Node000088" title=" " alt="" coords="552,1716,582,1777,626,1855,653,1896,685,1936,721,1972,760,2003,818,2040,867,2062,920,2076,989,2090,1078,2099,1163,2100,1158,2101,1078,2104,988,2095,919,2082,866,2067,816,2045,756,2008,717,1976,681,1939,649,1899,621,1858,577,1780,551,1721"/>
-<area shape="rect" id="Node000090" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1356,1299,1397"/>
-<area shape="poly" id="edge52_Node000043_Node000090" title=" " alt="" coords="553,1663,601,1584,666,1491,737,1405,770,1373,804,1347,840,1325,882,1306,988,1274,1024,1265,1054,1261,1083,1263,1118,1274,1139,1286,1163,1307,1212,1356,1206,1356,1160,1311,1135,1291,1116,1279,1082,1268,1054,1266,1025,1270,989,1279,884,1311,843,1329,807,1351,773,1377,741,1409,670,1494,605,1587,558,1666"/>
-<area shape="rect" id="Node000102" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1685,1299,1726"/>
-<area shape="poly" id="edge53_Node000043_Node000102" title=" " alt="" coords="580,1669,681,1630,747,1610,819,1594,895,1585,972,1585,1048,1599,1084,1611,1119,1627,1129,1636,1133,1647,1136,1657,1143,1666,1169,1685,1164,1685,1140,1670,1131,1659,1128,1649,1124,1640,1116,1632,1082,1616,1046,1604,972,1591,896,1590,820,1599,748,1615,683,1635,583,1674"/>
-<area shape="rect" id="Node000104" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1871,1299,1911"/>
-<area shape="poly" id="edge54_Node000043_Node000104" title=" " alt="" coords="571,1711,644,1758,744,1817,863,1874,926,1898,989,1916,1033,1923,1078,1922,1164,1911,1159,1912,1078,1927,1033,1928,988,1922,924,1903,861,1879,741,1822,641,1763,572,1716"/>
-<area shape="rect" id="Node000109" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1519,1299,1559"/>
-<area shape="poly" id="edge55_Node000043_Node000109" title=" " alt="" coords="561,1665,607,1620,667,1574,727,1543,815,1504,910,1469,988,1447,1055,1433,1084,1434,1119,1447,1128,1455,1133,1464,1143,1483,1191,1518,1185,1518,1139,1486,1128,1467,1124,1459,1116,1452,1083,1440,1055,1438,989,1452,911,1474,817,1509,729,1547,669,1579,611,1624,565,1668"/>
-<area shape="rect" id="Node000110" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1432,1299,1473"/>
-<area shape="poly" id="edge56_Node000043_Node000110" title=" " alt="" coords="557,1664,604,1604,666,1538,744,1469,812,1422,887,1388,988,1360,1055,1344,1085,1346,1119,1361,1129,1371,1133,1383,1136,1395,1143,1406,1177,1431,1172,1432,1139,1410,1131,1397,1128,1385,1125,1374,1116,1365,1084,1351,1056,1350,989,1366,889,1393,815,1426,748,1473,670,1542,608,1608,561,1667"/>
-<area shape="rect" id="Node000112" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,2144,1299,2185"/>
-<area shape="poly" id="edge57_Node000043_Node000112" title=" " alt="" coords="547,1716,571,1795,611,1897,639,1951,673,2003,713,2051,760,2090,849,2144,889,2161,927,2172,967,2178,1011,2180,1117,2176,1164,2174,1158,2175,1118,2182,1011,2186,967,2184,926,2177,887,2166,847,2149,756,2094,709,2054,668,2007,634,1954,606,1900,565,1796,546,1721"/>
-<area shape="rect" id="Node000116" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1239,1299,1279"/>
-<area shape="poly" id="edge58_Node000043_Node000116" title=" " alt="" coords="545,1662,568,1590,610,1494,638,1443,672,1395,711,1350,756,1313,805,1285,858,1265,913,1252,968,1244,1074,1240,1163,1248,1158,1250,1074,1245,969,1249,914,1257,859,1270,807,1290,760,1317,715,1354,676,1398,643,1446,615,1496,573,1592,550,1664"/>
-<area shape="rect" id="Node000118" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,2301,1299,2342"/>
-<area shape="poly" id="edge59_Node000043_Node000118" title=" " alt="" coords="541,1717,547,1834,556,1911,573,1994,599,2078,617,2117,638,2155,662,2191,690,2222,723,2250,759,2273,810,2295,863,2311,918,2322,972,2328,1076,2332,1158,2330,1163,2330,1076,2337,972,2334,917,2327,862,2316,808,2300,757,2277,720,2254,687,2226,658,2194,633,2158,612,2120,594,2079,567,1995,550,1912,541,1834,539,1722"/>
-<area shape="rect" id="Node000121" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,2229,1299,2270"/>
-<area shape="poly" id="edge60_Node000043_Node000121" title=" " alt="" coords="544,1717,560,1812,575,1874,595,1942,623,2010,659,2076,704,2135,731,2161,760,2183,807,2214,849,2237,888,2253,927,2262,968,2267,1011,2269,1117,2263,1158,2261,1164,2261,1118,2268,1011,2274,967,2273,926,2268,887,2258,847,2242,804,2219,756,2188,727,2165,700,2138,655,2079,618,2012,590,1943,570,1876,555,1813,542,1722"/>
-<area shape="rect" id="Node000123" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="792,1747,930,1787"/>
-<area shape="poly" id="edge61_Node000043_Node000123" title=" " alt="" coords="612,1705,795,1750,790,1752,612,1711"/>
-<area shape="poly" id="edge62_Node000123_Node000044" title=" " alt="" coords="892,1796,937,1840,990,1883,1024,1904,1052,1919,1119,1950,1194,1993,1188,1993,1116,1955,1050,1923,1021,1909,987,1887,934,1844,891,1801"/>
-<area shape="poly" id="edge63_Node000123_Node000046" title=" " alt="" coords="907,1736,945,1715,987,1695,1077,1666,1163,1648,1158,1650,1078,1671,989,1700,948,1719,909,1741"/>
-<area shape="poly" id="edge64_Node000123_Node000086" title=" " alt="" coords="944,1779,989,1783,1053,1786,1117,1783,1164,1783,1158,1785,1117,1789,1053,1791,988,1789,946,1784"/>
-<area shape="poly" id="edge65_Node000123_Node000088" title=" " alt="" coords="876,1799,895,1841,920,1888,952,1936,990,1979,1022,2001,1050,2013,1081,2022,1118,2037,1191,2074,1185,2074,1116,2041,1079,2027,1048,2018,1019,2006,987,1983,947,1939,915,1891,890,1843,874,1804"/>
-<area shape="poly" id="edge66_Node000123_Node000090" title=" " alt="" coords="864,1730,875,1669,897,1593,913,1553,933,1514,957,1478,987,1446,1026,1418,1071,1398,1117,1386,1163,1380,1158,1382,1119,1391,1073,1403,1029,1423,990,1450,962,1482,938,1517,918,1555,902,1595,880,1670,869,1732"/>
-<area shape="poly" id="edge67_Node000123_Node000102" title=" " alt="" coords="944,1751,1163,1716,1158,1718,946,1756"/>
-<area shape="poly" id="edge68_Node000123_Node000104" title=" " alt="" coords="927,1791,989,1814,1164,1871,1158,1872,987,1819,927,1796"/>
-<area shape="poly" id="edge69_Node000123_Node000109" title=" " alt="" coords="884,1732,928,1679,956,1652,987,1627,1029,1603,1074,1582,1163,1554,1158,1557,1076,1587,1032,1607,990,1632,960,1656,932,1683,888,1736"/>
-<area shape="poly" id="edge70_Node000123_Node000110" title=" " alt="" coords="871,1730,888,1687,912,1636,945,1585,987,1540,1027,1511,1073,1489,1118,1473,1163,1463,1159,1465,1120,1478,1075,1494,1030,1516,990,1544,949,1588,917,1639,893,1690,876,1733"/>
-<area shape="poly" id="edge71_Node000123_Node000112" title=" " alt="" coords="869,1800,884,1859,907,1929,942,2002,964,2035,990,2065,1014,2079,1060,2099,1173,2143,1167,2143,1058,2104,1012,2084,987,2069,960,2039,937,2004,902,1931,879,1861,867,1805"/>
-<area shape="poly" id="edge72_Node000123_Node000116" title=" " alt="" coords="861,1730,869,1655,888,1557,904,1504,926,1452,953,1403,986,1359,1025,1325,1070,1300,1117,1281,1163,1270,1159,1273,1118,1286,1073,1304,1028,1329,990,1362,957,1406,930,1454,909,1506,893,1558,874,1656,866,1732"/>
-<area shape="poly" id="edge73_Node000123_Node000118" title=" " alt="" coords="863,1800,867,1889,873,1944,884,2004,899,2066,922,2127,952,2184,990,2235,1028,2266,1072,2288,1118,2303,1163,2315,1158,2315,1117,2308,1070,2293,1025,2270,986,2239,947,2187,917,2129,894,2067,878,2005,868,1945,862,1889,860,1805"/>
-<area shape="poly" id="edge74_Node000123_Node000121" title=" " alt="" coords="866,1801,876,1874,896,1967,912,2015,933,2064,958,2109,990,2149,1014,2164,1060,2184,1173,2229,1168,2229,1058,2189,1012,2168,987,2153,954,2112,928,2066,907,2017,891,1968,871,1875,863,1805"/>
+<area shape="rect" id="Node000001" title="Interface for saveable objects." alt="" coords="5,518,138,544"/>
+<area shape="rect" id="Node000002" href="$classsensesp_1_1_file_system_saveable.html" title=" " alt="" coords="187,518,385,544"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,529,189,529,185,533,155,533"/>
+<area shape="rect" id="Node000003" href="$classsensesp_1_1_persisting_observable_value.html" title=" " alt="" coords="760,25,962,66"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="291,503,307,445,335,370,376,292,403,255,433,222,470,192,510,165,595,120,681,87,761,65,758,69,683,92,597,125,512,169,473,196,437,226,407,259,381,295,340,373,312,447,296,504"/>
+<area shape="rect" id="Node000004" href="$classsensesp_1_1_checkbox_config.html" title=" " alt="" coords="452,237,627,262"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="293,502,310,452,339,389,379,326,405,297,433,271,455,261,451,265,436,276,408,300,384,329,343,392,315,454,298,504"/>
+<area shape="rect" id="Node000005" href="$classsensesp_1_1_h_t_t_p_server.html" title="HTTP server class wrapping the esp&#45;idf http server." alt="" coords="464,286,615,312"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="296,503,317,462,346,412,385,363,433,321,465,307,461,312,436,325,389,366,351,415,321,464,301,505"/>
+<area shape="rect" id="Node000006" href="$classsensesp_1_1_number_config.html" title=" " alt="" coords="458,336,620,361"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="301,504,355,436,391,400,433,370,460,360,457,364,436,375,395,404,359,440,306,506"/>
+<area shape="rect" id="Node000007" href="$classsensesp_1_1_persisting_observable_value.html" title="An ObservableValue that saves its value to the configuration." alt="" coords="438,5,640,46"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="289,502,304,405,329,273,345,207,364,146,385,97,407,62,439,42,436,46,411,66,389,99,369,148,350,208,334,274,309,406,294,503"/>
+<area shape="rect" id="Node000008" href="$classsensesp_1_1_rgb_led.html" title="A special device object that can be used to control a multi&#45;channel color rgb LED light using up to 3..." alt="" coords="478,385,601,410"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="310,506,364,461,398,439,434,419,479,405,475,409,436,424,401,443,368,466,314,509"/>
+<area shape="rect" id="Node000009" href="$classsensesp_1_1_s_k_listener.html" title="An Obervable class that listens for Signal K stream deltas and notifies any observers of value change..." alt="" coords="468,434,610,460"/>
+<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="340,511,500,458,496,463,344,515"/>
+<area shape="rect" id="Node000015" href="$classsensesp_1_1_s_k_put_request_base.html" title="A base class for all template variations of the PUT request class SKPutRequest. This base class keeps..." alt="" coords="442,518,637,544"/>
+<area shape="poly" id="edge19_Node000002_Node000015" title=" " alt="" coords="399,529,443,529,439,533,403,533"/>
+<area shape="rect" id="Node000021" href="$classsensesp_1_1_s_k_w_s_client.html" title="The websocket connection to the Signal K server." alt="" coords="463,568,616,593"/>
+<area shape="poly" id="edge29_Node000002_Node000021" title=" " alt="" coords="369,545,472,565,467,568,372,550"/>
+<area shape="rect" id="Node000022" href="$classsensesp_1_1_select_config.html" title=" " alt="" coords="463,617,616,642"/>
+<area shape="poly" id="edge30_Node000002_Node000022" title=" " alt="" coords="322,550,376,577,436,603,472,615,467,618,434,608,374,582,324,554"/>
+<area shape="rect" id="Node000023" href="$classsensesp_1_1_sensor_config.html" title="The base class for all sensors. Used only as a base class &#45; never instantiated directly in a project." alt="" coords="461,848,618,873"/>
+<area shape="poly" id="edge31_Node000002_Node000023" title=" " alt="" coords="307,554,530,846,525,848,307,559"/>
+<area shape="rect" id="Node000040" href="$classsensesp_1_1_smart_switch_controller.html" title="A high level transform designed to control a digital output (such as a relay) via manual button press..." alt="" coords="435,897,644,922"/>
+<area shape="poly" id="edge44_Node000002_Node000040" title=" " alt="" coords="291,557,305,626,330,715,349,761,372,806,401,848,436,884,453,895,448,897,433,888,397,851,368,809,344,763,325,716,300,628,291,562"/>
+<area shape="rect" id="Node000041" href="$classsensesp_1_1_string_config.html" title=" " alt="" coords="464,946,614,972"/>
+<area shape="poly" id="edge45_Node000002_Node000041" title=" " alt="" coords="289,557,300,635,323,736,342,790,366,843,398,891,436,933,466,950,461,952,433,937,393,894,362,845,337,792,318,738,295,636,289,562"/>
+<area shape="rect" id="Node000042" href="$classsensesp_1_1_transform_base.html" title="The base class for all transforms. A transforms takes a value in, transforms it in some way,..." alt="" coords="456,1609,623,1634"/>
+<area shape="poly" id="edge46_Node000002_Node000042" title=" " alt="" coords="296,558,538,1608,532,1609,292,561"/>
+<area shape="rect" id="Node000125" href="$classsensesp_1_1_wi_fi_provisioner.html" title="Manages the ESP&#39;s WiFi connection." alt="" coords="454,1658,624,1684"/>
+<area shape="poly" id="edge74_Node000002_Node000125" title=" " alt="" coords="287,557,291,772,296,929,306,1100,324,1271,350,1429,368,1498,387,1558,410,1608,437,1645,457,1661,451,1662,433,1649,406,1610,383,1560,362,1499,345,1430,319,1272,301,1100,291,929,285,772,287,562"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="654,31,762,38,757,41,657,35"/>
+<area shape="rect" id="Node000010" href="$classsensesp_1_1_s_k_value_listener.html" title=" " alt="" coords="1143,364,1317,405"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="625,444,849,435,983,425,1117,408,1151,404,1147,407,1118,414,984,430,849,440,627,449"/>
+<area shape="rect" id="Node000011" href="$classsensesp_1_1_s_k_value_listener.html" title=" " alt="" coords="1143,120,1317,161"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="623,435,642,421,654,404,659,388,658,355,655,319,657,299,666,278,684,249,703,229,757,197,805,175,855,159,959,138,1058,131,1144,132,1140,135,1058,136,959,144,856,164,806,180,759,201,707,233,688,252,670,280,662,300,660,319,664,354,665,389,659,407,646,425,627,438"/>
+<area shape="rect" id="Node000012" href="$classsensesp_1_1_s_k_value_listener.html" title=" " alt="" coords="1143,217,1317,258"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="623,435,642,421,651,410,655,398,655,375,654,349,658,335,666,321,686,302,717,280,801,234,898,193,988,166,1053,155,1082,157,1118,166,1166,187,1207,216,1202,217,1164,192,1116,171,1081,163,1053,161,989,171,900,198,803,239,720,285,689,306,670,325,663,337,660,350,660,375,660,399,656,412,646,425,627,438"/>
+<area shape="rect" id="Node000013" href="$classsensesp_1_1_s_k_value_listener.html" title=" " alt="" coords="1143,288,1317,329"/>
+<area shape="poly" id="edge13_Node000009_Node000013" title=" " alt="" coords="624,430,668,423,795,411,896,408,944,405,995,398,1051,385,1116,365,1140,350,1188,327,1184,331,1143,355,1118,369,1052,390,995,403,944,410,896,413,796,416,668,428,628,434"/>
+<area shape="rect" id="Node000014" href="$classsensesp_1_1_s_k_value_listener.html" title="An ValueProducer that listens to specific Signal K paths and emits its value whenever it changes." alt="" coords="758,286,964,312"/>
+<area shape="poly" id="edge14_Node000009_Node000014" title=" " alt="" coords="623,434,642,421,652,407,654,392,656,375,666,359,687,342,711,328,765,311,761,314,714,333,690,346,670,362,661,377,659,392,657,409,646,425,627,437"/>
+<area shape="poly" id="edge15_Node000014_Node000010" title=" " alt="" coords="921,314,989,331,1145,367,1140,369,988,337,923,319"/>
+<area shape="poly" id="edge16_Node000014_Node000011" title=" " alt="" coords="894,276,987,225,1077,188,1163,159,1159,163,1079,193,989,229,898,279"/>
+<area shape="poly" id="edge17_Node000014_Node000012" title=" " alt="" coords="944,281,988,272,1144,249,1140,252,989,278,947,285"/>
+<area shape="poly" id="edge18_Node000014_Node000013" title=" " alt="" coords="979,300,1145,305,1140,308,982,304"/>
+<area shape="rect" id="Node000016" href="$classsensesp_1_1_s_k_put_request.html" title=" " alt="" coords="1147,751,1313,791"/>
+<area shape="poly" id="edge20_Node000015_Node000016" title=" " alt="" coords="640,550,646,553,658,569,662,584,664,600,670,618,706,684,726,708,759,730,807,751,858,767,910,777,962,784,1062,786,1149,782,1145,784,1062,791,962,789,909,783,856,772,805,756,757,735,723,712,701,687,666,620,659,601,656,585,653,571,642,557,641,555"/>
+<area shape="rect" id="Node000017" href="$classsensesp_1_1_s_k_put_request.html" title=" " alt="" coords="1147,483,1313,523"/>
+<area shape="poly" id="edge21_Node000015_Node000017" title=" " alt="" coords="640,513,668,510,892,486,991,482,1117,487,1149,491,1144,493,1117,492,991,488,893,491,668,515,643,518"/>
+<area shape="rect" id="Node000018" href="$classsensesp_1_1_s_k_put_request.html" title=" " alt="" coords="1147,564,1313,605"/>
+<area shape="poly" id="edge22_Node000015_Node000018" title=" " alt="" coords="651,520,907,508,1029,510,1079,514,1118,520,1194,563,1189,564,1116,526,1079,519,1029,515,907,514,654,525"/>
+<area shape="rect" id="Node000019" href="$classsensesp_1_1_s_k_put_request.html" title=" " alt="" coords="1147,656,1313,697"/>
+<area shape="poly" id="edge23_Node000015_Node000019" title=" " alt="" coords="632,547,645,553,658,564,670,576,713,602,759,623,822,658,871,686,921,710,989,730,1053,739,1081,737,1117,730,1159,715,1199,695,1195,699,1161,720,1118,735,1082,742,1053,745,988,735,919,715,868,691,820,662,757,628,710,606,666,580,655,568,643,557,634,552"/>
+<area shape="rect" id="Node000020" href="$classsensesp_1_1_s_k_put_request.html" title="Used to send requests to the server to change the value of the specified path to a specific value acc..." alt="" coords="762,588,960,613"/>
+<area shape="poly" id="edge24_Node000015_Node000020" title=" " alt="" coords="616,545,800,586,796,588,618,550"/>
+<area shape="poly" id="edge25_Node000020_Node000016" title=" " alt="" coords="891,620,938,652,990,682,1075,719,1159,749,1154,751,1073,724,987,687,935,656,892,625"/>
+<area shape="poly" id="edge26_Node000020_Node000017" title=" " alt="" coords="926,581,1152,522,1148,526,929,585"/>
+<area shape="poly" id="edge27_Node000020_Node000018" title=" " alt="" coords="974,601,1117,597,1149,595,1144,598,1117,602,976,605"/>
+<area shape="poly" id="edge28_Node000020_Node000019" title=" " alt="" coords="928,615,989,629,1149,661,1144,663,988,634,930,620"/>
+<area shape="rect" id="Node000024" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1146,1116,1314,1141"/>
+<area shape="poly" id="edge32_Node000023_Node000024" title=" " alt="" coords="632,872,646,882,656,896,662,909,663,934,663,960,670,989,688,1024,705,1050,726,1071,759,1091,807,1111,858,1126,909,1136,961,1142,1061,1144,1148,1139,1143,1142,1061,1149,961,1147,909,1141,856,1131,805,1116,757,1096,723,1076,701,1053,684,1026,666,991,657,960,658,934,656,910,652,898,642,886,633,878"/>
+<area shape="rect" id="Node000027" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1151,861,1309,886"/>
+<area shape="poly" id="edge35_Node000023_Node000027" title=" " alt="" coords="632,851,854,843,986,844,1118,851,1167,859,1162,861,1117,856,986,849,854,848,635,856"/>
+<area shape="rect" id="Node000031" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1146,932,1314,957"/>
+<area shape="poly" id="edge37_Node000023_Node000031" title=" " alt="" coords="633,857,895,862,1024,870,1118,884,1206,930,1200,932,1117,890,1024,875,895,867,635,862"/>
+<area shape="rect" id="Node000035" href="$classsensesp_1_1_sensor.html" title=" " alt="" coords="1141,1036,1319,1061"/>
+<area shape="poly" id="edge38_Node000023_Node000035" title=" " alt="" coords="632,874,646,882,656,896,660,909,662,923,670,936,695,957,731,981,824,1030,919,1071,989,1094,1053,1103,1117,1094,1164,1079,1207,1060,1203,1063,1166,1083,1118,1099,1053,1108,988,1099,917,1076,821,1034,728,985,692,961,666,939,657,924,654,911,651,898,642,886,633,879"/>
+<area shape="rect" id="Node000037" href="$classsensesp_1_1_sensor.html" title="Sensor template class for any sensor producing actual values." alt="" coords="786,952,937,977"/>
+<area shape="poly" id="edge39_Node000023_Node000037" title=" " alt="" coords="630,876,645,882,658,892,669,902,733,930,798,950,793,952,731,935,667,907,654,896,643,887,632,881"/>
+<area shape="rect" id="Node000025" href="$classsensesp_1_1_constant_sensor.html" title=" " alt="" coords="1368,1080,1540,1121"/>
+<area shape="poly" id="edge33_Node000024_Node000025" title=" " alt="" coords="1329,1113,1370,1110,1365,1112,1331,1118"/>
+<area shape="rect" id="Node000026" href="$classsensesp_1_1_analog_input.html" title="Sensor for reading the MCU analog input pins." alt="" coords="1380,1145,1528,1170"/>
+<area shape="poly" id="edge34_Node000024_Node000026" title=" " alt="" coords="1329,1139,1383,1147,1378,1149,1330,1144"/>
+<area shape="rect" id="Node000028" href="$classsensesp_1_1_constant_sensor.html" title=" " alt="" coords="1368,853,1540,894"/>
+<area shape="poly" id="edge36_Node000027_Node000028" title=" " alt="" coords="1323,871,1370,873,1365,875,1325,876"/>
+<area shape="poly" id="edge40_Node000037_Node000024" title=" " alt="" coords="890,985,936,1018,990,1050,1082,1087,1171,1114,1166,1116,1081,1092,987,1055,933,1023,890,990"/>
+<area shape="poly" id="edge41_Node000037_Node000027" title=" " alt="" coords="930,945,1177,885,1172,889,933,949"/>
+<area shape="poly" id="edge42_Node000037_Node000031" title=" " alt="" coords="951,965,1032,965,1117,961,1163,956,1158,959,1118,966,1033,970,953,970"/>
+<area shape="poly" id="edge43_Node000037_Node000035" title=" " alt="" coords="926,979,989,994,1165,1034,1160,1036,988,999,928,984"/>
+<area shape="rect" id="Node000043" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1159,1968,1301,2009"/>
+<area shape="poly" id="edge47_Node000042_Node000043" title=" " alt="" coords="636,1636,646,1644,658,1661,664,1677,665,1709,662,1742,664,1760,670,1779,688,1816,706,1842,728,1865,760,1890,818,1928,867,1950,920,1964,989,1978,1077,1988,1161,1992,1156,1992,1076,1994,988,1983,919,1969,865,1955,815,1933,756,1895,724,1869,701,1846,684,1818,666,1781,659,1761,657,1742,660,1709,659,1678,654,1663,642,1647,636,1642"/>
+<area shape="rect" id="Node000045" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1585,1299,1626"/>
+<area shape="poly" id="edge48_Node000042_Node000045" title=" " alt="" coords="576,1599,673,1554,737,1530,808,1508,885,1492,963,1485,1042,1490,1081,1497,1119,1509,1156,1537,1209,1585,1203,1585,1153,1541,1116,1513,1079,1502,1041,1495,964,1491,885,1498,810,1514,738,1535,675,1559,579,1603"/>
+<area shape="rect" id="Node000085" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1731,1299,1771"/>
+<area shape="poly" id="edge49_Node000042_Node000085" title=" " alt="" coords="638,1622,762,1629,900,1640,1028,1657,1080,1668,1119,1682,1132,1693,1143,1705,1184,1730,1178,1730,1140,1709,1128,1697,1116,1687,1078,1674,1027,1662,900,1645,761,1634,639,1627"/>
+<area shape="rect" id="Node000087" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,2049,1299,2090"/>
+<area shape="poly" id="edge50_Node000042_Node000087" title=" " alt="" coords="636,1636,646,1644,657,1664,662,1692,664,1759,663,1828,665,1856,670,1878,688,1912,705,1936,728,1956,759,1978,818,2015,868,2037,920,2051,989,2064,1078,2073,1163,2075,1158,2075,1078,2079,988,2070,919,2056,866,2042,816,2020,757,1983,725,1960,702,1939,683,1915,666,1880,660,1857,658,1828,658,1759,657,1692,652,1666,642,1647,636,1641"/>
+<area shape="rect" id="Node000089" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1304,1299,1345"/>
+<area shape="poly" id="edge51_Node000042_Node000089" title=" " alt="" coords="555,1594,603,1525,666,1445,740,1367,774,1338,807,1314,844,1294,884,1278,988,1248,1053,1237,1082,1240,1118,1248,1144,1259,1168,1272,1209,1303,1203,1304,1165,1277,1141,1263,1117,1254,1081,1245,1053,1243,989,1254,886,1283,846,1299,810,1319,777,1342,744,1371,670,1449,607,1528,560,1597"/>
+<area shape="rect" id="Node000101" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1655,1299,1695"/>
+<area shape="poly" id="edge52_Node000042_Node000101" title=" " alt="" coords="638,1604,762,1588,901,1577,968,1575,1029,1577,1080,1585,1119,1598,1128,1607,1133,1617,1136,1627,1143,1636,1169,1654,1164,1654,1140,1640,1131,1629,1128,1619,1124,1610,1116,1603,1079,1590,1029,1583,968,1580,902,1582,763,1593,640,1609"/>
+<area shape="rect" id="Node000103" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1844,1299,1885"/>
+<area shape="poly" id="edge53_Node000042_Node000103" title=" " alt="" coords="636,1637,646,1644,658,1663,660,1683,661,1702,670,1721,692,1743,725,1767,813,1818,909,1863,989,1891,1033,1897,1078,1896,1164,1884,1159,1886,1078,1902,1033,1902,988,1896,907,1868,811,1823,722,1771,688,1747,666,1725,656,1703,655,1683,653,1665,642,1647,636,1642"/>
+<area shape="rect" id="Node000108" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1475,1299,1515"/>
+<area shape="poly" id="edge54_Node000042_Node000108" title=" " alt="" coords="566,1597,612,1561,667,1525,751,1480,820,1453,894,1436,988,1422,1054,1410,1084,1411,1119,1422,1127,1428,1132,1435,1143,1449,1182,1474,1177,1474,1140,1453,1128,1438,1124,1432,1116,1427,1083,1416,1055,1415,989,1427,895,1441,822,1458,753,1485,669,1529,615,1565,569,1601"/>
+<area shape="rect" id="Node000109" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1399,1299,1439"/>
+<area shape="poly" id="edge55_Node000042_Node000109" title=" " alt="" coords="559,1595,606,1544,666,1489,747,1428,815,1387,890,1358,988,1335,1053,1324,1083,1326,1118,1335,1132,1344,1143,1354,1202,1398,1196,1398,1140,1358,1128,1348,1116,1340,1082,1331,1054,1329,989,1340,891,1363,817,1391,750,1432,670,1493,610,1548,563,1599"/>
+<area shape="rect" id="Node000111" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,2119,1299,2159"/>
+<area shape="poly" id="edge56_Node000042_Node000111" title=" " alt="" coords="636,1636,646,1644,660,1672,666,1710,666,1803,661,1898,663,1937,671,1967,687,2001,705,2024,728,2043,759,2065,850,2119,889,2135,928,2146,968,2153,1011,2155,1117,2151,1164,2149,1158,2150,1118,2156,1011,2160,967,2158,927,2152,887,2140,847,2123,757,2069,725,2047,701,2027,683,2003,665,1969,658,1938,656,1898,660,1803,661,1710,655,1673,642,1647,637,1641"/>
+<area shape="rect" id="Node000115" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,1200,1299,1241"/>
+<area shape="poly" id="edge57_Node000042_Node000115" title=" " alt="" coords="547,1593,573,1528,615,1443,644,1398,677,1356,714,1317,757,1285,806,1258,859,1239,914,1225,970,1215,1074,1208,1163,1212,1158,1214,1074,1214,970,1221,915,1230,861,1244,808,1263,759,1289,718,1321,681,1359,648,1401,620,1445,577,1530,552,1595"/>
+<area shape="rect" id="Node000117" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,2276,1299,2317"/>
+<area shape="poly" id="edge58_Node000042_Node000117" title=" " alt="" coords="636,1635,646,1644,657,1677,663,1735,664,1894,663,2054,665,2113,671,2148,686,2183,703,2208,726,2228,759,2247,810,2269,863,2285,918,2296,973,2302,1076,2306,1158,2305,1164,2304,1076,2311,972,2308,917,2301,862,2290,808,2274,757,2252,723,2232,699,2211,682,2185,665,2149,660,2114,658,2054,659,1894,657,1735,652,1678,642,1647,636,1640"/>
+<area shape="rect" id="Node000120" href="$classsensesp_1_1_transform.html" title=" " alt="" coords="1161,2204,1299,2245"/>
+<area shape="poly" id="edge59_Node000042_Node000120" title=" " alt="" coords="636,1635,646,1644,655,1671,660,1718,663,1848,664,1978,666,2026,671,2054,687,2089,705,2114,727,2135,759,2158,807,2188,849,2211,889,2227,928,2237,968,2242,1011,2243,1117,2238,1158,2236,1164,2235,1118,2243,1011,2248,967,2247,927,2242,887,2232,847,2216,804,2193,757,2163,724,2139,701,2118,682,2092,665,2056,661,2027,659,1978,658,1848,655,1719,650,1672,642,1647,636,1640"/>
+<area shape="rect" id="Node000122" href="$classsensesp_1_1_transform.html" title="The main Transform class. A transform is identified primarily by the type of value that is produces (..." alt="" coords="792,1725,930,1766"/>
+<area shape="poly" id="edge60_Node000042_Node000122" title=" " alt="" coords="636,1638,646,1644,655,1654,659,1664,662,1673,670,1682,698,1701,730,1715,795,1735,790,1737,728,1720,696,1705,666,1686,658,1676,654,1666,650,1656,642,1648,637,1644"/>
+<area shape="poly" id="edge61_Node000122_Node000043" title=" " alt="" coords="893,1774,938,1816,990,1857,1024,1879,1053,1893,1119,1925,1194,1968,1188,1967,1116,1929,1050,1898,1022,1884,987,1862,935,1820,892,1779"/>
+<area shape="poly" id="edge62_Node000122_Node000045" title=" " alt="" coords="903,1714,943,1690,987,1667,1077,1636,1164,1617,1159,1619,1078,1641,989,1672,945,1694,906,1719"/>
+<area shape="poly" id="edge63_Node000122_Node000085" title=" " alt="" coords="945,1754,988,1758,1053,1760,1117,1758,1164,1757,1158,1759,1117,1763,1053,1766,988,1763,946,1760"/>
+<area shape="poly" id="edge64_Node000122_Node000087" title=" " alt="" coords="876,1778,896,1819,920,1865,952,1912,990,1953,1022,1976,1050,1988,1081,1996,1118,2011,1191,2049,1185,2049,1116,2016,1079,2002,1048,1993,1019,1981,987,1957,948,1915,916,1868,891,1821,875,1783"/>
+<area shape="poly" id="edge65_Node000122_Node000089" title=" " alt="" coords="864,1709,875,1646,896,1566,912,1525,932,1483,957,1445,986,1410,1026,1380,1071,1357,1117,1341,1163,1332,1158,1335,1119,1346,1073,1362,1029,1384,990,1414,961,1448,937,1486,917,1527,901,1568,880,1647,869,1711"/>
+<area shape="poly" id="edge66_Node000122_Node000101" title=" " alt="" coords="944,1727,1163,1687,1158,1689,946,1732"/>
+<area shape="poly" id="edge67_Node000122_Node000103" title=" " alt="" coords="932,1769,989,1789,1164,1844,1158,1845,987,1794,932,1774"/>
+<area shape="poly" id="edge68_Node000122_Node000108" title=" " alt="" coords="883,1711,927,1654,955,1625,987,1598,1029,1571,1074,1548,1163,1515,1158,1517,1076,1553,1032,1576,990,1602,959,1629,931,1658,886,1714"/>
+<area shape="poly" id="edge69_Node000122_Node000109" title=" " alt="" coords="870,1709,885,1663,910,1608,943,1552,964,1527,987,1504,1027,1475,1072,1453,1118,1438,1163,1428,1158,1431,1119,1443,1074,1458,1030,1480,990,1508,968,1530,948,1555,914,1611,890,1665,874,1712"/>
+<area shape="poly" id="edge70_Node000122_Node000111" title=" " alt="" coords="870,1779,884,1837,907,1906,942,1977,964,2010,990,2040,1014,2054,1060,2073,1173,2118,1167,2118,1058,2078,1012,2059,987,2044,960,2014,937,1980,902,1908,879,1838,867,1783"/>
+<area shape="poly" id="edge71_Node000122_Node000115" title=" " alt="" coords="861,1709,866,1630,885,1525,901,1469,923,1414,951,1362,986,1315,1025,1282,1070,1257,1117,1240,1163,1229,1159,1232,1118,1245,1072,1262,1028,1286,990,1318,955,1364,927,1416,906,1471,890,1527,872,1631,865,1711"/>
+<area shape="poly" id="edge72_Node000122_Node000117" title=" " alt="" coords="863,1779,868,1867,874,1922,884,1981,900,2042,922,2103,952,2159,990,2209,1028,2240,1072,2263,1118,2278,1163,2290,1158,2289,1117,2283,1070,2268,1025,2245,986,2213,947,2162,917,2105,895,2044,879,1982,868,1923,862,1867,860,1784"/>
+<area shape="poly" id="edge73_Node000122_Node000120" title=" " alt="" coords="866,1779,876,1852,896,1943,912,1992,933,2039,959,2084,990,2124,1014,2138,1060,2158,1173,2204,1168,2203,1058,2163,1012,2143,987,2128,954,2087,928,2042,907,1993,891,1945,871,1853,863,1784"/>
 </map>

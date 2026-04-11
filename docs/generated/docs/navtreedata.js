@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "SensESP", "index.html", [
+    [ "Deprecated List", "deprecated.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -62,18 +63,18 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "air__density_8cpp.html",
-"classsensesp_1_1_click_type.html#ab3bb65e1d99930bd7272896149c0d939",
-"classsensesp_1_1_enable.html#a738aca5f06e2b6bd04476d625717b84a",
-"classsensesp_1_1_l_e_d_blinker.html#abbd667ac6703337b4e876475c95ce585",
-"classsensesp_1_1_p_w_m_output.html#a1aa17b03632b796aec5c532d8fb87ad6",
-"classsensesp_1_1_s_k_output.html#a04136285fe398306a634d716acaf2e8e",
-"classsensesp_1_1_s_k_w_s_client.html#afbe265351213c154f3977b8fb56fc91d",
-"classsensesp_1_1_sens_e_s_p_app_builder.html#aec8b05c9896ddc46d747ffea671dad70",
-"classsensesp_1_1_threshold_transform.html#af36079db3714b5c0d79e9c8f8c6e6abc",
-"classsensesp_1_1_zip_base.html#a9a62a99943d70f8a033aa320eab79dd1",
-"namespacemembers_c.html",
-"namespacesensesp.html#aeb0e053b59f10a1aaabb1f23ebab97be",
-"system__status__controller_8h.html"
+"classsensesp_1_1_click_type.html#a7cef6ec74f8d73633853e560a3872e3a",
+"classsensesp_1_1_digital_output.html#a7378683d6e207e3d9a207fad7f408309",
+"classsensesp_1_1_join_base.html",
+"classsensesp_1_1_observable_value.html#a957ddc061f5c639eac7741c9c1a3f273",
+"classsensesp_1_1_s_k_listener.html#a535f98acf252c744f27ea787ba6c48be",
+"classsensesp_1_1_s_k_w_s_client.html#abe1e4dd9416b5eaa1295417b474eac20",
+"classsensesp_1_1_sens_e_s_p_app.html#adc9c7cb698f8cf7f7e2450212b7dbb32",
+"classsensesp_1_1_system_hz.html#a1f6500b6058c2ae40ea1354c7f595eb4",
+"classsensesp_1_1_wi_fi_provisioner.html#a233294bd5924ce0ec7d647bdcf5e2f15",
+"functions_vars_t.html",
+"namespacesensesp.html#a8bc082ae2c9989fffdb01fd8f6248f18",
+"signalk__put__request__listener_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

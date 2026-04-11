@@ -16,5 +16,7 @@ var searchData=
   ['min_5fvalue_5f_13',['min_value_',['../classsensesp_1_1_threshold_transform.html#a5be2519c3e2efde176cc343f55c92802',1,'sensesp::ThresholdTransform']]],
   ['modifiers_5f_14',['modifiers_',['../classsensesp_1_1_l_e_d_blinker.html#abbd667ac6703337b4e876475c95ce585',1,'sensesp::LEDBlinker']]],
   ['ms_5fmin_5fdelay_5f_15',['ms_min_delay_',['../classsensesp_1_1_debounce.html#aec60fbe6fb2c7b220b499f8e48fb556b',1,'sensesp::Debounce']]],
-  ['must_5fconfirm_5f_16',['must_confirm_',['../classsensesp_1_1_u_i_button.html#ad8efc0f1c72eb3be2dabf29de8bae427',1,'sensesp::UIButton']]]
+  ['must_5fconfirm_5f_16',['must_confirm_',['../classsensesp_1_1_u_i_button.html#ad8efc0f1c72eb3be2dabf29de8bae427',1,'sensesp::UIButton']]],
+  ['mutex_5f_17',['mutex_',['../classsensesp_1_1_semaphore_value.html#a7cf4e6b39e939d952c4fd052a2a71fde',1,'sensesp::SemaphoreValue']]],
+  ['mutex_5fbuffer_5f_18',['mutex_buffer_',['../classsensesp_1_1_semaphore_value.html#a46eaf92e9a6fd04311e485f58299e955',1,'sensesp::SemaphoreValue']]]
 ];
