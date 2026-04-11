@@ -10,7 +10,7 @@ A not-at-all-organized assortment of common problems and solutions.
 
 ## Help on Discord
 
-Discord is an online messaging collaboration platform popular with open source projects. You can join the [Signal K Discord Server](https://discord.com/channels/1170433917761892493/1170433918592368684) via the invite link on [signalk.org][https://signalk.org]. The `#sensesp` channel is the best place for you to ask questions about SensESP.
+Discord is an online messaging collaboration platform popular with open source projects. You can join the [Signal K Discord Server](https://discord.com/channels/1170433917761892493/1170433918592368684) via the invite link on [signalk.org](https://signalk.org). The `#sensesp` channel is the best place for you to ask questions about SensESP.
 
 ## Missing Libraries
 

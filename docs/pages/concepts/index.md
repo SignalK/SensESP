@@ -6,6 +6,80 @@ nav_order: 50
 
 # Concepts
 
+## How SensESP Works
+
+A SensESP program creates objects in `setup()` and connects them into a processing graph. There is no application logic in `loop()` — just `event_loop()->tick()`. The event loop calls your sensors, runs transforms, and handles networking automatically.
+
+### The three layers
+
+SensESP programs are built from three kinds of objects:
+
+- **Sensors** read physical values (analog pins, I2C devices, serial ports) or generate values programmatically.
+- **Transforms** process values: convert units, filter noise, combine multiple inputs, add hysteresis.
+- **Outputs** send data to a Signal K server (`SKOutputFloat`, etc.), display it on the status page (`StatusPageItem`), or trigger other actions.
+
+### Connecting the graph
+
+Objects are connected with `connect_to()`:
+
+```c++
+sensor->connect_to(transform)->connect_to(sk_output);
+```
+
+Data flows from left to right. When the sensor produces a new value, it propagates through the chain automatically.
+
+### The builder
+
+`SensESPAppBuilder` configures WiFi, hostname, OTA, system sensors, and other framework features before `get_app()` finalizes the setup.
+
+### Configuration
+
+Objects with a `config_path` can persist their settings to the file system. Wrapping them in `ConfigItem()` also exposes them in the web configuration UI.
+
+### A minimal complete example
+
+Here is a simplified but complete SensESP program that reads an analog input, applies a linear calibration, and sends the result to a Signal K server:
+
+```c++
+#include "sensesp_app_builder.h"
+#include "sensesp/sensors/analog_input.h"
+#include "sensesp/transforms/linear.h"
+#include "sensesp/signalk/signalk_output.h"
+
+using namespace sensesp;
+
+void setup() {
+  SetupLogging();
+
+  SensESPAppBuilder builder;
+  builder.set_hostname("my-sensesp-device")
+         ->get_app();
+
+  auto* analog_input = new AnalogInput(36, 1000);
+
+  analog_input
+      ->connect_to(new Linear(1.0, 0.0, "/calibration"))
+      ->connect_to(new SKOutputFloat("sensors.indoor.illuminance"));
+
+  ConfigItem(analog_input)
+      ->set_title("Analog Input")
+      ->set_description("Read interval for the analog input.")
+      ->set_sort_order(1000);
+}
+
+void loop() { event_loop()->tick(); }
+```
+
+Walking through the code:
+
+- `SetupLogging()` initializes serial debug output.
+- `SensESPAppBuilder` sets up WiFi, mDNS, the web UI, and the Signal K connection. `get_app()` finalizes that configuration.
+- `AnalogInput(36, 1000)` reads GPIO 36 every 1000 ms.
+- `Linear(1.0, 0.0, "/calibration")` applies a y = ax + b transform. The `"/calibration"` config path lets you adjust the slope and offset at runtime.
+- `SKOutputFloat(...)` sends the result to the Signal K server at the given path.
+- `ConfigItem(analog_input)` exposes the analog input's settings (read interval) in the web configuration UI.
+- `loop()` just ticks the event loop — all the real work happens in the objects you created in `setup()`.
+
 ## ReactESP
 
 ### Basics
@@ -78,7 +152,7 @@ void setup() {
     pinMode(kGpioPin, OUTPUT);
 
     // create the repeat event
-    app.onRepeat(
+    event_loop()->onRepeat(
         interval,
         []() {
             bool current_state = digitalRead(kGpioPin);
@@ -130,14 +204,14 @@ Some specific sensors - for example, the MAX31856 thermocouple sensor - require 
 
 ## Transforms
 
-A [Transform](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_transform.html) is a class that takes a value as input (from a Sensor, or from another Transform), does something with that value (transforms it in some way), then outputs the new value, either to another Transform, or to the Signal K Server. In the `rpm_counter.cpp` example referred to above, the meat of the code is these three lines:
+A [Transform](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_transform.html) is a class that takes a value as input (from a Sensor, or from another Transform), does something with that value (transforms it in some way), then outputs the new value, either to another Transform, or to the Signal K Server. In the `rpm_counter.cpp` example (found in the `examples/` directory), the meat of the code is these three lines:
 
 ```c++
 auto* sensor = new DigitalInputCounter(D5, INPUT_PULLUP, RISING, read_delay);
 
 sensor
-    ->connectTo(new Frequency(multiplier, config_path_calibrate))
-    ->connectTo(new SKOutputFloat(sk_path, config_path_skpath));
+    ->connect_to(new Frequency(multiplier, config_path_calibrate))
+    ->connect_to(new SKOutputFloat(sk_path, config_path_skpath));
 ```
 
 The first line instantiates a Sensor of type DigitalInputCounter. The second line is a Transform of type [Frequency](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_frequency.html) - it takes a raw number from the DigitalInputCounter Sensor and converts it to hertz, then passes it along to [SKOutputFloat](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_s_k_output_numeric.html). SKOutputFloat is a special Transform whose purpose is to send a float value to the Signal K Server.
@@ -147,16 +221,84 @@ A much more complex example is `temperature_sender.cpp`, where the meat of the p
 ```c++
 auto* analog_input = new AnalogInput();
 
-analog_input->connectTo(new AnalogVoltage())
-    ->connectTo(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))
-    ->connectTo(new TemperatureInterpreter("/gen/temp/curve"))
-    ->connectTo(new Linear(1.0, 0.0, "/gen/temp/calibrate"))
-    ->connectTo(new SKOutputFloat(sk_path, "/gen/temp/sk"));
+analog_input->connect_to(new AnalogVoltage())
+    ->connect_to(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))
+    ->connect_to(new TemperatureInterpreter("/gen/temp/curve"))
+    ->connect_to(new Linear(1.0, 0.0, "/gen/temp/calibrate"))
+    ->connect_to(new SKOutputFloat(sk_path, "/gen/temp/sk"));
 ```
 
 In this example, there is still only one Sensor (AnalogInput), but several Transforms, all required to turn the raw value from the Analog Input pin on the MCU into a temperature that's sent to the Signal K Server.
 
 You can also include multiple Sensors, each with at least one Transform, in the same program, such as including both of the examples above into the same `main.cpp`, one after the other.
+
+### Additional Transforms
+
+SensESP v3 introduces several new transforms for common data processing tasks:
+
+**Filter** — Conditionally passes values based on a predicate function. Values that don't pass the test are silently dropped.
+
+```c++
+// Only pass through temperatures above freezing
+auto* above_freezing = new Filter<float>([](float t) { return t > 273.15; });
+sensor->connect_to(above_freezing)->connect_to(sk_output);
+```
+
+**Throttle** — Limits the rate of output updates. If values arrive faster than the minimum interval, excess values are dropped (not averaged).
+
+```c++
+// Emit at most once every 5 seconds
+sensor->connect_to(new Throttle<float>(5000))->connect_to(sk_output);
+```
+
+**Repeat and variants** — Re-emit the last received value at a regular interval, useful for systems that expect continuous updates.
+
+- `Repeat<T>` — re-emits the last value at a given interval
+- `RepeatStopping<T>` — stops repeating if no new input arrives within `max_age`
+- `RepeatExpiring<T>` — emits a `Nullable<T>` that becomes invalid after `max_age`, signaling that the value is stale
+- `RepeatConstantRate<T>` — emits at a constant rate regardless of input timing, also using `Nullable<T>`
+
+```c++
+// Re-emit temperature every 2 seconds, expire after 10 seconds without update
+sensor->connect_to(new RepeatExpiring<float>(2000, 10000))
+      ->connect_to(sk_output);
+```
+
+**Nullable&lt;T&gt;** — A wrapper type that can represent an invalid or expired value. Used by `RepeatExpiring` and `RepeatConstantRate` to signal stale data. When a `Nullable<T>` is invalid, it serializes to JSON `null`.
+
+**Hysteresis** — A threshold switch with a dead zone to prevent oscillation. Useful for on/off control like pump activation.
+
+```c++
+// Turn on when temperature exceeds 350K, turn off when it drops below 340K
+auto* overheat = new Hysteresis<float, bool>(340.0, 350.0, false, true);
+sensor->connect_to(overheat)->connect_to(alarm_output);
+```
+
+**Join and Zip** — Combine multiple input values into a tuple.
+
+- `Join<T1, T2>` emits a tuple whenever *any* input is updated (as long as all values are within `max_age`)
+- `Zip<T1, T2>` emits a tuple only when *all* inputs have been updated
+
+Since these transforms accept multiple inputs, they expose individual consumer members rather than accepting input directly. Connect producers to the consumers using `std::get<N>()`:
+
+```c++
+auto* join = new Join<float, float>();
+
+temperature_sensor->connect_to(&std::get<0>(join->consumers));
+pressure_sensor->connect_to(&std::get<1>(join->consumers));
+
+// join now produces std::tuple<float, float>
+join->connect_to(new LambdaTransform<std::tuple<float, float>, float>(
+    [](std::tuple<float, float> input) -> float {
+      auto [temp, pressure] = input;
+      return calculate_air_density(temp, pressure);
+    }
+));
+```
+
+Variants `Join3`, `Join4`, `Join5` and `Zip3`, `Zip4`, `Zip5` support up to five inputs.
+
+For complete working examples, see the `examples/join_and_zip.cpp`, `examples/repeat_transform.cpp`, and `examples/hysteresis.cpp` files in the SensESP repository.
 
 ## Configuration Paths
 
@@ -253,7 +395,7 @@ Here are three different ways to specify the Units for any data you're sending t
 
   /**
    * chain_counter is connected to accumulator, which is connected to an
-   * SKOutputNumber, which sends the final result to the indicated path on the
+   * SKOutputFloat, which sends the final result to the indicated path on the
    * Signal K server. (Note that each data type has its own version of SKOutput:
    * SKOutputFloat, SKOutputInt, SKOutputBool, and SKOutputString.)
    */

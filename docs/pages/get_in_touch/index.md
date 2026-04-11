@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Get in Touch
-nav_order: 90
+nav_order: 100
 ---
 
 # Get In Touch

@@ -35,9 +35,9 @@ Moving forward from Observables, we have Producers and Consumers, implemented in
 Producers are Observables that additionally define a `connect_to()` method that can be used to connect the Producer to a Consumer.
 The `connect_to()` method creates a standardized callback between the two objects, thus allowing you to connect the two without having to define the callback yourself.
 
-Consumers, on their turn, are classes that implement the `set_input()` method that the Observable callback will call.
+Consumers, on their turn, are classes that implement the `set()` method that the Observable callback will call.
 Consumers also define a `connect_from()` convenience method for connecting the Consumer to a Producer.
-`connect_from()` is a bit more complex than `connect_to()` because it "goes against the flow", so to speak, but it can come in handy in many situations.
+`connect_from()` is a bit more complex than `connect_to()` because it "goes against the flow", so to speak, but it can come in handy in many situations. Note: `connect_from()` is deprecated in v3; prefer using `connect_to()` instead.
 
 It is common for a class to be both a `ValueProducer` and a `ValueConsumer`. Such classes typically receive values, perform some operations, and then notify their consumers, thus creating a _transform_ of the input. [`Transform`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_transform.html) classes are described in the [Transforms](#Transforms) section.
 
@@ -66,6 +66,86 @@ By itself, it does nothing, but it implements the `ValueProducer` interface, and
 If you update the value of the `ObservableValue`, all the connected consumers will be notified.
 This approach can be used to inject arbitrary data into SensESP processing networks.
 
+### Advanced: Member Producers and Consumers
+
+When a class needs multiple typed inputs or multiple typed outputs, inheriting directly from `ValueConsumer<T>` or `ValueProducer<T>` for each type becomes unwieldy. C++ does not allow inheriting the same template base class with different type parameters, so a class that needs both a temperature input and a pressure input cannot simply inherit from both `ValueConsumer<float>` twice.
+
+The solution is to expose `ValueProducer` or `ValueConsumer` *members* and have external code connect to the members rather than the parent object.
+
+**The pattern:**
+
+1. The class creates `LambdaConsumer<T>` members for inputs, each with a lambda that processes the value internally.
+2. The class creates `ValueProducer<T>` members (or `ObservableValue<T>`) for outputs.
+3. Getter methods expose references to these members.
+4. External code connects via: `some_producer->connect_to(&obj->get_foo_consumer())`
+
+**Example: Join transform**
+
+The `Join` and `Zip` transforms use this pattern. They accept multiple inputs through a tuple of consumer members:
+
+```c++
+auto* join = new Join<float, float>();
+
+// Connect to individual consumer members, not to the join object itself
+temperature_sensor->connect_to(&std::get<0>(join->consumers));
+pressure_sensor->connect_to(&std::get<1>(join->consumers));
+
+// The join object itself is a ValueProducer<std::tuple<float, float>>
+join->connect_to(some_downstream_transform);
+```
+
+**Example: Custom multi-input class**
+
+Here is a sketch of a bilge alarm controller that takes water level and pump state as separate inputs and produces an alarm output:
+
+```c++
+class BilgeAlarmController : public ValueProducer<bool> {
+ public:
+  BilgeAlarmController() :
+      water_level_consumer_([this](float level) {
+        this->water_level_ = level;
+        this->evaluate();
+      }),
+      pump_state_consumer_([this](bool running) {
+        this->pump_running_ = running;
+        this->evaluate();
+      }) {}
+
+  ValueConsumer<float>& get_water_level_consumer() {
+    return water_level_consumer_;
+  }
+
+  ValueConsumer<bool>& get_pump_state_consumer() {
+    return pump_state_consumer_;
+  }
+
+ private:
+  void evaluate() {
+    bool alarm = (water_level_ > 0.8) && !pump_running_;
+    this->emit(alarm);
+  }
+
+  LambdaConsumer<float> water_level_consumer_;
+  LambdaConsumer<bool> pump_state_consumer_;
+  float water_level_ = 0;
+  bool pump_running_ = false;
+};
+```
+
+Usage:
+
+```c++
+auto* alarm = new BilgeAlarmController();
+
+water_level_sensor->connect_to(&alarm->get_water_level_consumer());
+pump_state_sensor->connect_to(&alarm->get_pump_state_consumer());
+alarm->connect_to(new SKOutputBool("electrical.bilgePump.alarm"));
+```
+
+**When to use this pattern:** Whenever your class needs more than one typed input, or when you want to expose multiple typed outputs from a single object. It is cleaner than complex inheritance hierarchies and allows each input or output to have its own type.
+
+This pattern is used extensively within SensESP itself. For example, `SystemStatusController` uses member consumers for WiFi state and WebSocket connection state, and `SKWSClient` exposes member producers for delta transmit and receive counts.
+
 ## Saveables and Serializables
 
 SensESP can persist many objects to the local file system. In particular, class objects that inherit from `Serializable` can be serialized to JSON and deserialized back. Likewise, any class inheriting from 'FileSystemSaveable' allows saving and loading of the object to and from the file system.
@@ -73,9 +153,9 @@ SensESP can persist many objects to the local file system. In particular, class 
 ## Sensors
 
 [Sensors](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_sensor_t.html) are classes that read value from some real-world source and provide them to the rest of the system.
-Building on the concepts described above, a `Sensor` subclass is a `ValueProducer` of a certain type, a `Configurable`, and a `Startable` (even though the default `start()` method does nothing and is usually not overridden). In other words, it is something that you can attach Observables or Consumers to, which can store and retrieve its own configuration (and can be configured via the web interface), and can define its own startup routine.
+Building on the concepts described above, a `Sensor` subclass is a `ValueProducer` of a certain type and a `SensorConfig`. In other words, it is something that you can attach Observables or Consumers to, which can store and retrieve its own configuration (and can be configured via the web interface). (`Startable` still exists as a backward-compatibility stub but is no longer part of the primary inheritance chain.)
 
-Like ValueProducers, all Sensors inherit from the [`SensorT<T>`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_sensor_t.html) template class, and there are pre-specialized classes for convenience: `FloatSensor`, `IntSensor`, `BoolSensor`, and `StringSensor`.
+Like ValueProducers, all Sensors inherit from the [`Sensor<T>`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_sensor_t.html) template class, and there are pre-specialized classes for convenience: `FloatSensor`, `IntSensor`, `BoolSensor`, and `StringSensor`.
 
 When creating new sensor classes, inheriting from `Sensor` requires writing quite a bit of boilerplate that may not be very relevant for simple sensor classes.
 If you are creating a new sensor that simply reads a value using an external library at given time intervals, you can use the [`RepeatSensor`](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_repeat_sensor.html) class instead.

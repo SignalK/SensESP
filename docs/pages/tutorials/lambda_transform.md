@@ -2,6 +2,7 @@
 layout: default
 title: Implementing Arbitrary Transforms
 parent: Tutorials
+nav_order: 30
 ---
 # Implementing Arbitrary Transforms with `LambdaTransform`
 
@@ -50,9 +51,9 @@ auto int_to_bool_transform = new LambdaTransform<int, bool>(int_to_bool_function
 - `int_to_bool_transform` is the name of the LambdaTransform object. (Actually, it's a pointer to the object, since it's created by `new`.)
 - `LambdaTransform<int, bool>(int_to_bool_function)` does two things: it says that our Transform is going to have an `int` as input and a `bool` as output (with the `LambdaTransform<int, bool>` part); and it says the function that we want to call whenever a value is passed to this Transform is our `int_to_bool_funtion`.
 
-Finally, we use it to transform the integer output of a DigitalInputValue Sensor into `true` or `false` , then send it to Signal K:
+Finally, we use it to transform the integer output of a DigitalInputState Sensor into `true` or `false` , then send it to Signal K:
 ```
-auto* digital_input = new DigitalInputValue(pin, INPUT, CHANGE);
+auto* digital_input = new DigitalInputState(pin, INPUT, CHANGE);
 
 digital_input->connect_to(int_to_bool_transform)
              ->connect_to(new SKOutputBool("some.sk.path"));

@@ -193,7 +193,7 @@ Next, we'll create the SensESP application using the builder class. Add the foll
 
 This will create a SensESP app with the hostname `sensesp-bme280`. You can change this to whatever you want, but make sure it's unique on your network. The builder class also allows you to set the WiFi SSID and password and other settings, if needed. See the [SensESPAppBuilder](/generated/docs/classsensesp_1_1_sens_e_s_p_app_builder.html) documentation for more information.
 
-One more thing to do is to add the `event_loopU()->tick();` command to the end of the `loop()` function. This call triggers execution of any ReactESP events that have been scheduled.
+One more thing to do is to add the `event_loop()->tick();` command to the end of the `loop()` function. This call triggers execution of any ReactESP events that have been scheduled.
 
 We're almost ready to give it a go! There's one more thing that is unobvious but very important. Have a look at the current `loop()` function:
 
@@ -229,7 +229,7 @@ The first line instantiates a variable calling `last_run` that is `static`, mean
 
 [^1]: This code has an unobvious but significant flaw: once the `millis()` value overflows, the values will start again from zero, and the `if` statement will never be true again. An `unsigned long` variable is 64 bits long, with the maximum decimal value being 18&nbsp;446&nbsp;744&nbsp;073&nbsp;709&nbsp;551&nbsp;616. If you divide that by 1000, you'll get 18&nbsp;446&nbsp;744&nbsp;073&nbsp;709&nbsp;551 seconds, or 584&nbsp;554&nbsp;049 years. Be sure not to leave your device running for that long!
 
-Try uploading the code. If you get a note that WiFiManager is started, you need to configure the WiFi settings. Connect to the WiFi network named `Configure sensesp-bme280` with password "thisisfine". You should see a captive portal page where you can select your WiFi network and enter the password. After that, the device should connect to the network. At this point, the blue LED should start flashing, indicating that the device is connected to the network. You should also see the sensor values printed on the serial monitor, along with some status messages from SensESP.
+Try uploading the code. If you get a note that WiFiManager is started, you need to configure the WiFi settings. Connect to the WiFi network named `sensesp-bme280` with password "thisisfine". You should see a captive portal page where you can select your WiFi network and enter the password. After that, the device should connect to the network. At this point, the blue LED should start flashing, indicating that the device is connected to the network. You should also see the sensor values printed on the serial monitor, along with some status messages from SensESP.
 
 ## Adding Signal K Output
 
@@ -273,9 +273,9 @@ void printValues() {
   float pressure_Pa = bme.readPressure();
   float humidity_ratio = bme.readHumidity() / 100.0F;
 
-  temperature_output->set_input(temperature_K);
-  pressure_output->set_input(pressure_Pa);
-  humidity_output->set_input(humidity_ratio);
+  temperature_output->set(temperature_K);
+  pressure_output->set(pressure_Pa);
+  humidity_output->set(humidity_ratio);
 
   Serial.println();
 }
@@ -313,9 +313,9 @@ void printValues() {
   float pressure_Pa = bme.readPressure();
   float humidity_ratio = bme.readHumidity() / 100.0F;
 
-  temperature_output->set_input(temperature_K);
-  pressure_output->set_input(pressure_Pa);
-  humidity_output->set_input(humidity_ratio);
+  temperature_output->set(temperature_K);
+  pressure_output->set(pressure_Pa);
+  humidity_output->set(humidity_ratio);
 }
 
 void setup() {
@@ -365,7 +365,7 @@ void loop() {
     last_run = millis();
   }
 
-  app.tick();
+  event_loop()->tick();
 }
 ```
 

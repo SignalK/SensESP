@@ -55,162 +55,18 @@ Discussion about SensESP happens mostly on the [Signal K Discord](https://discor
 
 Another place for SensESP discussions is the [discussion board on the SensESP GitHub repository](https://github.com/SignalK/SensESP/discussions).
 
-## Getting Started with Version 3
+## Version 3
 
-### Major Changes
+SensESP v3 is the current major version. Key changes from v2 include:
 
-- WiFiManager replaced with built-in implementation
-  - Supports simultaneous client and AP
-  - Same frontend used as captive portal
-  - Support for multiple alternative WiFi networks
-- Web server replaced with ESP-IDF standard implementation
-- Websockets replaced with ESP-IDF standard implementation
-- AsyncTCP dependencies removed
-- RemoteDebug replaced with ESP-IDF debugging macros
-- Web Frontend rewritten from scratch with Preact and Bootstrap
-  - JSONEditor no longer used
-  - More flexible and user-friendly UI
-  - Support for authentication
-  - Support for frontend plugins (app-defined React pages)
-  - Indicate when a ocnfiguration change requires a restart
+- Web frontend rewritten with Preact and Bootstrap, replacing the old JSONEditor-based UI
+- Built-in WiFi manager replacing the external WiFiManager library, with simultaneous AP+STA support
+- Explicit `ConfigItem` system for exposing objects to the web configuration UI
+- Transport-agnostic networking supporting both WiFi and Ethernet
+- New transforms: Join, Zip, Filter, Throttle, Repeat variants, Hysteresis
+- Standard ESP-IDF logging replacing RemoteDebug
 
-- Remove Startable class
-- Rename classes:
-  - `SensorT` -> `Sensor`
-  - `IntegratorT` -> `Integrator`
-  - `DebounceTemplate` -> `Debounce`
-  - `WSClient` -> `SKWSClient`
-  -
-- Add a run script to help with SensESP development
-- Function signature changes:
-  - Pass received JSON objects
-  - Rename `ValueConsumer::set_input` to `ValueConsumer::set`. The value parameter
-    is now passed as a const reference. The input_channel parameter is removed.
-
-- Add new transforms:
-  - `ExpiringValue`: output value expires after a given time unless updated
-  - `Repeat`: repeats the input value at a given interval
-  - `RepeatStopping`: repeats the input value at a given interval, stopping after a given time
-  - `RepeatExpiring`: repeats the input value at a given interval, expiring after a given time.
-    `RepeatExpiring` outputs an `Nullable<T>` value, where the value is invalid/`null` after expiration.
-  - `RepeatConstantRate`: repeats the input value at a constant rate, regardless of input rate.
-    `RepeatConstantRate` outputs an `Nullable<T>` value, where the value is invalid/`null` after expiration.
-  - `Join`: joins multiple input values into a single output tuple that is emitted when any inputs are updated
-  - `Zip`: joins multiple input values into a single output tuple that is emitted when all inputs are updated
-  - `Throttle`: limits the rate of output updates
-  - `Filter`: emits the input value only if it passes a given test
-
-- Implement stream producers that emit characters or lines from a stream
-  (e.g., a serial port)
-- SKEmitter::as_signalk() has been renamed to SKEmitter::as_signalk_json().
-  It now writes its output to a JsonDocument reference instead
-  of returning a String.
-
-- Custom Signal K output is done differently than before. Instead of implementing
-  an `as_signalk()` method in your `SKOutput` specialization that returned a
-  serialized string, you should
-  implement an `as_signalk_json()` method that writes constructs an ArduinoJson
-  object in the provided `JsonObject` reference.
-
-- `UIOutput` has been renamed to `StatusPageItem`. `UILambdaOutput` has been
-  removed. Since `StatusPageItem` is now a `ValueConsumer`, you can connect
-  a producer to it.
-
-- `SemaphoreValue` is a new class that can be used to synchronize access to a
-  shared value between multiple threads/tasks.
-
-- `Configurable` base class has been split to `Saveable`, `Serializable` and
-  `ConfigItem`. Web configuration cards are now only rendered for objects that
-  have been wrapped in a `ConfigItem` call.
-
-- [Smart pointers](https://medium.com/@lucky_rydar/guide-over-smart-pointers-in-c-46ed8b04448c)
-  are used internally throughout the project. This reduces the risk of memory
-  leaks or crashes due to dangling pointers. It is also possible, but not
-  mandatory, to use smart pointers in your own code.
-
-- Internal instrumentation has been improved. Web user interface status page
-  now shows memory usage and event loop statistics.
-
-### Migrating Existing Projects
-
-- Update your project's `platformio.ini` file to use the new version of SensESP:
-
-  ```ini
-  lib_deps =
-    SignalK/SensESP @ >=3.0.0-beta.2,<4
-    # https://github.com/SignalK/SensESP.git  # Use this line to use the latest git version
-    # symlink:///Users/mairas/src/SignalK/SensESP  # Use this line to use a local copy
-  ```
-
-- Adjust the build flags in your project's `platformio.ini` file as follows:
-
-  ```ini
-  build_flags =
-    -D LED_BUILTIN=2
-    ; Max (and default) debugging level in Arduino ESP32 Core
-    -D CORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE
-    ; Arduino Core bug workaround: define the log tag for the Arduino
-    ; logging macros.
-    -D TAG='"Arduino"'
-    ; Use the ESP-IDF logging library - required by SensESP.
-    -D USE_ESP_IDF_LOG
-  ```
-
-- If you have the following in the beginning of your `setup()` function:
-
-  ```cpp
-  #ifndef SERIAL_DEBUG_DISABLED
-    SetupSerialDebug(115200);
-  #endif
-  ```
-  replace it with:
-
-  ```cpp
-  SetupLogging();
-  ```
-
-- Remove the final `sensesp_app->start();` call from your `setup()` function.
-
-- The `reactesp` namespace is no longer imported. If you have any references to
-  classes in this namespace, you will need to update them to use the namespace
-  explicitly.
-
-  Additionally, ReactESP classes have been renamed:
-
-  - `ReactESP` -> `reactesp::EventLoop`
-  - `*Reaction` -> `reactesp::*Event`
-
-  For example, `ReactESP` class should be referred to as
-  `reactesp::EventLoop`. In particular, this change probably needs to be made
-  in your project's `main.cpp` file.
-
-- `ReactESP` is no longer a singleton. Earlier, you could refer to the singleton
-  instance of `ReactESP` using `ReactESP::app`. Now, the object pointer is
-  maintained by the `SensESPBaseApp` class, and you can refer to it using
-  `event_loop()`. For example:
-
-  ```cpp
-  event_loop()->onRepeat(
-    1000,
-    []() { Serial.println("Hello, world!"); }
-  );
-  ```
-
-- Objects inheriting from `Configurable` and having a `config_path` defined
-  were automatically added to the web configuration UI. This is no longer the
-  case. Now, you need to explicitly call `ConfigItem` with the object as an
-  argument. For example:
-
-  ```cpp
-  auto input_calibration = new Linear(1.0, 0.0, "/input/calibration");
-
-  ConfigItem(input_calibration)
-      ->set_title("Input Calibration")
-      ->set_description("Analog input value adjustment.")
-      ->set_sort_order(1100);
-
-  analog_input->connect_to(input_calibration);
-  ```
+For migration instructions from v2, see the [Migration Guide](https://signalk.org/SensESP/pages/migration/).
 
 ### Development
 
