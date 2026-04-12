@@ -12,11 +12,16 @@ export function SignalKSettingsPanel(): JSX.Element {
   const [config, setConfig] = useState({});
   const [errorText, setErrorText] = useState("");
 
-  async function handleSave(): Promise<void> {
+  async function handleSave(configOverride?: JsonObject): Promise<void> {
     try {
-      await saveConfigData(CONFIG_PATH, JSON.stringify(config), (e: Error) => {
-        setErrorText(e.message);
-      });
+      const configToSave = configOverride ?? config;
+      await saveConfigData(
+        CONFIG_PATH,
+        JSON.stringify(configToSave),
+        (e: Error) => {
+          setErrorText(e.message);
+        },
+      );
     } catch (e) {
       setErrorText(e.message);
     }
@@ -51,18 +56,18 @@ export function SignalKSettingsPanel(): JSX.Element {
         <SKConnectionSettings
           config={config}
           setConfig={setConfig}
-          setRequestSave={handleSave}
+          onSave={handleSave}
         />
         <SKSSLSettings
           config={config}
           setConfig={setConfig}
-          setRequestSave={handleSave}
+          onSave={handleSave}
           onConfigUpdate={updateConfig}
         />
         <SKAuthToken
           config={config}
           setConfig={setConfig}
-          setRequestSave={handleSave}
+          onSave={handleSave}
         />
       </div>
     </>
@@ -72,13 +77,13 @@ export function SignalKSettingsPanel(): JSX.Element {
 interface SKConnectionSettingsProps {
   config: JsonObject;
   setConfig: (cfg: JsonObject) => void;
-  setRequestSave: (b: boolean) => void;
+  onSave: (configOverride?: JsonObject) => Promise<void>;
 }
 
 function SKConnectionSettings({
   config,
   setConfig,
-  setRequestSave,
+  onSave,
 }: SKConnectionSettingsProps): JSX.Element {
   const id = useId();
 
@@ -153,7 +158,7 @@ function SKConnectionSettings({
               className="btn btn-primary"
               onClick={(e) => {
                 e.preventDefault();
-                setRequestSave(true);
+                void onSave();
               }}
             >
               Save
@@ -168,17 +173,18 @@ function SKConnectionSettings({
 interface SKAuthTokenProps {
   config: JsonObject;
   setConfig: (cfg: JsonObject) => void;
-  setRequestSave: (b: boolean) => void;
+  onSave: (configOverride?: JsonObject) => Promise<void>;
 }
 
 function SKAuthToken({
   config,
   setConfig,
-  setRequestSave,
+  onSave,
 }: SKAuthTokenProps): JSX.Element {
   function handleClearToken(): void {
-    setConfig({ ...config, token: "" });
-    setRequestSave(true);
+    const newConfig = { ...config, token: "" };
+    setConfig(newConfig);
+    void onSave(newConfig);
   }
 
   return (
@@ -197,14 +203,14 @@ function SKAuthToken({
 interface SKSSLSettingsProps {
   config: JsonObject;
   setConfig: (cfg: JsonObject) => void;
-  setRequestSave: (b: boolean) => void;
+  onSave: (configOverride?: JsonObject) => Promise<void>;
   onConfigUpdate: () => Promise<void>;
 }
 
 function SKSSLSettings({
   config,
   setConfig,
-  setRequestSave,
+  onSave,
   onConfigUpdate,
 }: SKSSLSettingsProps): JSX.Element {
   const [resetting, setResetting] = useState(false);
@@ -315,7 +321,7 @@ function SKSSLSettings({
             className="btn btn-primary"
             onClick={(e) => {
               e.preventDefault();
-              setRequestSave(true);
+              void onSave();
             }}
           >
             Save
