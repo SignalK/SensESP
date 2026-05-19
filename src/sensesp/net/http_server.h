@@ -24,6 +24,19 @@ namespace sensesp {
 #define HTTP_DEFAULT_PORT 80
 #endif
 
+// Maximum simultaneous client sockets the HTTP server will accept.
+// The default esp_http_server value (7) is too low for modern browsers,
+// which open 6+ parallel connections to fetch JS/CSS bundles of the
+// embedded SPA — extras get TCP-RST and the web UI hangs half-loaded.
+//
+// Note: esp_http_server reserves 3 sockets internally, so the effective
+// client cap is HTTP_SERVER_MAX_OPEN_SOCKETS. Additionally,
+// `CONFIG_LWIP_MAX_SOCKETS` must be >= HTTP_SERVER_MAX_OPEN_SOCKETS + 3
+// or lwIP itself will refuse the extra sockets.
+#ifndef HTTP_SERVER_MAX_OPEN_SOCKETS
+#define HTTP_SERVER_MAX_OPEN_SOCKETS 13
+#endif
+
 #include <ctype.h>
 #include <stdlib.h>
 
@@ -66,6 +79,7 @@ class HTTPServer : public FileSystemSaveable {
     config_.server_port = port;
     config_.stack_size = HTTP_SERVER_STACK_SIZE;
     config_.max_uri_handlers = 20;
+    config_.max_open_sockets = HTTP_SERVER_MAX_OPEN_SOCKETS;
     config_.uri_match_fn = httpd_uri_match_wildcard;
     String auth_realm_ = "Login required for " + SensESPBaseApp::get_hostname();
     load();
