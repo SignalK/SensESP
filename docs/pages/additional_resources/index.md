@@ -44,6 +44,10 @@ If you want to have your own project added to the list, [create an issue](https:
 
 - [SensESP BLE Gateway](https://github.com/dirkwa/sensesp-ble-gateway): BLE gateway that bridges Bluetooth Low Energy devices to signalk-server's BLE provider API. Supports ESP32-P4 (Bluedroid + esp_hosted over Ethernet) and ESP32-C5 (NimBLE over WiFi). Forwards advertisements via HTTP POST with optional control WebSocket for GATT client operations.
 
+### NMEA 2000
+
+- [SensESP N2K Gateway](https://github.com/dirkwa/sensesp-n2k-gateway): NMEA 2000 candump-over-TCP gateway. Streams raw CAN frames from the ESP32 TWAI peripheral to [canboatjs](https://github.com/canboat/canboatjs) over TCP, so the SignalK server does all PGN decoding. Bidirectional — also accepts inbound candump lines and transmits them on the bus. Field-tested on Waveshare ESP32-P4-WIFI6-Touch-LCD-7B with ~2500 frames/s sustained N2K traffic.
+
 ### Temperature and Humidity
 
 - [Adafruit MAX31856 thermocouple sensor shield](https://github.com/SensESP/MAX31856): Library for reading a Type K thermocouple with an Adafruit MAX31856 breakout board
