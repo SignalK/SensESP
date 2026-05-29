@@ -6,6 +6,7 @@
 
 #if ESP_ARDUINO_VERSION_MAJOR >= 3
 #include <Network.h>
+#include <WiFi.h>
 #else
 #include <WiFi.h>
 #endif
@@ -37,7 +38,8 @@ NetworkStateProducer::NetworkStateProducer() {
   // ----- Arduino-ESP32 3.x: unified Network event bus ---------------------
   wifi_got_ip_handle_ = Network.onEvent(
       [this](arduino_event_id_t, arduino_event_info_t) {
-        ESP_LOGI("net_state", "WiFi station got IP");
+        ESP_LOGI("net_state", "WiFi station got IP %s",
+                 WiFi.localIP().toString().c_str());
         defer_emit(this, kNetworkConnected);
       },
       ARDUINO_EVENT_WIFI_STA_GOT_IP);
@@ -51,7 +53,8 @@ NetworkStateProducer::NetworkStateProducer() {
 
   wifi_ap_start_handle_ = Network.onEvent(
       [this](arduino_event_id_t, arduino_event_info_t) {
-        ESP_LOGI("net_state", "WiFi soft-AP started");
+        ESP_LOGI("net_state", "WiFi soft-AP started, IP %s",
+                 WiFi.softAPIP().toString().c_str());
         defer_emit(this, kNetworkAPMode);
       },
       ARDUINO_EVENT_WIFI_AP_START);
@@ -89,7 +92,8 @@ NetworkStateProducer::NetworkStateProducer() {
   // ----- Arduino-ESP32 2.x: WiFi-only event bus --------------------------
   wifi_got_ip_handle_ = WiFi.onEvent(
       [this](WiFiEvent_t, WiFiEventInfo_t) {
-        ESP_LOGI("net_state", "WiFi station got IP");
+        ESP_LOGI("net_state", "WiFi station got IP %s",
+                 WiFi.localIP().toString().c_str());
         defer_emit(this, kNetworkConnected);
       },
       WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_GOT_IP);
@@ -103,7 +107,8 @@ NetworkStateProducer::NetworkStateProducer() {
 
   wifi_ap_start_handle_ = WiFi.onEvent(
       [this](WiFiEvent_t, WiFiEventInfo_t) {
-        ESP_LOGI("net_state", "WiFi soft-AP started");
+        ESP_LOGI("net_state", "WiFi soft-AP started, IP %s",
+                 WiFi.softAPIP().toString().c_str());
         defer_emit(this, kNetworkAPMode);
       },
       WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_START);
