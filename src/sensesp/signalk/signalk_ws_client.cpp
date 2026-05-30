@@ -1004,6 +1004,7 @@ void SKWSClient::connect_ws(const String& host, const uint16_t port) {
 
   String protocol = ssl_enabled_ ? "wss" : "ws";
   String path = "/signalk/v1/stream?subscribe=none";
+  if (send_meta_enabled_) path += "&sendMeta=all";
   String url = protocol + "://" + host + ":" + String(port) + path;
 
   ESP_LOGD(__FILENAME__, "Connecting WebSocket to %s", url.c_str());
@@ -1112,6 +1113,7 @@ bool SKWSClient::to_json(JsonObject& root) {
   root["ssl_enabled"] = this->ssl_enabled_;
   root["tofu_enabled"] = this->tofu_enabled_;
   root["tofu_fingerprint"] = this->tofu_fingerprint_;
+  root["send_meta_enabled"] = this->send_meta_enabled_;
   return true;
 }
 
@@ -1145,6 +1147,9 @@ bool SKWSClient::from_json(const JsonObject& config) {
   }
   if (config["tofu_fingerprint"].is<String>()) {
     this->tofu_fingerprint_ = config["tofu_fingerprint"].as<String>();
+  }
+  if (config["send_meta_enabled"].is<bool>()) {
+    this->send_meta_enabled_ = config["send_meta_enabled"].as<bool>();
   }
 
   return true;

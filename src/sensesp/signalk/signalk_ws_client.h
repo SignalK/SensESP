@@ -127,6 +127,25 @@ class SKWSClient : public FileSystemSaveable,
   }
 
   /**
+   * @brief Whether the WS subscribes with `sendMeta=all`.
+   *
+   * When true, the signalk-server pushes metadata deltas (units,
+   * zones, displayName, displayUnits, etc.) over the same WebSocket
+   * connection as value deltas, so consumers don't have to make
+   * separate REST `/meta` requests per path.
+   *
+   * Defaults to true. Disable only if you have a constrained client
+   * that doesn't want meta-deltas at all (they would simply be
+   * ignored by SKValueListener anyway since meta updates carry no
+   * `values` array).
+   */
+  bool is_send_meta_enabled() const { return send_meta_enabled_; }
+  void set_send_meta_enabled(bool enabled) {
+    send_meta_enabled_ = enabled;
+    save();
+  }
+
+  /**
    * @brief Check if TOFU certificate verification is enabled.
    */
   bool is_tofu_enabled() const { return tofu_enabled_; }
@@ -192,6 +211,10 @@ class SKWSClient : public FileSystemSaveable,
   // SSL/TLS configuration
   bool ssl_enabled_ = false;
   bool tofu_enabled_ = true;  // TOFU enabled by default
+
+  // Subscribe with ?sendMeta=all so metadata (zones, units, etc) is
+  // pushed in-stream rather than requiring REST /meta polls.
+  bool send_meta_enabled_ = true;
   String tofu_fingerprint_ = "";  // SHA256 fingerprint in hex (64 chars)
 
   TaskQueueProducer<SKWSConnectionState> connection_state_{
@@ -269,7 +292,10 @@ inline const String ConfigSchema(const SKWSClient& obj) {
   return "{\"type\":\"object\",\"properties\":{"
          "\"ssl_enabled\":{\"title\":\"SSL/TLS Enabled\",\"type\":\"boolean\"},"
          "\"tofu_enabled\":{\"title\":\"TOFU Verification\",\"type\":\"boolean\"},"
-         "\"tofu_fingerprint\":{\"title\":\"Server Fingerprint\",\"type\":\"string\",\"readOnly\":true}"
+         "\"tofu_fingerprint\":{\"title\":\"Server Fingerprint\",\"type\":\"string\",\"readOnly\":true},"
+         "\"send_meta_enabled\":{\"title\":\"Subscribe with sendMeta=all\","
+         "\"description\":\"Request metadata deltas (units, zones, displayName, displayUnits) over the WS stream. Disable only for constrained clients that ignore them.\","
+         "\"type\":\"boolean\"}"
          "}}";
 }
 
