@@ -146,6 +146,23 @@ class SKWSClient : public FileSystemSaveable,
   }
 
   /**
+   * @brief Register a callback for incoming meta-deltas.
+   *
+   * SignalK metadata (units, zones, displayName, displayUnits) is
+   * delivered in `updates[].meta[]` rather than `updates[].values[]`.
+   * SensESP listeners only consume values; meta entries are fanned out
+   * via this hook so consumers (e.g. zone-coloring widgets) can react
+   * without an additional HTTP /meta poll.
+   *
+   * The callback fires on the WS task — implementations must not
+   * block. If LVGL or other single-threaded UI work is needed,
+   * marshal it onto event_loop via onDelay(0, ...).
+   */
+  using MetaCallback =
+      std::function<void(const String& path, const JsonObject& meta)>;
+  void on_meta(MetaCallback cb) { meta_callback_ = std::move(cb); }
+
+  /**
    * @brief Check if TOFU certificate verification is enabled.
    */
   bool is_tofu_enabled() const { return tofu_enabled_; }
@@ -215,6 +232,9 @@ class SKWSClient : public FileSystemSaveable,
   // Subscribe with ?sendMeta=all so metadata (zones, units, etc) is
   // pushed in-stream rather than requiring REST /meta polls.
   bool send_meta_enabled_ = true;
+
+  // Optional fan-out for incoming meta deltas. Set via on_meta().
+  MetaCallback meta_callback_;
   String tofu_fingerprint_ = "";  // SHA256 fingerprint in hex (64 chars)
 
   TaskQueueProducer<SKWSConnectionState> connection_state_{

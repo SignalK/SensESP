@@ -362,6 +362,21 @@ void SKWSClient::on_receive_updates(JsonDocument& message) {
       }
       received_updates_.push_back(value_doc);
     }
+
+    // Fan out meta entries to the optional on_meta callback. Meta
+    // deltas only arrive when subscribed with sendMeta=all and are
+    // typically one-shot per path (at subscribe + on metadata change).
+    if (meta_callback_) {
+      JsonArray meta_entries = update["meta"];
+      for (size_t mi = 0; mi < meta_entries.size(); mi++) {
+        JsonObject entry = meta_entries[mi];
+        const char* path_cstr = entry["path"];
+        if (!path_cstr) continue;
+        JsonObject meta = entry["value"];
+        if (meta.isNull()) continue;
+        meta_callback_(String(path_cstr), meta);
+      }
+    }
   }
   release_received_updates_semaphore();
 }
