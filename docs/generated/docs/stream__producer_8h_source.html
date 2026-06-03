@@ -26,7 +26,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">SensESP<span id="projectnumber">&#160;3.3.0</span>
+   <div id="projectname">SensESP<span id="projectnumber">&#160;3.4.0</span>
    </div>
    <div id="projectbrief">Universal Signal K sensor toolkit ESP32</div>
   </td>
@@ -156,7 +156,7 @@ $(function(){initNavTree('stream__producer_8h_source.html','',''); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="comment">// Include the newline character in the output</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <a class="code hl_variable" href="classsensesp_1_1_stream_line_producer.html#a09d3974041ad522c1f4fe0372dc5ffd8">buf_</a>[<a class="code hl_variable" href="classsensesp_1_1_stream_line_producer.html#abae34d05c1ab338b0931b84988426c73">buf_pos</a>++] = c;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <a class="code hl_variable" href="classsensesp_1_1_stream_line_producer.html#a09d3974041ad522c1f4fe0372dc5ffd8">buf_</a>[<a class="code hl_variable" href="classsensesp_1_1_stream_line_producer.html#abae34d05c1ab338b0931b84988426c73">buf_pos</a>] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(buf_);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        this-&gt;<a class="code hl_function" href="classsensesp_1_1_value_producer.html#a4f5f0259d0d3cd9a0ed17d657cac04e2">emit</a>(String(<a class="code hl_variable" href="classsensesp_1_1_stream_line_producer.html#a09d3974041ad522c1f4fe0372dc5ffd8">buf_</a>.get()));</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_variable" href="classsensesp_1_1_stream_line_producer.html#abae34d05c1ab338b0931b84988426c73">buf_pos</a> = 0;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <a class="code hl_variable" href="classsensesp_1_1_stream_line_producer.html#a09d3974041ad522c1f4fe0372dc5ffd8">buf_</a>[<a class="code hl_variable" href="classsensesp_1_1_stream_line_producer.html#abae34d05c1ab338b0931b84988426c73">buf_pos</a>++] = c;</div>

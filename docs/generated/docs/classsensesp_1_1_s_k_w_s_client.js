@@ -5,6 +5,7 @@ var classsensesp_1_1_s_k_w_s_client =
     [ "connect_ws", "classsensesp_1_1_s_k_w_s_client.html#a2ebcbbfce9e5d6148e69185da36c5040", null ],
     [ "detect_ssl", "classsensesp_1_1_s_k_w_s_client.html#a12738fc1db47ebe9557753905bb62615", null ],
     [ "from_json", "classsensesp_1_1_s_k_w_s_client.html#ace3c9afd0a99729fb788e3802cb9fd4e", null ],
+    [ "get_auth_token", "classsensesp_1_1_s_k_w_s_client.html#afd3325dd6661625f41543a23fa2e7008", null ],
     [ "get_connection_state", "classsensesp_1_1_s_k_w_s_client.html#a4b743aa1377f34235482a2bbc6400698", null ],
     [ "get_connection_status", "classsensesp_1_1_s_k_w_s_client.html#ad7e2b5675a5fc16b4e71fdc938124a2d", null ],
     [ "get_delta_rx_count_producer", "classsensesp_1_1_s_k_w_s_client.html#ac215811c50ad83fde84244b447b29016", null ],
