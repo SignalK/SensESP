@@ -35,6 +35,7 @@ interface EditControlProps {
     description?: string;
     displayMultiplier?: number;
     displayOffset?: number;
+    multipleOf?: number;
   };
   value: JsonValue;
   setValue: (value: JsonValue) => void;
@@ -74,6 +75,7 @@ export function EditControl({
             (schema.displayOffset ?? 0)
           }
           readOnly={schema.readOnly ?? false}
+          step={schema.multipleOf}
           setValue={(value: number) => {
             setValue(
               (value - (schema.displayOffset ?? 0)) /
