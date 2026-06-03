@@ -45,6 +45,15 @@ class SKListener : virtual public Observable, public FileSystemSaveable {
 
   virtual void parse_value(const JsonObject& json) {}
 
+  /**
+   * Whether this listener consumes metadata deltas (`updates[].meta[]`)
+   * rather than value deltas (`updates[].values[]`). Defaults to false;
+   * `SKMetadataListener` overrides it to true. Used by
+   * `SKWSClient::process_received_updates` to route a queued delta to the
+   * correct listener kind without RTTI (RTTI is commonly disabled on ESP32).
+   */
+  virtual bool wants_meta() const { return false; }
+
   static const std::vector<SKListener*>& get_listeners() { return listeners_; }
 
   static bool take_semaphore(uint64_t timeout_ms = 0);

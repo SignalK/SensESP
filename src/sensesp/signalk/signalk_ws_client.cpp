@@ -18,6 +18,7 @@
 #include "elapsedMillis.h"
 #include "esp_arduino_version.h"
 #include "sensesp/signalk/signalk_listener.h"
+#include "sensesp/signalk/signalk_metadata_listener.h"
 #include "sensesp/signalk/signalk_put_request.h"
 #include "sensesp/signalk/signalk_put_request_listener.h"
 #include "sensesp/system/uuid.h"
@@ -349,36 +350,72 @@ void SKWSClient::on_receive_updates(JsonDocument& message) {
     JsonArray values = update["values"];
 
     for (size_t vi = 0; vi < values.size(); vi++) {
-      JsonDocument value_doc =
-          static_cast<JsonDocument>(static_cast<JsonObject>((values[vi])));
-
-      // push all values into a separate list for processing
-      // in the main task
-      constexpr size_t kMaxReceivedUpdates = 20;
-      while (received_updates_.size() >= kMaxReceivedUpdates) {
-        received_updates_.pop_front();
-        ESP_LOGW(__FILENAME__,
-                 "Dropping oldest received update (queue full)");
-      }
-      received_updates_.push_back(value_doc);
+      // Copy each value into an owned document for processing in the main
+      // task (decoupled from `message`, which is freed when on_receive_delta
+      // returns).
+      ReceivedUpdate ru;
+      ru.is_meta = false;
+      ru.doc.set(values[vi]);
+      enqueue_received_update(std::move(ru));
     }
 
-    // Fan out meta entries to the optional on_meta callback. Meta
-    // deltas only arrive when subscribed with sendMeta=all and are
-    // typically one-shot per path (at subscribe + on metadata change).
-    if (meta_callback_) {
-      JsonArray meta_entries = update["meta"];
-      for (size_t mi = 0; mi < meta_entries.size(); mi++) {
-        JsonObject entry = meta_entries[mi];
-        const char* path_cstr = entry["path"];
-        if (!path_cstr) continue;
-        JsonObject meta = entry["value"];
-        if (meta.isNull()) continue;
-        meta_callback_(String(path_cstr), meta);
-      }
+    // Meta deltas only arrive when subscribed with sendMeta=all and are
+    // typically one-shot per path (at subscribe + on metadata change). Copy
+    // each meta entry into an owned document the same way; SKMetadataListener
+    // consumers receive it (path-routed) on the main task. No user code runs
+    // here, so the critical section stays free of arbitrary callbacks.
+    JsonArray meta_entries = update["meta"];
+    for (size_t mi = 0; mi < meta_entries.size(); mi++) {
+      JsonObject entry = meta_entries[mi];
+      if (entry["path"].isNull() || entry["value"].isNull()) continue;
+      ReceivedUpdate ru;
+      ru.is_meta = true;
+      ru.doc.set(entry);  // {path, value: {...meta...}}
+      enqueue_received_update(std::move(ru));
     }
   }
   release_received_updates_semaphore();
+}
+
+/**
+ * @brief Push a received delta onto the queue with a per-kind budget.
+ *
+ * Caller must hold `received_updates_semaphore_`. Meta and value entries are
+ * budgeted independently so a meta burst (~one entry per subscribed path at
+ * subscribe time) cannot evict pending value deltas, and vice versa.
+ *
+ * @param update
+ */
+void SKWSClient::enqueue_received_update(ReceivedUpdate&& update) {
+  // Per-kind caps, tunable via build_flags (see signalk_ws_client.h). Meta and
+  // value deltas are budgeted independently so a metadata burst cannot evict
+  // pending values, and vice versa.
+  constexpr size_t kMaxReceivedValues = SENSESP_MAX_RECEIVED_VALUE_UPDATES;
+  constexpr size_t kMaxReceivedMeta = SENSESP_MAX_RECEIVED_META_UPDATES;
+
+  const bool is_meta = update.is_meta;
+  const size_t cap = is_meta ? kMaxReceivedMeta : kMaxReceivedValues;
+
+  size_t kind_count = 0;
+  for (const auto& ru : received_updates_) {
+    if (ru.is_meta == is_meta) kind_count++;
+  }
+
+  while (kind_count >= cap) {
+    // Drop the oldest entry of the SAME kind, leaving the other kind intact.
+    for (auto it = received_updates_.begin(); it != received_updates_.end();
+         ++it) {
+      if (it->is_meta == is_meta) {
+        received_updates_.erase(it);
+        kind_count--;
+        break;
+      }
+    }
+    ESP_LOGW(__FILENAME__, "Dropping oldest received %s update (queue full)",
+             is_meta ? "meta" : "value");
+  }
+
+  received_updates_.push_back(std::move(update));
 }
 
 /**
@@ -395,24 +432,44 @@ void SKWSClient::process_received_updates() {
       SKPutListener::get_listeners();
 
   take_received_updates_semaphore();
-  int num_updates = received_updates_.size();
+  // Count only value/put deltas toward the rx metric; meta deltas are
+  // low-frequency one-shots and would otherwise inflate it.
+  int num_updates = 0;
   while (!received_updates_.empty()) {
-    JsonDocument& doc = received_updates_.front();
+    ReceivedUpdate& ru = received_updates_.front();
 
-    const char* path = doc["path"];
-    JsonObject value = doc.as<JsonObject>();
-
-    for (size_t i = 0; i < listeners.size(); i++) {
-      SKListener* listener = listeners[i];
-      if (listener->get_sk_path().equals(path)) {
-        listener->parse_value(value);
+    if (ru.is_meta) {
+      // Capture the path into an owned String before moving the document: the
+      // const char* would dangle once ru.doc is moved into the shared_ptr.
+      String path = ru.doc["path"].as<String>();
+      // Move the already-owned queue document into a refcounted, read-only
+      // shared_ptr (no extra deep copy) so it safely outlives the queue entry
+      // and any deferred consumer, then fan it out to matching listeners.
+      std::shared_ptr<const JsonDocument> meta_doc =
+          std::make_shared<const JsonDocument>(std::move(ru.doc));
+      for (size_t i = 0; i < listeners.size(); i++) {
+        SKListener* listener = listeners[i];
+        if (listener->wants_meta() && listener->get_sk_path().equals(path)) {
+          static_cast<SKMetadataListener*>(listener)->parse_meta(meta_doc);
+        }
       }
-    }
-    //   to be able to parse values of Put Listeners    GA
-    for (size_t i = 0; i < put_listeners.size(); i++) {
-      SKPutListener* listener = put_listeners[i];
-      if (listener->get_sk_path().equals(path)) {
-        listener->parse_value(value);
+    } else {
+      num_updates++;
+      const char* path = ru.doc["path"];
+      JsonObject value = ru.doc.as<JsonObject>();
+
+      for (size_t i = 0; i < listeners.size(); i++) {
+        SKListener* listener = listeners[i];
+        if (!listener->wants_meta() && listener->get_sk_path().equals(path)) {
+          listener->parse_value(value);
+        }
+      }
+      //   to be able to parse values of Put Listeners    GA
+      for (size_t i = 0; i < put_listeners.size(); i++) {
+        SKPutListener* listener = put_listeners[i];
+        if (listener->get_sk_path().equals(path)) {
+          listener->parse_value(value);
+        }
       }
     }
     received_updates_.pop_front();
@@ -445,14 +502,11 @@ void SKWSClient::on_receive_put(JsonDocument& message) {
     for (size_t j = 0; j < listeners.size(); j++) {
       SKPutListener* listener = listeners[j];
       if (listener->get_sk_path().equals(path)) {
+        ReceivedUpdate ru;
+        ru.is_meta = false;
+        ru.doc.set(value);
         take_received_updates_semaphore();
-        constexpr size_t kMaxReceivedUpdates = 20;
-        while (received_updates_.size() >= kMaxReceivedUpdates) {
-          received_updates_.pop_front();
-          ESP_LOGW(__FILENAME__,
-                   "Dropping oldest received update (queue full)");
-        }
-        received_updates_.push_back(value);
+        enqueue_received_update(std::move(ru));
         release_received_updates_semaphore();
         matched = true;
       }

@@ -18,6 +18,22 @@
 #include "sensesp/transforms/integrator.h"
 #include "sensesp_base_app.h"
 
+// Maximum number of received value/put deltas buffered for processing on the
+// main task. Oldest entries are dropped when the buffer is full.
+#ifndef SENSESP_MAX_RECEIVED_VALUE_UPDATES
+#define SENSESP_MAX_RECEIVED_VALUE_UPDATES 20
+#endif
+
+// Maximum number of received meta deltas buffered for processing on the main
+// task, budgeted independently of value deltas so a metadata burst (~one entry
+// per subscribed path at subscribe time when sendMeta=all is enabled) cannot
+// evict pending values, and vice versa. Override per board via build_flags if
+// you subscribe many paths and need the full burst delivered (more paths =>
+// more buffered meta => more RAM).
+#ifndef SENSESP_MAX_RECEIVED_META_UPDATES
+#define SENSESP_MAX_RECEIVED_META_UPDATES 20
+#endif
+
 namespace sensesp {
 
 static const char* NULL_AUTH_TOKEN = "";
@@ -134,33 +150,16 @@ class SKWSClient : public FileSystemSaveable,
    * connection as value deltas, so consumers don't have to make
    * separate REST `/meta` requests per path.
    *
-   * Defaults to true. Disable only if you have a constrained client
-   * that doesn't want meta-deltas at all (they would simply be
-   * ignored by SKValueListener anyway since meta updates carry no
-   * `values` array).
+   * Defaults to true. When enabled, meta-deltas can be consumed via
+   * `SKMetadataListener`. Disable only if you have a constrained client
+   * that doesn't want meta-deltas at all (they are otherwise ignored by
+   * `SKValueListener` since meta updates carry no `values` array).
    */
   bool is_send_meta_enabled() const { return send_meta_enabled_; }
   void set_send_meta_enabled(bool enabled) {
     send_meta_enabled_ = enabled;
     save();
   }
-
-  /**
-   * @brief Register a callback for incoming meta-deltas.
-   *
-   * SignalK metadata (units, zones, displayName, displayUnits) is
-   * delivered in `updates[].meta[]` rather than `updates[].values[]`.
-   * SensESP listeners only consume values; meta entries are fanned out
-   * via this hook so consumers (e.g. zone-coloring widgets) can react
-   * without an additional HTTP /meta poll.
-   *
-   * The callback fires on the WS task — implementations must not
-   * block. If LVGL or other single-threaded UI work is needed,
-   * marshal it onto event_loop via onDelay(0, ...).
-   */
-  using MetaCallback =
-      std::function<void(const String& path, const JsonObject& meta)>;
-  void on_meta(MetaCallback cb) { meta_callback_ = std::move(cb); }
 
   /**
    * @brief Check if TOFU certificate verification is enabled.
@@ -233,8 +232,6 @@ class SKWSClient : public FileSystemSaveable,
   // pushed in-stream rather than requiring REST /meta polls.
   bool send_meta_enabled_ = true;
 
-  // Optional fan-out for incoming meta deltas. Set via on_meta().
-  MetaCallback meta_callback_;
   String tofu_fingerprint_ = "";  // SHA256 fingerprint in hex (64 chars)
 
   TaskQueueProducer<SKWSConnectionState> connection_state_{
@@ -252,10 +249,21 @@ class SKWSClient : public FileSystemSaveable,
   Integrator<int, int> delta_tx_count_producer_{1, 0, ""};
   Integrator<int, int> delta_rx_count_producer_{1, 0, ""};
 
+  /// @brief A single received delta entry awaiting dispatch on the main task.
+  ///
+  /// `is_meta` is an out-of-band discriminator: value/put entries and meta
+  /// entries are indistinguishable by JSON shape (a legitimate value can also
+  /// be an object, e.g. `navigation.position`), so the kind is carried
+  /// alongside the document rather than stamped into it.
+  struct ReceivedUpdate {
+    bool is_meta = false;
+    JsonDocument doc;
+  };
+
   StaticSemaphore_t received_updates_semaphore_buffer_;
   SemaphoreHandle_t received_updates_semaphore_ =
       xSemaphoreCreateRecursiveMutexStatic(&received_updates_semaphore_buffer_);
-  std::list<JsonDocument> received_updates_{};
+  std::list<ReceivedUpdate> received_updates_{};
 
   /////////////////////////////////////////////////////////
   // methods for all tasks
@@ -272,6 +280,12 @@ class SKWSClient : public FileSystemSaveable,
   void release_received_updates_semaphore() {
     xSemaphoreGiveRecursive(received_updates_semaphore_);
   }
+
+  /// @brief Push a received delta entry onto the queue, enforcing a per-kind
+  /// budget so a metadata burst (one meta-delta per subscribed path at
+  /// subscribe time when `sendMeta=all` is enabled) cannot evict pending value
+  /// deltas, and vice versa. Caller must hold `received_updates_semaphore_`.
+  void enqueue_received_update(ReceivedUpdate&& update);
 
   /////////////////////////////////////////////////////////
   // main task methods
