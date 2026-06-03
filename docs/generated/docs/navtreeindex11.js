@@ -1,5 +1,7 @@
 var NAVTREEINDEX11 =
 {
+"namespacesensesp.html#a88095944ec96ea99cace0b4ef5941258":[1,0,1,204],
+"namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0":[1,0,1,363],
 "namespacesensesp.html#a8bc082ae2c9989fffdb01fd8f6248f18":[1,0,1,213],
 "namespacesensesp.html#a8bf77334bee17aa7b498c3178b6f3094":[1,0,1,273],
 "namespacesensesp.html#a8c9160c46de8420705474a78aeb61dd1":[1,0,1,186],
@@ -247,7 +249,5 @@ var NAVTREEINDEX11 =
 "signalk__put__request_8cpp_source.html":[3,0,0,0,3,10],
 "signalk__put__request_8h.html":[3,0,0,0,3,11],
 "signalk__put__request_8h_source.html":[3,0,0,0,3,11],
-"signalk__put__request__listener_8cpp.html":[3,0,0,0,3,12],
-"signalk__put__request__listener_8cpp_source.html":[3,0,0,0,3,12],
-"signalk__put__request__listener_8h.html":[3,0,0,0,3,13]
+"signalk__put__request__listener_8cpp.html":[3,0,0,0,3,12]
 };

@@ -1,5 +1,7 @@
 var NAVTREEINDEX10 =
 {
+"functions_vars_r.html":[2,3,2,15],
+"functions_vars_s.html":[2,3,2,16],
 "functions_vars_t.html":[2,3,2,17],
 "functions_vars_u.html":[2,3,2,18],
 "functions_vars_v.html":[2,3,2,19],
@@ -247,7 +249,5 @@ var NAVTREEINDEX10 =
 "namespacesensesp.html#a82363bf0f46df7e94894ee48d2537b99":[1,0,1,238],
 "namespacesensesp.html#a83b6453db4ee358dd8eab3052877e3fd":[1,0,1,163],
 "namespacesensesp.html#a8481b36098cde132456851f920fb8ad0":[1,0,1,181],
-"namespacesensesp.html#a85fc3656cea89e333664441057db3584":[1,0,1,338],
-"namespacesensesp.html#a88095944ec96ea99cace0b4ef5941258":[1,0,1,204],
-"namespacesensesp.html#a8b87d522bfe38fb6f0f3412645759ad0":[1,0,1,363]
+"namespacesensesp.html#a85fc3656cea89e333664441057db3584":[1,0,1,338]
 };
