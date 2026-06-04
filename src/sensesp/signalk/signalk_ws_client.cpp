@@ -18,7 +18,6 @@
 #include "elapsedMillis.h"
 #include "esp_arduino_version.h"
 #include "sensesp/signalk/signalk_listener.h"
-#include "sensesp/signalk/signalk_metadata_listener.h"
 #include "sensesp/signalk/signalk_put_request.h"
 #include "sensesp/signalk/signalk_put_request_listener.h"
 #include "sensesp/system/uuid.h"
@@ -343,6 +342,20 @@ void SKWSClient::on_receive_updates(JsonDocument& message) {
   // Process updates from subscriptions...
   JsonArray updates = message["updates"];
 
+  // With sendMeta=all enabled by default, the server pushes meta deltas to
+  // every client. Skip copying them onto the queue unless something actually
+  // consumes them. Compute this before taking received_updates_semaphore_ to
+  // preserve the global lock order (SKListener before received_updates).
+  bool has_meta_listener = false;
+  SKListener::take_semaphore();
+  for (SKListener* listener : SKListener::get_listeners()) {
+    if (listener->wants_meta()) {
+      has_meta_listener = true;
+      break;
+    }
+  }
+  SKListener::release_semaphore();
+
   take_received_updates_semaphore();
   for (size_t i = 0; i < updates.size(); i++) {
     JsonObject update = updates[i];
@@ -363,15 +376,18 @@ void SKWSClient::on_receive_updates(JsonDocument& message) {
     // typically one-shot per path (at subscribe + on metadata change). Copy
     // each meta entry into an owned document the same way; SKMetadataListener
     // consumers receive it (path-routed) on the main task. No user code runs
-    // here, so the critical section stays free of arbitrary callbacks.
-    JsonArray meta_entries = update["meta"];
-    for (size_t mi = 0; mi < meta_entries.size(); mi++) {
-      JsonObject entry = meta_entries[mi];
-      if (entry["path"].isNull() || entry["value"].isNull()) continue;
-      ReceivedUpdate ru;
-      ru.is_meta = true;
-      ru.doc.set(entry);  // {path, value: {...meta...}}
-      enqueue_received_update(std::move(ru));
+    // here, so the critical section stays free of arbitrary callbacks. Skip
+    // entirely when no listener consumes meta (see has_meta_listener above).
+    if (has_meta_listener) {
+      JsonArray meta_entries = update["meta"];
+      for (size_t mi = 0; mi < meta_entries.size(); mi++) {
+        JsonObject entry = meta_entries[mi];
+        if (entry["path"].isNull() || entry["value"].isNull()) continue;
+        ReceivedUpdate ru;
+        ru.is_meta = true;
+        ru.doc.set(entry);  // {path, value: {...meta...}}
+        enqueue_received_update(std::move(ru));
+      }
     }
   }
   release_received_updates_semaphore();
@@ -450,7 +466,7 @@ void SKWSClient::process_received_updates() {
       for (size_t i = 0; i < listeners.size(); i++) {
         SKListener* listener = listeners[i];
         if (listener->wants_meta() && listener->get_sk_path().equals(path)) {
-          static_cast<SKMetadataListener*>(listener)->parse_meta(meta_doc);
+          listener->parse_meta(meta_doc);
         }
       }
     } else {

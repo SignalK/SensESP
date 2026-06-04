@@ -144,7 +144,8 @@ class SKMetadataListener : public SKListener,
    * the owned document backs `SKMetaView::raw` so the lossless data outlives
    * any deferred consumer with no extra deep copy.
    */
-  void parse_meta(const std::shared_ptr<const JsonDocument>& meta_doc) {
+  void parse_meta(
+      const std::shared_ptr<const JsonDocument>& meta_doc) override {
     JsonObjectConst meta = (*meta_doc)["value"].as<JsonObjectConst>();
     this->emit(SKMetaView(meta, meta_doc));
   }

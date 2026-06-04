@@ -4,6 +4,7 @@
 #include "sensesp.h"
 
 #include <ArduinoJson.h>
+#include <memory>
 #include <set>
 
 #include "sensesp/system/observable.h"
@@ -53,6 +54,15 @@ class SKListener : virtual public Observable, public FileSystemSaveable {
    * correct listener kind without RTTI (RTTI is commonly disabled on ESP32).
    */
   virtual bool wants_meta() const { return false; }
+
+  /**
+   * Consume a metadata delta for this listener's path. Mirrors `parse_value`
+   * for the meta stream: `SKWSClient::process_received_updates` calls it on the
+   * main task with an owned, read-only document (shape `{path, value:
+   * {...meta...}}`) that outlives any deferred consumer. Default is a no-op;
+   * `SKMetadataListener` overrides it.
+   */
+  virtual void parse_meta(const std::shared_ptr<const JsonDocument>& meta_doc) {}
 
   static const std::vector<SKListener*>& get_listeners() { return listeners_; }
 
