@@ -46,7 +46,7 @@ void HeatIndexTemperature::set(const std::tuple<float, float>& input) {
       const float c9 = -0.00000199;
 
       // equation for heat index
-      float heat_index_temperature =
+      heat_index_temperature =
           c1 + c2 * temp_fahrenheit + c3 * relative_humidity +
           c4 * temp_fahrenheit * relative_humidity +
           c5 * pow(temp_fahrenheit, 2) + c6 * pow(relative_humidity, 2) +

@@ -4,7 +4,7 @@
  *
  * Covers: MovingAverage from_json resize (#874), Hysteresis uninitialized
  * last_value_ (#906), VoltageDivider division by zero (#907), weather
- * transform tuple inputs (#872).
+ * transform tuple inputs (#872), HeatIndex Rothfusz result (#870).
  */
 
 #include <Arduino.h>
@@ -186,6 +186,17 @@ void test_heat_index_temperature_tuple_input() {
   TEST_ASSERT_FLOAT_WITHIN(0.0001f, 299.1111f, received);
 }
 
+void test_heat_index_temperature_rothfusz_branch() {
+  HeatIndexTemperature heat_index_temperature;
+
+  float received = -1.0f;
+  LambdaConsumer<float> consumer([&received](float v) { received = v; });
+  heat_index_temperature.connect_to(&consumer);
+
+  heat_index_temperature.set(std::make_tuple(303.15f, 0.70f));
+  TEST_ASSERT_FLOAT_WITHIN(0.001f, 308.1880f, received);
+}
+
 void test_heat_index_temperature_cold_branch_emits() {
   HeatIndexTemperature heat_index_temperature;
 
@@ -240,6 +251,7 @@ void setup() {
   RUN_TEST(test_air_density_tuple_input);
   RUN_TEST(test_dew_point_tuple_input);
   RUN_TEST(test_heat_index_temperature_tuple_input);
+  RUN_TEST(test_heat_index_temperature_rothfusz_branch);
   RUN_TEST(test_heat_index_temperature_cold_branch_emits);
   RUN_TEST(test_weather_zip_wiring_waits_for_all_inputs);
 
