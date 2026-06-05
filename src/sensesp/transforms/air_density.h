@@ -1,6 +1,8 @@
 #ifndef SENSESP_TRANSFORMS_AIR_DENSITY_H_
 #define SENSESP_TRANSFORMS_AIR_DENSITY_H_
 
+#include <tuple>
+
 #include "transform.h"
 
 namespace sensesp {
@@ -11,13 +13,10 @@ namespace sensesp {
  * More info about the equation can be found at
  * https://en.wikipedia.org/wiki/Density_of_air
  */
-class AirDensity : public FloatTransform {
+class AirDensity : public Transform<std::tuple<float, float, float>, float> {
  public:
   AirDensity();
-  virtual void set(const float& input) override;
-
- private:
-  float inputs[3]{};
+  virtual void set(const std::tuple<float, float, float>& input) override;
 };
 
 }  // namespace sensesp

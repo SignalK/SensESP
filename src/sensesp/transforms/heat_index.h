@@ -1,6 +1,8 @@
 #ifndef SENSESP_TRANSFORMS_HEAT_INDEX_H_
 #define SENSESP_TRANSFORMS_HEAT_INDEX_H_
 
+#include <tuple>
+
 #include "transform.h"
 
 namespace sensesp {
@@ -13,13 +15,10 @@ namespace sensesp {
  * the NOAA NWS. More info about the equation can be found at
  * https://en.wikipedia.org/wiki/Heat_index
  */
-class HeatIndexTemperature : public FloatTransform {
+class HeatIndexTemperature : public Transform<std::tuple<float, float>, float> {
  public:
   HeatIndexTemperature();
-  virtual void set(const float& input) override;
-
- private:
-  float inputs[2]{};
+  virtual void set(const std::tuple<float, float>& input) override;
 };
 
 /**
