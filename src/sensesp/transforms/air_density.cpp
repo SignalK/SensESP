@@ -4,18 +4,19 @@
 
 namespace sensesp {
 
-// dew point
+// air density
 
-AirDensity::AirDensity() : FloatTransform() {}
+AirDensity::AirDensity()
+    : Transform<std::tuple<float, float, float>, float>() {}
 
-void AirDensity::set(const float& /*input*/) {
+void AirDensity::set(const std::tuple<float, float, float>& input) {
   // For more info on the calculation see
   // https://en.wikipedia.org/wiki/Density_of_air
 
-  const float temp_kelvin = inputs[0];
+  const float temp_kelvin = std::get<0>(input);
   const float temp_celsius = temp_kelvin - 273.15;
-  const float relative_humidity = inputs[1];
-  const float pressure = inputs[2];
+  const float relative_humidity = std::get<1>(input);
+  const float pressure = std::get<2>(input);
 
   // Saturation vapor pressure of water
   float saturation_pressure =

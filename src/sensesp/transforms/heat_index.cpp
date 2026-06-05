@@ -1,22 +1,25 @@
 #include "heat_index.h"
 
+#include <cmath>
+
 namespace sensesp {
 
 // heat index temperature
 
-HeatIndexTemperature::HeatIndexTemperature() : FloatTransform() {}
+HeatIndexTemperature::HeatIndexTemperature()
+    : Transform<std::tuple<float, float>, float>() {}
 
-void HeatIndexTemperature::set(const float& /*input*/) {
+void HeatIndexTemperature::set(const std::tuple<float, float>& input) {
   // The following equation approximate the heat index
   // using both Steadman's and Rothfusz equations
   // See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3801457/
   // Algorithm 1 (table 1) (algorithm in figure 3)
 
   float const temp_fahrenheit =
-      1.8 * (inputs[0] - 273.15) +
+      1.8 * (std::get<0>(input) - 273.15) +
       32;  // dry-bulb temperature in degrees fahrenheit
   float const relative_humidity =
-      inputs[1] * 100;  // relative humidity in percent
+      std::get<1>(input) * 100;  // relative humidity in percent
 
   // step 1: if temperature is less than 40°F then heat index temperature is
   // dry bulb temperature.
@@ -43,7 +46,7 @@ void HeatIndexTemperature::set(const float& /*input*/) {
       const float c9 = -0.00000199;
 
       // equation for heat index
-      float heat_index_temperature =
+      heat_index_temperature =
           c1 + c2 * temp_fahrenheit + c3 * relative_humidity +
           c4 * temp_fahrenheit * relative_humidity +
           c5 * pow(temp_fahrenheit, 2) + c6 * pow(relative_humidity, 2) +
@@ -69,10 +72,10 @@ void HeatIndexTemperature::set(const float& /*input*/) {
             0.02 * (relative_humidity - 85) * (87 - temp_fahrenheit);
       }
     }
-
-    this->emit((heat_index_temperature - 32) / 1.8 +
-               273.15);  // Fahrenheit to Kelvin
   }
+
+  this->emit((heat_index_temperature - 32) / 1.8 +
+             273.15);  // Fahrenheit to Kelvin
 }
 
 // heat index effect (warning levels)
@@ -90,7 +93,7 @@ void HeatIndexEffect::set(const float& input) {
   } else if (heat_index_temperature > 32) {
     heat_index_effect = "Extreme Caution";
   } else if (heat_index_temperature > 27) {
-    heat_index_effect + "Caution";
+    heat_index_effect = "Caution";
   }
 
   this->emit(heat_index_effect);

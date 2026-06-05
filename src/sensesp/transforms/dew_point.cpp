@@ -1,16 +1,20 @@
 #include "dew_point.h"
 
+#include <cmath>
+
 namespace sensesp {
 
 // dew point
 
-void DewPoint::set(const float& /*input*/) {
+DewPoint::DewPoint() : Transform<std::tuple<float, float>, float>() {}
+
+void DewPoint::set(const std::tuple<float, float>& input) {
   // Dew point is calculated with Arden Buck Equation and Arden Buck valuation
   // sets For more info on the calculation see
   // https://en.wikipedia.org/wiki/Dew_point#Calculating_the_dew_point
 
-  float const temp_celsius = inputs[0] - 273.15;
-  float const relative_humidity = inputs[1];
+  float const temp_celsius = std::get<0>(input) - 273.15;
+  float const relative_humidity = std::get<1>(input);
 
   // valuation set for temperatures above 0°C
   float b = 17.368;

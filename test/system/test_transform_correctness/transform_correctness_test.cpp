@@ -3,15 +3,22 @@
  * @brief Tests for transform correctness bug fixes.
  *
  * Covers: MovingAverage from_json resize (#874), Hysteresis uninitialized
- * last_value_ (#906), VoltageDivider division by zero (#907).
+ * last_value_ (#906), VoltageDivider division by zero (#907), weather
+ * transform tuple inputs (#872), HeatIndex Rothfusz result (#870),
+ * HeatIndex Caution effect (#871).
  */
 
 #include <Arduino.h>
 
 #include "sensesp/system/lambda_consumer.h"
+#include "sensesp/system/observablevalue.h"
+#include "sensesp/transforms/air_density.h"
+#include "sensesp/transforms/dew_point.h"
+#include "sensesp/transforms/heat_index.h"
 #include "sensesp/transforms/hysteresis.h"
 #include "sensesp/transforms/moving_average.h"
 #include "sensesp/transforms/voltagedivider.h"
+#include "sensesp/transforms/zip.h"
 #include "unity.h"
 
 using namespace sensesp;
@@ -144,6 +151,101 @@ void test_voltage_divider_r1_normal() {
 }
 
 // ---------------------------------------------------------------------------
+// Weather transforms: tuple inputs replace removed input channels (#872)
+// ---------------------------------------------------------------------------
+
+void test_air_density_tuple_input() {
+  AirDensity air_density;
+
+  float received = -1.0f;
+  LambdaConsumer<float> consumer([&received](float v) { received = v; });
+  air_density.connect_to(&consumer);
+
+  air_density.set(std::make_tuple(303.15f, 0.70f, 101325.0f));
+  TEST_ASSERT_FLOAT_WITHIN(0.0001f, 1.164269f, received);
+}
+
+void test_dew_point_tuple_input() {
+  DewPoint dew_point;
+
+  float received = -1.0f;
+  LambdaConsumer<float> consumer([&received](float v) { received = v; });
+  dew_point.connect_to(&consumer);
+
+  dew_point.set(std::make_tuple(303.15f, 0.70f));
+  TEST_ASSERT_FLOAT_WITHIN(0.0001f, 296.83775f, received);
+}
+
+void test_heat_index_temperature_tuple_input() {
+  HeatIndexTemperature heat_index_temperature;
+
+  float received = -1.0f;
+  LambdaConsumer<float> consumer([&received](float v) { received = v; });
+  heat_index_temperature.connect_to(&consumer);
+
+  heat_index_temperature.set(std::make_tuple(299.15f, 0.50f));
+  TEST_ASSERT_FLOAT_WITHIN(0.0001f, 299.1111f, received);
+}
+
+void test_heat_index_temperature_rothfusz_branch() {
+  HeatIndexTemperature heat_index_temperature;
+
+  float received = -1.0f;
+  LambdaConsumer<float> consumer([&received](float v) { received = v; });
+  heat_index_temperature.connect_to(&consumer);
+
+  heat_index_temperature.set(std::make_tuple(303.15f, 0.70f));
+  TEST_ASSERT_FLOAT_WITHIN(0.001f, 308.1880f, received);
+}
+
+void test_heat_index_temperature_cold_branch_emits() {
+  HeatIndexTemperature heat_index_temperature;
+
+  float received = -1.0f;
+  LambdaConsumer<float> consumer([&received](float v) { received = v; });
+  heat_index_temperature.connect_to(&consumer);
+
+  heat_index_temperature.set(std::make_tuple(273.15f, 0.50f));
+  TEST_ASSERT_FLOAT_WITHIN(0.0001f, 273.15f, received);
+}
+
+void test_heat_index_effect_caution_range() {
+  HeatIndexEffect heat_index_effect;
+
+  String received = "";
+  LambdaConsumer<String> consumer([&received](String v) { received = v; });
+  heat_index_effect.connect_to(&consumer);
+
+  heat_index_effect.set(301.15f);
+  TEST_ASSERT_EQUAL_STRING("Caution", received.c_str());
+}
+
+void test_weather_zip_wiring_waits_for_all_inputs() {
+  ObservableValue<float> temperature(0.0f);
+  ObservableValue<float> humidity(0.0f);
+  Zip<float, float> zip;
+  HeatIndexTemperature heat_index_temperature;
+
+  float received = -1.0f;
+  bool was_called = false;
+  LambdaConsumer<float> consumer([&](float v) {
+    received = v;
+    was_called = true;
+  });
+
+  temperature.connect_to(&(std::get<0>(zip.consumers)));
+  humidity.connect_to(&(std::get<1>(zip.consumers)));
+  zip.connect_to(&heat_index_temperature)->connect_to(&consumer);
+
+  temperature.set(299.15f);
+  TEST_ASSERT_FALSE(was_called);
+
+  humidity.set(0.50f);
+  TEST_ASSERT_TRUE(was_called);
+  TEST_ASSERT_FLOAT_WITHIN(0.0001f, 299.1111f, received);
+}
+
+// ---------------------------------------------------------------------------
 // Test runner
 // ---------------------------------------------------------------------------
 
@@ -158,6 +260,13 @@ void setup() {
   RUN_TEST(test_voltage_divider_r1_zero_vout);
   RUN_TEST(test_voltage_divider_r2_vout_equals_vin);
   RUN_TEST(test_voltage_divider_r1_normal);
+  RUN_TEST(test_air_density_tuple_input);
+  RUN_TEST(test_dew_point_tuple_input);
+  RUN_TEST(test_heat_index_temperature_tuple_input);
+  RUN_TEST(test_heat_index_temperature_rothfusz_branch);
+  RUN_TEST(test_heat_index_temperature_cold_branch_emits);
+  RUN_TEST(test_heat_index_effect_caution_range);
+  RUN_TEST(test_weather_zip_wiring_waits_for_all_inputs);
 
   UNITY_END();
 }

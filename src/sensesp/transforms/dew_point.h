@@ -1,6 +1,8 @@
 #ifndef SENSESP_TRANSFORMS_DEW_POINT_H_
 #define SENSESP_TRANSFORMS_DEW_POINT_H_
 
+#include <tuple>
+
 #include "transform.h"
 
 namespace sensesp {
@@ -12,13 +14,10 @@ namespace sensesp {
  * temperatures from -40°C to +50°C. More info about the equation can be found
  * at https://en.wikipedia.org/wiki/Dew_point
  */
-class DewPoint : public FloatTransform {
+class DewPoint : public Transform<std::tuple<float, float>, float> {
  public:
   DewPoint();
-  virtual void set(const float& input) override;
-
- private:
-  float inputs[2]{};
+  virtual void set(const std::tuple<float, float>& input) override;
 };
 
 }  // namespace sensesp
