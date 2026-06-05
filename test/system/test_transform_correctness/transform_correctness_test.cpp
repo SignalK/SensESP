@@ -4,7 +4,8 @@
  *
  * Covers: MovingAverage from_json resize (#874), Hysteresis uninitialized
  * last_value_ (#906), VoltageDivider division by zero (#907), weather
- * transform tuple inputs (#872), HeatIndex Rothfusz result (#870).
+ * transform tuple inputs (#872), HeatIndex Rothfusz result (#870),
+ * HeatIndex Caution effect (#871).
  */
 
 #include <Arduino.h>
@@ -208,6 +209,17 @@ void test_heat_index_temperature_cold_branch_emits() {
   TEST_ASSERT_FLOAT_WITHIN(0.0001f, 273.15f, received);
 }
 
+void test_heat_index_effect_caution_range() {
+  HeatIndexEffect heat_index_effect;
+
+  String received = "";
+  LambdaConsumer<String> consumer([&received](String v) { received = v; });
+  heat_index_effect.connect_to(&consumer);
+
+  heat_index_effect.set(301.15f);
+  TEST_ASSERT_EQUAL_STRING("Caution", received.c_str());
+}
+
 void test_weather_zip_wiring_waits_for_all_inputs() {
   ObservableValue<float> temperature(0.0f);
   ObservableValue<float> humidity(0.0f);
@@ -253,6 +265,7 @@ void setup() {
   RUN_TEST(test_heat_index_temperature_tuple_input);
   RUN_TEST(test_heat_index_temperature_rothfusz_branch);
   RUN_TEST(test_heat_index_temperature_cold_branch_emits);
+  RUN_TEST(test_heat_index_effect_caution_range);
   RUN_TEST(test_weather_zip_wiring_waits_for_all_inputs);
 
   UNITY_END();

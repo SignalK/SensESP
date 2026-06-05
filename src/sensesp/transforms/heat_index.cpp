@@ -93,7 +93,7 @@ void HeatIndexEffect::set(const float& input) {
   } else if (heat_index_temperature > 32) {
     heat_index_effect = "Extreme Caution";
   } else if (heat_index_temperature > 27) {
-    heat_index_effect + "Caution";
+    heat_index_effect = "Caution";
   }
 
   this->emit(heat_index_effect);
