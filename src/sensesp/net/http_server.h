@@ -24,6 +24,22 @@ namespace sensesp {
 #define HTTP_DEFAULT_PORT 80
 #endif
 
+// Maximum simultaneous client sockets the HTTP server will accept.
+//
+// Kept at the esp_http_server default (7, of which 3 are reserved internally).
+// The web UI stalls modern browsers suffered with this default were caused by
+// keep-alive socket starvation, not the cap itself, and are addressed by
+// enabling `lru_purge_enable` (see the HTTPServer constructor) rather than by
+// claiming more of the lwIP socket budget — which the Signal K WebSocket
+// client, mDNS, and SNTP also draw from.
+//
+// Raising this requires `CONFIG_LWIP_MAX_SOCKETS >= HTTP_SERVER_MAX_OPEN_SOCKETS
+// + 3`; the espidf framework defaults that to 10, so values above 7 also need
+// `CONFIG_LWIP_MAX_SOCKETS` raised in sdkconfig.defaults or httpd_start() fails.
+#ifndef HTTP_SERVER_MAX_OPEN_SOCKETS
+#define HTTP_SERVER_MAX_OPEN_SOCKETS 7
+#endif
+
 #include <ctype.h>
 #include <stdlib.h>
 
@@ -66,6 +82,16 @@ class HTTPServer : public FileSystemSaveable {
     config_.server_port = port;
     config_.stack_size = HTTP_SERVER_STACK_SIZE;
     config_.max_uri_handlers = 20;
+    config_.max_open_sockets = HTTP_SERVER_MAX_OPEN_SOCKETS;
+    // The embedded SPA is served over HTTP/1.1 keep-alive, so a browser holds
+    // several connections open. Without LRU purge, once every socket slot is
+    // camped by an idle keep-alive connection the server defers (starves) any
+    // new connection — a late chunk, a retried fetch, a second tab — until one
+    // times out. On high-latency links (e.g. esp_hosted SDIO WiFi) that window
+    // is long enough to fail the SPA's parallel /api/* requests outright.
+    // Enabling LRU purge evicts the least-recently-used (idle) socket to admit
+    // the newcomer instead, which the browser simply reopens.
+    config_.lru_purge_enable = true;
     config_.uri_match_fn = httpd_uri_match_wildcard;
     String auth_realm_ = "Login required for " + SensESPBaseApp::get_hostname();
     load();
