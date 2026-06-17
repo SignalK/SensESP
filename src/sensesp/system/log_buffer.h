@@ -2,7 +2,9 @@
 #define SENSESP_SRC_SENSESP_SYSTEM_LOG_BUFFER_H_
 
 #include <freertos/FreeRTOS.h>
+#include <freertos/queue.h>
 #include <freertos/semphr.h>
+#include <freertos/task.h>
 
 #include <cstdarg>
 #include <cstdint>
@@ -19,6 +21,20 @@ struct LogRecord {
   uint32_t seq;
   uint32_t timestamp_ms;
   std::string text;
+};
+
+/// Maximum captured line length, and the size of each queue slot's text.
+inline constexpr size_t kLogCaptureLineMax = 256;
+/// Depth of the lock-free handoff queue between the vprintf hook and the
+/// capture task. Bursts beyond this drop lines rather than block the logger.
+inline constexpr size_t kLogCaptureQueueDepth = 16;
+
+/// One formatted line in transit from the vprintf hook to the capture task.
+/// Copied by value through the queue, so the hook allocates nothing.
+struct LogQueueItem {
+  uint32_t timestamp_ms;
+  uint16_t length;
+  char text[kLogCaptureLineMax];
 };
 
 /**
@@ -50,11 +66,15 @@ struct LogSnapshot {
  * otherwise Arduino-ESP32 reroutes ESP_LOGx to log_printf, bypassing the
  * vprintf hook (a compile-time #warning is emitted in that case).
  *
- * Thread-safety: a FreeRTOS mutex guards the buffer. The append path performs
- * no logging itself, so the hook cannot recurse. The HTTP reader copies lines
- * out while holding the mutex and must not log while holding it. Capture is
- * skipped in ISR context (a blocking mutex take is illegal there); the line is
- * still forwarded to UART via the chained handler.
+ * Thread-safety: the vprintf hook runs in the context of whichever task logged,
+ * so it must stay cheap on stack. It formats the line into a small stack buffer
+ * and hands it to a fixed-size queue; a dedicated capture task drains the queue
+ * and does the heap-allocating buffer work (ANSI stripping, std::string, deque)
+ * on its own adequately sized stack. This keeps the hook from overflowing
+ * small-stack caller tasks. A FreeRTOS mutex guards the records against the HTTP
+ * reader, which copies lines out while holding it and must not log while
+ * holding it. Capture is skipped in ISR context (a blocking queue send is
+ * illegal there); the line is still forwarded to UART via the chained handler.
  */
 class LogBuffer {
  public:
@@ -100,6 +120,10 @@ class LogBuffer {
  private:
   static int vprintf_trampoline(const char* format, va_list args);
 
+  /// Drains the handoff queue and appends lines to the buffer. Runs on its own
+  /// task so the heap work stays off the logging task's stack.
+  static void capture_task(void* arg);
+
   /// Evict records older than max_age_ms_ and beyond max_lines_. Caller holds
   /// the mutex.
   void prune_locked(uint32_t now_ms);
@@ -113,6 +137,9 @@ class LogBuffer {
   uint32_t session_id_;
 
   int (*previous_vprintf_)(const char*, va_list) = nullptr;
+
+  QueueHandle_t capture_queue_ = nullptr;
+  TaskHandle_t capture_task_handle_ = nullptr;
 
   SemaphoreHandle_t mutex_;
   StaticSemaphore_t mutex_buffer_;

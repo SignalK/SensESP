@@ -33,8 +33,29 @@ void LogBuffer::install() {
   // timer makes a repeated value across reboots unlikely even before the RF
   // subsystem seeds the RNG. The client also falls back to a cursor reset.
   session_id_ = esp_random() ^ static_cast<uint32_t>(esp_timer_get_time());
+
+  // Stand up the handoff queue and capture task before the hook goes live, so
+  // the first captured line already has somewhere to go.
+  capture_queue_ = xQueueCreate(kLogCaptureQueueDepth, sizeof(LogQueueItem));
+  if (capture_queue_ != nullptr) {
+    xTaskCreate(&LogBuffer::capture_task, "LogCapture", 4096, this, 1,
+                &capture_task_handle_);
+  }
+
   instance_ = this;
   previous_vprintf_ = esp_log_set_vprintf(&LogBuffer::vprintf_trampoline);
+}
+
+void LogBuffer::capture_task(void* arg) {
+  auto* self = static_cast<LogBuffer*>(arg);
+  LogQueueItem item;
+  while (true) {
+    if (xQueueReceive(self->capture_queue_, &item, portMAX_DELAY) == pdTRUE) {
+      // The heap-allocating work (ANSI strip, std::string, deque) happens here,
+      // on this task's stack, not the logging task's.
+      self->push_line(item.text, item.length, item.timestamp_ms);
+    }
+  }
 }
 
 int LogBuffer::vprintf_trampoline(const char* format, va_list args) {
@@ -50,22 +71,26 @@ int LogBuffer::vprintf_trampoline(const char* format, va_list args) {
     va_end(copy);
   }
 
-  // Capture into the buffer, but never from an ISR: push_line takes a blocking
-  // mutex, which is illegal in interrupt context. UART output already happened
-  // above, so an ISR-context line is forwarded but not captured.
-  if (inst != nullptr && !xPortInIsrContext()) {
-    // This buffer bounds the captured line length; LogBuffer's default
-    // max_line_length is sized to match it. Raising one without the other has
-    // no effect past the smaller of the two.
-    char buf[256];
+  // Capture path. This runs in the logging task's context, so it must stay
+  // light on stack and never block or allocate: format into a stack item and
+  // hand it to the capture task, which does the heap work on its own stack.
+  // Skipped in ISR context (we would not block there anyway); the line was
+  // already forwarded to UART above.
+  if (inst != nullptr && inst->capture_queue_ != nullptr &&
+      !xPortInIsrContext()) {
+    LogQueueItem item;
     va_list copy;
     va_copy(copy, args);
-    int n = vsnprintf(buf, sizeof(buf), format, copy);
+    int n = vsnprintf(item.text, sizeof(item.text), format, copy);
     va_end(copy);
     if (n > 0) {
-      size_t length =
-          (static_cast<size_t>(n) < sizeof(buf)) ? n : sizeof(buf) - 1;
-      inst->push_line(buf, length, esp_log_timestamp());
+      item.length = (static_cast<size_t>(n) < sizeof(item.text))
+                        ? static_cast<uint16_t>(n)
+                        : sizeof(item.text) - 1;
+      item.timestamp_ms = esp_log_timestamp();
+      // Non-blocking: drop the line if the capture task is behind rather than
+      // stall the logging task.
+      xQueueSend(inst->capture_queue_, &item, 0);
     }
   }
 
