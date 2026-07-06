@@ -689,7 +689,7 @@ void SKWSClient::process_received_updates() {
           std::make_shared<const JsonDocument>(std::move(ru.doc));
       for (size_t i = 0; i < listeners.size(); i++) {
         SKListener* listener = listeners[i];
-        if (listener->wants_meta() && listener->get_sk_path().equals(path)) {
+        if (listener->wants_meta() && listener->matches(path)) {
           listener->parse_meta(meta_doc);
         }
       }
@@ -700,7 +700,7 @@ void SKWSClient::process_received_updates() {
 
       for (size_t i = 0; i < listeners.size(); i++) {
         SKListener* listener = listeners[i];
-        if (!listener->wants_meta() && listener->get_sk_path().equals(path)) {
+        if (!listener->wants_meta() && listener->matches(path)) {
           listener->parse_value(value);
         }
       }

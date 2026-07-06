@@ -51,6 +51,18 @@ class SKListener : virtual public Observable, public FileSystemSaveable {
 
   int get_listen_delay() { return listen_delay; }
 
+  /**
+   * Whether a received delta on `path` should be routed to this listener.
+   *
+   * Defaults to an exact match against `sk_path`. Listeners that observe a
+   * *family* of paths (e.g. a prefix subscription like `notifications.*`,
+   * where the server publishes on paths the client cannot enumerate in
+   * advance) override this to widen the match. `SKWSClient::process_received_updates`
+   * calls it per delta instead of comparing paths directly, so the routing
+   * policy lives with the listener.
+   */
+  virtual bool matches(const String& path) const { return sk_path == path; }
+
   virtual void parse_value(const JsonObject& json) {}
 
   /**
