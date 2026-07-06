@@ -6,6 +6,8 @@
 #include <ESPmDNS.h>
 #include <esp_http_client.h>
 
+#include <map>
+
 #include "sensesp/signalk/signalk_ws_delta_size.h"
 
 #ifdef SENSESP_SSL_SUPPORT
@@ -479,13 +481,24 @@ void SKWSClient::subscribe_listeners() {
     output_available = true;
     JsonArray subscribe = subscription["subscribe"].to<JsonArray>();
 
+    // Collapse listeners that share a path into one subscription entry.
+    // With sendMeta=all (a connection-level flag), a single subscription
+    // delivers both value and meta deltas, so a value listener and a
+    // metadata listener on the same path — the common gauge pattern —
+    // would otherwise emit two identical entries. Keep the smallest
+    // period so the fastest listener's cadence wins.
+    std::map<String, int> path_period;
     for (size_t i = 0; i < listeners.size(); i++) {
       auto* listener = listeners.at(i);
-      String sk_path = listener->get_sk_path();
+      const String& sk_path = listener->get_sk_path();
       int listen_delay = listener->get_listen_delay();
-
+      auto it = path_period.find(sk_path);
+      if (it == path_period.end() || listen_delay < it->second) {
+        path_period[sk_path] = listen_delay;
+      }
+    }
+    for (const auto& [sk_path, listen_delay] : path_period) {
       JsonObject subscribe_path = subscribe.add<JsonObject>();
-
       subscribe_path["path"] = sk_path;
       subscribe_path["period"] = listen_delay;
       ESP_LOGI(__FILENAME__, "Adding %s subscription with listen_delay %d\n",
