@@ -36,6 +36,15 @@ class RouteDefinition {
 
 void add_base_app_http_command_handlers(std::shared_ptr<HTTPServer>& server);
 
+/// Reject cross-origin POST requests to state-changing endpoints.
+///
+/// Compares the Origin header's authority (host[:port]) against the
+/// request's own Host header, so it works across every access path (soft-AP
+/// IP, station IP, mDNS name, custom DNS) without a hardcoded allowlist.
+/// Requests without an Origin header (non-browser clients) are allowed. On
+/// rejection, sends the 403 response itself; callers should return ESP_FAIL.
+bool check_origin(httpd_req_t* req);
+
 }  // namespace sensesp
 
 #endif  // SENSESP_NET_HTTP_COMMAND_HANDLER_H_
