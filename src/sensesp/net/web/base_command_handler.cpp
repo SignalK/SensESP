@@ -16,20 +16,10 @@
 
 namespace sensesp {
 
-namespace {
-
-/// Reject cross-origin POST requests to destructive endpoints.
-///
-/// Compares the Origin header's authority (host[:port]) against the request's
-/// own Host header. The Host header reflects whatever interface the browser
-/// actually used, so this is same-origin for every access path — soft-AP IP,
-/// station IP, mDNS name, or custom DNS — without a hardcoded allowlist.
-/// Requests without an Origin header (non-browser clients) are allowed.
-///
-/// An Origin or Host that does not fit the buffer is rejected rather than
-/// treated as absent: a legitimate same-origin request to this device is always
-/// short, so an over-long header can only be a forgery attempt and must fail
-/// closed.
+// An Origin or Host that does not fit the buffer is rejected rather than
+// treated as absent: a legitimate same-origin request to this device is
+// always short, so an over-long header can only be a forgery attempt and
+// must fail closed.
 bool check_origin(httpd_req_t* req) {
   if (httpd_req_get_hdr_value_len(req, "Origin") == 0) {
     return true;
@@ -58,8 +48,6 @@ bool check_origin(httpd_req_t* req) {
                       "Cross-origin request rejected");
   return false;
 }
-
-}  // namespace
 
 void add_http_reset_handler(std::shared_ptr<HTTPServer>& server) {
   auto reset_handler = std::make_shared<HTTPRequestHandler>(
@@ -206,6 +194,7 @@ void add_routes_handlers(std::shared_ptr<HTTPServer>& server) {
   routes.push_back(RouteDefinition("Signal K", "/signalk", "SignalKPage"));
   routes.push_back(
       RouteDefinition("Configuration", "/configuration", "ConfigurationPage"));
+  routes.push_back(RouteDefinition("Control", "/control", "ControlPage"));
 
   // Pre-render the response
   JsonDocument json_doc;
