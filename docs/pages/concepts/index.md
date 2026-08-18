@@ -315,22 +315,22 @@ auto* analog_input = new AnalogInput();
 creates an AnalogInput Sensor whose Read Delay will be the default 200 ms, and which can't be configured.
 
 ```c++
-auto* analog_input = new AnalogInput(250);
+auto* analog_input = new AnalogInput(36, 250);
 ```
 
-creates a Sensor with a 250 ms Read Delay that still can't be adjusted in real time, because there is no config_path parameter.
+creates a Sensor reading GPIO 36 with a 250 ms Read Delay that still can't be adjusted in real time, because there is no config_path parameter.
 
 Defining a config_path parameter allows the object to save its configuration to the device file system:
 
 ```c++
-auto* analog_input = new AnalogInput(250, "/analogInput");
+auto* analog_input = new AnalogInput(36, 250, "/analogInput");
 ```
 
 Your configuration path parameter can also be passed with a variable you create, like this:
 
 ```c++
 const char* sensor_config_path = "/analogInput";
-auto* analog_input = new AnalogInput(250, sensor_config_path);
+auto* analog_input = new AnalogInput(36, 250, sensor_config_path);
 ```
 
 Now, if you want to expose the object to the web interface, call `ConfigItem` on it:

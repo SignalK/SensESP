@@ -400,3 +400,54 @@ saved configs should actually start working for the first time.
 
 See `docs/pages/features/index.md` (section "Network transports")
 for a short usage example.
+
+## AnalogInput scale and configuration fixes (v3 minor update)
+
+`AnalogInput` regressed in v3.1.0, when the ESP-IDF ADC calibration
+layer in `analog_reader.h` was replaced by a bare `analogRead()` call.
+Two bugs resulted, reported as
+[#812](https://github.com/SignalK/SensESP/issues/812). Both are now
+fixed.
+
+### `output_scale` produces the documented range again
+
+From v3.1.0 to v3.5.0, `AnalogInput` emitted
+`output_scale * raw_adc_count` instead of
+`output_scale * (input_voltage / 3.3 V)`. With the default
+`output_scale` of 1024, output ran up to about 4 194 304 instead of
+0 - 1024: a factor of roughly 4096 too large.
+
+Readings are calibrated again, using `analogReadMilliVolts()`, and
+normalized against the 3.3 V full-scale reference, so the documented
+meanings of `output_scale` hold once more:
+
+| `output_scale`   | Output           |
+|------------------|------------------|
+| `1024` (default) | 0 - 1024         |
+| `100`            | percent          |
+| `3.3`            | volts at the pin |
+| `1`              | ratio, 0 - 1     |
+
+**If you worked around the bug, undo the workaround.** The common one
+was scaling `output_scale` down by about 4096 - for example passing
+`1` where `4096` had been correct. Left in place, that now makes
+readings roughly 4096x too small. Also re-check the `multiplier` and
+`offset` of any `Linear` transform you calibrated against the broken
+output.
+
+### The Read delay setting now takes effect
+
+`AnalogInput`'s constructor armed its repeat timer from the
+constructor argument instead of the value loaded from the file system,
+so a Read delay set in the web UI was saved and then ignored, even
+after a restart. It is now applied. Devices with a saved Read delay
+will begin reading at that interval after upgrading, which may differ
+from the interval they have actually been using.
+
+### `AnalogInput` is no longer deprecated
+
+The class was deprecated while it was broken. With calibrated readings
+restored, it is again a supported way to read an analog pin, and
+unlike `RepeatSensor` it can expose its read interval in the web
+configuration UI. `RepeatSensor` with `analogReadMilliVolts()` remains
+a good choice when you do not need runtime configuration.
