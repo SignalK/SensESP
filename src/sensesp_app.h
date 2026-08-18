@@ -12,6 +12,7 @@
 #include "sensesp/net/ota.h"
 #include "sensesp/net/web/app_command_handler.h"
 #include "sensesp/net/web/base_command_handler.h"
+#include "sensesp/net/web/button_handler.h"
 #include "sensesp/net/web/config_handler.h"
 #include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/net/wifi_provisioner.h"
@@ -310,6 +311,7 @@ class SensESPApp : public SensESPBaseApp {
       add_tofu_reset_handler(this->http_server_);
     }
     add_config_handlers(this->http_server_);
+    add_button_handlers(this->http_server_);
 
     ConfigItem(this->http_server_);
 

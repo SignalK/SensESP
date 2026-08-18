@@ -1,5 +1,7 @@
 #include "base_command_handler.h"
 
+#include <ETH.h>
+#include <WiFi.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 
@@ -18,18 +20,38 @@ namespace sensesp {
 
 namespace {
 
-/// Reject cross-origin POST requests to destructive endpoints.
-///
-/// Compares the Origin header's authority (host[:port]) against the request's
-/// own Host header. The Host header reflects whatever interface the browser
-/// actually used, so this is same-origin for every access path — soft-AP IP,
-/// station IP, mDNS name, or custom DNS — without a hardcoded allowlist.
-/// Requests without an Origin header (non-browser clients) are allowed.
-///
-/// An Origin or Host that does not fit the buffer is rejected rather than
-/// treated as absent: a legitimate same-origin request to this device is always
-/// short, so an over-long header can only be a forgery attempt and must fail
-/// closed.
+// Strips an optional ":port" suffix from a Host/Origin authority.
+String strip_port(const String& authority) {
+  int colon = authority.lastIndexOf(':');
+  return colon < 0 ? authority : authority.substring(0, colon);
+}
+
+// True if `ip` is a non-zero address currently assigned to one of this
+// device's own network interfaces.
+bool is_own_interface_ip(const IPAddress& ip) {
+  if (ip == IPAddress(0, 0, 0, 0)) {
+    return false;
+  }
+  return ip == WiFi.localIP() || ip == WiFi.softAPIP() || ip == ETH.localIP();
+}
+
+// True if `host` (already stripped of any port) is an address this device
+// actually owns: its mDNS name, or the IP of one of its live interfaces.
+bool is_own_host(const String& host) {
+  String hostname = SensESPBaseApp::get_hostname();
+  if (hostname.length() > 0 && host.equalsIgnoreCase(hostname + ".local")) {
+    return true;
+  }
+  IPAddress ip;
+  return ip.fromString(host) && is_own_interface_ip(ip);
+}
+
+}  // namespace
+
+// An Origin or Host that does not fit the buffer is rejected rather than
+// treated as absent: a legitimate same-origin request to this device is
+// always short, so an over-long header can only be a forgery attempt and
+// must fail closed.
 bool check_origin(httpd_req_t* req) {
   if (httpd_req_get_hdr_value_len(req, "Origin") == 0) {
     return true;
@@ -50,7 +72,16 @@ bool check_origin(httpd_req_t* req) {
   String origin_authority =
       scheme_end < 0 ? origin_str : origin_str.substring(scheme_end + 3);
 
-  if (origin_authority == host) {
+  String host_str(host);
+
+  // Origin must agree with Host (classic CSRF defense) *and* Host must name
+  // an address the device actually owns. A DNS-rebinding page can make its
+  // own hostname resolve to the device's local IP after the fact, so its
+  // Origin and Host headers still agree with each other on that hostname;
+  // the Origin==Host comparison alone would pass it straight through. Only
+  // cross-checking Host against the device's real mDNS name/interface IPs
+  // catches that case.
+  if (origin_authority == host_str && is_own_host(strip_port(host_str))) {
     return true;
   }
 
@@ -58,8 +89,6 @@ bool check_origin(httpd_req_t* req) {
                       "Cross-origin request rejected");
   return false;
 }
-
-}  // namespace
 
 void add_http_reset_handler(std::shared_ptr<HTTPServer>& server) {
   auto reset_handler = std::make_shared<HTTPRequestHandler>(
@@ -206,6 +235,7 @@ void add_routes_handlers(std::shared_ptr<HTTPServer>& server) {
   routes.push_back(RouteDefinition("Signal K", "/signalk", "SignalKPage"));
   routes.push_back(
       RouteDefinition("Configuration", "/configuration", "ConfigurationPage"));
+  routes.push_back(RouteDefinition("Control", "/control", "ControlPage"));
 
   // Pre-render the response
   JsonDocument json_doc;
