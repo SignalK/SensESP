@@ -3,6 +3,8 @@
 
 #include "sensesp.h"
 
+#include <cmath>
+
 #include "Arduino.h"
 
 namespace sensesp {
@@ -32,6 +34,10 @@ class BaseAnalogReader {
  * reference voltage.
  */
 class ESP32AnalogReader : public BaseAnalogReader {
+ public:
+  /// The nominal 3.3 V supply voltage, in millivolts.
+  static constexpr float kDefaultMaxVoltage = 3300.;
+
  protected:
   int pin_;
   float max_voltage_;
@@ -40,11 +46,19 @@ class ESP32AnalogReader : public BaseAnalogReader {
   /**
    * @param pin The GPIO pin to read.
    *
-   * @param max_voltage The full-scale reference voltage, in millivolts. The
-   * default corresponds to the nominal 3.3 V supply voltage.
+   * @param max_voltage The full-scale reference voltage, in millivolts. Must
+   * be positive and finite; any other value would make read() return a
+   * meaningless fraction, so it is rejected in favour of the default.
    */
-  ESP32AnalogReader(int pin, float max_voltage = 3300.)
-      : pin_{pin}, max_voltage_{max_voltage} {}
+  ESP32AnalogReader(int pin, float max_voltage = kDefaultMaxVoltage)
+      : pin_{pin}, max_voltage_{max_voltage} {
+    if (!(max_voltage > 0.) || !std::isfinite(max_voltage)) {
+      max_voltage_ = kDefaultMaxVoltage;
+      ESP_LOGE(__FILENAME__,
+               "Invalid max_voltage %f mV; using the default %f mV instead",
+               max_voltage, max_voltage_);
+    }
+  }
 
   float read() override { return analogReadMilliVolts(pin_) / max_voltage_; }
 };
