@@ -13,18 +13,20 @@ When you read an analog input pin directly, the raw value is an integer whose ra
 
 For all of these examples, we'll use a tank level sensor that reads the level of liquid in a tank and sends the value to the ESP's AnalogIn pin.
 
-## EXAMPLE 1: a tank level sensor that outputs 0 when the tank is empty and 1023 when the tank is full.
+## EXAMPLE 1: a tank level sensor that uses the pin's full range
+This is the sensor that drives the pin all the way from 0 V when the tank is empty to the full-scale reference voltage when it's full - so with the default `output_scale` of 1024, `AnalogInput` reports 0 for empty and 1024 for full. (All the values quoted in these examples are values reported by `AnalogInput`, not raw ADC counts.)
+
 You, being human, would rather see empty and full expressed as a percentage from 0 to 100. When you instantiate your AnalogInput Sensor, do it with an `output_scale` of 100, like this:
 ```
 // assume `pin`, read_delay`, and `config_path` are already defined in main.cpp
 auto* tank_level = new AnalogInput(pin, read_delay, config_path, 100);
 ```
-AnalogInput will convert any value from empty (0) to full (1023) into the proper percentage from empty (0) to full (100). Ta da!
+AnalogInput will convert any reading from empty to full into the proper percentage from empty (0) to full (100). Ta da!
 
 However... tank levels are *supposed* to be sent to Signal K as a "ratio" - a number between 0 and 1, where 0 is empty and 1 is full. So, instead of using 100 for the `output_scale`, use 1 to express the value as a ratio.
 
-## EXAMPLE 2: a sensor that outputs 0 when the tank is empty, but something less than 1023 when the tank is full
-It will be very unusual for your sensor to output its full scale value (1023 in our first example) when the tank is full. Far more likely is that it will output a value less than its full scale value - let's say it outputs 826 when the tank is full. To keep this relatively simple, we'll still assume the output is 0 when the tank is empty.
+## EXAMPLE 2: a sensor that outputs 0 when the tank is empty, but less than full scale when the tank is full
+It will be very unusual for your sensor to reach full scale (1024 in our first example) when the tank is full. Far more likely is that it will stop short of it - let's say `AnalogInput`, with its default `output_scale` of 1024, reports 826 when the tank is full. To keep this relatively simple, we'll still assume the output is 0 when the tank is empty.
 
 - empty_value = 0
 - full_value = 826
@@ -51,9 +53,9 @@ will convert any value from 0 - 826 into the appropriate percentage, 0 - 100.
 However... tank levels are *supposed* to be sent to Signal K as a "ratio" - a number between 0 and 1, where 0 is empty and 1 is full. So, instead of using 124 for the `output_scale`, you need to divide it by 100: 124 / 100 = 1.24.
 
 ## EXAMPLE 3: a sensor that outputs something other than 0 when the tank is empty
-Not only is it unlikely that your sensor will output 1023 when the tank is full, it's also unlikely to output 0 when the tank is empty. It's far more likely to output some small-ish value, like 43. When that happens, we're going to have to do two things to get our 0 - 100% scaled output: we have to get the proper scale, and we also have to have an `offset`, to compensate for the fact that empty = 43.
+Not only is it unlikely that your sensor will reach full scale when the tank is full, it's also unlikely to output 0 when the tank is empty. It's far more likely to output some small-ish value, like 43. When that happens, we're going to have to do two things to get our 0 - 100% scaled output: we have to get the proper scale, and we also have to have an `offset`, to compensate for the fact that empty = 43.
 
-There are a couple ways to do this, but your humble author believes the simplest way is to let AnalogInput provide whatever raw value it's going to provide with its default `output_scale` of 1024, and then run that raw value through a [`Linear`](https://signalk.org/SensESP/generated/docs/class_linear.html) Transform, using the transform's `multiplier` and `offset` parameters. Here's how it works (to avoid confusion with previous examples, note that the example numbers are totally different):
+There are a couple ways to do this, but your humble author believes the simplest way is to let AnalogInput report whatever value it's going to report with its default `output_scale` of 1024, and then run that value through a [`Linear`](https://signalk.org/SensESP/generated/docs/class_linear.html) Transform, using the transform's `multiplier` and `offset` parameters. Here's how it works (to avoid confusion with previous examples, note that the example numbers are totally different):
 
 In your `main.cpp` start by using only AnalogInput connected to SKOutputFloat:
 ```c++
@@ -79,7 +81,7 @@ In other words, each percentage point represents 9.48 "output units" from the An
 
 Obviously, every value is 4.536 bigger than it should be, so we know that our `offset` parameter needs to be `-4.536`.
 
-Above, we're dividing our raw value by 9.48, but `multiplier` is a multiplier, not a divisor. That is, the math is `raw_value X multiplier`, not `raw_value / multiplier`. We can convert a divisor into a multiplier simply:
+Above, we're dividing our reported value by 9.48, but `multiplier` is a multiplier, not a divisor. That is, the math is `value X multiplier`, not `value / multiplier`. We can convert a divisor into a multiplier simply:
 
 multiplier = 1 / divisor (1 / 9.48 = 0.1055), and prove it with the same three sample numbers above:
 
