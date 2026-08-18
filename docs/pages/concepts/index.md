@@ -219,16 +219,19 @@ The first line instantiates a Sensor of type DigitalInputCounter. The second lin
 A much more complex example is `temperature_sender.cpp`, where the meat of the program is this:
 
 ```c++
-auto* analog_input = new AnalogInput();
+auto* analog_input = new RepeatSensor<float>(1000, [pin]() {
+  return analogReadMilliVolts(pin) / 1000.;
+});
 
-analog_input->connect_to(new AnalogVoltage())
-    ->connect_to(new VoltageDividerR2(R1, Vin, "/gen/temp/sender"))
-    ->connect_to(new TemperatureInterpreter("/gen/temp/curve"))
-    ->connect_to(new Linear(1.0, 0.0, "/gen/temp/calibrate"))
-    ->connect_to(new SKOutputFloat(sk_path, "/gen/temp/sk"));
+analog_input
+    ->connect_to(new VoltageDividerR2(R1, volt_div_v_in,
+                                      "/12V_alternator/temp/sender"))
+    ->connect_to(new TemperatureInterpreter("/12V_alternator/temp/curve"))
+    ->connect_to(new Linear(1.0, 0.0, "/12V_alternator/temp/calibrate"))
+    ->connect_to(new SKOutputFloat(sk_path, "/12V_alternator/temp/sk"));
 ```
 
-In this example, there is still only one Sensor (AnalogInput), but several Transforms, all required to turn the raw value from the Analog Input pin on the MCU into a temperature that's sent to the Signal K Server.
+In this example, there is still only one Sensor - a RepeatSensor that reads the pin voltage in volts - but several Transforms, all required to turn that voltage into a temperature that's sent to the Signal K Server.
 
 You can also include multiple Sensors, each with at least one Transform, in the same program, such as including both of the examples above into the same `main.cpp`, one after the other.
 
