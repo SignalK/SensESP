@@ -13,36 +13,39 @@ namespace sensesp {
 /**
  * @brief Sensor for reading the MCU analog input pins
  *
- * Read an analog input pin and return the result scaled onto a given range.
- * Note that the ADCs in ESP32 are quite nonlinear and noisy
- * and unlikely to give very accurate results. For accurate ADC results,
- * SensESP supports the ADS1015 and ADS1115 ADC's.
+ * Read an analog input pin at regular intervals and return the result scaled
+ * onto a given range. The reading is calibrated in millivolts using the
+ * Arduino core's analogReadMilliVolts(), so it compensates for the ESP32 ADC's
+ * nonlinearity. The ADCs are still noisy; for high accuracy, SensESP supports
+ * the ADS1015 and ADS1115 ADCs.
  *
- * @param[in] pin The GPIO pin to read. On ESP32, at
- * the moment only ADC channel 1 (pins 32..39) is supported because
- * ADC2 clashes with Wi-Fi.
+ * Unlike RepeatSensor, AnalogInput can expose its read delay in the web
+ * configuration UI. Give it a config_path and pass it to ConfigItem() if you
+ * want to adjust the read interval at run time.
+ *
+ * @param[in] pin The GPIO pin to read. Which pins are usable depends on the
+ * ESP32 variant. Note that pins on ADC2 cannot be read while Wi-Fi is active,
+ * which in practice limits you to ADC1 pins (GPIO 32..39 on the original
+ * ESP32).
  *
  * @param[in] read_delay Time delay between consecutive readings, in ms
  *
  * @param[in] config_path Configuration path for the sensor
  *
  * @param[in] output_scale The scale of the converted input value that
- * AnalogInput produces. The maximum raw analog value returned by the ADC
- * on different platforms varies, but AnalogInput takes that into account by
- * converting them to a number between zero and 'output_scale'. This allows
- * the same code to run on both platforms. The default value for
- * 'output_scale' is 1024, which means output will be from 0 to 1023. If you
- * want your output to be on a different scale, use this parameter to indicate
- * the X in the `0 to X` scale. For example, if you want your output to be
- * expressed as a percentage (0 to 100), make this parameter be 100. If you want
- * your output to be the original voltage read by the AnalogIn pin, make this
- * parameter be the maximum voltage that can go into the pin (probably 3.3). If
- * you want your output to be the original voltage that was intput into a
- * physical voltage divider circuit before being read by the AnalogIn pin,
- * make this parameter be the maximum voltage that you would send into the
- * voltage divider circuit.
+ * AnalogInput produces. The raw value width of the ADC varies between ESP32
+ * variants, so AnalogInput normalizes the calibrated input voltage against a
+ * 3.3 V full-scale reference and multiplies that fraction by 'output_scale'.
+ * Output is therefore in the range 0 to 'output_scale', and the same code
+ * behaves identically across variants. The default value is 1024. If you want
+ * your output expressed as a percentage, make this parameter 100. If you want
+ * the actual voltage at the pin, make it 3.3 -- that holds regardless of the
+ * ADC attenuation set with analogSetAttenuation(), because the reading is
+ * calibrated in millivolts before it is scaled. If you want the voltage on the
+ * input side of a physical voltage divider, make this parameter the voltage
+ * that the divider maps onto the pin's full-scale range.
  */
-class [[deprecated("Use RepeatSensor and Arduino analogReadMilliVolts() instead")]] AnalogInput : public FloatSensor {
+class AnalogInput : public FloatSensor {
  public:
   AnalogInput(uint8_t pin = A0, unsigned int read_delay = 200,
               const String& config_path = "", float output_scale = 1024.);
@@ -57,9 +60,9 @@ class [[deprecated("Use RepeatSensor and Arduino analogReadMilliVolts() instead"
   virtual bool from_json(const JsonObject& config) override;
 
  protected:
-  uint8_t pin{};
-  unsigned int read_delay;
-  float output_scale;
+  uint8_t pin_{};
+  unsigned int read_delay_;
+  float output_scale_;
   std::unique_ptr<BaseAnalogReader> analog_reader_{};
   reactesp::RepeatEvent* repeat_event_ = nullptr;
   void update();
