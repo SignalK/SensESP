@@ -47,4 +47,4 @@ bool check_origin(httpd_req_t* req);
 
 }  // namespace sensesp
 
-#endif  // SENSESP_NET_HTTP_COMMAND_HANDLER_H_
+#endif  // SENSESP_NET_WEB_BASE_COMMAND_HANDLER_H_
