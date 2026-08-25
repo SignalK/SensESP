@@ -28,7 +28,19 @@ class UIButton : public Observable {
     return ui_buttons_;
   }
 
+  /**
+   * @brief Create a button and register it for the web UI.
+   *
+   * Call during setup, before the HTTP server starts serving: the registry
+   * is read by the web UI handlers without locking. A duplicate name
+   * replaces the previously registered button.
+   */
   static UIButton* add(String name, String title, bool must_confirm = true) {
+    if (ui_buttons_.count(name) != 0) {
+      ESP_LOGW("UIButton",
+               "Duplicate button name '%s' replaces the earlier button",
+               name.c_str());
+    }
     auto new_cmd = std::make_shared<UIButton>(title, name, must_confirm);
     ui_buttons_[name] = new_cmd;
 
