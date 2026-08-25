@@ -1,3 +1,4 @@
+import { isAbortError } from "common/requestQueue";
 import { ButtonCard, Card } from "components/Card";
 import { ToastMessage } from "components/ToastMessage";
 import { AppPage } from "pages/AppPage";
@@ -25,29 +26,45 @@ export function ControlPage(): JSX.Element {
 
 function ControlCards(): JSX.Element {
   const [buttons, setButtons] = useState<UIButtonInfo[] | null>(null);
-  const [loadError, setLoadError] = useState<string>("");
+  const [failed, setFailed] = useState<boolean>(false);
+  const [reloadToken, setReloadToken] = useState<number>(0);
 
   useEffect(() => {
+    const controller = new AbortController();
+    setFailed(false);
+
     void (async () => {
       try {
-        const res = await fetch("/api/buttons");
+        const res = await fetch("/api/buttons", { signal: controller.signal });
         if (!res.ok) {
-          setLoadError(
-            `Failed to load buttons: ${res.status} ${res.statusText}`,
-          );
-          return;
+          throw new Error(`${res.status} ${res.statusText}`);
         }
-        setButtons(await res.json());
+        setButtons((await res.json()) as UIButtonInfo[]);
       } catch (e) {
-        setLoadError(`Failed to load buttons: ${(e as Error).message}`);
+        if (isAbortError(e)) return;
+        console.warn("Failed to load the button list", e);
+        setFailed(true);
       }
     })();
-  }, []);
 
-  if (loadError) {
+    return () => controller.abort();
+  }, [reloadToken]);
+
+  if (failed) {
     return (
       <div className="alert alert-danger" role="alert">
-        {loadError}
+        <p className="mb-1">Couldn't reach the device to load its controls.</p>
+        <p className="mb-2 small">
+          Make sure it's powered on and connected to the network, then try
+          again.
+        </p>
+        <button
+          className="btn btn-outline-secondary btn-sm"
+          type="button"
+          onClick={() => setReloadToken((token) => token + 1)}
+        >
+          Retry
+        </button>
       </div>
     );
   }
