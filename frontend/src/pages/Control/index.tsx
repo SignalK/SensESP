@@ -9,7 +9,7 @@ import { PageHeading } from "../PageHeading";
 interface UIButtonInfo {
   name: string;
   title: string;
-  must_confirm: boolean;
+  mustConfirm: boolean;
 }
 
 export function ControlPage(): JSX.Element {
@@ -86,7 +86,7 @@ function UIButtonCard({ button }: UIButtonCardProps): JSX.Element {
 
   async function handleClick(): Promise<void> {
     if (
-      button.must_confirm &&
+      button.mustConfirm &&
       !window.confirm(`Are you sure you want to trigger "${button.title}"?`)
     ) {
       return;
@@ -130,7 +130,7 @@ function UIButtonCard({ button }: UIButtonCardProps): JSX.Element {
       <ButtonCard
         title={button.title}
         buttonText={button.title}
-        buttonVariant={button.must_confirm ? "danger" : "primary"}
+        buttonVariant={button.mustConfirm ? "danger" : "primary"}
         isButtonEnabled={!pending}
         onClick={() => {
           void handleClick();

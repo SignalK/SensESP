@@ -23,7 +23,7 @@ void add_button_list_handler(std::shared_ptr<HTTPServer>& server) {
           JsonObject obj = arr.add<JsonObject>();
           obj["name"] = entry.second->get_name();
           obj["title"] = entry.second->get_title();
-          obj["must_confirm"] = entry.second->get_must_confirm();
+          obj["mustConfirm"] = entry.second->get_must_confirm();
         }
 
         String response;
