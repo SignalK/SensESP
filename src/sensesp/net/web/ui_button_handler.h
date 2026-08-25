@@ -1,5 +1,5 @@
-#ifndef SENSESP_NET_WEB_BUTTON_HANDLER_H_
-#define SENSESP_NET_WEB_BUTTON_HANDLER_H_
+#ifndef SENSESP_NET_WEB_UI_BUTTON_HANDLER_H_
+#define SENSESP_NET_WEB_UI_BUTTON_HANDLER_H_
 
 #include <memory>
 
@@ -17,4 +17,4 @@ void add_button_handlers(std::shared_ptr<HTTPServer>& server);
 
 }  // namespace sensesp
 
-#endif  // SENSESP_NET_WEB_BUTTON_HANDLER_H_
+#endif  // SENSESP_NET_WEB_UI_BUTTON_HANDLER_H_

@@ -12,7 +12,7 @@
 #include "sensesp/net/ota.h"
 #include "sensesp/net/web/app_command_handler.h"
 #include "sensesp/net/web/base_command_handler.h"
-#include "sensesp/net/web/button_handler.h"
+#include "sensesp/net/web/ui_button_handler.h"
 #include "sensesp/net/web/config_handler.h"
 #include "sensesp/net/web/static_file_handler.h"
 #include "sensesp/net/wifi_provisioner.h"

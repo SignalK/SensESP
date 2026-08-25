@@ -1,9 +1,17 @@
-#include "button_handler.h"
+#include "sensesp.h"
+
+#include "ui_button_handler.h"
 
 #include "sensesp/net/web/base_command_handler.h"
 #include "sensesp/ui/ui_button.h"
 
 namespace sensesp {
+
+namespace {
+
+// Longer names cannot match any registered button, so they are rejected
+// before decoding.
+constexpr size_t kMaxButtonNameLength = 64;
 
 void add_button_list_handler(std::shared_ptr<HTTPServer>& server) {
   auto handler = std::make_shared<HTTPRequestHandler>(
@@ -40,7 +48,12 @@ void add_button_click_handler(std::shared_ptr<HTTPServer>& server) {
         if (query_start != -1) {
           url_tail = url_tail.substring(0, query_start);
         }
-        char name_cstr[url_tail.length() + 1];
+        if (url_tail.length() > kMaxButtonNameLength) {
+          httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
+                              "No button found with that name");
+          return ESP_FAIL;
+        }
+        char name_cstr[kMaxButtonNameLength + 1];
         urldecode2(name_cstr, url_tail.c_str());
         String name(name_cstr);
 
@@ -52,14 +65,22 @@ void add_button_click_handler(std::shared_ptr<HTTPServer>& server) {
           return ESP_FAIL;
         }
 
-        it->second->notify();
-
         httpd_resp_set_type(req, "application/json");
-        httpd_resp_send(req, "{\"status\":\"ok\"}", 0);
+        httpd_resp_sendstr(req, "{\"status\":\"ok\"}");
+
+        // User callbacks belong on the event loop task: the httpd task stack
+        // is not sized for them, and they may touch event-loop-owned state.
+        // The shared_ptr copy keeps the button alive even if a callback
+        // mutates the registry. A 200 means the click was accepted, as with
+        // /api/device/reset and /api/device/restart.
+        auto button = it->second;
+        event_loop()->onDelay(0, [button]() { button->notify(); });
         return ESP_OK;
       });
   server->add_handler(handler);
 }
+
+}  // namespace
 
 void add_button_handlers(std::shared_ptr<HTTPServer>& server) {
   add_button_list_handler(server);
