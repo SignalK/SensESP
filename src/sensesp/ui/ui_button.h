@@ -34,6 +34,9 @@ class UIButton : public Observable {
    * Call during setup, before the HTTP server starts serving: the registry
    * is read by the web UI handlers without locking. A duplicate name
    * replaces the previously registered button.
+   *
+   * Names up to 64 characters can be triggered through the web UI; a
+   * longer name is listed but its clicks are rejected.
    */
   static UIButton* add(String name, String title, bool must_confirm = true) {
     if (ui_buttons_.count(name) != 0) {

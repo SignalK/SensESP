@@ -10,8 +10,11 @@ namespace sensesp {
 /**
  * @brief Handle HTTP requests to /api/buttons.
  *
- * Serves the UIButton registry (GET /api/buttons) and dispatches clicks
- * (POST /api/buttons/<name>) to the corresponding button's observers.
+ * Serves the UIButton registry (GET /api/buttons) and accepts clicks
+ * (POST /api/buttons/<name>). A 200 response with body {"status":"ok"}
+ * means the click was accepted; the button's observer callbacks run
+ * afterwards on the event loop task, matching the /api/device/reset and
+ * /api/device/restart contract.
  */
 void add_button_handlers(std::shared_ptr<HTTPServer>& server);
 

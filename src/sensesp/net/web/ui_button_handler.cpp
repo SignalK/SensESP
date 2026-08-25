@@ -9,9 +9,12 @@ namespace sensesp {
 
 namespace {
 
-// Longer names cannot match any registered button, so they are rejected
-// before decoding.
+// Names longer than this cannot be triggered over HTTP; the limit is
+// documented on UIButton::add(). Percent-encoding expands a character to
+// up to three bytes, so the encoded tail is bounded at three times the
+// limit before decoding.
 constexpr size_t kMaxButtonNameLength = 64;
+constexpr size_t kMaxEncodedNameLength = 3 * kMaxButtonNameLength;
 
 void add_button_list_handler(std::shared_ptr<HTTPServer>& server) {
   auto handler = std::make_shared<HTTPRequestHandler>(
@@ -48,14 +51,19 @@ void add_button_click_handler(std::shared_ptr<HTTPServer>& server) {
         if (query_start != -1) {
           url_tail = url_tail.substring(0, query_start);
         }
-        if (url_tail.length() > kMaxButtonNameLength) {
+        if (url_tail.length() > kMaxEncodedNameLength) {
           httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
                               "No button found with that name");
           return ESP_FAIL;
         }
-        char name_cstr[kMaxButtonNameLength + 1];
+        char name_cstr[kMaxEncodedNameLength + 1];
         urldecode2(name_cstr, url_tail.c_str());
         String name(name_cstr);
+        if (name.length() > kMaxButtonNameLength) {
+          httpd_resp_send_err(req, HTTPD_404_NOT_FOUND,
+                              "No button found with that name");
+          return ESP_FAIL;
+        }
 
         const auto& buttons = UIButton::get_ui_buttons();
         auto it = buttons.find(name);
