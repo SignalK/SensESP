@@ -1,4 +1,4 @@
-import { ButtonCard } from "components/Card";
+import { ButtonCard, Card } from "components/Card";
 import { ToastMessage } from "components/ToastMessage";
 import { AppPage } from "pages/AppPage";
 import { type JSX } from "preact";
@@ -24,7 +24,7 @@ export function ControlPage(): JSX.Element {
 }
 
 function ControlCards(): JSX.Element {
-  const [buttons, setButtons] = useState<UIButtonInfo[]>([]);
+  const [buttons, setButtons] = useState<UIButtonInfo[] | null>(null);
   const [loadError, setLoadError] = useState<string>("");
 
   useEffect(() => {
@@ -32,7 +32,9 @@ function ControlCards(): JSX.Element {
       try {
         const res = await fetch("/api/buttons");
         if (!res.ok) {
-          setLoadError(`Failed to load buttons: ${res.status} ${res.statusText}`);
+          setLoadError(
+            `Failed to load buttons: ${res.status} ${res.statusText}`,
+          );
           return;
         }
         setButtons(await res.json());
@@ -50,8 +52,18 @@ function ControlCards(): JSX.Element {
     );
   }
 
+  if (buttons === null) {
+    return (
+      <Card loading title="">
+        <></>
+      </Card>
+    );
+  }
+
   if (buttons.length === 0) {
-    return <p>No controls have been registered by this device&apos;s firmware.</p>;
+    return (
+      <p>No controls have been registered by this device&apos;s firmware.</p>
+    );
   }
 
   return (
@@ -92,7 +104,7 @@ function UIButtonCard({ button }: UIButtonCardProps): JSX.Element {
       }
       setShowSuccessToast(true);
     } catch (e) {
-      setHttpErrorText(`Error triggering "${button.title}": ${e}`);
+      setHttpErrorText(String(e));
     } finally {
       setPending(false);
     }
