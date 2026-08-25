@@ -9,9 +9,11 @@ export default defineMock(
       body: [
         { name: "Status", path: "/status", componentName: "StatusPage" },
         { name: "System", path: "/system", componentName: "SystemPage" },
+        { name: "Log", path: "/log", componentName: "LogPage" },
         { name: "WiFi", path: "/wifi", componentName: "WiFiConfigPage" },
         { name: "Signal K", path: "/signalk", componentName: "SignalKPage" },
         { name: "Configuration", path: "/configuration", componentName: "ConfigurationPage" },
+        { name: "Control", path: "/control", componentName: "ControlPage" },
         { name: "SensESP Plugin", path: "/sensesp-plugin/sensesp-plugin", componentName: "SensESPPluginPage", loadPath: "/api/plugins/sensesp-plugin/sensesp-plugin.js" },
       ]
       ,
