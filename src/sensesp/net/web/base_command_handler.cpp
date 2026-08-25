@@ -1,11 +1,10 @@
 #include "base_command_handler.h"
 
-#include <freertos/FreeRTOS.h>
-#include <freertos/task.h>
-
 #include <cerrno>
 #include <cstdint>
 #include <cstdlib>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
 #include <memory>
 #include <new>
 
@@ -55,10 +54,9 @@ void add_http_reset_handler(std::shared_ptr<HTTPServer>& server) {
         if (!check_origin(req)) {
           return ESP_FAIL;
         }
-        httpd_resp_send(req,
-                        "Resetting device back to factory defaults. "
-                        "You may have to reconfigure the WiFi settings.",
-                        0);
+        httpd_resp_sendstr(req,
+                           "Resetting device back to factory defaults. "
+                           "You may have to reconfigure the WiFi settings.");
         event_loop()->onDelay(500, []() { SensESPBaseApp::get()->reset(); });
         return ESP_OK;
       });
@@ -71,7 +69,7 @@ void add_http_restart_handler(std::shared_ptr<HTTPServer>& server) {
         if (!check_origin(req)) {
           return ESP_FAIL;
         }
-        httpd_resp_send(req, "Restarting device", 0);
+        httpd_resp_sendstr(req, "Restarting device");
         event_loop()->onDelay(500, []() { ESP.restart(); });
         return ESP_OK;
       });
@@ -91,20 +89,22 @@ void add_http_info_handler(std::shared_ptr<HTTPServer>& server) {
           info_items.add(info_item->second->as_json());
         }
 
-        // Per-task minimum-ever free stack, grouped under "Task stack free
-        // (bytes)", for spotting over- or under-provisioned task stacks.
-        // Computed live per request; needs the FreeRTOS trace facility, which
-        // the Arduino/ESP-IDF default config enables.
+    // Per-task minimum-ever free stack, grouped under "Task stack free
+    // (bytes)", for spotting over- or under-provisioned task stacks.
+    // Computed live per request; needs the FreeRTOS trace facility, which
+    // the Arduino/ESP-IDF default config enables.
 #if defined(CONFIG_FREERTOS_USE_TRACE_FACILITY) && \
     CONFIG_FREERTOS_USE_TRACE_FACILITY
         // Over-allocate a few slots so a task created between the count and the
         // snapshot can't undersize the array: uxTaskGetSystemState returns 0 on
-        // an undersized buffer, which would drop the whole section that request.
+        // an undersized buffer, which would drop the whole section that
+        // request.
         UBaseType_t task_slots = uxTaskGetNumberOfTasks() + 4;
-        std::unique_ptr<TaskStatus_t[]> tasks(
-            new (std::nothrow) TaskStatus_t[task_slots]);
+        std::unique_ptr<TaskStatus_t[]> tasks(new (std::nothrow)
+                                                  TaskStatus_t[task_slots]);
         if (tasks) {
-          UBaseType_t n = uxTaskGetSystemState(tasks.get(), task_slots, nullptr);
+          UBaseType_t n =
+              uxTaskGetSystemState(tasks.get(), task_slots, nullptr);
           for (UBaseType_t i = 0; i < n; i++) {
             JsonDocument item;
             item["name"] = tasks[i].pcTaskName;
@@ -147,7 +147,8 @@ void add_http_log_handler(std::shared_ptr<HTTPServer>& server) {
         size_t query_len = httpd_req_get_url_query_len(req) + 1;
         if (query_len > 1 && query_len <= 64) {
           char query[64];
-          if (httpd_req_get_url_query_str(req, query, sizeof(query)) == ESP_OK) {
+          if (httpd_req_get_url_query_str(req, query, sizeof(query)) ==
+              ESP_OK) {
             char value[16];
             if (httpd_query_key_value(query, "since", value, sizeof(value)) ==
                 ESP_OK) {
