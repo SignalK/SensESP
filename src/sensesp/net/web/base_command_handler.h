@@ -39,8 +39,13 @@ void add_base_app_http_command_handlers(std::shared_ptr<HTTPServer>& server);
 /// Reject cross-origin POST requests to state-changing endpoints.
 ///
 /// Compares the Origin header's authority (host[:port]) against the
-/// request's own Host header, so it works across every access path (soft-AP
-/// IP, station IP, mDNS name, custom DNS) without a hardcoded allowlist.
+/// request's own Host header (classic CSRF defense), and additionally
+/// requires that Host name an address the device actually owns — its mDNS
+/// name or the IP of one of its live network interfaces (soft-AP, station,
+/// Ethernet). The second check is what stops DNS rebinding: a rebinding
+/// page's Origin and Host headers agree with each other on its own
+/// attacker-controlled hostname, so the Origin==Host comparison alone would
+/// let it through once that hostname resolves to the device's IP.
 /// Requests without an Origin header (non-browser clients) are allowed. On
 /// rejection, sends the 403 response itself; callers should return ESP_FAIL.
 bool check_origin(httpd_req_t* req);
