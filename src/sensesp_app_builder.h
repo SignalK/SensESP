@@ -6,6 +6,7 @@
 #include "Arduino.h"
 #include "sensesp/sensors/system_info.h"
 #include "sensesp/system/valueproducer.h"
+#include "sensesp/system/wifi_watchdog.h"
 #include "sensesp/transforms/debounce.h"
 #include "sensesp_app.h"
 #include "sensesp_base_app_builder.h"
@@ -343,22 +344,35 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
     return this;
   }
 
-  const SensESPAppBuilder* enable_wifi_watchdog() {
-    // create the wifi disconnect watchdog
-    app_->system_status_controller_
-        ->connect_to(new Debounce<SystemStatus>(
-            3 * 60 * 1000  // 180 s = 180000 ms = 3 minutes
-            ))
-        ->connect_to(new LambdaConsumer<SystemStatus>([](SystemStatus input) {
-          ESP_LOGD(__FILENAME__, "Got system status: %d", (int)input);
-          if (input == SystemStatus::kWifiDisconnected ||
-              input == SystemStatus::kWifiNoAP) {
-            ESP_LOGW(__FILENAME__,
-                     "Unable to connect to wifi for too long; restarting.");
-            event_loop()->onDelay(1000, []() { ESP.restart(); });
-          }
-        }));
-
+  /**
+   * @brief Restart the device after a prolonged network outage.
+   *
+   * The watchdog arms on the first station or Ethernet connection after
+   * boot, so a device that starts without a reachable access point keeps
+   * running. The soft-AP and the captive portal neither arm it nor count as
+   * an outage. Once armed, a continuous outage of at least @p timeout_s
+   * restarts the device. The timeout is exposed on the web UI under System;
+   * a value saved there takes precedence over @p timeout_s on later boots.
+   *
+   * Pick a timeout that outlasts an access point reboot; a too-short value
+   * costs an unnecessary restart during every AP outage.
+   *
+   * @param timeout_s Initial outage duration in seconds before restarting,
+   *   between 1 and WiFiWatchdog::kMaxTimeoutS.
+   */
+  SensESPAppBuilder* enable_wifi_watchdog(int timeout_s = 180) {
+    if (!WiFiWatchdog::is_valid_timeout_s(timeout_s)) {
+      ESP_LOGE(__FILENAME__,
+               "WiFi watchdog timeout %d s is out of range [1, %d]; watchdog "
+               "not enabled.",
+               timeout_s, WiFiWatchdog::kMaxTimeoutS);
+      return this;
+    }
+    if (app_->wifi_watchdog_timeout_s_ != 0) {
+      ESP_LOGW(__FILENAME__, "WiFi watchdog already enabled.");
+      return this;
+    }
+    app_->wifi_watchdog_timeout_s_ = timeout_s;
     return this;
   }
 

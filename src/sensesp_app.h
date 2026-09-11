@@ -24,6 +24,7 @@
 #include "sensesp/system/log_buffer.h"
 #include "sensesp/system/reset_info.h"
 #include "sensesp/system/system_status_led.h"
+#include "sensesp/system/wifi_watchdog.h"
 #include "sensesp/ui/status_page_item.h"
 #include "sensesp_base_app.h"
 
@@ -226,6 +227,17 @@ class SensESPApp : public SensESPBaseApp {
     // — that way we cannot miss the GOT_IP that fires when DHCP
     // completes a few hundred ms later.
     network_state_producer_ = std::make_shared<NetworkStateProducer>();
+
+    if (wifi_watchdog_timeout_s_ != 0) {
+      wifi_watchdog_ = std::make_shared<WiFiWatchdog>(
+          network_state_producer_, wifi_watchdog_timeout_s_);
+      ConfigItem(wifi_watchdog_)
+          ->set_title("WiFi Watchdog")
+          ->set_description(
+              "Restart the device if the network stays down longer than the "
+              "timeout. Armed after the first successful connection.")
+          ->set_sort_order(1500);
+    }
 
     // Create the chosen provisioner. If the builder installed a custom
     // factory (via set_network_provisioner_factory()), use it; otherwise
@@ -492,6 +504,8 @@ class SensESPApp : public SensESPBaseApp {
   std::function<std::shared_ptr<NetworkProvisioner>()> provisioner_factory_;
 
   std::shared_ptr<OTA> ota_;
+  int wifi_watchdog_timeout_s_ = 0;  // 0 = disabled
+  std::shared_ptr<WiFiWatchdog> wifi_watchdog_;
   std::shared_ptr<SKDeltaQueue> sk_delta_queue_;
   std::shared_ptr<SKWSClient> ws_client_;
 
