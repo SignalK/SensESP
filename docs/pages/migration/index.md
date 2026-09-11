@@ -451,3 +451,9 @@ restored, it is again a supported way to read an analog pin, and
 unlike `RepeatSensor` it can expose its read interval in the web
 configuration UI. `RepeatSensor` with `analogReadMilliVolts()` remains
 a good choice when you do not need runtime configuration.
+
+## WiFi watchdog arming and timeout (v3 minor update)
+
+`enable_wifi_watchdog()` now arms only after the first station or Ethernet connection. A device that has not connected since boot is no longer restarted every 3 minutes. If you relied on that periodic restart to recover from a bad boot-time WiFi state, that recovery is gone.
+
+The timeout is now an argument, `enable_wifi_watchdog(timeout_s)`, defaulting to the previous 180 seconds, and a config item on the web UI Configuration page. A value saved there takes precedence over the argument on later boots.
