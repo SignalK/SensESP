@@ -62,7 +62,10 @@ NetworkStateProducer::NetworkStateProducer() {
   wifi_ap_stop_handle_ = Network.onEvent(
       [this](arduino_event_id_t, arduino_event_info_t) {
         ESP_LOGI("net_state", "WiFi soft-AP stopped");
-        defer_emit(this, kNetworkDisconnected);
+        // Stopping the soft-AP is not an outage while the station is up.
+        if (!WiFi.isConnected()) {
+          defer_emit(this, kNetworkDisconnected);
+        }
       },
       ARDUINO_EVENT_WIFI_AP_STOP);
 
@@ -116,7 +119,10 @@ NetworkStateProducer::NetworkStateProducer() {
   wifi_ap_stop_handle_ = WiFi.onEvent(
       [this](WiFiEvent_t, WiFiEventInfo_t) {
         ESP_LOGI("net_state", "WiFi soft-AP stopped");
-        defer_emit(this, kNetworkDisconnected);
+        // Stopping the soft-AP is not an outage while the station is up.
+        if (!WiFi.isConnected()) {
+          defer_emit(this, kNetworkDisconnected);
+        }
       },
       WiFiEvent_t::ARDUINO_EVENT_WIFI_AP_STOP);
 
