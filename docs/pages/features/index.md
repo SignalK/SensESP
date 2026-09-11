@@ -56,7 +56,9 @@ nav_order: 40
 
 | Method | Description |
 |--------|-------------|
-| `enable_wifi_watchdog()` | Restart device if WiFi disconnected for 3 minutes |
+| `enable_wifi_watchdog(timeout_s)` | Restart the device after a continuous network outage of `timeout_s` seconds (default 180); see below |
+
+The WiFi watchdog is off unless you call `enable_wifi_watchdog()`. It arms on the first station or Ethernet connection after boot, so a device that starts without a reachable access point keeps running and does not restart in a loop. The soft-AP and the captive portal neither arm it nor count as an outage. Once armed, it restarts the device after the network has been down continuously for the timeout. `timeout_s` accepts 1 to 604800 seconds (7 days); a value outside that range logs an error and leaves the watchdog off, and the web UI rejects it. Pick a timeout that outlasts an access point reboot: a too-short value costs an unnecessary restart on every outage, and every restart interrupts whatever else the device does, such as NMEA 2000 or serial output. The timeout is saved on the device and can be changed without a restart from the "WiFi Watchdog" card on the web UI Configuration page. A value saved there takes precedence over the argument on later boots. An active soft-AP session does not pause a running outage timer: if the station link is down and someone is using the device through its soft-AP, the device still restarts when the timeout elapses. Call `enable_wifi_watchdog()` before `get_app()`.
 
 **Finalize:**
 
@@ -73,7 +75,7 @@ builder.set_hostname("my-engine-monitor")
        ->enable_ota("otapass")
        ->set_admin_user("admin", "admin123")
        ->enable_system_info_sensors()
-       ->enable_wifi_watchdog()
+       ->enable_wifi_watchdog(600)
        ->get_app();
 ```
 
