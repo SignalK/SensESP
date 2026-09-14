@@ -109,6 +109,7 @@ function UIButtonCard({ button }: UIButtonCardProps): JSX.Element {
       return;
     }
 
+    setHttpErrorText("");
     setPending(true);
     try {
       const response = await fetch(
