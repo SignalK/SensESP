@@ -1,0 +1,6 @@
+# Appended by ESP-IDF after sdkconfig.defaults when the target is esp32c3.
+#
+# The ESP32-C3's native USB is the USB-Serial-JTAG controller, which is also
+# where the Arduino core routes Serial (ARDUINO_USB_MODE=1). Route the IDF
+# console there so logs reach the USB port under the espidf build.
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
