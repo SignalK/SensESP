@@ -1,0 +1,32 @@
+# ESP-IDF configuration for the espidf environments, which build
+# ESP-IDF from source and therefore honour this file. The arduino and pioarduino
+# environments use precompiled libraries and ignore it entirely.
+#
+# ESP-IDF appends sdkconfig.defaults.<target> (sdkconfig.defaults.esp32c3)
+# after this file on its own, so target-specific keys live there.
+#
+# AUTOSTART_ARDUINO and FREERTOS_HZ=1000 are required by the Arduino core.
+CONFIG_AUTOSTART_ARDUINO=y
+CONFIG_FREERTOS_HZ=1000
+CONFIG_MBEDTLS_PSK_MODES=y
+CONFIG_MBEDTLS_KEY_EXCHANGE_PSK=y
+CONFIG_ESPTOOLPY_FLASHFREQ="80m"
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+CONFIG_ESPTOOLPY_FLASHSIZE="4MB"
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=4096
+CONFIG_ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1=n
+CONFIG_HTTPD_MAX_REQ_HDR_LEN=1024
+
+# Allocate the mbedTLS TX/RX record buffers on demand and free them between
+# operations instead of holding two 16 KB buffers for the whole connection.
+# Without this, mbedtls_ssl_setup fails with MBEDTLS_ERR_SSL_ALLOC_FAILED
+# (-0x7F00) and a TLS Signal K connection never establishes. The precompiled
+# arduino libraries cannot expose this setting.
+CONFIG_MBEDTLS_DYNAMIC_BUFFER=y
+
+# Enable uxTaskGetSystemState so SensESP's /api/info per-task stack report
+# works on the from-source build (it is on by default only in the precompiled
+# arduino libraries).
+CONFIG_FREERTOS_USE_TRACE_FACILITY=y
