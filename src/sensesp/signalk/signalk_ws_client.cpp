@@ -1539,20 +1539,21 @@ void SKWSClient::send_delta() {
   if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
     if (sk_delta_queue_->data_available()) {
       std::vector<String> deltas;
-      sk_delta_queue_->get_deltas(deltas);
-      bool first = true;
+      size_t metadata_delta_count = 0;
+      sk_delta_queue_->get_deltas(deltas, SENSESP_SK_WS_BUFFER_SIZE,
+                                  &metadata_delta_count);
+      size_t delta_index = 0;
       for (const auto& delta : deltas) {
+        const bool carries_metadata = delta_index++ < metadata_delta_count;
         if (sk_delta_exceeds_ws_buffer(delta.length(),
                                        SENSESP_SK_WS_BUFFER_SIZE)) {
-          // Drop the delta to keep the connection alive (signalk_ws_delta_size.h
-          // explains why an oversize delta would otherwise abort it). Unlike the
-          // transient send failure below, an oversize delta is deterministic, so
-          // do NOT re-arm metadata here: get_deltas() already bundles metadata
-          // into the first delta and marks it sent, and re-arming would have
-          // get_deltas() rebuild the same oversize first delta every cycle --
-          // dropped and re-armed forever, never delivered. Leaving it sent lets
-          // the next, metadata-free first delta fit and flow; metadata waits for
-          // a reconnect or a larger SENSESP_SK_WS_BUFFER_SIZE.
+          // get_deltas() splits a batch to stay within the buffer, so the only
+          // delta that can arrive here is one carrying a single value longer
+          // than the buffer, which no split can help. Drop it to keep the
+          // connection alive (signalk_ws_delta_size.h explains why an oversize
+          // delta would otherwise abort it). Do NOT re-arm metadata here: it
+          // is deterministic, so re-arming would rebuild the same oversize
+          // delta every cycle -- dropped and re-armed forever.
           uint32_t now = millis();
           if (last_oversize_log_ms_ == 0 ||
               now - last_oversize_log_ms_ >= kOversizeDropLogIntervalMs) {
@@ -1563,7 +1564,6 @@ void SKWSClient::send_delta() {
                      (unsigned)SENSESP_SK_WS_BUFFER_SIZE);
             last_oversize_log_ms_ = now;
           }
-          first = false;
           continue;
         }
         int send_result = esp_websocket_client_send_text(
@@ -1575,12 +1575,13 @@ void SKWSClient::send_delta() {
           // internally -- its disconnect/error event drives reconnect. Never
           // block or tear the connection down from here. Deltas are
           // supersedable, so drop the rest of this batch. See SignalK/SensESP#1033.
-          if (first) {
-            // get_deltas() builds one-shot metadata (units, zones, ...) into the
-            // first delta and marks it sent before it leaves the device. The
-            // first delta is the only one that can carry that metadata, so if its
-            // send is the one that fails, re-arm metadata for the next batch --
-            // otherwise the server runs without it until the next reconnect.
+          if (carries_metadata) {
+            // get_deltas() puts the one-shot metadata (units, zones, ...) in
+            // the leading deltas of a batch and marks it sent before it leaves
+            // the device. Metadata can span several deltas, and a failure
+            // drops the rest of the batch, so re-arm whenever the delta that
+            // failed was one of them -- otherwise the server runs without that
+            // metadata until the next reconnect.
             sk_delta_queue_->reset_meta_send();
           }
           ESP_LOGW(__FILENAME__,
@@ -1589,7 +1590,6 @@ void SKWSClient::send_delta() {
           break;
         }
         this->delta_tx_tick_producer_.set(1);
-        first = false;
       }
     }
   }

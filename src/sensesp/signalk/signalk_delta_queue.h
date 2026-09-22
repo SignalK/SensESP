@@ -21,7 +21,21 @@ class SKDeltaQueue {
   void append(const String& val);
   bool data_available();
   void get_delta(String& output);
-  void get_deltas(std::vector<String>& output);
+
+  /**
+   * @brief Drain the queue into one or more deltas.
+   *
+   * @param output Receives the deltas, oldest values first.
+   * @param max_delta_size Longest delta the transport accepts, in bytes; the
+   * batch is split across as many deltas as it takes to stay within it. 0
+   * means no limit. A single value longer than this cannot be split and is
+   * emitted in a delta of its own.
+   * @param metadata_delta_count Receives the number of leading deltas that
+   * carry one-shot metadata. A caller that fails to send one of them must call
+   * reset_meta_send(), or that metadata is lost until the next reconnect.
+   */
+  void get_deltas(std::vector<String>& output, size_t max_delta_size = 0,
+                  size_t* metadata_delta_count = nullptr);
 
   void connect_emitters();
 
@@ -41,9 +55,6 @@ class SKDeltaQueue {
   std::list<String> buffer{};
   bool meta_sent_;
 
-  unsigned int get_doc_size_estimate();
-  unsigned int get_metadata_size_estimate();
-
   std::size_t get_buffer_size() {
     std::size_t size;
     take_semaphore();
@@ -52,8 +63,13 @@ class SKDeltaQueue {
     return size;
   }
 
-  // Adds Signal K meta data to the specified document
-  void add_metadata(JsonArray updates);
+  // Builds the deltas for one context's values, splitting on max_delta_size.
+  void emit_deltas(const String& context,
+                   const std::vector<const String*>& items,
+                   size_t max_delta_size, std::vector<String>& output);
+
+  // Builds the one-shot metadata deltas, splitting on max_delta_size.
+  void emit_metadata_deltas(size_t max_delta_size, std::vector<String>& output);
 
   StaticSemaphore_t semaphore_buffer_;
   SemaphoreHandle_t semaphore_ = NULL;
