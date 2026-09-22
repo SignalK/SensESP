@@ -85,7 +85,6 @@ void test_batch_splits_and_keeps_every_value() {
   }
 }
 
-// A budget that fits the whole batch produces exactly one delta, as before.
 void test_batch_within_budget_stays_one_delta() {
   SensESPMinimalAppBuilder builder;
   auto app = builder.get_app();
@@ -102,7 +101,6 @@ void test_batch_within_budget_stays_one_delta() {
   TEST_ASSERT_EQUAL_UINT(3, collect_paths(deltas).size());
 }
 
-// No budget means no splitting.
 void test_zero_budget_does_not_split() {
   SensESPMinimalAppBuilder builder;
   auto app = builder.get_app();

@@ -18,7 +18,6 @@
 
 using namespace sensesp;
 
-// The envelope is there before any item is added.
 void test_empty_packer_holds_the_envelope(void) {
   SKDeltaPacker packer(40, 1024);
   TEST_ASSERT_EQUAL_UINT(0, packer.item_count());
@@ -49,7 +48,6 @@ void test_exactly_the_budget_fits(void) {
   TEST_ASSERT_EQUAL_UINT(100, packer.length());
 }
 
-// One byte over the budget belongs in the next delta.
 void test_one_byte_over_the_budget_does_not_fit(void) {
   SKDeltaPacker packer(40, 100);
   TEST_ASSERT_FALSE(packer.fits(61));
@@ -74,14 +72,12 @@ void test_item_larger_than_the_budget_never_fits(void) {
   TEST_ASSERT_TRUE(packer.is_empty());
 }
 
-// Budget 0 means no limit: everything fits.
 void test_zero_budget_means_unlimited(void) {
   SKDeltaPacker packer(40, 0);
   packer.add(100000);
   TEST_ASSERT_TRUE(packer.fits(100000));
 }
 
-// reset() starts the next delta from the envelope again.
 void test_reset_starts_the_next_delta(void) {
   SKDeltaPacker packer(40, 1024);
   packer.add(60);

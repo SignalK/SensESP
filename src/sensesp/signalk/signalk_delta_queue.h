@@ -30,8 +30,12 @@ class SKDeltaQueue {
    * batch is split across as many deltas as it takes to stay within it. 0
    * means no limit. A single value longer than this cannot be split and is
    * emitted in a delta of its own.
+   * @param metadata_delta_count Receives the number of leading deltas that
+   * carry one-shot metadata. A caller that fails to send one of them must call
+   * reset_meta_send(), or that metadata is lost until the next reconnect.
    */
-  void get_deltas(std::vector<String>& output, size_t max_delta_size = 0);
+  void get_deltas(std::vector<String>& output, size_t max_delta_size = 0,
+                  size_t* metadata_delta_count = nullptr);
 
   void connect_emitters();
 

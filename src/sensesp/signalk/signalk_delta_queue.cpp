@@ -162,10 +162,8 @@ void SKDeltaQueue::emit_deltas(const String& context,
 
 void SKDeltaQueue::emit_metadata_deltas(size_t max_delta_size,
                                         std::vector<String>& output) {
-  // One serialized entry per emitter, so metadata splits the same way values
-  // do. Before this, all of it went into the first delta, which is the delta
-  // most likely to be over budget -- and it was marked sent either way, so a
-  // device in that state ran without metadata until the next reconnect.
+  // One serialized entry per emitter, so metadata packs against the budget
+  // the same way values do.
   std::vector<String> entries;
   for (auto const& sk_source : SKEmitter::get_sources()) {
     JsonDocument doc;
@@ -197,15 +195,20 @@ void SKDeltaQueue::emit_metadata_deltas(size_t max_delta_size,
 }
 
 void SKDeltaQueue::get_deltas(std::vector<String>& output,
-                              size_t max_delta_size) {
+                              size_t max_delta_size,
+                              size_t* metadata_delta_count) {
   // Drain the buffer under the semaphore
   std::list<String> items;
   take_semaphore();
   items.swap(buffer);
   release_semaphore();
 
+  const size_t output_size_before_metadata = output.size();
   if (!meta_sent_) {
     emit_metadata_deltas(max_delta_size, output);
+  }
+  if (metadata_delta_count != nullptr) {
+    *metadata_delta_count = output.size() - output_size_before_metadata;
   }
 
   // Fast path: if no item contains a context key, skip the grouping logic.
