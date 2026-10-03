@@ -36,24 +36,43 @@ class Debounce : public SymmetricTransform<T> {
     this->load();
   }
 
-  virtual void set(const T& input) override {
-    // Input has changed since the last emit, or this is the first
-    // input since the program started to run.
-
-    if (input != debounced_value_ || !value_received_) {
-      debounced_value_ = input;
-
-      if (event_) {
+  virtual ~Debounce() {
+    if (event_) {
         event_->remove(event_loop());
         event_ = nullptr;
-      }
-      event_ = event_loop()->onDelay(ms_min_delay_, [this, input]() {
-        this->event_ = nullptr;
-        this->debounced_value_ = input;
-        this->emit(input);
-      });
-      value_received_ = true;
     }
+  }
+
+  virtual void set(const T& input) override {
+    if (!value_received_) {
+      debounced_value_ = input;
+      value_received_ = true;
+      this->emit(debounced_value_);
+      return;
+    }
+
+    if (input == debounced_value_) {
+        if (event_) {
+            event_->remove(event_loop());
+            event_ = nullptr;
+        }
+        return;
+    }
+
+    if (event_ && input == pending_value_) {
+        return;
+    }
+
+    pending_value_ = input;
+    if (event_) {
+        event_->remove(event_loop());
+        event_ = nullptr;
+    }
+    event_ = event_loop()->onDelay(ms_min_delay_, [this]() {
+        event_ = nullptr;
+        debounced_value_ = pending_value_;
+        this->emit(debounced_value_);
+    });
   }
 
   virtual bool to_json(JsonObject& doc) override {
@@ -76,6 +95,7 @@ class Debounce : public SymmetricTransform<T> {
   int ms_min_delay_;
   bool value_received_ = false;
   T debounced_value_;
+  T pending_value_;
   reactesp::DelayEvent* event_ = nullptr;
 };
 
