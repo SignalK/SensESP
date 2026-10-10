@@ -1,4 +1,73 @@
-# SensESP
+# Signal K Outlook Guardian
+
+The Outlook Guardian is a talking alarm annunciator for boats: an ESP32-S3 device that listens for vessel alarms and reads them out loud.
+
+* Speaks the message of every [Signal K](https://signalk.org) notification that is raised
+* Falls back to the NMEA 2000 alert messages (PGN 126983 and 126985) when the Signal K server is not connected
+* Shows the severity of the alarm on the on-board RGB LED
+* Two push buttons acknowledge and snooze the alarms, and tell the Signal K server so
+* Six languages (US and UK English, Italian, German, Spanish, French) with a choice of voice, speed and volume in the web interface
+* Speech is synthesized on the device with PicoTTS and played through a MAX98357A I2S amplifier; no internet connection is needed
+
+It is built with SensESP, and this repository is a fork of [SignalK/SensESP](https://github.com/SignalK/SensESP) that adds the application and the drivers it needs.
+
+## Hardware
+
+* ESP32-S3-DevKitC-1 N16R8 (16 MB flash, 8 MB PSRAM)
+* MAX98357A I2S amplifier and a speaker
+* 3.3 V CAN transceiver for the NMEA 2000 bus
+* Two push buttons
+
+| Function | GPIO |
+|----------|------|
+| Amplifier LRC / BCLK / DIN | 4 / 5 / 6 |
+| CAN TX / RX | 17 / 18 |
+| Acknowledge button | 15 |
+| Snooze button | 16 |
+| RGB LED | 48 |
+
+## Building and flashing
+
+```sh
+git clone --recursive https://github.com/OpenFairWind/S3-Outlook-Guardian.git
+cd S3-Outlook-Guardian
+pio run -e pioarduino_esp32s3 -t upload
+```
+
+The firmware is updated over USB. Over-the-air updates are not available, because the firmware with all six languages is too large to fit twice in the flash.
+
+## Using it
+
+On the first start the device opens a WiFi access point called `outlook-guardian` for entering the boat's WiFi settings.
+Approve its access request on the Signal K server with read/write permission, then open `http://outlook-guardian.local/` and choose the language and voice under *Speech and alarms*.
+
+| LED | Meaning |
+|-----|---------|
+| Off | No alarm |
+| Blue | Alert or caution |
+| Yellow | Warning |
+| Red | Alarm |
+| Red, blinking fast | Emergency |
+
+The LED blinks until the alarms have been acknowledged or snoozed.
+
+## Outlook Guardian documentation
+
+The full documentation is in [`docs/pages/outlook_guardian`](docs/pages/outlook_guardian/index.md):
+
+* [Hardware](docs/pages/outlook_guardian/hardware.md) - parts, wiring and pin assignments
+* [Building and flashing](docs/pages/outlook_guardian/building.md)
+* [Using the device](docs/pages/outlook_guardian/usage.md) - settings, LED and buttons
+* [Alarm sources](docs/pages/outlook_guardian/alarm_sources.md) - how Signal K notifications and NMEA 2000 alerts are handled
+* [Development notes](docs/pages/outlook_guardian/development.md) - code structure, languages and flash layout
+
+## Status
+
+The firmware builds, flashes and starts on the board. The audio output, the handling of live Signal K notifications and the reception of NMEA 2000 alerts have not yet been tested against real equipment.
+
+# About SensESP
+
+The rest of this file is the README of SensESP, the framework this project is built on.
 
 ## Introduction
 

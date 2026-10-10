@@ -186,7 +186,7 @@ class SensESPApp : public SensESPBaseApp {
     return this;
   }
   const SensESPApp* set_system_status_led(
-      std::shared_ptr<SystemStatusLed>& system_status_led) {
+      std::shared_ptr<BaseSystemStatusLed> system_status_led) {
     this->system_status_led_ = system_status_led;
     return this;
   }

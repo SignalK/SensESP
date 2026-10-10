@@ -203,7 +203,7 @@ class SensESPAppBuilder : public SensESPBaseAppBuilder {
    * @return SensESPAppBuilder*
    */
   SensESPAppBuilder* set_system_status_led(
-      std::shared_ptr<SystemStatusLed> system_status_led) {
+      std::shared_ptr<BaseSystemStatusLed> system_status_led) {
     app_->set_system_status_led(system_status_led);
     return this;
   }
