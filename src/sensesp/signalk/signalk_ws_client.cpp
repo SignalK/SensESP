@@ -40,6 +40,10 @@ constexpr TickType_t kWsSendTimeoutTicks = pdMS_TO_TICKS(5000);
 // the event loop). 0 = enqueue if the ws-client lock and transport are free
 // right now, otherwise fail fast. Deltas are supersedable. See SignalK/SensESP#1033.
 constexpr TickType_t kWsDeltaSendTimeoutTicks = 0;
+// After a self-stop, the IDF 4.4 client task still closes its transport (a
+// TLS close_notify on wss) and sets STOPPED_BIT in the event group destroy()
+// frees.
+constexpr TickType_t kWsSelfStoppedTaskGraceTicks = pdMS_TO_TICKS(1000);
 // A device that keeps producing a delta larger than the buffer would drop one
 // every send cycle; rate-limit the warning so it does not flood the log.
 constexpr uint32_t kOversizeDropLogIntervalMs = 10000;
@@ -337,6 +341,9 @@ static void websocket_event_handler(void* handler_args,
       ws_client->on_connected();
       break;
     case WEBSOCKET_EVENT_DISCONNECTED:
+    // A close frame from the server ends the client task with CLOSED and no
+    // DISCONNECTED event, and the client does not reconnect by itself.
+    case WEBSOCKET_EVENT_CLOSED:
       ws_client->on_disconnected();
       break;
     case WEBSOCKET_EVENT_DATA:
@@ -1486,7 +1493,12 @@ void SKWSClient::teardown_task(void* arg) {
   // Blocking: esp_websocket_client_stop() waits for the client's task to exit
   // (up to one ~1 s poll cycle), destroy() frees its buffers. Run here, on a
   // throwaway task, so it never blocks the connect/event-loop context.
-  esp_websocket_client_stop(a->handle);
+  if (esp_websocket_client_stop(a->handle) == ESP_FAIL) {
+    // The client task stopped on its own after a server close frame. The IDF
+    // 4.4 client reports that as soon as it dispatches CLOSED, before the task
+    // has closed its transport; let it finish before its resources are freed.
+    vTaskDelay(kWsSelfStoppedTaskGraceTicks);
+  }
   esp_websocket_client_destroy(a->handle);
   a->self->teardown_in_progress_.store(false);
   delete a;
@@ -1537,6 +1549,15 @@ void SKWSClient::restart() {
 
 void SKWSClient::send_delta() {
   if (get_connection_state() == SKWSConnectionState::kSKWSConnected) {
+    // A server close frame moves the client out of CONNECTED at once, before
+    // it dispatches CLOSED, and the IDF 4.4 client dispatches no event at all
+    // when the server's TCP close follows late. Without this check the state
+    // could stay Connected and never reconnect.
+    if (!esp_websocket_client_is_connected(client_.load())) {
+      ESP_LOGW(__FILENAME__, "WebSocket client is no longer connected");
+      set_connection_state(SKWSConnectionState::kSKWSDisconnected);
+      return;
+    }
     if (sk_delta_queue_->data_available()) {
       std::vector<String> deltas;
       sk_delta_queue_->get_deltas(deltas);
