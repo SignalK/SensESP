@@ -13,6 +13,7 @@
 #include <set>
 
 #include "sensesp/signalk/signalk_delta_queue.h"
+#include "sensesp/signalk/signalk_ws_connect_due.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/task_queue_producer.h"
 #include "sensesp/system/valueproducer.h"
@@ -144,7 +145,9 @@ class SKWSClient : public FileSystemSaveable,
   /// worker's client_.store(h) and orphan a live client (leak + dropped events).
   /// Has no callers today. See #1033.
   void restart();
-  bool is_connect_due() const { return millis() >= next_attempt_ms_; }
+  bool is_connect_due() const {
+    return sk_connect_due(millis(), last_attempt_ms_, attempt_wait_ms_);
+  }
   void send_delta();
 
   /**
@@ -336,7 +339,8 @@ class SKWSClient : public FileSystemSaveable,
   String polling_href_ = "";
   String auth_token_ = NULL_AUTH_TOKEN;
 
-  unsigned long next_attempt_ms_ = 0;
+  unsigned long last_attempt_ms_ = 0;
+  unsigned long attempt_wait_ms_ = 0;
   unsigned long connect_interval_ms_ = 2000;
 
   // SSL/TLS configuration
@@ -525,8 +529,9 @@ class SKWSClient : public FileSystemSaveable,
   SKWSConnectionState get_connection_state() { return task_connection_state_; }
 
   void schedule_reconnect() {
-    next_attempt_ms_ = millis() + connect_interval_ms_ +
-                       (esp_random() % (connect_interval_ms_ / 4 + 1));
+    last_attempt_ms_ = millis();
+    attempt_wait_ms_ =
+        connect_interval_ms_ + (esp_random() % (connect_interval_ms_ / 4 + 1));
     connect_interval_ms_ =
         std::min(connect_interval_ms_ * 2, (unsigned long)60000);
   }
