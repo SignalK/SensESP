@@ -349,8 +349,12 @@ static void websocket_event_handler(void* handler_args,
     case WEBSOCKET_EVENT_DATA:
       // Only process text frames (opcode 0x1) and continuation frames (0x0).
       // Control frames (ping/pong/close: 0x8-0xA) have no JSON payload.
+      // A message larger than the receive buffer, or one TCP split, arrives
+      // as several of these: on_receive_data() puts it back together.
       if (data->op_code <= 0x2) {
-        ws_client->on_receive_delta((uint8_t*)data->data_ptr, data->data_len);
+        ws_client->on_receive_data(data->op_code, data->fin, data->payload_len,
+                                   data->payload_offset, data->data_ptr,
+                                   data->data_len);
       }
       break;
     case WEBSOCKET_EVENT_ERROR:
@@ -462,6 +466,8 @@ void SKWSClient::on_error(int handshake_status) {
  * Called in the websocket task context.
  */
 void SKWSClient::on_connected() {
+  // A message cut short by the previous connection is gone.
+  this->rx_assembler_.reset();
   // The connection is fully established and the server proved possession of its
   // certificate's private key, so it is safe to persist any anchor stashed
   // during this attempt's handshake (first-use capture).
@@ -534,6 +540,36 @@ void SKWSClient::subscribe_listeners() {
 }
 
 /**
+ * @brief Called with each piece of a received message (one
+ * WEBSOCKET_EVENT_DATA); hands the message to on_receive_delta() once it is
+ * whole.
+ *
+ * Called in the websocket task context.
+ */
+void SKWSClient::on_receive_data(uint8_t op_code, bool fin, int payload_len,
+                                 int payload_offset, const char* data,
+                                 int data_len) {
+  switch (rx_assembler_.add(op_code, fin, payload_len, payload_offset, data,
+                            data_len)) {
+    case SKWSMessageAssembler::Result::kComplete: {
+      const std::string& message = rx_assembler_.message();
+      on_receive_delta(
+          reinterpret_cast<uint8_t*>(const_cast<char*>(message.data())),
+          message.size());
+      break;
+    }
+    case SKWSMessageAssembler::Result::kDropped:
+      ESP_LOGW(__FILENAME__,
+               "WebSocket message dropped (larger than %u bytes, or a piece "
+               "missing)",
+               (unsigned)SENSESP_SK_WS_MAX_MESSAGE_SIZE);
+      break;
+    default:
+      break;
+  }
+}
+
+/**
  * @brief Called when the websocket receives a delta.
  *
  * Called in the websocket task context.
@@ -542,7 +578,7 @@ void SKWSClient::subscribe_listeners() {
  */
 void SKWSClient::on_receive_delta(uint8_t* payload, size_t length) {
   // Need to work on null-terminated strings
-  constexpr size_t kMaxWsMessageSize = 4096;
+  constexpr size_t kMaxWsMessageSize = SENSESP_SK_WS_MAX_MESSAGE_SIZE;
   if (length > kMaxWsMessageSize) {
     ESP_LOGW(__FILENAME__, "WebSocket message too large (%u bytes), dropping",
              (unsigned)length);

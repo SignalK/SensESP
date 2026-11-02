@@ -14,6 +14,7 @@
 
 #include "sensesp/signalk/signalk_delta_queue.h"
 #include "sensesp/signalk/signalk_ws_connect_due.h"
+#include "sensesp/signalk/signalk_ws_message_assembler.h"
 #include "sensesp/system/observablevalue.h"
 #include "sensesp/system/task_queue_producer.h"
 #include "sensesp/system/valueproducer.h"
@@ -45,6 +46,15 @@
 // boards.
 #ifndef SENSESP_SK_WS_BUFFER_SIZE
 #define SENSESP_SK_WS_BUFFER_SIZE 1024
+#endif
+
+// Largest received WebSocket message, in bytes. esp_websocket_client delivers
+// a message larger than SENSESP_SK_WS_BUFFER_SIZE (or one TCP splits) in
+// pieces; they are put back together up to this size before parsing (see
+// signalk_ws_message_assembler.h), and a larger message is dropped with a log
+// line. Override per board via build_flags.
+#ifndef SENSESP_SK_WS_MAX_MESSAGE_SIZE
+#define SENSESP_SK_WS_MAX_MESSAGE_SIZE 4096
 #endif
 
 namespace sensesp {
@@ -130,6 +140,9 @@ class SKWSClient : public FileSystemSaveable,
   // applicable); a 401 means the auth token was rejected.
   void on_error(int handshake_status);
   void on_connected();
+  // One WEBSOCKET_EVENT_DATA piece; parses the message once it is whole.
+  void on_receive_data(uint8_t op_code, bool fin, int payload_len,
+                       int payload_offset, const char* data, int data_len);
   void on_receive_delta(uint8_t* payload, size_t length);
   void on_receive_updates(JsonDocument& message);
   void on_receive_put(JsonDocument& message);
@@ -430,6 +443,10 @@ class SKWSClient : public FileSystemSaveable,
   /// rate-limit it when a device keeps producing a delta larger than the buffer.
   /// 0 = never logged, so the next drop logs immediately.
   uint32_t last_oversize_log_ms_ = 0;
+
+  /// @brief The pieces of the message being received. Only the websocket task
+  /// touches it (on_receive_data, on_connected).
+  SKWSMessageAssembler rx_assembler_{SENSESP_SK_WS_MAX_MESSAGE_SIZE};
 
   /// @brief A single received delta entry awaiting dispatch on the main task.
   ///
