@@ -20,16 +20,20 @@ namespace ws_detail {
 // Detects a `fin` member, so the build adapts to the client it is given
 // rather than guessing from a version number. C++11: the Arduino platform
 // builds with gnu++11, so no std::void_t or if constexpr.
+/// False unless T has a `fin` member (the specialisation below).
 template <typename T, typename = void>
 struct HasFin : std::false_type {};
+/// Chosen only when `event.fin` is a valid expression for T.
 template <typename T>
 struct HasFin<T, decltype(void(std::declval<const T&>().fin))>
     : std::true_type {};
 
+/// The client reports fin: say whether more frames follow.
 template <typename Event>
 WSFrameEnd frame_end(const Event& event, std::true_type) {
   return event.fin ? WSFrameEnd::kLast : WSFrameEnd::kMore;
 }
+/// The client has no fin flag; never instantiates `event.fin`.
 template <typename Event>
 WSFrameEnd frame_end(const Event&, std::false_type) {
   return WSFrameEnd::kUnknown;
@@ -59,8 +63,10 @@ WSFrameEnd ws_frame_end(const Event& event) {
  */
 class JsonEndScanner {
  public:
+  /// Start on a new message.
   void reset() { *this = JsonEndScanner{}; }
 
+  /// Read the next `len` bytes of the message; stops reading once it closes.
   void feed(const char* data, size_t len) {
     for (size_t i = 0; i < len && !closed_; i++) {
       const char c = data[i];
@@ -238,6 +244,7 @@ class SKWSMessageAssembler {
     json_end_.reset();
   }
 
+  /// Give up what is held (it can no longer be whole) and report it lost.
   Result lose() {
     start_over();
     return Result::kDropped;
