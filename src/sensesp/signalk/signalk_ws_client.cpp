@@ -5,7 +5,6 @@
 #include <ArduinoJson.h>
 #include <ESPmDNS.h>
 #include <esp_http_client.h>
-#include <esp_idf_version.h>
 
 #include <map>
 
@@ -325,22 +324,6 @@ static esp_err_t tofu_crt_bundle_attach(void* conf) {
 }
 #endif  // SENSESP_SSL_SUPPORT
 
-// Whether this WEBSOCKET_EVENT_DATA's frame is the last of its message. The
-// client bundled with ESP-IDF 4.4 (espressif32 Arduino platform) reports no fin
-// flag, so there each frame is taken as a whole message: a frame split across
-// events is still joined, but a message the server fragments into several
-// frames is lost (Signal K servers send each message as one frame). ESP-IDF 5
-// has no bundled client; the esp_websocket_client component used there has
-// reported fin since 1.0.0.
-static inline bool ws_event_fin(const esp_websocket_event_data_t* data) {
-#if ESP_IDF_VERSION_MAJOR >= 5
-  return data->fin;
-#else
-  (void)data;
-  return true;
-#endif
-}
-
 static void websocket_event_handler(void* handler_args,
                                     esp_event_base_t base,
                                     int32_t event_id, void* event_data) {
@@ -368,8 +351,9 @@ static void websocket_event_handler(void* handler_args,
       // Control frames (ping/pong/close: 0x8-0xA) have no JSON payload.
       // A message larger than the receive buffer, or one TCP split, arrives
       // as several of these: on_receive_data() puts it back together.
+      // ws_frame_end() reads the fin flag where the client has one.
       if (data->op_code <= 0x2) {
-        ws_client->on_receive_data(data->op_code, ws_event_fin(data),
+        ws_client->on_receive_data(data->op_code, ws_frame_end(*data),
                                    data->payload_len, data->payload_offset,
                                    data->data_ptr, data->data_len);
       }
@@ -563,11 +547,11 @@ void SKWSClient::subscribe_listeners() {
  *
  * Called in the websocket task context.
  */
-void SKWSClient::on_receive_data(uint8_t op_code, bool fin, int payload_len,
-                                 int payload_offset, const char* data,
-                                 int data_len) {
-  switch (rx_assembler_.add(op_code, fin, payload_len, payload_offset, data,
-                            data_len)) {
+void SKWSClient::on_receive_data(uint8_t op_code, WSFrameEnd frame_end,
+                                 int payload_len, int payload_offset,
+                                 const char* data, int data_len) {
+  switch (rx_assembler_.add(op_code, frame_end, payload_len, payload_offset,
+                            data, data_len)) {
     case SKWSMessageAssembler::Result::kComplete: {
       const std::string& message = rx_assembler_.message();
       on_receive_delta(

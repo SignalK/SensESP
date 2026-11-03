@@ -141,7 +141,7 @@ class SKWSClient : public FileSystemSaveable,
   void on_error(int handshake_status);
   void on_connected();
   // One WEBSOCKET_EVENT_DATA piece; parses the message once it is whole.
-  void on_receive_data(uint8_t op_code, bool fin, int payload_len,
+  void on_receive_data(uint8_t op_code, WSFrameEnd frame_end, int payload_len,
                        int payload_offset, const char* data, int data_len);
   void on_receive_delta(uint8_t* payload, size_t length);
   void on_receive_updates(JsonDocument& message);

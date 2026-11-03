@@ -10,10 +10,9 @@
  *   pio test -e native -f native/test_ws_message_assembler
  */
 
-#include <unity.h>
-
 #include <algorithm>
 #include <string>
+#include <unity.h>
 
 #include "sensesp/signalk/signalk_ws_message_assembler.h"
 
@@ -26,20 +25,43 @@ constexpr uint8_t kText = 0x1;
 constexpr uint8_t kCont = 0x0;
 constexpr uint8_t kPing = 0x9;
 
+constexpr WSFrameEnd kUnknown = WSFrameEnd::kUnknown;
+
 // Feeds `frame` as one frame in pieces of at most `piece` bytes, as the
 // client does with a receive buffer of that size. Returns the last result.
-Result feed(SKWSMessageAssembler& a, uint8_t op, bool fin,
+Result feed(SKWSMessageAssembler& a, uint8_t op, WSFrameEnd end,
             const std::string& frame, size_t piece = 1024) {
   Result r = Result::kPartial;
   size_t offset = 0;
   do {
     const size_t n = std::min(piece, frame.size() - offset);
-    r = a.add(op, fin, static_cast<int>(frame.size()),
-              static_cast<int>(offset), frame.data() + offset,
-              static_cast<int>(n));
+    r = a.add(op, end, static_cast<int>(frame.size()), static_cast<int>(offset),
+              frame.data() + offset, static_cast<int>(n));
     offset += n;
   } while (offset < frame.size());
   return r;
+}
+
+Result feed(SKWSMessageAssembler& a, uint8_t op, bool fin,
+            const std::string& frame, size_t piece = 1024) {
+  return feed(a, op, fin ? WSFrameEnd::kLast : WSFrameEnd::kMore, frame, piece);
+}
+
+// Stand-ins for esp_websocket_event_data_t with and without a fin member.
+struct EventWithFin {
+  bool fin;
+  uint8_t op_code;
+};
+struct EventWithoutFin {  // ESP-IDF 4.4's bundled client
+  uint8_t op_code;
+};
+
+bool scans_complete(const std::string& text, size_t piece = 1) {
+  JsonEndScanner s;
+  for (size_t i = 0; i < text.size(); i += piece) {
+    s.feed(text.data() + i, std::min(piece, text.size() - i));
+  }
+  return s.complete();
 }
 
 // A delta-shaped JSON text of about `size` bytes.
@@ -68,9 +90,8 @@ void test_frame_larger_than_the_buffer_is_joined(void) {
   Result r = Result::kPartial;
   while (offset < m.size()) {
     const size_t n = std::min<size_t>(1024, m.size() - offset);
-    r = a.add(kText, true, static_cast<int>(m.size()),
-              static_cast<int>(offset), m.data() + offset,
-              static_cast<int>(n));
+    r = a.add(kText, true, static_cast<int>(m.size()), static_cast<int>(offset),
+              m.data() + offset, static_cast<int>(n));
     offset += n;
     pieces++;
     if (offset < m.size()) TEST_ASSERT_TRUE(r == Result::kPartial);
@@ -122,10 +143,9 @@ void test_too_large_a_message_is_dropped_once(void) {
   int dropped = 0;
   while (offset < big.size()) {
     const size_t n = std::min<size_t>(1024, big.size() - offset);
-    const Result r =
-        a.add(kText, true, static_cast<int>(big.size()),
-              static_cast<int>(offset), big.data() + offset,
-              static_cast<int>(n));
+    const Result r = a.add(kText, true, static_cast<int>(big.size()),
+                           static_cast<int>(offset), big.data() + offset,
+                           static_cast<int>(n));
     if (r == Result::kDropped) dropped++;
     TEST_ASSERT_TRUE(r != Result::kComplete);
     offset += n;
@@ -149,8 +169,8 @@ void test_a_piece_out_of_place_loses_only_that_message(void) {
   const int len = static_cast<int>(m.size());
   TEST_ASSERT_TRUE(a.add(kText, true, len, 0, m.data(), 1024) ==
                    Result::kPartial);
-  TEST_ASSERT_TRUE(a.add(kText, true, len, 2048, m.data() + 2048,
-                         len - 2048) == Result::kDropped);
+  TEST_ASSERT_TRUE(a.add(kText, true, len, 2048, m.data() + 2048, len - 2048) ==
+                   Result::kDropped);
   TEST_ASSERT_TRUE(feed(a, kText, true, next) == Result::kComplete);
   TEST_ASSERT_EQUAL_STRING(next.c_str(), a.message().c_str());
 }
@@ -211,6 +231,82 @@ void test_bad_arguments_are_dropped(void) {
   TEST_ASSERT_TRUE(feed(a, kText, true, "{}") == Result::kComplete);
 }
 
+// The fin flag is read where the client's event has one, and only there.
+void test_frame_end_follows_the_event_struct(void) {
+  TEST_ASSERT_TRUE(ws_frame_end(EventWithFin{true, kText}) ==
+                   WSFrameEnd::kLast);
+  TEST_ASSERT_TRUE(ws_frame_end(EventWithFin{false, kText}) ==
+                   WSFrameEnd::kMore);
+  TEST_ASSERT_TRUE(ws_frame_end(EventWithoutFin{kText}) == kUnknown);
+}
+
+void test_json_end_scanner(void) {
+  TEST_ASSERT_TRUE(scans_complete("{\"a\":[1,{\"b\":2}]}"));
+  TEST_ASSERT_FALSE(scans_complete("{\"a\":[1,{\"b\":2}]"));
+  TEST_ASSERT_TRUE(scans_complete("  \r\n[1,2]\n"));
+  TEST_ASSERT_FALSE(scans_complete(""));
+  TEST_ASSERT_FALSE(scans_complete(" \n"));
+  // Brackets and quotes inside strings do not count, split anywhere.
+  const std::string tricky = "{\"p\":\"}]{[\\\"\\\\\",\"q\":\"x\\\\\"}";
+  for (size_t piece = 1; piece <= tricky.size(); piece++) {
+    TEST_ASSERT_TRUE(scans_complete(tricky, piece));
+    TEST_ASSERT_FALSE(
+        scans_complete(tricky.substr(0, tricky.size() - 1), piece));
+  }
+  TEST_ASSERT_TRUE(scans_complete("42"));
+  TEST_ASSERT_FALSE(scans_complete("\"open"));
+  TEST_ASSERT_TRUE(scans_complete("\"closed\""));
+}
+
+// Without fin: a whole message in one frame, read in pieces, is complete.
+void test_unknown_fin_single_frame(void) {
+  SKWSMessageAssembler a(4096);
+  const std::string m = delta(2500);
+  TEST_ASSERT_TRUE(feed(a, kText, kUnknown, m) == Result::kComplete);
+  TEST_ASSERT_EQUAL_STRING(m.c_str(), a.message().c_str());
+}
+
+// Without fin: a message the server fragmented waits for its last frame.
+void test_unknown_fin_fragmented_message_is_joined(void) {
+  SKWSMessageAssembler a(4096);
+  const std::string m = delta(3000);
+  TEST_ASSERT_TRUE(feed(a, kText, kUnknown, m.substr(0, 1200)) ==
+                   Result::kPartial);
+  TEST_ASSERT_TRUE(a.add(kPing, kUnknown, 0, 0, nullptr, 0) ==
+                   Result::kIgnored);
+  TEST_ASSERT_TRUE(feed(a, kCont, kUnknown, m.substr(1200, 1000)) ==
+                   Result::kPartial);
+  TEST_ASSERT_TRUE(feed(a, kCont, kUnknown, m.substr(2200)) ==
+                   Result::kComplete);
+  TEST_ASSERT_EQUAL_STRING(m.c_str(), a.message().c_str());
+  TEST_ASSERT_TRUE(feed(a, kText, kUnknown, "{}") == Result::kComplete);
+}
+
+// Without fin: the limit applies to the whole message, and no part of a
+// too-large one is handed on.
+void test_unknown_fin_too_large_fragmented_message(void) {
+  SKWSMessageAssembler a(4096);
+  const std::string big = delta(9000), next = delta(100);
+  TEST_ASSERT_TRUE(feed(a, kText, kUnknown, big.substr(0, 3000)) ==
+                   Result::kPartial);
+  TEST_ASSERT_TRUE(feed(a, kCont, kUnknown, big.substr(3000, 3000)) ==
+                   Result::kPartial);
+  TEST_ASSERT_TRUE(feed(a, kCont, kUnknown, big.substr(6000)) ==
+                   Result::kDropped);
+  TEST_ASSERT_TRUE(feed(a, kText, kUnknown, next) == Result::kComplete);
+  TEST_ASSERT_EQUAL_STRING(next.c_str(), a.message().c_str());
+}
+
+// Without fin: a message that never closes gives way to the next one.
+void test_unknown_fin_unclosed_message_gives_way(void) {
+  SKWSMessageAssembler a(4096);
+  const std::string next = delta(200);
+  TEST_ASSERT_TRUE(feed(a, kText, kUnknown, "{\"updates\":[") ==
+                   Result::kPartial);
+  TEST_ASSERT_TRUE(feed(a, kText, kUnknown, next) == Result::kComplete);
+  TEST_ASSERT_EQUAL_STRING(next.c_str(), a.message().c_str());
+}
+
 void setUp(void) {}
 void tearDown(void) {}
 
@@ -230,5 +326,11 @@ int main(int, char**) {
   RUN_TEST(test_empty_final_fragment_ends_the_message);
   RUN_TEST(test_buffer_is_kept_between_messages);
   RUN_TEST(test_bad_arguments_are_dropped);
+  RUN_TEST(test_frame_end_follows_the_event_struct);
+  RUN_TEST(test_json_end_scanner);
+  RUN_TEST(test_unknown_fin_single_frame);
+  RUN_TEST(test_unknown_fin_fragmented_message_is_joined);
+  RUN_TEST(test_unknown_fin_too_large_fragmented_message);
+  RUN_TEST(test_unknown_fin_unclosed_message_gives_way);
   return UNITY_END();
 }
