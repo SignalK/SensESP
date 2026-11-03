@@ -135,7 +135,6 @@ void test_too_large_a_message_is_dropped_once(void) {
   TEST_ASSERT_EQUAL_STRING(next.c_str(), a.message().c_str());
 }
 
-// A message of exactly the limit is kept.
 void test_message_of_exactly_the_limit_is_kept(void) {
   SKWSMessageAssembler a(4096);
   const std::string m(4096, 'x');
@@ -191,6 +190,19 @@ void test_empty_final_fragment_ends_the_message(void) {
   TEST_ASSERT_EQUAL_STRING(m.c_str(), a.message().c_str());
 }
 
+// Back-to-back large messages reuse the buffer rather than regrow it.
+void test_buffer_is_kept_between_messages(void) {
+  SKWSMessageAssembler a(4096);
+  const std::string m1 = delta(3000), m2 = delta(3500);
+  TEST_ASSERT_TRUE(feed(a, kText, true, m1) == Result::kComplete);
+  const size_t capacity = a.message().capacity();
+  TEST_ASSERT_TRUE(capacity >= m1.size());
+  const int len = static_cast<int>(m2.size());
+  TEST_ASSERT_TRUE(a.add(kText, true, len, 0, m2.data(), 10) ==
+                   Result::kPartial);
+  TEST_ASSERT_EQUAL(capacity, a.message().capacity());
+}
+
 void test_bad_arguments_are_dropped(void) {
   SKWSMessageAssembler a(4096);
   TEST_ASSERT_TRUE(a.add(kText, true, 10, 0, nullptr, 5) == Result::kDropped);
@@ -216,6 +228,7 @@ int main(int, char**) {
   RUN_TEST(test_an_unfinished_message_gives_way_to_a_new_one);
   RUN_TEST(test_reset_forgets_a_message_in_progress);
   RUN_TEST(test_empty_final_fragment_ends_the_message);
+  RUN_TEST(test_buffer_is_kept_between_messages);
   RUN_TEST(test_bad_arguments_are_dropped);
   return UNITY_END();
 }

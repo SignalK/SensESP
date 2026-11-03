@@ -38,14 +38,12 @@ class SKWSMessageAssembler {
 
   /// Forget any message in progress (call on every new connection).
   void reset() {
-    message_.clear();
-    // Hand a buffer grown by a rare large message back to the heap.
+    start_over();
+    // Hand a buffer grown by a rare large message back to the heap. Only
+    // here, not between messages, so a run of large messages reuses it.
     if (message_.capacity() > kKeptCapacity) {
       message_.shrink_to_fit();
     }
-    in_message_ = false;
-    dropping_ = false;
-    frame_pos_ = 0;
   }
 
   /**
@@ -67,7 +65,7 @@ class SKWSMessageAssembler {
       // (giving up an unfinished one before it); a continuation frame
       // carries the current one on.
       if (op_code != 0x0) {
-        reset();
+        start_over();
         in_message_ = true;
       } else if (!in_message_) {
         return Result::kDropped;  // A continuation of nothing we hold
@@ -105,8 +103,16 @@ class SKWSMessageAssembler {
  private:
   static constexpr size_t kKeptCapacity = 2048;
 
+  /// Forget the message in progress, keeping the buffer for the next one.
+  void start_over() {
+    message_.clear();
+    in_message_ = false;
+    dropping_ = false;
+    frame_pos_ = 0;
+  }
+
   Result lose() {
-    reset();
+    start_over();
     return Result::kDropped;
   }
 
