@@ -19,8 +19,14 @@ void Frequency::set(const int& input) {
     return;
   }
   unsigned long const elapsed_millis = cur_millis - last_update_;
+  ticks_ += input;
+  if (elapsed_millis == 0) {
+    return;
+  }
   last_update_ = cur_millis;
-  this->emit(multiplier_ * input / (elapsed_millis / 1000.));
+  const int ticks = ticks_;
+  ticks_ = 0;
+  this->emit(multiplier_ * ticks / (elapsed_millis / 1000.));
 }
 
 bool Frequency::to_json(JsonObject& root) {
