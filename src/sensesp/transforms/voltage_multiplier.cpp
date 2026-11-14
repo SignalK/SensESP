@@ -4,7 +4,9 @@ namespace sensesp {
 
 VoltageMultiplier::VoltageMultiplier(uint16_t R1, uint16_t R2,
                                      const String& config_path)
-    : FloatTransform(config_path), R1_{R1}, R2_{R2} {}
+    : FloatTransform(config_path), R1_{R1}, R2_{R2} {
+  load();
+}
 
 void VoltageMultiplier::set(const float& input) {
   // Ohms Law at work!
