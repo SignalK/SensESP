@@ -162,7 +162,7 @@ void test_air_density_tuple_input() {
   air_density.connect_to(&consumer);
 
   air_density.set(std::make_tuple(303.15f, 0.70f, 101325.0f));
-  TEST_ASSERT_FLOAT_WITHIN(0.0001f, 1.164269f, received);
+  TEST_ASSERT_FLOAT_WITHIN(0.0001f, 1.151490f, received);
 }
 
 void test_dew_point_tuple_input() {
