@@ -36,7 +36,10 @@ class Integrator : public Transform<C, P> {
     this->emit(value);
   }
 
-  void reset() { value = 0; }
+  void reset() {
+    value = 0;
+    this->emit(value);
+  }
 
   virtual bool to_json(JsonObject& doc) override final {
     doc["k"] = k;
