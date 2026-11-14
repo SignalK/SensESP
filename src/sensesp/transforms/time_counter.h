@@ -78,6 +78,9 @@ class TimeCounter : public Transform<T, double> {
     }
 
     duration_ms_ = duration_at_start_ms_;
+    if (initialized_) {
+      start_time_ms_ = millis64();
+    }
     ESP_LOGD(__FILENAME__, "duration_at_start_ms_ = %ld",
              duration_at_start_ms_);
     return true;
