@@ -25,13 +25,14 @@ class JoinBase {
 
  protected:
   elapsedMillis age_[N];
+  bool received_[N] = {};
   long max_age_;
 
   virtual void emit_tuple() = 0;
 
   void check_emit() {
     for (int i = 0; i < N; i++) {
-      if (max_age_ != 0 && age_[i] > max_age_) {
+      if (!received_[i] || (max_age_ != 0 && age_[i] > max_age_)) {
         return;
       }
     }
@@ -56,11 +57,13 @@ class Join : public JoinBase<2>, public ValueProducer<std::tuple<T1, T2>> {
       LambdaConsumer<T1>([this](T1 value) {
         std::get<0>(values) = value;
         age_[0] = 0;
+        received_[0] = true;
         check_emit();
       }),
       LambdaConsumer<T2>([this](T2 value) {
         std::get<1>(values) = value;
         age_[1] = 0;
+        received_[1] = true;
         check_emit();
       })};
 
@@ -86,16 +89,19 @@ class Join3 : public JoinBase<3>, public ValueProducer<std::tuple<T1, T2, T3>> {
       consumers = {LambdaConsumer<T1>([this](T1 value) {
                      std::get<0>(values) = value;
                      age_[0] = 0;
+                     received_[0] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T2>([this](T2 value) {
                      std::get<1>(values) = value;
                      age_[1] = 0;
+                     received_[1] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T3>([this](T3 value) {
                      std::get<2>(values) = value;
                      age_[2] = 0;
+                     received_[2] = true;
                      check_emit();
                    })};
 
@@ -123,21 +129,25 @@ class Join4 : public JoinBase<4>,
       consumers = {LambdaConsumer<T1>([this](T1 value) {
                      std::get<0>(values) = value;
                      age_[0] = 0;
+                     received_[0] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T2>([this](T2 value) {
                      std::get<1>(values) = value;
                      age_[1] = 0;
+                     received_[1] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T3>([this](T3 value) {
                      std::get<2>(values) = value;
                      age_[2] = 0;
+                     received_[2] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T4>([this](T4 value) {
                      std::get<3>(values) = value;
                      age_[3] = 0;
+                     received_[3] = true;
                      check_emit();
                    })};
 
@@ -165,26 +175,31 @@ class Join5 : public JoinBase<5>,
       consumers = {LambdaConsumer<T1>([this](T1 value) {
                      std::get<0>(values) = value;
                      age_[0] = 0;
+                     received_[0] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T2>([this](T2 value) {
                      std::get<1>(values) = value;
                      age_[1] = 0;
+                     received_[1] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T3>([this](T3 value) {
                      std::get<2>(values) = value;
                      age_[2] = 0;
+                     received_[2] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T4>([this](T4 value) {
                      std::get<3>(values) = value;
                      age_[3] = 0;
+                     received_[3] = true;
                      check_emit();
                    }),
                    LambdaConsumer<T5>([this](T5 value) {
                      std::get<4>(values) = value;
                      age_[4] = 0;
+                     received_[4] = true;
                      check_emit();
                    })};
 
