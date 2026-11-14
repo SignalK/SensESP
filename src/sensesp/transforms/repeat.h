@@ -56,7 +56,10 @@ class Repeat : public Transform<FROM, TO> {
 
 // For compatibility with the old RepeatReport class
 template <typename T>
-class RepeatReport : public Repeat<T, T> {};
+class RepeatReport : public Repeat<T, T> {
+ public:
+  using Repeat<T, T>::Repeat;
+};
 
 /**
  * @brief Repeat transform that stops emitting if the value age exceeds
@@ -73,7 +76,7 @@ class RepeatStopping : public Repeat<T, T> {
 
     if (this->repeat_event_ != nullptr) {
       // Delete the old repeat event
-      this->repeat_event_->remove();
+      this->repeat_event_->remove(event_loop());
     }
     this->repeat_event_ = event_loop()->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
@@ -84,7 +87,7 @@ class RepeatStopping : public Repeat<T, T> {
     age_ = 0;
     if (this->repeat_event_ != nullptr) {
       // Delete the old repeat event
-      this->repeat_event_->remove();
+      this->repeat_event_->remove(event_loop());
     }
     this->repeat_event_ = event_loop()->onRepeat(
         this->interval_, [this]() { this->repeat_function(); });
@@ -101,7 +104,7 @@ class RepeatStopping : public Repeat<T, T> {
     } else {
       if (this->repeat_event_ != nullptr) {
         // Delete the old repeat event
-        this->repeat_event_->remove();
+        this->repeat_event_->remove(event_loop());
         this->repeat_event_ = nullptr;
       }
     }
@@ -177,14 +180,14 @@ class RepeatConstantRate : public RepeatExpiring<T> {
       : RepeatExpiring<T>(interval, max_age) {
     if (this->repeat_event_ != nullptr) {
       // Delete the old repeat event
-      this->repeat_event_->remove();
+      this->repeat_event_->remove(event_loop());
     }
 
     this->repeat_event_ =
         event_loop()->onRepeat(interval, [this]() { this->repeat_function(); });
   }
 
-  void set(T input) override {
+  void set(const T& input) override {
     this->output_ = input;
     this->age_ = 0;
   }
