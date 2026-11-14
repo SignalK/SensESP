@@ -10,13 +10,14 @@ ChangeFilter::ChangeFilter(float min_delta, float max_delta, int max_skips,
       min_delta_{min_delta},
       max_delta_{max_delta},
       max_skips_{max_skips},
-      skips_(max_skips_ + 1) {
+      skips_(max_skips_) {
   load();
 }
 
 void ChangeFilter::set(const float& new_value) {
-  float delta = fabsf(new_value - output_);
-  if ((delta >= min_delta_ && delta <= max_delta_) || skips_ > max_skips_) {
+  if (skips_ >= max_skips_ ||
+      (fabsf(new_value - output_) >= min_delta_ &&
+       fabsf(new_value - output_) <= max_delta_)) {
     skips_ = 0;
     this->emit(new_value);
   } else {
@@ -41,7 +42,7 @@ bool ChangeFilter::from_json(const JsonObject& config) {
   min_delta_ = config["min_delta"];
   max_delta_ = config["max_delta"];
   max_skips_ = config["max_skips"];
-  skips_ = max_skips_ + 1;
+  skips_ = max_skips_;
   return true;
 }
 
