@@ -33,6 +33,11 @@ CurveInterpolator::CurveInterpolator(std::set<Sample>* defaults,
 }
 
 void CurveInterpolator::set(const float& input) {
+  if (samples_.size() == 1) {
+    this->emit(samples_.begin()->output_);
+    return;
+  }
+
   if (samples_.empty()) {
     output_ = 0;  // or any default output if no samples are available
     notify();
