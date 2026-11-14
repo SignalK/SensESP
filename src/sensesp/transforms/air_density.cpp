@@ -18,9 +18,9 @@ void AirDensity::set(const std::tuple<float, float, float>& input) {
   const float relative_humidity = std::get<1>(input);
   const float pressure = std::get<2>(input);
 
-  // Saturation vapor pressure of water
+  // Saturation vapor pressure of water in pascals (1 hPa = 100 Pa).
   float saturation_pressure =
-      6.1078 * pow(10, ((7.5 * temp_celsius) / (temp_celsius + 237.3)));
+      610.78 * pow(10, ((7.5 * temp_celsius) / (temp_celsius + 237.3)));
 
   // Vapor pressure of water
   const float vapor_pressure_water = relative_humidity * saturation_pressure;
