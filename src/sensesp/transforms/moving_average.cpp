@@ -7,7 +7,7 @@ namespace sensesp {
 MovingAverage::MovingAverage(int sample_size, float multiplier,
                              const String& config_path)
     : FloatTransform(config_path),
-      sample_size_{sample_size},
+      sample_size_{sample_size > 0 ? sample_size : 1},
       multiplier_{multiplier},
       initialized_(false) {
 
@@ -46,6 +46,10 @@ bool MovingAverage::from_json(const JsonObject& config) {
       return false;
     }
   }
+  if (!config["sample_size"].is<int>() ||
+      config["sample_size"].as<int>() <= 0) {
+    return false;
+  }
   multiplier_ = config["multiplier"];
   int const n_new = config["sample_size"];
   // need to reset the ring buffer if size changes
@@ -58,7 +62,7 @@ bool MovingAverage::from_json(const JsonObject& config) {
   return true;
 }
 const String ConfigSchema(const MovingAverage& obj) {
-  return R"({"type":"object","properties":{"sample_size":{"title":"Number of samples in average","type":"integer"},"multiplier":{"title":"Multiplier","type":"number"}}})";
+  return R"({"type":"object","properties":{"sample_size":{"title":"Number of samples in average","type":"integer","minimum":1},"multiplier":{"title":"Multiplier","type":"number"}}})";
 }
 
 }  // namespace sensesp
