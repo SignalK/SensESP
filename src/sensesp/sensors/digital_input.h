@@ -67,11 +67,12 @@ class DigitalInputState : public DigitalInput, public Sensor<bool> {
     }
   }
 
+  virtual bool to_json(JsonObject& root) override;
+  virtual bool from_json(const JsonObject& config) override;
+
  private:
   int read_delay_;
   reactesp::RepeatEvent* repeat_event_ = nullptr;
-  virtual bool to_json(JsonObject& root) override;
-  virtual bool from_json(const JsonObject& config) override;
 };
 
 const String ConfigSchema(const DigitalInputState& obj);
