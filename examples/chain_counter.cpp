@@ -89,13 +89,8 @@ void setup() {
    * Because its interrupt type is CHANGE, it will emit a value when the button
    * is pressed, and again when it's released, but that's OK - our
    * LambdaConsumer function will act only on the press, and ignore the release.
-   * DigitalInputChange looks for a change every read_delay ms, which can be
-   * configured at read_delay_config_path in the Config UI.
    */
-  int read_delay = 10;
-  String read_delay_config_path = "/button_watcher/read_delay";
-  auto* button_watcher = new DigitalInputChange(BUTTON_PIN, INPUT, read_delay,
-                                                read_delay_config_path);
+  auto* button_watcher = new DigitalInputChange(BUTTON_PIN, INPUT, CHANGE);
 
   /**
    * Create a DebounceInt to make sure we get a nice, clean signal from the
