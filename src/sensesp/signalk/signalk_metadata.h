@@ -70,6 +70,8 @@ class SKMetadata {
   String description_;
   String short_name_;
   float timeout_;
+  /// Advertises PUT support only. Register an SKPutRequestListener on the same
+  /// path and connect it to the code that applies the requested value.
   bool supports_put_;
   String example_;  ///< Example value for the path, shown by consumers
   /// NAN = not set; displayScale is emitted only when both bounds are set
@@ -95,8 +97,10 @@ class SKMetadata {
    * @param timeout Tells the consumer how long it should consider the value
    * valid. This value is specified in seconds. Specify -1.0 if you do not
    * want to specify a timeout.
-   * @param supports_put Indicates whether this path supports PUT requests.
-   * Defaults to false.
+   * @param supports_put Advertises that this path supports PUT requests.
+   * Defaults to false. This metadata flag does not register a request handler:
+   * also create an SKPutRequestListener for the same path and connect its
+   * output to the code that applies the requested value.
    */
   SKMetadata(const String& units, const String& display_name = "",
              const String& description = "", const String& short_name = "",

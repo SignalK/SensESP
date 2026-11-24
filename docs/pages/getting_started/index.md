@@ -89,7 +89,7 @@ Assuming that is the case, you can now continue with the next step.
 
 The device is now on the WiFi network.
 If you have a Signal K server running
-and automatic mDNS/Avahi service discovery correctly configured (see Note 2 below),  you should immediately have a device access request appear on the Signal K server web UI:
+and automatic mDNS/Avahi service discovery correctly configured (see Note 3 below),  you should immediately have a device access request appear on the Signal K server web UI:
 
 ![Device Access Request](assets/device_access_request.png "Device Access Request"){:width="50%"}
 
@@ -98,13 +98,21 @@ You should immediately get new data on the Signal K server dashboard and data br
 
 Notes:
 
-1. if you enabled SSL when setting up signalk server, sensESP will fail to connect to the server. Run the setup again and ensure you select NO when prompted for SSL.
+1. SSL/TLS is supported by the default `pioarduino_esp32` build and the
+   `pioarduino` and `espidf` configurations in this repository. You can keep
+   SSL enabled on your Signal K server. For configuration and certificate
+   trust settings, see the
+   [SSL connection example](https://github.com/SignalK/SensESP/blob/main/examples/ssl_connection.cpp).
+   These builds use Trust On First Use (TOFU) by default: the first connection
+   establishes the trust anchor, and subsequent connections check it. Make the
+   first connection on a trusted network; see the example for how to reset
+   trust after a server certificate change.
 
-(Hint: command for setting up signalk server)
+2. The older `arduino_esp32` configuration (`espressif32` platform) does not
+   support SSL/TLS. If your server requires SSL, use a `pioarduino` or `espidf`
+   configuration with `SENSESP_SSL_SUPPORT=1`, as shown in the example above.
 
-- `sudo signalk-server-setup`
-
-2. mdns is enabled under the signalk server tab Server /Settings
+3. mDNS is enabled under the Signal K server tab Server / Settings.
 
 SensESP device on the dashboard:
 
