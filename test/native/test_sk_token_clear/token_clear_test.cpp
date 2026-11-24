@@ -1,4 +1,4 @@
-#include "sensesp/signalk/signalk_ws_client.h"
+#include "sensesp/signalk/signalk_ws_token_policy.h"
 #include "unity.h"
 
 using namespace sensesp;
@@ -20,11 +20,13 @@ void test_keeps_token_on_non_401() {
   TEST_ASSERT_FALSE(should_clear_token_on_status(500));
 }
 
-void setup() {
+void setUp() {}
+void tearDown() {}
+
+int main(int, char**) {
   UNITY_BEGIN();
   RUN_TEST(test_clears_on_401);
   RUN_TEST(test_keeps_token_on_non_401);
-  UNITY_END();
+  return UNITY_END();
 }
 
-void loop() {}
