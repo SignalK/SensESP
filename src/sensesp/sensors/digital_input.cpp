@@ -70,7 +70,7 @@ bool DigitalInputDebounceCounter::from_json(const JsonObject& config) {
   return true;
 }
 
-const String ConfigSchema(DigitalInputState& obj) {
+const String ConfigSchema(const DigitalInputState& obj) {
   return R"###({"type":"object","properties":{"read_delay":{"title":"Read delay","type":"number","description":"The time, in milliseconds, between each read of the input"}}  })###";
 }
 
