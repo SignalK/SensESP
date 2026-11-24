@@ -424,10 +424,6 @@ void SKWSClient::on_disconnected() {
   this->set_connection_state(SKWSConnectionState::kSKWSDisconnected);
 }
 
-bool should_clear_token_on_status(int handshake_status) {
-  return handshake_status == kHttpUnauthorized;
-}
-
 /**
  * @brief Called when the websocket connection encounters an error.
  *
